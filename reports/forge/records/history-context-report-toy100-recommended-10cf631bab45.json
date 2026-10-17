@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/toy100/recommended",
+  "candidate_revision": "b28370006c6192d8ce844ddc0d2a0adcf0829a54a73f9957cedaf32a80c4ebbd",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "100-Gaussian toy gate: PASS",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/recommended",
+      "narrative_sources": [
+        {
+          "git_blob": "fff55c434161339f37472e08b881163ee7f080a7",
+          "path": "reports/toy100/recommended/leaderboard.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "44288d96af04b5583036e0ac0537130f7e4b5a0e8e451f2ed010ab136f5b7095",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/recommended/leaderboard.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# 100-Gaussian toy gate: PASS\n\nScope: **all declared problems**. Verdicts use complete live-weight curves at the stated training budget. A PASS needs five consecutive passing postinitial checks at the end; all 100 modes, sample quality, mode mass, and per-mode shape are evaluated by the toy metrics.\n\n| Problem | Status | Final modes | Final HQ | Mass TV | Cov eig ratio | Radial ratio | First 100 modes | First full quality | Stable from | Confirmed | Budget / elapsed | Reason |\n| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |\n| grid100 | PASS | 100 | 0.981 | 0.083 | 0.552\u20131.024 | 0.823\u20131.355 | 5,750 (81.4s) | 6,000 (84.9s) | 6,000 (84.9s) | 7,000 (98.8s) | 7,000 (98.8s) | terminal live metrics sustained |\n| rotated100 | PASS | 100 | 0.989 | 0.055 | 0.579\u20131.071 | 0.783\u20131.039 | 5,250 (75.3s) | 6,000 (85.8s) | 6,000 (85.8s) | 7,000 (99.9s) | 7,000 (99.9s) | terminal live metrics sustained |\n| staggered100 | PASS | 100 | 0.983 | 0.075 | 0.499\u20131.038 | 0.777\u20131.118 | 5,500 (137.7s) | 6,000 (150.8s) | 6,000 (150.8s) | 7,000 (176.1s) | 7,000 (176.1s) | terminal live metrics sustained |\n\nThe initial step is displayed in the raw events and animation but does not count toward convergence.\n"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-recommended-10cf631bab45",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "fff55c434161339f37472e08b881163ee7f080a7",
+    "path": "reports/toy100/recommended/leaderboard.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "44288d96af04b5583036e0ac0537130f7e4b5a0e8e451f2ed010ab136f5b7095",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/recommended/leaderboard.md"
+  },
+  "task_results": []
+}

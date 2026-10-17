@@ -1,0 +1,1036 @@
+{
+  "schema": "particlegan_new_toy_pr_review_v1",
+  "metadata": {
+    "path": "/ml2/hypergan/toy-new-pr-metadata-20261002-1345.json",
+    "sha256": "dd9b16c15a43a9db8cb3d8e9650e7bc2beb30f401533d66c2c2846614add02fa"
+  },
+  "records": [
+    {
+      "pr": 241,
+      "head_sha": "5ab86005b4da3b88e5640eb7c6c3b7475dc93b28",
+      "parent_sha": "cff399d93ddfdec4b02b69ba436af2e72cc4cdef",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/241",
+      "task": "routed_caption_fit_std_v1",
+      "question": "Does replacing the .04 learned-game normalization floor with untrained FIT coordinate standard deviations remove the untied-head endpoint advantage?",
+      "quality_score": 4,
+      "quality_scale": 5,
+      "scientific_status": "PASS",
+      "recommendation": "MERGE_AFTER_STACK_DEPENDENCIES_AND_CURRENT_CI",
+      "reason_to_keep": "Distinct predeclared task/contrast in a related conditional-caption family; inherited questions count once.",
+      "scope": "Single fixed generated fixture, fixed512 terminal comparison; no sustained/robustness/full-Supra/default qualification.",
+      "incremental_paths": [
+        ".gitignore",
+        "docs/e22_routed_caption_normalization.md",
+        "docs/e22_routed_caption_normalization/goal-final.png",
+        "docs/e22_routed_caption_normalization/goal.gif",
+        "docs/e22_routed_caption_normalization/media-completion.json",
+        "docs/e22_routed_caption_normalization_independent_review.json",
+        "docs/e22_routed_caption_normalization_independent_review_v2.json",
+        "docs/e22_routed_caption_normalization_preparation.json",
+        "docs/e22_routed_caption_normalization_results.json",
+        "docs/e22_routed_caption_normalization_results.md",
+        "docs/e22_routed_caption_normalization_v1.json",
+        "examples/e22_routed_caption_normalization.py",
+        "examples/render_e22_routed_caption_normalization.py",
+        "tests/test_e22_routed_caption_normalization.py"
+      ],
+      "incremental_path_count": 14,
+      "checks": {
+        "all_original_raw_artifacts_still_hash_match": true,
+        "source_card_matches_head_bytes": true,
+        "card_bound_to_producer_and_completion": true,
+        "exact_recorded_source_identity": true,
+        "imported_native_bytes_match_review_checkout": true,
+        "completed_budget_and_exit_agree": true,
+        "offline_reports_consistent": true,
+        "exact_test48_six_equal_source_counts": true,
+        "all_four_mandatory_endpoint_conditions": true,
+        "independent_saved_f64_scores_match_declared_tolerance": true,
+        "fixed_live_denominator_and_counts": true,
+        "all_six_live_code_and_particle_heads": true,
+        "all_declared_numeric_bounds_independently_pass": true,
+        "exact_all_three_update_streams": true,
+        "paired_data_gaussian_and_native_penalty_streams": true,
+        "live_gradient_counts_match_actual_trace": true,
+        "goal_media_hash_and_source_binding": true,
+        "goal_views_are_actual_fixed_finite_states": true,
+        "gif_retains_all_six_actual_steps": true,
+        "only_new_own_paths_and_ignore_rule": true
+      },
+      "api": [
+        "public initialize_",
+        "get_recipe",
+        "Recipe optimizers/loss/penalty",
+        "E22Policy",
+        "RoutedRows",
+        "public checkpoint restore"
+      ],
+      "protocol": {
+        "updates_per_arm": 512,
+        "arms": [
+          "ordinary_BF16",
+          "particle_BF16",
+          "particle_untied_BF16"
+        ],
+        "quality_updates": 1536,
+        "physical_gpu": 0,
+        "cap_seconds": 300,
+        "actual_external_seconds": 162.68321392079815,
+        "attempts": 1,
+        "exit_code": 0,
+        "test_contexts": 48,
+        "contexts_per_source": 8,
+        "endpoint_only": true,
+        "flow_independent_test_trajectories": 48,
+        "future_cli_external_watchdog": "Recorded campaigns use the hash-bound watchdog; CLI cooperative checks alone cannot interrupt a stalled native call.",
+        "future_cli_pretry_identity_failure": "source_identity/package_identity run before the handled try: unavailable bound files can raise Python exit1 without a completed receipt rather than documented incomplete2; watchdog rejects this as incomplete."
+      },
+      "accuracy": {
+        "ordinary_BF16": {
+          "rmse": 0.006543289293496626,
+          "by_source": {
+            "0": 0.006461117984849172,
+            "1": 0.006586236800317638,
+            "2": 0.006518634724139701,
+            "3": 0.006673324742494011,
+            "4": 0.006544279671001959,
+            "5": 0.006473777078992881
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "particle_BF16": {
+          "rmse": 0.00652559006475953,
+          "by_source": {
+            "0": 0.006464779063661054,
+            "1": 0.006537152174211416,
+            "2": 0.0065200463699247105,
+            "3": 0.006607931344509113,
+            "4": 0.006540534503314656,
+            "5": 0.006482119588546515
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "particle_untied_BF16": {
+          "rmse": 0.006394539506943568,
+          "by_source": {
+            "0": 0.006344374569578112,
+            "1": 0.006427201894269984,
+            "2": 0.006321986314992823,
+            "3": 0.0065286923542434705,
+            "4": 0.0063817315254943085,
+            "5": 0.006361050862833421
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "zero_code": {
+          "rmse": 0.007031394195604958,
+          "by_source": {
+            "0": 0.007290925529026692,
+            "1": 0.006852582229912035,
+            "2": 0.0065755167430808425,
+            "3": 0.006984084369106148,
+            "4": 0.007250805339112218,
+            "5": 0.007206838054055025
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        }
+      },
+      "published_metric_max_absolute_difference": 0.0,
+      "predeclared_independent_metric_tolerance_abs": 2e-15,
+      "numeric_gate": {
+        "ordinary_BF16_aggregate_improvement": true,
+        "ordinary_BF16_no_source_harm": true,
+        "particle_BF16_aggregate_improvement": true,
+        "particle_BF16_no_source_harm": true,
+        "code_aggregate": true,
+        "code_every_source": true,
+        "bank_live": true,
+        "query_live": true,
+        "C_and_particle_heads_live": true
+      },
+      "relative_gain": {
+        "ordinary_BF16": 0.02273318202526986,
+        "particle_BF16": 0.020082560583092768
+      },
+      "signed_source_harm": {
+        "ordinary_BF16": {
+          "0": -0.00011674341527106048,
+          "1": -0.00015903490604765418,
+          "2": -0.00019664840914687762,
+          "3": -0.00014463238825054067,
+          "4": -0.0001625481455076504,
+          "5": -0.00011272621615945975
+        },
+        "particle_BF16": {
+          "0": -0.00012040449408294226,
+          "1": -0.00010995027994143217,
+          "2": -0.00019806005493188707,
+          "3": -7.923899026564263e-05,
+          "4": -0.00015880297782034768,
+          "5": -0.000121068725713094
+        }
+      },
+      "zero_code_minus_live_rmse": 0.0006368546886613901,
+      "relative_code_benefit": 0.09959351849650089,
+      "population_events": {
+        "ordinary_BF16": {
+          "proposal_events_including_skips": 0,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        },
+        "particle_BF16": {
+          "proposal_events_including_skips": 5,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        },
+        "particle_untied_BF16": {
+          "proposal_events_including_skips": 5,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        }
+      },
+      "live": {
+        "bank": 511,
+        "query": 511,
+        "denominator": 511
+      },
+      "evidence": {
+        "protocol": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_normalization_v1.json",
+          "sha256": "33189f667744fc7fee4f9d20b3d030d6c217362f03f0fdbaeeff6d95c02fdaa1"
+        },
+        "compact_results": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_normalization_results.json",
+          "sha256": "4b123b23893d1ce5400416b5e7a561e46020f2c1f71c7b3cff8ea8900e046913"
+        },
+        "prior_independent_review": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_normalization_independent_review_v2.json",
+          "sha256": "9eb116d4802a6c51ce52324be2168738e8ee47f18f87330a2d8312ca6e0cc649",
+          "checks": 35,
+          "all_pass": true
+        },
+        "source_hashes": {
+          "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+          "examples/render_e22_routed_caption_normalization.py": "971537929ec67a310ff067dd1307e78ab739f173a87e6c7e0a25c4aa731250f7",
+          "tests/test_e22_routed_caption_normalization.py": "fee930af67dda03261ddf0455741f04a72b4a1d24a14ebcd6f7ea374db708b28",
+          "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+          "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+          "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+        },
+        "raw_artifacts": {
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/report.json": {
+            "expected_sha256": "ce0a7c28de15dcb63e15a90ea449cb964b8ebdb5609120155c93584d2b65421d",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/completion.json": {
+            "expected_sha256": "20ee87860295ab45ed20b4216018fec1296dfea89bfd4760ce3bcb028a332750",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/normalization-inputs.pt": {
+            "expected_sha256": "93449900957e08dc6fec5a21acedcfffed3d2be02ea2c013511ebaf87ad64a30",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/endpoint-residuals.pt": {
+            "expected_sha256": "75d2e59d2802367ed6eb06c3c462ae1f43088df96641f5a2a9d8272e254e4195",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/observed-media.pt": {
+            "expected_sha256": "1c82ae595e06aed1d9fd98d73c73d460a974748f954ef9fd429371a476e2f24b",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/ordinary_BF16.jsonl": {
+            "expected_sha256": "4266d1280f3a1a92175f26d61469e855130dde6bb71adc614245fc0d30e948b5",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/particle_BF16.jsonl": {
+            "expected_sha256": "b036fff28e83a9ebd4f7665ecad7f395ef4aa90a87284d74f03fb55014d03eb1",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/particle_untied_BF16.jsonl": {
+            "expected_sha256": "c2301d8618c15b062f830012757eba10cce0b88f9749a5deb540caa64937e90c",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1.external.json": {
+            "expected_sha256": "3fb684d4d565eb50863a7f720b9d771451535a335e87e7f941fcbcb3439bf38f",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/docs/e22_routed_caption_normalization_v1.json": {
+            "expected_sha256": "33189f667744fc7fee4f9d20b3d030d6c217362f03f0fdbaeeff6d95c02fdaa1",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/docs/e22_routed_caption_normalization_preparation.json": {
+            "expected_sha256": "fc9567d894ac7fae5b60c97c2d892a4eb5abe47102b5ac52133e48d1957e5217",
+            "exists": true,
+            "matches": true
+          },
+          "/tmp/routed-caption-normalization-v1-launch-pins.json": {
+            "expected_sha256": "0a6f1e425392965a1044b19159cc7b0a99990aeb60ba443248fdd81714b0edc6",
+            "exists": true,
+            "matches": true
+          },
+          "/tmp/bounded-particle-api-campaign-launcher-v1.py": {
+            "expected_sha256": "1e497a4bb36e979e7192bd38bc32d6bacf9bda8d363bbc648d8eef5db7964a5f",
+            "exists": true,
+            "matches": true
+          }
+        },
+        "media": {
+          "gif": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_normalization/goal.gif",
+          "gif_sha256": "e9c4ed3e875a9cefa0c8198e9e675fcd41ab64c102cff342f643505236d6414e",
+          "steps": [
+            0,
+            64,
+            128,
+            256,
+            384,
+            512
+          ],
+          "frames": 6,
+          "receipt": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_normalization/media-completion.json",
+          "receipt_sha256": "5072d3126531625448ca12169ee2f9e0a0700fd81d2f75ec1d6760c6cb46c0b7",
+          "visual_final_frame_review": "Readable goal/error heatmaps and terminal labels; six cameras are illustrative, full gate uses48."
+        }
+      },
+      "limits": [
+        "No independent seed replication or sustained suffix gate.",
+        "Raw errors across changed frozen-host laws must not be pooled.",
+        "No accepted structural proposal/move occurred; the observations do not validate that mechanism.",
+        "Extra untied head capacity/BF16 rounding and adaptive game prevent a unique causal mechanism claim.",
+        "Portable generated tests do not qualify the inherited asset-dependent real-caption/full-Supra FAIL."
+      ]
+    },
+    {
+      "pr": 242,
+      "head_sha": "68cc4361689531ce1b1a7fd441a49effb242440e",
+      "parent_sha": "5ab86005b4da3b88e5640eb7c6c3b7475dc93b28",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/242",
+      "task": "routed_caption_correlated_context_v1",
+      "question": "Does Gaussian-marginal-preserving cross-time correlation remove the untied-head endpoint advantage, with derived FIT units recomputed?",
+      "quality_score": 4,
+      "quality_scale": 5,
+      "scientific_status": "PASS",
+      "recommendation": "MERGE_AFTER_STACK_DEPENDENCIES_AND_CURRENT_CI",
+      "reason_to_keep": "Distinct predeclared task/contrast in a related conditional-caption family; inherited questions count once.",
+      "scope": "Single fixed generated fixture, fixed512 terminal comparison; no sustained/robustness/full-Supra/default qualification.",
+      "incremental_paths": [
+        ".gitignore",
+        "docs/e22_routed_caption_flow.md",
+        "docs/e22_routed_caption_flow/goal-final.png",
+        "docs/e22_routed_caption_flow/goal.gif",
+        "docs/e22_routed_caption_flow/media-completion.json",
+        "docs/e22_routed_caption_flow_independent_review.json",
+        "docs/e22_routed_caption_flow_preparation.json",
+        "docs/e22_routed_caption_flow_results.json",
+        "docs/e22_routed_caption_flow_results.md",
+        "docs/e22_routed_caption_flow_v1.json",
+        "examples/e22_routed_caption_flow.py",
+        "examples/render_e22_routed_caption_flow.py",
+        "tests/test_e22_routed_caption_flow.py"
+      ],
+      "incremental_path_count": 13,
+      "checks": {
+        "all_original_raw_artifacts_still_hash_match": true,
+        "source_card_matches_head_bytes": true,
+        "card_bound_to_producer_and_completion": true,
+        "exact_recorded_source_identity": true,
+        "imported_native_bytes_match_review_checkout": true,
+        "completed_budget_and_exit_agree": true,
+        "offline_reports_consistent": true,
+        "exact_test48_six_equal_source_counts": true,
+        "all_four_mandatory_endpoint_conditions": true,
+        "independent_saved_f64_scores_match_declared_tolerance": true,
+        "fixed_live_denominator_and_counts": true,
+        "all_six_live_code_and_particle_heads": true,
+        "all_declared_numeric_bounds_independently_pass": true,
+        "exact_all_three_update_streams": true,
+        "paired_data_gaussian_and_native_penalty_streams": true,
+        "live_gradient_counts_match_actual_trace": true,
+        "goal_media_hash_and_source_binding": true,
+        "goal_views_are_actual_fixed_finite_states": true,
+        "gif_retains_all_six_actual_steps": true,
+        "only_new_own_paths_and_ignore_rule": true
+      },
+      "api": [
+        "public initialize_",
+        "get_recipe",
+        "Recipe optimizers/loss/penalty",
+        "E22Policy",
+        "RoutedRows",
+        "public checkpoint restore"
+      ],
+      "protocol": {
+        "updates_per_arm": 512,
+        "arms": [
+          "ordinary_BF16",
+          "particle_BF16",
+          "particle_untied_BF16"
+        ],
+        "quality_updates": 1536,
+        "physical_gpu": 0,
+        "cap_seconds": 300,
+        "actual_external_seconds": 162.18285404494964,
+        "attempts": 1,
+        "exit_code": 0,
+        "test_contexts": 48,
+        "contexts_per_source": 8,
+        "endpoint_only": true,
+        "flow_independent_test_trajectories": 12,
+        "future_cli_external_watchdog": "Recorded campaigns use the hash-bound watchdog; CLI cooperative checks alone cannot interrupt a stalled native call.",
+        "future_cli_pretry_identity_failure": "source_identity/package_identity run before the handled try: unavailable bound files can raise Python exit1 without a completed receipt rather than documented incomplete2; watchdog rejects this as incomplete."
+      },
+      "accuracy": {
+        "ordinary_BF16": {
+          "rmse": 0.006570665372968516,
+          "by_source": {
+            "0": 0.006498631544292676,
+            "1": 0.006549274565951865,
+            "2": 0.00659002767817955,
+            "3": 0.006668196138752865,
+            "4": 0.006568477137865604,
+            "5": 0.0065481642402852765
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "particle_BF16": {
+          "rmse": 0.006565844349908527,
+          "by_source": {
+            "0": 0.006484468277175049,
+            "1": 0.006527905268831045,
+            "2": 0.006564522098196702,
+            "3": 0.006636381305241213,
+            "4": 0.0065954242584148805,
+            "5": 0.006585276590400539
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "particle_untied_BF16": {
+          "rmse": 0.006402591281475869,
+          "by_source": {
+            "0": 0.006381144487972105,
+            "1": 0.006418366579989173,
+            "2": 0.0063425899079674,
+            "3": 0.006520498565456048,
+            "4": 0.006377965989436983,
+            "5": 0.006373446299225167
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "zero_code": {
+          "rmse": 0.00714062885434793,
+          "by_source": {
+            "0": 0.00740760087844646,
+            "1": 0.006968225101745574,
+            "2": 0.006625775444477497,
+            "3": 0.0071526312583652385,
+            "4": 0.007260353746590025,
+            "5": 0.007397905114686941
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        }
+      },
+      "published_metric_max_absolute_difference": 8.673617379884035e-19,
+      "predeclared_independent_metric_tolerance_abs": 2e-15,
+      "numeric_gate": {
+        "ordinary_BF16_aggregate_improvement": true,
+        "ordinary_BF16_no_source_harm": true,
+        "particle_BF16_aggregate_improvement": true,
+        "particle_BF16_no_source_harm": true,
+        "code_aggregate": true,
+        "code_every_source": true,
+        "bank_live": true,
+        "query_live": true,
+        "C_and_particle_heads_live": true
+      },
+      "relative_gain": {
+        "ordinary_BF16": 0.02557946295425395,
+        "particle_BF16": 0.024863986980582786
+      },
+      "signed_source_harm": {
+        "ordinary_BF16": {
+          "0": -0.00011748705632057179,
+          "1": -0.00013090798596269212,
+          "2": -0.0002474377702121498,
+          "3": -0.00014769757329681672,
+          "4": -0.00019051114842862094,
+          "5": -0.00017471794106010963
+        },
+        "particle_BF16": {
+          "0": -0.0001033237892029441,
+          "1": -0.00010953868884187173,
+          "2": -0.00022193219022930213,
+          "3": -0.00011588273978516486,
+          "4": -0.00021745826897789748,
+          "5": -0.00021183029117537253
+        }
+      },
+      "zero_code_minus_live_rmse": 0.000738037572872061,
+      "relative_code_benefit": 0.11527169866478415,
+      "population_events": {
+        "ordinary_BF16": {
+          "proposal_events_including_skips": 0,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        },
+        "particle_BF16": {
+          "proposal_events_including_skips": 5,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        },
+        "particle_untied_BF16": {
+          "proposal_events_including_skips": 5,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        }
+      },
+      "live": {
+        "bank": 511,
+        "query": 511,
+        "denominator": 511
+      },
+      "evidence": {
+        "protocol": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_flow_v1.json",
+          "sha256": "a2d65843979511e0809851711b65292790cfd17e9e9326eed70d15a8c93cc843"
+        },
+        "compact_results": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_flow_results.json",
+          "sha256": "5f4c58c3e119e9325445e591317227da9507feb8885b717706bcf68c3696d9a7"
+        },
+        "prior_independent_review": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_flow_independent_review.json",
+          "sha256": "318c1c90e41a38126805b3b2498cf6c4ec61969cdae0f219d05bae3ed381a9ba",
+          "checks": 77,
+          "all_pass": true
+        },
+        "source_hashes": {
+          "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+          "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+          "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+          "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+          "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+          "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+          "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+        },
+        "raw_artifacts": {
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1/report.json": {
+            "expected_sha256": "c09c6ced80ac3cb4703448ff4ae31af20a0e74ac6b1695f58878c0a5c5040e34",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1/completion.json": {
+            "expected_sha256": "f3bfcebd7474d8ef62539959ce045911391f50934d6f8d6e023a2e77230c82a3",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1/flow-inputs.pt": {
+            "expected_sha256": "7a4dd1ad9ee911ea1593e6a988bf8bb4d095ed193365b75b963ba45a93135dd4",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1/endpoint-residuals.pt": {
+            "expected_sha256": "d1c7a30bb1484b8790db68929f03b01f4358f63e16ca618bb15af9a668ffa1c7",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1/observed-media.pt": {
+            "expected_sha256": "4fe073dcac3e5bd0b022fa9b61e5613de987d42ee0f832ee697a4e27ef08ca02",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1/ordinary_BF16.jsonl": {
+            "expected_sha256": "7386ae08515132fe91d5be9c125700653cb3ff4a1cb2b9f419ae42b0956872f8",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1/particle_BF16.jsonl": {
+            "expected_sha256": "aa26bfa4699570c3bbe589097385c3990806b5d11f2d705077c3d43a696af0ae",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1/particle_untied_BF16.jsonl": {
+            "expected_sha256": "47bee298739f9b53b2fa3f3c830bda96cdcff51f4decc5aa5308dc908a64ad18",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/runs/caption-flow-v1.external.json": {
+            "expected_sha256": "0001cc41bf23a6b6a1d651a836ab5e79767757be9e15489e8a777dbb6ae01a55",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/docs/e22_routed_caption_flow_v1.json": {
+            "expected_sha256": "a2d65843979511e0809851711b65292790cfd17e9e9326eed70d15a8c93cc843",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/docs/e22_routed_caption_flow_preparation.json": {
+            "expected_sha256": "10c53b259f395667001df62fbd40431b531affe0cf5dc84c37195c795c5fec4c",
+            "exists": true,
+            "matches": true
+          },
+          "/tmp/routed-caption-flow-v1-launch-pins.json": {
+            "expected_sha256": "f0fde9172f89430efa2c646a0ead9808a9b1bc5f3f539838c73eafda9cfc7fa2",
+            "exists": true,
+            "matches": true
+          },
+          "/tmp/bounded-particle-api-campaign-launcher-v1.py": {
+            "expected_sha256": "1e497a4bb36e979e7192bd38bc32d6bacf9bda8d363bbc648d8eef5db7964a5f",
+            "exists": true,
+            "matches": true
+          }
+        },
+        "media": {
+          "gif": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_flow/goal.gif",
+          "gif_sha256": "dadf9dffd91068c625d185a84ef0c866249282d761cb3e193306989467e7f200",
+          "steps": [
+            0,
+            64,
+            128,
+            256,
+            384,
+            512
+          ],
+          "frames": 6,
+          "receipt": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_flow/media-completion.json",
+          "receipt_sha256": "8d5c6dce20fa6836f228f65a34595a061184d5d574232635341481af0bde1e4b",
+          "visual_final_frame_review": "Readable goal/error heatmaps and terminal labels; six cameras are illustrative, full gate uses48."
+        }
+      },
+      "limits": [
+        "No independent seed replication or sustained suffix gate.",
+        "Raw errors across changed frozen-host laws must not be pooled.",
+        "No accepted structural proposal/move occurred; the observations do not validate that mechanism.",
+        "Extra untied head capacity/BF16 rounding and adaptive game prevent a unique causal mechanism claim.",
+        "Portable generated tests do not qualify the inherited asset-dependent real-caption/full-Supra FAIL."
+      ]
+    },
+    {
+      "pr": 243,
+      "head_sha": "18ff99d268393a9301212c9899a1fb1f99067842",
+      "parent_sha": "68cc4361689531ce1b1a7fd441a49effb242440e",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/243",
+      "task": "routed_caption_frozen_scalar_moments_v1",
+      "question": "Does calibration of 29 frozen-host sampling distributions to retained per-tensor scalar moments remove the untied-head endpoint advantage?",
+      "quality_score": 4,
+      "quality_scale": 5,
+      "scientific_status": "PASS",
+      "recommendation": "MERGE_AFTER_STACK_DEPENDENCIES_AND_CURRENT_CI",
+      "reason_to_keep": "Distinct predeclared task/contrast in a related conditional-caption family; inherited questions count once.",
+      "scope": "Single fixed generated fixture, fixed512 terminal comparison; no sustained/robustness/full-Supra/default qualification.",
+      "incremental_paths": [
+        ".gitignore",
+        "docs/e22_routed_caption_frozen_stats.md",
+        "docs/e22_routed_caption_frozen_stats_independent_review.json",
+        "docs/e22_routed_caption_frozen_stats_preparation.json",
+        "docs/e22_routed_caption_frozen_stats_profile_v1.json",
+        "docs/e22_routed_caption_frozen_stats_results.json",
+        "docs/e22_routed_caption_frozen_stats_results.md",
+        "docs/e22_routed_caption_frozen_stats_v1.json",
+        "docs/media/e22_routed_caption_frozen_stats/goal-final.png",
+        "docs/media/e22_routed_caption_frozen_stats/goal.gif",
+        "docs/media/e22_routed_caption_frozen_stats/media-completion.json",
+        "examples/e22_routed_caption_frozen_stats.py",
+        "examples/render_e22_routed_caption_frozen_stats.py",
+        "tests/test_e22_routed_caption_frozen_stats.py"
+      ],
+      "incremental_path_count": 14,
+      "checks": {
+        "all_original_raw_artifacts_still_hash_match": true,
+        "source_card_matches_head_bytes": true,
+        "card_bound_to_producer_and_completion": true,
+        "exact_recorded_source_identity": true,
+        "imported_native_bytes_match_review_checkout": true,
+        "completed_budget_and_exit_agree": true,
+        "offline_reports_consistent": true,
+        "exact_test48_six_equal_source_counts": true,
+        "all_four_mandatory_endpoint_conditions": true,
+        "independent_saved_f64_scores_match_declared_tolerance": true,
+        "fixed_live_denominator_and_counts": true,
+        "all_six_live_code_and_particle_heads": true,
+        "all_declared_numeric_bounds_independently_pass": true,
+        "exact_all_three_update_streams": true,
+        "paired_data_gaussian_and_native_penalty_streams": true,
+        "live_gradient_counts_match_actual_trace": true,
+        "goal_media_hash_and_source_binding": true,
+        "goal_views_are_actual_fixed_finite_states": true,
+        "gif_retains_all_six_actual_steps": true,
+        "only_new_own_paths_and_ignore_rule": true
+      },
+      "api": [
+        "public initialize_",
+        "get_recipe",
+        "Recipe optimizers/loss/penalty",
+        "E22Policy",
+        "RoutedRows",
+        "public checkpoint restore"
+      ],
+      "protocol": {
+        "updates_per_arm": 512,
+        "arms": [
+          "ordinary_BF16",
+          "particle_BF16",
+          "particle_untied_BF16"
+        ],
+        "quality_updates": 1536,
+        "physical_gpu": 0,
+        "cap_seconds": 300,
+        "actual_external_seconds": 160.62497924803756,
+        "attempts": 1,
+        "exit_code": 0,
+        "test_contexts": 48,
+        "contexts_per_source": 8,
+        "endpoint_only": true,
+        "flow_independent_test_trajectories": 12,
+        "future_cli_external_watchdog": "Recorded campaigns use the hash-bound watchdog; CLI cooperative checks alone cannot interrupt a stalled native call.",
+        "future_cli_pretry_identity_failure": "source_identity/package_identity run before the handled try: unavailable bound files can raise Python exit1 without a completed receipt rather than documented incomplete2; watchdog rejects this as incomplete."
+      },
+      "accuracy": {
+        "ordinary_BF16": {
+          "rmse": 0.7753937292347031,
+          "by_source": {
+            "0": 0.8326111605393579,
+            "1": 0.7647166512220067,
+            "2": 0.7160326676078481,
+            "3": 0.8159163645173527,
+            "4": 0.7439027019423546,
+            "5": 0.7730240525249804
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "particle_BF16": {
+          "rmse": 0.7453921362966868,
+          "by_source": {
+            "0": 0.8054579616111169,
+            "1": 0.7214811741705478,
+            "2": 0.6912897255379977,
+            "3": 0.7823461761879614,
+            "4": 0.7286264762052711,
+            "5": 0.7372349982568299
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "particle_untied_BF16": {
+          "rmse": 0.7371639088084463,
+          "by_source": {
+            "0": 0.8033007051085299,
+            "1": 0.7186351557846002,
+            "2": 0.6804097323913526,
+            "3": 0.7741641435324079,
+            "4": 0.7150731689206696,
+            "5": 0.7246503286183469
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        },
+        "zero_code": {
+          "rmse": 0.8317270711890504,
+          "by_source": {
+            "0": 0.95758448563452,
+            "1": 0.7696876561686482,
+            "2": 0.7068554098576679,
+            "3": 0.8781530991548792,
+            "4": 0.8026954754635318,
+            "5": 0.852123775150056
+          },
+          "source_counts": {
+            "0": 8,
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8
+          }
+        }
+      },
+      "published_metric_max_absolute_difference": 1.1102230246251565e-16,
+      "predeclared_independent_metric_tolerance_abs": 2e-15,
+      "numeric_gate": {
+        "ordinary_BF16_aggregate_improvement": true,
+        "ordinary_BF16_no_source_harm": true,
+        "particle_BF16_aggregate_improvement": true,
+        "particle_BF16_no_source_harm": true,
+        "code_aggregate": true,
+        "code_every_source": true,
+        "bank_live": true,
+        "query_live": true,
+        "C_and_particle_heads_live": true
+      },
+      "relative_gain": {
+        "ordinary_BF16": 0.04930375238395179,
+        "particle_BF16": 0.01103879030589261
+      },
+      "signed_source_harm": {
+        "ordinary_BF16": {
+          "0": -0.029310455430827997,
+          "1": -0.04608149543740647,
+          "2": -0.03562293521649551,
+          "3": -0.0417522209849448,
+          "4": -0.028829533021685005,
+          "5": -0.048373723906633526
+        },
+        "particle_BF16": {
+          "0": -0.002157256502587024,
+          "1": -0.0028460183859475574,
+          "2": -0.010879993146645117,
+          "3": -0.008182032655553506,
+          "4": -0.013553307284601468,
+          "5": -0.012584669638483037
+        }
+      },
+      "zero_code_minus_live_rmse": 0.09456316238060414,
+      "relative_code_benefit": 0.12827969634793468,
+      "population_events": {
+        "ordinary_BF16": {
+          "proposal_events_including_skips": 0,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        },
+        "particle_BF16": {
+          "proposal_events_including_skips": 5,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        },
+        "particle_untied_BF16": {
+          "proposal_events_including_skips": 5,
+          "accepted_row_moves": 0,
+          "accepted_proposals": 0
+        }
+      },
+      "live": {
+        "bank": 511,
+        "query": 511,
+        "denominator": 511
+      },
+      "evidence": {
+        "protocol": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_frozen_stats_v1.json",
+          "sha256": "95ff4941aee85074614d0bd1fe1ff477f0e343a80b27f324526d95c4f6e4cb81"
+        },
+        "compact_results": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_frozen_stats_results.json",
+          "sha256": "b48d18b106f2125cd1ed6057449e1c4cb3d13c7121ae4f2c81ab1ca1ba915157"
+        },
+        "prior_independent_review": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/e22_routed_caption_frozen_stats_independent_review.json",
+          "sha256": "f855ef64484c906585afed2865aa856bf84952df37e3672a8dee2f19b47abd4d",
+          "checks": 110,
+          "all_pass": true
+        },
+        "source_hashes": {
+          "examples/e22_routed_caption_frozen_stats.py": "a8489fc0369bf03bdfe5b8a5bb92c9a7c9b3f66aea83166f5fdd53f8dab99047",
+          "examples/render_e22_routed_caption_frozen_stats.py": "ea369cc340f349f042a498d131429cba75563c03aa9e9e232255ea2c8fb374d9",
+          "tests/test_e22_routed_caption_frozen_stats.py": "707cdb18f8436d4dc0d36e18a664c18684b865cf14d73aaffb8f218cd93caea4",
+          "docs/e22_routed_caption_frozen_stats_profile_v1.json": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+          "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+          "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+          "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+          "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+          "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+          "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+          "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+        },
+        "raw_artifacts": {
+          "/tmp/review_caption_frozen_stats_v1.py": {
+            "expected_sha256": "2bc72ac1fd1206d7b7450649f182c3971c34cc138a1ca6bebf49877ec712fde6",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1/report.json": {
+            "expected_sha256": "cd84e25a039d19966e55861f41ce3bae7ccda39095521d45babb6ae45bb5dd66",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1/completion.json": {
+            "expected_sha256": "47de07833dc25c310c11dedb1ddd0ae822a7aa2f7a9089ab0147039ab46884f6",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1/frozen-stats-inputs.pt": {
+            "expected_sha256": "737baccf8a7998a34f2f55cea7c837c702609ed6416c8e6255cf4b56513f8f9a",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1/endpoint-residuals.pt": {
+            "expected_sha256": "a83623be43529c4fb4c38010a1b3828bcec1bf51a00d896da5d04183bf6f8092",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1/observed-media.pt": {
+            "expected_sha256": "6c58d4e805bc4c594af7901c5f4261bb3b9218cb396201515ce060aa6a32b9f3",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1/ordinary_BF16.jsonl": {
+            "expected_sha256": "55ef7c846c76b783b5bc4b05580f957500b206c8a30fc379a21d550f6fe8169f",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1/particle_BF16.jsonl": {
+            "expected_sha256": "a5031b1cf7c61f175ba378763b0fa2fd2e181fbc8104a6056ef3090b7877e2ab",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1/particle_untied_BF16.jsonl": {
+            "expected_sha256": "2824cd94ebc62fbf87d83d926abc8c0628daadcfecf45fe75fd558a058c29566",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/runs/caption-frozen-stats-v1.external.json": {
+            "expected_sha256": "3bb83c55fbc2a9508e891b07c795e59753f3d887290e398c6278b5eca08959d1",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/docs/e22_routed_caption_frozen_stats_v1.json": {
+            "expected_sha256": "95ff4941aee85074614d0bd1fe1ff477f0e343a80b27f324526d95c4f6e4cb81",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/docs/e22_routed_caption_frozen_stats_preparation.json": {
+            "expected_sha256": "0675c5e8d902bf864c92905ce8c5189e67c91c36c76efe2ad6db22f13a9e413c",
+            "exists": true,
+            "matches": true
+          },
+          "/tmp/routed-caption-frozen-stats-v1-launch-pins.json": {
+            "expected_sha256": "35772c6c544d5333c511d7bd6dc1af343f93a11a945a616e469caf8d9e6b6fff",
+            "exists": true,
+            "matches": true
+          },
+          "/tmp/bounded-particle-api-campaign-launcher-v1.py": {
+            "expected_sha256": "1e497a4bb36e979e7192bd38bc32d6bacf9bda8d363bbc648d8eef5db7964a5f",
+            "exists": true,
+            "matches": true
+          },
+          "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/docs/e22_routed_caption_frozen_stats_profile_v1.json": {
+            "expected_sha256": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+            "exists": true,
+            "matches": true
+          },
+          "/tmp/e22-caption-frozen-magnitudes-v1.json": {
+            "expected_sha256": "c7abed11bb97a4dc118728246e1c3b9ab79f719c9b6f351358a4e23986b079a0",
+            "exists": true,
+            "matches": true
+          }
+        },
+        "media": {
+          "gif": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/media/e22_routed_caption_frozen_stats/goal.gif",
+          "gif_sha256": "3d8c583be32b799d18aba5f1a7d6096b3f465e6b59f01b368eac811fc6077f36",
+          "steps": [
+            0,
+            64,
+            128,
+            256,
+            384,
+            512
+          ],
+          "frames": 6,
+          "receipt": "/ml2/hypergan/ParticleGAN-toy-pr241-243-read-review/docs/media/e22_routed_caption_frozen_stats/media-completion.json",
+          "receipt_sha256": "1fa9ba281e704b8ed78c6ff858121cd1fe25aea3cc03a28fca8d3a783136536e",
+          "visual_final_frame_review": "Readable goal/error heatmaps and terminal labels; six cameras are illustrative, full gate uses48."
+        }
+      },
+      "limits": [
+        "No independent seed replication or sustained suffix gate.",
+        "Raw errors across changed frozen-host laws must not be pooled.",
+        "No accepted structural proposal/move occurred; the observations do not validate that mechanism.",
+        "Extra untied head capacity/BF16 rounding and adaptive game prevent a unique causal mechanism claim.",
+        "Portable generated tests do not qualify the inherited asset-dependent real-caption/full-Supra FAIL."
+      ]
+    }
+  ],
+  "review": {
+    "script_sha256": "72540d0a4234a8cf98d270fc8b1afc8c57cfbe37aba7240bf3d45964ef8ab7e3",
+    "seconds": 0.13869699998758733,
+    "model_constructions": 0,
+    "model_forwards": 0,
+    "API_calls": 0,
+    "native_updates": 0,
+    "science_attempts": 0,
+    "CUDA_initialized": false,
+    "CPU_RNG_unchanged": true
+  }
+}

@@ -99,6 +99,6 @@ All toy verdicts use their frozen sustained live-model criteria. The separate ho
 200 consecutive qualifying checks; learning-time dips do not themselves fail that hold.
 A hold failure stops the diagnostic at its first miss, so the count does not describe later recovery.
 
-[Audit](audit.json) · [Raw ledger](ledger.jsonl) · [Declarations](candidates.json) · [Device repairs](repairs.json)
+[Audit](audit.json) · [Raw ledger](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/gpu-leaderboard/ledger.jsonl) · [Declarations](candidates.json) · [Device repairs](repairs.json)
 
 Completed 2026-09-24T22:51:18.863999+00:00

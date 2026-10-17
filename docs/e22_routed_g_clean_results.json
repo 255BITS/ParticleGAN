@@ -1,0 +1,292 @@
+{
+  "task": "routed_G_only_clean_convergence_v1",
+  "status": "PASS on the single predeclared portable CPU convergence test",
+  "run_date": "2026-10-01",
+  "native_commit": "664ce464e3add5c65d06c8b324c6f9892e644eec",
+  "public_API": [
+    "init.initialize_",
+    "init.deterministic_orthogonal_",
+    "get_recipe",
+    "RoutedRows",
+    "RoutedBatch",
+    "E22Policy",
+    "E22Policy.routed_generate"
+  ],
+  "portable_command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python -m examples.e22_routed_g_clean --run --out runs/routed-g-clean-fresh",
+  "software": {
+    "CPU_cases": 12,
+    "seconds": 1.04,
+    "native_updates": 0,
+    "quality_updates": 0,
+    "CUDA_initialized": false
+  },
+  "zero_update_prerequisite": {
+    "seconds": 1.757510384079069,
+    "native_updates": 0,
+    "quality_updates": 0,
+    "shape": [
+      1,
+      4,
+      16,
+      16
+    ],
+    "matched_initial_native_digest": "bd192702fbeb0d5e34b088fd6419e5eb9f22b56276919b2c72ce3c6b75f044e1",
+    "live_caption_signal": true
+  },
+  "quality_cost": {
+    "fixed_CPU_budget_seconds": 300,
+    "internal_seconds": 27.028231350006536,
+    "outer_seconds": 27.55082419910468,
+    "exit_code": 0,
+    "updates_each": 512,
+    "arms": 2,
+    "G_clean_extra_no_grad_forwards": 512
+  },
+  "initialization": "Both arms: public sampled Down/Up/H/b/C, fresh Up=0,H=0,b=0,C remains sampled; prior public R2",
+  "sole_intervention": "G-only differentiable clean routed forward; D retains native DV12, and discarded noisy G forwards preserve native draw cadence.",
+  "gate": {
+    "pass": true,
+    "metric_max_clean_minus_native_game": -0.0003039836883544922,
+    "threshold": -0.0001,
+    "minimum_code_gain": 0.09090018272399902,
+    "code_threshold": 1e-06,
+    "calibrated": true,
+    "bank_live": true,
+    "query_live": true,
+    "C_live": true
+  },
+  "terminal_four_common_critics": {
+    "native@128": {
+      "native_clean": 3.5678622722625732,
+      "G_clean_clean": 3.5675582885742188,
+      "clean_G_minus_native": -0.0003039836883544922,
+      "native_DV12_mean_game": 3.568011522293091,
+      "G_clean_DV12_mean_game": 3.5675275325775146,
+      "noisy_G_minus_native": -0.0004839897155761719,
+      "G_clean_zero_code_minus_live": 0.09090065956115723,
+      "native_zero_code_minus_live": 0.09085679054260254
+    },
+    "native@512": {
+      "native_clean": 6.394525051116943,
+      "G_clean_clean": 6.394136905670166,
+      "clean_G_minus_native": -0.00038814544677734375,
+      "native_DV12_mean_game": 6.394874572753906,
+      "G_clean_DV12_mean_game": 6.394003391265869,
+      "noisy_G_minus_native": -0.0008711814880371094,
+      "G_clean_zero_code_minus_live": 0.15137863159179688,
+      "native_zero_code_minus_live": 0.15141916275024414
+    },
+    "G_clean@128": {
+      "native_clean": 3.5679209232330322,
+      "G_clean_clean": 3.5676164627075195,
+      "clean_G_minus_native": -0.0003044605255126953,
+      "native_DV12_mean_game": 3.568070411682129,
+      "G_clean_DV12_mean_game": 3.5675857067108154,
+      "noisy_G_minus_native": -0.00048470497131347656,
+      "G_clean_zero_code_minus_live": 0.09090018272399902,
+      "native_zero_code_minus_live": 0.09085559844970703
+    },
+    "G_clean@512": {
+      "native_clean": 6.394351959228516,
+      "G_clean_clean": 6.39396333694458,
+      "clean_G_minus_native": -0.0003886222839355469,
+      "native_DV12_mean_game": 6.3947014808654785,
+      "G_clean_DV12_mean_game": 6.3938307762146,
+      "noisy_G_minus_native": -0.0008707046508789062,
+      "G_clean_zero_code_minus_live": 0.15137577056884766,
+      "native_zero_code_minus_live": 0.15141534805297852
+    }
+  },
+  "reference_alphas": [
+    0,
+    0.25,
+    0.5,
+    1
+  ],
+  "reference_paths": {
+    "native@128": [
+      0.6931471228599548,
+      1.2227100133895874,
+      2.196964979171753,
+      3.783289670944214
+    ],
+    "native@512": [
+      0.6931471228599548,
+      1.5713658332824707,
+      3.6602132320404053,
+      6.730382442474365
+    ],
+    "G_clean@128": [
+      0.6931471228599548,
+      1.2227226495742798,
+      2.197003126144409,
+      3.7833445072174072
+    ],
+    "G_clean@512": [
+      0.6931471228599548,
+      1.5712679624557495,
+      3.6600325107574463,
+      6.730207443237305
+    ]
+  },
+  "coverage": {
+    "native": {
+      "bank": 511,
+      "query": 511,
+      "C_norms": [
+        0.6300418376922607,
+        0.6431223750114441
+      ]
+    },
+    "G_clean": {
+      "bank": 511,
+      "query": 511,
+      "C_norms": [
+        0.6314217448234558,
+        0.6472155451774597
+      ]
+    }
+  },
+  "learned_owners_gradients_and_optimizer_moments_finite": true,
+  "matched_data_paired_and_DV12_schedules": true,
+  "curve_steps": [
+    0,
+    64,
+    128,
+    192,
+    256,
+    320,
+    384,
+    448,
+    512
+  ],
+  "curve_G_clean_minus_native": {
+    "clean": {
+      "native@128": [
+        0.0,
+        -0.00021529197692871094,
+        -0.0007107257843017578,
+        6.604194641113281e-05,
+        -0.0004355907440185547,
+        -0.00011682510375976562,
+        -0.0007913112640380859,
+        -0.0009794235229492188,
+        -0.0003039836883544922
+      ],
+      "native@512": [
+        0.0,
+        -0.0003085136413574219,
+        -0.0011887550354003906,
+        0.00037860870361328125,
+        -0.0007410049438476562,
+        -0.0002551078796386719,
+        -0.0013227462768554688,
+        -0.0015592575073242188,
+        -0.00038814544677734375
+      ],
+      "G_clean@128": [
+        0.0,
+        -0.00021457672119140625,
+        -0.0007109642028808594,
+        6.604194641113281e-05,
+        -0.00043487548828125,
+        -0.00011610984802246094,
+        -0.0007915496826171875,
+        -0.0009789466857910156,
+        -0.0003044605255126953
+      ],
+      "G_clean@512": [
+        0.0,
+        -0.0003085136413574219,
+        -0.0011882781982421875,
+        0.0003790855407714844,
+        -0.0007419586181640625,
+        -0.0002541542053222656,
+        -0.0013222694396972656,
+        -0.0015597343444824219,
+        -0.0003886222839355469
+      ]
+    },
+    "DV12": {
+      "native@128": [
+        0.0,
+        -0.00013899803161621094,
+        -0.0003132820129394531,
+        -0.00013446807861328125,
+        -0.0002231597900390625,
+        -0.00028324127197265625,
+        -0.0004749298095703125,
+        -0.0005826950073242188,
+        -0.0004839897155761719
+      ],
+      "native@512": [
+        0.0,
+        -0.0002512931823730469,
+        -0.0004677772521972656,
+        -0.000186920166015625,
+        -0.00043201446533203125,
+        -0.0004706382751464844,
+        -0.0007772445678710938,
+        -0.00090789794921875,
+        -0.0008711814880371094
+      ],
+      "G_clean@128": [
+        0.0,
+        -0.0001392364501953125,
+        -0.0003132820129394531,
+        -0.00013446807861328125,
+        -0.00022292137145996094,
+        -0.0002827644348144531,
+        -0.0004754066467285156,
+        -0.0005829334259033203,
+        -0.00048470497131347656
+      ],
+      "G_clean@512": [
+        0.0,
+        -0.00025081634521484375,
+        -0.0004677772521972656,
+        -0.00018835067749023438,
+        -0.0004334449768066406,
+        -0.00047016143798828125,
+        -0.0007772445678710938,
+        -0.0009069442749023438,
+        -0.0008707046508789062
+      ]
+    }
+  },
+  "each_arm_curve_nondecreasing_improvement": {
+    "native": {
+      "clean": true,
+      "DV12": true
+    },
+    "G_clean": {
+      "clean": true,
+      "DV12": true
+    }
+  },
+  "curve_readout": "All four clean common-judge curves improve monotonically for both arms. G_clean leads on clean serving at every nonzero checkpoint except192, where native leads on all four. Both noisy cohorts also improve monotonically; the final G_clean noisy cohort leads under all four. There is no sustained dominance claim.",
+  "limits": [
+    "Single fixed synthetic conditioning-vector switch, two sites, one initialization and512 updates; no full-Supra or ordinary comparison.",
+    "Terminal clean advantages are small (.000304 to.000389 game units), despite passing the fixed1e-4 margin.",
+    "Native D and all structural controls remain active; no universal removal-of-DV12 claim.",
+    "Four learned common judges and calibrated reference paths are game evidence, not an output-accuracy or generative-quality guarantee.",
+    "Private noisy scoring averages game losses of16 actual DV12 realizations, not the game of their mean prediction."
+  ],
+  "ordinary_comparison": "UNAVAILABLE: only two particle arms are trained",
+  "next_eligibility": "Permits a separately bounded real caption comparison against both native particles and ordinary. No automatic full-Supra promotion.",
+  "bindings": {
+    "reviewed_protocol_sha256": "ffabd73a439c657aeecdc59aacb6854975ae1893aa49812e9107d5dc00832877",
+    "executed_protocol_sha256": "f33acb3b446e52375a3f759c9cca85a1c785a319b5f6218a797994b2bbab9929",
+    "source_sha256": "4386576cebcf05669f2daff8f7cd8b8f28a60bd966b37e2de795de72ee6d045d",
+    "test_sha256": "18ed686478e52c5ab80110271e5c1c087683b6c6eccf9d4e09a66eb6fda61a5b",
+    "native_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+    "data_digest": "6815a97bf9f14dfc5768025b32af43a9bbbcb1be43bdc6138e7a14ac7006e8ac",
+    "report_sha256": "c0638fd0f28392dfbcbca2bab71d9d32c693a4aa0cdaf6986cefc64842394b44",
+    "completion_sha256": "486dc270c2d8423015245aa8b55eaa535274f034d3b8ce4d49239a8fcc5abaf9",
+    "launcher_sha256": "211637060d37e4387b405a34213188b9310e3da5fa7acf8feb1fef62afa116ed",
+    "retained_sha256": "57588f595f103f013b761f16b662fbff260bcf2e9633716a4923482093f61dc9",
+    "native_trace_sha256": "ff3e6a199b7a25b325238ddd7746bad87f6a1df832827f50605703a3ebbe1ece",
+    "G_clean_trace_sha256": "da0b483cb3eb0fd58974ee82523072cf39ff859820787d48993940a79a3b2d10"
+  },
+  "raw_artifacts": "Ignored runs/routed-g-clean-v1; tensors, native state and per-update rows remain local. Exact frozen sources and this compact receipt are publishable."
+}

@@ -1,0 +1,22 @@
+{
+  "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+  "local_source_sha256": {
+    "INPUTS.json": "8f8191e6762acc0e33eafc6a69491d0606bc7ece6975a374cce7b54861540b79",
+    "PARENT-ADAPTER.json": "540877343ff152c35363c955b9f95f82af5fe0e1607b6afbe0a3e738d5d1042a",
+    "PROTOCOL.md": "37ba2294646d1b71060a5c0031a42d7be7ea4dade9d35da942a5888f4ec0c01e",
+    "RESTORATION-BRIDGE.json": "41b37c7e33eae7cc3f13a165924c92ffeac68e25d0e756eae3a0a2300a0ebeb2",
+    "SOURCE-PREP-ERROR.json": "7805514e6005331b6ec4c19ee7f7ce7d41b971b8090d5052af959be271186044",
+    "adapter.py": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+    "bridge.py": "b3b2a9cb8d89fc7005f0d1430807bd4cf8c59737673513ff75b70cf90f0e3324",
+    "close_replay.py": "475fac83bc2263983fce7e5f17a19e2a902b3af17a25555ee5ca1aa121d51df3",
+    "common.py": "6370a183848c484019064f27434427628f659ee54c1c4572e63572077d582110",
+    "contracts.py": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+    "launch_replay.py": "7bda69ad9dfdd53e3af20c836a5062d238f68b3c100421d1642415add49fb7af",
+    "preflight_cpu.py": "98d2f3473a56affadc675fb2d10f34b4b03742bae107f83fb9820410b1991731",
+    "preparation-receipt.json": "074d343da319e5f05862bc37c608692e984228e1dec0b794a8913ac4c6f9de17",
+    "prepare.py": "8f8302a84fed645e03d924ac1c90b953d43cd2b09c1d475d92ddff6b79bb8be2",
+    "replay.py": "083211a655978d6371990e927caca71e5c8d3bbf260df269f95a01f5d51108f8"
+  },
+  "package_sha256": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+  "status": "FROZEN_REPLAY_ONLY_NOT_LAUNCHED"
+}

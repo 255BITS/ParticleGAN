@@ -1,0 +1,232 @@
+{
+  "status": "VALID",
+  "scope": "sealed prospective saved endpoint; no model/optimizer update",
+  "step": 0,
+  "checkpoint_sha256": "40195bbf549c4f0982d270916f413a882b77483e70e9c134fe8be4210c2430e7",
+  "receipt_sha256": "cb90db457828339a952341d90fb695a5c2a24e0a01d9b3d8cd09f4d19187bfc0",
+  "checks": {
+    "sealed_post_save_log": true,
+    "record_and_metrics_exact": true,
+    "matched_sources_and_init": true,
+    "genuine_quarter_generator_and_sigma_base_rates": true,
+    "prior_and_critic_base_rates_exact": true,
+    "population_state_load_exact": true,
+    "old_law_atomic_rejections": [
+      "old-law",
+      "wrong-level",
+      "mask-dtype"
+    ],
+    "population_stamp_and_coverage_consistent": true,
+    "moved_row_reset_ledger_exact": true,
+    "graph_bounded_symmetric": true,
+    "novel_children_without_seed_links": true,
+    "common_count_family_and_phase_budget": true,
+    "paired_birth_support_and_true_certificate_accounting": true,
+    "semantic_timing_fields": [],
+    "last_metadata_json_serializable": true,
+    "rng_cpu_uint8": true,
+    "backend7_geometry_stamp_consistent": true,
+    "FIFO_step_snapshot_history_exact": true,
+    "paired_average_atomic_rejections": [
+      "old-backend6",
+      "wrong-geometry-policy",
+      "boolean-step",
+      "future-step"
+    ]
+  },
+  "population": {
+    "active": false,
+    "mask_rows": 0,
+    "required_rows": 973,
+    "s": 1.0,
+    "b": 1.0,
+    "last_decisive": 0,
+    "undo_s": null,
+    "coverage_rejections": 0,
+    "expiries": 0,
+    "accepted_stationary": 0,
+    "rebases": 0,
+    "last_population": {},
+    "last_decision": {},
+    "log": [],
+    "current_window_participants_b": 0,
+    "current_window_participants_2b": 0
+  },
+  "paired_average": {
+    "stamp": {
+      "schema": 1,
+      "policy": "ema_support_inside_current_real_group_Q_v1",
+      "snapshot": 0,
+      "step": 0,
+      "rows": 1024,
+      "required": 973,
+      "cells": 0,
+      "rank": 0,
+      "groups": 0,
+      "calibration_rows": 0,
+      "chart_valid": false,
+      "duplicate_ok": false,
+      "finite_rows": 0,
+      "same_group_rows": 0,
+      "ema_eligible_rows": 0,
+      "coherent_rows": 0,
+      "eligible": false
+    },
+    "age_real_rows": 0,
+    "age_steps": 0,
+    "eligible_now": false,
+    "derived_served_model": "fast",
+    "chart_absent_semantic_view": true,
+    "rejected_atomic_controls": [
+      "old-backend6",
+      "wrong-geometry-policy",
+      "boolean-step",
+      "future-step"
+    ],
+    "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+  },
+  "serving": {
+    "served_model": "fast",
+    "derived_from_frozen_RA8_geometry_predicate": true,
+    "average_rate": 0.25,
+    "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+  },
+  "base_learning_rates": [
+    [
+      0.0010625,
+      0.0085,
+      0.0010625
+    ],
+    [
+      0.00425
+    ]
+  ],
+  "applied_learning_rates": [
+    [
+      0.0010625,
+      0.0085,
+      0.0010625
+    ],
+    [
+      0.00425
+    ]
+  ],
+  "birth_counters": {
+    "evals": 0,
+    "dim_skips": 0,
+    "discoveries": 0,
+    "realised_deaths": 0,
+    "realised_births": 0,
+    "stays": 0,
+    "moves": 0,
+    "matched": 0,
+    "normalised": 0,
+    "waited_deaths": 0,
+    "waited_births": 0,
+    "stale_resets": 0,
+    "iso_evals": 0,
+    "iso_flagged": 0,
+    "iso_acted": 0,
+    "iso_skipped": 0,
+    "iso_moves": 0,
+    "iso_dup_skips": 0,
+    "cell_evals": 0,
+    "cell_discoveries": 0,
+    "ordinary_moves": 0,
+    "feature_rebuilds": 0,
+    "feature_distance_cells": 0,
+    "projection_products": 0,
+    "count_test_terms": 0,
+    "feature_forward_rows": 0,
+    "invalidated_cells": 0,
+    "novel_birth_moves": 0,
+    "novel_birth_attempts": 0
+  },
+  "last_phase": null,
+  "row_evidence": {
+    "mature_rows": 0,
+    "flags": 0,
+    "neff_median": 0.0,
+    "neff_max": 0.0
+  },
+  "graph": {
+    "edges": 0,
+    "max_degree": 0
+  },
+  "metrics": {
+    "precision": 0.158203125,
+    "coverage": 1,
+    "mass_tv": 0.9589013671875,
+    "centre_distance": 0.16752251982688904,
+    "covered_centroid_rms": 0.0225982666015625,
+    "supported_mass": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0008544921875,
+      0.1571044921875,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.000244140625,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "unsupported_mass": 0.841796875,
+    "clean_particle_centres": {
+      "precision": 0.1865234375,
+      "coverage": 1,
+      "mass_tv": 0.96,
+      "centre_distance": 0.15417787432670593,
+      "covered_centroid_rms": 0.026388948783278465,
+      "supported_mass": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.1865234375,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "unsupported_mass": 0.8134765625
+    }
+  },
+  "quality_verdict": null,
+  "quality_scope": "Watcher records frozen metrics only; numerical queue owns strict quality adjudication.",
+  "overall_target": "Toy AND original full Grid100 required; intermediate metrics have no acceptance verdict.",
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "cuda_initialized": false
+}

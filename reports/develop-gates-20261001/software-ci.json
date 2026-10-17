@@ -1,0 +1,33 @@
+{
+  "actions_run": 36897240410,
+  "new_report_classification_verification": {
+    "command": "python -m pytest -q tests/test_forge_history.py tests/test_forge_knowledge.py",
+    "history_source_sha256": "2b528d4f9a7e4c8ebf9280fcffc89e0f706f5807a5e99a4b8d313480ba842b08",
+    "log": "/ml2/hypergan/gan-attempts/develop-gates-20261001/software-ci/memory-tests.log",
+    "log_sha256": "37a8b3295e5772d4c19f6f09e8a2418864d8ca7de50ccbde90b506e3637a4619",
+    "passed": 37,
+    "seconds": 3.65
+  },
+  "other_checks": [
+    "Python 3.10 and 3.11 pipeline smokes",
+    "Installed-wheel smokes",
+    "Source archive and wheel build",
+    "Research-artifact packaging exclusions"
+  ],
+  "python312_full_suite": {
+    "passed": 2249,
+    "seconds": 815.32,
+    "skipped": 69,
+    "subtests_passed": 18
+  },
+  "raw_ci_job_log": {
+    "path": "/ml2/hypergan/gan-attempts/develop-gates-20261001/software-ci/ci-python312-job.log",
+    "sha256": "18512edd0d138c5e2810ff52206fb24148be233f3a9f43551342b4f4504ad8ca"
+  },
+  "schema_version": 1,
+  "scientific_qualification": false,
+  "software_verification_only": true,
+  "source_revision": "de9b9ae5fa9873c3a41407029221556c246a0442",
+  "status": "PASS",
+  "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36897240410"
+}

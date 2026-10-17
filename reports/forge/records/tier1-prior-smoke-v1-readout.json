@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "record_id": "tier1-prior-smoke-v1-readout",
+  "record_type": "scientific",
+  "goal": "discriminator_stability",
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+  "trainer_family": "bcap-dualnorm",
+  "evidence_scope": "task_only_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "lifecycle": "concluded",
+  "hypothesis": "Prior cardinality, public cloud/MoG code path and fixed MoG width may determine acquisition and local shape under the selected BCAP trainer. A balanced nine-configuration prior grid keeps all other task and trainer factors fixed.",
+  "mechanism_class": "task_owned_prior_hyperparameters",
+  "changed_factors": [
+    "Task-owned particle count: 256, 1024, 4096; batch size remains 128",
+    "Task-owned prior: ParticlePrior cloud or MoGParticlePrior with fixed sigma .025 or .1"
+  ],
+  "conclusion": "All 18 CUDA cells complete: 0/18 full-quality PASS, 3/18 explicitly narrower smoke-projection PASS. Larger tables regress fixed-budget acquisition. With 256 rows, MoG sigma .1 passes Gaussian location/width at five terminal checks but not sustained KS; ring passes coverage/precision/balance with cloud or MoG .025 but fails full local covariance. No single tested prior passes both original tasks or both proposed smoke questions. Baseline endpoints exactly reproduce the archived BCAP winner. No trainer delta, seed variation, retries or changed historical gates.",
+  "next_action": "Stop this finite grid. Keep 256 particles for these budgets; propose task-owned MoG sigma .1 for a separately scoped scalar smoke and .025 for ring acquisition. Preserve original full CDF/covariance questions as quality evidence and calibrate an explicit future profile revision before ordinary qualification. No automatic continuation or defaults.",
+  "source": {
+    "path": "reports/forge/tier1-prior-smoke/results.json",
+    "sha256": "72b4c725f721ff0595857ab3fc096be21a3b2241ab6f17f300ff0f7c1f157bb6"
+  },
+  "provenance": {
+    "protocol": "reports/forge/tier1-prior-smoke/protocol.json",
+    "protocol_sha256": "8bb8ed3bbf760290c8b8711592eda0b197100d0ddc0630b166063391f5c81ea1",
+    "source_commit": "ec9be602b2b8d587b8c8c3f8bc10e98c96580dc1",
+    "source_digest": "5cf787dc883d392f622ca74237a6d0582d6714b5fa5111bb462c30d91dc0c33d",
+    "actual_device": "cuda:0",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    },
+    "prior_conditions": {
+      "cloud-n256": {
+        "particles": 256,
+        "prior": {
+          "kind": "particle_cloud",
+          "sigma": 0,
+          "standardize": false,
+          "learnable": true,
+          "exception_reason": "User-requested explicit ParticlePrior diagnostic; finite atoms do not replace the baseline MoG cohort."
+        }
+      },
+      "mog025-n256": {
+        "particles": 256,
+        "prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false,
+          "learnable": true
+        }
+      },
+      "mog100-n256": {
+        "particles": 256,
+        "prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false,
+          "learnable": true
+        }
+      },
+      "cloud-n1024": {
+        "particles": 1024,
+        "prior": {
+          "kind": "particle_cloud",
+          "sigma": 0,
+          "standardize": false,
+          "learnable": true,
+          "exception_reason": "User-requested explicit ParticlePrior diagnostic; finite atoms do not replace the baseline MoG cohort."
+        }
+      },
+      "mog025-n1024": {
+        "particles": 1024,
+        "prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false,
+          "learnable": true
+        }
+      },
+      "mog100-n1024": {
+        "particles": 1024,
+        "prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false,
+          "learnable": true
+        }
+      },
+      "cloud-n4096": {
+        "particles": 4096,
+        "prior": {
+          "kind": "particle_cloud",
+          "sigma": 0,
+          "standardize": false,
+          "learnable": true,
+          "exception_reason": "User-requested explicit ParticlePrior diagnostic; finite atoms do not replace the baseline MoG cohort."
+        }
+      },
+      "mog025-n4096": {
+        "particles": 4096,
+        "prior": {
+          "kind": "mog",
+          "sigma": 0.025,
+          "standardize": false,
+          "learnable": true
+        }
+      },
+      "mog100-n4096": {
+        "particles": 4096,
+        "prior": {
+          "kind": "mog",
+          "sigma": 0.1,
+          "standardize": false,
+          "learnable": true
+        }
+      }
+    },
+    "trainer_delta": "none",
+    "archive_sha256": "0ab6a34f0dbb27b7bd6647ef44918a1f022abc2732826c0d50190064d96ccd7d"
+  },
+  "task_results": [
+    {
+      "task_id": "gaussian1d_acquisition__cloud-n256",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.09153066363216095,
+        "finite_fraction": 1.0,
+        "mean": 2.0285289878520416,
+        "mean_error_sigma": 0.05705797570408322,
+        "sample_count": 4096,
+        "std": 0.6010807538908765,
+        "std_ratio": 1.202161507781753
+      },
+      "cost": {
+        "wall_seconds": 10.143085921998136
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__cloud-n256",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.6433746553957462,
+        "component_core_min_eigen_ratio": 0.10228610038757324,
+        "component_covariance_error": 11.02201757952571,
+        "component_min_eigen_ratio": 0.10228610038757324,
+        "covariance_error": 0.14413590729236603,
+        "hq": 0.930419921875,
+        "mass_tv": 0.059814453125,
+        "max_component_spill": 0.2379182130098343,
+        "mean_error": 0.09678681939840317,
+        "min_hq_mass_ratio": 0.6328125,
+        "min_mass_ratio": 0.6328125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.07506984618001002,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.5475427149795
+      },
+      "reason": "Original full gate; separate smoke projection PASS with suffix 9. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__mog025-n256",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.11427786646523908,
+        "finite_fraction": 1.0,
+        "mean": 2.06394087895751,
+        "mean_error_sigma": 0.12788175791502,
+        "sample_count": 4096,
+        "std": 0.5274966483540625,
+        "std_ratio": 1.054993296708125
+      },
+      "cost": {
+        "wall_seconds": 9.442026496049948
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 1. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__mog025-n256",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.48049567081034184,
+        "component_core_min_eigen_ratio": 0.16551737487316132,
+        "component_covariance_error": 9.61552089639008,
+        "component_min_eigen_ratio": 0.29107269644737244,
+        "covariance_error": 0.09987626224756241,
+        "hq": 0.94384765625,
+        "mass_tv": 0.093017578125,
+        "max_component_spill": 0.3333333432674408,
+        "mean_error": 0.04772745072841644,
+        "min_hq_mass_ratio": 0.453125,
+        "min_mass_ratio": 0.65234375,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.05426782608930387,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.672290473012254
+      },
+      "reason": "Original full gate; separate smoke projection PASS with suffix 8. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__mog100-n256",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.042974089754048816,
+        "finite_fraction": 1.0,
+        "mean": 2.0065182581020053,
+        "mean_error_sigma": 0.013036516204010695,
+        "sample_count": 4096,
+        "std": 0.4786939427793527,
+        "std_ratio": 0.9573878855587054
+      },
+      "cost": {
+        "wall_seconds": 9.34374648006633
+      },
+      "reason": "Original full gate; separate smoke projection PASS with suffix 5. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__mog100-n256",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.8960003089159727,
+        "component_core_min_eigen_ratio": 0.713114857673645,
+        "component_covariance_error": 6.67240222916007,
+        "component_min_eigen_ratio": 1.2985795736312866,
+        "covariance_error": 0.02536173351109028,
+        "hq": 0.799072265625,
+        "mass_tv": 0.07666015625,
+        "max_component_spill": 0.3388157784938812,
+        "mean_error": 0.03136402741074562,
+        "min_hq_mass_ratio": 0.4375,
+        "min_mass_ratio": 0.64453125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.033773369163450424,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.630155976978131
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__cloud-n1024",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.2208338502118412,
+        "finite_fraction": 1.0,
+        "mean": 1.818703827477293,
+        "mean_error_sigma": 0.3625923450454138,
+        "sample_count": 4096,
+        "std": 0.35966968027385227,
+        "std_ratio": 0.7193393605477045
+      },
+      "cost": {
+        "wall_seconds": 8.969855610048398
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__cloud-n1024",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.4477179404348135,
+        "component_core_min_eigen_ratio": 0.2747213542461395,
+        "component_covariance_error": 7.472558559849858,
+        "component_min_eigen_ratio": 0.5451876521110535,
+        "covariance_error": 0.06779055297374725,
+        "hq": 0.818603515625,
+        "mass_tv": 0.0703125,
+        "max_component_spill": 0.37627118825912476,
+        "mean_error": 0.05254863575100899,
+        "min_hq_mass_ratio": 0.52734375,
+        "min_mass_ratio": 0.6015625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.4477179404348135,
+        "resolved_core_min_eigen_ratio": 0.2747213542461395,
+        "resolved_max_component_spill": 0.37627118825912476,
+        "sample_count": 4096,
+        "sw1_normalized": 0.045792473777859576,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.636902617989108
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__mog025-n1024",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.21692952694963463,
+        "finite_fraction": 1.0,
+        "mean": 1.7986855292328983,
+        "mean_error_sigma": 0.4026289415342035,
+        "sample_count": 4096,
+        "std": 0.395800237565175,
+        "std_ratio": 0.79160047513035
+      },
+      "cost": {
+        "wall_seconds": 9.039811434107833
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__mog025-n1024",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.36162904743105173,
+        "component_core_min_eigen_ratio": 0.32671138644218445,
+        "component_covariance_error": 8.688359942287207,
+        "component_min_eigen_ratio": 0.7249611616134644,
+        "covariance_error": 0.05909348279237747,
+        "hq": 0.803466796875,
+        "mass_tv": 0.069091796875,
+        "max_component_spill": 0.34166666865348816,
+        "mean_error": 0.045994583517313004,
+        "min_hq_mass_ratio": 0.49609375,
+        "min_mass_ratio": 0.640625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.36162904743105173,
+        "resolved_core_min_eigen_ratio": 0.32671138644218445,
+        "resolved_max_component_spill": 0.34166666865348816,
+        "sample_count": 4096,
+        "sw1_normalized": 0.04450546328169902,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.720386344008148
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__mog100-n1024",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.11241208222395527,
+        "finite_fraction": 1.0,
+        "mean": 1.9288255044884863,
+        "mean_error_sigma": 0.14234899102302734,
+        "sample_count": 4096,
+        "std": 0.4955881939000907,
+        "std_ratio": 0.9911763878001814
+      },
+      "cost": {
+        "wall_seconds": 9.03230162896216
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 1. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__mog100-n1024",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 1.6204013302922249,
+        "component_core_min_eigen_ratio": 0.9752346873283386,
+        "component_covariance_error": 8.080019325017929,
+        "component_min_eigen_ratio": 2.615046262741089,
+        "covariance_error": 0.03594016283750534,
+        "hq": 0.561279296875,
+        "mass_tv": 0.0556640625,
+        "max_component_spill": 0.5789473652839661,
+        "mean_error": 0.042994365096092224,
+        "min_hq_mass_ratio": 0.375,
+        "min_mass_ratio": 0.71484375,
+        "modes": 16,
+        "resolved_core_covariance_error": 1.6204013302922249,
+        "resolved_core_min_eigen_ratio": 0.9752346873283386,
+        "resolved_max_component_spill": 0.5789473652839661,
+        "sample_count": 4096,
+        "sw1_normalized": 0.040580974963670614,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.668850151007064
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__cloud-n4096",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.32809573921311486,
+        "finite_fraction": 1.0,
+        "mean": 2.3400772994209547,
+        "mean_error_sigma": 0.6801545988419093,
+        "sample_count": 4096,
+        "std": 0.413216951835287,
+        "std_ratio": 0.826433903670574
+      },
+      "cost": {
+        "wall_seconds": 9.18472565500997
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__cloud-n4096",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.8229479901492596,
+        "component_core_min_eigen_ratio": 0.7764935493469238,
+        "component_covariance_error": 12.463598892092705,
+        "component_min_eigen_ratio": 2.294947624206543,
+        "covariance_error": 0.07013995945453644,
+        "hq": 0.590087890625,
+        "mass_tv": 0.04150390625,
+        "max_component_spill": 0.5512820482254028,
+        "mean_error": 0.05169008672237396,
+        "min_hq_mass_ratio": 0.41015625,
+        "min_mass_ratio": 0.83984375,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.8229479901492596,
+        "resolved_core_min_eigen_ratio": 0.7764935493469238,
+        "resolved_max_component_spill": 0.5512820482254028,
+        "sample_count": 4096,
+        "sw1_normalized": 0.04392766274741514,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.637567871948704
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__mog025-n4096",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.19220190403754567,
+        "finite_fraction": 1.0,
+        "mean": 1.857681713954662,
+        "mean_error_sigma": 0.28463657209067605,
+        "sample_count": 4096,
+        "std": 0.6939272590647633,
+        "std_ratio": 1.3878545181295265
+      },
+      "cost": {
+        "wall_seconds": 9.189264612970874
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__mog025-n4096",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 1.1287164688110352,
+        "component_core_min_eigen_ratio": 0.6704072952270508,
+        "component_covariance_error": 9.507987529039383,
+        "component_min_eigen_ratio": 2.962479829788208,
+        "covariance_error": 0.07299302518367767,
+        "hq": 0.5791015625,
+        "mass_tv": 0.043701171875,
+        "max_component_spill": 0.5891472697257996,
+        "mean_error": 0.047218307852745056,
+        "min_hq_mass_ratio": 0.33984375,
+        "min_mass_ratio": 0.6796875,
+        "modes": 16,
+        "resolved_core_covariance_error": 1.1287164688110352,
+        "resolved_core_min_eigen_ratio": 0.6704072952270508,
+        "resolved_max_component_spill": 0.5891472697257996,
+        "sample_count": 4096,
+        "sw1_normalized": 0.043882298160637205,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.7212739599635825
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__mog100-n4096",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.12874880078731987,
+        "finite_fraction": 1.0,
+        "mean": 1.8366554820895544,
+        "mean_error_sigma": 0.32668903582089115,
+        "sample_count": 4096,
+        "std": 0.6128398431325662,
+        "std_ratio": 1.2256796862651325
+      },
+      "cost": {
+        "wall_seconds": 9.414489068905823
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    },
+    {
+      "task_id": "ring16_acquisition__mog100-n4096",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 2.3401803597807884,
+        "component_core_min_eigen_ratio": 0.9700378179550171,
+        "component_covariance_error": 11.354222446680069,
+        "component_min_eigen_ratio": 7.133003234863281,
+        "covariance_error": 0.07763563096523285,
+        "hq": 0.400634765625,
+        "mass_tv": 0.037109375,
+        "max_component_spill": 0.7286821603775024,
+        "mean_error": 0.02622883766889572,
+        "min_hq_mass_ratio": 0.25,
+        "min_mass_ratio": 0.82421875,
+        "modes": 16,
+        "resolved_core_covariance_error": 2.3401803597807884,
+        "resolved_core_min_eigen_ratio": 0.9700378179550171,
+        "resolved_max_component_spill": 0.7286821603775024,
+        "sample_count": 4096,
+        "sw1_normalized": 0.0402750542926074,
+        "target_scale": 3.0029242038726807
+      },
+      "cost": {
+        "wall_seconds": 5.61872926808428
+      },
+      "reason": "Original full gate; separate smoke projection FAIL with suffix 0. Scoped prior diagnostic grants no ordinary qualification."
+    }
+  ]
+}

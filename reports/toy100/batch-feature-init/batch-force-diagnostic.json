@@ -1,0 +1,115 @@
+{
+  "support": "All 256 initial QR particle outputs, CPU float64",
+  "interpretation": "Gradient of summed scores in input space, before D training. Not an Adam update or a proof of training collapse.",
+  "batch_weights": [
+    -0.054940517991781235,
+    0.037000514566898346,
+    0.12818677723407745,
+    0.039769116789102554
+  ],
+  "initial_covariance": [
+    [
+      0.0004969244040614441,
+      0.00021351116353786204
+    ],
+    [
+      0.00021351116353786204,
+      0.0016229696876352152
+    ]
+  ],
+  "contributions": {
+    "point": {
+      "score_std": 0.00042952587286229627,
+      "mean_input_gradient": [
+        -0.019738360189416625,
+        0.0028040463175807895
+      ],
+      "input_gradient_rms": 0.01412501642801217,
+      "covariance_velocity": [
+        [
+          -1.248581264794485e-05,
+          -2.0878531698505708e-05
+        ],
+        [
+          -2.0878531698505708e-05,
+          8.840692612720793e-05
+        ]
+      ],
+      "covariance_velocity_eigenvalues": [
+        -1.6635681869574058e-05,
+        9.255679534883714e-05
+      ]
+    },
+    "batch": {
+      "score_std": 0.006332995778704001,
+      "mean_input_gradient": [
+        0.0,
+        8.673617379884035e-19
+      ],
+      "input_gradient_rms": 0.364217899623254,
+      "covariance_velocity": [
+        [
+          -0.014359660375454351,
+          -0.003245959672144878
+        ],
+        [
+          -0.003245959672144878,
+          -0.03190095592106769
+        ]
+      ],
+      "covariance_velocity_eigenvalues": [
+        -0.032482340897766845,
+        -0.013778275398755197
+      ]
+    },
+    "combined": {
+      "score_std": 0.006353430418606195,
+      "mean_input_gradient": [
+        -0.019738360189416625,
+        0.0028040463175807856
+      ],
+      "input_gradient_rms": 0.3639888890214385,
+      "covariance_velocity": [
+        [
+          -0.014372146188102316,
+          -0.0032668382038433847
+        ],
+        [
+          -0.0032668382038433847,
+          -0.0318125489949405
+        ]
+      ],
+      "covariance_velocity_eigenvalues": [
+        -0.03240439056641596,
+        -0.013780304616626856
+      ]
+    }
+  },
+  "off_sample_jacobian_point_max": 0.0,
+  "off_sample_jacobian_batch_max": 0.0023552952804183937,
+  "batch_to_point_gradient_rms": 25.785308036948656,
+  "coincident_cloud_batch_hessian": {
+    "coefficient": -4.349527176646839,
+    "max_formula_error": 0.0,
+    "eigenvalues": [
+      -23.197400950779976,
+      -23.197400950779972,
+      -23.197400950779972,
+      -23.19740095077997,
+      -23.19740095077997,
+      -23.197400950779954,
+      -4.202067338731753e-15,
+      -2.015181599169124e-15
+    ]
+  },
+  "zero_batch_readout_checks": {
+    "off_sample_input_jacobian_max": 0.0,
+    "synthetic_logistic_head_gradient": [
+      6.091743178376459,
+      -4.304749567361201,
+      -1.241616663248735,
+      -0.4201714895477768
+    ],
+    "head_still_trainable": true
+  }
+}

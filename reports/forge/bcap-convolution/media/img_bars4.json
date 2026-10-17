@@ -1,0 +1,28 @@
+{
+  "gif_sha256": "d8bb8ff53259d33489c1937393e6548c5a6f18636524f575b71591c14aa81fb7",
+  "kind": "actual_training_saved_image_outputs_gif",
+  "observation_count": 24,
+  "observations_sha256": "1106b187e5e6dc3748e8f1c329c6fea9bcce99cdca7348a248841125080975e4",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+  "sampling_draws_added": 0,
+  "saved_sample_sets_recomputed": 24,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-dualnorm-convolution/runs/forge/bcap-convolution-images-v1/72b249143b324f41aa7d6b15d32f6f0f/observed-images.pt": "af6c9618067d69bb1f06e1ac34e77b63e6e1a2e309725fa25c6e584b7353c03c"
+  },
+  "task_id": "img_bars4"
+}

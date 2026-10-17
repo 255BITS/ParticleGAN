@@ -1,0 +1,42 @@
+{
+  "status": "VALID",
+  "ready_sha256": "e76a712d99f3a224a99f1e26a4dcfe813eb61617f217577dd60d69f12af5dee4",
+  "pilot_sha256": "cb9620d116112d710abd4d31f17f101f1d21d58c31b24bcc2bf8c2b738fd6b03",
+  "source_and_pilot_artifact_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/indexed_adapter.py": "921f4b9f29173e3604830c9ceae998c88aa935db7a5a06dede41b7d9890675da",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/run_indexed_monitor.py": "b106a49f0c91245c9307aec347d0a834c53d0cd5cedcb8019eac1ccdbe509371",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/pilot_indexed_adapter.py": "45b8e298cb4249909bddf8962f5524e540e81e41ebe6d1a54d35a76e2d336ff2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/prepare_indexed_declaration.py": "e5b457b78af1a6cbc4e724d00231687739f0d6346d8fb29dacc500cb7d6ea241",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/READY.json": "e76a712d99f3a224a99f1e26a4dcfe813eb61617f217577dd60d69f12af5dee4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/PILOT.json": "cb9620d116112d710abd4d31f17f101f1d21d58c31b24bcc2bf8c2b738fd6b03",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/pilot-run.log": "99d35f2ea67f476b3d5484a28e1da1e47b4999ae0ae5e318d55f88c7497e5963",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/pilot-monitor.log": "36b481a0308e104b479e7644604fe327cf5f6b048a91f911f8d769cec78e54cc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/README.md": "43587c6c3f7b807cbed96b7fa17415e502a4469c2afbc3e06b35d0c023ecfe5f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/failed-attempt1/READY.json": "60622d60891936c83133a647f8e88ec610af3ec20347edc353984773f510bdc2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/failed-attempt1/indexed_adapter.py": "6b1a9ee7c5dde5b9d019102e3f16af1b13c617410f176d42db14ce40afee3490",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/failed-attempt1/pilot-run.log": "d41eab0df8d11a7c2f89cb60b1cbf4549b93d39a7e05edee521a3d8e3b08ff4f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/failed-attempt1/pilot_indexed_adapter.py": "45b8e298cb4249909bddf8962f5524e540e81e41ebe6d1a54d35a76e2d336ff2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/failed-attempt1/prepare_indexed_declaration.py": "e5b457b78af1a6cbc4e724d00231687739f0d6346d8fb29dacc500cb7d6ea241",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/failed-attempt1/run_indexed_monitor.py": "b106a49f0c91245c9307aec347d0a834c53d0cd5cedcb8019eac1ccdbe509371"
+  },
+  "adjacent_output_readme": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/README.md",
+  "adjacent_output_readme_sha256": "43587c6c3f7b807cbed96b7fa17415e502a4469c2afbc3e06b35d0c023ecfe5f",
+  "collector_ast_proof": {
+    "original_ast_sha256": "b1fd9feaa73ead7170e097e7d52e8b57db0f069adfb2d6834749d879c8369597",
+    "adapted_ast_sha256": "08891c1b65fe387e8fb52ba16b88f56b1177e56d41c57200d1c67a4134fb7902",
+    "reverted_ast_sha256": "b1fd9feaa73ead7170e097e7d52e8b57db0f069adfb2d6834749d879c8369597",
+    "exact_ast_delta": {
+      "function": "collect",
+      "assignment": "expected_options",
+      "keyword": "evaluation_generate",
+      "before": "plain",
+      "after": "indexed"
+    },
+    "all_other_ast_nodes_exact": true
+  },
+  "old_error_receipts_preserved": true,
+  "numerical_reruns": 0,
+  "cpu_threads": 1,
+  "cuda_initialized": false,
+  "monitor_output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor"
+}

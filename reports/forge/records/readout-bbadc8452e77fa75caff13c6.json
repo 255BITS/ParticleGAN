@@ -1,0 +1,373 @@
+{
+  "attempt_ids": [
+    "1902c3ab92d14b7590efd8c5751d4019",
+    "4e81143249764fc7b7b402ebda745d6d"
+  ],
+  "candidate_id": "bispf-optimized-quintic-v1",
+  "candidate_revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Quintic preserves the native stripes positive and repairs the wider bars gate under identical H2 source, task architecture/data law, public initialization, initial prior, named streams, clean enumerated sampling, update budget and24 evaluations. This is architecture-portability evidence only, not natural-image quality or ordinary qualification.",
+  "conclusion": "Quintic convolution rule passes both width64 gates at600 updates: stripes HQ1 with2 modes and12 terminal passing checks; bars HQ1 with4 modes and9 terminal passing checks. Both exceed the required5-check stable suffix. All optimizer groups complete600 updates and all states remain finite.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "1902c3ab92d14b7590efd8c5751d4019",
+        "4e81143249764fc7b7b402ebda745d6d"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "c955fe18636b1671bca166b0593d308f54811e703145446eb396ad8b3b3f3ba7",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 1.0
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 1.0
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "1902c3ab92d14b7590efd8c5751d4019",
+          "producer_request_id": "62f797b1e9f3076a2c63c7b3",
+          "producer_study_id": "bispf-optimized-quintic-v1-wide",
+          "result_hash": "8a253e2fecdae7006eaff458f01b731ab4932a6cdc32aaf6fe257128abcb1281",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "4e81143249764fc7b7b402ebda745d6d",
+          "producer_request_id": "62f797b1e9f3076a2c63c7b3",
+          "producer_study_id": "bispf-optimized-quintic-v1-wide",
+          "result_hash": "e0c7b16a6ee375b72188bb36a0a49f149dac2e9b0065950b63fde27dc8943489",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "b5db147f65c53a767f638ec8bce8189bf30cd25f6e763c7e4a42553b9be4d917",
+        "contract_sha256": "c955fe18636b1671bca166b0593d308f54811e703145446eb396ad8b3b3f3ba7",
+        "control_binding_sha256": "72ffa7e88fa52160f2ffe8e8ab5658a3be0828bdfcfb7f17183f6b20fc4d1360",
+        "policy_fingerprint": "1f7397ed90f686616c7254136629b9dba731a6e48f40b63a799eeb7e2d2d0b8b",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "40e38f74ceb3b26711637aa12a36b3debca2bae6d0b3cf03a4c4a9043ee96f14"
+      },
+      "study_id": "bispf-optimized-quintic-v1-wide",
+      "study_sha256": "40e38f74ceb3b26711637aa12a36b3debca2bae6d0b3cf03a4c4a9043ee96f14"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "bispf_fastpath_quality",
+  "hypothesis": "The global quintic rule retains the native BISPF pass set on both unchanged width-64 image tasks, including a positive stripes acquisition pass, under the same seed, public initializer, data sequence, prior, sampling, 600 updates and 24 checks.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Proceed only with separately frozen matched full DCGAN performance and ordinary quality campaigns from H2. Selection requires the declared latency targets and preservation of every incumbent ordinary pass; no public-default adoption follows this diagnostic.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "1902c3ab92d14b7590efd8c5751d4019",
+        "result_hash": "8a253e2fecdae7006eaff458f01b731ab4932a6cdc32aaf6fe257128abcb1281",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "4e81143249764fc7b7b402ebda745d6d",
+        "result_hash": "e0c7b16a6ee375b72188bb36a0a49f149dac2e9b0065950b63fde27dc8943489",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-bbadc8452e77fa75caff13c6",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/1902c3ab92d14b7590efd8c5751d4019/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 1800,
+      "candidate_budget_seconds": 600,
+      "id": "bispf-fastpath-alternatives-v1"
+    },
+    "candidate": "bispf-optimized-quintic-v1",
+    "competing_explanation": "The new matrix update changes direction and effective displacement. Reduced update magnitude or altered spectral weighting may undertrain or collapse modes at the original 600-update budget. Native controls use the same widened tasks; no seed-only repeat, task-local rate choice, extra steps or gate relaxation is allowed.",
+    "control": {
+      "candidate_id": "bispf-v2",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic",
+      "threshold": 0.9
+    },
+    "hypothesis": "The global quintic rule retains the native BISPF pass set on both unchanged width-64 image tasks, including a positive stripes acquisition pass, under the same seed, public initializer, data sequence, prior, sampling, 600 updates and 24 checks.",
+    "id": "bispf-optimized-quintic-v1-wide",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bispf-v2",
+          "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+        },
+        "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+        "selector": [],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "schema": "bispf_fastpath_scorer_controls_v1"
+        },
+        "path": "reports/forge/bispf-optimized/fastpath-scorer-controls.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bispf_fastpath_quality"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bispf-optimized-quintic-v1-wide",
+  "study_sha256": "40e38f74ceb3b26711637aa12a36b3debca2bae6d0b3cf03a4c4a9043ee96f14",
+  "task_results": [
+    {
+      "compatibility_key": "25348fb841cb0ad459274b9963bde59a094f0dc96da33261e829fc71e54cebf7",
+      "cost": {
+        "adapter_loop_seconds": 13.903822129010223,
+        "adapter_seconds": 14.241988215013407,
+        "charged_task": "img_stripes2_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 20.168321941047907,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 13.61651210731361,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.019377479911781847
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008129088091664016
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 13.589005539310165
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 15.578304013004526,
+        "wall_seconds": 20.168321941047907
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.7083333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 425,
+          "first_pass_step": 325,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 12,
+          "passing_suffix": 12,
+          "stable_from_seconds": null,
+          "stable_from_step": 325
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.15625,
+        "hq": 1.0,
+        "mean_rmse": 2.3709274046268547e-06,
+        "mode_fractions": [
+          0.65625,
+          0.34375
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.65625,
+          0.34375
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic"
+    },
+    {
+      "compatibility_key": "eb668fc4284508c9571d8f14d75f23a602652d24253f4663ff2c507cb36c562b",
+      "cost": {
+        "adapter_loop_seconds": 13.757805482018739,
+        "adapter_seconds": 14.248002069070935,
+        "charged_task": "img_bars4_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 19.944213793962263,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 13.47063424915541,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.018833434442058206
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.00797316583339125
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 13.44382764887996
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 15.606506404932588,
+        "wall_seconds": 19.944213793962263
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.8333333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 500,
+          "first_pass_step": 400,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 9,
+          "passing_suffix": 9,
+          "stable_from_seconds": null,
+          "stable_from_step": 400
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4,
+            "value": 4
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.1875,
+        "hq": 1.0,
+        "mean_rmse": 0.00024228607071563601,
+        "mode_fractions": [
+          0.40625,
+          0.28125,
+          0.125,
+          0.1875
+        ],
+        "modes": 4,
+        "quality_mode_fractions": [
+          0.40625,
+          0.28125,
+          0.125,
+          0.1875
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_bars4_w64_optimizer_diagnostic"
+    }
+  ]
+}

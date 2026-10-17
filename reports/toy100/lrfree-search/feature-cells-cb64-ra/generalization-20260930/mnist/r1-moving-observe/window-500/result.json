@@ -1,0 +1,121 @@
+{
+  "status": "COMPLETE_ORIGINAL_MOVING_OBSERVATION_ONLY",
+  "start": 500,
+  "end": 535,
+  "updates": 35,
+  "checkpoint": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/moving-quarter/grid100-r1-on/checkpoint-000500.pt",
+  "checkpoint_sha256": "5c08180dc7ebbc7a3cc707ccc8864ac38a689a102c0e3f3e31227a72c79584be",
+  "canonical_semantic_restoration": true,
+  "initial_semantic_sha256": "24cb47739a5925086880608b083946a942c58ed730a9cb5624231f16b2cb8fd2",
+  "endpoint_semantic_sha256": "c3dc3064ce8270152b37378f1bbc8ab93dc34798b51ea5624dc73941115484c1",
+  "real_stream_restore": {
+    "seed": 1234,
+    "device": "cuda:0",
+    "original_sample_calls": 1000,
+    "batch_size": 2048,
+    "mechanism": "one supplied private CUDA generator; native sample_real twice per original update; rotations consume no RNG",
+    "checkpoint_loading_preserves_external_stream": true,
+    "reconstruction_preserves_global_rng": true,
+    "start_stream_sha256": "97b7925b5e16eb35d78e4d718bc4d3ceda7b5a6ebe6c41d192fd1a3610de30f6",
+    "end_stream_sha256": "44a175779731172ca591340b57b307620deb7db9d58895e82851f058caf40e52"
+  },
+  "fires": [
+    {
+      "update": 515,
+      "step_arg": 514,
+      "pending_q": {
+        "1.0": 1.5331058502197266,
+        "0.0": 1.2065049409866333,
+        "0.1": 0.2992744445800781,
+        "0.2": 0.0
+      },
+      "kept_keys": [
+        "0.0",
+        "0.1",
+        "1.0"
+      ],
+      "ratios": {
+        "0.0": 18.53287713460203,
+        "0.1": 10.752232383127552,
+        "1.0": 14.806933243347316
+      },
+      "ratio": 14.342852613692193,
+      "tester_scales": {
+        "0.0": 0.5,
+        "0.1": 1.0,
+        "0.2": 1.0,
+        "1.0": 0.25
+      },
+      "ka2": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.00425,
+        "lr_last": 0.0031872803741872864,
+        "anchor_started": false,
+        "calls": 514,
+        "observed_steps": 514,
+        "last_sur": 2.0947213172912598,
+        "sur_hist": [],
+        "sur_base": null,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 0.0,
+        "last_ratio": null,
+        "ema_updates": 0,
+        "ema_skips": 0,
+        "ema_reseeds": 0,
+        "formulation": "ka2"
+      },
+      "noise": {
+        "log_sigma": -3.540675163269043,
+        "unconstrained_sigma": 0.028993746265769005,
+        "last_output_sigma": 0.028999999165534973,
+        "floor": 0.029,
+        "settle": 1.0,
+        "grad": 0.0,
+        "adam_state": {
+          "step": 514.0,
+          "exp_avg": 0.0,
+          "exp_avg_sq": 3.945514054359833e-11,
+          "max_exp_avg_sq": 6.572062338783269e-11
+        }
+      }
+    }
+  ],
+  "scoring_calls": 0,
+  "sample_calls": 0,
+  "source_mutations": 0,
+  "instrumentation_preserves_all_rng_each_capture": true,
+  "detector_instance_schema_unchanged": true,
+  "class_wrapper_restored": true,
+  "trace_sha256": "c0435f810a5db39cd6fa64420807915812bfeac5e33645676943ae848a655f24",
+  "endpoint_sha256": "aacf3f89f0b3df598649712159dda535119df2dd00f5e26d99c39f0abd0dfed6",
+  "wall_seconds": 5.221505526918918,
+  "runtime": {
+    "device": "cuda:0",
+    "physical_gpu": {
+      "physical_index": 0,
+      "uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+      "pci_bus_id": "00000000:24:00.0",
+      "name": "NVIDIA RTX A6000",
+      "memory_total": "49140 MiB"
+    },
+    "visible_devices": "0",
+    "cuda_uuid_raw": "72c1b506-891d-b8bc-b353-e020585e1c47",
+    "cuda_uuid_normalized": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "cuda_memory_fraction": 0.2,
+    "cpu_threads": 1,
+    "interop_threads": 1,
+    "deterministic_algorithms": true,
+    "cublas_workspace_config": ":4096:8",
+    "cuda_device_order": "PCI_BUS_ID",
+    "tf32_matmul": false,
+    "tf32_cudnn": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "torch": "2.13.0+cu126",
+    "cuda_runtime": "12.6",
+    "cudnn_version": 91002,
+    "float32_matmul_precision": "highest",
+    "original_seed": 1234
+  }
+}

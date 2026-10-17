@@ -1,0 +1,46 @@
+{
+  "stage": "pre-registration software verification",
+  "scientific_training_launched": false,
+  "targeted_checks": {
+    "public_penalty_release_and_diagnostic_isolation": "PASS; final targeted suites recorded by agents and root",
+    "host_boundary_and_atomicity": "42 PASS",
+    "paired_native_artifact_software_fixture": {
+      "steps": 1,
+      "scientific_evidence": false,
+      "all_finite": true,
+      "hooks_exercised": true,
+      "unintended_rng_deviations": 0,
+      "artifacts": 19
+    }
+  },
+  "initial_full_suite": {
+    "runtime": "Python3.12 project venv",
+    "passed": 1849,
+    "failed": 8,
+    "skipped": 7,
+    "subtests_passed": 18,
+    "seconds": 251.0,
+    "reason": "Legacy subclass validation and checkpoint compatibility, plus one obsolete field-absence assertion; repaired before registration. The final full suite passed as recorded below."
+  },
+  "initial_frozen_runtime_full_collection": {
+    "runtime": "Python3.14",
+    "status": "ERROR",
+    "reason": "Optional matplotlib unavailable; full suite uses project development venv, selected runtime and parity checks use frozen experiment runtime. No experiment runtime packages changed."
+  },
+  "final_full_suite": {
+    "runtime": "Python3.12 project development venv; CI CPU/one-thread environment",
+    "passed": 1871,
+    "failed": 0,
+    "skipped": 7,
+    "subtests_passed": 18,
+    "seconds": 244.54,
+    "log": "/tmp/formulation-comparison-tests.log",
+    "skip_scope": "4 opt-in real-data CUDA;1 platform-sensitive convergence;2 unavailable CUDA CPU-test branches"
+  },
+  "history_inventory": {
+    "valid": true,
+    "covered": 7287,
+    "tracked": 7287,
+    "gaps_retained": 7
+  }
+}

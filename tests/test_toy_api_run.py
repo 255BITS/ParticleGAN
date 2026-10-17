@@ -1,0 +1,151 @@
+"""Verify real public updates, isolation and honest incomplete-run grading."""
+import json
+import random
+
+import numpy as np
+from PIL import Image
+import torch
+from torch import nn
+
+from particlegan import GANTrainer, get_recipe
+from benchmarks.toy_audit import api_run
+
+
+class PublicSoftwareFixture:
+    """API software control, with no claim of learned distribution quality."""
+    api_components = ("particlegan.GANTrainer", "particlegan.Recipe")
+
+    def __init__(self):
+        self.recipe = get_recipe("k3p", z_dim=2, num_particles=16, batch_size=16)
+        torch.manual_seed(5)
+        self.trainer = GANTrainer(self.recipe, nn.Linear(2, 2), nn.Linear(2, 1),
+                                  seed=7, max_steps=8)
+        self.data = torch.Generator().manual_seed(9)
+
+    def step(self):
+        self.trainer.step(torch.randn(16, 2, generator=self.data))
+
+    def observe(self, n, seed):
+        samples = self.trainer.sample(n, generator=torch.Generator().manual_seed(seed))
+        fraction = float(torch.isfinite(samples).float().mean())
+        return {"metrics": {"finite_fraction": fraction}, "passed": fraction == 1.,
+                "failed_bounds": [] if fraction == 1. else ["finite_fraction < 1"],
+                "views": [{"kind": "scatter", "title": "API software control: finite output",
+                           "target": torch.zeros(n, 2), "samples": samples}]}
+
+    def state_dict(self):
+        return self.trainer.state_dict()
+
+
+def test_real_api_prefix_cannot_qualify_a_larger_default_budget(tmp_path, monkeypatch):
+    torch.set_num_threads(1)
+    fixture = PublicSoftwareFixture()
+    before = fixture.trainer.G.weight.detach().clone()
+    monkeypatch.setattr(api_run.contract, "build", lambda *args, **kwargs: fixture)
+    case = {"id": "software-control", "goal": "Execute finite public GAN updates",
+            "default_steps": 8, "eval_samples": 32, "legacy_ids": ["software-control"]}
+    result = api_run.run_case(case, tmp_path / "run", steps=6, eval_samples=32, frames=7)
+    assert result["status"] == "COMPLETE"
+    assert result["completed_updates"] == fixture.trainer.completed_steps == 6
+    assert not torch.equal(before, fixture.trainer.G.weight)
+    assert result["metric_passed"] and result["sustained_metric_passed"]
+    assert result["verdict"] == "FAIL" and not result["default_protocol_complete"]
+    assert "default budget" in result["failed_bounds"][0]
+    with Image.open(tmp_path / "run/goal.gif") as gif:
+        assert gif.n_frames == 7
+    receipt = json.loads((tmp_path / "run/receipt.json").read_text())
+    assert receipt["artifacts"]["goal.gif"]["sha256"] == api_run.file_hash(tmp_path / "run/goal.gif")
+
+
+def test_eval_isolation_preserves_all_ambient_rngs():
+    python = random.getstate()
+    numpy = np.random.get_state()
+    cpu = torch.get_rng_state().clone()
+    with api_run.isolated_evaluation():
+        random.random()
+        np.random.randn(4)
+        torch.randn(4)
+    assert random.getstate() == python
+    restored = np.random.get_state()
+    assert numpy[0] == restored[0] and np.array_equal(numpy[1], restored[1])
+    assert numpy[2:] == restored[2:]
+    assert torch.equal(cpu, torch.get_rng_state())
+
+
+def test_entire_run_isolates_ambient_training_rng_and_restores_execution_settings(tmp_path, monkeypatch):
+    class AmbientFixture(PublicSoftwareFixture):
+        def step(self):
+            self.trainer.step(torch.randn(16, 2))
+
+    monkeypatch.setattr(api_run.contract, "build", lambda *args, **kwargs: AmbientFixture())
+    case = {"id": "ambient-training-control", "goal": "Repeat public GAN updates with ambient data RNG",
+            "default_steps": 8, "eval_samples": 32}
+    results = []
+    from experiments.forge.state import state_digest
+    for name in ("first", "repeat"):
+        torch.randn(17)  # Simulate unrelated work between identical requests.
+        before = torch.get_rng_state().clone()
+        deterministic = torch.are_deterministic_algorithms_enabled()
+        results.append(api_run.run_case(case, tmp_path / name, steps=2, frames=2))
+        assert torch.equal(before, torch.get_rng_state())
+        assert torch.are_deterministic_algorithms_enabled() == deterministic
+    assert all(row["status"] == "COMPLETE" for row in results)
+    assert all(row["runtime"]["deterministic_algorithms"] and row["runtime"]["torch_threads"] == 1 for row in results)
+    states = [torch.load(tmp_path / name / "final-state.pt", weights_only=True) for name in ("first", "repeat")]
+    assert state_digest(states[0]) == state_digest(states[1])
+
+
+def test_sparse_gif_frames_do_not_reduce_frozen_metric_cadence(tmp_path, monkeypatch):
+    torch.set_num_threads(1)
+    fixture = PublicSoftwareFixture()
+    monkeypatch.setattr(api_run.contract, "build", lambda *args, **kwargs: fixture)
+    case = {"id": "cadence-control", "goal": "Public API software cadence control",
+            "default_steps": 8, "eval_samples": 32, "evaluation_observations": 8}
+    result = api_run.run_case(case, tmp_path / "cadence", frames=2)
+    assert result["verdict"] == "PASS"
+    assert result["protocol"]["metric_evaluation_steps"] == list(range(9))
+    assert result["protocol"]["media_steps"] == [0, 8]
+    assert len(result["observations"]) == 9 and result["gif_frames"] == 2
+    with Image.open(tmp_path / "cadence/goal.gif") as gif:
+        assert gif.n_frames == 2
+
+
+def test_nonfinite_metrics_are_preserved_as_explicit_json_failures(tmp_path):
+    path = tmp_path / "failure.json"
+    api_run.write_json(path, {"passed": False, "rmse": float("nan")})
+    assert json.loads(path.read_text()) == {"passed": False, "rmse": "nan"}
+
+
+def test_unsupported_api_construction_is_a_recorded_binary_failure(tmp_path, monkeypatch):
+    def reject(*args, **kwargs):
+        raise ValueError("unsupported conditional policy")
+    monkeypatch.setattr(api_run.contract, "build", reject)
+    case = {"id": "unsupported-control", "default_steps": 8, "eval_samples": 32}
+    result = api_run.run_case(case, tmp_path / "unsupported", steps=1)
+    assert result["status"] == "ERROR" and result["verdict"] == "FAIL"
+    assert result["completed_updates"] == 0 and result["gif_frames"] == 0
+    assert "unsupported conditional policy" in result["failed_bounds"][0]
+    assert (tmp_path / "unsupported/receipt.json").is_file()
+
+
+def test_export_failure_retains_bound_final_state_and_observations(tmp_path, monkeypatch):
+    fixture = PublicSoftwareFixture()
+    monkeypatch.setattr(api_run.contract, "build", lambda *args, **kwargs: fixture)
+    def reject_export(*args, **kwargs):
+        raise ValueError("bad display layout")
+    monkeypatch.setattr(api_run, "render_gif", reject_export)
+    case = {"id": "export-control", "default_steps": 8, "eval_samples": 32}
+    result = api_run.run_case(case, tmp_path / "export", steps=2)
+    assert result["status"] == "ERROR" and result["verdict"] == "FAIL"
+    assert result["completed_updates"] == 2
+    assert set(result["artifacts"]) == {"observations.npz", "final-state.pt"}
+    for name, identity in result["artifacts"].items():
+        assert identity["sha256"] == api_run.file_hash(tmp_path / "export" / name)
+
+
+def test_goal_renderer_preserves_whole_independent_episode_paths():
+    episodes = np.array([[[0, 0], [1, 0], [2, 1]], [[10, 10], [11, 10], [12, 9]]])
+    paths = api_run._line_paths(episodes)
+    assert len(paths) == 2
+    assert all(np.array_equal(path, episode) for path, episode in zip(paths, episodes))
+    assert len(api_run._points(episodes)) == 6

@@ -1,0 +1,86 @@
+{
+  "campaign_definition": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 326340,
+    "candidate_budget_seconds": 46620,
+    "id": "technique-inventory-word-split-v1",
+    "purpose": "Revision8 complete-current-tier inventory of7 currently selected solution families through Tier3. Per-family full reservation including optional clock diagnostic:2520s smoke +40500s Tier2 +3600s grouped endurance =46620s; seven families326340s. Word hold adds300s in Tier2. Historical campaigns and receipts remain immutable. Expanded rosters require a new campaign identity and checked reservation.",
+    "schema_version": 1
+  },
+  "campaign_id": "technique-inventory-word-split-v1",
+  "comparison_contract": "Task-owned architecture, target/data, prior, sampler, initialization, update budget, cadence and isolated checkpointed streams are fixed across candidates; fixed behavioral fixtures remain separately declared task cohorts.",
+  "compute_profiles": {
+    "cuda": {
+      "autograd_multithreading_enabled": false,
+      "backend": "cuda",
+      "compute_capability": "8.6",
+      "deterministic": true,
+      "driver": "610.57.04",
+      "model": "NVIDIA RTX A6000",
+      "tf32": false,
+      "threads": 1
+    }
+  },
+  "cpu_training_fallback": false,
+  "execution_policy": {
+    "mode": "complete_current_tier",
+    "schema_version": 1
+  },
+  "families": [
+    {
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "recipe_identity_sha256": "454c07bbd5bf8d8fd277904d16ac9488041a337bf9817a2fe807ec286efb5d03"
+    },
+    {
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "f8a586adde90a6b016692bc8f026ee2f857ff5efd3615b68b7328bd04a70016d",
+      "recipe_identity_sha256": "fe683eea09623330b1e95774977e0ba58ce10f040a536849e0d0fe7361fda857"
+    },
+    {
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "2574d2c5fc438ec28b2b59b957e795e38c0cf554e7215f73d19bb000e2b181fd",
+      "recipe_identity_sha256": "50787d2adfbc21ec74b5f79f2d85181c0d3bc96c21bcc08722be0395d2e913fe"
+    },
+    {
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "106e39888728e0413a3417d90a0ba7870085ac12199090809919c77876855492",
+      "recipe_identity_sha256": "deb7f75a0e7190ea040d0978206f0d3874e90fb8362c7045d0ff337179231910"
+    },
+    {
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "a4868c16cfcb43a55a8103b1eefd82cd2d6c337f840b3cdc3d95f9e060e119dc",
+      "recipe_identity_sha256": "ad189b704ce2fced9b4cbf07955ee39cd9145e3d0e5fa4bbe9d92f7f4a74cff1"
+    }
+  ],
+  "host_delta": "five_word_joint_smoke confirms any passing scheduled full generation/inverse state in Tier 1; five_word_joint_hold is a required Tier 2 exact own-checkpoint continuation. Original sustained acquisition evidence remains archived.",
+  "hyperparameter_trials_per_family": 1,
+  "old_evidence_is_new_qualification": false,
+  "policy_fingerprint": "82fc1342c6238a38fcc41820c93f2388b5c8ca53577958c8f3ddca3da027b1dc",
+  "reproduction": "python reports/forge/word-split-inventory/run.py --stage run --gpus 0,1",
+  "required_counts": [
+    6,
+    21,
+    2
+  ],
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "seed": 0,
+  "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+  "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+  "through_tier": 2,
+  "tier2_execution": "Only candidates with six required Tier 1 PASS results may proceed. Complete independent runnable peers in a tier before applying required failures. Explicit own-checkpoint dependencies still gate work.",
+  "trainer_delta": "None relative to merged develop; all five exact preselected recipes are unchanged. Optional optimizer_smoothing stays at implicit zero. Default DualNorm truncation and disabled autograd multithreading stay enabled.",
+  "view_revision": 8
+}

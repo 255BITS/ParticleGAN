@@ -1,0 +1,35 @@
+{
+  "authoritative_final_metadata_ledger": {
+    "bytes": 2675,
+    "path": "/ml2/hypergan/.pg-pr223-full-original-retest-20261004.pr223-full19-metadata-cost.json",
+    "sha256": "ce949407c9a11b2d2873be0d51b2d147261f8b60cee411ea33381c8c5c6f4369"
+  },
+  "costs": {
+    "aggregate_cap_seconds": 10800,
+    "case_caps_sum_seconds": 9810,
+    "case_charged_seconds": 3165.841891122982,
+    "case_paid_wall_seconds": 3165.841891122982,
+    "case_reserved_seconds": 0.0,
+    "charged_seconds": 3210.214213816216,
+    "export_grace_seconds": 0,
+    "halt_required": false,
+    "metadata": {
+      "blocked": false,
+      "charged_seconds": 44.37232269323431,
+      "overrun_seconds": 0.0,
+      "paid_wall_seconds": 44.37232269323431,
+      "reserved_seconds": 0.0
+    },
+    "metadata_cap_seconds": 180,
+    "remaining_seconds": 7589.785786183784,
+    "retries": 0
+  },
+  "metadata_phase_count": 12,
+  "no_old_cost_or_qualification_pooling": true,
+  "original_case_verdicts_unchanged": true,
+  "original_terminal_cut_results_sha256": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3",
+  "raw_full_protocol_gate": "UNAVAILABLE",
+  "schema": "pg_pr223_final_publication_cost_v1",
+  "status": "INCOMPLETE",
+  "trusted_terminal_card_sha256": "d26716f60c89ca9499d8c4aa5a5a7baeb4bf6429861d1a081c943883058b6eff"
+}

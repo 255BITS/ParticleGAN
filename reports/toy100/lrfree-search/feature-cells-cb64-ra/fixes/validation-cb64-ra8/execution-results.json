@@ -1,0 +1,20 @@
+[
+  {
+    "name": "learned-toy-CB64-RA8",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 456.27261673798785,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/learned/training/toy/CB64-RA8/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/logs/learned-toy-CB64-RA8.log",
+    "result_sha256": "8df397fc69bde42de3022e2fd8935eac11488d29c8506fcda2f209dc0ea71346"
+  },
+  {
+    "name": "screen-grid100",
+    "returncode": 0,
+    "status": "FAIL",
+    "wall_seconds": 705.9774856620934,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/screens/runs/grid100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/logs/screen-grid100.log",
+    "result_sha256": "a1cee484c3abbd7387d8148d807d915f5c7d0b4a16131eaeba6791030666d21f"
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "2ebceb255a904e1917f2528b9658c4799b913fdb474d7a4f7f20a3c0417a4d21",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "1ebadbae5c2eb8be07c5f3e7442e600673047e4cf76834640c3f39f6809d04ad",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/1387870dc563405ab9a24bad41652c79/constraint_geometry-scored-outputs.pt": "6a7cfa5a137f508ebb6d7578285e746814cf9660c246f4984a3851b614c7d027"
+  },
+  "task_id": "residual_student"
+}

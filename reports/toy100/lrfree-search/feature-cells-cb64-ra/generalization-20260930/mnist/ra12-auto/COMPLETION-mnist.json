@@ -1,0 +1,25 @@
+{
+  "status": "COMPLETE",
+  "started_utc": "2026-09-30T20:51:06.991764+00:00",
+  "completed_utc": "2026-09-30T20:52:48.486847+00:00",
+  "returncode": 0,
+  "wall_seconds": 101.49510096595623,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/run_training.py",
+    "--variant",
+    "RA12-auto",
+    "--problem",
+    "mnist"
+  ],
+  "result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/result.json",
+  "result_sha256": "ab9e6944490c2a9a27e04face9a64c55434ca41181c78c05d7f91f2204015501",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/logs/RA12-auto-mnist.log",
+  "log_sha256": "f6f3f83ca9fd9f66a613b24c8fb4273243a860c51b53b684dd6ad91b95e90050",
+  "source_freeze_sha256": "678f1230a5305fecc6ba6f7054d6b18095d57d1970dc3233e3de2150cae7e0ca",
+  "inputs_sha256": "23696807a2dc96aa4056a0044540873245676e5ae5e8544960d01e7bc75c213e",
+  "original_supervisor_still_parked": true,
+  "signaled_processes": []
+}

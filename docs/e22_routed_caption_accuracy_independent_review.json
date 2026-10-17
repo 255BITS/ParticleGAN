@@ -1,0 +1,118 @@
+{
+  "complete": true,
+  "independent_integrity_status": "PASS",
+  "scientific_status": "FAIL",
+  "gates": {
+    "aggregate_accuracy_improved": false,
+    "no_source_harmed": false,
+    "aggregate_code_benefit": true,
+    "code_beneficial_each_source": true,
+    "bank_live": true,
+    "query_live": true,
+    "C_live_all_six_sites": true
+  },
+  "accuracy": {
+    "ordinary_BF16": {
+      "rmse": 0.006489918631166268,
+      "by_source": {
+        "0": 0.0064765666031385985,
+        "1": 0.006493289599499693,
+        "2": 0.006432832856963881,
+        "3": 0.006548754832801855,
+        "4": 0.0064956577826819776,
+        "5": 0.006491874905726111
+      }
+    },
+    "particle_BF16": {
+      "rmse": 0.006506938519664952,
+      "by_source": {
+        "0": 0.006487325314658033,
+        "1": 0.006510053620327607,
+        "2": 0.006510023689070444,
+        "3": 0.0065533339365834034,
+        "4": 0.006522276640716353,
+        "5": 0.00645822102593162
+      }
+    },
+    "zero_code": {
+      "rmse": 0.00661490908498763,
+      "by_source": {
+        "0": 0.00669643590506763,
+        "1": 0.006526989330308351,
+        "2": 0.006547237152876445,
+        "3": 0.006633809920391648,
+        "4": 0.006598705250138454,
+        "5": 0.0066844319349647205
+      }
+    }
+  },
+  "particle_minus_ordinary": {
+    "aggregate": 1.701988849868441e-05,
+    "by_source": {
+      "0": 1.0758711519434118e-05,
+      "1": 1.6764020827913888e-05,
+      "2": 7.719083210656289e-05,
+      "3": 4.579103781548674e-06,
+      "4": 2.6618858034375276e-05,
+      "5": -3.365387979449141e-05
+    }
+  },
+  "relative_particle_accuracy_improvement": -0.0026225118473675035,
+  "relative_code_benefit": 0.01659314361068187,
+  "live_counts": {
+    "ordinary_BF16": {
+      "bank": 0,
+      "query": 0
+    },
+    "particle_BF16": {
+      "bank": 511,
+      "query": 511
+    }
+  },
+  "live_denominator": 511,
+  "full_trace_steps_exact": true,
+  "matched_data_Gaussian_penalty_streams": true,
+  "reconstructed_TEST_context_and_zero_target_digests_exact": true,
+  "file_sha256": {
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/render_e22_routed_caption_accuracy.py": "1cdc113f648fabc506e093d23e13ba8b1ecf6b2ed970848c23c0b2159a6b2a7a",
+    "tests/test_e22_routed_caption_accuracy.py": "39b0a0c100ee8646bac08a9c4735f6c7e57d0563862c945e122fcebb0f4e1bad",
+    "docs/e22_routed_caption_accuracy_v1.json": "8fecbf89f1e8f8339eda49fd3d88536a18f49d782e2725dc8e5f330f9ed125bb",
+    "docs/e22_routed_caption_accuracy_software.json": "6c0ad629c101dae4ae657c362d0c5dc3d390a8a6e1504cb465bd2dd0d10048f5",
+    "runs/routed-caption-accuracy-v1/report.json": "a6c7ea362704a48c41841fbf6e13be7f1f3b98f7701b61931664696831b47c79",
+    "runs/routed-caption-accuracy-v1/completion.json": "071a3e98fdbdaf39e23f072cf431e3f08439c6c23d71c83fd4b75cb7ec2ba520",
+    "runs/routed-caption-accuracy-v1.external.json": "77fff4e0147e7fcf267a0cecf9b3045d4d4e8ecaf9f1373976be08add87862e4",
+    "runs/routed-caption-accuracy-v1/endpoint-residuals.pt": "ce9404e959f8d0d81c3dc4a94fd64d3693930d7fe50796b3660806a885e27b08",
+    "runs/routed-caption-accuracy-v1/observed-media.pt": "75d28d09cbb9546bbe5cd086d5f45e1bc727589453dc6b5bf5059ba6be25ae38",
+    "runs/routed-caption-accuracy-v1/ordinary_BF16.jsonl": "85e3e2b1a09448ed04c8a5d5970053f8430cf102acb312615842bd556883e76b",
+    "runs/routed-caption-accuracy-v1/particle_BF16.jsonl": "5d0ae5ebb1bd1c276702adec765c6ac9445caed50b452b89d026acae5f371425"
+  },
+  "native_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+  "inputs_sources_native_unchanged": true,
+  "comparison_tolerance": {
+    "rtol": 1e-14,
+    "atol": 1e-15
+  },
+  "reduction": "CPU float64 coordinate sum, independent math.fsum over contexts; all six sources.",
+  "command": [
+    "/ml2/ntc-image-studio/.venv-anima/bin/python",
+    "/tmp/review_routed_caption_accuracy_v1.py",
+    "--root",
+    "/ml2/hypergan/ParticleGAN-routed-caption-accuracy-develop",
+    "--out",
+    "/ml2/hypergan/ParticleGAN-routed-caption-accuracy-develop/docs/e22_routed_caption_accuracy_independent_review.json"
+  ],
+  "review_source_sha256": "063e9a224351609227c6b2c3e6c82be688ea7f36d061e62a112ab1f8e4d1d211",
+  "model_forwards": 0,
+  "native_updates": 0,
+  "quality_updates": 0,
+  "CUDA_initialized": false,
+  "caller_CPU_RNG_unchanged": true,
+  "GPU_campaign_seconds": 91.65191303589381,
+  "limit_seconds": 60,
+  "seconds": 0.9619177421554923,
+  "limits": [
+    "Independent scores and live-count log reduction; C norms, finite learned tensors and exact public terminal restore are bound producer witnesses, not fresh model checks.",
+    "This generated caption task does not qualify actual caption or full Supra improvement."
+  ]
+}

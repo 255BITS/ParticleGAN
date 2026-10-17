@@ -1,0 +1,22 @@
+{
+  "pid": 358530,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/gpu_slot.py",
+    "--queue",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-recovery",
+    "--reason",
+    "frozen exact axis-cache GPU parity and profile before final composition",
+    "--",
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/profile_axis_pair_gpu.py",
+    "--package-root",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/pkg-AXIS-ID",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/axis-gpu/result.json"
+  ]
+}

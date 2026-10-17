@@ -1,0 +1,103 @@
+{
+  "candidate_id": "context:pr155-current:e17-feature-gauge-review",
+  "candidate_revision": "5e9057bdad36e9f7872d67c17a2b01fddd1b0501f8148b1bf07b455dcde81aee",
+  "claim_contract": {
+    "clock_free_eligibility": "unverified",
+    "clock_free_eligible": null,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "diagnostic_only",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Hidden-axis scaling changes44 isolation moves to0 while scalar scores are unchanged. Whitening is an invariance diagnostic, not validated native improvement.",
+  "evidence_scope": "historical",
+  "hypothesis": "Function-preserving critic-feature gauge counterexample and limited whitening diagnostic.",
+  "mechanism_class": "historical_diagnostic_context",
+  "next_action": "Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "Exact original prior/config retained in raw evidence; context provides no current learned-MoG credit.",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "bundle_manifest": {
+      "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+    },
+    "config": null,
+    "context": {
+      "aggregate_cost_seconds": null,
+      "bundle_manifest": {
+        "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+        "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+        "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+      },
+      "cost_note": "No aggregation of overlapping receipts, ledgers, retries or diagnostics.",
+      "family": "e17-feature-gauge-review",
+      "fixture": {
+        "N": 1024,
+        "scope": "synthetic invariance diagnostic",
+        "source_sha256": "e68a0571db69df7813d09e4c3ef29d0c47373ab0bdec0aefa9c8ad2db703d3cf"
+      },
+      "narrative_sources": [
+        {
+          "git_blob": "91ab074051fa931a18be39b76206a673a9ee8afa",
+          "original_path": "reports/toy100/lrfree-search/e17-feature-gauge-review/REPAIR_SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/e17-feature-gauge-review/REPAIR_SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "9756fc1fbecd5a2d2468429e15fa79ec891afbd76315dca536ef5e2333abebe4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/e17-feature-gauge-review/REPAIR_SPEC.md"
+        },
+        {
+          "git_blob": "dbb5e4065a3d6038ff4b0b7122b918ed0167915c",
+          "original_path": "reports/toy100/lrfree-search/e17-feature-gauge-review/RESULTS.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/e17-feature-gauge-review/RESULTS.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "4c6bbb87cba2a0c795a0c816e32d8e25b9134e7353504057fc1c81233f6cdd38",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/e17-feature-gauge-review/RESULTS.md"
+        },
+        {
+          "git_blob": "3de08ae76261640d1f8dc9cf5eec035837b81537",
+          "original_path": "reports/toy100/lrfree-search/e17-feature-gauge-review/SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/e17-feature-gauge-review/SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "bfb331dbb5e344c08a9b4082b34877eeba2dd7b1467c7820f66da6a49b4bae1b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/e17-feature-gauge-review/SPEC.md"
+        }
+      ],
+      "normalization_scope": "Family context only, empty task_results; native-arm cards are the only normalized trials.",
+      "raw_context_paths": [
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/e17-feature-gauge-review/results.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/e17-feature-gauge-review/whiten_results.json"
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "Hidden-axis scaling changes44 isolation moves to0 while scalar scores are unchanged. Whitening is an invariance diagnostic, not validated native improvement."
+    },
+    "importer_version": "forge-supplemental-pr155-current-archive-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "archive-pr155-current-context-e17-feature-gauge-review-0527796ee1a3",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "dbb5e4065a3d6038ff4b0b7122b918ed0167915c",
+    "original_path": "reports/toy100/lrfree-search/e17-feature-gauge-review/RESULTS.md",
+    "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/e17-feature-gauge-review/RESULTS.md",
+    "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "sha256": "4c6bbb87cba2a0c795a0c816e32d8e25b9134e7353504057fc1c81233f6cdd38",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/e17-feature-gauge-review/RESULTS.md"
+  },
+  "task_results": []
+}

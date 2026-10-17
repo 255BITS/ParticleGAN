@@ -1,0 +1,166 @@
+{
+  "all_member_hashes_verified": true,
+  "archive_member_count": 10411,
+  "availability": "LOCAL_ONLY",
+  "bytes": 64385103,
+  "capacity": {
+    "SUPPORTED": 16,
+    "required": 16
+  },
+  "costs": {
+    "clock": "This cohort's durable supervised child intervals plus conservative interruption reserves; original engineering error is separately bound and debited from remaining quotas; CPU capacity verification, queue wait and parent certification are separate diagnostics",
+    "combined_cap_seconds": 15360.0,
+    "combined_charged_seconds": 59.116680497769266,
+    "engineering_paid_seconds": 4.757908704923466,
+    "family_remaining_caps_seconds": {
+      "atlas": 7675.2420912950765,
+      "e22": 7680.0
+    },
+    "ordinary_paid_seconds": 54.3587717928458,
+    "ordinary_reserved_seconds": 0.0,
+    "remaining_cohort_cap_seconds": 15355.242091295077
+  },
+  "durable_attempt_count": 3,
+  "engineering": {
+    "ERROR": 1,
+    "scientific_credit": false
+  },
+  "files": [
+    {
+      "archive_path": "canonical-snapshots/0-103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a/forge-source.json",
+      "bytes": 549476,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/25611fa53e50281927b3c3607fced40313087e16e3feb3085118f33d367f980c/snapshots/103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a/forge-source.json",
+      "sha256": "6fd1ab597352eb710a784257ebdcb2d0e2ca5417aae91892b16e43f24cb3305c"
+    },
+    {
+      "archive_path": "canonical-snapshots/1-70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff/forge-source.json",
+      "bytes": 549595,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/333da6dd2096c43b6b9b53c8b8e1c9ea204b21ee41ba99feddc585431ff1b3e0/snapshots/70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff/forge-source.json",
+      "sha256": "14b7351e73b8e7ac528d0729868858e2a22bd04229a931e85b8fce1ff3224bfc"
+    },
+    {
+      "archive_path": "original-cohort/atlas/study.json",
+      "bytes": 1329987,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003/atlas/study.json",
+      "sha256": "560d42b13901714a6f09af706e5cbec01a25392e4ec3e575e2725fd010a3c3ce"
+    },
+    {
+      "archive_path": "original-cohort/capacity/capacity.json",
+      "bytes": 726555,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003/capacity/capacity.json",
+      "sha256": "135961ae8ebcd563940e5f03c6dff151dc2154e6b2fc0d4fe2b934e2e46a9b33"
+    },
+    {
+      "archive_path": "repaired-cohort/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "bytes": 45782,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "fba7d1202f13bb6ffe39a19e5620add8076c3bbc7be5d1173bd2dec61cba53ab"
+    },
+    {
+      "archive_path": "repaired-cohort/atlas/study.json",
+      "bytes": 1336798,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/study.json",
+      "sha256": "9b66d1c64749896dcf7e4045f27a773c0e1d533ce6c558d19aeb75333413337c"
+    },
+    {
+      "archive_path": "repaired-cohort/certification-execution.json",
+      "bytes": 1550,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/certification-execution.json",
+      "sha256": "8480356c06b40304b72d1be1c2b5e0e4e1e913604a24fb617631967ff22102af"
+    },
+    {
+      "archive_path": "repaired-cohort/certification.json",
+      "bytes": 10000,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/certification.json",
+      "sha256": "e32d8dc2e906d737a592801050baf4fd6eb2599df840b82f3b18bd3786d34c97"
+    },
+    {
+      "archive_path": "repaired-cohort/combined.json",
+      "bytes": 1343621,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/combined.json",
+      "sha256": "49d0b2286a0b5bcd599c918f421bc7b84e361a2dbbc6c045a5ba20df15368fb1"
+    },
+    {
+      "archive_path": "repaired-cohort/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "bytes": 45568,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "b2ad738b713340be049ac8de3d048c5643e557f91cf3e03ab504b07d728fbd80"
+    },
+    {
+      "archive_path": "repaired-cohort/e22/study.json",
+      "bytes": 1336522,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/study.json",
+      "sha256": "33b0ec4bcb4aa358131e7f460b867b39dd97c1415afd23306055b563e125df18"
+    },
+    {
+      "archive_path": "repaired-cohort/preflight-source/policy/source-origins/333da6dd2096c43b6b9b53c8b8e1c9ea204b21ee41ba99feddc585431ff1b3e0/snapshots/70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff/forge-source.json",
+      "bytes": 549595,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/preflight-source/policy/source-origins/333da6dd2096c43b6b9b53c8b8e1c9ea204b21ee41ba99feddc585431ff1b3e0/snapshots/70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff/forge-source.json",
+      "sha256": "14b7351e73b8e7ac528d0729868858e2a22bd04229a931e85b8fce1ff3224bfc"
+    },
+    {
+      "archive_path": "repaired-cohort/publication-v1/results.json",
+      "bytes": 83682,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/publication-v1/results.json",
+      "sha256": "b935f088d53dff90de31a9bec768e140a3505c0c03729cf5f3d814f9f993b35f"
+    },
+    {
+      "archive_path": "supervisors/0588dce78af5244d822779b71f3b4d165f726e7e99fe715e7017e9ee82eda89b/supervisor-terminal.json",
+      "bytes": 149,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/0588dce78af5244d822779b71f3b4d165f726e7e99fe715e7017e9ee82eda89b/supervisor-terminal.json",
+      "sha256": "07b7f4e0fce8280a65e108a58565e1f7af9118e7328f43d9c4f60fe31fd539a1"
+    },
+    {
+      "archive_path": "supervisors/2973560028aed39ac58a28d84f95d2665de19b4d2ccc538c8bddbff73bbc2826/supervisor-terminal.json",
+      "bytes": 149,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/2973560028aed39ac58a28d84f95d2665de19b4d2ccc538c8bddbff73bbc2826/supervisor-terminal.json",
+      "sha256": "2d09eb8b2c4cc654486fe9b9dbee8a9d9f7470ace43f46ac6fe4c6df142ab4fc"
+    },
+    {
+      "archive_path": "supervisors/9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed/supervisor-terminal.json",
+      "sha256": "d2e206ac10c3878bc846f4c5ca392fddf64e9a3007c802984f5dd00700ff69ed"
+    },
+    {
+      "archive_path": "full-index.json",
+      "bytes": 7021467,
+      "original_path": "/ml2/hypergan/forge-critic-balance-archive-20261003/full-index.json",
+      "sha256": "3f8e917f81bbaa8c9bd3e85613c4b23bd0297532837acc3b5a023f4a456bc41a"
+    }
+  ],
+  "full_index": {
+    "archive_path": "full-index.json",
+    "bytes": 7021467,
+    "original_path": "/ml2/hypergan/forge-critic-balance-archive-20261003/full-index.json",
+    "sha256": "3f8e917f81bbaa8c9bd3e85613c4b23bd0297532837acc3b5a023f4a456bc41a"
+  },
+  "learning": {
+    "FAIL": 2,
+    "UNKNOWN": 14,
+    "required": 16
+  },
+  "new_sampler_calls": 0,
+  "new_training_updates": 0,
+  "original_inputs_unchanged": true,
+  "path": "/ml2/hypergan/forge-critic-balance-archive-20261003/critic-balance-capacity16-learning2-v1.tar.gz",
+  "publication_required_input_count": 6971,
+  "qualification_changed": false,
+  "remote_replication": "NOT_PERFORMED",
+  "retain_until": "UNDECLARED",
+  "retention_owner": "UNASSIGNED",
+  "schema": "particlegan-critic-balance-archive-card-v1",
+  "sha256": "292061adad594577d9186207234929afa42437cdf9e5539128d9ca4865a7b533",
+  "source_cohorts": [
+    {
+      "digest": "103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a",
+      "files": 3396,
+      "origin_commit": "92167813cb2b04af0c4e0395984c503b7fb7d7fe"
+    },
+    {
+      "digest": "70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff",
+      "files": 3397,
+      "origin_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55"
+    }
+  ]
+}

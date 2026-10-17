@@ -1,0 +1,241 @@
+{
+  "candidate_id": "pr217_qr_native_adapter",
+  "candidate_revision": "d778b2b9e3c2e430d98693a1c92c8ee3a6f3a6e1f8a55668cf1d9b3c59f33704",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: FAIL=3",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "package_sha256": "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4",
+      "protocol": {
+        "gates": "13 frozen #155 tasks; noisy model samples; intensity2 at 1200, stationary at 7500",
+        "native": "three frozen 100-Gaussian tasks; 7000 updates; noisy model samples; final-five and independent 100k holdout"
+      },
+      "schema": "pr155-215-217-comparison-v1",
+      "supporting_receipts": []
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4",
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-pr217-qr-native-adapter-57bc39c1b2bf",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+    "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "holdout_pass": false,
+        "metrics": {
+          "acc_center_rms_sigma": 0.37437312248995575,
+          "acc_cov_trace_bias": 0.5468351284498478,
+          "acc_radial_ks": 0.22271375473887445,
+          "mass_tv": 0.0663,
+          "max_cov_eig_ratio": 2.9638556408953614,
+          "min_cov_eig_ratio": 0.8810605824741181,
+          "modes": 99,
+          "precision": 0.88935,
+          "step": 7000
+        },
+        "observations": 34,
+        "passing_checks": 0
+      },
+      "raw_result": {
+        "holdout_pass": false,
+        "metrics": {
+          "acc_center_rms_sigma": 0.37437312248995575,
+          "acc_cov_trace_bias": 0.5468351284498478,
+          "acc_radial_ks": 0.22271375473887445,
+          "mass_tv": 0.0663,
+          "max_cov_eig_ratio": 2.9638556408953614,
+          "min_cov_eig_ratio": 0.8810605824741181,
+          "modes": 99,
+          "precision": 0.88935,
+          "step": 7000
+        },
+        "observations": 34,
+        "package_sha256": "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4",
+        "passing_checks": 0,
+        "result_path": "runs/pr217-dv12-qr/grid100/result.json",
+        "status": "FAIL"
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "grid100"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "holdout_pass": false,
+        "metrics": {
+          "acc_center_rms_sigma": 0.22030587863225193,
+          "acc_cov_trace_bias": 0.05002025721220593,
+          "acc_radial_ks": 0.02922163429094915,
+          "mass_tv": 0.06385,
+          "max_cov_eig_ratio": 1.623795849165511,
+          "min_cov_eig_ratio": 0.6874752534732078,
+          "modes": 100,
+          "precision": 0.87775,
+          "step": 7000
+        },
+        "observations": 34,
+        "passing_checks": 0
+      },
+      "raw_result": {
+        "holdout_pass": false,
+        "metrics": {
+          "acc_center_rms_sigma": 0.22030587863225193,
+          "acc_cov_trace_bias": 0.05002025721220593,
+          "acc_radial_ks": 0.02922163429094915,
+          "mass_tv": 0.06385,
+          "max_cov_eig_ratio": 1.623795849165511,
+          "min_cov_eig_ratio": 0.6874752534732078,
+          "modes": 100,
+          "precision": 0.87775,
+          "step": 7000
+        },
+        "observations": 34,
+        "package_sha256": "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4",
+        "passing_checks": 0,
+        "result_path": "runs/pr217-dv12-qr/rotated100/result.json",
+        "status": "FAIL"
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "rotated100"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "holdout_pass": false,
+        "metrics": {
+          "acc_center_rms_sigma": 0.33097538235182716,
+          "acc_cov_trace_bias": 0.24672218583793537,
+          "acc_radial_ks": 0.11470202097822191,
+          "mass_tv": 0.05075,
+          "max_cov_eig_ratio": 1.801548800054123,
+          "min_cov_eig_ratio": 0.8150301917948479,
+          "modes": 100,
+          "precision": 0.8843,
+          "step": 7000
+        },
+        "observations": 34,
+        "passing_checks": 0
+      },
+      "raw_result": {
+        "holdout_pass": false,
+        "metrics": {
+          "acc_center_rms_sigma": 0.33097538235182716,
+          "acc_cov_trace_bias": 0.24672218583793537,
+          "acc_radial_ks": 0.11470202097822191,
+          "mass_tv": 0.05075,
+          "max_cov_eig_ratio": 1.801548800054123,
+          "min_cov_eig_ratio": 0.8150301917948479,
+          "modes": 100,
+          "precision": 0.8843,
+          "step": 7000
+        },
+        "observations": 34,
+        "package_sha256": "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4",
+        "passing_checks": 0,
+        "result_path": "runs/pr217-dv12-qr/staggered100/result.json",
+        "status": "FAIL"
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "staggered100"
+    }
+  ]
+}

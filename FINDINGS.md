@@ -316,3 +316,257 @@ to answer those configuration questions.
 [leaderboard](results/mog/component_scale_leaderboard.csv) ·
 [component-count plot](results/mog/component_scale_count.png) ·
 [training curves](results/mog/component_scale_training.png).
+
+## BCAP-pure — optimizer-only Tier 1 screen (2026-10-05)
+
+The owner narrowed the proposed dual-norm study to the current **BCAP-pure
+Tier 1** first. This screen uses protocol seed 0, the public deterministic
+initializer and one global trainer configuration across all tasks. It changes
+only optimizer rules, their step sizes and declared network momentum. Losses,
+BCAP coefficient/cap, task-owned auxiliary terms, architecture, data/prior laws,
+sampling, schedule shape, update budgets and grading remain unchanged. Existing
+failing tasks are retained; their investigation belongs to another PR.
+
+The control is the current public BCAP recipe: Adam beta=(0,.999), base rate
+.00425, D multiplier 1, prior multiplier 2, constant schedule and clean/live
+evaluation. The pasted .0006/EMA/delayed-cosine native recipe is a different
+cohort. This run supplies no EMA/native100/core-sigma or scale-transfer result.
+The two-pole host's declared zero-coordinate/stored-weight fixture remains an
+explicit separate initialization cohort; it is not a substitute for the learned
+MoG hosts.
+
+The finite grid contains **41 configurations** across Adam and the seven new
+options: `sgda`, `nsgda_global`, `nsgda_layer`, `ada_nsgda`, `dualnorm`,
+`dualnorm_D_only`, and `particle_rownorm_only`. SGDA spans four decades; normalized
+rates use their own units. Full dualnorm tests momentum 0/.5/.9. Hybrid arms
+retain baseline Adam rates for unchanged players. The first stage fixes D/G=1.5
+and prior step=.03 for all-player normalized arms; it does not execute the full
+ratio/prior Cartesian grid. The tensor magnitude graft uses D/G=1 and prior/G=2
+to match Adam's nominal per-player rates. Every configuration runs the six
+required tasks plus the separately graded clock diagnostic, with a 103,320-second
+campaign ceiling. No seed repetitions, automatic edge extensions or later tiers
+follow from this declaration.
+
+Use the [current family leaderboard](reports/forge/technique-inventory.md) for
+the single ranked goal table. [All final configurations and metrics](reports/forge/dualnorm-tier1/analysis.json),
+[search results](reports/forge/dualnorm-tier1/results.json) and the
+[study/reproduction guide](reports/forge/dualnorm-tier1/README.md) preserve task
+statuses and exact whole-recipe selections. The original search selection
+maximizes required Tier 1 PASS count, then breaks ties by configuration hash.
+Those nine search outcomes remain unchanged. The owner subsequently requested
+a new optimizer as the BCAP starting point even on a tie. The current dualnorm
+measurement therefore uses the .01 zero-momentum recipe: among the 3/6 ties,
+it retains ring coverage, improves ring HQ and passes words. This retrospective
+preference is explicit in the [starter receipt](reports/forge/dualnorm-tier1/starter-selection.json);
+it is not an independent confirmation or a newly qualified default.
+
+**No new optimizer beats the 3/6 Adam control on required Tier 1 PASS count.**
+Global nSGDA, tensor nSGDA, full dualnorm with zero momentum, and prior-only row
+normalization each reach 3/6. Plain SGDA, the Adam-magnitude graft and D-only
+dualnorm each top out at 2/6. No configuration passes Gaussian or ring
+acquisition. The word task can pass at lower Adam/normalized rates, but those
+recipes lose other required passes. For example, global nSGDA at .01 passes
+unused-token hold, AE hold and words while failing two-pole; at .03/.1 it passes
+the three hold tasks and fails words. These are different whole recipes, not a
+combined four-pass candidate. The current .00425 Adam control reproduces its
+three hold passes and three acquisition failures.
+
+The 287 final cells comprise 246 required measurements and 41 separate clock
+diagnostics. Required outcomes are 70 PASS, 171 FAIL and five numerical
+INCOMPLETE; all 41 clock diagnostics pass. There are 288 paid attempts because
+one interrupted attempt has a linked repair. All 282 eligible saved-training
+GIFs pass certificate/input verification; the five numerical errors and original
+interrupted attempt have no eligible complete observation stream. Recorded
+attempt wall time totals 17,119.27 seconds, including the interrupted original;
+this is cost evidence, not a speed comparison.
+
+**The aggregate tie hides substantial quality tradeoffs.** Full dualnorm at
+mu=0, eta=.01 reaches 16/16 ring modes with HQ=.93018 versus the control's
+.82275, and passes word acquisition. Ring still fails its full covariance/
+component and sustained gate. Two-pole has 14 passing observations and a terminal
+passing suffix of four, below the required five, so this recipe remains 3/6.
+Its ring core minimum eigenvalue ratio is .17293 versus Adam's .24163, so the
+higher HQ also comes with a weaker core-width metric.
+At mu=.5, eta=.01, ring HQ rises further to .94336 at 16 modes, but the whole
+recipe reaches only 2/6. D-only eta=.03 reaches ring HQ=.87231 at 16 modes yet
+also remains 2/6. These are endpoint improvements, not new gate passes.
+
+Conversely, hash-selected tensor nSGDA at eta=.1 drops ring coverage to five
+modes/HQ=.21729, and prior-only eta=.01 drops it to four modes/HQ=.16260, despite
+their 3/6 scores. The original hash-selected full dualnorm eta=.03 generates word samples with
+quality fraction 1 but only three modes and fails reconstruction; quality fraction
+alone does not establish coverage. No tested ring configuration improves HQ
+over the control while losing ring modes, but several tied recipes lose both.
+R1/R2 was not run, so no cross-regularizer claim is available.
+
+The diagnostic plots show the exact .00425 Adam control and the top three
+non-Adam arms under the frozen count/hash rule, with the owner's tied dualnorm
+starting recipe substituted: tensor nSGDA .1, zero-momentum dualnorm .01 and
+prior-only .01. The original plot candidates remain recorded in the analysis. See
+[Gaussian](reports/forge/dualnorm-tier1/diagnostics/gaussian1d_acquisition.png),
+[ring](reports/forge/dualnorm-tier1/diagnostics/ring16_acquisition.png) and
+[joint words](reports/forge/dualnorm-tier1/diagnostics/five_word_joint_acquisition.png).
+Each plots relative update speed, G/E and D parameter norms, and the log spectral
+product. In joint words, the dualnorm starter's spectral-log total variation is
+4.580 versus Adam's 9.115 over the same 24 checkpoints, but it is higher than
+Adam's on Gaussian and ring; smoothing is not universal. One dualnorm G matrix
+grows 19.3x over those word checkpoints. Adam's D output matrix also
+grows 13.6x, and some biases grow further. These are finite-budget growth flags,
+not optimizer-specific proof of divergence. Explicit sampled-row traces for
+dualnorm and prior-only normalization certify zero unsampled raw-row drift at
+the recorded steps; native Adam reports gradient support instead.
+
+The hash-selected global/tensor nSGDA, magnitude-graft and D-only rates lie on
+their upper grid edges; prior-only's selection lies on its lower edge. These
+are unresolved edges under a coarse PASS/hash objective, not calibrated optimal
+rates. Swept Adam selects .016 by hash and also reaches 3/6; it does not improve
+the current .00425 control's pass count.
+
+Publication also preserves nine older trainer measurements under their original
+joint-word evaluator source binding. Their existing selection metadata called
+them current measurements even though the current v4 evaluator fingerprint
+differs. They are now historical incumbents, with numerical results and every
+recipe/source/runtime/RNG/task identity retained; current-contract validation is
+not weakened. The [migration receipt](reports/forge/dualnorm-tier1/selection-migration.json)
+records the original selection-card commit/blob and changed display metadata.
+The historical Adam BCAP-pure pin is retained as a control; the current
+dualnorm pin now selects the requested experimental starting point. The new pure-Adam declaration
+joins BCAP-pure only for current presentation; its frozen family identity and
+the existing canonical declaration remain intact.
+
+Recommendation: **start the next BCAP-pure work from full dualnorm**, with
+etaG=.01, D/G=1.5, etaPrior=.03 and network momentum 0. Use the same BCAP/loss
+and task settings; these normalized step sizes have their own units. This is
+the owner's requested experimental starting recipe, with Adam retained as the
+control and the existing acquisition failures still investigated in the separate PR. Any ratio/prior-rate or edge extension needs its own finite
+declaration and an explicit whole-recipe objective; this screen does not trigger
+automatic expansion or width/depth training. The strongest acquisition follow-up
+is zero-momentum dualnorm near .01. One possible **unexecuted** refinement is
+etaG={.012,.016,.022}, D/G=1.5 and etaPrior=.03 with unchanged Tier 1 contracts;
+three configurations would require a separately declared 7,560-second ceiling.
+Original controls may be reused only under exact source/runtime/protocol keys.
+
+Original predictions retain their requested native-benchmark/five-seed scope.
+The repository forbids seed-only repetitions, and this authorized first stage
+does not execute that scope. Their scores are therefore:
+
+| Prediction | Score in the original scope | Seed-0 Tier 1 observation |
+|---|---|---|
+| P1: global/layer nSGDA match Adam | Unscored | Both reach Adam's 3/6 PASS count; no equivalence or seed-noise estimate. |
+| P2: plain SGDA loses modes or needs a narrow window | Unscored | Best SGDA reaches 2/6; its largest rate produces five numerical incompletes. The coarse grid does not estimate a usable window. |
+| P3: D-only dualnorm improves quality with smoother spectral proxy | Unscored | D-only dualnorm tops out at 2/6 versus Adam's 3/6; no native/core-sigma or convergence claim follows from its spectral traces. |
+| P4: momentum .5 is best | Unscored | Zero momentum reaches 3/6; .5 and .9 each reach 2/6, opposing that preference in this screen. |
+| P5: prior row normalization matches Adam | Unscored | All three rates tie 3/6, but all have worse ring HQ (.163/.600/.663 versus .823). A gate-count tie is not quality equivalence; sampled-row and native-Adam gradient-support diagnostics remain distinct. |
+| P6: dualnorm rates transfer across width better than Adam | Unscored | Width/depth transfer was not run; no optimal-rate-vs-width plot is supplied. |
+
+**Magnitude or direction?** Global and tensor-normalized SGD recover the
+control's aggregate PASS count using raw gradient directions, so per-coordinate
+adaptivity is not necessary to recover this particular count. However, the
+tensor Adam-magnitude graft reaches only 2/6 in its own coarse sweep and does not
+recover all of Adam's behavior. Normalization is useful here; this screen does
+not establish that Adam's value is exclusively magnitude or exclusively
+direction. Dualnorm supplies a common matrix/vector/prior update rule and reaches
+3/6 at zero momentum, but rate transfer across width/depth remains untested.
+There is no evidence yet for a single calibrated optimizer form that scales.
+
+The executed source remains
+`15eb7cb0911905e401bdfcd7e264945a7ea64d97`, with original recipe, runtime,
+initialization, stream and result identities retained. One environment-interrupted
+attempt has an explicitly linked execution-repair retry, with the original
+receipt and cost preserved. Numerical failures are terminal and remain in the
+denominator. Later API/observer and large-matrix safeguards are software fixes
+for future runs; these numerical receipts do not qualify the corrected PR source.
+The frozen observer can mislabel generator-phase inputs as the next critic's
+real/fake inputs, so **all input-gradient curves are excluded**. Actual update,
+weight and spectral-product traces remain usable; observer invariance tests
+check model, optimizer and RNG states.
+
+Matching audits use emitted complete-component state hashes where available,
+named stream starts and frozen task contracts. Missing hashes and early-error
+audits are explicit; no direct consumed-batch digest was recorded. Weight growth
+is a finite-budget observation, not proof of unbounded growth. The critic proxy
+is the product of matrix spectral norms, excluding Fourier/input maps and
+nonlinearities; polar updates do not enforce a critic Lipschitz constraint.
+
+[Actual-training GIF index](reports/forge/dualnorm-tier1/media.json) renders
+saved certified observations without extra model calls or training. The
+[artifact inventory](reports/forge/dualnorm-tier1/artifact-inventory.json) binds
+raw logs, traces, states, original failures and recovery history outside Git.
+[Software verification](reports/forge/dualnorm-tier1/software-verification.json)
+records segmented test scopes and retained output hashes; overlapping counts
+are not a single final-HEAD suite total. The screening profile remains
+provisional, so this study supplies measurements rather than default adoption.
+
+## BCAP-pure — dualnorm pacing follow-up (2026-10-06)
+
+**The new experimental starting recipe passes 4/6 required Tier 1 tasks, up
+from 3/6 for the matched starter.** Use full dualnorm with G/E step .012,
+D/G=1.5 (D step .018), sampled-prior step .03 and network momentum 0:
+
+```python
+get_recipe("bcap", optimizer_family="dualnorm", lr=.012,
+           d_lr_mult=1.5, prior_lr_mult=2.5, optimizer_momentum=0.)
+```
+
+Only optimizer settings changed. BCAP-pure loss, cap/coefficient, task
+auxiliaries, initialization, architecture, data/prior laws, sampling, schedule,
+update budgets and grading retain their existing contracts. This is one
+global recipe at protocol seed 0, with no task-specific winner mixing. The
+public BCAP default was still Adam when this readout was published; the later
+[owner default decision](reports/forge/dualnorm-pacing-v2/DEFAULT_SELECTION.md)
+makes this winning recipe the public `bcap` default while preserving the study's
+unqualified status. The [single current leaderboard](reports/forge/technique-inventory.md)
+uses this new experimental measurement; the [completed readout](reports/forge/dualnorm-pacing-v2/README.md),
+[exact results](reports/forge/dualnorm-pacing-v2/results.json),
+[verified analysis](reports/forge/dualnorm-pacing-v2/analysis.json) and
+[selection receipt](reports/forge/dualnorm-pacing-v2/measurement-selection.json)
+preserve the complete recipe and remaining failures. The original 41-recipe
+screen above retains its original conclusions and source.
+
+All 25 configurations completed their seven actual attempts: six required
+tasks plus a separate clock diagnostic. There were 52 required PASS and 98
+FAIL cells, 25 diagnostic passes, no numerical errors or retries. Both GPUs
+were used. The finite search finished in approximately three hours for
+19,655.90 worker seconds; its 12-hour and 63,000-worker-second ceilings were
+not targets to exhaust. Completion verified all worker/child/lease exits,
+zero reservations and delivery of the assistant callback.
+
+Independent D/prior pacing at G=.01 did not improve the best complete count
+beyond 3/6. The predeclared intermediate-rate stage found .012, which adds
+two-pole: its terminal passing suffix grows from four to 17, above the required
+five. Unused-token hold, AE hold and joint words retain their passes. Positive
+network momenta .5/.9 at that winning pace reach at most 2/6. No larger search
+or positive-momentum rescue follows automatically.
+
+**The two remaining failures concern distribution shape.** Gaussian mean
+error .12788 sigma and std ratio 1.05499 meet their bounds, but CDF KS .11428
+exceeds .05. Its width improves while KS worsens relative to the current
+.01 control. Ring retains all 16 modes and improves HQ .93018 to .94385,
+but full nearest-assigned component covariance error 9.61552 exceeds .85.
+Its mass TV .09302 and full minimum eigenvalue ratio .29107 pass. Core-only
+covariance error .48050 and overall covariance error .09988 cannot replace
+the full-component gate: all assigned tail samples count. Better HQ is not
+evidence that the complete ring test passes.
+
+The scientific execution is commit
+`a0f7e70e50427e0d3221d1d7f4cb4aac6e18b1be`, digest
+`f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226`.
+Historical `15eb7cb0` receipts are not reused as this current-source control.
+The scalar/ring hosts' critic-phase input-gradient probes are usable. The word
+fixture leaves its critic in training mode during generator forwards, which
+can still contaminate the observer's input labels; those word curves are
+excluded. Actual update, weight, spectral and sampled-row traces remain usable.
+Matrix spectral products exclude Fourier/input maps and nonlinearities and do
+not bound the complete critic. [Actual-training GIFs](reports/forge/dualnorm-pacing-v2/media-index.json)
+render saved observations without new training. [New archive provenance](reports/forge/dualnorm-pacing-v2/artifact-inventory.json)
+preserves the raw evidence separately from the original archive.
+
+**Magnitude or direction?** This follow-up improves performance by changing
+pace while keeping dualnorm's direction rule fixed. Combined with the earlier
+normalized-SGD ties, it supports continued normalization/pacing work, but
+does not isolate the reason Adam works. No matched Adam/graft comparison ran
+in this new source cohort. Dualnorm has one reusable update form; optimal-rate
+transfer across width/depth remains untested. P1-P6 retain their original
+native/five-seed scope and remain unscored. Before another paid study, analyze
+the saved Gaussian CDF and ring assigned tails alongside the update diagnostics;
+the remaining errors are not explained by mode count or two moments alone.

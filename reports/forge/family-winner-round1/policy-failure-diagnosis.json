@@ -1,0 +1,1985 @@
+{
+  "schema": "particlegan_compact_policy_failure_diagnosis_v1",
+  "public_source_worktree": "/ml2/hypergan/ParticleGAN-forge-family-winner-publication",
+  "public_source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+  "reviewed_pr252_merge": "b395214f48b33197f441843c3f9a1de7bea4363c",
+  "source_lines": [
+    {
+      "file": "particlegan/recipes.py",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "start_line": 641,
+      "end_line": 686,
+      "claim": "Atlas inherits E22; preset structural differences"
+    },
+    {
+      "file": "particlegan/feature_cells.py",
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "start_line": 28,
+      "end_line": 50,
+      "claim": "Exact finite conformal/BH population feasibility"
+    },
+    {
+      "file": "particlegan/feature_policy.py",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "start_line": 89,
+      "end_line": 153,
+      "claim": "Auto ownership/shape selection, rate calibration, reference fallback and population settlement"
+    },
+    {
+      "file": "particlegan/output_moments.py",
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "start_line": 10,
+      "end_line": 14,
+      "claim": "Complete raw moment rank bound8"
+    },
+    {
+      "file": "particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "start_line": 365,
+      "end_line": 442,
+      "claim": "Shared DV12/stationarity/row-evidence/reference birth controls, optional guards/selection"
+    },
+    {
+      "file": "particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "start_line": 594,
+      "end_line": 657,
+      "claim": "First shape declaration, stationarity role rate scaling and guarded reopening"
+    },
+    {
+      "file": "particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "start_line": 963,
+      "end_line": 988,
+      "claim": "Actual reference/feature latent sampler branch; output-noise exclusion does not disable latent perturbation"
+    },
+    {
+      "file": "particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "start_line": 1047,
+      "end_line": 1070,
+      "claim": "Feature paired-average serving vs reference table decision; adaptive EMA/fallback"
+    },
+    {
+      "file": "particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "start_line": 338,
+      "end_line": 345,
+      "claim": "Noise optimizer group uses recipe.lr"
+    },
+    {
+      "file": "particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "start_line": 1013,
+      "end_line": 1063,
+      "claim": "Surprise guard may change detector state without firing an applied reopen"
+    },
+    {
+      "file": "particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "start_line": 1079,
+      "end_line": 1125,
+      "claim": "Settled guard contracts network witness and rebases KA2 objective epoch"
+    },
+    {
+      "file": "particlegan/recipes.py",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "start_line": 515,
+      "end_line": 541,
+      "claim": "Critic base rate is lr*d_lr_mult"
+    },
+    {
+      "file": "particlegan/recipes.py",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "start_line": 606,
+      "end_line": 632,
+      "claim": "Generator and prior base rates, prior_beta fallback and capability binding"
+    },
+    {
+      "file": "benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+      "start_line": 537,
+      "end_line": 597,
+      "claim": "Actual fixed task adaptations applied before explicit public knob overrides"
+    },
+    {
+      "file": "benchmarks/toy_audit/api_images.py",
+      "sha256": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+      "start_line": 748,
+      "end_line": 785,
+      "claim": "Actual image resources bound before explicit public knob overrides"
+    },
+    {
+      "file": "benchmarks/toy_audit/api_family_search.py",
+      "sha256": "acc2a6edbdb34b24648770d1ea6f1c67f82dcd426cb7a4ccf5338d9573d158ff",
+      "start_line": 72,
+      "end_line": 89,
+      "claim": "Study host adaptations/effective Recipe; not a literal same full Recipe across hosts"
+    },
+    {
+      "file": "experiments/forge/boundaries.py",
+      "sha256": "89a1782dd568295a981a03edf5868a140dd10f5d7fec75480a253dcc67590e66",
+      "start_line": 23,
+      "end_line": 50,
+      "claim": "PR252 recipe ownership and finite tuning whitelist"
+    },
+    {
+      "file": "experiments/forge/boundaries.py",
+      "sha256": "89a1782dd568295a981a03edf5868a140dd10f5d7fec75480a253dcc67590e66",
+      "start_line": 172,
+      "end_line": 219,
+      "claim": "Schedule-free horizons, metadata/host-owned/inactive provenance statuses"
+    },
+    {
+      "file": "experiments/forge/taskrecipes.py",
+      "sha256": "c11739bd935256e7083875f4e67d6c29fad1b9ea5915976dd32ed1eb7531d285",
+      "start_line": 10,
+      "end_line": 58,
+      "claim": "Host delegation limited to task resources/objectives; LR knobs not delegated"
+    },
+    {
+      "file": "experiments/forge/techniques.py",
+      "sha256": "b668252d2400a2f6555e425244f53b9a0b0a273c196c60921cacf4d57e8fe103",
+      "start_line": 17,
+      "end_line": 103,
+      "claim": "Technique activation signatures and declared inactive scheduling/prior knobs"
+    },
+    {
+      "file": "docs/forge-field-boundaries.md",
+      "sha256": "b42a94382a586f1687078ae2d97848d76cc4ecd0f21203c3be2d4a48114377ad",
+      "start_line": 1,
+      "end_line": 89,
+      "claim": "PR252 comparison-cohort and ownership documentation"
+    },
+    {
+      "file": "benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+      "start_line": 289,
+      "end_line": 298,
+      "claim": "Exact native quality host20k rows,7kupdates,20kevaluation, outputwidth2"
+    },
+    {
+      "file": "particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "start_line": 900,
+      "end_line": 914,
+      "claim": "An actual optimizer reopening rescales each group second moments by its own recorded surprise ratio"
+    }
+  ],
+  "comparison_cohort_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+  "studies": {
+    "atlas": {
+      "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/study.json",
+      "sha256": "af1a5bf83cae45d633d7bdc48e4152aadca5f2e0f3d7b55c1c602b5150ab4c9a",
+      "bytes": 117303
+    },
+    "e22": {
+      "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/study.json",
+      "sha256": "2f7b13d750095313e85d0ee3a49d56e9bfdd50a645e2721ed486d3aaa2ef78f5",
+      "bytes": 115940
+    }
+  },
+  "saved_pair_checks": [
+    {
+      "lr": 0.006375,
+      "prior_lr_mult": 1.0,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "artifacts": {
+        "atlas": {
+          "candidate_id": "atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12/receipt.json",
+            "sha256": "9ea0bf8ab628c575c25cd99031ba1a2fdbf1fd6b07869922e8fcde54f174946a",
+            "bytes": 43679
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "6f9f5ad9ca30db92a87b7e1e167b2fa41fed613a2b88d3be62c3db551b6ffbf3",
+            "bytes": 6083234
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "b7a6e77c6f02d0c4e1102167e8a9c52265e93cb0ce6365214846ffad7c82e2b8",
+            "bytes": 352133
+          }
+        },
+        "e22": {
+          "candidate_id": "e22--da75137238384f27a182b60f6232cd1900263fbf4a6875568c6f8cda4edc77bf",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--da75137238384f27a182b60f6232cd1900263fbf4a6875568c6f8cda4edc77bf/image-develop-img_intensity2-source-transpose12/receipt.json",
+            "sha256": "8a3995411e15b5c4df7456180d5bdd220b88af52b58f1360c493b46fddb237fe",
+            "bytes": 43466
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--da75137238384f27a182b60f6232cd1900263fbf4a6875568c6f8cda4edc77bf/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "6f9f5ad9ca30db92a87b7e1e167b2fa41fed613a2b88d3be62c3db551b6ffbf3",
+            "bytes": 6083234
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--da75137238384f27a182b60f6232cd1900263fbf4a6875568c6f8cda4edc77bf/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "9c48de287c63580f4c4496214b09cbc9546ee6ed0f9697dc55cb7b2fa5d1db3c",
+            "bytes": 350661
+          }
+        }
+      },
+      "retained_array_keys": 50,
+      "all_retained_target_and_sample_arrays_bitwise_equal": true,
+      "all_recorded_numeric_metrics_and_bounds_equal": true,
+      "terminal_component_state_equal": {
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "initial_lrs": true,
+        "controller": true,
+        "lr_settle": true,
+        "birth_death": true,
+        "row_evidence": true,
+        "streams": true,
+        "policy": true,
+        "surprise": false
+      },
+      "complete_public_state_equal": false,
+      "atlas_backend_selection": {
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 64,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "atlas_reopen_guard": {
+        "schema": 1,
+        "ka2_anchor_started": false,
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.5
+          },
+          "1.0": {
+            "role": "critic",
+            "scale": 0.5
+          }
+        },
+        "excursion": null,
+        "epoch_rebases": 0
+      },
+      "surprise": {
+        "atlas": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 0.9309618963893221,
+          "since_fire": null
+        },
+        "e22": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 0.9792673794005361,
+          "since_fire": null
+        }
+      },
+      "initial_role_rates": [
+        [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        [
+          0.006375
+        ]
+      ],
+      "final_role_rates": [
+        [
+          0.0031875,
+          0.006375,
+          0.006375
+        ],
+        [
+          0.004728553245983993
+        ]
+      ]
+    },
+    {
+      "lr": 0.006375,
+      "prior_lr_mult": 2.0,
+      "case_id": "api-vector-two-broad",
+      "artifacts": {
+        "atlas": {
+          "candidate_id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/api-vector-two-broad/receipt.json",
+            "sha256": "e75ef1a5c4bc64f94685dccc0538a7525bc39329b9c95c97b8b2e0ef9018d151",
+            "bytes": 75201
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/api-vector-two-broad/observations.npz",
+            "sha256": "2042818b165add35e226b2d21d4773e7d171b9ab014987efa1fd81bc3edba45a",
+            "bytes": 3070364
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/api-vector-two-broad/final-state.pt",
+            "sha256": "0eaf9678974a633298a8d636b258c11794381db57815c7b8eff27a0ba81c90ca",
+            "bytes": 432895
+          }
+        },
+        "e22": {
+          "candidate_id": "e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746/api-vector-two-broad/receipt.json",
+            "sha256": "49dd30c3c79beb10461bc68525cd708c26192e1eec7474c26fe6d6b762c9e39e",
+            "bytes": 74986
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746/api-vector-two-broad/observations.npz",
+            "sha256": "2042818b165add35e226b2d21d4773e7d171b9ab014987efa1fd81bc3edba45a",
+            "bytes": 3070364
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746/api-vector-two-broad/final-state.pt",
+            "sha256": "92d22dff4d430a669d87789d7a514e7cdc37bab4e9b4c621e21a27fd826238f4",
+            "bytes": 431423
+          }
+        }
+      },
+      "retained_array_keys": 150,
+      "all_retained_target_and_sample_arrays_bitwise_equal": true,
+      "all_recorded_numeric_metrics_and_bounds_equal": true,
+      "terminal_component_state_equal": {
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "initial_lrs": true,
+        "controller": true,
+        "lr_settle": true,
+        "birth_death": true,
+        "row_evidence": true,
+        "streams": true,
+        "policy": true,
+        "surprise": false
+      },
+      "complete_public_state_equal": false,
+      "atlas_backend_selection": {
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 2,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "atlas_reopen_guard": {
+        "schema": 1,
+        "ka2_anchor_started": true,
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.5
+          },
+          "1.0": {
+            "role": "critic",
+            "scale": 0.0625
+          }
+        },
+        "excursion": null,
+        "epoch_rebases": 1
+      },
+      "surprise": {
+        "atlas": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 1.1225710183067799,
+          "since_fire": null
+        },
+        "e22": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 4.434700701125369,
+          "since_fire": null
+        }
+      },
+      "initial_role_rates": [
+        [
+          0.006375,
+          0.01275,
+          0.006375
+        ],
+        [
+          0.0095625
+        ]
+      ],
+      "final_role_rates": [
+        [
+          0.0031875,
+          0.01275,
+          0.006375
+        ],
+        [
+          0.0071718737054509525
+        ]
+      ]
+    },
+    {
+      "lr": 0.006375,
+      "prior_lr_mult": 2.0,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "artifacts": {
+        "atlas": {
+          "candidate_id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12/receipt.json",
+            "sha256": "1bc04141bc35d38fcef72f6e5867336d8d1099adabd755b5c4f452395c158225",
+            "bytes": 43613
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "897a8589746fe16ee74551e2ca00d2c3b6ca3a16a4667454d4ef52ed57468967",
+            "bytes": 6088723
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "06cf15afa5e0402421cec120eb8869522f56ab2f88218331ddce32086a2aaa0e",
+            "bytes": 355663
+          }
+        },
+        "e22": {
+          "candidate_id": "e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746/image-develop-img_intensity2-source-transpose12/receipt.json",
+            "sha256": "2ed06e12ab051dc66e923e54aa36623f8747f68ae7a992725a5d2b071d96a620",
+            "bytes": 43403
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "897a8589746fe16ee74551e2ca00d2c3b6ca3a16a4667454d4ef52ed57468967",
+            "bytes": 6088723
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "e18d6286d6c3c61ef2514643df770691ce886ef917922ca0915585b64ce0afa5",
+            "bytes": 354127
+          }
+        }
+      },
+      "retained_array_keys": 50,
+      "all_retained_target_and_sample_arrays_bitwise_equal": true,
+      "all_recorded_numeric_metrics_and_bounds_equal": true,
+      "terminal_component_state_equal": {
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "initial_lrs": true,
+        "controller": true,
+        "lr_settle": true,
+        "birth_death": true,
+        "row_evidence": true,
+        "streams": true,
+        "policy": true,
+        "surprise": true
+      },
+      "complete_public_state_equal": false,
+      "atlas_backend_selection": {
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 64,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "atlas_reopen_guard": {
+        "schema": 1,
+        "ka2_anchor_started": false,
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.125
+          }
+        },
+        "excursion": {
+          "step": 598,
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            }
+          }
+        },
+        "epoch_rebases": 0
+      },
+      "surprise": {
+        "atlas": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 1.3300658453459646,
+          "since_fire": null
+        },
+        "e22": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 1.3300658453459646,
+          "since_fire": null
+        }
+      },
+      "initial_role_rates": [
+        [
+          0.006375,
+          0.01275,
+          0.006375
+        ],
+        [
+          0.006375
+        ]
+      ],
+      "final_role_rates": [
+        [
+          0.000796875,
+          0.01275,
+          0.006375
+        ],
+        [
+          0.006290215678519364
+        ]
+      ]
+    },
+    {
+      "lr": 0.0085,
+      "prior_lr_mult": 1.0,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "artifacts": {
+        "atlas": {
+          "candidate_id": "atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12/receipt.json",
+            "sha256": "67f38f3fd3ada348d6a4cc454eb588d11589980a80bcf6205b80d85246097b76",
+            "bytes": 44714
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "5198113e659ea88d7f23d8516a64b8aae052b226c772dbeaf70aea2fa588ee65",
+            "bytes": 6043377
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "e63d8d0edede0909460e5076a240d41f5c603b295b906350c2f81dae5f978df9",
+            "bytes": 345031
+          }
+        },
+        "e22": {
+          "candidate_id": "e22--5d4d276493d67e29887fbfc3c98925b989e2c8c28ed32344c5a0588ddc02cf8c",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--5d4d276493d67e29887fbfc3c98925b989e2c8c28ed32344c5a0588ddc02cf8c/image-develop-img_intensity2-source-transpose12/receipt.json",
+            "sha256": "5734918e10a2a83aa2179ae050acd4804c14ab389e064bb48421eb7bbfb21225",
+            "bytes": 44506
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--5d4d276493d67e29887fbfc3c98925b989e2c8c28ed32344c5a0588ddc02cf8c/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "5198113e659ea88d7f23d8516a64b8aae052b226c772dbeaf70aea2fa588ee65",
+            "bytes": 6043377
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--5d4d276493d67e29887fbfc3c98925b989e2c8c28ed32344c5a0588ddc02cf8c/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "4943bf61074a4c5f2927cc01f3ac04951b393ffc12972aa61bf130ac09517294",
+            "bytes": 343559
+          }
+        }
+      },
+      "retained_array_keys": 50,
+      "all_retained_target_and_sample_arrays_bitwise_equal": true,
+      "all_recorded_numeric_metrics_and_bounds_equal": true,
+      "terminal_component_state_equal": {
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "initial_lrs": true,
+        "controller": true,
+        "lr_settle": true,
+        "birth_death": true,
+        "row_evidence": true,
+        "streams": true,
+        "policy": true,
+        "surprise": true
+      },
+      "complete_public_state_equal": false,
+      "atlas_backend_selection": {
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 64,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "atlas_reopen_guard": {
+        "schema": 1,
+        "ka2_anchor_started": false,
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.5
+          },
+          "1.0": {
+            "role": "critic",
+            "scale": 0.5
+          }
+        },
+        "excursion": null,
+        "epoch_rebases": 0
+      },
+      "surprise": {
+        "atlas": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 1.1614078867292206,
+          "since_fire": null
+        },
+        "e22": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 1.1614078867292206,
+          "since_fire": null
+        }
+      },
+      "initial_role_rates": [
+        [
+          0.0085,
+          0.0085,
+          0.0085
+        ],
+        [
+          0.0085
+        ]
+      ],
+      "final_role_rates": [
+        [
+          0.00425,
+          0.0085,
+          0.0085
+        ],
+        [
+          0.006252385680055017
+        ]
+      ]
+    },
+    {
+      "lr": 0.0085,
+      "prior_lr_mult": 2.0,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "artifacts": {
+        "atlas": {
+          "candidate_id": "atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12/receipt.json",
+            "sha256": "79e49a27c3a4d7c7b01abed771ecccdee1b493d91d22ce9b500fc6f36e1d1b4b",
+            "bytes": 44021
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "180698a2b08f2db4cb584bed7506c7cdc8e27a9b70b4c79256dc8260d9e400fa",
+            "bytes": 6065791
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "47edbce9969d545694189e1bea094e8a7c8757fd58d492da45e50e35d50d09a0",
+            "bytes": 356369
+          }
+        },
+        "e22": {
+          "candidate_id": "e22--65e42a03035ec9ef2bad19032ac8a0b849c81b24ef8f8cbf6476da1ae8c8ff4c",
+          "receipt": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--65e42a03035ec9ef2bad19032ac8a0b849c81b24ef8f8cbf6476da1ae8c8ff4c/image-develop-img_intensity2-source-transpose12/receipt.json",
+            "sha256": "d268fe05fd44e63f641f9396c67d0337b9d5ce42f252a8371fec1239c2fab007",
+            "bytes": 43815
+          },
+          "clouds": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--65e42a03035ec9ef2bad19032ac8a0b849c81b24ef8f8cbf6476da1ae8c8ff4c/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "180698a2b08f2db4cb584bed7506c7cdc8e27a9b70b4c79256dc8260d9e400fa",
+            "bytes": 6065791
+          },
+          "state": {
+            "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/e22/e22--65e42a03035ec9ef2bad19032ac8a0b849c81b24ef8f8cbf6476da1ae8c8ff4c/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "9c8d5af57fd701488a53027998b9d30456e9ef7480ba748cd24bf9773fa43f1e",
+            "bytes": 354897
+          }
+        }
+      },
+      "retained_array_keys": 50,
+      "all_retained_target_and_sample_arrays_bitwise_equal": true,
+      "all_recorded_numeric_metrics_and_bounds_equal": true,
+      "terminal_component_state_equal": {
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "initial_lrs": true,
+        "controller": true,
+        "lr_settle": true,
+        "birth_death": true,
+        "row_evidence": true,
+        "streams": true,
+        "policy": true,
+        "surprise": false
+      },
+      "complete_public_state_equal": false,
+      "atlas_backend_selection": {
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 64,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "atlas_reopen_guard": {
+        "schema": 1,
+        "ka2_anchor_started": false,
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.5
+          },
+          "1.0": {
+            "role": "critic",
+            "scale": 0.5
+          }
+        },
+        "excursion": null,
+        "epoch_rebases": 0
+      },
+      "surprise": {
+        "atlas": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 1.0610365125725139,
+          "since_fire": null
+        },
+        "e22": {
+          "fires": 0,
+          "armed": true,
+          "streak": 0,
+          "last_ratio": 1.0667243149526136,
+          "since_fire": null
+        }
+      },
+      "initial_role_rates": [
+        [
+          0.0085,
+          0.017,
+          0.0085
+        ],
+        [
+          0.0085
+        ]
+      ],
+      "final_role_rates": [
+        [
+          0.00425,
+          0.017,
+          0.0085
+        ],
+        [
+          0.006322410236132922
+        ]
+      ]
+    }
+  ],
+  "capacity_card": {
+    "path": "/ml2/hypergan/ParticleGAN-forge-family-winner-publication/reports/forge/family-winner-round1/policy-representation.json",
+    "sha256": "729f084b5e7b076cfb5d06d65810cec1b823f5df0ebe645767d8cd43fcb74c38",
+    "bytes": 276377
+  },
+  "capacity_route_checks": [
+    {
+      "case_id": "api-grid100",
+      "capacity_state": {
+        "path": "/ml2/hypergan/toy-policy-native-capacity-cpu-20261002/atlas/api-grid100/state.pt",
+        "sha256": "3d90c0ca8a41784d32e7271fa5ac52879cf2a27e12161ee3088262d3bd97cdf6",
+        "bytes": 4143379
+      },
+      "completed_steps": 0,
+      "max_steps": 7000,
+      "backend_selection": {
+        "requested_backend": "auto",
+        "actual_backend": "feature_cells",
+        "selection_reason": "finite_resolution_and_complete_raw_moment_frame",
+        "raw_output_width": 2,
+        "moment_rank_bound": 8,
+        "generator_noise_factor": 0.25,
+        "sampling_backend": "feature_cells"
+      },
+      "initial_role_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "claim": "Already-retained zero-update public capacity/lifecycle state. No ordinary training or quality credit.",
+      "population": 20000
+    },
+    {
+      "case_id": "api-rotated100",
+      "capacity_state": {
+        "path": "/ml2/hypergan/toy-policy-native-capacity-cpu-20261002/atlas/api-rotated100/state.pt",
+        "sha256": "2895c3b6ad356aff005f901bcc85c6de7011678e4cb4e6b4651fede02a2a16f8",
+        "bytes": 4143379
+      },
+      "completed_steps": 0,
+      "max_steps": 7000,
+      "backend_selection": {
+        "requested_backend": "auto",
+        "actual_backend": "feature_cells",
+        "selection_reason": "finite_resolution_and_complete_raw_moment_frame",
+        "raw_output_width": 2,
+        "moment_rank_bound": 8,
+        "generator_noise_factor": 0.25,
+        "sampling_backend": "feature_cells"
+      },
+      "initial_role_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "claim": "Already-retained zero-update public capacity/lifecycle state. No ordinary training or quality credit.",
+      "population": 20000
+    },
+    {
+      "case_id": "api-staggered100",
+      "capacity_state": {
+        "path": "/ml2/hypergan/toy-policy-native-capacity-cpu-20261002/atlas/api-staggered100/state.pt",
+        "sha256": "7cecde41c9b224732a06edf79d00337265fc90a0cdda44fdd964a56cb5e44cd3",
+        "bytes": 4143443
+      },
+      "completed_steps": 0,
+      "max_steps": 7000,
+      "backend_selection": {
+        "requested_backend": "auto",
+        "actual_backend": "feature_cells",
+        "selection_reason": "finite_resolution_and_complete_raw_moment_frame",
+        "raw_output_width": 2,
+        "moment_rank_bound": 8,
+        "generator_noise_factor": 0.25,
+        "sampling_backend": "feature_cells"
+      },
+      "initial_role_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "claim": "Already-retained zero-update public capacity/lifecycle state. No ordinary training or quality credit.",
+      "population": 20000
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "capacity_state": {
+        "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-anisotropic/state.pt",
+        "sha256": "858b5ac06c6e9bc31020a8670c8b579099b2b56350db21fd80053f94b18a7158",
+        "bytes": 218697
+      },
+      "completed_steps": 0,
+      "max_steps": 1200,
+      "backend_selection": {
+        "requested_backend": "auto",
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 2,
+        "moment_rank_bound": 8,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "initial_role_rates": [
+        [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        [
+          0.0095625
+        ]
+      ],
+      "claim": "Already-retained zero-update public capacity/lifecycle state. No ordinary training or quality credit.",
+      "population": 256
+    },
+    {
+      "case_id": "api-vector-two-broad",
+      "capacity_state": {
+        "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-two-broad/state.pt",
+        "sha256": "fe25fe614de2fba29ade8dc4aaf9d5cfb76bc049dd6398a95d0d1c32189a5c85",
+        "bytes": 218697
+      },
+      "completed_steps": 0,
+      "max_steps": 1200,
+      "backend_selection": {
+        "requested_backend": "auto",
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 2,
+        "moment_rank_bound": 8,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "initial_role_rates": [
+        [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        [
+          0.0095625
+        ]
+      ],
+      "claim": "Already-retained zero-update public capacity/lifecycle state. No ordinary training or quality credit.",
+      "population": 256
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "capacity_state": {
+        "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-unequal-mass/state.pt",
+        "sha256": "5e604b037d6ee0589f58f18c1d06c0d6fe1636ed2035cb7c4f4141ae64e7e951",
+        "bytes": 218697
+      },
+      "completed_steps": 0,
+      "max_steps": 1200,
+      "backend_selection": {
+        "requested_backend": "auto",
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 2,
+        "moment_rank_bound": 8,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "initial_role_rates": [
+        [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        [
+          0.0095625
+        ]
+      ],
+      "claim": "Already-retained zero-update public capacity/lifecycle state. No ordinary training or quality credit.",
+      "population": 256
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "capacity_state": {
+        "path": "/ml2/hypergan/toy-policy-image-capacity-neighbors-20261002/atlas/image-develop-img_bars4-source-transpose12/state.pt",
+        "sha256": "eb059996c239fd4cd20c3e7ca8a1ae9253a15d92d102a8ca66369380923bb0df",
+        "bytes": 180986
+      },
+      "completed_steps": 0,
+      "max_steps": 600,
+      "backend_selection": {
+        "requested_backend": "auto",
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 64,
+        "moment_rank_bound": 8,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "initial_role_rates": [
+        [
+          0.00425,
+          0.0085,
+          0.00425
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "claim": "Already-retained zero-update public capacity/lifecycle state. No ordinary training or quality credit.",
+      "population": 32
+    },
+    {
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "capacity_state": {
+        "path": "/ml2/hypergan/toy-policy-image-capacity-neighbors-20261002/atlas/image-develop-img_intensity2-source-transpose12/state.pt",
+        "sha256": "87364091c69cd38b0c33183a240fde8c9d2127951a6943817790404927f1794a",
+        "bytes": 181434
+      },
+      "completed_steps": 0,
+      "max_steps": 600,
+      "backend_selection": {
+        "requested_backend": "auto",
+        "actual_backend": "knn",
+        "selection_reason": "finite_resolution_infeasible",
+        "raw_output_width": 64,
+        "moment_rank_bound": 8,
+        "generator_noise_factor": 1.0,
+        "sampling_backend": "controller_reference"
+      },
+      "initial_role_rates": [
+        [
+          0.00425,
+          0.0085,
+          0.00425
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "claim": "Already-retained zero-update public capacity/lifecycle state. No ordinary training or quality credit.",
+      "population": 32
+    }
+  ],
+  "population_controls": {
+    "32": {
+      "schema": 1,
+      "requested_backend": "feature_cells",
+      "population": 32,
+      "q": 0.05,
+      "calibration_rows": 16,
+      "minimum_bh_flags": 38,
+      "maximum_guard_flags": 1,
+      "finite_resolution_feasible": false,
+      "actual_backend": "knn",
+      "matching_sampler": "controller_reference",
+      "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)"
+    },
+    "256": {
+      "schema": 1,
+      "requested_backend": "feature_cells",
+      "population": 256,
+      "q": 0.05,
+      "calibration_rows": 128,
+      "minimum_bh_flags": 40,
+      "maximum_guard_flags": 12,
+      "finite_resolution_feasible": false,
+      "actual_backend": "knn",
+      "matching_sampler": "controller_reference",
+      "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)"
+    },
+    "799": {
+      "schema": 1,
+      "requested_backend": "feature_cells",
+      "population": 799,
+      "q": 0.05,
+      "calibration_rows": 399,
+      "minimum_bh_flags": 40,
+      "maximum_guard_flags": 39,
+      "finite_resolution_feasible": false,
+      "actual_backend": "knn",
+      "matching_sampler": "controller_reference",
+      "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)"
+    },
+    "800": {
+      "schema": 1,
+      "requested_backend": "feature_cells",
+      "population": 800,
+      "q": 0.05,
+      "calibration_rows": 400,
+      "minimum_bh_flags": 40,
+      "maximum_guard_flags": 40,
+      "finite_resolution_feasible": true,
+      "actual_backend": "feature_cells",
+      "matching_sampler": "feature_cells",
+      "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)"
+    },
+    "20000": {
+      "schema": 1,
+      "requested_backend": "feature_cells",
+      "population": 20000,
+      "q": 0.05,
+      "calibration_rows": 10000,
+      "minimum_bh_flags": 40,
+      "maximum_guard_flags": 1000,
+      "finite_resolution_feasible": true,
+      "actual_backend": "feature_cells",
+      "matching_sampler": "feature_cells",
+      "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)"
+    }
+  },
+  "knob_consumption": [
+    {
+      "field": "lr",
+      "owner": "hyperparameter",
+      "finite_search_allowed": true,
+      "effective": true,
+      "explanation": "G base=lr; D base=lr*d_lr_mult; learned-noise base=lr; prior base=lr*prior_lr_mult. These then receive role-specific stationarity scale; Atlas auto-feature route multiplies only G/noise ceilings by .25."
+    },
+    {
+      "field": "prior_lr_mult",
+      "owner": "hyperparameter",
+      "finite_search_allowed": true,
+      "effective": true,
+      "explanation": "All eight declared hosts have a trainable particle prior with its own optimizer group. Explicit common knob applied after provider spec reference, and table rate unaffected by Atlas .25 calibration; row damping/evidence/stationarity can change effective displacement."
+    },
+    {
+      "field": "d_lr_mult",
+      "owner": "hyperparameter",
+      "finite_search_allowed": true,
+      "searched_in_this_round": false,
+      "explanation": "Active D base multiplier. Fixed task adaptations currently use1 for images/native and1.5 for the three vector fixtures; not an ineffective knob, but not one of this round shared tuning axes."
+    },
+    {
+      "fields": [
+        "lr_anneal_start",
+        "lr_floor",
+        "network_lr_floor",
+        "network_lr_horizon_cap"
+      ],
+      "explanation": "Atlas/E22 total_steps=null and lr_control=stationarity: the scheduled cosine branch is not used. PR252 activity logic marks the first three inactive. Horizon cap is not on the finite TUNABLE_FIELDS list."
+    },
+    {
+      "fields": [
+        "birth_death_cells",
+        "birth_death_metric_rank",
+        "birth_death_chunk"
+      ],
+      "explanation": "Numerically owned but not on finite search whitelist; Atlas small-population reference fallback never constructs the feature backend. Tuning these there cannot exercise that backend."
+    },
+    {
+      "field": "standardize",
+      "owner": "task",
+      "finite_search_allowed": false,
+      "explanation": "Task-owned; Recipe.make_prior removes it for ParticlePrior. Its serialized reference must not be mistaken for actual cloud standardization."
+    },
+    {
+      "field": "ema_decay",
+      "owner": "hyperparameter",
+      "finite_search_allowed": false,
+      "explanation": "Not globally ineffective: it is the fallback until the table tester supplies the adaptive serve_average rate. Do not infer inactivity from steady-state adaptive averaging."
+    },
+    {
+      "fields": [
+        "batch_size",
+        "num_particles",
+        "z_dim",
+        "total_steps"
+      ],
+      "explanation": "Resources/task schedule horizon are delegated task fields in PR252; preset reference values do not override actual host resources. Schedule-free total_steps=null coexists with the unchanged external full update limit."
+    }
+  ],
+  "limits": [
+    "All retained C3 arrays and finite learned/model/optimizer/control endpoint states match for five observed config/case pairs, but complete public states differ. No universal Atlas/E22 equivalence is proved.",
+    "Monotone surprise fires=0 rules out applied optimizer reopen actions in those original runs; differing detector slow references and Atlas loss-epoch rebase remain real differences that may act later.",
+    "The three native feature-cell routes are verified zero-update public lifecycle/capacity states, not ordinary scientific training successes.",
+    "PR252 Forge ownership receipts are distinct from the policy-study API provider fixed adapters. Per-case effective full Recipes differ; only the declared shared knobs and policy preset are common.",
+    "No source changes, model construction, forward, resampling, backward, ordinary update or ranking during this read-only audit.",
+    "C3 output equality is an observed cohort result only. C4 .002125/prior2 demonstrably diverges because an applied reopening event differs; reference-backend equality never authorized merging policy identities or borrowing gates."
+  ],
+  "training_or_resampling": false,
+  "historical_results_changed": false,
+  "c4_pair_checks": {
+    "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+    "studies": {
+      "atlas": {
+        "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/study.json",
+        "sha256": "7b7d23bc5b9ac92c319628ecef9b094c5713fd7ffd91f9f6b55049f984e5c25e",
+        "bytes": 112567
+      },
+      "e22": {
+        "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/study.json",
+        "sha256": "bdf72467085e726e625ef88881948018d8c03cda3b15f46488a6b8969f3aefa6",
+        "bytes": 111707
+      }
+    },
+    "records": [
+      {
+        "lr": 0.002125,
+        "prior_lr_mult": 1.0,
+        "case_id": "image-develop-img_intensity2-source-transpose12",
+        "families": {
+          "atlas": {
+            "candidate_id": "atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d",
+            "receipt": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d/image-develop-img_intensity2-source-transpose12/receipt.json",
+              "sha256": "8487d09a7f9071aacd145102e0df06e450c1bed5c2a8ebe5f04d4b74d8c44dc2",
+              "bytes": 44595
+            },
+            "state": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d/image-develop-img_intensity2-source-transpose12/final-state.pt",
+              "sha256": "b7b8faf0940633deb56c3784c51cc8f1b5a07eb9acea67f8289399846ba06027",
+              "bytes": 330419
+            },
+            "clouds": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d/image-develop-img_intensity2-source-transpose12/observations.npz",
+              "sha256": "867a30141b4e5d50c9c42375fae28389a41433a7d16efcd7497fe1fdcf79b902",
+              "bytes": 6059400
+            },
+            "original_gate": "PASS",
+            "study_gate": "INCOMPLETE",
+            "completed_updates": 600,
+            "acquisition_hold": {
+              "status": "INCOMPLETE",
+              "reason": "fewer than five post-confirmation hold observations",
+              "acquired_step": 525,
+              "acquired_seconds": 16.966276421910152,
+              "hold_checks": 3,
+              "hold_passed": 3,
+              "speed_eligible": false
+            },
+            "surprise": {
+              "fires": 0,
+              "last_ratio": 1.1086709545042208,
+              "streak": 0,
+              "log": []
+            },
+            "reopen_guard": {
+              "schema": 1,
+              "ka2_anchor_started": false,
+              "calm_network": {},
+              "excursion": null,
+              "epoch_rebases": 0
+            },
+            "backend_selection": {
+              "actual_backend": "knn",
+              "selection_reason": "finite_resolution_infeasible",
+              "raw_output_width": 64,
+              "generator_noise_factor": 1.0,
+              "sampling_backend": "controller_reference"
+            },
+            "failed_after_first_acquisition": [],
+            "terminal": {
+              "step": 600,
+              "passed": true,
+              "failed_bounds": [],
+              "metrics": {
+                "hq": 0.9951171875,
+                "mean_rmse": 0.04189620912075043,
+                "modes": 2.0,
+                "distribution_tv": 0.017578125,
+                "finite_template_tv": 0.0224609375,
+                "rejected_mass": 0.0048828125,
+                "samples": 1024.0,
+                "completed_steps": 600.0,
+                "served_averaged": 0.0,
+                "output_noise_added": 0.0,
+                "policy_latent_perturbation": 1.0
+              }
+            }
+          },
+          "e22": {
+            "candidate_id": "e22--ab19c4f54e43cf88ec26d5988012d01e23ae84d2f23c5454e1b53a82a61e0914",
+            "receipt": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--ab19c4f54e43cf88ec26d5988012d01e23ae84d2f23c5454e1b53a82a61e0914/image-develop-img_intensity2-source-transpose12/receipt.json",
+              "sha256": "51cd6a48e67db137861e17dcf19a86986243d5fd51d49727cdfbef7628753956",
+              "bytes": 44386
+            },
+            "state": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--ab19c4f54e43cf88ec26d5988012d01e23ae84d2f23c5454e1b53a82a61e0914/image-develop-img_intensity2-source-transpose12/final-state.pt",
+              "sha256": "2c53871a7c2c684e8588cfdbae035c153d2817b9452c5009f5088b59c7c3f9cb",
+              "bytes": 329011
+            },
+            "clouds": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--ab19c4f54e43cf88ec26d5988012d01e23ae84d2f23c5454e1b53a82a61e0914/image-develop-img_intensity2-source-transpose12/observations.npz",
+              "sha256": "867a30141b4e5d50c9c42375fae28389a41433a7d16efcd7497fe1fdcf79b902",
+              "bytes": 6059400
+            },
+            "original_gate": "PASS",
+            "study_gate": "INCOMPLETE",
+            "completed_updates": 600,
+            "acquisition_hold": {
+              "status": "INCOMPLETE",
+              "reason": "fewer than five post-confirmation hold observations",
+              "acquired_step": 525,
+              "acquired_seconds": 17.844990972196683,
+              "hold_checks": 3,
+              "hold_passed": 3,
+              "speed_eligible": false
+            },
+            "surprise": {
+              "fires": 0,
+              "last_ratio": 2.175189696717455,
+              "streak": 0,
+              "log": []
+            },
+            "reopen_guard": null,
+            "backend_selection": null,
+            "failed_after_first_acquisition": [],
+            "terminal": {
+              "step": 600,
+              "passed": true,
+              "failed_bounds": [],
+              "metrics": {
+                "hq": 0.9951171875,
+                "mean_rmse": 0.04189620912075043,
+                "modes": 2.0,
+                "distribution_tv": 0.017578125,
+                "finite_template_tv": 0.0224609375,
+                "rejected_mass": 0.0048828125,
+                "samples": 1024.0,
+                "completed_steps": 600.0,
+                "served_averaged": 0.0,
+                "output_noise_added": 0.0,
+                "policy_latent_perturbation": 1.0
+              }
+            }
+          }
+        },
+        "bitwise_equal_captured_sample_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "first_captured_difference": null,
+        "differing_captured_observations": 0
+      },
+      {
+        "lr": 0.002125,
+        "prior_lr_mult": 2.0,
+        "case_id": "image-develop-img_intensity2-source-transpose12",
+        "families": {
+          "atlas": {
+            "candidate_id": "atlas--916ab8dff81a16119a6bc772c47362b5637af746c063572c75a3945d6c467816",
+            "receipt": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--916ab8dff81a16119a6bc772c47362b5637af746c063572c75a3945d6c467816/image-develop-img_intensity2-source-transpose12/receipt.json",
+              "sha256": "51bb29aab4db9edc1841d979d0a748c5fe7985c48c0100038067a459808e8768",
+              "bytes": 45055
+            },
+            "state": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--916ab8dff81a16119a6bc772c47362b5637af746c063572c75a3945d6c467816/image-develop-img_intensity2-source-transpose12/final-state.pt",
+              "sha256": "abdccbef1b40c2e0c4d3ba78ac8963c301f1451703669bf70fe21e31d9feacaa",
+              "bytes": 375369
+            },
+            "clouds": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--916ab8dff81a16119a6bc772c47362b5637af746c063572c75a3945d6c467816/image-develop-img_intensity2-source-transpose12/observations.npz",
+              "sha256": "8ebd47f1a508381a9a768f684fc56e9ff561fbabea659bf00c8c6cba638be860",
+              "bytes": 6059464
+            },
+            "original_gate": "FAIL",
+            "study_gate": "FAIL",
+            "completed_updates": 600,
+            "acquisition_hold": {
+              "status": "FAIL",
+              "reason": "no five-check acquisition window"
+            },
+            "surprise": {
+              "fires": 0,
+              "last_ratio": 1.1022810989893466,
+              "streak": 0,
+              "log": []
+            },
+            "reopen_guard": {
+              "schema": 1,
+              "ka2_anchor_started": false,
+              "calm_network": {},
+              "excursion": null,
+              "epoch_rebases": 0
+            },
+            "backend_selection": {
+              "actual_backend": "knn",
+              "selection_reason": "finite_resolution_infeasible",
+              "raw_output_width": 64,
+              "generator_noise_factor": 1.0,
+              "sampling_backend": "controller_reference"
+            },
+            "failed_after_first_acquisition": [],
+            "terminal": {
+              "step": 600,
+              "passed": false,
+              "failed_bounds": [
+                "finite_template_tv",
+                "hq",
+                "modes"
+              ],
+              "metrics": {
+                "hq": 0.625,
+                "mean_rmse": 0.04000438004732132,
+                "modes": 1.0,
+                "distribution_tv": 0.0556640625,
+                "finite_template_tv": 0.4306640625,
+                "rejected_mass": 0.375,
+                "samples": 1024.0,
+                "completed_steps": 600.0,
+                "served_averaged": 0.0,
+                "output_noise_added": 0.0,
+                "policy_latent_perturbation": 1.0
+              }
+            }
+          },
+          "e22": {
+            "candidate_id": "e22--4a3ce5cf0e28c856de95243f2f8faaf2974269bc09bfdaabb2a3cf42875566db",
+            "receipt": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--4a3ce5cf0e28c856de95243f2f8faaf2974269bc09bfdaabb2a3cf42875566db/image-develop-img_intensity2-source-transpose12/receipt.json",
+              "sha256": "6bbf9dfb1f1d85c6af2f9bd3e504c7690f509528cec2a2cdf47d662769f88f8f",
+              "bytes": 44655
+            },
+            "state": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--4a3ce5cf0e28c856de95243f2f8faaf2974269bc09bfdaabb2a3cf42875566db/image-develop-img_intensity2-source-transpose12/final-state.pt",
+              "sha256": "afcca898626095febf8a7560dcd6635c6002670a7f659de80f0f96ec95ad7946",
+              "bytes": 330439
+            },
+            "clouds": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--4a3ce5cf0e28c856de95243f2f8faaf2974269bc09bfdaabb2a3cf42875566db/image-develop-img_intensity2-source-transpose12/observations.npz",
+              "sha256": "bf55eb8602f56516f483c58d42dfb4819666ce1ff0d4e6b6fdedc76882aebede",
+              "bytes": 6069100
+            },
+            "original_gate": "PASS",
+            "study_gate": "INCOMPLETE",
+            "completed_updates": 600,
+            "acquisition_hold": {
+              "status": "INCOMPLETE",
+              "reason": "fewer than five post-confirmation hold observations",
+              "acquired_step": 600,
+              "acquired_seconds": 19.572355475043878,
+              "hold_checks": 0,
+              "hold_passed": 0,
+              "speed_eligible": false
+            },
+            "surprise": {
+              "fires": 1,
+              "last_ratio": 0.8310679586086616,
+              "streak": 0,
+              "log": [
+                [
+                  360,
+                  2.445
+                ]
+              ]
+            },
+            "reopen_guard": null,
+            "backend_selection": null,
+            "failed_after_first_acquisition": [],
+            "terminal": {
+              "step": 600,
+              "passed": true,
+              "failed_bounds": [],
+              "metrics": {
+                "hq": 0.9873046875,
+                "mean_rmse": 0.02019694447517395,
+                "modes": 2.0,
+                "distribution_tv": 0.0615234375,
+                "finite_template_tv": 0.0625,
+                "rejected_mass": 0.0126953125,
+                "samples": 1024.0,
+                "completed_steps": 600.0,
+                "served_averaged": 0.0,
+                "output_noise_added": 0.0,
+                "policy_latent_perturbation": 1.0
+              }
+            }
+          }
+        },
+        "bitwise_equal_captured_sample_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350
+        ],
+        "first_captured_difference": {
+          "step": 375,
+          "maximum_pixel_difference": 0.5872554779052734
+        },
+        "differing_captured_observations": 10
+      },
+      {
+        "lr": 0.00425,
+        "prior_lr_mult": 1.0,
+        "case_id": "image-develop-img_intensity2-source-transpose12",
+        "families": {
+          "atlas": {
+            "candidate_id": "atlas--d04d2c7e0c56516cafca40ff4622c41986a3d2afb6d1546032c11d313837b691",
+            "receipt": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--d04d2c7e0c56516cafca40ff4622c41986a3d2afb6d1546032c11d313837b691/image-develop-img_intensity2-source-transpose12/receipt.json",
+              "sha256": "ce00178666754e523c66765f9e34524d1c455d35936af6c272a122858227b12b",
+              "bytes": 44202
+            },
+            "state": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--d04d2c7e0c56516cafca40ff4622c41986a3d2afb6d1546032c11d313837b691/image-develop-img_intensity2-source-transpose12/final-state.pt",
+              "sha256": "5a40d178acc3a0c0d21cf285e6d246b7875164399328c0a6fb6694fbea413dfb",
+              "bytes": 339893
+            },
+            "clouds": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--d04d2c7e0c56516cafca40ff4622c41986a3d2afb6d1546032c11d313837b691/image-develop-img_intensity2-source-transpose12/observations.npz",
+              "sha256": "3a3aebef31e9de9d5e23a030169168faa22c855836c440740db36fdd90e9f728",
+              "bytes": 6053067
+            },
+            "original_gate": "PASS",
+            "study_gate": "FAIL",
+            "completed_updates": 600,
+            "acquisition_hold": {
+              "status": "FAIL",
+              "reason": "first acquisition later collapsed",
+              "acquired_step": 375,
+              "acquired_seconds": 13.047247424023226,
+              "hold_checks": 9,
+              "hold_passed": 8,
+              "speed_eligible": false
+            },
+            "surprise": {
+              "fires": 0,
+              "last_ratio": 0.9591094947065235,
+              "streak": 0,
+              "log": []
+            },
+            "reopen_guard": {
+              "schema": 1,
+              "ka2_anchor_started": false,
+              "calm_network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.5
+                }
+              },
+              "excursion": null,
+              "epoch_rebases": 0
+            },
+            "backend_selection": {
+              "actual_backend": "knn",
+              "selection_reason": "finite_resolution_infeasible",
+              "raw_output_width": 64,
+              "generator_noise_factor": 1.0,
+              "sampling_backend": "controller_reference"
+            },
+            "failed_after_first_acquisition": [
+              {
+                "step": 475,
+                "failed_bounds": [
+                  "finite_template_tv",
+                  "hq",
+                  "modes"
+                ],
+                "metrics": {
+                  "hq": 0.41015625,
+                  "mean_rmse": 0.05285271629691124,
+                  "modes": 1.0,
+                  "distribution_tv": 0.08984375,
+                  "finite_template_tv": 0.58984375,
+                  "rejected_mass": 0.58984375,
+                  "samples": 1024.0,
+                  "completed_steps": 475.0,
+                  "served_averaged": 0.0,
+                  "output_noise_added": 0.0,
+                  "policy_latent_perturbation": 1.0
+                }
+              }
+            ],
+            "terminal": {
+              "step": 600,
+              "passed": true,
+              "failed_bounds": [],
+              "metrics": {
+                "hq": 1.0,
+                "mean_rmse": 0.015113935805857182,
+                "modes": 2.0,
+                "distribution_tv": 0.08984375,
+                "finite_template_tv": 0.08984375,
+                "rejected_mass": 0.0,
+                "samples": 1024.0,
+                "completed_steps": 600.0,
+                "served_averaged": 0.0,
+                "output_noise_added": 0.0,
+                "policy_latent_perturbation": 1.0
+              }
+            }
+          },
+          "e22": {
+            "candidate_id": "e22--88a864cb691ec876eff8841c110860c62830ca6986ab986b2cd065c1d5e5d2d6",
+            "receipt": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--88a864cb691ec876eff8841c110860c62830ca6986ab986b2cd065c1d5e5d2d6/image-develop-img_intensity2-source-transpose12/receipt.json",
+              "sha256": "b2439a781dc4b1ca2413c1f4bb368e1d2671f2faec5074e7f281d80a330894b2",
+              "bytes": 43996
+            },
+            "state": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--88a864cb691ec876eff8841c110860c62830ca6986ab986b2cd065c1d5e5d2d6/image-develop-img_intensity2-source-transpose12/final-state.pt",
+              "sha256": "be3d988e8e77a3fd4634dc8ed81f618b14ea30dfa29cb9ab7b7ab4a7a6822616",
+              "bytes": 338421
+            },
+            "clouds": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--88a864cb691ec876eff8841c110860c62830ca6986ab986b2cd065c1d5e5d2d6/image-develop-img_intensity2-source-transpose12/observations.npz",
+              "sha256": "3a3aebef31e9de9d5e23a030169168faa22c855836c440740db36fdd90e9f728",
+              "bytes": 6053067
+            },
+            "original_gate": "PASS",
+            "study_gate": "FAIL",
+            "completed_updates": 600,
+            "acquisition_hold": {
+              "status": "FAIL",
+              "reason": "first acquisition later collapsed",
+              "acquired_step": 375,
+              "acquired_seconds": 13.421502499142662,
+              "hold_checks": 9,
+              "hold_passed": 8,
+              "speed_eligible": false
+            },
+            "surprise": {
+              "fires": 0,
+              "last_ratio": 0.959522451489198,
+              "streak": 0,
+              "log": []
+            },
+            "reopen_guard": null,
+            "backend_selection": null,
+            "failed_after_first_acquisition": [
+              {
+                "step": 475,
+                "failed_bounds": [
+                  "finite_template_tv",
+                  "hq",
+                  "modes"
+                ],
+                "metrics": {
+                  "hq": 0.41015625,
+                  "mean_rmse": 0.05285271629691124,
+                  "modes": 1.0,
+                  "distribution_tv": 0.08984375,
+                  "finite_template_tv": 0.58984375,
+                  "rejected_mass": 0.58984375,
+                  "samples": 1024.0,
+                  "completed_steps": 475.0,
+                  "served_averaged": 0.0,
+                  "output_noise_added": 0.0,
+                  "policy_latent_perturbation": 1.0
+                }
+              }
+            ],
+            "terminal": {
+              "step": 600,
+              "passed": true,
+              "failed_bounds": [],
+              "metrics": {
+                "hq": 1.0,
+                "mean_rmse": 0.015113935805857182,
+                "modes": 2.0,
+                "distribution_tv": 0.08984375,
+                "finite_template_tv": 0.08984375,
+                "rejected_mass": 0.0,
+                "samples": 1024.0,
+                "completed_steps": 600.0,
+                "served_averaged": 0.0,
+                "output_noise_added": 0.0,
+                "policy_latent_perturbation": 1.0
+              }
+            }
+          }
+        },
+        "bitwise_equal_captured_sample_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "first_captured_difference": null,
+        "differing_captured_observations": 0
+      },
+      {
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0,
+        "case_id": "image-develop-img_intensity2-source-transpose12",
+        "families": {
+          "atlas": {
+            "candidate_id": "atlas--9723217ce64dfdcc88fb37aec35b3476562104f2bce63b25273d33e2098bf7bf",
+            "receipt": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--9723217ce64dfdcc88fb37aec35b3476562104f2bce63b25273d33e2098bf7bf/image-develop-img_intensity2-source-transpose12/receipt.json",
+              "sha256": "33e3c412fa33d78553286f4ff511a1c76a7589399649d17fa4898211af34c5cb",
+              "bytes": 44178
+            },
+            "state": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--9723217ce64dfdcc88fb37aec35b3476562104f2bce63b25273d33e2098bf7bf/image-develop-img_intensity2-source-transpose12/final-state.pt",
+              "sha256": "6bdfb370b337aed476e9cd0aaf122de2d417ca85e03f6e56eea10353cc15e221",
+              "bytes": 343245
+            },
+            "clouds": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/atlas/atlas--9723217ce64dfdcc88fb37aec35b3476562104f2bce63b25273d33e2098bf7bf/image-develop-img_intensity2-source-transpose12/observations.npz",
+              "sha256": "2b992c2c1bf253d1af93b8e76adb8c9ead2ae515d5ebcff9ad0d544be7a1011b",
+              "bytes": 6070824
+            },
+            "original_gate": "PASS",
+            "study_gate": "FAIL",
+            "completed_updates": 600,
+            "acquisition_hold": {
+              "status": "FAIL",
+              "reason": "first acquisition later collapsed",
+              "acquired_step": 375,
+              "acquired_seconds": 12.959534693043679,
+              "hold_checks": 9,
+              "hold_passed": 8,
+              "speed_eligible": false
+            },
+            "surprise": {
+              "fires": 0,
+              "last_ratio": 1.3575183458601219,
+              "streak": 0,
+              "log": []
+            },
+            "reopen_guard": {
+              "schema": 1,
+              "ka2_anchor_started": false,
+              "calm_network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.5
+                }
+              },
+              "excursion": {
+                "step": 598,
+                "network": {
+                  "0.0": {
+                    "role": "generator",
+                    "scale": 0.5
+                  },
+                  "1.0": {
+                    "role": "critic",
+                    "scale": 0.5
+                  }
+                }
+              },
+              "epoch_rebases": 0
+            },
+            "backend_selection": {
+              "actual_backend": "knn",
+              "selection_reason": "finite_resolution_infeasible",
+              "raw_output_width": 64,
+              "generator_noise_factor": 1.0,
+              "sampling_backend": "controller_reference"
+            },
+            "failed_after_first_acquisition": [
+              {
+                "step": 425,
+                "failed_bounds": [
+                  "finite_template_tv",
+                  "hq"
+                ],
+                "metrics": {
+                  "hq": 0.791015625,
+                  "mean_rmse": 0.04847172647714615,
+                  "modes": 2.0,
+                  "distribution_tv": 0.0009765625,
+                  "finite_template_tv": 0.2099609375,
+                  "rejected_mass": 0.208984375,
+                  "samples": 1024.0,
+                  "completed_steps": 425.0,
+                  "served_averaged": 0.0,
+                  "output_noise_added": 0.0,
+                  "policy_latent_perturbation": 1.0
+                }
+              }
+            ],
+            "terminal": {
+              "step": 600,
+              "passed": true,
+              "failed_bounds": [],
+              "metrics": {
+                "hq": 0.9970703125,
+                "mean_rmse": 0.02691180445253849,
+                "modes": 2.0,
+                "distribution_tv": 0.0009765625,
+                "finite_template_tv": 0.00390625,
+                "rejected_mass": 0.0029296875,
+                "samples": 1024.0,
+                "completed_steps": 600.0,
+                "served_averaged": 0.0,
+                "output_noise_added": 0.0,
+                "policy_latent_perturbation": 1.0
+              }
+            }
+          },
+          "e22": {
+            "candidate_id": "e22--cb221ca2bd300bbcc744ad7f03825740fb747beb5f1f1043f5ccc22acc11949e",
+            "receipt": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--cb221ca2bd300bbcc744ad7f03825740fb747beb5f1f1043f5ccc22acc11949e/image-develop-img_intensity2-source-transpose12/receipt.json",
+              "sha256": "3fa8d5973e0bd8a265874255c68307fda9a3ab43330da15e76c0a2842c54ee52",
+              "bytes": 43973
+            },
+            "state": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--cb221ca2bd300bbcc744ad7f03825740fb747beb5f1f1043f5ccc22acc11949e/image-develop-img_intensity2-source-transpose12/final-state.pt",
+              "sha256": "351f613c5db96c1749591a9ed9fc8cbc0509d9ec987941776613434d8870e2db",
+              "bytes": 341645
+            },
+            "clouds": {
+              "path": "/ml2/hypergan/forge-policy-family-round2-20261002/e22/e22--cb221ca2bd300bbcc744ad7f03825740fb747beb5f1f1043f5ccc22acc11949e/image-develop-img_intensity2-source-transpose12/observations.npz",
+              "sha256": "2b992c2c1bf253d1af93b8e76adb8c9ead2ae515d5ebcff9ad0d544be7a1011b",
+              "bytes": 6070824
+            },
+            "original_gate": "PASS",
+            "study_gate": "FAIL",
+            "completed_updates": 600,
+            "acquisition_hold": {
+              "status": "FAIL",
+              "reason": "first acquisition later collapsed",
+              "acquired_step": 375,
+              "acquired_seconds": 13.514745174907148,
+              "hold_checks": 9,
+              "hold_passed": 8,
+              "speed_eligible": false
+            },
+            "surprise": {
+              "fires": 0,
+              "last_ratio": 1.3575183458601219,
+              "streak": 0,
+              "log": []
+            },
+            "reopen_guard": null,
+            "backend_selection": null,
+            "failed_after_first_acquisition": [
+              {
+                "step": 425,
+                "failed_bounds": [
+                  "finite_template_tv",
+                  "hq"
+                ],
+                "metrics": {
+                  "hq": 0.791015625,
+                  "mean_rmse": 0.04847172647714615,
+                  "modes": 2.0,
+                  "distribution_tv": 0.0009765625,
+                  "finite_template_tv": 0.2099609375,
+                  "rejected_mass": 0.208984375,
+                  "samples": 1024.0,
+                  "completed_steps": 425.0,
+                  "served_averaged": 0.0,
+                  "output_noise_added": 0.0,
+                  "policy_latent_perturbation": 1.0
+                }
+              }
+            ],
+            "terminal": {
+              "step": 600,
+              "passed": true,
+              "failed_bounds": [],
+              "metrics": {
+                "hq": 0.9970703125,
+                "mean_rmse": 0.02691180445253849,
+                "modes": 2.0,
+                "distribution_tv": 0.0009765625,
+                "finite_template_tv": 0.00390625,
+                "rejected_mass": 0.0029296875,
+                "samples": 1024.0,
+                "completed_steps": 600.0,
+                "served_averaged": 0.0,
+                "output_noise_added": 0.0,
+                "policy_latent_perturbation": 1.0
+              }
+            }
+          }
+        },
+        "bitwise_equal_captured_sample_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "first_captured_difference": null,
+        "differing_captured_observations": 0
+      }
+    ],
+    "interpretation": "The .002125/prior2 pair proves the guarded policy remains distinct even with the same reference density backend: E22 records an actual reopen at360, Atlasnone; captured outputs match through350, first differ375. The other three new pairs match every captured cloud with no recorded reopen in either family.",
+    "causal_limit": "Recorded action/timing and public implementation strongly locate the divergence to the reopening mechanism. Complete owners just before/after359/360 were not retained, so this is not a restored counterfactual experiment or quantitative causal-effect estimate."
+  },
+  "bounded_next_hypothesis": {
+    "precondition": "Both lower-grid family campaigns have concluded without a study-surviving configuration.",
+    "proposal": {
+      "lr": [
+        0.0031875,
+        0.0053125
+      ],
+      "prior_lr_mult": [
+        1.0,
+        2.0
+      ]
+    },
+    "rationale": "Empirical acquisition/stability bracket: half-rate/prior1 was late, preset rates acquired early but lost support in a later hold, and .006375/prior2 previously held intensity. These are nonmonotonic measured outcomes; interpolation is a finite strength search, not a proven law or new algorithm.",
+    "alternative": "d_lr_mult is active and tunable, but the saved evidence has no measured critic-response defect establishing that a critic-balance grid is better justified.",
+    "contract": "Separate exact-profile declaration and software admission; all8cases, gates, architectures, priors, seeds, serving laws, horizons and original overall paid cap unchanged. No repeated old knob configuration, automatic acquisition extension, seed-only study, ranking or default adoption.",
+    "launch_status": "No launch or declaration by this read-only agent.",
+    "remaining_original_round_paid_seconds": 10336.011929200264,
+    "original_total_paid_cap_seconds": 10800
+  },
+  "external_analysis": {
+    "path": "/ml2/hypergan/toy-policy-backend-mechanism-audit-20261002.json",
+    "sha256": "9d5e73b6722eb8db8a0373ee58d81fdf7834cd0944e73450cdbe34d16e65c872",
+    "bytes": 106511
+  },
+  "root_verified_c4_archive": {
+    "file": "reports/forge/family-winner-round1/policy-round2-archive.json",
+    "sha256": "49d110cf0f3b7ac9e4e7d51430492caa5351b78e1d75d80c20c683718d322e73",
+    "bytes": 45464
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "campaign_paid_seconds": 113.99425188452005,
+  "capacity_sampler_replay": true,
+  "combined": {
+    "bytes": 1345994,
+    "path": "/ml2/hypergan/forge-generator-step-20261003/combined.json",
+    "sha256": "2de9d080f8fdacdbb504f7fda6f7ee8ab2ba2dce00a454b117210dcc02a17b23"
+  },
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+    "-B",
+    "reports/forge/generator-step-20261003/run_generator_step.py",
+    "combine",
+    "/ml2/hypergan/forge-generator-step-20261003/atlas/study.json",
+    "--archive",
+    "/ml2/hypergan/forge-generator-step-20261003/e22/study.json",
+    "--output",
+    "/ml2/hypergan/forge-generator-step-20261003/combined.json"
+  ],
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0,
+  "log": {
+    "bytes": 1345994,
+    "path": "/ml2/hypergan/generator-step-combine-actual-20261003.log",
+    "sha256": "2de9d080f8fdacdbb504f7fda6f7ee8ab2ba2dce00a454b117210dcc02a17b23"
+  },
+  "new_science_paid_seconds": 54.87757138675079,
+  "new_science_reserve_seconds": 0.0,
+  "numeric_trace_rescore": true,
+  "ordinary_training_updates": 0,
+  "prior_paid_seconds": 59.116680497769266,
+  "runner": {
+    "bytes": 49819,
+    "path": "/ml2/hypergan/ParticleGAN-generator-step-20261003/reports/forge/generator-step-20261003/run_generator_step.py",
+    "sha256": "b3eadfed95a1c0c2b8bbdaab8459aff54799c9824dcc9909eb9fc4312bc642b5"
+  },
+  "schema": "particlegan_generator_step_root_certification_execution_v1",
+  "scientific_credit_changed": false,
+  "source_commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+  "status": "PASS",
+  "verification_scope": "Both independent full family studies recertified at frozen scientific source; all16 capacity records explicitly replayed for each archive; retained arrays/traces and complete protocols, states, source/law/Recipe/runtime, durable costs and prior debit recertified. No acquisition is repeated. This CPU diagnostic is separate from supervised scientific paid time.",
+  "working_directory": "/ml2/hypergan/ParticleGAN-generator-step-20261003"
+}

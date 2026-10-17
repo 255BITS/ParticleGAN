@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "technique-inventory-v1",
+  "budget_seconds": 529200,
+  "candidate_budget_seconds": 44100,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Inventory all 12 current declared techniques through ordinary discriminator_stability tiers 1-3. Declared ceiling: per technique 900s smoke + 39600s quality + 3600s grouped endurance = 44100s; 12 techniques = 529200s. These are timeout reservations, not expected runtime. Required failures stop remaining work immediately; known blocked first tasks spend nothing. Fixed screening seed and frozen clean/live laws only. Provisional gates confer no adoption or promotion. New techniques remain auto-discovered; expand this immutable campaign with a new id and explicit budgets when the declared ceiling grows."
+}

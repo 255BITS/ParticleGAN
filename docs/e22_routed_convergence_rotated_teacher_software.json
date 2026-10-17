@@ -1,0 +1,103 @@
+{
+  "schema": "routed_rotated_teacher_source_preparation_v1",
+  "status": "software_ready_quality_not_executed",
+  "quality_training_updates": 0,
+  "scope": "Source-only conditional diagnostic. Brief native updates verify software replay and particle ownership; no quality result or Forge/default/Supra qualification.",
+  "task": "routed_convergence_rotated_teacher_v1",
+  "rho": 0.027625366713810866,
+  "audit_report_sha256": "bfd38b84d558559ebe048ae93302270e6059253a4ccf6149f22eb8117f428241",
+  "prepared_card_sha256": "36e8694e48ea02bf05854dad6dab8d519c58f9d7db5776da6fc0b14327791b8a",
+  "source_sha256": {
+    "docs/e22_routed_convergence_rotated_teacher_v1.json": "36e8694e48ea02bf05854dad6dab8d519c58f9d7db5776da6fc0b14327791b8a",
+    "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+    "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+    "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+    "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+    "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+    "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+    "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+    "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
+  },
+  "native_python_source_digest": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
+  "held_sources_byte_unchanged": true,
+  "tests": {
+    "file": "tests/test_e22_routed_convergence_rotated_teacher.py",
+    "unique_final_cases_passed": 18,
+    "full_prepared_run": {
+      "passed": 14,
+      "failed": 1,
+      "seconds": 4.77,
+      "failure": "A transcribed native digest omitted two characters; fixed from the qualified PR227 receipt. Native files were unchanged."
+    },
+    "corrected_preflight": {
+      "passed": 1,
+      "seconds": 0.19,
+      "optimizer_updates": 0
+    },
+    "updated_gate_cases": {
+      "passed": 5,
+      "deselected": 10,
+      "seconds": 0.28,
+      "optimizer_updates": 0
+    },
+    "initial_draft_run": {
+      "passed": 14,
+      "seconds": 5.21
+    },
+    "total_brief_native_update_calls_across_both_full_software_attempts": 66,
+    "source_archive_cases": {
+      "passed": 3,
+      "deselected": 15,
+      "seconds": 23.13,
+      "optimizer_updates": 0,
+      "checks": "Exact app/native byte snapshots; refuse source or archive drift."
+    }
+  },
+  "verified": [
+    "Same student initial tensors, teacher up, fixed inputs and sources; only reachable teacher down span changed.",
+    "Declared rho and down row Gram; rho1 reproduces aligned target panels.",
+    "Bitwise exact teacher reachability on all fit/guard/test pools for both families.",
+    "Matched neutral H/b initialization before FAST/EMA; all other native owners remain identical within task.",
+    "All three actual native arms serialize and replay two brief updates exactly; cross-teacher restore is rejected atomically.",
+    "Four actual briefly learned critics score FAST and zero-code outputs without changing full state, streams, diagnostics, panels, or judge weights.",
+    "Final code-path owners acquire nonzero gradients while H/b/C, bank and router remain trainable.",
+    "Fixed35 checkpoints and34 curves include5120 beyond every200 cadence; mandatory four critic identities cannot be dropped.",
+    "Gap reductions are inapplicable for nonpositive/mixed baseline endpoint gaps; incomplete code witnesses cannot qualify retained particles."
+  ],
+  "cli_hold": {
+    "exit_code": 2,
+    "reason": "source-only task held pending qualified full Supra fixed-endpoint readout",
+    "quality_output_directory_created": false,
+    "tested_runner_sha256": "5e6b3f8d5559f1033d89019608a41f1d41d7f6a0cb98f7cef63b687aefc67b83",
+    "tested_card_sha256": "a518a1ba6823e8063a64508f31359058879f1e440553feb6129d2b820d5e0d15",
+    "subsequent_changes": "Particle witness/reporting fields and explanatory card metadata; hold branch unchanged. Final prepared card and sources passed direct validation."
+  },
+  "limitations": [
+    "The full fixed6400 orchestration path has not been executed.",
+    "Source and software readiness do not establish a trained remaining-gap witness.",
+    "The complete actual states/traces/scores and800802 replay require independent qualification after any authorized quality run."
+  ],
+  "independent_source_review": "transfer_law_review read-only audit identified no remaining code/quality issue after the documented gate, provenance and limit corrections; no trained experiment qualification implied.",
+  "source_preparation_archive_commit": "1f7b7c8022a48a99b40a56a2649b354136566215",
+  "post_preparation_change": "Add exact held source/card/native snapshots and frozen data.pt with SHA before quality execution. Native update, scoring and earlier held fixture bytes unchanged; full6400 path remains unexecuted.",
+  "independent_reviewer_preparation": {
+    "quality_evidence_exists": false,
+    "trained_qualification_executed": false,
+    "optimizer_updates": 0,
+    "final_cases_passed": 5,
+    "first_run_seconds": 5.9,
+    "after_changes_seconds": 2.33,
+    "final_contract_test_seconds": 0.2,
+    "source_sha256": {
+      "examples/review_e22_routed_convergence_rotated_teacher.py": "1a5cf8461249ea4efe9481f71f17129544528ca123c0444d700070f3fef6f70d",
+      "tests/test_e22_routed_convergence_rotated_teacher_review.py": "a591bea2bfa92b2f0dfcdebb728e2e1bb9214938618a7e36d68192ca0ae7424f"
+    },
+    "coverage": "Actual source/archive/data identities, all105states/102curves/19200draws, four mandatory common critics, both fixed endpoints, six replay updates after a complete run; included2700-second total budget."
+  },
+  "final_prepared_card_validation": {
+    "passed": true,
+    "card_sha256": "36e8694e48ea02bf05854dad6dab8d519c58f9d7db5776da6fc0b14327791b8a",
+    "by": "independent rotated_toy_review agent",
+    "optimizer_updates": 0
+  }
+}

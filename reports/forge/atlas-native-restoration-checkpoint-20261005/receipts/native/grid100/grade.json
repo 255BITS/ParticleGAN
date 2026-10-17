@@ -1,0 +1,25 @@
+{
+  "completed_steps": 7000,
+  "default_adoption": false,
+  "full_protocol_complete": true,
+  "independent_holdout_samples": 100000,
+  "metric_observations": 34,
+  "native_joint_gates": {
+    "accuracy": "PASS",
+    "coverage": "PASS"
+  },
+  "original_gate": "PASS",
+  "original_protocol_gate": "PASS",
+  "qualification_credit": false,
+  "reported_original_status": "PASS",
+  "sampling": "live archive slot contains intrinsic public selected/noisy primary",
+  "speed_ranking": false,
+  "status": "PASS",
+  "terminal_reads": [
+    6000,
+    6250,
+    6500,
+    6750,
+    7000
+  ]
+}

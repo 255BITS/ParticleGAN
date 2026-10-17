@@ -1,0 +1,19 @@
+{
+  "status": "DERIVED_FROM_FROZEN_CPU_CHECKER",
+  "base_checker": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/audit_checkpoints_v2.py",
+  "base_checker_sha256": "c2f595430ed9b70ae9d3cdc0383b7de7809d7540d8088dd4565f5cf78b2b4895",
+  "checker_sha256": "bbaaad0a8b37163b38818d4bbfb813559d78deae75c5a4cea2fdfe2a34bf1070",
+  "changes": [
+    "RA7 paths/variant/READY identity/new private output",
+    "pin lane source freeze",
+    "exact three declared config deltas",
+    "genuine saved group base rates and applied diagnostics",
+    "rate checks in endpoint receipt",
+    "base/applied rates retained",
+    "saved metrics with no separate quality adjudication",
+    "rate fields in summary"
+  ],
+  "old_checker_untouched": true,
+  "production_source_edits": 0,
+  "retained_private_failure": "failed-attempt1/generation-error.json: indentation mismatch in source-construction anchor; no numerical run"
+}

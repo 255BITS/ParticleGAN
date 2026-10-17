@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "scope": "task_only_duration_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "archive": {
+    "path": "artifacts/tier1-prior-duration-v1.tar.gz",
+    "local_path": "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/artifacts/tier1-prior-duration-v1.tar.gz",
+    "sha256": "18e339a2e78b73d95798b871914ac7a9301057e8b49a89c610f34dd7992d2480",
+    "bytes": 8012588,
+    "availability": "LOCAL_ONLY"
+  },
+  "parent_archive": {
+    "local_path": "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/artifacts/tier1-prior-smoke-v1.tar.gz",
+    "path": "artifacts/tier1-prior-smoke-v1.tar.gz",
+    "bytes": 13716517,
+    "sha256": "0ab6a34f0dbb27b7bd6647ef44918a1f022abc2732826c0d50190064d96ccd7d",
+    "availability": "LOCAL_ONLY"
+  },
+  "source_commit": "b4d1f95a074ffa64ac8f64e12aa0a049f836c0af",
+  "source_digest": "6135c3450b03669deee381928340a4f46b0d5299cc72f28c8f93b869bc57b9b0",
+  "protocol_sha256": "d858f77a33ba84fc400c9d4796c6f3ee02de707f81b971e4b7030c42a5acde3f",
+  "results_sha256": "24fe5d4ee9c75aa93ca69fd8733dc00bda1d99e20f3734919c72c6f9556a1eb0",
+  "verification_sha256": "eac5e4b366f02533a94b2c679d0db852a9bebbec7457dee2cacecf168e673df9",
+  "actual_devices": {
+    "cuda:0": 3
+  },
+  "additional_host_updates": 5400,
+  "repeated_prefix_updates": 0,
+  "automatic_retries": 0,
+  "raw_files": [
+    {
+      "path": "completion.json",
+      "bytes": 57,
+      "sha256": "9a2140c12ec3a04e3bb8cc0a9334e4f6e68be6e5bc8728477f01164f62f1d8d7"
+    },
+    {
+      "path": "mog025-n256-ring16_acquisition/curve.json",
+      "bytes": 413994,
+      "sha256": "12198ac7987c8abe14b3caae4e25ec21499fc9fa2cf5fadf04553b924649fd3c"
+    },
+    {
+      "path": "mog025-n256-ring16_acquisition/observations.pt",
+      "bytes": 3335427,
+      "sha256": "01c473e107f2b87ced8b79619076d9f4660377b971c9364a355ba8b69c30dea4"
+    },
+    {
+      "path": "mog025-n256-ring16_acquisition/receipt.json",
+      "bytes": 30898,
+      "sha256": "b1d6479861351aba541190fc0d7b15dc8a59a1ab863e621ef190b95698636492"
+    },
+    {
+      "path": "mog025-n256-ring16_acquisition/resume-proof.json",
+      "bytes": 403,
+      "sha256": "4c2aaeb94ac5f7c9d2f8eafa7aa572cbd3a4fda039535e055d2ea7950437fa2e"
+    },
+    {
+      "path": "mog025-n256-ring16_acquisition/source.json",
+      "bytes": 140393,
+      "sha256": "2b3d4bb30d355eb4c2b8ac78e84dfabd22945d1e8b2648cc9a5b8527e5ea5f69"
+    },
+    {
+      "path": "mog025-n256-ring16_acquisition/state.pt",
+      "bytes": 108455,
+      "sha256": "f6a28b4541ed2ebf31f1a8fa0fbfe3c9c1c336d1881f5bdbe262351a257078bd"
+    },
+    {
+      "path": "mog025-n256-ring16_acquisition.log",
+      "bytes": 211811,
+      "sha256": "d033e725f5dffe866f6643dc502b5e61b189cb4f1cc015b6c04b663ba7621ea5"
+    },
+    {
+      "path": "mog100-n256-gaussian1d_acquisition/curve.json",
+      "bytes": 47242,
+      "sha256": "28149d82668134c592018f386e97b4e830daa8197cd22dae55ae3fb8f8798936"
+    },
+    {
+      "path": "mog100-n256-gaussian1d_acquisition/observations.pt",
+      "bytes": 1626627,
+      "sha256": "34e2449ef47b941f908878de624931e972ba0cfb3e0405972ce710557bfbdfc6"
+    },
+    {
+      "path": "mog100-n256-gaussian1d_acquisition/receipt.json",
+      "bytes": 7003,
+      "sha256": "c5f2d361c681117e80d9b26c8ec29913365645ca38ee7856ebfcec5816d501f4"
+    },
+    {
+      "path": "mog100-n256-gaussian1d_acquisition/resume-proof.json",
+      "bytes": 404,
+      "sha256": "9ef17caa789a3d6531499b020a87773a6391bcb4b38ff750e911de3af024b78a"
+    },
+    {
+      "path": "mog100-n256-gaussian1d_acquisition/source.json",
+      "bytes": 140393,
+      "sha256": "2b3d4bb30d355eb4c2b8ac78e84dfabd22945d1e8b2648cc9a5b8527e5ea5f69"
+    },
+    {
+      "path": "mog100-n256-gaussian1d_acquisition/state.pt",
+      "bytes": 62375,
+      "sha256": "0e48d52faf639d16432b2e3c53b073488bc759333dc3e2afe12aad7833a9e179"
+    },
+    {
+      "path": "mog100-n256-gaussian1d_acquisition.log",
+      "bytes": 34212,
+      "sha256": "6db3187ac98e458706138fedf2d5dd198cf1b89916c8809f073451c324e9867e"
+    },
+    {
+      "path": "mog100-n256-ring16_acquisition/curve.json",
+      "bytes": 422897,
+      "sha256": "198085a3338a4e96f30a113175cbb2f362b7d4b0f457e702833993ac5c535608"
+    },
+    {
+      "path": "mog100-n256-ring16_acquisition/observations.pt",
+      "bytes": 3335171,
+      "sha256": "d772bf1b7a393082e2d796eddbb45802a7b74a16af23270218bf30dff9eb3706"
+    },
+    {
+      "path": "mog100-n256-ring16_acquisition/receipt.json",
+      "bytes": 31553,
+      "sha256": "8448bce5b2d0c2d21952789503d6ca5ce56ec05302d4979c4f90b82728c24d80"
+    },
+    {
+      "path": "mog100-n256-ring16_acquisition/resume-proof.json",
+      "bytes": 403,
+      "sha256": "8dff29a4da1d12e3f92f3a86991029b76356301f8205413b89f9ba130a4ec9e7"
+    },
+    {
+      "path": "mog100-n256-ring16_acquisition/source.json",
+      "bytes": 140393,
+      "sha256": "2b3d4bb30d355eb4c2b8ac78e84dfabd22945d1e8b2648cc9a5b8527e5ea5f69"
+    },
+    {
+      "path": "mog100-n256-ring16_acquisition/state.pt",
+      "bytes": 108455,
+      "sha256": "255bef96639557296fe4eef046dd23fcf3cb3f6cad4e0dacaf4792f6074a991e"
+    },
+    {
+      "path": "mog100-n256-ring16_acquisition.log",
+      "bytes": 220186,
+      "sha256": "68be5b9423b43439f94ef4072979b958408d7bda860595bedfff0f7b16a5ca22"
+    }
+  ]
+}

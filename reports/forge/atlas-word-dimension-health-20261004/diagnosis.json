@@ -1,0 +1,824 @@
+{
+  "actions": {
+    "cuda_initialized": false,
+    "models_constructed": 0,
+    "numeric_regrading": false,
+    "official_scoring_calls": 0,
+    "optimizer_updates": 0,
+    "raw_writes": 0,
+    "sampler_calls": 0,
+    "training_restores": 0
+  },
+  "causal_limit": "The sentinel explains the audit rejection, not the observed loss of word coverage or paired reconstruction. Missing per-update dimension/model traces prevent earlier timing or optimizer-mechanism attribution.",
+  "checkpoint_health": {
+    "frozen_health_accepts": false,
+    "learned_parameter_or_optimizer_nonfinite_found": false,
+    "nonfinite_leaves": [
+      {
+        "frozen_health_accepts": true,
+        "kind": "float",
+        "path": [
+          "policy",
+          "lr_settle",
+          0,
+          2,
+          "last",
+          "log_bf_b"
+        ],
+        "value": "nan"
+      },
+      {
+        "frozen_health_accepts": true,
+        "kind": "float",
+        "path": [
+          "policy",
+          "lr_settle",
+          0,
+          2,
+          "last",
+          "log_bf_2b"
+        ],
+        "value": "nan"
+      },
+      {
+        "count": 1,
+        "dtype": "torch.float32",
+        "frozen_health_accepts": true,
+        "inf_count": 0,
+        "kind": "tensor",
+        "nan_count": 1,
+        "path": [
+          "policy",
+          "lr_settle",
+          0,
+          3,
+          "r_b",
+          0
+        ],
+        "shape": []
+      },
+      {
+        "frozen_health_accepts": true,
+        "kind": "float",
+        "path": [
+          "policy",
+          "lr_settle",
+          0,
+          3,
+          "last",
+          "t_b"
+        ],
+        "value": "nan"
+      },
+      {
+        "frozen_health_accepts": true,
+        "kind": "float",
+        "path": [
+          "policy",
+          "lr_settle",
+          0,
+          3,
+          "last",
+          "t_2b"
+        ],
+        "value": "nan"
+      },
+      {
+        "frozen_health_accepts": true,
+        "kind": "float",
+        "path": [
+          "policy",
+          "lr_settle",
+          0,
+          3,
+          "last",
+          "mean_r_b"
+        ],
+        "value": "nan"
+      },
+      {
+        "frozen_health_accepts": true,
+        "kind": "float",
+        "path": [
+          "policy",
+          "lr_settle",
+          0,
+          3,
+          "last",
+          "mean_r_2b"
+        ],
+        "value": "nan"
+      },
+      {
+        "frozen_health_accepts": false,
+        "kind": "float",
+        "path": [
+          "policy",
+          "birth_death",
+          "last",
+          "d_R"
+        ],
+        "value": "nan"
+      }
+    ],
+    "rejected_leaves": [
+      {
+        "frozen_health_accepts": false,
+        "kind": "float",
+        "path": [
+          "policy",
+          "birth_death",
+          "last",
+          "d_R"
+        ],
+        "value": "nan"
+      }
+    ],
+    "tensor_leaves": 192
+  },
+  "checkpoint_state_sha256": "485ca3f1de4139d00118d081c9d501ab4ec3cc6adfc82b1ce01f7158d5727ef5",
+  "exact_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": true,
+    "batch_size": 256,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "auto",
+    "birth_death_cells": 128,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "std",
+    "birth_death_isolation": true,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "critic",
+    "conditioning": "scalar",
+    "continuous_policy": "dv12",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0053125,
+    "lr_anneal_start": 0.6,
+    "lr_control": "stationarity",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "atlas",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 11,
+    "observation_sigma": 0.03,
+    "output_noise_mode": "learnable",
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": true,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 1.5,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 3.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "release",
+    "reopen_guard": "settled",
+    "reopen_signal": "optimizer",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": true,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "scaled",
+    "row_policy": "independent",
+    "serve_average": 4.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "anchor",
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "family": "atlas_word_joint_min11",
+  "future_source_requirement": "Commit the audit patch and bind new implementation-source/task pins before any future execution; never substitute it into the old raw guard/grade. No unchanged C6 retry is proposed.",
+  "initialization": {
+    "discriminator": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.0.bias": 3734295931346225499,
+        "net.0.weight": 8910211641772985932,
+        "net.2.bias": 1656871869629328331,
+        "net.2.weight": 9070382962554913347,
+        "net.4.bias": 333772184539410714,
+        "net.4.weight": 3220091654461954378
+      }
+    },
+    "encoder": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.1.bias": 8635568878908975799,
+        "net.1.weight": 2352436766040047569,
+        "net.3.bias": 4684962440974121638,
+        "net.3.weight": 1013739058699418041,
+        "net.5.bias": 1863516330406637661,
+        "net.5.weight": 4393974776920474204
+      }
+    },
+    "generator": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.0.bias": 2669906441505372968,
+        "net.0.weight": 3213176745718584912,
+        "net.2.bias": 265576875384124118,
+        "net.2.weight": 5825468874490035566,
+        "net.4.bias": 6418902638380629685,
+        "net.4.weight": 3028787476376713866
+      }
+    },
+    "prior": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "z": 6640234621280078221
+      }
+    }
+  },
+  "input_roots": {
+    "frozen_source": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+    "run": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1"
+  },
+  "inputs": [
+    {
+      "bytes": 171329,
+      "relative_path": "forge-source.json",
+      "role": "source",
+      "sha256": "d1dd4b67ec65eedbed9468ecc61cbd684d774f2504d82511ea4bdf6e9f823a5a"
+    },
+    {
+      "bytes": 15130,
+      "relative_path": "experiments/forge/policy_adapters.py",
+      "role": "source",
+      "sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+    },
+    {
+      "bytes": 24294,
+      "relative_path": "experiments/forge/word_joint_policy_adapters.py",
+      "role": "source",
+      "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+    },
+    {
+      "bytes": 74085,
+      "relative_path": "experiments/forge/views.py",
+      "role": "source",
+      "sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+    },
+    {
+      "bytes": 45396,
+      "relative_path": "particlegan/birth_death.py",
+      "role": "source",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+    },
+    {
+      "bytes": 197018,
+      "relative_path": "raw-result.json",
+      "role": "raw",
+      "sha256": "e26ec506c81e8cdd74447c466d516ef30785de501da28dd50e698c115ebe7515"
+    },
+    {
+      "bytes": 901,
+      "relative_path": "graded-result.json",
+      "role": "raw",
+      "sha256": "5eb697cf6678ef764204ca5cd9e755a9d2f6f1fe0530c58a608b18ee9e3d766a"
+    },
+    {
+      "bytes": 4861315,
+      "relative_path": "resolved.json",
+      "role": "raw",
+      "sha256": "52a639183e9ed3c541b90311a16d0968ed85cd7cb039c64d0df693f4cc43bbc1"
+    },
+    {
+      "bytes": 11904,
+      "relative_path": "run.log",
+      "role": "raw",
+      "sha256": "22cb009f52291036a500322f556802fe4cad99adc2c3120184044084a89f0db1"
+    },
+    {
+      "bytes": 4544387,
+      "relative_path": "word-joint-policy/state.pt",
+      "role": "raw",
+      "sha256": "16388c4e59a657a154a4730e285191acfd18fbc23d41102d0c3ba82227efb8a7"
+    },
+    {
+      "bytes": 4147493,
+      "relative_path": "study.json",
+      "role": "study",
+      "sha256": "721adfbf299568bffc9bc7f72da0204a2fb5c87d283aa17d3bd32caa62540c4c"
+    }
+  ],
+  "minimal_repair": "Audit health only: recognize the exact public clocked no-move undefined-dimension branch; preserve NaN bytes and reject nonfinite learned/unknown state. No package algorithm or numerical-gate change.",
+  "original_observation": {
+    "all_metrics_finite": true,
+    "all_named_deviations_zero": true,
+    "all_policy_reads_pure": true,
+    "count": 24,
+    "final_metrics": {
+      "mass_apple": 0.0,
+      "mass_berry": 0.513671875,
+      "mass_grape": 0.4111328125,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.9248046875,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 11.05240844637142,
+      "sample_count": 1024,
+      "step": 20001
+    },
+    "no_new_numeric_verdict_computed": true,
+    "optimizer_updates": {
+      "discriminator": 20001,
+      "encoder": 20001,
+      "generator": 20001,
+      "prior": 20001
+    },
+    "policy_purity_count": 24,
+    "recorded_reconstruction_exact_values": [
+      0
+    ],
+    "selected_snapshots": [
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "a226803dc09a2c7d2986334db64e817bb21566c74dc319f6a0e562d094739b83",
+        "step": 834
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "037476d9f412b2994a704576131382f0faf6901ad0adb829f7017c326d77eb66",
+        "step": 1667
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "253ab20cb0f25a019168a16abf0f41b5e5a2e757de4daddc08ad8221ca5c6d0a",
+        "step": 2501
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "32d0c6cd8d55fa794bfd0ed3c151e345f5a727e4b3774aab08721b53976825b5",
+        "step": 3334
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "18c0db1b2f14aa8cf2e8710c4863dee9f650decf6af358b5b872e9bbcbaadd31",
+        "step": 4167
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "95ee053d044aa9ac4ab21224a612be5931ccb3e41d9a4944a184038ca1ffb5dc",
+        "step": 5001
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "2e34ed20d6dd82a22a8d49158bb999f99e508236dac2e5aa55f247e306e72031",
+        "step": 5834
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "2b7ddefec7e323e3889d2d084d444fb16e85e936c247975e2ce24efcb1a29352",
+        "step": 6667
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "685803d384f741d3e0087d7326272f2b1e1c968bb6d47e53ca6ec565f160fc4b",
+        "step": 7501
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "a8ec12748304530dd53eaeb470e78ee166209bdd73946d9cd602727bacfd7917",
+        "step": 8334
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "f056ad781eca8cebe08062423267b63cebd50117ea3c2764f282dc19a356253c",
+        "step": 9168
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "0fb400e3786f90337d9bc50f5e725cecd09553b9c3af90b4f87f856fb82f0d52",
+        "step": 10001
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "eea38fe922ec0fda24f20b984e126048698f6bc6c1fd045462988fc410cddfe9",
+        "step": 10834
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "296eaff01f95084d4a5f5f43d421ed34285b4c61bf552aa432db6c21ce67ec03",
+        "step": 11668
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "5a45a173f2cfaddfff56f1d9106afcc7a293b3837ee616a2a345c4767890ec19",
+        "step": 12501
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "876df67024007af65212971c23e8c9f31aeefd5f0e1be4c3cac51fa2ff80027b",
+        "step": 13334
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "08d5db084d0bd45b174f06120b4748e03929210285142309e22eefeea5755159",
+        "step": 14168
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "e5fc7fb10906393ab79cc2f313e14eef8cf74a84d56f7119516ac0c99e58e7b3",
+        "step": 15001
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "1b0012588dca04cf914fb8503687bf4a4d771ce7fb2563b53205d395efbdbeb8",
+        "step": 15835
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "ac4de4334598b7e580ef918d729e309ba2c0c47f49123c4be88db2d6e1ccee14",
+        "step": 16668
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "29a0afd504e15d12465ae3f52b2b4315e86ebde0919163837facabf6ac52d305",
+        "step": 17501
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "99993629eab9da36673ca881879901fc70d94ecc3408b72c4bdb6ac0f18711d2",
+        "step": 18335
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "3cc0fe96df9a7cb0d0b1cdea1e5ccde05055099be8e1c05bc37f1d303d6bfc19",
+        "step": 19168
+      },
+      {
+        "selected_source": "fast",
+        "snapshot_sha256": "5d192f139cedab90282f8ca42ac74e2e24a836e256113c6ebf7158cf55800792",
+        "step": 20001
+      }
+    ],
+    "steps": [
+      834,
+      1667,
+      2501,
+      3334,
+      4167,
+      5001,
+      5834,
+      6667,
+      7501,
+      8334,
+      9168,
+      10001,
+      10834,
+      11668,
+      12501,
+      13334,
+      14168,
+      15001,
+      15835,
+      16668,
+      17501,
+      18335,
+      19168,
+      20001
+    ],
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        1024
+      ],
+      [
+        "quality_fraction",
+        ">=",
+        0.95
+      ],
+      [
+        "modes",
+        "==",
+        5
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.1
+      ],
+      [
+        "reconstruction_exact",
+        "==",
+        1
+      ],
+      [
+        "minimum_reconstruction_token_probability",
+        ">=",
+        0.9
+      ]
+    ],
+    "updates": 20001
+  },
+  "original_task_execution": {
+    "device": "cuda",
+    "execution_path": "public_components",
+    "host": "five_word_joint",
+    "host_definition": {
+      "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+      "encoder_widths": [
+        168,
+        128,
+        64,
+        2
+      ],
+      "generator_widths": [
+        2,
+        64,
+        128,
+        168
+      ],
+      "joint_critic_widths": [
+        170,
+        256,
+        128,
+        1
+      ],
+      "length": 6,
+      "resources": {
+        "batch_size": 256,
+        "num_particles": 5,
+        "z_dim": 2
+      },
+      "words": [
+        "apple",
+        "grape",
+        "lemon",
+        "melon",
+        "berry"
+      ]
+    },
+    "host_source": "benchmarks/toy_audit/api_images.py",
+    "initializer": "deterministic_orthogonal",
+    "original_schedule_horizon": 20000,
+    "policy_contract": {
+      "checkpoint": "complete_public_policy_models_optimizers_streams_and_cursor",
+      "clean_function_and_gradient_equivalence": "matched_N11_clean_joint_function_only_not_DV12_on",
+      "cohort": "word_joint_policy_min11_v1",
+      "controls": "resolved_recipe_requested_enabled_eligible_applied",
+      "cpu_controls_scope": "structural_only",
+      "direct_response_scope": "latent_table_damping_only_not_direct_output_particle_response",
+      "encoder_mode": "none",
+      "encoder_optimizer_role": "encoder",
+      "encoder_owner": "auxiliary_original_free_continuous_WordEncoder",
+      "evaluation_output_noise": false,
+      "execution_device": "cuda",
+      "execution_path": "public_components",
+      "external_limit": "task.execution.steps",
+      "family": "atlas_word_joint_min11",
+      "free_reconstruction": "G(E(word))_under_selected_public_latent_sampling",
+      "generation_callback": "joint_generation(model,z_effective)=concat(model(z_effective),z_effective)",
+      "initializer": "parent_named_deterministic_orthogonal_original_classes",
+      "latent_law_change": "explicit_complete_joint_atom_for_independent_row_evidence_and_birth_death",
+      "learned_or_Atlas_qualification_reuse": false,
+      "lifecycle": "ordered_public_update",
+      "numerical_equivalence_to_parent": false,
+      "objective": "original_joint_RpGAN_real(word,E(word))_fake(G(z),z)_plus_Recipe.prior_reg_times_spread",
+      "original_five_row_task_status": "BLOCKED",
+      "original_scaffold": "G2_64_128_168_E168_128_64_2_D170_256_128_1_softmax28x6",
+      "original_split_code_law": "old_host_word_generator_receives_perturbed_code_but_joint_critic_receives_raw_code",
+      "owner": "particlegan.UpdatePolicy",
+      "precision": "preserve_original_fp32_no_autocast",
+      "prior_law": "eleven_uniform_raw_learned_2D_rows_for_five_words",
+      "prior_requirement": {
+        "actual_rows": 11,
+        "canonical_target_words": 5,
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protected_contexts": "no_fabricated_RoutedBatch_guard_or_row_to_word_pairing",
+      "reconstruction_eval_is_training_signal": false,
+      "reconstruction_training_loss": false,
+      "resource_adaptation": {
+        "actual": {
+          "batch_size": 256,
+          "num_particles": 11,
+          "z_dim": 2
+        },
+        "comparisons": "Resource-matched N11 only; no N5 or N6 numerical-equivalence claim.",
+        "controls_disabled": false,
+        "eligibility_source": "particlegan/birth_death.py:ParticleBirthDeath.__init__",
+        "historical_capacity_or_qualification_credit": false,
+        "isolation": true,
+        "minimum_complete_public_owners": 11,
+        "numerical_equivalence_to_parent": false,
+        "original": {
+          "batch_size": 256,
+          "num_particles": 5,
+          "z_dim": 2
+        },
+        "owner": "task",
+        "reason": "Original N5 fails public k>=4; N6 through N10 fail isolation leave-one-out reference-half guard. N11 has k5<6.",
+        "schema_version": 1
+      },
+      "row_policy": "independent",
+      "row_semantics": "independent",
+      "schedule": "preserve_resolved_recipe_none",
+      "schema_version": 1,
+      "sources": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "experiments/forge/adapters.py": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f",
+        "experiments/forge/api.py": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d",
+        "experiments/forge/artifacts.py": "78da4ed4b4038b8a93918aa4b5de7fa6f7e4d36731b69467e1cd8b7edcd7ee1e",
+        "experiments/forge/boundaries.py": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541",
+        "experiments/forge/contracts.py": "fcac35c47301f582bb19f2a4b12bd2b41f8630ec12b02912c3fc9f47539a81a8",
+        "experiments/forge/evaluate.py": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df",
+        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/named_policy_planning.py": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9",
+        "experiments/forge/planning.py": "8f8ff63d586a48cb9f7bed5a93c9b1c45f00eb7aada4cf6f34e77e0c2a4a6f9b",
+        "experiments/forge/policy_adapters.py": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf",
+        "experiments/forge/policy_behavior_adapters.py": "eebf6b881f80ac95b26f80a018b20cd0fc67febca2b05e8986f2ca0caee08c7d",
+        "experiments/forge/policy_cohorts.py": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f",
+        "experiments/forge/policy_declaration_sources.py": "374a176284199de724936d02e77ad8755250da273c75acfde096318e060ac717",
+        "experiments/forge/policy_snapshot_publication.py": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9",
+        "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+        "experiments/forge/routed_policy_adapters.py": "6754a975f5054e9b31c036175592d85d52d62c00fb4c5753401ecfc708256007",
+        "experiments/forge/runtime.py": "8f82ec5da54a9c670e80e5691e6337e03120019a1071516479fd65c3724ad147",
+        "experiments/forge/sampling.py": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7",
+        "experiments/forge/technique_board.py": "6eb7b31b9eab3fefad82cd773dc5ca8b2900d083e073b5aa7467c73ba1c85577",
+        "experiments/forge/views.py": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1",
+        "experiments/forge/word_joint_policy_adapters.py": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08",
+        "experiments/forge/word_joint_policy_contracts.py": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec",
+        "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+        "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+        "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+        "particlegan/policy.py": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42",
+        "particlegan/recipes.py": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "table_owner": "prior.z",
+      "training_latent_policy": "actual_DV12_same_effective_code_for_word_generator_and_joint_critic",
+      "training_output_noise": "public_learned_sigma_on168_word_coordinates_only_code2_coordinates_untouched"
+    },
+    "policy_recipe_overrides": {
+      "encoder_mode": "none",
+      "row_policy": "independent"
+    },
+    "policy_recipe_overrides_provenance": {
+      "complete_joint_atom": true,
+      "evidence_reuse": false,
+      "family": "atlas_word_joint_min11",
+      "historical_split_code_numerical_equivalence": false,
+      "original_free_encoder": true,
+      "same_code_DV12": true,
+      "words_only_output_noise": true
+    },
+    "prior": {
+      "exception_reason": "Explicit min11 independent joint-cloud variant: eleven actual raw learned rows for the unchanged five-word question; the original N5 and N6 isolation-invalid variant remain BLOCKED, with no historical capacity or qualification credit.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "produces_state": false,
+    "protocol": "screening",
+    "resource_adaptation": {
+      "actual": {
+        "batch_size": 256,
+        "num_particles": 11,
+        "z_dim": 2
+      },
+      "comparisons": "Resource-matched N11 only; no N5 or N6 numerical-equivalence claim.",
+      "controls_disabled": false,
+      "eligibility_source": "particlegan/birth_death.py:ParticleBirthDeath.__init__",
+      "historical_capacity_or_qualification_credit": false,
+      "isolation": true,
+      "minimum_complete_public_owners": 11,
+      "numerical_equivalence_to_parent": false,
+      "original": {
+        "batch_size": 256,
+        "num_particles": 5,
+        "z_dim": 2
+      },
+      "owner": "task",
+      "reason": "Original N5 fails public k>=4; N6 through N10 fail isolation leave-one-out reference-half guard. N11 has k5<6.",
+      "schema_version": 1
+    },
+    "resources": {
+      "batch_size": 256,
+      "num_particles": 11,
+      "z_dim": 2
+    },
+    "schedule_policy": "public_policy_stationarity_no_declared_horizon",
+    "steps": 20001
+  },
+  "preserved_original": {
+    "checkpoint_changed": false,
+    "family_status": "INVALID",
+    "gate": {
+      "gate_status": "FAIL",
+      "reasons": [
+        "observed public policy state is nonfinite"
+      ],
+      "status": "FAIL"
+    },
+    "numerical_grade_changed": false,
+    "paid_seconds": 558.5739127129782,
+    "reserve_seconds": 0.0
+  },
+  "schema": "pg_word_undefined_dimension_retained_diagnosis_v1",
+  "scope": "retained_data_health_diagnosis_no_numeric_regrading",
+  "source_commit": "fb7acc775b3a1a6184d36b55e035b9da04531492",
+  "source_defined_skip": {
+    "counters": {
+      "dim_skips": 5363,
+      "discoveries": 136858,
+      "evals": 20001,
+      "iso_acted": 0,
+      "iso_dup_skips": 20001,
+      "iso_evals": 14638,
+      "iso_flagged": 0,
+      "iso_moves": 0,
+      "iso_skipped": 0,
+      "matched": 1397,
+      "moves": 1397,
+      "normalised": 0,
+      "realised_births": 2018,
+      "realised_deaths": 132682,
+      "stale_resets": 2777,
+      "stays": 2158,
+      "waited_births": 621,
+      "waited_deaths": 131285
+    },
+    "dimension_skip_counter_is_not_a_per_update_trace": true,
+    "duplicate_nearest_neighbor_reason": "Every raw reference row has an exact duplicate; the source's deterministic critic features preserve equality.",
+    "earliest_exact_observable_step": 20001,
+    "first_occurrence_not_retained": true,
+    "last": {
+      "d_F": 0.926260882020859,
+      "d_R": "nan",
+      "k": 5,
+      "skip": "dimension undefined",
+      "step": 20001
+    },
+    "moved_rows": null,
+    "reference_multiplicities": [
+      2,
+      2,
+      3,
+      4
+    ],
+    "reservoir_shape": [
+      11,
+      170
+    ],
+    "source_skip_lines": [
+      511,
+      524
+    ],
+    "source_statistic_lines": [
+      206,
+      215
+    ],
+    "unique_raw_reference_rows": 4
+  },
+  "source_digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+  "task_id": "five_word_joint_acquisition_word_joint_policy_min11_v1"
+}

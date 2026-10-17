@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/run_pair.py",
+    "--run",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1"
+  ],
+  "source_integrity_before": {
+    "files": 169,
+    "package_sha256": {
+      "candidate": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+      "control": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15"
+    },
+    "source_freeze_sha256": "3cdda960aa6b7f0553276c3eb2f3d77ec2f25572bfffc217bbeff430928c8d3f",
+    "status": "VALID"
+  },
+  "start": 1790816660.546904,
+  "status": "WAITING_FOR_GPU"
+}

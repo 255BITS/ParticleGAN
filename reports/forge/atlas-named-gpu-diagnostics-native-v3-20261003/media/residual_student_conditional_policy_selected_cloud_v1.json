@@ -1,0 +1,74 @@
+{
+  "actual_steps": [
+    17,
+    67,
+    117,
+    167,
+    217,
+    250,
+    300,
+    350,
+    400
+  ],
+  "draws": 0,
+  "family": "atlas_conditional",
+  "gif": {
+    "bytes": 489417,
+    "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/residual_student_conditional_policy_selected_cloud_v1-goal.gif",
+    "sha256": "590a8d68fc9377c74ca233f7c211c3c642c4bf806a632780b98e637ad6b1df77"
+  },
+  "inputs": [
+    {
+      "bytes": 3463,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000017.npz",
+      "sha256": "342cb85da17333be12784f105d2ca1643ef7722952418df404846c778c115a07"
+    },
+    {
+      "bytes": 3467,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000067.npz",
+      "sha256": "7eb573233f4b9854dd2edf68d5f6e211c4a2dd6dabe210dcf27c0076538cb01e"
+    },
+    {
+      "bytes": 3469,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000117.npz",
+      "sha256": "a1f7296d089610860869ad1e55474a3ffe86b561d774754ebf1289d1abb860c9"
+    },
+    {
+      "bytes": 3474,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000167.npz",
+      "sha256": "8e01d81d13a8116cbc896834ef13d99c0755f111d14b1337f0ff0433a3087d7d"
+    },
+    {
+      "bytes": 3470,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000217.npz",
+      "sha256": "b9e5060ae755a9d18a1fb657094a9682d422b301dfce1126bc65e5bff8892482"
+    },
+    {
+      "bytes": 3460,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000250.npz",
+      "sha256": "0e9e46b5bad96d7cb29ebf8c40755ae2dfe598636da1e2ce769fec088a925124"
+    },
+    {
+      "bytes": 3467,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000300.npz",
+      "sha256": "881bfc89b5034d38c687044c0d9ec0894307a3d41f884311a1ad74c5011f4738"
+    },
+    {
+      "bytes": 3462,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000350.npz",
+      "sha256": "c4844b9a764dce9f6791a3eb1e554002a521d04e50b3a8ab88077dfae3a3ca33"
+    },
+    {
+      "bytes": 3468,
+      "path": "/ml2/hypergan/forge-atlas-named-gpu-diagnostics-20261003-native-v3/atlas_conditional/attempts/residual_student_conditional_policy_selected_cloud_v1/conditional-policy-behavior/observations/step_000400.npz",
+      "sha256": "0bab0c09ae7c6249dfd073b74c71a14b39f897ba84afeb864ca31131cca01c9e"
+    }
+  ],
+  "optimizer_updates": 0,
+  "original_gate": "PASS",
+  "qualification_input": false,
+  "renderer_sha256": "b063612758f92142a268b640b39e1a40de69b2f4d8f2b23534b55f1771ec284f",
+  "schema": "particlegan_atlas_named_gpu_diagnostics_v1_media",
+  "source_digest": "87fcd4e28bdcd9f347379b7db1fbcf0af3edcc0fbd5e97e4a98d9a49f8987a87",
+  "task": "residual_student_conditional_policy_selected_cloud_v1"
+}

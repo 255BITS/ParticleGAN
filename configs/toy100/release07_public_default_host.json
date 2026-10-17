@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "release_commit": "180d18f400335fb295611d624b48a4e072ae3bae",
+  "scope": "Released GAN v3 components on a declared named-stream native host. Caller-owned networks/initialization; not a repetition of an original historical fixture.",
+  "host_definition": {
+    "generator": {
+      "kind": "simple_mlp",
+      "z_dim": 4,
+      "hidden_dim": 128,
+      "n_hidden": 3,
+      "out_dim": 2
+    },
+    "discriminator": {
+      "kind": "simple_mlp",
+      "in_dim": 2,
+      "hidden_dim": 128,
+      "n_hidden": 3,
+      "fourier": 2
+    },
+    "resources": {
+      "z_dim": 4,
+      "num_particles": 20000,
+      "batch_size": 256
+    },
+    "initialization": {
+      "generator": {
+        "method": "xavier_uniform_zero_bias_v1",
+        "gain": 1.0
+      },
+      "discriminator": {
+        "method": "xavier_uniform_zero_bias_v1",
+        "gain": 1.0
+      },
+      "prior": {
+        "method": "sample_distributions_v1",
+        "parameters": {
+          "z": {
+            "kind": "normal",
+            "mean": 0.0,
+            "std": 1.0
+          }
+        }
+      }
+    }
+  }
+}

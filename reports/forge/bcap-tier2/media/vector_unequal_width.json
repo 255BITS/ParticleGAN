@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "e8e0ba7dd0c3c928e8976afa5217c284515bb89d19b910c033ba77d7f0ed0d0a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "634dc3ecf87bc26859eab456ea27a63bbbffd0f11c2a2beda20290a0a34da4f7",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/fb7d837090014713ab378cb9b7c422b9/observed-samples.pt": "39195c5b3f4834239fbfc4b5116e4dfc448c70cc611d44721278cdd143db5e0e"
+  },
+  "task_id": "vector_unequal_width"
+}

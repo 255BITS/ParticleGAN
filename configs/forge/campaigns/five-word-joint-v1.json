@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "five-word-joint-v1",
+  "budget_seconds": 1800,
+  "candidate_budget_seconds": 1800,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Opt-in three 300-second mechanism prerequisites plus one 900-second five-word quality task. Stops on prerequisite failure; no blanket matrix filling."
+}

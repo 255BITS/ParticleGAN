@@ -1,0 +1,71 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 11095,
+      "path": "/ml2/hypergan/pg-word-retained-comparison-20261004/README.md",
+      "sha256": "68b3f73ac7c327e912f45f41fc019a3ce1833c59cf27b124fe9201d3299b0769"
+    },
+    "compare_retained.py": {
+      "bytes": 20677,
+      "path": "/ml2/hypergan/pg-word-retained-comparison-20261004/compare_retained.py",
+      "sha256": "0266c399b3034e87e8c6ab515dff374fedfd6d56fed510ce29b312c18aa9424e"
+    },
+    "comparison-final.json": {
+      "bytes": 250771,
+      "path": "/ml2/hypergan/pg-word-retained-comparison-20261004/comparison-final.json",
+      "sha256": "f533b7bf9daa97c02f3fd2ec41acaa4c67cce7ed9e05021e8acfc9d77c8e68d9"
+    },
+    "inputs.json": {
+      "bytes": 1236,
+      "path": "/ml2/hypergan/pg-word-retained-comparison-20261004/inputs.json",
+      "sha256": "42dc978d05b41bffd513ba69e7e2981d0aa4d4ea1ed98a78e79b19211e111570"
+    },
+    "verification.json": {
+      "bytes": 1431,
+      "path": "/ml2/hypergan/pg-word-retained-comparison-20261004/verification.json",
+      "sha256": "5d4c253cf7d054f895aa453676ef06153c82a6d13d46d289879688dc54b1f969"
+    }
+  },
+  "input_count": 99,
+  "matched_clocks": 24,
+  "named_initialization_equal": true,
+  "proposed_repair": {
+    "change": "Add paired six-token NLL for all five original known words through the existing stochastic public G(E(word)) path, at fixed reconstruction_weight=1.",
+    "contrast_conditions": "Preserve current half-base nominal rates, all public owners, same-code generation callback, N11/raw prior, architecture, initialization, seed, DV12/noise laws, full horizon and original gates.",
+    "existing_loss_retained": "Current joint RpGAN and original regularizers remain; add exactly this explicit auxiliary term. Recipe.reconstruction_weight=1 is currently unused by the word caller.",
+    "falsifier": "No persistent improvement of those original finite inverse measurements, or continued original full-gate failure, rejects the proposal as a complete repair; coverage and inverse must not be pooled across checkpoints.",
+    "implementation_requirements": "Use numerically stable log probabilities from the same generator logits and prove forward/gradient parity; taking log of underflowed saved softmax values or a hard-clamped probability is insufficient. Declare a separate auxiliary training-noise stream; no silent reuse/shift of original fake or evaluation streams.",
+    "kind": "explicit_new_objective_and_family_variant",
+    "learning_rate_conclusion": "This one failed global LR reduction changes trajectories but does not establish that LR is irrelevant.",
+    "limits": "No proof of exact joint-law equality, stochastic capacity, DV12 causality, or default/speed benefit. Compressed code neighborhoods, the finite discriminator, moving support and asymmetric noisy joint distributions remain competing explanations.",
+    "new_candidate_declared": false,
+    "old_or_current_variant_credit": false,
+    "path": "Use the actual owned differentiable fast G/E and public UpdatePolicy.generate inside the generator update, never an inference snapshot. DV12 remains in the effective query; sigma=0 matches the inverse measurement. The auxiliary NLL bypasses D and supplies a direct word -> E -> public generator -> correct-token gradient.",
+    "prediction": "The original five paired minimum-token probabilities and all-five exact inverse criterion should improve persistently; all generation/quality/mass gates still must independently pass.",
+    "source_reason": "Identical old/new generator_objective has no direct inverse loss. Paired inverse remains incomplete at all 24 clocks despite occasional individual recovery.",
+    "status": "PROPOSAL_ONLY_NOT_IMPLEMENTED_OR_EXECUTED"
+  },
+  "recipe_differences": {
+    "lr": {
+      "new": 0.00265625,
+      "old": 0.0053125
+    }
+  },
+  "schema": "pg_word_retained_comparison_handoff_v1",
+  "scope": {
+    "checkpoint_deserializations": 0,
+    "cuda_initialized": false,
+    "default_credit": false,
+    "forwards": 0,
+    "model_constructions": 0,
+    "model_restores": 0,
+    "numerical_grades_changed": false,
+    "official_scorer_calls": 0,
+    "old_invalid_recertified": false,
+    "optimizer_updates": 0,
+    "qualification_input": false,
+    "samples_drawn": 0,
+    "speed_credit": false
+  },
+  "status": "NO_WRITE"
+}

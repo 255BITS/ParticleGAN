@@ -1,0 +1,76 @@
+{
+  "candidate_id": "context:report/cifar-particle-ddgan",
+  "candidate_revision": "781acdeb22b24979d8573b086a066187b47c5cad89ab09cf0cad5e08f3d4e273",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Direct particle AE-GAN versus DDGAN at 10k updates",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/cifar-particle-ddgan",
+      "narrative_sources": [
+        {
+          "git_blob": "0957c9035b024c2561ca22cf8d6024a68d0c57c5",
+          "path": "reports/cifar-particle-ddgan/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "30bef64bab8d5edc39f7c397de9a8bcdc63c2964791c3852987daadc6409fd17",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ddgan/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "a6d45b6aaffea9f17fcbe78cdfc8195a1e50253d",
+          "path": "reports/cifar-particle-ddgan/PROTOCOL.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4c79d0c30f469fec5f015982012f0b13ec846deaedbac14a220ea905180fa650",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ddgan/PROTOCOL.md"
+        },
+        {
+          "git_blob": "d6266dd612643ec94a200af48c93ca687069367a",
+          "path": "reports/cifar-particle-ddgan/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e57ddcc5b5012f7e935605fa058a7c4e5e86ab01e0a8aeeba5afdd8d8fa5ee8b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ddgan/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Direct particle AE-GAN versus DDGAN at 10k updates\n\nThe direct models win this CIFAR-10 comparison. Direct GAN reaches FID50k\n**19.48**, and direct particle AE-GAN **20.05**. Adding the particle encoder improves\nDDGAN from **49.47 to 43.23**, but neither DDGAN variant catches the direct\nmodels within this budget. All four same-count FID5k curves improve through\n10k, without the previous direct scout's late regression.\n\nSee the [leaderboard and ablations](LEADERBOARD.md), [exact protocol](PROTOCOL.md),\n[machine-readable results](leaderboard.json), and [learning curves](learning_curves.png).\n\n| Model | Final FID50k \u2193 | Training minutes | What it provides |\n|---|---:|---:|---|\n| Direct GAN | **19.483** | 7.91 | Prior-based generation |\n| Direct particle AE-GAN | **20.054** | 8.77 | Generation plus an encoder and reconstruction |\n| DDGAN + particle AE | **43.233** | 10.65 | Four-step generation plus an encoder |\n| DDGAN | **49.475** | 9.10 | Four-step generation |\n\nThese are final EMA checkpoints after **10,000 training updates**, evaluated on\n**50,000 generated images**. All use the same unconditional CIFAR task, fixed-sigma\nMoG prior (1,024 particles, 64 dimensions), update budget, and learning rates.\nThe encoder objective is the only intended change within each architecture pair;\ninitialization and all training random streams match. Cross-architecture comparisons\nhave differen"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-cifar-particle-ddgan-20d9cb478e20",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "d6266dd612643ec94a200af48c93ca687069367a",
+    "path": "reports/cifar-particle-ddgan/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "e57ddcc5b5012f7e935605fa058a7c4e5e86ab01e0a8aeeba5afdd8d8fa5ee8b",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ddgan/README.md"
+  },
+  "task_results": []
+}

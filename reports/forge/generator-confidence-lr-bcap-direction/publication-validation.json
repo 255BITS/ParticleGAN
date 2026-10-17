@@ -1,0 +1,56 @@
+{
+  "base_commit": "dacf96749a4effc0648a7a0945266d508804110e",
+  "source_branch_head": "367bec48e85dce967e325d8e81cd214c350e4fcc",
+  "kind": "evidence_only_publication",
+  "new_training_attempts": 0,
+  "new_sampling_draws": 0,
+  "imported_attempts": 15,
+  "original_status_counts": {
+    "PASS": 10,
+    "FAIL": 5
+  },
+  "original_existing_publication_pins_unchanged": true,
+  "scientific_sources_tasks_gates_and_selections_unchanged": true,
+  "scoped_tests": "41 passed",
+  "test_command": "python -m pytest -q tests/test_forge_test_performance.py",
+  "deterministic_report_regeneration": "python -m experiments.forge.test_performance --check passed",
+  "archive_checks_reused": {
+    "successor_file_pins": 251,
+    "tensor_and_checkpoint_files": 73,
+    "gifs": 29,
+    "all_match": true
+  },
+  "packets": [
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-confidence-lr-tier1-6.json",
+      "sha256": "394fb58001a45f50cc517bd3af69da11cf8e5fb62be49e8e112dbb1a7fddca26",
+      "original_branch_bytes_identical": true
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-confidence-lr-own-retention-2.json",
+      "sha256": "33b3b907a0d9c61b7afa14dfd6ee4809fa504e992064d32df1e33221e08947a6",
+      "original_branch_bytes_identical": true
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-gaussian-finite-cap-1.json",
+      "sha256": "a6604b7eb2b0bc9eb8e2942780eed32e5e5c85753d2ac0a08f6375da545317ee",
+      "original_branch_bytes_identical": true
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-critic-orientation-2.json",
+      "sha256": "7f46d7e86984d41fda73de7d6c4bac393cd0efcb65e8193a4cc5ac59d5520ce3",
+      "original_branch_bytes_identical": true
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-signed-confidence-2.json",
+      "sha256": "f0daa9efbc7e89291e881f9ed046cf12a5741a6d2a9407247ce64ea5c587e20e",
+      "original_branch_bytes_identical": true
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-positive-evidence-2.json",
+      "sha256": "bdf2cee710a11685ea194a4fc2e3f8783e354250b8a7cb2f6684af12e020fbff",
+      "original_branch_bytes_identical": true
+    }
+  ],
+  "analytical_note_adds_training_attempts": 0
+}

@@ -1,0 +1,40 @@
+{
+  "complete": false,
+  "error": {
+    "type": "AssertionError",
+    "message": "trace512_fixed_data_Gaussian_stream_ordinary_BF16"
+  },
+  "checks": {
+    "bound_report_complete_PASS": true,
+    "external_no_timeout_exit0_within300": true,
+    "external_manifest_launcher_current_exact": true,
+    "source_card_prep_current_exact": true,
+    "recorded_native_current_unchanged": true,
+    "source_bound_native_law": true,
+    "saved_artifact_hashes_match": true,
+    "normalization_before_training_bound": true,
+    "fixed_FIT_TEST_all48_six_sources": true,
+    "FIT_std_no_degenerate_or_epsilon_floor": true,
+    "actual_scale_raw_std_exact_and_F64_std_consistent": true,
+    "previous_floor_all16_and_reported_exact": true,
+    "initial_raw_normalized_power_match": true,
+    "pure_tensor_fixed_context_and_zero_target_digests": true,
+    "mandatory_four_physical_conditions": true,
+    "finite_physical_f27db3ca1da7": true,
+    "finite_physical_ecaff313459e": true,
+    "finite_physical_9730e7526dfb": true,
+    "finite_physical_b729d58b0036": true,
+    "independent_F64_all_scores_exact": true,
+    "trace512_fixed_data_Gaussian_stream_ordinary_BF16": false
+  },
+  "counts": {
+    "host_or_model_forwards": 0,
+    "native_updates": 0,
+    "native_policy_calls": 0,
+    "CUDA_initialized": false
+  },
+  "seconds": 1.0078596959356219,
+  "limit_seconds": 60,
+  "review_source_sha256": "445a8cc1f824a72981daecde323d69532b77998db299bbf675b8879f16a1cc6b",
+  "command": "CUDA_VISIBLE_DEVICES='' timeout --signal=INT --kill-after=5 60 /ml2/ntc-image-studio/.venv-anima/bin/python /tmp/review_caption_normalization_v1.py"
+}

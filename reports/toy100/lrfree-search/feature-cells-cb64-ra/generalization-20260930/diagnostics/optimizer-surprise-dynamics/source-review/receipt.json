@@ -1,0 +1,810 @@
+{
+  "attribution": {
+    "auxiliary_group_or_network_cause": "exact fire ratios pending",
+    "mnist_KA2_warmup_switch": false,
+    "mnist_population_transport_before_first_fire": false,
+    "toy_internal_KA2_phase": "source-consistent hypothesis; exact trace pending"
+  },
+  "detector_ast_sha256": "594ccea46194f8d255c16df2e9dd70d0167d5cafe09209b80f9868593e30e245",
+  "earlier_moving_mechanisms": [
+    {
+      "step": 500,
+      "surprise": {
+        "anchor_event": null,
+        "anchor_events": 0,
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.0044520379893667,
+        "log": [],
+        "streak": 0
+      }
+    },
+    {
+      "step": 1000,
+      "surprise": {
+        "anchor_event": null,
+        "anchor_events": 0,
+        "armed": true,
+        "fires": 1,
+        "last_ratio": 0.6940024440934202,
+        "log": [
+          [
+            514,
+            14.343
+          ]
+        ],
+        "streak": 0
+      }
+    },
+    {
+      "step": 1500,
+      "surprise": {
+        "anchor_event": null,
+        "anchor_events": 1,
+        "armed": true,
+        "fires": 2,
+        "last_ratio": 0.8461739696210576,
+        "log": [
+          [
+            514,
+            14.343
+          ],
+          [
+            1021,
+            4.472
+          ]
+        ],
+        "streak": 0
+      }
+    }
+  ],
+  "earlier_moving_verdict": {
+    "passed_periods": 2,
+    "periods": [
+      {
+        "hq": 0.9464,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "grid100"
+      },
+      {
+        "hq": 0.9416,
+        "modes": 100,
+        "period_end": 1000,
+        "target_deg": 30,
+        "task": "grid100"
+      },
+      {
+        "hq": 0.962,
+        "modes": 100,
+        "period_end": 1500,
+        "target_deg": 60,
+        "task": "grid100"
+      }
+    ],
+    "pre_turn_hq": 0.9464,
+    "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+    "status": "PASS",
+    "task": "grid100",
+    "turns": 2
+  },
+  "observations": {
+    "mnist": [
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00425
+          ]
+        ],
+        "output_sigma": 0.029000001028180122,
+        "population_moves": 0,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 0,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 0,
+          "last_ratio": null,
+          "log": [],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            4.6948610480228596e-05
+          ]
+        ],
+        "output_sigma": 0.051545627415180206,
+        "population_moves": 0,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 100,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 0,
+          "last_ratio": 1.010235097508746,
+          "log": [],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0003369766325319558
+          ]
+        ],
+        "output_sigma": 0.06329827010631561,
+        "population_moves": 0,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 250,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": false,
+          "fires": 1,
+          "last_ratio": 0.39395874370467987,
+          "log": [
+            [
+              202,
+              3.984
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0001768191531392451
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 0,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 500,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 0.7346637747341005,
+          "log": [
+            [
+              202,
+              3.984
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00010365158087793909
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 0,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 750,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 0.9078793257006079,
+          "log": [
+            [
+              202,
+              3.984
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00028512939714711496
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 0,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 1000,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 0.9552760339190515,
+          "log": [
+            [
+              202,
+              3.984
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0005991789898524287
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 0,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 1250,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 1.0878925011888871,
+          "log": [
+            [
+              202,
+              3.984
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 97,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0014950508647289173
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 95,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 1500,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 1.1537216148053546,
+          "log": [
+            [
+              202,
+              3.984
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 146,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0016483540912431583
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 271,
+        "scales": {
+          "d0": 0.5,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 1750,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 0.9718059676686337,
+          "log": [
+            [
+              202,
+              3.984
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 237,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0016364265183681668
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 504,
+        "scales": {
+          "d0": 0.5,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 2000,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 1.1001282097513212,
+          "log": [
+            [
+              202,
+              3.984
+            ]
+          ],
+          "streak": 0
+        }
+      }
+    ],
+    "toy": [
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00425
+          ]
+        ],
+        "output_sigma": 0.029000001028180122,
+        "population_moves": 0,
+        "scales": {
+          "d0": 1.0,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 0,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 0,
+          "last_ratio": null,
+          "log": [],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00053125,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.0031868848725320614
+          ]
+        ],
+        "output_sigma": 0.029356524348258972,
+        "population_moves": 544,
+        "scales": {
+          "d0": 0.125,
+          "g0": 0.5,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 100,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 0,
+          "last_ratio": 0.5017199795799727,
+          "log": [],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00053125,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.003187488520080762
+          ]
+        ],
+        "output_sigma": 0.02901698648929596,
+        "population_moves": 1513,
+        "scales": {
+          "d0": 0.125,
+          "g0": 0.5,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 250,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 0,
+          "last_ratio": 0.9175204227158057,
+          "log": [],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.000265625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.0031874987620779663
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 3094,
+        "scales": {
+          "d0": 0.0625,
+          "g0": 0.25,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 500,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 0,
+          "last_ratio": 0.9605379962555791,
+          "log": [],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.0001328125,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.003187499706303243
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 4569,
+        "scales": {
+          "d0": 0.015625,
+          "g0": 0.125,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 750,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 0,
+          "last_ratio": 1.3589328395373084,
+          "log": [],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.003187450297956512
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 6109,
+        "scales": {
+          "d0": 0.125,
+          "g0": 1.0,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 1000,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 0.5874815771092737,
+          "log": [
+            [
+              820,
+              2.096
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00053125,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.0031874993249752883
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 7690,
+        "scales": {
+          "d0": 0.125,
+          "g0": 0.5,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 1250,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 0.912371521563074,
+          "log": [
+            [
+              820,
+              2.096
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 0,
+        "lr": [
+          [
+            0.00053125,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.0031874998288572826
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 9169,
+        "scales": {
+          "d0": 0.0625,
+          "g0": 0.5,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 1500,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 1.2722449407550773,
+          "log": [
+            [
+              820,
+              2.096
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 20,
+        "lr": [
+          [
+            0.00053125,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.0031874995316888456
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 10611,
+        "scales": {
+          "d0": 0.03125,
+          "g0": 0.5,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 1750,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 2.132887493366084,
+          "log": [
+            [
+              820,
+              2.096
+            ]
+          ],
+          "streak": 0
+        }
+      },
+      {
+        "isolation_moves": 20,
+        "lr": [
+          [
+            0.000265625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.0031874998027369176
+          ]
+        ],
+        "output_sigma": 0.028999999165534973,
+        "population_moves": 12224,
+        "scales": {
+          "d0": 0.03125,
+          "g0": 0.25,
+          "g1": 1.0,
+          "g2": 1.0
+        },
+        "step": 2000,
+        "surprise": {
+          "anchor_event": null,
+          "anchor_events": 0,
+          "armed": true,
+          "fires": 1,
+          "last_ratio": 1.4170529317986258,
+          "log": [
+            [
+              820,
+              2.096
+            ]
+          ],
+          "streak": 0
+        }
+      }
+    ]
+  },
+  "proposed_scope": "known internal optimizer/loss epoch plus explicit role scope; not qualified",
+  "protected_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA12-auto.json": "9ae50f9fd0e903b7516ac04a72318ba79a35e52076393317511ec29ae19744b4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/CLOSED.json": "facec0ba1f6f07decf2a1bf8abab1b8d2434810b95ae50f60831851cd3ee453e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/SOURCE-FREEZE.json": "678f1230a5305fecc6ba6f7054d6b18095d57d1970dc3233e3de2150cae7e0ca",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/config.json": "bd00fb5d90c029c4aab3eff4bf2735c042aa3846c3e4e8b99ccc1a238281c28b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/metrics.jsonl": "b0f003b1cf4db6b4c0750c9b293f67ef6cb22ca5838b5d9a89fdb87d012a08a5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/result.json": "ab9e6944490c2a9a27e04face9a64c55434ca41181c78c05d7f91f2204015501",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/config.json": "8718e043966bd788bcbf14011c9983792b6253d2e8b48519d172dae196feea0a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/metrics.jsonl": "3cfd6754dfc67b73c21520c7cc87921a1194afb6d5eccc8a1c481fd336d2c740",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/result.json": "d663758b7012163a8a6f410f02e9bda9727997d80d3107bd9d03a56ae91f3e80",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/moving-quarter/SOURCE-FREEZE.json": "aaf4ff3d8e431d7f6b9dddcd06a0dd02a74d4fdd75f4530ea908ad2345598887",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/moving-quarter/grid100-r1-on.log": "12b373be687613a66de2f800d2705743943f162ace3ee16c57fa3620ca7fe00b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/moving-quarter/grid100-r1-on/frames.npz.verdict.json": "6841b4735eec6a9c7c894561d0a78774123224b2ad90a1467bfc7648906edfed",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA11-R1/particlegan/continuous.py": "1eea3baa8c76d3d9e4db86868cc2765cfee23e4dcdda73b24d7d5e7669ad32a8",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/continuous.py": "3b21b688a536f5060ba92f6db3dd6da92a8acf25f48895031dd31181998c4bfa",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/feature_policy.py": "334f1a110bde970d8591b22f94b0538cafa4de914c61075a5e49bc5bc7f66c6e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/policy.py": "025464e7e5a57245f76209951a946370ce4f2b5c387d0b582d0964973ff97f6a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/recipes.py": "8f7b841fdd4f24822c0d1a39ab4a36e7eb6f641c0ad156ee3676dace03831f1c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/training.py": "6a92fd42eb05729e36454f42bb76466103315efb9a64a358f825071cffafb8db",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/test_r1_composition.py": "94cef0c98d27de1cc43d0256a56538f8c3d4a9499b4c9fc06dbdf0668373cd07"
+  },
+  "same_detector_ast_in_earlier_moving_package": true,
+  "scope": "read-only source/JSON; no PT/model/forward/update/draw/scoring/CUDA",
+  "status": "PASS_SOURCE_AND_CLOSED_JSON_REVIEW"
+}

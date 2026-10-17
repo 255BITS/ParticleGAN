@@ -1,0 +1,24 @@
+{
+  "status": "PASS_WITH_FROZEN_COSMETIC_WHITESPACE_RETAINED",
+  "utc": "2026-09-30T18:38:33.220896+00:00",
+  "initial_scoped_diff_check_exit": 2,
+  "exceptions": [
+    {
+      "path": "integration/review/ra11-toy-artifact-audit/accepted-attempt1/REPORT.md",
+      "source_sha256": "41fc2691eb8eaf74c7d2714368d0baa6e1effd350a25ee28585fd2fba5afb763",
+      "archive_bytes_exact": true
+    },
+    {
+      "path": "integration/review/training-regression/post-ra10-quality/linear-output-production/pkg-OUTPUT-MEAN/particlegan/output_moments.py",
+      "source_sha256": "d6a897174b133863ce386b35e8f793349d30b6f59d79220ffd061f90092054ba",
+      "archive_bytes_exact": true
+    },
+    {
+      "path": "pkg-CB64-RA11/particlegan/output_moments.py",
+      "source_sha256": "d6a897174b133863ce386b35e8f793349d30b6f59d79220ffd061f90092054ba",
+      "archive_bytes_exact": true
+    }
+  ],
+  "reason": "Keep immutable qualified source/report bytes. Exceptions are report trailing spaces and one extra EOF blank line in the identical public/private output_moments module.",
+  "numeric_or_source_law_changes": 0
+}

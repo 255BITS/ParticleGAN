@@ -1,0 +1,19 @@
+{
+  "status": "ERROR",
+  "group": "native",
+  "started": 1790809962.435492,
+  "results": [],
+  "integrity": {
+    "status": "VALID",
+    "files": 103,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de"
+  },
+  "current": {
+    "kind": "screen",
+    "task": "grid100"
+  },
+  "error": "RuntimeError('run_screen.py grid100 failed; read /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/screen-grid100.log')",
+  "completed": 1790809967.548185
+}

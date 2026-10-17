@@ -1,0 +1,12 @@
+{
+  "status": "EXITED",
+  "returncode": 0,
+  "utc": "2026-09-30T15:16:50.593837+00:00",
+  "pid": 1175187,
+  "startticks": 168322480,
+  "elapsed_seconds": 5.938514698063955,
+  "launch_sha256": "e6296f093be2de4348f8c463825e7b77f8e0790ee7249add7c1e05a1bfbd6e51",
+  "closed_log_sha256": "51a196695c1d0551e13d443e5e2ed765791407a210611807a795c3bc8e2b1f0d",
+  "result_sha256": "d1956fcf9e9c516b3c0f85e45ebdab2308bc41a72cc65c0fe9613e28bb5e42fc",
+  "numerical_invocations_started": 1
+}

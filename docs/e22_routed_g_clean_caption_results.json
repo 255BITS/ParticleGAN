@@ -1,0 +1,321 @@
+{
+  "schema": "e22_routed_G_only_clean_actual_caption_result_v1",
+  "scientific_status": "FAIL",
+  "complete": true,
+  "portable_synthetic_result_transfer": "The512-update portable particle comparison passed; this fixed actual-caption gate failed. No ordinary or full-Supra win.",
+  "metric": "fixed common native paired-error RpGAN game; lower is better",
+  "fixed_gate": {
+    "endpoints": [
+      5120,
+      6400
+    ],
+    "all_four_common_critics": [
+      "ordinary_native_game@800",
+      "ordinary_native_game@6400",
+      "particle_native_game@800",
+      "particle_native_game@6400"
+    ],
+    "candidate_improvement_over_both_controls_strictly_greater_than": 0.0001,
+    "zero_code_minus_live_strictly_greater_than": 1e-06,
+    "all_critics_at_both_endpoints_mandatory": true
+  },
+  "candidate": {
+    "5120": {
+      "ordinary_native_game@800": 2.5743212699890137,
+      "ordinary_native_game@6400": 2.561326742172241,
+      "particle_native_game@800": 2.860213279724121,
+      "particle_native_game@6400": 2.5528481006622314
+    },
+    "6400": {
+      "ordinary_native_game@800": 2.5892908573150635,
+      "ordinary_native_game@6400": 2.5701003074645996,
+      "particle_native_game@800": 2.8697714805603027,
+      "particle_native_game@6400": 2.562737464904785
+    }
+  },
+  "ordinary": {
+    "5120": {
+      "ordinary_native_game@800": 2.5437171459198,
+      "ordinary_native_game@6400": 2.546147108078003,
+      "particle_native_game@800": 2.8368749618530273,
+      "particle_native_game@6400": 2.539008140563965
+    },
+    "6400": {
+      "ordinary_native_game@800": 2.574873924255371,
+      "ordinary_native_game@6400": 2.561357021331787,
+      "particle_native_game@800": 2.86407732963562,
+      "particle_native_game@6400": 2.5539653301239014
+    }
+  },
+  "neutral": {
+    "5120": {
+      "ordinary_native_game@800": 2.5745632648468018,
+      "ordinary_native_game@6400": 2.5605547428131104,
+      "particle_native_game@800": 2.8587546348571777,
+      "particle_native_game@6400": 2.5530593395233154
+    },
+    "6400": {
+      "ordinary_native_game@800": 2.5958540439605713,
+      "ordinary_native_game@6400": 2.5723865032196045,
+      "particle_native_game@800": 2.87988018989563,
+      "particle_native_game@6400": 2.5632357597351074
+    }
+  },
+  "differences": {
+    "5120": {
+      "ordinary_native_game@800": {
+        "candidate_minus_ordinary": 0.030604124069213867,
+        "candidate_minus_neutral": -0.00024199485778808594,
+        "zero_code_minus_live": 0.08127188682556152
+      },
+      "ordinary_native_game@6400": {
+        "candidate_minus_ordinary": 0.015179634094238281,
+        "candidate_minus_neutral": 0.0007719993591308594,
+        "zero_code_minus_live": 0.021878957748413086
+      },
+      "particle_native_game@800": {
+        "candidate_minus_ordinary": 0.02333831787109375,
+        "candidate_minus_neutral": 0.0014586448669433594,
+        "zero_code_minus_live": 0.033757925033569336
+      },
+      "particle_native_game@6400": {
+        "candidate_minus_ordinary": 0.013839960098266602,
+        "candidate_minus_neutral": -0.00021123886108398438,
+        "zero_code_minus_live": 0.020108699798583984
+      }
+    },
+    "6400": {
+      "ordinary_native_game@800": {
+        "candidate_minus_ordinary": 0.014416933059692383,
+        "candidate_minus_neutral": -0.0065631866455078125,
+        "zero_code_minus_live": 0.09908580780029297
+      },
+      "ordinary_native_game@6400": {
+        "candidate_minus_ordinary": 0.0087432861328125,
+        "candidate_minus_neutral": -0.002286195755004883,
+        "zero_code_minus_live": 0.02985692024230957
+      },
+      "particle_native_game@800": {
+        "candidate_minus_ordinary": 0.005694150924682617,
+        "candidate_minus_neutral": -0.010108709335327148,
+        "zero_code_minus_live": 0.05351376533508301
+      },
+      "particle_native_game@6400": {
+        "candidate_minus_ordinary": 0.008772134780883789,
+        "candidate_minus_neutral": -0.0004982948303222656,
+        "zero_code_minus_live": 0.0263214111328125
+      }
+    }
+  },
+  "gate": {
+    "pass": false,
+    "endpoints": {
+      "5120": {
+        "pass": false,
+        "beats_both_all_four": false,
+        "beneficial_particles_all_four": true,
+        "native_bank_live": true,
+        "native_query_live": true,
+        "calibrated": true
+      },
+      "6400": {
+        "pass": false,
+        "beats_both_all_four": false,
+        "beneficial_particles_all_four": true,
+        "native_bank_live": true,
+        "native_query_live": true,
+        "calibrated": true
+      }
+    }
+  },
+  "law": {
+    "initialization": "Fresh public initialize_; Up=0,H=0,b=0,C sampled before policy/EMA. Every fresh neutral owner/stream must match the retained initial state before same-owner public step0 restore adopts saved globalRNG. No restored-owner reinitialization.",
+    "changed_factor": "Only differentiable G uses clean routing; first discard noisy G under no_grad. Critic DV12, Gaussian law, native optimizers/controllers/feature-only zero-harm row guards unchanged.",
+    "shared_bank": [
+      128,
+      4
+    ],
+    "routed_sites": 6,
+    "rank": 16,
+    "effective_context_batch": 4,
+    "CFG_physical_batch": 8,
+    "teacher": "Same depth-one retained pretrained host with live target-caption teacher, CFG3 and source/time-only judge condition.",
+    "output_error_objective_guard_or_selection": false,
+    "data_pools": {
+      "FIT": 240,
+      "GUARD": 64,
+      "TEST": 240
+    },
+    "common_score_panels": {
+      "private_CPU_seed": 72,
+      "draws": 4,
+      "sigma": 0.125,
+      "paired_real_fake_noise": true,
+      "critic_coordinates": "Physical residual divided by the same frozen scale; critic mean over tokens precedes paired RpGAN softplus, then draws and contexts are averaged."
+    }
+  },
+  "checks": {
+    "all6400_trace_steps_present": true,
+    "fresh_full_neutral_native_state_and_caller_RNG_exact": true,
+    "both_controls6400_public_restore_TEST240_exact": true,
+    "old6ec_to_current664_native800802": {
+      "from": 800,
+      "to": 802,
+      "actual_replay_updates": 2,
+      "full_native_state_exact": true,
+      "caller_RNG_exact": true,
+      "native_losses_batches_exact": true,
+      "old_recipe_digest": "0213db89f1c838b152fe98f25314233c8313a456e49ee9ecf0433f3f26377297",
+      "current_recipe_digest": "0213db89f1c838b152fe98f25314233c8313a456e49ee9ecf0433f3f26377297",
+      "recipe_metadata_modified": false,
+      "scope": "Exercised800802 transition, not every old/new native state"
+    },
+    "candidate800802_rows_and_full_state_exact": true,
+    "final_learned_models_gradients_optimizer_moments_finite": true,
+    "executed_sources_hashes_unchanged": true
+  },
+  "particle_usage": {
+    "zero_code_beneficial_all4_both_endpoints": true,
+    "gradient_live_updates": {
+      "bank": 6399,
+      "query": 6399
+    },
+    "accepted_structural_move_rows": 0,
+    "first3_gradient_observations": [
+      {
+        "step": 1,
+        "C_gradient_norm": 0.0,
+        "bank_gradient_norm": 0.0,
+        "query_gradient_norm": 0.0
+      },
+      {
+        "step": 2,
+        "C_gradient_norm": 3.874032380918202e-05,
+        "bank_gradient_norm": 6.290885966016546e-06,
+        "query_gradient_norm": 0.00010372216204832573
+      },
+      {
+        "step": 3,
+        "C_gradient_norm": 0.00010119081838031604,
+        "bank_gradient_norm": 1.3561161255584734e-05,
+        "query_gradient_norm": 0.0002691830020557472
+      }
+    ]
+  },
+  "descriptive_final_C_norms": {
+    "ctx_proj": 1.0345706939697266,
+    "blocks.0.self_attn.qkv": 1.1076366901397705,
+    "blocks.0.self_attn.proj": 1.0754873752593994,
+    "blocks.0.cross_attn.q": 1.1066652536392212,
+    "blocks.0.cross_attn.kv": 1.0348037481307983,
+    "blocks.0.cross_attn.proj": 1.0610462427139282
+  },
+  "descriptive_final_gain_closure": {
+    "definition": "Unweighted retained projection coordinates satisfying1+tanh(Cz)<0.05 across all240TEST contexts and bothCFG halves; every retained token slot is counted without mask weighting. No output quality or causal-importance inference.",
+    "sites": {
+      "ctx_proj": {
+        "below005": 3360,
+        "coordinates": 983040,
+        "fraction_below005": 0.00341796875
+      },
+      "blocks.0.self_attn.qkv": {
+        "below005": 0,
+        "coordinates": 1966080,
+        "fraction_below005": 0.0
+      },
+      "blocks.0.self_attn.proj": {
+        "below005": 0,
+        "coordinates": 1966080,
+        "fraction_below005": 0.0
+      },
+      "blocks.0.cross_attn.q": {
+        "below005": 71466,
+        "coordinates": 1966080,
+        "fraction_below005": 0.0363494873046875
+      },
+      "blocks.0.cross_attn.kv": {
+        "below005": 228360,
+        "coordinates": 983040,
+        "fraction_below005": 0.2322998046875
+      },
+      "blocks.0.cross_attn.proj": {
+        "below005": 0,
+        "coordinates": 1966080,
+        "fraction_below005": 0.0
+      }
+    }
+  },
+  "cost": {
+    "new_quality_updates": 6400,
+    "replay_updates_not_quality_credit": 4,
+    "discarded_noisy_G_quality_forwards": 6400,
+    "discarded_noisy_G_replay_forwards": 2,
+    "producer_completion_clock_seconds": 912.8989506158978,
+    "parent_observed_launch_to_exit_seconds": 914.7278541650157,
+    "parent_clock_source": "Retained parent launcher receipt; SHA-bound with launcher-start metadata and stdout log in bindings.",
+    "fixed_allowance_seconds": 1750,
+    "within_fixed_allowance": true,
+    "separate_software_prerequisites": {
+      "pytest_cases_passed": 12,
+      "pytest_seconds": 1.21,
+      "CPU_input_preflight_seconds": 10.596199014922604,
+      "CPU_caption_host_forwards": 0,
+      "CPU_caption_native_updates": 0
+    }
+  },
+  "control_status": "provisional inherited observations independently state-checked, public-restored and rescored; old failed review remains unchanged",
+  "scope_and_limits": [
+    "Portable synthetic G-clean gain does not establish a general DV12 defect; the saved6400 mean-gradient probe was inconclusive.",
+    "Ordinary host branch uses BF16 autocast; both particle arms use FP32 branch math.",
+    "Depth-one caption result does not establish full-Supra victory.",
+    "This local external-fixture adapter is separate from the portable public-API synthetic test.",
+    "Original failed CPU review and all executed source/card/raw artifacts remain unchanged.",
+    "No accepted structural moves; no structural-control improvement claim.",
+    "This exact fixed candidate is not promoted; no automatic tuning or continuation."
+  ],
+  "bindings": {
+    "executed_plan_sha256": "2f22e98aeadc3c9b4b28628056bde108581e380135c9ee3e73f1a44d72ab0a46",
+    "prepared_plan_sha256": "8514c31c049eb5aea2621bd22d029f0e0fc4e91128fcfc7b426bba00a7df3a65",
+    "report_sha256": "88f956cafdf3be30a9f944c344e129852c5f9b745343b4c3d8b81c5829e22e59",
+    "completion_sha256": "2354d6a35f668974e5da9fb57c84a94938f0b4693e13e39128651a585230998c",
+    "trace_sha256": "5370b2439f575f289f1a5e9ded6517a7cb8071022e25441f3ee686a79cb5a58a",
+    "checkpoint_sha256": "cca168230d4e8dfc114ed9f8c317123cff2a185a64f0dbdcef7f142dabef20f8",
+    "endpoint_files": {
+      "5120": {
+        "sha256": "18ec9ad8da6b8aa01756291c6024545bd5d7a7b71267169692665583921e9454"
+      },
+      "6400": {
+        "sha256": "2c95fd9ff271c79692ccc8d161d5aeddd10c370beb918592e4b952db368adac7"
+      }
+    },
+    "runtime_source_sha256": {
+      "examples/e22_routed_g_clean_caption.py": "750d738e6065e199d1ab0dcf1a40771bb91a8c54d440b75598067cc502bfc46e",
+      "examples/run_e22_routed_g_clean_caption.py": "cea24a1e90992e1a76368a26ea164a834781835034f6f2dcfbe7e0c0c05c9149",
+      "tests/test_e22_routed_g_clean_caption.py": "f7cadc052a38a55a41422475eb9185ad7ac563f9293e4e628098042c3bcadcb1"
+    },
+    "native_commit": "664ce464e3add5c65d06c8b324c6f9892e644eec",
+    "native_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+    "external_input_sha256": {
+      "data": "fc18f90e1422a4a03287e368071cd71cab0d38c4e6cba1337c001b2d82598afc",
+      "panels": "acf9e4849f3950a08b2e435d5dd7e2f5521786332fac6c64e74a01ff6453eb87",
+      "parent_report": "e6ec5b485ddb3ad9f1851bef12cd29dc76595513e2383c1204fa9afe9f81b223",
+      "fixture_factory": "84f3e2a91a010f6585b59ff0068473ce13c74bd58038b68d30481628b230aedb",
+      "neutral_initial_state": "82ed38722f19a209eba27e17db171df6f6451a9a395464b3d86dae8ea23498bf"
+    },
+    "host_source_sha256": {
+      "adapter": "1a9814217dfaca2b37552b01b0441a6820330212031ccd931a02f712fdaac7dd",
+      "backend": "640851f4570d0f9eacccac70022f06668ddf92dcf8629e978a76443db60acdc4",
+      "game": "6a10cc15ea44651953fd46fefa3f097a832f594cca98084f17a67f3c4a94f35d",
+      "pairing": "4a0787d187de02e2619e8956c1b2b6a74fe268db00ee16a89601e5d6b229a78c"
+    },
+    "common_critic_state_sha256": {
+      "ordinary_native_game@800": "2c4dfcff0cbfa526f7309579d3527e1fc6f3863a325519390f7ce36a8cae1e95",
+      "ordinary_native_game@6400": "3404866298d8fcb45a135e746b8ee22c3b0529b3c7c33b8dd334c5d5ff8227b4",
+      "particle_native_game@800": "4add57101809b7fc4a103c60ecd0d4a641ff358ad3b73e4f0ba3fb49211f9ce4",
+      "particle_native_game@6400": "84de932c042664808b963d215b93d724e209fd33510b992659e1c33301223f5e"
+    },
+    "parent_launcher_sha256": "64b0ec4fea7e8fdbe71539962de870f9a03a903199cdaef7558571c9d3f6c149",
+    "parent_launcher_start_sha256": "470da11d5b797f78b382fe33f93c0a606efafeb304da3f17e83bb65adb3e7177",
+    "parent_launcher_log_sha256": "3ca5792498026adce1366de4338d187b37ed22fccb2a15917336f7c469dc7b13"
+  }
+}

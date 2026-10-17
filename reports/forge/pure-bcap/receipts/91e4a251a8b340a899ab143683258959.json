@@ -1,0 +1,204 @@
+{
+  "attempt_id": "91e4a251a8b340a899ab143683258959",
+  "attempt_status": "completed",
+  "campaign_id": "pure-bcap-joint-loss-repair-v2",
+  "candidate_id": "bcap-pure--af8db09ebc6580e3d94cd29b89b2624cb6c8107947e4b44aa714d23a64ea096c",
+  "candidate_revision": "a8781de309e67a11f37fa266e6a01f5f8e41817a5046fa361dd772a2f2c654e1",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "pure-bcap-joint-loss-repair-v2",
+    "request": "7a63343ca959d1535f93e7aa",
+    "revision": "a8781de309e67a11f37fa266e6a01f5f8e41817a5046fa361dd772a2f2c654e1"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "dfb1ca08ce8dd88cb0947bb3d00a19e8c729817cb9569e701d74e8c9cf65102b",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/91e4a251a8b340a899ab143683258959/evidence.json",
+        "sha256": "f928433e5f39c6ce93af3c7304df3544014d11f456c623236202ec5286e05796"
+      },
+      "request": {
+        "path": "reports/forge/attempts/91e4a251a8b340a899ab143683258959/request.json",
+        "sha256": "58d9e39b907dee064bf9d0e6ac570993458954d39674ac29201159eba7e28e6f"
+      },
+      "result": {
+        "path": "reports/forge/attempts/91e4a251a8b340a899ab143683258959/result.json",
+        "sha256": "0852b20fcf5ebd14ab65aae5ed93b1b15eec98dc3869a3c7109a7d1778608f1a"
+      }
+    },
+    "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+    "source_origin_commit": "44cc66d78495cb913e0ea064840e2de37c8a4ae5"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "7a63343ca959d1535f93e7aa",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "e5cf491faa49aa31667c6f628220cc0ba18eb5a72110c6a780d950319a30035a",
+      "cost": {
+        "adapter_loop_seconds": 3.6968772059772164,
+        "adapter_seconds": 3.980563341989182,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 400,
+        "device": "0",
+        "execution_seconds": 10.184433958027512,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 400,
+          "generator": 400,
+          "prior": 400
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 3.5102861803025007,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.4679188806330785
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007034348207525909
+            },
+            "training_updates": {
+              "calls": 400,
+              "seconds": 3.0353329514618963
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 6.371609417023137,
+        "wall_seconds": 10.184433958027512
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": -6.087912784516812,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 6.937912784516811
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.1104106366634369,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.2604106366634369
+          },
+          "hq": {
+            "margin": -0.287744140625,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 0.562255859375
+          },
+          "mass_tv": {
+            "margin": 0.042822265624999994,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.107177734375
+          },
+          "modes": {
+            "margin": -5,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 16,
+            "value": 11
+          },
+          "sample_count": {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          }
+        },
+        "passed": false,
+        "shortfall": 0.4418370863970588,
+        "status": "FAIL"
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.5870893057435751,
+        "component_core_min_eigen_ratio": 0.11383611708879471,
+        "component_covariance_error": 6.937912784516811,
+        "component_min_eigen_ratio": 0.2604106366634369,
+        "covariance_error": 0.035073693841695786,
+        "hq": 0.562255859375,
+        "mass_tv": 0.107177734375,
+        "max_component_spill": 0.980988621711731,
+        "mean_error": 0.09535851329565048,
+        "min_hq_mass_ratio": 0.01953125,
+        "min_mass_ratio": 0.66796875,
+        "modes": 11,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 400,
+        "sw1_normalized": 0.07776501473540229,
+        "target_scale": 3.0029242038726807
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    }
+  ]
+}

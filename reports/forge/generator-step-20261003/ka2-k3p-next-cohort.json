@@ -1,0 +1,3765 @@
+{
+  "accounting": {
+    "costs_reset": false,
+    "new_allowance_or_reservation_created": false,
+    "retained_prior_debit_seconds": 113.99425188452005,
+    "science_seconds": 0.0,
+    "unchanged_ceiling_seconds": 15360.0
+  },
+  "binding_boundaries": [
+    "Old API study restricts family names to Atlas/E22 and its capacity schema/rate admission does not authorize these candidates.",
+    "Old host_recipe_options/resolved_recipe omit the existing KA2/K3P fixture total_steps adaptation. A new test-only resolver must mirror it exactly before recipe verification.",
+    "A named family serving cohort must bind no DV12, fast-only selection, scheduled fixed noise and original native noisy primary explicitly; no old Atlas/E22 sampling-law credit.",
+    "New committed reproducer and complete source/dependency/config snapshot, exact three-field overrides and actual full resolved recipes, fresh owners/streams/optimizers and zero clocks must be attested.",
+    "Fresh full-count samples, primary gates, targets/views, observer/RNG purity and bitwise public replay are required. Retained fast parameter inputs are construction inputs only.",
+    "No learned log-sigma or old controller/average/clock may be transplanted into these fixed-noise family owners."
+  ],
+  "denominator": {
+    "cases_each": 8,
+    "cells": 16,
+    "families": 2,
+    "numeric_capacity_UNRESOLVED": 16,
+    "qualified_whole_configs": 0,
+    "scientific_NOT_EXECUTED": 16
+  },
+  "inspection_runtime": {
+    "cpu_threads": 1,
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126"
+  },
+  "native_construction_proposal": {
+    "clock0": "Place 200 rows per target mode as 100 antipodal pairs: u_j=(j+1/2)/100; r_j=.03*sqrt(-2*log(1-u_j)); theta_j=2*pi*j/golden_ratio; row=center +/- r_j*(cos(theta_j),sin(theta_j)). Uniform index sampling retains equal mass; no fitting, sampler change or jitter.",
+    "host": "Public learned ParticlePrior 20000x2 and original learned linear 2x2 G; identity G is permitted.",
+    "limits": "Finite row quadrature is not an exact continuous Gaussian law; stochastic repeated-index clouds and every per-mode/accuracy gate remain unmeasured. A failed candidate construction is not incapacity.",
+    "purpose": "Finite within-mode width and radial quantiles address the old near-center-input mismatch when fixed output_sigma(0)=0 and no DV12 perturbation is present.",
+    "reachability": "A legitimate zero-clock snapshot need not pass unchanged at later noise clocks. Do not fabricate completed clock7000 for a terminal witness or infer convergence from the population argument.",
+    "status": "ANALYTIC_PROPOSAL_NOT_CONSTRUCTED_NOT_MEASURED",
+    "terminal_argument": "At full warmup, a population isotropic residual N(0,(.03^2-.029^2)I) plus the fixed .029 output noise has target sigma .03. This is an analytic convolution statement, not a finite-row public sampler certificate or evidence training contracts rows to that state.",
+    "terminal_population_residual_std": 0.0076811457478686024
+  },
+  "operations": {
+    "capacity_exports": 0,
+    "cuda_contexts": 0,
+    "metadata_recipe_constructions": 16,
+    "model_constructions": 0,
+    "model_restores": 0,
+    "new_draws": 0,
+    "optimizer_constructions": 0,
+    "optimizer_updates": 0,
+    "scorer_calls": 0
+  },
+  "ordinary_knob_motivation": [
+    {
+      "card": "/ml2/hypergan/ParticleGAN-generator-step-20261003/reports/forge/configuration-search/ka2-tier1-refresh-v1.json",
+      "card_sha256": "aed283f58c4ee2199c107ecafaa8b885bea46c281cb386e44e3c391aa058cd35",
+      "configuration_id": "093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "family": "ka2",
+      "grade": "4/5",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualified": false,
+      "relevance": "Prospective knob motivation only; different tasks, prior, source/runtime. No capacity or training credit.",
+      "runtime": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    },
+    {
+      "card": "/ml2/hypergan/ParticleGAN-generator-step-20261003/reports/forge/configuration-search/k3p-tier1-refresh-v1.json",
+      "card_sha256": "40d6b2114936dd8e01035e1663bbbc22827d2d6fb8a400d4494b93cc93d5f298",
+      "configuration_id": "0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "family": "k3p",
+      "grade": "4/5",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "qualified": false,
+      "relevance": "Prospective knob motivation only; different tasks, prior, source/runtime. No capacity or training credit.",
+      "runtime": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185"
+    }
+  ],
+  "other_construction_proposals": {
+    "images": "Original retained fitted fast raw-host parameters and balanced row assignments may be explicit construction inputs only. Reinitialize owners and replay no-DV12 output-noise-off public serving, without fitting or source/gate changes; passing is unmeasured.",
+    "vectors": "Original LeakyReLU(.2) MLP can exactly realize coordinate identity using +/- coordinate pairs and phi(x)-phi(-x)=(1+.2)*x. Place deterministic mass-allocated within-component quadrature rows through that public map; no continuous latent kernel is needed to propose a finite sample-law witness. Exact finite CDF/mass/covariance gates must be measured afresh."
+  },
+  "prerequisite_stopping": "Each family separately needs eight fresh candidate-bound SUPPORTED capacity cells. Intensity2 then two-broad are the original two smoke prerequisites; first nonpass stops that family, keeping all unknown cells in the denominator.",
+  "protected_scientific_base": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+  "recommendation": "PROPOSED",
+  "records": [
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 32,
+      "capacity_artifacts": [],
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "case_sha256": "9efb58c9b062adfb243c4db80246307cd8a0d1f00ad04400f1d46cb635dd4335",
+      "eval_samples": 1024,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "ka2",
+      "fixture_options": {
+        "batch_size": 32,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "sigma_rel": 0,
+        "total_steps": 600,
+        "z_dim": 8
+      },
+      "goal": "Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass.",
+      "host": "original raw transpose12 convolutional G/D; 32 learned rows",
+      "host_d_mult_overridden": false,
+      "law": null,
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": {
+        "cohort": "New public-API variant; historical results are not imported",
+        "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+        "prior": "32 uniformly sampled trainable particle rows",
+        "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+        "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+      },
+      "original_default_steps": 600,
+      "original_host_options": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "sigma_rel": 0,
+        "z_dim": 8
+      },
+      "original_thresholds": {
+        "distribution_tv_max": 0.1,
+        "finite_template_tv_max": 0.1,
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.25,
+        "minimum_stable_checks": 5,
+        "modes": 2,
+        "observations": 24,
+        "quality_rmse": 0.06
+      },
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 32,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 32,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 600,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 8
+      },
+      "resolved_recipe_sha256": "0e178d916b292db4598f9b499dc54c463299323fc59fab22b1d2e0d4fc90aadc",
+      "scheduled_noise": {
+        "input_noise_ends_at": 60.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 120.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 600,
+        "network_cosine_start": 360.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 600,
+        "prior_cosine_start": 360.0,
+        "prior_floor": 0.05
+      },
+      "stage": 1,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 128,
+      "capacity_artifacts": [],
+      "case_id": "api-vector-two-broad",
+      "case_sha256": "ac12b8d01359d9d25ec3f5379eda07f1209e2b98e2d514bddef69787fd3b2e99",
+      "eval_samples": 4096,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "ka2",
+      "fixture_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "lr": 0.006375,
+        "num_particles": 256,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "goal": "Basic learnable multimodal distribution and within-mode spread.",
+      "host": "original LeakyReLU(.2) MLP G/D; learned row table",
+      "host_d_mult_overridden": true,
+      "law": {
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ]
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "original_default_steps": 1200,
+      "original_host_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "lr": 0.001,
+        "num_particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "original_thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "resolved_recipe_sha256": "6a1feaf1db06273c577d35dea6630d7235e6d77d84cf2011df12b98b95a14fc8",
+      "scheduled_noise": {
+        "input_noise_ends_at": 120.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 240.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1200,
+        "network_cosine_start": 720.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 1200,
+        "prior_cosine_start": 720.0,
+        "prior_floor": 0.05
+      },
+      "stage": 1,
+      "target_host_gates_changed": false,
+      "vector_construction": {
+        "component_rows": [
+          128,
+          128
+        ],
+        "covariance": "Preserve the entire declared 2x2 covariance, including signed off-diagonal terms; an isotropic or diagonal substitute changes the anisotropic question.",
+        "finite_population_mass_tv": 0.0,
+        "limits": "Finite projected CDF, mass, spread/covariance, spill and sustained gates remain unmeasured. Exact design covariance is not equality to a Gaussian density or proof training reaches the construction.",
+        "particles": 256,
+        "public_map": "Exact first-two-coordinate identity using +/- pairs in every existing LeakyReLU(.2) hidden layer; remaining coordinates may be zero. Preserve original widths/depths and all D architecture.",
+        "sampler": "Install only prospective fast G/prior parameters in fresh public owners, uniform row indexing, fast serving, output_noise=False, no added jitter or DV12. Evaluate n4096/seed34002 only after root declaration/source freeze.",
+        "source_template": "benchmarks/toy_audit/vector_quality.py:finite_cloud_witness nonrandom population body only; do not call its final private sampler or borrow its verdict.",
+        "spread": "Componentwise stratified normal quantiles; deterministic bit-reversed second-coordinate strata; arithmetic centering/whitening of the finite design, then full target Cholesky pushforward and mode center. No gradient fitting.",
+        "status": "ANALYTIC_PROPOSAL_NOT_CONSTRUCTED_NOT_MEASURED",
+        "z_dim": 4
+      }
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 2048,
+      "capacity_artifacts": [],
+      "case_id": "api-grid100",
+      "case_sha256": "b81ff8d0ec6f03108e1c565145335be8c60d96079e122faba5bc22216760b17f",
+      "eval_samples": 20000,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "ka2",
+      "fixture_options": {
+        "batch_size": 2048,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 20000,
+        "prior_lr_mult": 1.0,
+        "total_steps": 7000,
+        "z_dim": 2
+      },
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host": "native nn.Linear(2,2) + Fourier MLP D; 20k learned rows",
+      "host_d_mult_overridden": false,
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "grid100",
+        "sigma": 0.03
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "original_default_steps": 7000,
+      "original_host_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "original_thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "primary_output_noise": true,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "resolved_recipe_sha256": "e538403f9a557c69378329b7e3c3945a017bc62dad0874a2237ba1896426d9f9",
+      "scheduled_noise": {
+        "input_noise_ends_at": 700.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 1400.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1600,
+        "network_cosine_start": 960.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 7000,
+        "prior_cosine_start": 4200.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 2048,
+      "capacity_artifacts": [],
+      "case_id": "api-rotated100",
+      "case_sha256": "d50f659bd45e720962d4c4d6aa507bf3ffa87b16c5077dd0f20a31c172c3fbf1",
+      "eval_samples": 20000,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "ka2",
+      "fixture_options": {
+        "batch_size": 2048,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 20000,
+        "prior_lr_mult": 1.0,
+        "total_steps": 7000,
+        "z_dim": 2
+      },
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host": "native nn.Linear(2,2) + Fourier MLP D; 20k learned rows",
+      "host_d_mult_overridden": false,
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "rotated100",
+        "sigma": 0.03
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "original_default_steps": 7000,
+      "original_host_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "original_thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "primary_output_noise": true,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "resolved_recipe_sha256": "e538403f9a557c69378329b7e3c3945a017bc62dad0874a2237ba1896426d9f9",
+      "scheduled_noise": {
+        "input_noise_ends_at": 700.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 1400.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1600,
+        "network_cosine_start": 960.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 7000,
+        "prior_cosine_start": 4200.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 2048,
+      "capacity_artifacts": [],
+      "case_id": "api-staggered100",
+      "case_sha256": "8b9f4458743d99a2babf3b2cc2ac087d35fd186b28a797410842b4c952e377dd",
+      "eval_samples": 20000,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "ka2",
+      "fixture_options": {
+        "batch_size": 2048,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 20000,
+        "prior_lr_mult": 1.0,
+        "total_steps": 7000,
+        "z_dim": 2
+      },
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host": "native nn.Linear(2,2) + Fourier MLP D; 20k learned rows",
+      "host_d_mult_overridden": false,
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "staggered100",
+        "sigma": 0.03
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "original_default_steps": 7000,
+      "original_host_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "original_thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "primary_output_noise": true,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "resolved_recipe_sha256": "e538403f9a557c69378329b7e3c3945a017bc62dad0874a2237ba1896426d9f9",
+      "scheduled_noise": {
+        "input_noise_ends_at": 700.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 1400.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1600,
+        "network_cosine_start": 960.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 7000,
+        "prior_cosine_start": 4200.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 128,
+      "capacity_artifacts": [],
+      "case_id": "api-vector-unequal-mass",
+      "case_sha256": "605322ea850c2a7bf60ac736d2abae05bbb1bcbb4c05178910f9c5e6a103c151",
+      "eval_samples": 4096,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "ka2",
+      "fixture_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "lr": 0.006375,
+        "num_particles": 256,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "goal": "Checks target occupancy including the rare 2% component, not uniformity.",
+      "host": "original LeakyReLU(.2) MLP G/D; learned row table",
+      "host_d_mult_overridden": true,
+      "law": {
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ]
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "original_default_steps": 1200,
+      "original_host_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "lr": 0.001,
+        "num_particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "original_thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "resolved_core_covariance_error",
+          "<=",
+          0.5
+        ],
+        [
+          "resolved_core_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "resolved_max_component_spill",
+          "<=",
+          0.05
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "resolved_recipe_sha256": "6a1feaf1db06273c577d35dea6630d7235e6d77d84cf2011df12b98b95a14fc8",
+      "scheduled_noise": {
+        "input_noise_ends_at": 120.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 240.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1200,
+        "network_cosine_start": 720.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 1200,
+        "prior_cosine_start": 720.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": {
+        "component_rows": [
+          141,
+          77,
+          33,
+          5
+        ],
+        "covariance": "Preserve the entire declared 2x2 covariance, including signed off-diagonal terms; an isotropic or diagonal substitute changes the anisotropic question.",
+        "finite_population_mass_tv": 0.0015624999999999858,
+        "limits": "Finite projected CDF, mass, spread/covariance, spill and sustained gates remain unmeasured. Exact design covariance is not equality to a Gaussian density or proof training reaches the construction.",
+        "particles": 256,
+        "public_map": "Exact first-two-coordinate identity using +/- pairs in every existing LeakyReLU(.2) hidden layer; remaining coordinates may be zero. Preserve original widths/depths and all D architecture.",
+        "sampler": "Install only prospective fast G/prior parameters in fresh public owners, uniform row indexing, fast serving, output_noise=False, no added jitter or DV12. Evaluate n4096/seed34002 only after root declaration/source freeze.",
+        "source_template": "benchmarks/toy_audit/vector_quality.py:finite_cloud_witness nonrandom population body only; do not call its final private sampler or borrow its verdict.",
+        "spread": "Componentwise stratified normal quantiles; deterministic bit-reversed second-coordinate strata; arithmetic centering/whitening of the finite design, then full target Cholesky pushforward and mode center. No gradient fitting.",
+        "status": "ANALYTIC_PROPOSAL_NOT_CONSTRUCTED_NOT_MEASURED",
+        "z_dim": 4
+      }
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 128,
+      "capacity_artifacts": [],
+      "case_id": "api-vector-anisotropic",
+      "case_sha256": "7c5d725c1a9ccc14c66b4501cd1e8f0e944af43bb040d7902f34207d46ad0fae",
+      "eval_samples": 4096,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "ka2",
+      "fixture_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "lr": 0.006375,
+        "num_particles": 256,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "goal": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+      "host": "original LeakyReLU(.2) MLP G/D; learned row table",
+      "host_d_mult_overridden": true,
+      "law": {
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ]
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "original_default_steps": 1200,
+      "original_host_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "lr": 0.001,
+        "num_particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "original_thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "resolved_core_covariance_error",
+          "<=",
+          0.5
+        ],
+        [
+          "resolved_core_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "resolved_max_component_spill",
+          "<=",
+          0.05
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "resolved_recipe_sha256": "6a1feaf1db06273c577d35dea6630d7235e6d77d84cf2011df12b98b95a14fc8",
+      "scheduled_noise": {
+        "input_noise_ends_at": 120.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 240.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1200,
+        "network_cosine_start": 720.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 1200,
+        "prior_cosine_start": 720.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": {
+        "component_rows": [
+          86,
+          85,
+          85
+        ],
+        "covariance": "Preserve the entire declared 2x2 covariance, including signed off-diagonal terms; an isotropic or diagonal substitute changes the anisotropic question.",
+        "finite_population_mass_tv": 0.0026041666666666574,
+        "limits": "Finite projected CDF, mass, spread/covariance, spill and sustained gates remain unmeasured. Exact design covariance is not equality to a Gaussian density or proof training reaches the construction.",
+        "particles": 256,
+        "public_map": "Exact first-two-coordinate identity using +/- pairs in every existing LeakyReLU(.2) hidden layer; remaining coordinates may be zero. Preserve original widths/depths and all D architecture.",
+        "sampler": "Install only prospective fast G/prior parameters in fresh public owners, uniform row indexing, fast serving, output_noise=False, no added jitter or DV12. Evaluate n4096/seed34002 only after root declaration/source freeze.",
+        "source_template": "benchmarks/toy_audit/vector_quality.py:finite_cloud_witness nonrandom population body only; do not call its final private sampler or borrow its verdict.",
+        "spread": "Componentwise stratified normal quantiles; deterministic bit-reversed second-coordinate strata; arithmetic centering/whitening of the finite design, then full target Cholesky pushforward and mode center. No gradient fitting.",
+        "status": "ANALYTIC_PROPOSAL_NOT_CONSTRUCTED_NOT_MEASURED",
+        "z_dim": 4
+      }
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 32,
+      "capacity_artifacts": [],
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "case_sha256": "a3463562a1bd793543c248aa695b365af5c7418a73c26efe60c3ead7d45d175a",
+      "eval_samples": 1024,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "ka2",
+      "fixture_options": {
+        "batch_size": 32,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "sigma_rel": 0,
+        "total_steps": 600,
+        "z_dim": 8
+      },
+      "goal": "Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass.",
+      "host": "original raw transpose12 convolutional G/D; 32 learned rows",
+      "host_d_mult_overridden": false,
+      "law": null,
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": {
+        "cohort": "New public-API variant; historical results are not imported",
+        "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+        "prior": "32 uniformly sampled trainable particle rows",
+        "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+        "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+      },
+      "original_default_steps": 600,
+      "original_host_options": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "sigma_rel": 0,
+        "z_dim": 8
+      },
+      "original_thresholds": {
+        "distribution_tv_max": 0.1,
+        "finite_template_tv_max": 0.1,
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.125,
+        "minimum_stable_checks": 5,
+        "modes": 4,
+        "observations": 24,
+        "quality_rmse": 0.1
+      },
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 32,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 32,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 600,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 8
+      },
+      "resolved_recipe_sha256": "0e178d916b292db4598f9b499dc54c463299323fc59fab22b1d2e0d4fc90aadc",
+      "scheduled_noise": {
+        "input_noise_ends_at": 60.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 120.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 600,
+        "network_cosine_start": 360.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 600,
+        "prior_cosine_start": 360.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 32,
+      "capacity_artifacts": [],
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "case_sha256": "9efb58c9b062adfb243c4db80246307cd8a0d1f00ad04400f1d46cb635dd4335",
+      "eval_samples": 1024,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "k3p",
+      "fixture_options": {
+        "batch_size": 32,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "sigma_rel": 0,
+        "total_steps": 600,
+        "z_dim": 8
+      },
+      "goal": "Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass.",
+      "host": "original raw transpose12 convolutional G/D; 32 learned rows",
+      "host_d_mult_overridden": false,
+      "law": null,
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": {
+        "cohort": "New public-API variant; historical results are not imported",
+        "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+        "prior": "32 uniformly sampled trainable particle rows",
+        "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+        "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+      },
+      "original_default_steps": 600,
+      "original_host_options": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "sigma_rel": 0,
+        "z_dim": 8
+      },
+      "original_thresholds": {
+        "distribution_tv_max": 0.1,
+        "finite_template_tv_max": 0.1,
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.25,
+        "minimum_stable_checks": 5,
+        "modes": 2,
+        "observations": 24,
+        "quality_rmse": 0.06
+      },
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 32,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 32,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 600,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 8
+      },
+      "resolved_recipe_sha256": "e83d30edee4f6fd6f953bd39846cc0e175687e15bac814860a9665ef51456256",
+      "scheduled_noise": {
+        "input_noise_ends_at": 60.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 120.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 600,
+        "network_cosine_start": 360.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 600,
+        "prior_cosine_start": 360.0,
+        "prior_floor": 0.05
+      },
+      "stage": 1,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 128,
+      "capacity_artifacts": [],
+      "case_id": "api-vector-two-broad",
+      "case_sha256": "ac12b8d01359d9d25ec3f5379eda07f1209e2b98e2d514bddef69787fd3b2e99",
+      "eval_samples": 4096,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "k3p",
+      "fixture_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "lr": 0.006375,
+        "num_particles": 256,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "goal": "Basic learnable multimodal distribution and within-mode spread.",
+      "host": "original LeakyReLU(.2) MLP G/D; learned row table",
+      "host_d_mult_overridden": true,
+      "law": {
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ]
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "original_default_steps": 1200,
+      "original_host_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "lr": 0.001,
+        "num_particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "original_thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "resolved_recipe_sha256": "bcc1fe80692be896820d1335f6d63ef3d2e9920eb9605a6f4f9a6336190a1066",
+      "scheduled_noise": {
+        "input_noise_ends_at": 120.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 240.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1200,
+        "network_cosine_start": 720.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 1200,
+        "prior_cosine_start": 720.0,
+        "prior_floor": 0.05
+      },
+      "stage": 1,
+      "target_host_gates_changed": false,
+      "vector_construction": {
+        "component_rows": [
+          128,
+          128
+        ],
+        "covariance": "Preserve the entire declared 2x2 covariance, including signed off-diagonal terms; an isotropic or diagonal substitute changes the anisotropic question.",
+        "finite_population_mass_tv": 0.0,
+        "limits": "Finite projected CDF, mass, spread/covariance, spill and sustained gates remain unmeasured. Exact design covariance is not equality to a Gaussian density or proof training reaches the construction.",
+        "particles": 256,
+        "public_map": "Exact first-two-coordinate identity using +/- pairs in every existing LeakyReLU(.2) hidden layer; remaining coordinates may be zero. Preserve original widths/depths and all D architecture.",
+        "sampler": "Install only prospective fast G/prior parameters in fresh public owners, uniform row indexing, fast serving, output_noise=False, no added jitter or DV12. Evaluate n4096/seed34002 only after root declaration/source freeze.",
+        "source_template": "benchmarks/toy_audit/vector_quality.py:finite_cloud_witness nonrandom population body only; do not call its final private sampler or borrow its verdict.",
+        "spread": "Componentwise stratified normal quantiles; deterministic bit-reversed second-coordinate strata; arithmetic centering/whitening of the finite design, then full target Cholesky pushforward and mode center. No gradient fitting.",
+        "status": "ANALYTIC_PROPOSAL_NOT_CONSTRUCTED_NOT_MEASURED",
+        "z_dim": 4
+      }
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 2048,
+      "capacity_artifacts": [],
+      "case_id": "api-grid100",
+      "case_sha256": "b81ff8d0ec6f03108e1c565145335be8c60d96079e122faba5bc22216760b17f",
+      "eval_samples": 20000,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "k3p",
+      "fixture_options": {
+        "batch_size": 2048,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 20000,
+        "prior_lr_mult": 1.0,
+        "total_steps": 7000,
+        "z_dim": 2
+      },
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host": "native nn.Linear(2,2) + Fourier MLP D; 20k learned rows",
+      "host_d_mult_overridden": false,
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "grid100",
+        "sigma": 0.03
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "original_default_steps": 7000,
+      "original_host_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "original_thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "primary_output_noise": true,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "resolved_recipe_sha256": "afe4ce5aecded446db7a79120b048a5e33ff94531c45e078acc0e44ca8925f30",
+      "scheduled_noise": {
+        "input_noise_ends_at": 700.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 1400.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1600,
+        "network_cosine_start": 960.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 7000,
+        "prior_cosine_start": 4200.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 2048,
+      "capacity_artifacts": [],
+      "case_id": "api-rotated100",
+      "case_sha256": "d50f659bd45e720962d4c4d6aa507bf3ffa87b16c5077dd0f20a31c172c3fbf1",
+      "eval_samples": 20000,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "k3p",
+      "fixture_options": {
+        "batch_size": 2048,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 20000,
+        "prior_lr_mult": 1.0,
+        "total_steps": 7000,
+        "z_dim": 2
+      },
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host": "native nn.Linear(2,2) + Fourier MLP D; 20k learned rows",
+      "host_d_mult_overridden": false,
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "rotated100",
+        "sigma": 0.03
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "original_default_steps": 7000,
+      "original_host_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "original_thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "primary_output_noise": true,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "resolved_recipe_sha256": "afe4ce5aecded446db7a79120b048a5e33ff94531c45e078acc0e44ca8925f30",
+      "scheduled_noise": {
+        "input_noise_ends_at": 700.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 1400.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1600,
+        "network_cosine_start": 960.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 7000,
+        "prior_cosine_start": 4200.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 2048,
+      "capacity_artifacts": [],
+      "case_id": "api-staggered100",
+      "case_sha256": "8b9f4458743d99a2babf3b2cc2ac087d35fd186b28a797410842b4c952e377dd",
+      "eval_samples": 20000,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "k3p",
+      "fixture_options": {
+        "batch_size": 2048,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 20000,
+        "prior_lr_mult": 1.0,
+        "total_steps": 7000,
+        "z_dim": 2
+      },
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host": "native nn.Linear(2,2) + Fourier MLP D; 20k learned rows",
+      "host_d_mult_overridden": false,
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "staggered100",
+        "sigma": 0.03
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "original_default_steps": 7000,
+      "original_host_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "original_thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "primary_output_noise": true,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "resolved_recipe_sha256": "afe4ce5aecded446db7a79120b048a5e33ff94531c45e078acc0e44ca8925f30",
+      "scheduled_noise": {
+        "input_noise_ends_at": 700.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 1400.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1600,
+        "network_cosine_start": 960.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 7000,
+        "prior_cosine_start": 4200.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 128,
+      "capacity_artifacts": [],
+      "case_id": "api-vector-unequal-mass",
+      "case_sha256": "605322ea850c2a7bf60ac736d2abae05bbb1bcbb4c05178910f9c5e6a103c151",
+      "eval_samples": 4096,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "k3p",
+      "fixture_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "lr": 0.006375,
+        "num_particles": 256,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "goal": "Checks target occupancy including the rare 2% component, not uniformity.",
+      "host": "original LeakyReLU(.2) MLP G/D; learned row table",
+      "host_d_mult_overridden": true,
+      "law": {
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ]
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "original_default_steps": 1200,
+      "original_host_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "lr": 0.001,
+        "num_particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "original_thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "resolved_core_covariance_error",
+          "<=",
+          0.5
+        ],
+        [
+          "resolved_core_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "resolved_max_component_spill",
+          "<=",
+          0.05
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "resolved_recipe_sha256": "bcc1fe80692be896820d1335f6d63ef3d2e9920eb9605a6f4f9a6336190a1066",
+      "scheduled_noise": {
+        "input_noise_ends_at": 120.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 240.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1200,
+        "network_cosine_start": 720.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 1200,
+        "prior_cosine_start": 720.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": {
+        "component_rows": [
+          141,
+          77,
+          33,
+          5
+        ],
+        "covariance": "Preserve the entire declared 2x2 covariance, including signed off-diagonal terms; an isotropic or diagonal substitute changes the anisotropic question.",
+        "finite_population_mass_tv": 0.0015624999999999858,
+        "limits": "Finite projected CDF, mass, spread/covariance, spill and sustained gates remain unmeasured. Exact design covariance is not equality to a Gaussian density or proof training reaches the construction.",
+        "particles": 256,
+        "public_map": "Exact first-two-coordinate identity using +/- pairs in every existing LeakyReLU(.2) hidden layer; remaining coordinates may be zero. Preserve original widths/depths and all D architecture.",
+        "sampler": "Install only prospective fast G/prior parameters in fresh public owners, uniform row indexing, fast serving, output_noise=False, no added jitter or DV12. Evaluate n4096/seed34002 only after root declaration/source freeze.",
+        "source_template": "benchmarks/toy_audit/vector_quality.py:finite_cloud_witness nonrandom population body only; do not call its final private sampler or borrow its verdict.",
+        "spread": "Componentwise stratified normal quantiles; deterministic bit-reversed second-coordinate strata; arithmetic centering/whitening of the finite design, then full target Cholesky pushforward and mode center. No gradient fitting.",
+        "status": "ANALYTIC_PROPOSAL_NOT_CONSTRUCTED_NOT_MEASURED",
+        "z_dim": 4
+      }
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 128,
+      "capacity_artifacts": [],
+      "case_id": "api-vector-anisotropic",
+      "case_sha256": "7c5d725c1a9ccc14c66b4501cd1e8f0e944af43bb040d7902f34207d46ad0fae",
+      "eval_samples": 4096,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "k3p",
+      "fixture_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "lr": 0.006375,
+        "num_particles": 256,
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "total_steps": 1200,
+        "z_dim": 4
+      },
+      "goal": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+      "host": "original LeakyReLU(.2) MLP G/D; learned row table",
+      "host_d_mult_overridden": true,
+      "law": {
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ]
+      },
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "original_default_steps": 1200,
+      "original_host_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "lr": 0.001,
+        "num_particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "original_thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "resolved_core_covariance_error",
+          "<=",
+          0.5
+        ],
+        [
+          "resolved_core_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "resolved_max_component_spill",
+          "<=",
+          0.05
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "resolved_recipe_sha256": "bcc1fe80692be896820d1335f6d63ef3d2e9920eb9605a6f4f9a6336190a1066",
+      "scheduled_noise": {
+        "input_noise_ends_at": 120.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 240.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 1200,
+        "network_cosine_start": 720.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 1200,
+        "prior_cosine_start": 720.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": {
+        "component_rows": [
+          86,
+          85,
+          85
+        ],
+        "covariance": "Preserve the entire declared 2x2 covariance, including signed off-diagonal terms; an isotropic or diagonal substitute changes the anisotropic question.",
+        "finite_population_mass_tv": 0.0026041666666666574,
+        "limits": "Finite projected CDF, mass, spread/covariance, spill and sustained gates remain unmeasured. Exact design covariance is not equality to a Gaussian density or proof training reaches the construction.",
+        "particles": 256,
+        "public_map": "Exact first-two-coordinate identity using +/- pairs in every existing LeakyReLU(.2) hidden layer; remaining coordinates may be zero. Preserve original widths/depths and all D architecture.",
+        "sampler": "Install only prospective fast G/prior parameters in fresh public owners, uniform row indexing, fast serving, output_noise=False, no added jitter or DV12. Evaluate n4096/seed34002 only after root declaration/source freeze.",
+        "source_template": "benchmarks/toy_audit/vector_quality.py:finite_cloud_witness nonrandom population body only; do not call its final private sampler or borrow its verdict.",
+        "spread": "Componentwise stratified normal quantiles; deterministic bit-reversed second-coordinate strata; arithmetic centering/whitening of the finite design, then full target Cholesky pushforward and mode center. No gradient fitting.",
+        "status": "ANALYTIC_PROPOSAL_NOT_CONSTRUCTED_NOT_MEASURED",
+        "z_dim": 4
+      }
+    },
+    {
+      "api_host_status": "SUPPORTED_BY_DEFINITION",
+      "batch_size": 32,
+      "capacity_artifacts": [],
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "case_sha256": "a3463562a1bd793543c248aa695b365af5c7418a73c26efe60c3ead7d45d175a",
+      "eval_samples": 1024,
+      "eval_seed": 34002,
+      "execution_status": "NOT_EXECUTED",
+      "family": "k3p",
+      "fixture_options": {
+        "batch_size": 32,
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "sigma_rel": 0,
+        "total_steps": 600,
+        "z_dim": 8
+      },
+      "goal": "Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass.",
+      "host": "original raw transpose12 convolutional G/D; 32 learned rows",
+      "host_d_mult_overridden": false,
+      "law": null,
+      "measured_observations": [],
+      "named_serving_law": "Uniform independent learned-particle index law through fast G; no DV12/feature-cell perturbation; fixed scheduled additive output noise included only on native primary observations.",
+      "numeric_capacity_status": "UNRESOLVED",
+      "ordinary_success_imported": false,
+      "original_case_sampling": {
+        "cohort": "New public-API variant; historical results are not imported",
+        "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+        "prior": "32 uniformly sampled trainable particle rows",
+        "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+        "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+      },
+      "original_default_steps": 600,
+      "original_host_options": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "sigma_rel": 0,
+        "z_dim": 8
+      },
+      "original_thresholds": {
+        "distribution_tv_max": 0.1,
+        "finite_template_tv_max": 0.1,
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.125,
+        "minimum_stable_checks": 5,
+        "modes": 4,
+        "observations": 24,
+        "quality_rmse": 0.1
+      },
+      "primary_output_noise": false,
+      "protocol_seed": 24002,
+      "requested_shared_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 32,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 32,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0,
+        "standardize": true,
+        "table_release_rule": "any",
+        "total_steps": 600,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 8
+      },
+      "resolved_recipe_sha256": "e83d30edee4f6fd6f953bd39846cc0e175687e15bac814860a9665ef51456256",
+      "scheduled_noise": {
+        "input_noise_ends_at": 60.0,
+        "input_sigma_at_0": 0.5,
+        "output_noise_full_at": 120.0,
+        "output_sigma_at_0": 0.0,
+        "output_sigma_at_full_horizon": 0.029
+      },
+      "scheduled_rates": {
+        "network_cosine_end": 600,
+        "network_cosine_start": 360.0,
+        "network_floor": 0.01,
+        "nominal_G_D_P": [
+          0.006375,
+          0.006375,
+          0.006375
+        ],
+        "prior_cosine_end": 600,
+        "prior_cosine_start": 360.0,
+        "prior_floor": 0.05
+      },
+      "stage": 2,
+      "target_host_gates_changed": false,
+      "vector_construction": null
+    }
+  ],
+  "reproducer": {
+    "path": "/ml2/hypergan/ka2-k3p-family-cohort-proposal-20261003/inspect_family_metadata.py",
+    "sha256": "0ef2da62d65bf41ca568e1160390a7ac1708b21cd872b81b736914996cd06655"
+  },
+  "schema": "particlegan_ka2_k3p_serving_cohort_proposal_v1",
+  "shared_overrides_by_family": {
+    "k3p": {
+      "d_lr_mult": 1.0,
+      "lr": 0.006375,
+      "prior_lr_mult": 1.0
+    },
+    "ka2": {
+      "d_lr_mult": 1.0,
+      "lr": 0.006375,
+      "prior_lr_mult": 1.0
+    }
+  },
+  "source_commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+  "source_files_sha256": {
+    "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+    "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+    "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+    "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+    "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+    "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+    "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+    "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+    "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+    "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+    "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+    "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+    "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+    "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+    "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+    "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+    "benchmarks/toy_audit/api_family_search.py": "719b1bd3439eab226d94fb3f8c57592083ffd8c58d455ee872fa3f35c97b060f",
+    "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+    "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+    "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+    "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+    "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+    "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1",
+    "experiments/forge/boundaries.py": "89a1782dd568295a981a03edf5868a140dd10f5d7fec75480a253dcc67590e66",
+    "experiments/forge/configuration_search.py": "0e7f4ee2b2aa34b80105a80465c12b238e9a2c7f223ca15d2ad93828d6eb5b56",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+    "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+    "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+    "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+    "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+    "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+    "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+    "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+    "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+    "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+    "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+    "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+    "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "status": "DECLARED_NOT_EXECUTED",
+  "study_gate": "First five consecutive passing post-update primary observations, then every later observation passing with at least five later checks. Original terminal-five/full-budget verdict remains separate."
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "smoke",
+  "budget_seconds": 900,
+  "candidate_budget_seconds": 900,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Bounded opt-in Tier 1 execution; provisional gates do not establish production readiness."
+}

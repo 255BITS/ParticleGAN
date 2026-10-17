@@ -1,0 +1,31 @@
+{
+  "status": "READY",
+  "frozen_at": "2026-09-29T22:55:44.520179+00:00",
+  "quality_runs_started": false,
+  "wrapper_api": "run_screen.py --task TASK",
+  "output": "screens/runs/TASK/result.json",
+  "static_integrity": {
+    "status": "VALID",
+    "file_count": 103,
+    "package_sha256": "13f5bbe4de824e6899cb28ee4dff8f35d74bbaa6243bfe9c18b8df44d173a1ce",
+    "config_sha256": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7",
+    "screen_sha256": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c"
+  },
+  "lane_source_sha256": {
+    "lane.py": "c6eaff7ea19fdbd68b505e859f5a5cde0d369efb04d040489378dd2e23a730c3",
+    "run_screen.py": "49187aadde454ad90a32153ae62e42f1c42a5173a1a9468659722fe284d3ce40",
+    "collect.py": "3500fc335698b16741dc674ad9a0f6c30aa5084637cccd1ba6108b4f69049341",
+    "freeze.py": "c386a0b771c5d0bbfccee1465407f91e50bcfbc6e86d241947695484ec9c87ff",
+    "PROTOCOL.md": "742f7a1ddbae1004ec71aa66df3c2821cf581fa9345cb49adeeb104a77c98cfa",
+    "candidate-options.json": "0ff74e93d37e8a38d2bdc6551f1c96a0a4271a40aeb9e4f5b9a4ed0f04a64664",
+    "source-freeze.json": "28e6fa47bf0f982324d31a1c8d8fe2533d9102d93be8e800cfc3d681a6975762",
+    "planned-commands.json": "d834e8d4caab28fa9af0f5625418511e99f9aa9eb9bd740ce502cc0f9472b2b1",
+    "commands.txt": "d74b9b25b722230d82df2ebee85e62f33d02cbd61668f3152fc71df2305b0643",
+    "preparation-checks.json": "42f0c5f90d0d8f95a4cf4867d79a7c3cf5dfbb6d8f59a90cfcfe8c1a47ba3bfb"
+  },
+  "commands_file": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/screens/planned-commands.json",
+  "root_owns_gpu_scheduling": true,
+  "original_screen_sha256": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c",
+  "candidate_package_sha256": "13f5bbe4de824e6899cb28ee4dff8f35d74bbaa6243bfe9c18b8df44d173a1ce",
+  "config_sha256": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7"
+}

@@ -1,0 +1,164 @@
+{
+  "execution_group": null,
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": -3,
+          "metric": "modes",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 8,
+          "value": 5
+        },
+        {
+          "margin": 0.08974609374999998,
+          "metric": "hq",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.9,
+          "value": 0.98974609375
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.1875,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "metrics": {
+      "cover": 0.625,
+      "effective_modes": 3.775261878967285,
+      "hq": 0.98974609375,
+      "modes": 5,
+      "n_modes": 8,
+      "step": 1200
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "FAIL"
+  },
+  "raw_task_grades": {
+    "mode_hold": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -3,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 8,
+            "value": 5
+          },
+          {
+            "margin": 0.08974609374999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.98974609375
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.1875,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 3.775261878967285,
+        "hq": 0.98974609375,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  },
+  "schema": "pg_common26_full_atlas_grade_projection_v1",
+  "task_grades": {
+    "mode_hold": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -3,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 8,
+            "value": 5
+          },
+          {
+            "margin": 0.08974609374999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.98974609375
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.1875,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 3.775261878967285,
+        "hq": 0.98974609375,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  }
+}

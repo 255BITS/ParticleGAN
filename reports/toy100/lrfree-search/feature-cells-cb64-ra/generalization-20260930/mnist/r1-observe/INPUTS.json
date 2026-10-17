@@ -1,0 +1,31 @@
+{
+  "prepared_utc": "2026-09-30T21:16:42.431922+00:00",
+  "read_only_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/CLOSED.json": "facec0ba1f6f07decf2a1bf8abab1b8d2434810b95ae50f60831851cd3ee453e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/CPU-CLOSED.json": "8c2c88bc4df5676ac1b87ad8383f204ffe63b5318646ae1ce48eab218e135348",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/SOURCE-FREEZE.json": "678f1230a5305fecc6ba6f7054d6b18095d57d1970dc3233e3de2150cae7e0ca",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/INPUTS.json": "23696807a2dc96aa4056a0044540873245676e5ae5e8544960d01e7bc75c213e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/common.py": "ca88dc6087369d5d7b6f9ff13109032f965a2c661989ef7adaa39a75ac0776f9",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay.py": "8c8d84b649a80b945e67a1c835ef62d0ef3ab2b91550de933eb1f3b948cef93c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/contracts.py": "9209d33c76ce9cb00b1f50aeb16644e319d633f73e850278a3b42ef83836bd68",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/adapter.py": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/ROOT-REVIEW.json": "e7ee9a8e7dbe6a34c3a6fd363ee4f6dbdc204f9a262c6c17d2edd7a75b0230b9",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/checkpoint-0750.pt": "80b35fe487984291decabb8426144192bf81438a0495ad9eb8141226c2fe3944",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/config.json": "8718e043966bd788bcbf14011c9983792b6253d2e8b48519d172dae196feea0a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/checkpoint-0100.pt": "621021557245ce78547bbdaa14102cb01982e3bbf02ff133ca815ad4ebc25d2d",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/config.json": "bd00fb5d90c029c4aab3eff4bf2735c042aa3846c3e4e8b99ccc1a238281c28b"
+  },
+  "windows": {
+    "toy": [
+      750,
+      835
+    ],
+    "mnist": [
+      100,
+      215
+    ]
+  },
+  "total_updates": 200,
+  "scoring_calls": 0,
+  "package_sha256": "52cf04c3b629f054f81c9f9efdc8648ce71124c70e5d12d245a5c4876c5611b7"
+}

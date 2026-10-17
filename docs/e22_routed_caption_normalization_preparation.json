@@ -1,0 +1,77 @@
+{
+  "task": "routed_caption_fit_std_v1",
+  "status": "prepared; first full-host/science run not executed",
+  "parent_commit": "cff399d93ddfdec4b02b69ba436af2e72cc4cdef",
+  "protocol_sha256": "33189f667744fc7fee4f9d20b3d030d6c217362f03f0fdbaeeff6d95c02fdaa1",
+  "source_identity": {
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_normalization.py": "971537929ec67a310ff067dd1307e78ab739f173a87e6c7e0a25c4aa731250f7",
+    "tests/test_e22_routed_caption_normalization.py": "fee930af67dda03261ddf0455741f04a72b4a1d24a14ebcd6f7ea374db708b28",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "documentation_sha256": "b4c2dea759c4710bcc59c846d37950f91bc8f703687d49b0d8c72f2028199b34",
+  "software": {
+    "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. timeout --signal=INT --kill-after=5 60 /ml2/ntc-image-studio/.venv-anima/bin/python -m pytest tests/test_e22_routed_caption_normalization.py -q --junitxml=runs/caption-normalization-preparation-v1/junit.xml > runs/caption-normalization-preparation-v1/software.log 2>&1",
+    "invocations": 1,
+    "exit_code": 0,
+    "cases": 16,
+    "failures": 0,
+    "errors": 0,
+    "pytest_reported_seconds": 1.79,
+    "junit_seconds": 1.784,
+    "external_cpu_cap_seconds": 60,
+    "software_log_birth_to_last_write_seconds": 3.014982771,
+    "filesystem_timing_scope": "Descriptive output-file birth→last-write span; not a monotonic external process receipt. No outer monotonic wall timer was retained.",
+    "native_updates": 4,
+    "native_update_law": "Exactly2 original plus2 fresh-owner replay, reduced geometry only. Other cases use zero-update software forwards.",
+    "full_host_forwards": 0,
+    "CUDA_initialized": false,
+    "quality_updates": 0,
+    "junit_sha256": "e81621580cb622a1fed62d81a5b358041c6a9dacaf5a50cc9659e9b5e00ea1bd",
+    "software_log_sha256": "486c66a24a156d168738ded2bbde54a3bb6685297e96ffdfdf8bb9356c977501"
+  },
+  "zero_update_identity_observation": {
+    "imported_package": {
+      "imported_package": "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/particlegan",
+      "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+    },
+    "precision_backend": {
+      "allow_tf32": false,
+      "float32_matmul_precision": "highest",
+      "allow_bf16_reduced_precision_reduction": true
+    },
+    "torch_version": "2.13.0+cu126",
+    "python_version": "3.12.13 (main, Mar 24 2026, 22:49:22) [Clang 22.1.1 ]",
+    "seconds": 0.9325399638619274,
+    "process_tool_wall_seconds": 1.117847813,
+    "host_forwards": 0,
+    "native_updates": 0,
+    "CUDA_initialized": false,
+    "scope": "Observed once after software via imported package_identity/backend helpers; source/card not changed. First root science launcher separately binds this observed import identity; reusable CLI has no permanent native allowlist."
+  },
+  "software_guards": [
+    "FIT-only correction1 std, scale+digest sole changes, inherited floor provenance",
+    "zero/near-zero/nonfinite coordinates rejected",
+    "F64 raw mean/centered power oracle",
+    "all3 critic+EMA owners share frozen scale",
+    "public initialized owner/tangent/fresh restore and2+2 exact replay",
+    "unchanged both-control accuracy/code/live positive and destructive gates",
+    "exclusive output preservation and NEW raw-media frame/status/finite-label controls"
+  ],
+  "unexecuted_full_prerequisites": "The root science command constructs the actual full generated host and performs the inherited zero-update public initial/tangent/restore proof on the new scale before any quality updates. CPU preparation does not establish full geometry output or timing.",
+  "science_command": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_normalization --run --out runs/caption-normalization-v1",
+  "science_cap_seconds": 300,
+  "media_command": "python -m examples.render_e22_routed_caption_normalization --run-directory runs/caption-normalization-v1",
+  "media_cpu_cap_seconds": 60,
+  "remaining_limitations": [
+    "PASS rejects normalization alone as sufficient to recreate the missing untied win in this generated task; it does not establish an actual-caption or full-Supra improvement.",
+    "A completed FAIL records exactly which relative accuracy/source/code/live bounds failed. A code/live-only failure is not an accuracy-gap reproduction, and no outcome uniquely proves normalization caused the actual transfer gap.",
+    "The new .1% relative gates are unchanged from PR240; actual caption also demanded an absolute .0005 ordinary gain, which this test does not assess.",
+    "Generated random frozen backbone, synthetic caption directions, novel held-out times and iid latents remain unchanged and differ from the actual pretrained caption fixture.",
+    "Raw paired endpoint RMSE and media use physical residuals with no normalization; normalization affects only learned-game inputs, row features and native penalty geometry.",
+    "All prior executable helpers/cards/tests/results and media remain immutable. Future API versions are runnable without a permanent native-version allowlist."
+  ],
+  "native_adaptive_law_scope": "Resolved recipe/native update law is source-bound; inherited trace does not record per-update adaptive output sigma or learning rates. No observed constant dynamics claim."
+}

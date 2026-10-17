@@ -1,0 +1,24 @@
+{
+  "task_id": "supra_conditional_two_site_hidden_neutral_v1",
+  "scope": "standalone_policy_aware_causal_initialization_diagnostic",
+  "parent_task": "supra_conditional_two_site_convergence_v1",
+  "parent_card_sha256": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+  "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+  "hypothesis": "The randomly initialized additive hidden modulation makes the initial usable basis harder to learn on the jointly reachable teacher. Neutralizing only H and b at fresh initialization improves convergence while retaining the particle gate.",
+  "prior_evidence": "The frozen three-arm parent reproduced the gap under all four common learned critics. Native G and table scales stayed at one; the router visited 0.5 and returned to one. Noise stayed at 0.125, and there were no surprise fires or accepted structural moves. The teacher shares the ordinary initial down basis; V3 adds an unrelated nonlinear hidden term to that basis. Actual Supra early captures show larger hidden modulation than linear hidden at a minority of sites; this is context, not proof of this cause.",
+  "changed_factor": "After the same public named sampled initialization, set ONLY both bridge H column slices and bridge bias b to zero before constructing the native policy. Keep sampled C nonzero and all H/b trainable.",
+  "retained": ["shared 128-by-4 R2 bank", "two sequential routing sites", "nonzero particle gates", "learned source/time-conditioned critic", "all native optimizers and rates", "per-site DV12", "full routed row controls", "zero learned-feature-harm guards", "output guards disabled"],
+  "data_contract": "Byte-identical teacher, fit/guard/test tensors, frozen host, scales and all input/paired streams from the parent. Only initial_particle H/b tensors and explicit intervention metadata differ; new data identity is recomputed before policy construction.",
+  "initialization_gate": "All initial FAST/EMA G tensors equal the parent except the declared H/b slices; C/down/up/router/bank/critic and all native initial owner states match. Fresh full outputs remain exactly neutral. Retained bank/router gradients must become nonzero after the zero-up start.",
+  "arms": ["particle_native_game_with_neutral_H_b"],
+  "execution": {"device": "cpu", "threads": 1, "steps": 6400, "checkpoint_cadence": 200, "software_recovery_witness": [800, 802], "timeout_seconds": 900, "stopping": "fixed external horizon or operational budget only; no checkpoint, horizon, seed or head selection"},
+  "evaluation": {
+    "common_judges": ["ordinary_native_game@800", "ordinary_native_game@6400", "particle_native_game@800", "particle_native_game@6400"],
+    "law": "Use every parent frozen judge and the exact same four private paired Gaussian panels at sigma 0.125, clean FAST outputs without DV12; preserve all fixed 200-step curves.",
+    "support_gate": "The fixed 6400 test game improves by more than 1e-4 under ALL FOUR original common judges, and cuts the parent particle-minus-ordinary gap by at least half under BOTH endpoint judges. This supports the initialization mechanism on this teacher family; no default or Supra quality claim follows.",
+    "particle_gate": "Final C is nonzero and trainable, bank/router acquired nonzero gradients, and the final zero-code ablation changes mean test game by more than 1e-6 under ALL FOUR parent judges. Report its direction without selecting judges. No particle-removal configuration is promoted.",
+    "output_error": "diagnostic only; never optimizer, row criterion, selection or stopping"
+  },
+  "storage": "Keep run.log, traces, checkpoints and per-context scores local; track sources, compact receipts and explanation.",
+  "qualification_credit": "none; no Forge/default/Supra qualification; no automatic follow-up arms"
+}

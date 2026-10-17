@@ -1,0 +1,483 @@
+{
+  "cases": [
+    {
+      "default_recipe": "bcap",
+      "default_steps": 20001,
+      "eval_samples": 1024,
+      "goal": "Can public joint BiGAN training acquire all five words and confidently reconstruct every paired input at one independently confirmed scheduled state? Complete all 20,001 updates.",
+      "id": "image-five-word-joint-smoke-confirmed-v1",
+      "legacy_ids": [
+        "source-family-15"
+      ],
+      "sampling": {
+        "evaluation": "generated_and_paired_reconstructed_prior_without_output_noise"
+      },
+      "scope": "task-only selected BCAP DualNorm verification; no ordinary family qualification",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          1024
+        ],
+        [
+          "quality_fraction",
+          ">=",
+          0.95
+        ],
+        [
+          "modes",
+          "==",
+          5
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "reconstruction_exact",
+          "==",
+          1
+        ],
+        [
+          "minimum_reconstruction_token_probability",
+          ">=",
+          0.9
+        ]
+      ]
+    },
+    {
+      "default_recipe": "bcap",
+      "default_steps": 4000,
+      "eval_samples": 1024,
+      "goal": "Continue this candidate's earliest confirmed five-word acquisition state for 4,000 updates. Every scheduled generation and inverse check, including the exact restored state, must pass.",
+      "id": "image-five-word-joint-hold-confirmed-v1",
+      "legacy_ids": [
+        "source-family-15"
+      ],
+      "sampling": {
+        "evaluation": "generated_and_paired_reconstructed_prior_without_output_noise"
+      },
+      "scope": "task-only selected BCAP DualNorm verification; no ordinary family qualification",
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          1024
+        ],
+        [
+          "quality_fraction",
+          ">=",
+          0.95
+        ],
+        [
+          "modes",
+          "==",
+          5
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "reconstruction_exact",
+          "==",
+          1
+        ],
+        [
+          "minimum_reconstruction_token_probability",
+          ">=",
+          0.9
+        ]
+      ]
+    }
+  ],
+  "readouts": [
+    {
+      "completed_steps": 20001,
+      "completed_updates": 20001,
+      "default_updates": 20001,
+      "execution_status": "COMPLETE",
+      "gif": "media/five_word_joint_smoke.gif",
+      "goal": "Can public joint BiGAN training acquire all five words and confidently reconstruct every paired input at one independently confirmed scheduled state? Complete all 20,001 updates.",
+      "id": "image-five-word-joint-smoke-confirmed-v1",
+      "qualification_input": false,
+      "source_commit": "0270a501b7d90f4d6c34b4c3e9ef4166f877b301",
+      "verdict": "PASS"
+    },
+    {
+      "completed_steps": 5667,
+      "completed_updates": 4000,
+      "default_updates": 4000,
+      "execution_status": "COMPLETE",
+      "gif": "media/five_word_joint_hold.gif",
+      "goal": "Continue this candidate's earliest confirmed five-word acquisition state for 4,000 updates. Every scheduled generation and inverse check, including the exact restored state, must pass.",
+      "id": "image-five-word-joint-hold-confirmed-v1",
+      "qualification_input": false,
+      "source_commit": "0270a501b7d90f4d6c34b4c3e9ef4166f877b301",
+      "verdict": "FAIL"
+    }
+  ],
+  "runs": [
+    {
+      "completed_steps": 20001,
+      "completed_updates": 20001,
+      "default_updates": 20001,
+      "execution_status": "COMPLETE",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1875,
+        "mass_berry": 0.1953125,
+        "mass_grape": 0.2109375,
+        "mass_lemon": 0.2080078125,
+        "mass_melon": 0.1982421875,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": -0.0,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "gif": "media/five_word_joint_smoke.gif",
+      "gif_sha256": "6975bb5800f584ce3e27a0832b7c980fd602169009bf4211447f62feac6d7270",
+      "goal": "Can public joint BiGAN training acquire all five words and confidently reconstruct every paired input at one independently confirmed scheduled state? Complete all 20,001 updates.",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 20001,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 20001,
+              "calls": 20001,
+              "eligible": 20001,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "image-five-word-joint-smoke-confirmed-v1",
+      "qualification_input": false,
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 5,
+        "observation_sigma": 0.03,
+        "optimizer_family": "dualnorm",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 20000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime": {
+        "autograd_multithreading": false,
+        "cusolver_automatic_fallback_warnings": 1,
+        "driver_changed": false,
+        "scientific_retry": false,
+        "torch": "2.14.0+cu130",
+        "warning_claim": "Observed automatic fallback; its causal role was not tested."
+      },
+      "scope": "task-only selected BCAP DualNorm verification; no ordinary family qualification",
+      "source_commit": "0270a501b7d90f4d6c34b4c3e9ef4166f877b301",
+      "source_identity": "3c82db6c7b24642887dfaab8d7ba13e0f7ea11689f6839bc687d2dd59126e478",
+      "verdict": "PASS"
+    },
+    {
+      "completed_steps": 5667,
+      "completed_updates": 4000,
+      "default_updates": 4000,
+      "execution_status": "COMPLETE",
+      "final_metrics": {
+        "completed_steps": 5667.0,
+        "mass_apple": 0.2236328125,
+        "mass_berry": 0.1943359375,
+        "mass_grape": 0.1884765625,
+        "mass_lemon": 0.1826171875,
+        "mass_melon": 0.2109375,
+        "mass_tv": 0.034570312500000006,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": -0.0,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 5667
+      },
+      "gif": "media/five_word_joint_hold.gif",
+      "gif_sha256": "fd67f2bb9ca27919ffb306f3ce3b1dd288c8e030022084fbde4ebc7eaff0e364",
+      "goal": "Continue this candidate's earliest confirmed five-word acquisition state for 4,000 updates. Every scheduled generation and inverse check, including the exact restored state, must pass.",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 4000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 4000,
+              "calls": 4000,
+              "eligible": 4000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 5667,
+          "encoder": 5667,
+          "generator": 5667,
+          "prior": 5667
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "image-five-word-joint-hold-confirmed-v1",
+      "qualification_input": false,
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 5,
+        "observation_sigma": 0.03,
+        "optimizer_family": "dualnorm",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 20000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime": {
+        "autograd_multithreading": false,
+        "cusolver_automatic_fallback_warnings": 1,
+        "driver_changed": false,
+        "scientific_retry": false,
+        "torch": "2.14.0+cu130",
+        "warning_claim": "Observed automatic fallback; its causal role was not tested."
+      },
+      "scope": "task-only selected BCAP DualNorm verification; no ordinary family qualification",
+      "source_commit": "0270a501b7d90f4d6c34b4c3e9ef4166f877b301",
+      "source_identity": "3c82db6c7b24642887dfaab8d7ba13e0f7ea11689f6839bc687d2dd59126e478",
+      "verdict": "FAIL"
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,5 +1,7 @@
 """Device selection stays on CPU unless a CUDA run is actually selected."""
 
+import os
+
 import torch
 import pytest
 
@@ -40,6 +42,7 @@ def test_cpu_policy_does_not_change_runtime_state():
     assert torch.are_deterministic_algorithms_enabled() is deterministic
 
 
+@pytest.mark.skipif(torch.cuda.is_available(), reason="asserts CUDA is absent")
 def test_auto_uses_cpu_when_cuda_is_absent():
     assert torch.cuda.is_available() is False
     original = torch.Generator
@@ -49,6 +52,7 @@ def test_auto_uses_cpu_when_cuda_is_absent():
     assert torch.Generator is original
 
 
+@pytest.mark.skipif(torch.cuda.is_available(), reason="asserts CUDA is absent")
 def test_cuda_selection_refuses_when_cuda_is_absent():
     with pytest.raises(RuntimeError, match="not available"):
         select_device("cuda")
@@ -87,3 +91,35 @@ def test_harness_modules_import():
 
     assert benchmarks.locked_shared.observation.rng_fork_devices() == []
     assert benchmarks.transfer_suite.legacy_noise_adapters.host_device().type == "cpu"
+
+
+def test_device_policy_scope_undoes_selection_and_threads():
+    from benchmarks.toy100 import device
+    from benchmarks.toy100.device import device_policy_scope
+
+    threads = torch.get_num_threads()
+    with device_policy_scope():
+        apply_device_policy("cpu")
+        torch.set_num_threads(1 if threads != 1 else 2)
+        assert device._SELECTED == torch.device("cpu")
+    assert device._SELECTED is None
+    assert torch.get_num_threads() == threads
+    assert "TOY100_DEVICE" not in os.environ
+    apply_device_policy("cpu")  # a fresh selection is allowed again
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="needs CUDA")
+def test_device_policy_scope_undoes_cuda_policy():
+    from benchmarks.toy100.device import device_policy_scope
+
+    original = torch.Generator
+    with device_policy_scope():
+        apply_device_policy("cuda")
+        assert torch.get_default_device().type == "cuda"
+        assert torch.Generator is not original
+        assert torch.are_deterministic_algorithms_enabled()
+    assert torch.get_default_device() == torch.device("cpu")
+    assert torch.Generator is original
+    assert torch.are_deterministic_algorithms_enabled() is False
+    assert torch.zeros(1).device.type == "cpu"
+    assert torch.randn(2, generator=torch.Generator()).device.type == "cpu"

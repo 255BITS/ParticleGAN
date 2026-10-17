@@ -1,0 +1,105 @@
+{
+  "candidate_id": "ka2-slow-prior-0p25",
+  "candidate_revision": "1da46ac2e086644934253b01edea57f39b7a099f4a831686647f70c6acd715ec",
+  "changed_factors": {
+    "d_lr_mult": 1.5,
+    "input_noise_std": 0.0,
+    "lr": 0.0006,
+    "network_lr_horizon_cap": null,
+    "output_noise_std": 0.0,
+    "prior_lr_mult": 0.25
+  },
+  "conclusion": "PASS on the unchanged finite five-word joint/inverse task; 11/24 observations pass and the passing terminal suffix is 11 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Conditional parameter-only follow-up after the complete first diagnostic round: hold clean full-horizon optimizer settings fixed and slow the existing learned prior role to prevent code contraction while G/E learns the bijection. Same finite-word joint/inverse core and numerical gates; task-only diagnostic grants no ordinary qualification.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.",
+  "provenance": {
+    "parent": "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json",
+    "parent_sha256": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7",
+    "protocol_sha256": "f196f58c1f775c0d4ca83733fc0a0f5d0ae8ca133e68e6e3ecc7238bb43c16a0",
+    "raw_artifacts": {
+      "adapter-receipt.json": {
+        "bytes": 56234,
+        "sha256": "01bd5546bdd00a687f3d36768860bb819c44eff3eb493e71c41e34492cded95c"
+      },
+      "observations.npz": {
+        "bytes": 697676,
+        "sha256": "4e12f42d258c9fab41eefd547f8cab7b79cd11882f1d946f66611bb047f324ae"
+      },
+      "observed-records.pt": {
+        "bytes": 35388397,
+        "sha256": "de85b85fd764b8dda6f82f1f183901677e3f99d1f4401f96e7271d4aa30cc172"
+      },
+      "request.json": {
+        "bytes": 14431,
+        "sha256": "332d659bd412d22481ab3b69c874bbcfaf01e5aeae1aee138160e56b1bcdf354"
+      },
+      "source-manifest.json": {
+        "bytes": 136054,
+        "sha256": "2bd04ec5e2f48610906873207948c086fc6c5704999676a4d38e6024fdf2ce79"
+      },
+      "state.pt": {
+        "bytes": 2258835,
+        "sha256": "58bbc7aa7e5f156f6326eb6afbe9faa0995078051daf2c146d2c1f065a950742"
+      }
+    },
+    "runtime": {
+      "cpu_threads": 1,
+      "cublas_workspace_config": ":4096:8",
+      "cuda_matmul_allow_tf32": false,
+      "cudnn_allow_tf32": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "device": "cuda:0",
+      "gpu": "NVIDIA RTX A6000",
+      "python": "3.14.7",
+      "torch": "2.14.0+cu130"
+    },
+    "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+    "source_digest": "4c08e90d89bcde6da9387d85bf8fc75171c1ca58b553f07dd7c04666f741109d",
+    "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "word-diagnostic-48d0e04cb39975dd920addef",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p25.json",
+    "sha256": "bd9bf0afae2268d7564641da31e125a641b6ef9415744a02dd5f9fc9d8815472"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "wall_seconds": 173.74932220199844
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.17578125,
+        "mass_berry": 0.2099609375,
+        "mass_grape": 0.201171875,
+        "mass_lemon": 0.2041015625,
+        "mass_melon": 0.208984375,
+        "mass_tv": 0.024218749999999983,
+        "minimum_reconstruction_token_probability": 0.9926982522010803,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.0006530788690297236,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "reason": "Standalone full-budget diagnostic; unchanged 24-check/five-terminal-pass task grader.",
+      "task_id": "five_word_joint_acquisition"
+    }
+  ],
+  "trainer_family": "ka2"
+}

@@ -1,0 +1,44 @@
+{
+  "scope": "Read-only independent source/media/grade binding QA; no training or rescoring",
+  "training_commit": "5d75e6556bb65726e71a602dbce708986a5b49f5",
+  "media_commit": "f8ecb7d64648d00d0a22fa56b518e2079b1bb0c2",
+  "raw_archive": "/ml2/hypergan/toy-api-full-protocols-20261002",
+  "media_archive": "/ml2/hypergan/toy-api-publication-reviewed-media-20261002",
+  "verified_cases": 176,
+  "case_counts": [
+    {
+      "status": "COMPLETE",
+      "verdict": "FAIL",
+      "count": 120
+    },
+    {
+      "status": "COMPLETE",
+      "verdict": "PASS",
+      "count": 51
+    },
+    {
+      "status": "ERROR",
+      "verdict": "FAIL",
+      "count": 5
+    }
+  ],
+  "unique_source_bindings_verified": 110,
+  "errors": [],
+  "core_trees": {
+    "particlegan": {
+      "base_tree": "d85210289a35967493fc3345441b043a8d07860b",
+      "publication_tree": "d85210289a35967493fc3345441b043a8d07860b"
+    },
+    "lib": {
+      "base_tree": "42337549ec0c937120b4ce09157a3c24bd0442b8",
+      "publication_tree": "42337549ec0c937120b4ce09157a3c24bd0442b8"
+    },
+    "configs": {
+      "base_tree": "7e6c0f2d9e19af2d1d2be7e9d0236acca9755304",
+      "publication_tree": "7e6c0f2d9e19af2d1d2be7e9d0236acca9755304"
+    }
+  },
+  "historical_report_files_unchanged": 300,
+  "historical_report_changes": [],
+  "training_or_rescoring": false
+}

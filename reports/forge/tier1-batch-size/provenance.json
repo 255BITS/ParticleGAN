@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "scope": "task_only_batch_and_stationary_hold_diagnostic",
+  "executed_commit": "34871d418152d23cf260b29d14e82b6b4874b89d",
+  "training_source": {
+    "path": "benchmarks/toy_audit/tier1_batch_size.py",
+    "sha256": "82f75a5b993c51cfb198a8c6f22b44e2cb79a8a50645e95d825cd3f77eef3168"
+  },
+  "protocol_sha256": "562825e3e95306201d3b05e2d2934b2b56fcb2046c468d8089da6d488bf37798",
+  "archive": {
+    "path": "artifacts/tier1-batch-size-v1.tar.gz",
+    "sha256": "32580b2591ec6750b2e3c62b9ad8e446f8525072d4a0f46b9918b49453808588",
+    "bytes": 19072998,
+    "contents": "Raw stdout, full curves, four initial/final contexts, observations, consumed RNG states, executed sources and software-check logs."
+  },
+  "parent_archives": {
+    "prior": "0ab6a34f0dbb27b7bd6647ef44918a1f022abc2732826c0d50190064d96ccd7d",
+    "duration": "18e339a2e78b73d95798b871914ac7a9301057e8b49a89c610f34dd7992d2480"
+  },
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "device": "cuda:0",
+  "gpu": "NVIDIA RTX A6000",
+  "seed": 0,
+  "initializer": "public deterministic initializer; original model/optimizer/named-stream states matched exactly",
+  "trainer_delta": "none",
+  "neural_training_and_model_sampling": "cuda:0",
+  "frozen_target_reference_scoring_and_rendering": "cpu",
+  "new_training_updates": 10400,
+  "new_real_training_examples": 4403200,
+  "new_training_loop_seconds": 122.68288417521399,
+  "cost_scope": "Only the new training/evaluation loops; original prefixes retain their original costs. Excludes build/restore, source capture, CPU real-data audit, serialization, verification and rendering.",
+  "reservation_seconds": 2100,
+  "new_trials": 3,
+  "scientific_retries": 0,
+  "repeated_prefix_updates": 0,
+  "publication_startup_error": "Initial publisher import failed before any output, model draw or update; log preserved. Corrected repository import path, then rendered saved evidence.",
+  "verification": {
+    "saved_sample_metric_recomputations": 676,
+    "exact_final_cuda_restores": 4,
+    "initial_contexts_match": true,
+    "original_real_stream_segments_match": true,
+    "check_result": "95 passed in 3.55s",
+    "check_log_sha256": "4678a8cf68a1c8806fab35d9400f35c35abeea8b82908e6682f26a66aeaf7af5",
+    "publication_training_updates": 0,
+    "publication_model_sampling_draws": 0
+  },
+  "publication_artifacts": {
+    "b128-gaussian1d_acquisition.gif": "ce35d687263edeecfd9e5352e6f9b0da652a8ddb05c6ab21943e13dbf41bc51e",
+    "b128-ring16_acquisition.gif": "22383d4da7159c7939b7632be6222c72e562ea51fd9d8904e4197ed67bfe5077",
+    "b512-gaussian1d_acquisition.gif": "16918c300657c92427493e68334776902deab92d66e1f997a9c10c435262e534",
+    "b512-ring16_acquisition.gif": "a8a8869f9f326c9684776e2fac9f7dbf8dc717907a64e5a40af8c72e9e05fae9",
+    "comparison.svg": "276d0de7644cb582be5f68b6001b2cbb274b6c8caecebcca18a578e930e86684",
+    "protocol.json": "562825e3e95306201d3b05e2d2934b2b56fcb2046c468d8089da6d488bf37798",
+    "publish.py": "6112303a9f4288b5f2f376784a74122ae0b7eb94146b7d82c48367bdf1cdbc17",
+    "restore-proof.json": "55473ca1508bd507d028f724e8b2289e69d6c831a4380c7e752599cf5c9497d6",
+    "results.json": "c40780c95d3002a5d6300aa99113dd8fff644e7096baee730e9d78e3bd94ab98",
+    "verification.json": "160b8731f9998714cabfd766fc2170c412715208913dcc512e7d5b4c5ecb7496"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "overwrite_reciprocal_eviction_simultaneous_parent_and_empty_batch",
+      "status": "PASS",
+      "edges": 3,
+      "degree": 2,
+      "maximum_reciprocal_slots": 12
+    },
+    {
+      "name": "malformed_graph_rejected_and_degree_capped",
+      "status": "PASS"
+    },
+    {
+      "name": "empty_graph_bitwise_kernel_and_indexed_identity_derivative",
+      "status": "PASS"
+    },
+    {
+      "name": "known_copy_candidate_and_graph_only_resume",
+      "status": "PASS",
+      "radius_before": 5.0,
+      "radius_after": 0.005,
+      "max_candidates": 3
+    },
+    {
+      "name": "backend_semantic_checkpoint_cache_discard_and_rejection_before_mutation",
+      "status": "PASS",
+      "backend_schema": 4,
+      "latent_kernel": "bounded_local_dv12_lineage",
+      "graph_shape": [
+        1024,
+        8
+      ],
+      "reused_input_sha256": "6c6dac149ce7b77b835366c1a5944848d3754dd1b8adde583aa6ac29e276b62a"
+    }
+  ],
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_lineage.py": "b5639e48d8ffcdc57484eff99217f7ebc87bb2cea8564ba93e434d2bd8490c7b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA2/particlegan/feature_cells.py": "080dccbc404e1fe4112cd18275eaf94b8f68e6086996b88b5f9b5718770573c1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/training-regression/pkg-LINEAGE/particlegan/feature_cells.py": "23c70cd51c7171a272f1b21fa2310c7a15a670b5bf9777c8029af55a5ba80622",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/training-regression/pkg-LINEAGE/particlegan/training.py": "7edd9cb522357c49021719f8ce63e2cc9eec3a3b41c0f89219eab172e13b1c58"
+  },
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "scope": "Specified CPU copy/latent contracts; no learned quality qualification"
+}

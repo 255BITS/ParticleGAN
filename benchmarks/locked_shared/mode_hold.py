@@ -128,13 +128,20 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     # Host critic shape from the 100-Gaussians toy. Fourier width is the
     # sharp-D stress, not an architecture swap.
     critic = SimpleMLPDiscriminator(2, HIDDEN, N_HIDDEN, FOURIER)
+    # LSUV rescales orthogonal weights when --init ortho_lsuv is installed.
+    # Any other init, including the default, returns immediately.
+    from benchmarks.init_research.deterministic_init import prepare_modules
+    prepare_modules(generator, critic)
     if noise_policy is not None:
         from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
         generator = wrap_output(generator, noise_policy)
         critic = wrap_input(critic, noise_policy)
     gan = (gan_factory or (training_recipe.make_loss if training_recipe else make_gan_loss))()
     regularizer = (cap_factory or (training_recipe.make_gradient_penalty if training_recipe else make_b_cap))()
-    vicreg = ParticleRegularizer(weight=recipe.vicreg_weight)
+    if training_recipe is not None:
+        training_recipe.apply_prior_policy(prior)
+    vicreg = (ParticleRegularizer(weight=recipe.vicreg_weight) if training_recipe is None
+              else training_recipe.make_prior_regularizer(prior=prior))
     opt_g = torch.optim.Adam(
         list(generator.parameters()) + list(prior.parameters()),
         lr=LR,
@@ -221,8 +228,11 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             # Mean-feature match on coordinates. Uncapped by b_cap (FM-on drift).
             real_mean = sample_ring(means, batch, SIGMA, stream).detach().mean(0)
             g_loss = g_loss + recipe.fm_weight * (fake.mean(0) - real_mean).pow(2).sum()
-        g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
-        g_loss = g_loss + vicreg(prior.z)
+        if training_recipe is not None:
+            g_loss = g_loss + training_recipe.prior_regularization(prior.z, regularizer=vicreg)
+        else:
+            g_loss = g_loss + recipe.particle_l2 * prior.z.pow(2).mean()
+            g_loss = g_loss + vicreg(prior.z)
         opt_g.zero_grad()
         g_loss.backward()
         schedule_optimizer(opt_g, step)

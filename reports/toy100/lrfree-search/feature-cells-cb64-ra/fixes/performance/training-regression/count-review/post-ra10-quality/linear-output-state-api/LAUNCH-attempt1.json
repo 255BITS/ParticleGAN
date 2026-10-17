@@ -1,0 +1,31 @@
+{
+  "API_sample_calls": 3,
+  "CPU_environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "CPU_updates_total": 2,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/linear-output-state-api/check_affected_api.py",
+    "--inputs",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/linear-output-state-api/API-INPUTS-FROZEN.json",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/linear-output-state-api/accepted-attempt1"
+  ],
+  "cwd": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929",
+  "helper_sha256": "d0fb23b4cda41d17302f7e9c5d0428d2d16f0e48b189f11eb97ee2ceba33afa5",
+  "input_seal_sha256": "854460cd4584fdac9bcca58e03034129ba50249b4e40c2ecfce1d9cf9b21b7c1",
+  "launcher_sha256": "6c6dfec0b55843db3d8a085e2f0b96be093705fcf47df8004c093c62f4a71028",
+  "new_quality_emissions": 0,
+  "pid": 1229436,
+  "root_GO_sha256": "7a7d861758707821aeeac1bdb9574ca3f342632e17dd39cb735f724049fa9773",
+  "startticks": 168627683,
+  "status": "STARTED_ONE_ROOT_AUTHORIZED_CPU_API",
+  "utc": "2026-09-30T16:07:36.684572+00:00"
+}

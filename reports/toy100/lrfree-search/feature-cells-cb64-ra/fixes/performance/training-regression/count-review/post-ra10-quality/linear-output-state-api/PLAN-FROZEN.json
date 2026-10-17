@@ -1,0 +1,22 @@
+{
+  "local_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/linear-output-state-api/DESIGN.md": "f8c54bf2346b5278d32e31fb81a7c311c92506524c4a48f67fb14471ebd56893",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/linear-output-state-api/SOURCE-ONLY-PLAN.json": "00e48e63d267333324f9f17094669833a11018485f159198045082c04277c893"
+  },
+  "numerical_execution": false,
+  "source_and_input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA9.json": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/mean-api-review/CONTINUATION-ADDENDUM.md": "e031e8018721a2a1e1fb5d958ce21cfc56cc1062b0c6595dee0580be384e4870",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/mean-api-review/check_api.py": "260346ce3c283bac20b78fd38ccf1accff432faebbefa5096a174bf084f67e64",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/mean-api-review/check_api_skeleton.py": "e048eade50078565be7a97650a5606be4ae4f2b6705b2078a2628a564019e5b3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/mean-api-review/check_continuation.py": "bcf5c6f136327d4d949f92097b48a5582daf1625c89aaa1af218844a8f5099d5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA10/particlegan/feature_cells.py": "7eacec8111e3ba47e519e809ce1c6971ba9c27f27ba619c0975cdb7daa887b59",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA10/particlegan/mean_transport.py": "7037dd28e223a4630822db878c134e7b84f2c44bdfedd167dd5eccd107ab9492",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA10/particlegan/training.py": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra10/READY.json": "9f29f98761b136055ef5bfce3697de0cd45cb8d12c2d65fee01e5f5281edf6fd",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra10/integration-contract/FROZEN.json": "c051d28afb3a27760a255cdaf79b3f2510404a97805e3e45ca4525f3c3538970",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra10/integration-contract/receipt.json": "5e0a95b7e362bf798b0744aea14b74eadbd09d46db50f8071118a16226518aa7"
+  },
+  "status": "SOURCE_ONLY_PLAN",
+  "utc": "2026-09-30T15:34:08.203419+00:00"
+}

@@ -1,0 +1,255 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -697,7 +697,7 @@
+         real_counts = self.real_calibration_category_counts
+         p = conditional_count_pvalues(real_counts,fake_counts,self.calibration_rows,len(fake_features),self.work)
+         difference = fake_counts.double()/len(fake_features)-real_counts.double()/self.calibration_rows
+-        multiplicity = 3*self.cells
++        multiplicity = 3*self.cells+2
+         significant = p <= Q/multiplicity
+         if not self.valid_metric:
+             significant.zero_()
+@@ -715,9 +715,20 @@
+         mass = dict(real_counts=self.real_calibration_counts,fake_counts=mass_fake,pvalues=mass_p,
+                     difference=mass_difference,excess=mass_significant&(mass_difference>0),
+                     deficit=mass_significant&(mass_difference<0))
+-        return dict(mass=mass,support=support,pvalues=torch.cat((mass_p,p)),
++        global_real = real_counts.reshape(self.cells,2).sum(0)
++        global_fake = fake_counts.reshape(self.cells,2).sum(0)
++        global_p = conditional_count_pvalues(global_real,global_fake,
++                    self.calibration_rows,len(fake_features),self.work)
++        global_difference = global_fake.double()/len(fake_features)-global_real.double()/self.calibration_rows
++        global_significant = global_p <= Q/multiplicity
++        if not self.valid_metric:
++            global_significant.zero_()
++        global_support = dict(real_counts=global_real,fake_counts=global_fake,pvalues=global_p,
++                    difference=global_difference,excess=global_significant&(global_difference>0),
++                    deficit=global_significant&(global_difference<0))
++        return dict(mass=mass,support=support,global_support=global_support,pvalues=torch.cat((mass_p,p,global_p)),
+                     categories=2*self.cells,multiplicity=multiplicity,cutoff=Q/multiplicity,
+-                    family_sizes=(self.cells,2*self.cells),
++                    family_sizes=(self.cells,2*self.cells,2),
+                     count_partition=dict(self.count_partition),count_boundary=self.count_boundary.clone())
+ 
+     @torch.no_grad()
+@@ -953,13 +964,135 @@
+ 
+ 
+     @torch.no_grad()
++    def _ordinary_global_transport(self, query_features, flags, comparison, *, generator, pvalues=None, max_moves=None,
++                                    reserved_children=None, reserved_parents=None, supported_counts=None):
++        """Aggregate support recovery after gross prior certificate reservations."""
++        features = self.transform(query_features)
++        if flags.shape != (len(features),) or flags.dtype != torch.bool or flags.device != self.device:
++            raise ValueError("invalid isolation flags")
++        if pvalues is None:
++            _,pvalues,_ = self.support(query_features)
++        categories, _ = self._count_categories_metric(features)
++        inside = categories.remainder(2)==0
++        reserved = torch.zeros(len(features),device=self.device,dtype=torch.bool)
++        if reserved_children is not None:
++            reserved[reserved_children] = True
++        if reserved_parents is not None:
++            reserved[reserved_parents] = True
++        ids,pool,pool_counts,eligible_counts = self._pool(features,~flags&(pvalues>Q)&inside&~reserved,generator)
++        difference = comparison["difference"]
++        raw_death_capacity = torch.floor(len(features)*difference[1].clamp_min(0.)+1e-10).long()*comparison["excess"][1]
++        raw_birth_capacity = torch.floor(len(features)*(-difference[0]).clamp_min(0.)+1e-10).long()*comparison["deficit"][0]
++        spent_deaths = (categories[reserved_children].remainder(2)==1).sum() if reserved_children is not None else torch.zeros_like(raw_death_capacity)
++        spent_births = (categories[reserved_parents].remainder(2)==0).sum() if reserved_parents is not None else torch.zeros_like(raw_birth_capacity)
++        # Both previous phases spend these aggregate certificates, including
++        # supported mass children outside the fixed fitted boundary. Count
++        # gross use; an opposite action never restores certificate capacity.
++        residual_death_capacity = (raw_death_capacity-spent_deaths).clamp_min(0)
++        residual_birth_capacity = (raw_birth_capacity-spent_births).clamp_min(0)
++        target = self._mass_targets(len(features))
++        table_counts = torch.bincount(ids,minlength=self.cells)
++        budget = math.floor(Q*len(features)) if max_moves is None else min(int(max_moves),math.floor(Q*len(features)))
++        isolation_guard_rejects = int(flags.sum()) > Q*len(features)
++        certified_budget = max(0,min(budget,int(residual_death_capacity),int(residual_birth_capacity)))
++        # Global evidence supplies the direction; actual cell/group vacancies
++        # and unused inside parents supply physical birth capacity. Flagged
++        # outside deaths do not remove any supported mass.
++        clean_counts = torch.bincount(ids[~flags],minlength=self.cells) if supported_counts is None else supported_counts.clone()
++        vacancies = (target-clean_counts).clamp_min(0)
++        birth_capacity = vacancies.clone()
++        death_eligible = flags&~inside&~reserved
++        available_deaths = torch.bincount(ids[death_eligible],minlength=self.cells)
++        death_capacity = available_deaths
++        inaccessible = birth_capacity[pool_counts==0].sum()
++        birth_capacity = torch.minimum(birth_capacity,pool_counts)
++        groups = self._mass_topology()
++        group_target,group_clean = self._group_counts(target),self._group_counts(clean_counts)
++        within_capacity = torch.minimum(self._group_counts(death_capacity),self._group_counts(birth_capacity))
++        within_capacity = torch.minimum(within_capacity,(group_target-group_clean).clamp_min(0))
++        within = _integer_allocate(within_capacity,certified_budget)
++        within_deaths,within_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
++        for group in range(self.mass_groups):
++            members = groups==group
++            within_deaths += _integer_allocate(death_capacity*members,int(within[group]))
++            within_births += _integer_allocate(birth_capacity*members,int(within[group]))
++        remaining_death,remaining_birth = death_capacity-within_deaths,birth_capacity-within_births
++        group_death = self._group_counts(remaining_death)
++        remaining_vacancies = (group_target-group_clean-self._group_counts(within_births)).clamp_min(0)
++        group_birth = torch.minimum(self._group_counts(remaining_birth),remaining_vacancies)
++        cross_pairs = min(int(group_death.sum()),int(group_birth.sum()),max(0,certified_budget-int(within.sum())))
++        cross_group_death,cross_group_birth = _integer_allocate(group_death,cross_pairs),_integer_allocate(group_birth,cross_pairs)
++        cross_deaths,cross_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
++        for group in range(self.mass_groups):
++            members = groups==group
++            cross_deaths += _integer_allocate(remaining_death*members,int(cross_group_death[group]))
++            cross_births += _integer_allocate(remaining_birth*members,int(cross_group_birth[group]))
++        deaths,births = within_deaths+cross_deaths,within_births+cross_births
++        priorities = torch.rand(len(features),device=self.device,dtype=torch.float64,generator=generator)
++        empty = torch.empty(0,device=self.device,dtype=torch.long)
++        children_by_cell,parents_by_cell = [],[]
++        for cell in range(self.cells):
++            count = int(deaths[cell])
++            if count:
++                rows = ((ids==cell)&death_eligible).nonzero().flatten()
++                children_by_cell.append(rows[priorities[rows].argsort(stable=True)[:count]])
++            else:
++                children_by_cell.append(empty)
++            count = int(births[cell])
++            if count:
++                draw = torch.randperm(int(pool_counts[cell]),device=self.device,generator=generator)[:count]
++                parents_by_cell.append(pool[cell,draw])
++            else:
++                parents_by_cell.append(empty)
++        children,parents = [],[]
++        # Match the conservative within-neighborhood phase inside its group.
++        # Only the explicit residual phase can move mass between groups.
++        for group in range(self.mass_groups):
++            for cell in (groups==group).nonzero().flatten():
++                index = int(cell)
++                children.append(children_by_cell[index][:int(within_deaths[index])])
++                parents.append(parents_by_cell[index][:int(within_births[index])])
++        for cell in range(self.cells):
++            children.append(children_by_cell[cell][int(within_deaths[cell]):])
++            parents.append(parents_by_cell[cell][int(within_births[cell]):])
++        child = torch.cat(children) if children else empty
++        parent = torch.cat(parents) if parents else empty
++        detail = dict(excess_cells=int(comparison["excess"].sum()),deficit_cells=int(comparison["deficit"].sum()),
++                      discoveries=int((comparison["excess"]|comparison["deficit"]).sum()),
++                      inaccessible_birth_quota=int(inaccessible),budget=budget,moves=len(child),
++                      death_allocation=deaths,birth_allocation=births,eligible_parent_counts=eligible_counts,
++                      target_counts=target,clean_counts=clean_counts,table_counts=table_counts,clean_vacancies=vacancies,
++                      unique_parent_count=len(torch.unique(parent)),mass_topology=dict(self.mass_topology),
++                      group_target_counts=group_target,group_clean_counts=group_clean,
++                      within_group_moves=int(within.sum()),between_group_moves=cross_pairs)
++        supported_children = child[~flags[child]]
++        detail.update(isolation_guard_rejects=isolation_guard_rejects,
++                      ordinary_flagged_deaths=int(flags[child].sum()),
++                      death_policy="global_count_certified_flagged_outside_only",certified_budget=certified_budget,
++                      count_partition=dict(self.count_partition),count_boundary=self.count_boundary.clone(),
++                      query_category_ids=categories,child_category_ids=categories[child],parent_category_ids=categories[parent],
++                      child_region_ids=categories[child].remainder(2),parent_region_ids=categories[parent].remainder(2),
++                      death_certified_regions=comparison["excess"],birth_certified_regions=comparison["deficit"],
++                      death_category_allocation=torch.bincount(categories[child],minlength=2*self.cells),
++                      birth_category_allocation=torch.bincount(categories[parent],minlength=2*self.cells),
++                      raw_certified_death_capacity=raw_death_capacity,raw_certified_birth_capacity=raw_birth_capacity,
++                      spent_certified_death_capacity=spent_deaths,spent_certified_birth_capacity=spent_births,
++                      residual_certified_death_capacity=residual_death_capacity,
++                      residual_certified_birth_capacity=residual_birth_capacity,
++                      planned_supported_counts=clean_counts-torch.bincount(ids[supported_children],minlength=self.cells)
++                          +torch.bincount(ids[parent],minlength=self.cells))
++        return child,parent,detail
++
++
++    @torch.no_grad()
+     def ordinary_transport(self, query_features, flags, comparison, *, generator, pvalues=None, max_moves=None):
+-        """Original mass first, support recovery second, under one budget."""
+-        if (comparison.get("multiplicity") != 3*self.cells
+-                or comparison.get("cutoff") != Q/(3*self.cells)
++        """Mass, local support, then aggregate support under one ordinary budget."""
++        if (comparison.get("multiplicity") != 3*self.cells+2
++                or comparison.get("cutoff") != Q/(3*self.cells+2)
+                 or comparison["mass"]["difference"].shape != (self.cells,)
+-                or comparison["support"]["difference"].shape != (2*self.cells,)):
+-            raise ValueError("joint transport requires the common 3K comparison")
++                or comparison["support"]["difference"].shape != (2*self.cells,)
++                or comparison["global_support"]["difference"].shape != (2,)):
++            raise ValueError("joint transport requires the common 3K+2 comparison")
+         self._input(query_features)
+         rows = len(query_features)
+         if flags.shape != (rows,) or flags.dtype != torch.bool or flags.device != self.device:
+@@ -993,26 +1126,45 @@
+                     within_group_moves=0,between_group_moves=0,inaccessible_birth_quota=0)
+         child,parent = torch.cat((mass_child,support_child)),torch.cat((mass_parent,support_parent))
+         categories = self.count_categories(query_features)
+-        planned = after_mass+torch.bincount(ids[support_parent],minlength=self.cells)
+-        detail = dict(excess_cells=mass["excess_cells"]+int(comparison["support"]["excess"].sum()),
+-                deficit_cells=mass["deficit_cells"]+int(comparison["support"]["deficit"].sum()),
+-                discoveries=mass["discoveries"]+int((comparison["support"]["excess"]|comparison["support"]["deficit"]).sum()),
+-                inaccessible_birth_quota=mass["inaccessible_birth_quota"]+support["inaccessible_birth_quota"],
+-                budget=budget,moves=len(child),mass_moves=len(mass_child),support_moves=len(support_child),
++        after_local = after_mass+torch.bincount(ids[support_parent],minlength=self.cells)
++        remaining = budget-len(child)
++        global_comparison = comparison["global_support"]
++        possible = (remaining>0 and bool(flags.any()) and bool(global_comparison["excess"][1])
++                    and bool(global_comparison["deficit"][0]))
++        if possible:
++            global_child,global_parent,global_phase = self._ordinary_global_transport(query_features,flags,
++                    global_comparison,generator=generator,pvalues=pvalues,max_moves=remaining,
++                    reserved_children=child,reserved_parents=parent,supported_counts=after_local)
++            global_phase["ran"] = True
++        else:
++            global_child,global_parent = empty,empty
++            global_phase = dict(ran=False,moves=0,budget=remaining,planned_supported_counts=after_local.clone(),
++                    death_allocation=torch.zeros(self.cells,device=self.device,dtype=torch.long),
++                    birth_allocation=torch.zeros(self.cells,device=self.device,dtype=torch.long),
++                    within_group_moves=0,between_group_moves=0,inaccessible_birth_quota=0)
++        child,parent = torch.cat((child,global_child)),torch.cat((parent,global_parent))
++        planned = after_local+torch.bincount(ids[global_parent],minlength=self.cells)
++        detail = dict(excess_cells=mass["excess_cells"]+int(comparison["support"]["excess"].sum())+int(global_comparison["excess"].sum()),
++                deficit_cells=mass["deficit_cells"]+int(comparison["support"]["deficit"].sum())+int(global_comparison["deficit"].sum()),
++                discoveries=mass["discoveries"]+int((comparison["support"]["excess"]|comparison["support"]["deficit"]).sum())
++                    +int((global_comparison["excess"]|global_comparison["deficit"]).sum()),
++                inaccessible_birth_quota=mass["inaccessible_birth_quota"]+support["inaccessible_birth_quota"]+global_phase["inaccessible_birth_quota"],
++                budget=budget,moves=len(child),mass_moves=len(mass_child),support_moves=len(support_child),global_moves=len(global_child),
+                 mass_phase=mass,support_phase=support,mass_children=mass_child,mass_parents=mass_parent,
+                 support_children=support_child,support_parents=support_parent,
+-                action_kinds=torch.cat((torch.zeros_like(mass_child),torch.ones_like(support_child))),
+-                death_allocation=mass["death_allocation"]+support["death_allocation"],
+-                birth_allocation=mass["birth_allocation"]+support["birth_allocation"],
++                global_phase=global_phase,global_children=global_child,global_parents=global_parent,
++                action_kinds=torch.cat((torch.zeros_like(mass_child),torch.ones_like(support_child),torch.full_like(global_child,2))),
++                death_allocation=mass["death_allocation"]+support["death_allocation"]+global_phase["death_allocation"],
++                birth_allocation=mass["birth_allocation"]+support["birth_allocation"]+global_phase["birth_allocation"],
+                 eligible_parent_counts=mass["eligible_parent_counts"],target_counts=mass["target_counts"],
+                 clean_counts=clean,table_counts=mass["table_counts"],planned_supported_counts=planned,
+-                supported_after_mass=after_mass,unique_parent_count=len(torch.unique(parent)),
++                supported_after_mass=after_mass,supported_after_local=after_local,unique_parent_count=len(torch.unique(parent)),
+                 mass_topology=dict(self.mass_topology),group_target_counts=mass["group_target_counts"],
+                 group_clean_counts=self._group_counts(clean),
+-                within_group_moves=mass["within_group_moves"]+support["within_group_moves"],
+-                between_group_moves=mass["between_group_moves"]+support["between_group_moves"],
++                within_group_moves=mass["within_group_moves"]+support["within_group_moves"]+global_phase["within_group_moves"],
++                between_group_moves=mass["between_group_moves"]+support["between_group_moves"]+global_phase["between_group_moves"],
+                 isolation_guard_rejects=mass["isolation_guard_rejects"],ordinary_flagged_deaths=int(flags[child].sum()),
+-                death_policy="v4_mass_then_certified_flagged_outside",multiplicity=3*self.cells,cutoff=Q/(3*self.cells),
++                death_policy="v4_mass_then_local_then_global_certified_flagged_outside",multiplicity=3*self.cells+2,cutoff=Q/(3*self.cells+2),
+                 query_cell_ids=ids,query_category_ids=categories,child_category_ids=categories[child],
+                 parent_category_ids=categories[parent],count_partition=dict(self.count_partition),
+                 count_boundary=self.count_boundary.clone())
+@@ -1035,9 +1187,9 @@
+                              real_anchors=1,parent_rank=None,
+                              latent_kernel="bounded_local_dv12",latent_neighbors=PARENT_RESERVOIR,
+                              latent_rank=recipe.birth_death_metric_rank,
+-                             mass_policy="joint_mass_support_common_3K_unique_parents_v1",
++                             mass_policy="joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+                              count_partition="even_fit_score_order_statistic_2K",
+-                             count_family="original_K_plus_support_2K_common_Q_over_3K",
++                             count_family="original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2",
+                              isolation_parent_pool="supported_same_cell_without_replacement")
+         self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
+                                                    neighbors=PARENT_RESERVOIR, chunk=recipe.birth_death_chunk)
+@@ -1136,6 +1288,8 @@
+                         density_ratio=None,statistical_limit="conditional iid cell test; no repeated adaptive guarantee",
+                         count_partition=dict(snapshot.count_partition),count_boundary=float(snapshot.count_boundary),
+                         count_categories=comparison["categories"],count_multiplicity=comparison["multiplicity"],
++                        count_cutoff=comparison["cutoff"],ordinary_mass_moves=ordinary["mass_moves"],
++                        ordinary_support_moves=ordinary["support_moves"],ordinary_global_moves=ordinary["global_moves"],
+                         ordinary_death_policy=ordinary["death_policy"],
+                         mass_topology=dict(snapshot.mass_topology),
+                         ordinary_within_group_moves=ordinary["within_group_moves"],

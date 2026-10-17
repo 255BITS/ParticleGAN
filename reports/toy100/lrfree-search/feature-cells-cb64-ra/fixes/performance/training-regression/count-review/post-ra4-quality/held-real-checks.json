@@ -1,0 +1,52 @@
+[
+  {
+    "step": 0,
+    "reservoir_equal": true,
+    "data_position": 0
+  },
+  {
+    "step": 100,
+    "reservoir_equal": true,
+    "data_position": 25600
+  },
+  {
+    "step": 250,
+    "reservoir_equal": true,
+    "data_position": 64000
+  },
+  {
+    "step": 500,
+    "reservoir_equal": true,
+    "data_position": 128000
+  },
+  {
+    "step": 750,
+    "reservoir_equal": true,
+    "data_position": 192000
+  },
+  {
+    "step": 1000,
+    "reservoir_equal": true,
+    "data_position": 256000
+  },
+  {
+    "step": 1250,
+    "reservoir_equal": true,
+    "data_position": 320000
+  },
+  {
+    "step": 1500,
+    "reservoir_equal": true,
+    "data_position": 384000
+  },
+  {
+    "step": 1750,
+    "reservoir_equal": true,
+    "data_position": 448000
+  },
+  {
+    "step": 2000,
+    "reservoir_equal": true,
+    "data_position": 512000
+  }
+]

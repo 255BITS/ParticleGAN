@@ -1,0 +1,39 @@
+{
+  "status": "DIRECT_DISTANCE_CLARIFICATION",
+  "records": [
+    {
+      "row": 0,
+      "model": "fast",
+      "recorded_float32_cdist_distance": 0.0008097228710539639,
+      "selected_even_reference_row": 176,
+      "direct_coordinate_distance": 0.0007905685265048966
+    },
+    {
+      "row": 7,
+      "model": "fast",
+      "recorded_float32_cdist_distance": 0.0,
+      "selected_even_reference_row": 728,
+      "direct_coordinate_distance": 0.0003045910256489654
+    },
+    {
+      "row": 0,
+      "model": "ema",
+      "recorded_float32_cdist_distance": 0.011487588286399841,
+      "selected_even_reference_row": 42,
+      "direct_coordinate_distance": 0.011481679889673952
+    },
+    {
+      "row": 7,
+      "model": "ema",
+      "recorded_float32_cdist_distance": 0.0,
+      "selected_even_reference_row": 728,
+      "direct_coordinate_distance": 0.00018532939783002595
+    }
+  ],
+  "input_sha256": "3a65f95b5bb458a51c954e1ad9451c2fc3544d29b622b667e666e1eeca7c6f65",
+  "runner_sha256": "f5e16880b2c7b04c5c88aba02f974263c397786f60d76d3bbec35ed4bde7d945",
+  "scope": "Direct norm to the reference selected by the saved float32 cdist calculation; no exact-match claim.",
+  "inputs_unchanged": true,
+  "frozen_writes": 0,
+  "torch_imported": false
+}

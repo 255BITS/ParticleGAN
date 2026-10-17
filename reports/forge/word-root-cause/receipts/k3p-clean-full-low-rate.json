@@ -1,0 +1,1359 @@
+{
+  "candidate_revision": "f8b63ff6768c3fb3125ec0acb6b03c5f2acb6b37e91a81c433a461e160389ece",
+  "cost": {
+    "adapter_loop_seconds": 149.01589733897708,
+    "completed_steps": 20001,
+    "optimizer_updates": {
+      "discriminator": 20001,
+      "encoder": 20001,
+      "generator": 20001,
+      "prior": 20001
+    },
+    "phase_timing": {
+      "coverage": "partial_adapter",
+      "measured_seconds": 145.11342496122234,
+      "method": "exclusive_synchronized_wall_time",
+      "phases": {
+        "evaluation": {
+          "calls": 25,
+          "seconds": 0.38717105088289827
+        },
+        "sampling": {
+          "calls": 0,
+          "seconds": 0
+        },
+        "training_updates": {
+          "calls": 20001,
+          "seconds": 144.72625391033944
+        }
+      },
+      "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+    },
+    "reservation_seconds": 900,
+    "wall_seconds": 149.23373897298006
+  },
+  "eligible_for_default": false,
+  "family": "k3p",
+  "field_ownership": {
+    "delegated_reference_values": {},
+    "inactive_legacy_host_fields": {},
+    "protocol": {
+      "seed": {
+        "owner": "protocol",
+        "source": "protocol.seed",
+        "value": 0
+      }
+    },
+    "recipe_fields": {
+      "alpha_bar": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ]
+      },
+      "amsgrad": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": false
+      },
+      "batch_size": {
+        "owner": "task",
+        "source": "task.execution.host_definition.resources.batch_size",
+        "status": "effective",
+        "value": 256
+      },
+      "beta2_anneal_end": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.2
+      },
+      "beta2_end": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": null
+      },
+      "betas": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": [
+          0.0,
+          0.999
+        ]
+      },
+      "birth_death_backend": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "knn"
+      },
+      "birth_death_cells": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 64
+      },
+      "birth_death_chunk": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 256
+      },
+      "birth_death_feature_scale": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "none"
+      },
+      "birth_death_isolation": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": false
+      },
+      "birth_death_metric_rank": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 8
+      },
+      "birth_death_parent_policy": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "real_anchor"
+      },
+      "birth_death_space": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "data"
+      },
+      "conditioning": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "scalar"
+      },
+      "continuous_policy": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": null
+      },
+      "critic_formulation": {
+        "owner": "technique",
+        "source": "candidate.recipe_overrides.critic_formulation",
+        "status": "effective",
+        "value": "k3p"
+      },
+      "critic_payoff_damping": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": true
+      },
+      "critic_r1_real": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": true
+      },
+      "d_guard_min_steps": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 200
+      },
+      "d_guard_ratio": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 5.0
+      },
+      "d_lr_mult": {
+        "owner": "hyperparameter",
+        "source": "candidate.recipe_overrides.d_lr_mult",
+        "status": "effective",
+        "value": 1.5
+      },
+      "direct_particle_betas": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": [
+          0.0,
+          0.9
+        ]
+      },
+      "direct_particle_gain": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": true
+      },
+      "distance_reduction": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "sum"
+      },
+      "ema_decay": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.995
+      },
+      "encoder_mode": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "none"
+      },
+      "eps": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 1e-08
+      },
+      "input_noise_anneal_end": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.1
+      },
+      "input_noise_std": {
+        "owner": "hyperparameter",
+        "source": "candidate.recipe_overrides.input_noise_std",
+        "status": "effective",
+        "value": 0.0
+      },
+      "latent_damping_max_rate": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.5
+      },
+      "lr": {
+        "owner": "hyperparameter",
+        "source": "candidate.recipe_overrides.lr",
+        "status": "effective",
+        "value": 0.0006
+      },
+      "lr_anneal_start": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.6
+      },
+      "lr_control": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "mobility"
+      },
+      "lr_floor": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.05
+      },
+      "model": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "gan"
+      },
+      "name": {
+        "owner": "technique",
+        "source": "candidate.recipe_overrides.name",
+        "status": "metadata",
+        "value": "k3p"
+      },
+      "network_lr_floor": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.01
+      },
+      "network_lr_horizon_cap": {
+        "owner": "hyperparameter",
+        "source": "candidate.recipe_overrides.network_lr_horizon_cap",
+        "status": "effective",
+        "value": null
+      },
+      "num_classes": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": null
+      },
+      "num_particles": {
+        "owner": "task",
+        "source": "task.execution.host_definition.resources.num_particles",
+        "status": "effective",
+        "value": 5
+      },
+      "observation_sigma": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.03
+      },
+      "optimizer_family": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "formulation"
+      },
+      "output_noise_mode": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "fixed"
+      },
+      "output_noise_std": {
+        "owner": "hyperparameter",
+        "source": "candidate.recipe_overrides.output_noise_std",
+        "status": "effective",
+        "value": 0.0
+      },
+      "output_noise_warmup": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.2
+      },
+      "particle_birth_death": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": false
+      },
+      "prior_betas": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": null
+      },
+      "prior_kind": {
+        "owner": "task",
+        "source": "task.execution.prior.kind",
+        "status": "effective",
+        "value": "particles"
+      },
+      "prior_lr_mult": {
+        "owner": "hyperparameter",
+        "source": "candidate.recipe_overrides.prior_lr_mult",
+        "status": "effective",
+        "value": 2.0
+      },
+      "prior_reg": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.0
+      },
+      "reconstruction_weight": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 1.0
+      },
+      "reg_anchor_min_decay": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.9
+      },
+      "reg_anchor_weight": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 1.0
+      },
+      "reg_arm": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": null
+      },
+      "reg_coeff": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 1.0
+      },
+      "reg_coeff_anneal_end": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.2
+      },
+      "reg_coeff_end": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": null
+      },
+      "reg_every": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 1
+      },
+      "reg_kappa": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 1.0
+      },
+      "reopen_anchor": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "hold"
+      },
+      "reopen_guard": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": null
+      },
+      "reopen_signal": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "data"
+      },
+      "routing_temperature": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.25
+      },
+      "row_evidence_exclude": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": true
+      },
+      "row_evidence_gate": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": false
+      },
+      "row_evidence_hold": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": true
+      },
+      "row_evidence_hot": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": true
+      },
+      "row_evidence_null": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "theory"
+      },
+      "row_policy": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "independent"
+      },
+      "serve_average": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.0
+      },
+      "sigma_rel": {
+        "owner": "task",
+        "source": "public prior binding: absolute task sigma replaces relative calibration",
+        "status": "effective",
+        "value": 0.0
+      },
+      "standardize": {
+        "owner": "task",
+        "source": "task.execution.prior.standardize",
+        "status": "effective",
+        "value": false
+      },
+      "table_release_rule": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "any"
+      },
+      "total_steps": {
+        "owner": "task",
+        "source": "task.execution.original_schedule_horizon",
+        "status": "effective",
+        "value": 20000
+      },
+      "ucd_target": {
+        "owner": "technique",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": "class"
+      },
+      "ucd_weight": {
+        "owner": "hyperparameter",
+        "source": "public Recipe default",
+        "status": "effective",
+        "value": 0.02
+      },
+      "z_dim": {
+        "owner": "task",
+        "source": "task.execution.host_definition.resources.z_dim",
+        "status": "effective",
+        "value": 2
+      }
+    },
+    "reference_declarations": {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      }
+    },
+    "schema_version": 1,
+    "task_contract": {
+      "budget": {
+        "owner": "task",
+        "source": "task.execution and task.resources",
+        "value": {
+          "execution_resources": {
+            "cpu_threads": 1,
+            "gpu_memory_mb": 2048,
+            "gpus": 1,
+            "timeout_seconds": 900
+          },
+          "original_schedule_horizon": 20000,
+          "steps": 20001
+        }
+      },
+      "evaluation": {
+        "owner": "task",
+        "source": "task.evaluation",
+        "value": {
+          "eval_output_noise": "clean",
+          "eval_samples": 1024,
+          "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+          "evaluator_revision": {
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": {
+              "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+              "id": "joint-word-task-source-binding-v2",
+              "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+            },
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
+          },
+          "guards": {
+            "exact_optimizer_updates": true,
+            "finite_state": true,
+            "mechanism_exercised": true,
+            "optimizer_roles": [
+              "generator",
+              "encoder",
+              "prior",
+              "discriminator"
+            ],
+            "rng_isolation": true
+          },
+          "kind": "transfer_sustained",
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "sampling_contract_version": 1,
+          "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+          "scoring_weights": "live",
+          "sources": {
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+            "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+          },
+          "thresholds": [
+            [
+              "sample_count",
+              ">=",
+              1024
+            ],
+            [
+              "quality_fraction",
+              ">=",
+              0.95
+            ],
+            [
+              "modes",
+              "==",
+              5
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "reconstruction_exact",
+              "==",
+              1
+            ],
+            [
+              "minimum_reconstruction_token_probability",
+              ">=",
+              0.9
+            ]
+          ]
+        }
+      },
+      "host": {
+        "owner": "task",
+        "source": "frozen task architecture/data declaration and host source",
+        "value": {
+          "definition": {
+            "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+            "encoder_widths": [
+              168,
+              128,
+              64,
+              2
+            ],
+            "generator_widths": [
+              2,
+              64,
+              128,
+              168
+            ],
+            "joint_critic_widths": [
+              170,
+              256,
+              128,
+              1
+            ],
+            "length": 6,
+            "resources": {
+              "batch_size": 256,
+              "num_particles": 5,
+              "z_dim": 2
+            },
+            "words": [
+              "apple",
+              "grape",
+              "lemon",
+              "melon",
+              "berry"
+            ]
+          },
+          "model": null,
+          "native_profile": null,
+          "problem": null,
+          "recipe_resources": null,
+          "source": "benchmarks/toy_audit/api_images.py"
+        }
+      },
+      "initialization": {
+        "owner": "task",
+        "source": "task.execution.initializer",
+        "value": "deterministic_orthogonal"
+      },
+      "prior": {
+        "applicability": "sampled",
+        "code_path": "ParticlePrior",
+        "owner": "task",
+        "source": "task.execution.prior",
+        "value": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        }
+      }
+    },
+    "task_id": "five_word_joint_acquisition",
+    "version": "forge-field-boundaries-v1"
+  },
+  "final_metrics": {
+    "completed_steps": 20001.0,
+    "mass_apple": 0.0,
+    "mass_berry": 0.4111328125,
+    "mass_grape": 0.0,
+    "mass_lemon": 0.3798828125,
+    "mass_melon": 0.0,
+    "mass_tv": 0.6,
+    "minimum_reconstruction_token_probability": 2.6647054340855902e-08,
+    "modes": 2,
+    "output_noise_added": 0.0,
+    "policy_latent_perturbation": 0.0,
+    "quality_fraction": 0.791015625,
+    "reconstruction_exact": 0,
+    "reconstruction_nll": 5.478310870601314,
+    "sample_count": 1024,
+    "served_averaged": 0.0,
+    "step": 20001
+  },
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": 0,
+          "metric": "sample_count",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 1024,
+          "value": 1024
+        },
+        {
+          "margin": -0.15898437499999996,
+          "metric": "quality_fraction",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.95,
+          "value": 0.791015625
+        },
+        {
+          "margin": -3,
+          "metric": "modes",
+          "op": "==",
+          "status": "FAIL",
+          "threshold": 5,
+          "value": 2
+        },
+        {
+          "margin": -0.5,
+          "metric": "mass_tv",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.1,
+          "value": 0.6
+        },
+        {
+          "margin": -1,
+          "metric": "reconstruction_exact",
+          "op": "==",
+          "status": "FAIL",
+          "threshold": 1,
+          "value": 0
+        },
+        {
+          "margin": -0.8999999733529457,
+          "metric": "minimum_reconstruction_token_probability",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.9,
+          "value": 2.6647054340855902e-08
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.794558657346062,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "metrics": {
+      "completed_steps": 20001.0,
+      "mass_apple": 0.0,
+      "mass_berry": 0.4111328125,
+      "mass_grape": 0.0,
+      "mass_lemon": 0.3798828125,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 2.6647054340855902e-08,
+      "modes": 2,
+      "output_noise_added": 0.0,
+      "policy_latent_perturbation": 0.0,
+      "quality_fraction": 0.791015625,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 5.478310870601314,
+      "sample_count": 1024,
+      "served_averaged": 0.0,
+      "step": 20001
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "FAIL"
+  },
+  "guards": {
+    "all_finite": true,
+    "hooks_exercised": true,
+    "mechanism_audit": {
+      "mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 20001,
+          "eligible": 0,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_anchor": {
+          "applied": 3973,
+          "calls": 20001,
+          "eligible": 3974,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_guard": {
+          "applied": 457,
+          "calls": 20001,
+          "eligible": 19801,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_penalty": {
+          "applied": 20001,
+          "calls": 20001,
+          "eligible": 20001,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "gain": 2.0,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        }
+      },
+      "schema_version": 1
+    },
+    "optimizer_updates": {
+      "discriminator": 20001,
+      "encoder": 20001,
+      "generator": 20001,
+      "prior": 20001
+    },
+    "unintended_rng_deviations": 0
+  },
+  "host": {
+    "definition": {
+      "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+      "encoder_widths": [
+        168,
+        128,
+        64,
+        2
+      ],
+      "generator_widths": [
+        2,
+        64,
+        128,
+        168
+      ],
+      "joint_critic_widths": [
+        170,
+        256,
+        128,
+        1
+      ],
+      "length": 6,
+      "resources": {
+        "batch_size": 256,
+        "num_particles": 5,
+        "z_dim": 2
+      },
+      "words": [
+        "apple",
+        "grape",
+        "lemon",
+        "melon",
+        "berry"
+      ]
+    },
+    "initial_prior_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+    "models": {
+      "discriminator": {
+        "class": "benchmarks.toy_audit.api_images.WordJointCritic",
+        "initial_state_sha256": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "parameter_shapes": {
+          "net.0.bias": [
+            256
+          ],
+          "net.0.weight": [
+            256,
+            170
+          ],
+          "net.2.bias": [
+            128
+          ],
+          "net.2.weight": [
+            128,
+            256
+          ],
+          "net.4.bias": [
+            1
+          ],
+          "net.4.weight": [
+            1,
+            128
+          ]
+        },
+        "parameters": 76801
+      },
+      "encoder": {
+        "class": "benchmarks.toy_audit.api_images.WordEncoder",
+        "initial_state_sha256": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "parameter_shapes": {
+          "net.1.bias": [
+            128
+          ],
+          "net.1.weight": [
+            128,
+            168
+          ],
+          "net.3.bias": [
+            64
+          ],
+          "net.3.weight": [
+            64,
+            128
+          ],
+          "net.5.bias": [
+            2
+          ],
+          "net.5.weight": [
+            2,
+            64
+          ]
+        },
+        "parameters": 30018
+      },
+      "generator": {
+        "class": "benchmarks.toy_audit.api_images.WordGenerator",
+        "initial_state_sha256": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "parameter_shapes": {
+          "net.0.bias": [
+            64
+          ],
+          "net.0.weight": [
+            64,
+            2
+          ],
+          "net.2.bias": [
+            128
+          ],
+          "net.2.weight": [
+            128,
+            64
+          ],
+          "net.4.bias": [
+            168
+          ],
+          "net.4.weight": [
+            168,
+            128
+          ]
+        },
+        "parameters": 30184
+      }
+    },
+    "profile": null
+  },
+  "id": "k3p-clean-full-low-rate",
+  "initialization": {
+    "discriminator": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.0.bias": 3734295931346225499,
+        "net.0.weight": 8910211641772985932,
+        "net.2.bias": 1656871869629328331,
+        "net.2.weight": 9070382962554913347,
+        "net.4.bias": 333772184539410714,
+        "net.4.weight": 3220091654461954378
+      }
+    },
+    "encoder": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.1.bias": 8635568878908975799,
+        "net.1.weight": 2352436766040047569,
+        "net.3.bias": 4684962440974121638,
+        "net.3.weight": 1013739058699418041,
+        "net.5.bias": 1863516330406637661,
+        "net.5.weight": 4393974776920474204
+      }
+    },
+    "generator": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.0.bias": 2669906441505372968,
+        "net.0.weight": 3213176745718584912,
+        "net.2.bias": 265576875384124118,
+        "net.2.weight": 5825468874490035566,
+        "net.4.bias": 6418902638380629685,
+        "net.4.weight": 3028787476376713866
+      }
+    },
+    "prior": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "z": 6640234621280078221
+      }
+    }
+  },
+  "initializer": "deterministic_orthogonal",
+  "parent": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+  "parent_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+  "prior": {
+    "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+    "kind": "particle_cloud",
+    "learnable": true,
+    "sigma": 0.0,
+    "standardize": false
+  },
+  "protocol_id": "word-root-cause-parameter-round1-v1",
+  "protocol_sha256": "1bfe08d9b07f6a2d69d8bca6f3a51c42cbe1ba571b1ba2d82107a206b19ce760",
+  "qualification_input": false,
+  "raw_artifacts": {
+    "adapter-receipt.json": {
+      "bytes": 55535,
+      "sha256": "031f8ffbdd7c2e0186645264dcb297d8cc0fa1db7e1c89ae49283932235f1eb9"
+    },
+    "observations.npz": {
+      "bytes": 690436,
+      "sha256": "5072600fb90fb379695c687e0b56d7525a86b20bbb18415ffa830389e9bf4891"
+    },
+    "observed-records.pt": {
+      "bytes": 35388461,
+      "sha256": "1ba632bbeb4eefcaa6577d4ec5ddc0b0b7002ee9213663538fdfc8b0b26dfd9f"
+    },
+    "request.json": {
+      "bytes": 14952,
+      "sha256": "1b82e18234a0df7e20904b27db70f28efb14c2d02b06b7a778fe57291c4f8d5d"
+    },
+    "source-manifest.json": {
+      "bytes": 136054,
+      "sha256": "b98dd936ee461219ef01108620bd345bc97168cf93b85dde0e60a42c546ce74a"
+    },
+    "state.pt": {
+      "bytes": 2254995,
+      "sha256": "0fe978510114173138ea7573d850deef48226773e86e08a97dd332c0569716fb"
+    }
+  },
+  "raw_directory": "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round1/k3p-clean-full-low-rate",
+  "recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 256,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0006,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 5,
+    "observation_sigma": 0.03,
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 20000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "recipe_delta": {
+    "d_lr_mult": 1.5,
+    "input_noise_std": 0.0,
+    "lr": 0.0006,
+    "network_lr_horizon_cap": null,
+    "output_noise_std": 0.0,
+    "prior_lr_mult": 2.0
+  },
+  "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+  "runtime": {
+    "cpu_threads": 1,
+    "cublas_workspace_config": ":4096:8",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "deterministic_algorithms": true,
+    "device": "cuda:0",
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.14.7",
+    "torch": "2.14.0+cu130"
+  },
+  "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+  "schema_version": 1,
+  "scope": "User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.",
+  "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+  "source_digest": "a243817e934a3b889bc5233f804db3079e4f2dd3f7b1311edd1012434dd807d0",
+  "task": {
+    "adapter": "word_joint",
+    "dependencies": [],
+    "description": "Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding?",
+    "evaluation": {
+      "eval_output_noise": "clean",
+      "eval_samples": 1024,
+      "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+      "evaluator_revision": {
+        "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+        "id": "explicit-equality-and-word-prior-betas-v3",
+        "previous_revision": {
+          "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+          "id": "joint-word-task-source-binding-v2",
+          "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+        },
+        "previous_source_sha256": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        }
+      },
+      "guards": {
+        "exact_optimizer_updates": true,
+        "finite_state": true,
+        "mechanism_exercised": true,
+        "optimizer_roles": [
+          "generator",
+          "encoder",
+          "prior",
+          "discriminator"
+        ],
+        "rng_isolation": true
+      },
+      "kind": "transfer_sustained",
+      "minimum_stable_checks": 5,
+      "observations": 24,
+      "sampling_contract_version": 1,
+      "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+      "scoring_weights": "live",
+      "sources": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          1024
+        ],
+        [
+          "quality_fraction",
+          ">=",
+          0.95
+        ],
+        [
+          "modes",
+          "==",
+          5
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "reconstruction_exact",
+          "==",
+          1
+        ],
+        [
+          "minimum_reconstruction_token_probability",
+          ">=",
+          0.9
+        ]
+      ]
+    },
+    "execution": {
+      "execution_path": "public_components",
+      "host": "five_word_joint",
+      "host_definition": {
+        "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+        "encoder_widths": [
+          168,
+          128,
+          64,
+          2
+        ],
+        "generator_widths": [
+          2,
+          64,
+          128,
+          168
+        ],
+        "joint_critic_widths": [
+          170,
+          256,
+          128,
+          1
+        ],
+        "length": 6,
+        "resources": {
+          "batch_size": 256,
+          "num_particles": 5,
+          "z_dim": 2
+        },
+        "words": [
+          "apple",
+          "grape",
+          "lemon",
+          "melon",
+          "berry"
+        ]
+      },
+      "host_source": "benchmarks/toy_audit/api_images.py",
+      "initializer": "deterministic_orthogonal",
+      "original_schedule_horizon": 20000,
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "produces_state": false,
+      "protocol": "screening",
+      "steps": 20001
+    },
+    "id": "five_word_joint_acquisition",
+    "requires_capabilities": [
+      "public_components",
+      "checkpoint",
+      "named_rng",
+      "live_sampling",
+      "learned_locations",
+      "particle_cloud"
+    ],
+    "research_artifacts": {
+      "api_publication": "reports/toy_audit/api_contract/five_word_joint/publication.json",
+      "readout": "reports/forge/five-word-joint/README.md"
+    },
+    "resources": {
+      "cpu_threads": 1,
+      "gpu_memory_mb": 2048,
+      "gpus": 1,
+      "timeout_seconds": 900
+    },
+    "retained_question_ids": [
+      "source-family-15"
+    ],
+    "schema_version": 1
+  },
+  "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+}

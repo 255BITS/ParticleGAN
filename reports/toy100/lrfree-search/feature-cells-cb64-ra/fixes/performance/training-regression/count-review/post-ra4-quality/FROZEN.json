@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "purpose": "CPU mechanical evidence; population-continuity scheduler prototype, quality effect unqualified",
+  "files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/population_certificate.py": {
+      "sha256": "5ba1429a48aaa970d974644634029f89718dcdba0cda83828808ca15ac85887e",
+      "bytes": 5468
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/audit_dynamics.py": {
+      "sha256": "f19415163419b6c183a4e072b8730caba6d53e49de2923e02df1690cf7d16080",
+      "bytes": 12965
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/REPORT.md": {
+      "sha256": "681a5a262eca81e6cfac22a114b5b8ce3eeb752c524d34765461c15844bd6a3f",
+      "bytes": 5602
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/receipt.json": {
+      "sha256": "0d010d466d694c0e5ecc4fd20de9af6640fd25d88d9b36013d99ae780a33af67",
+      "bytes": 7400
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/traces.json": {
+      "sha256": "3dc039085544070d8c04d3caab8f4e24aad406698a93ccc952dcc79bc87dad4d",
+      "bytes": 152610
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/held-real-checks.json": {
+      "sha256": "8a32a47ad308731f01018ad4fd4d169e678453fbb667a29356707840146f27e3",
+      "bytes": 829
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/grid-snapshot.json": {
+      "sha256": "9fc8ffbe4a7a5906d71102f643a3ba9457496a8e13f0cfe58880f1c3bef09532",
+      "bytes": 454696
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/attempt1.log": {
+      "sha256": "208a0f4f3cf3cc27c719790ff723605936a42b9152ee07106b21ae4feaf528f4",
+      "bytes": 492
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/final.log": {
+      "sha256": "9625370598d445ec54357c1892d33608e6b9ede72b6c95d71d7686102f3aba96",
+      "bytes": 523
+    }
+  },
+  "reviewed_frozen_inputs": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/continuous.py": "26c71f54cab370cd5bc6b2faa9e860cf01600db780dddfdda6fcaf6081254388",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/training.py": "f5626e4e25f62b37aa76b162ef4d351ed45dad0b5c24dc2c0c385be3d42d6a7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/config.json": "fab170e44d5649334ea12586fa2efa9e3a9436a5f4a355fd16b011a497cf1118",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/config.json": "e101a2385b54d8c10c2cf26e0a96cf923754c5b81ae5b78526ee3a2da1108752",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0000.pt": "dce4dec4d1d6ff904a0c6421e7432ee6d8efd5ac7e3674f8510a4e1ab5317ad4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0100.pt": "945d3e39ae8ac429acd1e6d6b01635a90d11596eb789483bac6b67fc9bf334b8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0250.pt": "f8ba563d4fa4d8485462686f2186396a0e0436d7f7c8dc2261827e1229954709",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0500.pt": "c9dfea7b89834237dab0b4e7e52cba0d11370eef38dd4c51727308d0d7252be0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0750.pt": "33a5fb00315e649d68408340a278977df1b0154dfddeffcc3ade3ab8a2dd718c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1000.pt": "56fb3dfcc4112d0712575c053d64a2e3ef4519e97e041eeaf1f744dcaf26bf72",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1250.pt": "56508352d9856ec0dff125d91cea8527db14f19b6a2a80cc0805ac1117509da0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1500.pt": "24ddb26c4097865ffbce9afc72b7fc344665daf4ff8a0cbd2bf9ebf081ce0be9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1750.pt": "a2b64fd02a99769cc6fbf8b42a8fa81e3087b100c7012af7601bee0c604e5654",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-2000.pt": "9d27cc4cfbb5b3b1ce9e209f41e850617a715f2c57e6c5ecb9c0ddd2c8634d2f",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-0000.pt": "78f2baab3f15c4b6fd52ec5110cc4882826371f2dc7741baf2148f37ec756e02",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-0100.pt": "ec96ed10b40ab7f4a4b77a486389e053005aa0474275f767e7c4783172f1b3b4",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-0250.pt": "caef9221b935ff01743c515547b147307bd76dd93f1e2f9516a30ef8b14ff335",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-0500.pt": "394326ef0a4b71ee46c7913d283aecf3506f21d7c2a82a5e036d9a12318c185f",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-0750.pt": "552ce3478c9e5952e1e24f54cb934a7d900726648d9a2d91fb4575fc7317393b",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-1000.pt": "e09a4db18c93ff6c50f8d4f42d9067f4bddedbc6e2e387d64fdedc7e5d8791b0",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-1250.pt": "470eb6b4dd0d43e7a44639ad7ce72eb81349e3f51d4f60c0711a5ad92646c0d2",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-1500.pt": "eaf33eed3f7153cf74958071ee3d64a09bca62450aeeadda5e77dfa5217aba7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-1750.pt": "d3350c6fdebc268c45b00e1889b81c0362e4a15ad0e37980f0c706d74b6ada70",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-2000.pt": "2d6d08c195b993120696cc4374fc3a1fa3c8fe35ff042d73e8ae9b06bc2e8c09",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/population_certificate.py": "5ba1429a48aaa970d974644634029f89718dcdba0cda83828808ca15ac85887e"
+  },
+  "optimizer_updates": 0,
+  "cuda_contexts": 0,
+  "new_seeds": 0
+}

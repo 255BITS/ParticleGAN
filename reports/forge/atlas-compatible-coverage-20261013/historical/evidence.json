@@ -1,0 +1,921 @@
+{
+  "schema": "atlas_preserved_historical_context_v1",
+  "qualification_input": false,
+  "parent_selected_credit": false,
+  "new_experiments": 0,
+  "source_reports": [
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/FAST_PANEL_REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/FAST_PANEL_REPORT.md",
+      "sha256": "b96d65169f73fd712d19bad3fccd02bbd5d924446dc79965137986cdde99c05c",
+      "bytes": 8363,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/TRANSFER_REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/TRANSFER_REPORT.md",
+      "sha256": "c099ebd4643b2f618a96609101488a87e5b6c10c76aa439b47f7f5a76e3ecd85",
+      "bytes": 10671,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/REPORT.md",
+      "sha256": "94916bca003d12f00d3d12bed32b04a19c5641384e70343ed182919bc5b8e0df",
+      "bytes": 12515,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/SUCCESSOR_REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/SUCCESSOR_REPORT.md",
+      "sha256": "49bf3aecd9f574010ec3a23e50a962a5965e0b60504dc8e9db955865c3c6dfbc",
+      "bytes": 10606,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/RING_CAUSAL_SYNTHESIS_REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/RING_CAUSAL_SYNTHESIS_REPORT.md",
+      "sha256": "6427ad39456cc600ebe94c32a41eef9b1f0e9003af31b44249c566552ecfa47c",
+      "bytes": 11730,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/EARLY_RESIDUAL_REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/EARLY_RESIDUAL_REPORT.md",
+      "sha256": "2b696299ce0d81980d634b48914afe197042257fb25f2e07e28e39b22c0bc5f3",
+      "bytes": 8751,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/RING_TRUST_CORRECTED_REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/RING_TRUST_CORRECTED_REPORT.md",
+      "sha256": "8c48c76dbb22620d141ebe2f100f1b0baa4197a98b23aa13a94589f04a5e7400",
+      "bytes": 5591,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/CLEAN100_SETTLING_DECOMPOSITION_REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/CLEAN100_SETTLING_DECOMPOSITION_REPORT.md",
+      "sha256": "cfce3b321cdee1af208f44878dbfc2acbbdb09c776ed3126a9bcb7359ad4b23d",
+      "bytes": 8192,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/MODE_HOLD_QUARTER_TERMINAL_REPORT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/MODE_HOLD_QUARTER_TERMINAL_REPORT.md",
+      "sha256": "92777139d124542c7dcf55fbfe7fed882ffebf0097660af2bf98ffd0fba44152",
+      "bytes": 5245,
+      "scope": "Original historical report, unmodified; machine-local links are archival references, not portable downloadable artifacts."
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/FAST_PANEL_COPY_RECEIPT.json",
+      "sha256": "985bd24780d517120add23eb20f2def377961a3112c9c9126a6ee2dafcef6680",
+      "bytes": 787,
+      "bulk_handoff_retained_locally": true
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/TRANSFER_HANDOFF.json",
+      "sha256": "ad473eb77533be1b25ccb50d7b1eb46b52e3de5ca744030c5ce7c1f18a1b9ab6",
+      "bytes": 33861,
+      "bulk_handoff_retained_locally": true
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/RING_CAUSAL_SYNTHESIS_HANDOFF.json",
+      "sha256": "a086da1d4c48fbf24a640636e4fdb79cf2673cec2c42863754bbff46196e2334",
+      "bytes": 2500,
+      "bulk_handoff_retained_locally": true
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/READOUT.md",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/READOUT.md",
+      "sha256": "aa20290a95285aa3383607673c1aabbc283f8a2fb8c9213100910791049ee12f",
+      "bytes": 3636
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/INVENTORY-RECEIPT-PACKET.json",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/INVENTORY-RECEIPT-PACKET.json",
+      "sha256": "f14514230e11e79482dbc8fe2b3f75a29ce3b11ef2c2986ef10c0e82935b7e5e",
+      "bytes": 7111
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/ROUND-AUDIT.json",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/ROUND-AUDIT.json",
+      "sha256": "526dcb6f24a844ddad1c76042289ffc19794e751d66f6d8c86b6cba380639510",
+      "bytes": 7720
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/preregistration.json",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/preregistration.json",
+      "sha256": "f7faa35480c02718d352c97ae4cbc784c0c92c61b38c4738e07a20ca44bd4b69",
+      "bytes": 13040
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/PRELAUNCH-BINDING.json",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/PRELAUNCH-BINDING.json",
+      "sha256": "6fd027d2063d32693d74e3821be89bdc73811951719979dd82ea65abd4024e98",
+      "bytes": 684
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/TERMINAL-HOST-RECEIPT.json",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/TERMINAL-HOST-RECEIPT.json",
+      "sha256": "c33e4513d24d58c3601394926d26f2b3f5607c1874413518d73ba76dc7341b09",
+      "bytes": 2020
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/actual-training/astra-atlas-squared.gif",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/gifs/astra-atlas-squared.gif",
+      "sha256": "ec3f77dc207a0f83c911a6dacbaadab968da0347bc25771842172fa88ade80cf",
+      "bytes": 35023
+    },
+    {
+      "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-12/task-81126997-1552-4830-8720-0d10c0853d6f/astra-atlas-cap-seed0/actual-training/astra-atlas-rms-cap.gif",
+      "published_copy": "reports/forge/atlas-compatible-coverage-20261013/historical/native-real-cap/gifs/astra-atlas-rms-cap.gif",
+      "sha256": "c5ac9b9e7203edbff2f73eb439f2d4ba1e430e1849805805524e6fcad5a25558",
+      "bytes": 41003
+    }
+  ],
+  "cohorts": [
+    {
+      "id": "adapted_ra14_fast_panel_20261010_11",
+      "scope": "Opt-in public API adapter; original RA14 global recipe; raw 20000x2 particles, affine G, native D, DV12 selected-policy clean primary. Images have separately declared z2->8/table20000->32/batch2048->32 adaptation.",
+      "reported_counts": {
+        "PASS": 7,
+        "FAIL": 4
+      },
+      "cases": [
+        {
+          "task": "vector_unequal_width",
+          "actual_updates": 1200,
+          "original_updates": 1200,
+          "reported_primary_status": "PASS",
+          "passing_checks": 20,
+          "observations": 24,
+          "first_observed_pass": 250,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "vector_anisotropic",
+          "actual_updates": 1200,
+          "original_updates": 1200,
+          "reported_primary_status": "PASS",
+          "passing_checks": 20,
+          "observations": 24,
+          "first_observed_pass": 250,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "vector_two_broad",
+          "actual_updates": 1200,
+          "original_updates": 1200,
+          "reported_primary_status": "PASS",
+          "passing_checks": 23,
+          "observations": 24,
+          "first_observed_pass": 100,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "vector_unequal_mass",
+          "actual_updates": 1200,
+          "original_updates": 1200,
+          "reported_primary_status": "PASS",
+          "passing_checks": 20,
+          "observations": 24,
+          "first_observed_pass": 250,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "vector_overlap",
+          "actual_updates": 1200,
+          "original_updates": 1200,
+          "reported_primary_status": "PASS",
+          "passing_checks": 23,
+          "observations": 24,
+          "first_observed_pass": 100,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "vector_spiral",
+          "actual_updates": 1600,
+          "original_updates": 1600,
+          "reported_primary_status": "PASS",
+          "passing_checks": 23,
+          "observations": 24,
+          "first_observed_pass": 134,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "img_stripes2",
+          "actual_updates": 600,
+          "original_updates": 600,
+          "reported_primary_status": "PASS",
+          "passing_checks": 14,
+          "observations": 24,
+          "first_observed_pass": 275,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "img_intensity2",
+          "actual_updates": 600,
+          "original_updates": 600,
+          "reported_primary_status": "FAIL",
+          "passing_checks": 0,
+          "observations": 24,
+          "first_observed_pass": null,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "img_bars4",
+          "actual_updates": 600,
+          "original_updates": 600,
+          "reported_primary_status": "FAIL",
+          "passing_checks": 0,
+          "observations": 24,
+          "first_observed_pass": null,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "img_blobs4",
+          "actual_updates": 300,
+          "original_updates": 600,
+          "reported_primary_status": "FAIL",
+          "passing_checks": 0,
+          "observations": 12,
+          "first_observed_pass": null,
+          "full_training_horizon_complete": false,
+          "formal_receipt_this_turn_regraded": false
+        },
+        {
+          "task": "ring16_acquisition",
+          "actual_updates": 400,
+          "original_updates": 400,
+          "reported_primary_status": "FAIL",
+          "passing_checks": 4,
+          "observations": 24,
+          "first_observed_pass": 350,
+          "full_training_horizon_complete": true,
+          "formal_receipt_this_turn_regraded": false
+        }
+      ],
+      "width_anisotropic_counted_once_in_eleven": true,
+      "raw_error_preservation": "Both earlier width/aniso post-training JSON-export ERRORs remain raw ERROR; reported sustained passes came from separately audited saved-report recovery, not rewriting raw terminals.",
+      "blobs_original_600_update_protocol_incomplete": true,
+      "qualification": false
+    },
+    {
+      "id": "native_ra14_restoration_continuation_20261010",
+      "scope": "Bounded restored model/optimizer/controller/RNG/sampler comparison; not current qualification",
+      "eight_output_array_comparisons_bit_identical": true,
+      "real_resumed_updates": 90,
+      "three_layouts": true,
+      "raw_strict_state_matches": "9/30 retained; write-only eval_seconds differs; learned-state compatibility not substituted for literal equality"
+    },
+    {
+      "id": "ring_retained_fresh_and_transport_20261010_11",
+      "scope": "Original 400-update Ring and separately retained/fresh repair branches",
+      "findings": [
+        "Off-support acquisition precedes missing fifth original clean terminal check.",
+        "Retained early residual repair gained fifth selected-clean check; fresh repair exposed inadequate radial spread.",
+        "Corrected transport candidate failed protected-output feasibility and closed; neighbor refresh is a measured repair-locality obstacle, not an established initiating cause."
+      ],
+      "causal_synthesis_new_training": 0
+    },
+    {
+      "id": "clean100_settling_and_quarterG_20261010_11",
+      "scope": "Original source/prior/serving retained; interventions and later analysis kept separate",
+      "findings": [
+        "Extra settling improved conditional width but harmed LIVE HQ; residual deformation accounted for 91\u201396% of additional HQ loss.",
+        "Quarter-G local 1050 dip prevention was a prefix observation; full original 1200-horizon terminal remains failed.",
+        "Later D/P factorial has 40 failed scored cells, not 40 new runs."
+      ]
+    },
+    {
+      "id": "native_atlas_real_KA2A_RMS_cap_seed0_80x24_20261013",
+      "source_digest": "5bc17f2a0984e6dc413ec0ca106d49bff91743798ae5fcc520f8aa26bdef41ff",
+      "reported_statuses": {
+        "squared": "FAIL",
+        "rms_cap": "PASS"
+      },
+      "attempts": [
+        "1b18615dff364f489c4c0dee66ff0b47",
+        "145aeb03170146bea4301c3329b0b04a"
+      ],
+      "new_experiments_this_publication": 0,
+      "parent_selected_credit": false,
+      "lesson": "Per-example real input-gradient RMS hinge repaired direct-table early acquisition versus full native R1 ON; 80 updates do not test call800, Ring or heldout transfer. Output/logit penalties are separate.",
+      "all_original_packet_pins_reverified": true
+    }
+  ],
+  "audit_source": {
+    "path": "/ml2/codex-storage/future-workspaces/2026-10-13/task-3/audit/recoverability.json",
+    "sha256": "dd51fa272538dd96a4c647a24424d34185a5bf2ffd8fbd58ad499d88c58cf3aa"
+  },
+  "original_147_source_recheck": {
+    "checked": 147,
+    "missing": 0,
+    "mismatched": 0,
+    "records": [
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/gan_v3.py",
+        "sha256": "00ca856749c82ce3d4e554ced924dda4399311d2e31ca8dbea8b8d5829141538"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/legacy/gan_loss.py",
+        "sha256": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/legacy/grad_regularizers.py",
+        "sha256": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/legacy/locked_shared.py",
+        "sha256": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/legacy/recipe.py",
+        "sha256": "9a78476be08d90068bd772b141fa21db6ebe193a9d73db2323b9bab018d27d62"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/__init__.py",
+        "sha256": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/baseline.py",
+        "sha256": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/hosts/__init__.py",
+        "sha256": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/hosts/ae_gan_hold.py",
+        "sha256": "a962cececa641f39d61ae067d38c3c979af73173be10dee3f27feb66fc02e492"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/hosts/cover_leftover.py",
+        "sha256": "cbe79ec927e1409d32cf4c423db93848c90f93cf3a7586294a8eeea8a4b34c17"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/hosts/mid_scale_identity.py",
+        "sha256": "48f4d4842ef73ebf92bedbfad83a915d4010cd1b8eed408a913ddcbfb366a06e"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/hosts/residual_student.py",
+        "sha256": "e9464727cda9fa0ad035774adf4ff1c2fb0b1017e47e01566f551e29305a912f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/hosts/unipolar.py",
+        "sha256": "88f2970af9a19777a80e974b6301a049acc4a1f38ddb31387058eeca005e948e"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/hosts/unused_token_hold.py",
+        "sha256": "090abe6d153ab10cf0e0102e6d2fdcf7f40b9dd63f3b9191e640d7f6a7e2446c"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/mlp.py",
+        "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/mode_hold.py",
+        "sha256": "d312aa76fd631fb2adb2b8de53b92b1dc3f486b9c0a845ab2a25e895e643e855"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/observation.py",
+        "sha256": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/trajectory.py",
+        "sha256": "16c4772609210454d3eb37c7493ea922d4cf43e2cb765deb0bd978af671a58af"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/locked_shared/two_pole.py",
+        "sha256": "4a13360d4218f4b4cc457f79fe78cf92c4a760306e7c3d1239f39827c8429188"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/toy100/device.py",
+        "sha256": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/benchmarks/transfer_suite/protocol.py",
+        "sha256": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/configs/forge/ideas/atlas.json",
+        "sha256": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/configs/forge/tasks/two_pole.json",
+        "sha256": "93bebb4d3a017eb04450c3c84afe1d3f6efd4a38e6d86c9548a4bf431a042bf1"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/__init__.py",
+        "sha256": "5716a43a13f31b3c0987233e7b6e063c311a3b3f9bced2ffcd5c6af6565b7355"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/__main__.py",
+        "sha256": "f4487a029403252788cb0bb338b63c7595703c310ffb6cd6251c190fada25b13"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/adaptation.py",
+        "sha256": "27bb95041b9a5a9e744f8479d37252ace265507ac552827f59cccdf80d625ab7"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/adapters.py",
+        "sha256": "741ac407fbf8d5f825e7143253081fa8856c9937a3152bd0d0e8932f610ffd10"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/api.py",
+        "sha256": "7d10b8b12681aaf81c6481adeb376263f9959d8579cd206a5560d9d96f2afd9e"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/artifact_resolver.py",
+        "sha256": "0397f9d89539e59e1f966220c9a675d5255e13167a778fa35a8eab0ad9bccd7b"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/artifacts.py",
+        "sha256": "d282269ef2c0a45d27fc105121529e952affe0e6328545cc6a43c6333d59187b"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/atlas_measurement.py",
+        "sha256": "db88bd33121a7b1a00155b41841e11d2a37b2b64fd1d01e815b306456b7f9ec0"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/atlas_task_binding.py",
+        "sha256": "1866098ed5324fe9e22bb862c725b00fc27fcfc8312721e18475ae995b17f8be"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/behavior_adapters.py",
+        "sha256": "639d437a4621de84396dcfe6e192b8bd3ed72382bd8cde8943edba336d3cd104"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/board_filters.py",
+        "sha256": "ff5ac84738b4d466e3df8184447e9f2b00a1996b579d79d365d09fb9fa5a15f1"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/boundaries.py",
+        "sha256": "24833c54589e16842b6cf5c5c220ab45b330ebb17b6e52392415993cd0677814"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/calibration.py",
+        "sha256": "070f0b19f2f6a7673d6bf0df227114df53867b7bec5aedad1658d0f9283f33fa"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/calibration_feasibility.py",
+        "sha256": "54768e0148dfdac6e1548bb42899195d9008ec89fb3f5c3b8950c8ea7ae8a1ba"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/calibration_lane.py",
+        "sha256": "51831eb7ae8a230900116179413cf7ffabd8bf76b493271095ac4927344a5cb8"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/canonical_ae_adapter.py",
+        "sha256": "4257d2f7fa6a1c7c27a96cb3753e64a363564ba16d778aa8cd133174612c6a38"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/canonical_full_atlas_repeat.py",
+        "sha256": "3cd555f011a959b1c470af81c166ae8bb7111125be7cb8eccff149128578b1f9"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/canonical_mog_adapter.py",
+        "sha256": "8c2dc1f0d06572953c04d6ac926abb91c1c95b3e233376a7cadfc1032aff2d92"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/canonical_two_pole_adapter.py",
+        "sha256": "c46f2d5950cdbacfbbc800797d82e40a987ea6f439845964aecece66930d1351"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/canonical_two_pole_repeat.py",
+        "sha256": "49619af7eb4dd216c49746ddb587738c709ca7ed6489646725f912da3a1685cb"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/clockfree.py",
+        "sha256": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/comparison_protocol.py",
+        "sha256": "dfdfd4111261cbf6ebc766ed7132bc33c3b73204f151ad46d639cf687026978c"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/completed_studies.py",
+        "sha256": "741ff9fec9849fc8f5da2782f216167555f6d57164e27a6cd5d9f5f4e86dc996"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/configuration_search.py",
+        "sha256": "818f5425945330d24a1eaea0ffeae13354246fc416d27dfe7be9af6af3960cfc"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/continuation.py",
+        "sha256": "ed200028190e61c32e36174e29e1ca80862079027194efc817c2d22dc7084107"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/contracts.py",
+        "sha256": "f33aac0f2c627f313f3c7cc5a57bdb8078d9a2487bc212e5f7892ce549d81262"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/decision_contracts.py",
+        "sha256": "0ed0c4f02ac94f7972d723b15b13f77162d774f2d1a4799b1843c4e7d477af22"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/execution_policy.py",
+        "sha256": "920b51c509e5afa41ba35dafc34371645956fe601112fe4a1e9b377ec13e7665"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/family_documentation.py",
+        "sha256": "0fc88bb3f343d7d8e0d236aa8e976e43695ab24f9b3dea7b0c93b5949c2db78f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/family_reports.py",
+        "sha256": "f4e4bbc1a4cd25a1466b96379e421b7d6078808ce2d36ab70cbc110621833e40"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/gaussian_tasks.py",
+        "sha256": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/history.py",
+        "sha256": "89c0028199a81280ccf33a82515b58fff23497f23970c199964852a3d51e8cb8"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/hostprofiles.py",
+        "sha256": "c981f08f5a6eaa7c7c78060a5d52d9c822f405bea20e83a460cf122a495daf08"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/imageprofiles.py",
+        "sha256": "6f667f11b68e2d14f8610444c5fbd58bc87b080b50d0ad4b29f496e989bfc470"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/initialization.py",
+        "sha256": "c2674617c306e24337f1dbbf910d2110b7c852557b9c3e43b47f7fe1dce26634"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/knowledge.py",
+        "sha256": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/lifecycle.py",
+        "sha256": "1e3b93d4dd56f212bb4943a20fb681ed87b436302b390662b35622d20655cab6"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/mechanisms.py",
+        "sha256": "cd4386e48696a58b73365b3d2f939d19eaad78ceec0b998b928210180b2280c3"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/native3_publication_memory.py",
+        "sha256": "a1fbc7c3f1677c27b747233b677adb925a37109feea8ea78aeb01bcce0715314"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/native3_repaired_publication_memory.py",
+        "sha256": "f396251cb3ee12cff54d10457f45faa41a30414b6f5fbabd9e8449c6fd5115d5"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/nativeprofiles.py",
+        "sha256": "fe7ec6ee2b5046fc49d8408e4cf09824bc604aeadafbdca8cae33e1639fe2ee4"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/optimizer_diagnostics.py",
+        "sha256": "18c26fc82d76db849597e2e4293fe161c69d7582ddf83ad4977cd8ceafa2ba30"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/paired_sampling.py",
+        "sha256": "4dd4e7acd422388be738689155c2d6f6d39a68a9cfd6a6bc03b37f08b9ac6064"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/planning.py",
+        "sha256": "59984dc970ce5dc9e9977f3f0f21e0f2aa967c880092b0928ce258821234a170"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/policy_adapters.py",
+        "sha256": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/policy_behavior_adapters.py",
+        "sha256": "f8ef202ef50de3781cd414f6fc8d1abb6024190758dcb194f81c586704bf8d54"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/policy_execution.py",
+        "sha256": "43250d372e38a34a75962bf76c36d7e78a787d2ef1cfd5d35455a39b965d1ff8"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/preflight.py",
+        "sha256": "22b69480187d5a5595490ea356deb63f44e14039389c576984b6d4217aafa90e"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/priors.py",
+        "sha256": "315ab55030a4ed5bc5895794c826d1f4561c640d80930e7f73f68316762e6f5c"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/promotion.py",
+        "sha256": "53ab429efae0482668694e0393d0f95988e27561d0f614b6de6195560282be55"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/publication_memory.py",
+        "sha256": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/queue.py",
+        "sha256": "f0babd722f9fec4e21a5705125a3e006f6793ca6d262c21c683de62326a5d6f1"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/research_artifacts.py",
+        "sha256": "71d3b88f0271193e05506494881131cb34acf29deb060f9253827f83cc0ad13c"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/rng.py",
+        "sha256": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/sampling.py",
+        "sha256": "10e7c17dd4ca30c1f2f3797aa323690db7f4bfdbfe295f23770bb6293ba3aab1"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/scoped_publications.py",
+        "sha256": "60a85f64d23ff38bf48b0f1f5f183db031e6d12091f63801941330b720348597"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/search_space.py",
+        "sha256": "9fbc11c4c3dffb10257da7298f7e8fba5c7e6c293537dcb9b65f014ed3cff77e"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/sources.py",
+        "sha256": "6a1c6aea0f6ed68d98c8347926809db306eabc479a6fc317330e4033246e9e3f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/state.py",
+        "sha256": "2eb9613f8e85c63240499307a81c5af429b23cfa1f0ed08c126630a76ed887b5"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/studies.py",
+        "sha256": "7673638f157fbe95fc61f3e526d3b3f60ef2f8e3c336f1eddf9141939293ebe1"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/taskrecipes.py",
+        "sha256": "18c5a910bde37c39e1aee70f51829e6644edfc552efd417494cf4891dd3841a2"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/technique_board.py",
+        "sha256": "1864de8a3c7ffd881fc60dd81b70b33a4c7743c0041447ca73d73fa1b4cd97d0"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/technique_inventory.py",
+        "sha256": "e3872b493366ecd54c20817513338ba450f4cc7c77192abcc7a8557d27faf723"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/techniques.py",
+        "sha256": "526c416f17c0b039788e3b557d158cc28362d528f4db7782f2db79f4c6cddc1c"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/telemetry.py",
+        "sha256": "65f444bb1f643fec121144cbf1dce8574531d99c85b80cbd4089ba631ff4831a"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/tier1_policy.py",
+        "sha256": "102e152d284c6858fcd584c3acceb2100190176df0c9531ab21895af75620bc0"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/tier_report.py",
+        "sha256": "ebe825c8bba9dc3a3db21b36e58765e147e3b77694dd11951526f6fe87877261"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/trainer_families.py",
+        "sha256": "1543b6824786040264442a17d8f77de9f09ac717825a225394428a3f899076e2"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/transfer_cadence.py",
+        "sha256": "7b4f61062ead145603e08182ab8ca1d6f8739f6570ebf6387171d1f8319f537a"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/two_pole_observer.py",
+        "sha256": "452036923c18aa459601ee83b1fb781bfbd5c9e777ccf22612aabb15a4c9b006"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/vectorprofiles.py",
+        "sha256": "dcbbf669a3457126fce82d073f8d8e4e5254702dca5201f88ea5be7877ee14da"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/views.py",
+        "sha256": "9e2dcef04d03561f4b64e72fdec6061eb23bac714517212301330fee81346919"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/word_adapter.py",
+        "sha256": "e3923fd7904e465375c15915f729c1de4058f1bd88f801c020932184ef074dbd"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/experiments/forge/word_tasks.py",
+        "sha256": "79dd0d4c04989e07e168347255c0db3adc62cc5d0b657c27b9b71b0055761814"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/fault_export.py",
+        "sha256": "c0ddc1aa99dd2a0e16d61a894f88a3260b35f71b38e740723f0547dd34a1eb79"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/measure_child.py",
+        "sha256": "9854be5df88d20432c24822ce7179cf7c2aa5aaf4e8c9ddfff4f142ad273a04a"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/__init__.py",
+        "sha256": "9afa03984a9164a6fb132504208323b13460384a225a6c9f090a4fe757f67dc9"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/_qr.py",
+        "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/anchor_birth.py",
+        "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/autoencoder.py",
+        "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/birth_death.py",
+        "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/birth_phase.py",
+        "sha256": "4af5a0915f927ca3d8e753195227d59c97f07304e9927ca1383bda9acd0ccb8f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/capabilities.py",
+        "sha256": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/conditional_transport.py",
+        "sha256": "4ffa96e7688825b83e618edbc1f0e2a6bc1ac6fb2e3e5d04d7f27274069e24ee"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/conditioning.py",
+        "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/continuous.py",
+        "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/coulomb_prior.py",
+        "sha256": "cd4fed5a3b22510911bc098e7b48bfb794366ef5a9c8c983d1672172f15b10a3"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/diffusion.py",
+        "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/discriminators.py",
+        "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/execution.py",
+        "sha256": "015151489dd0b6c9933b9a9dc3f02edc721907770b82ab72d7e7ee2739d03c9d"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/feature_cells.py",
+        "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/feature_policy.py",
+        "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/feature_reference.py",
+        "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/gan_loss.py",
+        "sha256": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/grad_regularizers.py",
+        "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/init.py",
+        "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/initial_mmd.py",
+        "sha256": "59b9573dd79ac9d846779f2198d5864f865d0ae8207101ed8b3f4da720260615"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/k3p.py",
+        "sha256": "45ceabdc067fb420e163d3d4ac5a4edb0bb47d154c38c73865f95dabeaefcad7"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/ka2.py",
+        "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/kinetic_transport.py",
+        "sha256": "8922627370b55e9e6b47e4c946f94cbd23f87bf17a94c6b9410fcf3c3967c1ee"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/mean_transport.py",
+        "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/moment_tether.py",
+        "sha256": "16bc50edae9ca43464240c84ffd20cb93691194f2b285a1056b56ff3a98c0e5a"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/optim/__init__.py",
+        "sha256": "8e0403422e18e52c6fcd3bc73ddb138116bd910a6645207fe3b9f1e71a82274a"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/optim/constraint_geometry.py",
+        "sha256": "b78f2d6dec2d345c1357b3812a7f9adac8c4da0f86c8536ebfe0092c18269c5e"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/optim/critic_cap.py",
+        "sha256": "74950ecd95c56b9921e2ed28250c4c2694d764b1a9fd5a2d10585f283a45b999"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/optim/direction_blend.py",
+        "sha256": "f18900ba47c639dc5484022d294bec7fe199efbd770c92876c548f727822eb72"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/optim/dualnorm.py",
+        "sha256": "749fe763a28ba274e222bdd3e70fd117dc937fa65b353fe1312a516edf2205fa"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/optim/prior_proximal.py",
+        "sha256": "50b20c11f0e7f7cabb9496d4874136172f36ce9997baf6db8d5dce91e3ca32ea"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/optim/strict_progress.py",
+        "sha256": "45f4764a3bdfbf4f0f6f6986817b8aef6aacc14cadbd1fc63e0d483011b2f577"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/output_moments.py",
+        "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/particle_prior.py",
+        "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/policy.py",
+        "sha256": "837a090ef9e3c5a05cac6d0aab814a4c3f9efe2b298d49a84f07eda2dbf46ba4"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/population_continuity.py",
+        "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/recipe_compat.py",
+        "sha256": "755a3347a5ce0a700f5b04d756dd1e6bca7bd01e0bb16620f1f48dd8acd2e562"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/recipe_schedules.py",
+        "sha256": "49ecce55cdc162bbd72802f71ac256c51358e21c72088fa43193fa9ec2bdabdd"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/recipes.py",
+        "sha256": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/routing.py",
+        "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/row_evidence.py",
+        "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/sigreg.py",
+        "sha256": "96bac4b2344f9d505a7d767ecfbb58ab06442e2a1de1a48ea479baa2288e048b"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/tensorflow_adam.py",
+        "sha256": "37f1192e48b84907446d8f676c62631bf87ff450b2a2e6b63e7489adc33e24e9"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/training.py",
+        "sha256": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/particlegan/vicreg_loss.py",
+        "sha256": "177a68b98036e4725cacf6bc0d95277111184c0dcb9566d3f7fc1527046cefda"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/proposed_guard.py",
+        "sha256": "dbedb35a45dc1ccbe99e96fa77867dbc0a6b38c060e511dc5ea3ef814cb9756a"
+      },
+      {
+        "original_local_path": "/ml2/codex-storage/future-workspaces/2026-10-09/task-11/atlas-two-pole-proposed-location-seed-confirmation-20261012/source/run_confirmation.py",
+        "sha256": "8d438c4d1e9f042fe48192df57b177c1c116a9600bc8e5d6c54ca78be5120c0b"
+      }
+    ],
+    "interpretation": "Byte/existence checks only, no decoding, models, training or recovery rehearsal."
+  },
+  "other_lineage_pointer": {
+    "path": "/ml2/codex-storage/future-workspaces/2026-10-11/task-f28adb39-6f61-4eb2-a5e7-aae97142cf7a/REPORT.md",
+    "scope": "Related Oct11 CPU generator geometry/conditional ledger is a separate recipe/source lineage; 312 studies/406 comparisons are not independent-run counts and are not Atlas results. No unrelated BCAP rows are imported."
+  }
+}

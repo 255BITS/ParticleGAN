@@ -38,6 +38,7 @@ import torch.nn as nn
 import torch
 import torch.nn.functional as F
 import numpy as np
+import particlegan.init
 
 
 def get_act(config):
@@ -510,6 +511,10 @@ class NIN(nn.Module):
     x = x.permute(0, 2, 3, 1)
     y = contract_inner(x, self.W) + self.b
     return y.permute(0, 3, 1, 2)
+
+
+# NIN keeps its own variance-scaling init under particlegan.init.
+particlegan.init.register(NIN, {'W': particlegan.init.KEEP, 'b': particlegan.init.KEEP})
 
 
 class AttnBlock(nn.Module):

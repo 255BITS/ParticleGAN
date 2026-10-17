@@ -1,0 +1,8 @@
+{
+  "byte_audit": "Original trailing blank line restored before freeze; only intended keyword/guard changes remain.",
+  "findings": "Independent diff confirms exactly five modules, seven CPU-intended factory keywords and pre-_controls exact FIFO/backend shape check. Original meta failure, full/partial moments, accepted packet, empty population queries, feature/KNN shape rejection, both restore owners and atomic state/versions/control identity covered. DefaultCPU 18-update feature/two-reaction and 2-update KNN trace plus bidirectional valid replay reviewed. No new defaultCPU numerical law. Actual CUDA-default parity remains queued.",
+  "package_sha256": "ba20f8e6353b2aca4725258835a68c1dfaa056a0484b2d683a5bb74a1eca0aa0",
+  "reviewed_test_sha256": "72292b1aeb41be3a7b75243cb176535f2b347d324686c35140f0d7220a3a6f0a",
+  "reviewer": "/root/integration_review",
+  "status": "APPROVE"
+}

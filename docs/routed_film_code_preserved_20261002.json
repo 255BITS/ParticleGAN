@@ -1,0 +1,260 @@
+{
+  "protocol_sha256": "678b5d503aeb14da6fd4b10f3fd3485a2c4fb8d6f639744b5e4d3ac6cbf642b8",
+  "package_git_sha": "c4b53495d04a2052e266739a82053317b7f49698",
+  "source_sha256": {
+    "benchmarks/routed_conditioning/spatial_damping.py": "0122675cc226b6c5e128bbf36a9e2cadd768f42e86296d4c30888e356197ad39",
+    "benchmarks/routed_conditioning/film_damping.py": "d029255857691595de74672abd5f10bebfc9fd8fe1ede9f37131a202da9291a2",
+    "tests/test_routed_conditioning_code_preserved.py": "5c174be36d188b94dfd418809e7ae0478b584e44e29a1fa7c5fdebd23f0a5624"
+  },
+  "total_paid_seconds": 191.02763593406416,
+  "recommendation": "Preserve this as a negative transfer ablation; code conditioning recovers, but initialization alone does not solve real convergence.",
+  "superseded_hypothesis": "Restoring direct conditioning path improves every width: falsified by width4 final quality despite restoredJacobian/Egradient.",
+  "real_task_status": "completed; stopped at600 by the frozen decoded-control gate",
+  "readout_sha256": "6e04a4763c48f8568b3cc178912c1369695e42ce2ee67c741e65eb124d956014",
+  "artifact_root": "/ml2/hypergan/routed-film-code-preserved-artifacts-20261002",
+  "contracts": {
+    "passed": 29,
+    "junit_sha256": "bc649e5017c401b32b1ab350b515cc851c5625fa280bf82d05806179419a4148"
+  },
+  "widths": {
+    "4": {
+      "candidate_change_percent_vs_original": 2.830318777756058,
+      "candidate_change_percent_vs_whole_zero": -11.347713465481124,
+      "profiles": {
+        "original_native": {
+          "final_live_mse": 0.00014382613881025463,
+          "final_served_mse": 0.00014382613881025463,
+          "served_source": "fast",
+          "initial_code_jacobian_frobenius": 0.004910860446474598,
+          "first_encoder_gradient_energy": 7.700035229689253e-11,
+          "first_encoder_motion_energy": 1.0832021899886968e-05,
+          "generator_damped_updates": 0,
+          "caller_streams_equal_at_fixed_1200": true,
+          "all_1200_updates_finite_live_E_table_dense128": true,
+          "generator_cut_steps": [],
+          "clean_curve": {
+            "0": 0.0010322981979697943,
+            "100": 0.000969032000284642,
+            "200": 0.0008614810067228973,
+            "300": 0.0007204430876299739,
+            "400": 0.0005688400124199688,
+            "500": 0.0004122011596336961,
+            "600": 0.0004304954200051725,
+            "700": 0.0005004650447517633,
+            "800": 0.00025954924058169127,
+            "900": 0.0002167126804124564,
+            "1000": 0.00019407810759730637,
+            "1100": 0.0001864153309725225,
+            "1200": 0.00014382613881025463
+          }
+        },
+        "shift_zero_native": {
+          "final_live_mse": 0.00016682804562151432,
+          "final_served_mse": 0.00016682804562151432,
+          "served_source": "fast",
+          "initial_code_jacobian_frobenius": 0.0004031991363792369,
+          "first_encoder_gradient_energy": 1.6110070036462908e-12,
+          "first_encoder_motion_energy": 4.396306149345719e-06,
+          "generator_damped_updates": 0,
+          "caller_streams_equal_at_fixed_1200": true,
+          "all_1200_updates_finite_live_E_table_dense128": true,
+          "generator_cut_steps": [],
+          "clean_curve": {
+            "0": 0.0010343727190047503,
+            "100": 0.000989526859484613,
+            "200": 0.0008636341663077474,
+            "300": 0.0007093384629115462,
+            "400": 0.0005594636895693839,
+            "500": 0.0004285236063878983,
+            "600": 0.0004058459307998419,
+            "700": 0.0005192796234041452,
+            "800": 0.00031758227851241827,
+            "900": 0.0002587911731097847,
+            "1000": 0.00019116068142466247,
+            "1100": 0.0001613301719771698,
+            "1200": 0.00016682804562151432
+          }
+        },
+        "shift_time_zero_native": {
+          "final_live_mse": 0.00014789687702432275,
+          "final_served_mse": 0.00014789687702432275,
+          "served_source": "fast",
+          "initial_code_jacobian_frobenius": 0.004995918424058121,
+          "first_encoder_gradient_energy": 8.13984315961889e-11,
+          "first_encoder_motion_energy": 1.09733307596116e-05,
+          "generator_damped_updates": 0,
+          "caller_streams_equal_at_fixed_1200": true,
+          "all_1200_updates_finite_live_E_table_dense128": true,
+          "generator_cut_steps": [],
+          "clean_curve": {
+            "0": 0.0010314439423382282,
+            "100": 0.0009792277123779058,
+            "200": 0.000848442898131907,
+            "300": 0.0007077288464643061,
+            "400": 0.0005603478057309985,
+            "500": 0.00041112129110842943,
+            "600": 0.00044059602078050375,
+            "700": 0.00048623120528645813,
+            "800": 0.00026527492445893586,
+            "900": 0.00023340663756243885,
+            "1000": 0.0001923378586070612,
+            "1100": 0.00018569343956187367,
+            "1200": 0.00014789687702432275
+          }
+        }
+      }
+    },
+    "16": {
+      "candidate_change_percent_vs_original": -49.171014183967706,
+      "candidate_change_percent_vs_whole_zero": -34.0070301598285,
+      "profiles": {
+        "original_native": {
+          "final_live_mse": 9.684781252872199e-05,
+          "final_served_mse": 9.684781252872199e-05,
+          "served_source": "fast",
+          "initial_code_jacobian_frobenius": 0.004640115349244566,
+          "first_encoder_gradient_energy": 8.627236830526311e-09,
+          "first_encoder_motion_energy": 0.00011892527143686493,
+          "generator_damped_updates": 0,
+          "caller_streams_equal_at_fixed_1200": true,
+          "all_1200_updates_finite_live_E_table_dense128": true,
+          "generator_cut_steps": [],
+          "clean_curve": {
+            "0": 0.0008621537126600742,
+            "100": 0.0007160414243116975,
+            "200": 0.0006539776804856956,
+            "300": 0.00037737886304967105,
+            "400": 0.00023528227757196873,
+            "500": 0.00023124511062633246,
+            "600": 0.0001592020271345973,
+            "700": 0.00011708051897585392,
+            "800": 0.00012913980754092336,
+            "900": 9.128759120358154e-05,
+            "1000": 9.879178833216429e-05,
+            "1100": 4.543187969829887e-05,
+            "1200": 9.684781252872199e-05
+          }
+        },
+        "shift_zero_native": {
+          "final_live_mse": 7.45939469197765e-05,
+          "final_served_mse": 7.45939469197765e-05,
+          "served_source": "fast",
+          "initial_code_jacobian_frobenius": 0.0008029292324689142,
+          "first_encoder_gradient_energy": 2.7477984477212352e-11,
+          "first_encoder_motion_energy": 4.286674646891697e-05,
+          "generator_damped_updates": 0,
+          "caller_streams_equal_at_fixed_1200": true,
+          "all_1200_updates_finite_live_E_table_dense128": true,
+          "generator_cut_steps": [],
+          "clean_curve": {
+            "0": 0.0008630425436422229,
+            "100": 0.0007096025510691106,
+            "200": 0.0006617322796955705,
+            "300": 0.0003865562321152538,
+            "400": 0.0002563316375017166,
+            "500": 0.00024188692623283714,
+            "600": 0.00016600541130173951,
+            "700": 0.00011444780102465302,
+            "800": 0.00012726821296382695,
+            "900": 9.692956518847495e-05,
+            "1000": 9.052256791619584e-05,
+            "1100": 4.257243199390359e-05,
+            "1200": 7.45939469197765e-05
+          }
+        },
+        "shift_time_zero_native": {
+          "final_live_mse": 4.922676089336164e-05,
+          "final_served_mse": 4.922676089336164e-05,
+          "served_source": "fast",
+          "initial_code_jacobian_frobenius": 0.0046351552417009945,
+          "first_encoder_gradient_energy": 8.546275777560411e-09,
+          "first_encoder_motion_energy": 0.00011884205996182118,
+          "generator_damped_updates": 168,
+          "caller_streams_equal_at_fixed_1200": true,
+          "all_1200_updates_finite_live_E_table_dense128": true,
+          "generator_cut_steps": [
+            1032
+          ],
+          "clean_curve": {
+            "0": 0.0008635456906631589,
+            "100": 0.0007306223851628602,
+            "200": 0.000655345618724823,
+            "300": 0.00036940857535228133,
+            "400": 0.000263223861111328,
+            "500": 0.00021104139159433544,
+            "600": 0.00016701541608199477,
+            "700": 0.00010979376384057105,
+            "800": 0.000119703276141081,
+            "900": 7.230769551824778e-05,
+            "1000": 0.00013105860853102058,
+            "1100": 7.024186925264075e-05,
+            "1200": 4.922676089336164e-05
+          }
+        }
+      }
+    }
+  },
+  "real_task": {
+    "package_commit": "c4b53495d04a2052e266739a82053317b7f49698",
+    "source_sha256": "7f8eabb5acc90a566b48f3f86cc93517ec5bf86e7fec3f45296ca272fcf126c2",
+    "protocol_sha256": "078f8ef6bbd1b51664a9c06653c11e0f31093c7d730c84bdca0f1bc4e60a619d",
+    "raw_result_sha256": "2b35b1fe380c5a130022d90e382fedf483d29fdb60c697f7dde04e93b530174d",
+    "matched_caller_draw_steps": 600,
+    "comparisons": [
+      {
+        "step": 100,
+        "candidate_lpips": 0.47354310573163355,
+        "control_lpips": 0.48436123683032667,
+        "percent_change": -2.23348407677858,
+        "improved_cases": 144,
+        "total_cases": 176,
+        "candidate_source": "/ml2/hypergan/nova-qwen-code-preserved-20261002/shift_time_zero/decoded-176-000100.json",
+        "candidate_sha256": "21c881a9006f6195955b788e3458d2a3fd03eb91b70337de11c7ed11be40aa26",
+        "control_source": "/ml2/hypergan/nova-qwen-code-preserved-20261002/control/decoded-176-000100.json",
+        "control_is_archived_reuse": true,
+        "serving_candidate": "fast",
+        "serving_control": "averaged"
+      },
+      {
+        "step": 300,
+        "candidate_lpips": 0.3677713387561115,
+        "control_lpips": 0.38970203477550636,
+        "percent_change": -5.6275549169324535,
+        "improved_cases": 163,
+        "total_cases": 176,
+        "candidate_source": "/ml2/hypergan/nova-qwen-code-preserved-20261002/shift_time_zero/decoded-176-000300.json",
+        "candidate_sha256": "21aed4d4bdc5370b72890b6b8f5dc17ffc13fe7c6d023293078878052a207ade",
+        "control_source": "/ml2/hypergan/nova-qwen-code-preserved-20261002/control/decoded-176-000300.json",
+        "control_is_archived_reuse": true,
+        "serving_candidate": "fast",
+        "serving_control": "averaged"
+      },
+      {
+        "step": 600,
+        "candidate_lpips": 0.3100320383567702,
+        "control_lpips": 0.30005567766387353,
+        "percent_change": 3.3248365005351888,
+        "improved_cases": 10,
+        "total_cases": 176,
+        "candidate_source": "/ml2/hypergan/nova-qwen-code-preserved-20261002/shift_time_zero/decoded-176-000600.json",
+        "candidate_sha256": "b9b1b151c94fb939184031d56bfe5e6bd117010a557ecde1e8908272827393fa",
+        "control_source": "/ml2/hypergan/nova-qwen-code-preserved-20261002/control/decoded-176-000600.json",
+        "control_is_archived_reuse": true,
+        "serving_candidate": "fast",
+        "serving_control": "averaged"
+      }
+    ],
+    "raw_artifact_root": "/ml2/hypergan/nova-qwen-code-preserved-20261002",
+    "independent_review_sha256": "0691c325b80b44300363b466b7bb566c7c33bd56e1347db1d9f32cb5ce727849",
+    "strongest_fresh_B16_step300_lpips": 0.295439204,
+    "serving_comparison": "Identical native serving policy; original averaged, candidate fast. Not fixed-serving convergence.",
+    "supervisor": {
+      "status": "completed",
+      "reason": null,
+      "child_exit_code": 0,
+      "elapsed_wall_seconds": 466.08970101200975,
+      "test_opened": false
+    },
+    "test_opened": false
+  }
+}

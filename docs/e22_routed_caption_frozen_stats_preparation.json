@@ -1,0 +1,89 @@
+{
+  "schema": "routed_caption_frozen_scalar_moments_preparation_v1",
+  "task": "routed_caption_frozen_scalar_moments_v1",
+  "status": "Prepared software PASS only; full-geometry prerequisite/science not executed",
+  "parent_commit": "68cc4361689531ce1b1a7fd441a49effb242440e",
+  "protocol_sha256": "95ff4941aee85074614d0bd1fe1ff477f0e343a80b27f324526d95c4f6e4cb81",
+  "source_identity": {
+    "examples/e22_routed_caption_frozen_stats.py": "a8489fc0369bf03bdfe5b8a5bb92c9a7c9b3f66aea83166f5fdd53f8dab99047",
+    "examples/render_e22_routed_caption_frozen_stats.py": "ea369cc340f349f042a498d131429cba75563c03aa9e9e232255ea2c8fb374d9",
+    "tests/test_e22_routed_caption_frozen_stats.py": "707cdb18f8436d4dc0d36e18a664c18684b865cf14d73aaffb8f218cd93caea4",
+    "docs/e22_routed_caption_frozen_stats_profile_v1.json": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+    "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "profile_sha256": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+  "imported_native_observed": {
+    "imported_package": "/ml2/hypergan/ParticleGAN-routed-caption-frozen-stats-develop/particlegan",
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+  },
+  "precision_backend_observed": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "native_sha_is_observation_not_runtime_allowlist": true,
+  "software": {
+    "new_cases_passed": 14,
+    "pytest_seconds": 1.58,
+    "wrapper_seconds": 2.844156089005992,
+    "external_seconds": 3.296291108,
+    "native_updates_actual": 4,
+    "updates_scope": "Exactly two original plus two fresh-public-owner replay calls in the single NEW test; source-bound count.",
+    "full576host_forwards": 0,
+    "quality_updates": 0,
+    "CUDA_initialized": false,
+    "commands_invoked_once": true,
+    "checks": {
+      "NEW_suite_passed": true,
+      "all11_sources_unchanged": true,
+      "fixed_card_unchanged": true,
+      "imported_API_unchanged": true,
+      "backend_flags_unchanged": true,
+      "global_CPU_RNG_unchanged": true,
+      "CUDA_uninitialized": true
+    },
+    "scope": "Public strict29 scalar-profile/distribution oracle/destructive controls, same namedCPU Parameter/freeze ownership and unchanged registry, reduced paired fixed-host/teacher units/flow, native fresh restore/zero-update tangent and2+2 replay, unchanged metric/source/code gates, raw media and exclusive outputs."
+  },
+  "aggregate_CPU_preparation_process_seconds": 3.296291108,
+  "CPU_limit_seconds": 60,
+  "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. timeout --signal=INT --kill-after=5 60 /ml2/ntc-image-studio/.venv-anima/bin/python /tmp/prepare_caption_frozen_stats_v1.py > runs/caption-frozen-stats-preparation-v1/software.log 2>&1",
+  "raw_receipts": {
+    "software.log": {
+      "path": "runs/caption-frozen-stats-preparation-v1/software.log",
+      "sha256": "a5fbc334892b74edcf6509b288780e4fad5007eccebe157d340caa9a31ba1643"
+    },
+    "software-junit.xml": {
+      "path": "runs/caption-frozen-stats-preparation-v1/software-junit.xml",
+      "sha256": "5e2458c3360eb297a2e149f13a29ca5b05411f02d337cc5d76832ceb1723ca25"
+    },
+    "software-process.json": {
+      "path": "runs/caption-frozen-stats-preparation-v1/software-process.json",
+      "sha256": "62c05fb066a38e5862d83bb01ce710ee5a2f6e2a7d99a624156f5eb7cffeb15f"
+    }
+  },
+  "preparation_wrapper_source_sha256": "7b5f1da2f5fd6d162d8c43a03afc73a0cc54ee6f2ea6e343ae00ded36c1cc501",
+  "public_science_command": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_frozen_stats --run --out runs/caption-frozen-stats-v1",
+  "render_command": "python -m examples.render_e22_routed_caption_frozen_stats --run-directory runs/caption-frozen-stats-v1",
+  "full_geometry_prerequisite": "Not executed; exact initialoutputs/fresh publicrestore/native-loss tangent occur only inside the root-owned sole300s GPU campaign.",
+  "scientific_result": null,
+  "quality_updates": 0,
+  "calibration_data_only_prior_audit": {
+    "inventory_sha256": "c7abed11bb97a4dc118728246e1c3b9ab79f719c9b6f351358a4e23986b079a0",
+    "inventory_source_sha256": "fe99ccdfbfbedeaf68c0e4b0204e8280dbb75aefa72afd391b68957077478a01",
+    "seconds": 1.2627120211254805,
+    "prior_separate_task_limit_seconds": 60,
+    "CPU_mmap_loads": 1,
+    "models_native_API_updates_CUDA": 0,
+    "scope": "Prior completed independent source/data calibration audit, before this implementation authorization. No new actualcapsule read in software/runtime toy."
+  },
+  "realized_moments": "Only record sampled means/std/RMS; no sample correction, amplitude/meanfraction/accuracy search.",
+  "raw_paths_ignored": true,
+  "sources_tests_cards_prior_evidence_unchanged": true,
+  "limits": "Prepared14software cases/fourreplayupdates support source ownership and metric contracts, not convergence or actual caption/full-Supra qualification. Production uses FULL+complete bundled profile; reduced shapes are explicitlysoftware-only."
+}

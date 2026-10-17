@@ -1,0 +1,40 @@
+{
+  "configuration_notes": [
+    "Unmeasured structural transfer: no default adoption or original-result credit.",
+    "One global trainer configuration per matched task comparison. Architecture, data, prior, initialization, budget and sampling belong to tasks.",
+    "See docs/forge-search-spaces.md for finite random subsets, conditional categories and immutable manifests."
+  ],
+  "overview": "Halloween transfers the inspected historical G/D Adam settings and [-1,1,1] least-squares labels through the public API. Original HyperGAN execution and trained success remain unbound. This new family is unmeasured.",
+  "pseudocode": [
+    "Draw task-owned real and latent batches from isolated streams.",
+    "Minimize half the mean of (D(real)-1)^2 plus (D(fake)+1)^2 for D.",
+    "Minimize half the mean of (D(fake)-1)^2 for G; joint hosts add the reversed real-stream encoder term.",
+    "Apply role-specific dense legacy Adam, incrementing each optimizer application clock.",
+    "Save role clocks, powers, moments, model weights and every consumed stream."
+  ],
+  "references": [
+    {
+      "component": "Dense Adam epsilon and bias-correction law",
+      "title": "Inspected TensorFlow v1.3 Adam source",
+      "url": "https://github.com/tensorflow/tensorflow/blob/9e76bf324f6bac63137a02bb6e6ec9120703ea9b/tensorflow/python/training/adam.py"
+    }
+  ],
+  "sources": [
+    "particlegan/tensorflow_adam.py",
+    "particlegan/gan_loss.py",
+    "particlegan/recipes.py",
+    "configs/forge/ideas/halloween-optimizer-loss-v1.json",
+    "reports/forge/hypergan-search-audit/halloween-optimizer-loss.json"
+  ],
+  "symbols": "G is the generator, E an optional encoder, D the critic and P the task-owned prior; t counts optimizer applications.",
+  "training_details": {
+    "averaging": "Live parameters; no averaged serving.",
+    "critic_penalty": "Zero additional critic penalty in the transfer preset.",
+    "damping_and_guards": "No A2 damping, critic guard, anchor or direct-particle response.",
+    "gradient_clipping": "No parameter-gradient clipping.",
+    "learning_rates": "Constant rates: G .008020980209802098, D .003947939479394794. Prior multiplier 2 with its own (0,.999) betas and 1e-8 epsilon. Original decay is unbound; explicit exponential whole-update schedules are optional new variants.",
+    "loss": "Least squares with fake/real/G labels (-1,1,1); joint encoder stream is explicit.",
+    "noise": "No additive training input/output noise. Task-owned MoG kernel noise and clean sampling remain explicit.",
+    "optimizer": "Dense TensorFlow-v1 Adam formula implemented in PyTorch; different G/D betas and epsilon, no AMSGrad or weight decay."
+  }
+}

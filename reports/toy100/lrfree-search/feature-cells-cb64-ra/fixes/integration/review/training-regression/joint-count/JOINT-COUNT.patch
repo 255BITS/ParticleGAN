@@ -1,0 +1,330 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -337,11 +337,16 @@
+                 self.work["distance_cells"] += len(x)
+             self.real_representatives[cell] = x.index_select(0, chosen.reshape(1)).squeeze(0)
+             self.real_representative_rows[cell] = 2*chosen
++        # Freeze this geometric count partition before consuming odd rows.
++        # The existing odd-calibrated support null remains a separate law.
++        self._fit_count_partition_metric(x, ids)
+         calibration = self.transform(real[1::2])
+         calibration_ids, _ = self._assign_metric(calibration)
+         self.real_calibration_counts = torch.bincount(calibration_ids, minlength=self.cells)
+         self.calibration_rows = len(calibration)
+-        self.null_scores = self._scores_metric(calibration).sort().values
++        calibration_categories, calibration_scores = self._count_categories_metric(calibration, calibration_ids)
++        self.real_calibration_category_counts = torch.bincount(calibration_categories, minlength=2*self.cells)
++        self.null_scores = calibration_scores.sort().values
+         self.duplicate_fraction = 1. - len(torch.unique(real, dim=0)) / len(real)
+         self.row_features = self.query_cell_ids = self.query_counts = None
+         self.cache_version = 0
+@@ -383,6 +388,37 @@
+         for block in features.split(self.chunk):
+             scores.append((self._distance(block,self.centers)/self.cell_scale.square()[None]).min(1).values.sqrt())
+         return torch.cat(scores)
++
++    def _fit_count_partition_metric(self, fitted_features, fitted_ids):
++        """Fixed global even-fit score boundary, retaining all 2K categories.
++
++        This empirical fitted boundary is not a conformal p-value threshold.
++        Its only role is to define a partition before independent odd counts.
++        """
++        if hasattr(self, "count_boundary"):
++            raise ValueError("count partition is already frozen")
++        scores = self._scores_metric(fitted_features)
++        q = Fraction(str(Q))
++        ordinal = (len(scores)*(q.denominator-q.numerator)+q.denominator-1)//q.denominator
++        self.count_boundary = scores.sort().values[max(0, ordinal-1)].clone()
++        self.count_partition = dict(rule="even_fit_score_order_statistic", q=Q,
++                                    fitted_rows=len(scores), ordinal=ordinal,
++                                    ties="inside", categories=2*self.cells)
++        categories = 2*fitted_ids+(scores>self.count_boundary).long()
++        self.reference_category_counts = torch.bincount(categories, minlength=2*self.cells)
++
++    def _count_categories_metric(self, features, ids=None):
++        if not hasattr(self, "count_boundary"):
++            raise ValueError("fit count partition before assigning count categories")
++        if ids is None:
++            ids, _ = self._assign_metric(features)
++        scores = self._scores_metric(features)
++        return 2*ids+(scores>self.count_boundary).long(), scores
++
++    @torch.no_grad()
++    def count_categories(self, features):
++        categories, _ = self._count_categories_metric(self.transform(features))
++        return categories
+ 
+     @torch.no_grad()
+     def assign(self, features):
+@@ -562,7 +598,8 @@
+         groups = self._mass_topology()
+         kept = torch.bincount(ids[~flags],minlength=self.cells)
+         if ordinary_parents is not None:
+-            kept -= torch.bincount(ids[ordinary_children],minlength=self.cells)
++            supported_children = ordinary_children[~flags[ordinary_children]]
++            kept -= torch.bincount(ids[supported_children],minlength=self.cells)
+             kept += torch.bincount(ids[ordinary_parents],minlength=self.cells)
+         vacancies = (self._group_counts(target)-self._group_counts(kept)).clamp_min(0)
+         # Partition membership and the unchanged support p>Q criterion
+@@ -655,18 +692,36 @@
+ 
+     @torch.no_grad()
+     def cell_comparison(self, fake_features):
+-        fake_ids,_ = self.assign(fake_features)
+-        fake_counts = torch.bincount(fake_ids,minlength=self.cells)
+-        p = conditional_count_pvalues(self.real_calibration_counts,fake_counts,self.calibration_rows,len(fake_features),self.work)
+-        difference = fake_counts.double()/len(fake_features)-self.real_calibration_counts.double()/self.calibration_rows
+-        significant = p <= Q/self.cells
++        fake_categories = self.count_categories(fake_features)
++        fake_counts = torch.bincount(fake_categories,minlength=2*self.cells)
++        real_counts = self.real_calibration_category_counts
++        p = conditional_count_pvalues(real_counts,fake_counts,self.calibration_rows,len(fake_features),self.work)
++        difference = fake_counts.double()/len(fake_features)-real_counts.double()/self.calibration_rows
++        multiplicity = 3*self.cells
++        significant = p <= Q/multiplicity
+         if not self.valid_metric:
+             significant.zero_()
+-        return dict(real_counts=self.real_calibration_counts,fake_counts=fake_counts,pvalues=p,
++        support = dict(real_counts=real_counts,fake_counts=fake_counts,pvalues=p,
+                     difference=difference,excess=significant&(difference>0),deficit=significant&(difference<0))
+-
+-    @torch.no_grad()
+-    def ordinary_transport(self, query_features, flags, comparison, *, generator, pvalues=None, max_moves=None):
++        # K original cells and 2K refinements are overlapping hypotheses,
++        # not a single disjoint sample with twice the actual number of rows.
++        mass_fake = fake_counts.reshape(self.cells,2).sum(1)
++        mass_p = conditional_count_pvalues(self.real_calibration_counts,mass_fake,
++                    self.calibration_rows,len(fake_features),self.work)
++        mass_difference = mass_fake.double()/len(fake_features)-self.real_calibration_counts.double()/self.calibration_rows
++        mass_significant = mass_p <= Q/multiplicity
++        if not self.valid_metric:
++            mass_significant.zero_()
++        mass = dict(real_counts=self.real_calibration_counts,fake_counts=mass_fake,pvalues=mass_p,
++                    difference=mass_difference,excess=mass_significant&(mass_difference>0),
++                    deficit=mass_significant&(mass_difference<0))
++        return dict(mass=mass,support=support,pvalues=torch.cat((mass_p,p)),
++                    categories=2*self.cells,multiplicity=multiplicity,cutoff=Q/multiplicity,
++                    family_sizes=(self.cells,2*self.cells),
++                    count_partition=dict(self.count_partition),count_boundary=self.count_boundary.clone())
++
++    @torch.no_grad()
++    def _ordinary_mass_transport(self, query_features, flags, comparison, *, generator, pvalues=None, max_moves=None):
+         """One count-certified quota allocation; no inherited sequential evidence."""
+         features = self.transform(query_features)
+         if pvalues is None:
+@@ -776,6 +831,194 @@
+         return child,parent,detail
+ 
+ 
++    @torch.no_grad()
++    def _ordinary_support_transport(self, query_features, flags, comparison, *, generator, pvalues=None, max_moves=None,
++                                    reserved_children=None, reserved_parents=None, supported_counts=None):
++        """Certified outside-to-inside recovery, with supported mass reserved."""
++        features = self.transform(query_features)
++        if flags.shape != (len(features),) or flags.dtype != torch.bool or flags.device != self.device:
++            raise ValueError("invalid isolation flags")
++        if pvalues is None:
++            _,pvalues,_ = self.support(query_features)
++        categories, _ = self._count_categories_metric(features)
++        inside = categories.remainder(2)==0
++        reserved = torch.zeros(len(features),device=self.device,dtype=torch.bool)
++        if reserved_children is not None:
++            reserved[reserved_children] = True
++        if reserved_parents is not None:
++            reserved[reserved_parents] = True
++        ids,pool,pool_counts,eligible_counts = self._pool(features,~flags&(pvalues>Q)&inside&~reserved,generator)
++        difference = comparison["difference"].reshape(self.cells,2)
++        outside_excess = comparison["excess"].reshape(self.cells,2)[:,1]
++        inside_deficit = comparison["deficit"].reshape(self.cells,2)[:,0]
++        death_capacity = torch.floor(len(features)*difference[:,1].clamp_min(0.)+1e-10).long()*outside_excess
++        birth_capacity = torch.floor(len(features)*(-difference[:,0]).clamp_min(0.)+1e-10).long()*inside_deficit
++        raw_death_capacity,raw_birth_capacity = death_capacity.clone(),birth_capacity.clone()
++        spent_deaths = torch.bincount(categories[reserved_children],minlength=2*self.cells).reshape(self.cells,2)[:,1] if reserved_children is not None else torch.zeros_like(death_capacity)
++        spent_births = torch.bincount(categories[reserved_parents],minlength=2*self.cells).reshape(self.cells,2)[:,0] if reserved_parents is not None else torch.zeros_like(birth_capacity)
++        # Reserve gross certificate use by the first phase as well as row
++        # identities. Opposite-direction moves do not replenish this budget.
++        death_capacity = (death_capacity-spent_deaths).clamp_min(0)
++        birth_capacity = (birth_capacity-spent_births).clamp_min(0)
++        residual_death_capacity,residual_birth_capacity = death_capacity.clone(),birth_capacity.clone()
++        target = self._mass_targets(len(features))
++        table_counts = torch.bincount(ids,minlength=self.cells)
++        budget = math.floor(Q*len(features)) if max_moves is None else min(int(max_moves),math.floor(Q*len(features)))
++        isolation_guard_rejects = int(flags.sum()) > Q*len(features)
++        # Only flagged outside rows can supply ordinary deaths. Even under a
++        # passing isolation guard they do not reserve supported mass.
++        clean_counts = torch.bincount(ids[~flags],minlength=self.cells) if supported_counts is None else supported_counts.clone()
++        vacancies = (target-clean_counts).clamp_min(0)
++        birth_capacity = torch.minimum(birth_capacity,vacancies)
++        death_eligible = flags&~inside&~reserved
++        available_deaths = torch.bincount(ids[death_eligible],minlength=self.cells)
++        death_capacity = torch.minimum(death_capacity,available_deaths)
++        inaccessible = birth_capacity[pool_counts==0].sum()
++        birth_capacity = torch.minimum(birth_capacity,pool_counts)
++        groups = self._mass_topology()
++        group_target,group_clean = self._group_counts(target),self._group_counts(clean_counts)
++        within_capacity = torch.minimum(self._group_counts(death_capacity),self._group_counts(birth_capacity))
++        within_capacity = torch.minimum(within_capacity,(group_target-group_clean).clamp_min(0))
++        within = _integer_allocate(within_capacity,max(0,budget))
++        within_deaths,within_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
++        for group in range(self.mass_groups):
++            members = groups==group
++            within_deaths += _integer_allocate(death_capacity*members,int(within[group]))
++            within_births += _integer_allocate(birth_capacity*members,int(within[group]))
++        remaining_death,remaining_birth = death_capacity-within_deaths,birth_capacity-within_births
++        group_death = self._group_counts(remaining_death)
++        remaining_vacancies = (group_target-group_clean-self._group_counts(within_births)).clamp_min(0)
++        group_birth = torch.minimum(self._group_counts(remaining_birth),remaining_vacancies)
++        cross_pairs = min(int(group_death.sum()),int(group_birth.sum()),max(0,budget-int(within.sum())))
++        cross_group_death,cross_group_birth = _integer_allocate(group_death,cross_pairs),_integer_allocate(group_birth,cross_pairs)
++        cross_deaths,cross_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
++        for group in range(self.mass_groups):
++            members = groups==group
++            cross_deaths += _integer_allocate(remaining_death*members,int(cross_group_death[group]))
++            cross_births += _integer_allocate(remaining_birth*members,int(cross_group_birth[group]))
++        deaths,births = within_deaths+cross_deaths,within_births+cross_births
++        priorities = torch.rand(len(features),device=self.device,dtype=torch.float64,generator=generator)
++        empty = torch.empty(0,device=self.device,dtype=torch.long)
++        children_by_cell,parents_by_cell = [],[]
++        for cell in range(self.cells):
++            count = int(deaths[cell])
++            if count:
++                rows = ((ids==cell)&death_eligible).nonzero().flatten()
++                children_by_cell.append(rows[priorities[rows].argsort(stable=True)[:count]])
++            else:
++                children_by_cell.append(empty)
++            count = int(births[cell])
++            if count:
++                draw = torch.randperm(int(pool_counts[cell]),device=self.device,generator=generator)[:count]
++                parents_by_cell.append(pool[cell,draw])
++            else:
++                parents_by_cell.append(empty)
++        children,parents = [],[]
++        # Match the conservative within-neighborhood phase inside its group.
++        # Only the explicit residual phase can move mass between groups.
++        for group in range(self.mass_groups):
++            for cell in (groups==group).nonzero().flatten():
++                index = int(cell)
++                children.append(children_by_cell[index][:int(within_deaths[index])])
++                parents.append(parents_by_cell[index][:int(within_births[index])])
++        for cell in range(self.cells):
++            children.append(children_by_cell[cell][int(within_deaths[cell]):])
++            parents.append(parents_by_cell[cell][int(within_births[cell]):])
++        child = torch.cat(children) if children else empty
++        parent = torch.cat(parents) if parents else empty
++        detail = dict(excess_cells=int(comparison["excess"].sum()),deficit_cells=int(comparison["deficit"].sum()),
++                      discoveries=int((comparison["excess"]|comparison["deficit"]).sum()),
++                      inaccessible_birth_quota=int(inaccessible),budget=budget,moves=len(child),
++                      death_allocation=deaths,birth_allocation=births,eligible_parent_counts=eligible_counts,
++                      target_counts=target,clean_counts=clean_counts,table_counts=table_counts,clean_vacancies=vacancies,
++                      unique_parent_count=len(torch.unique(parent)),mass_topology=dict(self.mass_topology),
++                      group_target_counts=group_target,group_clean_counts=group_clean,
++                      within_group_moves=int(within.sum()),between_group_moves=cross_pairs)
++        supported_children = child[~flags[child]]
++        detail.update(isolation_guard_rejects=isolation_guard_rejects,
++                      ordinary_flagged_deaths=int(flags[child].sum()),
++                      death_policy="count_certified_flagged_outside_only",
++                      count_partition=dict(self.count_partition),count_boundary=self.count_boundary.clone(),
++                      query_category_ids=categories,child_category_ids=categories[child],parent_category_ids=categories[parent],
++                      death_certified_categories=comparison["excess"],birth_certified_categories=comparison["deficit"],
++                      death_category_allocation=torch.bincount(categories[child],minlength=2*self.cells),
++                      birth_category_allocation=torch.bincount(categories[parent],minlength=2*self.cells),
++                      raw_certified_death_capacity=raw_death_capacity,raw_certified_birth_capacity=raw_birth_capacity,
++                      spent_certified_death_capacity=spent_deaths,spent_certified_birth_capacity=spent_births,
++                      residual_certified_death_capacity=residual_death_capacity,
++                      residual_certified_birth_capacity=residual_birth_capacity,
++                      planned_supported_counts=clean_counts-torch.bincount(ids[supported_children],minlength=self.cells)
++                          +torch.bincount(ids[parent],minlength=self.cells))
++        return child,parent,detail
++
++
++    @torch.no_grad()
++    def ordinary_transport(self, query_features, flags, comparison, *, generator, pvalues=None, max_moves=None):
++        """Original mass first, support recovery second, under one budget."""
++        if (comparison.get("multiplicity") != 3*self.cells
++                or comparison.get("cutoff") != Q/(3*self.cells)
++                or comparison["mass"]["difference"].shape != (self.cells,)
++                or comparison["support"]["difference"].shape != (2*self.cells,)):
++            raise ValueError("joint transport requires the common 3K comparison")
++        self._input(query_features)
++        rows = len(query_features)
++        if flags.shape != (rows,) or flags.dtype != torch.bool or flags.device != self.device:
++            raise ValueError("invalid isolation flags")
++        if pvalues is None:
++            _,pvalues,_ = self.support(query_features)
++        budget = math.floor(Q*rows) if max_moves is None else min(int(max_moves),math.floor(Q*rows))
++        budget = max(0,budget)
++        mass_child,mass_parent,mass = self._ordinary_mass_transport(query_features,flags,comparison["mass"],
++                    generator=generator,pvalues=pvalues,max_moves=budget)
++        ids, _ = self.assign(query_features)
++        clean = torch.bincount(ids[~flags],minlength=self.cells)
++        mass_supported_child = mass_child[~flags[mass_child]]
++        after_mass = clean-torch.bincount(ids[mass_supported_child],minlength=self.cells)
++        after_mass += torch.bincount(ids[mass_parent],minlength=self.cells)
++        remaining = budget-len(mass_child)
++        possible = (remaining>0 and bool(flags.any())
++                    and bool(comparison["support"]["excess"][1::2].any())
++                    and bool(comparison["support"]["deficit"][0::2].any()))
++        empty = torch.empty(0,device=self.device,dtype=torch.long)
++        if possible:
++            support_child,support_parent,support = self._ordinary_support_transport(query_features,flags,
++                    comparison["support"],generator=generator,pvalues=pvalues,max_moves=remaining,
++                    reserved_children=mass_child,reserved_parents=mass_parent,supported_counts=after_mass)
++            support["ran"] = True
++        else:
++            support_child,support_parent = empty,empty
++            support = dict(ran=False,moves=0,budget=remaining,planned_supported_counts=after_mass.clone(),
++                    death_allocation=torch.zeros(self.cells,device=self.device,dtype=torch.long),
++                    birth_allocation=torch.zeros(self.cells,device=self.device,dtype=torch.long),
++                    within_group_moves=0,between_group_moves=0,inaccessible_birth_quota=0)
++        child,parent = torch.cat((mass_child,support_child)),torch.cat((mass_parent,support_parent))
++        categories = self.count_categories(query_features)
++        planned = after_mass+torch.bincount(ids[support_parent],minlength=self.cells)
++        detail = dict(excess_cells=mass["excess_cells"]+int(comparison["support"]["excess"].sum()),
++                deficit_cells=mass["deficit_cells"]+int(comparison["support"]["deficit"].sum()),
++                discoveries=mass["discoveries"]+int((comparison["support"]["excess"]|comparison["support"]["deficit"]).sum()),
++                inaccessible_birth_quota=mass["inaccessible_birth_quota"]+support["inaccessible_birth_quota"],
++                budget=budget,moves=len(child),mass_moves=len(mass_child),support_moves=len(support_child),
++                mass_phase=mass,support_phase=support,mass_children=mass_child,mass_parents=mass_parent,
++                support_children=support_child,support_parents=support_parent,
++                action_kinds=torch.cat((torch.zeros_like(mass_child),torch.ones_like(support_child))),
++                death_allocation=mass["death_allocation"]+support["death_allocation"],
++                birth_allocation=mass["birth_allocation"]+support["birth_allocation"],
++                eligible_parent_counts=mass["eligible_parent_counts"],target_counts=mass["target_counts"],
++                clean_counts=clean,table_counts=mass["table_counts"],planned_supported_counts=planned,
++                supported_after_mass=after_mass,unique_parent_count=len(torch.unique(parent)),
++                mass_topology=dict(self.mass_topology),group_target_counts=mass["group_target_counts"],
++                group_clean_counts=self._group_counts(clean),
++                within_group_moves=mass["within_group_moves"]+support["within_group_moves"],
++                between_group_moves=mass["between_group_moves"]+support["between_group_moves"],
++                isolation_guard_rejects=mass["isolation_guard_rejects"],ordinary_flagged_deaths=int(flags[child].sum()),
++                death_policy="v4_mass_then_certified_flagged_outside",multiplicity=3*self.cells,cutoff=Q/(3*self.cells),
++                query_cell_ids=ids,query_category_ids=categories,child_category_ids=categories[child],
++                parent_category_ids=categories[parent],count_partition=dict(self.count_partition),
++                count_boundary=self.count_boundary.clone())
++        return child,parent,detail
++
++
+ class FeatureCellBirthDeath(ParticleBirthDeath):
+     """Actual GANTrainer backend; keeps original FIFO and row-copy mechanics."""
+     BACKEND_SCHEMA = 3
+@@ -792,7 +1035,9 @@
+                              real_anchors=1,parent_rank=None,
+                              latent_kernel="bounded_local_dv12",latent_neighbors=PARENT_RESERVOIR,
+                              latent_rank=recipe.birth_death_metric_rank,
+-                             mass_policy="reference_topology_vacancies_unique_parents_v4",
++                             mass_policy="joint_mass_support_common_3K_unique_parents_v1",
++                             count_partition="even_fit_score_order_statistic_2K",
++                             count_family="original_K_plus_support_2K_common_Q_over_3K",
+                              isolation_parent_pool="supported_same_cell_without_replacement")
+         self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
+                                                    neighbors=PARENT_RESERVOIR, chunk=recipe.birth_death_chunk)
+@@ -889,6 +1134,9 @@
+                         minimum_bh_flag_fraction=1/(Q*(snapshot.calibration_rows+1)),
+                         duplicate_fraction=snapshot.duplicate_fraction,statistic="conditional_categorical_transport",
+                         density_ratio=None,statistical_limit="conditional iid cell test; no repeated adaptive guarantee",
++                        count_partition=dict(snapshot.count_partition),count_boundary=float(snapshot.count_boundary),
++                        count_categories=comparison["categories"],count_multiplicity=comparison["multiplicity"],
++                        ordinary_death_policy=ordinary["death_policy"],
+                         mass_topology=dict(snapshot.mass_topology),
+                         ordinary_within_group_moves=ordinary["within_group_moves"],
+                         ordinary_between_group_moves=ordinary["between_group_moves"],

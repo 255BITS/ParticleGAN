@@ -1,0 +1,451 @@
+{
+  "path": "/ml2/hypergan/forge-policy-family-round1-20261002/initial-atlas-cli-setup.tar.gz",
+  "sha256": "d03f515ce7367856ffa299e2bbb00f7992fa8c377fc4e3af1540c3d58c066455",
+  "bytes": 393641,
+  "source_commit": "563cb337937a05494a1577376e5740f0aa2e2777",
+  "study_id": "policy-family-defaults-round1-v1",
+  "paid_setup_seconds": 6.16541115893051,
+  "optimizer_updates": 0,
+  "scientific_status": "UNMEASURED",
+  "files": [
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "92ae772bca66139e2e6d84d2d6b289354f1c7e78acfa0b48d408239ed6e6e597",
+      "bytes": 432
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "92ae772bca66139e2e6d84d2d6b289354f1c7e78acfa0b48d408239ed6e6e597",
+      "bytes": 432
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "92ae772bca66139e2e6d84d2d6b289354f1c7e78acfa0b48d408239ed6e6e597",
+      "bytes": 432
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "92ae772bca66139e2e6d84d2d6b289354f1c7e78acfa0b48d408239ed6e6e597",
+      "bytes": 432
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/study.json",
+      "archive_path": "archive/atlas/study.json",
+      "sha256": "bba8374f395d4c8040c87f8db0e83995b3f0e7f7e583d47f4294148d794493b9",
+      "bytes": 92175
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round1-20261002/resource-admission.json",
+      "archive_path": "archive/resource-admission.json",
+      "sha256": "68293bf900b7b3c9be520c94cd4f9793e6187271906badc87bb502f8a45c7a8c",
+      "bytes": 701
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/__init__.py",
+      "archive_path": "source/benchmarks/toy100/__init__.py",
+      "sha256": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+      "bytes": 143
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/__main__.py",
+      "archive_path": "source/benchmarks/toy100/__main__.py",
+      "sha256": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+      "bytes": 10315
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/accuracy.py",
+      "archive_path": "source/benchmarks/toy100/accuracy.py",
+      "sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "bytes": 11658
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/accuracy_evidence.py",
+      "archive_path": "source/benchmarks/toy100/accuracy_evidence.py",
+      "sha256": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+      "bytes": 3664
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/accuracy_gate.py",
+      "archive_path": "source/benchmarks/toy100/accuracy_gate.py",
+      "sha256": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "bytes": 8383
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/config.py",
+      "archive_path": "source/benchmarks/toy100/config.py",
+      "sha256": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+      "bytes": 3694
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/constraint_screen.py",
+      "archive_path": "source/benchmarks/toy100/constraint_screen.py",
+      "sha256": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+      "bytes": 9931
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/continuous_probe.py",
+      "archive_path": "source/benchmarks/toy100/continuous_probe.py",
+      "sha256": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+      "bytes": 29615
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/device.py",
+      "archive_path": "source/benchmarks/toy100/device.py",
+      "sha256": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+      "bytes": 10288
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/gate.py",
+      "archive_path": "source/benchmarks/toy100/gate.py",
+      "sha256": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+      "bytes": 22664
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/metrics.py",
+      "archive_path": "source/benchmarks/toy100/metrics.py",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "bytes": 8442
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/models.py",
+      "archive_path": "source/benchmarks/toy100/models.py",
+      "sha256": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+      "bytes": 11086
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/native_models.py",
+      "archive_path": "source/benchmarks/toy100/native_models.py",
+      "sha256": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+      "bytes": 2017
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/problems.py",
+      "archive_path": "source/benchmarks/toy100/problems.py",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+      "bytes": 2428
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/render.py",
+      "archive_path": "source/benchmarks/toy100/render.py",
+      "sha256": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+      "bytes": 8428
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/schedule.py",
+      "archive_path": "source/benchmarks/toy100/schedule.py",
+      "sha256": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+      "bytes": 5707
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/search.py",
+      "archive_path": "source/benchmarks/toy100/search.py",
+      "sha256": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+      "bytes": 4527
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/train.py",
+      "archive_path": "source/benchmarks/toy100/train.py",
+      "sha256": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+      "bytes": 53526
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/warm_equilibrium_probe.py",
+      "archive_path": "source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "bytes": 14377
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_conditionals.py",
+      "archive_path": "source/benchmarks/toy_audit/api_conditionals.py",
+      "sha256": "ca6b063c0ac315f90661deaffae8f60fbd4a0f9575b891db1895501d12edad38",
+      "bytes": 48418
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_contract.py",
+      "archive_path": "source/benchmarks/toy_audit/api_contract.py",
+      "sha256": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+      "bytes": 10394
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_diagnostics.py",
+      "archive_path": "source/benchmarks/toy_audit/api_diagnostics.py",
+      "sha256": "d83ca91e423823e16126f5eb0557af3682efa22e459db7e1cbd7490558360a50",
+      "bytes": 36061
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_family_search.py",
+      "archive_path": "source/benchmarks/toy_audit/api_family_search.py",
+      "sha256": "ad3c9ed704bcc5af690300699e96735b1221cead23ab266c613e3ee9457895ea",
+      "bytes": 42361
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_images.py",
+      "archive_path": "source/benchmarks/toy_audit/api_images.py",
+      "sha256": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+      "bytes": 86442
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_publish.py",
+      "archive_path": "source/benchmarks/toy_audit/api_publish.py",
+      "sha256": "4334ac384c2766d85bd10ece19cee3ba88be67e39f151a414efcac188ecae2de",
+      "bytes": 30024
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_readout.py",
+      "archive_path": "source/benchmarks/toy_audit/api_readout.py",
+      "sha256": "7026a342e5325e19086bcd23e89fee74d871464cef3d727c1fd7d80c8649a414",
+      "bytes": 6738
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_reframe.py",
+      "archive_path": "source/benchmarks/toy_audit/api_reframe.py",
+      "sha256": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
+      "bytes": 22663
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_ring16.py",
+      "archive_path": "source/benchmarks/toy_audit/api_ring16.py",
+      "sha256": "28b7bddc2a72538177431db7318bfd6778fe35fe06e1292b1701a315f75801ff",
+      "bytes": 2878
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_run.py",
+      "archive_path": "source/benchmarks/toy_audit/api_run.py",
+      "sha256": "d6a9d34022688c2b6b8df8c29f93c60deaecf47e8c0888c7c82728c897a43be1",
+      "bytes": 35760
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_vectors.py",
+      "archive_path": "source/benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+      "bytes": 50536
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/definition_quality.py",
+      "archive_path": "source/benchmarks/toy_audit/definition_quality.py",
+      "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "bytes": 19193
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/vector_quality.py",
+      "archive_path": "source/benchmarks/toy_audit/vector_quality.py",
+      "sha256": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+      "bytes": 16391
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/transfer_suite/stress_tasks.py",
+      "archive_path": "source/benchmarks/transfer_suite/stress_tasks.py",
+      "sha256": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+      "bytes": 6273
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/transfer_suite/vector_tasks.py",
+      "archive_path": "source/benchmarks/transfer_suite/vector_tasks.py",
+      "sha256": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+      "bytes": 22296
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/experiments/forge/configuration_search.py",
+      "archive_path": "source/experiments/forge/configuration_search.py",
+      "sha256": "cbdc3d15b032ab4112b039a0b89ce8e7f7153fb19c406d5277a3793a81184c6a",
+      "bytes": 38743
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/lib/toy_models.py",
+      "archive_path": "source/lib/toy_models.py",
+      "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+      "bytes": 5231
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/__init__.py",
+      "archive_path": "source/particlegan/__init__.py",
+      "sha256": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+      "bytes": 1811
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/_qr.py",
+      "archive_path": "source/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "bytes": 1951
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/anchor_birth.py",
+      "archive_path": "source/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "bytes": 6401
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/autoencoder.py",
+      "archive_path": "source/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "bytes": 6194
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/birth_death.py",
+      "archive_path": "source/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "bytes": 45396
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/birth_phase.py",
+      "archive_path": "source/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "bytes": 21144
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/capabilities.py",
+      "archive_path": "source/particlegan/capabilities.py",
+      "sha256": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+      "bytes": 2285
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/conditioning.py",
+      "archive_path": "source/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "bytes": 4878
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/continuous.py",
+      "archive_path": "source/particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "bytes": 60875
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/diffusion.py",
+      "archive_path": "source/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "bytes": 5100
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/discriminators.py",
+      "archive_path": "source/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "bytes": 5833
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/feature_cells.py",
+      "archive_path": "source/particlegan/feature_cells.py",
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "bytes": 125325
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/feature_policy.py",
+      "archive_path": "source/particlegan/feature_policy.py",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "bytes": 14650
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/feature_reference.py",
+      "archive_path": "source/particlegan/feature_reference.py",
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "bytes": 32368
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/gan_loss.py",
+      "archive_path": "source/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "bytes": 1016
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/grad_regularizers.py",
+      "archive_path": "source/particlegan/grad_regularizers.py",
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "bytes": 14853
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/init.py",
+      "archive_path": "source/particlegan/init.py",
+      "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+      "bytes": 24559
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/k3p.py",
+      "archive_path": "source/particlegan/k3p.py",
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+      "bytes": 33012
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/ka2.py",
+      "archive_path": "source/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "bytes": 16551
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/mean_transport.py",
+      "archive_path": "source/particlegan/mean_transport.py",
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "bytes": 39633
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/output_moments.py",
+      "archive_path": "source/particlegan/output_moments.py",
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "bytes": 8387
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/particle_prior.py",
+      "archive_path": "source/particlegan/particle_prior.py",
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+      "bytes": 17899
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/policy.py",
+      "archive_path": "source/particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "bytes": 81022
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/population_continuity.py",
+      "archive_path": "source/particlegan/population_continuity.py",
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "bytes": 20329
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/recipe_schedules.py",
+      "archive_path": "source/particlegan/recipe_schedules.py",
+      "sha256": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+      "bytes": 6044
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/recipes.py",
+      "archive_path": "source/particlegan/recipes.py",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "bytes": 53612
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/routing.py",
+      "archive_path": "source/particlegan/routing.py",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "bytes": 64904
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/row_evidence.py",
+      "archive_path": "source/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "bytes": 9397
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/training.py",
+      "archive_path": "source/particlegan/training.py",
+      "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+      "bytes": 39880
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/vicreg_loss.py",
+      "archive_path": "source/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "bytes": 2297
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/reports/forge/family-winner-round1/policy-search.json",
+      "archive_path": "source/reports/forge/family-winner-round1/policy-search.json",
+      "sha256": "0cba2390d0e0a536909e0cb178a28f6ab55d857e14885e8a841c37bed98c6dde",
+      "bytes": 3048
+    }
+  ],
+  "restoration": "Verify the archive SHA before extraction. Archive/raw entries restore the original relative run paths; source entries retain exact executed bytes and the pinned source commit. No unchanged scientific failure was rerun."
+}

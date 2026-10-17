@@ -1,0 +1,76 @@
+{
+  "autograd_multithreading_changed_by_optimizer": false,
+  "historical_training_regraded": false,
+  "local_artifacts": {
+    "runs/software/default-truncation/junit.xml": "4067a0c72c371553a35391f845f5bd15c81b6ced851b4fb1f9494c02fc1a2b03",
+    "runs/software/default-truncation/native-adam-junit.xml": "802ffd5787376b427e92e679558e63d1f32c130a25a28f00e788344febd448fb",
+    "runs/software/default-truncation/native-adam.log": "e3591b963ab12246b4ba351aabb75b96bfde96787694ab697e0c5f4b6cb38891",
+    "runs/software/default-truncation/pytest.log": "a88db3fd09eb49efc00b51f376ac3022f68f1570bae239e18d10e830404b6087",
+    "runs/software/default-truncation/saved-gradient.json": "abfb9277f02c58ec2924036a0660471c1e9c3da0e09ef2e8d1eb57962c7a10c3",
+    "runs/software/default-truncation/saved-gradient.log": "7caa3117ed5de71d2be21f1f827f64408b7d71198bd3eeb5b8503744f8104265"
+  },
+  "native_adam_followup": {
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "2",
+    "time": "1.337"
+  },
+  "ordinary_tier1_and_gated_tier2": "pending_after_both_default_changes_merge",
+  "qualification_input": false,
+  "saved_gradient_parity": {
+    "arms": {
+      "live": {
+        "bit_exact_parity": true,
+        "dtype": "torch.float32",
+        "dtype_conversion": false,
+        "shape": [
+          64,
+          64
+        ],
+        "trace_sha256": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145"
+      },
+      "restart": {
+        "bit_exact_parity": true,
+        "dtype": "torch.float32",
+        "dtype_conversion": false,
+        "shape": [
+          64,
+          64
+        ],
+        "trace_sha256": "87975f57050de221f1c09d4146a0416390e7d3511a50eab6a255f14314ed235d"
+      }
+    },
+    "cuda_rng_preserved": true,
+    "device": "cuda:0",
+    "frozen_helper_sha256": "aa59a29e732fd1697195436d559f915fcdfb8dfe401f26dbceb0bc7981073258",
+    "gpu": "NVIDIA RTX A6000",
+    "qualification_input": false,
+    "sampling_draws": 0,
+    "scope": "public_default_vs_frozen_truncation_saved_cuda_gradients",
+    "source_sha256": "64ee3c7ccb8c823ac8ed18f2ba8e7bc3b11680d1e427775ca4ad798f10ace1d4",
+    "status": "PASS",
+    "training_updates": 0
+  },
+  "schema_version": 1,
+  "scope": "user_requested_public_dualnorm_default_adoption",
+  "software_check_budget": {
+    "public_training_updates_ceiling": 128,
+    "quality_training_updates": 0,
+    "wall_seconds_ceiling": 60
+  },
+  "software_tests": {
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "103",
+    "time": "2.973"
+  },
+  "source_sha256": {
+    "particlegan/optim/dualnorm.py": "64ee3c7ccb8c823ac8ed18f2ba8e7bc3b11680d1e427775ca4ad798f10ace1d4",
+    "tests/test_dualnorm_optimizers.py": "57a11f12843eeff951fe6f6b0f87c8866643b7aa8da78d539523d7a7dcfb1006"
+  },
+  "svd_sizes": "all",
+  "threshold_rule": "max(rows,columns)*finfo(SVD_computation_dtype).eps*s_max",
+  "verification_device": "CUDA physical GPU0, RTX A6000"
+}

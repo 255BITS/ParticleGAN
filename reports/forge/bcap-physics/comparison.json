@@ -1,0 +1,777 @@
+{
+  "schema_version": 1,
+  "scope": "source_bound_mechanism_diagnostic_comparison",
+  "qualification_input": false,
+  "goal": "discriminator_stability",
+  "original_winner": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+  "original_tier2": {
+    "PASS": 7,
+    "FAIL": 14,
+    "INCOMPLETE": 0
+  },
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "protocol_seed": 0,
+  "shared_queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue",
+  "tracks": [
+    {
+      "track": "hydraulic",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/360",
+      "publication_commit": "400725464ea4129b1f6b9a2387495002157c3005",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/400725464ea4129b1f6b9a2387495002157c3005/reports/forge/bcap-physics/hydraulic/README.md",
+      "publication_file_sha256": {
+        "README.md": "483ccb01588781ba9a1dd1fec29ef1cc7dc553a285338699f7703d4d0989ddd7",
+        "results.json": "4e4dac9d635a1d6a204e3aeef97945ecc2a1e168b7c8aa58fba3a295e94e5c6e",
+        "provenance.json": "70118455fa165cc7f209ab7a595c19254e18fcb4c864eb718e479138c321b0dc"
+      },
+      "executed_source_digest": "937cf7c08cea42796b95d33620092a309b179691c015dd49ac6a21f165354d0f",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "candidate": {
+        "candidate_id": "hydraulic-output-travel-v1",
+        "candidate_revision": "45374fb781da729e0ff341a752e017ab81a5bcbd2be35bedafaeeb40ccdb88da",
+        "request_id": "b20882a3aa30291a7b9803d5",
+        "study_id": "hydraulic-motion-candidate-v1",
+        "source_origin_commit": "534b35f10be84500746a71e9707a6e0ead9844a7",
+        "task_grades": {
+          "gaussian1d_stability": "FAIL",
+          "gaussian1d_smoke": "PASS",
+          "vector_two_broad": "PASS",
+          "grid100": "FAIL",
+          "two_pole": "BLOCKED"
+        },
+        "outcomes": {
+          "FAIL": 2,
+          "PASS": 2,
+          "BLOCKED": 1
+        },
+        "workers": [
+          {
+            "attempt_id": "68fbc87a80d045e0b3222927ef4a6183",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 25.3981434579473,
+            "result_hash": "13c3b11cf4d1c53fd134f4b4ce8291a47572ef87ecb317eae062a31c0959dd9e"
+          },
+          {
+            "attempt_id": "373eb78c6297437ea5b287015925a1af",
+            "task_id": "gaussian1d_stability",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 183.88990638102405,
+            "result_hash": "d3b0adabf0683abc141490778718f5a2d37026ecdbef5cafdaecf83255b3ca41"
+          },
+          {
+            "attempt_id": "fd72f1620ca84e978ec36ba5df5229d4",
+            "task_id": "grid100",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 647.6569368049968,
+            "result_hash": "8bc0f7e831362ed89c22b0adc0e3992090729ffe485a61404a359676995b2514"
+          },
+          {
+            "attempt_id": "269a87b079ef4bd19ef36954427f347f",
+            "task_id": "vector_two_broad",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 63.326793776941486,
+            "result_hash": "51cc5e988ec1d2b225461f6524254d3274cf9cdcb7dd8743c1ff20fd6bc43171"
+          }
+        ]
+      },
+      "control": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+        "candidate_revision": "9c4d7b3aab64c9137263a0738122dfefccfec6840da93ed7b3f490c3882d8186",
+        "request_id": "dac8193e4b2b0aa26fe70b61",
+        "study_id": "hydraulic-motion-control-v1",
+        "source_origin_commit": "2957c118d2ba50ad8c0bf8138a020c4281a356d1",
+        "task_grades": {
+          "gaussian1d_stability": "FAIL",
+          "grid100": "FAIL",
+          "vector_two_broad": "PASS",
+          "two_pole": "PASS",
+          "gaussian1d_smoke": "PASS"
+        },
+        "outcomes": {
+          "FAIL": 2,
+          "PASS": 3
+        },
+        "workers": [
+          {
+            "attempt_id": "8faee78d80854752b3981e1aa44c98e4",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 35.54464979795739,
+            "result_hash": "e1d84e8dabf3bb32f24334feb1c058d60d3c47941e579011c6767cb8db611982"
+          },
+          {
+            "attempt_id": "0c1cce6e78ba4084b9c094a373603427",
+            "task_id": "gaussian1d_stability",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 149.1425465460634,
+            "result_hash": "2f186a2691dbdc3a9325254f0ca3a980bd6dd71e6dde673071b5c36caddb0204"
+          },
+          {
+            "attempt_id": "7e5af598083640eba79d312deaa6a531",
+            "task_id": "grid100",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 467.20738539402373,
+            "result_hash": "3bb3470fcb8ef58a20288bf5d757653a782f243f82dd339224c4af0e70721d80"
+          },
+          {
+            "attempt_id": "3a7bf28d42b545e9bb43b3ad5e8e47ba",
+            "task_id": "two_pole",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 6.903549715992995,
+            "result_hash": "62dd1e6296fa3a76fffb65dbd4c03663c8319c20b9d8af5410383ef545aba31f"
+          },
+          {
+            "attempt_id": "dae67d2953e64a19b106f9e16ea2024d",
+            "task_id": "vector_two_broad",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 82.70488200697582,
+            "result_hash": "622a8ec987a0e41660fe440e999796bad488cf333e55777130bb94ea5928ca0e"
+          }
+        ]
+      },
+      "paid_worker_seconds": 1661.774793881923,
+      "remaining_reserved_seconds": 0.0
+    },
+    {
+      "track": "thermodynamic",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/359",
+      "publication_commit": "61b07b1c2769b5eb97bcbde70abc3cd4b4464ad9",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/61b07b1c2769b5eb97bcbde70abc3cd4b4464ad9/reports/forge/bcap-physics/thermodynamic/README.md",
+      "publication_file_sha256": {
+        "README.md": "96d360aca7ee440144a7bf18cec0cbf9f3d7984e98b6e76890dbff3d9286cbed",
+        "results.json": "16003bce94ada25b26833142c51e4a14919a22f691b035c9a5f04a773bbfb319",
+        "provenance.json": "b76873dfa8a4c29e2844a4156b7b3841a3339e4a0c17a3bc14cb685a99529273"
+      },
+      "executed_source_digest": "5dd9416b67f955d731ef39f9d161a4bb403f0fe8466192c7ef4f20f999b1f1ef",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "candidate": {
+        "candidate_id": "thermodynamic-bcap-optimism-v1",
+        "candidate_revision": "37de3dc839254b12f9c961e0b1b4dc17855bcc854688808f1985f8ea6a1e2e90",
+        "request_id": "db537481b073f306c0e5fde6",
+        "study_id": "thermodynamic-circulation-candidate-v1",
+        "source_origin_commit": "1503419419e3581cc84657aef5efe7465ea17671",
+        "task_grades": {
+          "vector_two_broad": "PASS",
+          "two_pole": "PASS",
+          "mode_hold": "FAIL",
+          "gaussian1d_smoke": "FAIL",
+          "trajectory": "FAIL",
+          "gaussian1d_stability": "BLOCKED"
+        },
+        "outcomes": {
+          "PASS": 2,
+          "FAIL": 3,
+          "BLOCKED": 1
+        },
+        "workers": [
+          {
+            "attempt_id": "2b9d007872f64d62bbb31077a9c9d1f3",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 27.458089759922586,
+            "result_hash": "65b92048b546348eae37f4b31e129391f46fb6150c23c56290570741816c8fa7"
+          },
+          {
+            "attempt_id": "537309eecfd14b55aa10de83436b4eec",
+            "task_id": "mode_hold",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 67.30326093698386,
+            "result_hash": "82a606bfc5ac6f7f653a28819577f2ac44466d416c78039e007e766c17d19368"
+          },
+          {
+            "attempt_id": "4ddf649ef1bc40dca6549e4add1ce387",
+            "task_id": "trajectory",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 13.963810206972994,
+            "result_hash": "3a1e6df9ffe371562d5d4213c961ecfd97c76b91325aada384147355548cb349"
+          },
+          {
+            "attempt_id": "c195189c3ecf4e76a2059847250985c9",
+            "task_id": "two_pole",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 7.2527618140447885,
+            "result_hash": "12b4abc0bae74bf9b0c9e2e1d69c5a96b9eee086e32be0cb999babb5f6932221"
+          },
+          {
+            "attempt_id": "ef41eadf73be49b7831a5f6d00605f21",
+            "task_id": "vector_two_broad",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 56.68528311699629,
+            "result_hash": "fe43ad537122ccd5b9ecc212d11819963842a62dfc4a7741a0c962c255cf4d04"
+          }
+        ]
+      },
+      "control": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+        "candidate_revision": "6eb2b2fbb09d85edefa1f070f45c3e19cd4b63b512152284384f5d3bfc0b3302",
+        "request_id": "fc6b2276923e8b3eb897a82a",
+        "study_id": "thermodynamic-circulation-control-v1",
+        "source_origin_commit": "1503419419e3581cc84657aef5efe7465ea17671",
+        "task_grades": {
+          "two_pole": "PASS",
+          "vector_two_broad": "PASS",
+          "gaussian1d_smoke": "PASS",
+          "gaussian1d_stability": "FAIL",
+          "trajectory": "FAIL",
+          "mode_hold": "FAIL"
+        },
+        "outcomes": {
+          "PASS": 3,
+          "FAIL": 3
+        },
+        "workers": [
+          {
+            "attempt_id": "94fc2df0816c460dbae3520185f5cde4",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 32.23918141401373,
+            "result_hash": "4caa0bf1d31a28af323a44b6f3a39cd23a2faf05a7851e3b59da5298cfbb1be8"
+          },
+          {
+            "attempt_id": "f28b8acf22ea444f8578a588f8d2486f",
+            "task_id": "gaussian1d_stability",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 110.3138400510652,
+            "result_hash": "04082e1cc4b217fae17c9c396a7d5fb6cf97a301ae27fbcb9563778d406faa8e"
+          },
+          {
+            "attempt_id": "37d190fbec7e46d7855f7fa9abe151c3",
+            "task_id": "mode_hold",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 85.28876388596836,
+            "result_hash": "8893f9c4e6b86274234229ad04ffc7a7c3a91d953e3c353f209d21eba6c3c916"
+          },
+          {
+            "attempt_id": "03c64e3c2e5c4df3a83cff14bb78a6bc",
+            "task_id": "trajectory",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 25.307965448941104,
+            "result_hash": "140c29eda886dc2bc123df289fba7f1b1a7539c74e2900119d2965991c541db6"
+          },
+          {
+            "attempt_id": "37226da43f274280a5af682e3d633ff8",
+            "task_id": "two_pole",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 7.015042413026094,
+            "result_hash": "bb6e3b95485e18f9d8fbbd35821b6b99238294cc8eca89bfd5261195c339ce88"
+          },
+          {
+            "attempt_id": "e0c02213a05049588023530310caa91c",
+            "task_id": "vector_two_broad",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 62.11896371503826,
+            "result_hash": "9d75b1c541fec421191082a251501020ddc4144232b8ce227cbc9070faa318ce"
+          }
+        ]
+      },
+      "paid_worker_seconds": 494.94696276297327,
+      "remaining_reserved_seconds": 0.0
+    },
+    {
+      "track": "kinetic_transport",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/358",
+      "publication_commit": "bbf6ce30af8d56aea2ce0914341c818f988888d6",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/bbf6ce30af8d56aea2ce0914341c818f988888d6/reports/forge/bcap-physics/kinetic_transport/README.md",
+      "publication_file_sha256": {
+        "README.md": "60a73549c4c4f3e2e539a385f2a1e0ed5b947091eb4b7f51c0bbd54337fb003d",
+        "results.json": "8faf92420e4dc3d341b81fb4af14d10ed31a36b4ff8aa4e970ecb52039e39a1f",
+        "provenance.json": "1f03cbccb54ceaa46985ce6587d7757dd7515691f93939f3b723bde1eb374101"
+      },
+      "executed_source_digest": "d6fa25a96d87ad1b3eb7a43619088c564e655500869f9b97073c182282d330f7",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "candidate": {
+        "candidate_id": "kinetic_transport_sliced_v1",
+        "candidate_revision": "24bacd26b777b7bb90214c0254f92861d20b93bd8c2f83fce4ed59ee76e49997",
+        "request_id": "0fb3826fbd0cd83e21e2096b",
+        "study_id": "kinetic_transport_candidate_v1",
+        "source_origin_commit": "3fb7d4f98190589f399a8328fa11a19c591d9cb3",
+        "task_grades": {
+          "vector_unequal_width": "FAIL",
+          "gaussian1d_stability": "FAIL",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "FAIL",
+          "gaussian1d_smoke": "PASS",
+          "two_pole": "BLOCKED"
+        },
+        "outcomes": {
+          "FAIL": 3,
+          "PASS": 2,
+          "BLOCKED": 1
+        },
+        "workers": [
+          {
+            "attempt_id": "a1ff0275d07b469faa657be9ff6751e5",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 30.120391619973816,
+            "result_hash": "b4df01f889d8b10c303311214699a7b662a8e002fc2f775d18fff45a2d558c2f"
+          },
+          {
+            "attempt_id": "8314ce32f63c424d9464a01bdaf734f9",
+            "task_id": "gaussian1d_stability",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 94.34509687393438,
+            "result_hash": "fec9eca8b4437216ccd104aa309869d9649470cc8f4557214e3450d50eff577b"
+          },
+          {
+            "attempt_id": "b2ce21bffdf94e768affa381f363245f",
+            "task_id": "vector_two_broad",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 52.58235900697764,
+            "result_hash": "0659f33d442d84cbf410ca76a2f7141441522911bd8e556681eec6c04cdf2b48"
+          },
+          {
+            "attempt_id": "183df95fc16a4eb7b73416e6b1371d73",
+            "task_id": "vector_unequal_mass",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 24.772013721987605,
+            "result_hash": "1a0aaa64ab8413d2a3101898bc48064f976c9936d48d362dc9ecee6584bd91cc"
+          },
+          {
+            "attempt_id": "dfa63108433648a5a7a2c38f5522ef45",
+            "task_id": "vector_unequal_width",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 46.50744774204213,
+            "result_hash": "21c5ea491e647d023be12aca0e5d923a6e38bfcf2f4fa58ca145f0d9100b2235"
+          }
+        ]
+      },
+      "control": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+        "candidate_revision": "c140b8522f30cae109998c05dae7fc2b9ccefeb320e4151a6308098af1f8a1a7",
+        "request_id": "cfe8d674ced2499bcc9369d2",
+        "study_id": "kinetic_transport_control_v1",
+        "source_origin_commit": "3fb7d4f98190589f399a8328fa11a19c591d9cb3",
+        "task_grades": {
+          "vector_unequal_mass": "FAIL",
+          "gaussian1d_stability": "FAIL",
+          "vector_unequal_width": "FAIL",
+          "two_pole": "PASS",
+          "vector_two_broad": "PASS",
+          "gaussian1d_smoke": "PASS"
+        },
+        "outcomes": {
+          "FAIL": 3,
+          "PASS": 3
+        },
+        "workers": [
+          {
+            "attempt_id": "c972aab9701841c9accb7428b8ca25f5",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 28.525144055020064,
+            "result_hash": "b438aabf6bc2d7063f68b1d0a07a7710c7cac5d3cd5e40cfec2bcb9ce8b7bec7"
+          },
+          {
+            "attempt_id": "14332175519e4d03903ff781f7b0cd67",
+            "task_id": "gaussian1d_stability",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 105.18261374800932,
+            "result_hash": "b9250f08dec07bae21f4d62be16c36cbdc7be36e8aed891b34746ebf75eb1877"
+          },
+          {
+            "attempt_id": "4b8b1ee17a2f4f84a2b38f4750669ad9",
+            "task_id": "two_pole",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 7.402488559950143,
+            "result_hash": "dbf288b9a1c41147be72f81cc7e7e29ac4a8edc3bf0919545f592783d169fde5"
+          },
+          {
+            "attempt_id": "ccf19e258a5142a4a5bd9304bfde4ed7",
+            "task_id": "vector_two_broad",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 47.312461109948345,
+            "result_hash": "ad81cc1507ef593aff851f9980406eb00673b8297c13d37943ac5eb39038220c"
+          },
+          {
+            "attempt_id": "309417316e3e457990409cce70082a82",
+            "task_id": "vector_unequal_mass",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 52.13377779093571,
+            "result_hash": "18896f1d1821cdacf04382cad189328cbe7b2f2c8e9eddc260e98df670177da4"
+          },
+          {
+            "attempt_id": "549d9e9f37814d409f17b7d50f2de96c",
+            "task_id": "vector_unequal_width",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 52.28172348893713,
+            "result_hash": "9a1f50513b123d226b630a7f2976d3b042749369f57415b9b8afb4094a111e53"
+          }
+        ]
+      },
+      "paid_worker_seconds": 541.1655177177163,
+      "remaining_reserved_seconds": 0.0
+    },
+    {
+      "track": "constraint_geometry",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/361",
+      "publication_commit": "c776f9058241ba7a903e1df2ffa3ccf63ae5e688",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/c776f9058241ba7a903e1df2ffa3ccf63ae5e688/reports/forge/bcap-physics/constraint_geometry/README.md",
+      "publication_file_sha256": {
+        "README.md": "353326be410fe55cf163cde344cc500d58410d4bb731ea3cefd111285e88faa2",
+        "results.json": "a20ce06e971f2d0c496488b5c966ac14db79d221081824bd721fc80683ce909c",
+        "provenance.json": "320f9b53f68f968cab8b07d2bb7280a4f00e3daf0b90d96abcd6dbeadf42b771"
+      },
+      "executed_source_digest": "43391f7415970f12e3818d76b95a4562bdc81570f5bd6c4e36fc54ad6d63ce8f",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "candidate": {
+        "candidate_id": "constraint_geometry-nonascent-v1",
+        "candidate_revision": "a1c79573bfc2c13b0517409f609db17062f64384ce427e10ee9a337afbb40f56",
+        "request_id": "7d22bb9602d65151123f8494",
+        "study_id": "constraint_geometry-candidate-study-v1",
+        "source_origin_commit": "f909ec56e7258e0cd4b264bbc8c3302d56d54358",
+        "task_grades": {
+          "two_pole": "PASS",
+          "gaussian1d_smoke": "FAIL",
+          "trajectory": "FAIL",
+          "mid_scale_identity": "PASS",
+          "residual_student": "FAIL",
+          "gaussian1d_stability": "BLOCKED"
+        },
+        "outcomes": {
+          "PASS": 2,
+          "FAIL": 3,
+          "BLOCKED": 1
+        },
+        "workers": [
+          {
+            "attempt_id": "b8f61980e99c47838f03387cf8b20af0",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 45.444512570044026,
+            "result_hash": "67ca3ee6c0b30a7c3e1fc7dfbf5cfc09a478168ece3a8ff71be9fb4cab880a9e"
+          },
+          {
+            "attempt_id": "9a216d19d03d48ea956be7be22216702",
+            "task_id": "mid_scale_identity",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 34.80105659097899,
+            "result_hash": "242cdebbeddf59a45c14d0d5eb7e0f3d214952ddf372bf67fd33c43b10237e6b"
+          },
+          {
+            "attempt_id": "fa2d2a10184c432687c22291ff4de4cb",
+            "task_id": "residual_student",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 27.977864203043282,
+            "result_hash": "fc022fad1382b92a221ef56c61946669fa2483c5a56505c5d5647a6e3c62c63f"
+          },
+          {
+            "attempt_id": "fe6af71b0bb14cae8f1770d260d0622c",
+            "task_id": "trajectory",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 25.251570836058818,
+            "result_hash": "8b9c0428e4750339a21be757c5e68dfe822090d4752287a44576899fcb5594ea"
+          },
+          {
+            "attempt_id": "51c559b016d248388056dcab751a8012",
+            "task_id": "two_pole",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 7.31292499799747,
+            "result_hash": "89dd9f571ccdfe3abecea747748ed34fac3d852b4142b054353cba294bd9a519"
+          }
+        ]
+      },
+      "control": {
+        "candidate_id": "constraint_geometry-control-v1",
+        "candidate_revision": "53ab9888fa7d32645260b911a85c46003b4b272b4551d2b3682ec8e09eb4c825",
+        "request_id": "f30bde03964b05286609b536",
+        "study_id": "constraint_geometry-control-study-v1",
+        "source_origin_commit": "f909ec56e7258e0cd4b264bbc8c3302d56d54358",
+        "task_grades": {
+          "gaussian1d_smoke": "PASS",
+          "mid_scale_identity": "PASS",
+          "two_pole": "PASS",
+          "gaussian1d_stability": "FAIL",
+          "residual_student": "FAIL",
+          "trajectory": "FAIL"
+        },
+        "outcomes": {
+          "PASS": 3,
+          "FAIL": 3
+        },
+        "workers": [
+          {
+            "attempt_id": "5f0b34c373994bf595e540b0f0b73935",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 40.93540270801168,
+            "result_hash": "d29003240501791253ccb50be05c99b78b74da104b0e24c7b4d1162539a0c3f7"
+          },
+          {
+            "attempt_id": "2039e936fc59444aa7edd63f09551a2c",
+            "task_id": "gaussian1d_stability",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 174.5467774469871,
+            "result_hash": "1c4115e6fb9811ff2dc6de648996f9488ebfa8aa1e8929acfbd3422ac6f2df2f"
+          },
+          {
+            "attempt_id": "c8565d3bdaa84abb8e473744ee3e0a2a",
+            "task_id": "mid_scale_identity",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 28.64474604895804,
+            "result_hash": "6c838e628fe0707fe09324163fbbf3791a4531fc74901a85bf902a8f80a2ff53"
+          },
+          {
+            "attempt_id": "7ea5dabf0bc7441f993a4dfd791cd17e",
+            "task_id": "residual_student",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 20.11255861504469,
+            "result_hash": "b2c2eb70e2db4a83e1f863eabf012d16a91989dbaf80b4f4b6e4ed7e02150ead"
+          },
+          {
+            "attempt_id": "7098708936a543d78ea7aa241200dc78",
+            "task_id": "trajectory",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 19.130473568919115,
+            "result_hash": "50ab029672caed2f1355e83fa3e4e5d542dfcd93d9cc55ccf416873470eda5b3"
+          },
+          {
+            "attempt_id": "0849b0fe1246477e89e5f45219310c72",
+            "task_id": "two_pole",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 7.412912852014415,
+            "result_hash": "9fd3e2fbf7f181f503b75897a6eae8e84de920208cb4212709a5847fd9e93906"
+          }
+        ]
+      },
+      "paid_worker_seconds": 431.57080043805763,
+      "remaining_reserved_seconds": 0.0
+    },
+    {
+      "track": "information_geometry",
+      "pr_url": "https://github.com/255BITS/ParticleGAN/pull/357",
+      "publication_commit": "7a8abb93a861b6004d2f1ee4c1775b2d86513bac",
+      "report_url": "https://github.com/255BITS/ParticleGAN/blob/7a8abb93a861b6004d2f1ee4c1775b2d86513bac/reports/forge/bcap-physics/information_geometry/README.md",
+      "publication_file_sha256": {
+        "README.md": "2e0d58b3bf6665a06a0b29325e4c1e8416508eb02b05b4fcfcf5ac524e0ae70d",
+        "results.json": "90d697d6d3a531f660d380904f5db99718be043386f9ad48bfd4e8524f422fc9",
+        "provenance.json": "9901d1954b02e4d88ea807c2200b4ec86cf9d1d3305575624c06f2a09826ed01"
+      },
+      "executed_source_digest": "a31696abf0d63393a34795022aa730be575944d390bf79a0992017306a9a10f0",
+      "matched_frozen_bindings": {
+        "protocol": true,
+        "rng": true,
+        "runtime": true,
+        "compute_profiles": true,
+        "task_scientific_declarations": true,
+        "executed_source_files": true,
+        "executed_source_digest": true
+      },
+      "task_parity_excludes_generated_fields": [
+        "field_ownership",
+        "preflight_blockers"
+      ],
+      "candidate": {
+        "candidate_id": "information_geometry_spectral_half_v1",
+        "candidate_revision": "a07a5ff342eb7d147ae9ffc0ffc4eef7abd785585a5a982814ca8087e17c7aea",
+        "request_id": "dcb2b264edfb738b7d40ea96",
+        "study_id": "information_geometry_candidate_v1",
+        "source_origin_commit": "2c182d552100a562cd9f7c9d8f3d226d855b26c8",
+        "task_grades": {
+          "vector_unequal_mass": "FAIL",
+          "img_blobs4": "FAIL",
+          "gaussian1d_smoke": "PASS",
+          "gaussian1d_stability": "FAIL",
+          "two_pole": "PASS",
+          "img_intensity2": "FAIL"
+        },
+        "outcomes": {
+          "FAIL": 4,
+          "PASS": 2
+        },
+        "workers": [
+          {
+            "attempt_id": "10a2fbd74ed24f379693c7fe4ec610bd",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 25.909690083004534,
+            "result_hash": "307a3b205bfa4e79b2b24aa0359764ad032277643c5780f7b93f36811810e41b"
+          },
+          {
+            "attempt_id": "cce86df88b944f2a8537249e74987185",
+            "task_id": "gaussian1d_stability",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 85.84682850597892,
+            "result_hash": "89697db7d48cb0d9fcce38b28db76aec9604456584aef7e3e1c81d31ee6a4b59"
+          },
+          {
+            "attempt_id": "c6e74fd8ceea4f52a2b17ac6fe6b335f",
+            "task_id": "img_blobs4",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 51.909378790995106,
+            "result_hash": "49972b46ce36a530ff5784cded284fd4c1794882688b794e31711d2a33e141e1"
+          },
+          {
+            "attempt_id": "3b09e4e8cabc4fbe81bac86d80ddfb3c",
+            "task_id": "img_intensity2",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 51.713602531002834,
+            "result_hash": "105418fe8bd0ad792bd415d497b411deed538c853d8816273d0eab77411f3557"
+          },
+          {
+            "attempt_id": "3a44de4f33c84583acaec03bfa1d979b",
+            "task_id": "two_pole",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 8.652875134022906,
+            "result_hash": "07db2ab74934ab68e7f62f2000bf3640669a9e12e74f154b7a84f81f8c7408ee"
+          },
+          {
+            "attempt_id": "3abe929ac4f74414b9849493b696958e",
+            "task_id": "vector_unequal_mass",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 33.98196611891035,
+            "result_hash": "6e1f7dbaaa98b1b8f386b324f7c871aceb2f82f79b4833a89a720c4a8dc91f72"
+          }
+        ]
+      },
+      "control": {
+        "candidate_id": "bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36",
+        "candidate_revision": "dc0c4e80c5a5b0bbc44f4fcc9dc9c90ee3cbd59c7b7abc78332dcb462d866179",
+        "request_id": "ddd40e01a4a0edcd711af989",
+        "study_id": "information_geometry_control_v1",
+        "source_origin_commit": "2c182d552100a562cd9f7c9d8f3d226d855b26c8",
+        "task_grades": {
+          "img_blobs4": "FAIL",
+          "vector_unequal_mass": "FAIL",
+          "gaussian1d_stability": "FAIL",
+          "gaussian1d_smoke": "PASS",
+          "two_pole": "PASS",
+          "img_intensity2": "FAIL"
+        },
+        "outcomes": {
+          "FAIL": 4,
+          "PASS": 2
+        },
+        "workers": [
+          {
+            "attempt_id": "f73d9410b8b94adaa08e5d9b3b63c649",
+            "task_id": "gaussian1d_smoke",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 23.099909547017887,
+            "result_hash": "904433900ef269aa06fbe2ed5afee89a810cf83571f56cf5f5eab37b0a9645b5"
+          },
+          {
+            "attempt_id": "48bb2368c65a4b5d9bda4e3f99376df7",
+            "task_id": "gaussian1d_stability",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 83.95868169493042,
+            "result_hash": "b149b0197caefa7b73ca9bfce5ac537f29a9f62cf5b67e4db81b818b747c614b"
+          },
+          {
+            "attempt_id": "e1396a0dc1744e93b5ce33ad19dde6c4",
+            "task_id": "img_blobs4",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 52.970987980952486,
+            "result_hash": "5b7243c5ec235d2575fc60aa889cdbf8e928a79b42082dc27c16c8a2d935ca05"
+          },
+          {
+            "attempt_id": "92ed7a8e91cb4039a2939e2475e891e3",
+            "task_id": "img_intensity2",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 52.331346261897124,
+            "result_hash": "1851195da0aeee07e3c00e402b33b988d850a9df8b539ab445179b26a8d7f44f"
+          },
+          {
+            "attempt_id": "a391fde358dd48f9b2cebbc937ed8469",
+            "task_id": "two_pole",
+            "gate_status": "PASS",
+            "paid_worker_seconds": 7.477602359955199,
+            "result_hash": "f58492a61d5635069d3c57db69cae030a7cde96cf78930e508c8f790e59b0163"
+          },
+          {
+            "attempt_id": "573ef8bb3c524f60b9def8c3cf792e5c",
+            "task_id": "vector_unequal_mass",
+            "gate_status": "FAIL",
+            "paid_worker_seconds": 24.26556523400359,
+            "result_hash": "1bf91bf63e1acdc995241ade6ba3afc68f2eeef309b682a8669c9a5f500f460a"
+          }
+        ]
+      },
+      "paid_worker_seconds": 502.11843424267136,
+      "remaining_reserved_seconds": 0.0
+    }
+  ],
+  "totals": {
+    "declared_task_cells": 58,
+    "completed_runnable_scientific_jobs": 54,
+    "numerical_PASS": 24,
+    "numerical_FAIL": 30,
+    "unexecuted_BLOCKED_cells": 4,
+    "incomplete_workers": 0,
+    "invalid_workers": 0,
+    "scientific_retries": 0,
+    "actual_training_gifs": 54,
+    "planned_full_reservations_seconds": 64200,
+    "executed_full_allowances_seconds": 62400,
+    "track_ceiling_seconds": 72000,
+    "paid_worker_seconds": 3631.5765090433415,
+    "remaining_reserved_seconds": 0,
+    "separate_native_cpu_fp64_diagnostic_seconds": 2.036952082067728
+  },
+  "interpretation": {
+    "additional_complete_pass_on_previously_failing_task": false,
+    "full_ordinary_suite_qualification": false,
+    "default_adoption": false,
+    "constraint_published_correction": "schema2 is unmeasured; trained schema1 has inactive-step rounding confound",
+    "source_overlap": "Shared seed/task controls across changed sources are not independent replications",
+    "ranking": "Different diagnostic subsets; do not rank by aggregate PASS counts"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "forge_search_space_v1",
+  "id": "bcap-options-admission-audit-v1",
+  "hypothesis": "Verify existing BCAP optimizer and loss category admission without training or selecting a configuration.",
+  "protocol": "screening",
+  "view": "discriminator_stability",
+  "execution_backend": "cpu",
+  "tuning_through_tier": 1,
+  "campaign": {
+    "id": "bcap-options-admission-audit-v1",
+    "budget_seconds": 37800,
+    "candidate_budget_seconds": 2520
+  },
+  "samples": 15,
+  "parameters": {"lr": {"kind": "literal", "value": 0.00425}},
+  "candidates": [
+    {"base_candidate": "bcap-pure-adam-v2", "trainer_family": "bcap-pure"},
+    {"base_candidate": "bcap-pure-non-saturating-joint-v2", "trainer_family": "bcap-pure"},
+    {"base_candidate": "bcap-pure-hinge-joint-v2", "trainer_family": "bcap-pure"},
+    {"base_candidate": "bcap-pure-wasserstein-joint-v2", "trainer_family": "bcap-pure"},
+    {"base_candidate": "bcap-pure-least-squares-joint-v2", "trainer_family": "bcap-pure"},
+    {"base_candidate": "bcap-sgda-v1", "trainer_family": "bcap-sgda"},
+    {"base_candidate": "bcap-nsgda-global-v1", "trainer_family": "bcap-nsgda-global"},
+    {"base_candidate": "bcap-nsgda-layer-v1", "trainer_family": "bcap-nsgda-layer"},
+    {"base_candidate": "bcap-ada-nsgda-v1", "trainer_family": "bcap-ada-nsgda"},
+    {"base_candidate": "bcap-dualnorm-zero-v1", "trainer_family": "bcap-dualnorm"},
+    {"base_candidate": "bcap-dualnorm-momentum-v1", "trainer_family": "bcap-dualnorm"},
+    {"base_candidate": "bcap-dualnorm-d-only-v1", "trainer_family": "bcap-dualnorm-d-only"},
+    {"base_candidate": "bcap-particle-rownorm-only-v1", "trainer_family": "bcap-particle-rownorm-only"},
+    {
+      "base_candidate": "bcap-dualnorm-smoothed-v1", "trainer_family": "bcap-dualnorm",
+      "parameters": {"lr": {"kind": "literal", "value": 0.012}}
+    },
+    {
+      "base_candidate": "bcap-dualnorm-convolution-v1", "trainer_family": "bcap-dualnorm",
+      "parameters": {"lr": {"kind": "literal", "value": 0.012}}
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "odd_and_fake_boundary_isolation_original_geometry_support_and_rng",
+      "status": "PASS",
+      "fitted_rows": 32,
+      "ordinal": 31,
+      "boundary": 1.6750193730075464,
+      "actual_multiplicity": 12
+    },
+    {
+      "name": "exact_conditional_family_reference_with_retained_empty_bin",
+      "status": "PASS",
+      "allocations": 29,
+      "pooled_counts": [
+        6,
+        6,
+        4,
+        0
+      ],
+      "family_rejection_probability": 0.013053613053613054,
+      "family_rejection_probability_exact": "28/2145",
+      "max_pvalue_error": 2.3314683517128287e-15,
+      "actual_multiplicity": 4
+    },
+    {
+      "name": "minimum_input_ties_empty_cells_and_degenerate_discoveries",
+      "status": "PASS",
+      "cells": 3,
+      "categories": 6,
+      "reference_category_counts": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_counts.py": "7c6f2eec9923f3b4c65348109d6134503b625cc13f359bd6726fd0409d5251d8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/support-count/pkg-support-count/particlegan/feature_cells.py": "a2be31d6dd4457dc9e35b9d19dacefe579faaf1601d50329699079e1f9de1dd9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/pkg-count-recovery/particlegan/feature_cells.py": "2f55fb6da21d2dc61645d4c9a2f0299f3f652ee7027de235661c8b2cce2f708a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/snapshot-1000.pt": "6c6dac149ce7b77b835366c1a5944848d3754dd1b8adde583aa6ac29e276b62a"
+  },
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "scope": "Finite partition/count contracts; no action response or learned quality rerun"
+}

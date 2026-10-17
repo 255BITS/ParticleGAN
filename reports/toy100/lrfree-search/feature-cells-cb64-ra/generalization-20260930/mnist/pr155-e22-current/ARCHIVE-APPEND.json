@@ -1,0 +1,311 @@
+{
+  "archived_e22_none_not_relabelled": true,
+  "atlas_original_v4_qualification_unchanged": true,
+  "copy_policy": "Add absent relative paths; accept existing byte-identical targets; reject all conflicts.",
+  "created_utc": "2026-10-01T03:20:11.918297+00:00",
+  "excludes": [
+    "weights",
+    "checkpoints",
+    "datasets",
+    "sample clouds",
+    "images",
+    "lockfiles"
+  ],
+  "file_count": 58,
+  "files": [
+    {
+      "bytes": 1033,
+      "path": "mnist/pr155-e22-current/COMPARISON-PREPARATION.json",
+      "sha256": "94a8dcebe73a81afa39bccb457cd77fcc2cf0e4ec6503ce85014ca38734cd63a"
+    },
+    {
+      "bytes": 1387,
+      "path": "mnist/pr155-e22-current/COMPLETION-mnist.json",
+      "sha256": "7a2b78f24e21755c9486a75bcf6852501f79bc309a36be38c3e23e2f1cabe269"
+    },
+    {
+      "bytes": 1381,
+      "path": "mnist/pr155-e22-current/COMPLETION-toy.json",
+      "sha256": "5cc77cff65c58eeaf18d66e130fedfa9aff8239aa0e364789b70befe4ed75622"
+    },
+    {
+      "bytes": 5416,
+      "path": "mnist/pr155-e22-current/CPU-CLOSED.json",
+      "sha256": "fa8f2ad8ab77093f34413ab1ee13660b5c50c5cf979bc7f5ba97acc256f4b702"
+    },
+    {
+      "bytes": 24944,
+      "path": "mnist/pr155-e22-current/INPUTS.json",
+      "sha256": "b316bbf28bc659c7bbc13a32fa22e7fd78b25923bcca48721727055ded046fd5"
+    },
+    {
+      "bytes": 824,
+      "path": "mnist/pr155-e22-current/LAUNCH-all.json",
+      "sha256": "545a71ab2cf8914c7451f00df191dd4436e98b4a52200ea9c612232fdfa65eea"
+    },
+    {
+      "bytes": 2660,
+      "path": "mnist/pr155-e22-current/PROTOCOL.md",
+      "sha256": "33b0b035b222c05f8c97d803b28eab370dc2dd11384f0c930b5cc5b0dc7c2ff4"
+    },
+    {
+      "bytes": 6181,
+      "path": "mnist/pr155-e22-current/REPORT.md",
+      "sha256": "194680605f337d6a0796fb3287cd9f354d7149fdc7c73087db7a1a85eb99f779"
+    },
+    {
+      "bytes": 952,
+      "path": "mnist/pr155-e22-current/SOURCE-FREEZE.json",
+      "sha256": "8bb844c6a89c7aa258a04837fa1150fa55b43811668fe6321f67da87592185ab"
+    },
+    {
+      "bytes": 1113,
+      "path": "mnist/pr155-e22-current/adapter.py",
+      "sha256": "f96f4c86c04df329a84c6d5d07b9d2b4073cb027b245669c9f817b59ec8f4cd2"
+    },
+    {
+      "bytes": 2528,
+      "path": "mnist/pr155-e22-current/archive_comparison.py",
+      "sha256": "8af40417f2cc12f234f24d99332556d9942bd8cec77d497c00434ddea77b9eb4"
+    },
+    {
+      "bytes": 9635,
+      "path": "mnist/pr155-e22-current/close_comparison.py",
+      "sha256": "f73a38e04080ba9f0ad6488b437e2570585b3f1b9e6d283a1d064e6605cc079a"
+    },
+    {
+      "bytes": 7699,
+      "path": "mnist/pr155-e22-current/common.py",
+      "sha256": "4e437277bec7ddf78212d0c726ec67c881c743490b380368ba854e65f3d36ae7"
+    },
+    {
+      "bytes": 104410,
+      "path": "mnist/pr155-e22-current/comparison-closure/COMPARISON.json",
+      "sha256": "8827b93d57301976eae551e0ad34916fc0539842deacaae578046938353485c8"
+    },
+    {
+      "bytes": 373,
+      "path": "mnist/pr155-e22-current/comparison-closure/FROZEN.json",
+      "sha256": "2c9f1e46e555f7a571304e946e21bf087126f491fa44e7c098c68243f8c1fa92"
+    },
+    {
+      "bytes": 22294,
+      "path": "mnist/pr155-e22-current/comparison-closure/INPUTS.json",
+      "sha256": "7a537a8872182f1d61e545550856635f03ef1d2d2f6afc963afba472f7aa8aa1"
+    },
+    {
+      "bytes": 5925,
+      "path": "mnist/pr155-e22-current/contracts.py",
+      "sha256": "b45f44e5ab38e8bccd9b3240628a5e5b1038a673aef9baae55bc94e5ba13f87a"
+    },
+    {
+      "bytes": 4711,
+      "path": "mnist/pr155-e22-current/launch_training.py",
+      "sha256": "8aa28ddecd28d7f2634e6606ca93639a596ec0dbc512a5e76bca4631b380f70c"
+    },
+    {
+      "bytes": 120811,
+      "path": "mnist/pr155-e22-current/logs/PR155-E22-cabe2084-mnist.log",
+      "sha256": "e646401a76d62cb0e4198ee3863fae41b0802c8e1e537f09a509b6689caa1eba"
+    },
+    {
+      "bytes": 125232,
+      "path": "mnist/pr155-e22-current/logs/PR155-E22-cabe2084-toy.log",
+      "sha256": "866d67c1c64a1b4611f8f558100e933127e908e692b51f7a1cc2fa83d6cac07f"
+    },
+    {
+      "bytes": 165,
+      "path": "mnist/pr155-e22-current/logs/preflight-cpu.log",
+      "sha256": "9df9714eadbe0a728453ce6ee3dabeef1a5ea49e9a0a68c77908c3884d35cc73"
+    },
+    {
+      "bytes": 3177,
+      "path": "mnist/pr155-e22-current/preflight_cpu.py",
+      "sha256": "db8078beef62c779c365d735f6dd51f541530a2a0e2608d95537f88c46b0708a"
+    },
+    {
+      "bytes": 1089,
+      "path": "mnist/pr155-e22-current/preparation-receipt.json",
+      "sha256": "0daf8e28cf15422cfe9cd88f1eae3eb36b515e75d22ca4378bf77a7030af2771"
+    },
+    {
+      "bytes": 8340,
+      "path": "mnist/pr155-e22-current/prepare.py",
+      "sha256": "aab110f5ca7a81f235a25abf7af7cf9e0a2f228cde2c1108b3ce6a801d557f6b"
+    },
+    {
+      "bytes": 13804,
+      "path": "mnist/pr155-e22-current/run_training.py",
+      "sha256": "ac3292c5795dd14cb143ca6988146e213ac4ec934234b4bb17cc744d3802fe76"
+    },
+    {
+      "bytes": 1982,
+      "path": "mnist/pr155-e22-current/source-transform-receipt.json",
+      "sha256": "acf1230994f85e2fce647f2be905a1ef8f9e17dce8769949aa52b246b8ecb1a8"
+    },
+    {
+      "bytes": 28798,
+      "path": "mnist/pr155-e22-current/training/mnist/PR155-E22-cabe2084/config.json",
+      "sha256": "ad44a94ab7fafea48ff751aebeb62cc31fe3fba2a5f78ed025bce8d47a89c7f7"
+    },
+    {
+      "bytes": 1660,
+      "path": "mnist/pr155-e22-current/training/mnist/PR155-E22-cabe2084/evaluator.json",
+      "sha256": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992"
+    },
+    {
+      "bytes": 90533,
+      "path": "mnist/pr155-e22-current/training/mnist/PR155-E22-cabe2084/metrics.jsonl",
+      "sha256": "b555fcf0233ea0188f54ba82bba221b643635cfd479de842e7dd2d51db475b68"
+    },
+    {
+      "bytes": 50953,
+      "path": "mnist/pr155-e22-current/training/mnist/PR155-E22-cabe2084/result.json",
+      "sha256": "92fb80537dba8289044598005c5a69786523c15fb5476fbd7ffa1008658bde52"
+    },
+    {
+      "bytes": 28792,
+      "path": "mnist/pr155-e22-current/training/toy/PR155-E22-cabe2084/config.json",
+      "sha256": "8cf8cb66bee738a56157fc2049cc82dddbf5efcb4c6ff73deaaa2184dcc3f662"
+    },
+    {
+      "bytes": 96024,
+      "path": "mnist/pr155-e22-current/training/toy/PR155-E22-cabe2084/metrics.jsonl",
+      "sha256": "0a6b6912a610ad6ba1fa6ff0e97cc00330c18978dbf75effeda1a627e5b7373f"
+    },
+    {
+      "bytes": 51429,
+      "path": "mnist/pr155-e22-current/training/toy/PR155-E22-cabe2084/result.json",
+      "sha256": "f37aead26e16d5b210a5206987dd64488e11b8bf63106b030a8480f2ff3757eb"
+    },
+    {
+      "bytes": 5957,
+      "path": "visualization-pr223-convergence/BASELINE-SOURCE-FREEZE.json",
+      "sha256": "2c34fe4f5f8950c16f1f551a9ede4e3082e64af1d19e69655b254b25677225e4"
+    },
+    {
+      "bytes": 2330,
+      "path": "visualization-pr223-convergence/E22-RECIPE-IDENTITY.json",
+      "sha256": "e3f50f74a696b8fb781b5e95f7fd5813e8a8ba017eed0d912490163bb3d5d018"
+    },
+    {
+      "bytes": 1524,
+      "path": "visualization-pr223-convergence/configs/pr155-e22.json",
+      "sha256": "03a8c7a8d35512a4e06735c37c375895f6ecc24011c4411a606eddd92f4c202c"
+    },
+    {
+      "bytes": 1702,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/__init__.py",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f"
+    },
+    {
+      "bytes": 1951,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916"
+    },
+    {
+      "bytes": 6194,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    {
+      "bytes": 45396,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+    },
+    {
+      "bytes": 4878,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    {
+      "bytes": 56001,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/continuous.py",
+      "sha256": "365a1e7b2f8e4eb4bc63bd04d05d645da8c2154159d596cb1564bec29f9eacc5"
+    },
+    {
+      "bytes": 5100,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61"
+    },
+    {
+      "bytes": 5833,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    {
+      "bytes": 1016,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    {
+      "bytes": 13033,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2"
+    },
+    {
+      "bytes": 12150,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/init.py",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30"
+    },
+    {
+      "bytes": 31092,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/k3p.py",
+      "sha256": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1"
+    },
+    {
+      "bytes": 16551,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+    },
+    {
+      "bytes": 17676,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/particle_prior.py",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac"
+    },
+    {
+      "bytes": 73605,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/policy.py",
+      "sha256": "0a5dd9112a8796eb88f3fadaa55604620c5950d56dc44b48d8c52e27ace77530"
+    },
+    {
+      "bytes": 43237,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/recipes.py",
+      "sha256": "640b934f0b4697cd8fb6c49bf9bfaf40d4e9d9646a99e7bac133072514695abd"
+    },
+    {
+      "bytes": 64904,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/routing.py",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc"
+    },
+    {
+      "bytes": 9397,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+    },
+    {
+      "bytes": 30164,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/training.py",
+      "sha256": "dcfba088e0e3cd2dbe312578545a29f6e110340276e07ae5299d10ba58d11959"
+    },
+    {
+      "bytes": 2297,
+      "path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    {
+      "bytes": 9805,
+      "path": "visualization-pr223-convergence/source-reference/README.md",
+      "sha256": "5425e7597b55f83edfce6d6e4cbf9ace47a12723e999255363cfd2f2e394ea75"
+    },
+    {
+      "bytes": 17837,
+      "path": "visualization-pr223-convergence/source-reference/docs/e22.md",
+      "sha256": "d08fab46e24d1cb095697ce90bfc2ee4b639e333a050044905e4d88ad70ecc49"
+    }
+  ],
+  "root": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930",
+  "status": "SEALED_ADDITIVE_CURRENT_PR155_E22_LEARNED_COMPARISON",
+  "total_bytes": 1305885,
+  "visualization_pin": "User-authorized GIF/SVG/PNG and rendering receipts are separate additive artifacts."
+}

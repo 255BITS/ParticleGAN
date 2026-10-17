@@ -1,0 +1,11 @@
+{
+  "status": "PREPARED_NOT_TRAINED",
+  "previous_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13",
+  "previous_freeze_sha256": "50b21e9fce4ca0d75f6ec8467ca0ea96d99cfd211da80c3a352c0f500a6b8f8f",
+  "reason": "Independent review found dynamic original collector and task-plan source missing from external source guards; added both to new freeze before any gate runs",
+  "package_changed": false,
+  "config_changed": false,
+  "scorers_changed": false,
+  "thresholds_changed": false,
+  "budgets_changed": false
+}

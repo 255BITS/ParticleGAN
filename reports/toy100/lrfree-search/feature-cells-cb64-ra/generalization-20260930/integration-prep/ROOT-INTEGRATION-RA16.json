@@ -1,0 +1,16 @@
+{
+  "status": "RA16_BYTE_EXACT_PORTABLE_TESTS_INTEGRATED",
+  "repository": "/ml2/hypergan/ParticleGAN-ra11-pr155",
+  "changed_modules": [
+    "feature_policy.py",
+    "feature_reference.py",
+    "mean_transport.py",
+    "output_moments.py",
+    "population_continuity.py"
+  ],
+  "source_bridge_sha256": "9a7064831524031dce661db1b1ea90e2d2871a4873df4dd9c0cd4d7e524ad031",
+  "test_file": "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_feature_portability.py",
+  "test_sha256": "72292b1aeb41be3a7b75243cb176535f2b347d324686c35140f0d7220a3a6f0a",
+  "actual_cuda_default_gate": "PENDING",
+  "full_suite": "PENDING"
+}

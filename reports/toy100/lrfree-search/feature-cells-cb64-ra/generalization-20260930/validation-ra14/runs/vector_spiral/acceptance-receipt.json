@@ -1,0 +1,191 @@
+{
+  "acceptance_status": "PASS",
+  "evidence_validity": "VALID",
+  "final": {
+    "covariance_error": 0.04437887668609619,
+    "mean_error": 0.027347680181264877,
+    "pass": true,
+    "sample_count": 4096,
+    "seconds": 54.778,
+    "step": 1600,
+    "sw1_normalized": 0.026478310166719695,
+    "target_scale": 1.240945816040039
+  },
+  "final_streak": 24,
+  "first_arrival": 67,
+  "mechanisms": {
+    "birth_death_counters": {
+      "dim_skips": 0,
+      "discoveries": 3110,
+      "evals": 800,
+      "iso_acted": 0,
+      "iso_dup_skips": 0,
+      "iso_evals": 800,
+      "iso_flagged": 673,
+      "iso_moves": 0,
+      "iso_skipped": 6,
+      "matched": 5,
+      "moves": 5,
+      "normalised": 0,
+      "realised_births": 32,
+      "realised_deaths": 1490,
+      "stale_resets": 48,
+      "stays": 1588,
+      "waited_births": 27,
+      "waited_deaths": 1485
+    },
+    "reopen_guard": {
+      "calm_network": {
+        "0.0": {
+          "role": "generator",
+          "scale": 0.25
+        },
+        "1.0": {
+          "role": "critic",
+          "scale": 0.125
+        }
+      },
+      "epoch_rebases": 1,
+      "excursion": null,
+      "ka2_anchor_started": true,
+      "schema": 1
+    },
+    "selection": {
+      "actual_backend": "knn",
+      "generator_noise_factor": 1.0,
+      "moment_rank_bound": 8,
+      "output_shape": [
+        2
+      ],
+      "population_policy": {
+        "actual_backend": "knn",
+        "calibration_rows": 128,
+        "finite_resolution_feasible": false,
+        "matching_sampler": "controller_reference",
+        "maximum_guard_flags": 12,
+        "minimum_bh_flags": 40,
+        "population": 256,
+        "q": 0.05,
+        "requested_backend": "feature_cells",
+        "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+        "schema": 1
+      },
+      "rate_mapping": [
+        [
+          {
+            "base_rate": 0.00425,
+            "factor": 1.0,
+            "rate": 0.00425,
+            "role": "generator"
+          },
+          {
+            "base_rate": 0.0085,
+            "factor": 1.0,
+            "rate": 0.0085,
+            "role": "table"
+          },
+          {
+            "base_rate": 0.00425,
+            "factor": 1.0,
+            "rate": 0.00425,
+            "role": "noise"
+          }
+        ],
+        [
+          {
+            "base_rate": 0.00425,
+            "factor": 1.0,
+            "rate": 0.00425,
+            "role": "critic"
+          }
+        ]
+      ],
+      "raw_output_width": 2,
+      "requested_backend": "auto",
+      "sampling_backend": "controller_reference",
+      "schema": 1,
+      "selection_reason": "finite_resolution_infeasible"
+    },
+    "surprise": {
+      "anchor_event": null,
+      "anchor_events": 0,
+      "armed": true,
+      "fast": {
+        "0.0": -1.6948009845993708,
+        "0.1": -1.5936549057789549,
+        "1.0": -1.6892464617118035
+      },
+      "fires": 0,
+      "last_ratio": 1.064008603391946,
+      "last_ratios": {
+        "0.0": 1.0349940921769625,
+        "0.1": 1.1241385801451447,
+        "1.0": 1.0353273696345708
+      },
+      "log": [],
+      "pending": {
+        "0.0": "tensor(0.2238)",
+        "0.1": "tensor(0.1875)",
+        "0.2": "tensor(0.)",
+        "1.0": "tensor(0.2289)"
+      },
+      "since_calm": 0,
+      "since_fire": null,
+      "slow": {
+        "0.0": -1.731632766121141,
+        "0.1": -1.7086851327619084,
+        "1.0": -1.7225849894509209
+      },
+      "streak": 0
+    }
+  },
+  "native": null,
+  "original_plan": {
+    "batch_size": 128,
+    "num_particles": 256,
+    "observation_steps": [
+      67,
+      134,
+      200,
+      267,
+      334,
+      400,
+      467,
+      534,
+      600,
+      667,
+      734,
+      800,
+      867,
+      934,
+      1000,
+      1067,
+      1134,
+      1200,
+      1267,
+      1334,
+      1400,
+      1467,
+      1534,
+      1600
+    ],
+    "seed": 0,
+    "steps": 1600,
+    "z_dim": 4
+  },
+  "passing_checks": 24,
+  "peak_allocated_gpu_mib": 84.75146484375,
+  "peak_reserved_gpu_mib": 90.0,
+  "quality_status": "PASS",
+  "reasons": [],
+  "result_sha256": "94a09d15115525d3b0e57167fc86cc7e85e76d33c13af2db66f161ac9dd871a1",
+  "source_integrity": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "files": 103,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+    "status": "VALID"
+  },
+  "task": "vector_spiral",
+  "wall_seconds": 58.12751364707947
+}

@@ -1,0 +1,35 @@
+{
+  "status": "PREPARED_FROM_CLOSED_ACTUAL_API_ADAPTER_NO_CANDIDATE_EXECUTION",
+  "prepared_utc": "2026-09-30T21:33:41.705556+00:00",
+  "parent": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto",
+  "parent_closed_sha256": "facec0ba1f6f07decf2a1bf8abab1b8d2434810b95ae50f60831851cd3ee453e",
+  "copied_parent_source_sha256": {
+    "adapter.py": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+    "audit_source.py": "f09d2e2a469136044389d928c726fc4a4a827f1af7f7990e230a1854f8deb4b5",
+    "build_adapter.py": "1eca8fd9bac7693f5a7c98c033e61379a9297370a6af731d85afe6280e0f345f",
+    "common.py": "ca88dc6087369d5d7b6f9ff13109032f965a2c661989ef7adaa39a75ac0776f9",
+    "contracts.py": "9209d33c76ce9cb00b1f50aeb16644e319d633f73e850278a3b42ef83836bd68",
+    "freeze.py": "92ba2eea7accb1875fb0c2d23bb64449ed5b3f1c3e80422ea134a4f2107c5f10",
+    "init_parity_cpu.py": "c1c234f2800c5e616f98a5d0a00dae7c926f8ddc09a2d91250224b9440710bbe",
+    "launch_first.py": "8c7f225175e31d042fb216ccdcdc9c860bf48267a172ea5cd682c0ae346d6c81",
+    "preflight_cpu.py": "06848eec2dc87b61a2355f898246cde3be95aec69d0a5c375473c2651191f148",
+    "replay.py": "8c8d84b649a80b945e67a1c835ef62d0ef3ab2b91550de933eb1f3b948cef93c",
+    "run_training.py": "9741adf986b80bba6667d2355e37731961294d79ad4416cfc389a9d320187e47",
+    "summarize.py": "ff298f99f0e4e7365326a5cd4c049cc69b3aa4a8867a03f5022b04077759247f",
+    "PROTOCOL.md": "20a055787e3a7d02ebe975e0de939dc1862f4e34712d5ab164f45f41229f0ec7"
+  },
+  "binding": {
+    "package": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled",
+    "config": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA13-settled.json"
+  },
+  "changes": [
+    "variant/package/config names",
+    "init-parity source binds actual candidate package",
+    "candidate intervention description and measured-cost estimates",
+    "source-declared settled guard checkpoint validation and diagnostics equality",
+    "candidate public-init receipt name"
+  ],
+  "training_updates": 0,
+  "candidate_imports": 0,
+  "cuda_launches": 0
+}

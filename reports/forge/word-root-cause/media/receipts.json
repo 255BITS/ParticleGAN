@@ -1,0 +1,149 @@
+{
+  "media": [
+    {
+      "arm": "k3p-coeff170-cap1",
+      "bytes": 538988,
+      "family": "k3p",
+      "frame_updates": [
+        0,
+        2501,
+        5001,
+        7501,
+        10001,
+        12501,
+        15001,
+        17501,
+        20001
+      ],
+      "frames": 9,
+      "new_sampling_draws": 0,
+      "optimizer_updates": 0,
+      "path": "reports/forge/word-root-cause/media/k3p.gif",
+      "renderer": {
+        "matplotlib": "3.11.1",
+        "pillow": "12.3.0",
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130"
+      },
+      "scope": "Nine frames selected from saved actual training observations; numerical grade uses all 24 checks.",
+      "selected_record_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24
+      ],
+      "sha256": "d19a104aa086c9a587ece982ffac70d7ba9cabd63faf5ceab28453f27ba3d7aa",
+      "source_receipt": {
+        "bytes": 40177,
+        "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+        "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+      },
+      "stored_observations": {
+        "bytes": 35388269,
+        "sha256": "9586c1e3c9e5600c3987185cfc39f280babcbd7cd908763b915cd5ce4b3948b8"
+      }
+    },
+    {
+      "arm": "ka2-slow-prior-0p1",
+      "bytes": 540865,
+      "family": "ka2",
+      "frame_updates": [
+        0,
+        2501,
+        5001,
+        7501,
+        10001,
+        12501,
+        15001,
+        17501,
+        20001
+      ],
+      "frames": 9,
+      "new_sampling_draws": 0,
+      "optimizer_updates": 0,
+      "path": "reports/forge/word-root-cause/media/ka2.gif",
+      "renderer": {
+        "matplotlib": "3.11.1",
+        "pillow": "12.3.0",
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130"
+      },
+      "scope": "Nine frames selected from saved actual training observations; numerical grade uses all 24 checks.",
+      "selected_record_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24
+      ],
+      "sha256": "f1eca0a24e69819b7a7b3c6ffb592dce25216cf042e3877e65059ddbf46ac524",
+      "source_receipt": {
+        "bytes": 40024,
+        "path": "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json",
+        "sha256": "bdf4c73e51647f79c2b7e485f442e92ad6334857e2f4a4cad5fc2e6ec022addc"
+      },
+      "stored_observations": {
+        "bytes": 35388269,
+        "sha256": "d2f41d92a889179073dd46ba36f8cd5b7cbaa5ffe294c851f817f7dfc0ea2d6e"
+      }
+    },
+    {
+      "arm": "r1r2-mid-rate-fast-roles",
+      "bytes": 540793,
+      "family": "r1r2",
+      "frame_updates": [
+        0,
+        2501,
+        5001,
+        7501,
+        10001,
+        12501,
+        15001,
+        17501,
+        20001
+      ],
+      "frames": 9,
+      "new_sampling_draws": 0,
+      "optimizer_updates": 0,
+      "path": "reports/forge/word-root-cause/media/r1r2.gif",
+      "renderer": {
+        "matplotlib": "3.11.1",
+        "pillow": "12.3.0",
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130"
+      },
+      "scope": "Nine frames selected from saved actual training observations; numerical grade uses all 24 checks.",
+      "selected_record_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        15,
+        18,
+        21,
+        24
+      ],
+      "sha256": "0a1bcf0bbd4e3b7f63c5306fd7db0209b0d031b9985fa23421e59e0a74f489bf",
+      "source_receipt": {
+        "bytes": 39856,
+        "path": "reports/forge/word-root-cause/receipts/r1r2-mid-rate-fast-roles.json",
+        "sha256": "f6bea957a6eb13ef2ec377b576773de4cf66b30b721fefb8b202747d12c5adfd"
+      },
+      "stored_observations": {
+        "bytes": 35388269,
+        "sha256": "2f67de89189bd005729cbe5c7345850cd47b4ecade19e3808a3eda2328a96427"
+      }
+    }
+  ],
+  "schema_version": 1
+}

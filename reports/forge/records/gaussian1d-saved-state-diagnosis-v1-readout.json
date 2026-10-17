@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "record_id": "gaussian1d-saved-state-diagnosis-v1-readout",
+  "record_type": "family_context",
+  "goal": "discriminator_stability",
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+  "trainer_family": "bcap-dualnorm",
+  "evidence_scope": "task_only_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "lifecycle": "concluded",
+  "hypothesis": "Does the scalar failure reflect insufficient architecture/prior capacity, or loss of an already acquired fit?",
+  "mechanism_class": "saved_state_and_fixed_representation_diagnostic",
+  "changed_factors": [
+    "No training change; read-only saved-state probes and an explicit target-informed fixed affine representation control."
+  ],
+  "conclusion": "Actual scalar host is z_dim2, width32/depth2 (G1185/D1281 parameters), correcting the 4/64 handoff typo. All 97 saved sample metrics reproduce and all three CUDA contexts restore exactly. An affine map in the unchanged MLP with unchanged initial 256-location sigma-.1 MoG passes 24/24 numerical checks; conservative exact mixture KS bound .005086. Trained fresh 32768-sample KS is .04160 at1000 and .09307 at4000; fitted-normal shape KS worsens .03613 to .16831, skew1.602. At4000 only .47% of output variance is within components; prior displacement from initialization averages1.403. Constant normalized .012/.018/.03 steps and moving inputs support a stability hypothesis without assigning causality. Zero training updates, no task/gate revision or qualification credit.",
+  "next_action": "Require continuous acquisition, quality retention and renewed response to a target shift, without elapsed-step annealing. First propose a separately declared frozen-prior-from-initialization diagnostic with G/D learning throughout. Then compare magnitude/evidence-sensitive prior response or an explicit position spring. Existing prior_reg0 cannot be decreased; VICReg only floors spread and decorrelates, while unit row normalization can preserve motion even with a spring. A2/DV12 cannot simply be enabled for current BCAP dualnorm. Register a finite supported study and preserve matched conditions and all original gates; no new training is launched by this recommendation.",
+  "source": {
+    "path": "reports/forge/gaussian1d-diagnosis/results.json",
+    "sha256": "acab54648e6dfad59f33f25edf42dca2018008c598db0dde9a71fa1bf8753812"
+  },
+  "provenance": {
+    "source_parent_commit": "502cdb8d6fb3cb47d011cd45b190f91228221319",
+    "analysis_source_sha256": "7c190d0492012790be9c05e670ecd2bc1c309071c1b8f1496f847cb177f97acb",
+    "protocol_sha256": "50ef26b3508513689b90c054856b07b2e7b758b36082a34783b9c964d8fe3935",
+    "archive_sha256": "4dc3e21b0643ae59f869c8569af52bfcb7e1ad83f53e0130d3c6b22765688c61",
+    "report": "reports/forge/gaussian1d-diagnosis/README.md",
+    "training_updates": 0
+  },
+  "task_results": []
+}

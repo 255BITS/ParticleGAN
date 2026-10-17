@@ -1,0 +1,132 @@
+{
+  "budgets": {
+    "campaign_seconds": 3600,
+    "candidate_seconds": 1800,
+    "task_seconds": {
+      "mode_hold": 1800
+    }
+  },
+  "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+  "contract": "configs/forge/campaigns/host-profile-control-mode-v1.json",
+  "contract_sha256": "bd8ff70b8dc48492bdf9bf17e987693ae72d9b30e8d9c2335a2dd0999c024762",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "enqueued": false,
+  "interpretation": "One mode_hold result per control is diagnostic evidence for the first smoke predicate only. No positive outcome is predicted; BLOCKED and errors remain unknown. Inspect results before any additional cell.",
+  "lifecycle_conclusion_recorded": false,
+  "maximum_reserved_seconds": 3600,
+  "planned_execution": {
+    "allow_sharing": false,
+    "campaign_id": "calibration-host-profile-control-mode-v1",
+    "gpus": [
+      "0"
+    ],
+    "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+    "serial": true,
+    "workers_per_gpu": 1
+  },
+  "plans": [
+    {
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "diagnostic_key": "d0863c99b6d467deb0712f7a3ca87fb16f6ed85d5d8e9e432ec5db68ed6282bf",
+      "lifecycle_open": true,
+      "plan": {
+        "candidate": "forge-no-critic-penalty",
+        "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+        "guide": "EXPERIMENTATION.md",
+        "policy_fingerprint": "28563220c0ce76066187b1835aba9d93ca788a6c945bd091007c83d006ba295c",
+        "preflight_blockers": [],
+        "tasks": [
+          {
+            "blockers": [],
+            "budget_seconds": 1800,
+            "execution_group": "mode_hold",
+            "importance": "diagnostic",
+            "order": 0,
+            "permitted_by_tier_cap": true,
+            "qualification_tier": 1,
+            "reusable": false,
+            "shared_pending": false,
+            "task": "mode_hold"
+          }
+        ],
+        "through_tier": 1,
+        "view": "calibration-host-profile-control-mode-v1",
+        "worst_case_seconds": 1800
+      },
+      "protocol_seed": 0,
+      "qualification_key": "e42c442b32bc8bdf8080a7040790cbd0b6535b3b35abd4239903b574d2452de0",
+      "selected_task": "mode_hold",
+      "snapshot_path": "/home/martyn/dev/ParticleGAN/runs/forge/snapshots/5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+      "snapshot_verified": true,
+      "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7"
+    },
+    {
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "diagnostic_key": "be326d6107f72b20b3fc72a86188452ec31a7d795966ca22c0d6e2fe65e557df",
+      "lifecycle_open": true,
+      "plan": {
+        "candidate": "forge-onboarding-anchor-ablation",
+        "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+        "guide": "EXPERIMENTATION.md",
+        "policy_fingerprint": "28563220c0ce76066187b1835aba9d93ca788a6c945bd091007c83d006ba295c",
+        "preflight_blockers": [],
+        "tasks": [
+          {
+            "blockers": [],
+            "budget_seconds": 1800,
+            "execution_group": "mode_hold",
+            "importance": "diagnostic",
+            "order": 0,
+            "permitted_by_tier_cap": true,
+            "qualification_tier": 1,
+            "reusable": false,
+            "shared_pending": false,
+            "task": "mode_hold"
+          }
+        ],
+        "through_tier": 1,
+        "view": "calibration-host-profile-control-mode-v1",
+        "worst_case_seconds": 1800
+      },
+      "protocol_seed": 0,
+      "qualification_key": "4e85db09f8160363d11c190a1168c85c37a8636f5a6fed159bc02749e8336eb6",
+      "selected_task": "mode_hold",
+      "snapshot_path": "/home/martyn/dev/ParticleGAN/runs/forge/snapshots/5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+      "snapshot_verified": true,
+      "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7"
+    }
+  ],
+  "profile": "configs/forge/calibration/host-profile-transfer-v1.json",
+  "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+  "qualification_reuse": false,
+  "registration_file_sha256": "f0124c192a2a32653a384072c97d55ca9d4b501a28a96c7392c74d17867e3580",
+  "registration_id": "host-profile-control-mode-v1",
+  "registration_path": "reports/forge/calibration-lanes/host-profile-control-mode-v1/registration.json",
+  "registration_sha256": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51",
+  "schema_version": 1,
+  "selected_cells": 2,
+  "source_origin_commit": "a00ed7b6f93d5423ba4597a9868dfdd24e5978f1",
+  "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "status": "prepared_not_enqueued",
+  "training_launched": false,
+  "unchanged_file_sha256": {
+    "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+    "configs/forge/calibration/host-profile-transfer-v1.json": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+    "configs/forge/ideas/forge-no-critic-penalty.json": "0960f66e997b3f576ba87355f1153d46a84b9e0c2dcf57fb8947a05bf777b618",
+    "configs/forge/ideas/forge-onboarding-anchor-ablation.json": "37602c6321190082490b398ea77c964cccfc19b71c5f869697fa991c33033bc0",
+    "configs/forge/ideas/k3p.json": "f04e7442c7f878882be1aaee197be64aff225f3eba2a937b4d114821d656a634",
+    "configs/forge/tasks/mode_hold.json": "070ed9ed35451e294f7962dc0cbfd5926e49498eead1dc9f224a2d065c45d1b3"
+  },
+  "validated": [
+    "Profile, criteria and existing idea bytes unchanged",
+    "Exact candidate revisions and full 3-smoke/16-reference cohort match registered profile",
+    "Planner source remains 5c9c929, including declared report-host inputs; existing immutable snapshot verified without creating a snapshot",
+    "Seed 0, task host, prior, live scoring and all task gates unchanged",
+    "Both public/task capability preflights clear and lifecycle revisions open",
+    "Immutable registration, repeated-registration idempotency, exact request and submission validation pass",
+    "Only two mode_hold assignments authorized; one 1800s reservation per candidate and 3600s total",
+    "No enqueue, training, candidate conclusion, profile/source edit or shared compilation"
+  ]
+}

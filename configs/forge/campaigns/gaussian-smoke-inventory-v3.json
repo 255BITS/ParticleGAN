@@ -1,0 +1,8 @@
+{
+  "accept_shared_cost_transfer": false,
+  "budget_seconds": 2221440,
+  "candidate_budget_seconds": 42720,
+  "description": "Complete fixed-roster CUDA rerun after correcting the existing scalar execution-budget omission. Preserve v1 zero-spend admission and v2 partial/error evidence; no retuning or outcome-driven scientific retries.",
+  "id": "gaussian-smoke-inventory-v3",
+  "schema_version": 1
+}

@@ -1,0 +1,176 @@
+{
+  "status": "PASS",
+  "scope": "SOURCE_ONLY_CHECKER_PREPARATION",
+  "utc": "2026-09-30T13:05:09.661135+00:00",
+  "variant": "CB64-RA10",
+  "ready_sha256": "9f29f98761b136055ef5bfce3697de0cd45cb8d12c2d65fee01e5f5281edf6fd",
+  "source_freeze_sha256": "4cd1be039f2d6fb9bd12fe3d93bae60ca331bb68d77d365c9eadb4019bd8b856",
+  "package_sha256": "c8f8b343bded25ce8153bdd74ab9f722b369c0e087aee8a44d3c6e816baef2e4",
+  "config_sha256": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+  "checked_source_inputs": 189,
+  "helpers": 4,
+  "pure_ASTs": [
+    {
+      "name": "PROBLEM_NAMES",
+      "ast_sha256": "53d619768fdcb7edc6ad5afbbe5d21682d0c8d80ab3d122cfa23c2dafbe083af"
+    },
+    {
+      "name": "N_MODES",
+      "ast_sha256": "e3689728c0cd02cbf7daff2983480e284c9a6924dce42430f31021ea825c4fa2"
+    },
+    {
+      "name": "EVAL_N",
+      "ast_sha256": "852f67dbfa6e31114e156e63e0fabf30ceadbc1f30accf1b4694b855b0be5517"
+    },
+    {
+      "name": "MIN_HQ_MODE_MASS",
+      "ast_sha256": "3106e44819f8fa3c184b408a80991f286fd4d6cb3673ff0d48976aca1d191bbc"
+    },
+    {
+      "name": "MIN_PRECISION",
+      "ast_sha256": "f7c2e416bccee0ca7183a2ae6e3060b148191e46703c917504b64e80434f9a38"
+    },
+    {
+      "name": "MAX_MASS_TV",
+      "ast_sha256": "5162ab5db6b049a6b6d3d06ecc83495c89c89b32645ed1ec2ddfd219b6865251"
+    },
+    {
+      "name": "MAX_MODE_MASS",
+      "ast_sha256": "b779ed909e399617cd06cb4645814a2fb2c601f72130ec15f4c9330955532ef4"
+    },
+    {
+      "name": "MIN_COV_EIG_RATIO",
+      "ast_sha256": "e6b0dc1c1cb0c2a49b7d2c840d12d0f23a6dc21f7175ff6b83ad42d33a09c455"
+    },
+    {
+      "name": "MAX_COV_EIG_RATIO",
+      "ast_sha256": "8a4b2af4e6aa61fadd1cdbeb71e0d1e342b7677e32036e93480ac147321147be"
+    },
+    {
+      "name": "MIN_RADIAL_MEDIAN_RATIO",
+      "ast_sha256": "c9374d0f8353fa8dc97cdca2a7bb35c232893711a596e1272be2ab13e33c0eef"
+    },
+    {
+      "name": "MAX_RADIAL_MEDIAN_RATIO",
+      "ast_sha256": "5736b9b02ffc909c31626e3026b6c86f72fa8c0fe0aa80bb624ed535e65b0d37"
+    },
+    {
+      "name": "REQUIRED_KEYS",
+      "ast_sha256": "f3fcb0e6d5dae66e977192630dd6863ebe9a4889e08858a953c5036055ad5ca4"
+    },
+    {
+      "name": "passes",
+      "ast_sha256": "3315cc46edfd2f021f80eaa677d698f9d94b707a10e2bf50d44657ba9eda8dfa"
+    },
+    {
+      "name": "PROTOCOL",
+      "ast_sha256": "59f2b28fe8a865896cfb067e2a8c7bb36d9f1b0842803213c27fa450500b5490"
+    },
+    {
+      "name": "LIMITS",
+      "ast_sha256": "063cd9776dbf34d003fa3fb41614f0ede0121f9bc8806635fc3291806e0a7dd0"
+    },
+    {
+      "name": "passes_accuracy",
+      "ast_sha256": "a201647104fa1c96a1d7843728f31c862bb6c1e4c63aed61e645e272cbe46f77"
+    },
+    {
+      "name": "EARLY_EVAL_STEPS",
+      "ast_sha256": "02630951c9cce3730e74e6521b00d6ade3a4ff9681db9e6d9f06e54c0e0fe3b4"
+    },
+    {
+      "name": "evaluation_steps",
+      "ast_sha256": "917c4b33b627ea16f81f555d12d3dc297a8966ddc9d37d502142dcc3354a799d"
+    },
+    {
+      "name": "MIN_BUDGET_STEPS",
+      "ast_sha256": "958e29bd0e8594dfd2c3f9296df8386be2c8c92eb33b266004a3026315a81c54"
+    },
+    {
+      "name": "MAX_EVAL_INTERVAL",
+      "ast_sha256": "1c421f561d8b24c7989415bab32c2d506229cb56a4e6a87e8aa4cfe47477bc85"
+    },
+    {
+      "name": "MIN_STABLE_CHECKS",
+      "ast_sha256": "6f33adb076d388a1c60ddcf8008612f14ed534cd477297095da200a5e31adfa3"
+    },
+    {
+      "name": "MANDATORY_EARLY_STEPS",
+      "ast_sha256": "7abfa7eb232c39ef44f93eed8a17dd24929d128f8ac682969a9069f4b9387076"
+    },
+    {
+      "name": "_finite_tree",
+      "ast_sha256": "e52936169278fd948740e79c4215cda1e8e79b9c629fd125cd8ff40aa30e3446"
+    },
+    {
+      "name": "_expected_steps",
+      "ast_sha256": "741b130d5315845f6f0fe1756fc6bb0caf4c12164bbe1ac4dd84411bec99fd24"
+    },
+    {
+      "name": "HOLDOUT_N",
+      "ast_sha256": "b30f6085d932b9d0890a416d16ba5d5b81477d5a428e33cb3e37b9f41b32d915"
+    },
+    {
+      "name": "HOLDOUT_SEED_OFFSETS",
+      "ast_sha256": "55e6c3331fcae2176ecde5f07832fe000df1fdeeac1423f6ca0a079ec5837c17"
+    },
+    {
+      "name": "coverage_from_recorded",
+      "ast_sha256": "cec2ecfb25a82722c197be20701f7f79efa26d3d6df2f6072d1b22456301846c"
+    },
+    {
+      "name": "Q",
+      "ast_sha256": "945a1902a2369f867cac201ecb4012a8ddc5f17148cbe84b0672d210ae7121a4"
+    },
+    {
+      "name": "POLICY",
+      "ast_sha256": "7a15ffd0ffd6dcf82545193e3a093d0cc68315be3275d22053d289e240542675"
+    },
+    {
+      "name": "MEAN_POLICY",
+      "ast_sha256": "19bb7fd82bbad2c160c2e881fb6af548b9ed219e9ff0143712f91ab86a311a80"
+    },
+    {
+      "name": "SCALAR_FIELDS",
+      "ast_sha256": "a9a73a38f71bb4dccc0cfa734da8aeea5c02b4a79f1922bd9b42e3462a75b226"
+    },
+    {
+      "name": "MEAN_KEYS",
+      "ast_sha256": "360b3a91d0e26bed42c92e1d9f4cf204fbaffba7f27724fc8d63e470c62aa9af"
+    },
+    {
+      "name": "initial_mean_diagnostics",
+      "ast_sha256": "deb420d063dd6098fd0f489183628536083f6481d9ed99523dd5fdafa23f69c6"
+    },
+    {
+      "name": "check_mean_diagnostics",
+      "ast_sha256": "ceb2b08e32a46c325950f42a7e6aa487f2f73acb01f66d392f6dba338cb62139"
+    },
+    {
+      "name": "_check_mean_actions",
+      "ast_sha256": "3a9cf88808246b1500052726b35cb0e4c983a379bbc4613f9061f16a66145c4e"
+    },
+    {
+      "name": "NATIVE_COVERAGE_THRESHOLDS",
+      "ast_sha256": "72674bcbe71f7791df8ddc1fa4e5212794a3559a3ea65a9b01d06e3aa77ee889"
+    },
+    {
+      "name": "NATIVE_ACCURACY_THRESHOLDS",
+      "ast_sha256": "e423d6b559b08f6f93d45dd1fc351a62323f04e7ec7d2a5b8a09f96bce5651d0"
+    }
+  ],
+  "bound_owned_canonical_monitor": {
+    "pid": 1030112,
+    "startticks": 167460340,
+    "output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra10-monitor"
+  },
+  "source_only": true,
+  "Torch_imported": false,
+  "PT_objects_loaded": 0,
+  "models_instantiated": 0,
+  "model_forwards": 0,
+  "metrics_or_quality_verdicts_measured": 0,
+  "numerical_gate_functions_executed": 0,
+  "write_scope": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/grid-canonical-review",
+  "runtime_status": "NOT_STARTED_AWAIT_PARENT_AUTHORIZATION"
+}

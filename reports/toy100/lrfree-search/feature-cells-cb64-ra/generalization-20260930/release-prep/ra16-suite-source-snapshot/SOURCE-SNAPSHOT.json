@@ -1,0 +1,1180 @@
+{
+  "GPU_operations": 0,
+  "advanced_upstream_source_qualified": false,
+  "bytes": 1857207,
+  "candidate_package_sha256": "ba20f8e6353b2aca4725258835a68c1dfaa056a0484b2d683a5bb74a1eca0aa0",
+  "commit": "b25de08cfbeef9fe8aa06522324e132c3e71ae0f",
+  "completed_suite_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra16/FULL-TESTS.json",
+  "completed_suite_receipt_sha256": "7d620aed94dc799a5d7bbbf41fc78c5339b88c92f6772b1e9c83f0268e67a5e8",
+  "file_count": 193,
+  "files": {
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/__init__.py": {
+      "bytes": 1702,
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/__init__.py",
+      "source_relative_path": "particlegan/__init__.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/_qr.py": {
+      "bytes": 1951,
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/_qr.py",
+      "source_relative_path": "particlegan/_qr.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/anchor_birth.py": {
+      "bytes": 6401,
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/anchor_birth.py",
+      "source_relative_path": "particlegan/anchor_birth.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/autoencoder.py": {
+      "bytes": 6194,
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/autoencoder.py",
+      "source_relative_path": "particlegan/autoencoder.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/birth_death.py": {
+      "bytes": 45396,
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/birth_death.py",
+      "source_relative_path": "particlegan/birth_death.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/birth_phase.py": {
+      "bytes": 21144,
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/birth_phase.py",
+      "source_relative_path": "particlegan/birth_phase.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/conditioning.py": {
+      "bytes": 4878,
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/conditioning.py",
+      "source_relative_path": "particlegan/conditioning.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/continuous.py": {
+      "bytes": 58657,
+      "sha256": "0342b0b19a6e5e177ec38840775886576d22e21dc6608e6aa2bb49aa53e1bef4",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/continuous.py",
+      "source_relative_path": "particlegan/continuous.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/diffusion.py": {
+      "bytes": 5100,
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/diffusion.py",
+      "source_relative_path": "particlegan/diffusion.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/discriminators.py": {
+      "bytes": 5833,
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/discriminators.py",
+      "source_relative_path": "particlegan/discriminators.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/feature_cells.py": {
+      "bytes": 125325,
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/feature_cells.py",
+      "source_relative_path": "particlegan/feature_cells.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/feature_policy.py": {
+      "bytes": 14650,
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/feature_policy.py",
+      "source_relative_path": "particlegan/feature_policy.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/feature_reference.py": {
+      "bytes": 32368,
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/feature_reference.py",
+      "source_relative_path": "particlegan/feature_reference.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/gan_loss.py": {
+      "bytes": 1016,
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/gan_loss.py",
+      "source_relative_path": "particlegan/gan_loss.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/grad_regularizers.py": {
+      "bytes": 13033,
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/grad_regularizers.py",
+      "source_relative_path": "particlegan/grad_regularizers.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/init.py": {
+      "bytes": 12150,
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/init.py",
+      "source_relative_path": "particlegan/init.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/k3p.py": {
+      "bytes": 32329,
+      "sha256": "b1b3c18fcb577232138b06b5f378270da7a0b93640ab9d6b91de20ea9cb77502",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/k3p.py",
+      "source_relative_path": "particlegan/k3p.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/ka2.py": {
+      "bytes": 16551,
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/ka2.py",
+      "source_relative_path": "particlegan/ka2.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/mean_transport.py": {
+      "bytes": 39633,
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/mean_transport.py",
+      "source_relative_path": "particlegan/mean_transport.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/output_moments.py": {
+      "bytes": 8388,
+      "sha256": "f150fd6daffccef4a8eca53dd363553ee432197be19390a952016d6be6da4536",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/output_moments.py",
+      "source_relative_path": "particlegan/output_moments.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/particle_prior.py": {
+      "bytes": 17676,
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/particle_prior.py",
+      "source_relative_path": "particlegan/particle_prior.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/policy.py": {
+      "bytes": 79220,
+      "sha256": "390e8b03df87ee72e81a11c6c242fa9dcb2934b903e6143f4eae919c0950ae08",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/policy.py",
+      "source_relative_path": "particlegan/policy.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/population_continuity.py": {
+      "bytes": 20329,
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/population_continuity.py",
+      "source_relative_path": "particlegan/population_continuity.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/recipes.py": {
+      "bytes": 45757,
+      "sha256": "544fac3422e56ffa24f1bb82acd071a66db7b48498e49a3c5c7026ca74880d3b",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/recipes.py",
+      "source_relative_path": "particlegan/recipes.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/routing.py": {
+      "bytes": 63314,
+      "sha256": "77d28f7b67765a06ef5c60302a7605ce2583b727018784806e2c01180cc55197",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/routing.py",
+      "source_relative_path": "particlegan/routing.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/row_evidence.py": {
+      "bytes": 9397,
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/row_evidence.py",
+      "source_relative_path": "particlegan/row_evidence.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/training.py": {
+      "bytes": 32475,
+      "sha256": "ffb1ccf4b44a1fd7edca34e3f6eb08e886f2d7875757ba9f1365054dbf5cc903",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/training.py",
+      "source_relative_path": "particlegan/training.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/vicreg_loss.py": {
+      "bytes": 2297,
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/particlegan/vicreg_loss.py",
+      "source_relative_path": "particlegan/vicreg_loss.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/pyproject.toml": {
+      "bytes": 1194,
+      "sha256": "9037d73fe240aed03b781e28b2153618a05d2f661676b0c1e05cf70d9ff59a6d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/pyproject.toml",
+      "source_relative_path": "pyproject.toml"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/conftest.py": {
+      "bytes": 403,
+      "sha256": "dbfd4549ebc1b8a0a209d616920587fde2e81c1ebd99a1895cc7c45986d6065b",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/conftest.py",
+      "source_relative_path": "tests/conftest.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/k3p_scenarios.py": {
+      "bytes": 9029,
+      "sha256": "381d1eb98c7a8a97c6017cdfee7f73f5c0a4b20cb4a68a7c85e4d98627c461fc",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/k3p_scenarios.py",
+      "source_relative_path": "tests/k3p_scenarios.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_ablation_switches.py": {
+      "bytes": 5580,
+      "sha256": "ce08006cf39379911c4b05690b91496ea2f7a10b506dc5886427e7cc9ad3b0c8",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_ablation_switches.py",
+      "source_relative_path": "tests/test_ablation_switches.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_api_dogfood.py": {
+      "bytes": 3552,
+      "sha256": "dab28da3adb7740466cd1cc312b684cb2d4f48cb573991006dd83c5b756d8827",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_api_dogfood.py",
+      "source_relative_path": "tests/test_api_dogfood.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_api_integration.py": {
+      "bytes": 6233,
+      "sha256": "aee89a0da69ae0ebca46e98ad95ff02a6a02e0464c2d5ed423fa68906f82c58d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_api_integration.py",
+      "source_relative_path": "tests/test_api_integration.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_api_primitives.py": {
+      "bytes": 10239,
+      "sha256": "f772d50993c83f07f2a55234c0bdf1166d121e4c8094c6a21f0d2ee43eec1054",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_api_primitives.py",
+      "source_relative_path": "tests/test_api_primitives.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_autoencoder_api.py": {
+      "bytes": 6516,
+      "sha256": "64d67181552c0e55b65ef1ca9fcda66efa6fba36292615a008ebb93450caf05d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_autoencoder_api.py",
+      "source_relative_path": "tests/test_autoencoder_api.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_bandwidth_kde_probe.py": {
+      "bytes": 2551,
+      "sha256": "65ded6c6995f582266171d8a023cc67af8a82bf6cf6f64c58f5a62614c99935f",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_bandwidth_kde_probe.py",
+      "source_relative_path": "tests/test_bandwidth_kde_probe.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_bandwidth_wave.py": {
+      "bytes": 1828,
+      "sha256": "20c57dd7adc866fef792c3521905e5b8b3d3fc6fd50529625a9ada4b2aeb8ec3",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_bandwidth_wave.py",
+      "source_relative_path": "tests/test_bandwidth_wave.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_batch_distance_discriminator.py": {
+      "bytes": 4483,
+      "sha256": "a40d68cfd0c861319836ffc5fbb597388422b2482a46b2ea785715027de63511",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_batch_distance_discriminator.py",
+      "source_relative_path": "tests/test_batch_distance_discriminator.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_batch_feature_init.py": {
+      "bytes": 4378,
+      "sha256": "3b5a854b38f5035d12451b2d773426a66320ac345513d49ee32462ef06ae3bc3",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_batch_feature_init.py",
+      "source_relative_path": "tests/test_batch_feature_init.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_behavioral_baseline.py": {
+      "bytes": 7298,
+      "sha256": "83461b3e864df9bb1daabdb4690cd559fbb09c53a0a827548265076ba839bdf0",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_behavioral_baseline.py",
+      "source_relative_path": "tests/test_behavioral_baseline.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_behavioral_convergence.py": {
+      "bytes": 3178,
+      "sha256": "90d406c2040f6a37a39bbf7980eaec1cfdf9f139a1818980617be7257bb7b734",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_behavioral_convergence.py",
+      "source_relative_path": "tests/test_behavioral_convergence.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_cifar_api.py": {
+      "bytes": 4623,
+      "sha256": "bd2711bc57cc729dc55c39a460ffa0a86ab1f7162e8da07df281f9870e5c7ef1",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_cifar_api.py",
+      "source_relative_path": "tests/test_cifar_api.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_cifar_particle_ae.py": {
+      "bytes": 2969,
+      "sha256": "61bc43002174786dbc2a2c03e1dde4ec58354d1e7d63fae31b74d6ed5ad817c7",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_cifar_particle_ae.py",
+      "source_relative_path": "tests/test_cifar_particle_ae.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_cifar_particle_ddgan.py": {
+      "bytes": 2267,
+      "sha256": "6d8d429294d076b7b8ae97e16f7c9b2a652b98ded22fdd7a45adf7651c68d0e2",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_cifar_particle_ddgan.py",
+      "source_relative_path": "tests/test_cifar_particle_ddgan.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_cifar_particle_variation.py": {
+      "bytes": 1113,
+      "sha256": "05d54bbe7299db6458ae65e4ffa96e05687780308459735e88f8c10686a9b035",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_cifar_particle_variation.py",
+      "source_relative_path": "tests/test_cifar_particle_variation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_cifar_resume.py": {
+      "bytes": 3781,
+      "sha256": "955dbd0d9a40187d67e3cddcadf301dd654efc2cf6a3dd7908ff1b333335d478",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_cifar_resume.py",
+      "source_relative_path": "tests/test_cifar_resume.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_cifar_speed.py": {
+      "bytes": 2007,
+      "sha256": "2f092d0250e78e208e6d354f778dc335dc1dc11a3aff91b0fded494cd2fe4664",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_cifar_speed.py",
+      "source_relative_path": "tests/test_cifar_speed.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_clean_sample.py": {
+      "bytes": 6809,
+      "sha256": "0ff89d652e9194521fc9e658cadbaccefeb9a6558da0850a809fab81aaad87e3",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_clean_sample.py",
+      "source_relative_path": "tests/test_clean_sample.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_compare_defaults.py": {
+      "bytes": 2948,
+      "sha256": "340b23159d89740e1ace6567a949f2d6584daa3475cefd6672b0bc020d0a0027",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_compare_defaults.py",
+      "source_relative_path": "tests/test_compare_defaults.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_config.py": {
+      "bytes": 4218,
+      "sha256": "b3e4d1b87487d09f6a0b36b189988734062b79bbe4bfc88337c160ca148f96e6",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_config.py",
+      "source_relative_path": "tests/test_config.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_continuous_candidates.py": {
+      "bytes": 5790,
+      "sha256": "90f5440e7389b649e2f6734948db9134236d3c074539c9e7d8df6838f8cc7d14",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_continuous_candidates.py",
+      "source_relative_path": "tests/test_continuous_candidates.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_convergence_gate.py": {
+      "bytes": 2414,
+      "sha256": "119be783df7eee3ef6c90bb6e13d1a348990ca2d0af87c5a7d99230f591a9c5c",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_convergence_gate.py",
+      "source_relative_path": "tests/test_convergence_gate.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_cpu_optimizer_scope.py": {
+      "bytes": 4067,
+      "sha256": "b2917552a6730e76de102a2eb9b29d9a687c6645fcb7cc0d95e9bdc957f4d2c5",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_cpu_optimizer_scope.py",
+      "source_relative_path": "tests/test_cpu_optimizer_scope.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_default_formulation.py": {
+      "bytes": 3809,
+      "sha256": "25055fcb2a2cbc88fd3c47d9094852eacd4a93ee6978aca3de9385937f905403",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_default_formulation.py",
+      "source_relative_path": "tests/test_default_formulation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_denoising.py": {
+      "bytes": 6452,
+      "sha256": "107627e53ac1438bac2d8bff12f07b3f69ba931d35a939d2d6b4ca2db468e243",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_denoising.py",
+      "source_relative_path": "tests/test_denoising.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_denoising_api.py": {
+      "bytes": 6196,
+      "sha256": "f06b8da9fbc13494c4ccfe0feba1ea1220593d30e3fe191f736506a60caa033e",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_denoising_api.py",
+      "source_relative_path": "tests/test_denoising_api.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_det_init_registry.py": {
+      "bytes": 2917,
+      "sha256": "5582159e1f31fc3d325204e8a2ce3030fd1c4b561a7ca1b4950b0e3531e66a6f",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_det_init_registry.py",
+      "source_relative_path": "tests/test_det_init_registry.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_diagnose_gym_control_actions.py": {
+      "bytes": 819,
+      "sha256": "535af9b81a200de04b0ad3e6a27b4393e6f8031461de7af4326ea263dd5f00af",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_diagnose_gym_control_actions.py",
+      "source_relative_path": "tests/test_diagnose_gym_control_actions.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_config_compatibility.py": {
+      "bytes": 3308,
+      "sha256": "aa0455e121a48ca485285569107190fe9f920ff873b1be229c156f85a12a8c12",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_config_compatibility.py",
+      "source_relative_path": "tests/test_e22_config_compatibility.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_frozen_precision.py": {
+      "bytes": 13089,
+      "sha256": "20c4a482b3faab25636a3b2ff72484ee1a6203daa2937d5b9cc1050d5c907cf3",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_frozen_precision.py",
+      "source_relative_path": "tests/test_e22_frozen_precision.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_noise_floor.py": {
+      "bytes": 8412,
+      "sha256": "838402a1f95deccc5eed44f51d5c94a1bbfa56257df4789b2a1fd9acbcd92155",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_noise_floor.py",
+      "source_relative_path": "tests/test_e22_noise_floor.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_ownership.py": {
+      "bytes": 5074,
+      "sha256": "adbbe3f46337c2097a70cfc861ec784cdf36e095f2fa541976f4f3c65fbb39e4",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_ownership.py",
+      "source_relative_path": "tests/test_e22_ownership.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_policy.py": {
+      "bytes": 29336,
+      "sha256": "389b1d535999a043717a42a8f47f63d69555246e56760f42f4356aa482ccb750",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_policy.py",
+      "source_relative_path": "tests/test_e22_policy.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_recipe.py": {
+      "bytes": 4160,
+      "sha256": "e5ff72f3b1d4a9e00f3b4139ce0a2b97305dd8d690254b9ba593420ad441e5ff",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_recipe.py",
+      "source_relative_path": "tests/test_e22_recipe.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_registered_table.py": {
+      "bytes": 8852,
+      "sha256": "da8a2d1bb6e47d15d6adcb2ff90393a7ac2b8859cc9ee85697c553b4535c1f2d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_registered_table.py",
+      "source_relative_path": "tests/test_e22_registered_table.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_ablation.py": {
+      "bytes": 10874,
+      "sha256": "c82e8c884058ff55cb38a78a2d38a11e28b964b26d6c2d9daca60df694fe44ac",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_ablation.py",
+      "source_relative_path": "tests/test_e22_routed_ablation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_cadence.py": {
+      "bytes": 12275,
+      "sha256": "014cf93a05565b614915aeff5d5aecef98a175837c4255b91a26143effa26d87",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_cadence.py",
+      "source_relative_path": "tests/test_e22_routed_cadence.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_game.py": {
+      "bytes": 19680,
+      "sha256": "e7d2e1332efdb6738db468e3e6f00db482d7e8c699a4af6f0686c5f1140eb4f1",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_game.py",
+      "source_relative_path": "tests/test_e22_routed_game.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_geometry.py": {
+      "bytes": 13734,
+      "sha256": "2c459535c43606eba2706cb9b89b13dac4ef2051be3f276dbe324de5cdfdebde",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_geometry.py",
+      "source_relative_path": "tests/test_e22_routed_geometry.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_optimizer_transport.py": {
+      "bytes": 15402,
+      "sha256": "825c6d4fcbc575d5040ccf9fb77858426fe202a63e8e58b99730b770a4facc68",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_optimizer_transport.py",
+      "source_relative_path": "tests/test_e22_routed_optimizer_transport.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_output_guard.py": {
+      "bytes": 16296,
+      "sha256": "af13f857df4b1211c11b5b99fb81e65d3b27b814897877e750ddf57afa913ffc",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_output_guard.py",
+      "source_relative_path": "tests/test_e22_routed_output_guard.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_policy.py": {
+      "bytes": 10286,
+      "sha256": "0a0e63d33f68c4107386ab4016388df24d4a83b8357e91a99c60da18f9d17ca2",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_policy.py",
+      "source_relative_path": "tests/test_e22_routed_policy.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_replay.py": {
+      "bytes": 9820,
+      "sha256": "5ed1f0b30825efb1a766a18d40703caf3282b3a92d8dcc470a2679fffc582274",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_replay.py",
+      "source_relative_path": "tests/test_e22_routed_replay.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_sites.py": {
+      "bytes": 15996,
+      "sha256": "df14171dcab4b26c4cd475d2e4d2fda7e9a9ba27c1d750e8051a22307d44d412",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_sites.py",
+      "source_relative_path": "tests/test_e22_routed_sites.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routed_support.py": {
+      "bytes": 7818,
+      "sha256": "b4fd48057b437a87b6f380fbd0defe6adbdefaf236f899bba809d501d7bd858e",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routed_support.py",
+      "source_relative_path": "tests/test_e22_routed_support.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_routing_rows.py": {
+      "bytes": 30852,
+      "sha256": "3b7e302d66cbb9cc389249087c91a41926f7be6463288a36c78acb7837bb0972",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_routing_rows.py",
+      "source_relative_path": "tests/test_e22_routing_rows.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_row_contract.py": {
+      "bytes": 13042,
+      "sha256": "eea239716af8c430d35ba8854157067c930e9bca774489f13666dc88e2f463ef",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_row_contract.py",
+      "source_relative_path": "tests/test_e22_row_contract.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_e22_token_penalty.py": {
+      "bytes": 17242,
+      "sha256": "6ba87d47708e7cd5bc2b694db3212ea5a243e0a85b30f4fbe57e3defb7d46209",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_e22_token_penalty.py",
+      "source_relative_path": "tests/test_e22_token_penalty.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_extra_adam_scratch.py": {
+      "bytes": 6407,
+      "sha256": "f06ed0ed8927a50d9498504b075c8dc19d19df9b0ecf367f3d970a72e586075b",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_extra_adam_scratch.py",
+      "source_relative_path": "tests/test_extra_adam_scratch.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_fast_lander_pipeline.py": {
+      "bytes": 1424,
+      "sha256": "9908c076f3a15a0980f46767e3822d40c0667103ed21ba4729d95c375bdbe6bf",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_fast_lander_pipeline.py",
+      "source_relative_path": "tests/test_fast_lander_pipeline.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_feature_auto.py": {
+      "bytes": 14750,
+      "sha256": "2cd0379568903ae61322e9c4fba53f4f16dd5239fbd4fbc2fed799d1262a4b51",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_feature_auto.py",
+      "source_relative_path": "tests/test_feature_auto.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_feature_partial_recovery.py": {
+      "bytes": 13174,
+      "sha256": "5bd78dc66d588fa95d36875e12537fdb6f4483a2798aff9550672a7a898c59b0",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_feature_partial_recovery.py",
+      "source_relative_path": "tests/test_feature_partial_recovery.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_feature_portability.py": {
+      "bytes": 15402,
+      "sha256": "72292b1aeb41be3a7b75243cb176535f2b347d324686c35140f0d7220a3a6f0a",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_feature_portability.py",
+      "source_relative_path": "tests/test_feature_portability.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_formulation_architecture.py": {
+      "bytes": 2575,
+      "sha256": "c80fde159287235cbc182809176b5cc0e1666be8913452ffc6927026a734f4d8",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_formulation_architecture.py",
+      "source_relative_path": "tests/test_formulation_architecture.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gradient_normalization_probe.py": {
+      "bytes": 4728,
+      "sha256": "62a1de27f146aef16b2cc2502f3e8c875efa64341ce2aa96ff537d85c9187af1",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gradient_normalization_probe.py",
+      "source_relative_path": "tests/test_gradient_normalization_probe.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_grid_observation.py": {
+      "bytes": 2366,
+      "sha256": "1954c418b47fff557800ba9be934e4d378329ba0f90dfd761c53ff2ab35f2205",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_grid_observation.py",
+      "source_relative_path": "tests/test_grid_observation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_control_evaluation.py": {
+      "bytes": 4692,
+      "sha256": "e2a94d9fdb5c0206dba5ffbc94728f31df1556dcc4960ea35d7d719bdf7bce27",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_control_evaluation.py",
+      "source_relative_path": "tests/test_gym_control_evaluation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_control_training.py": {
+      "bytes": 5381,
+      "sha256": "cfdde2db162c5ee7e2a24896c5d71a710340a1f22cb74e23724aa8c3463099f1",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_control_training.py",
+      "source_relative_path": "tests/test_gym_control_training.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_data.py": {
+      "bytes": 3693,
+      "sha256": "21e2cd6100232fff59ec26f69a3842d84cf1e25bb321e1dcc315a8046baf7d26",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_data.py",
+      "source_relative_path": "tests/test_gym_data.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_evaluation.py": {
+      "bytes": 3111,
+      "sha256": "eadb96569ca6903375f8161cc49b66d990fd951f97ebd5c68bfd9a2b4a3f4ce8",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_evaluation.py",
+      "source_relative_path": "tests/test_gym_evaluation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_gan_control_evaluation.py": {
+      "bytes": 3017,
+      "sha256": "efb27cbef13ac84db1f41c6fdfaff49014a5e79148f7ca8035eb0a78812e5b96",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_gan_control_evaluation.py",
+      "source_relative_path": "tests/test_gym_gan_control_evaluation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_gan_control_training.py": {
+      "bytes": 12482,
+      "sha256": "b039b88c314f9771fb79b910d1c0624d5829a4793878c2628192a9b630060b93",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_gan_control_training.py",
+      "source_relative_path": "tests/test_gym_gan_control_training.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_l2_finetune.py": {
+      "bytes": 9677,
+      "sha256": "f277b2a0696224ed14e471bb2d828e420e99f27e9e2093f32393e5a0a935b156",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_l2_finetune.py",
+      "source_relative_path": "tests/test_gym_l2_finetune.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_lander_live.py": {
+      "bytes": 13364,
+      "sha256": "8f7c0e89ed774fb613df5787423fd9df6fa3c35c630b8398db17bf6172a16c83",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_lander_live.py",
+      "source_relative_path": "tests/test_gym_lander_live.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_particle_finetune.py": {
+      "bytes": 22573,
+      "sha256": "660886d69a99f3e7656d07d99c671f4f3f18b293d7cd3eeb9c138dd99416936c",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_particle_finetune.py",
+      "source_relative_path": "tests/test_gym_particle_finetune.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_previous_gan.py": {
+      "bytes": 6371,
+      "sha256": "fe1bc5d43a7c33531f040e56ffaadf2f1fba0bd2fc4289d393e5ba1f68276dff",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_previous_gan.py",
+      "source_relative_path": "tests/test_gym_previous_gan.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_probe.py": {
+      "bytes": 1391,
+      "sha256": "17ef594026e9d676e6630fa8fb47dcf3f829339032ff0f81a36de36149c22e9c",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_probe.py",
+      "source_relative_path": "tests/test_gym_probe.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_slider_finetune.py": {
+      "bytes": 6153,
+      "sha256": "6c463ea280bb2dc366f1f108a771ae39ecd352df3f200b258cdf52164aabea77",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_slider_finetune.py",
+      "source_relative_path": "tests/test_gym_slider_finetune.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_slider_gan.py": {
+      "bytes": 6035,
+      "sha256": "de80fd41d28681d118faf28c0e821feed92e976179add5268bd995cbe60dd432",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_slider_gan.py",
+      "source_relative_path": "tests/test_gym_slider_gan.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_sparse_action_diagnostics.py": {
+      "bytes": 784,
+      "sha256": "cc5056bebca119f263d9ad0af0cf683cfcc981b78a04a6d0a4f9bc4126096628",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_sparse_action_diagnostics.py",
+      "source_relative_path": "tests/test_gym_sparse_action_diagnostics.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_sparse_action_evaluation.py": {
+      "bytes": 3373,
+      "sha256": "cb278101fa09cd8288160d15a4d0d9dde1ed0647ef1c46b72d09611a917c4349",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_sparse_action_evaluation.py",
+      "source_relative_path": "tests/test_gym_sparse_action_evaluation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_sparse_action_training.py": {
+      "bytes": 9062,
+      "sha256": "f629700343f2a881437a6db04b2c9c795d488b0784e62a9f673b7ffa94c4ec6f",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_sparse_action_training.py",
+      "source_relative_path": "tests/test_gym_sparse_action_training.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_state_control_evaluation.py": {
+      "bytes": 3535,
+      "sha256": "a49051927dc386a6e8c7706d3520b0a514522cfc5c0ec5df11b4f4e7b8af348e",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_state_control_evaluation.py",
+      "source_relative_path": "tests/test_gym_state_control_evaluation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_state_control_training.py": {
+      "bytes": 6748,
+      "sha256": "fe9a2e3657cd633fa6095aa73e7bd0869eabaf6a9c9c6506decef6de5c9f7c12",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_state_control_training.py",
+      "source_relative_path": "tests/test_gym_state_control_training.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_gym_transition.py": {
+      "bytes": 8109,
+      "sha256": "e125b8d5334492b7923dfebbb892cdb8628eaa7338d86f5a18d990cd7a03746b",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_gym_transition.py",
+      "source_relative_path": "tests/test_gym_transition.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_image_ddgan.py": {
+      "bytes": 3658,
+      "sha256": "a2eb2ba656ebb6488fa57c72eb85b23d61748b8df366e549d505d3a470b81ace",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_image_ddgan.py",
+      "source_relative_path": "tests/test_image_ddgan.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_image_moonshots.py": {
+      "bytes": 6251,
+      "sha256": "6693a7e5a910f8fa51a018519b89c8390306d22c3565106c1ea5c24d62e423a3",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_image_moonshots.py",
+      "source_relative_path": "tests/test_image_moonshots.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_image_ncsnpp.py": {
+      "bytes": 2218,
+      "sha256": "41d1ff5ed63978546215c95872cddc94c9e56ca073be82502a2fba07fd564f85",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_image_ncsnpp.py",
+      "source_relative_path": "tests/test_image_ncsnpp.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_image_solvability.py": {
+      "bytes": 2017,
+      "sha256": "9c56f9742e9b766ac219afe3535b2bc044ed7b1714b22f93e821327c15a51a93",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_image_solvability.py",
+      "source_relative_path": "tests/test_image_solvability.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_initialization.py": {
+      "bytes": 9427,
+      "sha256": "134f294c9eaeff5d084d2c3f24ed01683a38a434166c1d80dcc23cd440431098",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_initialization.py",
+      "source_relative_path": "tests/test_initialization.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_k3p.py": {
+      "bytes": 20747,
+      "sha256": "0b59cd8cf53cd539072e878493df4cc6e23c506355ceea44a840d84f5fb66316",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_k3p.py",
+      "source_relative_path": "tests/test_k3p.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_k3p_selection.py": {
+      "bytes": 4730,
+      "sha256": "a8e4bbc32ba863ff7732c39fb2bca3e01e959ab2c22c79bba5f5dfede0eba7e0",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_k3p_selection.py",
+      "source_relative_path": "tests/test_k3p_selection.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_k3p_trainer.py": {
+      "bytes": 25892,
+      "sha256": "acaf734ba6dc90b17da38371c1bb4593faad7043a13e9c7b0b5e4376e4717162",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_k3p_trainer.py",
+      "source_relative_path": "tests/test_k3p_trainer.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_ka2_default.py": {
+      "bytes": 4607,
+      "sha256": "c757a139442068235c475c77fcc9fcb45695454ba7b2cc98f3fe580d991ceaa9",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_ka2_default.py",
+      "source_relative_path": "tests/test_ka2_default.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_lazy_default_penalty.py": {
+      "bytes": 3946,
+      "sha256": "8d126e049d2c53342e6f23db17e75d7b7f2f1f63bba771618dd13954c3fc0adb",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_lazy_default_penalty.py",
+      "source_relative_path": "tests/test_lazy_default_penalty.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_learned_lr_controller.py": {
+      "bytes": 2730,
+      "sha256": "64bf081f5875bc821ed579e633fe9f84f34a1eb57a8a4861adae7c76db49f9bc",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_learned_lr_controller.py",
+      "source_relative_path": "tests/test_learned_lr_controller.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_learned_lr_evaluation.py": {
+      "bytes": 2177,
+      "sha256": "1a4b47c577064fa50580f1adc3a26b690884fdaa8b6daca2cb342ba2a45ba180",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_learned_lr_evaluation.py",
+      "source_relative_path": "tests/test_learned_lr_evaluation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_legacy_learnable_noise.py": {
+      "bytes": 8220,
+      "sha256": "df5fa386618e0b314216a353ac41cdfc096b9aab354c0b8c102b14a8f21c412e",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_legacy_learnable_noise.py",
+      "source_relative_path": "tests/test_legacy_learnable_noise.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_legacy_noise_adapters.py": {
+      "bytes": 4696,
+      "sha256": "6b5e155b4e585943fedf5bb07b763defee0bb5dba3c7e877d64e1977d5c161cb",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_legacy_noise_adapters.py",
+      "source_relative_path": "tests/test_legacy_noise_adapters.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_legacy_noise_remaining.py": {
+      "bytes": 1790,
+      "sha256": "a2bfd479eaf3b46f3771b48a336a6ef0956c3cff807b11386014b66550242a2c",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_legacy_noise_remaining.py",
+      "source_relative_path": "tests/test_legacy_noise_remaining.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_legacy_recipe_schedule.py": {
+      "bytes": 6703,
+      "sha256": "cbd377ead64c5fb325d96bf47e30b184ed37571762a3da8f456da4fcab5d2d61",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_legacy_recipe_schedule.py",
+      "source_relative_path": "tests/test_legacy_recipe_schedule.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_linear_skip_critic.py": {
+      "bytes": 1845,
+      "sha256": "de2dcf4a16971af0be5fe4ce11b060fe23226effbfc06fd58cf1f99b11e26554",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_linear_skip_critic.py",
+      "source_relative_path": "tests/test_linear_skip_critic.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_lunar_artifacts.py": {
+      "bytes": 2592,
+      "sha256": "39d1c81d760eac23c07ba01950169406d00c61d2a11fd19bb0740f7c01771eb3",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_lunar_artifacts.py",
+      "source_relative_path": "tests/test_lunar_artifacts.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_lunar_flight.py": {
+      "bytes": 6378,
+      "sha256": "6657e6d898b4580b9e5dbf94b6fd44b24bd0bfcf74353f256cedfac92ae2ec6d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_lunar_flight.py",
+      "source_relative_path": "tests/test_lunar_flight.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_lunar_training.py": {
+      "bytes": 6588,
+      "sha256": "868092f81d0b0cc9f7f8d5a09bb64b7b1cfef40449e984070c59a4f1816ad883",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_lunar_training.py",
+      "source_relative_path": "tests/test_lunar_training.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_mog.py": {
+      "bytes": 3194,
+      "sha256": "43a912ad94bff728575b09a703cff0d90f46d09ccfa317caa2e8c7d229722e46",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_mog.py",
+      "source_relative_path": "tests/test_mog.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_mog_api.py": {
+      "bytes": 17604,
+      "sha256": "76daa875bf2e75f000afd6ebd4723f865131f2cfb1e3d1e873f0cd21b1813060",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_mog_api.py",
+      "source_relative_path": "tests/test_mog_api.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_mog_autoencoder.py": {
+      "bytes": 7664,
+      "sha256": "941f12057ee4960fbb97fb9e6fe812db34120238d371c806a60b1c62c194ad02",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_mog_autoencoder.py",
+      "source_relative_path": "tests/test_mog_autoencoder.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_mog_encoder_fit.py": {
+      "bytes": 2455,
+      "sha256": "e6c121704b74a659b3330b85c8b070ad37570cb9baba6da0f732dc78de93affa",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_mog_encoder_fit.py",
+      "source_relative_path": "tests/test_mog_encoder_fit.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_mog_oracle.py": {
+      "bytes": 1114,
+      "sha256": "85e0598e43d3741ceba3bbba12a1a8bf0b0b70c7c0a959b81c1d1a64118da643",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_mog_oracle.py",
+      "source_relative_path": "tests/test_mog_oracle.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_mog_vae.py": {
+      "bytes": 2427,
+      "sha256": "41b8b373f9b9435ff37561afd791b2b36cdc4009a023b7d4151d08fcb1945a1a",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_mog_vae.py",
+      "source_relative_path": "tests/test_mog_vae.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_mog_vae_stability.py": {
+      "bytes": 2079,
+      "sha256": "716b0a9457a7df148dabaa52d1a232ac952f70370b2d1d7c73658b442345b919",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_mog_vae_stability.py",
+      "source_relative_path": "tests/test_mog_vae_stability.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_optimistic_adam_scratch.py": {
+      "bytes": 10865,
+      "sha256": "5c1f219e0c22dd9f0fb6c83a70267d1cc8b379897d78f40e12aa489689d86f0f",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_optimistic_adam_scratch.py",
+      "source_relative_path": "tests/test_optimistic_adam_scratch.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_optimistic_regrade.py": {
+      "bytes": 3874,
+      "sha256": "97b33430880629f9358415f4682ec7428bd39729297b9e8dd44ec650681606cb",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_optimistic_regrade.py",
+      "source_relative_path": "tests/test_optimistic_regrade.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_paired_error_2d.py": {
+      "bytes": 4057,
+      "sha256": "70350d24b558707638ba2bf1b5f4510200cc43b63855e878522ae25bdb4f0f1a",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_paired_error_2d.py",
+      "source_relative_path": "tests/test_paired_error_2d.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_particle_native_2d.py": {
+      "bytes": 2206,
+      "sha256": "038443e5cfdc7e4cfcd94f3ec8197a6e90553148ad5895f8042531bb127c5eb8",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_particle_native_2d.py",
+      "source_relative_path": "tests/test_particle_native_2d.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_persistent_noise_scratch.py": {
+      "bytes": 4458,
+      "sha256": "e42b135570da56a0dc3b99a48bfeeb64f0886625e36cb1e9e90c50f7c993f11d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_persistent_noise_scratch.py",
+      "source_relative_path": "tests/test_persistent_noise_scratch.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_pretrained_critic_init.py": {
+      "bytes": 2729,
+      "sha256": "3379371decbffa3f696b87f34549b3d0a699563183cee6f92f41a86d32197ac7",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_pretrained_critic_init.py",
+      "source_relative_path": "tests/test_pretrained_critic_init.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_public_default_verification.py": {
+      "bytes": 2498,
+      "sha256": "94129221500dc339791e6017976c52a46bd672ac173f467728efcf8a53b9b3be",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_public_default_verification.py",
+      "source_relative_path": "tests/test_public_default_verification.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_r1_rotation.py": {
+      "bytes": 5579,
+      "sha256": "58fa2779f3690cbf00d59457a9bcc025e6bbecb4a2498a019a901a7f865d6400",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_r1_rotation.py",
+      "source_relative_path": "tests/test_r1_rotation.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_readme.py": {
+      "bytes": 1237,
+      "sha256": "f382cf95d01e7bae922996944369953ffd67ccf53f1a7cc01d57ff9bc3f10f9e",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_readme.py",
+      "source_relative_path": "tests/test_readme.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_recipe_defaults.py": {
+      "bytes": 5290,
+      "sha256": "1eb2d5490c61856a186808bcacf0a665dea6ca85498c4508c212dc8cd793777d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_recipe_defaults.py",
+      "source_relative_path": "tests/test_recipe_defaults.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_relative_step_adapter.py": {
+      "bytes": 2779,
+      "sha256": "559019d24e94a809257b08c2bdd14f91bcd36c9870d638d92309b75a65fae91b",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_relative_step_adapter.py",
+      "source_relative_path": "tests/test_relative_step_adapter.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_run_grid.py": {
+      "bytes": 18474,
+      "sha256": "276ed57b97db749fa22b3d33a32bc5fe412b04df0c1531a87f122102a76e4d61",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_run_grid.py",
+      "source_relative_path": "tests/test_run_grid.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_safe_fast_2d.py": {
+      "bytes": 4115,
+      "sha256": "a7d3d187db2f730a5fee02da704b7bda3db27232c25636cfdc6b4ac7473b924e",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_safe_fast_2d.py",
+      "source_relative_path": "tests/test_safe_fast_2d.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_settled_guard.py": {
+      "bytes": 11246,
+      "sha256": "17b0b9e5e9c6e6909f0b2b046400bdaabb7c58e0f273936a2dc0e0ac9d6645b0",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_settled_guard.py",
+      "source_relative_path": "tests/test_settled_guard.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_sgd_controller.py": {
+      "bytes": 3884,
+      "sha256": "b31711d4d31f25bc17e5763d48bbe0dd6d6a47468a43b2f9e576296bec4d6ceb",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_sgd_controller.py",
+      "source_relative_path": "tests/test_sgd_controller.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_batch_feature_research.py": {
+      "bytes": 4398,
+      "sha256": "88b009bde6e4009c8db0570d4486d5e1a5c7b528e32d05a46ed73a689b07c497",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_batch_feature_research.py",
+      "source_relative_path": "tests/test_shared_batch_feature_research.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_critic_research.py": {
+      "bytes": 3257,
+      "sha256": "e2a597cb0a3cc4c8df2a4c502dbbfabd75479edf2ee8a965cedd9e521b7a6cd2",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_critic_research.py",
+      "source_relative_path": "tests/test_shared_critic_research.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_default_search.py": {
+      "bytes": 2178,
+      "sha256": "f9e119b08c70b8910a4b9da5c65f5c5b99c717123a152eeda4af808375d1de32",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_default_search.py",
+      "source_relative_path": "tests/test_shared_default_search.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_ensemble_pointnorm.py": {
+      "bytes": 1906,
+      "sha256": "b1168bc298c45ce362a57dcc28277083ccdb3279990bc66b748ff2e17d608caf",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_ensemble_pointnorm.py",
+      "source_relative_path": "tests/test_shared_ensemble_pointnorm.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_geometry_research.py": {
+      "bytes": 4233,
+      "sha256": "d85f7875b7310fc708c23197712097c49afb92d46c2321af7bf3b95f856016bd",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_geometry_research.py",
+      "source_relative_path": "tests/test_shared_geometry_research.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_local_density_research.py": {
+      "bytes": 2570,
+      "sha256": "e68542078138d7e73bd52663b07d27f00787106d55158b8bf1c01b4f0068b9b6",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_local_density_research.py",
+      "source_relative_path": "tests/test_shared_local_density_research.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_profile_search.py": {
+      "bytes": 3487,
+      "sha256": "3000e72845f9ceb92c8dcef3e5f846bbb909d43e10d569504d6dc6eea258d02a",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_profile_search.py",
+      "source_relative_path": "tests/test_shared_profile_search.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_residual_curvature.py": {
+      "bytes": 2614,
+      "sha256": "32a1abba78991688b6145b757eb2ccbfa759f2f7cc00fb2e68b55faa390a03f8",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_residual_curvature.py",
+      "source_relative_path": "tests/test_shared_residual_curvature.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_schedule_search.py": {
+      "bytes": 3049,
+      "sha256": "509fa12f62ec24824cff4e63d394bd29ee55f08377c84749f2dc9f6a110742ab",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_schedule_search.py",
+      "source_relative_path": "tests/test_shared_schedule_search.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_shared_variants.py": {
+      "bytes": 3372,
+      "sha256": "27aee8b0746eb3b24ac34ec5febdfac0e621c8dd81ea128703ebd284f91b3d54",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_shared_variants.py",
+      "source_relative_path": "tests/test_shared_variants.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_smart_descent.py": {
+      "bytes": 5420,
+      "sha256": "d2ca1a9d92bf4fed677e155703d0f76f7c31b3c5111592e5e44a796d7b19f0f0",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_smart_descent.py",
+      "source_relative_path": "tests/test_smart_descent.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_smooth_critic_research.py": {
+      "bytes": 3858,
+      "sha256": "7c9d01b9e637ffa5fcbbe11c01ee1756d5c7d9ce51afd55b64457ffa7568899a",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_smooth_critic_research.py",
+      "source_relative_path": "tests/test_smooth_critic_research.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_solvability_search.py": {
+      "bytes": 2730,
+      "sha256": "84aa589bdad2ca9758e5830c1c2e59b4f65e864d792581108f46961f79112139",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_solvability_search.py",
+      "source_relative_path": "tests/test_solvability_search.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_sparse.py": {
+      "bytes": 7245,
+      "sha256": "07a5a64832dcdf47cc427ca876c9b6ff51f13573f4fb0d6010b6a80c5b453dbc",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_sparse.py",
+      "source_relative_path": "tests/test_sparse.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_state_transfer_alias.py": {
+      "bytes": 5444,
+      "sha256": "a07fc35e6c94ca5db6f82981ca78812195c47d80c2e5113dc02ef7eef8307abe",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_state_transfer_alias.py",
+      "source_relative_path": "tests/test_state_transfer_alias.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_accuracy.py": {
+      "bytes": 4041,
+      "sha256": "50fcef31cf207f5ba1dc2e723f39425cd591035ee182e55409ca5b6baaea68f2",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_accuracy.py",
+      "source_relative_path": "tests/test_toy100_accuracy.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_accuracy_cli.py": {
+      "bytes": 1914,
+      "sha256": "5b73c62c9be73710b33d49c8628727874cbd1d5aa3d67198e378d2ebb668058d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_accuracy_cli.py",
+      "source_relative_path": "tests/test_toy100_accuracy_cli.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_accuracy_evidence.py": {
+      "bytes": 2841,
+      "sha256": "9d37655a020534919a531d3f80d112f6c53d2c55c5b2ebcac8c86f09e416644d",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_accuracy_evidence.py",
+      "source_relative_path": "tests/test_toy100_accuracy_evidence.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_accuracy_gate.py": {
+      "bytes": 5971,
+      "sha256": "a279031ac1e724103c90a1677213c9b7886b330c829ae5d8af9e253b8b5746fa",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_accuracy_gate.py",
+      "source_relative_path": "tests/test_toy100_accuracy_gate.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_config.py": {
+      "bytes": 3754,
+      "sha256": "fe8531683a4a9bef6f1240d5a75d0b8b363b1437d2806b74f572242e5e8fd809",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_config.py",
+      "source_relative_path": "tests/test_toy100_config.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_device.py": {
+      "bytes": 4759,
+      "sha256": "2c44db3678cf5c024ccb66aba6bab4871bb25df7ea6199a43e3111bf4aec2b50",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_device.py",
+      "source_relative_path": "tests/test_toy100_device.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_fanin_probe.py": {
+      "bytes": 3224,
+      "sha256": "79ea0ea91ac42cd1a39f2e957fd68648d8503c0c82158ced59b0a3538ec57466",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_fanin_probe.py",
+      "source_relative_path": "tests/test_toy100_fanin_probe.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_full_prior_probe.py": {
+      "bytes": 2476,
+      "sha256": "e70090140e2ad1bc041effefb64b12679528706e8e9ccf90e34123f686e8cdbe",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_full_prior_probe.py",
+      "source_relative_path": "tests/test_toy100_full_prior_probe.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_gate.py": {
+      "bytes": 10506,
+      "sha256": "e89da3dc223bf135a090671d793af22d9b982b930b8afeb4ce70c0ce6a77c682",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_gate.py",
+      "source_relative_path": "tests/test_toy100_gate.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_geometry_policy.py": {
+      "bytes": 8703,
+      "sha256": "fa5ccd4fd08aa3046472f401d5b8d0fd133b789e9ad3bd7e2be5a775dc0d5ae9",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_geometry_policy.py",
+      "source_relative_path": "tests/test_toy100_geometry_policy.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_isolated_noise.py": {
+      "bytes": 11601,
+      "sha256": "44aa554a67fd5c94149d652538d81e09aeaa5bdf1e99ab60e26463cae1b7b8be",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_isolated_noise.py",
+      "source_relative_path": "tests/test_toy100_isolated_noise.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_learnable_noise.py": {
+      "bytes": 6667,
+      "sha256": "2f66ea93cd93a9e7213abc8f4a61c1bb904b0214994bd74bd4cb18cc3b2cc7b3",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_learnable_noise.py",
+      "source_relative_path": "tests/test_toy100_learnable_noise.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_metrics.py": {
+      "bytes": 5721,
+      "sha256": "3514e91b2002f66999a2de3178e4d96dc3d6cc9728e86c443eaf8a1ce7d067e9",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_metrics.py",
+      "source_relative_path": "tests/test_toy100_metrics.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_policy.py": {
+      "bytes": 19363,
+      "sha256": "03858a4408d21ea9a93d2214fa7bb2e37fb791d176beb03c85a7b92f23e2bc6c",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_policy.py",
+      "source_relative_path": "tests/test_toy100_policy.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy100_runner.py": {
+      "bytes": 8412,
+      "sha256": "3eb5781ead16b7a6969eaa66017e4641d4a2abd0df5a755a4df39928b1924e36",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy100_runner.py",
+      "source_relative_path": "tests/test_toy100_runner.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy_metrics.py": {
+      "bytes": 2349,
+      "sha256": "fb5104786c3f85db02e23965bb1eeaa87bd3d1dfa4c9eca116649dfdb55ca0d2",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy_metrics.py",
+      "source_relative_path": "tests/test_toy_metrics.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy_suite.py": {
+      "bytes": 58953,
+      "sha256": "ac27dcb71e0c94db147e304b4c25b373b55afc02169cfad44e68ab9b1d594638",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy_suite.py",
+      "source_relative_path": "tests/test_toy_suite.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_toy_suite_leaderboard.py": {
+      "bytes": 744,
+      "sha256": "a2f9cfd9a11afaa59cb8e3bc26ca4149ae46d1d63423bca5ff4c00a6d70179b4",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_toy_suite_leaderboard.py",
+      "source_relative_path": "tests/test_toy_suite_leaderboard.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_train_gym_transition.py": {
+      "bytes": 4390,
+      "sha256": "6369349a0d77f28bc1e994fba262ea642d00a4ec0065ace1989245f8c2d72f3b",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_train_gym_transition.py",
+      "source_relative_path": "tests/test_train_gym_transition.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_training.py": {
+      "bytes": 13022,
+      "sha256": "2b9dc1c2d5370853334848320b1d44d1336c6bcb2e87bf03f93414ad28867d63",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_training.py",
+      "source_relative_path": "tests/test_training.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_trajectory.py": {
+      "bytes": 8710,
+      "sha256": "4ac39877ab189c334dcc3fbdb0286d256efb531bb4ab9e15d870b58aaf7bdeb9",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_trajectory.py",
+      "source_relative_path": "tests/test_trajectory.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_transfer_image_tasks.py": {
+      "bytes": 5085,
+      "sha256": "57222b965af35a90d94854a975ee8122caae2c1501a43befe24640da4aa029f4",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_transfer_image_tasks.py",
+      "source_relative_path": "tests/test_transfer_image_tasks.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_transfer_output_rng.py": {
+      "bytes": 7094,
+      "sha256": "3def9f5efc865c3362d837e97bec903fa78aead420c58a41c68b803dbd671fb2",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_transfer_output_rng.py",
+      "source_relative_path": "tests/test_transfer_output_rng.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_transfer_protocol.py": {
+      "bytes": 5047,
+      "sha256": "7408f09933047e6456ff5f5a206e6f5df30ce4f4e7da51459c6963b34a0a9826",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_transfer_protocol.py",
+      "source_relative_path": "tests/test_transfer_protocol.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_transfer_stress_tasks.py": {
+      "bytes": 3999,
+      "sha256": "fca087703afa3970e14985367e11f68a19d82de0744efdf66a7e12c13c525a61",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_transfer_stress_tasks.py",
+      "source_relative_path": "tests/test_transfer_stress_tasks.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_transfer_suite.py": {
+      "bytes": 2696,
+      "sha256": "c7e7eb18f2e14d34dc90406f45f920436d56e3aeb3de57b2cc3ff22f9783b978",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_transfer_suite.py",
+      "source_relative_path": "tests/test_transfer_suite.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_transfer_vector_tasks.py": {
+      "bytes": 12167,
+      "sha256": "92b92446d0c38523e5c4403f981ea262848191afa77d8bc7ce8007fba572d164",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_transfer_vector_tasks.py",
+      "source_relative_path": "tests/test_transfer_vector_tasks.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_transition.py": {
+      "bytes": 14366,
+      "sha256": "542070e9235b0b84989b6673498343d2b76308ca4189f076a40866fa93b3b0a9",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_transition.py",
+      "source_relative_path": "tests/test_transition.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_transition_encoder.py": {
+      "bytes": 6170,
+      "sha256": "f82534db0d1ee4531b31ae364e91b9d5d3946b72307a0c6ef515adf157ae9013",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_transition_encoder.py",
+      "source_relative_path": "tests/test_transition_encoder.py"
+    },
+    "/ml2/hypergan/ParticleGAN-ra11-pr155/tests/test_yue2_particle_toy.py": {
+      "bytes": 911,
+      "sha256": "6ee4c5aeb0b09f0f243b94ffe285d3034b1d3d7b5efa456c2e35abb3be917843",
+      "snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/test_yue2_particle_toy.py",
+      "source_relative_path": "tests/test_yue2_particle_toy.py"
+    }
+  },
+  "model_calls": 0,
+  "original_f459_reference_scope_preserved": true,
+  "public_fixture": {
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/ra16-suite-source-snapshot/tests/fixtures/feature-auto-base.json",
+    "sha256": "9ae50f9fd0e903b7516ac04a72318ba79a35e52076393317511ec29ae19744b4"
+  },
+  "repository": "/ml2/hypergan/ParticleGAN-ra11-pr155",
+  "source_snapshots_match_every_completed_suite_declared_SHA": true,
+  "status": "PASS_EXACT_COMPLETED_SUITE_SOURCE_TESTS_FROM_IMMUTABLE_COMMIT",
+  "tensor_loads": 0
+}

@@ -1,0 +1,3801 @@
+{
+  "as_of_utc": "2026-10-03T20:33:00.444670+00:00",
+  "candidate": {
+    "explicit_task_exceptions": "Only source-bound task overrides recorded per case; no per-toy search.",
+    "family": "atlas",
+    "id": "atlas-c6-observed-policy-current-v1",
+    "revision": "e5679af1af7ea6d4b75ab50c4895f642b57a2517324861384971f93cb82c43f8",
+    "seed": 0,
+    "shared_overrides": {
+      "lr": 0.0053125,
+      "prior_lr_mult": 1.5
+    },
+    "task_cohort": "policy_selected_cloud_v1"
+  },
+  "completed_jobs": 13,
+  "costs": {
+    "charged_completed_terminal_seconds": 504.1727315648459,
+    "diagnostic_cap_seconds": 34800,
+    "full_defined_allowance_seconds": 45300,
+    "interruption_reserved_seconds": 0,
+    "live_attempt_cost_included": false,
+    "measured_completed_terminal_seconds": 504.1727315648459,
+    "ordinary_draft_cap_seconds": 44100,
+    "walltime_or_convergence_speed_ranking": false
+  },
+  "counts": {
+    "BLOCKED": 8,
+    "FAIL": 6,
+    "NOT_RUN": 5,
+    "PASS": 7
+  },
+  "counts_by_tier": {
+    "1": {
+      "BLOCKED": 3,
+      "FAIL": 2
+    },
+    "2": {
+      "BLOCKED": 5,
+      "FAIL": 4,
+      "NOT_RUN": 3,
+      "PASS": 7
+    },
+    "3": {
+      "NOT_RUN": 2
+    }
+  },
+  "executable_jobs": 17,
+  "executable_slots": 18,
+  "observed_findings": [
+    "All six failed toys fail every one of their 24 recorded complete checks; none has an acquisition confirmation.",
+    "Ring16 has 16 occupied modes and balanced mass, but poor precision and full-component covariance. Visible ring shape is insufficient.",
+    "Unequal-width and unequal-mass pass global transport, mass and precision but fail full-component covariance. Their clipped-core diagnostics are separate and do not replace the declared full-sample gate.",
+    "Bars4 has HQ=1 but only two qualifying modes; blobs4 has HQ=0 and nearly black outputs in the inspected original GIF.",
+    "Overlap first passes at150 but its retained passing suffix starts650; intensity first passes350 but its suffix starts425. Original suffix PASS does not certify uninterrupted hold after the first pass.",
+    "Every inspected observation reports actual selected source fast, reference kNN backend, controller DV12 and clean output-noise-off scoring; this is a prospective policy cohort, not historical Atlas19 or the C6 seed24002 cohort.",
+    "Two-pole primary target/sample visualization is materially unreadable due to the collapsed 1D display axis; retain its original GIF and add a separately bound observation-only supplement before calling that goal fully illustrated."
+  ],
+  "physical_gpu": "1",
+  "preparation": {
+    "bytes": 4312307,
+    "path": "/ml2/hypergan/.forge-atlas-current-gpu-diagnostics-20261003-native-v2.atlas-gpu-diagnostics.json",
+    "sha256": "64e5860749dc1ed556811fc27155184ffcb5f33275045f7e59c8e25ac318fd3b"
+  },
+  "recipes_by_sha256": {
+    "309f9ec454176a9123c2257ad9a77a74def48707188c4e4e02d3e03cd530d68d": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 32,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.0053125,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "atlas",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 32,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 1.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": false,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 8
+    },
+    "42c878377c3c42c7e3980af998d7068c12796084ebc156f4aee55354a6743cba": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 12,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.0053125,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "atlas",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 12,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 1.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": false,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 1
+    },
+    "58e0b1fead90cad16971542910f65ecb6d0eaaac5348233941d4211b20db8c8b": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 128,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.0053125,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "atlas",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 256,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 1.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": false,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    "f0225d5d2bf49dba7a753d90c4ce3aba771f0a4da6a2e10bd5ca6f73faa38ba9": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 128,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.0053125,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "atlas",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 12,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 1.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": false,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    "fc4b1625022daf0ae57ee6f98a49b7687ed216107abd9148b327b833d9891772": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 128,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.0053125,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "atlas",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 256,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 1.5,
+      "prior_reg": 0.05,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": false,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    }
+  },
+  "recommended_next_action": "Root may publish this partial cut with the full26 denominator and paired bounds/GIFs. Preserve all raw science. Await the next root-announced immutable job boundary; do not retry, tune, infer native outcomes, or extend schedules.",
+  "records": [
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 55.0
+      },
+      "charged_seconds": 17.982926624128595,
+      "completed_steps": 80,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_diagnostics": {},
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [
+        {
+          "actual_recorded_value": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "declared_value": null,
+          "field": "alpha_bar",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": 12,
+          "declared_value": null,
+          "field": "batch_size",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": "scalar",
+          "declared_value": null,
+          "field": "conditioning",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": "sum",
+          "declared_value": null,
+          "field": "distance_reduction",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": "none",
+          "declared_value": null,
+          "field": "encoder_mode",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": "gan",
+          "declared_value": null,
+          "field": "model",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": null,
+          "declared_value": null,
+          "field": "num_classes",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": 12,
+          "declared_value": null,
+          "field": "num_particles",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": 0.03,
+          "declared_value": null,
+          "field": "observation_sigma",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": 0.0,
+          "declared_value": null,
+          "field": "prior_reg",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": 1.0,
+          "declared_value": null,
+          "field": "reconstruction_weight",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": 0.25,
+          "declared_value": null,
+          "field": "routing_temperature",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": "class",
+          "declared_value": null,
+          "field": "ucd_target",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": 0.02,
+          "declared_value": null,
+          "field": "ucd_weight",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        },
+        {
+          "actual_recorded_value": 1,
+          "declared_value": null,
+          "field": "z_dim",
+          "limitation": "Unresolved planning ownership placeholder; the applied Recipe is recorded separately."
+        }
+      ],
+      "gates": [
+        {
+          "first_recorded": 0.03270360082387924,
+          "margin": -0.2863302186131477,
+          "maximum_recorded": 0.03893222287297249,
+          "metric": "mean_abs",
+          "minimum_recorded": 0.005151970777660608,
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.3,
+          "value": 0.013669781386852264
+        },
+        {
+          "first_recorded": 0.030048541724681854,
+          "margin": 0.9798786118626595,
+          "maximum_recorded": 0.031711190938949585,
+          "metric": "grad_med",
+          "minimum_recorded": 0.0005953311920166016,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 1.0,
+          "value": 0.020121388137340546
+        }
+      ],
+      "id": "two_pole_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          4,
+          14,
+          24,
+          34,
+          44,
+          50,
+          60,
+          70,
+          80
+        ],
+        "dimensions": [
+          920,
+          556
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Padding 1D y=0 plus equal aspect collapses the target/sample axis to a near-zero-height line; critic-gradient bars remain readable.",
+        "primary_probe_readability": "NEEDS_SUPPLEMENT"
+      },
+      "observation_steps": [
+        4,
+        7,
+        10,
+        14,
+        17,
+        20,
+        24,
+        27,
+        30,
+        34,
+        37,
+        40,
+        44,
+        47,
+        50,
+        54,
+        57,
+        60,
+        64,
+        67,
+        70,
+        74,
+        77,
+        80
+      ],
+      "observations": 24,
+      "parent_id": "two_pole",
+      "parent_identity": {
+        "evaluation_fingerprint": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+        "execution_fingerprint": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83",
+        "id": "two_pole",
+        "task_sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5"
+      },
+      "pins": {
+        "artifact_bytes": 91741,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "6928e4a6003549f0c0c4efcf095b3bb99b83490599aacdbed1eae98d8830cdde",
+        "gif": {
+          "bytes": 316253,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/two_pole_policy_selected_cloud_v1-goal.gif",
+          "sha256": "170b703f6c4a8e98c1d35a20d923cd1146579861428db4cd734e4f9bd9319b38"
+        },
+        "grading": {
+          "bytes": 2079,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "d4135bc991c02034727e1f6e49b5020fcc58b0f4f813b26cdb56726b9aecbe66"
+        },
+        "media_receipt": {
+          "bytes": 3411,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/two_pole_policy_selected_cloud_v1-media.json",
+          "sha256": "b689feb656caa70539f42f45573f2c79742d5716f8e5963b193fdb024d0a510c"
+        },
+        "raw": {
+          "bytes": 146695,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "f45387bc30d4f84a9a3c7a1837ebea24d1211c5d1a6bd2214eca61a9fd2646de"
+        },
+        "resolved": {
+          "bytes": 6219107,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/resolved.json",
+          "sha256": "42281fb4bd5061240d54257aa9ef77257ba055e20fadd2d47fe5f6fcaa462076"
+        },
+        "state_opaque": {
+          "bytes": 65586,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/state.pt",
+          "sha256": "af2b8bdefce5a720dd5916d903b859468cea2db216a11ec990ae3475a9fd4318"
+        },
+        "supervisor_terminal": {
+          "bytes": 151,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/277fcfd1d40b88f830d2311021243f644d43e6e5806923600689c269fa162f49/supervisor-terminal.json",
+          "sha256": "6f56943d915b6aeee30956fe50ff578dd3819a75d2bed839f74c87c5e01cb09f"
+        }
+      },
+      "qualification_input": false,
+      "question": "Do the 12 direct particles travel from the origin (mean absolute position >=.3) while median absolute critic slope remains <=1 within80 updates? This does not gate both-pole balance or complete distribution recovery.",
+      "recipe_pointer_in_raw": "/applied/recipe",
+      "recipe_sha256": "42c878377c3c42c7e3980af998d7068c12796084ebc156f4aee55354a6743cba",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "learned_particles_and_critic_gradient",
+        "output_noise": "not_applied_to_measurement",
+        "sample_counts": [],
+        "weights": "state_selected"
+      },
+      "scientific_status": "FAIL",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 80,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 80,
+      "task_definition_sha256": "7de61994b6c7d29532cb428977455bc1b454ed4cb99da1530c66c632d3fb179c",
+      "task_recipe_overrides": {},
+      "task_recipe_overrides_provenance": null,
+      "terminal_paid_seconds": 17.982926624128595,
+      "tier": 1
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 55.0
+      },
+      "charged_seconds": 26.85916006891057,
+      "completed_steps": 400,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_diagnostics": {
+        "component_core_covariance_error": 1.050946218892932,
+        "component_core_covariance_errors": [
+          0.9030125141143799,
+          1.2139734029769897,
+          1.299479603767395,
+          1.3291188478469849,
+          1.1653305292129517,
+          1.0020815134048462,
+          1.0028903484344482,
+          1.6876399517059326,
+          1.866684079170227,
+          0.547294557094574,
+          0.5007852911949158,
+          0.9887708425521851,
+          0.40861085057258606,
+          0.9715521335601807,
+          1.1108046770095825,
+          0.8171103596687317
+        ],
+        "component_counts": [
+          225,
+          296,
+          243,
+          290,
+          258,
+          275,
+          213,
+          280,
+          272,
+          208,
+          235,
+          248,
+          265,
+          230,
+          280,
+          278
+        ],
+        "component_covariance_errors": [
+          3.4169774055480957,
+          3.924543857574463,
+          5.090020179748535,
+          5.580592155456543,
+          4.524930477142334,
+          3.7913315296173096,
+          3.5153121948242188,
+          4.630575180053711,
+          5.8267998695373535,
+          5.817726135253906,
+          2.778867483139038,
+          3.453319549560547,
+          4.004637241363525,
+          4.575865268707275,
+          3.8338470458984375,
+          3.232578754425049
+        ],
+        "component_mass": [
+          0.054931640625,
+          0.072265625,
+          0.059326171875,
+          0.07080078125,
+          0.06298828125,
+          0.067138671875,
+          0.052001953125,
+          0.068359375,
+          0.06640625,
+          0.05078125,
+          0.057373046875,
+          0.060546875,
+          0.064697265625,
+          0.05615234375,
+          0.068359375,
+          0.06787109375
+        ],
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 4096,
+          "margin": 0,
+          "maximum_recorded": 4096,
+          "metric": "sample_count",
+          "minimum_recorded": 4096,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 4096,
+          "value": 4096
+        },
+        {
+          "first_recorded": 0,
+          "margin": 0,
+          "maximum_recorded": 16,
+          "metric": "modes",
+          "minimum_recorded": 0,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 16,
+          "value": 16
+        },
+        {
+          "first_recorded": 0.2177734375,
+          "margin": 0.10361328125,
+          "maximum_recorded": 0.2177734375,
+          "metric": "mass_tv",
+          "minimum_recorded": 0.045166015625,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.04638671875
+        },
+        {
+          "first_recorded": 0.053466796875,
+          "margin": -0.324609375,
+          "maximum_recorded": 0.646240234375,
+          "metric": "hq",
+          "minimum_recorded": 0.053466796875,
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 0.525390625
+        },
+        {
+          "first_recorded": 202.97837448120117,
+          "margin": -3.3998702704906463,
+          "maximum_recorded": 202.97837448120117,
+          "metric": "component_covariance_error",
+          "minimum_recorded": 4.236661657691002,
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 4.249870270490646
+        },
+        {
+          "first_recorded": 11.348471641540527,
+          "margin": 1.4149546384811402,
+          "maximum_recorded": 11.348471641540527,
+          "metric": "component_min_eigen_ratio",
+          "minimum_recorded": 1.5649546384811401,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 1.5649546384811401
+        }
+      ],
+      "id": "ring16_acquisition_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          17,
+          67,
+          117,
+          167,
+          217,
+          250,
+          300,
+          350,
+          400
+        ],
+        "dimensions": [
+          460,
+          696
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Declared means/centerline are the visual reference; covariance and mass fidelity require the linked recorded gates.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        17,
+        34,
+        50,
+        67,
+        84,
+        100,
+        117,
+        134,
+        150,
+        167,
+        184,
+        200,
+        217,
+        234,
+        250,
+        267,
+        284,
+        300,
+        317,
+        334,
+        350,
+        367,
+        384,
+        400
+      ],
+      "observations": 24,
+      "parent_id": "ring16_acquisition",
+      "parent_identity": {
+        "evaluation_fingerprint": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+        "execution_fingerprint": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996",
+        "id": "ring16_acquisition",
+        "task_sha256": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+      },
+      "pins": {
+        "artifact_bytes": 1226114,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "93ca5dba4b918860cef0ccdcfdb5dda2305fb7edd2e69e9509cd2e75be441c77",
+        "gif": {
+          "bytes": 302672,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/ring16_acquisition_policy_selected_cloud_v1/ring16_acquisition_policy_selected_cloud_v1-goal.gif",
+          "sha256": "c94bcbe5cebf64af946ba8e4be16728cd11a1986767194f00e155a4d9a399d01"
+        },
+        "grading": {
+          "bytes": 7360,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/ring16_acquisition_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "d35e692e0449190e64ecd2730d491469f365fd71f1e86ae74f9694d2b96076db"
+        },
+        "media_receipt": {
+          "bytes": 3557,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/ring16_acquisition_policy_selected_cloud_v1/ring16_acquisition_policy_selected_cloud_v1-media.json",
+          "sha256": "8320364979d5340e923f09d467ae96daf8752b6e3411c9b010c2cdd000a95be4"
+        },
+        "raw": {
+          "bytes": 285306,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/ring16_acquisition_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "29e4ff16d4ec67fdd5b8389c12b58e999c9490b6442486bcf4589d81df9ded72"
+        },
+        "resolved": {
+          "bytes": 6219167,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/ring16_acquisition_policy_selected_cloud_v1/resolved.json",
+          "sha256": "2215eaa3132015ce4ec2e66aa2720edf8bdb4aea6890227bd5ee20313a28bea7"
+        },
+        "state_opaque": {
+          "bytes": 495291,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/ring16_acquisition_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "c9136ad3ec9776a28ed7ded877a30e18d2a24bd59d834dffd69ff798a482989b"
+        },
+        "supervisor_terminal": {
+          "bytes": 150,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/4b81ba93b132a506b78132db0d377637cccbd901f1710bd2c8d698fc275b4f92/supervisor-terminal.json",
+          "sha256": "5fc04e5830d3ea4d96ec797d4562c5712afc0b7f8023fa9dd16f35e81aae6c7b"
+        }
+      },
+      "qualification_input": false,
+      "question": "Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase.",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "58e0b1fead90cad16971542910f65ecb6d0eaaac5348233941d4211b20db8c8b",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "public_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [
+          4096
+        ],
+        "weights": "state_selected"
+      },
+      "scientific_status": "FAIL",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 400,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 400,
+      "task_definition_sha256": "14210be9a058abd9a6db317a55a1f34b050a9991fa604e06920bf8e2dd147cb4",
+      "task_recipe_overrides": {},
+      "task_recipe_overrides_provenance": null,
+      "terminal_paid_seconds": 26.85916006891057,
+      "tier": 1
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 57.0
+      },
+      "charged_seconds": 53.21107015106827,
+      "completed_steps": 1200,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 1000,
+        "first_pass_step": 800,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 9,
+        "passing_suffix": 9,
+        "stable_from_seconds": null,
+        "stable_from_step": 800
+      },
+      "endpoint_diagnostics": {},
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 1,
+          "margin": 0,
+          "maximum_recorded": 8,
+          "metric": "modes",
+          "minimum_recorded": 1,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 8,
+          "value": 8
+        },
+        {
+          "first_recorded": 0.00244140625,
+          "margin": 0.07924804687499998,
+          "maximum_recorded": 0.986083984375,
+          "metric": "hq",
+          "minimum_recorded": 0.00244140625,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.9,
+          "value": 0.979248046875
+        }
+      ],
+      "id": "mode_hold_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          50,
+          200,
+          350,
+          500,
+          650,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "dimensions": [
+          460,
+          630
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Declared means/centerline are the visual reference; covariance and mass fidelity require the linked recorded gates.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "observations": 24,
+      "parent_id": "mode_hold",
+      "parent_identity": {
+        "evaluation_fingerprint": "2ff79602c67d23a79f4d744ee150d324fcd2f52204b37e036c4409e7d16bf5ac",
+        "execution_fingerprint": "7d66fc1f094499445cdf8c5a608a757980c1622f9620dc87ea541bd480b78bac",
+        "id": "mode_hold",
+        "task_sha256": "79e11760a8851a65f3739775b5e4041bacb0a79050e8e21f52ad1eb9500435f5"
+      },
+      "pins": {
+        "artifact_bytes": 2085520,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "22638a7a17ad60a923282e86b1ce08d9a76a7bea377698f11f781b9d906040ba",
+        "gif": {
+          "bytes": 238886,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/mode_hold_policy_selected_cloud_v1/mode_hold_policy_selected_cloud_v1-goal.gif",
+          "sha256": "a5a5ef5aa462aa752bb8c11ebc1ef54c0b6a3d123bdbfd1403a5c5c8b8ac553b"
+        },
+        "grading": {
+          "bytes": 2079,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/mode_hold_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "23c02b5aebd207d1c1f57477fb6ddaa6a0b86b93ac9869329bb3d4f32270f1d5"
+        },
+        "media_receipt": {
+          "bytes": 3452,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/mode_hold_policy_selected_cloud_v1/mode_hold_policy_selected_cloud_v1-media.json",
+          "sha256": "00c74978e658306bdcbffe1e3721818a062fdd630ead5799fe5cde19ef0695fe"
+        },
+        "raw": {
+          "bytes": 163411,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/mode_hold_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "29064a031afccb1dbd9306f897d5782b0d445ab1fd8f828c7190e13ec1e3a738"
+        },
+        "resolved": {
+          "bytes": 6219114,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/mode_hold_policy_selected_cloud_v1/resolved.json",
+          "sha256": "51bf8a1bf9a119f0396eb50e50e4f383faed30d349957fd7927b85140832b874"
+        },
+        "state_opaque": {
+          "bytes": 1353831,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/mode_hold_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "3c853d820d3a6fa7debd27fe9ae6d4cbe72cb54e52e8d9c60f60fabf48268e40"
+        },
+        "supervisor_terminal": {
+          "bytes": 150,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9d9971501effdaec95817827f4d1aa699d6c73a98463f72f4c22d66a100abb49/supervisor-terminal.json",
+          "sha256": "393c009c16cc802839737c19a1d6c6c694c5422b9f2cca3a88c58f7b25b5d843"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: modes >= 8; hq >= 0.9",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "f0225d5d2bf49dba7a753d90c4ce3aba771f0a4da6a2e10bd5ca6f73faa38ba9",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "public_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [],
+        "weights": "state_selected"
+      },
+      "scientific_status": "PASS",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 1200,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 1200,
+      "task_definition_sha256": "f407c5668061a4de22ddbb81aa237352e96138971833f3e7cbe8bea94f363c86",
+      "task_recipe_overrides": {},
+      "task_recipe_overrides_provenance": null,
+      "terminal_paid_seconds": 53.21107015106827,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 62.0
+      },
+      "charged_seconds": 47.39826455200091,
+      "completed_steps": 1200,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 300,
+        "first_pass_step": 100,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 23,
+        "passing_suffix": 23,
+        "stable_from_seconds": null,
+        "stable_from_step": 100
+      },
+      "endpoint_diagnostics": {
+        "component_core_covariance_error": 0.11846837028861046,
+        "component_core_covariance_errors": [
+          0.12283134460449219,
+          0.11410539597272873
+        ],
+        "component_counts": [
+          1987,
+          2109
+        ],
+        "component_covariance_errors": [
+          0.29612138867378235,
+          0.10229592770338058
+        ],
+        "component_mass": [
+          0.485107421875,
+          0.514892578125
+        ],
+        "component_resolved": [
+          true,
+          true
+        ]
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0.12396211511963126,
+          "margin": 0.14837233192959148,
+          "maximum_recorded": 0.12396211511963126,
+          "metric": "sw1_normalized",
+          "minimum_recorded": 0.021185249329534358,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.18,
+          "value": 0.03162766807040852
+        },
+        {
+          "first_recorded": 0.048828125,
+          "margin": 0.135107421875,
+          "maximum_recorded": 0.048828125,
+          "metric": "mass_tv",
+          "minimum_recorded": 0.00048828125,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.014892578125
+        },
+        {
+          "first_recorded": 0.864501953125,
+          "margin": 0.13022460937500002,
+          "maximum_recorded": 0.986083984375,
+          "metric": "hq",
+          "minimum_recorded": 0.864501953125,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.85,
+          "value": 0.980224609375
+        },
+        {
+          "first_recorded": 1.2624454498291016,
+          "margin": 0.6507913418114185,
+          "maximum_recorded": 1.2624454498291016,
+          "metric": "component_covariance_error",
+          "minimum_recorded": 0.13692179694771767,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.85,
+          "value": 0.19920865818858147
+        },
+        {
+          "first_recorded": 0.8437829613685608,
+          "margin": 0.7892083287239074,
+          "maximum_recorded": 1.0537489652633667,
+          "metric": "component_min_eigen_ratio",
+          "minimum_recorded": 0.7236628532409668,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.9392083287239075
+        }
+      ],
+      "id": "vector_two_broad_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          50,
+          200,
+          350,
+          500,
+          650,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "dimensions": [
+          460,
+          677
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Declared means/centerline are the visual reference; covariance and mass fidelity require the linked recorded gates.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "observations": 24,
+      "parent_id": "vector_two_broad",
+      "parent_identity": {
+        "evaluation_fingerprint": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+        "execution_fingerprint": "3b132eedc3306811609231c7751ff6395b89b8695b6b5f3a688de3509a3737a1",
+        "id": "vector_two_broad",
+        "task_sha256": "7239390e9da217364f4142d0a90afd60e75317cd5fe362efb9b0e68d0e1bccab"
+      },
+      "pins": {
+        "artifact_bytes": 1174098,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "078fe9517e7ea8f241ad18b9b8cdae552e471731f00231a14f31908e695358d3",
+        "gif": {
+          "bytes": 291587,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_two_broad_policy_selected_cloud_v1/vector_two_broad_policy_selected_cloud_v1-goal.gif",
+          "sha256": "fe4af38b3b361fdbefc22f14878cc01305e337bccde3e38237b95e692573b102"
+        },
+        "grading": {
+          "bytes": 4233,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_two_broad_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "e3f1ea0b8da89e23f03fcfe8909cd695711198e888e46d5654512a6cc1b01f06"
+        },
+        "media_receipt": {
+          "bytes": 3536,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_two_broad_policy_selected_cloud_v1/vector_two_broad_policy_selected_cloud_v1-media.json",
+          "sha256": "e82d4adb319868daac8fbf8e452062c10d5374090fe396e597ee0e02e074f014"
+        },
+        "raw": {
+          "bytes": 206651,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_two_broad_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "95afcae32c61183fe930991c6a8e1f66686e15adf0287db729695e9136b2d348"
+        },
+        "resolved": {
+          "bytes": 6219156,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_two_broad_policy_selected_cloud_v1/resolved.json",
+          "sha256": "5c437016846d41ee9d17aa4964b303526747dfad7cbd7d02cae8b10e3a9bb381"
+        },
+        "state_opaque": {
+          "bytes": 439987,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_two_broad_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "71607be4007af3471d387fe2ea7f5fbac4e3aba69ff057a57c66f105994db376"
+        },
+        "supervisor_terminal": {
+          "bytes": 150,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/7005267ad7c8a3fd215214fcec8f11b484369352645462984b0d5951d730f83f/supervisor-terminal.json",
+          "sha256": "a0c0958d158e90779fde8cc8bbd4933ee4d8e542bb4ba07b594d39cb31a87a5f"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: sw1_normalized <= 0.18; mass_tv <= 0.15; hq >= 0.85; component_covariance_error <= 0.85; component_min_eigen_ratio >= 0.15",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "fc4b1625022daf0ae57ee6f98a49b7687ed216107abd9148b327b833d9891772",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "public_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [
+          4096
+        ],
+        "weights": "state_selected"
+      },
+      "scientific_status": "PASS",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 1200,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 1200,
+      "task_definition_sha256": "d29bda7f64155d0743f25f95bce87f5a7791de473b446203c8812dfa45163f05",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "prior_reg": 0.05
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-vector",
+        "reference_recipe_sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 47.39826455200091,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 65.0
+      },
+      "charged_seconds": 47.76538762403652,
+      "completed_steps": 1200,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_diagnostics": {
+        "component_core_covariance_error": 0.47568611800670624,
+        "component_core_covariance_errors": [
+          0.22117628157138824,
+          0.5950783491134644,
+          0.24097095429897308,
+          0.8455188870429993
+        ],
+        "component_counts": [
+          2346,
+          1178,
+          474,
+          98
+        ],
+        "component_covariance_errors": [
+          0.8478944301605225,
+          0.5230907797813416,
+          0.17878375947475433,
+          1.8988990783691406
+        ],
+        "component_mass": [
+          0.57275390625,
+          0.28759765625,
+          0.11572265625,
+          0.02392578125
+        ],
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ]
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0.1935032600244269,
+          "margin": 0.14242018487870406,
+          "maximum_recorded": 0.1935032600244269,
+          "metric": "sw1_normalized",
+          "minimum_recorded": 0.02479225284712188,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.18,
+          "value": 0.03757981512129595
+        },
+        {
+          "first_recorded": 0.05336915701627731,
+          "margin": 0.12332031466066837,
+          "maximum_recorded": 0.05336915701627731,
+          "metric": "mass_tv",
+          "minimum_recorded": 0.012792954221367836,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.026679685339331627
+        },
+        {
+          "first_recorded": 0.4013671875,
+          "margin": 0.12998046875000002,
+          "maximum_recorded": 0.97998046875,
+          "metric": "hq",
+          "minimum_recorded": 0.4013671875,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.85,
+          "value": 0.97998046875
+        },
+        {
+          "first_recorded": 12.277478456497192,
+          "margin": -0.012167011946439765,
+          "maximum_recorded": 18.40300065279007,
+          "metric": "component_covariance_error",
+          "minimum_recorded": 0.8621670119464397,
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 0.8621670119464397
+        },
+        {
+          "first_recorded": 4.00781774520874,
+          "margin": 0.11254922151565552,
+          "maximum_recorded": 4.00781774520874,
+          "metric": "component_min_eigen_ratio",
+          "minimum_recorded": 0.2625492215156555,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.2625492215156555
+        },
+        {
+          "first_recorded": 0.8854166269302368,
+          "margin": 0.6401743292808533,
+          "maximum_recorded": 0.9423827528953552,
+          "metric": "min_mass_ratio",
+          "minimum_recorded": 0.3662109375,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.25,
+          "value": 0.8901743292808533
+        }
+      ],
+      "id": "vector_unequal_mass_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          50,
+          200,
+          350,
+          500,
+          650,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "dimensions": [
+          460,
+          713
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Declared means/centerline are the visual reference; covariance and mass fidelity require the linked recorded gates.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "observations": 24,
+      "parent_id": "vector_unequal_mass",
+      "parent_identity": {
+        "evaluation_fingerprint": "544fa234382ae0154133b3f5fe468d69a47098018e53175cfd009a41375350f1",
+        "execution_fingerprint": "ae3ebee9a498a6cbaa4397bfd36f80fbda49e35831ad563a24e982687617a432",
+        "id": "vector_unequal_mass",
+        "task_sha256": "ea1b35df2bd0ab55b50d47ade00a758775d29130641fc1e76db28c03009164ff"
+      },
+      "pins": {
+        "artifact_bytes": 1191686,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "0025883fa78033f1aa1d5153aea1b5546c3d4266f0af20b0a635f3b9543b4626",
+        "gif": {
+          "bytes": 300229,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_mass_policy_selected_cloud_v1/vector_unequal_mass_policy_selected_cloud_v1-goal.gif",
+          "sha256": "230883b5c3e2003866edcb408ceddac07c8236626218cb142747741ca7a928ed"
+        },
+        "grading": {
+          "bytes": 4960,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_mass_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "77fb8fc83ed29ce7e20d632451f2364f6a1bbffd4ed6c21c4bffa38ffa25d5cb"
+        },
+        "media_receipt": {
+          "bytes": 3572,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_mass_policy_selected_cloud_v1/vector_unequal_mass_policy_selected_cloud_v1-media.json",
+          "sha256": "e3b804c2b5789d4b45d7db5016343b53ea9c422b8a255fa881db9802a2b7953c"
+        },
+        "raw": {
+          "bytes": 218988,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_mass_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "72d61f3ee8cbe36255ba8b842229f468c6886de78ccbba14bf480c30cb22954c"
+        },
+        "resolved": {
+          "bytes": 6219174,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_mass_policy_selected_cloud_v1/resolved.json",
+          "sha256": "6ffc46bf32169bf9fc8d51f7d3af3cfa45dba708a8172d7e8f4d11df5b8fbe58"
+        },
+        "state_opaque": {
+          "bytes": 501795,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_mass_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "834105c323f6af068352e5ccf732934dfe851ac72af6bcce3675da7fe2c73967"
+        },
+        "supervisor_terminal": {
+          "bytes": 150,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/d523198d0eadc4eb56f0fc37911ac9625b27ea8a94ad11e5afa5f1ff828f9067/supervisor-terminal.json",
+          "sha256": "4c107bdb2580fd06e0cc9519f242be53342580be4d84f18112e37371f88a2e58"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: sw1_normalized <= 0.18; mass_tv <= 0.15; hq >= 0.85; component_covariance_error <= 0.85; component_min_eigen_ratio >= 0.15; min_mass_ratio >= 0.25",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "fc4b1625022daf0ae57ee6f98a49b7687ed216107abd9148b327b833d9891772",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "public_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [
+          4096
+        ],
+        "weights": "state_selected"
+      },
+      "scientific_status": "FAIL",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 1200,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 1200,
+      "task_definition_sha256": "6205193592d02d5ee3927e9a5dfa678e5cf16c08d0156aac7d756b18b03653b1",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "prior_reg": 0.05
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-vector",
+        "reference_recipe_sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 47.76538762403652,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 67.0
+      },
+      "charged_seconds": 46.2031531019602,
+      "completed_steps": 1200,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_diagnostics": {
+        "component_core_covariance_error": 0.20480960537679493,
+        "component_core_covariance_errors": [
+          0.31705543398857117,
+          0.2244361937046051,
+          0.2646627128124237,
+          0.013084081001579762
+        ],
+        "component_counts": [
+          935,
+          1036,
+          1056,
+          1069
+        ],
+        "component_covariance_errors": [
+          10.58568000793457,
+          4.096225261688232,
+          0.9940967559814453,
+          0.10187600553035736
+        ],
+        "component_mass": [
+          0.228271484375,
+          0.2529296875,
+          0.2578125,
+          0.260986328125
+        ],
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0.186155890707018,
+          "margin": 0.12503857610286692,
+          "maximum_recorded": 0.186155890707018,
+          "metric": "sw1_normalized",
+          "minimum_recorded": 0.03691835224764485,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.18,
+          "value": 0.05496142389713307
+        },
+        {
+          "first_recorded": 0.087158203125,
+          "margin": 0.128271484375,
+          "maximum_recorded": 0.087158203125,
+          "metric": "mass_tv",
+          "minimum_recorded": 0.007568359375,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.021728515625
+        },
+        {
+          "first_recorded": 0.3076171875,
+          "margin": 0.09311523437500002,
+          "maximum_recorded": 0.943115234375,
+          "metric": "hq",
+          "minimum_recorded": 0.3076171875,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.85,
+          "value": 0.943115234375
+        },
+        {
+          "first_recorded": 26.501399636268616,
+          "margin": -3.0944695077836513,
+          "maximum_recorded": 26.501399636268616,
+          "metric": "component_covariance_error",
+          "minimum_recorded": 3.9444695077836514,
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 3.9444695077836514
+        },
+        {
+          "first_recorded": 5.204409122467041,
+          "margin": 0.6674205422401428,
+          "maximum_recorded": 5.204409122467041,
+          "metric": "component_min_eigen_ratio",
+          "minimum_recorded": 0.8174205422401428,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.8174205422401428
+        }
+      ],
+      "id": "vector_unequal_width_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          50,
+          200,
+          350,
+          500,
+          650,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "dimensions": [
+          460,
+          713
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Declared means/centerline are the visual reference; covariance and mass fidelity require the linked recorded gates.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "observations": 24,
+      "parent_id": "vector_unequal_width",
+      "parent_identity": {
+        "evaluation_fingerprint": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+        "execution_fingerprint": "58ff8fb230c73346cdba79289903881b5ef6a996c4474bff157d280921bcc26b",
+        "id": "vector_unequal_width",
+        "task_sha256": "e3f18fe65e198563908aa1b2b68a76bf46398427037cddffef4b42e0cd3d0c8f"
+      },
+      "pins": {
+        "artifact_bytes": 1159185,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "9c9d8708d978b3e1a88458c77a10da6e313cb08e2c3b1d0dbf077710da92a1ac",
+        "gif": {
+          "bytes": 321219,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_width_policy_selected_cloud_v1/vector_unequal_width_policy_selected_cloud_v1-goal.gif",
+          "sha256": "572a4a71f5ba374c959986ce0fe921915e4ee530efc821af7ea7d295eccdaefb"
+        },
+        "grading": {
+          "bytes": 4606,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_width_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "2b7c2b1d010960ac0f63ffc1ebbcc039bbe3c4f21e4eea7f84979c8d27b38db2"
+        },
+        "media_receipt": {
+          "bytes": 3584,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_width_policy_selected_cloud_v1/vector_unequal_width_policy_selected_cloud_v1-media.json",
+          "sha256": "9bca1b0abf1be601e2d33456e77c0766cb4cb3f9a10b4a8bc78ad009499b144d"
+        },
+        "raw": {
+          "bytes": 218501,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_width_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "af1aec0e972043053844acfdea46012418577f2946980c09799c4e88de1a2ad6"
+        },
+        "resolved": {
+          "bytes": 6219180,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_width_policy_selected_cloud_v1/resolved.json",
+          "sha256": "69892113ec5e8795e53c1e3718adfada0bfdf49c5ccf8ff6d47c8971e6eebdbe"
+        },
+        "state_opaque": {
+          "bytes": 461447,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_unequal_width_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "6f94aa892d4d5eeeb1856bc0506839c5aa044aaccf3286ba33bc6ffeb1323721"
+        },
+        "supervisor_terminal": {
+          "bytes": 149,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/aec802158365cfc91bd93cc5314f7245cfaa62b5a67a97fc8b2af13c53094912/supervisor-terminal.json",
+          "sha256": "daf01a4a9d877c659407652891222a7a47dfb155c927ef1f5611c5826584bcbd"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: sw1_normalized <= 0.18; mass_tv <= 0.15; hq >= 0.85; component_covariance_error <= 0.85; component_min_eigen_ratio >= 0.15",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "fc4b1625022daf0ae57ee6f98a49b7687ed216107abd9148b327b833d9891772",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "public_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [
+          4096
+        ],
+        "weights": "state_selected"
+      },
+      "scientific_status": "FAIL",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 1200,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 1200,
+      "task_definition_sha256": "29f88504beeafe174fae3319e34ae39d239fa5f64fcf678d4da8d165453fb408",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "prior_reg": 0.05
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-vector",
+        "reference_recipe_sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 46.2031531019602,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 67.0
+      },
+      "charged_seconds": 43.36943912599236,
+      "completed_steps": 1200,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 500,
+        "first_pass_step": 300,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 19,
+        "passing_suffix": 19,
+        "stable_from_seconds": null,
+        "stable_from_step": 300
+      },
+      "endpoint_diagnostics": {
+        "component_core_covariance_error": 0.1391670530041059,
+        "component_core_covariance_errors": [
+          0.09411158412694931,
+          0.0934106707572937,
+          0.22997890412807465
+        ],
+        "component_counts": [
+          1450,
+          1471,
+          1175
+        ],
+        "component_covariance_errors": [
+          0.020293574780225754,
+          0.02674948237836361,
+          0.23049746453762054
+        ],
+        "component_mass": [
+          0.35400390625,
+          0.359130859375,
+          0.286865234375
+        ],
+        "component_resolved": [
+          true,
+          true,
+          true
+        ]
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0.16088790634564146,
+          "margin": 0.14094225494320523,
+          "maximum_recorded": 0.16088790634564146,
+          "metric": "sw1_normalized",
+          "minimum_recorded": 0.024995187498885504,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.18,
+          "value": 0.039057745056794775
+        },
+        {
+          "first_recorded": 0.009847000241279602,
+          "margin": 0.10353190600872039,
+          "maximum_recorded": 0.0558268278837204,
+          "metric": "mass_tv",
+          "minimum_recorded": 0.009847000241279602,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.0464680939912796
+        },
+        {
+          "first_recorded": 0.353759765625,
+          "margin": 0.12338867187500002,
+          "maximum_recorded": 0.97607421875,
+          "metric": "hq",
+          "minimum_recorded": 0.353759765625,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.85,
+          "value": 0.973388671875
+        },
+        {
+          "first_recorded": 13.7414501508077,
+          "margin": 0.75748649276793,
+          "maximum_recorded": 13.7414501508077,
+          "metric": "component_covariance_error",
+          "minimum_recorded": 0.04095246953268846,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.85,
+          "value": 0.09251350723206997
+        },
+        {
+          "first_recorded": 3.382619857788086,
+          "margin": 0.585098123550415,
+          "maximum_recorded": 3.382619857788086,
+          "metric": "component_min_eigen_ratio",
+          "minimum_recorded": 0.27957582473754883,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.735098123550415
+        }
+      ],
+      "id": "vector_anisotropic_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          50,
+          200,
+          350,
+          500,
+          650,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "dimensions": [
+          460,
+          696
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Declared means/centerline are the visual reference; covariance and mass fidelity require the linked recorded gates.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "observations": 24,
+      "parent_id": "vector_anisotropic",
+      "parent_identity": {
+        "evaluation_fingerprint": "198e23ac1327240f43d77e8b20baad29f418610e4940478bb12adcb6de07efe7",
+        "execution_fingerprint": "1860798b210fdb571dbfd3e1ec9fa729a7276a2a4352fb3be5aa164960f17a87",
+        "id": "vector_anisotropic",
+        "task_sha256": "e98512a93ba2d3a10a5fe6640cf74c5d22f88f917e9a5cf313302cc4aed1a24b"
+      },
+      "pins": {
+        "artifact_bytes": 1193097,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "31291e4dcba56d4c56a5a571d61fbc94a87a511540eaeb3f8e380c41288657dd",
+        "gif": {
+          "bytes": 280145,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_anisotropic_policy_selected_cloud_v1/vector_anisotropic_policy_selected_cloud_v1-goal.gif",
+          "sha256": "fe25ab1135be02aed6131e9c513f9c4bea483beeb80af969fb3aa52aeac1e089"
+        },
+        "grading": {
+          "bytes": 4494,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_anisotropic_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "64a1d99ac75125246f41441def6fbdac8efe66f977f25befc8dc372b9d7b8ca1"
+        },
+        "media_receipt": {
+          "bytes": 3560,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_anisotropic_policy_selected_cloud_v1/vector_anisotropic_policy_selected_cloud_v1-media.json",
+          "sha256": "0c81091a1c40b2a99a4ebb8ce3cf16c11833758bf6dc21d7169b576ccb06bfe9"
+        },
+        "raw": {
+          "bytes": 213588,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_anisotropic_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "65b8ae3eb4b45cd08d7634602c66137512222ee32dd4a2f751ddd05ee774c333"
+        },
+        "resolved": {
+          "bytes": 6219168,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_anisotropic_policy_selected_cloud_v1/resolved.json",
+          "sha256": "bc3873cf6f7fabeb790137e513f49703f6d4558e881633ccebbb3a2d74f34e7a"
+        },
+        "state_opaque": {
+          "bytes": 462643,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_anisotropic_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "23e6f34e281d565cc1417ca047453ec6501f7832dfce41793a055eb9af274ec1"
+        },
+        "supervisor_terminal": {
+          "bytes": 150,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/568ad7fca2cec996b43c7bb9aad94631d0c9dbee91314f8e052cb23e1d62c92c/supervisor-terminal.json",
+          "sha256": "0ed407f44e4424160c8b471c1123edbba0b1e685b88d22fc04e92fe1080b30fe"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: sw1_normalized <= 0.18; mass_tv <= 0.15; hq >= 0.85; component_covariance_error <= 0.85; component_min_eigen_ratio >= 0.15",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "fc4b1625022daf0ae57ee6f98a49b7687ed216107abd9148b327b833d9891772",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "public_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [
+          4096
+        ],
+        "weights": "state_selected"
+      },
+      "scientific_status": "PASS",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 1200,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 1200,
+      "task_definition_sha256": "9de2588a94ad06fa4dfcdd53e1617f6afa94fcc9dead40baba6df7020b08d877",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "prior_reg": 0.05
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-vector",
+        "reference_recipe_sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 43.36943912599236,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 69.0
+      },
+      "charged_seconds": 43.15405528480187,
+      "completed_steps": 1200,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 850,
+        "first_pass_step": 150,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 18,
+        "passing_suffix": 12,
+        "stable_from_seconds": null,
+        "stable_from_step": 650
+      },
+      "endpoint_diagnostics": {},
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0.13812806101361946,
+          "margin": 0.14711614919885618,
+          "maximum_recorded": 0.16482770684660955,
+          "metric": "sw1_normalized",
+          "minimum_recorded": 0.032883850801143796,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.18,
+          "value": 0.032883850801143796
+        },
+        {
+          "first_recorded": 0.2078624665737152,
+          "margin": 0.11002347394824027,
+          "maximum_recorded": 0.2539868652820587,
+          "metric": "mean_error",
+          "minimum_recorded": 0.009667213074862957,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.03997652605175972
+        },
+        {
+          "first_recorded": 0.2686295509338379,
+          "margin": 0.38980079144239427,
+          "maximum_recorded": 0.2686295509338379,
+          "metric": "covariance_error",
+          "minimum_recorded": 0.032604992389678955,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.45,
+          "value": 0.06019920855760574
+        }
+      ],
+      "id": "vector_overlap_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          50,
+          200,
+          350,
+          500,
+          650,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "dimensions": [
+          460,
+          646
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Declared means/centerline are the visual reference; covariance and mass fidelity require the linked recorded gates.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "observations": 24,
+      "parent_id": "vector_overlap",
+      "parent_identity": {
+        "evaluation_fingerprint": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+        "execution_fingerprint": "6423bf5387f4f88adee6b173db5eb707cab2077dae060e28f3af229b1cc0eb16",
+        "id": "vector_overlap",
+        "task_sha256": "72bde8ab5f9a5222b095ee17849c27823156bd28675f443138d56542c9e69c35"
+      },
+      "pins": {
+        "artifact_bytes": 1203240,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "84527c2cf3974d1361ab2ad477f366e0f0511553662993d1fa64eac8d2f833de",
+        "gif": {
+          "bytes": 372259,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/vector_overlap_policy_selected_cloud_v1-goal.gif",
+          "sha256": "4ecc952270f4f1a501ca50aa6b03012b8420675a5c3140c88499eeefbfb3865b"
+        },
+        "grading": {
+          "bytes": 2461,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "82fd068f7f496920820ead7230685d6828f10553a4e789d22e3cac551e7d4fda"
+        },
+        "media_receipt": {
+          "bytes": 3512,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/vector_overlap_policy_selected_cloud_v1-media.json",
+          "sha256": "4dd68c94f2f556ef9c99c7abe44e14e832de8130251d2cbcdcfdf17e9a00d089"
+        },
+        "raw": {
+          "bytes": 173732,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "353b58b3dd339a3d85b1df0817ad8d9c587e5349684c9355c569ac542e41c585"
+        },
+        "resolved": {
+          "bytes": 6219144,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/resolved.json",
+          "sha256": "edc0ecb3aa4da3df0a480dd0a0403ac66bf22128a92d7aa2c8e600aa0305af97"
+        },
+        "state_opaque": {
+          "bytes": 468819,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "fbfd401d37bcd82511527b92cad77f6e9cdc680dec734a44e34b2e6922c585f1"
+        },
+        "supervisor_terminal": {
+          "bytes": 150,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/44026c22e21bd1b1e517a7ed99869554f5f02e2b920000efdd52fe71ef5caa94/supervisor-terminal.json",
+          "sha256": "7c66a15045f915be78be0d0ee695e2db1d8b50892a828dff54ed1fe19c836eaf"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: sw1_normalized <= 0.18; mean_error <= 0.15; covariance_error <= 0.45",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "fc4b1625022daf0ae57ee6f98a49b7687ed216107abd9148b327b833d9891772",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "public_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [
+          4096
+        ],
+        "weights": "state_selected"
+      },
+      "scientific_status": "PASS",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 1200,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 1200,
+      "task_definition_sha256": "1a562d55b531b7c5f4d89e35a30d1f9e3ed8be4264ba74c2750d1778c24541c3",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "prior_reg": 0.05
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-vector",
+        "reference_recipe_sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 43.15405528480187,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 69.0
+      },
+      "charged_seconds": 53.5209794070106,
+      "completed_steps": 1600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 334,
+        "first_pass_step": 67,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 24,
+        "passing_suffix": 24,
+        "stable_from_seconds": null,
+        "stable_from_step": 67
+      },
+      "endpoint_diagnostics": {},
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0.05423898519186539,
+          "margin": 0.15308500637783856,
+          "maximum_recorded": 0.05764047677544584,
+          "metric": "sw1_normalized",
+          "minimum_recorded": 0.01656726825474311,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.18,
+          "value": 0.02691499362216144
+        },
+        {
+          "first_recorded": 0.017581883817911148,
+          "margin": 0.11846189722418785,
+          "maximum_recorded": 0.07171476632356644,
+          "metric": "mean_error",
+          "minimum_recorded": 0.003069500671699643,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.15,
+          "value": 0.03153810277581215
+        },
+        {
+          "first_recorded": 0.1903352439403534,
+          "margin": 0.41453513205051423,
+          "maximum_recorded": 0.1903352439403534,
+          "metric": "covariance_error",
+          "minimum_recorded": 0.014751763083040714,
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.45,
+          "value": 0.03546486794948578
+        }
+      ],
+      "id": "vector_spiral_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          67,
+          267,
+          467,
+          667,
+          867,
+          1000,
+          1200,
+          1400,
+          1600
+        ],
+        "dimensions": [
+          460,
+          646
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Declared means/centerline are the visual reference; covariance and mass fidelity require the linked recorded gates.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        67,
+        134,
+        200,
+        267,
+        334,
+        400,
+        467,
+        534,
+        600,
+        667,
+        734,
+        800,
+        867,
+        934,
+        1000,
+        1067,
+        1134,
+        1200,
+        1267,
+        1334,
+        1400,
+        1467,
+        1534,
+        1600
+      ],
+      "observations": 24,
+      "parent_id": "vector_spiral",
+      "parent_identity": {
+        "evaluation_fingerprint": "86ba56a0bfead981fdc703910ada5f9d699a69f8127690098f039c82f19bdd3d",
+        "execution_fingerprint": "9db2b6aa062181f4259de07ae0e32e86ad0ce58f70cc8016144bdd90df1fb949",
+        "id": "vector_spiral",
+        "task_sha256": "d47cf689d77375873c25b5d6aa3610e9d6250ee5a9d2f2592538d49da943ff9f"
+      },
+      "pins": {
+        "artifact_bytes": 1183924,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "1430600afcd7a944744392ae2cc030e582b637de9b3a2ef9847cc9c226434680",
+        "gif": {
+          "bytes": 327893,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_spiral_policy_selected_cloud_v1/vector_spiral_policy_selected_cloud_v1-goal.gif",
+          "sha256": "36361618fd2ce27b69a4c6bdd9bc2cfd1f417824bff447c88476e1fba32efba4"
+        },
+        "grading": {
+          "bytes": 2444,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_spiral_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "2eb861362c14e5966dd98a6e1768e75bc4394c2576445ea2c62e3ad214943abd"
+        },
+        "media_receipt": {
+          "bytes": 3502,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_spiral_policy_selected_cloud_v1/vector_spiral_policy_selected_cloud_v1-media.json",
+          "sha256": "fb81f0cc6357ef1d3df70c891baf4622fdbc1d2d11af2881d84d2ed862232c8d"
+        },
+        "raw": {
+          "bytes": 173186,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_spiral_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "cb933ab73cafceffb9b958b7a52438060d7d51dc24e7885994077f9bd144801d"
+        },
+        "resolved": {
+          "bytes": 6219138,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_spiral_policy_selected_cloud_v1/resolved.json",
+          "sha256": "03af10474fcb1af2eb060aeccc7a4452797ed7817833f924233fa201f8d300d5"
+        },
+        "state_opaque": {
+          "bytes": 455171,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_spiral_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "f8abf00e8e24c1705ec6ea42012e1b78bfb53597710b531fe6ff97bb3e857ec7"
+        },
+        "supervisor_terminal": {
+          "bytes": 149,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/76be52fb567d896b94f8662502bf49023ad372368d416f41d9e7cb7f3fa5a949/supervisor-terminal.json",
+          "sha256": "5245cea53d3a77f05c3252ea2199ec8e90f124fa6f9fc4521ea35cdd1b6ee9b1"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: sw1_normalized <= 0.18; mean_error <= 0.15; covariance_error <= 0.45",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "fc4b1625022daf0ae57ee6f98a49b7687ed216107abd9148b327b833d9891772",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "public_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [
+          4096
+        ],
+        "weights": "state_selected"
+      },
+      "scientific_status": "PASS",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 1600,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 1600,
+      "task_definition_sha256": "770ecb45190145d428f0376d78356b33be2a300cb70bc73b08d4bf9bb5c821c3",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "prior_reg": 0.05
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-vector",
+        "reference_recipe_sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 53.5209794070106,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 70.0
+      },
+      "charged_seconds": 30.821239427896217,
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 150,
+        "first_pass_step": 50,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 23,
+        "passing_suffix": 23,
+        "stable_from_seconds": null,
+        "stable_from_step": 50
+      },
+      "endpoint_diagnostics": {
+        "distribution_tv": 0.0,
+        "mean_rmse": 0.004295396618545055
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 1,
+          "margin": 0,
+          "maximum_recorded": 2,
+          "metric": "modes",
+          "minimum_recorded": 1,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 2,
+          "value": 2
+        },
+        {
+          "first_recorded": 0.8125,
+          "margin": 0.09999999999999998,
+          "maximum_recorded": 1.0,
+          "metric": "hq",
+          "minimum_recorded": 0.8125,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.9,
+          "value": 1.0
+        }
+      ],
+      "id": "img_stripes2_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          25,
+          100,
+          175,
+          250,
+          325,
+          375,
+          450,
+          525,
+          600
+        ],
+        "dimensions": [
+          460,
+          630
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Retained target templates and actual output tiles illustrate quality and mode omissions; finite displayed tiles do not certify mass.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "observations": 24,
+      "parent_id": "img_stripes2",
+      "parent_identity": {
+        "evaluation_fingerprint": "859a4010e118b1159c5d09f0ddf370c826f62436ab78c44025f1229f2aa09727",
+        "execution_fingerprint": "ac7731acb0fe9e102f7dcf3a3b21793c598e1f9ade4d4b35c20c3b0358901a80",
+        "id": "img_stripes2",
+        "task_sha256": "010a96d3829b639d13f1150f30a5ff44119bcc10a23822f4191773bab177eb70"
+      },
+      "pins": {
+        "artifact_bytes": 522574,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "d7b43b8dcd6c54b8acf136f2991f57d4f12882e203cba946296c74de14c41c60",
+        "gif": {
+          "bytes": 206507,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_stripes2_policy_selected_cloud_v1/img_stripes2_policy_selected_cloud_v1-goal.gif",
+          "sha256": "f72fac86b2fb36546e0fe8e7aadbffd8a3dad9a2c42358d50bd36b4f3a696d1c"
+        },
+        "grading": {
+          "bytes": 2176,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_stripes2_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "61381bd38a70df0c5dbeaf58178afc6cdd50440e00b6edb7d41025e4aee84fed"
+        },
+        "media_receipt": {
+          "bytes": 3477,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_stripes2_policy_selected_cloud_v1/img_stripes2_policy_selected_cloud_v1-media.json",
+          "sha256": "7f7a045fd2de9f480ec75fb26b3fe295a0a100aeacb237aa4938c83e52b6bc9c"
+        },
+        "raw": {
+          "bytes": 171929,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_stripes2_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "6e4a0e87641475e53fe437c4b56f49ba9edde6804112d66134481f72aa1fd6c6"
+        },
+        "resolved": {
+          "bytes": 6219132,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_stripes2_policy_selected_cloud_v1/resolved.json",
+          "sha256": "b8998b66320ec6206d7294935e1d3afc71bcf892fd09956bef25726fde615ab7"
+        },
+        "state_opaque": {
+          "bytes": 341599,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_stripes2_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "2ad2271dd2e852b743a3b35dea714809dcd68a933e4819fec6b7504ecb1701db"
+        },
+        "supervisor_terminal": {
+          "bytes": 151,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/d2e62ca679ab89adaa7a34366ef674be9882070bd6e7186b6f662bebdb022874/supervisor-terminal.json",
+          "sha256": "881d916a4033ad736ca108e744549567f363c259097541af89cdd818178b6942"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: modes >= 2; hq >= 0.9",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "309f9ec454176a9123c2257ad9a77a74def48707188c4e4e02d3e03cd530d68d",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "enumerated_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [],
+        "weights": "state_selected"
+      },
+      "scientific_status": "PASS",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 600,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 600,
+      "task_definition_sha256": "cc35682806d14d7045b7578af20b3d5702c8d0af5881d84add31e79c55466105",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "d_lr_mult": 1.0,
+        "prior_reg": 0.0
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-image",
+        "reference_recipe_sha256": "8569265702f682b316c09f15a2396b75e97e4381943cf2ba46e558ef8b069b0c",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 30.821239427896217,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 68.0
+      },
+      "charged_seconds": 31.53448656294495,
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_diagnostics": {
+        "distribution_tv": 0.53125,
+        "mean_rmse": 0.011484213173389435
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0,
+          "margin": -2,
+          "maximum_recorded": 2,
+          "metric": "modes",
+          "minimum_recorded": 0,
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 4,
+          "value": 2
+        },
+        {
+          "first_recorded": 0.0,
+          "margin": 0.09999999999999998,
+          "maximum_recorded": 1.0,
+          "metric": "hq",
+          "minimum_recorded": 0.0,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.9,
+          "value": 1.0
+        }
+      ],
+      "id": "img_bars4_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          25,
+          100,
+          175,
+          250,
+          325,
+          375,
+          450,
+          525,
+          600
+        ],
+        "dimensions": [
+          460,
+          630
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Retained target templates and actual output tiles illustrate quality and mode omissions; finite displayed tiles do not certify mass.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "observations": 24,
+      "parent_id": "img_bars4",
+      "parent_identity": {
+        "evaluation_fingerprint": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+        "execution_fingerprint": "978344c617984ac1e73c4a15d81c81b0d56de6b27533f4f3c30b7c91b35e8a24",
+        "id": "img_bars4",
+        "task_sha256": "562c05c07de33e5a5e088cff097af9cf9f6f8b37bb436aed37bf502fb7aff86f"
+      },
+      "pins": {
+        "artifact_bytes": 566067,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "1d1a992dd033cfd30a9e9c3dad8ec4e261bfd57fb0ddb8b219dcb4710a85fb83",
+        "gif": {
+          "bytes": 209474,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_bars4_policy_selected_cloud_v1/img_bars4_policy_selected_cloud_v1-goal.gif",
+          "sha256": "71c53fe4d9b0b6a125e43b87468832444a1f5b081f5635a5eb05d79a48dc7493"
+        },
+        "grading": {
+          "bytes": 2262,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_bars4_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "17898380bbc324a7cd37ffbe83d7cb807b8bab8dec60f03c4618e2d2989fbd25"
+        },
+        "media_receipt": {
+          "bytes": 3441,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_bars4_policy_selected_cloud_v1/img_bars4_policy_selected_cloud_v1-media.json",
+          "sha256": "e40f1fc827a815697892d22d1ba2a8464d0d59edec572dba919848c0fd37545f"
+        },
+        "raw": {
+          "bytes": 174148,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_bars4_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "c6210ad4f4187b953f7d23a4a631a305f82a8d99ae76b75e960ea287deb6afef"
+        },
+        "resolved": {
+          "bytes": 6219114,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_bars4_policy_selected_cloud_v1/resolved.json",
+          "sha256": "58e18a6944eaf58928197763d460f14b4e6c257e7a07d86c938fb3a0e7acd2f3"
+        },
+        "state_opaque": {
+          "bytes": 384023,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_bars4_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "e04589352025bc57d68fe3046f8bfd718dde4b921c1c695527ee06f9d9fca58c"
+        },
+        "supervisor_terminal": {
+          "bytes": 150,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/bf870ea12ccc7cce61e79f0bfffb6999eb4103767ead9b1c3a5ea6ca5589265b/supervisor-terminal.json",
+          "sha256": "f4cec5696b2ddb488b758219e848fdf434aa8a5109c76831543b89ff65e39aa4"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: modes >= 4; hq >= 0.9",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "309f9ec454176a9123c2257ad9a77a74def48707188c4e4e02d3e03cd530d68d",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "enumerated_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [],
+        "weights": "state_selected"
+      },
+      "scientific_status": "FAIL",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 600,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 600,
+      "task_definition_sha256": "df18109793365efa86938458cebec4b28752655b7c44b1cd47c299be4fa96bc0",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "d_lr_mult": 1.0,
+        "prior_reg": 0.0
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-image",
+        "reference_recipe_sha256": "8569265702f682b316c09f15a2396b75e97e4381943cf2ba46e558ef8b069b0c",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 31.53448656294495,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 68.0
+      },
+      "charged_seconds": 31.13397442107089,
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_diagnostics": {
+        "distribution_tv": 0.75,
+        "mean_rmse": 0.25
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0,
+          "margin": -4,
+          "maximum_recorded": 0,
+          "metric": "modes",
+          "minimum_recorded": 0,
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 4,
+          "value": 0
+        },
+        {
+          "first_recorded": 0.0,
+          "margin": -0.9,
+          "maximum_recorded": 0.0,
+          "metric": "hq",
+          "minimum_recorded": 0.0,
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.9,
+          "value": 0.0
+        }
+      ],
+      "id": "img_blobs4_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          25,
+          100,
+          175,
+          250,
+          325,
+          375,
+          450,
+          525,
+          600
+        ],
+        "dimensions": [
+          460,
+          630
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Retained target templates and actual output tiles illustrate quality and mode omissions; finite displayed tiles do not certify mass.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "observations": 24,
+      "parent_id": "img_blobs4",
+      "parent_identity": {
+        "evaluation_fingerprint": "3577d52170ab9a83b176e540cab0453ee5a9e2d328d82357a2b6e2cb8e7d1f98",
+        "execution_fingerprint": "cd3f12cac7d815ba92920c02f53208c6668df0fbd3039365525538fdb55912d0",
+        "id": "img_blobs4",
+        "task_sha256": "15c7ec3cfe80539b14d24824afc1a6fffae99e27b5a38e75c991823b5aceb336"
+      },
+      "pins": {
+        "artifact_bytes": 543202,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "0ad54a3b687592fb8472ddd27206c0235073af70c58e11c733b7be0ac37ab38e",
+        "gif": {
+          "bytes": 197441,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_blobs4_policy_selected_cloud_v1/img_blobs4_policy_selected_cloud_v1-goal.gif",
+          "sha256": "9e6d5c005d5dd2e154dd2392075e3fea9922ab689db699b156a91d2f9d3e052e"
+        },
+        "grading": {
+          "bytes": 2208,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_blobs4_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "4cafa5eb983fe6c2856ccc51121e8d6d0f999d57e8ed0c0babbf991593711546"
+        },
+        "media_receipt": {
+          "bytes": 3453,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_blobs4_policy_selected_cloud_v1/img_blobs4_policy_selected_cloud_v1-media.json",
+          "sha256": "118d951d5fbe1504d4ee0920f8e5cf8436ab5f5deb17de531b77b4432504a3d0"
+        },
+        "raw": {
+          "bytes": 173071,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_blobs4_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "7db6db97ef28970d81cbf5a2ee93f92b68258c4f2a14dc390e855e93a4bf40ed"
+        },
+        "resolved": {
+          "bytes": 6219120,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_blobs4_policy_selected_cloud_v1/resolved.json",
+          "sha256": "adbd5372a2610af4dba9cb52f524a11ec6791cbad9c3648cd7fd7aa84a0fd64e"
+        },
+        "state_opaque": {
+          "bytes": 339707,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_blobs4_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "08c9dcf0ae83feddfa244335bccaa655a9f8a29d78436dc34fee85399fdff6ce"
+        },
+        "supervisor_terminal": {
+          "bytes": 150,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/6138e1571ae5d2aacebecabffea78cb1e81bbad00d62c554178e326ff8efbf2a/supervisor-terminal.json",
+          "sha256": "95a0f2214958172c18dbb5669748b4088708e1f5fd0de978aa5bfb3cd90e50c3"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: modes >= 4; hq >= 0.9",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "309f9ec454176a9123c2257ad9a77a74def48707188c4e4e02d3e03cd530d68d",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "enumerated_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [],
+        "weights": "state_selected"
+      },
+      "scientific_status": "FAIL",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 600,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 600,
+      "task_definition_sha256": "d52f8b4cc6fab46d9078732a9899e9116d67c88aaea9bbb1619f5769a49d62f6",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "d_lr_mult": 1.0,
+        "prior_reg": 0.0
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-image",
+        "reference_recipe_sha256": "8569265702f682b316c09f15a2396b75e97e4381943cf2ba46e558ef8b069b0c",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 31.13397442107089,
+      "tier": 2
+    },
+    {
+      "admission": {
+        "free_memory_mib": 31005.0,
+        "model": "NVIDIA RTX A6000",
+        "physical_gpu": "1",
+        "temperature_c": 67.0
+      },
+      "charged_seconds": 31.218595213023946,
+      "completed_steps": 600,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 525,
+        "first_pass_step": 350,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 10,
+        "passing_suffix": 8,
+        "stable_from_seconds": null,
+        "stable_from_step": 425
+      },
+      "endpoint_diagnostics": {
+        "distribution_tv": 0.0,
+        "mean_rmse": 0.02307453751564026
+      },
+      "execution_status": "COMPLETE",
+      "field_ownership_placeholders": [],
+      "gates": [
+        {
+          "first_recorded": 0,
+          "margin": 0,
+          "maximum_recorded": 2,
+          "metric": "modes",
+          "minimum_recorded": 0,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 2,
+          "value": 2
+        },
+        {
+          "first_recorded": 0.0,
+          "margin": 0.09999999999999998,
+          "maximum_recorded": 1.0,
+          "metric": "hq",
+          "minimum_recorded": 0.0,
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.9,
+          "value": 1.0
+        }
+      ],
+      "id": "img_intensity2_policy_selected_cloud_v1",
+      "interruption_reserved_seconds": 0,
+      "media": {
+        "actual_steps": [
+          25,
+          100,
+          175,
+          250,
+          325,
+          375,
+          450,
+          525,
+          600
+        ],
+        "dimensions": [
+          460,
+          630
+        ],
+        "first_middle_final_pixels_inspected": true,
+        "frames": 9,
+        "limitation": "Retained target templates and actual output tiles illustrate quality and mode omissions; finite displayed tiles do not certify mass.",
+        "primary_probe_readability": "READABLE"
+      },
+      "observation_steps": [
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "observations": 24,
+      "parent_id": "img_intensity2",
+      "parent_identity": {
+        "evaluation_fingerprint": "a5b244cfb3d5a99f00c2a44d8a06afae964b3399d5fb21a2b96542a1d8a61647",
+        "execution_fingerprint": "3284efc2336d75627f5f960804059fcd422dddb36954b5961591d393368d2d53",
+        "id": "img_intensity2",
+        "task_sha256": "6a69162bee7dd1c50c9f596f29ed339a5e475c296156c4324e5092099cddf90d"
+      },
+      "pins": {
+        "artifact_bytes": 584369,
+        "artifact_files": 25,
+        "artifact_manifest_sha256": "e0bc2e0dd46b5462297e9dfa7d5f25086a0cc27dc2e50d9f85e0ba78e1933d3a",
+        "gif": {
+          "bytes": 222968,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_intensity2_policy_selected_cloud_v1/img_intensity2_policy_selected_cloud_v1-goal.gif",
+          "sha256": "ab83dafebee2cdf023ff53e408bc8cbf2e388521099dea113b2139c1fcedb5ea"
+        },
+        "grading": {
+          "bytes": 2179,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_intensity2_policy_selected_cloud_v1/graded-result.json",
+          "sha256": "f2a765a339a063e67ff78d4644ea23228c8c169a410f578c5717358051c142ae"
+        },
+        "media_receipt": {
+          "bytes": 3501,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_intensity2_policy_selected_cloud_v1/img_intensity2_policy_selected_cloud_v1-media.json",
+          "sha256": "b75cce46355eb78e20c248ea29ca3cc48646ad49c3cfc7dad744bb4846370f69"
+        },
+        "raw": {
+          "bytes": 172865,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_intensity2_policy_selected_cloud_v1/raw-result.json",
+          "sha256": "10de02ea5563b8731483f51f773df5b8782efb1ddad9a40066614b17ea2146bd"
+        },
+        "resolved": {
+          "bytes": 6219144,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_intensity2_policy_selected_cloud_v1/resolved.json",
+          "sha256": "71cc1c99c4bfe8f1a6284a71ca91e51c1ab831daa1b6cb57c60ae2bf015bd40e"
+        },
+        "state_opaque": {
+          "bytes": 389687,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/img_intensity2_policy_selected_cloud_v1/policy-artifacts/state.pt",
+          "sha256": "0f4275ac51d31900aa216ae1ce14e7f3c679c1eb25a86670a55b373874fcc0cb"
+        },
+        "supervisor_terminal": {
+          "bytes": 151,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/ebd53708cead3f384202cac327f1bc39be0ce4865f61879cee634cfe199d61f3/supervisor-terminal.json",
+          "sha256": "ff567e34192b1210d7c99145d02b4ff26ba1c00198f5320660f401e9bcc577ce"
+        }
+      },
+      "qualification_input": false,
+      "question": "Frozen numerical question: modes >= 2; hq >= 0.9",
+      "recipe_pointer_in_raw": "/recipe",
+      "recipe_sha256": "309f9ec454176a9123c2257ad9a77a74def48707188c4e4e02d3e03cd530d68d",
+      "sampling": {
+        "actual_backends": [
+          "knn"
+        ],
+        "actual_selected_sources": [
+          "fast"
+        ],
+        "independent_100k_credit": false,
+        "law": "enumerated_prior_without_output_noise",
+        "output_noise": "clean",
+        "sample_counts": [],
+        "weights": "state_selected"
+      },
+      "scientific_status": "PASS",
+      "software_receipts": {
+        "all_finite_recorded": true,
+        "hook_updates": 600,
+        "independent_cpu_grading_existing": true,
+        "lifecycle_complete": true,
+        "pure_observations": 24,
+        "requested_owners_bound": true,
+        "review_regraded": false
+      },
+      "steps": 600,
+      "task_definition_sha256": "32e6aa94911e3d21804a5270729111f8cbb17fada318fd9b772f0d3bd980419c",
+      "task_recipe_overrides": {
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "d_lr_mult": 1.0,
+        "prior_reg": 0.0
+      },
+      "task_recipe_overrides_provenance": {
+        "evidence_reuse": false,
+        "fields": [
+          "betas",
+          "d_lr_mult",
+          "prior_reg"
+        ],
+        "owner": "task",
+        "recipe_group": "atlas-image",
+        "reference_recipe_sha256": "8569265702f682b316c09f15a2396b75e97e4381943cf2ba46e558ef8b069b0c",
+        "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "schema_version": 1,
+        "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+      },
+      "terminal_paid_seconds": 31.218595213023946,
+      "tier": 2
+    }
+  ],
+  "required_slots": 26,
+  "runtime": {
+    "compute": {
+      "backend": "cuda",
+      "compute_capability": "8.6",
+      "deterministic": true,
+      "driver": "580.173.02",
+      "model": "NVIDIA RTX A6000",
+      "tf32": false,
+      "threads": 1
+    },
+    "cuda_device_model": "NVIDIA RTX A6000",
+    "device": "cuda:0",
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.13.0+cu126"
+    },
+    "python": "3.12.13",
+    "system": "Linux",
+    "torch_threads": 1
+  },
+  "schema": "particlegan_atlas_native_v2_completed_evidence_review_v1",
+  "scope": {
+    "calibration_credit": false,
+    "checkpoint_model_state_deserialized_by_review": false,
+    "convergence_contract": "Original declared full horizon plus passing final suffix >=5 observations; added first-window+five-later-hold contract is not applied.",
+    "cross_cohort_pooling": false,
+    "default_adoption": false,
+    "ordinary_tier_credit": false,
+    "qualification_input": false,
+    "samples_or_acquisition_forwards_performed_by_review": false,
+    "scientific_metrics_recomputed_by_review": false,
+    "scientific_training_or_model_restore_performed_by_review": false,
+    "source_commit_metadata": "Pinned preparation/snapshot metadata; this review does not use Git to recertify commit blobs.",
+    "speed_ranking": false
+  },
+  "software_proof": {
+    "recorded_70_control_log": {
+      "bytes": 99,
+      "path": "/ml2/hypergan/pg-atlas-gpu-diagnostic-json-reconstruction-controls-20261003.log",
+      "sha256": "3d9e283cf939f16c359e0de972bdb69c86a522c97596662c5e17d72cfa30e691"
+    },
+    "scope": "Existing CPU structural software evidence; no convergence credit or new test rerun."
+  },
+  "source": {
+    "digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+    "origin_commit": "9563dea57bb150f2a0275bbe8d785bf76210fca3",
+    "schema_version": 1,
+    "snapshot_path": "/ml2/hypergan/diagnostic-source/snapshots/db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037"
+  },
+  "source_files_verified": 1366,
+  "status": "PARTIAL_IMMUTABLE_CHECKPOINT",
+  "structural_card": {
+    "bytes": 3540,
+    "path": "/ml2/hypergan/.forge-atlas-current-gpu-diagnostics-20261003-native-v2.structural-readiness.json",
+    "sha256": "feee38430168e9200389476f7d90a6459feb29d48c82b5d8a30aedd26bb8826c"
+  },
+  "structural_card_capacity_or_learning_credit": false,
+  "study_capture": {
+    "bytes": 4357036,
+    "claim": "One captured RUNNING ledger; only its 13 COMPLETE jobs were inspected. Later/live child state was not read.",
+    "original_path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/study.json",
+    "path": "/tmp/pg-native-v2-review-study.json",
+    "sha256": "979685de67817ef4d25210cc226cea2c0ea4371dddd869a57f01f59041f05497"
+  },
+  "unexecuted_or_blocked_slots": [
+    {
+      "diagnostic_status": "BLOCKED",
+      "id": "ae_gan_hold_policy_selected_cloud_v1",
+      "parent_id": "ae_gan_hold",
+      "qualification_input": false,
+      "reason": [
+        "ae_gan_hold_policy_selected_cloud_v1: the original MoG posterior/encoder law conflicts with independent cloud row controls; a named routed encoder/cloud task must attest its revised conditional law"
+      ],
+      "task_definition_sha256": "09282dc690278cb719e6d8bd35b9404728a24e61bd8c353f4a817abd3d92fb83",
+      "tier": 1
+    },
+    {
+      "diagnostic_status": "BLOCKED",
+      "id": "cover_leftover_policy_selected_cloud_v1",
+      "parent_id": "cover_leftover",
+      "qualification_input": false,
+      "reason": [
+        "cover_leftover_policy_selected_cloud_v1: the original objective owns two prior banks and conditioned polar contexts; a single independent table is not their joint law"
+      ],
+      "task_definition_sha256": "a94ab5b1d86869a82caedbeda6eabe40a3de0aca0456be55f3ab292195d105a2",
+      "tier": 2
+    },
+    {
+      "diagnostic_status": "BLOCKED",
+      "id": "five_word_joint_acquisition_policy_selected_cloud_v1",
+      "parent_id": "five_word_joint_acquisition",
+      "qualification_input": false,
+      "reason": [
+        "five_word_joint_acquisition_policy_selected_cloud_v1: the joint (word,E(word))/(G(z),z) game has no declared ordered policy ownership, independent-row birth/death geometry and selected conditional serving adapter; a separate public routed joint contract is required"
+      ],
+      "task_definition_sha256": "ce8bbbb1325325217340f47eb9444879141e9c871b31372984baa8e035dffa3a",
+      "tier": 1
+    },
+    {
+      "diagnostic_status": "NOT_RUN",
+      "id": "grid100_policy_selected_cloud_v1",
+      "parent_id": "grid100",
+      "qualification_input": false,
+      "reason": null,
+      "task_definition_sha256": "d0ab5be7b54a48a0bc3f6be21c93f06b604c0b2b1a5c8bfc4f3cd760ae1e527c",
+      "tier": 2
+    },
+    {
+      "diagnostic_status": "BLOCKED",
+      "id": "mid_scale_identity_policy_selected_cloud_v1",
+      "parent_id": "mid_scale_identity",
+      "qualification_input": false,
+      "reason": [
+        "mid_scale_identity_policy_selected_cloud_v1: the original mid-scale paired mapping consumes context coordinates; a faithful public callback/routing binding is not yet declared"
+      ],
+      "task_definition_sha256": "8da8e6c08dc44c9efc2821a86c693a45c190886d83b3957e0e934b58862236ea",
+      "tier": 2
+    },
+    {
+      "diagnostic_status": "BLOCKED",
+      "id": "residual_student_policy_selected_cloud_v1",
+      "parent_id": "residual_student",
+      "qualification_input": false,
+      "reason": [
+        "residual_student_policy_selected_cloud_v1: the original paired residual mapping requires a named conditional routing and protected-context contract"
+      ],
+      "task_definition_sha256": "e2a1336a3186ced5f31ed0b4e6784f7b23e15d4e60d4483d63d5e909fe944011",
+      "tier": 2
+    },
+    {
+      "diagnostic_status": "NOT_RUN",
+      "id": "ring_extension_policy_selected_cloud_v1",
+      "parent_id": "ring_extension",
+      "qualification_input": false,
+      "reason": null,
+      "task_definition_sha256": "f9e107c2b4d283e596a27769a8a46fab85ba71bd7310c54c78960c16dc25aedb",
+      "tier": 3
+    },
+    {
+      "diagnostic_status": "NOT_RUN",
+      "id": "ring_hold_policy_selected_cloud_v1",
+      "parent_id": "ring_hold",
+      "qualification_input": false,
+      "reason": null,
+      "task_definition_sha256": "600f53256d0174611f51405492c9e807400f8d67bd0d77c551441eaeebbeec0d",
+      "tier": 3
+    },
+    {
+      "diagnostic_status": "NOT_RUN",
+      "id": "rotated100_policy_selected_cloud_v1",
+      "parent_id": "rotated100",
+      "qualification_input": false,
+      "reason": null,
+      "task_definition_sha256": "663ff97d1eb6a559d0f9c2ff975349310eecb9329dee9e1fdc35c4e23c580a5e",
+      "tier": 2
+    },
+    {
+      "diagnostic_status": "NOT_RUN",
+      "id": "staggered100_policy_selected_cloud_v1",
+      "parent_id": "staggered100",
+      "qualification_input": false,
+      "reason": null,
+      "task_definition_sha256": "81ada04ad0c77f620b85b3f9cd3a13806892c1ae9efcefda83ac1a78aadd4eed",
+      "tier": 2
+    },
+    {
+      "diagnostic_status": "BLOCKED",
+      "id": "trajectory_policy_selected_cloud_v1",
+      "parent_id": "trajectory",
+      "qualification_input": false,
+      "reason": [
+        "trajectory_policy_selected_cloud_v1: the original source-conditioned generation requires a named conditional routing and row-evidence/birth-death contract"
+      ],
+      "task_definition_sha256": "936a0ef000758a58714728ce657dd3d47388fa6fe355c996c0972ad23909b68f",
+      "tier": 2
+    },
+    {
+      "diagnostic_status": "BLOCKED",
+      "id": "unipolar_policy_selected_cloud_v1",
+      "parent_id": "unipolar",
+      "qualification_input": false,
+      "reason": [
+        "unipolar_policy_selected_cloud_v1: the original residual generator consumes conditioned teacher coordinates; a faithful public callback/routing binding is not yet declared"
+      ],
+      "task_definition_sha256": "7bd420eee0f0cc3c496a9cbf7a18837f520cc3ce0578d932b949263812acd8e5",
+      "tier": 2
+    },
+    {
+      "diagnostic_status": "BLOCKED",
+      "id": "unused_token_hold_policy_selected_cloud_v1",
+      "parent_id": "unused_token_hold",
+      "qualification_input": false,
+      "reason": [
+        "unused_token_hold_policy_selected_cloud_v1: shared/slot parameters have no independent sampled row table; a named public RoutedRows binding must preserve protected unused contexts"
+      ],
+      "task_definition_sha256": "91d4e09920e2f18c0df90089942206ff386d307597682fd81f644891bb9fa22c",
+      "tier": 1
+    }
+  ],
+  "unproven_hypotheses": [
+    "Rare-component tail/outlier dynamics or policy geometry may cause unequal-mass covariance failure; recorded component errors localize the failure but do not isolate a cause.",
+    "Narrow-component outliers, latent perturbation and selected-state geometry are plausible unequal-width causes; no intervention or replay comparison has been performed.",
+    "Image saturation, critic-rate adaptation and mode allocation are potential causes of missing modes/black blobs; final rates and pixels alone cannot establish causality."
+  ],
+  "verification": {
+    "all_completed_artifact_bindings_match": true,
+    "checks": {
+      "complete_artifact_file_set": 13,
+      "declared_numerical_bounds": 13,
+      "external_artifact_pins": 196,
+      "frozen_source_files": 1366,
+      "gif_decoded_frames": 117,
+      "last_recorded_observation": 13,
+      "media_exact_observation_inputs": 13,
+      "media_gif_identity": 13,
+      "recorded_field_ownership": 895,
+      "resolved_job_tasks": 13,
+      "resolved_lane_runtime": 13,
+      "resolved_packet_source": 13,
+      "resolved_packet_spec": 13,
+      "resolved_request_source": 13,
+      "retained_scientific_artifacts": 325,
+      "sidecar_cases_identity": 1,
+      "sidecar_source_identity": 1,
+      "sidecar_spec_identity": 1,
+      "snapshot_provenance_identity": 1,
+      "source_execution_identity": 1,
+      "structural_readiness_identity": 1,
+      "task_frozen_definition": 13
+    },
+    "field_ownership_placeholder_count": 15,
+    "unique_bytes_hashed": 119599858,
+    "unique_files_hashed": 1774
+  }
+}

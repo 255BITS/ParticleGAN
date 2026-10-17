@@ -1,0 +1,83 @@
+{
+  "status": "PASS_CPU_METADATA_PREFLIGHT",
+  "source_freeze_sha256": "0b4eaf796ee41761d642967879121fbd42bc06b4f1ad7d832b2092f21cc5c6e0",
+  "checkpoint_sha256": "a7e6384507d3ffb1f9b20f9295f99abbdf891aaec4f9edccc254bbd35da02b19",
+  "actual_paired_average": {
+    "schema": 1,
+    "policy": "ema_support_inside_current_real_group_Q_v1",
+    "snapshot": 250,
+    "step": 2000,
+    "rows": 1024,
+    "required": 973,
+    "cells": 64,
+    "rank": 8,
+    "groups": 25,
+    "calibration_rows": 512,
+    "chart_valid": true,
+    "duplicate_ok": true,
+    "finite_rows": 1024,
+    "same_group_rows": 1018,
+    "ema_eligible_rows": 982,
+    "coherent_rows": 977,
+    "eligible": true
+  },
+  "rng_buffer_placement": {
+    "cpu_rng": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 5056
+    },
+    "cuda_rng": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "streams.latent_generator": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "streams.penalty_generator": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "streams.eval_generator": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "streams.noise_generator": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    },
+    "birth_death.stream": {
+      "device": "cpu",
+      "dtype": "torch.uint8",
+      "numel": 16
+    }
+  },
+  "completed_steps": 2000,
+  "original_scorer_seed": 314259,
+  "original_chunk_rows": 256,
+  "chunks_per_branch": 2,
+  "independent_initial_restores": 2,
+  "intermediate_reloads": 1,
+  "training_updates": 0,
+  "model_constructions": 0,
+  "model_forwards": 0,
+  "generated_samples": 0,
+  "cuda_initialized": false,
+  "numerical_cuda_contract": "NOT_RUN",
+  "finished_utc": "2026-09-30T08:15:34.068406+00:00",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/positive-lease-replay/sample_reload.py",
+    "--cpu-preflight",
+    "--package-root",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA8",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/positive-lease-replay/cpu-preflight-attempt1/result.json"
+  ]
+}

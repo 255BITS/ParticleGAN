@@ -1,0 +1,43 @@
+{
+  "scope": "Completed grid100 saved JSON diagnosis; count/lineage freeze untouched",
+  "status": "ANALYZED",
+  "local_artifact_sha256": {
+    "GRID100-REPORT.md": "246c41a18922c74df92c24fe7bcf8c6b3f459f527f184cef4da03bc985fd7f5e",
+    "analyze_grid100.py": "30169cc01cd614ebff5299317f5dd10278ac3c1c5265c54684fd7fa7c8f4db85",
+    "grid100-analysis.json": "36f598befed2653eb596f40582705dba7490150f7e1bf59a94bde42bc9757105",
+    "grid100-analysis.log": "1f51c29188ea188c3c2775141266643bb21336e12f996296c5446f12a97d2335"
+  },
+  "input_source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/result.json": "1ffb666fac600723637dfb7ecd7bc506750bc7ba8e1ce407cbf25000466b4100",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/execution-receipt.json": "8b7ee8e835babfb1d7ed687eaaf4ff52cba848b2830116396599f1f24364c087",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/metrics.jsonl": "31e308a3aeffa5523d200dfb170e121ecbd26b93dac8094afed44eb680d167cb",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/native100-diagnostics.jsonl": "dd5344b1d1b7f6d8f6f827882e86fec1d029a2bcd33e90ed21e7005147b612f6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/rates.jsonl": "629d0901af2d345becbeb0cda46db2f537bd901fa0d490e609a1657836f8acb8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/native-noisy/verdict.json": "3bf5122530f25da1b828c291a483137e74055215b22f14de4c52fd2394601969",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/native-noisy/config.json": "2e132f55cfb0cb57e456b9334c3d1a2867516aaea289aaa818208f7902bd6aed",
+    "/ml2/hypergan/lrfree-20260926/harness/screen.py": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c",
+    "/ml2/hypergan/lrfree-20260926/harness/native100_diagnostics.py": "46e54896b8725499cb775fbb112b7bf27074ae01d8a7997e4fbb4384c9c44a2e",
+    "/ml2/hypergan/lrfree-20260926/harness/native100_score.py": "10cc14edfcd98ab34fd3768aaba2ee835dc2241dc1face2e18998c8f2b687feb",
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/native100_fixture.json": "95a0afa02e03522bd33b1a3851041551c0802f2da87d81bc67fd89ec9695932d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA2/particlegan/training.py": "28f6cc3f01308829531d4fab655db4cfd1870354d9c81f9374175a8b324088d9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/analyze_grid100.py": "30169cc01cd614ebff5299317f5dd10278ac3c1c5265c54684fd7fa7c8f4db85",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/train.py": "88b0f4d9dbe540d9ccd9276af663e60becf25515819cf05ae63326fcd8675472",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/models.py": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy_evidence.py": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/gate.py": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/config.py": "0cadc75ddcf68e970102074a7f04a91fc23c0e169c7abbafb5e25133af6b5983",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/device.py": "b6777948db2c5e4692c49a3aae594c94145ce32e51f3eb548c8ad7a5b2453a67",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3"
+  },
+  "count_lineage_frozen_sha256": "615ea0f4b7bb5cce53b1541df096e33ff3988dcabbf268d4def8f172a028d024",
+  "cuda_context_created": false,
+  "torch_imported": false,
+  "new_trajectories": 0,
+  "new_seeds": 0,
+  "optimizer_updates": 0
+}

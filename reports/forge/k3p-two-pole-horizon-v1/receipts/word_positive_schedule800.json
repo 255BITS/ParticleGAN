@@ -1,0 +1,1120 @@
+{
+  "arm_id": "word_positive_schedule800",
+  "attempt_id": "aa10c29d2ca84f2f96ae2ddb9b13088f",
+  "candidate_id": "k3p-global-repair-v1",
+  "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+  "charged_wall_seconds": 10.303621676983312,
+  "compatibility_key": "6311c731f23521d06486f512a23d124a9c300bfce32342f05318afb8de9e69fa",
+  "decision_review": {
+    "binding_errors": [],
+    "causal_judgment": "requires_review",
+    "contract_sha256": "80440f2683d0aa22ace80e856acdf22d27a72cd5ba3f65951c034219fce7d298",
+    "duplicate_task_ids": [],
+    "execution_authorized": false,
+    "max_rounds": 1,
+    "next_action": "stop_revision",
+    "observed": {
+      "falsifier": {
+        "satisfied": true,
+        "value": 0.11110240966081619
+      },
+      "prediction": {
+        "satisfied": false,
+        "value": 0.11110240966081619
+      }
+    },
+    "outcome": "falsified",
+    "qualification_input": false,
+    "schema_version": 1
+  },
+  "default_adoption": false,
+  "diagnostic_gate_status": "FAIL",
+  "durable_certificate": {
+    "artifacts": [
+      {
+        "bytes": 308854,
+        "path": "reports/forge/attempts/aa10c29d2ca84f2f96ae2ddb9b13088f/request.json",
+        "sha256": "42e38931ee37c11631e1237cdb40c6dcbebcb8b12cd4fafe6356f6ad3e4396ee"
+      },
+      {
+        "bytes": 172097,
+        "path": "reports/forge/attempts/aa10c29d2ca84f2f96ae2ddb9b13088f/result.json",
+        "sha256": "63b64e104d31a434d75a41bf3a73abd6894324da527cd1525802b2bedf33c87c"
+      },
+      {
+        "bytes": 139500,
+        "path": "reports/forge/attempts/aa10c29d2ca84f2f96ae2ddb9b13088f/evidence.json",
+        "sha256": "0833d0359c0e4fabd8a4036c99af7e76502e88d3e510f584fd369d16c2fe6e71"
+      }
+    ],
+    "result_stable_hash": "cdea89b41dea1007329a0abf3d46bb94c8b4d7c34c9f345d53e6bff6a85ed5bb"
+  },
+  "effective_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0006,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 170.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 800,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "evaluator_result": {
+    "attempted": true,
+    "confirmation_fraction": 2.0,
+    "convergence": {
+      "complete": true,
+      "confirmed_seconds": null,
+      "confirmed_step": null,
+      "first_pass_step": null,
+      "minimum_stable_checks": 5,
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "stable_from_seconds": null,
+      "stable_from_step": null
+    },
+    "metrics": [
+      {
+        "margin": -0.1888975903391838,
+        "metric": "mean_abs",
+        "op": ">=",
+        "status": "FAIL",
+        "threshold": 0.3,
+        "value": 0.11110240966081619
+      },
+      {
+        "margin": 0.9955318793654442,
+        "metric": "grad_med",
+        "op": "<=",
+        "status": "PASS",
+        "threshold": 1.0,
+        "value": 0.004468120634555817
+      }
+    ],
+    "passed": false,
+    "shortfall": 0.314829317231973,
+    "status": "FAIL"
+  },
+  "execution_updates": 800,
+  "final_metrics": {
+    "grad_med": 0.004468120634555817,
+    "mean_abs": 0.11110240966081619
+  },
+  "global_recipe_overrides": {
+    "amsgrad": false,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "ema_decay": 0.995,
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0006,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_lr_mult": 2.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 170.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "table_release_rule": "any"
+  },
+  "guards": {
+    "all_finite": true,
+    "hooks_exercised": true,
+    "mechanism_audit": {
+      "mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        },
+        "critic_anchor": {
+          "applied": 156,
+          "calls": 800,
+          "eligible": 157,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_guard": {
+          "applied": 0,
+          "calls": 800,
+          "eligible": 600,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "clipped_tensors": 1,
+              "initial_adam_step": 200,
+              "optimizer_updates": 1
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_penalty": {
+          "applied": 800,
+          "calls": 800,
+          "eligible": 800,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 232,
+          "calls": 800,
+          "eligible": 800,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        }
+      },
+      "schema_version": 1
+    },
+    "optimizer_updates": {
+      "discriminator": 800,
+      "prior": 800
+    },
+    "unintended_rng_deviations": 0
+  },
+  "initial_component_sha256": {
+    "critic": "9526db5264aa213fba9bcee4f964b26cf6a04ed33a99003ef7530f8d9fd05fc6",
+    "critic_optimizer": "9bf975b8b338fd135bab85b45eb736246024933aa3087af37e8f16ab2710cd65",
+    "generator_optimizer": "512abae119c74e384b133aeab6ef40263e0ff00df3ec113f9d79acbca2b32cba",
+    "positions": "c18b86bf245935a17f844f1f69c7f43e570596f6a35092f6f6fc19b62c739227",
+    "streams": "7f8c06a6af283dbc892a5276976d6bc216c144ef70eef085208369e2df0622ac",
+    "torch_rng_state": "00bc7db87a0d46d4818aadc951bb97d80e5c3c78c8a5f52ff9f9ea6357a99098"
+  },
+  "initial_state_sha256": "eeb42133ae6044163f9ce8b490d55444d9b56636ebe9b5669a9ba242f773216e",
+  "initializer": "deterministic_orthogonal",
+  "media": {
+    "bytes": 108198,
+    "path": "reports/forge/k3p-two-pole-horizon-v1/media/word_positive_schedule800.gif",
+    "sha256": "275dcc869cac80404b43b84ff7426c722dd12a803a45f712b28b3ecbaad93de6"
+  },
+  "media_fixed_axis": [
+    -1.5,
+    1.5
+  ],
+  "media_frames": 9,
+  "media_steps": [
+    0,
+    40,
+    80,
+    160,
+    200,
+    320,
+    400,
+    600,
+    800
+  ],
+  "milestones": [
+    {
+      "actual_generator_betas": [
+        0.0,
+        0.9
+      ],
+      "actual_generator_lr": 0.0012,
+      "adversarial_gradient_norm": 0.0016808166401460767,
+      "behavior_bounds_pass": false,
+      "critic_applied_gradient_norm": 0.10071787238121033,
+      "critic_diagnostics": {
+        "clean_gradient_median": 0.0033258646726608276,
+        "particle_score_mean": 0.0374019481241703,
+        "real_score_mean": 0.03755282238125801
+      },
+      "critic_displacement_norm": 8.935640653362498e-05,
+      "critic_lr": 0.0009,
+      "critic_payoff_gradient_norm": 0.25880125164985657,
+      "critic_penalty_gradient_norm": 0.3478173017501831,
+      "critic_total_gradient_norm": 0.10071787238121033,
+      "direct_gain": 2.0,
+      "displacement_norm": 0.003334361594170332,
+      "grad_med": 0.0033258646726608276,
+      "input_noise_std": 0.0,
+      "l2_gradient_norm": 0.0006774593493901193,
+      "maximum_position": -0.05878595635294914,
+      "mean_abs": 0.05962689593434334,
+      "mean_signed_adversarial_force": -0.00048520651762373745,
+      "mean_signed_l2_force": 0.00019554780737962574,
+      "minimum_position": -0.060455530881881714,
+      "nearest_pole_distance": 0.9403731226921082,
+      "negative_particles": 12,
+      "output_noise_std": 0.0,
+      "particle_std": 0.0007938503986224532,
+      "penalty": {
+        "applied": true,
+        "center": 1.0,
+        "pen": 0.0004285452014300972,
+        "phase": "a",
+        "prox": 0.0,
+        "s": 1.0
+      },
+      "positive_particles": 0,
+      "scheduled_generator_lr": 0.0006,
+      "state_sha256": "932c41836321eb681a6d4dbae2dc045fee3f0e7c0c31adfd2b8e9388916bcfdc",
+      "step": 80,
+      "total_gradient_norm": 0.0010035268496721983,
+      "zero_particles": 0
+    },
+    {
+      "actual_generator_betas": [
+        0.0,
+        0.9
+      ],
+      "actual_generator_lr": 0.0011989789724349974,
+      "adversarial_gradient_norm": 0.00156955246347934,
+      "behavior_bounds_pass": false,
+      "critic_applied_gradient_norm": 0.015810230746865273,
+      "critic_diagnostics": {
+        "clean_gradient_median": 0.003054223954677582,
+        "particle_score_mean": 0.03834879770874977,
+        "real_score_mean": 0.03740805760025978
+      },
+      "critic_displacement_norm": 3.5097793443128467e-05,
+      "critic_lr": 0.0009,
+      "critic_payoff_gradient_norm": 0.2792815566062927,
+      "critic_penalty_gradient_norm": 0.27543580532073975,
+      "critic_total_gradient_norm": 0.015810230746865273,
+      "direct_gain": 1.9982982873916626,
+      "displacement_norm": 0.00013628059241455048,
+      "grad_med": 0.003054223954677582,
+      "input_noise_std": 0.0,
+      "l2_gradient_norm": 0.0015703683020547032,
+      "maximum_position": -0.13548915088176727,
+      "mean_abs": 0.1359577476978302,
+      "mean_signed_adversarial_force": -0.00045308819971978664,
+      "mean_signed_l2_force": 0.00045332362060435116,
+      "minimum_position": -0.13642418384552002,
+      "nearest_pole_distance": 0.8640422224998474,
+      "negative_particles": 12,
+      "output_noise_std": 0.0,
+      "particle_std": 0.00046338432002812624,
+      "penalty": {
+        "applied": true,
+        "center": 1.0,
+        "pen": 0.0002483540156390518,
+        "phase": "a",
+        "prox": 0.0,
+        "s": 1.0
+      },
+      "positive_particles": 0,
+      "scheduled_generator_lr": 0.0006,
+      "state_sha256": "979f45b012903baa5514ad8cf8e71b2b53b9f66e3a8eec0c7076cdd97ff83aa7",
+      "step": 200,
+      "total_gradient_norm": 8.178732286978629e-07,
+      "zero_particles": 0
+    },
+    {
+      "actual_generator_betas": [
+        0.0,
+        0.9
+      ],
+      "actual_generator_lr": 0.0006,
+      "adversarial_gradient_norm": 0.0014699228340759873,
+      "behavior_bounds_pass": false,
+      "critic_applied_gradient_norm": 0.014824011363089085,
+      "critic_diagnostics": {
+        "clean_gradient_median": 0.002959880977869034,
+        "particle_score_mean": 0.03814667835831642,
+        "real_score_mean": 0.03740982711315155
+      },
+      "critic_displacement_norm": 4.840922701987438e-05,
+      "critic_lr": 0.0009,
+      "critic_payoff_gradient_norm": 0.27591806650161743,
+      "critic_penalty_gradient_norm": 0.27241048216819763,
+      "critic_total_gradient_norm": 0.014824011363089085,
+      "direct_gain": 1.0,
+      "displacement_norm": 0.0019685793668031693,
+      "grad_med": 0.002959880977869034,
+      "input_noise_std": 0.0,
+      "l2_gradient_norm": 0.0014684547204524279,
+      "maximum_position": -0.1265665590763092,
+      "mean_abs": 0.12741799652576447,
+      "mean_signed_adversarial_force": -0.0004243279981892556,
+      "mean_signed_l2_force": 0.0004239049449097365,
+      "minimum_position": -0.12797221541404724,
+      "nearest_pole_distance": 0.8725820183753967,
+      "negative_particles": 12,
+      "output_noise_std": 0.0,
+      "particle_std": 0.0005896548391319811,
+      "penalty": {
+        "applied": true,
+        "center": 1.0,
+        "pen": 0.00024232742725871503,
+        "phase": "a",
+        "prox": 0.0,
+        "s": 1.0
+      },
+      "positive_particles": 0,
+      "scheduled_generator_lr": 0.0006,
+      "state_sha256": "9a010838f7c1064d8e5471e6547db15a222375d8b31b8cfc2fc9713ff44033ac",
+      "step": 400,
+      "total_gradient_norm": 3.3780531794036506e-06,
+      "zero_particles": 0
+    },
+    {
+      "actual_generator_betas": [
+        0.0,
+        0.9
+      ],
+      "actual_generator_lr": 3.001373444659152e-05,
+      "adversarial_gradient_norm": 0.0012828651815652847,
+      "behavior_bounds_pass": false,
+      "critic_applied_gradient_norm": 0.06541676074266434,
+      "critic_diagnostics": {
+        "clean_gradient_median": 0.004468120634555817,
+        "particle_score_mean": 0.037318479269742966,
+        "real_score_mean": 0.03759266436100006
+      },
+      "critic_displacement_norm": 2.403276312179514e-06,
+      "critic_lr": 9.021469108619375e-06,
+      "critic_payoff_gradient_norm": 0.27003538608551025,
+      "critic_penalty_gradient_norm": 0.2074962854385376,
+      "critic_total_gradient_norm": 0.06541676074266434,
+      "direct_gain": 1.0,
+      "displacement_norm": 7.273532537510619e-05,
+      "grad_med": 0.004468120634555817,
+      "input_noise_std": 0.0,
+      "l2_gradient_norm": 0.0012828276958316565,
+      "maximum_position": -0.11077799648046494,
+      "mean_abs": 0.11110240966081619,
+      "mean_signed_adversarial_force": -0.00037032991531305015,
+      "mean_signed_l2_force": 0.00037031914689578116,
+      "minimum_position": -0.11141432076692581,
+      "nearest_pole_distance": 0.8888976573944092,
+      "negative_particles": 12,
+      "output_noise_std": 0.0,
+      "particle_std": 0.00030702512594871223,
+      "penalty": {
+        "applied": true,
+        "center": 1.0,
+        "pen": 0.00011904740676982328,
+        "phase": "blend",
+        "prox": 1.3991729019835475e-06,
+        "s": 0.0001947264517916623
+      },
+      "positive_particles": 0,
+      "scheduled_generator_lr": 3.001373444659152e-05,
+      "state_sha256": "bd0e4a1fd0d7433b2348b796e0b2b119303c174a0dcd83458ee0ea544dd88e69",
+      "step": 800,
+      "total_gradient_norm": 1.215538247834047e-07,
+      "zero_particles": 0
+    }
+  ],
+  "optimizer_group_bindings": [
+    {
+      "base_betas": [
+        0.0,
+        0.999
+      ],
+      "base_lr": 0.0006,
+      "beta2_schedule_declared": false,
+      "counter_role": "prior",
+      "current_group_betas": [
+        0.0,
+        0.999
+      ],
+      "current_lr": 3.001373444659152e-05,
+      "direct_particle_response": {
+        "gain_enabled": true,
+        "installed": true,
+        "lr_gain_range": [
+          1.0,
+          2.0
+        ],
+        "step_betas": [
+          0.0,
+          0.9
+        ]
+      },
+      "group_betas_overridden_during_step": true,
+      "group_index": 0,
+      "lr_schedule": "prior",
+      "optimizer": "K3PGeneratorAdam",
+      "optimizer_role": "generator",
+      "prior_betas_consumed": false,
+      "prior_lr_mult_consumed": false,
+      "representation": "direct_sample_coordinates"
+    },
+    {
+      "base_betas": [
+        0.0,
+        0.999
+      ],
+      "base_lr": 0.0009,
+      "beta2_schedule_declared": false,
+      "counter_role": "discriminator",
+      "current_group_betas": [
+        0.0,
+        0.999
+      ],
+      "current_lr": 9.021469108619375e-06,
+      "direct_particle_response": {
+        "gain_enabled": false,
+        "installed": false,
+        "lr_gain_range": [
+          1.0,
+          1.0
+        ],
+        "step_betas": null
+      },
+      "group_betas_overridden_during_step": false,
+      "group_index": 0,
+      "lr_schedule": "network",
+      "optimizer": "K3PCriticAdam",
+      "optimizer_role": "discriminator",
+      "prior_betas_consumed": false,
+      "prior_lr_mult_consumed": false,
+      "representation": "network"
+    }
+  ],
+  "phases": [
+    {
+      "actual_particle_lr_sum": 0.09539999080896377,
+      "critic_lr_sum": 0.072,
+      "first_update": 1,
+      "gain_above_one_updates": 79,
+      "last_update": 80,
+      "mean_signed_adversarial_force": -0.0014351161538797897,
+      "mean_signed_l2_force": 9.844069976168157e-05,
+      "nonzero_input_noise_updates": 0,
+      "ranges": {
+        "adversarial_gradient_norm": {
+          "first": 0.020726662129163742,
+          "last": 0.0016808166401460767,
+          "maximum": 0.020726662129163742,
+          "mean": 0.0049751965125324205,
+          "minimum": 0.0016808166401460767
+        },
+        "critic_applied_gradient_norm": {
+          "first": 37.10689163208008,
+          "last": 0.10071787238121033,
+          "maximum": 37.10689163208008,
+          "mean": 6.818161430489272,
+          "minimum": 0.10071787238121033
+        },
+        "critic_displacement_norm": {
+          "first": 0.008818065747618675,
+          "last": 8.935640653362498e-05,
+          "maximum": 0.008818065747618675,
+          "mean": 0.0022397129942874016,
+          "minimum": 8.935640653362498e-05
+        },
+        "critic_payoff_gradient_norm": {
+          "first": 0.26267239451408386,
+          "last": 0.25880125164985657,
+          "maximum": 0.26267239451408386,
+          "mean": 0.25482046641409395,
+          "minimum": 0.2519504725933075
+        },
+        "critic_penalty_gradient_norm": {
+          "first": 37.05979537963867,
+          "last": 0.3478173017501831,
+          "maximum": 37.05979537963867,
+          "mean": 6.9552601300179955,
+          "minimum": 0.3478173017501831
+        },
+        "critic_total_gradient_norm": {
+          "first": 37.10689163208008,
+          "last": 0.10071787238121033,
+          "maximum": 37.10689163208008,
+          "mean": 6.818161430489272,
+          "minimum": 0.10071787238121033
+        },
+        "direct_gain": {
+          "first": 1.0,
+          "last": 2.0,
+          "maximum": 2.0,
+          "mean": 1.9874998085200786,
+          "minimum": 1.0
+        },
+        "displacement_norm": {
+          "first": 0.002078457735478878,
+          "last": 0.003334361594170332,
+          "maximum": 0.004049849230796099,
+          "mean": 0.0025822278257692233,
+          "minimum": 0.0018302638782188296
+        },
+        "l2_gradient_norm": {
+          "first": 0.0,
+          "last": 0.0006774593493901193,
+          "maximum": 0.0006774593493901193,
+          "mean": 0.0003410493358160238,
+          "minimum": 0.0
+        },
+        "total_gradient_norm": {
+          "first": 0.020726662129163742,
+          "last": 0.0010035268496721983,
+          "maximum": 0.020726662129163742,
+          "mean": 0.004634263989282772,
+          "minimum": 0.0010035268496721983
+        }
+      },
+      "scheduled_particle_lr_sum": 0.047999999999999994
+    },
+    {
+      "actual_particle_lr_sum": 0.14337063338756562,
+      "critic_lr_sum": 0.108,
+      "first_update": 81,
+      "gain_above_one_updates": 119,
+      "last_update": 200,
+      "mean_signed_adversarial_force": -0.00046571373750339264,
+      "mean_signed_l2_force": 0.0003671818283085789,
+      "nonzero_input_noise_updates": 0,
+      "ranges": {
+        "adversarial_gradient_norm": {
+          "first": 0.0016786891501396894,
+          "last": 0.00156955246347934,
+          "maximum": 0.0016786891501396894,
+          "mean": 0.0016132904371867578,
+          "minimum": 0.00156955246347934
+        },
+        "critic_applied_gradient_norm": {
+          "first": 0.09284763038158417,
+          "last": 0.015810230746865273,
+          "maximum": 0.09284763038158417,
+          "mean": 0.020602750622977815,
+          "minimum": 0.013367551378905773
+        },
+        "critic_displacement_norm": {
+          "first": 8.268660167232156e-05,
+          "last": 3.5097793443128467e-05,
+          "maximum": 8.268660167232156e-05,
+          "mean": 3.031161707743498e-05,
+          "minimum": 1.909049206005875e-05
+        },
+        "critic_payoff_gradient_norm": {
+          "first": 0.2590118646621704,
+          "last": 0.2792815566062927,
+          "maximum": 0.2794867753982544,
+          "mean": 0.27204385548830035,
+          "minimum": 0.2590118646621704
+        },
+        "critic_penalty_gradient_norm": {
+          "first": 0.340537965297699,
+          "last": 0.27543580532073975,
+          "maximum": 0.340537965297699,
+          "mean": 0.2766710969309012,
+          "minimum": 0.2672622799873352
+        },
+        "critic_total_gradient_norm": {
+          "first": 0.09284763038158417,
+          "last": 0.015810230746865273,
+          "maximum": 0.09284763038158417,
+          "mean": 0.020602750622977815,
+          "minimum": 0.013367551378905773
+        },
+        "direct_gain": {
+          "first": 2.0,
+          "last": 1.9982982873916626,
+          "maximum": 2.0,
+          "mean": 1.9912587970495224,
+          "minimum": 1.0
+        },
+        "displacement_norm": {
+          "first": 0.003353568259626627,
+          "last": 0.00013628059241455048,
+          "maximum": 0.0034812227822840214,
+          "mean": 0.0022378000163371325,
+          "minimum": 4.2363415559520945e-05
+        },
+        "l2_gradient_norm": {
+          "first": 0.0006885730545036495,
+          "last": 0.0015703683020547032,
+          "maximum": 0.0015763163100928068,
+          "mean": 0.0012719767924863844,
+          "minimum": 0.0006885730545036495
+        },
+        "total_gradient_norm": {
+          "first": 0.0009902864694595337,
+          "last": 8.178732286978629e-07,
+          "maximum": 0.0009902864694595337,
+          "mean": 0.0003418416017585931,
+          "minimum": 5.658307031808363e-07
+        }
+      },
+      "scheduled_particle_lr_sum": 0.072
+    },
+    {
+      "actual_particle_lr_sum": 0.13697429577112197,
+      "critic_lr_sum": 0.18,
+      "first_update": 201,
+      "gain_above_one_updates": 34,
+      "last_update": 400,
+      "mean_signed_adversarial_force": -0.00043941045078099705,
+      "mean_signed_l2_force": 0.0004394938322366215,
+      "nonzero_input_noise_updates": 0,
+      "ranges": {
+        "adversarial_gradient_norm": {
+          "first": 0.0015691432636231184,
+          "last": 0.0014699228340759873,
+          "maximum": 0.0015691432636231184,
+          "mean": 0.0015221706742886453,
+          "minimum": 0.0014699228340759873
+        },
+        "critic_applied_gradient_norm": {
+          "first": 0.015805574133992195,
+          "last": 0.014824011363089085,
+          "maximum": 0.015805574133992195,
+          "mean": 0.015356114618480205,
+          "minimum": 0.014824011363089085
+        },
+        "critic_displacement_norm": {
+          "first": 3.5184282751288265e-05,
+          "last": 4.840922701987438e-05,
+          "maximum": 4.840922701987438e-05,
+          "mean": 4.234739171806723e-05,
+          "minimum": 3.5184282751288265e-05
+        },
+        "critic_payoff_gradient_norm": {
+          "first": 0.27926647663116455,
+          "last": 0.27591806650161743,
+          "maximum": 0.27926647663116455,
+          "mean": 0.27768606424331665,
+          "minimum": 0.27591806650161743
+        },
+        "critic_penalty_gradient_norm": {
+          "first": 0.27542245388031006,
+          "last": 0.27241048216819763,
+          "maximum": 0.27542245388031006,
+          "mean": 0.27396357387304304,
+          "minimum": 0.27240046858787537
+        },
+        "critic_total_gradient_norm": {
+          "first": 0.015805574133992195,
+          "last": 0.014824011363089085,
+          "maximum": 0.015805574133992195,
+          "mean": 0.015356114618480205,
+          "minimum": 0.014824011363089085
+        },
+        "direct_gain": {
+          "first": 1.997926950454712,
+          "last": 1.0,
+          "maximum": 1.9979368448257446,
+          "mean": 1.1414524647593498,
+          "minimum": 1.0
+        },
+        "displacement_norm": {
+          "first": 0.00013569658040069044,
+          "last": 0.0019685793668031693,
+          "maximum": 0.0039880783297121525,
+          "mean": 0.00161386873711308,
+          "minimum": 0.00011380021169316024
+        },
+        "l2_gradient_norm": {
+          "first": 0.0015699140494689345,
+          "last": 0.0014684547204524279,
+          "maximum": 0.0015699140494689345,
+          "mean": 0.0015224617830244824,
+          "minimum": 0.0014684547204524279
+        },
+        "total_gradient_norm": {
+          "first": 7.728938271611696e-07,
+          "last": 3.3780531794036506e-06,
+          "maximum": 7.214638117147842e-06,
+          "mean": 2.8045662119779992e-06,
+          "minimum": 1.701269525256066e-07
+        }
+      },
+      "scheduled_particle_lr_sum": 0.12
+    },
+    {
+      "actual_particle_lr_sum": 0.149085,
+      "critic_lr_sum": 0.2178855,
+      "first_update": 401,
+      "gain_above_one_updates": 0,
+      "last_update": 800,
+      "mean_signed_adversarial_force": -0.00039238891818968116,
+      "mean_signed_l2_force": 0.00039246198131877465,
+      "nonzero_input_noise_updates": 0,
+      "ranges": {
+        "adversarial_gradient_norm": {
+          "first": 0.001469212700612843,
+          "last": 0.0012828651815652847,
+          "maximum": 0.001469212700612843,
+          "mean": 0.001359280957840383,
+          "minimum": 0.0012828651815652847
+        },
+        "critic_applied_gradient_norm": {
+          "first": 0.01488442625850439,
+          "last": 0.06541676074266434,
+          "maximum": 0.06541676074266434,
+          "mean": 0.02460522605339065,
+          "minimum": 0.013564716093242168
+        },
+        "critic_displacement_norm": {
+          "first": 4.852062920690514e-05,
+          "last": 2.403276312179514e-06,
+          "maximum": 5.268548193271272e-05,
+          "mean": 3.620869189319365e-05,
+          "minimum": 2.403276312179514e-06
+        },
+        "critic_payoff_gradient_norm": {
+          "first": 0.2759888172149658,
+          "last": 0.27003538608551025,
+          "maximum": 0.2759888172149658,
+          "mean": 0.272450585514307,
+          "minimum": 0.27003538608551025
+        },
+        "critic_penalty_gradient_norm": {
+          "first": 0.2723664939403534,
+          "last": 0.2074962854385376,
+          "maximum": 0.2723766267299652,
+          "mean": 0.25576347041875125,
+          "minimum": 0.2074962854385376
+        },
+        "critic_total_gradient_norm": {
+          "first": 0.01488442625850439,
+          "last": 0.06541676074266434,
+          "maximum": 0.06541676074266434,
+          "mean": 0.02460522605339065,
+          "minimum": 0.013564716093242168
+        },
+        "direct_gain": {
+          "first": 1.0,
+          "last": 1.0,
+          "maximum": 1.0,
+          "mean": 1.0,
+          "minimum": 1.0
+        },
+        "displacement_norm": {
+          "first": 0.0021420682314783335,
+          "last": 7.273532537510619e-05,
+          "maximum": 0.002148640574887395,
+          "mean": 0.001219166202172346,
+          "minimum": 6.602118810405955e-05
+        },
+        "l2_gradient_norm": {
+          "first": 0.0014713120181113482,
+          "last": 0.0012828276958316565,
+          "maximum": 0.0014713120181113482,
+          "mean": 0.0013595355453435332,
+          "minimum": 0.0012828276958316565
+        },
+        "total_gradient_norm": {
+          "first": 3.6971084682591027e-06,
+          "last": 1.215538247834047e-07,
+          "maximum": 3.7029199120297562e-06,
+          "mean": 2.0920426881154695e-06,
+          "minimum": 1.0998954991237042e-07
+        }
+      },
+      "scheduled_particle_lr_sum": 0.149085
+    }
+  ],
+  "prefix80": {
+    "final_metrics": {
+      "grad_med": 0.0033258646726608276,
+      "mean_abs": 0.05962689593434334,
+      "step": 80
+    },
+    "observation_sha256": "80751c46ac4ac2a552a98708d89514a395b1e6e88d66f86a9ea5119f75de539d",
+    "observations": 24,
+    "original_cadence_steps": [
+      4,
+      7,
+      10,
+      14,
+      17,
+      20,
+      24,
+      27,
+      30,
+      34,
+      37,
+      40,
+      44,
+      47,
+      50,
+      54,
+      57,
+      60,
+      64,
+      67,
+      70,
+      74,
+      77,
+      80
+    ],
+    "qualification_input": false
+  },
+  "prior": {
+    "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+    "kind": "particle_cloud",
+    "learnable": true,
+    "sigma": 0.0,
+    "standardize": false
+  },
+  "publication_optimizer_updates": 0,
+  "publication_sampling_draws": 0,
+  "publication_source": {
+    "bytes": 25936,
+    "path": "reports/forge/k3p-two-pole-horizon-v1/publish.py",
+    "sha256": "b6e823ae3de7efde64061ff8394a68b26ececfcfeae6c1f6fc1801632291dbb6"
+  },
+  "qualification_input": false,
+  "raw_artifacts": [
+    {
+      "bytes": 308854,
+      "path": "runs/forge/k3p-two-pole-horizon-v1/queue/k3p-two-pole-horizon-v1/aa10c29d2ca84f2f96ae2ddb9b13088f/request.json",
+      "sha256": "42e38931ee37c11631e1237cdb40c6dcbebcb8b12cd4fafe6356f6ad3e4396ee"
+    },
+    {
+      "bytes": 72340,
+      "path": "runs/forge/k3p-two-pole-horizon-v1/queue/k3p-two-pole-horizon-v1/aa10c29d2ca84f2f96ae2ddb9b13088f/raw-result.json",
+      "sha256": "d6da4645e8a16f6fe5d1af18a8f3b6c54df8001d6a71f775aba171dfeb69dbc0"
+    },
+    {
+      "bytes": 2061,
+      "path": "runs/forge/k3p-two-pole-horizon-v1/queue/k3p-two-pole-horizon-v1/aa10c29d2ca84f2f96ae2ddb9b13088f/graded-result.json",
+      "sha256": "d393d2d76166bf374458fc169bfc23efecaf12e595b6028b4c32797f18340e30"
+    },
+    {
+      "bytes": 172097,
+      "path": "runs/forge/k3p-two-pole-horizon-v1/queue/k3p-two-pole-horizon-v1/aa10c29d2ca84f2f96ae2ddb9b13088f/result.json",
+      "sha256": "63b64e104d31a434d75a41bf3a73abd6894324da527cd1525802b2bedf33c87c"
+    }
+  ],
+  "recipe_label": "word_positive",
+  "request_id": "d17293684540bade4684e37d",
+  "retained_diagnostic_artifacts": [
+    {
+      "bytes": 4220607,
+      "kind": "direct_coordinate_updates_v1",
+      "path": "force-trace.pt",
+      "record_count": 800,
+      "sha256": "3edd9e6a643cf4d95d9b998ec28de2d76460d59288698f055871981f6c4b705e"
+    },
+    {
+      "bytes": 938276,
+      "kind": "direct_coordinate_scalar_updates_v1",
+      "path": "force-trace.jsonl",
+      "record_count": 800,
+      "sha256": "2384f0ddc462301086af99b6be446e1375d197b21c64e31a8e7cd795a954350e"
+    },
+    {
+      "bytes": 510464,
+      "kind": "public_component_states_v1",
+      "path": "diagnostic-checkpoints.pt",
+      "record_count": 4,
+      "sha256": "20f8675c5c7b98ad6c467bb3feec0d4eb825a7e18065a9d2d98e413b44707b9c"
+    }
+  ],
+  "rng_manifest_sha256": "5234d0bf8f3e6e59f77198a97e05cebfebe06564435720a7f038d9b95a8de488",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "sampling_law": "learned_particles_and_critic_gradient",
+  "schedule_horizon": 800,
+  "schema_version": 1,
+  "scope": "nonqualifying_global_recipe_horizon_diagnostic",
+  "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+  "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+  "task_execution_binding": {
+    "two_pole_800_schedule800_diagnostic_v1": "34ac07bf77f85e4916fcef2a3d1963d6485143903ba7cfe007204781f1b1df5e"
+  },
+  "task_id": "two_pole_800_schedule800_diagnostic_v1",
+  "training_schedules": {
+    "clock": "completed host updates; penalty observes completed critic updates",
+    "horizon": 800,
+    "optimizer_groups": {
+      "discriminator": {
+        "beta2": {
+          "first": 0.999,
+          "last": 0.999,
+          "maximum": 0.999,
+          "minimum": 0.999,
+          "observations": 800
+        },
+        "lr": {
+          "first": 0.0009,
+          "last": 9.021469108619375e-06,
+          "maximum": 0.0009,
+          "minimum": 9.021469108619375e-06,
+          "observations": 800
+        }
+      },
+      "prior": {
+        "beta2": {
+          "first": 0.999,
+          "last": 0.999,
+          "maximum": 0.999,
+          "minimum": 0.999,
+          "observations": 800
+        },
+        "lr": {
+          "first": 0.0006,
+          "last": 3.001373444659152e-05,
+          "maximum": 0.0006,
+          "minimum": 3.001373444659152e-05,
+          "observations": 800
+        }
+      }
+    },
+    "penalty_coefficient": {
+      "first": 170.0,
+      "last": 170.0,
+      "maximum": 170.0,
+      "minimum": 170.0,
+      "observations": 800
+    }
+  }
+}

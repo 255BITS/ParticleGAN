@@ -1,0 +1,11 @@
+{
+  "attempt_status": "completed",
+  "child_returncode": 1,
+  "deadline_monotonic": null,
+  "finished_monotonic": null,
+  "original_terminal_sha256": "a5c8f106c5e9a57f1815ee892b9794c2f490fa9240b1086377f47afee1246d15",
+  "paid_wall_seconds": 891.6997955399565,
+  "schema": "pg_common26_public_terminal_proof_v1",
+  "started_monotonic": null,
+  "token_sha256": "823916e3c6f2e4f200761e37e2c8f80b5e2b5ee1834f3cba141dd7f39753aafe"
+}

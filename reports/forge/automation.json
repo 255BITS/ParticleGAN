@@ -1,0 +1,895 @@
+{
+  "attempt_outcomes": {
+    "cancelled": 1,
+    "completed": 1208,
+    "error": 13
+  },
+  "component_timing": {
+    "measured_attempts": 609,
+    "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
+    "seconds": {
+      "evaluation": 528.9835569689603,
+      "sampling": 14.005095558502944,
+      "training_updates": 68160.34877172664
+    },
+    "unmeasured_attempts": 613
+  },
+  "concurrency": {
+    "mean_active_workers": 0.05206873186188079,
+    "measured_attempts": 1219,
+    "missing_interval_attempts": 3,
+    "observation_window_seconds": 1522806.7271749973,
+    "peak_distinct_gpu_devices": 2,
+    "peak_workers": 6,
+    "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
+  },
+  "cost_to_qualify": {
+    "maximum_seconds": 2565.99207282532,
+    "mean_seconds": 2565.99207282532,
+    "measured_outcomes": 1,
+    "median_seconds": 2565.99207282532,
+    "outcomes": 1,
+    "unknown_cost_outcomes": 0
+  },
+  "cost_to_reject": {
+    "maximum_seconds": 3479.4779098521685,
+    "mean_seconds": 709.8103934106168,
+    "measured_outcomes": 23,
+    "median_seconds": 222.5759124510223,
+    "outcomes": 23,
+    "unknown_cost_outcomes": 0
+  },
+  "execution_error_rate": {
+    "denominator": 1222,
+    "fraction": 0.011456628477905073,
+    "numerator": 14
+  },
+  "execution_jobs_avoided": 92,
+  "flops": {
+    "kind": "unavailable",
+    "value": null
+  },
+  "incomplete_task_rate": {
+    "denominator": 1225,
+    "fraction": 0.011428571428571429,
+    "numerator": 14
+  },
+  "limits": [
+    "Cost-to-outcome uses owned incremental paid costs. Evidence costs may overlap across requests and are not additive spending.",
+    "Avoided tasks are requested work left unattempted after a required scientific failure; cap-excluded work is not counted.",
+    "Queue-only paid attempts contribute spend, but require durable certified receipts for outcome/timing metrics."
+  ],
+  "memory": {
+    "cuda_peak_allocated_bytes": {
+      "maximum_bytes": 259587072,
+      "measured_attempts": 890
+    },
+    "cuda_peak_reserved_bytes": {
+      "maximum_bytes": 413138944,
+      "measured_attempts": 890
+    },
+    "maximum_reaped_child_peak_rss_bytes": {
+      "maximum_bytes": 2175885312,
+      "measured_attempts": 1219
+    },
+    "process_peak_rss_bytes": {
+      "maximum_bytes": 2169315328,
+      "measured_attempts": 1211
+    },
+    "supervisor_peak_rss_bytes": {
+      "maximum_bytes": 8757907456,
+      "measured_attempts": 1219
+    }
+  },
+  "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
+  "public_default_claim": false,
+  "qualification_scope": "Recorded attainment under each frozen request view and cap; not a current-source regrade or accepted public-default claim.",
+  "qualification_units": [
+    {
+      "attempt_ids": [
+        "4078445f46f147e39894e000026ec3f6",
+        "7c0aadf7ae4b45e98dde558d99a10ef4",
+        "a3ca0a13c3884bc6831f4234ef50cec7",
+        "a9ec1d9fb4e84a0f9b00a8fefebd0982",
+        "c15785a864654ea0abd72ac43aa642aa",
+        "d1ce289bf56a4fd392f856a568b8d202",
+        "eb7e794937a54c3e8c4a068fbf051157"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "560af40db25ca8bac4e1dead371be4f15963c20c585458efcf12d58c35df9ff7",
+      "evidence_wall_seconds": 223.7683490079362,
+      "incremental_paid_seconds": 223.7683490079362,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "b0770d82ddadea3337428682"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0df13ca9dc564d3eb8491fe172207f02",
+        "0fb46a74ee744bb79ba5b40fa2522b6c",
+        "2517089ee598460a86ded9c75338f222",
+        "4cead08afb894a31bda997203834fd5b",
+        "5dec0fdcf021489fb9d9ad3fc36a28f7",
+        "9936b20b4b7a4411a2f9e809d015fc87",
+        "9a57d0617feb471794da0343f1f995c2"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "a25d2228d7f3246f8b4debaa0430ebdb8ae4e9c43b1277fe01489a4a8fdd9bcf",
+      "evidence_wall_seconds": 224.04661783203483,
+      "incremental_paid_seconds": 224.04661783203483,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "5e4cdbefdf5c0524130dd5a4"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "fafc3da7cecf4b1780bbaedf66141092"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5",
+      "evidence_wall_seconds": 7.371452854000381,
+      "incremental_paid_seconds": 7.371452854000381,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "acde0787eb4675361a9ef0b8"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "00478c63af304eed981bbcbe761a2b6e",
+        "115587f39db84c9893ba252257ad782e",
+        "79f03ddde82d408080b60bb6ff1e2763",
+        "7cdf33b904b7470c8120d70cfffd9590",
+        "8bd7b466e7044b97985e972fa5a02c9b",
+        "97e2684a05b74b07ac0d313fb4422226",
+        "e6ded0b0bc874e6c80f1e5f8d51ece7b"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "bcfabe4b4fbe32ea9874a85b4dce45883a927aca08bf80a6b1fafeb65061413a",
+      "evidence_wall_seconds": 216.0948851328576,
+      "incremental_paid_seconds": 216.0948851328576,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "ffd5c4f33209021cb90f4efa"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "2dcfab451e2b4c2087c4c2dcdcfddb44"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+      "evidence_wall_seconds": 4.800435357999959,
+      "incremental_paid_seconds": 4.800435357999959,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "397c486fb1b97b0f8e581b42"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "002dcdd1918a433786bc1b7253c492e6",
+        "10ffa79853034264b944a0da626a99ff",
+        "3e32d034c6d74848945fc163f0365fae",
+        "48537eb0efbb40f0a14cb349c6fe3fdb",
+        "7b921455802944aa9020d1960bd2ea61",
+        "ce7f17c7f6e04750b30f0d742fdf5944",
+        "f33ca58d224c4e3fbec1fba7ee4de4ea"
+      ],
+      "avoided_execution_jobs": 21,
+      "avoided_tasks": [
+        "gaussian1d_stability",
+        "five_word_joint_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "candidate_revision": "3084339840eabf288376d3896a23e6586a8eaa4f51e6d914fa32d9f0fe2320f4",
+      "evidence_wall_seconds": 857.6828726229869,
+      "incremental_paid_seconds": 857.6828726229869,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "939944e2492bc891ccaf04ad"
+      ],
+      "status": "FAIL",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0e386457921d483b90a36903359cece5",
+        "297a41250ca349adb369963316292162",
+        "6069108176db4632af970bfabf5e6ee4",
+        "85c2e2a5433b40029c905d934c38b349",
+        "9111fe0d836c4a3f813478f9f4f306b8",
+        "a73d8a7b6b0f4a88ab5bb10b245e539d",
+        "f3d4c01d90d24b3086a808728dfbb91f"
+      ],
+      "avoided_execution_jobs": 21,
+      "avoided_tasks": [
+        "gaussian1d_stability",
+        "five_word_joint_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "candidate_revision": "72331ecdefe3524174489d502899cbae201bdd196ce0c465883d235bbd3a49b7",
+      "evidence_wall_seconds": 840.751981865018,
+      "incremental_paid_seconds": 840.751981865018,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "91181e6d4e6e99e9dac03174"
+      ],
+      "status": "FAIL",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "1d6c3ccad32149a89694b552fc88e752",
+        "2a0a34a7df06433182f461d73863b638",
+        "781eabde10e24c509878e9bc7434f9a2",
+        "8ec03328e955453598a4f150dbd1eafe",
+        "9719417dd79a441ca5395ea20191e3f2",
+        "d8b03d8f09454efd9235b4ef0ac3c168",
+        "e21102acefcd45519ef5a4839438f719"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "4f6d8fa83022a55ec18ca21a4aeb6343728e51ba8d0de1ac0762e43a52cf83ef",
+      "evidence_wall_seconds": 225.21723390708212,
+      "incremental_paid_seconds": 225.21723390708212,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "97dc99df65e91855173ccbc3"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "37f490e1c22749b396bb341b45220378",
+        "7176f2d6b3584865b8cba41ad0ddcff4",
+        "8724f8fa1fe34f909425518d7e9a45b2",
+        "a028529ce6604146b6f375212cd73429",
+        "a3b2db5542554e908bdec43160b7d7fa",
+        "b13caad3fccc4a20b3b58ebeac4b66d9",
+        "e2055ee1d89b4fb3b51329e79cdd8df4"
+      ],
+      "avoided_execution_jobs": 21,
+      "avoided_tasks": [
+        "gaussian1d_stability",
+        "five_word_joint_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "candidate_revision": "1c462fc648ce2cbbdbe7711f2dbe7932e4c6e7cb52bf582bd58edbd00e820e24",
+      "evidence_wall_seconds": 847.1702798650076,
+      "incremental_paid_seconds": 847.1702798650076,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "8e53b09acc90939c1f7b1e26"
+      ],
+      "status": "FAIL",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "3c1c30e6fe724c848b0bdada2811798f",
+        "83f9cff6c23242eb920f5c29ef9c1623",
+        "97d2c6a32eae4e219ed7d983cccc2a21",
+        "9989749a18dc48f486cd0d038af6ee7d",
+        "bcd6fc4de68b4d44824ea854a9557889",
+        "ecef263b7a4f4eee8026e40ec592401f",
+        "f4860e4f4e574dee96a7ffe5a81624a4"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "b1cf2475873297aa04ad8fb27e6340df13cb0d6f6054b3f906323a23ddd314da",
+      "evidence_wall_seconds": 216.91530906688422,
+      "incremental_paid_seconds": 216.91530906688422,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "1d211cd9573323464022ac03"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0209e95728cd45018cf90debb1eb2b91",
+        "13f001247e7940a397f3814291fd97a5",
+        "2568ffe053694fd5bd61a33feb058978",
+        "57e4ee032d5349b28d09251da4965936",
+        "591ddc034f304396baaf03d5dccd2c21",
+        "5e0f565f6e16444488a95c962c811604",
+        "be7aee3de31048a28ad9318019d2e1b2"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "fafee2b174ced860fb86cdb3d4e6605e634e9fcf372af78d6fb282d7e3f3f1ee",
+      "evidence_wall_seconds": 218.79622008826118,
+      "incremental_paid_seconds": 218.79622008826118,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "547709d830dd16d57ce458a1"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "04cbfddb078d499faff04bd63a43d60c",
+        "3b0ffbbd58dd40fbb38cf0253b43c72a",
+        "5b00fc5ffdd44442827379a2e0b35fd3",
+        "628f7dcfef8840f6b2c19e194803da51",
+        "9394985733534e9aa50b904035b6756a",
+        "9f15b4afc5534c52964b92a656b67552",
+        "e32bc6ad5b7e4860b6e1b1436767103d"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "gaussian1d_stability",
+        "five_word_joint_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "8d7b34c2b3872f1d9aa567409a191688db6b71a45ee16549fd05fbe7c8a7ed82",
+      "evidence_wall_seconds": 904.558554194984,
+      "incremental_paid_seconds": 904.558554194984,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "97b839b82d983c16e8e18651",
+        "bb248ec0d6368abb10dcb6ec"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "02dece4572564e2b8a9897194da155f2",
+        "08690b539b1f43c0a78c7227bfe32d52",
+        "21b81561c3ae4a889c7eaa87b274f372",
+        "3b48c653a193493ba48631635fa1e6e7",
+        "5729a7b4269841dea9f47cbd65e0ddab",
+        "9a560368efc941f0a56b97d6b1959cb0",
+        "f3bb657b13d140749e0853d0cf81d15a"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "b9288b487e33e587bb1f5c86b87e4728ef53db4b1c87d2a091d583d1daeec448",
+      "evidence_wall_seconds": 216.04075907799415,
+      "incremental_paid_seconds": 216.04075907799415,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "a8d47cbe6b84ed23d0231947"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "020ac9e1accd473a9228717fed14849a",
+        "025680a54e684fa8a56826825581d3ba",
+        "0ef87e04f15d4e9abd6a33e08cc3efea",
+        "1363cfa408eb4c5c9562f6d08567f32d",
+        "143ef698433b4a4eabca1dd5c069b9a4",
+        "145ecb9085514dbd9ece85959ba474a3",
+        "263f288afdae498eb5baa9c207eeeb7b",
+        "2d054cfd49724793b99438411612eae3",
+        "476f8d2bd510431399f0064469aeefc3",
+        "4f0d8120373c440b8aab478cdd6dd3c0",
+        "5929100533eb4a6cb2ea36a2611f8f5a",
+        "5a37e2ead5b146dc8917f7c61112ec89",
+        "667e99ebeb544c2596d4d5c355344ed8",
+        "6b069db5a1c5434485d1cef6e897ea01",
+        "778cee61f6b4451ebc4098e26bf981b5",
+        "7efc3dbd9cf34eb98a6c070092ce6285",
+        "820f209109fd4ca9a925f0cfd165f456",
+        "8ced570ed2284cec861ddd54df0d7f02",
+        "9573a0eae4f0461aba07f9be8f6ad63b",
+        "968ecb2b4909498295de6f8d9dc6a0c3",
+        "9988100ab39245f3909e05caa66fc8cf",
+        "a29ca92e6bfe4c3abecf11957d257acb",
+        "a38cd6b230f44641b3ca63e0293d1838",
+        "b658fa069d88407e997d16e6a8870515",
+        "b9e5b67b60434e319f301801cf0bb8f3",
+        "d39edface2f84f6a832db1eec0821268",
+        "db7a586a51c648d8b934b82f66a004e2",
+        "f8d48ad77e8d4e29aa101865af67918a",
+        "ff5c8fc21a4043308c05d92e7db09c7d"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "bc978330be9d69b4b58e45de56f35b50b024b9537a87a338b0dee5494deb31cd",
+      "evidence_wall_seconds": 2517.6150145498104,
+      "incremental_paid_seconds": 2517.6150145498104,
+      "qualified_tier": 2,
+      "rejected_tier": 3,
+      "request_ids": [
+        "f206c37dd98f134899fede39"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0aa6e1e160f64e96bf6782cc38a14ce4",
+        "237f05a0cce7467b8e011e4d3f2bda10",
+        "30b3c8c200de40b38920ecc9a3fe98f1",
+        "46ef9ca2646b4b4fa84eb510171bba7f",
+        "49101978fa1e4196858deeda931615b5",
+        "4f9bd2fe69034904a3b9606ff8b3380a",
+        "54cc309d7e1f419c9e76ff2ee1699ad0",
+        "580095874fe24343bec83280b8a8adfa",
+        "5ca9596b366f4a2380a29c99444e43c2",
+        "5d9ef548748947d9bcbe7835ea50705d",
+        "657f76ece11f4a93808cdf74122582b3",
+        "65fca230122942adb13799a109265b28",
+        "83072537e6d04bf98127afbaf881f145",
+        "862fa10e540b45e48ee94d7c0640470e",
+        "9a659042827a4e2db5362bb72300f24c",
+        "a13f9ff98cb64153823f07f6535198ab",
+        "b96c7236866b4610a9b55e55785517c3",
+        "beecdfb118ad414982a2a6ad618993df",
+        "c7508d7af21e411db3617d7007bbcadf",
+        "cdd253025d03437e8b3c8f32ec15baa8",
+        "d4a0d6e34cbf493a81381bc19545bd1b",
+        "d60ade0394994dc3844b4256c85d1356",
+        "ecf90065f1584256a12020060e3074fb",
+        "f04a263a1b84483e9aa240cb3cbdba1e",
+        "f0f2a7596c4d4cdbad9e26fdf48af123",
+        "f0f5faceee6c471d848c4b748a936318",
+        "f3fb0738b3ac4dda9495dd9f76fce883",
+        "fdf80041b38942e99cacd2e2874a8e0d"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "9b869d8e95bc0ea145098ba5a3e6059fb135050b033cab71695ba625e51dccc0",
+      "evidence_wall_seconds": 2117.165756800052,
+      "incremental_paid_seconds": 2117.165756800052,
+      "qualified_tier": 1,
+      "rejected_tier": 2,
+      "request_ids": [
+        "18db7f924ff2bc1a9534defc"
+      ],
+      "status": "FAIL",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0466b9b84f6e4a30a36cf1d3e2357443",
+        "04bdce86bf5d450eba77e030b4d2c8cd",
+        "107a60b7168444b38b3b068a9a854176",
+        "115487721ecf4269ba1c51c6b3b269a5",
+        "13cabd9c88fa4df4af186e641c046a86",
+        "14e55ba8ae4c4ad89a11d76a2ae06852",
+        "152ce7ced8e74275aa47a5f2f5e99611",
+        "16ffa34a053140d58da0562f7e4e4549",
+        "534748cbd1f24ee4a8208a9ab38e23a2",
+        "695263469b104ddba700b66ea0843ec8",
+        "6b9cd00388eb4e6a8efd644d3683fd8a",
+        "6cbe082f020e4c9d96899be0cb5844e9",
+        "6e582d69d3304e1f8ff273bc4a0e58d8",
+        "73d292e48415468da02e005da548bff1",
+        "748a747f7f984e89af34f775f29974cb",
+        "790b9b08584543a3812a737baa6716e7",
+        "79830b7ba76b4b208ea60e24cd639d41",
+        "7adf20f3b4744284b2636fa3d864f2f0",
+        "7f561abdc9bb4f5e988478c32c32ad18",
+        "9172df1376154c82881abf383128869e",
+        "9a11c54209454bc5ba5afe4aa7787423",
+        "d275d224e2b54812a55b58fc0f443101",
+        "d62e9931a8b94bb88c54c9d02186ef33",
+        "d8804dfc19204afca81615bd73da90f3",
+        "d953893876524a4f966ef148e83118bd",
+        "e2308cfc7fa94052b16dcfe5bd3b9f6e",
+        "e8ce58b245764b2ba335538ce6b8caed",
+        "fe106cd86a9047a7ba63ed3f2c1cf447"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "bd5a3bd25bb702a6d2602883df4c1644d3605ed373fee205e54ac15abd12f58b",
+      "evidence_wall_seconds": 2110.5164849509893,
+      "incremental_paid_seconds": 2110.5164849509893,
+      "qualified_tier": 1,
+      "rejected_tier": 2,
+      "request_ids": [
+        "b753104f4c26be878788ceae"
+      ],
+      "status": "FAIL",
+      "through_tier": 2,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "1e67f608c6304422b1db3f7105af4f72",
+        "238ca6778e75491da0ab7469d721e1db",
+        "41863909faad44c2b0015c2f460a0290",
+        "798d82fe66bf4324bb84a0a3d85a89d4",
+        "7be0ed5d3c1a4210b6f0dd1d6365f6ea",
+        "8c0d7d73813c4ebfae68d0d642258b97",
+        "a3819a262772499db4391b91999f9b8b"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "a88fd9e1c2fa32551469be75ba3e2ac863169cffcc22450fa989d171f381483a",
+      "evidence_wall_seconds": 219.10200906789396,
+      "incremental_paid_seconds": 219.10200906789396,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "23b82b4261ea781465d1bb26"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "1a8c845303714eddae1516aa651c600a",
+        "4fad83388e8141a0818f632a6fccabda",
+        "68c7724ba26745afb3a0c182604b0256",
+        "9a83403d601444d6b28306d7427de33f",
+        "9b23ec36704747b3b91e40f2abac5858",
+        "c349049418d249389d196a04aa429b45",
+        "d8615d861e294277b8f1ac08d3a26ffe"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "470c5fe68dd297eccd3f657f85673c6943ec92a46b6e47fa6a6be4956c70db27",
+      "evidence_wall_seconds": 217.0478892971296,
+      "incremental_paid_seconds": 217.0478892971296,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "1d21f5f89da6f8ecb434bce3"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "b766e89d1a0843ba9af94f2ce94e4273"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9",
+      "evidence_wall_seconds": 5.255199994000577,
+      "incremental_paid_seconds": 5.255199994000577,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "043465ae751e26417aad2e9a"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0031ba37faa14f999038fcfaddee07d5",
+        "036390fe010f4f00b5abc5e409af056a",
+        "064cecd705564a789f1b90bbafb217d8",
+        "0bb6442eb34d4334b5b2422b7d3bbb42",
+        "10d0f94101a443c0b507cb1e23c44890",
+        "26a191cb73ea4bfab90d07a9bc2f805a",
+        "3e4468c447344a368c81296108c53468",
+        "4439b248968f4a0f8df5465ec19f67d8",
+        "4fe88f917ed74a95a6c7170ec9f95d3f",
+        "709883c2451748199927eff7067d46b8",
+        "774433c2171548d094407f9246af1206",
+        "78d7fdecada54a61ba05874e77ac56fe",
+        "78f9cd763da04fc7a3a7d235eca25ded",
+        "7954040f61484c67aec06acd47612604",
+        "800c8f10664541c682c1ef6b8b32046a",
+        "8a6f138f30cb4d86865639c572c61a3d",
+        "8b2eac3ed12549269a68483719552e24",
+        "9fb83c3425f8403c8e9fac0b13feed1e",
+        "a59db4ab92d44045be17de2d9f9eed72",
+        "a72beeb326ac40aeb4529359a5c72bb1",
+        "b51b096228f54d0baf40e02b0b67749c",
+        "beec3429faef4670aa60b4e45cdaab13",
+        "cbfc9f9cd70f40c99ba751daf7ac2b3d",
+        "df208f4d5f9d4feab99e14fdac5e3d5c",
+        "ebca93189f0e4b3fbfd1d999ee5ae9ea",
+        "ec7f719ad37843c0b536f24169724eef",
+        "f1783daa04b7416f9819e8bcc4d565e6",
+        "f4028fa01160452dbe941554aae6982d"
+      ],
+      "avoided_execution_jobs": 1,
+      "avoided_tasks": [
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b",
+      "evidence_wall_seconds": 3479.4779098521685,
+      "incremental_paid_seconds": 3479.4779098521685,
+      "qualified_tier": 1,
+      "rejected_tier": 2,
+      "request_ids": [
+        "751e444969992407a8bc44af"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "0e978476e02f43da81debbbe3c1b1784",
+        "12ebab6743264aaca9854e1d98bd2420",
+        "1565061ce93b4f3b96e0ba5199636b8e",
+        "30323b33e3c943fbbd46f35f51e780fc",
+        "31fcb73f64774c86973dcd3db11a13a5",
+        "3bc34531e5084d37b99744b7bcbfc612",
+        "40c162a797fa4b989db47d03cf6f3020",
+        "45d95e83dc7945d4bc461150312a32d4",
+        "465e27337bf04ae7a5f5453399733b8f",
+        "554bda1905ef4a3eb7b825679bd9efe4",
+        "638005f1457b41e0a0f9daf790d49c01",
+        "70c0315cf2d6447bb4c4d6871ef63844",
+        "73104832003f4f7ca6ec21fc0a3a795b",
+        "777abc459a7c4b898a0cb28e26bce070",
+        "8a8c883ed54049b39c3aca762a6f0e4b",
+        "9377962203d1437cba35db1054915287",
+        "946fa7621c40477a8d7e89febd7f7cf7",
+        "9b8b2cf4650242e991dd0ba8f4f40bb3",
+        "9b9f896d59d0440383d8fef55c18098c",
+        "a8ed2f55cbf441eca23e3652ad626aab",
+        "af97fa02492a4f4c8ab8eaf18a094bbc",
+        "b0c6f67410034a4fa548079525dd41e3",
+        "baec8010a206497db6d595b59a9c412b",
+        "c04ee10ecc3e4ccf8e0dea67645acd11",
+        "c707b0c32be1463a84a9ffb92e87472e",
+        "c918480989174ef4af1532b57cfa750a",
+        "cff676fdda004c3696529ed7a082ddaf",
+        "ee6f7c11f0a640ae95e684b119a92905",
+        "ffb429b1b3314120a7cc791c68ef59b7"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967",
+      "evidence_wall_seconds": 2565.99207282532,
+      "incremental_paid_seconds": 2565.99207282532,
+      "qualified_tier": 3,
+      "rejected_tier": null,
+      "request_ids": [
+        "b3c58d2892e9a3f2beb09422"
+      ],
+      "status": "PASS",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "1f40b17a4e0142bb91a0c7fe8a0fd014",
+        "5c505572378f423a877aecabcc91fa18",
+        "8943456c0190412e8c74a41aa18ec6b3",
+        "9bad9a33cc3546cf8c83f8071f399265",
+        "ab576f6654f14329bc30b385278173eb",
+        "c68238a7d9784306a8a07ec28a870b93",
+        "e94f86fd67b147af8c2a3d4af04cd88e"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "61092db5543c74892cd841c83016e7c08f02c3ed5f29a164a896e61f2f9040b5",
+      "evidence_wall_seconds": 218.37786252691876,
+      "incremental_paid_seconds": 218.37786252691876,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "93bfe1ce1cd3e1b4255afa7d"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "102d76dbaa4d43f587c37185b79d01c9",
+        "1b96117aec3a4e01b20cb274cba8c810",
+        "1fa456e3c78b456c8ae0c6cf0e8182ef",
+        "5b73fc7b44c7447aa9b4f30db0db40a0",
+        "c825700234c64a14bd4edb8f707a1fa0",
+        "cd53d7588e5d4a1a9bcebda72c435524",
+        "f476373f901344b78e2058286535c182"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "dab4930ddc80747cb0b6e384c558b95e65ea437db231fa35c683b3961f682df8",
+      "evidence_wall_seconds": 215.2900580811547,
+      "incremental_paid_seconds": 215.2900580811547,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "bfb332265a37a3efd36f25d2"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "030e63a1f5364aabbd99f5bb4074be3f",
+        "217792e6bfe74987ae23da4da4b117a7",
+        "3db9815cbee2441586da98e2a47e8166",
+        "4f2f4873cbc54f14920fd62a0b2238ce",
+        "a12d444637ab45c5afdbd013c1452ed5",
+        "b242d0475e944043a83a441dba36b7e5",
+        "f02d2d4bce8b4ba8b15487a1c36c2e9d"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "e90b4b853ecee6d3680b4005d08670018c68be19da679e3e5b76d06d2c6f0005",
+      "evidence_wall_seconds": 222.5759124510223,
+      "incremental_paid_seconds": 222.5759124510223,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "4bea9ea16845386de5ab26d5"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    }
+  ],
+  "queue_available": true,
+  "queue_locations": [
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout/runs/forge",
+    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/implementation-pilot",
+    "/home/martyn/dev/ParticleGAN/runs/forge",
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-tier1-repair/queue",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-physics-20261009/queue",
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-tier2-round6-20261011/queue"
+  ],
+  "receipt_issues": [],
+  "requests_with_unavailable_cap": 0,
+  "reuse": {
+    "evidence_uses": 264,
+    "reused_evidence_uses": 7,
+    "submitted_execution_demands": 378,
+    "unique_evidence_jobs": 257
+  },
+  "schema_version": 1,
+  "scope": "recorded current Forge receipts; historical imports are excluded",
+  "spend": {
+    "attempts": 1222,
+    "known_wall_seconds": 79341.69766439771,
+    "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
+    "unknown_cost_attempts": 0,
+    "wall_seconds": 79341.69766439771
+  },
+  "task_gate_counts": {
+    "FAIL": 570,
+    "INCOMPLETE": 14,
+    "PASS": 641
+  },
+  "tasks_avoided": 94,
+  "tier_rejections": {
+    "1": 19,
+    "2": 3,
+    "3": 1
+  }
+}

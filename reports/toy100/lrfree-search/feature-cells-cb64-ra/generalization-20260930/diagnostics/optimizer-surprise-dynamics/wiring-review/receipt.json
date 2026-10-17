@@ -1,0 +1,44 @@
+{
+  "base_package_sha256": "9954a37e277a0aa1682c6bc37461b29a2704b5bee2a42b66c031d1a76016c2a1",
+  "changed_modules": [
+    "continuous.py",
+    "policy.py",
+    "recipes.py",
+    "training.py"
+  ],
+  "concrete_remaining_source_defects": [],
+  "config_only_delta": {
+    "reopen_guard": "settled"
+  },
+  "cuda_calls": 0,
+  "default_schema_and_dict_compatibility": "guard None omits recipe and checkpoint key; original schemas1/4 retained",
+  "draws": 0,
+  "epoch_timing": "after actual critic optimizer/penalty epoch change, before changed-loss q queued",
+  "forwards": 0,
+  "generic_roles": [
+    "generator",
+    "encoder",
+    "router",
+    "critic"
+  ],
+  "guard_checkpoint_validation": "strict scalar/role/scale/time checks after optimizer/control validation and before live release/writes",
+  "models": 0,
+  "outside_declared_nodes_ast_equal": true,
+  "owner_runtime_evidence": "19 affected +35 existing +4 default R1 PASS; reviewed, not rerun",
+  "package_files": 28,
+  "package_sha256": "c5923f22ceec88292788a0150007ad23d5a5146d2ad9f8ca60e6cafd93770c30",
+  "pt_reads": 0,
+  "remaining_limits": [
+    "not an external-target classifier",
+    "full guarded quality and GPU replay require original fresh validation",
+    "custom caller loss phases without an attached KA2 optimizer record are not inferred"
+  ],
+  "routed_and_encoder_ownership": "same existing homogeneous group ownership; table/noise roles excluded; routing module unchanged",
+  "scope": "independent read-only source/JSON review; no runtime repetition",
+  "scorers": 0,
+  "status": "PASS",
+  "torch_imports": 0,
+  "unchanged_from_cpu_fix": 24,
+  "updates": 0,
+  "whole_continuous_module_ast_inverse_exact": true
+}

@@ -1,0 +1,21 @@
+{
+  "all_members_individually_inspected": 17366,
+  "archive_bytes": 111262244,
+  "archive_path": "/ml2/hypergan/forge-generator-step-archive-20261003/generator-step-capacity16-learning2-v1.tar.gz",
+  "archive_sha256": "271cf1c21a341d33d520311160c3d9c03f3ffcb6094dd544602e2084089c8949",
+  "availability": "LOCAL_ONLY",
+  "bootstrap_members_inspected_and_hydrated": 29,
+  "current_durable_attempts": 2,
+  "full_index_sha256": "62c42dd3a03570ed023d332e5a629191c30306296478d219c0a64881b65a3696",
+  "new_sampler_calls": 0,
+  "new_training_updates": 0,
+  "original_inputs_unchanged": true,
+  "prior_engineering_attempts": 1,
+  "prior_scientific_attempts": 2,
+  "publication_required_inputs": 10466,
+  "qualification_changed": false,
+  "remote_replication": "NOT_PERFORMED",
+  "resolver": "experiments.forge.artifact_resolver",
+  "schema": "particlegan_generator_step_archive_verification_v1",
+  "status": "PASS"
+}

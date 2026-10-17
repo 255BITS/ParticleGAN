@@ -1,0 +1,22 @@
+{
+  "gif_sha256": "ede0d3e2efca38b798b24b2c29e388ffbf52c550613de78edd3d54306e6cb164",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "e1ce9e831a60d79efd587a0d0c456887dbe031adb49f33cf1e7859cac2dce137",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-six-smoothing-v1/71c1218bcea94954838a766c2fda4972/clockfree-proof/comparisons.pt": "93114dbf53acbad7a49135c070e05bdc585d95b5094305ada6eb9700843bbdf9"
+  },
+  "task_id": "clockfree_audit_measurement_v1"
+}

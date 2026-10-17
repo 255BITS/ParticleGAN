@@ -1,0 +1,285 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -1344,9 +1344,50 @@
+         return child,parent,detail
+ 
+ 
++def paired_average_geometry(snapshot, ema_features, *, step, snapshot_serial,
++                            finite_coordinates=None):
++    """Current clean anti-blur geometry, not stationarity or quality evidence.
++
++    The FAST cache must contain every applied copy and novel birth. No random
++    draws or count tests are added. One joint Q-sized exception set covers EMA
++    support, the even-fitted inside region and paired real-topology agreement.
++    """
++    if snapshot.row_features is None or snapshot.query_cell_ids is None:
++        raise ValueError("paired-average geometry needs the refreshed FAST cache")
++    n = len(snapshot.row_features)
++    if (ema_features.ndim != 2 or len(ema_features) != n
++            or ema_features.shape[1] != snapshot.width or ema_features.device != snapshot.device):
++        raise ValueError("paired-average EMA features do not match the current chart")
++    finite = torch.isfinite(snapshot.row_features).all(1) & torch.isfinite(ema_features).all(1)
++    if finite_coordinates is not None:
++        if (finite_coordinates.shape != (n,) or finite_coordinates.dtype != torch.bool
++                or finite_coordinates.device != snapshot.device):
++            raise ValueError("invalid paired-average finite-coordinate mask")
++        finite &= finite_coordinates
++    stamp = dict(schema=1, policy="ema_support_inside_current_real_group_Q_v1",
++        snapshot=snapshot_serial, step=step, rows=n, required=n-math.floor(Q*n),
++        cells=snapshot.cells, rank=snapshot.rank, groups=0, calibration_rows=snapshot.calibration_rows,
++        chart_valid=bool(snapshot.valid_metric), duplicate_ok=bool(snapshot.duplicate_fraction<=Q),
++        finite_rows=int(finite.sum()), same_group_rows=0, ema_eligible_rows=0, coherent_rows=0,
++        eligible=False)
++    if not bool(finite.all()):
++        return stamp
++    groups = snapshot._mass_topology()
++    metric = snapshot.transform(ema_features)
++    categories, scores = snapshot._count_categories_metric(metric)
++    pvalues = (1.+len(snapshot.null_scores)-torch.searchsorted(snapshot.null_scores,scores))/(1.+len(snapshot.null_scores))
++    same_group = groups[snapshot.query_cell_ids] == groups[categories//2]
++    eligible = (pvalues>Q) & (categories.remainder(2)==0)
++    stamp.update(groups=snapshot.mass_groups, same_group_rows=int(same_group.sum()),
++        ema_eligible_rows=int(eligible.sum()), coherent_rows=int((same_group&eligible).sum()))
++    stamp["eligible"] = bool(stamp["chart_valid"] and stamp["duplicate_ok"]
++                             and stamp["coherent_rows"]>=stamp["required"])
++    return stamp
++
++
+ class FeatureCellBirthDeath(ParticleBirthDeath):
+     """Actual GANTrainer backend; keeps original FIFO and row-copy mechanics."""
+-    BACKEND_SCHEMA = 6
++    BACKEND_SCHEMA = 7
+ 
+     def __init__(self,trainer,seed):
+         super().__init__(trainer,seed)
+@@ -1359,6 +1400,8 @@
+         self.settings.update(novel_birth_policy="paired_even_real_anchor_shared_3K_plus_2_v1",
+             novel_birth_cells=4,novel_birth_linearizations=4,
+             novel_birth_trust="per_model_prior_rms_coordinate_spread")
++        self.settings.update(paired_average_policy="ema_support_inside_current_real_group_Q_v1",
++                             paired_average_expiry="strictly_less_than_one_real_fifo_turnover_v1")
+         self.lineage = LatentLineage(self.N,self.settings["lineage_degree"],trainer.device)
+         self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
+                           neighbors=PARENT_RESERVOIR,chunk=recipe.birth_death_chunk,lineage=self.lineage)
+@@ -1366,9 +1409,72 @@
+         self._sampling_prior, self._sampling_controller = trainer.prior, trainer.controller
+         self.snapshot = None
+         self.snapshot_serial = 0
++        self.paired_average = dict(schema=1, policy=self.settings["paired_average_policy"],
++            snapshot=0, step=0, rows=self.N, required=self.N-math.floor(Q*self.N),
++            cells=0, rank=0, groups=0, calibration_rows=0, chart_valid=False, duplicate_ok=False,
++            finite_rows=0, same_group_rows=0, ema_eligible_rows=0, coherent_rows=0, eligible=False)
+         self.counters.update({key:0 for key in ("cell_evals","cell_discoveries","ordinary_moves","feature_rebuilds",
+                                                 "feature_distance_cells","projection_products","count_test_terms",
+                                                 "feature_forward_rows","invalidated_cells","novel_birth_moves","novel_birth_attempts")})
++
++    def paired_average_eligible(self, step):
++        """Empirical bounded-stale view, valid for less than one FIFO turnover.
++
++        G/D can move between reactions. This is an anti-blur lease, not an
++        every-update support or distribution certificate. Only scalar semantic
++        state is needed after load; the ephemeral chart may remain absent.
++        """
++        stamp = self.paired_average
++        return bool(stamp["eligible"] and stamp["snapshot"]==self.snapshot_serial
++                    and type(step) is int and step>=stamp["step"]
++                    and self.fill==self.N and 0<=self.rows_since_eval<self.N)
++
++    @torch.no_grad()
++    def _record_paired_average(self, trainer, snapshot):
++        """One extra chunked EMA forward after every reaction action."""
++        modes = [(m,m.training) for root in (trainer.ema_G,trainer.D) for m in root.modules()]
++        # Supported custom eval forwards can draw global randomness or update
++        # registered buffers. The measurement is observational: preserve both
++        # without consuming any dedicated trainer/reaction stream.
++        buffers = [(m,dict(m._buffers),{name:None if value is None else value.detach().clone()
++                    for name,value in m._buffers.items()},set(m._non_persistent_buffers_set))
++                   for root in (trainer.ema_G,trainer.D) for m in root.modules()]
++        streams = [self.stream,*[getattr(trainer,name) for name in getattr(trainer,"_STREAMS",())]]
++        stream_states = [(stream,stream.get_state()) for stream in streams]
++        gradients = [(p,p.grad,None if p.grad is None else p.grad.detach().clone())
++                     for root in (trainer.ema_G,trainer.D) for p in root.parameters()]
++        devices = [trainer.device.index] if trainer.device.type=="cuda" else []
++        features,finite_output = [],[]
++        try:
++            with torch.random.fork_rng(devices=devices):
++                trainer.ema_G.eval(); trainer.D.eval()
++                for block in trainer.ema_prior.z.detach().split(self.settings["chunk"]):
++                    raw = trainer.ema_G(block)
++                    if tuple(raw.shape[1:]) != self.sample_shape:
++                        raise ValueError("EMA generator output shape does not match the real FIFO")
++                    finite_output.append(torch.isfinite(raw).flatten(1).all(1))
++                    features.append(self._features(trainer,raw,chunk=self.settings["chunk"]))
++        finally:
++            for stream,before in stream_states:
++                stream.set_state(before)
++            for parameter,original,before in gradients:
++                parameter.grad = original
++                if original is not None:
++                    original.copy_(before)
++            for module,original,before,nonpersistent in buffers:
++                module._buffers.clear(); module._buffers.update(original)
++                module._non_persistent_buffers_set.clear(); module._non_persistent_buffers_set.update(nonpersistent)
++                for name,value in original.items():
++                    if value is not None:
++                        value.copy_(before[name])
++            for module,mode in modes:
++                module.training = mode
++        finite = (torch.isfinite(trainer.prior.z.detach()).all(1)
++                  & torch.isfinite(trainer.ema_prior.z.detach()).all(1)
++                  & torch.cat(finite_output))
++        self.paired_average = paired_average_geometry(snapshot,torch.cat(features),
++            step=trainer.completed_steps+1,snapshot_serial=self.snapshot_serial,
++            finite_coordinates=finite)
+ 
+     @torch.no_grad()
+     def _jitter(self,trainer,latent,prior,noise):
+@@ -1515,6 +1621,11 @@
+                 if self.isolation:
+                     c["iso_moves"] += len(iso_child)
+                 last["moves"] = len(child)+len(iso_child)+len(newborn)
++            # All copies/new latents have been applied and the FAST metric
++            # cache refreshed. EMA is queried in this same current-D chart.
++            self._record_paired_average(trainer,snapshot)
++            last["paired_average"] = dict(self.paired_average)
++            last["paired_average_forward_rows"] = self.N
+             c["feature_distance_cells"] += snapshot.work["distance_cells"]
+             c["projection_products"] += snapshot.work["projection_products"]
+             c["count_test_terms"] += snapshot.work["count_test_terms"]
+@@ -1530,6 +1641,8 @@
+         result.update(backend="feature_cells",settings=dict(self.settings),snapshot_serial=self.snapshot_serial,
+                       snapshot_work=None if self.snapshot is None else dict(self.snapshot.work),
+                       population_policy=dict(self.population_policy),
++                      paired_average=dict(self.paired_average),
++                      paired_average_age_real_rows=self.rows_since_eval,
+                       lineage_edges=int((self.lineage.neighbors>=0).sum())//2)
+         return result
+ 
+@@ -1537,11 +1650,12 @@
+         result = super().state_dict()
+         result.update(backend="feature_cells",backend_schema=self.BACKEND_SCHEMA,settings=dict(self.settings),
+                       sample_shape=self.sample_shape,snapshot_serial=self.snapshot_serial,
++                      paired_average=dict(self.paired_average),
+                       population_policy=dict(self.population_policy),lineage_neighbors=self.lineage.neighbors.clone())
+         return result
+ 
+     def check_state(self,state):
+-        extra = {"backend","backend_schema","settings","sample_shape","snapshot_serial","population_policy","lineage_neighbors"}
++        extra = {"backend","backend_schema","settings","sample_shape","snapshot_serial","population_policy","lineage_neighbors","paired_average"}
+         base = set(self._TENSORS)|{"fill","cursor","rows_since_eval","counters","last","stream"}
+         if (not isinstance(state,dict) or set(state)!=base|extra or state.get("backend")!="feature_cells"
+                 or state.get("backend_schema")!=self.BACKEND_SCHEMA or state.get("settings")!=self.settings
+@@ -1559,6 +1673,7 @@
+                 or any(type(value) is not int or value<0 for value in state["counters"].values())
+                 or not isinstance(state["last"],dict)):
+             raise ValueError("invalid feature-cell diagnostics state")
++        self._check_paired_average_state(state)
+         for key in ("S","W","n","anchor","radius","pending"):
+             value,expected=state[key],getattr(self,key)
+             if (value is None or value.shape!=expected.shape or value.dtype!=expected.dtype
+@@ -1577,6 +1692,68 @@
+                                       or reservoir.dtype!=self.radius.dtype or not bool(torch.isfinite(reservoir).all())):
+             raise ValueError("invalid feature-cell reservoir")
+ 
++    def _check_paired_average_state(self, state):
++        stamp = state["paired_average"]
++        if not isinstance(stamp,dict) or set(stamp)!=set(self.paired_average):
++            raise ValueError("invalid paired-average semantic state")
++        if (type(stamp["schema"]) is not int or stamp["schema"]!=1
++                or stamp["policy"]!=self.settings["paired_average_policy"]):
++            raise ValueError("incompatible paired-average geometry law")
++        booleans = ("chart_valid","duplicate_ok","eligible")
++        integers = ("snapshot","step","rows","required","cells","rank","groups","calibration_rows",
++                    "finite_rows","same_group_rows","ema_eligible_rows","coherent_rows")
++        if (any(type(stamp[k]) is not bool for k in booleans)
++                or any(type(stamp[k]) is not int or stamp[k]<0 for k in integers)):
++            raise ValueError("invalid paired-average typed fields")
++        if (stamp["snapshot"]!=state["snapshot_serial"] or stamp["rows"]!=self.N
++                or stamp["required"]!=self.N-math.floor(Q*self.N)
++                or any(stamp[k]>self.N for k in ("finite_rows","same_group_rows","ema_eligible_rows"))
++                or stamp["coherent_rows"]>min(stamp["finite_rows"],stamp["same_group_rows"],stamp["ema_eligible_rows"])
++                or (stamp["finite_rows"]==self.N
++                    and stamp["coherent_rows"]<max(0,stamp["same_group_rows"]+stamp["ema_eligible_rows"]-self.N))
++                or (stamp["finite_rows"]<self.N
++                    and any(stamp[k] for k in ("groups","same_group_rows","ema_eligible_rows","coherent_rows")))
++                or stamp["groups"]>stamp["cells"] or stamp["rank"]>self.settings["rank"]
++                or stamp["cells"]>min(self.settings["cells"],(self.N+1)//2)):
++            raise ValueError("inconsistent paired-average counts/chart")
++        expected = (stamp["chart_valid"] and stamp["duplicate_ok"] and stamp["finite_rows"]==self.N
++                    and stamp["coherent_rows"]>=stamp["required"])
++        if stamp["eligible"]!=expected:
++            raise ValueError("paired-average eligibility disagrees with its counts")
++        if stamp["chart_valid"]!=(stamp["rank"]>0):
++            raise ValueError("paired-average chart validity disagrees with its rank")
++        if stamp["snapshot"]==0:
++            if (stamp["step"]!=0 or stamp["cells"] or stamp["rank"] or stamp["groups"]
++                    or stamp["calibration_rows"] or any(stamp[k] for k in booleans)
++                    or any(stamp[k] for k in ("finite_rows","same_group_rows","ema_eligible_rows","coherent_rows"))):
++                raise ValueError("invalid initial paired-average state")
++        elif (stamp["step"]<=0 or stamp["cells"]<=0 or stamp["calibration_rows"]!=self.N//2
++                or (stamp["chart_valid"] and stamp["rank"]<=0)
++                or (stamp["finite_rows"]==self.N and stamp["groups"]<=0)
++                or state["last"].get("step")!=stamp["step"]
++                or state["last"].get("snapshot")!=stamp["snapshot"]
++                or state["last"].get("paired_average")!=stamp):
++            raise ValueError("inconsistent paired-average reaction stamp")
++        if stamp["snapshot"]:
++            last = state["last"]
++            if any(type(last.get(key)) is not int or last[key]!=stamp[field]
++                   for key,field in (("cells","cells"),("metric_rank","rank"),("calibration_rows","calibration_rows"))):
++                raise ValueError("paired-average stamp disagrees with its reaction chart")
++            duplicate = last.get("duplicate_fraction")
++            if (type(duplicate) not in (float,int) or not math.isfinite(duplicate) or not 0<=duplicate<=1
++                    or stamp["duplicate_ok"]!=(duplicate<=Q)):
++                raise ValueError("paired-average duplicate guard disagrees with its reaction")
++            topology = last.get("mass_topology")
++            if (stamp["finite_rows"]==self.N
++                    and (not isinstance(topology,dict) or type(topology.get("groups")) is not int
++                         or topology["groups"]!=stamp["groups"])):
++                raise ValueError("paired-average stamp disagrees with its real topology")
++
++    def check_paired_average_step(self, state, completed_steps):
++        """Trainer validates the reaction step before any load mutation."""
++        if state["paired_average"]["step"]>completed_steps:
++            raise ValueError("paired-average stamp is from a future trainer step")
++
+     def load_state_dict(self,state):
+         self.check_state(state)
+         base=set(self._TENSORS)|{"fill","cursor","rows_since_eval","counters","last","stream"}
+@@ -1590,6 +1767,7 @@
+         self.stream.set_state(state["stream"].cpu())
+         self.sample_shape=None if state["sample_shape"] is None else tuple(state["sample_shape"])
+         self.snapshot_serial=state["snapshot_serial"]
++        self.paired_average=dict(state["paired_average"])
+         self.snapshot=None
+         self.moved_rows=None
+         self._copy_parent_rows=None
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -298,9 +298,14 @@
+         self._fast = None
+ 
+     def _serve_settled(self):
+-        """The averaged model is served only while the table's own stationarity test stands at STATIONARY: its last decisive verdict is a
+-        descent (not a drift or a release), i.e. the rows are no longer migrating. Before that, and after a release, the fast iterate is
+-        served (a position average of rows that still move between modes blurs them; measured on the small-table toys)."""
++        """Use current paired geometry for the feasible feature-cell backend.
++
++        Its bounded-turnover view checks anti-blur geometry, not stationarity,
++        distribution equivalence or quality. The population test retains its
++        independent LR law. Small/reference backends retain the legacy gate.
++        """
++        if self.birth_death is not None and hasattr(self.birth_death,"paired_average_eligible"):
++            return self.birth_death.paired_average_eligible(self.completed_steps)
+         tester = self._table_tester()
+         return tester is not None and getattr(tester, "last_decisive", 0) == -1
+ 
+@@ -664,6 +669,8 @@
+             deepcopy(self.lr_settle).load_state_dict(state["lr_settle"], (self.opt_g, self.opt_d))
+         if self.birth_death is not None:
+             self.birth_death.check_state(state["birth_death"])
++            if hasattr(self.birth_death,"check_paired_average_step"):
++                self.birth_death.check_paired_average_step(state["birth_death"],steps)
+         if self.row_evidence is not None:
+             self.row_evidence.check_state(state["row_evidence"])
+         for name, values in state["models"].items():

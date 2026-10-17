@@ -58,7 +58,8 @@ def step_with_policy(trainer, real, *, network_lr_horizon_cap: int | None = None
     the trainer's base rates are never modified, including in checkpoints.
     """
     total = trainer.recipe.total_steps
-    if network_lr_horizon_cap is None and network_lr_floor is None:
+    if network_lr_horizon_cap is None and (
+            network_lr_floor is None or network_lr_floor == trainer.recipe.resolved_network_lr_floor):
         return trainer.step(real, **step_kwargs)
     network, prior = policy_multipliers(
         trainer.completed_steps, total, trainer.recipe.lr_anneal_start,

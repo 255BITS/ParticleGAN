@@ -1,0 +1,482 @@
+{
+  "publication_path": "/home/martyn/dev/ParticleGAN-bcap-projection-baseline-review/reports/forge/bcap-projection-baseline-review",
+  "source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+  "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+  "results_sha256": "8a3a390819a5dab4921ae88c4f9049cbc08a56e40827b0ab998aea7390afd70b",
+  "independent_audit_path": "reports/forge/bcap-three-phase/projection-independent-audit.json",
+  "independent_audit_sha256": "d83f24a388771aac36cb8af962895d97860aa00d191e99c582eb73b277581393",
+  "comparison_basis": "Certified individual gate statuses; matched effects require verified consumed streams.",
+  "outcomes": {
+    "baseline": {
+      "1": {
+        "PASS": 6,
+        "FAIL": 0,
+        "unresolved": 0
+      },
+      "2": {
+        "PASS": 1,
+        "FAIL": 9,
+        "unresolved": 0
+      }
+    },
+    "candidate": {
+      "1": {
+        "PASS": 6,
+        "FAIL": 0,
+        "unresolved": 0
+      },
+      "2": {
+        "PASS": 3,
+        "FAIL": 7,
+        "unresolved": 0
+      }
+    }
+  },
+  "certified_gate_changes": {
+    "repaired": [
+      {
+        "task_id": "residual_student",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "trajectory",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "PASS"
+      }
+    ],
+    "retained_pass": [
+      {
+        "task_id": "ae_gan_hold",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "five_word_joint_hold",
+        "original_tier": 2,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "five_word_joint_smoke",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "gaussian1d_smoke",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "ring16_acquisition",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "two_pole",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "unused_token_hold",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      }
+    ],
+    "regressed": [],
+    "persistent_failure": [
+      {
+        "task_id": "gaussian1d_stability",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "grid100",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "rotated100",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "staggered100",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_anisotropic",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_unequal_mass",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_unequal_width",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      }
+    ],
+    "unresolved": []
+  },
+  "verified_consumption_changes": {
+    "repaired": [
+      {
+        "task_id": "residual_student",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "trajectory",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "PASS"
+      }
+    ],
+    "retained_pass": [
+      {
+        "task_id": "ae_gan_hold",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "five_word_joint_hold",
+        "original_tier": 2,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "five_word_joint_smoke",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "gaussian1d_smoke",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "ring16_acquisition",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "two_pole",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      },
+      {
+        "task_id": "unused_token_hold",
+        "original_tier": 1,
+        "baseline": "PASS",
+        "candidate": "PASS"
+      }
+    ],
+    "regressed": [],
+    "persistent_failure": [
+      {
+        "task_id": "gaussian1d_stability",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "grid100",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "rotated100",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "staggered100",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_anisotropic",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_unequal_mass",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      },
+      {
+        "task_id": "vector_unequal_width",
+        "original_tier": 2,
+        "baseline": "FAIL",
+        "candidate": "FAIL"
+      }
+    ],
+    "unresolved": []
+  },
+  "consumed_stream_pairs": [
+    {
+      "task_id": "ae_gan_hold",
+      "original_tier": 1,
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 250,
+        "candidate": 250
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "five_word_joint_hold",
+      "original_tier": 2,
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 4834,
+        "candidate": 4834
+      },
+      "own_prefix_steps": {
+        "baseline": 834,
+        "candidate": 834
+      },
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "five_word_joint_smoke",
+      "original_tier": 1,
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 20001,
+        "candidate": 20001
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "gaussian1d_smoke",
+      "original_tier": 1,
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 1000,
+        "candidate": 1000
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "gaussian1d_stability",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "FAIL",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 6000,
+        "candidate": 6000
+      },
+      "own_prefix_steps": {
+        "baseline": 1000,
+        "candidate": 1000
+      },
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "grid100",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "FAIL",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "residual_student",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 400,
+        "candidate": 400
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "ring16_acquisition",
+      "original_tier": 1,
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 1600,
+        "candidate": 1600
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "rotated100",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "FAIL",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "staggered100",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "FAIL",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "trajectory",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 400,
+        "candidate": 400
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "two_pole",
+      "original_tier": 1,
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 80,
+        "candidate": 80
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "unused_token_hold",
+      "original_tier": 1,
+      "baseline": "PASS",
+      "candidate": "PASS",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 200,
+        "candidate": 200
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "vector_anisotropic",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "FAIL",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "vector_unequal_mass",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "FAIL",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    },
+    {
+      "task_id": "vector_unequal_width",
+      "original_tier": 2,
+      "baseline": "FAIL",
+      "candidate": "FAIL",
+      "consumed_stream_pair_status": "VERIFIED",
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "own_prefix_steps": {},
+      "reason": "Exact complete consumed states"
+    }
+  ],
+  "unverified_consumption_pairs": [],
+  "certified_tier2_repairs": [
+    "residual_student",
+    "trajectory"
+  ],
+  "tier2_repairs": [
+    "residual_student",
+    "trajectory"
+  ],
+  "tier2_regressions": [],
+  "gate_selection_eligible": true,
+  "eligible_research_baseline": true,
+  "paid_seconds_including_predecessors": 3541.1636059249986,
+  "execution_retries": 0,
+  "actual_training_gifs": 32,
+  "scope": "separate_direction_only_research_diagnostic",
+  "qualification_input": false,
+  "pr": "https://github.com/255BITS/ParticleGAN/pull/383",
+  "ordinary_tier2_questions_unmeasured": 11
+}

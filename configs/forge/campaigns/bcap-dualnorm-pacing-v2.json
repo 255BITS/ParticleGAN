@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "bcap-dualnorm-pacing-v2",
+  "budget_seconds": 63000,
+  "candidate_budget_seconds": 2520,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Finite optimizer-only BCAP pacing study, at most 20 Stage A recipes plus 3 conditional Stage B rates and 2 conditional Stage C momenta. All six unchanged required Tier 1 tasks and the separate clock diagnostic complete for every admitted recipe, protocol seed 0, public deterministic initialization with explicit task fixtures, one global recipe. The selected historical starter is one justified matched current-source control because optimizer/API/observer source changed. Fixed BCAP loss/penalty/cap/schedules, architecture, prior law, objectives, sampling, updates and evaluation. Maximum 63000 paid/reserved seconds and 43200 monotonic elapsed seconds across two exclusive GPU workers plus the automatic CPU worker. Full task timeouts are reserved before claim; no reduced timeouts, automatic retries, expansion, Tier 2, seed-only work or default adoption. Conditional branches are fixed in the committed pacing contract before spending."
+}

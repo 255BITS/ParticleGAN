@@ -1,0 +1,91 @@
+{
+  "files": [
+    {
+      "path": "hyperchamber/selector.py",
+      "repository": "HyperGAN/hyperchamber",
+      "revision": "f9b92f5518f1b23e6873e7da63bc31aac3819aae",
+      "sha256": "dc285fdfd2fe8dc53c9224d57e539a364bd6c0523bac7b027983433f63ccc6c0",
+      "url": "https://github.com/HyperGAN/hyperchamber/blob/f9b92f5518f1b23e6873e7da63bc31aac3819aae/hyperchamber/selector.py"
+    },
+    {
+      "path": "hyperchamber/__init__.py",
+      "repository": "HyperGAN/hyperchamber",
+      "revision": "f9b92f5518f1b23e6873e7da63bc31aac3819aae",
+      "sha256": "a3a5faf8d9a7069adace3d1a8977f99dfcda6bcab5a43b35eb34271613c62ab9",
+      "url": "https://github.com/HyperGAN/hyperchamber/blob/f9b92f5518f1b23e6873e7da63bc31aac3819aae/hyperchamber/__init__.py"
+    },
+    {
+      "path": "hyperchamber/config.py",
+      "repository": "HyperGAN/hyperchamber",
+      "revision": "f9b92f5518f1b23e6873e7da63bc31aac3819aae",
+      "sha256": "c453e9b10d9777e58d6441ee849f644eddec79b41c592f2c45d1dd8b894810ba",
+      "url": "https://github.com/HyperGAN/hyperchamber/blob/f9b92f5518f1b23e6873e7da63bc31aac3819aae/hyperchamber/config.py"
+    },
+    {
+      "path": "hypergan/losses/least_squares_loss.py",
+      "repository": "HyperGAN/HyperGAN",
+      "revision": "79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c",
+      "sha256": "f9e33285ed513cefbc107ac1492a9565fd1ef46c6c100c994a5291d5c0abd430",
+      "url": "https://github.com/HyperGAN/HyperGAN/blob/79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c/hypergan/losses/least_squares_loss.py"
+    },
+    {
+      "path": "hypergan/losses/base_loss.py",
+      "repository": "HyperGAN/HyperGAN",
+      "revision": "79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c",
+      "sha256": "2f4b40caf5b82f3ee0b2f868177c786744e62cafbd1314d013cc1338a8538f31",
+      "url": "https://github.com/HyperGAN/HyperGAN/blob/79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c/hypergan/losses/base_loss.py"
+    },
+    {
+      "path": "hypergan/trainers/base_trainer.py",
+      "repository": "HyperGAN/HyperGAN",
+      "revision": "79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c",
+      "sha256": "03dbad3286bcc09d3efa461f072998e26d934acf3feb33aae3ad3b8c2a46789f",
+      "url": "https://github.com/HyperGAN/HyperGAN/blob/79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c/hypergan/trainers/base_trainer.py"
+    },
+    {
+      "path": "hypergan/trainers/alternating_trainer.py",
+      "repository": "HyperGAN/HyperGAN",
+      "revision": "79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c",
+      "sha256": "2f520f13caeb66e618ff3681d58de492d3a2d13b35ca207386030643e98d5652",
+      "url": "https://github.com/HyperGAN/HyperGAN/blob/79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c/hypergan/trainers/alternating_trainer.py"
+    },
+    {
+      "path": "hypergan/gans/alpha_gan.py",
+      "repository": "HyperGAN/HyperGAN",
+      "revision": "79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c",
+      "sha256": "77a361206825055196994b26ecf665eb045cbc4d6733739902cc73e33335931a",
+      "url": "https://github.com/HyperGAN/HyperGAN/blob/79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c/hypergan/gans/alpha_gan.py"
+    },
+    {
+      "path": "hypergan/search/random_search.py",
+      "repository": "HyperGAN/HyperGAN",
+      "revision": "79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c",
+      "sha256": "6a0c5f308a31a8e2ed42a722789747a529e52908a9ed566d394e46931b7d5e89",
+      "url": "https://github.com/HyperGAN/HyperGAN/blob/79f073a068f2d2c2ad9327ce0eb4d12f4f62a27c/hypergan/search/random_search.py"
+    },
+    {
+      "path": "hypergan/trainers/base_trainer.py",
+      "repository": "HyperGAN/HyperGAN",
+      "revision": "55c169c9f19046f79cada264e9c5f9e3207da410",
+      "sha256": "1e92bcee2370bc28def9e567487731d795a2543c29df952376d2aaa9fee13a18",
+      "url": "https://github.com/HyperGAN/HyperGAN/blob/55c169c9f19046f79cada264e9c5f9e3207da410/hypergan/trainers/base_trainer.py"
+    },
+    {
+      "path": "hypergan/losses/base_loss.py",
+      "repository": "HyperGAN/HyperGAN",
+      "revision": "55c169c9f19046f79cada264e9c5f9e3207da410",
+      "sha256": "5d683b5dd304f443c7e1ad504855d19ccc049307f3487189b6eb87ce658443eb",
+      "url": "https://github.com/HyperGAN/HyperGAN/blob/55c169c9f19046f79cada264e9c5f9e3207da410/hypergan/losses/base_loss.py"
+    },
+    {
+      "path": "tensorflow/python/training/adam.py",
+      "reference": "v1.3.0",
+      "repository": "tensorflow/tensorflow",
+      "revision": "9e76bf324f6bac63137a02bb6e6ec9120703ea9b",
+      "sha256": "cb9d8dbdec79bf31126c9112df2df06a152366c0fac8a620dbac7cf885d0a774",
+      "url": "https://github.com/tensorflow/tensorflow/blob/9e76bf324f6bac63137a02bb6e6ec9120703ea9b/tensorflow/python/training/adam.py"
+    }
+  ],
+  "schema": "source_inspection_receipt_v1",
+  "scope": "Inspected reference snapshots; not a claim that Halloween executed these revisions"
+}

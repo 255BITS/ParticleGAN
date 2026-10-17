@@ -17,12 +17,17 @@ jobs:
     if: github.repository == '255BITS/ParticleGAN'
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    outputs:
+      source_sha: ${{ steps.package.outputs.source_sha }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Require a tag matching the package version
+        id: package
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
@@ -38,11 +43,14 @@ jobs:
               raise SystemExit(f"Expected particlegan release {expected}, got {tag!r}")
           print(f"Validated {project['name']} {project['version']}")
           PY
+          echo "source_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   checks:
     name: Test and build release
     needs: validate-release
     uses: ./.github/workflows/tests.yml
+    with:
+      source_ref: ${{ needs.validate-release.outputs.source_sha }}
 
   publish:
     name: Publish tested distributions

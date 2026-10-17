@@ -1,0 +1,13 @@
+{
+  "schema": "rpgan_local_stationarity_attraction_software_v1",
+  "software_cases_passed": 6,
+  "wall_seconds": 0.3861888460814953,
+  "test_sha256": "7ce6825e369672b92d2bb4237d4ce8732a80cc949c25ed153cf1abf768a4f908",
+  "native_source_unchanged": true,
+  "completed_saved_critic_observation_rerun": false,
+  "optimizer_updates": 0,
+  "model_updates": 0,
+  "cuda_initialized": false,
+  "scope": "Fixed scalar native-RpGAN derivatives: concave critic current-antithetic wrong finite attractor, even-antithetic correct-zero attraction, convex critic cancellation with local-maximum counterexample. No trained critics or optimizer steps.",
+  "qualification_credit": "none"
+}

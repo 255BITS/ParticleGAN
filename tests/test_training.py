@@ -4,11 +4,11 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import GANTrainer, Recipe, get_recipe, learning_rate_scale, learning_rate_scales
+from particlegan import DEFAULT_RECIPE, GANTrainer, Recipe, get_recipe, learning_rate_scale, learning_rate_scales
 
 
-def make_trainer(*, particles=12, steps=8, buffers=False, dropout=False, **overrides):
-    recipe = get_recipe(num_particles=particles, z_dim=3,
+def make_trainer(*, preset="gan", particles=12, steps=8, buffers=False, dropout=False, **overrides):
+    recipe = get_recipe(preset, num_particles=particles, z_dim=3,
                         batch_size=6, total_steps=steps, **overrides)
     generator = nn.Sequential(nn.Linear(3, 8), nn.BatchNorm1d(8) if buffers else nn.Identity(),
                               nn.LeakyReLU(.2), nn.Dropout(.25) if dropout else nn.Identity(),
@@ -40,13 +40,75 @@ def assert_checkpoint_equal(left, right):
 
 
 def test_winning_recipe_is_the_common_default():
-    assert get_recipe() == Recipe()
+    assert get_recipe() == get_recipe(DEFAULT_RECIPE)
     winner = get_recipe()
-    assert winner.name == 'k3p'
-    assert (winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == (1., 1., 0.)
-    assert (winner.reg_anchor_weight, winner.direct_particle_gain) == (1., True)
-    assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .999), 2., 1.)
+    assert winner.name == DEFAULT_RECIPE
+    assert Recipe(**winner.to_dict()) == winner
     assert isinstance(make_trainer(), GANTrainer)
+
+
+@pytest.mark.parametrize("prior_kind", ["particles", "mog"])
+@pytest.mark.parametrize("global_stream", [False, True])
+def test_shared_training_stream_preserves_sampling_isolation_and_checkpoint_resume(prior_kind, global_stream):
+    def build():
+        torch.manual_seed(51)
+        recipe = get_recipe(num_particles=8, z_dim=2, total_steps=4,
+                            prior_kind=prior_kind, sigma_rel=.025 if prior_kind == "mog" else 0,
+                            standardize=False,
+                            input_noise_std=.02, output_noise_std=.03, output_noise_warmup=0)
+        shared = torch.default_generator if global_stream else torch.Generator().manual_seed(19)
+        options = dict(latent_generator=shared, penalty_generator=shared,
+                       noise_generator=shared, input_noise_generator=shared)
+        if prior_kind == "mog":
+            options["prior_noise_generator"] = shared
+        return GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1), **options)
+
+    trainer = build()
+    real = torch.arange(8, dtype=torch.float32).reshape(4, 2) / 8
+    trainer.step(real)
+    before = trainer.latent_generator.get_state().clone()
+    trainer.sample(7, output_noise=True)
+    assert torch.equal(before, trainer.latent_generator.get_state())
+    with pytest.raises(ValueError, match="separate from training"):
+        trainer.sample(7, generator=trainer.penalty_generator)
+    checkpoint = trainer.state_dict()
+    trainer.step(real)
+    expected = trainer.state_dict()
+    restored = build()
+    restored.load_state_dict(checkpoint)
+    assert restored.latent_generator is restored.penalty_generator is restored.noise_generator
+    restored.step(real)
+    assert_checkpoint_equal(expected, restored.state_dict())
+    before = restored.state_dict()
+    bad = deepcopy(before)
+    bad["streams"]["penalty_generator"] = torch.Generator().manual_seed(91).get_state()
+    with pytest.raises(ValueError, match="RNG state"):
+        restored.load_state_dict(bad)
+    assert_checkpoint_equal(before, restored.state_dict())
+    if global_stream:
+        bad = deepcopy(before)
+        for name in bad["streams"]:
+            if getattr(restored, name) is torch.default_generator:
+                bad["streams"][name] = torch.Generator().manual_seed(91).get_state()
+        with pytest.raises(ValueError, match="RNG state"):
+            restored.load_state_dict(bad)
+        assert_checkpoint_equal(before, restored.state_dict())
+
+
+@pytest.mark.parametrize("isolated", ["eval_generator", "model_generator"])
+def test_eval_and_model_streams_cannot_alias_training(isolated):
+    shared = torch.Generator().manual_seed(19)
+    with pytest.raises(ValueError, match="must be separate"):
+        GANTrainer(get_recipe(num_particles=8, z_dim=2), nn.Linear(2, 2), nn.Linear(2, 1),
+                   latent_generator=shared, **{isolated: shared})
+
+
+@pytest.mark.parametrize("global_binding", ["model_generator", "latent_generator", "noise_generator"])
+def test_model_isolation_rejects_process_default_generator_bindings(global_binding):
+    options = {"model_generator": torch.Generator().manual_seed(12), global_binding: torch.default_generator}
+    with pytest.raises(ValueError, match="model stream must be separate"):
+        GANTrainer(get_recipe(num_particles=8, z_dim=2), nn.Linear(2, 2), nn.Linear(2, 1),
+                   **options)
 
 
 def test_step_updates_prior_restores_frozen_parameters_and_detaches_results():
@@ -83,8 +145,9 @@ def test_freeze_restored_when_generator_callback_raises():
     assert [p.requires_grad for p in trainer.D.parameters()] == flags
 
 
-def test_checkpoints_that_recorded_removed_fixed_choices_still_load():
-    trainer = make_trainer()
+@pytest.mark.parametrize("schema", [2, 3, 4])
+def test_historical_k3p_alias_cannot_resume_as_ka2(schema):
+    trainer = make_trainer(preset="ka2")
     trainer.step(torch.randn(6, 2))
     checkpoint = trainer.state_dict()
     recipe = dict(checkpoint["recipe"])
@@ -92,16 +155,40 @@ def test_checkpoints_that_recorded_removed_fixed_choices_still_load():
         del recipe[key]
     old = {**checkpoint, "recipe": {**recipe, "loss_type": "logistic", "gan_mode": "rp",
                                     "reg_arm": "k3p", "reg_method": "autograd"}}
-    restored = make_trainer()
-    restored.load_state_dict(old)
-    assert restored.completed_steps == 1
-    with pytest.raises(ValueError, match="recipe"):
-        make_trainer().load_state_dict({**old, "recipe": {**old["recipe"], "reg_arm": "b_cap"}})
+    old["schema"] = schema
+    if schema == 2:
+        old = deepcopy(old)
+        generator = old["optimizers"][0].pop("regularizer")
+        critic = old["optimizers"][1].pop("regularizer")
+        assert generator["direct"] is None
+        old["schema"] = 2
+        old["k3p"] = {"latent": generator["latent"],
+                       "critic": {"penalty": critic["record"], "ema": critic["ema"],
+                                  "guard": critic["guard"]}}
+    restored = make_trainer(preset="ka2")
+    initial = restored.state_dict()
+    with pytest.raises(ValueError, match="schema" if schema < 4 else "recipe"):
+        restored.load_state_dict(old)
+    assert_checkpoint_equal(initial, restored.state_dict())
+
+
+@pytest.mark.parametrize("formulation", ["ka2", "k3p"])
+def test_current_checkpoint_without_unused_arm_selector_still_resumes(formulation):
+    trainer = make_trainer(preset=formulation)
+    trainer.step(torch.arange(12, dtype=torch.float32).reshape(6, 2) / 8)
+    checkpoint = trainer.state_dict()
+    assert "reg_arm" not in checkpoint["recipe"]
+    restored = make_trainer(preset=formulation)
+    restored.load_state_dict(checkpoint)
+    assert restored.completed_steps == 1 and restored.recipe.reg_arm is None
+    assert restored.recipe.effective_critic_formulation == formulation
+    for actual, expected in zip(restored.G.parameters(), trainer.G.parameters()):
+        assert torch.equal(actual, expected)
 
 
 @pytest.mark.parametrize("particles", [12, 1025])
 def test_prior_regularizes_full_small_table_or_unique_large_sample(particles):
-    trainer = make_trainer(particles=particles)
+    trainer = make_trainer(particles=particles, prior_reg=.1)
     seen = []
     handle = trainer.prior_regularizer.register_forward_pre_hook(lambda module, args: seen.append(len(args[0])))
     trainer.step(torch.randn(6, 2))

@@ -1,0 +1,35 @@
+{
+  "budgets": {
+    "campaign_seconds": 5400,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "vector_two_broad": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "current-k3p-mog-gpu-pilot-v2",
+  "profile": "current-k3p-mog-v2",
+  "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+  "purpose": "Prepared physical two-GPU pilot on exclusive/reserved A6000 capacity. Exactly two 1200-update learned-MoG vector cells, plus at most one explicit repair of deliberate Forge cancellation. No enqueue or execution until a joint GPU ownership window is recorded. Outcomes remain diagnostic, never qualification.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "One independent learned-MoG reference cell for each substantive control, paired on the frozen source. Together they exercise real two-device placement, source/RNG binding and bounded coordinator recovery.",
+      "tasks": [
+        "vector_two_broad"
+      ]
+    },
+    {
+      "lineage_id": "forge-no-critic-penalty",
+      "reason": "One independent learned-MoG reference cell for each substantive control, paired on the frozen source. Together they exercise real two-device placement, source/RNG binding and bounded coordinator recovery.",
+      "tasks": [
+        "vector_two_broad"
+      ]
+    }
+  ],
+  "view": "discriminator_stability"
+}

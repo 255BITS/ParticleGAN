@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "release07-gan-v3-mog-family-defaults-round1-v1",
+  "trainer_family": "release07-gan-v3-mog",
+  "base_candidate": "release07-gan-v3-task-adapted-v1",
+  "grid": {
+    "lr": [
+      0.006375,
+      0.0085
+    ],
+    "prior_lr_mult": [
+      1.0,
+      2.0
+    ]
+  },
+  "tuning_through_tier": 3,
+  "view": "discriminator_stability",
+  "execution_backend": "cuda",
+  "cuda_model": "NVIDIA RTX A6000",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "campaign": {
+    "id": "release07-gan-v3-mog-family-defaults-round1-v1",
+    "budget_seconds": 176400.0,
+    "candidate_budget_seconds": 44100.0,
+    "accept_shared_cost_transfer": false
+  },
+  "hypothesis": "Higher shared learning rates increase transport within the unchanged short movement and conditional horizons; one or two times prior rate tests whether stronger location transport destabilizes the later coverage hold.",
+  "rationale": "Four newly declared complete public Recipe configurations retain family mechanism, architecture, prior, named streams, task budgets and serving laws. None uses the previously failed canonical LR 0.00425. Every survivor advances through all 24 requirements; most passes only identifies a provisional incumbent, never default adoption.",
+  "guide": "EXPERIMENTATION.md"
+}

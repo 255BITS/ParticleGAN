@@ -3,14 +3,18 @@ import copy
 
 import torch
 from torch import nn
-from particlegan import get_recipe
+from particlegan import get_recipe, init
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 
 def main():
     for name in ('ae_gan', 'vae_gan'):
         recipe = get_recipe(name, num_particles=16, z_dim=2)
-        prior = recipe.make_prior()
+        prior = init.deterministic_orthogonal_(recipe.make_prior())
         encoder, decoder, critic = nn.Linear(2, 4), nn.Linear(2, 2), nn.Linear(2, 1)
+        init.deterministic_orthogonal_(decoder, seed=0)
+        init.deterministic_orthogonal_(critic, seed=1)
+        init.deterministic_orthogonal_(encoder, seed=2)
         opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder,
                                               ema_critic=copy.deepcopy(critic))
         x = torch.randn(8, 2)
@@ -19,7 +23,9 @@ def main():
         # This tests the encoding and optimizer, not a diffusion or GAN loop.
         loss = encoded.reconstruction_loss(decoder(encoded.codes), x)
         opt_g.zero_grad()
-        loss.backward()
+        if hasattr(opt_g, "set_sampled_rows"):
+            opt_g.set_sampled_rows(prior.z, encoded.indices.flatten())
+        constraint_geometry_backward(loss, opt_g, (loss,))
         opt_g.step()
         assert torch.isfinite(loss)
         print(f'{name}: reconstruction step passed', flush=True)

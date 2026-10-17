@@ -1,0 +1,167 @@
+{
+  "task": "routed_caption_untied_up_v1",
+  "status": "prepared new variant, no science executed",
+  "parent_commit": "610a5f5bc4a73d9d86f94858a2e318a6af530381",
+  "question": "Can independent output heads for the ordinary and particle-conditioned bases beat both ordinary LoRA and the shared-head particle control at fixed endpoint accuracy, while codes help every source?",
+  "arms": [
+    "ordinary_BF16",
+    "particle_BF16",
+    "particle_untied_BF16"
+  ],
+  "geometry": {
+    "width": 576,
+    "text": 768,
+    "rank": 16,
+    "tokens": 256,
+    "length": 128,
+    "heads": 9,
+    "output": 16,
+    "frequency": 256
+  },
+  "sites": [
+    "ctx_proj",
+    "block.self_attn.qkv",
+    "block.self_attn.proj",
+    "block.cross_attn.q",
+    "block.cross_attn.kv",
+    "block.cross_attn.proj"
+  ],
+  "steps": 512,
+  "seconds": 300,
+  "device": "cuda:0",
+  "physical_gpu": 0,
+  "external_timeout_seconds": 300,
+  "external_kill_grace_seconds": 5,
+  "formula": "U_h[h+tanh(Hh+b)] + U_p[h*tanh(Cz)] with one shared Down; H/b0, sampledC, both Ups0 before optimizers/EMA.",
+  "changed_factors": [
+    "Adds an independently learned particle Up head at each of six sites,82944 additional parameters.",
+    "Two separately rounded BF16 Up matmuls replace one BF16 Up matmul; FP32 head summation and original host boundary are explicit."
+  ],
+  "accuracy_thresholds": {
+    "relative_aggregate_improvement_gte": 0.001,
+    "source_harm_lte": 1e-06,
+    "relative_code_benefit_gte": 0.001,
+    "strict_code_benefit_each_source": true,
+    "bank_router_live_fraction_gte": 0.9,
+    "live_denominator": 511,
+    "all_six_particle_Up_and_C_nonzero": true
+  },
+  "primary_gate": "Untied terminal TEST48 physical float64 RMSE improves BOTH fresh controls by>=.1%, harms no source by>1e-6 against EITHER control; code zero worsens aggregate by>=.1% and strictly every source; bank/query>=90% updates2..512, all6 U_p/C norms finite positive.",
+  "evaluation": {
+    "metric": "Unscaled physical source-prediction minus frozen positive-caption-teacher RMSE; float64 coordinate/context reductions. Offline only.",
+    "endpoint": 512,
+    "test_contexts": 48,
+    "sources": 6,
+    "contexts_per_source": 8,
+    "source_weighting": "Aggregate over all48 contexts; six separate equally sized source reductions.",
+    "code_ablation": "Untied at512 only: public native routed generation with all six mixed codes replaced by zero; shared Down/main H-term remains active. No training.",
+    "no_output_training": "No output-MSE objective, structural guard, coefficient choice, checkpoint selection or stopping rule.",
+    "oracle_destructive_controls": "Exact-zero and unit-error oracle, known positive gate, no-change failure, one-source-harm failure and nonfinite rejection before any training."
+  },
+  "input_law": {
+    "captions": "13 fixed synthetic captions; retained measured masked pooled Gram/mask lengths/valid and padded scalar statistics, generated token and padding directions.",
+    "latent_stream": "CPU102",
+    "caption_residual_stream": "CPU103",
+    "fit": "48: sixsources\u00d7times[.1,.35,.6,.85]\u00d7two latent draws",
+    "guard": "12: sixsources\u00d7times[.22,.72]\u00d7one disjoint draw",
+    "test": "48: sixsources\u00d7times[.18,.43,.68,.93]\u00d7two disjoint draws",
+    "source_to_target": "Synthetic indices1..6\u21927..12; empty0. Distinct paired captions, live teacher in every host forward.",
+    "difference_from_actual_caption": "This toy TEST includes novel times as well as held-out latents. Actual caption FIT/TEST share their ten-time grid."
+  },
+  "prior": {
+    "kind": "particle_cloud",
+    "sigma": 0,
+    "num_particles": 128,
+    "z_dim": 4,
+    "exception": "The task requires one shared trainable dense routing bank. This explicit particle-cloud/R2 exception supplies no Forge learned-MoG or public-default qualification.",
+    "initialization": "Public init.deterministic_orthogonal_ on recipe.make_prior(); preserve prior.to(device).z nn.Parameter ownership."
+  },
+  "precision_backend": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "initialization": {
+    "api": "Public init.initialize_(method=sample_distributions_v1), before EMA/policy construction.",
+    "named_stream": "sha256(routed-caption-geometry-v1:{role}:{full_parameter_name}) first8 little-endian modulo2**63-1; retained exactly from prior geometry fixture.",
+    "teacher": "Same public-initialized pure one-block frozen FP32-stored backbone; positive caption replaces source, same latent/time/empty half. No teacher adapters or reachability/alignment assumption.",
+    "branches": "Common named Down values; Up0; particle H/b0 and sampled nonzeroC. Both Down/Up use BF16 matmuls, stored parameters remainFP32.",
+    "restore": "Public E22Policy.load_state_dict; explicit registered UntiedAdapter survives restoration, no trained-owner initialization, caller streams/modes/gradients preserved.",
+    "placeholder_change": "This new unexecuted fixture preserves the public prior nn.Parameter instead of the earlier geometry fixture plain Tensor. Initial values and mathematical routing law remain the same; ownership is recorded explicitly.",
+    "extra_head": "Registered nn.Linear Parameter owners and public initialize_ before native optimizer/policy/EMA, then fresh both heads zeroed. Common Down/main-Up/H/b/C/query/D values preserve original named streams.",
+    "dead_control": "C-zero is destructive software-only; combining zero U_p and C creates a dead conditional path. Science retains sampled nonzero C."
+  },
+  "native_law": {
+    "particle_recipe": "e22_routed",
+    "ordinary_recipe": "e22 with conditional rows and atom-only row evidence/birth controls disabled",
+    "sigma": 0.125,
+    "batch_size": 4,
+    "guidance": 3,
+    "cfg_layout": "physicalB4\u2192B8 conditional-first/unconditional-second; routed mixer sees B\u00d72 halves",
+    "generator_router_lr": 5e-05,
+    "bank_critic_noise_rates": "Recipe defaults",
+    "D_G_DV12": "Unchanged public native particle forwarding, perturb=True for both native game forwards.",
+    "row_controls": "Public RoutedRows, shared full-model reruns, feature-only decision law, max_context_harm0/output_error_guardFalse, probe_interval100/reopen_guardsettled.",
+    "penalty": "Recipe.make_critic_penalty on per-token view with token pooling cancellation,16-dimensional native penalty coordinates.",
+    "sampling": "CPU7 B4 fit rows with replacement; CPU43 two Gaussian arrays perupdate; owned CPU/CUDA900 native penalty streams; policyseed21."
+  },
+  "reuse": "Bundled immutable PR239 math/data/public update/state helpers imported normally; explicit new host/factory, no native implementations copied, FunctionType cloning, global template edits or captured FAST aliases.",
+  "fresh_cli": "Always fresh three-arm512 run, entirely self-contained. Compatible historical controls may only be reused in separately declared external root evidence; no reuse option or historical failure gate in CLI.",
+  "media_steps": [
+    0,
+    64,
+    128,
+    256,
+    384,
+    512
+  ],
+  "media_indices": [
+    0,
+    8,
+    16,
+    24,
+    32,
+    40,
+    1,
+    9
+  ],
+  "media": {
+    "role": "Visual-only actual clean native observations; does not alter the terminal scientific gate.",
+    "context": "First six indices give one query/source atTESTtime.18, latent occurrence3; last two are fixed occurrence4 B4 padding. Render first six.",
+    "arrays": "Actual observed physical residuals, zero target-residual arrays and fixed context/source identities; no stock or reconstructed training trajectory.",
+    "immutability": "Each capture checks native policy state including diagnostics/RNG, plus owned caller streams/globals, modes, gradient buffers and closed route lifecycle.",
+    "goal": "Four rows: target0, ordinary, shared particles, untied particles; actual native-observed patch RMS, fixed six source-conditioned queries.",
+    "axes_colors": "Constant16x16 patch axes, white0/redinitial observed maximum. Initial-only scale fixed across all frames.",
+    "render_seconds": 60,
+    "render_device": "cpu",
+    "render_models_or_native_updates": 0,
+    "optional_render_dependencies": "NumPy/Pillow>=10.1; exclusive GIF/PNG/receipt files, no overwrites.",
+    "command": "python -m examples.render_e22_routed_caption_untied --run-directory runs/caption-untied-up-v1"
+  },
+  "oracle_controls": "Bundled unscaled F64 exact-zero/unit-error and nonfinite scorer; new positive-both-controls, loses-one-control, source-harm, dead-head destructive gates before training.",
+  "api": "Record actual imported package path/hash and require within-run immutability only; no native revision/hash allowlist. Future improvements can PASS without historical failure reproduction.",
+  "exit_codes": {
+    "0": "completed scientificPASS",
+    "1": "completed scientificFAIL",
+    "2": "incomplete/error/overrun"
+  },
+  "cli": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_untied --run --out runs/caption-untied-up-v1",
+  "software": "Reduced software geometry only; initial native routed perturbed-code ordinary-head tangent agrees with ordinary and U_p gradient is nonzero with sampledC; C0 destructive branch demonstrated. Two native original updates+two fresh-owner public replay updates (max4total),20s CPU target/60s hard. No fullhost/CUDA/quality by preparation agents.",
+  "budget": "One fresh3x512 GPU0 campaign,300s startup through full-host zero-update prerequisites, all fixed media/endpoint observations, cleanup/report/final writes. Separate saved-state CPU60s renderer; no score-dependent stopping/selection.",
+  "limits": [
+    "New host architecture/capacity, not a demonstrated native optimizer bug or total-gradient variance reduction theorem.",
+    "A win cannot uniquely identify head interference because of extra conditional capacity and separate BF16 rounding.",
+    "Shared Down and later upstream game gradients still couple branches.",
+    "Generated text law/frozen backbone only; no actual Supra or T5 weights; actual activation geometry not established.",
+    "Novel TEST times and latents differ from actual caption common ten-time grid.",
+    "Actual BF16 transfer was negative; original full-Supra top score remains unbeaten.",
+    "PR239 executed source/card/tests/results/GIF remain immutable; this is a new explicit variant."
+  ],
+  "source_provenance": {
+    "bundled_fixture": "examples/e22_routed_caption_accuracy.py",
+    "sha256": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "parent_result": "docs/e22_routed_caption_accuracy_results.json"
+  },
+  "zero_update_full_prerequisite": "All3 fresh outputs/common Down/main-Up/D match; shared/untied H/b/C,query,bank and recipe equal; public fresh-owner restore exact. Also native RpGAN initial ordinary-main-Up gradients EXACT with sampledC/DV12 and all6 U_p gradients finite positive on FITindices[0,8,16,24], privateCPU72 Gaussian panel sigma.125, with full native/caller/modes/gradients state restored. No D/G updates or outputobjective; GPU proof is initial-point only.",
+  "population_reporting": "Controller events include rejected/skipped attempts; accepted_row_moves sums event.moves and accepted_proposals counts event.accepted, reported separately."
+}

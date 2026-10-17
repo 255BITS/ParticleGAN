@@ -1,0 +1,171 @@
+{
+  "candidate_id": "k3p",
+  "candidate_revision": "37347e3dcbb1800a88cf34df606ed85af024b3c5f31dc6073a366b310c4aab51",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "k3p-toy-img_bars4",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3p-4ed085f0b363",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 24.135661353124306,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_bars4/result.json",
+            "artifact_sha256": "576e6783e46f9eab6187748babc23b35a53b0b37758334ee53a34371c70837fb",
+            "id": "k3p-toy-img_bars4",
+            "snapshot": "results/k3p-toy-img_bars4.json.gz",
+            "snapshot_sha256": "d6bea16378567ff7d64a0e8c64f253012914425bda9dd077e432b5ae440ce65e"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_bars4/result.json",
+        "artifact_sha256": "576e6783e46f9eab6187748babc23b35a53b0b37758334ee53a34371c70837fb",
+        "candidate": "k3p",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "k3p-toy-img_bars4",
+        "kind": "toy",
+        "live": {
+          "distribution_tv": 0.03125,
+          "hq": 0.96875,
+          "mean_rmse": 0.032672218978405,
+          "mode_fractions": [
+            0.28125,
+            0.21875,
+            0.25,
+            0.25
+          ],
+          "modes": 4,
+          "quality_mode_fractions": [
+            0.25,
+            0.21875,
+            0.25,
+            0.25
+          ]
+        },
+        "raw_status": "PASS",
+        "seconds": 24.135661353124306,
+        "snapshot": "results/k3p-toy-img_bars4.json.gz",
+        "snapshot_sha256": "d6bea16378567ff7d64a0e8c64f253012914425bda9dd077e432b5ae440ce65e",
+        "task": "img_bars4",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.375,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 9.422012627823278,
+            "confirmed_step": 225,
+            "first_pass_step": 125,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 20,
+            "passing_suffix": 20,
+            "stable_from_seconds": 5.803472938016057,
+            "stable_from_step": 125
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 4,
+              "value": 4
+            },
+            {
+              "margin": 0.06874999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.96875
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "img_bars4"
+    }
+  ]
+}

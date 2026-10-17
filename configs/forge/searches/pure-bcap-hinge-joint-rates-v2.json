@@ -1,0 +1,26 @@
+{
+  "base_candidate": "bcap-pure-hinge-joint-v2",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 20160,
+    "candidate_budget_seconds": 2520,
+    "id": "pure-bcap-joint-loss-repair-v2"
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.0010625,
+      0.00425
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Pure BCAP with hinge and a complete joint generator/encoder objective may acquire the unchanged Tier 1 distributions at one of two constant global rates.",
+  "id": "pure-bcap-hinge-joint-rates-v2",
+  "protocol": "screening",
+  "rationale": "Correct the omitted encoder term discovered in v1. Evaluate eight complete source-bound recipes, including all seven Tier 1 peers, without grafting prior scalar measurements into the corrected source. Preserve all original failures and paid cancellations. No loss grid axis, seed trial, criteria change, automatic continuation or default adoption.",
+  "schema_version": 2,
+  "trainer_family": "bcap-pure",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

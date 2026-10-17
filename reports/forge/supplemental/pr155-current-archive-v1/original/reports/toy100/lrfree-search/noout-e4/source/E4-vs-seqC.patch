@@ -1,0 +1,391 @@
+diff -ruN /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/continuous.py pkg-E4/particlegan/continuous.py
+--- /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/continuous.py	2026-09-28 14:15:15.452694342 -0600
++++ pkg-E4/particlegan/continuous.py	2026-09-28 19:00:49.660778920 -0600
+@@ -561,8 +561,28 @@
+         self.early_stationary_only = bool(early_stationary_only)
+         self.final_table = tuple(_T99375 if final_table is None else final_table)
+         self.counts["early"] = 0
++        self.counts["held"] = 0
+         self.looks = 0
+         self.last_look = {}
++        # Off-support gate (set by GANTrainer each step from the birth-death support test):
++        # ``exclude``: rows that do not vote (off-support rows); ``hold_descent``: a STATIONARY verdict
++        # is deferred (early: evidence kept; window end: window discarded) while too much of the table
++        # is off-support.
++        self.exclude = None
++        self.hold_descent = False
++        # Table release rule (a DRIFT verdict below the ceiling raises s): "any" = the SettleTest table rule (either scale
++        # positive and not opposed); "both" = both scales significantly positive; "never" = no release from this tester.
++        self.release_rule = "any"
++        # ANCHOR: evidence scale (in intrinsic time) of the last accepted STATIONARY decision = the scale at which the bulk
++        # mean-reverts. Under a stationary bulk the block cosine is positive below it and negative near it, so a DRIFT verdict
++        # whose evidence scale is below twice this anchor is what a settled table produces and is not evidence of drift.
++        self.b_anchor = None
++        self.counts["drift_blocked"] = 0
++
++    def restart(self, params, reopen=False):
++        super().restart(params, reopen=reopen)
++        if reopen:
++            self.b_anchor = None
+ 
+     @torch.no_grad()
+     def _scale_values(self):
+@@ -573,6 +593,8 @@
+             return torch.empty(0, dtype=torch.float64), torch.empty(0, dtype=torch.float64)
+         values = torch.stack(self.r_b + self.r_2b)
+         if self.rows is not None:
++            if self.exclude is not None:
++                values = values.masked_fill(self.exclude.to(values.device)[None, :], float("nan"))
+             values = torch.nanmean(values, dim=1)
+         values = values.cpu().double()
+         return values[:nb], values[nb:]
+@@ -626,8 +648,18 @@
+             decision = "stationary"
+         elif vb == 1 or v2 == 1:
+             decision = "drift"
++            if self.s < 1.0:
++                drift_scale = 2 * tested_b if vb != 1 and v2 == 1 else tested_b
++                if self.release_rule == "never" or (self.release_rule == "both" and not (vb == 1 and v2 == 1)):
++                    decision = "inconclusive"   # a release needs the stated evidence; otherwise search a longer scale
++                elif (self.release_rule == "anchor" and self.b_anchor is not None
++                      and drift_scale < 2 * self.b_anchor):
++                    decision = "inconclusive"
++                    self.counts["drift_blocked"] += 1
+         else:
+             decision = "inconclusive"
++        if decision == "stationary" and self.hold_descent:
++            decision = "held"           # off-support mass above the FDR budget: descent is deferred
+         self.counts[decision] += 1
+         if early:
+             self.counts["early"] += 1
+@@ -647,6 +679,8 @@
+                 self.b = max(self.B0, self.b / 2)
+             self.last_decisive = sign
+             self.last_decisive_scale = evidence_scale
++            if sign < 0:
++                self.b_anchor = evidence_scale
+         elif decision in ("mixed", "inconclusive"):
+             self.b *= 2
+         self.last = dict(decision=decision, step=step, tested_b=tested_b, verdict_b=vb, verdict_2b=v2,
+@@ -670,6 +704,8 @@
+                               log_bf_b=sb["log_bf"], log_bf_2b=s2["log_bf"])
+         if sb["verdict"] == 0 and s2["verdict"] == 0:
+             return None
++        if self.hold_descent and (sb["verdict"] == -1 or s2["verdict"] == -1):
++            return None                 # a descent is due but held: keep the evidence, decide when the hold lifts
+         if self.early_stationary_only:
+             # Only a descent (STATIONARY: cheap to undo) may be decided early, and only when the other
+             # scale can speak (>= 2 values) and does not oppose it. DRIFT / release and MIXED are decided
+@@ -725,6 +761,9 @@
+     def diagnostics(self):
+         out = super().diagnostics()
+         out["sequential"] = True
++        out["hold_descent"] = self.hold_descent
++        out["excluded_rows"] = None if self.exclude is None else int(self.exclude.sum())
++        out["b_anchor"] = self.b_anchor
+         out["early_decisions"] = self.counts.get("early", 0)
+         out["looks"] = self.looks
+         out["last_look"] = self.last_look
+@@ -734,7 +773,7 @@
+ class StationarityLR:
+     """Per-group SettleTests for GANTrainer's (opt_g, opt_d) (lr_control="stationarity")."""
+ 
+-    def __init__(self, optimizers, prior_param=None):
++    def __init__(self, optimizers, prior_param=None, release_rule="any"):
+         self.testers = []
+         for optimizer in optimizers:
+             row = []
+@@ -745,6 +784,7 @@
+                         and group["params"][0] is prior_param and prior_param.dim() == 2:
+                     tester = SequentialSettleTest(early_stationary_only=True, final_table=_T9875)     # descent may be decided early
+                     tester.rows = prior_param.shape[0]
++                    tester.release_rule = release_rule
+                 row.append(tester)
+             self.testers.append(row)
+ 
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/autoencoder.cpython-312.pyc and pkg-E4/particlegan/__pycache__/autoencoder.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/birth_death.cpython-312.pyc and pkg-E4/particlegan/__pycache__/birth_death.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/conditioning.cpython-312.pyc and pkg-E4/particlegan/__pycache__/conditioning.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/continuous.cpython-312.pyc and pkg-E4/particlegan/__pycache__/continuous.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/diffusion.cpython-312.pyc and pkg-E4/particlegan/__pycache__/diffusion.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/discriminators.cpython-312.pyc and pkg-E4/particlegan/__pycache__/discriminators.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/gan_loss.cpython-312.pyc and pkg-E4/particlegan/__pycache__/gan_loss.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/grad_regularizers.cpython-312.pyc and pkg-E4/particlegan/__pycache__/grad_regularizers.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/__init__.cpython-312.pyc and pkg-E4/particlegan/__pycache__/__init__.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/initialization.cpython-312.pyc and pkg-E4/particlegan/__pycache__/initialization.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/k3p.cpython-312.pyc and pkg-E4/particlegan/__pycache__/k3p.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/ka2.cpython-312.pyc and pkg-E4/particlegan/__pycache__/ka2.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/particle_prior.cpython-312.pyc and pkg-E4/particlegan/__pycache__/particle_prior.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/qr_bz_pq_init.cpython-312.pyc and pkg-E4/particlegan/__pycache__/qr_bz_pq_init.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/recipes.cpython-312.pyc and pkg-E4/particlegan/__pycache__/recipes.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/row_evidence.cpython-312.pyc and pkg-E4/particlegan/__pycache__/row_evidence.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/training.cpython-312.pyc and pkg-E4/particlegan/__pycache__/training.cpython-312.pyc differ
+Binary files /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/__pycache__/vicreg_loss.cpython-312.pyc and pkg-E4/particlegan/__pycache__/vicreg_loss.cpython-312.pyc differ
+diff -ruN /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/recipes.py pkg-E4/particlegan/recipes.py
+--- /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/recipes.py	2026-09-28 14:15:15.432241317 -0600
++++ pkg-E4/particlegan/recipes.py	2026-09-28 19:00:49.660976069 -0600
+@@ -102,6 +102,15 @@
+     # Fisher-Rao birth-death moves on the particle table (kNN density ratio,
+     # sequential evidence, BH at q=.05; see birth_death.py). Off by default.
+     particle_birth_death: bool = False
++    # Per-row force-persistence evidence (row_evidence.py): rows whose own gradient history has a significant mean
++    # keep the full table rate and do not vote in the table tester; descent is held while many rows are unbalanced.
++    row_evidence_gate: bool = False
++    # Table stationarity tester: which evidence may raise the table rate again ("any" | "both" | "never" | "anchor"), see continuous.py.
++    table_release_rule: str = "any"
++    # Parts of the row-evidence gate (ablation switches; all True is the declared mechanism).
++    row_evidence_hot: bool = True
++    row_evidence_exclude: bool = True
++    row_evidence_hold: bool = True
+ 
+     def __post_init__(self):
+         if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+@@ -195,6 +204,15 @@
+             raise ValueError("particle_birth_death must be a boolean")
+         if self.particle_birth_death and self.prior_kind != "particles":
+             raise ValueError("particle_birth_death requires prior_kind='particles' (a trainable table)")
++        for _name in ("row_evidence_hot", "row_evidence_exclude", "row_evidence_hold"):
++            if type(getattr(self, _name)) is not bool:
++                raise ValueError(f"{_name} must be a boolean")
++        if self.table_release_rule not in ("any", "both", "never", "anchor"):
++            raise ValueError("table_release_rule must be any, both, never or anchor")
++        if type(self.row_evidence_gate) is not bool:
++            raise ValueError("row_evidence_gate must be a boolean")
++        if self.row_evidence_gate and self.lr_control != "stationarity":
++            raise ValueError("row_evidence_gate requires lr_control='stationarity'")
+         if type(self.direct_particle_gain) is not bool:
+             raise ValueError("direct_particle_gain must be a boolean")
+         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
+diff -ruN /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/row_evidence.py pkg-E4/particlegan/row_evidence.py
+--- /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/row_evidence.py	1969-12-31 17:00:00.000000000 -0700
++++ pkg-E4/particlegan/row_evidence.py	2026-09-28 19:00:49.633845858 -0600
+@@ -0,0 +1,97 @@
++"""Per-row force-persistence evidence from the table's own gradients (information class I0: no real data, no model output).
++
++A table row that sits in a region of the critic's field that pushes it persistently in one direction has a gradient history with a
++non-zero mean; a row at equilibrium has a zero-mean history. Every touch (a row appears in the generator batch) gives the row one gradient
++g in R^d. The row keeps exponentially weighted sufficient statistics over its own touches (weights (1-lam)^age, so the effective sample size
++is n_eff = (sum w)^2 / sum w^2, at most (2-lam)/lam) and tests H0: E[g] = 0 with a Hotelling T^2 statistic. For d = 2 the null law is
++exactly p = (1 + T^2/(n-1))^(-(n-2)/2) (the F(2, n-2) survival function); for other d the chi^2_d survival function is used, which is
++anti-conservative below n ~ 30, so a p-value needs n_eff >= 3 d (a test needs more observations than parameters; otherwise p = 1).
++Rows are then flagged by Benjamini-Hochberg at level Q over all rows (Q is used only as this FDR level).
++"""
++import torch
++
++
++class RowEvidence:
++    def __init__(self, table, window=50, level=0.05):
++        n, d = table.shape
++        dev, dt = table.device, table.dtype
++        self.n, self.d, self.lam, self.Q = n, d, 1.0 / float(window), float(level)
++        self.M = torch.zeros(n, d, device=dev, dtype=dt)      # sum_j w_j g_j
++        self.Qs = torch.zeros(n, device=dev, dtype=dt)        # sum_j w_j |g_j|^2
++        self.W = torch.zeros(n, device=dev, dtype=dt)         # sum_j w_j
++        self.S = torch.zeros(n, device=dev, dtype=dt)         # sum_j w_j^2
++        self.flag = torch.zeros(n, device=dev, dtype=torch.bool)
++        self.fraction = 0.0
++        self.valid = False
++        self.counters = {"updates": 0, "flagged_rows_sum": 0, "resets": 0}
++
++    @torch.no_grad()
++    def update(self, grad):
++        """Fold this step's table gradient in (rows with a non-zero gradient were touched) and refresh the flags."""
++        idx = (grad != 0).any(1).nonzero().flatten()
++        if len(idx):
++            g = grad[idx]
++            keep = 1.0 - self.lam
++            self.M[idx] = keep * self.M[idx] + g
++            self.Qs[idx] = keep * self.Qs[idx] + g.square().sum(1)
++            self.W[idx] = keep * self.W[idx] + 1.0
++            self.S[idx] = keep * keep * self.S[idx] + 1.0
++        self._test()
++        self.counters["updates"] += 1
++        self.counters["flagged_rows_sum"] += int(self.flag.sum())
++
++    @torch.no_grad()
++    def _test(self):
++        d = self.d
++        W = self.W.clamp_min(1e-30)
++        n_eff = W * W / self.S.clamp_min(1e-30)
++        mean = self.M / W.unsqueeze(1)
++        # unbiased per-coordinate variance of the weighted sample
++        ss = (self.Qs / W - mean.square().sum(1)).clamp_min(0.0)
++        var = ss * n_eff / (n_eff - 1.0).clamp_min(1e-6) / d
++        ok = (n_eff >= 3.0 * d) & (var > 0)
++        t2 = n_eff * mean.square().sum(1) / var.clamp_min(1e-38)
++        if d == 2:
++            logp = -(n_eff - 2.0) / 2.0 * torch.log1p(t2 / (n_eff - 1.0).clamp_min(1e-6))
++            p = logp.exp()
++        else:
++            p = torch.special.gammaincc(torch.tensor(d / 2.0, device=t2.device, dtype=t2.dtype), t2 / 2.0)
++        p = torch.where(ok, p, torch.ones_like(p))
++        ps, order = p.sort()
++        ranks = torch.arange(1, self.n + 1, device=p.device, dtype=p.dtype)
++        passed = (ps <= ranks * self.Q / self.n).nonzero()
++        flag = torch.zeros(self.n, device=p.device, dtype=torch.bool)
++        if len(passed):
++            flag[order[:int(passed[-1]) + 1]] = True
++        self.flag = flag
++        self.fraction = float(flag.double().mean())
++        self.valid = True
++
++    @torch.no_grad()
++    def reset(self, rows):
++        """A teleported row begins a new lineage: its gradient history belongs to another place."""
++        self.M[rows] = 0
++        self.Qs[rows] = 0
++        self.W[rows] = 0
++        self.S[rows] = 0
++        self.flag[rows] = False
++        self.counters["resets"] += int(len(rows))
++
++    _TENSORS = ("M", "Qs", "W", "S", "flag")
++
++    def state_dict(self):
++        return dict(**{k: getattr(self, k).clone() for k in self._TENSORS}, fraction=self.fraction, valid=self.valid,
++                    counters=dict(self.counters))
++
++    def check_state(self, state):
++        if not isinstance(state, dict) or set(state) != set(self._TENSORS) | {"fraction", "valid", "counters"}:
++            raise ValueError("invalid row-evidence state")
++        for k in self._TENSORS:
++            if not isinstance(state[k], torch.Tensor) or state[k].shape != getattr(self, k).shape:
++                raise ValueError(f"row-evidence {k} does not match the table")
++
++    def load_state_dict(self, state):
++        self.check_state(state)
++        for k in self._TENSORS:
++            setattr(self, k, state[k].clone().to(self.M.device))
++        self.fraction, self.valid, self.counters = float(state["fraction"]), bool(state["valid"]), dict(state["counters"])
+diff -ruN /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/training.py pkg-E4/particlegan/training.py
+--- /ml2/hypergan/gan-attempts/seqtest-20260928/pkg-seqC/particlegan/training.py	2026-09-28 14:15:15.432335627 -0600
++++ pkg-E4/particlegan/training.py	2026-09-28 19:00:49.633686209 -0600
+@@ -51,7 +51,9 @@
+ # reproduces the older behaviour; a saved recipe without them is upgraded.
+ _ADDED_RECIPE_FIELDS = {"continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
+                         "critic_payoff_damping": True, "output_noise_mode": "fixed",
+-                        "lr_control": "mobility", "particle_birth_death": False}
++                        "lr_control": "mobility", "particle_birth_death": False,
++                        "row_evidence_gate": False, "table_release_rule": "any",
++                        "row_evidence_hot": True, "row_evidence_exclude": True, "row_evidence_hold": True}
+ 
+ 
+ class GANTrainer:
+@@ -159,12 +161,18 @@
+         self.lr_settle = None
+         if recipe.lr_control == "stationarity":
+             from .continuous import StationarityLR
+-            self.lr_settle = StationarityLR((self.opt_g, self.opt_d), prior_param=self.prior.z)
++            self.lr_settle = StationarityLR((self.opt_g, self.opt_d), prior_param=self.prior.z,
++                                            release_rule=recipe.table_release_rule)
+         # particle_birth_death: Fisher-Rao moves on the table (private stream seed + 6).
+         self.birth_death = None
+         if recipe.particle_birth_death:
+             from .birth_death import ParticleBirthDeath
+             self.birth_death = ParticleBirthDeath(self, seed + 6)
++        # row_evidence_gate: per-row force-persistence evidence from the table's own gradients (no data comparison).
++        self.row_evidence = None
++        if recipe.row_evidence_gate:
++            from .row_evidence import RowEvidence
++            self.row_evidence = RowEvidence(self.prior.z)
+ 
+     @property
+     def latent_damping(self):
+@@ -311,6 +319,12 @@
+         if self.controller is not None and recipe.critic_payoff_damping:
+             for group in self.opt_d.param_groups:
+                 group["lr"] *= self.controller.critic_scale()
++        stray_flags, stray_hold, table_tester = self._stray_gate()
++        if table_tester is not None and hasattr(table_tester, "hold_descent"):
++            table_tester.exclude = stray_flags if self.recipe.row_evidence_exclude else None
++            table_tester.hold_descent = stray_hold
++        if stray_hold:
++            self.row_evidence.counters["hold_steps"] = self.row_evidence.counters.get("hold_steps", 0) + 1
+         sigma_in = input_noise_std(recipe, self.completed_steps)
+         sigma_out = self._output_sigma(output_noise_std(recipe, self.completed_steps), detach=False)
+         self.last_output_sigma = float(sigma_out.detach() if torch.is_tensor(sigma_out) else sigma_out)
+@@ -361,7 +375,20 @@
+             loss_g.backward()
+             if self.controller is not None:
+                 self.controller.observe_generator(self.G, loss_gan.detach(), (loss_d - penalty).detach())
++            hot = None
++            if self.row_evidence is not None:
++                self.row_evidence.update(self.prior.z.grad)
++                if (self.recipe.row_evidence_hot and stray_flags is not None and table_tester is not None
++                        and table_tester.s < 1.0 and bool(stray_flags.any())):
++                    hot = stray_flags
++                    z_before = self.prior.z.detach().clone()
+             self.opt_g.step()
++            if hot is not None:
++                # Unbalanced rows keep the full table rate: undo the group's scale s on their step.
++                with torch.no_grad():
++                    z = self.prior.z
++                    z[hot] = z_before[hot] + (z[hot] - z_before[hot]) * (1.0 / table_tester.s)
++                self.row_evidence.counters["hot_row_steps"] = self.row_evidence.counters.get("hot_row_steps", 0) + int(hot.sum())
+             if self.lr_settle is not None:
+                 self._settle_observe(0)
+         finally:
+@@ -381,6 +408,8 @@
+                 for group, tester, role in zip(self.opt_g.param_groups, self.lr_settle.testers[0], self.roles[0]):
+                     if role == "prior" and tester is not None:
+                         tester.rebase(group["params"], self.birth_death.moved_rows)
++                if self.row_evidence is not None:
++                    self.row_evidence.reset(self.birth_death.moved_rows)
+         self.completed_steps += 1
+         result = {key: value.detach() for key, value in
+                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
+@@ -390,6 +419,28 @@
+             result["penalty_stats"] = penalty_stats
+         return result
+ 
++    def _table_tester(self):
++        """The stationarity tester of the particle table group (None without lr_control="stationarity")."""
++        if self.lr_settle is None:
++            return None
++        for tester, role in zip(self.lr_settle.testers[0], self.roles[0]):
++            if role == "prior" and tester is not None:
++                return tester
++        return None
++
++    def _stray_gate(self):
++        """Unbalanced-row gate for this step -> (flags, hold, tester).
++
++        Rows whose own gradient history has a significant mean (row_evidence.py, BH at the FDR level Q over rows)
++        are still being pushed: while more than Q of the table is flagged the table is in transport and descent is
++        held (flags=None). Below that the flagged rows keep the full table rate and do not vote in the table's
++        stationarity statistic, so the settled bulk can anneal while they can neither freeze nor re-open it."""
++        ev, tester = self.row_evidence, self._table_tester()
++        if ev is None or tester is None or not ev.valid:
++            return None, False, tester
++        hold = ev.fraction > ev.Q and self.recipe.row_evidence_hold
++        return (None if hold else ev.flag), hold, tester
++
+     def _settle_observe(self, index):
+         optimizer = (self.opt_g, self.opt_d)[index]
+         for group, rate, tester in zip(optimizer.param_groups, self.initial_lrs[index], self.lr_settle.testers[index]):
+@@ -442,6 +493,7 @@
+                if self.log_output_sigma is not None else {}),
+             **({"lr_settle": self.lr_settle.state_dict()} if self.lr_settle is not None else {}),
+             **({"birth_death": self.birth_death.state_dict()} if self.birth_death is not None else {}),
++            **({"row_evidence": self.row_evidence.state_dict()} if self.row_evidence is not None else {}),
+         })
+ 
+     def load_state_dict(self, state):
+@@ -523,6 +575,8 @@
+             deepcopy(self.lr_settle).load_state_dict(state["lr_settle"], (self.opt_g, self.opt_d))
+         if self.birth_death is not None:
+             self.birth_death.check_state(state["birth_death"])
++        if self.row_evidence is not None:
++            self.row_evidence.check_state(state["row_evidence"])
+         for name, values in state["models"].items():
+             getattr(self, name).load_state_dict(values)
+         if self.log_output_sigma is not None:
+@@ -536,6 +590,8 @@
+             self.lr_settle.load_state_dict(state["lr_settle"], (self.opt_g, self.opt_d))
+         if self.birth_death is not None:
+             self.birth_death.load_state_dict(state["birth_death"])
++        if self.row_evidence is not None:
++            self.row_evidence.load_state_dict(state["row_evidence"])
+         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
+         self.recipe = self.recipe.replace(initialization=saved_recipe.get("initialization"))
+         for name, value in state["streams"].items():

@@ -1,0 +1,58 @@
+{
+  "grades": {
+    "trajectory_conditional_policy_selected_cloud_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.4175,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 167,
+          "first_pass_step": 100,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 19,
+          "passing_suffix": 19,
+          "stable_from_seconds": null,
+          "stable_from_step": 100
+        },
+        "metrics": [
+          {
+            "margin": 0.01892909172922373,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.02,
+            "value": 0.0010709082707762718
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0010709082707762718,
+        "step": 400
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "raw_hash": "0b31c75dcbd9efdf4dba9836198b3997b6b358794c51d63a87c4d9d32460cfbf",
+  "schema_version": 1,
+  "source_digest": "87fcd4e28bdcd9f347379b7db1fbcf0af3edcc0fbd5e97e4a98d9a49f8987a87",
+  "telemetry": {
+    "independent_grading_seconds": 0.8581374378409237,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 664309760
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}

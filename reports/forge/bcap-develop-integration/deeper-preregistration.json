@@ -1,0 +1,80 @@
+{
+  "admission": "READY",
+  "blocked_holds": [
+    {
+      "producer_grades": {
+        "five_word_joint_smoke": "INCOMPLETE"
+      },
+      "reason": "Own required producer did not completely PASS",
+      "task_id": "five_word_joint_hold"
+    }
+  ],
+  "campaign_ceiling_seconds": 45000,
+  "candidate_revision": "cd0bc55327a413a597a55fe9b662e9e03c77d3fd90460ddc35c2045e873abe86",
+  "evidence_scope": "research_diagnostic",
+  "full_reservation_seconds": 40320,
+  "measured_tasks": [
+    "gaussian1d_smoke",
+    "gaussian1d_stability",
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "mode_hold",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "img_stripes2",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "ordinary_request": "9579aae4bd9bdbae01e7919d",
+  "ordinary_tier1": {
+    "ae_gan_hold": "PASS",
+    "five_word_joint_smoke": "INCOMPLETE",
+    "gaussian1d_smoke": "PASS",
+    "ring16_acquisition": "PASS",
+    "two_pole": "FAIL",
+    "unused_token_hold": "PASS"
+  },
+  "passing_producers_replayed": [
+    "gaussian1d_smoke"
+  ],
+  "qualification_input": false,
+  "required_tier2": [
+    "gaussian1d_stability",
+    "five_word_joint_hold",
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "mode_hold",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "img_stripes2",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "schema_version": 1,
+  "software_allowance_seconds": 3600,
+  "source_digest": "c68be4ae40db26959c1b2876ed33ec044aba9cf08cab84be71ed8a0264a2eb17",
+  "stopping_rule": "One unchanged global revision, full gates, no tuning or seeds; no ordinary qualification credit.",
+  "total_main_and_diagnostic_ceiling_seconds": 135000
+}

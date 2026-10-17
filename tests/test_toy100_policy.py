@@ -110,6 +110,30 @@ def test_affine_square_initialization_matches_scratch_rng_order():
     assert sum(p.numel() for p in trainer.G.parameters()) == 6
 
 
+def test_critic_keeps_the_benchmarks_explicit_xavier_init():
+    # toy100's recipes were gated on this critic; a QR redraw at PyTorch's
+    # default scale (particlegan.init.deterministic_orthogonal_) fails 0/3.
+    from lib.toy_models import SimpleMLPDiscriminator
+
+    config, recipe = resolve_config(_small_config(input_noise_std=.5))
+    trainer = make_trainer(config, recipe)
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(31)
+        recipe.make_prior(learnable=True).z.detach().uniform_(-5.0, 5.0)
+        torch.nn.Linear(2, 2)
+        reference = SimpleMLPDiscriminator(in_dim=2, hidden_dim=8, n_hidden=1, fourier=3)
+        for layer in reference.modules():
+            if isinstance(layer, torch.nn.Linear):
+                torch.nn.init.xavier_uniform_(layer.weight)
+                torch.nn.init.zeros_(layer.bias)
+    assert isinstance(trainer.D, InputNoise)
+    actual = dict(trainer.D.model.named_parameters())
+    for name, value in reference.named_parameters():
+        torch.testing.assert_close(actual[name], value, rtol=0, atol=0)
+        if name.endswith("bias"):
+            assert torch.all(value == 0)
+
+
 def test_policy_rates_keep_prior_on_full_budget_and_restore_checkpoint_bases():
     config, recipe = resolve_config(_small_config())
     torch.set_num_threads(1)

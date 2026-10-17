@@ -1,0 +1,39 @@
+{
+  "base_candidate": "k3p-global-input-noise-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 16800,
+    "candidate_budget_seconds": 2100,
+    "id": "k3p-global-input-noise-tier1-v1"
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "coupled_rates": [
+      {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706
+      },
+      {
+        "lr": 0.0085,
+        "prior_lr_mult": 0.14117647058823526
+      }
+    ],
+    "reg_coeff": [
+      1.0,
+      10.0,
+      30.0,
+      170.0
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Restoring the existing symmetric critic input-noise schedule, while retaining clean generator outputs and a full network horizon, may avoid the low-force two_pole plateaus observed across twelve clean K3P recipes. Early independent critic input perturbations can break the deterministic symmetry of the initially identical direct particles. Existing positive critic coefficients and coupled global rates test whether one complete recipe also passes ring and words. Ordinary prerequisites stop a candidate on its first required failure.",
+  "id": "k3p-global-input-noise-tier1-v1",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "The first separately frozen clean grid concluded with twelve two_pole failures, movement .025701 to .141911, all later tasks unknown. Its finite negative evidence did not identify a single cause. The zero-initialized clean direct cloud preserves identical particle inputs and deterministic per-row gradients; early independent critic perturbations provide an existing symmetry breaking control. Historical noisy incumbents and a clean word-positive recipe have different joint bindings and do not establish transfer. This second independent bounded round fixes the existing input noise at .5 with its unchanged anneal-end fraction .1, output noise0/full horizon, D multiplier1.5, and all other mechanisms. Its strict positive numerical grid varies shared LR and critic coefficient only, coupled to prior=.0012/LR. Phase two is one separately bounded round of eight complete global recipes, 2100 seconds each and 16800 total. Input noise is a fixed, explicitly declared existing-control activation; the numerical search keeps that technique signature fixed. No new GAN technique, task override, objective, architecture, seed study, gate change, word-witness qualification import, unchanged repeat, paid base/control run, higher-tier execution or automatic further paid round. Output noise remains zero; schedule horizons and sampling laws are unchanged. Nominal prior rate is fixed, not its realized trajectory. Prerequisite-gated cells remain UNKNOWN.",
+  "schema_version": 1,
+  "trainer_family": "k3p",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

@@ -1,5 +1,12 @@
 # Running and reusing experiment grids
 
+For new technique ideas on supported toy/native tasks, start with
+[ParticleGAN Forge](../EXPERIMENTATION.md). Its gate profile remains provisional;
+calibration has not approved replacing full legacy coverage. This runner retains
+generic `--trainer` grids, uncovered application domains and archived reproduction.
+The [consumer index](../reports/forge/legacy-consumers.json) records those retained
+contracts.
+
 Run from the repository root with the environment used for training:
 
 ```bash

@@ -1,0 +1,57 @@
+{
+  "accepted_original_gate_counts": {
+    "FAIL": 0,
+    "PASS": 0,
+    "UNAVAILABLE": 3
+  },
+  "attempt_token_sha256": "35098588f278fa43c262505dca85be48fe941ecb4568435f288f45622aa50752",
+  "budget": {
+    "aggregate_cap_seconds": 10800,
+    "maximum_inclusive_with_next_three_full_caps_seconds": 7637.891497056,
+    "metadata_cap_seconds": 180,
+    "next_three_full_caps_seconds": [
+      1470,
+      1440,
+      1380
+    ]
+  },
+  "case_cost": {
+    "charged_seconds": 2.0496059330180287,
+    "overrun_seconds": 0.0,
+    "paid_wall_seconds": 2.0496059330180287,
+    "reserved_seconds": 0.0
+  },
+  "closed_metadata_before_sealing": {
+    "bytes": 4644,
+    "canonical_path": "/ml2/hypergan/.pg-pr223-full-original-retest-20261004.pr223-full19-metadata-cost.json",
+    "charged_seconds": 58.63964644144289,
+    "phase_count": 22,
+    "sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2"
+  },
+  "execution_counts": {
+    "INVALID": 1,
+    "NOT_RUN": 2
+  },
+  "first_case_id": "pr223-native3-continuation-v1-native-grid100",
+  "historical_grades_transferred": false,
+  "metadata_is_same_cumulative_180_not_extra_debit": true,
+  "numerical_credit": false,
+  "old19_case_charged_seconds": 3165.841891122982,
+  "old_grades_are_current_credit": false,
+  "original_required": 19,
+  "physical_attempt_key": "84a5ce0a6978a245eb56aca4a7e91ad88ada29e14e861969290edbbf37450a1f",
+  "pretraining_refusal": "declared native3 rows cannot carry historical grade or attempt credit",
+  "required": 3,
+  "retained_total_case_charge_seconds": 3167.891497056,
+  "schema": "pg_pr223_native3_first_invalid_debit_anchor_v1",
+  "source": {
+    "digest": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
+    "origin_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d"
+  },
+  "supervisor": {
+    "attempt_status": "completed",
+    "child_returncode": 1,
+    "paid_wall_seconds": 2.0496059330180287
+  },
+  "training_started": false
+}

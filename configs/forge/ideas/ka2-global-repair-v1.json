@@ -1,0 +1,1589 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Register the previously selected repaired optimizer recipe as one global reusable family candidate with fixed numerical optimizer, penalty, noise and schedule controls across all tasks; declared task-owned geometry/resources/prior/horizons/objectives remain bound by existing adapters."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "decision_contract": {
+    "candidate_binding_sha256": "42b23694c40f18a8b0f4d240a183d0003287e1d266dc823a7aa9f2b442eef33c",
+    "competing_explanation": "The lower word-compatible global rates may be too small for the frozen 80-update movement screen. A failure rejects this complete ordinary candidate; prior word passes cannot fill its gated cells or justify per-task tuning.",
+    "control": {
+      "binding_sha256": "a1ad03695d477e74705ba07032b8cb5af21b5024e920f1693f36e6b0c444a7ac",
+      "candidate_id": "ka2",
+      "task_map": {
+        "ae_gan_hold": "ae_gan_hold",
+        "cover_leftover": "cover_leftover",
+        "five_word_joint_acquisition": "five_word_joint_acquisition",
+        "grid100": "grid100",
+        "img_bars4": "img_bars4",
+        "img_blobs4": "img_blobs4",
+        "img_intensity2": "img_intensity2",
+        "img_stripes2": "img_stripes2",
+        "mid_scale_identity": "mid_scale_identity",
+        "mode_hold": "mode_hold",
+        "residual_student": "residual_student",
+        "ring16_acquisition": "ring16_acquisition",
+        "ring_extension": "ring_extension",
+        "ring_hold": "ring_hold",
+        "rotated100": "rotated100",
+        "staggered100": "staggered100",
+        "trajectory": "trajectory",
+        "two_pole": "two_pole",
+        "unipolar": "unipolar",
+        "unused_token_hold": "unused_token_hold",
+        "vector_anisotropic": "vector_anisotropic",
+        "vector_overlap": "vector_overlap",
+        "vector_spiral": "vector_spiral",
+        "vector_two_broad": "vector_two_broad",
+        "vector_unequal_mass": "vector_unequal_mass",
+        "vector_unequal_width": "vector_unequal_width"
+      }
+    },
+    "falsifier": {
+      "metric": "mean_abs",
+      "op": "<",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prediction": {
+      "metric": "mean_abs",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_revision": "a3ea26c51800ede1c4dd8983a58b0c2a891bf18e8ef814c7aa5f9283186acf81",
+          "id": "ka2-slow-prior-0p1"
+        },
+        "path": "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json",
+        "selector": [],
+        "sha256": "bdf4c73e51647f79c2b7e485f442e92ad6334857e2f4a4cad5fc2e6ec022addc",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 146700,
+      "candidate_budget_seconds": 48900,
+      "execution_backend": "cuda",
+      "jobs_sha256": "bd79a8e0841db8ac8567fff65f7d14c6fa91980d0fe4e5ae6d355ba4b72f128d",
+      "max_rounds": 1,
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_cohort_sha256": "e2f4acc3bb6543576475ece1bb0bce5b973eca2ed1852b13d096ec9145277c71",
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "task_ids": [
+        "ae_gan_hold",
+        "cover_leftover",
+        "five_word_joint_acquisition",
+        "grid100",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "img_stripes2",
+        "mid_scale_identity",
+        "mode_hold",
+        "residual_student",
+        "ring16_acquisition",
+        "ring_extension",
+        "ring_hold",
+        "rotated100",
+        "staggered100",
+        "trajectory",
+        "two_pole",
+        "unipolar",
+        "unused_token_hold",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width"
+      ],
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    "status": "ready",
+    "substantive_delta": [
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "cover_leftover",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "cover_leftover",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "cover_leftover",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "cover_leftover",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "cover_leftover",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "cover_leftover",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "grid100",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "grid100",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "grid100",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "grid100",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "grid100",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "grid100",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "img_bars4",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "img_bars4",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "img_bars4",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "img_bars4",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "img_bars4",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "img_bars4",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "img_blobs4",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "img_blobs4",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "img_blobs4",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "img_blobs4",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "img_blobs4",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "img_blobs4",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "img_intensity2",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "img_intensity2",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "img_intensity2",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "img_intensity2",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "img_intensity2",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "img_intensity2",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "img_stripes2",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "img_stripes2",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "img_stripes2",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "img_stripes2",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "img_stripes2",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "img_stripes2",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "mid_scale_identity",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "mid_scale_identity",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "mid_scale_identity",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "mid_scale_identity",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "mid_scale_identity",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "mode_hold",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "mode_hold",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "mode_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "mode_hold",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "mode_hold",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "mode_hold",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "residual_student",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "residual_student",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "residual_student",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "residual_student",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "residual_student",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "residual_student",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ring_extension",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "ring_extension",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "ring_extension",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "ring_extension",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "ring_extension",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "ring_extension",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ring_hold",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "ring_hold",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "ring_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "ring_hold",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "ring_hold",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "ring_hold",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "rotated100",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "rotated100",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "rotated100",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "rotated100",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "rotated100",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "rotated100",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "staggered100",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "staggered100",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "staggered100",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "staggered100",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "staggered100",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "staggered100",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "trajectory",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "trajectory",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "trajectory",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "trajectory",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "trajectory",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "trajectory",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "two_pole",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "two_pole",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "two_pole",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "two_pole",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "two_pole",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "unipolar",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "unipolar",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "unipolar",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "unipolar",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "unipolar",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "vector_anisotropic",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "vector_anisotropic",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "vector_anisotropic",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "vector_anisotropic",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "vector_anisotropic",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "vector_anisotropic",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "vector_overlap",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "vector_overlap",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "vector_overlap",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "vector_overlap",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "vector_overlap",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "vector_overlap",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "vector_spiral",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "vector_spiral",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "vector_spiral",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "vector_spiral",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "vector_spiral",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "vector_spiral",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "vector_two_broad",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "vector_two_broad",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "vector_two_broad",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "vector_two_broad",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "vector_two_broad",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "vector_two_broad",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "vector_unequal_mass",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "vector_unequal_mass",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "vector_unequal_mass",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "vector_unequal_mass",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "vector_unequal_mass",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "vector_unequal_mass",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 1.5,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "vector_unequal_width",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "vector_unequal_width",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0006,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "vector_unequal_width",
+          "lr"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "vector_unequal_width",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "vector_unequal_width",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.1,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "vector_unequal_width",
+          "prior_lr_mult"
+        ]
+      }
+    ],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "diagnostic_ancestor": {
+    "qualification_reuse": false,
+    "receipt": {
+      "bytes": 40024,
+      "path": "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json",
+      "sha256": "bdf4c73e51647f79c2b7e485f442e92ad6334857e2f4a4cad5fc2e6ec022addc"
+    },
+    "use": "motivation_only"
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "The exact repaired global recipe acquires the five-word inverse task and transfers without task-specific optimizer tuning across every eligible required discriminator-stability task under ordinary prerequisites.",
+  "id": "ka2-global-repair-v1",
+  "lifecycle": "proposed",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Explicit global solution successor. Clean-noise/cap activation boundaries are declared rather than hidden in same-signature search; no new penalty kernel, optimizer family or auxiliary objective. Family membership describes solution lineage.",
+  "parent": "ka2",
+  "prior_art": [
+    "reports/forge/word-root-cause/README.md",
+    "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json"
+  ],
+  "recipe_overrides": {
+    "amsgrad": false,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "continuous_policy": null,
+    "critic_formulation": "ka2",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "ema_decay": 0.995,
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0006,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "name": "ka2",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_lr_mult": 0.1,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "table_release_rule": "any"
+  },
+  "recipe_scope": "global_existing_settings_task_owned_conditions_only",
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 2,
+  "trainer_family": "ka2"
+}

@@ -1,0 +1,89 @@
+{
+  "candidate_id": "bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe",
+  "exporter_sha256": "7251a2b6d0061ab0b1e25b33a966e7466d98ec96d11d9540901ede72f1a77cba",
+  "live_execution_guard": "Model construction/forward, trainer step/sample and prior sampling disabled during export.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selection_policy": "All executed tasks from the explicitly named complete candidate; no per-task candidate substitution.",
+  "tasks": [
+    {
+      "attempt_id": "ac34e490e95544d9973d45f647e0e432",
+      "gif": "ae_gan_hold.gif",
+      "gif_sha256": "3b002b0fdc9403faf6a3acf6b71f3a099ebdde245bcd13bfe79a921ec0db4586",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "ae_gan_hold.json",
+      "renderer_receipt_sha256": "ccdd8d3cb008f0eca2fa07ca86d7a10691121998572d5585f8fe2c27e4fa33e1",
+      "source_commit": "96b03a5e577dab9c566e346df8e2a100f79787d6",
+      "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "71c1218bcea94954838a766c2fda4972",
+      "gif": "clockfree_audit_measurement_v1.gif",
+      "gif_sha256": "ede0d3e2efca38b798b24b2c29e388ffbf52c550613de78edd3d54306e6cb164",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "clockfree_audit_measurement_v1.json",
+      "renderer_receipt_sha256": "8046ed49c5474a3d63034b1dcd55722511f64d3d520af46179790facc5074090",
+      "source_commit": "96b03a5e577dab9c566e346df8e2a100f79787d6",
+      "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "2e700f5b3f394de59e02546341aec00b",
+      "gif": "five_word_joint_smoke.gif",
+      "gif_sha256": "c68db09ea2c61a3b01fd228e90c77f0a63abcd35c1eec55826f890f2fc49c9fa",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "five_word_joint_smoke.json",
+      "renderer_receipt_sha256": "6bca42c305e7cd834fc90a61c7abd8aeaff1d9b0b644f91b1bc4c78b4c37c3f0",
+      "source_commit": "96b03a5e577dab9c566e346df8e2a100f79787d6",
+      "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "552b402395d740029c82a38fc206b187",
+      "gif": "gaussian1d_smoke.gif",
+      "gif_sha256": "9639b44a458f4d5756486be1f23f3c62047f0549f1259d047cbdf0f3ba816247",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "gaussian1d_smoke.json",
+      "renderer_receipt_sha256": "ca5545d2b754d465d543237c96dd8869e67ccdc36921c49dea6c4659c80e2707",
+      "source_commit": "96b03a5e577dab9c566e346df8e2a100f79787d6",
+      "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "1db2d1f4da6b4c6f9458ae1be2e7dce8",
+      "gif": "ring16_acquisition.gif",
+      "gif_sha256": "e9f66cb8458965b03f6ea08a4436894fbae6a1e96b118af8b4bd21802018c18a",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "ring16_acquisition.json",
+      "renderer_receipt_sha256": "cf72a146e1ac3741a59808dcee1af2c681d570958a98ff35f5e94d15309274db",
+      "source_commit": "96b03a5e577dab9c566e346df8e2a100f79787d6",
+      "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "a8ab41de17b24a459220ad598042e788",
+      "gif": "two_pole.gif",
+      "gif_sha256": "040e2312fd9e62614e606a778b6f1dcaace44e2621419547e1eeac8f4b5c4aea",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "two_pole.json",
+      "renderer_receipt_sha256": "b88aefb6ae0f1b739c8201c64c52c686b5d8cb1089114cf804088395a7ee9685",
+      "source_commit": "96b03a5e577dab9c566e346df8e2a100f79787d6",
+      "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "ca04af081a2f44c28d088142491863fa",
+      "gif": "unused_token_hold.gif",
+      "gif_sha256": "6380209b9c9a828af2b5dd4ecd18b42cd6da1be89ace8e828f056268ac761d92",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "unused_token_hold.json",
+      "renderer_receipt_sha256": "c18c43ae00916b31268626c9970e25f7ece0b71efefed88165fd68822877e0d6",
+      "source_commit": "96b03a5e577dab9c566e346df8e2a100f79787d6",
+      "source_digest": "801d07b11ff269f441d7960dbc445939aa770dbceebdca5e315432c76b46b97a",
+      "task_id": "unused_token_hold"
+    }
+  ]
+}

@@ -1,0 +1,352 @@
+{
+  "schema": "particlegan_recent_toy_media_v1",
+  "pr": 235,
+  "reviewed_head": "bcd4b1b201f8f154a00e2b432cf051c0e318813c",
+  "cohort": "retained_original",
+  "quality_tier": "4/5 bounded diagnostic definition",
+  "recommendation": "PRESERVE_AND_ADD",
+  "frozen_176_campaign_changed": false,
+  "training_or_model_rescoring_during_export": false,
+  "raw_inputs": {
+    "/ml2/hypergan/ParticleGAN-routed-g-clean-toy-develop/runs/routed-g-clean-v1/report.json": {
+      "sha256": "c0638fd0f28392dfbcbca2bab71d9d32c693a4aa0cdaf6986cefc64842394b44",
+      "bytes": 10468,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/ParticleGAN-routed-g-clean-toy-develop/runs/routed-g-clean-v1/completion.json": {
+      "sha256": "486dc270c2d8423015245aa8b55eaa535274f034d3b8ce4d49239a8fcc5abaf9",
+      "bytes": 174,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/ParticleGAN-routed-g-clean-toy-develop/runs/routed-g-clean-v1/retained.pt": {
+      "sha256": "57588f595f103f013b761f16b662fbff260bcf2e9633716a4923482093f61dc9",
+      "bytes": 16407134,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/ParticleGAN-routed-g-clean-toy-develop/runs/routed-g-clean-v1/native.jsonl": {
+      "sha256": "ff3e6a199b7a25b325238ddd7746bad87f6a1df832827f50605703a3ebbe1ece",
+      "bytes": 300611,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/ParticleGAN-routed-g-clean-toy-develop/runs/routed-g-clean-v1/G_clean.jsonl": {
+      "sha256": "da0b483cb3eb0fd58974ee82523072cf39ff859820787d48993940a79a3b2d10",
+      "bytes": 299738,
+      "attestation": "original_public_receipt"
+    }
+  },
+  "raw_files_unchanged": true,
+  "exporter_source": {
+    "commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+    "file": "benchmarks/toy_audit/recent_toy_media.py",
+    "sha256": "71fb5ea6a15f40f87d0d586394b1ae80326517ac0362bc2172926095fc732a98"
+  },
+  "data": {
+    "complete": true,
+    "native_updates_per_arm": 512,
+    "arms": 2,
+    "scientific_status": "PASS",
+    "gate": {
+      "pass": true,
+      "metric_max_clean_minus_native_game": -0.0003039836883544922,
+      "threshold": -0.0001,
+      "minimum_code_gain": 0.09090018272399902,
+      "code_threshold": 1e-06,
+      "calibrated": true,
+      "bank_live": true,
+      "query_live": true,
+      "C_live": true
+    },
+    "curves": {
+      "native": {
+        "0": {
+          "clean": {
+            "native@128": 3.783289670944214,
+            "native@512": 6.730382442474365,
+            "G_clean@128": 3.7833445072174072,
+            "G_clean@512": 6.730207443237305
+          },
+          "DV12": {
+            "native@128": 3.783289670944214,
+            "native@512": 6.730382442474365,
+            "G_clean@128": 3.7833445072174072,
+            "G_clean@512": 6.730207443237305
+          }
+        },
+        "64": {
+          "clean": {
+            "native@128": 3.7748782634735107,
+            "native@512": 6.720103740692139,
+            "G_clean@128": 3.774932861328125,
+            "G_clean@512": 6.71992826461792
+          },
+          "DV12": {
+            "native@128": 3.7749481201171875,
+            "native@512": 6.720143795013428,
+            "G_clean@128": 3.775003433227539,
+            "G_clean@512": 6.719968318939209
+          }
+        },
+        "128": {
+          "clean": {
+            "native@128": 3.759474039077759,
+            "native@512": 6.699638366699219,
+            "G_clean@128": 3.7595298290252686,
+            "G_clean@512": 6.699460983276367
+          },
+          "DV12": {
+            "native@128": 3.7590696811676025,
+            "native@512": 6.699028015136719,
+            "G_clean@128": 3.759124994277954,
+            "G_clean@512": 6.698850631713867
+          }
+        },
+        "192": {
+          "clean": {
+            "native@128": 3.7395973205566406,
+            "native@512": 6.67097806930542,
+            "G_clean@128": 3.7396535873413086,
+            "G_clean@512": 6.670801639556885
+          },
+          "DV12": {
+            "native@128": 3.7392280101776123,
+            "native@512": 6.670459747314453,
+            "G_clean@128": 3.739283800125122,
+            "G_clean@512": 6.670284271240234
+          }
+        },
+        "256": {
+          "clean": {
+            "native@128": 3.7074594497680664,
+            "native@512": 6.623854160308838,
+            "G_clean@128": 3.7075159549713135,
+            "G_clean@512": 6.623676776885986
+          },
+          "DV12": {
+            "native@128": 3.7072269916534424,
+            "native@512": 6.623388767242432,
+            "G_clean@128": 3.7072837352752686,
+            "G_clean@512": 6.623212814331055
+          }
+        },
+        "320": {
+          "clean": {
+            "native@128": 3.6668856143951416,
+            "native@512": 6.559581756591797,
+            "G_clean@128": 3.666942596435547,
+            "G_clean@512": 6.5594048500061035
+          },
+          "DV12": {
+            "native@128": 3.666947364807129,
+            "native@512": 6.559657573699951,
+            "G_clean@128": 3.6670048236846924,
+            "G_clean@512": 6.559481143951416
+          }
+        },
+        "384": {
+          "clean": {
+            "native@128": 3.6293752193450928,
+            "native@512": 6.499995708465576,
+            "G_clean@128": 3.6294336318969727,
+            "G_clean@512": 6.499819278717041
+          },
+          "DV12": {
+            "native@128": 3.6299588680267334,
+            "native@512": 6.500982761383057,
+            "G_clean@128": 3.630017042160034,
+            "G_clean@512": 6.500807285308838
+          }
+        },
+        "448": {
+          "clean": {
+            "native@128": 3.597728729248047,
+            "native@512": 6.446645259857178,
+            "G_clean@128": 3.5977871417999268,
+            "G_clean@512": 6.446469783782959
+          },
+          "DV12": {
+            "native@128": 3.5970494747161865,
+            "native@512": 6.445367813110352,
+            "G_clean@128": 3.5971081256866455,
+            "G_clean@512": 6.445191860198975
+          }
+        },
+        "512": {
+          "clean": {
+            "native@128": 3.5678622722625732,
+            "native@512": 6.394525051116943,
+            "G_clean@128": 3.5679209232330322,
+            "G_clean@512": 6.394351959228516
+          },
+          "DV12": {
+            "native@128": 3.568011522293091,
+            "native@512": 6.394874572753906,
+            "G_clean@128": 3.568070411682129,
+            "G_clean@512": 6.3947014808654785
+          },
+          "zero_code": {
+            "native@128": 3.658719062805176,
+            "native@512": 6.5459442138671875,
+            "G_clean@128": 3.6587765216827393,
+            "G_clean@512": 6.545767307281494
+          }
+        }
+      },
+      "G_clean": {
+        "0": {
+          "clean": {
+            "native@128": 3.783289670944214,
+            "native@512": 6.730382442474365,
+            "G_clean@128": 3.7833445072174072,
+            "G_clean@512": 6.730207443237305
+          },
+          "DV12": {
+            "native@128": 3.783289670944214,
+            "native@512": 6.730382442474365,
+            "G_clean@128": 3.7833445072174072,
+            "G_clean@512": 6.730207443237305
+          }
+        },
+        "64": {
+          "clean": {
+            "native@128": 3.774662971496582,
+            "native@512": 6.719795227050781,
+            "G_clean@128": 3.7747182846069336,
+            "G_clean@512": 6.7196197509765625
+          },
+          "DV12": {
+            "native@128": 3.7748091220855713,
+            "native@512": 6.719892501831055,
+            "G_clean@128": 3.7748641967773438,
+            "G_clean@512": 6.719717502593994
+          }
+        },
+        "128": {
+          "clean": {
+            "native@128": 3.758763313293457,
+            "native@512": 6.698449611663818,
+            "G_clean@128": 3.7588188648223877,
+            "G_clean@512": 6.698272705078125
+          },
+          "DV12": {
+            "native@128": 3.758756399154663,
+            "native@512": 6.6985602378845215,
+            "G_clean@128": 3.7588117122650146,
+            "G_clean@512": 6.69838285446167
+          }
+        },
+        "192": {
+          "clean": {
+            "native@128": 3.7396633625030518,
+            "native@512": 6.671356678009033,
+            "G_clean@128": 3.7397196292877197,
+            "G_clean@512": 6.671180725097656
+          },
+          "DV12": {
+            "native@128": 3.739093542098999,
+            "native@512": 6.6702728271484375,
+            "G_clean@128": 3.739149332046509,
+            "G_clean@512": 6.670095920562744
+          }
+        },
+        "256": {
+          "clean": {
+            "native@128": 3.707023859024048,
+            "native@512": 6.62311315536499,
+            "G_clean@128": 3.7070810794830322,
+            "G_clean@512": 6.622934818267822
+          },
+          "DV12": {
+            "native@128": 3.7070038318634033,
+            "native@512": 6.6229567527771,
+            "G_clean@128": 3.7070608139038086,
+            "G_clean@512": 6.622779369354248
+          }
+        },
+        "320": {
+          "clean": {
+            "native@128": 3.666768789291382,
+            "native@512": 6.559326648712158,
+            "G_clean@128": 3.6668264865875244,
+            "G_clean@512": 6.559150695800781
+          },
+          "DV12": {
+            "native@128": 3.6666641235351562,
+            "native@512": 6.559186935424805,
+            "G_clean@128": 3.666722059249878,
+            "G_clean@512": 6.559010982513428
+          }
+        },
+        "384": {
+          "clean": {
+            "native@128": 3.6285839080810547,
+            "native@512": 6.498672962188721,
+            "G_clean@128": 3.6286420822143555,
+            "G_clean@512": 6.498497009277344
+          },
+          "DV12": {
+            "native@128": 3.629483938217163,
+            "native@512": 6.5002055168151855,
+            "G_clean@128": 3.6295416355133057,
+            "G_clean@512": 6.500030040740967
+          }
+        },
+        "448": {
+          "clean": {
+            "native@128": 3.5967493057250977,
+            "native@512": 6.4450860023498535,
+            "G_clean@128": 3.5968081951141357,
+            "G_clean@512": 6.444910049438477
+          },
+          "DV12": {
+            "native@128": 3.5964667797088623,
+            "native@512": 6.444459915161133,
+            "G_clean@128": 3.596525192260742,
+            "G_clean@512": 6.444284915924072
+          }
+        },
+        "512": {
+          "clean": {
+            "native@128": 3.5675582885742188,
+            "native@512": 6.394136905670166,
+            "G_clean@128": 3.5676164627075195,
+            "G_clean@512": 6.39396333694458
+          },
+          "DV12": {
+            "native@128": 3.5675275325775146,
+            "native@512": 6.394003391265869,
+            "G_clean@128": 3.5675857067108154,
+            "G_clean@512": 6.3938307762146
+          },
+          "zero_code": {
+            "native@128": 3.658458948135376,
+            "native@512": 6.545515537261963,
+            "G_clean@128": 3.6585166454315186,
+            "G_clean@512": 6.545339107513428
+          }
+        }
+      }
+    },
+    "ordinary_toy_comparison": "UNAVAILABLE",
+    "actual_caption_status": "FAIL (separate frozen verification)"
+  },
+  "media": [
+    {
+      "file": "pr235-goal.gif",
+      "sha256": "425db281ddba14a133723b7217ebc1d8df4c7da89e79de04db1a63fc2dbf725f",
+      "bytes": 541530,
+      "frames": 9,
+      "actual_updates": [
+        0,
+        64,
+        128,
+        192,
+        256,
+        320,
+        384,
+        448,
+        512
+      ],
+      "variance_observation_phases": null
+    }
+  ]
+}

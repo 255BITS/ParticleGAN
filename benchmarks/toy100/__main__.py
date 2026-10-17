@@ -30,13 +30,17 @@ def _parser():
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="train then gate all problems, or one named problem")
     run.add_argument("--config", type=Path, default=Path("configs/toy100/constraints_simple_regularization.json"),
-                     help="frozen JSON/TOML recipe (default: the verified shared 22-toy candidate)")
+                     help="JSON/TOML recipe (default: legacy BCap; scoring is clean unless explicitly changed)")
     run.add_argument("--output", type=Path, required=True, help="new run directory")
     run.add_argument("--problem", choices=PROBLEM_NAMES, help="individual deep dive")
     run.add_argument("--steps", type=int, help="override training budget for a deep dive")
     run.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
                      help="auto uses cuda when available, else cpu; overrides the config device")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
+    run.add_argument("--eval-output-noise", action=argparse.BooleanOptionalAction, default=None,
+                     help="score the original served sampling law; default scoring remains clean")
+    run.add_argument("--init", default=None,
+                     help="deterministic weight and particle init name; omit to keep the PyTorch init")
     accuracy = run.add_mutually_exclusive_group()
     accuracy.add_argument("--require-accuracy", action="store_true", default=True,
                           help="require sustained fidelity and a 100k-sample holdout (default)")
@@ -56,17 +60,28 @@ def _run(args):
     if device_override is not None:
         apply_device_policy(device_override, log=True)
         device_override = str(host_device())
+    from benchmarks.init_research.init_registry import use_init
+    chosen_init = use_init(getattr(args, "init", None))
     config_bytes = args.config.read_bytes()
     manifest = load_config(args.config)
     # Preflight every declared problem, even for an individual deep dive. An
     # invalid hidden override cannot be ignored just because it was unselected.
     configs = {name: resolve_problem_config(manifest, name, steps=args.steps, device=device_override)
                for name in PROBLEM_NAMES}
+    eval_output_noise = getattr(args, "eval_output_noise", None)
+    if eval_output_noise is not None:
+        configs = {name: {**config, "eval_output_noise": eval_output_noise}
+                   for name, config in configs.items()}
+    # The initializer is process-wide and runs before the affine receipt.
+    # Recording the name is what lets regrade rebuild that same prior.
+    if chosen_init is not None:
+        configs = {name: {**config, "deterministic_init": chosen_init}
+                   for name, config in configs.items()}
     policy_source_hashes = None
     policy_source_receipt = None
     if any("toy100_model" in config or "network_lr_horizon_cap" in config
            for config in configs.values()):
-        policy_source_receipt = _source_provenance(include_policy=True)
+        policy_source_receipt = _source_provenance(include_policy=True, deterministic_init=chosen_init)
         policy_source_hashes = policy_source_receipt["source_sha256"]
     names = (args.problem,) if args.problem else PROBLEM_NAMES
     args.output.mkdir(parents=True, exist_ok=True)
@@ -75,11 +90,19 @@ def _run(args):
         folder = args.output / name
         if (folder / "summary.json").exists() or (folder / "events.jsonl").exists():
             raise FileExistsError(f"existing run evidence at {folder}; choose a new output directory")
+    command_overrides = {"steps": args.steps, "device": device_override}
+    if eval_output_noise is not None:
+        command_overrides["eval_output_noise"] = eval_output_noise
+    # The init is not in the recipe file. The resolved configs carry it, so
+    # the manifest override has to carry it too or the gate rebuilds a
+    # different config.
+    if chosen_init is not None:
+        command_overrides["deterministic_init"] = chosen_init
     declaration = {"config_path": str(args.config),
                    "config_sha256": hashlib.sha256(config_bytes).hexdigest(),
                    "config_contents": config_bytes.decode("utf-8"),
                    "declared_manifest": manifest, "resolved_problem_configs": configs,
-                   "command_overrides": {"steps": args.steps, "device": device_override},
+                   "command_overrides": command_overrides,
                    "selected_problems": names}
     if policy_source_hashes is not None:
         declaration["policy_source_sha256"] = policy_source_hashes
@@ -94,7 +117,7 @@ def _run(args):
                           "steps": config["steps"], "output": str(folder)}), flush=True)
         try:
             if (policy_source_hashes is not None
-                    and _source_provenance(include_policy=True)["source_sha256"] != policy_source_hashes):
+                    and _source_provenance(include_policy=True, deterministic_init=chosen_init)["source_sha256"] != policy_source_hashes):
                 raise RuntimeError("policy source changed between selected problems")
             summary = train(config, folder)
             if (policy_source_hashes is not None
@@ -119,7 +142,7 @@ def _run(args):
             traceback.print_exc()
 
     if (policy_source_hashes is not None
-            and _source_provenance(include_policy=True)["source_sha256"] != policy_source_hashes):
+            and _source_provenance(include_policy=True, deterministic_init=chosen_init)["source_sha256"] != policy_source_hashes):
         policy_source_ok = False
         print(json.dumps({"event": "policy_source_mismatch",
                           "error": "policy source changed during selected problem run"}), flush=True)

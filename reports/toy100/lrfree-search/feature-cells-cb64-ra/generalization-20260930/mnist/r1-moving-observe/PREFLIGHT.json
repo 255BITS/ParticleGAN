@@ -1,0 +1,24 @@
+{
+  "status": "PASS_ZERO_UPDATE_SOURCE_CONTRACT",
+  "training_updates": 0,
+  "scoring_calls": 0,
+  "model_updates": 0,
+  "external_stream_seed": 1234,
+  "external_stream_device": "cuda:0",
+  "batch_size": 2048,
+  "calls_per_original_update": 2,
+  "frozen_data_function_ast_identical": true,
+  "replay_windows": [
+    [
+      500,
+      535
+    ],
+    [
+      1000,
+      1035
+    ]
+  ],
+  "original_initializer_host_source_identical": true,
+  "canonical_checkpoint_semantic_restoration_required_at_runtime": true,
+  "all_rng_capture_purity_required_at_runtime": true
+}

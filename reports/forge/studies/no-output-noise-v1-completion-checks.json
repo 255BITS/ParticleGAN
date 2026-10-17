@@ -1,0 +1,42 @@
+{
+  "campaign": {
+    "definition": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 3600,
+      "candidate_budget_seconds": 3600,
+      "id": "calibration-no-output-noise-native-v1"
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 93.74668720099726
+  },
+  "compiled_conflicts": [],
+  "compiled_pending_readout": [],
+  "criteria_sha256_unchanged": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "declarations_validated": {
+    "tasks": 45,
+    "training_launched": false,
+    "views": [
+      "adaptation",
+      "clockfree_continuous",
+      "discriminator_stability",
+      "host_profile_transfer",
+      "quality_coverage"
+    ]
+  },
+  "gpu0_after": "idle, 18MiB, 0% utilization",
+  "gpu1_after": "unrelated owner PID507768 still running, no process intervention",
+  "historical_inventory_coverage": {
+    "declared_count": 7285,
+    "missing": [],
+    "stale": [],
+    "tracked_count": 7285,
+    "unclassified": [],
+    "valid": true
+  },
+  "request_id": "37ceb438a71a1ac65bdea9b5",
+  "request_status": "concluded",
+  "software_tests_repeated": false,
+  "source_digest_unchanged": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "validation_scope": "No scientific-source implementation changed. Exact preregistration preflight, source/criteria identity, raw frozen evaluator grades, full checkpoint/initialization/RNG parity, independent profile replay, 45-file artifact verification, inventory and memory checks cover this declaration/evidence-only stage. Earlier full runtime CI/pilot remain preserved."
+}

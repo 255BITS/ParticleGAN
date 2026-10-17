@@ -1,0 +1,120 @@
+{
+  "status": "VALID_TOY_PASS_GRID_CENTER_QUALITY_FAIL",
+  "utc": "2026-09-30T09:44:34.558234+00:00",
+  "variant": "CB64-RA9",
+  "toy_gate": "PASS",
+  "grid_gate": "FAIL",
+  "canonical_fixture_validity": "VALID",
+  "toy_saved_state_validity": "VALID",
+  "toy_metrics": {
+    "precision": 0.96533203125,
+    "modes": 25,
+    "mass_tv": 0.05211425781250001,
+    "minimum_supported_mode_mass": 0.03271484375
+  },
+  "grid_terminal_accuracy": [
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "grid_terminal": [
+    {
+      "step": 6000,
+      "precision": 0.9793,
+      "modes": 100,
+      "mass_tv": 0.031650000000000005,
+      "acc_center_rms_sigma": 0.2224977468606382,
+      "acc_abs_cov_trace_bias": 0.032708825694222954,
+      "acc_radial_ks": 0.024088629558294272,
+      "max_cov_eig_ratio": 1.5248552151768877,
+      "max_radial_median_ratio": 1.2265427297128493
+    },
+    {
+      "step": 6250,
+      "precision": 0.9793,
+      "modes": 100,
+      "mass_tv": 0.031650000000000005,
+      "acc_center_rms_sigma": 0.21507315614053812,
+      "acc_abs_cov_trace_bias": 0.033189814538182594,
+      "acc_radial_ks": 0.02157981011381327,
+      "max_cov_eig_ratio": 1.5977718738051294,
+      "max_radial_median_ratio": 1.1651948019375955
+    },
+    {
+      "step": 6500,
+      "precision": 0.98,
+      "modes": 100,
+      "mass_tv": 0.0314,
+      "acc_center_rms_sigma": 0.21269435290762184,
+      "acc_abs_cov_trace_bias": 0.029598022051730677,
+      "acc_radial_ks": 0.021494767341753263,
+      "max_cov_eig_ratio": 1.581589392944794,
+      "max_radial_median_ratio": 1.1671714423791228
+    },
+    {
+      "step": 6750,
+      "precision": 0.98155,
+      "modes": 100,
+      "mass_tv": 0.030750000000000006,
+      "acc_center_rms_sigma": 0.21111251845234097,
+      "acc_abs_cov_trace_bias": 0.026872797759035727,
+      "acc_radial_ks": 0.01883250182568441,
+      "max_cov_eig_ratio": 1.5552076496786056,
+      "max_radial_median_ratio": 1.1823780546079565
+    },
+    {
+      "step": 7000,
+      "precision": 0.9821,
+      "modes": 100,
+      "mass_tv": 0.030750000000000006,
+      "acc_center_rms_sigma": 0.21192746519405134,
+      "acc_abs_cov_trace_bias": 0.025672539261681893,
+      "acc_radial_ks": 0.018561341430661127,
+      "max_cov_eig_ratio": 1.6125790239522193,
+      "max_radial_median_ratio": 1.2077416412190558
+    }
+  ],
+  "grid_final": {
+    "precision": 0.9821,
+    "modes": 100,
+    "mass_tv": 0.030750000000000006,
+    "acc_center_rms_sigma": 0.21192746519405134,
+    "acc_abs_cov_trace_bias": 0.025672539261681893,
+    "acc_radial_ks": 0.018561341430661127,
+    "max_cov_eig_ratio": 1.6125790239522193,
+    "max_radial_median_ratio": 1.2077416412190558
+  },
+  "grid_holdout": {
+    "mass_tv": 0.019089999999999996,
+    "center_rms_sigma": 0.19268703347970606,
+    "abs_cov_trace_bias": 0.01677357241810551,
+    "cov_trace_bias": 0.01677357241810551,
+    "radial_ks": 0.014529296322613017,
+    "accuracy_score": 0.4531424915778943,
+    "accuracy_pass": true,
+    "frozen_pass": true,
+    "passed": true,
+    "precision": 0.98173
+  },
+  "grid_holdout_full_pass": true,
+  "package_promoted": false,
+  "both_quality_gates_pass": false,
+  "training_seconds": {
+    "toy": 113.74897909467109,
+    "grid": 771.62
+  },
+  "input_artifact_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/result.json": "b41eec6f75673a397d7d300db225a6867c2c2c585f9093099fddc0ab5cdf84ab",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/runs/grid100/result.json": "131bd3dc19b2621ed50f04551146422947cfa4bd7c728b2b72d7eeaa0f0b3dbc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra9-monitor/canonical-receipts/screens/runs/grid100/acceptance-receipt.json": "2787a69bfeb42b5d48e02c0105f21351e4d9dffd32b693efe0625c72c08abce8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/source-freeze.json": "09e6e11fd7c862d7d98fca9b5209e93be971d034ab0c6553cbd9a18bdeb6bec2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/CB64-RA9-toy-audited.json": "1a9130ad8f8221606145a8aa0df037878c5bf5788b1dcf993d8f0dc95051348a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/receipt.json": "48834a41c4022b0148cf9b5b4c08f60db8358f993cb5086da2f49f61811f94fc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/FROZEN.json": "925bb577283169c1c592fcae0be7e283d526cbd03d6e9a4d6960efbf2a465c59"
+  },
+  "canonical_post_exit_verified_maps": 285,
+  "scope": "Both original schedules complete. Toy and full holdout pass; all five terminal grid accuracy checks fail their center RMS gate. No checkpoint selection or combined recommendation."
+}

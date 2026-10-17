@@ -1,0 +1,57 @@
+{
+  "budgets": {
+    "campaign_seconds": 18000,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "grid100_affine_paired_laws_v1": 3600,
+      "grid100_release07_cloud_named_v1": 3600
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "formulation-comparison-v1",
+  "profile": "formulation-comparison-v1",
+  "profile_sha256": "0e6bea41fd24fa06d3349c29e415f5c5d0e9538ddb51841f25d8c47acb8a2493",
+  "purpose": "Five preregistered full7k grid diagnostic jobs compare only-penalty R1/R2 and BCap against K3P, full released GANv3 adapted to the same MoG host, and exact effective released GANv3 on explicit cloud host. Paired noisy/live and clean/noisy EMA are diagnostics on identical base draws with zero additional reference credit. Retain all34 observations, five final20k checks,100k holdout,3smoke+16ref purposes and unchanged criteria. No sweep, retry of science,14k continuation, fullmatrix expansion or promotion. Expected several minutes; task reservations are worst-case3600s each.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "One independently registered native formulation comparison; complete the frozen five-arm study regardless of scientific outcomes, no downstream qualification.",
+      "tasks": [
+        "grid100_affine_paired_laws_v1"
+      ]
+    },
+    {
+      "lineage_id": "k3p-r1r2-matched-v1",
+      "reason": "One independently registered native formulation comparison; complete the frozen five-arm study regardless of scientific outcomes, no downstream qualification.",
+      "tasks": [
+        "grid100_affine_paired_laws_v1"
+      ]
+    },
+    {
+      "lineage_id": "k3p-bcap-matched-v1",
+      "reason": "One independently registered native formulation comparison; complete the frozen five-arm study regardless of scientific outcomes, no downstream qualification.",
+      "tasks": [
+        "grid100_affine_paired_laws_v1"
+      ]
+    },
+    {
+      "lineage_id": "release07-gan-v3-mog-v1",
+      "reason": "One independently registered native formulation comparison; complete the frozen five-arm study regardless of scientific outcomes, no downstream qualification.",
+      "tasks": [
+        "grid100_affine_paired_laws_v1"
+      ]
+    },
+    {
+      "lineage_id": "release07-gan-v3-cloud-v1",
+      "reason": "One independently registered native formulation comparison; complete the frozen five-arm study regardless of scientific outcomes, no downstream qualification.",
+      "tasks": [
+        "grid100_release07_cloud_named_v1"
+      ]
+    }
+  ],
+  "view": "formulation_comparison"
+}

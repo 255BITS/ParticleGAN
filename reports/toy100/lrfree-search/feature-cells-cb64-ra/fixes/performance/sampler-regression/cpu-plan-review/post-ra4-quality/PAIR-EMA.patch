@@ -1,0 +1,44 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -1307,7 +1307,7 @@
+ 
+ class FeatureCellBirthDeath(ParticleBirthDeath):
+     """Actual GANTrainer backend; keeps original FIFO and row-copy mechanics."""
+-    BACKEND_SCHEMA = 4
++    BACKEND_SCHEMA = 5
+ 
+     def __init__(self,trainer,seed):
+         super().__init__(trainer,seed)
+@@ -1316,6 +1316,7 @@
+             raise ValueError("use make_feature_cell_birth_death for an infeasible small population")
+         recipe = trainer.recipe
+         self.settings = dict(cells=recipe.birth_death_cells, rank=recipe.birth_death_metric_rank, chunk=recipe.birth_death_chunk, parent_policy=recipe.birth_death_parent_policy, lloyd=LLOYD_PASSES, power=POWER_PASSES, parent_reservoir=PARENT_RESERVOIR, real_anchors=1, parent_rank=None, latent_kernel='bounded_local_dv12_lineage', latent_neighbors=PARENT_RESERVOIR, latent_rank=recipe.birth_death_metric_rank, lineage_degree=min(recipe.birth_death_metric_rank, PARENT_RESERVOIR, self.N - 1), lineage_policy='symmetric_copy_links_newest_first_invalidate_overwrites', latent_candidate_bound=PARENT_RESERVOIR + min(recipe.birth_death_metric_rank, PARENT_RESERVOIR, self.N - 1), mass_policy='joint_mass_local_global_common_3K_plus_2_unique_parents_v1', isolation_parent_pool='supported_same_cell_without_replacement', count_partition='even_fit_score_order_statistic_2K', count_family='original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2')
++        self.settings["copy_noise_policy"] = "shared_noise_separate_live_ema_current_geometry_v1"
+         self.lineage = LatentLineage(self.N,self.settings["lineage_degree"],trainer.device)
+         self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
+                           neighbors=PARENT_RESERVOIR,chunk=recipe.birth_death_chunk,lineage=self.lineage)
+@@ -1336,7 +1337,23 @@
+     def _move(self,trainer,child,parent):
+         self._copy_parent_rows = parent
+         try:
+-            super()._move(trainer,child,parent)
++            prior,ema = trainer.prior,trainer.ema_prior
++            zp,ema_zp = prior.z.detach()[parent],ema.z.detach()[parent]
++            noise = torch.randn(zp.shape,device=zp.device,dtype=zp.dtype,generator=self.stream)
++            delta = self._jitter(trainer,zp,prior,noise)
++            # A shared noise draw preserves coupling and RNG accounting. Each
++            # table applies that draw within its own current local geometry.
++            ema_delta = self.latent_geometry.displacement(ema_zp,ema,
++                            trainer.controller.latent_bandwidth,noise,rows=parent)
++            prior.z[child] = zp+delta
++            ema.z[child] = ema_zp+ema_delta
++            state = trainer.opt_g.state.get(prior.z,{})
++            for value in state.values():
++                if isinstance(value,torch.Tensor) and value.shape == prior.z.shape:
++                    value[child] = value[parent]
++            history = trainer.opt_g.latent_history
++            if history is not None:
++                history[child] = history[parent]
+         finally:
+             self._copy_parent_rows = None
+         self.lineage.register_copies(child,parent)

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "utc": "2026-09-30T16:28:47.057962+00:00",
+  "pid": 1255211,
+  "startticks": "168754515",
+  "exit_code": 0,
+  "elapsed_seconds": 2.0607710140757263,
+  "process_absent": true,
+  "child_waited": true,
+  "log_closed": true,
+  "log_sha256": "a4f04e030baa0fa885d30d1c0cd525663f7bb9927bd88a1623b10f8bd55e5681",
+  "launch_sha256": "309565c275ac3878d597fb33ab0b51ceed9ae25e569b865e700569d9dae143dd",
+  "audit_invocations": 1
+}

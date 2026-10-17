@@ -32,6 +32,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from particlegan import get_recipe, particle_ae, scale_learning_rates
+from particlegan.init import deterministic_orthogonal_
 
 Z, K, H, B = 2, 32, 64, 128
 PRE, FINE = 250, 400
@@ -126,13 +127,14 @@ class Logger:
 
 
 def pretrain(log):
-    # The recipe default (critic penalty, optimizers, LR schedule) at this toy's rates.
-    recipe = get_recipe(prior_kind='mog', sigma_rel=.025, z_dim=Z, num_particles=K,
+    # Preserve the K3P cohort used by this historical control comparison.
+    # A change to the public default must not change its optimizer or penalty.
+    recipe = get_recipe(trainer="k3p", prior_kind='mog', sigma_rel=.025, z_dim=Z, num_particles=K,
                         total_steps=FINE, batch_size=B, lr=.0006, d_lr_mult=1.5,
                         prior_lr_mult=100., prior_reg=1.)
     spread = recipe.make_prior_regularizer()
     generator = torch.Generator().manual_seed(11)
-    prior = recipe.make_prior(generator=torch.Generator().manual_seed(3))
+    prior = deterministic_orthogonal_(recipe.make_prior(generator=torch.Generator().manual_seed(3)))
     encoder, decoder = Enc(), Gen()
     # Supervised reconstruction pretraining at its own step size.
     opt = recipe.make_generator_optimizer(

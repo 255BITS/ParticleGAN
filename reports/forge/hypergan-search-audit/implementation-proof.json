@@ -1,0 +1,690 @@
+{
+  "artifact_directory": "/home/martyn/dev/ParticleGAN-hypergan-search-audit/runs/forge/hypergan-search-audit/api-proof-5dafb438",
+  "batch_sequence_hash": "fc0f8904db4d1ded28e91196d079a4429afc77fe8f8ee7720202eec34f3b907a",
+  "contract": {
+    "architecture": "G 2-16-tanh-2; D 2-16-tanh-1; float64 CPU",
+    "evaluation_updates": [
+      0,
+      4,
+      8
+    ],
+    "execution": "public GANTrainer via FormulationContext",
+    "gates": {
+      "checkpoint_state_equal": true,
+      "finite_changed_models": true,
+      "initial_models_equal": true,
+      "resume_samples_equal": true,
+      "seen_batches_equal": true,
+      "variant_displacement_positive": true
+    },
+    "prior": "16 learned equal-mass MoG components, sigma .025, unstandardized",
+    "qualification": "software consumption and continuation only; no quality claim or default adoption",
+    "sampling": "256 clean live samples per observation",
+    "seed": 0,
+    "target": "equal Gaussian mixture centers (-1,0),(1,0), std .15",
+    "trainer_delta": "adam_variant pytorch versus tensorflow_v1; all other settings identical",
+    "updates_per_arm": 8,
+    "wall_seconds_ceiling": 60
+  },
+  "elapsed_seconds": 0.15734876797068864,
+  "final_state_hashes": {
+    "pytorch": "82a2de58aa4dc1911e55b239a70d36320065769880391663562a8a68406566fb",
+    "tensorflow_v1": "e762153b62c31077b5a865e2612debe9e84e621c6e7f895c64590c1cc3d08075"
+  },
+  "gates": {
+    "checkpoint_state_equal": true,
+    "finite_changed_models": true,
+    "initial_models_equal": true,
+    "resume_samples_equal": true,
+    "seen_batches_equal": true,
+    "variant_displacement_positive": true
+  },
+  "initial_model_hashes": {
+    "pytorch": "dbe313f58a7e4bb08284aebdf14fb512934c348c906d06ae34dc33d4bf318143",
+    "tensorflow_v1": "dbe313f58a7e4bb08284aebdf14fb512934c348c906d06ae34dc33d4bf318143"
+  },
+  "maximum_generator_variant_difference": 0.0006936814655116308,
+  "pass": true,
+  "resolved_contexts": {
+    "pytorch": {
+      "api_changes": [],
+      "api_version": "forge-api-v1",
+      "capabilities": {
+        "a2": false,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": true,
+        "named_rng": true,
+        "particle_cloud": false,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "served_sampling": false,
+        "uniform_masses": true
+      },
+      "execution_path": "public_trainer",
+      "extensions": {},
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "197ec2c6cc21861ac2e1567d16a0df02c59e7c4e851aaa25ca653767eaf789e0",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "0.bias": 6652631374610317303,
+            "0.weight": 3620272153336253636,
+            "2.bias": 7269094322969568603,
+            "2.weight": 5778109641139043506
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "74b890ab0514171eb80880fee90b33c67e6369d2382521daf5c80df2fdc516f8",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "0.bias": 3118781841204788894,
+            "0.weight": 7063123783767706971,
+            "2.bias": 2297926149942541122,
+            "2.weight": 1165607292355943702
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "d4c537ee424d7bbb8f6d0a743ec88bb1ca5279475f4551b68cc25f406ef2d677",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "initializer": "deterministic_orthogonal",
+      "policy_lifecycle": null,
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "prior_mechanisms": {
+        "a2": {
+          "enabled": false,
+          "reason": "disabled explicitly by latent_damping_max_rate=0",
+          "requested": false,
+          "supported": true
+        },
+        "prior": {
+          "a2_eligible": true,
+          "kind": "mog",
+          "learned_locations": true,
+          "learned_width": false,
+          "mixture_weights": "uniform",
+          "row_local_gradients": true,
+          "sigma": 0.025,
+          "standardize": false
+        }
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 16,
+        "betas": [
+          0.6119661196611966,
+          0.5612256122561226
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_betas": [
+          0.1051710517105171,
+          0.7203172031720317
+        ],
+        "d_eps": 0.007500075000750007,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 0.4922016232592352,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 0.3087330873308733,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "least_squares",
+        "loss_labels": [
+          -1.0,
+          1.0,
+          1.0
+        ],
+        "lr": 0.008020980209802098,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "lr_schedule": "constant",
+        "model": "gan",
+        "name": "halloween",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 16,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": [
+          0.0,
+          0.999
+        ],
+        "prior_eps": 1e-08,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 0.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 8,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "recipe_preset": "halloween",
+      "requires_capabilities": [],
+      "rng": {
+        "bindings": {
+          "[\"data\",\"critic\",\"training\",\"cpu\"]": {
+            "component": "critic",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "0c49fa27bde856bbd239e6a751e2f513e2335bc5370bb4b9a5e24927b7e9cd6b",
+            "purpose": "training",
+            "seed": 4277391295314730155
+          },
+          "[\"data\",\"generator\",\"training\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5b49df960867f0a8a8c0dd30c1d5db18a972e9067a0fbc6ee814d78137e71ddb",
+            "purpose": "training",
+            "seed": 412570267228304451
+          },
+          "[\"data\",\"target\",\"training\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"eval\",\"sampler\",\"samples\",\"cpu\"]": {
+            "component": "sampler",
+            "device": "cpu",
+            "family": "eval",
+            "initial_state_sha256": "9488d65f11be2e232c210ae5b27c29426ac74687551e6bc1597afc56159f8726",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "[\"eval\",\"target\",\"reference\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "eval",
+            "initial_state_sha256": "905a51801f69a4375927533ecf1199816a077aea8b3164d15b2811fae33abf02",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "[\"init\",\"prior\",\"locations\",\"cpu\"]": {
+            "component": "prior",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "ab1fa62c08db5e35d0b5c6be2418a849814f3490f8448c5b0e671be86de398ca",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "[\"noise\",\"critic\",\"input\",\"cpu\"]": {
+            "component": "critic",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "d45c4d304b060206d27bed2cfb50b4e02d8d3a2a3ebc2bd23198f3119b34be6d",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "[\"noise\",\"generator\",\"output\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cpu\"]": {
+            "component": "models",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "c2f7ba3cac65f7a2c9f1da18c52f973980852aaa4a916683301b0efdbb50edf9",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "[\"noise\",\"penalty\",\"training\",\"cpu\"]": {
+            "component": "penalty",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "e170727612c771e1a5db3740ca655a777d92c20f99fb8497de95c6cfdb6fdd84",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "[\"noise\",\"prior\",\"gaussian\",\"cpu\"]": {
+            "component": "prior",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "d6261b40f0efc71cdced90af99c43969a0675e1827f184a56c8790fee5a820d8",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "[\"prior\",\"latent\",\"indices\",\"cpu\"]": {
+            "component": "latent",
+            "device": "cpu",
+            "family": "prior",
+            "initial_state_sha256": "c20d03989eda9e8650239603a2db8efb7df1bab81c5257cce0283964a570c14a",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          }
+        },
+        "runtime": {
+          "rng": "torch.Generator",
+          "torch": "2.14.0+cu130"
+        },
+        "seed": 0,
+        "version": "forge-rng-v1"
+      }
+    },
+    "tensorflow_v1": {
+      "api_changes": [],
+      "api_version": "forge-api-v1",
+      "capabilities": {
+        "a2": false,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": true,
+        "named_rng": true,
+        "particle_cloud": false,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "served_sampling": false,
+        "uniform_masses": true
+      },
+      "execution_path": "public_trainer",
+      "extensions": {},
+      "initialization": {
+        "discriminator": {
+          "initial_state_sha256": "197ec2c6cc21861ac2e1567d16a0df02c59e7c4e851aaa25ca653767eaf789e0",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "0.bias": 6652631374610317303,
+            "0.weight": 3620272153336253636,
+            "2.bias": 7269094322969568603,
+            "2.weight": 5778109641139043506
+          }
+        },
+        "generator": {
+          "initial_state_sha256": "74b890ab0514171eb80880fee90b33c67e6369d2382521daf5c80df2fdc516f8",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "0.bias": 3118781841204788894,
+            "0.weight": 7063123783767706971,
+            "2.bias": 2297926149942541122,
+            "2.weight": 1165607292355943702
+          }
+        },
+        "prior": {
+          "initial_state_sha256": "d4c537ee424d7bbb8f6d0a743ec88bb1ca5279475f4551b68cc25f406ef2d677",
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "initializer": "deterministic_orthogonal",
+      "policy_lifecycle": null,
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "prior_mechanisms": {
+        "a2": {
+          "enabled": false,
+          "reason": "disabled explicitly by latent_damping_max_rate=0",
+          "requested": false,
+          "supported": true
+        },
+        "prior": {
+          "a2_eligible": true,
+          "kind": "mog",
+          "learned_locations": true,
+          "learned_width": false,
+          "mixture_weights": "uniform",
+          "row_local_gradients": true,
+          "sigma": 0.025,
+          "standardize": false
+        }
+      },
+      "recipe": {
+        "adam_variant": "tensorflow_v1",
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 16,
+        "betas": [
+          0.6119661196611966,
+          0.5612256122561226
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_betas": [
+          0.1051710517105171,
+          0.7203172031720317
+        ],
+        "d_eps": 0.007500075000750007,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 0.4922016232592352,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 0.3087330873308733,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "least_squares",
+        "loss_labels": [
+          -1.0,
+          1.0,
+          1.0
+        ],
+        "lr": 0.008020980209802098,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "lr_schedule": "constant",
+        "model": "gan",
+        "name": "halloween",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 16,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": [
+          0.0,
+          0.999
+        ],
+        "prior_eps": 1e-08,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 0.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 8,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "recipe_preset": "halloween",
+      "requires_capabilities": [],
+      "rng": {
+        "bindings": {
+          "[\"data\",\"critic\",\"training\",\"cpu\"]": {
+            "component": "critic",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "0c49fa27bde856bbd239e6a751e2f513e2335bc5370bb4b9a5e24927b7e9cd6b",
+            "purpose": "training",
+            "seed": 4277391295314730155
+          },
+          "[\"data\",\"generator\",\"training\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5b49df960867f0a8a8c0dd30c1d5db18a972e9067a0fbc6ee814d78137e71ddb",
+            "purpose": "training",
+            "seed": 412570267228304451
+          },
+          "[\"data\",\"target\",\"training\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"eval\",\"sampler\",\"samples\",\"cpu\"]": {
+            "component": "sampler",
+            "device": "cpu",
+            "family": "eval",
+            "initial_state_sha256": "9488d65f11be2e232c210ae5b27c29426ac74687551e6bc1597afc56159f8726",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "[\"eval\",\"target\",\"reference\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "eval",
+            "initial_state_sha256": "905a51801f69a4375927533ecf1199816a077aea8b3164d15b2811fae33abf02",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "[\"init\",\"prior\",\"locations\",\"cpu\"]": {
+            "component": "prior",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "ab1fa62c08db5e35d0b5c6be2418a849814f3490f8448c5b0e671be86de398ca",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "[\"noise\",\"critic\",\"input\",\"cpu\"]": {
+            "component": "critic",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "d45c4d304b060206d27bed2cfb50b4e02d8d3a2a3ebc2bd23198f3119b34be6d",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "[\"noise\",\"generator\",\"output\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cpu\"]": {
+            "component": "models",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "c2f7ba3cac65f7a2c9f1da18c52f973980852aaa4a916683301b0efdbb50edf9",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "[\"noise\",\"penalty\",\"training\",\"cpu\"]": {
+            "component": "penalty",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "e170727612c771e1a5db3740ca655a777d92c20f99fb8497de95c6cfdb6fdd84",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "[\"noise\",\"prior\",\"gaussian\",\"cpu\"]": {
+            "component": "prior",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "d6261b40f0efc71cdced90af99c43969a0675e1827f184a56c8790fee5a820d8",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "[\"prior\",\"latent\",\"indices\",\"cpu\"]": {
+            "component": "latent",
+            "device": "cpu",
+            "family": "prior",
+            "initial_state_sha256": "c20d03989eda9e8650239603a2db8efb7df1bab81c5257cce0283964a570c14a",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          }
+        },
+        "runtime": {
+          "rng": "torch.Generator",
+          "torch": "2.14.0+cu130"
+        },
+        "seed": 0,
+        "version": "forge-rng-v1"
+      }
+    }
+  },
+  "schema": "halloween_api_software_proof_v1",
+  "source_commit": "5dafb438573fd15b21646055fc87063c9a4f88bc",
+  "source_files": {
+    "experiments/forge/api.py": "269bd8c090ad71a5f2b7dbf3d942de5da8a1f9d3cc00add0908b0ea5b7e154c5",
+    "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+    "particlegan/__init__.py": "971a24dc4e7875af3463196fa7adff132bb55b5108acb9b603ae63d7d6e16161",
+    "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+    "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+    "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+    "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+    "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+    "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+    "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+    "particlegan/gan_loss.py": "f73cc593aef5d7507dc1a468ee261cc186c8dbfbee3a0aad769b6e252c2c143f",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/k3p.py": "ad4a928462e640c074a846a2c41985d49af1c1131cd0855a85001d02d62aac4d",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+    "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+    "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+    "particlegan/recipe_compat.py": "dbcf916c2fbfaa46ed3614fcecc78c8ae2fd7de790e30d95272fc84a5cd64626",
+    "particlegan/recipe_schedules.py": "49ecce55cdc162bbd72802f71ac256c51358e21c72088fa43193fa9ec2bdabdd",
+    "particlegan/recipes.py": "db84c21e36ec351f40799ac9d676b9ca520e397de1d698a41e3d5b201d888b2f",
+    "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+    "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+    "particlegan/tensorflow_adam.py": "37f1192e48b84907446d8f676c62631bf87ff450b2a2e6b63e7489adc33e24e9",
+    "particlegan/training.py": "45d7d0f55292c8e18b9a488c8ab343213e1f82cccebb765a6b65086101279a3b",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "reports/forge/hypergan-search-audit/implementation_probe.py": "ed04537e82daf4101e3d1b3acf6330a931e02f8f9595c0e7c7857e4df9b479c4"
+  }
+}

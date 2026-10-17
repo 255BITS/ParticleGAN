@@ -1,0 +1,11 @@
+{
+  "status": "READY",
+  "local_source_sha256": {
+    "common.py": "078bcb410ad8f3dcd57fb2e314315481895b4e9663cf604530db2383ad069939",
+    "run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "replay.py": "6b7ac41dab7a52ead34870917235d64c85824bd561dd44cb97b7602468cb2a0d",
+    "PROTOCOL.md": "344811215c95a15b0b4b293a8b1a9893b1527c6c6cd45250792d9ce3fbc3ffcc",
+    "INPUTS.json": "cc1b2491b7f8cb93183cb5d764391ea99e02e16b13ed527aee8b9d44bf94c3a8"
+  },
+  "source_freeze_sha256": "195e5aa298c18155ca5e3dd4ae66b46d96b99546fc1c25feba3527c0501fcd80"
+}

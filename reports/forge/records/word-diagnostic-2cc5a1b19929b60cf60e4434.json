@@ -1,0 +1,107 @@
+{
+  "candidate_id": "k3p-coeff1-cap0p1",
+  "candidate_revision": "8effaa09e476ee03768abb1abf9282bc3cd18a8969ac2a6444374d449df978b7",
+  "changed_factors": {
+    "d_lr_mult": 1.5,
+    "input_noise_std": 0.0,
+    "lr": 0.0006,
+    "network_lr_horizon_cap": null,
+    "output_noise_std": 0.0,
+    "prior_lr_mult": 2.0,
+    "reg_coeff": 1.0,
+    "reg_kappa": 0.1
+  },
+  "conclusion": "FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Independent bounded existing-parameter contrast after low-rate/noise/horizon and slower-prior diagnostics: tune positive K3P critic coefficient/cap strengths on the unchanged 170-dimensional word/latent joint host. Compare against the already-completed clean/full low-rate baseline without rerunning it. No penalty swap, new objective, seed study or qualification bypass credit.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.",
+  "provenance": {
+    "parent": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+    "parent_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+    "protocol_sha256": "11d307370d7e769c2189d2b73c415e308edb7dc44dc8cbebce0bffd28d6a98b2",
+    "raw_artifacts": {
+      "adapter-receipt.json": {
+        "bytes": 55625,
+        "sha256": "11c2d056da552d66db97f358cca25e4f638c4ddd77a2cf93ec44d1f37d4d900c"
+      },
+      "observations.npz": {
+        "bytes": 687517,
+        "sha256": "6a228cde62f6e6f80c81e57109127a71c7e65d26265c6bed30bf1c5474782c65"
+      },
+      "observed-records.pt": {
+        "bytes": 35388461,
+        "sha256": "a1911464d413f0dd99bc0a347ed8040772b1056e4eefa7a43e5159da73b53c56"
+      },
+      "request.json": {
+        "bytes": 12833,
+        "sha256": "978e71224779e992cd7d54ca90d5625b5718ec2899d154b11c3769e2668ca6e4"
+      },
+      "source-manifest.json": {
+        "bytes": 136054,
+        "sha256": "2c16e9dfb6ab2a909d82acc2684be5300216369da510e6dfffdc70aef86fc733"
+      },
+      "state.pt": {
+        "bytes": 2254995,
+        "sha256": "0b9e182013cc0133726d2ce87d3ddb8dac75a1c7505558d557edf09534b7baef"
+      }
+    },
+    "runtime": {
+      "cpu_threads": 1,
+      "cublas_workspace_config": ":4096:8",
+      "cuda_matmul_allow_tf32": false,
+      "cudnn_allow_tf32": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "device": "cuda:0",
+      "gpu": "NVIDIA RTX A6000",
+      "python": "3.14.7",
+      "torch": "2.14.0+cu130"
+    },
+    "source_commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+    "source_digest": "4ff32ae9e41adf0814fbf9a35bb81376b1ff7940ca9a497a43bf4526722561ef",
+    "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "word-diagnostic-2cc5a1b19929b60cf60e4434",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/word-root-cause/receipts/k3p-coeff1-cap0p1.json",
+    "sha256": "bdec0a7da41b2b19d8b0b191e481fcb4294ea58fbf86261173b474f8b4aa3ffe"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "wall_seconds": 150.4964478640468
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.201171875,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.17578125,
+        "mass_melon": 0.0,
+        "mass_tv": 0.62421875,
+        "minimum_reconstruction_token_probability": 6.492044124506435e-10,
+        "modes": 2,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.376953125,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 3.9616811471055757,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "reason": "Standalone full-budget diagnostic; unchanged 24-check/five-terminal-pass task grader.",
+      "task_id": "five_word_joint_acquisition"
+    }
+  ],
+  "trainer_family": "k3p"
+}

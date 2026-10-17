@@ -1,0 +1,10 @@
+{
+  "status": "FROZEN_ORIGINAL_MOVING_OBSERVATION_ONLY",
+  "source_sha256": {
+    "run_observe.py": "7977613fcc8561ea54d74e8b480795e0096ace880c3f9cf237bc39fa718b36b0",
+    "capture.py": "64fac01bbff1c4fb4bfea3ce71c0fd77f929704a1c2cb31e8564785c2cb0f958",
+    "frozen_data.py": "8fd623a048e243ba8c61f1f4e03d785ff6d9683ac515ee14c435582d520b78ae",
+    "launch.py": "952419d6a93a35451bcacbc058ff26f7f0e0771e70bf69f453bfc1ec172da59f",
+    "PREFLIGHT.json": "93d5905b2d406e0a1509857c360b8671da34db4c07359913205c907ba02f1aff"
+  }
+}

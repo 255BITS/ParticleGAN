@@ -1,0 +1,121 @@
+{
+  "status": "PENDING",
+  "counts": {
+    "portability": {
+      "PENDING": 13
+    },
+    "native": {
+      "PENDING": 3
+    }
+  },
+  "source_integrity": {
+    "status": "VALID",
+    "source_freeze_sha256": "e13678688ba960084f23546a0311908d170e8619e403a6f990a57e4d7ed85c7a",
+    "package_sha256": "6bb967c405c486d2a5cbd5dcc3bce7d1bd2cb93b3f9c7e916229f1327a8e5fc5",
+    "config_sha256": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7",
+    "checked_local": 18,
+    "checked_external": 126
+  },
+  "records": [
+    {
+      "task": "mode_hold",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "img_intensity2",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "img_blobs4",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "img_stripes2",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "img_bars4",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "vector_two_broad",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "vector_unequal_mass",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "vector_unequal_width",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "vector_anisotropic",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "vector_overlap",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "vector_spiral",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "ring_shift",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "stationary",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "grid100",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "rotated100",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    },
+    {
+      "task": "staggered100",
+      "primary_status": "PENDING",
+      "acceptance_status": "PENDING",
+      "canonical_fixture_validity": "UNVERIFIED"
+    }
+  ],
+  "completed": 0,
+  "total": 16,
+  "scope": "CPU saved-artifact canonical check; validation bytes read-only",
+  "completed_other_jobs": []
+}

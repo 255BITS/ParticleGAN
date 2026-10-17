@@ -1,0 +1,437 @@
+{
+  "actual_optimizers": [
+    "Adam",
+    "Adam"
+  ],
+  "actual_training_schedules": {
+    "clock": "completed host updates; penalty observes completed critic updates",
+    "horizon": 80,
+    "optimizer_groups": {
+      "discriminator": {
+        "beta2": {
+          "first": 0.9,
+          "last": 0.99,
+          "maximum": 0.99,
+          "minimum": 0.9,
+          "observations": 80
+        },
+        "lr": {
+          "first": 0.0002,
+          "last": 0.0002,
+          "maximum": 0.0002,
+          "minimum": 0.0002,
+          "observations": 80
+        }
+      },
+      "prior": {
+        "beta2": {
+          "first": 0.9,
+          "last": 0.99,
+          "maximum": 0.99,
+          "minimum": 0.9,
+          "observations": 80
+        },
+        "lr": {
+          "first": 0.0002,
+          "last": 0.0002,
+          "maximum": 0.0002,
+          "minimum": 0.0002,
+          "observations": 80
+        }
+      }
+    },
+    "penalty_coefficient": {
+      "first": 1.0,
+      "last": 0.1,
+      "maximum": 1.0,
+      "minimum": 0.1,
+      "observations": 80
+    }
+  },
+  "all_finite": true,
+  "artifact_archive": "reports/forge/r3gan-baseline-archive.json",
+  "attempt_id": "ea66e44192c048eaa97f8595c5e55508",
+  "campaign_budget_seconds": 44100,
+  "campaign_id": "r3gan-stacked-training-toy-v1",
+  "candidate_id": "r3gan-stacked-training-toy-v1",
+  "candidate_revision": "724a672468491e40b3f214c3b44b8913b9317266346527139da7a1de750d8d44",
+  "compute_profiles": {
+    "cpu": {
+      "backend": "cpu",
+      "deterministic": true,
+      "machine": "x86_64",
+      "model": "AMD Ryzen 9 5900X 12-Core Processor",
+      "tf32": false,
+      "threads": 1
+    },
+    "cuda": {
+      "backend": "cuda",
+      "compute_capability": "8.6",
+      "deterministic": true,
+      "driver": "610.57.04",
+      "model": "NVIDIA RTX A6000",
+      "tf32": false,
+      "threads": 1
+    }
+  },
+  "cost": {
+    "adapter_seconds": 0.273574368970003,
+    "charged_task": "two_pole",
+    "device": "cpu",
+    "execution_seconds": 5.347339480998926,
+    "flops": {
+      "kind": "unavailable",
+      "value": null
+    },
+    "runner_seconds": 2.2649928049650043,
+    "wall_seconds": 5.347339480998926
+  },
+  "effective_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": 0.99,
+    "betas": [
+      0.0,
+      0.9
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "distance_reduction": "sum",
+    "ema_decay": 0.0,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "lr": 0.0002,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 1.0,
+    "model": "gan",
+    "name": "r3gan-stacked-training-toy-v1",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "adam",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 1.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "a_r1r2",
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": 0.1,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 80,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "evaluator_summary": {
+    "attempted": true,
+    "confirmation_fraction": 2.0,
+    "convergence": {
+      "complete": true,
+      "confirmed_seconds": null,
+      "confirmed_step": null,
+      "first_pass_step": null,
+      "minimum_stable_checks": 5,
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "stable_from_seconds": null,
+      "stable_from_step": null
+    },
+    "metric_checks": {
+      "grad_med": {
+        "margin": 0.8667849153280258,
+        "metric": "grad_med",
+        "op": "<=",
+        "status": "PASS",
+        "threshold": 1.0,
+        "value": 0.13321508467197418
+      },
+      "mean_abs": {
+        "margin": -0.2885506322607398,
+        "metric": "mean_abs",
+        "op": ">=",
+        "status": "FAIL",
+        "threshold": 0.3,
+        "value": 0.011449367739260197
+      }
+    },
+    "passed": false,
+    "shortfall": 0.4809177204345663,
+    "status": "FAIL"
+  },
+  "execution_errors": 0,
+  "gate_status": "FAIL",
+  "host": {
+    "device": "cpu",
+    "execution_path": "public_components",
+    "fixed_initialization": {
+      "critic": "stored_host_weights",
+      "particles": "zeros"
+    },
+    "host": "two_pole",
+    "host_definition": {
+      "family": "existing_behavior",
+      "phase": "fit",
+      "runner": "legacy",
+      "split": "development",
+      "steps": 80
+    },
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "prior": {
+      "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "produces_state": false,
+    "protocol": "screening",
+    "schedule_policy": "public_recipe_with_frozen_host_horizon",
+    "steps": 80
+  },
+  "host_prior": {
+    "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+    "kind": "particle_cloud",
+    "learnable": true,
+    "sigma": 0.0,
+    "standardize": false
+  },
+  "mechanism_audit": {
+    "mechanisms": {
+      "a2": {
+        "applied": 0,
+        "calls": 0,
+        "eligible": 0,
+        "enabled": false,
+        "reason": "disabled by the declared formulation; no activation claimed",
+        "requested": false
+      },
+      "critic_anchor": {
+        "applied": 0,
+        "calls": 80,
+        "eligible": 0,
+        "enabled": false,
+        "reason": "disabled by the declared formulation; no activation claimed",
+        "requested": false
+      },
+      "critic_guard": {
+        "applied": 0,
+        "calls": 0,
+        "eligible": 0,
+        "enabled": false,
+        "reason": "disabled by the declared formulation; no activation claimed",
+        "requested": false
+      },
+      "critic_penalty": {
+        "applied": 80,
+        "calls": 80,
+        "eligible": 80,
+        "enabled": true,
+        "reason": "actual host mechanism branch applied",
+        "requested": true
+      },
+      "direct_particle_gain": {
+        "applied": 0,
+        "calls": 0,
+        "eligible": 0,
+        "enabled": false,
+        "reason": "disabled by the declared formulation; no activation claimed",
+        "requested": false
+      }
+    },
+    "schema_version": 1
+  },
+  "metrics": {
+    "grad_med": 0.13321508467197418,
+    "mean_abs": 0.011449367739260197
+  },
+  "note": "Compact final-metric/provenance publication. Raw certified originals remain the qualification inputs for their exact frozen source; this report does not qualify a newer checkout.",
+  "observations": 24,
+  "optimizer_updates": {
+    "discriminator": 80,
+    "prior": 80
+  },
+  "original_result_hash": "50b7d156951985639efc4a1f444c54f6f89d9f06e5819c4317f2cb06c617931e",
+  "protocol": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "screening",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 0
+  },
+  "qualification_input": false,
+  "recipe_overrides": {
+    "amsgrad": false,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": 0.99,
+    "betas": [
+      0.0,
+      0.9
+    ],
+    "critic_formulation": "k3p",
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "ema_decay": 0.0,
+    "eps": 1e-08,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "lr": 0.0002,
+    "lr_floor": 1.0,
+    "name": "r3gan-stacked-training-toy-v1",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "adam",
+    "output_noise_std": 0.0,
+    "prior_betas": null,
+    "prior_lr_mult": 1.0,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "a_r1r2",
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": 0.1,
+    "reg_every": 1
+  },
+  "recorded_tiers": {
+    "1": {
+      "FAIL": 1,
+      "UNKNOWN": 2,
+      "passes": 0,
+      "total": 3
+    },
+    "2": {
+      "UNKNOWN": 19,
+      "passes": 0,
+      "total": 19
+    },
+    "3": {
+      "UNKNOWN": 2,
+      "passes": 0,
+      "total": 2
+    }
+  },
+  "remaining_required_status_counts": {
+    "UNKNOWN": 23
+  },
+  "request_id": "14fd1b0dcf6cbcd237a98055",
+  "reserved_seconds": 0,
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "sampling": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_particles_and_critic_gradient",
+    "scoring_weights": "live"
+  },
+  "schema_version": 1,
+  "source_digest": "8bfb0b738e288fbe9ca2e055539469e52c34b27adeda9901b317d44faf07ea2f",
+  "source_origin_commit": "77a373648e3a7a5f1923015fa2097ec9e0ec877f",
+  "steps": 80,
+  "summary_receipt": "reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json",
+  "summary_sha256": "35f15105a3b07529ca08c4977608eb176a9b652305882c33b92527f4fac486c1",
+  "unintended_rng_deviations": 0
+}

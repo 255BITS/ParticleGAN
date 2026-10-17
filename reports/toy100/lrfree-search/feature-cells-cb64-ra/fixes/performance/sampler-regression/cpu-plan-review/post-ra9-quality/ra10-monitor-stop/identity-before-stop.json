@@ -1,0 +1,40 @@
+[
+  {
+    "pid": 1030112,
+    "startticks": 167460340,
+    "state": "S",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+      "--validation",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+      "--output",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra10-monitor",
+      "--watch"
+    ],
+    "all_thread_children": {
+      "1030112": []
+    },
+    "cpu_environment_checked": true
+  },
+  {
+    "pid": 1030112,
+    "startticks": 167460340,
+    "state": "S",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+      "--validation",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+      "--output",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra10-monitor",
+      "--watch"
+    ],
+    "all_thread_children": {
+      "1030112": []
+    },
+    "cpu_environment_checked": true
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "status": "RETAINED_METADATA_PREFLIGHT_FAILURE",
+  "error": "Optional seal sidecar required literal PASS while API seal status is FROZEN_CPU_API_INTEGRATION_PASS. Digest was correct.",
+  "gpu_quality_executed": false,
+  "dependent_generic_freezer": "Both actual PASS review receipts and frozen input maps were verified by freezer; READY and lane are retained unchanged.",
+  "correction": "Supplementary prelaunch verification accepts the documented API seal status and verifies every map.",
+  "corrected_receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA8-prelaunch-seal-verification.json",
+  "corrected_receipt_sha256": "b4baab378a8e700b9edc2e2327e56b428592ea80d51016ea3b014cb70911549f"
+}

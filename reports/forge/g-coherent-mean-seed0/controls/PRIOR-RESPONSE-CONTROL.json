@@ -1,0 +1,21 @@
+{
+  "nominal_rates_restored": true,
+  "prior_update_bitwise_equal": true,
+  "rows": [
+    {
+      "G": 0.5799999833106995,
+      "active": false,
+      "new_response_steps": 0,
+      "old_response_steps": 1,
+      "prior": 1.7200000286102295
+    },
+    {
+      "G": 0.8500000238418579,
+      "active": true,
+      "new_response_steps": 1,
+      "old_response_steps": 1,
+      "prior": 1.7200000286102295
+    }
+  ],
+  "status": "PASS"
+}

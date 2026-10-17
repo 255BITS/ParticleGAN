@@ -1,0 +1,131 @@
+{
+  "Atlas_minus_E22_original_HQ_percentage_points": [
+    7.99,
+    12.1,
+    -2.14
+  ],
+  "GPU_launch_by_renderer": false,
+  "actual_updates_each": 1500,
+  "all_observations_preserved_owned_state": true,
+  "assets": {
+    "README.md": {
+      "bytes": 4307,
+      "sha256": "491c63afa5b8b38f4241f52b779b30cfa9ef37c7a9b0a99486262f5d8fdcda36"
+    },
+    "RENDER-RECEIPT.json": {
+      "bytes": 9401,
+      "sha256": "5da4f169af25044d949f2d0b992e9f27925cc05d43d0dda2fb146feb29255eca"
+    },
+    "atlas-vs-e22-convergence.gif": {
+      "bytes": 19586225,
+      "sha256": "0fe379c9400c34e3799728ea50ca269a2032c781afa34a78cecb28ca1f25e8c0"
+    },
+    "atlas-vs-e22-convergence.mp4": {
+      "bytes": 5932355,
+      "sha256": "e331f2029363e8be75c1fb4fecffdd678490c973813b9a455c1c6d9048600e9b"
+    },
+    "poster.png": {
+      "bytes": 280094,
+      "sha256": "a89840fd77de91dda3c05192b4f622004f62661f1a9a01801d0f032522fe01c7"
+    },
+    "poster.svg": {
+      "bytes": 137349,
+      "sha256": "d178331f44a29254bf9e129be67bb2eda821f9b2def5f75bd0d04a77479f04ec"
+    },
+    "render_convergence.py": {
+      "bytes": 21550,
+      "sha256": "f44697a97af51285c1899f894981c4445f2caee95675334b95ae20c73dadbb37"
+    }
+  },
+  "capture_completion_sha256": "b64e220f44ae6a81886c7c953bec9fb2d53823892f7b530ab41845ef2971807b",
+  "detail_target_index": 55,
+  "fixed_axes": [
+    -8.5,
+    8.5
+  ],
+  "gif": {
+    "duration_ms": 37860,
+    "frames": 153,
+    "height": 1380,
+    "width": 1600
+  },
+  "intermediate_png_frames": "Retained locally; excluded from compact archive.",
+  "interpolated_clouds": false,
+  "mp4": {
+    "duration": "37.916667",
+    "height": 1380,
+    "nb_frames": "910",
+    "r_frame_rate": "24/1",
+    "width": 1600
+  },
+  "new_training_by_renderer": false,
+  "observed_states_each": 151,
+  "original_gate_draw_count": 20000,
+  "original_gate_status": {
+    "Atlas": "PASS",
+    "E22": "PASS"
+  },
+  "original_gates": {
+    "Atlas": [
+      {
+        "HQ": 0.9609,
+        "modes": 100,
+        "step": 500
+      },
+      {
+        "HQ": 0.9609,
+        "modes": 100,
+        "step": 1000
+      },
+      {
+        "HQ": 0.9259,
+        "modes": 98,
+        "step": 1500
+      }
+    ],
+    "E22": [
+      {
+        "HQ": 0.881,
+        "modes": 100,
+        "step": 500
+      },
+      {
+        "HQ": 0.8399,
+        "modes": 100,
+        "step": 1000
+      },
+      {
+        "HQ": 0.9473,
+        "modes": 100,
+        "step": 1500
+      }
+    ]
+  },
+  "original_seed": 1234,
+  "packages": {
+    "Atlas": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+    "E22": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316"
+  },
+  "render_receipt_sha256": "5da4f169af25044d949f2d0b992e9f27925cc05d43d0dda2fb146feb29255eca",
+  "same_final_external_data_cursor": true,
+  "same_initial_cloud": true,
+  "source_freeze_sha256": "24821dcbc3d85f5188b42a2389293254742db384e9c206f893b7371be9d566e3",
+  "status": "COMPLETE_ACTUAL_PAIRED_CAPTURE_MEDIA",
+  "target_shift_clouds_exact_copies": true,
+  "target_shift_events_each": 2,
+  "task": "rotated100",
+  "torch_imported_by_renderer": false,
+  "visual_90_percent_guide_first_recorded_update": {
+    "Atlas": {
+      "first_turn": 790,
+      "initial": 220,
+      "second_turn": 1330
+    },
+    "E22": {
+      "first_turn": null,
+      "initial": null,
+      "second_turn": 1330
+    }
+  },
+  "visual_draw_count": 4096
+}

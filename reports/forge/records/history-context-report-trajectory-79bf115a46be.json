@@ -1,0 +1,139 @@
+{
+  "candidate_id": "context:report/trajectory",
+  "candidate_revision": "791a3c868e45dc8bc4645a8aa81b11193f17f169941432c2fa45394fe3aeb260",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Conditional trajectories with Particle DDGAN",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/trajectory",
+      "narrative_sources": [
+        {
+          "git_blob": "66197c6c942885b6fb305f56e4632c8a87e9cee7",
+          "path": "reports/trajectory/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "82bbaf562ae13d01645b808a0b9c5bb5e20074a974a18ccb53c1965efbcf2371",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/README.md"
+        },
+        {
+          "git_blob": "447a1fbdaacbba6aaff6278dff12f3c33a483acb",
+          "path": "reports/trajectory/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "75d5900a14c665f71bd8691f355cb027665a3bf8441b58c7e79fcb07be7da919",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/READOUT.md"
+        },
+        {
+          "git_blob": "b1fb64a73d1d945291a0c3b12edac09b5511ff22",
+          "path": "reports/trajectory/diversity/PLAN.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4be717539c641f3f55ec9ec2a76fe20eeb9a6a0c0b6e0beab0e89928f646acb3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/diversity/PLAN.md"
+        },
+        {
+          "git_blob": "a4afb70fb9190a9b9f47c14cee928ec79117b09c",
+          "path": "reports/trajectory/diversity/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7197821cdb18fd266b3bd3358bb8bac2429c420867c05ebadcaafd072213ae01",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/diversity/READOUT.md"
+        },
+        {
+          "git_blob": "10db67b2fd44cc329106e38979a7cf2f7127e121",
+          "path": "reports/trajectory/diversity/confirm_10k/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ecb2c4563da66b5389f32e451941274d38473dcf8ac49a9a9e4df209bb476260",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/diversity/confirm_10k/TABLE.md"
+        },
+        {
+          "git_blob": "aee439d3af09ba3f8b21370276b92355fc61f653",
+          "path": "reports/trajectory/diversity/scout_1k/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d14a5b262eb9fa8f36e285cf141ccaf605415923a5cb8d8abce1d21679c8f1ec",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/diversity/scout_1k/TABLE.md"
+        },
+        {
+          "git_blob": "c17410544e37b71b02653312da7d7d38acd7c6e7",
+          "path": "reports/trajectory/hybrid/MOTION_HANDOFF.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7e50e84641d451afdc81ea098e5a0f98ad9d6dda014255aa99f058a4320608f6",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/hybrid/MOTION_HANDOFF.md"
+        },
+        {
+          "git_blob": "533279f039672c77026b5331846c8774e0f9e02e",
+          "path": "reports/trajectory/hybrid/PLAN.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2c0f6d3e61b0aa818869dd30790aa5e07caec34732b4995086eceec480f42247",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/hybrid/PLAN.md"
+        },
+        {
+          "git_blob": "d82fb1d18a3de3582cad8198700316081e9f5e75",
+          "path": "reports/trajectory/hybrid/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a2fc60a17d8bff41401ce12f4788a3a9eeef1d8bbf32ee7c444c2b34b7447658",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/hybrid/READOUT.md"
+        },
+        {
+          "git_blob": "6d65c56e22a94bd1b3f7ea3cd69acf1d952a8d8a",
+          "path": "reports/trajectory/hybrid/confirm_10k/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3e1e2e715917a4201406ae1846058b7bd67f1a503b66e1785b1d5e3569d99240",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/hybrid/confirm_10k/TABLE.md"
+        },
+        {
+          "git_blob": "cc0c40f773c78f3cecce051f206a3209729cb23e",
+          "path": "reports/trajectory/hybrid/scout_1k/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6ab86e882f008e7f787e8e9c23c94d97022b9b6d38c88cb5e9f5ee0a005176c1",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/hybrid/scout_1k/TABLE.md"
+        },
+        {
+          "git_blob": "f2ca40a0816e835ee992e90b16977b8350f2ba66",
+          "path": "reports/trajectory/round1/TABLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b2225e8a30d056d418ece4653a48a3d04952b74af1b87906478a4a522dea4d25",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/round1/TABLE.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Conditional trajectories with Particle DDGAN\n\n**Hybrid discriminator round complete:** [results and interpretation](hybrid/READOUT.md),\n[interactive comparison](hybrid/confirm_10k/index.html),\n[next-session motion handoff](hybrid/MOTION_HANDOFF.md).\n\n**Geometry \u00d7 discriminator round complete:** [results and interpretation](diversity/READOUT.md),\n[interactive comparison](diversity/confirm_10k/index.html).\n\n**First round complete:** [results and interpretation](READOUT.md),\n[interactive gallery](round1/index.html), [leaderboard](round1/TABLE.md).\n\nFeature branch: `experiment/trajectory-ddgan`. CIFAR and Gaussian-toy defaults\nare unchanged. Entry point: `experiments/train_trajectory.py`; no arguments\nloads `configs/trajectory/default.yaml`. All settings are YAML-controlled.\n\n## Task\n\nPredict a 64-position, two-coordinate future from an eight-position observed\napproach, obstacle height/radius, and a discrete route-preference label.\nPreference 0 requests 80% upper / 20% lower paths; preference 1 requests\n30% upper / 70% lower paths. Actual route and path coefficients are hidden.\nEach route contains three independent uniform continuous coefficients for\nlongitudinal progression, clearance, and lateral asymmetry. There is no finite\ntraining dataset: independent analytic samples are drawn each optimizer phase.\n\nFour training geometries \u00d7 two preferences give eight training contexts.\nF"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-trajectory-79bf115a46be",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "66197c6c942885b6fb305f56e4632c8a87e9cee7",
+    "path": "reports/trajectory/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "82bbaf562ae13d01645b808a0b9c5bb5e20074a974a18ccb53c1965efbcf2371",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/trajectory/README.md"
+  },
+  "task_results": []
+}

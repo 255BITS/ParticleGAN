@@ -1,0 +1,19 @@
+{
+  "status": "PRESERVED_PRIVATE_CHECKER_FAILURE",
+  "utc": "2026-09-30T13:57:47.824353+00:00",
+  "files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-grid-artifact-review/audit_completed.py": "1eb39df8b6b1dbc45aa2f5354ef2eed7a5514f0f016bbaab3509c9d7dd6b2566",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-grid-artifact-review/attempt1.log": "cf427b43cac9cfcc27537e40e4ced618797842e4d2ef956b96f5a839ad329a34",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-grid-artifact-review/accepted-attempt1/original-native-authority.json": "634aaf23a71ddd1feadfb1a0d48ee75477401a20dabf2e546a9b21accc8c0db3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-grid-artifact-review/attempt1-inputs/INPUTS-FROZEN.json": "2f9c6239daa716fd7e8e39892f1befc5eb340b0a5b5013c8180301cb180b1fa8"
+  },
+  "exit_code": 1,
+  "error": "Exact raw-state action checker applied to original native JSON lists compressed above32 rows.",
+  "PT_objects_loaded": 1,
+  "passed_native_artifact_checks": 102,
+  "original_gpu_typed_digests_computed_before_failure": true,
+  "RNG_placement_checked_before_failure": true,
+  "CPU_only": true,
+  "candidate_sources_changed": false,
+  "continuation": "Remaining backend metadata/graph/population/row reset cases only; no scoring/forward/training/planner."
+}

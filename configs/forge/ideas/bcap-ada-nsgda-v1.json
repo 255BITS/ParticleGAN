@@ -1,0 +1,36 @@
+{
+  "api_changes": [
+    "Selectable public Recipe optimizer family; checkpointed optimizer state and sampled-row metadata"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.optimizer_family=ada_nsgda",
+    "Optimizer direction/normalization only; no loss or regularizer change"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "bcap-ada-nsgda-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Replace only the public optimizer step rule. Fixed current BCAP relativistic loss, b_cap coefficient 1, zero interventions and noise, and constant schedule; task-owned auxiliary objectives remain active. Generator and encoder share the G-player normalization. Hybrid arms pin native-Adam groups to the incumbent base rate 0.00425; sampled-row arms consume actual rows and leave unsampled rows unchanged. This card is a reusable technique, not a task-specific optimizer.",
+  "parent": "bcap-pure-adam-v2",
+  "prior_art": [
+    "bcap-pure-adam-v2",
+    "reports/smart_descent/sgd/README.md",
+    "https://arxiv.org/abs/2210.04319"
+  ],
+  "recipe_overrides": {
+    "optimizer_family": "ada_nsgda"
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3,
+  "trainer_family": "bcap-ada-nsgda"
+}

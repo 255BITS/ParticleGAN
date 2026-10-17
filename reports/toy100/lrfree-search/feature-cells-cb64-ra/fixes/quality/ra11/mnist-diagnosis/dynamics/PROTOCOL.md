@@ -1,0 +1,11 @@
+# RA11 MNIST dynamics: source and saved JSON only
+
+Read the completed original MNIST config, evaluator, result, metric and progress-log JSON for RA11, RA4 and the corrected original CUDA E22 run. Pin every relevant source and closed JSON/log before running this stdlib-only reduction. Compare stored values and source ASTs; never import Torch, deserialize PT, construct a model, run a forward/update/draw/scorer, or change an input, source, gate, budget or seed.
+
+The E22 comparator is `feature-cells-cuda-retest-20260929/learned/training/mnist/E22`, whose active evaluator frame is comparable to RA4/RA11. The older scaling-portability all-dimension score is excluded from the FD comparison. Check actual evaluator and initialization hashes rather than assuming equivalence.
+
+Separate mechanisms: accepted population actions; extra observational mean-frame queries; actual G/prior/sigma/D rates and inherited payoff damping; generator/prior EMA clock and eligibility; output-noise formula. An inactive mean phase can still observe models, so inspect its deterministic projection and owned-state-neutral observation boundary. Claim source scope for the actual buffer-free image networks and retain custom external state as a limitation.
+
+The next possible config is the historical G+sigma base with compensating multipliers (`lr=.00425`, `prior_lr_mult=2`, `d_lr_mult=1`), preserving prior/D base rates. This is one prospective configuration suggested by the old successful MNIST rates, not proof that the new package retains its toy/grid passes or that rate change alone is causal. Do not change learnable noise, serving, count/support, or the evaluator to diagnose the present result.
+
+No PT probe is authorized here. If an ambiguity remains, the smallest proposed probe is a separately frozen, deterministic functional clean G/EMA forward on the first 32 saved latent rows at checkpoints 100 and 2000 for RA11 and RA4, with scalar saved optimizer/log-sigma inspection. It would measure tanh saturation and between-row raw output variation without noise draws or a quality score. Such a probe would require new helper/input seals, independent review and root GO; it would not establish a training counterfactual or qualify a config.

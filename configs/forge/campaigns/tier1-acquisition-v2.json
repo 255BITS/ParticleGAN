@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "tier1-acquisition-v2",
+  "budget_seconds": 2220,
+  "candidate_budget_seconds": 2220,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Main-view revision 4 Tier 1: scalar Gaussian 120s, three behavior tasks 300s each, ring16 300s and word acquisition 900s. This declaration permits no automatic whole-view execution from a standalone API result."
+}

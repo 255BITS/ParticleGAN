@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "9d035f74ab1a260f76505dd87a5561531298942d68819f8dbeb7813559c5fe79",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "a1b3fe25d5ab44b1d699b773b5a613b43186039294bd007314c5f940379c0567",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/7e3a21c2fd29479698c655610fd1a8fc/constraint_geometry-scored-outputs.pt": "c1fea633aa4d6b33ea010e02b1c740cc830fac6583458f7af2b2a7b76b2720ce"
+  },
+  "task_id": "trajectory"
+}

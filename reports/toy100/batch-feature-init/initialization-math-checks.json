@@ -1,0 +1,65 @@
+{
+  "linear_and_flattened_kernel": [
+    {
+      "shape": [
+        8,
+        3
+      ],
+      "gram_error": 4.440892098500626e-16,
+      "rms_error": 4.163336342344337e-17
+    },
+    {
+      "shape": [
+        3,
+        8
+      ],
+      "gram_error": 1.1102230246251565e-16,
+      "rms_error": 1.3877787807814457e-17
+    },
+    {
+      "shape": [
+        5,
+        5
+      ],
+      "gram_error": 8.673617379884035e-17,
+      "rms_error": 1.3877787807814457e-17
+    },
+    {
+      "shape": [
+        7,
+        27
+      ],
+      "gram_error": 1.6653345369377348e-16,
+      "rms_error": 3.469446951953614e-18
+    }
+  ],
+  "pattern_bias": {
+    "mean_error": 3.96508223080413e-18,
+    "variance_error": 3.469446951953614e-18
+  },
+  "convolution_counterexample": {
+    "kernel_gram_error": 2.220446049250313e-16,
+    "spatial_gram_error": 2.220446049250313e-16,
+    "spatial_gram_is_not_identity": true
+  },
+  "neutral_residual": {
+    "output_error": 0.0,
+    "input_jacobian_error": 0.0,
+    "interior_gradient_error": 0.0,
+    "output_map_gradient_max": 0.9726124365875642
+  },
+  "lora": {
+    "no_op_error": 0.0,
+    "b_gradient_error": 0.0,
+    "a_gradient_error": 0.0,
+    "b_gradient_max": 0.23247444681267465,
+    "projector_error": 1.1102230246251565e-16,
+    "first_sgd_update_error": 3.0357660829594124e-18
+  },
+  "both_lora_factors_zero": {
+    "a_gradient_max": 0.0,
+    "b_gradient_max": 0.0
+  },
+  "torch_rng_unchanged": true,
+  "scope": "Algebra checks only. No transformer/LoRA training, no added benchmark passes."
+}

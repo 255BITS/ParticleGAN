@@ -1,0 +1,2017 @@
+{
+  "base_candidate": "k3p-bcap-matched-v1",
+  "base_declaration": {
+    "api_changes": [],
+    "api_version": "forge-api-v1",
+    "changed_factors": [
+      "reg_arm k3p -> b_cap"
+    ],
+    "claim_contract": {
+      "sampling_law": "task_declared",
+      "schedule": "scheduled",
+      "scoring_weights": "live"
+    },
+    "execution_path": "public_trainer",
+    "goal": "discriminator_stability",
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "Replace only the critic penalty by frozen historical bcap while retaining the K3P optimizer, noise, A2, host and sampling contracts.",
+    "id": "k3p-bcap-matched-v1",
+    "lifecycle": "proposed",
+    "mechanism_class": "structural",
+    "mechanism_rationale": "Fixed real/fake squared L2 gradients replace the K3P LR-dependent penalty and anchor. Coefficient1, cap1; no tuning.",
+    "parent": "k3p",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "prior_art": [
+      "reports/forge/studies/FORMULATION_COMPARISON_CONTINUATION.md",
+      "tests/fixtures/release07-public-api.json"
+    ],
+    "recipe_overrides": {
+      "reg_arm": "b_cap"
+    },
+    "requires_capabilities": [
+      "learned_locations",
+      "a2",
+      "named_rng"
+    ],
+    "schema_version": 1
+  },
+  "blocked_count": 0,
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 2221440,
+    "candidate_budget_seconds": 42720,
+    "description": "Complete fixed-roster CUDA rerun after adopting default DualNorm numerical-rank truncation and disabling autograd multithreaded backward scheduling project-wide. Keep all original recipes, priors, architectures, seed0, named streams, sampling, cadence, task gates and budgets. Preserve all prior source results/costs separately; no scientific retries, retuning or cross-source gate pooling.",
+    "id": "gaussian-smoke-inventory-v5",
+    "schema_version": 1
+  },
+  "campaign_accounting": {
+    "definition": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 2221440,
+      "candidate_budget_seconds": 42720,
+      "description": "Complete fixed-roster CUDA rerun after adopting default DualNorm numerical-rank truncation and disabling autograd multithreaded backward scheduling project-wide. Keep all original recipes, priors, architectures, seed0, named streams, sampling, cadence, task gates and budgets. Preserve all prior source results/costs separately; no scientific retries, retuning or cross-source gate pooling.",
+      "id": "gaussian-smoke-inventory-v5",
+      "schema_version": 1
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 785.797474547755
+  },
+  "cost": {
+    "evidence_wall_seconds": 67.08945071487688,
+    "new_paid_wall_seconds": 785.797474547755,
+    "observed_attempts": 6,
+    "wall_seconds": 67.08945071487688
+  },
+  "declared_worst_case_seconds": 42720,
+  "default_adoption": false,
+  "execution_backend": "cuda",
+  "holdout_tasks": [
+    "ring_hold",
+    "ring_extension"
+  ],
+  "independent_confirmation": "not_performed",
+  "input_digest": "50604c6d890f0e5c86eeb1f6b3ad2599d553ee403dfb6eea98493f42e88580be",
+  "logs": "/tmp/particlegan-default-tier-refresh/runs/forge/gaussian-smoke-inventory-v5/events.jsonl",
+  "policy_fingerprint": "b6acbf9d4f293c3c22d913d36ef98bca3293ab152634ecb46ffb0b28658ed066",
+  "progression": {
+    "comparison_complete": true,
+    "configured_through_tier": 2,
+    "default_adoption": false,
+    "full_view_qualified_candidate_ids": [],
+    "full_view_winner_candidate_id": null,
+    "outcome": "best_observed",
+    "policy": "every declared configuration advances independently through ordinary prerequisites to the tier cap",
+    "smoke_survivor_candidate_ids": []
+  },
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_scope": "declared tuning tasks only; provisional Forge gates",
+  "queue_root": "/tmp/particlegan-default-tier-refresh/runs/forge/gaussian-smoke-inventory-v5",
+  "runtime_cohort": {
+    "compute_profiles": {
+      "cuda": {
+        "autograd_multithreading_enabled": false,
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "execution_backend": "cuda",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "all_trials_terminal": true,
+    "calibration_status": "provisional",
+    "default_adoption": false,
+    "independent_confirmation": "not_performed",
+    "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+    "qualified": false,
+    "required_pass_count": 4,
+    "required_passes_by_tier": [
+      4,
+      0
+    ],
+    "required_task_bindings": [
+      {
+        "compatibility_key": "e9613ed0b88a8e423850d4576bfaeb12220f244c31ce3b32f1de040a8fcf1188",
+        "qualification_tier": 1,
+        "task": "gaussian1d_smoke"
+      },
+      {
+        "compatibility_key": "073e7993569636cc4a7ec74816824ca35af2fb28cf03e2fc1c9fee9eb5396317",
+        "qualification_tier": 1,
+        "task": "two_pole"
+      },
+      {
+        "compatibility_key": "e5aebae5fe544a9283571a0eb2e18028bf893567d9ae94c9dc19a3ae3c432159",
+        "qualification_tier": 1,
+        "task": "unused_token_hold"
+      },
+      {
+        "compatibility_key": "29c9a8a7e7d371f5d2ed36037227ca89f9e668c20d3e23b28f1c860622bafbbc",
+        "qualification_tier": 1,
+        "task": "ae_gan_hold"
+      },
+      {
+        "compatibility_key": "a70ee7fd5b5f42934544434f30a77646c2e70c17c6ef07234aac9aa79ee4c950",
+        "qualification_tier": 1,
+        "task": "ring16_acquisition"
+      },
+      {
+        "compatibility_key": "d5b513fc00fba0dbf5ffd57f672ef74e25a2104d02957009bdf4dc1ca7e13e8f",
+        "qualification_tier": 1,
+        "task": "five_word_joint_acquisition"
+      },
+      {
+        "compatibility_key": "0e816940a6ab1198e47223020ef97eefc8d3957b3d08c31ee5970a3c1c49d146",
+        "qualification_tier": 2,
+        "task": "gaussian1d_stability"
+      },
+      {
+        "compatibility_key": "c4546f0b93453b9c71796de19e25fc914c02a074bb4bcd2f52a57baa710797d4",
+        "qualification_tier": 2,
+        "task": "trajectory"
+      },
+      {
+        "compatibility_key": "f22b057396acc9ba4edf82ce6f8fea44a715d584fb305ca96b1de7593b3fa7f6",
+        "qualification_tier": 2,
+        "task": "residual_student"
+      },
+      {
+        "compatibility_key": "3e7aabae29a942d2cda4ce6f6ad54e86c7cecd1dd4859d61e746d55608252a10",
+        "qualification_tier": 2,
+        "task": "unipolar"
+      },
+      {
+        "compatibility_key": "bf612fe3e41b59010b71660f9bd3c75596788c3bc1a09cbe4aa11199eb2a008f",
+        "qualification_tier": 2,
+        "task": "cover_leftover"
+      },
+      {
+        "compatibility_key": "afa31d9a509d166f3257965b68aec7ab06dc8faaa43aae2c55dabb5ce2ae6f2d",
+        "qualification_tier": 2,
+        "task": "mid_scale_identity"
+      },
+      {
+        "compatibility_key": "1854a797a733fabb86f3bcff3051a6d05d043c50ed6eeb436558ff4021f6dd8c",
+        "qualification_tier": 2,
+        "task": "mode_hold"
+      },
+      {
+        "compatibility_key": "fe586153b7bb1f56b5f1af100d1ebdbbc506afffdecf1dd110e625cb39c361ad",
+        "qualification_tier": 2,
+        "task": "vector_two_broad"
+      },
+      {
+        "compatibility_key": "d46e83e9c239e03d71aa2fcbac2127fd291d2bb56162539789b88f7f0c31fc81",
+        "qualification_tier": 2,
+        "task": "vector_unequal_mass"
+      },
+      {
+        "compatibility_key": "3d593aa81d0e89c684f9d8267858ad3ff419eb0424a8bfe2d6b13a22bad107f6",
+        "qualification_tier": 2,
+        "task": "vector_unequal_width"
+      },
+      {
+        "compatibility_key": "89bb2a8eccdf522326708a43b93bb80e08308a64f0071dc4975a2e0e4880c34e",
+        "qualification_tier": 2,
+        "task": "vector_anisotropic"
+      },
+      {
+        "compatibility_key": "f5327965850988b2edf676f957ee3551132890dd1819d5ad1d2c0f89f30cf4c8",
+        "qualification_tier": 2,
+        "task": "vector_overlap"
+      },
+      {
+        "compatibility_key": "23d172b411cb6cf74c78fc221ba06c75d723bf078201b8270afa447181413408",
+        "qualification_tier": 2,
+        "task": "vector_spiral"
+      },
+      {
+        "compatibility_key": "70a35d2d04968b2a06eb44d363367768253dad6b94339f601be37d4a1f32acf2",
+        "qualification_tier": 2,
+        "task": "img_stripes2"
+      },
+      {
+        "compatibility_key": "a8e546bfedb968314c0bb78e5b1b18b2ea284101da68eefbcc094ce9448c7583",
+        "qualification_tier": 2,
+        "task": "img_bars4"
+      },
+      {
+        "compatibility_key": "01cbe69965edb42982c7cb07853ebf0f345c555e496f0a925069395f37c10f35",
+        "qualification_tier": 2,
+        "task": "img_blobs4"
+      },
+      {
+        "compatibility_key": "7be663c5c1bb1319f2b9de59c29f91a8b7c32e591474926bfa5a8d0e53458f5f",
+        "qualification_tier": 2,
+        "task": "img_intensity2"
+      },
+      {
+        "compatibility_key": "167f2f0ed3766516f60618269e61f5625f3f6187b85cec65b50cd15a7e51a605",
+        "qualification_tier": 2,
+        "task": "grid100"
+      },
+      {
+        "compatibility_key": "fd73f4df4fd4da44f7e6f7912e26ca82417d17e3842b7b4ae08a2824f153e5cb",
+        "qualification_tier": 2,
+        "task": "rotated100"
+      },
+      {
+        "compatibility_key": "f55821095b0484d51bbc403e0a330b732bf0710e31faab97bd9a84bb40fe9432",
+        "qualification_tier": 2,
+        "task": "staggered100"
+      }
+    ],
+    "required_total": 26,
+    "selected_candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+    "selected_configuration_id": "08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+    "selection_complete": true,
+    "selection_kind": "best_observed",
+    "source_digest": "3bf51eab2a80eef3645ca5c7df9fa0583cc7053332bc94b19ec874e2e19f98a0",
+    "tuning_through_tier": 2
+  },
+  "source_digest": "3bf51eab2a80eef3645ca5c7df9fa0583cc7053332bc94b19ec874e2e19f98a0",
+  "source_digests": [
+    "3bf51eab2a80eef3645ca5c7df9fa0583cc7053332bc94b19ec874e2e19f98a0"
+  ],
+  "spec": {
+    "base_candidate": "k3p-bcap-matched-v1",
+    "campaign": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 2221440,
+      "candidate_budget_seconds": 42720,
+      "description": "Complete fixed-roster CUDA rerun after adopting default DualNorm numerical-rank truncation and disabling autograd multithreaded backward scheduling project-wide. Keep all original recipes, priors, architectures, seed0, named streams, sampling, cadence, task gates and budgets. Preserve all prior source results/costs separately; no scientific retries, retuning or cross-source gate pooling.",
+      "id": "gaussian-smoke-inventory-v5",
+      "schema_version": 1
+    },
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "grid": {
+      "d_lr_mult": [
+        2.0
+      ],
+      "prior_lr_mult": [
+        4.0
+      ],
+      "reg_coeff": [
+        0.5
+      ]
+    },
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "Remeasure the exact preselected global recipe after adopting default numerical-rank truncation for DualNorm and disabling autograd multithreaded backward scheduling project-wide. Complete all runnable Tier1 and unlock Tier2 only for a whole six-task Tier1 PASS. No hyperparameter search, seed variation or retuning.",
+    "id": "gaussian-smoke-inventory-bcap-v5",
+    "protocol": "screening",
+    "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "schema_version": 1,
+    "trainer_family": "bcap",
+    "tuning_through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "spec_hash": "1c37733f11dd29afa33bb7dd42e8dfdda484226805628a88396b01e12e6093a7",
+  "speed_selection": {
+    "reason": "No frozen comparable first-acquisition timing contract is implemented for this search. Not all required adapters record per-observation seconds; original terminal-suffix or coverage-only times cannot supply full-quality first-acquisition speed.",
+    "selected_candidate_id": null,
+    "status": "UNAVAILABLE",
+    "wall_time_ranking": false
+  },
+  "stage": "enqueued",
+  "study_id": "gaussian-smoke-inventory-bcap-v5",
+  "submitted_count": 1,
+  "technique_signature": {
+    "digest": "6db7d1147ee00903cf47b16dbfa5915930903505d522e9a09270cacd2dd1f734",
+    "fixed_recipe_fields": {
+      "birth_death_backend": "knn",
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "continuous_policy": null,
+      "critic_formulation": "k3p",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "encoder_mode": "none",
+      "loss": "relativistic",
+      "lr_control": "mobility",
+      "model": "gan",
+      "num_classes": null,
+      "optimizer_family": "formulation",
+      "output_noise_mode": "fixed",
+      "particle_birth_death": false,
+      "reg_arm": "b_cap",
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "table_release_rule": "any",
+      "ucd_target": "class"
+    },
+    "mechanisms": {
+      "amsgrad": false,
+      "averaged_serving": false,
+      "beta2_schedule": {
+        "declared": false,
+        "network_changing": false,
+        "prior_changing": false
+      },
+      "critic_anchor": true,
+      "critic_guard": true,
+      "critic_penalty": {
+        "initial": true,
+        "terminal": true
+      },
+      "direct_particle_moments": [
+        false,
+        true
+      ],
+      "gradient_cap": true,
+      "k3p_penalty_lr_floor": null,
+      "latent_damping": true,
+      "network_horizon_cap": true,
+      "network_moments": [
+        false,
+        true
+      ],
+      "network_terminal_updates": true,
+      "output_noise_warmup": true,
+      "penalty_schedule": {
+        "changing": false,
+        "declared": false
+      },
+      "prior_moments": [
+        false,
+        true
+      ],
+      "prior_regularization": false,
+      "prior_terminal_updates": true,
+      "reconstruction_objective": null,
+      "scheduled_learning_rates": true,
+      "terminal_second_moment": true,
+      "training_input_noise": true,
+      "training_output_noise": true,
+      "ucd_objective": null
+    },
+    "schema_version": 1
+  },
+  "trainer_family": "bcap",
+  "trials": [
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "0791e058d184493fa840b21f36b3e904",
+          "gate_statuses": {
+            "clockfree_audit_measurement_v1": "FAIL"
+          },
+          "result_hash": "fa5b8f81f6bc67b4170dc0ddc5c9e2086ca8bacb7e6e313ed667c7b28f04afd2",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.206009925925173
+        },
+        {
+          "attempt_id": "a365bd854d864bd58e5a0d17d5d92a41",
+          "gate_statuses": {
+            "two_pole": "PASS"
+          },
+          "result_hash": "c5c4e4a70f98d5f9b0aff98037a43abf01345775af921770291de85e8fea41b6",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.891045324970037
+        },
+        {
+          "attempt_id": "b68d4b3a11c54fd88420f50324962022",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "f1bf9063fc20d7bb4341b60094f736f677cd14a61d20aed085874ea16ae049ba",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 8.189001205959357
+        },
+        {
+          "attempt_id": "c72e7ab509e842a593a3589619048f4f",
+          "gate_statuses": {
+            "ring16_acquisition": "FAIL"
+          },
+          "result_hash": "ea21fc68f8c42d6c01ad3300d5defdcaf652ff067d08acceab27ba31a3c21a1a",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 21.86829839798156
+        },
+        {
+          "attempt_id": "f273d7465fdf4bc9877278d0e6ee2344",
+          "gate_statuses": {
+            "unused_token_hold": "PASS"
+          },
+          "result_hash": "debcbbef9a2fa65991272e5f730a06ba0e7673a510aaa8ca31007cbe4d18f63a",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.200870475033298
+        },
+        {
+          "attempt_id": "f94fc095b22c4284a8b879a7ec38b537",
+          "gate_statuses": {
+            "gaussian1d_smoke": "PASS"
+          },
+          "result_hash": "4fb808e55b9b22a1dc03c41054eb41274f7e1b8c28f982374883285a4974aa69",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 15.734225385007448
+        }
+      ],
+      "attempt_ids": [
+        "0791e058d184493fa840b21f36b3e904",
+        "a365bd854d864bd58e5a0d17d5d92a41",
+        "b68d4b3a11c54fd88420f50324962022",
+        "c72e7ab509e842a593a3589619048f4f",
+        "f273d7465fdf4bc9877278d0e6ee2344",
+        "f94fc095b22c4284a8b879a7ec38b537"
+      ],
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "f396589952da515489c1ed1af263c264bdba5229d33cd0d8aa0120f3dc111e36",
+      "configuration_id": "08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "cost": {
+        "evidence_wall_seconds": 67.08945071487688,
+        "new_paid_wall_seconds": 67.08945071487688,
+        "wall_seconds": 67.08945071487688
+      },
+      "counts": {
+        "BLOCKED": 1,
+        "FAIL": 2,
+        "PASS": 4,
+        "UNKNOWN": 22
+      },
+      "declaration": {
+        "api_changes": [],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.d_lr_mult=2.0",
+          "Recipe.prior_lr_mult=4.0",
+          "Recipe.reg_coeff=0.5"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+        "execution_path": "public_trainer",
+        "goal": "discriminator_stability",
+        "guide": "EXPERIMENTATION.md",
+        "hypothesis": "A bounded shared-defaults grid of critic rate, prior rate and fixed BCap strength may retain the canonical smoke behavior while improving the observed clean mode-hold coverage failure.",
+        "id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+        "lifecycle": "proposed",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "Fixed real/fake squared L2 gradients replace the K3P LR-dependent penalty and anchor. Coefficient1, cap1; no tuning.",
+        "parent": "k3p-bcap-matched-v1",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "prior_art": [
+          "reports/forge/studies/FORMULATION_COMPARISON_CONTINUATION.md",
+          "tests/fixtures/release07-public-api.json"
+        ],
+        "recipe_overrides": {
+          "d_lr_mult": 2.0,
+          "prior_lr_mult": 4.0,
+          "reg_arm": "b_cap",
+          "reg_coeff": 0.5
+        },
+        "requires_capabilities": [
+          "learned_locations",
+          "a2",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 2.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.5,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "ka2",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.2,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 4.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_arm": "b_cap",
+          "reg_coeff": 0.5,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 1,
+        "search_report": "reports/forge/configuration-search/bcap-family-defaults-round1-v1.json",
+        "search_study_id": "bcap-family-defaults-round1-v1",
+        "trainer_family": "bcap"
+      },
+      "declared_worst_case_seconds": 42720,
+      "policy_fingerprint": "b6acbf9d4f293c3c22d913d36ef98bca3293ab152634ecb46ffb0b28658ed066",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 4,
+        "required_statuses": {
+          "BLOCKED": 1,
+          "FAIL": 1,
+          "PASS": 4,
+          "UNKNOWN": 22
+        },
+        "required_total": 28,
+        "tiers": [
+          {
+            "required_passed": 4,
+            "required_total": 6,
+            "statuses": {
+              "BLOCKED": 1,
+              "FAIL": 1,
+              "PASS": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 20,
+            "statuses": {
+              "UNKNOWN": 20
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 4,
+        "tuning_required_total": 26
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "0791e058d184493fa840b21f36b3e904",
+          "result_hash": "fa5b8f81f6bc67b4170dc0ddc5c9e2086ca8bacb7e6e313ed667c7b28f04afd2",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a365bd854d864bd58e5a0d17d5d92a41",
+          "result_hash": "c5c4e4a70f98d5f9b0aff98037a43abf01345775af921770291de85e8fea41b6",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "b68d4b3a11c54fd88420f50324962022",
+          "result_hash": "f1bf9063fc20d7bb4341b60094f736f677cd14a61d20aed085874ea16ae049ba",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "c72e7ab509e842a593a3589619048f4f",
+          "result_hash": "ea21fc68f8c42d6c01ad3300d5defdcaf652ff067d08acceab27ba31a3c21a1a",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f273d7465fdf4bc9877278d0e6ee2344",
+          "result_hash": "debcbbef9a2fa65991272e5f730a06ba0e7673a510aaa8ca31007cbe4d18f63a",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "f94fc095b22c4284a8b879a7ec38b537",
+          "result_hash": "4fb808e55b9b22a1dc03c41054eb41274f7e1b8c28f982374883285a4974aa69",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "d_lr_mult": 2.0,
+        "prior_lr_mult": 4.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 0.5
+      },
+      "recipe_preset": null,
+      "request_id": "15b80c374243b0f37dd91620",
+      "request_path": "/tmp/particlegan-default-tier-refresh/runs/forge/gaussian-smoke-inventory-v5/queue/requests/15b80c374243b0f37dd91620.json",
+      "resolved_recipe": {
+        "adam_variant": "pytorch",
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_betas": null,
+        "d_eps": null,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 2.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "loss": "relativistic",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_decay_rate": 0.96,
+        "lr_decay_staircase": false,
+        "lr_decay_steps": 50000,
+        "lr_floor": 0.05,
+        "lr_schedule": "cosine",
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_adam_lr": null,
+        "optimizer_family": "formulation",
+        "optimizer_momentum": 0.0,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_eps": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 4.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 0.5,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cuda": {
+            "autograd_multithreading_enabled": false,
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "837b74e9555dd73492a7e3fda12b00e478aafe6ca9c541e1bf0d2bd53606f226",
+      "selected_attempt_ids": [
+        "0791e058d184493fa840b21f36b3e904",
+        "a365bd854d864bd58e5a0d17d5d92a41",
+        "b68d4b3a11c54fd88420f50324962022",
+        "c72e7ab509e842a593a3589619048f4f",
+        "f273d7465fdf4bc9877278d0e6ee2344",
+        "f94fc095b22c4284a8b879a7ec38b537"
+      ],
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 4,
+        "required_passes_by_tier": [
+          4,
+          0
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "e9613ed0b88a8e423850d4576bfaeb12220f244c31ce3b32f1de040a8fcf1188",
+            "qualification_tier": 1,
+            "task": "gaussian1d_smoke"
+          },
+          {
+            "compatibility_key": "073e7993569636cc4a7ec74816824ca35af2fb28cf03e2fc1c9fee9eb5396317",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "e5aebae5fe544a9283571a0eb2e18028bf893567d9ae94c9dc19a3ae3c432159",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "29c9a8a7e7d371f5d2ed36037227ca89f9e668c20d3e23b28f1c860622bafbbc",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "a70ee7fd5b5f42934544434f30a77646c2e70c17c6ef07234aac9aa79ee4c950",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "d5b513fc00fba0dbf5ffd57f672ef74e25a2104d02957009bdf4dc1ca7e13e8f",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          },
+          {
+            "compatibility_key": "0e816940a6ab1198e47223020ef97eefc8d3957b3d08c31ee5970a3c1c49d146",
+            "qualification_tier": 2,
+            "task": "gaussian1d_stability"
+          },
+          {
+            "compatibility_key": "c4546f0b93453b9c71796de19e25fc914c02a074bb4bcd2f52a57baa710797d4",
+            "qualification_tier": 2,
+            "task": "trajectory"
+          },
+          {
+            "compatibility_key": "f22b057396acc9ba4edf82ce6f8fea44a715d584fb305ca96b1de7593b3fa7f6",
+            "qualification_tier": 2,
+            "task": "residual_student"
+          },
+          {
+            "compatibility_key": "3e7aabae29a942d2cda4ce6f6ad54e86c7cecd1dd4859d61e746d55608252a10",
+            "qualification_tier": 2,
+            "task": "unipolar"
+          },
+          {
+            "compatibility_key": "bf612fe3e41b59010b71660f9bd3c75596788c3bc1a09cbe4aa11199eb2a008f",
+            "qualification_tier": 2,
+            "task": "cover_leftover"
+          },
+          {
+            "compatibility_key": "afa31d9a509d166f3257965b68aec7ab06dc8faaa43aae2c55dabb5ce2ae6f2d",
+            "qualification_tier": 2,
+            "task": "mid_scale_identity"
+          },
+          {
+            "compatibility_key": "1854a797a733fabb86f3bcff3051a6d05d043c50ed6eeb436558ff4021f6dd8c",
+            "qualification_tier": 2,
+            "task": "mode_hold"
+          },
+          {
+            "compatibility_key": "fe586153b7bb1f56b5f1af100d1ebdbbc506afffdecf1dd110e625cb39c361ad",
+            "qualification_tier": 2,
+            "task": "vector_two_broad"
+          },
+          {
+            "compatibility_key": "d46e83e9c239e03d71aa2fcbac2127fd291d2bb56162539789b88f7f0c31fc81",
+            "qualification_tier": 2,
+            "task": "vector_unequal_mass"
+          },
+          {
+            "compatibility_key": "3d593aa81d0e89c684f9d8267858ad3ff419eb0424a8bfe2d6b13a22bad107f6",
+            "qualification_tier": 2,
+            "task": "vector_unequal_width"
+          },
+          {
+            "compatibility_key": "89bb2a8eccdf522326708a43b93bb80e08308a64f0071dc4975a2e0e4880c34e",
+            "qualification_tier": 2,
+            "task": "vector_anisotropic"
+          },
+          {
+            "compatibility_key": "f5327965850988b2edf676f957ee3551132890dd1819d5ad1d2c0f89f30cf4c8",
+            "qualification_tier": 2,
+            "task": "vector_overlap"
+          },
+          {
+            "compatibility_key": "23d172b411cb6cf74c78fc221ba06c75d723bf078201b8270afa447181413408",
+            "qualification_tier": 2,
+            "task": "vector_spiral"
+          },
+          {
+            "compatibility_key": "70a35d2d04968b2a06eb44d363367768253dad6b94339f601be37d4a1f32acf2",
+            "qualification_tier": 2,
+            "task": "img_stripes2"
+          },
+          {
+            "compatibility_key": "a8e546bfedb968314c0bb78e5b1b18b2ea284101da68eefbcc094ce9448c7583",
+            "qualification_tier": 2,
+            "task": "img_bars4"
+          },
+          {
+            "compatibility_key": "01cbe69965edb42982c7cb07853ebf0f345c555e496f0a925069395f37c10f35",
+            "qualification_tier": 2,
+            "task": "img_blobs4"
+          },
+          {
+            "compatibility_key": "7be663c5c1bb1319f2b9de59c29f91a8b7c32e591474926bfa5a8d0e53458f5f",
+            "qualification_tier": 2,
+            "task": "img_intensity2"
+          },
+          {
+            "compatibility_key": "167f2f0ed3766516f60618269e61f5625f3f6187b85cec65b50cd15a7e51a605",
+            "qualification_tier": 2,
+            "task": "grid100"
+          },
+          {
+            "compatibility_key": "fd73f4df4fd4da44f7e6f7912e26ca82417d17e3842b7b4ae08a2824f153e5cb",
+            "qualification_tier": 2,
+            "task": "rotated100"
+          },
+          {
+            "compatibility_key": "f55821095b0484d51bbc403e0a330b732bf0710e31faab97bd9a84bb40fe9432",
+            "qualification_tier": 2,
+            "task": "staggered100"
+          }
+        ],
+        "required_total": 26,
+        "selected_candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+        "selected_configuration_id": "08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "3bf51eab2a80eef3645ca5c7df9fa0583cc7053332bc94b19ec874e2e19f98a0",
+        "tuning_through_tier": 2
+      },
+      "settings": {
+        "d_lr_mult": 2.0,
+        "prior_lr_mult": 4.0,
+        "reg_coeff": 0.5
+      },
+      "source_digest": "3bf51eab2a80eef3645ca5c7df9fa0583cc7053332bc94b19ec874e2e19f98a0",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "tier 1: ring16_acquisition: FAIL recomputed complete live curve and terminal suffix; five_word_joint_acquisition: BLOCKED five_word_joint_acquisition: five_word_joint_acquisition: evaluator source changed; revise the task definition: benchmarks/toy_audit/reproducibility.py; five_word_joint_acquisition: word source binding differs: benchmarks/toy_audit/reproducibility.py",
+      "submission_status": "blocked",
+      "tasks": [
+        {
+          "attempt_id": "f94fc095b22c4284a8b879a7ec38b537",
+          "blockers": [],
+          "budget_seconds": 120,
+          "compatibility_key": "e9613ed0b88a8e423850d4576bfaeb12220f244c31ce3b32f1de040a8fcf1188",
+          "cost": {
+            "adapter_loop_seconds": 9.51379406498745,
+            "adapter_seconds": 9.803306809044443,
+            "charged_task": "gaussian1d_smoke",
+            "completed_steps": 1000,
+            "device": "0",
+            "execution_seconds": 15.734225385007448,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1000,
+              "generator": 1000,
+              "prior": 1000
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 9.05637897842098,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 25,
+                  "seconds": 0.7915809481637552
+                },
+                "sampling": {
+                  "calls": 50,
+                  "seconds": 0.10205995966680348
+                },
+                "training_updates": {
+                  "calls": 1000,
+                  "seconds": 8.162738070590422
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 11.059132230002433,
+            "wall_seconds": 15.734225385007448
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {},
+            "semantics": "no first full-quality acquisition timestamp in this evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "gaussian1d_smoke",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "cdf_ks": 0.035626066054682326,
+            "finite_fraction": 1.0,
+            "mean": 1.9788412882189732,
+            "mean_error_sigma": 0.04231742356205359,
+            "sample_count": 4096,
+            "std": 0.4630675712641357,
+            "std_ratio": 0.9261351425282714,
+            "step": 1000
+          },
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "any scheduled full pass with independent same-state confirmation",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "attempt_id": "a365bd854d864bd58e5a0d17d5d92a41",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "073e7993569636cc4a7ec74816824ca35af2fb28cf03e2fc1c9fee9eb5396317",
+          "cost": {
+            "adapter_seconds": 1.042405528947711,
+            "charged_task": "two_pole",
+            "device": "1",
+            "execution_seconds": 6.891045324970037,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.3546529290033504,
+            "wall_seconds": 6.891045324970037
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 67,
+              "first_pass_step": 54,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 9,
+              "passing_suffix": 9,
+              "stable_from_seconds": null,
+              "stable_from_step": 54
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.7659024596214294,
+            "mean_abs": 0.43834739923477173
+          },
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "attempt_id": "f273d7465fdf4bc9877278d0e6ee2344",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "e5aebae5fe544a9283571a0eb2e18028bf893567d9ae94c9dc19a3ae3c432159",
+          "cost": {
+            "adapter_seconds": 1.6499373430851847,
+            "charged_task": "unused_token_hold",
+            "device": "0",
+            "execution_seconds": 7.200870475033298,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.9013154060812667,
+            "wall_seconds": 7.200870475033298
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 125,
+              "first_pass_step": 92,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 14,
+              "passing_suffix": 14,
+              "stable_from_seconds": null,
+              "stable_from_step": 92
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.9445965323092587,
+            "unused_hold": 0.9903269773349166
+          },
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "attempt_id": "b68d4b3a11c54fd88420f50324962022",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "29c9a8a7e7d371f5d2ed36037227ca89f9e668c20d3e23b28f1c860622bafbbc",
+          "cost": {
+            "adapter_seconds": 2.600149609032087,
+            "charged_task": "ae_gan_hold",
+            "device": "1",
+            "execution_seconds": 8.189001205959357,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.8648994349641725,
+            "wall_seconds": 8.189001205959357
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 73,
+              "first_pass_step": 32,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 22,
+              "passing_suffix": 22,
+              "stable_from_seconds": null,
+              "stable_from_step": 32
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.006184488534927368,
+            "recon_mse": 0.0035452579613775015
+          },
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "attempt_id": "c72e7ab509e842a593a3589619048f4f",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "a70ee7fd5b5f42934544434f30a77646c2e70c17c6ef07234aac9aa79ee4c950",
+          "cost": {
+            "adapter_loop_seconds": 15.923368235933594,
+            "adapter_seconds": 16.19667949900031,
+            "charged_task": "ring16_acquisition",
+            "completed_steps": 1600,
+            "device": "0",
+            "execution_seconds": 21.86829839798156,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1600,
+              "generator": 1600,
+              "prior": 1600
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 15.15804431005381,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 96,
+                  "seconds": 1.8891284288838506
+                },
+                "sampling": {
+                  "calls": 96,
+                  "seconds": 0.027637912891805172
+                },
+                "training_updates": {
+                  "calls": 1600,
+                  "seconds": 13.241277968278155
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 17.45850160601549,
+            "wall_seconds": 21.86829839798156
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 96,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "component_core_covariance_error": 0.9990828298032284,
+            "component_core_min_eigen_ratio": 1.0240178108215332,
+            "component_covariance_error": 3.337884247303009,
+            "component_min_eigen_ratio": 1.0640733242034912,
+            "covariance_error": 0.0422956719994545,
+            "hq": 0.85595703125,
+            "mass_tv": 0.083740234375,
+            "max_component_spill": 0.248927041888237,
+            "mean_error": 0.026698706671595573,
+            "min_hq_mass_ratio": 0.546875,
+            "min_mass_ratio": 0.6171875,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.02841597124835959,
+            "target_scale": 3.0029242038726807
+          },
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [
+            "five_word_joint_acquisition: evaluator source changed; revise the task definition: benchmarks/toy_audit/reproducibility.py",
+            "word source binding differs: benchmarks/toy_audit/reproducibility.py"
+          ],
+          "budget_seconds": 900,
+          "compatibility_key": "d5b513fc00fba0dbf5ffd57f672ef74e25a2104d02957009bdf4dc1ca7e13e8f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "execution_group_blockers": [
+            "five_word_joint_acquisition: five_word_joint_acquisition: evaluator source changed; revise the task definition: benchmarks/toy_audit/reproducibility.py",
+            "five_word_joint_acquisition: word source binding differs: benchmarks/toy_audit/reproducibility.py"
+          ],
+          "gate_status": "BLOCKED",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "attempt_id": "0791e058d184493fa840b21f36b3e904",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "2d2b0c4a751d66fc9630eaa4b44ca3a6dda860c2b1fbc13664898fe202288118",
+          "cost": {
+            "adapter_reported_inclusive_seconds": 1.1657727929996327,
+            "adapter_seconds": 1.1710196760250255,
+            "charged_task": "clockfree_audit_measurement_v1",
+            "completed_updates": 24,
+            "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+            "device": "1",
+            "execution_seconds": 7.206009925925173,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.4569657229585573,
+            "wall_seconds": 7.206009925925173
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {},
+            "semantics": "no first full-quality acquisition timestamp in this evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "diagnostic",
+          "metrics": {},
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "step_label changed the update or common-prefix state",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 600,
+          "compatibility_key": "0e816940a6ab1198e47223020ef97eefc8d3957b3d08c31ee5970a3c1c49d146",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "gaussian1d_stability",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_stability"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "c4546f0b93453b9c71796de19e25fc914c02a074bb4bcd2f52a57baa710797d4",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f22b057396acc9ba4edf82ce6f8fea44a715d584fb305ca96b1de7593b3fa7f6",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "3e7aabae29a942d2cda4ce6f6ad54e86c7cecd1dd4859d61e746d55608252a10",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "bf612fe3e41b59010b71660f9bd3c75596788c3bc1a09cbe4aa11199eb2a008f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "afa31d9a509d166f3257965b68aec7ab06dc8faaa43aae2c55dabb5ce2ae6f2d",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "1854a797a733fabb86f3bcff3051a6d05d043c50ed6eeb436558ff4021f6dd8c",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "fe586153b7bb1f56b5f1af100d1ebdbbc506afffdecf1dd110e625cb39c361ad",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "d46e83e9c239e03d71aa2fcbac2127fd291d2bb56162539789b88f7f0c31fc81",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "3d593aa81d0e89c684f9d8267858ad3ff419eb0424a8bfe2d6b13a22bad107f6",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "89bb2a8eccdf522326708a43b93bb80e08308a64f0071dc4975a2e0e4880c34e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f5327965850988b2edf676f957ee3551132890dd1819d5ad1d2c0f89f30cf4c8",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "23d172b411cb6cf74c78fc221ba06c75d723bf078201b8270afa447181413408",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "70a35d2d04968b2a06eb44d363367768253dad6b94339f601be37d4a1f32acf2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "a8e546bfedb968314c0bb78e5b1b18b2ea284101da68eefbcc094ce9448c7583",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "01cbe69965edb42982c7cb07853ebf0f345c555e496f0a925069395f37c10f35",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "7be663c5c1bb1319f2b9de59c29f91a8b7c32e591474926bfa5a8d0e53458f5f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "167f2f0ed3766516f60618269e61f5625f3f6187b85cec65b50cd15a7e51a605",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "fd73f4df4fd4da44f7e6f7912e26ca82417d17e3842b7b4ae08a2824f153e5cb",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "f55821095b0484d51bbc403e0a330b732bf0710e31faab97bd9a84bb40fe9432",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 19,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "7639b40635d711e2fb71de48a53cb876448c8a5b4d5559fd0a46639dd06926bb",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "7639b40635d711e2fb71de48a53cb876448c8a5b4d5559fd0a46639dd06926bb",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "6db7d1147ee00903cf47b16dbfa5915930903505d522e9a09270cacd2dd1f734",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "loss": "relativistic",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": "b_cap",
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": true,
+          "critic_guard": true,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "direct_particle_moments": [
+            false,
+            true
+          ],
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": true,
+          "network_horizon_cap": true,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": true,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": true,
+          "training_output_noise": true,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "bcap",
+      "unreused_worst_case_seconds": 42720
+    }
+  ],
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

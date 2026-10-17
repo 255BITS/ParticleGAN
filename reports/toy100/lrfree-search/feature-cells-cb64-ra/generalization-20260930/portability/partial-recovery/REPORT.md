@@ -1,0 +1,11 @@
+RA15 partial recovery is implemented in a fresh package cloned from RA14. The original package, validation lanes, diagnostic report and repository are unchanged.
+
+The feature facade enables recovery only after its existing typed optimizer-surprise counter has recorded a fire. At the preaction freeze, missing EMA groups receive zero moment direction and zero original-mass weight. The remaining weights are not renormalized. Every odd observation remains in the bounded witness with the original alpha, clipping radius and EB penalties. Missing support stays in the existing independently certified birth/death path.
+
+The same preaction flag reaches the current mean phase. Initially inactive groups stay inactive after prefix births. If an initially active group loses all current EMA rows, the entire phase is vetoed. Proposal and actual-preview masks reject inactive groups before count division. No new serialized active mask, checkpoint field, schema, recipe option, evaluator selection, serving threshold, budget or learning-rate rule was introduced.
+
+CPU verification passed 75 contracts: 58 existing source contracts and 17 focused recovery cases. Tests used CUDA_VISIBLE_DEVICES=0 and confirmed cuda_initialized False. The focused cases cover the retained default missing-group veto, real-checkpoint partial witness and unchanged bound, fully supported old/new parity, typed fire history, inactive proposals and previews, active-group loss, inactive prefix births, and exact no-fire feature training/RNG/checkpoint parity through two reactions.
+
+The first focused run had 16 passes and a harness-only comparison failure in measured eval_seconds. Its log remains retained. The corrected parity contract uses an identical diagnostic perf_counter in each implementation, so all checkpoint metadata, numerical tensors and RNG states are compared exactly without treating independent runtime measurements as training-state differences. Candidate source did not change during this harness correction.
+
+The original moving quality verdict remains FAIL. This CPU closure authorizes the controlled GPU comparison to assess recovery; it does not establish improved quality. SOURCE-BRIDGE.json and SOURCE-FREEZE.json contain exact source/config/test hashes and candidate digest, and candidate.patch contains the reviewable four-module diff.

@@ -1,0 +1,23 @@
+{
+  "base_candidate": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+  "campaign": {
+    "budget_seconds": 55440,
+    "candidate_budget_seconds": 5040,
+    "description": "One fixed recipe per family; complete Tier 1 only. One documented infrastructure-repair retry per task at most; no scientific retry or tuning.",
+    "id": "tier1-completion-v1"
+  },
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.0085
+    ]
+  },
+  "id": "tier1-completion-v1-r1r2",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "Admission registration for one existing selected configuration; no tuning, new card, recipe change or independent confirmation.",
+  "schema_version": 1,
+  "trainer_family": "r1r2",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

@@ -1,0 +1,35 @@
+{
+  "archive_bytes": 3727293,
+  "archive_file_count": 24,
+  "archive_inventory_sha256": "645059b5fe2e3a69e78e46b12fb2cc9ba46831ea87324d98ca972e86bb22bc97",
+  "artifact_root": "/tmp/particlegan-cpu-sampling-probe-compatible-20261001",
+  "checkpoint_exact_equal": true,
+  "cpu_capability": "AVX2",
+  "cpu_model": "AMD Ryzen 9 5900X",
+  "diagnostic_only": true,
+  "differences": [],
+  "durable_artifact_root": "/ml2/hypergan/gan-attempts/develop-gates-20261001/cpu-sampling-probe-compatible",
+  "environment": {
+    "ATEN_CPU_CAPABILITY": "avx2",
+    "DNNL_MAX_CPU_ISA": "AVX2",
+    "MKL_CBWR": "COMPATIBLE",
+    "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "ONEDNN_MAX_CPU_ISA": "AVX2"
+  },
+  "new_training_updates": 80,
+  "python": "3.11.15 (main, Mar 24 2026, 22:50:29) [Clang 22.1.1 ]",
+  "runtime_profile": "portable-cpu-blas-v2",
+  "sampling_laws": [
+    "clean",
+    "training_noise"
+  ],
+  "schedule_horizon": 7000,
+  "scientific_qualification": false,
+  "source_sha256": "a7b0a258215a8e110a2d54987673066dbeae48e7698bcdf8ea6e5d5475cada91",
+  "torch": "2.13.0+cpu",
+  "torch_build_sha256": "5f31e143bbf0b6328fd858350d03ae70da7fa5fae71ac9415dd0a96680624668",
+  "unchanged_seed": 1234,
+  "updates_per_case": 40
+}

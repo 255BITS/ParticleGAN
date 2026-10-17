@@ -1,0 +1,3361 @@
+{
+  "base_candidate": "bcap-pure-least-squares-joint-v2",
+  "base_declaration": {
+    "api_changes": [
+      "GANLoss.joint_g_loss supplies both generator and encoder adversarial streams on joint hosts"
+    ],
+    "api_version": "forge-api-v1",
+    "changed_factors": [
+      "Reusable pure BCAP recipe with constant Adam rates and moments",
+      "Adversarial loss: least_squares",
+      "Explicit two-stream generator/encoder objective on joint hosts"
+    ],
+    "claim_contract": {
+      "sampling_law": "task_declared",
+      "schedule": "scheduled",
+      "scoring_weights": "live"
+    },
+    "execution_path": "public_trainer",
+    "guide": "EXPERIMENTATION.md",
+    "id": "bcap-pure-least-squares-joint-v2",
+    "mechanism_class": "structural",
+    "mechanism_rationale": "Native Adam and fixed real/fake BCAP only. Task-owned auxiliary objectives and conditions remain in tasks. The relativistic update is unchanged; unpaired joint objectives reverse both critic streams.",
+    "parent": "bcap-pure-least-squares-v1",
+    "prior_art": [
+      "bcap-pure-least-squares-v1"
+    ],
+    "recipe_overrides": {
+      "loss": "least_squares"
+    },
+    "recipe_preset": "bcap",
+    "requires_capabilities": [
+      "learned_locations",
+      "named_rng"
+    ],
+    "schema_version": 3
+  },
+  "blocked_count": 0,
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 20160,
+    "candidate_budget_seconds": 2520,
+    "id": "pure-bcap-joint-loss-repair-v2"
+  },
+  "campaign_accounting": {
+    "definition": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 20160,
+      "candidate_budget_seconds": 2520,
+      "id": "pure-bcap-joint-loss-repair-v2"
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 1510.7568104849197
+  },
+  "cost": {
+    "evidence_wall_seconds": 382.5537607478909,
+    "new_paid_wall_seconds": 1510.7568104849197,
+    "observed_attempts": 14,
+    "wall_seconds": 382.5537607478909
+  },
+  "declared_worst_case_seconds": 5040,
+  "default_adoption": false,
+  "execution_backend": "cuda",
+  "holdout_tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "mode_hold",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "img_stripes2",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "grid100",
+    "rotated100",
+    "staggered100",
+    "ring_hold",
+    "ring_extension"
+  ],
+  "independent_confirmation": "not_performed",
+  "input_digest": "31355479bf845d5a6b2a7a1eb4acc6bcf9df913e8eef729bb1fc51fa98356f0e",
+  "logs": "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/forge/pure-bcap-joint-loss-repair-v2/queue/events.jsonl",
+  "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+  "progression": {
+    "comparison_complete": true,
+    "configured_through_tier": 1,
+    "default_adoption": false,
+    "full_view_qualified_candidate_ids": [],
+    "full_view_winner_candidate_id": null,
+    "outcome": "best_observed",
+    "policy": "every declared configuration advances independently through ordinary prerequisites to the tier cap",
+    "smoke_survivor_candidate_ids": []
+  },
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_scope": "declared tuning tasks only; provisional Forge gates",
+  "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/forge/pure-bcap-joint-loss-repair-v2/queue",
+  "runtime_cohort": {
+    "compute_profiles": {
+      "cpu": {
+        "backend": "cpu",
+        "deterministic": true,
+        "machine": "x86_64",
+        "model": "AMD Ryzen 9 5900X 12-Core Processor",
+        "tf32": false,
+        "threads": 1
+      },
+      "cuda": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "execution_backend": "cuda",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "all_trials_terminal": true,
+    "calibration_status": "provisional",
+    "default_adoption": false,
+    "independent_confirmation": "not_performed",
+    "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+    "qualified": false,
+    "required_pass_count": 2,
+    "required_passes_by_tier": [
+      2
+    ],
+    "required_task_bindings": [
+      {
+        "compatibility_key": "2e6840600dbc66db2809ac8080441166ac8db7510d0628f191e65affd6809c82",
+        "qualification_tier": 1,
+        "task": "gaussian1d_acquisition"
+      },
+      {
+        "compatibility_key": "b52a36bca747041e5c5e523824c6a3ca6664ac454db45cbbc0afff05a68cffbb",
+        "qualification_tier": 1,
+        "task": "two_pole"
+      },
+      {
+        "compatibility_key": "bdbf0507b0ac94fcd78a126770c6d5c8dca86f44a00ddaab02adb4a0b3294fde",
+        "qualification_tier": 1,
+        "task": "unused_token_hold"
+      },
+      {
+        "compatibility_key": "683d2d2f4da79f8b83452a38dbb45047c50feb595ecdc41df96dc63975467ebc",
+        "qualification_tier": 1,
+        "task": "ae_gan_hold"
+      },
+      {
+        "compatibility_key": "d483f3b8faf80fc1b2b31c2d7a47880e55bf1cd04a63528fd3407258b5dbee77",
+        "qualification_tier": 1,
+        "task": "ring16_acquisition"
+      },
+      {
+        "compatibility_key": "a5418c2c056347d58e4e6233931e9777b1a569d4dd11f74948f1b8eee57e02ac",
+        "qualification_tier": 1,
+        "task": "five_word_joint_acquisition"
+      }
+    ],
+    "required_total": 6,
+    "selected_candidate_id": "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+    "selected_configuration_id": "023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+    "selection_complete": true,
+    "selection_kind": "best_observed",
+    "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+    "tuning_through_tier": 1
+  },
+  "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+  "source_digests": [
+    "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72"
+  ],
+  "spec": {
+    "base_candidate": "bcap-pure-least-squares-joint-v2",
+    "campaign": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 20160,
+      "candidate_budget_seconds": 2520,
+      "id": "pure-bcap-joint-loss-repair-v2"
+    },
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "grid": {
+      "lr": [
+        0.0010625,
+        0.00425
+      ]
+    },
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "Pure BCAP with least_squares and a complete joint generator/encoder objective may acquire the unchanged Tier 1 distributions at one of two constant global rates.",
+    "id": "pure-bcap-least-squares-joint-rates-v2",
+    "protocol": "screening",
+    "rationale": "Correct the omitted encoder term discovered in v1. Evaluate eight complete source-bound recipes, including all seven Tier 1 peers, without grafting prior scalar measurements into the corrected source. Preserve all original failures and paid cancellations. No loss grid axis, seed trial, criteria change, automatic continuation or default adoption.",
+    "schema_version": 2,
+    "trainer_family": "bcap-pure",
+    "tuning_through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "spec_hash": "bd1d0ed6444fd55e1d7c7ee92275a7ce4c9b91eb7ba8a9c2cddf51e4a5826df8",
+  "speed_selection": {
+    "reason": "No frozen comparable first-acquisition timing contract is implemented for this search. Not all required adapters record per-observation seconds; original terminal-suffix or coverage-only times cannot supply full-quality first-acquisition speed.",
+    "selected_candidate_id": null,
+    "status": "UNAVAILABLE",
+    "wall_time_ranking": false
+  },
+  "stage": "enqueued",
+  "study_id": "pure-bcap-least-squares-joint-rates-v2",
+  "submitted_count": 2,
+  "technique_signature": {
+    "digest": "a28a78ed84798b17de31025f187f65ecaab9e5f8c4af7030433e5f31ac3e25d3",
+    "fixed_recipe_fields": {
+      "birth_death_backend": "knn",
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "continuous_policy": null,
+      "critic_formulation": "bcap",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "direct_particle_gain": false,
+      "distance_reduction": "sum",
+      "encoder_mode": "none",
+      "loss": "least_squares",
+      "lr_control": "mobility",
+      "model": "gan",
+      "num_classes": null,
+      "optimizer_family": "adam",
+      "output_noise_mode": "fixed",
+      "particle_birth_death": false,
+      "reg_arm": "b_cap",
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "table_release_rule": "any",
+      "ucd_target": "class"
+    },
+    "mechanisms": {
+      "amsgrad": false,
+      "averaged_serving": false,
+      "beta2_schedule": {
+        "declared": false,
+        "network_changing": false,
+        "prior_changing": false
+      },
+      "critic_anchor": false,
+      "critic_guard": false,
+      "critic_penalty": {
+        "initial": true,
+        "terminal": true
+      },
+      "direct_particle_moments": null,
+      "gradient_cap": true,
+      "k3p_penalty_lr_floor": null,
+      "latent_damping": false,
+      "network_horizon_cap": false,
+      "network_moments": [
+        false,
+        true
+      ],
+      "network_terminal_updates": true,
+      "output_noise_warmup": false,
+      "penalty_schedule": {
+        "changing": false,
+        "declared": false
+      },
+      "prior_moments": [
+        false,
+        true
+      ],
+      "prior_regularization": false,
+      "prior_terminal_updates": true,
+      "reconstruction_objective": null,
+      "scheduled_learning_rates": true,
+      "terminal_second_moment": true,
+      "training_input_noise": false,
+      "training_output_noise": false,
+      "ucd_objective": null
+    },
+    "schema_version": 1
+  },
+  "trainer_family": "bcap-pure",
+  "trials": [
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "02cf124ded584f7f94a5094ed5aec5a3",
+          "gate_statuses": {
+            "unused_token_hold": "PASS"
+          },
+          "result_hash": "03993a3639f77258267be66f095cd3d03b43532199f20b16d558245a22c5dcef",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.781040003988892
+        },
+        {
+          "attempt_id": "101c7abe578349a3bbccb231e7aea60d",
+          "gate_statuses": {
+            "gaussian1d_acquisition": "FAIL"
+          },
+          "result_hash": "8db09d1c3834f20ff4c8fde14310502b373b52e10118fce88d145b58713a0c63",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 14.262924873037264
+        },
+        {
+          "attempt_id": "3c55299eefee4d3eb6e43be5ab62ee91",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "c039df19dc24f3e81220b37648610f2c7e6096cf3e4be81115492dbe71c8ec95",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.333138759015128
+        },
+        {
+          "attempt_id": "414509c0751544cb98c91ec50e3a81af",
+          "gate_statuses": {
+            "clockfree_audit_measurement_v1": "PASS"
+          },
+          "result_hash": "8b14c9dea20d8a6ddab18b72c12e05c7bb1ce57ec8bac290b5dfefc5c8918ebd",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.251737982966006
+        },
+        {
+          "attempt_id": "b8856e4949284f59896ce514797de147",
+          "gate_statuses": {
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "result_hash": "d0fb577fc56babe44edce85ee6e36e488e7af1ca910fb77f130ddc1c6d5f1568",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 138.78489414195064
+        },
+        {
+          "attempt_id": "c23d72db478147499bb46ac8a0f4c0aa",
+          "gate_statuses": {
+            "ring16_acquisition": "FAIL"
+          },
+          "result_hash": "751f5e59b03988751bd6d17b00624acc1a372df46377d589a620322bfcf66ed8",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 10.282870586030185
+        },
+        {
+          "attempt_id": "cabce795ba5c466b82986c26d15fa3d7",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "629ffeccd8a748becf90df882f9764d20ced9cc0edae0720a7fe0486151fc40e",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.030452565988526
+        }
+      ],
+      "attempt_ids": [
+        "02cf124ded584f7f94a5094ed5aec5a3",
+        "101c7abe578349a3bbccb231e7aea60d",
+        "3c55299eefee4d3eb6e43be5ab62ee91",
+        "414509c0751544cb98c91ec50e3a81af",
+        "b8856e4949284f59896ce514797de147",
+        "c23d72db478147499bb46ac8a0f4c0aa",
+        "cabce795ba5c466b82986c26d15fa3d7"
+      ],
+      "candidate_id": "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+      "candidate_revision": "cd6c6f39041d36d6434b28d0c6c4d4b13f7dac3ca9b4de2d89c824ef298ad90c",
+      "configuration_id": "023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+      "cost": {
+        "evidence_wall_seconds": 190.72705891297664,
+        "new_paid_wall_seconds": 190.72705891297664,
+        "wall_seconds": 190.72705891297664
+      },
+      "counts": {
+        "FAIL": 4,
+        "PASS": 3,
+        "UNKNOWN": 21
+      },
+      "declaration": {
+        "api_changes": [
+          "GANLoss.joint_g_loss supplies both generator and encoder adversarial streams on joint hosts"
+        ],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.lr=0.00425"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+        "execution_path": "public_trainer",
+        "guide": "EXPERIMENTATION.md",
+        "id": "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "Native Adam and fixed real/fake BCAP only. Task-owned auxiliary objectives and conditions remain in tasks. The relativistic update is unchanged; unpaired joint objectives reverse both critic streams.",
+        "parent": "bcap-pure-least-squares-joint-v2",
+        "prior_art": [
+          "bcap-pure-least-squares-v1"
+        ],
+        "recipe_overrides": {
+          "loss": "least_squares",
+          "lr": 0.00425
+        },
+        "recipe_preset": "bcap",
+        "requires_capabilities": [
+          "learned_locations",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 0.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "ema_decay": 0.0,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.0,
+          "loss": "least_squares",
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 1.0,
+          "model": "gan",
+          "name": "bcap",
+          "network_lr_floor": 1.0,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 0.0,
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 3,
+        "trainer_family": "bcap-pure"
+      },
+      "declared_worst_case_seconds": 2520,
+      "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 2,
+        "required_statuses": {
+          "FAIL": 4,
+          "PASS": 2,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 2,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 4,
+              "PASS": 2
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 2,
+        "tuning_required_total": 6
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "02cf124ded584f7f94a5094ed5aec5a3",
+          "result_hash": "03993a3639f77258267be66f095cd3d03b43532199f20b16d558245a22c5dcef",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "101c7abe578349a3bbccb231e7aea60d",
+          "result_hash": "8db09d1c3834f20ff4c8fde14310502b373b52e10118fce88d145b58713a0c63",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3c55299eefee4d3eb6e43be5ab62ee91",
+          "result_hash": "c039df19dc24f3e81220b37648610f2c7e6096cf3e4be81115492dbe71c8ec95",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "414509c0751544cb98c91ec50e3a81af",
+          "result_hash": "8b14c9dea20d8a6ddab18b72c12e05c7bb1ce57ec8bac290b5dfefc5c8918ebd",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "b8856e4949284f59896ce514797de147",
+          "result_hash": "d0fb577fc56babe44edce85ee6e36e488e7af1ca910fb77f130ddc1c6d5f1568",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "c23d72db478147499bb46ac8a0f4c0aa",
+          "result_hash": "751f5e59b03988751bd6d17b00624acc1a372df46377d589a620322bfcf66ed8",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "cabce795ba5c466b82986c26d15fa3d7",
+          "result_hash": "629ffeccd8a748becf90df882f9764d20ced9cc0edae0720a7fe0486151fc40e",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "loss": "least_squares",
+        "lr": 0.00425
+      },
+      "recipe_preset": "bcap",
+      "request_id": "a34032d118d6cfa4fd728161",
+      "request_path": "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/forge/pure-bcap-joint-loss-repair-v2/queue/queue/requests/a34032d118d6cfa4fd728161.json",
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "least_squares",
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "a62b859dfd7eb8e0e5f4fc16524c79305328696c136561018389a9d5468fb135",
+      "selected_attempt_ids": [
+        "02cf124ded584f7f94a5094ed5aec5a3",
+        "101c7abe578349a3bbccb231e7aea60d",
+        "3c55299eefee4d3eb6e43be5ab62ee91",
+        "414509c0751544cb98c91ec50e3a81af",
+        "b8856e4949284f59896ce514797de147",
+        "c23d72db478147499bb46ac8a0f4c0aa",
+        "cabce795ba5c466b82986c26d15fa3d7"
+      ],
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 2,
+        "required_passes_by_tier": [
+          2
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "2e6840600dbc66db2809ac8080441166ac8db7510d0628f191e65affd6809c82",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "b52a36bca747041e5c5e523824c6a3ca6664ac454db45cbbc0afff05a68cffbb",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "bdbf0507b0ac94fcd78a126770c6d5c8dca86f44a00ddaab02adb4a0b3294fde",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "683d2d2f4da79f8b83452a38dbb45047c50feb595ecdc41df96dc63975467ebc",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "d483f3b8faf80fc1b2b31c2d7a47880e55bf1cd04a63528fd3407258b5dbee77",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "a5418c2c056347d58e4e6233931e9777b1a569d4dd11f74948f1b8eee57e02ac",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+        "selected_configuration_id": "023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+        "tuning_through_tier": 1
+      },
+      "settings": {
+        "lr": 0.00425
+      },
+      "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "tier 1: gaussian1d_acquisition: FAIL recomputed complete live curve and terminal suffix; two_pole: FAIL recomputed complete live curve and terminal suffix; ring16_acquisition: FAIL recomputed complete live curve and terminal suffix; five_word_joint_acquisition: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "tasks": [
+        {
+          "attempt_id": "101c7abe578349a3bbccb231e7aea60d",
+          "blockers": [],
+          "budget_seconds": 120,
+          "compatibility_key": "2e6840600dbc66db2809ac8080441166ac8db7510d0628f191e65affd6809c82",
+          "cost": {
+            "adapter_loop_seconds": 7.655021406011656,
+            "adapter_seconds": 7.991650423035026,
+            "charged_task": "gaussian1d_acquisition",
+            "completed_steps": 1000,
+            "device": "0",
+            "execution_seconds": 14.262924873037264,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1000,
+              "generator": 1000,
+              "prior": 1000
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 7.2826635165838525,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.007728169090114534
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007483583991415799
+                },
+                "training_updates": {
+                  "calls": 1000,
+                  "seconds": 7.267451763502322
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 10.340733194025233,
+            "wall_seconds": 14.262924873037264
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 250,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 4,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "gaussian1d_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "cdf_ks": 0.10545790042022851,
+            "finite_fraction": 1.0,
+            "mean": 1.9367782450281084,
+            "mean_error_sigma": 0.12644350994378328,
+            "sample_count": 4096,
+            "std": 0.4509909648577894,
+            "std_ratio": 0.9019819297155788,
+            "step": 1000
+          },
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_acquisition"
+        },
+        {
+          "attempt_id": "3c55299eefee4d3eb6e43be5ab62ee91",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "b52a36bca747041e5c5e523824c6a3ca6664ac454db45cbbc0afff05a68cffbb",
+          "cost": {
+            "adapter_seconds": 0.24990602501202375,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.333138759015128,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.574437022092752,
+            "wall_seconds": 6.333138759015128
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 70,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 4,
+              "passing_suffix": 4,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.4288318157196045,
+            "mean_abs": 0.41393330693244934
+          },
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "attempt_id": "02cf124ded584f7f94a5094ed5aec5a3",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "bdbf0507b0ac94fcd78a126770c6d5c8dca86f44a00ddaab02adb4a0b3294fde",
+          "cost": {
+            "adapter_seconds": 0.5173574489308521,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.781040003988892,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.9039385080104694,
+            "wall_seconds": 6.781040003988892
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 192,
+              "first_pass_step": 84,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 11,
+              "passing_suffix": 6,
+              "stable_from_seconds": null,
+              "stable_from_step": 159
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.8879541959882147,
+            "unused_hold": 0.9885899014770985
+          },
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "attempt_id": "cabce795ba5c466b82986c26d15fa3d7",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "683d2d2f4da79f8b83452a38dbb45047c50feb595ecdc41df96dc63975467ebc",
+          "cost": {
+            "adapter_seconds": 1.0616910390090197,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 7.030452565988526,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.3877513960469514,
+            "wall_seconds": 7.030452565988526
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 105,
+              "first_pass_step": 21,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 22,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 63
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.010841377079486847,
+            "recon_mse": 0.006856846157461405
+          },
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "attempt_id": "c23d72db478147499bb46ac8a0f4c0aa",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "d483f3b8faf80fc1b2b31c2d7a47880e55bf1cd04a63528fd3407258b5dbee77",
+          "cost": {
+            "adapter_loop_seconds": 3.903291021939367,
+            "adapter_seconds": 4.197379617020488,
+            "charged_task": "ring16_acquisition",
+            "completed_steps": 400,
+            "device": "0",
+            "execution_seconds": 10.282870586030185,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 400,
+              "generator": 400,
+              "prior": 400
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 3.703587569645606,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.472590125631541
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007504099979996681
+                },
+                "training_updates": {
+                  "calls": 400,
+                  "seconds": 3.2234933440340683
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 6.566856334917247,
+            "wall_seconds": 10.282870586030185
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "component_core_covariance_error": 0.6178974714130163,
+            "component_core_min_eigen_ratio": 0.22418814897537231,
+            "component_covariance_error": 74.97995734214783,
+            "component_min_eigen_ratio": 0.6415042877197266,
+            "covariance_error": 0.22345027327537537,
+            "hq": 0.47021484375,
+            "mass_tv": 0.165771484375,
+            "max_component_spill": 0.9020270109176636,
+            "mean_error": 0.1641416698694229,
+            "min_hq_mass_ratio": 0.0546875,
+            "min_mass_ratio": 0.4609375,
+            "modes": 13,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.14673421223060223,
+            "target_scale": 3.0029242038726807
+          },
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "attempt_id": "b8856e4949284f59896ce514797de147",
+          "blockers": [],
+          "budget_seconds": 900,
+          "compatibility_key": "a5418c2c056347d58e4e6233931e9777b1a569d4dd11f74948f1b8eee57e02ac",
+          "cost": {
+            "adapter_loop_seconds": 132.36505074996967,
+            "adapter_seconds": 132.66633853607345,
+            "charged_task": "five_word_joint_acquisition",
+            "completed_steps": 20001,
+            "device": "0",
+            "execution_seconds": 138.78489414195064,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 20001,
+              "encoder": 20001,
+              "generator": 20001,
+              "prior": 20001
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 128.32543884869665,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.2905165138654411
+                },
+                "sampling": {
+                  "calls": 0,
+                  "seconds": 0
+                },
+                "training_updates": {
+                  "calls": 20001,
+                  "seconds": 128.0349223348312
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 135.02582476707175,
+            "wall_seconds": 138.78489414195064
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.0,
+            "mass_berry": 0.0,
+            "mass_grape": 0.0,
+            "mass_lemon": 0.0,
+            "mass_melon": 0.0,
+            "mass_tv": 1.0,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 0,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 0.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 27.631021115928547,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "attempt_id": "414509c0751544cb98c91ec50e3a81af",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "99365b4d1a99622285175b327614349ddfa8ad97e7cd1e1a7134c8fe73ecbdad",
+          "cost": {
+            "adapter_reported_inclusive_seconds": 1.0451276280218735,
+            "adapter_seconds": 1.070080490084365,
+            "charged_task": "clockfree_audit_measurement_v1",
+            "completed_updates": 24,
+            "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+            "device": "1",
+            "execution_seconds": 7.251737982966006,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.417103179031983,
+            "wall_seconds": 7.251737982966006
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {},
+            "semantics": "no first full-quality acquisition timestamp in this evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "diagnostic",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "6263f9a0a436bf53caf3798e2020851f8df53746e4a3d5ed80ac06aff761fdbd",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "19054ca2b5ebd8bad7e1a1b6ef9c8258a044d302b0540ad0f48a6a7355f8d1d2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b4519746c4cd26e8e0c6ba32d6755434255774fd8318182a841348d62f0e0f93",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "fa4d59bf8241e5ea4dec35dc748e0f7ed9862e093054548c2351f3a669caefd5",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "9424800a320863e24601215bad608fc52d7415e49f428247edec763d6f8a200e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "807312a80a2096c8967ab6a36ba8317c26f0c17c602efd032ee23748af7c0d03",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "72fa931b7569d1ed4bb8264e6f9846ca5b5bdd693f0f715fae0bcfc3b4d7b5b4",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "a2a0988504e833e875f2ab18739e9c3c947501fa1f283c34dee1753431a19b32",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "0930787daef8546fe2f9d220856c45353704f66c906366652e07a44a2f7b4524",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "0ed2531535bafb6364ce15e0b3b8f7f6720e8c8bb2becf273d8d070832aee101",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "13b9f044355f29ab2b5acd688214fc8d6644fc6781ebb560f24e406f97d80c08",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "aae0cdec625ed29b2792641ddfdf81054cf88ccc86dd57458c09743552f6df26",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "35f4212e4d670c1c275e71c0e8d557854a845db9cbad1702718962210f8cc6f5",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "7c2e50e06452180b677607eca910cf3b6532a6253136f7540fbb07623f7e79aa",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "78fc129cc10bcf2f5cc280ee462c7e8da66c2c3ee97b23b0d8bea5148b567558",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "c19376e74f51b40daf246cc209a4beb14bc7804d292afd9120bb826e9e8b7504",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "382b4a6f57fc402a0b98a2fed1f14e045029a769b061c89ca7e5f6ef399f691b",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "eea0c983aa4b3345371b3b21adcc4d53318aff689c524a483e91202f94619237",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "f671854447bc45e555fe7da2b7142e245582ddcefdd7e1b6758f0232793b2a07",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "f2ed83a5d69f365f408897d056e834f5e36110d9362eefc2df61857c0938961f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "f2ed83a5d69f365f408897d056e834f5e36110d9362eefc2df61857c0938961f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "a28a78ed84798b17de31025f187f65ecaab9e5f8c4af7030433e5f31ac3e25d3",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "loss": "least_squares",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": "b_cap",
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": false,
+          "critic_guard": false,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "direct_particle_moments": null,
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": false,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "bcap-pure",
+      "unreused_worst_case_seconds": 2520
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "08ff2ca10d174434af80cd8a9eb2a98c",
+          "gate_statuses": {
+            "ring16_acquisition": "FAIL"
+          },
+          "result_hash": "42b5faaea26367fd3e70b6f6f9c06c8c6cc483507f8ddce65349e2e4462f46ee",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 10.241583943017758
+        },
+        {
+          "attempt_id": "3177f946cf6741159f7a4bab90aa3d2f",
+          "gate_statuses": {
+            "gaussian1d_acquisition": "FAIL"
+          },
+          "result_hash": "9e0d9a7361fb06124cc456d1319a350701307ae9d6eb70e57816677ae6b99901",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 14.129697308060713
+        },
+        {
+          "attempt_id": "39da91aef56947a68ed8dbc4c1dbccca",
+          "gate_statuses": {
+            "unused_token_hold": "FAIL"
+          },
+          "result_hash": "80f2664f2a1f96ecacb08967a43783715a6894ab44316b8fb386d2d17bd63dd1",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.58842508494854
+        },
+        {
+          "attempt_id": "4e69d41c0eaf4161adffe0e00a7f9894",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "4f70215bc2c8aa1d99a0279c1298d0cfd74bbfc3c5d64835f29dc4de9c160c3d",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.044269857928157
+        },
+        {
+          "attempt_id": "755e19d50eb342399105645899ee21b9",
+          "gate_statuses": {
+            "clockfree_audit_measurement_v1": "PASS"
+          },
+          "result_hash": "d145d1ea5adcfff336101b303a35509388bcf8419904244dd4e24c575bd24f19",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.502166311023757
+        },
+        {
+          "attempt_id": "9f6d74ec154a44dc925594bf0b617442",
+          "gate_statuses": {
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "result_hash": "0b225686c497ae03c4235349ff0c7b92315145b55a847e25f164f86cccb8699e",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 139.97487702092621
+        },
+        {
+          "attempt_id": "9fe782adbf8e4dc6a8877452bc76d4d5",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "c793897620db8bad3cb33a6070121e7ad25706019186c387fc4d70656a0f61e6",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.345682309009135
+        }
+      ],
+      "attempt_ids": [
+        "08ff2ca10d174434af80cd8a9eb2a98c",
+        "3177f946cf6741159f7a4bab90aa3d2f",
+        "39da91aef56947a68ed8dbc4c1dbccca",
+        "4e69d41c0eaf4161adffe0e00a7f9894",
+        "755e19d50eb342399105645899ee21b9",
+        "9f6d74ec154a44dc925594bf0b617442",
+        "9fe782adbf8e4dc6a8877452bc76d4d5"
+      ],
+      "candidate_id": "bcap-pure--08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d",
+      "candidate_revision": "93380a81cd7e9af8d4e78e95c3fe3162928b8e147ad5f5cf4d71167ac7557848",
+      "configuration_id": "08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d",
+      "cost": {
+        "evidence_wall_seconds": 191.82670183491427,
+        "new_paid_wall_seconds": 191.82670183491427,
+        "wall_seconds": 191.82670183491427
+      },
+      "counts": {
+        "FAIL": 5,
+        "PASS": 2,
+        "UNKNOWN": 21
+      },
+      "declaration": {
+        "api_changes": [
+          "GANLoss.joint_g_loss supplies both generator and encoder adversarial streams on joint hosts"
+        ],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.lr=0.0010625"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d",
+        "execution_path": "public_trainer",
+        "guide": "EXPERIMENTATION.md",
+        "id": "bcap-pure--08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "Native Adam and fixed real/fake BCAP only. Task-owned auxiliary objectives and conditions remain in tasks. The relativistic update is unchanged; unpaired joint objectives reverse both critic streams.",
+        "parent": "bcap-pure-least-squares-joint-v2",
+        "prior_art": [
+          "bcap-pure-least-squares-v1"
+        ],
+        "recipe_overrides": {
+          "loss": "least_squares",
+          "lr": 0.0010625
+        },
+        "recipe_preset": "bcap",
+        "requires_capabilities": [
+          "learned_locations",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 0.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "ema_decay": 0.0,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.0,
+          "loss": "least_squares",
+          "lr": 0.0010625,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 1.0,
+          "model": "gan",
+          "name": "bcap",
+          "network_lr_floor": 1.0,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 0.0,
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 3,
+        "trainer_family": "bcap-pure"
+      },
+      "declared_worst_case_seconds": 2520,
+      "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 1,
+        "required_statuses": {
+          "FAIL": 5,
+          "PASS": 1,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 1,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 5,
+              "PASS": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 1,
+        "tuning_required_total": 6
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "08ff2ca10d174434af80cd8a9eb2a98c",
+          "result_hash": "42b5faaea26367fd3e70b6f6f9c06c8c6cc483507f8ddce65349e2e4462f46ee",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3177f946cf6741159f7a4bab90aa3d2f",
+          "result_hash": "9e0d9a7361fb06124cc456d1319a350701307ae9d6eb70e57816677ae6b99901",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "39da91aef56947a68ed8dbc4c1dbccca",
+          "result_hash": "80f2664f2a1f96ecacb08967a43783715a6894ab44316b8fb386d2d17bd63dd1",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "4e69d41c0eaf4161adffe0e00a7f9894",
+          "result_hash": "4f70215bc2c8aa1d99a0279c1298d0cfd74bbfc3c5d64835f29dc4de9c160c3d",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "755e19d50eb342399105645899ee21b9",
+          "result_hash": "d145d1ea5adcfff336101b303a35509388bcf8419904244dd4e24c575bd24f19",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "9f6d74ec154a44dc925594bf0b617442",
+          "result_hash": "0b225686c497ae03c4235349ff0c7b92315145b55a847e25f164f86cccb8699e",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "9fe782adbf8e4dc6a8877452bc76d4d5",
+          "result_hash": "c793897620db8bad3cb33a6070121e7ad25706019186c387fc4d70656a0f61e6",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "loss": "least_squares",
+        "lr": 0.0010625
+      },
+      "recipe_preset": "bcap",
+      "request_id": "96065960155f14fbc201d504",
+      "request_path": "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/forge/pure-bcap-joint-loss-repair-v2/queue/queue/requests/96065960155f14fbc201d504.json",
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "least_squares",
+        "lr": 0.0010625,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "8b2522a1b07c1529b49e701982aa1730fa99f71b19ac8cb3d16672a8a9806e5d",
+      "selected_attempt_ids": [
+        "08ff2ca10d174434af80cd8a9eb2a98c",
+        "3177f946cf6741159f7a4bab90aa3d2f",
+        "39da91aef56947a68ed8dbc4c1dbccca",
+        "4e69d41c0eaf4161adffe0e00a7f9894",
+        "755e19d50eb342399105645899ee21b9",
+        "9f6d74ec154a44dc925594bf0b617442",
+        "9fe782adbf8e4dc6a8877452bc76d4d5"
+      ],
+      "settings": {
+        "lr": 0.0010625
+      },
+      "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "tier 1: gaussian1d_acquisition: FAIL recomputed complete live curve and terminal suffix; two_pole: FAIL recomputed complete live curve and terminal suffix; unused_token_hold: FAIL recomputed complete live curve and terminal suffix; ring16_acquisition: FAIL recomputed complete live curve and terminal suffix; five_word_joint_acquisition: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "tasks": [
+        {
+          "attempt_id": "3177f946cf6741159f7a4bab90aa3d2f",
+          "blockers": [],
+          "budget_seconds": 120,
+          "compatibility_key": "9a2ee4bec2126e793c916549f17feb18cd2b4494c8feb67d53c45229b50ac5c1",
+          "cost": {
+            "adapter_loop_seconds": 7.748630746034905,
+            "adapter_seconds": 8.068476988002658,
+            "charged_task": "gaussian1d_acquisition",
+            "completed_steps": 1000,
+            "device": "1",
+            "execution_seconds": 14.129697308060713,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1000,
+              "generator": 1000,
+              "prior": 1000
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 7.3876909740502015,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.007822065614163876
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.00740181072615087
+                },
+                "training_updates": {
+                  "calls": 1000,
+                  "seconds": 7.372467097709887
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 10.418782554916106,
+            "wall_seconds": 14.129697308060713
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 334,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 9,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "gaussian1d_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "cdf_ks": 0.08195781390232604,
+            "finite_fraction": 1.0,
+            "mean": 2.0710391165921465,
+            "mean_error_sigma": 0.1420782331842929,
+            "sample_count": 4096,
+            "std": 0.5193502447818714,
+            "std_ratio": 1.0387004895637428,
+            "step": 1000
+          },
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_acquisition"
+        },
+        {
+          "attempt_id": "9fe782adbf8e4dc6a8877452bc76d4d5",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "f8788bb12fdfbd9aad70836bf36a8cd1fbb2572f8c48e2928a502f39d859e6df",
+          "cost": {
+            "adapter_seconds": 0.2676250250078738,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.345682309009135,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.5409506930736825,
+            "wall_seconds": 6.345682309009135
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.07693804800510406,
+            "mean_abs": 0.06086349114775658
+          },
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "attempt_id": "39da91aef56947a68ed8dbc4c1dbccca",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "1d10936d234f8c16310953e37a2caa5c6a3bbe3b5e9ee187a7939a78f054793f",
+          "cost": {
+            "adapter_seconds": 0.5320359619800001,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.58842508494854,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.868261107010767,
+            "wall_seconds": 6.58842508494854
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.631046780281963,
+            "unused_hold": 0.9902858175337315
+          },
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "attempt_id": "4e69d41c0eaf4161adffe0e00a7f9894",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "ea362a8507f60b2ad2abe2c215aa815e0bae3c109bd25da7c23e585e963e2f59",
+          "cost": {
+            "adapter_seconds": 1.0920176230138168,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 7.044269857928157,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.4363284279825166,
+            "wall_seconds": 7.044269857928157
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 125,
+              "first_pass_step": 84,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 17,
+              "passing_suffix": 17,
+              "stable_from_seconds": null,
+              "stable_from_step": 84
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.004828219767659903,
+            "recon_mse": 0.023169027641415596
+          },
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "attempt_id": "08ff2ca10d174434af80cd8a9eb2a98c",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "4603e3eaf25d9212d3a85f764c12e4a0d7adb0d4568e89563efee542707355f7",
+          "cost": {
+            "adapter_loop_seconds": 3.859769545029849,
+            "adapter_seconds": 4.118299509980716,
+            "charged_task": "ring16_acquisition",
+            "completed_steps": 400,
+            "device": "1",
+            "execution_seconds": 10.241583943017758,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 400,
+              "generator": 400,
+              "prior": 400
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 3.668571647373028,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.4596785062458366
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007396839675493538
+                },
+                "training_updates": {
+                  "calls": 400,
+                  "seconds": 3.201496301451698
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 6.486675110994838,
+            "wall_seconds": 10.241583943017758
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "component_core_covariance_error": 0.7117275595664978,
+            "component_core_min_eigen_ratio": 0.0,
+            "component_covariance_error": 148.60477995872498,
+            "component_min_eigen_ratio": 0.5474805235862732,
+            "covariance_error": 0.5287395715713501,
+            "hq": 0.29931640625,
+            "mass_tv": 0.192626953125,
+            "max_component_spill": 1.0,
+            "mean_error": 0.22379787266254425,
+            "min_hq_mass_ratio": 0.0,
+            "min_mass_ratio": 0.25390625,
+            "modes": 8,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.24059437592659477,
+            "target_scale": 3.0029242038726807
+          },
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "attempt_id": "9f6d74ec154a44dc925594bf0b617442",
+          "blockers": [],
+          "budget_seconds": 900,
+          "compatibility_key": "cf4e6674924dcc5258fb6f3940bd69e3cfb51580771b685d7c3b31ef7b6f9f8a",
+          "cost": {
+            "adapter_loop_seconds": 133.64098191598896,
+            "adapter_seconds": 133.9186533180764,
+            "charged_task": "five_word_joint_acquisition",
+            "completed_steps": 20001,
+            "device": "1",
+            "execution_seconds": 139.97487702092621,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 20001,
+              "encoder": 20001,
+              "generator": 20001,
+              "prior": 20001
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 129.63912472920492,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.29356235393788666
+                },
+                "sampling": {
+                  "calls": 0,
+                  "seconds": 0
+                },
+                "training_updates": {
+                  "calls": 20001,
+                  "seconds": 129.34556237526704
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 136.26053938898258,
+            "wall_seconds": 139.97487702092621
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.0,
+            "mass_berry": 0.0,
+            "mass_grape": 0.0,
+            "mass_lemon": 0.59375,
+            "mass_melon": 0.40625,
+            "mass_tv": 0.6,
+            "minimum_reconstruction_token_probability": 2.274483434290881e-18,
+            "modes": 2,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 8.402425067001415,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "attempt_id": "755e19d50eb342399105645899ee21b9",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "897109056ab1ac38ac2494aafb29e8bbdd73eef42164cfbf53d1ccaaddb557c2",
+          "cost": {
+            "adapter_reported_inclusive_seconds": 1.1135127349989489,
+            "adapter_seconds": 1.1342504230560735,
+            "charged_task": "clockfree_audit_measurement_v1",
+            "completed_updates": 24,
+            "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+            "device": "0",
+            "execution_seconds": 7.502166311023757,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.520693046040833,
+            "wall_seconds": 7.502166311023757
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {},
+            "semantics": "no first full-quality acquisition timestamp in this evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "diagnostic",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "016ff9f1f7c430ff3dc0e9714c7d763f392a0dba4f2577ced5a95a6555eefa3a",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "d8ba562ad64813ac313861ca93ff8b4d7388deef7a733241ad20a265ae6ca857",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "9f576cdc7d5f68a1a3919b10802adcfece4fc1e5ae229248858c2a1baa641b09",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "008e13fec968585eab8e6e8746707d983e0ff80e551ab44fdb8b3dd2c5553d2e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "7ec9440c4e552707278d5d4e720c55e669d4d5ccab8349d350f6a336b0317545",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "c9d0e435334f56e7e8a7ec7b617c774e3feb4e43e8b887d744c8005a127f0368",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "245009ea59ec41496c832c41b1a7ffeb1cc6104676e71b82cac7991a47fdce76",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "4226317c3ef853849c9776fb629c94ea96db86716fdcab01bcd488b47dcfc48a",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "62b40c8f3d32613ae6c8c5d396814443c0c7c69fc68b9b7588a9c2f920102d31",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "86a1e89738138d6ac59b32a63c1d17442948517f7eab696dcc9f09f023ff9f87",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "eccc54ba1e70c52024fdff4716a3f2d6a3eb3c26f839bc27645a35b943bcf61e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "7c7f978aabbeaa5948c7adc94d1cd8959b5bc7efda54b22df6f1c3b8696cf82f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b5244ec3d013a9186d25add6f0c340eb960ad7c3e8a9cbf4ce72d0808a7f8020",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "d7ed9100ae19787cbd419746c56b3995618c028c108cf31b7b6da5070b29d428",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "84704f1cc6581e2477d322a4d433b1d074c7aecc8f6b52a7996a412beb938a4f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "2ca3907864af7135db0cedf57d9353d6441c0a3fa80e2fb2b304c8f4870201e5",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "01ba4100d20a3ef861f1d7d4d9b7a7019dff40b37599a38a05c81434dd9972c5",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "8f634391aeed9d363b7b48b22753a993f8f6ff773987839ba0448ab93e72fba9",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "b978a4122795abd535dd63e3b074aec95994df1beec38ed89e468eb58ad4f3e9",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "2469d82bf7756863ecf43d023c859482ffa899f7457bfd7c5c061264920ee625",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "2469d82bf7756863ecf43d023c859482ffa899f7457bfd7c5c061264920ee625",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "a28a78ed84798b17de31025f187f65ecaab9e5f8c4af7030433e5f31ac3e25d3",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "loss": "least_squares",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": "b_cap",
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": false,
+          "critic_guard": false,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "direct_particle_moments": null,
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": false,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "bcap-pure",
+      "unreused_worst_case_seconds": 2520
+    }
+  ],
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

@@ -1,14 +1,21 @@
-"""GANTrainer / the recipe's optimizers and critic penalty: K3P as the default, EMA critic and checkpoints."""
+"""GANTrainer with the K3P critic (the pinned benchmarks LegacyRecipe; the package default is KA2, see
+test_ka2_default.py): optimizers, critic penalty, EMA critic and checkpoints."""
 import copy
 
 import pytest
 import torch
+from particlegan import (
+    GANTrainer,
+    InputNoise,
+    NetworkLRTransition,
+    learning_rate_scale,
+    learning_rate_scales,
+    scale_learning_rates,
+)
+from benchmarks.legacy.grad_regularizers import GradientPenalty
+from benchmarks.legacy.recipe import LegacyRecipe, get_recipe
 from torch import nn
 from torch.nn.utils.parametrizations import spectral_norm
-
-from particlegan import (GANTrainer, InputNoise, Recipe, get_recipe, learning_rate_scale,
-                         learning_rate_scales, scale_learning_rates)
-from particlegan.grad_regularizers import GradientPenalty
 
 
 def _recipe(**overrides):
@@ -32,9 +39,9 @@ def _reals(n, seed=1):
     return [torch.randn(8, 2, generator=rng) * 2 for _ in range(n)]
 
 
-def test_trainer_default_is_k3p():
+def test_legacy_recipe_is_k3p():
     recipe = get_recipe()
-    assert recipe == Recipe() and recipe.name == "k3p"
+    assert isinstance(recipe, LegacyRecipe) and recipe.name == "k3p" and recipe.reg_anchor_decay == 0.999
     trainer = _trainer()
     assert isinstance(trainer.penalty.regularizer, GradientPenalty)
     assert trainer.penalty.regularizer.lr_floor == trainer.recipe.network_lr_floor
@@ -91,7 +98,7 @@ def test_trainer_k3p_resume_bit_exact():
     _run(first, reals[:split])
     checkpoint = first.state_dict()
     opt_g_state, opt_d_state = (state["regularizer"] for state in checkpoint["optimizers"])
-    assert checkpoint["schema"] == 3 and opt_d_state["record"]["anchor_started"]
+    assert checkpoint["schema"] == 4 and opt_d_state["record"]["anchor_started"]
     assert opt_g_state["latent"]["state"]["started"] and "noise_generator" in checkpoint["streams"]
     resumed = _trainer(seed=5)  # different construction randomness; the checkpoint wins
     resumed.load_state_dict(checkpoint)
@@ -239,7 +246,7 @@ def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
     ref_opt = torch.optim.Adam(ref_d.parameters(), lr=1e-2, betas=recipe.betas)
     from particlegan.k3p import CriticSpikeGuard, RobustCriticAnchor
     ref_anchor = RobustCriticAnchor(ref_d, copy.deepcopy(ref_d).requires_grad_(False), decay=recipe.reg_anchor_decay)
-    ref = GradientPenalty(anchor=ref_anchor, **recipe._penalty_options())
+    ref = recipe.make_gradient_penalty(anchor=ref_anchor)  # the same pinned K3P options the recipe uses
     guard = CriticSpikeGuard(recipe.d_guard_ratio, recipe.d_guard_min_steps)
     labels, t = torch.tensor([0, 1, 2, 0, 1, 2, 0, 1]), torch.tensor([[0.3]])
     for step, real in enumerate(_reals(12), start=1):
@@ -396,6 +403,56 @@ def test_scale_learning_rates_drives_k3p_to_its_floor():
         opt_d.zero_grad()
         loss.backward()
         opt_d.step()
+    assert penalty.diagnostics()["blend_weight"] == 0.0
+
+
+def test_caller_marked_network_transition_keeps_prior_schedule_and_resumes():
+    recipe = _recipe(total_steps=20, network_lr_horizon_cap=4)
+    transition = NetworkLRTransition(decay_steps=4)
+    assert learning_rate_scales(8, recipe, network_transition=transition) == (
+        1.0, learning_rate_scales(8, recipe)[1])
+    transition.mark_plateau(8)
+    transition.mark_plateau(8)
+    with pytest.raises(ValueError, match="already marked"):
+        transition.mark_plateau(9)
+    for step, expected in ((8, 1.0), (10, (1 + recipe.network_lr_floor) / 2),
+                           (12, recipe.network_lr_floor), (18, recipe.network_lr_floor)):
+        network, prior = learning_rate_scales(step, recipe, network_transition=transition)
+        assert network == pytest.approx(expected)
+        assert prior == learning_rate_scales(step, recipe)[1]
+    resumed = NetworkLRTransition(decay_steps=4)
+    resumed.load_state_dict(transition.state_dict())
+    assert [learning_rate_scales(step, recipe, network_transition=resumed)
+            for step in range(8, 20)] == [learning_rate_scales(step, recipe, network_transition=transition)
+                                          for step in range(8, 20)]
+    with pytest.raises(ValueError, match="decay_steps differ"):
+        NetworkLRTransition(decay_steps=5).load_state_dict(transition.state_dict())
+
+
+def test_caller_marked_transition_moves_k3p_penalty_with_critic_rate():
+    recipe = _recipe(total_steps=20, network_lr_horizon_cap=4)
+    torch.manual_seed(0)
+    g, d = nn.Linear(2, 2), nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
+    prior = recipe.make_prior()
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d))
+    base = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
+    penalty = recipe.make_critic_penalty(opt_d, collect_stats=True)
+    transition = NetworkLRTransition(decay_steps=4)
+    phases = []
+    for step, real in enumerate(_reals(14), start=1):
+        if step == 9:
+            transition.mark_plateau(step - 1)
+        scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base, prior,
+                             network_transition=transition)
+        loss = d(real).mean() - d(real + 1).mean() + penalty(d, real, real + 1)
+        phases.append(penalty.last_stats.get("phase"))
+        opt_d.zero_grad()
+        loss.backward()
+        opt_d.step()
+    assert phases[7] == "a"
+    # The penalty reads the critic's last completed optimizer step.
+    assert "blend" in phases[10:13]
+    assert phases[13] == "b"
     assert penalty.diagnostics()["blend_weight"] == 0.0
 
 

@@ -1,0 +1,281 @@
+{
+  "schema": "particlegan_bounded_family_screen_completion_v1",
+  "goal": "whole-family-config-screen",
+  "status": "finite_screen_complete_no_fully_qualified_config",
+  "qualification_input": false,
+  "shipping_default": null,
+  "speed_winner": null,
+  "comparison_scope": "Forge MoG and public selected/served policy suites remain distinct; these counts and costs are a ledger, not a pooled quality or speed ranking. All source cohorts and each entire configuration remain separate.",
+  "families": 7,
+  "whole_configurations": 60,
+  "ordinary_certified_task_runs": 198,
+  "setup_attempts_without_optimizer_updates": 4,
+  "policy_capacity_witnesses": 16,
+  "policy_screen": {
+    "declared_paid_cap_seconds": 10800,
+    "ordinary_paid_seconds": 1128.1612365315668,
+    "setup_paid_seconds": 6.16541115893051,
+    "paid_seconds_including_setup": 1134.3266476904973,
+    "remaining_paid_allowance_seconds": 9665.673352309503,
+    "whole_configurations": 32,
+    "required_case_cells": 256,
+    "complete_original_runs": 42,
+    "original_verdict_counts": {
+      "FAIL": 15,
+      "PASS": 27
+    },
+    "study_verdict_counts": {
+      "FAIL": 21,
+      "PASS": 10,
+      "INCOMPLETE": 11
+    },
+    "whole_config_verdict_counts": {
+      "FAIL": 21,
+      "INCOMPLETE": 11
+    },
+    "unknown_required_cells": 214,
+    "ordinary_updates": 31200,
+    "original_training_gifs": 42,
+    "separately_reviewed_training_gifs": 10,
+    "primary_board": "reports/forge/policy-family-inventory.md",
+    "primary_json_sha256": "b36cf5d76adc736adc09184afef38d81b708313864e0e94c38a47a75ace004dc",
+    "cohorts": [
+      {
+        "study_id": "policy-family-defaults-round1-cli-recovery-v2",
+        "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+        "combined_local_path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/current-policy-family-results.json",
+        "combined_sha256": "62079914653b9c27efec277c2ce4a57c50b42c856bb25f827a46af16b1f3cd3f",
+        "archive_manifest": "reports/forge/family-winner-round1/policy-round1-archive.json",
+        "archive_sha256": "44278a5879e7bddd302c947dc06f44bd3872168b98a6f994fab08b585bfa25eb",
+        "whole_configurations": 8,
+        "required_case_cells": 64,
+        "complete_original_runs": 10,
+        "original_verdict_counts": {
+          "FAIL": 6,
+          "PASS": 4
+        },
+        "study_verdict_counts": {
+          "FAIL": 6,
+          "PASS": 2,
+          "INCOMPLETE": 2
+        },
+        "whole_config_verdict_counts": {
+          "FAIL": 6,
+          "INCOMPLETE": 2
+        },
+        "unknown_required_cells": 54,
+        "ordinary_updates": 7200,
+        "paid_child_seconds": 268.79123173863627,
+        "selection": {
+          "attempts_concluded": true,
+          "comparison_complete": false,
+          "outcome": "incomplete_comparison",
+          "fully_qualified_ids": [],
+          "display_candidate_id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+          "timing_ties": "all qualified configs retained; speed unranked under external contention",
+          "speed_winner": null,
+          "default_adoption": false,
+          "required_cases_per_config": 8
+        }
+      },
+      {
+        "study_id": "policy-family-defaults-round2-v1",
+        "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+        "combined_local_path": "/ml2/hypergan/forge-policy-family-round2-20261002/current-policy-family-results.json",
+        "combined_sha256": "52b9b85f9c6e4139c6a51ad7dfa5641c241fa822ea2bd70877543616ebf8351c",
+        "archive_manifest": "reports/forge/family-winner-round1/policy-round2-archive.json",
+        "archive_sha256": "6d2922b957b4497cc79a4ff0fa185bdab374f54e141859726a685d8e75d3c9c7",
+        "whole_configurations": 8,
+        "required_case_cells": 64,
+        "complete_original_runs": 8,
+        "original_verdict_counts": {
+          "PASS": 7,
+          "FAIL": 1
+        },
+        "study_verdict_counts": {
+          "INCOMPLETE": 3,
+          "FAIL": 5
+        },
+        "whole_config_verdict_counts": {
+          "INCOMPLETE": 3,
+          "FAIL": 5
+        },
+        "unknown_required_cells": 56,
+        "ordinary_updates": 4800,
+        "paid_child_seconds": 189.03142790216953,
+        "selection": {
+          "attempts_concluded": true,
+          "comparison_complete": false,
+          "outcome": "incomplete_comparison",
+          "fully_qualified_ids": [],
+          "display_candidate_id": "atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d",
+          "timing_ties": "all qualified configs retained; speed unranked under external contention",
+          "speed_winner": null,
+          "default_adoption": false,
+          "required_cases_per_config": 8
+        }
+      },
+      {
+        "study_id": "policy-family-defaults-round3-v1",
+        "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+        "combined_local_path": "/ml2/hypergan/forge-policy-family-round3-20261002/current-policy-family-results.json",
+        "combined_sha256": "7b55b4aa8b60bffb0d213f5b5863711691ea27875b96ef546e0b87b295cdd916",
+        "archive_manifest": "reports/forge/family-winner-round1/policy-round3-archive.json",
+        "archive_sha256": "45344c3a0ec090f747a93377d6a54107cf71530c89434d6ea4e1017ecf22fb41",
+        "whole_configurations": 8,
+        "required_case_cells": 64,
+        "complete_original_runs": 12,
+        "original_verdict_counts": {
+          "PASS": 8,
+          "FAIL": 4
+        },
+        "study_verdict_counts": {
+          "PASS": 4,
+          "FAIL": 4,
+          "INCOMPLETE": 4
+        },
+        "whole_config_verdict_counts": {
+          "FAIL": 4,
+          "INCOMPLETE": 4
+        },
+        "unknown_required_cells": 52,
+        "ordinary_updates": 9600,
+        "paid_child_seconds": 338.82339419214986,
+        "selection": {
+          "attempts_concluded": true,
+          "comparison_complete": false,
+          "outcome": "incomplete_comparison",
+          "fully_qualified_ids": [],
+          "display_candidate_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+          "timing_ties": "all qualified configs retained; speed unranked under external contention",
+          "speed_winner": null,
+          "default_adoption": false,
+          "required_cases_per_config": 8
+        }
+      },
+      {
+        "study_id": "policy-family-defaults-round4-prior-balance-v1",
+        "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "combined_local_path": "/ml2/hypergan/forge-policy-family-round4-20261002/current-policy-family-results.json",
+        "combined_sha256": "0f36a1dd85bde72220f3c89151cc9c73515d6c6b4d0a077eacf3fc4f5b10be62",
+        "archive_manifest": "reports/forge/family-winner-round1/policy-round4-archive.json",
+        "archive_sha256": "8e5a30848ab045a1bfe52c1d431978bd7215777f2e61b98b70493b600c1dbdbd",
+        "whole_configurations": 8,
+        "required_case_cells": 64,
+        "complete_original_runs": 12,
+        "original_verdict_counts": {
+          "PASS": 8,
+          "FAIL": 4
+        },
+        "study_verdict_counts": {
+          "FAIL": 6,
+          "PASS": 4,
+          "INCOMPLETE": 2
+        },
+        "whole_config_verdict_counts": {
+          "FAIL": 6,
+          "INCOMPLETE": 2
+        },
+        "unknown_required_cells": 52,
+        "ordinary_updates": 9600,
+        "paid_child_seconds": 331.51518269861117,
+        "selection": {
+          "attempts_concluded": true,
+          "comparison_complete": false,
+          "outcome": "incomplete_comparison",
+          "fully_qualified_ids": [],
+          "display_candidate_id": "atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00",
+          "timing_ties": "all qualified configs retained; speed unranked under external contention",
+          "speed_winner": null,
+          "default_adoption": false,
+          "required_cases_per_config": 8
+        }
+      }
+    ],
+    "capacity_archive_manifest": "reports/forge/family-winner-round1/policy-capacity-archive.json"
+  },
+  "summed_paid_child_and_setup_seconds": 2721.4754995855037,
+  "cost_scope": "Measured child/setup wall seconds only. Overlapping wall time is not elapsed campaign duration. Software-control, capacity-construction/replay, diagnostics, export and publication work are not ordinary training cost; total machine FLOPs are not available.",
+  "source_and_sharing": "Compact metrics, full required denominators, receipt/source/protocol/runtime/Recipe/artifact bindings and actual training GIFs are committed on develop. Original bulk arrays/checkpoints/logs live at the checked manifests local paths and need transfer or shared-machine access for independent regrading.",
+  "default_limit": "Capacity, a smoke pass or a good final endpoint does not qualify a whole configuration. Calibration and separately registered confirmation/robustness remain required. External GPU contention disables speed ranking.",
+  "mog_screen": {
+    "declared_paid_cap_seconds": 10800,
+    "ordinary_paid_seconds": 1587.1488518950064,
+    "whole_configurations": 28,
+    "required_task_cells": 672,
+    "task_verdict_counts": {
+      "PASS": 128,
+      "FAIL": 28,
+      "UNKNOWN": 516
+    },
+    "primary_board": "reports/forge/technique-inventory.md",
+    "reports": [
+      {
+        "report": "reports/forge/configuration-search/bcap-family-defaults-round1-v1.json",
+        "sha256": "b265fd57be3b38bef42b4775f76a2fb917a7de56946a776d00048cf81a1d5b28",
+        "study_id": "bcap-family-defaults-round1-v1",
+        "whole_configurations": 8,
+        "required_task_cells": 192,
+        "task_verdict_counts": {
+          "PASS": 22,
+          "FAIL": 8,
+          "UNKNOWN": 162
+        },
+        "paid_child_seconds": 284.3666561259888
+      },
+      {
+        "report": "reports/forge/configuration-search/k3p-family-defaults-round1-v1.json",
+        "sha256": "13a7218306ade6aeece8a6f7fefbaf30c6aae01a325d2dfa5e44fd9f0e95eb11",
+        "study_id": "k3p-family-defaults-round1-v1",
+        "whole_configurations": 4,
+        "required_task_cells": 96,
+        "task_verdict_counts": {
+          "PASS": 32,
+          "FAIL": 4,
+          "UNKNOWN": 60
+        },
+        "paid_child_seconds": 411.96245005517267
+      },
+      {
+        "report": "reports/forge/configuration-search/ka2-family-defaults-round1-v1.json",
+        "sha256": "96122c9264312f7e4f69afb18e9f3e43f53a72fa1cc5958170be70331f49e10a",
+        "study_id": "ka2-family-defaults-round1-v1",
+        "whole_configurations": 4,
+        "required_task_cells": 96,
+        "task_verdict_counts": {
+          "PASS": 34,
+          "FAIL": 4,
+          "UNKNOWN": 58
+        },
+        "paid_child_seconds": 468.98806252749637
+      },
+      {
+        "report": "reports/forge/configuration-search/r1r2-modern-family-round1-v1.json",
+        "sha256": "22d28269f739705be9fe1bbdaa4640d434886fd006ad92051df920c9a02db4f0",
+        "study_id": "r1r2-modern-family-round1-v1",
+        "whole_configurations": 8,
+        "required_task_cells": 192,
+        "task_verdict_counts": {
+          "FAIL": 8,
+          "UNKNOWN": 171,
+          "PASS": 13
+        },
+        "paid_child_seconds": 135.24208330502734
+      },
+      {
+        "report": "reports/forge/configuration-search/release07-gan-v3-mog-family-defaults-round1-v1.json",
+        "sha256": "5103ae1997e48d1af0fc0aad70c4b20a00e80d45bf34cbaea66accfa3701e7d6",
+        "study_id": "release07-gan-v3-mog-family-defaults-round1-v1",
+        "whole_configurations": 4,
+        "required_task_cells": 96,
+        "task_verdict_counts": {
+          "PASS": 27,
+          "FAIL": 4,
+          "UNKNOWN": 65
+        },
+        "paid_child_seconds": 286.5895998813212
+      }
+    ],
+    "source_archive_manifest": "reports/forge/family-winner-round1/phase1-archive.json"
+  }
+}

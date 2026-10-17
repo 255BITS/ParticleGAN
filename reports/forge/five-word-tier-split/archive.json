@@ -1,0 +1,12 @@
+{
+  "artifact_archive": "/home/martyn/dev/ParticleGAN-fivewords-tier-split/artifacts/five-word-tier-split-v1.tar.gz",
+  "bulk_tracked": false,
+  "bytes": 9025125,
+  "members": 38,
+  "restoration": "Extract archive to an empty directory; frozen run request, source manifest, complete checkpoints, scored arrays and logs are retained.",
+  "schema_version": 1,
+  "sha256": "e2944bc031f96e9bbdd09fe8c8be24dff95a9d92fd8dd07c45a5ad9b220e0d0b",
+  "source_commit": "0270a501b7d90f4d6c34b4c3e9ef4166f877b301",
+  "source_digest": "3c82db6c7b24642887dfaab8d7ba13e0f7ea11689f6839bc687d2dd59126e478",
+  "stdout_sha256": "2b9969f3aea0821913f2b64c209d38112bad8ad4c89098344891d4a712408d62"
+}

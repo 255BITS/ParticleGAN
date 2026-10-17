@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "all_inherited_setting_expression_asts_exact_axis": true,
+  "only_changed_existing_setting": "mass_policy",
+  "only_added_settings": [
+    "count_partition",
+    "count_family"
+  ],
+  "all_three_count_setting_expression_asts_exact_plan": true,
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/feature_cells.py": "a7f2d0f8794e109535358ea08ef43951449814acbdfca89705870df9f153f025",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/pkg-AXIS-ID/particlegan/feature_cells.py": "05886af29cb47ac7e6043d9b7e6f1620a293a5afc30645b5381aa85760d5b554",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/plan-batching/pkg-PLAN-FINAL/particlegan/feature_cells.py": "e6d2823d8e862dd8b29182cf0988325328523be0e77ae1fb2ea964707b34ad7f"
+  },
+  "cpu_only": true,
+  "new_numerical_execution": false
+}

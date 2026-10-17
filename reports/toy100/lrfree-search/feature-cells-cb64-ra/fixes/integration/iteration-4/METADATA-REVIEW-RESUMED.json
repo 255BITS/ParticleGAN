@@ -1,0 +1,18 @@
+{
+  "utc": "2026-09-30T03:09:57.444111+00:00",
+  "pid": 384331,
+  "start_ticks": "163720702",
+  "previous_state": "T",
+  "event": "ra4_supervisor_resumed",
+  "reason": "Frozen indexed API metadata adapter passed owner pilot and independent direct review; numerical fixtures and quality gates unchanged",
+  "independent_review": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/INDEXED-OWNER-FROZEN.json",
+  "source_integrity": {
+    "status": "VALID",
+    "package_sha256": "e34bcb21aaa64caa0601cea5dc1f9b8eaebee9578686ebff39b459676063deb2",
+    "ready_sha256": "e76a712d99f3a224a99f1e26a4dcfe813eb61617f217577dd60d69f12af5dee4",
+    "root_ready_sha256": "8d5522e1e2bf7ae42baf9666bc63da4da490b03f1b62724b1ab759031341ee87",
+    "source_freeze_sha256": "c1b09a7acf8ce40690eeaf6e931586c47c08e523dcfc573c7efb1d6f7bb8b443",
+    "original_collector_sha256": "3500fc335698b16741dc674ad9a0f6c30aa5084637cccd1ba6108b4f69049341",
+    "original_monitor_sha256": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b"
+  }
+}

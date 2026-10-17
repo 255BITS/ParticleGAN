@@ -1,0 +1,237 @@
+{
+  "candidate_id": "context:report/toy100/gpu-leaderboard",
+  "candidate_revision": "5ff6aca63294f3eb862c831bf999f26d933e653d71520d3abd7719fc29a593c2",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "GPU leaderboard rebuild",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/gpu-leaderboard",
+      "narrative_sources": [
+        {
+          "git_blob": "892f0fde0c0e4f8b41520d811ae17c788039bb46",
+          "path": "reports/toy100/gpu-leaderboard/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "46b0ddf453634849a2c3180922a801b52d3a9f17c76659dd0c7b3bee210d8e60",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "ed4d1e043edc1c2306557d242f954896a459aabf",
+          "path": "reports/toy100/gpu-leaderboard/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "addd82751ff9cbfa4e822e4f7fd1bb65567ee4f34f6a1126a20025f315267f18",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/README.md"
+        },
+        {
+          "git_blob": "0784f61f234b606de00941e7055ebec3fb29b698",
+          "path": "reports/toy100/gpu-leaderboard/runs/H/grid100/native/accuracy-leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b6b4e12caa5077042dc4228bdeb620f082864512c56dc1bff832a84ea9525a31",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/H/grid100/native/accuracy-leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "fcbaadc189614f51f6ebadc0bcb0c678386cefdc",
+          "path": "reports/toy100/gpu-leaderboard/runs/H/grid100/native/leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2f02c882f143b82c6dc6c2f9d99d7b3246a2d9d33ae19bb4a30066227477be4b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/H/grid100/native/leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "9ea28becc72e0c496229a6c754f6e5e7dff94de6",
+          "path": "reports/toy100/gpu-leaderboard/runs/H/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "47d1182ce091752578b04d498651963890a3399947d5d8d8a9d3c2c2ec36085a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/H/rotated100/native/accuracy-leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "ffca0522dda2666e4f820e4e3e9e1ca0d47f8dab",
+          "path": "reports/toy100/gpu-leaderboard/runs/H/rotated100/native/leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bd417899d6ba0ce967fe44a2ba70a0a9f0aaabe1f59019cfe505546a70ea3b81",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/H/rotated100/native/leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "45c50d138e7d6653978f68b5167aea632dc89765",
+          "path": "reports/toy100/gpu-leaderboard/runs/H/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b215215168a4fcd365eb2c58a7c698d14fe88ab1e455cc19e5872a861aef76d8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/H/staggered100/native/accuracy-leaderboard-staggered100.md"
+        },
+        {
+          "git_blob": "61fb37dbb9d4a7c0beb42b3a938808f4fcce7894",
+          "path": "reports/toy100/gpu-leaderboard/runs/H/staggered100/native/leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1191e7cd67ca1608de66522df9ac2faf32e70b6061dca60d5b915c5ce60342ce",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/H/staggered100/native/leaderboard-staggered100.md"
+        },
+        {
+          "git_blob": "f00ffac0a663c8c442533e7311573c3d750371e8",
+          "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/grid100/native/accuracy-leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4421c3ae514ba7fd2721efc1669b36832fa736c5ea21bcefa2571b54d6763876",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/eps_net_1m/grid100/native/accuracy-leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "90ae7417b51b18d4a99fbbf165321fecd84e3d81",
+          "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/grid100/native/leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7df52029e4baabaee543484fd7b6882571b6179ac26325a901dd0e97f94e4136",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/eps_net_1m/grid100/native/leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "5fc4a19ea5f6edcbf56d64c769d724df09084306",
+          "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0624309c04ea4c6bef6ee5342abdcac607e5f82f313ad0152e15e3d509de98c4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/eps_net_1m/rotated100/native/accuracy-leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "bf914e267d62ff249403401e5c7b6b9fab339aec",
+          "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/rotated100/native/leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f0e7f4ffc1fd87aee8fd3d3568c1df5963ec98e21c06b6548856cef3f742417d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/eps_net_1m/rotated100/native/leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "1b71c6220ecd28a5d1131861c130c2d62d9c7f5d",
+          "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c7bd32f8a9394a417d94b067d90fad6ea23ddc62e2a9e3b97662a5d03f105047",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/eps_net_1m/staggered100/native/accuracy-leaderboard-staggered100.md"
+        },
+        {
+          "git_blob": "91572ac151a84fd029a0da0b932d4ddb83aebd28",
+          "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/staggered100/native/leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "77b15eb2128599a9eb5bad6443003836187fd4e7ddab4c8d2a32ece0645387da",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/eps_net_1m/staggered100/native/leaderboard-staggered100.md"
+        },
+        {
+          "git_blob": "491550781dcdc93a2805da856550a47d7f9050d8",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/grid100/native/accuracy-leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "14782e579a3279eece2304665ae5782c84f0f0903736d629d3f0171b835156c3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_column_rms/grid100/native/accuracy-leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "23a2bb46f646e5cb16994bdddbf2b59131b07147",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/grid100/native/leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c1e636217f94282914dadc216ed07b8124321bf53dc83d6fb0e6a07fc1696ad8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_column_rms/grid100/native/leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "ada424a89a1b01d00e0791f9b409c58950b3ef86",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3722bbaa71ab2ceef0a0e2dda92556ae1cae3a085e6a01c0a7e2b84844d1cc15",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_column_rms/rotated100/native/accuracy-leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "8588605f0b989e902cff96ddbea5b055a238dc24",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/rotated100/native/leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ec07e1b1c12d176695489481571785a12a25ec31f4da8996a7ad3d76abb84f12",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_column_rms/rotated100/native/leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "aafe59d61f21c5257e29946533440780b19c355e",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "58fc7aaed6fad62ab4a5fe045103b24f866212a47753c970542a6e4985c1f9a3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_column_rms/staggered100/native/accuracy-leaderboard-staggered100.md"
+        },
+        {
+          "git_blob": "c06369f1e598250bcc7e2f295cdcdc4799df042f",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/staggered100/native/leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c143968f807c485608035718a34042b40cf0065910a2558dc83525cc600099eb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_column_rms/staggered100/native/leaderboard-staggered100.md"
+        },
+        {
+          "git_blob": "3b8b069f994f8f16ebb0566a8ff1d729a8f940d6",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/grid100/native/accuracy-leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9ac74f16e5275d7d75606d599fd72aa9261d35f522d6a65efa7bec5a0ad3a01d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_rms/grid100/native/accuracy-leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "c5e297f4b3584a2e666ed852191ec72871a34f9f",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/grid100/native/leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3005711f244c710f42c1a097665fb4d6219694721a6c86d526063eaf42cc15cf",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_rms/grid100/native/leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "ccbe21db7a5e7e596f1e3f2a9d64c1286c2abbf4",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ef119b9dbde24a19bcc236f1938271bf9f059a39c10cd2e9195ce3e7687473e5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_rms/rotated100/native/accuracy-leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "88e5edf580a439c469e3626dbaaddb98ae364f53",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/rotated100/native/leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5b2852e2f6981450b943683635d4edd72668d0158d890e5130f52c78a28e08fd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_rms/rotated100/native/leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "7259a504a9eb5d6bc70139b07ab3ec01179df471",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7fbc34e3d6342b0211148796330142bc1aee5c46584761bdb1f3265259473ef0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_rms/staggered100/native/accuracy-leaderboard-staggered100.md"
+        },
+        {
+          "git_blob": "b245942f136172b8091a3ac8d02abf9d550822f8",
+          "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/staggered100/native/leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f2b4640aa2bb80e51825101480a10d0e994913488218d3c5bd4cf40ce1144ff4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/runs/shared_rms/staggered100/native/leaderboard-staggered100.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# GPU leaderboard rebuild\n\nThis evaluates eight continuous-learning variants on CUDA. The original\n[22/22 CPU winner and its 16/22 GPU control](../gpu-known-winner-control/README.md)\nare a separate preserved-recipe comparison. See the [leaderboard and\ncomplete 22-toy matrix](LEADERBOARD.md). A toy PASS always comes from that\ncandidate's own GPU run. Unsupported cells receive no credit. The separate\nconvergence gate measures stability after acquisition, rather than rejecting\nevery dip during learning.\n\n## Protocol\n\n- `cuda_fp32_v1`: NVIDIA RTX A6000, PyTorch 2.13.0+cu126, CUDA 12.6,\n  cuDNN 91002, driver 580.173.02, Python 3.12.13.\n- FP32 model training; inherited curvature reductions retain float64.\n  TF32 disabled; deterministic algorithms enabled;\n  `CUBLAS_WORKSPACE_CONFIG=:4096:8`; one CPU thread; unfused, non-foreach Adam.\n  Three independent jobs share physical GPU 1. Every scored optimizer call\n  asserts CUDA parameters and gradients; first updates also check CUDA moments.\n- Existing seeds, targets, architectures, thresholds, and budgets remain fixed.\n  The three native 100-mode toys each run 7,000 updates and require both the\n  coverage and accuracy gates. Their existing affine-generator model card is\n  retained; older toys retain their own declared architectures. All policies\n  remain adversarial GAN policies with learned latent particles.\n- All supported toys run even"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-gpu-leaderboard-ddf28349e721",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "ed4d1e043edc1c2306557d242f954896a459aabf",
+    "path": "reports/toy100/gpu-leaderboard/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "addd82751ff9cbfa4e822e4f7fd1bb65567ee4f34f6a1126a20025f315267f18",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard/README.md"
+  },
+  "task_results": []
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "particlegan_policy_family_search_v1",
+  "id": "policy-family-defaults-round1-cli-recovery-v2",
+  "families": [
+    "atlas",
+    "e22"
+  ],
+  "seed": 24002,
+  "grid": {
+    "lr": [
+      0.006375,
+      0.0085
+    ],
+    "prior_lr_mult": [
+      1.0,
+      2.0
+    ]
+  },
+  "cases": [
+    {
+      "id": "image-develop-img_intensity2-source-transpose12",
+      "tier": 1,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-vector-two-broad",
+      "tier": 1,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-grid100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-rotated100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-staggered100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-vector-unequal-mass",
+      "tier": 2,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-vector-anisotropic",
+      "tier": 2,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "image-develop-img_bars4-source-transpose12",
+      "tier": 2,
+      "timeout_seconds": 180
+    }
+  ],
+  "backend": "cuda",
+  "frames": 9,
+  "candidate_budget_seconds": 5400,
+  "budget_seconds": 10793.83458884107,
+  "family_budget_seconds": {
+    "atlas": 5393.8345888410695,
+    "e22": 5400
+  },
+  "export_grace_seconds": 120,
+  "stability": {
+    "confirmation_checks": 5,
+    "post_confirmation_hold_checks": 5,
+    "first_window_only": true,
+    "all_subsequent_primary_checks": true
+  },
+  "speed_ranking": false,
+  "default_adoption": false,
+  "representation_card": {
+    "path": "reports/forge/family-winner-round1/policy-representation.json",
+    "sha256": "729f084b5e7b076cfb5d06d65810cec1b823f5df0ebe645767d8cd43fcb74c38"
+  },
+  "rationale": "Four new substantive common LR/prior-rate settings per family, applied to all eight declared original API hosts and gates; first five-pass acquisition plus uninterrupted hold is a separate study requirement. No historical or clean/live pooling, per-toy winner or shipping-default claim.",
+  "timeout_rationale": "Original full CPU1 API acquisition wall times on the historical 5d75e655 source were 1748.815,1720.797,1701.546s for grid/rotated/staggered; 21.605,22.684,23.453s for selected vectors; 11.998,12.243s for selected images. New2100s native caps exceed those observed original full CPU horizons;180s smaller-host caps permit substantial device/contention overhead. These old times are context, not current GPU speed estimates or convergence-time reuse. Original steps/batches/scoring/draw counts remain unchanged; time caps never adapt after failure.",
+  "budget_scope": "Linked recovery keeps all four original CLI setup failures and their6.165411s cost. Remaining Atlas quota5393.834589s plus E225400s totals10793.834589s; original setup plus recovery cannot exceed10800s. Full task allowances and all original case protocols remain unchanged. No scientific FAIL is retried.",
+  "capacity_scope": "Current CPU public restored selected/served snapshot witnesses support the exact parameterization and numerical tolerance with zero ordinary optimizer updates. They are necessary capacity evidence, not trained quality/stability or guaranteed GPU convergence. Failed alternatives and original source identities remain separately retained.",
+  "execution_repair": {
+    "kind": "unsupported_cli_flag_removed",
+    "original_study_id": "policy-family-defaults-round1-v1",
+    "original_source_commit": "563cb337937a05494a1577376e5740f0aa2e2777",
+    "original_study_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/study.json",
+    "original_study_sha256": "bba8374f395d4c8040c87f8db0e83995b3f0e7f7e583d47f4294148d794493b9",
+    "original_paid_setup_seconds": 6.16541115893051,
+    "original_optimizer_updates": 0,
+    "original_scientific_status": "UNMEASURED",
+    "repair": "Use supported child CLI arguments; require actual case protocol seed24002 in preflight. Family/knobs/gates/horizons/samplers and protected source bindings are unchanged.",
+    "automatic_retry": false,
+    "round_paid_cap_including_original_setup_seconds": 10800
+  }
+}

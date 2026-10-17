@@ -1,0 +1,80 @@
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/feature_policy.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/feature_policy.py
+@@ -234,6 +234,15 @@
+         current_shape = self.state['output_shape']
+         if current_shape is not None and shape != current_shape:
+             raise ValueError('checkpoint output shape differs from the resolved policy')
++        birth_state = state['birth_death']
++        if isinstance(birth_state, dict):
++            fifo_shape = birth_state.get('sample_shape')
++            if shape is None:
++                if fifo_shape is not None or birth_state.get('reservoir') is not None:
++                    raise ValueError('unresolved backend output shape with initialized birth-death FIFO')
++            elif fifo_shape is not None and (not isinstance(fifo_shape, (tuple, list))
++                                             or tuple(fifo_shape) != tuple(shape)):
++                raise ValueError('birth-death sample shape differs from the frozen backend output shape')
+         controls = self._controls(expected)
+         birth, settle = controls
+         if birth is not None and expected['actual_backend'] == 'feature_cells':
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/feature_reference.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/feature_reference.py
+@@ -81,7 +81,7 @@
+         self.k = min(math.ceil((math.log2(n / self.Q) + 1) / 2), n - 2)
+         if self.k < 4:
+             raise ValueError("particle_birth_death needs at least 6 particles")
+-        self.s_k = math.sqrt(2. * float(torch.polygamma(1, torch.tensor(float(self.k), dtype=torch.float64))))
++        self.s_k = math.sqrt(2. * float(torch.polygamma(1, torch.tensor(float(self.k), dtype=torch.float64, device='cpu'))))
+         self.dry_run = False   # test hook: evaluate, never move
+         device, dtype = trainer.device, trainer.dtype
+         self.reservoir = None  # [N, D_out], allocated on the first batch
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/mean_transport.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/mean_transport.py
+@@ -126,7 +126,7 @@
+     budget = math.floor(Q * n) - earlier_ordinary
+     empty = torch.empty(0, dtype=torch.long, device=fast.metric.device)
+     if fixed is None:
+-        return CandidatePairs(empty, empty, torch.empty(0, dtype=torch.float64), 0, 0, empty,
++        return CandidatePairs(empty, empty, torch.empty(0, dtype=torch.float64, device='cpu'), 0, 0, empty,
+                               budget, earlier_ordinary)
+     reserved = torch.zeros(n, dtype=torch.bool, device=fast.metric.device)
+     reserved[reserved_rows] = True
+@@ -313,7 +313,7 @@
+         preview_work=dict(geometry.work))
+     if not accepted:
+         return None, dict(detail, reason="no_actual_retained_progress")
+-    indices = torch.tensor(accepted, dtype=torch.long).to(child.device)
++    indices = torch.tensor(accepted, dtype=torch.long, device='cpu').to(child.device)
+     accepted_child, accepted_parent = child[indices].clone(), parent[indices].clone()
+     row_state = {key: value[accepted_parent].clone() for key, value in state.row_state.items()
+                  if isinstance(value, torch.Tensor) and value.shape == state.prior.z.shape}
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/output_moments.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/output_moments.py
+@@ -43,7 +43,7 @@
+     width=math.prod(even_raw.shape[1:])
+     if width<1:return None,'empty_output_width'
+     # Two stable streamed passes, no d*d covariance or fit RNG. O(M*d).
+-    mean=torch.zeros(width,dtype=torch.float64)
++    mean=torch.zeros(width,dtype=torch.float64,device='cpu')
+     count=0
+     for block in even_raw.split(FIT_CHUNK):
+         flat=block.flatten(1).double().cpu()
+@@ -110,7 +110,7 @@
+     centers,counts=group_means(metric,even_groups,snapshot.mass_groups)
+     if bool((counts<2).any()):return None,'missing_or_insufficient_even_group'
+     squared=(metric-centers[even_groups]).square().sum(1)
+-    ss=torch.zeros(snapshot.mass_groups,dtype=torch.float64)
++    ss=torch.zeros(snapshot.mass_groups,dtype=torch.float64,device='cpu')
+     ss.index_add_(0,even_groups,squared)
+     scales=(ss/counts/projection.rank).sqrt()
+     if not bool(torch.isfinite(scales).all()&(scales>0).all()):return None,'nonfinite_or_zero_even_scale'
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/population_continuity.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/population_continuity.py
+@@ -176,7 +176,7 @@
+         one host sync."""
+         nb = len(self.r_b)
+         if not (self.r_b or self.r_2b):
+-            return torch.empty(0, dtype=torch.float64), torch.empty(0, dtype=torch.float64)
++            return torch.empty(0, dtype=torch.float64, device='cpu'), torch.empty(0, dtype=torch.float64, device='cpu')
+         values = torch.stack(self.r_b + self.r_2b)
+         if self.rows is not None:
+             if self.exclude is not None:

@@ -1,0 +1,24 @@
+{
+  "status": "VALID",
+  "design_status": "RESERVED",
+  "files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-population/REPORT.md": "8160662a78785dc1ef95a31f292b82179007b24ae4cbfebf181f9066bf34557c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-population/cpu-attempt1.log": "5e8f20d3cdc62b362d583638e2abf424a299e20fd4ac07a483b0094ac603fac8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-population/diagnose.py": "14dee6acb6201c2b42e651d1ef14d0497b7a61759ea74d6de5f2ab508f5cf836",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-population/failed-inspection1.log": "8e74228da820319d24ef91d3170e7aa517cbc2920700304d5890290995943468",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-population/freeze.py": "e82b45641c0138d505e553308a6af8937b18e0028d83a1852297a23108777973",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-population/observations.json": "c86c988788c2b1cebaa7de232af4c986653cf5d82235b59ad084be90f9bf2e10",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-population/receipt.json": "0a5ba026e7587e4ad132696e42c96d9e3b20500f3971f86a5a892870cd2934c3"
+  },
+  "inputs": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/continuous.py": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/training.py": "8961dc8596230bc0ff5f153606694aa21745e77f5577a0fc93664d9107d5b005",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/feature_cells.py": "eee5469b420d9c750d9ad015172af58052e8aab161d93d4f16fc323be12f9245",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra7/READY.json": "f300089ce4fece3a812b890d4060e0567e833dddd236e5a955993f65ef15e1dd",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/source-freeze.json": "1724fc603970338b0ae94d58d6055a734e3cd424fcd514a53bb1ca9297426b3d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra7-prospective/FINAL-FROZEN.json": "36df2b0c6c754b4eca0daf0fa09eada081b649eda0f3d29fa4723753a2a3dda2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-0500.pt": "132f9351b3c5857b0e434c7d9b294de12084bc09f8012e01c53159e9e78f7612",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-1000.pt": "5ca98bdfbe400930d42f52306e6fa0eac330b6d87a8f6ae5254594daa5c7edb2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-2000.pt": "94ee1c70def3f8256140ec23a2f7c9ef997699ca1a63815ce9a51bd1e85db3c2"
+  }
+}

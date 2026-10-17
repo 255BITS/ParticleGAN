@@ -1,0 +1,33 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/source-review/review_source.py"
+  ],
+  "sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA12-auto.json": "9ae50f9fd0e903b7516ac04a72318ba79a35e52076393317511ec29ae19744b4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/source-review/REPORT.md": "34e46e4ebc7a0e56eb35e1660c723433ca155595c010598794998013bd8e77d5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/source-review/review_source.py": "bb43560ee583ae054e9beff71f6d1c8578e21ed2eaa5e9271aa12fb31c685285",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/CLOSED.json": "facec0ba1f6f07decf2a1bf8abab1b8d2434810b95ae50f60831851cd3ee453e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/SOURCE-FREEZE.json": "678f1230a5305fecc6ba6f7054d6b18095d57d1970dc3233e3de2150cae7e0ca",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/config.json": "bd00fb5d90c029c4aab3eff4bf2735c042aa3846c3e4e8b99ccc1a238281c28b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/metrics.jsonl": "b0f003b1cf4db6b4c0750c9b293f67ef6cb22ca5838b5d9a89fdb87d012a08a5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/result.json": "ab9e6944490c2a9a27e04face9a64c55434ca41181c78c05d7f91f2204015501",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/config.json": "8718e043966bd788bcbf14011c9983792b6253d2e8b48519d172dae196feea0a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/metrics.jsonl": "3cfd6754dfc67b73c21520c7cc87921a1194afb6d5eccc8a1c481fd336d2c740",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/result.json": "d663758b7012163a8a6f410f02e9bda9727997d80d3107bd9d03a56ae91f3e80",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/moving-quarter/SOURCE-FREEZE.json": "aaf4ff3d8e431d7f6b9dddcd06a0dd02a74d4fdd75f4530ea908ad2345598887",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/moving-quarter/grid100-r1-on.log": "12b373be687613a66de2f800d2705743943f162ace3ee16c57fa3620ca7fe00b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/moving-quarter/grid100-r1-on/frames.npz.verdict.json": "6841b4735eec6a9c7c894561d0a78774123224b2ad90a1467bfc7648906edfed",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA11-R1/particlegan/continuous.py": "1eea3baa8c76d3d9e4db86868cc2765cfee23e4dcdda73b24d7d5e7669ad32a8",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/continuous.py": "3b21b688a536f5060ba92f6db3dd6da92a8acf25f48895031dd31181998c4bfa",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/feature_policy.py": "334f1a110bde970d8591b22f94b0538cafa4de914c61075a5e49bc5bc7f66c6e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/policy.py": "025464e7e5a57245f76209951a946370ce4f2b5c387d0b582d0964973ff97f6a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/recipes.py": "8f7b841fdd4f24822c0d1a39ab4a36e7eb6f641c0ad156ee3676dace03831f1c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/training.py": "6a92fd42eb05729e36454f42bb76466103315efb9a64a358f825071cffafb8db",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/test_r1_composition.py": "94cef0c98d27de1cc43d0256a56538f8c3d4a9499b4c9fc06dbdf0668373cd07"
+  },
+  "status": "FROZEN_SOURCE_JSON_ONLY"
+}

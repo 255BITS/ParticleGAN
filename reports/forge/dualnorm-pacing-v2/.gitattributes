@@ -1,0 +1,2 @@
+# Review generated plots as images while preserving their exact archived bytes.
+diagnostics-*.svg -diff

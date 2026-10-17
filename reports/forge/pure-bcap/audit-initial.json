@@ -1,0 +1,3012 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "02f803b831d44861820adce18355a59e",
+      "candidate_id": "bcap-pure--b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+      "candidate_revision": "18a217e7897c4593e54c3d65295bfc5ed982fea10f86ecdd707d8653e4ea06ea",
+      "paid_wall_seconds": 6.394618719932623,
+      "receipt_hashes": {
+        "evidence": "c4136985aae5c5bdb18d41ada229e0c78c4e9649a0c15c4f8ed32c92279b1914",
+        "request": "645f9ad58bc0b8c1403eaf2fe5bbb42585cde78db9d5e15430564b0bcd966574",
+        "result": "efd1d46db077d3517565c4b0f2d8c96e31daa83acc6cbe0ab8ac3ebad37df059"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "0f1994ca025f464c85124642088b217c",
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "paid_wall_seconds": 7.84978503594175,
+      "receipt_hashes": {
+        "evidence": "3f8f308b477665a75dea5fb5a02192bbdcf9e57e3f47d9bb6389aca702cf1dbe",
+        "request": "92d5f25557348b0fa2d9ea23ecf8d9bc0e133982a4ab10236abd3e219918bf6f",
+        "result": "2a97970ee153709def91454c4891a37502bf89792b0d183885e1ce6341d17d38"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "1032e1df4c694b14a3d5628ca4bd23dd",
+      "candidate_id": "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "candidate_revision": "c4a28acb61adc5b566d1b5793b8cf09c0b7ee2d08cad18079c3728aa807b28f1",
+      "paid_wall_seconds": 24.55630082206335,
+      "receipt_hashes": {
+        "evidence": "cd4629816d3f214b41c41798783f4595c6287af65ac1ce078d21a0e498531a3c",
+        "request": "c34f7408b54dd44ba9b4af7ddb8014e5ddc9e62cfbc4fa7c93ef4853d0cf8286",
+        "result": "4e82f7c6c1b4616bd963f1f9ba3f05ecd6f7793d84df068fb6d7b17cb1bb3c61"
+      },
+      "status": "cancelled"
+    },
+    {
+      "attempt_id": "17891104e21a4817bb6a0c6372d15155",
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "paid_wall_seconds": 7.523797992034815,
+      "receipt_hashes": {
+        "evidence": "89fb2bc41503df9a42145144d9004817cd06500718925da284b4bb80f994ffe0",
+        "request": "a4dc518075a476f4ecb0794758d378614f4248d87bfae3576dadfa6e4cea94ba",
+        "result": "d7e038ddb3e4a3530b6fa0e159aa73ad8f9d4c21e59231788f051dd0c16c4f5e"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "1960ec3f31484361962fecc229a69e32",
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "paid_wall_seconds": 6.611189475981519,
+      "receipt_hashes": {
+        "evidence": "6aac1b90d7315b505e0e478d1845584e57db22d459832017eab880e0993b0b2b",
+        "request": "c949b6b499727b4d1bf3926fdda629ba607f3741903c467030476150825bd46b",
+        "result": "ed9af326974376e2bd61b04a5b4adf6b5e60cdc79ac3485839374712865a35f4"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "19fec1d2875248ff975ae1265491cd71",
+      "candidate_id": "bcap-pure--93c9484d09ce9d3eb4f2f5deb1cdf4d3a012ff5d8e60146059360b2ad8e279f4",
+      "candidate_revision": "60483ffa00c237a12daf1b4b277d45c08eb8168630f9dd888eced59553591225",
+      "paid_wall_seconds": 7.1996864140965044,
+      "receipt_hashes": {
+        "evidence": "743124b40a5c875087df718f6176623a12cbf7b8e59c38cb70b5c73446130132",
+        "request": "637df89504e6ee6fcebb2e2e56a36e35037be2b886e47a4a9fe3b600fbdbc1e4",
+        "result": "cee92b8eb4e0f10017681f5cbdd35ecc87ca3e7200bb4dcf86996953d74fbe46"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "21c73b9fd45f408fa0b40ab182b976b4",
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "paid_wall_seconds": 10.395477715064771,
+      "receipt_hashes": {
+        "evidence": "4324ed1eaf0f30bc5f61f3659764c276cbf147578d21420984f7b13850447608",
+        "request": "9376516225102c3253fa15efb63095beb64b788a2d638c9204bd6d9d574e8ef3",
+        "result": "c768fd3e6e84d7742f0abade8a1394a7d6dd62af29f7b621b8dc9ed35f068002"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "23e19dacb7114d63b49ebb02527f1a8a",
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "paid_wall_seconds": 14.806475167977624,
+      "receipt_hashes": {
+        "evidence": "095de7f2feb0966dbf60f4f973dd1e35b10bc95c44d530255e30298e28e72266",
+        "request": "1671b6d0f7a35dcee431b03cfaae0462d65b6f9ba7beda2a13c1cdcd9e0a3531",
+        "result": "e620f77045abe8bb88514b3ea9024a2f7e5464658071587e2bc06761ef63a834"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "288936eb39174fd3bf07f60e97763a64",
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "paid_wall_seconds": 7.369716702029109,
+      "receipt_hashes": {
+        "evidence": "d685fc7afc679a0562d7e4f2e6473f5873d31d5dfaa2ceba5902807cbc8764de",
+        "request": "440e2279e6bdf96218766b4edafc35cf7b9f3365da871c98cf46947f9c7baa26",
+        "result": "109f87f26b68424a843faf401f083ace68704d7b02ba28f90168c8590ecde6b6"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "2e89b6ea84d14007b985c3bb70f64cfe",
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "paid_wall_seconds": 7.390291974996217,
+      "receipt_hashes": {
+        "evidence": "f2a29336335e07bc6534e7651d98cdb90b920ba3df22f650759d3407c771f04a",
+        "request": "a285759ecfc83ee708cf0a10307ba7419ae4e618e3ca3614cea80f677d449f59",
+        "result": "b15a0fe9656e1ed92a179f2801149bc20d461230c02502b96160aa40cf6f135f"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "2f826b19844140c091965928a874119b",
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "paid_wall_seconds": 79.86234539293218,
+      "receipt_hashes": {
+        "evidence": "2036fc54824980a0899c9d251bba13efb00c9d313e962eb2745e203c73eb3502",
+        "request": "bb1ff362f81848aaf2abd6d253ae184bc9eb70d7e16d8bf7de4497185a569cc1",
+        "result": "035fa1ecbfe9055f84fbbc789aa38ad9ec5eff8fb19310265c38e379c31faa2a"
+      },
+      "status": "cancelled"
+    },
+    {
+      "attempt_id": "3056aa7e9e5c493887dda74f0f5dcd3a",
+      "candidate_id": "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "candidate_revision": "c4a28acb61adc5b566d1b5793b8cf09c0b7ee2d08cad18079c3728aa807b28f1",
+      "paid_wall_seconds": 6.5269979409640655,
+      "receipt_hashes": {
+        "evidence": "24f1b05a9272257ee7d46099b15ae17f8e04c30aea661b88ac3ef620c5d28832",
+        "request": "dc98148f13b538aef119bf93f5621179be83e3fe0a12fa7bdc3d31e2be8bf706",
+        "result": "502971d5ee1d389e201a568ac55e2a9f8997b25985c9e3beb3d5200be754d3b6"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "32c79dc0456d4bc589e9e36bab27316c",
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "paid_wall_seconds": 14.692913618055172,
+      "receipt_hashes": {
+        "evidence": "879a5c3147560786722888f05eec3b672c891e92692f6179064445087866c620",
+        "request": "b0252df7af71b38b17c4859b0db8a4a6150196000de6e6f167074ad4c208abdc",
+        "result": "fb609ae7917e9db139e910037f45366fcc6a2055b6cb67fd3dc2017e32bd4f70"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "33f8a3a2df494506b3b1c793556c7c83",
+      "candidate_id": "bcap-pure--43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+      "candidate_revision": "61b5c86289eada345408f765e861ddcff146ddcc351f18798eaef00f8b52ddd9",
+      "paid_wall_seconds": 6.471655826084316,
+      "receipt_hashes": {
+        "evidence": "718e35d672ed159c1bd3fd4efe086ef9b29b2f07c4b83294a3037906450427fc",
+        "request": "e677de706ec4ab38b07743bc8e9bd0bb3712533d66169d9653bb65fdb9089143",
+        "result": "f15289f3e04810f939314d014d44617759bbcc5dd4a2a23da68965628cb3b570"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "3a777010b37a48339e81a32d06ce5c45",
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "paid_wall_seconds": 131.16836533299647,
+      "receipt_hashes": {
+        "evidence": "92984bab37b8bcc474535bfd3bd152b6ff0cb775a0fde0cb3545cdd8a23b0de8",
+        "request": "260acc7a2973a7f6beac1c8b22ecb0acc313e6510d1b100798d7799f370954da",
+        "result": "e4feb61a21d4e351a043917997017791e8fd33f234467db89dc1be308b60f741"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "446d5f9437ee4e329273ba1f1acc97f1",
+      "candidate_id": "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "candidate_revision": "c4a28acb61adc5b566d1b5793b8cf09c0b7ee2d08cad18079c3728aa807b28f1",
+      "paid_wall_seconds": 10.274633813998662,
+      "receipt_hashes": {
+        "evidence": "057d0408b5422e5f361d717835bcbbfe7c08f1ce708bf5878806a12cdde73b00",
+        "request": "743ec5df5bdd5aeb5ba009820f584a97002a5bb8cbee556a7acefac7f62a60c7",
+        "result": "93be7217b3682863bd035c23915ef9b6fdf78fb8360a76589e20c33d2cd490bb"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "4aeaa2316a8a4a119cbd8cff23ccee09",
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "paid_wall_seconds": 10.389492925954983,
+      "receipt_hashes": {
+        "evidence": "96fa85fc9fa977e6ba97b9fbd662d1e78036ecd05808c4afb1915a503ba2d543",
+        "request": "73d1de9fac9f89ec534235e8e9c2db830a38f43b9ccda84a3668894ad95cdb73",
+        "result": "7eb5ad358f0df952fae836835f41b57968b231115ea71e1cf84c5dd7774c0c3d"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "4eb5c35e509b4299a2289fa78ff83f8d",
+      "candidate_id": "bcap-pure--93c9484d09ce9d3eb4f2f5deb1cdf4d3a012ff5d8e60146059360b2ad8e279f4",
+      "candidate_revision": "60483ffa00c237a12daf1b4b277d45c08eb8168630f9dd888eced59553591225",
+      "paid_wall_seconds": 6.678742342977785,
+      "receipt_hashes": {
+        "evidence": "19344cdfbf698d1230586944fa6357b07dec97776d0da6b87afd84d0b14ddcc9",
+        "request": "825dbb192b5d7a5c55272ca969913f301c7be6bb2c7a35b4eac23d4dde926541",
+        "result": "82fd62a3681d27e3ba5ae083718e268a6dce7094e31e67d10d972dffdd41a2e0"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "51eb0fc4dbdb4af1888a2ce8e9f6d3cf",
+      "candidate_id": "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "candidate_revision": "c4a28acb61adc5b566d1b5793b8cf09c0b7ee2d08cad18079c3728aa807b28f1",
+      "paid_wall_seconds": 7.042829246958718,
+      "receipt_hashes": {
+        "evidence": "a8f4fd24a7538500524836a4775daae79d13728190da34f3dd1bc87f3a4ef83f",
+        "request": "1d7f1027d8913a7553ffacaaeaee16cf27012d231b0f825c97dececc0cb8385f",
+        "result": "e85fcf950fba31d655abe895dd613616d79c9fa582618ed73843d8908d5cafa1"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "5b905ab81da0430588f03d302a43df32",
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "paid_wall_seconds": 7.657906718086451,
+      "receipt_hashes": {
+        "evidence": "2a8be3d35ba15a4fbb4bac1f85fc22ea29f39222e0b7c5f94e5a35b558b4aafe",
+        "request": "e6a0b7c3bfb4d5c5c5aad9d7cacbcae55f11edf4bd0f9860efe12240f8cd9273",
+        "result": "faf439bc198470e15e2b93f89f1d6ce1efec9cdd3c81da693fe5e31971f6a70c"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "5bc5dc450b234d19a71e37715620d71f",
+      "candidate_id": "bcap-pure--93c9484d09ce9d3eb4f2f5deb1cdf4d3a012ff5d8e60146059360b2ad8e279f4",
+      "candidate_revision": "60483ffa00c237a12daf1b4b277d45c08eb8168630f9dd888eced59553591225",
+      "paid_wall_seconds": 6.515666626975872,
+      "receipt_hashes": {
+        "evidence": "a7b5d455e466a184dfa752222fcadf666accea9c5611fd6192e5683405b1a8d8",
+        "request": "db9f7dc61adb70b0f9dc343422cd5cbf8e96a97ed22bc79f45f30eedc45b46b4",
+        "result": "8617f3185c866493c8abe8169b5b6df6a183c828555201bf98e8c8549a519aee"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "666f399c92fe4c59a9f08f5b851706b7",
+      "candidate_id": "bcap-pure--e94cef26b873872b35a6dd7f7386e9e73d1ed0473b4561cae0b63d6a84040a33",
+      "candidate_revision": "2196057f98d30c165fd705eaa671c5fa681246c80bd4f6718588a56a9501db20",
+      "paid_wall_seconds": 7.251794448005967,
+      "receipt_hashes": {
+        "evidence": "d7e0cf3a0efa7b4f9df0945e61104517ad3fb35d8f5e69be15f5b2a11ebd9577",
+        "request": "606448ec8acbb3f70f58649cfced86a439977285b46ea673c015df09b3ef2c45",
+        "result": "26050ae5473a3fd98e3a06147e9a6fd85b49fd5c16f1d39e919f900ec34cb290"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "676619fbfa5e4fe59a312df6662f6c30",
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "paid_wall_seconds": 7.073487506015226,
+      "receipt_hashes": {
+        "evidence": "931bf11f23e2f3a9a8682b8576cfb2503940c38b99f8185868b6b9c77d543bc0",
+        "request": "01d073971b1486fb6dee36edc482f3e23752ef9833c8e56eecb150441a032761",
+        "result": "11801a977f1803a73919f47e1c66cfe1800109af56685837021b17e473acba51"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "6a9fedac7bbb4ecd8a080a40230f6416",
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "paid_wall_seconds": 131.96428568498231,
+      "receipt_hashes": {
+        "evidence": "a74459367375d2367d402de498ed66aee043f44174b928307220f1e604945d31",
+        "request": "9f3dd16bfc6ea96b9a5da33ab4ca8219b79bc4a8d8ec693fbdb789fb5f240975",
+        "result": "2761b8d59a2d17f9912ec2d981e1f5574aa82bcc08339f7f7f11cbc42e04883c"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "6f806410852b4ff0a3482569b3b3fc99",
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "paid_wall_seconds": 139.3736281329766,
+      "receipt_hashes": {
+        "evidence": "049172ad3f22b6275f8c42635802c356990b00f9424c3e061a7911b453865a1a",
+        "request": "83d54dff1a2ae8701c82fb145357b7e4543935445aeba7085eb8da0a9845de5c",
+        "result": "00a1bc5effd9b01a4e5fb96047654d7065d543a0a950dd44fbb6b340f3b99737"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "78a1e4390452414abc496855d0097111",
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "paid_wall_seconds": 14.704186085029505,
+      "receipt_hashes": {
+        "evidence": "3185949ec49b4a2245c7611780c4be51221968219eda16662a634eea744d6a04",
+        "request": "e48837b1957cb72e1befe8f3822f562e93908d353cff2db83e87ada71531db1e",
+        "result": "a9b44c5fed317b9a379db58d6eb30a53597a67fbf5e1f1aabe1aa426a7ada7b0"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "7d3b1facce1f4314b9249a8be80cc1db",
+      "candidate_id": "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "candidate_revision": "c4a28acb61adc5b566d1b5793b8cf09c0b7ee2d08cad18079c3728aa807b28f1",
+      "paid_wall_seconds": 14.22934591898229,
+      "receipt_hashes": {
+        "evidence": "d4c069d8e548c5b236d61f1a4e20e6961c01d403020218d2591c169d42b1c428",
+        "request": "4b1914beea2554e5b541c482bd3c0e7bf4efc11c1e33a746afa2b767d1b37be7",
+        "result": "2972a81c766a381c1a3f81b35002ea666435216aef20cce9d2a79ec6c5795952"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "80b050360e4d4202b5d05138c25cc5d9",
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "paid_wall_seconds": 6.5279965930385515,
+      "receipt_hashes": {
+        "evidence": "42d3f99ad7e474634777531c0d228f762675df094cc100d83868d847fd8d9d85",
+        "request": "0919a135e574b4d9e8476dd7c30c0e3044e2721938d4d1d9937c72cb16d7f742",
+        "result": "4a769d91da9794a337aa2512f80044b0154bb7b129a0f0296f974bfb0b9d7a71"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "80f86665c2924acabb3807936ca9af19",
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "paid_wall_seconds": 14.265254441066645,
+      "receipt_hashes": {
+        "evidence": "fb8932169d74ae1b984fdcaefc0b6c8bb37dce0e575514d50a5d7efe222c3364",
+        "request": "fd7cb1f35c955bbd92d29293c32a36b6de46d40f4b9e16b2a0b296e2767e7917",
+        "result": "cb7a8e92e5696fa8ccea390215e28ce021439cd69eadcf3d871dfbf1eaab1358"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "83d84e50247e4c08be21f119691bd5ab",
+      "candidate_id": "bcap-pure--e94cef26b873872b35a6dd7f7386e9e73d1ed0473b4561cae0b63d6a84040a33",
+      "candidate_revision": "2196057f98d30c165fd705eaa671c5fa681246c80bd4f6718588a56a9501db20",
+      "paid_wall_seconds": 6.4314428709913045,
+      "receipt_hashes": {
+        "evidence": "8f5a9cf37c56d38a1528fc56e40f4aaab77750f1ceb7a019d2dd3deef6a6545c",
+        "request": "d7916f8d62bad01a755091e109d7de527f4ebb0784f305b9d036ce32d1ea9e02",
+        "result": "8c76cda56c7cededb2313eabbe6f3796c1e6d3bcb8fff662b21a04b554d5e98c"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "9fd6055cda01483994f65867dd72eec6",
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "paid_wall_seconds": 7.266436827951111,
+      "receipt_hashes": {
+        "evidence": "e4a51514a5d624f2f01223fa40056fa09048edbd33bc9594f49adf25d716def0",
+        "request": "010e9625b13fea2c0c5b6481e40fda314d5ab2d120433a343cbdfbf2616b01cf",
+        "result": "f70b39981e48fbd0665617617d3137b3683d2d12e404d3ca59d778e2b946f38c"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "a17d32ae15274bed96bb324a239041bd",
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "paid_wall_seconds": 10.47222512809094,
+      "receipt_hashes": {
+        "evidence": "1026913595ea2057d08da9821679f64305f75dcd9e14dbe054e47b8268e2d330",
+        "request": "39323b8a41174ddf73179cfa7d6d70b7578adf2e8741e65d7849cb4cd0cb28d6",
+        "result": "3ea05d30680a3c172ab20a7ded4cf1eccbb7df0505b8d943a6b8e4a452900288"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "a36a9ee30bfc4caa92fa9f842613c2e4",
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "paid_wall_seconds": 140.4610472319182,
+      "receipt_hashes": {
+        "evidence": "09c5b231d13163d41d83a68f2adc1a147d6af629334ae2f4a932a9d8fcb8ec5f",
+        "request": "87c588be4ede5e715b298c9845133a9ab28c2561d569981911fccaa64cff68a2",
+        "result": "35e25cc07294d30d16106f1173b8d8ff72536a6bf4747fc525f71222a1e6cdf9"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "a43d949bc0094a80a87dbfaa976636ae",
+      "candidate_id": "bcap-pure--b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+      "candidate_revision": "18a217e7897c4593e54c3d65295bfc5ed982fea10f86ecdd707d8653e4ea06ea",
+      "paid_wall_seconds": 7.16299256705679,
+      "receipt_hashes": {
+        "evidence": "a3977a1318a9c30cbc6c8fe2039541ea1a2c70bb9dea3df22459bb59a000c472",
+        "request": "5cf886e0017f00d6ea79ae3d4ffb8ac038c1a4c61dcb2fd64ba69d7c3fe86826",
+        "result": "f4dd05c537c3a3b5bdc8f4cbb459714e640284b54d1a2d1c57794c40eb289970"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "aa60b1572b3f403ca23204b47806a5e1",
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "paid_wall_seconds": 6.304015361936763,
+      "receipt_hashes": {
+        "evidence": "74f33cdc27fec02d2773b19e93280e324bb5335f206a4ee3c75ae18f6e749c84",
+        "request": "fe2e7dd450cc7d84a811b99567bda2d65d4fe914c33173e9fe1468cc57d6701e",
+        "result": "27ca7a5ee06181f407aba2dc93a0b0b940eecb87b51909744d05777114f59e1e"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "aae235aaaaa64ac2b5e36c18f4af3155",
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "paid_wall_seconds": 10.580151983071119,
+      "receipt_hashes": {
+        "evidence": "ff78d7e2118de48ac50c88fb80df34fdeb5ed8c3a973665618bc6ef5c350fcb1",
+        "request": "8dbf4f7de7d524cae398ffd4868634bbf618558dca7706ec7e507591dad3320d",
+        "result": "5f9c4206db50122e7eb3ca73206649a656dcb5f955bff48b910cd4b0a1b045c5"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "ab5eda290c54483cb5ee67c5775149e7",
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "paid_wall_seconds": 6.707080826978199,
+      "receipt_hashes": {
+        "evidence": "a68ea9a037faffdf2f17d6fa3d3b460e31956b1a66ebf47326881aafc4fac4a1",
+        "request": "5f1d37bb8842108bf009cf3f07524bb190b7cbd33052cd9215c58a44f649d55c",
+        "result": "f888be90d178b6a9871ef1fd0961a8d8f244f637525ffd296a873457da44e3d4"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "accd2a2f1c4845e382db9ea56c6326f2",
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "paid_wall_seconds": 6.206653682049364,
+      "receipt_hashes": {
+        "evidence": "612c9b3948f2337ffbc35e0161055ec6390645245cbc8288d3549858777c3a4e",
+        "request": "c314343c2bde0841c431fdc6f2113037946d6e2938e4d3bd5ed52b8682c5c7f4",
+        "result": "ff7e955adf652abf6e3a15a0dfafdba626636c69df0c6cd02ea69b1ab2033612"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "ad6b7c03424542d3b6090541b9923ae9",
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "paid_wall_seconds": 14.098155300016515,
+      "receipt_hashes": {
+        "evidence": "44724ac09f71e5aff841ddb70867cafc92e3d2aa593c0770c404a165a3960352",
+        "request": "06d72ea20a29da01b863ea569c12d599f10b2ce5dcbc75e12fa6c67277fe68e7",
+        "result": "73ed8e009a990103a4397dbb61270a9e7428a8beb69885d254fc231a31f33a77"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "b812d90758a84198be73f68c9673f370",
+      "candidate_id": "bcap-pure--43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+      "candidate_revision": "61b5c86289eada345408f765e861ddcff146ddcc351f18798eaef00f8b52ddd9",
+      "paid_wall_seconds": 6.192651285906322,
+      "receipt_hashes": {
+        "evidence": "a5c3c91d5642ce802626306bf88ef26c364a9f4de395cc6a1ad8057c2617f4e8",
+        "request": "53742e096b7658dd203916fd069b51d1120e62dd0fff8c00860e6030582b0866",
+        "result": "25f0d0a5646173542b41944d459e09a349c9e333e52f0232bd00754547f86fa7"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "b955ece8035444bc8374584ca8f93730",
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "paid_wall_seconds": 6.711307863006368,
+      "receipt_hashes": {
+        "evidence": "8eb9bf9c31f41324c7b74b143459398aea171d867d3509d265fd6bf2155243b9",
+        "request": "6c14c23cca4f14f214c2486ccd9573f83f756bd724f857e38b8e08bdfd9e9f0e",
+        "result": "0c734ff2b8e5764200946f6f7bd8f9e7824e8088d60d83722e8b68587d11ae22"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "c76e7f5e2765443a973215a909328e55",
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "paid_wall_seconds": 7.133902929024771,
+      "receipt_hashes": {
+        "evidence": "2d37f40a80620b1002c3b16c8b77b140b6869fe172d5325259a0b59a0c578f34",
+        "request": "948e642871de160e383766d3b9dd607395f85f66a097c7e01e2865f45ef29b15",
+        "result": "54277a180ab343a312cb32415ae1a9d1bfb7e2787c3f414548d52b7e43fe718a"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "c9ce614e1f01418c9228772d1090bc87",
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "paid_wall_seconds": 6.1026964919874445,
+      "receipt_hashes": {
+        "evidence": "56612c930989793643e6e6503871913c68a5d1dcb0b9ac9368d7b021500a6a9b",
+        "request": "eb38fcee3c7e7fb747714cc0190e8d7757c3a95590a8fccf17e30d78ac9fac9a",
+        "result": "9c6fc65c7bebdc0b4f31b3687778da6dab209a480a98963b0ec0826df1ab0941"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "d020e2bc803a4ab8ad181f76f8753dc4",
+      "candidate_id": "bcap-pure--43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+      "candidate_revision": "61b5c86289eada345408f765e861ddcff146ddcc351f18798eaef00f8b52ddd9",
+      "paid_wall_seconds": 7.098756002029404,
+      "receipt_hashes": {
+        "evidence": "4d897c2cdc6e82770b2dee136466b0dbbae1d8db7b2cd73f3a2d10b413580c93",
+        "request": "10270b74839d30664eebc6d2c94f5c27a06852fb3f745afa4b97c84cd0c05d29",
+        "result": "d92ce5171aa71f96ae6624420c34967973b3c3918360693a2a98cf76f8df9d36"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "d04e0075fd78429ab0aca4e8df285ca9",
+      "candidate_id": "bcap-pure--e94cef26b873872b35a6dd7f7386e9e73d1ed0473b4561cae0b63d6a84040a33",
+      "candidate_revision": "2196057f98d30c165fd705eaa671c5fa681246c80bd4f6718588a56a9501db20",
+      "paid_wall_seconds": 6.566238365019672,
+      "receipt_hashes": {
+        "evidence": "da90d90b65e66c9c006773ed64b5908a63a886523c599104f436887a7754acb0",
+        "request": "37d362b582d847d0ab78ee836b2c4786861052055176f837e1ef2a5cbd81cc19",
+        "result": "c76d2f01dabaf1ce577d2bfc57310a7a34764f9a9e97a9a1ee05b5f74cdd7f2a"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "d179717b2071476b8115a926ae9f41c6",
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "paid_wall_seconds": 10.648085971944965,
+      "receipt_hashes": {
+        "evidence": "c6861a0e2aa783232edc729e1a6847fd709ee960ea7d1ab562719fc74fabbfaa",
+        "request": "7a4f265f67e37f110d9376efd5752a64cf24d4c322ab50b535b651b86aece3b6",
+        "result": "b60eab10f5c10a0e1a9b0950c045874c3f9c55c88f490021297f7c51dbb5ec43"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "d295b50685f34011822aa9836946482d",
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "paid_wall_seconds": 8.76890392799396,
+      "receipt_hashes": {
+        "evidence": "3fb53a2977e704d371a17c30ae162b5c80c61323c43be5e5ab20d303cfb613d6",
+        "request": "fe356520a59875a9133c149b73ed8e3b919e99c4005cccef130729b60c31b5bf",
+        "result": "0723f89ac31087b7721a09e187f1390148500871913dcee37d4139a268b844cd"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "d342f0ff8c4d421aa26360478dbf7680",
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "paid_wall_seconds": 7.1481354960706085,
+      "receipt_hashes": {
+        "evidence": "0d977354b755a8e7adc2410c979a42391ed5b92bd3d1aa2128dc9b9fcb20be6f",
+        "request": "cf7f85b09de69b16c770649b30025480ebcd13f0cd5a797d5086d126907f5cb0",
+        "result": "78bc009f523b5dae4804a3e7b4465f5d035b197010d2d29f4aa9a36295c8fc17"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "dc68bad9eefd476294494bceeb125881",
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "paid_wall_seconds": 6.719901676056907,
+      "receipt_hashes": {
+        "evidence": "905d4a6cb76a6b6d1f4bff763b7c4ca60aa40601c044f2b919f2b8509f66ad25",
+        "request": "2a4d8cf5de44d1625cfc8139e39cfae27f687b3120c9afd96122a4e2e9cb2946",
+        "result": "f2edce1b7140782c8be20d3105304e3661d05d04db877f4cf32787201473b8d2"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "ea25e68da70f4256a166e6c923a63ff3",
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "paid_wall_seconds": 6.884946122998372,
+      "receipt_hashes": {
+        "evidence": "581cd38d942654ddfaf5dfb25f4773f402a0dbdbca5f6d7aefc86bd63e148fe9",
+        "request": "13d423acfcdad3e8f5ebede140133e1538fdc9c2bf6a29a55603736f14f275b6",
+        "result": "883b03b2fabd45d8cde2390cd9404ee368c87722c66b69457d2c8799307f5c5a"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "ee65b34fe5f74eaeb8f8580624820485",
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "paid_wall_seconds": 7.019753145053983,
+      "receipt_hashes": {
+        "evidence": "a67bb64bff3b6d1e2b99b9bf9f5691fea765bb4ee7eb4b7a210ea33f97d1ca92",
+        "request": "b833e9bfefd9a3944a2c390df2d8415bd31192728d5f8c40cfd78dc548c0f8a9",
+        "result": "1a0d46aa89a6b78e481ed3b21876a6cd89d3d7209745a829af88d3ae406edba1"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "f8c80814105a49488a79cd7ce67871d0",
+      "candidate_id": "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "candidate_revision": "c4a28acb61adc5b566d1b5793b8cf09c0b7ee2d08cad18079c3728aa807b28f1",
+      "paid_wall_seconds": 6.784015410928987,
+      "receipt_hashes": {
+        "evidence": "e6d0df0b114674fc38142f662826c84044797fbd49be8021a5de962d027684d7",
+        "request": "b2aef2af607cd64eeae367d102ac6f7a17b4be77c8c135ba68efaed17535966f",
+        "result": "7dff8ca3e040fe9d8c171a49c08c42e3efa5d91a98c2f916284f12f49dda169a"
+      },
+      "status": "completed"
+    },
+    {
+      "attempt_id": "fdc40f446d964237b012235b3c6a283f",
+      "candidate_id": "bcap-pure--b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+      "candidate_revision": "18a217e7897c4593e54c3d65295bfc5ed982fea10f86ecdd707d8653e4ea06ea",
+      "paid_wall_seconds": 6.513807665091008,
+      "receipt_hashes": {
+        "evidence": "960e631624b7d427758b96ef2aa8296659f2f0ed3f1523cb2570186e44049681",
+        "request": "2f498df6f5912b3ac02bec741d5cca555f6bb91c88dfee1a3068cdd2b2353607",
+        "result": "3fe57d57782a746f3c1f812d9e81d6e76543fa7e907b94db4146a4d679aea673"
+      },
+      "status": "completed"
+    }
+  ],
+  "audit_status": "PASS",
+  "candidates": [
+    {
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "configuration_id": "3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "host_update_contract_valid": true,
+      "loss": "hinge",
+      "lr": 0.0010625,
+      "paid_wall_seconds": 133.08506710699294,
+      "required_measurements": 6,
+      "required_passes": 1,
+      "required_total": 6,
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "c76e7f5e2765443a973215a909328e55",
+          "attempt_status": "completed",
+          "compatibility_key": "82473c92b70cba2c6dd8731f7fdb32d2c59dedda03e793417cdc4ead43c09187",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 136,
+            "first_pass_step": 94,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 16,
+            "passing_suffix": 16,
+            "stable_from_seconds": null,
+            "stable_from_step": 94
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.133902929024771,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.004517143592238426,
+            "recon_mse": 0.019146235659718513
+          }
+        },
+        {
+          "attempt_id": "2e89b6ea84d14007b985c3bb70f64cfe",
+          "attempt_status": "completed",
+          "compatibility_key": "ccf194523e0f8fdad95247d24371e40c6cefc17c993be8c9e9bcd5e1e1c3be19",
+          "paid_wall_seconds": 7.390291974996217,
+          "reasons": [
+            "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+          ],
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1",
+          "terminal_metrics": {
+            "parity_comparisons": 4
+          }
+        },
+        {
+          "attempt_id": "2f826b19844140c091965928a874119b",
+          "attempt_status": "cancelled",
+          "compatibility_key": "6a71102e92b6b255432d86d54f6e1337272a94822651b78d3d50c84abb282d5b",
+          "paid_wall_seconds": 79.86234539293218,
+          "reasons": [
+            "request cancelled"
+          ],
+          "status": "INCOMPLETE",
+          "task_id": "five_word_joint_acquisition",
+          "terminal_metrics": null
+        },
+        {
+          "attempt_id": "78a1e4390452414abc496855d0097111",
+          "attempt_status": "completed",
+          "compatibility_key": "a0534d50b86da9963250328529cb6265aee5644d426cfcd7217dcd6e3710d7e4",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 875,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 2,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.08992718580411746,
+              "metric": "mean_error_sigma",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.2,
+              "value": 0.28992718580411747
+            },
+            {
+              "margin": -0.08405397544121855,
+              "metric": "cdf_ks",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 0.13405397544121855
+            }
+          ],
+          "last_five_cdf_ks": [
+            {
+              "cdf_ks": 0.2831770342946164,
+              "step": 834
+            },
+            {
+              "cdf_ks": 0.039496410889001354,
+              "step": 875
+            },
+            {
+              "cdf_ks": 0.07644943608148125,
+              "step": 917
+            },
+            {
+              "cdf_ks": 0.03775753036780555,
+              "step": 959
+            },
+            {
+              "cdf_ks": 0.13405397544121855,
+              "step": 1000
+            }
+          ],
+          "paid_wall_seconds": 14.704186085029505,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "gaussian1d_acquisition",
+          "terminal_metrics": {
+            "cdf_ks": 0.13405397544121855,
+            "finite_fraction": 1.0,
+            "mean": 1.8550364070979413,
+            "mean_error_sigma": 0.28992718580411747,
+            "sample_count": 4096,
+            "std": 0.4305206165312262,
+            "std_ratio": 0.8610412330624524,
+            "step": 1000
+          }
+        },
+        {
+          "attempt_id": "4aeaa2316a8a4a119cbd8cff23ccee09",
+          "attempt_status": "completed",
+          "compatibility_key": "6cf33363090115d02fa3d8a1a0e08be533d319599ead4df49ef7b0418d1ee2aa",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -2,
+              "metric": "modes",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 16,
+              "value": 14
+            },
+            {
+              "margin": -0.391259765625,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.458740234375
+            },
+            {
+              "margin": -66.6417438030243,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 67.49174380302429
+            }
+          ],
+          "paid_wall_seconds": 10.389492925954983,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "ring16_acquisition",
+          "terminal_metrics": {
+            "component_core_covariance_error": 0.7901965668424964,
+            "component_core_min_eigen_ratio": 0.13616426289081573,
+            "component_covariance_error": 67.49174380302429,
+            "component_min_eigen_ratio": 0.6567501425743103,
+            "covariance_error": 0.22582830488681793,
+            "hq": 0.458740234375,
+            "mass_tv": 0.092041015625,
+            "max_component_spill": 0.9475524425506592,
+            "mean_error": 0.049105387181043625,
+            "min_hq_mass_ratio": 0.05859375,
+            "min_mass_ratio": 0.58203125,
+            "modes": 14,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.09060509828484348,
+            "target_scale": 3.0029242038726807
+          }
+        },
+        {
+          "attempt_id": "ea25e68da70f4256a166e6c923a63ff3",
+          "attempt_status": "completed",
+          "compatibility_key": "103e3eaf9c946b74c6b82e29619f8ee9f33513c28a3f083de697e4ab89e237c1",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2171386808156967,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.08286131918430328
+            }
+          ],
+          "paid_wall_seconds": 6.884946122998372,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.12501758337020874,
+            "mean_abs": 0.08286131918430328
+          }
+        },
+        {
+          "attempt_id": "dc68bad9eefd476294494bceeb125881",
+          "attempt_status": "completed",
+          "compatibility_key": "d1c450c68225f929ca78b7c294bd449ba7a7703bc3194f08e2b1d20eca08ad5e",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.23350210956212292,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.6164978904378771
+            }
+          ],
+          "paid_wall_seconds": 6.719901676056907,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.6164978904378771,
+            "unused_hold": 0.9894794477149844
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [],
+      "whole_tier1_measured": false
+    },
+    {
+      "candidate_id": "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "candidate_revision": "c4a28acb61adc5b566d1b5793b8cf09c0b7ee2d08cad18079c3728aa807b28f1",
+      "configuration_id": "f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "host_update_contract_valid": true,
+      "loss": "hinge",
+      "lr": 0.00425,
+      "paid_wall_seconds": 69.41412315389607,
+      "required_measurements": 6,
+      "required_passes": 2,
+      "required_total": 6,
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "51eb0fc4dbdb4af1888a2ce8e9f6d3cf",
+          "attempt_status": "completed",
+          "compatibility_key": "90faf33dd1371867d65a821a28e6e2e1baef2682e3817d8a251289eaa323fd71",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 63,
+            "first_pass_step": 21,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": null,
+            "stable_from_step": 21
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.042829246958718,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.11840250343084335,
+            "recon_mse": 0.012361206114292145
+          }
+        },
+        {
+          "attempt_id": "1032e1df4c694b14a3d5628ca4bd23dd",
+          "attempt_status": "cancelled",
+          "compatibility_key": "6ac8b55641c89df13ecb3741e853822427311decbbe953f22ea6120e9516e746",
+          "paid_wall_seconds": 24.55630082206335,
+          "reasons": [
+            "request cancelled"
+          ],
+          "status": "INCOMPLETE",
+          "task_id": "five_word_joint_acquisition",
+          "terminal_metrics": null
+        },
+        {
+          "attempt_id": "7d3b1facce1f4314b9249a8be80cc1db",
+          "attempt_status": "completed",
+          "compatibility_key": "98a5a6f7b5fec737a06be4c77dcc353111896b07e3d7b576faaaa9e532f50461",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 375,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 1,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.04107664717552405,
+              "metric": "cdf_ks",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 0.09107664717552405
+            }
+          ],
+          "last_five_cdf_ks": [
+            {
+              "cdf_ks": 0.1278830367382663,
+              "step": 834
+            },
+            {
+              "cdf_ks": 0.08977105053966022,
+              "step": 875
+            },
+            {
+              "cdf_ks": 0.27570273178171184,
+              "step": 917
+            },
+            {
+              "cdf_ks": 0.12295674270091861,
+              "step": 959
+            },
+            {
+              "cdf_ks": 0.09107664717552405,
+              "step": 1000
+            }
+          ],
+          "paid_wall_seconds": 14.22934591898229,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "gaussian1d_acquisition",
+          "terminal_metrics": {
+            "cdf_ks": 0.09107664717552405,
+            "finite_fraction": 1.0,
+            "mean": 2.025480385753326,
+            "mean_error_sigma": 0.050960771506652236,
+            "sample_count": 4096,
+            "std": 0.4609205310647997,
+            "std_ratio": 0.9218410621295994,
+            "step": 1000
+          }
+        },
+        {
+          "attempt_id": "446d5f9437ee4e329273ba1f1acc97f1",
+          "attempt_status": "completed",
+          "compatibility_key": "80a34c02b0dc2aa1bb8e8592bcd490ab6a91d8d69e3baf7bb3a5e8c0f6e2ff40",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -4,
+              "metric": "modes",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 16,
+              "value": 12
+            },
+            {
+              "margin": -0.299951171875,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.550048828125
+            },
+            {
+              "margin": -3.570631400309503,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 4.420631400309503
+            }
+          ],
+          "paid_wall_seconds": 10.274633813998662,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "ring16_acquisition",
+          "terminal_metrics": {
+            "component_core_covariance_error": 0.601235861890018,
+            "component_core_min_eigen_ratio": 0.18166200816631317,
+            "component_covariance_error": 4.420631400309503,
+            "component_min_eigen_ratio": 0.2896200716495514,
+            "covariance_error": 0.11484430730342865,
+            "hq": 0.550048828125,
+            "mass_tv": 0.08203125,
+            "max_component_spill": 0.8584474921226501,
+            "mean_error": 0.11083116382360458,
+            "min_hq_mass_ratio": 0.12109375,
+            "min_mass_ratio": 0.47265625,
+            "modes": 12,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.07814063966707256,
+            "target_scale": 3.0029242038726807
+          }
+        },
+        {
+          "attempt_id": "3056aa7e9e5c493887dda74f0f5dcd3a",
+          "attempt_status": "completed",
+          "compatibility_key": "a94afc5c1b5651a2d3868ff991030699854f55f4d0b989ec734dd8011c9f0ed0",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2875787189230323,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.012421281076967716
+            }
+          ],
+          "paid_wall_seconds": 6.5269979409640655,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.13019117712974548,
+            "mean_abs": 0.012421281076967716
+          }
+        },
+        {
+          "attempt_id": "f8c80814105a49488a79cd7ce67871d0",
+          "attempt_status": "completed",
+          "compatibility_key": "ac681b994c0e5c8620d5e46323d8d13310ab82043dcbcd56b42f7eb80a23a58b",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 175,
+            "first_pass_step": 84,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 12,
+            "passing_suffix": 8,
+            "stable_from_seconds": null,
+            "stable_from_step": 142
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 6.784015410928987,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.9114856522846182,
+            "unused_hold": 0.9963127870578319
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [],
+      "whole_tier1_measured": false
+    },
+    {
+      "candidate_id": "bcap-pure--e94cef26b873872b35a6dd7f7386e9e73d1ed0473b4561cae0b63d6a84040a33",
+      "candidate_revision": "2196057f98d30c165fd705eaa671c5fa681246c80bd4f6718588a56a9501db20",
+      "configuration_id": "e94cef26b873872b35a6dd7f7386e9e73d1ed0473b4561cae0b63d6a84040a33",
+      "host_update_contract_valid": true,
+      "loss": "least_squares",
+      "lr": 0.0010625,
+      "paid_wall_seconds": 20.249475684016943,
+      "required_measurements": 3,
+      "required_passes": 1,
+      "required_total": 6,
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "666f399c92fe4c59a9f08f5b851706b7",
+          "attempt_status": "completed",
+          "compatibility_key": "55c804629539c84ac24590bfdacbd39a9bcda14c66149db861d05ff1fdddafdc",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 125,
+            "first_pass_step": 84,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 17,
+            "passing_suffix": 17,
+            "stable_from_seconds": null,
+            "stable_from_step": 84
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.251794448005967,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.004828219767659903,
+            "recon_mse": 0.023169027641415596
+          }
+        },
+        {
+          "attempt_id": "83d84e50247e4c08be21f119691bd5ab",
+          "attempt_status": "completed",
+          "compatibility_key": "b27e0e65aa546beda562084bae4182b4ababfa743d6f39121c47626fa933dc12",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2391365088522434,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.06086349114775658
+            }
+          ],
+          "paid_wall_seconds": 6.4314428709913045,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.07693804800510406,
+            "mean_abs": 0.06086349114775658
+          }
+        },
+        {
+          "attempt_id": "d04e0075fd78429ab0aca4e8df285ca9",
+          "attempt_status": "completed",
+          "compatibility_key": "f5b71eb94f1f5b4c08df7cfd8abbe115af50d282c1af6c87c85508157db236b4",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.21895321971803694,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.631046780281963
+            }
+          ],
+          "paid_wall_seconds": 6.566238365019672,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.631046780281963,
+            "unused_hold": 0.9902858175337315
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition"
+      ],
+      "whole_tier1_measured": false
+    },
+    {
+      "candidate_id": "bcap-pure--93c9484d09ce9d3eb4f2f5deb1cdf4d3a012ff5d8e60146059360b2ad8e279f4",
+      "candidate_revision": "60483ffa00c237a12daf1b4b277d45c08eb8168630f9dd888eced59553591225",
+      "configuration_id": "93c9484d09ce9d3eb4f2f5deb1cdf4d3a012ff5d8e60146059360b2ad8e279f4",
+      "host_update_contract_valid": true,
+      "loss": "least_squares",
+      "lr": 0.00425,
+      "paid_wall_seconds": 20.39409538405016,
+      "required_measurements": 3,
+      "required_passes": 2,
+      "required_total": 6,
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "19fec1d2875248ff975ae1265491cd71",
+          "attempt_status": "completed",
+          "compatibility_key": "a7b967ac5dd14c06a97fc138783af88867c3e159d050dc32e32d8a1e2b09d34a",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 105,
+            "first_pass_step": 21,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 22,
+            "passing_suffix": 19,
+            "stable_from_seconds": null,
+            "stable_from_step": 63
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.1996864140965044,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.010841377079486847,
+            "recon_mse": 0.006856846157461405
+          }
+        },
+        {
+          "attempt_id": "4eb5c35e509b4299a2289fa78ff83f8d",
+          "attempt_status": "completed",
+          "compatibility_key": "8fab1bb5d56bca6cb4a68ec3cd298432a879175e51a629d62dd29a7d23f52343",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 70,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 4,
+            "passing_suffix": 4,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 6.678742342977785,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.4288318157196045,
+            "mean_abs": 0.41393330693244934
+          }
+        },
+        {
+          "attempt_id": "5bc5dc450b234d19a71e37715620d71f",
+          "attempt_status": "completed",
+          "compatibility_key": "3ee70163217ce9b6fdee187cfa1db4eeea4b7e397f9536f0ac8f3983f63d4591",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 192,
+            "first_pass_step": 84,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 11,
+            "passing_suffix": 6,
+            "stable_from_seconds": null,
+            "stable_from_step": 159
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 6.515666626975872,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.8879541959882147,
+            "unused_hold": 0.9885899014770985
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition"
+      ],
+      "whole_tier1_measured": false
+    },
+    {
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "configuration_id": "bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "host_update_contract_valid": false,
+      "loss": "non_saturating",
+      "lr": 0.0010625,
+      "paid_wall_seconds": 185.5521261600079,
+      "required_measurements": 6,
+      "required_passes": 0,
+      "required_total": 6,
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "5b905ab81da0430588f03d302a43df32",
+          "attempt_status": "completed",
+          "compatibility_key": "1c6ac8bbf509363c8286f410676c654378a354345c55b205a5e0dfef9c2287f3",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 84,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 15,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.019920450448989865,
+              "metric": "recon_mse",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 0.06992045044898987
+            }
+          ],
+          "paid_wall_seconds": 7.657906718086451,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.0020322834607213736,
+            "recon_mse": 0.06992045044898987
+          }
+        },
+        {
+          "attempt_id": "9fd6055cda01483994f65867dd72eec6",
+          "attempt_status": "completed",
+          "compatibility_key": "31e46de4e1bd9fffa18ba0cf57287b00479216991bc61db79eae46da0f71c8ea",
+          "paid_wall_seconds": 7.266436827951111,
+          "reasons": [
+            "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+          ],
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1",
+          "terminal_metrics": {
+            "parity_comparisons": 4
+          }
+        },
+        {
+          "attempt_id": "6a9fedac7bbb4ecd8a080a40230f6416",
+          "attempt_status": "completed",
+          "compatibility_key": "93bea14b7dc01a8aac8261c709870d1e951749285c94c46fe7f1c390b7a18d6e",
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 0,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "paid_wall_seconds": 131.96428568498231,
+          "reasons": [
+            "encoder did not perform an intended optimizer update"
+          ],
+          "status": "FAIL",
+          "task_id": "five_word_joint_acquisition",
+          "terminal_metrics": null
+        },
+        {
+          "attempt_id": "32c79dc0456d4bc589e9e36bab27316c",
+          "attempt_status": "completed",
+          "compatibility_key": "01ef10de80cf82e33b9131afd7b89a01020f1d09ac42481ae522e671f13d1853",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 500,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 4,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.09001118521217992,
+              "metric": "cdf_ks",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 0.14001118521217992
+            }
+          ],
+          "last_five_cdf_ks": [
+            {
+              "cdf_ks": 0.143966150918166,
+              "step": 834
+            },
+            {
+              "cdf_ks": 0.11490947555760067,
+              "step": 875
+            },
+            {
+              "cdf_ks": 0.05978656332083743,
+              "step": 917
+            },
+            {
+              "cdf_ks": 0.1296335057252413,
+              "step": 959
+            },
+            {
+              "cdf_ks": 0.14001118521217992,
+              "step": 1000
+            }
+          ],
+          "paid_wall_seconds": 14.692913618055172,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "gaussian1d_acquisition",
+          "terminal_metrics": {
+            "cdf_ks": 0.14001118521217992,
+            "finite_fraction": 1.0,
+            "mean": 2.0984287113678874,
+            "mean_error_sigma": 0.1968574227357749,
+            "sample_count": 4096,
+            "std": 0.49504788187859217,
+            "std_ratio": 0.9900957637571843,
+            "step": 1000
+          }
+        },
+        {
+          "attempt_id": "d179717b2071476b8115a926ae9f41c6",
+          "attempt_status": "completed",
+          "compatibility_key": "269d7500255bcad899c7a009d190630d8435edb233f62afe60065b9cc7160f99",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -5,
+              "metric": "modes",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 16,
+              "value": 11
+            },
+            {
+              "margin": -0.379541015625,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.470458984375
+            },
+            {
+              "margin": -62.586137318611144,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 63.436137318611145
+            }
+          ],
+          "paid_wall_seconds": 10.648085971944965,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "ring16_acquisition",
+          "terminal_metrics": {
+            "component_core_covariance_error": 0.9130028989166021,
+            "component_core_min_eigen_ratio": 0.18440473079681396,
+            "component_covariance_error": 63.436137318611145,
+            "component_min_eigen_ratio": 0.6157886981964111,
+            "covariance_error": 0.1016504168510437,
+            "hq": 0.470458984375,
+            "mass_tv": 0.110595703125,
+            "max_component_spill": 0.9080118536949158,
+            "mean_error": 0.03191094473004341,
+            "min_hq_mass_ratio": 0.12109375,
+            "min_mass_ratio": 0.5,
+            "modes": 11,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.08927734798804336,
+            "target_scale": 3.0029242038726807
+          }
+        },
+        {
+          "attempt_id": "1960ec3f31484361962fecc229a69e32",
+          "attempt_status": "completed",
+          "compatibility_key": "8d72c8bc3476df9fc0159045473a403cb4f9b79a960415641174600e82b7a8be",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2250771328806877,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.07492286711931229
+            }
+          ],
+          "paid_wall_seconds": 6.611189475981519,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.09017051756381989,
+            "mean_abs": 0.07492286711931229
+          }
+        },
+        {
+          "attempt_id": "b955ece8035444bc8374584ca8f93730",
+          "attempt_status": "completed",
+          "compatibility_key": "07ad72526ba971a6eba4c55caa3940940be7b31eedc55475718973564736e937",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2189513142792222,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.6310486857207778
+            }
+          ],
+          "paid_wall_seconds": 6.711307863006368,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.6310486857207778,
+            "unused_hold": 0.9885933995246887
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [],
+      "whole_tier1_measured": true
+    },
+    {
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "configuration_id": "3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "host_update_contract_valid": false,
+      "loss": "non_saturating",
+      "lr": 0.00425,
+      "paid_wall_seconds": 183.82760386215523,
+      "required_measurements": 6,
+      "required_passes": 1,
+      "required_total": 6,
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "ee65b34fe5f74eaeb8f8580624820485",
+          "attempt_status": "completed",
+          "compatibility_key": "3df0d6cb394ef8cd9856d0ba393c1497c43aef98e437e7c8c6ace3eb8b2719da",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 63,
+            "first_pass_step": 21,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": null,
+            "stable_from_step": 21
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.019753145053983,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.011145614087581635,
+            "recon_mse": 0.006077683065086603
+          }
+        },
+        {
+          "attempt_id": "17891104e21a4817bb6a0c6372d15155",
+          "attempt_status": "completed",
+          "compatibility_key": "3ba86bebf04a630dc5cdf3eedc0e960c07f4b1d32b70625b4853de361a08da70",
+          "paid_wall_seconds": 7.523797992034815,
+          "reasons": [
+            "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+          ],
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1",
+          "terminal_metrics": {
+            "parity_comparisons": 4
+          }
+        },
+        {
+          "attempt_id": "3a777010b37a48339e81a32d06ce5c45",
+          "attempt_status": "completed",
+          "compatibility_key": "80bc8e782774dc481b95797a18517770e92eaa66553882e452b4a082e1128756",
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 0,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "paid_wall_seconds": 131.16836533299647,
+          "reasons": [
+            "encoder did not perform an intended optimizer update"
+          ],
+          "status": "FAIL",
+          "task_id": "five_word_joint_acquisition",
+          "terminal_metrics": null
+        },
+        {
+          "attempt_id": "23e19dacb7114d63b49ebb02527f1a8a",
+          "attempt_status": "completed",
+          "compatibility_key": "68acc571b30e9d96366f870eb347f41ce5667ddb9e3b622bbdbd6750f2dd9f9c",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 417,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 2,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.020236461565354136,
+              "metric": "cdf_ks",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 0.07023646156535414
+            }
+          ],
+          "last_five_cdf_ks": [
+            {
+              "cdf_ks": 0.052874689176823586,
+              "step": 834
+            },
+            {
+              "cdf_ks": 0.04766157323887654,
+              "step": 875
+            },
+            {
+              "cdf_ks": 0.17417186777077265,
+              "step": 917
+            },
+            {
+              "cdf_ks": 0.1277103416457251,
+              "step": 959
+            },
+            {
+              "cdf_ks": 0.07023646156535414,
+              "step": 1000
+            }
+          ],
+          "paid_wall_seconds": 14.806475167977624,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "gaussian1d_acquisition",
+          "terminal_metrics": {
+            "cdf_ks": 0.07023646156535414,
+            "finite_fraction": 1.0,
+            "mean": 2.00048916254309,
+            "mean_error_sigma": 0.0009783250861801207,
+            "sample_count": 4096,
+            "std": 0.5556614682660906,
+            "std_ratio": 1.1113229365321813,
+            "step": 1000
+          }
+        },
+        {
+          "attempt_id": "21c73b9fd45f408fa0b40ab182b976b4",
+          "attempt_status": "completed",
+          "compatibility_key": "03a4156c3b0477524cb53a5cc4cc526604c813e731ae2116bd0a90034038fccc",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -5,
+              "metric": "modes",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 16,
+              "value": 11
+            },
+            {
+              "margin": -0.287744140625,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.562255859375
+            },
+            {
+              "margin": -6.087912784516812,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 6.937912784516811
+            }
+          ],
+          "paid_wall_seconds": 10.395477715064771,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "ring16_acquisition",
+          "terminal_metrics": {
+            "component_core_covariance_error": 0.5870893057435751,
+            "component_core_min_eigen_ratio": 0.11383611708879471,
+            "component_covariance_error": 6.937912784516811,
+            "component_min_eigen_ratio": 0.2604106366634369,
+            "covariance_error": 0.035073693841695786,
+            "hq": 0.562255859375,
+            "mass_tv": 0.107177734375,
+            "max_component_spill": 0.980988621711731,
+            "mean_error": 0.09535851329565048,
+            "min_hq_mass_ratio": 0.01953125,
+            "min_mass_ratio": 0.66796875,
+            "modes": 11,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.07776501473540229,
+            "target_scale": 3.0029242038726807
+          }
+        },
+        {
+          "attempt_id": "accd2a2f1c4845e382db9ea56c6326f2",
+          "attempt_status": "completed",
+          "compatibility_key": "3920b61de0fa57b2df3950695f38e017a2ec26486182a27f6b1d98a86a82d226",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 70,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 4,
+            "passing_suffix": 4,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 6.206653682049364,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.2300739884376526,
+            "mean_abs": 0.3895387649536133
+          }
+        },
+        {
+          "attempt_id": "ab5eda290c54483cb5ee67c5775149e7",
+          "attempt_status": "completed",
+          "compatibility_key": "b8c6cfc5760d4f2319ea0341c08b3b62e79501ea9fd0c97a876f8140eaa6f61d",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 75,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 10,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.008423290973068709,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.8415767090269313
+            }
+          ],
+          "paid_wall_seconds": 6.707080826978199,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.8415767090269313,
+            "unused_hold": 0.9978891126811504
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [],
+      "whole_tier1_measured": true
+    },
+    {
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "configuration_id": "ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "host_update_contract_valid": true,
+      "loss": "relativistic",
+      "lr": 0.0010625,
+      "paid_wall_seconds": 192.58539328700863,
+      "required_measurements": 6,
+      "required_passes": 2,
+      "required_total": 6,
+      "submission_status": "blocked",
+      "tasks": [
+        {
+          "attempt_id": "676619fbfa5e4fe59a312df6662f6c30",
+          "attempt_status": "completed",
+          "compatibility_key": "8769b866e3eee1d41ab7f39e63f7fb08c20d3667ccaf1fc5fc75421d69852bbe",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 125,
+            "first_pass_step": 84,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 17,
+            "passing_suffix": 17,
+            "stable_from_seconds": null,
+            "stable_from_step": 84
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.073487506015226,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.004604631569236517,
+            "recon_mse": 0.024311479181051254
+          }
+        },
+        {
+          "attempt_id": "0f1994ca025f464c85124642088b217c",
+          "attempt_status": "completed",
+          "compatibility_key": "a93e847e0fbceec3cb34a192b271a7b2156a7a502a03ff4649eb96e9b883b25d",
+          "paid_wall_seconds": 7.84978503594175,
+          "reasons": [
+            "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+          ],
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1",
+          "terminal_metrics": {
+            "parity_comparisons": 4
+          }
+        },
+        {
+          "attempt_id": "a36a9ee30bfc4caa92fa9f842613c2e4",
+          "attempt_status": "completed",
+          "compatibility_key": "4f9d87466731a7d6d9f5b05bff05fd0f4cba81c59ae2ffcb8001216a4a989d95",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 17501,
+            "first_pass_step": 1667,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 19,
+            "passing_suffix": 8,
+            "stable_from_seconds": null,
+            "stable_from_step": 14168
+          },
+          "failed_terminal_thresholds": [],
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "paid_wall_seconds": 140.4610472319182,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "five_word_joint_acquisition",
+          "terminal_metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1953125,
+            "mass_berry": 0.1982421875,
+            "mass_grape": 0.2109375,
+            "mass_lemon": 0.2080078125,
+            "mass_melon": 0.1875,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9987101554870605,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 9.626422770213189e-05,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          }
+        },
+        {
+          "attempt_id": "ad6b7c03424542d3b6090541b9923ae9",
+          "attempt_status": "completed",
+          "compatibility_key": "195526e8ff05fdaeb2dbfaf497b45ea10eee913361cb6a644bd08322296249e2",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 375,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 6,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.018207492926387722,
+              "metric": "cdf_ks",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 0.06820749292638772
+            }
+          ],
+          "last_five_cdf_ks": [
+            {
+              "cdf_ks": 0.05411846519397412,
+              "step": 834
+            },
+            {
+              "cdf_ks": 0.08231091104837307,
+              "step": 875
+            },
+            {
+              "cdf_ks": 0.04931806259602367,
+              "step": 917
+            },
+            {
+              "cdf_ks": 0.038506311640404856,
+              "step": 959
+            },
+            {
+              "cdf_ks": 0.06820749292638772,
+              "step": 1000
+            }
+          ],
+          "paid_wall_seconds": 14.098155300016515,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "gaussian1d_acquisition",
+          "terminal_metrics": {
+            "cdf_ks": 0.06820749292638772,
+            "finite_fraction": 1.0,
+            "mean": 2.0400818080815952,
+            "mean_error_sigma": 0.08016361616319045,
+            "sample_count": 4096,
+            "std": 0.5587890411362039,
+            "std_ratio": 1.1175780822724077,
+            "step": 1000
+          }
+        },
+        {
+          "attempt_id": "a17d32ae15274bed96bb324a239041bd",
+          "attempt_status": "completed",
+          "compatibility_key": "e35f86090f0bc7ad4b11b18e7f8d01c6ecb537ff95baed7a1c57aba9e00cfe86",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -2,
+              "metric": "modes",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 16,
+              "value": 14
+            },
+            {
+              "margin": -0.393212890625,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.456787109375
+            },
+            {
+              "margin": -99.1946025133133,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 100.0446025133133
+            }
+          ],
+          "paid_wall_seconds": 10.47222512809094,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "ring16_acquisition",
+          "terminal_metrics": {
+            "component_core_covariance_error": 0.7483790926635265,
+            "component_core_min_eigen_ratio": 0.1654159277677536,
+            "component_covariance_error": 100.0446025133133,
+            "component_min_eigen_ratio": 0.9494692087173462,
+            "covariance_error": 0.45307454466819763,
+            "hq": 0.456787109375,
+            "mass_tv": 0.111083984375,
+            "max_component_spill": 0.8078431487083435,
+            "mean_error": 0.042149387300014496,
+            "min_hq_mass_ratio": 0.18359375,
+            "min_mass_ratio": 0.515625,
+            "modes": 14,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.12494746004760393,
+            "target_scale": 3.0029242038726807
+          }
+        },
+        {
+          "attempt_id": "c9ce614e1f01418c9228772d1090bc87",
+          "attempt_status": "completed",
+          "compatibility_key": "be292e2a4c81825470ec90bf10cf98fa6928795d4a8e5563b8a09e0982a64e88",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.22750976234674453,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.07249023765325546
+            }
+          ],
+          "paid_wall_seconds": 6.1026964919874445,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.07922613620758057,
+            "mean_abs": 0.07249023765325546
+          }
+        },
+        {
+          "attempt_id": "80b050360e4d4202b5d05138c25cc5d9",
+          "attempt_status": "completed",
+          "compatibility_key": "1a94f34ca479f9ea26d049bb26e1a76022ee32341d23edd98f012e48a395ffe8",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2508235320550284,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.5991764679449716
+            }
+          ],
+          "paid_wall_seconds": 6.5279965930385515,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.5991764679449716,
+            "unused_hold": 0.9898491138592362
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [],
+      "whole_tier1_measured": true
+    },
+    {
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "configuration_id": "5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "host_update_contract_valid": true,
+      "loss": "relativistic",
+      "lr": 0.00425,
+      "paid_wall_seconds": 193.8098060451448,
+      "required_measurements": 6,
+      "required_passes": 3,
+      "required_total": 6,
+      "submission_status": "blocked",
+      "tasks": [
+        {
+          "attempt_id": "d342f0ff8c4d421aa26360478dbf7680",
+          "attempt_status": "completed",
+          "compatibility_key": "cd9854eec8732e023137ee6639645d1b2a9a9c8536f12b550439ef29120448cd",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 63,
+            "first_pass_step": 21,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": null,
+            "stable_from_step": 21
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.1481354960706085,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.023710791021585464,
+            "recon_mse": 0.006918410770595074
+          }
+        },
+        {
+          "attempt_id": "288936eb39174fd3bf07f60e97763a64",
+          "attempt_status": "completed",
+          "compatibility_key": "a468093b474460ae02a767fda80656caa687d9dc92d79a5beeca8b41514d54c3",
+          "paid_wall_seconds": 7.369716702029109,
+          "reasons": [
+            "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+          ],
+          "status": "PASS",
+          "task_id": "clockfree_audit_measurement_v1",
+          "terminal_metrics": {
+            "parity_comparisons": 4
+          }
+        },
+        {
+          "attempt_id": "6f806410852b4ff0a3482569b3b3fc99",
+          "attempt_status": "completed",
+          "compatibility_key": "b2981c5c1bf94b43ffde558ec56becfc73375f93ca7f858d92662407cf4ad982",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 834,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 4,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.95,
+              "metric": "quality_fraction",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.95,
+              "value": 0.0
+            },
+            {
+              "margin": -5,
+              "metric": "modes",
+              "op": "==",
+              "status": "FAIL",
+              "threshold": 5,
+              "value": 0
+            },
+            {
+              "margin": -0.9,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.1,
+              "value": 1.0
+            },
+            {
+              "margin": -1,
+              "metric": "reconstruction_exact",
+              "op": "==",
+              "status": "FAIL",
+              "threshold": 1,
+              "value": 0
+            },
+            {
+              "margin": -0.9,
+              "metric": "minimum_reconstruction_token_probability",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.9,
+              "value": 0.0
+            }
+          ],
+          "optimizer_updates": {
+            "discriminator": 20001,
+            "encoder": 20001,
+            "generator": 20001,
+            "prior": 20001
+          },
+          "paid_wall_seconds": 139.3736281329766,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "five_word_joint_acquisition",
+          "terminal_metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.0,
+            "mass_berry": 0.0,
+            "mass_grape": 0.0,
+            "mass_lemon": 0.0,
+            "mass_melon": 0.0,
+            "mass_tv": 1.0,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 0,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 0.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 22.10481689274284,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          }
+        },
+        {
+          "attempt_id": "80f86665c2924acabb3807936ca9af19",
+          "attempt_status": "completed",
+          "compatibility_key": "46a625d9d0c69b69766c7832935df82f30f232ca376126b70bac4c4469de734c",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 667,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 2,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.06168303035151612,
+              "metric": "std_ratio",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 1.2,
+              "value": 1.261683030351516
+            },
+            {
+              "margin": -0.04674429124274314,
+              "metric": "cdf_ks",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.05,
+              "value": 0.09674429124274314
+            }
+          ],
+          "last_five_cdf_ks": [
+            {
+              "cdf_ks": 0.11765239756287249,
+              "step": 834
+            },
+            {
+              "cdf_ks": 0.06516560793957626,
+              "step": 875
+            },
+            {
+              "cdf_ks": 0.1434397914027541,
+              "step": 917
+            },
+            {
+              "cdf_ks": 0.046392211785884374,
+              "step": 959
+            },
+            {
+              "cdf_ks": 0.09674429124274314,
+              "step": 1000
+            }
+          ],
+          "paid_wall_seconds": 14.265254441066645,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "gaussian1d_acquisition",
+          "terminal_metrics": {
+            "cdf_ks": 0.09674429124274314,
+            "finite_fraction": 1.0,
+            "mean": 2.0039131882513175,
+            "mean_error_sigma": 0.007826376502634957,
+            "sample_count": 4096,
+            "std": 0.630841515175758,
+            "std_ratio": 1.261683030351516,
+            "step": 1000
+          }
+        },
+        {
+          "attempt_id": "aae235aaaaa64ac2b5e36c18f4af3155",
+          "attempt_status": "completed",
+          "compatibility_key": "da255498fd77bfc26e0fdba796fc753f7921caf09a19d491a1287ed5f6bd8758",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.027246093749999978,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.82275390625
+            },
+            {
+              "margin": -4.516516193374992,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 5.366516193374991
+            }
+          ],
+          "paid_wall_seconds": 10.580151983071119,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "ring16_acquisition",
+          "terminal_metrics": {
+            "component_core_covariance_error": 0.5016616713255644,
+            "component_core_min_eigen_ratio": 0.24163351953029633,
+            "component_covariance_error": 5.366516193374991,
+            "component_min_eigen_ratio": 0.34812042117118835,
+            "covariance_error": 0.03320864588022232,
+            "hq": 0.82275390625,
+            "mass_tv": 0.099853515625,
+            "max_component_spill": 0.34517765045166016,
+            "mean_error": 0.03581660985946655,
+            "min_hq_mass_ratio": 0.4375,
+            "min_mass_ratio": 0.48046875,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.04620475956788857,
+            "target_scale": 3.0029242038726807
+          }
+        },
+        {
+          "attempt_id": "d295b50685f34011822aa9836946482d",
+          "attempt_status": "completed",
+          "compatibility_key": "1e719b84ee800f13b5933a1a9681adf46c485730ce4c511e9ec0767534e57295",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 80,
+            "first_pass_step": 67,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 5,
+            "passing_suffix": 5,
+            "stable_from_seconds": null,
+            "stable_from_step": 67
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 8.76890392799396,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.3448672890663147,
+            "mean_abs": 0.42117419838905334
+          }
+        },
+        {
+          "attempt_id": "aa60b1572b3f403ca23204b47806a5e1",
+          "attempt_status": "completed",
+          "compatibility_key": "f5c538913c8770c3abd0d81666a74d3293aa81e5280dd358813cfbce17072ba5",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 117,
+            "first_pass_step": 84,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 15,
+            "passing_suffix": 15,
+            "stable_from_seconds": null,
+            "stable_from_step": 84
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 6.304015361936763,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.9834464616592982,
+            "unused_hold": 0.9886034224182367
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [],
+      "whole_tier1_measured": true
+    },
+    {
+      "candidate_id": "bcap-pure--b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+      "candidate_revision": "18a217e7897c4593e54c3d65295bfc5ed982fea10f86ecdd707d8653e4ea06ea",
+      "configuration_id": "b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+      "host_update_contract_valid": true,
+      "loss": "wasserstein",
+      "lr": 0.0010625,
+      "paid_wall_seconds": 20.07141895208042,
+      "required_measurements": 3,
+      "required_passes": 1,
+      "required_total": 6,
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "a43d949bc0094a80a87dbfaa976636ae",
+          "attempt_status": "completed",
+          "compatibility_key": "53fae5cb54622fe9805120ad24022f33a07323ee7f2e2fde22358f9bf5028fdd",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 136,
+            "first_pass_step": 94,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 16,
+            "passing_suffix": 16,
+            "stable_from_seconds": null,
+            "stable_from_step": 94
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.16299256705679,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.00808912143111229,
+            "recon_mse": 0.014130453579127789
+          }
+        },
+        {
+          "attempt_id": "02f803b831d44861820adce18355a59e",
+          "attempt_status": "completed",
+          "compatibility_key": "c7dc2839b74ea8d641310edaf24497f793d08585bf4265fce41e3f0e78959ce3",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2171386808156967,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.08286131918430328
+            }
+          ],
+          "paid_wall_seconds": 6.394618719932623,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.12501758337020874,
+            "mean_abs": 0.08286131918430328
+          }
+        },
+        {
+          "attempt_id": "fdc40f446d964237b012235b3c6a283f",
+          "attempt_status": "completed",
+          "compatibility_key": "2414c9cbda4419c4b9cdf20353590f0bb895db94d16d625cf2ee99a71441e019",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2466495322145178,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.85,
+              "value": 0.6033504677854822
+            }
+          ],
+          "paid_wall_seconds": 6.513807665091008,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.6033504677854822,
+            "unused_hold": 0.9898760169744492
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition"
+      ],
+      "whole_tier1_measured": false
+    },
+    {
+      "candidate_id": "bcap-pure--43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+      "candidate_revision": "61b5c86289eada345408f765e861ddcff146ddcc351f18798eaef00f8b52ddd9",
+      "configuration_id": "43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+      "host_update_contract_valid": true,
+      "loss": "wasserstein",
+      "lr": 0.00425,
+      "paid_wall_seconds": 19.763063114020042,
+      "required_measurements": 3,
+      "required_passes": 2,
+      "required_total": 6,
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "d020e2bc803a4ab8ad181f76f8753dc4",
+          "attempt_status": "completed",
+          "compatibility_key": "9607fd526929ac02815ef0de56b9febcd5885c28133890b068cc9f3ff9d40682",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 63,
+            "first_pass_step": 21,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": null,
+            "stable_from_step": 21
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 7.098756002029404,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "ae_gan_hold",
+          "terminal_metrics": {
+            "hold": 0.010169580578804016,
+            "recon_mse": 0.013462427072227001
+          }
+        },
+        {
+          "attempt_id": "b812d90758a84198be73f68c9673f370",
+          "attempt_status": "completed",
+          "compatibility_key": "929d67d8a3d0a0c3606ec5fb17677bd06f402ae0b1c512842f637acec99bee19",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "failed_terminal_thresholds": [
+            {
+              "margin": -0.2875787189230323,
+              "metric": "mean_abs",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.3,
+              "value": 0.012421281076967716
+            }
+          ],
+          "paid_wall_seconds": 6.192651285906322,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "FAIL",
+          "task_id": "two_pole",
+          "terminal_metrics": {
+            "grad_med": 0.13019117712974548,
+            "mean_abs": 0.012421281076967716
+          }
+        },
+        {
+          "attempt_id": "33f8a3a2df494506b3b1c793556c7c83",
+          "attempt_status": "completed",
+          "compatibility_key": "f5bf158ad1af68c8ad465d6996d4dd16870cf9ee7c21e53f17bf114228bf5701",
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 167,
+            "first_pass_step": 84,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 14,
+            "passing_suffix": 9,
+            "stable_from_seconds": null,
+            "stable_from_step": 134
+          },
+          "failed_terminal_thresholds": [],
+          "paid_wall_seconds": 6.471655826084316,
+          "reasons": [
+            "recomputed complete live curve and terminal suffix"
+          ],
+          "status": "PASS",
+          "task_id": "unused_token_hold",
+          "terminal_metrics": {
+            "concept_move": 0.9881880963882423,
+            "unused_hold": 0.9876703899353743
+          }
+        }
+      ],
+      "unmeasured_required_tasks": [
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition"
+      ],
+      "whole_tier1_measured": false
+    }
+  ],
+  "checks": {
+    "behavioral_constant_schedule_traces": 30,
+    "certified_attempts": 53,
+    "independently_regraded_task_cells": 53,
+    "initialization_cohorts": 8,
+    "original_receipts_rewritten": false,
+    "seed_only_trials": false,
+    "source_bound_sustained_gates": true,
+    "source_merged_measurements": false,
+    "verified_snapshot_files": 1174
+  },
+  "conclusions": [
+    "Both relativistic recipes completed all six required tasks with intended optimizer roles: LR .00425 passed 3/6; LR .0010625 passed 2/6. Both passed the separate clock audit diagnostic; neither qualified Tier 1.",
+    "Both non-saturating recipes also completed all six required task receipts (1/6 at LR .00425; 0/6 at LR .0010625), but their word-host encoder update contract failed. The other six nonrelativistic candidates remain partial.",
+    "Eight nonrelativistic candidates were cancelled after the word host exposed missing encoder updates. Their measured scalar/behavioral cells remain original-source context; unexecuted and cancelled cells remain explicit.",
+    "Both completed non-saturating word attempts recorded 20001 generator/discriminator/prior updates and zero encoder updates. The guard correctly rejected the host/loss mismatch before assigning a numerical quality verdict.",
+    "All six measured Gaussian cells failed sustained gates. Some observations transiently passed, while late CDF shape or width failed; a longer training allowance is an untested hypothesis rather than an established remedy.",
+    "The behavioral hosts retain task-owned particle separation, unused-token hold and reconstruction objectives. A pure trainer does not remove these problem definitions.",
+    "The word task declares 20001 actual updates with the retained 20000 schedule horizon; the clock diagnostic declares 24 probe updates with a 128 schedule horizon. These distinct frozen fields agree with their receipts.",
+    "The updated develop merge and repaired joint losses have no new GPU measurements in this environment. Original af75a3fe receipts cannot qualify the revised source; each repaired candidate requires its own complete frozen Tier 1 cohort."
+  ],
+  "cost": {
+    "accounting": "Sum each unique durable queue charge once; per-search campaign totals overlap.",
+    "campaign_cap_seconds": 25200,
+    "cancelled_attempts": 2,
+    "completed_attempts": 51,
+    "paid_wall_seconds": 1038.7521727493731,
+    "unique_paid_attempts": 53
+  },
+  "default_adoption": false,
+  "errors": [],
+  "input_digest": "109e88dbd70a9f14f500b57c9defe68efe734ef8ba9c26772fb4111fb267e87a",
+  "prior_laws": {
+    "ae_gan_hold": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "clockfree_audit_measurement_v1": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "five_word_joint_acquisition": {
+      "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "gaussian1d_acquisition": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "ring16_acquisition": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "two_pole": {
+      "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "unused_token_hold": {
+      "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    }
+  },
+  "qualification_input": false,
+  "recommendations": [
+    "Finish the reviewed two-sided BiGAN objective repair, then run the eight nonrelativistic recipes as complete new-source cohorts on GPU 0 and GPU 1 when CUDA is accessible.",
+    "Use the unchanged relativistic candidates as separately labeled original-source baseline readouts; preserve all failed and cancelled v1 receipts and charge their cost.",
+    "Consider a separately budgeted Gaussian duration or rate experiment only after inspecting the saved live curve; maintain CDF and sustained terminal criteria rather than lowering thresholds to obtain a pass."
+  ],
+  "round": "pure-bcap-losses-v1",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "scope": "independent_audit_of_original_partial_initial_round",
+  "source_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33",
+  "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+  "task_status_counts": {
+    "ae_gan_hold": {
+      "FAIL": 1,
+      "PASS": 9
+    },
+    "clockfree_audit_measurement_v1": {
+      "PASS": 5
+    },
+    "five_word_joint_acquisition": {
+      "FAIL": 3,
+      "INCOMPLETE": 2,
+      "PASS": 1
+    },
+    "gaussian1d_acquisition": {
+      "FAIL": 6
+    },
+    "ring16_acquisition": {
+      "FAIL": 6
+    },
+    "two_pole": {
+      "FAIL": 9,
+      "PASS": 1
+    },
+    "unused_token_hold": {
+      "FAIL": 6,
+      "PASS": 4
+    }
+  },
+  "view_revision": 5
+}

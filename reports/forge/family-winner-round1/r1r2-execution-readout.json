@@ -1,0 +1,3567 @@
+{
+  "cost": {
+    "evidence_wall_seconds": 135.24208330502734,
+    "new_paid_wall_seconds": 135.24208330502734,
+    "observed_attempts": 21,
+    "wall_seconds": 135.24208330502734
+  },
+  "executed_source_commit": "05a2b3c021155fa72471b2293c3fd6d41d1e58a0",
+  "full_required_denominators": {
+    "1": 3,
+    "2": 19,
+    "3": 2
+  },
+  "kind": "frozen_source_display_projection",
+  "original_report": {
+    "path": "reports/forge/configuration-search/r1r2-modern-family-round1-v1.json",
+    "sha256": "22d28269f739705be9fe1bbdaa4640d434886fd006ad92051df920c9a02db4f0"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "regrading": false,
+  "representation_status": "UNRESOLVED_COMPLETE_SUITE",
+  "required_task_roster": [
+    [
+      1,
+      0,
+      "two_pole"
+    ],
+    [
+      1,
+      1,
+      "unused_token_hold"
+    ],
+    [
+      1,
+      2,
+      "ae_gan_hold"
+    ],
+    [
+      2,
+      0,
+      "trajectory"
+    ],
+    [
+      2,
+      1,
+      "residual_student"
+    ],
+    [
+      2,
+      2,
+      "unipolar"
+    ],
+    [
+      2,
+      3,
+      "cover_leftover"
+    ],
+    [
+      2,
+      4,
+      "mid_scale_identity"
+    ],
+    [
+      2,
+      5,
+      "mode_hold"
+    ],
+    [
+      2,
+      6,
+      "vector_two_broad"
+    ],
+    [
+      2,
+      7,
+      "vector_unequal_mass"
+    ],
+    [
+      2,
+      8,
+      "vector_unequal_width"
+    ],
+    [
+      2,
+      9,
+      "vector_anisotropic"
+    ],
+    [
+      2,
+      10,
+      "vector_overlap"
+    ],
+    [
+      2,
+      11,
+      "vector_spiral"
+    ],
+    [
+      2,
+      12,
+      "img_stripes2"
+    ],
+    [
+      2,
+      13,
+      "img_bars4"
+    ],
+    [
+      2,
+      14,
+      "img_blobs4"
+    ],
+    [
+      2,
+      15,
+      "img_intensity2"
+    ],
+    [
+      2,
+      16,
+      "grid100"
+    ],
+    [
+      2,
+      17,
+      "rotated100"
+    ],
+    [
+      2,
+      18,
+      "staggered100"
+    ],
+    [
+      3,
+      0,
+      "ring_hold"
+    ],
+    [
+      3,
+      1,
+      "ring_extension"
+    ]
+  ],
+  "schema_version": 1,
+  "selection": {
+    "all_trials_terminal": true,
+    "calibration_status": "provisional",
+    "default_adoption": false,
+    "independent_confirmation": "not_performed",
+    "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+    "qualified": false,
+    "required_pass_count": 4,
+    "required_passes_by_tier": [
+      3,
+      1,
+      0
+    ],
+    "required_task_bindings": [
+      {
+        "compatibility_key": "7fb5211e5a4ffdef0d6078324fae8d08ea5099efab3e35b36f9fba8030ad6ceb",
+        "qualification_tier": 1,
+        "task": "two_pole"
+      },
+      {
+        "compatibility_key": "958557fe7a6855d0875dcc74b3837ae220163b10a3633dc187ac1f1d9ce551f3",
+        "qualification_tier": 1,
+        "task": "unused_token_hold"
+      },
+      {
+        "compatibility_key": "0fbd835cb31a985e930d8d2986322ecd5accbc71c9335ed01bce4a3236306525",
+        "qualification_tier": 1,
+        "task": "ae_gan_hold"
+      },
+      {
+        "compatibility_key": "367ff9b275ea58ef71d603286fef4077294f53d160dfdbede84319812cd502f3",
+        "qualification_tier": 2,
+        "task": "trajectory"
+      },
+      {
+        "compatibility_key": "65eeb37f1c9abec8b17b34369a4a5d856d3065a67410705e303eece39020f0dd",
+        "qualification_tier": 2,
+        "task": "residual_student"
+      },
+      {
+        "compatibility_key": "18d3e4834ee91761d59203cd299acdf6c1db3a8ece3e1a2973b41188265aec4c",
+        "qualification_tier": 2,
+        "task": "unipolar"
+      },
+      {
+        "compatibility_key": "3b820f380745768896e8b89c931a1885fa376985cd34da88eaf308e5ad8903b2",
+        "qualification_tier": 2,
+        "task": "cover_leftover"
+      },
+      {
+        "compatibility_key": "41a7ca09e641c525d3bb47e14ae5b274a39274a250c80fc014783fa7e3193a02",
+        "qualification_tier": 2,
+        "task": "mid_scale_identity"
+      },
+      {
+        "compatibility_key": "33f94f3f7bb1b915a816d894ab0f2217cdf4a29ecbe781aef50f85b00ab2ab58",
+        "qualification_tier": 2,
+        "task": "mode_hold"
+      },
+      {
+        "compatibility_key": "e6866cc4480607701f71e49e51f64c15582b8cc14c8211fb9e55802634d6af53",
+        "qualification_tier": 2,
+        "task": "vector_two_broad"
+      },
+      {
+        "compatibility_key": "c1bf39bc92b70a638dcad0871e63de31d2fbfd5e68129b2a5f90389deaa38ce6",
+        "qualification_tier": 2,
+        "task": "vector_unequal_mass"
+      },
+      {
+        "compatibility_key": "577108375368cc6115967cdb11f250b1274176d58976c32f1671534e06794bc3",
+        "qualification_tier": 2,
+        "task": "vector_unequal_width"
+      },
+      {
+        "compatibility_key": "eb99adabaafa30ae59dd3ea57ea0281c300e1de5b17eae552b6f2f836acee81a",
+        "qualification_tier": 2,
+        "task": "vector_anisotropic"
+      },
+      {
+        "compatibility_key": "4304ddceada5dde99aa857e4946fd2482aecf2dff7d148c09a7f3fbe5f60c738",
+        "qualification_tier": 2,
+        "task": "vector_overlap"
+      },
+      {
+        "compatibility_key": "1c94d1c176c4fcc1d2de1973bcbb229833c82997205085f44f3b92117fb883c8",
+        "qualification_tier": 2,
+        "task": "vector_spiral"
+      },
+      {
+        "compatibility_key": "f21d0297e144464d117907ace84d90e2e011c80aecd0f6a7fbc4ee2df33f8ec6",
+        "qualification_tier": 2,
+        "task": "img_stripes2"
+      },
+      {
+        "compatibility_key": "d15ce675fc2d6aa9112eeccecae15d7e1d1fb27ad0c8725a75f4c1ad701a14ea",
+        "qualification_tier": 2,
+        "task": "img_bars4"
+      },
+      {
+        "compatibility_key": "ea8fcc9d32ad270aa167f1444886d7355e41af86d516c87a0f3df5cb5c53f8cb",
+        "qualification_tier": 2,
+        "task": "img_blobs4"
+      },
+      {
+        "compatibility_key": "dda89ca239c70dcdcade55a2e4d86151f9330c5b16be9c0af8dcb11f94f0b4db",
+        "qualification_tier": 2,
+        "task": "img_intensity2"
+      },
+      {
+        "compatibility_key": "cdaf2876b976b313d768b8cecf2e6852bc418b700cc0f882ae2c7613cf335826",
+        "qualification_tier": 2,
+        "task": "grid100"
+      },
+      {
+        "compatibility_key": "6a67ce3b53ff87ac7dd2f8e39645ae7ce709b9b05f86e767d26cef1a88ef6ad5",
+        "qualification_tier": 2,
+        "task": "rotated100"
+      },
+      {
+        "compatibility_key": "50883e31a7711cec80d3083499999549442a1f9441ef6e055059c5fca5de557e",
+        "qualification_tier": 2,
+        "task": "staggered100"
+      },
+      {
+        "compatibility_key": "0deeda44d6cf0d7aa9ae6424920d29c91e6367f7805a9b43b91affea123be265",
+        "qualification_tier": 3,
+        "task": "ring_hold"
+      },
+      {
+        "compatibility_key": "0deeda44d6cf0d7aa9ae6424920d29c91e6367f7805a9b43b91affea123be265",
+        "qualification_tier": 3,
+        "task": "ring_extension"
+      }
+    ],
+    "required_total": 24,
+    "selected_candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+    "selected_configuration_id": "302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+    "selection_complete": true,
+    "selection_kind": "best_observed",
+    "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e",
+    "tuning_through_tier": 3
+  },
+  "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e",
+  "speed_selection": {
+    "reason": "No frozen comparable first-acquisition timing contract is implemented for this search. Not all required adapters record per-observation seconds; original terminal-suffix or coverage-only times cannot supply full-quality first-acquisition speed.",
+    "selected_candidate_id": null,
+    "status": "UNAVAILABLE",
+    "wall_time_ranking": false
+  },
+  "study_id": "r1r2-modern-family-round1-v1",
+  "training_updates": 0,
+  "trials": [
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "099c73ee4ff74441ae08296a85c4d6d0",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "4b93b30629bdf06de9f7ebaafde1dc192a26129d5b2069891cd09fd85d12337f",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.252913524163887
+        }
+      ],
+      "candidate_id": "r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b",
+      "candidate_revision": "dadbadaee14454dccd65972cc5090c40735afe2eceaed7416fd7b0d2e412db48",
+      "configuration_id": "083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b",
+      "cost": {
+        "evidence_wall_seconds": 6.252913524163887,
+        "new_paid_wall_seconds": 6.252913524163887,
+        "wall_seconds": 6.252913524163887
+      },
+      "observed_tasks": [
+        {
+          "actual_device": "cpu",
+          "attempt_id": "099c73ee4ff74441ae08296a85c4d6d0",
+          "budget_seconds": 300,
+          "compatibility_key": "5e1c9015d64a7a640cb32217b4b1e5d1732675ed541690bdf21bd045f7b23f9d",
+          "cost": {
+            "adapter_seconds": 0.40085413306951523,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.252913524163887,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.601626521907747,
+            "wall_seconds": 6.252913524163887
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 77,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 2,
+              "passing_suffix": 2,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.5100146532058716,
+            "mean_abs": 0.3188682496547699
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "8a59041ff1134437e2d7a2d702511a6f90b58662a25557ddfada774dba9e1147",
+            "request": "e1bbf0985a87b11b2f1fd7ac72fad8acda28ec65d9dd92cfbc13552e6338a809",
+            "result": "6805d0d5dffdd73b3357f15563fd19c187396afa14a65c9d7f2c0ea80c060ec5"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 77,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 2,
+              "passing_suffix": 2,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": 0.01886824965476991,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.3,
+                "value": 0.3188682496547699
+              },
+              {
+                "margin": 0.4899853467941284,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.5100146532058716
+              }
+            ],
+            "passed": false,
+            "shortfall": 0.0,
+            "status": "FAIL"
+          },
+          "task": "two_pole"
+        }
+      ],
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 23
+        },
+        "required_total": 24,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 3,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 2
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 24
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "099c73ee4ff74441ae08296a85c4d6d0",
+          "result_hash": "4b93b30629bdf06de9f7ebaafde1dc192a26129d5b2069891cd09fd85d12337f",
+          "valid_receipt": true
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "580.173.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.25,
+        "network_lr_floor": 0.25
+      },
+      "status": "FAIL",
+      "submission_reason": "two_pole: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "unknown_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ]
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "0555e9d9fd35498fa061ca6d7f761526",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "1dbc922099a0c1a8513955b4d90357337e3800f0e193c769c9ed33cf9ed27e86",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.302146029891446
+        }
+      ],
+      "candidate_id": "r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6",
+      "candidate_revision": "fbd72afc0ddb7d43f808c4e5e9a7c84efa8d4b2ddbf69b4b9f21d06bed06d196",
+      "configuration_id": "14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6",
+      "cost": {
+        "evidence_wall_seconds": 6.302146029891446,
+        "new_paid_wall_seconds": 6.302146029891446,
+        "wall_seconds": 6.302146029891446
+      },
+      "observed_tasks": [
+        {
+          "actual_device": "cpu",
+          "attempt_id": "0555e9d9fd35498fa061ca6d7f761526",
+          "budget_seconds": 300,
+          "compatibility_key": "a1d99e9b240b467a44faa082bd4721af33060c600704e21930f796073108e9d9",
+          "cost": {
+            "adapter_seconds": 0.41272397991269827,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.302146029891446,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.700260773068294,
+            "wall_seconds": 6.302146029891446
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.4249042272567749,
+            "mean_abs": 0.2638007700443268
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "599289b7edd8b2a5428694ff28a1d7b393bc141e0d753ffd7943d2e2e6564d48",
+            "request": "c6cfc8ab18d46c57962e9dd311e8167d44e8ee9280972ac0cdd4e9d33cafd469",
+            "result": "e51792d69cccc789d73348adf22682f6d7065fe24bddef9db17576537fe64828"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -0.03619922995567321,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 0.3,
+                "value": 0.2638007700443268
+              },
+              {
+                "margin": 0.5750957727432251,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.4249042272567749
+              }
+            ],
+            "passed": false,
+            "shortfall": 0.06033204992612201,
+            "status": "FAIL"
+          },
+          "task": "two_pole"
+        }
+      ],
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 23
+        },
+        "required_total": 24,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 3,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 2
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 24
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "0555e9d9fd35498fa061ca6d7f761526",
+          "result_hash": "1dbc922099a0c1a8513955b4d90357337e3800f0e193c769c9ed33cf9ed27e86",
+          "valid_receipt": true
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "580.173.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.1,
+        "network_lr_floor": 0.1
+      },
+      "status": "FAIL",
+      "submission_reason": "two_pole: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "unknown_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ]
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "41b5e98408d543bdac9d98f840090e72",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "3d8f3bfbd497a9a1ff0bfc7961ff4814fa4a619243ecd70e9c0f8d3c54cf233b",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 5.799115515081212
+        }
+      ],
+      "candidate_id": "r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46",
+      "candidate_revision": "fc850ff3eb0a9b91964017993b6cfedb26ef9ab9cb36b6c3812011b0d6f19b93",
+      "configuration_id": "151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46",
+      "cost": {
+        "evidence_wall_seconds": 5.799115515081212,
+        "new_paid_wall_seconds": 5.799115515081212,
+        "wall_seconds": 5.799115515081212
+      },
+      "observed_tasks": [
+        {
+          "actual_device": "cpu",
+          "attempt_id": "41b5e98408d543bdac9d98f840090e72",
+          "budget_seconds": 300,
+          "compatibility_key": "2e358e4b4dfe2e49e3a1f5a14992cda7877239d8c4d527fca9b589063eb44da1",
+          "cost": {
+            "adapter_seconds": 0.37934592086821795,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.799115515081212,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.4899037941358984,
+            "wall_seconds": 5.799115515081212
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.14037206768989563,
+            "mean_abs": 0.19175636768341064
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "8e2596dd5dc4df38c2ef9ec15d4d02f537234f097ddfa6f30a161138d4622bf5",
+            "request": "15b9a271452e0e4639fee4f4ca290d14e02621227d81baf2dba53ef565f44e1c",
+            "result": "1468d7a1037223fdda7c73df06e87ff81f180048243d884d710aa6fa9d5e5fa1"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -0.10824363231658934,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 0.3,
+                "value": 0.19175636768341064
+              },
+              {
+                "margin": 0.8596279323101044,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.14037206768989563
+              }
+            ],
+            "passed": false,
+            "shortfall": 0.18040605386098224,
+            "status": "FAIL"
+          },
+          "task": "two_pole"
+        }
+      ],
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 23
+        },
+        "required_total": 24,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 3,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 2
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 24
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "41b5e98408d543bdac9d98f840090e72",
+          "result_hash": "3d8f3bfbd497a9a1ff0bfc7961ff4814fa4a619243ecd70e9c0f8d3c54cf233b",
+          "valid_receipt": true
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "580.173.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.2,
+        "lr_floor": 0.25,
+        "network_lr_floor": 0.25
+      },
+      "status": "FAIL",
+      "submission_reason": "two_pole: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "unknown_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ]
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "80d1263ad5bf48bcbd28bc8b659064ab",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "8e922e380a50433d0b3873ec2df0340cbc7fe77fe7d56434b7bdedea8722cc4e",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.805303645087406
+        },
+        {
+          "attempt_id": "bd512b5e04fa434aa12b3b0e02c4126d",
+          "gate_statuses": {
+            "unused_token_hold": "PASS"
+          },
+          "result_hash": "33300563b0e8c727a8f19b3487bcd27e949b187aaf00592d8b0123b466963088",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.105581643991172
+        },
+        {
+          "attempt_id": "c0a724ed82464aac82cbb3c1b5eb6eca",
+          "gate_statuses": {
+            "trajectory": "PASS"
+          },
+          "result_hash": "574bbe9846b4aaa77d36e2ab1d741910cd25b41df06ff8f01504608c2b31746c",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.132266593864188
+        },
+        {
+          "attempt_id": "d7c5750c83904c58a3c839662c177d70",
+          "gate_statuses": {
+            "residual_student": "FAIL"
+          },
+          "result_hash": "1c05ef942a5a92188b2f9fac2f4e0dc0387a2eff37ce88888ee9b110901386c4",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.207809104816988
+        },
+        {
+          "attempt_id": "fc5ae22de7074e51ba6b3f35973cd966",
+          "gate_statuses": {
+            "two_pole": "PASS"
+          },
+          "result_hash": "b2006a16d6631443f5ec87080c17abe8592edb860651c286b50463d8c99039cd",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 5.894401161931455
+        }
+      ],
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "9fa7fc79d149420568346a12cd88f32506df90560e37c6fd0d9cace20d9732b6",
+      "configuration_id": "302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "cost": {
+        "evidence_wall_seconds": 33.14536214969121,
+        "new_paid_wall_seconds": 33.14536214969121,
+        "wall_seconds": 33.14536214969121
+      },
+      "observed_tasks": [
+        {
+          "actual_device": "cpu",
+          "attempt_id": "fc5ae22de7074e51ba6b3f35973cd966",
+          "budget_seconds": 300,
+          "compatibility_key": "7fb5211e5a4ffdef0d6078324fae8d08ea5099efab3e35b36f9fba8030ad6ceb",
+          "cost": {
+            "adapter_seconds": 0.3838509649503976,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.894401161931455,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.4957460779696703,
+            "wall_seconds": 5.894401161931455
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 70,
+              "first_pass_step": 57,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 8,
+              "passing_suffix": 8,
+              "stable_from_seconds": null,
+              "stable_from_step": 57
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.6925410032272339,
+            "mean_abs": 0.3810328245162964
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "fcb34f9aea14e6b43675b8954fc1dd9e5231efd491254e2db9d467a12b2ed580",
+            "request": "5a99794ff1ffebd707c07f99ce4edf9e9e998e60e70a3717ee2742c00f987547",
+            "result": "6571b01d3bdbdfc4fab8e88a5acccd945bdd0e6c73c616a8f357e842a8fe214c"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.875,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 70,
+              "first_pass_step": 57,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 8,
+              "passing_suffix": 8,
+              "stable_from_seconds": null,
+              "stable_from_step": 57
+            },
+            "metrics": [
+              {
+                "margin": 0.0810328245162964,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.3,
+                "value": 0.3810328245162964
+              },
+              {
+                "margin": 0.3074589967727661,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.6925410032272339
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "two_pole"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "bd512b5e04fa434aa12b3b0e02c4126d",
+          "budget_seconds": 300,
+          "compatibility_key": "958557fe7a6855d0875dcc74b3837ae220163b10a3633dc187ac1f1d9ce551f3",
+          "cost": {
+            "adapter_seconds": 0.6700006318278611,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.105581643991172,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.803966413019225,
+            "wall_seconds": 6.105581643991172
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 84,
+              "first_pass_step": 50,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 19,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 50
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.9999997615814209,
+            "unused_hold": 0.9999999701976776
+          },
+          "order": 1,
+          "original_file_sha256": {
+            "evidence": "8ec5d5539edad77ff48f7a971e039f0196dfec58d5f854a389333a4a16f5f566",
+            "request": "7e2d1ffffb539ae4c270f16bfab9a098cc7633d19a24dee472da18ab8e8f52a4",
+            "result": "db266c5aab58e9c04267a690283f6ac0cc90abda090563c6344ef76a8b4cd084"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.42,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 84,
+              "first_pass_step": 50,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 19,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 50
+            },
+            "metrics": [
+              {
+                "margin": 0.14999997019767763,
+                "metric": "unused_hold",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9999999701976776
+              },
+              {
+                "margin": 0.14999976158142092,
+                "metric": "concept_move",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9999997615814209
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "unused_token_hold"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "80d1263ad5bf48bcbd28bc8b659064ab",
+          "budget_seconds": 300,
+          "compatibility_key": "0fbd835cb31a985e930d8d2986322ecd5accbc71c9335ed01bce4a3236306525",
+          "cost": {
+            "adapter_seconds": 1.2249438329599798,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.805303645087406,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.3534123771823943,
+            "wall_seconds": 6.805303645087406
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 73,
+              "first_pass_step": 11,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 23,
+              "passing_suffix": 22,
+              "stable_from_seconds": null,
+              "stable_from_step": 32
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.00289349677041173,
+            "recon_mse": 0.002680479548871517
+          },
+          "order": 2,
+          "original_file_sha256": {
+            "evidence": "de0b8f6d5578a098cbb744a5ceab5cd83e2b46b228a7032ad97128022fa9ad7f",
+            "request": "fde82fa4df23b43b1ecc5065a75c30223ac299336bdf50a7731ed452b5e861bc",
+            "result": "f75b1c20c0d02587e6ce5e787f6b1b9b114c042d879ed0c981632144315d6c43"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.292,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 73,
+              "first_pass_step": 11,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 23,
+              "passing_suffix": 22,
+              "stable_from_seconds": null,
+              "stable_from_step": 32
+            },
+            "metrics": [
+              {
+                "margin": 0.047319520451128486,
+                "metric": "recon_mse",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.05,
+                "value": 0.002680479548871517
+              },
+              {
+                "margin": 0.34710650322958825,
+                "metric": "hold",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.35,
+                "value": 0.00289349677041173
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "ae_gan_hold"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "c0a724ed82464aac82cbb3c1b5eb6eca",
+          "budget_seconds": 1800,
+          "compatibility_key": "367ff9b275ea58ef71d603286fef4077294f53d160dfdbede84319812cd502f3",
+          "cost": {
+            "adapter_seconds": 1.7571327008772641,
+            "charged_task": "trajectory",
+            "device": "cpu",
+            "execution_seconds": 7.132266593864188,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.894594323821366,
+            "wall_seconds": 7.132266593864188
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 234,
+              "first_pass_step": 167,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 15,
+              "passing_suffix": 15,
+              "stable_from_seconds": null,
+              "stable_from_step": 167
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "identity_mse": 1.3148825246389606e-06
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "c858f3b92c0a112b16bf486dbe6356333cefccbc2bc8d625a1b867c41c5e2a2b",
+            "request": "cb42009733f11db8a6911291b2e706b23dbc2f116abc8a555a6067f1f2ef2354",
+            "result": "ee27f7942ba334be7dbcd4339cb519609b59d5fa19006fcbe8a1405db5a99f1f"
+          },
+          "qualification_tier": 2,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.585,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 234,
+              "first_pass_step": 167,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 15,
+              "passing_suffix": 15,
+              "stable_from_seconds": null,
+              "stable_from_step": 167
+            },
+            "metrics": [
+              {
+                "margin": 0.01999868511747536,
+                "metric": "identity_mse",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.02,
+                "value": 1.3148825246389606e-06
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "trajectory"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "d7c5750c83904c58a3c839662c177d70",
+          "budget_seconds": 1800,
+          "compatibility_key": "65eeb37f1c9abec8b17b34369a4a5d856d3065a67410705e303eece39020f0dd",
+          "cost": {
+            "adapter_seconds": 1.790608820039779,
+            "charged_task": "residual_student",
+            "device": "cpu",
+            "execution_seconds": 7.207809104816988,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.902979109901935,
+            "wall_seconds": 7.207809104816988
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "identity_mse": 0.1483762115240097,
+            "success_rate": 0.0,
+            "wrong_pad_rate": 1.0
+          },
+          "order": 1,
+          "original_file_sha256": {
+            "evidence": "8b74333b468163999a5e8d098a8b7f3b88477d3be706bcfe26525062e9822214",
+            "request": "91e0a182fea76b8204c955bfac17b6b0e8de43ba75b284be6ccfa61a05d45248",
+            "result": "2faac2e45609bdd4d04bfb91a72d19f82a7fe1c1f7d6c99695b369e00bf2d495"
+          },
+          "qualification_tier": 2,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -0.12837621152400971,
+                "metric": "identity_mse",
+                "op": "<=",
+                "status": "FAIL",
+                "threshold": 0.02,
+                "value": 0.1483762115240097
+              },
+              {
+                "margin": -1.0,
+                "metric": "success_rate",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 1.0,
+                "value": 0.0
+              },
+              {
+                "margin": -1.0,
+                "metric": "wrong_pad_rate",
+                "op": "<=",
+                "status": "FAIL",
+                "threshold": 0.0,
+                "value": 1.0
+              }
+            ],
+            "passed": false,
+            "shortfall": 1.3333333333333333,
+            "status": "FAIL"
+          },
+          "task": "residual_student"
+        }
+      ],
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 1,
+        "required_passed": 4,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 4,
+          "UNKNOWN": 19
+        },
+        "required_total": 24,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 3,
+            "statuses": {
+              "PASS": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 1,
+            "required_total": 19,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 1,
+              "UNKNOWN": 17
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 4,
+        "tuning_required_total": 24
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "80d1263ad5bf48bcbd28bc8b659064ab",
+          "result_hash": "8e922e380a50433d0b3873ec2df0340cbc7fe77fe7d56434b7bdedea8722cc4e",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "bd512b5e04fa434aa12b3b0e02c4126d",
+          "result_hash": "33300563b0e8c727a8f19b3487bcd27e949b187aaf00592d8b0123b466963088",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "c0a724ed82464aac82cbb3c1b5eb6eca",
+          "result_hash": "574bbe9846b4aaa77d36e2ab1d741910cd25b41df06ff8f01504608c2b31746c",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "d7c5750c83904c58a3c839662c177d70",
+          "result_hash": "1c05ef942a5a92188b2f9fac2f4e0dc0387a2eff37ce88888ee9b110901386c4",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "fc5ae22de7074e51ba6b3f35973cd966",
+          "result_hash": "b2006a16d6631443f5ec87080c17abe8592edb860651c286b50463d8c99039cd",
+          "valid_receipt": true
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "580.173.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.2,
+        "lr_floor": 0.1,
+        "network_lr_floor": 0.1
+      },
+      "status": "FAIL",
+      "submission_reason": "residual_student: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "unknown_tasks": [
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ]
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "1f498f96bc8b41499e268406705e4ed9",
+          "gate_statuses": {
+            "unused_token_hold": "PASS"
+          },
+          "result_hash": "5bcbb02dffaa6d68fa7569a6e02ab89e1d29d8aa2d8a312fc6128ec8d3772cb1",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.200563103891909
+        },
+        {
+          "attempt_id": "55a3dd9aadc34a3490b1de4b1c7158be",
+          "gate_statuses": {
+            "two_pole": "PASS"
+          },
+          "result_hash": "fb05aab253e0ce169567bbb8815a2189d4d6b13b743b86bc2bd6b3ce3925f906",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 5.790606852155179
+        },
+        {
+          "attempt_id": "77b22fad82d242d1bd7727ee5643f549",
+          "gate_statuses": {
+            "trajectory": "FAIL"
+          },
+          "result_hash": "fe2c1ac0fc73c94cca82753320a41f91c8f311efc1049ed6c0cfa8074743b68d",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.240924677113071
+        },
+        {
+          "attempt_id": "a06984368aa24eeea8ba6e877e5007cd",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "dbff1fa3ca4e277c50e776d88af6f82948d9b2dd38268765a94add1ac4f6c034",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.531778000062332
+        }
+      ],
+      "candidate_id": "r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27",
+      "candidate_revision": "e68d85f3ef544b549536ca4bb183334dcea0dc365051fc16c9aa1484c32120d7",
+      "configuration_id": "4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27",
+      "cost": {
+        "evidence_wall_seconds": 25.76387263322249,
+        "new_paid_wall_seconds": 25.76387263322249,
+        "wall_seconds": 25.76387263322249
+      },
+      "observed_tasks": [
+        {
+          "actual_device": "cpu",
+          "attempt_id": "55a3dd9aadc34a3490b1de4b1c7158be",
+          "budget_seconds": 300,
+          "compatibility_key": "a47a8670b2bcea401197174045b3db6ef5746dc04748384b839a32bc3518731e",
+          "cost": {
+            "adapter_seconds": 0.3811252871528268,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.790606852155179,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.4886126841884106,
+            "wall_seconds": 5.790606852155179
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 67,
+              "first_pass_step": 54,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 9,
+              "passing_suffix": 9,
+              "stable_from_seconds": null,
+              "stable_from_step": 54
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.7698720693588257,
+            "mean_abs": 0.46660780906677246
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "a0f30e3368fabfec039cdaffb8c55d6da9656a499c1e403535708fcf556b6e2e",
+            "request": "117275b9e252ec049b487bf590f711edd443d118fe8bac546eaff1bbea85544e",
+            "result": "535d6fa918e42174a51bd8558b00c7fc19cfd5972cb8a1d77ee3ba4b9d108f43"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.8375,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 67,
+              "first_pass_step": 54,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 9,
+              "passing_suffix": 9,
+              "stable_from_seconds": null,
+              "stable_from_step": 54
+            },
+            "metrics": [
+              {
+                "margin": 0.16660780906677247,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.3,
+                "value": 0.46660780906677246
+              },
+              {
+                "margin": 0.23012793064117432,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.7698720693588257
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "two_pole"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "1f498f96bc8b41499e268406705e4ed9",
+          "budget_seconds": 300,
+          "compatibility_key": "b128d030acb5c9f1fe3a9f1a33aa8a12c36ec6abb8aae0144e5d3841ab99ca9d",
+          "cost": {
+            "adapter_seconds": 0.6662274419795722,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.200563103891909,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.824056955985725,
+            "wall_seconds": 6.200563103891909
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 84,
+              "first_pass_step": 50,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 19,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 50
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.9999997615814209,
+            "unused_hold": 0.9999999701976776
+          },
+          "order": 1,
+          "original_file_sha256": {
+            "evidence": "83a777c790ce73726c6cddeccf73a4aed91f3961392edbbb17297a4248fd0e08",
+            "request": "7ba5b43e2c21bcfa7d4ca04e1fabb44c3e0b90c424be910f75b365eb1f08631b",
+            "result": "f55e401e4b632b31f9ce87cf0f6c4ae97069e615b26845ec366fac6fadaf1dae"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.42,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 84,
+              "first_pass_step": 50,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 19,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 50
+            },
+            "metrics": [
+              {
+                "margin": 0.14999997019767763,
+                "metric": "unused_hold",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9999999701976776
+              },
+              {
+                "margin": 0.14999976158142092,
+                "metric": "concept_move",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9999997615814209
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "unused_token_hold"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "a06984368aa24eeea8ba6e877e5007cd",
+          "budget_seconds": 300,
+          "compatibility_key": "5623fc3041ac29b552e1d7b05ad2ef46b50f49adb6a76b24e7990c2708b9fee4",
+          "cost": {
+            "adapter_seconds": 1.2306475478690118,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.531778000062332,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.3288962179794908,
+            "wall_seconds": 6.531778000062332
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 73,
+              "first_pass_step": 11,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 23,
+              "passing_suffix": 22,
+              "stable_from_seconds": null,
+              "stable_from_step": 32
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.003981784917414188,
+            "recon_mse": 0.0036232119891792536
+          },
+          "order": 2,
+          "original_file_sha256": {
+            "evidence": "d9c374382e11d721985318e0af1a1bc450ce08464b36e4e5fafa2973e2cbd1dd",
+            "request": "573b3a898a2414a7ca2ea87b846325a2c05f50dbdb13c6f816f899a5874e2c70",
+            "result": "6f5e1d05a05fbfb70a16c88378aa9e20d35986050b5b15dff72a6021796cabf9"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.292,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 73,
+              "first_pass_step": 11,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 23,
+              "passing_suffix": 22,
+              "stable_from_seconds": null,
+              "stable_from_step": 32
+            },
+            "metrics": [
+              {
+                "margin": 0.04637678801082075,
+                "metric": "recon_mse",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.05,
+                "value": 0.0036232119891792536
+              },
+              {
+                "margin": 0.3460182150825858,
+                "metric": "hold",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.35,
+                "value": 0.003981784917414188
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "ae_gan_hold"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "77b22fad82d242d1bd7727ee5643f549",
+          "budget_seconds": 1800,
+          "compatibility_key": "1cc4b24389fbced07374691ce1699d6f3771738237e870e9af566f6f46fb1cce",
+          "cost": {
+            "adapter_seconds": 1.6923886658623815,
+            "charged_task": "trajectory",
+            "device": "cpu",
+            "execution_seconds": 7.240924677113071,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.809376328950748,
+            "wall_seconds": 7.240924677113071
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "identity_mse": 0.19697833061218262
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "dd8bf7b5d0d9468d6c917509c200cab0048423107420ec4febb79ea5fbdfc807",
+            "request": "c1f40bfff063d4d931d0c9a8c6bff36f57844475edf4b4213933744e5dc9ec33",
+            "result": "1b68a828577a0a6fea528bc51bb5d79e34f5cb389b21790a88fcd1ce2d99495b"
+          },
+          "qualification_tier": 2,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -0.17697833061218263,
+                "metric": "identity_mse",
+                "op": "<=",
+                "status": "FAIL",
+                "threshold": 0.02,
+                "value": 0.19697833061218262
+              }
+            ],
+            "passed": false,
+            "shortfall": 2.0,
+            "status": "FAIL"
+          },
+          "task": "trajectory"
+        }
+      ],
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 1,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 20
+        },
+        "required_total": 24,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 3,
+            "statuses": {
+              "PASS": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 18
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 24
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "1f498f96bc8b41499e268406705e4ed9",
+          "result_hash": "5bcbb02dffaa6d68fa7569a6e02ab89e1d29d8aa2d8a312fc6128ec8d3772cb1",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "55a3dd9aadc34a3490b1de4b1c7158be",
+          "result_hash": "fb05aab253e0ce169567bbb8815a2189d4d6b13b743b86bc2bd6b3ce3925f906",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "77b22fad82d242d1bd7727ee5643f549",
+          "result_hash": "fe2c1ac0fc73c94cca82753320a41f91c8f311efc1049ed6c0cfa8074743b68d",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a06984368aa24eeea8ba6e877e5007cd",
+          "result_hash": "dbff1fa3ca4e277c50e776d88af6f82948d9b2dd38268765a94add1ac4f6c034",
+          "valid_receipt": true
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "580.173.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.2,
+        "lr_floor": 0.25,
+        "network_lr_floor": 0.25
+      },
+      "status": "FAIL",
+      "submission_reason": "trajectory: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "unknown_tasks": [
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ]
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "70005da6899e49268ffa982702756265",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "597cb0de296ad76c21840092f1cf3c35a8e8e7c0fd8c624f653d59d87058509d",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.4624064499512315
+        },
+        {
+          "attempt_id": "71bebfa326e4492da73161a7c9d7c61e",
+          "gate_statuses": {
+            "two_pole": "PASS"
+          },
+          "result_hash": "cf893b066eb02e91adf2ec73d20dbfda3b2747857feb22157af876cf8c6fedd7",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.063996500102803
+        },
+        {
+          "attempt_id": "94dbb904663543cbada69a615cb2e321",
+          "gate_statuses": {
+            "unused_token_hold": "PASS"
+          },
+          "result_hash": "4a1a70f71740e0eb944a813383778f789ac4492501746c2ae8d8edf889b6ac60",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.325637547997758
+        },
+        {
+          "attempt_id": "dca382bc52bc45df9d84fdd5d0ea359c",
+          "gate_statuses": {
+            "trajectory": "FAIL"
+          },
+          "result_hash": "abff41ef2b35e2e6fe0b205a17d4c72b465765fb74ab85db80b0b9c4e50a0e42",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.173719920916483
+        }
+      ],
+      "candidate_id": "r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d",
+      "candidate_revision": "dc7541979f0c3eb2e4ed628c550f9d9c2105fb1c44b66ea966bf12a5f3b45325",
+      "configuration_id": "9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d",
+      "cost": {
+        "evidence_wall_seconds": 26.025760418968275,
+        "new_paid_wall_seconds": 26.025760418968275,
+        "wall_seconds": 26.025760418968275
+      },
+      "observed_tasks": [
+        {
+          "actual_device": "cpu",
+          "attempt_id": "71bebfa326e4492da73161a7c9d7c61e",
+          "budget_seconds": 300,
+          "compatibility_key": "e63e68e93361acdf45917471a2d5c8668c089eb4746b95d21919c66de2c81f0f",
+          "cost": {
+            "adapter_seconds": 0.38173112203367054,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.063996500102803,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.5628444249741733,
+            "wall_seconds": 6.063996500102803
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 60,
+              "first_pass_step": 47,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 11,
+              "passing_suffix": 11,
+              "stable_from_seconds": null,
+              "stable_from_step": 47
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.7579650282859802,
+            "mean_abs": 0.6908041834831238
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "ad8d44d90406cd28238972253a1c91619dd615b085fdacf970b5db888a1d481b",
+            "request": "a65d005153dcbbdf132025d784b5bb5742a8da8d66224261f62ad9cb2d5c0fc1",
+            "result": "4c1763b1e0ccfa7162513166becd4daad7b2920c8ca075d3e032e15267313960"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.75,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 60,
+              "first_pass_step": 47,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 11,
+              "passing_suffix": 11,
+              "stable_from_seconds": null,
+              "stable_from_step": 47
+            },
+            "metrics": [
+              {
+                "margin": 0.3908041834831238,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.3,
+                "value": 0.6908041834831238
+              },
+              {
+                "margin": 0.24203497171401978,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.7579650282859802
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "two_pole"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "94dbb904663543cbada69a615cb2e321",
+          "budget_seconds": 300,
+          "compatibility_key": "a19e3ccc6e190eab995b094882931e4ddf03e307cf6d49932b3c339b12a2947e",
+          "cost": {
+            "adapter_seconds": 0.6820717880036682,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.325637547997758,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.855643240036443,
+            "wall_seconds": 6.325637547997758
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 84,
+              "first_pass_step": 50,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 19,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 50
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.9999997615814209,
+            "unused_hold": 0.9999999701976776
+          },
+          "order": 1,
+          "original_file_sha256": {
+            "evidence": "bef9615cee24ae96ea56a191358d94fc0a015a5a029ad66f9868c59675ed8214",
+            "request": "a46e8c6dada41bc90d1c8468cbc07616dcf890bce124a455ea7b1d52473722b1",
+            "result": "47ed4cf3c8c8a48b1658f34d9ae49a2b4296d7f405c20266b2d002da6acb4117"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.42,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 84,
+              "first_pass_step": 50,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 19,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 50
+            },
+            "metrics": [
+              {
+                "margin": 0.14999997019767763,
+                "metric": "unused_hold",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9999999701976776
+              },
+              {
+                "margin": 0.14999976158142092,
+                "metric": "concept_move",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9999997615814209
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "unused_token_hold"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "70005da6899e49268ffa982702756265",
+          "budget_seconds": 300,
+          "compatibility_key": "64a535876dff02cdad0ae2b8120754910e647c38a7eee54791cde03a9f16437e",
+          "cost": {
+            "adapter_seconds": 1.2298646948765963,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.4624064499512315,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.3132091108709574,
+            "wall_seconds": 6.4624064499512315
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 240,
+              "first_pass_step": 11,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 22,
+              "passing_suffix": 6,
+              "stable_from_seconds": null,
+              "stable_from_step": 198
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.0010776888811960816,
+            "recon_mse": 0.0031720977276563644
+          },
+          "order": 2,
+          "original_file_sha256": {
+            "evidence": "e5f89320f2edf5a791b8cb6c7ff1fb787eb88f7c8e51e24895c9db75cbcc2e1d",
+            "request": "b5cb5614336d6171b76826b762984b765df53489cbabd97eb1412cdff4b3abb4",
+            "result": "2c74303771a267bc893026e1b592dab37224f41a9a3006b250369c17885a1af2"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.96,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 240,
+              "first_pass_step": 11,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 22,
+              "passing_suffix": 6,
+              "stable_from_seconds": null,
+              "stable_from_step": 198
+            },
+            "metrics": [
+              {
+                "margin": 0.04682790227234364,
+                "metric": "recon_mse",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.05,
+                "value": 0.0031720977276563644
+              },
+              {
+                "margin": 0.3489223111188039,
+                "metric": "hold",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.35,
+                "value": 0.0010776888811960816
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "ae_gan_hold"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "dca382bc52bc45df9d84fdd5d0ea359c",
+          "budget_seconds": 1800,
+          "compatibility_key": "a97a8a5cd86ee3f3b87a2e19b44cdcef462a3665ef71341a025e718b71cb79ba",
+          "cost": {
+            "adapter_seconds": 1.7163618290796876,
+            "charged_task": "trajectory",
+            "device": "cpu",
+            "execution_seconds": 7.173719920916483,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.8075706439558417,
+            "wall_seconds": 7.173719920916483
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "identity_mse": 0.35053133964538574
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "0cdf8a2953bcb04d5b603ec07b548054c6d7d9838945156e2dbbf4253a12b512",
+            "request": "528b6577860fabe562bd3146a5e1710128248811ce174d666f00644ef6baaa95",
+            "result": "c9dcf377a47caafbea29321c74b388fc42660ec2e5d105cef2cbe3c5d4d1b6f8"
+          },
+          "qualification_tier": 2,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -0.3305313396453857,
+                "metric": "identity_mse",
+                "op": "<=",
+                "status": "FAIL",
+                "threshold": 0.02,
+                "value": 0.35053133964538574
+              }
+            ],
+            "passed": false,
+            "shortfall": 2.0,
+            "status": "FAIL"
+          },
+          "task": "trajectory"
+        }
+      ],
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 1,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 20
+        },
+        "required_total": 24,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 3,
+            "statuses": {
+              "PASS": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 18
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 24
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "70005da6899e49268ffa982702756265",
+          "result_hash": "597cb0de296ad76c21840092f1cf3c35a8e8e7c0fd8c624f653d59d87058509d",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "71bebfa326e4492da73161a7c9d7c61e",
+          "result_hash": "cf893b066eb02e91adf2ec73d20dbfda3b2747857feb22157af876cf8c6fedd7",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "94dbb904663543cbada69a615cb2e321",
+          "result_hash": "4a1a70f71740e0eb944a813383778f789ac4492501746c2ae8d8edf889b6ac60",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "dca382bc52bc45df9d84fdd5d0ea359c",
+          "result_hash": "abff41ef2b35e2e6fe0b205a17d4c72b465765fb74ab85db80b0b9c4e50a0e42",
+          "valid_receipt": true
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "580.173.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.25,
+        "network_lr_floor": 0.25
+      },
+      "status": "FAIL",
+      "submission_reason": "trajectory: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "unknown_tasks": [
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ]
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "f57864438f1b4091a8f1a608ea5aad38",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "0bc7c601b66543db328fbe03ac778ed107d7982c1c02017f50d0bc1709920088",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 5.944403492147103
+        }
+      ],
+      "candidate_id": "r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743",
+      "candidate_revision": "f009b59af7ebc4ad19ac7808ac3a79503b7b6a02c9eb66e6608e628c8f8779e3",
+      "configuration_id": "dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743",
+      "cost": {
+        "evidence_wall_seconds": 5.944403492147103,
+        "new_paid_wall_seconds": 5.944403492147103,
+        "wall_seconds": 5.944403492147103
+      },
+      "observed_tasks": [
+        {
+          "actual_device": "cpu",
+          "attempt_id": "f57864438f1b4091a8f1a608ea5aad38",
+          "budget_seconds": 300,
+          "compatibility_key": "8e5a18b07cf9b7a6b9786dc26ac013ec848d11c24278c780d3373e5273dbc412",
+          "cost": {
+            "adapter_seconds": 0.3947954399045557,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.944403492147103,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.5274400820489973,
+            "wall_seconds": 5.944403492147103
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.06950034201145172,
+            "mean_abs": 0.18938367068767548
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "9b167ebf64f91655435967c6dd4db09d2fa405a6caf15a79ac9df0c58ec3b824",
+            "request": "c6c86fcf45ab559eea4f30d2b8a63b538e50f4754964a8eaffef8cf9e506631c",
+            "result": "f6da4b1485143cf893299339d2da505dedfd2ab5f643a1c45e4fbf699368993a"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -0.11061632931232451,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 0.3,
+                "value": 0.18938367068767548
+              },
+              {
+                "margin": 0.9304996579885483,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.06950034201145172
+              }
+            ],
+            "passed": false,
+            "shortfall": 0.1843605488538742,
+            "status": "FAIL"
+          },
+          "task": "two_pole"
+        }
+      ],
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 23
+        },
+        "required_total": 24,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 3,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 2
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 24
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "f57864438f1b4091a8f1a608ea5aad38",
+          "result_hash": "0bc7c601b66543db328fbe03ac778ed107d7982c1c02017f50d0bc1709920088",
+          "valid_receipt": true
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "580.173.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.2,
+        "lr_floor": 0.1,
+        "network_lr_floor": 0.1
+      },
+      "status": "FAIL",
+      "submission_reason": "two_pole: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "unknown_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ]
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "2574a196da1743dda9f5b3e7c8190b57",
+          "gate_statuses": {
+            "two_pole": "PASS"
+          },
+          "result_hash": "f86b31fa987eeeccf03986b1ccacda03ef7b91d9be9f1d61019fc3574c156b75",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 5.951619925908744
+        },
+        {
+          "attempt_id": "9746e2ad8da34d8da38728eb3d68d86d",
+          "gate_statuses": {
+            "unused_token_hold": "PASS"
+          },
+          "result_hash": "cbd7917635b953ca26e01b44054e044f2f4abf65fc51649b98dc52bafc413c34",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.183291997993365
+        },
+        {
+          "attempt_id": "b3844dc48d1749f585da1632d5f96b32",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "35c010c3e825274c60f72c7e3dd0a9321fba2069f59e144bddebdabea499e105",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.784130049869418
+        },
+        {
+          "attempt_id": "daffc820b74740ae8dfa61d6dbc7e6bc",
+          "gate_statuses": {
+            "trajectory": "FAIL"
+          },
+          "result_hash": "e66b009becc3d57e6f52a398a6f9a3030f093bee1fe0487cdecb3547499dbd25",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.0894675680901855
+        }
+      ],
+      "candidate_id": "r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe",
+      "candidate_revision": "52a1698ab0d57b24008033563cdb6c0a1aa7242a050ccdc1b53b1612dc5d0f10",
+      "configuration_id": "e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe",
+      "cost": {
+        "evidence_wall_seconds": 26.008509541861713,
+        "new_paid_wall_seconds": 26.008509541861713,
+        "wall_seconds": 26.008509541861713
+      },
+      "observed_tasks": [
+        {
+          "actual_device": "cpu",
+          "attempt_id": "2574a196da1743dda9f5b3e7c8190b57",
+          "budget_seconds": 300,
+          "compatibility_key": "dcb7a737b91cb2fdb68d47e66d4690a4ebd530abb164c8b11ace36f445b91d77",
+          "cost": {
+            "adapter_seconds": 0.36942420806735754,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.951619925908744,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.4738562488928437,
+            "wall_seconds": 5.951619925908744
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 60,
+              "first_pass_step": 47,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 11,
+              "passing_suffix": 11,
+              "stable_from_seconds": null,
+              "stable_from_step": 47
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.7845979928970337,
+            "mean_abs": 0.6629347205162048
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "9cbd7695798feb3059f59a52083c952da62d61fc76afad45d454df578ecaab00",
+            "request": "725dc2499b492014fdc47306237d973bde593005a88f6434fd51960ce223bea0",
+            "result": "91b28f6afea955be3f2b702813942a7dd1df24176a897682d943e5b15128a7bb"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.75,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 60,
+              "first_pass_step": 47,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 11,
+              "passing_suffix": 11,
+              "stable_from_seconds": null,
+              "stable_from_step": 47
+            },
+            "metrics": [
+              {
+                "margin": 0.36293472051620485,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.3,
+                "value": 0.6629347205162048
+              },
+              {
+                "margin": 0.2154020071029663,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.7845979928970337
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "two_pole"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "9746e2ad8da34d8da38728eb3d68d86d",
+          "budget_seconds": 300,
+          "compatibility_key": "399ec5147e3ca4ad4f60fc511b011d99f38e7ccf10868da48ffb4871d647c31c",
+          "cost": {
+            "adapter_seconds": 0.6825732549186796,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.183291997993365,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.8306681350804865,
+            "wall_seconds": 6.183291997993365
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 84,
+              "first_pass_step": 50,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 19,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 50
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.9999997615814209,
+            "unused_hold": 0.9999999403953552
+          },
+          "order": 1,
+          "original_file_sha256": {
+            "evidence": "d71c005e1058259c2275745c0e3f2f6f186fab3ec59db16e5bb858c5efa70ee7",
+            "request": "8b42d0e8d891d5af595009f97788cc9ec2d6b88db955021c42086b87bf90fb80",
+            "result": "c1c08793c836aa08f119a43b876f173e42c4b146267cca3250f1ffe4299ce9cc"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.42,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 84,
+              "first_pass_step": 50,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 19,
+              "passing_suffix": 19,
+              "stable_from_seconds": null,
+              "stable_from_step": 50
+            },
+            "metrics": [
+              {
+                "margin": 0.14999994039535525,
+                "metric": "unused_hold",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9999999403953552
+              },
+              {
+                "margin": 0.14999976158142092,
+                "metric": "concept_move",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9999997615814209
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "unused_token_hold"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "b3844dc48d1749f585da1632d5f96b32",
+          "budget_seconds": 300,
+          "compatibility_key": "b6d4f77bf72cc772b68f36159661eb1a879a35bf0478a330b46b8706f16da385",
+          "cost": {
+            "adapter_seconds": 1.2591659859754145,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 6.784130049869418,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.3326641980092973,
+            "wall_seconds": 6.784130049869418
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 230,
+              "first_pass_step": 11,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 22,
+              "passing_suffix": 7,
+              "stable_from_seconds": null,
+              "stable_from_step": 188
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.0051301526837050915,
+            "recon_mse": 0.005790254566818476
+          },
+          "order": 2,
+          "original_file_sha256": {
+            "evidence": "80dae4d5ba890fac887f90248ea288ef865d538b9f1753c8d418d04420894933",
+            "request": "5a2a31b79ea46c3f2fcc9ce571ce622ce8d55d840418fce62e9756205c90062c",
+            "result": "4440bb974fca202fc8b52fc82c2e6e9a8a4576eafcee3874ac0531f917acf370"
+          },
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 0.92,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 230,
+              "first_pass_step": 11,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 22,
+              "passing_suffix": 7,
+              "stable_from_seconds": null,
+              "stable_from_step": 188
+            },
+            "metrics": [
+              {
+                "margin": 0.04420974543318153,
+                "metric": "recon_mse",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.05,
+                "value": 0.005790254566818476
+              },
+              {
+                "margin": 0.3448698473162949,
+                "metric": "hold",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.35,
+                "value": 0.0051301526837050915
+              }
+            ],
+            "passed": true,
+            "shortfall": 0.0,
+            "status": "PASS"
+          },
+          "task": "ae_gan_hold"
+        },
+        {
+          "actual_device": "cpu",
+          "attempt_id": "daffc820b74740ae8dfa61d6dbc7e6bc",
+          "budget_seconds": 1800,
+          "compatibility_key": "bac765aabb0299e207ee4efac73e59ea82026c39c3838018e45a85a5acc7e59a",
+          "cost": {
+            "adapter_seconds": 1.6822388349100947,
+            "charged_task": "trajectory",
+            "device": "cpu",
+            "execution_seconds": 7.0894675680901855,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.7805283840280026,
+            "wall_seconds": 7.0894675680901855
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "identity_mse": 0.3511522114276886
+          },
+          "order": 0,
+          "original_file_sha256": {
+            "evidence": "f0ceff14cb1f7492d0092d47e92dfada24b4ee825b6fda270f9bfd30c48d5a21",
+            "request": "249f43ba139fb9d851cfa37db0f483f8bdecb855f8aa6a7f3ecad1125d9fa897",
+            "result": "22f4489b24bc43dbc81b00a5c1070d92cf188ad60e9a1da3847037fd7b478455"
+          },
+          "qualification_tier": 2,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "recorded_claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "recorded_evaluator_result": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -0.3311522114276886,
+                "metric": "identity_mse",
+                "op": "<=",
+                "status": "FAIL",
+                "threshold": 0.02,
+                "value": 0.3511522114276886
+              }
+            ],
+            "passed": false,
+            "shortfall": 2.0,
+            "status": "FAIL"
+          },
+          "task": "trajectory"
+        }
+      ],
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 1,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 20
+        },
+        "required_total": 24,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 3,
+            "statuses": {
+              "PASS": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 18
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 24
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "2574a196da1743dda9f5b3e7c8190b57",
+          "result_hash": "f86b31fa987eeeccf03986b1ccacda03ef7b91d9be9f1d61019fc3574c156b75",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "9746e2ad8da34d8da38728eb3d68d86d",
+          "result_hash": "cbd7917635b953ca26e01b44054e044f2f4abf65fc51649b98dc52bafc413c34",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "b3844dc48d1749f585da1632d5f96b32",
+          "result_hash": "35c010c3e825274c60f72c7e3dd0a9321fba2069f59e144bddebdabea499e105",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "daffc820b74740ae8dfa61d6dbc7e6bc",
+          "result_hash": "e66b009becc3d57e6f52a398a6f9a3030f093bee1fe0487cdecb3547499dbd25",
+          "valid_receipt": true
+        }
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "580.173.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.1,
+        "network_lr_floor": 0.1
+      },
+      "status": "FAIL",
+      "submission_reason": "trajectory: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "unknown_tasks": [
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ]
+    }
+  ]
+}

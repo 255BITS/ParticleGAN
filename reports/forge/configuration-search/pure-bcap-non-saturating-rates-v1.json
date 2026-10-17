@@ -1,0 +1,5272 @@
+{
+  "base_candidate": "bcap-pure-non-saturating-v1",
+  "base_declaration": {
+    "api_changes": [],
+    "api_version": "forge-api-v1",
+    "changed_factors": [
+      "Native Adam and fixed BCAP only",
+      "Constant rates and moments; zero additive training noise",
+      "Adversarial loss: non_saturating"
+    ],
+    "claim_contract": {
+      "sampling_law": "task_declared",
+      "schedule": "scheduled",
+      "scoring_weights": "live"
+    },
+    "decision_contract": {
+      "candidate_binding_sha256": "TODO",
+      "competing_explanation": "TODO: state the alternative explanation this observation distinguishes",
+      "control": {
+        "binding_sha256": "TODO",
+        "candidate_id": "k3p-bcap-matched-v1",
+        "task_map": {}
+      },
+      "falsifier": {
+        "metric": "TODO",
+        "op": "<",
+        "phase": "final",
+        "task_id": "TODO",
+        "threshold": 0.0
+      },
+      "prediction": {
+        "metric": "TODO",
+        "op": ">=",
+        "phase": "final",
+        "task_id": "TODO",
+        "threshold": 0.0
+      },
+      "prior_evidence": [
+        {
+          "identity": {
+            "record_id": "TODO"
+          },
+          "path": "TODO: source-bound JSON",
+          "selector": [],
+          "sha256": "TODO",
+          "use": "motivation_only"
+        }
+      ],
+      "schema_version": 1,
+      "scope": {
+        "campaign_budget_seconds": 900,
+        "candidate_budget_seconds": 900,
+        "execution_backend": "cuda",
+        "jobs_sha256": "TODO",
+        "max_rounds": 1,
+        "protocol_sha256": "TODO",
+        "runtime_cohort_sha256": "TODO",
+        "source_digest": "TODO",
+        "task_ids": [],
+        "through_tier": 1,
+        "view": "discriminator_stability"
+      },
+      "status": "draft",
+      "substantive_delta": [],
+      "terminal_rules": {
+        "falsified": "stop_revision",
+        "incomplete": "request_missing_evidence",
+        "inconclusive": "stop_and_readout",
+        "prediction_observed": "review_saved_diagnostics"
+      }
+    },
+    "execution_path": "public_trainer",
+    "goal": "discriminator_stability",
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "Pure BCAP with non_saturating loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+    "id": "bcap-pure-non-saturating-v1",
+    "lifecycle": "proposed",
+    "mechanism_class": "structural",
+    "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
+    "parent": "k3p-bcap-matched-v1",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "prior_art": [
+      "k3p-bcap-matched-v1"
+    ],
+    "recipe_overrides": {
+      "loss": "non_saturating"
+    },
+    "recipe_preset": "bcap",
+    "requires_capabilities": [
+      "learned_locations",
+      "named_rng"
+    ],
+    "schema_version": 2
+  },
+  "blocked_count": 0,
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 25200,
+    "candidate_budget_seconds": 2520,
+    "id": "pure-bcap-losses-v1"
+  },
+  "campaign_accounting": {
+    "definition": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 25200,
+      "candidate_budget_seconds": 2520,
+      "id": "pure-bcap-losses-v1"
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 1038.7521727493731
+  },
+  "cost": {
+    "evidence_wall_seconds": 369.37973002216313,
+    "new_paid_wall_seconds": 1038.7521727493731,
+    "observed_attempts": 14,
+    "wall_seconds": 369.37973002216313
+  },
+  "declared_worst_case_seconds": 5040,
+  "default_adoption": false,
+  "execution_backend": "cuda",
+  "holdout_tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "mode_hold",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "img_stripes2",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "grid100",
+    "rotated100",
+    "staggered100",
+    "ring_hold",
+    "ring_extension"
+  ],
+  "independent_confirmation": "not_performed",
+  "input_digest": "db27ef3867c302d327ea3874480f94dfb2ec647fdd1b86e62ab2a9de84cac414",
+  "logs": "/home/martyn/dev/ParticleGAN-bcap-pure/runs/forge/pure-bcap-losses-v1/queue/events.jsonl",
+  "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+  "progression": {
+    "comparison_complete": false,
+    "configured_through_tier": 1,
+    "default_adoption": false,
+    "full_view_qualified_candidate_ids": [],
+    "full_view_winner_candidate_id": null,
+    "outcome": "pending",
+    "policy": "every declared configuration advances independently through ordinary prerequisites to the tier cap",
+    "smoke_survivor_candidate_ids": []
+  },
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_scope": "declared tuning tasks only; provisional Forge gates",
+  "queue_root": "/home/martyn/dev/ParticleGAN-bcap-pure/runs/forge/pure-bcap-losses-v1/queue",
+  "runtime_cohort": {
+    "compute_profiles": {
+      "cpu": {
+        "backend": "cpu",
+        "deterministic": true,
+        "machine": "x86_64",
+        "model": "AMD Ryzen 9 5900X 12-Core Processor",
+        "tf32": false,
+        "threads": 1
+      },
+      "cuda": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "execution_backend": "cuda",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "all_trials_terminal": false,
+    "calibration_status": "provisional",
+    "default_adoption": false,
+    "independent_confirmation": "not_performed",
+    "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+    "qualified": false,
+    "required_pass_count": null,
+    "required_passes_by_tier": null,
+    "required_task_bindings": [],
+    "required_total": null,
+    "selected_candidate_id": null,
+    "selected_configuration_id": null,
+    "selection_complete": false,
+    "selection_kind": "pending",
+    "source_digest": null,
+    "tuning_through_tier": 1
+  },
+  "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+  "source_digests": [
+    "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac"
+  ],
+  "spec": {
+    "base_candidate": "bcap-pure-non-saturating-v1",
+    "campaign": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 25200,
+      "candidate_budget_seconds": 2520,
+      "id": "pure-bcap-losses-v1"
+    },
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "grid": {
+      "lr": [
+        0.0010625,
+        0.00425
+      ]
+    },
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "Pure BCAP with non_saturating loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+    "id": "pure-bcap-non-saturating-rates-v1",
+    "protocol": "screening",
+    "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "rationale": "Two constant global rates at one fixed loss. Same task-owned prior, initialization, architecture, duration and gates. Complete all runnable Tier 1 peers, preserve CPU behavioral objectives, stop before higher tiers. Five loss studies share one finite campaign. No seed trials, automatic tuning, criteria edits or default adoption.",
+    "schema_version": 1,
+    "trainer_family": "bcap-pure",
+    "tuning_through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "spec_hash": "af00b53686cfea2de1557b95dcf943ef35b96eef9d2e072686cf8309a11e4da6",
+  "speed_selection": {
+    "reason": "No frozen comparable first-acquisition timing contract is implemented for this search. Not all required adapters record per-observation seconds; original terminal-suffix or coverage-only times cannot supply full-quality first-acquisition speed.",
+    "selected_candidate_id": null,
+    "status": "UNAVAILABLE",
+    "wall_time_ranking": false
+  },
+  "stage": "enqueued",
+  "study_id": "pure-bcap-non-saturating-rates-v1",
+  "submitted_count": 2,
+  "technique_signature": {
+    "digest": "cdc492b221b87df48a4e01a6fb794aa2d0577b129bd75eda68a61df6946fbe49",
+    "fixed_recipe_fields": {
+      "birth_death_backend": "knn",
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "continuous_policy": null,
+      "critic_formulation": "bcap",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "direct_particle_gain": false,
+      "distance_reduction": "sum",
+      "encoder_mode": "none",
+      "loss": "non_saturating",
+      "lr_control": "mobility",
+      "model": "gan",
+      "num_classes": null,
+      "optimizer_family": "adam",
+      "output_noise_mode": "fixed",
+      "particle_birth_death": false,
+      "reg_arm": "b_cap",
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "table_release_rule": "any",
+      "ucd_target": "class"
+    },
+    "mechanisms": {
+      "amsgrad": false,
+      "averaged_serving": false,
+      "beta2_schedule": {
+        "declared": false,
+        "network_changing": false,
+        "prior_changing": false
+      },
+      "critic_anchor": false,
+      "critic_guard": false,
+      "critic_penalty": {
+        "initial": true,
+        "terminal": true
+      },
+      "direct_particle_moments": null,
+      "gradient_cap": true,
+      "k3p_penalty_lr_floor": null,
+      "latent_damping": false,
+      "network_horizon_cap": false,
+      "network_moments": [
+        false,
+        true
+      ],
+      "network_terminal_updates": true,
+      "output_noise_warmup": false,
+      "penalty_schedule": {
+        "changing": false,
+        "declared": false
+      },
+      "prior_moments": [
+        false,
+        true
+      ],
+      "prior_regularization": false,
+      "prior_terminal_updates": true,
+      "reconstruction_objective": null,
+      "scheduled_learning_rates": true,
+      "terminal_second_moment": true,
+      "training_input_noise": false,
+      "training_output_noise": false,
+      "ucd_objective": null
+    },
+    "schema_version": 1
+  },
+  "trainer_family": "bcap-pure",
+  "trials": [
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "17891104e21a4817bb6a0c6372d15155",
+          "gate_statuses": {
+            "clockfree_audit_measurement_v1": "PASS"
+          },
+          "result_hash": "1c4df0e1503bac706fce9835c45b060ad2d193a6f386fdb0a24a4f3274674095",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.523797992034815
+        },
+        {
+          "attempt_id": "21c73b9fd45f408fa0b40ab182b976b4",
+          "gate_statuses": {
+            "ring16_acquisition": "FAIL"
+          },
+          "result_hash": "a2f6f28d12669bc1ae528314bef21fb13847b0eed62b0dda78995c64c98665af",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 10.395477715064771
+        },
+        {
+          "attempt_id": "23e19dacb7114d63b49ebb02527f1a8a",
+          "gate_statuses": {
+            "gaussian1d_acquisition": "FAIL"
+          },
+          "result_hash": "1a032e81f8aa2583f209bc84449f2c6e4fda22b4cd89718c0a1a1dbffbdd1dbc",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 14.806475167977624
+        },
+        {
+          "attempt_id": "3a777010b37a48339e81a32d06ce5c45",
+          "gate_statuses": {
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "result_hash": "6b003883730e7ed649d44830429d7ab45cabbc7f2c1bd09149692e6bc27239d8",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 131.16836533299647
+        },
+        {
+          "attempt_id": "ab5eda290c54483cb5ee67c5775149e7",
+          "gate_statuses": {
+            "unused_token_hold": "FAIL"
+          },
+          "result_hash": "d9e343f6e2bd03bcfcd5712e21f67e70783806a624ee5bfa28c818bf93d6bbbf",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.707080826978199
+        },
+        {
+          "attempt_id": "accd2a2f1c4845e382db9ea56c6326f2",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "ecea47ef17de6d647b000c91f68a069350c72bc3e8101dbad9431eaf77e7349e",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.206653682049364
+        },
+        {
+          "attempt_id": "ee65b34fe5f74eaeb8f8580624820485",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "e151e1cd1dc08eade45c3744c4f2dfcde2d249de1fab44a68658129a903ce6c0",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.019753145053983
+        }
+      ],
+      "attempt_ids": [
+        "17891104e21a4817bb6a0c6372d15155",
+        "21c73b9fd45f408fa0b40ab182b976b4",
+        "23e19dacb7114d63b49ebb02527f1a8a",
+        "3a777010b37a48339e81a32d06ce5c45",
+        "ab5eda290c54483cb5ee67c5775149e7",
+        "accd2a2f1c4845e382db9ea56c6326f2",
+        "ee65b34fe5f74eaeb8f8580624820485"
+      ],
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "configuration_id": "3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "cost": {
+        "evidence_wall_seconds": 183.82760386215523,
+        "new_paid_wall_seconds": 183.82760386215523,
+        "wall_seconds": 183.82760386215523
+      },
+      "counts": {
+        "FAIL": 5,
+        "PASS": 2,
+        "UNKNOWN": 21
+      },
+      "declaration": {
+        "api_changes": [],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.lr=0.00425"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+        "decision_contract": {
+          "candidate_binding_sha256": "77e3c0ad8c0796e2fa5be0f14aab284295d2829f2e457266480c9dc0d162757b",
+          "competing_explanation": "The old BCAP evidence uses K3P optimizers, schedules and noise. It motivates this baseline but is not a matched causal control. Finite task budgets and rate endpoints may fail; one passing endpoint is insufficient for the unchanged sustained task gate. Behavioral objectives belong to the tests.",
+          "control": {
+            "binding_sha256": "7075d43e0fb653e7545b5a0c9c95cc098c6edbf26758baaec3db72eb616a2856",
+            "candidate_id": "k3p-bcap-matched-v1",
+            "task_map": {
+              "ae_gan_hold": "ae_gan_hold",
+              "clockfree_audit_measurement_v1": "clockfree_audit_measurement_v1",
+              "five_word_joint_acquisition": "five_word_joint_acquisition",
+              "gaussian1d_acquisition": "gaussian1d_acquisition",
+              "ring16_acquisition": "ring16_acquisition",
+              "two_pole": "two_pole",
+              "unused_token_hold": "unused_token_hold"
+            }
+          },
+          "falsifier": {
+            "metric": "cdf_ks",
+            "op": ">",
+            "phase": "final",
+            "task_id": "gaussian1d_acquisition",
+            "threshold": 0.05
+          },
+          "prediction": {
+            "metric": "cdf_ks",
+            "op": "<=",
+            "phase": "final",
+            "task_id": "gaussian1d_acquisition",
+            "threshold": 0.05
+          },
+          "prior_evidence": [
+            {
+              "identity": {
+                "study_id": "bcap-tier1-refresh-v1"
+              },
+              "path": "reports/forge/configuration-search/bcap-tier1-refresh-v1.json",
+              "selector": [],
+              "sha256": "30d3f63dc83f7d651d8243527d0cba131105b1f6d103cd875da0b53eb6ae8924",
+              "use": "motivation_only"
+            }
+          ],
+          "schema_version": 1,
+          "scope": {
+            "campaign_budget_seconds": 25200,
+            "candidate_budget_seconds": 2520,
+            "execution_backend": "cuda",
+            "jobs_sha256": "3384211c25875ee068313cc305d28022c9ff460c71501aca171083d8e79ece56",
+            "max_rounds": 1,
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort_sha256": "f03804f032a7d5815d018b45c9fa112c1765013224d393e7a702a172b585735d",
+            "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+            "task_ids": [
+              "ae_gan_hold",
+              "clockfree_audit_measurement_v1",
+              "five_word_joint_acquisition",
+              "gaussian1d_acquisition",
+              "ring16_acquisition",
+              "two_pole",
+              "unused_token_hold"
+            ],
+            "through_tier": 1,
+            "view": "discriminator_stability"
+          },
+          "status": "ready",
+          "substantive_delta": [
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "two_pole",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "two_pole",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "two_pole",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "two_pole",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "two_pole",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "two_pole",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "two_pole",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "two_pole",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "two_pole",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "two_pole",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "two_pole",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "two_pole",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "two_pole",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "two_pole",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "reg_anchor_weight"
+              ]
+            }
+          ],
+          "terminal_rules": {
+            "falsified": "stop_revision",
+            "incomplete": "request_missing_evidence",
+            "inconclusive": "stop_and_readout",
+            "prediction_observed": "review_saved_diagnostics"
+          }
+        },
+        "execution_path": "public_trainer",
+        "goal": "discriminator_stability",
+        "guide": "EXPERIMENTATION.md",
+        "hypothesis": "Pure BCAP with non_saturating loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+        "id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+        "lifecycle": "proposed",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
+        "parent": "bcap-pure-non-saturating-v1",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "prior_art": [
+          "k3p-bcap-matched-v1"
+        ],
+        "recipe_overrides": {
+          "loss": "non_saturating",
+          "lr": 0.00425
+        },
+        "recipe_preset": "bcap",
+        "requires_capabilities": [
+          "learned_locations",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 0.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "ema_decay": 0.0,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.0,
+          "loss": "non_saturating",
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 1.0,
+          "model": "gan",
+          "name": "bcap",
+          "network_lr_floor": 1.0,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 0.0,
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 2,
+        "search_report": "reports/forge/configuration-search/pure-bcap-non-saturating-rates-v1.json",
+        "search_study_id": "pure-bcap-non-saturating-rates-v1",
+        "trainer_family": "bcap-pure"
+      },
+      "declared_worst_case_seconds": 2520,
+      "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 1,
+        "required_statuses": {
+          "FAIL": 5,
+          "PASS": 1,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 1,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 5,
+              "PASS": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 1,
+        "tuning_required_total": 6
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "17891104e21a4817bb6a0c6372d15155",
+          "result_hash": "1c4df0e1503bac706fce9835c45b060ad2d193a6f386fdb0a24a4f3274674095",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "21c73b9fd45f408fa0b40ab182b976b4",
+          "result_hash": "a2f6f28d12669bc1ae528314bef21fb13847b0eed62b0dda78995c64c98665af",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "23e19dacb7114d63b49ebb02527f1a8a",
+          "result_hash": "1a032e81f8aa2583f209bc84449f2c6e4fda22b4cd89718c0a1a1dbffbdd1dbc",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "3a777010b37a48339e81a32d06ce5c45",
+          "result_hash": "6b003883730e7ed649d44830429d7ab45cabbc7f2c1bd09149692e6bc27239d8",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "ab5eda290c54483cb5ee67c5775149e7",
+          "result_hash": "d9e343f6e2bd03bcfcd5712e21f67e70783806a624ee5bfa28c818bf93d6bbbf",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "accd2a2f1c4845e382db9ea56c6326f2",
+          "result_hash": "ecea47ef17de6d647b000c91f68a069350c72bc3e8101dbad9431eaf77e7349e",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "ee65b34fe5f74eaeb8f8580624820485",
+          "result_hash": "e151e1cd1dc08eade45c3744c4f2dfcde2d249de1fab44a68658129a903ce6c0",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "loss": "non_saturating",
+        "lr": 0.00425
+      },
+      "recipe_preset": "bcap",
+      "request_id": "18076fc3a99ea36263414c4e",
+      "request_path": "/home/martyn/dev/ParticleGAN-bcap-pure/runs/forge/pure-bcap-losses-v1/queue/queue/requests/18076fc3a99ea36263414c4e.json",
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "57de977a44cf9a1099e0db2cb5f841ee64facb5cae8d6df1ad959a3b0c1021f2",
+      "selected_attempt_ids": [
+        "17891104e21a4817bb6a0c6372d15155",
+        "21c73b9fd45f408fa0b40ab182b976b4",
+        "23e19dacb7114d63b49ebb02527f1a8a",
+        "3a777010b37a48339e81a32d06ce5c45",
+        "ab5eda290c54483cb5ee67c5775149e7",
+        "accd2a2f1c4845e382db9ea56c6326f2",
+        "ee65b34fe5f74eaeb8f8580624820485"
+      ],
+      "settings": {
+        "lr": 0.00425
+      },
+      "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "cancelled by request",
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "23e19dacb7114d63b49ebb02527f1a8a",
+          "blockers": [],
+          "budget_seconds": 120,
+          "compatibility_key": "68acc571b30e9d96366f870eb347f41ce5667ddb9e3b622bbdbd6750f2dd9f9c",
+          "cost": {
+            "adapter_loop_seconds": 8.120516859926283,
+            "adapter_seconds": 8.464867803035304,
+            "charged_task": "gaussian1d_acquisition",
+            "completed_steps": 1000,
+            "device": "1",
+            "execution_seconds": 14.806475167977624,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1000,
+              "generator": 1000,
+              "prior": 1000
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 7.737522171228193,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.00784422515425831
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.00783612485975027
+                },
+                "training_updates": {
+                  "calls": 1000,
+                  "seconds": 7.721841821214184
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 10.800509820925072,
+            "wall_seconds": 14.806475167977624
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 417,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 2,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "gaussian1d_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "cdf_ks": 0.07023646156535414,
+            "finite_fraction": 1.0,
+            "mean": 2.00048916254309,
+            "mean_error_sigma": 0.0009783250861801207,
+            "sample_count": 4096,
+            "std": 0.5556614682660906,
+            "std_ratio": 1.1113229365321813,
+            "step": 1000
+          },
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_acquisition"
+        },
+        {
+          "attempt_id": "accd2a2f1c4845e382db9ea56c6326f2",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "3920b61de0fa57b2df3950695f38e017a2ec26486182a27f6b1d98a86a82d226",
+          "cost": {
+            "adapter_seconds": 0.2565369209041819,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.206653682049364,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.636428052908741,
+            "wall_seconds": 6.206653682049364
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 70,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 4,
+              "passing_suffix": 4,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.2300739884376526,
+            "mean_abs": 0.3895387649536133
+          },
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "attempt_id": "ab5eda290c54483cb5ee67c5775149e7",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "b8c6cfc5760d4f2319ea0341c08b3b62e79501ea9fd0c97a876f8140eaa6f61d",
+          "cost": {
+            "adapter_seconds": 0.5478123670909554,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.707080826978199,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.86073351604864,
+            "wall_seconds": 6.707080826978199
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 75,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 10,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.8415767090269313,
+            "unused_hold": 0.9978891126811504
+          },
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "attempt_id": "ee65b34fe5f74eaeb8f8580624820485",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "3df0d6cb394ef8cd9856d0ba393c1497c43aef98e437e7c8c6ace3eb8b2719da",
+          "cost": {
+            "adapter_seconds": 1.062340809032321,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 7.019753145053983,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.344528157962486,
+            "wall_seconds": 7.019753145053983
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 63,
+              "first_pass_step": 21,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 23,
+              "passing_suffix": 23,
+              "stable_from_seconds": null,
+              "stable_from_step": 21
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.011145614087581635,
+            "recon_mse": 0.006077683065086603
+          },
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "attempt_id": "21c73b9fd45f408fa0b40ab182b976b4",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "03a4156c3b0477524cb53a5cc4cc526604c813e731ae2116bd0a90034038fccc",
+          "cost": {
+            "adapter_loop_seconds": 3.838330972008407,
+            "adapter_seconds": 4.117645033984445,
+            "charged_task": "ring16_acquisition",
+            "completed_steps": 400,
+            "device": "1",
+            "execution_seconds": 10.395477715064771,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 400,
+              "generator": 400,
+              "prior": 400
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 3.639300848939456,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.47906361531931907
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007163045112974942
+                },
+                "training_updates": {
+                  "calls": 400,
+                  "seconds": 3.153074188507162
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 6.433243059087545,
+            "wall_seconds": 10.395477715064771
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "component_core_covariance_error": 0.5870893057435751,
+            "component_core_min_eigen_ratio": 0.11383611708879471,
+            "component_covariance_error": 6.937912784516811,
+            "component_min_eigen_ratio": 0.2604106366634369,
+            "covariance_error": 0.035073693841695786,
+            "hq": 0.562255859375,
+            "mass_tv": 0.107177734375,
+            "max_component_spill": 0.980988621711731,
+            "mean_error": 0.09535851329565048,
+            "min_hq_mass_ratio": 0.01953125,
+            "min_mass_ratio": 0.66796875,
+            "modes": 11,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.07776501473540229,
+            "target_scale": 3.0029242038726807
+          },
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "attempt_id": "3a777010b37a48339e81a32d06ce5c45",
+          "blockers": [],
+          "budget_seconds": 900,
+          "compatibility_key": "80bc8e782774dc481b95797a18517770e92eaa66553882e452b4a082e1128756",
+          "cost": {
+            "adapter_loop_seconds": 124.8119430259103,
+            "adapter_seconds": 125.09816326596774,
+            "charged_task": "five_word_joint_acquisition",
+            "completed_steps": 20001,
+            "device": "0",
+            "execution_seconds": 131.16836533299647,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 20001,
+              "encoder": 0,
+              "generator": 20001,
+              "prior": 20001
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 120.57476785732433,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.30532635119743645
+                },
+                "sampling": {
+                  "calls": 0,
+                  "seconds": 0
+                },
+                "training_updates": {
+                  "calls": 20001,
+                  "seconds": 120.2694415061269
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 127.37099595705513,
+            "wall_seconds": 131.16836533299647
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {},
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "encoder did not perform an intended optimizer update",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "attempt_id": "17891104e21a4817bb6a0c6372d15155",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "3ba86bebf04a630dc5cdf3eedc0e960c07f4b1d32b70625b4853de361a08da70",
+          "cost": {
+            "adapter_reported_inclusive_seconds": 1.110337833990343,
+            "adapter_seconds": 1.1316585959866643,
+            "charged_task": "clockfree_audit_measurement_v1",
+            "completed_updates": 24,
+            "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+            "device": "1",
+            "execution_seconds": 7.523797992034815,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.4347075439291075,
+            "wall_seconds": 7.523797992034815
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {},
+            "semantics": "no first full-quality acquisition timestamp in this evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "diagnostic",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "8fdf537f79159c370f1693e9dbd3d1902ceb5e59242d9a741487a6dd7c4b3b91",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "fbeaa517f456ba7bb3d90dde59a5b37105c17c28919d565c80827e06bd98a72a",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b74e43e1cb5e81e41cec285f99a237ca903328f5eff8f7ba7a3196a58f6e851a",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "47e5fa181a1347657b6d9722be9b928a2413437edcf454cac80b739798d27dbe",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "c3bc3ef17b54db6faa3423bfe834d665827e3993f6a5468881f4fd9c8ff2ad21",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "1eb1caa87fbde4542e7bb3966f1aa106fe1557897bb9164a78d47d171635d0eb",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "5cf15a6d44d1809a438cb27449a6df0598237a7cd2efb160ed9bfc0cdd8814a6",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "9bc242bd6ff727d2ff664fa083f27ebfce0d6df2e7999df98dd8c9c8bb3ea5a3",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "a9e3cd944f9361f9f06ab8d7c14bd41957b86f9a89b940eb4511f26af74e0a35",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "c2b9d7eab216ecabac8f2c39b295cf78f34700cccacc75d929d78f389d9f30c1",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "c65b275d114b7bdb342247ab914adb81646f8b9580a76561eb00057c3e0d35db",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "0c026872c0cf2f273d2a6e4f1bacb0b1f4b251c4486d75b11b92d4a7e2b87797",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "0815533f002ea904dc01c540891367cbc059b3109734b995ae688beb13e30753",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "d1de6d1387e07ee050b7f4767e8914d98b9c0125fa4bc720dd95667937c4df86",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "1c3140384be7bbf26662d251320101f2feaaa58f2666e17c9f8cab3a6bd32b9c",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f0394f04d8ad8dd0d9b4758b79299f7b69d68ce3dcfe8a37f4d1106f6d34c105",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "7e67d65f1cb94f6fe44dd6f682c9124a9af0df84a8e1a2b56eab497b28760b5b",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "48a584ff2c9cb66985b9be8d8e605a38cf5f53b5c284fa784c9614cae9741e20",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "196d8b0469681f204aff998ddd02a13c8ebb0cb76c8f26d6093c8f7765de5baa",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "2a70da294924f3267f8e5735a978e994c9f991a65d9c384768fb2d6eeda26066",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "2a70da294924f3267f8e5735a978e994c9f991a65d9c384768fb2d6eeda26066",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "cdc492b221b87df48a4e01a6fb794aa2d0577b129bd75eda68a61df6946fbe49",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "loss": "non_saturating",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": "b_cap",
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": false,
+          "critic_guard": false,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "direct_particle_moments": null,
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": false,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "bcap-pure",
+      "unreused_worst_case_seconds": 2520
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "1960ec3f31484361962fecc229a69e32",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "843dad0c56402746c6db3f14e8b44cddd7e9c9d519e130443829501f28f40703",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.611189475981519
+        },
+        {
+          "attempt_id": "32c79dc0456d4bc589e9e36bab27316c",
+          "gate_statuses": {
+            "gaussian1d_acquisition": "FAIL"
+          },
+          "result_hash": "8a60ae4a526747cc07d4062c6951068fe0f1efb7909acd95c46793f3ff5ed99d",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 14.692913618055172
+        },
+        {
+          "attempt_id": "5b905ab81da0430588f03d302a43df32",
+          "gate_statuses": {
+            "ae_gan_hold": "FAIL"
+          },
+          "result_hash": "0a39deb2810c3f703d2291a850cbf986881966dd3004315867787fa5984f50c8",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.657906718086451
+        },
+        {
+          "attempt_id": "6a9fedac7bbb4ecd8a080a40230f6416",
+          "gate_statuses": {
+            "five_word_joint_acquisition": "FAIL"
+          },
+          "result_hash": "4b41f351486cd8b69b50e9b4ed900169109bc934e7e3ec36125fb538307f7ce3",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 131.96428568498231
+        },
+        {
+          "attempt_id": "9fd6055cda01483994f65867dd72eec6",
+          "gate_statuses": {
+            "clockfree_audit_measurement_v1": "PASS"
+          },
+          "result_hash": "27f31c80dfbe930261bef434faf31a69abc29028ac056f44cde2c19c12cabe4c",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.266436827951111
+        },
+        {
+          "attempt_id": "b955ece8035444bc8374584ca8f93730",
+          "gate_statuses": {
+            "unused_token_hold": "FAIL"
+          },
+          "result_hash": "ec5d6de821d1bfb673f815513da69d5924070e604fb2390bd6c76217589c377b",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.711307863006368
+        },
+        {
+          "attempt_id": "d179717b2071476b8115a926ae9f41c6",
+          "gate_statuses": {
+            "ring16_acquisition": "FAIL"
+          },
+          "result_hash": "9902919d5607bb5cd446cfe4558132c2315bd7abb7ee2911a135be2a29d9b70e",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 10.648085971944965
+        }
+      ],
+      "attempt_ids": [
+        "1960ec3f31484361962fecc229a69e32",
+        "32c79dc0456d4bc589e9e36bab27316c",
+        "5b905ab81da0430588f03d302a43df32",
+        "6a9fedac7bbb4ecd8a080a40230f6416",
+        "9fd6055cda01483994f65867dd72eec6",
+        "b955ece8035444bc8374584ca8f93730",
+        "d179717b2071476b8115a926ae9f41c6"
+      ],
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "configuration_id": "bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "cost": {
+        "evidence_wall_seconds": 185.5521261600079,
+        "new_paid_wall_seconds": 185.5521261600079,
+        "wall_seconds": 185.5521261600079
+      },
+      "counts": {
+        "FAIL": 6,
+        "PASS": 1,
+        "UNKNOWN": 21
+      },
+      "declaration": {
+        "api_changes": [],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.lr=0.0010625"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+        "decision_contract": {
+          "candidate_binding_sha256": "aa2ae3488c9297870c85f3b137c1a15b3a94ef9113faef713e177fad10c61817",
+          "competing_explanation": "The old BCAP evidence uses K3P optimizers, schedules and noise. It motivates this baseline but is not a matched causal control. Finite task budgets and rate endpoints may fail; one passing endpoint is insufficient for the unchanged sustained task gate. Behavioral objectives belong to the tests.",
+          "control": {
+            "binding_sha256": "7075d43e0fb653e7545b5a0c9c95cc098c6edbf26758baaec3db72eb616a2856",
+            "candidate_id": "k3p-bcap-matched-v1",
+            "task_map": {
+              "ae_gan_hold": "ae_gan_hold",
+              "clockfree_audit_measurement_v1": "clockfree_audit_measurement_v1",
+              "five_word_joint_acquisition": "five_word_joint_acquisition",
+              "gaussian1d_acquisition": "gaussian1d_acquisition",
+              "ring16_acquisition": "ring16_acquisition",
+              "two_pole": "two_pole",
+              "unused_token_hold": "unused_token_hold"
+            }
+          },
+          "falsifier": {
+            "metric": "cdf_ks",
+            "op": ">",
+            "phase": "final",
+            "task_id": "gaussian1d_acquisition",
+            "threshold": 0.05
+          },
+          "prediction": {
+            "metric": "cdf_ks",
+            "op": "<=",
+            "phase": "final",
+            "task_id": "gaussian1d_acquisition",
+            "threshold": 0.05
+          },
+          "prior_evidence": [
+            {
+              "identity": {
+                "study_id": "bcap-tier1-refresh-v1"
+              },
+              "path": "reports/forge/configuration-search/bcap-tier1-refresh-v1.json",
+              "selector": [],
+              "sha256": "30d3f63dc83f7d651d8243527d0cba131105b1f6d103cd875da0b53eb6ae8924",
+              "use": "motivation_only"
+            }
+          ],
+          "schema_version": 1,
+          "scope": {
+            "campaign_budget_seconds": 25200,
+            "candidate_budget_seconds": 2520,
+            "execution_backend": "cuda",
+            "jobs_sha256": "3e4a3a73215001435e2db0fb8260731502d17351d5b5021464ffc8a8f9e827be",
+            "max_rounds": 1,
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort_sha256": "f03804f032a7d5815d018b45c9fa112c1765013224d393e7a702a172b585735d",
+            "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+            "task_ids": [
+              "ae_gan_hold",
+              "clockfree_audit_measurement_v1",
+              "five_word_joint_acquisition",
+              "gaussian1d_acquisition",
+              "ring16_acquisition",
+              "two_pole",
+              "unused_token_hold"
+            ],
+            "through_tier": 1,
+            "view": "discriminator_stability"
+          },
+          "status": "ready",
+          "substantive_delta": [
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "two_pole",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "two_pole",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "two_pole",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "two_pole",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "two_pole",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "two_pole",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "two_pole",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "two_pole",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "two_pole",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "two_pole",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "two_pole",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "two_pole",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "two_pole",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "two_pole",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "two_pole",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "non_saturating",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "reg_anchor_weight"
+              ]
+            }
+          ],
+          "terminal_rules": {
+            "falsified": "stop_revision",
+            "incomplete": "request_missing_evidence",
+            "inconclusive": "stop_and_readout",
+            "prediction_observed": "review_saved_diagnostics"
+          }
+        },
+        "execution_path": "public_trainer",
+        "goal": "discriminator_stability",
+        "guide": "EXPERIMENTATION.md",
+        "hypothesis": "Pure BCAP with non_saturating loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+        "id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+        "lifecycle": "proposed",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
+        "parent": "bcap-pure-non-saturating-v1",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "prior_art": [
+          "k3p-bcap-matched-v1"
+        ],
+        "recipe_overrides": {
+          "loss": "non_saturating",
+          "lr": 0.0010625
+        },
+        "recipe_preset": "bcap",
+        "requires_capabilities": [
+          "learned_locations",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 0.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "ema_decay": 0.0,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.0,
+          "loss": "non_saturating",
+          "lr": 0.0010625,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 1.0,
+          "model": "gan",
+          "name": "bcap",
+          "network_lr_floor": 1.0,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 0.0,
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 2,
+        "search_report": "reports/forge/configuration-search/pure-bcap-non-saturating-rates-v1.json",
+        "search_study_id": "pure-bcap-non-saturating-rates-v1",
+        "trainer_family": "bcap-pure"
+      },
+      "declared_worst_case_seconds": 2520,
+      "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 6,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 6
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 6
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "1960ec3f31484361962fecc229a69e32",
+          "result_hash": "843dad0c56402746c6db3f14e8b44cddd7e9c9d519e130443829501f28f40703",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "32c79dc0456d4bc589e9e36bab27316c",
+          "result_hash": "8a60ae4a526747cc07d4062c6951068fe0f1efb7909acd95c46793f3ff5ed99d",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "5b905ab81da0430588f03d302a43df32",
+          "result_hash": "0a39deb2810c3f703d2291a850cbf986881966dd3004315867787fa5984f50c8",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "6a9fedac7bbb4ecd8a080a40230f6416",
+          "result_hash": "4b41f351486cd8b69b50e9b4ed900169109bc934e7e3ec36125fb538307f7ce3",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "9fd6055cda01483994f65867dd72eec6",
+          "result_hash": "27f31c80dfbe930261bef434faf31a69abc29028ac056f44cde2c19c12cabe4c",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "b955ece8035444bc8374584ca8f93730",
+          "result_hash": "ec5d6de821d1bfb673f815513da69d5924070e604fb2390bd6c76217589c377b",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "d179717b2071476b8115a926ae9f41c6",
+          "result_hash": "9902919d5607bb5cd446cfe4558132c2315bd7abb7ee2911a135be2a29d9b70e",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "loss": "non_saturating",
+        "lr": 0.0010625
+      },
+      "recipe_preset": "bcap",
+      "request_id": "c1b7f6c31335af406b765853",
+      "request_path": "/home/martyn/dev/ParticleGAN-bcap-pure/runs/forge/pure-bcap-losses-v1/queue/queue/requests/c1b7f6c31335af406b765853.json",
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.0010625,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "f3469f19d4a3536b2bb82df65b7a0297762cfa8fe690656077778214a7d52494",
+      "selected_attempt_ids": [
+        "1960ec3f31484361962fecc229a69e32",
+        "32c79dc0456d4bc589e9e36bab27316c",
+        "5b905ab81da0430588f03d302a43df32",
+        "6a9fedac7bbb4ecd8a080a40230f6416",
+        "9fd6055cda01483994f65867dd72eec6",
+        "b955ece8035444bc8374584ca8f93730",
+        "d179717b2071476b8115a926ae9f41c6"
+      ],
+      "settings": {
+        "lr": 0.0010625
+      },
+      "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "cancelled by request",
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "attempt_id": "32c79dc0456d4bc589e9e36bab27316c",
+          "blockers": [],
+          "budget_seconds": 120,
+          "compatibility_key": "01ef10de80cf82e33b9131afd7b89a01020f1d09ac42481ae522e671f13d1853",
+          "cost": {
+            "adapter_loop_seconds": 8.044670323026367,
+            "adapter_seconds": 8.371796230087057,
+            "charged_task": "gaussian1d_acquisition",
+            "completed_steps": 1000,
+            "device": "1",
+            "execution_seconds": 14.692913618055172,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 1000,
+              "generator": 1000,
+              "prior": 1000
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 7.667428514454514,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.00783144822344184
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.007736347732134163
+                },
+                "training_updates": {
+                  "calls": 1000,
+                  "seconds": 7.651860718498938
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 10.645842437981628,
+            "wall_seconds": 14.692913618055172
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 500,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 4,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "gaussian1d_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "cdf_ks": 0.14001118521217992,
+            "finite_fraction": 1.0,
+            "mean": 2.0984287113678874,
+            "mean_error_sigma": 0.1968574227357749,
+            "sample_count": 4096,
+            "std": 0.49504788187859217,
+            "std_ratio": 0.9900957637571843,
+            "step": 1000
+          },
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_acquisition"
+        },
+        {
+          "attempt_id": "1960ec3f31484361962fecc229a69e32",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "8d72c8bc3476df9fc0159045473a403cb4f9b79a960415641174600e82b7a8be",
+          "cost": {
+            "adapter_seconds": 0.26019065408036113,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.611189475981519,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.7403529330622405,
+            "wall_seconds": 6.611189475981519
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.09017051756381989,
+            "mean_abs": 0.07492286711931229
+          },
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "attempt_id": "b955ece8035444bc8374584ca8f93730",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "07ad72526ba971a6eba4c55caa3940940be7b31eedc55475718973564736e937",
+          "cost": {
+            "adapter_seconds": 0.5475696260109544,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.711307863006368,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.916204387904145,
+            "wall_seconds": 6.711307863006368
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.6310486857207778,
+            "unused_hold": 0.9885933995246887
+          },
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "attempt_id": "5b905ab81da0430588f03d302a43df32",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "1c6ac8bbf509363c8286f410676c654378a354345c55b205a5e0dfef9c2287f3",
+          "cost": {
+            "adapter_seconds": 1.0876333450432867,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 7.657906718086451,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.5615269750123844,
+            "wall_seconds": 7.657906718086451
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": 84,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 15,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.0020322834607213736,
+            "recon_mse": 0.06992045044898987
+          },
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "attempt_id": "d179717b2071476b8115a926ae9f41c6",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "269d7500255bcad899c7a009d190630d8435edb233f62afe60065b9cc7160f99",
+          "cost": {
+            "adapter_loop_seconds": 3.97532725695055,
+            "adapter_seconds": 4.261518990970217,
+            "charged_task": "ring16_acquisition",
+            "completed_steps": 400,
+            "device": "1",
+            "execution_seconds": 10.648085971944965,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 400,
+              "generator": 400,
+              "prior": 400
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 3.7716143951984122,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.48731223843060434
+                },
+                "sampling": {
+                  "calls": 24,
+                  "seconds": 0.00777301553171128
+                },
+                "training_updates": {
+                  "calls": 400,
+                  "seconds": 3.2765291412360966
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 6.708222953951918,
+            "wall_seconds": 10.648085971944965
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "component_core_covariance_error": 0.9130028989166021,
+            "component_core_min_eigen_ratio": 0.18440473079681396,
+            "component_covariance_error": 63.436137318611145,
+            "component_min_eigen_ratio": 0.6157886981964111,
+            "covariance_error": 0.1016504168510437,
+            "hq": 0.470458984375,
+            "mass_tv": 0.110595703125,
+            "max_component_spill": 0.9080118536949158,
+            "mean_error": 0.03191094473004341,
+            "min_hq_mass_ratio": 0.12109375,
+            "min_mass_ratio": 0.5,
+            "modes": 11,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.08927734798804336,
+            "target_scale": 3.0029242038726807
+          },
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "attempt_id": "6a9fedac7bbb4ecd8a080a40230f6416",
+          "blockers": [],
+          "budget_seconds": 900,
+          "compatibility_key": "93bea14b7dc01a8aac8261c709870d1e951749285c94c46fe7f1c390b7a18d6e",
+          "cost": {
+            "adapter_loop_seconds": 125.56312754796818,
+            "adapter_seconds": 125.84715710498858,
+            "charged_task": "five_word_joint_acquisition",
+            "completed_steps": 20001,
+            "device": "1",
+            "execution_seconds": 131.96428568498231,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "optimizer_updates": {
+              "discriminator": 20001,
+              "encoder": 0,
+              "generator": 20001,
+              "prior": 20001
+            },
+            "phase_timing": {
+              "coverage": "partial_adapter",
+              "measured_seconds": 121.41824895120226,
+              "method": "exclusive_synchronized_wall_time",
+              "phases": {
+                "evaluation": {
+                  "calls": 24,
+                  "seconds": 0.3011204752838239
+                },
+                "sampling": {
+                  "calls": 0,
+                  "seconds": 0
+                },
+                "training_updates": {
+                  "calls": 20001,
+                  "seconds": 121.11712847591843
+                }
+              },
+              "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+            },
+            "runner_seconds": 128.2141417270759,
+            "wall_seconds": 131.96428568498231
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {},
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "encoder did not perform an intended optimizer update",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "attempt_id": "9fd6055cda01483994f65867dd72eec6",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "31e46de4e1bd9fffa18ba0cf57287b00479216991bc61db79eae46da0f71c8ea",
+          "cost": {
+            "adapter_reported_inclusive_seconds": 1.0817745060194284,
+            "adapter_seconds": 1.1061711449874565,
+            "charged_task": "clockfree_audit_measurement_v1",
+            "completed_updates": 24,
+            "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+            "device": "0",
+            "execution_seconds": 7.266436827951111,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.400890638004057,
+            "wall_seconds": 7.266436827951111
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {},
+            "semantics": "no first full-quality acquisition timestamp in this evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "diagnostic",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "078c437108587d40fa9043e9cc2c6fbebab0d3a7789b5cf41a0f310968c8d790",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "58091184a5e7ea66625f8b335d27ae449ab0904e08b636afe96b53068c8e1ca0",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "c408fc02416d8ff2de358208ca1f0f8dbcff81e1acc1e94cf5cfa43a9562a85a",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "0f162dcfb9e9a34fb8bd71af523ec5192708b5bc70fa9bdfc0acd771a22391d2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "16ce5e1b41df984ee094ab36d7d29bf518b9a70f15678fa8d0e333089fb88712",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "0f326c0ee6789c3ea8e5facb0ca3d780b5edfefb1d4f8ec307d5dc275ae283b0",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "998ec2781bd69e45e832e0b6a69ec2c555472f0c515a5c022b50798ffa67c102",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "bf5f2e20c395efe073a43f716682278f9e4433b937f75fad98bf8d93b690e29d",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "87bdd18add797f62e105c3669b793089fa72ac8b039785719544e842c682c74f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "d63e8cea76781fcd239cbbf97575c9ed9acb84e746fee0cd019221b08b8f654d",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "9a3a033d523c863accee5963dd83777444047b4ce8621b6a71be53c9b30ca087",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "eb780aa50607abbd8d760c4d49c75f8d62c8c527befb2603db3d93af680576e2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "314aaa4f57dcd87b6f445178f631e4867fc91d2f7a458b7665db41b1d7b4b048",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "d4cfe82215eddc3d8c1916f916af383e00e3b51c1eb552ec56cd60e1d8481ab3",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "537c54694ab13e0e193a862f54fe32a79b175d3cf37c341dc5b31401b195ab27",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "ff5230442e9c2696e6b940f6fa535b93b590b6697d7e7d50c89831caaffd7ca5",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "79235ffe68fb05ecd2c23259a8b4558ea0b0bfc4b11cd6a80da3a7039236f353",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "c2fb9cad23503d387f428b6e8214eeb9ea07f2fa0f706742cdd00fd84eaa5951",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "555425852980cc6058ec370f72ecf6254d4a5df61317880010752a7a14838a0e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "e653edb9336b07e1a7d3f9e1fc1edbb2d5f35e6ad5fb8c93c25f254200f08ba2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "e653edb9336b07e1a7d3f9e1fc1edbb2d5f35e6ad5fb8c93c25f254200f08ba2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "cdc492b221b87df48a4e01a6fb794aa2d0577b129bd75eda68a61df6946fbe49",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "loss": "non_saturating",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": "b_cap",
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": false,
+          "critic_guard": false,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "direct_particle_moments": null,
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": false,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "bcap-pure",
+      "unreused_worst_case_seconds": 2520
+    }
+  ],
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

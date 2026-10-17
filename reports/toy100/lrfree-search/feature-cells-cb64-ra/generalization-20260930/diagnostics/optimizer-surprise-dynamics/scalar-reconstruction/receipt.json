@@ -1,0 +1,45 @@
+{
+  "candidate_source_sha256": "0342b0b19a6e5e177ec38840775886576d22e21dc6608e6aa2bb49aa53e1bef4",
+  "cases": {
+    "mnist": {
+      "guarded_fires": [],
+      "legacy_fires": [
+        202
+      ],
+      "prefix_last_step": 202
+    },
+    "moving1000": {
+      "guarded_fires": [
+        1021
+      ],
+      "legacy_fires": [
+        1021
+      ],
+      "prefix_last_step": 1021
+    },
+    "moving500": {
+      "guarded_fires": [
+        514
+      ],
+      "legacy_fires": [
+        514
+      ],
+      "prefix_last_step": 514
+    },
+    "toy": {
+      "guarded_fires": [],
+      "legacy_fires": [
+        820
+      ],
+      "prefix_last_step": 820
+    }
+  },
+  "closed_exit_sha256": "d6a109d5eb3d9309b7c6845fa3818a5de5e91ea4a6feb6c2d8d9f37f6343f44b",
+  "completed_utc": "2026-09-30T21:41:00.078124+00:00",
+  "exact_legacy_default_rows": 270,
+  "inputs_sha256": "6b0011b236c4d6bff8799f44ad06dfe7fc5ee9d8b75336163ef333c98c4fa2b7",
+  "no_models_pt_forwards_draws_updates_scoring_cuda": true,
+  "result_sha256": "559bf3b63e134ec58bcb02a8b4c596bd0efdac09422fb7b0fd3e9b7d4dd0ba3b",
+  "scope": "exact detector-only closed scalar prefixes; not guarded training or quality qualification",
+  "status": "PASS"
+}

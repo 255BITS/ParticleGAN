@@ -1,0 +1,11 @@
+{
+  "evidence_validity": "INVALID",
+  "file_sha256": {
+    "ARCHIVE-APPEND.json": "9ff7fbee47c6bd7c56687cbc9f6164743d1d91c2c6bb1d7f81ffd2d08738e6ca",
+    "INPUTS.json": "33b56ab09697ded9dd4b54169aba31b7f1b7d1ec912bc464564b7a96fdc70d8d",
+    "QUALIFICATION.json": "afedf2633fe6dbdd44b105df167c676895531942dd447c827b2505a8dceecf34",
+    "QUALIFICATION.md": "479e3660a6f4135cd6cddf87b7ccd7a347ff6955c7eda8100807b1de4b832836"
+  },
+  "quality_qualification": "PASS",
+  "status": "CLOSED_FINAL_QUALIFICATION"
+}

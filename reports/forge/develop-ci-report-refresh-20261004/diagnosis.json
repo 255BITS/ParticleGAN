@@ -1,0 +1,209 @@
+{
+  "actions": {
+    "ci_dispatches": false,
+    "git_mutations": false,
+    "gpu": false,
+    "models": false,
+    "numerical_runs": false,
+    "pytest_runs": false,
+    "queue_mutations": false,
+    "repo_edits": false
+  },
+  "checked_source": {
+    ".github/workflows/tests.yml": {
+      "bytes": 9286,
+      "commit": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+      "git_blob": "bc8cc251f3efdc88fdd805db134e1c77fbf40d17",
+      "sha256": "ae3d26860634bf722b39fd27ec35a8548e7088a49acbdd2058d11cfb95cf8cd4"
+    },
+    "experiments/forge/contracts.py": {
+      "bytes": 6315,
+      "commit": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+      "git_blob": "d7c5217d8e7c4e218d66d61d8ee0d428159dcaf5",
+      "sha256": "0b197620cfe44144d1b9a4a7eaf0320f31c207488fd5e4ba0002727e26af3dfc"
+    },
+    "experiments/forge/research_artifacts.py": {
+      "bytes": 11895,
+      "commit": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+      "git_blob": "32ee416b19a1a327550ca1573243225557599698",
+      "sha256": "7207ba8824ce6329cf482de2951a03941b7804a07bb28145c7d4c36d694c84b2"
+    },
+    "experiments/forge/tier_report.py": {
+      "bytes": 22102,
+      "commit": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+      "git_blob": "4754d17f796337e0cf13419940d5bd0d5db146bc",
+      "sha256": "d54f3b6317859115411b160fb222c12573d72c6d132e471bdee927d5d58e1bdb"
+    },
+    "reports/forge/EXPERIMENTS_BY_TIER.md": {
+      "bytes": 123104,
+      "commit": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+      "git_blob": "2298857be0eb5b6fed8df1c7cdac74d2c55e2ade",
+      "sha256": "71aa94579cc2ce83b9f809e9e11a58d9d9eb611ec709ba38e969d82351ace512"
+    },
+    "reports/forge/technique-inventory.json": {
+      "bytes": 2190992,
+      "commit": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+      "git_blob": "e98eca22485384568cfb65ca7d44356dbde9d7e2",
+      "sha256": "9b6bd702ae2f4873881a3c91eb0d81b274d5e62b5c8bda28287b663eb40f2a5b"
+    },
+    "tests/test_forge_tier_report.py": {
+      "bytes": 27087,
+      "commit": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+      "git_blob": "980a776d7bbcc442150016ebc7dfae595cce0d56",
+      "sha256": "4f3fb4ad9fc96185d2a4281b933369b59cfc916bcef9997239a7225597fe4c31"
+    }
+  },
+  "dependency_explanation": {
+    "contracts.py:33-37": "stable_hash is canonical sorted JSON SHA256",
+    "research_artifacts.py:128-129": "technique-inventory.json is a hashed artifact input",
+    "research_artifacts.py:183-206": "explicit task readouts and selected GIFs also enter inputs; stable_hash(inputs) supplies artifact digest",
+    "research_artifacts.py:34-39": "compact source files enter inputs by exact byte SHA",
+    "tier_report.py:325": "Markdown renders artifact digest in footer",
+    "tier_report.py:95": "build_report includes build_artifacts result"
+  },
+  "inputs": {
+    "latest-failed-job.log": {
+      "bytes": 60192,
+      "path": "/ml2/hypergan/pg-develop-ci-diagnosis-20261004/root-api/latest-failed-job.log",
+      "sha256": "72c9c32748cb7af74289545c7b106327d94318d35094a85ee94f0d082d8390be"
+    },
+    "latest-jobs.json": {
+      "bytes": 10343,
+      "path": "/ml2/hypergan/pg-develop-ci-diagnosis-20261004/root-api/latest-jobs.json",
+      "sha256": "1889ca3b6f9601762502a41ea81a3cd23d68d56f02e17a731c35981cae0ed908"
+    },
+    "latest-run.json": {
+      "bytes": 12548,
+      "path": "/ml2/hypergan/pg-develop-ci-diagnosis-20261004/root-api/latest-run.json",
+      "sha256": "b291f89cd22001b607c9698abb29ed36117bd503e2b5b1b6c8225af484b47d80"
+    },
+    "prior-failed-job.log": {
+      "bytes": 59932,
+      "path": "/ml2/hypergan/pg-develop-ci-diagnosis-20261004/root-api/prior-failed-job.log",
+      "sha256": "8f9c6ffb36d1e77483f4760bbb41fe55c86895ebf6144649b524beb378e2c4af"
+    },
+    "prior-full-run-list.json": {
+      "bytes": 25097,
+      "path": "/ml2/hypergan/pg-develop-ci-diagnosis-20261004/root-api/prior-full-run-list.json",
+      "sha256": "eb559d2b57c2c5b93ab4858c66086e31cc7f6a35dbd6701d919c214741c88c6d"
+    },
+    "prior-jobs.json": {
+      "bytes": 10343,
+      "path": "/ml2/hypergan/pg-develop-ci-diagnosis-20261004/root-api/prior-jobs.json",
+      "sha256": "b3446217ed5ce4c06a83c48f6c1a0f477f13a8f64465a78e1f9a3394a0615cf6"
+    }
+  },
+  "latest": {
+    "actual_checkout": "6b972d16d9214acc780de83d7bf9df647d8ddea6",
+    "base_sha": "0ff9a7afe5dcb828239369446cfe71971bce687b",
+    "conclusion": "failure",
+    "event": "pull_request",
+    "failed_job_id": 111357369686,
+    "failed_step": "Test numerical kernels and experiment workflows",
+    "head_sha": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+    "job_elapsed_seconds": 1016,
+    "other_jobs": [
+      {
+        "conclusion": "success",
+        "id": 111357369808,
+        "name": "CPU / Python 3.10"
+      },
+      {
+        "conclusion": "success",
+        "id": 111357369844,
+        "name": "CPU / Python 3.11"
+      },
+      {
+        "conclusion": "skipped",
+        "id": 111359895964,
+        "name": "Build release distributions"
+      }
+    ],
+    "pr": 247,
+    "pytest_summary": {
+      "elapsed_seconds": 941.33,
+      "failed": 1,
+      "passed": 4664,
+      "skipped": 72,
+      "subtests_passed": 18,
+      "warnings": 11,
+      "xfailed": 1
+    },
+    "python312_renderer": "skipped",
+    "python312_wheel_smokes": "skipped",
+    "run_id": 37175573781,
+    "status": "completed",
+    "step_elapsed_seconds": 945,
+    "url": "https://github.com/255BITS/ParticleGAN/actions/runs/37175573781"
+  },
+  "network_observation": "This agent GH API calls failed to connect. Root supplied immutable primary API snapshots/logs; no subsequent network retries or dispatch were performed.",
+  "no_write_handoff": true,
+  "observed_at_utc": "2026-10-04T04:44:42.243518+00:00",
+  "prior_inspected": {
+    "actual_checkout": "3e03d1e22f63b535198029c5281b4217025aeaf8",
+    "event": "pull_request",
+    "failed_job_id": 111350337927,
+    "failed_step": "Test numerical kernels and experiment workflows",
+    "head_sha": "1f15b96b87da3638c5b49334457c2a7f9daca7cd",
+    "pytest_summary": {
+      "elapsed_seconds": 1086.17,
+      "failed": 1,
+      "passed": 4656,
+      "skipped": 72,
+      "subtests_passed": 18,
+      "warnings": 11,
+      "xfailed": 1
+    },
+    "run_id": 37173231063,
+    "url": "https://github.com/255BITS/ParticleGAN/actions/runs/37173231063"
+  },
+  "prior_push_metadata_only": {
+    "conclusion": "failure",
+    "failed_primary_log_inspected": false,
+    "head_sha": "1f15b96b87da3638c5b49334457c2a7f9daca7cd",
+    "run_id": 37173226177
+  },
+  "qualification_input": false,
+  "repair_proposal": {
+    "command": "python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMENTS_BY_TIER.md",
+    "do_not": [
+      "Copy an old CI footer digest into the report.",
+      "Alter freshness assertion, scientific gates or numerical tests.",
+      "Increase job timeout to address this failure.",
+      "Claim Python3.12 renderer/wheel or newest full CI green."
+    ],
+    "scope": "Generated EXPERIMENTS_BY_TIER.md report only after final maintained display/JSON/compile outputs",
+    "validation": [
+      "Run the unchanged focused committed-report freshness test once.",
+      "Repeat the report generation to confirm idempotent bytes.",
+      "Use declaration-only compile freshness as needed; preserve source/evidence/gates and ordinary ranks."
+    ]
+  },
+  "schema": "pg_develop_ci_primary_failure_diagnosis_v1",
+  "sole_failure": {
+    "committed_artifact_digest_both_heads": "efe7547e587914bc977a06cafc7ed57cc5ccf6e1d3acc0f238bc84451249402e",
+    "declaration_digest_unchanged": "e19612930696d10c45025db31cd5cd2dd7ab2891b0e2bbcb06ad793638eb419a",
+    "failure_kind": "generated Markdown byte equality",
+    "fresh_latest_digest_as_logged": "443295818d369647781ce1ac8b2fc8e019e63d874f4cbb4cfdbdca6dfaf3493a",
+    "fresh_prior_digest_as_logged": "6787e5716cf81b4b530553c6849ec33ea9eacb978dc6d05cc5156537509ce619",
+    "identical_leading_characters": 122613,
+    "identical_trailing_characters": 82,
+    "latest_log_lines": [
+      519,
+      535
+    ],
+    "prior_log_lines": [
+      516,
+      532
+    ],
+    "source_line": 524,
+    "test": "tests/test_forge_tier_report.py::test_committed_tier_report_matches_current_declarations_and_artifacts"
+  },
+  "status": "CONFIRMED_GENERATED_REPORT_FRESHNESS_DEFECT",
+  "timeout_assessment": {
+    "cpu_timeout_minutes": 25,
+    "latest_failure_is_timeout": false,
+    "latest_job_finished_before_timeout": true,
+    "workflow_bytes_equal_between_heads": true
+  }
+}

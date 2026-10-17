@@ -1,0 +1,20 @@
+{
+  "actual_training_media_receipts": 12,
+  "archive_bytes": 12151037,
+  "archive_sha256": "c9943e53634115ffc6fe4b1c6a7d625f960313111e8322d837330b702b6278e1",
+  "inventory_entries": 2518,
+  "measured_fail": 9,
+  "measured_pass": 3,
+  "ordinary_certificates": 12,
+  "regular_files": 2519,
+  "reproducer_sha256": "86eff1a111c34481b2525b36604fe35185c1a49878a7fd507ad3d13ae96aa0fa",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "Exact archived member hashes, ordinary durable/grader certificates, executed Git/source blobs, saved observation/media identities. This does not regrade science or independently qualify a candidate; archive/card remains external.",
+  "source_git_blob_files": {
+    "36ed5655d9e6cfd7f92626cc4ca8c18e07edcb45": 1137,
+    "9d089ca777e647c6d3b6ad56529ac27f171fdcb6": 1137
+  },
+  "status": "PASS",
+  "training_updates_added": 0
+}

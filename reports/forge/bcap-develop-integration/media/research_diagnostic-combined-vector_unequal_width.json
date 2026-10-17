@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "b8ae00b27ed7f663f2d87de86ad38af4a96ea9ec10fbb7e32bbeca3be9555c9a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "1a801b96fd42fa4329cd216e935b3b3a6fd4cb865e713cf8885d8301b879b269",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/70797006744f400485b775a5f794edb2/observed-samples.pt": "4e1704269d2ac681d4a853948c454948ce58df8ee4e6cf026ef523ca8faf2ff6"
+  },
+  "task_id": "vector_unequal_width"
+}

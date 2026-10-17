@@ -1,0 +1,21 @@
+{
+  "calibration_body_and_two_pole_contract_changed": true,
+  "current_source_sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+  "executed_sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387",
+  "executed_source": "/ml2/hypergan/toy-source-family-training-20261001/executed-source/definition_quality.py",
+  "production_changes": false,
+  "scientific_evaluation_functions_unchanged": [
+    "gaussian_metrics",
+    "five_word_metrics",
+    "word_probabilities",
+    "word_templates",
+    "paired_edit_metrics",
+    "landing_metrics",
+    "ring_metrics",
+    "useful_code_metrics",
+    "terminal_window",
+    "_array",
+    "_ks"
+  ],
+  "scope": "frozen source-family evaluator bytes preserved, separate from corrected calibration controls"
+}

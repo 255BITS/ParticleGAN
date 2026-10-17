@@ -1,0 +1,101 @@
+{
+  "overview": "BCAP adds a fixed critic penalty whenever the input-gradient norm exceeds a threshold, evaluated separately on real and generated data. This high-level formulation defines the family. Adam, normalized-gradient and DualNorm optimizers, learning rates, momentum and loss settings are configuration choices. The current benchmark uses the explicitly selected winning DualNorm recipe. Historical BCAP-with-K3P formulations and optimizer alternatives retain their complete, separate evidence below.",
+  "symbols": "$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\\epsilon_{\\mathrm{in}})$ with a fresh draw. $\\mathbb E$ means a sample mean, $\\lVert\\cdot\\rVert_2$ is the Euclidean norm, $(a)_+=\\max(a,0)$ and $\\operatorname{softplus}(a)=\\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\\nabla_x C(x)$ and $g_f=\\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\\lambda$ is penalty strength and $\\kappa$ the cap threshold. $\\eta_0$ is the global base LR, $m_D$ and $m_P$ the role multipliers. A joint host also has an encoder $E$, whose adversarial objective must train both joint critic streams.",
+  "pseudocode": [
+    "Choose an adversarial loss, optimizer and its configuration.",
+    "For each task-owned training update:",
+    "  Sample real x and latent z from the task prior P; compute y=G(z).",
+    "  Critic objective = adversarial_D(D(x), D(stop_gradient(y))) + fixed BCAP penalty.",
+    "  Compute BCAP from real and fake input-gradient norms; the penalty updates D only.",
+    "  Backpropagate the critic objective and step D using the configured optimizer.",
+    "  With D fixed, recompute differentiable fake samples and scores.",
+    "  Backpropagate adversarial_G plus task-owned auxiliary objectives.",
+    "  Step G, trainable prior P and encoder E when present using their configured rates.",
+    "  Joint encoder/generator hosts reverse labels on both critic streams."
+  ],
+  "training_details": {
+    "loss": "Selectable paired relativistic logistic (canonical/default), non-saturating logistic, hinge, Wasserstein or least squares. The scalar losses are minimized. Relativistic $D$: $\\mathbb E[\\operatorname{softplus}(C(y)-C(x))]$; $G$ reverses the difference. Joint hosts use the explicit generator/encoder objective.",
+    "optimizer": "Native PyTorch Adam. Canonical $\\beta_1=0$, $\\beta_2=0.999$ and $\\varepsilon=10^{-8}$; moments are constant.",
+    "learning_rates": "Constant: canonical global LR $0.00425$, D multiplier $1$ and prior multiplier $2$. The measured round also tested global LR $0.0010625$. Network and prior LR floors are $1$, so the scheduled API path performs no annealing.",
+    "gradient_clipping": "None. Critic spike guard is disabled; BCAP acts through the loss, not parameter-gradient clipping.",
+    "critic_penalty": "Fixed real/fake one-sided squared L2 cap. Canonical $\\lambda=1$, $\\kappa=1$, applied every critic update. No K3P early/late blend or critic-anchor term.",
+    "damping_and_guards": "No A2 latent-row damping, direct-particle response gain, or adaptive critic step intervention.",
+    "noise": "No additive critic-input or generator-output training noise. Sampling noise inherent to a task-declared MoG prior remains part of that prior, not an extra BCAP intervention.",
+    "averaging": "Canonical generator EMA decay=$0$ and no critic-anchor penalty; the reported round scores clean live weights."
+  },
+  "configuration_notes": [
+    "The fixed capped input-gradient penalty defines BCAP. Optimizer choice, learning rates, momentum, numerical floors and adversarial-loss settings stay within this solution family.",
+    "The selected configuration table reports the executed trainer recipe. Task-owned architecture, initialization, prior, sampling, update budget and auxiliary objectives remain bound to each experiment.",
+    "One whole recorded configuration supplies every displayed result. Passing cells from different recipes or sources are never combined.",
+    "The cap is a soft loss penalty on critic input gradients, not a hard bound on parameter gradients. The L2 norm is not divided by input dimension.",
+    "Corrected joint-host candidates use both generator and encoder adversarial terms. Earlier incompatible receipts preserve their original source and verdicts.",
+    "BCAP with K3P retains its additional K3P training mechanisms and is reported as a separate formulation.",
+    "The opt-in per-offset DualNorm convolution extension completes the four previously unsupported image tasks, but all four sustained gates fail. This separate source-bound diagnostic retains constant learning rates and does not replace the selected configuration or original Tier 2 setup errors. See [the convolution readout](../bcap-convolution/README.md)."
+  ],
+  "references": [
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "url": "https://arxiv.org/abs/1412.6980",
+      "component": "Base optimizer. Repository-specific guards and damping are separate mechanisms."
+    },
+    {
+      "title": "The relativistic discriminator: a key element missing from standard GAN",
+      "url": "https://arxiv.org/abs/1807.00734",
+      "component": "Paired relativistic logistic objective; this implementation pairs scores, rather than subtracting batch-average scores."
+    },
+    {
+      "title": "On the regularization of Wasserstein GANs",
+      "url": "https://arxiv.org/abs/1709.08894",
+      "component": "Related work on one-sided gradient penalties. The repository BCAP kernel uses real/fake inputs directly and is not a reproduction of this paper or its sampling scheme."
+    },
+    {
+      "title": "Generative Adversarial Networks",
+      "url": "https://arxiv.org/abs/1406.2661",
+      "component": "Non-saturating logistic loss option."
+    },
+    {
+      "title": "Wasserstein GAN",
+      "url": "https://arxiv.org/abs/1701.07875",
+      "component": "Wasserstein score-loss option. This BCAP recipe does not adopt the paper\u2019s weight clipping or full training algorithm."
+    },
+    {
+      "title": "Least Squares Generative Adversarial Networks",
+      "url": "https://arxiv.org/abs/1611.04076",
+      "component": "Least-squares loss option; repository targets are real=1, fake=0 and generator=1."
+    },
+    {
+      "title": "Spectral Normalization for Generative Adversarial Networks",
+      "url": "https://arxiv.org/abs/1802.05957",
+      "component": "Reference for the hinge adversarial objective option; selecting hinge does not itself enable spectral normalization."
+    }
+  ],
+  "sources": [
+    "particlegan/recipes.py",
+    "particlegan/gan_loss.py",
+    "particlegan/grad_regularizers.py",
+    "particlegan/recipe_schedules.py",
+    "configs/forge/ideas/bcap-pure-adam-v2.json",
+    "reports/forge/pure-bcap/README.md",
+    "particlegan/optim/dualnorm.py",
+    "docs/dualnorm-convolution.md",
+    "reports/forge/bcap-convolution/README.md",
+    "reports/forge/bcap-convolution/readout.json"
+  ],
+  "equations": [
+    {
+      "label": "Default paired adversarial loss",
+      "latex": "\\begin{aligned}\\ell_D&=\\mathbb E\\!\\left[\\operatorname{softplus}(C(y)-C(x))\\right],\\\\\\ell_G&=\\mathbb E\\!\\left[\\operatorname{softplus}(C(x)-C(y))\\right].\\end{aligned}",
+      "explanation": "These scalar losses are minimized. The critic objective is $\\ell_D+R$; the generator adds only its declared auxiliary objectives. Critic fakes are detached, and generator fakes and both scores are recomputed after the critic step. $C$ includes any declared fresh input noise. This equation is the canonical paired-loss example; non-saturating, hinge, Wasserstein and least-squares options keep their own loss formulas, and joint hosts use their explicit generator/encoder objective."
+    },
+    {
+      "label": "Fixed capped input-gradient penalty",
+      "latex": "R_{\\mathrm{BCAP}}=\\frac{\\lambda}{2}\\left\\{\\mathbb E\\!\\left[(\\lVert g_r\\rVert_2-\\kappa)_+^2\\right]+\\mathbb E\\!\\left[(\\lVert g_f\\rVert_2-\\kappa)_+^2\\right]\\right\\}.",
+      "explanation": "The cap is a soft loss penalty on real and fake critic input-gradient norms, without division by input dimension. It does not directly clip critic parameter gradients or weights. The canonical BCAP cards use $\\lambda=1$ and $\\kappa=1$; source-bound selected recipes may differ."
+    }
+  ],
+  "illustration": {
+    "path": "reports/forge/families/assets/bcap-explainer.png",
+    "alt": "Real and generated samples share a critic; a soft penalty discourages excessive input-gradient slopes and adds to the critic loss.",
+    "caption": "Conceptual illustration of the BCAP critic-loss mechanism, not measured training results. Generator/prior updates are described below."
+  }
+}

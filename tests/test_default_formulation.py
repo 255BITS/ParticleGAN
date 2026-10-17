@@ -5,6 +5,7 @@ from torch import nn
 
 from particlegan import GANLoss, GANTrainer, LinearSkipDiscriminator, Recipe, get_recipe
 from particlegan.grad_regularizers import GradientPenalty
+from particlegan.ka2 import KA2GradientPenalty
 from benchmarks.transfer_suite.linear_skip_refinement_research import ARCHITECTURES, constructor
 
 
@@ -22,7 +23,7 @@ def test_public_discriminator_preserves_research_initialization_and_cap_gradient
         with torch.no_grad():
             model.main.net[-1].weight.mul_(100.)
             model.skip.weight.fill_(2.)
-        loss = GradientPenalty(**get_recipe()._penalty_options())(model, real, fake)
+        loss = KA2GradientPenalty(**get_recipe("ka2")._penalty_options())(model, real, fake)
         assert loss > 0
         (loss + model(real).mean()).backward()
     assert torch.equal(reference(real), promoted(real))
@@ -30,15 +31,14 @@ def test_public_discriminator_preserves_research_initialization_and_cap_gradient
         assert a.grad is not None and torch.equal(a.grad, b.grad)
 
 
-def test_default_optimizers_and_losses_bind_the_winning_recipe():
-    recipe = get_recipe(num_particles=16)
+def test_bcap_optimizers_and_losses_bind_the_selected_leader():
+    recipe = get_recipe("bcap", num_particles=16)
     g, d = nn.Linear(2, 2), LinearSkipDiscriminator()
     trainer = GANTrainer(recipe, g, d)
-    assert [group['lr'] for group in trainer.opt_g.param_groups] == [.00425, .0085]
-    assert [group['lr'] for group in trainer.opt_d.param_groups] == [.00425]
-    assert all(group['betas'] == (0., .999) for opt in (trainer.opt_g, trainer.opt_d) for group in opt.param_groups)
+    assert [group['lr'] for group in trainer.opt_g.param_groups] == [.012, .03]
+    assert [group['lr'] for group in trainer.opt_d.param_groups] == pytest.approx([.018])
     assert isinstance(trainer.penalty.regularizer, GradientPenalty)
-    assert trainer.ema_D is not None and trainer.latent_damping is not None
+    assert trainer.ema_D is None and trainer.latent_damping is None
     assert isinstance(trainer.loss, GANLoss)
     result = trainer.step(torch.randn(8, 2))
     assert torch.equal(result['loss_g'], result['loss_gan'] + 0. * result['prior_regularization'])
@@ -51,9 +51,11 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     dict(prior_kind='mog', sigma_rel=.025, encoder_mode='hard')])
 def test_component_choices_share_the_winning_training_defaults(options):
     recipe = get_recipe(**options)
-    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (1., 1., 0., (0., .999))
-    assert (recipe.network_lr_floor, recipe.network_lr_horizon_cap) == (.01, 1600)
-    assert (recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult) == (.00425, 1., 2.)
+    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (1., 1., .01, (0., .999))
+    selected = get_recipe()
+    for field in ("network_lr_floor", "network_lr_horizon_cap", "lr", "d_lr_mult", "prior_lr_mult",
+                  "optimizer_family", "loss", "constraint_geometry_mode"):
+        assert getattr(recipe, field) == getattr(selected, field)
 
 
 @pytest.mark.parametrize('kwargs', [dict(in_dim=0), dict(hidden_dim=0), dict(n_hidden=0),

@@ -1,0 +1,532 @@
+{
+  "base_commit": "2859975707eb3ea4d31958ad1b03e9e69e148a53",
+  "common_seen_training_batch_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+  "cost": {
+    "attempts": 12,
+    "conservative_seconds_debit": 355.31336048909,
+    "cost_excludes_prior_4064_update_reproduction": true,
+    "intervention_internal_training_seconds": 191.52891830785666,
+    "max_new_updates": 13604,
+    "max_reserved_seconds": 2880,
+    "max_scoring_draws": 824,
+    "new_scoring_draws": 822,
+    "new_training_updates": 13604,
+    "probe_seconds_charged_conservatively": 120,
+    "rendering_and_saved_metadata_analysis_model_calls": 0,
+    "saved_gradient_probe_compute_seconds": 3.5403422790113837,
+    "scientific_retries": 0,
+    "training_subprocess_seconds": 235.31336048908997
+  },
+  "prior_blocked_cuda_launch_preserved": "gpu-execution-20261007.json",
+  "prior_preparation_preserved": "preparation.json",
+  "production_defaults_changed": false,
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "report_date": "2026-10-07",
+  "runtime": {
+    "actual_node_execution_order_traced": false,
+    "archive": {
+      "archive_members": 50,
+      "archive_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-runtime-rounding-v1.tar.gz",
+      "bytes": 2956852,
+      "contains": "All four completed CUDA arm artifacts and campaign summary; local diagnostic/report logs existing at archive creation. Later publication logs remain separate.",
+      "every_member_hash_verified": true,
+      "new_model_calls": 0,
+      "original_files": 49,
+      "originals_unchanged": true,
+      "qualification_input": false,
+      "restore": "Extract into a new directory; archive paths preserve runs/api and runs/reports. Verify every file with archive-manifest.json before analysis.",
+      "scope": "verified_byte_exact_local_archive",
+      "sha256": "ab129bef834442151f07d85f56def5d9c5c71e8eed5513eec2cb8f0ebf958531"
+    },
+    "compared_sequence_relations": 7503,
+    "execution_source_commit": "fa60ca4af1fc872e650a6c4b13ca35d0a755a0ca",
+    "execution_source_digest": "570c875151504c271baa3c08f716041d8077cb7a3770bdb95e43dfaf5a0516af",
+    "historical_ordinary_gradient_parity": true,
+    "intervention_scope": "all autograd work during update401 including create_graph derivatives and final backward",
+    "new_updates": 804,
+    "ordinary_changed_sequence_relations": 1054,
+    "ordinary_live_restored_context401_exact": false,
+    "pr": "https://github.com/255BITS/ParticleGAN/pull/334",
+    "publication_commit": "7408331c01134b67469b7883a9ebc776dc37e16d",
+    "report_path": "reports/forge/ring16-runtime-rounding/README.md",
+    "result_sha256": "3b3b7527d06f19c30d43988fe495e79267d4274b31ec33620b5facd96fc2ee05",
+    "scoring_draws": 48,
+    "serialized_1600_quality_measured": false,
+    "serialized_changed_sequence_relations": 0,
+    "serialized_live_restored_context401_exact": true,
+    "serialized_path_matches_neither_ordinary_path": true,
+    "whole_process_seconds": 24.795115167158656
+  },
+  "schema_version": 1,
+  "scope": "source_bound_cuda_diagnostic_summary",
+  "tier2_spending": 0,
+  "tracks": {
+    "damping": {
+      "archive": {
+        "bytes": 6994425,
+        "contains_bulk_logs_and_tensor_checkpoints": true,
+        "execution_sources": [
+          {
+            "digest": "74de41f325a59c40df404a9107b0d40d6adbaf5e394f48f3ce13fbbf4be56ccb",
+            "origin_commit": "996fcaa581ef145650acff96824a77b704e71dc3"
+          },
+          {
+            "digest": "74de41f325a59c40df404a9107b0d40d6adbaf5e394f48f3ce13fbbf4be56ccb",
+            "origin_commit": "996fcaa581ef145650acff96824a77b704e71dc3"
+          }
+        ],
+        "manifest_member": "archive-manifest.json",
+        "members_verified": 34,
+        "path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-spectral-damping-cuda-v1.tar.gz",
+        "prior_archive_sha256": "c6c452ef8dc7d5d8c23e4ae7794e155815603203cb68ae998784038f21fa9c8e",
+        "prior_raw_root": "/home/martyn/dev/ParticleGAN/runs/api/ring16-restart-diagnostic-v1",
+        "schema_version": 1,
+        "scope": "local_raw_cuda_evidence_archive",
+        "sha256": "febb94f0bebbf36125a58c1ac7fe4c32f0faf04da087a64449fa9486aa77b0a9",
+        "source_file_count": 33,
+        "tracked_bulk_files": false,
+        "verification": "all members matched exact SHA256 after writing"
+      },
+      "arms": [
+        {
+          "actual_curve_sha256": "5f5a1ab8f9d5ef466e78ee8aa505e2609a25125ee3422b55e2510aa4f9d47b58",
+          "arm": "boundary_only",
+          "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+          "completed_updates": 1600,
+          "confirmation": {
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "full_pass": false,
+            "metrics": {
+              "component_covariance_error": 0.8595406319946051,
+              "component_min_eigen_ratio": 0.3241220712661743,
+              "hq": 0.930908203125,
+              "mass_tv": 0.0654296875,
+              "modes": 16,
+              "sample_count": 4096
+            },
+            "state_digest_before_draw": "57d1b27fe7e2decd0b57322c5e75fee8abb2d5f7f01a0b0bcc91ad517d48e275",
+            "step": 1067
+          },
+          "confirmed_smoke": false,
+          "final_metrics": {
+            "component_covariance_error": 0.45885503105819225,
+            "component_min_eigen_ratio": 0.36701369285583496,
+            "hq": 0.96923828125,
+            "mass_tv": 0.05859375,
+            "modes": 16,
+            "sample_count": 4096
+          },
+          "first_full_pass": 1067,
+          "five_terminal_verdict": "PASS",
+          "full_passing_observations": 32,
+          "initial_state_file_sha256": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+          "intervention_calls": 6,
+          "last_post_first_full_pass_failure_update": 1084,
+          "post_first_full_pass_checks": 32,
+          "post_first_full_pass_failures": 1,
+          "receipt_sha256": "24b1db4992ad293c18047fe0d4d82a7e36b9e6d575f4016c23f37b05239f3082",
+          "scoring_draws": 97,
+          "source_commit": "996fcaa581ef145650acff96824a77b704e71dc3",
+          "source_digest": "74de41f325a59c40df404a9107b0d40d6adbaf5e394f48f3ce13fbbf4be56ccb",
+          "status": "COMPLETE",
+          "terminal_suffix": 31
+        },
+        {
+          "actual_curve_sha256": "d3f84029658f19a6b3b37f0b1ed95b721e9a67bd9a94c5b39a0ed2bd2d028bcf",
+          "arm": "every_step",
+          "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+          "completed_updates": 1600,
+          "confirmation": null,
+          "confirmed_smoke": false,
+          "final_metrics": {
+            "component_covariance_error": 1.057656491175294,
+            "component_min_eigen_ratio": 0.34619760513305664,
+            "hq": 0.969482421875,
+            "mass_tv": 0.072998046875,
+            "modes": 16,
+            "sample_count": 4096
+          },
+          "first_full_pass": null,
+          "five_terminal_verdict": "FAIL",
+          "full_passing_observations": 0,
+          "initial_state_file_sha256": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+          "intervention_calls": 9600,
+          "last_post_first_full_pass_failure_update": null,
+          "post_first_full_pass_checks": 0,
+          "post_first_full_pass_failures": 0,
+          "receipt_sha256": "f0ead32ef44eaad5c3b8153a124d61d360f040c2fb82758cf7fde80e78cc682b",
+          "scoring_draws": 96,
+          "source_commit": "996fcaa581ef145650acff96824a77b704e71dc3",
+          "source_digest": "74de41f325a59c40df404a9107b0d40d6adbaf5e394f48f3ce13fbbf4be56ccb",
+          "status": "COMPLETE",
+          "terminal_suffix": 0
+        }
+      ],
+      "new_updates": 3200,
+      "physical_gpu": 1,
+      "pr": "https://github.com/255BITS/ParticleGAN/pull/336",
+      "probe_elapsed_seconds": 0.36558905499987304,
+      "probe_seconds_charged_conservatively": 30,
+      "protocol_id": "ring16-spectral-damping-v1",
+      "protocol_sha256": "9d3faf972f34c67d7b9ad633f6c34b2b39a6e92371727af37c7146f253db8b59",
+      "publication_commit": "1ef3b01e7ba32548abd663ad688efd6375116713",
+      "report_path": "reports/forge/ring16-damping/README.md",
+      "result_sha256": "8cb270c7717d622c85f1bc339cb21df59b5d73425a9284d6597fac49f81140a9",
+      "scoring_draws": 193,
+      "training_process_seconds": 50.003936005872674
+    },
+    "flips": {
+      "archive": {
+        "archive_local_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-small-sign-flips-v1-cuda-evidence.tar.gz",
+        "archive_sha256": "e5b809f1a633cd0c634d01c4930acc505dbc86a1a04da819965c84cade01e784",
+        "bulk_tracked_in_git": false,
+        "bytes": 7002387,
+        "manifest_sha256": "0eae78abc396515a118526d79845b4655784b90bdaebdb689f0e4223719ff4c0",
+        "member_bytes_verified": true,
+        "original_execution_commit": "79291dad8a15e742bc86a55c56cafc0d26539292",
+        "raw_file_count": 29,
+        "raw_originals_retained": true,
+        "restore": "tar -xzf ARCHIVE -C CHECKOUT (hydrate local runs/api only; never rerun consumed arms)",
+        "schema_version": 1
+      },
+      "arms": [
+        {
+          "actual_curve_sha256": "798f7c669d3451b5b890416dc05e6a017b8293662b8abc34207da95bcadb9fdf",
+          "arm": "boundary_only",
+          "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+          "completed_updates": 1600,
+          "confirmation": {
+            "failed_bounds": [],
+            "full_pass": true,
+            "metrics": {
+              "component_covariance_error": 0.5814243843778968,
+              "component_min_eigen_ratio": 0.3420414924621582,
+              "hq": 0.94482421875,
+              "mass_tv": 0.0732421875,
+              "modes": 16,
+              "sample_count": 4096
+            },
+            "state_digest_before_draw": "3b24f62db7bc82992c183a17b5c39a851155e7e3a354654579a56711c4c14c5c",
+            "step": 1300
+          },
+          "confirmed_smoke": true,
+          "final_metrics": {
+            "component_covariance_error": 0.4485974982380867,
+            "component_min_eigen_ratio": 0.30732083320617676,
+            "hq": 0.929931640625,
+            "mass_tv": 0.0673828125,
+            "modes": 16,
+            "sample_count": 4096
+          },
+          "first_full_pass": 1300,
+          "five_terminal_verdict": "PASS",
+          "full_passing_observations": 19,
+          "initial_state_file_sha256": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+          "intervention_calls": 6,
+          "last_post_first_full_pass_failure_update": null,
+          "post_first_full_pass_checks": 18,
+          "post_first_full_pass_failures": 0,
+          "receipt_sha256": "cf3b6a338f39f9c45e2177e520af2bc8317d33ad66c04a47e60a54c1daaac27b",
+          "scoring_draws": 97,
+          "source_commit": "79291dad8a15e742bc86a55c56cafc0d26539292",
+          "source_digest": "66435ea6507e3c64dea52c89ebfb6ee5a90d0d4cd34220b558c5441c9f56ff05",
+          "status": "COMPLETE",
+          "terminal_suffix": 19
+        },
+        {
+          "actual_curve_sha256": "44308b96c3ca437c9f1d6fdc3f69bb783cc9f521e62c3f58a80877f1394fb775",
+          "arm": "every_step",
+          "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+          "completed_updates": 1600,
+          "confirmation": null,
+          "confirmed_smoke": false,
+          "final_metrics": {
+            "component_covariance_error": 1.4772562589496374,
+            "component_min_eigen_ratio": 0.2350468635559082,
+            "hq": 0.96240234375,
+            "mass_tv": 0.06689453125,
+            "modes": 16,
+            "sample_count": 4096
+          },
+          "first_full_pass": null,
+          "five_terminal_verdict": "FAIL",
+          "full_passing_observations": 0,
+          "initial_state_file_sha256": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+          "intervention_calls": 9600,
+          "last_post_first_full_pass_failure_update": null,
+          "post_first_full_pass_checks": 0,
+          "post_first_full_pass_failures": 0,
+          "receipt_sha256": "033c2e806c6acd396dab969ff820b50e84050603bfdd1c6efe4480d0b23a889a",
+          "scoring_draws": 96,
+          "source_commit": "79291dad8a15e742bc86a55c56cafc0d26539292",
+          "source_digest": "66435ea6507e3c64dea52c89ebfb6ee5a90d0d4cd34220b558c5441c9f56ff05",
+          "status": "COMPLETE",
+          "terminal_suffix": 0
+        }
+      ],
+      "new_updates": 3200,
+      "physical_gpu": 0,
+      "pr": "https://github.com/255BITS/ParticleGAN/pull/333",
+      "probe_elapsed_seconds": 1.4919318599859253,
+      "probe_seconds_charged_conservatively": 30,
+      "protocol_id": "ring16-small-sign-flips-v1",
+      "protocol_sha256": "a684fb45f2cb2a7dc0f793ca60155f7463eb4120e02990349003f556c5bb72d8",
+      "publication_commit": "0c027bd8b13e1643d9857d73a0909024a654fde3",
+      "report_path": "reports/forge/ring16-sign-flips/README.md",
+      "result_sha256": "fe1c7fdaf4aee32389a9b99cf03ab6105f041e635ad74ea0f9eb645a23270866",
+      "scoring_draws": 193,
+      "training_process_seconds": 51.69856573699508
+    },
+    "noise": {
+      "archive": {
+        "bytes": 7109835,
+        "contains_bulk_logs_and_tensor_checkpoints": true,
+        "execution_sources": [
+          {
+            "digest": "4165cdf4e92d38e58607699d814ccaf4b41896cf509aa63b230b12d7ff776811",
+            "origin_commit": "1ca28014bf7102975376efadc691f3e103535f41"
+          },
+          {
+            "digest": "4165cdf4e92d38e58607699d814ccaf4b41896cf509aa63b230b12d7ff776811",
+            "origin_commit": "1ca28014bf7102975376efadc691f3e103535f41"
+          }
+        ],
+        "manifest_member": "archive-manifest.json",
+        "members_verified": 37,
+        "path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-tiny-noise-cuda-v1.tar.gz",
+        "prior_archive_sha256": "c6c452ef8dc7d5d8c23e4ae7794e155815603203cb68ae998784038f21fa9c8e",
+        "prior_raw_root": "/home/martyn/dev/ParticleGAN/runs/api/ring16-restart-diagnostic-v1",
+        "schema_version": 1,
+        "scope": "local_raw_cuda_evidence_archive",
+        "sha256": "22323efff9e1ac1ac38e389a3917d6a13ca12f76a0d4566f9616850e7e894471",
+        "source_file_count": 36,
+        "tracked_bulk_files": false,
+        "verification": "all members matched exact SHA256 after writing"
+      },
+      "arms": [
+        {
+          "actual_curve_sha256": "b3d3b7ce129a699a4e34c0d150819b56472542c5463eda9156a21b229525a04a",
+          "arm": "boundary_only",
+          "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+          "completed_updates": 1600,
+          "confirmation": {
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "full_pass": false,
+            "metrics": {
+              "component_covariance_error": 0.9583789985626936,
+              "component_min_eigen_ratio": 0.40726494789123535,
+              "hq": 0.940185546875,
+              "mass_tv": 0.072021484375,
+              "modes": 16,
+              "sample_count": 4096
+            },
+            "state_digest_before_draw": "cc6336f82c06abf0b9d514421d1fb9c1d40ad5b327c3a9e9949d7d9817ffd162",
+            "step": 1400
+          },
+          "confirmed_smoke": false,
+          "final_metrics": {
+            "component_covariance_error": 0.4813628178089857,
+            "component_min_eigen_ratio": 0.31537938117980957,
+            "hq": 0.92626953125,
+            "mass_tv": 0.064208984375,
+            "modes": 16,
+            "sample_count": 4096
+          },
+          "first_full_pass": 1400,
+          "five_terminal_verdict": "PASS",
+          "full_passing_observations": 10,
+          "initial_state_file_sha256": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+          "intervention_calls": 6,
+          "last_post_first_full_pass_failure_update": 1500,
+          "post_first_full_pass_checks": 12,
+          "post_first_full_pass_failures": 3,
+          "receipt_sha256": "a789e75bb2170e6d180ab52eb9ce2abcf814b381f41762887dde4a849c0fd7c7",
+          "scoring_draws": 97,
+          "source_commit": "1ca28014bf7102975376efadc691f3e103535f41",
+          "source_digest": "4165cdf4e92d38e58607699d814ccaf4b41896cf509aa63b230b12d7ff776811",
+          "status": "COMPLETE",
+          "terminal_suffix": 6
+        },
+        {
+          "actual_curve_sha256": "a1ec366d3aaf2f90cd64a80a5a57041729b48e0d7ec95c4565f56ac86f5a9c1d",
+          "arm": "every_step",
+          "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+          "completed_updates": 1600,
+          "confirmation": {
+            "failed_bounds": [],
+            "full_pass": true,
+            "metrics": {
+              "component_covariance_error": 0.754245332442224,
+              "component_min_eigen_ratio": 0.5019050240516663,
+              "hq": 0.922119140625,
+              "mass_tv": 0.087890625,
+              "modes": 16,
+              "sample_count": 4096
+            },
+            "state_digest_before_draw": "709ec2cbe46feb98f708b5cb2ce7b83a80495d987f58a6d94aeba9e9e28e44af",
+            "step": 817
+          },
+          "confirmed_smoke": true,
+          "final_metrics": {
+            "component_covariance_error": 0.5044049359858036,
+            "component_min_eigen_ratio": 0.33274251222610474,
+            "hq": 0.965576171875,
+            "mass_tv": 0.077392578125,
+            "modes": 16,
+            "sample_count": 4096
+          },
+          "first_full_pass": 817,
+          "five_terminal_verdict": "PASS",
+          "full_passing_observations": 47,
+          "initial_state_file_sha256": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+          "intervention_calls": 9600,
+          "last_post_first_full_pass_failure_update": 850,
+          "post_first_full_pass_checks": 47,
+          "post_first_full_pass_failures": 1,
+          "receipt_sha256": "b3b7f5af7d36e468e6d3f94ef317e9e6111e1ec4de9f631ae94e9ecf41c4ed8a",
+          "scoring_draws": 97,
+          "source_commit": "1ca28014bf7102975376efadc691f3e103535f41",
+          "source_digest": "4165cdf4e92d38e58607699d814ccaf4b41896cf509aa63b230b12d7ff776811",
+          "status": "COMPLETE",
+          "terminal_suffix": 45
+        }
+      ],
+      "new_updates": 3200,
+      "physical_gpu": 1,
+      "pr": "https://github.com/255BITS/ParticleGAN/pull/335",
+      "probe_elapsed_seconds": 0.4122871150029823,
+      "probe_seconds_charged_conservatively": 30,
+      "protocol_id": "ring16-tiny-noise-v1",
+      "protocol_sha256": "fc8c3b6ac532d7db31131f9250d515abb08cf5e0057f7516ba47d9ad5b03d343",
+      "publication_commit": "a570d722949b4bf26f3641b8d020a7a1cf67ec3b",
+      "report_path": "reports/forge/ring16-noise/README.md",
+      "result_sha256": "6323669099c4eb007473830dbcfb921422c2aeb253991ff2acf1a4d195d6e1be",
+      "scoring_draws": 194,
+      "training_process_seconds": 58.01454582007136
+    },
+    "truncation": {
+      "archive": {
+        "archive_local_path": "/home/martyn/dev/ParticleGAN/artifacts/ring16-followup/ring16-spectral-truncation-v1-cuda-evidence.tar.gz",
+        "archive_sha256": "a7f7a8eb26d47604189842b6ba0d9abfcaf4c6b2e96d861f15173134a1747092",
+        "bulk_tracked_in_git": false,
+        "bytes": 7108797,
+        "manifest_sha256": "87b829cca87bdb235623ffd332848a1a4e363ee4691c057c7502910fa67fd608",
+        "member_bytes_verified": true,
+        "original_execution_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+        "raw_file_count": 30,
+        "raw_originals_retained": true,
+        "restore": "tar -xzf ARCHIVE -C CHECKOUT (hydrate local runs/api only; never rerun consumed arms)",
+        "schema_version": 1
+      },
+      "arms": [
+        {
+          "actual_curve_sha256": "be0fe132c3e324c11d4877a618544efbcc02b22485ed60fb44c011451b60b664",
+          "arm": "boundary_only",
+          "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+          "completed_updates": 1600,
+          "confirmation": {
+            "failed_bounds": [
+              "component_covariance_error <= 0.85"
+            ],
+            "full_pass": false,
+            "metrics": {
+              "component_covariance_error": 1.0147978998720646,
+              "component_min_eigen_ratio": 0.39938345551490784,
+              "hq": 0.9443359375,
+              "mass_tv": 0.06396484375,
+              "modes": 16,
+              "sample_count": 4096
+            },
+            "state_digest_before_draw": "999d375d4b0e84302a3552448e0c45f03d1f73246411fba4131bf26d26b90183",
+            "step": 1400
+          },
+          "confirmed_smoke": false,
+          "final_metrics": {
+            "component_covariance_error": 1.3725859075784683,
+            "component_min_eigen_ratio": 0.36543142795562744,
+            "hq": 0.9306640625,
+            "mass_tv": 0.052734375,
+            "modes": 16,
+            "sample_count": 4096
+          },
+          "first_full_pass": 1400,
+          "five_terminal_verdict": "FAIL",
+          "full_passing_observations": 2,
+          "initial_state_file_sha256": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+          "intervention_calls": 6,
+          "last_post_first_full_pass_failure_update": 1600,
+          "post_first_full_pass_checks": 12,
+          "post_first_full_pass_failures": 11,
+          "receipt_sha256": "2ef6c0bbc01e3b0f28aa5b9dafc9ba6359754f1709b0e1a73b39f0d6c8ab85e5",
+          "scoring_draws": 97,
+          "source_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+          "source_digest": "95dc4f10685943bd393a228540fde213924785d5be6a6e0e8c1ee827e167d940",
+          "status": "COMPLETE",
+          "terminal_suffix": 0
+        },
+        {
+          "actual_curve_sha256": "ca289830c84e42e775dc6530e485ecdfd69daee1fdeb62d4e188becbd6e7b7cd",
+          "arm": "every_step",
+          "batch_sequence_sha256": "94734673d1a3559a725f58ac2a33456d4063995bb312591613c381e828121750",
+          "completed_updates": 1600,
+          "confirmation": {
+            "failed_bounds": [],
+            "full_pass": true,
+            "metrics": {
+              "component_covariance_error": 0.8353303028270602,
+              "component_min_eigen_ratio": 0.5696465373039246,
+              "hq": 0.910400390625,
+              "mass_tv": 0.082275390625,
+              "modes": 16,
+              "sample_count": 4096
+            },
+            "state_digest_before_draw": "5bcbc783d62559d08419f5d89a1a0806388e91a72e8bd85da7905a353ee06581",
+            "step": 684
+          },
+          "confirmed_smoke": true,
+          "final_metrics": {
+            "component_covariance_error": 0.5896781794726849,
+            "component_min_eigen_ratio": 0.35003533959388733,
+            "hq": 0.963623046875,
+            "mass_tv": 0.06591796875,
+            "modes": 16,
+            "sample_count": 4096
+          },
+          "first_full_pass": 684,
+          "five_terminal_verdict": "PASS",
+          "full_passing_observations": 52,
+          "initial_state_file_sha256": "4ce8a1851ea818a00a7ad2e8e894db357f408b7abf92956b41a774cdf932de17",
+          "intervention_calls": 9600,
+          "last_post_first_full_pass_failure_update": 817,
+          "post_first_full_pass_checks": 55,
+          "post_first_full_pass_failures": 4,
+          "receipt_sha256": "f6eaf2ad1a2918eb59c73e3fc12726a32f906cf6a89744a4dd04db8963e713b2",
+          "scoring_draws": 97,
+          "source_commit": "ca69cabc2801744a7f99b8c601af98ba68a9e639",
+          "source_digest": "95dc4f10685943bd393a228540fde213924785d5be6a6e0e8c1ee827e167d940",
+          "status": "COMPLETE",
+          "terminal_suffix": 47
+        }
+      ],
+      "new_updates": 3200,
+      "physical_gpu": 0,
+      "pr": "https://github.com/255BITS/ParticleGAN/pull/332",
+      "probe_elapsed_seconds": 1.270534249022603,
+      "probe_seconds_charged_conservatively": 30,
+      "protocol_id": "ring16-spectral-truncation-v1",
+      "protocol_sha256": "4ee54aaca83e734c531a42e57905dc815b99b1371d4dbd1c113bd85d09895444",
+      "publication_commit": "2df43066919d6af46f23b41b5f8db026926363db",
+      "report_path": "reports/forge/ring16-truncation/README.md",
+      "result_sha256": "334f5b9ff373b50a8bc8a108418231015aed9b31338f5b1ba33fa7ceccc9f3d2",
+      "scoring_draws": 194,
+      "training_process_seconds": 50.8011977589922
+    }
+  },
+  "unchanged_technique_inventory_sha256": "ff3dbaec98de9328d676943a94301414e78baeca30071a62df93790185bd7a45"
+}

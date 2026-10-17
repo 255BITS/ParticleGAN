@@ -1,0 +1,61 @@
+{
+  "attempt": "fcd5df9c44d64d1c9add83a0015700e9",
+  "comparisons": [
+    {
+      "changed_sha256": "d9e2e417b3d79734655adfa4d31660f868b395c71b7605ddd632db90d9872223",
+      "condition": "step_label",
+      "permitted_state_sha256": "3435ee8eb826dca53911fd33c51cfb079084d630832cad900931838e91017373",
+      "reference_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+      "rng_state_sha256": "578f65e963c7555e3a74dbfcec0c866e4fcd68eb331a91ef933ac235256ce023"
+    },
+    {
+      "changed_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+      "condition": "horizon",
+      "permitted_state_sha256": "3435ee8eb826dca53911fd33c51cfb079084d630832cad900931838e91017373",
+      "reference_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+      "rng_state_sha256": "578f65e963c7555e3a74dbfcec0c866e4fcd68eb331a91ef933ac235256ce023"
+    },
+    {
+      "changed_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+      "condition": "evaluation_cadence",
+      "permitted_state_sha256": "3435ee8eb826dca53911fd33c51cfb079084d630832cad900931838e91017373",
+      "reference_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+      "rng_state_sha256": "578f65e963c7555e3a74dbfcec0c866e4fcd68eb331a91ef933ac235256ce023"
+    },
+    {
+      "changed_sha256": "9e480af99bf2affbed61c04f7f2ef5e2d3a0603f5733891983b503ae71613e6b",
+      "condition": "restart",
+      "permitted_state_sha256": "3435ee8eb826dca53911fd33c51cfb079084d630832cad900931838e91017373",
+      "reference_sha256": "b78040ef466835dd0bf7ecb7ae5923336d6849cdd578eb13809dd05bc815f937",
+      "rng_state_sha256": "578f65e963c7555e3a74dbfcec0c866e4fcd68eb331a91ef933ac235256ce023"
+    }
+  ],
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "source_audit": {
+    "allowed_state": [
+      "parameters_and_ema",
+      "optimizer_moments_and_bias_correction",
+      "observed_gradients_and_row_visit_history",
+      "named_training_rng"
+    ],
+    "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+    "source_sha256": {
+      "experiments/forge/api.py": "eaa5888c4613ee52ac98aa82faa89bf70df21d03b39979fecc9297c26effbc49",
+      "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+      "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+      "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/k3p.py": "45ceabdc067fb420e163d3d4ac5a4edb0bb47d154c38c73865f95dabeaefcad7",
+      "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "particlegan/policy.py": "f3af6679aea15e3c2693605a8d020fb175dd9afe1f48f05ca0565a33599cee4e",
+      "particlegan/recipes.py": "b3988126f2aa31808aac39d6c95738b50cb405afdbb852b4b35c44ecf88282fd",
+      "particlegan/training.py": "5d3063b38760626d3686cc0b613ab4ce13e3d11bd3ed491de746ca9e2fac99f6"
+    },
+    "unexplained_clock_dependencies": [
+      "continuous policy lifecycle needs a separate reviewed clock/state audit",
+      "KA2 switches from pure A to blended penalty at call 800",
+      "critic guard releases at a fixed minimum update count"
+    ]
+  }
+}

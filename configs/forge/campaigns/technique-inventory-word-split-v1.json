@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "technique-inventory-word-split-v1",
+  "budget_seconds": 326340,
+  "candidate_budget_seconds": 46620,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Revision8 complete-current-tier inventory of7 currently selected solution families through Tier3. Per-family full reservation including optional clock diagnostic:2520s smoke +40500s Tier2 +3600s grouped endurance =46620s; seven families326340s. Word hold adds300s in Tier2. Historical campaigns and receipts remain immutable. Expanded rosters require a new campaign identity and checked reservation."
+}

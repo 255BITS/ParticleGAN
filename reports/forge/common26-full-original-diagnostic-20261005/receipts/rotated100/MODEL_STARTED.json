@@ -1,0 +1,11 @@
+{
+  "completed_updates": 0,
+  "device": "cuda:1",
+  "frozen_request_digest": "e4633d120227e36c9a6fd39099ee7b8eb75db32f03e100fe84c69ea7b372a86a",
+  "gpus": 1,
+  "initialization_sha256": "cda3401193d58a8a89216b9aaace23e3e1a6fd054648c1e5c138a4d720a574b2",
+  "initialized_monotonic": 2067018.400031966,
+  "models_constructed": true,
+  "pid": 2564283,
+  "schema": "pg_common26_full_atlas_actual_start_v1"
+}

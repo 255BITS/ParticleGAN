@@ -1,0 +1,10 @@
+{
+  "supervisor_pid": 384331,
+  "startticks": 163720702,
+  "cmd": "/tmp/pr38-default-env/bin/python -u -B /ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/launch.py --through 19 ",
+  "status": "PARKED_BETWEEN_JOBS",
+  "active_child_untouched": true,
+  "outer_slot_pid": 383348,
+  "reason": "Serial slot for prospective toy/grid quality candidate after active grid finishes",
+  "utc": "2026-09-30 04:10:21 UTC"
+}

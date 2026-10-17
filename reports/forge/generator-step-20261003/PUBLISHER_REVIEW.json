@@ -1,0 +1,45 @@
+{
+  "schema": "generator_step_publisher_readonly_review_v1",
+  "created_utc": "2026-10-03T12:37:07.714124+00:00",
+  "source": {
+    "path": "/ml2/hypergan/generator-step-publication-build-20261003/publish_generator_step.py",
+    "sha256": "7c03ad28bd0cbae7a183bf8afd7d241298739d31b7c9566074d63aadb52186c6",
+    "bytes": 41820
+  },
+  "status": "CLEARED_NO_MATERIAL_BLOCKER",
+  "review_scope": "Read-only complete source and targeted software-control inspection; no imports/execution of the helper, tests, models, draws, scoring, CUDA, queue, training or publication.",
+  "software_controls": "57PASS1.96s reported by author; not rerun by this reviewer.",
+  "required_trust_boundary": "Root first completes CPU combine_studies, including the candidate-bound capacity sampler replay and numerical retained-trace certification, then binds the exact completed packet and explicitly supplies its trusted certification SHA. bind-certification alone does not establish certification.",
+  "checks": {
+    "exact_overrides": {
+      "lr": 0.00265625,
+      "prior_lr_mult": 3.0,
+      "d_lr_mult": 4.5
+    },
+    "whole_configurations": 2,
+    "cases_each": 8,
+    "required_cells": 16,
+    "current_source_commit_expected": "488b792e2fb875894f017cf7043420f2bb66190f",
+    "prior_source_commit_preserved": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+    "source_boundaries": "Own committed exporter blob; current/old scientific source files and discovery JSON; complete immutable snapshots; runner, binder, delegated helper; current/prior raw receipts/artifacts/durable supervisors and hash-bound construction inputs including summary_path/summary_sha256.",
+    "complete_branch": "Pure verify_run flags/cadence/artifact/array health/PIL plus recorded acquisition_hold reduction; no verify_case, capacity replay, model restore, sampler or numerical scorer.",
+    "partial_branch": "Only non-COMPLETE invokes strict source/recipe/runtime/schedule-prefix attribution; missing receipt remains ERROR rather than learned FAIL/PASS.",
+    "media_context": "Every unchanged raw GIF is accompanied by original and added-study grade, confirmation and later-check counts; first5then\u22655/all-later requirement remains explicit.",
+    "capacity_credit": "16 outcomes retained; zero-update necessary evidence remains separate from actual learning, including negatives and UNKNOWN future cells.",
+    "new_cost_clock": "Actual new supervised paid time and conservative interruption reserves; CPU capacity/parent certification/queue remain separately scoped.",
+    "prior_costs": {
+      "scientific_paid_seconds": 54.3587717928458,
+      "engineering_paid_seconds": 4.757908704923466,
+      "total_debit_once": 59.116680497769266,
+      "original_campaign_cap_seconds": 15360.0,
+      "prior_fills_new_cells": false
+    },
+    "output_immutability": "New output directory only, outside protected scientific/raw/snapshot trees; all validations before output; copied GIF SHA/size identity; full consumed-input recheck before and after export.",
+    "qualification": "UNKNOWN denominator retained; no default, fastest-family or full MoG qualification inferred."
+  },
+  "publication_context_notes": [
+    "Show exact non-default .00265625/3/4.5 profile and distinguish nominal rates from controller-applied rates in the final human-facing report.",
+    "Original raw Default-test FAIL badges refer to the full case protocol, not shipping-default adoption.",
+    "Both real current intensity runs are COMPLETE originalFAIL/studyFAIL with no passing acquisition window; later14 cells UNKNOWN."
+  ]
+}

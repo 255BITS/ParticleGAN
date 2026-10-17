@@ -61,6 +61,7 @@ class ParticlePrior(nn.Module):
             raise ValueError("init_std must be finite and nonnegative")
 
         factory_kwargs = {"device": device, "dtype": dtype}
+        self.init_std = float(init_std)
 
         # One tensor of particles.
         # When learnable (the default) it is a single Parameter, so DDP /
@@ -308,16 +309,18 @@ class MoGParticlePrior(ParticlePrior):
         return z
 
     def sample(self, batch_size, generator=None, *, fixed_first_n=False,
-               offset=0, eps=None):
+               offset=0, eps=None, noise_generator=None):
         """Return noisy codes and component indices, uniformly with replacement.
 
         fixed_first_n fixes indices only; also supply fixed eps for reproducible
-        positive-noise snapshots. A generator controls both indices and noise.
+        positive-noise snapshots. By default a generator controls both indices
+        and noise. ``noise_generator`` optionally isolates the Gaussian draws
+        from component-index draws; sigma=0 consumes neither noise stream.
         """
         # Reuse index validation and RNG consumption exactly, including r=0.
         _, idx = super().sample(batch_size, generator,
                                 fixed_first_n=fixed_first_n, offset=offset)
-        return self(idx, generator=generator, eps=eps), idx
+        return self(idx, generator=generator if noise_generator is None else noise_generator, eps=eps), idx
 
     def get_extra_state(self):
         return {"sigma_rel": self.sigma_rel, "standardize": self.standardize}

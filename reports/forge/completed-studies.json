@@ -1,0 +1,238 @@
+{
+  "cross_cohort_pooling": false,
+  "qualification_input": false,
+  "reuse": false,
+  "schema": "forge_completed_studies_registry_v1",
+  "studies": [
+    {
+      "archive": {
+        "bytes": 17395,
+        "path": "reports/forge/continuous-baseline-20261003/archive.json",
+        "sha256": "7492292bf2840d32d656d3f99b595350d51743ae75670cb7390f20bae1ffe17b"
+      },
+      "archive_readout": {
+        "bytes": 4007,
+        "path": "reports/forge/continuous-baseline-20261003/ARCHIVE.md",
+        "sha256": "d7c426e09bee85c27452697693aa0d3fd85ef7e3345c7ee615b242495ff16677"
+      },
+      "id": "atlas19_hold",
+      "media": [
+        {
+          "bytes": 80846,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-img_intensity2.gif",
+          "sha256": "5e9d0919d530f4881de2b8758be2b4217a29b96e3ab7dd1205b8eb617955b426"
+        },
+        {
+          "bytes": 86365,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-mode_hold.gif",
+          "sha256": "89ee2fea383ca7305a6a72adac9b3318d6f51a3d7e7572433b34661b894cd752"
+        },
+        {
+          "bytes": 85746,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-img_blobs4.gif",
+          "sha256": "613b11f6974e6188057758d802d6bc7ebef1e5528cb3a22884a9926396b68489"
+        },
+        {
+          "bytes": 90687,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-img_bars4.gif",
+          "sha256": "a236f568dc474c40c39faab9316e1804072a4dcce71a362fb9c6c9edddc30bab"
+        },
+        {
+          "bytes": 84026,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-img_stripes2.gif",
+          "sha256": "2d61bbccb776d2fe80a8d7b7f9091a3b80f0c4a29261a9b81893c44cebf44547"
+        },
+        {
+          "bytes": 181767,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_two_broad.gif",
+          "sha256": "0a2029f226ff8620b62020f5e8207411ae38a52ac49917273de6721eba437263"
+        },
+        {
+          "bytes": 207734,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_unequal_mass.gif",
+          "sha256": "9b6507b395c822c48d82b47b50f6b19ba7071ac8282fc65373002fb2f5ea00b7"
+        },
+        {
+          "bytes": 171269,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_unequal_width.gif",
+          "sha256": "5740482d6df22c226a1f9eb53052cad32eab743b1edcb03375e524372994ca6c"
+        },
+        {
+          "bytes": 167567,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_anisotropic.gif",
+          "sha256": "200db69ea68a8c5b9c93d72fc0d45f155ee01382e4935c8545bf68e40babbe05"
+        },
+        {
+          "bytes": 119182,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_overlap.gif",
+          "sha256": "6dfe254b5a15088db09dd9b64ee224566e40aa43f782d1844c87d3871f24df0f"
+        },
+        {
+          "bytes": 115641,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_spiral.gif",
+          "sha256": "478ebdb7e699f458d50953a8add7987e1f393efee75bdb24979703b2524b3078"
+        },
+        {
+          "bytes": 92658,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-stationary.gif",
+          "sha256": "a8467735286f32f16a61b1151735d1e511010b164bb48aaf314f93108dec3951"
+        },
+        {
+          "bytes": 86896,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-ring_shift.gif",
+          "sha256": "af181f2e628b8e7e54e105adb70a4fb8bd5188aa35f9c84f63145ebf9bc30aeb"
+        },
+        {
+          "bytes": 40708,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-grid100.gif",
+          "sha256": "073625cd9b4322a6d82760910b79cb13939fa599e0ce6de081b956a532e79ac3"
+        },
+        {
+          "bytes": 60758,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-rotated100.gif",
+          "sha256": "1354ee9af564991fa69fcb107a44512a8b5115b50420f173de983c5b84ed6d32"
+        },
+        {
+          "bytes": 44162,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-staggered100.gif",
+          "sha256": "87dae044601acb99d6f7660fcafe65db05f067a7bd047eb71458907bf8f8694f"
+        },
+        {
+          "bytes": 215408,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-grid100.gif",
+          "sha256": "9187b98ee92764bba7fa7cf0e0287884ff1b17a8037ce299f7ab9af26bdc3308"
+        },
+        {
+          "bytes": 213599,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-rotated100.gif",
+          "sha256": "97c69b393160fabd4e94452a6c7dabc00383b619d47234d176bd2b50cbffd063"
+        },
+        {
+          "bytes": 219398,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-staggered100.gif",
+          "sha256": "479cfd839cb624eb7053265fdda17edb634bda9b2a9b9824ca994eec2120cf7a"
+        },
+        {
+          "bytes": 1128406,
+          "path": "reports/forge/continuous-baseline-20261003/media/c6-atlas-broad-hold-1200-to-1350.gif",
+          "sha256": "b56db2674a5f785c7979ff4bfb8ae6d4c309880cb29c3f45a8a72bb16b2f7822"
+        },
+        {
+          "bytes": 1128406,
+          "path": "reports/forge/continuous-baseline-20261003/media/c6-e22-broad-hold-1200-to-1350.gif",
+          "sha256": "b56db2674a5f785c7979ff4bfb8ae6d4c309880cb29c3f45a8a72bb16b2f7822"
+        },
+        {
+          "bytes": 159873,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-grid100-retained-clouds.gif",
+          "sha256": "63775290464f08d38478e26855d728e4c344df6ec50dbc5451e166e1a1eb4d18"
+        },
+        {
+          "bytes": 169544,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-rotated100-retained-clouds.gif",
+          "sha256": "ec0f6ea0bfe4c3794f10e0b2498861c03a994d10b81d5b8bd498e4f27f162ae2"
+        },
+        {
+          "bytes": 203243,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-staggered100-retained-clouds.gif",
+          "sha256": "aa21115e2a548259e825502174000bc30ed055497adfca30ed84e813f27844d6"
+        },
+        {
+          "bytes": 292829,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-grid100-retained-clouds.gif",
+          "sha256": "7b973fa274b99755899451371f964c220e3f44fcc808026a0313816a7b25ab95"
+        },
+        {
+          "bytes": 266842,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-rotated100-retained-clouds.gif",
+          "sha256": "7dbf3ccf1e49a927b8dc04d41bda82bc93262d6e2a41bcb6d2d0482306133349"
+        },
+        {
+          "bytes": 405234,
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-staggered100-retained-clouds.gif",
+          "sha256": "fa62f6a5b7e30b1486041b4bd7dff540d8753024081c854cb95526148e85d94c"
+        }
+      ],
+      "readout": {
+        "bytes": 11435,
+        "path": "reports/forge/continuous-baseline-20261003/README.md",
+        "sha256": "89894f1196554b62e6076b93a09f651295bf727fd332c640c15478d407d21c10"
+      },
+      "report": {
+        "bytes": 574945,
+        "path": "reports/forge/continuous-baseline-20261003/results.json",
+        "sha256": "4cdbec6b54e31ecdaac5ee2cd887258004c5da7c9a7102261e1c1c8c3939b66a"
+      }
+    },
+    {
+      "archive": {
+        "bytes": 8599,
+        "path": "reports/forge/critic-balance-20261003/archive.json",
+        "sha256": "cc2553e635b2675726e282325127a0018307e870a4bec8ce364f8c305e99c903"
+      },
+      "archive_readout": {
+        "bytes": 3796,
+        "path": "reports/forge/critic-balance-20261003/ARCHIVE.md",
+        "sha256": "b08247d1eb281c0a1a73b40593e35f1a13d98bd47b4b97e698e41fe30c0b8507"
+      },
+      "id": "critic_balance",
+      "media": [
+        {
+          "bytes": 191904,
+          "path": "reports/forge/critic-balance-20261003/media/atlas/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "7aba76b1ed1bbcffda60a9fd0640550ec66b65697bb05effe5c92c6f786030c2"
+        },
+        {
+          "bytes": 191904,
+          "path": "reports/forge/critic-balance-20261003/media/e22/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "7aba76b1ed1bbcffda60a9fd0640550ec66b65697bb05effe5c92c6f786030c2"
+        }
+      ],
+      "readout": {
+        "bytes": 6425,
+        "path": "reports/forge/critic-balance-20261003/README.md",
+        "sha256": "030000baa7295590e5014b0eddafab05863fd4946abc5cb52b99405f9e52295e"
+      },
+      "report": {
+        "bytes": 83682,
+        "path": "reports/forge/critic-balance-20261003/results.json",
+        "sha256": "b935f088d53dff90de31a9bec768e140a3505c0c03729cf5f3d814f9f993b35f"
+      }
+    },
+    {
+      "archive": {
+        "bytes": 13705,
+        "path": "reports/forge/generator-step-20261003/archive.json",
+        "sha256": "28833711ef1a0617468788ee5496aedbe16f5ba87b129da05616da4fa3c08991"
+      },
+      "archive_readout": {
+        "bytes": 4365,
+        "path": "reports/forge/generator-step-20261003/ARCHIVE.md",
+        "sha256": "34fc4a8b8a22078f33e28be0017533fecc55d07220cf57e91e7e4f8f763c66db"
+      },
+      "id": "generator_step",
+      "media": [
+        {
+          "bytes": 192353,
+          "path": "reports/forge/generator-step-20261003/media/atlas/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "9a5b6e71bcee967383eab1a32c49add58192f984e1eef22970223761b35bc026"
+        },
+        {
+          "bytes": 192353,
+          "path": "reports/forge/generator-step-20261003/media/e22/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "9a5b6e71bcee967383eab1a32c49add58192f984e1eef22970223761b35bc026"
+        }
+      ],
+      "readout": {
+        "bytes": 8631,
+        "path": "reports/forge/generator-step-20261003/README.md",
+        "sha256": "7afe581a70bebfe137cd599ba847bbd06d5a9f59d2300ab2313225017766e223"
+      },
+      "report": {
+        "bytes": 92866,
+        "path": "reports/forge/generator-step-20261003/results.json",
+        "sha256": "a9da2ae3af04d50873cc7f0199eedd34a0f2ba768efc86ada866a40d293c6c63"
+      }
+    }
+  ]
+}

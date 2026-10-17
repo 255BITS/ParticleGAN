@@ -1,0 +1,21 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "clockfree_audit"
+    }
+  ],
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "clockfree_continuous",
+  "id": "selected-family-coverage-diagnostic-v1",
+  "policy_change_reason": "User-authorized measurement of a previously unrun compatible strict audit; retain every task gate and the selected recipe. No ordinary qualification credit.",
+  "ranking": {
+    "cost_separate": true,
+    "policy": "diagnostic_outcomes_only"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

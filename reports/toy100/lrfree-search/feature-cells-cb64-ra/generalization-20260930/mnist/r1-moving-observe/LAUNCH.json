@@ -1,0 +1,29 @@
+{
+  "status": "RUNNING",
+  "started_utc": "2026-09-30T21:29:07.858490+00:00",
+  "pid": 1970513,
+  "startticks": "170556801",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/run_observe.py"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/observe.log",
+  "source_freeze_sha256": "35ea2c173c42e795de4f61c9d37e3c520a2a0e9c7d83902e50f1bfe33bbbe743",
+  "inputs_sha256": "29dcf35a0a679adb223c55ca539fe0843ba8e80ef0fef2b6e9e953a1a80c3542",
+  "authorization": "Root explicitly authorized original quarter-rate moving Grid100500->535 and1000->1035 observation-only replay",
+  "known_original_processes": {
+    "384331": [
+      "T",
+      "163720702"
+    ],
+    "383348": [
+      "S",
+      "163716372"
+    ]
+  },
+  "original_outer_slot_held": true,
+  "original_owned_numerical_processes_at_launch": [],
+  "signaled_processes": []
+}

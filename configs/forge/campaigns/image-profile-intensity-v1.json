@@ -1,0 +1,28 @@
+{
+  "budgets": {
+    "campaign_seconds": 1800,
+    "candidate_seconds": 1800,
+    "task_seconds": {
+      "img_intensity2_residual16": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "image-profile-intensity-v1",
+  "profile": "image-profile-transfer-v1",
+  "profile_sha256": "743bd4eb241a32a00f307ca4fe0714eba485dc30c71bcffe5bfcc5059790406b",
+  "purpose": "One 600-update K3P residual16 intensity architecture-transfer diagnostic through the explicit published host-profile resolver, with current K3P, named initialization and clean live outputs. Preserve the image finite-cloud exception, 24 observations, final-five gates, seed 0 and 1800-second task/candidate/campaign ceiling. Retain all 16 independent references in the unmeasured calibration denominator. No historical replay claim, known-positive certificate, prior receipt imports or ordinary qualification credit. Review this one outcome before wider expansion.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "Transfer the historically solvable residual16 architecture under the current protocol; one bounded diagnostic only.",
+      "tasks": [
+        "img_intensity2_residual16"
+      ]
+    }
+  ],
+  "view": "host_profile_transfer"
+}

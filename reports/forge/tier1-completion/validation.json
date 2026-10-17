@@ -1,0 +1,80 @@
+{
+  "archive_member_hash_checks": 3269,
+  "archive_member_hash_mismatches": [],
+  "archive_sha256": "2041cfe2e9975b533089d4c74b0970164235c0d0b35af46a3ebbd7b7168b9c66",
+  "attempts": 71,
+  "cells": 77,
+  "charged_seconds": 2055.6923065807205,
+  "checks": 2330,
+  "errors": [],
+  "executed_commit": "928b485ffbe6e17d79b41d307ae8b6275489b37a",
+  "explicit_blockers": [
+    [
+      "atlas",
+      "ae_gan_hold_tier1_policy_selected_cloud_v1"
+    ],
+    [
+      "atlas",
+      "five_word_joint_acquisition_tier1_policy_selected_cloud_v1"
+    ],
+    [
+      "atlas",
+      "unused_token_hold_tier1_policy_selected_cloud_v1"
+    ],
+    [
+      "e22",
+      "ae_gan_hold_tier1_policy_selected_cloud_v1"
+    ],
+    [
+      "e22",
+      "five_word_joint_acquisition_tier1_policy_selected_cloud_v1"
+    ],
+    [
+      "e22",
+      "unused_token_hold_tier1_policy_selected_cloud_v1"
+    ]
+  ],
+  "history_inventory_coverage": "valid",
+  "independent_actual_binding_audit": {
+    "grade_disagreements": 0,
+    "infrastructure_errors": 0,
+    "initialization_components": 195,
+    "named_parameter_seed_derivations": 771,
+    "policy_fixture_hashes": 4,
+    "status": "PASS",
+    "trained_attempts": 71
+  },
+  "memory_freshness": "CURRENT",
+  "notes": [],
+  "publication_input_digest": "36b596ed80f38c46bbf8261bd944047c941d53d3c0ae16031add593469c55d82",
+  "publication_integrity": {
+    "clock_summaries": 11,
+    "live_declaration_rows_without_attempts_or_grade_credit": 142,
+    "selected_and_archived_science_preserved": true,
+    "training_gif_links": 71
+  },
+  "qualification_input": false,
+  "reporting_tests": {
+    "scope": [
+      "tier1_publication",
+      "family_reports",
+      "current_technique_inventory",
+      "trainer_families",
+      "knowledge",
+      "publication_memory"
+    ],
+    "status": "PASS",
+    "tests": 253
+  },
+  "schema_version": 1,
+  "source_digests": [
+    "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+  ],
+  "status": "PASS",
+  "statuses": {
+    "BLOCKED": 6,
+    "FAIL": 45,
+    "PASS": 26
+  },
+  "validator_sha256": "d85938f641aea8f7de6caa87b8a86fb8afe48f01173c4ba34faeaaf1c60dcc82"
+}

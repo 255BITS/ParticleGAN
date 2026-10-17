@@ -1,0 +1,761 @@
+"""Public routed-E22 GAN-only deterministic remote-conditioning diagnostic.
+
+One fixed G16/G64 comparison, D16 unchanged,200 updates/arm,60 seconds total.
+The teacher requires remote source information on held local patches. This is
+an explicit diagnostic fixture, not evidence of a real codec routing defect.
+"""
+
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import json
+import math
+import signal
+import sys
+import time
+from copy import deepcopy
+from pathlib import Path
+
+import torch
+from torch import nn
+from torch.nn import functional as F
+
+from particlegan import E22Policy, ParticlePrior, get_recipe, init
+
+# Execute the byte-identical merged PR236 helper in a dedicated namespace.
+# Its benchmark globals remain isolated from ordinary imports of that example.
+_reference_spec = importlib.util.spec_from_file_location(
+    "routed_remote_conditioning_reference",
+    Path(__file__).with_name("routed_generator_batch.py"),
+)
+reference = importlib.util.module_from_spec(_reference_spec)
+sys.modules[_reference_spec.name] = reference
+_reference_spec.loader.exec_module(reference)
+
+GRID = 16
+MARKER = (slice(0, 2), slice(0, 2))
+MASK = (slice(12, 16), slice(12, 16))
+STEPS = 200
+SECONDS = 60.0
+ENDPOINTS = (100, 200)
+TEACHER_VARIANCE_MIN = 1e-8
+BASE = "45e621f11de05816204151a271e87144ebded90a"
+
+
+class PooledEncoder(nn.Module):
+    """Global pooled source/time query; G separately retains spatial source."""
+
+    def __init__(self):
+        super().__init__()
+        self.features = nn.Linear(2, 4, bias=False)
+        self.time = nn.Linear(3, 4)
+        self.query = nn.Linear(4, 4)
+
+    def forward(self, context):
+        h = F.silu(
+            self.features(context[:, :2].mean((2, 3)))
+            + self.time(reference.time_features(context))
+        )
+        return self.query(h)
+
+
+class PrescribedLinear(nn.Linear):
+    """Mathematically declared boundary state, using direct public KEEP owners."""
+
+
+init.register(
+    PrescribedLinear,
+    lambda module: {
+        name: init.KEEP for name, _ in module.named_parameters(recurse=False)
+    },
+)
+
+
+class TeacherEncoder(PooledEncoder):
+    """Prescribed observable marker readout; public KEEP, not seed selection.
+
+    Marker occupies4/256 pixels at±.2. Pooling then scaling by320 gives±1;
+    afterSiLU the query has two style coordinates plus fixed±1coordinates.
+    A student with this SAME class parameter topology can represent it.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.features = PrescribedLinear(2, 4, bias=False)
+        self.time = PrescribedLinear(3, 4)
+        self.query = PrescribedLinear(4, 4)
+        with torch.no_grad():
+            self.features.weight.zero_()
+            self.features.weight[0, 1] = GRID**2 / (4 * 0.2)
+            self.time.weight.zero_()
+            self.time.bias.zero_()
+            self.query.weight.zero_()
+            self.query.weight[0, 0] = 1.0
+            self.query.weight[1, 0] = -1.0
+            self.query.bias.copy_(torch.tensor([0.0, 0.0, 1.0, -1.0]))
+
+
+class NormalizedGenerator(reference.Generator):
+    """Exact raw generator followed by frozen fit-only target calibration."""
+
+    def __init__(self, target_mean, target_std):
+        super().__init__()
+        if target_mean.shape != (1, 2, 1, 1) or target_std.shape != (1, 2, 1, 1):
+            raise ValueError("fixed per-channel calibration shape required")
+        if not bool(
+            torch.isfinite(target_mean).all() and torch.isfinite(target_std).all()
+        ):
+            raise ValueError("finite target calibration required")
+        if not bool(target_std.ge(1e-4).all()):
+            raise ValueError("fixed calibration floor is1e-4")
+        self.register_buffer("target_mean", target_mean.detach().clone())
+        self.register_buffer("target_std", target_std.detach().clone())
+
+    def forward(self, context, code):
+        return (super().forward(context, code) - self.target_mean) / self.target_std
+
+
+def fit_channel_calibration(raw_fit_target):
+    """Population std over fit rows and pixels only, clamp exactly1e-4."""
+    if raw_fit_target.ndim != 4 or raw_fit_target.shape[1] != 2:
+        raise ValueError("fit target must have2 channels")
+    require_finite_tree(raw_fit_target, "raw fit target")
+    mean = raw_fit_target.mean((0, 2, 3), keepdim=True)
+    std = (
+        (raw_fit_target - mean)
+        .square()
+        .mean((0, 2, 3), keepdim=True)
+        .sqrt()
+        .clamp_min(1e-4)
+    )
+    return mean.detach(), std.detach()
+
+
+class Critic16(reference.Critic):
+    def __init__(self):
+        super().__init__()
+        self.global_features = nn.Sequential(
+            nn.Linear(2 * GRID**2, 16),
+            nn.LeakyReLU(0.2),
+            nn.Linear(16, 4),
+            nn.LeakyReLU(0.2),
+        )
+
+    @staticmethod
+    def energy(error):
+        return error.square().mean((2, 3)) * math.sqrt(GRID**2 / 2)
+
+
+def require_finite_tree(value, label):
+    if isinstance(value, torch.Tensor):
+        if not bool(torch.isfinite(value).all()):
+            raise FloatingPointError("nonfinite " + label)
+    elif isinstance(value, float):
+        if not math.isfinite(value):
+            raise FloatingPointError("nonfinite " + label)
+    elif isinstance(value, dict):
+        for key, child in value.items():
+            require_finite_tree(child, label + "/" + str(key))
+    elif isinstance(value, (list, tuple)):
+        for index, child in enumerate(value):
+            require_finite_tree(child, label + "/" + str(index))
+
+
+def native_health(p):
+    reference.assert_ownership(p)
+    for optimizer in p.optimizers:
+        require_finite_tree(optimizer.state_dict(), "optimizer/regularizer")
+        for group in optimizer.param_groups:
+            for value in group["params"]:
+                require_finite_tree(value, "parameter")
+                if value.grad is not None:
+                    require_finite_tree(value.grad, "gradient")
+    for module in (
+        p.G,
+        p.encoder,
+        p.router,
+        p.D,
+        p.opt_d.ema_critic,
+        p.ema_G,
+        p.ema_encoder,
+        p.ema_router,
+        p.ema_prior,
+    ):
+        if module is not None:
+            require_finite_tree(module.state_dict(), "fast/average module")
+    require_finite_tree(p.averaged_table, "average table")
+
+
+def paired_contexts(content, times):
+    if (
+        content.ndim != 3
+        or content.shape[1:] != (GRID, GRID)
+        or times.shape != (len(content),)
+    ):
+        raise ValueError("fixed16x16content/time shape required")
+    source = torch.zeros(len(content), 2, 2, GRID, GRID)
+    source[:, :, 0] = content[:, None]
+    source[:, 0, 1, MARKER[0], MARKER[1]] = 0.2
+    source[:, 1, 1, MARKER[0], MARKER[1]] = -0.2
+    u = times[:, None, None, None, None].expand(-1, 2, 1, GRID, GRID)
+    return torch.cat((source, u), 2).flatten(0, 1)
+
+
+def teacher_policy():
+    """Public owners/initialization; no private host, optimizer update or fit."""
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(123)
+        G, E, R, D, prior = (
+            reference.Generator(),
+            TeacherEncoder(),
+            reference.Router(),
+            Critic16(),
+            ParticlePrior(128, 4),
+        )
+    for module, seed in ((G, 4), (E, 5), (R, 6), (D, 1)):
+        init.deterministic_orthogonal_(module, seed=seed)
+    init.deterministic_orthogonal_(prior)
+    recipe = get_recipe(
+        "e22_routed",
+        num_particles=128,
+        z_dim=4,
+        batch_size=16,
+        output_noise_std=1.3,
+        betas=(0.0, 0.999),
+        birth_death_backend="auto",
+        reopen_guard="settled",
+    )
+    opt_g = recipe.make_generator_optimizer(
+        [
+            {"params": [v for v in G.parameters() if v.requires_grad]},
+            {"params": list(E.parameters())},
+            {"params": [prior.z]},
+        ],
+        latent_table=prior.z,
+        foreach=False,
+    )
+    opt_d = recipe.make_critic_optimizer(D, ema_critic=deepcopy(D), foreach=False)
+    rows = reference.RoutedRows(
+        model_forward=reference.routed_forward,
+        features=reference.paired_features,
+        sites=("global",),
+    )
+    p = E22Policy(
+        recipe,
+        G,
+        D,
+        prior=prior,
+        encoder=E,
+        router=R,
+        generator_optimizer=opt_g,
+        critic_optimizer=opt_d,
+        roles=[["generator", "encoder", "table"], ["critic"]],
+        routed_rows=rows,
+        seed=21,
+    )
+    for module in (p.G, p.encoder, p.router, p.D):
+        module.eval().requires_grad_(False)
+    p.table.requires_grad_(False)
+    return p
+
+
+@torch.no_grad()
+def fixture():
+    source_rng = torch.Generator().manual_seed(44)
+    time_rng = torch.Generator().manual_seed(45)
+    teacher = teacher_policy()
+    if not bool(teacher.G.condition.weight[:, :4].ne(0).any()):
+        raise ValueError("teacher code columns must be nonzero")
+    data = {}
+    for name, count in (("fit", 128), ("guard", 4), ("population", 32)):
+        content = 0.2 * torch.randn(count, GRID, GRID, generator=source_rng)
+        times = 0.02 + 0.93 * torch.rand(count, generator=time_rng)
+        context = paired_contexts(content, times)
+        target = teacher.routed_generate(context, sigma=0, perturb=False)
+        data[name + "_context"] = context
+        data[name + "_mean"] = target
+        if name != "population":
+            data[name + "_rows"] = context
+            data[name + "_target"] = target
+    mean, std = fit_channel_calibration(data["fit_target"])
+    data["target_mean"], data["target_std"] = mean, std
+    for name in ("fit", "guard", "population"):
+        raw = data[name + "_mean"]
+        data[name + "_raw_mean"] = raw
+        normalized = (raw - mean) / std
+        data[name + "_mean"] = normalized
+        if name != "population":
+            data[name + "_target"] = normalized
+    pair_targets = data["population_mean"].view(32, 2, 2, GRID, GRID)
+    difference = (
+        pair_targets[:, 0, :, MASK[0], MASK[1]]
+        - pair_targets[:, 1, :, MASK[0], MASK[1]]
+    )
+    variance = float(difference.square().mean() / 4)
+    if not math.isfinite(variance) or variance < TEACHER_VARIANCE_MIN:
+        raise ValueError(
+            "fixed teacher fails predeclared nonlocal variance qualification; no retuning"
+        )
+    data["teacher_nonlocal_variance"] = variance
+    data["teacher_hash"] = reference.digest_tensors(
+        {
+            **{"G." + k: v for k, v in teacher.G.state_dict().items()},
+            **{"E." + k: v for k, v in teacher.encoder.state_dict().items()},
+            **{"R." + k: v for k, v in teacher.router.state_dict().items()},
+            "table": teacher.table,
+        }
+    )
+    data["fixture_hash"] = reference.digest_tensors(
+        {k: v for k, v in data.items() if isinstance(v, torch.Tensor)}
+    )
+    return data
+
+
+def draw_panel(loop):
+    streams = loop.streams
+    d_ids = torch.randint(256, (16,), generator=streams["d_data"])
+    extras = torch.randint(256, (48,), generator=streams["g_data"])
+    panel = {
+        "d_indices": d_ids,
+        "g_indices": torch.cat((d_ids, extras)),
+        "d_gaussian": torch.randn(16, 2, GRID, GRID, generator=streams["d_gaussian"]),
+        "g_gaussian": torch.randn(64, 2, GRID, GRID, generator=streams["g_gaussian"]),
+    }
+    loop.caller_history.append(reference.digest_tensors(panel))
+    return panel
+
+
+def paired_decomposition(prediction, target, variance):
+    """Descriptive algebra on existing clean tensors; no extra prediction/gate."""
+    if (
+        prediction.shape != target.shape
+        or prediction.ndim != 5
+        or prediction.shape[1] != 2
+    ):
+        raise ValueError(
+            "require paired [pairs,plus-minus,channels,height,width] tensors"
+        )
+    if (
+        not all(bool(torch.isfinite(x).all()) for x in (prediction, target))
+        or not math.isfinite(variance)
+        or variance <= 0
+    ):
+        raise ValueError("finite paired tensors and positive variance required")
+    p, t = prediction.double(), target.double()
+    pm, tm = p.mean(1), t.mean(1)
+    ph, th = (p[:, 0] - p[:, 1]) / 2, (t[:, 0] - t[:, 1]) / 2
+    midpoint = float((pm - tm).square().mean())
+    condition = float((ph - th).square().mean())
+    total = float((p - t).square().mean())
+    identity_error = abs(total - midpoint - condition)
+    if identity_error > 1e-6:
+        raise ArithmeticError("exact pair-MSE decomposition failed")
+    return {
+        "pair_MSE": total,
+        "midpoint_loss": midpoint,
+        "conditional_error": condition,
+        "conditional_error_over_V": condition / variance,
+        "alpha": float((ph * th).mean()) / variance,
+        "predicted_contrast_power_over_V": float(ph.square().mean()) / variance,
+        "target_contrast_power_over_V": float(th.square().mean()) / variance,
+        "decomposition_identity_error": identity_error,
+        "scope": "descriptive paired algebra; original campaign gates unchanged",
+    }
+
+
+@torch.no_grad()
+def evaluate(loop):
+    p, data = loop.policy, loop.data
+    context, target = data["population_context"], data["population_mean"]
+    live = p.routed_generate(context, sigma=0, perturb=False)
+    served = p.served_model()
+    serving = served.routed_forward(context)
+    require_finite_tree((live, serving), "evaluation predictions")
+    error = (live - target).square()
+    return {
+        "live_mask_error": float(error[:, :, MASK[0], MASK[1]].mean()),
+        "live_full_error": float(error.mean()),
+        "served_mask_error": float(
+            (serving - target).square()[:, :, MASK[0], MASK[1]].mean()
+        ),
+        "served_source": served.source,
+        "codeblind_mask_lower_bound": data["teacher_nonlocal_variance"],
+        "metric": "fixed64remote-conditioned maskMSE, evaluation only",
+        "paired_decomposition": paired_decomposition(
+            live.reshape(-1, 2, 2, GRID, GRID)[:, :, :, MASK[0], MASK[1]],
+            target.reshape(-1, 2, 2, GRID, GRID)[:, :, :, MASK[0], MASK[1]],
+            data["teacher_nonlocal_variance"],
+        ),
+    }
+
+
+# Reuse the immutable published benchmark's public factory/native GAN update.
+# Only fixed fixture architecture/draw/evaluation globals differ. Candidate
+# arms use this SAME benchmark module; no ParticleGAN package defaults change.
+reference.Encoder = PooledEncoder
+reference.Critic = Critic16
+reference.fixture = fixture
+reference.draw_panel = draw_panel
+reference.evaluate = evaluate
+reference.STEPS = STEPS
+
+
+def make_loop(g_batch, data):
+    """Same immutable public factory, install calibration BEFORE policy/EMA creation."""
+    if g_batch not in (16, 64):
+        raise ValueError("the frozen arms are G16 and G64")
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(reference.SEEDS["constructor"])
+        G = NormalizedGenerator(data["target_mean"], data["target_std"])
+        E, D, R, prior = (
+            PooledEncoder(),
+            Critic16(),
+            reference.Router(),
+            ParticlePrior(128, 4),
+        )
+    for module, role in (
+        (G, "generator"),
+        (E, "encoder"),
+        (D, "critic"),
+        (R, "router"),
+    ):
+        init.deterministic_orthogonal_(module, seed=reference.SEEDS[role + "_init"])
+    init.deterministic_orthogonal_(prior)
+    recipe = get_recipe(
+        "e22_routed",
+        num_particles=128,
+        z_dim=4,
+        batch_size=16,
+        lr=0.000204,
+        d_lr_mult=1.5,
+        prior_lr_mult=10.0,
+        output_noise_std=1.3,
+        betas=(0.0, 0.999),
+        birth_death_backend="auto",
+        reopen_guard="settled",
+    )
+    opt_g = recipe.make_generator_optimizer(
+        [
+            {"params": [v for v in G.parameters() if v.requires_grad]},
+            {"params": list(E.parameters())},
+            {"params": [prior.z], "lr": recipe.lr * recipe.prior_lr_mult},
+        ],
+        latent_table=prior.z,
+        foreach=False,
+    )
+    opt_d = recipe.make_critic_optimizer(D, ema_critic=deepcopy(D), foreach=False)
+    rows = reference.RoutedRows(
+        model_forward=reference.routed_forward,
+        features=reference.paired_features,
+        sites=("global",),
+        probe_interval=16,
+        probe_budget=8,
+        reservoir_size=64,
+        min_observations=8,
+    )
+    p = E22Policy(
+        recipe,
+        G,
+        D,
+        prior=prior,
+        encoder=E,
+        router=R,
+        generator_optimizer=opt_g,
+        critic_optimizer=opt_d,
+        roles=[["generator", "encoder", "table"], ["critic"]],
+        routed_rows=rows,
+        seed=21,
+    )
+    p.attach_penalty(recipe.make_critic_penalty(opt_d, collect_stats=True))
+    hashes = {
+        name: reference.digest_tensors(module.state_dict())
+        for name, module in (
+            ("generator", p.G),
+            ("encoder", p.encoder),
+            ("critic", p.D),
+            ("router", p.router),
+        )
+    }
+    hashes["table"] = reference.digest_tensors({"table": p.table})
+    loop = reference.Loop(
+        p,
+        g_batch,
+        data,
+        {
+            name: torch.Generator().manual_seed(reference.SEEDS[name])
+            for name in ("d_data", "d_gaussian", "g_data", "g_gaussian")
+        },
+        [],
+        reference.digest_tensors(p.G.host.state_dict()),
+        {},
+        hashes,
+        {
+            "min_dense_rows": 128,
+            "finite_steps": 0,
+            "ka2_applied_calls": 0,
+            "critic_score_active_gradients": True,
+            "generator_live_gradients": True,
+            "ownership": True,
+            "frozen_host": True,
+        },
+    )
+    loop.initial = evaluate(loop)
+    native_health(p)
+    return loop
+
+
+def update(loop):
+    native_health(loop.policy)
+    row = reference.update(loop)
+    native_health(loop.policy)
+    for module in (loop.policy.G, loop.policy.ema_G):
+        if module is not None and not all(
+            torch.equal(getattr(module, "target_" + name), loop.data["target_" + name])
+            for name in ("mean", "std")
+        ):
+            raise RuntimeError("frozen fit calibration changed")
+    return row
+
+
+def checkpoint(loop):
+    return {
+        "schema": 1,
+        "base": reference.checkpoint(loop),
+        "fixture_hash": loop.data["fixture_hash"],
+        "teacher_hash": loop.data["teacher_hash"],
+        "execution_limit": STEPS,
+        "calibration": {
+            "mean": loop.data["target_mean"].clone(),
+            "std": loop.data["target_std"].clone(),
+        },
+    }
+
+
+def restore(loop, state):
+    if set(state) != {
+        "schema",
+        "base",
+        "fixture_hash",
+        "teacher_hash",
+        "execution_limit",
+        "calibration",
+    }:
+        raise ValueError("complete deterministic fixture/caller checkpoint required")
+    if (
+        state["schema"] != 1
+        or state["execution_limit"] != STEPS
+        or state["fixture_hash"] != loop.data["fixture_hash"]
+        or state["teacher_hash"] != loop.data["teacher_hash"]
+    ):
+        raise ValueError("different fixed fixture/budget is not exact replay")
+    calibration = state["calibration"]
+    if set(calibration) != {"mean", "std"} or not all(
+        torch.equal(calibration[name], loop.data["target_" + name])
+        for name in ("mean", "std")
+    ):
+        raise ValueError("different fit-only calibration is not exact replay")
+    base = state["base"]
+    if set(base) != {"policy", "caller_streams", "g_batch", "health", "caller_history"}:
+        raise ValueError("complete public policy and callers required")
+    if set(base["caller_streams"]) != set(loop.streams):
+        raise ValueError("all four caller streams required")
+    step = base["policy"]["completed_steps"]
+    if base["health"]["finite_steps"] != step or len(base["caller_history"]) != step:
+        raise ValueError("caller/native/health clocks differ")
+    reference.restore(loop, deepcopy(base))
+    native_health(loop.policy)
+    for module in (loop.policy.G, loop.policy.ema_G):
+        if module is not None and not all(
+            torch.equal(getattr(module, "target_" + name), calibration[name])
+            for name in ("mean", "std")
+        ):
+            raise ValueError("native checkpoint calibration differs")
+
+
+def quality_gates(arms, variance):
+    if not math.isfinite(variance) or variance < TEACHER_VARIANCE_MIN:
+        raise ValueError(
+            "teacher must satisfy the fixed nonlocal variance qualification"
+        )
+    for arm in arms.values():
+        values = [arm["initial"]["live_mask_error"]] + [
+            arm["evaluations"][str(step)]["live_mask_error"] for step in ENDPOINTS
+        ]
+        if any(not math.isfinite(value) or value < 0 for value in values):
+            raise ValueError("held errors must be finite and nonnegative")
+    checks = {}
+    for step in ENDPOINTS:
+        for name in ("G16", "G64"):
+            checks[name + f"_converges_at{step}"] = (
+                arms[name]["evaluations"][str(step)]["live_mask_error"]
+                <= 0.9 * arms[name]["initial"]["live_mask_error"]
+            )
+        checks[f"G64_better_at{step}"] = (
+            arms["G64"]["evaluations"][str(step)]["live_mask_error"]
+            <= 0.9 * arms["G16"]["evaluations"][str(step)]["live_mask_error"]
+        )
+    for name in ("G16", "G64"):
+        checks[name + "_beats_codeblind_bound"] = (
+            arms[name]["evaluations"][str(STEPS)]["live_mask_error"] <= 0.5 * variance
+        )
+    return checks
+
+
+def campaign_passes(summary):
+    required = {
+        "source_exact",
+        "teacher_qualified",
+        "initial_owners_match",
+        "caller_streams_match",
+        "fixed400_complete",
+        "within60s",
+    }
+    required |= {
+        n + suffix
+        for n in ("G16", "G64")
+        for suffix in (
+            "_native_health",
+            "_converges_at100",
+            "_converges_at200",
+            "_beats_codeblind_bound",
+        )
+    }
+    required |= {"G64_better_at100", "G64_better_at200"}
+    return (
+        summary.get("failure") is None
+        and summary.get("committed_updates") == {"G16": 200, "G64": 200}
+        and all(summary.get("checks", {}).get(key) is True for key in required)
+    )
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    if args.output.exists() and any(args.output.iterdir()):
+        parser.error("output must be new or empty; completed evidence is immutable")
+    args.output.mkdir(parents=True, exist_ok=True)
+    protocol_path = Path(__file__).with_name("routed_remote_conditioning_protocol.json")
+    summary = {
+        "status": "running",
+        "checks": {},
+        "arms": {},
+        "committed_updates": {"G16": 0, "G64": 0},
+        "failure": None,
+    }
+    started = time.monotonic()
+    previous_alarm = signal.getsignal(signal.SIGALRM)
+
+    def stop(signum, frame):
+        raise TimeoutError("fixed combined60second budget exhausted")
+
+    signal.signal(signal.SIGALRM, stop)
+    signal.setitimer(signal.ITIMER_REAL, SECONDS)
+    try:
+        torch.set_num_threads(1)
+        torch.use_deterministic_algorithms(True)
+        protocol = json.loads(protocol_path.read_text())
+        summary["identity"] = reference.execution_identity(protocol)
+        summary["checks"]["source_exact"] = True
+        (args.output / "protocol.json").write_bytes(protocol_path.read_bytes())
+        (args.output / "source.py").write_bytes(Path(__file__).read_bytes())
+        data = fixture()
+        summary["teacher_nonlocal_variance"] = data["teacher_nonlocal_variance"]
+        summary["teacher_hash"] = data["teacher_hash"]
+        summary["fixture_hash"] = data["fixture_hash"]
+        summary["calibration"] = {
+            "mean": data["target_mean"].flatten().tolist(),
+            "std": data["target_std"].flatten().tolist(),
+            "law": "fit-only population channel std clamp1e-4",
+        }
+        summary["checks"]["teacher_qualified"] = (
+            data["teacher_nonlocal_variance"] >= TEACHER_VARIANCE_MIN
+        )
+        loops = {
+            name: make_loop(batch, data) for name, batch in (("G16", 16), ("G64", 64))
+        }
+        summary["checks"]["initial_owners_match"] = (
+            loops["G16"].initial_hashes == loops["G64"].initial_hashes
+        )
+        for name, loop in loops.items():
+            with (args.output / (name + ".jsonl")).open("w") as log:
+                evaluations = {}
+                for _ in range(STEPS):
+                    row = update(loop)
+                    summary["committed_updates"][name] = loop.policy.completed_steps
+                    log.write(
+                        json.dumps(reference.json_safe(row), allow_nan=False) + "\n"
+                    )
+                    log.flush()
+                    if loop.policy.completed_steps in ENDPOINTS:
+                        evaluations[str(loop.policy.completed_steps)] = evaluate(loop)
+                        print(
+                            json.dumps(
+                                {
+                                    "arm": name,
+                                    "step": loop.policy.completed_steps,
+                                    **evaluations[str(loop.policy.completed_steps)],
+                                }
+                            ),
+                            flush=True,
+                        )
+                native_health(loop.policy)
+                torch.save(checkpoint(loop), args.output / (name + "-checkpoint.pt"))
+                control = loop.policy.routed_control.diagnostics()
+                summary["arms"][name] = {
+                    "steps": loop.policy.completed_steps,
+                    "initial": loop.initial,
+                    "evaluations": evaluations,
+                    "health": deepcopy(loop.health),
+                    "control": reference.json_safe(control),
+                }
+                summary["checks"][name + "_native_health"] = (
+                    loop.health["finite_steps"] == STEPS
+                    and loop.health["min_dense_rows"] == 128
+                    and loop.health["ka2_applied_calls"] > 0
+                    and control["rows"]["counters"]["updates"] == STEPS
+                    and control["counters"]["evals"] > 0
+                    and control["counters"]["probes"] > 0
+                )
+        summary["checks"].update(
+            quality_gates(summary["arms"], data["teacher_nonlocal_variance"])
+        )
+        summary["checks"]["caller_streams_match"] = loops[
+            "G16"
+        ].caller_history == loops[
+            "G64"
+        ].caller_history and reference.caller_stream_hashes(
+            loops["G16"]
+        ) == reference.caller_stream_hashes(loops["G64"])
+        summary["checks"]["fixed400_complete"] = summary["committed_updates"] == {
+            "G16": 200,
+            "G64": 200,
+        }
+        summary["checks"]["source_exact"] = reference.source_readback(protocol)
+        summary["checks"]["within60s"] = time.monotonic() - started <= SECONDS
+    except (Exception, KeyboardInterrupt) as exc:  # noqa: BLE001
+        summary["failure"] = repr(exc)
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous_alarm)
+        summary["elapsed_seconds"] = time.monotonic() - started
+        summary["status"] = "passed" if campaign_passes(summary) else "failed"
+        (args.output / "result.json").write_text(
+            json.dumps(reference.json_safe(summary), indent=2, allow_nan=False) + "\n"
+        )
+    print(
+        json.dumps(
+            {
+                "status": summary["status"],
+                "failure": summary["failure"],
+                "updates": summary["committed_updates"],
+            }
+        ),
+        flush=True,
+    )
+    return 0 if summary["status"] == "passed" else (1 if summary["failure"] else 2)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -29,7 +29,7 @@ the finished side is held. The indicator marks active downward thrust.
 - [Report](report.json), [configuration/cohorts](config.json),
   [slow validation](slow_validation.json), [slow training](slow_metrics.json),
   [validation candidates](validation.json), [world-model errors](world_metrics.json),
-  [run log](run.log), [artifact hashes](manifest.json)
+  [run log](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/lunar_fast/run.log), [artifact hashes](manifest.json)
 - [World model](world.pt), [slow policy](slow.pt), [fast policy](fast.pt)
 
 Scoring version `box2d-active-ground-contacts-v1` requires an enabled, touching

@@ -1,0 +1,26 @@
+{
+  "GPU_launches": 0,
+  "artifact_sha256": {
+    "MEDIA-ARCHIVE-APPEND.json": "cf74d5adb38df28bb386defbdb3197d0547ce1e2d73de058ef2072c4fa7851cb",
+    "MEDIA-MANIFEST.json": "b6215f7ea6c512f7f1d2e025db4d7c62b32d785686b2aaf6c271d0e6555de10e",
+    "README.md": "491c63afa5b8b38f4241f52b779b30cfa9ef37c7a9b0a99486262f5d8fdcda36",
+    "RENDER-RECEIPT.json": "5da4f169af25044d949f2d0b992e9f27925cc05d43d0dda2fb146feb29255eca",
+    "atlas-vs-e22-convergence.gif": "0fe379c9400c34e3799728ea50ca269a2032c781afa34a78cecb28ca1f25e8c0",
+    "atlas-vs-e22-convergence.mp4": "e331f2029363e8be75c1fb4fecffdd678490c973813b9a455c1c6d9048600e9b",
+    "poster.png": "a89840fd77de91dda3c05192b4f622004f62661f1a9a01801d0f032522fe01c7",
+    "poster.svg": "d178331f44a29254bf9e129be67bb2eda821f9b2def5f75bd0d04a77479f04ec",
+    "render_convergence.py": "f44697a97af51285c1899f894981c4445f2caee95675334b95ae20c73dadbb37"
+  },
+  "input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/COMPLETION.json": "b64e220f44ae6a81886c7c953bec9fb2d53823892f7b530ab41845ef2971807b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/dense-frames.npz": "6d466cbe42f8b71cf3b29eb6534a3430dd80cc8b9d1cf7ce2638e871ba79e619",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/original-frames.npz.verdict.json": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/dense-frames.npz": "3beec1243aa59a582d27c5c1b665b1de8b85c199499d109692399e8aa5e705a9",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/original-frames.npz.verdict.json": "3be57be0e15ffccc40eb8b1b3a8dbb2dc065d65893f0d7bda9c9931058251881",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/render_convergence.py": "f44697a97af51285c1899f894981c4445f2caee95675334b95ae20c73dadbb37"
+  },
+  "media_append_entries": 8,
+  "new_training_updates": 0,
+  "status": "COMPLETE",
+  "validity": "VALID"
+}

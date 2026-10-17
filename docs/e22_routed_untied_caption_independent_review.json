@@ -1,0 +1,358 @@
+{
+  "review_complete": true,
+  "independent_saved_artifact_review": "PASS",
+  "scientific_status": "FAIL",
+  "failed_frozen_bounds": [
+    "ordinary_absolute_gain_gt0005",
+    "no_source_harm_gt1e6_vs_both"
+  ],
+  "gate_checks": {
+    "ordinary_absolute_gain_gt0005": false,
+    "ordinary_relative_gain_gte001": true,
+    "tied_relative_gain_gte001": true,
+    "no_source_harm_gt1e6_vs_both": false,
+    "code_absolute_gain_gt0001": true,
+    "code_relative_gain_gte001": true,
+    "code_beneficial_each_source": true,
+    "bank_live_at_least90percent": true,
+    "query_live_at_least90percent": true,
+    "C_live_all_six_sites": true,
+    "particle_Up_live_all_six_sites": true
+  },
+  "scores": {
+    "5120": {
+      "untied": {
+        "rmse": 0.050218780784111273,
+        "by_source": {
+          "4": 0.0499725502239619,
+          "5": 0.05006714436804393,
+          "15": 0.05075232328463551,
+          "16": 0.05012141716803165,
+          "17": 0.050478611329460854,
+          "18": 0.04991528783977917
+        },
+        "contexts": 240,
+        "coordinates_per_context": 4096,
+        "source_counts": {
+          "4": 40,
+          "5": 40,
+          "15": 40,
+          "16": 40,
+          "17": 40,
+          "18": 40
+        }
+      },
+      "zero_code": {
+        "rmse": 0.05200313527619684,
+        "by_source": {
+          "4": 0.0512779372635957,
+          "5": 0.05118009726562433,
+          "15": 0.05198251459529273,
+          "16": 0.05204526334881936,
+          "17": 0.05457376977533509,
+          "18": 0.050871796282512864
+        },
+        "contexts": 240,
+        "coordinates_per_context": 4096,
+        "source_counts": {
+          "4": 40,
+          "5": 40,
+          "15": 40,
+          "16": 40,
+          "17": 40,
+          "18": 40
+        }
+      },
+      "ordinary_native_game": {
+        "rmse": 0.05008802608216603,
+        "by_source": {
+          "4": 0.04984913570912611,
+          "5": 0.05009217197977341,
+          "15": 0.050909852077382876,
+          "16": 0.04995428652503159,
+          "17": 0.050260331591837036,
+          "18": 0.04945053491885633
+        },
+        "contexts": 240,
+        "coordinates_per_context": 4096,
+        "source_counts": {
+          "4": 40,
+          "5": 40,
+          "15": 40,
+          "16": 40,
+          "17": 40,
+          "18": 40
+        }
+      },
+      "tied_particle_BF16": {
+        "rmse": 0.05036492596677357,
+        "by_source": {
+          "4": 0.050202588143767254,
+          "5": 0.05020436121952248,
+          "15": 0.05088827488103703,
+          "16": 0.050514452908880424,
+          "17": 0.05048042361941223,
+          "18": 0.04989365913812781
+        },
+        "contexts": 240,
+        "coordinates_per_context": 4096,
+        "source_counts": {
+          "4": 40,
+          "5": 40,
+          "15": 40,
+          "16": 40,
+          "17": 40,
+          "18": 40
+        }
+      }
+    },
+    "6400": {
+      "untied": {
+        "rmse": 0.050191642154460196,
+        "by_source": {
+          "4": 0.05021613000071535,
+          "5": 0.049972866178423184,
+          "15": 0.05090465330935006,
+          "16": 0.05012352339607258,
+          "17": 0.05062868337879526,
+          "18": 0.04928837266314359
+        },
+        "contexts": 240,
+        "coordinates_per_context": 4096,
+        "source_counts": {
+          "4": 40,
+          "5": 40,
+          "15": 40,
+          "16": 40,
+          "17": 40,
+          "18": 40
+        }
+      },
+      "zero_code": {
+        "rmse": 0.05244421163318882,
+        "by_source": {
+          "4": 0.051764382506321746,
+          "5": 0.05145911544159304,
+          "15": 0.05224360927154094,
+          "16": 0.052752121913188725,
+          "17": 0.055003496680341254,
+          "18": 0.05135381603681
+        },
+        "contexts": 240,
+        "coordinates_per_context": 4096,
+        "source_counts": {
+          "4": 40,
+          "5": 40,
+          "15": 40,
+          "16": 40,
+          "17": 40,
+          "18": 40
+        }
+      },
+      "ordinary_native_game": {
+        "rmse": 0.05039700311972803,
+        "by_source": {
+          "4": 0.04983227780106905,
+          "5": 0.05036281196561894,
+          "15": 0.050793626447399085,
+          "16": 0.0510109552540659,
+          "17": 0.05042713559141212,
+          "18": 0.04994469694779572
+        },
+        "contexts": 240,
+        "coordinates_per_context": 4096,
+        "source_counts": {
+          "4": 40,
+          "5": 40,
+          "15": 40,
+          "16": 40,
+          "17": 40,
+          "18": 40
+        }
+      },
+      "tied_particle_BF16": {
+        "rmse": 0.050601121474222424,
+        "by_source": {
+          "4": 0.050341989236878236,
+          "5": 0.05008877429047513,
+          "15": 0.050744140254869154,
+          "16": 0.05123127840646671,
+          "17": 0.05061958497749429,
+          "18": 0.05057356756039124
+        },
+        "contexts": 240,
+        "coordinates_per_context": 4096,
+        "source_counts": {
+          "4": 40,
+          "5": 40,
+          "15": 40,
+          "16": 40,
+          "17": 40,
+          "18": 40
+        }
+      }
+    }
+  },
+  "endpoint_comparisons": {
+    "5120": {
+      "candidate_minus_ordinary": 0.0001307547019452418,
+      "candidate_minus_tied": -0.00014614518266229531,
+      "harm_gt1e6_vs_ordinary": [
+        "4",
+        "16",
+        "17",
+        "18"
+      ],
+      "harm_gt1e6_vs_tied": [
+        "18"
+      ],
+      "zero_minus_live": 0.0017843544920855686,
+      "relative_code_gain": 0.03553161714053643
+    },
+    "6400": {
+      "candidate_minus_ordinary": -0.0002053609652678326,
+      "candidate_minus_tied": -0.0004094793197622279,
+      "harm_gt1e6_vs_ordinary": [
+        "4",
+        "15",
+        "17"
+      ],
+      "harm_gt1e6_vs_tied": [
+        "15",
+        "17"
+      ],
+      "zero_minus_live": 0.002252569478728622,
+      "relative_code_gain": 0.04487937397618014
+    }
+  },
+  "fixed_games_saved_scalars_only": {
+    "5120": {
+      "ordinary_native_game@800": 2.5724387168884277,
+      "ordinary_native_game@6400": 2.5610504150390625,
+      "particle_native_game@800": 2.85955548286438,
+      "particle_native_game@6400": 2.553273916244507
+    },
+    "6400": {
+      "ordinary_native_game@800": 2.578878879547119,
+      "ordinary_native_game@6400": 2.562349557876587,
+      "particle_native_game@800": 2.8604226112365723,
+      "particle_native_game@6400": 2.5537023544311523
+    }
+  },
+  "maximum_accuracy_difference": 6.938893903907228e-18,
+  "trace": {
+    "quality_rows": 6400,
+    "fixed_batch_draws": 6400,
+    "CPU7_43_state_pairs": 6400,
+    "live_post_first": {
+      "bank": 6399,
+      "query": 6399
+    },
+    "live_denominator": 6399,
+    "structural_probes": 64,
+    "accepted_proposals": 0,
+    "accepted_row_moves": 0,
+    "native_DV12_row_hashes_distinct": 6400,
+    "final_native_DV12_hash_exact": true
+  },
+  "retained_learned_site_norms": {
+    "blocks.0.self_attn.qkv": {
+      "C_norm": 1.1300595264548436,
+      "particle_Up_norm": 2.500978070196392
+    },
+    "blocks.0.cross_attn.proj": {
+      "C_norm": 1.0785897581216963,
+      "particle_Up_norm": 1.2997996457179424
+    },
+    "blocks.0.self_attn.proj": {
+      "C_norm": 1.0858903416295826,
+      "particle_Up_norm": 1.3120979618017643
+    },
+    "blocks.0.cross_attn.kv": {
+      "C_norm": 1.1082457745362349,
+      "particle_Up_norm": 2.2864643750703206
+    },
+    "ctx_proj": {
+      "C_norm": 1.0533668507986653,
+      "particle_Up_norm": 0.7237614636327849
+    },
+    "blocks.0.cross_attn.q": {
+      "C_norm": 1.1270583808441466,
+      "particle_Up_norm": 1.1061371675996219
+    }
+  },
+  "provenance": {
+    "report_sha256": "18f64bfc77e22ffcd0490a368b564a157b3dcc25890f975c55e432817dfa4b4b",
+    "completion_sha256": "28e166072cdceb376b6c44053c33cdd5ad606c9d1af5da4ddcdb02b11694cef1",
+    "external_sha256": "3be9e0f2cca6b24c236ed0b1a21ae11f991dfbb7343dae1bec5bcb559699c3a5",
+    "card_sha256": "731ea9e7ab8b49ed5b2dd3ce6590e66f0729b30815a802b29b47ebbc48e19b28",
+    "reviewer_sha256": "19d390cd6295cf60b59a761d3ea16a259712996ca79b9c99d7d4186e2fdfa3f9",
+    "current_native_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+    "bound_files_unchanged": {
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/report.json": "e6ec5b485ddb3ad9f1851bef12cd29dc76595513e2383c1204fa9afe9f81b223",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/data.pt": "fc18f90e1422a4a03287e368071cd71cab0d38c4e6cba1337c001b2d82598afc",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/panels.pt": "acf9e4849f3950a08b2e435d5dd7e2f5521786332fac6c64e74a01ff6453eb87",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/examples/e22_routed_caption_transfer.py": "84f3e2a91a010f6585b59ff0068473ce13c74bd58038b68d30481628b230aedb",
+      "/ml2/hypergan/supra-e22-neutral-init/supra/particle_adapter.py": "1a9814217dfaca2b37552b01b0441a6820330212031ccd931a02f712fdaac7dd",
+      "/ml2/hypergan/supra-e22-neutral-init/vendor/particle-sliders/conceptmod/textsliders/supra_model.py": "640851f4570d0f9eacccac70022f06668ddf92dcf8629e978a76443db60acdc4",
+      "/ml2/hypergan/supra-e22-neutral-init/supra/particle_game.py": "6a10cc15ea44651953fd46fefa3f097a832f594cca98084f17a67f3c4a94f35d",
+      "/ml2/hypergan/supra-e22-neutral-init/supra/particle_training_data.py": "4a0787d187de02e2619e8956c1b2b6a74fe268db00ee16a89601e5d6b229a78c",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/judge-ordinary_native_game-800.pt": "2c4dfcff0cbfa526f7309579d3527e1fc6f3863a325519390f7ce36a8cae1e95",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/judge-ordinary_native_game-6400.pt": "3404866298d8fcb45a135e746b8ee22c3b0529b3c7c33b8dd334c5d5ff8227b4",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/judge-particle_native_game-800.pt": "4add57101809b7fc4a103c60ecd0d4a641ff358ad3b73e4f0ba3fb49211f9ce4",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/judge-particle_native_game-6400.pt": "84de932c042664808b963d215b93d724e209fd33510b992659e1c33301223f5e",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/ordinary_native_game/step-6400.pt": "a7a2da68814e38208e143b2b101cd7eea8fbd8ca1e61cc22c395569970335ebb",
+      "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/runs/caption-BF16-DownUp-accuracy-v1/step-6400.pt": "586c232f22b73de2a2b01e7c6d44d4ab61c6a9fd96bd42b8c263b51cdd9fe813",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-recovered-v1/particle_hb_neutral_native_game/step-0.pt": "82ed38722f19a209eba27e17db171df6f6451a9a395464b3d86dae8ea23498bf",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/ordinary_native_game/residual-5120.pt": "5b293d0fe433c7783b7356ed9d6622cde191f5bb81e6b9570ef7d7e7dc6b8bc0",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/ordinary_native_game/residual-6400.pt": "0b7b878476381ed30e3f1decfef8a399a8840ccf52677151f6c04064c5683cd5",
+      "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/runs/caption-BF16-DownUp-accuracy-v1/endpoint-5120.pt": "b7b5e00f4148e2d06552b5db42af388d538ba606a932bcc47de5137d9f4948ea",
+      "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/runs/caption-BF16-DownUp-accuracy-v1/endpoint-6400.pt": "525105dea35a683cc649c76c5f4459df4e84be4aeec9b0ec8a9f709c6557df6f",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/examples/e22_routed_untied_caption.py": "b2db3275ae9b3ce2dd11bac32e8be861ea2018e795fabb8aa8c86f62e7e27bf2",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/examples/run_e22_routed_untied_caption.py": "30e122585d787f64fb52393f4213979d3d3fd42a4e8be7583f1df284b4b1e84e",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/tests/test_e22_routed_untied_caption.py": "53628b2cd514b5c450084260a0bcb70ca960bc2a1401c8927b6171567c5afd9d",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/examples/render_e22_routed_untied_caption.py": "f8ffce9a3cc02796099a1ffb46df3d1d1f34ebea7672cbfee3bd43b8d6d83faa",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/tests/test_e22_routed_untied_caption_renderer.py": "4d8ec065f28803254fb0d2dc223aef32b80e62408a202d7d8092725c539426b5",
+      "/ml2/hypergan/ParticleGAN-supra-g-clean-caption-develop/examples/e22_routed_g_clean_caption.py": "750d738e6065e199d1ab0dcf1a40771bb91a8c54d440b75598067cc502bfc46e",
+      "/ml2/hypergan/ParticleGAN-supra-g-clean-caption-develop/examples/run_e22_routed_g_clean_caption.py": "cea24a1e90992e1a76368a26ea164a834781835034f6f2dcfbe7e0c0c05c9149",
+      "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/examples/e22_routed_bf16_caption.py": "f5357b4797289a144244f83b7db6bd57b40c028a91181dcead76d3fc7088991f",
+      "/ml2/hypergan/ParticleGAN-supra-bf16-caption-develop/runs/caption-BF16-DownUp-accuracy-v1/report.json": "183158eeb9a07e86a63984d7dd40b4af23bf8a6384783c5e83a556b09019d7d3",
+      "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-pretrained-caption-transfer-v1/ordinary_native_game/residual-0.pt": "3ac506587f603a5cb2bcf4840933af4e1c36f967cc2afb798ab6262730c24f0e",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/docs/e22_routed_untied_caption_v1.json": "731ea9e7ab8b49ed5b2dd3ce6590e66f0729b30815a802b29b47ebbc48e19b28",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1/report.json": "18f64bfc77e22ffcd0490a368b564a157b3dcc25890f975c55e432817dfa4b4b",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1/completion.json": "28e166072cdceb376b6c44053c33cdd5ad606c9d1af5da4ddcdb02b11694cef1",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1.external.json": "3be9e0f2cca6b24c236ed0b1a21ae11f991dfbb7343dae1bec5bcb559699c3a5",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1/train.jsonl": "4cc847a8aef64fc271a0450a073bd4cc6793698d72ee62727c35b4c7dfed7e0f",
+      "/tmp/launch-supra-untied-caption-v1.py": "1080989ddda3f49d22d1af22bbd0080b6b7a068fd470610d9a36c81f58f9b57a",
+      "/tmp/supra-untied-caption-v1-launch-pins.json": "07bd7a90ee0efc06b994143afc2823a7f8547d00c0ab2dcdecfd8d3739d2c9d6",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/docs/e22_routed_untied_caption_preparation.json": "1ef6eb187fae8428a0c3d9d9612c791379d3159bc9fe4b1d774730510758d6ca",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1/step-6400.pt": "86b2e480e45be944e174613f980a24722309d511738fb15b1055b1dfcb3707b6",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1/observed-media.pt": "f2785fa9afb09adc6b4dc079bd14e389226f36f4ea1e7d846960421e9913421d",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1/endpoint-5120.pt": "5631ddaa791557471e1ecb66dc02ed02877d5fe7b77abd19573d3750917a3c83",
+      "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/runs/caption-untied-Up-accuracy-v1/endpoint-6400.pt": "2479e9a943df843793ffec93553b562b43c304e255150a8f6a5467772c7c3130"
+    }
+  },
+  "costs": {
+    "CPU_reduction_seconds_before_write": 3.162815080024302,
+    "CPU_limit_seconds": 60,
+    "actual_GPU_campaign_external_seconds": 710.1254217280075,
+    "actual_GPU_campaign_limit_seconds": 1750
+  },
+  "scope": {
+    "models_constructed": 0,
+    "model_forwards": 0,
+    "native_updates": 0,
+    "CUDA_initialized": false,
+    "limits": [
+      "Physical saved tensors, CPU caller streams, saved scalar games and source identities independently checked. Public class/EMA/teacher and800802 recovery remain bound producer witnesses; no native/host replay.",
+      "Older controls remain provisional. Prior scientific gates/results unchanged. FullSupra quality is ineligible under this actual-caption FAIL."
+    ]
+  },
+  "command": [
+    "/tmp/review_actual_untied_caption_v1.py",
+    "--root",
+    "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop",
+    "--out",
+    "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/docs/e22_routed_untied_caption_independent_review.json"
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "board": "reports/forge/technique-inventory.md",
+  "composition": "Exact existing scientific rows and pins are retained; only the new complete Pure BCAP family row is selected.",
+  "cost_note": "Unique physical paid attempts, including cancelled original work, count once; overlapping per-search campaign totals are not added.",
+  "default_adoption": false,
+  "family_pin": {
+    "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+    "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+    "cohort": "38c2e05b80ccb1949cd578d6ba808da0afc90b199e22d39e9817b2e6abdc0d89",
+    "execution_backend": "cuda",
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "reason": "Initial finite Pure BCAP round: required Tier 1 PASS count descending, then configuration hash ascending. One complete recipe; no calibrated default adoption.",
+    "recipe_sha256": "e5404e93760d0e20cfabf9af6e6eea31694141eb6e6966adf5bdd2005c8a7439",
+    "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+    "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+    "scientific_row_sha256": "251ceee5771b4e2ab2c75dadd32952844aab9805796a261c63b05248f68cad96",
+    "selection_kind": "historical_incumbent",
+    "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+    "task_keys_sha256": "6755f0277a3afc96c320b3c3b51cd3888a4a263a3209b05d5a900ca5c3e99118",
+    "trainer_family": "bcap-pure"
+  },
+  "paid_wall_seconds": 2549.508983234293,
+  "plan_sha256": "805c0108110499671c98f48491e64764eba06d9266403c148c657c1811fb672c",
+  "preserved_family_scientific_rows": {
+    "atlas": "f8085081448551ec953ae687655b7f728783880a39a2c3256097d95ae93a0ed7",
+    "bcap": "f80096afa43674c86183944f7f20d70a295c7d8e6417296466338b874fe36579",
+    "e22": "e52a11334f64cf5dcfe711456c1cea0831fa37fdd60097c8bb504f0f66b058f0",
+    "k3p": "dac00138248531ae613ea8b97b008b6f0745f6ae4328449925c2e7b8f126bf90",
+    "k3p-no-a2": "3cf3186fee0d132f0efb5380336efeab3f641b4fadc8083d8b48d14d85433402",
+    "k3p-no-anchor": "4307ba1e8f2bac4871159a216efde31c73d11ba1872a670916a3489d63698719",
+    "k3p-no-penalty": "aae0815fb3c2b4b31bb840f3f6ee281a78708f0cea06c8ea6ea7d12befeab973",
+    "k3p-no-training-noise": "e5733efa9a715fdd3bd774ff2cf475ccc58d49e9e63bfbe5e5798ca8b409e3d5",
+    "ka2": "bce6bbe1c461f153d9b5f8d3105e3c349ac5e09f590bd834c2355ec33a8b7fe9",
+    "r1r2": "64a1bd4ef1a63ed55a4d0dfb2120582c5aa5fd57d26c209e724f2cba8b83a8bf",
+    "release07-gan-v3": "4eaba09d2426109bb1e12082cea5f8f93a46199e006736732b05eca749acd34c"
+  },
+  "qualification_input": false,
+  "readout": "reports/forge/pure-bcap/readout.json",
+  "readout_sha256": "3d14d355327e38be0b0f819226310b3bdef1b5f94bad5fa2f4286a27ec4f25e7",
+  "schema_version": 2,
+  "scope": "pure_bcap_initial_recorded_source_selection",
+  "selected_live_measurement_contracts_validated": false,
+  "selection": {
+    "all_trials_terminal": true,
+    "calibration_status": "provisional",
+    "default_adoption": false,
+    "independent_confirmation": "not_performed",
+    "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+    "qualified": false,
+    "required_pass_count": 3,
+    "required_passes_by_tier": [
+      3
+    ],
+    "required_task_bindings": [
+      {
+        "compatibility_key": "46a625d9d0c69b69766c7832935df82f30f232ca376126b70bac4c4469de734c",
+        "qualification_tier": 1,
+        "task": "gaussian1d_acquisition"
+      },
+      {
+        "compatibility_key": "1e719b84ee800f13b5933a1a9681adf46c485730ce4c511e9ec0767534e57295",
+        "qualification_tier": 1,
+        "task": "two_pole"
+      },
+      {
+        "compatibility_key": "f5c538913c8770c3abd0d81666a74d3293aa81e5280dd358813cfbce17072ba5",
+        "qualification_tier": 1,
+        "task": "unused_token_hold"
+      },
+      {
+        "compatibility_key": "cd9854eec8732e023137ee6639645d1b2a9a9c8536f12b550439ef29120448cd",
+        "qualification_tier": 1,
+        "task": "ae_gan_hold"
+      },
+      {
+        "compatibility_key": "da255498fd77bfc26e0fdba796fc753f7921caf09a19d491a1287ed5f6bd8758",
+        "qualification_tier": 1,
+        "task": "ring16_acquisition"
+      },
+      {
+        "compatibility_key": "b2981c5c1bf94b43ffde558ec56becfc73375f93ca7f858d92662407cf4ad982",
+        "qualification_tier": 1,
+        "task": "five_word_joint_acquisition"
+      }
+    ],
+    "required_total": 6,
+    "selected_candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+    "selected_configuration_id": "5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+    "selection_complete": true,
+    "selection_kind": "best_observed",
+    "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+    "tuning_through_tier": 1
+  },
+  "selection_scope": "One complete executed source cohort; no latest-checkout or default qualification.",
+  "source_cohorts": [
+    {
+      "candidate_ids": [
+        "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+        "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c"
+      ],
+      "source_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33",
+      "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac"
+    },
+    {
+      "candidate_ids": [
+        "bcap-pure--6532492dc44ac33fea7a61332f0d62faba0bc351c68dd07fde38eb40c7a8537c",
+        "bcap-pure--af8db09ebc6580e3d94cd29b89b2624cb6c8107947e4b44aa714d23a64ea096c",
+        "bcap-pure--b097e283dc35eb5ff38878e138eacc4845dc3fc6e1a9d5d14bba34899d763657",
+        "bcap-pure--fd25cf2436cc9b68ebf995ebe006a326976082bc711a57a6e116f17efb7b991d",
+        "bcap-pure--06f49dc26a020d0ffb6b887e7156a203bc22927b2a6b96a8e5021bb16d4d2cf7",
+        "bcap-pure--dc8f9b409a2b40ab12abbdc38707c69f25bf7cfab45895c1369700a8236b3844",
+        "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+        "bcap-pure--08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d"
+      ],
+      "source_commit": "44cc66d78495cb913e0ea064840e2de37c8a4ae5",
+      "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72"
+    }
+  ],
+  "unique_paid_attempts": 109
+}

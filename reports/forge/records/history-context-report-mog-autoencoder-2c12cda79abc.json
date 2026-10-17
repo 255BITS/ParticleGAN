@@ -1,0 +1,104 @@
+{
+  "candidate_id": "context:report/mog-autoencoder",
+  "candidate_revision": "f955fcf35ba8326c8909aa9a548a78b3fb521376e98a7d9da621dd84be08dcfa",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Fixed-sigma particle routing on 100 Gaussians",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/mog-autoencoder",
+      "narrative_sources": [
+        {
+          "git_blob": "eaf982fedb6d5444424245f39d155a26517446e9",
+          "path": "reports/mog-autoencoder/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "55d908f7768cd05e21818d6c4b968ebedce30e62feab046c5b946ee642ad6daa",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-autoencoder/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "e91f6fbb76d3d3b2723c76d0fe32c6c34b21f9a3",
+          "path": "reports/mog-autoencoder/ORACLE.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4a23e99d85565742f8818433c64dc7a608d03431b404cc1c567142db0a348747",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-autoencoder/ORACLE.md"
+        },
+        {
+          "git_blob": "6b849a638f18a267cca9dddb89c4f634607615dd",
+          "path": "reports/mog-autoencoder/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0c95683920b249fba901a3f22c6ec0ee07f450ac4566baaee9ff8c306990b025",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-autoencoder/README.md"
+        },
+        {
+          "git_blob": "3c5eae5e79934a186407960e80f4170e57e950a2",
+          "path": "reports/mog-autoencoder/ROUTING.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cc9bce021f28fa80ad2380ba275e59593c52ca7df9e12d328b03336e1da753ed",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-autoencoder/ROUTING.md"
+        },
+        {
+          "git_blob": "add8d386a8a23a3ff0f622023ee913664695ca90",
+          "path": "reports/mog-autoencoder/encoder-fit/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "280ffc00c5ff7f78227a2c42f43a8419df9226f190cf24e14d3ef6995514e962",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-autoencoder/encoder-fit/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "54e542a7127404f0c3a9972d3e3780c3d0482bf3",
+          "path": "reports/mog-autoencoder/encoder-fit/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3c11bda44264df9e446e79d7713c404e1fbdbbb3e7bdf013eaaf7a834f9cd579",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-autoencoder/encoder-fit/README.md"
+        },
+        {
+          "git_blob": "dcbc8b605e62c80a9be126701f3d72a126325f86",
+          "path": "reports/mog-autoencoder/local_protocol.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d2a506e3c76621773d43898131b79be541331a31b4df823b09a6610f83bef92b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-autoencoder/local_protocol.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Fixed-sigma particle routing on 100 Gaussians\n\nThis scout tests whether reconstruction through a selected MoG particle helps\ngeneration, and whether predicting an offset helps beyond choosing a particle.\nSigma is a fixed buffer throughout every arm. No VAE KL term is used.\n\n**Result:** local routing reaches 93 modes versus 92 for the original bounded\narm, taking first place under the coverage-first ranking. It loses on HQ\n(72.41% versus 82.23%), reconstruction, width, balance, and SW1. Adding usage\nbalancing to local routing reduces coverage to 79 and effective hard particle\nusage from 151 to 119, despite more uniform soft probabilities. Its SW1 of\n0.1929 is the best of all arms, so there is no across-metric winner. Keep the\noriginal bounded arm as the reference for HQ and reconstruction. All final\nmodels generate overly narrow mode cores; neither tested surrogate makes\nthe usage-balancing loss achieve its hard-routing target.\n\n**Frozen-checkpoint follow-up:** exhaustive selection among decoded particle\ncenters removes 33.1% of the bounded model's zero-offset reconstruction error,\n50.3% for local routing, and 60.1% for local balancing. The original bounded\nmodel also has the best available decoded centers. See the [oracle audit](ORACLE.md).\n\n**Encoder fitting follow-up:** with that bounded decoder and prior frozen,\noracle-query supervision reduces zero-offset MSE by 25.42%, c"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-mog-autoencoder-2c12cda79abc",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "6b849a638f18a267cca9dddb89c4f634607615dd",
+    "path": "reports/mog-autoencoder/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "0c95683920b249fba901a3f22c6ec0ee07f450ac4566baaee9ff8c306990b025",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-autoencoder/README.md"
+  },
+  "task_results": []
+}

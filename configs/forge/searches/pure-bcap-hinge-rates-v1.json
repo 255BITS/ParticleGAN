@@ -1,0 +1,27 @@
+{
+  "base_candidate": "bcap-pure-hinge-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 25200,
+    "candidate_budget_seconds": 2520,
+    "id": "pure-bcap-losses-v1"
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.0010625,
+      0.00425
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Pure BCAP with hinge loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+  "id": "pure-bcap-hinge-rates-v1",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "Two constant global rates at one fixed loss. Same task-owned prior, initialization, architecture, duration and gates. Complete all runnable Tier 1 peers, preserve CPU behavioral objectives, stop before higher tiers. Five loss studies share one finite campaign. No seed trials, automatic tuning, criteria edits or default adoption.",
+  "schema_version": 1,
+  "trainer_family": "bcap-pure",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "cuda_software_tests_passed": 4,
+  "oracle_destructive_controls_passed": 10,
+  "saved_cuda_checkpoints_verified": 18,
+  "media_verified": 18,
+  "model_sampling_draws_added": 0,
+  "training_updates_added": 0,
+  "checks": [
+    {
+      "arm": "cloud-n256",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "86e9cc6053e53a40aba21d744481d4a6ea07770c6c7a39262a343923273bcfb2"
+    },
+    {
+      "arm": "cloud-n256",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "cc98eb6885843aad53192c7a28eb0e73dbcb351c4ed3399abc60f4382be2ae9f"
+    },
+    {
+      "arm": "mog025-n256",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "d6df51dca220cc79c2bdd75c63466e4335ecd3995c9db05d540ba176da720bc0"
+    },
+    {
+      "arm": "mog025-n256",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "080ef923a31fddbe11186f7e85ac14e1720a5ad2498e063f802a3ee2907d6299"
+    },
+    {
+      "arm": "mog100-n256",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "e70cf3edc0feb34c737c605f5cbe17e67c3a5d5be138fabe15c4ecf63a2bdb29"
+    },
+    {
+      "arm": "mog100-n256",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "23f5c0c286b3057bdf2146fa8a49d92eb706a7f5e89043099a803e4b19a76524"
+    },
+    {
+      "arm": "cloud-n1024",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "4ecc4f92fd8c1bddb343b5d25930fa57db28c8a8cc7f7941aba7c0e42dd390a2"
+    },
+    {
+      "arm": "cloud-n1024",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "573d53fcbec1c60dc12fb8f210dd4d7aa223696a5937e0db27ed02edb9c647fd"
+    },
+    {
+      "arm": "mog025-n1024",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "f67e4ba50e4f0d0c2a79b8c1976c9288b2087ba14bec32ecfaab99b367854224"
+    },
+    {
+      "arm": "mog025-n1024",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "1c5c96a52d5b35ed24c2e87c13153165f01db2c30756fc7abd6c3f1f2c5f15c6"
+    },
+    {
+      "arm": "mog100-n1024",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "acb47e0a87caefce4c73c8c11aa07413f90fe985605faf1f00aa1c1edc346789"
+    },
+    {
+      "arm": "mog100-n1024",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "16c75b1767856bf7146d579e4143d0c100d86467c4c81e706c0b0c89859605c3"
+    },
+    {
+      "arm": "cloud-n4096",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "995f2b62fea2131199f81af16559ae339e30119adefb29e7cd68ebb297f48ed8"
+    },
+    {
+      "arm": "cloud-n4096",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "93ed6fd59edc658a74561e9a34c9101d82fe9514d2683c82fcaaaba6031ddb8c"
+    },
+    {
+      "arm": "mog025-n4096",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "a834c26d4917c689e05f5817e9adfac2b0208c7268898b0e11ebd3626fbf9e65"
+    },
+    {
+      "arm": "mog025-n4096",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "72a5561061bf1ea3728a312e57fd2f526122f52d63c53e436b986e76b222d945"
+    },
+    {
+      "arm": "mog100-n4096",
+      "task": "gaussian1d_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "093daac1f4f0bc8e500aaba4087827d384cc94c2a8b535d4e25ddc3d50c80c86"
+    },
+    {
+      "arm": "mog100-n4096",
+      "task": "ring16_acquisition",
+      "finite_checkpoint": true,
+      "device": "cuda:0",
+      "frames": 9,
+      "checkpoint_sha256": "3a9f60a31293e0cf1c482f5068458d75f15a0bdf876ddd7abdef0dae300f25a1"
+    }
+  ]
+}

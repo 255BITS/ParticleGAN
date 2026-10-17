@@ -1,5 +1,12 @@
 # GitHub CI common-22 trained-gate audit
 
+The 22/22 results below retain their original source and **noisy served** sampling
+law. The later develop failure used clean native samples after PR #209 while
+the transfer leg still sampled with noise. See the
+[post-merge diagnosis and explicit contract repair](../develop-gates-20261001/README.md).
+The current legacy BCap CI regression is named for that cohort; it does not
+qualify the public clean sampler, E22 or Atlas.
+
 The [κ=1.176 winning recipe](shared22/README.md) passes a fresh local common gate at **22/22**, independently regraded from the published evidence. The [hosted workflow](https://github.com/255BITS/ParticleGAN/actions/workflows/toy100.yml) runs the same gate; the older CI failures below document how the candidate developed.
 
 ## Earlier κ=1.0 affine shared candidate: 20/22

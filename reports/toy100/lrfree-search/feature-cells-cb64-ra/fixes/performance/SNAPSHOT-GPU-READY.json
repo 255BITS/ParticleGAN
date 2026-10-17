@@ -1,0 +1,22 @@
+{
+  "status": "READY_SNAPSHOT_GPU_PARITY",
+  "ready_at": "2026-09-29T23:32:05.403179+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/snapshot_parity.py": "ed03dd51fc9990ba56c13383f6be96cce840026ef3aa30ade3f23387136c563c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/pkg/particlegan/feature_cells.py": "53f86ed38337c8875c374ebbf1e4abf4eb0e561e71d77b5d3c9c87cc03eb3615",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/cpu-snapshot-parity.json": "5aa17350dd884fe2200f4ab12b67ff8afb3974a567da523fbf46260ecac3923a"
+  },
+  "planned_command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "-u",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/snapshot_parity.py",
+    "--device",
+    "cuda",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/gpu-snapshot-parity.json"
+  ],
+  "cpu_parity": "6 fits,10 pools including tied priorities,3 quota transports,4 malformed feature cases; all float fields/indices/RNG bit-exact",
+  "scope": "stable grouped fit, stable parent pools, batched quota metadata; no model/recipe/null-test changes",
+  "gpu_execution_owner": "root only"
+}

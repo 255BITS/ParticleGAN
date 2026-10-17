@@ -1,0 +1,15 @@
+{
+  "authoritative_template": "configs/forge/promotion-template.json",
+  "candidate_id": null,
+  "candidate_revision": null,
+  "eligible_lifecycle": "finished_candidate_with_concluded_tier3_readout",
+  "execution_authorized": false,
+  "is_candidate_claim": false,
+  "kind": "public_default_promotion_contract_template_pointer",
+  "next_action": "Register the canonical template against one finished candidate before any robustness run.",
+  "registration_required_before_execution": true,
+  "schema_version": 1,
+  "seed_policy": "Finished-candidate robustness only. No screening sweeps, replacement seeds, or best-seed selection; publish every result.",
+  "status": "UNREGISTERED_TEMPLATE",
+  "training_allowance_seconds": 0
+}

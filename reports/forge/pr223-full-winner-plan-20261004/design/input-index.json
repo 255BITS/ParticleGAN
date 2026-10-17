@@ -1,0 +1,446 @@
+{
+  "files": {
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/100gaussians/atlas.json": {
+      "bytes": 1798,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/configs/100gaussians/atlas.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/policy_execution.py": {
+      "bytes": 22816,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/policy_execution.py",
+      "sha256": "fa99cb761903211d17fa1eaded93ff3f5d7a92c9d3f15c327a42d92e9c9e197a"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/policy_publication.py": {
+      "bytes": 32419,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/experiments/forge/policy_publication.py",
+      "sha256": "e1979089cef132b94018aa343d00eab89fe277ecb191b7a96aed4b1ebb40ae47"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/__init__.py": {
+      "bytes": 1811,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/__init__.py",
+      "sha256": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/_qr.py": {
+      "bytes": 1951,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/anchor_birth.py": {
+      "bytes": 6401,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/autoencoder.py": {
+      "bytes": 6194,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/birth_death.py": {
+      "bytes": 45396,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/birth_phase.py": {
+      "bytes": 21144,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/capabilities.py": {
+      "bytes": 2285,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/capabilities.py",
+      "sha256": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/conditioning.py": {
+      "bytes": 4878,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/continuous.py": {
+      "bytes": 60875,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/diffusion.py": {
+      "bytes": 5100,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/discriminators.py": {
+      "bytes": 5833,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/feature_cells.py": {
+      "bytes": 125325,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/feature_cells.py",
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/feature_policy.py": {
+      "bytes": 14650,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/feature_policy.py",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/feature_reference.py": {
+      "bytes": 32368,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/feature_reference.py",
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/gan_loss.py": {
+      "bytes": 1016,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/grad_regularizers.py": {
+      "bytes": 14853,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/grad_regularizers.py",
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/init.py": {
+      "bytes": 24559,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/init.py",
+      "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/k3p.py": {
+      "bytes": 33012,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/k3p.py",
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/ka2.py": {
+      "bytes": 16551,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/mean_transport.py": {
+      "bytes": 39633,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/mean_transport.py",
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/output_moments.py": {
+      "bytes": 8387,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/output_moments.py",
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/particle_prior.py": {
+      "bytes": 17899,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/particle_prior.py",
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/policy.py": {
+      "bytes": 85594,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/policy.py",
+      "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/population_continuity.py": {
+      "bytes": 20329,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/population_continuity.py",
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/recipe_schedules.py": {
+      "bytes": 6044,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/recipe_schedules.py",
+      "sha256": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/recipes.py": {
+      "bytes": 54485,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/recipes.py",
+      "sha256": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/routing.py": {
+      "bytes": 64904,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/routing.py",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/row_evidence.py": {
+      "bytes": 9397,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/training.py": {
+      "bytes": 39880,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/training.py",
+      "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/vicreg_loss.py": {
+      "bytes": 2297,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/develop-gates-20261001/atlas19-replay.json": {
+      "bytes": 52406,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/develop-gates-20261001/atlas19-replay.json",
+      "sha256": "1e1b536bfd66e20a240436b417d429059d22ea55c2b6ecfff31e796b96c470fa"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/ARCHIVE.md": {
+      "bytes": 4007,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/ARCHIVE.md",
+      "sha256": "d7c426e09bee85c27452697693aa0d3fd85ef7e3345c7ee615b242495ff16677"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/ORIGINAL_POSITIVE_CHECK.json": {
+      "bytes": 11165,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/ORIGINAL_POSITIVE_CHECK.json",
+      "sha256": "336b8a650cba93a9aae5db8161bd24219485c70669cbf3246fbce3f7e9483349"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/ORIGINAL_POSITIVE_CHECK.md": {
+      "bytes": 4506,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/ORIGINAL_POSITIVE_CHECK.md",
+      "sha256": "a1d7e54fba413ade83ee046744773b00ffc0a7460ef7151589204f0543683fc1"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/PLAN.md": {
+      "bytes": 6475,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/PLAN.md",
+      "sha256": "efbe8459f0b5bf5ecced5900dbc6376fdbc0aaf8dff10e57cf83964438018a30"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/README.md": {
+      "bytes": 11435,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/README.md",
+      "sha256": "89894f1196554b62e6076b93a09f651295bf727fd332c640c15478d407d21c10"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/archive.json": {
+      "bytes": 17395,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/archive.json",
+      "sha256": "7492292bf2840d32d656d3f99b595350d51743ae75670cb7390f20bae1ffe17b"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/export_moving_goal.py": {
+      "bytes": 20239,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/export_moving_goal.py",
+      "sha256": "85e93b98dc3baef73a138f3ec5a1519746eb749bded111b78b96cb144507a4e6"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/export_native_goal.py": {
+      "bytes": 24799,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/export_native_goal.py",
+      "sha256": "df9aab359b9f022d4b07f9ce648646bb668486f73146a39d534c9805b2404ca5"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/publish_results.py": {
+      "bytes": 47963,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/publish_results.py",
+      "sha256": "27ea82b8897168419f964b339054299b63c305914199d156b7583a767c12a8bd"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/results.json": {
+      "bytes": 574945,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/results.json",
+      "sha256": "4cdbec6b54e31ecdaac5ee2cd887258004c5da7c9a7102261e1c1c8c3939b66a"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/run_atlas_baseline.py": {
+      "bytes": 41242,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/continuous-baseline-20261003/run_atlas_baseline.py",
+      "sha256": "4cf4ee67b04af25243b742f67c54b7272e53158fe629455b5772c9ada6f98a9e"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/current_api_fixtures.py": {
+      "bytes": 1885,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/current_api_fixtures.py",
+      "sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12"
+    },
+    "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py": {
+      "bytes": 66175,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra15/screen_current.py",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/grid100/frames.npz.verdict.json": {
+      "bytes": 506,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/grid100/frames.npz.verdict.json",
+      "sha256": "bbc1b65e6a3befc43998651a6716d9894f956cbaccdd376ecddd68a9d8de6785"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/grid100/runner.py": {
+      "bytes": 9250,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/grid100/runner.py",
+      "sha256": "8f70947f6b1bacc3bedcf4eb931f5e4d2b5bd6ae4771d2dfeb21e5a320b89ec9"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/rotated100/frames.npz.verdict.json": {
+      "bytes": 518,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/rotated100/frames.npz.verdict.json",
+      "sha256": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/rotated100/runner.py": {
+      "bytes": 9250,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/rotated100/runner.py",
+      "sha256": "8f70947f6b1bacc3bedcf4eb931f5e4d2b5bd6ae4771d2dfeb21e5a320b89ec9"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/staggered100/frames.npz.verdict.json": {
+      "bytes": 526,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/staggered100/frames.npz.verdict.json",
+      "sha256": "e6d329eef1dc1958b6bd3bfb1a0130432c52173b7c5eb05fa3f712b162b9842d"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/staggered100/runner.py": {
+      "bytes": 9250,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/moving/staggered100/runner.py",
+      "sha256": "8f70947f6b1bacc3bedcf4eb931f5e4d2b5bd6ae4771d2dfeb21e5a320b89ec9"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/grid100/result.json": {
+      "bytes": 12935,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/grid100/result.json",
+      "sha256": "5132616d19ddad1d5ab8255a5d554a75ac5fdf3c7f8d49395a165048bbf2167e"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/rotated100/result.json": {
+      "bytes": 12942,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/rotated100/result.json",
+      "sha256": "24f4da57341fde6fa471e8d7146da4850347f3148fbe5201eab085358d7132da"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/staggered100/result.json": {
+      "bytes": 12908,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/native/staggered100/result.json",
+      "sha256": "79ee39188450f0c73c7b795f3eccedd44cc0d2720df614458b6eba49f5433e17"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_bars4/result.json": {
+      "bytes": 6845,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_bars4/result.json",
+      "sha256": "54c61030b0dc5737e8d3dfa57e0f3c08f934201f6d84d8719c02a652deb165f5"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_blobs4/result.json": {
+      "bytes": 6859,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_blobs4/result.json",
+      "sha256": "f787513c636c056bd87792d485511abf29c57f9054acc906baba5447cc53fd8d"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_intensity2/result.json": {
+      "bytes": 6756,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_intensity2/result.json",
+      "sha256": "83a013849ef2656855a1963a4b62aa3b7ac0115805bbed8869beff503cdeeedf"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_stripes2/result.json": {
+      "bytes": 6686,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_stripes2/result.json",
+      "sha256": "13ad6fbe5b59c9a67eadafc030b93bde2984b82a663d05c3e0379035d7ae9207"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/mode_hold/result.json": {
+      "bytes": 6879,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/mode_hold/result.json",
+      "sha256": "d16ee3d91d07daa343fae083124ae9acaac91f979aba6346c6e6e5aa19ba48a9"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/ring_shift/result.json": {
+      "bytes": 75892,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/ring_shift/result.json",
+      "sha256": "a95e0b60699490b87d229eaa773057e0f2964b399b352a08f405829c4adb0c9e"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/stationary/result.json": {
+      "bytes": 29197,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/stationary/result.json",
+      "sha256": "2448ee78674c2d2a4a8043392f7c2b0c9f51da03ab8c140e8e3daf7650e9f58d"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_anisotropic/result.json": {
+      "bytes": 9356,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_anisotropic/result.json",
+      "sha256": "155d03f4411502595ad9c51c5715ba53b49c38890fa783130b76ed2357be8c33"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_overlap/result.json": {
+      "bytes": 7279,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_overlap/result.json",
+      "sha256": "621d02601496c5e2476074d040b06e4c1c0a74f525680d41d924de6fb38864a9"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_spiral/result.json": {
+      "bytes": 7276,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_spiral/result.json",
+      "sha256": "0c9f8f5adc020608ce355de5ade1d1c9964b6a18450c9dad0975fdf6d0f5ef5e"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_two_broad/result.json": {
+      "bytes": 8981,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_two_broad/result.json",
+      "sha256": "dc6e7440e9b00c550eb861faca1267707d9c6ca8bf2a9b3543399af556ffed01"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_unequal_mass/result.json": {
+      "bytes": 9739,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_unequal_mass/result.json",
+      "sha256": "43ac5796a4cc8276bc52e2ddc1140b3e6ef0e433bdd6557389c8bc2476710d4f"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_unequal_width/result.json": {
+      "bytes": 9364,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/vector_unequal_width/result.json",
+      "sha256": "7be9e4627ebc18346437e5d80cebf51298ad00ac5f375c81cb78a0cf307e2501"
+    },
+    "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/study.json": {
+      "bytes": 969399,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/study.json",
+      "sha256": "39351f2d8ed5290b37b160b08f327d49b56dd7551368474f1e8c6380086e92ec"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/initialization.py": {
+      "bytes": 5943,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/initialization.py",
+      "sha256": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/qr_bz_pq_init.py": {
+      "bytes": 12419,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/qr_bz_pq_init.py",
+      "sha256": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3"
+    },
+    "/ml2/hypergan/gan-attempts/noout-20260928/gif/rotate_gate.py": {
+      "bytes": 8686,
+      "path": "/ml2/hypergan/gan-attempts/noout-20260928/gif/rotate_gate.py",
+      "sha256": "8057a8d4298d251edabcaeaaf02ef5b83834bdb56c296d2681c70aec6f277ed1"
+    },
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/image_host.py": {
+      "bytes": 6307,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/image_host.py",
+      "sha256": "98dfe053295760f7a86eb4a1011587718a735bec94f36ee86481fd1f50ce7c8d"
+    },
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/mode_hold_host.py": {
+      "bytes": 9801,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/mode_hold_host.py",
+      "sha256": "848869361678a9aaa59cda94d50c62fbf28d34f5c3b85a46682b20f0730cc37c"
+    },
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/ring_host.py": {
+      "bytes": 6973,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/ring_host.py",
+      "sha256": "312c29e7629848a12f54006e90d1b8d7de7470b1313175a7d437ebb879552ed6"
+    },
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/vector_host.py": {
+      "bytes": 15631,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/vector_host.py",
+      "sha256": "7d6b7da9e940f0e3d81e63c587cb55f5373aeb400424a46aee029cbdd5414294"
+    },
+    "/ml2/hypergan/lrfree-20260926/harness/native100_score.py": {
+      "bytes": 1660,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/native100_score.py",
+      "sha256": "10cc14edfcd98ab34fd3768aaba2ee835dc2241dc1face2e18998c8f2b687feb"
+    },
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/image_task_specs.json": {
+      "bytes": 4527,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/tasks/image_task_specs.json",
+      "sha256": "60aff41072a8f88d3ca7fa63252af65aeec18e94f57600c7b3413f84139280b4"
+    },
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/native100_fixture.json": {
+      "bytes": 2297,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/tasks/native100_fixture.json",
+      "sha256": "95a0afa02e03522bd33b1a3851041551c0802f2da87d81bc67fd89ec9695932d"
+    },
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/vector_task_specs.json": {
+      "bytes": 14323,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/tasks/vector_task_specs.json",
+      "sha256": "c751c10571ba32403b1e048d167991da1b6a79c5786db7bf99f4e2675feb9cbd"
+    },
+    "/ml2/hypergan/pg-pr223-primary-packet-20261004/437c7554235a6de0c6777aca9d8993b2c3e62c67-atlas-config.json": {
+      "bytes": 1798,
+      "path": "/ml2/hypergan/pg-pr223-primary-packet-20261004/437c7554235a6de0c6777aca9d8993b2c3e62c67-atlas-config.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    },
+    "/ml2/hypergan/pg-pr223-primary-packet-20261004/bc9d9aec23618e84b6b3cc8f5169638b0925671b-atlas-config.json": {
+      "bytes": 1798,
+      "path": "/ml2/hypergan/pg-pr223-primary-packet-20261004/bc9d9aec23618e84b6b3cc8f5169638b0925671b-atlas-config.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    },
+    "/ml2/hypergan/pg-pr223-primary-packet-20261004/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f-atlas-config.json": {
+      "bytes": 1798,
+      "path": "/ml2/hypergan/pg-pr223-primary-packet-20261004/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f-atlas-config.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    },
+    "/ml2/hypergan/pg-pr223-primary-packet-20261004/manifest.json": {
+      "bytes": 1275,
+      "path": "/ml2/hypergan/pg-pr223-primary-packet-20261004/manifest.json",
+      "sha256": "74a48ccb57a1360473cd46f5bf6cbb5edb330d7d143ac6b0c9e3a466084e0e3e"
+    },
+    "/ml2/hypergan/pg-pr223-primary-packet-20261004/pr223-body.md": {
+      "bytes": 18227,
+      "path": "/ml2/hypergan/pg-pr223-primary-packet-20261004/pr223-body.md",
+      "sha256": "7172967d83418a5abacb82eff612bd085bddfff2a8829c18c9994929cfa8061d"
+    },
+    "/ml2/hypergan/pg-pr223-primary-packet-20261004/pr223-files.json": {
+      "bytes": 1144102,
+      "path": "/ml2/hypergan/pg-pr223-primary-packet-20261004/pr223-files.json",
+      "sha256": "a9bf50c999ba76c43ed1ce362fa4e3465fa024e12972e9af03880f23636dd468"
+    },
+    "/ml2/hypergan/pg-pr223-primary-packet-20261004/pr223.json": {
+      "bytes": 35033,
+      "path": "/ml2/hypergan/pg-pr223-primary-packet-20261004/pr223.json",
+      "sha256": "5551124541f6ae5933ec1f085066a6796327cbc54f5dec00034ac4406f6dc1b1"
+    }
+  },
+  "schema": "pg_pr223_retest_design_input_index_v1",
+  "scope": "read-only inspection metadata/source; not a new runtime certificate"
+}

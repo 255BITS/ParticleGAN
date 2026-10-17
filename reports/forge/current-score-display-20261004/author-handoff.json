@@ -1,0 +1,108 @@
+{
+  "base": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+  "branch": "codex/pg-half-base-score-display-20261004",
+  "cherry_pick_commits": [
+    "df57afed8fd7e9612fbb6b64c7b97b891949fac0",
+    "eb8c6287340aae8e448d41e704098747d21d5785"
+  ],
+  "commit": "eb8c6287340aae8e448d41e704098747d21d5785",
+  "current_layouts": {
+    "reports/forge/shared-score-index-20261003/README.md": {
+      "first_row": "| [Atlas C6 LR .0053125 / prior1.5 \u00b7 source `9563dea5`](../atlas-current-gpu-diagnostics-native-v2-20261003/README.md) | Particles | **7/26 PASS** \u00b7 FAIL 11 \u00b7 BLOCKED 8 <br>Selected-policy diagnostic \u00b7 [source and 18 goal GIFs](../atlas-current-gpu-diagnostics-native-v2-20261003/README.md) |",
+      "rows": 18,
+      "table_count": 1
+    },
+    "reports/forge/technique-inventory.md": {
+      "first_row": "| [Atlas C6 LR .0053125 / prior1.5 \u00b7 source `9563dea5`](atlas-current-gpu-diagnostics-native-v2-20261003/README.md) | Particles | **7/26 PASS** \u00b7 FAIL 11 \u00b7 BLOCKED 8 <br>Selected-policy diagnostic \u00b7 [source and 18 goal GIFs](atlas-current-gpu-diagnostics-native-v2-20261003/README.md) |",
+      "rows": 18,
+      "table_count": 1
+    }
+  },
+  "display": {
+    "accepted_numeric": "FAIL",
+    "counts": {
+      "FAIL": 1,
+      "NOT_RUN": 25
+    },
+    "full_updates": 20001,
+    "inclusive_charged_seconds": 1466.669318475062,
+    "observations": 24,
+    "older_word_accepted_numeric": "UNAVAILABLE",
+    "older_word_status": "INVALID",
+    "passing_reads": 0,
+    "representation": "Particles (N11 joint cloud; free encoder)",
+    "required_slots": 26,
+    "status": "COMPLETE"
+  },
+  "draws": 0,
+  "files": {
+    "reports/forge/regenerate_technique_inventory.py": {
+      "bytes": 106222,
+      "sha256": "44763e125623e706168cd9939af4f40603221d9d5f09dd605904d0a7f0b3315e"
+    },
+    "reports/forge/shared-score-index-20261003/ARCHIVED_REPORTS.md": {
+      "bytes": 17654,
+      "sha256": "823c7b5a24b05a0dd022e317c3fe29a5a9955c735930d50b0c1cab76844b2902"
+    },
+    "reports/forge/shared-score-index-20261003/README.md": {
+      "bytes": 8504,
+      "sha256": "7afcd9d3949091fef1b535dfc0ec3d47ce9130b8b4774a43303db71040881af8"
+    },
+    "reports/forge/technique-inventory.json": {
+      "bytes": 2198650,
+      "sha256": "cac33438c9e2fc29d8c462e744d43893115c1a34493d47e52109d2175b06da09"
+    },
+    "reports/forge/technique-inventory.md": {
+      "bytes": 18315,
+      "sha256": "037799226423ecb2373e1a0ade0e872c9e3fe2c4f30555ef39ce60573873682d"
+    },
+    "tests/test_forge_current_technique_inventory.py": {
+      "bytes": 67584,
+      "sha256": "254164500aa129827814d22cd06d5fc053ccf57950daf4c10443e6cd02a3b856"
+    }
+  },
+  "integration_notes": [
+    "Only six display/test/archive files are committed; root owns all copied half-base dataset files.",
+    "One table and18 source-scoped rows in each current page; generic ordinary Atlas is omitted only from the current renderer, not its unchanged data.",
+    "The exact historical shared suffix is committed as ARCHIVED_REPORTS.md in its original directory, preserving relative links.",
+    "recorded-policy and quality_coverage render bytes are unchanged."
+  ],
+  "models_created": 0,
+  "preservation_proof": {
+    "existing_nonprovenance_fields_unchanged": 24,
+    "historical_archive_byte_identical": true,
+    "historical_archive_sha256": "823c7b5a24b05a0dd022e317c3fe29a5a9955c735930d50b0c1cab76844b2902",
+    "older_render_byte_identical": true,
+    "ordinary_rows": 12,
+    "path": "/ml2/hypergan/half-base-one-table-display-proof-20261004/proof.json",
+    "prior_ledgers_unchanged": true,
+    "qualification_manifest_unchanged": true,
+    "rebuild_idempotent": true,
+    "script_sha256": "d39fc4695ad09ad1f3b692e17ea964e4660da04bf68986557fd9a71f79abc2ad",
+    "sha256": "4a79e7a8c32e55e5d8951b7e9619d95c0953e4c81d0a5970ba5a189cd28177df",
+    "status": "PASS"
+  },
+  "pushed": false,
+  "raw_hydrations": 0,
+  "regrades": 0,
+  "root_dataset_copy_prerequisite": {
+    "committed_by_this_agent": false,
+    "gif_sha256": "2d94247b902d6384ef172faa99db0ae4d655bd0171ae6a4ef4d77eaadbc1012b",
+    "path": "reports/forge/word-half-base-20261004",
+    "readout_sha256": "08db1485b912d00558af0f3496dff6332c9b27d2cb13dfca68496f8a90d54bbe",
+    "results_sha256": "d2bc198d65c935ca31160505510b8efc7aa2cf9e5f62ac6429f758173e7ca8b7",
+    "source": "/ml2/hypergan/pg-word-half-base-current-gpu-20261004-v1/publication-v1"
+  },
+  "schema": "pg_half_base_one_table_display_handoff_v1",
+  "software_controls": {
+    "command": "CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 /tmp/pr155-e22-venv/bin/python -m pytest -p no:cacheprovider -q tests/test_forge_current_technique_inventory.py",
+    "elapsed_seconds": 10.86,
+    "failed": 0,
+    "log": "/ml2/hypergan/half-base-one-table-display-controls-final-20261004.log",
+    "log_sha256": "c3439bdf0210d8edf810edecbafc58fcf350effbef6527a1283c6df56e2b99a7",
+    "passed": 92
+  },
+  "status": "NO_WRITE_REVIEW_READY",
+  "training_updates": 0,
+  "worktree": "/ml2/hypergan/ParticleGAN-half-base-score-display-20261004"
+}

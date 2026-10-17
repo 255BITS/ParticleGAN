@@ -1,0 +1,58 @@
+{
+  "status": "DECLARED_PILOT_REQUIRED_BEFORE_WATCH",
+  "created_utc": "2026-09-30T02:56:49.917734+00:00",
+  "scope": "one expected API metadata literal; all original numerical/data/init/stream/gate checks retained",
+  "package_sha256": "e34bcb21aaa64caa0601cea5dc1f9b8eaebee9578686ebff39b459676063deb2",
+  "generate_api_ast_sha256": "6e404b9fd2382bbbac4677d656dbd8c88457227e8c659d65354411576fac70de",
+  "exact_source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/iteration-4/READY.json": "8d5522e1e2bf7ae42baf9666bc63da4da490b03f1b62724b1ab759031341ee87",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/source-freeze.json": "c1b09a7acf8ce40690eeaf6e931586c47c08e523dcfc573c7efb1d6f7bb8b443",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/source-freeze.json": "329e61941685a35007ab514f59b779f5cf5870fdc2d73cf475dc85eab5e3c681",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/READY.json": "1a506432e84f34ea9d4c2abeb1ffb4dcd8b4196a993c70ef057851141a533110",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/collect.py": "3500fc335698b16741dc674ad9a0f6c30aa5084637cccd1ba6108b4f69049341",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/lane.py": "a2c3b374a2757aca6f27be0237202fb414b7532c707c0f2fa4f58b64fd343bf5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/AXIS-ID-READY.json": "9193167d0184e82ef24ed513dc2d823fb5ee84bcadb3696c1518534d5e39801a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/training.py": "f5626e4e25f62b37aa76b162ef4d351ed45dad0b5c24dc2c0c385be3d42d6a7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/composition-review/COMPOSITION-FROZEN.json": "69ae4a80e94503b2094a2d21520403fc45849b70caa398248fd910b0fc1cba97",
+    "/ml2/hypergan/lrfree-20260926/harness/screen.py": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/indexed_adapter.py": "6b1a9ee7c5dde5b9d019102e3f16af1b13c617410f176d42db14ce40afee3490",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/run_indexed_monitor.py": "b106a49f0c91245c9307aec347d0a834c53d0cd5cedcb8019eac1ccdbe509371",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/pilot_indexed_adapter.py": "45b8e298cb4249909bddf8962f5524e540e81e41ebe6d1a54d35a76e2d336ff2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/prepare_indexed_declaration.py": "e5b457b78af1a6cbc4e724d00231687739f0d6346d8fb29dacc500cb7d6ea241"
+  },
+  "collector_ast_proof": {
+    "original_ast_sha256": "b1fd9feaa73ead7170e097e7d52e8b57db0f069adfb2d6834749d879c8369597",
+    "adapted_ast_sha256": "08891c1b65fe387e8fb52ba16b88f56b1177e56d41c57200d1c67a4134fb7902",
+    "reverted_ast_sha256": "b1fd9feaa73ead7170e097e7d52e8b57db0f069adfb2d6834749d879c8369597",
+    "exact_ast_delta": {
+      "function": "collect",
+      "assignment": "expected_options",
+      "keyword": "evaluation_generate",
+      "before": "plain",
+      "after": "indexed"
+    },
+    "all_other_ast_nodes_exact": true
+  },
+  "validation": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4",
+  "original_monitor": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+  "new_output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor",
+  "old_monitor_output_preserved": true,
+  "cpu_threads": 1,
+  "cuda_context_allowed": false,
+  "numerical_reruns": 0,
+  "original_quality_gates_unchanged": true,
+  "pilot_command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/pilot_indexed_adapter.py"
+  ],
+  "watch_command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/run_indexed_monitor.py",
+    "--watch"
+  ]
+}

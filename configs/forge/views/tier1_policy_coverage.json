@@ -1,0 +1,55 @@
+{
+  "assignments": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "importance": "required",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "two_pole_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "importance": "required",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "unused_token_hold_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "five_word_joint_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "importance": "required",
+      "order": 6,
+      "qualification_tier": 1,
+      "task": "clockfree_audit_tier1_policy_selected_cloud_v1"
+    }
+  ],
+  "description": "Separate Atlas/E22 selected-policy cloud Tier 1 coverage. Original live/MoG parents receive no pass credit; incompatible independent objectives retain explicit blockers.",
+  "eligibility": {},
+  "goal": "discriminator_stability",
+  "id": "tier1_policy_coverage",
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

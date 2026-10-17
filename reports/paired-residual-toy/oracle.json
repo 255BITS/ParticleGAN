@@ -1,0 +1,156 @@
+{
+  "format": "paired_residual_analytic_calibration_v1",
+  "status": "passed",
+  "scope": "CPU float64 component oracle; no trained E22 or decoded-quality claim",
+  "sigma": 1.3,
+  "samples": 8192,
+  "fixed_probe_seed": 1143,
+  "initialization": "Public init.KEEP analytic coefficients; deterministic_orthogonal_(seed=1)",
+  "zero_residual": [
+    {
+      "linear": 0.0,
+      "G_antithetic_gradient_mean": 0.0,
+      "G_antithetic_gradient_variance": 0.0,
+      "expected_G_force": -0.0,
+      "D_loss": 0.6931471805599453,
+      "D_parameter_gradients": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "linear": 0.0625,
+      "G_antithetic_gradient_mean": -0.03125,
+      "G_antithetic_gradient_variance": 9.254079276848458e-36,
+      "expected_G_force": -0.03125,
+      "D_loss": 0.6931471805599453,
+      "D_parameter_gradients": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "quadratic_single_zero_variance": {
+    "measured": 0.026581373463274337,
+    "expected": 0.026406250000000003
+  },
+  "initial_D_energy": [
+    {
+      "amplitude": 0.05,
+      "single_mean": 0.002215714084510912,
+      "single_variance": 0.0042530197541238626,
+      "expected_mean": 0.0012500000000000002,
+      "expected_single_variance": 0.004225000000000001,
+      "antithetic_mean": 0.0012499999999999961,
+      "antithetic_variance": 8.889246421642522e-33
+    },
+    {
+      "amplitude": 0.2,
+      "single_mean": 0.023862856338043685,
+      "single_variance": 0.068048316065982,
+      "expected_mean": 0.020000000000000004,
+      "expected_single_variance": 0.06760000000000002,
+      "antithetic_mean": 0.020000000000000014,
+      "antithetic_variance": 1.1021883190531019e-32
+    },
+    {
+      "amplitude": 0.8,
+      "single_mean": 0.33545142535217476,
+      "single_variance": 1.0887730570557115,
+      "expected_mean": 0.32000000000000006,
+      "expected_single_variance": 1.0816000000000003,
+      "antithetic_mean": 0.3200000000000002,
+      "antithetic_variance": 5.171911832883481e-32
+    }
+  ],
+  "nonzero_G_parity": [
+    {
+      "amplitude": 0.05,
+      "G_single_mean": 0.009995665138095355,
+      "G_antithetic_mean": 0.007580248273363772,
+      "quadrature_population_gradient": 0.0075712018160574695,
+      "common_stream_mean_difference": 0.0024154168647315846,
+      "common_stream_difference_SE": 0.0018022861734978278,
+      "MC_parity_within_6SE": true
+    },
+    {
+      "amplitude": 0.2,
+      "G_single_mean": 0.03280658186321002,
+      "G_antithetic_mean": 0.030374200568054364,
+      "quadrature_population_gradient": 0.03033808455367357,
+      "common_stream_mean_difference": 0.0024323812951556594,
+      "common_stream_difference_SE": 0.0018149287209224582,
+      "MC_parity_within_6SE": true
+    },
+    {
+      "amplitude": 0.8,
+      "G_single_mean": 0.12752068929355564,
+      "G_antithetic_mean": 0.12481995702726063,
+      "quadrature_population_gradient": 0.1246804586221865,
+      "common_stream_mean_difference": 0.0027007322662949873,
+      "common_stream_difference_SE": 0.0020115165733031568,
+      "MC_parity_within_6SE": true
+    }
+  ],
+  "fake_only_sigma_chain": {
+    "measured": 0.16361355222372737,
+    "expected": 0.16361355222372734,
+    "note": "Detached real references; sigma keeps its fake-branch graph even at zero residual"
+  },
+  "KA2_A_mean_linear_dimensions": [
+    {
+      "dimension": 1,
+      "slope": 1.0,
+      "reg_coeff": 3.0,
+      "penalty": 1.5,
+      "expected_penalty": 1.5,
+      "slope_gradient": 3.0000000000015,
+      "expected_slope_gradient": 3.0,
+      "phase": "a",
+      "penalty_calls": 1,
+      "optimizer_steps": 0
+    },
+    {
+      "dimension": 16,
+      "slope": 1.0,
+      "reg_coeff": 3.0,
+      "penalty": 0.005859375,
+      "expected_penalty": 0.005859375,
+      "slope_gradient": 0.01171875,
+      "expected_slope_gradient": 0.01171875,
+      "phase": "a",
+      "penalty_calls": 1,
+      "optimizer_steps": 0
+    },
+    {
+      "dimension": 128,
+      "slope": 1.0,
+      "reg_coeff": 3.0,
+      "penalty": 9.1552734375e-05,
+      "expected_penalty": 9.1552734375e-05,
+      "slope_gradient": 0.00018310546875,
+      "expected_slope_gradient": 0.00018310546875,
+      "phase": "a",
+      "penalty_calls": 1,
+      "optimizer_steps": 0
+    }
+  ],
+  "limitations": [
+    "D energy cancellation is at an all-zero critic, not an arbitrary trained nonlinear D",
+    "Unconditional residual subtraction retains pairing; finite critic capacity can still limit optimization",
+    "The mean-linear d^-2 law is not a universal CNN or blended-KA2 scaling law",
+    "Monte Carlo parity is approximate; deterministic quadrature establishes symmetric population parity"
+  ],
+  "optimizer_updates": 0,
+  "reconstruction_objective": false,
+  "global_CPU_RNG_unchanged": true,
+  "source_sha256": {
+    "experiments/paired_residual_oracle.py": "060b1770f67760c7abd7cbe69ff784a19719975c30efca72d0802d2aa409b7a2",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+  }
+}

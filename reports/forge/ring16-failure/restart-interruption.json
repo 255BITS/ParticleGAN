@@ -1,0 +1,51 @@
+{
+  "arm": "live",
+  "artifacts": {
+    "before-runtime.pt": "4274f7c43d07d330aedd58cf978bc2ccc9b4b554b2396a3ab726cf51e01ed6a4",
+    "before-state.pt": "fd9c595e9ad8c2257af3ae5c71157732c0854254af6a056ec4097cb5a9c4b561",
+    "initial-state.pt": "88d55eb4ea2daa679db5acc27ba1aa97f42d325bf2a9aa1e3438b57db8628070",
+    "prefix-curve.json": "1d2ce8cbd54f622e883d5b72a1e947ab7cd2b87f63fb239652aa18a220a0fcb2",
+    "prefix-observations.pt": "5fae9b4fdc1739349b0db4e3ee3ec3a5bd9bcade2bc02e5ba35957558eabce19",
+    "prefix-runtime.pt": "1c5646469533c847180d91fcce1502e09ec084595230fdadde33cf3f24541f17",
+    "prefix-state.pt": "772c6a22e0ebc33d42dd3c4ae81f696f7fe9499626456f428c349f2d62f58e4d",
+    "source.json": "ad94b11b6791836b1ef8dccae659fafe44c9a8d44b7159df33e805d85da4f2c6",
+    "state416.pt": "b611cc1de26d2fbea6bca69c7d5449783b5aee321c8ed4b8ee86e01a3524ad6c",
+    "trace.pt": "7735822645b4d7d03fd4d5952c316e41b83123d67fcba984bb64b8b05bf43145"
+  },
+  "charged_seconds": 300,
+  "completed_updates": 1600,
+  "cost": "Exact elapsed seconds unavailable after process termination; charge full300-second reserved allowance conservatively.",
+  "elapsed_seconds": 300,
+  "final_printed_metrics": {
+    "arm": "live",
+    "covariance": 2.2202680110931396,
+    "event": "observation",
+    "hq": 0.93603515625,
+    "pass": false,
+    "step": 1600
+  },
+  "full_verdict": "INCOMPLETE",
+  "missing": [
+    "post416 full model checkpoints except416",
+    "post400 full scored sample tensors",
+    "original complete final receipt"
+  ],
+  "new_updates": 1600,
+  "observed_full_numeric_verdict": "FAIL",
+  "passing_observations": 0,
+  "qualification_input": false,
+  "reason": "Initial stream manifest preceded data/eval stream registration; final require_same_formulation rejected changed registry after all1600 updates. No training retry.",
+  "retained_full_prefix_samples": 24,
+  "retained_scored_observations": 96,
+  "retained_traced_updates": 16,
+  "schema_version": 1,
+  "scope": "completed_training_with_postexecution_receipt_error",
+  "source_commit": "74e5e1e5c0424d131066ed28bac911d3c32b6996",
+  "source_digest": "fe33d7dea283dfdc75ab0052242873bd9505c3854fe80b3099d5311a5f82340d",
+  "status": "postexecution_metadata_error",
+  "stdout": {
+    "path": "runs/reports/ring16-failure/restart-run.log",
+    "sha256": "cd8391b9d5b6511a86dfb1af0b502c3f25819bcd21cb2e9a9e454a68b7a1f1d4"
+  },
+  "terminal_suffix": 0
+}

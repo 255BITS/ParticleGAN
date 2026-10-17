@@ -1,0 +1,17 @@
+{
+  "status": "FROZEN_READ_ONLY_FRAMEWORK",
+  "milestones": [
+    500,
+    1000,
+    2000
+  ],
+  "files_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/PROTOCOL.md": "cf926f4a0e7ef5fcb578ca756e71c636dbbdde6d598ed5bb3d6dfaf6585194e9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/summarize_saved.py": "449dea47d095025409cd0e7b49546e84009e144e0f0c4670e8c65d0af59657b4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/analyze_saved.py": "bf3e2001a703b1801f718bbacc185e24ea7bd631f9cf61997c32a817f505a735",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/compare_checkpoint_motion.py": "61974f346e7ea48e17dbf76f4a1b90bf693be800c87f1964ba91c3c0f2cb4e53"
+  },
+  "cpu_only": true,
+  "production_writes": 0,
+  "new_virtual_optimizer_probes": 0
+}

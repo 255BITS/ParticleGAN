@@ -1,0 +1,45 @@
+{
+  "status": "SOURCE_FROZEN_WAITING_FOR_CPU_AND_ROOT_GPU_AUTHORIZATION",
+  "shared_config_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA12-auto.json",
+  "candidate_review_receipt": {
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/ROOT-REVIEW.json",
+    "sha256": "e7ee9a8e7dbe6a34c3a6fd363ee4f6dbdc204f9a262c6c17d2edd7a75b0230b9"
+  },
+  "current_public_init": true,
+  "model_init_hashes_required_exact": true,
+  "no_synthetic_updates_or_begin_step": true,
+  "scorer_ast_and_original_gate_unchanged": true,
+  "estimated_train_wall_seconds": {
+    "toy": 160,
+    "mnist": 110,
+    "replay": 10
+  },
+  "estimate_scope": "prior original diagnostic costs; actual current API candidate remains unmeasured",
+  "proposed_commands": {
+    "toy": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/launch_first.py",
+      "--problem",
+      "toy"
+    ],
+    "mnist": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/launch_first.py",
+      "--problem",
+      "mnist"
+    ],
+    "replay": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/launch_first.py",
+      "--problem",
+      "replay"
+    ]
+  },
+  "cuda_launches": 0
+}

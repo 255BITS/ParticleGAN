@@ -1,0 +1,35 @@
+{
+  "status": "STATIC_CLEAR",
+  "reviewed_at_utc": "2026-09-29T22:59:32.728829+00:00",
+  "common_source_freeze_sha256": "2b7a17dbf70d3523896a75217415657e8c405117ba257d1b90d12c3a2de3dbd3",
+  "lanes": {
+    "learned": {
+      "ready_sha256": "9b69f8b680d977dee35e731a0dbef5bbba59472c64c720cce8d67a821b91e79c",
+      "status": "READY",
+      "source_count": 8,
+      "all_declared_bytes_match": true,
+      "mismatches": []
+    },
+    "screens": {
+      "ready_sha256": "7c281ec9285671cfc6e900480973b04073d5f9642aca438c5f042224ce64ece3",
+      "status": "READY",
+      "source_count": 10,
+      "all_declared_bytes_match": true,
+      "mismatches": []
+    }
+  },
+  "original_source_baseline_sha256": "563254cf37565b0b8f0dbb77e51827484d0754fc91677d1f9d9be6ac9f405493",
+  "original_files_checked": 144,
+  "all_original_prior_receipts_match": true,
+  "findings_resolved_before_measurement": [
+    "wrapper required arguments now have locked defaults for task-only coordinator API",
+    "original mode_hold compressed batch receipt and actual MNIST files frozen",
+    "warning-only construction comparisons preserved without extra rejection criterion",
+    "evaluator tensor model hash distinguished from serialized checkpoint file hash",
+    "both lanes assert and record the same physical GPU0 identity with normalized UUID spelling",
+    "coordinator freezes READY-declared sources and immutable preparation receipts, excluding generated outputs"
+  ],
+  "source_policy": "Root common freeze is immutable; no candidate/harness/runner changes after measurements",
+  "numerical_workloads_executed_by_auditor": false,
+  "quality_verdict": "PENDING; static clearance establishes protocol and identity only"
+}

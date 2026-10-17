@@ -1,0 +1,22 @@
+{
+  "gif_sha256": "b483538cf3cef462e06b56767b86c979bf974a12cf3f6f98b7c61e77c669f27a",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "877617f3799513fe36ebc4afb74c9bae039f15946b64292b09456f80dbcad6ae",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/forge/pure-bcap-joint-loss-repair-v2/queue/pure-bcap-joint-loss-repair-v2/755e19d50eb342399105645899ee21b9/clockfree-proof/comparisons.pt": "61710c64c1aef922e0d43fd03e4b27b5b5f510b98de0a3da79664d031e690bac"
+  },
+  "task_id": "clockfree_audit_measurement_v1"
+}

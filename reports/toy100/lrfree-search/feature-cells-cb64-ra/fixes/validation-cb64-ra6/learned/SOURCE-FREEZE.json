@@ -1,0 +1,12 @@
+{
+  "status": "FROZEN_PRE_EXECUTION",
+  "local_source_sha256": {
+    "common.py": "64510721107711a2359edf27cb4378e9bc10d91c791ec2add1960b12c6ef7615",
+    "run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "replay.py": "6b7ac41dab7a52ead34870917235d64c85824bd561dd44cb97b7602468cb2a0d",
+    "PROTOCOL.md": "cc63ebe42b3edac071beba7890cc576231c230bac83817e7693138d8f244cb21",
+    "INPUTS.json": "6afa0172c21b8761b9c825b4764818c912fe02d7b18fffbed6eec5020cfb7927"
+  },
+  "candidate_package_sha256": "6bb967c405c486d2a5cbd5dcc3bce7d1bd2cb93b3f9c7e916229f1327a8e5fc5",
+  "candidate_config_sha256": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7"
+}

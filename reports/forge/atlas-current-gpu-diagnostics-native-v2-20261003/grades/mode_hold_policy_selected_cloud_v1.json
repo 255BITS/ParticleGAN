@@ -1,0 +1,70 @@
+{
+  "grades": {
+    "mode_hold_policy_selected_cloud_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.8333333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 1000,
+          "first_pass_step": 800,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 9,
+          "passing_suffix": 9,
+          "stable_from_seconds": null,
+          "stable_from_step": 800
+        },
+        "metrics": [
+          {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 8,
+            "value": 8
+          },
+          {
+            "margin": 0.07924804687499998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.979248046875
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cover": 1.0,
+        "effective_modes": 7.500499248504639,
+        "hq": 0.979248046875,
+        "modes": 8,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "raw_hash": "8c7f5f2fd7543796e7e13247963b6525d61b1fe6541eae344271a1d6fa75ab22",
+  "schema_version": 1,
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "telemetry": {
+    "independent_grading_seconds": 0.8543922950048,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 664367104
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}

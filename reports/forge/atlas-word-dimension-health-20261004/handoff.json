@@ -1,0 +1,69 @@
+{
+  "original_evidence": {
+    "family_status": "INVALID",
+    "numeric_gate_status": "UNAVAILABLE",
+    "numeric_regrading": false,
+    "original_artifacts_unchanged": true,
+    "reserved_seconds": 0,
+    "source_commit": "fb7acc775b3a1a6184d36b55e035b9da04531492",
+    "source_digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+    "supervised_paid_seconds": 558.5739127129782
+  },
+  "patch": {
+    "base": "9345c4a69b176e79ed0cc46533a2199935c0ae47",
+    "commit": "6690feb5cd7d48511be6321f058d272c47e8318e",
+    "files": {
+      "experiments/forge/policy_adapters.py": {
+        "bytes": 17953,
+        "sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13"
+      },
+      "tests/test_forge_policy_state_health.py": {
+        "bytes": 6334,
+        "sha256": "f77717e094fd4f32685714851dbae080063272bc0054bda4ac56d991aed4fd3d"
+      }
+    },
+    "worktree": "/ml2/hypergan/ParticleGAN-birth-dimension-health-20261004"
+  },
+  "reports": {
+    "DIAGNOSIS.md": {
+      "bytes": 7325,
+      "sha256": "7f74f3bdc73ed8a55cc0840991adc87c6e12a2efb8caa7018717f2dac2d99694"
+    },
+    "diagnosis.json": {
+      "bytes": 27303,
+      "sha256": "e914ace15d8d65d587ea5518804c1e9dd8417f114ac166ef8ef34a69f7eea3cc"
+    },
+    "inspect_word_health.py": {
+      "bytes": 11419,
+      "sha256": "13eddd6ad43b558c6580dde2dc3ee3f0e415d3d547ae8b3195bc5ec7f685b289"
+    },
+    "inspection.log": {
+      "bytes": 245,
+      "sha256": "d6d58d9783674988aaefdf6a23ae58d98ac24787f11cc89d5c494715d8e1821d"
+    },
+    "patch-check.json": {
+      "bytes": 613,
+      "sha256": "e75f36297ef1446595697e4cf0e2696146d15c73fba8910a805bfd0449c30df5"
+    }
+  },
+  "schema": "pg_word_dimension_health_handoff_v1",
+  "scope": {
+    "cuda_initialized": false,
+    "models_constructed": 0,
+    "optimizer_updates": 0,
+    "sampler_calls": 0,
+    "training_restores": 0,
+    "unchanged_word_rerun": false
+  },
+  "software_controls": {
+    "bytes": 114,
+    "deselected": 11,
+    "deselection_reason": "Existing controls that construct or update tiny public models were excluded from this explicitly model-free task.",
+    "log": "/ml2/hypergan/pg-word-dimension-health-controls-20261004.log",
+    "model_free": true,
+    "passed": 61,
+    "seconds": 0.28,
+    "sha256": "18e739067e965f3fbd5b5313e980b7a27b0423e61451949cde56eaffcb9e1d04"
+  },
+  "status": "NO_WRITE_HANDOFF"
+}

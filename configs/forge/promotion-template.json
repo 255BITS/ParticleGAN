@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "REPLACE-with-finished-candidate-stage",
+  "qualification_view": "discriminator_stability",
+  "candidate_revision": "REPLACE-with-exact-qualified-revision",
+  "seeds": [0, 1729, 2718],
+  "tasks": ["REPLACE-with-dependency-closed-task-set"],
+  "controls": [{
+    "candidate_id": "REPLACE-with-reference-control",
+    "candidate_revision": "REPLACE-with-exact-control-revision",
+    "expected_statuses": {"REPLACE-with-dependency-closed-task-set": "PASS"}
+  }],
+  "budgets": {
+    "task_seconds": {"REPLACE-with-dependency-closed-task-set": 1},
+    "campaign_seconds": 1,
+    "candidate_seconds": 1
+  },
+  "scoring_weights": "live",
+  "aggregation": "all_registered_cells",
+  "acceptance": {"candidate": "all_pass", "controls": "match_declared", "missing": "reject", "conflicts": "reject"},
+  "no_tuning": true,
+  "early_stop": "on_required_failure",
+  "execution_backend": "cuda",
+  "cuda_model": null
+}

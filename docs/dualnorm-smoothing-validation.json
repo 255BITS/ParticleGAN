@@ -1,0 +1,68 @@
+{
+  "base_commit": "83b099d1e4330dda953d5fce4f68ce00f75fa9a6",
+  "bulk_logs_committed": false,
+  "default_adoption": false,
+  "distinct_checks": 476,
+  "final_validation": [
+    {
+      "command": "CUDA_VISIBLE_DEVICES=0 /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_dualnorm_smoothing.py tests/test_dualnorm_default_parity.py tests/test_dualnorm_optimizers.py",
+      "device_contract": "Every numerical fixture uses torch.device(cuda:0) and serial autograd; the parity fixture alone was rerun after a test attribute correction.",
+      "distinct_passing_checks": 127,
+      "local_logs": [
+        "runs/opt-in-smoothing/cuda.log",
+        "runs/opt-in-smoothing/cuda-parity.log"
+      ]
+    },
+    {
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_dualnorm_smoothing_search.py tests/test_forge_boundaries.py tests/test_forge_techniques.py tests/test_forge_configuration_search.py tests/test_forge_search_space.py",
+      "device_contract": "Pure host Python: no learned models or optimizer updates.",
+      "distinct_passing_checks": 143,
+      "local_logs": [
+        "runs/opt-in-smoothing/search-plumbing.log",
+        "runs/opt-in-smoothing/search-plumbing-final.log"
+      ]
+    },
+    {
+      "command": "/home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_technique_exports.py tests/test_forge_dualnorm_contracts.py tests/test_forge_current_technique_inventory.py tests/test_forge_technique_inventory.py tests/test_forge_technique_bindings.py",
+      "distinct_passing_checks": 206,
+      "gpu_checks": 2,
+      "gpu_command": "CUDA_VISIBLE_DEVICES=0 /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_dualnorm_contracts.py -k behavioral_prior",
+      "host_python_checks": 204,
+      "local_logs": [
+        "runs/opt-in-smoothing/compatibility.log",
+        "runs/opt-in-smoothing/cuda-behavioral.log"
+      ]
+    }
+  ],
+  "forge_validate": {
+    "candidates": 406,
+    "status": "PASS",
+    "tasks": 64,
+    "training_launched": false
+  },
+  "gpu_numerical_checks": 129,
+  "host_schema_admission_publication_checks": 347,
+  "implementation_sha256": {
+    "experiments/forge/boundaries.py": "f16332c81056efad6fb628baa4cc5863ef18ac189897e03b4f9dcd91ea347c40",
+    "experiments/forge/family_reports.py": "86c9e8c1bfd69c33ebf94e7467e48934a9f5d33456e091abf5872ef485a4b740",
+    "experiments/forge/techniques.py": "b2589fc1beb18ba65a28f647ba575622581b3ae3664c733950ea7e4eb8d32110",
+    "particlegan/optim/dualnorm.py": "d6bacaa9d95d6e62bc015f7f2b679342c0f43b036e49d0be49898c5cf5b2c15e",
+    "particlegan/recipe_compat.py": "c750b59f8478786838f445f7a137c717892ffaba7d09284889c4a6a5163bbe94",
+    "particlegan/recipes.py": "1f1d8485d8af94631107ee4e478decf07e723900ed48f1f7b22bb1182f10e375"
+  },
+  "initial_validation_corrections": [
+    "New synthetic search fixtures first omitted explicit optimizer_family=dualnorm, but Forge API v1 correctly binds its bcap preset to historical Adam. Corrected the fixtures and explicit winning-rate base; final search suites pass.",
+    "New public parity fixture initially referenced optG/optD instead of opt_g/opt_d. Corrected test attributes and reran only that fixture; no production change or learning retry.",
+    "Two inherited behavioral numerical cases initially used their existing CPU default. Converted those cases to explicit CUDA stream/device binding and device assertion; their final rerun passes on physical GPU0. No research training was performed."
+  ],
+  "read_only_plan": {
+    "executed": false,
+    "id": "bcap-dualnorm-smoothing-tier1-v1",
+    "submission_blockers": [],
+    "trials": 3,
+    "worst_case_seconds": 7560
+  },
+  "schema": "dualnorm_smoothing_software_validation_v1",
+  "scope": "Opt-in feature and search plumbing; no learning experiment or ordinary qualification",
+  "training_search_enqueued": false
+}

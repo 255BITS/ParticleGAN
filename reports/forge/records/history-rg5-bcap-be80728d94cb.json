@@ -1,0 +1,171 @@
+{
+  "candidate_id": "rg5-bcap",
+  "candidate_revision": "922f1333b14b374cdff41e85b078e046a0f64831adba53045552eef23e76d78a",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "rg5-bcap-toy-img_blobs4",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-rg5-bcap-be80728d94cb",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 33.31638993299566,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_blobs4/result.json",
+            "artifact_sha256": "e0f6ac09ec11c15dac3cdcb33a2a3174c01ade2e8d2a909e0f408349633ade71",
+            "id": "rg5-bcap-toy-img_blobs4",
+            "snapshot": "results/rg5-bcap-toy-img_blobs4.json.gz",
+            "snapshot_sha256": "506db336630b56267d72bbe4645181850c24f2915b8d80a0dd3546b542952d15"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-img_blobs4/result.json",
+        "artifact_sha256": "e0f6ac09ec11c15dac3cdcb33a2a3174c01ade2e8d2a909e0f408349633ade71",
+        "candidate": "rg5-bcap",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "rg5-bcap-toy-img_blobs4",
+        "kind": "toy",
+        "live": {
+          "distribution_tv": 0.0625,
+          "hq": 0.96875,
+          "mean_rmse": 0.035672377794981,
+          "mode_fractions": [
+            0.21875,
+            0.21875,
+            0.28125,
+            0.28125
+          ],
+          "modes": 4,
+          "quality_mode_fractions": [
+            0.21875,
+            0.21875,
+            0.25,
+            0.28125
+          ]
+        },
+        "raw_status": "PASS",
+        "seconds": 33.31638993299566,
+        "snapshot": "results/rg5-bcap-toy-img_blobs4.json.gz",
+        "snapshot_sha256": "506db336630b56267d72bbe4645181850c24f2915b8d80a0dd3546b542952d15",
+        "task": "img_blobs4",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.5416666666666666,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 17.83211967977695,
+            "confirmed_step": 325,
+            "first_pass_step": 225,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 16,
+            "passing_suffix": 16,
+            "stable_from_seconds": 12.907511541852728,
+            "stable_from_step": 225
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 4,
+              "value": 4
+            },
+            {
+              "margin": 0.06874999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.96875
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "img_blobs4"
+    }
+  ]
+}

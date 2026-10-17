@@ -1,0 +1,85 @@
+{
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+  "changed_factors": [
+    "Task-owned G and D hidden layers2to1; width32 and criticFourier2 retained.",
+    "Uses separately declared Tier1can-it-pass/Tier2continuous-stability semantics fromPR322; original historical five-terminal verdicts retained."
+  ],
+  "conclusion": "Shallow Gaussian passes the confirmed Tier 1 smoke at updates 584 and 792, but original five-terminal acquisition FAIL and Tier 2 FAIL: 4/72 stationary checks, 0/48 shift checks, 0/24 shifted hold, no deadline reacquisition. All six exact CUDA restores, 219 saved-sample metric recomputations and data/train/primary-eval stream matches pass. A self-receipt manifest bug interrupted after 1000; byte-exact own-state migration plus a source-bound software amendment completed only the remaining 5000. Exactly 6000 new updates, zero repeated prefix or scientific retries.",
+  "evidence_scope": "task_architecture_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Reducing G/D hidden depth 2 to 1 can make a scalar Gaussian easier to acquire without changing its BCAP trainer, Fourier features, learned MoG prior, data or sampling law.",
+  "lifecycle": "concluded",
+  "mechanism_class": "task_architecture_only",
+  "next_action": "Retain depth 1 as a tested diagnostic smoke variant; keep the original depth 2 ordinary Gaussian architecture because it already passes the separate confirmed smoke baseline. Do not claim convergence or adopt this as a stability repair. Stop this bounded depth arm; root merges positive diagnostic evidence and reruns the whole inventory plus eligible Tier 2 under the new view.",
+  "provenance": {
+    "archive_sha256": "319cbec56850ed05711a983d336ee204834c933ec34d6168fd1e5098e8e36837",
+    "continuation_protocol_sha256": "cde6b89168652c68ea46f1271dcf8bb3f21094e3c8a5ff116524551b6e01f994",
+    "new_training_updates": 6000,
+    "protocol_sha256": "7b250028cd7d89e9a350afe123f3256d5db929028a1a72a778d707275a215008",
+    "repeated_prefix_updates": 0,
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    },
+    "source_commits": {
+      "original_prefix": "326f0e0b82d014dfcd728cd8f5719b2450fc627a",
+      "remaining_continuation": "6f0375011a50e70e505ccd556767e211b82a6246"
+    },
+    "source_digests": {
+      "original_prefix": "b8372c956a48d4d23e6c9db359661a7e41eb367b01703dcd2bde53a6823f3c9c",
+      "remaining_continuation": "74a33f7dc7e4875f23c5d7c4d4df678d82799a39d76e567132c5cd5bf6c24dd2"
+    }
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "gaussian-shallow-v1-readout",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/gaussian-shallow/results.json",
+    "sha256": "4be13276ecd371338f31f1eec6bee4cdceca0516c995434bd62ace9c80dbdd8e"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "wall_seconds": 7.909566284972243
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "confirmed_full_law_states": 2,
+        "finite_fraction": 1.0,
+        "first_confirmed_step": 584,
+        "sample_count": 4096
+      },
+      "reason": "Diagnostic depth1sigma.1cohort; anyscheduled full-law hit by1000with independent same-state confirmation. EndpointFAIL/originalfive-terminalFAIL do not alter this declared smoke gate; no ordinaryqualification transfer.",
+      "task_id": "gaussian1d_shallow_smoke"
+    },
+    {
+      "cost": {
+        "wall_seconds": 37.84536868194118
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.12541789243761237,
+        "finite_fraction": 1.0,
+        "mean": 3.0558899897150695,
+        "mean_error_sigma": 0.11177997943013906,
+        "sample_count": 4096,
+        "std": 0.37026823894733374,
+        "std_ratio": 0.7405364778946675,
+        "step": 6000
+      },
+      "reason": "Own1000state continuedexactly to6000:4/72stationaryfullchecks; shifteddeadlineFAIL and0/24hold. Cost chargesonlyremaining5000updates after source-boundsoftware repair.",
+      "task_id": "gaussian1d_shallow_stability"
+    }
+  ],
+  "trainer_family": "bcap-dualnorm"
+}

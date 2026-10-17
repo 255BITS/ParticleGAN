@@ -1,0 +1,181 @@
+{
+  "candidate_id": "context:report/toy100/formulation-round-20260924",
+  "candidate_revision": "9ceec802c64f63b9dd3f48dbd902ffde768545c24477d655874b57f9cb835f67",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Formulation round: 18 proposals, no joint winner",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/formulation-round-20260924",
+      "narrative_sources": [
+        {
+          "git_blob": "be0681b095fcdc3f0e28683c1e5b78a5a63cd3c5",
+          "path": "reports/toy100/formulation-round-20260924/FOLLOWUPS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "919b54b511be36d7ed9cda7c0f7432da1ac56d6977af218ffccf343273e313e0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/FOLLOWUPS.md"
+        },
+        {
+          "git_blob": "36a95ee035d03ab0118292fa1fdd35289c5b79a4",
+          "path": "reports/toy100/formulation-round-20260924/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0195a2a2f201602050e489ec9c5ecebdc118d3d0170c1dbdf1c4a179b5d2909a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/README.md"
+        },
+        {
+          "git_blob": "353744ded05504e35984122a030c6a400bb0a43a",
+          "path": "reports/toy100/formulation-round-20260924/critic_formulation/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0efa398a9e8ad346ec52258a0c32fc1effca98ed5c2bee9f794957cea9397e03",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/critic_formulation/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "86cbb0b5908a203f0f21b701545ee49827a29769",
+          "path": "reports/toy100/formulation-round-20260924/critic_formulation/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "68c7805fe6e37d0a7eef5fe20ae78564d7f1ce25b177cebe91f8e83db81babd9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/critic_formulation/README.md"
+        },
+        {
+          "git_blob": "86cbb0b5908a203f0f21b701545ee49827a29769",
+          "path": "reports/toy100/formulation-round-20260924/critic_formulation/attempt-report.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "68c7805fe6e37d0a7eef5fe20ae78564d7f1ce25b177cebe91f8e83db81babd9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/critic_formulation/attempt-report.md"
+        },
+        {
+          "git_blob": "297cc04e43d3ca7ed33af5c1fc199f6281de2595",
+          "path": "reports/toy100/formulation-round-20260924/followups/bcap_real_half_fake_one/result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "043ff95744dcfb22acfaa1da1ea1f1d1a13fe37a430f90963133184f6e9ba6d8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/bcap_real_half_fake_one/result.md"
+        },
+        {
+          "git_blob": "d9ff9895bb8ca272b944cb0e5448562573d92f15",
+          "path": "reports/toy100/formulation-round-20260924/followups/bcap_symmetric_half/regression-result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2f784a14eda1d86948c2f3de010b207617342abed76f85f0413d9edda983a010",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/bcap_symmetric_half/regression-result.md"
+        },
+        {
+          "git_blob": "38473b091666771694eec86a67673484984887d1",
+          "path": "reports/toy100/formulation-round-20260924/followups/bcap_symmetric_half/result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "df19b6f4ed8e94a71aa5005d2d59f1521f23f442df37cb9ee82e29bc40a6128e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/bcap_symmetric_half/result.md"
+        },
+        {
+          "git_blob": "697b045dda5a77d0cc8d103ec1084439d91917a8",
+          "path": "reports/toy100/formulation-round-20260924/followups/ra_r1_fake_cap/result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8e4acb8755db695d8d0a7471c743b123ba7fef254a0e46eb0c83a9ad2d075187",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/ra_r1_fake_cap/result.md"
+        },
+        {
+          "git_blob": "f9b60064f141bd5001612351103db05fcbe3453b",
+          "path": "reports/toy100/formulation-round-20260924/followups/ra_r1r2_exposure_mean/result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "dc0599afaf88780100876b789a647d328fb2e36893ae08d90e2829f68f26623d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/ra_r1r2_exposure_mean/result.md"
+        },
+        {
+          "git_blob": "9978037a15092006f7c378979b0259c7ebba6879",
+          "path": "reports/toy100/formulation-round-20260924/followups/ra_r1r2_shared_coordinate/result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5d810a024faab8f6de86493af02d409ba9870d27a6587717c21be7ef82e436f3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/ra_r1r2_shared_coordinate/result.md"
+        },
+        {
+          "git_blob": "f80c208ec63e6b79ececd97f38b2222851324d68",
+          "path": "reports/toy100/formulation-round-20260924/followups/rp_bcap_half/result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "568344dd30911507f66b5fe8f0a398d3a1426beb805b5e79d5ada7f1b8a458aa",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/rp_bcap_half/result.md"
+        },
+        {
+          "git_blob": "9856d9e66ce187af7f0f1ac61c6791e42d90ae7c",
+          "path": "reports/toy100/formulation-round-20260924/followups/rp_r1_fake_cap/regression-result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "be5c453dbdc9ea2701636a60e963389771a7c4dada3a87490d40c64b43a85098",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/rp_r1_fake_cap/regression-result.md"
+        },
+        {
+          "git_blob": "df63bc4a6b0b15d939b6d0535342c84cd1f5a404",
+          "path": "reports/toy100/formulation-round-20260924/followups/rp_r1_fake_cap/result.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4d804bc73f1bc9445f41c8f56808f9ba52fe26ae2436d1200f4f20fb6dcd07ed",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/followups/rp_r1_fake_cap/result.md"
+        },
+        {
+          "git_blob": "e3f4b43cc76d599e42fad128dac9a7b402f078c6",
+          "path": "reports/toy100/formulation-round-20260924/game_dynamics/attempt-report.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2d7f4fd709b7060706f5ca8204a822e3109f9d18263cd441c7cabafc25af1db4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/game_dynamics/attempt-report.md"
+        },
+        {
+          "git_blob": "9135a0773e1d2191fc3c422f787b5c08f0cd1592",
+          "path": "reports/toy100/formulation-round-20260924/game_dynamics/conclusions.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "fb582a86f8539145963abc6d64b7c894236f96337b1b7ffea158eba35ddc508b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/game_dynamics/conclusions.md"
+        },
+        {
+          "git_blob": "80da8564a7ceaa869432ae5859ed81a59bec4166",
+          "path": "reports/toy100/formulation-round-20260924/particle_geometry/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6c44efedd07eecb49c65645258568e99212ffacf059bea6cc73a571661cb435c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/particle_geometry/README.md"
+        },
+        {
+          "git_blob": "80da8564a7ceaa869432ae5859ed81a59bec4166",
+          "path": "reports/toy100/formulation-round-20260924/particle_geometry/attempt-report.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6c44efedd07eecb49c65645258568e99212ffacf059bea6cc73a571661cb435c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/particle_geometry/attempt-report.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Formulation round: 18 proposals, no joint winner\n\n**36 GPU training gates: 7 PASS, 29 FAIL, 0 ERROR.** No candidate passes both\nring and unequal mass, so none advances to the full 22 or post-convergence tests.\nThe full native GPU reference remains 16/22.\n\n| Candidate | Ring modes / HQ | Ring verdict | Unequal eigen ratio | Unequal verdict |\n|---|---:|---|---:|---|\n| c01_r1r2 | 8 / 0.9014 | FAIL (1/5 suffix) | 0.02234 | FAIL (0/5 suffix) |\n| c02_ra_cap | 7 / 0.9956 | FAIL (0/5 suffix) | 0.57846 | FAIL (0/5 suffix) |\n| c03_smooth_cap | 2 / 0.2595 | FAIL (0/5 suffix) | 0.00000 | FAIL (0/5 suffix) |\n| c04_hinge_cap | 5 / 1.0000 | FAIL (0/5 suffix) | 0.00689 | FAIL (0/5 suffix) |\n| c05_ra_r1r2 | 8 / 1.0000 | PASS (5/5 suffix) | 0.38229 | FAIL (0/5 suffix) |\n| c06_ra_r1_only | 5 / 1.0000 | FAIL (0/5 suffix) | 0.33534 | PASS (6/5 suffix) |\n| shared_coordinate | 6 / 1.0000 | FAIL (0/5 suffix) | 0.62283 | PASS (11/5 suffix) |\n| exposure_trust | 7 / 1.0000 | FAIL (0/5 suffix) | 0.66360 | PASS (6/5 suffix) |\n| exposure_mean | 6 / 0.9802 | FAIL (0/5 suffix) | 0.82172 | PASS (7/5 suffix) |\n| shared_geometry | 6 / 1.0000 | FAIL (0/5 suffix) | 0.62920 | PASS (5/5 suffix) |\n| visit_isotropic | 5 / 0.8333 | FAIL (0/5 suffix) | 0.62519 | PASS (9/5 suffix) |\n| density_mobility | 5 / 0.9966 | FAIL (0/5 suffix) | 0.16980 | FAIL (3/5 suffix) |\n| optimistic_adam | 8 / 1.0000 | FAIL (3/5 suffix) | 0"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-formulation-round-20260924-7c545c79a8d0",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "36a95ee035d03ab0118292fa1fdd35289c5b79a4",
+    "path": "reports/toy100/formulation-round-20260924/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "0195a2a2f201602050e489ec9c5ecebdc118d3d0170c1dbdf1c4a179b5d2909a",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-round-20260924/README.md"
+  },
+  "task_results": []
+}

@@ -1,0 +1,43 @@
+{
+  "clean_families": [
+    "bcap",
+    "k3p",
+    "k3p-no-a2",
+    "k3p-no-anchor",
+    "k3p-no-penalty",
+    "k3p-no-training-noise",
+    "ka2",
+    "r1r2",
+    "release07-gan-v3"
+  ],
+  "display_refresh": {
+    "clock_summaries": 11,
+    "input_digest": "36b596ed80f38c46bbf8261bd944047c941d53d3c0ae16031add593469c55d82",
+    "live_declaration_rows_without_attempts_or_grade_credit": 142,
+    "qualification_regraded": false,
+    "selected_and_archived_science_preserved": true,
+    "training_gif_links": 71,
+    "training_launched": false
+  },
+  "measured_counts": {
+    "BLOCKED": 6,
+    "FAIL": 45,
+    "PASS": 26
+  },
+  "policy_families": [
+    "atlas",
+    "e22"
+  ],
+  "publication": {
+    "input_digest": "67ecceaa031622b67f06135968ba5d8437a6a31c90b2f743e79ea8cb36a16794",
+    "json": "/home/martyn/dev/ParticleGAN/reports/forge/technique-inventory.json",
+    "qualification_reuse": false,
+    "report": "/home/martyn/dev/ParticleGAN/reports/forge/technique-inventory.md",
+    "rows": 11
+  },
+  "qualification_input": false,
+  "schema": "forge_tier1_publication_receipt_v1",
+  "scoped_registry_sha256": "3bd16ed03a99d558f95ee0457682448d9418e607aef62026595d3d9f46f3a86c",
+  "selection_sha256": "d93c820022809d5aa19f7a4c16040b15312950955f11f2cd08ce8c184a547338",
+  "source_commit": "928b485ffbe6e17d79b41d307ae8b6275489b37a"
+}

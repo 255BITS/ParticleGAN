@@ -1,0 +1,371 @@
+{
+  "attested_monotonic": 2066989.354735656,
+  "completed_updates": 600,
+  "deadline_monotonic": 2068752.128219051,
+  "files": {
+    "INITIALIZATION.json": {
+      "bytes": 7229,
+      "sha256": "83e8ddf7ea063c693784335736df09b27dd4ee0acee039effe433adab065d275"
+    },
+    "MODEL_STARTED.json": {
+      "bytes": 402,
+      "sha256": "095dff249ef5794d964cc4b56b8d083f325205ac0e9b876204ed5f2c77aecc7c"
+    },
+    "goal-final.png": {
+      "bytes": 50315,
+      "sha256": "42d70e5cd2cdeb41782cc650e962550435bf8a1070349f3c50abf901da4d3546"
+    },
+    "goal-states.json": {
+      "bytes": 2116187,
+      "sha256": "4cc40815a3d6c3b441e5a83655f5e6a18e9674b2c9ee3a6337252dc673a609a8"
+    },
+    "goal.gif": {
+      "bytes": 681659,
+      "sha256": "6576cf96d8cff287c4b40f0be09ad7403391ec04dda61389127f38e2244b54df"
+    },
+    "grade-projection.json": {
+      "bytes": 4445,
+      "sha256": "4a94e3df20046ed8a58ba3f02b21f4956923837395310e7a1e937b049a9b8f09"
+    },
+    "grade.json": {
+      "bytes": 1223,
+      "sha256": "4179719bb30d66aaa5851c56f50ae6c69dbd7727a0f976d7d0a07ebd396b8095"
+    },
+    "raw-result.json": {
+      "bytes": 70777,
+      "sha256": "4a699b99a3cb973a5d1bcc9946a7d71df1a1ed4b40a98ca95da7b696b2443bdb"
+    },
+    "state.pt": {
+      "bytes": 769363,
+      "sha256": "0f94d1f5cc37589d73060a445e6a33f1506812dec3fe723743c037707011ea91"
+    }
+  },
+  "frozen_request_digest": "f609a62b19bef11fa86c34e9db82a9743726dbee2ef9ae0d26312bd81d71f591",
+  "goal_state_steps": [
+    25,
+    50,
+    75,
+    100,
+    125,
+    150,
+    175,
+    200,
+    225,
+    250,
+    275,
+    300,
+    325,
+    350,
+    375,
+    400,
+    425,
+    450,
+    475,
+    500,
+    525,
+    550,
+    575,
+    600
+  ],
+  "gpu_peak_reserved_mb": 22.0,
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 375,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 9,
+        "passing_suffix": 3,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": 0,
+          "metric": "modes",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 2,
+          "value": 2
+        },
+        {
+          "margin": 0.006249999999999978,
+          "metric": "hq",
+          "op": ">=",
+          "status": "PASS",
+          "threshold": 0.9,
+          "value": 0.90625
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.0,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "metrics": {
+      "distribution_tv": 0.0625,
+      "hq": 0.90625,
+      "mean_rmse": 0.03370506316423416,
+      "mode_fractions": [
+        0.5625,
+        0.4375
+      ],
+      "modes": 2,
+      "quality_mode_fractions": [
+        0.5,
+        0.40625
+      ],
+      "step": 600
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "FAIL"
+  },
+  "grade_projection": {
+    "execution_group": null,
+    "grade": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 375,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 9,
+          "passing_suffix": 3,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          },
+          {
+            "margin": 0.006249999999999978,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.90625
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.0625,
+        "hq": 0.90625,
+        "mean_rmse": 0.03370506316423416,
+        "mode_fractions": [
+          0.5625,
+          0.4375
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.5,
+          0.40625
+        ],
+        "step": 600
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    },
+    "raw_task_grades": {
+      "img_intensity2": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 375,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 9,
+            "passing_suffix": 3,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.006249999999999978,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.90625
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.0,
+          "status": "FAIL"
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "distribution_tv": 0.0625,
+          "hq": 0.90625,
+          "mean_rmse": 0.03370506316423416,
+          "mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "modes": 2,
+          "quality_mode_fractions": [
+            0.5,
+            0.40625
+          ],
+          "step": 600
+        },
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "FAIL"
+      }
+    },
+    "schema": "pg_common26_full_atlas_grade_projection_v1",
+    "task_grades": {
+      "img_intensity2": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": 375,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 9,
+            "passing_suffix": 3,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.006249999999999978,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.90625
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.0,
+          "status": "FAIL"
+        },
+        "gate_status": "FAIL",
+        "metrics": {
+          "distribution_tv": 0.0625,
+          "hq": 0.90625,
+          "mean_rmse": 0.03370506316423416,
+          "mode_fractions": [
+            0.5625,
+            0.4375
+          ],
+          "modes": 2,
+          "quality_mode_fractions": [
+            0.5,
+            0.40625
+          ],
+          "step": 600
+        },
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "FAIL"
+      }
+    }
+  },
+  "observation_steps": [
+    25,
+    50,
+    75,
+    100,
+    125,
+    150,
+    175,
+    200,
+    225,
+    250,
+    275,
+    300,
+    325,
+    350,
+    375,
+    400,
+    425,
+    450,
+    475,
+    500,
+    525,
+    550,
+    575,
+    600
+  ],
+  "repeat": {
+    "accepted_numeric_credit": false,
+    "authority_sequence": 561,
+    "binding_digest": "f95aec7c96f210d944e49d06d460c0b753f5321030c8d5da3a4377379c394dbd",
+    "candidate_digest": "3b91a9c51944409236f633fbaf09349c9dd41fa4c2dc03f59560789fd734ed29",
+    "case_id": "canonical-common26-full-atlas-img_intensity2-ember561-v1",
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "effective_recipe_digest": "c64791736011b9eda199a66e89bf26e454184720e8df23393cc1d3dc39806eff",
+    "execution_updates": 600,
+    "initialization": "new_owner_factory",
+    "observation_contract_sha256": "79f762cdd8af020def7597ecb8c512a0336dafde395203210495ce8259762d05",
+    "protocol_digest": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "recipe_schedule_horizon": null,
+    "repeat_id": "canonical-common26-full-atlas-img_intensity2-ember561-fresh-init-seed0-v1",
+    "rng_version": "forge-rng-v1",
+    "runtime_digest": "aa5147e57a8c7111d6a2236830248cc054f82a6af1ad44ed9defba8c54307d55",
+    "schema": "forge_canonical_full_atlas_fresh_repeat_v1",
+    "seed": 0,
+    "source_contract_sha256": "e7545d25230835dcecaa95a96e3c5fe5947473404cb9b6b47d8cf91913f4bf6d",
+    "source_digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb",
+    "source_manifest_digest": "7a2048111bc97f66710ffb624a93140e55340a5c24a4948ec93647281ee4e1d4",
+    "source_origin_commit": "7f7037a54edc54cfb8f7466f6a98aee56e17b6db",
+    "task_digest": "694752fc66c0a17d73afe9081fec8409f18c178ba252b2152431569427da6003",
+    "task_id": "img_intensity2"
+  },
+  "runtime_digest": "aa5147e57a8c7111d6a2236830248cc054f82a6af1ad44ed9defba8c54307d55",
+  "schema": "pg_common26_full_atlas_child_attestation_v1",
+  "source_digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb",
+  "started_monotonic": 2066952.128219051,
+  "token_sha256": "ff3d21e9be4044c6247f9d0dec4d461c76236d138711831df6489d98822852f9"
+}

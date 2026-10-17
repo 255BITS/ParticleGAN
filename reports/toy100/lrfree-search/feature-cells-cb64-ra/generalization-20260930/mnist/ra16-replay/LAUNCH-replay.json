@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra16-replay/replay.py",
+    "RA16-portability"
+  ],
+  "fixtures": 2,
+  "fresh_training_planned": false,
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra16-replay/logs/RA16-portability-replay.log",
+  "original_branches_per_fixture": 2,
+  "original_updates_per_branch": 10,
+  "source_integrity_before": {
+    "cpu_closed_sha256": "84bf9fbbbfe5f1299cacc91d48f6c215566e6359e7b84400f5431b3165ffc0fc",
+    "inputs_sha256": "e7c912abaa92f2fa660dcfc74a268e543e67803f587461d4e68c3955652ad24b",
+    "package_sha256": "ba20f8e6353b2aca4725258835a68c1dfaa056a0484b2d683a5bb74a1eca0aa0",
+    "read_only_files": 459,
+    "source_freeze_sha256": "5faa154cfa7b42a4d842291dd9f2612b3b89901b45990df9ca8d994b084427d3",
+    "status": "VALID"
+  },
+  "start": 1790818900.9611902,
+  "status": "WAITING_FOR_SERIAL_LOCK",
+  "total_updates": 40
+}

@@ -1,0 +1,96 @@
+{
+  "scope": "saved metadata bound; no numerical rerun",
+  "old_source_sha256": "10706113635963427a2d3a53a8ccaa8e925a42cd7fb5e504ca527ab354943c51",
+  "current_source_sha256": "ab67cbd221de191febe696207dfc088e3150c0feedc6c3ed79b62cdbef4b95d6",
+  "cases": [
+    {
+      "fixture": [
+        "cost",
+        1024,
+        "highdim",
+        128,
+        "frozen_toy_head"
+      ],
+      "eps_trace_between_over_within_max_upper_bound": 5.46702505548554e-12,
+      "added_floor_inactive": true
+    },
+    {
+      "fixture": [
+        "cost",
+        2048,
+        "highdim",
+        128,
+        "frozen_toy_head"
+      ],
+      "eps_trace_between_over_within_max_upper_bound": 4.234592580284935e-12,
+      "added_floor_inactive": true
+    },
+    {
+      "fixture": [
+        "cost",
+        4096,
+        "highdim",
+        128,
+        "frozen_toy_head"
+      ],
+      "eps_trace_between_over_within_max_upper_bound": 4.018490298119183e-12,
+      "added_floor_inactive": true
+    },
+    {
+      "fixture": [
+        "cost",
+        8192,
+        "highdim",
+        128,
+        "frozen_toy_head"
+      ],
+      "eps_trace_between_over_within_max_upper_bound": 4.163342506223898e-12,
+      "added_floor_inactive": true
+    },
+    {
+      "fixture": [
+        "geometry",
+        1024,
+        "fold",
+        128,
+        "trained600"
+      ],
+      "eps_trace_between_over_within_max_upper_bound": 4.1889501652872266e-08,
+      "added_floor_inactive": true
+    },
+    {
+      "fixture": [
+        "geometry",
+        2048,
+        "fold",
+        128,
+        "trained600"
+      ],
+      "eps_trace_between_over_within_max_upper_bound": 3.493557796069676e-08,
+      "added_floor_inactive": true
+    },
+    {
+      "fixture": [
+        "geometry",
+        1024,
+        "fold",
+        128,
+        "frozen_initialization"
+      ],
+      "eps_trace_between_over_within_max_upper_bound": 3.4330321418035764e-07,
+      "added_floor_inactive": true
+    },
+    {
+      "fixture": [
+        "geometry",
+        2048,
+        "fold",
+        128,
+        "frozen_initialization"
+      ],
+      "eps_trace_between_over_within_max_upper_bound": 2.525494863541487e-07,
+      "added_floor_inactive": true
+    }
+  ],
+  "conclusion": "added roundoff bound inactive on all eight prior ranked fixtures"
+}

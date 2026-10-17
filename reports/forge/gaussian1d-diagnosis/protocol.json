@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "gaussian1d-saved-state-diagnosis-v1",
+  "status": "ready",
+  "scope": "saved_state_and_fixed_representation_diagnostic",
+  "qualification_input": false,
+  "seed": 0,
+  "training_updates": 0,
+  "maximum_training_updates": 0,
+  "task_path": "configs/forge/tasks/gaussian1d_acquisition.json",
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "diagnostic_prior": {
+    "kind": "mog",
+    "sigma": 0.1,
+    "standardize": false,
+    "learnable": true
+  },
+  "states": [
+    {
+      "path": "runs/api/tier1-prior-smoke-v1/mog100-n256/gaussian1d_acquisition/initial-state.pt",
+      "step": 0
+    },
+    {
+      "path": "runs/api/tier1-prior-smoke-v1/mog100-n256/gaussian1d_acquisition/state.pt",
+      "step": 1000
+    },
+    {
+      "path": "runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/state.pt",
+      "step": 4000
+    }
+  ],
+  "observations_path": "runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/observations.pt",
+  "curve_path": "runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/curve.json",
+  "fresh_sample_count": 32768,
+  "draws_per_component": 128,
+  "control_checks": 24,
+  "timeout_seconds": 120,
+  "maximum_neural_sample_count": 294912,
+  "fixed_control_scope": "Target-informed affine map in the unchanged MLP using unchanged initial R2/MoG prior; representation control only. Never replaces public deterministic training initialization.",
+  "source_parent_commit": "502cdb8d6fb3cb47d011cd45b190f91228221319",
+  "prior_source_commit": "ec9be602b2b8d587b8c8c3f8bc10e98c96580dc1",
+  "duration_source_commit": "b4d1f95a074ffa64ac8f64e12aa0a049f836c0af",
+  "parent_archive_sha256": "0ab6a34f0dbb27b7bd6647ef44918a1f022abc2732826c0d50190064d96ccd7d",
+  "duration_archive_sha256": "18e339a2e78b73d95798b871914ac7a9301057e8b49a89c610f34dd7992d2480",
+  "inputs": {
+    "configs/forge/tasks/gaussian1d_acquisition.json": "b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13",
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "runs/api/tier1-prior-smoke-v1/mog100-n256/gaussian1d_acquisition/initial-state.pt": "714a87af2b4cddd36f2865b02907f681b654a4b528b04762d1945c96cc95c5e0",
+    "runs/api/tier1-prior-smoke-v1/mog100-n256/gaussian1d_acquisition/state.pt": "e70cf3edc0feb34c737c605f5cbe17e67c3a5d5be138fabe15c4ecf63a2bdb29",
+    "runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/state.pt": "0e48d52faf639d16432b2e3c53b073488bc759333dc3e2afe12aad7833a9e179",
+    "runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/observations.pt": "34e2449ef47b941f908878de624931e972ba0cfb3e0405972ce710557bfbdfc6",
+    "runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/curve.json": "28149d82668134c592018f386e97b4e830daa8197cd22dae55ae3fb8f8798936",
+    "runs/api/tier1-prior-smoke-v1/mog100-n256/gaussian1d_acquisition/receipt.json": "038cbb67be787ec7237c81f648881b5611bce7dd02e24b5cd7776c6d3f78fd4b",
+    "runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/receipt.json": "c5f2d361c681117e80d9b26c8ec29913365645ca38ee7856ebfcec5816d501f4",
+    "runs/api/tier1-prior-duration-v1/mog100-n256-gaussian1d_acquisition/resume-proof.json": "9ef17caa789a3d6531499b020a87773a6391bcb4b38ff750e911de3af024b78a",
+    "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/optim/dualnorm.py": "f5546ca81fc247d3c6a3084343ec604d01a96418396603f470f548a91d1fde12"
+  }
+}

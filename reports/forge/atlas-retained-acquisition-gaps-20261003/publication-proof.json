@@ -1,0 +1,29 @@
+{
+  "artifacts": [
+    {
+      "bytes": 11241,
+      "path": "audit.py",
+      "sha256": "37ed88eb9023d026670c4370b54d638d3d5712a165e076e4cfb42dd1467039da"
+    },
+    {
+      "bytes": 23689,
+      "path": "gaps.json",
+      "sha256": "44cb50568d59208530a264cd6ad84ced0e49e3ffdb7bce6dab558630a165682a"
+    },
+    {
+      "bytes": 4405,
+      "path": "GAPS.md",
+      "sha256": "d0242574f52c6a2f7e746993adcead05224c30178d5b5dd34655c7290b91a6f2"
+    }
+  ],
+  "consumed_inputs_verified": 19,
+  "independent_numeric_replay_byte_equal": true,
+  "new_draws": 0,
+  "new_models": 0,
+  "official_scorer_calls": 0,
+  "original_verdicts_changed": false,
+  "private_plaintext_values_copied": 0,
+  "schema": "pg_retained_acquisition_gaps_publication_review_v1",
+  "source_bytes_unchanged": true,
+  "training_updates": 0
+}

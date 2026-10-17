@@ -1,0 +1,22 @@
+{
+  "gif_sha256": "f9abae004213133933cab4acd728a7a51d4c1e8572a44d1c301a701ce83b5494",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "26d2fe8e5dccfb9175779de99d432f00ae37890238fc8e5a92a6f60e4971aef0",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/932de39b0da24e8d95b13f1d37cdde5f/clockfree-proof/comparisons.pt": "029e8beb6571126714d6ecae660209a7a8f0d4b004742de713764aa227453ae3"
+  },
+  "task_id": "clockfree_audit_measurement_v1"
+}

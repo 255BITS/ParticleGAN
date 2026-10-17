@@ -1,0 +1,21 @@
+{
+  "status": "VALID_TOY_PASS_GRID_PENDING",
+  "utc": "2026-09-30T09:29:56.357528+00:00",
+  "variant": "CB64-RA9",
+  "toy_gate": "PASS",
+  "grid_gate": "PENDING",
+  "toy_saved_checkpoint_count": 10,
+  "toy_saved_state_validity": "VALID",
+  "toy_training_parity": "EXACT_RA8_AFTER_DECLARED_METADATA",
+  "verified_maps": 1074,
+  "input_artifact_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/CB64-RA9-toy.json": "41048a8757387cd6a4f4a30271de3dc420c78b8fbfe42d96578068b31ca74325",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/FINAL-RECEIPT.json": "ed6cad0a796fe6e6b04723e57c8dc45254f990b77d8e8b95f43ab7eb4d02b029",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/FINAL-FROZEN.json": "2fa52b90ae4001a9bb7edaed47c10404ad7b39c60cfc7cd014eb28b2c62e3243",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/receipt.json": "25ff05e040fe8c8d407b3c72402cafbf73a9cf7345a4ddf2f3b5de7d01ab7157",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/FROZEN.json": "d258a3ed192e6a0fce90794ac45297c9b4105d3fd61091156616c6fd76909e40"
+  },
+  "both_quality_gates_pass": false,
+  "package_promoted": false,
+  "scope": "Original full final noisy CUDA toy gate and independent artifact/state validity. Grid gate remains pending; no combined qualification."
+}

@@ -1,0 +1,8 @@
+{
+  "tests": 2,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/pkg-nonflagged-correction",
+  "scope": "CPU regression on exact frozen GPU-contract inputs and fresh seed90229 stream"
+}

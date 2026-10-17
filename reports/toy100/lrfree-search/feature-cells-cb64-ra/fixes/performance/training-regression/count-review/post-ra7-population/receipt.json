@@ -1,0 +1,115 @@
+{
+  "status": "VALID",
+  "design_status": "RESERVED",
+  "scope": "compact independent saved-state and tiny fixed population-flux proof",
+  "checks": {
+    "saved_sources_and_checkpoints_exact": true,
+    "current_row_evidence_missingness_not_assumed_random": true,
+    "all_saved_pair_identification_intervals_span_zero": true,
+    "deterministic_permutation_population_flux_reachable": true,
+    "no_ancestor_evidence_assigned_to_newborn": true,
+    "first_moment_cancellation_control": true,
+    "bounded_conditional_mean_null_proof_and_exact_fixed_enumeration": true,
+    "no_retrospective_RA7_population_certificate": true,
+    "design_reserved_not_production_implemented": true,
+    "read_only_schema_inspection_failure_preserved": true
+  },
+  "reviewed_hashes": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/continuous.py": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/training.py": "8961dc8596230bc0ff5f153606694aa21745e77f5577a0fc93664d9107d5b005",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/feature_cells.py": "eee5469b420d9c750d9ad015172af58052e8aab161d93d4f16fc323be12f9245",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra7/READY.json": "f300089ce4fece3a812b890d4060e0567e833dddd236e5a955993f65ef15e1dd",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/source-freeze.json": "1724fc603970338b0ae94d58d6055a734e3cd424fcd514a53bb1ca9297426b3d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra7-prospective/FINAL-FROZEN.json": "36df2b0c6c754b4eca0daf0fa09eada081b649eda0f3d29fa4723753a2a3dda2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-0500.pt": "132f9351b3c5857b0e434c7d9b294de12084bc09f8012e01c53159e9e78f7612",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-1000.pt": "5ca98bdfbe400930d42f52306e6fa0eac330b6d87a8f6ae5254594daa5c7edb2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-2000.pt": "94ee1c70def3f8256140ec23a2f7c9ef997699ca1a63815ce9a51bd1e85db3c2"
+  },
+  "saved_summary": [
+    {
+      "step": 500,
+      "required_rows": 973,
+      "current_window_participation": {
+        "r_b": 488,
+        "r_2b": 277
+      },
+      "table_s": 1.0,
+      "table_b": 16.0,
+      "generator_s": 0.25,
+      "generator_stamp": -1
+    },
+    {
+      "step": 1000,
+      "required_rows": 973,
+      "current_window_participation": {
+        "r_b": 299,
+        "r_2b": 152
+      },
+      "table_s": 1.0,
+      "table_b": 32.0,
+      "generator_s": 0.125,
+      "generator_stamp": -1
+    },
+    {
+      "step": 2000,
+      "required_rows": 973,
+      "current_window_participation": {
+        "r_b": 281,
+        "r_2b": 75
+      },
+      "table_s": 1.0,
+      "table_b": 64.0,
+      "generator_s": 0.0625,
+      "generator_stamp": -1
+    }
+  ],
+  "synthetic": {
+    "rows": 64,
+    "dimension": 2,
+    "replaced_rows_per_block": 3,
+    "blocks": 20,
+    "required_current_row_participants": 61,
+    "current_row_participants": 49,
+    "all_population_flux_pairs": 10,
+    "all_population_flux_cosines": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0
+    ],
+    "maximum_reaction_flux": 2.7755575615628914e-17,
+    "maximum_flux_accounting_error": 1.734723475976807e-18,
+    "note": "Every coordinate moves; deterministic permutations invalidate rows but preserve all population observables."
+  },
+  "bounded_betting": {
+    "lambdas": [
+      "1/4",
+      "1/2",
+      "3/4",
+      "1"
+    ],
+    "alpha": "1/80",
+    "threshold": 80,
+    "fixed_all_negative_crossing_pairs": 8,
+    "fair_null_sequences": 4096,
+    "null_anytime_crossings": 16,
+    "null_anytime_probability": "1/256",
+    "exact_null_final_expectation": 1,
+    "null": "Conditional population-flux cosine mean >=0, not full-density equilibrium.",
+    "limits": "Epoch/scale allocation and certificate expiry remain necessary; this is not production implementation."
+  },
+  "original_quality": "RA7 strict toy FAIL; both toy and original full Grid100 required.",
+  "next_candidate": "Separate empirical paired-average anti-blur guard; existing population training law unchanged.",
+  "model_forward_calls": 0,
+  "model_gradient_calls": 0,
+  "optimizer_calls": 0,
+  "new_seeds": 0,
+  "new_quality_emissions": 0,
+  "cuda_initialized": false
+}

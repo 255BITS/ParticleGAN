@@ -1,0 +1,229 @@
+{
+  "campaign_cap_seconds": 25200,
+  "configuration_count": 10,
+  "execution_rounds": [
+    {
+      "campaign_cap_seconds": 25200,
+      "campaign_id": "pure-bcap-losses-v1",
+      "paid_attempt_ids_frozen": [
+        "02f803b831d44861820adce18355a59e",
+        "0f1994ca025f464c85124642088b217c",
+        "1032e1df4c694b14a3d5628ca4bd23dd",
+        "17891104e21a4817bb6a0c6372d15155",
+        "1960ec3f31484361962fecc229a69e32",
+        "19fec1d2875248ff975ae1265491cd71",
+        "21c73b9fd45f408fa0b40ab182b976b4",
+        "23e19dacb7114d63b49ebb02527f1a8a",
+        "288936eb39174fd3bf07f60e97763a64",
+        "2e89b6ea84d14007b985c3bb70f64cfe",
+        "2f826b19844140c091965928a874119b",
+        "3056aa7e9e5c493887dda74f0f5dcd3a",
+        "32c79dc0456d4bc589e9e36bab27316c",
+        "33f8a3a2df494506b3b1c793556c7c83",
+        "3a777010b37a48339e81a32d06ce5c45",
+        "446d5f9437ee4e329273ba1f1acc97f1",
+        "4aeaa2316a8a4a119cbd8cff23ccee09",
+        "4eb5c35e509b4299a2289fa78ff83f8d",
+        "51eb0fc4dbdb4af1888a2ce8e9f6d3cf",
+        "5b905ab81da0430588f03d302a43df32",
+        "5bc5dc450b234d19a71e37715620d71f",
+        "666f399c92fe4c59a9f08f5b851706b7",
+        "676619fbfa5e4fe59a312df6662f6c30",
+        "6a9fedac7bbb4ecd8a080a40230f6416",
+        "6f806410852b4ff0a3482569b3b3fc99",
+        "78a1e4390452414abc496855d0097111",
+        "7d3b1facce1f4314b9249a8be80cc1db",
+        "80b050360e4d4202b5d05138c25cc5d9",
+        "80f86665c2924acabb3807936ca9af19",
+        "83d84e50247e4c08be21f119691bd5ab",
+        "9fd6055cda01483994f65867dd72eec6",
+        "a17d32ae15274bed96bb324a239041bd",
+        "a36a9ee30bfc4caa92fa9f842613c2e4",
+        "a43d949bc0094a80a87dbfaa976636ae",
+        "aa60b1572b3f403ca23204b47806a5e1",
+        "aae235aaaaa64ac2b5e36c18f4af3155",
+        "ab5eda290c54483cb5ee67c5775149e7",
+        "accd2a2f1c4845e382db9ea56c6326f2",
+        "ad6b7c03424542d3b6090541b9923ae9",
+        "b812d90758a84198be73f68c9673f370",
+        "b955ece8035444bc8374584ca8f93730",
+        "c76e7f5e2765443a973215a909328e55",
+        "c9ce614e1f01418c9228772d1090bc87",
+        "d020e2bc803a4ab8ad181f76f8753dc4",
+        "d04e0075fd78429ab0aca4e8df285ca9",
+        "d179717b2071476b8115a926ae9f41c6",
+        "d295b50685f34011822aa9836946482d",
+        "d342f0ff8c4d421aa26360478dbf7680",
+        "dc68bad9eefd476294494bceeb125881",
+        "ea25e68da70f4256a166e6c923a63ff3",
+        "ee65b34fe5f74eaeb8f8580624820485",
+        "f8c80814105a49488a79cd7ce67871d0",
+        "fdc40f446d964237b012235b3c6a283f"
+      ],
+      "paid_wall_seconds_frozen": 1038.7521727493731,
+      "round": "pure-bcap-losses-v1"
+    },
+    {
+      "campaign_cap_seconds": 20160,
+      "campaign_id": "pure-bcap-joint-loss-repair-v2",
+      "round": "pure-bcap-joint-loss-repair-v2"
+    }
+  ],
+  "expected_paid_attempt_count": 109,
+  "original_initial_readout_sha256": "433ee0b37529d8b2066c7fed00b17145bde734757fa3dacb9a703d2a8b874108",
+  "original_plan_sha256": "074cf92c60b488addd0a7cc99c09507d94cdf87656d50fb1264420eb731e317c",
+  "original_unselected_paid_attempt_count": 39,
+  "repair_plan_sha256": "dfd9c7e592a0f8fec85765cf40bd5df730757ffc83b9d0e92d3b7ad258f4b0fa",
+  "required_task_ids": [
+    "ae_gan_hold",
+    "five_word_joint_acquisition",
+    "gaussian1d_acquisition",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "round": "pure-bcap-losses-v1",
+  "schema_version": 2,
+  "scientific_comparison_note": "Final candidates remain complete executed-source cohorts; the unchanged two original relativistic candidates retain af75 measurements. All eight repaired nonrelativistic candidates execute all seven peers on44cc66d7. Original omitted candidates remain failure/cancellation context and their paid cost is counted once. No task criteria change, cell grafting, seed repeat or default adoption.",
+  "scope": "pure_bcap_two_source_whole_candidate_publication",
+  "selected_measurement_attempt_count": 70,
+  "source_cohorts": [
+    {
+      "candidate_ids": [
+        "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+        "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c"
+      ],
+      "source_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33",
+      "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac"
+    },
+    {
+      "candidate_ids": [
+        "bcap-pure--6532492dc44ac33fea7a61332f0d62faba0bc351c68dd07fde38eb40c7a8537c",
+        "bcap-pure--af8db09ebc6580e3d94cd29b89b2624cb6c8107947e4b44aa714d23a64ea096c",
+        "bcap-pure--b097e283dc35eb5ff38878e138eacc4845dc3fc6e1a9d5d14bba34899d763657",
+        "bcap-pure--fd25cf2436cc9b68ebf995ebe006a326976082bc711a57a6e116f17efb7b991d",
+        "bcap-pure--06f49dc26a020d0ffb6b887e7156a203bc22927b2a6b96a8e5021bb16d4d2cf7",
+        "bcap-pure--dc8f9b409a2b40ab12abbdc38707c69f25bf7cfab45895c1369700a8236b3844",
+        "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+        "bcap-pure--08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d"
+      ],
+      "source_commit": "44cc66d78495cb913e0ea064840e2de37c8a4ae5",
+      "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72"
+    }
+  ],
+  "specs": [
+    "configs/forge/searches/pure-bcap-relativistic-rates-v1.json",
+    "configs/forge/searches/pure-bcap-non-saturating-joint-rates-v2.json",
+    "configs/forge/searches/pure-bcap-hinge-joint-rates-v2.json",
+    "configs/forge/searches/pure-bcap-wasserstein-joint-rates-v2.json",
+    "configs/forge/searches/pure-bcap-least-squares-joint-rates-v2.json"
+  ],
+  "task_ids": [
+    "ae_gan_hold",
+    "clockfree_audit_measurement_v1",
+    "five_word_joint_acquisition",
+    "gaussian1d_acquisition",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "trials": [
+    {
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-relativistic-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-relativistic-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--6532492dc44ac33fea7a61332f0d62faba0bc351c68dd07fde38eb40c7a8537c",
+      "candidate_revision": "7564542398b027e1c98f3641be8ef755f35f251f0da8e1343b7e4bf32b54be5d",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_signature": "fab963c859a851f89e835808bf7f276a6f612b84158ff42a4015de17ab674636",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-non-saturating-joint-rates-v2"
+    },
+    {
+      "candidate_id": "bcap-pure--af8db09ebc6580e3d94cd29b89b2624cb6c8107947e4b44aa714d23a64ea096c",
+      "candidate_revision": "a8781de309e67a11f37fa266e6a01f5f8e41817a5046fa361dd772a2f2c654e1",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_signature": "cd31f0651e175280c2578957da33189699d5615f2786a33a6979c1a86e2c6a2e",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-non-saturating-joint-rates-v2"
+    },
+    {
+      "candidate_id": "bcap-pure--b097e283dc35eb5ff38878e138eacc4845dc3fc6e1a9d5d14bba34899d763657",
+      "candidate_revision": "2380690dc65e1800aaf69605b1cf3cfee6acb4f41cad292491d912b94c16901f",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_signature": "b802d9aa58ea28391af76c54eac13d90312ec7a041666c24fd9f7a66762d5a62",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-hinge-joint-rates-v2"
+    },
+    {
+      "candidate_id": "bcap-pure--fd25cf2436cc9b68ebf995ebe006a326976082bc711a57a6e116f17efb7b991d",
+      "candidate_revision": "a033de83d7054c9bc4ec7003bfbd7e749271b114d95dcbfad5b4e8d6067ed144",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_signature": "65849eda72e22ad21143ec7cae59a7013fd75c7c6ff46580e0d7aea9f0f190d4",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-hinge-joint-rates-v2"
+    },
+    {
+      "candidate_id": "bcap-pure--06f49dc26a020d0ffb6b887e7156a203bc22927b2a6b96a8e5021bb16d4d2cf7",
+      "candidate_revision": "860bfa48e3eddba61a67c58e5e8d911b22867ac937c17112bad70983f80872a1",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_signature": "219bcc43bc7ebe4a88b6df698c91600f7a822855070ebeadceade405d42ef71b",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-wasserstein-joint-rates-v2"
+    },
+    {
+      "candidate_id": "bcap-pure--dc8f9b409a2b40ab12abbdc38707c69f25bf7cfab45895c1369700a8236b3844",
+      "candidate_revision": "932e2c8b10f61b98fd737e456de54042249326f02345db60ea395c2a71f1c2ac",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_signature": "83466e976d437146cfd3172c2dd3c6073ae19b97f2a417ad00f3f06777377c73",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-wasserstein-joint-rates-v2"
+    },
+    {
+      "candidate_id": "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+      "candidate_revision": "cd6c6f39041d36d6434b28d0c6c4d4b13f7dac3ca9b4de2d89c824ef298ad90c",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_signature": "a62b859dfd7eb8e0e5f4fc16524c79305328696c136561018389a9d5468fb135",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-least-squares-joint-rates-v2"
+    },
+    {
+      "candidate_id": "bcap-pure--08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d",
+      "candidate_revision": "93380a81cd7e9af8d4e78e95c3fe3162928b8e147ad5f5cf4d71167ac7557848",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_signature": "8b2522a1b07c1529b49e701982aa1730fa99f71b19ac8cb3d16672a8a9806e5d",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-least-squares-joint-rates-v2"
+    }
+  ],
+  "view_revision": 5
+}

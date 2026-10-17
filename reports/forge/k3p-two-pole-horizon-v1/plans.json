@@ -1,0 +1,148 @@
+{
+  "arms": [
+    {
+      "candidate_id": "k3p-global-repair-v1",
+      "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+      "compatibility_key": "c41c886c335f1a78dd2d8db6479d9602855b0e53f541862d50b96e9955a6556a",
+      "declaration": "reports/forge/k3p-two-pole-horizon-v1/declarations/word_positive.json",
+      "id": "word_positive_schedule80",
+      "recipe_label": "word_positive",
+      "schedule_horizon": 80,
+      "task_id": "two_pole_800_schedule80_diagnostic_v1"
+    },
+    {
+      "candidate_id": "k3p-global-repair-v1",
+      "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+      "compatibility_key": "6311c731f23521d06486f512a23d124a9c300bfce32342f05318afb8de9e69fa",
+      "declaration": "reports/forge/k3p-two-pole-horizon-v1/declarations/word_positive.json",
+      "id": "word_positive_schedule800",
+      "recipe_label": "word_positive",
+      "schedule_horizon": 800,
+      "task_id": "two_pole_800_schedule800_diagnostic_v1"
+    },
+    {
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "candidate_revision": "3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402",
+      "compatibility_key": "2a674de0bf74ae7596163970f7db3daeb9f2ad165b4767bf99534d1a2a1163a9",
+      "declaration": "reports/forge/k3p-two-pole-horizon-v1/declarations/movement_control.json",
+      "id": "movement_control_schedule80",
+      "recipe_label": "movement_control",
+      "schedule_horizon": 80,
+      "task_id": "two_pole_800_schedule80_diagnostic_v1"
+    },
+    {
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "candidate_revision": "3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402",
+      "compatibility_key": "f8284b617709c21ae56d0a942bbde5b5c24bb3d7c53d89cd891fe6268879bf28",
+      "declaration": "reports/forge/k3p-two-pole-horizon-v1/declarations/movement_control.json",
+      "id": "movement_control_schedule800",
+      "recipe_label": "movement_control",
+      "schedule_horizon": 800,
+      "task_id": "two_pole_800_schedule800_diagnostic_v1"
+    }
+  ],
+  "campaign_ceiling_seconds": 1200,
+  "campaign_id": "k3p-two-pole-horizon-v1",
+  "candidate_ceiling_seconds": 600,
+  "candidate_plans": [
+    {
+      "candidate_id": "k3p-global-repair-v1",
+      "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+      "decision_contract_sha256": "80440f2683d0aa22ace80e856acdf22d27a72cd5ba3f65951c034219fce7d298",
+      "decision_status": "READY",
+      "declaration": "reports/forge/k3p-two-pole-horizon-v1/declarations/word_positive.json",
+      "declaration_sha256": "1dcc2707e32ca17e1925bde08f9b23f27c922ef305a9995345ec0044bcb1383f",
+      "jobs_sha256": "72bb77ccfe0b6eb9794608361e0fce50e8655a05ed861046c0f2f7e7b493ed81",
+      "original_declaration": "configs/forge/ideas/k3p-global-repair-v1.json",
+      "original_declaration_sha256": "492c1fb8551098d022e5e4d95deb8d4e4dc8d42699cfd2d0e6c164ea45c22ead",
+      "recipe_label": "word_positive"
+    },
+    {
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "candidate_revision": "3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402",
+      "decision_contract_sha256": "4ebe3cbb49ff1edbf9a326ab0ba492f10b635429a4a564a63257561c33a2aedd",
+      "decision_status": "READY",
+      "declaration": "reports/forge/k3p-two-pole-horizon-v1/declarations/movement_control.json",
+      "declaration_sha256": "5f8a1a05745b7a7202daf0c78755ba513f908a6e26d36cea1de0cb3379cf9253",
+      "jobs_sha256": "c33239e85f0d4f5da17e05a93686dd654124452839d3927ac1aaea787b6917bf",
+      "original_declaration": "configs/forge/configurations/k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5.json",
+      "original_declaration_sha256": "90930c5cdf100af4eae35471d432629beebcd611c12cd2daa3dd92625e99e855",
+      "recipe_label": "movement_control"
+    }
+  ],
+  "compute": {
+    "cpu": {
+      "backend": "cpu",
+      "deterministic": true,
+      "machine": "x86_64",
+      "model": "AMD Ryzen 9 5900X 12-Core Processor",
+      "tf32": false,
+      "threads": 1
+    }
+  },
+  "execution_updates_per_arm": 800,
+  "maximum_workers": 1,
+  "milestones": [
+    80,
+    200,
+    400,
+    800
+  ],
+  "original_two_pole_task_sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5",
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "7c9ea7c422fdacc4f9bbee35883893cf0d6abb2693341b515598e52b8a47cfa5",
+        "id": "k3p-coeff170-cap1",
+        "source_digest": "4ff32ae9e41adf0814fbf9a35bb81376b1ff7940ca9a497a43bf4526722561ef"
+      },
+      "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+      "selector": [],
+      "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed",
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d",
+        "study": "k3p-global-tier1-v3"
+      },
+      "path": "reports/forge/k3p-global-tier1-v3/summary.json",
+      "selector": [],
+      "sha256": "1e45b4e4c50b9ce8a0bd2ce17f03d145983e91eda93e7bf0c645d2b6aaba03e5",
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "id": "k3p-direct-rate-analysis-v1",
+        "source_digest": "8778d4c7fc0d714b7b571dccabdfbd08093625e645b97519ea009f2b4b66f48d"
+      },
+      "path": "reports/forge/k3p-global-tier1-v3/direct-rate-analysis.json",
+      "selector": [],
+      "sha256": "c66f70e77c7eef5bfab2000d6d1155fbd6400d138b70b1f5dfe44f32f77247d3",
+      "use": "motivation_only"
+    }
+  ],
+  "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_input": false,
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "scientific_python_executable": "/usr/bin/python",
+  "scope": "One bounded diagnostic round. Existing global recipes only; no seeds/new techniques/task-specific recipes or original gate changes. Standard24checks/fivepassingterminalchecks per800-step diagnostic; extra milestones/prefix do not enter its gate. No follow-on search or default adoption.",
+  "seed": 0,
+  "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+  "source_file_count": 1143,
+  "study": "k3p-two-pole-horizon-v1",
+  "task_ceiling_seconds": 300,
+  "through_tier": 1,
+  "view": "k3p_two_pole_horizon"
+}

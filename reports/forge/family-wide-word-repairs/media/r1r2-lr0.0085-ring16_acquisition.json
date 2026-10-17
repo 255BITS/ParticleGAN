@@ -1,0 +1,87 @@
+{
+  "candidate": "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+  "candidate_revision": "98d01c8b382226c46c312202c5a952ad5d37355192778c149090a03b8fd17bfc",
+  "gif": {
+    "bytes": 250838,
+    "path": "reports/forge/family-wide-word-repairs/media/r1r2-lr0.0085-ring16_acquisition.gif",
+    "sha256": "20b0fc88101bf143175c3f0e0b7f55c9724724d85edb15891bc5e233bf93bdc8"
+  },
+  "kind": "actual_training_numerical_goal_gif",
+  "observation_count": 24,
+  "observations_sha256": "64d67ab6a55f58b914dbc64a186152d8f3b9f5f6a3e96e6dc3cda9d1bee72ad3",
+  "optimizer_updates": 0,
+  "raw_result": {
+    "bytes": 163875,
+    "path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/r1r2-global-repair-rates-v1/eb05f11341ca4916a7cf30233311a7fb/raw-result.json",
+    "sha256": "5e11a604d2f6d1b8e5cdb1167a0f1208e1f9979029a738621256aeef8a0b3c0f"
+  },
+  "renderer": {
+    "matplotlib": "3.11.1",
+    "pillow": "12.3.0",
+    "python": "3.12.13",
+    "source_sha256": "9b1fb30c93c26dd4d04e8f781ed6836e60929498755e22c4bbff814913d220f4"
+  },
+  "resolved_request": {
+    "bytes": 1609061,
+    "path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/r1r2-global-repair-rates-v1/eb05f11341ca4916a7cf30233311a7fb/request.json",
+    "sha256": "60c48ab90e12888569e37132bcffe6eff8aca79f3d12b64d33b8aff8ab0b822c"
+  },
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "Saved API metric outputs against declared gate targets; no invented samples or parameter interpolation. Numerical grader retains all recorded observations.",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "task": "ring16_acquisition",
+  "thresholds": [
+    [
+      "sample_count",
+      ">=",
+      4096
+    ],
+    [
+      "modes",
+      ">=",
+      16
+    ],
+    [
+      "mass_tv",
+      "<=",
+      0.15
+    ],
+    [
+      "hq",
+      ">=",
+      0.85
+    ],
+    [
+      "component_covariance_error",
+      "<=",
+      0.85
+    ],
+    [
+      "component_min_eigen_ratio",
+      ">=",
+      0.15
+    ]
+  ],
+  "updates": [
+    17,
+    67,
+    117,
+    167,
+    217,
+    250,
+    300,
+    350,
+    400
+  ]
+}

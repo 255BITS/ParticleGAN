@@ -1,0 +1,102 @@
+{
+  "completed": 1790824840.9285262,
+  "evidence_validity": "VALID",
+  "original_scoring_and_acceptance_unchanged": true,
+  "scope": "observer numerical parity",
+  "source_integrity_after": {
+    "files": 104,
+    "packages": {
+      "Atlas": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+      "E22": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316"
+    },
+    "source_freeze_sha256": "24821dcbc3d85f5188b42a2389293254742db384e9c206f893b7371be9d566e3",
+    "status": "VALID"
+  },
+  "status": "PASS",
+  "variants": {
+    "Atlas": {
+      "control": {
+        "external_cursor_sha256": "1e935fd3afce3b0167f57208f0e00bf47b4e200de24f248559e31f35d25bb916",
+        "first_update": 1001,
+        "last_update": 1010,
+        "observed": false,
+        "original_evaluation_score": {
+          "hq": 0.027699999511241913,
+          "modes": 15
+        },
+        "original_seed": 1234,
+        "preservation_checks": 0,
+        "private_streams_in_saved_state": true,
+        "status": "COMPLETE",
+        "training_updates": 10,
+        "variant": "Atlas"
+      },
+      "exact_losses": true,
+      "exact_original_evaluation": true,
+      "exclusions": [
+        "birth_death.last.eval_seconds"
+      ],
+      "observed": {
+        "external_cursor_sha256": "1e935fd3afce3b0167f57208f0e00bf47b4e200de24f248559e31f35d25bb916",
+        "first_update": 1001,
+        "last_update": 1010,
+        "observed": true,
+        "original_evaluation_score": {
+          "hq": 0.027699999511241913,
+          "modes": 15
+        },
+        "original_seed": 1234,
+        "preservation_checks": 11,
+        "private_streams_in_saved_state": true,
+        "status": "COMPLETE",
+        "training_updates": 10,
+        "variant": "Atlas"
+      },
+      "runtime_state_differences": [],
+      "semantic_state_differences": [],
+      "status": "PASS"
+    },
+    "E22": {
+      "control": {
+        "external_cursor_sha256": "ffa82f122a29e79ba7917cdf3a186c41660cde5e70774917357e1565d854ca80",
+        "first_update": 1,
+        "last_update": 20,
+        "observed": false,
+        "original_evaluation_score": {
+          "hq": 0.04084999859333038,
+          "modes": 38
+        },
+        "original_seed": 1234,
+        "preservation_checks": 0,
+        "private_streams_in_saved_state": true,
+        "status": "COMPLETE",
+        "training_updates": 20,
+        "variant": "E22"
+      },
+      "exact_losses": true,
+      "exact_original_evaluation": true,
+      "exclusions": [
+        "birth_death.last.eval_seconds"
+      ],
+      "observed": {
+        "external_cursor_sha256": "ffa82f122a29e79ba7917cdf3a186c41660cde5e70774917357e1565d854ca80",
+        "first_update": 1,
+        "last_update": 20,
+        "observed": true,
+        "original_evaluation_score": {
+          "hq": 0.04084999859333038,
+          "modes": 38
+        },
+        "original_seed": 1234,
+        "preservation_checks": 21,
+        "private_streams_in_saved_state": true,
+        "status": "COMPLETE",
+        "training_updates": 20,
+        "variant": "E22"
+      },
+      "runtime_state_differences": [],
+      "semantic_state_differences": [],
+      "status": "PASS"
+    }
+  }
+}

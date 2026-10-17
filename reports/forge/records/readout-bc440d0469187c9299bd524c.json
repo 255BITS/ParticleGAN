@@ -1,0 +1,74 @@
+{
+  "attempt_ids": [
+    "ea66e44192c048eaa97f8595c5e55508"
+  ],
+  "candidate_id": "r3gan-stacked-training-toy-v1",
+  "candidate_revision": "724a672468491e40b3f214c3b44b8913b9317266346527139da7a1de750d8d44",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "The earlier matched penalty-only R1/R2 row reached mean_abs0.178637 and grad_med0.064047 under its separate frozen K3P recipe/source. Both fail this exact movement threshold, but the whole training recipe and source cohorts differ. This80-update host result does not reproduce or disprove the paper architecture,Gaussian prior,10M-image budget orEMA image evaluation. No quality ranking is justified.",
+  "conclusion": "The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed Forge toy hosts, failed the complete 80-update two_pole movement gate: mean_abs=0.011449367739260197 <0.30; grad_med=0.13321508467197418 <=1 passed. 24 observations, zero passing observations/suffix; actual Adam beta2 0.9 to0.99, gamma1 to0.1, constant LR0.0002,80 penalty applications, no interventions. One CPU attempt cost5.347339480998926 paid seconds. All23 remaining requirements are unknown; no execution error or downstream spending.",
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Transfer the Modern GAN paper's Stacked MNIST training recipe to Forge's fixed toy hosts, distinguishing the complete scheduled Adam/R1/R2 recipe from the prior penalty-only swap.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact failed revision. Preserve full denominators and the separate recorded cohorts; no seed repeats,unchanged reruns or downstream gate filling. Before a substantive further test, establish an independently justified and bounded convergence/reference protocol; calibrate the provisional screen before adoption.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "ea66e44192c048eaa97f8595c5e55508",
+        "result_hash": "50b7d156951985639efc4a1f444c54f6f89d9f06e5819c4317f2cb06c617931e",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "publication": {
+    "kind": "compact_readout_projection",
+    "original_archive_member": "runs/forge/r3gan-stacked-training-toy-v1/full-readouts/readout-bc440d0469187c9299bd524c.json",
+    "original_file_sha256": "8d9abdda1e5b344d012dc2a6fa17e8c7fcb85b1e02a769ff828b74804881184b",
+    "qualification_input": false
+  },
+  "qualification_reuse": false,
+  "record_id": "readout-bc440d0469187c9299bd524c",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json"
+  },
+  "task_results": [
+    {
+      "_attempt_id": "ea66e44192c048eaa97f8595c5e55508",
+      "compatibility_key": "c4f1ae304edbf8cb08a4c486fad119a12988164c3fb6f736288290a9d7c4753a",
+      "cost": {
+        "adapter_seconds": 0.273574368970003,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 5.347339480998926,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.2649928049650043,
+        "wall_seconds": 5.347339480998926
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.13321508467197418,
+        "mean_abs": 0.011449367739260197
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    }
+  ]
+}

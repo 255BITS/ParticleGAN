@@ -1,0 +1,69 @@
+{
+  "task": "routed_caption_untied_up_v1",
+  "software_status": "PASS",
+  "science_executed": false,
+  "scope": "Reduced CPU software geometry only; no CUDA/fullgeometry/quality by preparation agent.",
+  "cases": 20,
+  "pytest_seconds": 1.87,
+  "bounded_process_seconds": 3.6655184160917997,
+  "CPU_target_seconds": 20,
+  "CPU_hard_seconds": 60,
+  "native_software_updates": 4,
+  "software_optimizer_steps": 8,
+  "full_geometry_host_forwards": 0,
+  "quality_updates": 0,
+  "CUDA_initialized": false,
+  "raw_software_log_sha256": "4ab49f80d3e11299400edc0aaaa34f283638035deaa0f29c17353dbbedeb74f9",
+  "raw_software_execution_receipt_sha256": "1eb22156db213b37e873930bd5b5ee020205568348c0f4744cf873597b49f5ac",
+  "raw_storage": "Local /tmp software artifacts; raw logs stay outside Git.",
+  "command": "python -m pytest tests/test_e22_routed_caption_untied.py -q",
+  "proofs": [
+    "Public native RpGAN initial ordinary-main-Up gradients exact with nonzeroC/nativeDV12 and all6 U_p gradients positive; complete native/caller/modes/grads restored.",
+    "Both BF16 heads registered/public-initialized beforeopt/EMA; direct optimizer ownership and EMA Parameter+forward noalias witness.",
+    "C-zero destructive conditional-gradient control, F64 scorer/oracles/both-control and six-source gate/live bounds.",
+    "Exactly2 original+2 fresh publicreplay tinyupdates; full rows/native/caller/mode/gradient state exact; trainedrestore keeps subclass without initialize_.",
+    "Clean and zero-code captures immutable; exclusive science/media output refusal and four-row shared-scale renderer math."
+  ],
+  "post_suite_zero_update_check": {
+    "reason": "Final input validation binds immutable bundled fixture SHA; card wording gained explicit fullgeometry initial-tangent prerequisite.",
+    "cases": 2,
+    "pytest_seconds": 0.08,
+    "process_seconds": 1.580894700018689,
+    "native_updates": 0,
+    "scope": "Output refusal and fixedcard validation; no repeated native update tests."
+  },
+  "prepared_checkout": "610a5f5bc4a73d9d86f94858a2e318a6af530381",
+  "imported_package": {
+    "imported_package": "/ml2/hypergan/ParticleGAN-routed-caption-untied-up-develop/particlegan",
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+  },
+  "precision_backend": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "versions": {
+    "torch": "2.13.0+cu126",
+    "Pillow": "12.3.0",
+    "numpy": "2.5.2"
+  },
+  "source_sha256": {
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b",
+    "tests/test_e22_routed_caption_untied.py": "5bde66c3f5cb6efd77a21ff8d69f8faeb9ed40ae94192a9910c5945cae2588c7",
+    "docs/e22_routed_caption_untied_v1.json": "be0ca520f7426c04a8d9edada3d17027137445e22ff0126cfa078218e96bd7f1",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3"
+  },
+  "budgets": {
+    "sole_GPU0_quality_seconds": 300,
+    "native_quality_updates": 1536,
+    "saved_state_CPU_media_seconds": 60
+  },
+  "limits": [
+    "Software PASS is not convergence PASS.",
+    "Untied heads add82944parameters and separateBF16rounding, not a unique head-interference or variance diagnosis.",
+    "CurrentactualBF16captionnegative and originalfullSupraordinarylead remain unchanged."
+  ],
+  "science_command": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_untied --run --out runs/caption-untied-up-v1",
+  "media_command": "python -m examples.render_e22_routed_caption_untied --run-directory runs/caption-untied-up-v1"
+}

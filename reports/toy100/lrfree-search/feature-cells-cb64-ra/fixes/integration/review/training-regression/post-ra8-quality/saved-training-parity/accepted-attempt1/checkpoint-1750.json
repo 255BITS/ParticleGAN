@@ -1,0 +1,180 @@
+{
+  "status": "EXACT_LEGACY_TRAINING_PARITY",
+  "step": 1750,
+  "scope": "descriptive serialized endpoint training neutrality, not quality acceptance",
+  "compared_all_serialized_trainer_leaves": true,
+  "legacy_view_reference_sha256": "4c3bd7c94389ff5474eeda144532abb0757e561ab562b5c11fb56ae1f2b4eead",
+  "legacy_view_candidate_sha256": "4c3bd7c94389ff5474eeda144532abb0757e561ab562b5c11fb56ae1f2b4eead",
+  "components": {
+    "birth_death": {
+      "exact": true,
+      "reference_sha256": "3b6faa3a6d51fa4c9fce59e9299b8033abb318cad85ae09e4ecab8471c531fa6",
+      "candidate_sha256": "3b6faa3a6d51fa4c9fce59e9299b8033abb318cad85ae09e4ecab8471c531fa6"
+    },
+    "completed_steps": {
+      "exact": true,
+      "reference_sha256": "ecd054a9ed2bbf4aac229ead16853a968fc24d5d89b56078bfc2cd4e7531b3f5",
+      "candidate_sha256": "ecd054a9ed2bbf4aac229ead16853a968fc24d5d89b56078bfc2cd4e7531b3f5"
+    },
+    "controller": {
+      "exact": true,
+      "reference_sha256": "ef0e47fe0edecc9a392d1eecb7957bd0447e5449e7fcb935ed99551aba037d41",
+      "candidate_sha256": "ef0e47fe0edecc9a392d1eecb7957bd0447e5449e7fcb935ed99551aba037d41"
+    },
+    "cpu_rng": {
+      "exact": true,
+      "reference_sha256": "955ce21cc2bdd8306374246739b6368d1d836c33df340bae22da9e50ce9f27ba",
+      "candidate_sha256": "955ce21cc2bdd8306374246739b6368d1d836c33df340bae22da9e50ce9f27ba"
+    },
+    "cuda_rng": {
+      "exact": true,
+      "reference_sha256": "68636b80a077addc02ba16239a356f714020af548fdd465756bbbfdeb39eba33",
+      "candidate_sha256": "68636b80a077addc02ba16239a356f714020af548fdd465756bbbfdeb39eba33"
+    },
+    "device": {
+      "exact": true,
+      "reference_sha256": "62b1fd387ede69f7b6cdca09f82c873e93fc375d3b8198096b12c0e5f45f8d84",
+      "candidate_sha256": "62b1fd387ede69f7b6cdca09f82c873e93fc375d3b8198096b12c0e5f45f8d84"
+    },
+    "dtype": {
+      "exact": true,
+      "reference_sha256": "dcd7721175e7e5e54c7c030a218d2af8a6c096f88f801afa6801931b4a507548",
+      "candidate_sha256": "dcd7721175e7e5e54c7c030a218d2af8a6c096f88f801afa6801931b4a507548"
+    },
+    "initial_lrs": {
+      "exact": true,
+      "reference_sha256": "28e7a704629249811c5438ca071514744c87b4c8f075674585d0a339a7256591",
+      "candidate_sha256": "28e7a704629249811c5438ca071514744c87b4c8f075674585d0a339a7256591"
+    },
+    "lr_settle": {
+      "exact": true,
+      "reference_sha256": "426cf0b2ed09610af2b870fba043e1bbb14d840d445398ddf19c8e116bd9fd55",
+      "candidate_sha256": "426cf0b2ed09610af2b870fba043e1bbb14d840d445398ddf19c8e116bd9fd55"
+    },
+    "models": {
+      "exact": true,
+      "reference_sha256": "5584d497c8cee0b43347a44acf4962d6196ede2c65bfc5fe1a1be35383857a49",
+      "candidate_sha256": "5584d497c8cee0b43347a44acf4962d6196ede2c65bfc5fe1a1be35383857a49"
+    },
+    "optimizer_options": {
+      "exact": true,
+      "reference_sha256": "88030c4ffd69d277afb5ff21be5c74f74b2bf22c9a2ffd8a9715ce910b5b233e",
+      "candidate_sha256": "88030c4ffd69d277afb5ff21be5c74f74b2bf22c9a2ffd8a9715ce910b5b233e"
+    },
+    "optimizers": {
+      "exact": true,
+      "reference_sha256": "a7defd2ae27bb53d184623e1f5e9f33061a1105cadb0c14decd8cecd9fb753ef",
+      "candidate_sha256": "a7defd2ae27bb53d184623e1f5e9f33061a1105cadb0c14decd8cecd9fb753ef"
+    },
+    "output_noise": {
+      "exact": true,
+      "reference_sha256": "fe778984b1bdb712d7a085b98b1e02b5950f1e48f220371ec83c77e4866e37ba",
+      "candidate_sha256": "fe778984b1bdb712d7a085b98b1e02b5950f1e48f220371ec83c77e4866e37ba"
+    },
+    "penalty_options": {
+      "exact": true,
+      "reference_sha256": "88030c4ffd69d277afb5ff21be5c74f74b2bf22c9a2ffd8a9715ce910b5b233e",
+      "candidate_sha256": "88030c4ffd69d277afb5ff21be5c74f74b2bf22c9a2ffd8a9715ce910b5b233e"
+    },
+    "recipe": {
+      "exact": true,
+      "reference_sha256": "0ad444f6c9a697de9c49b50357f7708300685cbe239bafc578854ba0aafff9a7",
+      "candidate_sha256": "0ad444f6c9a697de9c49b50357f7708300685cbe239bafc578854ba0aafff9a7"
+    },
+    "requires_grad": {
+      "exact": true,
+      "reference_sha256": "8454c9037345e1f436cb89663a7a12cdcea3986cf19f1168bd811775ec874312",
+      "candidate_sha256": "8454c9037345e1f436cb89663a7a12cdcea3986cf19f1168bd811775ec874312"
+    },
+    "row_evidence": {
+      "exact": true,
+      "reference_sha256": "78101f2db2de95f4898475f333e38c97ed787ddee39d9eb3dc2eba49a0cb729e",
+      "candidate_sha256": "78101f2db2de95f4898475f333e38c97ed787ddee39d9eb3dc2eba49a0cb729e"
+    },
+    "schema": {
+      "exact": true,
+      "reference_sha256": "5d015e710b7314dd6f07a170de90372fa9aaacd7a8167713f1ae6d84fb558edd",
+      "candidate_sha256": "5d015e710b7314dd6f07a170de90372fa9aaacd7a8167713f1ae6d84fb558edd"
+    },
+    "serial_backward": {
+      "exact": true,
+      "reference_sha256": "9cb1f8d265b86a3c23cc31ee85330c3ec44d521e944c85daf59a11ed734877ab",
+      "candidate_sha256": "9cb1f8d265b86a3c23cc31ee85330c3ec44d521e944c85daf59a11ed734877ab"
+    },
+    "streams": {
+      "exact": true,
+      "reference_sha256": "b559df5f3f942c5b8782f8217037f76ee2b5d2b1a9fe94415a5baf5ef0ca64e5",
+      "candidate_sha256": "b559df5f3f942c5b8782f8217037f76ee2b5d2b1a9fe94415a5baf5ef0ca64e5"
+    }
+  },
+  "unexpected_difference_count": 0,
+  "unexpected_differences": [],
+  "allowed_metadata_reference": {
+    "counters/feature_distance_cells": 430227520,
+    "counters/projection_products": 5003523072,
+    "last/eval_seconds": 1.8818391331005841,
+    "last/work/distance_cells": 1807680,
+    "last/work/projection_products": 22041600
+  },
+  "allowed_metadata_candidate": {
+    "backend_schema": 7,
+    "settings/paired_average_policy": "ema_support_inside_current_real_group_Q_v1",
+    "settings/paired_average_expiry": "strictly_less_than_one_real_fifo_turnover_v1",
+    "paired_average": {
+      "schema": 1,
+      "policy": "ema_support_inside_current_real_group_Q_v1",
+      "snapshot": 218,
+      "step": 1744,
+      "rows": 1024,
+      "required": 973,
+      "cells": 64,
+      "rank": 8,
+      "groups": 25,
+      "calibration_rows": 512,
+      "chart_valid": true,
+      "duplicate_ok": true,
+      "finite_rows": 1024,
+      "same_group_rows": 1016,
+      "ema_eligible_rows": 970,
+      "coherent_rows": 963,
+      "eligible": false
+    },
+    "counters/feature_distance_cells": 458801216,
+    "counters/projection_products": 5232112640,
+    "last/eval_seconds": 0.1365494451019913,
+    "last/work/distance_cells": 1938752,
+    "last/work/projection_products": 23090176
+  },
+  "paired_average_lease_live": false,
+  "checkpoint_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-1750.pt": "6d0fd133d017d75f65aeebc0072e6bd59ce49572902f6652a9db3a59cc9737a6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/learned/training/toy/CB64-RA8/checkpoint-1750.pt": "51f5387697b000c058d46fa2bf202307948d8455ec6922e98c4c509128ecfb9f"
+  },
+  "original_trainer_sha256": {
+    "RA7": "81abba40ec8315db0a483545b7b6195d92adad21d40977140fc724f5c81e6283",
+    "RA8": "720a2f440949ef3ff3f5716696b9ecb6f026a1648137bec85964e2f509d83f5d"
+  },
+  "data_position_exact": true,
+  "original_checkpoint_objects_unchanged": true,
+  "all_sources_and_input_files_unchanged": true,
+  "helper_frozen_sha256": "f5a6e92c58f5d566300315277db5b72c2512bfe996ac7fc7e5077e2d5537a7d1",
+  "source_frozen_utc": "2026-09-30T07:51:13.917572+00:00",
+  "compared_utc": "2026-09-30T07:51:16.204482+00:00",
+  "post_save_seal": {
+    "log_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/logs/learned-toy-CB64-RA8.log",
+    "line_sha256": "e873703dba16d8d9bd3a1f7252476c28320d89ff181720f2abeaa7b80fa363d5",
+    "event": "training_checkpoint",
+    "step": 1750,
+    "utc": null,
+    "post_checkpoint_save": true
+  },
+  "CPU_only": true,
+  "cuda_initialized": false,
+  "global_rng_unchanged": true,
+  "new_emissions": 0,
+  "new_training_steps": 0,
+  "new_optimizer_steps": 0,
+  "new_seed_experiments": 0,
+  "quality_verdict": null,
+  "outer_log_scope": "record metrics/diagnostics/timing and config receipt provenance are not training state and not compared as parity"
+}

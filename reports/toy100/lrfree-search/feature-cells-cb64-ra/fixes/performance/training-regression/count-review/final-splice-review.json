@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_final_splices.py": "2cf3405ef421e02e100de61939a524012c8a1034d5f08d7c304a35bbdc682f85",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/pkg-global-count/particlegan/feature_cells.py": "1d3c90aa3b72d086df0defcc8c356e48778310f005473e8c5c271afa44f89d76",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/plan-batching/pkg-PLAN-FINAL/particlegan/feature_cells.py": "e6d2823d8e862dd8b29182cf0988325328523be0e77ae1fb2ea964707b34ad7f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/plan-batching/pkg-PLAN/particlegan/feature_cells.py": "113a2e0553a45ef1898130af1f9c25703e8d03af25525636c3c3ecbb1fa5495e"
+  },
+  "helper_matches_independently_reviewed_prototype": true,
+  "exactly_four_performance_AST_splices": true,
+  "all_other_module_AST_unchanged": true,
+  "original_MST_and_all_backend_settings_unchanged": true,
+  "cpu_only": true,
+  "scope": "Complete feature module composition proof, stdlib only"
+}

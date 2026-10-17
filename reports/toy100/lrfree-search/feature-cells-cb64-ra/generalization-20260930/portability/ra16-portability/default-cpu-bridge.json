@@ -1,0 +1,103 @@
+{
+  "CPU_allocation_sites": [
+    {
+      "factory": "tensor",
+      "line": 84,
+      "module": "feature_reference.py"
+    },
+    {
+      "factory": "empty",
+      "line": 129,
+      "module": "mean_transport.py"
+    },
+    {
+      "factory": "tensor",
+      "line": 316,
+      "module": "mean_transport.py"
+    },
+    {
+      "factory": "zeros",
+      "line": 46,
+      "module": "output_moments.py"
+    },
+    {
+      "factory": "zeros",
+      "line": 113,
+      "module": "output_moments.py"
+    },
+    {
+      "factory": "empty",
+      "line": 179,
+      "module": "population_continuity.py"
+    },
+    {
+      "factory": "empty",
+      "line": 179,
+      "module": "population_continuity.py"
+    }
+  ],
+  "CUDA_initialized": false,
+  "CUDA_visible": true,
+  "candidate_shape_rejection": {
+    "message": "birth-death sample shape differs from the frozen backend output shape",
+    "type": "ValueError"
+  },
+  "candidate_shape_rejection_state_atomic": true,
+  "changed_modules": [
+    "feature_policy.py",
+    "feature_reference.py",
+    "mean_transport.py",
+    "output_moments.py",
+    "population_continuity.py"
+  ],
+  "default_CPU_forward_law": [
+    {
+      "actual_backend": "feature_cells",
+      "exact_all_checkpoint_state_every_step": true,
+      "exact_losses_every_step": true,
+      "exact_samples": true,
+      "feature_reactions": 2,
+      "mean_forward_rows": 2048,
+      "resumed_next_update_exact": true,
+      "updates": 18,
+      "valid_checkpoint_roundtrip_both_directions": true,
+      "width": 2
+    },
+    {
+      "actual_backend": "knn",
+      "exact_all_checkpoint_state_every_step": true,
+      "exact_losses_every_step": true,
+      "exact_samples": true,
+      "feature_reactions": null,
+      "mean_forward_rows": null,
+      "resumed_next_update_exact": true,
+      "updates": 2,
+      "valid_checkpoint_roundtrip_both_directions": true,
+      "width": 9
+    }
+  ],
+  "fixture_sha256": "9ae50f9fd0e903b7516ac04a72318ba79a35e52076393317511ec29ae19744b4",
+  "meta_projection_exact_normal_CPU": true,
+  "noseedexperiment": true,
+  "original_meta_failure": {
+    "message": "Tensor on device meta is not on the expected device cpu!",
+    "type": "RuntimeError"
+  },
+  "original_shape_failure": {
+    "fifo_sample_shape": [
+      1,
+      2
+    ],
+    "generated_observation_failure": {
+      "message": "generator output shape does not match the real FIFO",
+      "type": "ValueError"
+    },
+    "output_shape": [
+      2
+    ],
+    "restore_accepted": true
+  },
+  "seed": 1234,
+  "source_AST_only_7_CPU_factory_keywords_plus_pre_mutation_shape_validator": true,
+  "status": "CPU_PASS"
+}

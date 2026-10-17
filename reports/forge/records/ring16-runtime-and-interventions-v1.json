@@ -1,0 +1,52 @@
+{
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50",
+  "changed_factors": [
+    "serialize all autograd work at update401 in matched live/restored controls",
+    "fixed weak singular direction damping, truncation, tiny gradient noise or sign flips, at401 only or every update"
+  ],
+  "conclusion": "Four CUDA controls exactly reproduce historical ordinary critic gradients. Serializing autograd only during update401 makes complete live/restored contexts identical but chooses a third trajectory; actual engine execution order and serialized1600 quality remain unmeasured. Identical topology but 1054/7503 changed sequence relations, versus zero for serialized controls, supports thread-local autograd counter history and accumulation ordering. No lossy checkpoint dtype conversion found. Continuous truncation confirms acquisition at684 (47terminal passes), continuous tiny-gradient noise at817 (45), and one-time sign flips at1300 (19). Truncation fails covariance at717/734/750/817 and noise at850 after acquisition, so never-leaves-goal retention is not established. Damping/noise at401 pass terminal quality but fail their one first-pass confirmation; continuous damping/sign flips have zero full passes. All original receipt statuses and gates are preserved.",
+  "evidence_scope": "cuda_runtime_and_weak_direction_diagnostics",
+  "goal": "discriminator_stability",
+  "hypothesis": "Isolate runtime rounding after Ring16 reload and test fixed weak-direction interventions under the same public initialization, prior, batches, constant rates and full distribution bounds.",
+  "lifecycle": "concluded",
+  "mechanism_class": "numerical_sensitivity_diagnostic",
+  "next_action": "Prioritize deterministic continuous truncation and retain weak-gradient noise as a second supported candidate for a separately frozen whole-configuration Tier1 comparison. Exact reload attribution needs scoped graph-construction/scheduling controls or executed-node order capture. Run Tier2 retention only after required ordinary gates pass. Stop completed every-step damping/sign-flip negatives; no seed study, automatic continuation, default adoption or qualification follows.",
+  "provenance": {
+    "charged_seconds": 355.31336048909,
+    "cost_limit_seconds": 2880,
+    "cost_scope": "new twelve-arm campaign only; whole training subprocess time plus full30s per saved-gradient probe; excludes prior reproduction",
+    "parent_record": "ring16-restart-diagnostic-v1",
+    "protocol_seed": 0,
+    "prs": [
+      "https://github.com/255BITS/ParticleGAN/pull/334",
+      "https://github.com/255BITS/ParticleGAN/pull/336",
+      "https://github.com/255BITS/ParticleGAN/pull/333",
+      "https://github.com/255BITS/ParticleGAN/pull/335",
+      "https://github.com/255BITS/ParticleGAN/pull/332"
+    ],
+    "qualification_changes": 0,
+    "report": "reports/forge/ring16-followup/README.md",
+    "scientific_retries": 0,
+    "scoring_draws": 822,
+    "source_commits": [
+      "fa60ca4af1fc872e650a6c4b13ca35d0a755a0ca",
+      "996fcaa581ef145650acff96824a77b704e71dc3",
+      "79291dad8a15e742bc86a55c56cafc0d26539292",
+      "1ca28014bf7102975376efadc691f3e103535f41",
+      "ca69cabc2801744a7f99b8c601af98ba68a9e639"
+    ],
+    "training_updates_added": 13604
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "ring16-runtime-and-interventions-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/ring16-followup/results.json",
+    "sha256": "883a107ee646612ee59f0f3aad3c57e4b30723f6f36161d47d4ee23639289b8d"
+  },
+  "task_results": [],
+  "trainer_family": "bcap-dualnorm"
+}

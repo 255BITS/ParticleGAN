@@ -1,0 +1,44 @@
+{
+  "configuration_notes": [
+    "The initial optimizer campaign has exactly 41 whole recipes and reserves 103320 seconds (2520 per recipe); every recipe retains all six required Tier 1 tasks plus the existing diagnostic.",
+    "Each candidate uses one global configuration across tasks, protocol seed 0 and the public deterministic initializer. Independent runnable current-tier peers finish despite another required failure.",
+    "No measured result or qualification is inferred from these mechanism descriptions. Existing task failures, archived source cohorts and the incumbent remain intact.",
+    "Five-seed inference, the R1/R2 axis, native examples and width/depth transfer are deferred by the focused study scope; P1-P6 cannot be statistically falsified by this screen.",
+    "Consult the single current goal leaderboard reports/forge/technique-inventory.md and the registered search for compatible measured results."
+  ],
+  "overview": "BCAP with public Recipe.optimizer_family=dualnorm. The focused study changes only the optimizer rule and its rates from current pure BCAP. It retains the relativistic objective, fixed real/fake cap penalty and each task-owned auxiliary objective. Outcomes remain pending until compatible ordinary receipts are measured.",
+  "pseudocode": [
+    "For each unchanged task update:",
+    "  Compute the existing critic loss plus fixed BCAP penalty; backpropagate D.",
+    "  Apply the selected optimizer rule to D.",
+    "  Compute the existing G/E/prior loss through the updated critic, retaining task auxiliary terms.",
+    "  Record actual G-sampled prior rows when the selected optimizer consumes a row mask.",
+    "  Apply the selected optimizer rule to G/E/prior.",
+    "  Apply the existing schedule multiplier and score with the frozen task sampling/evaluation law.",
+    "Selected rule: For matrix weights, use momentum m=mu*m+g and the polar update sqrt(max(1, fan_out/fan_in))*polar(m). Normalize bias/vector momentum per tensor. Skip matrix gradients below epsilon. Sampled prior rows receive independent normalized-gradient steps with no momentum; unsampled rows do not move. No Adam components."
+  ],
+  "references": [],
+  "sources": [
+    "particlegan/optim/dualnorm.py",
+    "particlegan/recipes.py",
+    "particlegan/gan_loss.py",
+    "particlegan/grad_regularizers.py",
+    "configs/forge/ideas/bcap-dualnorm-momentum-v1.json",
+    "configs/forge/searches/bcap-optim-dualnorm-momentum-tier1-v1.json",
+    "configs/forge/campaigns/bcap-dualnorm-tier1-v1.json",
+    "reports/forge/technique-inventory.md",
+    "configs/forge/ideas/bcap-dualnorm-zero-v1.json",
+    "configs/forge/searches/bcap-optim-dualnorm-zero-tier1-v1.json"
+  ],
+  "symbols": "G is the generator, E an encoder when present, D the critic, P the task-declared prior, g the loss gradient, m a momentum buffer, mu its coefficient, eta_P the player step size and epsilon the numerical floor. G and E share one player for global normalization. All updates descend their existing public losses.",
+  "training_details": {
+    "averaging": "Current BCAP EMA decay 0 and live serving/scoring; this focused study does not substitute the pasted historical EMA/cosine example recipe.",
+    "critic_penalty": "Unchanged b_cap coefficient 1 and cap 1, applied to real/fake L2 input-gradient norms; no added critic anchor.",
+    "damping_and_guards": "Existing BCAP disables A2, direct-particle gain and critic spike guard; no replacement intervention is introduced.",
+    "gradient_clipping": "No added parameter-gradient clipping. Normalization defines the optimizer step; the existing BCAP term remains a loss penalty on critic input gradients.",
+    "learning_rates": "etaG in {0.003, 0.01, 0.03, 0.1}, D/G=1.5, absolute etaPrior=0.03. Positive mu in {0.5, 0.9}; mu=0 has a separate structural base/search. The BCAP baseline schedule has network/prior floors 1, so its declared schedule multiplier stays constant; changing the optimizer does not change that shape.",
+    "loss": "Current BCAP paired relativistic logistic; joint hosts retain their explicit two-stream generator/encoder objective and existing auxiliary terms.",
+    "noise": "Zero additive training input/output noise. Task-declared prior sampling, named streams and data batches remain unchanged.",
+    "optimizer": "For matrix weights, use momentum m=mu*m+g and the polar update sqrt(max(1, fan_out/fan_in))*polar(m). Normalize bias/vector momentum per tensor. Skip matrix gradients below epsilon. Sampled prior rows receive independent normalized-gradient steps with no momentum; unsampled rows do not move. No Adam components."
+  }
+}

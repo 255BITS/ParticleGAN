@@ -1,0 +1,38 @@
+{
+  "base_candidate": "bcap-dualnorm-d-only-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 2221440,
+    "candidate_budget_seconds": 42720,
+    "description": "Complete fixed-roster CUDA rerun after adopting default DualNorm numerical-rank truncation and disabling autograd multithreaded backward scheduling project-wide. Keep all original recipes, priors, architectures, seed0, named streams, sampling, cadence, task gates and budgets. Preserve all prior source results/costs separately; no scientific retries, retuning or cross-source gate pooling. Correct the stale joint-word evaluator pin before coherent current-source qualification; retain interrupted V5 evidence and costs with no cross-source reuse.",
+    "id": "gaussian-smoke-inventory-v6",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "d_lr_mult": [
+      1.5
+    ],
+    "lr": [
+      0.1
+    ],
+    "optimizer_adam_lr": [
+      0.00425
+    ],
+    "optimizer_momentum": [
+      0.5
+    ],
+    "prior_lr_mult": [
+      2.0
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Remeasure the exact preselected global recipe after adopting default numerical-rank truncation for DualNorm and disabling autograd multithreaded backward scheduling project-wide. Complete all runnable Tier1 and unlock Tier2 only for a whole six-task Tier1 PASS. No hyperparameter search, seed variation or retuning. Joint-word evaluator pin corrected; all earlier receipts remain under their executed source without reuse.",
+  "id": "gaussian-smoke-inventory-bcap-dualnorm-d-only-v6",
+  "protocol": "screening",
+  "schema_version": 2,
+  "trainer_family": "bcap-dualnorm-d-only",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

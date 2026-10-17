@@ -1,0 +1,513 @@
+{
+  "cohort": {
+    "identity": {
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "rng": {
+        "bindings": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"eval\",\"sampler\",\"samples\",\"cpu\"]": {
+            "component": "sampler",
+            "device": "cpu",
+            "family": "eval",
+            "initial_state_sha256": "9488d65f11be2e232c210ae5b27c29426ac74687551e6bc1597afc56159f8726",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "[\"eval\",\"target\",\"reference\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "eval",
+            "initial_state_sha256": "905a51801f69a4375927533ecf1199816a077aea8b3164d15b2811fae33abf02",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "[\"init\",\"prior\",\"locations\",\"cpu\"]": {
+            "component": "prior",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "ab1fa62c08db5e35d0b5c6be2418a849814f3490f8448c5b0e671be86de398ca",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "[\"noise\",\"critic\",\"input\",\"cpu\"]": {
+            "component": "critic",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "d45c4d304b060206d27bed2cfb50b4e02d8d3a2a3ebc2bd23198f3119b34be6d",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "[\"noise\",\"generator\",\"output\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cpu\"]": {
+            "component": "models",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "c2f7ba3cac65f7a2c9f1da18c52f973980852aaa4a916683301b0efdbb50edf9",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "[\"noise\",\"penalty\",\"training\",\"cpu\"]": {
+            "component": "penalty",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "e170727612c771e1a5db3740ca655a777d92c20f99fb8497de95c6cfdb6fdd84",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "[\"noise\",\"prior\",\"gaussian\",\"cpu\"]": {
+            "component": "prior",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "d6261b40f0efc71cdced90af99c43969a0675e1827f184a56c8790fee5a820d8",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "[\"prior\",\"latent\",\"indices\",\"cpu\"]": {
+            "component": "latent",
+            "device": "cpu",
+            "family": "prior",
+            "initial_state_sha256": "c20d03989eda9e8650239603a2db8efb7df1bab81c5257cce0283964a570c14a",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          }
+        },
+        "runtime": {
+          "rng": "torch.Generator",
+          "torch": "2.14.0+cu130"
+        },
+        "seed": 0,
+        "version": "forge-rng-v1"
+      },
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.3",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.14.7",
+        "system": "Linux"
+      },
+      "source_sha256": "c673226cad226889b05269d71786100dcfe2122c8fbe880067d2d2ebd79ab32d",
+      "tasks": {
+        "ae_gan_hold": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "ed402cb682ecc95b7b13fc9a86097b2e30bb5ed0f0be1ae881acaf65dea9b128",
+          "execution": "ef7bde79535925f1f96f56e284fdba12f0dbe934c76e8c66127a72f7dabad85b",
+          "execution_group": "ae_gan_hold",
+          "scoring_weights": "live"
+        },
+        "cover_leftover": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "126684bb74dfc593da66838918d253cadb2816e805a853e76b90b60ab68392d8",
+          "execution": "5de2b21493d176cd0e83f65d9a6e46b63a737001669a5c8cf07010780ae5b1c9",
+          "execution_group": "cover_leftover",
+          "scoring_weights": "live"
+        },
+        "grid100": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "bc88efa046f1749bf954035b665269ec1ee68fade7b66d6d686b555f062a8e66",
+          "execution": "f5b7ae518ef853a83c870149365fd2a4aa89bea8db3044324e086654c47b7425",
+          "execution_group": "grid100",
+          "scoring_weights": "live"
+        },
+        "img_blobs4": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "a75027e7638f8b30d5ef2a029f7da92bfeb9537f1d16b0e130159ccfc76a6dea",
+          "execution": "b910c6fba7f2847ec43bedaee9cb65ca8865bc83c68c96718c8d4de17660cb46",
+          "execution_group": "img_blobs4",
+          "scoring_weights": "live"
+        },
+        "img_stripes2": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "061aba660a9d1c0f7cba51194863007a228c4411a8af7f20e48f7b1b3f26d200",
+          "execution": "a62a7b56ec6dcacb646046c081a5b8b88f25a3940455d1b47212fed6e9f95710",
+          "execution_group": "img_stripes2",
+          "scoring_weights": "live"
+        },
+        "mid_scale_identity": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "36d40d1d8733153839a381c691cd88fe039af795ee7b9861c978cc30731c7a98",
+          "execution": "f49a4a3f0e43e70a1edb82554adbb4f250d41deae54b4ec2ff4a7730c1daf217",
+          "execution_group": "mid_scale_identity",
+          "scoring_weights": "live"
+        },
+        "residual_student": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "98a74ba006ec057527b0076e1da411af616b7fe0053785e76f4e43198a3b9a0e",
+          "execution": "d21c139505868687b7fb13fde73d192d8bca2aa6f73f86af11690dd138d783c8",
+          "execution_group": "residual_student",
+          "scoring_weights": "live"
+        },
+        "rotated100": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "bc88efa046f1749bf954035b665269ec1ee68fade7b66d6d686b555f062a8e66",
+          "execution": "2ce98641b9194fd2576370adf2a31a38ed8b639ad6eefdd78abb248c2c31a852",
+          "execution_group": "rotated100",
+          "scoring_weights": "live"
+        },
+        "staggered100": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "bc88efa046f1749bf954035b665269ec1ee68fade7b66d6d686b555f062a8e66",
+          "execution": "e0a0ad78023ea1e08f0bb08e4be61a5594e1c0728d1aff393a2143a85b318bad",
+          "execution_group": "staggered100",
+          "scoring_weights": "live"
+        },
+        "trajectory": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "7ce43040816862fec12772c8331335d4b59c0e5d2a3e4ac504900f5f33763c01",
+          "execution": "dbd95ff64a3b780f917491a453fddba362bf6a96bbba7ce8626cd7c253817c9f",
+          "execution_group": "trajectory",
+          "scoring_weights": "live"
+        },
+        "two_pole": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "8a839e3fa803fbd0e6bd84beb0e2d312684e7821417edf8dca402052ee5e7fcd",
+          "execution": "04520427ee6d85233c3a82a45f0ff1c50d1cb7eed7a77e0d0bf8a8b84c152711",
+          "execution_group": "two_pole",
+          "scoring_weights": "live"
+        },
+        "unipolar": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "933cf5ca415289f3c5c2b45e8dec15a7bdf15287f92ad1f5e84c0afc6d7ac6b4",
+          "execution": "5c8b17e7f7417712e05371542770910c1cf109dc1ed213b9e6409b48ffc2ad2d",
+          "execution_group": "unipolar",
+          "scoring_weights": "live"
+        },
+        "unused_token_hold": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "520512a723e50297b8f3b5708b329ec04b6e532c9b8a60108688b016ee1d78df",
+          "execution": "1aebc5ea66f8ee6e35cf3cdde19e9b6c3a4243b84519eaea77f6c4415d1b9f96",
+          "execution_group": "unused_token_hold",
+          "scoring_weights": "live"
+        },
+        "vector_anisotropic": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "c41655b9235820307e858503a9e93dda60cc23e1b71a5adee43795e3b1785b98",
+          "execution": "5edf4f8b72c166182379862df08bec959f7544c96effcf8e6c4823c9a8979e00",
+          "execution_group": "vector_anisotropic",
+          "scoring_weights": "live"
+        },
+        "vector_overlap": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "6f3776896ffb15c590a78b4cfd3cf6838dd148c1d97502407a92b749dc2bb9d9",
+          "execution": "311c696153e74c4d09de1bd8a4c42dbe7a522faa9c5f9355a0e4b97750bfcba6",
+          "execution_group": "vector_overlap",
+          "scoring_weights": "live"
+        },
+        "vector_spiral": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "6f3776896ffb15c590a78b4cfd3cf6838dd148c1d97502407a92b749dc2bb9d9",
+          "execution": "656beaa971d66fb6288c8081f9071a853a89381399f62ca87b362a7a41600d46",
+          "execution_group": "vector_spiral",
+          "scoring_weights": "live"
+        },
+        "vector_two_broad": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "c41655b9235820307e858503a9e93dda60cc23e1b71a5adee43795e3b1785b98",
+          "execution": "ccbbe157991e1d309df6f4a76acb01b8c5dea3e4627c0adf424736d4d8c72db1",
+          "execution_group": "vector_two_broad",
+          "scoring_weights": "live"
+        },
+        "vector_unequal_mass": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "c4931ab27eab24cdf927336bbb4076686ad70b158b998ac0067bd68caa0df025",
+          "execution": "182088e02815e6ebc075f53e0563231ce441f14e2a812b3f6a8a01c392b1acf2",
+          "execution_group": "vector_unequal_mass",
+          "scoring_weights": "live"
+        },
+        "vector_unequal_width": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "c41655b9235820307e858503a9e93dda60cc23e1b71a5adee43795e3b1785b98",
+          "execution": "2726e2b7c98f5177f510917584e85f9f6254bb5786f6951eedf9bf9545648b79",
+          "execution_group": "vector_unequal_width",
+          "scoring_weights": "live"
+        }
+      }
+    },
+    "sha256": "6004164be20ea430b47de7b7040f382b0bc0467d116722da012977f456a2cb21"
+  },
+  "criteria": "criteria-v1.json",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "evidence_scope": "current",
+  "id": "current-k3p-mog-v2",
+  "lineages": [
+    {
+      "candidate_id": "k3p",
+      "candidate_revision": "229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b",
+      "id": "k3p"
+    },
+    {
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "f3adbc07708643ba4563a65ce256b6e1903e30a90095032c6821118cbb36e775",
+      "id": "forge-onboarding-anchor-ablation"
+    },
+    {
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
+      "id": "forge-no-critic-penalty"
+    }
+  ],
+  "previous_profile": "current-k3p-mog-v1",
+  "reference_exclusions": [
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "mode_hold",
+    "img_bars4",
+    "img_intensity2"
+  ],
+  "reference_scope": "Independent quality suffix, shared across both proposed smoke profiles. Endurance and adaptation remain separate later requirements. Excludes the union of both smoke predicates to avoid circular false-rejection classification.",
+  "reference_tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "grid100",
+    "rotated100",
+    "staggered100",
+    "img_stripes2",
+    "img_blobs4"
+  ],
+  "revision": 2,
+  "revision_reason": "Correct redundant behavioral noise-seed receipt labels and compact board source references; learning, host LR/L2 policy, gates and screening streams are unchanged. Keep old receipts verbatim and do not pool repeated-source cohorts as independent evidence.",
+  "schema_version": 1,
+  "scoring_weights": "live",
+  "selection_note": "Baseline and two substantive critic-mechanism ablations at fixed screening seed0. Reference outcomes are unmeasured; positive/negative labels will be derived from the full independent reference, never assigned by hypothesis.",
+  "smoke_tasks": [
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold"
+  ],
+  "training_allowance_seconds": 0
+}

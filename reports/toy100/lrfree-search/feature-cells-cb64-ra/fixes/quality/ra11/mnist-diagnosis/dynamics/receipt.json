@@ -1,0 +1,3038 @@
+{
+  "status": "PASS",
+  "scope": "STDLIB_SOURCE_AND_CLOSED_JSON_DYNAMICS_ONLY",
+  "utc": "2026-09-30T17:41:50.750053+00:00",
+  "source_preseal_sha256": "24b2a0011fd5c02b5e9f2305b77bf2893b02c4ac29f3d9dd3b35961521539f89",
+  "source_and_input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/mnist/CB64-RA11/config.json": "05fe8a48225b181447cfee43d7f40411ef1bc1ce3ffa73786409751cec1c8525",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/mnist/CB64-RA11/result.json": "a4eb46d07e0693bac9106aaf267216fb759e1625f967b2281d33296b3f72681d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/mnist/CB64-RA11/metrics.jsonl": "107eed644dcfe5be9083dfeb3d8c1585e7f7bf77af223d7a41b52d820cbdb0cc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/mnist/CB64-RA11/evaluator.json": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA11.json": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/__init__.py": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/continuous.py": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/feature_cells.py": "58a8093eab44c63778c8516c3747e025ceb6ce27e7e740f257bd5c2722c2a7a8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/mean_transport.py": "7fbd945a7f18f8817f090a53629443adbbe5a9b25c5dc459f12280061fd30fb3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/output_moments.py": "d6a897174b133863ce386b35e8f793349d30b6f59d79220ffd061f90092054ba",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/training.py": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/logs/learned-mnist-CB64-RA11.log": "f05c7fcb79c66696fde32829df1610afdf43d9d6109973e0134bdc187369e8e9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/config.json": "1a2972991ac7b20be4876d9d36ed47f821e53074603dc62834b4503da49a1e7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/result.json": "bf3c8d173034182de8d8c1400fbfa6652e8d828850b449a1d0bf8cd324922669",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/metrics.jsonl": "f3410b67e90c76c29f05647b2a6c4b5218de44e8d290b8c7949e553fdcf01a50",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/evaluator.json": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA4.json": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/__init__.py": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/continuous.py": "26c71f54cab370cd5bc6b2faa9e860cf01600db780dddfdda6fcaf6081254388",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/feature_cells.py": "a7f2d0f8794e109535358ea08ef43951449814acbdfca89705870df9f153f025",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/training.py": "f5626e4e25f62b37aa76b162ef4d351ed45dad0b5c24dc2c0c385be3d42d6a7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/logs/learned-mnist-CB64-RA4.log": "9670eb4dfad9b8637d6560f37c0ca58ba1ecaed3e365b83ab2d0183b8b1c2482",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/config.json": "4b0b54bdaa432e0ade412400091ac9ea1d37f57802c8c6756b76c9936046a153",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/result.json": "08c3fdd74b30275dcc7c9369697924a0badb94bd9c8f824d70954b05e180aeac",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/metrics.jsonl": "4afa89d2f9bc673990c5d7cb678116beafc23d706ebb27d0624325eae963419f",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/evaluator.json": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/reference-overrides-E22.json": "b80f81ff1f56b6886c6a7ace42d4f7f6de83db5999484b730429ddecdf1e72ae",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/__init__.py": "93cf2f09d6e73716405e0ef55dec1a47f3b03c04f3fcaf0ec10ba5d169da4aa7",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/continuous.py": "26c71f54cab370cd5bc6b2faa9e860cf01600db780dddfdda6fcaf6081254388",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/recipes.py": "7f4ed2a55b698c8aadf34a6d51ce1683ddafd35307dbce2e3b1c68e83583ef92",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/training.py": "6ebe9a53d6ed953a2d538eae5f543b10b5c11edd6b33a2570450ee8035d223af",
+    "/ml2/hypergan/gan-attempts/noout-20260928/pkg-E22/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/logs/learned-mnist-E22.log": "ed199bd4b180e28e8b1e73103c1661fc15466477144cd8c90c3cdffd8729ae88",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/READY.json": "f7a357d0a40d353fd72bc1377240d7f89f47b34758086d284d628e35989fa5b9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/source-freeze.json": "d973828e057a63131e6498fc3188f82b8fff3a3f58ab1ace12615566fe9837fe",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/models_metrics.py": "ae4113c9c7523e0ac17df05cb2c93731b96740c5594daa7085e4bf39ad9c7e47",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra10-quality/linear-output-production/READY.json": "987b08e81f53e3eed2761e2063859fb724a43bd4272eb83a872870725fede107",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra10-quality/linear-output-production/FROZEN.json": "d94f7cabeed772cce7f819f469fc067e7af9d458ef0212c7ac00d0105f918a7f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/integration-contract/receipt.json": "49b994f2204378b641ebe8ee907a2323200a013f14f3d9d2611dec5f365f689c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/integration-contract/FINAL-FROZEN.json": "cae723cb3bd8c2a597e757db023eea52b652571c458037fe408b7bc4e2cbf12e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/mnist-diagnosis/dynamics/PROTOCOL.md": "b01f3e794682c636efb735ee43fbd0fda65f43cb35c6eccb135dcd5bf3e4a984",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/mnist-diagnosis/dynamics/review_source_json.py": "3e811c07f34a05301ae803e6082b52c064933ffc9b3d4e9e8408abd535b7e6bb"
+  },
+  "initial_model_and_prior_hashes": {
+    "RA11": {
+      "initial_generator_sha256": "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+      "initial_critic_sha256": "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+      "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+    },
+    "RA4": {
+      "initial_generator_sha256": "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+      "initial_critic_sha256": "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+      "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+    },
+    "E22": {
+      "initial_generator_sha256": "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+      "initial_critic_sha256": "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+      "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+    }
+  },
+  "active_evaluator_frames": {
+    "RA11": {
+      "accuracy": 0.9807999730110168,
+      "active_dimensions": 39,
+      "active_mask_sha256": "09d9892b4e49583f84a5d8f192e6aad6ece2237afe45da407a1fec715f80a600",
+      "active_mean_sha256": "f446c6b9a17cf16f85aae7da1857f6a99b33de145175368825432e2c99f57422",
+      "active_std_sha256": "4b1f1e4fbfb8cb2bc04f18ccf10083462c7223d517916f761cbcca409fd4aea8",
+      "raw_reference_sha256": "b22e4231107b009c7c0dd04e2f4f55c254f94922b2b955f2653f5b4354d9dfcb",
+      "active_reference_sha256": "6604cc8058164117d72883d7c0fcc7574c8ccbb3acb1e33fee8dbc47f9474049",
+      "evaluator_model_sha256": "9872b10008933497cd2b0de80ea7d7d804e58f5a2a9f6dd0ccd5db3cb4f6f05b"
+    },
+    "RA4": {
+      "accuracy": 0.9807999730110168,
+      "active_dimensions": 39,
+      "active_mask_sha256": "09d9892b4e49583f84a5d8f192e6aad6ece2237afe45da407a1fec715f80a600",
+      "active_mean_sha256": "f446c6b9a17cf16f85aae7da1857f6a99b33de145175368825432e2c99f57422",
+      "active_std_sha256": "4b1f1e4fbfb8cb2bc04f18ccf10083462c7223d517916f761cbcca409fd4aea8",
+      "raw_reference_sha256": "b22e4231107b009c7c0dd04e2f4f55c254f94922b2b955f2653f5b4354d9dfcb",
+      "active_reference_sha256": "6604cc8058164117d72883d7c0fcc7574c8ccbb3acb1e33fee8dbc47f9474049",
+      "evaluator_model_sha256": "9872b10008933497cd2b0de80ea7d7d804e58f5a2a9f6dd0ccd5db3cb4f6f05b"
+    },
+    "E22": {
+      "accuracy": 0.9807999730110168,
+      "active_dimensions": 39,
+      "active_mask_sha256": "09d9892b4e49583f84a5d8f192e6aad6ece2237afe45da407a1fec715f80a600",
+      "active_mean_sha256": "f446c6b9a17cf16f85aae7da1857f6a99b33de145175368825432e2c99f57422",
+      "active_std_sha256": "4b1f1e4fbfb8cb2bc04f18ccf10083462c7223d517916f761cbcca409fd4aea8",
+      "raw_reference_sha256": "b22e4231107b009c7c0dd04e2f4f55c254f94922b2b955f2653f5b4354d9dfcb",
+      "active_reference_sha256": "6604cc8058164117d72883d7c0fcc7574c8ccbb3acb1e33fee8dbc47f9474049",
+      "evaluator_model_sha256": "9872b10008933497cd2b0de80ea7d7d804e58f5a2a9f6dd0ccd5db3cb4f6f05b"
+    }
+  },
+  "exact_shared_evaluator_frame": true,
+  "recipe_deltas": {
+    "RA4": {
+      "birth_death_cells": {
+        "old": 64,
+        "RA11": 128
+      },
+      "d_lr_mult": {
+        "old": 1.0,
+        "RA11": 4.0
+      },
+      "lr": {
+        "old": 0.00425,
+        "RA11": 0.0010625
+      },
+      "prior_lr_mult": {
+        "old": 2.0,
+        "RA11": 8.0
+      }
+    },
+    "E22": {
+      "birth_death_backend": {
+        "old": null,
+        "RA11": "feature_cells"
+      },
+      "birth_death_cells": {
+        "old": null,
+        "RA11": 128
+      },
+      "birth_death_chunk": {
+        "old": null,
+        "RA11": 256
+      },
+      "birth_death_metric_rank": {
+        "old": null,
+        "RA11": 8
+      },
+      "birth_death_parent_policy": {
+        "old": null,
+        "RA11": "real_anchor"
+      },
+      "d_lr_mult": {
+        "old": 1.0,
+        "RA11": 4.0
+      },
+      "lr": {
+        "old": 0.00425,
+        "RA11": 0.0010625
+      },
+      "prior_lr_mult": {
+        "old": 2.0,
+        "RA11": 8.0
+      }
+    }
+  },
+  "curves": {
+    "RA11": [
+      {
+        "step": 0,
+        "active_embedding": {
+          "embedding_frechet": 56.84234015761439,
+          "embedding_precision": 1.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.0,
+        "output_sigma": 0.029000001028180122,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            0.00425
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.0,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 1.0,
+          "last_cosine": 0.0,
+          "alignment": 0.0,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 0,
+          "step": 0,
+          "rows": 1024,
+          "required": 973,
+          "cells": 0,
+          "rank": 0,
+          "groups": 0,
+          "calibration_rows": 0,
+          "chart_valid": false,
+          "duplicate_ok": false,
+          "finite_rows": 0,
+          "same_group_rows": 0,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 100,
+        "active_embedding": {
+          "embedding_frechet": 109.45267044337844,
+          "embedding_precision": 0.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.49293702840805054,
+        "output_sigma": 0.03294363617897034,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            4.223046648176964e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 10.02917422463442,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.9998551014803763,
+          "last_cosine": 0.9992774724960327,
+          "alignment": 0.8637992762149532,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 4.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 12,
+          "step": 96,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 250,
+        "active_embedding": {
+          "embedding_frechet": 108.79348002363477,
+          "embedding_precision": 0.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.49720701575279236,
+        "output_sigma": 0.040219925343990326,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.4820175199391998e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 13.043111935708914,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.9999999339907584,
+          "last_cosine": 0.9958674311637878,
+          "alignment": 0.9884425099658161,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 16.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 31,
+          "step": 248,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 27,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 500,
+        "active_embedding": {
+          "embedding_frechet": 107.13384822944758,
+          "embedding_precision": 0.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.4993656575679779,
+        "output_sigma": 0.05840834230184555,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.0074306500804434e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 14.51129657897632,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.9999999999998219,
+          "last_cosine": 0.9949276447296143,
+          "alignment": 0.9912740427624596,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 16.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 62,
+          "step": 496,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 20,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 750,
+        "active_embedding": {
+          "embedding_frechet": 104.92465173810184,
+          "embedding_precision": 0.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.4994998872280121,
+        "output_sigma": 0.0898953303694725,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            1.816510281286051e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 15.266564027744888,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.9999999999999989,
+          "last_cosine": 0.9917392730712891,
+          "alignment": 0.9919170450985763,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 64.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 93,
+          "step": 744,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 30,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 1000,
+        "active_embedding": {
+          "embedding_frechet": 101.02095072567332,
+          "embedding_precision": 0.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.49952197074890137,
+        "output_sigma": 0.1387816220521927,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.1284863403452668e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 14.103668653668596,
+          "game_trust": 1.0,
+          "game_ratio": 0.3789264694366091,
+          "mobility": 0.9999999999999989,
+          "last_cosine": 0.9883248805999756,
+          "alignment": 0.9916141798152412,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 64.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 125,
+          "step": 1000,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 21,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 1250,
+        "active_embedding": {
+          "embedding_frechet": 90.71463703637919,
+          "embedding_precision": 0.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8816171875000001,
+        "pixel_clipping_fraction": 0.49953383207321167,
+        "output_sigma": 0.24560226500034332,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.03886320581328e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 14.416019265558777,
+          "game_trust": 1.0,
+          "game_ratio": 0.40080244613774596,
+          "mobility": 0.9999999999999989,
+          "last_cosine": 0.9913548827171326,
+          "alignment": 0.9911308564946456,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 64.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 156,
+          "step": 1248,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 42,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 1500,
+        "active_embedding": {
+          "embedding_frechet": 65.94660270321947,
+          "embedding_precision": 0.93701171875,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.7794777343749999,
+        "pixel_clipping_fraction": 0.49954625964164734,
+        "output_sigma": 0.4577523171901703,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.0615126260813414e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 14.317687786061228,
+          "game_trust": 1.0,
+          "game_ratio": 0.8654313649645725,
+          "mobility": 0.9999999999999989,
+          "last_cosine": 0.990365743637085,
+          "alignment": 0.9907814093153765,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 64.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 187,
+          "step": 1496,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 16,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 1750,
+        "active_embedding": {
+          "embedding_frechet": 35.611914920584255,
+          "embedding_precision": 0.97314453125,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.5530015625,
+        "pixel_clipping_fraction": 0.5092729926109314,
+        "output_sigma": 0.8561466336250305,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            2.1101624300384277e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 14.163625525566706,
+          "game_trust": 1.0,
+          "game_ratio": 0.8537103231630551,
+          "mobility": 0.9999999999999989,
+          "last_cosine": 0.9862616062164307,
+          "alignment": 0.9915067451035922,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 64.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 218,
+          "step": 1744,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 30,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      },
+      {
+        "step": 2000,
+        "active_embedding": {
+          "embedding_frechet": 40.54441017804998,
+          "embedding_precision": 0.28125,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 1,
+        "class_mass_tv": 0.58571640625,
+        "pixel_clipping_fraction": 0.5632903575897217,
+        "output_sigma": 1.310713768005371,
+        "actual_lrs": [
+          [
+            0.0010625,
+            0.0085,
+            0.0010625
+          ],
+          [
+            1.9760388177501512e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 14.632013912086798,
+          "game_trust": 0.7541819814080533,
+          "game_ratio": 1.5709114862915305,
+          "mobility": 0.9999999999999989,
+          "last_cosine": 0.9924513101577759,
+          "alignment": 0.9933169526321428,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 64.0,
+            "last_decision": "drift",
+            "population_active": false,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": 0,
+        "mean_fires": 0,
+        "paired_average": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 250,
+          "step": 2000,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 20,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1024,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        }
+      }
+    ],
+    "RA4": [
+      {
+        "step": 0,
+        "active_embedding": {
+          "embedding_frechet": 56.84234015761439,
+          "embedding_precision": 1.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.0,
+        "output_sigma": 0.029000001028180122,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00425
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.0,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 1.0,
+          "last_cosine": 0.0,
+          "alignment": 0.0,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 100,
+        "active_embedding": {
+          "embedding_frechet": 54.789240704475326,
+          "embedding_precision": 0.03564453125,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 2,
+        "class_mass_tv": 0.672230859375,
+        "pixel_clipping_fraction": 0.4426247775554657,
+        "output_sigma": 0.04756723344326019,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            8.953670148715781e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 6.680306329948398,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.9997665377864285,
+          "last_cosine": 0.6971408128738403,
+          "alignment": 0.47683092699017604,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 2.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 4.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 250,
+        "active_embedding": {
+          "embedding_frechet": 14.961041422872846,
+          "embedding_precision": 0.91455078125,
+          "embedding_recall": 0.02099609375
+        },
+        "confident_class_coverage": 3,
+        "class_mass_tv": 0.481847265625,
+        "pixel_clipping_fraction": 0.33159372210502625,
+        "output_sigma": 0.03572561591863632,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0013999542815807116
+          ]
+        ],
+        "controller": {
+          "payoff_error": 1.3982829512360522,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.9999998936451274,
+          "last_cosine": 0.7300211191177368,
+          "alignment": 0.2739631428341143,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 2.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 16.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 18
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 4.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 469,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 500,
+        "active_embedding": {
+          "embedding_frechet": 2.8513092391691544,
+          "embedding_precision": 0.630859375,
+          "embedding_recall": 0.6826171875
+        },
+        "confident_class_coverage": 9,
+        "class_mass_tv": 0.18257812499999998,
+        "pixel_clipping_fraction": 0.40579408407211304,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.004155238508652868
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.14894557579357345,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.4388559680346069,
+          "last_cosine": 0.8382571339607239,
+          "alignment": 0.05691871809324159,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 16.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 37
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 4.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 782,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 750,
+        "active_embedding": {
+          "embedding_frechet": 2.1851310458450612,
+          "embedding_precision": 0.76123046875,
+          "embedding_recall": 0.658203125
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.10349921875000001,
+        "pixel_clipping_fraction": 0.4105190336704254,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.004220438575491494
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.08469909691239769,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.13015148171877997,
+          "last_cosine": 0.4478352665901184,
+          "alignment": -0.023806618390216378,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 32.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 42
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 8.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 820,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 1000,
+        "active_embedding": {
+          "embedding_frechet": 0.8189881791637248,
+          "embedding_precision": 0.80859375,
+          "embedding_recall": 0.73876953125
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.06962226562500001,
+        "pixel_clipping_fraction": 0.40574800968170166,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00422597696692063
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.07606458734982204,
+          "game_trust": 0.9999409708262954,
+          "game_ratio": 1.007683271331512,
+          "mobility": 0.04104718582850511,
+          "last_cosine": -0.006288839969784021,
+          "alignment": 0.056249809968149246,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 32.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 42
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 8.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 820,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 1250,
+        "active_embedding": {
+          "embedding_frechet": 0.780700957363635,
+          "embedding_precision": 0.82763671875,
+          "embedding_recall": 0.76708984375
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.047080078125,
+        "pixel_clipping_fraction": 0.406093031167984,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0031852693294965127
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.026748879114636085,
+          "game_trust": 0.9586337546328769,
+          "game_ratio": 1.2077287909433707,
+          "mobility": 0.013514066268010917,
+          "last_cosine": -0.3008698523044586,
+          "alignment": 0.11424188810982829,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 32.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 43
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 0.5,
+            "b": 16.0,
+            "last_decision": "stationary",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 824,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 1500,
+        "active_embedding": {
+          "embedding_frechet": 0.5402591748804326,
+          "embedding_precision": 0.88525390625,
+          "embedding_recall": 0.80126953125
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.040412890624999996,
+        "pixel_clipping_fraction": 0.4088013172149658,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003186956102709063
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.012947913239042085,
+          "game_trust": 0.892194522345556,
+          "game_ratio": 1.347608700241955,
+          "mobility": 0.004094671688096872,
+          "last_cosine": -0.7213924527168274,
+          "alignment": 0.1938532443221501,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 128.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 43
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 0.5,
+            "b": 16.0,
+            "last_decision": "stationary",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 824,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 1750,
+        "active_embedding": {
+          "embedding_frechet": 0.5515865308091321,
+          "embedding_precision": 0.89404296875,
+          "embedding_recall": 0.7880859375
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.033677734375,
+        "pixel_clipping_fraction": 0.4064767062664032,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0031872172638526784
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.009230195698587046,
+          "game_trust": 0.3931756168270641,
+          "game_ratio": 2.2423335768365136,
+          "mobility": 0.0012475502776040084,
+          "last_cosine": 0.5161864161491394,
+          "alignment": 0.2962901613685173,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 128.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 43
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 0.5,
+            "b": 32.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 824,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 2000,
+        "active_embedding": {
+          "embedding_frechet": 0.3934020514487315,
+          "embedding_precision": 0.8955078125,
+          "embedding_recall": 0.7861328125
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.045684375000000006,
+        "pixel_clipping_fraction": 0.4079502522945404,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0031873378724271025
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.0076766690299331294,
+          "game_trust": 0.2685897430516603,
+          "game_ratio": 2.6501970686721195,
+          "mobility": 0.00042566466287669816,
+          "last_cosine": 0.6653112173080444,
+          "alignment": 0.2831837650317122,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 128.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 43
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 0.5,
+            "b": 32.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 824,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      }
+    ],
+    "E22": [
+      {
+        "step": 0,
+        "active_embedding": {
+          "embedding_frechet": 56.842754487912686,
+          "embedding_precision": 1.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 0,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.0,
+        "output_sigma": 0.029000001028180122,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.00425
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.0,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 1.0,
+          "last_cosine": 0.0,
+          "alignment": 0.0,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 100,
+        "active_embedding": {
+          "embedding_frechet": 199.7914996879549,
+          "embedding_precision": 0.0,
+          "embedding_recall": 0.0
+        },
+        "confident_class_coverage": 1,
+        "class_mass_tv": 0.8865000000000001,
+        "pixel_clipping_fraction": 0.49996668100357056,
+        "output_sigma": 0.051545627415180206,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            4.6948610480228596e-05
+          ]
+        ],
+        "controller": {
+          "payoff_error": 9.365575162765369,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.9997663562379863,
+          "last_cosine": 0.5717284083366394,
+          "alignment": 0.6791440471927607,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 4.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 250,
+        "active_embedding": {
+          "embedding_frechet": 29.939259225437077,
+          "embedding_precision": 0.97314453125,
+          "embedding_recall": 0.0224609375
+        },
+        "confident_class_coverage": 1,
+        "class_mass_tv": 0.72696328125,
+        "pixel_clipping_fraction": 0.4792511463165283,
+        "output_sigma": 0.06308090686798096,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0003851987645602218
+          ]
+        ],
+        "controller": {
+          "payoff_error": 3.114836113978224,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.999999893562422,
+          "last_cosine": 0.5815489888191223,
+          "alignment": 0.4723120113142329,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 16.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": null,
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 500,
+        "active_embedding": {
+          "embedding_frechet": 6.009637971426095,
+          "embedding_precision": 0.6884765625,
+          "embedding_recall": 0.36669921875
+        },
+        "confident_class_coverage": 8,
+        "class_mass_tv": 0.254496875,
+        "pixel_clipping_fraction": 0.4106859266757965,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0021269081480231023
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.9934120362297272,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.999991028535535,
+          "last_cosine": 0.8513608574867249,
+          "alignment": 0.17596833929033315,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 2.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 16.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 0,
+        "isolation_moves": 0,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 750,
+        "active_embedding": {
+          "embedding_frechet": 4.015096434977174,
+          "embedding_precision": 0.73046875,
+          "embedding_recall": 0.6455078125
+        },
+        "confident_class_coverage": 9,
+        "class_mass_tv": 0.179185546875,
+        "pixel_clipping_fraction": 0.4091644287109375,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003809167358263965
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.3401118048289994,
+          "game_trust": 1.0,
+          "game_ratio": 1.0,
+          "mobility": 0.4591353294585847,
+          "last_cosine": -0.1862034648656845,
+          "alignment": -0.08028839775934513,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 32.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 21
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 4.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 127,
+        "isolation_moves": 83,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 1000,
+        "active_embedding": {
+          "embedding_frechet": 1.7988102146091762,
+          "embedding_precision": 0.7509765625,
+          "embedding_recall": 0.75830078125
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.129111328125,
+        "pixel_clipping_fraction": 0.4073869287967682,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.004041813558069921
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.22797377246034062,
+          "game_trust": 0.78379667428743,
+          "game_ratio": 1.5252057557178553,
+          "mobility": 0.17527097024443847,
+          "last_cosine": 0.5791710019111633,
+          "alignment": -0.14800316419442708,
+          "closed": false
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 2.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 32.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 47
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 1.0,
+            "b": 4.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 198,
+        "isolation_moves": 83,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 1250,
+        "active_embedding": {
+          "embedding_frechet": 1.1811586516979844,
+          "embedding_precision": 0.787109375,
+          "embedding_recall": 0.83740234375
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.09964335937499999,
+        "pixel_clipping_fraction": 0.40667444467544556,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.0030680817882160058
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.19902153786321108,
+          "game_trust": 0.41614945604151504,
+          "game_ratio": 2.1844757641300108,
+          "mobility": 0.08478674082085372,
+          "last_cosine": 0.38069212436676025,
+          "alignment": -0.049096178586236446,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 32.0,
+            "last_decision": "inconclusive",
+            "population_active": null,
+            "rebases": 70
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 0.5,
+            "b": 16.0,
+            "last_decision": "stationary",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 255,
+        "isolation_moves": 83,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 1500,
+        "active_embedding": {
+          "embedding_frechet": 1.0481367439618055,
+          "embedding_precision": 0.82421875,
+          "embedding_recall": 0.830078125
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.06326640624999999,
+        "pixel_clipping_fraction": 0.4104944169521332,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003163559903277972
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.08721967968169343,
+          "game_trust": 0.4889977372399982,
+          "game_ratio": 2.0222520422670627,
+          "mobility": 0.034931497222782354,
+          "last_cosine": -0.34031543135643005,
+          "alignment": 0.0381146820264992,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 128.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 89
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 0.5,
+            "b": 16.0,
+            "last_decision": "stationary",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 313,
+        "isolation_moves": 83,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 1750,
+        "active_embedding": {
+          "embedding_frechet": 0.5433374620574085,
+          "embedding_precision": 0.869140625,
+          "embedding_recall": 0.8623046875
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.04871484375000001,
+        "pixel_clipping_fraction": 0.4095240831375122,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003175065910491565
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.06299413908831299,
+          "game_trust": 0.2973755338887985,
+          "game_ratio": 2.537124400899577,
+          "mobility": 0.013388232495762181,
+          "last_cosine": 0.5547107458114624,
+          "alignment": 0.1612736535552386,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 128.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 107
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 0.5,
+            "b": 32.0,
+            "last_decision": "mixed",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 371,
+        "isolation_moves": 83,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      },
+      {
+        "step": 2000,
+        "active_embedding": {
+          "embedding_frechet": 0.5444880363760234,
+          "embedding_precision": 0.869140625,
+          "embedding_recall": 0.84716796875
+        },
+        "confident_class_coverage": 10,
+        "class_mass_tv": 0.03639648437499999,
+        "pixel_clipping_fraction": 0.40906819701194763,
+        "output_sigma": 0.028999999165534973,
+        "actual_lrs": [
+          [
+            0.00425,
+            0.0085,
+            0.00425
+          ],
+          [
+            0.003180598461389926
+          ]
+        ],
+        "controller": {
+          "payoff_error": 0.04777730713505011,
+          "game_trust": 0.34201256779629424,
+          "game_ratio": 2.38703610696032,
+          "mobility": 0.005828231097686944,
+          "last_cosine": 0.5088303089141846,
+          "alignment": 0.1292133378784347,
+          "closed": true
+        },
+        "testers": {
+          "g0": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 0
+          },
+          "g1": {
+            "s": 1.0,
+            "b": 128.0,
+            "last_decision": "drift",
+            "population_active": null,
+            "rebases": 125
+          },
+          "g2": {
+            "s": 1.0,
+            "b": 1.0,
+            "last_decision": "frozen",
+            "population_active": null,
+            "rebases": 0
+          },
+          "d0": {
+            "s": 0.5,
+            "b": 32.0,
+            "last_decision": "mixed",
+            "population_active": null,
+            "rebases": 0
+          }
+        },
+        "accepted_moves": 415,
+        "isolation_moves": 83,
+        "mean_moves": null,
+        "mean_fires": null,
+        "paired_average": null
+      }
+    ]
+  },
+  "progress": {
+    "RA11": [
+      {
+        "step": 100,
+        "loss_g": 8.559136390686035,
+        "loss_d": 0.003896478796377778,
+        "penalty": 0.002227362245321274
+      },
+      {
+        "step": 200,
+        "loss_g": 8.897056579589844,
+        "loss_d": 0.0034969912376254797,
+        "penalty": 0.0023245569318532944
+      },
+      {
+        "step": 300,
+        "loss_g": 9.447669982910156,
+        "loss_d": 0.0029216150287538767,
+        "penalty": 0.002322103828191757
+      },
+      {
+        "step": 400,
+        "loss_g": 10.15333366394043,
+        "loss_d": 0.0029274742119014263,
+        "penalty": 0.0023096438962966204
+      },
+      {
+        "step": 500,
+        "loss_g": 9.900446891784668,
+        "loss_d": 0.003033678513020277,
+        "penalty": 0.0022859210148453712
+      },
+      {
+        "step": 600,
+        "loss_g": 10.61506462097168,
+        "loss_d": 0.003193628042936325,
+        "penalty": 0.002247910713776946
+      },
+      {
+        "step": 700,
+        "loss_g": 10.557737350463867,
+        "loss_d": 0.0024351628962904215,
+        "penalty": 0.0021855414379388094
+      },
+      {
+        "step": 800,
+        "loss_g": 10.78563404083252,
+        "loss_d": 0.014654330909252167,
+        "penalty": 0.014213500544428825
+      },
+      {
+        "step": 900,
+        "loss_g": 9.877408027648926,
+        "loss_d": 0.0018014360684901476,
+        "penalty": 0.0009751724428497255
+      },
+      {
+        "step": 1000,
+        "loss_g": 10.06690788269043,
+        "loss_d": 0.0015610663685947657,
+        "penalty": 0.0009150328114628792
+      },
+      {
+        "step": 1100,
+        "loss_g": 9.852742195129395,
+        "loss_d": 0.0013401961186900735,
+        "penalty": 0.0008976436802186072
+      },
+      {
+        "step": 1200,
+        "loss_g": 9.8709077835083,
+        "loss_d": 0.0014600212452933192,
+        "penalty": 0.0009155189618468285
+      },
+      {
+        "step": 1300,
+        "loss_g": 10.754846572875977,
+        "loss_d": 0.0016152590978890657,
+        "penalty": 0.0009622508659958839
+      },
+      {
+        "step": 1400,
+        "loss_g": 10.245278358459473,
+        "loss_d": 0.0013883349020034075,
+        "penalty": 0.0009035069961100817
+      },
+      {
+        "step": 1500,
+        "loss_g": 9.731362342834473,
+        "loss_d": 0.001432763529010117,
+        "penalty": 0.0009023106540553272
+      },
+      {
+        "step": 1600,
+        "loss_g": 10.001842498779297,
+        "loss_d": 0.0017703722696751356,
+        "penalty": 0.0009600287303328514
+      },
+      {
+        "step": 1700,
+        "loss_g": 10.004814147949219,
+        "loss_d": 0.0023524498101323843,
+        "penalty": 0.0010014711879193783
+      },
+      {
+        "step": 1800,
+        "loss_g": 9.97532844543457,
+        "loss_d": 0.002077770885080099,
+        "penalty": 0.0009946506470441818
+      },
+      {
+        "step": 1900,
+        "loss_g": 9.972615242004395,
+        "loss_d": 0.0023302389308810234,
+        "penalty": 0.0010592893231660128
+      },
+      {
+        "step": 2000,
+        "loss_g": 10.165190696716309,
+        "loss_d": 0.0019352168310433626,
+        "penalty": 0.0010339163709431887
+      }
+    ],
+    "RA4": [
+      {
+        "step": 100,
+        "loss_g": 0.14775370061397552,
+        "loss_d": 2.994647264480591,
+        "penalty": 0.0010015370789915323
+      },
+      {
+        "step": 200,
+        "loss_g": 1.8841865062713623,
+        "loss_d": 0.654994010925293,
+        "penalty": 0.0007095245528034866
+      },
+      {
+        "step": 300,
+        "loss_g": 0.8665650486946106,
+        "loss_d": 0.6683886647224426,
+        "penalty": 0.0007087687263265252
+      },
+      {
+        "step": 400,
+        "loss_g": 0.8045660257339478,
+        "loss_d": 0.6477697491645813,
+        "penalty": 0.0003879927971865982
+      },
+      {
+        "step": 500,
+        "loss_g": 0.7224857807159424,
+        "loss_d": 0.6897264122962952,
+        "penalty": 0.0002205564669566229
+      },
+      {
+        "step": 600,
+        "loss_g": 0.7071914076805115,
+        "loss_d": 0.699161171913147,
+        "penalty": 0.00011301715130684897
+      },
+      {
+        "step": 700,
+        "loss_g": 0.7171748280525208,
+        "loss_d": 0.6740699410438538,
+        "penalty": 0.00018334038031753153
+      },
+      {
+        "step": 800,
+        "loss_g": 0.7179848551750183,
+        "loss_d": 0.6698129773139954,
+        "penalty": 7.112016464816406e-05
+      },
+      {
+        "step": 900,
+        "loss_g": 0.7337054014205933,
+        "loss_d": 0.6783879995346069,
+        "penalty": 0.0001303834142163396
+      },
+      {
+        "step": 1000,
+        "loss_g": 0.7523796558380127,
+        "loss_d": 0.6771222949028015,
+        "penalty": 0.0001625624136067927
+      },
+      {
+        "step": 1100,
+        "loss_g": 0.7072254419326782,
+        "loss_d": 0.692267894744873,
+        "penalty": 0.00011525710579007864
+      },
+      {
+        "step": 1200,
+        "loss_g": 0.708402156829834,
+        "loss_d": 0.6974762678146362,
+        "penalty": 0.00012373345089145005
+      },
+      {
+        "step": 1300,
+        "loss_g": 0.7011568546295166,
+        "loss_d": 0.68730229139328,
+        "penalty": 0.00010807171929627657
+      },
+      {
+        "step": 1400,
+        "loss_g": 0.7046211957931519,
+        "loss_d": 0.6878169178962708,
+        "penalty": 7.037194154690951e-05
+      },
+      {
+        "step": 1500,
+        "loss_g": 0.7016559839248657,
+        "loss_d": 0.6967030167579651,
+        "penalty": 8.495977817801759e-05
+      },
+      {
+        "step": 1600,
+        "loss_g": 0.70714271068573,
+        "loss_d": 0.6907413601875305,
+        "penalty": 8.719794277567416e-05
+      },
+      {
+        "step": 1700,
+        "loss_g": 0.6937196850776672,
+        "loss_d": 0.6901530027389526,
+        "penalty": 8.274200081359595e-05
+      },
+      {
+        "step": 1800,
+        "loss_g": 0.6983780860900879,
+        "loss_d": 0.6880409717559814,
+        "penalty": 8.354982128366828e-05
+      },
+      {
+        "step": 1900,
+        "loss_g": 0.6992720365524292,
+        "loss_d": 0.6974175572395325,
+        "penalty": 8.215226989705116e-05
+      },
+      {
+        "step": 2000,
+        "loss_g": 0.7069126963615417,
+        "loss_d": 0.6831734776496887,
+        "penalty": 7.938910130178556e-05
+      }
+    ],
+    "E22": [
+      {
+        "step": 100,
+        "loss_g": 3.3944034576416016,
+        "loss_d": 0.17016184329986572,
+        "penalty": 0.001340721151791513
+      },
+      {
+        "step": 200,
+        "loss_g": 0.5890061855316162,
+        "loss_d": 4.176669120788574,
+        "penalty": 0.0012760120443999767
+      },
+      {
+        "step": 300,
+        "loss_g": 2.013902187347412,
+        "loss_d": 0.3944240212440491,
+        "penalty": 0.0008763662190176547
+      },
+      {
+        "step": 400,
+        "loss_g": 2.341627597808838,
+        "loss_d": 0.36973029375076294,
+        "penalty": 0.0045326813124120235
+      },
+      {
+        "step": 500,
+        "loss_g": 1.070019006729126,
+        "loss_d": 0.5756887197494507,
+        "penalty": 0.0009799962863326073
+      },
+      {
+        "step": 600,
+        "loss_g": 0.9055439233779907,
+        "loss_d": 0.605428159236908,
+        "penalty": 0.0010444256477057934
+      },
+      {
+        "step": 700,
+        "loss_g": 0.8157761096954346,
+        "loss_d": 0.6224571466445923,
+        "penalty": 0.0006320904940366745
+      },
+      {
+        "step": 800,
+        "loss_g": 0.8368033766746521,
+        "loss_d": 0.6149746775627136,
+        "penalty": 0.00041521748062223196
+      },
+      {
+        "step": 900,
+        "loss_g": 0.8363082408905029,
+        "loss_d": 0.6400800347328186,
+        "penalty": 0.0006392714567482471
+      },
+      {
+        "step": 1000,
+        "loss_g": 0.8285340666770935,
+        "loss_d": 0.6365944147109985,
+        "penalty": 0.0007112112361937761
+      },
+      {
+        "step": 1100,
+        "loss_g": 0.80992591381073,
+        "loss_d": 0.6654895544052124,
+        "penalty": 0.0007846131920814514
+      },
+      {
+        "step": 1200,
+        "loss_g": 0.7935479879379272,
+        "loss_d": 0.6617939472198486,
+        "penalty": 0.0008738954784348607
+      },
+      {
+        "step": 1300,
+        "loss_g": 0.7657320499420166,
+        "loss_d": 0.6926807165145874,
+        "penalty": 0.0008505773730576038
+      },
+      {
+        "step": 1400,
+        "loss_g": 0.7407323122024536,
+        "loss_d": 0.6718286275863647,
+        "penalty": 0.0004913312150165439
+      },
+      {
+        "step": 1500,
+        "loss_g": 0.7532949447631836,
+        "loss_d": 0.6855303645133972,
+        "penalty": 0.0004543449904303998
+      },
+      {
+        "step": 1600,
+        "loss_g": 0.713247537612915,
+        "loss_d": 0.7021276950836182,
+        "penalty": 0.0004094008472748101
+      },
+      {
+        "step": 1700,
+        "loss_g": 0.7207823991775513,
+        "loss_d": 0.7059694528579712,
+        "penalty": 0.00038849690463393927
+      },
+      {
+        "step": 1800,
+        "loss_g": 0.7272967100143433,
+        "loss_d": 0.6904542446136475,
+        "penalty": 0.0003741806431207806
+      },
+      {
+        "step": 1900,
+        "loss_g": 0.73663330078125,
+        "loss_d": 0.6900731325149536,
+        "penalty": 0.0004476852191146463
+      },
+      {
+        "step": 2000,
+        "loss_g": 0.7429922819137573,
+        "loss_d": 0.6696040630340576,
+        "penalty": 0.00032463710522279143
+      }
+    ]
+  },
+  "unchanged_body_ASTs_ignoring_docstrings": [
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_output_sigma",
+      "body_ast_sha256": {
+        "RA11": "221907e51aa6fa9e0ccae7aa00d551f7bf970234ec4fa56ba7783f4ce4375ae1",
+        "RA4": "221907e51aa6fa9e0ccae7aa00d551f7bf970234ec4fa56ba7783f4ce4375ae1",
+        "E22": "221907e51aa6fa9e0ccae7aa00d551f7bf970234ec4fa56ba7783f4ce4375ae1"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_average_rate",
+      "body_ast_sha256": {
+        "RA11": "74c014719ef0f43a3517ce406d2b3392e308731c2c7756fe4e69bdc367ce8e3a",
+        "RA4": "74c014719ef0f43a3517ce406d2b3392e308731c2c7756fe4e69bdc367ce8e3a",
+        "E22": "74c014719ef0f43a3517ce406d2b3392e308731c2c7756fe4e69bdc367ce8e3a"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_serve_apply",
+      "body_ast_sha256": {
+        "RA11": "875cc1aa58354df01a34e991526baa48e84a04e26f8d28857d027bf152db58c0",
+        "RA4": "875cc1aa58354df01a34e991526baa48e84a04e26f8d28857d027bf152db58c0",
+        "E22": "875cc1aa58354df01a34e991526baa48e84a04e26f8d28857d027bf152db58c0"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_serve_release",
+      "body_ast_sha256": {
+        "RA11": "a3ea0de3a6b9a2f793ddde5c3aac06eb436e5eea6136ae5b32574fad56e1e485",
+        "RA4": "a3ea0de3a6b9a2f793ddde5c3aac06eb436e5eea6136ae5b32574fad56e1e485",
+        "E22": "a3ea0de3a6b9a2f793ddde5c3aac06eb436e5eea6136ae5b32574fad56e1e485"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_served_parameters",
+      "body_ast_sha256": {
+        "RA11": "88c1ec730e94ac3f814bb095475e9aa359191b0d9cea28aa5675e3e0020263c7",
+        "RA4": "88c1ec730e94ac3f814bb095475e9aa359191b0d9cea28aa5675e3e0020263c7",
+        "E22": "88c1ec730e94ac3f814bb095475e9aa359191b0d9cea28aa5675e3e0020263c7"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_served_averages",
+      "body_ast_sha256": {
+        "RA11": "88fdb5c9c52ed86d7a88e00d8b5fde85f42629e26afc974be465d88a9ba6bcce",
+        "RA4": "88fdb5c9c52ed86d7a88e00d8b5fde85f42629e26afc974be465d88a9ba6bcce",
+        "E22": "88fdb5c9c52ed86d7a88e00d8b5fde85f42629e26afc974be465d88a9ba6bcce"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_table_tester",
+      "body_ast_sha256": {
+        "RA11": "79d56b53849f1c51136b6990f8f593a88bab5c3daf730bc724a0d6b0c8af43ce",
+        "RA4": "79d56b53849f1c51136b6990f8f593a88bab5c3daf730bc724a0d6b0c8af43ce",
+        "E22": "79d56b53849f1c51136b6990f8f593a88bab5c3daf730bc724a0d6b0c8af43ce"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_stray_gate",
+      "body_ast_sha256": {
+        "RA11": "f7168455500c6ebf800368616b22b9c339d8f5efb5f9e1151cc15926990f2b3e",
+        "RA4": "f7168455500c6ebf800368616b22b9c339d8f5efb5f9e1151cc15926990f2b3e",
+        "E22": "f7168455500c6ebf800368616b22b9c339d8f5efb5f9e1151cc15926990f2b3e"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_settle_observe",
+      "body_ast_sha256": {
+        "RA11": "3b072d0b22ae7adae3ccf0aa214ae2d06573f5e5f3fb936406443ac9f4b3bd59",
+        "RA4": "3b072d0b22ae7adae3ccf0aa214ae2d06573f5e5f3fb936406443ac9f4b3bd59",
+        "E22": "3b072d0b22ae7adae3ccf0aa214ae2d06573f5e5f3fb936406443ac9f4b3bd59"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "continuous.py",
+      "owner": "DataDriftController",
+      "name": "observe_generator",
+      "body_ast_sha256": {
+        "RA11": "939bd615e5ec830c4ab62958569a35320f18c4017668e8fcaf2626c301f51121",
+        "RA4": "939bd615e5ec830c4ab62958569a35320f18c4017668e8fcaf2626c301f51121",
+        "E22": "939bd615e5ec830c4ab62958569a35320f18c4017668e8fcaf2626c301f51121"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "continuous.py",
+      "owner": "DataDriftController",
+      "name": "critic_scale",
+      "body_ast_sha256": {
+        "RA11": "c2bce4e7f5765fb58fb4dfe40ff9025ea9f6824f79ca5f98b51f0f22e1ef71b6",
+        "RA4": "c2bce4e7f5765fb58fb4dfe40ff9025ea9f6824f79ca5f98b51f0f22e1ef71b6",
+        "E22": "c2bce4e7f5765fb58fb4dfe40ff9025ea9f6824f79ca5f98b51f0f22e1ef71b6"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "continuous.py",
+      "owner": "DataDriftController",
+      "name": "observe_blind",
+      "body_ast_sha256": {
+        "RA11": "e729d62dc5b6d492f2da57e9a9a93619aa0f2af6c55cde3f07e2037da784a68d",
+        "RA4": "e729d62dc5b6d492f2da57e9a9a93619aa0f2af6c55cde3f07e2037da784a68d",
+        "E22": "e729d62dc5b6d492f2da57e9a9a93619aa0f2af6c55cde3f07e2037da784a68d"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "continuous.py",
+      "owner": "DataDriftController",
+      "name": "_advance_mobility",
+      "body_ast_sha256": {
+        "RA11": "bb0a97fb511122ed960c6aa971702b396e2a01f618888c641faace3faed2bcf7",
+        "RA4": "bb0a97fb511122ed960c6aa971702b396e2a01f618888c641faace3faed2bcf7",
+        "E22": "bb0a97fb511122ed960c6aa971702b396e2a01f618888c641faace3faed2bcf7"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "continuous.py",
+      "owner": "DataDriftController",
+      "name": "observe_game",
+      "body_ast_sha256": {
+        "RA11": "aaaad83766213e344d3c31cdc3c52c69b8fe9ee541847447708c952dca5bb69d",
+        "RA4": "aaaad83766213e344d3c31cdc3c52c69b8fe9ee541847447708c952dca5bb69d",
+        "E22": "aaaad83766213e344d3c31cdc3c52c69b8fe9ee541847447708c952dca5bb69d"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "recipes.py",
+      "owner": "Recipe",
+      "name": "make_optimizers",
+      "body_ast_sha256": {
+        "RA11": "0230aea39a1f5b0f049ad1d7c1b1a09396919286f7cb9b761b9330c3017297a6",
+        "RA4": "0230aea39a1f5b0f049ad1d7c1b1a09396919286f7cb9b761b9330c3017297a6",
+        "E22": "0230aea39a1f5b0f049ad1d7c1b1a09396919286f7cb9b761b9330c3017297a6"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "recipes.py",
+      "owner": "Recipe",
+      "name": "make_generator_optimizer",
+      "body_ast_sha256": {
+        "RA11": "ceec58c13354a36db1b0b68e9c0f1896aed82d741dce40f676e6c0c04ecd3afe",
+        "RA4": "ceec58c13354a36db1b0b68e9c0f1896aed82d741dce40f676e6c0c04ecd3afe",
+        "E22": "ceec58c13354a36db1b0b68e9c0f1896aed82d741dce40f676e6c0c04ecd3afe"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "recipes.py",
+      "owner": "Recipe",
+      "name": "make_critic_optimizer",
+      "body_ast_sha256": {
+        "RA11": "13540bf2aac6792a2c0719d5714ea5d285d9e236d801f90d38452d3d8916c162",
+        "RA4": "13540bf2aac6792a2c0719d5714ea5d285d9e236d801f90d38452d3d8916c162",
+        "E22": "13540bf2aac6792a2c0719d5714ea5d285d9e236d801f90d38452d3d8916c162"
+      },
+      "all_equal": true
+    }
+  ],
+  "RA4_sampling_ASTs": [
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "_generate",
+      "body_ast_sha256": {
+        "RA4": "9a25d9394d65b00c02df6a2bfde2c9534a09397088c66579767b1ca6dc8e4f65",
+        "RA11": "9a25d9394d65b00c02df6a2bfde2c9534a09397088c66579767b1ca6dc8e4f65"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "training.py",
+      "owner": "GANTrainer",
+      "name": "sample",
+      "body_ast_sha256": {
+        "RA4": "0aeb511d7308799b50869871dbb827838cc5cb112f0f6e515cb03f6a3390a8d2",
+        "RA11": "0aeb511d7308799b50869871dbb827838cc5cb112f0f6e515cb03f6a3390a8d2"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "feature_cells.py",
+      "owner": "FeatureCellBirthDeath",
+      "name": "perturb_latent",
+      "body_ast_sha256": {
+        "RA4": "9aaafec6da876064560d22e8b1aeeb39ab15283561fe67711aae067df65a7f79",
+        "RA11": "9aaafec6da876064560d22e8b1aeeb39ab15283561fe67711aae067df65a7f79"
+      },
+      "all_equal": true
+    },
+    {
+      "file": "feature_cells.py",
+      "owner": null,
+      "name": "BoundedLatentGeometry",
+      "body_ast_sha256": {
+        "RA4": "ba35d8d57eb5b22363ca69ee1f6c2e838f8c4f018ef1adbb6f1f1d35e2de8294",
+        "RA11": "ba35d8d57eb5b22363ca69ee1f6c2e838f8c4f018ef1adbb6f1f1d35e2de8294"
+      },
+      "all_equal": true
+    }
+  ],
+  "optimizer_kernel_bytes": {
+    "k3p.py": {
+      "RA11": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+      "RA4": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+      "E22": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1"
+    },
+    "ka2.py": {
+      "RA11": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+      "RA4": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+      "E22": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8"
+    }
+  },
+  "findings": [
+    "No accepted mean, ordinary, isolation or novel population action occurred in RA11 MNIST; there was no population rebase/reset and lineage stayed empty.",
+    "Paired EMA eligibility is false at every recorded checkpoint. Active evaluation therefore used FAST, not an averaged serving swap.",
+    "Applied sigma grew above the unchanged learnable floor while the G and sigma testers remained scale1; G+sigma base .0010625 is one quarter the previous .00425, prior base .0085 and critic base .00425 are preserved.",
+    "The inherited payoff-error controller multiplies critic LR by 1/(1+payoff_error**2). The saved payoff error remains large and D LR remains about2e-5; RA4/E22 recover D LR and sigma falls to .029.",
+    "The output moment frame is fitted deterministically without an RNG draw. Its extra EMA observations use the owned-state-neutral context; a nonfiring run returns before preview and paired jitter.",
+    "The actual image G and D fixture definitions contain no stochastic eval layers or registered buffers. Their model/gradient/global and dedicated stream observation boundary is preserved by the qualified source."
+  ],
+  "candidate_direction": {
+    "kind": "ONE_RESERVED_CONFIG_ONLY_PROSPECT",
+    "lr": 0.00425,
+    "prior_lr_mult": 2.0,
+    "d_lr_mult": 1.0,
+    "scope": "restore historical G+sigma base; preserve prior/D base and all algorithm/noise/serving laws",
+    "evidence": "RA4 and corrected E22 original MNIST recover under these bases; actual RA11 G+sigma rates never annealed to compensate the quarter base",
+    "qualified": false
+  },
+  "limits": [
+    "Zero accepted actions rules out a direct mean-copy effect; observational neutrality is a source/qualified-contract conclusion, not a new live measurement.",
+    "The three runs differ in support/controller/serving package laws as well as rates. Stored trajectories establish a failure path, not an isolated causal config experiment.",
+    "Clean generator saturation versus late output-noise amplification is not quantified from tensors here. Pixel clipping alone also counts correct near-boundary MNIST background pixels.",
+    "A config-only correction has evidence for a prospective test, not a guarantee of retaining toy/grid passes or recovering MNIST.",
+    "Registered model state and owned Torch streams are covered by observation guards; arbitrary custom external/Python state is outside that claim."
+  ],
+  "Torch_imported": false,
+  "PT_objects_loaded": 0,
+  "model_constructions": 0,
+  "model_forwards": 0,
+  "new_draws": 0,
+  "training_updates": 0,
+  "new_scoring_calls": 0,
+  "new_seeds": 0,
+  "CPU_only": true
+}

@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "scope": "Compact software-validation evidence; original failure coverage across explicitly recorded source revisions.",
+  "created_utc": "2026-10-10T18:54:28.247146+00:00",
+  "initial_full_cpu_suite": {
+    "status": "FAILED",
+    "source_commit": "5a38c8505945e8b4ce806f4d1bd8c4b95e4184e6",
+    "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/full-cpu.json",
+    "receipt_sha256": "216afbbdaffce5f941c133309065f5e827100c950bf6d6dc8e6c0de811f68bcc",
+    "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/full-cpu.xml",
+    "junit_sha256": "0eddf4cac34be3d94fe18242fd6bc920a8bbd51c3a15c8bf115832a2d9cefbd2",
+    "pytest_counts": {
+      "passed": 5886,
+      "failed": 96,
+      "errors": 35,
+      "skipped": 299,
+      "xfailed": 1,
+      "subtests_passed": 131
+    },
+    "junit_skipped_entries": 300
+  },
+  "final_original_failure_coverage": {
+    "original_failed_nodes": 131,
+    "later_exact_node_pass": 131,
+    "pending": 0,
+    "exact_node_receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/failure-coverage-final.json",
+    "exact_node_receipt_sha256": "5007eccfa244674ccb6f5ac87f75dea1003116dbbda7a0120d4b507467015fd0",
+    "initial_pending_snapshot": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/failure-coverage.json",
+    "initial_pending_snapshot_sha256": "f04bb60a142aff7dd66fc93b28d67a7247df59843b0904af8029d6796f04798c"
+  },
+  "focused_evidence": [
+    {
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/root/current-contract-fixtures.xml",
+      "sha256": "173f28dfe3cb38874f411f846d07358fe92ef95870593ae4dd212f731c9b86c7",
+      "counts": {
+        "pass": 93,
+        "failure": 1
+      },
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/root/current-contract-fixtures.json",
+      "source_commit": null,
+      "working_diff_sha256": null,
+      "ending_diff_sha256": null,
+      "elapsed_seconds": 5.959105289002764
+    },
+    {
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/root/host-objective-boundary-recheck.xml",
+      "sha256": "1e2b88f84e1a5d8a5af85ed691051c7bef176a9f9c72bcc8a108756b7ec548c4",
+      "counts": {
+        "pass": 1
+      },
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/root/host-objective-boundary-recheck.json",
+      "source_commit": null,
+      "working_diff_sha256": null,
+      "ending_diff_sha256": null,
+      "elapsed_seconds": 1.4715847560000839
+    },
+    {
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/development/prior-api-repair.xml",
+      "sha256": "2449eca20d06f941eb785c1a9dfd4cd5a1385119947bb629525d3ee0d84917c2",
+      "counts": {
+        "pass": 219,
+        "skip": 10
+      },
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/development/prior-api-repair.json",
+      "source_commit": "ad9daaf259b0273c127f4407db429c718319b1c8",
+      "working_diff_sha256": null,
+      "ending_diff_sha256": null,
+      "elapsed_seconds": 6.75
+    },
+    {
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/legacy-focused.xml",
+      "sha256": "435587748e57a5df6e023aadf954d3d9c0eff05a640f919f099ebb59c7f5a045",
+      "counts": {
+        "pass": 168,
+        "failure": 10,
+        "error": 7,
+        "skip": 1
+      },
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/legacy-focused.json",
+      "source_commit": "5a38c8505945e8b4ce806f4d1bd8c4b95e4184e6",
+      "working_diff_sha256": "2d286d5dc845b6a38b8d136395922b57014a59cb70898b52bfb521689e9756bd",
+      "ending_diff_sha256": "9fbae6ee8898e0ae8c5cde90dc0f1c343bfb814855404fbbdfe901fc2911d601",
+      "elapsed_seconds": 150.18334612299805
+    },
+    {
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/root/current-and-archived-source-bindings.xml",
+      "sha256": "4ea11fb702412fcf04655027e5b14f347bedad4dbc1d9a1956e2afbd4190f102",
+      "counts": {
+        "pass": 1
+      },
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/root/current-and-archived-source-bindings.json",
+      "source_commit": null,
+      "working_diff_sha256": null,
+      "ending_diff_sha256": null,
+      "elapsed_seconds": 1.9757917239985545
+    },
+    {
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/legacy-failed-recheck.xml",
+      "sha256": "63114e862e652a6674b50d883b42b56b51e23b0b9177303e3c9b9877db592d1a",
+      "counts": {
+        "pass": 29
+      },
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/legacy-failed-recheck.json",
+      "source_commit": "85404a97dea6a987637b2ce9488e5ea2be081f44",
+      "working_diff_sha256": "b88fe22337ada3ab5193cc0da9ba491a3ed0fa37a03c48ac65447970e651af63",
+      "ending_diff_sha256": "b88fe22337ada3ab5193cc0da9ba491a3ed0fa37a03c48ac65447970e651af63",
+      "elapsed_seconds": 28.125101197998447
+    },
+    {
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/compatibility/publication-existing-initial.xml",
+      "sha256": "bff13ddb5b9dc4d38e74750c97e088053f86da0723d7f8f179b2b99544a5abac",
+      "counts": {
+        "pass": 345,
+        "failure": 1
+      },
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/compatibility/publication-existing-initial.json",
+      "source_commit": "85404a97dea6a987637b2ce9488e5ea2be081f44",
+      "working_diff_sha256": null,
+      "ending_diff_sha256": null,
+      "elapsed_seconds": 58.26473349599837
+    }
+  ],
+  "final_report_guard_invocations": [
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/final-acceptance/root-final-freshness.json",
+      "receipt_sha256": "c35ccb1b291029d34d6a8e6494ca651ddf413bd68f2ea561679680c68acdcac6",
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/final-acceptance/root-final-freshness.xml",
+      "junit_sha256": "8d5c6e6235882a1b4503846ba5797960d442bb72c5a63bbe8a983c7d9a3efc36",
+      "counts": {
+        "failure": 3,
+        "pass": 2
+      },
+      "source_commit": "d65b4862c39bb61858de11d61348b5952b687f90",
+      "exit_code": 1,
+      "elapsed_seconds": 14.675415409998095,
+      "status": "FAILED",
+      "qualification_input": false
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/final-acceptance/root-final-family-repair.json",
+      "receipt_sha256": "2bfbbf2a19f4701f78a35e122235d59f022278fd10ffc9cbd883dfbc9e559120",
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/final-acceptance/root-final-family-repair.xml",
+      "junit_sha256": "521b618a12dc337f103ad78856bcc2173a8cd399b079d3a74b3839e42cc168c0",
+      "counts": null,
+      "source_commit": "d65b4862c39bb61858de11d61348b5952b687f90",
+      "exit_code": -9,
+      "elapsed_seconds": 13.00155441100651,
+      "status": "INTERRUPTED",
+      "qualification_input": false,
+      "junit_limit": "Interrupted XML contains only an unnamed testcase; no exact-node PASS is inferred."
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/root-guard-completion/root-final-family-guards.json",
+      "receipt_sha256": "61fe569363765074f61ad77e951ce80d41d990324df116eced9a02e22ebd106b",
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/root-guard-completion/root-final-family-guards.xml",
+      "junit_sha256": "cf114857939bf2176cddad6ca1cbad6488955fe1b94f92f1f13291d967c05a86",
+      "counts": {
+        "pass": 3
+      },
+      "source_commit": "d65b4862c39bb61858de11d61348b5952b687f90",
+      "exit_code": 0,
+      "elapsed_seconds": 7.249690940006985,
+      "status": "PASS",
+      "qualification_input": false
+    }
+  ],
+  "combined_final_report_controls": [
+    {
+      "nodeid": "tests.test_forge_family_reports::test_committed_pages_and_every_drilldown_link_match_the_generator",
+      "status": "pass",
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/root-guard-completion/root-final-family-guards.xml"
+    },
+    {
+      "nodeid": "tests.test_forge_family_reports::test_current_clock_measurement_retains_original_evidence_alongside_policy_advance",
+      "status": "pass",
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/root-guard-completion/root-final-family-guards.xml"
+    },
+    {
+      "nodeid": "tests.test_forge_family_reports::test_current_measurement_families_complete_only_their_declared_view_scope",
+      "status": "pass",
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/root-guard-completion/root-final-family-guards.xml"
+    },
+    {
+      "nodeid": "tests.test_forge_publication_memory::test_committed_research_memory_is_fresh_without_raw_log_hydration",
+      "status": "pass",
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/final-acceptance/root-final-freshness.xml"
+    },
+    {
+      "nodeid": "tests.test_forge_tier_report::test_committed_tier_report_matches_current_declarations_and_artifacts",
+      "status": "pass",
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/final-acceptance/root-final-freshness.xml"
+    }
+  ],
+  "independent_numerical_archive_proofs": [
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/legacy-existing-tensor-parity.json",
+      "sha256": "240afecc15b0dd0867a72ee83ea7c990b71bb9560b67dc4688472b3fd42c9d96"
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/legacy-final-immutability-proof.json",
+      "sha256": "28e35f208f2f7f78bb73a2727bf587b7132f3f297e5052bf3569cb85173a91be"
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/legacy-final-adapter-receipt.json",
+      "sha256": "8c0a2159bea7727466bba83b32b424f8b91a4327bd65d53e77342201497f4b0d"
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/legacy-final-source-bindings.json",
+      "sha256": "bc6c3a47824f402cbe35614c533797aec0fc2783aa00817cc2af5fb51e6fba6c"
+    }
+  ],
+  "separate_renderer": {
+    "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-prior-refactor-20261010/audit/renderer.json",
+    "receipt_sha256": "5e968b15f786df742c542a40acef203fc057a331aaa9954ec5827197e253f550",
+    "junit_sha256": "f097cbb4dfbdce85e9bdd669a1fc410665309e4bfab4817e14ced9a44fe0451d",
+    "passed": 3
+  },
+  "software_budget_stage_snapshots": [
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/acceptance/original-1800s-software-ledger.json",
+      "observed_sha256": "18b3219add481c263d00cfbfa844ec3f47b5de01fec26005d086893336eb956f",
+      "scope": "recipe_owned_priors_software_development_ledger",
+      "allowance_seconds": 1800,
+      "recorded_elapsed_seconds": 1763.71784361801,
+      "recorded_remaining_seconds": 36.282156381990035,
+      "paid_training_attempts": 0,
+      "accounting_limit": "Completed measured total is a lower bound because original preparation/binding/admin timers were not retained. Full CPU and isolated renderer are terminal and fully charged using wrapper elapsed. All failed checks remain represented. Time all subsequent checks and preserve an allowance for the explicitly untimed original probes; no zero-cost claim."
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/acceptance/publication-acceptance-ledger.json",
+      "observed_sha256": "31ff8deeeedbd6b715fbab2e099e88261814319e945e8a8dae616034e4e914f3",
+      "scope": "zero_training_publication_acceptance",
+      "allowance_seconds": 300,
+      "recorded_elapsed_seconds": 272.7520185169887,
+      "recorded_remaining_seconds": 27.2479814830113,
+      "paid_training_attempts": 0,
+      "accounting_limit": "Separate finite reporting/acceptance allowance. No scientific training, resampling, new scoring cohorts, gate edits or Forge campaign budget changes. Original software stage remains immutable."
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/final-acceptance/final-reporting-acceptance-ledger.json",
+      "observed_sha256": "63a2b591a862e33f29b170ea65e62d6e16cbddb6a62abe1c9a98e28f984b3f0f",
+      "scope": "final_zero_training_reporting_acceptance_completion",
+      "allowance_seconds": 120,
+      "recorded_elapsed_seconds": 119.21429607000755,
+      "recorded_remaining_seconds": 0.7857039299924509,
+      "paid_training_attempts": 0,
+      "accounting_limit": null
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/publisher-verification/publisher-verification-ledger.json",
+      "observed_sha256": "558c8601f09242d338f41b12ff332013c3c9e3bd17004c257c469f8d113795fd",
+      "scope": "cold_exact_seven_leader_publisher_verification",
+      "allowance_seconds": 90,
+      "recorded_elapsed_seconds": 49.43178279499989,
+      "recorded_remaining_seconds": 40.56821720500011,
+      "paid_training_attempts": 0,
+      "accounting_limit": null
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/media-completion/saved-media-completion-ledger.json",
+      "observed_sha256": "ee6645e1c9575cec65f99a78618dfbf05a9bdda66ea14f94e1493e3571951a26",
+      "scope": "deterministic_saved_media_export_completion",
+      "allowance_seconds": 120,
+      "recorded_elapsed_seconds": 109.65802243500366,
+      "recorded_remaining_seconds": 10.341977564996341,
+      "paid_training_attempts": 0,
+      "accounting_limit": null
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/remaining-publisher-acceptance/remaining-publisher-acceptance-ledger.json",
+      "observed_sha256": "47f9c57f998d37330b5015c461eea26577e5b641c86cf444940d6628e85f0bbf",
+      "scope": "zero_training_remaining_publisher_repair_acceptance",
+      "allowance_seconds": 120.0,
+      "recorded_elapsed_seconds": 86.81395505600085,
+      "recorded_remaining_seconds": 33.18604494399915,
+      "paid_training_attempts": 0,
+      "accounting_limit": null
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/root-guard-completion/final-reporting-acceptance-ledger.json",
+      "observed_sha256": "56a6c1f21b551bb40d31fcd75041859cee43ff8d39b79e163b01883946319301",
+      "scope": "remaining_current_and_historical_report_guard_completion",
+      "allowance_seconds": 60,
+      "recorded_elapsed_seconds": 7.249690940006985,
+      "recorded_remaining_seconds": 52.750309059993015,
+      "paid_training_attempts": 0,
+      "accounting_limit": null
+    }
+  ],
+  "executed_source_boundary": {
+    "receipt": "publication/integration-verification.json",
+    "receipt_sha256": "51695316ce52e5277d8f4723b3911c5a4b11d6f9c4f78381ef3e477c77d8a562",
+    "executed_files_verified": 1206,
+    "executed_freezes_are_ancestors": [
+      "a0493ca3c213d559523eadc76e244ec9f9c1f81f",
+      "f3631bf94f457e0325f6992aa1252d9ac3f3f582"
+    ],
+    "executed_manifest_sha256": "11b262c19d2129cebc102e5f2bfc1bcd354f3fd44e8310e3bb375f3a8050f5b5",
+    "executed_source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+    "integrated_commit": "d65b4862c39bb61858de11d61348b5952b687f90",
+    "mismatches": [],
+    "original_user_checkout_head": "653c38045618ad240524237a9c141c8d06b28c03",
+    "original_user_tracked_files_unchanged": true,
+    "scope": "Exact executed source files; incoming unrelated analysis files are outside this frozen boundary.",
+    "status": "PASS"
+  },
+  "initialization_contract": {
+    "new_comparison_seed": 0,
+    "initializer": "public deterministic initializer",
+    "task_owned": [
+      "architecture",
+      "data law",
+      "initial prior distribution and capacity",
+      "sampling law",
+      "update budget",
+      "evaluation cadence"
+    ],
+    "recipe_owned": [
+      "prior update policy",
+      "prior regularizer and weight"
+    ],
+    "historical_replay_task_sources": [
+      "5737ade47dca89b04d338ada20667781d1f2b5df",
+      "03466efa4de8271b9a2c964406dc6f4f0f260792"
+    ],
+    "original_numerical_assertions_preserved": true,
+    "current_migrated_task_declarations_checked": 33
+  },
+  "limits": {
+    "new_full_suite_run": false,
+    "claim_all_tests_pass_at_current_head": false,
+    "qualification_input": false,
+    "new_scientific_training_by_validation": false,
+    "incoming_unrelated_diagnostic_helper": "Outside the executed 1206-file boundary; no qualification or rerun claim."
+  },
+  "software_budget_limit": "Recorded stage totals are preserved separately. The original1800-second ledger explicitly lists untimed preparation/admin probes: its recorded total is a lower bound, not a zero-cost claim for those probes. All later reporting stages are finite and add no scientific training.",
+  "final_publisher_acceptance": [
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/remaining-publisher-acceptance/final-archive-roster-lineage-controls.json",
+      "receipt_sha256": "00eb31884e926b7557b6c02a49389cc7d654d73520430b88d8e12729ae44c659",
+      "status": "PASS",
+      "source_commit": "f3631bf94f457e0325f6992aa1252d9ac3f3f582",
+      "elapsed_seconds": 15.79651399699651,
+      "exit_code": 0,
+      "junit": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/remaining-publisher-acceptance/final-controls.xml",
+      "junit_sha256": "84aca730b910c0cac01a00285436040da2bda7d270cf9ef3ec35ca57afa3f888",
+      "passed": 34
+    },
+    {
+      "receipt": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/remaining-publisher-acceptance/normal-summary-only-after-develop-sync.json",
+      "receipt_sha256": "9ada380273970a6b1ef8d9004de1270a0a7ac2f883018d78e0dd39aeb176207b",
+      "status": "PASS",
+      "source_commit": "d65b4862c39bb61858de11d61348b5952b687f90",
+      "elapsed_seconds": 13.304538520002097,
+      "exit_code": 0,
+      "preservation_proof": "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/publication/remaining-publisher-acceptance/normal-summary-preservation-proof.json",
+      "preservation_proof_sha256": "fdfa92d8960a3bcd1779ff443efee3a8507f409dbf68c696cf89f56948edb2c1"
+    }
+  ]
+}

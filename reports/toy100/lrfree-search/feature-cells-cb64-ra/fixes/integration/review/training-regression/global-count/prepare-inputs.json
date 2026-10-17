@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "source_3K_inputs": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/inputs.pt",
+  "source_3K_sha256": "d8cb4123942985797be0c491650894163c00d76c05f4dbdd81322919039da5cd",
+  "input_sha256": "3e8deeb2fe534d28cf3731a4694c0543e280d2de270e0d9644731d9ec40057f2",
+  "inherited_cases": 7,
+  "added_cases": [
+    "global_no_signal",
+    "global_opposite_signal"
+  ],
+  "fitting_changes": 0,
+  "new_seeds": 0,
+  "optimizer_updates": 0,
+  "cuda_initialized": false
+}

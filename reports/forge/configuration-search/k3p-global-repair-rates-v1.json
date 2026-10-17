@@ -1,0 +1,5601 @@
+{
+  "base_candidate": "k3p-global-repair-v1",
+  "base_declaration": {
+    "api_changes": [],
+    "api_version": "forge-api-v1",
+    "changed_factors": [
+      "Register the previously selected repaired optimizer recipe as one global reusable family candidate with fixed numerical optimizer, penalty, noise and schedule controls across all tasks; declared task-owned geometry/resources/prior/horizons/objectives remain bound by existing adapters."
+    ],
+    "claim_contract": {
+      "sampling_law": "task_declared",
+      "schedule": "scheduled",
+      "scoring_weights": "live"
+    },
+    "decision_contract": {
+      "candidate_binding_sha256": "47c37d5bf0b108a292212214662cbd33e7c34655cf535c652c1b272860c04100",
+      "competing_explanation": "The lower word-compatible global rates may be too small for the frozen 80-update movement screen. A failure rejects this complete ordinary candidate; prior word passes cannot fill its gated cells or justify per-task tuning.",
+      "control": {
+        "binding_sha256": "aa1cdd0b644d6daf56ef3ba0800aafad7136f80152ca05739ff389a3f43af737",
+        "candidate_id": "k3p",
+        "task_map": {
+          "ae_gan_hold": "ae_gan_hold",
+          "cover_leftover": "cover_leftover",
+          "five_word_joint_acquisition": "five_word_joint_acquisition",
+          "grid100": "grid100",
+          "img_bars4": "img_bars4",
+          "img_blobs4": "img_blobs4",
+          "img_intensity2": "img_intensity2",
+          "img_stripes2": "img_stripes2",
+          "mid_scale_identity": "mid_scale_identity",
+          "mode_hold": "mode_hold",
+          "residual_student": "residual_student",
+          "ring16_acquisition": "ring16_acquisition",
+          "ring_extension": "ring_extension",
+          "ring_hold": "ring_hold",
+          "rotated100": "rotated100",
+          "staggered100": "staggered100",
+          "trajectory": "trajectory",
+          "two_pole": "two_pole",
+          "unipolar": "unipolar",
+          "unused_token_hold": "unused_token_hold",
+          "vector_anisotropic": "vector_anisotropic",
+          "vector_overlap": "vector_overlap",
+          "vector_spiral": "vector_spiral",
+          "vector_two_broad": "vector_two_broad",
+          "vector_unequal_mass": "vector_unequal_mass",
+          "vector_unequal_width": "vector_unequal_width"
+        }
+      },
+      "falsifier": {
+        "metric": "mean_abs",
+        "op": "<",
+        "phase": "final",
+        "task_id": "two_pole",
+        "threshold": 0.3
+      },
+      "prediction": {
+        "metric": "mean_abs",
+        "op": ">=",
+        "phase": "final",
+        "task_id": "two_pole",
+        "threshold": 0.3
+      },
+      "prior_evidence": [
+        {
+          "identity": {
+            "candidate_revision": "7c9ea7c422fdacc4f9bbee35883893cf0d6abb2693341b515598e52b8a47cfa5",
+            "id": "k3p-coeff170-cap1"
+          },
+          "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+          "selector": [],
+          "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed",
+          "use": "motivation_only"
+        }
+      ],
+      "schema_version": 1,
+      "scope": {
+        "campaign_budget_seconds": 146700,
+        "candidate_budget_seconds": 48900,
+        "execution_backend": "cuda",
+        "jobs_sha256": "588651109a700f31eaf01ff129e4381526458dcfcb0874e70c7e106f2a4bf903",
+        "max_rounds": 1,
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort_sha256": "e2f4acc3bb6543576475ece1bb0bce5b973eca2ed1852b13d096ec9145277c71",
+        "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+        "task_ids": [
+          "ae_gan_hold",
+          "cover_leftover",
+          "five_word_joint_acquisition",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "ring16_acquisition",
+          "ring_extension",
+          "ring_hold",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "two_pole",
+          "unipolar",
+          "unused_token_hold",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "through_tier": 3,
+        "view": "discriminator_stability"
+      },
+      "status": "ready",
+      "substantive_delta": [
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "ae_gan_hold",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "ae_gan_hold",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "ae_gan_hold",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "ae_gan_hold",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "ae_gan_hold",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "ae_gan_hold",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "cover_leftover",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "cover_leftover",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "cover_leftover",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "cover_leftover",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "cover_leftover",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "cover_leftover",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "five_word_joint_acquisition",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "five_word_joint_acquisition",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "five_word_joint_acquisition",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "five_word_joint_acquisition",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "five_word_joint_acquisition",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "five_word_joint_acquisition",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "grid100",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "grid100",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "grid100",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "grid100",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "grid100",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "grid100",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "img_bars4",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "img_bars4",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "img_bars4",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "img_bars4",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "img_bars4",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "img_bars4",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "img_blobs4",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "img_blobs4",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "img_blobs4",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "img_blobs4",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "img_blobs4",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "img_blobs4",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "img_intensity2",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "img_intensity2",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "img_intensity2",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "img_intensity2",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "img_intensity2",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "img_intensity2",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "img_stripes2",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "img_stripes2",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "img_stripes2",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "img_stripes2",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "img_stripes2",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "img_stripes2",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "mid_scale_identity",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "mid_scale_identity",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "mid_scale_identity",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "mid_scale_identity",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "mid_scale_identity",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "mid_scale_identity",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "mode_hold",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "mode_hold",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "mode_hold",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "mode_hold",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "mode_hold",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "mode_hold",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "residual_student",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "residual_student",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "residual_student",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "residual_student",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "residual_student",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "residual_student",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "ring16_acquisition",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "ring16_acquisition",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "ring16_acquisition",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "ring16_acquisition",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "ring16_acquisition",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "ring16_acquisition",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "ring_extension",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "ring_extension",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "ring_extension",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "ring_extension",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "ring_extension",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "ring_extension",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "ring_hold",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "ring_hold",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "ring_hold",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "ring_hold",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "ring_hold",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "ring_hold",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "rotated100",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "rotated100",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "rotated100",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "rotated100",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "rotated100",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "rotated100",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "staggered100",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "staggered100",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "staggered100",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "staggered100",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "staggered100",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "staggered100",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "trajectory",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "trajectory",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "trajectory",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "trajectory",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "trajectory",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "trajectory",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "two_pole",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "two_pole",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "two_pole",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "two_pole",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "two_pole",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "two_pole",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "unipolar",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "unipolar",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "unipolar",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "unipolar",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "unipolar",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "unipolar",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "unused_token_hold",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "unused_token_hold",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "unused_token_hold",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "unused_token_hold",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "unused_token_hold",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "unused_token_hold",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_anisotropic",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "vector_anisotropic",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "vector_anisotropic",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "vector_anisotropic",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "vector_anisotropic",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_anisotropic",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_overlap",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "vector_overlap",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "vector_overlap",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "vector_overlap",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "vector_overlap",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_overlap",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_spiral",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "vector_spiral",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "vector_spiral",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "vector_spiral",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "vector_spiral",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_spiral",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_two_broad",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "vector_two_broad",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "vector_two_broad",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "vector_two_broad",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "vector_two_broad",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_two_broad",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_unequal_mass",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "vector_unequal_mass",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "vector_unequal_mass",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "vector_unequal_mass",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "vector_unequal_mass",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_unequal_mass",
+            "reg_coeff"
+          ]
+        },
+        {
+          "after": 1.5,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_unequal_width",
+            "d_lr_mult"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.5,
+          "path": [
+            "recipe",
+            "vector_unequal_width",
+            "input_noise_std"
+          ]
+        },
+        {
+          "after": 0.0006,
+          "before": 0.00425,
+          "path": [
+            "recipe",
+            "vector_unequal_width",
+            "lr"
+          ]
+        },
+        {
+          "after": null,
+          "before": 1600,
+          "path": [
+            "recipe",
+            "vector_unequal_width",
+            "network_lr_horizon_cap"
+          ]
+        },
+        {
+          "after": 0.0,
+          "before": 0.029,
+          "path": [
+            "recipe",
+            "vector_unequal_width",
+            "output_noise_std"
+          ]
+        },
+        {
+          "after": 170.0,
+          "before": 1.0,
+          "path": [
+            "recipe",
+            "vector_unequal_width",
+            "reg_coeff"
+          ]
+        }
+      ],
+      "terminal_rules": {
+        "falsified": "stop_revision",
+        "incomplete": "request_missing_evidence",
+        "inconclusive": "stop_and_readout",
+        "prediction_observed": "review_saved_diagnostics"
+      }
+    },
+    "diagnostic_ancestor": {
+      "qualification_reuse": false,
+      "receipt": {
+        "bytes": 40177,
+        "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+        "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+      },
+      "use": "motivation_only"
+    },
+    "execution_path": "public_trainer",
+    "goal": "discriminator_stability",
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "The exact repaired global recipe acquires the five-word inverse task and transfers without task-specific optimizer tuning across every eligible required discriminator-stability task under ordinary prerequisites.",
+    "id": "k3p-global-repair-v1",
+    "lifecycle": "proposed",
+    "mechanism_class": "structural",
+    "mechanism_rationale": "Explicit global solution successor. Clean-noise/cap activation boundaries are declared rather than hidden in same-signature search; no new penalty kernel, optimizer family or auxiliary objective. Family membership describes solution lineage.",
+    "parent": "k3p",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "prior_art": [
+      "reports/forge/word-root-cause/README.md",
+      "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json"
+    ],
+    "recipe_overrides": {
+      "amsgrad": false,
+      "beta2_anneal_end": 0.2,
+      "beta2_end": null,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "knn",
+      "birth_death_cells": 64,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "continuous_policy": null,
+      "critic_formulation": "k3p",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "ema_decay": 0.995,
+      "eps": 1e-08,
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.0006,
+      "lr_anneal_start": 0.6,
+      "lr_control": "mobility",
+      "lr_floor": 0.05,
+      "name": "k3p",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": null,
+      "optimizer_family": "formulation",
+      "output_noise_mode": "fixed",
+      "output_noise_std": 0.0,
+      "output_noise_warmup": 0.2,
+      "particle_birth_death": false,
+      "prior_betas": null,
+      "prior_lr_mult": 2.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_arm": null,
+      "reg_coeff": 170.0,
+      "reg_coeff_anneal_end": 0.2,
+      "reg_coeff_end": null,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "serve_average": 0.0,
+      "table_release_rule": "any"
+    },
+    "recipe_scope": "global_existing_settings_task_owned_conditions_only",
+    "requires_capabilities": [
+      "learned_locations",
+      "a2",
+      "named_rng"
+    ],
+    "schema_version": 2,
+    "trainer_family": "k3p"
+  },
+  "blocked_count": 0,
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 97800,
+    "candidate_budget_seconds": 48900,
+    "id": "k3p-global-repair-rates-v1"
+  },
+  "campaign_accounting": {
+    "definition": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 97800,
+      "candidate_budget_seconds": 48900,
+      "id": "k3p-global-repair-rates-v1"
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 14.060570542002097
+  },
+  "cost": {
+    "evidence_wall_seconds": 14.060570542002097,
+    "new_paid_wall_seconds": 14.060570542002097,
+    "observed_attempts": 2,
+    "wall_seconds": 14.060570542002097
+  },
+  "declared_worst_case_seconds": 90600,
+  "default_adoption": false,
+  "execution_backend": "cuda",
+  "holdout_tasks": [],
+  "independent_confirmation": "not_performed",
+  "input_digest": "35ea6af06df32e8aaea3025b61f8e60a59bd5b2880872063a1d324c16753f339",
+  "logs": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/events.jsonl",
+  "policy_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+  "progression": {
+    "comparison_complete": true,
+    "configured_through_tier": 3,
+    "default_adoption": false,
+    "full_view_qualified_candidate_ids": [],
+    "full_view_winner_candidate_id": null,
+    "outcome": "best_observed",
+    "policy": "every declared configuration advances independently through ordinary prerequisites to the tier cap",
+    "smoke_survivor_candidate_ids": []
+  },
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_scope": "declared tuning tasks only; provisional Forge gates",
+  "queue_root": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue",
+  "runtime_cohort": {
+    "compute_profiles": {
+      "cpu": {
+        "backend": "cpu",
+        "deterministic": true,
+        "machine": "x86_64",
+        "model": "AMD Ryzen 9 5900X 12-Core Processor",
+        "tf32": false,
+        "threads": 1
+      },
+      "cuda": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "execution_backend": "cuda",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "all_trials_terminal": true,
+    "calibration_status": "provisional",
+    "default_adoption": false,
+    "independent_confirmation": "not_performed",
+    "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+    "qualified": false,
+    "required_pass_count": 0,
+    "required_passes_by_tier": [
+      0,
+      0,
+      0
+    ],
+    "required_task_bindings": [
+      {
+        "compatibility_key": "4c4dc8de4db0728eef1acc6775371a5fc12aac34f066bde8b10a4277097ff31a",
+        "qualification_tier": 1,
+        "task": "two_pole"
+      },
+      {
+        "compatibility_key": "333b73eb8599c1511e99912cab7bca712219908887611c5e17b52d064155bea2",
+        "qualification_tier": 1,
+        "task": "unused_token_hold"
+      },
+      {
+        "compatibility_key": "eda903582d1d5c25fb846417803923f8a97d5366487f19fcd9770df8de372e37",
+        "qualification_tier": 1,
+        "task": "ae_gan_hold"
+      },
+      {
+        "compatibility_key": "82cba39b988360fc05213f8c11967e886b010f2e12a797724731ca95ea9e36e2",
+        "qualification_tier": 1,
+        "task": "ring16_acquisition"
+      },
+      {
+        "compatibility_key": "650dfcff4754a691e8044daca1d02c032c1afc2dfbf27020bd50b9764c66a590",
+        "qualification_tier": 1,
+        "task": "five_word_joint_acquisition"
+      },
+      {
+        "compatibility_key": "6beaceab0bfea3113aea5c97571daab1ec1ce9c62c182a3a0c59d940c8d48784",
+        "qualification_tier": 2,
+        "task": "trajectory"
+      },
+      {
+        "compatibility_key": "7a5fa294bf0cedc3bcd4d9c13d4cc15e00dc73ac9ffb3e039ec067a79fa50e25",
+        "qualification_tier": 2,
+        "task": "residual_student"
+      },
+      {
+        "compatibility_key": "59900353c90327dd203f25d038767c0b110ef98678ddf8acf2c88710dda02452",
+        "qualification_tier": 2,
+        "task": "unipolar"
+      },
+      {
+        "compatibility_key": "b4ac440bd65b8d5734b5f37cf1a2ce8c077271a04dcb97dc8322b4a034c47dda",
+        "qualification_tier": 2,
+        "task": "cover_leftover"
+      },
+      {
+        "compatibility_key": "76eb1cbb728102f87e06c024e6cc1f752223241bd568d536b82fe1e9bfeff662",
+        "qualification_tier": 2,
+        "task": "mid_scale_identity"
+      },
+      {
+        "compatibility_key": "4740bc5d7e68b947712767a12718fefb70d25619dca251b621dfd98cfed2ac86",
+        "qualification_tier": 2,
+        "task": "mode_hold"
+      },
+      {
+        "compatibility_key": "1f0509612253436f07a68bd1ac116556eff12b71298d40aa8efb9d2c13f8539d",
+        "qualification_tier": 2,
+        "task": "vector_two_broad"
+      },
+      {
+        "compatibility_key": "f99b6986ce5f8610ef593347312f802c92be44ab4bbda2bdfd6bd8b8f4c4214f",
+        "qualification_tier": 2,
+        "task": "vector_unequal_mass"
+      },
+      {
+        "compatibility_key": "73f45b5222d91a124be0ac110af033dc3afa261fbcebd34bd163d06c6a363e32",
+        "qualification_tier": 2,
+        "task": "vector_unequal_width"
+      },
+      {
+        "compatibility_key": "66f12a02a9c5d6bc9770256da2fa3273474e0ca39b28200aee7ebff2b0c071ca",
+        "qualification_tier": 2,
+        "task": "vector_anisotropic"
+      },
+      {
+        "compatibility_key": "07ef794aeea85327c21a1b0450a71395d2b0bbaff323f09a135ffbbc6e86f20f",
+        "qualification_tier": 2,
+        "task": "vector_overlap"
+      },
+      {
+        "compatibility_key": "01d73a58db13648bc2b5ddcb83bc7de37004bda94995403edf24e1e673f26126",
+        "qualification_tier": 2,
+        "task": "vector_spiral"
+      },
+      {
+        "compatibility_key": "e5f378f191f620ad37e12dc3f5d03083ffdc00fb27d40b8cf688c4a3560647ee",
+        "qualification_tier": 2,
+        "task": "img_stripes2"
+      },
+      {
+        "compatibility_key": "b205e5fa1fe23942675f3106a60205bffb1b423fad73a9648c1c958781d61524",
+        "qualification_tier": 2,
+        "task": "img_bars4"
+      },
+      {
+        "compatibility_key": "602e008fb6e19487905e51b1815774f0a14e1fdf51aab5e2f1ea4684c06020a6",
+        "qualification_tier": 2,
+        "task": "img_blobs4"
+      },
+      {
+        "compatibility_key": "fe1c9e8669cbb916755742102c9367c3ff8dd54c9efb05cfe6f013b48db71770",
+        "qualification_tier": 2,
+        "task": "img_intensity2"
+      },
+      {
+        "compatibility_key": "492fc62a926a793c181f40265cfa407f70ce6aa7330b6c9f13b45d47ab8fc1c6",
+        "qualification_tier": 2,
+        "task": "grid100"
+      },
+      {
+        "compatibility_key": "fe10e7c6319c254122a8e5ca1b16da78733b7480b3afe2528954b49c1419e946",
+        "qualification_tier": 2,
+        "task": "rotated100"
+      },
+      {
+        "compatibility_key": "62c69c4e496e681534700fb8fc644537b4bb99490ba2ee42f28f0de41ecd4e54",
+        "qualification_tier": 2,
+        "task": "staggered100"
+      },
+      {
+        "compatibility_key": "949a9b02367f72d07259da2bcf8aa200e960f8745edec0d064b6e27e52a51725",
+        "qualification_tier": 3,
+        "task": "ring_hold"
+      },
+      {
+        "compatibility_key": "949a9b02367f72d07259da2bcf8aa200e960f8745edec0d064b6e27e52a51725",
+        "qualification_tier": 3,
+        "task": "ring_extension"
+      }
+    ],
+    "required_total": 26,
+    "selected_candidate_id": "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+    "selected_configuration_id": "370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+    "selection_complete": true,
+    "selection_kind": "best_observed",
+    "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+    "tuning_through_tier": 3
+  },
+  "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+  "source_digests": [
+    "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
+  ],
+  "spec": {
+    "base_candidate": "k3p-global-repair-v1",
+    "campaign": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 97800,
+      "candidate_budget_seconds": 48900,
+      "id": "k3p-global-repair-rates-v1"
+    },
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "grid": {
+      "coupled_rates": [
+        {
+          "lr": 0.00425,
+          "prior_lr_mult": 0.28235294117647053
+        },
+        {
+          "lr": 0.006375,
+          "prior_lr_mult": 0.18823529411764706
+        }
+      ]
+    },
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "Increasing the global network/base rate while retaining the nominal absolute latent-table prior base rate may restore movement within the unchanged 80-update screen. Every complete configuration is then evaluated through all ordinary Tier 3 prerequisites; later failures remain part of this whole-candidate result.",
+    "id": "k3p-global-repair-rates-v1",
+    "protocol": "screening",
+    "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "rationale": "The completed k3p-global-repair-v1 first gate had mean_abs=0.04687126353 below .3, with a passing gradient bound. These two coupled global numeric settings hold all existing penalty kernels, intervention flags, moments, noise/schedule laws and task conditions fixed. They preserve nominal latent-table prior base LR 0.0012; direct coordinates instead consume the existing global G-side base LR. Effective feedback rates can differ with training state. No per-task candidate override, new objective, seed study, gate change, repeat of the failed base, or automatic continuation is allowed.",
+    "schema_version": 1,
+    "trainer_family": "k3p",
+    "tuning_through_tier": 3,
+    "view": "discriminator_stability"
+  },
+  "spec_hash": "dc37b3d0c8eb4e38d6f82b0330d8a51a0371c50ef223cdb664054557036241b8",
+  "speed_selection": {
+    "reason": "No frozen comparable first-acquisition timing contract is implemented for this search. Not all required adapters record per-observation seconds; original terminal-suffix or coverage-only times cannot supply full-quality first-acquisition speed.",
+    "selected_candidate_id": null,
+    "status": "UNAVAILABLE",
+    "wall_time_ranking": false
+  },
+  "stage": "enqueued",
+  "study_id": "k3p-global-repair-rates-v1",
+  "submitted_count": 2,
+  "technique_signature": {
+    "digest": "a8d9b9c2248c7cd74c6f00e3cebe29ec75e8f9a73570bf31588aee20e2ada07b",
+    "fixed_recipe_fields": {
+      "birth_death_backend": "knn",
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "continuous_policy": null,
+      "critic_formulation": "k3p",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "encoder_mode": "none",
+      "lr_control": "mobility",
+      "model": "gan",
+      "num_classes": null,
+      "optimizer_family": "formulation",
+      "output_noise_mode": "fixed",
+      "particle_birth_death": false,
+      "reg_arm": null,
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "table_release_rule": "any",
+      "ucd_target": "class"
+    },
+    "mechanisms": {
+      "amsgrad": false,
+      "averaged_serving": false,
+      "beta2_schedule": {
+        "declared": false,
+        "network_changing": false,
+        "prior_changing": false
+      },
+      "critic_anchor": true,
+      "critic_guard": true,
+      "critic_penalty": {
+        "initial": true,
+        "terminal": true
+      },
+      "gradient_cap": true,
+      "k3p_penalty_lr_floor": true,
+      "latent_damping": true,
+      "network_horizon_cap": false,
+      "network_moments": [
+        false,
+        true
+      ],
+      "network_terminal_updates": true,
+      "output_noise_warmup": false,
+      "penalty_schedule": {
+        "changing": false,
+        "declared": false
+      },
+      "prior_moments": [
+        false,
+        true
+      ],
+      "prior_regularization": false,
+      "prior_terminal_updates": true,
+      "reconstruction_objective": null,
+      "scheduled_learning_rates": true,
+      "terminal_second_moment": true,
+      "training_input_noise": false,
+      "training_output_noise": false,
+      "ucd_objective": null
+    },
+    "schema_version": 1
+  },
+  "trainer_family": "k3p",
+  "trials": [
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "3472d2f10e984168a3cb9877d287d069",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "eda7588efc68d850460b79f968789372b6f999ca2f3555be9c2da837c9e456ef",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 8.084339857974555
+        }
+      ],
+      "attempt_ids": [
+        "3472d2f10e984168a3cb9877d287d069"
+      ],
+      "candidate_id": "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+      "candidate_revision": "1a9eb1831acf7de8a0a96d1a2db0fc239b9836d19cfaec2986937cb0cd00e7ed",
+      "configuration_id": "370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+      "cost": {
+        "evidence_wall_seconds": 8.084339857974555,
+        "new_paid_wall_seconds": 8.084339857974555,
+        "wall_seconds": 8.084339857974555
+      },
+      "counts": {
+        "FAIL": 1,
+        "UNKNOWN": 25
+      },
+      "declaration": {
+        "api_changes": [],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.lr=0.00425",
+          "Recipe.prior_lr_mult=0.28235294117647053"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+        "decision_contract": {
+          "candidate_binding_sha256": "dd49419567fe5e0c3c60c0da1cc043372b3cd1549d682fcc98c5877c315aae51",
+          "competing_explanation": "Global rate increases also change critic/network dynamics and can still miss the frozen short-horizon gate or destabilize later tasks. The paired prior multiplier retains nominal table base LR, not the realized state-dependent optimizer trajectory. A complete failed configuration cannot be repaired by importing a task-only word witness or tuning one task.",
+          "control": {
+            "binding_sha256": "47c37d5bf0b108a292212214662cbd33e7c34655cf535c652c1b272860c04100",
+            "candidate_id": "k3p-global-repair-v1",
+            "task_map": {
+              "ae_gan_hold": "ae_gan_hold",
+              "cover_leftover": "cover_leftover",
+              "five_word_joint_acquisition": "five_word_joint_acquisition",
+              "grid100": "grid100",
+              "img_bars4": "img_bars4",
+              "img_blobs4": "img_blobs4",
+              "img_intensity2": "img_intensity2",
+              "img_stripes2": "img_stripes2",
+              "mid_scale_identity": "mid_scale_identity",
+              "mode_hold": "mode_hold",
+              "residual_student": "residual_student",
+              "ring16_acquisition": "ring16_acquisition",
+              "ring_extension": "ring_extension",
+              "ring_hold": "ring_hold",
+              "rotated100": "rotated100",
+              "staggered100": "staggered100",
+              "trajectory": "trajectory",
+              "two_pole": "two_pole",
+              "unipolar": "unipolar",
+              "unused_token_hold": "unused_token_hold",
+              "vector_anisotropic": "vector_anisotropic",
+              "vector_overlap": "vector_overlap",
+              "vector_spiral": "vector_spiral",
+              "vector_two_broad": "vector_two_broad",
+              "vector_unequal_mass": "vector_unequal_mass",
+              "vector_unequal_width": "vector_unequal_width"
+            }
+          },
+          "falsifier": {
+            "metric": "mean_abs",
+            "op": "<",
+            "phase": "final",
+            "task_id": "two_pole",
+            "threshold": 0.3
+          },
+          "prediction": {
+            "metric": "mean_abs",
+            "op": ">=",
+            "phase": "final",
+            "task_id": "two_pole",
+            "threshold": 0.3
+          },
+          "prior_evidence": [
+            {
+              "identity": {
+                "attempt_id": "abb9e24f625d449da70f6641ec1bce0a",
+                "candidate_id": "k3p-global-repair-v1",
+                "candidate_revision": "9bc3da4de808300aaa74effda23f1114910ce2c819bda3fcd579bb8b6d5f5e8e"
+              },
+              "path": "reports/forge/family-wide-word-repairs/initial/k3p-global-repair-v1.json",
+              "selector": [],
+              "sha256": "ef721e05025ecb5e576c0b3c86f70fd4c3e5d1aea383834d2b80300b40839989",
+              "use": "motivation_only"
+            }
+          ],
+          "schema_version": 1,
+          "scope": {
+            "campaign_budget_seconds": 97800,
+            "candidate_budget_seconds": 48900,
+            "execution_backend": "cuda",
+            "jobs_sha256": "5668d4d975ab55fca73a90a13a6d06f04d7ea939cda1155088817edeecfc1197",
+            "max_rounds": 1,
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort_sha256": "e2f4acc3bb6543576475ece1bb0bce5b973eca2ed1852b13d096ec9145277c71",
+            "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+            "task_ids": [
+              "ae_gan_hold",
+              "cover_leftover",
+              "five_word_joint_acquisition",
+              "grid100",
+              "img_bars4",
+              "img_blobs4",
+              "img_intensity2",
+              "img_stripes2",
+              "mid_scale_identity",
+              "mode_hold",
+              "residual_student",
+              "ring16_acquisition",
+              "ring_extension",
+              "ring_hold",
+              "rotated100",
+              "staggered100",
+              "trajectory",
+              "two_pole",
+              "unipolar",
+              "unused_token_hold",
+              "vector_anisotropic",
+              "vector_overlap",
+              "vector_spiral",
+              "vector_two_broad",
+              "vector_unequal_mass",
+              "vector_unequal_width"
+            ],
+            "through_tier": 3,
+            "view": "discriminator_stability"
+          },
+          "status": "ready",
+          "substantive_delta": [
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "cover_leftover",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "cover_leftover",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "grid100",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "grid100",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "img_bars4",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "img_bars4",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "img_blobs4",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "img_blobs4",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "img_intensity2",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "img_intensity2",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "img_stripes2",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "img_stripes2",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "mid_scale_identity",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "mode_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "mode_hold",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "residual_student",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "residual_student",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "ring_extension",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "ring_extension",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "ring_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "ring_hold",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "rotated100",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "rotated100",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "staggered100",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "staggered100",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "trajectory",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "trajectory",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "two_pole",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "unipolar",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_anisotropic",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_anisotropic",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_overlap",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_overlap",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_spiral",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_spiral",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_two_broad",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_two_broad",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_unequal_mass",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_unequal_mass",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.00425,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_unequal_width",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.28235294117647053,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_unequal_width",
+                "prior_lr_mult"
+              ]
+            }
+          ],
+          "terminal_rules": {
+            "falsified": "stop_revision",
+            "incomplete": "request_missing_evidence",
+            "inconclusive": "stop_and_readout",
+            "prediction_observed": "review_saved_diagnostics"
+          }
+        },
+        "diagnostic_ancestor": {
+          "qualification_reuse": false,
+          "receipt": {
+            "bytes": 40177,
+            "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+            "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+          },
+          "use": "motivation_only"
+        },
+        "execution_path": "public_trainer",
+        "goal": "discriminator_stability",
+        "guide": "EXPERIMENTATION.md",
+        "hypothesis": "Increasing the global network/base rate while retaining the nominal absolute latent-table prior base rate may restore movement within the unchanged 80-update screen. Every complete configuration is then evaluated through all ordinary Tier 3 prerequisites; later failures remain part of this whole-candidate result.",
+        "id": "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+        "lifecycle": "proposed",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "Explicit global solution successor. Clean-noise/cap activation boundaries are declared rather than hidden in same-signature search; no new penalty kernel, optimizer family or auxiliary objective. Family membership describes solution lineage.",
+        "parent": "k3p-global-repair-v1",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "prior_art": [
+          "reports/forge/word-root-cause/README.md",
+          "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json"
+        ],
+        "recipe_overrides": {
+          "amsgrad": false,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "ema_decay": 0.995,
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 0.05,
+          "name": "k3p",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": null,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.2,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_lr_mult": 0.28235294117647053,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_arm": null,
+          "reg_coeff": 170.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "table_release_rule": "any"
+        },
+        "recipe_scope": "global_existing_settings_task_owned_conditions_only",
+        "requires_capabilities": [
+          "learned_locations",
+          "a2",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "k3p",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.2,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 0.28235294117647053,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_arm": null,
+          "reg_coeff": 170.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 2,
+        "search_report": "reports/forge/configuration-search/k3p-global-repair-rates-v1.json",
+        "search_study_id": "k3p-global-repair-rates-v1",
+        "trainer_family": "k3p"
+      },
+      "declared_worst_case_seconds": 45300,
+      "policy_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 26
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "3472d2f10e984168a3cb9877d287d069",
+          "result_hash": "eda7588efc68d850460b79f968789372b6f999ca2f3555be9c2da837c9e456ef",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "amsgrad": false,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "ema_decay": 0.995,
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_lr_mult": 0.28235294117647053,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 170.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "table_release_rule": "any"
+      },
+      "recipe_preset": null,
+      "request_id": "b4294ae0eb648181a2f33a1f",
+      "request_path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/queue/requests/b4294ae0eb648181a2f33a1f.json",
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 0.28235294117647053,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 170.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "4fc1a64b848f20430688512b62ddb8705bc09b8024431818a0be15dcb342b7f9",
+      "selected_attempt_ids": [
+        "3472d2f10e984168a3cb9877d287d069"
+      ],
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 0,
+        "required_passes_by_tier": [
+          0,
+          0,
+          0
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "4c4dc8de4db0728eef1acc6775371a5fc12aac34f066bde8b10a4277097ff31a",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "333b73eb8599c1511e99912cab7bca712219908887611c5e17b52d064155bea2",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "eda903582d1d5c25fb846417803923f8a97d5366487f19fcd9770df8de372e37",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "82cba39b988360fc05213f8c11967e886b010f2e12a797724731ca95ea9e36e2",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "650dfcff4754a691e8044daca1d02c032c1afc2dfbf27020bd50b9764c66a590",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          },
+          {
+            "compatibility_key": "6beaceab0bfea3113aea5c97571daab1ec1ce9c62c182a3a0c59d940c8d48784",
+            "qualification_tier": 2,
+            "task": "trajectory"
+          },
+          {
+            "compatibility_key": "7a5fa294bf0cedc3bcd4d9c13d4cc15e00dc73ac9ffb3e039ec067a79fa50e25",
+            "qualification_tier": 2,
+            "task": "residual_student"
+          },
+          {
+            "compatibility_key": "59900353c90327dd203f25d038767c0b110ef98678ddf8acf2c88710dda02452",
+            "qualification_tier": 2,
+            "task": "unipolar"
+          },
+          {
+            "compatibility_key": "b4ac440bd65b8d5734b5f37cf1a2ce8c077271a04dcb97dc8322b4a034c47dda",
+            "qualification_tier": 2,
+            "task": "cover_leftover"
+          },
+          {
+            "compatibility_key": "76eb1cbb728102f87e06c024e6cc1f752223241bd568d536b82fe1e9bfeff662",
+            "qualification_tier": 2,
+            "task": "mid_scale_identity"
+          },
+          {
+            "compatibility_key": "4740bc5d7e68b947712767a12718fefb70d25619dca251b621dfd98cfed2ac86",
+            "qualification_tier": 2,
+            "task": "mode_hold"
+          },
+          {
+            "compatibility_key": "1f0509612253436f07a68bd1ac116556eff12b71298d40aa8efb9d2c13f8539d",
+            "qualification_tier": 2,
+            "task": "vector_two_broad"
+          },
+          {
+            "compatibility_key": "f99b6986ce5f8610ef593347312f802c92be44ab4bbda2bdfd6bd8b8f4c4214f",
+            "qualification_tier": 2,
+            "task": "vector_unequal_mass"
+          },
+          {
+            "compatibility_key": "73f45b5222d91a124be0ac110af033dc3afa261fbcebd34bd163d06c6a363e32",
+            "qualification_tier": 2,
+            "task": "vector_unequal_width"
+          },
+          {
+            "compatibility_key": "66f12a02a9c5d6bc9770256da2fa3273474e0ca39b28200aee7ebff2b0c071ca",
+            "qualification_tier": 2,
+            "task": "vector_anisotropic"
+          },
+          {
+            "compatibility_key": "07ef794aeea85327c21a1b0450a71395d2b0bbaff323f09a135ffbbc6e86f20f",
+            "qualification_tier": 2,
+            "task": "vector_overlap"
+          },
+          {
+            "compatibility_key": "01d73a58db13648bc2b5ddcb83bc7de37004bda94995403edf24e1e673f26126",
+            "qualification_tier": 2,
+            "task": "vector_spiral"
+          },
+          {
+            "compatibility_key": "e5f378f191f620ad37e12dc3f5d03083ffdc00fb27d40b8cf688c4a3560647ee",
+            "qualification_tier": 2,
+            "task": "img_stripes2"
+          },
+          {
+            "compatibility_key": "b205e5fa1fe23942675f3106a60205bffb1b423fad73a9648c1c958781d61524",
+            "qualification_tier": 2,
+            "task": "img_bars4"
+          },
+          {
+            "compatibility_key": "602e008fb6e19487905e51b1815774f0a14e1fdf51aab5e2f1ea4684c06020a6",
+            "qualification_tier": 2,
+            "task": "img_blobs4"
+          },
+          {
+            "compatibility_key": "fe1c9e8669cbb916755742102c9367c3ff8dd54c9efb05cfe6f013b48db71770",
+            "qualification_tier": 2,
+            "task": "img_intensity2"
+          },
+          {
+            "compatibility_key": "492fc62a926a793c181f40265cfa407f70ce6aa7330b6c9f13b45d47ab8fc1c6",
+            "qualification_tier": 2,
+            "task": "grid100"
+          },
+          {
+            "compatibility_key": "fe10e7c6319c254122a8e5ca1b16da78733b7480b3afe2528954b49c1419e946",
+            "qualification_tier": 2,
+            "task": "rotated100"
+          },
+          {
+            "compatibility_key": "62c69c4e496e681534700fb8fc644537b4bb99490ba2ee42f28f0de41ecd4e54",
+            "qualification_tier": 2,
+            "task": "staggered100"
+          },
+          {
+            "compatibility_key": "949a9b02367f72d07259da2bcf8aa200e960f8745edec0d064b6e27e52a51725",
+            "qualification_tier": 3,
+            "task": "ring_hold"
+          },
+          {
+            "compatibility_key": "949a9b02367f72d07259da2bcf8aa200e960f8745edec0d064b6e27e52a51725",
+            "qualification_tier": 3,
+            "task": "ring_extension"
+          }
+        ],
+        "required_total": 26,
+        "selected_candidate_id": "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+        "selected_configuration_id": "370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+        "tuning_through_tier": 3
+      },
+      "settings": {
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053
+      },
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "two_pole: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "tasks": [
+        {
+          "attempt_id": "3472d2f10e984168a3cb9877d287d069",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "4c4dc8de4db0728eef1acc6775371a5fc12aac34f066bde8b10a4277097ff31a",
+          "cost": {
+            "adapter_seconds": 2.4837379280361347,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 8.084339857974555,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 4.5560127520002425,
+            "wall_seconds": 8.084339857974555
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.004241243004798889,
+            "mean_abs": 0.12804390490055084
+          },
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "333b73eb8599c1511e99912cab7bca712219908887611c5e17b52d064155bea2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "eda903582d1d5c25fb846417803923f8a97d5366487f19fcd9770df8de372e37",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "82cba39b988360fc05213f8c11967e886b010f2e12a797724731ca95ea9e36e2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "compatibility_key": "650dfcff4754a691e8044daca1d02c032c1afc2dfbf27020bd50b9764c66a590",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "6beaceab0bfea3113aea5c97571daab1ec1ce9c62c182a3a0c59d940c8d48784",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "7a5fa294bf0cedc3bcd4d9c13d4cc15e00dc73ac9ffb3e039ec067a79fa50e25",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "59900353c90327dd203f25d038767c0b110ef98678ddf8acf2c88710dda02452",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b4ac440bd65b8d5734b5f37cf1a2ce8c077271a04dcb97dc8322b4a034c47dda",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "76eb1cbb728102f87e06c024e6cc1f752223241bd568d536b82fe1e9bfeff662",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "4740bc5d7e68b947712767a12718fefb70d25619dca251b621dfd98cfed2ac86",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "1f0509612253436f07a68bd1ac116556eff12b71298d40aa8efb9d2c13f8539d",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f99b6986ce5f8610ef593347312f802c92be44ab4bbda2bdfd6bd8b8f4c4214f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "73f45b5222d91a124be0ac110af033dc3afa261fbcebd34bd163d06c6a363e32",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "66f12a02a9c5d6bc9770256da2fa3273474e0ca39b28200aee7ebff2b0c071ca",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "07ef794aeea85327c21a1b0450a71395d2b0bbaff323f09a135ffbbc6e86f20f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "01d73a58db13648bc2b5ddcb83bc7de37004bda94995403edf24e1e673f26126",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "e5f378f191f620ad37e12dc3f5d03083ffdc00fb27d40b8cf688c4a3560647ee",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b205e5fa1fe23942675f3106a60205bffb1b423fad73a9648c1c958781d61524",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "602e008fb6e19487905e51b1815774f0a14e1fdf51aab5e2f1ea4684c06020a6",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "fe1c9e8669cbb916755742102c9367c3ff8dd54c9efb05cfe6f013b48db71770",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "492fc62a926a793c181f40265cfa407f70ce6aa7330b6c9f13b45d47ab8fc1c6",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "fe10e7c6319c254122a8e5ca1b16da78733b7480b3afe2528954b49c1419e946",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "62c69c4e496e681534700fb8fc644537b4bb99490ba2ee42f28f0de41ecd4e54",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "949a9b02367f72d07259da2bcf8aa200e960f8745edec0d064b6e27e52a51725",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "949a9b02367f72d07259da2bcf8aa200e960f8745edec0d064b6e27e52a51725",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "a8d9b9c2248c7cd74c6f00e3cebe29ec75e8f9a73570bf31588aee20e2ada07b",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": null,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": true,
+          "critic_guard": true,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": true,
+          "latent_damping": true,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "k3p",
+      "unreused_worst_case_seconds": 45300
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "9007daae982e4bc3b8c9f4019d48bd26",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "9fd4e6630ebc9aabe94df96f7d712e54051ba95f18f77b4a63ca8ec0b21caafd",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 5.976230684027541
+        }
+      ],
+      "attempt_ids": [
+        "9007daae982e4bc3b8c9f4019d48bd26"
+      ],
+      "candidate_id": "k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d",
+      "candidate_revision": "f415e58283e06eaf2679a31dbf0317b69bda8fd3e1a880e62209ac9318f1eaf8",
+      "configuration_id": "9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d",
+      "cost": {
+        "evidence_wall_seconds": 5.976230684027541,
+        "new_paid_wall_seconds": 5.976230684027541,
+        "wall_seconds": 5.976230684027541
+      },
+      "counts": {
+        "FAIL": 1,
+        "UNKNOWN": 25
+      },
+      "declaration": {
+        "api_changes": [],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.lr=0.006375",
+          "Recipe.prior_lr_mult=0.18823529411764706"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d",
+        "decision_contract": {
+          "candidate_binding_sha256": "4e89422160f216f6eb2c027bd464895eff7a751ece41e45b7b49d4c044774837",
+          "competing_explanation": "Global rate increases also change critic/network dynamics and can still miss the frozen short-horizon gate or destabilize later tasks. The paired prior multiplier retains nominal table base LR, not the realized state-dependent optimizer trajectory. A complete failed configuration cannot be repaired by importing a task-only word witness or tuning one task.",
+          "control": {
+            "binding_sha256": "47c37d5bf0b108a292212214662cbd33e7c34655cf535c652c1b272860c04100",
+            "candidate_id": "k3p-global-repair-v1",
+            "task_map": {
+              "ae_gan_hold": "ae_gan_hold",
+              "cover_leftover": "cover_leftover",
+              "five_word_joint_acquisition": "five_word_joint_acquisition",
+              "grid100": "grid100",
+              "img_bars4": "img_bars4",
+              "img_blobs4": "img_blobs4",
+              "img_intensity2": "img_intensity2",
+              "img_stripes2": "img_stripes2",
+              "mid_scale_identity": "mid_scale_identity",
+              "mode_hold": "mode_hold",
+              "residual_student": "residual_student",
+              "ring16_acquisition": "ring16_acquisition",
+              "ring_extension": "ring_extension",
+              "ring_hold": "ring_hold",
+              "rotated100": "rotated100",
+              "staggered100": "staggered100",
+              "trajectory": "trajectory",
+              "two_pole": "two_pole",
+              "unipolar": "unipolar",
+              "unused_token_hold": "unused_token_hold",
+              "vector_anisotropic": "vector_anisotropic",
+              "vector_overlap": "vector_overlap",
+              "vector_spiral": "vector_spiral",
+              "vector_two_broad": "vector_two_broad",
+              "vector_unequal_mass": "vector_unequal_mass",
+              "vector_unequal_width": "vector_unequal_width"
+            }
+          },
+          "falsifier": {
+            "metric": "mean_abs",
+            "op": "<",
+            "phase": "final",
+            "task_id": "two_pole",
+            "threshold": 0.3
+          },
+          "prediction": {
+            "metric": "mean_abs",
+            "op": ">=",
+            "phase": "final",
+            "task_id": "two_pole",
+            "threshold": 0.3
+          },
+          "prior_evidence": [
+            {
+              "identity": {
+                "attempt_id": "abb9e24f625d449da70f6641ec1bce0a",
+                "candidate_id": "k3p-global-repair-v1",
+                "candidate_revision": "9bc3da4de808300aaa74effda23f1114910ce2c819bda3fcd579bb8b6d5f5e8e"
+              },
+              "path": "reports/forge/family-wide-word-repairs/initial/k3p-global-repair-v1.json",
+              "selector": [],
+              "sha256": "ef721e05025ecb5e576c0b3c86f70fd4c3e5d1aea383834d2b80300b40839989",
+              "use": "motivation_only"
+            }
+          ],
+          "schema_version": 1,
+          "scope": {
+            "campaign_budget_seconds": 97800,
+            "candidate_budget_seconds": 48900,
+            "execution_backend": "cuda",
+            "jobs_sha256": "490bab734e86320945517a4335231be489a6e6718ec762fa2e0f25af52bb0cf5",
+            "max_rounds": 1,
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort_sha256": "e2f4acc3bb6543576475ece1bb0bce5b973eca2ed1852b13d096ec9145277c71",
+            "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+            "task_ids": [
+              "ae_gan_hold",
+              "cover_leftover",
+              "five_word_joint_acquisition",
+              "grid100",
+              "img_bars4",
+              "img_blobs4",
+              "img_intensity2",
+              "img_stripes2",
+              "mid_scale_identity",
+              "mode_hold",
+              "residual_student",
+              "ring16_acquisition",
+              "ring_extension",
+              "ring_hold",
+              "rotated100",
+              "staggered100",
+              "trajectory",
+              "two_pole",
+              "unipolar",
+              "unused_token_hold",
+              "vector_anisotropic",
+              "vector_overlap",
+              "vector_spiral",
+              "vector_two_broad",
+              "vector_unequal_mass",
+              "vector_unequal_width"
+            ],
+            "through_tier": 3,
+            "view": "discriminator_stability"
+          },
+          "status": "ready",
+          "substantive_delta": [
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "cover_leftover",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "cover_leftover",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "grid100",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "grid100",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "img_bars4",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "img_bars4",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "img_blobs4",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "img_blobs4",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "img_intensity2",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "img_intensity2",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "img_stripes2",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "img_stripes2",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "mid_scale_identity",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "mode_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "mode_hold",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "residual_student",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "residual_student",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "ring_extension",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "ring_extension",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "ring_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "ring_hold",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "rotated100",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "rotated100",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "staggered100",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "staggered100",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "trajectory",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "trajectory",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "two_pole",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "unipolar",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_anisotropic",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_anisotropic",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_overlap",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_overlap",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_spiral",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_spiral",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_two_broad",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_two_broad",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_unequal_mass",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_unequal_mass",
+                "prior_lr_mult"
+              ]
+            },
+            {
+              "after": 0.006375,
+              "before": 0.0006,
+              "path": [
+                "recipe",
+                "vector_unequal_width",
+                "lr"
+              ]
+            },
+            {
+              "after": 0.18823529411764706,
+              "before": 2.0,
+              "path": [
+                "recipe",
+                "vector_unequal_width",
+                "prior_lr_mult"
+              ]
+            }
+          ],
+          "terminal_rules": {
+            "falsified": "stop_revision",
+            "incomplete": "request_missing_evidence",
+            "inconclusive": "stop_and_readout",
+            "prediction_observed": "review_saved_diagnostics"
+          }
+        },
+        "diagnostic_ancestor": {
+          "qualification_reuse": false,
+          "receipt": {
+            "bytes": 40177,
+            "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+            "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+          },
+          "use": "motivation_only"
+        },
+        "execution_path": "public_trainer",
+        "goal": "discriminator_stability",
+        "guide": "EXPERIMENTATION.md",
+        "hypothesis": "Increasing the global network/base rate while retaining the nominal absolute latent-table prior base rate may restore movement within the unchanged 80-update screen. Every complete configuration is then evaluated through all ordinary Tier 3 prerequisites; later failures remain part of this whole-candidate result.",
+        "id": "k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d",
+        "lifecycle": "proposed",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "Explicit global solution successor. Clean-noise/cap activation boundaries are declared rather than hidden in same-signature search; no new penalty kernel, optimizer family or auxiliary objective. Family membership describes solution lineage.",
+        "parent": "k3p-global-repair-v1",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "prior_art": [
+          "reports/forge/word-root-cause/README.md",
+          "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json"
+        ],
+        "recipe_overrides": {
+          "amsgrad": false,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "ema_decay": 0.995,
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.006375,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 0.05,
+          "name": "k3p",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": null,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.2,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_lr_mult": 0.18823529411764706,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_arm": null,
+          "reg_coeff": 170.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "table_release_rule": "any"
+        },
+        "recipe_scope": "global_existing_settings_task_owned_conditions_only",
+        "requires_capabilities": [
+          "learned_locations",
+          "a2",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.006375,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "k3p",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.2,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 0.18823529411764706,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_arm": null,
+          "reg_coeff": 170.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 2,
+        "search_report": "reports/forge/configuration-search/k3p-global-repair-rates-v1.json",
+        "search_study_id": "k3p-global-repair-rates-v1",
+        "trainer_family": "k3p"
+      },
+      "declared_worst_case_seconds": 45300,
+      "policy_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 26
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "9007daae982e4bc3b8c9f4019d48bd26",
+          "result_hash": "9fd4e6630ebc9aabe94df96f7d712e54051ba95f18f77b4a63ca8ec0b21caafd",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "amsgrad": false,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "ema_decay": 0.995,
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 170.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "table_release_rule": "any"
+      },
+      "recipe_preset": null,
+      "request_id": "86610124d87e739933a2b8b0",
+      "request_path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/queue/requests/86610124d87e739933a2b8b0.json",
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "k3p",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "formulation",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 0.18823529411764706,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": null,
+        "reg_coeff": 170.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "68d167ec98f16171e97254566e9a7ec8ef69b790c65b1ce1539c933771f8ff36",
+      "selected_attempt_ids": [
+        "9007daae982e4bc3b8c9f4019d48bd26"
+      ],
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706
+      },
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "two_pole: FAIL recomputed complete live curve and terminal suffix",
+      "submission_status": "blocked",
+      "tasks": [
+        {
+          "attempt_id": "9007daae982e4bc3b8c9f4019d48bd26",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "0fe60021af9ed40bcae1efc0b3c87e5c4fe399516153a8411303f5fa832cf5ed",
+          "cost": {
+            "adapter_seconds": 0.49273193697445095,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 5.976230684027541,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.5656895950087346,
+            "wall_seconds": 5.976230684027541
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.0038677677512168884,
+            "mean_abs": 0.12258729338645935
+          },
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "51da99481df27bb9ce71f75af2315262fe96f8f3b3f2aeef529e8e49e38a0cad",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "bf4d0c65836d31de4882190753bd736f0fcf09cd82227e5ee886a596f958abe2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "d50011dc08caa0987122db547a007f7161d194aa61e6691a5095cef6614c36c7",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "compatibility_key": "33a5bd6f2b667328bf4605035dbf0beb2ec10eab0a7707cc9e9ce5e24dc70e95",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "ff7c2d222010e633173988da916800aec3feab9225f0e83c3a9979a1bd8918de",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "31d220859de8630331b66379665a7ed08698b9233589f9b09a4286948f808bde",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b979be30b8bffae964920a87b1a3a1901fd470194de638a3bd17b18634250c9d",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b2ea4b70a002f21a8738bba83db59b2af1fb721b27e58a38364691b8043db4d5",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f6116dc85dda39e0f4e436ba4c12c21efa7548e443c2bb7e30834cc646b35742",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "9f134fed279c2a473909c80a3102443a0a8e881951e5d1401902c86bb05af141",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b5af7731bd726e0211fcf975df54ac20716b9e0939888383b6bbd1bc4dd578e2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "b351c85204dbfa71857b45c656e30453904907bb8ae819c73a40bc704ace7739",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "bfca0c3aa4a1205abf03c967382f24abb03ba23e324fbf5f673100df34e6fe5e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "4abbc50bf6057560f33cd0cefd0be251910b76d4c7b749a581f6d27016dd8838",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "99a5ebfce856adc22df4f0da98602151007d0800ca636007f510e1dda243b6c8",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f70dce5cfb4080b968e0bde2208f251efd50a92340f37f9493f524e798394637",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "e4b979766e1fbc502af1497eb0563fc29feecce131977e8799d33fbd8b98eb87",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "7c93539c34a60dbc31715a9fe05587643a1ed362e2e9dc002d52ff6091fb6bb2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "08c42e571504743a0701725cf57ab129a5751f1c81418e5772383af3cf269c93",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "87ee9b2fee2e4689eea0aaf7512bf44f2bb3c8035865b84a2f51462c787cd60f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "dd6110c2075e698160be008431a363fbe848e657b68e2d515bd4a0e2a694cff2",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "9f045705e151b3cb09a80ba955bb5f98dd21df78d0a9ecef38564277483bf706",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "42577eafadd20d6577557211580691c029c0bd1daea6477ce337acb330fb72b4",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "8b2546ae738b8cbc9592b6a93114c127e7e623b99c14c7cb3a1491301a86b360",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "8b2546ae738b8cbc9592b6a93114c127e7e623b99c14c7cb3a1491301a86b360",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "a8d9b9c2248c7cd74c6f00e3cebe29ec75e8f9a73570bf31588aee20e2ada07b",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": null,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": true,
+          "critic_guard": true,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": true,
+          "latent_damping": true,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "k3p",
+      "unreused_worst_case_seconds": 45300
+    }
+  ],
+  "tuning_through_tier": 3,
+  "view": "discriminator_stability"
+}

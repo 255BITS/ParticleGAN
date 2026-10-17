@@ -1,5 +1,11 @@
 # Controller transfer: test importance
 
+For new candidate experiments on supported tasks, follow the
+[ParticleGAN Forge guide](../../EXPERIMENTATION.md). Forge's gate profile remains
+provisional; calibration has not approved replacing this suite's full coverage.
+The formulation, solver and historical-study commands below retain their declared
+protocols and artifacts; see the [consumer index](../../reports/forge/legacy-consumers.json).
+
 The [current formulation leaderboard](../../reports/transfer_suite/formulations/README.md)
 compares each candidate's declared training recipe on nine required regressions
 and ten practical data/image toys. G/D architecture may vary within an entry.

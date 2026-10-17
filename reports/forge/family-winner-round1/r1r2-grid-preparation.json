@@ -1,0 +1,498 @@
+{
+  "all_survivors_advance": true,
+  "budget_seconds": 352800,
+  "calibration_status": "provisional",
+  "candidate_budget_seconds": 44100,
+  "count": 8,
+  "factory_checks": {
+    "all8_differ_from_old_winner": true,
+    "all8_resolve": true,
+    "only_declared_recipe_changes": true,
+    "only_old_winner_public_recipe_fields_changed": [
+      "d_lr_mult",
+      "lr_anneal_start",
+      "lr_floor",
+      "network_lr_floor"
+    ],
+    "schedule_examples": [
+      {
+        "changes_from_previous_winner": {
+          "d_lr_mult": [
+            1.0,
+            0.5
+          ],
+          "lr_floor": [
+            1.0,
+            0.25
+          ],
+          "network_lr_floor": [
+            1.0,
+            0.25
+          ]
+        },
+        "configuration_id": "083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b",
+        "trajectory_schedule_scales": {
+          "0": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "160": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "240": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "320": {
+            "network": 0.625,
+            "prior": 0.625
+          },
+          "399": {
+            "network": 0.2500722848192257,
+            "prior": 0.2500722848192257
+          },
+          "80": {
+            "network": 1.0,
+            "prior": 1.0
+          }
+        }
+      },
+      {
+        "changes_from_previous_winner": {
+          "d_lr_mult": [
+            1.0,
+            0.5
+          ],
+          "lr_floor": [
+            1.0,
+            0.1
+          ],
+          "network_lr_floor": [
+            1.0,
+            0.1
+          ]
+        },
+        "configuration_id": "14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6",
+        "trajectory_schedule_scales": {
+          "0": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "160": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "240": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "320": {
+            "network": 0.55,
+            "prior": 0.55
+          },
+          "399": {
+            "network": 0.10008674178307084,
+            "prior": 0.10008674178307084
+          },
+          "80": {
+            "network": 1.0,
+            "prior": 1.0
+          }
+        }
+      },
+      {
+        "changes_from_previous_winner": {
+          "d_lr_mult": [
+            1.0,
+            0.5
+          ],
+          "lr_anneal_start": [
+            0.6,
+            0.2
+          ],
+          "lr_floor": [
+            1.0,
+            0.25
+          ],
+          "network_lr_floor": [
+            1.0,
+            0.25
+          ]
+        },
+        "configuration_id": "151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46",
+        "trajectory_schedule_scales": {
+          "0": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "160": {
+            "network": 0.8901650429449552,
+            "prior": 0.8901650429449552
+          },
+          "240": {
+            "network": 0.625,
+            "prior": 0.625
+          },
+          "320": {
+            "network": 0.3598349570550447,
+            "prior": 0.3598349570550447
+          },
+          "399": {
+            "network": 0.250018071640252,
+            "prior": 0.250018071640252
+          },
+          "80": {
+            "network": 1.0,
+            "prior": 1.0
+          }
+        }
+      },
+      {
+        "changes_from_previous_winner": {
+          "lr_anneal_start": [
+            0.6,
+            0.2
+          ],
+          "lr_floor": [
+            1.0,
+            0.1
+          ],
+          "network_lr_floor": [
+            1.0,
+            0.1
+          ]
+        },
+        "configuration_id": "302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+        "trajectory_schedule_scales": {
+          "0": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "160": {
+            "network": 0.8681980515339464,
+            "prior": 0.8681980515339464
+          },
+          "240": {
+            "network": 0.55,
+            "prior": 0.55
+          },
+          "320": {
+            "network": 0.23180194846605365,
+            "prior": 0.23180194846605365
+          },
+          "399": {
+            "network": 0.10002168596830241,
+            "prior": 0.10002168596830241
+          },
+          "80": {
+            "network": 1.0,
+            "prior": 1.0
+          }
+        }
+      },
+      {
+        "changes_from_previous_winner": {
+          "lr_anneal_start": [
+            0.6,
+            0.2
+          ],
+          "lr_floor": [
+            1.0,
+            0.25
+          ],
+          "network_lr_floor": [
+            1.0,
+            0.25
+          ]
+        },
+        "configuration_id": "4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27",
+        "trajectory_schedule_scales": {
+          "0": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "160": {
+            "network": 0.8901650429449552,
+            "prior": 0.8901650429449552
+          },
+          "240": {
+            "network": 0.625,
+            "prior": 0.625
+          },
+          "320": {
+            "network": 0.3598349570550447,
+            "prior": 0.3598349570550447
+          },
+          "399": {
+            "network": 0.250018071640252,
+            "prior": 0.250018071640252
+          },
+          "80": {
+            "network": 1.0,
+            "prior": 1.0
+          }
+        }
+      },
+      {
+        "changes_from_previous_winner": {
+          "lr_floor": [
+            1.0,
+            0.25
+          ],
+          "network_lr_floor": [
+            1.0,
+            0.25
+          ]
+        },
+        "configuration_id": "9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d",
+        "trajectory_schedule_scales": {
+          "0": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "160": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "240": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "320": {
+            "network": 0.625,
+            "prior": 0.625
+          },
+          "399": {
+            "network": 0.2500722848192257,
+            "prior": 0.2500722848192257
+          },
+          "80": {
+            "network": 1.0,
+            "prior": 1.0
+          }
+        }
+      },
+      {
+        "changes_from_previous_winner": {
+          "d_lr_mult": [
+            1.0,
+            0.5
+          ],
+          "lr_anneal_start": [
+            0.6,
+            0.2
+          ],
+          "lr_floor": [
+            1.0,
+            0.1
+          ],
+          "network_lr_floor": [
+            1.0,
+            0.1
+          ]
+        },
+        "configuration_id": "dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743",
+        "trajectory_schedule_scales": {
+          "0": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "160": {
+            "network": 0.8681980515339464,
+            "prior": 0.8681980515339464
+          },
+          "240": {
+            "network": 0.55,
+            "prior": 0.55
+          },
+          "320": {
+            "network": 0.23180194846605365,
+            "prior": 0.23180194846605365
+          },
+          "399": {
+            "network": 0.10002168596830241,
+            "prior": 0.10002168596830241
+          },
+          "80": {
+            "network": 1.0,
+            "prior": 1.0
+          }
+        }
+      },
+      {
+        "changes_from_previous_winner": {
+          "lr_floor": [
+            1.0,
+            0.1
+          ],
+          "network_lr_floor": [
+            1.0,
+            0.1
+          ]
+        },
+        "configuration_id": "e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe",
+        "trajectory_schedule_scales": {
+          "0": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "160": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "240": {
+            "network": 1.0,
+            "prior": 1.0
+          },
+          "320": {
+            "network": 0.55,
+            "prior": 0.55
+          },
+          "399": {
+            "network": 0.10008674178307084,
+            "prior": 0.10008674178307084
+          },
+          "80": {
+            "network": 1.0,
+            "prior": 1.0
+          }
+        }
+      }
+    ],
+    "schedule_horizon_unchanged": true
+  },
+  "ordinary_prerequisite_stopping": true,
+  "ordinary_qualification": false,
+  "prior_configuration_overlap": 0,
+  "public_defaults_changed": false,
+  "representation": {
+    "complete_suite": "UNRESOLVED",
+    "other_required_tasks": "UNRESOLVED_PENDING_SOURCE_BOUND_COMMON_WITNESSES",
+    "trajectory": {
+      "certificate": "r1r2-trajectory-representation.json",
+      "sha256": "8f1506391a0b5bb1da5d348c526faf04da78c362e73b4ea8402f57930638a91f",
+      "status": "SUPPORTED"
+    }
+  },
+  "required_totals": {
+    "tier1": 3,
+    "tier2": 19,
+    "tier3": 2
+  },
+  "rows": [
+    {
+      "candidate_id": "r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b",
+      "card": "configs/forge/configurations/r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b.json",
+      "configuration_id": "083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b",
+      "resolved_recipe_sha256": "170a3e03e4925d3bfbc6b65f4b869c45a042d5595b3c023fd7de24dbc982af12",
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.25,
+        "network_lr_floor": 0.25
+      }
+    },
+    {
+      "candidate_id": "r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6",
+      "card": "configs/forge/configurations/r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6.json",
+      "configuration_id": "14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6",
+      "resolved_recipe_sha256": "cbcf6fefc90c42d4ffcf6d068d45b299b6ee7a582601e39eef382f2439f2e273",
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.1,
+        "network_lr_floor": 0.1
+      }
+    },
+    {
+      "candidate_id": "r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46",
+      "card": "configs/forge/configurations/r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46.json",
+      "configuration_id": "151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46",
+      "resolved_recipe_sha256": "4f689c1b1975d374df3dd3ead5c6539410879497d67c3ce0732dccd940df9f0e",
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.2,
+        "lr_floor": 0.25,
+        "network_lr_floor": 0.25
+      }
+    },
+    {
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "card": "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json",
+      "configuration_id": "302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "resolved_recipe_sha256": "deb7f75a0e7190ea040d0978206f0d3874e90fb8362c7045d0ff337179231910",
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.2,
+        "lr_floor": 0.1,
+        "network_lr_floor": 0.1
+      }
+    },
+    {
+      "candidate_id": "r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27",
+      "card": "configs/forge/configurations/r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27.json",
+      "configuration_id": "4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27",
+      "resolved_recipe_sha256": "d490df255e7cdf7eca13215dff1cf5a286d9de1ccff6e884180910016885e4f7",
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.2,
+        "lr_floor": 0.25,
+        "network_lr_floor": 0.25
+      }
+    },
+    {
+      "candidate_id": "r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d",
+      "card": "configs/forge/configurations/r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d.json",
+      "configuration_id": "9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d",
+      "resolved_recipe_sha256": "1c84e548f14f79910253b5cd7e317b6dacdbdbf0a5b234657a38e1e66e14e917",
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.25,
+        "network_lr_floor": 0.25
+      }
+    },
+    {
+      "candidate_id": "r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743",
+      "card": "configs/forge/configurations/r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743.json",
+      "configuration_id": "dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743",
+      "resolved_recipe_sha256": "9f32fa3948735efbac4a0742b5941fc6bbffd6b3ae01ed8dd6c6e86320b6b71e",
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.2,
+        "lr_floor": 0.1,
+        "network_lr_floor": 0.1
+      }
+    },
+    {
+      "candidate_id": "r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe",
+      "card": "configs/forge/configurations/r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe.json",
+      "configuration_id": "e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe",
+      "resolved_recipe_sha256": "b79afe9e25de5c87ddfe08e5043672a5a5646e7a1caa9822800739e7326839b4",
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0085,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.1,
+        "network_lr_floor": 0.1
+      }
+    }
+  ],
+  "schema_version": 1,
+  "scientific_verdict": "NOT_ATTEMPTED",
+  "shared_recipe_across_tasks": true,
+  "source_frozen": false,
+  "spec_hash": "9e356c63e9bc0fe853142ff60cc58b548f94cda1c24bac29862cd1a89e7e78a2",
+  "status": "PREPARED_NOT_EXECUTED",
+  "study_id": "r1r2-modern-family-round1-v1",
+  "trainer_family": "r1r2",
+  "training_attempts": 0
+}

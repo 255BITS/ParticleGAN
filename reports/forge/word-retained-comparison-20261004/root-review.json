@@ -1,0 +1,19 @@
+{
+  "checkpoint_deserializations": 0,
+  "comparison_sha256": "f533b7bf9daa97c02f3fd2ec41acaa4c67cce7ed9e05021e8acfc9d77c8e68d9",
+  "draws": 0,
+  "forwards": 0,
+  "gpu": 0,
+  "independent_output_byte_equal": true,
+  "input_pins_verified": 99,
+  "matched_clocks": 24,
+  "models": 0,
+  "official_scorer_calls": 0,
+  "old_invalid_recertified": false,
+  "proposal_implemented_or_executed": false,
+  "qualification_input": false,
+  "reader_sha256": "0266c399b3034e87e8c6ab515dff374fedfd6d56fed510ce29b312c18aa9424e",
+  "schema": "pg_word_saved_comparison_root_review_v1",
+  "status": "VERIFIED",
+  "updates": 0
+}

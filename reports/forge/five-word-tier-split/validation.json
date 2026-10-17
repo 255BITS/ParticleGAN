@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "distinct_passing_checks": 372,
+  "checks": [
+    {
+      "group": "newword_smoke_hold",
+      "passed": 17,
+      "CUDA_numerical_checks": 2
+    },
+    {
+      "group": "task_view_recipe_campaign_metadata",
+      "passed": 77,
+      "deselected": 1
+    },
+    {
+      "group": "current_inventory_tier_family_publication",
+      "passed": 257
+    },
+    {
+      "group": "legacy_word_provenance_CUDA",
+      "passed": 1
+    },
+    {
+      "group": "legacy_word_execution_and_models_migrated_to_CUDA",
+      "passed": 20,
+      "CUDA_numerical_checks": 6,
+      "pure_metadata_checks": 14
+    }
+  ],
+  "CUDA_devices": {
+    "new_numerical": "physicalGPU0",
+    "legacy_provenance": "physicalGPU1"
+  },
+  "GPU_training_required": true,
+  "no_CPU_training_fallback": true,
+  "Forge_validate": {
+    "candidates": 405,
+    "tasks": 66,
+    "status": "PASS"
+  },
+  "preserved_publication": {
+    "original_sustained_task_sha256": "3a0db059c0465bcb44754ee2c817d42eec07473b84b63717ee514171192b217b",
+    "historical_task_byte_unchanged": true,
+    "registered_scientific_fields_preserved": [
+      "rows",
+      "evidence_rows",
+      "configuration_rows",
+      "archived_evidence_rows",
+      "historical_family_rows"
+    ],
+    "source_base": "83b099d1e4330dda953d5fce4f68ce00f75fa9a6",
+    "recorded_view": 7,
+    "declared_view": 8,
+    "declared_required_counts": {
+      "1": 6,
+      "2": 21,
+      "3": 2
+    },
+    "qualification_regraded": false
+  },
+  "known_preexisting_failure": {
+    "test": "tests/test_forge_views.py::test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer",
+    "reason": "Two archived shallow Gaussian task declarations pin gaussian_tasks.py at839e01...; develop source is346430... . This existing source-pin check fails before the change. Preserve those archived task identities and exclude the unrelated check.",
+    "task_declarations": [
+      "gaussian1d_shallow_smoke",
+      "gaussian1d_shallow_stability"
+    ]
+  },
+  "combined_integration": {
+    "source_commit": "be0dc0e9f32f792fe73eb78f540810fa3e3cac63",
+    "word_executed_source": "0270a501b7d90f4d6c34b4c3e9ef4166f877b301",
+    "smoothing_source": "3cd835d00",
+    "physicalGPU": 1,
+    "CUDA_checks": 4,
+    "schema_checks": 2,
+    "Forge_validate": {
+      "candidates": 406,
+      "tasks": 66,
+      "status": "PASS"
+    },
+    "scientific_training_repeated": false
+  },
+  "raw_logs": "untracked runs/forge/five-word-tier-split-v1; archived with complete raw evidence",
+  "CUDA_numerical_or_provenance_checks": 9,
+  "pure_metadata_checks": 363
+}

@@ -1,0 +1,667 @@
+{
+  "bound_assumptions": {
+    "adam_beta1": 0.0,
+    "base_lr": 0.0006,
+    "constant_beta2": true,
+    "epsilon_nonnegative": true,
+    "gain_first_step": 1.0,
+    "gain_maximum_later_steps": 2.0,
+    "initial_adam_moments": "all zero",
+    "initial_coordinates": "all zero",
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "optimizer_updates": 80,
+    "prior_lr_mult_consumed": false,
+    "schedule_horizon": 80,
+    "schedule_role": "prior",
+    "weight_decay": 0.0
+  },
+  "direct_beta2_bounds": [
+    {
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "excluded_by_bound": true,
+      "lr": 0.0006,
+      "mean_absolute_displacement_upper_bound": 0.22666346175085383,
+      "passing_is_not_implied": true
+    },
+    {
+      "direct_particle_betas": [
+        0.0,
+        0.95
+      ],
+      "excluded_by_bound": true,
+      "lr": 0.0006,
+      "mean_absolute_displacement_upper_bound": 0.28986417359455535,
+      "passing_is_not_implied": true
+    },
+    {
+      "direct_particle_betas": [
+        0.0,
+        0.99
+      ],
+      "excluded_by_bound": false,
+      "lr": 0.0006,
+      "mean_absolute_displacement_upper_bound": 0.3897120152791084,
+      "passing_is_not_implied": true
+    },
+    {
+      "direct_particle_betas": [
+        0.0,
+        0.999
+      ],
+      "excluded_by_bound": false,
+      "lr": 0.0006,
+      "mean_absolute_displacement_upper_bound": 0.4238650972903656,
+      "passing_is_not_implied": true
+    }
+  ],
+  "early_k3p_real_gradient_units": {
+    "formula": "reg_coeff/(2*input_dimension) * mean(||grad_real D||^2)",
+    "reg_coeff": 170.0,
+    "scope": "early phase only; the late cap/proximity terms use their existing separate units",
+    "two_pole_dimension": 1,
+    "two_pole_prefactor": 85.0,
+    "word_joint_dimension": 170,
+    "word_prefactor": 0.5
+  },
+  "id": "k3p-direct-rate-analysis-v1",
+  "input_sha256": {
+    "configs/forge/tasks/two_pole.json": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5",
+    "reports/forge/k3p-global-tier1-v2/input-noise/receipts/15b66aa393dfb7f3e75c6241b985a5c19e6c3b6ee4122df3abe170cd5a5521b1.json": "9df4d233f320a176ebc2ec88bc5c5dd47e00e17f52e4f67a84290cae9233040a",
+    "reports/forge/k3p-global-tier1-v2/input-noise/receipts/1c04efed544cabaab50ebd306711bfe83db8615beede38114fe5d3a6f337a9d0.json": "882781bdb3555304a3252b218d204d895f4e4da8e085eac4bc0173d77a06c44e",
+    "reports/forge/k3p-global-tier1-v2/input-noise/receipts/239cdcf7cbe2739c63a0abc5cd27d38adfe73f1e09103ed5e1be2c0df1073176.json": "7a735e2889c3f6f63574c17532b2eaa9afec6a1eb3e1d3dd47a220dc5275277e",
+    "reports/forge/k3p-global-tier1-v2/input-noise/receipts/74219b54461b106a1f780a72ce43035f47611df4760a34a448292e6a40597503.json": "41f93a24aa5c047e2fc8f651ee00daaf37032cd746d1255f3f670035bf69d6f3",
+    "reports/forge/k3p-global-tier1-v2/input-noise/receipts/8072e0db5de655465437a1de7db530340beb273340f909fcfc0e8c731e92bd6f.json": "650944265e5d5ca08e96482e597a9d4e02cc2a9e085b01e54893f8e2cb84eae2",
+    "reports/forge/k3p-global-tier1-v2/input-noise/receipts/8951909fddc06a4529927659598aa380f0368268ff1fd71115b0003eee5620b4.json": "d5c676f17f6f7e83e08a83c45e0fa78c5d8ab4478e1f0afca322ff3329ee66eb",
+    "reports/forge/k3p-global-tier1-v2/input-noise/receipts/a9f37c77c97987a31d1ae35ae01de536de29d59914640ebcdc06bfebaf1ceadc.json": "36542b43e1ecac4e4e8568555e1e7d20f964abd3df894c6f1f9b1391a0d89ace",
+    "reports/forge/k3p-global-tier1-v2/input-noise/receipts/b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2.json": "53c59bcf6f442d7765287924ae33bafdc0913267cd5464b052223477ba48dc49",
+    "reports/forge/k3p-global-tier1-v2/receipts/0ababb7bec701731ff473ae925c5aaebc92aec05056db9f0d01e881aa1a451b5.json": "c64b3c50d14b0f469b8ff9142256b46091ec263849d761b54f292451b36e2d3c",
+    "reports/forge/k3p-global-tier1-v2/receipts/607bd2f2bf44f748b7acddcca0456c4cb92cda1371c9f1c5e93672f5d782046e.json": "0bbefaba6b2783d1943bea2eecb749eb33cf3d47420be4c099daaadd35339c45",
+    "reports/forge/k3p-global-tier1-v2/receipts/862c7c23a730daa7bae2c2076b47e192483f4731012e3faa97e9881c708edb0f.json": "0129d7e0ffafcc1aee58170386a5fc10a7dba83c2245c2ac3b5bc3c8290a0843",
+    "reports/forge/k3p-global-tier1-v2/receipts/8c14d4a6a059d0954eb79a8d100d1c4de0eb13c039f49a8ac6f8f66ca544b8df.json": "060d53486eade275149a4ea30f555af3d849fc5553c5d81a489b05b832e04336",
+    "reports/forge/k3p-global-tier1-v2/receipts/922f620215f1e76351aeca2f68b79ddefeb7a44c1f824d9fdb867a27e5a03ade.json": "176362d75ea371c42785d6bd250853e57a7b299028fbb081267b819c5a44520f",
+    "reports/forge/k3p-global-tier1-v2/receipts/9c6f1ae673fc7b51dbdeac0a826695ceb94c869ba886e750177b73c6727af687.json": "825015139025fa97348da06ca1e80ca320c83561640e338a464ce1e353ceaa1c",
+    "reports/forge/k3p-global-tier1-v2/receipts/a5ef4da177f58c3bd3aa6f3af5a6ffb6145889635d2a303ecb7534711b698993.json": "5d601344bb0a7b2a5e8052700febbe6808af27f7e47bf468b480430a29966799",
+    "reports/forge/k3p-global-tier1-v2/receipts/adbcdd335837dcd7c340e2fe7f4b98ade162bf5a3e8f1e4f78e64e316d7a47b7.json": "4df50f8e1c5ba3800c8863f10182cdeba779e4ed5dd73276f943417393cfd59f",
+    "reports/forge/k3p-global-tier1-v2/receipts/c4458f4c26996e5e889dfabcae38099962017f164e1bbc1085d5f8084fcb39d7.json": "9ba3ec6a7120474f261691a1a7a1a6ce3c238e5f25c63f5f8a59f0c07043dadd",
+    "reports/forge/k3p-global-tier1-v2/receipts/e99f7210e7272e65ba80cd6793b63a073862cff90ce2de25ea1ea4726bc7442f.json": "46e307db5e36cdb2127070ebd844163874a939c01e2e5039623f35aebe9b6737",
+    "reports/forge/k3p-global-tier1-v2/receipts/fcf67be558ec42242657e9b103c7698896a1021a7fc88325348058e7800bdfaa.json": "728260eb037d410c318a4d3058cb9563c69f5ae7e1eb01b7a60ccf38919b2244",
+    "reports/forge/k3p-global-tier1-v2/receipts/fd2c44a2f5c0e6194db14cc1c464a17e43dc2aa4340046bf76b47b3ad66019bf.json": "e3274a310fb3c01b0b9949854f469bdc9cbec4da2469f5ba5ef068ef30fd5ac4",
+    "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+  },
+  "limits": [
+    "The bound excludes a recipe; a larger bound does not establish a passing trajectory.",
+    "Higher-rate c170 runs also plateau below .3 despite ample possible displacement, so the low-rate step bound is not their explanation.",
+    "Critic gradient median covers real and fake inputs; it is not the exact per-particle generator force.",
+    "Behavioral receipts retain numerical curves and optimizer/mechanism bindings, not reconstructible critic/particle checkpoints.",
+    "Larger beta2 can slow responses to falling gradients; this numeric contrast has no promised gain."
+  ],
+  "measured_two_pole": [
+    {
+      "attempt_id": "e22ffc9a90834e21b77f64b89bba7573",
+      "candidate_id": "k3p--0ababb7bec701731ff473ae925c5aaebc92aec05056db9f0d01e881aa1a451b5",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.006030604243278503,
+        "mean_abs": 0.08268533647060394
+      },
+      "maximum_observed_critic_median": 0.0198134183883667,
+      "minimum_observed_critic_median": 0.006030604243278503,
+      "original_result": {
+        "bytes": 113356,
+        "path": "reports/forge/attempts/e22ffc9a90834e21b77f64b89bba7573/result.json",
+        "sha256": "71558417249db1ebe99dae25d68c8e99e58bc69dbda7436617659ecbc0750eed"
+      },
+      "peak_movement": 0.10931690782308578,
+      "peak_step": 44,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.00425,
+        "reg_coeff": 30.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "31dedc2b49d641bf9f42db70ace0c20a",
+      "candidate_id": "k3p--607bd2f2bf44f748b7acddcca0456c4cb92cda1371c9f1c5e93672f5d782046e",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 79,
+      "final": {
+        "grad_med": 0.006238441914319992,
+        "mean_abs": 0.14191100001335144
+      },
+      "maximum_observed_critic_median": 0.1165727898478508,
+      "minimum_observed_critic_median": 0.005841933190822601,
+      "original_result": {
+        "bytes": 113260,
+        "path": "reports/forge/attempts/31dedc2b49d641bf9f42db70ace0c20a/result.json",
+        "sha256": "d6eaf20957caeae6a703dad3397921291e2c61c230128e9e539d521ed53daf5e"
+      },
+      "peak_movement": 0.15433208644390106,
+      "peak_step": 44,
+      "settings": {
+        "d_lr_mult": 0.25,
+        "input_noise_std": 0.0,
+        "lr": 0.00425,
+        "reg_coeff": 85.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "8135ff77df4e485e99b5da7d678013bf",
+      "candidate_id": "k3p--862c7c23a730daa7bae2c2076b47e192483f4731012e3faa97e9881c708edb0f",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.004532963037490845,
+        "mean_abs": 0.08526656776666641
+      },
+      "maximum_observed_critic_median": 0.14044368267059326,
+      "minimum_observed_critic_median": 0.002512611448764801,
+      "original_result": {
+        "bytes": 113292,
+        "path": "reports/forge/attempts/8135ff77df4e485e99b5da7d678013bf/result.json",
+        "sha256": "1aa2f0861bc1a383d4e71953fafc2904ffe956ee2b3c0373b4051aaa00666551"
+      },
+      "peak_movement": 0.12418877333402634,
+      "peak_step": 37,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.006375,
+        "reg_coeff": 30.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "ccee6e970afc4a4e9ebe2c0984b2d234",
+      "candidate_id": "k3p--8c14d4a6a059d0954eb79a8d100d1c4de0eb13c039f49a8ac6f8f66ca544b8df",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.006650954484939575,
+        "mean_abs": 0.0983227789402008
+      },
+      "maximum_observed_critic_median": 0.11648515611886978,
+      "minimum_observed_critic_median": 0.006650954484939575,
+      "original_result": {
+        "bytes": 113266,
+        "path": "reports/forge/attempts/ccee6e970afc4a4e9ebe2c0984b2d234/result.json",
+        "sha256": "cfbe6437f1ae6b2313dea4bcdd8cc58497f2174e18b04b044202711e0877df99"
+      },
+      "peak_movement": 0.13721011579036713,
+      "peak_step": 34,
+      "settings": {
+        "d_lr_mult": 0.25,
+        "input_noise_std": 0.0,
+        "lr": 0.00425,
+        "reg_coeff": 10.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "8b5fc1d3ea164f76a6613023820f9ebc",
+      "candidate_id": "k3p--922f620215f1e76351aeca2f68b79ddefeb7a44c1f824d9fdb867a27e5a03ade",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.0009740814566612244,
+        "mean_abs": 0.025701144710183144
+      },
+      "maximum_observed_critic_median": 0.018692076206207275,
+      "minimum_observed_critic_median": 0.0009740814566612244,
+      "original_result": {
+        "bytes": 113379,
+        "path": "reports/forge/attempts/8b5fc1d3ea164f76a6613023820f9ebc/result.json",
+        "sha256": "bb221b1121c12bd46ea458036a56bcf1b55092316bcd21701e50191e24288529"
+      },
+      "peak_movement": 0.07898706942796707,
+      "peak_step": 37,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.00425,
+        "reg_coeff": 10.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "3801fe9a68c840fabccca50cb88e0fd3",
+      "candidate_id": "k3p--9c6f1ae673fc7b51dbdeac0a826695ceb94c869ba886e750177b73c6727af687",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.007280532270669937,
+        "mean_abs": 0.1166168674826622
+      },
+      "maximum_observed_critic_median": 0.020420663058757782,
+      "minimum_observed_critic_median": 0.004599779844284058,
+      "original_result": {
+        "bytes": 113348,
+        "path": "reports/forge/attempts/3801fe9a68c840fabccca50cb88e0fd3/result.json",
+        "sha256": "c636b57334ed7749321411f0e7d96a103920708ebd80abc959d84bd6ab033363"
+      },
+      "peak_movement": 0.12594157457351685,
+      "peak_step": 50,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.00425,
+        "reg_coeff": 85.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "acebd1ae03164344b101f8920cf63f99",
+      "candidate_id": "k3p--a5ef4da177f58c3bd3aa6f3af5a6ffb6145889635d2a303ecb7534711b698993",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.00968249887228012,
+        "mean_abs": 0.13049209117889404
+      },
+      "maximum_observed_critic_median": 0.11654648929834366,
+      "minimum_observed_critic_median": 0.00968249887228012,
+      "original_result": {
+        "bytes": 113246,
+        "path": "reports/forge/attempts/acebd1ae03164344b101f8920cf63f99/result.json",
+        "sha256": "36a55ea5fbc272dd0fe1c853e734664a4012e0d8726a4fd56edbaf711db1f060"
+      },
+      "peak_movement": 0.14835062623023987,
+      "peak_step": 40,
+      "settings": {
+        "d_lr_mult": 0.25,
+        "input_noise_std": 0.0,
+        "lr": 0.00425,
+        "reg_coeff": 30.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "c768b079943b417086f1c2836fd9a466",
+      "candidate_id": "k3p--adbcdd335837dcd7c340e2fe7f4b98ade162bf5a3e8f1e4f78e64e316d7a47b7",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.006676580756902695,
+        "mean_abs": 0.11368787288665771
+      },
+      "maximum_observed_critic_median": 0.098653644323349,
+      "minimum_observed_critic_median": 0.0031700879335403442,
+      "original_result": {
+        "bytes": 113282,
+        "path": "reports/forge/attempts/c768b079943b417086f1c2836fd9a466/result.json",
+        "sha256": "fd55ba4218992c3116ee3370c5c9e9447ac1719a92549606516813c7f9f915ed"
+      },
+      "peak_movement": 0.14379742741584778,
+      "peak_step": 37,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.006375,
+        "reg_coeff": 85.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "29fafa676a204a6ebf6ff833ea3d4fd6",
+      "candidate_id": "k3p--c4458f4c26996e5e889dfabcae38099962017f164e1bbc1085d5f8084fcb39d7",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.009154722094535828,
+        "mean_abs": 0.1199449673295021
+      },
+      "maximum_observed_critic_median": 0.1014271154999733,
+      "minimum_observed_critic_median": 0.009154722094535828,
+      "original_result": {
+        "bytes": 113285,
+        "path": "reports/forge/attempts/29fafa676a204a6ebf6ff833ea3d4fd6/result.json",
+        "sha256": "9f1c35d5db245d8521886e45d9ad4f66617b967f43eac58dff0c2ad832eb398b"
+      },
+      "peak_movement": 0.14024022221565247,
+      "peak_step": 30,
+      "settings": {
+        "d_lr_mult": 0.25,
+        "input_noise_std": 0.0,
+        "lr": 0.006375,
+        "reg_coeff": 30.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "71843480b261405aada2e291af07e7b9",
+      "candidate_id": "k3p--e99f7210e7272e65ba80cd6793b63a073862cff90ce2de25ea1ea4726bc7442f",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.005839478224515915,
+        "mean_abs": 0.13333581387996674
+      },
+      "maximum_observed_critic_median": 0.10148917138576508,
+      "minimum_observed_critic_median": 0.005068376660346985,
+      "original_result": {
+        "bytes": 113285,
+        "path": "reports/forge/attempts/71843480b261405aada2e291af07e7b9/result.json",
+        "sha256": "935c80ff20aab00ba8a7f78ff3fc82e8147d83af5bf863cb7e788d04e452843c"
+      },
+      "peak_movement": 0.14598923921585083,
+      "peak_step": 34,
+      "settings": {
+        "d_lr_mult": 0.25,
+        "input_noise_std": 0.0,
+        "lr": 0.006375,
+        "reg_coeff": 85.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "c17c42e742024f269e1314271fdf4628",
+      "candidate_id": "k3p--fcf67be558ec42242657e9b103c7698896a1021a7fc88325348058e7800bdfaa",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.006037458777427673,
+        "mean_abs": 0.08567378669977188
+      },
+      "maximum_observed_critic_median": 0.10128405690193176,
+      "minimum_observed_critic_median": 0.006037458777427673,
+      "original_result": {
+        "bytes": 113298,
+        "path": "reports/forge/attempts/c17c42e742024f269e1314271fdf4628/result.json",
+        "sha256": "3c6268db3fb855e617671bddc925afefd899bec9537c81a329ad5e9afb005938"
+      },
+      "peak_movement": 0.12965230643749237,
+      "peak_step": 24,
+      "settings": {
+        "d_lr_mult": 0.25,
+        "input_noise_std": 0.0,
+        "lr": 0.006375,
+        "reg_coeff": 10.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "9ecb7a4f3fa8468697b31247ed6a4d30",
+      "candidate_id": "k3p--fd2c44a2f5c0e6194db14cc1c464a17e43dc2aa4340046bf76b47b3ad66019bf",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 78,
+      "final": {
+        "grad_med": 0.0007349550724029541,
+        "mean_abs": 0.03603987395763397
+      },
+      "maximum_observed_critic_median": 0.1198178231716156,
+      "minimum_observed_critic_median": 0.000362589955329895,
+      "original_result": {
+        "bytes": 113338,
+        "path": "reports/forge/attempts/9ecb7a4f3fa8468697b31247ed6a4d30/result.json",
+        "sha256": "31283621a5828792628cbac203a3464b38330655e24ffe8dee0efc58f9d68fe5"
+      },
+      "peak_movement": 0.08134641498327255,
+      "peak_step": 37,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.006375,
+        "reg_coeff": 10.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "3051e7cbdda74152a63f9a56fad13ee5",
+      "candidate_id": "k3p--15b66aa393dfb7f3e75c6241b985a5c19e6c3b6ee4122df3abe170cd5a5521b1",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 73,
+      "final": {
+        "grad_med": 0.004863053560256958,
+        "mean_abs": 0.07401707023382187
+      },
+      "maximum_observed_critic_median": 0.09042907506227493,
+      "minimum_observed_critic_median": 0.0027679502964019775,
+      "original_result": {
+        "bytes": 113362,
+        "path": "reports/forge/attempts/3051e7cbdda74152a63f9a56fad13ee5/result.json",
+        "sha256": "ae4fcbfce2a63d16107dd1e92908b8fe488731613120d4dc598e9c861a8b425b"
+      },
+      "peak_movement": 0.08666201680898666,
+      "peak_step": 44,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.0085,
+        "reg_coeff": 30.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "6344d822707c4dfb92a8186f159dbe8c",
+      "candidate_id": "k3p--1c04efed544cabaab50ebd306711bfe83db8615beede38114fe5d3a6f337a9d0",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 74,
+      "final": {
+        "grad_med": 0.0003557130694389343,
+        "mean_abs": 0.0340726375579834
+      },
+      "maximum_observed_critic_median": 0.09898987412452698,
+      "minimum_observed_critic_median": 0.0003557130694389343,
+      "original_result": {
+        "bytes": 113364,
+        "path": "reports/forge/attempts/6344d822707c4dfb92a8186f159dbe8c/result.json",
+        "sha256": "80f9fd6e0c0d3f0869b965132aff6ac4237a5f8fed1b54721bbfe31b62ac51de"
+      },
+      "peak_movement": 0.0693439245223999,
+      "peak_step": 40,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.0085,
+        "reg_coeff": 10.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "07c53601ebb545ebbf65ac500c0fa602",
+      "candidate_id": "k3p--239cdcf7cbe2739c63a0abc5cd27d38adfe73f1e09103ed5e1be2c0df1073176",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 74,
+      "final": {
+        "grad_med": 0.005087234079837799,
+        "mean_abs": 0.07838483899831772
+      },
+      "maximum_observed_critic_median": 0.07871952652931213,
+      "minimum_observed_critic_median": 0.0038850530982017517,
+      "original_result": {
+        "bytes": 113314,
+        "path": "reports/forge/attempts/07c53601ebb545ebbf65ac500c0fa602/result.json",
+        "sha256": "8500931b5cd361d88da523e5896a10290fc4939b1c96678f856c37851f8e8e1c"
+      },
+      "peak_movement": 0.1015784740447998,
+      "peak_step": 24,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.006375,
+        "reg_coeff": 30.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "8695bc2ade9d42f7a4b12edc14b492e1",
+      "candidate_id": "k3p--74219b54461b106a1f780a72ce43035f47611df4760a34a448292e6a40597503",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 73,
+      "final": {
+        "grad_med": 0.003651566803455353,
+        "mean_abs": 0.09658876806497574
+      },
+      "maximum_observed_critic_median": 0.08713214844465256,
+      "minimum_observed_critic_median": 0.0025154203176498413,
+      "original_result": {
+        "bytes": 113368,
+        "path": "reports/forge/attempts/8695bc2ade9d42f7a4b12edc14b492e1/result.json",
+        "sha256": "9804a552c8a8692cbc41b6252acc4dd2651ba5add5940d5c992a3fab2e1f7547"
+      },
+      "peak_movement": 0.10570808500051498,
+      "peak_step": 40,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.0085,
+        "reg_coeff": 170.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "48c3f164f47f478dbb7496d48c1526e7",
+      "candidate_id": "k3p--8072e0db5de655465437a1de7db530340beb273340f909fcfc0e8c731e92bd6f",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 74,
+      "final": {
+        "grad_med": 0.20988729596138,
+        "mean_abs": 0.5623689889907837
+      },
+      "maximum_observed_critic_median": 0.20988729596138,
+      "minimum_observed_critic_median": 0.016138941049575806,
+      "original_result": {
+        "bytes": 113175,
+        "path": "reports/forge/attempts/48c3f164f47f478dbb7496d48c1526e7/result.json",
+        "sha256": "621e8f4fa13c45cc2542758047c7b225c8cc09112a084b0e585faeac45325112"
+      },
+      "peak_movement": 0.5623689889907837,
+      "peak_step": 80,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.006375,
+        "reg_coeff": 1.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "PASS"
+    },
+    {
+      "attempt_id": "b429b664e160450fa504b46ef2d578d9",
+      "candidate_id": "k3p--8951909fddc06a4529927659598aa380f0368268ff1fd71115b0003eee5620b4",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 74,
+      "final": {
+        "grad_med": 0.003890886902809143,
+        "mean_abs": 0.11112472414970398
+      },
+      "maximum_observed_critic_median": 0.11187079548835754,
+      "minimum_observed_critic_median": 0.002007097005844116,
+      "original_result": {
+        "bytes": 113352,
+        "path": "reports/forge/attempts/b429b664e160450fa504b46ef2d578d9/result.json",
+        "sha256": "64071c43c47fd56aa15ead281e667a683fd021029a485850be6d8ef19542c63a"
+      },
+      "peak_movement": 0.1148042306303978,
+      "peak_step": 30,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.006375,
+        "reg_coeff": 170.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    },
+    {
+      "attempt_id": "0b57a0a43a0d4a579892cd9d418e5b33",
+      "candidate_id": "k3p--a9f37c77c97987a31d1ae35ae01de536de29d59914640ebcdc06bfebaf1ceadc",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 74,
+      "final": {
+        "grad_med": 0.24655884504318237,
+        "mean_abs": 0.5839954614639282
+      },
+      "maximum_observed_critic_median": 0.24655884504318237,
+      "minimum_observed_critic_median": 0.016384810209274292,
+      "original_result": {
+        "bytes": 113230,
+        "path": "reports/forge/attempts/0b57a0a43a0d4a579892cd9d418e5b33/result.json",
+        "sha256": "6100618e9af6428d469d0b19a48198e207f002e56bc95ac34d4aaae08878ecc0"
+      },
+      "peak_movement": 0.5839954614639282,
+      "peak_step": 80,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.0085,
+        "reg_coeff": 1.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "PASS"
+    },
+    {
+      "attempt_id": "820d347d4e0e432d84e2a4fbf01e4f6f",
+      "candidate_id": "k3p--b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2",
+      "critic_anchor_applications": 13,
+      "direct_gain_applications": 75,
+      "final": {
+        "grad_med": 0.0001968294382095337,
+        "mean_abs": 0.026968738064169884
+      },
+      "maximum_observed_critic_median": 0.0759572982788086,
+      "minimum_observed_critic_median": 0.0001968294382095337,
+      "original_result": {
+        "bytes": 113342,
+        "path": "reports/forge/attempts/820d347d4e0e432d84e2a4fbf01e4f6f/result.json",
+        "sha256": "e8e5878bb6d207f6880a7abb4012069b02403d0b9d3936c6898837b9c517024d"
+      },
+      "peak_movement": 0.08055660873651505,
+      "peak_step": 24,
+      "settings": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.006375,
+        "reg_coeff": 10.0
+      },
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "status": "FAIL"
+    }
+  ],
+  "optimizer_updates": 0,
+  "proof": "v_t >= (1-beta2)*g_t^2; |g_t|/sqrt(v_t/(1-beta2^t)) <= sqrt((1-beta2^t)/(1-beta2)); sum gain_t*lr_t times this bound. Triangle inequality bounds each zero-origin coordinate and mean absolute movement.",
+  "qualification_input": false,
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "read_only_analytic_and_saved_receipt_diagnostic",
+  "source_digest": "8778d4c7fc0d714b7b571dccabdfbd08093625e645b97519ea009f2b4b66f48d",
+  "source_digest_kind": "analysis_source_sha256_map_digest",
+  "source_sha256": {
+    "benchmarks/locked_shared/two_pole.py": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e",
+    "experiments/forge/behavior_adapters.py": "9a46d334961ee0172371d2a7a95ef56d4c0e118e7aa06a16f81c255eb3e14530",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "reports/forge/k3p-global-tier1-v3/direct-rate-analysis.py": "f0fac836bab809395b62a84dc49cd4f461ed6fc30f3c56bed349d04b636561a0"
+  },
+  "unchanged_movement_threshold": 0.3,
+  "word_reference": {
+    "candidate_revision": "7c9ea7c422fdacc4f9bbee35883893cf0d6abb2693341b515598e52b8a47cfa5",
+    "gate_status": "PASS",
+    "id": "k3p-coeff170-cap1",
+    "source_digest": "4ff32ae9e41adf0814fbf9a35bb81376b1ff7940ca9a497a43bf4526722561ef"
+  }
+}

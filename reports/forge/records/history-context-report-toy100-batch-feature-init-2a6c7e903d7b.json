@@ -1,0 +1,83 @@
+{
+  "candidate_id": "context:report/toy100/batch-feature-init",
+  "candidate_revision": "bdd2f043deab044d3df57e4d0b314ce6942ceb92824b1c9a0d5282a44c12397c",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Batch-feature initialization: research and package integration",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/batch-feature-init",
+      "narrative_sources": [
+        {
+          "git_blob": "be593a281cbb9371e5f7dde57c28a4911f70dea3",
+          "path": "reports/toy100/batch-feature-init/BATCH_FEATURE_MATH.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3af8a35c7404d949e6bf9b2c7b30209c946a1c7cc28b7bdaec43e47312e6b183",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/batch-feature-init/BATCH_FEATURE_MATH.md"
+        },
+        {
+          "git_blob": "33a42384093fbc9fce03c210cd7b70594b8bb91e",
+          "path": "reports/toy100/batch-feature-init/BATCH_FEATURE_REPORT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "751238198451a52329b2e68d49d8214aac56212aebae44ca4c99a4140d17e3ea",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/batch-feature-init/BATCH_FEATURE_REPORT.md"
+        },
+        {
+          "git_blob": "6c254a020ce5221f77aebe8038c804728059e506",
+          "path": "reports/toy100/batch-feature-init/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cea4ce588bbca57178f4f51e742fcf70ce3591b4afec7f0a1b12f781dbb60519",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/batch-feature-init/README.md"
+        },
+        {
+          "git_blob": "99453e6286c874e0096640c6a37fabfcf11f1257",
+          "path": "reports/toy100/batch-feature-init/batch-feature-leaderboard.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f0527e1cf5e039ebf94e8dddcd1a24b74e3d79e765d30cd38589ed6dff2d1a52",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/batch-feature-init/batch-feature-leaderboard.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Batch-feature initialization: research and package integration\n\n> **API update:** the recipe no longer initializes weights and `initialize_` is gone; this\n> construction is now the explicit `particlegan.init.deterministic_orthogonal_(module, seed=k)`\n> ([API](../../../docs/api.md#initialization)), and the research registry lives in `benchmarks/init_research`.\n\nThe initialization-only search selected **QR weights + patterned biases + R2\nparticles + zero explicit batch-distance readout coefficients**. The frozen\nresearch run passed all **22/22 fixed benchmark gates**, plus long hold.\nShifted-target recovery remains **FAIL** (pre-shift STAY passes 120/120).\nNo seed, optimizer, schedule, architecture, sampling, budget, or threshold sweep\nwas performed. The original QR control passed 21/22; zeroing the entire critic\nhead regressed to 19/22. See [the leaderboard](batch-feature-leaderboard.md),\n[mechanism and results](BATCH_FEATURE_REPORT.md), and\n[math/architecture guide](../../../docs/initialization.md).\n\n## Public entry points\n\n`get_recipe()` now defaults to `initialization=\"batch_feature_zero\"`.\n`GANTrainer` and `recipe.make_optimizers` use the direct, RNG-neutral\n`particlegan.initialize_(network, key=0)` API. Standard layer declarations\nreplace the historical hook's captured declarations; keys are explicit\n(G=0, D=1, E=2) instead of depending on process-wide optimizer count.\n`i"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-batch-feature-init-2a6c7e903d7b",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "6c254a020ce5221f77aebe8038c804728059e506",
+    "path": "reports/toy100/batch-feature-init/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "cea4ce588bbca57178f4f51e742fcf70ce3591b4afec7f0a1b12f781dbb60519",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/batch-feature-init/README.md"
+  },
+  "task_results": []
+}

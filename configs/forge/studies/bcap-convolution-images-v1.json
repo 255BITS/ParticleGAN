@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 7200,
+    "candidate_budget_seconds": 7200,
+    "id": "bcap-convolution-images-v1"
+  },
+  "candidate": "bcap-dualnorm-convolution-v1",
+  "competing_explanation": "Kernel support may permit all declared updates but fail sustained image coverage or quality. A numerical failure is distinct from an optimizer setup error; the old unsupported receipts are motivation rather than a matched trained control. The selected incumbent has other genuine Tier2 failures and none is addressed by this four-image diagnostic.",
+  "control": {
+    "candidate_id": "bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "img_stripes2",
+    "threshold": 0.9
+  },
+  "hypothesis": "Per-offset smoothed DualNorm with explicit grouped convolution and transposed convolution layout can train the four previously unsupported image hosts at the selected fixed rates.",
+  "id": "bcap-convolution-images-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "img_stripes2",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "source_origin_commit": "f96819ddb2b8510c3496b1883d73439e8691db83",
+        "study_id": "bcap-tier2-smoothing-v1"
+      },
+      "path": "reports/forge/bcap-tier2/readout.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap_convolution_images"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Only constraint_geometry_mode: none -> direction_blend, globally; native SVD and every other resolved recipe field identical to control"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "guide": "reports/forge/bcap-three-phase/README.md",
+  "id": "bcap-projection-baseline-review-direction-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Protect existing adversarial/paired signals against full DualNorm displacement from conflicting original cover/spread/hold objectives. Apply existing common-descent blend only when actual rounded displacement has positive protected-gradient dot product; no finite-loss probes, transport, new supervision, backend or cap changes.",
+  "parent": "bcap-three-phase-incumbent-v1",
+  "recipe_overrides": {
+    "constraint_geometry_mode": "direction_blend",
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

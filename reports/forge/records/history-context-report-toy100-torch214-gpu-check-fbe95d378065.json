@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/toy100/torch214-gpu-check",
+  "candidate_revision": "ddb6c00dae64399f4c9ab0e30fd61a963929a63a88fd39a17becbc7be30a02de",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "PyTorch 2.14 does not fix the two GPU blockers",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/torch214-gpu-check",
+      "narrative_sources": [
+        {
+          "git_blob": "a288eb41534c8c7646e55615751fae9c6485edc4",
+          "path": "reports/toy100/torch214-gpu-check/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8b087e0105665af3ffcc4fc6ab19104fdb45449be960f999a756a0c73d369564",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/torch214-gpu-check/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# PyTorch 2.14 does not fix the two GPU blockers\n\n**All four 2.14.0+cu126 runs reproduce their 2.13.0+cu126 controls exactly in\nall non-timing result fields.** The two original-recipe blockers still fail,\nwith both native CUDA initialization and copied CPU initial parameters.\n\n| Initialization | Gate | PyTorch 2.13 | PyTorch 2.14 |\n|---|---|---|---|\n| Native CUDA | Ring | FAIL: 7 modes, HQ .997802734375 | Identical FAIL |\n| CPU parameters, CUDA training | Ring | FAIL: 7 modes, HQ .9970703125 | Identical FAIL |\n| Native CUDA | Unequal mass | FAIL: minimum eigenvalue ratio .02909558 | Identical FAIL |\n| CPU parameters, CUDA training | Unequal mass | FAIL: minimum eigenvalue ratio .03095048 | Identical FAIL |\n\nBoth versions use the same RTX A6000, CUDA12.6, cuDNN91002, driver, original\nscheduled recipe, seed0, 1200-update budgets, FP32, deterministic algorithms,\nTF32 off, and one CPU thread. Actual parameters, gradients and Adam moments\nremain CUDA. The complete random-draw receipts and initial parameter hashes\nalso match exactly. All four frozen verdicts and 2400 Adam updates per run were\nindependently checked. This is a two-blocker comparison, not a 22-toy score.\n\nThe upgrade was installed only in `/tmp/particlegan-torch214-cu126`, an isolated\nvenv. The original 2.13 benchmark environment is unchanged. The compatible\n2.14 CUDA12.6 build uses the existing CUDA libraries; torch, t"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-torch214-gpu-check-fbe95d378065",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "a288eb41534c8c7646e55615751fae9c6485edc4",
+    "path": "reports/toy100/torch214-gpu-check/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8b087e0105665af3ffcc4fc6ab19104fdb45449be960f999a756a0c73d369564",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/torch214-gpu-check/README.md"
+  },
+  "task_results": []
+}

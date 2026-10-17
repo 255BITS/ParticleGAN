@@ -35,6 +35,7 @@ from .metrics import EVAL_N, evaluate_samples
 from .models import (
     OUTPUT_NOISE_SEED_OFFSET, InputNoise, IsolatedOutputNoise, OutputNoise,
     StatefulInputNoise, linear_input_noise, linear_output_noise, paired_output_noise,
+    sample_evaluation,
 )
 from .problems import PROBLEM_NAMES, sample_real
 from .schedule import policy_rate_action, step_with_policy
@@ -68,6 +69,7 @@ RUN_DEFAULTS = {
 OPTIONAL_RUN_FIELDS = {
     "output_noise_warmup", "output_noise_learnable",
     "output_noise_rng", "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
+    "eval_output_noise", "deterministic_init",
 }
 AFFINE_MODEL_POLICIES = {
     "affine_square_v1", "affine_normal_v1", "affine_square_random_v1",
@@ -199,6 +201,8 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         raise ValueError("CUDA requested but unavailable")
     if type(run["fused_adam"]) is not bool:
         raise ValueError("fused_adam must be a boolean")
+    if "eval_output_noise" in run and type(run["eval_output_noise"]) is not bool:
+        raise ValueError("eval_output_noise must be a boolean")
     for key in ("output_noise_std", "input_noise_std", "input_noise_anneal_end"):
         value = run[key]
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
@@ -236,6 +240,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         if (isinstance(value, bool) or not isinstance(value, (int, float))
                 or not math.isfinite(value) or not 0 <= value <= 1):
             raise ValueError("network_lr_floor must be a finite fraction in [0, 1]")
+    if "deterministic_init" in run:
+        init_name = run["deterministic_init"]
+        if type(init_name) is not str or not init_name:
+            raise ValueError("deterministic_init must be a registered init name")
+        from benchmarks.init_research.init_registry import names as init_names
+        if init_name not in init_names():
+            raise ValueError(f"unknown deterministic_init {init_name!r}")
     # Noise and network-horizon keys are benchmark-run fields: the benchmark
     # applies them through its own wrappers and hooks, so the trainer recipe
     # keeps their pre-K3P neutral values (see benchmarks.gan_v3).
@@ -256,6 +267,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
 
 
 def _init_linear(module: nn.Module) -> None:
+    """The benchmark's chosen init: ``xavier_uniform_`` weights, zero biases.
+
+    This is deliberate, not a placeholder for ``particlegan.init``. The toy100
+    recipes were tuned and gated on this critic. ``deterministic_orthogonal_(D,
+    seed=1)`` redraws it at ``nn.Linear``'s declared (PyTorch-default) scale,
+    and that fails the default gate 0/3 (docs/initialization.md).
+    """
     for layer in module.modules():
         if isinstance(layer, nn.Linear):
             nn.init.xavier_uniform_(layer.weight)
@@ -277,16 +295,17 @@ class IsolatedNoiseGANTrainer(GANTrainer):
     """Preserve private training noise across direct public-style sampling."""
 
     @torch.no_grad()
-    def sample(self, n, *, ema=False, generator=None, output_noise_eval_seed=None):
+    def sample(self, n, *, ema=False, generator=None, output_noise=False,
+               output_noise_eval_seed=None):
         model = self.ema_G if ema else self.G
         if model._output_rng_scope_active:
             # The caller already paired live/EMA output noise, as in holdout.
-            return super().sample(n, ema=ema, generator=generator)
+            return super().sample(n, ema=ema, generator=generator, output_noise=output_noise)
         if output_noise_eval_seed is None:
             stream = self.eval_generator if generator is None else self._stream(generator, 0)
             output_noise_eval_seed = _noise_state_seed(stream)
         with paired_output_noise((self.G, self.ema_G), seed=output_noise_eval_seed):
-            return super().sample(n, ema=ema, generator=generator)
+            return super().sample(n, ema=ema, generator=generator, output_noise=output_noise)
 
     def load_state_dict(self, state):
         # GANTrainer checks tensor shape/dtype before mutating state, but it
@@ -349,7 +368,11 @@ def _moment_init_box(config: Mapping[str, Any], device: torch.device):
 
 
 def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
-    """Match the public 100-Gaussian example's model and initialization."""
+    """Build the toy100 networks with the benchmark's explicit init.
+
+    The prior and G follow ``toy100_model``. D keeps :func:`_init_linear`'s xavier
+    weights. ``GANTrainer`` trains the weights it is given and does not re-draw them.
+    """
     device = torch.device(config["device"])
     seed = config["seed"]
     devices = [device.index if device.index is not None else torch.cuda.current_device()] if device.type == "cuda" else []
@@ -357,7 +380,9 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
         torch.manual_seed(seed)
         if device.type == "cuda":
             torch.cuda.manual_seed_all(seed)
-        prior = recipe.make_prior(learnable=True).to(device)
+        # Retain the benchmark's learned-table initialization/RNG order;
+        # GANTrainer binds the actual recipe policy after initialization.
+        prior = recipe.replace(prior_update="learned").make_prior().to(device)
         model_policy = config.get("toy100_model")
         if model_policy in AFFINE_MODEL_POLICIES:
             # Preserve the scratch probe's RNG order: construct the ordinary
@@ -481,13 +506,17 @@ def _isolated_output_receipt(trainer: GANTrainer, config: Mapping[str, Any]) -> 
     }
 
 
-def _source_provenance(*, include_policy: bool = False) -> dict[str, Any]:
+def _source_provenance(*, include_policy: bool = False, deterministic_init: str | None = None) -> dict[str, Any]:
     paths = POLICY_SOURCE_FILES_V1[:10]
     if include_policy:
         public = {str(path.relative_to(ROOT)) for path in ROOT.glob("particlegan/**/*.py")}
         if not set(POLICY_PUBLIC_SOURCE_FILES) <= public:
             raise RuntimeError("required public package source is missing")
         paths = tuple(sorted(set(POLICY_SOURCE_FILES_V1) | public))
+    if deterministic_init is not None:
+        initializers = {str(path.relative_to(ROOT))
+                        for path in ROOT.glob("benchmarks/init_research/*.py")}
+        paths = tuple(sorted(set(paths) | initializers | {"benchmarks/toy100/device.py"}))
     hashes = {}
     for name in paths:
         path = ROOT / name
@@ -672,7 +701,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     _write_json(out_dir / "config.json", resolved)
     policy_enabled = ("toy100_model" in resolved or "network_lr_horizon_cap" in resolved
                       or "network_lr_floor" in resolved or "output_noise_rng" in resolved)
-    provenance = (_source_provenance(include_policy=True) if policy_enabled
+    provenance = (_source_provenance(include_policy=True, deterministic_init=resolved.get("deterministic_init")) if policy_enabled
                   else _source_provenance())
     if policy_enabled:
         _write_source_archive(out_dir, provenance)
@@ -682,6 +711,11 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     environment = {
         "python": sys.version.split()[0], "torch": torch.__version__,
         "numpy": np.__version__, "platform": platform.platform(),
+        "cpu_capability": torch.backends.cpu.get_cpu_capability(),
+        "cpu_dispatch": {key: os.environ.get(key) for key in (
+            "ATEN_CPU_CAPABILITY", "ONEDNN_MAX_CPU_ISA", "DNNL_MAX_CPU_ISA",
+            "MKL_ENABLE_INSTRUCTIONS", "MKL_CBWR")},
+        "torch_build_sha256": hashlib.sha256(torch.__config__.show().encode()).hexdigest(),
         "device": str(device), "cuda": torch.version.cuda,
         "gpu": torch.cuda.get_device_name(device) if device.type == "cuda" else None,
         "visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
@@ -706,6 +740,9 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         "status": "running", "problem": resolved["problem"], "budget_steps": budget,
         "config": resolved, "eval_steps": eval_steps, "snapshot_steps": snap_steps,
         "provenance": provenance, "environment": environment,
+        # Default scoring remains clean. The original served-law regression
+        # is opt-in; evidence without this key predates clean scoring.
+        "eval_output_noise": "training_noise" if resolved.get("eval_output_noise", False) else "clean",
     }
     if "network_lr_horizon_cap" in resolved:
         summary["network_lr_horizon_cap"] = resolved["network_lr_horizon_cap"]
@@ -798,7 +835,10 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                         before_state = _noise_state_sha256(sampled_model)
                         before_draws = sampled_model.draw_receipt()
                         sample_options["output_noise_eval_seed"] = resolved["seed"] + 402
-                    draw = trainer.sample(count, **sample_options)
+                    draw = sample_evaluation(
+                        trainer, count, eval_output_noise=resolved.get("eval_output_noise", False),
+                        **sample_options,
+                    )
                     if isolated:
                         after_state = _noise_state_sha256(sampled_model)
                         after_draws = sampled_model.draw_receipt()

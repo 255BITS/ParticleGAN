@@ -25,7 +25,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config, recipe_defaults
-from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, get_recipe, init, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.denoising_toy import (
     GaussianGrid, ToyGenerator, ToyDiscriminator,
@@ -65,8 +65,9 @@ DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "default.toml"
 
 def training_recipe(cfg):
     """Resolve experiment fields into the public, caller-owned recipe."""
-    return get_recipe(
+    return get_recipe(trainer="ka2",
         model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
+        prior_update="learned" if cfg["prior"] in ("learned", "mog") else "frozen",
         num_classes=cfg["classes"],
         prior_kind="mog" if cfg["prior"] == "mog" else "particles",
         sigma_rel=cfg.get("sigma_rel", 1 / 40) if cfg["prior"] == "mog" else 0.0,
@@ -86,7 +87,8 @@ def make_prior(cfg, device):
     """Build latent sources consistently for training and checkpoint probes."""
     if cfg["prior"] == "mog":
         rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 101)
-        return training_recipe(cfg).make_prior(device=device, generator=rng)
+        # R2 table, then MoG spacing recalibrated on it.
+        return init.deterministic_orthogonal_(training_recipe(cfg).make_prior(device=device, generator=rng))
     return DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"] + 101, device)
 
 
@@ -206,10 +208,13 @@ def train(cfg):
     prior = make_prior(cfg, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2, cfg["seed"] + 102, device)
     g, d = ToyGenerator(cfg).to(device), ToyDiscriminator(cfg).to(device)
+    # Replaces the constructors' Xavier init.
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(d, seed=1)
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg["fused_adam"])
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for model in (ema_g, ema_prior, ema_noise):
         model.requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg["fused_adam"])
     if cfg["noise"] == "learned":
         # A research-only source with its own rate; ordinary optimizers stay extensible.
         opt_g.add_param_group({"params": list(noise.parameters()),

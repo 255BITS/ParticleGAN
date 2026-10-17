@@ -1,0 +1,12 @@
+{
+  "status": "FROZEN_BEFORE_FINAL_GRID_RECEIPT_AUDIT",
+  "utc": "2026-09-30T09:29:54.938848+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-grid-final-review/audit_completed.py": "0b5c4b38a8070ab70f3b9426459ec7ba68fdaa0c69d493cb5d6bdc4791f27431",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra8-monitor/canonical-receipts/screens/runs/grid100/acceptance-receipt.json": "fd9a4eb173c60c60b2a8cf77df5c1f42d210592c8dfda860ba38f07a3e823876",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/source-freeze.json": "09e6e11fd7c862d7d98fca9b5209e93be971d034ab0c6553cbd9a18bdeb6bec2"
+  },
+  "numerical_jobs": 0,
+  "scope": "Stored original canonical receipt/source/artifact integrity and unchanged quality-verdict preservation."
+}

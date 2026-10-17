@@ -1,0 +1,2031 @@
+{
+  "analysis_source": {
+    "bytes": 14739,
+    "path": "reports/forge/k3p-two-pole-horizon-v1/force_analysis.py",
+    "sha256": "8691e9b2ca46966e9fc165b85416971c1846e9b160b14d8d48d270c1ef928272"
+  },
+  "arms": [
+    {
+      "applied_numeric_controls": {
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "input_noise_std": 0.0,
+        "lr": 0.0006,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 2.0,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 170.0,
+        "reg_kappa": 1.0,
+        "total_steps": 80
+      },
+      "arm_id": "word_positive_schedule80",
+      "attempt_id": "200fd64ddd1a42a5bf300e5cae01e0b6",
+      "candidate_id": "k3p-global-repair-v1",
+      "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+      "critic_guard": {
+        "clipped_tensor_count": 0,
+        "clipped_update_count": 0,
+        "eligible_updates": 600,
+        "pre_and_post_gradient_tensors_identical": true
+      },
+      "diagnostic_gate_status": "FAIL",
+      "early_real_squared_gradient_prefactor": 85.0,
+      "final_metrics": {
+        "grad_med": 0.006353974342346191,
+        "mean_abs": 0.08969766646623611
+      },
+      "first_mean_abs_threshold_crossing": null,
+      "historical_prefix_control": {
+        "all24prefix_observations_exactly_match": true,
+        "charged_wall_seconds_added": 0,
+        "final_metrics": {
+          "grad_med": 0.004666268825531006,
+          "mean_abs": 0.04687126353383064,
+          "step": 80
+        },
+        "limit": "Exact recorded trajectory agreement across source identities supports comparability; original optimizer/critic checkpoints were not retained to prove state identity. No historical qualification is transferred.",
+        "original_attempt_id": "abb9e24f625d449da70f6641ec1bce0a",
+        "original_candidate_id": "k3p-global-repair-v1",
+        "original_candidate_revision": "9bc3da4de808300aaa74effda23f1114910ce2c819bda3fcd579bb8b6d5f5e8e",
+        "original_prefix_observations_sha256": "051fa99d1e3740fcd39053b40239dcba2e3543260a584698601eeddc5b3265d9",
+        "original_result_stable_hash": "600ac4a9b0e1915a3c9893e95299f88742aa20aabf269f7c0899545826ad8ba6",
+        "original_source_commit": "9d089ca777e647c6d3b6ad56529ac27f171fdcb6",
+        "original_source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+        "qualification_input": false,
+        "raw_effective_recipe_exactly_matches": true,
+        "recipe_label": "word_positive"
+      },
+      "initial_state_sha256": "eeb42133ae6044163f9ce8b490d55444d9b56636ebe9b5669a9ba242f773216e",
+      "maximum_particle_std": 0.0007366715581156313,
+      "mean_abs_peak": {
+        "step": 800,
+        "value": 0.08969766646623611
+      },
+      "milestones": [
+        {
+          "actual_particle_lr": 6.274470392690987e-05,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.5253108799570162,
+            "cosine": -0.9998096737215507,
+            "left_norm": 0.0017369337815296912,
+            "right_norm": 0.0005406458268769103,
+            "right_to_left_norm_ratio": 0.3112645010570131
+          },
+          "clean_gradient_median": 0.004666268825531006,
+          "critic_lr": 1.1145204267536317e-05,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.9098538661857454,
+            "cosine": -0.09160872466561404,
+            "left_norm": 0.2562282497424171,
+            "right_norm": 0.0242034616556723,
+            "right_to_left_norm_ratio": 0.09446055101263706
+          },
+          "descent_vs_displacement_cosine": 0.9998832787905716,
+          "direct_gain": 1.9999999403953552,
+          "displacement_norm": 0.00019306699687149376,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 2.4045733880484477e-05,
+            "phase": "blend",
+            "prox": 1.939952021245972e-08,
+            "s": 0.01941078816408354
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.04687126353383064,
+          "mean_signed_adversarial_force": -0.0005014059715904295,
+          "mean_signed_l2_force": 0.00015605177031829953,
+          "nearest_pole_distance": 0.9531288146972656,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.012028530240058899,
+              -0.012026041746139526
+            ],
+            "maximum_absolute_gradient_error": 1.4551915228366852e-09,
+            "paired_sigmoid_min_max": [
+              0.4982764720916748,
+              0.5022710561752319
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 12,
+            "positive": 0,
+            "zero": 0
+          },
+          "particle_std": 0.0007352960528805852,
+          "positions_min_max": [
+            -0.04763970524072647,
+            -0.046094320714473724
+          ],
+          "step": 80,
+          "total_gradient_norm": 0.0011964373989030719
+        },
+        {
+          "actual_particle_lr": 5.999999642372131e-05,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.47106619882314466,
+            "cosine": -0.9998480317694604,
+            "left_norm": 0.0017310751478218603,
+            "right_norm": 0.0006225225476231976,
+            "right_to_left_norm_ratio": 0.35961613128493686
+          },
+          "clean_gradient_median": 0.00483124703168869,
+          "critic_lr": 9e-06,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.7753747133042832,
+            "cosine": -0.6337878102579462,
+            "left_norm": 0.25762471302207623,
+            "right_norm": 0.04273983614342713,
+            "right_to_left_norm_ratio": 0.1658995972943197
+          },
+          "descent_vs_displacement_cosine": 0.999908848581293,
+          "direct_gain": 1.9999998807907104,
+          "displacement_norm": 0.00020659268193412572,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 2.7896246592717944e-06,
+            "phase": "b",
+            "prox": 3.2819112760762437e-08,
+            "s": 0.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.053966641426086426,
+          "mean_signed_adversarial_force": -0.0004997148062102497,
+          "mean_signed_l2_force": 0.00017969000327866524,
+          "nearest_pole_distance": 0.946033239364624,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.011987835168838501,
+              -0.01198527216911316
+            ],
+            "maximum_absolute_gradient_error": 1.3387762010097504e-09,
+            "paired_sigmoid_min_max": [
+              0.4982947111129761,
+              0.5022636651992798
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 12,
+            "positive": 0,
+            "zero": 0
+          },
+          "particle_std": 0.0007363590411841869,
+          "positions_min_max": [
+            -0.054736196994781494,
+            -0.053188521414995193
+          ],
+          "step": 200,
+          "total_gradient_norm": 0.0011087002931162715
+        },
+        {
+          "actual_particle_lr": 5.999999821186065e-05,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.3874404595647326,
+            "cosine": -0.9998892677846942,
+            "left_norm": 0.001721564656345536,
+            "right_norm": 0.000760185111590133,
+            "right_to_left_norm_ratio": 0.4415664022772293
+          },
+          "clean_gradient_median": 0.005366731435060501,
+          "critic_lr": 9e-06,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.4858717282645653,
+            "cosine": -0.9270124825046004,
+            "left_norm": 0.2601287904682897,
+            "right_norm": 0.0974063779787129,
+            "right_to_left_norm_ratio": 0.37445443006658263
+          },
+          "descent_vs_displacement_cosine": 0.9998821368226062,
+          "direct_gain": 1.9999999403953552,
+          "displacement_norm": 0.0002064249274553731,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 2.2395603082259186e-05,
+            "phase": "b",
+            "prox": 2.63477687667546e-07,
+            "s": 0.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.06588944047689438,
+          "mean_signed_adversarial_force": -0.0004969695000909269,
+          "mean_signed_l2_force": 0.000219432869926095,
+          "nearest_pole_distance": 0.9341104626655579,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.011921606957912445,
+              -0.011918850243091583
+            ],
+            "maximum_absolute_gradient_error": 1.7462298274040222e-09,
+            "paired_sigmoid_min_max": [
+              0.4983360767364502,
+              0.502260684967041
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 12,
+            "positive": 0,
+            "zero": 0
+          },
+          "particle_std": 0.0007353154360316694,
+          "positions_min_max": [
+            -0.06665794551372528,
+            -0.0651124119758606
+          ],
+          "step": 400,
+          "total_gradient_norm": 0.0009615302551537752
+        },
+        {
+          "actual_particle_lr": 5.9999999999999995e-05,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.24587326509359414,
+            "cosine": -0.9999307365033085,
+            "left_norm": 0.0017098009181103484,
+            "right_norm": 0.0010350878181313295,
+            "right_to_left_norm_ratio": 0.6053849937542999
+          },
+          "clean_gradient_median": 0.006353974342346191,
+          "critic_lr": 9e-06,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.21043046707285887,
+            "cosine": -0.9897186545866729,
+            "left_norm": 0.2657381169230305,
+            "right_norm": 0.17776872166816135,
+            "right_to_left_norm_ratio": 0.668962073362065
+          },
+          "descent_vs_displacement_cosine": 0.9997695553598366,
+          "direct_gain": 2.0,
+          "displacement_norm": 0.00020587003382388502,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 8.55418256833218e-05,
+            "phase": "b",
+            "prox": 1.0063744184662937e-06,
+            "s": 0.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.08969766646623611,
+          "mean_signed_adversarial_force": -0.000493573781568557,
+          "mean_signed_l2_force": 0.00029879415524192154,
+          "nearest_pole_distance": 0.9103022217750549,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.011839501559734344,
+              -0.011836349964141846
+            ],
+            "maximum_absolute_gradient_error": 1.0477378964424133e-09,
+            "paired_sigmoid_min_max": [
+              0.498406320810318,
+              0.5022587180137634
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 12,
+            "positive": 0,
+            "zero": 0
+          },
+          "particle_std": 0.000731982639990747,
+          "positions_min_max": [
+            -0.0904628187417984,
+            -0.08892414718866348
+          ],
+          "step": 800,
+          "total_gradient_norm": 0.0006748947780579329
+        }
+      ],
+      "original_result_stable_hash": "4f815f66d9c828c5c8525659683925242631881bb739045f908e49f8aee7cfd9",
+      "recipe_label": "word_positive",
+      "schedule_horizon": 80,
+      "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "stable_terminal_gate_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.21030233353376387,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.08969766646623611
+          },
+          {
+            "margin": 0.9936460256576538,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.006353974342346191
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.3505038892229398,
+        "status": "FAIL"
+      },
+      "trace_artifacts": [
+        {
+          "bytes": 4222335,
+          "kind": "direct_coordinate_updates_v1",
+          "path": "force-trace.pt",
+          "record_count": 800,
+          "sha256": "d86564b4e707149e4c4a5644299c277be143407f84a1a63c15f645d8ee86c4c8"
+        },
+        {
+          "bytes": 955088,
+          "kind": "direct_coordinate_scalar_updates_v1",
+          "path": "force-trace.jsonl",
+          "record_count": 800,
+          "sha256": "5e51502ea7467fd2e00cb29eab565c384eb7049e1d0b1784e8f6c9d2eb1e266d"
+        },
+        {
+          "bytes": 510464,
+          "kind": "public_component_states_v1",
+          "path": "diagnostic-checkpoints.pt",
+          "record_count": 4,
+          "sha256": "6a3d453ea8787bf8fa25081c702ba6bcac5ca42f1f713300b46a4f9c686c579f"
+        }
+      ],
+      "windows": [
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 948,
+            "zero_or_origin": 12
+          },
+          "coordinate_net_displacement_l1": 0.5624551773071289,
+          "coordinate_path_length": 0.5624551177024841,
+          "mean_abs_change": 0.04687126353383064,
+          "mean_abs_range": [
+            0.0005999990389682353,
+            0.04687126353383064
+          ],
+          "median_adversarial_l2_cancellation": 0.7438701440523008,
+          "median_adversarial_l2_cosine": -0.9997509496886984,
+          "median_critic_payoff_penalty_cancellation": 0.837398903504089,
+          "median_critic_payoff_penalty_cosine": -0.6787824553968951,
+          "median_displacement_norm": 0.002005525166168809,
+          "median_l2_to_adversarial_norm_ratio": 0.14690914162167829,
+          "median_total_gradient_norm": 0.0019631863688118756,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            1,
+            80
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 1440,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.08514454960823059,
+          "coordinate_path_length": 0.08514454960823059,
+          "mean_abs_change": 0.007095377892255783,
+          "mean_abs_range": [
+            0.046925101429224014,
+            0.053966641426086426
+          ],
+          "median_adversarial_l2_cancellation": 0.49779540350254603,
+          "median_adversarial_l2_cosine": -0.9998303655984728,
+          "median_critic_payoff_penalty_cancellation": 0.8677286680933514,
+          "median_critic_payoff_penalty_cosine": -0.26284503843305496,
+          "median_displacement_norm": 0.00020659268193412572,
+          "median_l2_to_adversarial_norm_ratio": 0.33535303057198074,
+          "median_total_gradient_norm": 0.0011527389287948608,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            81,
+            200
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 2400,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.14307363331317902,
+          "coordinate_path_length": 0.14307361841201782,
+          "mean_abs_change": 0.011922799050807953,
+          "mean_abs_range": [
+            0.0540262795984745,
+            0.06588944047689438
+          ],
+          "median_adversarial_l2_cancellation": 0.427845466861511,
+          "median_adversarial_l2_cosine": -0.9998715652855639,
+          "median_critic_payoff_penalty_cancellation": 0.6159751740124624,
+          "median_critic_payoff_penalty_cosine": -0.8569442584563265,
+          "median_displacement_norm": 0.00020650881924666464,
+          "median_l2_to_adversarial_norm_ratio": 0.4007719896576279,
+          "median_total_gradient_norm": 0.0010343841277062893,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            201,
+            400
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 4800,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.2856987416744232,
+          "coordinate_path_length": 0.2856988310813904,
+          "mean_abs_change": 0.023808225989341736,
+          "mean_abs_range": [
+            0.06594903022050858,
+            0.08969766646623611
+          ],
+          "median_adversarial_l2_cancellation": 0.3126776926287913,
+          "median_adversarial_l2_cosine": -0.9999143075122877,
+          "median_critic_payoff_penalty_cancellation": 0.3096234338190741,
+          "median_critic_payoff_penalty_cosine": -0.9748194591867883,
+          "median_displacement_norm": 0.00020620338182197884,
+          "median_l2_to_adversarial_norm_ratio": 0.5236750413836619,
+          "median_total_gradient_norm": 0.0008170288929250091,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            401,
+            800
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 1200,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.0713488906621933,
+          "coordinate_path_length": 0.0713488906621933,
+          "mean_abs_change": 0.005945727229118347,
+          "mean_abs_range": [
+            0.08381140977144241,
+            0.08969766646623611
+          ],
+          "median_adversarial_l2_cancellation": 0.2618196140531901,
+          "median_adversarial_l2_cosine": -0.9999272097080052,
+          "median_critic_payoff_penalty_cancellation": 0.23007211628518326,
+          "median_critic_payoff_penalty_cosine": -0.987276061474245,
+          "median_displacement_norm": 0.00020597326511051506,
+          "median_l2_to_adversarial_norm_ratio": 0.5850939755015845,
+          "median_total_gradient_norm": 0.0007100911461748183,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            701,
+            800
+          ]
+        }
+      ]
+    },
+    {
+      "applied_numeric_controls": {
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "input_noise_std": 0.0,
+        "lr": 0.0006,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 2.0,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 170.0,
+        "reg_kappa": 1.0,
+        "total_steps": 800
+      },
+      "arm_id": "word_positive_schedule800",
+      "attempt_id": "aa10c29d2ca84f2f96ae2ddb9b13088f",
+      "candidate_id": "k3p-global-repair-v1",
+      "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+      "critic_guard": {
+        "clipped_tensor_count": 0,
+        "clipped_update_count": 0,
+        "eligible_updates": 600,
+        "pre_and_post_gradient_tensors_identical": true
+      },
+      "diagnostic_gate_status": "FAIL",
+      "early_real_squared_gradient_prefactor": 85.0,
+      "final_metrics": {
+        "grad_med": 0.004468120634555817,
+        "mean_abs": 0.11110240966081619
+      },
+      "first_mean_abs_threshold_crossing": null,
+      "initial_state_sha256": "eeb42133ae6044163f9ce8b490d55444d9b56636ebe9b5669a9ba242f773216e",
+      "maximum_particle_std": 0.0008667820366099477,
+      "mean_abs_peak": {
+        "step": 183,
+        "value": 0.1365123689174652
+      },
+      "milestones": [
+        {
+          "actual_particle_lr": 0.0012,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.42553408222493483,
+            "cosine": -0.9998506741811345,
+            "left_norm": 0.001680816692114242,
+            "right_norm": 0.0006774593238288491,
+            "right_to_left_norm_ratio": 0.40305366254823194
+          },
+          "clean_gradient_median": 0.0033258646726608276,
+          "critic_lr": 0.0009,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.16603163717728295,
+            "cosine": -0.9876675098540041,
+            "left_norm": 0.258801243466729,
+            "right_norm": 0.3478172949590463,
+            "right_to_left_norm_ratio": 1.3439552696884975
+          },
+          "descent_vs_displacement_cosine": 0.9998584678141683,
+          "direct_gain": 2.0,
+          "displacement_norm": 0.003334361594170332,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.0004285452014300972,
+            "phase": "a",
+            "prox": 0.0,
+            "s": 1.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.05962689593434334,
+          "mean_signed_adversarial_force": -0.00048520651762373745,
+          "mean_signed_l2_force": 0.00019554780737962574,
+          "nearest_pole_distance": 0.9403731226921082,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.011644303798675537,
+              -0.011643707752227783
+            ],
+            "maximum_absolute_gradient_error": 1.0186340659856796e-09,
+            "paired_sigmoid_min_max": [
+              0.4981420338153839,
+              0.501939058303833
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 12,
+            "positive": 0,
+            "zero": 0
+          },
+          "particle_std": 0.0007938503986224532,
+          "positions_min_max": [
+            -0.060455530881881714,
+            -0.05878595635294914
+          ],
+          "step": 80,
+          "total_gradient_norm": 0.0010035268496721983
+        },
+        {
+          "actual_particle_lr": 0.0011989789724349974,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.00026047575798842574,
+            "cosine": -0.9999999992914732,
+            "left_norm": 0.0015695525310558233,
+            "right_norm": 0.0015703682662663425,
+            "right_to_left_norm_ratio": 1.0005197246950188
+          },
+          "clean_gradient_median": 0.003054223954677582,
+          "critic_lr": 0.0009,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.02850142060881034,
+            "cosine": -0.9984713922521921,
+            "left_norm": 0.279281555890733,
+            "right_norm": 0.27543580646600496,
+            "right_to_left_norm_ratio": 0.9862298481814794
+          },
+          "descent_vs_displacement_cosine": 0.9981208617567132,
+          "direct_gain": 1.9982982873916626,
+          "displacement_norm": 0.00013628059241455048,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.0002483540156390518,
+            "phase": "a",
+            "prox": 0.0,
+            "s": 1.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.1359577476978302,
+          "mean_signed_adversarial_force": -0.00045308819971978664,
+          "mean_signed_l2_force": 0.00045332362060435116,
+          "nearest_pole_distance": 0.8640422224998474,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.010880604386329651,
+              -0.010877907276153564
+            ],
+            "maximum_absolute_gradient_error": 1.2223608791828156e-09,
+            "paired_sigmoid_min_max": [
+              0.4979972243309021,
+              0.5015231370925903
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 12,
+            "positive": 0,
+            "zero": 0
+          },
+          "particle_std": 0.00046338432002812624,
+          "positions_min_max": [
+            -0.13642418384552002,
+            -0.13548915088176727
+          ],
+          "step": 200,
+          "total_gradient_norm": 8.178732286978629e-07
+        },
+        {
+          "actual_particle_lr": 0.0006,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.001149632073449547,
+            "cosine": -0.9999978559872702,
+            "left_norm": 0.0014699228676396205,
+            "right_norm": 0.0014684547140894578,
+            "right_to_left_norm_ratio": 0.9990012036804895
+          },
+          "clean_gradient_median": 0.002959880977869034,
+          "critic_lr": 0.0009,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.027034904699908487,
+            "cosine": -0.9986200112537968,
+            "left_norm": 0.275918074071366,
+            "right_norm": 0.2724104880667362,
+            "right_to_left_norm_ratio": 0.9872875815894446
+          },
+          "descent_vs_displacement_cosine": 0.9999996818174257,
+          "direct_gain": 1.0,
+          "displacement_norm": 0.0019685793668031693,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.00024232742725871503,
+            "phase": "a",
+            "prox": 0.0,
+            "s": 1.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.12741799652576447,
+          "mean_signed_adversarial_force": -0.0004243279981892556,
+          "mean_signed_l2_force": 0.0004239049449097365,
+          "nearest_pole_distance": 0.8725820183753967,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.010188907384872437,
+              -0.010186992585659027
+            ],
+            "maximum_absolute_gradient_error": 1.5133991837501526e-09,
+            "paired_sigmoid_min_max": [
+              0.49816593527793884,
+              0.5014592409133911
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 12,
+            "positive": 0,
+            "zero": 0
+          },
+          "particle_std": 0.0005896548391319811,
+          "positions_min_max": [
+            -0.12797221541404724,
+            -0.1265665590763092
+          ],
+          "step": 400,
+          "total_gradient_norm": 3.3780531794036506e-06
+        },
+        {
+          "actual_particle_lr": 3.001373444659152e-05,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 4.737660551736296e-05,
+            "cosine": -0.9999999959385045,
+            "left_norm": 0.001282865160658226,
+            "right_norm": 0.0012828276457829092,
+            "right_to_left_norm_ratio": 0.9999707569614739
+          },
+          "clean_gradient_median": 0.004468120634555817,
+          "critic_lr": 9.021469108619375e-06,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.1369893656925453,
+            "cosine": -0.9967142051932304,
+            "left_norm": 0.27003538097463575,
+            "right_norm": 0.20749629204602296,
+            "right_to_left_norm_ratio": 0.7684040931862665
+          },
+          "descent_vs_displacement_cosine": 0.9998863597047019,
+          "direct_gain": 1.0,
+          "displacement_norm": 7.273532537510619e-05,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.00011904740676982328,
+            "phase": "blend",
+            "prox": 1.3991729019835475e-06,
+            "s": 0.0001947264517916623
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.11110240966081619,
+          "mean_signed_adversarial_force": -0.00037032991531305015,
+          "mean_signed_l2_force": 0.00037031914689578116,
+          "nearest_pole_distance": 0.8888976573944092,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.008886769413948059,
+              -0.008886635303497314
+            ],
+            "maximum_absolute_gradient_error": 2.066371962428093e-09,
+            "paired_sigmoid_min_max": [
+              0.4986693561077118,
+              0.5014519691467285
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 12,
+            "positive": 0,
+            "zero": 0
+          },
+          "particle_std": 0.00030702512594871223,
+          "positions_min_max": [
+            -0.11141432076692581,
+            -0.11077799648046494
+          ],
+          "step": 800,
+          "total_gradient_norm": 1.215538247834047e-07
+        }
+      ],
+      "original_result_stable_hash": "cdea89b41dea1007329a0abf3d46bb94c8b4d7c34c9f345d53e6bff6a85ed5bb",
+      "recipe_label": "word_positive",
+      "schedule_horizon": 800,
+      "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "stable_terminal_gate_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.1888975903391838,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.11110240966081619
+          },
+          {
+            "margin": 0.9955318793654442,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.004468120634555817
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.314829317231973,
+        "status": "FAIL"
+      },
+      "trace_artifacts": [
+        {
+          "bytes": 4220607,
+          "kind": "direct_coordinate_updates_v1",
+          "path": "force-trace.pt",
+          "record_count": 800,
+          "sha256": "3edd9e6a643cf4d95d9b998ec28de2d76460d59288698f055871981f6c4b705e"
+        },
+        {
+          "bytes": 938276,
+          "kind": "direct_coordinate_scalar_updates_v1",
+          "path": "force-trace.jsonl",
+          "record_count": 800,
+          "sha256": "2384f0ddc462301086af99b6be446e1375d197b21c64e31a8e7cd795a954350e"
+        },
+        {
+          "bytes": 510464,
+          "kind": "public_component_states_v1",
+          "path": "diagnostic-checkpoints.pt",
+          "record_count": 4,
+          "sha256": "20f8675c5c7b98ad6c467bb3feec0d4eb825a7e18065a9d2d98e413b44707b9c"
+        }
+      ],
+      "windows": [
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 948,
+            "zero_or_origin": 12
+          },
+          "coordinate_net_displacement_l1": 0.7155227661132812,
+          "coordinate_path_length": 0.7155224680900574,
+          "mean_abs_change": 0.05962689593434334,
+          "mean_abs_range": [
+            0.0005999990389682353,
+            0.05962689593434334
+          ],
+          "median_adversarial_l2_cancellation": 0.7438701440523008,
+          "median_adversarial_l2_cosine": -0.9997509496886984,
+          "median_critic_payoff_penalty_cancellation": 0.8118364518901535,
+          "median_critic_payoff_penalty_cosine": -0.7249035905151038,
+          "median_displacement_norm": 0.002496616216376424,
+          "median_l2_to_adversarial_norm_ratio": 0.14690914162167829,
+          "median_total_gradient_norm": 0.0019631863688118756,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            1,
+            80
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 1440,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.9159703850746155,
+          "coordinate_path_length": 0.9294593334197998,
+          "mean_abs_change": 0.07633085176348686,
+          "mean_abs_range": [
+            0.06059497967362404,
+            0.1365123689174652
+          ],
+          "median_adversarial_l2_cancellation": 0.0885814490182589,
+          "median_adversarial_l2_cosine": -0.9999642161300253,
+          "median_critic_payoff_penalty_cancellation": 0.02850936563993689,
+          "median_critic_payoff_penalty_cosine": -0.9984733575597857,
+          "median_displacement_norm": 0.0028548064874485135,
+          "median_l2_to_adversarial_norm_ratio": 0.837428343753486,
+          "median_total_gradient_norm": 0.00026199106650892645,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            81,
+            200
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 2400,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.10247714817523956,
+          "coordinate_path_length": 1.0977599620819092,
+          "mean_abs_change": -0.008539751172065735,
+          "mean_abs_range": [
+            0.12717147171497345,
+            0.13591858744621277
+          ],
+          "median_adversarial_l2_cancellation": 0.00113850507801565,
+          "median_adversarial_l2_cosine": -0.9999979548775275,
+          "median_critic_payoff_penalty_cancellation": 0.027851531317017144,
+          "median_critic_payoff_penalty_cosine": -0.998539233798843,
+          "median_displacement_norm": 0.0019707344472408295,
+          "median_l2_to_adversarial_norm_ratio": 1.0001789090249718,
+          "median_total_gradient_norm": 3.3875913914016564e-06,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            201,
+            400
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 4800,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.1957869827747345,
+          "coordinate_path_length": 1.6784919500350952,
+          "mean_abs_change": -0.016315586864948273,
+          "mean_abs_range": [
+            0.11109573394060135,
+            0.1273183971643448
+          ],
+          "median_adversarial_l2_cancellation": 0.0008646152604771943,
+          "median_adversarial_l2_cosine": -0.9999988893528153,
+          "median_critic_payoff_penalty_cancellation": 0.026719058805740877,
+          "median_critic_payoff_penalty_cosine": -0.9986688885973818,
+          "median_displacement_norm": 0.001363493676763028,
+          "median_l2_to_adversarial_norm_ratio": 1.0000327877762065,
+          "median_total_gradient_norm": 2.33791911341541e-06,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            401,
+            800
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 1200,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.02181769162416458,
+          "coordinate_path_length": 0.062164850533008575,
+          "mean_abs_change": -0.001818142831325531,
+          "mean_abs_range": [
+            0.11109573394060135,
+            0.11285022646188736
+          ],
+          "median_adversarial_l2_cancellation": 9.75390123986534e-05,
+          "median_adversarial_l2_cosine": -0.9999999868957881,
+          "median_critic_payoff_penalty_cancellation": 0.09836249154288902,
+          "median_critic_payoff_penalty_cosine": -0.9976437510356322,
+          "median_displacement_norm": 0.0001477135156164877,
+          "median_l2_to_adversarial_norm_ratio": 1.0000327877762065,
+          "median_total_gradient_norm": 2.513625645406137e-07,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            701,
+            800
+          ]
+        }
+      ]
+    },
+    {
+      "applied_numeric_controls": {
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "input_noise_std": 0.5,
+        "lr": 0.006375,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 1.0,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "total_steps": 80
+      },
+      "arm_id": "movement_control_schedule80",
+      "attempt_id": "bd148c44722a49ceb91c21c309c25514",
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "candidate_revision": "3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402",
+      "critic_guard": {
+        "clipped_tensor_count": 0,
+        "clipped_update_count": 0,
+        "eligible_updates": 600,
+        "pre_and_post_gradient_tensors_identical": true
+      },
+      "diagnostic_gate_status": "PASS",
+      "early_real_squared_gradient_prefactor": 0.5,
+      "final_metrics": {
+        "grad_med": 0.23149800300598145,
+        "mean_abs": 1.0542289018630981
+      },
+      "first_mean_abs_threshold_crossing": 48,
+      "historical_prefix_control": {
+        "all24prefix_observations_exactly_match": true,
+        "charged_wall_seconds_added": 0,
+        "final_metrics": {
+          "grad_med": 0.2004294991493225,
+          "mean_abs": 0.5928364992141724,
+          "step": 80
+        },
+        "limit": "Exact recorded trajectory agreement across source identities supports comparability; original optimizer/critic checkpoints were not retained to prove state identity. No historical qualification is transferred.",
+        "original_attempt_id": "1e0e2fbd6d1840bd9271785ac1eaf2ca",
+        "original_candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+        "original_candidate_revision": "6d51dba8dfc9eaec9c9eead65aeb5a59706fcb65c7b492b88647043eb322d0b9",
+        "original_prefix_observations_sha256": "f5ad3027eabd946313c0d04099d327cfd8557cef8a3b54747bc0c8c2dda71755",
+        "original_result_stable_hash": "7bd4f84c7adbacdffb8454196e66905215bd3be6747bee379276192e2ed995b3",
+        "original_source_commit": "72da7275034422bc171f9b9b1955c9b150cda045",
+        "original_source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d",
+        "qualification_input": false,
+        "raw_effective_recipe_exactly_matches": true,
+        "recipe_label": "movement_control"
+      },
+      "initial_state_sha256": "11bd11dfbfdad5a81d88b67d78c99c3c2ea1147fba4259da845c3cdf5064fadc",
+      "maximum_particle_std": 1.0554903745651245,
+      "mean_abs_peak": {
+        "step": 800,
+        "value": 1.0542289018630981
+      },
+      "milestones": [
+        {
+          "actual_particle_lr": 0.0006666624990915081,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.5672230695935374,
+            "cosine": -0.9830782127101778,
+            "left_norm": 0.024516872340766743,
+            "right_norm": 0.006872796404879661,
+            "right_to_left_norm_ratio": 0.2803292487456302
+          },
+          "clean_gradient_median": 0.2004294991493225,
+          "critic_lr": 7.894519689504891e-05,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.38604478222399197,
+            "cosine": -0.9686851602209162,
+            "left_norm": 0.20137354575758704,
+            "right_norm": 0.09301156855277068,
+            "right_to_left_norm_ratio": 0.4618857367925466
+          },
+          "descent_vs_displacement_cosine": 0.9771221515312624,
+          "direct_gain": 2.0,
+          "displacement_norm": 0.0027531518135219812,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.0027856440283358097,
+            "phase": "blend",
+            "prox": 0.004466908518224955,
+            "s": 0.01941078816408354
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.5928364992141724,
+          "mean_signed_adversarial_force": -0.0009092462132684886,
+          "mean_signed_l2_force": -0.00010830285464180633,
+          "nearest_pole_distance": 0.40716350078582764,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.2002445012331009,
+              0.15386690199375153
+            ],
+            "maximum_absolute_gradient_error": 2.7939677238464355e-09,
+            "paired_sigmoid_min_max": [
+              0.5067213773727417,
+              0.533893346786499
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 6,
+            "positive": 6,
+            "zero": 0
+          },
+          "particle_std": 0.5951055884361267,
+          "positions_min_max": [
+            -0.629975438117981,
+            0.6870835423469543
+          ],
+          "step": 80,
+          "total_gradient_norm": 0.0178049448877573
+        },
+        {
+          "actual_particle_lr": 0.0006375,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.6085278642042004,
+            "cosine": -0.9910159646584096,
+            "left_norm": 0.03175066736755876,
+            "right_norm": 0.007784745069443611,
+            "right_to_left_norm_ratio": 0.245183667458835
+          },
+          "clean_gradient_median": 0.24851563572883606,
+          "critic_lr": 6.374999999999999e-05,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.15954054358044992,
+            "cosine": -0.9932290178096899,
+            "left_norm": 0.17231064420683082,
+            "right_norm": 0.12767199938639248,
+            "right_to_left_norm_ratio": 0.7409408743962623
+          },
+          "descent_vs_displacement_cosine": 0.9891921702001145,
+          "direct_gain": 2.0,
+          "displacement_norm": 0.0022458864841610193,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.004823876079171896,
+            "phase": "b",
+            "prox": 0.009647752158343792,
+            "s": 0.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.6720268130302429,
+          "mean_signed_adversarial_force": -0.0007706438773311675,
+          "mean_signed_l2_force": -0.00010961312364088371,
+          "nearest_pole_distance": 0.32797321677207947,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.248347207903862,
+              0.2070622444152832
+            ],
+            "maximum_absolute_gradient_error": 1.862645149230957e-09,
+            "paired_sigmoid_min_max": [
+              0.5061075091362,
+              0.5331224799156189
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 6,
+            "positive": 6,
+            "zero": 0
+          },
+          "particle_std": 0.6740226149559021,
+          "positions_min_max": [
+            -0.7086941599845886,
+            0.7665005922317505
+          ],
+          "step": 200,
+          "total_gradient_norm": 0.024058399721980095
+        },
+        {
+          "actual_particle_lr": 0.0006374999810010195,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.6104499317503559,
+            "cosine": -0.9954855809801962,
+            "left_norm": 0.03816436019676798,
+            "right_norm": 0.00926580691631763,
+            "right_to_left_norm_ratio": 0.24278690559844165
+          },
+          "clean_gradient_median": 0.27871406078338623,
+          "critic_lr": 6.374999999999999e-05,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.025970731781733928,
+            "cosine": -0.9998380601447041,
+            "left_norm": 0.11525798885934559,
+            "right_norm": 0.12101429672533941,
+            "right_to_left_norm_ratio": 1.0499428102378092
+          },
+          "descent_vs_displacement_cosine": 0.9954258516919334,
+          "direct_gain": 1.9999999403953552,
+          "displacement_norm": 0.0022155288606882095,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.004424377344548702,
+            "phase": "b",
+            "prox": 0.008848754689097404,
+            "s": 0.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.800724983215332,
+          "mean_signed_adversarial_force": -0.0005704986397176981,
+          "mean_signed_l2_force": -0.00011057305528083816,
+          "nearest_pole_distance": 0.199274942278862,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.2897949516773224,
+              0.2570476830005646
+            ],
+            "maximum_absolute_gradient_error": 2.7939677238464355e-09,
+            "paired_sigmoid_min_max": [
+              0.5004505515098572,
+              0.5251128077507019
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 6,
+            "positive": 6,
+            "zero": 0
+          },
+          "particle_std": 0.802394688129425,
+          "positions_min_max": [
+            -0.8369934558868408,
+            0.8953614830970764
+          ],
+          "step": 400,
+          "total_gradient_norm": 0.02895374223589897
+        },
+        {
+          "actual_particle_lr": 0.000637499962002039,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.4747297247701493,
+            "cosine": -0.9961015270483656,
+            "left_norm": 0.034073813299483745,
+            "right_norm": 0.012186502587278268,
+            "right_to_left_norm_ratio": 0.35765009569571443
+          },
+          "clean_gradient_median": 0.23149800300598145,
+          "critic_lr": 6.374999999999999e-05,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.78632956586961,
+            "cosine": -0.5252990133018308,
+            "left_norm": 0.03462798363103789,
+            "right_norm": 0.005949181814016857,
+            "right_to_left_norm_ratio": 0.1718027210999506
+          },
+          "descent_vs_displacement_cosine": 0.9946356824524111,
+          "direct_gain": 1.9999998807907104,
+          "displacement_norm": 0.0021727210842072964,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 7.281201760633849e-06,
+            "phase": "b",
+            "prox": 1.4562403521267697e-05,
+            "s": 0.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 1.0542289018630981,
+          "mean_signed_adversarial_force": -0.000532527978066355,
+          "mean_signed_l2_force": -0.00011022281978512183,
+          "nearest_pole_distance": 0.07337275892496109,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.26227590441703796,
+              0.23140831291675568
+            ],
+            "maximum_absolute_gradient_error": 2.7939677238464355e-09,
+            "paired_sigmoid_min_max": [
+              0.4833502769470215,
+              0.5082835555076599
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 6,
+            "positive": 6,
+            "zero": 0
+          },
+          "particle_std": 1.0554903745651245,
+          "positions_min_max": [
+            -1.0904167890548706,
+            1.1485711336135864
+          ],
+          "step": 800,
+          "total_gradient_norm": 0.02196114882826805
+        }
+      ],
+      "original_result_stable_hash": "2f8f7a911fccfc2e3eda6449cdf7e442de2d37b719c2b8691b06860a32cd5416",
+      "recipe_label": "movement_control",
+      "schedule_horizon": 80,
+      "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "stable_terminal_gate_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.25,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 200,
+          "first_pass_step": 67,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 23,
+          "passing_suffix": 23,
+          "stable_from_seconds": null,
+          "stable_from_step": 67
+        },
+        "metrics": [
+          {
+            "margin": 0.7542289018630981,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 1.0542289018630981
+          },
+          {
+            "margin": 0.7685019969940186,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.23149800300598145
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "trace_artifacts": [
+        {
+          "bytes": 4222335,
+          "kind": "direct_coordinate_updates_v1",
+          "path": "force-trace.pt",
+          "record_count": 800,
+          "sha256": "2d70897e8d6a27990250d78a7b5d1303f1177741e37a916a297c233b272d4067"
+        },
+        {
+          "bytes": 943400,
+          "kind": "direct_coordinate_scalar_updates_v1",
+          "path": "force-trace.jsonl",
+          "record_count": 800,
+          "sha256": "d80e5368b2cf8ef100e876218840ef4a304291067e8faac2930ee4bd17dc37e1"
+        },
+        {
+          "bytes": 510464,
+          "kind": "public_component_states_v1",
+          "path": "diagnostic-checkpoints.pt",
+          "record_count": 4,
+          "sha256": "66cf0db48f562896a44c59800c656c862035f5fa4be7909a67d53ad18809d54a"
+        }
+      ],
+      "windows": [
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 150,
+            "outward": 798,
+            "zero_or_origin": 12
+          },
+          "coordinate_net_displacement_l1": 7.114037990570068,
+          "coordinate_path_length": 8.082769393920898,
+          "mean_abs_change": 0.5928364992141724,
+          "mean_abs_range": [
+            0.0063749863766133785,
+            0.5928364992141724
+          ],
+          "median_adversarial_l2_cancellation": 0.5532062246905511,
+          "median_adversarial_l2_cosine": -0.9823746861513104,
+          "median_critic_payoff_penalty_cancellation": 0.01745564925525398,
+          "median_critic_payoff_penalty_cosine": -0.9997320723564285,
+          "median_displacement_norm": 0.02039946708828211,
+          "median_l2_to_adversarial_norm_ratio": 0.29867307583678493,
+          "median_total_gradient_norm": 0.007816038560122252,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            1,
+            80
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 1440,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.9502835869789124,
+          "coordinate_path_length": 0.9502836465835571,
+          "mean_abs_change": 0.07919031381607056,
+          "mean_abs_range": [
+            0.5935839414596558,
+            0.6720268130302429
+          ],
+          "median_adversarial_l2_cancellation": 0.5951053903324167,
+          "median_adversarial_l2_cosine": -0.9873494671042661,
+          "median_critic_payoff_penalty_cancellation": 0.2530464753517264,
+          "median_critic_payoff_penalty_cosine": -0.9827376966050169,
+          "median_displacement_norm": 0.0022620471427217126,
+          "median_l2_to_adversarial_norm_ratio": 0.2565646648763284,
+          "median_total_gradient_norm": 0.02139249537140131,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            81,
+            200
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 2400,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 1.5443789958953857,
+          "coordinate_path_length": 1.5443791151046753,
+          "mean_abs_change": 0.1286981701850891,
+          "mean_abs_range": [
+            0.6726751327514648,
+            0.800724983215332
+          ],
+          "median_adversarial_l2_cancellation": 0.6147928542909197,
+          "median_adversarial_l2_cosine": -0.9942026701498079,
+          "median_critic_payoff_penalty_cancellation": 0.05026989319968102,
+          "median_critic_payoff_penalty_cosine": -0.9992394732341536,
+          "median_displacement_norm": 0.002228429075330496,
+          "median_l2_to_adversarial_norm_ratio": 0.23969303915039947,
+          "median_total_gradient_norm": 0.02732687070965767,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            201,
+            400
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 4800,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 3.042046070098877,
+          "coordinate_path_length": 3.0420451164245605,
+          "mean_abs_change": 0.2535039186477661,
+          "mean_abs_range": [
+            0.8013646006584167,
+            1.0542289018630981
+          ],
+          "median_adversarial_l2_cancellation": 0.5649801574687663,
+          "median_adversarial_l2_cosine": -0.9961636409732124,
+          "median_critic_payoff_penalty_cancellation": 0.20059512991224177,
+          "median_critic_payoff_penalty_cosine": -0.9860464129389579,
+          "median_displacement_norm": 0.002196007641032338,
+          "median_l2_to_adversarial_norm_ratio": 0.278907592553691,
+          "median_total_gradient_norm": 0.027813425287604332,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            401,
+            800
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 1200,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.7550811171531677,
+          "coordinate_path_length": 0.7550811171531677,
+          "mean_abs_change": 0.0629233717918396,
+          "mean_abs_range": [
+            0.9919365048408508,
+            1.0542289018630981
+          ],
+          "median_adversarial_l2_cancellation": 0.5023623778626095,
+          "median_adversarial_l2_cosine": -0.9961830951868438,
+          "median_critic_payoff_penalty_cancellation": 0.813221487719219,
+          "median_critic_payoff_penalty_cosine": 0.14815325917799602,
+          "median_displacement_norm": 0.0021799467504024506,
+          "median_l2_to_adversarial_norm_ratio": 0.33250053341031305,
+          "median_total_gradient_norm": 0.02381247654557228,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            701,
+            800
+          ]
+        }
+      ]
+    },
+    {
+      "applied_numeric_controls": {
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "input_noise_std": 0.5,
+        "lr": 0.006375,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 1.0,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "total_steps": 800
+      },
+      "arm_id": "movement_control_schedule800",
+      "attempt_id": "21bdde76d2f045e98b829627eb9071f1",
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "candidate_revision": "3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402",
+      "critic_guard": {
+        "clipped_tensor_count": 0,
+        "clipped_update_count": 0,
+        "eligible_updates": 600,
+        "pre_and_post_gradient_tensors_identical": true
+      },
+      "diagnostic_gate_status": "PASS",
+      "early_real_squared_gradient_prefactor": 0.5,
+      "final_metrics": {
+        "grad_med": 0.07788927108049393,
+        "mean_abs": 0.9759703278541565
+      },
+      "first_mean_abs_threshold_crossing": 94,
+      "initial_state_sha256": "11bd11dfbfdad5a81d88b67d78c99c3c2ea1147fba4259da845c3cdf5064fadc",
+      "maximum_particle_std": 0.9759706854820251,
+      "mean_abs_peak": {
+        "step": 800,
+        "value": 0.9759703278541565
+      },
+      "milestones": [
+        {
+          "actual_particle_lr": 0.012660790286958217,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.5691701071909765,
+            "cosine": -0.9858446707805264,
+            "left_norm": 0.005110682641073134,
+            "right_norm": 0.0014208710909373644,
+            "right_to_left_norm_ratio": 0.278019824498242
+          },
+          "clean_gradient_median": 0.06671559065580368,
+          "critic_lr": 0.006375,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.013999529862743275,
+            "cosine": -0.9996172717165267,
+            "left_norm": 0.2886168683710725,
+            "right_norm": 0.2898607404366908,
+            "right_to_left_norm_ratio": 1.0043097691158476
+          },
+          "descent_vs_displacement_cosine": 0.978043228142381,
+          "direct_gain": 1.9860063195228577,
+          "displacement_norm": 0.031062491238117218,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.030114538967609406,
+            "phase": "a",
+            "prox": 0.0,
+            "s": 1.0
+          },
+          "input_noise_std": 0.006249999999999978,
+          "mean_abs": 0.10820866376161575,
+          "mean_signed_adversarial_force": 0.00023856938059907407,
+          "mean_signed_l2_force": -0.0001304501056438312,
+          "nearest_pole_distance": 0.8917913436889648,
+          "paired_loss_derivative_validation": {
+            "checked": false,
+            "reason": "Actual update used input noise; clean scores cannot reconstruct that draw."
+          },
+          "particle_sign_counts": {
+            "negative": 6,
+            "positive": 6,
+            "zero": 0
+          },
+          "particle_std": 0.12540894746780396,
+          "positions_min_max": [
+            -0.18460077047348022,
+            0.2660594582557678
+          ],
+          "step": 80,
+          "total_gradient_norm": 0.0037175652105361223
+        },
+        {
+          "actual_particle_lr": 0.006375,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.0713447441780606,
+            "cosine": -0.9903229116641555,
+            "left_norm": 0.010094112930531089,
+            "right_norm": 0.009778180153718084,
+            "right_to_left_norm_ratio": 0.968701283709892
+          },
+          "clean_gradient_median": 0.06783010065555573,
+          "critic_lr": 0.006375,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.13642635262259065,
+            "cosine": -0.9630983288253521,
+            "left_norm": 0.09304684674454165,
+            "right_norm": 0.09069136563250169,
+            "right_to_left_norm_ratio": 0.9746849979934635
+          },
+          "descent_vs_displacement_cosine": 0.9883409721132697,
+          "direct_gain": 1.0,
+          "displacement_norm": 0.02469353936612606,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.002548222430050373,
+            "phase": "a",
+            "prox": 0.0,
+            "s": 1.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.8468523621559143,
+          "mean_signed_adversarial_force": -0.0003998186148237437,
+          "mean_signed_l2_force": -4.2655738070607185e-06,
+          "nearest_pole_distance": 0.1531476378440857,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.07881468534469604,
+              0.05941646546125412
+            ],
+            "maximum_absolute_gradient_error": 1.6298145055770874e-09,
+            "paired_sigmoid_min_max": [
+              0.496062308549881,
+              0.5088374614715576
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 6,
+            "positive": 6,
+            "zero": 0
+          },
+          "particle_std": 0.8468604683876038,
+          "positions_min_max": [
+            -0.8561564087867737,
+            0.8463099598884583
+          ],
+          "step": 200,
+          "total_gradient_norm": 0.0014177836710587144
+        },
+        {
+          "actual_particle_lr": 0.006375,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.1601636089866491,
+            "cosine": -0.953336411065047,
+            "left_norm": 0.010860062780375435,
+            "right_norm": 0.00985053549004888,
+            "right_to_left_norm_ratio": 0.9070422233515252
+          },
+          "clean_gradient_median": 0.05097592622041702,
+          "critic_lr": 0.006375,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.27794792075904423,
+            "cosine": -0.8463108463025595,
+            "left_norm": 0.09402604108130293,
+            "right_norm": 0.09014258109975723,
+            "right_to_left_norm_ratio": 0.958698037938365
+          },
+          "descent_vs_displacement_cosine": 0.9885187648398552,
+          "direct_gain": 1.0,
+          "displacement_norm": 0.022099805995821953,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 0.0024408306926488876,
+            "phase": "a",
+            "prox": 0.0,
+            "s": 1.0
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.853104293346405,
+          "mean_signed_adversarial_force": -0.0009395346860401332,
+          "mean_signed_l2_force": -6.182429842738202e-06,
+          "nearest_pole_distance": 0.1468956619501114,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.09448035806417465,
+              0.048798419535160065
+            ],
+            "maximum_absolute_gradient_error": 3.725290298461914e-09,
+            "paired_sigmoid_min_max": [
+              0.49186891317367554,
+              0.5133277177810669
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 6,
+            "positive": 6,
+            "zero": 0
+          },
+          "particle_std": 0.8531179428100586,
+          "positions_min_max": [
+            -0.8630720376968384,
+            0.8529412150382996
+          ],
+          "step": 400,
+          "total_gradient_norm": 0.003317084163427353
+        },
+        {
+          "actual_particle_lr": 0.0006371813113477422,
+          "adversarial_vs_particle_l2": {
+            "cancellation_ratio": 0.00025871451444505454,
+            "cosine": -0.9999998718617404,
+            "left_norm": 0.011269712935374168,
+            "right_norm": 0.011268506757241857,
+            "right_to_left_norm_ratio": 0.9998929717075112
+          },
+          "clean_gradient_median": 0.07788927108049393,
+          "critic_lr": 6.390207285272057e-05,
+          "critic_payoff_vs_penalty": {
+            "cancellation_ratio": 0.030553649708882642,
+            "cosine": -0.9999872849430631,
+            "left_norm": 0.01808580458996896,
+            "right_norm": 0.017016942441509947,
+            "right_to_left_norm_ratio": 0.940900492253917
+          },
+          "descent_vs_displacement_cosine": 0.9980179831913725,
+          "direct_gain": 1.9980854392051697,
+          "displacement_norm": 0.0021545556373894215,
+          "existing_penalty": {
+            "applied": true,
+            "center": 1.0,
+            "pen": 6.597197352675721e-05,
+            "phase": "blend",
+            "prox": 0.0001308193022850901,
+            "s": 0.0001947264517916623
+          },
+          "input_noise_std": 0.0,
+          "mean_abs": 0.9759703278541565,
+          "mean_signed_adversarial_force": 4.7858725338301156e-06,
+          "mean_signed_l2_force": -6.432179361581802e-06,
+          "nearest_pole_distance": 0.0240296870470047,
+          "paired_loss_derivative_validation": {
+            "checked": true,
+            "clean_D_prime_at_preupdate_particles_min_max": [
+              -0.07794320583343506,
+              0.07816343754529953
+            ],
+            "maximum_absolute_gradient_error": 1.862645149230957e-09,
+            "paired_sigmoid_min_max": [
+              0.4993762969970703,
+              0.5014186501502991
+            ],
+            "scope": "Existing critic state after its update and pre-generator coordinates; no sample draws or optimizer updates."
+          },
+          "particle_sign_counts": {
+            "negative": 6,
+            "positive": 6,
+            "zero": 0
+          },
+          "particle_std": 0.9759706854820251,
+          "positions_min_max": [
+            -0.9759098887443542,
+            0.9784650802612305
+          ],
+          "step": 800,
+          "total_gradient_norm": 5.8309642554377206e-06
+        }
+      ],
+      "original_result_stable_hash": "e705a4e489612c381937c096ff6ebea0914bb098e1885477f14cf5da71caff61",
+      "recipe_label": "movement_control",
+      "schedule_horizon": 800,
+      "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "stable_terminal_gate_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.2925,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 234,
+          "first_pass_step": 100,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 100
+        },
+        "metrics": [
+          {
+            "margin": 0.6759703278541564,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.9759703278541565
+          },
+          {
+            "margin": 0.9221107289195061,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.07788927108049393
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "trace_artifacts": [
+        {
+          "bytes": 4220607,
+          "kind": "direct_coordinate_updates_v1",
+          "path": "force-trace.pt",
+          "record_count": 800,
+          "sha256": "dee95de8a1b649013bf19faecc83078f182a6f016a12dd933009993f4521528c"
+        },
+        {
+          "bytes": 933481,
+          "kind": "direct_coordinate_scalar_updates_v1",
+          "path": "force-trace.jsonl",
+          "record_count": 800,
+          "sha256": "af28b64234d72383486e51dc2759dbf82d1f122a04bcc3dc5faf93d0566190a6"
+        },
+        {
+          "bytes": 510464,
+          "kind": "public_component_states_v1",
+          "path": "diagnostic-checkpoints.pt",
+          "record_count": 4,
+          "sha256": "3289099c9052ea9b1779959e8b7d8c2771f5bc78070855f379e22adfea796ab6"
+        }
+      ],
+      "windows": [
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 385,
+            "outward": 563,
+            "zero_or_origin": 12
+          },
+          "coordinate_net_displacement_l1": 1.2985039949417114,
+          "coordinate_path_length": 5.061071395874023,
+          "mean_abs_change": 0.10820866376161575,
+          "mean_abs_range": [
+            0.0063749863766133785,
+            0.10820866376161575
+          ],
+          "median_adversarial_l2_cancellation": 0.9484988645914328,
+          "median_adversarial_l2_cosine": -0.3038536808819184,
+          "median_critic_payoff_penalty_cancellation": 0.13775590107286287,
+          "median_critic_payoff_penalty_cosine": -0.9770900033715113,
+          "median_displacement_norm": 0.020989801734685898,
+          "median_l2_to_adversarial_norm_ratio": 0.05523353396468478,
+          "median_total_gradient_norm": 0.009224920067936182,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            1,
+            80
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 1440,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 8.863724708557129,
+          "coordinate_path_length": 10.802576065063477,
+          "mean_abs_change": 0.7386436983942986,
+          "mean_abs_range": [
+            0.11725345253944397,
+            0.8468835949897766
+          ],
+          "median_adversarial_l2_cancellation": 0.08293739102263706,
+          "median_adversarial_l2_cosine": -0.9955103822265796,
+          "median_critic_payoff_penalty_cancellation": 0.01770951406042419,
+          "median_critic_payoff_penalty_cosine": -0.9998511215224086,
+          "median_displacement_norm": 0.02629922516644001,
+          "median_l2_to_adversarial_norm_ratio": 0.8857119264329509,
+          "median_total_gradient_norm": 0.0016431555268354714,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            81,
+            200
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 2400,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.07864415645599365,
+          "coordinate_path_length": 15.911322593688965,
+          "mean_abs_change": 0.006251931190490723,
+          "mean_abs_range": [
+            0.8468733429908752,
+            0.853104293346405
+          ],
+          "median_adversarial_l2_cancellation": 0.1590822029893924,
+          "median_adversarial_l2_cosine": -0.9537149302006078,
+          "median_critic_payoff_penalty_cancellation": 0.25573333147356925,
+          "median_critic_payoff_penalty_cosine": -0.8815465800069944,
+          "median_displacement_norm": 0.022275966592133045,
+          "median_l2_to_adversarial_norm_ratio": 0.9829608295544168,
+          "median_total_gradient_norm": 0.0032482314854860306,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            201,
+            400
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 4800,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 1.4743918180465698,
+          "coordinate_path_length": 17.926790237426758,
+          "mean_abs_change": 0.12286603450775146,
+          "mean_abs_range": [
+            0.8531398773193359,
+            0.9759703278541565
+          ],
+          "median_adversarial_l2_cancellation": 0.01760952168643163,
+          "median_adversarial_l2_cosine": -0.9993938226158282,
+          "median_critic_payoff_penalty_cancellation": 0.03623495421917861,
+          "median_critic_payoff_penalty_cosine": -0.9975615069681548,
+          "median_displacement_norm": 0.012531684711575508,
+          "median_l2_to_adversarial_norm_ratio": 0.9979259814433492,
+          "median_total_gradient_norm": 0.0003510908136377111,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            401,
+            800
+          ]
+        },
+        {
+          "adversarial_force_coordinate_events": {
+            "inward": 0,
+            "outward": 1200,
+            "zero_or_origin": 0
+          },
+          "coordinate_net_displacement_l1": 0.5993844866752625,
+          "coordinate_path_length": 1.1830832958221436,
+          "mean_abs_change": 0.04994875192642212,
+          "mean_abs_range": [
+            0.9269475936889648,
+            0.9759703278541565
+          ],
+          "median_adversarial_l2_cancellation": 0.0004489822035241758,
+          "median_adversarial_l2_cosine": -0.9999997367792852,
+          "median_critic_payoff_penalty_cancellation": 0.01628775726564647,
+          "median_critic_payoff_penalty_cosine": -0.9998516501100259,
+          "median_displacement_norm": 0.0029767852975055575,
+          "median_l2_to_adversarial_norm_ratio": 0.9994731872752466,
+          "median_total_gradient_norm": 9.975833563657943e-06,
+          "optimizer_coordinate_updates_opposing_current_descent": 0,
+          "updates": [
+            701,
+            800
+          ]
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "cancellation_ratio": "norm(left+right)/(norm(left)+norm(right)); near zero means opposing vectors nearly cancel.",
+    "clean_RpGAN_adversarial_gradient": "-sigmoid(D(real_i)-D(x_i))*D_prime(x_i)/12; real score is detached.",
+    "early_real_squared_gradient_prefactor": "reg_coeff/(2*sample_dimension); sample_dimension=1 here. Later blend/anchor terms differ and are recorded separately.",
+    "first_mean_abs_threshold_crossing": "Trace-only travel threshold; does not replace the certified stable terminal grade.",
+    "force": "Negative loss gradient; scalar signs describe coordinate direction, not raw critic derivative.",
+    "particle_l2_gradient": ".04*x/12, from the unchanged .02*mean(x^2) host term."
+  },
+  "findings": [
+    "Neither word-positive arm reaches mean_abs .3 during 800 updates. Schedule80 keeps moving slowly; schedule800 reaches a small-radius adversarial/L2 balance and its radius later decreases.",
+    "The word schedule800 adversarial and restoring L2 vectors nearly cancel at retained milestones200/400/800. Critic payoff and penalty gradients also oppose; this is measured vector cancellation, not evidence of a broken update binding.",
+    "The 1D host's early squared-real-gradient prefactor is85 for the word recipe versus .5 for the movement control. The recorded small slopes and penalty/payoff cancellation are consistent with a strongly flattened word critic; the multi-control recipe contrast cannot establish coefficient-only causality.",
+    "All four arms have zero critic guard clipping despite 600 eligible updates. The guard cannot explain the measured word plateau in these runs.",
+    "The word recipe remains one-sided, with a small nonzero coordinate spread. Rowwise relativistic pairing can produce unequal gradients even from identical clean zero coordinates; noise is not its only possible symmetry source.",
+    "Both movement-control arms retain six negative and six positive particles at the end and pass their complete declared terminal checks. Diagnostic movement and sign balance do not confer ordinary Tier1 or word-task qualification."
+  ],
+  "kernel_sources": [
+    {
+      "bytes": 1016,
+      "path": "particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    {
+      "bytes": 14853,
+      "path": "particlegan/grad_regularizers.py",
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    {
+      "bytes": 33012,
+      "path": "particlegan/k3p.py",
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    {
+      "bytes": 6753,
+      "path": "benchmarks/locked_shared/two_pole.py",
+      "sha256": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e"
+    },
+    {
+      "bytes": 12231,
+      "path": "experiments/forge/two_pole_observer.py",
+      "sha256": "452036923c18aa459601ee83b1fb781bfbd5c9e777ccf22612aabb15a4c9b006"
+    }
+  ],
+  "limits": [
+    "Only retained single-seed declared arms are analyzed; no seed study, fresh training, added sample draws or modified gate.",
+    "Optimizer normalization can produce finite steps near force cancellation; small instantaneous gradients alone do not prove convergence. Window drift and path length are provided separately.",
+    "Schedule horizon changes LR/noise durations and LR-dependent penalty/anchor timing together; it is not an isolated LR intervention.",
+    "Both fixed80 prefixes reproduce all24 original observations and effective recipes exactly. Original critic/optimizer checkpoints were not retained, so historical full-state identity cannot be proved."
+  ],
+  "optimizer_updates_added": 0,
+  "plans": {
+    "bytes": 6704,
+    "path": "reports/forge/k3p-two-pole-horizon-v1/plans.json",
+    "sha256": "4f730277767fbd434da0eeff4ab2fe98f462d13627cff9a80bc532daf3fd8970"
+  },
+  "qualification_input": false,
+  "recommendations": [
+    "Do not spend on another unchanged word-recipe continuation to claim a global winner: both declared 800-update contrasts fail and one shows near force balance far inside the .3 gate.",
+    "Keep task gates and global-recipe scope fixed. A future bounded existing-parameter hypothesis should target critic shape/penalty balance, with a prediction of increased outward adversarial force at the same radius; changing optimizer rates alone cannot change a fixed zero-gradient equilibrium.",
+    "These two recipes differ in several existing controls, so their contrast does not isolate coefficient, input noise, or rate as the causal factor. Consult prior whole-family searches before selecting another finite grid."
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "read_only_existing_training_force_analysis",
+  "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+  "study": "k3p-two-pole-horizon-v1",
+  "validation_source": {
+    "bytes": 25936,
+    "path": "reports/forge/k3p-two-pole-horizon-v1/publish.py",
+    "sha256": "b6e823ae3de7efde64061ff8394a68b26ececfcfeae6c1f6fc1801632291dbb6"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "input_mutation": false,
+  "model_checkpoint_deserialization": false,
+  "negative_controls": [
+    {
+      "name": "changed_generated_count",
+      "status": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "name": "changed_source_digest",
+      "status": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "name": "changed_input_hash",
+      "status": "REJECTED_AS_REQUIRED"
+    },
+    {
+      "name": "missing_pinned_input",
+      "status": "REJECTED_AS_REQUIRED"
+    }
+  ],
+  "new_science": false,
+  "positive": {
+    "checker_sha256": "52d271adaa8f094a8c196168e5505266dd32d0c4626c205c678d0940a0702228",
+    "checkpoint_deserialization": false,
+    "counts": {
+      "every_prior_table_has_eleven_distinct_rows": true,
+      "generated_changed": 24576,
+      "generated_codes": 24576,
+      "generated_effective_equal_any_encoder": 0,
+      "inverse_changed": 120,
+      "inverse_codes": 120,
+      "observations": 24
+    },
+    "draws": false,
+    "forwards": false,
+    "model_construction": false,
+    "numerical_regrading": false,
+    "official_scoring": false,
+    "qualification_input": false,
+    "report_sha256": "d82ce66dcb84b4bbf262e744dc16de0b7442760aba0a1bbe28d1a35b8ebf2624",
+    "schema": "pg_word_joint_law_passive_check_v1",
+    "status": "PASS_SAVED_BYTES_ONLY",
+    "verified_input_files": 46
+  },
+  "privacy": {
+    "forbidden_keys_found": 0,
+    "known_private_value_matches": 0
+  },
+  "regrading": false,
+  "schema": "pg_word_joint_law_passive_audit_v1"
+}

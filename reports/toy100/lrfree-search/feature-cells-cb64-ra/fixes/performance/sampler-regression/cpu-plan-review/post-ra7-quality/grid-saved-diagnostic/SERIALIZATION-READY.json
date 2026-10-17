@@ -1,0 +1,14 @@
+{
+  "status": "FROZEN_OUTPUT_ONLY_ADAPTER_BEFORE_REPEAT",
+  "utc": "2026-09-30T07:57:52.065497+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra7-quality/grid-saved-diagnostic/diagnose.py": "ab083335ea1df0a2eddd9fe574e657484da8795dfb74dc53377a3584e1ab0a05",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra7-quality/grid-saved-diagnostic/run_serialized.py": "82aba424f09af9ae7f581477b12876603af7fcae5270e8be76ec3b9e11aee3f7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra7-quality/grid-saved-diagnostic/PREPARATION.json": "e202d80f9453b2a045f9055da312793c5885c0298458aaf2b03c7cc7d954623a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra7-quality/grid-saved-diagnostic/PREPARATION-FROZEN.json": "433037a8169b384afdd525a407c7f7b90ea4367d926a5aa09f87a8d2b71c2505",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra7-quality/grid-saved-diagnostic/attempt1.log": "ea8d3156753e7836bb7eb9c1ccde53cda496f088f37640f8e88247eebb4c6e8b"
+  },
+  "exact_change": "JSON default converts saved Tensor context to scalars/lists; original fixed numerical helper unchanged",
+  "numerical_design_changed": false,
+  "input_selection_changed": false
+}

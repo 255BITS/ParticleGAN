@@ -1,0 +1,103 @@
+{
+  "observed_at": "2026-10-10T03:18:18.071536+00:00",
+  "scientific_retries": 0,
+  "source_or_task_changes": 0,
+  "charges_include_downtime": true,
+  "tracks": {
+    "anisotropic": {
+      "collected_attempts": 2,
+      "before_state_sha256": "d7fff2f567fb4f06cd9698516adb670e76378dbecc6166012d7d30318069d250",
+      "after_state_sha256": "7c78d8bb57a685b3086b7c75f236b1d5075067a65e92483ed39350e90f541258",
+      "interrupted_attempts": [
+        {
+          "attempt_id": "cdaff831a260432f9152883bc80e934d",
+          "task_id": "residual_student",
+          "gate_status": "INCOMPLETE",
+          "reason": "worker stopped without terminal receipt; explicit retry required",
+          "charged_wall_seconds": 701.8402304649353,
+          "terminal_sha256": "14e9b02cb25de6b33995c142f70728e2a063f27eaab6c83c8e9ec61df4f14a66",
+          "result_sha256": "89759d9bdbeafae411db407626b2bb17327a4c74552ec7b7e38c25f91ea232bc"
+        },
+        {
+          "attempt_id": "a00c63aaf8e64580ab0a7066b93a32d3",
+          "task_id": "grid100",
+          "gate_status": "INCOMPLETE",
+          "reason": "worker stopped without terminal receipt; explicit retry required",
+          "charged_wall_seconds": 698.02605509758,
+          "terminal_sha256": "c7dd586ea5883f1b75575d90ced5e3189261e6c3f029755d22f10a5da5127a16",
+          "result_sha256": "f65a2fb564679c27ae71a2392116025a475ad53e555cb3e79c214031a083f50f"
+        }
+      ],
+      "remaining_running": 0
+    },
+    "optimistic": {
+      "collected_attempts": 1,
+      "before_state_sha256": "8a59abaf1f13bedc86a1b1f6fd9c2e4c4acf0c7ecbf8fc7b7660d0ec3e98b34f",
+      "after_state_sha256": "c7ff4e3f0cbb9f1562ffcbcf8f691d79d19c9bbdba405471d6b26c98c5c0ee2b",
+      "interrupted_attempts": [
+        {
+          "attempt_id": "e939011f991640c3a7676abc9c595e41",
+          "task_id": "grid100",
+          "gate_status": "INCOMPLETE",
+          "reason": "worker stopped without terminal receipt; explicit retry required",
+          "charged_wall_seconds": 3451.496060371399,
+          "terminal_sha256": "afa26a636b19c0ac080f125f6475de695448ee7e7e695640a8454e11707da337",
+          "result_sha256": "0480c855dfc99c66b6786d948c26b48632c5264b7e5646d44c7f624510b4c2be"
+        }
+      ],
+      "remaining_running": 0
+    },
+    "secant": {
+      "collected_attempts": 2,
+      "before_state_sha256": "49a1e80c677a79c9d63f8150b16eb78d2389229a503caf304462b9c184f22471",
+      "after_state_sha256": "fe2d4415153cf117496959457ff9a4e013906b017baeba1d9100365a998b7e89",
+      "interrupted_attempts": [
+        {
+          "attempt_id": "d81dffeab9c14c00b8eade4e010c028d",
+          "task_id": "residual_student",
+          "gate_status": "INCOMPLETE",
+          "reason": "worker stopped without terminal receipt; explicit retry required",
+          "charged_wall_seconds": 1560.9512734413147,
+          "terminal_sha256": "6ceb6e5e6a8cac4b144dbcb21ceb7e444ed6e05b67794ec8010028095fe6b37d",
+          "result_sha256": "3701c7146d75a5f1b0e99bb33a6f4a9a06f9debef93ce34fc1927e36b53e93ec"
+        },
+        {
+          "attempt_id": "203b6a2bbfab45bf8c260d73d8122b75",
+          "task_id": "two_pole",
+          "gate_status": "INCOMPLETE",
+          "reason": "worker stopped without terminal receipt; explicit retry required",
+          "charged_wall_seconds": 705.8670415878296,
+          "terminal_sha256": "fc08c33001fbff0b676ead93584dce94a5681901504a62ae8666efd2adcef00e",
+          "result_sha256": "523eedb65fb301b8f966cb54606bd4a1f1584a2289f12b34d7f6626195669cb2"
+        }
+      ],
+      "remaining_running": 0
+    },
+    "sinkhorn": {
+      "collected_attempts": 2,
+      "before_state_sha256": "1bad6c4ccb7eb3031685d61ffef910708c747807e01ac42a624fc1d207fb695b",
+      "after_state_sha256": "3b2ab5e9bf50af75b7e8184dbb17161a88cb7e52a5f33b088bfc268857869013",
+      "interrupted_attempts": [
+        {
+          "attempt_id": "35131b71037848818236a1cb3e86dc66",
+          "task_id": "grid100",
+          "gate_status": "INCOMPLETE",
+          "reason": "worker stopped without terminal receipt; explicit retry required",
+          "charged_wall_seconds": 3453.8705615997314,
+          "terminal_sha256": "6f584a8bab9f0e3836327d0193593f931fffb38a3ba5d296034e5cb05f4e81d2",
+          "result_sha256": "836857298013025c1fe9af7b0e20c0009e8749e8b639105f4e334f9bc85f1156"
+        },
+        {
+          "attempt_id": "3d777395319c4583aae36c3458ad4987",
+          "task_id": "rotated100",
+          "gate_status": "INCOMPLETE",
+          "reason": "worker stopped without terminal receipt; explicit retry required",
+          "charged_wall_seconds": 3309.460136413574,
+          "terminal_sha256": "004c9b5e930bf87118edb81f6812b8c66d63b34a8d2487a5853414667bf41e76",
+          "result_sha256": "df80880931f4158129d7b19dcf6fb04579bfd567148cadbc60019983de436ddd"
+        }
+      ],
+      "remaining_running": 0
+    }
+  }
+}

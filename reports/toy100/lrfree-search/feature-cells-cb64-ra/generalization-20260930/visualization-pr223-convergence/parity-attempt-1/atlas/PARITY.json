@@ -1,0 +1,42 @@
+{
+  "control": {
+    "external_cursor_sha256": "1e935fd3afce3b0167f57208f0e00bf47b4e200de24f248559e31f35d25bb916",
+    "first_update": 1001,
+    "last_update": 1010,
+    "observed": false,
+    "original_evaluation_score": {
+      "hq": 0.027699999511241913,
+      "modes": 15
+    },
+    "original_seed": 1234,
+    "preservation_checks": 0,
+    "private_streams_in_saved_state": true,
+    "status": "COMPLETE",
+    "training_updates": 10,
+    "variant": "Atlas"
+  },
+  "exact_losses": true,
+  "exact_original_evaluation": true,
+  "exclusions": [
+    "birth_death.last.eval_seconds"
+  ],
+  "observed": {
+    "external_cursor_sha256": "1e935fd3afce3b0167f57208f0e00bf47b4e200de24f248559e31f35d25bb916",
+    "first_update": 1001,
+    "last_update": 1010,
+    "observed": true,
+    "original_evaluation_score": {
+      "hq": 0.027699999511241913,
+      "modes": 15
+    },
+    "original_seed": 1234,
+    "preservation_checks": 11,
+    "private_streams_in_saved_state": true,
+    "status": "COMPLETE",
+    "training_updates": 10,
+    "variant": "Atlas"
+  },
+  "runtime_state_differences": [],
+  "semantic_state_differences": [],
+  "status": "PASS"
+}

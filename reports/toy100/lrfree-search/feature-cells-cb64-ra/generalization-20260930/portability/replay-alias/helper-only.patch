@@ -1,0 +1,29 @@
+--- a/particlegan/policy.py
++++ b/particlegan/policy.py
+@@ -83,16 +83,20 @@
+                     raise ValueError("invalid checkpoint Adam step")
+ 
+ 
+-def _state_to_device(value, device):
+-    """Move controller/test tensor state after a CPU-first checkpoint load."""
++def _state_to_device(value, device, memo=None):
++    """Move control tensors, preserving repeated references across a device copy."""
++    memo = {} if memo is None else memo
+     if isinstance(value, torch.Tensor):
+-        return value.to(device=device)
++        key = id(value)
++        if key not in memo:
++            memo[key] = value.to(device=device)
++        return memo[key]
+     if isinstance(value, dict):
+-        return {key: _state_to_device(item, device) for key, item in value.items()}
++        return {key: _state_to_device(item, device, memo) for key, item in value.items()}
+     if isinstance(value, list):
+-        return [_state_to_device(item, device) for item in value]
++        return [_state_to_device(item, device, memo) for item in value]
+     if isinstance(value, tuple):
+-        return tuple(_state_to_device(item, device) for item in value)
++        return tuple(_state_to_device(item, device, memo) for item in value)
+     return value
+ 
+ 

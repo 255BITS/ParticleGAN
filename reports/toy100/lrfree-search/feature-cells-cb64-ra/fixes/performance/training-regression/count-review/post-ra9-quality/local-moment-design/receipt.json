@@ -1,0 +1,43 @@
+{
+  "status": "VALID_SOURCE_ONLY_RESERVED_DESIGN",
+  "scope": "Critique and one deferred split-reference local-moment feasibility diagnostic",
+  "candidate_change_implemented": false,
+  "diagnostic_executed": false,
+  "production_law_qualified": false,
+  "trigger": "Parent selection only after final original RA9 grid verdict",
+  "numerical_PT_loads": 0,
+  "numerical_PT_hashes": 0,
+  "numerical_measurements": 0,
+  "Torch_import": false,
+  "model_forwards": 0,
+  "random_draws": 0,
+  "new_seeds": 0,
+  "training_updates": 0,
+  "cuda": false,
+  "oracle_production_inputs": false,
+  "quality_verdict": null,
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/feature_cells.py": "39558fb3839090eb9d933b8b37e4c73b7dfc3cf123b24c2ef58d818cc4052fcc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/training.py": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/birth_phase.py": "aa794152ad55a44673adf3bac4284f6ab4bc3b559fac8cb4e7169fe7fafd633d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/source-freeze.json": "09e6e11fd7c862d7d98fca9b5209e93be971d034ab0c6553cbd9a18bdeb6bec2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-covariance/REPORT.md": "2a18ca3ed6afb753d0cfd979366044ea93b5b538241826a107b2eb207f8098be",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-covariance/FROZEN.json": "351686a047c44d4f2ba9875da8810b2f62801e88de3e0e10e8ce24fce54f483a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/REPORT.md": "c06d419927568d56f96279a78410d2ec2ef9d6fc0f6f8cc076b77ea1c7683ce0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/FROZEN.json": "d94cb9e8403eb2ae1f923c72448a4814de355ae31d2c01cc95edb5b42e551dc2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/grid-saved-diagnostic/REPORT.md": "1ffbf2189d97bbf12ad9fa9ae2dba59b01ac7be918f335c3075782ce1c9d6f86",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/grid-saved-diagnostic/FROZEN.json": "ad9904e3946f054eb30167c5bf399646713d83ad3fcfccaacf176e4a39f959f1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/probe.py": "4463176199d5116563c6aebd3b814c546dd21e8510827a947a0335594e87ea22",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra8-quality/current-chart-resolution/PROTOCOL.md": "90ca618d7ad9ea61f32fa24b152f8bf042ff5db8c7470b7b21b8f4170299d344"
+  },
+  "major_limits": [
+    "Trained-D/shared-FIFO dependence",
+    "Multimode aliasing and conditional group selection",
+    "Global moment rejection does not certify all local movements",
+    "Latent clean and emitted laws differ",
+    "Moment transport needs its own law; existing count certificates do not authorize it"
+  ]
+}

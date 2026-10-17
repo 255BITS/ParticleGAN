@@ -1,0 +1,30 @@
+{
+  "status": "RUNNING",
+  "started_utc": "2026-09-30T20:54:46.109631+00:00",
+  "pid": 1896623,
+  "startticks": "170350626",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay.py",
+    "RA12-auto"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/logs/RA12-auto-replay.log",
+  "source_freeze_sha256": "678f1230a5305fecc6ba6f7054d6b18095d57d1970dc3233e3de2150cae7e0ca",
+  "inputs_sha256": "23696807a2dc96aa4056a0044540873245676e5ae5e8544960d01e7bc75c213e",
+  "root_authorization": "Root review/freeze and GO required for this exact actual-candidate phase",
+  "known_original_processes": {
+    "384331": [
+      "T",
+      "163720702"
+    ],
+    "383348": [
+      "S",
+      "163716372"
+    ]
+  },
+  "original_outer_slot_held": true,
+  "original_owned_numerical_processes_at_launch": [],
+  "signaled_processes": []
+}

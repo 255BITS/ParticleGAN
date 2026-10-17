@@ -1,0 +1,21 @@
+{
+  "elapsed_seconds": 20.57,
+  "exporter_git_blob_and_media_hashes_verified": true,
+  "frozen_237_report_bytes_unchanged_except_navigation": true,
+  "goal_frame_count": 12,
+  "log": "/ml2/hypergan/toy-api-pr236-integrated-focused-validation-20261002.log",
+  "log_sha256": "debf78ce7df0b8a0945a1ce86a940324c899a804eb3d47b9fdaa8fcf6324d068",
+  "original_pr236_ancestry_preserved": true,
+  "passed": 62,
+  "production_package_library_config_trees_unchanged": true,
+  "protected_source_files_verified": 37,
+  "schema": "particlegan_pr236_integrated_software_validation_v1",
+  "scientific_training_or_model_rescoring": false,
+  "test_files": [
+    "tests/test_batch_toy_media.py",
+    "tests/test_routed_generator_batch_public.py",
+    "tests/test_routed_generator_batch_identity.py",
+    "tests/test_recent_toy_media.py"
+  ],
+  "tested_tree_commit": "faf30de9977604fd1bb626679a47f4cbdca6c874"
+}

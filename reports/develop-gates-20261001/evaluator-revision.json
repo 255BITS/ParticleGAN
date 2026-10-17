@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "change": "native100-manifest-sampling-v2",
+  "old_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+  "new_gate_sha256": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+  "changed_task_files": [
+    "configs/forge/tasks/grid100.json",
+    "configs/forge/tasks/grid100_14k.json",
+    "configs/forge/tasks/grid100_affine_paired_laws_v1.json",
+    "configs/forge/tasks/grid100_affine_square_named_v1.json",
+    "configs/forge/tasks/grid100_affine_square_named_v1_14k.json",
+    "configs/forge/tasks/grid100_release07_cloud_named_v1.json",
+    "configs/forge/tasks/rotated100.json",
+    "configs/forge/tasks/rotated100_14k.json",
+    "configs/forge/tasks/rotated100_affine_square_named_v1.json",
+    "configs/forge/tasks/rotated100_affine_square_named_v1_14k.json",
+    "configs/forge/tasks/staggered100.json",
+    "configs/forge/tasks/staggered100_14k.json",
+    "configs/forge/tasks/staggered100_affine_square_named_v1.json",
+    "configs/forge/tasks/staggered100_affine_square_named_v1_14k.json"
+  ],
+  "execution_changed": false,
+  "sampling_law_changed": false,
+  "budgets_changed": false,
+  "thresholds_changed": false,
+  "reuse_note": "The evaluation fingerprint changes. Previous receipts retain their original task/source identities and are not silently relabelled as current evidence.",
+  "reason": "The CLI manifest can now declare an evaluation sampling switch; the grader checks this field against every resolved run configuration."
+}

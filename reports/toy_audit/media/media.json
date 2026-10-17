@@ -1,0 +1,779 @@
+{
+  "pr106": {
+    "gif": "pr106.gif",
+    "sha256": "b9f0e6c3eadf515f65b606e16e37875359ef2185220e01f537a7e4eeec1e29a2",
+    "bytes": 787938,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr106.png"
+  },
+  "pr131": {
+    "gif": "pr131.gif",
+    "sha256": "53f16cdd4e6131b5c12ed889ebc768068c3c6adcb362dd7911fc44768b204d40",
+    "bytes": 852274,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr131.png"
+  },
+  "pr150": {
+    "gif": "pr150.gif",
+    "sha256": "7634f2f67137f3fb7bedf445246fdb1e0902004cc91b7e4d1ae590f08d4f437e",
+    "bytes": 829863,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr150.png"
+  },
+  "pr151": {
+    "gif": "pr151.gif",
+    "sha256": "15c7c63d66d90f9ab5ce94735d7942d7e465367f46abb7bba77a594baa1ce421",
+    "bytes": 791891,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr151.png"
+  },
+  "pr152-adapted": {
+    "gif": "pr152-adapted.gif",
+    "sha256": "9eb29f04d0a0e83f19eab550ddc227df5cfab4c53197b27cd1c8e9068c6a8fa6",
+    "bytes": 456378,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr152-adapted.png"
+  },
+  "pr154": {
+    "gif": "pr154.gif",
+    "sha256": "d1e1bffa15fa37681acae167e0b90d59152a3fe72087b78f480524a3e4af5f0c",
+    "bytes": 814048,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr154.png"
+  },
+  "pr159": {
+    "gif": "pr159.gif",
+    "sha256": "66407b82641293bc57c59669e5067a5b00b7911af02e10fce50f5c5bd40d5087",
+    "bytes": 679060,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr159.png"
+  },
+  "pr166": {
+    "gif": "pr166.gif",
+    "sha256": "80e1201d4921b37349beeaf0edb980e93e44fed6527de38d26f40b878fe2798e",
+    "bytes": 816407,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr166.png"
+  },
+  "pr170": {
+    "gif": "pr170.gif",
+    "sha256": "c3c0cd0ab29ea8f27e8114241c0d701a8f5825408009aa469386e311096d03a6",
+    "bytes": 734041,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr170.png"
+  },
+  "pr45-adapted": {
+    "gif": "pr45-adapted.gif",
+    "sha256": "1f3670377e97b4d3d02611942b2a5f8c3a4b536b14976ff8e8313c7a3a15ee93",
+    "bytes": 523047,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr45-adapted.png"
+  },
+  "pr47-adapted": {
+    "gif": "pr47-adapted.gif",
+    "sha256": "6fdea8d324366727dace4d29677a3f9a817bf694b8c6d507465791a5ae4c7bd6",
+    "bytes": 544710,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr47-adapted.png"
+  },
+  "pr48-adapted": {
+    "gif": "pr48-adapted.gif",
+    "sha256": "9349823b047a91b35219d57a29a2bf478e27cfbd989aff9e88b9f82504bedd23",
+    "bytes": 378092,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr48-adapted.png"
+  },
+  "pr49-adapted": {
+    "gif": "pr49-adapted.gif",
+    "sha256": "cfde8bed87e25f41bdb72e317c26e8f980b9bb012d07d564cd695c46b6e223d8",
+    "bytes": 408319,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr49-adapted.png"
+  },
+  "pr50-adapted": {
+    "gif": "pr50-adapted.gif",
+    "sha256": "b2bf21e1ea10a22e5888a8b8396d053a319ee1941ac17d510a5a1939d706ad21",
+    "bytes": 451193,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr50-adapted.png"
+  },
+  "pr51-adapted": {
+    "gif": "pr51-adapted.gif",
+    "sha256": "f622238977e259bd6a404e2eee6fcdb7294ccb2d213d86253c4e4b0f7e6c1726",
+    "bytes": 463227,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr51-adapted.png"
+  },
+  "pr52-adapted": {
+    "gif": "pr52-adapted.gif",
+    "sha256": "52931766405e76180493fca71df5e2d5881eca00979e471b5362ed9bebf7f61f",
+    "bytes": 500905,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr52-adapted.png"
+  },
+  "pr53-adapted": {
+    "gif": "pr53-adapted.gif",
+    "sha256": "f618849eaec5970d0f57c44fdab99c7eddb6185771d3210e802e8a8d08ff78af",
+    "bytes": 398004,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr53-adapted.png"
+  },
+  "pr54-adapted": {
+    "gif": "pr54-adapted.gif",
+    "sha256": "51a526cdffcfd6dfdba22ff9fb578f92127cd0fabd25cf703ff7fb97c6891219",
+    "bytes": 463853,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr54-adapted.png"
+  },
+  "pr55-adapted": {
+    "gif": "pr55-adapted.gif",
+    "sha256": "b9bf0620e7726c34fe66d803d188047e83e3a98e69becf0f2ef9a70cf75a81d2",
+    "bytes": 408308,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr55-adapted.png"
+  },
+  "pr56-adapted": {
+    "gif": "pr56-adapted.gif",
+    "sha256": "4cdc800680b9438c097ac05f3de1eb13bfa0fa027a79a466ce8b1cb8db9cd9b5",
+    "bytes": 427313,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr56-adapted.png"
+  },
+  "pr57-adapted": {
+    "gif": "pr57-adapted.gif",
+    "sha256": "d2d4973f0a0985865a9a20f2a70d6f8d7860f0ad2204fb4b43255e67a921b0fe",
+    "bytes": 448410,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr57-adapted.png"
+  },
+  "pr58": {
+    "gif": "pr58.gif",
+    "sha256": "e7478799ef82b859b2da7660d336a0dfdc6e65f8975b24bc562e1adc0dce651c",
+    "bytes": 558964,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr58.png"
+  },
+  "pr59": {
+    "gif": "pr59.gif",
+    "sha256": "7bdd6fd2be088dc28ed0e75068b18ecc46e48e481a3f4197b4943502873ef184",
+    "bytes": 523443,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr59.png"
+  },
+  "pr61": {
+    "gif": "pr61.gif",
+    "sha256": "545786565cb719f3cc36a027d95ea03d9b8e5685be5d75de2ab28dc369f38529",
+    "bytes": 540411,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr61.png"
+  },
+  "pr62": {
+    "gif": "pr62.gif",
+    "sha256": "d0c3c1ae5d72f11fd336fe867545b8f8e57b6716366de1e2f4b34276d5d1f5fc",
+    "bytes": 908586,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr62.png"
+  },
+  "pr63": {
+    "gif": "pr63.gif",
+    "sha256": "1878e6c99d72d151679dcb62c5be6206fde51e3366345914a3a5e0d76bcd0c39",
+    "bytes": 892853,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr63.png"
+  },
+  "pr64": {
+    "gif": "pr64.gif",
+    "sha256": "9653997f167d6b18b8af1baacd73f897d9e7baace5806aa6e8bf7760fa5c096e",
+    "bytes": 704987,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr64.png"
+  },
+  "pr65": {
+    "gif": "pr65.gif",
+    "sha256": "c4f3d5008fe74ac15d9f38131251030a4f0a9d98876690113199de7fe9482716",
+    "bytes": 517874,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr65.png"
+  },
+  "pr66": {
+    "gif": "pr66.gif",
+    "sha256": "3e1f1d1be59d971df674b14a589cd8f26cc32673bf9ed545669646ef6e6cdf69",
+    "bytes": 856159,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr66.png"
+  },
+  "pr67": {
+    "gif": "pr67.gif",
+    "sha256": "b74524d353e03a827e59fe3abe00e83596a2fb8e4fbd9a6b22332bd508af7e95",
+    "bytes": 781512,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr67.png"
+  },
+  "pr68": {
+    "gif": "pr68.gif",
+    "sha256": "81038f55a70cb46b15a88ed031a0cade62bdd0ce13f950868950ca091c83d765",
+    "bytes": 769200,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr68.png"
+  },
+  "pr69": {
+    "gif": "pr69.gif",
+    "sha256": "cd7f7466005755b27231fe3601832d1f6c7c96e72d09ae59a8037170cdaab2c1",
+    "bytes": 722572,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr69.png"
+  },
+  "pr70": {
+    "gif": "pr70.gif",
+    "sha256": "d82c7ca181a1c14dc4ce621ac6558e9c83d0b69819a274be401e0bf0179921be",
+    "bytes": 903583,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr70.png"
+  },
+  "pr71": {
+    "gif": "pr71.gif",
+    "sha256": "88c416dd97308963c5b75c22d7175e72ce5906f31fc3bb79954901df88825cd4",
+    "bytes": 891716,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr71.png"
+  },
+  "pr72": {
+    "gif": "pr72.gif",
+    "sha256": "bc568536bbda299ee5b69907b7cedcc9c6c74590d915e904dcaa77963f870e51",
+    "bytes": 908341,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr72.png"
+  },
+  "pr73": {
+    "gif": "pr73.gif",
+    "sha256": "def2848ee2a96ce0320a1c4ffc88f38b4d847e91fc4f403838161b9d7392a8b5",
+    "bytes": 808034,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr73.png"
+  },
+  "pr74": {
+    "gif": "pr74.gif",
+    "sha256": "190a9c473344f1cd0a53b9e1dd6a9c3427ad3184db0fece7ba602e120924b6b5",
+    "bytes": 789754,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr74.png"
+  },
+  "pr75": {
+    "gif": "pr75.gif",
+    "sha256": "025787627e5f51913bde626f5c2a5f4e292a5e6bad9b8cfa12543f02e2f51ed7",
+    "bytes": 740129,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr75.png"
+  },
+  "pr76": {
+    "gif": "pr76.gif",
+    "sha256": "b911eb7906b279b303146edc5af5dc30834cd837481dc38e2de8bfcd066585b8",
+    "bytes": 804068,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr76.png"
+  },
+  "pr77": {
+    "gif": "pr77.gif",
+    "sha256": "f840a9bb2d34fd8089bd8c412711493f968ef69b9c1210c1e2a944abafeedbe5",
+    "bytes": 883501,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr77.png"
+  },
+  "pr78": {
+    "gif": "pr78.gif",
+    "sha256": "ce9356c50a62c1711abce1752f2cb0a5ff24d59284bebfeb4730969693e89617",
+    "bytes": 764256,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr78.png"
+  },
+  "pr79": {
+    "gif": "pr79.gif",
+    "sha256": "a467e410c147840c0349e37b47e41cafcf36f6617d7e2d85317d04cc82e5fb51",
+    "bytes": 765953,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr79.png"
+  },
+  "pr80": {
+    "gif": "pr80.gif",
+    "sha256": "2b35ac06a7b6c22b25515bb8818fad55acc86ee2b3f902fe715b68c319795cff",
+    "bytes": 841910,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "pr80.png"
+  },
+  "develop-two_pole": {
+    "gif": "develop-two_pole.gif",
+    "sha256": "79c8007cc599e103630bbe966c9a4273f44329f42418afdcd9692b0e452e5ccb",
+    "bytes": 185613,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-two_pole.png"
+  },
+  "develop-trajectory": {
+    "gif": "develop-trajectory.gif",
+    "sha256": "61a9febe464b1024dfaabae437aab17a74b06ffa9421f0cfcf0d06f577ed8a9c",
+    "bytes": 150893,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-trajectory.png"
+  },
+  "develop-residual_student": {
+    "gif": "develop-residual_student.gif",
+    "sha256": "8e1ac3308dd4d2658f0f146c982b4d127f3f10f03cde99cd4686c391cf1133cf",
+    "bytes": 197633,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-residual_student.png"
+  },
+  "develop-unipolar": {
+    "gif": "develop-unipolar.gif",
+    "sha256": "6e971880e27ccf25f072d61ea82173d84a9ce065e01d343b919c47a1d3e35c2f",
+    "bytes": 240437,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-unipolar.png"
+  },
+  "develop-ae_gan_hold": {
+    "gif": "develop-ae_gan_hold.gif",
+    "sha256": "152278cd6e11fee13f59b3a6df98cc03afd8091279c1c0cadd4f50a71123b9ef",
+    "bytes": 183756,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-ae_gan_hold.png"
+  },
+  "develop-cover_leftover": {
+    "gif": "develop-cover_leftover.gif",
+    "sha256": "9b345575724aac48c7fed880cf28cabd62fb7ca89ae91b964e43e0c9c472e2fc",
+    "bytes": 361017,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-cover_leftover.png"
+  },
+  "develop-unused_token_hold": {
+    "gif": "develop-unused_token_hold.gif",
+    "sha256": "63cfd2e8a07b4fe47604ed8cd5db7fbe2842c942b6dae59419c9099583ad32d1",
+    "bytes": 163328,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-unused_token_hold.png"
+  },
+  "develop-mid_scale_identity": {
+    "gif": "develop-mid_scale_identity.gif",
+    "sha256": "4d5aa3bff20810c60d3d4a2639ae4ae78b487117b3e215a4d77cf7ebde754243",
+    "bytes": 348496,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-mid_scale_identity.png"
+  },
+  "develop-mode_hold": {
+    "gif": "develop-mode_hold.gif",
+    "sha256": "ed326ce015d9027a8d09e05104d988c9c1641d26bc1dd892c2e22dddb73b2ba9",
+    "bytes": 165764,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-mode_hold.png"
+  },
+  "develop-vector_two_broad": {
+    "gif": "develop-vector_two_broad.gif",
+    "sha256": "0ae4e2f7982fdd2f11f81e3ed7fb7291dfef682ed538d48118f2ee4a08470ff6",
+    "bytes": 318910,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-vector_two_broad.png"
+  },
+  "develop-vector_unequal_mass": {
+    "gif": "develop-vector_unequal_mass.gif",
+    "sha256": "02bb5dee960f7cd757797a54d5d04eaaab67f948d052c09ad26c280ceed495d1",
+    "bytes": 364430,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-vector_unequal_mass.png"
+  },
+  "develop-vector_unequal_width": {
+    "gif": "develop-vector_unequal_width.gif",
+    "sha256": "c9072eca7e3b09db49b6529f27fc59f2ba05955e2f6d224140f285b0b164a054",
+    "bytes": 404290,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-vector_unequal_width.png"
+  },
+  "develop-vector_anisotropic": {
+    "gif": "develop-vector_anisotropic.gif",
+    "sha256": "6a3376ce4a454d416ac1d26ede0abea1a4fd67de4580a56be7094a18739f6ce0",
+    "bytes": 325944,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-vector_anisotropic.png"
+  },
+  "develop-vector_overlap": {
+    "gif": "develop-vector_overlap.gif",
+    "sha256": "3f356b7c239a74579381400ce5897f21fd5f687c35b7247165ece1db8babbd3a",
+    "bytes": 432264,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-vector_overlap.png"
+  },
+  "develop-vector_narrow": {
+    "gif": "develop-vector_narrow.gif",
+    "sha256": "6d9de669df4539ad9ee70a26d694aa3c8008a73e3b31390a06fa979724fd77ed",
+    "bytes": 224416,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-vector_narrow.png"
+  },
+  "develop-vector_scale_drift": {
+    "gif": "develop-vector_scale_drift.gif",
+    "sha256": "63d274d0feae91c165ff4ec6bbc505ea6b23c149b2d9526a8306d4c92a59e9f1",
+    "bytes": 389734,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-vector_scale_drift.png"
+  },
+  "develop-vector_spiral": {
+    "gif": "develop-vector_spiral.gif",
+    "sha256": "dfd52ab17b50dbad6e042f074128d5770775fece2413be711879fa619abda706",
+    "bytes": 379345,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-vector_spiral.png"
+  },
+  "develop-reserved_annulus": {
+    "gif": "develop-reserved_annulus.gif",
+    "sha256": "06b8a3b0a7caeec777c277292206ff2676391fe9e1e1f14531c1c33cdf8698b8",
+    "bytes": 382637,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-reserved_annulus.png"
+  },
+  "develop-stress_fast_critic": {
+    "gif": "develop-stress_fast_critic.gif",
+    "sha256": "3050fe8fedae01c79c589771642fe0863a2bbed154a0a5ba16f51b27c13162cc",
+    "bytes": 310083,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-stress_fast_critic.png"
+  },
+  "develop-stress_slow_critic": {
+    "gif": "develop-stress_slow_critic.gif",
+    "sha256": "044a7a1f7b4f0b58ff6acb4af2c7f2e20b08e34f18e3ba73a74f87cf01e7f6db",
+    "bytes": 332256,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-stress_slow_critic.png"
+  },
+  "develop-stress_small_batch": {
+    "gif": "develop-stress_small_batch.gif",
+    "sha256": "af7cfd24c1dbfd102df31b9ba6d6cb86c62643f998cbcae09ae98ac939285ae1",
+    "bytes": 357638,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-stress_small_batch.png"
+  },
+  "develop-stress_large_critic": {
+    "gif": "develop-stress_large_critic.gif",
+    "sha256": "8993b744eac69fa43470e651804d6cd2319a7848cae3377480f49994fce64486",
+    "bytes": 319117,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-stress_large_critic.png"
+  },
+  "develop-stress_long_horizon": {
+    "gif": "develop-stress_long_horizon.gif",
+    "sha256": "c8b0023dfa9b9d358f1728b8f362f90726fd7cbe73a65d1a2b08d879914a15f8",
+    "bytes": 330272,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-stress_long_horizon.png"
+  },
+  "develop-stress_r1_r2": {
+    "gif": "develop-stress_r1_r2.gif",
+    "sha256": "273c20f277d1d1d095ae552288f5655346b689fca77e29101fb99311a7e6f3e9",
+    "bytes": 340456,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-stress_r1_r2.png"
+  },
+  "develop-stress_weak_critic": {
+    "gif": "develop-stress_weak_critic.gif",
+    "sha256": "be1e3ddce62d2c403eb398891c79925319d67ea441a0e33fb3b186e88afd2363",
+    "bytes": 335587,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-stress_weak_critic.png"
+  },
+  "develop-stress_overlapping_data": {
+    "gif": "develop-stress_overlapping_data.gif",
+    "sha256": "9847891f68f31849ddad90602dc8f1d316897298c7af56d1f63eb2b324b83c5b",
+    "bytes": 400168,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-stress_overlapping_data.png"
+  },
+  "develop-reserved_alternating_critic_updates": {
+    "gif": "develop-reserved_alternating_critic_updates.gif",
+    "sha256": "ab4e14b6dab7cda42b9e2fbc7f55bceedb9898654b5eca2411f48ae15b11c870",
+    "bytes": 352855,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-reserved_alternating_critic_updates.png"
+  },
+  "develop-img_stripes2": {
+    "gif": "develop-img_stripes2.gif",
+    "sha256": "b912a156c411c11265e9745b7df04ebec63999716248a1f907a22c342ced876a",
+    "bytes": 237948,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_stripes2.png"
+  },
+  "develop-img_bars4": {
+    "gif": "develop-img_bars4.gif",
+    "sha256": "4e6fbdc5d5220e47f0a78309121b87e9bbcc153a856b25d98b0f83789047a981",
+    "bytes": 314033,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_bars4.png"
+  },
+  "develop-img_blobs4": {
+    "gif": "develop-img_blobs4.gif",
+    "sha256": "61c82f0fd83477c21cd6900a8d91a4ae2d3091bf012fdb65e61a7547a2b5ea1c",
+    "bytes": 316345,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_blobs4.png"
+  },
+  "develop-img_intensity2": {
+    "gif": "develop-img_intensity2.gif",
+    "sha256": "aa9d3ef3a0fe2cfb1d161692be168ad71eb4206795cbba35a4c81dccc0441540",
+    "bytes": 480134,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_intensity2.png"
+  },
+  "develop-img_bars8": {
+    "gif": "develop-img_bars8.gif",
+    "sha256": "f06958f31791658400e86e06cd17bfef47fcaed2823cbd50f666eb3251dd0464",
+    "bytes": 399269,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_bars8.png"
+  },
+  "develop-img_tiny_generator": {
+    "gif": "develop-img_tiny_generator.gif",
+    "sha256": "6ae6627c26d4960defb63ae6bbb8adb73294d5897efe1d3150b465bd90c5f2fb",
+    "bytes": 522561,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_tiny_generator.png"
+  },
+  "develop-img_mean_discriminator": {
+    "gif": "develop-img_mean_discriminator.gif",
+    "sha256": "f634a16ed6c58a39fd65dacf95a0aa0221a48edf7717b9cd04f6603ed27b8180",
+    "bytes": 417768,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_mean_discriminator.png"
+  },
+  "develop-img_uniform_generator": {
+    "gif": "develop-img_uniform_generator.gif",
+    "sha256": "2ac7820663e8ba8a31b6c3938420709e47a8778cce993350338c89f0c457a571",
+    "bytes": 362839,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_uniform_generator.png"
+  },
+  "develop-img_residual_bars4": {
+    "gif": "develop-img_residual_bars4.gif",
+    "sha256": "798fb0cd2f143297d3c9d3a11aa2e5ec8c76ff613010f8245c9940e317a2b877",
+    "bytes": 311908,
+    "frames": 24,
+    "interpolation": false,
+    "poster": "develop-img_residual_bars4.png"
+  },
+  "atlas-grid100": {
+    "gif": "atlas-grid100.gif",
+    "sha256": "26447b7d185ee7b8c6b9eefeaa25324cdef6a18daa7f0da8b36170a5da8b80f5",
+    "bytes": 1004931,
+    "frames": 85,
+    "interpolation": false,
+    "poster": "atlas-grid100.png"
+  },
+  "atlas-rotated100_moving": {
+    "gif": "atlas-rotated100_moving.gif",
+    "sha256": "f7bfb6994c7f1075a3baefe18c3d2b8ae007943459c1f76fdca461bab4b7041a",
+    "bytes": 498261,
+    "frames": 21,
+    "interpolation": false,
+    "poster": "atlas-rotated100_moving.png"
+  },
+  "atlas-rotated100": {
+    "gif": "atlas-rotated100.gif",
+    "sha256": "a7ad0e1619aba83d43a18ca52fcdfcb752e1850c78ef4f77521c9b69f587f8d1",
+    "bytes": 1044586,
+    "frames": 85,
+    "interpolation": false,
+    "poster": "atlas-rotated100.png"
+  },
+  "atlas-staggered100": {
+    "gif": "atlas-staggered100.gif",
+    "sha256": "e92ac5bea7d4dd1a662034fc8904187b2e86f528d78006fab5852d0781f1e503",
+    "bytes": 1012808,
+    "frames": 85,
+    "interpolation": false,
+    "poster": "atlas-staggered100.png"
+  },
+  "pr224": {
+    "gif": "pr224.gif",
+    "sha256": "cdf8580dee3ccd91cc6da3450c666f1e18ab9e80497fa8c6d38d9636fe402a74",
+    "bytes": 381282,
+    "frames": 35,
+    "interpolation": false,
+    "poster": "pr224.png"
+  },
+  "pr196-block": {
+    "gif": "pr196-block.gif",
+    "sha256": "b1d85161585da556a2dbf9b67660104c8b2d4172fb88fbf60456312f7df4a359",
+    "bytes": 356291,
+    "frames": 14,
+    "interpolation": false,
+    "poster": "pr196-block.png"
+  },
+  "pr196-mcar_p20": {
+    "gif": "pr196-mcar_p20.gif",
+    "sha256": "af20f605216004ae5665d508645689a180bf8a380944595a5c6a3d359bf349b3",
+    "bytes": 262906,
+    "frames": 14,
+    "interpolation": false,
+    "poster": "pr196-mcar_p20.png"
+  },
+  "pr196-mcar_p50": {
+    "gif": "pr196-mcar_p50.gif",
+    "sha256": "cc8b7f3d38f216234afa02c9659fbab8f9f365e42baf3e0ba0b29b54830327ef",
+    "bytes": 337499,
+    "frames": 14,
+    "interpolation": false,
+    "poster": "pr196-mcar_p50.png"
+  },
+  "pr196-mcar_p80": {
+    "gif": "pr196-mcar_p80.gif",
+    "sha256": "c148f3215f7a4bc06a7582e23a01aaf729e4800e8ac72af5caf3d840c8b2b4af",
+    "bytes": 422259,
+    "frames": 14,
+    "interpolation": false,
+    "poster": "pr196-mcar_p80.png"
+  },
+  "pr226": {
+    "gif": "pr226.gif",
+    "sha256": "28a01d30a3e66c5356b09b6532baf38dd2880e3ca99ba31c9f94c437e7253de8",
+    "bytes": 520583,
+    "frames": 16,
+    "steps": [
+      0,
+      10,
+      25,
+      50,
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000,
+      1100,
+      1200
+    ],
+    "interpolation": false,
+    "poster": "pr226.png",
+    "poster_sha256": "adfd7c3775d96effb364c6b8db99269b6950b04169bf276c6b7757249f3d7494",
+    "sampling_law": "clean stock-selected served output; live matches; disjoint reporting grid"
+  },
+  "pr227": {
+    "gif": "pr227.gif",
+    "sha256": "564d15cb400485acd2c4def058eb7f13ae1622e03574a85b6f18b53920fe3469",
+    "bytes": 1279095,
+    "frames": 33,
+    "steps": [
+      0,
+      200,
+      400,
+      600,
+      800,
+      1000,
+      1200,
+      1400,
+      1600,
+      1800,
+      2000,
+      2200,
+      2400,
+      2600,
+      2800,
+      3000,
+      3200,
+      3400,
+      3600,
+      3800,
+      4000,
+      4200,
+      4400,
+      4600,
+      4800,
+      5000,
+      5200,
+      5400,
+      5600,
+      5800,
+      6000,
+      6200,
+      6400
+    ],
+    "interpolation": false,
+    "poster": "pr227.png",
+    "poster_sha256": "1bf62ff6cf758e7725b81c55ed1d84df054b5ea19e55c27b036343695f307c42",
+    "sampling_law": "clean FAST; no DV12/output noise in predictions; fixed private paired score panels sigma0.125"
+  }
+}

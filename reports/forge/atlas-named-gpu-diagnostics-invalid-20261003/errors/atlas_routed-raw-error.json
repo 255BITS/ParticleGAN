@@ -1,0 +1,49 @@
+{
+  "api_changes": [
+    {
+      "affected_hosts": "The unchanged 26 original main-view questions, with distinct suffixed task identities",
+      "migration": "Explicit opt-in only; original revision-3 live/MoG tasks and published evidence remain unchanged",
+      "provider": "experiments.forge.policy_contracts and policy adapters",
+      "variables": [
+        "task_cohort",
+        "execution.policy_contract",
+        "execution.policy_recipe_overrides"
+      ]
+    }
+  ],
+  "api_version": "forge-api-v1",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "state_selected"
+  },
+  "cost": {
+    "adapter_seconds": 0.09461435815319419,
+    "runner_seconds": 1.1977978199720383
+  },
+  "error": {
+    "message": "routed task changed its original objective, host, initialization or gates",
+    "type": "ValueError"
+  },
+  "execution_path": "public_trainer",
+  "telemetry": {
+    "flops": {
+      "kind": "unavailable",
+      "value": null
+    },
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": 0,
+      "cuda_peak_reserved_bytes": 0,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 664170496
+    },
+    "schema_version": 1,
+    "timing": {
+      "adapter_wall_seconds": 0.09461435815319419,
+      "runner_wall_seconds": 1.1977978199720383,
+      "scope": "Aggregate runner/adapter time includes setup, sampling, evaluation and artifact I/O; phase timing is separate.",
+      "unattributed_runner_seconds": null
+    }
+  }
+}

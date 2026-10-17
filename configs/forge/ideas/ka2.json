@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "ka2",
+  "parent": "k3p",
+  "goal": "discriminator_stability",
+  "hypothesis": "The current KA2 public recipe is an explicit learned-MoG reference; archived K3P and E22 cloud results remain separate evidence.",
+  "changed_factors": [
+    "KA2 critic formulation with Forge learned-MoG prior and isolated named streams"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Current public KA2 penalty, optimizer and learned prior reference.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "name": "ka2",
+    "critic_formulation": "ka2"
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "api_changes": [],
+  "claim_contract": {
+    "schedule": "scheduled",
+    "scoring_weights": "live",
+    "sampling_law": "task_declared"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "reports/toy100/current-research-base.json"
+  ],
+  "guide": "EXPERIMENTATION.md"
+}

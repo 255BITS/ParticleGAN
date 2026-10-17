@@ -16,7 +16,7 @@ pytest.importorskip("Box2D")
 from lib.gym_data import make_env
 from lib.gym_lander_live import LiveLander, OFF_ACTION, encoder_action, handler_for, rgb_png_url
 from lib.gym_transition import GymTransitionEncoder, GymTransitionGenerator, GymTransitionScaler
-from particlegan import get_recipe
+from particlegan import get_recipe, init
 
 
 @pytest.fixture
@@ -27,7 +27,8 @@ def bundle():
     return dict(device=torch.device("cpu"), scaler=scaler,
         G=GymTransitionGenerator(scaler, z_dim=4, width=8).eval(),
         E=GymTransitionEncoder(z_dim=4, width=8).eval(),
-        prior=get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8).make_prior(device="cpu"))
+        prior=init.deterministic_orthogonal_(
+            get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8).make_prior(device="cpu")))
 
 
 @contextmanager

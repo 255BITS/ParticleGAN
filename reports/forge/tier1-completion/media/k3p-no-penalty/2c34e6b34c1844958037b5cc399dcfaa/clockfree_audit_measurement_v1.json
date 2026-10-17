@@ -1,0 +1,22 @@
+{
+  "gif_sha256": "31b9791db9028e5ebdb2e5a39a3c8a8f6cfe937386d4f12ad349bcb8c76267d5",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "1f35ee96d7333e1955843664ec4d4ba1e9ac9df2994e7ce5b216c2f4286ea88d",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/experiments/ParticleGAN/tier1-completion-v1/queue/2c34e6b34c1844958037b5cc399dcfaa/clockfree-proof/comparisons.pt": "7afe186920bf039a7e2bf3919a51e4a92e022c19f9ff5f31734e69efce4167d3"
+  },
+  "task_id": "clockfree_audit_measurement_v1"
+}

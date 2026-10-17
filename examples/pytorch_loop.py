@@ -8,16 +8,18 @@ the same update GANTrainer performs, with the control flow in your hands:
 
 * role-wise LR schedule: ``learning_rate_scales`` (network horizon + prior),
 * critic input noise (``InputNoise``) / generator output noise (annealed, one stream),
-* ``recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))``: Adam
-  optimizers whose ordinary ``step()`` does the recipe's step-time work
-  (currently K3P: spike guard, EMA-critic update, A2 latent damping),
+* ``recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))``:
+  recipe-owned optimizers, currently optimized BISPF DualNorm with direction blending,
+* sampled prior rows and protected generator loss bound before the G step,
 * ``recipe.make_critic_penalty(opt_d)``: the critic penalty, added to the
   critic loss like any other term.
 
 To checkpoint, save the modules and both optimizers' ``state_dict()`` (they
 carry the EMA critic and every counter). With several critics, build one
 ``recipe.make_critic_optimizer(D_k, ema_critic=...)`` and one penalty per
-critic. Replace the networks and synthetic batches with your own.
+critic, and call ``particlegan.init.deterministic_orthogonal_(D_k, seed=k)``
+on a fresh extra critic first (seeds 0/1/2 are the examples' G/D/E). Replace
+the networks and synthetic batches with your own.
 """
 
 import argparse
@@ -28,7 +30,8 @@ import time
 import torch
 from torch import nn
 
-from particlegan import InputNoise, get_recipe, learning_rate_scales
+from particlegan import InputNoise, get_recipe, init, learning_rate_scales, scale_learning_rates
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 from particlegan.training import input_noise_std, output_noise_std
 
 
@@ -82,11 +85,15 @@ def main():
         nn.Linear(64, 64), nn.LeakyReLU(0.2), nn.Linear(64, 1),
     ).to(device)
     prior = recipe.make_prior().to(device)
+    # Deterministic initial weights and R2 particle table; optimizers keep weights as given.
+    init.deterministic_orthogonal_(generator, seed=0)
+    init.deterministic_orthogonal_(critic, seed=1)
+    init.deterministic_orthogonal_(prior)
     gan = recipe.make_loss()
-    spread = recipe.make_prior_regularizer()
-    # Adam optimizers ([generator, prior] groups, and the critic); the recipe's
-    # regularization runs inside their step(). The EMA critic is ours to allocate.
+    # Joint generator/prior optimizer and critic optimizer, selected by the recipe.
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, ema_critic=copy.deepcopy(critic))
+    # Optimizer construction binds the initialized prior's reference buffers.
+    spread = recipe.make_prior_regularizer(prior=prior)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     penalty = recipe.make_critic_penalty(opt_d)
     noise = torch.Generator(device=device).manual_seed(43)
@@ -105,9 +112,7 @@ def main():
     started = time.monotonic()
     for step in range(1, recipe.total_steps + 1):
         network, prior_scale = learning_rate_scales(step - 1, recipe)
-        opt_g.param_groups[0]["lr"] = base_lrs[0][0] * network
-        opt_g.param_groups[1]["lr"] = base_lrs[0][1] * prior_scale
-        opt_d.param_groups[0]["lr"] = base_lrs[1][0] * network
+        scale_learning_rates(step - 1, recipe, (opt_g, opt_d), base_lrs, prior)
         noisy_critic.std = input_noise_std(recipe, step - 1)
         sigma_out = output_noise_std(recipe, step - 1)
 
@@ -131,7 +136,9 @@ def main():
             g_loss = gan.g_loss(noisy_critic(fake), noisy_critic(real).detach())
             prior_loss = spread(prior.z[particle_ids.unique()])
             total_g = g_loss + prior_loss  # spread already carries recipe.prior_reg
-            total_g.backward()
+            if hasattr(opt_g, "set_sampled_rows"):
+                opt_g.set_sampled_rows(prior.z, particle_ids)
+            constraint_geometry_backward(total_g, opt_g, (g_loss,))
             opt_g.step()
         finally:
             for parameter, flag in zip(critic.parameters(), flags):

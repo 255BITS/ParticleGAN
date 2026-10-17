@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from experiments.config import merge_config, read_config
-from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, get_recipe, init, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.image_ddgan import sample_images, update_ema
 from lib.image_moonshots import build_models
@@ -124,8 +124,9 @@ def training_recipe(cfg):
     LR schedule is recipe fields: G/D follow the full-budget cosine down to
     ``lr_floor`` (no 1,600-step network horizon at image scale).
     """
-    return get_recipe(
+    return get_recipe(trainer="ka2",
         model='ddgan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
+        prior_update='learned' if cfg['prior'] == 'learned' else 'frozen',
         num_classes=cfg['classes'],
         conditioning='ucd' if cfg['d_mode'] == 'ucd' else 'conditional',
         ucd_target=cfg.get('ucd_target', 'class'), ucd_weight=cfg['ucd_lambda'],
@@ -203,10 +204,13 @@ def train(cfg, resume=None):
         env['pretrained_D'] = d.pretrained_metadata
         write_json(out / 'environment.json', env)
     prior = DrawSource(cfg['prior'], cfg['num_particles'], cfg['z_dim'], cfg['seed'] + 101, device)
+    recipe = training_recipe(cfg)
+    # Deterministic init before optimizers and any resume; frozen pretrained features stay as loaded.
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(d, seed=1)
+    og, od = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg.get('fused_adam', False))
     initial_prior = prior.table.detach().clone()
     eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
-    recipe = training_recipe(cfg)
-    og, od = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=cfg.get('fused_adam', False))
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]
     gan = recipe.make_loss()
     spread = recipe.make_prior_regularizer()

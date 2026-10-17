@@ -17,7 +17,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.config import read_config
-from particlegan import DDGAN, get_recipe, scale_learning_rates, ucd_loss
+from particlegan import DDGAN, get_recipe, init, scale_learning_rates, ucd_loss
 from particlegan.diffusion import DrawSource
 from lib.trajectory import Routes, TrajectoryGenerator, TrajectoryDiscriminator, generate, metrics
 from lib.trajectory_visuals import render
@@ -38,8 +38,9 @@ DEFAULTS = {
 
 def training_recipe(cfg):
     """The recipe default (critic penalty, optimizers, LR schedule) at this study's rates."""
-    return get_recipe(
+    return get_recipe(trainer="ka2",
         model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
+        prior_update="learned" if cfg["prior"] == "learned" else "frozen",
         conditioning="conditional" if cfg["d_mode"] == "concat" else "ucd",
         ucd_target="time_class" if cfg["model"] == "ddgan" and cfg["d_mode"] == "ucd" else "class",
         ucd_weight=cfg["ucd_lambda"], alpha_bar=cfg["alpha_bar"],
@@ -115,10 +116,12 @@ def train(cfg):
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"]+101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2*cfg["length"], cfg["seed"]+102, device)
     g, d = TrajectoryGenerator(cfg).to(device), TrajectoryDiscriminator(cfg).to(device)
+    init.deterministic_orthogonal_(g, seed=0)
+    init.deterministic_orthogonal_(d, seed=1)
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=True)
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for m in (ema_g, ema_prior, ema_noise):
         m.requires_grad_(False)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, ema_critic=copy.deepcopy(d), fused=True)
     if noise.kind == "learned":
         opt_g.add_param_group({"params": list(noise.parameters()),
                                "lr": recipe.lr * cfg["noise_lr_mult"]})

@@ -1,0 +1,128 @@
+{
+  "adaptive_probes": {
+    "arms": [
+      "restored_untraced",
+      "restored_stats",
+      "restored_twice",
+      "restored_runtime"
+    ],
+    "condition": "Always run restored_untraced to check instrumentation parity. Run the remaining three probes only if live/restart samples differ or archive replay does not match the original passing continuation.",
+    "description": "Use the exact shared fresh400 state. Compare trace instrumentation, synchronized stats, idempotent reload and the recorded nonserialized gradients/module flags. No RNG reset or seed variation.",
+    "timeout_seconds_per_arm": 30,
+    "updates_per_arm": 16
+  },
+  "archived_parent_checkpoint_sha256": "23f5c0c286b3057bdf2146fa8a49d92eb706a7f5e89043099a803e4b19a76524",
+  "artifacts": "Raw stdout, traces, full contexts and all named streams stay ignored and archived. Publish compact report/metrics/provenance and actual-training GIFs.",
+  "bindings": {
+    "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
+    "reports/forge/tier1-prior-smoke/frozen-tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+  },
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "device": "cuda:0",
+  "gates": {
+    "quality": "Existing Ring16 full bounds, same 96-check five-terminal reducer. Diagnostics cannot fill ordinary qualification.",
+    "reproduction": "Zero batch, named stream, sampled latent, raw gradient and update tensor mismatches; report exact first mismatch and magnitude.",
+    "serialization_restore": "Zero tensor/value mismatches except external execution cap."
+  },
+  "held_fixed": [
+    "architecture",
+    "target law",
+    "batch128",
+    "prior256 MoG sigma.1",
+    "recipe",
+    "all named RNG states/draw sequence",
+    "96 observations of4096 clean samples",
+    "total1600 and recipe horizon400"
+  ],
+  "hypotheses": {
+    "restore_state": "A restore changes serialized values, consumed streams, gradients or update inputs.",
+    "runtime_or_numerical": "Serialized tensors and draws agree but ephemeral runtime state or numerical kernels change updates.",
+    "technique": "Only a demonstrated substantive state/draw change would justify a separately declared restart or subbatch technique; this diagnostic adds none."
+  },
+  "id": "ring16-restart-diagnostic-v1",
+  "initializer": "public deterministic orthogonal named initialization",
+  "max_attempts": 7,
+  "max_new_host_updates": 4064,
+  "max_new_scoring_draws": 240,
+  "max_reserved_seconds": 1020,
+  "primary_runs": [
+    {
+      "collect_stats": false,
+      "id": "live",
+      "new_continuation_updates": 1200,
+      "prefix_updates": 400,
+      "restore": false,
+      "timeout_seconds": 300,
+      "trace_steps": [
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416
+      ]
+    },
+    {
+      "collect_stats": false,
+      "id": "restart",
+      "new_continuation_updates": 1200,
+      "parent": "live/prefix-state.pt",
+      "restore": true,
+      "timeout_seconds": 300,
+      "trace_steps": [
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416
+      ]
+    },
+    {
+      "collect_stats": false,
+      "id": "archive-replay",
+      "new_continuation_updates": 1200,
+      "parent": "archived original400 checkpoint",
+      "restore": true,
+      "timeout_seconds": 300,
+      "trace_steps": []
+    }
+  ],
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "scientific_retries": 0,
+  "scope": "cuda_checkpoint_boundary_reproduction",
+  "seed": 0,
+  "status": "ready",
+  "stopping_rules": [
+    "Every primary arm finishes its declared cap even if a quality state passes.",
+    "Stop an arm on nonfinite loss, incompatible state/source, budget exhaustion or timeout; retain actual cost and error.",
+    "No repeat of an executed arm; conditional probes have distinct declared deltas.",
+    "No periodic randomization, resampling, row replacement, subbatch repeats, annealing, new seed, gate relaxation or promotion."
+  ],
+  "task_path": "configs/forge/tasks/ring16_acquisition.json",
+  "trace_contract": "Observation wrappers invoke originals once and copy existing tensors to CPU; no extra model calls, RNG draws or optimizer updates. Explicit separate diagnostic cohort until the untraced short restore agrees.",
+  "user_authorization": "User requested reproducing what actually changes when restarting versus continuing, before treating randomization or subbatch repeating as a technique."
+}

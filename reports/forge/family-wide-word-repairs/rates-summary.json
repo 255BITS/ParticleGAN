@@ -1,0 +1,150 @@
+{
+  "campaign_ceiling_seconds": 293400,
+  "candidates": [
+    {
+      "candidate_id": "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+      "charged_wall_seconds": 8.084339857974555,
+      "family": "k3p",
+      "prediction_supported": false,
+      "receipt": "reports/forge/family-wide-word-repairs/rates/k3p-lr0.00425.json",
+      "required_passes_by_tier": [
+        0,
+        0,
+        0
+      ],
+      "settings": {
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053
+      },
+      "unknown_count": 25
+    },
+    {
+      "candidate_id": "k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d",
+      "charged_wall_seconds": 5.976230684027541,
+      "family": "k3p",
+      "prediction_supported": false,
+      "receipt": "reports/forge/family-wide-word-repairs/rates/k3p-lr0.006375.json",
+      "required_passes_by_tier": [
+        0,
+        0,
+        0
+      ],
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706
+      },
+      "unknown_count": 25
+    },
+    {
+      "candidate_id": "ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca",
+      "charged_wall_seconds": 5.99482965801144,
+      "family": "ka2",
+      "prediction_supported": false,
+      "receipt": "reports/forge/family-wide-word-repairs/rates/ka2-lr0.006375.json",
+      "required_passes_by_tier": [
+        0,
+        0,
+        0
+      ],
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.009411764705882354
+      },
+      "unknown_count": 25
+    },
+    {
+      "candidate_id": "ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4",
+      "charged_wall_seconds": 5.993709111993667,
+      "family": "ka2",
+      "prediction_supported": false,
+      "receipt": "reports/forge/family-wide-word-repairs/rates/ka2-lr0.00425.json",
+      "required_passes_by_tier": [
+        0,
+        0,
+        0
+      ],
+      "settings": {
+        "lr": 0.00425,
+        "prior_lr_mult": 0.014117647058823528
+      },
+      "unknown_count": 25
+    },
+    {
+      "candidate_id": "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+      "charged_wall_seconds": 30.974294167011976,
+      "family": "r1r2",
+      "prediction_supported": true,
+      "receipt": "reports/forge/family-wide-word-repairs/rates/r1r2-lr0.0085.json",
+      "required_passes_by_tier": [
+        3,
+        0,
+        0
+      ],
+      "settings": {
+        "lr": 0.0085,
+        "prior_lr_mult": 0.28235294117647053
+      },
+      "unknown_count": 22
+    },
+    {
+      "candidate_id": "r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e",
+      "charged_wall_seconds": 8.290254701976664,
+      "family": "r1r2",
+      "prediction_supported": false,
+      "receipt": "reports/forge/family-wide-word-repairs/rates/r1r2-lr0.006375.json",
+      "required_passes_by_tier": [
+        0,
+        0,
+        0
+      ],
+      "settings": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.3764705882352941
+      },
+      "unknown_count": 25
+    }
+  ],
+  "charged_wall_seconds": 65.31365818099584,
+  "configuration_count": 6,
+  "decision": "The bounded coupled-rate prediction was supported only for R1/R2 LR .0085; that complete configuration passed three Tier1 tasks then failed ring16 quality. The other five configurations failed movement. All six full candidates remain unqualified, with word and later cells UNKNOWN. Preserve historical family incumbents and exact independent outcomes; no automatic paid continuation.",
+  "default_adoption": false,
+  "execution_concurrency": {
+    "actual_maximum_cpu_workers": 1,
+    "actual_maximum_cuda_workers": 1,
+    "actual_maximum_supervisors": 2,
+    "configured_workers_per_gpu": 1,
+    "consequence": "Execution-concurrency deviation disclosed additively; frozen declarations, observations, certificates and grades unchanged. Per-job budgets and cohort bindings remain valid. No speed comparison, timing benefit, rerun or extra scientific work is claimed.",
+    "cpu_threads_per_worker": 1,
+    "intended_global_worker_cap": 1,
+    "overlapping_attempts": [
+      {
+        "attempt_id": "eb05f11341ca4916a7cf30233311a7fb",
+        "candidate_id": "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+        "device": "0",
+        "finished_at_epoch": 1791044788.9522355,
+        "started_at_epoch": 1791044776.9228277,
+        "task_id": "ring16_acquisition"
+      },
+      {
+        "attempt_id": "a399cef53ff04eaa930b5c231f64db52",
+        "candidate_id": "r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e",
+        "device": "cpu",
+        "finished_at_epoch": 1791044785.974786,
+        "started_at_epoch": 1791044777.68455,
+        "task_id": "two_pole"
+      }
+    ],
+    "reason": "The existing standard Queue/drain scheduler automatically adds an independent CPU fallback slot. The final CPU first-gate attempt overlapped the sole CUDA ring attempt despite the intended one-worker campaign. Earlier attempts were serial."
+  },
+  "grouped_job_ceiling_seconds": 271800,
+  "measured_fail": 6,
+  "measured_pass": 3,
+  "measured_task_count": 9,
+  "new_configured_family_standards": 0,
+  "ordinary_word_measured": 0,
+  "round": "family-wide-word-repair-rates-v1",
+  "schema_version": 1,
+  "source_commit": "36ed5655d9e6cfd7f92626cc4ca8c18e07edcb45",
+  "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+  "unknown_count": 147
+}

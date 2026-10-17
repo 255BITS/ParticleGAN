@@ -1,0 +1,283 @@
+{
+  "all_required_schedule_labels_evaluated": 24,
+  "complete_shared_suite_representation": "UNRESOLVED",
+  "construction": "Per-frame rotation by (fast_speed-slow_speed)*t; paired LeakyReLU(.2) channels give lrelu(lrelu(x))-lrelu(lrelu(-x))=(1+.2**2)*x; latent columns zero.",
+  "controls": {
+    "collapse": {
+      "bounds": [
+        {
+          "margin": -0.2458333480358124,
+          "metric": "identity_mse",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.02,
+          "value": 0.2658333480358124
+        }
+      ],
+      "identity_mse": 0.2658333480358124,
+      "passed": false
+    },
+    "rotation_oracle": {
+      "bounds": [
+        {
+          "margin": 0.019999999999993995,
+          "metric": "identity_mse",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.02,
+          "value": 6.007302081045005e-15
+        }
+      ],
+      "identity_mse": 6.007302081045005e-15,
+      "passed": true
+    },
+    "swapped_identity": {
+      "bounds": [
+        {
+          "margin": -1.0433333921432495,
+          "metric": "identity_mse",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.02,
+          "value": 1.0633333921432495
+        }
+      ],
+      "identity_mse": 1.0633333921432495,
+      "passed": false
+    },
+    "unchanged_slow": {
+      "bounds": [
+        {
+          "margin": -0.22414801597595216,
+          "metric": "identity_mse",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.02,
+          "value": 0.24414801597595215
+        }
+      ],
+      "identity_mse": 0.24414801597595215,
+      "passed": false
+    }
+  },
+  "convergence_time": null,
+  "family": "r1r2",
+  "fitting_updates": 0,
+  "frames": 8,
+  "generator_witness_state_sha256": "cc9871a968d19b0bd9e18b85b1903578adb4e9cdd288132447294df18a075e0e",
+  "host_protocol": {
+    "beta1": 0.0,
+    "beta2": 0.99,
+    "cover_weight": 1.5,
+    "critic_hidden": 64,
+    "fast_speed": 2.2,
+    "frames": 8,
+    "lr": 0.005,
+    "n_particles": 12,
+    "particle_l2": 0.02,
+    "seed": 0,
+    "slow_speed": 0.45,
+    "steps": 400,
+    "vicreg_weight": 0.05,
+    "z_dim": 4
+  },
+  "maximum_coordinate_error": 4.6193599700927734e-07,
+  "maximum_identity_mse": 6.007302081045005e-15,
+  "minimum_identity_mse": 6.007302081045005e-15,
+  "models_initial_state_sha256": {
+    "discriminator": "d7df97080046c155b6498d0c66a3f844f719c17018efe82c6c63cb12e0808d9c",
+    "generator": "532bff3d6bdb15e2eda9b45bac8f8fbbab73e61631b5aed5592f868f67d4808b",
+    "prior0": "f4a0d0e19d24400c5feb61d1a7240cad545148f326074108f3e017aa0db8bca1"
+  },
+  "observation_did_not_mutate_model_prior_or_optimizers": true,
+  "observations_are_training_checkpoints": false,
+  "ordinary_qualification": false,
+  "prior": {
+    "exception_reason": "The conditional host enumerates prior.z in its identity objective; a stochastic latent read changes the frozen host law.",
+    "kind": "particle_cloud",
+    "learnable": true,
+    "sigma": 0.0,
+    "standardize": false
+  },
+  "prior_witness_state_sha256": "f4a0d0e19d24400c5feb61d1a7240cad545148f326074108f3e017aa0db8bca1",
+  "recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": 0.99,
+    "betas": [
+      0.0,
+      0.9
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "distance_reduction": "sum",
+    "ema_decay": 0.0,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "lr": 0.0002,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 1.0,
+    "model": "gan",
+    "name": "r3gan-stacked-training-toy-v1",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "adam",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 1.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "a_r1r2",
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": 0.1,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 400,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "reproducer_sha256": "fadfe3e2516e7dbae1878ca9cf26a478020d36268cbebd1c9298d413171a5b77",
+  "rng_derivation": "forge-rng-v1",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.13.0+cu126"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "sample_rows": 12,
+  "sampling": {
+    "eval_output_noise": "public_recipe_schedule",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "sampling_contract_version": 1,
+    "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+      "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+    },
+    "thresholds": [
+      [
+        "identity_mse",
+        "<=",
+        0.02
+      ]
+    ]
+  },
+  "schema_version": 1,
+  "scientific_training_status": "NOT_ATTEMPTED",
+  "scope": "The exact finite conditional gate is represented, independent of optimizer learning. Applies only to unchanged host/target/prior/serving and zero input/output-noise configurations.",
+  "source_manifest_hash": "b3c1935d9eafb01ffb289432f79439f6a8303e07a1f4ac7240b46751e126105a",
+  "source_sha256": {
+    "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+    "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+    "benchmarks/locked_shared/trajectory.py": "9d9ac0313e53142107fea6ae231b44be0852679aa267d6d423873f948abeea4d",
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": "2e4ebc45fc92a3464d230d0bac8cddc00521f760b20be6538a103a6e27700c09",
+    "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+    "configs/forge/ideas/r3gan-stacked-training-toy-v1.json": "aa695486c643018f66c6d843cb346b48b0b929efaeb99d0439142b4e4ca991d0",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/tasks/trajectory.json": "78ca0e824c2041c0f40bd8d8189f9d1bedc2b4b9759065b320987762bb7e019c",
+    "experiments/forge/api.py": "fb4d49b9702aa1569f5ad9c9ed459904fcf5ab33d33a6f6a43b58f7f3df3a468",
+    "experiments/forge/behavior_adapters.py": "20e25930092c9cf0f7535ccc758bb1247cf613f46f95ec96c721035826b32a4d",
+    "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+    "experiments/forge/taskrecipes.py": "c11739bd935256e7083875f4e67d6c29fad1b9ea5915976dd32ed1eb7531d285",
+    "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+    "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+    "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+    "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+    "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+    "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+    "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+    "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+    "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+    "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+    "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+    "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+    "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "status": "SUPPORTED",
+  "task": "trajectory",
+  "training_updates": 0,
+  "unintended_rng_deviations": 0
+}

@@ -1,0 +1,51 @@
+{
+  "campaign_ceiling_seconds": 146700,
+  "candidate_ceiling_seconds": 48900,
+  "candidates": [
+    {
+      "attempt_id": "abb9e24f625d449da70f6641ec1bce0a",
+      "candidate_id": "k3p-global-repair-v1",
+      "gated_unknown": 25,
+      "measured_fail": 1,
+      "metrics": {
+        "grad_med": 0.004666268825531006,
+        "mean_abs": 0.04687126353383064
+      },
+      "qualified_tier": 0,
+      "receipt": "reports/forge/family-wide-word-repairs/initial/k3p-global-repair-v1.json"
+    },
+    {
+      "attempt_id": "e2fcaf0f2965415db4c7234a024d3031",
+      "candidate_id": "ka2-global-repair-v1",
+      "gated_unknown": 25,
+      "measured_fail": 1,
+      "metrics": {
+        "grad_med": 0.004442274570465088,
+        "mean_abs": 0.03632952272891998
+      },
+      "qualified_tier": 0,
+      "receipt": "reports/forge/family-wide-word-repairs/initial/ka2-global-repair-v1.json"
+    },
+    {
+      "attempt_id": "2f43521c43294c3a872be42d999debf1",
+      "candidate_id": "r1r2-global-repair-v1",
+      "gated_unknown": 25,
+      "measured_fail": 1,
+      "metrics": {
+        "grad_med": 0.08259358257055283,
+        "mean_abs": 0.039443571120500565
+      },
+      "qualified_tier": 0,
+      "receipt": "reports/forge/family-wide-word-repairs/initial/r1r2-global-repair-v1.json"
+    }
+  ],
+  "charged_wall_seconds": 17.662177768943366,
+  "decision": "All complete candidates failed the unchanged 80-update movement prerequisite. This rejects the whole candidates and leaves 75 later cells unmeasured; it neither establishes a word failure nor qualifies historical word witnesses. Retain historical family incumbents. A separately bounded global coupled-rate search tests the observed short-horizon rate tradeoff.",
+  "falsifier_triggered_for_all_candidates": true,
+  "prediction_supported": false,
+  "round": "family-wide-word-repairs-v1",
+  "schema_version": 1,
+  "scope": "ordinary_global_family_candidates",
+  "source_commit": "9d089ca777e647c6d3b6ad56529ac27f171fdcb6",
+  "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
+}

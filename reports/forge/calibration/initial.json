@@ -1,0 +1,3055 @@
+{
+  "adoption": "BLOCKED",
+  "cohorts": [
+    {
+      "adoption": "BLOCKED",
+      "checks": {
+        "maximum_false_accept_fraction": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_false_reject_fraction": {
+          "actual": null,
+          "required": 0.0,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_to_reference_wall_ratio": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_wall_seconds": {
+          "actual": null,
+          "required": 900.0,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_fraction": {
+          "actual": 0.0,
+          "required": 0.9,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_lineages": {
+          "actual": 0,
+          "required": 3,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_negatives": {
+          "actual": 0,
+          "required": 2,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_positives": {
+          "actual": 0,
+          "required": 1,
+          "status": "BLOCKED"
+        },
+        "require_complete_reference_cost": {
+          "missing_lineages": [
+            "row-em-renew-all22"
+          ],
+          "status": "BLOCKED"
+        },
+        "require_complete_smoke_cost": {
+          "missing_lineages": [
+            "row-em-renew-all22"
+          ],
+          "status": "BLOCKED"
+        }
+      },
+      "prior_cohort": "historical_cloud_with_custom_host_refusals",
+      "runtime_cohort": "pr155_qr_noisy_cuda",
+      "stats": {
+        "all_reference_negatives": 1,
+        "all_reference_positives": 0,
+        "blocked_lineages": 1,
+        "false_accept": 0,
+        "false_accept_fraction": null,
+        "false_reject": 0,
+        "false_reject_fraction": null,
+        "incomplete_lineages": 0,
+        "lineages": 1,
+        "paired": 0,
+        "paired_fraction": 0.0,
+        "reference_negatives": 0,
+        "reference_positives": 0,
+        "reference_unknown_lineages": 0,
+        "smoke_unknown_lineages": 1,
+        "true_accept": 0,
+        "true_reject": 0,
+        "unknown": 1
+      }
+    },
+    {
+      "adoption": "BLOCKED",
+      "checks": {
+        "maximum_false_accept_fraction": {
+          "actual": 0.0,
+          "required": 0.1,
+          "status": "PASS"
+        },
+        "maximum_false_reject_fraction": {
+          "actual": null,
+          "required": 0.0,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_to_reference_wall_ratio": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_wall_seconds": {
+          "actual": null,
+          "required": 900.0,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_fraction": {
+          "actual": 1.0,
+          "required": 0.9,
+          "status": "PASS"
+        },
+        "minimum_paired_lineages": {
+          "actual": 2,
+          "required": 3,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_negatives": {
+          "actual": 2,
+          "required": 2,
+          "status": "PASS"
+        },
+        "minimum_reference_positives": {
+          "actual": 0,
+          "required": 1,
+          "status": "BLOCKED"
+        },
+        "require_complete_reference_cost": {
+          "missing_lineages": [
+            "dv12-ams-rc3-c22",
+            "st-10-c22"
+          ],
+          "status": "BLOCKED"
+        },
+        "require_complete_smoke_cost": {
+          "missing_lineages": [
+            "dv12-ams-rc3-c22",
+            "st-10-c22"
+          ],
+          "status": "BLOCKED"
+        }
+      },
+      "prior_cohort": "historical_custom_hosts",
+      "runtime_cohort": "pr155_custom_engine",
+      "stats": {
+        "all_reference_negatives": 2,
+        "all_reference_positives": 0,
+        "blocked_lineages": 0,
+        "false_accept": 0,
+        "false_accept_fraction": 0.0,
+        "false_reject": 0,
+        "false_reject_fraction": null,
+        "incomplete_lineages": 0,
+        "lineages": 2,
+        "paired": 2,
+        "paired_fraction": 1.0,
+        "reference_negatives": 2,
+        "reference_positives": 0,
+        "reference_unknown_lineages": 0,
+        "smoke_unknown_lineages": 0,
+        "true_accept": 0,
+        "true_reject": 2,
+        "unknown": 0
+      }
+    },
+    {
+      "adoption": "BLOCKED",
+      "checks": {
+        "maximum_false_accept_fraction": {
+          "actual": 1.0,
+          "required": 0.1,
+          "status": "FAIL"
+        },
+        "maximum_false_reject_fraction": {
+          "actual": 0.0,
+          "required": 0.0,
+          "status": "PASS"
+        },
+        "maximum_smoke_to_reference_wall_ratio": {
+          "actual": 0.01735764510452326,
+          "required": 0.1,
+          "status": "PASS"
+        },
+        "maximum_smoke_wall_seconds": {
+          "actual": 20.712050907080993,
+          "required": 900.0,
+          "status": "PASS"
+        },
+        "minimum_paired_fraction": {
+          "actual": 1.0,
+          "required": 0.9,
+          "status": "PASS"
+        },
+        "minimum_paired_lineages": {
+          "actual": 4,
+          "required": 3,
+          "status": "PASS"
+        },
+        "minimum_reference_negatives": {
+          "actual": 1,
+          "required": 2,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_positives": {
+          "actual": 3,
+          "required": 1,
+          "status": "PASS"
+        },
+        "require_complete_reference_cost": {
+          "missing_lineages": [],
+          "status": "PASS"
+        },
+        "require_complete_smoke_cost": {
+          "missing_lineages": [],
+          "status": "PASS"
+        }
+      },
+      "prior_cohort": "historical_host_protocol",
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol",
+      "stats": {
+        "all_reference_negatives": 1,
+        "all_reference_positives": 3,
+        "blocked_lineages": 0,
+        "false_accept": 1,
+        "false_accept_fraction": 1.0,
+        "false_reject": 0,
+        "false_reject_fraction": 0.0,
+        "incomplete_lineages": 0,
+        "lineages": 4,
+        "paired": 4,
+        "paired_fraction": 1.0,
+        "reference_negatives": 1,
+        "reference_positives": 3,
+        "reference_unknown_lineages": 0,
+        "smoke_unknown_lineages": 0,
+        "true_accept": 3,
+        "true_reject": 0,
+        "unknown": 0
+      }
+    },
+    {
+      "adoption": "BLOCKED",
+      "checks": {
+        "maximum_false_accept_fraction": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_false_reject_fraction": {
+          "actual": null,
+          "required": 0.0,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_to_reference_wall_ratio": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_wall_seconds": {
+          "actual": null,
+          "required": 900.0,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_fraction": {
+          "actual": 0.0,
+          "required": 0.9,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_lineages": {
+          "actual": 0,
+          "required": 3,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_negatives": {
+          "actual": 0,
+          "required": 2,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_positives": {
+          "actual": 0,
+          "required": 1,
+          "status": "BLOCKED"
+        },
+        "require_complete_reference_cost": {
+          "missing_lineages": [
+            "pr215_qr_adapter",
+            "pr217_qr_native_adapter"
+          ],
+          "status": "BLOCKED"
+        },
+        "require_complete_smoke_cost": {
+          "missing_lineages": [
+            "pr215_qr_adapter",
+            "pr217_qr_native_adapter"
+          ],
+          "status": "BLOCKED"
+        }
+      },
+      "prior_cohort": "historical_particle_cloud",
+      "runtime_cohort": "pr155_qr_cuda",
+      "stats": {
+        "all_reference_negatives": 2,
+        "all_reference_positives": 0,
+        "blocked_lineages": 0,
+        "false_accept": 0,
+        "false_accept_fraction": null,
+        "false_reject": 0,
+        "false_reject_fraction": null,
+        "incomplete_lineages": 0,
+        "lineages": 2,
+        "paired": 0,
+        "paired_fraction": 0.0,
+        "reference_negatives": 0,
+        "reference_positives": 0,
+        "reference_unknown_lineages": 0,
+        "smoke_unknown_lineages": 2,
+        "true_accept": 0,
+        "true_reject": 0,
+        "unknown": 2
+      }
+    },
+    {
+      "adoption": "BLOCKED",
+      "checks": {
+        "maximum_false_accept_fraction": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_false_reject_fraction": {
+          "actual": null,
+          "required": 0.0,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_to_reference_wall_ratio": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_wall_seconds": {
+          "actual": null,
+          "required": 900.0,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_fraction": {
+          "actual": 0.0,
+          "required": 0.9,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_lineages": {
+          "actual": 0,
+          "required": 3,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_negatives": {
+          "actual": 0,
+          "required": 2,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_positives": {
+          "actual": 0,
+          "required": 1,
+          "status": "BLOCKED"
+        },
+        "require_complete_reference_cost": {
+          "missing_lineages": [
+            "pr215_exact_host_init"
+          ],
+          "status": "BLOCKED"
+        },
+        "require_complete_smoke_cost": {
+          "missing_lineages": [
+            "pr215_exact_host_init"
+          ],
+          "status": "BLOCKED"
+        }
+      },
+      "prior_cohort": "historical_particle_cloud",
+      "runtime_cohort": "pr155_xavier_cuda",
+      "stats": {
+        "all_reference_negatives": 1,
+        "all_reference_positives": 0,
+        "blocked_lineages": 0,
+        "false_accept": 0,
+        "false_accept_fraction": null,
+        "false_reject": 0,
+        "false_reject_fraction": null,
+        "incomplete_lineages": 0,
+        "lineages": 1,
+        "paired": 0,
+        "paired_fraction": 0.0,
+        "reference_negatives": 0,
+        "reference_positives": 0,
+        "reference_unknown_lineages": 0,
+        "smoke_unknown_lineages": 1,
+        "true_accept": 0,
+        "true_reject": 0,
+        "unknown": 1
+      }
+    },
+    {
+      "adoption": "BLOCKED",
+      "checks": {
+        "maximum_false_accept_fraction": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_false_reject_fraction": {
+          "actual": null,
+          "required": 0.0,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_to_reference_wall_ratio": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_wall_seconds": {
+          "actual": null,
+          "required": 900.0,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_fraction": {
+          "actual": 0,
+          "required": 0.9,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_lineages": {
+          "actual": 0,
+          "required": 3,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_negatives": {
+          "actual": 0,
+          "required": 2,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_positives": {
+          "actual": 0,
+          "required": 1,
+          "status": "BLOCKED"
+        },
+        "require_complete_reference_cost": {
+          "missing_lineages": [],
+          "status": "BLOCKED"
+        },
+        "require_complete_smoke_cost": {
+          "missing_lineages": [],
+          "status": "BLOCKED"
+        }
+      },
+      "prior_cohort": "new_learned_mog_sigma_0.025",
+      "reason": "No compatible new-MoG calibration receipts exist in the archived sources.",
+      "runtime_cohort": "unmeasured",
+      "stats": {
+        "all_reference_negatives": 0,
+        "all_reference_positives": 0,
+        "blocked_lineages": 0,
+        "false_accept": 0,
+        "false_accept_fraction": null,
+        "false_reject": 0,
+        "false_reject_fraction": null,
+        "incomplete_lineages": 0,
+        "lineages": 0,
+        "paired": 0,
+        "paired_fraction": 0,
+        "reference_negatives": 0,
+        "reference_positives": 0,
+        "reference_unknown_lineages": 0,
+        "smoke_unknown_lineages": 0,
+        "true_accept": 0,
+        "true_reject": 0,
+        "unknown": 0
+      }
+    }
+  ],
+  "criteria": {
+    "adoption_rule": "Every criterion must pass within each declared prior/runtime cohort; missing evidence blocks adoption. Zero training is authorized by this calibration.",
+    "cost_rule": "Both complete task-cost vectors required; compare the maximum observed smoke sum and maximum per-lineage smoke/reference ratio, within each exact prior/runtime cohort. Unknown costs never count as zero.",
+    "false_accept_denominator": "All paired lineages with an independent FAIL reference (false_accept + true_reject).",
+    "false_reject_denominator": "All paired lineages with an independent PASS reference (false_reject + true_accept).",
+    "id": "calibration-criteria-v1",
+    "maximum_false_accept_fraction": 0.1,
+    "maximum_false_reject_fraction": 0.0,
+    "maximum_smoke_to_reference_wall_ratio": 0.1,
+    "maximum_smoke_wall_seconds": 900.0,
+    "minimum_paired_fraction": 0.9,
+    "minimum_paired_lineages": 3,
+    "minimum_reference_negatives": 2,
+    "minimum_reference_positives": 1,
+    "reference_rule": "FAIL if any independent required reference fails; PASS only if every independent required reference passes; otherwise UNKNOWN. Blocked/error/missing tests remain unknown, never scientific failures.",
+    "require_complete_reference_cost": true,
+    "require_complete_smoke_cost": true,
+    "require_new_mog_cohort": true,
+    "schema_version": 1,
+    "scope": "Retrospective saved-evidence calibration; criteria are not claimed to precede the original experiments.",
+    "status": "frozen_before_reducer_evaluation",
+    "unknowns_count_as_failures": false
+  },
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "current_qualification_reuse": false,
+  "descriptive_totals_not_pooled_adoption": {
+    "all_reference_negatives": 7,
+    "all_reference_positives": 3,
+    "blocked_lineages": 1,
+    "false_accept": 1,
+    "false_accept_fraction": 0.3333333333333333,
+    "false_reject": 0,
+    "false_reject_fraction": 0.0,
+    "incomplete_lineages": 0,
+    "lineages": 10,
+    "paired": 6,
+    "paired_fraction": 0.6,
+    "reference_negatives": 3,
+    "reference_positives": 3,
+    "reference_unknown_lineages": 0,
+    "smoke_unknown_lineages": 4,
+    "true_accept": 3,
+    "true_reject": 2,
+    "unknown": 4
+  },
+  "evidence_scope": "historical",
+  "interpretation": "Historical outcomes assess rejection risk; unknowns and host/prior differences prevent a validated default. Passing custom smoke does not predict native100 quality.",
+  "matrix": [
+    {
+      "candidate_id": "k3p",
+      "candidate_revisions": [
+        "b30920c7ba6b00eb9c04879efa6027425c02310877c70c7bffb9a3591768afea"
+      ],
+      "classification": "true_accept",
+      "conflicts": [],
+      "cost_receipts": {
+        "ae_gan_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "cca7e4e131b0fbdfc058f363cf21703b37287549",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-ae_gan_hold.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "19d01b53059191d131bfe8fb01fc873bdbb1cc504b67e4d477e157b783271626",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-ae_gan_hold.json.gz"
+          },
+          "wall_seconds": 10.089281641179696
+        },
+        "cover_leftover": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "d0f25e5e92cee5337f93d837bfb70906b31d635c",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-cover_leftover.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "2ed3d1de319e18c0f181a500885e2e978bca6b251a2d260fca4f24ac4a00def6",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-cover_leftover.json.gz"
+          },
+          "wall_seconds": 47.0096651900094
+        },
+        "grid100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "1d302cadb1fe2a2f1719223679dab74e4c1b4d40",
+            "path": "reports/toy100/overnight-20260925/results/8f81681928432bda47d73e9cb5a1e8b1e920755d1833394e12645cdc6c78872d.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "a6e47493e136c912d201f9f8a50e6531a51a37892d45e34aea06351c47af818c",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/8f81681928432bda47d73e9cb5a1e8b1e920755d1833394e12645cdc6c78872d.json.gz"
+          },
+          "wall_seconds": 207.26660084491596
+        },
+        "img_blobs4": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "6f1874b0ba2b037048bab14ea0feee1a73941f63",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-img_blobs4.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "48f555f87e00eff6be00d180eac6c003d3eea5f403e760e45ce89bbc2ebc438c",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-img_blobs4.json.gz"
+          },
+          "wall_seconds": 24.307421477977186
+        },
+        "img_stripes2": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "3aa87dd71fe4a12f3b944b981f1d9ebbb677c1ab",
+            "path": "reports/toy100/overnight-20260925/results/fa8c03203f67832818b9d972544b771b0ec7a5fd812776bcf48044a38cb9906a.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "0763183e837089c290a699ab731b687b7eac9141c88efdba29b4817a6533f141",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/fa8c03203f67832818b9d972544b771b0ec7a5fd812776bcf48044a38cb9906a.json.gz"
+          },
+          "wall_seconds": 27.032602016814053
+        },
+        "mid_scale_identity": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "decc711358e650fe29083abc9e79e0b08c6ee41d",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-mid_scale_identity.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "24b671a6e00f76009f0ac4f9a5ddd6e6718fdc64e05c5230304f645f6d583c8d",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-mid_scale_identity.json.gz"
+          },
+          "wall_seconds": 55.66584592894651
+        },
+        "residual_student": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "bbe1ad0c2b52a550eccbf4a39dd69177c01cd246",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-residual_student.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "3a9bf77306978c2eaacc6d2dc9b3b75df735a5f0cb02ae0c11726e1927a76cbe",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-residual_student.json.gz"
+          },
+          "wall_seconds": 17.632827911060303
+        },
+        "rotated100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "4016cf740d11c69ee56d8df6b789ace8dff38160",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-native-rotated100.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "ebcea152be44d38ec84ae1d9fd1ec5f612f73f2d98157a3275cb569320403a1b",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-native-rotated100.json.gz"
+          },
+          "wall_seconds": 160.5664204270579
+        },
+        "staggered100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "13128e4c24c2a55865f9a776ec06af4c8ea5aa4d",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-native-staggered100.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "dbb098c6442d63314f1d0c7192fbcb49a7ec7e8f10292edba737f29cac8a9ca0",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-native-staggered100.json.gz"
+          },
+          "wall_seconds": 209.73143176082522
+        },
+        "trajectory": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "84a8ba2eed97106c6f7cac75dfef29ae7d31fc2a",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-trajectory.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "52e22c505f6b1898b79ba9821e8326ce5b965bbb9a10987c7878e248ca3cab79",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-trajectory.json.gz"
+          },
+          "wall_seconds": 13.326459119096398
+        },
+        "two_pole": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "a490dead72c540fbae4bffd202945c8fd5963a10",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-two_pole.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "ad4b11bec9fe37566b50b2159930981e478001a2f66dc2bc4790da41ee136e53",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-two_pole.json.gz"
+          },
+          "wall_seconds": 3.491859447909519
+        },
+        "unipolar": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "c90fb6af89f4a2da3d4f44b384890c6327e96fa0",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-unipolar.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "a37fc1e37508572e97c8a1b93f3643469628d901ab3e6fcfe472a7f800033381",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-unipolar.json.gz"
+          },
+          "wall_seconds": 16.067189374007285
+        },
+        "unused_token_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "cfb6fc299bd57d108dfbd0d496639a6bc910ba0b",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-unused_token_hold.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "4651e482941cc46877de8914b439574529f525a937375132be235c7006e394f2",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-unused_token_hold.json.gz"
+          },
+          "wall_seconds": 5.753563608042896
+        },
+        "vector_anisotropic": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "3e8280fa81207777338f42675e7d3a2640ab9de4",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-vector_anisotropic.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "11ab2594fc8557dc20890ace275bea7519d5bcc9e7f7245ebb82a4ee91343f7f",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-vector_anisotropic.json.gz"
+          },
+          "wall_seconds": 84.47461107186973
+        },
+        "vector_overlap": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "873ae0bb1b476b19b49a2d7136d6e50a9c58485c",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-vector_overlap.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "b541b0924915fa584d9ce59d381521ce6460373b92fff8c1ac01a5057d289d38",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-vector_overlap.json.gz"
+          },
+          "wall_seconds": 78.76605590595864
+        },
+        "vector_spiral": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "a78964c6677377769734781aa8c6ac448d9d2470",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-vector_spiral.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "9ccab6696b6ad8e4ef02b8ee8c8e317ee77fbf2426d7193f99358bf89201fd28",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-vector_spiral.json.gz"
+          },
+          "wall_seconds": 75.40356746106409
+        },
+        "vector_two_broad": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "640a4dc5180cd51a53109b56814ecbe7b78cc0fd",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-vector_two_broad.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "d2d58b0ad7c4704980386ddfc4983c4c6aa3c84c4436723a561da435f8ab6e18",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-vector_two_broad.json.gz"
+          },
+          "wall_seconds": 62.38879210082814
+        },
+        "vector_unequal_mass": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "7ca3d5e87d35e4f76ced4b5ef4f1f5ee4e2858ce",
+            "path": "reports/toy100/overnight-20260925/results/d9bfc8b2d7d107832c8460955ef4095c0d8e5296ee52f19291b5be59fbf1ef5b.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "bad9bdb2f3069b076ed33e7148d898587383bb6c3f6dff1f24508d6e8465d9b3",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/d9bfc8b2d7d107832c8460955ef4095c0d8e5296ee52f19291b5be59fbf1ef5b.json.gz"
+          },
+          "wall_seconds": 90.1650893338956
+        },
+        "vector_unequal_width": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "0031bdc48edda0d2716fe42e0ed531c617dec39f",
+            "path": "reports/toy100/gap-fill-20260925/results/k3p-toy-vector_unequal_width.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "054501068ba530522f85518791fb5b3bb20382dd6f03b84d93dc538fb8bb8798",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3p-toy-vector_unequal_width.json.gz"
+          },
+          "wall_seconds": 79.03423630795442
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "gapfill-k3p",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-k3p-84363f69cb3a.json",
+          "sha256": "e71a2e2f1070c1a8145043fba3cd80075f2bc9fa0109c29ef5b5f66801e76f6c"
+        }
+      ],
+      "package_sha256": [],
+      "prior_cohort": "historical_host_protocol",
+      "record_ids": [
+        "history-k3p-84363f69cb3a"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 16,
+          "known_wall_seconds": 1248.8388162322808,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": 1248.8388162322808
+        },
+        "decision": "PASS",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "cover_leftover": "PASS",
+          "grid100": "PASS",
+          "img_blobs4": "PASS",
+          "img_stripes2": "PASS",
+          "mid_scale_identity": "PASS",
+          "residual_student": "PASS",
+          "rotated100": "PASS",
+          "staggered100": "PASS",
+          "trajectory": "PASS",
+          "unipolar": "PASS",
+          "vector_anisotropic": "PASS",
+          "vector_overlap": "PASS",
+          "vector_spiral": "PASS",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "PASS",
+          "vector_unequal_width": "PASS"
+        },
+        "unknown_tasks": []
+      },
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 3,
+          "known_wall_seconds": 19.33470469713211,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": 19.33470469713211
+        },
+        "decision": "PASS",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "ae_gan_hold": "PASS",
+          "two_pole": "PASS",
+          "unused_token_hold": "PASS"
+        },
+        "unknown_tasks": []
+      },
+      "source_path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+      "sources": [
+        {
+          "git_blob": "dc64f4f11afc2068a4863a87a76a1f54890d98c7",
+          "path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bb0a6f3073b07a3074139c16111a1886478a90c8a7a7c417a7657ae90e52c743",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/qualification-summary.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "k3g",
+      "candidate_revisions": [
+        "6a2c31fa8e413c17a4cf97a290c0f5a477bad11dfb12e2ce4fa8d074ad87d29c"
+      ],
+      "classification": "true_accept",
+      "conflicts": [],
+      "cost_receipts": {
+        "ae_gan_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "d6954d124e789c9469f2a6fc7e62c0fc4c756d3f",
+            "path": "reports/toy100/overnight-20260925/results/bc304172d858b5e9d41ffd3643580e166f5ad5c511b46e0e4e618a73ffd3aa5b.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "1893d4bb48c9d34996c17de6e8552209e26f81f02973e0cb7ff69a8294c3cd99",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/bc304172d858b5e9d41ffd3643580e166f5ad5c511b46e0e4e618a73ffd3aa5b.json.gz"
+          },
+          "wall_seconds": 11.178123003803194
+        },
+        "cover_leftover": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "7f660e9759a3a7789385070fd6b524897b70c146",
+            "path": "reports/toy100/overnight-20260925/results/a41b789fef084ac2575f47e4b38532a6066c6c49a2a95949ea090abdfb04d3c0.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "e3a58858a450567370c540c0a18a459785cb8927c30348d2628fd3443ea51443",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/a41b789fef084ac2575f47e4b38532a6066c6c49a2a95949ea090abdfb04d3c0.json.gz"
+          },
+          "wall_seconds": 39.11538620386273
+        },
+        "grid100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "e27115160c8993651ee12fffd72c17b252dc91c6",
+            "path": "reports/toy100/gap-fill-20260925/results/k3g-native-grid100.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "b0237053e2459c909efefd04c0c7c0e340bb93b2478d82d477ebdf38cbd81bd6",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3g-native-grid100.json.gz"
+          },
+          "wall_seconds": 160.4816088541411
+        },
+        "img_blobs4": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "71d1a37a524e56177c17393c02c0c6e17d852330",
+            "path": "reports/toy100/overnight-20260925/results/bced129963a6b33d185495367b036016780ef4260968953b1ea979a17d4e946f.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "26ea4464e18374e7cc31979c2d2064ae6cf3114d1df70327a31b4155af9ae0b8",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/bced129963a6b33d185495367b036016780ef4260968953b1ea979a17d4e946f.json.gz"
+          },
+          "wall_seconds": 28.595064610941336
+        },
+        "img_stripes2": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "18172d77cc566c288028acc9ca02bd81dcd8f20e",
+            "path": "reports/toy100/overnight-20260925/results/d80b62bac3098279714224860c973a8bc1b0d18c6608c9a5afebfaace23cf846.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "36ff9a2229d9f39c9ee9dccf6d7bf6739bafd4687e14a8b548d1fea0173adfdd",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/d80b62bac3098279714224860c973a8bc1b0d18c6608c9a5afebfaace23cf846.json.gz"
+          },
+          "wall_seconds": 33.63222097908147
+        },
+        "mid_scale_identity": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "2c4c88cb46b77c14dee245631aed631983b6f956",
+            "path": "reports/toy100/overnight-20260925/results/b5a396c4ff83871a3f5405def5481c9fb141c670f8a840af429bd625e4115d04.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "215fe3906a4125a0e9a746e627b9f6327a0996baedcefc14d673291cf3759610",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/b5a396c4ff83871a3f5405def5481c9fb141c670f8a840af429bd625e4115d04.json.gz"
+          },
+          "wall_seconds": 59.499005215941
+        },
+        "residual_student": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "9d6a048a80a6e7efd1a5e6165fb6c307370bbfb1",
+            "path": "reports/toy100/overnight-20260925/results/79368a4b008652fa1e775c69e16360ebd66963763f83ad06160b4e73c1ea846e.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "ce3d96a6513bea3a196a890ee18e1084e0d3fd9eb35e977393941380e032e7cf",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/79368a4b008652fa1e775c69e16360ebd66963763f83ad06160b4e73c1ea846e.json.gz"
+          },
+          "wall_seconds": 15.777037490857765
+        },
+        "rotated100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "72ffdf044b0ee4856f0fd79facdb327016b53420",
+            "path": "reports/toy100/gap-fill-20260925/results/k3g-native-rotated100.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "4c0e8f9ea8c85c390a4cec80ade1d5ede9c1c525c605a989552a233398327d83",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3g-native-rotated100.json.gz"
+          },
+          "wall_seconds": 223.513489224948
+        },
+        "staggered100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "672f28ce18f486abd24851b91db43b8d007ded36",
+            "path": "reports/toy100/overnight-20260925/results/f01f77c7bc65319b44aa57948ba09d3b566880f99ec91c5b7ad45127af1011b1.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "5bd2c122f101b976170ec0e05a51d571cf80d459bb656bd36219155bccc01e88",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/f01f77c7bc65319b44aa57948ba09d3b566880f99ec91c5b7ad45127af1011b1.json.gz"
+          },
+          "wall_seconds": 263.4571724140551
+        },
+        "trajectory": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "91afabdd03ea4747d88ef212b7a37469f3c1ff3d",
+            "path": "reports/toy100/overnight-20260925/results/f7765c0e21dc760a7c8e257fb058ece047daee6dd6494262fd5840564dea5a82.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "68bdd331c8ab0697eece0019f63fa24316a7778ab53cbddd99d5d53fe8ce7921",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/f7765c0e21dc760a7c8e257fb058ece047daee6dd6494262fd5840564dea5a82.json.gz"
+          },
+          "wall_seconds": 16.546538598136976
+        },
+        "two_pole": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "632e338311c9328f0d2c61f37501ce6445cac635",
+            "path": "reports/toy100/overnight-20260925/results/41b41bb330a46b89d70e77adeb4a0e2dbc4f13654ffa8cfa9747c431cfa4ca58.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "990554cae9a7759ede4a6306b7cd4f370d1c663d96bbd7d1f11ba62059063057",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/41b41bb330a46b89d70e77adeb4a0e2dbc4f13654ffa8cfa9747c431cfa4ca58.json.gz"
+          },
+          "wall_seconds": 3.0934459129348397
+        },
+        "unipolar": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "99ded650480ec158d6dd4d5b041d90fbf184b8ab",
+            "path": "reports/toy100/overnight-20260925/results/69a6099b4f5b7db7fe56046a1e0bdd016c891efd14bf0d95f7b3a240bf6c3640.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "32e199a17e4c6bc8ab8b6fcf393c946d0edf305c24ea011ff1cdf5e8c5b4684e",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/69a6099b4f5b7db7fe56046a1e0bdd016c891efd14bf0d95f7b3a240bf6c3640.json.gz"
+          },
+          "wall_seconds": 16.84677869384177
+        },
+        "unused_token_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "ea76d42de898f5a2ebc6b90d9186da84a1ba55a6",
+            "path": "reports/toy100/overnight-20260925/results/daf0afa6b067d7a226d8cc2ee6095b87e8d36d3dc35fcbf0540b8fb356bbbf17.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "c27e2763eaccf23847de1bc3cca6272152b78e1008ab3febbce08ffa2b89e210",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/daf0afa6b067d7a226d8cc2ee6095b87e8d36d3dc35fcbf0540b8fb356bbbf17.json.gz"
+          },
+          "wall_seconds": 4.997561624040827
+        },
+        "vector_anisotropic": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "31bb0e32816c4d2a264573ffb337bd1bd91476c2",
+            "path": "reports/toy100/gap-fill-20260925/results/k3g-toy-vector_anisotropic.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "3bcc2c30f15b9608e1747273b89a7d1be2a64dafcc43c2cd2760a7d81bd485ae",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3g-toy-vector_anisotropic.json.gz"
+          },
+          "wall_seconds": 104.18927899701521
+        },
+        "vector_overlap": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "9d9c0f12cbac23cc888f9d4f23ffe0b43f58d762",
+            "path": "reports/toy100/gap-fill-20260925/results/k3g-toy-vector_overlap.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "75a79b8878a31dea5f84e6d52e4e3511824329ea7f480561f9cb0bf702c2a5cd",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3g-toy-vector_overlap.json.gz"
+          },
+          "wall_seconds": 66.42750799306668
+        },
+        "vector_spiral": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "cab8873020cca93309f71a7ec916f742008b68ef",
+            "path": "reports/toy100/gap-fill-20260925/results/k3g-toy-vector_spiral.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "da64f97d34b593c5b32d1d56bfe2dc5ed28001f49312e74c401a055fb12b1e62",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3g-toy-vector_spiral.json.gz"
+          },
+          "wall_seconds": 73.54476851783693
+        },
+        "vector_two_broad": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "21292b3404326fccfa5546a2f910807016abd574",
+            "path": "reports/toy100/overnight-20260925/results/cdef2c55b6d23c8ac1db228943b579108811894cd9b5ae3c6fd43fffcad1bfe2.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "4130659ebec511802978e537563d13b4dc98db5a08f8dad1103e9a96651b7de4",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/cdef2c55b6d23c8ac1db228943b579108811894cd9b5ae3c6fd43fffcad1bfe2.json.gz"
+          },
+          "wall_seconds": 76.2454418479465
+        },
+        "vector_unequal_mass": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "4d798d5e20ce00c21f76d27a5506c82fd4380c10",
+            "path": "reports/toy100/overnight-20260925/results/3beec7acea67c38a1b6fdc2f565ace01f0857bf85c4d74c125b9657abd868e53.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "cfa3d0510555e224fc623a8a01fa83927e34dd33e3ad0b05bd83611ef6e5fb94",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/3beec7acea67c38a1b6fdc2f565ace01f0857bf85c4d74c125b9657abd868e53.json.gz"
+          },
+          "wall_seconds": 105.22334662615322
+        },
+        "vector_unequal_width": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "3991341cc6073d4c7ad5b77804318948771a214f",
+            "path": "reports/toy100/overnight-20260925/results/7d7c1f4e16bea7024c7f3ad254c6e385ccf05a2d56701112f4542a6ebd40ac15.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "757c1fbe2ad7a5a51d1185e72828bc53d8a13f708ca8d52a47f2f87db96c75d8",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/7d7c1f4e16bea7024c7f3ad254c6e385ccf05a2d56701112f4542a6ebd40ac15.json.gz"
+          },
+          "wall_seconds": 74.37723146914504
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "gapfill-k3g",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-k3g-27ec6750db46.json",
+          "sha256": "418160aef409f4a840a17b898602a85980d857ed76fae2288e536be16c3ebd64"
+        }
+      ],
+      "package_sha256": [],
+      "prior_cohort": "historical_host_protocol",
+      "record_ids": [
+        "history-k3g-27ec6750db46"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 16,
+          "known_wall_seconds": 1357.4718777369708,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": 1357.4718777369708
+        },
+        "decision": "PASS",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "cover_leftover": "PASS",
+          "grid100": "PASS",
+          "img_blobs4": "PASS",
+          "img_stripes2": "PASS",
+          "mid_scale_identity": "PASS",
+          "residual_student": "PASS",
+          "rotated100": "PASS",
+          "staggered100": "PASS",
+          "trajectory": "PASS",
+          "unipolar": "PASS",
+          "vector_anisotropic": "PASS",
+          "vector_overlap": "PASS",
+          "vector_spiral": "PASS",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "PASS",
+          "vector_unequal_width": "PASS"
+        },
+        "unknown_tasks": []
+      },
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 3,
+          "known_wall_seconds": 19.26913054077886,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": 19.26913054077886
+        },
+        "decision": "PASS",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "ae_gan_hold": "PASS",
+          "two_pole": "PASS",
+          "unused_token_hold": "PASS"
+        },
+        "unknown_tasks": []
+      },
+      "source_path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+      "sources": [
+        {
+          "git_blob": "dc64f4f11afc2068a4863a87a76a1f54890d98c7",
+          "path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bb0a6f3073b07a3074139c16111a1886478a90c8a7a7c417a7657ae90e52c743",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/qualification-summary.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "k3",
+      "candidate_revisions": [
+        "2545387aaded0601a1152f6c93b42b62247f339b702a2646c8b536afa7814299"
+      ],
+      "classification": "true_accept",
+      "conflicts": [],
+      "cost_receipts": {
+        "ae_gan_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "ead61586af7c99c0a2cb807614524ced8fe7ffea",
+            "path": "reports/toy100/overnight-20260925/results/869530e53e0299aa8f4b6fdc7a32f36d934d7bc536989a975be170557734788e.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "921a4a02e77f0356c73c03b76305bc87b465b8b2622af8d1ec6ffe98391d675b",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/869530e53e0299aa8f4b6fdc7a32f36d934d7bc536989a975be170557734788e.json.gz"
+          },
+          "wall_seconds": 12.17408295511268
+        },
+        "cover_leftover": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "2b94f7c3eb1a2ba02df41ff5430d33cf8da12893",
+            "path": "reports/toy100/overnight-20260925/results/cc3b00077e8b0e0b82c93c0a245aa47de9eb025961eb5a748574868be7aa250c.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "2a0ee6bd0be488c6d613b9b47d925432b86fd8028c5179bd55d89af5f4db5747",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/cc3b00077e8b0e0b82c93c0a245aa47de9eb025961eb5a748574868be7aa250c.json.gz"
+          },
+          "wall_seconds": 44.150262312963605
+        },
+        "grid100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "7a1030fdba9d63a34c34f66f369b844b3b46cc75",
+            "path": "reports/toy100/overnight-20260925/results/628636a5168d364071fa5b8e7f5a2518cb8d83b6be03fc27f87a6d34b853189f.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "c6d2d811e0df6ace95b1e4f1dfa555b5490be1d4f4bf839e9e158b156da0e022",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/628636a5168d364071fa5b8e7f5a2518cb8d83b6be03fc27f87a6d34b853189f.json.gz"
+          },
+          "wall_seconds": 214.18657032796182
+        },
+        "img_blobs4": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "39966126c5553da6716b0644737a778ec47b3e9e",
+            "path": "reports/toy100/overnight-20260925/results/6633d14002cdc1126f1d68b3250fda7616e8a4620c8e4063c55c0943d1917759.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "8292313aec924b181738d6a7a6af719e8f936dce4962170b01d229da1f34f988",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/6633d14002cdc1126f1d68b3250fda7616e8a4620c8e4063c55c0943d1917759.json.gz"
+          },
+          "wall_seconds": 30.1615766400937
+        },
+        "img_stripes2": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "a928ad65ce5696cfe8ee663e72340240122092ab",
+            "path": "reports/toy100/overnight-20260925/results/e938ad09f29188fe3ff2a8bb3618f71d631457c792a9388457d1a334dc0229d8.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "299158e9baedd751f1ae210c2ad384f8c872f919f291267d3b351433176118ab",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/e938ad09f29188fe3ff2a8bb3618f71d631457c792a9388457d1a334dc0229d8.json.gz"
+          },
+          "wall_seconds": 26.87232956988737
+        },
+        "mid_scale_identity": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "bbbb4fa09e44b57d043f0d5681d5c5684fe37d2d",
+            "path": "reports/toy100/overnight-20260925/results/66ce1fad77c96d9b87f175f4e8229354edfe2714235b62b52170ed0fd8763874.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "d70aa7316095ff398f31ac44058bf9d8a2dfb73cf5c3e8247f1c7e98ede52096",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/66ce1fad77c96d9b87f175f4e8229354edfe2714235b62b52170ed0fd8763874.json.gz"
+          },
+          "wall_seconds": 58.735393221955746
+        },
+        "residual_student": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "91920e719b17db2ab3622da640e1e70d75729fab",
+            "path": "reports/toy100/overnight-20260925/results/c58cbc9456da1f203f099517af6b17c8290043744a7647b9858fa7fcef330c5e.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "352c3abd148846cf038429f5ed56f463a4b2dd0e9935f5b6097b6ce37319d7aa",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/c58cbc9456da1f203f099517af6b17c8290043744a7647b9858fa7fcef330c5e.json.gz"
+          },
+          "wall_seconds": 16.360481416108087
+        },
+        "rotated100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "1a308e8bcf8857d56284ad09dbdef734dffd551e",
+            "path": "reports/toy100/overnight-20260925/results/14f75f363b795bb7cdb9026317b4ba4cbd7605c6f0d566dc085d87f16991f57f.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "05cdbf6967d4cd682244311335d5b49075ce993ec1947c3af26f9576feabde26",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/14f75f363b795bb7cdb9026317b4ba4cbd7605c6f0d566dc085d87f16991f57f.json.gz"
+          },
+          "wall_seconds": 261.81892936490476
+        },
+        "staggered100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "63ff114faa9d713102ea0eb3bfd903e031510799",
+            "path": "reports/toy100/overnight-20260925/results/ac33096fedf24f26c0f6ea6fd112c32321e5bc0f3c3b9e6b760e52e124a80b9e.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "bceda47ebc5b5f73826583bbae4cb1303b6127e8be6007ca088e864b03058887",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/ac33096fedf24f26c0f6ea6fd112c32321e5bc0f3c3b9e6b760e52e124a80b9e.json.gz"
+          },
+          "wall_seconds": 289.85862986999564
+        },
+        "trajectory": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "03306aebef9fdf1feb8b6b67c58491e7e96bb2e1",
+            "path": "reports/toy100/overnight-20260925/results/cce0d1e10a8641fb6d3826fc6b7492ab3e40610527dfa52afcfbeb420cf3de6b.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "d500b9caae0e229ed332236e9c57138cc8fd946729f248d30f7a563be8cf6735",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/cce0d1e10a8641fb6d3826fc6b7492ab3e40610527dfa52afcfbeb420cf3de6b.json.gz"
+          },
+          "wall_seconds": 15.754500602837652
+        },
+        "two_pole": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "451a6da5621ffa08d4b71663bbd17feb49d2add2",
+            "path": "reports/toy100/overnight-20260925/results/291077610e2ffb97bda15c3f1e1e1569703ad1715db00082c5fc2e3dac603b3a.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "caeef628babec18ceed200d8182c2278fbd8f038ee1772d33f772299700fc44c",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/291077610e2ffb97bda15c3f1e1e1569703ad1715db00082c5fc2e3dac603b3a.json.gz"
+          },
+          "wall_seconds": 2.9095988620538265
+        },
+        "unipolar": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "ce57106f1cebe3b290e9b780d5ffba5aa74dc779",
+            "path": "reports/toy100/overnight-20260925/results/d4829747358dda128a78b6109902c68c46003ce235f4dd45d0b2a398430cf425.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "01c616b8bdadd4fa58353a3a2ddecee32e3501b3cc78026debde3bb239482957",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/d4829747358dda128a78b6109902c68c46003ce235f4dd45d0b2a398430cf425.json.gz"
+          },
+          "wall_seconds": 18.104057267075405
+        },
+        "unused_token_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "a5ce1a2963a462e27ce704f75fc3067597f0d46d",
+            "path": "reports/toy100/overnight-20260925/results/583956c2a8d733dee5a1b3575216887d2f32f7f441f3eba55b2390cb07698e23.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "7f5777442f2c08a66e7eb3eff30b3844277134f6393b332ea4659d34586e0487",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/583956c2a8d733dee5a1b3575216887d2f32f7f441f3eba55b2390cb07698e23.json.gz"
+          },
+          "wall_seconds": 5.628369089914486
+        },
+        "vector_anisotropic": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "63cf66aaf1381c778862b25d90433777cc5d3825",
+            "path": "reports/toy100/gap-fill-20260925/results/k3-toy-vector_anisotropic.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "2458ded6fa5f308f5caba1fd1def64db90d13efa2a1db9af880564e889aaa433",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3-toy-vector_anisotropic.json.gz"
+          },
+          "wall_seconds": 73.14449321315624
+        },
+        "vector_overlap": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "e04e9d459cf1582ab8a7646179472704f5245237",
+            "path": "reports/toy100/gap-fill-20260925/results/k3-toy-vector_overlap.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "6878d27742004865a311f36cd4ae68d0b46a504f334ae227a93f9f44199fdeb9",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3-toy-vector_overlap.json.gz"
+          },
+          "wall_seconds": 70.2202997871209
+        },
+        "vector_spiral": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "35b9306ed91f2646bdea989f6ab082bc8faee773",
+            "path": "reports/toy100/gap-fill-20260925/results/k3-toy-vector_spiral.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "ab64367cd94267dd194ea3c8d327878b62309d59ba3b5aeaa8b1a8b614c495be",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/k3-toy-vector_spiral.json.gz"
+          },
+          "wall_seconds": 75.62303545884788
+        },
+        "vector_two_broad": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "48245141421b0d6b890362f550d909dc66151a4f",
+            "path": "reports/toy100/overnight-20260925/results/23e09059c146ac198c9864ebb819e50c720518d860b1bc00565a8b2edd3e6bf6.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "fc360354fb1f7da4b946a06030070a552a85e954f363db985a88da28735446ad",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/23e09059c146ac198c9864ebb819e50c720518d860b1bc00565a8b2edd3e6bf6.json.gz"
+          },
+          "wall_seconds": 74.58125441800803
+        },
+        "vector_unequal_mass": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "504e37ce30352b6a8b3fa0ad9770753dcfdd08fb",
+            "path": "reports/toy100/overnight-20260925/results/8323c121e1564432c01d923c6fac2c5908a057388a1ac58bf2d1e35d3956f34d.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "fd8ff8df32f75952c7137e53925d197dec9dbe3f3938cad3fd3e6dc04cc8f324",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/8323c121e1564432c01d923c6fac2c5908a057388a1ac58bf2d1e35d3956f34d.json.gz"
+          },
+          "wall_seconds": 86.80975745501928
+        },
+        "vector_unequal_width": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "5412c00bdd680c80b22d9256487e6508b7cc974d",
+            "path": "reports/toy100/overnight-20260925/results/486597340a6656466b3e4aae0d401e3bdf7a68fa6e30fec673b2fa85551d44c1.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "985e0c75218e9997252bdc0e5bbf2d16125800a3c06252a57108acde25e81120",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/486597340a6656466b3e4aae0d401e3bdf7a68fa6e30fec673b2fa85551d44c1.json.gz"
+          },
+          "wall_seconds": 78.80239974707365
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "gapfill-k3",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-k3-8f678149295a.json",
+          "sha256": "430b91c019d05f1e095ec3335ab4f8406ad0ebdca438a738e818c1fa51d7746a"
+        }
+      ],
+      "package_sha256": [],
+      "prior_cohort": "historical_host_protocol",
+      "record_ids": [
+        "history-k3-8f678149295a"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 16,
+          "known_wall_seconds": 1435.1839706730098,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": 1435.1839706730098
+        },
+        "decision": "PASS",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "cover_leftover": "PASS",
+          "grid100": "PASS",
+          "img_blobs4": "PASS",
+          "img_stripes2": "PASS",
+          "mid_scale_identity": "PASS",
+          "residual_student": "PASS",
+          "rotated100": "PASS",
+          "staggered100": "PASS",
+          "trajectory": "PASS",
+          "unipolar": "PASS",
+          "vector_anisotropic": "PASS",
+          "vector_overlap": "PASS",
+          "vector_spiral": "PASS",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "PASS",
+          "vector_unequal_width": "PASS"
+        },
+        "unknown_tasks": []
+      },
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 3,
+          "known_wall_seconds": 20.712050907080993,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": 20.712050907080993
+        },
+        "decision": "PASS",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "ae_gan_hold": "PASS",
+          "two_pole": "PASS",
+          "unused_token_hold": "PASS"
+        },
+        "unknown_tasks": []
+      },
+      "source_path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+      "sources": [
+        {
+          "git_blob": "dc64f4f11afc2068a4863a87a76a1f54890d98c7",
+          "path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bb0a6f3073b07a3074139c16111a1886478a90c8a7a7c417a7657ae90e52c743",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/qualification-summary.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "rg5-bcap",
+      "candidate_revisions": [
+        "b698c6b06ff09ea4933164b54068247ac18a6a145377eacc77b9fcfb9b8e6de6"
+      ],
+      "classification": "false_accept",
+      "conflicts": [],
+      "cost_receipts": {
+        "ae_gan_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "08918048dcc9c9dc225563f540bdebf92695e39c",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-ae_gan_hold.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "ae3fae01bd251fbb5b25d428c8ba7eafc3fe620a41d8573078befc445e6509d8",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-ae_gan_hold.json.gz"
+          },
+          "wall_seconds": 10.676302849082276
+        },
+        "cover_leftover": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "03154caaed209505e9765a26e985e2a424d98581",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-cover_leftover.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "a75b1b3b3053b5ce27068fd5176b599df21a289097171d4df4509936233206ce",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-cover_leftover.json.gz"
+          },
+          "wall_seconds": 45.5109979279805
+        },
+        "grid100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "4cf981c929c5fb0080228d46621fa3920688dadc",
+            "path": "reports/toy100/overnight-20260925/results/900395afca5198e9ad2805006bcbef36c9194c63cf87f163f53f7ca68ff91536.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "b54a4857a72b8382dd591da0821efc4ef69135a9dc4762f2baa48abbfe217b66",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/900395afca5198e9ad2805006bcbef36c9194c63cf87f163f53f7ca68ff91536.json.gz"
+          },
+          "wall_seconds": 181.6956566479057
+        },
+        "img_blobs4": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "369608391e75cc2b612d51493b5a26f422798d91",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-img_blobs4.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "506db336630b56267d72bbe4645181850c24f2915b8d80a0dd3546b542952d15",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-img_blobs4.json.gz"
+          },
+          "wall_seconds": 33.31638993299566
+        },
+        "img_stripes2": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "42b06b664ab6e5f89268c9ed119976ba2ef3de4c",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-img_stripes2.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "8a10491feece43762e5d95a08f56051ed77ccf1498c7e1ce2fffe1499f040b1d",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-img_stripes2.json.gz"
+          },
+          "wall_seconds": 29.69130358705297
+        },
+        "mid_scale_identity": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "f41ec8eeefd8eb23248e49dd7b82083e522ae3c4",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-mid_scale_identity.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "7e46877e21ea3c3c2157e7ba8109e4eed4199231f4a6984256788c845c1a0562",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-mid_scale_identity.json.gz"
+          },
+          "wall_seconds": 59.705141343176365
+        },
+        "residual_student": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "78938dd41bce545ef5c7f82640263feed99d1942",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-residual_student.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "4e86149152368a4546c84db36232fe11a4f628cc63e183176e4a6371b767d0b5",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-residual_student.json.gz"
+          },
+          "wall_seconds": 16.906087211100385
+        },
+        "rotated100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "24f12350de476eeb6404273d84af173b1583e8e8",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-native-rotated100.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "6c81ccd624953755f5d545f6c219cb5fe6c0e4f7321fb085bb0a52f489f8b2a7",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-native-rotated100.json.gz"
+          },
+          "wall_seconds": 158.2157783191651
+        },
+        "staggered100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "6ef7de91adfa56301d357e51b381d7647be69848",
+            "path": "reports/toy100/overnight-20260925/results/05ddd2c9e8bcbb5b02a1d06d6118bf628737931d93acd7e877182ede5ccc7e74.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "6bb4c05fe951e36aa3b9f59731eea1d2a983fc4f77f77a31583f57af69f4aab5",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/overnight-20260925/results/05ddd2c9e8bcbb5b02a1d06d6118bf628737931d93acd7e877182ede5ccc7e74.json.gz"
+          },
+          "wall_seconds": 161.56092551187612
+        },
+        "trajectory": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "92d822ef8323eeae77703efa133d92483efd9a2a",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-trajectory.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "59ff6cf3009b064b52c0005c2ef95ec4f2cf53c51efffc123bb1cbb6a0c274be",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-trajectory.json.gz"
+          },
+          "wall_seconds": 18.524748079944402
+        },
+        "two_pole": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "81ad854a75d5f7cc200fe2a5f72b5fea7948df7b",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-two_pole.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "1d0832ccd72c669c36d15cef9b434834358caa994fe21b2d7b73e3582604ca07",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-two_pole.json.gz"
+          },
+          "wall_seconds": 2.9275261969305575
+        },
+        "unipolar": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "91a6662f2a5ba302b30a3fb6f04a5669288eae2d",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-unipolar.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "abc0dd42a0b584a89888e051e96b8940b9ae23d2e7fd83dee5015a10c3c43a52",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-unipolar.json.gz"
+          },
+          "wall_seconds": 14.745335426181555
+        },
+        "unused_token_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "a082ccc70ffe21e10946619a0c155137862c9725",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-unused_token_hold.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "f57813c6de1769f3f52156f1dcd3542652789a90f71facab50a93158745660db",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-unused_token_hold.json.gz"
+          },
+          "wall_seconds": 5.505274070892483
+        },
+        "vector_anisotropic": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "3c6ae5c9f06d914f2a4eeb08e7f0fdeef1971f13",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_anisotropic.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "8afed43f8a781f6d53965e2a7ab1563412517627b647f2e52cbab9f3db1c8c82",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_anisotropic.json.gz"
+          },
+          "wall_seconds": 70.72709662094712
+        },
+        "vector_overlap": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "38945b3c32af3552496df88fed60865dee3a0e49",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_overlap.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "7ec172e02d5f4ff3c4539c279e0fdf8da081ce28b47de2007505db0ad9763bb7",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_overlap.json.gz"
+          },
+          "wall_seconds": 56.36425980110653
+        },
+        "vector_spiral": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "39c4fb53052692f80d934b95fac60d79e9c29057",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_spiral.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "b8428938dcfd5881e736f0ba833d9b0a6777d42b53587315e19c5872831acc8c",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_spiral.json.gz"
+          },
+          "wall_seconds": 63.611864041071385
+        },
+        "vector_two_broad": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "5a8a047d43d30dc615f21734b3c7a3dc86104b9b",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_two_broad.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "a23cb48a16a558ab27ee568d02b9ea59c2fbdbbc0ef85d6072e5a24669900cbd",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_two_broad.json.gz"
+          },
+          "wall_seconds": 52.70489411102608
+        },
+        "vector_unequal_mass": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "083cc30da8ae18b4f0eac36eca08d98db8635714",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_unequal_mass.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "c5dd8eb02ed2dd7f7ea243f6cdb15617e37054884af60f30fe22198600ac3035",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_unequal_mass.json.gz"
+          },
+          "wall_seconds": 79.686700015096
+        },
+        "vector_unequal_width": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": {
+            "git_blob": "ae08a42aa612d4d6f7f4e286d221710bbdd0e57c",
+            "path": "reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_unequal_width.json.gz",
+            "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+            "sha256": "9ec1d41435c88897b1a4d0749902cb72ae3d2646c3a6ba4a81f32c1336f15823",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results/rg5-bcap-toy-vector_unequal_width.json.gz"
+          },
+          "wall_seconds": 57.936947636073455
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "gapfill-rg5-bcap",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-rg5-bcap-8a3d2c8b9a0c.json",
+          "sha256": "a357c5fc5729ac97b71ba82a6ba3dfe25530bee95383460624dc1d36c7ecbb39"
+        }
+      ],
+      "package_sha256": [],
+      "prior_cohort": "historical_host_protocol",
+      "record_ids": [
+        "history-rg5-bcap-8a3d2c8b9a0c"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 16,
+          "known_wall_seconds": 1100.9041262126993,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": 1100.9041262126993
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "img_stripes2"
+        ],
+        "task_statuses": {
+          "cover_leftover": "PASS",
+          "grid100": "PASS",
+          "img_blobs4": "PASS",
+          "img_stripes2": "FAIL",
+          "mid_scale_identity": "PASS",
+          "residual_student": "PASS",
+          "rotated100": "PASS",
+          "staggered100": "PASS",
+          "trajectory": "PASS",
+          "unipolar": "PASS",
+          "vector_anisotropic": "PASS",
+          "vector_overlap": "PASS",
+          "vector_spiral": "PASS",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "FAIL",
+          "vector_unequal_width": "FAIL"
+        },
+        "unknown_tasks": []
+      },
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 3,
+          "known_wall_seconds": 19.109103116905317,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": 19.109103116905317
+        },
+        "decision": "PASS",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "ae_gan_hold": "PASS",
+          "two_pole": "PASS",
+          "unused_token_hold": "PASS"
+        },
+        "unknown_tasks": []
+      },
+      "source_path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+      "sources": [
+        {
+          "git_blob": "dc64f4f11afc2068a4863a87a76a1f54890d98c7",
+          "path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bb0a6f3073b07a3074139c16111a1886478a90c8a7a7c417a7657ae90e52c743",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/qualification-summary.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "dv12-ams-rc3-c22",
+      "candidate_revisions": [
+        "aef86862b376cb681be9d48ba344f5c3f004a1e005a2e697ec544a9bf3b1de04"
+      ],
+      "classification": "true_reject",
+      "conflicts": [],
+      "cost_receipts": {
+        "ae_gan_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "cover_leftover": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "mid_scale_identity": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "residual_student": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "trajectory": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "two_pole": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "unipolar": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "unused_token_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "dv12-ams-rc3-c22",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-dv12-ams-rc3-c22-501063495713.json",
+          "sha256": "39a6b67c7c72b3da23adf917be0a217a385e9cb26b61af69f6e20ce5c405faad"
+        }
+      ],
+      "package_sha256": [
+        "ca2feb43713a0eb8000fbdcf6a640d83d47ce275bbb3228a34ed271756f72506"
+      ],
+      "prior_cohort": "historical_custom_hosts",
+      "record_ids": [
+        "history-dv12-ams-rc3-c22-501063495713"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "cover_leftover",
+          "mid_scale_identity"
+        ],
+        "task_statuses": {
+          "cover_leftover": "FAIL",
+          "grid100": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "FAIL",
+          "residual_student": "PASS",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "PASS",
+          "unipolar": "PASS",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "grid100",
+          "rotated100",
+          "staggered100",
+          "img_stripes2",
+          "img_blobs4"
+        ]
+      },
+      "runtime_cohort": "pr155_custom_engine",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "two_pole",
+            "unused_token_hold",
+            "ae_gan_hold"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "two_pole",
+          "unused_token_hold"
+        ],
+        "task_statuses": {
+          "ae_gan_hold": "PASS",
+          "two_pole": "FAIL",
+          "unused_token_hold": "FAIL"
+        },
+        "unknown_tasks": []
+      },
+      "source_path": "reports/toy100/lrfree-search/custom22/results.json",
+      "sources": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "st-10-c22",
+      "candidate_revisions": [
+        "e9068ddba0056793a11f663ccbcfc582ba8042c0c8ad7edd4e633f78d73e1901"
+      ],
+      "classification": "true_reject",
+      "conflicts": [],
+      "cost_receipts": {
+        "ae_gan_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "cover_leftover": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "mid_scale_identity": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "residual_student": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "trajectory": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "two_pole": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "unipolar": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "unused_token_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "st-10-c22",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-st-10-c22-6815082d4e4a.json",
+          "sha256": "5350851358baa44e9d3dfab280dd8cf1f3d795e16a9e45e488f2911442b9df8c"
+        }
+      ],
+      "package_sha256": [
+        "7effbb0f0083c0e532581a4cc8763e60d106ab4944930337c128aef7014825e4"
+      ],
+      "prior_cohort": "historical_custom_hosts",
+      "record_ids": [
+        "history-st-10-c22-6815082d4e4a"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "trajectory"
+        ],
+        "task_statuses": {
+          "cover_leftover": "PASS",
+          "grid100": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "PASS",
+          "residual_student": "PASS",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "FAIL",
+          "unipolar": "PASS",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "grid100",
+          "rotated100",
+          "staggered100",
+          "img_stripes2",
+          "img_blobs4"
+        ]
+      },
+      "runtime_cohort": "pr155_custom_engine",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "two_pole",
+            "unused_token_hold",
+            "ae_gan_hold"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "two_pole",
+          "unused_token_hold"
+        ],
+        "task_statuses": {
+          "ae_gan_hold": "PASS",
+          "two_pole": "FAIL",
+          "unused_token_hold": "FAIL"
+        },
+        "unknown_tasks": []
+      },
+      "source_path": "reports/toy100/lrfree-search/custom22/results.json",
+      "sources": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "row-em-renew-all22",
+      "candidate_revisions": [
+        "17b592f92b62a61b22a4ab9845915971321649be421a09df5ea13e9c74b07a54"
+      ],
+      "classification": "unknown",
+      "conflicts": [],
+      "cost_receipts": {
+        "ae_gan_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "cover_leftover": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "grid100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "img_blobs4": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "img_stripes2": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "mid_scale_identity": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "residual_student": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "rotated100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "staggered100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "trajectory": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "two_pole": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "unipolar": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "unused_token_hold": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_anisotropic": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_overlap": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_spiral": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_two_broad": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_unequal_mass": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_unequal_width": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "row-em-renew-all22",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-row-em-renew-all22-c9a100c54f2f.json",
+          "sha256": "0dac7a2a21f7ef8b1274ef41bfc927d80a389bb5fc8e523e9674b4074c09c00e"
+        }
+      ],
+      "package_sha256": [
+        "1fc12d29e2c5964f91c9523006e569cba743eba2e3e9851a68afa063c08cd324"
+      ],
+      "prior_cohort": "historical_cloud_with_custom_host_refusals",
+      "record_ids": [
+        "history-row-em-renew-all22-c9a100c54f2f"
+      ],
+      "reference": {
+        "blocked_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity"
+        ],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "img_blobs4"
+        ],
+        "task_statuses": {
+          "cover_leftover": "BLOCKED",
+          "grid100": "PASS",
+          "img_blobs4": "FAIL",
+          "img_stripes2": "PASS",
+          "mid_scale_identity": "BLOCKED",
+          "residual_student": "BLOCKED",
+          "rotated100": "PASS",
+          "staggered100": "PASS",
+          "trajectory": "BLOCKED",
+          "unipolar": "BLOCKED",
+          "vector_anisotropic": "PASS",
+          "vector_overlap": "PASS",
+          "vector_spiral": "PASS",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "PASS",
+          "vector_unequal_width": "PASS"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity"
+        ]
+      },
+      "runtime_cohort": "pr155_qr_noisy_cuda",
+      "smoke": {
+        "blocked_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "two_pole",
+            "unused_token_hold",
+            "ae_gan_hold"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "ae_gan_hold": "BLOCKED",
+          "two_pole": "BLOCKED",
+          "unused_token_hold": "BLOCKED"
+        },
+        "unknown_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ]
+      },
+      "source_path": "reports/toy100/lrfree-search/row-em-renew/all22-summary.json",
+      "sources": [
+        {
+          "git_blob": "debad11dfa014bc28ffe97ff21fb408d1cb92ec1",
+          "path": "reports/toy100/lrfree-search/row-em-renew/all22-summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "abe4bf4a25984f55ddaa563a5b80f98d1beb8bbadb7ab13ff19a5dcdfb85ab11",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/row-em-renew/all22-summary.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "pr215_exact_host_init",
+      "candidate_revisions": [
+        "fc26fd5e53d545fce331d99c6d479cda5b6dd5d12c7e34ec7eab40cd04e009d0"
+      ],
+      "classification": "unknown",
+      "conflicts": [],
+      "cost_receipts": {
+        "grid100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "img_blobs4": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "img_stripes2": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "rotated100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "staggered100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_anisotropic": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_overlap": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_spiral": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_two_broad": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_unequal_mass": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_unequal_width": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "pr215_exact_host_init",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-pr215-exact-host-init-0ee61e89ff62.json",
+          "sha256": "7d7dc56938d2bc1d569c2eff5b032f95edd18f8b6195a0aaa64000bddd9b9231"
+        },
+        {
+          "path": "reports/forge/records/history-pr215-exact-host-init-74bea9b2e76e.json",
+          "sha256": "b8eb6ee658a211544d4de90c870bf721d272dbbafef01afcda4f05a62b2a24dc"
+        }
+      ],
+      "package_sha256": [
+        "eb988dd9f211df8af9c3ade4ba90edc438eec6f71251545b467e6dc91ade184b"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "record_ids": [
+        "history-pr215-exact-host-init-0ee61e89ff62",
+        "history-pr215-exact-host-init-74bea9b2e76e"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "vector_anisotropic",
+          "vector_overlap",
+          "grid100",
+          "rotated100",
+          "staggered100",
+          "img_stripes2"
+        ],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100": "FAIL",
+          "img_blobs4": "PASS",
+          "img_stripes2": "FAIL",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100": "FAIL",
+          "staggered100": "FAIL",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic": "FAIL",
+          "vector_overlap": "FAIL",
+          "vector_spiral": "PASS",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "FAIL",
+          "vector_unequal_width": "FAIL"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity"
+        ]
+      },
+      "runtime_cohort": "pr155_xavier_cuda",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "two_pole",
+            "unused_token_hold",
+            "ae_gan_hold"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ]
+      },
+      "source_path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+      "sources": [
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        },
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "pr215_qr_adapter",
+      "candidate_revisions": [
+        "331fdbd266382abe38c29a657f98c9ebf4aa7e449d928b99f035bd4fe130bd5c"
+      ],
+      "classification": "unknown",
+      "conflicts": [],
+      "cost_receipts": {
+        "grid100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "img_blobs4": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "img_stripes2": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "rotated100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "staggered100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_anisotropic": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_overlap": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_spiral": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_two_broad": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_unequal_mass": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_unequal_width": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "pr215_qr_adapter",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-pr215-qr-adapter-e0fbccd2b4d8.json",
+          "sha256": "9ced7048a88c5208e77ec22ef4e8e732f53c44d5b1363aeb8c5dedd66db95ce8"
+        },
+        {
+          "path": "reports/forge/records/history-pr215-qr-adapter-e1824439449c.json",
+          "sha256": "073905d65f4dbfaf9e84c12b8bd469da9ac8bde47e7c7de40bc1d9134c46ad35"
+        }
+      ],
+      "package_sha256": [
+        "0a5aae9479ab741dd0f9f0ebde86137fbde43109e33e128d4839c7ad6a1d9686"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "record_ids": [
+        "history-pr215-qr-adapter-e0fbccd2b4d8",
+        "history-pr215-qr-adapter-e1824439449c"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "vector_anisotropic",
+          "vector_overlap",
+          "grid100",
+          "rotated100",
+          "staggered100",
+          "img_blobs4"
+        ],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100": "FAIL",
+          "img_blobs4": "FAIL",
+          "img_stripes2": "PASS",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100": "FAIL",
+          "staggered100": "FAIL",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic": "FAIL",
+          "vector_overlap": "FAIL",
+          "vector_spiral": "PASS",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "FAIL",
+          "vector_unequal_width": "FAIL"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity"
+        ]
+      },
+      "runtime_cohort": "pr155_qr_cuda",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "two_pole",
+            "unused_token_hold",
+            "ae_gan_hold"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ]
+      },
+      "source_path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+      "sources": [
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        },
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        }
+      ]
+    },
+    {
+      "candidate_id": "pr217_qr_native_adapter",
+      "candidate_revisions": [
+        "d778b2b9e3c2e430d98693a1c92c8ee3a6f3a6e1f8a55668cf1d9b3c59f33704"
+      ],
+      "classification": "unknown",
+      "conflicts": [],
+      "cost_receipts": {
+        "grid100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "img_blobs4": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "img_stripes2": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "rotated100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "staggered100": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_anisotropic": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_overlap": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_spiral": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_two_broad": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_unequal_mass": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        },
+        "vector_unequal_width": {
+          "flops": null,
+          "flops_status": "unavailable",
+          "source": null,
+          "wall_seconds": null
+        }
+      },
+      "current_qualification_reuse": false,
+      "evidence_scope": "historical",
+      "frozen_config_and_fixture_location": "Bound input cards preserve exact recipe, fixture, initializer, sampling and package headers.",
+      "id": "pr217_qr_native_adapter",
+      "input_cards": [
+        {
+          "path": "reports/forge/records/history-pr217-qr-native-adapter-0d320a9304af.json",
+          "sha256": "05f9d860fd6515e530784b15bd2c79c81ef36dc60867c3639ca8587505d8e4ae"
+        },
+        {
+          "path": "reports/forge/records/history-pr217-qr-native-adapter-57bc39c1b2bf.json",
+          "sha256": "8996c166d926e441921f43afc2e241ce3bb8e9f05801085c0dacf0d9f4e31c15"
+        }
+      ],
+      "package_sha256": [
+        "387a1265838966581b7e1858593ce9f292f376ba76d04f5f2c64e0666bf814c4"
+      ],
+      "prior_cohort": "historical_particle_cloud",
+      "record_ids": [
+        "history-pr217-qr-native-adapter-0d320a9304af",
+        "history-pr217-qr-native-adapter-57bc39c1b2bf"
+      ],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "grid100",
+          "rotated100",
+          "staggered100"
+        ],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100": "FAIL",
+          "img_blobs4": "PASS",
+          "img_stripes2": "PASS",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100": "FAIL",
+          "staggered100": "FAIL",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic": "PASS",
+          "vector_overlap": "PASS",
+          "vector_spiral": "PASS",
+          "vector_two_broad": "PASS",
+          "vector_unequal_mass": "PASS",
+          "vector_unequal_width": "PASS"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity"
+        ]
+      },
+      "runtime_cohort": "pr155_qr_cuda",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "two_pole",
+            "unused_token_hold",
+            "ae_gan_hold"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "ae_gan_hold": "NOT_RUN",
+          "two_pole": "NOT_RUN",
+          "unused_token_hold": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ]
+      },
+      "source_path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+      "sources": [
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        },
+        {
+          "git_blob": "a1289b02a8f69680e6f06823ec54dd2d1d14372a",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "20caed1469fc01a162430e452076460b27b7e15cfccdb8cab823145f8ca0bafd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+        }
+      ]
+    }
+  ],
+  "profile": "initial",
+  "profile_sha256": "3e02c9ec01b5cb1e0a9b1ae8bdc14354fed0b1eade4d37a0c1698ae852fc2a09",
+  "profile_updates": {
+    "ae_gan_hold": 250,
+    "two_pole": 80,
+    "unused_token_hold": 200
+  },
+  "recommendation": "Keep initial gates provisional. Neither profile satisfies frozen adoption criteria. Preserve independent native quality gates; repair evidence/parity before the small proposed campaign, then calibrate new MoG separately.",
+  "reducer_sha256": "c8ee41d9c25332238a014c20f6145f2fd76dc13d21cdba2e81bdc59879a4d09b",
+  "reference_scope": "Independent quality suffix, shared across both proposed smoke profiles. Endurance and adaptation remain separate later requirements. Excludes the union of both smoke predicates to avoid circular false-rejection classification.",
+  "sampling_limit": "Retrospectively selected saved lineages; these fractions are descriptive diagnostics, not unbiased population error estimates.",
+  "schema_version": 1,
+  "training_seconds_spent": 0
+}

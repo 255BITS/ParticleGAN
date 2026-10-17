@@ -1,0 +1,38 @@
+{
+  "device": "cpu",
+  "torch": "2.13.0+cu126",
+  "gpu": null,
+  "sites": 3,
+  "tokens": 2,
+  "particles": 16,
+  "z_dim": 4,
+  "batch_size": 4,
+  "steps": 2,
+  "warmup_steps": 1,
+  "seconds": 0.024034697096794844,
+  "milliseconds_per_update": 12.017348548397422,
+  "host_scalar_extractions": {
+    "two_generator_forwards": 32,
+    "complete_update": 106
+  },
+  "probe_interval": 1000,
+  "structural_evaluations": 0,
+  "last_dv12_applications": [
+    {
+      "radius_min": 0.5251496434211731,
+      "radius_mean": 0.5748231410980225,
+      "radius_max": 0.6261515617370605,
+      "perturbation_rms": 0.2864013910293579,
+      "clipped_fraction": 0.875
+    },
+    {
+      "radius_min": 0.5695470571517944,
+      "radius_mean": 0.6232749819755554,
+      "radius_max": 0.6787180304527283,
+      "perturbation_rms": 0.29425546526908875,
+      "clipped_fraction": 0.75
+    }
+  ],
+  "precision": "frozen BF16 hosts; FP32 trainable owners/table",
+  "scope": "small shared-bank overhead fixture; complete_update includes caller logging; timing includes synchronized updates but excludes profiling, serving, checkpoint writes and warmup"
+}

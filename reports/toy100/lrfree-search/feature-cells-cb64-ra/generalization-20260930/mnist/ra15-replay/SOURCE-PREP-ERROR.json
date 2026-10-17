@@ -1,0 +1,11 @@
+{
+  "checkpoint_loads": 0,
+  "configuration_or_package_changes": false,
+  "correction": "Remove one unmatchedclosingparenthesis; compile every localPython source before preparing.",
+  "dependent_check_errors": "CPUpreflight/checkonly reported absentINPUTS.json after failed preparation.",
+  "first_error": "prepare.py unmatchedclosingparenthesis atline55; no inputs/sourcefreeze were written.",
+  "gpu_operations": 0,
+  "model_calls": 0,
+  "status": "RETAINED_SOURCE_PREPARATION_ERROR_CORRECTED_BEFORE_FREEZE",
+  "training_updates": 0
+}

@@ -1,0 +1,62 @@
+{
+  "status": "STOPPED_AT_TOY_FAILURE",
+  "utc": "2026-09-30T06:05:38.479672+00:00",
+  "scope": "only owned RA6 CPU canonical watcher stopped after valid final learned artifact/source audit; no numerical job or original RA4 watcher touched",
+  "process": {
+    "pid": 585174,
+    "startticks": "164634835",
+    "state": "S",
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+      "--validation",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra6",
+      "--output",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra6-monitor",
+      "--watch"
+    ],
+    "children": []
+  },
+  "signal": "SIGTERM",
+  "terminal_state": "gone",
+  "original_monitor_sha256": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+  "final_artifact_audit_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/FINAL-RECEIPT.json",
+  "final_artifact_audit_sha256": "59b0b13a9e30c4752d033fffb7359f7c0f03b57b4901e3b4a75ae636640609ce",
+  "final_artifact_freeze_sha256": "24990c2af5f0f5ee923fd17a9295a67acdd69fe12f6c8ffd4cb1627f7b0741c6",
+  "final_guard_files_verified": 219,
+  "evidence_status": "VALID",
+  "learned_toy_quality_status": "FAIL",
+  "learned_toy_metrics": {
+    "precision": 0.5169677734375,
+    "coverage": 23,
+    "mass_tv": 0.4830322265625
+  },
+  "canonical_screens": {
+    "completed": 0,
+    "total": 16,
+    "all_unrun_status": "PENDING",
+    "counts": {
+      "portability": {
+        "PENDING": 13
+      },
+      "native": {
+        "PENDING": 3
+      }
+    }
+  },
+  "source_integrity": {
+    "status": "VALID",
+    "source_freeze_sha256": "e13678688ba960084f23546a0311908d170e8619e403a6f990a57e4d7ed85c7a",
+    "package_sha256": "6bb967c405c486d2a5cbd5dcc3bce7d1bd2cb93b3f9c7e916229f1327a8e5fc5",
+    "config_sha256": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7",
+    "checked_local": 18,
+    "checked_external": 126
+  },
+  "summary_bytes_unchanged": true,
+  "source_edits": 0,
+  "cuda_used": false,
+  "numerical_jobs_started": 0,
+  "unrun_jobs_not_marked_quality_fail": true
+}

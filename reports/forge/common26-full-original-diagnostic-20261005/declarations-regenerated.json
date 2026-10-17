@@ -1,0 +1,19 @@
+{
+  "admissions": 0,
+  "cards": {
+    "configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json": "f2195f2cd9eebe5585f989832bbe86805c2064546964aef609d111c003792ecf",
+    "configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json": "fbf3c5b91ef75f3ebdde1f1abfaef884192d8ab86cf252359c8695c6b883e66c",
+    "configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json": "d01a22d4e69178841dd23565db024611e09000c449a2f546abdff7e986c404b7",
+    "configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json": "81300cc41f93a1cf5d4b687e5db934a05bd141d8e45050e6428f63504a0b59a8",
+    "configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json": "e858bfa75ef950ee27b225ca191ef1ccd6cf77e8e9fc518d453913c91a8a5aae",
+    "configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json": "6890a3369a3e9ec3a9021323f616abd2834ef73c8298587eb1d0e70704a0b29d",
+    "configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json": "8d26bb30b05c6465393f6a5f9d8e9c34f8245bee118bf4d30cd5f564c5e170dc",
+    "configs/forge/tasks/clockfree_audit_measurement_v1.json": "c7ec7dee0e4b4ec58349e199f674232abec342518687d300f263c7c056aed122",
+    "configs/forge/views/tier1_policy_coverage.json": "f6c669aede722bac3d957327b55d1db7625f108ada197323b8827c1883efc7f2"
+  },
+  "generator_source_sha256": "2b92022a3bc6213826fadfaaa98b0c4aae0f4afab19f2206e6812c69ac23e5ce",
+  "models": 0,
+  "schema": "pg_common26_declaration_regeneration_v1",
+  "scientific_original_view": 3,
+  "selected_cohort_gives_no_original_credit": true
+}

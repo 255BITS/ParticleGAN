@@ -1,0 +1,872 @@
+{
+  "schema": "particlegan_policy_search_archive_v1",
+  "path": "/ml2/hypergan/forge-policy-family-round4-20261002/receipts-states-gifs-and-source.tar.gz",
+  "sha256": "8e5a30848ab045a1bfe52c1d431978bd7215777f2e61b98b70493b600c1dbdbd",
+  "bytes": 69653189,
+  "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+  "study_id": "policy-family-defaults-round4-prior-balance-v1",
+  "ordinary_complete_cases": 12,
+  "paid_task_seconds": 331.51518269861117,
+  "raw_study_sha256": "0f36a1dd85bde72220f3c89151cc9c73515d6c6b4d0a077eacf3fc4f5b10be62",
+  "files": [
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "archive_path": "archive/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "e29a6276a1a737699259107ac2eef257ef27513006e9d05507658c481dbdeee6",
+      "bytes": 332741
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "archive_path": "archive/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "b33d203ee17c807e8155339846f6ee51791d067c87acdc15d176d182132fab33",
+      "bytes": 221024
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "archive_path": "archive/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "7392de5866e3e515c94c4200a23f6b6d6f710fd5072e094515662ada03d2b705",
+      "bytes": 6075245
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "archive_path": "archive/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "d96574b717a8ec6ec848baed6d1138e098c00e7687d4cc868f71eff5a71e6546",
+      "bytes": 44503
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "13b9cbce23c70eaca9f7b542d193c357eb79dded371c5da9a77ba7982e49f8a7",
+      "bytes": 4374
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/summary.json",
+      "archive_path": "archive/atlas/atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656/summary.json",
+      "sha256": "32738b8d1318b99458635a8d037b4d92328d2512574571e1338fda4cd7290884",
+      "bytes": 459
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad/final-state.pt",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad/final-state.pt",
+      "sha256": "ff801e4326d829c67898422d87a7f0aad1694b6b3faf29e2dab84cfac16ff7ff",
+      "bytes": 452607
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad/goal.gif",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad/goal.gif",
+      "sha256": "1e2c6f7c23aa63cf87079ea556eb68e2f45ff8802df832d9b5d2c9bd68470bfc",
+      "bytes": 713927
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad/observations.npz",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad/observations.npz",
+      "sha256": "f6ecdd859a4b5f730a9907c15b5045774a8d59ff86fa3c2b22f31c7351d96bfb",
+      "bytes": 3069715
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad/receipt.json",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad/receipt.json",
+      "sha256": "cde0330486999b1afe4a586df5a401c825d53d9a1c68b0518197582baeca6c33",
+      "bytes": 76027
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad.log",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/api-vector-two-broad.log",
+      "sha256": "b90286cc76501c77ae903ee5a0f325ba46597300eeb353b5c1f3e7bc8b7e3d95",
+      "bytes": 3743
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "15b1b68fd5be20bf574e50b69bebd27864551d06bb07b929ecbcbddeac08b47b",
+      "bytes": 358421
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "bfddedf4c4f2a33a761977a0e8a0d21eec3b624d2fa8e921e1984dbbb4a5d447",
+      "bytes": 220984
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "cbf84aa82a89f7a372c9cfb5ca8dc09890f9d2b78d203a1566177aaec96402c6",
+      "bytes": 6077003
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "c338feffa474e3c16c18d3cd746b9b48992d06e18d021c67d4f7b95d63c7c89a",
+      "bytes": 44277
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "91381a4963de13425ce8cbcc814a1473e8a93f39561c626db59d9cf75121c26b",
+      "bytes": 4262
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/summary.json",
+      "archive_path": "archive/atlas/atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00/summary.json",
+      "sha256": "315001d9a7bdbae2d4bf798042512caacc81080e3f5a8c1cf5c182490ebafa8a",
+      "bytes": 406
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "archive_path": "archive/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "8fe92baf7f82d04d0ce740573fd2584987133fdec490c3e878bcd25cd793ee64",
+      "bytes": 360823
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "archive_path": "archive/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "2a7c85ac333a7fe258a4b471a71aaab29ca121196eb44497ca895422a17d728c",
+      "bytes": 219747
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "archive_path": "archive/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "853b56a775982bd8c0c7ddcd4246267aeef0074e20534c4734a550e5e6e7bd03",
+      "bytes": 6057940
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "archive_path": "archive/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "3e18dbbe5f0600fe6248e1daf88199c4099b236e0d063da24cad94e4ec85063c",
+      "bytes": 44401
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "f2582df4cad0578c50ba12115c41a9482f54b9f22dc836c32eee09f88e8bee01",
+      "bytes": 4320
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/summary.json",
+      "archive_path": "archive/atlas/atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514/summary.json",
+      "sha256": "fc5a49b13816863d0d49d3aab6e73d92abbeae39844dbfe35431707296ec7583",
+      "bytes": 459
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/final-state.pt",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/final-state.pt",
+      "sha256": "95401e3063a5f0bba29cae59835f50bd1e7f8387776944b09aceea5ba4738075",
+      "bytes": 450187
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/goal.gif",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/goal.gif",
+      "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0",
+      "bytes": 689019
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/observations.npz",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/observations.npz",
+      "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a",
+      "bytes": 3070137
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/receipt.json",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/receipt.json",
+      "sha256": "e2bfc5fdc66ea2c32e77b22d16a00346a83852b3192d9f4b4ee2da2619da20a6",
+      "bytes": 75781
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad.log",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad.log",
+      "sha256": "0fba2b2975eeebc0eb1a803274f3d4043a2b70bcd25721e17c8ff6d33f0a1115",
+      "bytes": 3626
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "9d22906492417a9bbb786221b8ef6c6db19cb51d2b67fa2a5f2ab3ff38e570a2",
+      "bytes": 379481
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "ce19fb8b4c60976f22996ffc7ff82b5b66043093d6db759a111733682425fed3",
+      "bytes": 220376
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "45fa7538ffa883ba79cc41aa25d1906fc8985b4dfcd3de3aa839b137725afe97",
+      "bytes": 6094402
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "4f2bbbcb1ced5a8f092670413729be6ef202b2b2060e0ac1c2443db882199a6d",
+      "bytes": 44622
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "fdda08dc680e44b9292e42b5569038c15ebd9c62ab37ec4b59ba153c57585796",
+      "bytes": 4433
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/summary.json",
+      "archive_path": "archive/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/summary.json",
+      "sha256": "56adf3496cdce7443b4853bf11bf1b62ba8ccb187411ea0921f1957fdbdd2b4a",
+      "bytes": 406
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/study.json",
+      "archive_path": "archive/atlas/study.json",
+      "sha256": "5e64e4885fb2d65b00940d728a37d1112d22b26e7bfdc6a17f214615bcb1bcae",
+      "bytes": 128013
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas-coordinator.log",
+      "archive_path": "archive/atlas-coordinator.log",
+      "sha256": "5e64e4885fb2d65b00940d728a37d1112d22b26e7bfdc6a17f214615bcb1bcae",
+      "bytes": 128013
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/combine-recertification.log",
+      "archive_path": "archive/combine-recertification.log",
+      "sha256": "0f36a1dd85bde72220f3c89151cc9c73515d6c6b4d0a077eacf3fc4f5b10be62",
+      "bytes": 162937
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/current-policy-family-results.json",
+      "archive_path": "archive/current-policy-family-results.json",
+      "sha256": "0f36a1dd85bde72220f3c89151cc9c73515d6c6b4d0a077eacf3fc4f5b10be62",
+      "bytes": 162937
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "archive_path": "archive/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "732c168c79a334559f7fad0f5de6f6af722f3355fd3c3a7b67cd04f876bbdc09",
+      "bytes": 359287
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "archive_path": "archive/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "2a7c85ac333a7fe258a4b471a71aaab29ca121196eb44497ca895422a17d728c",
+      "bytes": 219747
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "archive_path": "archive/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "853b56a775982bd8c0c7ddcd4246267aeef0074e20534c4734a550e5e6e7bd03",
+      "bytes": 6057940
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "archive_path": "archive/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "1df017cc9b5e8303a4c296864a9d3c9cc9f33f6b3267cc6486f31925789149c0",
+      "bytes": 44193
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "3b28aa69224944bb41fc43a49acd1453e7fa72c3c103acb7eeffb98e2ff92226",
+      "bytes": 4321
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/summary.json",
+      "archive_path": "archive/e22/e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a/summary.json",
+      "sha256": "4a155454e745f5cac098b2db290e63eee2983d9724cb37a999a5224d551a663d",
+      "bytes": 455
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/final-state.pt",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/final-state.pt",
+      "sha256": "c68b983b89db276b3e1bc3352c2e176066d84e3d9eef54ac9c49c8201a1d89b8",
+      "bytes": 448779
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/goal.gif",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/goal.gif",
+      "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0",
+      "bytes": 689019
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/observations.npz",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/observations.npz",
+      "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a",
+      "bytes": 3070137
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/receipt.json",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/receipt.json",
+      "sha256": "bf6005d2118b3f6994ca240e706a5e8a4e5ef94818f8b54ecc695a6fb00a03dd",
+      "bytes": 75571
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad.log",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad.log",
+      "sha256": "be6fcd850ab927b6e3a70158e6f19deff414a633a7dc5279267985b573d804c8",
+      "bytes": 3627
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "172849006f18d4a425ac6b4cfe8e103cc23df19f85235a4ada3a80308ecb346c",
+      "bytes": 378073
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "ce19fb8b4c60976f22996ffc7ff82b5b66043093d6db759a111733682425fed3",
+      "bytes": 220376
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "45fa7538ffa883ba79cc41aa25d1906fc8985b4dfcd3de3aa839b137725afe97",
+      "bytes": 6094402
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "19017a0c294d4e295de3bc2c4ff09c7a6ba46df347a7dd8bde959e59a76fdbf0",
+      "bytes": 44416
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "770f0152f06aa4f0deee6a4bf8a497c3c2c3d376d1a0770a3ac0b31f0782e5c0",
+      "bytes": 4437
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/summary.json",
+      "archive_path": "archive/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/summary.json",
+      "sha256": "a95e370eab5002638b14431405298bfb694cc26b46947be70b82fbdb597681d6",
+      "bytes": 402
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "archive_path": "archive/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "29f62ceeae8389e0f321efc4064f79c1863c485bfbcc71e614fc9f11b5622efe",
+      "bytes": 331269
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "archive_path": "archive/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "b33d203ee17c807e8155339846f6ee51791d067c87acdc15d176d182132fab33",
+      "bytes": 221024
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "archive_path": "archive/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "7392de5866e3e515c94c4200a23f6b6d6f710fd5072e094515662ada03d2b705",
+      "bytes": 6075245
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "archive_path": "archive/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "3b2a598a26536a40b25b5ab85747aa86b2310df019703aec978e5f7897b0a226",
+      "bytes": 44297
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "8e3ac9f050080247e3ba48ec6bc887a6f055a46216d68c006b369e201bbd0f08",
+      "bytes": 4377
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/summary.json",
+      "archive_path": "archive/e22/e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611/summary.json",
+      "sha256": "4c9df238550a36372d8b0df4dd21653f363dcddc5b288d90f390b510ea72d82f",
+      "bytes": 455
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad/final-state.pt",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad/final-state.pt",
+      "sha256": "9a02fea8e558befed6f2e3138368f3a38e39f4dcbfd7eec3276a67041503126e",
+      "bytes": 451135
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad/goal.gif",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad/goal.gif",
+      "sha256": "1e2c6f7c23aa63cf87079ea556eb68e2f45ff8802df832d9b5d2c9bd68470bfc",
+      "bytes": 713927
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad/observations.npz",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad/observations.npz",
+      "sha256": "f6ecdd859a4b5f730a9907c15b5045774a8d59ff86fa3c2b22f31c7351d96bfb",
+      "bytes": 3069715
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad/receipt.json",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad/receipt.json",
+      "sha256": "e1779d9c12b26f6d90f4e009434485e4be73378f2dea80a5eef25fbc6f12ab6f",
+      "bytes": 75817
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad.log",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/api-vector-two-broad.log",
+      "sha256": "3333ba097d3219320ec2351160e1d14d569146b663c7f5e2a5c727574e77a1c6",
+      "bytes": 3744
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12/final-state.pt",
+      "sha256": "013f34764f3667eb9cd32a140d5659b5f97d70d961231b574cd5b68b767bd315",
+      "bytes": 356821
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12/goal.gif",
+      "sha256": "bfddedf4c4f2a33a761977a0e8a0d21eec3b624d2fa8e921e1984dbbb4a5d447",
+      "bytes": 220984
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12/observations.npz",
+      "sha256": "cbf84aa82a89f7a372c9cfb5ca8dc09890f9d2b78d203a1566177aaec96402c6",
+      "bytes": 6077003
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "b3a232e0368a9e50249eec27edf004a6f208b7564a451dc1d84bea1289ddc2f8",
+      "bytes": 44064
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12.log",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "5ae940aff8ef518501b68e433139c8a57482f6069b853630c13a78f4aab9fe81",
+      "bytes": 4260
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/summary.json",
+      "archive_path": "archive/e22/e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb/summary.json",
+      "sha256": "8f350cc0d4ef73431b95c384d22c97990c44f19e483608a422ac8a538eac49ee",
+      "bytes": 402
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/study.json",
+      "archive_path": "archive/e22/study.json",
+      "sha256": "b45325d5c5db3effb958432fcbf648fc5327be93048e14859f131ef8509e4665",
+      "bytes": 126380
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22-coordinator.log",
+      "archive_path": "archive/e22-coordinator.log",
+      "sha256": "b45325d5c5db3effb958432fcbf648fc5327be93048e14859f131ef8509e4665",
+      "bytes": 126380
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/resource-admission-e22.json",
+      "archive_path": "archive/resource-admission-e22.json",
+      "sha256": "800d18eaed3e45c736b611f67a4c235bd60c22d8a98e4f2ea7a36adce74ece30",
+      "bytes": 646
+    },
+    {
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/resource-admission.json",
+      "archive_path": "archive/resource-admission.json",
+      "sha256": "a1c18f88a6f4a2929a734c12ac9391bf1630213dabcc2bc26b6cfb3659921e01",
+      "bytes": 1174
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/__init__.py",
+      "archive_path": "source/benchmarks/toy100/__init__.py",
+      "sha256": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+      "bytes": 143
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/__main__.py",
+      "archive_path": "source/benchmarks/toy100/__main__.py",
+      "sha256": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+      "bytes": 10315
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/accuracy.py",
+      "archive_path": "source/benchmarks/toy100/accuracy.py",
+      "sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "bytes": 11658
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/accuracy_evidence.py",
+      "archive_path": "source/benchmarks/toy100/accuracy_evidence.py",
+      "sha256": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+      "bytes": 3664
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/accuracy_gate.py",
+      "archive_path": "source/benchmarks/toy100/accuracy_gate.py",
+      "sha256": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "bytes": 8383
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/config.py",
+      "archive_path": "source/benchmarks/toy100/config.py",
+      "sha256": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+      "bytes": 3694
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/constraint_screen.py",
+      "archive_path": "source/benchmarks/toy100/constraint_screen.py",
+      "sha256": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+      "bytes": 9931
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/continuous_probe.py",
+      "archive_path": "source/benchmarks/toy100/continuous_probe.py",
+      "sha256": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+      "bytes": 29615
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/device.py",
+      "archive_path": "source/benchmarks/toy100/device.py",
+      "sha256": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+      "bytes": 10288
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/gate.py",
+      "archive_path": "source/benchmarks/toy100/gate.py",
+      "sha256": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+      "bytes": 22664
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/metrics.py",
+      "archive_path": "source/benchmarks/toy100/metrics.py",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "bytes": 8442
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/models.py",
+      "archive_path": "source/benchmarks/toy100/models.py",
+      "sha256": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+      "bytes": 11086
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/native_models.py",
+      "archive_path": "source/benchmarks/toy100/native_models.py",
+      "sha256": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+      "bytes": 2017
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/problems.py",
+      "archive_path": "source/benchmarks/toy100/problems.py",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+      "bytes": 2428
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/render.py",
+      "archive_path": "source/benchmarks/toy100/render.py",
+      "sha256": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+      "bytes": 8428
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/schedule.py",
+      "archive_path": "source/benchmarks/toy100/schedule.py",
+      "sha256": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+      "bytes": 5707
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/search.py",
+      "archive_path": "source/benchmarks/toy100/search.py",
+      "sha256": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+      "bytes": 4527
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/train.py",
+      "archive_path": "source/benchmarks/toy100/train.py",
+      "sha256": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+      "bytes": 53526
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy100/warm_equilibrium_probe.py",
+      "archive_path": "source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "bytes": 14377
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_conditionals.py",
+      "archive_path": "source/benchmarks/toy_audit/api_conditionals.py",
+      "sha256": "ca6b063c0ac315f90661deaffae8f60fbd4a0f9575b891db1895501d12edad38",
+      "bytes": 48418
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_contract.py",
+      "archive_path": "source/benchmarks/toy_audit/api_contract.py",
+      "sha256": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+      "bytes": 10394
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_diagnostics.py",
+      "archive_path": "source/benchmarks/toy_audit/api_diagnostics.py",
+      "sha256": "d83ca91e423823e16126f5eb0557af3682efa22e459db7e1cbd7490558360a50",
+      "bytes": 36061
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_family_search.py",
+      "archive_path": "source/benchmarks/toy_audit/api_family_search.py",
+      "sha256": "064d8767af5fe56b029f69203fa84ffe9d0df036b99f1dc8eb9734cfe4e2708c",
+      "bytes": 43833
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_images.py",
+      "archive_path": "source/benchmarks/toy_audit/api_images.py",
+      "sha256": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+      "bytes": 86442
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_publish.py",
+      "archive_path": "source/benchmarks/toy_audit/api_publish.py",
+      "sha256": "4334ac384c2766d85bd10ece19cee3ba88be67e39f151a414efcac188ecae2de",
+      "bytes": 30024
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_readout.py",
+      "archive_path": "source/benchmarks/toy_audit/api_readout.py",
+      "sha256": "7026a342e5325e19086bcd23e89fee74d871464cef3d727c1fd7d80c8649a414",
+      "bytes": 6738
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_reframe.py",
+      "archive_path": "source/benchmarks/toy_audit/api_reframe.py",
+      "sha256": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
+      "bytes": 22663
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_ring16.py",
+      "archive_path": "source/benchmarks/toy_audit/api_ring16.py",
+      "sha256": "28b7bddc2a72538177431db7318bfd6778fe35fe06e1292b1701a315f75801ff",
+      "bytes": 2878
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_run.py",
+      "archive_path": "source/benchmarks/toy_audit/api_run.py",
+      "sha256": "d6a9d34022688c2b6b8df8c29f93c60deaecf47e8c0888c7c82728c897a43be1",
+      "bytes": 35760
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/api_vectors.py",
+      "archive_path": "source/benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+      "bytes": 50536
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/definition_quality.py",
+      "archive_path": "source/benchmarks/toy_audit/definition_quality.py",
+      "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "bytes": 19193
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/toy_audit/vector_quality.py",
+      "archive_path": "source/benchmarks/toy_audit/vector_quality.py",
+      "sha256": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+      "bytes": 16391
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/transfer_suite/stress_tasks.py",
+      "archive_path": "source/benchmarks/transfer_suite/stress_tasks.py",
+      "sha256": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+      "bytes": 6273
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/benchmarks/transfer_suite/vector_tasks.py",
+      "archive_path": "source/benchmarks/transfer_suite/vector_tasks.py",
+      "sha256": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+      "bytes": 22296
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/experiments/forge/configuration_search.py",
+      "archive_path": "source/experiments/forge/configuration_search.py",
+      "sha256": "541df097308bcfc650a85e94a0dbc31e02cc026c11bc20621b31f68d9e85f57e",
+      "bytes": 44387
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/lib/toy_models.py",
+      "archive_path": "source/lib/toy_models.py",
+      "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+      "bytes": 5231
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/__init__.py",
+      "archive_path": "source/particlegan/__init__.py",
+      "sha256": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+      "bytes": 1811
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/_qr.py",
+      "archive_path": "source/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "bytes": 1951
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/anchor_birth.py",
+      "archive_path": "source/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "bytes": 6401
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/autoencoder.py",
+      "archive_path": "source/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "bytes": 6194
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/birth_death.py",
+      "archive_path": "source/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "bytes": 45396
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/birth_phase.py",
+      "archive_path": "source/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "bytes": 21144
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/capabilities.py",
+      "archive_path": "source/particlegan/capabilities.py",
+      "sha256": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+      "bytes": 2285
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/conditioning.py",
+      "archive_path": "source/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "bytes": 4878
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/continuous.py",
+      "archive_path": "source/particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "bytes": 60875
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/diffusion.py",
+      "archive_path": "source/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "bytes": 5100
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/discriminators.py",
+      "archive_path": "source/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "bytes": 5833
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/feature_cells.py",
+      "archive_path": "source/particlegan/feature_cells.py",
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "bytes": 125325
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/feature_policy.py",
+      "archive_path": "source/particlegan/feature_policy.py",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "bytes": 14650
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/feature_reference.py",
+      "archive_path": "source/particlegan/feature_reference.py",
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "bytes": 32368
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/gan_loss.py",
+      "archive_path": "source/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "bytes": 1016
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/grad_regularizers.py",
+      "archive_path": "source/particlegan/grad_regularizers.py",
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "bytes": 14853
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/init.py",
+      "archive_path": "source/particlegan/init.py",
+      "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+      "bytes": 24559
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/k3p.py",
+      "archive_path": "source/particlegan/k3p.py",
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+      "bytes": 33012
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/ka2.py",
+      "archive_path": "source/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "bytes": 16551
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/mean_transport.py",
+      "archive_path": "source/particlegan/mean_transport.py",
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "bytes": 39633
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/output_moments.py",
+      "archive_path": "source/particlegan/output_moments.py",
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "bytes": 8387
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/particle_prior.py",
+      "archive_path": "source/particlegan/particle_prior.py",
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+      "bytes": 17899
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/policy.py",
+      "archive_path": "source/particlegan/policy.py",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "bytes": 81022
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/population_continuity.py",
+      "archive_path": "source/particlegan/population_continuity.py",
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "bytes": 20329
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/recipe_schedules.py",
+      "archive_path": "source/particlegan/recipe_schedules.py",
+      "sha256": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+      "bytes": 6044
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/recipes.py",
+      "archive_path": "source/particlegan/recipes.py",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "bytes": 53612
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/routing.py",
+      "archive_path": "source/particlegan/routing.py",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "bytes": 64904
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/row_evidence.py",
+      "archive_path": "source/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "bytes": 9397
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/training.py",
+      "archive_path": "source/particlegan/training.py",
+      "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+      "bytes": 39880
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/particlegan/vicreg_loss.py",
+      "archive_path": "source/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "bytes": 2297
+    },
+    {
+      "original_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-round1/reports/forge/family-winner-round1/policy-search-round4.json",
+      "archive_path": "source/reports/forge/family-winner-round1/policy-search-round4.json",
+      "sha256": "4e7e64121615f3c88c1ff0fe054cadf45d5ba3ca0053558f87b4a40c3bf6617d",
+      "bytes": 8625
+    }
+  ],
+  "restoration": "Verify archive SHA. archive entries restore paths relative to the original run root; source entries preserve exact executed bytes. Use the pinned Git source commit and declared original artifact mapping for independent regrading. Git shares this compact manifest, not bulk arrays/states/logs."
+}

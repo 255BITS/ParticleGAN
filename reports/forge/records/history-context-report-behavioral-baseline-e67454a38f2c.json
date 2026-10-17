@@ -1,0 +1,132 @@
+{
+  "candidate_id": "context:report/behavioral_baseline",
+  "candidate_revision": "ee986dd57fad064e7111ff58f069ec777a0202a8c994a561ac0efa0ea7d44920",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Behavioral baseline \u2014 live weights",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/behavioral_baseline",
+      "narrative_sources": [
+        {
+          "git_blob": "65d45f146d40fe2d41a6bafb90fcb78f1c578dcc",
+          "path": "reports/behavioral_baseline/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5dd86f23d0192b595182a1424a66dd2948b405f02d136a7b42935b3820edf3bd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/README.md"
+        },
+        {
+          "git_blob": "b6536deed5aa80e6d335231db33535fb95f582a1",
+          "path": "reports/behavioral_baseline/convergence/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "85b309a3e1291ca0e811d5b699730f8118c8f70bd063a6279e956df00d96068a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/convergence/README.md"
+        },
+        {
+          "git_blob": "45bb5831ce274fafeec441e154a7ed7c5fac310c",
+          "path": "reports/behavioral_baseline/convergence/api_grid/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3e038e7be0cb2ef95ae4da776a484717d915e83a7627996717e80a05dbdfd24d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/convergence/api_grid/README.md"
+        },
+        {
+          "git_blob": "16273a3ba320b1996aafcdb631f4167c281e40c4",
+          "path": "reports/behavioral_baseline/convergence/grid/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "fa656e57831b085a2c01007fc24cb299c7557a3e19c6af35af808bd6546190c4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/convergence/grid/README.md"
+        },
+        {
+          "git_blob": "20d2753902d392a24d46050da4e6de85170a1cb7",
+          "path": "reports/behavioral_baseline/convergence/measurement/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "451f581b6795f67d3e183c7a536bec0905067e392e3cbceced1af36b8893ad81",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/convergence/measurement/README.md"
+        },
+        {
+          "git_blob": "e7361d764365a7642bb7f681a51b22d811135188",
+          "path": "reports/behavioral_baseline/convergence/pr39/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "49a30662dd923151fd136c66557dc868efef869a7b36310e5df1aadc5718364f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/convergence/pr39/README.md"
+        },
+        {
+          "git_blob": "46695c869394a4a5b8cbb04011689ecbbcf79023",
+          "path": "reports/behavioral_baseline/convergence/schedule/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4f4406936e2baab055bf8c014a63634deee8ae2dbd6f912fe03f71accfe7e68d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/convergence/schedule/README.md"
+        },
+        {
+          "git_blob": "0c6e56b1efc2833146e79d3663802543900a5fb9",
+          "path": "reports/behavioral_baseline/convergence/sensitivity/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b6682a2be4707084f45736254b10ffed0961b02a637257f82abc1aaa4627704c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/convergence/sensitivity/README.md"
+        },
+        {
+          "git_blob": "0a0d67ae7d4b95b5243584f6f5386866a2624891",
+          "path": "reports/behavioral_baseline/convergence/validation/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "93f35ab3e98815297453978d3c9715aefe6663e7dd504d16ca4b5f2b0a8b34e2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/convergence/validation/README.md"
+        },
+        {
+          "git_blob": "a99d631c965821f25679cc1a94db4388f2ce4d77",
+          "path": "reports/behavioral_baseline/default_selection.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e629ebfa9d30003ad4ce5fa56971bffd10fae9adb0e5f3725f4bb6dd6fa3169d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/default_selection.md"
+        },
+        {
+          "git_blob": "5dc3a14135efb7ad0da25a9aaef7743b6365d5b2",
+          "path": "reports/behavioral_baseline/search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "46975a31b5605d6141718595cfc21de8375e5f04a9ae23430bd4b2d8cc59491c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/search/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Behavioral baseline \u2014 live weights\n\n**Supported baseline: delayed cosine decay makes the cap candidate sustain all nine\nbehavioral toys, with 8/8 ring modes and 100% final HQ.**\nRead the [convergence study](convergence/README.md) for the current comparison,\n[resolved candidate](convergence/leading_config.json),\n[full schedule leaderboard](convergence/schedule/README.md), sensitivity tests\nand [actual 100-Gaussian results](convergence/grid/README.md).\n\n| Formulation | Final live bounds | Sustained toys | Final ring modes / HQ |\n| --- | ---: | ---: | --- |\n| Original locked shared | 26/29 | 7/9 | 5/8 / 82.30% |\n| R1+R2 0.1 | 29/29 | 8/9 | 7/8 / 100% |\n| Cap 1.25, coeff 3, LR \u00d70.85, original schedules | 29/29 | 8/9 | 8/8 / 100% |\n| **Same cap + cosine from 60%, floor 5%** | **29/29** | **9/9** | **8/8 / 100%** |\n| Learned gradient feedback + same cosine | 29/29 | 9/9 | 8/8 / 100% |\n\nThe [expanded smart-descent leaderboard](../smart_descent/README.md) compares\nlearned LR/regularization control, direct fitting without cosine, plain SGD and\nper-tensor gradient descent. The learned addition improves mean normalized\nconfirmation by 2.36%, but the ring confirms later (1,150 versus 1,050) and there\nis no established wall-time speedup. Cosine remains the supported baseline.\n\nSustained means at least five consecutive final passing observations in a\ncomplete 24-point curve, with no later "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-behavioral-baseline-e67454a38f2c",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "65d45f146d40fe2d41a6bafb90fcb78f1c578dcc",
+    "path": "reports/behavioral_baseline/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "5dd86f23d0192b595182a1424a66dd2948b405f02d136a7b42935b3820edf3bd",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/behavioral_baseline/README.md"
+  },
+  "task_results": []
+}

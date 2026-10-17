@@ -1,0 +1,22 @@
+{
+  "gif_sha256": "59592aef227627474cb6eb87f4fbd0c13c2d9f2a107231fab2cbc19a081c17a3",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "38ce59e003f5d173a34c8ccc7e0abea1503f18d812bffb172ab6021b6dc7a44e",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/d2be1cfa78f74e1ead5dec8b3acc88af/clockfree-proof/comparisons.pt": "16584481a04b2a5c7eef112091a1d58dfba2e307200924a36466854ceb211fd4"
+  },
+  "task_id": "clockfree_audit_measurement_v1"
+}

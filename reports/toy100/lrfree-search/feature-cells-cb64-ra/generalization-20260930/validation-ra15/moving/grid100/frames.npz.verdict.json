@@ -1,0 +1,31 @@
+{
+ "task": "grid100",
+ "status": "PASS",
+ "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+ "pre_turn_hq": 0.9464,
+ "periods": [
+  {
+   "task": "grid100",
+   "period_end": 500,
+   "target_deg": 0,
+   "modes": 100,
+   "hq": 0.9464
+  },
+  {
+   "task": "grid100",
+   "period_end": 1000,
+   "target_deg": 30,
+   "modes": 100,
+   "hq": 0.9379
+  },
+  {
+   "task": "grid100",
+   "period_end": 1500,
+   "target_deg": 60,
+   "modes": 100,
+   "hq": 0.962
+  }
+ ],
+ "passed_periods": 2,
+ "turns": 2
+}

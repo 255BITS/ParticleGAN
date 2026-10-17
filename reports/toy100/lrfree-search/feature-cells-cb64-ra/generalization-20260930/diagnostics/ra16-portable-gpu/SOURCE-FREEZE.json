@@ -1,0 +1,13 @@
+{
+  "local_source_sha256": {
+    "INPUTS.json": "9bcaaa7a0e4977e2f95fbf4a01333cccf8716acb13742d169bb00aca46ff6056",
+    "PREPARATION.json": "5db457305648af4e989b5f4273a902c0472eb9ad58267fa126cf71f0cc21b01f",
+    "PROTOCOL.md": "b8d7c340ff7079f8032207bb478a8a15bc2af4ae7f92719ad2a7367892de76c6",
+    "launch.py": "4bd6269a8c7f19f1ca26ef1339c5c07a9feb3a1e8c4b5c03c61668b9ff047e37",
+    "prepare.py": "f01aa0c300ea251a7cea49ca1e6a69bbe7692cebffdae6149a3fec7e935fcd0a",
+    "worker.py": "b5c802ac06f041da080cc58b6e8ab3ee2cebc5565677a21bb92296213f9fe330"
+  },
+  "package_sha256": "ba20f8e6353b2aca4725258835a68c1dfaa056a0484b2d683a5bb74a1eca0aa0",
+  "read_only_file_count": 77,
+  "status": "FROZEN_UNLAUNCHED"
+}

@@ -1,0 +1,73 @@
+{
+  "copied_frozen_bytes": [
+    {
+      "bytes": 14155,
+      "original_path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/DESIGN.md",
+      "publication": "design/DESIGN.md",
+      "sha256": "cfcc735d72aad59dbad04ce78e2214469488b9dab6673e934d4b011716917f09"
+    },
+    {
+      "bytes": 24267,
+      "original_path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/derive_design.py",
+      "publication": "design/derive_design.py",
+      "sha256": "a3b6210d5a15d9b0f35155b55011a7de377bd0adce3195c5afc8e20ac924d37e"
+    },
+    {
+      "bytes": 247039,
+      "original_path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/design.json",
+      "publication": "design/design.json",
+      "sha256": "9b1e42243d325272e746f6090a3f945c78530861bc717036d92910a7141fe50a"
+    },
+    {
+      "bytes": 28554,
+      "original_path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/input-index.json",
+      "publication": "design/input-index.json",
+      "sha256": "7f55b32ab2b5e0c7856370b2fc6d6e5ba2844ba2f6419b559a3d20877eaa99d1"
+    },
+    {
+      "bytes": 929,
+      "original_path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/verification.json",
+      "publication": "design/verification.json",
+      "sha256": "822223477b4efe223b6366c7c492dd30fa05a1982543bcc6b787a6b4d9706c8f"
+    },
+    {
+      "bytes": 1713,
+      "original_path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/handoff.json",
+      "publication": "design/handoff.json",
+      "sha256": "60729ab5a8d81fb5415965b5ea241a0f3709084f00e39a99815368ecc318848b"
+    },
+    {
+      "bytes": 9431,
+      "original_path": "/ml2/hypergan/pg-pr223-additional-gates-mapping-20261004/README.md",
+      "publication": "mapping/README.md",
+      "sha256": "02d22a4342e8ee79a02c3784c6d95a73f1af5c2cf63a79ff13bea0d526246c80"
+    },
+    {
+      "bytes": 167757,
+      "original_path": "/ml2/hypergan/pg-pr223-additional-gates-mapping-20261004/mapping.json",
+      "publication": "mapping/mapping.json",
+      "sha256": "d263b2494c71c026e1792d5a3569ac5eb8ae1011110df0c8c0c3e2e8a15138de"
+    },
+    {
+      "bytes": 507,
+      "original_path": "/ml2/hypergan/pg-pr223-additional-gates-mapping-20261004/handoff.json",
+      "publication": "mapping/handoff.json",
+      "sha256": "92d8761b66324153c5ded99c7d14def2fe8fa1a4785dc7819b0c05c320c74af6"
+    },
+    {
+      "bytes": 5362,
+      "original_path": "/ml2/hypergan/pg-pr223-faithful-winner-supervisor-review-20261004/develop-package-parity.json",
+      "publication": "source-parity/develop-package-parity.json",
+      "sha256": "4dfa2e702ce519896720eb4650c8c5e36d80398055995c810e42ebb0fe4ec1af"
+    },
+    {
+      "bytes": 10857,
+      "original_path": "/ml2/hypergan/pg-pr223-faithful-winner-supervisor-review-20261004/scientific-adapter-function-parity.json",
+      "publication": "source-parity/scientific-adapter-function-parity.json",
+      "sha256": "8a2dad5c96e8331aa7dcde6dd148aaa39d9b7f69f9d31162ad094109da41e41f"
+    }
+  ],
+  "preparation_or_scientific_run": false,
+  "raw_evidence": "LOCAL_ONLY",
+  "schema": "pg_pr223_winner_plan_copy_manifest_v1"
+}

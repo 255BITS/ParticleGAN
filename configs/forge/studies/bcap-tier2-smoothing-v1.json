@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 43020,
+    "candidate_budget_seconds": 43020,
+    "id": "bcap-tier2-smoothing-v1"
+  },
+  "candidate": "bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe",
+  "competing_explanation": "Confirmed transient acquisition can coexist with persistent distribution-shape errors, inverse-map failures or late coverage loss. A passing endpoint alone does not establish the sustained task gates. The unsmoothed control supplies a declaration binding and historical motivation only; no matched new control or causal superiority is claimed.",
+  "control": {
+    "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "ks",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_stability",
+    "threshold": 0.05
+  },
+  "hypothesis": "The single selected constant-rate BCAP/DualNorm smoothing=1e-5 recipe that acquired all six Tier 1 tasks can retain live quality and continued learning across the unchanged 21 required Tier 2 tasks. This is a frozen-recipe qualification stage, with no further tuning, seeds or learning-rate annealing.",
+  "id": "bcap-tier2-smoothing-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "ks",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_stability",
+    "threshold": 0.05
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_count": 21,
+        "study_id": "bcap-six-smoothing-v1"
+      },
+      "path": "reports/forge/bcap-six/readout.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 2,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

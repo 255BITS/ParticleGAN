@@ -1,0 +1,12 @@
+{
+  "status": "PASS_ZERO_UPDATE_SOURCE_CONTRACT",
+  "updated_models": 0,
+  "training_updates": 0,
+  "scoring_calls": 0,
+  "rng_draws": 0,
+  "instrumentation_original_decide_exactly_once": true,
+  "instance_schema_unchanged": true,
+  "all_rng_captures_checked_at_runtime": true,
+  "prior_original_current_api_cpu_preflight": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/CPU-CLOSED.json",
+  "frozen_canonical_gpu_replay": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay-RA12-auto.json"
+}

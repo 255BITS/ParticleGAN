@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "name": "saved_toy_1000",
+      "mass_moves": 3,
+      "local_moves": 24,
+      "global_moves": 24,
+      "ordinary_moves": 51,
+      "ordinary_budget": 51,
+      "remaining_ordinary_budget": 0,
+      "isolation_moves": 0,
+      "global_real_counts": [
+        446,
+        66
+      ],
+      "global_fake_counts": [
+        80,
+        944
+      ],
+      "global_pvalues": [
+        5.581603598464739e-223,
+        5.581603598477113e-223
+      ],
+      "raw_global_death_quota": 812,
+      "spent_global_death_quota": 27,
+      "residual_global_death_before_phase": 785,
+      "raw_global_birth_quota": 812,
+      "spent_global_birth_quota": 25,
+      "residual_global_birth_before_phase": 787,
+      "global_births_without_local_discovery": 24,
+      "global_births_in_observed_inside_deficit_without_local_discovery": 24,
+      "global_birth_cells_without_local_discovery": 19,
+      "remaining_unused_eligible_inside_rows": 37,
+      "remaining_physical_birth_capacity": 36,
+      "remaining_flagged_rows": 836,
+      "limiting_ordinary_constraint": "shared floor(Q*N) budget after aggregate phase"
+    },
+    {
+      "name": "saved_toy_2000",
+      "mass_moves": 4,
+      "local_moves": 23,
+      "global_moves": 24,
+      "ordinary_moves": 51,
+      "ordinary_budget": 51,
+      "remaining_ordinary_budget": 0,
+      "isolation_moves": 0,
+      "global_real_counts": [
+        421,
+        91
+      ],
+      "global_fake_counts": [
+        91,
+        933
+      ],
+      "global_pvalues": [
+        6.333162968879617e-189,
+        6.333162968882497e-189
+      ],
+      "raw_global_death_quota": 751,
+      "spent_global_death_quota": 27,
+      "residual_global_death_before_phase": 724,
+      "raw_global_birth_quota": 751,
+      "spent_global_birth_quota": 25,
+      "residual_global_birth_before_phase": 726,
+      "global_births_without_local_discovery": 24,
+      "global_births_in_observed_inside_deficit_without_local_discovery": 24,
+      "global_birth_cells_without_local_discovery": 22,
+      "remaining_unused_eligible_inside_rows": 117,
+      "remaining_physical_birth_capacity": 81,
+      "remaining_flagged_rows": 659,
+      "limiting_ordinary_constraint": "shared floor(Q*N) budget after aggregate phase"
+    }
+  ],
+  "sources_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/diagnose_response.py": "a3542e0b92f66e6a11b1ebd90dc7f3dab26be90c70801382adefb1ca08dd911c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/contract_cases.py": "f92b0b466fa34bd187061cf48b0064db09f96fc2ed36a3e2414ba6bdb5871742",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/inputs.pt": "3e8deeb2fe534d28cf3731a4694c0543e280d2de270e0d9644731d9ec40057f2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/pkg-global-count/particlegan/feature_cells.py": "1d3c90aa3b72d086df0defcc8c356e48778310f005473e8c5c271afa44f89d76"
+  },
+  "sources_unchanged": true,
+  "cuda_initialized": false,
+  "new_seeds": 0,
+  "optimizer_updates": 0,
+  "scope": "saved fixed-input count response and residual capacity, no distribution oracle or quality verdict"
+}

@@ -1,0 +1,72 @@
+{
+  "actual_unchanged_job_keys": 0,
+  "automatic_cross_source_reuse_available": false,
+  "base_develop_commit": "9423c648de58b168b2a26a6c0762ed2f14d8e569",
+  "changed_word_job_keys": 47,
+  "cuda_kernels": 0,
+  "explanation": "The selected-policy word variant captures the base task JSON as catalog evaluator support. Changing only that task pin changes global source manifest, candidate revisions and every ordinary job key; automatic reuse of v5 evidence is unavailable.",
+  "forge_validate": "PASS",
+  "helper_sha256": {
+    "current": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
+    "previous": "bb8cf4836bf8331c1a955a1cbb532c9fa24f469f53560624972bc5a2053f5786"
+  },
+  "inventory_coverage": "11776/11776",
+  "local_artifacts_sha256": {
+    "runs/software/word-runtime-pins/history.log": "289c59e168f3d78199fe1831acdcc796f955633185fe762a8f2a84f5a143a4b2",
+    "runs/software/word-runtime-pins/pytest-metadata.log": "9f32f3bd557cff5f59af8a8f1e4b18aa8df69df81f70c161c5762e6110714a74",
+    "runs/software/word-runtime-pins/validate.log": "b2da5310158b602a746dfca6d089b0761c43440b1cc801e368b65baf87c0714a",
+    "runs/software/word-runtime-pins/verification-2.log": "d8cf9dc1f1b6d4e279adfc5976ed40168882ae7d8e3d6907d825e462afa282da",
+    "runs/software/word-runtime-pins/verification.json": "47f2092b1cdf3f192ebc0f5d87ec2e9d46fbf081624db851e45d667e9aa846eb",
+    "runs/software/word-runtime-pins/verification.log": "b8ec2c7a4aea1fbe8bee0d0396e758852c1028f333df9388bcc0b5bc73b2a0c2"
+  },
+  "metadata_tests": {
+    "models": 0,
+    "passed": 4,
+    "seconds": 0.57,
+    "training_updates": 0
+  },
+  "model_constructors": 0,
+  "new_task_sha256": "3a0db059c0465bcb44754ee2c817d42eec07473b84b63717ee514171192b217b",
+  "old_task_sha256": "26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8",
+  "optimizer_constructors": 0,
+  "planned_count": 47,
+  "previous_source_digest": "3bf51eab2a80eef3645ca5c7df9fa0583cc7053332bc94b19ec874e2e19f98a0",
+  "previous_task_archive": {
+    "commit": "9423c648de58b168b2a26a6c0762ed2f14d8e569",
+    "git_blob": "2a3191e170183f2031e88ce23388f6448edf60fe",
+    "path": "configs/forge/tasks/five_word_joint_acquisition.json",
+    "sha256": "26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8"
+  },
+  "qualification_input": false,
+  "representative": {
+    "candidate": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "required_tasks_with_clear_preflight": 26,
+    "word_after_blockers": [],
+    "word_after_key": "15933b26d48d5ba1cb0265fff17e1f013d4dac4a5332606f54be2550a3827b2a",
+    "word_before_blockers": [
+      "five_word_joint_acquisition: evaluator source changed; revise the task definition: benchmarks/toy_audit/reproducibility.py",
+      "word source binding differs: benchmarks/toy_audit/reproducibility.py"
+    ],
+    "word_before_key": "558746d557269055aff175b572dc72788aeeda6917ccb5224a41fbf91d384f11"
+  },
+  "required_tier1_and_tier2_tasks_checked": 26,
+  "roster_count": 52,
+  "roster_declaration_sha256": "5b6934dc3cada7a2e70dd4fd116d797b5ae6b06ae7eb5427539fd8b6ae71743d",
+  "schema_version": 1,
+  "scope": "task_source_binding_metadata_repair",
+  "source_digest": "6269a18ac4f82564cb16ba19afa4b3dd2f836a2b4085fbe5aeb81a35a453e895",
+  "source_origins_are_equivalent": false,
+  "source_pins_checked": 84,
+  "status": "PASS",
+  "task_evaluation_fingerprint": {
+    "current": "33d49f357a880fcc9095af55acec75b8ffea5a7b07a908f2412ec6bd988c2a33",
+    "previous": "9023e1024da135caa1bec9ad36685cc76964a066cccde5f6e5227292fd5a31de"
+  },
+  "task_execution_fingerprint": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654",
+  "tested_source_commit": "16135e113170d5ffd7b2fce4206418edcff300cd",
+  "training_updates": 0,
+  "unchanged_declaration_refusals": 5,
+  "unchanged_nonword_semantics_after_candidate_normalization": 1269,
+  "unchanged_other_task_files": 63,
+  "verification_source_sha256": "fa69cb489ce79b896339654f27820847508271e88c9592e4afdf61bba02481e0"
+}

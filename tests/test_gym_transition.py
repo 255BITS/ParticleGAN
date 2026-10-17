@@ -8,7 +8,7 @@ from lib.gym_transition import (
     contact_record, contact_state, encoded_transition, real_reconstruction,
     state_reconstruction, synthetic_reconstruction,
 )
-from particlegan import get_recipe
+from particlegan import get_recipe, init
 
 
 class GymTransitionTests(unittest.TestCase):
@@ -20,7 +20,8 @@ class GymTransitionTests(unittest.TestCase):
         self.real[:, 8:10].tanh_()
         self.terrain = torch.randn(32, 11)
         self.scaler = GymTransitionScaler.fit(self.real)
-        self.prior = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=32).make_prior(num_particles=32)
+        self.prior = init.deterministic_orthogonal_(
+            get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=32).make_prior(num_particles=32))
         self.g = GymTransitionGenerator(self.scaler, width=16)
         self.e = GymTransitionEncoder(width=16)
 

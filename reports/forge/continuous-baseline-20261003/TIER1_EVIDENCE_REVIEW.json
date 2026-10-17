@@ -1,0 +1,859 @@
+{
+  "schema": "tier1_evidence_review_v1",
+  "reviewed_checkout": "153c0dd4fc9b725785e133722c9194d849324f10",
+  "scope": "Read-only exact roster and compact evidence audit; no new leaderboard, training or retrospective qualification.",
+  "qualification_input": false,
+  "default_adoption": false,
+  "inputs_sha256": {
+    "reports/forge/tier1-refresh/readout.json": "69a607318bdc559acf3a779fc7a3251274b125ddc76b1750a869f1b023f86bc6",
+    "reports/forge/tier1-refresh/archive.json": "300031b86425c01c067af6ddead3abe4cdb6a33a0982a275b8d64a6a0fe5c60b",
+    "reports/forge/technique-inventory.json": "01513191552cb57846582acd609a89571e130576b30ea509ce73ab213e4296bd",
+    "configs/forge/rounds/tier1-existing-configs-v1.json": "aea7193e563f282df7f96b54b75605fe4a10a9744fa4c565127e8aa6f98f9fd1",
+    "configs/forge/selections/tier1-existing-configs-v1.json": "18e990f873f8315d30740124afad4acad212f6708723b58816dda72d57e224b8",
+    "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+    "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+    "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+    "experiments/forge/word_adapter.py": "26b59497d3c5b4534b9c31e8d34fa0d84f52acdeb4ed9d5c54b73ae2be1eb5f8"
+  },
+  "executed_cohort": {
+    "commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+    "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+    "runtime": {
+      "compute_profiles": {
+        "cpu": {
+          "backend": "cpu",
+          "deterministic": true,
+          "machine": "x86_64",
+          "model": "AMD Ryzen 9 5900X 12-Core Processor",
+          "tf32": false,
+          "threads": 1
+        },
+        "cuda": {
+          "backend": "cuda",
+          "compute_capability": "8.6",
+          "deterministic": true,
+          "driver": "610.57.04",
+          "model": "NVIDIA RTX A6000",
+          "tf32": false,
+          "threads": 1
+        }
+      },
+      "execution_backend": "cuda",
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.3",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.14.7",
+        "system": "Linux"
+      }
+    },
+    "executed_source_files": 1137,
+    "same_bytes_in_reviewed_checkout": 1137,
+    "changed_or_missing_source_files": []
+  },
+  "coverage": {
+    "declarations": 47,
+    "ideas": 15,
+    "configurations": 32,
+    "missing_roster_ids": [],
+    "candidate_status_counts": {
+      "BLOCKED": 4,
+      "FAIL": 43
+    },
+    "required_by_tier": {
+      "1": 5,
+      "2": 19,
+      "3": 2
+    },
+    "tier1_cells": 235,
+    "tier1_cell_status_counts": {
+      "BLOCKED": 20,
+      "PASS": 68,
+      "UNKNOWN": 104,
+      "FAIL": 43
+    },
+    "full_required_cells": 1222,
+    "full_cell_status_counts": {
+      "BLOCKED": 101,
+      "PASS": 68,
+      "FAIL": 43,
+      "UNKNOWN": 1010
+    },
+    "completed_attempts": 111,
+    "paid_seconds": 1135.2333302518236,
+    "tier2_or_tier3_ordinary_attempts": 0,
+    "stopped_downstream_unknown_is_not_missing_work": true
+  },
+  "rank_scope": {
+    "view": "discriminator_stability",
+    "revision": 3,
+    "best_observed_tie": [
+      "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f"
+    ],
+    "tie_tier1_passes": 4,
+    "tier1_required": 5,
+    "full_qualified_families": 0,
+    "selector": "One intact configuration per family/runtime; required PASS count then configuration hash.",
+    "speed_ranking": false,
+    "calibrated_shipping": false,
+    "policy_atlas_e22_or_historical_noisy_results_not_poolable": true
+  },
+  "archive_blocker": {
+    "bytes": 43004589,
+    "path": "/home/martyn/dev/ParticleGAN/artifacts/forge/tier1-existing-configs-v1.tar.gz",
+    "sha256": "1ea74b7b92cd36848a6204bd39d9ce087470f8da4210f9dc0e4bd670c11057d9",
+    "available_at_declared_path": false,
+    "checked_alternate_paths": [
+      "artifacts/forge/tier1-existing-configs-v1.tar.gz",
+      "/ml2/hypergan/artifacts/forge/tier1-existing-configs-v1.tar.gz",
+      "/ml2/hypergan/ParticleGAN-single-recipe/artifacts/forge/tier1-existing-configs-v1.tar.gz"
+    ],
+    "all_checked_alternates_absent": true,
+    "required_next_action": "Obtain exact archive and verify SHA/restore manifest before saved-trace analysis; no replacement rerun.",
+    "word_expected_raw_files": [
+      "reports/forge/attempts/<attempt>/raw-result.json",
+      "reports/forge/attempts/<attempt>/adapter-receipt.json",
+      "reports/forge/attempts/<attempt>/state.pt"
+    ],
+    "ring_checkpoint_limitation": "ring16 produces_state=false: original VectorAdapter did not save a checkpoint. Archived raw scalar observations/logs must be inspected; no nonexistent saved state is assumed."
+  },
+  "word_observations": [
+    {
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "attempt_id": "51169502a0e64466b5005e7c870b5592",
+      "compact_summary": {
+        "path": "reports/forge/technique-receipts/51169502a0e64466b5005e7c870b5592.json",
+        "sha256": "d695ca247a5e2833337eae277780a627ca878b446d1ae108c50468d2a8e3a29b"
+      },
+      "original_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/51169502a0e64466b5005e7c870b5592/evidence.json",
+          "sha256": "60ed0458c7965f2e697d8c088071bd49d823414b4aa8cd08e6144f99515eb33c"
+        },
+        "request": {
+          "path": "reports/forge/attempts/51169502a0e64466b5005e7c870b5592/request.json",
+          "sha256": "d59d0b978ea00bc11ef62286171f3f43c8dee0b984e046bb79d6442033e87c3a"
+        },
+        "result": {
+          "path": "reports/forge/attempts/51169502a0e64466b5005e7c870b5592/result.json",
+          "sha256": "03371b046278654fe04618c3db0698a68d1e7ac5e679dd0853b09a95720e5ecb"
+        }
+      },
+      "original_files_available": false,
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 0.40625,
+        "mass_lemon": 0.2109375,
+        "mass_melon": 0.3828125,
+        "mass_tv": 0.4,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 3,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 7.368280446502225,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "observed_gate": "FAIL",
+      "completed_updates": 20001,
+      "paid_seconds": 180.8761336649768,
+      "intended_endpoint_bound_flags": {
+        "sample_count": true,
+        "quality_fraction": true,
+        "modes": false,
+        "mass_tv": false,
+        "reconstruction_exact": false,
+        "minimum_reconstruction_token_probability": false
+      },
+      "raw_temporal_predicates_available": false
+    },
+    {
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "attempt_id": "8e0a35381d6543bd8a3ecb6056351c06",
+      "compact_summary": {
+        "path": "reports/forge/technique-receipts/8e0a35381d6543bd8a3ecb6056351c06.json",
+        "sha256": "123c6fedccf6e126c4e478db7d6c60622ed14c01cd93b723b20d4a2f240c1446"
+      },
+      "original_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/8e0a35381d6543bd8a3ecb6056351c06/evidence.json",
+          "sha256": "4dd62396db3d4489e2274882609cf9e00b3a17956ed6cab46d6f481ccd5a97b4"
+        },
+        "request": {
+          "path": "reports/forge/attempts/8e0a35381d6543bd8a3ecb6056351c06/request.json",
+          "sha256": "38c236996c9b8326769edef498fb102cd9ba06b34dd924c44511ce62151ac9c7"
+        },
+        "result": {
+          "path": "reports/forge/attempts/8e0a35381d6543bd8a3ecb6056351c06/result.json",
+          "sha256": "381fa429da058e30cc2e8dd392a389775c943d9e335641a6e300de52165a4225"
+        }
+      },
+      "original_files_available": false,
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1982421875,
+        "mass_berry": 0.2080078125,
+        "mass_grape": 0.1875,
+        "mass_lemon": 0.1953125,
+        "mass_melon": 0.2109375,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 0.9478409886360168,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.0022995131988590416,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 1667,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 18,
+        "passing_suffix": 1,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "observed_gate": "FAIL",
+      "completed_updates": 20001,
+      "paid_seconds": 192.955190934008,
+      "intended_endpoint_bound_flags": {
+        "sample_count": true,
+        "quality_fraction": true,
+        "modes": true,
+        "mass_tv": true,
+        "reconstruction_exact": true,
+        "minimum_reconstruction_token_probability": true
+      },
+      "raw_temporal_predicates_available": false
+    }
+  ],
+  "scorer_reporting_operator_bug": {
+    "source_functions": [
+      "benchmarks.locked_shared.baseline.score_metrics",
+      "benchmarks.locked_shared.observation.sustained"
+    ],
+    "observed_behavior": "Any operator other than >= follows <=; declared == modes/reconstruction checks therefore report K3P modes3/reconstruction0 as PASS.",
+    "corrected_numeric_endpoint_flags": {
+      "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c": {
+        "sample_count": true,
+        "quality_fraction": true,
+        "modes": false,
+        "mass_tv": false,
+        "reconstruction_exact": false,
+        "minimum_reconstruction_token_probability": false
+      },
+      "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f": {
+        "sample_count": true,
+        "quality_fraction": true,
+        "modes": true,
+        "mass_tv": true,
+        "reconstruction_exact": true,
+        "minimum_reconstruction_token_probability": true
+      }
+    },
+    "original_overall_fail_is_preserved": true,
+    "current_word_gate_redundancy_proof": "Missing one of five equal-mass accepted words implies massTV>=.2>.1; minimum correct-token probability>=.9 implies correct argmax at every reconstruction token and hence exact reconstruction. Thus correcting equality alone grants no new current word PASS.",
+    "future_software_requirement": "Explicit >=, <=, == semantics and unknown-op rejection, controls3!=5 and0!=1, with new evaluator/source identity. No source repair or archived regrade in this review."
+  },
+  "falsifiable_hypothesis": {
+    "observed_source": "Word caller has joint [word,code] critic, not merely marginal critic; its generator/encoder objective lacks an explicit paired G(E(word)) token consistency term.",
+    "unproved_cause": "Neither weak critic nor absent reconstruction term is established as the failure cause; A2 was inactive. Exact failed observation predicates remain unavailable.",
+    "next_bounded_variant_if_archive_diagnosis_supports_it": "Explicit paired token-consistency objective through the same public API, preserving original20001 budget/24 cadence/final5 gates and masses/padding. No unchanged rerun or seed tuning.",
+    "falsifier": "Five required terminal observations must each satisfy all original probability, exactness, coverage, mass and quality bounds."
+  },
+  "roster": [
+    {
+      "candidate_id": "atlas",
+      "candidate_revision": "506319d4621e284ded8897c02670c7c51c2d50c759e6a459b39848114e346667",
+      "trainer_family": "atlas",
+      "status": "BLOCKED",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "8d2031fe492f23ff16897c7d26b9d8dc1d1ecae33e35fa793c23d08a87332965",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5",
+      "candidate_revision": "f29b4cbcdf81565886085d7a9c678fa8c002abe50b9044c0722ccabce0bb1fcc",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604",
+      "candidate_revision": "6a6fdf0100eeb8625f29aaaec86cb0ef85f32b82c5c52309486dab5a8e37cdf1",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3",
+      "candidate_revision": "d6130d9a1603dd91600b59c03e04582409f53e1eb872616d4ffc1c938a6306a1",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0",
+      "candidate_revision": "52be4491f12130aa891864e902c98ce7e10acbf0810bd4cb5798796d570c5da6",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc",
+      "candidate_revision": "d8c3d7d83cb655d9091d939aec924dc49d0a504aec8fc03b333236dc35d0474b",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e",
+      "candidate_revision": "2e4c7273266e94647d74da18d1415ecef57e5de7783cb3259982ba4e2e4e9e06",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383",
+      "candidate_revision": "62821742d34def35c0693f6b3e4f7db5929ba434253eb438ad0d7793a8bfd4e7",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "e22",
+      "candidate_revision": "cf5d3fdcbb1d395a36dbaa487597185853433b7a4127127494d77b115630c242",
+      "trainer_family": "e22",
+      "status": "BLOCKED",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "five-word-joint-ka2-v1",
+      "candidate_revision": "1b10bb148f0e243166bbe62f58f1cce8042ba77be67ccb39048afce650f86bbf",
+      "trainer_family": "five-word-joint-ka2-v1",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "ea1e0bdda2f81b8214e9b4cb0fc273348f536d542c6b85655361fb8b577f55e0",
+      "trainer_family": "k3p-no-penalty",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "0fa611b1ebcc59007bd8a184d772b865ee6aa575a4d09475b373f2b8165ff54a",
+      "trainer_family": "k3p-no-anchor",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "k3p",
+      "candidate_revision": "b65b2e85287fabbbfbf888eefcc6ac53db145f14e15740dbd740f163b2ec8a2f",
+      "trainer_family": "k3p",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b",
+      "candidate_revision": "370569798888ba55de4f9ff8324abb648afa2a057876a4f0da013be5d67514f2",
+      "trainer_family": "k3p",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "412dbcba924680e57d9b0874082220f04b43e8b31f8e81fc60a7bcbad5f701a1",
+      "trainer_family": "k3p",
+      "status": "FAIL",
+      "tier1_passed": 4,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "five_word_joint_acquisition"
+      }
+    },
+    {
+      "candidate_id": "k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a",
+      "candidate_revision": "69e1c86c9867aaceaac10b5de639036862b5f1ec7e7ae5078972ea5ddebf47ea",
+      "trainer_family": "k3p",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f",
+      "candidate_revision": "c37fbb0f22742d4660a4258f1137da3336219502f3438347747aad3b06909da4",
+      "trainer_family": "k3p",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "b51787a935f07f6f61c0dc777455a8b30ad2e16bc39e022bb2bae3004c30ce89",
+      "trainer_family": "k3p-no-a2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "baa37cecccf77ff336795b0c8bafb952259a599410a5431b86776bf8a2118106",
+      "trainer_family": "bcap",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "b66c72f805f4deb3026709c05774414fb12a72f1b99311eb825ab0dc1241b22c",
+      "trainer_family": "k3p-no-training-noise",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "k3p-r1r2-matched-v1",
+      "candidate_revision": "2be36d0cc3e8b3d08df9f07a7b5b26f92551080d594812a314c092bdc68d8db0",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "ka2",
+      "candidate_revision": "0cc7bb82003a688982938ea2d24f11af0ef8656823d35746b304903a07b3b319",
+      "trainer_family": "ka2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "d5ebfc250aac0490ef7281aa1aa44d904beebcbc81ee507d9d857b58d917b3aa",
+      "trainer_family": "ka2",
+      "status": "FAIL",
+      "tier1_passed": 4,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "five_word_joint_acquisition"
+      }
+    },
+    {
+      "candidate_id": "ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d",
+      "candidate_revision": "15408f8bc4205e4292f0e574bdd7fb1d0588b3b21fd367ef4f7082302feea515",
+      "trainer_family": "ka2",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f",
+      "candidate_revision": "96e0a93bb82065d0f96e2c9a2bcdd1e8eb2ef0f582f7791bc2602352e4d70d17",
+      "trainer_family": "ka2",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03",
+      "candidate_revision": "0fe8201bf3f8e15221af758cf82ebe1e0be1fb838335678c7e05f49447122764",
+      "trainer_family": "ka2",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b",
+      "candidate_revision": "1725b352208136f4c40506babe9f595ad985608d59d95efad33b18d21a108bad",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6",
+      "candidate_revision": "eb9b3479ac8852797223159fad746a1092fe97e9d817d7b711dc1245f1d0c4e0",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46",
+      "candidate_revision": "0c1dfc79f4f204782015aaa8108621c55ae1a4b04f3ad94f0619f92fe5c3635f",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "2727e20c5a10a9391f5298cbb6a73da1c8b80add1d29303ffcab3f26b0d2d26d",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27",
+      "candidate_revision": "2110cd0e7bd1ed2aa7fa0f938708ebd6ed1a2172fef79536bde1c7b2961eb9a8",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595",
+      "candidate_revision": "d3cc3776cbff26bce6a2ec34e234990f7d1d804d39b70f2476650d0934258f82",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d",
+      "candidate_revision": "938d8908e315336aae25b7d6d71a53760292706864e4b30666fcab008b1b4951",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd",
+      "candidate_revision": "3db2077771297550ea392e74272231f015406c4d34d844f001f9ab82d679adf7",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff",
+      "candidate_revision": "5e9f119e5a1d77ace5a3b2d305ac10cdcfd986e34a9285a73c73d5b2a7d8da67",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743",
+      "candidate_revision": "d1d45b77eaf7128cff440bdc508011e3de6300454ffcb271ae2a8ba1ae13715e",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe",
+      "candidate_revision": "da0d697213b018daf952e3272ea913f666a33788af1c859923d596a6150af108",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a",
+      "candidate_revision": "9de572db18f751d0aa80105073631c386514a34fb8f0b3fbd340b5372ef78d54",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "r3gan-stacked-training-toy-v1",
+      "candidate_revision": "b2cdff32b14f9bbc3d26c65025c1898f26e29f8eb510945c927105e9914bd333",
+      "trainer_family": "r1r2",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "release07-gan-v3-cloud-v1",
+      "candidate_revision": "95e403581ebf0d72da9e36b0bcc668ec4512daa4e1aafe06013b465b7a8b06da",
+      "trainer_family": "release07-gan-v3-cloud",
+      "status": "BLOCKED",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "47630167ae31039bb209a2245097e4b9d5b2379ae0c526d4d3aa57e6204b0f33",
+      "trainer_family": "release07-gan-v3-mog",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f",
+      "candidate_revision": "674a82d7bd093e07b0e357aa47abae278f61b10a01f4c17e220208fcdc38c8bf",
+      "trainer_family": "release07-gan-v3-mog",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e",
+      "candidate_revision": "ddca0274d6776dc4990980c30424b0559ae1bbfd3549800dd26ecc084040c1b1",
+      "trainer_family": "release07-gan-v3-mog",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26",
+      "candidate_revision": "0939a8bc6653cecdf4fa02d5b7884e69dd052d1e65504a8cfe0f2816750d5bc7",
+      "trainer_family": "release07-gan-v3-mog",
+      "status": "FAIL",
+      "tier1_passed": 3,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "ring16_acquisition"
+      }
+    },
+    {
+      "candidate_id": "release07-gan-v3-mog-v1",
+      "candidate_revision": "d8ec84dfaad0ef645617535021e3d6b6dadd14a07818299563478599d1eae63a",
+      "trainer_family": "release07-gan-v3-mog",
+      "status": "BLOCKED",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      }
+    },
+    {
+      "candidate_id": "release07-gan-v3-task-adapted-v1",
+      "candidate_revision": "cb26bc6bde603eb27fc2ab70989c5bcc9e714576d8056a756f0e775cc2e0d655",
+      "trainer_family": "release07-gan-v3-mog",
+      "status": "FAIL",
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "first_stopping_required_task": {
+        "status": "FAIL",
+        "task_id": "two_pole"
+      }
+    }
+  ]
+}

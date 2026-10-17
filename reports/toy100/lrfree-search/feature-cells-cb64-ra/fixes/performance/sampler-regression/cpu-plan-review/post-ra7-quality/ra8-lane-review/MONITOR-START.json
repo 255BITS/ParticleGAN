@@ -1,0 +1,25 @@
+{
+  "status": "STARTED_OWNED_CPU_WATCHER",
+  "utc": "2026-09-30T07:43:45.835729+00:00",
+  "pid": 774187,
+  "startticks": "165604598",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+    "--validation",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra8-monitor",
+    "--watch"
+  ],
+  "validation": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8",
+  "output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra8-monitor",
+  "monitor_sha256": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+  "audit_receipt_sha256": "fbb72e49ab4a435d30d13bf5503eac266a541d59c946f8b76c6891af7b9fdfec",
+  "audit_frozen_sha256": "1ebbb19aa504b0683a1088469825f3eafb18343bb286224e0d2cf4d3cc26e199",
+  "scope": "unchanged saved-artifact canonical checker; CPU only, no numerical reruns or CUDA context",
+  "live_log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra7-quality/ra8-lane-review/watcher.log",
+  "quality_verdict": null
+}

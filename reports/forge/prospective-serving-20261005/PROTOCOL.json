@@ -1,0 +1,40 @@
+{
+  "authority_scope": "ROOT authenticated617/618 intended-serving interface; this file activates no run or budget",
+  "caller_bound_prerequisites": [
+    "actual committed/copied source and trusted GANTrainer/UpdatePolicy ownership",
+    "whole existing Recipe and actual supplied prior/network preserved",
+    "task declared uniform independent observation law; contexts and enumeration require separate declared law",
+    "unchanged metrics thresholds horizons and required observation/holdout clocks",
+    "source-bound semantic state fingerprint covering models optimizers policy averages Recipe global/owner RNGs callback/data state",
+    "dedicated repeat-bound evaluation stream on actual snapshot device",
+    "finite ROOT-authorized runtime envelope and no score-based selector/checkpoint branch"
+  ],
+  "measurement": {
+    "draw_api": "ServedModel.sample(n, generator=dedicated_eval_rng, output_noise=True)",
+    "full_protocol_credit_from_one_observation": false,
+    "latent_perturbation": "unchanged public DV12 and selected backend",
+    "output_noise": true,
+    "output_sigma": "current policy output_sigma, including its learned floor law",
+    "owner_api": "GANTrainer.served_model -> UpdatePolicy.served_model",
+    "prior_and_network": "existing caller-owned modules; no override",
+    "protocol_id": "canonical-policy-selected-served-output-v1",
+    "purity": "equal source-bound semantic state fingerprints before and after",
+    "rng": "caller-owned dedicated evaluation stream, separate from every owner stream",
+    "sampling_law": "uniform_independent_public_served_sample",
+    "schema": "pg_canonical_serving_measurement_contract_v1",
+    "selection": "intrinsic public policy selector; fast or averaged as selected",
+    "task_metrics_thresholds_horizons": "unchanged by this helper; separately declared by the caller",
+    "unsupported_sampling_laws": [
+      "conditional_context",
+      "routed_context",
+      "enumerated_image_centers"
+    ]
+  },
+  "old_results_regraded": false,
+  "prospective_explicit_output_noise": true,
+  "public_api_default_output_noise": false,
+  "qualification_default_speed_credit": false,
+  "retrospective_scope": "one final complete state cannot recover all past served models/noise states; terminal diagnostic only without complete original observations",
+  "schema": "pg_canonical_serving_measurement_prospective_protocol_v1",
+  "status": "SOURCE_ONLY_NOT_EXECUTED"
+}

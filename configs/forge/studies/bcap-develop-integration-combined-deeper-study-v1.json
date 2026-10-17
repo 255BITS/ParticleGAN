@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 45000,
+    "candidate_budget_seconds": 45000,
+    "id": "bcap-develop-integration-deeper-v1"
+  },
+  "candidate": "bcap-develop-integration-combined-v1",
+  "competing_explanation": "Marginal matching may conflict with conditional goals or degenerate targets, and first-order protected descent does not certify finite density or Gaussian retention.",
+  "control": {
+    "candidate_id": "bcap-develop-integration-winner-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "hypothesis": "Characterize whether the same global combined recipe retains its measured conditional/rare repairs and incumbent full-gate passes on the remaining Tier2 tasks despite its failed ordinary Tier1 screen.",
+  "id": "bcap-develop-integration-combined-deeper-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "vector_unequal_mass",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "research_publication_commit": "fed122eed540a100a83d0b2614895f35d6c9e5c9"
+      },
+      "path": "reports/forge/bcap-develop-integration/prior-evidence.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bcap-develop-integration-deeper-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

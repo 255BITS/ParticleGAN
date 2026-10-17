@@ -1,0 +1,28 @@
+{
+  "gif_sha256": "4f87f986289905ac02e7e60fa16d9775f9e229b690fd5ad53c648b3474b1e251",
+  "kind": "actual_training_saved_image_outputs_gif",
+  "observation_count": 24,
+  "observations_sha256": "cd461825cd0fc281f315d89116290f6bb3e7074484e299a3e6dc1116e42032e8",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+  "sampling_draws_added": 0,
+  "saved_sample_sets_recomputed": 24,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-dualnorm-convolution/runs/forge/bcap-convolution-images-v1/881d3aa88d7b46a89ead5372e79f5216/observed-images.pt": "a11b27e4ccf6d6bd592df810c041e9bfdf910b2eec1f9ab406df7c6a02a40c82"
+  },
+  "task_id": "img_blobs4"
+}

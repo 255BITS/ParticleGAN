@@ -1,0 +1,194 @@
+{
+  "media_append": "Separate renderer closure; no media, individual rendered frames or layout drafts in this append.",
+  "raw_file_count": 31,
+  "raw_files": [
+    {
+      "bytes": 6992523,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-000500.pt",
+      "role": "local_checkpoint",
+      "sha256": "d757f78f7417148feb7532670ab348d04c9b665128266a22ab53e73eca5bd378"
+    },
+    {
+      "bytes": 6394051,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-001000.pt",
+      "role": "local_checkpoint",
+      "sha256": "100616faab0cd20aa37cc8a80433b1ca7471cd5a65d975606ceac68918ae06dc"
+    },
+    {
+      "bytes": 6118299,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-001500.pt",
+      "role": "local_checkpoint",
+      "sha256": "eb49450650450fe6d45ec360bfffb091686e702196852ee75ae253551733f132"
+    },
+    {
+      "bytes": 33181,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/cpu-observer-atlas/dense-frames.partial.npz",
+      "role": "local_sample_cloud",
+      "sha256": "a490f32d1dec617f76c5847dc209a9de353470cfb15de28ba1fa913451335b00"
+    },
+    {
+      "bytes": 33181,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/cpu-observer-e22/dense-frames.partial.npz",
+      "role": "local_sample_cloud",
+      "sha256": "f4e64e1c66954f804d132a0df3b0624a3377420d11f243c6a9740a431c18fdfd"
+    },
+    {
+      "bytes": 6992523,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-000500.pt",
+      "role": "local_checkpoint",
+      "sha256": "7fd73c4a72ad784c4939c200a5e8549df1d32d7d128f8c1a3b3ca469f3fd2b37"
+    },
+    {
+      "bytes": 6394051,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-001000.pt",
+      "role": "local_checkpoint",
+      "sha256": "6df8d3c5a7401db302de5c556e3ec049e44f616279738e41e0bfe49c2a439779"
+    },
+    {
+      "bytes": 6118299,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-001500.pt",
+      "role": "local_checkpoint",
+      "sha256": "8c07ba3f9df84e4e3fe97483a3c726a3ba6b39adc176422ea615f2e56b21eea1"
+    },
+    {
+      "bytes": 4620500,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/dense-frames.npz",
+      "role": "local_sample_cloud",
+      "sha256": "6d466cbe42f8b71cf3b29eb6534a3430dd80cc8b9d1cf7ce2638e871ba79e619"
+    },
+    {
+      "bytes": 4620500,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/dense-frames.partial.npz",
+      "role": "local_sample_cloud",
+      "sha256": "6d466cbe42f8b71cf3b29eb6534a3430dd80cc8b9d1cf7ce2638e871ba79e619"
+    },
+    {
+      "bytes": 60597,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/original-frames.npz",
+      "role": "local_sample_cloud",
+      "sha256": "ae6bf51e32303e2cb0b2cfbf7a7f213e64f343938735c8ddd15be3f72feed279"
+    },
+    {
+      "bytes": 44974,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/original-frames.npz.partial.npz",
+      "role": "local_sample_cloud",
+      "sha256": "8f568e81c03b1f7f38e602fc133d80c90e2e696ea1778b507d8ee9c187732668"
+    },
+    {
+      "bytes": 5666051,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/checkpoint-000500.pt",
+      "role": "local_checkpoint",
+      "sha256": "2309591314b1db5dfd8ccb546254995573ee5400b18a2c20dc283874f11e5fd3"
+    },
+    {
+      "bytes": 4823995,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/checkpoint-001000.pt",
+      "role": "local_checkpoint",
+      "sha256": "fb01631bb172184907dec722338d8ef39989d0378ab7b874abd39b4eccc6ebbb"
+    },
+    {
+      "bytes": 5087467,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/checkpoint-001500.pt",
+      "role": "local_checkpoint",
+      "sha256": "d0192ebb9ec6c1c2059ead9abe1df19a3da457d15367b2b534c90a4fdaef2ceb"
+    },
+    {
+      "bytes": 4624020,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/dense-frames.npz",
+      "role": "local_sample_cloud",
+      "sha256": "3beec1243aa59a582d27c5c1b665b1de8b85c199499d109692399e8aa5e705a9"
+    },
+    {
+      "bytes": 4624020,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/dense-frames.partial.npz",
+      "role": "local_sample_cloud",
+      "sha256": "3beec1243aa59a582d27c5c1b665b1de8b85c199499d109692399e8aa5e705a9"
+    },
+    {
+      "bytes": 60649,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/original-frames.npz",
+      "role": "local_sample_cloud",
+      "sha256": "f95315e5b586b93e866953e162d4055b9d3114c3bf916fb5d53b643cbf9f85b0"
+    },
+    {
+      "bytes": 45055,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/original-frames.npz.partial.npz",
+      "role": "local_sample_cloud",
+      "sha256": "19943eb3617daafbfc50e013855997ec423b91f2381e57a4d6fb7eecd25c374e"
+    },
+    {
+      "bytes": 6356091,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/final-state.pt",
+      "role": "local_checkpoint",
+      "sha256": "e29e52131128ebdbee9ec1c408750cc8de63f86e194ed7440c01dacc716faa0b"
+    },
+    {
+      "bytes": 306091,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/control/runtime-state.pt",
+      "role": "local_checkpoint",
+      "sha256": "f6cc3423aaaf3df1979af09bcf675904ffbea618999337d7c81d545885e969d8"
+    },
+    {
+      "bytes": 366102,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/dense-frames.npz",
+      "role": "local_sample_cloud",
+      "sha256": "1468a3edaf3c81fced1a581ca05c914e32226c594a0b67210251c3c705cc6ec3"
+    },
+    {
+      "bytes": 366102,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/dense-frames.partial.npz",
+      "role": "local_sample_cloud",
+      "sha256": "1468a3edaf3c81fced1a581ca05c914e32226c594a0b67210251c3c705cc6ec3"
+    },
+    {
+      "bytes": 6356091,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/final-state.pt",
+      "role": "local_checkpoint",
+      "sha256": "20f4b0bee4f92720620c4f02f38422f5b31910ba834e222695ef50b82abcc3be"
+    },
+    {
+      "bytes": 306091,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/atlas/observed/runtime-state.pt",
+      "role": "local_checkpoint",
+      "sha256": "f6cc3423aaaf3df1979af09bcf675904ffbea618999337d7c81d545885e969d8"
+    },
+    {
+      "bytes": 5571053,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/control/final-state.pt",
+      "role": "local_checkpoint",
+      "sha256": "9283696926977f9746ae45c8b907590b25c134f68b33f29c76f03a378d239574"
+    },
+    {
+      "bytes": 306091,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/control/runtime-state.pt",
+      "role": "local_checkpoint",
+      "sha256": "a67e1a2b33dfafdb0b4e78e3725fd19438e94c8e1200cb73cf0588cd878e5fd7"
+    },
+    {
+      "bytes": 636963,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/dense-frames.npz",
+      "role": "local_sample_cloud",
+      "sha256": "caf95991d38957a5f67b83a5bef2f52906c9b9532b6bbbc96f94edaf480b1d2b"
+    },
+    {
+      "bytes": 636963,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/dense-frames.partial.npz",
+      "role": "local_sample_cloud",
+      "sha256": "caf95991d38957a5f67b83a5bef2f52906c9b9532b6bbbc96f94edaf480b1d2b"
+    },
+    {
+      "bytes": 5571053,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/final-state.pt",
+      "role": "local_checkpoint",
+      "sha256": "9283696926977f9746ae45c8b907590b25c134f68b33f29c76f03a378d239574"
+    },
+    {
+      "bytes": 306091,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/e22/observed/runtime-state.pt",
+      "role": "local_checkpoint",
+      "sha256": "a67e1a2b33dfafdb0b4e78e3725fd19438e94c8e1200cb73cf0588cd878e5fd7"
+    }
+  ],
+  "raw_total_bytes": 100438718,
+  "schema_version": 1
+}

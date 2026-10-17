@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/toy100/cpu-recipe-gpu-port",
+  "candidate_revision": "b682c89a5b30fddaacd03585b2b9112829811fd40e39d56d4f0ed90908c98cd0",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Port the known CPU winner to GPU",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/cpu-recipe-gpu-port",
+      "narrative_sources": [
+        {
+          "git_blob": "33b0eac6a727d3c92316fbbf6b988d300d315544",
+          "path": "reports/toy100/cpu-recipe-gpu-port/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c42e61ed1aadc73cab0ae7b5aba6296845f42333f2dd87148bbb758d7a17e1e3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/cpu-recipe-gpu-port/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Port the known CPU winner to GPU\n\n**The active base is `constraints_simple_regularization`, the recorded 22/22 CPU\nrecipe. Preserve its schedules, noise, losses, and host settings while resolving\nthe GPU failures.** The continuous-rate optimizer search is secondary.\n\nAll six failures from the 16/22 CUDA control pass in fresh local CPU training.\nThese are new runs of the archived original source, PyTorch 2.13.0+cu126,\nordinary AMD Ryzen 5900X execution, one thread, AVX2, and seed 0. No MKL vendor\noverride is used. This is a six-host reproduction, not a new full CPU 22/22 run.\n\n| Previously failing toy | Fresh CPU | Native CUDA | CUDA, CPU initial parameters | CUDA, all CPU random draws |\n|---|---|---|---|---|\n| trajectory | PASS | FAIL | **PASS** | **PASS** |\n| img_intensity2 | PASS | FAIL | **PASS** | **PASS** |\n| img_bars4 | PASS | FAIL | **PASS** | FAIL |\n| img_blobs4 | PASS | FAIL | **PASS** | **PASS** |\n| mode_hold | PASS | FAIL | FAIL | FAIL |\n| vector_unequal_mass | PASS | FAIL | FAIL | **PASS** |\n| Total in this six-host diagnostic | **6/6** | **0/6** | **4/6** | **4/6** |\n\nNo diagnostic row has a 22-toy score. Do not add these passes to the previous\nsixteen, or combine passes from different columns. Each candidate needs its own\ncomplete qualification before promotion. The ordinary CUDA recipe remains\n**16/22**, including the three native 100-mode passes.\n\n## What the "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-cpu-recipe-gpu-port-ff3bab8bd767",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "33b0eac6a727d3c92316fbbf6b988d300d315544",
+    "path": "reports/toy100/cpu-recipe-gpu-port/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "c42e61ed1aadc73cab0ae7b5aba6296845f42333f2dd87148bbb758d7a17e1e3",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/cpu-recipe-gpu-port/README.md"
+  },
+  "task_results": []
+}

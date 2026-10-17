@@ -1,0 +1,228 @@
+{
+  "phase": "batch-feature-full-suite",
+  "suite": {
+    "PASS": 22
+  },
+  "stress": {
+    "PASS": 1,
+    "FAIL": 1
+  },
+  "rows": [
+    {
+      "id": "toy-two_pole",
+      "kind": "toy",
+      "task": "two_pole",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 10; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-two_pole/result.json"
+    },
+    {
+      "id": "toy-trajectory",
+      "kind": "toy",
+      "task": "trajectory",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 17; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-trajectory/result.json"
+    },
+    {
+      "id": "toy-residual_student",
+      "kind": "toy",
+      "task": "residual_student",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 23; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-residual_student/result.json"
+    },
+    {
+      "id": "toy-unipolar",
+      "kind": "toy",
+      "task": "unipolar",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 19; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-unipolar/result.json"
+    },
+    {
+      "id": "toy-ae_gan_hold",
+      "kind": "toy",
+      "task": "ae_gan_hold",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 22; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-ae_gan_hold/result.json"
+    },
+    {
+      "id": "toy-cover_leftover",
+      "kind": "toy",
+      "task": "cover_leftover",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 13; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-cover_leftover/result.json"
+    },
+    {
+      "id": "toy-unused_token_hold",
+      "kind": "toy",
+      "task": "unused_token_hold",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 8; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-unused_token_hold/result.json"
+    },
+    {
+      "id": "toy-mid_scale_identity",
+      "kind": "toy",
+      "task": "mid_scale_identity",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 17; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-mid_scale_identity/result.json"
+    },
+    {
+      "id": "toy-mode_hold",
+      "kind": "toy",
+      "task": "mode_hold",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 16; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-mode_hold/result.json"
+    },
+    {
+      "id": "toy-vector_two_broad",
+      "kind": "toy",
+      "task": "vector_two_broad",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 23; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-vector_two_broad/result.json"
+    },
+    {
+      "id": "toy-vector_unequal_mass",
+      "kind": "toy",
+      "task": "vector_unequal_mass",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 7; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-vector_unequal_mass/result.json"
+    },
+    {
+      "id": "toy-vector_unequal_width",
+      "kind": "toy",
+      "task": "vector_unequal_width",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 21; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-vector_unequal_width/result.json"
+    },
+    {
+      "id": "toy-vector_anisotropic",
+      "kind": "toy",
+      "task": "vector_anisotropic",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 22; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-vector_anisotropic/result.json"
+    },
+    {
+      "id": "toy-vector_overlap",
+      "kind": "toy",
+      "task": "vector_overlap",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 7; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-vector_overlap/result.json"
+    },
+    {
+      "id": "toy-vector_spiral",
+      "kind": "toy",
+      "task": "vector_spiral",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 23; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-vector_spiral/result.json"
+    },
+    {
+      "id": "toy-img_stripes2",
+      "kind": "toy",
+      "task": "img_stripes2",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 22; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-img_stripes2/result.json"
+    },
+    {
+      "id": "toy-img_bars4",
+      "kind": "toy",
+      "task": "img_bars4",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 12; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-img_bars4/result.json"
+    },
+    {
+      "id": "toy-img_blobs4",
+      "kind": "toy",
+      "task": "img_blobs4",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 17; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-img_blobs4/result.json"
+    },
+    {
+      "id": "toy-img_intensity2",
+      "kind": "toy",
+      "task": "img_intensity2",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "final consecutive passes 9; need 5",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/toy-img_intensity2/result.json"
+    },
+    {
+      "id": "native-grid100",
+      "kind": "native",
+      "task": "grid100",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "coverage PASS; accuracy PASS; stable checks 7 (need 5); holdout center RMS/sigma 0.106728",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/native-grid100/result.json"
+    },
+    {
+      "id": "native-rotated100",
+      "kind": "native",
+      "task": "rotated100",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "coverage PASS; accuracy PASS; stable checks 6 (need 5); holdout center RMS/sigma 0.111781",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/native-rotated100/result.json"
+    },
+    {
+      "id": "native-staggered100",
+      "kind": "native",
+      "task": "staggered100",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "coverage PASS; accuracy PASS; stable checks 6 (need 5); holdout center RMS/sigma 0.121113",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/native-staggered100/result.json"
+    },
+    {
+      "id": "hold-mode_hold",
+      "kind": "hold",
+      "task": "mode_hold",
+      "candidate": "batch_feature_zero",
+      "status": "PASS",
+      "details": "confirmed 1400; hold 1200/1200; minimum hold HQ 0.903564; extra-window final HQ 0.999023",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/hold-mode_hold/result.json"
+    },
+    {
+      "id": "shift-mode_hold",
+      "kind": "shift",
+      "task": "mode_hold",
+      "candidate": "batch_feature_zero",
+      "status": "FAIL",
+      "details": "pre-shift STAY 120/120; recovery deadline False",
+      "result_file": "/ml2/hypergan/pr194-init-search-20260926/batch-feature-full-suite/runs/shift-mode_hold/result.json"
+    }
+  ]
+}

@@ -1,0 +1,4038 @@
+{
+  "all_observed_selected_sources": [
+    "fast"
+  ],
+  "candidates": [
+    {
+      "competing_explanation": "No direct inverse objective and the stochastic joint law may dominate; endogenous scales will differ.",
+      "id": "word-min11-quarter-base-rate-v1",
+      "overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.001328125,
+        "prior_lr_mult": 1.5
+      },
+      "rationale": "Reduce nominal motion of every role fourfold at preserved ratios; test whether sharp wrong-token/coverage excursions persist.",
+      "status": "PROPOSED_NOT_EXECUTED",
+      "worst_case_seconds": 900
+    },
+    {
+      "competing_explanation": "Birth/death transport and DV12 geometry are endogenous; eleven distinct terminal rows are not collapsed latent support.",
+      "id": "word-min11-slower-prior-v1",
+      "overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0053125,
+        "prior_lr_mult": 0.15
+      },
+      "rationale": "Reduce only nominal row motion tenfold; test a moving-support hypothesis suggested by changing saved code geometry and many table moves.",
+      "status": "PROPOSED_NOT_EXECUTED",
+      "worst_case_seconds": 900
+    }
+  ],
+  "cohort": "word_joint_policy_min11_v1",
+  "family": "atlas_word_joint_min11",
+  "initialization": {
+    "discriminator": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.0.bias": 3734295931346225499,
+        "net.0.weight": 8910211641772985932,
+        "net.2.bias": 1656871869629328331,
+        "net.2.weight": 9070382962554913347,
+        "net.4.bias": 333772184539410714,
+        "net.4.weight": 3220091654461954378
+      }
+    },
+    "encoder": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.1.bias": 8635568878908975799,
+        "net.1.weight": 2352436766040047569,
+        "net.3.bias": 4684962440974121638,
+        "net.3.weight": 1013739058699418041,
+        "net.5.bias": 1863516330406637661,
+        "net.5.weight": 4393974776920474204
+      }
+    },
+    "generator": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "net.0.bias": 2669906441505372968,
+        "net.0.weight": 3213176745718584912,
+        "net.2.bias": 265576875384124118,
+        "net.2.weight": 5825468874490035566,
+        "net.4.bias": 6418902638380629685,
+        "net.4.weight": 3028787476376713866
+      }
+    },
+    "prior": {
+      "initializer": "deterministic_orthogonal_named_parameters_v1",
+      "parameter_seeds": {
+        "z": 6640234621280078221
+      }
+    }
+  },
+  "inputs": {
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/benchmarks/toy_audit/api_images.py": {
+      "bytes": 86556,
+      "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/benchmarks/toy_audit/definition_quality.py": {
+      "bytes": 19193,
+      "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json": {
+      "bytes": 15010,
+      "sha256": "cbb8fad29b406e9a997101be7ba5ca1d1669dc5be1d7f6f982409d2c092f2ebb"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/experiments/forge/policy_adapters.py": {
+      "bytes": 15130,
+      "sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/experiments/forge/views.py": {
+      "bytes": 74085,
+      "sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/experiments/forge/word_joint_policy_adapters.py": {
+      "bytes": 24294,
+      "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/experiments/forge/word_joint_policy_contracts.py": {
+      "bytes": 11445,
+      "sha256": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/forge-source.json": {
+      "bytes": 171329,
+      "sha256": "d1dd4b67ec65eedbed9468ecc61cbd684d774f2504d82511ea4bdf6e9f823a5a"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/birth_death.py": {
+      "bytes": 45396,
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/continuous.py": {
+      "bytes": 60875,
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/gan_loss.py": {
+      "bytes": 1016,
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/particle_prior.py": {
+      "bytes": 17899,
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/policy.py": {
+      "bytes": 85594,
+      "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/recipes.py": {
+      "bytes": 54485,
+      "sha256": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/graded-result.json": {
+      "bytes": 901,
+      "sha256": "5eb697cf6678ef764204ca5cd9e755a9d2f6f1fe0530c58a608b18ee9e3d766a"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/raw-result.json": {
+      "bytes": 197018,
+      "sha256": "e26ec506c81e8cdd74447c466d516ef30785de501da28dd50e698c115ebe7515"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/resolved.json": {
+      "bytes": 4861315,
+      "sha256": "52a639183e9ed3c541b90311a16d0968ed85cd7cb039c64d0df693f4cc43bbc1"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_000834.npz": {
+      "bytes": 673600,
+      "sha256": "94b1e358af8f8d385b4b84e34cc78528499d627a9ffdf9ae16887077293f90fd"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_001667.npz": {
+      "bytes": 671357,
+      "sha256": "b27e7d004183b08f4c8b7acfa1fb6a210c97d8765c3926f31c1ed91eae469847"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_002501.npz": {
+      "bytes": 672475,
+      "sha256": "43533501462255e48e5dd98344490a4bb37569ea07449d5e983479bb0d116588"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_003334.npz": {
+      "bytes": 534709,
+      "sha256": "0479401dc35618f4fcdede300376186f13717e6261088cfbf84c9dcb61516cd7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_004167.npz": {
+      "bytes": 412303,
+      "sha256": "3fdcd8973de945270ce16a0ee91115c1c2d94d346e59d77e6f96f73461916b30"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_005001.npz": {
+      "bytes": 652104,
+      "sha256": "16362dd48ec56783f08de63b395daec574e36e20e31791d11d182c4caa658d6a"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_005834.npz": {
+      "bytes": 682046,
+      "sha256": "8857ccc7c3d1d3a478fad9461549a13d1e65382e1bbc8e7074bf0982f2e1d38c"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_006667.npz": {
+      "bytes": 678672,
+      "sha256": "25b015f466b767607f901391e193dd5b5583546407dccff14b6e51b869824ee9"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_007501.npz": {
+      "bytes": 679201,
+      "sha256": "a9ebb4bf5d9ef88e4955231c30da6a9f4c34b5e98a7433b29ae0a68350081dd7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_008334.npz": {
+      "bytes": 681647,
+      "sha256": "89404a8dcf672903bab180fcba628adc408cb3379e245f6c7f6b32ae97d8efd8"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_009168.npz": {
+      "bytes": 672852,
+      "sha256": "705dd615fe8e7fef522c4d457ef62e74c805e1c54291bc8adb37b1c30e2bdca6"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_010001.npz": {
+      "bytes": 678324,
+      "sha256": "1f860bd19eeffca6055ade8baa93b6524bc8c785f641d71925841071e9ab44e4"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_010834.npz": {
+      "bytes": 667941,
+      "sha256": "dd824e1cfa43e3d00c842ebd2f85ac1e6b4c56f10a72683def8e4ee693f7e613"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_011668.npz": {
+      "bytes": 555474,
+      "sha256": "e87d954bf62725eb4b413c6cb79019957fd5ae0162a3f092f223aa01bf86c683"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_012501.npz": {
+      "bytes": 62719,
+      "sha256": "d2f45255f845a5d5733fc609bf6645a78d64134dd14943da55dfaf6f08501800"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_013334.npz": {
+      "bytes": 138894,
+      "sha256": "5f182bd82d62e6fe0cc8c4c5cbb177209a2cad858aa4da89ebe79aab4cc3dc60"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_014168.npz": {
+      "bytes": 96631,
+      "sha256": "d2dadf4778b24869f3d7940f2d6d99959fd7f913b7216effe99bff0a5db3192f"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_015001.npz": {
+      "bytes": 173084,
+      "sha256": "87fd590e14487dbc0ec600a744d1e70426e7c4c1cf5be7538a5e17ac4c35fd96"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_015835.npz": {
+      "bytes": 14875,
+      "sha256": "4859149f1aea39cf6176690cc33ef1f0f568c84f588425f2278582c41c83033f"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_016668.npz": {
+      "bytes": 21097,
+      "sha256": "bb45be37be9254af3813c7f9b05780a252b4890f37b99978459238340607146a"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_017501.npz": {
+      "bytes": 19827,
+      "sha256": "c0750bab99566b2bbb3ebdb04511d3154a55abdfe2fb41b7f78654f786a44bbf"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_018335.npz": {
+      "bytes": 19520,
+      "sha256": "e39532569b49307da2ce4b5f9ef36d99f1e541de9e0b83b337e692e0decf0ce7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_019168.npz": {
+      "bytes": 19531,
+      "sha256": "7a3fe821d558a0c9c88b36abf8a759609b03a3f29d5929fda21ac71c9d6f0320"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_020001.npz": {
+      "bytes": 21372,
+      "sha256": "a3b12b4fd82b0064367e32a557ca3d7c3be779113884ea5761039bec4c5eb213"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/state.pt": {
+      "bytes": 4544387,
+      "sha256": "16388c4e59a657a154a4730e285191acfd18fbc23d41102d0c3ba82227efb8a7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/study.json": {
+      "bytes": 4147493,
+      "sha256": "721adfbf299568bffc9bc7f72da0204a2fb5c87d283aa17d3bd32caa62540c4c"
+    }
+  },
+  "last_update": {
+    "auxiliary": 0.0,
+    "loss_d": 0.2700580358505249,
+    "loss_g": 2.2668192386627197,
+    "loss_gan": 2.2668192386627197,
+    "penalty": 0.010245047509670258
+  },
+  "missing": [
+    "Per-update applied G/E/prior/D displacement and loss histories",
+    "Earlier complete model/optimizer/controller checkpoints",
+    "Counterfactual G(E(word)) with DV12 disabled on identical selected state",
+    "Current N11/full-DV12 word capacity certificate"
+  ],
+  "observations_pure": true,
+  "original_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": true,
+    "batch_size": 256,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "auto",
+    "birth_death_cells": 128,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "std",
+    "birth_death_isolation": true,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "critic",
+    "conditioning": "scalar",
+    "continuous_policy": "dv12",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0053125,
+    "lr_anneal_start": 0.6,
+    "lr_control": "stationarity",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "atlas",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 11,
+    "observation_sigma": 0.03,
+    "output_noise_mode": "learnable",
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": true,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 1.5,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 3.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "release",
+    "reopen_guard": "settled",
+    "reopen_signal": "optimizer",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": true,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "scaled",
+    "row_policy": "independent",
+    "serve_average": 4.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "anchor",
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "original_task_evaluation": {
+    "eval_output_noise": "clean",
+    "eval_samples": 1024,
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "evaluator_revision": {
+      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+      "id": "explicit-equality-and-word-prior-betas-v3",
+      "previous_revision": {
+        "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+        "id": "joint-word-task-source-binding-v2",
+        "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+      },
+      "previous_source_sha256": {
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+      }
+    },
+    "guards": {
+      "exact_optimizer_updates": true,
+      "finite_state": true,
+      "mechanism_exercised": true,
+      "optimizer_roles": [
+        "generator",
+        "encoder",
+        "prior",
+        "discriminator"
+      ],
+      "rng_isolation": true
+    },
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "policy_observation": {
+      "diagnostic_credit": false,
+      "diagnostic_weights": [],
+      "eval_streams": "forge-rng-v1_isolated",
+      "generated_output": "word_coordinates_of_complete_joint_atom",
+      "latent_policy": "actual_selected_public_policy",
+      "output_noise": false,
+      "reconstruction": "selected_free_encoder_on_all_five_known_canonical_inputs_then_same_served_generator",
+      "row_selection": "uniform_eleven_actual_prior_rows",
+      "sampler": "ServedModel.generate",
+      "schema_version": 1,
+      "unseen_word_generalization_claim": false,
+      "weight_selector": "state_selected"
+    },
+    "sampling_contract_version": 1,
+    "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+    "scoring_weights": "state_selected",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+      "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+    },
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        1024
+      ],
+      [
+        "quality_fraction",
+        ">=",
+        0.95
+      ],
+      [
+        "modes",
+        "==",
+        5
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.1
+      ],
+      [
+        "reconstruction_exact",
+        "==",
+        1
+      ],
+      [
+        "minimum_reconstruction_token_probability",
+        ">=",
+        0.9
+      ]
+    ]
+  },
+  "original_task_execution": {
+    "device": "cuda",
+    "execution_path": "public_components",
+    "host": "five_word_joint",
+    "host_definition": {
+      "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+      "encoder_widths": [
+        168,
+        128,
+        64,
+        2
+      ],
+      "generator_widths": [
+        2,
+        64,
+        128,
+        168
+      ],
+      "joint_critic_widths": [
+        170,
+        256,
+        128,
+        1
+      ],
+      "length": 6,
+      "resources": {
+        "batch_size": 256,
+        "num_particles": 5,
+        "z_dim": 2
+      },
+      "words": [
+        "apple",
+        "grape",
+        "lemon",
+        "melon",
+        "berry"
+      ]
+    },
+    "host_source": "benchmarks/toy_audit/api_images.py",
+    "initializer": "deterministic_orthogonal",
+    "original_schedule_horizon": 20000,
+    "policy_contract": {
+      "checkpoint": "complete_public_policy_models_optimizers_streams_and_cursor",
+      "clean_function_and_gradient_equivalence": "matched_N11_clean_joint_function_only_not_DV12_on",
+      "cohort": "word_joint_policy_min11_v1",
+      "controls": "resolved_recipe_requested_enabled_eligible_applied",
+      "cpu_controls_scope": "structural_only",
+      "direct_response_scope": "latent_table_damping_only_not_direct_output_particle_response",
+      "encoder_mode": "none",
+      "encoder_optimizer_role": "encoder",
+      "encoder_owner": "auxiliary_original_free_continuous_WordEncoder",
+      "evaluation_output_noise": false,
+      "execution_device": "cuda",
+      "execution_path": "public_components",
+      "external_limit": "task.execution.steps",
+      "family": "atlas_word_joint_min11",
+      "free_reconstruction": "G(E(word))_under_selected_public_latent_sampling",
+      "generation_callback": "joint_generation(model,z_effective)=concat(model(z_effective),z_effective)",
+      "initializer": "parent_named_deterministic_orthogonal_original_classes",
+      "latent_law_change": "explicit_complete_joint_atom_for_independent_row_evidence_and_birth_death",
+      "learned_or_Atlas_qualification_reuse": false,
+      "lifecycle": "ordered_public_update",
+      "numerical_equivalence_to_parent": false,
+      "objective": "original_joint_RpGAN_real(word,E(word))_fake(G(z),z)_plus_Recipe.prior_reg_times_spread",
+      "original_five_row_task_status": "BLOCKED",
+      "original_scaffold": "G2_64_128_168_E168_128_64_2_D170_256_128_1_softmax28x6",
+      "original_split_code_law": "old_host_word_generator_receives_perturbed_code_but_joint_critic_receives_raw_code",
+      "owner": "particlegan.UpdatePolicy",
+      "precision": "preserve_original_fp32_no_autocast",
+      "prior_law": "eleven_uniform_raw_learned_2D_rows_for_five_words",
+      "prior_requirement": {
+        "actual_rows": 11,
+        "canonical_target_words": 5,
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protected_contexts": "no_fabricated_RoutedBatch_guard_or_row_to_word_pairing",
+      "reconstruction_eval_is_training_signal": false,
+      "reconstruction_training_loss": false,
+      "resource_adaptation": {
+        "actual": {
+          "batch_size": 256,
+          "num_particles": 11,
+          "z_dim": 2
+        },
+        "comparisons": "Resource-matched N11 only; no N5 or N6 numerical-equivalence claim.",
+        "controls_disabled": false,
+        "eligibility_source": "particlegan/birth_death.py:ParticleBirthDeath.__init__",
+        "historical_capacity_or_qualification_credit": false,
+        "isolation": true,
+        "minimum_complete_public_owners": 11,
+        "numerical_equivalence_to_parent": false,
+        "original": {
+          "batch_size": 256,
+          "num_particles": 5,
+          "z_dim": 2
+        },
+        "owner": "task",
+        "reason": "Original N5 fails public k>=4; N6 through N10 fail isolation leave-one-out reference-half guard. N11 has k5<6.",
+        "schema_version": 1
+      },
+      "row_policy": "independent",
+      "row_semantics": "independent",
+      "schedule": "preserve_resolved_recipe_none",
+      "schema_version": 1,
+      "sources": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "experiments/forge/adapters.py": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f",
+        "experiments/forge/api.py": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d",
+        "experiments/forge/artifacts.py": "78da4ed4b4038b8a93918aa4b5de7fa6f7e4d36731b69467e1cd8b7edcd7ee1e",
+        "experiments/forge/boundaries.py": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541",
+        "experiments/forge/contracts.py": "fcac35c47301f582bb19f2a4b12bd2b41f8630ec12b02912c3fc9f47539a81a8",
+        "experiments/forge/evaluate.py": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df",
+        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/named_policy_planning.py": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9",
+        "experiments/forge/planning.py": "8f8ff63d586a48cb9f7bed5a93c9b1c45f00eb7aada4cf6f34e77e0c2a4a6f9b",
+        "experiments/forge/policy_adapters.py": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf",
+        "experiments/forge/policy_behavior_adapters.py": "eebf6b881f80ac95b26f80a018b20cd0fc67febca2b05e8986f2ca0caee08c7d",
+        "experiments/forge/policy_cohorts.py": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f",
+        "experiments/forge/policy_declaration_sources.py": "374a176284199de724936d02e77ad8755250da273c75acfde096318e060ac717",
+        "experiments/forge/policy_snapshot_publication.py": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9",
+        "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+        "experiments/forge/routed_policy_adapters.py": "6754a975f5054e9b31c036175592d85d52d62c00fb4c5753401ecfc708256007",
+        "experiments/forge/runtime.py": "8f82ec5da54a9c670e80e5691e6337e03120019a1071516479fd65c3724ad147",
+        "experiments/forge/sampling.py": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7",
+        "experiments/forge/technique_board.py": "6eb7b31b9eab3fefad82cd773dc5ca8b2900d083e073b5aa7467c73ba1c85577",
+        "experiments/forge/views.py": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1",
+        "experiments/forge/word_joint_policy_adapters.py": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08",
+        "experiments/forge/word_joint_policy_contracts.py": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec",
+        "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+        "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+        "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+        "particlegan/policy.py": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42",
+        "particlegan/recipes.py": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "table_owner": "prior.z",
+      "training_latent_policy": "actual_DV12_same_effective_code_for_word_generator_and_joint_critic",
+      "training_output_noise": "public_learned_sigma_on168_word_coordinates_only_code2_coordinates_untouched"
+    },
+    "policy_recipe_overrides": {
+      "encoder_mode": "none",
+      "row_policy": "independent"
+    },
+    "policy_recipe_overrides_provenance": {
+      "complete_joint_atom": true,
+      "evidence_reuse": false,
+      "family": "atlas_word_joint_min11",
+      "historical_split_code_numerical_equivalence": false,
+      "original_free_encoder": true,
+      "same_code_DV12": true,
+      "words_only_output_noise": true
+    },
+    "prior": {
+      "exception_reason": "Explicit min11 independent joint-cloud variant: eleven actual raw learned rows for the unchanged five-word question; the original N5 and N6 isolation-invalid variant remain BLOCKED, with no historical capacity or qualification credit.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "produces_state": false,
+    "protocol": "screening",
+    "resource_adaptation": {
+      "actual": {
+        "batch_size": 256,
+        "num_particles": 11,
+        "z_dim": 2
+      },
+      "comparisons": "Resource-matched N11 only; no N5 or N6 numerical-equivalence claim.",
+      "controls_disabled": false,
+      "eligibility_source": "particlegan/birth_death.py:ParticleBirthDeath.__init__",
+      "historical_capacity_or_qualification_credit": false,
+      "isolation": true,
+      "minimum_complete_public_owners": 11,
+      "numerical_equivalence_to_parent": false,
+      "original": {
+        "batch_size": 256,
+        "num_particles": 5,
+        "z_dim": 2
+      },
+      "owner": "task",
+      "reason": "Original N5 fails public k>=4; N6 through N10 fail isolation leave-one-out reference-half guard. N11 has k5<6.",
+      "schema_version": 1
+    },
+    "resources": {
+      "batch_size": 256,
+      "num_particles": 11,
+      "z_dim": 2
+    },
+    "schedule_policy": "public_policy_stationarity_no_declared_horizon",
+    "steps": 20001
+  },
+  "preserved": {
+    "family_status": "INVALID",
+    "numeric_gate_status": "UNAVAILABLE",
+    "numerical_regrading": false,
+    "old_grade": {
+      "gate_status": "FAIL",
+      "reasons": [
+        "observed public policy state is nonfinite"
+      ],
+      "status": "FAIL"
+    },
+    "paid_seconds": 558.5739127129782,
+    "reserved_seconds": 0
+  },
+  "prospective_contract": {
+    "actual_dv12": true,
+    "actual_rows": 11,
+    "eval_samples": 1024,
+    "executed": false,
+    "free_encoder": true,
+    "full_updates": 20001,
+    "gate_changes": false,
+    "max_total_new_gpu1_seconds": 1800,
+    "mechanism_overrides": false,
+    "observations": 24,
+    "old_named_gpu1_paid_seconds": 675.413062,
+    "old_named_total_paid_seconds": 910.239143,
+    "passing_case_reruns": false,
+    "prior_cost_once": true,
+    "qualification_credit": false,
+    "root_owns_spec_admission_execution": true,
+    "same_effective_joint_code": true,
+    "seed": 0,
+    "selected_output_noise": false,
+    "source_requirement": "New exact rate-declaration/resolver and current health/source pins; frozen original C6-only resolver rejects new knobs.",
+    "terminal_checks": 5,
+    "words_only_learned_training_noise": true
+  },
+  "recorded_metrics": [
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.0,
+      "mass_grape": 0.5322265625,
+      "mass_lemon": 0.4423828125,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 1.4413053216200122e-11,
+      "modes": 2,
+      "quality_fraction": 0.974609375,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 4.504802046250792,
+      "sample_count": 1024,
+      "step": 834
+    },
+    {
+      "mass_apple": 0.310546875,
+      "mass_berry": 0.0,
+      "mass_grape": 0.0,
+      "mass_lemon": 0.3095703125,
+      "mass_melon": 0.32421875,
+      "mass_tv": 0.4,
+      "minimum_reconstruction_token_probability": 3.8984725091800576e-29,
+      "modes": 3,
+      "quality_fraction": 0.9443359375,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 8.655250748311037,
+      "sample_count": 1024,
+      "step": 1667
+    },
+    {
+      "mass_apple": 0.3671875,
+      "mass_berry": 0.0,
+      "mass_grape": 0.2861328125,
+      "mass_lemon": 0.3466796875,
+      "mass_melon": 0.0,
+      "mass_tv": 0.4,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 3,
+      "quality_fraction": 1.0,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 5.249481338730732,
+      "sample_count": 1024,
+      "step": 2501
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.0,
+      "mass_grape": 0.4560546875,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.517578125,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.9736328125,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 9.210340371976182,
+      "sample_count": 1024,
+      "step": 3334
+    },
+    {
+      "mass_apple": 0.3525390625,
+      "mass_berry": 0.0,
+      "mass_grape": 0.0,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.44921875,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.8017578125,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 7.046629888008345,
+      "sample_count": 1024,
+      "step": 4167
+    },
+    {
+      "mass_apple": 0.54296875,
+      "mass_berry": 0.0,
+      "mass_grape": 0.1748046875,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.2373046875,
+      "mass_tv": 0.4251953125,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 3,
+      "quality_fraction": 0.955078125,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 6.447412042041591,
+      "sample_count": 1024,
+      "step": 5001
+    },
+    {
+      "mass_apple": 0.3681640625,
+      "mass_berry": 0.0,
+      "mass_grape": 0.1708984375,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.4609375,
+      "mass_tv": 0.4291015625,
+      "minimum_reconstruction_token_probability": 1.874200230775336e-12,
+      "modes": 3,
+      "quality_fraction": 1.0,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 5.453521746721514,
+      "sample_count": 1024,
+      "step": 5834
+    },
+    {
+      "mass_apple": 0.2626953125,
+      "mass_berry": 0.0,
+      "mass_grape": 0.2421875,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.28515625,
+      "mass_tv": 0.4,
+      "minimum_reconstruction_token_probability": 3.349952606979123e-11,
+      "modes": 3,
+      "quality_fraction": 0.7900390625,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 2.1664316246043485,
+      "sample_count": 1024,
+      "step": 6667
+    },
+    {
+      "mass_apple": 0.1943359375,
+      "mass_berry": 0.0,
+      "mass_grape": 0.14453125,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.5361328125,
+      "mass_tv": 0.46113281250000004,
+      "minimum_reconstruction_token_probability": 8.084568830795224e-17,
+      "modes": 3,
+      "quality_fraction": 0.875,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 5.566894393931889,
+      "sample_count": 1024,
+      "step": 7501
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.0,
+      "mass_grape": 0.18359375,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.17578125,
+      "mass_tv": 0.640625,
+      "minimum_reconstruction_token_probability": 3.12856793423244e-12,
+      "modes": 2,
+      "quality_fraction": 0.359375,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 4.049557723132377,
+      "sample_count": 1024,
+      "step": 8334
+    },
+    {
+      "mass_apple": 0.357421875,
+      "mass_berry": 0.0,
+      "mass_grape": 0.3740234375,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.7314453125,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 13.710318688880653,
+      "sample_count": 1024,
+      "step": 9168
+    },
+    {
+      "mass_apple": 0.359375,
+      "mass_berry": 0.0830078125,
+      "mass_grape": 0.189453125,
+      "mass_lemon": 0.1376953125,
+      "mass_melon": 0.1728515625,
+      "mass_tv": 0.21699218750000002,
+      "minimum_reconstruction_token_probability": 3.845078885042544e-30,
+      "modes": 5,
+      "quality_fraction": 0.9423828125,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 7.592433584156871,
+      "sample_count": 1024,
+      "step": 10001
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.2841796875,
+      "mass_grape": 0.34375,
+      "mass_lemon": 0.2626953125,
+      "mass_melon": 0.0,
+      "mass_tv": 0.4,
+      "minimum_reconstruction_token_probability": 5.045061926913117e-19,
+      "modes": 3,
+      "quality_fraction": 0.890625,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 9.021457483121129,
+      "sample_count": 1024,
+      "step": 10834
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.2744140625,
+      "mass_grape": 0.3681640625,
+      "mass_lemon": 0.3173828125,
+      "mass_melon": 0.0,
+      "mass_tv": 0.4,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 3,
+      "quality_fraction": 0.9599609375,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 5.532938789586316,
+      "sample_count": 1024,
+      "step": 11668
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.0,
+      "mass_grape": 0.24609375,
+      "mass_lemon": 0.4677734375,
+      "mass_melon": 0.2861328125,
+      "mass_tv": 0.4,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 3,
+      "quality_fraction": 1.0,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 8.289306334778564,
+      "sample_count": 1024,
+      "step": 12501
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.376953125,
+      "mass_grape": 0.166015625,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.4462890625,
+      "mass_tv": 0.433984375,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 3,
+      "quality_fraction": 0.9892578125,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 8.289306334778564,
+      "sample_count": 1024,
+      "step": 13334
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.3779296875,
+      "mass_grape": 0.53125,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.9091796875,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 11.05240844637142,
+      "sample_count": 1024,
+      "step": 14168
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.4541015625,
+      "mass_grape": 0.359375,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.1005859375,
+      "mass_tv": 0.4994140625,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 3,
+      "quality_fraction": 0.9140625,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 13.056148285325245,
+      "sample_count": 1024,
+      "step": 15001
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.0,
+      "mass_grape": 1.0,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.7999999999999999,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 1,
+      "quality_fraction": 1.0,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 17.499646706754746,
+      "sample_count": 1024,
+      "step": 15835
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.484375,
+      "mass_grape": 0.4560546875,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.9404296875,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 11.973442483569038,
+      "sample_count": 1024,
+      "step": 16668
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.4677734375,
+      "mass_grape": 0.4404296875,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.908203125,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 11.05240844637142,
+      "sample_count": 1024,
+      "step": 17501
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.4208984375,
+      "mass_grape": 0.5087890625,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.9296875,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 13.815510557964274,
+      "sample_count": 1024,
+      "step": 18335
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.4267578125,
+      "mass_grape": 0.505859375,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.9326171875,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 11.05240844637142,
+      "sample_count": 1024,
+      "step": 19168
+    },
+    {
+      "mass_apple": 0.0,
+      "mass_berry": 0.513671875,
+      "mass_grape": 0.4111328125,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.0,
+      "mass_tv": 0.6,
+      "minimum_reconstruction_token_probability": 0.0,
+      "modes": 2,
+      "quality_fraction": 0.9248046875,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 11.05240844637142,
+      "sample_count": 1024,
+      "step": 20001
+    }
+  ],
+  "retained_array_descriptors": [
+    {
+      "actual_dv12_displacements": [
+        [
+          0.03511190414428711,
+          -0.06529581546783447
+        ],
+        [
+          0.12419217824935913,
+          0.15074384212493896
+        ],
+        [
+          -0.1407983899116516,
+          0.12132978439331055
+        ],
+        [
+          0.28270208835601807,
+          0.334885835647583
+        ],
+        [
+          0.15491780638694763,
+          -0.18989655375480652
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.546886682510376,
+        0.9610005617141724
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        true,
+        false,
+        false
+      ],
+      "prior_axis_std": [
+        0.5262972712516785,
+        1.1749610900878906
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.3895021378993988,
+          0.853222131729126
+        ],
+        [
+          -1.0298925638198853,
+          0.4540402889251709
+        ],
+        [
+          -0.4242413640022278,
+          -1.2897316217422485
+        ],
+        [
+          -1.8080790042877197,
+          -1.518575668334961
+        ],
+        [
+          -0.4551354944705963,
+          0.21346035599708557
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "lemon_",
+        "lemon_",
+        "geaon_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.3543902337551117,
+          0.7879263162612915
+        ],
+        [
+          -0.9057003855705261,
+          0.6047841310501099
+        ],
+        [
+          -0.5650397539138794,
+          -1.168401837348938
+        ],
+        [
+          -1.5253769159317017,
+          -1.183689832687378
+        ],
+        [
+          -0.3002176880836487,
+          0.023563802242279053
+        ]
+      ],
+      "step": 834,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": [
+        [
+          1.1818521272743965e-07,
+          1.875190605460375e-06,
+          1.6882818476560146e-09,
+          4.718043328466592e-06,
+          0.9999969005584717,
+          0.9861563444137573
+        ],
+        [
+          0.9999908208847046,
+          0.9999747276306152,
+          1.0,
+          0.9999133348464966,
+          0.9999828338623047,
+          0.9954943656921387
+        ],
+        [
+          0.9999998807907104,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.9999984502792358
+        ],
+        [
+          1.789606240976127e-10,
+          1.0,
+          1.4413053216200122e-11,
+          1.0,
+          1.0,
+          0.9999998807907104
+        ],
+        [
+          0.0003907482896465808,
+          0.7489303946495056,
+          0.0006557642482221127,
+          0.010755029506981373,
+          0.0022222213447093964,
+          0.990702748298645
+        ]
+      ]
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.01806485652923584,
+          -0.011753737926483154
+        ],
+        [
+          -0.056527137756347656,
+          0.08740580081939697
+        ],
+        [
+          0.16790813207626343,
+          0.03187519311904907
+        ],
+        [
+          0.050483882427215576,
+          0.054353415966033936
+        ],
+        [
+          0.002397298812866211,
+          -0.011156581342220306
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        1.3925727605819702,
+        0.46503937244415283
+      ],
+      "individually_correct_argmax": 3,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        true,
+        false,
+        true,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.6961638331413269,
+        0.5588939189910889
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.3634082078933716,
+          0.3558342456817627
+        ],
+        [
+          -0.7506887912750244,
+          -0.6407514810562134
+        ],
+        [
+          -0.6110926866531372,
+          -0.8821660876274109
+        ],
+        [
+          0.20553743839263916,
+          -0.6170015335083008
+        ],
+        [
+          -3.879020929336548,
+          0.02958294376730919
+        ]
+      ],
+      "reconstruction_argmax": [
+        "apple_",
+        "lemon_",
+        "lemon_",
+        "melon_",
+        "apple_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -1.3814730644226074,
+          0.34408050775527954
+        ],
+        [
+          -0.8072159290313721,
+          -0.5533456802368164
+        ],
+        [
+          -0.4431845545768738,
+          -0.8502908945083618
+        ],
+        [
+          0.25602132081985474,
+          -0.5626481175422668
+        ],
+        [
+          -3.8766236305236816,
+          0.018426362425088882
+        ]
+      ],
+      "step": 1667,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.03339529037475586,
+          -0.00249597430229187
+        ],
+        [
+          -0.0961408019065857,
+          -0.04120880365371704
+        ],
+        [
+          -0.0010714530944824219,
+          0.018435537815093994
+        ],
+        [
+          0.02533435821533203,
+          -0.049019038677215576
+        ],
+        [
+          0.020483732223510742,
+          0.09030044078826904
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        1.3513598442077637,
+        0.6138618588447571
+      ],
+      "individually_correct_argmax": 3,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "prior_axis_std": [
+        0.5964952707290649,
+        0.5589054822921753
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.4574825763702393,
+          0.22406163811683655
+        ],
+        [
+          -0.2905266284942627,
+          0.8243851661682129
+        ],
+        [
+          -0.38489994406700134,
+          -0.6926936507225037
+        ],
+        [
+          -0.3905012905597687,
+          -0.5936639904975891
+        ],
+        [
+          2.5733375549316406,
+          -0.707750678062439
+        ]
+      ],
+      "reconstruction_argmax": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "lemon_",
+        "melon_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -1.4908778667449951,
+          0.22156566381454468
+        ],
+        [
+          -0.3866674304008484,
+          0.7831763625144958
+        ],
+        [
+          -0.38597139716148376,
+          -0.6742581129074097
+        ],
+        [
+          -0.36516693234443665,
+          -0.6426830291748047
+        ],
+        [
+          2.5938212871551514,
+          -0.6174502372741699
+        ]
+      ],
+      "step": 2501,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.27937835454940796,
+          -0.11562085151672363
+        ],
+        [
+          0.07045245170593262,
+          -0.07226929068565369
+        ],
+        [
+          -0.05754043906927109,
+          0.11372598260641098
+        ],
+        [
+          0.04269098490476608,
+          -0.13796758651733398
+        ],
+        [
+          -0.11225223541259766,
+          -0.04098033905029297
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.7335507869720459,
+        1.8582566976547241
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.686854898929596,
+        0.7528457641601562
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.2182186841964722,
+          2.993814706802368
+        ],
+        [
+          -1.6801717281341553,
+          0.5698627829551697
+        ],
+        [
+          0.07656156271696091,
+          -0.026699542999267578
+        ],
+        [
+          0.10448085516691208,
+          -0.9212359189987183
+        ],
+        [
+          -0.16374608874320984,
+          -2.670041561126709
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "melon_",
+        "melon_",
+        "melon_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.9388403296470642,
+          2.8781938552856445
+        ],
+        [
+          -1.6097192764282227,
+          0.497593492269516
+        ],
+        [
+          0.01902112364768982,
+          0.0870264396071434
+        ],
+        [
+          0.14717184007167816,
+          -1.0592035055160522
+        ],
+        [
+          -0.2759983241558075,
+          -2.711021900177002
+        ]
+      ],
+      "step": 3334,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.07121860980987549,
+          0.018110424280166626
+        ],
+        [
+          -0.0979415774345398,
+          -0.1070144772529602
+        ],
+        [
+          -0.43647605180740356,
+          0.08994543552398682
+        ],
+        [
+          -0.00766376405954361,
+          0.008360981941223145
+        ],
+        [
+          0.011044710874557495,
+          0.0798957347869873
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.845795214176178,
+        0.9351259469985962
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.8418316841125488,
+        0.5609076023101807
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.645897388458252,
+          -0.38310420513153076
+        ],
+        [
+          -0.8428683876991272,
+          0.5970818400382996
+        ],
+        [
+          0.8530210852622986,
+          1.1535574197769165
+        ],
+        [
+          0.06585466116666794,
+          -0.5647753477096558
+        ],
+        [
+          -0.16444095969200134,
+          1.925678014755249
+        ]
+      ],
+      "reconstruction_argmax": [
+        "apple_",
+        "arape_",
+        "meaon_",
+        "melon_",
+        "mrape_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -1.5746787786483765,
+          -0.36499378085136414
+        ],
+        [
+          -0.940809965133667,
+          0.49006736278533936
+        ],
+        [
+          0.416545033454895,
+          1.2435028553009033
+        ],
+        [
+          0.05819089710712433,
+          -0.5564143657684326
+        ],
+        [
+          -0.15339624881744385,
+          2.0055737495422363
+        ]
+      ],
+      "step": 4167,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.05514359474182129,
+          0.007507115602493286
+        ],
+        [
+          -0.03451082110404968,
+          -0.05171549320220947
+        ],
+        [
+          -0.06062138080596924,
+          0.08813327550888062
+        ],
+        [
+          -0.09972445666790009,
+          -0.010276049375534058
+        ],
+        [
+          -0.019539594650268555,
+          0.0457245409488678
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.9954496026039124,
+        0.41932976245880127
+      ],
+      "individually_correct_argmax": 3,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        true,
+        true,
+        false,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.5386554598808289,
+        0.448183536529541
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.147576093673706,
+          -0.230974480509758
+        ],
+        [
+          -0.2400064766407013,
+          0.5690227746963501
+        ],
+        [
+          1.2520004510879517,
+          0.4364296793937683
+        ],
+        [
+          -0.08942030370235443,
+          -0.485361248254776
+        ],
+        [
+          -1.6441820859909058,
+          0.42031270265579224
+        ]
+      ],
+      "reconstruction_argmax": [
+        "apple_",
+        "grape_",
+        "melon_",
+        "melon_",
+        "akple_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -1.0924324989318848,
+          -0.2234673649072647
+        ],
+        [
+          -0.274517297744751,
+          0.5173072814941406
+        ],
+        [
+          1.1913790702819824,
+          0.5245629549026489
+        ],
+        [
+          -0.18914476037025452,
+          -0.49563729763031006
+        ],
+        [
+          -1.6637216806411743,
+          0.46603724360466003
+        ]
+      ],
+      "step": 5001,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.03342795372009277,
+          -0.003979980945587158
+        ],
+        [
+          -0.009268701076507568,
+          -0.03425955772399902
+        ],
+        [
+          0.03184516355395317,
+          -0.0040395259857177734
+        ],
+        [
+          -0.01582898199558258,
+          0.04133129119873047
+        ],
+        [
+          -0.03646180033683777,
+          -0.10632801055908203
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.33796975016593933,
+        0.49362874031066895
+      ],
+      "individually_correct_argmax": 3,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        true,
+        true,
+        false,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.4172293543815613,
+        0.5377341508865356
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.7970146536827087,
+          0.7018176913261414
+        ],
+        [
+          -0.450791597366333,
+          1.0390905141830444
+        ],
+        [
+          -0.011754892766475677,
+          0.42229801416397095
+        ],
+        [
+          0.15638619661331177,
+          -0.4488776922225952
+        ],
+        [
+          -0.3999217748641968,
+          0.39334577322006226
+        ]
+      ],
+      "reconstruction_argmax": [
+        "apple_",
+        "grape_",
+        "grape_",
+        "melon_",
+        "arple_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.763586699962616,
+          0.6978377103805542
+        ],
+        [
+          -0.4600602984428406,
+          1.0048309564590454
+        ],
+        [
+          0.020090270787477493,
+          0.4182584881782532
+        ],
+        [
+          0.1405572146177292,
+          -0.40754640102386475
+        ],
+        [
+          -0.43638357520103455,
+          0.2870177626609802
+        ]
+      ],
+      "step": 5834,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.004828810691833496,
+          -0.018266737461090088
+        ],
+        [
+          -0.02558121830224991,
+          -0.03573426604270935
+        ],
+        [
+          0.023477137088775635,
+          0.03148132562637329
+        ],
+        [
+          0.0011176466941833496,
+          0.027901887893676758
+        ],
+        [
+          -0.03245016932487488,
+          -0.05648729205131531
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.1823485940694809,
+        0.2722703516483307
+      ],
+      "individually_correct_argmax": 3,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        true,
+        true,
+        false,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.19766497611999512,
+        0.32098764181137085
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.17651990056037903,
+          -0.3524966835975647
+        ],
+        [
+          -0.11722024530172348,
+          0.19858931005001068
+        ],
+        [
+          0.313289612531662,
+          -0.389909029006958
+        ],
+        [
+          0.15264230966567993,
+          -0.5976664423942566
+        ],
+        [
+          0.13868816196918488,
+          -0.11406826972961426
+        ]
+      ],
+      "reconstruction_argmax": [
+        "apple_",
+        "grape_",
+        "peyon_",
+        "melon_",
+        "geape_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.18134871125221252,
+          -0.3707634210586548
+        ],
+        [
+          -0.1428014636039734,
+          0.16285504400730133
+        ],
+        [
+          0.3367667496204376,
+          -0.3584277033805847
+        ],
+        [
+          0.15375995635986328,
+          -0.5697645545005798
+        ],
+        [
+          0.10623799264431,
+          -0.17055556178092957
+        ]
+      ],
+      "step": 6667,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.08942148089408875,
+          0.08385440707206726
+        ],
+        [
+          -0.012035161256790161,
+          -0.06289860606193542
+        ],
+        [
+          -0.03618741035461426,
+          -0.04316201061010361
+        ],
+        [
+          0.03765103220939636,
+          -0.06591826677322388
+        ],
+        [
+          -0.052114903926849365,
+          -0.016589045524597168
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.11459938436746597,
+        0.30688104033470154
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.21601568162441254,
+        0.26568758487701416
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          0.31009334325790405,
+          -0.41256004571914673
+        ],
+        [
+          0.3816722631454468,
+          0.3711923360824585
+        ],
+        [
+          0.5880039930343628,
+          -0.08577846735715866
+        ],
+        [
+          0.33565711975097656,
+          -0.2813073396682739
+        ],
+        [
+          0.5531046986579895,
+          0.2821180820465088
+        ]
+      ],
+      "reconstruction_argmax": [
+        "melon_",
+        "grape_",
+        "melon_",
+        "melon_",
+        "grapy_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          0.3995148241519928,
+          -0.32870563864707947
+        ],
+        [
+          0.3696371018886566,
+          0.30829373002052307
+        ],
+        [
+          0.5518165826797485,
+          -0.12894047796726227
+        ],
+        [
+          0.3733081519603729,
+          -0.3472256064414978
+        ],
+        [
+          0.5009897947311401,
+          0.2655290365219116
+        ]
+      ],
+      "step": 7501,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.054648399353027344,
+          -0.02826029807329178
+        ],
+        [
+          -0.00931406021118164,
+          -0.00030712783336639404
+        ],
+        [
+          -0.13144826889038086,
+          0.11128175258636475
+        ],
+        [
+          -0.017394930124282837,
+          -0.06611238420009613
+        ],
+        [
+          0.010196715593338013,
+          -0.06095454841852188
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.35433658957481384,
+        0.16307397186756134
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.32620739936828613,
+        0.23190581798553467
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.4013294577598572,
+          0.10229813307523727
+        ],
+        [
+          0.17735543847084045,
+          0.19990594685077667
+        ],
+        [
+          0.7076679468154907,
+          0.2313772737979889
+        ],
+        [
+          0.13239803910255432,
+          -0.2117854207754135
+        ],
+        [
+          0.27557992935180664,
+          -0.031566306948661804
+        ]
+      ],
+      "reconstruction_argmax": [
+        "apppe_",
+        "grape_",
+        "beary_",
+        "melon_",
+        "beyon_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.4559778571128845,
+          0.0740378350019455
+        ],
+        [
+          0.1680413782596588,
+          0.19959881901741028
+        ],
+        [
+          0.5762196779251099,
+          0.34265902638435364
+        ],
+        [
+          0.11500310897827148,
+          -0.27789780497550964
+        ],
+        [
+          0.28577664494514465,
+          -0.09252085536718369
+        ]
+      ],
+      "step": 8334,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.01883155107498169,
+          -0.005240090191364288
+        ],
+        [
+          0.018491454422473907,
+          0.008261127397418022
+        ],
+        [
+          0.014863237738609314,
+          0.027132034301757812
+        ],
+        [
+          -0.04509751498699188,
+          -0.06325122714042664
+        ],
+        [
+          0.006227970123291016,
+          0.008112043142318726
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.2549455165863037,
+        0.7192967534065247
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "prior_axis_std": [
+        0.10019445419311523,
+        0.12650761008262634
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.00028622522950172424,
+          -0.12232480198144913
+        ],
+        [
+          0.11355587095022202,
+          0.00757991336286068
+        ],
+        [
+          -0.1907806247472763,
+          1.4793795347213745
+        ],
+        [
+          -0.2203647941350937,
+          -0.47946324944496155
+        ],
+        [
+          -0.6327202320098877,
+          -0.43953219056129456
+        ]
+      ],
+      "reconstruction_argmax": [
+        "apple_",
+        "grape_",
+        "grape_",
+        "apple_",
+        "apple_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.019117776304483414,
+          -0.12756489217281342
+        ],
+        [
+          0.13204732537269592,
+          0.015841040760278702
+        ],
+        [
+          -0.175917387008667,
+          1.5065115690231323
+        ],
+        [
+          -0.26546230912208557,
+          -0.5427144765853882
+        ],
+        [
+          -0.6264922618865967,
+          -0.43142014741897583
+        ]
+      ],
+      "step": 9168,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.011667490005493164,
+          -0.0122175058349967
+        ],
+        [
+          -0.001598060131072998,
+          -0.0001553371548652649
+        ],
+        [
+          0.018430709838867188,
+          -0.023463070392608643
+        ],
+        [
+          -0.012613147497177124,
+          0.00504690408706665
+        ],
+        [
+          -0.012281298637390137,
+          0.017635583877563477
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.21614576876163483,
+        0.21179895102977753
+      ],
+      "individually_correct_argmax": 1,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        false,
+        false,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.21446767449378967,
+        0.13319067656993866
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.03155914321541786,
+          0.022695718333125114
+        ],
+        [
+          -0.17323599755764008,
+          -0.08863671123981476
+        ],
+        [
+          0.30933254957199097,
+          -0.5699492692947388
+        ],
+        [
+          0.35562530159950256,
+          -0.38743674755096436
+        ],
+        [
+          0.31927618384361267,
+          -0.3147020936012268
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "apple_",
+        "melon_",
+        "melon_",
+        "melon_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.019891653209924698,
+          0.010478212498128414
+        ],
+        [
+          -0.17483405768871307,
+          -0.08879204839468002
+        ],
+        [
+          0.32776325941085815,
+          -0.5934123396873474
+        ],
+        [
+          0.34301215410232544,
+          -0.3823898434638977
+        ],
+        [
+          0.30699488520622253,
+          -0.29706650972366333
+        ]
+      ],
+      "step": 10001,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": [
+        [
+          0.019143784418702126,
+          0.026792611926794052,
+          0.013189878314733505,
+          0.017208537086844444,
+          0.9999854564666748,
+          0.9999973773956299
+        ],
+        [
+          1.5767431250424124e-05,
+          1.4047576769371517e-05,
+          5.399568294706114e-07,
+          4.4127737055532634e-06,
+          0.9999935626983643,
+          1.0
+        ],
+        [
+          6.321633499449468e-25,
+          1.0,
+          3.845078885042544e-30,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          3.0880042988824796e-13,
+          1.0,
+          1.954291589667534e-11,
+          1.0971916212549961e-16,
+          1.914686467642708e-14,
+          0.9999998807907104
+        ]
+      ]
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.0011732690036296844,
+          0.06576581299304962
+        ],
+        [
+          -0.004453763365745544,
+          0.029051929712295532
+        ],
+        [
+          0.016592323780059814,
+          0.05190694332122803
+        ],
+        [
+          -0.03955675661563873,
+          0.0252191424369812
+        ],
+        [
+          -0.007796108722686768,
+          -0.04293549060821533
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.1183408871293068,
+        0.32751086354255676
+      ],
+      "individually_correct_argmax": 1,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "prior_axis_std": [
+        0.12249106913805008,
+        0.20957958698272705
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          0.0434974730014801,
+          -0.1993730366230011
+        ],
+        [
+          0.0700836181640625,
+          -0.3433470129966736
+        ],
+        [
+          0.1754215806722641,
+          -0.7510178089141846
+        ],
+        [
+          0.18163630366325378,
+          -0.5750200152397156
+        ],
+        [
+          0.379456102848053,
+          -1.1352728605270386
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "berry_",
+        "grape_",
+        "melon_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          0.04232420399785042,
+          -0.13360722362995148
+        ],
+        [
+          0.06562985479831696,
+          -0.31429508328437805
+        ],
+        [
+          0.1920139044523239,
+          -0.6991108655929565
+        ],
+        [
+          0.14207954704761505,
+          -0.5498008728027344
+        ],
+        [
+          0.3716599941253662,
+          -1.178208351135254
+        ]
+      ],
+      "step": 10834,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.04230715334415436,
+          -0.07678315788507462
+        ],
+        [
+          0.006162270903587341,
+          0.002848297357559204
+        ],
+        [
+          0.0007507205009460449,
+          -0.05938386917114258
+        ],
+        [
+          0.020261362195014954,
+          -0.08789753913879395
+        ],
+        [
+          -0.0026570558547973633,
+          0.004321098327636719
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.12518170475959778,
+        0.6648237705230713
+      ],
+      "individually_correct_argmax": 3,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        true,
+        false,
+        true
+      ],
+      "prior_axis_std": [
+        0.21587225794792175,
+        0.46187201142311096
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          0.15633951127529144,
+          -0.00180739164352417
+        ],
+        [
+          0.16983824968338013,
+          -0.16364364326000214
+        ],
+        [
+          0.19095076620578766,
+          -1.0555126667022705
+        ],
+        [
+          0.13332074880599976,
+          -1.8506052494049072
+        ],
+        [
+          0.4720466136932373,
+          -0.7070848345756531
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "lemon_",
+        "lemon_",
+        "berry_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          0.1986466646194458,
+          -0.07859054952859879
+        ],
+        [
+          0.17600052058696747,
+          -0.16079534590244293
+        ],
+        [
+          0.1917014867067337,
+          -1.114896535873413
+        ],
+        [
+          0.1535821110010147,
+          -1.9385027885437012
+        ],
+        [
+          0.46938955783843994,
+          -0.7027637362480164
+        ]
+      ],
+      "step": 11668,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.05922165513038635,
+          -0.0013399124145507812
+        ],
+        [
+          -0.005229845643043518,
+          0.05325212702155113
+        ],
+        [
+          -0.0222557932138443,
+          -0.021536827087402344
+        ],
+        [
+          -0.00807809829711914,
+          0.010480642318725586
+        ],
+        [
+          -0.09457558393478394,
+          -0.1313009262084961
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.3539605140686035,
+        0.6012485027313232
+      ],
+      "individually_correct_argmax": 3,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        true,
+        true,
+        false
+      ],
+      "prior_axis_std": [
+        0.3414272367954254,
+        0.6179632544517517
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.16677486896514893,
+          -1.881133794784546
+        ],
+        [
+          -0.030013687908649445,
+          -0.060624122619628906
+        ],
+        [
+          0.11023104190826416,
+          -1.3765466213226318
+        ],
+        [
+          -0.6715160608291626,
+          -0.9822355508804321
+        ],
+        [
+          -0.779338002204895,
+          -1.2660305500030518
+        ]
+      ],
+      "reconstruction_argmax": [
+        "lelon_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "melon_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.22599652409553528,
+          -1.8824737071990967
+        ],
+        [
+          -0.03524353355169296,
+          -0.007371995598077774
+        ],
+        [
+          0.08797524869441986,
+          -1.3980834484100342
+        ],
+        [
+          -0.6795941591262817,
+          -0.9717549085617065
+        ],
+        [
+          -0.873913586139679,
+          -1.3973314762115479
+        ]
+      ],
+      "step": 12501,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.023147806525230408,
+          -0.03131759166717529
+        ],
+        [
+          -0.032393068075180054,
+          -0.009876519441604614
+        ],
+        [
+          -0.02582768350839615,
+          0.014406323432922363
+        ],
+        [
+          0.11386644840240479,
+          0.033728599548339844
+        ],
+        [
+          -0.049696214497089386,
+          -0.0056809186935424805
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.25245729088783264,
+        0.9800575971603394
+      ],
+      "individually_correct_argmax": 3,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        true,
+        true
+      ],
+      "prior_axis_std": [
+        0.33081263303756714,
+        0.45284977555274963
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.15222609043121338,
+          1.0093116760253906
+        ],
+        [
+          0.12447206676006317,
+          -0.4254112243652344
+        ],
+        [
+          0.0522969514131546,
+          -0.45871129631996155
+        ],
+        [
+          -0.5335808992385864,
+          -1.7606397867202759
+        ],
+        [
+          0.14047099649906158,
+          -1.505041241645813
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "grape_",
+        "melon_",
+        "berry_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.12907828390598297,
+          0.9779940843582153
+        ],
+        [
+          0.09207899868488312,
+          -0.435287743806839
+        ],
+        [
+          0.026469267904758453,
+          -0.4443049728870392
+        ],
+        [
+          -0.41971445083618164,
+          -1.726911187171936
+        ],
+        [
+          0.0907747820019722,
+          -1.5107221603393555
+        ]
+      ],
+      "step": 13334,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.013112708926200867,
+          -0.015232682228088379
+        ],
+        [
+          -0.006749480962753296,
+          0.017382442951202393
+        ],
+        [
+          0.15272453427314758,
+          -0.039748549461364746
+        ],
+        [
+          0.02388399839401245,
+          -0.016445517539978027
+        ],
+        [
+          0.019317984580993652,
+          -0.061470866203308105
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.25661322474479675,
+        0.27797073125839233
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        false,
+        true
+      ],
+      "prior_axis_std": [
+        0.30205264687538147,
+        0.2965557873249054
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.17110271751880646,
+          -0.9071176052093506
+        ],
+        [
+          -0.13544146716594696,
+          -0.5951831936836243
+        ],
+        [
+          -0.030934542417526245,
+          -1.244338035583496
+        ],
+        [
+          0.4958046078681946,
+          -1.028700590133667
+        ],
+        [
+          0.2662939131259918,
+          -1.3992578983306885
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "berry_",
+        "berry_",
+        "berry_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.18421542644500732,
+          -0.922350287437439
+        ],
+        [
+          -0.14219094812870026,
+          -0.5778007507324219
+        ],
+        [
+          0.12178999185562134,
+          -1.2840865850448608
+        ],
+        [
+          0.519688606262207,
+          -1.045146107673645
+        ],
+        [
+          0.2856118977069855,
+          -1.4607287645339966
+        ]
+      ],
+      "step": 14168,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.0893140435218811,
+          0.07985736429691315
+        ],
+        [
+          0.0767596960067749,
+          0.010228313505649567
+        ],
+        [
+          -0.1965031623840332,
+          0.09150069952011108
+        ],
+        [
+          -0.18057656288146973,
+          0.10019487142562866
+        ],
+        [
+          -0.07043188065290451,
+          0.09038776159286499
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.4992630183696747,
+        0.24182412028312683
+      ],
+      "individually_correct_argmax": 1,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "prior_axis_std": [
+        0.34069105982780457,
+        0.31136003136634827
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.30239588022232056,
+          -0.22559228539466858
+        ],
+        [
+          -0.3185478448867798,
+          0.047253191471099854
+        ],
+        [
+          -1.1829360723495483,
+          -0.3129997253417969
+        ],
+        [
+          -1.3144398927688599,
+          -0.19011414051055908
+        ],
+        [
+          -0.11128786951303482,
+          -0.6962578296661377
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "aplon_",
+        "aplle_",
+        "grape_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.21308183670043945,
+          -0.14573492109775543
+        ],
+        [
+          -0.24178814888000488,
+          0.05748150497674942
+        ],
+        [
+          -1.3794392347335815,
+          -0.2214990258216858
+        ],
+        [
+          -1.4950164556503296,
+          -0.08991926908493042
+        ],
+        [
+          -0.18171975016593933,
+          -0.6058700680732727
+        ]
+      ],
+      "step": 15001,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.0071830153465271,
+          0.05497439205646515
+        ],
+        [
+          -0.023431599140167236,
+          0.07371607422828674
+        ],
+        [
+          0.040285587310791016,
+          0.039285480976104736
+        ],
+        [
+          -0.03377917408943176,
+          0.02075374126434326
+        ],
+        [
+          0.052684903144836426,
+          -0.09408178925514221
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.46722355484962463,
+        0.3720579445362091
+      ],
+      "individually_correct_argmax": 1,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "prior_axis_std": [
+        0.22445735335350037,
+        0.23416924476623535
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.5865716934204102,
+          -0.13029396533966064
+        ],
+        [
+          -0.8040173053741455,
+          -0.4546396732330322
+        ],
+        [
+          -1.6647703647613525,
+          -0.9313024878501892
+        ],
+        [
+          -0.49750885367393494,
+          -0.8092142343521118
+        ],
+        [
+          -1.4333336353302002,
+          0.029210597276687622
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "grape_",
+        "grape_",
+        "grape_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.5793886780738831,
+          -0.0753195732831955
+        ],
+        [
+          -0.8274489045143127,
+          -0.3809235990047455
+        ],
+        [
+          -1.6244847774505615,
+          -0.8920170068740845
+        ],
+        [
+          -0.5312880277633667,
+          -0.7884604930877686
+        ],
+        [
+          -1.3806487321853638,
+          -0.06487119197845459
+        ]
+      ],
+      "step": 15835,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.15813171863555908,
+          -0.046775322407484055
+        ],
+        [
+          -0.09586936235427856,
+          -0.1238456666469574
+        ],
+        [
+          0.19176152348518372,
+          -0.03574705123901367
+        ],
+        [
+          0.09658443927764893,
+          0.07741522789001465
+        ],
+        [
+          -0.050910770893096924,
+          0.007115870714187622
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.7196675539016724,
+        1.811287760734558
+      ],
+      "individually_correct_argmax": 1,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "prior_axis_std": [
+        0.46775758266448975,
+        0.6306241154670715
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.7720869779586792,
+          0.09174299240112305
+        ],
+        [
+          -0.8269044756889343,
+          -0.017619013786315918
+        ],
+        [
+          0.31420043110847473,
+          -2.921001434326172
+        ],
+        [
+          -1.4756934642791748,
+          2.7817463874816895
+        ],
+        [
+          -0.7652592658996582,
+          -0.4128112196922302
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "geape_",
+        "veroy_",
+        "grape_",
+        "berry_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -1.6139552593231201,
+          0.04496766999363899
+        ],
+        [
+          -0.9227738380432129,
+          -0.14146468043327332
+        ],
+        [
+          0.5059619545936584,
+          -2.9567484855651855
+        ],
+        [
+          -1.3791090250015259,
+          2.859161615371704
+        ],
+        [
+          -0.8161700367927551,
+          -0.4056953489780426
+        ]
+      ],
+      "step": 16668,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.03796029090881348,
+          -0.043302685022354126
+        ],
+        [
+          0.012663006782531738,
+          -0.015876397490501404
+        ],
+        [
+          0.03286540508270264,
+          -0.10158562660217285
+        ],
+        [
+          -0.002474134787917137,
+          -0.09685671329498291
+        ],
+        [
+          -0.023784995079040527,
+          -0.051795899868011475
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.48069414496421814,
+        0.5763913989067078
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        false,
+        true
+      ],
+      "prior_axis_std": [
+        0.4440780282020569,
+        0.6339142918586731
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.171372413635254,
+          0.5001945495605469
+        ],
+        [
+          -1.1053657531738281,
+          0.1915002465248108
+        ],
+        [
+          -1.2666265964508057,
+          -0.9497276544570923
+        ],
+        [
+          0.018252544105052948,
+          -0.7830203175544739
+        ],
+        [
+          -0.5999523401260376,
+          -0.6635510921478271
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "berry_",
+        "berry_",
+        "berry_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -1.1334121227264404,
+          0.45689186453819275
+        ],
+        [
+          -1.0927027463912964,
+          0.1756238490343094
+        ],
+        [
+          -1.233761191368103,
+          -1.0513132810592651
+        ],
+        [
+          0.01577840931713581,
+          -0.8798770308494568
+        ],
+        [
+          -0.6237373352050781,
+          -0.7153469920158386
+        ]
+      ],
+      "step": 17501,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          0.009426593780517578,
+          0.1584344357252121
+        ],
+        [
+          0.006836533546447754,
+          -0.04814828187227249
+        ],
+        [
+          0.11605274677276611,
+          0.003865279257297516
+        ],
+        [
+          0.0471707284450531,
+          -0.09784001111984253
+        ],
+        [
+          -0.17094221711158752,
+          0.11910897493362427
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.6186213493347168,
+        0.1677929311990738
+      ],
+      "individually_correct_argmax": 1,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "prior_axis_std": [
+        0.45228302478790283,
+        0.5988089442253113
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.0148628950119019,
+          -0.20786944031715393
+        ],
+        [
+          -1.2293496131896973,
+          0.16714221239089966
+        ],
+        [
+          -0.793493390083313,
+          0.1036001443862915
+        ],
+        [
+          0.28491854667663574,
+          0.24012166261672974
+        ],
+        [
+          0.14536753296852112,
+          -0.09812676906585693
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "grape_",
+        "berry_",
+        "gerre_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -1.0054363012313843,
+          -0.049435004591941833
+        ],
+        [
+          -1.2225130796432495,
+          0.11899393051862717
+        ],
+        [
+          -0.6774406433105469,
+          0.10746542364358902
+        ],
+        [
+          0.33208927512168884,
+          0.1422816514968872
+        ],
+        [
+          -0.025574684143066406,
+          0.020982205867767334
+        ]
+      ],
+      "step": 18335,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.09688937664031982,
+          0.132401704788208
+        ],
+        [
+          0.007710576057434082,
+          -0.03430347144603729
+        ],
+        [
+          -0.05737656354904175,
+          0.03651967644691467
+        ],
+        [
+          0.23063254356384277,
+          0.15078282356262207
+        ],
+        [
+          0.01675570011138916,
+          0.05151435732841492
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.2529156804084778,
+        0.7622628808021545
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        false,
+        true
+      ],
+      "prior_axis_std": [
+        0.42943644523620605,
+        0.5971577167510986
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -0.8668080568313599,
+          -0.24099323153495789
+        ],
+        [
+          -1.2283031940460205,
+          0.2193935215473175
+        ],
+        [
+          -0.8031944036483765,
+          -0.47870492935180664
+        ],
+        [
+          -0.5336791276931763,
+          -2.044816017150879
+        ],
+        [
+          -0.5529512166976929,
+          -0.5363367795944214
+        ]
+      ],
+      "reconstruction_argmax": [
+        "grape_",
+        "grape_",
+        "geare_",
+        "berry_",
+        "berry_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -0.9636974334716797,
+          -0.10859152674674988
+        ],
+        [
+          -1.2205926179885864,
+          0.1850900501012802
+        ],
+        [
+          -0.8605709671974182,
+          -0.44218525290489197
+        ],
+        [
+          -0.3030465841293335,
+          -1.8940331935882568
+        ],
+        [
+          -0.5361955165863037,
+          -0.48482242226600647
+        ]
+      ],
+      "step": 19168,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": null
+    },
+    {
+      "actual_dv12_displacements": [
+        [
+          -0.0204164981842041,
+          -0.012301743030548096
+        ],
+        [
+          0.012409090995788574,
+          0.17903192341327667
+        ],
+        [
+          -0.003275454044342041,
+          -0.05514794588088989
+        ],
+        [
+          0.035356491804122925,
+          0.07380557060241699
+        ],
+        [
+          -0.04915189743041992,
+          -0.025503456592559814
+        ]
+      ],
+      "argmax_only_display_diagnostic": true,
+      "encoder_axis_std": [
+        0.6371774673461914,
+        0.41921529173851013
+      ],
+      "individually_correct_argmax": 2,
+      "numerical_regrading": false,
+      "paired_argmax_correct": [
+        false,
+        true,
+        false,
+        false,
+        true
+      ],
+      "prior_axis_std": [
+        0.40452897548675537,
+        0.6023789644241333
+      ],
+      "prior_unique_rows": 11,
+      "raw_encoder_codes": [
+        [
+          -1.089945673942566,
+          -0.5869327783584595
+        ],
+        [
+          -1.5359466075897217,
+          0.03212803602218628
+        ],
+        [
+          -0.23513799905776978,
+          -0.5643832683563232
+        ],
+        [
+          0.284627228975296,
+          -1.2866342067718506
+        ],
+        [
+          -0.5573339462280273,
+          -0.5132500529289246
+        ]
+      ],
+      "reconstruction_argmax": [
+        "berre_",
+        "grape_",
+        "berry_",
+        "berry_",
+        "berry_"
+      ],
+      "reconstruction_effective_codes": [
+        [
+          -1.11036217212677,
+          -0.5992345213890076
+        ],
+        [
+          -1.523537516593933,
+          0.21115995943546295
+        ],
+        [
+          -0.23841345310211182,
+          -0.6195312142372131
+        ],
+        [
+          0.31998372077941895,
+          -1.2128286361694336
+        ],
+        [
+          -0.6064858436584473,
+          -0.5387535095214844
+        ]
+      ],
+      "step": 20001,
+      "target_words": [
+        "apple_",
+        "grape_",
+        "lemon_",
+        "melon_",
+        "berry_"
+      ],
+      "true_token_probabilities": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "schema": "pg_word_retained_goals_and_rate_proposals_v1",
+  "scope": {
+    "cuda_initialized": false,
+    "forwards": 0,
+    "models_constructed": 0,
+    "official_scorer_calls": 0,
+    "optimizer_updates": 0,
+    "public_state_restores": 0,
+    "sampler_calls": 0
+  },
+  "source": {
+    "commit": "fb7acc775b3a1a6184d36b55e035b9da04531492",
+    "consumed_files": {
+      "benchmarks/toy_audit/api_images.py": {
+        "bytes": 86556,
+        "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+      },
+      "benchmarks/toy_audit/definition_quality.py": {
+        "bytes": 19193,
+        "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+      },
+      "configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json": {
+        "bytes": 15010,
+        "sha256": "cbb8fad29b406e9a997101be7ba5ca1d1669dc5be1d7f6f982409d2c092f2ebb"
+      },
+      "experiments/forge/policy_adapters.py": {
+        "bytes": 15130,
+        "sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+      },
+      "experiments/forge/views.py": {
+        "bytes": 74085,
+        "sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+      },
+      "experiments/forge/word_joint_policy_adapters.py": {
+        "bytes": 24294,
+        "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+      },
+      "experiments/forge/word_joint_policy_contracts.py": {
+        "bytes": 11445,
+        "sha256": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec"
+      },
+      "particlegan/birth_death.py": {
+        "bytes": 45396,
+        "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+      },
+      "particlegan/continuous.py": {
+        "bytes": 60875,
+        "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+      },
+      "particlegan/gan_loss.py": {
+        "bytes": 1016,
+        "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+      },
+      "particlegan/particle_prior.py": {
+        "bytes": 17899,
+        "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+      },
+      "particlegan/policy.py": {
+        "bytes": 85594,
+        "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+      },
+      "particlegan/recipes.py": {
+        "bytes": 54485,
+        "sha256": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1"
+      }
+    },
+    "digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed"
+  },
+  "status": "READ_ONLY_METADATA_PROPOSAL",
+  "task_id": "five_word_joint_acquisition_word_joint_policy_min11_v1",
+  "terminal_birth_counters": {
+    "dim_skips": 5363,
+    "discoveries": 136858,
+    "evals": 20001,
+    "iso_acted": 0,
+    "iso_dup_skips": 20001,
+    "iso_evals": 14638,
+    "iso_flagged": 0,
+    "iso_moves": 0,
+    "iso_skipped": 0,
+    "matched": 1397,
+    "moves": 1397,
+    "normalised": 0,
+    "realised_births": 2018,
+    "realised_deaths": 132682,
+    "stale_resets": 2777,
+    "stays": 2158,
+    "waited_births": 621,
+    "waited_deaths": 131285
+  },
+  "terminal_controller": {
+    "alignment": 0.06417239446725531,
+    "closed": false,
+    "current_post_generator_damping": 0.12115149982419968,
+    "last_cosine": 0.8930014967918396,
+    "mobility": 0.9999999999999989,
+    "payoff_error": 2.6933488648504684,
+    "recorded_d_lr_fraction": 0.1214783079703727,
+    "temporal_caveat": "Applied critic LR used pre-generator payoff state; saved payoff is post-generator."
+  },
+  "terminal_optimizer_groups": [
+    {
+      "amsgrad": true,
+      "applied_parameter_delta_history": "NOT_RETAINED",
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "group": 0,
+      "initial_lr": 0.0053125,
+      "optimizer": 0,
+      "parameter_steps": [
+        20001,
+        20001,
+        20001,
+        20001,
+        20001,
+        20001
+      ],
+      "role": "generator",
+      "saved_first_moment_l2": 0.0015454538004750994,
+      "terminal_applied_lr": 0.0053125
+    },
+    {
+      "amsgrad": true,
+      "applied_parameter_delta_history": "NOT_RETAINED",
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "group": 1,
+      "initial_lr": 0.0053125,
+      "optimizer": 0,
+      "parameter_steps": [
+        20001,
+        20001,
+        20001,
+        20001,
+        20001,
+        20001
+      ],
+      "role": "encoder",
+      "saved_first_moment_l2": 0.052609705300929906,
+      "terminal_applied_lr": 0.0053125
+    },
+    {
+      "amsgrad": true,
+      "applied_parameter_delta_history": "NOT_RETAINED",
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "group": 2,
+      "initial_lr": 0.00796875,
+      "optimizer": 0,
+      "parameter_steps": [
+        20001
+      ],
+      "role": "table",
+      "saved_first_moment_l2": 0.013365719694261462,
+      "terminal_applied_lr": 0.00796875
+    },
+    {
+      "amsgrad": true,
+      "applied_parameter_delta_history": "NOT_RETAINED",
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "group": 3,
+      "initial_lr": 0.0053125,
+      "optimizer": 0,
+      "parameter_steps": [
+        20001
+      ],
+      "role": "noise",
+      "saved_first_moment_l2": 0.0,
+      "terminal_applied_lr": 0.0053125
+    },
+    {
+      "amsgrad": true,
+      "applied_parameter_delta_history": "NOT_RETAINED",
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "group": 0,
+      "initial_lr": 0.0053125,
+      "optimizer": 1,
+      "parameter_steps": [
+        20001,
+        20001,
+        20001,
+        20001,
+        20001,
+        20001
+      ],
+      "role": "critic",
+      "saved_first_moment_l2": 0.15768756541130077,
+      "terminal_applied_lr": 0.0006453535110926051
+    }
+  ],
+  "terminal_row_evidence": {
+    "flagged_rows_sum": 16096,
+    "hold_steps": 8431,
+    "resets": 1397,
+    "scale_sum": 323263.27321887657,
+    "updates": 20001
+  },
+  "terminal_stationarity": [
+    {
+      "b": 1.0,
+      "counts": {
+        "drift": 71,
+        "dropped_pairs": 380,
+        "frozen": 18,
+        "inconclusive": 40,
+        "mixed": 0,
+        "rebases": 0,
+        "reopens": 6,
+        "restarts": 0,
+        "reversal": 1,
+        "stationary": 1
+      },
+      "group": 0,
+      "last_decision": "stationary",
+      "last_decision_step": 18071,
+      "last_decisive": 0,
+      "optimizer": 0,
+      "role": "generator",
+      "s": 1.0,
+      "tau": 0.0
+    },
+    {
+      "b": 1.0,
+      "counts": {
+        "drift": 675,
+        "dropped_pairs": 0,
+        "frozen": 0,
+        "inconclusive": 39,
+        "mixed": 2,
+        "rebases": 0,
+        "reopens": 6,
+        "restarts": 0,
+        "reversal": 1,
+        "stationary": 1
+      },
+      "group": 1,
+      "last_decision": "drift",
+      "last_decision_step": 19991,
+      "last_decisive": 0,
+      "optimizer": 0,
+      "role": "encoder",
+      "s": 1.0,
+      "tau": 0.0
+    },
+    {
+      "b": 1.0,
+      "counts": {
+        "drift": 16,
+        "drift_blocked": 0,
+        "dropped_pairs": 60,
+        "early": 0,
+        "frozen": 1,
+        "held": 0,
+        "inconclusive": 13,
+        "mixed": 0,
+        "rebases": 757,
+        "reopens": 6,
+        "restarts": 0,
+        "reversal": 0,
+        "stationary": 0
+      },
+      "group": 2,
+      "last_decision": "drift",
+      "last_decision_step": 19487,
+      "last_decisive": 0,
+      "optimizer": 0,
+      "role": "table",
+      "s": 1.0,
+      "tau": 0.0
+    },
+    {
+      "b": 1.0,
+      "counts": {
+        "drift": 24,
+        "dropped_pairs": 14520,
+        "frozen": 806,
+        "inconclusive": 0,
+        "mixed": 0,
+        "rebases": 0,
+        "reopens": 6,
+        "restarts": 0,
+        "reversal": 0,
+        "stationary": 0
+      },
+      "group": 3,
+      "last_decision": "frozen",
+      "last_decision_step": 19991,
+      "last_decisive": 0,
+      "optimizer": 0,
+      "role": "noise",
+      "s": 1.0,
+      "tau": 0.0
+    },
+    {
+      "b": 1.0,
+      "counts": {
+        "drift": 10,
+        "dropped_pairs": 0,
+        "frozen": 0,
+        "inconclusive": 23,
+        "mixed": 0,
+        "rebases": 0,
+        "reopens": 6,
+        "restarts": 0,
+        "reversal": 1,
+        "stationary": 9
+      },
+      "group": 0,
+      "last_decision": "inconclusive",
+      "last_decision_step": 19678,
+      "last_decisive": 0,
+      "optimizer": 1,
+      "role": "critic",
+      "s": 1.0,
+      "tau": 0.36529664286586316
+    }
+  ],
+  "terminal_surprise": {
+    "anchor_event": [
+      false
+    ],
+    "anchor_events": 6,
+    "armed": false,
+    "fires": 6,
+    "last_ratio": 0.4580503665602798,
+    "log": [
+      [
+        2157,
+        2.6
+      ],
+      [
+        11138,
+        2.159
+      ],
+      [
+        11317,
+        3.202
+      ],
+      [
+        12121,
+        6.068
+      ],
+      [
+        15335,
+        4.92
+      ],
+      [
+        19998,
+        2.362
+      ]
+    ],
+    "streak": 0
+  }
+}

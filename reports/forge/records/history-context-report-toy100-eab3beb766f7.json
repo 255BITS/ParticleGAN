@@ -1,0 +1,666 @@
+{
+  "candidate_id": "context:report/toy100",
+  "candidate_revision": "667f7130dfd21da2ebbd039333e6d78927798790bdbb9074f69d7636bd2b2bf2",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "100-mode convergence: failures and shared-recipe search",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100",
+      "narrative_sources": [
+        {
+          "git_blob": "333078e3822526930b5169044b830a602436d2ce",
+          "path": "reports/toy100/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "12cb6e9a8acb00dfef953932f278173497034f6686ab2fc2e72ccc0bf7496a9b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/README.md"
+        },
+        {
+          "git_blob": "867213d18c14fad467ad2ae36e34a73d3136bde9",
+          "path": "reports/toy100/accuracy-core-transfer.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5713f8ca317721bc112d06b03e0ae3d7a996bef0dd6cf1d3bc4a67dc40fd80a8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-core-transfer.md"
+        },
+        {
+          "git_blob": "5126b597d4898f7c1e114955b55287e971c534e7",
+          "path": "reports/toy100/accuracy-diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "961469d43528885e7367a9fd3bd5afaab8af31eaab472be70a1e7fa2ec3708cf",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-diagnostics.md"
+        },
+        {
+          "git_blob": "e9124305d34a8f6b496b318a9ed2d6f51c74997c",
+          "path": "reports/toy100/accuracy-fanin.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4df2f5531805c3690620b3257f6ecc2223415c521d1157b64573121913a38088",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-fanin.md"
+        },
+        {
+          "git_blob": "0b653bfe5325f6fbe6799e907894e39286efe0d3",
+          "path": "reports/toy100/accuracy-full-prior.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "022eabcd20f329ede0b56479ef84ab5a5184767fb4833b10b8bd160e9bf16286",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-full-prior.md"
+        },
+        {
+          "git_blob": "509ac3cdef4196becd64f4043bf1afc34b4be313",
+          "path": "reports/toy100/accuracy-generator-freeze.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "70f206e87a40594489b809a1e6081a6b17f24470d750f6afad29723ad85162f0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-generator-freeze.md"
+        },
+        {
+          "git_blob": "4d4cb1f4879382f29d57f1593b12110b3efcc870",
+          "path": "reports/toy100/accuracy-learnable-broad.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b5fe78b2c17265db0673a552b3395f7cf4f83316f4ca4a89d4f9fb4829825cb9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-learnable-broad.md"
+        },
+        {
+          "git_blob": "60d439e3988e28d6e968bcd4e4b903019b10a515",
+          "path": "reports/toy100/accuracy-learnable.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ae01bb3dbe01cba64bbacaa9f5dfa7a0541687bae69206ef870739500de0af4f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-learnable.md"
+        },
+        {
+          "git_blob": "a28458bc4fded02c5427acc2ea13502132527e11",
+          "path": "reports/toy100/accuracy-momentum.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a3ea4495cea25161a00c80701a853a105f3b2766aa080f69405547135e1e936b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-momentum.md"
+        },
+        {
+          "git_blob": "544ab6df1a5bed30e4894ff35ab3e207cfab2506",
+          "path": "reports/toy100/accuracy-network-horizon.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8d1a330491270b63bcf857317dea47b0417e9d5dca771642354b97b12096d36d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon.md"
+        },
+        {
+          "git_blob": "243bb6f0b9de16b8eebbe77582dc6de2f8ba2441",
+          "path": "reports/toy100/accuracy-prior-horizon-f5.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "fbfb7ce0df8cbdd564bcca0215870475a61e57df7a0e774f6120911fc7710265",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-prior-horizon-f5.md"
+        },
+        {
+          "git_blob": "28b70b31358aca56018ba8e6e63cd002f1db2a4e",
+          "path": "reports/toy100/accuracy-prior-horizon.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2ca3867c8ab01594a3d2cc6bdc479dc110cb269508fc3363c3674cb276afdf41",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-prior-horizon.md"
+        },
+        {
+          "git_blob": "9db9c3df3bcc5f7ce53cd71af55ebbf6c06f774a",
+          "path": "reports/toy100/accuracy-search-ledger.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "baa1877adbc14e80ad098536802bc19fe984113fb190c3c80e7941e61c7a8403",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-search-ledger.md"
+        },
+        {
+          "git_blob": "115525b021a13e865155cffb5e8af75c1230e400",
+          "path": "reports/toy100/accuracy-search.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b6d1f0f4a83194a12caa20241526db3d75c712c047f13affdd49d9cfa11ad9ee",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-search.md"
+        },
+        {
+          "git_blob": "d3fede9a86820b022cd6d4bd5c5427d98c56748e",
+          "path": "reports/toy100/accuracy-stability.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9ad90cf3a05df56dcbadf6b6e81456b85567818bd9ceafb24294dc047cf520e0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-stability.md"
+        },
+        {
+          "git_blob": "2d4de183ea8ea907fa46eb17d6abb885f4274dc0",
+          "path": "reports/toy100/accuracy-timescale.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "25ba0aafd924494146fccccf2001322dc92d1ea9ee9708c0ec33f93adf2dade9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-timescale.md"
+        },
+        {
+          "git_blob": "5fa4b7d3cc50fb525873c53e4863c600d04221ad",
+          "path": "reports/toy100/accuracy-warmup-search.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "16265d09ad3c609c4fb57d71fafe027afbe627a02105ea7253d3ee842125f52d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-warmup-search.md"
+        },
+        {
+          "git_blob": "f1721b8d347c04b4e0616189b1938ebbbdaa94b9",
+          "path": "reports/toy100/affine-noiseless-dhorizon-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ff4be97f9c5525b1b5559dab5c9c065e50b03bb1a944d29767ad3103d419e3fb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/affine-noiseless-dhorizon-v1.md"
+        },
+        {
+          "git_blob": "7cedc19b13dd2f9b0cc5bafa4981a8e678fb2bba",
+          "path": "reports/toy100/affine-noiseless-f5-transfer.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "beddec7e2b3d1480c80199b22bffc22abab728be1059c08a304915f84c5af698",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/affine-noiseless-f5-transfer.md"
+        },
+        {
+          "git_blob": "a6fa8555079c184e38a2b09ea902e60be0f3a033",
+          "path": "reports/toy100/affine-noiseless-fourier-shape.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "33997d177ade682f2c53501dc20ccdfa0bdc2507528425a8aa7f103850144e8a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/affine-noiseless-fourier-shape.md"
+        },
+        {
+          "git_blob": "be0f6b16bf82eb9c4d7728881d259d5dec404661",
+          "path": "reports/toy100/affine-noiseless-horizon-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6c9e6a9de6cd279149b57d2d1a89f0086be09a25f2ac089e39a28615d241214a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/affine-noiseless-horizon-v1.md"
+        },
+        {
+          "git_blob": "8f560eb541a35dc198fcfb29b71ba2c6ff423ab8",
+          "path": "reports/toy100/affine-noiseless-native.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "aff2274ac885b88efd1fcbade9963f7c5ee41e845d592e9b084bbd3c67d0253d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/affine-noiseless-native.md"
+        },
+        {
+          "git_blob": "10411678bcebb12bc0955d2a52a15cfaa7ba5fd3",
+          "path": "reports/toy100/affine-public-low-noise-transfer.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "83b152177c041ba58e2b37cc404789b31aded085d52ab06514233456e6b7da79",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/affine-public-low-noise-transfer.md"
+        },
+        {
+          "git_blob": "6a9b609508786e4d63d554f5d5757b5ccb43e244",
+          "path": "reports/toy100/avx2-profile-five.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d3767b35101f2a2d42dba229a01360193156943a6ba7ac835a7e1c4cff5a91f3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/avx2-profile-five.md"
+        },
+        {
+          "git_blob": "20f7baa887aec4d07ccf469fc35e96f46d3407a2",
+          "path": "reports/toy100/bandwidth-constraints.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cf4866e87feabb0c3c3b42f9c15b6d6d8ce3cab9bdf0b7ccf7288f986d0ea201",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/bandwidth-constraints.md"
+        },
+        {
+          "git_blob": "d0d0ee5b3bda9d13fd428c5190f0b7ebd763de53",
+          "path": "reports/toy100/ci-common22.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "76128757006c885333f0dfc548ede76a52b4a879b56d59c799f5e33844d56075",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/ci-common22.md"
+        },
+        {
+          "git_blob": "9a816c3585b0afe003c9a7c2eea5eafdded0e67b",
+          "path": "reports/toy100/compatibility.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6164f4da12329638120f39e9bd6d4d15330d0690d26ac1dd9f6a5a1c18535fdd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/compatibility.md"
+        },
+        {
+          "git_blob": "991eb8ccdd02e6f96eddcf3e060db3bb96052282",
+          "path": "reports/toy100/constant-game-screen.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7b04f23072f32e6e505b21b2b6ebd8954b6da9d97134c2ba28d7d3c7afc612ab",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/constant-game-screen.md"
+        },
+        {
+          "git_blob": "ce1ad1271cef56a2e6e7972088f9819fd4d7cc67",
+          "path": "reports/toy100/constant-lr-wave1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d9be300827cc378af0d9e03cc52b608b3bc5fbbfe05d55231f73c3852ca3e469",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/constant-lr-wave1.md"
+        },
+        {
+          "git_blob": "d1766a1d2c4ccbea1a79d07826655e1cccdfb0c2",
+          "path": "reports/toy100/constraint-removal.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5e79b6bc75a00daea236a204e3927cbc715f32d8cefa8c4a39169f69241c5da9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/constraint-removal.md"
+        },
+        {
+          "git_blob": "2843175481dc5ff869d7d46f5003ad6fe04c4928",
+          "path": "reports/toy100/constraints-geometry.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cc732976518f143a9eed50fd491e7435383e5ba603c41e8e6bbb2daebdf04dfc",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/constraints-geometry.md"
+        },
+        {
+          "git_blob": "da66f12dd679a20091475a106606c729b4092703",
+          "path": "reports/toy100/continuous-practical-leaderboard-cpu-history.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a3d6be8cf6d37582d8f15d582ff01fe729c9a1ad72a016b1907ca3a8d22b6f12",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/continuous-practical-leaderboard-cpu-history.md"
+        },
+        {
+          "git_blob": "21a3b1d411e0b1444a5bfe4a471f3d8a5f92d579",
+          "path": "reports/toy100/continuous-practical-leaderboard.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0268054b53170b38505101688bf0321b2129d144d4e9dd94531de868962ee49d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/continuous-practical-leaderboard.md"
+        },
+        {
+          "git_blob": "0b258ece5b52c01fddc3213384891cee96b883f8",
+          "path": "reports/toy100/dlr-near-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bb701020085dd5a39515a4d9cd9f084202bb4a70a8f752b9877eda7e86bd45eb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/dlr-near-v1.md"
+        },
+        {
+          "git_blob": "f434c314065b42463b3ef6a930bbc574f779b848",
+          "path": "reports/toy100/extra-adam-screen.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0ca36f6714bcbe247a1764211d72b17172afc0cf8c165914099f1541bd3a4de5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/extra-adam-screen.md"
+        },
+        {
+          "git_blob": "34e458f82dcddafbfc0b692d6cd0489650015dcc",
+          "path": "reports/toy100/fail-fast-stage-order.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a5b289d401560f3772c160c7fac68b2463d6249c317380b4123a782b35529fd0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/fail-fast-stage-order.md"
+        },
+        {
+          "git_blob": "7d658a8463f70e44a9ec89096e28a292dfad6498",
+          "path": "reports/toy100/formulation-search-before-dimension-rms.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7d8c69df1310092b67a0216b97ea759b5c656febef1e069f5b0981f8baa7a49a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-search-before-dimension-rms.md"
+        },
+        {
+          "git_blob": "05bb3ed533394f06d4e3b9dee2c2807cdcd8a419",
+          "path": "reports/toy100/formulation-search-before-direct-particle.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "454f968402cec1ced9457e650ae4650ba9c8b56d3da1ef7a835a16fb4ea3ef24",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-search-before-direct-particle.md"
+        },
+        {
+          "git_blob": "ad571001b72815d1a9d7e5fba5ca46ee9c3b6593",
+          "path": "reports/toy100/formulation-search-before-k3p.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c6778fd456149248e8177c86005c8b786cdb83dfcbb329755e266c84731b2d6b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-search-before-k3p.md"
+        },
+        {
+          "git_blob": "7281176c58b069174e6e9e7bdae0e07e937178a5",
+          "path": "reports/toy100/formulation-search.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6e1297ecc36b20c2d8a0996d8a0e8a2d6615f9487db3ae93383fb53b4a1f2536",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/formulation-search.md"
+        },
+        {
+          "git_blob": "78bc6b0f2c5223090e66bbe70b78eec9d4b7c37c",
+          "path": "reports/toy100/gpu-leaderboard.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5cbc704aaf442b5e419bfb4a7077061285f365f837fb4ee2d56875538334d6ad",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gpu-leaderboard.md"
+        },
+        {
+          "git_blob": "2db2037fc4508e476e51eba98ed162f7a29c81a7",
+          "path": "reports/toy100/gradient-normalization-scratch.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d125ab9300552fed32ab6e3d66658f911a7f599142270ad04a462e0721a22516",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gradient-normalization-scratch.md"
+        },
+        {
+          "git_blob": "4d3e8a2475d8aba4baa0dfcb9b5bce352edf35a4",
+          "path": "reports/toy100/grid-center-optimizer-diagnosis.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "18836dd65c4783635acf3f9b6cda9145bee32f403fb8cc16d666fa77067b13bf",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/grid-center-optimizer-diagnosis.md"
+        },
+        {
+          "git_blob": "f149d364d8749d182bdc94eed197da26e08bfd4a",
+          "path": "reports/toy100/instance-noise.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5d30ce3c97fff364733616cd117ba33b6c03f68a69d384220bbed10815caad8b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/instance-noise.md"
+        },
+        {
+          "git_blob": "44068d9fe71c780cf518f45434b054c0564f3fe3",
+          "path": "reports/toy100/isolated-rng-input-bracket.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "96adc65dc2ac1fe8407ff457eab951375aa0812aad25ce709f11a0be995dadd1",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/isolated-rng-input-bracket.md"
+        },
+        {
+          "git_blob": "4375691025d55d29ec1dd5f578c0b4e4a97f32d1",
+          "path": "reports/toy100/isolated-rng-native-input-probes.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4fc32022b1ce5bb02f4668758bd2cd1ed65eb4e7d1a9116bfe624a61de81233f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/isolated-rng-native-input-probes.md"
+        },
+        {
+          "git_blob": "dda4968974ab79c7533610a9e42ce3c88acb9cc2",
+          "path": "reports/toy100/isolated-rng-screen4.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "50f966d3b447dc45eee79592f02dcec116b8baff392ebaf8d8dc2026c750f564",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/isolated-rng-screen4.md"
+        },
+        {
+          "git_blob": "48196fdd5cb151500ebabf295c5c3d8c63dc2891",
+          "path": "reports/toy100/isolated-rng-shared-base19.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a523ad53363bfe38c82f0be3298700b98783e6b0b3f957e0edb8da78061930d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/isolated-rng-shared-base19.md"
+        },
+        {
+          "git_blob": "631e265fd81ec890d20f6709e4616bbe995ed924",
+          "path": "reports/toy100/isolated-rng-transfer.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3f82f957a443232b524b324674f75d3e7c5211564c97354fcd9a40475b905b96",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/isolated-rng-transfer.md"
+        },
+        {
+          "git_blob": "efbaf01546d1fe16ff25b7c7deeb93cffab63cbc",
+          "path": "reports/toy100/isolated-rng-validation.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c10b7737bf086cd19a8e4084a7599f81b06f772c5439a0e74939096c2edac177",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/isolated-rng-validation.md"
+        },
+        {
+          "git_blob": "b167e43e94801d00214bb814e0e4a55a526cb008",
+          "path": "reports/toy100/kappa-curriculum-search.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bd3b65c3fa180b2540e8e648be4e51b51a1ee5e91fdc7d9ea15d54ab90bc89bd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/kappa-curriculum-search.md"
+        },
+        {
+          "git_blob": "ef67785d671704959ae7ef3768e15b38b4af69ce",
+          "path": "reports/toy100/kappa-halton.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "683845c3e55c5f1bf19ab8d201e9343d21acaf250ae0e74b1dd58aebc8ef8a34",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/kappa-halton.md"
+        },
+        {
+          "git_blob": "cce2e5d5a68a7b3deabb8b0d2381bd28235f3251",
+          "path": "reports/toy100/kappa-near-v2.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "daf1e34114d0e885e8ca6285b0ab655b3a6b1ec87befa22d4337d53c94970743",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/kappa-near-v2.md"
+        },
+        {
+          "git_blob": "a15d54c5a9efc4aa55b1dc27bed2c4a039609787",
+          "path": "reports/toy100/kappa-prior-bracket.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "178043440299441629aea0629d0ea02652e586e5d019bab2907141d8e0a352eb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/kappa-prior-bracket.md"
+        },
+        {
+          "git_blob": "fcf7c9f7f07a2a6c80bf6111a16a40c8abddf075",
+          "path": "reports/toy100/legacy-noise-adapter-audit.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f3a5af7a59ea7ea51a9b74019be56bc871437e0682513336a44fb1b946a00416",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/legacy-noise-adapter-audit.md"
+        },
+        {
+          "git_blob": "247330ea5815e060c534f4df8d9d81124112236e",
+          "path": "reports/toy100/log-retention.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5049494713c8324f99d1c138c7be04b2d5917ffadd0beeb16c85ee88cd797508",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/log-retention.md"
+        },
+        {
+          "git_blob": "af01cebea551f1227554c761ccfca6e755647ea7",
+          "path": "reports/toy100/network-floor-bracket-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3c7d7ff90a9e61b209ab2e852bfd36f198908706e7a5cb69007d56196b722386",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/network-floor-bracket-v1.md"
+        },
+        {
+          "git_blob": "56689f31f01170db9c90a26af1c87310802c52b8",
+          "path": "reports/toy100/network-floor-kappa-bracket-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "734da60ffdcc546058f3a429818eed784fe28bebc33f77ecf9510eb366d9c269",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/network-floor-kappa-bracket-v1.md"
+        },
+        {
+          "git_blob": "afb39dfcb2556a7c27a02dfc75a105662394facf",
+          "path": "reports/toy100/network-floor-lr-bracket.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3befce07ccb6eeff3240373f3051608604db9a24fc3f8d5f9056c44ae7f72b0a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/network-floor-lr-bracket.md"
+        },
+        {
+          "git_blob": "2befd2fe33331f87c082fe59e8e32f5a358182dd",
+          "path": "reports/toy100/network-floor-native.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8dab23182094a0a4c386744a559c8c0347afa2f7daeb2a4b1b7a6029bb6e00fe",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/network-floor-native.md"
+        },
+        {
+          "git_blob": "6bf52a2a384e536ec6523e203b9345cd0901ce40",
+          "path": "reports/toy100/network-floor-noise-phase.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b5008a0d68af87bc5461b27ae7cdae37e536997d05bb78fc5f4875b4c4f97bbe",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/network-floor-noise-phase.md"
+        },
+        {
+          "git_blob": "403bf3fa668baae51ea18f816c9c556f50fcc7bd",
+          "path": "reports/toy100/network-floor-screen.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "573a923c385ca9c8325b824bac322f044c6fbfb0fa870f3e81612edc11f1861f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/network-floor-screen.md"
+        },
+        {
+          "git_blob": "bc9a4396c96f50327cf5f1b279c006e73059fb50",
+          "path": "reports/toy100/noise-grid-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6d1ade861cf9baac8f9185333cb3f6539270ae15289e6c968c65782c5918fc4f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/noise-grid-v1.md"
+        },
+        {
+          "git_blob": "dfab6d453dc2c3d9c0f168be84839e9adb4b02c5",
+          "path": "reports/toy100/noise-near-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1053c389ce8d3a62880a062eae00671bc5e801fc009c425e81c1a2e5c9e4ff58",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/noise-near-v1.md"
+        },
+        {
+          "git_blob": "b5aa4c832207c8ada093967dca39cb0e5f6dd185",
+          "path": "reports/toy100/noiseless-translation-probe.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e1d5c7188af06e6b14e9fce678fb816ed2780847b7abf0af56be6298b90bd9be",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/noiseless-translation-probe.md"
+        },
+        {
+          "git_blob": "ba4e454f052570a742b0241ebbf051f074b4c344",
+          "path": "reports/toy100/noisy-mlp-allocation.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1e7eaea7a0de057bb0a174dd8acb78bf04a2bbeb3a1d35c92e954dee3fb2a4aa",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/noisy-mlp-allocation.md"
+        },
+        {
+          "git_blob": "54c6ad0ea65e843efbefa022ecd2f5b42ac588ad",
+          "path": "reports/toy100/optimistic-adam-scratch.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4a190acef97d9327b05519b7ac00f4ee6569a03a9a51216626c2d7cf678e1479",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/optimistic-adam-scratch.md"
+        },
+        {
+          "git_blob": "7026a7bb9e0dd643c4045f40ae06dcf4f265532f",
+          "path": "reports/toy100/optimizer-formulation-research.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ead5b6212ab68c0da9c0a67b33b6a1e90036aa6608279c89f61f7e6462db1fd1",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/optimizer-formulation-research.md"
+        },
+        {
+          "git_blob": "80eeb6b6b3d41cfa38640a928253e2d3873b1dc2",
+          "path": "reports/toy100/output-noise-rng-audit.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b94c5684985f7816a14167517c0315c775e0889689543526c7e42cf61e822718",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/output-noise-rng-audit.md"
+        },
+        {
+          "git_blob": "9fdd54219a892872c8c2d880c131c03d1053f6d9",
+          "path": "reports/toy100/persistent-noise-screen.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "01f731cddc1338ae885a18731757e583acacb622a2bd5ce7a780c944506308d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/persistent-noise-screen.md"
+        },
+        {
+          "git_blob": "70060d2dc17dd587f48dd6fcf933527dff98c4d1",
+          "path": "reports/toy100/pr140-independent-review.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a70428b72ec981ca3006071a05ae904609985f5890754d891d013a6ede442d42",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/pr140-independent-review.md"
+        },
+        {
+          "git_blob": "76f6e0b9ea2c86156b338aecac2c46d84bff28f4",
+          "path": "reports/toy100/priorreg-f5-transfer.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b64ecae71c2c2b17cd6ec3375cc84bd2a70831830b2c39cc10066409956569c9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/priorreg-f5-transfer.md"
+        },
+        {
+          "git_blob": "7cd48513c6a7dd1196fcea098676d0f1b670740d",
+          "path": "reports/toy100/production-policy22.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9439657255dfc875096e07740ad0c8a8eace70edb8c638fc45d96f82f0991dde",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/production-policy22.md"
+        },
+        {
+          "git_blob": "cf465d40aee95a4ed3581eb58393bfc7f1fa5c47",
+          "path": "reports/toy100/projected-discriminator-f5.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4a1f5177118121a1d7c783814d68eae7e2e7d8a283c363ab5b1b485a33d74d7a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/projected-discriminator-f5.md"
+        },
+        {
+          "git_blob": "72834eccfef566a0cbfd5b778fb635d92134ccf6",
+          "path": "reports/toy100/projected-discriminator-followups.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "706eb50444c61f34b1575bcb3ea442e5e50403bc33a17c44f2564741a6d6cfa4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/projected-discriminator-followups.md"
+        },
+        {
+          "git_blob": "b8d78e65f715f7c48077b3157a9fdc1766beb151",
+          "path": "reports/toy100/promotion-validation-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b1b510097966893aaa20e3bfa86f7489e65985842ae26a5ad92a91de740edc75",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/promotion-validation-v1.md"
+        },
+        {
+          "git_blob": "1498d1fe89f83d6d358277361321e02cc72fdec9",
+          "path": "reports/toy100/r1r2-transfer.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "930f546c53e5fd9e2cebb95de26898cb382f74331aff835970fbf124fadfcb3b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/r1r2-transfer.md"
+        },
+        {
+          "git_blob": "ba5aa7ea48b94d14d6f25807d9eb41a2c07b7a67",
+          "path": "reports/toy100/regularization-screen-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8c800e7b800b6edaa4c15f449a9dd79afb300cf343785cd948410bda4bd6f96f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/regularization-screen-v1.md"
+        },
+        {
+          "git_blob": "e4f36ae72814278f985cf9bf9f754fc7f6805628",
+          "path": "reports/toy100/residual-escape-shape-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5387dc82412c364eeb3045b41495e47b74d22dd9e0922f06f0d9bd0e3d323120",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/residual-escape-shape-v1.md"
+        },
+        {
+          "git_blob": "b2642eded18d38a41fc5a4152eb5f0dc5b03a657",
+          "path": "reports/toy100/search-architecture.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "84821d8d3c311b8ef89ca1bb11973350ddd5c8862e528461ec8f740348ced1d7",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/search-architecture.md"
+        },
+        {
+          "git_blob": "59c14b6089dfefe9aa0b9584e1ee38a765b37ae2",
+          "path": "reports/toy100/search-recipe.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f439e6aabfb9371a174fec167bf1a29c23c70d1d24fac92e9021f13ff323eb06",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/search-recipe.md"
+        },
+        {
+          "git_blob": "8c6a51d8341de548e1ca9dff56480b3efa31909b",
+          "path": "reports/toy100/search-schedule.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "61b5c81ce11796f713d2e834b89001427cbc803bd6cbf9ea307d1ba334bf7834",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/search-schedule.md"
+        },
+        {
+          "git_blob": "9ae6ebf15b9fde10314c6e0ea7baa7edf8618d14",
+          "path": "reports/toy100/shared-halton64-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "25391977c1bab06a287909bbb6184fd30221d7124d07bd4e01006c92f1d94870",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/shared-halton64-v1.md"
+        },
+        {
+          "git_blob": "da8a34b7e1bdc1b63d4205cd5b8f78f629e8b1b1",
+          "path": "reports/toy100/shared-kappa-boundary-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "079863003e315fc0ff18ccb63253d899c50b0cf4eb4ad085f6486f937315ce3a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/shared-kappa-boundary-v1.md"
+        },
+        {
+          "git_blob": "d062879eaa38dac187c8ee0e12d5f3bd038af4fc",
+          "path": "reports/toy100/shared-kappa-fine-v1.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "95c2359406f8a37d9625394a76f65b8de3710e46c3af1740c78a68069eeb0dc4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/shared-kappa-fine-v1.md"
+        },
+        {
+          "git_blob": "bed01b79e5f8bc489464b91c68da27fc01059428",
+          "path": "reports/toy100/shared-recipe-search.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3c28cab2f886a3d4aae40435f8f5b118ee89564f8ab35aa7ce39138b47df650f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/shared-recipe-search.md"
+        },
+        {
+          "git_blob": "8a67ff106edbcf669c8220755ebf8f4367c80fbc",
+          "path": "reports/toy100/simpler22-independent-audit.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9b3c32fc1c940fcd9376355766bece79af4063cd33d11019a50a0de41e7bf5cb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/simpler22-independent-audit.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/current-research-base.json"
+      ],
+      "summary_excerpt": "# 100-mode convergence: failures and shared-recipe search\n\n**Current GPU research/launcher selection: [K3P](k3p-base/README.md).**\nIt passes 22/22 declared toy gates and its 1,200-update ring hold plus\n300-update extension. Target-shift recovery remains a measured failure.\n[Current leaderboard](continuous-practical-leaderboard.md) \u00b7\n[Exact selection declaration](current-research-base.json).\n\n[Log retention](log-retention.md): console output and duplicate metric streams\nstay in local runs; qualification evidence and reproducibility inputs are retained.\n\n## Earlier shared-recipe and CPU results\n\nThe historical [CPU shared recipe](simpler22/README.md) passes **22/22** in a fresh production-runner replay and independent regrades. Compared with the previous 22/22 winner, it uses a unit discriminator cap and coefficient and removes the particle penalty. All three native problems first cover 100 modes at update 750 and pass all terminal accuracy checks plus independent 100k holdouts. The detailed report includes the exact settings, [new convergence GIF](simpler22/toy100/toy100-progress.gif), and [per-case combined gate](simpler22/compatibility.md). The [constraint-removal audit](constraint-removal.md) records successful simplifications and failed alternatives; constant-rate continuous learning remains unresolved. The [hosted workflow](https://github.com/255BITS/ParticleGAN/actions/wor"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-eab3beb766f7",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "333078e3822526930b5169044b830a602436d2ce",
+    "path": "reports/toy100/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "12cb6e9a8acb00dfef953932f278173497034f6686ab2fc2e72ccc0bf7496a9b",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/README.md"
+  },
+  "task_results": []
+}

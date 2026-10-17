@@ -1,0 +1,24 @@
+{
+  "delta": "Preserve original JSON NaN/Infinity evidence tokens; typed mean finite validation unchanged. Move final top-level receipt publishing to parent.",
+  "numerical_attempts_before_correction": 0,
+  "original_files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/PLAN.md": "b202790f414b5a5613dbfc2026187b227b698af0100b3b4233c226e8b5af4a38",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/audit_final.py": "4f6ab96bad5701a2c4a9fca975a32c4fb1f89e18f6dae7258b940c8d5b100cf5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/close_review.py": "8b064b7c916b33e86072df75452d9384c10d95956a136b416fc446cf8ebfe2de",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/common.py": "0695e6bf79eba71ee401c8818ce38a8a7bc049af6f4228236877b2cffc15b66c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/launch_once.py": "5367c68f23bba1abe2d8d86341f93a752d1c68e9650c1af2542037624533388e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/prepare.py": "1e4b35566d873ad4a45e274aa5ea0275cd64dc011310d0f8dc80c00b199d3ba6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/seal_inputs.py": "105d931533a6a00d73f0cd5443bb33f517a321b5212cd359aecc60dcccc3a6cd"
+  },
+  "original_preparation_sha256": "7dff45a78eede6640a4740f38ca31f05397aff9edebd3d5766d0509f70d9e3ee",
+  "revised_files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/PLAN.md": "88ad8fa6378dcb9c6156f4c3fed47e22cfb51a881786cacf2faf899553841fbe",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/audit_final.py": "4f6ab96bad5701a2c4a9fca975a32c4fb1f89e18f6dae7258b940c8d5b100cf5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/close_review.py": "4a75763b12d3346157121fcc93472b381aa608f6b008a394e3f336df11a60204",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/common.py": "ee12bad6b9f95539d24e3c653c69341b36972e07fa8876b4cbe61eccee9f8b18",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/launch_once.py": "5367c68f23bba1abe2d8d86341f93a752d1c68e9650c1af2542037624533388e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/prepare.py": "48159857c367e93dfadded3ca54e72a83829970868d1fa0c4388333d0c573a0e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/final-regression-review/preparation-attempt2/seal_inputs.py": "105d931533a6a00d73f0cd5443bb33f517a321b5212cd359aecc60dcccc3a6cd"
+  },
+  "status": "VERSIONED_SERIALIZATION_ONLY_SOURCE_CORRECTION"
+}

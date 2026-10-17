@@ -1,0 +1,1463 @@
+{
+  "CUDA_initialized": false,
+  "GPU_launched": false,
+  "actual_upstream_function_boundary_witnesses": [
+    {
+      "equal": true,
+      "generator": 0.015625,
+      "new": {
+        "derivative": 0.0,
+        "sigma": 0.029
+      },
+      "noise": 1.0,
+      "old": {
+        "derivative": 0.0,
+        "sigma": 0.029
+      },
+      "table": 1.0
+    },
+    {
+      "equal": true,
+      "generator": 0.015625,
+      "new": {
+        "derivative": 0.0,
+        "sigma": 0.029
+      },
+      "noise": 1.0,
+      "old": {
+        "derivative": 0.0,
+        "sigma": 0.029
+      },
+      "table": 0.5
+    },
+    {
+      "equal": true,
+      "generator": 0.015625,
+      "new": {
+        "derivative": 0.0,
+        "sigma": 0.029
+      },
+      "noise": 1.0,
+      "old": {
+        "derivative": 0.0,
+        "sigma": 0.029
+      },
+      "table": 0.25
+    },
+    {
+      "equal": false,
+      "generator": 0.015625,
+      "new": {
+        "derivative": 0.010000000000000004,
+        "sigma": 0.010000000000000004
+      },
+      "noise": 1.0,
+      "old": {
+        "derivative": 0.0,
+        "sigma": 0.029
+      },
+      "table": 0.015625
+    }
+  ],
+  "advanced_base": "cabe2084284db923d525918cbf3e18de6f20faac",
+  "history_relabelled": false,
+  "inputs": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/checkpoint-2000.pt": "ea87c269c1dff371e058d72b5371947786de8fdd99b771834546a27dced7a559",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/checkpoint-2000.pt": "66fdeef39ac1aa9f10d54444185e62626b813320bacd7111e7c5261583bff3b4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/grid100/final-state.pt": "f25ea84bbab231a70e10eaf29ff8b10ec51ddaa024daea188a3ac7399a5d513f",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/rotated100/final-state.pt": "6a383ab46d055e0ae8a4eb6bfe88ef7792a46b775771cae092d58b1d21dd62e6",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/staggered100/final-state.pt": "e393fd13a9f82dc633d8360b9c0f58c8f0bb1bd02b483b588b85eb2ee2a25c43",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/final-state.pt": "3eae07b7eeaac044c284106b7773e3918979278d85e07ba0e54955bae076a4f8",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/final-state.pt": "190ac70aaabf1e0bb2dc1aff576bcf2bb4e5646bb3e34afb539e5dc984f4049f",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/final-state.pt": "21b8942b29a1fc2c52980a760bbabc0e226dc6c5e6c993cc6e38eb9a0a523469",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/final-state.pt": "2991ca1c04c86fb803da08b0802761b41cc4402941f0c160e03ae7fbff2dbe12",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/final-state.pt": "15f13d22e8e775b57f01b81e2ad1fe09bd862be2ec6a254138fb39d53aba676b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/stationary/final-state.pt": "bca2c3e2cee650a2847711b88b421fef3d87c91a3c1ca5f3ae98a599c9c5442c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/final-state.pt": "7036dc131f2b45972b18a6b9f808e794c3e530592bf064302976106fe25a9641",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/final-state.pt": "6b2f832a89edcef5752a3562abc71fe7e43fa1d6529c61af2bab022e2bc81c2b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/final-state.pt": "678ad4fb1eb6a25a125b39c37b5040a5dfa482fea44456270e163928c7865ad5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/final-state.pt": "335940447a6b68b97d65cddd8078a0ba396acbe3bf14841198ee8e921b57e171",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/final-state.pt": "d94fe869fdca3d66194e03be167e1e4edff561c3c774705f89aa57ae8cc6e9ef",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/final-state.pt": "cf547974bf5e4837c8198251f6a116ccbfe79b5b29670ff593d52affa6c38d0f",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/grid100/checkpoint-001500.pt": "c54b045114a3dd70305c69dfd6abdc9a91d4785be264bbf013a81b88895a7abb",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-001500.pt": "eb49450650450fe6d45ec360bfffb091686e702196852ee75ae253551733f132",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/staggered100/checkpoint-001500.pt": "6bf7efce22cb9b379f4c5e960c9b8fc3af032aaab8636614240df83c1ab04adf",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/runs/ring_shift/final-state.pt": "c0e80e5b9b796aa3bb98883c71d7ae65ae81663fdab7ed4a0fbbeb75c8681503"
+  },
+  "invariant": {
+    "all_step_bound": "s(t) >= 2^(-C_stationary(T)) for every 0 <= t <= T",
+    "drift_reopen_and_population_expiry_do_not_decrease_s": true,
+    "exactly_six_stationary_decisions_necessary_from_initial_s_one": true,
+    "floor_override_equal_if_any_retained_nonnoise_role_above": "1/64",
+    "initial_s": 1.0,
+    "only_stationary_decision_decreases_s": true,
+    "stationary_counter_cumulative_and_never_cleared_by_restart": true,
+    "stationary_multiplier": 0.5
+  },
+  "learned_fixture_prefixes_proven_unaffected": 2,
+  "minimum_all_step_table_s_bound": 0.25,
+  "models_constructed": false,
+  "new_training_or_seed_experiments": false,
+  "original_base": "f459cb6d6aaaabeb1af076ec53ad7a963618de90",
+  "original_learned_replay": {
+    "branches_per_fixture": 2,
+    "fixtures": 2,
+    "latest_combined_source_replay_required": true,
+    "start": 1000,
+    "total_updates": 40,
+    "updates_per_branch": 10,
+    "within_proved_training_prefix": true
+  },
+  "original_quality_tasks_proven_unaffected": 19,
+  "records": [
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "bca2c3e2cee650a2847711b88b421fef3d87c91a3c1ca5f3ae98a599c9c5442c",
+      "completed_steps": 7500,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/stationary/final-state.pt",
+      "recipe_sha256": "3a6a8151abb778ceb2cfd7b42c4bdcf7fa0b889e0b133c0df777f67a4c4ea191",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "ported/stationary",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.0078125,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.0078125,
+          "lifetime_stationary_decisions": 7,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": 0,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "15f13d22e8e775b57f01b81e2ad1fe09bd862be2ec6a254138fb39d53aba676b",
+      "completed_steps": 1200,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/final-state.pt",
+      "recipe_sha256": "333649112c50b59383bf97ee9d283df29b8c61c5235dfde6a14afcf7c7748dff",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/mode_hold",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.5,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.5,
+          "lifetime_stationary_decisions": 1,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "c0e80e5b9b796aa3bb98883c71d7ae65ae81663fdab7ed4a0fbbeb75c8681503",
+      "completed_steps": 4600,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/runs/ring_shift/final-state.pt",
+      "recipe_sha256": "3a6a8151abb778ceb2cfd7b42c4bdcf7fa0b889e0b133c0df777f67a4c4ea191",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "ported/ring_shift",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.001953125,
+          "final_population_expiries": null,
+          "final_reopens": 1,
+          "final_s": 0.125,
+          "lifetime_stationary_decisions": 9,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": 0,
+          "final_reopens": 1,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 1,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "335940447a6b68b97d65cddd8078a0ba396acbe3bf14841198ee8e921b57e171",
+      "completed_steps": 1200,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/final-state.pt",
+      "recipe_sha256": "e462346a20ec61bc317425c66d4c4ae51daa0d3f9658554324d70c7b2aac5862",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/vector_two_broad",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.5,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.5,
+          "lifetime_stationary_decisions": 1,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 0.25,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "6b2f832a89edcef5752a3562abc71fe7e43fa1d6529c61af2bab022e2bc81c2b",
+      "completed_steps": 1200,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/final-state.pt",
+      "recipe_sha256": "e462346a20ec61bc317425c66d4c4ae51daa0d3f9658554324d70c7b2aac5862",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/vector_overlap",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.25,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.25,
+          "lifetime_stationary_decisions": 2,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 0.25,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.25,
+          "lifetime_stationary_decisions": 2,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 2,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 0.5,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "678ad4fb1eb6a25a125b39c37b5040a5dfa482fea44456270e163928c7865ad5",
+      "completed_steps": 1600,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/final-state.pt",
+      "recipe_sha256": "e462346a20ec61bc317425c66d4c4ae51daa0d3f9658554324d70c7b2aac5862",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/vector_spiral",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.25,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.25,
+          "lifetime_stationary_decisions": 2,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 0.5,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.5,
+          "lifetime_stationary_decisions": 1,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 1,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "7036dc131f2b45972b18a6b9f808e794c3e530592bf064302976106fe25a9641",
+      "completed_steps": 1200,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/final-state.pt",
+      "recipe_sha256": "e462346a20ec61bc317425c66d4c4ae51daa0d3f9658554324d70c7b2aac5862",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/vector_anisotropic",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.125,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.125,
+          "lifetime_stationary_decisions": 3,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "d94fe869fdca3d66194e03be167e1e4edff561c3c774705f89aa57ae8cc6e9ef",
+      "completed_steps": 1200,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/final-state.pt",
+      "recipe_sha256": "e462346a20ec61bc317425c66d4c4ae51daa0d3f9658554324d70c7b2aac5862",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/vector_unequal_mass",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.125,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.25,
+          "lifetime_stationary_decisions": 3,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "cf547974bf5e4837c8198251f6a116ccbfe79b5b29670ff593d52affa6c38d0f",
+      "completed_steps": 1200,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/final-state.pt",
+      "recipe_sha256": "e462346a20ec61bc317425c66d4c4ae51daa0d3f9658554324d70c7b2aac5862",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/vector_unequal_width",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.5,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.5,
+          "lifetime_stationary_decisions": 1,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "190ac70aaabf1e0bb2dc1aff576bcf2bb4e5646bb3e34afb539e5dc984f4049f",
+      "completed_steps": 600,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/final-state.pt",
+      "recipe_sha256": "da5d6dcce68731895f8d6b4ff4770710b0d82cbea978341bb450d7aa6926234f",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/img_blobs4",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "2991ca1c04c86fb803da08b0802761b41cc4402941f0c160e03ae7fbff2dbe12",
+      "completed_steps": 600,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/final-state.pt",
+      "recipe_sha256": "da5d6dcce68731895f8d6b4ff4770710b0d82cbea978341bb450d7aa6926234f",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/img_stripes2",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "3eae07b7eeaac044c284106b7773e3918979278d85e07ba0e54955bae076a4f8",
+      "completed_steps": 600,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/final-state.pt",
+      "recipe_sha256": "da5d6dcce68731895f8d6b4ff4770710b0d82cbea978341bb450d7aa6926234f",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/img_bars4",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "21b8942b29a1fc2c52980a760bbabc0e226dc6c5e6c993cc6e38eb9a0a523469",
+      "completed_steps": 600,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/final-state.pt",
+      "recipe_sha256": "da5d6dcce68731895f8d6b4ff4770710b0d82cbea978341bb450d7aa6926234f",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "ported/img_intensity2",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.25,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.25,
+          "lifetime_stationary_decisions": 2,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 0.5,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "f25ea84bbab231a70e10eaf29ff8b10ec51ddaa024daea188a3ac7399a5d513f",
+      "completed_steps": 7000,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/grid100/final-state.pt",
+      "recipe_sha256": "3a6a8151abb778ceb2cfd7b42c4bdcf7fa0b889e0b133c0df777f67a4c4ea191",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "native/grid100",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.03125,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.03125,
+          "lifetime_stationary_decisions": 5,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 0.5,
+          "final_population_expiries": 1,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 1,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 1,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "c54b045114a3dd70305c69dfd6abdc9a91d4785be264bbf013a81b88895a7abb",
+      "completed_steps": 1500,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/grid100/checkpoint-001500.pt",
+      "recipe_sha256": "3a6a8151abb778ceb2cfd7b42c4bdcf7fa0b889e0b133c0df777f67a4c4ea191",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "moving/grid100",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.125,
+          "final_population_expiries": null,
+          "final_reopens": 2,
+          "final_s": 0.5,
+          "lifetime_stationary_decisions": 3,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": 0,
+          "final_reopens": 2,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 2,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 0.25,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "6a383ab46d055e0ae8a4eb6bfe88ef7792a46b775771cae092d58b1d21dd62e6",
+      "completed_steps": 7000,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/rotated100/final-state.pt",
+      "recipe_sha256": "3a6a8151abb778ceb2cfd7b42c4bdcf7fa0b889e0b133c0df777f67a4c4ea191",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "native/rotated100",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.125,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.125,
+          "lifetime_stationary_decisions": 3,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 0.25,
+          "final_population_expiries": 1,
+          "final_reopens": 0,
+          "final_s": 0.5,
+          "lifetime_stationary_decisions": 2,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 2,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "eb49450650450fe6d45ec360bfffb091686e702196852ee75ae253551733f132",
+      "completed_steps": 1500,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-001500.pt",
+      "recipe_sha256": "3a6a8151abb778ceb2cfd7b42c4bdcf7fa0b889e0b133c0df777f67a4c4ea191",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "moving/rotated100",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.0625,
+          "final_population_expiries": null,
+          "final_reopens": 2,
+          "final_s": 0.25,
+          "lifetime_stationary_decisions": 4,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": 0,
+          "final_reopens": 2,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 2,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 0.5,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "e393fd13a9f82dc633d8360b9c0f58c8f0bb1bd02b483b588b85eb2ee2a25c43",
+      "completed_steps": 7000,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/staggered100/final-state.pt",
+      "recipe_sha256": "3a6a8151abb778ceb2cfd7b42c4bdcf7fa0b889e0b133c0df777f67a4c4ea191",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "native/staggered100",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.03125,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.03125,
+          "lifetime_stationary_decisions": 5,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 0.5,
+          "final_population_expiries": 0,
+          "final_reopens": 0,
+          "final_s": 0.5,
+          "lifetime_stationary_decisions": 1,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 1,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "6bf7efce22cb9b379f4c5e960c9b8fc3af032aaab8636614240df83c1ab04adf",
+      "completed_steps": 1500,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/staggered100/checkpoint-001500.pt",
+      "recipe_sha256": "3a6a8151abb778ceb2cfd7b42c4bdcf7fa0b889e0b133c0df777f67a4c4ea191",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "moving/staggered100",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.25,
+          "final_population_expiries": null,
+          "final_reopens": 2,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 2,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": 0,
+          "final_reopens": 2,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 2,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "66fdeef39ac1aa9f10d54444185e62626b813320bacd7111e7c5261583bff3b4",
+      "completed_steps": 2000,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/checkpoint-2000.pt",
+      "recipe_sha256": "8cf1f23ea6965ea6b5d44ef3731ba8a0f8fb52c8c7bad7dcd37f1d37d3892498",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "feature_cells",
+      "task": "learned/toy",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 0.0625,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 0.0625,
+          "lifetime_stationary_decisions": 4,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": 0,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    },
+    {
+      "all_step_proof": "cumulative stationary-decision bound from fresh s=1, not final-scale interpolation",
+      "all_step_table_s_lower_bound": 1.0,
+      "base_sigma": 0.029,
+      "checkpoint_sha256": "ea87c269c1dff371e058d72b5371947786de8fdd99b771834546a27dced7a559",
+      "completed_steps": 2000,
+      "fresh_training_required_for_noise_floor_change": false,
+      "old_and_new_settle_override_every_step": 1.0,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/checkpoint-2000.pt",
+      "recipe_sha256": "8cf1f23ea6965ea6b5d44ef3731ba8a0f8fb52c8c7bad7dcd37f1d37d3892498",
+      "roles": [
+        [
+          "generator",
+          "table",
+          "noise"
+        ],
+        [
+          "critic"
+        ]
+      ],
+      "source_backend": "knn",
+      "task": "learned/mnist",
+      "tester_records": [
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            0
+          ],
+          "role": "generator"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            1
+          ],
+          "role": "table"
+        },
+        {
+          "all_step_s_lower_bound": 1.0,
+          "final_population_expiries": null,
+          "final_reopens": 0,
+          "final_s": 1.0,
+          "lifetime_stationary_decisions": 0,
+          "owner": [
+            0,
+            2
+          ],
+          "role": "noise"
+        }
+      ],
+      "unaffected_by_noise_floor_change": true,
+      "witness_lifetime_stationary_count": 0,
+      "witness_role": "table"
+    }
+  ],
+  "scope_limit": "Noise-floor applicability only; latest combined-source replay/full suite remain required for compatibility.",
+  "scoped_change": "learnable output-noise floor ignores noise tester",
+  "standard_and_sequential_settle_AST_unchanged_across_bases": true,
+  "status": "PROVEN_UNAFFECTED_FOR_ORIGINAL_FINITE_HORIZONS",
+  "tasks_requiring_fresh_training_for_noise_floor_change": []
+}

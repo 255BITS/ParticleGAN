@@ -1,0 +1,11 @@
+{
+  "artifact_sha256": {
+    "COMPARISON.json": "8827b93d57301976eae551e0ad34916fc0539842deacaae578046938353485c8",
+    "INPUTS.json": "7a537a8872182f1d61e545550856635f03ef1d2d2f6afc963afba472f7aa8aa1"
+  },
+  "gpu_calls_by_closer": 0,
+  "input_count": 119,
+  "model_calls_by_closer": 0,
+  "status": "COMPLETE_CURRENT_PR155_E22_VS_ATLAS_COMPARISON",
+  "validity": "VALID"
+}

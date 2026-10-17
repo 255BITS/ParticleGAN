@@ -1,0 +1,524 @@
+{
+  "controls": {
+    "develop-two_pole": {
+      "centers_only": {
+        "expected_sample_count": 12,
+        "mass_tv": 0.0,
+        "max_grid_quantile_error_halfwidth": 1.0000000000000009,
+        "mean_grid_quantile_error_halfwidth": 0.6000000000000005,
+        "passed": false,
+        "pole_fractions": [
+          0.5,
+          0.5
+        ],
+        "quantile_normalizer": "target offset half-width .05, not standard deviation",
+        "sample_count": 12,
+        "sampling": "exact clean 12-atom enumeration",
+        "support_fraction": 1.0
+      },
+      "exact_target": {
+        "expected_sample_count": 12,
+        "mass_tv": 0.0,
+        "max_grid_quantile_error_halfwidth": 9.536743172944284e-07,
+        "mean_grid_quantile_error_halfwidth": 4.5299530052981635e-07,
+        "passed": true,
+        "pole_fractions": [
+          0.5,
+          0.5
+        ],
+        "quantile_normalizer": "target offset half-width .05, not standard deviation",
+        "sample_count": 12,
+        "sampling": "exact clean 12-atom enumeration",
+        "support_fraction": 1.0
+      },
+      "law": "Twelve equally weighted atoms: six linspace offsets from -.05 to .05 per pole. The source sampler is batch-size dependent.",
+      "old_travel_accepts_one_pole": true,
+      "one_pole_travel": {
+        "expected_sample_count": 12,
+        "mass_tv": 0.5,
+        "max_grid_quantile_error_halfwidth": 33.00000047683716,
+        "mean_grid_quantile_error_halfwidth": 19.999999999999996,
+        "passed": false,
+        "pole_fractions": [
+          0.0,
+          1.0
+        ],
+        "quantile_normalizer": "target offset half-width .05, not standard deviation",
+        "sample_count": 12,
+        "sampling": "exact clean 12-atom enumeration",
+        "support_fraction": 0.0
+      },
+      "retained_80_update_support_bound": {
+        "actual_particles": 12,
+        "added_support_gate": "FAIL",
+        "claim": "An original travel PASS cannot be a density PASS when even the best possible support count allowed by its recorded mean is below the support gate.",
+        "maximum_supported_rows": 6,
+        "mean_abs": 0.5143722891807556,
+        "original_travel_status": "PASS",
+        "source_result_sha256": "18b8814ccb151b23f557b0e0c6c8ab2fbb7d7729f724a026cef8ee19bc0956d9",
+        "support_fraction_upper_bound": 0.5
+      },
+      "wrong_256_atom_cohort": {
+        "expected_sample_count": 12,
+        "mass_tv": 0.0,
+        "max_grid_quantile_error_halfwidth": null,
+        "mean_grid_quantile_error_halfwidth": null,
+        "passed": false,
+        "pole_fractions": [
+          0.5,
+          0.5
+        ],
+        "quantile_normalizer": "target offset half-width .05, not standard deviation",
+        "sample_count": 256,
+        "sampling": "exact clean 12-atom enumeration",
+        "support_fraction": 1.0
+      }
+    },
+    "source-family-10": {
+      "adapted_to_target_shift": {
+        "covariance_eigenvalues": [
+          [
+            1.0081774264606396,
+            1.1209026264209354
+          ],
+          [
+            0.9609231393073088,
+            1.287538734144252
+          ],
+          [
+            0.9418297028879565,
+            1.0442497560235418
+          ],
+          [
+            0.9624931829270857,
+            1.0019211097639544
+          ],
+          [
+            0.9331497208392572,
+            1.132287907312989
+          ],
+          [
+            1.0137759209019637,
+            1.078184867867451
+          ],
+          [
+            0.8945328541548815,
+            0.9536929367662595
+          ],
+          [
+            0.9477590027513653,
+            1.0333814349221957
+          ]
+        ],
+        "hq": 0.987060546875,
+        "mass_tv": 0.0,
+        "max_radial_ks": 0.05369328001103291,
+        "modes": 8,
+        "passed": true,
+        "sample_count": 4096
+      },
+      "balanced_ring": {
+        "covariance_eigenvalues": [
+          [
+            1.0081774264606391,
+            1.1209026264209356
+          ],
+          [
+            0.9609231393073088,
+            1.287538734144252
+          ],
+          [
+            0.9418297028879568,
+            1.0442497560235418
+          ],
+          [
+            0.9624931829270857,
+            1.0019211097639544
+          ],
+          [
+            0.9331497208392572,
+            1.132287907312989
+          ],
+          [
+            1.0137759209019637,
+            1.078184867867451
+          ],
+          [
+            0.8945328541548819,
+            0.9536929367662595
+          ],
+          [
+            0.9477590027513649,
+            1.033381434922196
+          ]
+        ],
+        "hq": 0.987060546875,
+        "mass_tv": 0.0,
+        "max_radial_ks": 0.05369328001103291,
+        "modes": 8,
+        "passed": true,
+        "sample_count": 4096
+      },
+      "eight_centers_no_width": {
+        "covariance_eigenvalues": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "hq": 1.0,
+        "mass_tv": 0.0,
+        "max_radial_ks": 1.0,
+        "modes": 8,
+        "passed": false,
+        "sample_count": 4096
+      },
+      "five_terminal_passes": {
+        "passed": true,
+        "passing_suffix": 5
+      },
+      "frozen_before_target_shift": {
+        "covariance_eigenvalues": [
+          [
+            1.0081774264606396,
+            1.1209026264209356
+          ],
+          [
+            0.9613975989119214,
+            1.2654449256467293
+          ],
+          [
+            0.9552427698585529,
+            2.725392448016275
+          ],
+          [
+            0.9624931829270857,
+            1.0019211097639549
+          ],
+          [
+            0.9331497208392572,
+            1.1322879073129897
+          ],
+          [
+            1.0510025779612509,
+            2.7357542428554527
+          ],
+          [
+            0.875357783198635,
+            0.9554359615207846
+          ],
+          [
+            0.9477590027513652,
+            1.033381434922196
+          ]
+        ],
+        "hq": 0.0,
+        "mass_tv": 0.00048828125,
+        "max_radial_ks": 1.0,
+        "modes": 0,
+        "passed": false,
+        "sample_count": 4096
+      },
+      "temporary_pass_late_failure": {
+        "passed": false,
+        "passing_suffix": 0
+      }
+    },
+    "source-family-11": {
+      "expert_correspondence": {
+        "mse": 0.0,
+        "neutral_mse": 0.69783318574392,
+        "passed": true,
+        "relative_mse": 0.0
+      },
+      "joint_law_limit": "A decoder allowed to reflect both state and action can match the joint data law while reversing the caller's physical action.",
+      "same_empirical_marginal": true,
+      "simultaneous_state_action_reflection_preserves_joint_law": true,
+      "wrong_sign_identical_output_marginal": {
+        "mse": 2.79133274297568,
+        "neutral_mse": 0.69783318574392,
+        "passed": false,
+        "relative_mse": 4.0
+      }
+    },
+    "source-family-12": {
+      "crash_sink": {
+        "crash_rate": 1.0,
+        "landings": 0.0,
+        "passed": false,
+        "restricted_mean_steps": 48.0,
+        "timeout_rate": 0.0
+      },
+      "hover": {
+        "crash_rate": 0.01,
+        "landings": 0.0,
+        "passed": false,
+        "restricted_mean_steps": 48.0,
+        "timeout_rate": 0.99
+      },
+      "quick_soft": {
+        "crash_rate": 0.0,
+        "landings": 1.0,
+        "passed": true,
+        "restricted_mean_steps": 19.295,
+        "timeout_rate": 0.0
+      }
+    },
+    "source-family-13": {
+      "analytic_paired_action": {
+        "mse": 0.0,
+        "neutral_mse": 0.5572533026237458,
+        "passed": true,
+        "relative_mse": 0.0
+      },
+      "reversed_previous_command": {
+        "mse": 2.229013210494984,
+        "neutral_mse": 0.5572533026237458,
+        "passed": false,
+        "relative_mse": 4.000000000000001
+      },
+      "same_empirical_action_marginal": true
+    },
+    "source-family-14": {
+      "harmful_code_all_judges": {
+        "passed": false,
+        "zero_minus_live": [
+          -0.10000000000000009,
+          -0.10000000000000009,
+          -0.09999999999999998,
+          -0.09999999999999998
+        ]
+      },
+      "helpful_code_all_judges": {
+        "passed": true,
+        "zero_minus_live": [
+          0.10000000000000009,
+          0.10000000000000009,
+          0.09999999999999998,
+          0.09999999999999998
+        ]
+      },
+      "one_judge_disagrees": {
+        "passed": false,
+        "zero_minus_live": [
+          0.10000000000000009,
+          0.10000000000000009,
+          0.10000000000000009,
+          -0.010000000000000009
+        ]
+      },
+      "paired_target": {
+        "mse": 0.0,
+        "neutral_mse": 0.69783318574392,
+        "passed": true,
+        "relative_mse": 0.0
+      },
+      "row_permutation": {
+        "mse": 2.79133274297568,
+        "neutral_mse": 0.69783318574392,
+        "passed": false,
+        "relative_mse": 4.0
+      }
+    },
+    "source-family-15": {
+      "correct_argmax_low_confidence": {
+        "mass_tv": 1.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 0,
+        "passed": false,
+        "quality_fraction": 0.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": -0.0,
+        "sample_count": 200,
+        "word_masses": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "correct_marginal_wrong_reconstruction": {
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 5,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": false,
+        "reconstruction_nll": 18.420680743952364,
+        "sample_count": 200,
+        "word_masses": [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      },
+      "display_equivalent_wrong_padding": {
+        "mass_tv": 1.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 0,
+        "passed": false,
+        "quality_fraction": 0.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": -0.0,
+        "sample_count": 200,
+        "word_masses": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "exact_words_and_reconstruction": {
+        "mass_tv": 0.0,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "passed": true,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": -0.0,
+        "sample_count": 200,
+        "word_masses": [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      },
+      "one_word_only": {
+        "mass_tv": 0.7999999999999999,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 1,
+        "passed": false,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": true,
+        "reconstruction_nll": -0.0,
+        "sample_count": 200,
+        "word_masses": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "source-family-16": {
+      "center_only": {
+        "covariance_eigenvalues": [
+          0.0,
+          0.0
+        ],
+        "max_projection_ks": 0.5,
+        "mean_error_sigma": 0.0,
+        "passed": false,
+        "radial_ks": 1.0,
+        "sample_count": 4096
+      },
+      "independent_normal_draw": {
+        "covariance_eigenvalues": [
+          0.9605592289693351,
+          1.0351360121574558
+        ],
+        "max_projection_ks": 0.018475572652036476,
+        "mean_error_sigma": 0.02580602424103206,
+        "passed": true,
+        "radial_ks": 0.010196090773149535,
+        "sample_count": 4096
+      },
+      "isotropic_circle_same_covariance": {
+        "covariance_eigenvalues": [
+          1.0000000000000002,
+          1.0000000000000007
+        ],
+        "max_projection_ks": 0.09735013599111131,
+        "mean_error_sigma": 8.881643062323799e-17,
+        "passed": false,
+        "radial_ks": 0.6321205588285574,
+        "sample_count": 4096
+      },
+      "shifted": {
+        "covariance_eigenvalues": [
+          0.9605592289693347,
+          1.0351360121574555
+        ],
+        "max_projection_ks": 0.5183181697191238,
+        "mean_error_sigma": 1.389891723207493,
+        "passed": false,
+        "radial_ks": 0.2958902985630929,
+        "sample_count": 4096
+      },
+      "wrong_width": {
+        "covariance_eigenvalues": [
+          0.038422369158773395,
+          0.04140544048629823
+        ],
+        "max_projection_ks": 0.33090555307565894,
+        "mean_error_sigma": 0.0051612048482063905,
+        "passed": false,
+        "radial_ks": 0.8394371568689347,
+        "sample_count": 4096
+      }
+    }
+  },
+  "evaluator_seeds": {
+    "numpy_controls": 713,
+    "two_pole": "deterministic source sampler; no RNG"
+  },
+  "historical_verdicts_unchanged": true,
+  "runtime": {
+    "numpy": "2.5.2",
+    "torch": "2.13.0+cu126"
+  },
+  "scope": "evaluator calibration controls; no training or convergence qualification",
+  "source_sha256": {
+    "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+    "benchmarks/locked_shared/mode_hold.py": "38d4b4030ddaf354d41593395f3d6a26b4acf3668e672ebe56d126b7ee1c7232",
+    "benchmarks/locked_shared/two_pole.py": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e",
+    "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+    "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+    "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
+    "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
+    "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
+    "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
+    "examples/five_modes.py": "9da653c131e9889943974e6a340299fb07327b5605182034ba49abb0d2a416b4",
+    "examples/quickstart_gan.py": "3cad45dd34cf8152e0df51663ebb3ffd6cfc0496ebc011a06074a37acd0783ef",
+    "experiments/toy_particle_native_2d.py": "bc03bd06f914f8093319d92de7feb3621f9ca6f2f9a1ba5732089ee2f71e62cd",
+    "lib/safe_fast_landing.py": "6016f444d47375ba71fafc5ec20132fceb38ca0814854e4fab0b106e092647b5",
+    "lib/yue2_particle_toy.py": "a0a62a31a276d8b36b97577881e679b8de61162af8699ef39a122b444c8bc078",
+    "reports/toy_audit/catalog.json": "1064b4f399c6dde97ce5313b05e3589f7083bad21846fc0d62a311fd8078ff18"
+  },
+  "version": "toy-definition-quality-v1"
+}

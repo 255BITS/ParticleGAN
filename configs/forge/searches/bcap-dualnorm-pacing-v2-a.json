@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "id": "bcap-dualnorm-pacing-v2-a",
+  "trainer_family": "bcap-dualnorm",
+  "base_candidate": "bcap-dualnorm-zero-v1",
+  "grid": {
+    "lr": [0.01],
+    "d_lr_mult": [0.5, 0.75, 1.0, 1.5, 2.0],
+    "prior_lr_mult": [0.3, 1.0, 3.0, 10.0]
+  },
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability",
+  "execution_backend": "cuda",
+  "cuda_model": "NVIDIA RTX A6000",
+  "protocol": "screening",
+  "campaign": {
+    "schema_version": 1,
+    "id": "bcap-dualnorm-pacing-v2",
+    "budget_seconds": 63000,
+    "candidate_budget_seconds": 2520,
+    "accept_shared_cost_transfer": false,
+    "purpose": "Finite optimizer-only BCAP pacing study, at most 20 Stage A recipes plus 3 conditional Stage B rates and 2 conditional Stage C momenta. All six unchanged required Tier 1 tasks and the separate clock diagnostic complete for every admitted recipe, protocol seed 0, public deterministic initialization with explicit task fixtures, one global recipe. The selected historical starter is one justified matched current-source control because optimizer/API/observer source changed. Fixed BCAP loss/penalty/cap/schedules, architecture, prior law, objectives, sampling, updates and evaluation. Maximum 63000 paid/reserved seconds and 43200 monotonic elapsed seconds across two exclusive GPU workers plus the automatic CPU worker. Full task timeouts are reserved before claim; no reduced timeouts, automatic retries, expansion, Tier 2, seed-only work or default adoption. Conditional branches are fixed in the committed pacing contract before spending."
+  },
+  "hypothesis": "Independent discriminator and sampled-prior pace at full dualnorm mu=0 and etaG=.01 can improve complete sustained Gaussian/ring/two-pole gates while retaining learned-word inverse/coverage and behavioral hold. Slower prior should reduce distant assigned tails; lower critic pace should improve the terminal two-pole slope window. Improvements that regress other tasks are retained as tradeoffs, not a whole winner.",
+  "rationale": "The frozen 15eb starter achieved only 3/6: Gaussian CDF/spread failed, two-pole had four terminal passes, ring HQ passed but full component covariance failed. Earlier full dualnorm grids held D/G=1.5 and absolute prior=.03, so neither pace axis was tested. The expanded finite grid includes lower D ratios .5/.75 and prior .003 as explicit boundary contrasts. Exactly one .01/D1.5/prior.03 center is a matched current-source control; historical receipts remain unchanged and cannot fill its cells. The numeric conditional criteria are revised from the audit's proposed 4-pass trigger to >=3 passes and >=this current control; a rate refinement may improve ring while preserving the best complete whole-row score. The committed reports/forge/dualnorm-pacing-v2/contract.json freezes all conditional rules and reachable branches before admission.",
+  "guide": "EXPERIMENTATION.md"
+}

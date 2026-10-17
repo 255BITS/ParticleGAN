@@ -1,0 +1,93 @@
+{
+  "budgets": {
+    "campaign_seconds": 3600,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "grid100_affine_square_named_v1": 3600
+    }
+  },
+  "candidate_id": "k3p-a2-off-native-diagnostic",
+  "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+  "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+  "contract": "configs/forge/campaigns/host-profile-a2-off-native-v1.json",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "enqueued": false,
+  "expected_wall_seconds_context": {
+    "estimate": "Approximately 90 seconds is context from the paired control, not a guarantee or reservation.",
+    "paired_control_measured_seconds": 92.03703144600149
+  },
+  "import_validation_conflicts": [],
+  "imported_control": [
+    {
+      "attempt_id": "dca8c7aa0eca484c9270d07125f7cb0b",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "files": {
+        "evidence.json": "9cccb1146f236e839b4738c5693e06e2fc089aa0c79c1453e49f95fc462552cc",
+        "request.json": "532da7b25bf8c7bf146ded22d1d80f6f69b597a1b4044325ed03a33c01cb74d7",
+        "result.json": "d6550ffc6da0a5a7ec1087a0085398f7ce1c63c37e7981ebf7f101f5c3a87fe3"
+      },
+      "qualification_reuse": false,
+      "registration_id": "host-profile-first-cells-v1",
+      "registration_sha256": "e42a6a6eeac26ab67f319e5cc9b95158bbf4d3fee5827c25822f270b7b96d329",
+      "tasks": {
+        "grid100_affine_square_named_v1": {
+          "diagnostic_key": "22086fb731424c642ff66123f83a7f7ff433967a83821a309c904da7ba996de8",
+          "qualification_key": "d9b93b7c14acba90cd785ba4a6a9bd2819a7d68edd3734b15d5b60cef60770b8"
+        }
+      }
+    }
+  ],
+  "lifecycle_conclusion_recorded": false,
+  "plan": {
+    "candidate": "k3p-a2-off-native-diagnostic",
+    "candidate_revision": "8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581",
+    "guide": "EXPERIMENTATION.md",
+    "policy_fingerprint": "5341659cae77f29e3289eb52513146fe792058a17279765a2846d2d3ab196102",
+    "preflight_blockers": [],
+    "tasks": [
+      {
+        "blockers": [],
+        "budget_seconds": 3600,
+        "execution_group": "grid100_affine_square_named_v1",
+        "importance": "diagnostic",
+        "order": 0,
+        "permitted_by_tier_cap": true,
+        "qualification_tier": 1,
+        "reusable": false,
+        "shared_pending": false,
+        "task": "grid100_affine_square_named_v1"
+      }
+    ],
+    "through_tier": 1,
+    "view": "calibration-host-profile-a2-off-native-v1",
+    "worst_case_seconds": 3600
+  },
+  "profile": "configs/forge/calibration/host-profile-a2-off-v1.json",
+  "profile_sha256": "5ab83d98bbbdca3b03fa538333ff5811b1e4553bb89cc2b034d0a26c82cb056a",
+  "qualification_reuse": false,
+  "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+  "recipe_difference": {
+    "latent_damping_max_rate": [
+      0.5,
+      0
+    ]
+  },
+  "registration_id": "host-profile-a2-off-native-v1",
+  "registration_sha256": "29c0f420821f0e38bc1b6fbd216f0cd43cfaa3ae95bd16600b2f518318f9ea9d",
+  "schema_version": 1,
+  "source_origin_commit": "745f459cb4395d92e57f8d4730a7d5406a6a1af5",
+  "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "source_snapshot": "/home/martyn/dev/ParticleGAN/runs/forge/snapshots/5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "status": "prepared_not_enqueued",
+  "training_launched": false,
+  "validated": [
+    "Exact original scientific source/cohort, all task definitions and seed0 unchanged",
+    "Only resolved recipe change is A2 max rate 0.5 to 0, plus required capability removed",
+    "All candidate and task preflights clear",
+    "Disposable registration/plan/freeze/snapshot verification passed",
+    "Durable registration/plan/freeze/request verification passed",
+    "Certified original control import verified without conflicts or fabricated receipts",
+    "Original K3P idea/profile/criteria/control receipt bytes unchanged"
+  ]
+}

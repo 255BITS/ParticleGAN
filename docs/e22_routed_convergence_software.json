@@ -1,0 +1,154 @@
+{
+  "scope": "software preflight only; identical 4-update wiring replay, no learned quality verdict",
+  "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+  "native_import_path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/particlegan/__init__.py",
+  "fixture_raw_sha256": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+  "test_raw_sha256": "8ed66cf19e261b61561e6c80a0d1635ec17111a0c6e0e4273e9333e0cc24be15",
+  "data_digest": "48a7d5a6ef912dbef2eb9e8161301054239e09f897624e0c3a6573e774f79df8",
+  "teacher_reachability": {
+    "ordinary": {
+      "fit": true,
+      "guard": true,
+      "test": true
+    },
+    "particle": {
+      "fit": true,
+      "guard": true,
+      "test": true
+    }
+  },
+  "common_initial_tensor_parity": true,
+  "source_rms": [
+    0.052000001072883606,
+    0.052000001072883606,
+    0.052000001072883606,
+    0.05199999362230301,
+    0.052000001072883606,
+    0.052000001072883606
+  ],
+  "raw_coordinate_scale": [
+    0.20655815303325653,
+    0.14194773137569427,
+    0.191263809800148,
+    0.2002985030412674,
+    0.2582257390022278,
+    0.1988748461008072,
+    0.18372561037540436,
+    0.13857236504554749,
+    0.16627676784992218,
+    0.18487302958965302,
+    0.20268180966377258,
+    0.22392016649246216,
+    0.17031875252723694,
+    0.1408318430185318,
+    0.15154540538787842,
+    0.22948619723320007
+  ],
+  "scale_floor_count": 0,
+  "pools": {
+    "fit": {
+      "contexts": 96,
+      "first2_latent_power_share": 0.57083660364151,
+      "first2_initial_residual_power_share": 0.26094961166381836,
+      "fresh_parity_all_arms": true
+    },
+    "guard": {
+      "contexts": 24,
+      "first2_latent_power_share": 0.5748922824859619,
+      "first2_initial_residual_power_share": 0.40740084648132324,
+      "fresh_parity_all_arms": true
+    },
+    "test": {
+      "contexts": 96,
+      "first2_latent_power_share": 0.5339150428771973,
+      "first2_initial_residual_power_share": 0.399393767118454,
+      "fresh_parity_all_arms": true
+    }
+  },
+  "active_parameter_counts": {
+    "ordinary_native_game": {
+      "generator": 128,
+      "critic": 38529,
+      "encoder": 0,
+      "average_generator": 0,
+      "average_encoder": 0,
+      "critic_average": 0
+    },
+    "particle_native_game": {
+      "generator": 156,
+      "critic": 38529,
+      "encoder": 0,
+      "router": 136,
+      "average_generator": 0,
+      "average_encoder": 0,
+      "average_router": 0,
+      "critic_average": 0
+    },
+    "ordinary_mse_reference": {
+      "generator": 128
+    }
+  },
+  "active_particle_bank": 512,
+  "learned_noise_per_native_arm": 1,
+  "software_update_seconds": {
+    "ordinary_native_game": [
+      0.07169769494794309,
+      0.008034756174311042,
+      0.006572808139026165,
+      0.008262974908575416
+    ],
+    "particle_native_game": [
+      0.02126986184157431,
+      0.019586944952607155,
+      0.01991965319029987,
+      0.021390480920672417
+    ],
+    "ordinary_mse_reference": [
+      0.0021293931640684605,
+      0.0010366318747401237,
+      0.0008785929530858994,
+      0.0008414329495280981
+    ]
+  },
+  "post4_checkpoint_digests": {
+    "ordinary_native_game": "291d4546c36bedd960acf2711b5cc706b3e7892113e988ba200821847a2d6359",
+    "particle_native_game": "392b200083ab07967e998004bfc8ce96d792e9d60daa657efc761b2757bd2921",
+    "ordinary_mse_reference": "f3b260489bfedae32cedd933b7568230a9b93fdb71e795e9a9ed6e9318835a49"
+  },
+  "strict_trace_serialization": {
+    "direct": {
+      "ordinary_native_game": "direct strict JSON compatible",
+      "particle_native_game": "TypeError: Object of type Tensor is not JSON serializable",
+      "ordinary_mse_reference": "direct strict JSON compatible"
+    },
+    "recursive_tensor_and_nonfinite_diagnostic_conversion": true
+  },
+  "finite_training_losses_and_gradient_norms": true,
+  "independent_tests": {
+    "passed": 10,
+    "wall_seconds": 3.33,
+    "gates": [
+      "public named initializer and identical common tensors",
+      "complete-pool joint teacher reachability",
+      "neutral first step followed by live 128-row bank and router gradients",
+      "frozen BF16 bases and contextual owners unchanged",
+      "actual native KA2 token inputs [64,16]",
+      "native routed fallback declared",
+      "private common loss and teacher log2 anchor",
+      "evaluation preserves owned state, module modes, gradients and RNG",
+      "all3 exact own-state checkpoint plus 2-update replay",
+      "data/card/schema/counter/stream tamper rejected before mutation"
+    ]
+  },
+  "runtime_estimate": {
+    "base_train_seconds": {
+      "ordinary_native_game": 86,
+      "particle_native_game": 170,
+      "ordinary_mse_reference": 10
+    },
+    "four_judge_all_checkpoint_evaluator_seconds": 20,
+    "operational_budget_seconds_per_arm": 900,
+    "operational_budget_seconds_total": 2700,
+    "limit": "first4 software update timings exclude later growth/proposal cost; hard driver budgets include logging and evaluation"
+  }
+}

@@ -1,0 +1,250 @@
+--- a/examples/e22_routed_convergence_neutral.py
++++ b/examples/e22_routed_convergence_neutral.py
+@@ -270,7 +270,7 @@
+         retained_particle_gate = (particle_witness["bridge_still_trainable"]
+             and all(value > 0 for value in particle_witness["C_norms"].values())
+             and coverage["live_bank_updates"] > 0 and coverage["live_query_updates"] > 0
+-            and all(abs(value) > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values()))
++            and all(value > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values()))
+         budget()
+         receipt.update(status="complete", wall_seconds=time.monotonic() - start,
+                        paired_game_improvements=improvements, endpoint_gap_reduction=gap_reductions,
+--- a/examples/evaluate_e22_routed_convergence_neutral.py
++++ b/examples/evaluate_e22_routed_convergence_neutral.py
+@@ -1,7 +1,8 @@
+ """Recover only the fixed neutral evaluation, preserving the failed receipt.
+
+ No training runs here. The archived training source must differ from the
+-repaired helper by exactly the fresh carrier used before checkpoint scoring.
++repaired helper by exactly the fresh checkpoint-scoring carrier and signed
++beneficial-particle gate. Original training bindings and artifacts stay intact.
+ """
+
+ import argparse
+@@ -27,6 +28,25 @@
+
+ def observational_source_repair(original, repaired):
+     old, new = ast.parse(original), ast.parse(repaired)
++    # Undo exactly the evaluation-only gate correction for the source proof.
++    # Training was performed under the archived unsigned gate; this recovery
++    # classifies its unchanged endpoints with the stricter signed requirement.
++    unsigned = ast.parse('all(abs(value) > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values())').body[0].value
++    signed = ast.dump(ast.parse('all(value > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values())').body[0].value)
++
++    class RestoreUnsignedGate(ast.NodeTransformer):
++        replacements = 0
++
++        def visit_Call(self, node):
++            if ast.dump(node) == signed:
++                self.replacements += 1
++                return deepcopy(unsigned)
++            return self.generic_visit(node)
++
++    correction = RestoreUnsignedGate()
++    new = correction.visit(new)
++    if correction.replacements != 1:
++        raise ValueError("repair requires exactly one declared signed gate correction")
+     insertion = ast.dump(ast.parse("loop = make_neutral_loop(data, bindings=bindings)").body[0])
+     for index, node in enumerate(ast.walk(new)):
+         for field, value in ast.iter_fields(node):
+@@ -37,9 +57,12 @@
+                         owner = list(ast.walk(candidate))[index]
+                         getattr(owner, field).pop(position)
+                         if ast.dump(candidate) == ast.dump(old):
+-                            return {"sole_change": "fresh neutral loop before fixed checkpoint evaluation",
+-                                    "training_ast_unchanged": True}
+-    raise ValueError("repair changed more than the declared observational carrier")
++                            return {"changes": ["fresh neutral loop before fixed checkpoint evaluation",
++                                                "signed beneficial-particle evaluation gate"],
++                                    "training_ast_unchanged": True,
++                                    "trained_retained_particle_gate": "unsigned_effect_v1",
++                                    "evaluated_retained_particle_gate": "beneficial_signed_v2"}
++    raise ValueError("repair changed more than the declared observational carrier and signed gate")
+
+
+ def main():
+@@ -145,7 +168,7 @@
+     coverage = failed["particle_coverage"]
+     retained = (witness["bridge_still_trainable"] and all(value > 0 for value in witness["C_norms"].values())
+                 and coverage["live_bank_updates"] > 0 and coverage["live_query_updates"] > 0
+-                and all(abs(value) > 1e-6 for value in witness["zero_code_minus_live_test_game"].values()))
++                and all(value > 1e-6 for value in witness["zero_code_minus_live_test_game"].values()))
+     for name, sha in artifact_hashes.items():
+         if common.sha(args.run / name) != sha:
+             raise AssertionError("read-only recovery changed an original training artifact")
+--- a/tests/test_e22_routed_convergence_long.py
++++ b/tests/test_e22_routed_convergence_long.py
+@@ -96,7 +96,7 @@
+             values["zero_code_minus_live"] = _game(proposed, judge, panels, ablate=True) - values["neutral_particle"]
+             improvement = values["particle_native_game"] - values["neutral_particle"]
+             assert improvement > 1e-4, (arm, step, values)
+-            assert abs(values["zero_code_minus_live"]) > 1e-6, (arm, step, values)
++            assert values["zero_code_minus_live"] > 1e-6, (arm, step, values)
+             if step == 6400:
+                 gap = values["particle_native_game"] - values["ordinary_native_game"]
+                 assert gap > 1e-4, (arm, step, values)
+--- /dev/null
++++ b/tests/test_e22_routed_convergence_signed_gate.py
+@@ -0,0 +1,122 @@
++"""Synthetic scoring controls for the beneficial-particle assertion.
++
++These use three-update tensor fixtures and explicitly synthetic endpoint
++labels/scores. They exercise the real regression's ownership, restoration and
++state-purity checks, but supply no learned 6,400-update qualification evidence.
++"""
++from copy import deepcopy
++import importlib.util
++from pathlib import Path
++
++import pytest
++import torch
++
++from examples import e22_routed_convergence as base
++from examples import e22_routed_convergence_neutral as neutral
++from examples import evaluate_e22_routed_convergence_neutral as recovery
++
++
++@pytest.fixture(scope="module")
++def scoring_fixture():
++    threads, rng = torch.get_num_threads(), torch.get_rng_state()
++    torch.set_num_threads(1)
++    try:
++        original = base.make_data()
++        modified = neutral.make_neutral_data(original)
++        states = {}
++        for arm in base.ARMS:
++            loop = base.make_loop(arm, original)
++            for _ in range(3):
++                base.update(loop)
++            states[arm] = base.checkpoint(loop)
++        loop = neutral.make_neutral_loop(modified)
++        for _ in range(3):
++            base.update(loop)
++        states["neutral"] = base.checkpoint(loop)
++        path = Path(__file__).with_name("test_e22_routed_convergence_long.py")
++        spec = importlib.util.spec_from_file_location("routed_long_gate_control", path)
++        regression = importlib.util.module_from_spec(spec)
++        spec.loader.exec_module(regression)
++        yield regression, states
++    finally:
++        torch.set_num_threads(threads)
++        torch.set_rng_state(rng)
++
++
++JUDGES = tuple(f"{arm}@{step}" for arm in ("ordinary_native_game", "particle_native_game")
++               for step in (800, 6400))
++
++
++@pytest.mark.parametrize("harmful_judge", (None, *JUDGES))
++def test_actual_regression_rejects_harmful_code_effect_under_any_required_judge(
++        monkeypatch, scoring_fixture, harmful_judge):
++    regression, states = scoring_fixture
++    current_judge = [None]
++
++    def synthetic_load(path):
++        arm, step = path.parent.name, int(path.stem.split("-")[1])
++        current_judge[0] = f"{arm}@{step}"
++        state = deepcopy(states[arm])
++        # Synthetic labels only: keep fixture and policy counters consistent
++        # so the complete assertion reaches its scoring gate.
++        state["step"] = step
++        if "completed_steps" in state["training"]:
++            state["training"]["completed_steps"] = step
++        return state
++
++    def synthetic_game(loop, judge, panels, *, ablate=False):
++        if loop.law["task"] == neutral.TASK:
++            if ablate:
++                return .79 if current_judge[0] == harmful_judge else .91
++            return .8
++        return {"ordinary_native_game": 1., "particle_native_game": 2.,
++                "ordinary_mse_reference": .9}[loop.arm]
++
++    monkeypatch.setattr(regression, "_load", synthetic_load)
++    monkeypatch.setattr(regression, "_game", synthetic_game)
++    if harmful_judge is None:
++        result = regression._assert_registered_game_regression(Path("parent"), Path("neutral"))
++        assert tuple(result) == JUDGES
++        assert all(value["zero_code_minus_live"] > 0 for value in result.values())
++    else:
++        with pytest.raises(AssertionError) as error:
++            regression._assert_registered_game_regression(Path("parent"), Path("neutral"))
++        arm, step, values = error.value.args[0]
++        assert f"{arm}@{step}" == harmful_judge
++        assert values["zero_code_minus_live"] < 0
++        assert values["particle_native_game"] - values["neutral_particle"] > 1e-4
++
++
++def archived_and_repaired_helpers():
++    repaired = Path(neutral.__file__).read_text()
++    signed = 'all(value > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values())'
++    unsigned = signed.replace("all(value", "all(abs(value)")
++    assert repaired.count(signed) == 1
++    original = repaired.replace(signed, unsigned).replace(
++        '        loop = make_neutral_loop(data, bindings=bindings)\n        with (args.out / "common-judge-curves.jsonl")',
++        '        with (args.out / "common-judge-curves.jsonl")',
++    )
++    return original, repaired
++
++
++def test_recovery_proof_records_both_evaluation_changes_and_old_training_gate():
++    original, repaired = archived_and_repaired_helpers()
++    proof = recovery.observational_source_repair(original, repaired)
++    assert proof["training_ast_unchanged"]
++    assert proof["trained_retained_particle_gate"] == "unsigned_effect_v1"
++    assert proof["evaluated_retained_particle_gate"] == "beneficial_signed_v2"
++    assert len(proof["changes"]) == 2
++
++
++def test_recovery_proof_rejects_an_extra_training_change():
++    original, repaired = archived_and_repaired_helpers()
++    assert "range(1, 6401)" in repaired
++    changed = repaired.replace("range(1, 6401)", "range(1, 6402)")
++    with pytest.raises(ValueError, match="more than"):
++        recovery.observational_source_repair(original, changed)
++
++
++def test_recovery_proof_rejects_a_missing_signed_gate():
++    original, _ = archived_and_repaired_helpers()
++    with pytest.raises(ValueError, match="exactly one"):
++        recovery.observational_source_repair(original, original)
+--- /dev/null
++++ b/docs/e22_routed_convergence_signed_gate.md
+@@ -0,0 +1,37 @@
++# Beneficial particle-use gate follow-up
++
++The original three assertion paths accepted
++`abs(zero_code_minus_live) > 1e-6`. Lower common game loss is better, so this
++accepted particle codes that worsened the game. The runner, recovered scorer
++and tensor-based learned regression now require the signed delta to exceed
++`1e-6` under every mandatory common critic.
++
++The new software control supplies a harmful code effect under each of the four
++judges in turn, while preserving positive initialization improvements and all
++other tensor ownership/restoration assertions. Each must be rejected. A
++positive control must pass. Its three-update fixtures and synthetic scores are
++software tests, with no full-horizon training or qualification credit.
++
++The recovered scorer's source proof now admits exactly two evaluation changes:
++the fresh checkpoint carrier and this signed classification gate. It records
++the archived training gate as `unsigned_effect_v1` and the new evaluated gate
++as `beneficial_signed_v2`. Other source changes still fail preflight. Archived
++training bindings, failed receipts, curves and checkpoints retain their actual
++identities; they are not relabelled as training performed under this new source.
++
++The existing measured endpoint deltas are all positive:
++`0.755647 / 0.584848 / 1.185280 / 0.930370` in the declared judge order. They
++therefore support beneficial particle use under the stronger signed check.
++No unchanged campaign should be retrained only to alter this classification.
++
++```sh
++CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest -q \
++    tests/test_e22_routed_convergence.py \
++    tests/test_e22_routed_convergence_neutral.py \
++    tests/test_e22_routed_convergence_signed_gate.py \
++    tests/test_e22_routed_convergence_long.py
++```
++
++The original opt-in full-training regression remains separate. Its exact current
++revision and required CI checks must be verified before merging; the saved
++diagnostic is not a Supra quality or Forge qualification.

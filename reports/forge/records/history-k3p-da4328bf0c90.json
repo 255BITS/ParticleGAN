@@ -1,0 +1,213 @@
+{
+  "candidate_id": "k3p",
+  "candidate_revision": "632180aac0a3e3076d90f8db0fd01fcf0ceec966a2d76080d9c148afac8e0999",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "k3p-toy-vector_unequal_width",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3p-da4328bf0c90",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 79.03423630795442,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_unequal_width/result.json",
+            "artifact_sha256": "f866fc3320494f9f8570b43d8f15ff15a1652da3181fc09ad32daa7c8c2bb6a8",
+            "id": "k3p-toy-vector_unequal_width",
+            "snapshot": "results/k3p-toy-vector_unequal_width.json.gz",
+            "snapshot_sha256": "054501068ba530522f85518791fb5b3bb20382dd6f03b84d93dc538fb8bb8798"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_unequal_width/result.json",
+        "artifact_sha256": "f866fc3320494f9f8570b43d8f15ff15a1652da3181fc09ad32daa7c8c2bb6a8",
+        "candidate": "k3p",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "k3p-toy-vector_unequal_width",
+        "kind": "toy",
+        "live": {
+          "component_counts": [
+            980,
+            1102,
+            950,
+            1064
+          ],
+          "component_covariance_error": 0.4118782728910446,
+          "component_covariance_errors": [
+            0.5043409466743469,
+            0.5898901224136353,
+            0.2721608579158783,
+            0.281121164560318
+          ],
+          "component_mass": [
+            0.2392578125,
+            0.26904296875,
+            0.23193359375,
+            0.259765625
+          ],
+          "component_min_eigen_ratio": 0.20727907121181488,
+          "covariance_error": 0.05884285643696785,
+          "hq": 0.979736328125,
+          "mass_tv": 0.02880859375,
+          "mean_error": 0.03579946979880333,
+          "min_mass_ratio": 0.927734375,
+          "sample_count": 4096,
+          "sw1_normalized": 0.04066150533968248,
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "target_scale": 2.138371229171753
+        },
+        "raw_status": "PASS",
+        "seconds": 79.03423630795442,
+        "snapshot": "results/k3p-toy-vector_unequal_width.json.gz",
+        "snapshot_sha256": "054501068ba530522f85518791fb5b3bb20382dd6f03b84d93dc538fb8bb8798",
+        "task": "vector_unequal_width",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.9166666666666666,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 72.1681596019771,
+            "confirmed_step": 1100,
+            "first_pass_step": 200,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 20,
+            "passing_suffix": 7,
+            "stable_from_seconds": 58.530821298016235,
+            "stable_from_step": 900
+          },
+          "metrics": [
+            {
+              "margin": 0.1393384946603175,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.04066150533968248
+            },
+            {
+              "margin": 0.12119140625,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.02880859375
+            },
+            {
+              "margin": 0.12973632812500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.979736328125
+            },
+            {
+              "margin": 0.43812172710895536,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.4118782728910446
+            },
+            {
+              "margin": 0.057279071211814886,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.20727907121181488
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "vector_unequal_width"
+    }
+  ]
+}

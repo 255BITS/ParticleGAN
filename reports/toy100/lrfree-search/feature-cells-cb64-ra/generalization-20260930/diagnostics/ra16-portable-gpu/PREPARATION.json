@@ -1,0 +1,15 @@
+{
+  "GPU_operations": 0,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/ra16-portable-gpu/launch.py"
+  ],
+  "guarded_files": 77,
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/ra16-portable-gpu/attempt-1/run.log",
+  "model_calls": 0,
+  "package_sha256": "ba20f8e6353b2aca4725258835a68c1dfaa056a0484b2d683a5bb74a1eca0aa0",
+  "status": "SOURCE_READY_UNLAUNCHED",
+  "training_updates": 0
+}

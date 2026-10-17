@@ -1,0 +1,364 @@
+{
+  "candidate_id": "context:pr155-current:noout-e4",
+  "candidate_revision": "21b670986297192d73a388d47050458825c8235ee39c070ac3f26f2ade50bb6f",
+  "claim_contract": {
+    "clock_free_eligibility": "unverified",
+    "clock_free_eligible": null,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "mixed_historical",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "18 native receipts:13 noisy PASS/5FAIL. Original22-task matrix12PASS/2FAIL/8rawERROR, with all8 errors capability-parity BLOCKED. Ring/stationary supplements pass; no current qualification.",
+  "evidence_scope": "historical",
+  "hypothesis": "E4 package and complete mixed-suite context.",
+  "mechanism_class": "historical_diagnostic_context",
+  "next_action": "Read complete original evidence, failed variants and provenance gaps; keep uncertain schemas as context and obtain compatible evidence before qualification.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "Exact original prior/config retained in raw evidence; context provides no current learned-MoG credit.",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "bundle_manifest": {
+      "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+    },
+    "config": null,
+    "context": {
+      "aggregate_cost_seconds": null,
+      "applicability_refusals": [
+        {
+          "applicability": "BLOCKED",
+          "evidence": {
+            "git_blob": "741f5ff6f4573cc83d94b65ac9be58693e35b5b8",
+            "original_path": "reports/toy100/lrfree-search/noout-e4/suite-receipts/ae_gan_hold-result.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/ae_gan_hold-result.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "e580a66d8e6ce1f4b7be4a3dabe25e6d2efc68d067230145e82b2f8195fdbd5c",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-receipts/ae_gan_hold-result.json"
+          },
+          "raw_status": "ERROR",
+          "reason": "RuntimeError('engine parity REFUSED: f69349eeda9679c6-133c0bfe61a9-9a4ac201e3ef-762e5ec7b0bc.json [\\'EngineRefusal(\"GANTrainer defines hooks the engine does not re-express: [\\\\\\'_stray_gate\\\\\\', \\\\\\'_table_tester\\\\\\']\")\\']')",
+          "task": "ae_gan_hold"
+        },
+        {
+          "applicability": "BLOCKED",
+          "evidence": {
+            "git_blob": "64be25b2e2390075f659ce34f7a541e888cd2d7c",
+            "original_path": "reports/toy100/lrfree-search/noout-e4/suite-receipts/cover_leftover-result.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/cover_leftover-result.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "495426e193ae61be1dbfa3f3b5eaebeed3b852d2fe054326a814d3d525053fb7",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-receipts/cover_leftover-result.json"
+          },
+          "raw_status": "ERROR",
+          "reason": "RuntimeError('engine parity REFUSED: f69349eeda9679c6-133c0bfe61a9-9a4ac201e3ef-762e5ec7b0bc.json [\\'EngineRefusal(\"GANTrainer defines hooks the engine does not re-express: [\\\\\\'_stray_gate\\\\\\', \\\\\\'_table_tester\\\\\\']\")\\']')",
+          "task": "cover_leftover"
+        },
+        {
+          "applicability": "BLOCKED",
+          "evidence": {
+            "git_blob": "eb6cb6d8dfdb45410fff11f612dd4f8e851e57dc",
+            "original_path": "reports/toy100/lrfree-search/noout-e4/suite-receipts/mid_scale_identity-result.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/mid_scale_identity-result.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "ed141750b09da727bd4c1699611f959ee50743e7b9e1ed808e2fe31f7dd73a22",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-receipts/mid_scale_identity-result.json"
+          },
+          "raw_status": "ERROR",
+          "reason": "RuntimeError('engine parity REFUSED: f69349eeda9679c6-133c0bfe61a9-9a4ac201e3ef-762e5ec7b0bc.json [\\'EngineRefusal(\"GANTrainer defines hooks the engine does not re-express: [\\\\\\'_stray_gate\\\\\\', \\\\\\'_table_tester\\\\\\']\")\\']')",
+          "task": "mid_scale_identity"
+        },
+        {
+          "applicability": "BLOCKED",
+          "evidence": {
+            "git_blob": "5870e7e1b331c2558c91c2db75ce254dc08aa1c9",
+            "original_path": "reports/toy100/lrfree-search/noout-e4/suite-receipts/residual_student-result.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/residual_student-result.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "50c1cbb5cdaf76eb72d78a858b6e4d2e63b3d11d7c8592ef481bf5fffd7ed076",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-receipts/residual_student-result.json"
+          },
+          "raw_status": "ERROR",
+          "reason": "RuntimeError('engine parity REFUSED: f69349eeda9679c6-133c0bfe61a9-9a4ac201e3ef-762e5ec7b0bc.json [\\'EngineRefusal(\"GANTrainer defines hooks the engine does not re-express: [\\\\\\'_stray_gate\\\\\\', \\\\\\'_table_tester\\\\\\']\")\\']')",
+          "task": "residual_student"
+        },
+        {
+          "applicability": "BLOCKED",
+          "evidence": {
+            "git_blob": "9abfea867bf5c56b2c8171c022c2b759c8c4a931",
+            "original_path": "reports/toy100/lrfree-search/noout-e4/suite-receipts/trajectory-result.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/trajectory-result.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "3e584c4763799ab1a46120b60ad1ff9f3692503b1f8d6e9f9d7c29aba33d3d9e",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-receipts/trajectory-result.json"
+          },
+          "raw_status": "ERROR",
+          "reason": "RuntimeError('engine parity REFUSED: f69349eeda9679c6-133c0bfe61a9-9a4ac201e3ef-762e5ec7b0bc.json [\\'EngineRefusal(\"GANTrainer defines hooks the engine does not re-express: [\\\\\\'_stray_gate\\\\\\', \\\\\\'_table_tester\\\\\\']\")\\']')",
+          "task": "trajectory"
+        },
+        {
+          "applicability": "BLOCKED",
+          "evidence": {
+            "git_blob": "195372cd0ed44e3b48d1510758f45f326ff2d591",
+            "original_path": "reports/toy100/lrfree-search/noout-e4/suite-receipts/two_pole-result.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/two_pole-result.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "f686e6c6fbfc0f2037313771b95e4d28a453c8b06890707de16f97c5fdf26356",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-receipts/two_pole-result.json"
+          },
+          "raw_status": "ERROR",
+          "reason": "RuntimeError('engine parity REFUSED: f69349eeda9679c6-133c0bfe61a9-9a4ac201e3ef-762e5ec7b0bc.json [\\'EngineRefusal(\"GANTrainer defines hooks the engine does not re-express: [\\\\\\'_stray_gate\\\\\\', \\\\\\'_table_tester\\\\\\']\")\\']')",
+          "task": "two_pole"
+        },
+        {
+          "applicability": "BLOCKED",
+          "evidence": {
+            "git_blob": "77a4fcff62c08c3fb241f4011e7a08960a66ebe9",
+            "original_path": "reports/toy100/lrfree-search/noout-e4/suite-receipts/unipolar-result.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/unipolar-result.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "e3d16d6bc48bbf322c796360b90d7f48ce1bbddf204204241d4ac5e80afb392a",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-receipts/unipolar-result.json"
+          },
+          "raw_status": "ERROR",
+          "reason": "RuntimeError('engine parity REFUSED: f69349eeda9679c6-133c0bfe61a9-9a4ac201e3ef-762e5ec7b0bc.json [\\'EngineRefusal(\"GANTrainer defines hooks the engine does not re-express: [\\\\\\'_stray_gate\\\\\\', \\\\\\'_table_tester\\\\\\']\")\\']')",
+          "task": "unipolar"
+        },
+        {
+          "applicability": "BLOCKED",
+          "evidence": {
+            "git_blob": "6ff79779dbf23164c2adcb3ebbd3bbfe14535984",
+            "original_path": "reports/toy100/lrfree-search/noout-e4/suite-receipts/unused_token_hold-result.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/unused_token_hold-result.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "f3ae4e5d6a6373110de52e2f669ad232d0125a6db46f4506356ada6e337504a8",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-receipts/unused_token_hold-result.json"
+          },
+          "raw_status": "ERROR",
+          "reason": "RuntimeError('engine parity REFUSED: f69349eeda9679c6-133c0bfe61a9-9a4ac201e3ef-762e5ec7b0bc.json [\\'EngineRefusal(\"GANTrainer defines hooks the engine does not re-express: [\\\\\\'_stray_gate\\\\\\', \\\\\\'_table_tester\\\\\\']\")\\']')",
+          "task": "unused_token_hold"
+        }
+      ],
+      "bundle_manifest": {
+        "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+        "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+        "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+      },
+      "cost_note": "No aggregation of overlapping receipts, ledgers, retries or diagnostics.",
+      "family": "noout-e4",
+      "mixed_suite_scope": "21 non-native files include ring/stationary supplements; standard22 combines19 non-native with3 E4 native receipts. No extra normalized rows/costs.",
+      "narrative_sources": [
+        {
+          "git_blob": "c702be59207fd40bdd30cbb0221d177b7f03c144",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/HANDOFF.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/HANDOFF.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "aec668e67ede31f751855932b7cd9562ccf0c290b1e32553e9f28a877360f43c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/HANDOFF.md"
+        },
+        {
+          "git_blob": "caf9a26b1c3971c5964b5561be09fc8cd7906ae8",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/README.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/README.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "df78b6fa58b06da77a32b1b4be18a151f8912145d0a9039ff4d44808020e2e65",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/README.md"
+        },
+        {
+          "git_blob": "f9fdd42d7f3ec72bab4344331dd45ac55b3db98c",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/eb-preflight/RESULTS.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/eb-preflight/RESULTS.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "40a14ac1da9f007ed74c5d60ce39ed86304cbddf0c1441093c49b768b0f57603",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/eb-preflight/RESULTS.md"
+        },
+        {
+          "git_blob": "a587a264f93eacfb18b4ed6324cb20d7c5fc057b",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/eb-preflight/SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/eb-preflight/SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "8134345ef2cb4e675696b8213f5b322f56ca6835b09e59f473bd52302cac4382",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/eb-preflight/SPEC.md"
+        },
+        {
+          "git_blob": "2470958ccc664c78f96a5e8f7b7341d273794f5e",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/geometry-preflight/RESULTS.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/geometry-preflight/RESULTS.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "b595611ef01479947be5d9b3dc6625e8fa9c39278f7a08817eff6907c60848df",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/geometry-preflight/RESULTS.md"
+        },
+        {
+          "git_blob": "200cd818a6aa93f141f49f0c1a644333ca17b02a",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/geometry-preflight/SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/geometry-preflight/SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "eb1b11ea41f1c13782eedaac5192c90c8b9cb0ec6f5bc659956aad06ed03992f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/geometry-preflight/SPEC.md"
+        },
+        {
+          "git_blob": "f9237c72e5683159c726a1bcd7d7ca82e49c797e",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/location-preflight/RESULTS.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/location-preflight/RESULTS.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "7260eb6aa8219ae365c866c1f3b052dd083af8d78dd55b4e50173d093a3a7b4e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/location-preflight/RESULTS.md"
+        },
+        {
+          "git_blob": "72e5b9fa0e0f5baf20e49b5ae67723c3bcfead72",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/location-preflight/SPEC.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/location-preflight/SPEC.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "cf2533d05979620895a0b62e2e264346f684a37883e3571881a05610b0a5e0eb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/location-preflight/SPEC.md"
+        },
+        {
+          "git_blob": "54b7f31f461a06a06a77abc1f902082f0c31e9d3",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/oracle-feasibility.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/oracle-feasibility.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "e1a6f9fbf67f5f8cba3cd14e40a9b2cadb2fda9b14a68b5b6ab56300401f2873",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/oracle-feasibility.md"
+        },
+        {
+          "git_blob": "ad2bc93b55d731131f2a3f3c51c01042c6fa7237",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/portability.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/portability.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "00e1b655de692b1918c3e095b4ff16e4ea4a34623c7868a25a5e857c0851e532",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/portability.md"
+        },
+        {
+          "git_blob": "e266d0bc3c3cd91534290c2f9101c581b69f9352",
+          "original_path": "reports/toy100/lrfree-search/noout-e4/suite-leaderboard.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-leaderboard.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "58747481e27414d0321b6780f1ad94f6c9dac2995984d9f6cd174b4e2791bd97",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/suite-leaderboard.md"
+        }
+      ],
+      "normalization_scope": "Family context only, empty task_results; native-arm cards are the only normalized trials.",
+      "original_22_task_counts": {
+        "FAIL": 2,
+        "PASS": 12,
+        "capability_BLOCKED": 8,
+        "raw_ERROR": 8
+      },
+      "raw_context_paths": [
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/eb-preflight/results.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/forecast-E4-S4.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/geometry-preflight/results.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/location-preflight/results.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-grid100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-grid100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-grid100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-rotated100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-rotated100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-rotated100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-staggered100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-staggered100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4-staggered100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-grid100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-grid100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-grid100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-rotated100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-rotated100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-rotated100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-staggered100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-staggered100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E414k-staggered100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-grid100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-grid100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-grid100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-rotated100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-rotated100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-rotated100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-staggered100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-staggered100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr075-staggered100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-grid100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-grid100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-grid100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-rotated100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-rotated100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-rotated100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-staggered100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-staggered100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4lr133-staggered100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-grid100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-grid100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-grid100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-rotated100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-rotated100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-rotated100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-staggered100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-staggered100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh-staggered100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-grid100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-rotated100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-rotated100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-rotated100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-staggered100/job-header.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-staggered100/native-noisy-summary.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/native-receipts/E4nh14k-staggered100/native-noisy-verdict.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/oracle-feasibility.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/source/overrides.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/ae_gan_hold-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/candidate.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/cover_leftover-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/img_bars4-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/img_blobs4-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/img_intensity2-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/img_stripes2-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/mid_scale_identity-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/mode_hold-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/pool-results.jsonl",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/residual_student-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/ring_shift-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/stationary-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/trajectory-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/two_pole-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/unipolar-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/unused_token_hold-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/vector_anisotropic-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/vector_overlap-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/vector_spiral-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/vector_two_broad-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/vector_unequal_mass-result.json",
+        "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-receipts/vector_unequal_width-result.json"
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "18 native receipts:13 noisy PASS/5FAIL. Original22-task matrix12PASS/2FAIL/8rawERROR, with all8 errors capability-parity BLOCKED. Ring/stationary supplements pass; no current qualification."
+    },
+    "importer_version": "forge-supplemental-pr155-current-archive-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "archive-pr155-current-context-noout-e4-2d33dd7e870c",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "caf9a26b1c3971c5964b5561be09fc8cd7906ae8",
+    "original_path": "reports/toy100/lrfree-search/noout-e4/README.md",
+    "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/README.md",
+    "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "sha256": "df78b6fa58b06da77a32b1b4be18a151f8912145d0a9039ff4d44808020e2e65",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/noout-e4/README.md"
+  },
+  "task_results": []
+}

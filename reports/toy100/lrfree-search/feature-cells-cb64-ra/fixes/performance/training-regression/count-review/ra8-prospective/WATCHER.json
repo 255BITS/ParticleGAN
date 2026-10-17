@@ -1,0 +1,19 @@
+{
+  "pid": 780362,
+  "startticks": 165641225,
+  "started_utc": "2026-09-30T07:49:52.104066+00:00",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/watcher.log",
+  "output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/accepted-attempt1",
+  "cpu_only": true,
+  "cuda_visible_devices": "",
+  "checker_sha256": "2dbc740f3a81651173dd4b95a5601456953e542463893e15a313bbe36769b548",
+  "checker_freeze_sha256": "b748bedff286cddfdbbc5d2eda50173916c3f966665e971e5d7f87d3ffbdc5f0",
+  "source_ready_sha256": "f2f117d650dbe8eca58c0313d07b661a25ad953bd6b3b30c99507510ca9e5949",
+  "lane_freeze_sha256": "1292ef86f6b16d8928923fda267fb9f1efc6d8ac746a1f091a01397e032a3cf3",
+  "initial_steps": [
+    0,
+    100,
+    250
+  ],
+  "initial_status": "VALID"
+}

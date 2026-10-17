@@ -1,0 +1,28 @@
+{
+  "gif_sha256": "94e92257c02b46dff0b0d7d87ccfb40692894d409ee806d4a55215c5e93a4748",
+  "kind": "actual_training_saved_image_outputs_gif",
+  "observation_count": 24,
+  "observations_sha256": "f1064fe9cdb158395ee6f261562a38c169604ffb5f208c40c4282d0e5e684ac3",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3d61c0a1ff00117703c6705d15e410f256a646269b5da69ca9db13c5b242ef5c",
+  "sampling_draws_added": 0,
+  "saved_sample_sets_recomputed": 24,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-dualnorm-convolution/runs/forge/bcap-convolution-images-v1/2924ddfceed4462a957ff9295d4689ed/observed-images.pt": "9f28fef1ff465b6e5e613f4daf5500d380a3db0586899494d86065c794c34ea2"
+  },
+  "task_id": "img_stripes2"
+}

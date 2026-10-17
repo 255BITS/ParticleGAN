@@ -1,0 +1,99 @@
+{
+  "calibration_status": "provisional",
+  "candidate_revision": "7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1",
+  "confirmation_campaign": {
+    "attempt_count": 1,
+    "attempt_ids": [
+      "8f6e156ef20f47ae939597d0fdcfde65"
+    ],
+    "id": "r1r2-modern-toy-confirmation-v1",
+    "new_paid_seconds": 6.636296234966721,
+    "request_id": "8b14a136693890e59481ab01",
+    "reserved_seconds": 0.0,
+    "reuse": "three exact smoke receipts",
+    "updates": 400
+  },
+  "default_adoption": false,
+  "input_digest": "e2894faec24418a3ebca30a045588a9e95379c2466e31b83b613637a4b9ebf50",
+  "observed_confirmation": {
+    "compatibility_key": "5ecf34948285b7ee774de601930434cb07280543b0559b07772211cce90223aa",
+    "gate": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metric_checks": {
+        "identity_mse": {
+          "margin": -0.21911647498607636,
+          "metric": "identity_mse",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.02,
+          "value": 0.23911647498607635
+        }
+      },
+      "passed": false,
+      "shortfall": 2.0,
+      "status": "FAIL"
+    },
+    "metrics": {
+      "identity_mse": 0.23911647498607635
+    },
+    "projection": "reports/forge/technique-receipts/8f6e156ef20f47ae939597d0fdcfde65.json",
+    "status": "FAIL",
+    "task": "trajectory"
+  },
+  "original_files": {
+    "evidence": {
+      "path": "reports/forge/attempts/8f6e156ef20f47ae939597d0fdcfde65/evidence.json",
+      "sha256": "8d6dd727c9e0f8bcc2013cf951c357e3ca6b4f160719367689fc2c0cecedc068"
+    },
+    "request": {
+      "path": "reports/forge/attempts/8f6e156ef20f47ae939597d0fdcfde65/request.json",
+      "sha256": "5092ad79e012cb80ca4362b565d5a1f4adc603c6542f27ac75bd4a73ea090597"
+    },
+    "result": {
+      "path": "reports/forge/attempts/8f6e156ef20f47ae939597d0fdcfde65/result.json",
+      "sha256": "6d308a51fe83f14460e09c16b3e34b59bc5e0abc6da57f32e29465e5f4b3d3f4"
+    }
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 1,
+  "robustness_confirmation": "not_performed",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "selected_candidate_id": "r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd",
+  "source_digest": "f23a47fab9058c4e16590c5c8ebf6a8bbed9f1d6b5406d4107db395096658f54",
+  "source_origin_commit": "cd0ba9feba7aae79723f8581fe29eb4bd3c9050b",
+  "stopping": "ordinary failed quality prerequisite; 18 quality and two endurance requirements unmeasured",
+  "study_id": "r1r2-modern-toy-v1",
+  "total_new_paid_seconds": 44.45582266105339,
+  "tuning_campaign": {
+    "attempt_count": 6,
+    "id": "r1r2-modern-toy-search-v1",
+    "new_paid_seconds": 37.81952642608667,
+    "reserved_seconds": 0.0,
+    "updates": 770
+  }
+}

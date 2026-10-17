@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "record_id": "five-word-tier-split-v1-readout",
+  "record_type": "family_context",
+  "goal": "discriminator_stability",
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "d0ebccd0900ed102d1fa7ce028e862f53bf5e89b0e30d719950cfd6f43a4b990",
+  "trainer_family": "bcap-dualnorm",
+  "evidence_scope": "task_only_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "lifecycle": "concluded",
+  "hypothesis": "Separate acquisition of the full joint five-word goal from retention under continuing learning, retaining all numerical thresholds and original evidence.",
+  "mechanism_class": "task_policy_and_own_checkpoint_continuation",
+  "changed_factors": [
+    "New Tier1 confirmed smoke and Tier2 exact earliest-state4,000-update hold; original sustained task and receipts unchanged.",
+    "Preserve the whole20,001-update acquisition budget,24 paired checks and every RNG/optimizer state; no trainer mechanism change.",
+    "Allow public policy restoration beyond the schedule horizon while the caller enforces its actual execution cap.",
+    "Migrate inherited word numerical fixtures to explicit CUDA devices with no CPU fallback."
+  ],
+  "conclusion": "Selected BCAP DualNorm full CUDA smoke PASS:13/24 independently confirmed checks, earliest update1,667. Exact own-state hold FAIL:20/25 checks; failures at3,001/5,001/5,167/5,334/5,501; both endpoints PASS. At3,001 generation passes while paired inverse fails. Exactly24,001 research updates;930.430 loop seconds,947.754 total wall seconds,1,200 reserved.100 saved metric sets and complete checkpoints verified;372 software checks pass, including9 CUDA numerical/provenance checks. New ordinary contracts remain UNKNOWN; scientific rows and historical task bytes unchanged. One automatic cuSOLVER fallback warning; no driver change or causal claim.",
+  "next_action": "Adopt acquisition/hold placement, retain the holding failure, and use the separate saved-state diagnosis before declaring another bounded mechanism experiment. No automatic research repeat or ordinary qualification credit.",
+  "source": {
+    "path": "reports/forge/five-word-tier-split/readout.json",
+    "sha256": "5e9796b9c347407b4ceb34925feca1f1d15fffe7d6691917c45dc8f125878e87"
+  },
+  "provenance": {
+    "report": "reports/forge/five-word-tier-split/README.md",
+    "protocol_sha256": "4ff760dc8627e9cc947fc8e01f84d2003c5dc3d0509f0e7a9a20c7545cdc3f7d",
+    "archive_sha256": "e2944bc031f96e9bbdd09fe8c8be24dff95a9d92fd8dd07c45a5ad9b220e0d0b",
+    "training_updates": 24001,
+    "executed_source_commit": "0270a501b7d90f4d6c34b4c3e9ef4166f877b301",
+    "scientific_retry": false,
+    "actual_training_GIFs": 2
+  },
+  "task_results": []
+}

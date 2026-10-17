@@ -1,0 +1,66 @@
+{
+  "candidate_id": "context:report/toy100/gap-fill-20260925",
+  "candidate_revision": "74ce5d3a3a3e1142c760ba1d954f56cbb3f5b62f09648c0fe8a0756a6efd3c03",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Qualification gap fill \u2014 September 25, 2026",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/gap-fill-20260925",
+      "narrative_sources": [
+        {
+          "git_blob": "5bcc0cb9e37410f3303b0623e1c7cf2519c00270",
+          "path": "reports/toy100/gap-fill-20260925/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "20e709bbde44805088e4d81c8df20a805eb99015dc6f650fe0749ecbd5da0e13",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/gap-fill-20260925/qualification-summary.json",
+        "reports/toy100/gap-fill-20260925/results-summary.json",
+        "reports/toy100/gap-fill-20260925/rg5-recovery-pair.json"
+      ],
+      "summary_excerpt": "# Qualification gap fill \u2014 September 25, 2026\n\nStatus: **COMPLETE \u2014 53/53 jobs, zero execution errors**, 14:43\u201314:52 UTC.\nThe initial 51 jobs and two additional P1 ring checks ran across two RTX A6000\nGPUs, up to six jobs per GPU with GPU/system-memory headroom. Every job has its\nown output directory and log. No training jobs from this batch remain active.\n\n**K3P leads: 22/22 toys, standard hold and 300-update extension PASS; recovery\nstill FAIL.** K3G and P1 also score 22/22, but both fail 237/300 extension checks\nand their recovery gates. RG5+b-cap scores 18/22 and fails hold/recovery.\n\n![K3P converging on grid100, rotated100 and staggered100](k3p-100gaussians-convergence.gif)\n\nActual live-generator snapshots from the declared seed-1234 runs: axis-aligned\ngrid, 25\u00b0 rotation, and staggered rows. All 34 saved checkpoints from updates\n0\u20137,000 are shown, with synchronized step labels and fixed axes. Each panel\nshows 4,096 generated and target samples; displayed metrics use the full 20,000\nevaluation samples. All three runs pass the full coverage and accuracy gates.\nPlayback is not real time. No retraining, sample interpolation, or EMA substitution.\n[`Rendering source`](render_k3p_convergence.py) \u00b7\n[`Frame/source provenance`](k3p-convergence-provenance.json) \u00b7\n[`Final frame`](k3p-100gaussians-final.png).\n\n```sh\ntail -f /ml2/hypergan/gan-attempts/gap-fill-20260925/progress.jsonl\n``"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-gap-fill-20260925-2f29e447871c",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "5bcc0cb9e37410f3303b0623e1c7cf2519c00270",
+    "path": "reports/toy100/gap-fill-20260925/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "20e709bbde44805088e4d81c8df20a805eb99015dc6f650fe0749ecbd5da0e13",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/README.md"
+  },
+  "task_results": []
+}

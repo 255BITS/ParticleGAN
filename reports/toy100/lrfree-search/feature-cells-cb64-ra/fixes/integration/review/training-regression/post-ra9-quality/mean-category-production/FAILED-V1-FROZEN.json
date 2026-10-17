@@ -1,0 +1,24 @@
+{
+  "status": "FAILED_FIXTURE_ATTEMPT_CLOSED",
+  "post_exit": true,
+  "source_preseal_unchanged": true,
+  "production_source_changes": false,
+  "raw_G_D_binding_failed": true,
+  "injected_tester_hook_semantic_key_invalid": true,
+  "qualified_checkpoint": false,
+  "local_evidence_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/SOURCE-FROZEN.json": "38d410d92e8827c53232d03a6ba0cadeb38facd008d46f69806bf0ee221ab493",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/run_mechanics.py": "8485739856f9fd71afaabdbcca39ae12b06cbf499a0e60e8d0554d4add3f51fb",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/cpu-contract-attempt1.log": "030bdb08ec815f763568a2af3e5187494cb3f03ef8fc8b7ff0fc5668a3e9b8ae",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/cpu-contract-attempt1/result.json": "c2665c59620732aa385ac34194d7eecfc70da4d8ea2e333bf4cdbadcb0bc83d0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/FAILED-V1-REPORT.md": "ac6773424958a830e28636a606330adf61eb99091fd184f34c8f8be8661dccfc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/cpu-contract-attempt1/grid/after.pt": "3b0eb1abdb266fae61c2064e97700edd0e7d4396a560c7f235ee8239b36231b1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/cpu-contract-attempt1/grid/before.pt": "a4d618dddc07a00f6c28b3623b0fef8e3f6adb7a245042b79fae6e32b1a99dd0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/metadata-diagnosis/PREPARATION.json": "892c7e761eecb3c96b6fd7cf87a034890271c6722d1fd408294181b2583c31bc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/metadata-diagnosis/PROTOCOL.md": "247786f9a496b1315847ab3430c6ca80e78fb07dfc1146d74a811e2865f9f621",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/metadata-diagnosis/attempt1.log": "8f89e2852eaec462d9e4980a5aab13b1c96c112eacdc53c78d2e8f0373a0995c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/metadata-diagnosis/failed-unaliased-read.txt": "0d942bdfa7437d78a984accdd2c9c3b1f12eea7067a2f88f4c327d2fff2f5504",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/metadata-diagnosis/read_saved.py": "8b92271780c49bcc597c7cfb6e5dea52eda1ac6423883f83854e6c124623a3b8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/metadata-diagnosis/result.json": "4525f4bb7144630952d1e7b46736025637090625793d03a6ed5f1bea69550045"
+  }
+}

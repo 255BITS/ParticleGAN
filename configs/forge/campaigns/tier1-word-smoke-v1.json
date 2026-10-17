@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "tier1-word-smoke-v1",
+  "budget_seconds": 2220,
+  "candidate_budget_seconds": 2220,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Revision8 required Tier1 reservations: Gaussian120s, three behavior tasks300s each, ring300s, confirmed word smoke900s. No historical regrading. Through Tier2 required reservation42,720s per candidate."
+}

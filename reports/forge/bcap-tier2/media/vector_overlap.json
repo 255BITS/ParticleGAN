@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "f7bd872dace05ae1a9d42f2e41b1b17093fd8cf28b78cad205a7049fb68e231f",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "90c84fa6be0b985abaee7f9ae452ec1cc4c7e6e34bc0d9eb97288af9416e6093",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-tier2-smoothing-v1/4798d7ea1ffb41529d8ce695753b83c4/observed-samples.pt": "20dd75e63e5c161d7eefb9e75720a9e1dcda30eb2da584f8d9050128ff98ce58"
+  },
+  "task_id": "vector_overlap"
+}

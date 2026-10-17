@@ -1,0 +1,466 @@
+{
+  "all_four": {
+    "full_original_cases": 42,
+    "original_gate_counts": {
+      "FAIL": 15,
+      "PASS": 27,
+      "UNKNOWN": 214
+    },
+    "original_gifs": 42,
+    "paid_wall_seconds": 1128.1612365315668,
+    "required_cells": 256,
+    "reviewed_gifs": 10,
+    "study_gate_counts": {
+      "FAIL": 21,
+      "INCOMPLETE": 11,
+      "PASS": 10,
+      "UNKNOWN": 214
+    },
+    "total_published_gifs": 52,
+    "unknown_cells": 214,
+    "whole_config_status_counts": {
+      "FAIL": 21,
+      "INCOMPLETE": 11
+    },
+    "whole_configs": 32
+  },
+  "board_path": "/ml2/hypergan/ParticleGAN-forge-family-winner-publication/reports/forge/policy-family-inventory.json",
+  "board_sha256": "b36cf5d76adc736adc09184afef38d81b708313864e0e94c38a47a75ace004dc",
+  "checks": {
+    "all_declared_source_spec_family_runtime_bindings": true,
+    "all_relative_links_resolve": 69,
+    "committed_source_blobs_checked": 586,
+    "every_reached_run_linked": true,
+    "full_config_denominators": true,
+    "full_receipts_checked": 42,
+    "no_cross_config_or_cohort_pooling": true,
+    "no_default_or_speed_winner": true,
+    "original_and_study_verdicts_separate": true,
+    "published_gifs_hash_bytes_decoded_frames_checked": 52,
+    "raw_files_verified_before_and_after": 168,
+    "reviewed_exact_retained_arrays_metadata_checked": 10,
+    "unmeasured_cells_unqualified": true
+  },
+  "cohorts": [
+    {
+      "all_source_receipt_artifact_media_bindings": "PASS",
+      "combined_sha256": "62079914653b9c27efec277c2ce4a57c50b42c856bb25f827a46af16b1f3cd3f",
+      "full_original_cases": 10,
+      "id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "original_gate_counts": {
+        "FAIL": 6,
+        "PASS": 4,
+        "UNKNOWN": 54
+      },
+      "original_gifs": 10,
+      "paid_wall_seconds": 268.79123173863627,
+      "required_cells": 64,
+      "reviewed_gifs": 2,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "spec_sha256": "ade8ffc150b0ddd68cc9be4b1a71b7cf754185cb5aa76287e6ab8ec32938d438",
+      "study_gate_counts": {
+        "FAIL": 6,
+        "INCOMPLETE": 2,
+        "PASS": 2,
+        "UNKNOWN": 54
+      },
+      "unknown_cells": 54,
+      "whole_config_status_counts": {
+        "FAIL": 6,
+        "INCOMPLETE": 2
+      },
+      "whole_configs": 8
+    },
+    {
+      "all_source_receipt_artifact_media_bindings": "PASS",
+      "combined_sha256": "52b9b85f9c6e4139c6a51ad7dfa5641c241fa822ea2bd70877543616ebf8351c",
+      "full_original_cases": 8,
+      "id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "original_gate_counts": {
+        "FAIL": 1,
+        "PASS": 7,
+        "UNKNOWN": 56
+      },
+      "original_gifs": 8,
+      "paid_wall_seconds": 189.03142790216953,
+      "required_cells": 64,
+      "reviewed_gifs": 0,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "spec_sha256": "279bca3b3c3555ae11fd4fce9cedd2899efcf671a7d12dc278f86d51bca8f790",
+      "study_gate_counts": {
+        "FAIL": 5,
+        "INCOMPLETE": 3,
+        "UNKNOWN": 56
+      },
+      "unknown_cells": 56,
+      "whole_config_status_counts": {
+        "FAIL": 5,
+        "INCOMPLETE": 3
+      },
+      "whole_configs": 8
+    },
+    {
+      "all_source_receipt_artifact_media_bindings": "PASS",
+      "combined_sha256": "7b55b4aa8b60bffb0d213f5b5863711691ea27875b96ef546e0b87b295cdd916",
+      "full_original_cases": 12,
+      "id": "policy-family-defaults-round3-v1--531021742ad2",
+      "original_gate_counts": {
+        "FAIL": 4,
+        "PASS": 8,
+        "UNKNOWN": 52
+      },
+      "original_gifs": 12,
+      "paid_wall_seconds": 338.82339419214986,
+      "required_cells": 64,
+      "reviewed_gifs": 4,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "spec_sha256": "c6cdef1d0a949160b5a6267818786abef3ef6b207e528caa699f97f2059a4083",
+      "study_gate_counts": {
+        "FAIL": 4,
+        "INCOMPLETE": 4,
+        "PASS": 4,
+        "UNKNOWN": 52
+      },
+      "unknown_cells": 52,
+      "whole_config_status_counts": {
+        "FAIL": 4,
+        "INCOMPLETE": 4
+      },
+      "whole_configs": 8
+    },
+    {
+      "all_source_receipt_artifact_media_bindings": "PASS",
+      "combined_sha256": "0f36a1dd85bde72220f3c89151cc9c73515d6c6b4d0a077eacf3fc4f5b10be62",
+      "full_original_cases": 12,
+      "id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "original_gate_counts": {
+        "FAIL": 4,
+        "PASS": 8,
+        "UNKNOWN": 52
+      },
+      "original_gifs": 12,
+      "paid_wall_seconds": 331.51518269861117,
+      "required_cells": 64,
+      "reviewed_gifs": 4,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "spec_sha256": "8bf93b8b603c5a21bad0fefb18ef5497e3c4522e5412287da6bbfeb8f8971b6b",
+      "study_gate_counts": {
+        "FAIL": 6,
+        "INCOMPLETE": 2,
+        "PASS": 4,
+        "UNKNOWN": 52
+      },
+      "unknown_cells": 52,
+      "whole_config_status_counts": {
+        "FAIL": 6,
+        "INCOMPLETE": 2
+      },
+      "whole_configs": 8
+    }
+  ],
+  "limits": "Read-only proof checks source/files, exact recorded metrics and pass/fail streams. No model/scorer rerun; upstream frozen metric certification is retained. Visual inspection is recorded separately.",
+  "markdown_sha256": "08c9682c7233d883ef1ca8bc785c8c723245df365bb9fbd844fc05792030546c",
+  "media_reviews": [
+    {
+      "original_gate": "FAIL",
+      "retained_numeric_observation_sha256": "21787d19d522bfb07c1df6bcd77980ca9043fc7f809f97c440a049e17dcd9a2a",
+      "sha256": "6326edd260dbeff2414d61bc785f228529176c5341903d36ff9d568274913ec6",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/atlas/ca0901b6679b--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "FAIL"
+    },
+    {
+      "original_gate": "FAIL",
+      "retained_numeric_observation_sha256": "cde340b79a7f3b52f522ac02336aadfd1adf7a7036bc493805ee0639e144642d",
+      "sha256": "6162f4745543637e4cc2242ea441e12435d5764a4c4c5a07bbbb9b5462033392",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/e22/0acab20ca12f--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "FAIL"
+    },
+    {
+      "original_gate": "FAIL",
+      "retained_numeric_observation_sha256": "12c02510f68cb0fa6346dc6919a79e6614476ec47c3159ef6f1c5289d9d9a44b",
+      "sha256": "c5e8d16f46e234dd010703d67b59b2dfe555da5b29ba63b342db56267673c40b",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "FAIL"
+    },
+    {
+      "original_gate": "FAIL",
+      "retained_numeric_observation_sha256": "54b47e811450ed3a66959f734b7375e9922556f321f7000d032f413b67e20f58",
+      "sha256": "1f10a0630a76005d381e24d5fc079bc0c90e0a5ca8d0602f930d2cc679555343",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/cf74ea1def0d--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "FAIL"
+    },
+    {
+      "original_gate": "FAIL",
+      "retained_numeric_observation_sha256": "bcf3d085fd2d0e8240d5a616069959927cfa44c3bba1686ebdd5f3184af499c9",
+      "sha256": "ba0d8fecc8a1821324804414c60c2964b8a64efc8039423f044cef2b0d60a683",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "FAIL"
+    },
+    {
+      "original_gate": "FAIL",
+      "retained_numeric_observation_sha256": "2ee10882da0c45c000fc47808c1da5af7c55c9d47d0dc3504aaf35e0aebc4e0d",
+      "sha256": "311a0f614d775dec46383560e972121cd9c2241f93095fed3a5b6d126cbdc658",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/d0348c27e9ce--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "FAIL"
+    },
+    {
+      "original_gate": "FAIL",
+      "retained_numeric_observation_sha256": "5ba6a91296b16b84bbfd250534188f5e22da6e75421b1e81d217ab68d54e9deb",
+      "sha256": "32cef678818db3cb6366679419d12054d507d3cf4aedd1e0e32d7e26890b7357",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "FAIL"
+    },
+    {
+      "original_gate": "PASS",
+      "retained_numeric_observation_sha256": "eb2b1fc0e97589e2854da0028bce3b65715556c42ee8e7c55bb93172fcd966ff",
+      "sha256": "9b2fdb37d04df51ad7f973fcc470431a742757b1a4bd057dc400be8f7349f01b",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/abe34fb6f0c5--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "INCOMPLETE"
+    },
+    {
+      "original_gate": "PASS",
+      "retained_numeric_observation_sha256": "895c82b374d10ef4e6bbec654b9ca705f1f6a4b225d9b4506f6d9d054ce11f38",
+      "sha256": "806a9e4dface7ddb47038bc99da923ac560a253212c8f9fc5719810e2b7aef96",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "INCOMPLETE"
+    },
+    {
+      "original_gate": "FAIL",
+      "retained_numeric_observation_sha256": "2e0098675c77159a89f9249ea90e23d189391a0abe46ec25a76a87b36b36741c",
+      "sha256": "08bf15c707fa7bc93a7700b3c121e5bcc9ccfc0cd8e0f7d8d488e9d9b58fb808",
+      "sidecar": "reports/forge/policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/e3d2b84ede8f--api-vector-two-broad-reviewed.media-review.json",
+      "study_gate": "FAIL"
+    }
+  ],
+  "metric_rescoring": false,
+  "model_execution": false,
+  "publisher_source": {
+    "files_sha256": {
+      "reports/forge/family-winner-round1/policy_family_readout.py": "e4269840d790cf1855a1cbe6b0cc9ddd0fca3d779d997120179e4b21fcb10497",
+      "reports/forge/family-winner-round1/publish_policy_results.py": "8f0f0b929152316b88ddcf4aacb458f99c949ee68175b66eddb32c2e1503caf2"
+    },
+    "path": "reports/forge/family-winner-round1/publish_policy_results.py",
+    "publisher_committed_at_head": true,
+    "repository_head": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+    "sha256": "8f0f0b929152316b88ddcf4aacb458f99c949ee68175b66eddb32c2e1503caf2"
+  },
+  "raw_files_changed": false,
+  "repository_files_changed_by_reviewer": false,
+  "result": "PASS",
+  "retained_first_three": {
+    "full_original_cases": 30,
+    "original_gate_counts": {
+      "FAIL": 11,
+      "PASS": 19,
+      "UNKNOWN": 162
+    },
+    "original_gifs": 30,
+    "paid_wall_seconds": 796.6460538329557,
+    "required_cells": 192,
+    "reviewed_gifs": 6,
+    "study_gate_counts": {
+      "FAIL": 15,
+      "INCOMPLETE": 9,
+      "PASS": 6,
+      "UNKNOWN": 162
+    },
+    "total_published_gifs": 36,
+    "unknown_cells": 162,
+    "whole_config_status_counts": {
+      "FAIL": 15,
+      "INCOMPLETE": 9
+    },
+    "whole_configs": 24
+  },
+  "sample_generation": false,
+  "schema": "independent_policy_goal_board_review_v1",
+  "training_updates": 0,
+  "visual_candidates": [
+    {
+      "acquisition_hold": {
+        "reason": "no five-check acquisition window",
+        "status": "FAIL"
+      },
+      "cohort": "policy-family-defaults-round3-v1--531021742ad2",
+      "config": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "family": "atlas",
+      "last_five": [
+        {
+          "passed": false,
+          "projection_ks": 0.0751643349890786,
+          "step": 1000
+        },
+        {
+          "passed": false,
+          "projection_ks": 0.07344772124681465,
+          "step": 1050
+        },
+        {
+          "passed": false,
+          "projection_ks": 0.10604010664457594,
+          "step": 1100
+        },
+        {
+          "passed": false,
+          "projection_ks": 0.06730694642851398,
+          "step": 1150
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.033686475788986536,
+          "step": 1200
+        }
+      ],
+      "last_png": "/ml2/hypergan/toy-policy-four-cohort-board-qa-20261002/c5-atlas-cf74ea1def0d-last.png",
+      "longest_passing_streak": 2,
+      "original_gate": "FAIL",
+      "penultimate_png": "/ml2/hypergan/toy-policy-four-cohort-board-qa-20261002/c5-atlas-cf74ea1def0d-penultimate.png",
+      "repo_gif": "reports/forge/policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/cf74ea1def0d--api-vector-two-broad-reviewed.gif",
+      "study_gate": "FAIL",
+      "terminal_instant_gate": true,
+      "terminal_passing_suffix": 1
+    },
+    {
+      "acquisition_hold": {
+        "reason": "no five-check acquisition window",
+        "status": "FAIL"
+      },
+      "cohort": "policy-family-defaults-round3-v1--531021742ad2",
+      "config": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "family": "e22",
+      "last_five": [
+        {
+          "passed": false,
+          "projection_ks": 0.0751643349890786,
+          "step": 1000
+        },
+        {
+          "passed": false,
+          "projection_ks": 0.07344772124681465,
+          "step": 1050
+        },
+        {
+          "passed": false,
+          "projection_ks": 0.10604010664457594,
+          "step": 1100
+        },
+        {
+          "passed": false,
+          "projection_ks": 0.06730694642851398,
+          "step": 1150
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.033686475788986536,
+          "step": 1200
+        }
+      ],
+      "last_png": "/ml2/hypergan/toy-policy-four-cohort-board-qa-20261002/c5-e22-8385a62046db-last.png",
+      "longest_passing_streak": 2,
+      "original_gate": "FAIL",
+      "penultimate_png": "/ml2/hypergan/toy-policy-four-cohort-board-qa-20261002/c5-e22-8385a62046db-penultimate.png",
+      "repo_gif": "reports/forge/policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--api-vector-two-broad-reviewed.gif",
+      "study_gate": "FAIL",
+      "terminal_instant_gate": true,
+      "terminal_passing_suffix": 1
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 28.892384918872267,
+        "acquired_step": 1100,
+        "hold_checks": 2,
+        "hold_passed": 2,
+        "reason": "fewer than five post-confirmation hold observations",
+        "speed_eligible": false,
+        "status": "INCOMPLETE"
+      },
+      "cohort": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "config": "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0",
+      "family": "atlas",
+      "last_five": [
+        {
+          "passed": true,
+          "projection_ks": 0.057708764293614156,
+          "step": 1000
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.05751784930247322,
+          "step": 1050
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.05929161405696359,
+          "step": 1100
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.05206046040426304,
+          "step": 1150
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.05444427459011636,
+          "step": 1200
+        }
+      ],
+      "last_png": "/ml2/hypergan/toy-policy-four-cohort-board-qa-20261002/c6-atlas-abe34fb6f0c5-last.png",
+      "longest_passing_streak": 7,
+      "original_gate": "PASS",
+      "penultimate_png": "/ml2/hypergan/toy-policy-four-cohort-board-qa-20261002/c6-atlas-abe34fb6f0c5-penultimate.png",
+      "repo_gif": "reports/forge/policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/abe34fb6f0c5--api-vector-two-broad-reviewed.gif",
+      "study_gate": "INCOMPLETE",
+      "terminal_instant_gate": true,
+      "terminal_passing_suffix": 7
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 28.53343412396498,
+        "acquired_step": 1100,
+        "hold_checks": 2,
+        "hold_passed": 2,
+        "reason": "fewer than five post-confirmation hold observations",
+        "speed_eligible": false,
+        "status": "INCOMPLETE"
+      },
+      "cohort": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "config": "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be",
+      "family": "e22",
+      "last_five": [
+        {
+          "passed": true,
+          "projection_ks": 0.057708764293614156,
+          "step": 1000
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.05751784930247322,
+          "step": 1050
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.05929161405696359,
+          "step": 1100
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.05206046040426304,
+          "step": 1150
+        },
+        {
+          "passed": true,
+          "projection_ks": 0.05444427459011636,
+          "step": 1200
+        }
+      ],
+      "last_png": "/ml2/hypergan/toy-policy-four-cohort-board-qa-20261002/c6-e22-5376bd11b0af-last.png",
+      "longest_passing_streak": 7,
+      "original_gate": "PASS",
+      "penultimate_png": "/ml2/hypergan/toy-policy-four-cohort-board-qa-20261002/c6-e22-5376bd11b0af-penultimate.png",
+      "repo_gif": "reports/forge/policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--api-vector-two-broad-reviewed.gif",
+      "study_gate": "INCOMPLETE",
+      "terminal_instant_gate": true,
+      "terminal_passing_suffix": 7
+    }
+  ]
+}

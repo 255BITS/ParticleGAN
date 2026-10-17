@@ -1,0 +1,38 @@
+{
+  "adapted_runner_sha256": "ac3292c5795dd14cb143ca6988146e213ac4ec934234b4bb17cc744d3802fe76",
+  "model_edits": 0,
+  "parent_adapter_sha256": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+  "parent_common_sha256": "8da895fad8baf14c5478dcc30d37b6b79e1087488528d87e81438b2556a0aa3c",
+  "parent_runner": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/run_training.py",
+  "parent_runner_sha256": "71d96c56f77ffa070bee27e84c67eeb704376d25e0ff062dcdc24aebfa3bf6b1",
+  "sampling_edits": 0,
+  "scorer_edits": 0,
+  "training_loop_edits": 0,
+  "transformations": [
+    {
+      "after": "VARIANTS = ('PR155-E22-cabe2084',)",
+      "before": "VARIANTS = ('RA13-settled',)",
+      "label": "current baseline report identity only"
+    },
+    {
+      "after": "initialize_fixture_models",
+      "before": "initialize_fixture_models, selection_diagnostics",
+      "label": "drop Atlas-only diagnostic import"
+    },
+    {
+      "after": "",
+      "before": "    out['backend_selection']=selection_diagnostics(trainer)\n",
+      "label": "no feature selection on E22"
+    },
+    {
+      "after": "",
+      "before": "    if trainer.policy.reopen_guard is not None:out['reopen_guard']=trainer.policy.reopen_guard.state_dict()\n",
+      "label": "no optional settled guard in PR155"
+    },
+    {
+      "after": "                record['baseline_recipe_contract']=validate_checkpoint_state(state,trainer.policy.roles,args.problem,recipe)\n",
+      "before": "                record['backend_selection']=validate_checkpoint_state(state,trainer.policy.roles,args.problem,recipe)\n                require(record['backend_selection']==record['diagnostics']['backend_selection'],'record/checkpoint selection disagrees')\n                require(record['diagnostics'].get('reopen_guard')==state.get('reopen_guard'),'record/checkpoint reopen guard disagrees')\n",
+      "label": "validate current named E22 instead of Atlas selection"
+    }
+  ]
+}

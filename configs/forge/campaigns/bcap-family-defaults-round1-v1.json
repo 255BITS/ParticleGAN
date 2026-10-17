@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "bcap-family-defaults-round1-v1",
+  "budget_seconds": 352800,
+  "candidate_budget_seconds": 44100,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Finite eight-configuration BCap family search: coefficient0.5/1 x prior-rate1/4 x critic-rate0.5/2. Full ceilings per configuration are 900s smoke,39600s quality and3600s grouped endurance, total44100s; all eight total352800s. These are reservation bounds, not expected wall time. Hold exact task laws, architecture, initialization, priors, named streams, gates and budgets fixed. Require stagewise representation support before launch. Advance every ordinary survivor independently and stop each required non-pass. Preserve all failed/skipped/unresolved configurations and costs; no canonical failed-repeat, seed study, per-toy recipe selection, continuation of scientific failures or default promotion. Confirmed fastest/default claims remain unavailable without compatible timing, complete matched qualification, accepted calibration and separate robustness."
+}

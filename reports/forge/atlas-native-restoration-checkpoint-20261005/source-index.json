@@ -1,0 +1,2644 @@
+{
+  "base_controller_sha256": "86c41c6e527b8a0722539d9b413e9714244127bd65fd1d2984217d1d9b50516d",
+  "envelope_sha256": "00721965227e6fef28b65cb1f97d85f38264f761c92088e4fe5760e60cc0630d",
+  "isolated_allocator_proposal": "https://github.com/255BITS/ParticleGAN/pull/292",
+  "isolated_allocator_sha256": "4af5a0915f927ca3d8e753195227d59c97f07304e9927ca1383bda9acd0ccb8f",
+  "native_source": {
+    "copied_source_file_count": 3914,
+    "execution_digest": "00c19ef01f68e3222888a9b0edc6fcc5f635a384b982260c4e005832c1ed09ae",
+    "full_copied_source_bytes_reverified": true,
+    "manifest_bytes": 622247,
+    "manifest_sha256": "4582cbde7e0ad337fdae1ebe3e8609b569d2e7ac9a3385875e11cd6981215a56",
+    "origin_commit": "9da0e927a0a4242ee813ceb0340e9fee70ccdc40"
+  },
+  "omitted_dependencies": "389 external archive bodies and private scored arrays/full state remain necessary locally.",
+  "plain_develop_runnable_claimed": false,
+  "producer_sha256": "a0e7d88dfea6f1f101ee1a0760efda4c17d1139a1e48c0c86fa80fdc57a04150",
+  "public_report_is_full_scientific_regrade_package": false,
+  "required_members": [
+    {
+      "alias": "atlas19-external/adapter/current_api_fixtures.py",
+      "bytes": 1885,
+      "role": "external_archive",
+      "sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12"
+    },
+    {
+      "alias": "atlas19-external/adapter/screen_current.py",
+      "bytes": 66175,
+      "role": "external_archive",
+      "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    },
+    {
+      "alias": "atlas19-external/harness/hosts/native100/__init__.py",
+      "bytes": 0,
+      "role": "external_archive",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "alias": "atlas19-external/harness/hosts/native100/accuracy.py",
+      "bytes": 11658,
+      "role": "external_archive",
+      "sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2"
+    },
+    {
+      "alias": "atlas19-external/harness/hosts/native100/metrics.py",
+      "bytes": 8442,
+      "role": "external_archive",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+    },
+    {
+      "alias": "atlas19-external/harness/hosts/native100/problems.py",
+      "bytes": 2428,
+      "role": "external_archive",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d"
+    },
+    {
+      "alias": "atlas19-external/harness/hosts/native100/toy_models.py",
+      "bytes": 5231,
+      "role": "external_archive",
+      "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3"
+    },
+    {
+      "alias": "atlas19-external/harness/native100_diagnostics.py",
+      "bytes": 14421,
+      "role": "external_archive",
+      "sha256": "46e54896b8725499cb775fbb112b7bf27074ae01d8a7997e4fbb4384c9c44a2e"
+    },
+    {
+      "alias": "atlas19-external/harness/native100_score.py",
+      "bytes": 1660,
+      "role": "external_archive",
+      "sha256": "10cc14edfcd98ab34fd3768aaba2ee835dc2241dc1face2e18998c8f2b687feb"
+    },
+    {
+      "alias": "atlas19-external/harness/tasks/native100_constraints_simple_regularization.json",
+      "bytes": 1507,
+      "role": "external_archive",
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    {
+      "alias": "atlas19-external/harness/tasks/native100_fixture.json",
+      "bytes": 2297,
+      "role": "external_archive",
+      "sha256": "95a0afa02e03522bd33b1a3851041551c0802f2da87d81bc67fd89ec9695932d"
+    },
+    {
+      "alias": "atlas19-external/harness/tasks/vector_task_specs.json",
+      "bytes": 14323,
+      "role": "external_archive",
+      "sha256": "c751c10571ba32403b1e048d167991da1b6a79c5786db7bf99f4e2675feb9cbd"
+    },
+    {
+      "alias": "atlas19-external/initializer/__init__.py",
+      "bytes": 1473,
+      "role": "external_archive",
+      "sha256": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a"
+    },
+    {
+      "alias": "atlas19-external/initializer/anchor_birth.py",
+      "bytes": 6401,
+      "role": "external_archive",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+    },
+    {
+      "alias": "atlas19-external/initializer/autoencoder.py",
+      "bytes": 6194,
+      "role": "external_archive",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    {
+      "alias": "atlas19-external/initializer/batch_feature_init.py",
+      "bytes": 6691,
+      "role": "external_archive",
+      "sha256": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2"
+    },
+    {
+      "alias": "atlas19-external/initializer/birth_death.py",
+      "bytes": 32354,
+      "role": "external_archive",
+      "sha256": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72"
+    },
+    {
+      "alias": "atlas19-external/initializer/birth_phase.py",
+      "bytes": 21144,
+      "role": "external_archive",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7"
+    },
+    {
+      "alias": "atlas19-external/initializer/conditioning.py",
+      "bytes": 4878,
+      "role": "external_archive",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    {
+      "alias": "atlas19-external/initializer/continuous.py",
+      "bytes": 51741,
+      "role": "external_archive",
+      "sha256": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195"
+    },
+    {
+      "alias": "atlas19-external/initializer/det_init_a.py",
+      "bytes": 15944,
+      "role": "external_archive",
+      "sha256": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b"
+    },
+    {
+      "alias": "atlas19-external/initializer/det_init_d.py",
+      "bytes": 17670,
+      "role": "external_archive",
+      "sha256": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4"
+    },
+    {
+      "alias": "atlas19-external/initializer/det_init_f.py",
+      "bytes": 25380,
+      "role": "external_archive",
+      "sha256": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c"
+    },
+    {
+      "alias": "atlas19-external/initializer/deterministic_init.py",
+      "bytes": 16631,
+      "role": "external_archive",
+      "sha256": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f"
+    },
+    {
+      "alias": "atlas19-external/initializer/diffusion.py",
+      "bytes": 5080,
+      "role": "external_archive",
+      "sha256": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683"
+    },
+    {
+      "alias": "atlas19-external/initializer/discriminators.py",
+      "bytes": 5833,
+      "role": "external_archive",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    {
+      "alias": "atlas19-external/initializer/family_e_init.py",
+      "bytes": 21096,
+      "role": "external_archive",
+      "sha256": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936"
+    },
+    {
+      "alias": "atlas19-external/initializer/feature_cells.py",
+      "bytes": 125131,
+      "role": "external_archive",
+      "sha256": "58a8093eab44c63778c8516c3747e025ceb6ce27e7e740f257bd5c2722c2a7a8"
+    },
+    {
+      "alias": "atlas19-external/initializer/gan_loss.py",
+      "bytes": 1016,
+      "role": "external_archive",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    {
+      "alias": "atlas19-external/initializer/grad_regularizers.py",
+      "bytes": 13033,
+      "role": "external_archive",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2"
+    },
+    {
+      "alias": "atlas19-external/initializer/init_registry.py",
+      "bytes": 5997,
+      "role": "external_archive",
+      "sha256": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c"
+    },
+    {
+      "alias": "atlas19-external/initializer/initialization.py",
+      "bytes": 5943,
+      "role": "external_archive",
+      "sha256": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366"
+    },
+    {
+      "alias": "atlas19-external/initializer/k3p.py",
+      "bytes": 31092,
+      "role": "external_archive",
+      "sha256": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1"
+    },
+    {
+      "alias": "atlas19-external/initializer/ka2.py",
+      "bytes": 16381,
+      "role": "external_archive",
+      "sha256": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8"
+    },
+    {
+      "alias": "atlas19-external/initializer/mean_transport.py",
+      "bytes": 38859,
+      "role": "external_archive",
+      "sha256": "7fbd945a7f18f8817f090a53629443adbbe5a9b25c5dc459f12280061fd30fb3"
+    },
+    {
+      "alias": "atlas19-external/initializer/output_moments.py",
+      "bytes": 7740,
+      "role": "external_archive",
+      "sha256": "d6a897174b133863ce386b35e8f793349d30b6f59d79220ffd061f90092054ba"
+    },
+    {
+      "alias": "atlas19-external/initializer/particle_prior.py",
+      "bytes": 17636,
+      "role": "external_archive",
+      "sha256": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9"
+    },
+    {
+      "alias": "atlas19-external/initializer/qr_bz_pq_init.py",
+      "bytes": 12419,
+      "role": "external_archive",
+      "sha256": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3"
+    },
+    {
+      "alias": "atlas19-external/initializer/recipes.py",
+      "bytes": 42958,
+      "role": "external_archive",
+      "sha256": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e"
+    },
+    {
+      "alias": "atlas19-external/initializer/row_evidence.py",
+      "bytes": 6662,
+      "role": "external_archive",
+      "sha256": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606"
+    },
+    {
+      "alias": "atlas19-external/initializer/structured_init.py",
+      "bytes": 16695,
+      "role": "external_archive",
+      "sha256": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379"
+    },
+    {
+      "alias": "atlas19-external/initializer/training.py",
+      "bytes": 40369,
+      "role": "external_archive",
+      "sha256": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205"
+    },
+    {
+      "alias": "atlas19-external/initializer/vicreg_loss.py",
+      "bytes": 2297,
+      "role": "external_archive",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/__init__.py",
+      "bytes": 71,
+      "role": "external_archive",
+      "sha256": "53ba1483505036be295d73f5f3308bffb951e9414bf2b1139d8756e260e3b830"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/gan_v3.py",
+      "bytes": 2573,
+      "role": "external_archive",
+      "sha256": "00ca856749c82ce3d4e554ced924dda4399311d2e31ca8dbea8b8d5829141538"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr/__init__.py",
+      "bytes": 83,
+      "role": "external_archive",
+      "sha256": "cf9e55b41fea4ea8f4f83deea631b50ec047f8b68db2f874d8cbbba36cfb3303"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr/controller.py",
+      "bytes": 6415,
+      "role": "external_archive",
+      "sha256": "099bbf965e22ac28b42850dbade9f0ec350d723ee79f251d9665a8878d193e52"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr/relative_sgd_followup.py",
+      "bytes": 7256,
+      "role": "external_archive",
+      "sha256": "ffbe0058995d3442622328d253eb8ede053e6bbe6c47553792384c24325f5286"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr/relative_sgd_study.py",
+      "bytes": 7523,
+      "role": "external_archive",
+      "sha256": "4c1add91835378b214bf2b3017ad5b1c5d747500a30cf81b232130b3ca5c8bba"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr/sgd_diagnostics.py",
+      "bytes": 3031,
+      "role": "external_archive",
+      "sha256": "717c481ea81ce43da0e7081ade2aa74912de2d3b9d4ca7e53c79f063ad1de1eb"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr/sgd_report.py",
+      "bytes": 6067,
+      "role": "external_archive",
+      "sha256": "079f15e47a97eeb85d94657d558a5910c2f345b317a2404a132101de60d83432"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr/sgd_study.py",
+      "bytes": 16184,
+      "role": "external_archive",
+      "sha256": "2a881d35fec48ac3bd42abe74287a086d343b1eab060007a82694ea2571543c9"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr/study.py",
+      "bytes": 10999,
+      "role": "external_archive",
+      "sha256": "b738559d40cfe170766d5e620a8485124a5cd5ee270b25f58932cbd70f2326dd"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/learned_lr_evaluation.py",
+      "bytes": 10361,
+      "role": "external_archive",
+      "sha256": "2bbaf1caba19f7d31632178782ce81ae93e71c1e9455e0ec1e3c5bb740737532"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/legacy/__init__.py",
+      "bytes": 393,
+      "role": "external_archive",
+      "sha256": "83de2dd27bb1fec5ba74b066b49274ba161e4e480037129e3c99e13b04767f04"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/legacy/gan_loss.py",
+      "bytes": 8047,
+      "role": "external_archive",
+      "sha256": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/legacy/grad_regularizers.py",
+      "bytes": 27997,
+      "role": "external_archive",
+      "sha256": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/legacy/locked_shared.py",
+      "bytes": 4756,
+      "role": "external_archive",
+      "sha256": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/legacy/recipe.py",
+      "bytes": 8269,
+      "role": "external_archive",
+      "sha256": "26944cbc4a2dc1225ad824995fd44a423ab51271b5cdcadec56016d17b0b4ab0"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/__init__.py",
+      "bytes": 79,
+      "role": "external_archive",
+      "sha256": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/__main__.py",
+      "bytes": 2861,
+      "role": "external_archive",
+      "sha256": "d335cd36d6670ac34f47e2ea16e3c4d23f7eee78fad6a85b38b1122bb4203c85"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/base_recipe.py",
+      "bytes": 1496,
+      "role": "external_archive",
+      "sha256": "2a85b801ddc0c3e7dd5ed979b0a9e2c50cfd6c6d52db0b79ad30695b0223d4ab"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/baseline.py",
+      "bytes": 30097,
+      "role": "external_archive",
+      "sha256": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/default_selection.py",
+      "bytes": 2174,
+      "role": "external_archive",
+      "sha256": "95faf35a6f3decb6c870454377b26b47c51f151fb0eef738d8b4091eb77d2dec"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/grid_study.py",
+      "bytes": 16276,
+      "role": "external_archive",
+      "sha256": "e92e97c56d8db770c748d42b46024b17702d3cdee05bdbdf2641804d5592e452"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/host_reference.py",
+      "bytes": 3718,
+      "role": "external_archive",
+      "sha256": "030fdb5d6b4ec3d212d7786409475d8aaf024384db3d26548f250cfa765b6dfa"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/hosts/__init__.py",
+      "bytes": 78,
+      "role": "external_archive",
+      "sha256": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/hosts/ae_gan_hold.py",
+      "bytes": 8188,
+      "role": "external_archive",
+      "sha256": "7cf5e66dc63728612f5b4cd8291263b7e9b8e61913cb47062f35f0ba910c13ca"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/hosts/cover_leftover.py",
+      "bytes": 18673,
+      "role": "external_archive",
+      "sha256": "d6556a851ee6b323b2aaa0fa3a366d1e230bc02b7cb6b1e7ac26422599482865"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/hosts/mid_scale_identity.py",
+      "bytes": 19419,
+      "role": "external_archive",
+      "sha256": "ca36f2badc34e82f7f0540303deec87a6f56c2ef54aa7d5f11a8696eecb98f49"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/hosts/residual_student.py",
+      "bytes": 12104,
+      "role": "external_archive",
+      "sha256": "42c4dd16dae443b8bd8be5766c061e1ffe8b6defb920f9ac8cc294360bb0576f"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/hosts/unipolar.py",
+      "bytes": 13961,
+      "role": "external_archive",
+      "sha256": "aeed81a291dc0d559775c9e061bfbd761b70a74d5a39b67826e1021d1767a258"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/hosts/unused_token_hold.py",
+      "bytes": 8814,
+      "role": "external_archive",
+      "sha256": "8ac5536238f77627be5fea8eb0321d50f5b8e95ffd9fdf357c68a73aa8ef094e"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/investigate.py",
+      "bytes": 5571,
+      "role": "external_archive",
+      "sha256": "3d0bc8c91beeadc0bee2410686e750d2934629aa435746689258d966a6bcdac5"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/mlp.py",
+      "bytes": 2289,
+      "role": "external_archive",
+      "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/mode_hold.py",
+      "bytes": 11024,
+      "role": "external_archive",
+      "sha256": "805afb52d0f1209c70ca8028a6d0d7fb62aaeaaeaeab440fdea10a68d63c284d"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/observation.py",
+      "bytes": 3922,
+      "role": "external_archive",
+      "sha256": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/recorded_recipes.py",
+      "bytes": 603,
+      "role": "external_archive",
+      "sha256": "6122cfaeee24630788958994f27266801b036a21cd15b057b4501fbad5e2b31b"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/reference.py",
+      "bytes": 3393,
+      "role": "external_archive",
+      "sha256": "a97933b31a240822fc5535979a1e84bb884472a69b702808484257cff46cfbef"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/run.py",
+      "bytes": 7750,
+      "role": "external_archive",
+      "sha256": "e3e73b0de2ef2c396674fa9c127143664cdd29760339f3d13ebef8790dc1d3b8"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/scale_probe.py",
+      "bytes": 2497,
+      "role": "external_archive",
+      "sha256": "3843211cf5125cdd59a9e74d862be9d5c9eb6d3cde19855453ffd66e846ffb6b"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/shared_checks.py",
+      "bytes": 8511,
+      "role": "external_archive",
+      "sha256": "255425c41000307576088fec3ab8c0c7afad0af5185749d97b841d0ea5e8698a"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/suite_reference.py",
+      "bytes": 4465,
+      "role": "external_archive",
+      "sha256": "8bd939b18a9ff771846326d49b025ad4590ed3534d0749ae928c3ea1d0e8fe3f"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/summarize.py",
+      "bytes": 10179,
+      "role": "external_archive",
+      "sha256": "4a5585a310aa4f093269fe186252440ffa7d187f5e6c9e72a6324456b037b21c"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/trajectory.py",
+      "bytes": 9182,
+      "role": "external_archive",
+      "sha256": "f6f7b5578f4bfaf09c286c1681033186d009d0224c03fe789ac639cdacc3ea10"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/locked_shared/two_pole.py",
+      "bytes": 6531,
+      "role": "external_archive",
+      "sha256": "65237880beaf0e102f80b56f7362f138e08b27d0b27c83e60bbb17ebffbec3ce"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/paired_error_2d/__init__.py",
+      "bytes": 82,
+      "role": "external_archive",
+      "sha256": "11316dc14459b13614c7edc5ad3ab534be73385a3a1c8f336a4d703ae4205b36"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/paired_error_2d/__main__.py",
+      "bytes": 79,
+      "role": "external_archive",
+      "sha256": "e1db44950e96e96cdf38c5aa2b9a523d1d492b58577b8c3edb4dc0aedc40bdd2"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/paired_error_2d/run.py",
+      "bytes": 14282,
+      "role": "external_archive",
+      "sha256": "622b193562b10d6049ad1e70e73a6ab9fc22120790d2d0aed9a5771942857ad2"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/paired_error_2d/task.py",
+      "bytes": 10846,
+      "role": "external_archive",
+      "sha256": "f9e7a26e7a857afa29d5c210a1f1d73e40aab53d4891a6297f96a900a2c3bea8"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/plot_learned_lr.py",
+      "bytes": 2091,
+      "role": "external_archive",
+      "sha256": "47c973ce8b9f4d325ca591c486660f5ca92905ad8165143f6b4f15d76fb6202e"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/smart_descent/__init__.py",
+      "bytes": 81,
+      "role": "external_archive",
+      "sha256": "e71448ddd8f5c404eede89e9046d342866d2e9a9faa1642fe950db4dc1d42369"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/smart_descent/controller.py",
+      "bytes": 6686,
+      "role": "external_archive",
+      "sha256": "b2c00ade7ec77d1acba7917d8689bd29db4406fde5cf84cd67976dea274a42cf"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/smart_descent/damping_probe.py",
+      "bytes": 3490,
+      "role": "external_archive",
+      "sha256": "c5cf00e6edc5dea7310136f546f1d24537baeff619682d99ef6af1e9da8f49fc"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/smart_descent/evaluate.py",
+      "bytes": 8560,
+      "role": "external_archive",
+      "sha256": "7d053ee8397f13e0579baf671867a16a1207c06e2763b1c0a3e8551e9fd38407"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/smart_descent/freeze.py",
+      "bytes": 3084,
+      "role": "external_archive",
+      "sha256": "e0e35abf58e58f2f8f54296b8da6540191f229f9ff161bd7a6fe386338650606"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/smart_descent/refine.py",
+      "bytes": 5149,
+      "role": "external_archive",
+      "sha256": "dcf1dce52adbad876d639640c950fc703f8e4377c0fe649f96fe832bf426f8cc"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/smart_descent/standalone.py",
+      "bytes": 5159,
+      "role": "external_archive",
+      "sha256": "76dac92182024c51cab1e05a5248e7a68948bd9fbf857e0e7011e6c9bd89890f"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/smart_descent/study.py",
+      "bytes": 13497,
+      "role": "external_archive",
+      "sha256": "01b7f1c994d4de893d0424a20218ca26105dabf65d2e77d5a84c8871dcb3509f"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/__init__.py",
+      "bytes": 143,
+      "role": "external_archive",
+      "sha256": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/__main__.py",
+      "bytes": 9739,
+      "role": "external_archive",
+      "sha256": "57f6fb919c19a5661332b301ee5bb49e11c6a329db4340a0424790a4dd7e272d"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/accuracy.py",
+      "bytes": 11658,
+      "role": "external_archive",
+      "sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/accuracy_evidence.py",
+      "bytes": 3052,
+      "role": "external_archive",
+      "sha256": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/accuracy_gate.py",
+      "bytes": 8383,
+      "role": "external_archive",
+      "sha256": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/config.py",
+      "bytes": 3673,
+      "role": "external_archive",
+      "sha256": "0cadc75ddcf68e970102074a7f04a91fc23c0e169c7abbafb5e25133af6b5983"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/constraint_screen.py",
+      "bytes": 9931,
+      "role": "external_archive",
+      "sha256": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/continuous_probe.py",
+      "bytes": 29602,
+      "role": "external_archive",
+      "sha256": "cbf0d19340213421b9dd04f6aec18fa21ae028f2b719f36a3a1757e0dc10334d"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/device.py",
+      "bytes": 7065,
+      "role": "external_archive",
+      "sha256": "b6777948db2c5e4692c49a3aae594c94145ce32e51f3eb548c8ad7a5b2453a67"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/gate.py",
+      "bytes": 22299,
+      "role": "external_archive",
+      "sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/metrics.py",
+      "bytes": 8442,
+      "role": "external_archive",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/models.py",
+      "bytes": 9411,
+      "role": "external_archive",
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/problems.py",
+      "bytes": 2428,
+      "role": "external_archive",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/render.py",
+      "bytes": 8428,
+      "role": "external_archive",
+      "sha256": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/schedule.py",
+      "bytes": 5628,
+      "role": "external_archive",
+      "sha256": "7bc234006ac6ba457c8fb897351e5d5999dfcfc1ff6ac4061a06f9e103d33fe1"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/search.py",
+      "bytes": 4527,
+      "role": "external_archive",
+      "sha256": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/train.py",
+      "bytes": 51936,
+      "role": "external_archive",
+      "sha256": "88b0f4d9dbe540d9ccd9276af663e60becf25515819cf05ae63326fcd8675472"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy100/warm_equilibrium_probe.py",
+      "bytes": 14377,
+      "role": "external_archive",
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/toy_suite.py",
+      "bytes": 81897,
+      "role": "external_archive",
+      "sha256": "3dfc002e2bbad5a6369434090f9344184f9a99c0d8c05ccb840c8d6e9e2782b9"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/__init__.py",
+      "bytes": 80,
+      "role": "external_archive",
+      "sha256": "8d105e8141cf36010abf315aa2b5f74fab872c341612b567236e7fe96c5177dc"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/compare_defaults.py",
+      "bytes": 13929,
+      "role": "external_archive",
+      "sha256": "8cdefd488e3a9de3692de6434586256852024b21feed0c64aa548554b1309676"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/compare_formulations.py",
+      "bytes": 5690,
+      "role": "external_archive",
+      "sha256": "106488e5d0fe0594bd86be9d3e0ff4ff9b22635ec5ad7f07339e767b7a47cb1b"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/default_promotion.py",
+      "bytes": 5139,
+      "role": "external_archive",
+      "sha256": "0a9ae0eec84a3cac85a5066af7e146cbd289665f44b05f327ae97d05cbd1bc48"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/formulations.py",
+      "bytes": 4399,
+      "role": "external_archive",
+      "sha256": "49731ee001b57aff7a6d8254d82bac571864237ba44b90a933fbb38e497a67af"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/image_solvability.py",
+      "bytes": 12604,
+      "role": "external_archive",
+      "sha256": "f16181db9124e7d8dcaa83b33c4a2db8d9c3392ca4f336f1a5ddff9ecac8721b"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/image_tasks.py",
+      "bytes": 15788,
+      "role": "external_archive",
+      "sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/legacy_noise_adapters.py",
+      "bytes": 20111,
+      "role": "external_archive",
+      "sha256": "2e4ebc45fc92a3464d230d0bac8cddc00521f760b20be6538a103a6e27700c09"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/linear_skip_refinement_research.py",
+      "bytes": 1611,
+      "role": "external_archive",
+      "sha256": "399a6d6dc268bd58952366c5d11e57886faf2cdb7accf882c47fe1e846e4bd1c"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/default_comparison.json",
+      "bytes": 26969,
+      "role": "external_archive",
+      "sha256": "2e62a935dd702c9851165354cb580d18ffd4c47b72e0568562d0f50256028883"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/rare_mode_witness.json",
+      "bytes": 603,
+      "role": "external_archive",
+      "sha256": "f15c133a0719b0c3a65b4ad2a6e367ef59762c5a40ce71040fcd146816b28f5e"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/recipe_history.json",
+      "bytes": 3643,
+      "role": "external_archive",
+      "sha256": "52331ba9ab6750f8d0deebc74221a95d9f3ca05c3ae9513cbbdc4dca9f918218"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/residual16.json",
+      "bytes": 440,
+      "role": "external_archive",
+      "sha256": "8f6aa589f80ded8970297bfedfc335a8c79a077f48c8b88ad4c6d5521bf7fbd0"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_batch_feature_rare.json",
+      "bytes": 589,
+      "role": "external_archive",
+      "sha256": "1a868fcfd9b812c74aa79f3636c5dfd11e3fb6b0a2dac99487d5be08162ca4df"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_ensemble_screen.json",
+      "bytes": 729,
+      "role": "external_archive",
+      "sha256": "0ace20d1d8ed499098b7cfec323cda6a5e442df779f1522f00256e574bc89758"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_geometry_rare_screen.json",
+      "bytes": 707,
+      "role": "external_archive",
+      "sha256": "d68b74546c5993f412798800884a5e68b3819b9c153f75c67f1420617d7f9102"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_geometry_readout_rare.json",
+      "bytes": 287,
+      "role": "external_archive",
+      "sha256": "7c9338f2cab08de291ee993efa19a8e19211fb917519a1bf486c52c132d59fa3"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_geometry_residual_rare.json",
+      "bytes": 552,
+      "role": "external_archive",
+      "sha256": "e0bebf786a663b8d21551d7f8b528d17375b7f25c4d5996ea90b2b5d783e690b"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_norm_structure_center_followup_rare.json",
+      "bytes": 540,
+      "role": "external_archive",
+      "sha256": "0d92c541f248c0d2fdb08946615e2647d7c651366503d05da988adb0912bf4bc"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_norm_structure_rare.json",
+      "bytes": 806,
+      "role": "external_archive",
+      "sha256": "7b1b3a20b2f5de52973aff294814637fc29a11116551b86174c7410cb63a3e05"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_norm_structure_refinement_rare.json",
+      "bytes": 744,
+      "role": "external_archive",
+      "sha256": "4551174ffb976bba533c55ab1baa3f928e37c551fe26b0b76661299e21cc3027"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_pointnorm_beta_interpolation_rare.json",
+      "bytes": 463,
+      "role": "external_archive",
+      "sha256": "803c444e3ba55f3c8dda0713680ecf42bfb52e1045a01d83bc10c8cb37e62401"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_pointnorm_refinement_rare.json",
+      "bytes": 555,
+      "role": "external_archive",
+      "sha256": "5d13590bd82b9ddc75635e0966631ae895862ac722a9ccee5b67884f34eab0e7"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_pointnorm_refinement_width.json",
+      "bytes": 377,
+      "role": "external_archive",
+      "sha256": "5ec80373b958aed1e750471095e03af6d73a943239c44c5f80b8b2bb2dccc1c8"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/plans/shared_pointnorm_screen.json",
+      "bytes": 541,
+      "role": "external_archive",
+      "sha256": "7b99e49a16a4f1aa4ad5ae9acdd616ef37447295a90ba1b7342a444c1dff26cc"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/protocol.py",
+      "bytes": 9958,
+      "role": "external_archive",
+      "sha256": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/public_default_verification.py",
+      "bytes": 25937,
+      "role": "external_archive",
+      "sha256": "65fcb3d70cc026d36c56f7448722de46b8c01235bb0281b16b575019f1a96ace"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/relative_step_adapter.py",
+      "bytes": 4491,
+      "role": "external_archive",
+      "sha256": "6b4ce3b02842dc12d040a4a2e8aa8a396db386a6463bee02879631b0f7d7e304"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/replay_shared_architecture.py",
+      "bytes": 3470,
+      "role": "external_archive",
+      "sha256": "2aeaf0bb277b1bd3d06bd0875d21184c11dc2cbc80154a3a863d0a265ef32806"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/run_linear_skip.py",
+      "bytes": 3089,
+      "role": "external_archive",
+      "sha256": "1533cf25c0c38db537e53c3f190153233ad00511da6016909d41110739a1e130"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_adapter_search.py",
+      "bytes": 8217,
+      "role": "external_archive",
+      "sha256": "22563537bb017091ac4d1aec8428bb45d073e9050777481f95bf10603a4022bf"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_batch_feature_research.py",
+      "bytes": 5767,
+      "role": "external_archive",
+      "sha256": "014f0d0b255ff301687dc202fba1ea5553852a373d04b05220ddaaaea2896f34"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_batch_feature_search.py",
+      "bytes": 7113,
+      "role": "external_archive",
+      "sha256": "4f92a08c0e436f65a245633f48e91ff514c1b8db91b589512dd6d4d9410203e1"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_critic_research.py",
+      "bytes": 4788,
+      "role": "external_archive",
+      "sha256": "02588724d95d8df300e3d953a8a9539525f48be5891d15f606e3608818a30d6a"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_default_search.py",
+      "bytes": 7943,
+      "role": "external_archive",
+      "sha256": "dadf30d0af3b27645335d27f03d210c9cc321eb2387c35e1f2cae07ef615f479"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_discriminator_search.py",
+      "bytes": 6756,
+      "role": "external_archive",
+      "sha256": "a5d28665b69a5d47ced0d5c1129be09ce098709b57277a59e7253b4fd94e7a65"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_ensemble_research.py",
+      "bytes": 5345,
+      "role": "external_archive",
+      "sha256": "c4e51ce449cb27ef8f2b1de0279d391e7e5f68623c0ffe81669cc899176f7fe2"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_ensemble_search.py",
+      "bytes": 6775,
+      "role": "external_archive",
+      "sha256": "ce491adee9960080e2cb2dbc529f9b219b4eff6e77d3db1ffb9ef2e7dd5d0c79"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_geometry_readout_research.py",
+      "bytes": 2867,
+      "role": "external_archive",
+      "sha256": "e08534552b89aaae946295b00453639c2f074205e5dcb0088f64c2f952a326f4"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_geometry_readout_search.py",
+      "bytes": 1185,
+      "role": "external_archive",
+      "sha256": "f28e8e8a55c6fba6d4fbfd97b14d88cb90c9b7991e24a1dfca5b6eec4c87f4d1"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_geometry_research.py",
+      "bytes": 7318,
+      "role": "external_archive",
+      "sha256": "34997f76d74d01d75298d7fe1f8ca61d0b5079bff354e8f39cd12be367bfee31"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_geometry_residual_research.py",
+      "bytes": 6068,
+      "role": "external_archive",
+      "sha256": "8565b7cacc25a88c44db30f607cb5f922a5cea93761f3de3561e23577759401d"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_geometry_residual_search.py",
+      "bytes": 1197,
+      "role": "external_archive",
+      "sha256": "66cbaafa9464bab88745edbc725049c43f9991f8bd101c0f77c32d3e772dd748"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_geometry_search.py",
+      "bytes": 1194,
+      "role": "external_archive",
+      "sha256": "dc14e184b650d1d55e5846c2039ab1c33f64b2d9a9caf64697894df0f4f29683"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_local_density_research.py",
+      "bytes": 6302,
+      "role": "external_archive",
+      "sha256": "ee66b747964a90e304241048b3709ebacc7e56f78bd7f5d2b5fc8baa13c7f089"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_local_density_search.py",
+      "bytes": 1515,
+      "role": "external_archive",
+      "sha256": "3ff9112d11ffc62acb28af7c7a610393aa2a0147ed9e19c942bd69ff6d302641"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_norm_structure_research.py",
+      "bytes": 8650,
+      "role": "external_archive",
+      "sha256": "d8ecb052d0b8458f59c7cc279b308e31c52e223d8350d56dd43793451352bf5c"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_norm_structure_search.py",
+      "bytes": 6798,
+      "role": "external_archive",
+      "sha256": "335fd34a965906fc933cae87ad8514ff3faa26796e87b19ae2efff04105e26fe"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_pointnorm_research.py",
+      "bytes": 5916,
+      "role": "external_archive",
+      "sha256": "3b52fa0422ff17b95e33970e3b98882dc76971ba0db3332a11148274561d6838"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_pointnorm_search.py",
+      "bytes": 6788,
+      "role": "external_archive",
+      "sha256": "25ebbe33b6d77e3ee034f38dc5e2f7e512e4bf5d10a9c62f6f5fda4b74b8c714"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_profile_search.py",
+      "bytes": 5189,
+      "role": "external_archive",
+      "sha256": "218460a54e05c812c4163d5447ecefa2b0f31f56c31079d9493039fd96b9d5df"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_rare_diagnostic.py",
+      "bytes": 5628,
+      "role": "external_archive",
+      "sha256": "772b9b3369fe44417123e09a29e4a531bc22c7bd0c01e6b39dbc796897227377"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_rare_gradient_research.py",
+      "bytes": 4330,
+      "role": "external_archive",
+      "sha256": "f02210f522e91f5589e5253b8143f43cf0e24b8ce4741f0684bcfe45e8537983"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_rare_gradient_search.py",
+      "bytes": 1091,
+      "role": "external_archive",
+      "sha256": "cb13b9573c4269d95b2d5042311b7efac1ca97eee1a3bd76830e55d7d5ec15c9"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_residual_curvature_research.py",
+      "bytes": 2882,
+      "role": "external_archive",
+      "sha256": "4d5c49add5d7b90f92acfc633e8a8681a71062d7121f66e6db147cfea8575244"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_residual_curvature_search.py",
+      "bytes": 1102,
+      "role": "external_archive",
+      "sha256": "a0ff435d2b2a898c0bfc434b1629155d9546b1806bd3efed894de4a64791fc55"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_schedule_search.py",
+      "bytes": 7111,
+      "role": "external_archive",
+      "sha256": "ea760ffd243c0827ffc1f0cc7ca37e301c083700c43df2ade41fdceb4019b8d6"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_variants.py",
+      "bytes": 3161,
+      "role": "external_archive",
+      "sha256": "90f17940d08bda1bcb6378c729530df43ece8e8cb37800b0b89034257b12d2c7"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_width_catalog.py",
+      "bytes": 1380,
+      "role": "external_archive",
+      "sha256": "4dea3d96f4672cb7c1a45ecd19959d09e7a0577ee744ee77859ec7b46e418956"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_width_last_refinement.py",
+      "bytes": 1584,
+      "role": "external_archive",
+      "sha256": "60bd437cd32cc2c0b09ec6a5246fbc411dcd42758552abfe04cad4a696d02702"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_width_refinement.py",
+      "bytes": 2087,
+      "role": "external_archive",
+      "sha256": "d01a2a5ef5023eeba1c63886162815cdfa1f9d64631bde391bf6395c491b33be"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/shared_width_search.py",
+      "bytes": 1038,
+      "role": "external_archive",
+      "sha256": "68b13e0e6586b1e29b1a0ef61b57fcbacd78b62c9d7a6c3d0b6c47f7f5c65ace"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/smooth_critic_research.py",
+      "bytes": 3494,
+      "role": "external_archive",
+      "sha256": "9958f52f265c6ecf37de1449afc02d25db916f7c05879017c33025757f81bfcc"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/solvability_search.py",
+      "bytes": 7342,
+      "role": "external_archive",
+      "sha256": "016b6134c3fbcb2b109b703664c2365628e36ca92d79ad4e1f340d7156be2626"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/stress_tasks.py",
+      "bytes": 6273,
+      "role": "external_archive",
+      "sha256": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/suite.py",
+      "bytes": 19543,
+      "role": "external_archive",
+      "sha256": "ba4a182b16834bbe59a491bb1f2cf9ce3e5deff98b8b1ff59f0083cf7ce500ee"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/toy100_compatibility.py",
+      "bytes": 38839,
+      "role": "external_archive",
+      "sha256": "f72def919d1c8026acbeb943d4298d674acc799bbbb65aee07f320318dfd2fa8"
+    },
+    {
+      "alias": "atlas19-external/native_root/benchmarks/transfer_suite/vector_tasks.py",
+      "bytes": 18093,
+      "role": "external_archive",
+      "sha256": "b573e8aae115b17bd60b71b64b016d6f012c61ebd3388fd98be23ea79ce6a917"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/baseline/manifest.json",
+      "bytes": 97,
+      "role": "external_archive",
+      "sha256": "bc732696cedb2716aa93ddd6d6df8e4caf3b5d0a4ba0934eee9d768cb0063001"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/conditioning/manifest.json",
+      "bytes": 55,
+      "role": "external_archive",
+      "sha256": "c6b815fd2215087d88228e185b445857e79ac80f2ca4770b22256704669642c4"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/image_lr/manifest.json",
+      "bytes": 96,
+      "role": "external_archive",
+      "sha256": "1cc83fd7dcfeb0ce88489793c374b8f7b606df0093d618b50dea18366a6673b2"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/joint_ucd/manifest.json",
+      "bytes": 105,
+      "role": "external_archive",
+      "sha256": "72b30b09f2bbd14b045beea460fdd45f7d470b874ea97878bf3d75b4dae86dcd"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/joint_ucd_smoke/manifest.json",
+      "bytes": 117,
+      "role": "external_archive",
+      "sha256": "b4ebbdb9893e51f619fbaad008e5562f1d10e93d08fe608e5ff89d161d66bd07"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/moonshot/manifest.json",
+      "bytes": 110,
+      "role": "external_archive",
+      "sha256": "dd0e18effd42e8d65581d4e3a66b6bb944838ed365e1d5fc33b42090aa0d04eb"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/moonshot_followup/manifest.json",
+      "bytes": 122,
+      "role": "external_archive",
+      "sha256": "50706075c0bdd49ad80e907bdf07d54ec5fa51fa300a5b1fead6f247a98eb5a7"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/moonshot_smoke/manifest.json",
+      "bytes": 122,
+      "role": "external_archive",
+      "sha256": "a471347c93a9cc05f473db018909d8ca48df0196f72906efe0a11aa9a1215ef0"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/normalized_d/manifest.json",
+      "bytes": 105,
+      "role": "external_archive",
+      "sha256": "991e07d466a8b7e907a8c0df35b4109ca8a0751bbae8442823bcf11c0ffbc8bf"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/normalized_smoke/manifest.json",
+      "bytes": 113,
+      "role": "external_archive",
+      "sha256": "a86e16923069df4ccefe8a37840c856b1167413da383ac45e22d3558d0ad25cf"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/scale_50k/manifest.json",
+      "bytes": 100,
+      "role": "external_archive",
+      "sha256": "19a0f1e1313eaa2981d84357f51c5e0b31d977d319a7f6b15c0ca7d6472e5648"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/scale_50k_smoke/manifest.json",
+      "bytes": 112,
+      "role": "external_archive",
+      "sha256": "ad380aa1295e9f9a077da480237d2d2b88ddd1343f0ddb11d3cbe8844ab977c0"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/schedule_30k/manifest.json",
+      "bytes": 105,
+      "role": "external_archive",
+      "sha256": "8a5b74cfeac7787b86f1ddecbf1077c4785c290d28d6d9cc9600e0bc4a40f669"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/smoke/manifest.json",
+      "bytes": 91,
+      "role": "external_archive",
+      "sha256": "cee48978164496c1a541b55bd9c8f030374a5cc08b78de48d24d8a771023da9b"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_batch/manifest.json",
+      "bytes": 105,
+      "role": "external_archive",
+      "sha256": "65270d0fb1eef468285050b2547e02ac445ba6d61e4c468982b10ef7aa6306b4"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_layout/manifest.json",
+      "bytes": 115,
+      "role": "external_archive",
+      "sha256": "00b44765155c3d27ec4f61e26b5d8722d4a1e08f7aa991290c2cdfc0286010eb"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_ncsn/manifest.json",
+      "bytes": 66,
+      "role": "external_archive",
+      "sha256": "86dd9b74cc4ebe27fcd9cafaed7254843ea3436ee62e87408323e042233f6d36"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_ncsn_ablation/manifest.json",
+      "bytes": 285,
+      "role": "external_archive",
+      "sha256": "01abd901ac97c59c6e10314305d229e0e2959f6748435654f2a962e22330a0d9"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_ncsn_nchw/manifest.json",
+      "bytes": 68,
+      "role": "external_archive",
+      "sha256": "f7edc2f0900c80ec4d6fdf12d53f3a3167f9ec85902d86fc3033561f42f7b76b"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_profile/manifest.json",
+      "bytes": 108,
+      "role": "external_archive",
+      "sha256": "77ec09cd85fa17ba132f75090686f9d535fd5c2a06bbbd9a4e50a54630effbd1"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_promote_ncsn/manifest.json",
+      "bytes": 68,
+      "role": "external_archive",
+      "sha256": "4997b8e314465fb91e057d1ce8cebc904a1f7c9e6b59daa2fb310ea4e611cf76"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_promote_unet/manifest.json",
+      "bytes": 183,
+      "role": "external_archive",
+      "sha256": "17b5aba3ecccdb14b3bb61124b9c6b7a20ed2b0b9622e7978f4fc9a801b162d9"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_ddgan/speed_regularizer/manifest.json",
+      "bytes": 225,
+      "role": "external_archive",
+      "sha256": "1fd9d59928e61a7e0f0b0a7b747cb1e253120fc6459d29d50239aa168d01ac1d"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_particle_ae/particle_16k_160k_information/manifest.json",
+      "bytes": 78,
+      "role": "external_archive",
+      "sha256": "baecbd43d32da278b40ad4218533ecf93234147cca9d6b41eca59aae1b97a098"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_particle_ae/particle_lr_80k_scout_smoke/manifest.json",
+      "bytes": 76,
+      "role": "external_archive",
+      "sha256": "8daeaac0521f02e0714994839744dcc27645263eb7990d1eb47c8e548da485eb"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_particle_ae/particle_overlap_sweep_smoke/manifest.json",
+      "bytes": 72,
+      "role": "external_archive",
+      "sha256": "69c15135b35fd28d34674a548f158399071b4ee3d8e83cc8a110163eb34abeba"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_particle_ae/particle_overlap_training_smoke_freeze_centers/manifest.json",
+      "bytes": 101,
+      "role": "external_archive",
+      "sha256": "30263065fef713ec62d8b2e2c315ed6fbd1a78ea31010c4a6e370bac8626a793"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/cifar_particle_ae/particle_overlap_training_smoke_reduced_noise/manifest.json",
+      "bytes": 99,
+      "role": "external_archive",
+      "sha256": "4ea72e1520552d6ee2db1524b5f131747500aabfc059c0af9e6b9a74e3f2a263"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/budget56k/manifest.json",
+      "bytes": 416,
+      "role": "external_archive",
+      "sha256": "27a5c64b2d874e330ef9b37c942693a7fbc4d4ad6fb052d1791db09e12ff9c9c"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/confirm28k/comparison_manifest.json",
+      "bytes": 184,
+      "role": "external_archive",
+      "sha256": "ab71bf637ca773a576db14aaa88b62273e474cc0b74273ecf7c8d7d0e94e9b29"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/confirm28k/manifest.json",
+      "bytes": 123,
+      "role": "external_archive",
+      "sha256": "86e83836ae0bc1b6cf595c7a08b63c284ba68786e85cd236e7a6f8be6313cec0"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/diagnostics/manifest.json",
+      "bytes": 582,
+      "role": "external_archive",
+      "sha256": "6d10e817aca2ec5b14e107cb148b8f566b7fe0f39a81646e7b820a7eaa905e9f"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/joint_ucd/manifest.json",
+      "bytes": 101,
+      "role": "external_archive",
+      "sha256": "91b440012989d3604be44218ada2bc61968a6f54b3cc2a812625eb0a588ad1b0"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/joint_ucd_smoke/manifest.json",
+      "bytes": 113,
+      "role": "external_archive",
+      "sha256": "7358ba96898c33338bf35eed0820956ee40efe7bac5817194388f3b1523b665f"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/mog_capacity/manifest.json",
+      "bytes": 207,
+      "role": "external_archive",
+      "sha256": "8a356d619db0b63ad495c62e6b55d684e919663e340901315db51dfc4b00b626"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/mog_capacity_100k/manifest.json",
+      "bytes": 227,
+      "role": "external_archive",
+      "sha256": "c36cce3d36b8a21148fc19bb5412d46c5b4f4610322cffe45e2d6587e9701a89"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/screen/manifest.json",
+      "bytes": 3435,
+      "role": "external_archive",
+      "sha256": "32197afa753ff25e3804cb06867fa5e5c6424c3a88ae8064ef30d0d396f66497"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/screen_20k/manifest.json",
+      "bytes": 3531,
+      "role": "external_archive",
+      "sha256": "11cf20554d6dc883bb0b5133334e36fef4184fdd0950ba2050b31e7951e1eb64"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/screen_20k/reruns.json",
+      "bytes": 1803,
+      "role": "external_archive",
+      "sha256": "90d04611a67a3648ca686969f9c452998e7fcf9038b6713982c49115bf8adc6c"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/denoising/smoke/manifest.json",
+      "bytes": 143,
+      "role": "external_archive",
+      "sha256": "f6f074d389d68dd0e97eaf2d0e998a4ebefd7aa5edd15edba8cd5c464034f29d"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/mog/stage1_criteria.json",
+      "bytes": 723,
+      "role": "external_archive",
+      "sha256": "6eded9516b2e8215631ca7cfba753096dc4d30a705544b3832bb2a69abd319e3"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/speed_100gaussians_10k/manifest.json",
+      "bytes": 144,
+      "role": "external_archive",
+      "sha256": "91186b59a016dade61d71edcfbbc06b4fc1a8ebd36626ba141720d48383881e6"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/speed_100gaussians_1k/manifest.json",
+      "bytes": 141,
+      "role": "external_archive",
+      "sha256": "7d5cd0f37055a5a5396b388b81eb1e53bf352062b3d2eaca89d8626d5744278f"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/speed_denoising_10k/manifest.json",
+      "bytes": 182,
+      "role": "external_archive",
+      "sha256": "969781366f832d57f21165c494ab7aa68274c7c4f05b8cd0325e281224cb68f5"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/speed_denoising_1k/manifest.json",
+      "bytes": 178,
+      "role": "external_archive",
+      "sha256": "83f6c3c5d1c791003c064b56010809bc2fd924be09ebf08ca6d835b37a5a4b14"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/speed_denoising_56k/manifest.json",
+      "bytes": 182,
+      "role": "external_archive",
+      "sha256": "43f2e460e4154ab82312d88e709661cdb67c7b9d7c8da8a3f0714111f348e5f8"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_batch1024.json",
+      "bytes": 120,
+      "role": "external_archive",
+      "sha256": "9eec509978d9404dea4981938f55d192a3512995ccacaadc0a20fab06612d1b4"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_batch2048.json",
+      "bytes": 120,
+      "role": "external_archive",
+      "sha256": "728c3610ae7e91c253c834c732420cbfae4bd061d6a58a922192ba07b0c19212"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_beta99_end015.json",
+      "bytes": 938,
+      "role": "external_archive",
+      "sha256": "d891a4905fb5e01b3aa232adc6c9c651d2a6433c1b9a76001a9bf88e908a6913"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_cap2_batch2048.json",
+      "bytes": 191,
+      "role": "external_archive",
+      "sha256": "b0c2117db186dc9214c997e4958da863013418ed2fb1d5841666f335f469b8c5"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_cap2_batch512.json",
+      "bytes": 189,
+      "role": "external_archive",
+      "sha256": "b60b236fc81368f8f1cd07b52c941130f6d597982e31231b4fe26ef044e76446"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_coupled_short_warmup.json",
+      "bytes": 939,
+      "role": "external_archive",
+      "sha256": "f31a262f5f27e1c5da70d62449b1f3afc3fdf56047b8d01002153c1b6bf048d5"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_critic_search.json",
+      "bytes": 339,
+      "role": "external_archive",
+      "sha256": "bacab15819bb4be31716d5bc3584303ee5ce28cf53d6d70f82cfc01f61520d4e"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_learnable.json",
+      "bytes": 972,
+      "role": "external_archive",
+      "sha256": "6b12f70f2be1b54e071c29913736bc087b0f675d727432ee8738cc5ed809937d"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_learnable_broad.json",
+      "bytes": 972,
+      "role": "external_archive",
+      "sha256": "d8a4266bb39876bb179c8d70cc030d2866dd6d7b4fb83900bf548fe3aaef87fd"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_momentum.json",
+      "bytes": 980,
+      "role": "external_archive",
+      "sha256": "5a6607f2b83cdb05c81f92ea6e9ba4319bceac7fb816d2934dbb34243a23705f"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_network_floor.json",
+      "bytes": 1508,
+      "role": "external_archive",
+      "sha256": "544fca1b89fe39950e4be0b37dd07f4787e4f8e2433e84c0ad1c4cf478f2e455"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_output_only_warm02.json",
+      "bytes": 936,
+      "role": "external_archive",
+      "sha256": "c2109995988ed3a7da55a36a150da1a2269dcea398a7da480710a95916a26b1b"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_refine_search.json",
+      "bytes": 381,
+      "role": "external_archive",
+      "sha256": "7c6b9574c4ad68da2504f27e5ef4321aae980ad1929e4ede3cddf451c5bda65b"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_search.json",
+      "bytes": 610,
+      "role": "external_archive",
+      "sha256": "ce7c9d6c17ffe4bd22936c4edf80558da2ba82e1de7749f40dca38c86846ee24"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_shared_base.json",
+      "bytes": 893,
+      "role": "external_archive",
+      "sha256": "3123c721ffc1efc395b02c5d75eb843064538fc63255b2faa9cfb9b7ce95fae4"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_shared_policy.json",
+      "bytes": 1493,
+      "role": "external_archive",
+      "sha256": "681f6140095edd64062eee619f43a036594c86e4fdb56aad538a8be885574a7b"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_shared_policy_isolated_rng.json",
+      "bytes": 1527,
+      "role": "external_archive",
+      "sha256": "a89ca37b788c71e2bbfa512b94b8e81ed303f3f6c7a68cc960936adb393f5170"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_small_g_search.json",
+      "bytes": 513,
+      "role": "external_archive",
+      "sha256": "71a20aaaebbd2696610e94fde874df02d4f3fb3dcac513186ed4987fb2d18a84"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_timescale.json",
+      "bytes": 931,
+      "role": "external_archive",
+      "sha256": "e0a847231d78f37d59e0ff48e5b25be9f1a9c81b6639a46fe8ba19bffc7ad5ff"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_v3_base.json",
+      "bytes": 894,
+      "role": "external_archive",
+      "sha256": "9e6424290e73a581a2fe7008690bf614fa8fd01a4acb34cfe36afa71cf43ce27"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_v3_beta999_anneal06.json",
+      "bytes": 936,
+      "role": "external_archive",
+      "sha256": "fe530796c53f8ad4b31ac364fc079d41f8fe7c7160edd0c60ba0ed1e4af5336d"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_v3_search.json",
+      "bytes": 329,
+      "role": "external_archive",
+      "sha256": "1a6331571511dcca3fce2f6a298e740593dc66f104968039209d27f111e8c164"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_warmup_arch_search.json",
+      "bytes": 423,
+      "role": "external_archive",
+      "sha256": "525cfa9684671d752a4a8f04af4980e6b08b1e2c427ab78e0df8eb86208aa1a8"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_warmup_core_search.json",
+      "bytes": 292,
+      "role": "external_archive",
+      "sha256": "bd2f3a76561e9f46005a1f2bb247cb2b58e9850cd4e337e15c61acef597013b2"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/accuracy_warmup_v3_base.json",
+      "bytes": 933,
+      "role": "external_archive",
+      "sha256": "242768399077e113da0f01d35ba11104000345510f74a30605511f35022f1742"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/bandwidth_noiseless_f5_base.json",
+      "bytes": 1483,
+      "role": "external_archive",
+      "sha256": "51f6bd91a60e523708b51a36bd2f38907a28bc138a1d0d1b366e6a6a200586b0"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/baseline.json",
+      "bytes": 772,
+      "role": "external_archive",
+      "sha256": "5c092a3f1126c491e45ed5490048dc890b1720de88d215013709ec8bbbf4b7b2"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constant_game_probes.json",
+      "bytes": 1986,
+      "role": "external_archive",
+      "sha256": "8a2874d3e1014503b14e14c64b61913a47f1641352658b5ad09c1abff1258545"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constant_lr_ablation.json",
+      "bytes": 1446,
+      "role": "external_archive",
+      "sha256": "c69dfec526daabffdeee4a64e6545067a8ca563a6cb0c83bd33af4f228dff287"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_data_init.json",
+      "bytes": 1507,
+      "role": "external_archive",
+      "sha256": "eb5ac83c61ca152bc8ff1e11af0294e3a5351871cdb9d8c3e9a37590773c6ced"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/affine_empirical_box.json",
+      "bytes": 1528,
+      "role": "external_archive",
+      "sha256": "a870558630019271ecc03e9777d60aff78a9b5c34bd9be6bd5a4f232c34a2a06"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/affine_empirical_box_random.json",
+      "bytes": 1542,
+      "role": "external_archive",
+      "sha256": "bf65e5c5edaeed8d1cbaf7ea829db082efa1752219e95a6e4ee4031fd434f4ca"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/affine_normal.json",
+      "bytes": 1514,
+      "role": "external_archive",
+      "sha256": "f0ac9045b325d48e7ca3db30b034ec999c0526be770704e3958cd9ef421a41c3"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/affine_normal_random.json",
+      "bytes": 1528,
+      "role": "external_archive",
+      "sha256": "58dac9dc00340c4b5f2e624f40186e22bc14e20a6ba2f395382170406efc383a"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/affine_square_random.json",
+      "bytes": 1528,
+      "role": "external_archive",
+      "sha256": "e303dbe8b2695d6ed0cdcc50f46cb41e0bdd263f7e0f567b0b0debe5090e14ad"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/batch1024.json",
+      "bytes": 1510,
+      "role": "external_archive",
+      "sha256": "7ace71029be86228f321e2b890bd2f84eb4482c3acbac3b47506700c6e1a3d10"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/batch512.json",
+      "bytes": 1508,
+      "role": "external_archive",
+      "sha256": "7650ba838892559bcbca9babc5c79c30ef493ef3465ca94aa84e23594ddeb0ed"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/control.json",
+      "bytes": 1508,
+      "role": "external_archive",
+      "sha256": "83c56023ae5f5bdbde2b612d29500fafd9aaca29b2e00cfa6ff53baa8d942f72"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/critic32.json",
+      "bytes": 1508,
+      "role": "external_archive",
+      "sha256": "56fe2a6682076f1fd5eb02adab6c1bfbf31cf348eb1b58beab9fd3f416af477f"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/critic64.json",
+      "bytes": 1508,
+      "role": "external_archive",
+      "sha256": "b3f8b539c960b19525e649812e059c816df97730c80013f9db581cd7924c454c"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/critic_depth2.json",
+      "bytes": 1514,
+      "role": "external_archive",
+      "sha256": "9597f06a141b486c94ede088b22ebe5dd2f739673db4ad671ffb68fbf347703a"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/fourier0.json",
+      "bytes": 1509,
+      "role": "external_archive",
+      "sha256": "00dc27083a8079a59428dad0e36d12c75f9bdcc8b830e0fbc6a6566270a5a4cf"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/fourier1.json",
+      "bytes": 1509,
+      "role": "external_archive",
+      "sha256": "3726452951b46715f6dc7ca5789e322afd05e80be506c0623c6c0ee8363ae5de"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/fourier2.json",
+      "bytes": 1509,
+      "role": "external_archive",
+      "sha256": "69dc82cc6db177ba2305cc8d8ab211d4326031c2a0927bd093553216f0f339db"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/lean_joint.json",
+      "bytes": 1510,
+      "role": "external_archive",
+      "sha256": "07c3187cc6b4e222b7e13feb22e5fb7e0b738230768976857f4542b12eaeb29b"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/mlp_normal_z2.json",
+      "bytes": 1476,
+      "role": "external_archive",
+      "sha256": "e38d380369698dee609d81fbbb80b935776803bf7e69fa344e52d49a877df3e9"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/mlp_normal_z4.json",
+      "bytes": 1476,
+      "role": "external_archive",
+      "sha256": "01ad353ae4353c8f536999953338c167fbad87808a8224336c77647d0f6a08b7"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/particles10000.json",
+      "bytes": 1515,
+      "role": "external_archive",
+      "sha256": "f08472db7d1b202a3891314d5043eb9c923da4460f6a1aea6300afa9263e1548"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v1/particles5000.json",
+      "bytes": 1513,
+      "role": "external_archive",
+      "sha256": "a1730319a59b2c615734b11133d267ce19a4109363fe7f4a93248cd0305eaed7"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v2/simple_empirical_box.json",
+      "bytes": 1507,
+      "role": "external_archive",
+      "sha256": "eb5ac83c61ca152bc8ff1e11af0294e3a5351871cdb9d8c3e9a37590773c6ced"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_geometry_v3/simple_moment_box.json",
+      "bytes": 1501,
+      "role": "external_archive",
+      "sha256": "dd85c189eb15469a3f521e189cc7086367bfc688c0f459e4cb9936c0925e053e"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/constraints_simple_regularization.json",
+      "bytes": 1507,
+      "role": "external_archive",
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/extra_adam_probes.json",
+      "bytes": 1082,
+      "role": "external_archive",
+      "sha256": "0775a27a848ff22640eec0c41b72e753bbf0bed8a74cd4aa109bddf0c57ce945"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta999_p3_o028_e02.json",
+      "bytes": 948,
+      "role": "external_archive",
+      "sha256": "73a762dadcb3c3a34d625f592d820b6e9b4c889bf7af3055b346b7c8e76aeabb"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta999_p3_o029_e02_i025.json",
+      "bytes": 954,
+      "role": "external_archive",
+      "sha256": "a34190f9ac4fde10be867c9ff03df4d9541e8397af561297017f496e33e495ad"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o0275_e0125.json",
+      "bytes": 949,
+      "role": "external_archive",
+      "sha256": "96c204723ef47adc392d5dad985e507c54a80cad3a258450eb494072a7bc3160"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o0275_e015.json",
+      "bytes": 947,
+      "role": "external_archive",
+      "sha256": "1c4bc9f7030879e1815a0452b3eb23a5c5c068ac616e0f9277390896a17091f2"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o0275_e0175.json",
+      "bytes": 949,
+      "role": "external_archive",
+      "sha256": "fc6596153f880460e0ffc2d21921a9498bd9ab410c78beebcaa6604196fdc689"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o028_e0125.json",
+      "bytes": 947,
+      "role": "external_archive",
+      "sha256": "6f7fbfdd4292b275d8170e259279a92f7e117f985ea86ec110cd1035f30adb88"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o028_e015.json",
+      "bytes": 945,
+      "role": "external_archive",
+      "sha256": "b3ff3143232e057d8a5fc4844407dbc55f586cad05f709b16f335de419da1da3"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o028_e0175.json",
+      "bytes": 947,
+      "role": "external_archive",
+      "sha256": "6691450b4ce639dc42cb3aaad2367292534a9d196c826b2ecff84352193b70bb"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o029_e0125.json",
+      "bytes": 947,
+      "role": "external_archive",
+      "sha256": "8824896be5e7c9891204f0552151494a7408a1a7674ca3f13abe35f6f133a560"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o029_e015_i025.json",
+      "bytes": 951,
+      "role": "external_archive",
+      "sha256": "039bec46d4d93174a3d200ba647ccc93e4f7747d3f588af5647f10b207e0f09b"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_grid_v1/beta99_o029_e0175.json",
+      "bytes": 947,
+      "role": "external_archive",
+      "sha256": "b36e8cf345e3b54c5d9c2c8f733aa01e363940da6edfa1327f468e0539ce9848"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_near_v1/near_a055.json",
+      "bytes": 942,
+      "role": "external_archive",
+      "sha256": "267643d8aaff17b155e0fe421f836505e687e691ebd552fd172a7ccdfd3a9511"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_near_v1/near_e012.json",
+      "bytes": 940,
+      "role": "external_archive",
+      "sha256": "6094ca69c5d0db334ac890b5b5d9fa1e6b419b2854062ce4b89ffc33db9a9c40"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_near_v1/near_e013.json",
+      "bytes": 940,
+      "role": "external_archive",
+      "sha256": "9f6274d0ff6172ee9a07f19816a6475b7827080f0955a5510eb8d4b136fa17d5"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noise_near_v1/near_i045.json",
+      "bytes": 942,
+      "role": "external_archive",
+      "sha256": "5159131af458cad237a1fce033bda389739cf3303dddc02e9495bd317587844a"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/noisy_mlp_allocation.json",
+      "bytes": 1125,
+      "role": "external_archive",
+      "sha256": "a22a5f45b32e01ed383cef496cfe20b99253db53964aa76e917e8beeb2819f25"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/persistent_noise_probes.json",
+      "bytes": 1498,
+      "role": "external_archive",
+      "sha256": "0af3ef1e5af9067388afbdc6caa094795977531e9762afb7dc62fbdb01b7f8af"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/recommended.json",
+      "bytes": 976,
+      "role": "external_archive",
+      "sha256": "58b85e9e9fda88a9dafe933c9ca4b27ee88c75f3ab2831a70ebefe2285cfd959"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/regularization_screen_v1/kappa100.json",
+      "bytes": 1481,
+      "role": "external_archive",
+      "sha256": "12c1933787fb133e9708247c807aeb279df83a7053404ce7aafdde8d3e3d37d8"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/regularization_screen_v1/kappa150.json",
+      "bytes": 1481,
+      "role": "external_archive",
+      "sha256": "ab824321fbe433437c777ef49cf67da50c05c8e227ef33c60e6fcaa11deed59f"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/regularization_screen_v1/prior002.json",
+      "bytes": 1482,
+      "role": "external_archive",
+      "sha256": "c072a5f4c902ad9507d03d906dfce17e2e528a4843a5e9ed0ed3ddd09bed24c5"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/regularization_screen_v1/prior010.json",
+      "bytes": 1481,
+      "role": "external_archive",
+      "sha256": "d3c0babd13c7de846bfb1930a0ec9de5c20072003f92a2186e83ec23d1b3f2b4"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/search_architecture.json",
+      "bytes": 1508,
+      "role": "external_archive",
+      "sha256": "c5ee2939f621cb17640258d7f07e9ac1f7ccbe438a07e2731868dbc84e389f94"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/search_instance_noise.json",
+      "bytes": 358,
+      "role": "external_archive",
+      "sha256": "5f47f1b96e29a4d6e339fad1dfe7c034f0d651459b1efa8c8aa80c615d73f59e"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/search_recipe.json",
+      "bytes": 1677,
+      "role": "external_archive",
+      "sha256": "3623f70951173026fb9d6277301e91f02664dcc9c2f0f17a589137bd6cd4ed9c"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/search_schedule.json",
+      "bytes": 2144,
+      "role": "external_archive",
+      "sha256": "84d92c3587e7fc5cd7d3d1432d4338d7011f98b569939db34d616707ef907c1a"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/search_staggered.json",
+      "bytes": 310,
+      "role": "external_archive",
+      "sha256": "3c9fe1b2a8ca4575ee7a1163fff62f0cfb6fbba8d473824c29603afe8e3e1adc"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/shared_candidate.json",
+      "bytes": 1496,
+      "role": "external_archive",
+      "sha256": "6de24743336a3ce7e922deceab91dff0688bdb28ae8f5e6ff2c8b88b9f2bec27"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/toy100/shared_candidate_isolated_rng.json",
+      "bytes": 1557,
+      "role": "external_archive",
+      "sha256": "a966d3f3c955b7b19bd4f99705dfebbe9ea862dc3b3a598828364efd49c431e8"
+    },
+    {
+      "alias": "atlas19-external/native_root/configs/transition/leaderboard.json",
+      "bytes": 8741,
+      "role": "external_archive",
+      "sha256": "0a4b11ab3f407e2244c642f27ee3749075d21df6de3cf3e5e27c44897624f76f"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/cifar_metrics.py",
+      "bytes": 2814,
+      "role": "external_archive",
+      "sha256": "7593a15822cb8cd99b48ed75127f99f1f856ebc1000d0acf9d7e369d9b2d44a3"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/cifar_speed.py",
+      "bytes": 1902,
+      "role": "external_archive",
+      "sha256": "2642cbbdf844510de4680050eb91972a03ecab6450f67d1965e4316e4b1a2edd"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/ddgan_ncsnpp/__init__.py",
+      "bytes": 58,
+      "role": "external_archive",
+      "sha256": "60a5d144f89ad8c2c39c2a57f5f3d4202970022133edfd372f2db4d497ce7a18"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/ddgan_ncsnpp/dense_layer.py",
+      "bytes": 3234,
+      "role": "external_archive",
+      "sha256": "d98df1532c1b7900bb08eda7af0c5f9aa9a710fbbeeda7b97ef5d56736510cda"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/ddgan_ncsnpp/layers.py",
+      "bytes": 20853,
+      "role": "external_archive",
+      "sha256": "152abf198a0bdf0fb6520de21ff139167471961f7299be9e1c8ea46d93f49b83"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/ddgan_ncsnpp/layerspp.py",
+      "bytes": 12549,
+      "role": "external_archive",
+      "sha256": "291cb4d45729b99832d6da7959dcba9c3605179db8deb1486b7fb8844caf6211"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/ddgan_ncsnpp/ncsnpp_generator_adagn.py",
+      "bytes": 15585,
+      "role": "external_archive",
+      "sha256": "a50b6609f174dbe46e1011c83fb713e39e38f169f396651853b3b0bff88d0e7b"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/ddgan_ncsnpp/up_or_down_sampling.py",
+      "bytes": 9105,
+      "role": "external_archive",
+      "sha256": "ca1f71d780cebf20faaf2162e18c16d2564b2a9bca0b3e606794d52da1e636b4"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/ddgan_ncsnpp/upfirdn2d.py",
+      "bytes": 2009,
+      "role": "external_archive",
+      "sha256": "22f1993059536a7828d912ccd81f0d135524d712b62a09ccbdf1649b366c6d8f"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/ddgan_ncsnpp/utils.py",
+      "bytes": 4342,
+      "role": "external_archive",
+      "sha256": "5a78caca1d5550859bdb844d7c3ee9ccb76a05c54515f1a65cd1dbcabbe647e9"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/denoising_toy.py",
+      "bytes": 9741,
+      "role": "external_archive",
+      "sha256": "b16eefa77a131b7c819ed15d92e2b31d3bf3fb13bbaf51aa915e5032265ddc29"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/game_jacobian.py",
+      "bytes": 12085,
+      "role": "external_archive",
+      "sha256": "1126e7df248d017c1ce8cf98ed09f378e0cf4f80004bfdd865493cf0cc83fccf"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_control.py",
+      "bytes": 6314,
+      "role": "external_archive",
+      "sha256": "f2dc04cca26dd22f9756778034239fb8fae632598b0b2bf68ccb70447295a838"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_control_evaluation.py",
+      "bytes": 11617,
+      "role": "external_archive",
+      "sha256": "8d67a9520261ebaf157f721a23da8ace61fc6616f330624fb3c71f0ea910783d"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_data.py",
+      "bytes": 6467,
+      "role": "external_archive",
+      "sha256": "e32979f8da059466a7122bbdf30607e3f51b0a23f8b41f8ca5202947401d133f"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_evaluation.py",
+      "bytes": 6478,
+      "role": "external_archive",
+      "sha256": "5422148100ed7c8b48c79ebe8a2c9f68c165bf07bce005b9c7ee59dab17908fd"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_gan_control.py",
+      "bytes": 8232,
+      "role": "external_archive",
+      "sha256": "9676b18dc77e0a73a68a4780d1c16692a2c0e2eb2b03fac38e8438f19a8f7d61"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_l2_finetune.py",
+      "bytes": 1632,
+      "role": "external_archive",
+      "sha256": "5d23c0c9c9a233aafded1f533a161b00fd2ae346e1e5241cfd6db48e4440856e"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_lander_live.py",
+      "bytes": 17649,
+      "role": "external_archive",
+      "sha256": "6949a9b6f60160576284b0f18ce13f661ff093c4639367fd1819fbc27abcf8c5"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_particle_finetune.py",
+      "bytes": 11141,
+      "role": "external_archive",
+      "sha256": "04d9473c2a934b5801691a8060792347f685f94d9a78e8df8922f54e18058352"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_previous_gan.py",
+      "bytes": 5565,
+      "role": "external_archive",
+      "sha256": "1cee5cafcfb780d2c638277b4ae4536694a0761f2639c616fe4e63120f15b8bd"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_slider_finetune.py",
+      "bytes": 5130,
+      "role": "external_archive",
+      "sha256": "78272d17355fd22c58b802fba6b7a8d80e57be398320d67338c8cc3b55320669"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_slider_gan.py",
+      "bytes": 5026,
+      "role": "external_archive",
+      "sha256": "cbf55e44a903413de605745bc7044053b85e95789089a3abf246a7504110015b"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_sparse_action.py",
+      "bytes": 4993,
+      "role": "external_archive",
+      "sha256": "a56dca6275230a81f514d15fc6223e0bf955f35ceb835be266285aaf5b4408f6"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_state_control.py",
+      "bytes": 6544,
+      "role": "external_archive",
+      "sha256": "48d7f4a1eabc55f52e0122627e4ee2a751f5490f19c2c59491cc20a1c23ad8d5"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/gym_transition.py",
+      "bytes": 12041,
+      "role": "external_archive",
+      "sha256": "0353acc41e4263b71f4c6c04c2918db0106d256938cea9e1c16a92fc58ebbcf0"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/image_ddgan.py",
+      "bytes": 6663,
+      "role": "external_archive",
+      "sha256": "b49dd3ac6f43d55c9445d6813dc3c51203542bd54e81613a13f48e8b3268af2e"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/image_moonshots.py",
+      "bytes": 7594,
+      "role": "external_archive",
+      "sha256": "32609ae5ac95d017416ad8a9154dcf8d3a00483b78770bf606213cff41088bb8"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/image_ncsnpp.py",
+      "bytes": 1308,
+      "role": "external_archive",
+      "sha256": "4c85dafcbe71dbd9cb2d0f0a0e4c75cc77b067f4b437bcdac88808be926f1c9c"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/image_particle_autoencoder.py",
+      "bytes": 3979,
+      "role": "external_archive",
+      "sha256": "f4202737465b21d5478a7e744d02717fabb1f76175b179b055ba1e79c074e40e"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/image_particle_ddgan.py",
+      "bytes": 1630,
+      "role": "external_archive",
+      "sha256": "c0106fef92ac25d0f9acc5ca91c48b5b037f0e05ab5a517ca7f149fc676c7fe9"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/lunar_artifacts.py",
+      "bytes": 12267,
+      "role": "external_archive",
+      "sha256": "3a4d126314f71de9fbf534d0ea582b5e5bf9d9c812f2625a0a608acd903f4f23"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/lunar_flight.py",
+      "bytes": 15831,
+      "role": "external_archive",
+      "sha256": "9cae6e8e18c26dd66e460bed684a629eb0e640aa38e85dda8da783e4807b6a12"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/lunar_training.py",
+      "bytes": 18298,
+      "role": "external_archive",
+      "sha256": "2b4436dcd8b54cb8af26f709ea38f2583b9e5728b391f49674ad8113f5fe188d"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/mog_metrics.py",
+      "bytes": 7116,
+      "role": "external_archive",
+      "sha256": "70389fe190357d9aa49b8dfe43c822c0eb167be3a2f3e39102c2a32fa8ff5f21"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/oadam.py",
+      "bytes": 6647,
+      "role": "external_archive",
+      "sha256": "bb00feeca65675a90beb28886ed0fef420963798e53d900d920cb3c531275de3"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/particle_prior.py",
+      "bytes": 127,
+      "role": "external_archive",
+      "sha256": "8a7ecf9b49c58a2d78b30f0237e586079a8353afd3ac1ea9029c53c837f63989"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/safe_fast_landing.py",
+      "bytes": 19653,
+      "role": "external_archive",
+      "sha256": "011bdee91847e65ad57f5da531c83fb9cc567c9d14a0620a1fd0f3a2cf034903"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/sparse_metrics.py",
+      "bytes": 13637,
+      "role": "external_archive",
+      "sha256": "e359fbddf67f00d4ab5b18b1a9feacd223649b2409d90f439418619918f98ef2"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/sparse_models.py",
+      "bytes": 11002,
+      "role": "external_archive",
+      "sha256": "acc4e24b41791334c66a31de9a2f8fe098cff5c5f474fce00e3e64fec2c39fd4"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/sparse_toy.py",
+      "bytes": 7651,
+      "role": "external_archive",
+      "sha256": "c356bc07a3510efc12eda6ea78ab02196cd5b6dfa2d5540c1602c8649551c979"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/toy_metrics.py",
+      "bytes": 18527,
+      "role": "external_archive",
+      "sha256": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/toy_models.py",
+      "bytes": 5231,
+      "role": "external_archive",
+      "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/trajectory.py",
+      "bytes": 13760,
+      "role": "external_archive",
+      "sha256": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/trajectory_visuals.py",
+      "bytes": 7381,
+      "role": "external_archive",
+      "sha256": "5e7e2534d6af396f6c0fcc0e32663f982769f5007abdfc7d21ae05d5873612bf"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/transition.py",
+      "bytes": 12257,
+      "role": "external_archive",
+      "sha256": "87bb3cfb65a96ac058860a06df421601caf02a44a05c5c62b265d3e1850fcf76"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/transition_visuals.py",
+      "bytes": 5348,
+      "role": "external_archive",
+      "sha256": "ad0e39ccac8c9a1c682c4ac350d88efc9ef7c6910e615ccf936017c6265518c4"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/vendor/concept_slider_core/UPSTREAM.json",
+      "bytes": 458,
+      "role": "external_archive",
+      "sha256": "cffe842bc007d53490dbfc584a63b5fc084f0b40d60a02af2d50ade90137bdd4"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/vendor/concept_slider_core/provenance.json",
+      "bytes": 763,
+      "role": "external_archive",
+      "sha256": "16d875715549da05c922caba8bce46cc228d3e028ddecaba0eef288425ba0264"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/vendor/concept_slider_core/reference.py",
+      "bytes": 11592,
+      "role": "external_archive",
+      "sha256": "c5ef81e49826a8b9065f1b1ab11b03f3fccce7a93c9de8d31b897f668f48b833"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/vicreg_loss.py",
+      "bytes": 121,
+      "role": "external_archive",
+      "sha256": "16eaf1f57450d8b81de801fe3c1d9e0f28b8842c8669a23bfa4a5f20db5b6cf8"
+    },
+    {
+      "alias": "atlas19-external/native_root/lib/yue2_particle_toy.py",
+      "bytes": 13077,
+      "role": "external_archive",
+      "sha256": "6fd9cdb227c0c4583973bc7a4609514a4d921aec694ab736ac5ac141695e2786"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/__init__.py",
+      "bytes": 1284,
+      "role": "external_archive",
+      "sha256": "ce33350b157e74f10046d03456c59a26c9a40fa3d948773bad90568c86014e1e"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/autoencoder.py",
+      "bytes": 6194,
+      "role": "external_archive",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/batch_feature_init.py",
+      "bytes": 6691,
+      "role": "external_archive",
+      "sha256": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/conditioning.py",
+      "bytes": 4878,
+      "role": "external_archive",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/det_init_a.py",
+      "bytes": 15944,
+      "role": "external_archive",
+      "sha256": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/det_init_d.py",
+      "bytes": 17670,
+      "role": "external_archive",
+      "sha256": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/det_init_f.py",
+      "bytes": 25380,
+      "role": "external_archive",
+      "sha256": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/deterministic_init.py",
+      "bytes": 16631,
+      "role": "external_archive",
+      "sha256": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/diffusion.py",
+      "bytes": 5080,
+      "role": "external_archive",
+      "sha256": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/discriminators.py",
+      "bytes": 5833,
+      "role": "external_archive",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/family_e_init.py",
+      "bytes": 21096,
+      "role": "external_archive",
+      "sha256": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/gan_loss.py",
+      "bytes": 1016,
+      "role": "external_archive",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/grad_regularizers.py",
+      "bytes": 13043,
+      "role": "external_archive",
+      "sha256": "889ddd74eaa7cbf87b28d9e10f14d5402be9d0dffff0d338ef9e5043366fb2fe"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/init_registry.py",
+      "bytes": 5997,
+      "role": "external_archive",
+      "sha256": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/initialization.py",
+      "bytes": 5943,
+      "role": "external_archive",
+      "sha256": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/k3p.py",
+      "bytes": 30636,
+      "role": "external_archive",
+      "sha256": "a2aa0f78a8c7a2883801206dd850314a6f39dda7d1c21cf53517d7cc5a644530"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/particle_prior.py",
+      "bytes": 17636,
+      "role": "external_archive",
+      "sha256": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/qr_bz_pq_init.py",
+      "bytes": 12419,
+      "role": "external_archive",
+      "sha256": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/recipes.py",
+      "bytes": 27518,
+      "role": "external_archive",
+      "sha256": "1320aa7dce1f759a8217a83792d8ba57b43e237d8d9e4e4c9a057228f2f9d46f"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/structured_init.py",
+      "bytes": 16695,
+      "role": "external_archive",
+      "sha256": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/training.py",
+      "bytes": 21635,
+      "role": "external_archive",
+      "sha256": "02b690c8fea710545f06d84f7998f47164b4c59be4d922fa86aaf49895bee049"
+    },
+    {
+      "alias": "atlas19-external/native_root/particlegan/vicreg_loss.py",
+      "bytes": 2297,
+      "role": "external_archive",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    {
+      "alias": "configs/100gaussians/atlas.json",
+      "bytes": 1798,
+      "role": "owned_source",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    },
+    {
+      "alias": "configs/forge/ideas/five-word-joint-ka2-v1.json",
+      "bytes": 1938,
+      "role": "owned_source",
+      "sha256": "f2cd3809340d8aece6cb24ecde8eb863061ad290de5aa09f4fc66c73bb984118"
+    },
+    {
+      "alias": "configs/forge/ideas/k3p-a2-off-native-diagnostic.json",
+      "bytes": 1847,
+      "role": "owned_source",
+      "sha256": "66e366ea1fced5d6575a5b4acd322e39564ce582ac591449cd5a79b5831907be"
+    },
+    {
+      "alias": "configs/forge/ideas/k3p-bcap-matched-v1.json",
+      "bytes": 1049,
+      "role": "owned_source",
+      "sha256": "7eed5eb795a0cedf1200e3333ea225736e06a3db67d6b48720115a144fda71a8"
+    },
+    {
+      "alias": "configs/forge/ideas/k3p-global-input-noise-v1.json",
+      "bytes": 7942,
+      "role": "owned_source",
+      "sha256": "e8cd2312d5ce4ca16afff0100d0995a80928f64a235d97a206f20ce496d31837"
+    },
+    {
+      "alias": "configs/forge/ideas/k3p-global-repair-v1.json",
+      "bytes": 33419,
+      "role": "owned_source",
+      "sha256": "492c1fb8551098d022e5e4d95deb8d4e4dc8d42699cfd2d0e6c164ea45c22ead"
+    },
+    {
+      "alias": "configs/forge/ideas/k3p-no-output-noise-diagnostic.json",
+      "bytes": 1933,
+      "role": "owned_source",
+      "sha256": "bf49d3ef0619e561fb1cad1c7fff36987c93f76fd882af18f200a2ea5d117595"
+    },
+    {
+      "alias": "configs/forge/ideas/k3p-r1r2-matched-v1.json",
+      "bytes": 1051,
+      "role": "owned_source",
+      "sha256": "7f07c3be712629d7711f47a9bc12a4c0836ed31d407aee69afe849c881516c03"
+    },
+    {
+      "alias": "configs/forge/ideas/k3p.json",
+      "bytes": 1006,
+      "role": "owned_source",
+      "sha256": "8830c96552458a1f16973016bb0f5519d875811ce519be08e5652ac325dabe97"
+    },
+    {
+      "alias": "configs/forge/ideas/ka2-global-repair-v1.json",
+      "bytes": 32822,
+      "role": "owned_source",
+      "sha256": "c2cbdbfcb068c16b637b33a385889b847905bdc3f4507b879cfe1e0bb61f01ab"
+    },
+    {
+      "alias": "configs/forge/ideas/ka2.json",
+      "bytes": 998,
+      "role": "owned_source",
+      "sha256": "bafc216a39aea2453241a01a6bd3b12e4b2d0b516a5f96601e1cbcd7bfebc09c"
+    },
+    {
+      "alias": "configs/forge/ideas/r1r2-global-repair-v1.json",
+      "bytes": 32631,
+      "role": "owned_source",
+      "sha256": "85af1689b8c2e33f5462b7787c5305452ccdc3841a79ae5de025322521039add"
+    },
+    {
+      "alias": "configs/forge/ideas/release07-gan-v3-cloud-v1.json",
+      "bytes": 2297,
+      "role": "owned_source",
+      "sha256": "daee7bac640a1d000d9b6596b6c458d2b40fa251beeb4c162ae57e0b11fa67ab"
+    },
+    {
+      "alias": "configs/forge/ideas/release07-gan-v3-mog-v1.json",
+      "bytes": 2219,
+      "role": "owned_source",
+      "sha256": "5726a561ca5a92ff96cf93e53f47c3acba01e44622437534c67a00eaeb7f8bec"
+    },
+    {
+      "alias": "configs/forge/ideas/release07-gan-v3-task-adapted-v1.json",
+      "bytes": 3127,
+      "role": "owned_source",
+      "sha256": "0c11aa5d44503f146fcfea3cb97267cfc63e02d3a4a24f36d87c7bbb9b801558"
+    },
+    {
+      "alias": "configs/toy100/constraints_simple_regularization.json",
+      "bytes": 1507,
+      "role": "owned_source",
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    {
+      "alias": "experiments/forge/canonical_serving_measurement.py",
+      "bytes": 7446,
+      "role": "owned_source",
+      "sha256": "cb7957917d7217d6976ce30389ac02b0e5fb42a04c5dc0fa61c982b3a15e54e6"
+    },
+    {
+      "alias": "particlegan/__init__.py",
+      "bytes": 1811,
+      "role": "owned_source",
+      "sha256": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c"
+    },
+    {
+      "alias": "particlegan/_qr.py",
+      "bytes": 1951,
+      "role": "owned_source",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916"
+    },
+    {
+      "alias": "particlegan/anchor_birth.py",
+      "bytes": 6401,
+      "role": "owned_source",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+    },
+    {
+      "alias": "particlegan/autoencoder.py",
+      "bytes": 6194,
+      "role": "owned_source",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    {
+      "alias": "particlegan/birth_death.py",
+      "bytes": 45396,
+      "role": "owned_source",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+    },
+    {
+      "alias": "particlegan/birth_phase.py",
+      "bytes": 21157,
+      "role": "owned_source",
+      "sha256": "4af5a0915f927ca3d8e753195227d59c97f07304e9927ca1383bda9acd0ccb8f"
+    },
+    {
+      "alias": "particlegan/capabilities.py",
+      "bytes": 2285,
+      "role": "owned_source",
+      "sha256": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177"
+    },
+    {
+      "alias": "particlegan/conditioning.py",
+      "bytes": 4878,
+      "role": "owned_source",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    {
+      "alias": "particlegan/continuous.py",
+      "bytes": 60875,
+      "role": "owned_source",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    {
+      "alias": "particlegan/diffusion.py",
+      "bytes": 5100,
+      "role": "owned_source",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61"
+    },
+    {
+      "alias": "particlegan/discriminators.py",
+      "bytes": 5833,
+      "role": "owned_source",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    {
+      "alias": "particlegan/feature_cells.py",
+      "bytes": 125325,
+      "role": "owned_source",
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a"
+    },
+    {
+      "alias": "particlegan/feature_policy.py",
+      "bytes": 14650,
+      "role": "owned_source",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+    },
+    {
+      "alias": "particlegan/feature_reference.py",
+      "bytes": 32368,
+      "role": "owned_source",
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1"
+    },
+    {
+      "alias": "particlegan/gan_loss.py",
+      "bytes": 1016,
+      "role": "owned_source",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    {
+      "alias": "particlegan/grad_regularizers.py",
+      "bytes": 14853,
+      "role": "owned_source",
+      "sha256": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747"
+    },
+    {
+      "alias": "particlegan/init.py",
+      "bytes": 24559,
+      "role": "owned_source",
+      "sha256": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0"
+    },
+    {
+      "alias": "particlegan/k3p.py",
+      "bytes": 33012,
+      "role": "owned_source",
+      "sha256": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c"
+    },
+    {
+      "alias": "particlegan/ka2.py",
+      "bytes": 16551,
+      "role": "owned_source",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703"
+    },
+    {
+      "alias": "particlegan/mean_transport.py",
+      "bytes": 39633,
+      "role": "owned_source",
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06"
+    },
+    {
+      "alias": "particlegan/output_moments.py",
+      "bytes": 8387,
+      "role": "owned_source",
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188"
+    },
+    {
+      "alias": "particlegan/particle_prior.py",
+      "bytes": 17899,
+      "role": "owned_source",
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    {
+      "alias": "particlegan/policy.py",
+      "bytes": 81022,
+      "role": "owned_source",
+      "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5"
+    },
+    {
+      "alias": "particlegan/population_continuity.py",
+      "bytes": 20329,
+      "role": "owned_source",
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6"
+    },
+    {
+      "alias": "particlegan/recipe_schedules.py",
+      "bytes": 6044,
+      "role": "owned_source",
+      "sha256": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500"
+    },
+    {
+      "alias": "particlegan/recipes.py",
+      "bytes": 53612,
+      "role": "owned_source",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+    },
+    {
+      "alias": "particlegan/routing.py",
+      "bytes": 64904,
+      "role": "owned_source",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc"
+    },
+    {
+      "alias": "particlegan/row_evidence.py",
+      "bytes": 9397,
+      "role": "owned_source",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e"
+    },
+    {
+      "alias": "particlegan/training.py",
+      "bytes": 39880,
+      "role": "owned_source",
+      "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+    },
+    {
+      "alias": "particlegan/vicreg_loss.py",
+      "bytes": 2297,
+      "role": "owned_source",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    {
+      "alias": "tests/fixtures/release07-public-api.json",
+      "bytes": 76583,
+      "role": "owned_source",
+      "sha256": "4dc52437ee91133c56ffb11bb09e51ac9e1dba27203e7f72cb34780411951e9a"
+    }
+  ],
+  "schema": "pg_atlas_restoration_relative_source_index_v1",
+  "shared_core_merge_claimed": false
+}

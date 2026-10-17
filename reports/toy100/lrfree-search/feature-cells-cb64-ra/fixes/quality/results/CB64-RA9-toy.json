@@ -1,0 +1,23 @@
+{
+  "status": "TOY_RAW_PASS_GRID_PENDING",
+  "utc": "2026-09-30T09:22:29.243127+00:00",
+  "variant": "CB64-RA9",
+  "toy_gate": "PASS",
+  "grid_gate": "PENDING",
+  "toy_metrics": {
+    "precision": 0.96533203125,
+    "modes": 25,
+    "mass_tv": 0.05211425781250001,
+    "minimum_supported_mode_mass": 0.03271484375
+  },
+  "toy_training_seconds": 113.74897909467109,
+  "input_artifact_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/result.json": "b41eec6f75673a397d7d300db225a6867c2c2c585f9093099fddc0ab5cdf84ab",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/source-freeze.json": "09e6e11fd7c862d7d98fca9b5209e93be971d034ab0c6553cbd9a18bdeb6bec2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/owned-slot-through-1.json": "476d3748bed1cacfb7fcb4e1f459a371a9b6eda61694cde499f3c2ccb420827a"
+  },
+  "package_promoted": false,
+  "both_quality_gates_pass": false,
+  "scope": "Original final noisy CUDA toy raw gate. Independent saved-state audit is separate and pending; full canonical grid pending."
+}

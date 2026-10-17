@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "scientific_status": "VALID_NEGATIVE_FIXED_GATE_FAIL",
+  "scientific_rerun_for_publication": false,
+  "exit_code": 2,
+  "changed_factor": "D16/G16 versus D16/G64; all other profile/fixture/units/native controls identical",
+  "steps_per_arm": 200,
+  "combined_elapsed_seconds": 16.410747226094827,
+  "scientific_checks": {
+    "source_exact": true,
+    "teacher_qualified": true,
+    "initial_owners_match": true,
+    "G16_native_health": true,
+    "G64_native_health": true,
+    "G16_converges_at100": true,
+    "G64_converges_at100": true,
+    "G64_better_at100": false,
+    "G16_converges_at200": true,
+    "G64_converges_at200": true,
+    "G64_better_at200": false,
+    "G16_beats_codeblind_bound": false,
+    "G64_beats_codeblind_bound": false,
+    "caller_streams_match": true,
+    "fixed400_complete": true,
+    "within60s": true
+  },
+  "failure": null,
+  "teacher_nonlocal_variance": 0.0005061657866463065,
+  "teacher_hash": "ef4f828da6191e6dd3ae57e8409ae7709153925703070f9a5f9a9dd382d5c354",
+  "fixture_hash": "a460cf5d50c193ce0b145da5171137f4b4358b7c26f78aac71456b4a6ca4d0cb",
+  "calibration": {
+    "mean": [
+      -0.013075649738311768,
+      -0.01493869535624981
+    ],
+    "std": [
+      0.004309856332838535,
+      0.002184599870815873
+    ],
+    "law": "fit-only population channel std clamp1e-4"
+  },
+  "arms": {
+    "G16": {
+      "initial": {
+        "live_mask_error": 56.984703063964844,
+        "live_full_error": 61.6086540222168,
+        "served_mask_error": 56.984703063964844,
+        "served_source": "fast",
+        "codeblind_mask_lower_bound": 0.0005061657866463065,
+        "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+      },
+      "evaluations": {
+        "100": {
+          "live_mask_error": 2.9455859661102295,
+          "live_full_error": 2.673997640609741,
+          "served_mask_error": 2.9455859661102295,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        },
+        "200": {
+          "live_mask_error": 1.5986964702606201,
+          "live_full_error": 1.4933761358261108,
+          "served_mask_error": 1.5986964702606201,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        }
+      },
+      "native_health": {
+        "min_dense_rows": 128,
+        "finite_steps": 200,
+        "ka2_applied_calls": 200,
+        "critic_score_active_gradients": true,
+        "generator_live_gradients": true,
+        "ownership": true,
+        "frozen_host": true
+      },
+      "organic_controls": {
+        "evals": 12,
+        "probes": 96,
+        "proposals": 96,
+        "guard_rejections": 3,
+        "moves": 6,
+        "splits": 3
+      },
+      "row_counters": {
+        "updates": 200,
+        "resets": 384,
+        "global_resets": 3,
+        "flagged_rows_sum": 1571,
+        "hold_steps": 57
+      },
+      "error200_over_V": 3158.444352497774
+    },
+    "G64": {
+      "initial": {
+        "live_mask_error": 56.984703063964844,
+        "live_full_error": 61.6086540222168,
+        "served_mask_error": 56.984703063964844,
+        "served_source": "fast",
+        "codeblind_mask_lower_bound": 0.0005061657866463065,
+        "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+      },
+      "evaluations": {
+        "100": {
+          "live_mask_error": 2.9461498260498047,
+          "live_full_error": 2.673090934753418,
+          "served_mask_error": 2.9461498260498047,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        },
+        "200": {
+          "live_mask_error": 1.5947275161743164,
+          "live_full_error": 1.490707278251648,
+          "served_mask_error": 1.5947275161743164,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        }
+      },
+      "native_health": {
+        "min_dense_rows": 128,
+        "finite_steps": 200,
+        "ka2_applied_calls": 200,
+        "critic_score_active_gradients": true,
+        "generator_live_gradients": true,
+        "ownership": true,
+        "frozen_host": true
+      },
+      "organic_controls": {
+        "evals": 12,
+        "probes": 96,
+        "proposals": 96,
+        "guard_rejections": 1,
+        "moves": 8,
+        "splits": 4
+      },
+      "row_counters": {
+        "updates": 200,
+        "resets": 512,
+        "global_resets": 4,
+        "flagged_rows_sum": 1322,
+        "hold_steps": 51
+      },
+      "error200_over_V": 3150.60313882626
+    }
+  },
+  "g64_benefit_fraction": {
+    "100": -0.00019142538906097387,
+    "200": 0.002482618908676699
+  },
+  "primary_gate_outcome": "G64 failed10% advantage at BOTH100 and200;both arms failed.5V bound at200,all other gates passed",
+  "interpretation": "Both arms rapidly reduced totalerror, but G64 missed10% advantage and both missed.5V codeblindbound. Separate fixed savedendpoint algebra shows conditional error remains near V, so little marker contrast was learned within200steps; midpointerror dominates totalerror. This is a finite-budget diagnostic fixture outcome, not an established ParticleGAN or realbridge bug.",
+  "real_routing_use": {
+    "scope": "Fixed raw64 context-dependent-code use witness; no convergence/default qualification",
+    "raw_context_count": 64,
+    "raw_error_original": 0.1455255150794983,
+    "raw_error_constant_fullbank": 0.15461575984954834,
+    "worsening_fraction": 0.06246495513232983,
+    "rows_worse": 49,
+    "code_variance_mean": 0.21802114969843023,
+    "code_centered_rms": 0.466927349486438,
+    "weight_entropy_mean_nats": 4.427688702556131,
+    "gradient_calls": 0,
+    "optimizer_steps": 0,
+    "noise_draws": 0,
+    "limitations": "Full bank key/value counterfactual establishes useful context-varying bank dependence on one realcohort,not FiLM-only,critic/conditioning defect,convergencecause orLPIPS improvement."
+  },
+  "provenance": {
+    "original_scientific_driver_sha256": "6b0b65d39e4cf5bc9588ae8de4632e9c0ede784d41884560509197d7a89f1c34",
+    "original_scientific_protocol_sha256": "b1cd007e46f8c616bbfad8a56dfee5a0da4d33fe0a126802045b68095f504ed5",
+    "original_result_sha256": "5d7cfc667692d6c9fc32a654b51560405aeae37700a4d24f5177d7f2562cd45d",
+    "original_independent_review_sha256": "7c54729e9696cc0d7628ef29231f5f7db5eccc75aae61304fa14d7a838851694",
+    "real_routing_receipt_sha256": "3899d85332a6691a7a301894fcdcc091b3ece65d6a389e476ea2a5478c3dfe6d",
+    "original_CPU_receipt_sha256": "bf54edd3c98867ec84eb8a4bea96ccbb347e83bb50c75acbec3036a2e1f948e9",
+    "original_public_CPU_contracts": 4,
+    "original_public_CPU_result": "4passed1.00s,RuffPASS;2 genuine one-update unit owner steps,noproductionfixture incontracts",
+    "saved_endpoint_decomposition_result_sha256": "b04ad4f8e44ddb193a2131211b6458b0d2a335f889abe45b325424a71919b558"
+  },
+  "clean_capacity_noise_limit": "Frozen same-family clean teacher does not prove perfect native-DV12 noisy-code capacity. Teacher prescribed pooled-marker coefficient320 differs from studentinitialorthogonal scale; no scientific seed or teacher tuning occurred.",
+  "saved_endpoint_paired_decomposition": {
+    "status": "failed",
+    "arms": {
+      "G16": {
+        "pair_MSE": 1.5986967302194772,
+        "midpoint_loss": 1.5981903897461365,
+        "conditional_error": 0.0005063404733407389,
+        "conditional_error_over_V": 1.000345117546545,
+        "alpha": 0.00030064236355146454,
+        "predicted_contrast_power_over_V": 0.000946466857368776,
+        "target_contrast_power_over_V": 0.9999999354162792,
+        "decomposition_identity_error": 1.0625181290357943e-17,
+        "marker_learned": false,
+        "prediction_sha256": "5dc434f10ad2292119168df5173329ffe295da86926763d76cdfa36455ad267a",
+        "public_native_and_caller_replay_exact": true
+      },
+      "G64": {
+        "pair_MSE": 1.5947275253341386,
+        "midpoint_loss": 1.5942232442037811,
+        "conditional_error": 0.0005042811303575079,
+        "conditional_error_over_V": 0.9962766027682634,
+        "alpha": 0.004269536803996634,
+        "predicted_contrast_power_over_V": 0.004815740959977524,
+        "target_contrast_power_over_V": 0.9999999354162792,
+        "decomposition_identity_error": 9.974659986866641e-18,
+        "marker_learned": false,
+        "prediction_sha256": "d5cd0cdb5af472ed73389f80f1a5bd81ab0940624ed9c1c72c7b05716c632e07",
+        "public_native_and_caller_replay_exact": true
+      }
+    },
+    "predictor_forwards": 9,
+    "autograd_calls": 0,
+    "optimizer_steps": 0,
+    "native_updates": 0,
+    "scientific_training": false,
+    "V": 0.0005061657866463065,
+    "elapsed_seconds": 1.8347727078944445,
+    "source_sha256": "a71651547c3968145a92c73d9b65c133774633840aecaee3741e38becc40c610",
+    "protocol_sha256": "eb3200accfec8d21037ea4a6baeafa3c898ffbaa4493073f8df0a1690fe0f337",
+    "scope": "Separate zero-update fixed saved200 endpoint diagnostic; its .5V marker gate is not a replacement for the four failed original campaign gates."
+  }
+}

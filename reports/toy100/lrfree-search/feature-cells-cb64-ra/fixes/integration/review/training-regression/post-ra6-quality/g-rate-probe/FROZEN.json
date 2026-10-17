@@ -1,0 +1,14 @@
+{
+  "status": "FROZEN_FIXED_INPUT_PROBE",
+  "quality_verdict": null,
+  "files_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/PROTOCOL.md": "6051c370369d44709db8caa39bdd779466923ad2b8045c81822e902b4ef139eb",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/REPORT.md": "c7e855872bb12386101d5c1453b4d34c200eddddc9ce9b33f1380a65afc0a28f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/cpu-attempt1.log": "aa0cc3d204ceab720beec4016915c5f212e11cad737ffec70d7c05492a54c457",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/probe.py": "cfb0df57764cab501d48d46ab75dbd77fa1702c980db905acf08efe3420c0bda",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/g-rate-probe/result.json": "7b1483a006eff60cf1d4cceddda20911a5c6586a5502e84e5198aa138d57671b"
+  },
+  "cpu_only": true,
+  "production_changed": false,
+  "scope": "One root-specified G-only recorded-gradient virtual step at1x/.25; prospectiveconfigG+sigma coupling explicit."
+}

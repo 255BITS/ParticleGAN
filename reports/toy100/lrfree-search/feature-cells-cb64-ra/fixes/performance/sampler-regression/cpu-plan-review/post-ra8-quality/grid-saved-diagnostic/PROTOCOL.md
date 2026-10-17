@@ -1,0 +1,5 @@
+# RA8 binding of the original frozen saved-grid equations
+
+Import the immutable RA4 diagnostic helper ab083335ea1df0a2eddd9fe574e657484da8795dfb74dc53377a3584e1ab0a05. Bind only its input run/output area globals to completed RA8 grid artifacts; retain all numeric equations, fixed step7000, original20k/100k sample counts, oracle scoring-only geometry and data selection. Apply the same output-only JSON scalar-Tensor conversion. Freeze the binding helper and complete input map before measurement. No new random draws, emissions, model constructor, training, CUDA, alternative checkpoint or production patch.
+
+Primary scope is anchor/clean/noisy centroid evidence and current real-only reference calibration opportunities. Existing covariance/radial decomposition fields are reproduced by the unchanged helper; an independent reviewer analyzes their worst-mode structure separately. Saved state contains only semantic paired-average stamp and derived-chart metadata; a newly reconstructed chart must never be labeled the exact historical GPU chart. Coarse topology groups35 with100 diagnostic modes cannot justify a group-wide mean shift.

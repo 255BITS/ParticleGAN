@@ -1,0 +1,17 @@
+{
+  "status": "PASS_ORIGINAL_FIXTURE_CURRENT_API_PREFLIGHT",
+  "training_updates": 0,
+  "model_forwards": 0,
+  "sampling_calls": 0,
+  "begin_step_calls": 0,
+  "cuda_context_initialized": false,
+  "file_sha256": {
+    "SOURCE-FREEZE.json": "678f1230a5305fecc6ba6f7054d6b18095d57d1970dc3233e3de2150cae7e0ca",
+    "INPUTS.json": "23696807a2dc96aa4056a0044540873245676e5ae5e8544960d01e7bc75c213e",
+    "preparation-receipt.json": "1e2c7d70fdd6e829aff6c6e9bf2c49ac281df34974ce2f2fe08f583772f9ee45",
+    "preflight-cpu.json": "d989d293292b0eed9391a0dc409e402e6782b514fe1d5b8d345fe2f196e5082d",
+    "logs/preflight-cpu.log": "3e34c749045b9c1bbd9887d46e64093d39311c3e0797af897ec04cfff28984d1",
+    "ADAPTER-PREPARATION.json": "f39c136e88ba27f6b2b9952c9a4c6f421df049aaeaa15e9945def667c0278d15",
+    "source-transform-receipt.json": "d8d3d67067d7c90e191effa491984203aaf79d0d42a0e72c6380b67f773da2d5"
+  }
+}

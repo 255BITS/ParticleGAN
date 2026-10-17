@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "screening",
+  "revision": 1,
+  "seed": 0,
+  "rng": {
+    "derivation": "forge-rng-v1",
+    "streams": [
+      "init",
+      "data",
+      "prior",
+      "noise",
+      "eval"
+    ],
+    "component_scoped": true,
+    "unintended_deviations": 0,
+    "candidate_identity_in_seed": false
+  },
+  "scoring": {
+    "weights": "live",
+    "ema": "separate_view_required",
+    "best_checkpoint": "diagnostic_only"
+  },
+  "budgets": {
+    "default_through_tier": 1,
+    "per_task": "TaskSpec.execution and resources.timeout_seconds",
+    "candidate_and_campaign": "required before enqueue; reserve full execution-group cost"
+  },
+  "prior": {
+    "kind": "mog",
+    "sigma": 0.025,
+    "standardize": false,
+    "learnable": true
+  },
+  "calibration_status": "provisional",
+  "robustness": {
+    "enabled_for_screening": false,
+    "requires_frozen_candidate": true,
+    "requires_preregistered_seed_set": true,
+    "cross_seed_reuse": false
+  }
+}

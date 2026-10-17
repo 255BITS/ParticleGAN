@@ -1,0 +1,146 @@
+{
+  "completed": 1790816822.6669168,
+  "control_reproduction": "PASS",
+  "evidence_validity": "VALID",
+  "full_new_quality_validation": false,
+  "original_quality_criteria_unchanged": true,
+  "quality_status": "PASS",
+  "scope": "Paired diagnostic continuation from the original1000checkpoint only",
+  "source_integrity_after": {
+    "files": 169,
+    "package_sha256": {
+      "candidate": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+      "control": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15"
+    },
+    "source_freeze_sha256": "3cdda960aa6b7f0553276c3eb2f3d77ec2f25572bfffc217bbeff430928c8d3f",
+    "status": "VALID"
+  },
+  "status": "COMPLETE",
+  "variants": {
+    "candidate": {
+      "control_reproduction": null,
+      "elapsed_time_only_exclusions": [
+        "birth_death.last.eval_seconds"
+      ],
+      "external_batches_advanced_before_restore": 2000,
+      "external_batches_in_window": 1000,
+      "external_cursor_sha256": "36b5a604264600a878ef276abaf6f5a346137c435952b298c522730f53c730e9",
+      "first_update": 1001,
+      "global_cpu_rng_sha256": "2605724fe6fb06b169108b3ff02bc2c62ed0ba329c87124c08268485b4c0f5eb",
+      "global_cuda_rng_sha256": "5ae471354d47f72b9593839a6c236bcf5f2403d996a329aea6548ccb32daba3c",
+      "last_update": 1500,
+      "original_quality_bar": 0.86481,
+      "peak_allocated_gpu_mib": 182.82275390625,
+      "peak_reserved_gpu_mib": 226.0,
+      "private_rng_sha256": {
+        "eval_generator": "6b047b4e9f1fcbc5ec06299572c5bce5b25290652212477187423393ab934d0e",
+        "latent_generator": "9054a68b63c3fd249842e99b4920bbc97c2d9d4b01f69294cc5e862309394610",
+        "noise_generator": "ca9acb1a990adf39c1cd5664f339d6166fd8a2341321ac7b016e0dcd489797fa",
+        "penalty_generator": "8480e26d32f82c48a6ef8886d14b173502092a9f3cca72b58a2dbd2ee49b0fbc"
+      },
+      "quality_status": "PASS",
+      "scorer_changed": false,
+      "seeds_changed": false,
+      "status": "COMPLETE",
+      "thresholds_changed": false,
+      "training_updates": 500,
+      "variant": "candidate",
+      "verdict": {
+        "passed_periods": 2,
+        "periods": [
+          {
+            "hq": 0.9609,
+            "modes": 100,
+            "period_end": 500,
+            "target_deg": 0,
+            "task": "rotated100"
+          },
+          {
+            "hq": 0.9548,
+            "modes": 100,
+            "period_end": 1000,
+            "target_deg": 30,
+            "task": "rotated100"
+          },
+          {
+            "hq": 0.8984,
+            "modes": 99,
+            "period_end": 1500,
+            "target_deg": 60,
+            "task": "rotated100"
+          }
+        ],
+        "pre_turn_hq": 0.9609,
+        "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+        "status": "PASS",
+        "task": "rotated100",
+        "turns": 2
+      }
+    },
+    "control": {
+      "control_reproduction": {
+        "checkpoint_semantic_mismatches": [],
+        "identical_original_verdict": true,
+        "original_checkpoint_sha256": "86377a68005eab5bd3f095514b59ca0aa94a14b0b408b4098a3826590b8dcc2e",
+        "status": "PASS"
+      },
+      "elapsed_time_only_exclusions": [
+        "birth_death.last.eval_seconds"
+      ],
+      "external_batches_advanced_before_restore": 2000,
+      "external_batches_in_window": 1000,
+      "external_cursor_sha256": "36b5a604264600a878ef276abaf6f5a346137c435952b298c522730f53c730e9",
+      "first_update": 1001,
+      "global_cpu_rng_sha256": "2605724fe6fb06b169108b3ff02bc2c62ed0ba329c87124c08268485b4c0f5eb",
+      "global_cuda_rng_sha256": "5ae471354d47f72b9593839a6c236bcf5f2403d996a329aea6548ccb32daba3c",
+      "last_update": 1500,
+      "original_quality_bar": 0.86481,
+      "peak_allocated_gpu_mib": 182.74365234375,
+      "peak_reserved_gpu_mib": 226.0,
+      "private_rng_sha256": {
+        "eval_generator": "6b047b4e9f1fcbc5ec06299572c5bce5b25290652212477187423393ab934d0e",
+        "latent_generator": "9054a68b63c3fd249842e99b4920bbc97c2d9d4b01f69294cc5e862309394610",
+        "noise_generator": "ca9acb1a990adf39c1cd5664f339d6166fd8a2341321ac7b016e0dcd489797fa",
+        "penalty_generator": "8480e26d32f82c48a6ef8886d14b173502092a9f3cca72b58a2dbd2ee49b0fbc"
+      },
+      "quality_status": "FAIL",
+      "scorer_changed": false,
+      "seeds_changed": false,
+      "status": "COMPLETE",
+      "thresholds_changed": false,
+      "training_updates": 500,
+      "variant": "control",
+      "verdict": {
+        "passed_periods": 1,
+        "periods": [
+          {
+            "hq": 0.9609,
+            "modes": 100,
+            "period_end": 500,
+            "target_deg": 0,
+            "task": "rotated100"
+          },
+          {
+            "hq": 0.9548,
+            "modes": 100,
+            "period_end": 1000,
+            "target_deg": 30,
+            "task": "rotated100"
+          },
+          {
+            "hq": 0.8557,
+            "modes": 99,
+            "period_end": 1500,
+            "target_deg": 60,
+            "task": "rotated100"
+          }
+        ],
+        "pre_turn_hq": 0.9609,
+        "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+        "status": "FAIL",
+        "task": "rotated100",
+        "turns": 2
+      }
+    }
+  }
+}

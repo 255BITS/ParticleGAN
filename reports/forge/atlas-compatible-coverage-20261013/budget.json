@@ -1,0 +1,32 @@
+{
+  "new_budget": 0,
+  "new_queue_spend": 94.13518967101118,
+  "new_wall_spend": 98.23526351500186,
+  "original_ceilings": {
+    "queue_seconds": 8640,
+    "wall_seconds": 7200
+  },
+  "paid_retries": 0,
+  "preceding_ledger": {
+    "path": "[local reference omitted]",
+    "sha256": "d64cf20378d9949e35449cca03a1f36bfc8bcd6eb30f7403c56b7083a8fcce67"
+  },
+  "queue": {
+    "path": "[local reference omitted]",
+    "sha256": "40df128cd76bd018c3521768e3ec143f38579890a7cd0a58758b8ac54ab89318"
+  },
+  "remaining_queue_seconds": 2449.3978298639267,
+  "remaining_wall_seconds": 860.82847858491,
+  "reservations": 0,
+  "schema_version": 1,
+  "status": "CURRENT_VERIFIED",
+  "terminal_host": {
+    "path": "[local reference omitted]",
+    "sha256": "7e0e84fc31ddaee6b7260d9aa6e186fcbae28afb3564cbab7f43662fd80ef2f3"
+  },
+  "terminal_receipt": {
+    "path": "[local reference omitted]",
+    "sha256": "9df60b932bb429f71baff67842246c4d08512ea75fafc61837ac96e445ffa026"
+  },
+  "unix": 1791902647.1783497
+}

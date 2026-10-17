@@ -1,0 +1,81 @@
+# Proposed reporting CI; copy to .github/workflows/test-performance.yml with a workflow-authorized credential.
+name: Forge test performance report
+
+on:
+  pull_request:
+    branches: [develop, master]
+    paths:
+      - "experiments/forge/**"
+      - "reports/forge/**"
+      - "reports/toy_audit/api_contract/**"
+      - "configs/forge/**"
+      - "tests/test_forge_test_performance.py"
+      - "tests/browser/forge_test_performance.cjs"
+      - ".github/workflows/test-performance.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reporting:
+    name: Protocol-safe projection and offline browser
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      REPORT_SCREENSHOTS: /tmp/forge-test-performance-browser
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          # The projection consumes compact publications, never media/tensors.
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !*.gif
+            !*.png
+            !*.jpg
+            !*.svg
+            !*.npy
+            !*.npz
+            !*.pt
+            !*.pth
+            !*.gz
+            !*.jsonl
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install software-test dependencies
+        run: |
+          python -m pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e '.[dev,mog]'
+      - name: Test projection and scientific display controls
+        run: python -m pytest -q tests/test_forge_test_performance.py
+      - name: Regenerate and check deterministic reports
+        run: |
+          python -m experiments.forge.test_performance
+          python -m experiments.forge.test_performance --check
+          git diff --exit-code -- reports/forge/test-performance.md
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned browser test runtime
+        run: |
+          npm install --prefix "$RUNNER_TEMP/report-browser" playwright@1.62.1
+          "$RUNNER_TEMP/report-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Inspect the offline matrix in Chromium
+        env:
+          NODE_PATH: ${{ runner.temp }}/report-browser/node_modules
+        run: node tests/browser/forge_test_performance.cjs
+      - name: Save exact-head offline report and inspected renders
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-performance-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            reports/forge/test-performance.html
+            reports/forge/test-performance.json
+            /tmp/forge-test-performance-browser/*.png
+          if-no-files-found: error

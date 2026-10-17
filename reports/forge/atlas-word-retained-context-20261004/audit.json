@@ -1,0 +1,44 @@
+{
+  "all_input_hashes_unchanged": true,
+  "copied_gif_and_media_byte_original": true,
+  "cross_cohort_pooling": false,
+  "default_adoption": false,
+  "execution_status": "INVALID",
+  "files": {
+    "README.md": {
+      "bytes": 3829,
+      "sha256": "cecb9d1b69ab3d01e71cd984c77cdd20d516bc72d8efff30c0455869536ff68a"
+    },
+    "context.json": {
+      "bytes": 19330,
+      "sha256": "54d61041c72befd8b4196f78d368374ac1c98470fd5742d4772f9cb6da5bcbdd"
+    },
+    "input-index.json": {
+      "bytes": 6868,
+      "sha256": "b5fe10f92fd894ab0de488c40bf1e532ff8a1106cb49fee385881e128a0fd9f8"
+    },
+    "word-retained-goal.gif": {
+      "bytes": 513356,
+      "sha256": "6e70906af5df22fb369de292955fe9c5a077a963f8174f99cf5645fb3ea42b4e"
+    },
+    "word-retained-media.json": {
+      "bytes": 3865,
+      "sha256": "c51e08932cbd4e3aab0ec6bee2e0cc9a70bcfa55b77243262af453b5fd7687ef"
+    }
+  },
+  "gif_frames": 9,
+  "inputs": 23,
+  "model_checkpoint_loads_draws_rescoring_gpu_queue_calls": 0,
+  "new_training_credit": false,
+  "numeric_gate": "UNAVAILABLE",
+  "numeric_regrade": false,
+  "ordinary_tier_credit": false,
+  "private_fields_or_plaintext_nonces": 0,
+  "pure_reads": 24,
+  "qualification_input": false,
+  "raw_clock": 20001,
+  "schema": "pg_atlas_word_retained_context_audit_v1",
+  "source": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+  "speed_ranking": false,
+  "status": "PASS"
+}

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/nested_slot.py",
+    "--lane",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+    "--through",
+    "1"
+  ],
+  "pid": 1029485,
+  "startticks": "167455922",
+  "started_UTC": "2026-09-30T12:52:19.070392+00:00",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA10-toy-driver.log",
+  "source_verification_sha256": "d5e06e12acaa932d33ea4dd6411c21ea666f601aa3e9b5a5e5c1a1153a6290fa",
+  "numerical_parallelism": 1,
+  "scope": "Original final CUDA toy25 gate; no earlier checkpoint selection"
+}

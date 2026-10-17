@@ -1,0 +1,21 @@
+{
+  "baseline_label": "PR155-E22-cabe2084",
+  "fresh_training_planned": true,
+  "fresh_training_updates_per_fixture": 2000,
+  "problems": [
+    "toy",
+    "mnist"
+  ],
+  "shared_mutex": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/.serial-phase.lock",
+  "signaled_processes": [],
+  "source_integrity_before": {
+    "cpu_closed_sha256": "fa8f2ad8ab77093f34413ab1ee13660b5c50c5cf979bc7f5ba97acc256f4b702",
+    "inputs_sha256": "b316bbf28bc659c7bbc13a32fa22e7fd78b25923bcca48721727055ded046fd5",
+    "package_sha256": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316",
+    "read_only_files": 95,
+    "source_freeze_sha256": "8bb844c6a89c7aa258a04837fa1150fa55b43811668fe6321f67da87592185ab",
+    "status": "VALID"
+  },
+  "start": 1790824387.4938035,
+  "status": "WAITING_FOR_SERIAL_LOCK"
+}

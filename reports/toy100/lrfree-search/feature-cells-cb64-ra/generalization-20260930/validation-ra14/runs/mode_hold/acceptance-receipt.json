@@ -1,0 +1,193 @@
+{
+  "acceptance_status": "PASS",
+  "evidence_validity": "VALID",
+  "final": {
+    "cover": 1.0,
+    "effective_modes": 7.494993209838867,
+    "hq": 0.976806640625,
+    "modes": 8,
+    "n_modes": 8,
+    "pass": true,
+    "seconds": 57.652,
+    "sharp_clean": 1.2606853246688843,
+    "sharp_noisy": 1.3520134687423706,
+    "step": 1200
+  },
+  "final_streak": 9,
+  "first_arrival": 800,
+  "mechanisms": {
+    "birth_death_counters": {
+      "dim_skips": 0,
+      "discoveries": 71,
+      "evals": 1200,
+      "iso_acted": 0,
+      "iso_dup_skips": 0,
+      "iso_evals": 1200,
+      "iso_flagged": 0,
+      "iso_moves": 0,
+      "iso_skipped": 0,
+      "matched": 0,
+      "moves": 0,
+      "normalised": 0,
+      "realised_births": 0,
+      "realised_deaths": 28,
+      "stale_resets": 0,
+      "stays": 43,
+      "waited_births": 0,
+      "waited_deaths": 28
+    },
+    "reopen_guard": {
+      "calm_network": {
+        "0.0": {
+          "role": "generator",
+          "scale": 0.5
+        },
+        "1.0": {
+          "role": "critic",
+          "scale": 0.5
+        }
+      },
+      "epoch_rebases": 1,
+      "excursion": null,
+      "ka2_anchor_started": true,
+      "schema": 1
+    },
+    "selection": {
+      "actual_backend": "knn",
+      "generator_noise_factor": 1.0,
+      "moment_rank_bound": 8,
+      "output_shape": [
+        2
+      ],
+      "population_policy": {
+        "actual_backend": "knn",
+        "calibration_rows": 6,
+        "finite_resolution_feasible": false,
+        "matching_sampler": "controller_reference",
+        "maximum_guard_flags": 0,
+        "minimum_bh_flags": 35,
+        "population": 12,
+        "q": 0.05,
+        "requested_backend": "feature_cells",
+        "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+        "schema": 1
+      },
+      "rate_mapping": [
+        [
+          {
+            "base_rate": 0.00425,
+            "factor": 1.0,
+            "rate": 0.00425,
+            "role": "generator"
+          },
+          {
+            "base_rate": 0.0085,
+            "factor": 1.0,
+            "rate": 0.0085,
+            "role": "table"
+          },
+          {
+            "base_rate": 0.00425,
+            "factor": 1.0,
+            "rate": 0.00425,
+            "role": "noise"
+          }
+        ],
+        [
+          {
+            "base_rate": 0.00425,
+            "factor": 1.0,
+            "rate": 0.00425,
+            "role": "critic"
+          }
+        ]
+      ],
+      "raw_output_width": 2,
+      "requested_backend": "auto",
+      "sampling_backend": "controller_reference",
+      "schema": 1,
+      "selection_reason": "finite_resolution_infeasible"
+    },
+    "surprise": {
+      "anchor_event": null,
+      "anchor_events": 0,
+      "armed": true,
+      "fast": {
+        "0.0": -3.1660567436426152,
+        "0.1": -4.03297602259258,
+        "1.0": -1.997716619919152
+      },
+      "fires": 0,
+      "last_ratio": 0.9110190706152862,
+      "last_ratios": {
+        "0.0": 0.9811688411253032,
+        "0.1": 0.8563891027931282,
+        "1.0": 0.899844620091797
+      },
+      "log": [],
+      "pending": {
+        "0.0": "tensor(0.0715)",
+        "0.1": "tensor(0.0388)",
+        "0.2": "tensor(0.)",
+        "1.0": "tensor(0.1643)"
+      },
+      "since_calm": 0,
+      "since_fire": null,
+      "slow": {
+        "0.0": -3.142215263591997,
+        "0.1": -3.879782361912569,
+        "1.0": -1.8968046804372458
+      },
+      "streak": 0
+    }
+  },
+  "native": null,
+  "original_plan": {
+    "batch_size": 128,
+    "num_particles": 12,
+    "observation_steps": [
+      50,
+      100,
+      150,
+      200,
+      250,
+      300,
+      350,
+      400,
+      450,
+      500,
+      550,
+      600,
+      650,
+      700,
+      750,
+      800,
+      850,
+      900,
+      950,
+      1000,
+      1050,
+      1100,
+      1150,
+      1200
+    ],
+    "seed": 0,
+    "steps": 1200,
+    "z_dim": 4
+  },
+  "passing_checks": 9,
+  "peak_allocated_gpu_mib": 68.79443359375,
+  "peak_reserved_gpu_mib": 88.0,
+  "quality_status": "PASS",
+  "reasons": [],
+  "result_sha256": "05e082e53bb37c0a50a52fd92213a58c386bf9ad0760b175c4239c01c8f708c1",
+  "source_integrity": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "files": 103,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+    "status": "VALID"
+  },
+  "task": "mode_hold",
+  "wall_seconds": 59.353110790252686
+}

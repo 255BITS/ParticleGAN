@@ -1,0 +1,658 @@
+{
+  "cohort": {
+    "identity": {
+      "initializer": "deterministic_orthogonal",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "protocol": {
+        "budgets": {
+          "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+          "default_through_tier": 1,
+          "per_task": "TaskSpec.execution and resources.timeout_seconds"
+        },
+        "calibration_status": "provisional",
+        "id": "screening",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "revision": 1,
+        "rng": {
+          "candidate_identity_in_seed": false,
+          "component_scoped": true,
+          "derivation": "forge-rng-v1",
+          "streams": [
+            "init",
+            "data",
+            "prior",
+            "noise",
+            "eval"
+          ],
+          "unintended_deviations": 0
+        },
+        "robustness": {
+          "cross_seed_reuse": false,
+          "enabled_for_screening": false,
+          "requires_frozen_candidate": true,
+          "requires_preregistered_seed_set": true
+        },
+        "schema_version": 1,
+        "scoring": {
+          "best_checkpoint": "diagnostic_only",
+          "ema": "separate_view_required",
+          "weights": "live"
+        },
+        "seed": 0
+      },
+      "rng": {
+        "bindings": {
+          "[\"data\",\"target\",\"training\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "data",
+            "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+            "purpose": "training",
+            "seed": 2842969976240124311
+          },
+          "[\"eval\",\"sampler\",\"samples\",\"cpu\"]": {
+            "component": "sampler",
+            "device": "cpu",
+            "family": "eval",
+            "initial_state_sha256": "9488d65f11be2e232c210ae5b27c29426ac74687551e6bc1597afc56159f8726",
+            "purpose": "samples",
+            "seed": 212130830619035767
+          },
+          "[\"eval\",\"target\",\"reference\",\"cpu\"]": {
+            "component": "target",
+            "device": "cpu",
+            "family": "eval",
+            "initial_state_sha256": "905a51801f69a4375927533ecf1199816a077aea8b3164d15b2811fae33abf02",
+            "purpose": "reference",
+            "seed": 7189743471773393273
+          },
+          "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+            "component": "discriminator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+            "purpose": "construction",
+            "seed": 3363721576689578451
+          },
+          "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+            "purpose": "construction",
+            "seed": 6942576180060350273
+          },
+          "[\"init\",\"prior\",\"locations\",\"cpu\"]": {
+            "component": "prior",
+            "device": "cpu",
+            "family": "init",
+            "initial_state_sha256": "ab1fa62c08db5e35d0b5c6be2418a849814f3490f8448c5b0e671be86de398ca",
+            "purpose": "locations",
+            "seed": 2562565386842645502
+          },
+          "[\"noise\",\"critic\",\"input\",\"cpu\"]": {
+            "component": "critic",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "d45c4d304b060206d27bed2cfb50b4e02d8d3a2a3ebc2bd23198f3119b34be6d",
+            "purpose": "input",
+            "seed": 5961379833291764029
+          },
+          "[\"noise\",\"generator\",\"output\",\"cpu\"]": {
+            "component": "generator",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+            "purpose": "output",
+            "seed": 9214932872906931917
+          },
+          "[\"noise\",\"models\",\"stochastic_layers\",\"cpu\"]": {
+            "component": "models",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "c2f7ba3cac65f7a2c9f1da18c52f973980852aaa4a916683301b0efdbb50edf9",
+            "purpose": "stochastic_layers",
+            "seed": 4481608677977550636
+          },
+          "[\"noise\",\"penalty\",\"training\",\"cpu\"]": {
+            "component": "penalty",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "e170727612c771e1a5db3740ca655a777d92c20f99fb8497de95c6cfdb6fdd84",
+            "purpose": "training",
+            "seed": 7930995805460461310
+          },
+          "[\"noise\",\"prior\",\"gaussian\",\"cpu\"]": {
+            "component": "prior",
+            "device": "cpu",
+            "family": "noise",
+            "initial_state_sha256": "d6261b40f0efc71cdced90af99c43969a0675e1827f184a56c8790fee5a820d8",
+            "purpose": "gaussian",
+            "seed": 939191808430552031
+          },
+          "[\"prior\",\"latent\",\"indices\",\"cpu\"]": {
+            "component": "latent",
+            "device": "cpu",
+            "family": "prior",
+            "initial_state_sha256": "c20d03989eda9e8650239603a2db8efb7df1bab81c5257cce0283964a570c14a",
+            "purpose": "indices",
+            "seed": 5876435880110660064
+          }
+        },
+        "runtime": {
+          "rng": "torch.Generator",
+          "torch": "2.14.0+cu130"
+        },
+        "seed": 0,
+        "version": "forge-rng-v1"
+      },
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.3",
+          "scipy": "1.17.1",
+          "torch": "2.14.0"
+        },
+        "python": "3.14.7",
+        "system": "Linux"
+      },
+      "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+      "tasks": {
+        "cover_leftover": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "75e9abb0477c545d8f344dee9a925b72dac98b2946638b09e157db37e61468b3",
+          "execution": "5de2b21493d176cd0e83f65d9a6e46b63a737001669a5c8cf07010780ae5b1c9",
+          "execution_group": "cover_leftover",
+          "scoring_weights": "live"
+        },
+        "grid100_affine_square_named_v1": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "ac6b5ddbeb02c6d06e11a85a8b48b512dd775e77b0ac587d49b6ed02b53f5b13",
+          "execution": "f7709d78c9c667d7154fc79ad6c7fb070dc828a0690eb1c82370410f114d0330",
+          "execution_group": "grid100_affine_square_named_v1",
+          "scoring_weights": "live"
+        },
+        "img_bars4_residual16": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "437349889edc4499cc143484ede64867223a2ca5ec0c335d45c10efc726638ba",
+          "execution": "c207f269a1b775163f01f6dd62c841f30edcfa7c52643a3f91d90b7cf4c4e716",
+          "execution_group": "img_bars4_residual16",
+          "scoring_weights": "live"
+        },
+        "img_blobs4_residual16": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "437349889edc4499cc143484ede64867223a2ca5ec0c335d45c10efc726638ba",
+          "execution": "867a75b975177d3818ab4b2ee813f5cca2d6f968adc6a719f0ed8474afd63de1",
+          "execution_group": "img_blobs4_residual16",
+          "scoring_weights": "live"
+        },
+        "img_intensity2_residual16": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "8a97484a6a5f5a6cbedbb033f885323a7909598a996404456781cdb36cbeea25",
+          "execution": "46d40414871ca6b92dfecedbe9604ecc5d92d2c3a9acae1800da6f9518bd36fa",
+          "execution_group": "img_intensity2_residual16",
+          "scoring_weights": "live"
+        },
+        "img_stripes2_residual16": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "5e0203ac88b539b5648c270dd7bf287eabf03f0e6c1bce58f58d6c77ea4d38e9",
+          "execution": "b2c005796fcb6817dde5a932780b4af28073518a25b50c59a6f1782f5314f6a2",
+          "execution_group": "img_stripes2_residual16",
+          "scoring_weights": "live"
+        },
+        "mid_scale_identity": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "c188b2abe270856141e172c6fd47db7d51ac674bb4f38558167dacdb8b0c7312",
+          "execution": "f49a4a3f0e43e70a1edb82554adbb4f250d41deae54b4ec2ff4a7730c1daf217",
+          "execution_group": "mid_scale_identity",
+          "scoring_weights": "live"
+        },
+        "mode_hold": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "0f29ca217695b203afeb956b050f2dab6dbdbdf426312ff8f3be984b1a37573c",
+          "execution": "b01acd562dade06d420de1e84e3bd24fe5169545b4d1ae1f6d2845c8b11e2918",
+          "execution_group": "mode_hold",
+          "scoring_weights": "live"
+        },
+        "residual_student": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "d60d9ea3e736c65bb86a2f56695011afa266ad725b3b950f5ec147bf04db0734",
+          "execution": "d21c139505868687b7fb13fde73d192d8bca2aa6f73f86af11690dd138d783c8",
+          "execution_group": "residual_student",
+          "scoring_weights": "live"
+        },
+        "rotated100_affine_square_named_v1": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "ac6b5ddbeb02c6d06e11a85a8b48b512dd775e77b0ac587d49b6ed02b53f5b13",
+          "execution": "3d6d3764eaa94e9ddc2ffa7505f8b4b49763c599162f1817a5dc96591d8f942d",
+          "execution_group": "rotated100_affine_square_named_v1",
+          "scoring_weights": "live"
+        },
+        "staggered100_affine_square_named_v1": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "ac6b5ddbeb02c6d06e11a85a8b48b512dd775e77b0ac587d49b6ed02b53f5b13",
+          "execution": "8f5c54e3a6bc4f7dabbae850ffe7e9a5b053b9636d9888b5c10c95c141bb60c3",
+          "execution_group": "staggered100_affine_square_named_v1",
+          "scoring_weights": "live"
+        },
+        "trajectory": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "6f37afa3854b3aa05eb993f18b6198e2971ccd971b0fcac25967e4585cdd0b8b",
+          "execution": "dbd95ff64a3b780f917491a453fddba362bf6a96bbba7ce8626cd7c253817c9f",
+          "execution_group": "trajectory",
+          "scoring_weights": "live"
+        },
+        "unipolar": {
+          "compute": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "8dec8ca7136e8a92edbd9ac3d532139630b9e8fde202359ef78bdeaf87870c76",
+          "execution": "5c8b17e7f7417712e05371542770910c1cf109dc1ed213b9e6409b48ffc2ad2d",
+          "execution_group": "unipolar",
+          "scoring_weights": "live"
+        },
+        "vector_anisotropic_published": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "2f57276cbdf9e22b69d45332a5c7ce90437a1fc0fc5879efbb76be812037812e",
+          "execution": "7a51bf71ddc67133db93fdae5fbd5ab7dd81bd66edaa014dd97c252cffdb8f6a",
+          "execution_group": "vector_anisotropic_published",
+          "scoring_weights": "live"
+        },
+        "vector_overlap_published": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "358b0cc4e9d3354efb84d96b349fbe3c4641d63ac17c5a04a73f75fad417cec9",
+          "execution": "38ea1f4e45dc7e66cec183c2a64aa35f1fd431b34d195f1344ef6659431f8c57",
+          "execution_group": "vector_overlap_published",
+          "scoring_weights": "live"
+        },
+        "vector_spiral_published": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "358b0cc4e9d3354efb84d96b349fbe3c4641d63ac17c5a04a73f75fad417cec9",
+          "execution": "46faaf21ad0bb3ad00855a2bbf522ce6f7b54d8ae5af7d2500f10f904e5bc5bf",
+          "execution_group": "vector_spiral_published",
+          "scoring_weights": "live"
+        },
+        "vector_two_broad_published": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "2f57276cbdf9e22b69d45332a5c7ce90437a1fc0fc5879efbb76be812037812e",
+          "execution": "6f5401aad695cfcb8ccddbe28c37cf015ed9178b9c1a404b1d2498bbe69749a1",
+          "execution_group": "vector_two_broad_published",
+          "scoring_weights": "live"
+        },
+        "vector_unequal_mass_published": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "c32bae1dacb4419f940ddaf83b444c5b5243212679a1c15aea212631386632ad",
+          "execution": "5687b34c1394fbbce10d7687c048db3b3b7ff96ecb91811bcaa2ba94b9a6f45a",
+          "execution_group": "vector_unequal_mass_published",
+          "scoring_weights": "live"
+        },
+        "vector_unequal_width_published": {
+          "compute": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          },
+          "evaluation": "2f57276cbdf9e22b69d45332a5c7ce90437a1fc0fc5879efbb76be812037812e",
+          "execution": "eb448112e5cbd76b1132142e5f0da03b30a92dc83a2f3ffd8f1c803b491d755d",
+          "execution_group": "vector_unequal_width_published",
+          "scoring_weights": "live"
+        }
+      }
+    },
+    "sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b"
+  },
+  "criteria": "criteria-v1.json",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "diagnostic_imports": [
+    {
+      "attempt_id": "680dcd337be343f69a1922cd3e89750a",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "files": {
+        "evidence.json": "3d5fa58dc9ea75d6913a25d75ebbf5ca6600ca18d27ac52eea6e44ddb15ad6c5",
+        "request.json": "97c905f350ae81db6813666f8f8cd8a4baf7b18b9230a07aacdb014c1b3738e0",
+        "result.json": "d8975b4f8e89a5b6966d4cdd3aabb75fde12e2cf4d322c9e24f3210c333c309f"
+      },
+      "qualification_reuse": false,
+      "registration_id": "host-profile-first-cells-v1",
+      "registration_sha256": "e42a6a6eeac26ab67f319e5cc9b95158bbf4d3fee5827c25822f270b7b96d329",
+      "tasks": {
+        "img_bars4_residual16": {
+          "diagnostic_key": "b2d097543fd581aca2d08180234c1a0956b88e984c7e83e98e313c054cca1404",
+          "qualification_key": "c447a1c8eca995d67e127bb5b085c68d8dd5d5cc4255d26916f230fe3425921f"
+        }
+      }
+    },
+    {
+      "attempt_id": "a1de5d14bd8b4640b95a826209ae3085",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "files": {
+        "evidence.json": "f735bce221520a87a8a70de8f6822619a85f812cab0cfe54ce78f8215d013658",
+        "request.json": "d6de3f4e7b9aa3352ec02cb20cdf5a1ee355ac7803b1914e5e55fd498e1ee493",
+        "result.json": "f78b856a9eda125f6469d91ea3d5bbaf3140bf5d9c63bc387e3b514ab8b4ec34"
+      },
+      "qualification_reuse": false,
+      "registration_id": "host-profile-first-cells-v1",
+      "registration_sha256": "e42a6a6eeac26ab67f319e5cc9b95158bbf4d3fee5827c25822f270b7b96d329",
+      "tasks": {
+        "vector_unequal_mass_published": {
+          "diagnostic_key": "44c596ba299ac3ba2358976f4322ad674547e20e39e86d02ebb9134fd8bf0b3f",
+          "qualification_key": "5ca95b3c329546c006e7837a1367cfc0705eeb5fabdabb885e6b09b760b433e5"
+        }
+      }
+    },
+    {
+      "attempt_id": "dca8c7aa0eca484c9270d07125f7cb0b",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "files": {
+        "evidence.json": "9cccb1146f236e839b4738c5693e06e2fc089aa0c79c1453e49f95fc462552cc",
+        "request.json": "532da7b25bf8c7bf146ded22d1d80f6f69b597a1b4044325ed03a33c01cb74d7",
+        "result.json": "d6550ffc6da0a5a7ec1087a0085398f7ce1c63c37e7981ebf7f101f5c3a87fe3"
+      },
+      "qualification_reuse": false,
+      "registration_id": "host-profile-first-cells-v1",
+      "registration_sha256": "e42a6a6eeac26ab67f319e5cc9b95158bbf4d3fee5827c25822f270b7b96d329",
+      "tasks": {
+        "grid100_affine_square_named_v1": {
+          "diagnostic_key": "22086fb731424c642ff66123f83a7f7ff433967a83821a309c904da7ba996de8",
+          "qualification_key": "d9b93b7c14acba90cd785ba4a6a9bd2819a7d68edd3734b15d5b60cef60770b8"
+        }
+      }
+    },
+    {
+      "attempt_id": "49d41e284fde41698212677403ca5d67",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "files": {
+        "evidence.json": "d20091b8031736451a80824570fa2091b82d9be329326214207770a1c024deee",
+        "request.json": "10e16ccae1bf7d0a9b6d9b53d6b035b715c280077e81cc2144a0191dafa51cdd",
+        "result.json": "01ec9f965e5629ef18405ea2eb4b7ec1b8e926d4355788d2e388d4039093569d"
+      },
+      "qualification_reuse": false,
+      "registration_id": "host-profile-smoke-pair-v1",
+      "registration_sha256": "82ddb3d1fd968c79b5aa91a0749ee69e6a2cf105f791b41abe1c62d8fe31f1a0",
+      "tasks": {
+        "mode_hold": {
+          "diagnostic_key": "bd9de58c3a05e147e26d6a47bb0ae7c5084d44466fa5add9163d816d827150f6",
+          "qualification_key": "93d7430dabfc07fd3ed7c932692a0d77884a5d1d099331f6d16705727533c878"
+        }
+      }
+    },
+    {
+      "attempt_id": "5693d7b9c35844c78f4440ed15bad4a2",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "files": {
+        "evidence.json": "ad55194da0cd400e1bb0bb0916d36186274c42d5bcb3a9be7bc04240ab66a30c",
+        "request.json": "1a1a3b041963bac2274b59b296cecafcff4a63a55bb1ded617f3b2b7fd9a7749",
+        "result.json": "bdce3e9a45e32c1ce8bcfdbab25fd4573eeca5375c8363a952e25876ab1b633a"
+      },
+      "qualification_reuse": false,
+      "registration_id": "host-profile-smoke-pair-v1",
+      "registration_sha256": "82ddb3d1fd968c79b5aa91a0749ee69e6a2cf105f791b41abe1c62d8fe31f1a0",
+      "tasks": {
+        "img_intensity2_residual16": {
+          "diagnostic_key": "58bcab3c70f65c3c16468ea26445e8586b77c57ed5b5338a30543e0d6b1bac16",
+          "qualification_key": "e3ce8dfacb047c41574713bfb7347e5af5aa1625045e2679eaa5601fdac84381"
+        }
+      }
+    },
+    {
+      "attempt_id": "6d10bbf90f1b4233a73034391599ecdb",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "files": {
+        "evidence.json": "7af1596a11c82bd6c2daac2edcfd90d5b86fc1f907641c05b4da603030847cab",
+        "request.json": "9710f95aab6f90f4b88ece817bd4b84025f0b95ac379273f303a8773d2ea8764",
+        "result.json": "c8e11201f96a7b2f5086499ac8f70ba2d5e00d6c20c9c1c54df5af4589c86ae0"
+      },
+      "qualification_reuse": false,
+      "registration_id": "host-profile-control-mode-v1",
+      "registration_sha256": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51",
+      "tasks": {
+        "mode_hold": {
+          "diagnostic_key": "d0863c99b6d467deb0712f7a3ca87fb16f6ed85d5d8e9e432ec5db68ed6282bf",
+          "qualification_key": "e42c442b32bc8bdf8080a7040790cbd0b6535b3b35abd4239903b574d2452de0"
+        }
+      }
+    },
+    {
+      "attempt_id": "eac540ccfe564a5ab396abdd545ab013",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "files": {
+        "evidence.json": "d76f77972effff939ad6c2362738ae6ce259ed7e2639a64860cd1b26fcdb560f",
+        "request.json": "ecb54aef21fd460b4b9fe6e9bc9afe1ea2001b277ac001da265c294539fc3127",
+        "result.json": "3444fb5f634fa99b228e874928b9d6593ec2b840916496992a20077b14d8f94b"
+      },
+      "qualification_reuse": false,
+      "registration_id": "host-profile-control-mode-v1",
+      "registration_sha256": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51",
+      "tasks": {
+        "mode_hold": {
+          "diagnostic_key": "be326d6107f72b20b3fc72a86188452ec31a7d795966ca22c0d6e2fe65e557df",
+          "qualification_key": "4e85db09f8160363d11c190a1168c85c37a8636f5a6fed159bc02749e8336eb6"
+        }
+      }
+    }
+  ],
+  "evidence_scope": "current",
+  "id": "no-output-noise-reference-v1",
+  "lineages": [
+    {
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "id": "k3p"
+    },
+    {
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "id": "forge-onboarding-anchor-ablation"
+    },
+    {
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "id": "forge-no-critic-penalty"
+    },
+    {
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "0fa6918ca4d0456515de09dbcfaeedffba1d4cecaab00dee5028bcf3b0b34603",
+      "id": "k3p-no-output-noise-diagnostic"
+    }
+  ],
+  "previous_profile": "host-profile-transfer-v1",
+  "reference_exclusions": [
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "mode_hold",
+    "img_bars4",
+    "img_intensity2",
+    "img_intensity2_residual16",
+    "img_bars4_residual16"
+  ],
+  "reference_scope": "The same 16 independent quality purposes as the predecessor, with explicit published vector/image and native named architecture/initialization variants. No task family is removed. Endurance/adaptation remain later requirements; all smoke purposes remain excluded.",
+  "reference_tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "vector_two_broad_published",
+    "vector_unequal_mass_published",
+    "vector_unequal_width_published",
+    "vector_anisotropic_published",
+    "vector_overlap_published",
+    "vector_spiral_published",
+    "grid100_affine_square_named_v1",
+    "rotated100_affine_square_named_v1",
+    "staggered100_affine_square_named_v1",
+    "img_stripes2_residual16",
+    "img_blobs4_residual16"
+  ],
+  "revision": 1,
+  "revision_reason": "Keep all three smoke gates and all 16 independent reference purposes; add one substantive training-output-noise-removal lineage to test the known native clean-shape bottleneck. Freeze this roster before observing the new outcome. No criteria, task, source or scoring change.",
+  "schema_version": 1,
+  "scoring_weights": "live",
+  "selection_note": "Outcome-selected diagnostic sample: existing controls and native contraction motivated removal of training output noise. Reuse seven exact original cells. Register only new full 7k grid100; stop this study on native FAIL and publish positive-reference gap. A PASS can justify a separately bounded screen measurement but is not a full-reference positive. No automatic whole-matrix execution.",
+  "smoke_tasks": [
+    "mode_hold",
+    "img_bars4_residual16",
+    "img_intensity2_residual16"
+  ],
+  "training_allowance_seconds": 0
+}

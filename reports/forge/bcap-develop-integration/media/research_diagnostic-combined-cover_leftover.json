@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "b1036a4e3d37a5d3633c762ef4ca5ba0a2713200fea7c886ef086f40a8e86740",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "9b1ccb7edfbde3359ecd2e1a6b2360947570b05e11272c3f69356a93e243c9cf",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/e0f6fcd28025411091b8a43eed2c0e6d/constraint_geometry-scored-outputs.pt": "d1764dd63ea03a5a1418e9c2d6d551f2067a0e5e921dddf0db6917c75de95cc7"
+  },
+  "task_id": "cover_leftover"
+}

@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "byte_deterministic_regeneration": true,
+  "unchanged_scientific_rows": 8,
+  "main_Atlas_selected_source_unchanged": true,
+  "source_trainer_adapter_evaluator_task_test_changes": 0,
+  "tier_assignments_changed": false,
+  "existing_scoped_cohorts_preserved": true,
+  "new_scoped_counts": {
+    "BLOCKED": 4,
+    "FAIL": 1,
+    "INCOMPLETE": 2
+  },
+  "new_GPU_attempts": 3,
+  "actual_training_GIFs": 3,
+  "older_native_cap_GIFs": 2,
+  "relative_report_links_valid": true,
+  "registry_verified": true,
+  "qualification_input": false,
+  "software_tests": {
+    "initial_result": "141 passed, 1 failed, 57 subtests passed",
+    "initial_failure": "Committed research memory stale after three receipt additions; summaries-only metadata recompilation performed without code/test changes.",
+    "freshness_rerun": "1 passed in 1.04s",
+    "full_suite_not_claimed": true,
+    "distinct_tests_with_passing_results": 142,
+    "subtests_passed": 57
+  },
+  "summaries_only_memory_refresh": true,
+  "unchanged_publication_memory_records": 816,
+  "summaries_only_memory_byte_deterministic": true
+}

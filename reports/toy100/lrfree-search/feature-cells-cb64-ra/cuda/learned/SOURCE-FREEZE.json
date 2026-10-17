@@ -1,0 +1,27 @@
+{
+  "status": "FROZEN_PRE_EXECUTION",
+  "frozen_at": "2026-09-29T22:58:33.411053+00:00",
+  "local_source_sha256": {
+    "common.py": "6484c3191e326e63930603e905e53e9f32e3609e6296a54d9807a67e0e6b0000",
+    "run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "replay.py": "6b7ac41dab7a52ead34870917235d64c85824bd561dd44cb97b7602468cb2a0d",
+    "prepare.py": "6ac5460972da4e4caa3dab6c587b249f0823c2aab0cc386b5c7444dc9387fabc",
+    "summarize.py": "f7d1e7d42fba29407cda8e889d6bcedbf7e60043478660f765b18b227d436982",
+    "PROTOCOL.md": "22292c5c59c369d2344a8afaa3e101b5ad3a3d3cc9586d230b416f21f74714a9",
+    "COMMANDS.md": "088c54b58c8ba9135de7d464ccaad75b250eae691036180538f73956a9467103",
+    "INPUTS.json": "121e6c9957242ba33a3a7af030a8e91bcdaf44ab2027d4df7a83ac4bc0a2c437"
+  },
+  "candidate_package_sha256": "13f5bbe4de824e6899cb28ee4dff8f35d74bbaa6243bfe9c18b8df44d173a1ce",
+  "candidate_config_sha256": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7",
+  "variants": {
+    "E22": {
+      "package_sha256": "8d9ca80a6604e9bdf4d0f736a572ce67e0e7122ecc220b13c80ae29cdf62bde9",
+      "config_sha256": "b80f81ff1f56b6886c6a7ace42d4f7f6de83db5999484b730429ddecdf1e72ae"
+    },
+    "CB64-RA": {
+      "package_sha256": "13f5bbe4de824e6899cb28ee4dff8f35d74bbaa6243bfe9c18b8df44d173a1ce",
+      "config_sha256": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7"
+    }
+  },
+  "package_digest_convention": "sorted *.py paths relative to particlegan + NUL + file bytes + NUL"
+}

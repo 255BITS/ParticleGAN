@@ -1,0 +1,64 @@
+{
+  "candidate_id": "context:lrfree/prior-geomean",
+  "candidate_revision": "b9e2f378e9d7fb4c4a75e673d1c7100c038bbad91110d3b584c8492b7068ae9b",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Geometric prior-rate coupling: grid100 holdout pass, frozen run fail",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/prior-geomean",
+      "narrative_sources": [
+        {
+          "git_blob": "4d0a8ae5f7a0f67b6446a26101f6c3dc6a258892",
+          "path": "reports/toy100/lrfree-search/prior-geomean/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5ea7151893cda6153092fff5a3bc1b762f5a462e0bc92c3d80b5a755d7016fce",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/prior-geomean/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/prior-geomean/grid100-result.json"
+      ],
+      "summary_excerpt": "# Geometric prior-rate coupling: grid100 holdout pass, frozen run fail\n\nThis isolated candidate starts from the committed paired birth/death graft and changes only the prior applied stationarity scale to `min(s_prior, sqrt(s_prior * s_G))`, where `s_G` is the slowest non-sigma generator tester scale. It never exceeds the prior's own tester and adds no task name, clock schedule, metric feedback or recipe override. QR `batch_feature_zero` initialization, learnable output noise at .02, the paired BD rule and noisy evaluation are unchanged. `training.patch` applies to the graft training source; `source-sha256.json` records the exact source and unchanged BD/override hashes.\n\nThe unchanged native grid100 7,000-update run ended **FAIL**. The runner's `13/34` count is its older coverage-style check; the stricter accuracy check passed **4/34** observations and **0/5** required terminal observations. Its independent 100k holdout **PASSES**. This is a promising but **unqualified** native lead; no rotated100 or staggered100 was run.\n\n| Final live measure | Geometric coupling | Frozen requirement |\n|---|---:|---:|\n| Modes | 100 | 100 |\n| Noisy precision | .97990 | \u2265 .97000 |\n| Centre RMS / data \u03c3 | .20427 | \u2264 .20 |\n| Covariance eig ratios | .42251\u20131.68585 | .40\u20131.70 |\n| Mass TV | .0364 | \u2264 .06 |\n| Trace bias abs | .02337 | \u2264 .10 |\n| Radial KS | .01168 | \u2264 .04 |\n| Independent holdout | **PAS"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-prior-geomean-ee68d53e75bc",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "4d0a8ae5f7a0f67b6446a26101f6c3dc6a258892",
+    "path": "reports/toy100/lrfree-search/prior-geomean/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "5ea7151893cda6153092fff5a3bc1b762f5a462e0bc92c3d80b5a755d7016fce",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/prior-geomean/README.md"
+  },
+  "task_results": []
+}

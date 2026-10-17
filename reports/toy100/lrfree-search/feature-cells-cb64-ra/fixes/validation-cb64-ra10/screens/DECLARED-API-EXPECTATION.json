@@ -1,0 +1,10 @@
+{
+  "expected_generation_api": "indexed",
+  "basis": "fifth positional parameter named indices",
+  "original_ast_sha256": "88d0ad29587dff5b0a6fcd2c545d7c99c4e9d08ef9ec8d719b7f792214a4f1e4",
+  "adapted_ast_sha256": "be6d65965d2cb46871c783bab3366e189000b6b3a4de2b2b455eade184d0ed6e",
+  "exact_change": "collect.expected_options.evaluation_generate: plain -> indexed",
+  "all_other_collector_checks_exact": true,
+  "quality_gates_unchanged": true,
+  "declared_before_numerical_execution": true
+}

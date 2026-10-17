@@ -146,7 +146,7 @@ def _recipe_critic(lazy_k=1, split=None):
     With ``split``, checkpoint with the usual ``D``/``opt_d`` state_dicts after
     ``split`` steps and resume into freshly built objects.
     """
-    from particlegan import get_recipe
+    from benchmarks.legacy.recipe import get_recipe  # the pinned K3P critic (the package default is KA2)
     recipe = get_recipe(reg_kappa=0.5, reg_coeff=1.0, reg_every=lazy_k, network_lr_floor=0.01,
                         reg_anchor_decay=0.999, d_guard_ratio=5.0, d_guard_min_steps=3, lr=sc.LR0)
 
@@ -431,7 +431,8 @@ def test_one_regularizer_rejects_a_second_critic_without_explicit_ema():
 
 
 def _k3p_trainer():
-    from particlegan import GANTrainer, get_recipe
+    from particlegan import GANTrainer
+    from benchmarks.legacy.recipe import get_recipe  # the pinned K3P critic (the package default is KA2)
     torch.manual_seed(0)
     recipe = get_recipe("gan", num_particles=8, z_dim=2, batch_size=4,
                         total_steps=10, lr_anneal_start=0.1)

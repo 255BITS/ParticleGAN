@@ -1,0 +1,55 @@
+{
+  "model_sampling_draws": 0,
+  "passed": true,
+  "states": [
+    {
+      "completed_steps": 0,
+      "device": "cuda:1",
+      "exact": true,
+      "path": "smoke/evaluator/initial-state.pt",
+      "sha256": "9dc76ddfbb34b388374282f41a87ffe5498a415a8d9b6dfbaea5b3ede2ca1b2a",
+      "state_sha256": "7b9638d0c3564c7b29f1057a5392492867c5a4a05022a430d31d74b0d7f588e8"
+    },
+    {
+      "completed_steps": 1000,
+      "device": "cuda:1",
+      "exact": true,
+      "path": "smoke/evaluator/state.pt",
+      "sha256": "a0c52b9e8ea8a9848cc472915db52182a80729ce9c290f8b11955d25bd9b6bb9",
+      "state_sha256": "0b29d3ce3fa90ab753d462268092b692a1bb07386edd15ecec0f728f1d2c17bf"
+    },
+    {
+      "completed_steps": 4000,
+      "device": "cuda:1",
+      "exact": true,
+      "path": "stability/evaluator/frozen-state.pt",
+      "sha256": "3526684110262d9666669ca0cb9b1a1b8ea2a47ba7387c2e793b084e1e2e6ae6",
+      "state_sha256": "316baaf421da4c439f65e1203e47f80958c6fbbb134e3e9287c17c1e012fa5ff"
+    },
+    {
+      "completed_steps": 1000,
+      "device": "cuda:1",
+      "exact": true,
+      "path": "stability/evaluator/initial-state.pt",
+      "sha256": "8b26509c479570349a559c92ab7437aaa32d1daad06a71cf788cbc439c91182a",
+      "state_sha256": "84936f6f45386343eb6cdbf7c073808b10bcdd68b14e4a568c0615ae8c7c2cae"
+    },
+    {
+      "completed_steps": 4000,
+      "device": "cuda:1",
+      "exact": true,
+      "path": "stability/evaluator/pre-shift-state.pt",
+      "sha256": "6dc38de3dbfd2978a12e814bbb942c8f32991bdabcff45688a9da9c93883be62",
+      "state_sha256": "40d072f4161d4682ab90cbb861a24c1d21a5dbd6db9643c8126f9d3a32b5af24"
+    },
+    {
+      "completed_steps": 6000,
+      "device": "cuda:1",
+      "exact": true,
+      "path": "stability/evaluator/state.pt",
+      "sha256": "bac8abbb6a0f35a735853f2e9936cad4b0808e46694744e011cbd645ab47192c",
+      "state_sha256": "cfdccde64599c311fe709d8021abbe59b7e9aedf0f6b0a55aed76e1d82470519"
+    }
+  ],
+  "training_updates": 0
+}

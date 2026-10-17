@@ -1,0 +1,911 @@
+{
+  "closure_input_count": 129,
+  "inputs": [
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/__init__.py",
+      "bytes": 1702,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/__init__.py",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/_qr.py",
+      "bytes": 1951,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/anchor_birth.py",
+      "bytes": 6401,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/autoencoder.py",
+      "bytes": 6194,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/birth_death.py",
+      "bytes": 45396,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/birth_phase.py",
+      "bytes": 21144,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/conditioning.py",
+      "bytes": 4878,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/continuous.py",
+      "bytes": 60875,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/diffusion.py",
+      "bytes": 5100,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/discriminators.py",
+      "bytes": 5833,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_cells.py",
+      "bytes": 125325,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/feature_cells.py",
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_policy.py",
+      "bytes": 14650,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/feature_policy.py",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_reference.py",
+      "bytes": 32368,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/feature_reference.py",
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/gan_loss.py",
+      "bytes": 1016,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/grad_regularizers.py",
+      "bytes": 13033,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/init.py",
+      "bytes": 12150,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/init.py",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/k3p.py",
+      "bytes": 32329,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/k3p.py",
+      "sha256": "b1b3c18fcb577232138b06b5f378270da7a0b93640ab9d6b91de20ea9cb77502",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/ka2.py",
+      "bytes": 16551,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/mean_transport.py",
+      "bytes": 39633,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/mean_transport.py",
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/output_moments.py",
+      "bytes": 8387,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/output_moments.py",
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/particle_prior.py",
+      "bytes": 17676,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/particle_prior.py",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/policy.py",
+      "bytes": 79533,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/policy.py",
+      "sha256": "c169697148d884e7b1b6634c54380a94f4c3144893cf7b1bd1c288ea6e241499",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/population_continuity.py",
+      "bytes": 20329,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/population_continuity.py",
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/recipes.py",
+      "bytes": 45757,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/recipes.py",
+      "sha256": "544fac3422e56ffa24f1bb82acd071a66db7b48498e49a3c5c7026ca74880d3b",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/routing.py",
+      "bytes": 64904,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/routing.py",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/row_evidence.py",
+      "bytes": 9397,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/training.py",
+      "bytes": 32475,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/training.py",
+      "sha256": "ffb1ccf4b44a1fd7edca34e3f6eb08e886f2d7875757ba9f1365054dbf5cc903",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/vicreg_loss.py",
+      "bytes": 2297,
+      "path": "/ml2/hypergan/ParticleGAN-ra11-pr155/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/__init__.py",
+      "bytes": 1702,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/__init__.py",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/_qr.py",
+      "bytes": 1951,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/anchor_birth.py",
+      "bytes": 6401,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/autoencoder.py",
+      "bytes": 6194,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/birth_death.py",
+      "bytes": 45396,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/birth_phase.py",
+      "bytes": 21144,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/birth_phase.py",
+      "sha256": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/conditioning.py",
+      "bytes": 4878,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/continuous.py",
+      "bytes": 60875,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/diffusion.py",
+      "bytes": 5100,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/discriminators.py",
+      "bytes": 5833,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_cells.py",
+      "bytes": 125325,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/feature_cells.py",
+      "sha256": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_policy.py",
+      "bytes": 14650,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/feature_policy.py",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/feature_reference.py",
+      "bytes": 32368,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/feature_reference.py",
+      "sha256": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/gan_loss.py",
+      "bytes": 1016,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/grad_regularizers.py",
+      "bytes": 13033,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/init.py",
+      "bytes": 12150,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/init.py",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/k3p.py",
+      "bytes": 32329,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/k3p.py",
+      "sha256": "b1b3c18fcb577232138b06b5f378270da7a0b93640ab9d6b91de20ea9cb77502",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/ka2.py",
+      "bytes": 16551,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/mean_transport.py",
+      "bytes": 39633,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/mean_transport.py",
+      "sha256": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/output_moments.py",
+      "bytes": 8387,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/output_moments.py",
+      "sha256": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/particle_prior.py",
+      "bytes": 17676,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/particle_prior.py",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/policy.py",
+      "bytes": 79533,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/policy.py",
+      "sha256": "c169697148d884e7b1b6634c54380a94f4c3144893cf7b1bd1c288ea6e241499",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/population_continuity.py",
+      "bytes": 20329,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/population_continuity.py",
+      "sha256": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/recipes.py",
+      "bytes": 45757,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/recipes.py",
+      "sha256": "544fac3422e56ffa24f1bb82acd071a66db7b48498e49a3c5c7026ca74880d3b",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/routing.py",
+      "bytes": 64904,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/routing.py",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/row_evidence.py",
+      "bytes": 9397,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/training.py",
+      "bytes": 32475,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/training.py",
+      "sha256": "ffb1ccf4b44a1fd7edca34e3f6eb08e886f2d7875757ba9f1365054dbf5cc903",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-RA17-current-pr155/particlegan/vicreg_loss.py",
+      "bytes": 2297,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/study-guards/portability/ra17-current-pr155/SOURCE-FREEZE.json",
+      "bytes": 24929,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/ra17-current-pr155/SOURCE-FREEZE.json",
+      "sha256": "4fd0ff0ea5ffa0c9f60a98f44f1ad8737e8a6a1d957f216db5142aff750c507d",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/historical-atlas/COMPLETION.json",
+      "bytes": 2458,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/COMPLETION.json",
+      "sha256": "aada2905da7bcc7860fc17a615c5b9ccd8b2ea2e6d3c2a36f7404279b4aacfad",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/historical-atlas/LAUNCH.json",
+      "bytes": 1307,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/LAUNCH.json",
+      "sha256": "a3d62ff4f1aacb281c75bf9b28ae9d997b0b0e6d299d3224e7aea0483d35e9a1",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/original-ra15-adapted-runner.py",
+      "bytes": 9328,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/adapted_runner.py",
+      "sha256": "930b1a62061e4e3b50d5f9239c1854d67ecd06ec760d970d986741b7db8cc369",
+      "storage": "archive"
+    },
+    {
+      "archived_path": null,
+      "bytes": 6992523,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-000500.pt",
+      "sha256": "d757f78f7417148feb7532670ab348d04c9b665128266a22ab53e73eca5bd378",
+      "storage": "local_reference"
+    },
+    {
+      "archived_path": null,
+      "bytes": 6394051,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-001000.pt",
+      "sha256": "100616faab0cd20aa37cc8a80433b1ca7471cd5a65d975606ceac68918ae06dc",
+      "storage": "local_reference"
+    },
+    {
+      "archived_path": null,
+      "bytes": 6118299,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/checkpoint-001500.pt",
+      "sha256": "eb49450650450fe6d45ec360bfffb091686e702196852ee75ae253551733f132",
+      "storage": "local_reference"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/historical-atlas/frames.npz.verdict.json",
+      "bytes": 518,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/frames.npz.verdict.json",
+      "sha256": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/study-guards/validation-ra17/SOURCE-FREEZE.json",
+      "bytes": 92783,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra17/SOURCE-FREEZE.json",
+      "sha256": "d25156134ed3805f81ee75c16dbd8154589a5879b0af9032f558c957e60d280c",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/BASELINE-SOURCE-FREEZE.json",
+      "bytes": 5957,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/BASELINE-SOURCE-FREEZE.json",
+      "sha256": "2c34fe4f5f8950c16f1f551a9ede4e3082e64af1d19e69655b254b25677225e4",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/CPU-CHECK-Atlas.json",
+      "bytes": 994,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/CPU-CHECK-Atlas.json",
+      "sha256": "474b75e5b89cc7121993038bd0de7c36fc134521c595ed60a38d531ecc6d9785",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/CPU-CHECK-E22.json",
+      "bytes": 993,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/CPU-CHECK-E22.json",
+      "sha256": "09b382ae7d76782ba57753c7976d3f6ee8116ab0026cc6826a718ca0e97cf6fa",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/E22-RECIPE-IDENTITY.json",
+      "bytes": 2330,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/E22-RECIPE-IDENTITY.json",
+      "sha256": "e3f50f74a696b8fb781b5e95f7fd5813e8a8ba017eed0d912490163bb3d5d018",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/HOST-ADAPTER-CHECK.json",
+      "bytes": 709,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/HOST-ADAPTER-CHECK.json",
+      "sha256": "d49d81aff86c2d8f069a1c4d5c675c6d765ff2e1704e3ff948a3e3e0a59b92f4",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/PROTOCOL.md",
+      "bytes": 4918,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/PROTOCOL.md",
+      "sha256": "4e1361ebe6ac0533d12e7301ae5e252af788b57bfaca106d73af5ffa3278212d",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/SOURCE-FREEZE.json",
+      "bytes": 20266,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/SOURCE-FREEZE.json",
+      "sha256": "24821dcbc3d85f5188b42a2389293254742db384e9c206f893b7371be9d566e3",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/atlas_runner.py",
+      "bytes": 9538,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/atlas_runner.py",
+      "sha256": "82ff34a8c5b73ce218293c093c6c1ef8eda61c362e8ac79c0ba2d618df635f0b",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/check_source.py",
+      "bytes": 5405,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/check_source.py",
+      "sha256": "06d850d1a0b791cc01da382d0514de041f783b6a712826baa096c08e43ab0451",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/closure-v1/DATA-RECEIPT.json",
+      "bytes": 11560,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/closure-v1/DATA-RECEIPT.json",
+      "sha256": "774cc0dea3ae3eadc18cce31748521c35470b5b30debaa2a3a96c6e54a9c0f05",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/closure-v1/close_capture.log",
+      "bytes": 359,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/closure-v1/close_capture.log",
+      "sha256": "af184be47eb71309d1140ea5985ec831d98e8192f85cbb25f71cae901b73602e",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/closure-v1/close_capture.py",
+      "bytes": 5698,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/closure-v1/close_capture.py",
+      "sha256": "ffa6c4cb3415fc0759ad053ed5c991c6a010ab31eb315df4b53c0f641f6a7371",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/configs/particle-gan-atlas.json",
+      "bytes": 1798,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/configs/particle-gan-atlas.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/configs/pr155-e22.json",
+      "bytes": 1524,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/configs/pr155-e22.json",
+      "sha256": "03a8c7a8d35512a4e06735c37c375895f6ecc24011c4411a606eddd92f4c202c",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/e22_runner.py",
+      "bytes": 9538,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/e22_runner.py",
+      "sha256": "18618fc95a39ed0e19225635bb8b21efa0fd5bb0bced94ae9aa266e473635c11",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/COMPLETION.json",
+      "bytes": 3587,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/COMPLETION.json",
+      "sha256": "b64e220f44ae6a81886c7c953bec9fb2d53823892f7b530ab41845ef2971807b",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/CAPTURE-COMPLETION.json",
+      "bytes": 1271,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/CAPTURE-COMPLETION.json",
+      "sha256": "f9164eb9334a168b29b4d7f4a126f81ead348aa1aa3fbb9521f72467a9ad9ca6",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/LAUNCH.json",
+      "bytes": 1375,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/LAUNCH.json",
+      "sha256": "3aa58f8c2ac48acce8de97534b78502df5d58d83602945f9295a503d0da6d258",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/SOURCE-CLOSE.json",
+      "bytes": 461,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/SOURCE-CLOSE.json",
+      "sha256": "4f1e716710dc531d8aebe090bc594df050f26a503c7b1ebdcd94b3fb3902f773",
+      "storage": "archive"
+    },
+    {
+      "archived_path": null,
+      "bytes": 6992523,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-000500.pt",
+      "sha256": "7fd73c4a72ad784c4939c200a5e8549df1d32d7d128f8c1a3b3ca469f3fd2b37",
+      "storage": "local_reference"
+    },
+    {
+      "archived_path": null,
+      "bytes": 6394051,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-001000.pt",
+      "sha256": "6df8d3c5a7401db302de5c556e3ec049e44f616279738e41e0bfe49c2a439779",
+      "storage": "local_reference"
+    },
+    {
+      "archived_path": null,
+      "bytes": 6118299,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/checkpoint-001500.pt",
+      "sha256": "8c07ba3f9df84e4e3fe97483a3c726a3ba6b39adc176422ea615f2e56b21eea1",
+      "storage": "local_reference"
+    },
+    {
+      "archived_path": null,
+      "bytes": 4620500,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/dense-frames.npz",
+      "sha256": "6d466cbe42f8b71cf3b29eb6534a3430dd80cc8b9d1cf7ce2638e871ba79e619",
+      "storage": "local_reference"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/original-frames.npz.verdict.json",
+      "bytes": 518,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/original-frames.npz.verdict.json",
+      "sha256": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/training-trace.jsonl",
+      "bytes": 152874,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/training-trace.jsonl",
+      "sha256": "e54525d955af8b032aeac10591ffcdd197e064b267cf68dc249c553c3f842806",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/atlas/capture/visualization-metrics.jsonl",
+      "bytes": 41800,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/atlas/capture/visualization-metrics.jsonl",
+      "sha256": "1cf44bd407a463efe3432f609a3cdc5953738ab9e3090b515dbcd2d8ce844ea1",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/e22/capture/CAPTURE-COMPLETION.json",
+      "bytes": 1268,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/CAPTURE-COMPLETION.json",
+      "sha256": "0ff3734530e01d6299b0da3b0ce76c8d7781ad372405d11ba21e5ab08d2fb66e",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/e22/capture/LAUNCH.json",
+      "bytes": 1370,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/LAUNCH.json",
+      "sha256": "b8b490b8e256cc446b238cff360392c456123fd0487800db942d7d6eeee50bd6",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/e22/capture/SOURCE-CLOSE.json",
+      "bytes": 462,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/SOURCE-CLOSE.json",
+      "sha256": "350463571a97285c5a834a986bdceda3d6cbb87244bbcb6311e904d85e1826d3",
+      "storage": "archive"
+    },
+    {
+      "archived_path": null,
+      "bytes": 4624020,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/dense-frames.npz",
+      "sha256": "3beec1243aa59a582d27c5c1b665b1de8b85c199499d109692399e8aa5e705a9",
+      "storage": "local_reference"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/e22/capture/original-frames.npz.verdict.json",
+      "bytes": 517,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/original-frames.npz.verdict.json",
+      "sha256": "3be57be0e15ffccc40eb8b1b3a8dbb2dc065d65893f0d7bda9c9931058251881",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/e22/capture/training-trace.jsonl",
+      "bytes": 36396,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/training-trace.jsonl",
+      "sha256": "fb5f80f2c811edc5f29f90add9cd42046550f4d30940af2c9651a896ef257871",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/full-attempt-1/e22/capture/visualization-metrics.jsonl",
+      "bytes": 41517,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/full-attempt-1/e22/capture/visualization-metrics.jsonl",
+      "sha256": "8bc23ea1feb878288e2d2509c745c3e436f7618b57c3004d2e55fc6f7fed0580",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/instrumentation.py",
+      "bytes": 14421,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/instrumentation.py",
+      "sha256": "60e7c8cede7809cdd833cde6eabc668b70225b2bf184b647d629f8558b12a499",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/parity-attempt-1/PARITY-COMPLETION.json",
+      "bytes": 3186,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/parity-attempt-1/PARITY-COMPLETION.json",
+      "sha256": "97fe13f2d930c466c9f0d0be414ce6f7d0fd3624419b72b8ae4953c120887667",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/__init__.py",
+      "bytes": 1702,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/__init__.py",
+      "sha256": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/_qr.py",
+      "bytes": 1951,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/_qr.py",
+      "sha256": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/autoencoder.py",
+      "bytes": 6194,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/birth_death.py",
+      "bytes": 45396,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/birth_death.py",
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/conditioning.py",
+      "bytes": 4878,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/continuous.py",
+      "bytes": 56001,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/continuous.py",
+      "sha256": "365a1e7b2f8e4eb4bc63bd04d05d645da8c2154159d596cb1564bec29f9eacc5",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/diffusion.py",
+      "bytes": 5100,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/diffusion.py",
+      "sha256": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/discriminators.py",
+      "bytes": 5833,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/gan_loss.py",
+      "bytes": 1016,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/grad_regularizers.py",
+      "bytes": 13033,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/init.py",
+      "bytes": 12150,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/init.py",
+      "sha256": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/k3p.py",
+      "bytes": 31092,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/k3p.py",
+      "sha256": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/ka2.py",
+      "bytes": 16551,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/ka2.py",
+      "sha256": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/particle_prior.py",
+      "bytes": 17676,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/particle_prior.py",
+      "sha256": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/policy.py",
+      "bytes": 73605,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/policy.py",
+      "sha256": "0a5dd9112a8796eb88f3fadaa55604620c5950d56dc44b48d8c52e27ace77530",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/recipes.py",
+      "bytes": 43237,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/recipes.py",
+      "sha256": "640b934f0b4697cd8fb6c49bf9bfaf40d4e9d9646a99e7bac133072514695abd",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/routing.py",
+      "bytes": 64904,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/routing.py",
+      "sha256": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/row_evidence.py",
+      "bytes": 9397,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/row_evidence.py",
+      "sha256": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/training.py",
+      "bytes": 30164,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/training.py",
+      "sha256": "dcfba088e0e3cd2dbe312578545a29f6e110340276e07ae5299d10ba58d11959",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/vicreg_loss.py",
+      "bytes": 2297,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/run_capture.py",
+      "bytes": 19265,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/run_capture.py",
+      "sha256": "31da51910b0724dd47e4863d953e03cee715b5a039cb46b04e204a749e2d800d",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/README.md",
+      "bytes": 9805,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/source-reference/README.md",
+      "sha256": "5425e7597b55f83edfce6d6e4cbf9ace47a12723e999255363cfd2f2e394ea75",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/docs/e22.md",
+      "bytes": 17837,
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/source-reference/docs/e22.md",
+      "sha256": "d08fab46e24d1cb095697ce90bfc2ee4b639e333a050044905e4d88ad70ecc49",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/original-rotate-gate.py",
+      "bytes": 8686,
+      "path": "/ml2/hypergan/gan-attempts/noout-20260928/gif/rotate_gate.py",
+      "sha256": "8057a8d4298d251edabcaeaaf02ef5b83834bdb56c296d2681c70aec6f277ed1",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/hosts/native100/__init__.py",
+      "bytes": 0,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/hosts/native100/accuracy.py",
+      "bytes": 11658,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/accuracy.py",
+      "sha256": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/hosts/native100/metrics.py",
+      "bytes": 8442,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/metrics.py",
+      "sha256": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/hosts/native100/problems.py",
+      "bytes": 2428,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/problems.py",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+      "storage": "archive"
+    },
+    {
+      "archived_path": "visualization-pr223-convergence/source-reference/hosts/native100/toy_models.py",
+      "bytes": 5231,
+      "path": "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/toy_models.py",
+      "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+      "storage": "archive"
+    }
+  ],
+  "original_absolute_paths_retained": true,
+  "relocation_note": "archived_path locates byte-identical source/evidence copies; raw state and clouds remain at original local paths.",
+  "schema_version": 1
+}

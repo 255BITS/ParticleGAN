@@ -1,0 +1,21 @@
+{
+  "candidate_id": "word-joint-root-cause-readout",
+  "candidate_revision": "46dd1b58096a2b9d65e90c5ab544a3fb94d66d771f75906b94a8ca80fbff951b",
+  "conclusion": "All three existing families pass the unchanged 20,001-update, 24-check/five-terminal-pass word task: selected K3P suffix24, KA2 suffix21, R1/R2 suffix22. Joint pairs/signs/routing are correct. Early network decay with a 100:1 nominal prior/network rate, post-softmax fake-only Gaussian noise and 170-dimensional critic penalty units are explicit host-binding risks; bundled comparisons do not isolate noise as the cause. Lowering prior rate restored KA2; strengthening the existing positive critic coefficient restored K3P. No new loss or spread: all 18 diagnostic arms prior_reg0. A2/direct particle gain were inactive. Historical R1/R2 word was unmeasured, not FAIL. Equality grading and prior_betas consumption bugs were repaired without relabeling old whole verdicts. Coeff170 matches only initial pure-A real R1 scale; fake cap and later kernels remain different. The two coeff170 cap arms have identical saved observations/endpoints, not independent replications or evidence of cap improvement. All arm verdicts/costs reside in their own records; this narrative adds no duplicated task result or cost.",
+  "evidence_scope": "task_only_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Audit the finite five-word joint host and inherited training law before attributing failure to BiGAN or introducing a new stabilization technique. Clean/full K3P/KA2 ablations cross original-parent noise/warmup/horizon activation boundaries; they are task-only diagnostics, not ordinary same-signature configuration searches. Round2/3 preserve their measured clean/full comparator signatures.",
+  "lifecycle": "concluded",
+  "mechanism_class": "explicit_existing_control_ablation",
+  "next_action": "Use reports/forge/word-root-cause/README.md and exact configs/forge/selections/word-joint-task-v1.json for scoped reproduction. Ordinary complete-view qualification and calibration remain required before defaults; preserve original failures/unknowns and do not automatically launch another paid study.",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "word-diagnostic-readout-46dd1b58096a2b9d65e90c5a",
+  "record_type": "task_diagnostic_readout",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/word-root-cause/summary.json",
+    "sha256": "46dd1b58096a2b9d65e90c5ab544a3fb94d66d771f75906b94a8ca80fbff951b"
+  },
+  "task_results": []
+}

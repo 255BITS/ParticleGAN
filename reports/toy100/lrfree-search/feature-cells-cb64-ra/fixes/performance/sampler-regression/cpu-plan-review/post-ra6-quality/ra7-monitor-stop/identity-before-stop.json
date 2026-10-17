@@ -1,0 +1,18 @@
+{
+  "pid": 672040,
+  "startticks": 165052997,
+  "process_state": "S",
+  "cmdline": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+    "--validation",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra7-monitor",
+    "--watch"
+  ],
+  "children": [],
+  "stat": "672040 (python) S 1286 672040 672040 0 -1 4194304 20344 0 347 0 19 7 0 0 26 6 1 0 165052997 48934912 3276 18446744073709551615 106071071010816 106071073437541 140731972472224 0 0 0 0 16781312 2 1 0 0 17 23 0 0 0 0 0 106071074867856 106071076849840 106071707635712 140731972477941 140731972478286 140731972478286 140731972485079 0\n"
+}

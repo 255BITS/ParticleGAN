@@ -1,0 +1,50 @@
+{
+  "attempt": "661bd9830be94225891954f5fb690342",
+  "capacity_mb": 48628,
+  "device": "0",
+  "directory": "/home/martyn/dev/ParticleGAN/runs/forge/calibration-develop-20260929-gpu-pilot-v3/661bd9830be94225891954f5fb690342",
+  "host_capacity_at_claim": {
+    "available_memory_mb": 32967,
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "cpu_threads": 24,
+    "memory_headroom_mb": 512,
+    "memory_mb": 63674
+  },
+  "host_reservation": {
+    "cpu_threads": 1,
+    "host_memory_mb": 2048
+  },
+  "memory_mb": 48009,
+  "model": "NVIDIA RTX A6000",
+  "pid": 400307,
+  "process_identity": "400307:11493876",
+  "sharing": false,
+  "slot": 0,
+  "started_at": 1790738405.4580595,
+  "token": "d1959092261a44febf34eb3a6c9c51b8"
+}

@@ -1,0 +1,533 @@
+{
+  "attempt_id": "e2fcaf0f2965415db4c7234a024d3031",
+  "candidate_id": "ka2-global-repair-v1",
+  "candidate_revision": "71a50b7b10fdc6307c92b781224e73625f670377ffeb4a31b9f3abe4b34be108",
+  "charged_wall_seconds": 5.981502406997606,
+  "compute": {
+    "backend": "cpu",
+    "deterministic": true,
+    "machine": "x86_64",
+    "model": "AMD Ryzen 9 5900X 12-Core Processor",
+    "tf32": false,
+    "threads": 1
+  },
+  "durable_certificate": {
+    "artifacts": [
+      {
+        "bytes": 1646330,
+        "path": "reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/request.json",
+        "sha256": "ec0d56194346230e87f19901d56da6c7b990eee4518dff3dbdaddde61e2e4550"
+      },
+      {
+        "bytes": 114558,
+        "path": "reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/result.json",
+        "sha256": "3333b2206f2cbaa6f9e4ca51f0f5b6a1dc9a94af970f9c7066f53d97d5657ce0"
+      },
+      {
+        "bytes": 138771,
+        "path": "reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/evidence.json",
+        "sha256": "67001e4300385696ea65a6e851cbca309c0b237ec8f7efb2450d39a4a5b7364f"
+      }
+    ],
+    "result_stable_hash": "3fef37621119b702e4e76c223201fa17ebe97df0f6f4855bcc57ecc273a91683",
+    "valid": true
+  },
+  "falsifier_triggered": true,
+  "global_recipe_overrides": {
+    "amsgrad": false,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "continuous_policy": null,
+    "critic_formulation": "ka2",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "ema_decay": 0.995,
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0006,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "name": "ka2",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_lr_mult": 0.1,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "table_release_rule": "any"
+  },
+  "measured_task": {
+    "compatibility_key": "148eeeaf1c49019ba6970f67460537bd7f27025c829d8664bfb2513d00e21267",
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": -0.26367047727108,
+          "metric": "mean_abs",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.3,
+          "value": 0.03632952272891998
+        },
+        {
+          "margin": 0.9955577254295349,
+          "metric": "grad_med",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 1.0,
+          "value": 0.004442274570465088
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.43945079545180005,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "guards": {
+      "all_finite": true,
+      "hooks_exercised": true,
+      "mechanism_audit": {
+        "mechanisms": {
+          "a2": {
+            "applied": 0,
+            "calls": 0,
+            "eligible": 0,
+            "enabled": false,
+            "probe": {
+              "kind": "synthetic_public_component",
+              "measurements": {
+                "damping_branch_applied": true,
+                "initial_sparse_history_total": 8,
+                "optimizer_updates": 2
+              },
+              "status": "PASS",
+              "synthetic_state": true,
+              "training_evidence": false
+            },
+            "reason": "host has no applicable component",
+            "requested": true
+          },
+          "critic_anchor": {
+            "applied": 0,
+            "calls": 80,
+            "eligible": 0,
+            "enabled": true,
+            "probe": {
+              "kind": "synthetic_public_component",
+              "measurements": {
+                "critic_formulation": "ka2",
+                "declared_lr_ratio": 0.0,
+                "initial_observed_optimizer_steps": 1,
+                "initial_penalty_calls": 799,
+                "optimizer_updates": 0,
+                "penalty_calls": 2,
+                "phase": "blend",
+                "prox": 1.0
+              },
+              "status": "PASS",
+              "synthetic_state": true,
+              "training_evidence": false
+            },
+            "reason": "host conditions did not activate the branch; targeted component check required",
+            "requested": true
+          },
+          "critic_guard": {
+            "applied": 0,
+            "calls": 80,
+            "eligible": 0,
+            "enabled": true,
+            "probe": {
+              "kind": "synthetic_public_component",
+              "measurements": {
+                "clipped_tensors": 1,
+                "initial_adam_step": 200,
+                "optimizer_updates": 1
+              },
+              "status": "PASS",
+              "synthetic_state": true,
+              "training_evidence": false
+            },
+            "reason": "host conditions did not activate the branch; targeted component check required",
+            "requested": true
+          },
+          "critic_penalty": {
+            "applied": 80,
+            "calls": 80,
+            "eligible": 80,
+            "enabled": true,
+            "reason": "actual host mechanism branch applied",
+            "requested": true
+          },
+          "direct_particle_gain": {
+            "applied": 79,
+            "calls": 80,
+            "eligible": 80,
+            "enabled": true,
+            "reason": "actual host mechanism branch applied",
+            "requested": true
+          }
+        },
+        "schema_version": 1
+      },
+      "optimizer_updates": {
+        "discriminator": 80,
+        "prior": 80
+      },
+      "unintended_rng_deviations": 0
+    },
+    "metrics": {
+      "grad_med": 0.004442274570465088,
+      "mean_abs": 0.03632952272891998
+    },
+    "optimizer_group_bindings": [
+      {
+        "base_betas": [
+          0.0,
+          0.999
+        ],
+        "base_lr": 0.0006,
+        "beta2_schedule_declared": false,
+        "counter_role": "prior",
+        "current_group_betas": [
+          0.0,
+          0.999
+        ],
+        "current_lr": 3.137235289842391e-05,
+        "direct_particle_response": {
+          "gain_enabled": true,
+          "installed": true,
+          "lr_gain_range": [
+            1.0,
+            2.0
+          ],
+          "step_betas": [
+            0.0,
+            0.9
+          ]
+        },
+        "group_betas_overridden_during_step": true,
+        "group_index": 0,
+        "lr_schedule": "prior",
+        "optimizer": "K3PGeneratorAdam",
+        "optimizer_role": "generator",
+        "prior_betas_consumed": false,
+        "prior_lr_mult_consumed": false,
+        "representation": "direct_sample_coordinates"
+      },
+      {
+        "base_betas": [
+          0.0,
+          0.999
+        ],
+        "base_lr": 0.0009,
+        "beta2_schedule_declared": false,
+        "counter_role": "discriminator",
+        "current_group_betas": [
+          0.0,
+          0.999
+        ],
+        "current_lr": 1.1145204267536317e-05,
+        "direct_particle_response": {
+          "gain_enabled": false,
+          "installed": false,
+          "lr_gain_range": [
+            1.0,
+            1.0
+          ],
+          "step_betas": null
+        },
+        "group_betas_overridden_during_step": false,
+        "group_index": 0,
+        "lr_schedule": "network",
+        "optimizer": "KA2CriticAdam",
+        "optimizer_role": "discriminator",
+        "prior_betas_consumed": false,
+        "prior_lr_mult_consumed": false,
+        "representation": "network"
+      }
+    ],
+    "task_id": "two_pole",
+    "training_schedules": {
+      "clock": "completed host updates; penalty observes completed critic updates",
+      "horizon": 80,
+      "optimizer_groups": {
+        "discriminator": {
+          "beta2": {
+            "first": 0.999,
+            "last": 0.999,
+            "maximum": 0.999,
+            "minimum": 0.999,
+            "observations": 80
+          },
+          "lr": {
+            "first": 0.0009,
+            "last": 1.1145204267536317e-05,
+            "maximum": 0.0009,
+            "minimum": 1.1145204267536317e-05,
+            "observations": 80
+          }
+        },
+        "prior": {
+          "beta2": {
+            "first": 0.999,
+            "last": 0.999,
+            "maximum": 0.999,
+            "minimum": 0.999,
+            "observations": 80
+          },
+          "lr": {
+            "first": 0.0006,
+            "last": 3.137235289842391e-05,
+            "maximum": 0.0006,
+            "minimum": 3.137235289842391e-05,
+            "observations": 80
+          }
+        }
+      },
+      "penalty_coefficient": {
+        "first": 1.0,
+        "last": 1.0,
+        "maximum": 1.0,
+        "minimum": 1.0,
+        "observations": 80
+      }
+    }
+  },
+  "media": "reports/forge/family-wide-word-repairs/media/ka2-global-repair-v1-two_pole.json",
+  "ordinary_word_measured": false,
+  "prediction": "two_pole.mean_abs >= 0.3",
+  "prediction_supported": false,
+  "prior_word_qualification_reuse": false,
+  "qualified_tier": 0,
+  "request_id": "3b320d3808bec45e897fc498",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "scope": "ordinary_global_candidate",
+  "source_commit": "9d089ca777e647c6d3b6ad56529ac27f171fdcb6",
+  "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+  "tasks": [
+    {
+      "reason": "measured ordinary first gate",
+      "status": "FAIL",
+      "task_id": "two_pole",
+      "tier": 1
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "unused_token_hold",
+      "tier": 1
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "ae_gan_hold",
+      "tier": 1
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "ring16_acquisition",
+      "tier": 1
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "five_word_joint_acquisition",
+      "tier": 1
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "trajectory",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "residual_student",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "unipolar",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "cover_leftover",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "mid_scale_identity",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "mode_hold",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "vector_two_broad",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "vector_unequal_mass",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "vector_unequal_width",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "vector_anisotropic",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "vector_overlap",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "vector_spiral",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "img_stripes2",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "img_bars4",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "img_blobs4",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "img_intensity2",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "grid100",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "rotated100",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "staggered100",
+      "tier": 2
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "ring_hold",
+      "tier": 3
+    },
+    {
+      "reason": "gated by measured two_pole failure; no task-only witness reuse",
+      "status": "UNKNOWN",
+      "task_id": "ring_extension",
+      "tier": 3
+    }
+  ]
+}

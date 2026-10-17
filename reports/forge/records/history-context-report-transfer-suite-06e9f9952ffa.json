@@ -1,0 +1,1140 @@
+{
+  "candidate_id": "context:report/transfer_suite",
+  "candidate_revision": "ce617fc5bd68c3395ef4a45abdbfeb9cdd8ab0784f22fdaad7b299b0b7d3f5f0",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Transfer leaderboard with test importance",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/transfer_suite",
+      "narrative_sources": [
+        {
+          "git_blob": "3bf9f5982c63870b110360ba68c865c25cd8fc3a",
+          "path": "reports/transfer_suite/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a74a33045948f262efbab7c55ed07ff9f7996fb4cd9c42301a554644b5e215fe",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/README.md"
+        },
+        {
+          "git_blob": "d3a1d7093a97a92d772c4ced9a4177b165c644f1",
+          "path": "reports/transfer_suite/calibration/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "dafbd35d20f56714996eac13969530d66cdc3c0d2d38d97caf263ee7aa26a19b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/calibration/README.md"
+        },
+        {
+          "git_blob": "3ae8ee53f174f394f6edb7571e75183e32d265f7",
+          "path": "reports/transfer_suite/calibration/images/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a93a4d6b43477d180860bdd1cc5024ccac271932d30bad1e4eefaad7b3827848",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/calibration/images/README.md"
+        },
+        {
+          "git_blob": "cf294d61120c228a2e7d1a4270f4022241d68a24",
+          "path": "reports/transfer_suite/calibration/stress/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c0c20cfb6f401461d3f3dcd16eef132b20dbc61443ca98355d9ff905b87020ad",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/calibration/stress/README.md"
+        },
+        {
+          "git_blob": "5121df09b10009c937f224116bf1f0bcb0780173",
+          "path": "reports/transfer_suite/calibration/vectors/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0412c9c58fc4389853b0bf7f7066a87a2b9b3f28da0c7393760601a1e161972c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/calibration/vectors/README.md"
+        },
+        {
+          "git_blob": "d21de23253056f5047dc3e216a27d6d2013d3e77",
+          "path": "reports/transfer_suite/calibration/vectors/support/v2_rescored/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1b7c7852703c86cb621b82ac3f997672f614d37963f0597070055bbf5e558434",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/calibration/vectors/support/v2_rescored/README.md"
+        },
+        {
+          "git_blob": "fa2ea6d734682e2f89c29cab369ad81486489770",
+          "path": "reports/transfer_suite/default_comparison/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d6c1eef4114352d8963a7174ea90521ae8b0c95ee5f49820fafbd0faab89e756",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/default_comparison/README.md"
+        },
+        {
+          "git_blob": "c3c899d4ae1ce3a942f4633813292e56c3d0e37a",
+          "path": "reports/transfer_suite/default_promotion/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "134500de960dcda0d5fb7b7ca94c89f8db54bd9f7328a9d09a3b50f8c4f8d99f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/default_promotion/README.md"
+        },
+        {
+          "git_blob": "16b8b3922b4432c03224fcce5fb8f1fc146d9f65",
+          "path": "reports/transfer_suite/formulations/DIAGNOSTICS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8783c83c6006d3724b27de5f6cc1a6fdbc6a07e549fa31d646b0ddc568a330fe",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/formulations/DIAGNOSTICS.md"
+        },
+        {
+          "git_blob": "9ee59f74a4a11d45fca12624746694ab06ea8651",
+          "path": "reports/transfer_suite/formulations/LONG_TRAINING.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "52a5c6cd7639fd64808110cb987db565a986c1729eaa1097c1681d036dd433ae",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/formulations/LONG_TRAINING.md"
+        },
+        {
+          "git_blob": "703b4c0dc76d3d1de5fe40b44e96996a5a6c3850",
+          "path": "reports/transfer_suite/formulations/MATRIX.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9561657a27541b7b25a36368f284899734db9304266114cb368a19750d2e1a1d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/formulations/MATRIX.md"
+        },
+        {
+          "git_blob": "10729cd4b15bb4a01424ed7b48345cf92b227a84",
+          "path": "reports/transfer_suite/formulations/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "af7fe21d1926efbfb04c468455b9c4548ca27c812c4e065dea9654f6e719687a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/formulations/README.md"
+        },
+        {
+          "git_blob": "71f178a92359412af9f570f0d50f4768d3e15672",
+          "path": "reports/transfer_suite/formulations/nominal_ring/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a55eefc68828286911d618c4616094b80228664a1bcb5b94fe389c1693bfd48d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/formulations/nominal_ring/README.md"
+        },
+        {
+          "git_blob": "fe7b4b59bfc7414813c27b8b46f740efd720ad7d",
+          "path": "reports/transfer_suite/public_v3_promotion/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2f56819702b0b4f59064c4ed7e6f41e15cc2ef8db9cf0124fcab0534564edc1a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/public_v3_promotion/README.md"
+        },
+        {
+          "git_blob": "b5977280ac81a8a881ae65f2b7ddbfe719d7b84a",
+          "path": "reports/transfer_suite/rare_focus/DIAGNOSIS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "97f2deb461625256b1e2e68b030c76379c691cefa7686929243e72e5d2718985",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/DIAGNOSIS.md"
+        },
+        {
+          "git_blob": "234efb995f8ffae5e15a8fd499a00b314603cb02",
+          "path": "reports/transfer_suite/rare_focus/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c1dbf20b09d25b07ac3cdc25708fe5ec2f32a459d63cb1e0d7f6d82c0fbf455c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/README.md"
+        },
+        {
+          "git_blob": "e2effc8cc50d436d44f8a4800ae4aacb5d6de98c",
+          "path": "reports/transfer_suite/rare_focus/ensemble/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d768043a4779ed024e835cea31422deaf05e2e51bb61d0efa6aee2525cc25313",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/ensemble/README.md"
+        },
+        {
+          "git_blob": "bba4631881e24ddbb4e7ec5c009e2fceea6b0a02",
+          "path": "reports/transfer_suite/rare_focus/forensics/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0a62cd3d140840a02c411f7b6e0f761a342940224b34bb2feaf38a25f4521493",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/forensics/README.md"
+        },
+        {
+          "git_blob": "679d065f19e0a98b84fa232dfcde155acda255e2",
+          "path": "reports/transfer_suite/rare_focus/frequency/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cc64d6308d70f05375b99ce736829919a72e8bd87dec7d5f6ea149e2849a0b36",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/frequency/README.md"
+        },
+        {
+          "git_blob": "d2412408dd8979ee65796d75ebcf4d3dd9aa1e46",
+          "path": "reports/transfer_suite/rare_focus/layernorm/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6da06be3de38f2b0c9c2b66c00c7e698617d68640f84f23876a41968b7879137",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/layernorm/README.md"
+        },
+        {
+          "git_blob": "a494381be9a658d11ecab9756a316f32247e5df5",
+          "path": "reports/transfer_suite/rare_focus/linear_refinement/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b9f39e1b86944d7b8e9e669206e0a5cfe6ae0ca59bfd1292fa7a5d8718e4da61",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/linear_refinement/FINDINGS.md"
+        },
+        {
+          "git_blob": "402a25c169e4499d4fd2db169ade0b114b0531b0",
+          "path": "reports/transfer_suite/rare_focus/linear_refinement/MATRIX.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bf842460dbe1139f456e7c2d03316d81b954ed6305833670c4635d56c8142c4c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/linear_refinement/MATRIX.md"
+        },
+        {
+          "git_blob": "80e071a5c94366ccb3b9738222f8b0b3c2e1172e",
+          "path": "reports/transfer_suite/rare_focus/linear_refinement/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4e8dadfebe8163d26d080fb57de3fc4aa7475435f81da4d017def3e39b03faf9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/linear_refinement/README.md"
+        },
+        {
+          "git_blob": "2d9799a577f6fa167d5882a73cced4979757253c",
+          "path": "reports/transfer_suite/rare_focus/linear_refinement/cross/attempts.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "dae462bb2ff303fe5585f8ff85f8dd09230e35ab91492ba6f2cd69ad8eb3c2e9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/linear_refinement/cross/attempts.md"
+        },
+        {
+          "git_blob": "06f3e305f373fa865863c6956c794a53bdb672ae",
+          "path": "reports/transfer_suite/rare_focus/linear_refinement/screen/attempts.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4255529fafc2ebd6165c44993b2b8d6931f1b98a2dc326f821d2cf17be2ba524",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/linear_refinement/screen/attempts.md"
+        },
+        {
+          "git_blob": "1c26d3ab01fa1f76261b00cd2d38f0527e858967",
+          "path": "reports/transfer_suite/rare_focus/rbf/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "63f249152ced3ea81a4142e486c4e24a89cf6d562d741a3a952f249b2a5abcb2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/rbf/FINDINGS.md"
+        },
+        {
+          "git_blob": "3e0e975bf7bcd3f73f6e111a3bbc468517728823",
+          "path": "reports/transfer_suite/rare_focus/rbf/MATRIX.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4a27ddb3f4524b9d994bf7c8013ab37eaf3cdbda147f512fc1e65b8eff941e90",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/rbf/MATRIX.md"
+        },
+        {
+          "git_blob": "09e182106519af5a4686a2aca2f8da9342555f17",
+          "path": "reports/transfer_suite/rare_focus/rbf/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "35f0983945422cd6bfe0b6fa2259c19e404952fc3413efbd8fc681bf09992e32",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/rbf/README.md"
+        },
+        {
+          "git_blob": "d39f91d0ce89d4726759ac3f4466e3233acfe9b8",
+          "path": "reports/transfer_suite/rare_focus/skip/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2bbe92f0f17f097d0b78a6c9050f41585196e6b7e93883ae2bb470c17e3443b1",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/skip/FINDINGS.md"
+        },
+        {
+          "git_blob": "bcb0f2b714b6c16099d8be9a035915e84b2b6cda",
+          "path": "reports/transfer_suite/rare_focus/skip/MATRIX.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f974e91a33fa72697c38ac59689c849841e2b2d388a3276a9de38d63e3766647",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/skip/MATRIX.md"
+        },
+        {
+          "git_blob": "d909244de985e2cc0e7afc187a9cfb922485879d",
+          "path": "reports/transfer_suite/rare_focus/skip/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "dd67158a12cd483a30666fe8ef7a1f9c0cd628f05a643b0341ac6bb79eed1367",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/skip/README.md"
+        },
+        {
+          "git_blob": "4a8fccb78c0f3e6d2614e8b05ce537b993c9c21b",
+          "path": "reports/transfer_suite/rare_focus/softplus/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7f0426197c7e48886591a20d53da038fe7d8aa62813cf5f9e3cb8180b8d517b7",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/softplus/README.md"
+        },
+        {
+          "git_blob": "a6aa95f4487f5db4345e98918fb46e8451f08f43",
+          "path": "reports/transfer_suite/rare_focus/spectral/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7d546165bd5f0522a9dcbc5858cf1258d17abcdcb8f82d0f2c1c4265de979998",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/rare_focus/spectral/README.md"
+        },
+        {
+          "git_blob": "9db4066638b456f3d013a7cc1ef0e4a399aad8de",
+          "path": "reports/transfer_suite/single_default_verification/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "89bf7e7a88055a0415e50beaa0b5ae13ec90c20116c248a4e885f0df9ae854a5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/single_default_verification/README.md"
+        },
+        {
+          "git_blob": "3cb7b6bd90bb7b757fdbb9e3243d79c8f0c98dc8",
+          "path": "reports/transfer_suite/solvability/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "838ecec130204570c148d71af6cd7c780326ce90dd2215a7c95211317dde2511",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/README.md"
+        },
+        {
+          "git_blob": "a65c8ec06afcabe4a3c74e40a25291b4db8ba532",
+          "path": "reports/transfer_suite/solvability/controls/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "74fc6aeb070240745e6ff3918cda8f9961cb40b861205f76b5ebf28365c11bc4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/controls/README.md"
+        },
+        {
+          "git_blob": "83fcd68d4c762f8e9a29d684935b2f6d4a3b609d",
+          "path": "reports/transfer_suite/solvability/dynamics/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3a636a2ba7c1d4de94f123037e59861c904f3c2484f960e59b3cdc16df0b39eb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/dynamics/FINDINGS.md"
+        },
+        {
+          "git_blob": "b5598819272f639da1393d04d78cc1e0908485f1",
+          "path": "reports/transfer_suite/solvability/dynamics/MATRIX.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "93af0d68ebf2b48f328896bb88b4d18c3217da5c57f6ba67de2b60c3b53823ef",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/dynamics/MATRIX.md"
+        },
+        {
+          "git_blob": "501e2f23dc6d9bd1daee5beb3bc6c0794f3c8d12",
+          "path": "reports/transfer_suite/solvability/dynamics/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e92480b6e7fc407d8b8f05d3a223a74713feeb1ecec20c8e89b329792fa2d457",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/dynamics/README.md"
+        },
+        {
+          "git_blob": "c777838d3d10c85b9886e926f2b07b23fd5b4ccf",
+          "path": "reports/transfer_suite/solvability/dynamics/attempts.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cc61709273e9985ac00d50414117ee680d630da376c71330b416a9c3503bbe58",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/dynamics/attempts.md"
+        },
+        {
+          "git_blob": "b0f5f092634557c01141131037ecad9272f38c01",
+          "path": "reports/transfer_suite/solvability/dynamics_followup/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "55ddb1f0d736394eb7a929703ce1b0cfd0ecb62341db97257763cca8f1c588fc",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/dynamics_followup/README.md"
+        },
+        {
+          "git_blob": "8052b0b2bebf66b4949c152ac5b49f5754a68719",
+          "path": "reports/transfer_suite/solvability/image_reproduction/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cc7f83a020e8a3f756df699a79a2fe04cadc456a7f0c31bbe33748126b329aec",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/image_reproduction/README.md"
+        },
+        {
+          "git_blob": "36d0f7ea804d8ccf781388b94b43ec52a7f44c7d",
+          "path": "reports/transfer_suite/solvability/images/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e5a9e42a7432e9c403fbb7a7ad89e50cd574c9398e0283db515c074334db67fd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/images/README.md"
+        },
+        {
+          "git_blob": "36d0f7ea804d8ccf781388b94b43ec52a7f44c7d",
+          "path": "reports/transfer_suite/solvability/images/combined/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e5a9e42a7432e9c403fbb7a7ad89e50cd574c9398e0283db515c074334db67fd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/images/combined/README.md"
+        },
+        {
+          "git_blob": "54f22b5b3137561d0e59371767e064c6b1ce3f63",
+          "path": "reports/transfer_suite/solvability/images/cross/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "17ad74050856f3052af7120f27c6334312380d96d068a825afa2ee64d15846df",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/images/cross/README.md"
+        },
+        {
+          "git_blob": "51e6817a950283dfa3256ed04bb2d315ebeeeeec",
+          "path": "reports/transfer_suite/solvability/images/stage1/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "08640766afd6e310013fe07f8beeb3c5d390d8430bcc8682d0f4ff2464ee4d0d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/images/stage1/README.md"
+        },
+        {
+          "git_blob": "16d1ac86729fa23b0d4d1b3c96f21c25b3202d0d",
+          "path": "reports/transfer_suite/solvability/images/stage2/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2aee7d5e484db7053de0f80b51b22b7e55fe914885e010648672a3c88cd3e111",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/images/stage2/README.md"
+        },
+        {
+          "git_blob": "29a31ef2f13e079e5320b40bda45fdaa61221530",
+          "path": "reports/transfer_suite/solvability/mog/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2ac49ef62a9ca2f0726f0cd4cc4e358a55b3b991d82ca6eb3b8eb74a1d2b1f8b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/mog/README.md"
+        },
+        {
+          "git_blob": "bb3aa518d146aa79c6a5b4739d6f6996f9877ba3",
+          "path": "reports/transfer_suite/solvability/vectors/combinations/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9c172799ec7134101d0b50860139a183320ef84d49fddda184084b3e9801b273",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/vectors/combinations/README.md"
+        },
+        {
+          "git_blob": "544448a507be41002a72b30d85b9c1a2ddaac941",
+          "path": "reports/transfer_suite/solvability/vectors/density/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f4e5803207b2f345d2733ee3e29f1fa99d2bce8ef9b151a2ae3e07e1ae2e95d8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/vectors/density/README.md"
+        },
+        {
+          "git_blob": "70d1cd391c980871b9c22502b01debe943e7d11a",
+          "path": "reports/transfer_suite/solvability/vectors/geometry/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "fc1d0f635a9bb79cca523db7fb5ef0f5179b9892da5933dff367f116a7e1e738",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/vectors/geometry/README.md"
+        },
+        {
+          "git_blob": "e552fdddbd8063dcf957580aab5927a946317f4f",
+          "path": "reports/transfer_suite/solvability/vectors/reduction/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4fb600d63df836dd359daac6cc4bda7eac11bfc0623c69261217efb4c0a07d60",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/vectors/reduction/README.md"
+        },
+        {
+          "git_blob": "87ac9f681ee542a4d1f7bb86824a08f575f2dc9a",
+          "path": "reports/transfer_suite/solvability/vectors/regressions/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b5516630fc9950b8b1680e703fbef97a079cc63ab1297731497a700da3d79a88",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/vectors/regressions/README.md"
+        },
+        {
+          "git_blob": "144e223661c2ccbaf7cec795ecd56ac9307c74b5",
+          "path": "reports/transfer_suite/solvability/vectors/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "df9689a8a3e0cdef65aabaee9f99588a58b80dcdfc6ab9607bb5ec1caa2e3900",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/solvability/vectors/screen/README.md"
+        },
+        {
+          "git_blob": "df1c4e9c0c6115ac374b1e68bdeddd76e5170c5c",
+          "path": "reports/transfer_suite/study/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8346050be823ed38bf65aabac28e6f6bf644e1a2eebac5bb12ef1fe5cacc1455",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/study/README.md"
+        },
+        {
+          "git_blob": "e76032a4c5203745561d9e3efb4d4253d9e5b038",
+          "path": "reports/transfer_suite/unadjusted/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b86f533750a557e51b3d8ce6783818135270e03026deabae57fc18d911d7e41b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/FINDINGS.md"
+        },
+        {
+          "git_blob": "e3f1eaeb4c7bb509355001f99d1476220eb322d0",
+          "path": "reports/transfer_suite/unadjusted/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8899e59cf82e0e7f875271bfbe8f8034a9be007920d0d49ff6522dbe8bb3f67b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/README.md"
+        },
+        {
+          "git_blob": "7a0a8ff90c60030e64ecb6376f429df941934d75",
+          "path": "reports/transfer_suite/unadjusted/runs/completion-0/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0b13eea6dadb81c4ee7ed5b45243949ee29b3685a04ad17e6cd472ee4233be50",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/completion-0/README.md"
+        },
+        {
+          "git_blob": "c9ab48559d9487921294a89e26a380666e379c03",
+          "path": "reports/transfer_suite/unadjusted/runs/completion-1/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5d7ce400693f4c1123197af3473b71f6d221cc74598844622eeeef935c5a6e08",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/completion-1/README.md"
+        },
+        {
+          "git_blob": "eab5b5a641c951899b5c79e7c2dbc37684830ea0",
+          "path": "reports/transfer_suite/unadjusted/runs/completion-2/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "486c26a96c1e633f2323ad18274b023080cd95d4d69ad2be09761efb6816b191",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/completion-2/README.md"
+        },
+        {
+          "git_blob": "56445eadde64907a47063f807ec4a5f7ca7d04ea",
+          "path": "reports/transfer_suite/unadjusted/runs/rare-global-optimizer-screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "aa3b5405b626a6d1da01f445ef4d280916de216060a6526bd69f50f208961a52",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/rare-global-optimizer-screen/README.md"
+        },
+        {
+          "git_blob": "39a0f7da389ccabe3fb8406e1a1696b865728ce9",
+          "path": "reports/transfer_suite/unadjusted/runs/rare-profile-replays/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c1edba09cea2af6da110e7cdd553d95ee69806e5eb13a54616890ef1f9bc0c01",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/rare-profile-replays/README.md"
+        },
+        {
+          "git_blob": "a243a6266b6e9ef597e77fe3b33b2df4c662344f",
+          "path": "reports/transfer_suite/unadjusted/runs/rare-profile-replays/initial/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c8ce74efaa56426942289a5935df454c2f3e5675d8f967adcf9f7fe90594b997",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/rare-profile-replays/initial/README.md"
+        },
+        {
+          "git_blob": "79a311c9d031ddbd4d5b1f9a1fd8d679837ae44a",
+          "path": "reports/transfer_suite/unadjusted/runs/rare-profile-replays/winner/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7e1a487e313e19f4d4adc7df28cb4053bab19e791192af5a981e168a254b0274",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/rare-profile-replays/winner/README.md"
+        },
+        {
+          "git_blob": "6d8c3b5221f01555d34659e67406852962038d1e",
+          "path": "reports/transfer_suite/unadjusted/runs/remaining-replays/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cd9749bb040d85d1922fd9568eb29df0ac3d5e584200bea37185da655257dfa0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/remaining-replays/README.md"
+        },
+        {
+          "git_blob": "73436f909250b38a7a057801454c150bf9d307c7",
+          "path": "reports/transfer_suite/unadjusted/runs/remaining-verifier-audit/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2c7b15fe03b39e0f8cfd89aa93c0b1a938307f8cf1fc30f90da308255c31ab73",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/remaining-verifier-audit/README.md"
+        },
+        {
+          "git_blob": "498162ae08a30bf493ef526f59c06ff6acb9d206",
+          "path": "reports/transfer_suite/unadjusted/runs/round0-0/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "732de8048bf2139380b8c76cfbedf28f66bb704f3793b353c4cbec1ed7a559cf",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/round0-0/README.md"
+        },
+        {
+          "git_blob": "a0197f8ff1a244df7a0ef8a6fc4c2089bc07086a",
+          "path": "reports/transfer_suite/unadjusted/runs/round0-1/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2477be338b9a606721b54eccf92bf58e094969b01070b3cf4f9d7ed90de34874",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/round0-1/README.md"
+        },
+        {
+          "git_blob": "9acf76612e97a4ca82d1e0f399636f7b860ba02c",
+          "path": "reports/transfer_suite/unadjusted/runs/round0-2/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "419b97847e20b18193644511fadee08c70b19c1205bf86efcc7004b8f571af08",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/round0-2/README.md"
+        },
+        {
+          "git_blob": "fd10d7da8836e4d78586cdd64f81ec90411a04a6",
+          "path": "reports/transfer_suite/unadjusted/runs/round1-0/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3dd67bc913245fc8b62af79859b1596f42cbe8833ba35dfc27fcc0691322ca49",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/round1-0/README.md"
+        },
+        {
+          "git_blob": "ab90d4fa794f3c647b1cbdda90799815e983f2b4",
+          "path": "reports/transfer_suite/unadjusted/runs/round1-1/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "043b82feda071ab7eef59d5269c9f9c62685222189d1f611a1d7bb2dfdb45bfe",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/round1-1/README.md"
+        },
+        {
+          "git_blob": "065523aecee544b3687dd6b27b8d7c0b1dd86466",
+          "path": "reports/transfer_suite/unadjusted/runs/round1-2/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "71bf2013d99bb326e53bbc013f75a6eba7bcd25d3b38be064956d7c75547581c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/round1-2/README.md"
+        },
+        {
+          "git_blob": "90e46129dc108aec9e8fa95908509364f2ee80b2",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-adapter-search/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1da18df5640b47f9750ddff77f4773f03c05e804ea8d0f5e9df67a026e1ff8b2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-adapter-search/FINDINGS.md"
+        },
+        {
+          "git_blob": "3448276cd91236585baae5ac8794c684c154cda9",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-adapter-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9bcff3914e4af8cc66ae1921e54858d80e71da7fdcb4db3398423a5ab092a05e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-adapter-search/README.md"
+        },
+        {
+          "git_blob": "04ff88c88ba68e9a0f5984a872b59705152c1532",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-adapter-search/metadata_timestamp_attempt/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "86f64956de791bc751281414141269ef949c6ea02d3bf9d110dbc7ca0e41eef0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-adapter-search/metadata_timestamp_attempt/README.md"
+        },
+        {
+          "git_blob": "04ff88c88ba68e9a0f5984a872b59705152c1532",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-adapter-search/metadata_tuple_attempt/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "86f64956de791bc751281414141269ef949c6ea02d3bf9d110dbc7ca0e41eef0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-adapter-search/metadata_tuple_attempt/README.md"
+        },
+        {
+          "git_blob": "037c152a9f982f6c9813a8ebe83ba3ed9c020b43",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-adapter-search/reproduction/relative_step_adapter.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0e23c7d989652d291308b9318e67cf808d5fc6b433e4a50670312634b8060579",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-adapter-search/reproduction/relative_step_adapter.md"
+        },
+        {
+          "git_blob": "4e9b38479acf552e76c6e39348ba7e43f05eae5a",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-adapter-search/study/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3b6496a4c1f590856477883a33ba007ac598bb6d56edd6ab01144d49fa86e29a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-adapter-search/study/README.md"
+        },
+        {
+          "git_blob": "59abafa8e19da52e6d66acccc85538c4dd438496",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-architecture-replays/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9d8855d0f8efe7d604372f4fbecf4e645d536dc3ce6ad25298cc46b05c2a260d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-architecture-replays/README.md"
+        },
+        {
+          "git_blob": "02e759d977b44a9a2f0bc96142efaa3f4c7eb19a",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-batch-feature-review/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2e259dcc0bd3fe580d8671b6f185e0fc1dd583cc9bb919bbe23360812ad2b6be",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-batch-feature-review/README.md"
+        },
+        {
+          "git_blob": "e710f4a53a2633b2d1d8c206d2f55f05e5e2774b",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-batch-feature-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "022bb13589a34e43e75f7a8bf9e17d8289f2ad702e1ede80d828692d8ad1d7a5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-batch-feature-search/README.md"
+        },
+        {
+          "git_blob": "0d118098c306632a7782832d1b5dbdc00696d2b1",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-batch-feature-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e5ce7248961410b645c7d9deba1dfdf82ff64c6b9e7ee56e968a4983f6c01e44",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-batch-feature-search/screen/README.md"
+        },
+        {
+          "git_blob": "86bb68b3f95cdf9d50bb96e644c5366084f04e9f",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/PROTOCOL.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a939617067460508274b6623dc1b38afa104cae690708b7b06ad32b05f8e0ef4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-discriminator-search/PROTOCOL.md"
+        },
+        {
+          "git_blob": "9a3a8e0dbba3d11abcbe60371691fde4d92b80a1",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f8f9b179bb7e60f8127c9a71baf3894f924f90ba52feaf9b24c33b124afed7a2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-discriminator-search/README.md"
+        },
+        {
+          "git_blob": "f46227521b08ec896dabb44a115329b826eb61f5",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/completion/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "365d06305e59609bd987a489d58d1f3be8d08af0f36e2bca0e44734f09f3c600",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-discriminator-search/completion/README.md"
+        },
+        {
+          "git_blob": "2d52d72dd9101bd482e4e82806b102bde9052ca3",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/cross/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "eeee05aa2b333a0500adc352307b69a43c40aca4e08d869e3578b6f3ddfb5906",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-discriminator-search/cross/README.md"
+        },
+        {
+          "git_blob": "0cf7d1307829dac7014d3151b7ae2f2358b07b7e",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "be3fa4c899ff6afcdf0009daf50f33206c08b255c7c31cc9dfac7476d50727b0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-discriminator-search/screen/README.md"
+        },
+        {
+          "git_blob": "cafb408279ecb9cb8a70b9350bc97ba14613891a",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-ensemble-search/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6d0393c482f94491240d2a49698558b2fb32d4218e7c48ea2f2d8e6d131205a9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-ensemble-search/FINDINGS.md"
+        },
+        {
+          "git_blob": "84ce96d2ab3ad18ae5015993f82a63c38d4eadf2",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-ensemble-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b73b69def7c70ccdcf1c37601346fe4b004f80d84fa4f60756eca40736c59a54",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-ensemble-search/screen/README.md"
+        },
+        {
+          "git_blob": "c1b88502ca6d6aeac1e2c745e70deef285631f20",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-geometry-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6306cb6aef6b03101b34b91b905f01699bff679d617fc3739631caffd14dc1b9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-geometry-search/README.md"
+        },
+        {
+          "git_blob": "4cf281167aac647eb6e99e740d15847e5dc0ca67",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-geometry-search/readout/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3769659168135e83b93966c4d40359ec080433f3f430f6a0b338a4b78233b4bd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-geometry-search/readout/README.md"
+        },
+        {
+          "git_blob": "3ca17f6a9c3aa1149dca5361cc5d84358391fae9",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-geometry-search/residual/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0d1f9cd4ff01ff8c5c56b073bb1ea80d1ee6b73c8caae34beec9352fca569296",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-geometry-search/residual/README.md"
+        },
+        {
+          "git_blob": "720ffcf4ab1d06f1d5e226c074bd54e62a1ba1dc",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-geometry-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "08f6cfd0877402743e1d1dbe1ed31f153abc6fa1b84d752a865346f1e92705f3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-geometry-search/screen/README.md"
+        },
+        {
+          "git_blob": "81e59cf6d6948e11b4b4d1f88652d36dcbc6802a",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-local-density-search/PROTOCOL.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ac2a7d62fe419c6c8996de10961ee341cdb97bd86fcd833ba2f11657bf7b797b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-local-density-search/PROTOCOL.md"
+        },
+        {
+          "git_blob": "a5f813dde7692822ada459b12c40a6e897365548",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-local-density-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8bed38c4842547399991e9c1eaad924da9e92b31bea221672d8753d2d48b24b1",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-local-density-search/README.md"
+        },
+        {
+          "git_blob": "99d43df6bbb320bc17e352deeb17b9131d1aa883",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-local-density-search/refinement/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1387462e63d273706d812b0b66d6268a3b158a441e8dda187f2c1f3d875851aa",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-local-density-search/refinement/README.md"
+        },
+        {
+          "git_blob": "5ceaa464456efe2d4b2a30851c2e89210cfb98cd",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-local-density-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b736411cb6de5df02b566b720577f50595db3c1bd72128064caa31e336a5bf77",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-local-density-search/screen/README.md"
+        },
+        {
+          "git_blob": "38fafc3faac474c0a045ed94ea3dd26ffaf1fcd8",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "471a06eda0ba5ef2adc7ef5cff78ec2c2ac1725c9b4863e6298ed11d292d5a3e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/README.md"
+        },
+        {
+          "git_blob": "2f92135e9f358a75ceae23ada47dc6d157f576de",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/center-followup/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "28e0cdc9e3cb60c85eba8373f0f9b5e45a775648dd9523768a88c6b46c912127",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/center-followup/README.md"
+        },
+        {
+          "git_blob": "cd8aedbb2bccd4c60e8ad188fd626fe4edd0ceb9",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/refinement/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e27ec2b69a5b4d7dfd76cc7f71f5638b278aa0329393668340d1bec1e7abe02d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/refinement/README.md"
+        },
+        {
+          "git_blob": "eecaac50768e9a4f9cede2df5ae0224e80efcddd",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "35c37aa159c3ca5f68c0568a0c40ac89a0fbe3ea4573d1cc68386de325c4c47a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/screen/README.md"
+        },
+        {
+          "git_blob": "b4c80da9676fcb2004f28b4b1c1a9579cb6db4ff",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/beta-interpolation-rare/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1066b350ea766ff81fb37801bec5c761f00926a62a2d533b82e4079212aca55f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/beta-interpolation-rare/README.md"
+        },
+        {
+          "git_blob": "eb309a6feeb3a094058d205f48cc27e238aa141d",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/refinement-rare/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "718f4cf949341f80e5c7d4dbb7f0b4020cfb31c16ac4f8cfc1a343c91ffba42d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/refinement-rare/README.md"
+        },
+        {
+          "git_blob": "c3c52dc88280b9bfc518d6ca1e5d3f443371091a",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/refinement-width/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8452dfd91b3b864355d18e49cc87be03bb25b201414d2e061d7ed6698f2e9bc0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/refinement-width/README.md"
+        },
+        {
+          "git_blob": "51d6bc3dcf97e44c94efae70f25dd97046b69ee2",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "eb4e3d2c3f7da7051633fc9ca3319d3e467480fee984fddfb364ccac523b631b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/screen/README.md"
+        },
+        {
+          "git_blob": "4600f2601beb5086496683833305798e4a12e6ff",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-rare-diagnostic-precheck/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b861b038a3f89698f5dd19451d3c0151d8a5ed65d88c941838399bb8559bf433",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-rare-diagnostic-precheck/README.md"
+        },
+        {
+          "git_blob": "99f95b53727337ef1b163ad516a8c4114db32147",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-rare-diagnostic/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8c7720e410d2ccb22439407621a2d133d54af86794430e4ce8e55ac22608a628",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-rare-diagnostic/README.md"
+        },
+        {
+          "git_blob": "88066ffc7b7a909738a6c423f910daa2204d72d4",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-rare-gradient/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ae2fc55a00a644b6e9ae0315389a06b3b6277e2312876722f74eaf2b5629a270",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-rare-gradient/README.md"
+        },
+        {
+          "git_blob": "d4001e46ecbc72a5dab28e400fb16fe02fa21193",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-rare-gradient/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "145b030f7ac646c59aa773b34186f902f42735d23bde3753caea3bfea7eba41a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-rare-gradient/screen/README.md"
+        },
+        {
+          "git_blob": "f87282f64479db3ddf3ed60bc853a3659e9e398b",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-rare-mechanism-audit/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ea75712e22260f82b54f058e313478dc6b4e80bc7bca7e5db0588853c0b58275",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-rare-mechanism-audit/README.md"
+        },
+        {
+          "git_blob": "b32bf9a703fe8596fd5aa373b58e0914ce0d35be",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-ratio-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1edeec4d7a848b1010c245521928d167d4900f3e5874b8398593de15a58eed60",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-ratio-search/README.md"
+        },
+        {
+          "git_blob": "1a95bcc0ba5475ca10ce57e69daa2e2cfb3db881",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-ratio-search/completion/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a98c3a72435a0d91311a0b9b0000bf7cca9301063fa44f7ec9d379cb814889b5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-ratio-search/completion/README.md"
+        },
+        {
+          "git_blob": "195c06524377fda9da3e784b955479b09bf04673",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "441943bab4687f769bc1caeb2c33aa684d3e1a4f88455ccce25d333b8b71f474",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/README.md"
+        },
+        {
+          "git_blob": "6a26b45917543ccc10115e5a083ed76e45848013",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-schedule-search/BETA6_FOLLOWUP.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "615d5233718fe5cc5909abded68df0fac52e0098e6bfb6b96569bffd826620da",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-schedule-search/BETA6_FOLLOWUP.md"
+        },
+        {
+          "git_blob": "eb3f43201611889a277441326314691fa69af9ce",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-schedule-search/INTERPOLATION_UNRUN.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "30c09af5a575cf42e36d5260221ea06e73a6df233c802acb1372ac23a71b18d9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-schedule-search/INTERPOLATION_UNRUN.md"
+        },
+        {
+          "git_blob": "4c733ed3f9da37a44155f1762bcd23a6d4a8744c",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-schedule-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e32fb511fd959628f79606617588be53e3de3173c496293b1af75a64367d8cf4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-schedule-search/README.md"
+        },
+        {
+          "git_blob": "b1695c555f8f6aeac79f55e73d5c7c5fdd9ef547",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-schedule-search/beta6_control/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "19ffc0ed247c887e92444df1502a897373bb139b1de12e9c51ecbc2af708f806",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-schedule-search/beta6_control/README.md"
+        },
+        {
+          "git_blob": "419d7b5aca3723d85122b9db53ffe61256d22d3a",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-schedule-search/beta6_screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "30d6c8ab77970b2415430a9194857529db9f2bf714ff6485d3ecc5bd780fd867",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-schedule-search/beta6_screen/README.md"
+        },
+        {
+          "git_blob": "08ae326e88722a35c3517c2bacdc72bd84f9357d",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-schedule-search/control/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "acefe9b18d20ff506bc01a8af3017febdcb2d8db2d1332022ad6c384f7467d30",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-schedule-search/control/README.md"
+        },
+        {
+          "git_blob": "d90fed32c5139e978c1d1e4ac179e359b5a3fbc9",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-schedule-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8100c1816000593f0685825c4f37eacad0c0f87ab891cfe86f48ef5e6e29b3d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-schedule-search/screen/README.md"
+        },
+        {
+          "git_blob": "2c0c04f7bb9c99a647b8c22e336fbb9c797426fe",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-width-search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6b358b40151f7ef7d8af5c49f5447cb6ab16373b3c38aee66f9708b9322e1e97",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-width-search/README.md"
+        },
+        {
+          "git_blob": "2ca9321bc5b877d70228bdedfa789fcbd80a9f87",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-width-search/cross/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "936713955657093b616f9b0098e7e1ee59409feebe72525196e4b0ae6b3efb0a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-width-search/cross/README.md"
+        },
+        {
+          "git_blob": "7603dbe8141528e04058062c69d4966880661c68",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-width-search/last_refinement/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "800e5525282249334e5706e50f952f710e9439664c7e6e27ecb6d90b4dddab9a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-width-search/last_refinement/README.md"
+        },
+        {
+          "git_blob": "20ba8196f09ef493455b60855b90f416a5e6b148",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-width-search/refinement/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "686a364433526e3650896d7f3d3556c8a44d65c1cb7389176585fe02119fab80",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-width-search/refinement/README.md"
+        },
+        {
+          "git_blob": "8540c94496a55c1e7e9b4a126c38fd815485e804",
+          "path": "reports/transfer_suite/unadjusted/runs/shared-width-search/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ac8e79f3e4457a25075b74299cb338b7c691355eae0224bf8dc349dd84bb0a06",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/unadjusted/runs/shared-width-search/screen/README.md"
+        },
+        {
+          "git_blob": "2e540aff6a40430a995a77399790d465c998ce59",
+          "path": "reports/transfer_suite/valid_search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ef24bd139efbef0de31893ec305461d1fb7e750905ae9831c5adf80932feb9c4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/README.md"
+        },
+        {
+          "git_blob": "38097418025428831bc4b8fa8d15657b148db754",
+          "path": "reports/transfer_suite/valid_search/adam999_group_fix/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "252506851792c1dd0eefce0abe5ca538034acb1704c7748f09a6e42b29b6ecd9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/adam999_group_fix/README.md"
+        },
+        {
+          "git_blob": "557fe79550cddfc556f4fc2ace591d1ae787b7c9",
+          "path": "reports/transfer_suite/valid_search/adam999_hosts/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bd82970bf67fa39defd28cc6b97317b12da8b581ab7cd9b04fcfce6f62a4912b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/adam999_hosts/README.md"
+        },
+        {
+          "git_blob": "75c6f94f911be54e73d30d3246ffdf29d8d6bb1e",
+          "path": "reports/transfer_suite/valid_search/adam999_images/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e57b1885ea9ef334a04aa25a6faabba58b1804998514dfd279999562ce6a20f9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/adam999_images/README.md"
+        },
+        {
+          "git_blob": "8f5544d2b22ebdfe745b2142c49ce2ee8de6cc1d",
+          "path": "reports/transfer_suite/valid_search/coordinated_group_fix/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d497f165b8e4c684efdde45967f12261180e1a148f2cbc19bbc72fac3e01d3fd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/coordinated_group_fix/README.md"
+        },
+        {
+          "git_blob": "7e43d912721ef4673e89b9d816cc5d5a165f8056",
+          "path": "reports/transfer_suite/valid_search/coordinated_hosts/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "da1dca9021b46bb184608900c2853c36ea594c8e31de5e4c8ad31d89ebf524ef",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/coordinated_hosts/README.md"
+        },
+        {
+          "git_blob": "feb148b965b253454b4055c25c6410f0c44db375",
+          "path": "reports/transfer_suite/valid_search/discriminator/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "00d7bcba0b56ecb24fe3e27c229d498a1ffb461d9fd5e902b0080a34e479cdce",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/discriminator/README.md"
+        },
+        {
+          "git_blob": "ef074208daa0f7787414b5a42221e610aa67e5bb",
+          "path": "reports/transfer_suite/valid_search/discriminator_combinations/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3fd287b7f50531f741f19b8b1bad86c68a8eda1f00db0890e0acc34968ca468a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/discriminator_combinations/README.md"
+        },
+        {
+          "git_blob": "a56eca7cb39aa64dd39fbfb0a17411db5af8e9cd",
+          "path": "reports/transfer_suite/valid_search/discriminator_combinations/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "dc8e0a92d522a08e56a9fee35e3370aebffae16a1182ec5c2e4501590a2caff4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/discriminator_combinations/screen/README.md"
+        },
+        {
+          "git_blob": "2dc70a1c54f81c83c4b664c25cc19d96f2717450",
+          "path": "reports/transfer_suite/valid_search/recipes/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "201cc97ff8616946980a460736828f6068afaf2a03652c0c6d99f37c1ae15ea0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/recipes/FINDINGS.md"
+        },
+        {
+          "git_blob": "21d5e11a51bc2429804d0df1b426ff852553a38d",
+          "path": "reports/transfer_suite/valid_search/recipes/MATRIX.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "55fe05ccad53cd926d00b1b1336890a00ae5731a020e71cd870c0d3fe565116e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/recipes/MATRIX.md"
+        },
+        {
+          "git_blob": "8e4c6e38b2c42259f837c1ec0fdc8208c4a2132d",
+          "path": "reports/transfer_suite/valid_search/recipes/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c54a898cc7c132e83f004a37317e346cacc2ef4f5eba970579eaa4e4239d921d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/recipes/README.md"
+        },
+        {
+          "git_blob": "7580505d2faeecc3f80339b4f81faaba41f4e40b",
+          "path": "reports/transfer_suite/valid_search/recipes/cross/attempts.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "74cb9ac271f834ada78ae4777da28e47824d9f83becdaa98d1536d6b1655943d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/recipes/cross/attempts.md"
+        },
+        {
+          "git_blob": "9f0cbef15ab557041cb8149d18797b1e39646db9",
+          "path": "reports/transfer_suite/valid_search/recipes/cross_secondary/attempts.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e2dfaba2dfd3f9c4f48eb4ec58625d41cddd2205dae50c006603d00f9204d6e9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/recipes/cross_secondary/attempts.md"
+        },
+        {
+          "git_blob": "51c81f1507b572b6292e27e499997d552e194237",
+          "path": "reports/transfer_suite/valid_search/recipes/screen/attempts.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ccadfd90379a7c36d2c4feccf4413d8c13e4b9a6eddf4a9c5227c2c4bb5cdace",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/recipes/screen/attempts.md"
+        },
+        {
+          "git_blob": "c044803679dec7d53f88566fb915875f434f7b01",
+          "path": "reports/transfer_suite/valid_search/resources/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3ee24c77805883fc4d06114c0fd11d857ac90e55805bcf55611530601e24f3d7",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/resources/README.md"
+        },
+        {
+          "git_blob": "f840169ebd2e9dcf2b0acb64f05db69f768bbd7a",
+          "path": "reports/transfer_suite/valid_search/resources/architecture/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9626b90df6e21c574f567edfd233c7b08a8fc8b68c1019b77923879247e82d68",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/resources/architecture/README.md"
+        },
+        {
+          "git_blob": "1f12b53c262a173bab92f19fe1ae6acb58d5d423",
+          "path": "reports/transfer_suite/valid_search/resources/beta999/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c2998c9fc1b76720d0bef215689f5554fbd81d616c0d6487a7694a7c41b94c39",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/resources/beta999/README.md"
+        },
+        {
+          "git_blob": "8525f669aa07070505770f58240d363bc6b757c1",
+          "path": "reports/transfer_suite/valid_search/resources/combined-validation/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9f7920a18c57a85e34db18a5e3a9c58d5566e584c5e92b860b440dd07610ad34",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/resources/combined-validation/README.md"
+        },
+        {
+          "git_blob": "f7a6af46a7860a376b909a7ae9fbd034b611abb7",
+          "path": "reports/transfer_suite/valid_search/resources/combined/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e615e3f7c1b486441b0048c674705b9f780d73e4788ab815c4aee550b9bec308",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/resources/combined/README.md"
+        },
+        {
+          "git_blob": "3618b857523cd54ee4ac6d482b13fb27162f37f0",
+          "path": "reports/transfer_suite/valid_search/resources/screen/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2112ae69c8b85e41258f2d95b2298fed4972a42f78249911f713b17c476e4695",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/resources/screen/README.md"
+        },
+        {
+          "git_blob": "a360ef869ada08352109eb03bddade275fd452bf",
+          "path": "reports/transfer_suite/valid_search/resources/validation/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "97400d7754bfcf355b5e72f349ab73c0de0dac52291b289a1d35fd7d81e037a0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/resources/validation/README.md"
+        },
+        {
+          "git_blob": "0a325e2161d8b33ca6e393a733a4a54a9a5ea24f",
+          "path": "reports/transfer_suite/valid_search/smooth512/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5c3449728d7d98c2889c31ef470ed6337e31622cd04b8b8358823c97cdfba012",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/smooth512/README.md"
+        },
+        {
+          "git_blob": "fb7f94ef3f77b950f7ed0717a3d285e2607c3700",
+          "path": "reports/transfer_suite/valid_search/smooth_discriminator/FINDINGS.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "26656393d477f9fcf775738f0201ca7eb06e28eba5c87b9df83449f919ccecc2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/smooth_discriminator/FINDINGS.md"
+        },
+        {
+          "git_blob": "29f4a1b4a557ca6c8789cdbfec139952a7adbab8",
+          "path": "reports/transfer_suite/valid_search/smooth_discriminator/MATRIX.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "acf90294bd11ea2ceae63542d69b52f3f59e09838440dca0bb5ffcca595e9835",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/smooth_discriminator/MATRIX.md"
+        },
+        {
+          "git_blob": "cf9ca5a1e9d655e12d51c681384d0b604ed7206c",
+          "path": "reports/transfer_suite/valid_search/smooth_discriminator/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "adaf88896283fddab92231104f65ac05266e7f7b345bafbb6ae2e434222a9c16",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/smooth_discriminator/README.md"
+        },
+        {
+          "git_blob": "2fb4c6e8ac2be348f8bf31b031cb275c0f4c3cea",
+          "path": "reports/transfer_suite/valid_search/smooth_discriminator/cross/attempts.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e77a5ad91f41ad4fe12c78023f4bee55c74e88d0931acc9049d6170dbbdd8717",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/smooth_discriminator/cross/attempts.md"
+        },
+        {
+          "git_blob": "806966e61e23b855e457c4bf00877bf80b2686e7",
+          "path": "reports/transfer_suite/valid_search/smooth_discriminator/reusable/smooth_critic_research.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "24c309f01a6891568a3f3c8d34836ec2a908627cb8b38766d25890d3efcdab46",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/smooth_discriminator/reusable/smooth_critic_research.md"
+        },
+        {
+          "git_blob": "50070f2942738c69bee3d7fb7af00fe9156ac71a",
+          "path": "reports/transfer_suite/valid_search/smooth_discriminator/screen/attempts.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3fe2dc609bed3463b5c433fe5901c1b6d8b0e0783f283107d72d36098fa6b22c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/smooth_discriminator/screen/attempts.md"
+        },
+        {
+          "git_blob": "6fad96d8ee58ddce043e815c7b7a063eaae8747a",
+          "path": "reports/transfer_suite/valid_search/softplus_refinement/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "896eaea44387d68bda746046e8a0f2d2b40de18adcc2d311fb2bbb15f0bd9980",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/valid_search/softplus_refinement/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Transfer leaderboard with test importance\n\n**Current PR comparison: [formulation defaults](formulations/README.md).**\nEach candidate owns its training recipe; G/D architecture is separate. The\ncurrent b_cap3 entry passes **9/9 required and 9/10 practical data/image toys**.\nThe [valid-toy search](valid_search/README.md) adds overlap and unequal-width passes through\ndiscriminator architecture changes with the original training recipe.\nImposed LR/batch/discriminator variants are nonblocking diagnostics.\n[Longer training](formulations/LONG_TRAINING.md) is a separate toy: b_cap3\npasses at 7,200 updates with the same recipe and architecture.\n\nThe prior 7/16 becomes 7/10 through an explicit user-requested scope revision;\nno measured result or threshold changed. The [solvability audit](solvability/README.md)\nretains all 16 historical individual solver witnesses. No shared all-pass\nrecipe has been found. **The controller study below retains its original\n16-case ranking, tiers and scores; it is historical evidence.**\n\n**Cosine remains the baseline.** The broader learned-controller search did not\nimprove practical coverage or transfer. Deliberately poor architectures and\ndata stresses remain visible without vetoing candidate selection.\n\n| Test importance | Cases | Effect on selection |\n| --- | ---: | --- |\n| **Required** | 9 | Every established live behavioral regression must sustain su"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-transfer-suite-06e9f9952ffa",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "3bf9f5982c63870b110360ba68c865c25cd8fc3a",
+    "path": "reports/transfer_suite/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "a74a33045948f262efbab7c55ed07ff9f7996fb4cd9c42301a554644b5e215fe",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/transfer_suite/README.md"
+  },
+  "task_results": []
+}

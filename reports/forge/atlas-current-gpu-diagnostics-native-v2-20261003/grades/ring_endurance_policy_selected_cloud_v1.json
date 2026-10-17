@@ -1,0 +1,74 @@
+{
+  "grades": {
+    "ring_extension_policy_selected_cloud_v1": {
+      "gate_status": "FAIL",
+      "metrics": {
+        "confirmation_checks": 200,
+        "converged_step": 1400,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "first_hold_failure": 1407,
+        "frozen_toy_verdicts_unchanged": true,
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "hold_budget": 1200,
+        "hold_budget_complete": false,
+        "hold_checks": 7,
+        "longest_settling_streak": 200,
+        "min_hq": 0.9,
+        "modes": 8,
+        "name": "first_convergence_then_hold_v1",
+        "settling_budget": 4800,
+        "settling_checks": 200,
+        "settling_failures": 0,
+        "start_step": 1200,
+        "status": "POST_CONVERGENCE_FAIL",
+        "training_feedback": false
+      },
+      "reasons": [
+        "first qualifying window failed acquisition or uninterrupted hold"
+      ],
+      "status": "FAIL"
+    },
+    "ring_hold_policy_selected_cloud_v1": {
+      "gate_status": "FAIL",
+      "metrics": {
+        "confirmation_checks": 200,
+        "converged_step": 1400,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "first_hold_failure": 1407,
+        "frozen_toy_verdicts_unchanged": true,
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "hold_budget": 1200,
+        "hold_budget_complete": false,
+        "hold_checks": 7,
+        "longest_settling_streak": 200,
+        "min_hq": 0.9,
+        "modes": 8,
+        "name": "first_convergence_then_hold_v1",
+        "settling_budget": 4800,
+        "settling_checks": 200,
+        "settling_failures": 0,
+        "start_step": 1200,
+        "status": "POST_CONVERGENCE_FAIL",
+        "training_feedback": false
+      },
+      "reasons": [
+        "first qualifying window failed acquisition or uninterrupted hold"
+      ],
+      "status": "FAIL"
+    }
+  },
+  "raw_hash": "17b338b7d18f31671148bedfba6f51ffc60d4eeee2a97895030a223a9ef66cf7",
+  "schema_version": 1,
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "telemetry": {
+    "independent_grading_seconds": 0.8012233029585332,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 665972736
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}

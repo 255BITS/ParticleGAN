@@ -1,0 +1,7 @@
+{
+  "status": "ERROR_METADATA_FORMAT_CHECK",
+  "utc": "2026-09-30T09:52:10.878200+00:00",
+  "error": "git diff --cached --check treated the required single-space blank context lines of frozen RESOLUTION.patch as trailing whitespace.",
+  "resolution": "Preserve byte-exact frozen patch; check staged source/docs and other artifacts while excluding unified patch evidence.",
+  "source_and_quality_unchanged": true
+}

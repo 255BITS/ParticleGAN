@@ -1,0 +1,13 @@
+{
+  "status": "FROZEN_PASS",
+  "files": {
+    "audit_lane.py": "68c7c8e5a44db7bfc194f3f9066f9954d7705d079c11d58742e0bfa825b6d657",
+    "receipt.json": "8c5d3457545a513d93b0e68612d3044aa83da269bfd04ea0e27b95a38ae6c120",
+    "REPORT.md": "e223261d7d5f8ce0933769f4811821d667c704dc4b22078ada9da57c7a88961d",
+    "MONITOR-START.json": "24d635feb1a5bc45c3c30020d76f08233fa7bf4176f3c562f3d0dc72bd0643fa"
+  },
+  "evolving_excluded": [
+    "watcher.log",
+    "integration/review/validation-cb64-ra6-monitor/"
+  ]
+}

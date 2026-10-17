@@ -1,0 +1,14 @@
+{
+  "status": "FROZEN_CPU_API_INTEGRATION_PASS",
+  "utc": "2026-09-30T06:02:32.391893+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra7/integration-contract/REPORT.md": "4ed5d4428f745b47adc1ebbd89cac651c11888ac013be455986501d190d777d3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra7/integration-contract/attempt1.log": "6c48d1c41011c88f84141b737272ab8ded44e83121b101cdf7cefbd718dfcc53",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra7/integration-contract/attempt2.log": "a6bfda31460474f86828ac897bcebc611a22fe4e5c7459048dfd0afc0cb868bf",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra7/integration-contract/proof.py": "ee67bb0b54319d1913134dce134dafc643a42b19188063d9fe209c00a7994d18",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra7/integration-contract/receipt.json": "08342c621c83a34e6d367427920836243554abb37f9e8064dbbc1f518658d0fc"
+  },
+  "package_sha256": "671404988209f615aefd1aec32ab1ef0a51807a9b07514c9bb35a662a6154c7c",
+  "config_sha256": "08359ed4406148faf6915144ef4265d930829de53775eeafc4f17a11b5667b4c",
+  "quality_verdict": null
+}

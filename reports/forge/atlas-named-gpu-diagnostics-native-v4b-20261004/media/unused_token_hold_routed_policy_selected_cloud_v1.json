@@ -1,0 +1,74 @@
+{
+  "actual_steps": [
+    9,
+    34,
+    59,
+    84,
+    109,
+    125,
+    150,
+    175,
+    200
+  ],
+  "draws": 0,
+  "family": "atlas_routed",
+  "gif": {
+    "bytes": 404476,
+    "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/unused_token_hold_routed_policy_selected_cloud_v1-goal.gif",
+    "sha256": "76a5b02abc36f92fd66bdb91f1a1677ae0d8712e7f5ba0887961fe7cb039d4c7"
+  },
+  "inputs": [
+    {
+      "bytes": 1478,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000009.npz",
+      "sha256": "e7f66f5b95623085fd6e5e78a97cdebcb3acfbfce4fa0b12b08e1e9464d02c35"
+    },
+    {
+      "bytes": 1478,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000034.npz",
+      "sha256": "6431ed131ff25eadbbe9ab830364aac33e3589a06d595eb46421ee2a36d62e14"
+    },
+    {
+      "bytes": 1478,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000059.npz",
+      "sha256": "d1b2bcce1f4d0f458a95bf5c4d9784d9c64fab024801630c2a5e0730497aa50c"
+    },
+    {
+      "bytes": 1478,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000084.npz",
+      "sha256": "0228a8d349631f03e6d346894d03b11d744014ddbfc8cb4ba736a92537d25da6"
+    },
+    {
+      "bytes": 1479,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000109.npz",
+      "sha256": "a27247b981bd0a49c2b4ef2c6f3399d5713f799bec21609c7d4c8a0fbf1bfc12"
+    },
+    {
+      "bytes": 1479,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000125.npz",
+      "sha256": "6dcfcb253ee6bcedd16e430bde0ca04de5c37426e95fa4b4da2e6b57110f0ecf"
+    },
+    {
+      "bytes": 1478,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000150.npz",
+      "sha256": "2b101d5b4a2223cda3e5429ceaa78ca15341b0111318afb8005625c383390845"
+    },
+    {
+      "bytes": 1478,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000175.npz",
+      "sha256": "48186cce3fe7b1fc12c1220ced7d37c8b689616033c0e27a01e7cdff5b5d86ab"
+    },
+    {
+      "bytes": 1479,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_routed/attempts/unused_token_hold_routed_policy_selected_cloud_v1/routed-policy-behavior/observations/step_000200.npz",
+      "sha256": "e0f1715b4465a3a1034601569aa74380dd4e6e3e50102bf34501774f7262494a"
+    }
+  ],
+  "optimizer_updates": 0,
+  "original_gate": "PASS",
+  "qualification_input": false,
+  "renderer_sha256": "f61f4e3a7e03fc7ca35775dd5d08b63afd950df30583847ddbd6de4c15e29d08",
+  "schema": "particlegan_atlas_named_gpu_diagnostics_v1_media",
+  "source_digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+  "task": "unused_token_hold_routed_policy_selected_cloud_v1"
+}

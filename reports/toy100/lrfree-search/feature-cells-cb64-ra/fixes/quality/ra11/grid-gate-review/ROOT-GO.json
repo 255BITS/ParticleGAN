@@ -1,0 +1,8 @@
+{
+  "status": "GO_ONE_FINAL_GRID_JSON_GATE_AUDIT",
+  "utc": "2026-09-30T17:02:28.931906+00:00",
+  "input_seal_sha256": "88cd9ab073902310afb3de5dc69f9a7fcd7c75ea1142934c1ac4f345ffdbf149",
+  "root_verified_raw_guard_count": 103,
+  "invocations_allowed": 1,
+  "scope": "One presealed independent CPU audit of completed saved artifacts; no constructor/forward/draw/update/seed experiment/rescoring/CUDA."
+}

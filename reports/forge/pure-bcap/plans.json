@@ -1,0 +1,116 @@
+{
+  "campaign_cap_seconds": 25200,
+  "candidate_cap_seconds": 2520,
+  "configuration_count": 10,
+  "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "required_task_ids": [
+    "ae_gan_hold",
+    "five_word_joint_acquisition",
+    "gaussian1d_acquisition",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "round": "pure-bcap-losses-v1",
+  "schema_version": 1,
+  "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+  "specs": [
+    "configs/forge/searches/pure-bcap-relativistic-rates-v1.json",
+    "configs/forge/searches/pure-bcap-non-saturating-rates-v1.json",
+    "configs/forge/searches/pure-bcap-hinge-rates-v1.json",
+    "configs/forge/searches/pure-bcap-wasserstein-rates-v1.json",
+    "configs/forge/searches/pure-bcap-least-squares-rates-v1.json"
+  ],
+  "task_ids": [
+    "ae_gan_hold",
+    "clockfree_audit_measurement_v1",
+    "five_word_joint_acquisition",
+    "gaussian1d_acquisition",
+    "ring16_acquisition",
+    "two_pole",
+    "unused_token_hold"
+  ],
+  "trials": [
+    {
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-relativistic-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-relativistic-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+      "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-non-saturating-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b",
+      "candidate_revision": "47ae1040ab56f8288ce9af4641e0f222283fbfd17244325cee902a11da380969",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-non-saturating-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+      "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-hinge-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1",
+      "candidate_revision": "c4a28acb61adc5b566d1b5793b8cf09c0b7ee2d08cad18079c3728aa807b28f1",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-hinge-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+      "candidate_revision": "61b5c86289eada345408f765e861ddcff146ddcc351f18798eaef00f8b52ddd9",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-wasserstein-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+      "candidate_revision": "18a217e7897c4593e54c3d65295bfc5ed982fea10f86ecdd707d8653e4ea06ea",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-wasserstein-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--93c9484d09ce9d3eb4f2f5deb1cdf4d3a012ff5d8e60146059360b2ad8e279f4",
+      "candidate_revision": "60483ffa00c237a12daf1b4b277d45c08eb8168630f9dd888eced59553591225",
+      "settings": {
+        "lr": 0.00425
+      },
+      "study": "pure-bcap-least-squares-rates-v1"
+    },
+    {
+      "candidate_id": "bcap-pure--e94cef26b873872b35a6dd7f7386e9e73d1ed0473b4561cae0b63d6a84040a33",
+      "candidate_revision": "2196057f98d30c165fd705eaa671c5fa681246c80bd4f6718588a56a9501db20",
+      "settings": {
+        "lr": 0.0010625
+      },
+      "study": "pure-bcap-least-squares-rates-v1"
+    }
+  ],
+  "view_revision": 5
+}

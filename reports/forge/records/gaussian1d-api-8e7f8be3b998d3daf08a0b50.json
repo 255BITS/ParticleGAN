@@ -1,0 +1,144 @@
+{
+  "candidate_id": "k3p",
+  "candidate_revision": "0a8c525384fa50273be6c67c83fd65dc0f2379a57404847917e8f7246b100d21",
+  "changed_factors": [
+    "New one-dimensional target and scalar MLP output; existing K3P recipe, explicitly bound prior, initializer, budget and clean sampling law."
+  ],
+  "conclusion": "Close scalar fit after 4.953 CPU seconds: mean 2.02749, std .52790 for target mean2/std.5. Strict FAIL: final KS .05674 exceeds .05, and only 3/5 terminal checks pass (12/24 overall). No recipe attribution, threshold adjustment, repeat or continuation. Oracle and seven destructive controls behave as declared; nine-state actual histogram GIF is published.",
+  "evidence_scope": "standalone_api",
+  "goal": "discriminator_stability",
+  "hypothesis": "Can the public GANTrainer learn N(2, 0.5^2) from random initialization in 1,000 updates? One standalone K3P/learned-MoG cohort with 24 checks and five required terminal passes; no ordinary Forge qualification.",
+  "lifecycle": "concluded",
+  "mechanism_class": "existing_recipe_new_scalar_host",
+  "next_action": "Keep the provisional fast Tier 1 test and its FAIL. Before a more complex target, preregister one substantive stability hypothesis with explicit recipe/budget/source binding; no seed-only repeat, ordinary qualification or default adoption.",
+  "provenance": {
+    "initialization": {
+      "discriminator": "deterministic_orthogonal seed1",
+      "generator": "deterministic_orthogonal seed0",
+      "prior": "Gaussian init_std=.5 seed0"
+    },
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "protocol": {
+      "default_evaluation_samples": 4096,
+      "default_updates": 1000,
+      "evaluation_samples": 4096,
+      "evaluation_steps": [
+        0,
+        42,
+        84,
+        125,
+        167,
+        209,
+        250,
+        292,
+        334,
+        375,
+        417,
+        459,
+        500,
+        542,
+        584,
+        625,
+        667,
+        709,
+        750,
+        792,
+        834,
+        875,
+        917,
+        959,
+        1000
+      ],
+      "media_frames": 9,
+      "media_steps": [
+        0,
+        125,
+        250,
+        375,
+        500,
+        625,
+        750,
+        875,
+        1000
+      ],
+      "metric_evaluation_steps": [
+        0,
+        42,
+        84,
+        125,
+        167,
+        209,
+        250,
+        292,
+        334,
+        375,
+        417,
+        459,
+        500,
+        542,
+        584,
+        625,
+        667,
+        709,
+        750,
+        792,
+        834,
+        875,
+        917,
+        959,
+        1000
+      ],
+      "metric_observations": 24,
+      "terminal_observations": 5,
+      "updates": 1000,
+      "wall_cap_seconds": 120.0
+    },
+    "raw_receipt_sha256": "3f46b26f0facced65c4abda485af6d82cfe1720405ee0c4ebc9109ce3b91e098",
+    "recipe_sha256": "0a8c525384fa50273be6c67c83fd65dc0f2379a57404847917e8f7246b100d21",
+    "runtime": {
+      "cuda": "13.0",
+      "device": "cpu",
+      "python": "3.12.13",
+      "torch": "2.14.0+cu130",
+      "torch_threads": 1
+    },
+    "sampling": "Live public GANTrainer.sample(output_noise=False); uniformly sampled learned MoG locations with fixed sigma=.025 latent Gaussian noise; standardize=False; no EMA.",
+    "source_commit": "f28dd8fda9068cf959010b682599d271d41e4fb9",
+    "source_identity": "666642486d3c67cfafaa2826aec67073708ccdc46b7c553e701bbcfecdd10872",
+    "task_sha256": "b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "gaussian1d-api-8e7f8be3b998d3daf08a0b50",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/toy_audit/api_contract/gaussian1d/results.json",
+    "sha256": "b63a6ed2593458e7d383f28eab116c35cac8d7d35f7bd59b41c7cd30237611ba"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "wall_seconds": 4.952774425968528
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.056740549361447234,
+        "finite_fraction": 1.0,
+        "mean": 2.027489085274283,
+        "mean_error_sigma": 0.054978170548565686,
+        "sample_count": 4096,
+        "std": 0.5279010190700607,
+        "std_ratio": 1.0558020381401214
+      },
+      "reason": "Standalone complete API cohort, not the Forge named-stream cohort. KS and five-terminal-pass gate failed.",
+      "task_id": "gaussian1d_acquisition"
+    }
+  ],
+  "trainer_family": "k3p"
+}

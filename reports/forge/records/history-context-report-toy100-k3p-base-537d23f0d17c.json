@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/toy100/k3p-base",
+  "candidate_revision": "bd0ea201ac1adb5efd07991e668c7c70148cb0e6d93311bf4c7f33eab908812d",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Selected research base: K3P",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/k3p-base",
+      "narrative_sources": [
+        {
+          "git_blob": "7ceb2aebb6790ab1cb33ee6b358372d24af7a21c",
+          "path": "reports/toy100/k3p-base/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3c41ce629c89a45f6bf45f9c92577658065d6cddd8c8ed74a32e75eea7b46a2c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/k3p-base/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Selected research base: K3P\n\n**K3P is the user-selected GAN research and launcher base.** It replaces\n`direct_particle_response` as the starting formulation for future research.\nIt passes all 22 declared GPU toy gates and the measured ring hold plus\n300-update extension. Target-shift recovery remains the next problem to solve.\nK3P is also the package default: `get_recipe()` and `GANTrainer` train with it\n([package guide](../../../docs/k3p.md)).\n\n![K3P convergence on three 100-Gaussian layouts](../gap-fill-20260925/k3p-100gaussians-convergence.gif)\n\n## Results\n\n| Measurement | K3P result | Scope |\n|---|---:|---|\n| Declared toy suite | **22/22 PASS** | 19 transfer problems + three full native gates |\n| Transfer problems | **19/19 PASS** | Frozen per-task seeds, budgets and sustained verdicts |\n| grid100 | **4/4 PASS** | Existing seeds 1234\u20131237, coverage and accuracy |\n| rotated100 | **1/1 PASS** | Declared seed 1234, coverage and accuracy |\n| staggered100 | **1/1 PASS** | Declared seed 1234, coverage and accuracy |\n| Ring hold after convergence | **1,200/1,200 PASS** | Every update, minimum HQ 0.90723 |\n| Following ring extension | **300/300 PASS** | Every update, minimum HQ 0.98779 |\n| Target-shift recovery | **FAIL: 28/81 passing checks** | Fixed deadline window requires 81/81 |\n\nThe native gates run all 7,000 updates. The 22/22 total uses the declared native\nseed 1234 and e"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-k3p-base-537d23f0d17c",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "7ceb2aebb6790ab1cb33ee6b358372d24af7a21c",
+    "path": "reports/toy100/k3p-base/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "3c41ce629c89a45f6bf45f9c92577658065d6cddd8c8ed74a32e75eea7b46a2c",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/k3p-base/README.md"
+  },
+  "task_results": []
+}

@@ -1,0 +1,56 @@
+{
+  "entries": [
+    {
+      "archive_path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/visualization-pr223-convergence/render/final-media-1/atlas-vs-e22-convergence.gif",
+      "bytes": 19586225,
+      "sha256": "0fe379c9400c34e3799728ea50ca269a2032c781afa34a78cecb28ca1f25e8c0",
+      "source_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/final-media-1/atlas-vs-e22-convergence.gif"
+    },
+    {
+      "archive_path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/visualization-pr223-convergence/render/final-media-1/atlas-vs-e22-convergence.mp4",
+      "bytes": 5932355,
+      "sha256": "e331f2029363e8be75c1fb4fecffdd678490c973813b9a455c1c6d9048600e9b",
+      "source_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/final-media-1/atlas-vs-e22-convergence.mp4"
+    },
+    {
+      "archive_path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/visualization-pr223-convergence/render/final-media-1/poster.png",
+      "bytes": 280094,
+      "sha256": "a89840fd77de91dda3c05192b4f622004f62661f1a9a01801d0f032522fe01c7",
+      "source_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/final-media-1/poster.png"
+    },
+    {
+      "archive_path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/visualization-pr223-convergence/render/final-media-1/poster.svg",
+      "bytes": 137349,
+      "sha256": "d178331f44a29254bf9e129be67bb2eda821f9b2def5f75bd0d04a77479f04ec",
+      "source_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/final-media-1/poster.svg"
+    },
+    {
+      "archive_path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/visualization-pr223-convergence/render/final-media-1/render_convergence.py",
+      "bytes": 21550,
+      "sha256": "f44697a97af51285c1899f894981c4445f2caee95675334b95ae20c73dadbb37",
+      "source_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/final-media-1/render_convergence.py"
+    },
+    {
+      "archive_path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/visualization-pr223-convergence/render/final-media-1/RENDER-RECEIPT.json",
+      "bytes": 9401,
+      "sha256": "5da4f169af25044d949f2d0b992e9f27925cc05d43d0dda2fb146feb29255eca",
+      "source_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/final-media-1/RENDER-RECEIPT.json"
+    },
+    {
+      "archive_path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/visualization-pr223-convergence/render/final-media-1/README.md",
+      "bytes": 4307,
+      "sha256": "491c63afa5b8b38f4241f52b779b30cfa9ef37c7a9b0a99486262f5d8fdcda36",
+      "source_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/final-media-1/README.md"
+    },
+    {
+      "archive_path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/visualization-pr223-convergence/render/final-media-1/MEDIA-MANIFEST.json",
+      "bytes": 3391,
+      "sha256": "b6215f7ea6c512f7f1d2e025db4d7c62b32d785686b2aaf6c271d0e6555de10e",
+      "source_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/render/final-media-1/MEDIA-MANIFEST.json"
+    }
+  ],
+  "entry_count": 8,
+  "no_old_artifact_modified": true,
+  "source_capture_archive": "Separate companion manifest",
+  "status": "COMPLETE"
+}

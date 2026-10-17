@@ -1,0 +1,65 @@
+{
+  "status": "COMPOSED_FINITE_FIT_RESOLUTION_CPU_REVIEW_PENDING",
+  "base_package": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA8",
+  "base_ready_sha256": "f2f117d650dbe8eca58c0313d07b661a25ad953bd6b3b30c99507510ca9e5949",
+  "package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9",
+  "package_sha256": "2d00c77ae0e7545ac253ff81aa729158d69016be82edc117e5597bdd664b86ce",
+  "source_sha256": {
+    "__init__.py": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+    "anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "birth_phase.py": "aa794152ad55a44673adf3bac4284f6ab4bc3b559fac8cb4e7169fe7fafd633d",
+    "conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "continuous.py": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+    "det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "feature_cells.py": "39558fb3839090eb9d933b8b37e4c73b7dfc3cf123b24c2ef58d818cc4052fcc",
+    "gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "training.py": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+    "vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "config_sha256": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+  "backend_schema": 8,
+  "trainer_schema": 5,
+  "composed_from": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/compose_ra9.py": "ac742e98ab70b5e7514303d596a047cc02a5d9e69302bbacd84db7964de0c0b1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/RA9-PLAN.md": "91f46f9082c7d72bb927021434756009c4d9c133a09c4a43670b533d80d9752e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/READY.json": "f5afd255877d747a6113881aedffdcb8a62d01e01a3c4f7b486e4e1da62081af",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/FROZEN.json": "fa9aee80a4d62fe6d611e69508caaa66ab909dd6bf176d918cee6e5581a47a40",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/SOURCE-FROZEN.json": "06649bc07d660c2c54f2927c6b39c0a8c995a2f5f4f7877182ebdf83f9e65294"
+  },
+  "config_changes": {
+    "birth_death_cells": {
+      "before": 64,
+      "after": 128
+    }
+  },
+  "hypothesis": "Resolve more learned grid supports while retaining the smaller toy chart through an even-real-fit sample cap per effective metric rank.",
+  "scope": "Finite-fit resolution regularization on average; neither a per-cell occupancy guarantee nor a quality certificate. Both original final toy and full grid gates are required.",
+  "unchanged": [
+    "RA8 optimizer bases, adaptive update laws and learned noise formula/floor",
+    "serving geometry, expiry and population stationarity law",
+    "copy/birth equations, quotas and parent reservations",
+    "count family formula 3K+2, using actual fitted K",
+    "all original fixtures, seeds, budgets, scorers and quality gates",
+    "default package"
+  ],
+  "quality_verdict": null
+}

@@ -1,0 +1,2246 @@
+{
+  "schema_version": 1,
+  "scope": "saved-state anatomy; no updates, no stochastic samples, no qualification",
+  "runtime": {
+    "torch": "2.14.0+cu130",
+    "device": "cpu",
+    "threads": 1
+  },
+  "output_noise_support_counterexamples": {
+    "scope": "fixed arithmetic support counterexamples, no noise draw or estimated frequency",
+    "negative_coordinate": -0.028999999165534973,
+    "negative_example_token_mass": 0.9710000157356262,
+    "above_one_coordinate": 1.0290000438690186,
+    "above_one_example_token_mass": 1.0290000438690186,
+    "interpretation": "Unprojected additive Gaussian output noise has support outside categorical probability simplices. This establishes a training-law mismatch, not its causal responsibility for any failure."
+  },
+  "states": [
+    {
+      "directory": "/home/martyn/dev/ParticleGAN/runs/forge/tier1-existing-configs-v1/51169502a0e64466b5005e7c870b5592",
+      "artifacts": {
+        "state.pt": {
+          "sha256": "b26893116fdad34972b6770c4587d3ee05b37b7a7847b8bbd3225bdbbf981a3a",
+          "bytes": 2254931
+        },
+        "adapter-receipt.json": {
+          "sha256": "b0abe4abeac71b80b2059525756ae30f286d7e36665078b8dacb775b9b476bb0",
+          "bytes": 55574
+        }
+      },
+      "completed_updates": 20001,
+      "recipe": {
+        "name": "k3p",
+        "critic_formulation": "k3p",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 5,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 20000,
+        "continuous_policy": null,
+        "lr": 0.006375,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 1.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "prior": {
+        "rows": [
+          [
+            -1.4871405363082886,
+            -2.1361498832702637
+          ],
+          [
+            -3.128538131713867,
+            -1.8011497259140015
+          ],
+          [
+            -3.5364184379577637,
+            -1.5070332288742065
+          ],
+          [
+            2.720651865005493,
+            1.89548921585083
+          ],
+          [
+            2.8113715648651123,
+            1.7572124004364014
+          ]
+        ],
+        "initial_rows": [
+          [
+            -0.6592187285423279,
+            -1.476981520652771
+          ],
+          [
+            -2.335627555847168,
+            0.35760512948036194
+          ],
+          [
+            0.7212852835655212,
+            -0.8080848455429077
+          ],
+          [
+            0.0489254966378212,
+            0.7700374722480774
+          ],
+          [
+            -0.5995942950248718,
+            -0.3874772787094116
+          ]
+        ],
+        "initial_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+        "distance_from_initial_by_row": [
+          1.0582804679870605,
+          2.299767255783081,
+          4.314692497253418,
+          2.899097204208374,
+          4.029191493988037
+        ],
+        "distance_from_initial_frobenius": 7.047312259674072,
+        "minimum_pair_distance": 0.16537998616695404,
+        "maximum_pair_distance": 7.137907981872559,
+        "centroid": [
+          -0.5240147113800049,
+          -0.358326256275177
+        ],
+        "coordinate_std": [
+          3.099935293197632,
+          2.0073060989379883
+        ],
+        "unweighted_spread_cost": 33.92923355102539
+      },
+      "generator_atoms": {
+        "decoded": [
+          "lemon_",
+          "melon_",
+          "melon_",
+          "grape_",
+          "grape_"
+        ],
+        "minimum_argmax_token_probability": [
+          1.0,
+          0.9655450582504272,
+          0.9999998807907104,
+          1.0,
+          1.0
+        ],
+        "canonical_confident": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "exact_uniform_atom_integral": {
+          "sampling": "enumerate exactly five rows, each weight .2; diagnostic only",
+          "accepted_word_masses": [
+            0.0,
+            0.4,
+            0.2,
+            0.4,
+            0.0
+          ],
+          "rejected_mass": 0.0,
+          "quality_fraction": 1.0,
+          "modes": 3,
+          "mass_tv": 0.4
+        },
+        "logit_minimum": -102.06082916259766,
+        "logit_maximum": 147.70436096191406,
+        "maximum_token_logit_range": 228.25433349609375,
+        "zero_token_probabilities": 585,
+        "unit_token_probabilities": 27,
+        "jacobians_at_prior": [
+          {
+            "probability_jacobian_frobenius": 4.5692130634655825e-10,
+            "probability_jacobian_singular_values": [
+              4.13420575551271e-10,
+              1.945777844403196e-10
+            ],
+            "logit_jacobian_frobenius": 163.4427490234375,
+            "zero_probability_derivatives": 190,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 2.9587504863739014,
+            "probability_jacobian_singular_values": [
+              2.9587230682373047,
+              0.012826730497181416
+            ],
+            "logit_jacobian_frobenius": 169.51463317871094,
+            "zero_probability_derivatives": 204,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 5.237477580521954e-06,
+            "probability_jacobian_singular_values": [
+              5.184879228181671e-06,
+              7.404049142678559e-07
+            ],
+            "logit_jacobian_frobenius": 159.0758514404297,
+            "zero_probability_derivatives": 217,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.0,
+            "probability_jacobian_singular_values": [
+              5.754481639853699e-35,
+              1.4009069975858233e-36
+            ],
+            "logit_jacobian_frobenius": 162.48306274414062,
+            "zero_probability_derivatives": 300,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.0,
+            "probability_jacobian_singular_values": [
+              1.7669217189475926e-34,
+              6.927537471267066e-36
+            ],
+            "logit_jacobian_frobenius": 162.44699096679688,
+            "zero_probability_derivatives": 298,
+            "probability_derivatives": 336
+          }
+        ]
+      },
+      "encoder": {
+        "rows": [
+          [
+            2.9856224060058594,
+            0.5110087394714355
+          ],
+          [
+            2.705129623413086,
+            1.860620379447937
+          ],
+          [
+            -1.531583309173584,
+            -2.2854013442993164
+          ],
+          [
+            -3.280951499938965,
+            -1.7093095779418945
+          ],
+          [
+            -3.1104774475097656,
+            -1.6078242063522339
+          ]
+        ],
+        "reconstructed_words": [
+          "grape_",
+          "grape_",
+          "lemon_",
+          "melon_",
+          "melon_"
+        ],
+        "minimum_correct_token_probability_by_word": [
+          5.302541414974394e-40,
+          1.0,
+          1.0,
+          0.9997592568397522,
+          0.0
+        ],
+        "nearest_prior_indices": [
+          4,
+          3,
+          0,
+          1,
+          1
+        ],
+        "nearest_prior_distances": [
+          1.2583270072937012,
+          0.03816772997379303,
+          0.1557278335094452,
+          0.177945077419281,
+          0.19416730105876923
+        ],
+        "interpolation_prior_to_encoder": [
+          {
+            "fraction": 0.0,
+            "decoded": [
+              "grape_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "melon_"
+            ],
+            "minimum_correct_probability": [
+              0.0,
+              1.0,
+              1.0,
+              0.9655450582504272,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -122.24713134765625,
+              81.91044616699219,
+              25.27556610107422,
+              3.333038330078125,
+              -122.42548370361328
+            ]
+          },
+          {
+            "fraction": 0.5,
+            "decoded": [
+              "grape_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "melon_"
+            ],
+            "minimum_correct_probability": [
+              0.0,
+              1.0,
+              1.0,
+              0.9980146884918213,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -105.43972778320312,
+              81.52943420410156,
+              27.116683959960938,
+              6.2199859619140625,
+              -118.059326171875
+            ]
+          },
+          {
+            "fraction": 1.0,
+            "decoded": [
+              "grape_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "melon_"
+            ],
+            "minimum_correct_probability": [
+              5.302541414974394e-40,
+              1.0,
+              1.0,
+              0.9997592568397522,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -90.43521881103516,
+              81.1484603881836,
+              28.95781707763672,
+              8.331321716308594,
+              -113.69808959960938
+            ]
+          },
+          {
+            "fraction": 1.5,
+            "decoded": [
+              "grape_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "melon_"
+            ],
+            "minimum_correct_probability": [
+              2.548660015349843e-34,
+              1.0,
+              1.0,
+              0.9999711513519287,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -77.35232543945312,
+              80.76744079589844,
+              30.798980712890625,
+              10.452720642089844,
+              -109.45051574707031
+            ]
+          },
+          {
+            "fraction": 2.0,
+            "decoded": [
+              "grape_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "melon_"
+            ],
+            "minimum_correct_probability": [
+              9.45280662147079e-29,
+              1.0,
+              1.0,
+              0.9999954700469971,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -64.52865600585938,
+              80.38646697998047,
+              32.640045166015625,
+              12.304191589355469,
+              -105.33991241455078
+            ]
+          }
+        ],
+        "jacobians_at_encoder": [
+          {
+            "probability_jacobian_frobenius": 0.0,
+            "probability_jacobian_singular_values": [
+              4.021373463206032e-26,
+              3.8350014535992725e-27
+            ],
+            "logit_jacobian_frobenius": 161.06822204589844,
+            "zero_probability_derivatives": 194,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.0,
+            "probability_jacobian_singular_values": [
+              1.2389107787223374e-34,
+              3.337710885325229e-36
+            ],
+            "logit_jacobian_frobenius": 162.48306274414062,
+            "zero_probability_derivatives": 298,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 1.1498860023884117e-11,
+            "probability_jacobian_singular_values": [
+              1.0404113334749887e-11,
+              4.896754442901274e-12
+            ],
+            "logit_jacobian_frobenius": 163.4427490234375,
+            "zero_probability_derivatives": 228,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.00975458137691021,
+            "probability_jacobian_singular_values": [
+              0.009754580445587635,
+              6.543956260429695e-06
+            ],
+            "logit_jacobian_frobenius": 169.51463317871094,
+            "zero_probability_derivatives": 218,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.005455167964100838,
+            "probability_jacobian_singular_values": [
+              0.00545516749843955,
+              2.0821908037760295e-06
+            ],
+            "logit_jacobian_frobenius": 169.37339782714844,
+            "zero_probability_derivatives": 183,
+            "probability_derivatives": 336
+          }
+        ]
+      },
+      "critic": {
+        "real_scores": [
+          2.766066074371338,
+          -0.5049839615821838,
+          0.1960044801235199,
+          -0.3814140856266022,
+          2.93994402885437
+        ],
+        "fake_scores": [
+          0.17040672898292542,
+          -0.41422733664512634,
+          -0.4110053479671478,
+          -0.5093429088592529,
+          -0.5162031650543213
+        ],
+        "real_word_gradient_norm": [
+          1.0974329710006714,
+          1.0275609493255615,
+          0.8488596677780151,
+          0.9600077271461487,
+          1.0952997207641602
+        ],
+        "real_latent_gradient_norm": [
+          0.0309882964938879,
+          0.02283339761197567,
+          0.08641178160905838,
+          0.14158236980438232,
+          0.03013671562075615
+        ],
+        "fake_word_gradient_norm": [
+          1.0115385055541992,
+          0.9066500067710876,
+          0.729263186454773,
+          0.8950875401496887,
+          0.8540704846382141
+        ],
+        "fake_latent_gradient_norm": [
+          0.1623864471912384,
+          0.12963591516017914,
+          0.16521142423152924,
+          0.17184166610240936,
+          0.09320911765098572
+        ]
+      },
+      "final_optimizer_groups": [
+        [
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          },
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          },
+          {
+            "lr": 0.00031875,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          }
+        ],
+        [
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "directory": "/home/martyn/dev/ParticleGAN/runs/forge/tier1-existing-configs-v1/8e0a35381d6543bd8a3ecb6056351c06",
+      "artifacts": {
+        "state.pt": {
+          "sha256": "c28c3869eab705781ff594edb635d8016e6578c919ec354c9377efd5ea64d35b",
+          "bytes": 2258835
+        },
+        "adapter-receipt.json": {
+          "sha256": "aac72af746bbbb4d9e6708ba0da8e6a64c21562706c1047df20c1d798afba505",
+          "bytes": 56566
+        }
+      },
+      "completed_updates": 20001,
+      "recipe": {
+        "name": "ka2",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 5,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 20000,
+        "continuous_policy": null,
+        "lr": 0.006375,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 1.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "prior": {
+        "rows": [
+          [
+            -1.3644709587097168,
+            1.688962697982788
+          ],
+          [
+            -1.5769883394241333,
+            0.9890263676643372
+          ],
+          [
+            2.8714051246643066,
+            1.3963342905044556
+          ],
+          [
+            0.08560400456190109,
+            3.5226898193359375
+          ],
+          [
+            -1.4675142765045166,
+            -0.7993799448013306
+          ]
+        ],
+        "initial_rows": [
+          [
+            -0.6592187285423279,
+            -1.476981520652771
+          ],
+          [
+            -2.335627555847168,
+            0.35760512948036194
+          ],
+          [
+            0.7212852835655212,
+            -0.8080848455429077
+          ],
+          [
+            0.0489254966378212,
+            0.7700374722480774
+          ],
+          [
+            -0.5995942950248718,
+            -0.3874772787094116
+          ]
+        ],
+        "initial_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+        "distance_from_initial_by_row": [
+          3.243544816970825,
+          0.987028956413269,
+          3.0793633460998535,
+          2.752896785736084,
+          0.9607023000717163
+        ],
+        "distance_from_initial_frobenius": 5.429426670074463,
+        "minimum_pair_distance": 0.7314878702163696,
+        "maximum_pair_distance": 4.862857818603516,
+        "centroid": [
+          -0.2903929352760315,
+          1.3595266342163086
+        ],
+        "coordinate_std": [
+          1.8929425477981567,
+          1.5481687784194946
+        ],
+        "unweighted_spread_cost": 0.8072394132614136
+      },
+      "generator_atoms": {
+        "decoded": [
+          "melon_",
+          "lemon_",
+          "grape_",
+          "apple_",
+          "berry_"
+        ],
+        "minimum_argmax_token_probability": [
+          0.9990440011024475,
+          0.9983323216438293,
+          0.9997121691703796,
+          0.9998894929885864,
+          0.9998799562454224
+        ],
+        "canonical_confident": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "exact_uniform_atom_integral": {
+          "sampling": "enumerate exactly five rows, each weight .2; diagnostic only",
+          "accepted_word_masses": [
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ],
+          "rejected_mass": 0.0,
+          "quality_fraction": 1.0,
+          "modes": 5,
+          "mass_tv": 0.0
+        },
+        "logit_minimum": -71.47877502441406,
+        "logit_maximum": 89.3375473022461,
+        "maximum_token_logit_range": 145.0737762451172,
+        "zero_token_probabilities": 45,
+        "unit_token_probabilities": 15,
+        "jacobians_at_prior": [
+          {
+            "probability_jacobian_frobenius": 0.0359983891248703,
+            "probability_jacobian_singular_values": [
+              0.0359925776720047,
+              0.000646795320790261
+            ],
+            "logit_jacobian_frobenius": 88.16336059570312,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.06320495903491974,
+            "probability_jacobian_singular_values": [
+              0.06304219365119934,
+              0.004533093888312578
+            ],
+            "logit_jacobian_frobenius": 88.79888153076172,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.011309152469038963,
+            "probability_jacobian_singular_values": [
+              0.011309151537716389,
+              6.776827490284631e-07
+            ],
+            "logit_jacobian_frobenius": 126.83956146240234,
+            "zero_probability_derivatives": 93,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.0049276575446128845,
+            "probability_jacobian_singular_values": [
+              0.004925618413835764,
+              0.00014172510418575257
+            ],
+            "logit_jacobian_frobenius": 103.92201232910156,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.004722603131085634,
+            "probability_jacobian_singular_values": [
+              0.004721932578831911,
+              7.958519563544542e-05
+            ],
+            "logit_jacobian_frobenius": 89.12107849121094,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          }
+        ]
+      },
+      "encoder": {
+        "rows": [
+          [
+            0.04293644428253174,
+            3.6261942386627197
+          ],
+          [
+            2.7528772354125977,
+            1.5416572093963623
+          ],
+          [
+            -1.678234338760376,
+            1.1002838611602783
+          ],
+          [
+            -1.3432044982910156,
+            1.5188641548156738
+          ],
+          [
+            -1.4372013807296753,
+            -0.6724474430084229
+          ]
+        ],
+        "reconstructed_words": [
+          "apple_",
+          "grape_",
+          "lemon_",
+          "melon_",
+          "berry_"
+        ],
+        "minimum_correct_token_probability_by_word": [
+          0.9994329810142517,
+          0.947841227054596,
+          0.9988563060760498,
+          0.993137776851654,
+          0.9999407529830933
+        ],
+        "nearest_prior_indices": [
+          3,
+          2,
+          1,
+          0,
+          4
+        ],
+        "nearest_prior_distances": [
+          0.11195394396781921,
+          0.1875302940607071,
+          0.15042932331562042,
+          0.1714228093624115,
+          0.13050183653831482
+        ],
+        "interpolation_prior_to_encoder": [
+          {
+            "fraction": 0.0,
+            "decoded": [
+              "apple_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              0.9998894929885864,
+              0.9997121691703796,
+              0.9983323216438293,
+              0.9990440011024475,
+              0.9998799562454224
+            ],
+            "minimum_correct_logit_margin": [
+              9.11085319519043,
+              8.152931213378906,
+              6.442792892456055,
+              7.007480621337891,
+              9.027385711669922
+            ]
+          },
+          {
+            "fraction": 0.5,
+            "decoded": [
+              "apple_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              0.9997527003288269,
+              0.9960755705833435,
+              0.9986370205879211,
+              0.9974538683891296,
+              0.99991774559021
+            ],
+            "minimum_correct_logit_margin": [
+              8.304557800292969,
+              5.5366058349609375,
+              6.609428405761719,
+              5.999553680419922,
+              9.405838012695312
+            ]
+          },
+          {
+            "fraction": 1.0,
+            "decoded": [
+              "apple_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              0.9994329810142517,
+              0.947841227054596,
+              0.9988563060760498,
+              0.993137776851654,
+              0.9999407529830933
+            ],
+            "minimum_correct_logit_margin": [
+              7.474618911743164,
+              2.8998947143554688,
+              6.776056289672852,
+              4.989580154418945,
+              9.733987808227539
+            ]
+          },
+          {
+            "fraction": 1.5,
+            "decoded": [
+              "apple_",
+              "grape_",
+              "lemon_",
+              "melon_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              0.9986947178840637,
+              0.5729374885559082,
+              0.9990338087081909,
+              0.9817607998847961,
+              0.999954342842102
+            ],
+            "minimum_correct_logit_margin": [
+              6.639978408813477,
+              0.29384613037109375,
+              6.942697525024414,
+              3.9938716888427734,
+              9.993947982788086
+            ]
+          },
+          {
+            "fraction": 2.0,
+            "decoded": [
+              "apple_",
+              "gpape_",
+              "lemon_",
+              "melon_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              0.996997594833374,
+              0.1098608672618866,
+              0.9991826415061951,
+              0.951860785484314,
+              0.9999607801437378
+            ],
+            "minimum_correct_logit_margin": [
+              5.805322647094727,
+              -2.0921630859375,
+              7.109342575073242,
+              2.9901466369628906,
+              10.144905090332031
+            ]
+          }
+        ],
+        "jacobians_at_encoder": [
+          {
+            "probability_jacobian_frobenius": 0.026058081537485123,
+            "probability_jacobian_singular_values": [
+              0.02605571411550045,
+              0.00035137799568474293
+            ],
+            "logit_jacobian_frobenius": 105.27942657470703,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 2.006582736968994,
+            "probability_jacobian_singular_values": [
+              2.006582736968994,
+              2.4644203222123906e-05
+            ],
+            "logit_jacobian_frobenius": 128.68890380859375,
+            "zero_probability_derivatives": 69,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.0429418571293354,
+            "probability_jacobian_singular_values": [
+              0.042938437312841415,
+              0.000542128924280405
+            ],
+            "logit_jacobian_frobenius": 88.79888153076172,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.28630590438842773,
+            "probability_jacobian_singular_values": [
+              0.28629693388938904,
+              0.0022641876712441444
+            ],
+            "logit_jacobian_frobenius": 92.29721069335938,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.0026066729333251715,
+            "probability_jacobian_singular_values": [
+              0.0026065767742693424,
+              2.2405751224141568e-05
+            ],
+            "logit_jacobian_frobenius": 90.43806457519531,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          }
+        ]
+      },
+      "critic": {
+        "real_scores": [
+          -0.14923761785030365,
+          -0.17851749062538147,
+          -0.07969530671834946,
+          -0.11004359275102615,
+          -0.10486837476491928
+        ],
+        "fake_scores": [
+          -0.13075414299964905,
+          -0.09937456995248795,
+          -0.20791630446910858,
+          -0.16100385785102844,
+          -0.12029974907636642
+        ],
+        "real_word_gradient_norm": [
+          0.9994735717773438,
+          1.0591659545898438,
+          0.9691256880760193,
+          1.0259777307510376,
+          0.9447275400161743
+        ],
+        "real_latent_gradient_norm": [
+          0.1340634822845459,
+          0.08130737394094467,
+          0.1164940595626831,
+          0.037837229669094086,
+          0.09554639458656311
+        ],
+        "fake_word_gradient_norm": [
+          0.9649648666381836,
+          0.8713085651397705,
+          0.8112418055534363,
+          0.7782124876976013,
+          0.9013853073120117
+        ],
+        "fake_latent_gradient_norm": [
+          0.1349903643131256,
+          0.10541000217199326,
+          0.16371998190879822,
+          0.14386524260044098,
+          0.17593388259410858
+        ]
+      },
+      "final_optimizer_groups": [
+        [
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          },
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          },
+          {
+            "lr": 0.00031875,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          }
+        ],
+        [
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "directory": "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round1/k3p-clean-full-low-rate",
+      "artifacts": {
+        "state.pt": {
+          "sha256": "0fe978510114173138ea7573d850deef48226773e86e08a97dd332c0569716fb",
+          "bytes": 2254995
+        },
+        "adapter-receipt.json": {
+          "sha256": "031f8ffbdd7c2e0186645264dcb297d8cc0fa1db7e1c89ae49283932235f1eb9",
+          "bytes": 55535
+        }
+      },
+      "completed_updates": 20001,
+      "recipe": {
+        "name": "k3p",
+        "critic_formulation": "k3p",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 5,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 20000,
+        "continuous_policy": null,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "prior": {
+        "rows": [
+          [
+            -1.1491568088531494,
+            -0.5254783034324646
+          ],
+          [
+            -1.4405624866485596,
+            -0.017633432522416115
+          ],
+          [
+            -0.08742508292198181,
+            -0.6483498811721802
+          ],
+          [
+            0.001224895124323666,
+            0.0877038836479187
+          ],
+          [
+            -0.2952776253223419,
+            0.17893201112747192
+          ]
+        ],
+        "initial_rows": [
+          [
+            -0.6592187285423279,
+            -1.476981520652771
+          ],
+          [
+            -2.335627555847168,
+            0.35760512948036194
+          ],
+          [
+            0.7212852835655212,
+            -0.8080848455429077
+          ],
+          [
+            0.0489254966378212,
+            0.7700374722480774
+          ],
+          [
+            -0.5995942950248718,
+            -0.3874772787094116
+          ]
+        ],
+        "initial_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+        "distance_from_initial_by_row": [
+          1.0702325105667114,
+          0.9705387353897095,
+          0.8243346810340881,
+          0.6839988827705383,
+          0.6429837942123413
+        ],
+        "distance_from_initial_frobenius": 1.9100139141082764,
+        "minimum_pair_distance": 0.31021979451179504,
+        "maximum_pair_distance": 1.4929112195968628,
+        "centroid": [
+          -0.594239354133606,
+          -0.18496514856815338
+        ],
+        "coordinate_std": [
+          0.6566987037658691,
+          0.37598007917404175
+        ],
+        "unweighted_spread_cost": 0.4839933514595032
+      },
+      "generator_atoms": {
+        "decoded": [
+          "lemon_",
+          "lemon_",
+          "cecon_",
+          "berry_",
+          "berry_"
+        ],
+        "minimum_argmax_token_probability": [
+          0.9993703961372375,
+          0.9980242252349854,
+          0.08444789052009583,
+          0.9980269074440002,
+          0.9980853796005249
+        ],
+        "canonical_confident": [
+          true,
+          true,
+          false,
+          true,
+          true
+        ],
+        "exact_uniform_atom_integral": {
+          "sampling": "enumerate exactly five rows, each weight .2; diagnostic only",
+          "accepted_word_masses": [
+            0.0,
+            0.0,
+            0.4,
+            0.0,
+            0.4
+          ],
+          "rejected_mass": 0.19999999999999996,
+          "quality_fraction": 0.8,
+          "modes": 2,
+          "mass_tv": 0.6
+        },
+        "logit_minimum": -6.520513534545898,
+        "logit_maximum": 39.32383728027344,
+        "maximum_token_logit_range": 38.125274658203125,
+        "zero_token_probabilities": 0,
+        "unit_token_probabilities": 0,
+        "jacobians_at_prior": [
+          {
+            "probability_jacobian_frobenius": 0.005473750177770853,
+            "probability_jacobian_singular_values": [
+              0.004719470161944628,
+              0.0027728218119591475
+            ],
+            "logit_jacobian_frobenius": 111.69707489013672,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.0512167289853096,
+            "probability_jacobian_singular_values": [
+              0.051133230328559875,
+              0.002923391992226243
+            ],
+            "logit_jacobian_frobenius": 98.3828353881836,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 4.904088020324707,
+            "probability_jacobian_singular_values": [
+              4.529319763183594,
+              1.8802498579025269
+            ],
+            "logit_jacobian_frobenius": 98.0949478149414,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.01840047910809517,
+            "probability_jacobian_singular_values": [
+              0.015761971473693848,
+              0.009494099766016006
+            ],
+            "logit_jacobian_frobenius": 80.48741912841797,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.030537111684679985,
+            "probability_jacobian_singular_values": [
+              0.03028835728764534,
+              0.003889727173373103
+            ],
+            "logit_jacobian_frobenius": 65.31906127929688,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          }
+        ]
+      },
+      "encoder": {
+        "rows": [
+          [
+            -0.30009424686431885,
+            -0.6013883352279663
+          ],
+          [
+            0.19352832436561584,
+            -0.806596577167511
+          ],
+          [
+            -1.2475638389587402,
+            -0.346746027469635
+          ],
+          [
+            -0.13458803296089172,
+            -0.501662015914917
+          ],
+          [
+            -0.20520344376564026,
+            0.12205924093723297
+          ]
+        ],
+        "reconstructed_words": [
+          "lemon_",
+          "ce_cn_",
+          "lemon_",
+          "cecon_",
+          "berry_"
+        ],
+        "minimum_correct_token_probability_by_word": [
+          2.6646953088516057e-08,
+          4.564628852676833e-07,
+          0.9996333122253418,
+          3.3189037367264973e-06,
+          0.9981017708778381
+        ],
+        "nearest_prior_indices": [
+          2,
+          2,
+          0,
+          2,
+          4
+        ],
+        "nearest_prior_distances": [
+          0.21779246628284454,
+          0.32245439291000366,
+          0.2040322721004486,
+          0.15408332645893097,
+          0.10652638226747513
+        ],
+        "interpolation_prior_to_encoder": [
+          {
+            "fraction": 0.0,
+            "decoded": [
+              "cecon_",
+              "cecon_",
+              "lemon_",
+              "cecon_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              2.3324437847804802e-07,
+              2.3324437847804802e-07,
+              0.9993703961372375,
+              5.203791602070851e-07,
+              0.9980853796005249
+            ],
+            "minimum_correct_logit_margin": [
+              -14.931943893432617,
+              -14.885530471801758,
+              8.695237159729004,
+              -12.206820487976074,
+              7.614973068237305
+            ]
+          },
+          {
+            "fraction": 0.5,
+            "decoded": [
+              "cecon_",
+              "cezon_",
+              "lemon_",
+              "cecon_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              8.281644170438085e-08,
+              3.629118623393879e-07,
+              0.999664306640625,
+              1.3245352192825521e-06,
+              0.9981237053871155
+            ],
+            "minimum_correct_logit_margin": [
+              -16.18926239013672,
+              -14.081149101257324,
+              8.859170913696289,
+              -11.28796100616455,
+              7.59514045715332
+            ]
+          },
+          {
+            "fraction": 1.0,
+            "decoded": [
+              "lemon_",
+              "ce_cn_",
+              "lemon_",
+              "cecon_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              2.6646953088516057e-08,
+              4.564628852676833e-07,
+              0.9996333122253418,
+              3.3189037367264973e-06,
+              0.9981017708778381
+            ],
+            "minimum_correct_logit_margin": [
+              -17.418184280395508,
+              -13.329202651977539,
+              8.871841430664062,
+              -10.363393783569336,
+              7.374608993530273
+            ]
+          },
+          {
+            "fraction": 1.5,
+            "decoded": [
+              "lemon_",
+              "ce_cn_",
+              "lemon_",
+              "cerrn_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              8.21090839764338e-09,
+              4.720581614492403e-07,
+              0.9995585083961487,
+              8.087165042525157e-06,
+              0.9980388283729553
+            ],
+            "minimum_correct_logit_margin": [
+              -18.609350204467773,
+              -12.62736701965332,
+              8.673860549926758,
+              -9.473747253417969,
+              7.144586563110352
+            ]
+          },
+          {
+            "fraction": 2.0,
+            "decoded": [
+              "lemon_",
+              "ce_cs_",
+              "lemon_",
+              "berry_",
+              "berry_"
+            ],
+            "minimum_correct_probability": [
+              2.5888611254742955e-09,
+              4.5392542347144627e-07,
+              0.999458372592926,
+              1.8283453755429946e-05,
+              0.9979027509689331
+            ],
+            "minimum_correct_logit_margin": [
+              -19.76876449584961,
+              -12.574647903442383,
+              7.814540863037109,
+              -9.456014633178711,
+              6.897815704345703
+            ]
+          }
+        ],
+        "jacobians_at_encoder": [
+          {
+            "probability_jacobian_frobenius": 7.549858093261719,
+            "probability_jacobian_singular_values": [
+              7.491461277008057,
+              0.9372106790542603
+            ],
+            "logit_jacobian_frobenius": 89.02206420898438,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 6.3540191650390625,
+            "probability_jacobian_singular_values": [
+              6.167115211486816,
+              1.5297859907150269
+            ],
+            "logit_jacobian_frobenius": 102.18911743164062,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.004510472994297743,
+            "probability_jacobian_singular_values": [
+              0.0042793406173586845,
+              0.0014253457775339484
+            ],
+            "logit_jacobian_frobenius": 111.68090057373047,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 8.85010814666748,
+            "probability_jacobian_singular_values": [
+              8.739980697631836,
+              1.3918161392211914
+            ],
+            "logit_jacobian_frobenius": 97.47254943847656,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 0.03606631979346275,
+            "probability_jacobian_singular_values": [
+              0.03570544719696045,
+              0.005089277867227793
+            ],
+            "logit_jacobian_frobenius": 72.70995330810547,
+            "zero_probability_derivatives": 0,
+            "probability_derivatives": 336
+          }
+        ]
+      },
+      "critic": {
+        "real_scores": [
+          1.6716203689575195,
+          1.6449871063232422,
+          -1.1847524642944336,
+          0.43514594435691833,
+          -1.270185947418213
+        ],
+        "fake_scores": [
+          -1.1963880062103271,
+          -1.1990649700164795,
+          -1.3515007495880127,
+          -1.2736473083496094,
+          -1.2700011730194092
+        ],
+        "real_word_gradient_norm": [
+          1.113359808921814,
+          1.1168524026870728,
+          0.7186026573181152,
+          1.164603352546692,
+          0.5580924153327942
+        ],
+        "real_latent_gradient_norm": [
+          0.010872481390833855,
+          0.11291871219873428,
+          0.05697900801897049,
+          0.009237082675099373,
+          0.017519507557153702
+        ],
+        "fake_word_gradient_norm": [
+          0.7738438248634338,
+          0.8200848698616028,
+          1.0993731021881104,
+          0.5580924153327942,
+          0.5580924153327942
+        ],
+        "fake_latent_gradient_norm": [
+          0.05763057619333267,
+          0.03898932784795761,
+          0.015232713893055916,
+          0.017519507557153702,
+          0.017519507557153702
+        ]
+      },
+      "final_optimizer_groups": [
+        [
+          {
+            "lr": 5.999999999999999e-06,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          },
+          {
+            "lr": 5.999999999999999e-06,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          },
+          {
+            "lr": 5.9999999999999995e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          }
+        ],
+        [
+          {
+            "lr": 9e-06,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "directory": "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round1/k3p-clean-full-original-rate",
+      "artifacts": {
+        "state.pt": {
+          "sha256": "3b902d2f95d0cc0d5fa6668608dc159707cdd37034375a67e05918f03fbb4292",
+          "bytes": 2254995
+        },
+        "adapter-receipt.json": {
+          "sha256": "a25a55e1b816752682380a185b70b248de492e1998f16bbfe292452bf17f513e",
+          "bytes": 54705
+        }
+      },
+      "completed_updates": 20001,
+      "recipe": {
+        "name": "k3p",
+        "critic_formulation": "k3p",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 5,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 20000,
+        "continuous_policy": null,
+        "lr": 0.006375,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 1.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": null,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "prior": {
+        "rows": [
+          [
+            1.9954897165298462,
+            -0.8707640171051025
+          ],
+          [
+            -3.1988441944122314,
+            1.0313222408294678
+          ],
+          [
+            -1.130267858505249,
+            -0.17240048944950104
+          ],
+          [
+            -1.0674726963043213,
+            0.7170689105987549
+          ],
+          [
+            -1.7067036628723145,
+            0.09500099718570709
+          ]
+        ],
+        "initial_rows": [
+          [
+            -0.6592187285423279,
+            -1.476981520652771
+          ],
+          [
+            -2.335627555847168,
+            0.35760512948036194
+          ],
+          [
+            0.7212852835655212,
+            -0.8080848455429077
+          ],
+          [
+            0.0489254966378212,
+            0.7700374722480774
+          ],
+          [
+            -0.5995942950248718,
+            -0.3874772787094116
+          ]
+        ],
+        "initial_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+        "distance_from_initial_by_row": [
+          2.7230453491210938,
+          1.095005750656128,
+          1.9576373100280762,
+          1.1176540851593018,
+          1.2076739072799683
+        ],
+        "distance_from_initial_frobenius": 3.8928120136260986,
+        "minimum_pair_distance": 0.6354382634162903,
+        "maximum_pair_distance": 5.531639575958252,
+        "centroid": [
+          -1.021559715270996,
+          0.1600455343723297
+        ],
+        "coordinate_std": [
+          1.8925182819366455,
+          0.7494527101516724
+        ],
+        "unweighted_spread_cost": 1.6578166484832764
+      },
+      "generator_atoms": {
+        "decoded": [
+          "mglon_",
+          "mglon_",
+          "mglon_",
+          "mglon_",
+          "mglon_"
+        ],
+        "minimum_argmax_token_probability": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "canonical_confident": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "exact_uniform_atom_integral": {
+          "sampling": "enumerate exactly five rows, each weight .2; diagnostic only",
+          "accepted_word_masses": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rejected_mass": 1.0,
+          "quality_fraction": 0.0,
+          "modes": 0,
+          "mass_tv": 1.0
+        },
+        "logit_minimum": -502.7043151855469,
+        "logit_maximum": 519.7191162109375,
+        "maximum_token_logit_range": 682.7174682617188,
+        "zero_token_probabilities": 570,
+        "unit_token_probabilities": 30,
+        "jacobians_at_prior": [
+          {
+            "probability_jacobian_frobenius": 0.0,
+            "probability_jacobian_singular_values": [
+              1.8380277653641374e-23,
+              1.2730795060637733e-23
+            ],
+            "logit_jacobian_frobenius": 437.55596923828125,
+            "zero_probability_derivatives": 332,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 1.2697706384609542e-12,
+            "probability_jacobian_singular_values": [
+              1.2696035629061742e-12,
+              2.059754751200342e-14
+            ],
+            "logit_jacobian_frobenius": 260.9293518066406,
+            "zero_probability_derivatives": 254,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 1.2398260717748528e-18,
+            "probability_jacobian_singular_values": [
+              9.584499364645538e-19,
+              7.864746410189869e-19
+            ],
+            "logit_jacobian_frobenius": 345.5325622558594,
+            "zero_probability_derivatives": 214,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 2.897410662563711e-16,
+            "probability_jacobian_singular_values": [
+              2.603997390843637e-16,
+              1.2705062751406997e-16
+            ],
+            "logit_jacobian_frobenius": 203.59228515625,
+            "zero_probability_derivatives": 157,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 2.0375164093899487e-14,
+            "probability_jacobian_singular_values": [
+              1.920495080781799e-14,
+              6.8056755265783874e-15
+            ],
+            "logit_jacobian_frobenius": 281.9274597167969,
+            "zero_probability_derivatives": 212,
+            "probability_derivatives": 336
+          }
+        ]
+      },
+      "encoder": {
+        "rows": [
+          [
+            2.5620813369750977,
+            -1.5875065326690674
+          ],
+          [
+            1.1748794317245483,
+            -0.4003458023071289
+          ],
+          [
+            -2.307898998260498,
+            0.5762683749198914
+          ],
+          [
+            -1.558732509613037,
+            0.3770378828048706
+          ],
+          [
+            -1.7867326736450195,
+            0.6358292698860168
+          ]
+        ],
+        "reconstructed_words": [
+          "mglon_",
+          "mglon_",
+          "mglon_",
+          "mglon_",
+          "mglon_"
+        ],
+        "minimum_correct_token_probability_by_word": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "nearest_prior_indices": [
+          0,
+          0,
+          4,
+          4,
+          4
+        ],
+        "nearest_prior_distances": [
+          0.9136443138122559,
+          0.9458829164505005,
+          0.7701000571250916,
+          0.3184968829154968,
+          0.5467174053192139
+        ],
+        "interpolation_prior_to_encoder": [
+          {
+            "fraction": 0.0,
+            "decoded": [
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_"
+            ],
+            "minimum_correct_probability": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -508.9326171875,
+              -508.9326171875,
+              -332.4963073730469,
+              -332.4963073730469,
+              -332.4963073730469
+            ]
+          },
+          {
+            "fraction": 0.5,
+            "decoded": [
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_"
+            ],
+            "minimum_correct_probability": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -575.7196044921875,
+              -434.03131103515625,
+              -343.9843444824219,
+              -309.1897277832031,
+              -310.6585998535156
+            ]
+          },
+          {
+            "fraction": 1.0,
+            "decoded": [
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_"
+            ],
+            "minimum_correct_probability": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -642.8583374023438,
+              -359.7743225097656,
+              -358.4139099121094,
+              -287.8274230957031,
+              -292.1278381347656
+            ]
+          },
+          {
+            "fraction": 1.5,
+            "decoded": [
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_"
+            ],
+            "minimum_correct_probability": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -711.4256591796875,
+              -290.8515930175781,
+              -372.1251220703125,
+              -267.48883056640625,
+              -273.6042175292969
+            ]
+          },
+          {
+            "fraction": 2.0,
+            "decoded": [
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_",
+              "mglon_"
+            ],
+            "minimum_correct_probability": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "minimum_correct_logit_margin": [
+              -780.8969116210938,
+              -226.63243103027344,
+              -386.02008056640625,
+              -247.26702880859375,
+              -258.1861572265625
+            ]
+          }
+        ],
+        "jacobians_at_encoder": [
+          {
+            "probability_jacobian_frobenius": 0.0,
+            "probability_jacobian_singular_values": [
+              3.8506458318413366e-24,
+              2.406603995967613e-24
+            ],
+            "logit_jacobian_frobenius": 440.40863037109375,
+            "zero_probability_derivatives": 332,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 3.382301199674468e-19,
+            "probability_jacobian_singular_values": [
+              2.8278283349012783e-19,
+              1.8556261588615124e-19
+            ],
+            "logit_jacobian_frobenius": 437.37591552734375,
+            "zero_probability_derivatives": 332,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 5.208942543792616e-13,
+            "probability_jacobian_singular_values": [
+              5.206417979033984e-13,
+              1.621517183763091e-14
+            ],
+            "logit_jacobian_frobenius": 264.14007568359375,
+            "zero_probability_derivatives": 225,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 1.4995364433674496e-13,
+            "probability_jacobian_singular_values": [
+              1.4884434288396642e-13,
+              1.8205948291365008e-14
+            ],
+            "logit_jacobian_frobenius": 247.67063903808594,
+            "zero_probability_derivatives": 198,
+            "probability_derivatives": 336
+          },
+          {
+            "probability_jacobian_frobenius": 2.418206693916014e-13,
+            "probability_jacobian_singular_values": [
+              2.4164836256133915e-13,
+              9.127737153895484e-15
+            ],
+            "logit_jacobian_frobenius": 250.60244750976562,
+            "zero_probability_derivatives": 194,
+            "probability_derivatives": 336
+          }
+        ]
+      },
+      "critic": {
+        "real_scores": [
+          -0.20592816174030304,
+          -0.4166095554828644,
+          -0.9632334113121033,
+          -2.0738344192504883,
+          -0.062306616455316544
+        ],
+        "fake_scores": [
+          -3.8163154125213623,
+          -3.6982858180999756,
+          -3.704542398452759,
+          -3.7014713287353516,
+          -3.701338291168213
+        ],
+        "real_word_gradient_norm": [
+          1.0480879545211792,
+          1.0904731750488281,
+          1.1246168613433838,
+          1.152351975440979,
+          1.0454603433609009
+        ],
+        "real_latent_gradient_norm": [
+          0.0066480133682489395,
+          0.014558461494743824,
+          0.0031265122815966606,
+          0.0014289463870227337,
+          0.006677035707980394
+        ],
+        "fake_word_gradient_norm": [
+          1.2996478080749512,
+          1.0105657577514648,
+          0.9786350131034851,
+          1.152351975440979,
+          0.9946606159210205
+        ],
+        "fake_latent_gradient_norm": [
+          0.01845415122807026,
+          0.0031744148582220078,
+          0.023914050310850143,
+          0.0014289463870227337,
+          0.0013545871479436755
+        ]
+      },
+      "final_optimizer_groups": [
+        [
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          },
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          },
+          {
+            "lr": 0.00031875,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          }
+        ],
+        [
+          {
+            "lr": 6.374999999999999e-05,
+            "betas": [
+              0.0,
+              0.999
+            ]
+          }
+        ]
+      ]
+    }
+  ]
+}

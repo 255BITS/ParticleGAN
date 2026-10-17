@@ -1,0 +1,8 @@
+{
+  "accept_shared_cost_transfer": false,
+  "budget_seconds": 2221440,
+  "candidate_budget_seconds": 42720,
+  "description": "Complete fixed-roster CUDA rerun after repairing mandatory consumed-stream provenance retention. Preserve v1 admission and v2/v3 interrupted evidence and costs. Numerical recipes, priors, initialization, targets, batches, sampling, cadence and budgets stay fixed; no outcome-driven retries or retuning.",
+  "id": "gaussian-smoke-inventory-v4",
+  "schema_version": 1
+}

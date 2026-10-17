@@ -1,0 +1,33 @@
+{
+  "status": "RUNNING",
+  "started_utc": "2026-09-30T21:54:33.937999+00:00",
+  "pid": 2045342,
+  "startticks": "170709409",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/run_training.py",
+    "--variant",
+    "RA13-settled",
+    "--problem",
+    "mnist"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/logs/RA13-settled-mnist.log",
+  "source_freeze_sha256": "26c3654df83056303135c12312e5f9b74c75b2063deda1cb84e598e17228c3a5",
+  "inputs_sha256": "86b89fc333279fa6a8dca22af4790b940314fec1b2fdbb71ef2db7ac4ade86b0",
+  "root_authorization": "Root review/freeze and GO required for this exact actual-candidate phase",
+  "known_original_processes": {
+    "384331": [
+      "T",
+      "163720702"
+    ],
+    "383348": [
+      "S",
+      "163716372"
+    ]
+  },
+  "original_outer_slot_held": true,
+  "original_owned_numerical_processes_at_launch": [],
+  "signaled_processes": []
+}

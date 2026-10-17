@@ -1,0 +1,61 @@
+{
+  "adapter": "dcgan_performance_v1",
+  "dependencies": [],
+  "evaluation": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "evaluator": "experiments.forge.scaling_adapter:grade",
+    "kind": "image_training_performance",
+    "qualification_input": false,
+    "sampling_contract_version": 1,
+    "sampling_law": "training_update_measurement",
+    "scoring_weights": "live",
+    "training_feedback": false
+  },
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "performance": {
+      "base_channels": 8,
+      "batch_size": 2,
+      "image_size": 32,
+      "latent_dim": 128,
+      "max_channels": 64,
+      "max_seconds": 90,
+      "measured_updates": 2,
+      "n_particles": 256,
+      "prior": {
+        "kind": "mog",
+        "sigma": 0.1,
+        "standardize": false
+      },
+      "profile_updates": 0,
+      "seed": 0,
+      "warmup_updates": 1
+    },
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.1,
+      "standardize": false
+    },
+    "prior_contract": "recipe_owned_v1",
+    "resources": {
+      "batch_size": 2,
+      "num_particles": 256,
+      "z_dim": 128
+    },
+    "steps": 3
+  },
+  "id": "dcgan_performance_cpu_smoke",
+  "requires_capabilities": [
+    "public_trainer",
+    "mog_prior",
+    "checkpoint",
+    "named_rng"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 120
+  },
+  "schema_version": 1
+}

@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "aec5482fedcb6cb0d6bda333ceea0a3a262909cdc151e156b1b4cad2cb5ef751",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "0e7959fb232cb7a2342aaded5dd26e0e038a817b1eb08942bf212e454b112ee2",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/8dcd5de8cab147149e8f2bc3c13a2230/observed-samples.pt": "1327cc973762d8c99750a47708d2286aca33f4608102f96a8275a65a561cb056"
+  },
+  "task_id": "ring16_acquisition"
+}

@@ -1,0 +1,64 @@
+{
+  "candidate_id": "context:lrfree/comparison-pr215-pr217",
+  "candidate_revision": "6c128566cda4db67b4a591821d2cc61aaa33fe194efaabfda88ca39ede1c96ff",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "PR #215 GS2 and PR #217 DV12 on the #155 frozen hosts",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/comparison-pr215-pr217",
+      "narrative_sources": [
+        {
+          "git_blob": "9f2fd286486c24ef1f080a206809862fa72e3586",
+          "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "24660a03b5f538d99d75fad40cb685fe65982964ad0ccabe508dd12773cb1c49",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json"
+      ],
+      "summary_excerpt": "# PR #215 GS2 and PR #217 DV12 on the #155 frozen hosts\n\nThis comparison uses the same 13-task and native 100-Gaussian hosts as the\n#155 research harness. It is separate from the [structural `st5`/`st6`\nround](../structural100/README.md). Results below score the model's own\nsamples, including output noise when the recipe has it. The native verdict\nrequires sustained live accuracy and an independent 100k holdout.\n\n## Source and protocol\n\n| Arm | Source and adaptation | Initialization |\n|---|---|---|\n| #215 exact GS2 | [PR #215](https://github.com/255BITS/ParticleGAN/pull/215) commit `c138aff3a1fcdca76ee3e84567c28b6f9be7db12`; package SHA-256 `eb988dd9f211df8af9c3ade4ba90edc438eec6f71251545b467e6dc91ade184b` | Frozen host defaults; native critic Xavier |\n| #215 QR | Same commit plus [QR adapter](pr215-qr-adapter.patch), patch SHA-256 `332b2e6728d4a2477b23a1b009369019b7871b8733385db3762026e76ecd791b`; package SHA-256 `0a5aae9479ab741dd0f9f0ebde86137fbde43109e33e128d4839c7ad6a1d9686` | #155 QR |\n| #217 QR | [PR #217](https://github.com/255BITS/ParticleGAN/pull/217) commit `261fcfd1decba067b9c95123abf21e046dc32127`; exact package SHA-256 `90e96a276b90af0316de5960dfd967c3ee6f639fca161b0e78f7ef510627a849`; [QR/native adapter](pr217-qr-native-adapter.patch), patch SHA-256 `a9d3a922abf7ba7ceed576cee5b76c669512b4efac42d125699df25679114d14`, package SHA-256 `387a1265838966581b7e1858593ce9"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-comparison-pr215-pr217-fa34f5331da4",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "9f2fd286486c24ef1f080a206809862fa72e3586",
+    "path": "reports/toy100/lrfree-search/comparison-pr215-pr217/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "24660a03b5f538d99d75fad40cb685fe65982964ad0ccabe508dd12773cb1c49",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/comparison-pr215-pr217/README.md"
+  },
+  "task_results": []
+}

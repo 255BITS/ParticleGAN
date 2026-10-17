@@ -1,0 +1,1210 @@
+{
+  "adoption": "BLOCKED",
+  "cells": [
+    {
+      "artifact_file_count": null,
+      "artifact_manifest_sha256": null,
+      "attempt_id": "49d41e284fde41698212677403ca5d67",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "certificate_and_raw_hashes_verified": true,
+      "checkpoint_file_hash_verified": null,
+      "compatibility_key": "bd9de58c3a05e147e26d6a47bb0ae7c5084d44466fa5add9163d816d827150f6",
+      "complete_profile_cohort_reproduced": true,
+      "compute": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 12.584348834992852,
+        "adapter_seconds": 12.818176301996573,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 17.93031075700128,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 12.097441082412843,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.012047342912410386
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008364666035049595
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 12.077029073465383
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 14.665282380010467,
+        "wall_seconds": 17.93031075700128
+      },
+      "files": {
+        "evidence.json": "d20091b8031736451a80824570fa2091b82d9be329326214207770a1c024deee",
+        "request.json": "10e16ccae1bf7d0a9b6d9b53d6b035b715c280077e81cc2144a0191dafa51cdd",
+        "result.json": "01ec9f965e5629ef18405ea2eb4b7ec1b8e926d4355788d2e388d4039093569d"
+      },
+      "frozen_grade_exactly_reproduced": true,
+      "gate_status": "FAIL",
+      "memory": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 71163392,
+        "cuda_peak_reserved_bytes": 92274688,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 1627176960
+      },
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 4.5106520652771,
+        "hq": 0.998779296875,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "qualification_compatibility_key": "93d7430dabfc07fd3ed7c932692a0d77884a5d1d099331f6d16705727533c878",
+      "registration_id": "host-profile-smoke-pair-v1",
+      "request_id": "5885f849de55d9603a1bdac7",
+      "rng_audit_count": 24,
+      "task_id": "mode_hold",
+      "unintended_rng_deviations": 0
+    },
+    {
+      "artifact_file_count": null,
+      "artifact_manifest_sha256": null,
+      "attempt_id": "5693d7b9c35844c78f4440ed15bad4a2",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "certificate_and_raw_hashes_verified": true,
+      "checkpoint_file_hash_verified": null,
+      "compatibility_key": "58bcab3c70f65c3c16468ea26445e8586b77c57ed5b5338a30543e0d6b1bac16",
+      "complete_profile_cohort_reproduced": true,
+      "compute": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 525,
+        "first_pass_step": 425,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 8,
+        "passing_suffix": 8,
+        "stable_from_seconds": null,
+        "stable_from_step": 425
+      },
+      "cost": {
+        "adapter_loop_seconds": 5.781028169003548,
+        "adapter_seconds": 6.040882229004637,
+        "charged_task": "img_intensity2_residual16",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 11.143371591999312,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 5.481988669824204,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.040361606937949546
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.009131533035542816
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 5.432495529850712
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 7.876048617006745,
+        "wall_seconds": 11.143371591999312
+      },
+      "files": {
+        "evidence.json": "ad55194da0cd400e1bb0bb0916d36186274c42d5bcb3a9be7bc04240ab66a30c",
+        "request.json": "1a1a3b041963bac2274b59b296cecafcff4a63a55bb1ded617f3b2b7fd9a7749",
+        "result.json": "bdce3e9a45e32c1ce8bcfdbab25fd4573eeca5375c8363a952e25876ab1b633a"
+      },
+      "frozen_grade_exactly_reproduced": true,
+      "gate_status": "PASS",
+      "memory": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 70475264,
+        "cuda_peak_reserved_bytes": 90177536,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 2017013760
+      },
+      "metrics": {
+        "distribution_tv": 0.0,
+        "hq": 0.90625,
+        "mean_rmse": 0.025580957531929016,
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.5,
+          0.40625
+        ],
+        "step": 600
+      },
+      "qualification_compatibility_key": "e3ce8dfacb047c41574713bfb7347e5af5aa1625045e2679eaa5601fdac84381",
+      "registration_id": "host-profile-smoke-pair-v1",
+      "request_id": "5885f849de55d9603a1bdac7",
+      "rng_audit_count": 24,
+      "task_id": "img_intensity2_residual16",
+      "unintended_rng_deviations": 0
+    },
+    {
+      "artifact_file_count": null,
+      "artifact_manifest_sha256": null,
+      "attempt_id": "680dcd337be343f69a1922cd3e89750a",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "certificate_and_raw_hashes_verified": true,
+      "checkpoint_file_hash_verified": null,
+      "compatibility_key": "b2d097543fd581aca2d08180234c1a0956b88e984c7e83e98e313c054cca1404",
+      "complete_profile_cohort_reproduced": true,
+      "compute": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 275,
+        "first_pass_step": 175,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 18,
+        "passing_suffix": 18,
+        "stable_from_seconds": null,
+        "stable_from_step": 175
+      },
+      "cost": {
+        "adapter_loop_seconds": 5.774296852003317,
+        "adapter_seconds": 6.033605564996833,
+        "charged_task": "img_bars4_residual16",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 11.170116852008505,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 5.475048568172497,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.04137633307254873
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.00898668596346397
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 5.424685549136484
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 7.879128403001232,
+        "wall_seconds": 11.170116852008505
+      },
+      "files": {
+        "evidence.json": "3d5fa58dc9ea75d6913a25d75ebbf5ca6600ca18d27ac52eea6e44ddb15ad6c5",
+        "request.json": "97c905f350ae81db6813666f8f8cd8a4baf7b18b9230a07aacdb014c1b3738e0",
+        "result.json": "d8975b4f8e89a5b6966d4cdd3aabb75fde12e2cf4d322c9e24f3210c333c309f"
+      },
+      "frozen_grade_exactly_reproduced": true,
+      "gate_status": "PASS",
+      "memory": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 70475776,
+        "cuda_peak_reserved_bytes": 90177536,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 2016796672
+      },
+      "metrics": {
+        "distribution_tv": 0.125,
+        "hq": 1.0,
+        "mean_rmse": 0.0037037041038274765,
+        "mode_fractions": [
+          0.28125,
+          0.34375,
+          0.1875,
+          0.1875
+        ],
+        "modes": 4,
+        "quality_mode_fractions": [
+          0.28125,
+          0.34375,
+          0.1875,
+          0.1875
+        ],
+        "step": 600
+      },
+      "qualification_compatibility_key": "c447a1c8eca995d67e127bb5b085c68d8dd5d5cc4255d26916f230fe3425921f",
+      "registration_id": "host-profile-first-cells-v1",
+      "request_id": "89ee9af850e27926df7661de",
+      "rng_audit_count": 24,
+      "task_id": "img_bars4_residual16",
+      "unintended_rng_deviations": 0
+    },
+    {
+      "artifact_file_count": null,
+      "artifact_manifest_sha256": null,
+      "attempt_id": "a1de5d14bd8b4640b95a826209ae3085",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "certificate_and_raw_hashes_verified": true,
+      "checkpoint_file_hash_verified": null,
+      "compatibility_key": "44c596ba299ac3ba2358976f4322ad674547e20e39e86d02ebb9134fd8bf0b3f",
+      "complete_profile_cohort_reproduced": true,
+      "compute": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 1000,
+        "first_pass_step": 800,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 9,
+        "passing_suffix": 9,
+        "stable_from_seconds": null,
+        "stable_from_step": 800
+      },
+      "cost": {
+        "adapter_loop_seconds": 18.596869953995338,
+        "adapter_seconds": 18.84739075100515,
+        "charged_task": "vector_unequal_mass_published",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 24.002935347991297,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.02931023814017,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3801774599996861
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007562259983387776
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 17.641570518157096
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 20.729739650996635,
+        "wall_seconds": 24.002935347991297
+      },
+      "files": {
+        "evidence.json": "f735bce221520a87a8a70de8f6822619a85f812cab0cfe54ce78f8215d013658",
+        "request.json": "d6de3f4e7b9aa3352ec02cb20cdf5a1ee355ac7803b1914e5e55fd498e1ee493",
+        "result.json": "f78b856a9eda125f6469d91ea3d5bbaf3140bf5d9c63bc387e3b514ab8b4ec34"
+      },
+      "frozen_grade_exactly_reproduced": true,
+      "gate_status": "PASS",
+      "memory": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 73220608,
+        "cuda_peak_reserved_bytes": 75497472,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 1655029760
+      },
+      "metrics": {
+        "component_core_covariance_error": 0.25280026346445084,
+        "component_core_covariance_errors": [
+          0.07595457136631012,
+          0.0634879320859909,
+          0.19583365321159363,
+          0.6759248971939087
+        ],
+        "component_core_eigen_ratios": [
+          0.9163923263549805,
+          0.9103771448135376,
+          0.9814819097518921,
+          0.8492969274520874
+        ],
+        "component_core_min_eigen_ratio": 0.8492969274520874,
+        "component_counts": [
+          2215,
+          1453,
+          373,
+          55
+        ],
+        "component_covariance_error": 0.25280026346445084,
+        "component_covariance_errors": [
+          0.07595457136631012,
+          0.0634879320859909,
+          0.19583365321159363,
+          0.6759248971939087
+        ],
+        "component_mass": [
+          0.540771484375,
+          0.354736328125,
+          0.091064453125,
+          0.013427734375
+        ],
+        "component_min_eigen_ratio": 0.8492969274520874,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.0,
+          0.0013764625182375312,
+          0.021447721868753433,
+          0.0
+        ],
+        "covariance_error": 0.1438046246767044,
+        "hq": 0.99755859375,
+        "mass_tv": 0.05473632365465164,
+        "max_component_spill": 0.021447721868753433,
+        "mean_error": 0.10958066582679749,
+        "min_mass_ratio": 0.67138671875,
+        "resolved_core_covariance_error": 0.11175871888796489,
+        "resolved_core_min_eigen_ratio": 0.9103771448135376,
+        "resolved_max_component_spill": 0.021447721868753433,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.07929448294437208,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "qualification_compatibility_key": "5ca95b3c329546c006e7837a1367cfc0705eeb5fabdabb885e6b09b760b433e5",
+      "registration_id": "host-profile-first-cells-v1",
+      "request_id": "89ee9af850e27926df7661de",
+      "rng_audit_count": 24,
+      "task_id": "vector_unequal_mass_published",
+      "unintended_rng_deviations": 0
+    },
+    {
+      "artifact_file_count": 45,
+      "artifact_manifest_sha256": "c34c7506764ee0e128732e283d57290619f91e4cd0e5195b1ef8b1dac13bca63",
+      "attempt_id": "dca8c7aa0eca484c9270d07125f7cb0b",
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "certificate_and_raw_hashes_verified": true,
+      "checkpoint_file_hash_verified": true,
+      "compatibility_key": "22086fb731424c642ff66123f83a7f7ff433967a83821a309c904da7ba996de8",
+      "complete_profile_cohort_reproduced": true,
+      "compute": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "convergence": null,
+      "cost": {
+        "adapter_loop_seconds": 82.98258584400173,
+        "adapter_seconds": 83.20568999199895,
+        "charged_task": "grid100_affine_square_named_v1",
+        "completed_steps": 7000,
+        "device": "0",
+        "execution_seconds": 92.03703144600149,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 7000,
+          "generator": 7000,
+          "prior": 7000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 77.78440030183992,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 35,
+              "seconds": 4.583559970968054
+            },
+            "sampling": {
+              "calls": 70,
+              "seconds": 0.07702675399195869
+            },
+            "training_updates": {
+              "calls": 7000,
+              "seconds": 73.12381357687991
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 85.02587316100835,
+        "wall_seconds": 92.03703144600149
+      },
+      "files": {
+        "evidence.json": "9cccb1146f236e839b4738c5693e06e2fc089aa0c79c1453e49f95fc462552cc",
+        "request.json": "532da7b25bf8c7bf146ded22d1d80f6f69b597a1b4044325ed03a33c01cb74d7",
+        "result.json": "d6550ffc6da0a5a7ec1087a0085398f7ce1c63c37e7981ebf7f101f5c3a87fe3"
+      },
+      "frozen_grade_exactly_reproduced": true,
+      "gate_status": "FAIL",
+      "memory": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 125372416,
+        "cuda_peak_reserved_bytes": 192937984,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 2163372032
+      },
+      "metrics": {
+        "abs_cov_trace_bias": 0.26559370322193143,
+        "accuracy_pass": false,
+        "accuracy_score": 1.6597133408796447,
+        "all_finite": true,
+        "center_max_sigma": 0.20227549127386174,
+        "center_rms_sigma": 0.08988516071449146,
+        "cov_frob_rms": 0.2687805959695523,
+        "cov_trace_bias": -0.26559370322193143,
+        "frozen_pass": true,
+        "mass_tv": 0.032,
+        "n": 100000,
+        "passed": false,
+        "precision": 0.99517,
+        "precision_gap": 0.006278996538242265,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.12000628777573896,
+        "valid_n": 100000,
+        "within_radius_n": 99517
+      },
+      "qualification_compatibility_key": "d9b93b7c14acba90cd785ba4a6a9bd2819a7d68edd3734b15d5b60cef60770b8",
+      "registration_id": "host-profile-first-cells-v1",
+      "request_id": "89ee9af850e27926df7661de",
+      "rng_audit_count": 35,
+      "task_id": "grid100_affine_square_named_v1",
+      "unintended_rng_deviations": 0
+    },
+    {
+      "artifact_file_count": null,
+      "artifact_manifest_sha256": null,
+      "attempt_id": "eac540ccfe564a5ab396abdd545ab013",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "certificate_and_raw_hashes_verified": true,
+      "checkpoint_file_hash_verified": null,
+      "compatibility_key": "be326d6107f72b20b3fc72a86188452ec31a7d795966ca22c0d6e2fe65e557df",
+      "complete_profile_cohort_reproduced": true,
+      "compute": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 12.33953959000064,
+        "adapter_seconds": 12.566157444001874,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 17.569934434010065,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 11.854175705986563,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.012274752953089774
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008578581997426227
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 11.833322371036047
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 14.385699954000302,
+        "wall_seconds": 17.569934434010065
+      },
+      "files": {
+        "evidence.json": "d76f77972effff939ad6c2362738ae6ce259ed7e2639a64860cd1b26fcdb560f",
+        "request.json": "ecb54aef21fd460b4b9fe6e9bc9afe1ea2001b277ac001da265c294539fc3127",
+        "result.json": "3444fb5f634fa99b228e874928b9d6593ec2b840916496992a20077b14d8f94b"
+      },
+      "frozen_grade_exactly_reproduced": true,
+      "gate_status": "FAIL",
+      "memory": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 71163392,
+        "cuda_peak_reserved_bytes": 90177536,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 1626755072
+      },
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 4.522450923919678,
+        "hq": 0.992919921875,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "qualification_compatibility_key": "4e85db09f8160363d11c190a1168c85c37a8636f5a6fed159bc02749e8336eb6",
+      "registration_id": "host-profile-control-mode-v1",
+      "request_id": "3bd0097419b99a5836ca77e6",
+      "rng_audit_count": 24,
+      "task_id": "mode_hold",
+      "unintended_rng_deviations": 0
+    },
+    {
+      "artifact_file_count": null,
+      "artifact_manifest_sha256": null,
+      "attempt_id": "6d10bbf90f1b4233a73034391599ecdb",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "certificate_and_raw_hashes_verified": true,
+      "checkpoint_file_hash_verified": null,
+      "compatibility_key": "d0863c99b6d467deb0712f7a3ca87fb16f6ed85d5d8e9e432ec5db68ed6282bf",
+      "complete_profile_cohort_reproduced": true,
+      "compute": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 12.28991258899623,
+        "adapter_seconds": 14.602227273993776,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 21.671807713995804,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 11.80964112203219,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.010634818027028814
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008390385992242955
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 11.790615918012918
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 16.442378927007667,
+        "wall_seconds": 21.671807713995804
+      },
+      "files": {
+        "evidence.json": "7af1596a11c82bd6c2daac2edcfd90d5b86fc1f907641c05b4da603030847cab",
+        "request.json": "9710f95aab6f90f4b88ece817bd4b84025f0b95ac379273f303a8773d2ea8764",
+        "result.json": "c8e11201f96a7b2f5086499ac8f70ba2d5e00d6c20c9c1c54df5af4589c86ae0"
+      },
+      "frozen_grade_exactly_reproduced": true,
+      "gate_status": "FAIL",
+      "memory": {
+        "cpu_scope": "this process lifetime, including imports",
+        "cuda_peak_allocated_bytes": 71163392,
+        "cuda_peak_reserved_bytes": 92274688,
+        "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+        "process_peak_rss_bytes": 1627533312
+      },
+      "metrics": {
+        "cover": 0.0,
+        "effective_modes": 0.0,
+        "hq": 0.0,
+        "modes": 0,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "qualification_compatibility_key": "e42c442b32bc8bdf8080a7040790cbd0b6535b3b35abd4239903b574d2452de0",
+      "registration_id": "host-profile-control-mode-v1",
+      "request_id": "1ecb2cad5a5080af7160d599",
+      "rng_audit_count": 24,
+      "task_id": "mode_hold",
+      "unintended_rng_deviations": 0
+    }
+  ],
+  "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+  "complete_frozen_source_snapshot_verified": true,
+  "criteria_checks": {
+    "maximum_false_accept_fraction": {
+      "actual": 0.0,
+      "required": 0.1,
+      "status": "PASS"
+    },
+    "maximum_false_reject_fraction": {
+      "actual": null,
+      "required": 0.0,
+      "status": "BLOCKED"
+    },
+    "maximum_smoke_to_reference_wall_ratio": {
+      "actual": null,
+      "required": 0.1,
+      "status": "BLOCKED"
+    },
+    "maximum_smoke_wall_seconds": {
+      "actual": null,
+      "required": 900.0,
+      "status": "BLOCKED"
+    },
+    "minimum_paired_fraction": {
+      "actual": 0.3333333333333333,
+      "required": 0.9,
+      "status": "BLOCKED"
+    },
+    "minimum_paired_lineages": {
+      "actual": 1,
+      "required": 3,
+      "status": "BLOCKED"
+    },
+    "minimum_reference_negatives": {
+      "actual": 1,
+      "required": 2,
+      "status": "BLOCKED"
+    },
+    "minimum_reference_positives": {
+      "actual": 0,
+      "required": 1,
+      "status": "BLOCKED"
+    },
+    "require_complete_reference_cost": {
+      "missing_lineages": [
+        "k3p",
+        "forge-onboarding-anchor-ablation",
+        "forge-no-critic-penalty"
+      ],
+      "status": "BLOCKED"
+    },
+    "require_complete_smoke_cost": {
+      "missing_lineages": [
+        "forge-onboarding-anchor-ablation",
+        "forge-no-critic-penalty"
+      ],
+      "status": "BLOCKED"
+    }
+  },
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "feasibility": {
+    "empirical_false_accept_fraction": 0.0,
+    "empirical_false_reject_fraction": null,
+    "premises": {
+      "all_declared_smoke_decisions_fail": true,
+      "maximum_false_reject_fraction": 0.0,
+      "minimum_reference_positives": 1
+    },
+    "proof": "Any completion with no independent reference positives violates the positive minimum. Any completion with a positive has a failed smoke decision for every positive, so its false-reject fraction is 1 and violates the frozen zero limit. No completion of this exact declared matrix can be accepted.",
+    "status": "INFEASIBLE"
+  },
+  "flops": null,
+  "flops_status": "unavailable",
+  "frozen_evaluator_file": "/home/martyn/dev/ParticleGAN/runs/forge/snapshots/5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7/experiments/forge/views.py",
+  "frozen_evaluator_sha256": "5db62c14ab806bd5d752fbeff1f63da603166344b11df41b045db4c0fdd0a90b",
+  "limitations": [
+    "The fixed selected lineages do not estimate population error rates or robustness.",
+    "Unknown costs remain unavailable; only K3P has a complete smoke-cost vector. No complete reference-cost vector or smoke/reference ratio is established.",
+    "A2-off is a separate profile/revision and is excluded from these seven cells and their cost.",
+    "Transfer receipts have initializer/RNG declarations and audit manifests but do not save initial tensors, checkpoints or final stream states; exact tensor equality cannot be independently established.",
+    "Native artifact hashes and checkpoint file hash were verified. This audit does not execute training or claim continuation eligibility for the failed native parent."
+  ],
+  "lineages": [
+    {
+      "candidate_id": "k3p",
+      "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+      "classification": "true_reject",
+      "id": "k3p",
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 2,
+          "known_wall_seconds": 116.03996679399279,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad_published",
+            "vector_unequal_width_published",
+            "vector_anisotropic_published",
+            "vector_overlap_published",
+            "vector_spiral_published",
+            "rotated100_affine_square_named_v1",
+            "staggered100_affine_square_named_v1",
+            "img_stripes2_residual16",
+            "img_blobs4_residual16"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "grid100_affine_square_named_v1"
+        ],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100_affine_square_named_v1": "FAIL",
+          "img_blobs4_residual16": "NOT_RUN",
+          "img_stripes2_residual16": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100_affine_square_named_v1": "NOT_RUN",
+          "staggered100_affine_square_named_v1": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic_published": "NOT_RUN",
+          "vector_overlap_published": "NOT_RUN",
+          "vector_spiral_published": "NOT_RUN",
+          "vector_two_broad_published": "NOT_RUN",
+          "vector_unequal_mass_published": "PASS",
+          "vector_unequal_width_published": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity",
+          "vector_two_broad_published",
+          "vector_unequal_width_published",
+          "vector_anisotropic_published",
+          "vector_overlap_published",
+          "vector_spiral_published",
+          "rotated100_affine_square_named_v1",
+          "staggered100_affine_square_named_v1",
+          "img_stripes2_residual16",
+          "img_blobs4_residual16"
+        ]
+      },
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 3,
+          "known_wall_seconds": 40.2437992010091,
+          "missing_tasks": [],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": 40.2437992010091
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "mode_hold"
+        ],
+        "task_statuses": {
+          "img_bars4_residual16": "PASS",
+          "img_intensity2_residual16": "PASS",
+          "mode_hold": "FAIL"
+        },
+        "unknown_tasks": []
+      }
+    },
+    {
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "d297bd4d9cf9c012b927c8e10af4c5145a4e73aee1680a675396f99aa7cf048f",
+      "classification": "unknown",
+      "id": "forge-onboarding-anchor-ablation",
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad_published",
+            "vector_unequal_mass_published",
+            "vector_unequal_width_published",
+            "vector_anisotropic_published",
+            "vector_overlap_published",
+            "vector_spiral_published",
+            "grid100_affine_square_named_v1",
+            "rotated100_affine_square_named_v1",
+            "staggered100_affine_square_named_v1",
+            "img_stripes2_residual16",
+            "img_blobs4_residual16"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100_affine_square_named_v1": "NOT_RUN",
+          "img_blobs4_residual16": "NOT_RUN",
+          "img_stripes2_residual16": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100_affine_square_named_v1": "NOT_RUN",
+          "staggered100_affine_square_named_v1": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic_published": "NOT_RUN",
+          "vector_overlap_published": "NOT_RUN",
+          "vector_spiral_published": "NOT_RUN",
+          "vector_two_broad_published": "NOT_RUN",
+          "vector_unequal_mass_published": "NOT_RUN",
+          "vector_unequal_width_published": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity",
+          "vector_two_broad_published",
+          "vector_unequal_mass_published",
+          "vector_unequal_width_published",
+          "vector_anisotropic_published",
+          "vector_overlap_published",
+          "vector_spiral_published",
+          "grid100_affine_square_named_v1",
+          "rotated100_affine_square_named_v1",
+          "staggered100_affine_square_named_v1",
+          "img_stripes2_residual16",
+          "img_blobs4_residual16"
+        ]
+      },
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 1,
+          "known_wall_seconds": 17.569934434010065,
+          "missing_tasks": [
+            "img_bars4_residual16",
+            "img_intensity2_residual16"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "mode_hold"
+        ],
+        "task_statuses": {
+          "img_bars4_residual16": "NOT_RUN",
+          "img_intensity2_residual16": "NOT_RUN",
+          "mode_hold": "FAIL"
+        },
+        "unknown_tasks": [
+          "img_bars4_residual16",
+          "img_intensity2_residual16"
+        ]
+      }
+    },
+    {
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "5bbe11c14ddca9d5334589d6901e38838d627fdecee94d6bd6aa86e1f1e76125",
+      "classification": "unknown",
+      "id": "forge-no-critic-penalty",
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad_published",
+            "vector_unequal_mass_published",
+            "vector_unequal_width_published",
+            "vector_anisotropic_published",
+            "vector_overlap_published",
+            "vector_spiral_published",
+            "grid100_affine_square_named_v1",
+            "rotated100_affine_square_named_v1",
+            "staggered100_affine_square_named_v1",
+            "img_stripes2_residual16",
+            "img_blobs4_residual16"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100_affine_square_named_v1": "NOT_RUN",
+          "img_blobs4_residual16": "NOT_RUN",
+          "img_stripes2_residual16": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100_affine_square_named_v1": "NOT_RUN",
+          "staggered100_affine_square_named_v1": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic_published": "NOT_RUN",
+          "vector_overlap_published": "NOT_RUN",
+          "vector_spiral_published": "NOT_RUN",
+          "vector_two_broad_published": "NOT_RUN",
+          "vector_unequal_mass_published": "NOT_RUN",
+          "vector_unequal_width_published": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity",
+          "vector_two_broad_published",
+          "vector_unequal_mass_published",
+          "vector_unequal_width_published",
+          "vector_anisotropic_published",
+          "vector_overlap_published",
+          "vector_spiral_published",
+          "grid100_affine_square_named_v1",
+          "rotated100_affine_square_named_v1",
+          "staggered100_affine_square_named_v1",
+          "img_stripes2_residual16",
+          "img_blobs4_residual16"
+        ]
+      },
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 1,
+          "known_wall_seconds": 21.671807713995804,
+          "missing_tasks": [
+            "img_bars4_residual16",
+            "img_intensity2_residual16"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "FAIL",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [
+          "mode_hold"
+        ],
+        "task_statuses": {
+          "img_bars4_residual16": "NOT_RUN",
+          "img_intensity2_residual16": "NOT_RUN",
+          "mode_hold": "FAIL"
+        },
+        "unknown_tasks": [
+          "img_bars4_residual16",
+          "img_intensity2_residual16"
+        ]
+      }
+    }
+  ],
+  "measured_cell_statuses": {
+    "FAIL": 4,
+    "PASS": 3
+  },
+  "measured_cells": 7,
+  "paid_wall_seconds": 195.52550814300776,
+  "profile": "host-profile-transfer-v1",
+  "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+  "receipt_issues": [],
+  "recommendation": "Stop filling host-profile-transfer-v1 solely for adoption; preserve its exact criteria, receipts, failures and costs. A new justified screen needs a compatible independent positive reference before acceptance or production promotion.",
+  "registrations": {
+    "host-profile-control-mode-v1": "0c3688b09c50b8dbb5fc036180bbf82fc5940b84f0f45036540faa1f4eec7c51",
+    "host-profile-first-cells-v1": "e42a6a6eeac26ab67f319e5cc9b95158bbf4d3fee5827c25822f270b7b96d329",
+    "host-profile-smoke-pair-v1": "82ddb3d1fd968c79b5aa91a0749ee69e6a2cf105f791b41abe1c62d8fe31f1a0"
+  },
+  "required_cells": 57,
+  "saved_reducer_sha256": "9fd484f2309733808000b4ee7666c5f5843e38f063fd02b27357debc24a9779e",
+  "saved_reduction_exactly_reproduced": true,
+  "saved_reduction_sha256": "11bb0f2e89df8ff90183a51b89949a148c3adeb6713d26337196541e35dfe721",
+  "schema_version": 1,
+  "scope": "independent_saved_evidence_audit",
+  "source_file_count": 1029,
+  "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "source_snapshot": "/home/martyn/dev/ParticleGAN/runs/forge/snapshots/5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "stats": {
+    "all_reference_negatives": 1,
+    "all_reference_positives": 0,
+    "blocked_lineages": 0,
+    "false_accept": 0,
+    "false_accept_fraction": 0.0,
+    "false_reject": 0,
+    "false_reject_fraction": null,
+    "incomplete_lineages": 0,
+    "lineages": 3,
+    "paired": 1,
+    "paired_fraction": 0.3333333333333333,
+    "reference_negatives": 1,
+    "reference_positives": 0,
+    "reference_unknown_lineages": 2,
+    "smoke_unknown_lineages": 0,
+    "true_accept": 0,
+    "true_reject": 1,
+    "unknown": 2
+  },
+  "status": "PASS",
+  "training_allowance_seconds": 0,
+  "training_seconds_spent": 0,
+  "unknown_cells": 50
+}

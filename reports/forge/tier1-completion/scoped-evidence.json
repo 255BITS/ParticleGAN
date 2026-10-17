@@ -1,0 +1,3460 @@
+{
+  "clock_audits": [
+    {
+      "attempt_id": "6b44efa5cbac4cce91192d9a3ac33cde",
+      "canonical_result_hash": "596e8ca6591124e0678edfbf7cc90e663330819dca94930502222a162ed7cb15",
+      "clock_dependency_count": 3,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "4f567490ec320016f68b6cff4a053a37272f5c6f928353650ff757f8b186637e",
+          "digest_equal": true,
+          "reference_sha256": "4f567490ec320016f68b6cff4a053a37272f5c6f928353650ff757f8b186637e"
+        },
+        "horizon": {
+          "changed_sha256": "4f567490ec320016f68b6cff4a053a37272f5c6f928353650ff757f8b186637e",
+          "digest_equal": true,
+          "reference_sha256": "4f567490ec320016f68b6cff4a053a37272f5c6f928353650ff757f8b186637e"
+        },
+        "restart": {
+          "changed_sha256": "a517322dc52059971ddaabf901ebefbe9f233e301723faa0bcd5dfd3da754728",
+          "digest_equal": false,
+          "reference_sha256": "4f567490ec320016f68b6cff4a053a37272f5c6f928353650ff757f8b186637e"
+        },
+        "step_label": {
+          "changed_sha256": "d394ab00864965d5d480b1d481fbd03a88e501002240cc6747f53aa687f6b2a0",
+          "digest_equal": false,
+          "reference_sha256": "4f567490ec320016f68b6cff4a053a37272f5c6f928353650ff757f8b186637e"
+        }
+      },
+      "family": "atlas",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1",
+      "unexplained_clock_dependencies": [
+        "continuous policy lifecycle needs a separate reviewed clock/state audit",
+        "KA2 switches from pure A to blended penalty at call 800",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "5732e526ff764977af157e194f8a5749",
+      "canonical_result_hash": "a3fec24dab8f8761b4273f6fbb5ac641026a9371b40b87761e2617513862fbba",
+      "clock_dependency_count": 4,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "94817895cf5b205491c58380d17ef1b1b62560980baf80b1d1a1e49fb8f13c93",
+          "digest_equal": true,
+          "reference_sha256": "94817895cf5b205491c58380d17ef1b1b62560980baf80b1d1a1e49fb8f13c93"
+        },
+        "horizon": {
+          "changed_sha256": "4f8f3a28715a25a5c6c8126298f025fff30eb00c678a76e84e0db2e461bfee23",
+          "digest_equal": false,
+          "reference_sha256": "94817895cf5b205491c58380d17ef1b1b62560980baf80b1d1a1e49fb8f13c93"
+        },
+        "restart": {
+          "changed_sha256": "94817895cf5b205491c58380d17ef1b1b62560980baf80b1d1a1e49fb8f13c93",
+          "digest_equal": true,
+          "reference_sha256": "94817895cf5b205491c58380d17ef1b1b62560980baf80b1d1a1e49fb8f13c93"
+        },
+        "step_label": {
+          "changed_sha256": "d3cef5fcf9ad67092468dfc1c62a207bd23657913b06e7bb9a1aa108b158058b",
+          "digest_equal": false,
+          "reference_sha256": "94817895cf5b205491c58380d17ef1b1b62560980baf80b1d1a1e49fb8f13c93"
+        }
+      },
+      "family": "bcap",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon",
+        "input-noise annealing depends on completed steps and horizon",
+        "output-noise warmup depends on completed steps and horizon",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "14a06006efc24c9a9f22579e7c2df958",
+      "canonical_result_hash": "8c83cc63f747a36e690729dff83e0ba079978784aacfcf53f8f69fafe1698fce",
+      "clock_dependency_count": 3,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "dfe6916ac9a3f5b6c5155a70c1101ec34582a34d5eb45e085b05d6cd537b5195",
+          "digest_equal": true,
+          "reference_sha256": "dfe6916ac9a3f5b6c5155a70c1101ec34582a34d5eb45e085b05d6cd537b5195"
+        },
+        "horizon": {
+          "changed_sha256": "dfe6916ac9a3f5b6c5155a70c1101ec34582a34d5eb45e085b05d6cd537b5195",
+          "digest_equal": true,
+          "reference_sha256": "dfe6916ac9a3f5b6c5155a70c1101ec34582a34d5eb45e085b05d6cd537b5195"
+        },
+        "restart": {
+          "changed_sha256": "b9c04d3b7db2c34e4b9f6044e8815a545c6f61eaa2965c2e1698e22a339eb1d2",
+          "digest_equal": false,
+          "reference_sha256": "dfe6916ac9a3f5b6c5155a70c1101ec34582a34d5eb45e085b05d6cd537b5195"
+        },
+        "step_label": {
+          "changed_sha256": "5b701183847043e0d6fce9c150292a9e4c0ce6087feee340df9b5b479c89849b",
+          "digest_equal": false,
+          "reference_sha256": "dfe6916ac9a3f5b6c5155a70c1101ec34582a34d5eb45e085b05d6cd537b5195"
+        }
+      },
+      "family": "e22",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1",
+      "unexplained_clock_dependencies": [
+        "continuous policy lifecycle needs a separate reviewed clock/state audit",
+        "KA2 switches from pure A to blended penalty at call 800",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "eb7b95dbf5b34f69a0c41e97626df6cb",
+      "canonical_result_hash": "ac5bc2f0f1d829779a437208448c1df836fc6731fc436c773e24f48c3e54a094",
+      "clock_dependency_count": 4,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "a84e9c3cac7680fce03e40a3c3687f5c33cea55d64b2b94349abe141ce889952",
+          "digest_equal": true,
+          "reference_sha256": "a84e9c3cac7680fce03e40a3c3687f5c33cea55d64b2b94349abe141ce889952"
+        },
+        "horizon": {
+          "changed_sha256": "9168c607a4cc22d2f9760001831ba54ffa293de10e4fab88b662d25a4deff0bf",
+          "digest_equal": false,
+          "reference_sha256": "a84e9c3cac7680fce03e40a3c3687f5c33cea55d64b2b94349abe141ce889952"
+        },
+        "restart": {
+          "changed_sha256": "a84e9c3cac7680fce03e40a3c3687f5c33cea55d64b2b94349abe141ce889952",
+          "digest_equal": true,
+          "reference_sha256": "a84e9c3cac7680fce03e40a3c3687f5c33cea55d64b2b94349abe141ce889952"
+        },
+        "step_label": {
+          "changed_sha256": "f0387cf98909aec08d4116544befa255777a8af66f55346be4ff01b2c25d6562",
+          "digest_equal": false,
+          "reference_sha256": "a84e9c3cac7680fce03e40a3c3687f5c33cea55d64b2b94349abe141ce889952"
+        }
+      },
+      "family": "k3p",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon",
+        "input-noise annealing depends on completed steps and horizon",
+        "output-noise warmup depends on completed steps and horizon",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "30721d27de584721884a842289f14830",
+      "canonical_result_hash": "7059daf4d5f8a12d7005cccf5a456c1235f3c720f415b2254b7fafa621d8a0b3",
+      "clock_dependency_count": 4,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "7048216fb5e8b6a19c552999ae54d5d5a3bac8ec7e73cc7b34258f9428ba222d",
+          "digest_equal": true,
+          "reference_sha256": "7048216fb5e8b6a19c552999ae54d5d5a3bac8ec7e73cc7b34258f9428ba222d"
+        },
+        "horizon": {
+          "changed_sha256": "34bf2798504381a7fcbe34d39c5aede524fdcf597aadb1e49062acf8bbce7030",
+          "digest_equal": false,
+          "reference_sha256": "7048216fb5e8b6a19c552999ae54d5d5a3bac8ec7e73cc7b34258f9428ba222d"
+        },
+        "restart": {
+          "changed_sha256": "7048216fb5e8b6a19c552999ae54d5d5a3bac8ec7e73cc7b34258f9428ba222d",
+          "digest_equal": true,
+          "reference_sha256": "7048216fb5e8b6a19c552999ae54d5d5a3bac8ec7e73cc7b34258f9428ba222d"
+        },
+        "step_label": {
+          "changed_sha256": "3ed09b92937f8c79274eb728e7b012e5d787449e98d10cccdbfb4b9990622839",
+          "digest_equal": false,
+          "reference_sha256": "7048216fb5e8b6a19c552999ae54d5d5a3bac8ec7e73cc7b34258f9428ba222d"
+        }
+      },
+      "family": "k3p-no-a2",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon",
+        "input-noise annealing depends on completed steps and horizon",
+        "output-noise warmup depends on completed steps and horizon",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "e79c4474957644c081c1975409c43a3b",
+      "canonical_result_hash": "0f2a5f257e7f2f130cfb392d33a4c864bec024facc3b650c337f6e3c4ce43f74",
+      "clock_dependency_count": 4,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "72ed090edbf3f667ca082c97142414e66f44e51f55b742a89b70113341287d39",
+          "digest_equal": true,
+          "reference_sha256": "72ed090edbf3f667ca082c97142414e66f44e51f55b742a89b70113341287d39"
+        },
+        "horizon": {
+          "changed_sha256": "8b94e5016e070b5a16fcaca409d9d1e0a49194bdf42dbbb323035fb2bbbbbca3",
+          "digest_equal": false,
+          "reference_sha256": "72ed090edbf3f667ca082c97142414e66f44e51f55b742a89b70113341287d39"
+        },
+        "restart": {
+          "changed_sha256": "72ed090edbf3f667ca082c97142414e66f44e51f55b742a89b70113341287d39",
+          "digest_equal": true,
+          "reference_sha256": "72ed090edbf3f667ca082c97142414e66f44e51f55b742a89b70113341287d39"
+        },
+        "step_label": {
+          "changed_sha256": "ef034319eebdfca7d2a1d658bc12463c2a291a9039c721c84d536fbf1b73c93a",
+          "digest_equal": false,
+          "reference_sha256": "72ed090edbf3f667ca082c97142414e66f44e51f55b742a89b70113341287d39"
+        }
+      },
+      "family": "k3p-no-anchor",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon",
+        "input-noise annealing depends on completed steps and horizon",
+        "output-noise warmup depends on completed steps and horizon",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "2c34e6b34c1844958037b5cc399dcfaa",
+      "canonical_result_hash": "857575b1d49ba09ac60dc50097ed4078166ce836cf2fd99f09c0952e77374b7d",
+      "clock_dependency_count": 4,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "2262f7b79373dea9fb5d107338455e2c3d9548cdcc001c0217df12d7e50e364f",
+          "digest_equal": true,
+          "reference_sha256": "2262f7b79373dea9fb5d107338455e2c3d9548cdcc001c0217df12d7e50e364f"
+        },
+        "horizon": {
+          "changed_sha256": "a0b8e90ef8970ef789f403dc5adc75bd4553c0c8b817e4818c8e7426127c23dd",
+          "digest_equal": false,
+          "reference_sha256": "2262f7b79373dea9fb5d107338455e2c3d9548cdcc001c0217df12d7e50e364f"
+        },
+        "restart": {
+          "changed_sha256": "2262f7b79373dea9fb5d107338455e2c3d9548cdcc001c0217df12d7e50e364f",
+          "digest_equal": true,
+          "reference_sha256": "2262f7b79373dea9fb5d107338455e2c3d9548cdcc001c0217df12d7e50e364f"
+        },
+        "step_label": {
+          "changed_sha256": "32fbe3fb12942a37b9aba1c62692dcd7c971d185aa54f06e11d1c1aa94bc69b3",
+          "digest_equal": false,
+          "reference_sha256": "2262f7b79373dea9fb5d107338455e2c3d9548cdcc001c0217df12d7e50e364f"
+        }
+      },
+      "family": "k3p-no-penalty",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon",
+        "input-noise annealing depends on completed steps and horizon",
+        "output-noise warmup depends on completed steps and horizon",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "39568145a2a24c5291060e6ab48b23a8",
+      "canonical_result_hash": "97daebdeb586290a356327df7479aabb0e4a90f2c7f3b44e73589da7b8f664a9",
+      "clock_dependency_count": 3,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "80e0e1606728eca43d94878946a177261793f117c4d468c46756fed0a082dac8",
+          "digest_equal": true,
+          "reference_sha256": "80e0e1606728eca43d94878946a177261793f117c4d468c46756fed0a082dac8"
+        },
+        "horizon": {
+          "changed_sha256": "9761c6d187b8898bf1c42a7c62d2e9bed8f66481409f523fb35fffbe848e2b01",
+          "digest_equal": false,
+          "reference_sha256": "80e0e1606728eca43d94878946a177261793f117c4d468c46756fed0a082dac8"
+        },
+        "restart": {
+          "changed_sha256": "80e0e1606728eca43d94878946a177261793f117c4d468c46756fed0a082dac8",
+          "digest_equal": true,
+          "reference_sha256": "80e0e1606728eca43d94878946a177261793f117c4d468c46756fed0a082dac8"
+        },
+        "step_label": {
+          "changed_sha256": "bc15dafc05ae32962d041dfa7bbe10778ee32aae1e53ebbcbd3aaffaf0b1dad5",
+          "digest_equal": false,
+          "reference_sha256": "80e0e1606728eca43d94878946a177261793f117c4d468c46756fed0a082dac8"
+        }
+      },
+      "family": "k3p-no-training-noise",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon",
+        "input-noise annealing depends on completed steps and horizon",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "ce6eec65990e41269dd54b438e68625c",
+      "canonical_result_hash": "8879c62d0323bfce62ec06c6bc33e02a3228ee44b007d057bf71f752a1164e84",
+      "clock_dependency_count": 5,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "ac942f57aaf29b0667ecf64be06363be5198d88087fe9edd0c0906450d427359",
+          "digest_equal": true,
+          "reference_sha256": "ac942f57aaf29b0667ecf64be06363be5198d88087fe9edd0c0906450d427359"
+        },
+        "horizon": {
+          "changed_sha256": "3487dedaa065063ff8df4de0d79e9c05eac58a7c385ea1abfa687dbc935d352d",
+          "digest_equal": false,
+          "reference_sha256": "ac942f57aaf29b0667ecf64be06363be5198d88087fe9edd0c0906450d427359"
+        },
+        "restart": {
+          "changed_sha256": "ac942f57aaf29b0667ecf64be06363be5198d88087fe9edd0c0906450d427359",
+          "digest_equal": true,
+          "reference_sha256": "ac942f57aaf29b0667ecf64be06363be5198d88087fe9edd0c0906450d427359"
+        },
+        "step_label": {
+          "changed_sha256": "8d527f4f057e542a5ff13811e4872100461f3e693808b017e47cc2bbfc0aad6d",
+          "digest_equal": false,
+          "reference_sha256": "ac942f57aaf29b0667ecf64be06363be5198d88087fe9edd0c0906450d427359"
+        }
+      },
+      "family": "ka2",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon",
+        "input-noise annealing depends on completed steps and horizon",
+        "output-noise warmup depends on completed steps and horizon",
+        "KA2 switches from pure A to blended penalty at call 800",
+        "critic guard releases at a fixed minimum update count"
+      ]
+    },
+    {
+      "attempt_id": "5b7aef86733c4079a953578e2c00a67b",
+      "canonical_result_hash": "4bf4bd3c994d3ed11b521ab2a84bae8a4b0e58bd6a4d6bdf778650847b9f616f",
+      "clock_dependency_count": 1,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "ffc77e9db743483dc00188de9b5ffeb56e4c762f26e9a18e7af5d7c56289345d",
+          "digest_equal": true,
+          "reference_sha256": "ffc77e9db743483dc00188de9b5ffeb56e4c762f26e9a18e7af5d7c56289345d"
+        },
+        "horizon": {
+          "changed_sha256": "e66cf4fd14437df7c7dbd3b746067d544bd1047f8052d9f0aab370e9c1d61783",
+          "digest_equal": false,
+          "reference_sha256": "ffc77e9db743483dc00188de9b5ffeb56e4c762f26e9a18e7af5d7c56289345d"
+        },
+        "restart": {
+          "changed_sha256": "ffc77e9db743483dc00188de9b5ffeb56e4c762f26e9a18e7af5d7c56289345d",
+          "digest_equal": true,
+          "reference_sha256": "ffc77e9db743483dc00188de9b5ffeb56e4c762f26e9a18e7af5d7c56289345d"
+        },
+        "step_label": {
+          "changed_sha256": "8d13aefe636994b1b74e0975e33c54bb0a84ea15ff6baf5b3a3b4153ce48b738",
+          "digest_equal": false,
+          "reference_sha256": "ffc77e9db743483dc00188de9b5ffeb56e4c762f26e9a18e7af5d7c56289345d"
+        }
+      },
+      "family": "r1r2",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon"
+      ]
+    },
+    {
+      "attempt_id": "10087734b6b3445ea5db443693bf02a0",
+      "canonical_result_hash": "e6512dd21adbb5aafd6527875dd5149be73ed91aa3c3c04ce93df90e4a068971",
+      "clock_dependency_count": 1,
+      "comparisons": {
+        "evaluation_cadence": {
+          "changed_sha256": "090f3e98561529588d3fbe23803e8d4bdc5510d595070e96bee0d64db79fe1a1",
+          "digest_equal": true,
+          "reference_sha256": "090f3e98561529588d3fbe23803e8d4bdc5510d595070e96bee0d64db79fe1a1"
+        },
+        "horizon": {
+          "changed_sha256": "090f3e98561529588d3fbe23803e8d4bdc5510d595070e96bee0d64db79fe1a1",
+          "digest_equal": true,
+          "reference_sha256": "090f3e98561529588d3fbe23803e8d4bdc5510d595070e96bee0d64db79fe1a1"
+        },
+        "restart": {
+          "changed_sha256": "090f3e98561529588d3fbe23803e8d4bdc5510d595070e96bee0d64db79fe1a1",
+          "digest_equal": true,
+          "reference_sha256": "090f3e98561529588d3fbe23803e8d4bdc5510d595070e96bee0d64db79fe1a1"
+        },
+        "step_label": {
+          "changed_sha256": "15bb47cc96bbeb900222669822e64eca21dad9e66e4e29dae8c4a0bfca71aa1e",
+          "digest_equal": false,
+          "reference_sha256": "090f3e98561529588d3fbe23803e8d4bdc5510d595070e96bee0d64db79fe1a1"
+        }
+      },
+      "family": "release07-gan-v3",
+      "qualification_input": false,
+      "recorded_grade": "FAIL",
+      "source_audit": {
+        "allowed_state": [
+          "parameters_and_ema",
+          "optimizer_moments_and_bias_correction",
+          "observed_gradients_and_row_visit_history",
+          "named_training_rng"
+        ],
+        "scope": "shipped public scalar trainer and explicitly listed state; no arbitrary-extension certification",
+        "source_sha256": {
+          "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+          "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+          "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+        }
+      },
+      "task_id": "clockfree_audit_measurement_v1",
+      "unexplained_clock_dependencies": [
+        "learning-rate annealing depends on completed steps and horizon"
+      ]
+    }
+  ],
+  "final_measurements": [
+    {
+      "attempt_id": "6b44efa5cbac4cce91192d9a3ac33cde",
+      "candidate_id": "atlas",
+      "candidate_revision": "2f2806b54846656bc87e008e616f8fc7eae9b1f24e080f4eeaaf88bf3fb4b098",
+      "canonical_result_hash": "596e8ca6591124e0678edfbf7cc90e663330819dca94930502222a162ed7cb15",
+      "compatibility_key": "66d93d5e314fc0f78f34de6fb4fb103a165a208b3ee0051b584037a051729894",
+      "family": "atlas",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "6fc1a81be1ba4664993a0af5b2dec088",
+      "candidate_id": "atlas",
+      "candidate_revision": "2f2806b54846656bc87e008e616f8fc7eae9b1f24e080f4eeaaf88bf3fb4b098",
+      "canonical_result_hash": "4fa8a267c377509ad1914220ef9b925efebc6ebc5cec09745e999503672ca236",
+      "compatibility_key": "97decac5b28ef3b249265467385c14d0ed16f54a5b3eeab6582c17ebd43338e7",
+      "family": "atlas",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "fa5b20a8f092437b9ce53b4573e6ea8b",
+      "candidate_id": "atlas",
+      "candidate_revision": "2f2806b54846656bc87e008e616f8fc7eae9b1f24e080f4eeaaf88bf3fb4b098",
+      "canonical_result_hash": "79dac70fdb1b9d0dc3be1a6dd4911ba9cbaee35ec0f1494a71520c2d645bf860",
+      "compatibility_key": "34a877b49076cec46c15e69ea24af8b98f1921eb6741285fb86ef1ae5dd625ea",
+      "family": "atlas",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "e28ab59ac9204a258cc60d431a8d3f3c",
+      "candidate_id": "atlas",
+      "candidate_revision": "2f2806b54846656bc87e008e616f8fc7eae9b1f24e080f4eeaaf88bf3fb4b098",
+      "canonical_result_hash": "97ea34a35400563a9cc1cb570a94f9ad851ee6e8c1ab6281a6ee4d6a03524025",
+      "compatibility_key": "8d5696e9bbc2a8617f651050aa6145a86ae29962ddd1ded8947faa7a6f9e74d8",
+      "family": "atlas",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "two_pole_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "99b2e68810ba4379a860e467e8a818ca",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+      "canonical_result_hash": "01bce7bc33b8de7829cd6fc5da3849e9d67ac70acdcc5526b8454e044ee56078",
+      "compatibility_key": "8bc26da42bd68654ec3395f0c1ca3b33a0b13efbfbfbc6966bb5de868202d03b",
+      "family": "bcap",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "5732e526ff764977af157e194f8a5749",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+      "canonical_result_hash": "a3fec24dab8f8761b4273f6fbb5ac641026a9371b40b87761e2617513862fbba",
+      "compatibility_key": "ed868cb3726966ebe70d479a38d1d4b9bab26e7c50bb1bbdda8457b287028645",
+      "family": "bcap",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "8b88bf0491144e35b637e68eda852310",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+      "canonical_result_hash": "cb0cccce457535f94a1c693d5b843543adeb409abf97bd941e3d07676c9654c6",
+      "compatibility_key": "8227a355e01d7eef10974e26f477bd31095fe5f101b38b74b233fc500d426b4c",
+      "family": "bcap",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "d0638ad5ce5a47e5b2fcb00b369768b2",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+      "canonical_result_hash": "a704de865b85b40b32357f8931a4ad55f1ddaaed57fcaa389a4c3b53aaec7ea9",
+      "compatibility_key": "dfb82593ed02efc8cf48a1f77f253c569380ff2a8ee5558a5400c267bfa34722",
+      "family": "bcap",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "d8185ca486b54af79ef422395eac8065",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+      "canonical_result_hash": "8562463777845a734731ef3a617838c90dc5c85077c7f82c0aed7b6de3f250bb",
+      "compatibility_key": "40889b3b15924e871484cd09184d7c1b8d3d6227d9a10710f116988e4f12f7c4",
+      "family": "bcap",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "bde4745f31864cc08c42880d0fa36272",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+      "canonical_result_hash": "fbc4f715f76e5d03885734bd82261a37ff2e395c6b72f4be72d6c969e2fe6e55",
+      "compatibility_key": "dce9d052b262d2a4ff8525fb4cc0aa2144542f3f51443a41222286872d45995d",
+      "family": "bcap",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "329006823c804cdfbd01ab414d10d1cd",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+      "canonical_result_hash": "85fdd4af7736bc979cf118b5dbc4d9b1c8ef9df7d716818d5ef768bc8ce6b986",
+      "compatibility_key": "84524e912215b1c4372140c5821ea077d501c0d661a01ca7c99bc84142db41bf",
+      "family": "bcap",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "14a06006efc24c9a9f22579e7c2df958",
+      "candidate_id": "e22",
+      "candidate_revision": "54aa80772e121ccadfc3f7069ddf6c6ddd5453080817d1caa07b32130a9e2552",
+      "canonical_result_hash": "8c83cc63f747a36e690729dff83e0ba079978784aacfcf53f8f69fafe1698fce",
+      "compatibility_key": "606394d49555673f3326b2ad79b4de7bba17c387c0b6ad47cab34200e7c6130f",
+      "family": "e22",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "7995e31c7afd49a1af49b97d2af747d8",
+      "candidate_id": "e22",
+      "candidate_revision": "54aa80772e121ccadfc3f7069ddf6c6ddd5453080817d1caa07b32130a9e2552",
+      "canonical_result_hash": "b2fb17edc13dcb25473f666750ccf0541cd544a1f97c229e5054a8aec42ef640",
+      "compatibility_key": "08bbe00207f65039087ab8db5c6f0c19c165f5cc955da0a6aa8a888eab42f44d",
+      "family": "e22",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "0b72648afcc544d6a579c44063225f8a",
+      "candidate_id": "e22",
+      "candidate_revision": "54aa80772e121ccadfc3f7069ddf6c6ddd5453080817d1caa07b32130a9e2552",
+      "canonical_result_hash": "610c23ece15cdc2f744644ff5a3de642023d3d3eca63ce7bb8e0bc6a05126e2f",
+      "compatibility_key": "210672a45b20bab77e86732bb2bcd2aa6a34b4904c4296dbe22f025c5991830c",
+      "family": "e22",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "94d550c4fe694660b0ef433a546b2920",
+      "candidate_id": "e22",
+      "candidate_revision": "54aa80772e121ccadfc3f7069ddf6c6ddd5453080817d1caa07b32130a9e2552",
+      "canonical_result_hash": "9156ecb12c739f6cdc7863b7a5a4a0cbb990062f5b1d64f79b65bdeaac000607",
+      "compatibility_key": "8b5561dd8fa082411fa729644650813ccb35db78105177e9476bbee4e4117eb0",
+      "family": "e22",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "two_pole_tier1_policy_selected_cloud_v1"
+    },
+    {
+      "attempt_id": "b2e5ce07510342a3ae9b24f0e21449bb",
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+      "canonical_result_hash": "4ecfa468bf7e53944dedf8e8635e1f62b4dff5cf90b178825e55606ce619f4d7",
+      "compatibility_key": "916ecc825f604b5d78d970f9fba3acb7f2b236c5eded1ce9195a502334835b2c",
+      "family": "k3p",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "eb7b95dbf5b34f69a0c41e97626df6cb",
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+      "canonical_result_hash": "ac5bc2f0f1d829779a437208448c1df836fc6731fc436c773e24f48c3e54a094",
+      "compatibility_key": "15d96531204cf738364359d51a4252e0cf3a8be51fcb4eec3cbae7cdec6d2ff8",
+      "family": "k3p",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "2031cd7bb3a04d4090bdfbca8eaac088",
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+      "canonical_result_hash": "2e90bc7601269fea9618ebf13ce531aec65ba16f2f03c56138a4ad87ba58e227",
+      "compatibility_key": "fe650cba19a7783e2469567d49cfd2e5355f2b3bf17e4491b2795807fbb23fac",
+      "family": "k3p",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "7ccd8797a0ab4592b312a86354518228",
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+      "canonical_result_hash": "38ee60c7c705fb12bcceef96997fe02170b563b9d64078d8adb5cffc1005f2f0",
+      "compatibility_key": "61890b04c5fd2163d88da3b63f878ce71cbc2b96e1f6cf31d3118c5037552392",
+      "family": "k3p",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "d6d907c833524c1ea23374d90c548cf6",
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+      "canonical_result_hash": "0ed7021cad3bd6d18d59e0b94aa909942f83f66c3c59609fce6f98377ed23e16",
+      "compatibility_key": "88bd147ce6aeb7be206395d257923de4f0c6c2b989fe9407aac974a8807a48bb",
+      "family": "k3p",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "cecbce1a5db74a7bb9bc709231515998",
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+      "canonical_result_hash": "268a49e06051e6dda867e2c6365fc8fabaa364c8a4c5a5c14da76d509b449ead",
+      "compatibility_key": "e26089e00c2c1fa1d1887a81e83286717ee8e85730dc4716daef501c16287d35",
+      "family": "k3p",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "20d3eadff3724e6db327613becd577e7",
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+      "canonical_result_hash": "1b0df1bba8d60d299a3aec6d43f0cfaf241afba4463a118b7dec23aa6ea38854",
+      "compatibility_key": "0e6a94c52e51f642a6e429d47510a8c7d7b03751bded2d20ed529572108d0e4b",
+      "family": "k3p",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "c132eb371ac84a46b28ea6c6aba62dc4",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+      "canonical_result_hash": "d97841a8caf6a8566f6a37c75435f5cb70699080e7c40c8be0accf35ac95967b",
+      "compatibility_key": "e412616cb68d1802ae4820f6bf4cf207585df3d771bd7d700e263bd1c1d39f01",
+      "family": "k3p-no-a2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "30721d27de584721884a842289f14830",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+      "canonical_result_hash": "7059daf4d5f8a12d7005cccf5a456c1235f3c720f415b2254b7fafa621d8a0b3",
+      "compatibility_key": "e875d95fb6871870ecc2a1d6983a2eea323c478c82ea0adb639a1cc3bd7a62bb",
+      "family": "k3p-no-a2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "07cedd019f354da8b21c4f424eaa6ebb",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+      "canonical_result_hash": "14179f583abee65e24b74ba6a2d796696524fbe852b51206b9629cefb67e2413",
+      "compatibility_key": "4a9584f1ae8fa628291deb317977aadd9b296055b19f72e15954eb1f671caa54",
+      "family": "k3p-no-a2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "5a406e15157e46a98d2c2edb8da481e9",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+      "canonical_result_hash": "7eb11594ea65eb4ff6733b213e3563ba4a77b77405134aa6c394eb819d82dfb3",
+      "compatibility_key": "024205ec854427ceb233e72eb73d56f6a330b78ba85f5bf5ade510c5f2165a50",
+      "family": "k3p-no-a2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "c6a42f78e2c5426c87da0d5cc3eb6145",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+      "canonical_result_hash": "ae99b2c0bca35fd473b36e38c76fd50d4dd7791be6f17aa3ad78a3394ecdffb4",
+      "compatibility_key": "8e504bb22c7f7f39fa3c808d98f686b254004de576971625f14deeaa847e5ca2",
+      "family": "k3p-no-a2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "fca5f1754f334c81bf04fd9417281836",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+      "canonical_result_hash": "7253d75c51d3a937c6ea92e2d07ed832975ccc5fd05c4950059f5ef78c65e22e",
+      "compatibility_key": "24cfa9770519ac57877b3d9cdd505a4fac5572f0c71490b91365f64c0f49f6ba",
+      "family": "k3p-no-a2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "50d7d9261caf485886c6088b9e9b334b",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "4d5747820b405019339f071e4677392f938e840855371561c53a1a8e348427d0",
+      "canonical_result_hash": "08b171eb3249f787305176c64ec7febf1331127b1e430172591428e61b84b3e1",
+      "compatibility_key": "3224a78a3d352ed2dab014f57a433c66c15522746e5f025b62dbb0673d0f10c4",
+      "family": "k3p-no-a2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "a44bca7f22e94973981b81d1fca24d53",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+      "canonical_result_hash": "28685ad24cd3ce434f2054695b1c0b3bdc2f8ab813d3d50732e8ee47521a3eda",
+      "compatibility_key": "87ddc248e2e4d53ea64200bb23a7d1c7958930abf306b23af7d329ab5f196a12",
+      "family": "k3p-no-anchor",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "e79c4474957644c081c1975409c43a3b",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+      "canonical_result_hash": "0f2a5f257e7f2f130cfb392d33a4c864bec024facc3b650c337f6e3c4ce43f74",
+      "compatibility_key": "5f53c4bad81466a6b7f871018bd2059a89b5d56f8b48fb525ffe3e0153d8316e",
+      "family": "k3p-no-anchor",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "ac35cc0e5786417a86611d3bff57eb86",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+      "canonical_result_hash": "006db5b57046dbec442d8f8ada5b5abcf8a3dda9f519fa2c790ccdb5c428c161",
+      "compatibility_key": "4ccc2cae63f401cc92419c87b5e29bbdeb40e28b12157776b6a59da1bb8ae9e7",
+      "family": "k3p-no-anchor",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "f8a3d5c90d9945d2ac774654864df258",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+      "canonical_result_hash": "bb39b7a5e02a0c000be96bc62f83ee161071eb67fd95a798865f315683318c5a",
+      "compatibility_key": "c2616a77fdcbd0b524dae20ef9ba35cad6ee884954d7dfca8435a0aecd2b6eaa",
+      "family": "k3p-no-anchor",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "13dbf1c57daf46758e8fdb22209885cd",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+      "canonical_result_hash": "0bbb58d1d9507e26221e4140841bbc940379b1cfa427bc84610162833f565f08",
+      "compatibility_key": "989ba8c7a7c02b2f47db296b559519679036c7512d4fd71159b2c5d8c2a56393",
+      "family": "k3p-no-anchor",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "c81010a770824ab4a856e76bd1c2cf65",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+      "canonical_result_hash": "dd0c2518c430f006ea7d03c42c467a471a2a69c76e0f1e2c03baf185da2ccf27",
+      "compatibility_key": "303a8b212926b999ae407ce1b067d374bb5f554bca38cd7bb90e89f6293410d9",
+      "family": "k3p-no-anchor",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "3c70d39471924671b31b573764ef1c11",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "07d51b9c7ed063159ce11a8fc2463a0199d8554a498cba3641952a0e9caf7658",
+      "canonical_result_hash": "eb30ba95561bfe1bbad1b4f5b7f9309cb433083b4e9b2451f545ff9f7c179ccd",
+      "compatibility_key": "3310d7df89ebcc710d6a21c5c77d38015b18dcdc62916817138bdca6f99d0be8",
+      "family": "k3p-no-anchor",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "01313af6d0b1452b9d9e60f95a57e1d7",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+      "canonical_result_hash": "e3a424263eddba3a6776d4d0d4a2fb3427f69722e1c31929f0aead445e479889",
+      "compatibility_key": "c5728b44a1d6efc8a43c9e2c24f17aac3d551834765c6ce312f7612015f4814d",
+      "family": "k3p-no-penalty",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "2c34e6b34c1844958037b5cc399dcfaa",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+      "canonical_result_hash": "857575b1d49ba09ac60dc50097ed4078166ce836cf2fd99f09c0952e77374b7d",
+      "compatibility_key": "609537f2872d8643f43f220e38c9dcf3df433e70e63831b337d150cd35f65815",
+      "family": "k3p-no-penalty",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "6a64df7ae894460e866e47378ac85143",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+      "canonical_result_hash": "0b4158324bf6748f11a656b3194573fea3949b078bcf11d685dce0f35acc472b",
+      "compatibility_key": "d61fa2ee98a6e4fc1ecbc39c5a186b177475df613e352228c1984ccae818e524",
+      "family": "k3p-no-penalty",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "61df57eff54f4129b19b60ad9fa426b3",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+      "canonical_result_hash": "039b7a8e2c09ed643be6c68bdc0e550cb61d5e1cf0e01ca978aca9955c688376",
+      "compatibility_key": "aa3fb20f5b96309c39f0005509b8f9a1895b39f5a914fd2b93b47f7b4db5370c",
+      "family": "k3p-no-penalty",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "f4c4560d3c214491914c067adc0782fb",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+      "canonical_result_hash": "a41d64fb8634f840a3e3b78cb5ff8dd119c25b3030fd41beca509c30329c22d0",
+      "compatibility_key": "e9399b30dcd8b9fbc598bcfa0d9fc4b0b0ba1bbf1f4d6205a86e9e3fc442a354",
+      "family": "k3p-no-penalty",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "d54d98951bf34e7990d47fced9234d37",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+      "canonical_result_hash": "5215f65a292b445f84e99636f3fc64538137648dd51226b1ca7052ded0d81f97",
+      "compatibility_key": "cdbd9e811ca93aace6d590c4eee2d35554a63898c28635e0dd8a13cf460538a0",
+      "family": "k3p-no-penalty",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "8ca22bcbde054570956f3e5c7e9d14a7",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "51e07b68506b8759bcc2369f1ca4d655d375119eda5a320eeae8eb858970d8d8",
+      "canonical_result_hash": "53a5bf5d87d295800821b065d254eb27547722df10ce7b15f748fd2d9a6e7a45",
+      "compatibility_key": "6644dee7877714e59ee92fc06f75a6f65c17d4c79a6a9e7ab8bad4786945df8c",
+      "family": "k3p-no-penalty",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "9daa17b88d3949438b8cb9887e64b442",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+      "canonical_result_hash": "65494a4a3cbcc0d668368e6583c78d658c9f4c3c85f42b902358149a947ed86b",
+      "compatibility_key": "cc8fa2f7995a7bd520a7922716bfa08b2b4506f893d3aeeef2d921c0dc711c35",
+      "family": "k3p-no-training-noise",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "39568145a2a24c5291060e6ab48b23a8",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+      "canonical_result_hash": "97daebdeb586290a356327df7479aabb0e4a90f2c7f3b44e73589da7b8f664a9",
+      "compatibility_key": "2356f9dd1536d4e16052013f8abc79a78581e5cf5ca5757d244c1636a9a1f719",
+      "family": "k3p-no-training-noise",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "531e90cf76cf4e45815ec1786e3a9f3c",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+      "canonical_result_hash": "95f88c2c0cef4c308bf4e5accf12a5bbdd458be4f2f842907a583b859d5e12c8",
+      "compatibility_key": "825fb8e68e6dd3e0925007aafd4119e9417769f955394a66489a24a853dd8d4b",
+      "family": "k3p-no-training-noise",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "fca8da49a5a14f7da875e55c90e22347",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+      "canonical_result_hash": "a0e38591ce9aadbd9cb2f81b24b34647ca3d1b86f5936e03a2483b24e5dcd320",
+      "compatibility_key": "3432ec55713082e6df58f425f09cb970eb6cdab1b87ffd7fda33b6d45b43398e",
+      "family": "k3p-no-training-noise",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "06e5d0bec7fb43d283699ffe8b5ed989",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+      "canonical_result_hash": "3f825f99cbef7e266096af5e5dc81204fa915797ddbe5f04086aa022722749e5",
+      "compatibility_key": "8268e42f28e1e6214198e745f47e5c0a5d3b061f0dc1eb0b41ad3524e8005a51",
+      "family": "k3p-no-training-noise",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "09504ecb601543ba80058d46bc456757",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+      "canonical_result_hash": "9d9ce59e1d5cc7da90a88ab29d6ad90f59ff0b73c5b1f3a31ce4824520b1030e",
+      "compatibility_key": "e329e8d7bcadbad087cf7559b461bfa2d3af49d21e58fdb95d675d1b5f256ae3",
+      "family": "k3p-no-training-noise",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "37c259fdac504f92b4636d50e94d9461",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "897508cbe0391de6cd90c7042c8991a15a35971dd85d1d86f2bc95754f84fbee",
+      "canonical_result_hash": "c2f8914c88d0747897aa176d3c4bb44446fb3236605e00b5aa3d572c997f0f6e",
+      "compatibility_key": "8b5994d81c8b150e758e432636f29ada876b9231871e75761f78fbec09965c1c",
+      "family": "k3p-no-training-noise",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "bf6d669e859d4c00bda87284addca604",
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+      "canonical_result_hash": "ff1548bcb6a7665d96bdfaf44537be000406db5ab98855870c407bf1aad4f69d",
+      "compatibility_key": "be6059d037aca1dacb03b4bddd8150a417fbe3fd74e80af04ddc6214c3274765",
+      "family": "ka2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "ce6eec65990e41269dd54b438e68625c",
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+      "canonical_result_hash": "8879c62d0323bfce62ec06c6bc33e02a3228ee44b007d057bf71f752a1164e84",
+      "compatibility_key": "627fd5410e2bcf4e71ae298c0e53750785f21c7431844689b3ddeac0505b6721",
+      "family": "ka2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "859d609d7dee4dfab70bb52bd6dcc1dc",
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+      "canonical_result_hash": "d8d86aa9affa9fd49dee559c2eba39feff5796f8dccabab4b53658f683ee7351",
+      "compatibility_key": "a041ecdf27ed2327ac76ab9c56e64a525a98ee35a666c75c248baf7b082e3a7a",
+      "family": "ka2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "0a80066804bc4760bafd5110710304a7",
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+      "canonical_result_hash": "db0e5c15b3fb34bcd53bdf38b9bf9e68d42e9694bff80f8bf87f5c320bb942f3",
+      "compatibility_key": "1898f5990dd23922b7770859547926e387d639574ef2b4147e18328d5e8f994d",
+      "family": "ka2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "764fcd21c0de4d95a8bb898609dfaa72",
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+      "canonical_result_hash": "2d4d1c999c461fc59dc5495fd95311fc4cd4031b00b8423671144282dc5163c8",
+      "compatibility_key": "bce0b44b5a1131772e4aa5a7f2832e92072fa46c6f2a80d1b11916905e1b8a69",
+      "family": "ka2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "02b97792b1e24d6f98f8931ca77cf5f6",
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+      "canonical_result_hash": "d83f79e74b3d3984c223f91bb4fe2b1d171ead8166031a360223d2f906bd5108",
+      "compatibility_key": "328ab77b50d3174e4a81283f01b1a7d63bc3745512744deaeeb08d84d26ff4bd",
+      "family": "ka2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "49dcdd59005a4413afc2145348bdfa31",
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+      "canonical_result_hash": "188b709c1b1fe9c66b9c7ed461f2612ef7122c4258ea6efc66c8aedd8e94dd68",
+      "compatibility_key": "8ec95371e0fd5b0beb59aca7bbfe9577cac027afd6f7ca514d03e8137e7754ed",
+      "family": "ka2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "d7e57ea425df4a55836a6994d83f686e",
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+      "canonical_result_hash": "3cacbbc82fe179e49788305e5242aaf863bcfcae0ca572e3bbadcfb23e5da05b",
+      "compatibility_key": "60c253722f4f20cc0a145484461355f4a289a907252860d40a59c00f8a25d64b",
+      "family": "r1r2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "5b7aef86733c4079a953578e2c00a67b",
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+      "canonical_result_hash": "4bf4bd3c994d3ed11b521ab2a84bae8a4b0e58bd6a4d6bdf778650847b9f616f",
+      "compatibility_key": "e47eca7651fef3596a3b8299eeae9971d471f6eb4b2029b9f3abf578cac77d18",
+      "family": "r1r2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "9b6c316afe1041d780c3503e80f4119f",
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+      "canonical_result_hash": "d75ea6eedcf7b9645f5b8205c88571caa846baa545a2b8141d466baa281a696e",
+      "compatibility_key": "8ae03b6b7e4dde84d96155ed03f7f9112eb66827440ebbd39670a94c695a32a6",
+      "family": "r1r2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "809b9e18b76c49dd9257365f46dba372",
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+      "canonical_result_hash": "bafd18daa9953495cffbc2f5599850b45f48114d69e99e93a9e1e2924e5c999a",
+      "compatibility_key": "0c570fc41638ff1f25a337ba9ff7478d16a38fb37458d9d322b65c4562257efe",
+      "family": "r1r2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "b191bd3f88c4487086908f0a1bd51469",
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+      "canonical_result_hash": "4e172c4b93d7e33fb0b5ea16f810442e579b98316f3ccbfda74ebc1ab8a96ced",
+      "compatibility_key": "a3aa0f9b6c073f3886345145f94b642b2046463c7a312eb90a44beb6e482d590",
+      "family": "r1r2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "dc3918cd7ee949de9f31b1342cf1e62a",
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+      "canonical_result_hash": "a388f9447659b59662cbb5ccde3bcf66dd40ccff4163336ebd5acf5159483ad8",
+      "compatibility_key": "eff99e6c1efeae29d179d2a22c469e1b51c7a5f84cc5c622e7e1f93ffff5209e",
+      "family": "r1r2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "492cef222d534e1da8e526a60af81603",
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+      "canonical_result_hash": "943a088106e6c0bcf7364d44eeb94726dd7a4513e8da6957a261aeb95dbdf81d",
+      "compatibility_key": "e171bedbdcd36c0520d811df869001f79e9f96bc41794f2d8289ef0cd823bf80",
+      "family": "r1r2",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "attempt_id": "13e60a31e9f24e429a72e95ee3bce070",
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+      "canonical_result_hash": "7a4e5fbecf682ef15478301d7f9d9322bf9b2d65cab73c8c718a9c91bd58726b",
+      "compatibility_key": "e72de53fa39dc376a2969782e219d004a80df7ec8c3a33bb466e35d0634adedf",
+      "family": "release07-gan-v3",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "10087734b6b3445ea5db443693bf02a0",
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+      "canonical_result_hash": "e6512dd21adbb5aafd6527875dd5149be73ed91aa3c3c04ce93df90e4a068971",
+      "compatibility_key": "177102b30837dfa5205e20c65ed3cde5cba8055b201753b096237d52bb8d4180",
+      "family": "release07-gan-v3",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "c22eb7c8e1534f1c854b1d6b01898377",
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+      "canonical_result_hash": "aa04200689820dc6fe8bed64dcdb435c88850798814feac33e467a1cae90675a",
+      "compatibility_key": "8cc83554dc0bf0615eac4253f3d0f6ac68daaae618e5616b5885b359382d1537",
+      "family": "release07-gan-v3",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "dcf742de7b174557a429b674f558e62d",
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+      "canonical_result_hash": "48e5c4d97dbb0c18fe31bf3657a9f5985586f5666a06a36785af80c18ce541c2",
+      "compatibility_key": "42619490180d582fdeabbb8d0e276d519315767666e8b4d15f766609587b5374",
+      "family": "release07-gan-v3",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "d151441783bc409aaff7320fe9789542",
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+      "canonical_result_hash": "b3a03c095473038a74eab295f44fffbeaa5f70553dae9e810fc640ec0c1e51a5",
+      "compatibility_key": "816d5936242492eb635288cba4ffd430e77d515b1f13e99f60e55fb4a9c4cabb",
+      "family": "release07-gan-v3",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "FAIL",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "9d71a2050db7405eb8b0fae856432e0e",
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+      "canonical_result_hash": "910c4f1bbecc7482cf449a12cfdf5fe2aa7385f621123e411dd577d7a61d1c40",
+      "compatibility_key": "8b50f6619727a84a11185cd56f5e4b9c4093b536df5e95358fbcd3b8479aca5f",
+      "family": "release07-gan-v3",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "c02c053fc0924c3494ab8278628a6596",
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+      "canonical_result_hash": "46355ca4f39a01e100c726ecec53aabf1f32efc27174261b849e74106b01b512",
+      "compatibility_key": "15dcd2c59ab5dba7c9d6fbb570e46ff749ca9abcf272ba4d1f25d28d17f45368",
+      "family": "release07-gan-v3",
+      "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "frozen_report_input_digest": "ffb6c215d90f5dd11182234f2c5158251e2691b2032a0e640c5b06d553b58bcf",
+  "parent_qualification_credit": false,
+  "policy_fingerprint": "8bbcc385c79532adaf9050dfff9713fb9dc52bf5d43648b5a1c6295ca899c372",
+  "projector_sha256": "c1471d5a3d0de8e8a42114cf1d0412ff98af89cfc3ec81f6627cc069b6964fe9",
+  "qualification_input": false,
+  "receipt_result_hashes": {
+    "01313af6d0b1452b9d9e60f95a57e1d7": "e3a424263eddba3a6776d4d0d4a2fb3427f69722e1c31929f0aead445e479889",
+    "02b97792b1e24d6f98f8931ca77cf5f6": "d83f79e74b3d3984c223f91bb4fe2b1d171ead8166031a360223d2f906bd5108",
+    "06e5d0bec7fb43d283699ffe8b5ed989": "3f825f99cbef7e266096af5e5dc81204fa915797ddbe5f04086aa022722749e5",
+    "07cedd019f354da8b21c4f424eaa6ebb": "14179f583abee65e24b74ba6a2d796696524fbe852b51206b9629cefb67e2413",
+    "09504ecb601543ba80058d46bc456757": "9d9ce59e1d5cc7da90a88ab29d6ad90f59ff0b73c5b1f3a31ce4824520b1030e",
+    "0a80066804bc4760bafd5110710304a7": "db0e5c15b3fb34bcd53bdf38b9bf9e68d42e9694bff80f8bf87f5c320bb942f3",
+    "0b72648afcc544d6a579c44063225f8a": "610c23ece15cdc2f744644ff5a3de642023d3d3eca63ce7bb8e0bc6a05126e2f",
+    "10087734b6b3445ea5db443693bf02a0": "e6512dd21adbb5aafd6527875dd5149be73ed91aa3c3c04ce93df90e4a068971",
+    "13dbf1c57daf46758e8fdb22209885cd": "0bbb58d1d9507e26221e4140841bbc940379b1cfa427bc84610162833f565f08",
+    "13e60a31e9f24e429a72e95ee3bce070": "7a4e5fbecf682ef15478301d7f9d9322bf9b2d65cab73c8c718a9c91bd58726b",
+    "14a06006efc24c9a9f22579e7c2df958": "8c83cc63f747a36e690729dff83e0ba079978784aacfcf53f8f69fafe1698fce",
+    "2031cd7bb3a04d4090bdfbca8eaac088": "2e90bc7601269fea9618ebf13ce531aec65ba16f2f03c56138a4ad87ba58e227",
+    "20d3eadff3724e6db327613becd577e7": "1b0df1bba8d60d299a3aec6d43f0cfaf241afba4463a118b7dec23aa6ea38854",
+    "2c34e6b34c1844958037b5cc399dcfaa": "857575b1d49ba09ac60dc50097ed4078166ce836cf2fd99f09c0952e77374b7d",
+    "30721d27de584721884a842289f14830": "7059daf4d5f8a12d7005cccf5a456c1235f3c720f415b2254b7fafa621d8a0b3",
+    "329006823c804cdfbd01ab414d10d1cd": "85fdd4af7736bc979cf118b5dbc4d9b1c8ef9df7d716818d5ef768bc8ce6b986",
+    "37c259fdac504f92b4636d50e94d9461": "c2f8914c88d0747897aa176d3c4bb44446fb3236605e00b5aa3d572c997f0f6e",
+    "39568145a2a24c5291060e6ab48b23a8": "97daebdeb586290a356327df7479aabb0e4a90f2c7f3b44e73589da7b8f664a9",
+    "3c70d39471924671b31b573764ef1c11": "eb30ba95561bfe1bbad1b4f5b7f9309cb433083b4e9b2451f545ff9f7c179ccd",
+    "492cef222d534e1da8e526a60af81603": "943a088106e6c0bcf7364d44eeb94726dd7a4513e8da6957a261aeb95dbdf81d",
+    "49dcdd59005a4413afc2145348bdfa31": "188b709c1b1fe9c66b9c7ed461f2612ef7122c4258ea6efc66c8aedd8e94dd68",
+    "50d7d9261caf485886c6088b9e9b334b": "08b171eb3249f787305176c64ec7febf1331127b1e430172591428e61b84b3e1",
+    "531e90cf76cf4e45815ec1786e3a9f3c": "95f88c2c0cef4c308bf4e5accf12a5bbdd458be4f2f842907a583b859d5e12c8",
+    "5732e526ff764977af157e194f8a5749": "a3fec24dab8f8761b4273f6fbb5ac641026a9371b40b87761e2617513862fbba",
+    "5a406e15157e46a98d2c2edb8da481e9": "7eb11594ea65eb4ff6733b213e3563ba4a77b77405134aa6c394eb819d82dfb3",
+    "5b7aef86733c4079a953578e2c00a67b": "4bf4bd3c994d3ed11b521ab2a84bae8a4b0e58bd6a4d6bdf778650847b9f616f",
+    "61df57eff54f4129b19b60ad9fa426b3": "039b7a8e2c09ed643be6c68bdc0e550cb61d5e1cf0e01ca978aca9955c688376",
+    "6a64df7ae894460e866e47378ac85143": "0b4158324bf6748f11a656b3194573fea3949b078bcf11d685dce0f35acc472b",
+    "6b44efa5cbac4cce91192d9a3ac33cde": "596e8ca6591124e0678edfbf7cc90e663330819dca94930502222a162ed7cb15",
+    "6fc1a81be1ba4664993a0af5b2dec088": "4fa8a267c377509ad1914220ef9b925efebc6ebc5cec09745e999503672ca236",
+    "764fcd21c0de4d95a8bb898609dfaa72": "2d4d1c999c461fc59dc5495fd95311fc4cd4031b00b8423671144282dc5163c8",
+    "7995e31c7afd49a1af49b97d2af747d8": "b2fb17edc13dcb25473f666750ccf0541cd544a1f97c229e5054a8aec42ef640",
+    "7ccd8797a0ab4592b312a86354518228": "38ee60c7c705fb12bcceef96997fe02170b563b9d64078d8adb5cffc1005f2f0",
+    "809b9e18b76c49dd9257365f46dba372": "bafd18daa9953495cffbc2f5599850b45f48114d69e99e93a9e1e2924e5c999a",
+    "859d609d7dee4dfab70bb52bd6dcc1dc": "d8d86aa9affa9fd49dee559c2eba39feff5796f8dccabab4b53658f683ee7351",
+    "8b88bf0491144e35b637e68eda852310": "cb0cccce457535f94a1c693d5b843543adeb409abf97bd941e3d07676c9654c6",
+    "8ca22bcbde054570956f3e5c7e9d14a7": "53a5bf5d87d295800821b065d254eb27547722df10ce7b15f748fd2d9a6e7a45",
+    "94d550c4fe694660b0ef433a546b2920": "9156ecb12c739f6cdc7863b7a5a4a0cbb990062f5b1d64f79b65bdeaac000607",
+    "99b2e68810ba4379a860e467e8a818ca": "01bce7bc33b8de7829cd6fc5da3849e9d67ac70acdcc5526b8454e044ee56078",
+    "9b6c316afe1041d780c3503e80f4119f": "d75ea6eedcf7b9645f5b8205c88571caa846baa545a2b8141d466baa281a696e",
+    "9d71a2050db7405eb8b0fae856432e0e": "910c4f1bbecc7482cf449a12cfdf5fe2aa7385f621123e411dd577d7a61d1c40",
+    "9daa17b88d3949438b8cb9887e64b442": "65494a4a3cbcc0d668368e6583c78d658c9f4c3c85f42b902358149a947ed86b",
+    "a44bca7f22e94973981b81d1fca24d53": "28685ad24cd3ce434f2054695b1c0b3bdc2f8ab813d3d50732e8ee47521a3eda",
+    "ac35cc0e5786417a86611d3bff57eb86": "006db5b57046dbec442d8f8ada5b5abcf8a3dda9f519fa2c790ccdb5c428c161",
+    "b191bd3f88c4487086908f0a1bd51469": "4e172c4b93d7e33fb0b5ea16f810442e579b98316f3ccbfda74ebc1ab8a96ced",
+    "b2e5ce07510342a3ae9b24f0e21449bb": "4ecfa468bf7e53944dedf8e8635e1f62b4dff5cf90b178825e55606ce619f4d7",
+    "bde4745f31864cc08c42880d0fa36272": "fbc4f715f76e5d03885734bd82261a37ff2e395c6b72f4be72d6c969e2fe6e55",
+    "bf6d669e859d4c00bda87284addca604": "ff1548bcb6a7665d96bdfaf44537be000406db5ab98855870c407bf1aad4f69d",
+    "c02c053fc0924c3494ab8278628a6596": "46355ca4f39a01e100c726ecec53aabf1f32efc27174261b849e74106b01b512",
+    "c132eb371ac84a46b28ea6c6aba62dc4": "d97841a8caf6a8566f6a37c75435f5cb70699080e7c40c8be0accf35ac95967b",
+    "c22eb7c8e1534f1c854b1d6b01898377": "aa04200689820dc6fe8bed64dcdb435c88850798814feac33e467a1cae90675a",
+    "c6a42f78e2c5426c87da0d5cc3eb6145": "ae99b2c0bca35fd473b36e38c76fd50d4dd7791be6f17aa3ad78a3394ecdffb4",
+    "c81010a770824ab4a856e76bd1c2cf65": "dd0c2518c430f006ea7d03c42c467a471a2a69c76e0f1e2c03baf185da2ccf27",
+    "ce6eec65990e41269dd54b438e68625c": "8879c62d0323bfce62ec06c6bc33e02a3228ee44b007d057bf71f752a1164e84",
+    "cecbce1a5db74a7bb9bc709231515998": "268a49e06051e6dda867e2c6365fc8fabaa364c8a4c5a5c14da76d509b449ead",
+    "d0638ad5ce5a47e5b2fcb00b369768b2": "a704de865b85b40b32357f8931a4ad55f1ddaaed57fcaa389a4c3b53aaec7ea9",
+    "d151441783bc409aaff7320fe9789542": "b3a03c095473038a74eab295f44fffbeaa5f70553dae9e810fc640ec0c1e51a5",
+    "d54d98951bf34e7990d47fced9234d37": "5215f65a292b445f84e99636f3fc64538137648dd51226b1ca7052ded0d81f97",
+    "d6d907c833524c1ea23374d90c548cf6": "0ed7021cad3bd6d18d59e0b94aa909942f83f66c3c59609fce6f98377ed23e16",
+    "d7e57ea425df4a55836a6994d83f686e": "3cacbbc82fe179e49788305e5242aaf863bcfcae0ca572e3bbadcfb23e5da05b",
+    "d8185ca486b54af79ef422395eac8065": "8562463777845a734731ef3a617838c90dc5c85077c7f82c0aed7b6de3f250bb",
+    "dc3918cd7ee949de9f31b1342cf1e62a": "a388f9447659b59662cbb5ccde3bcf66dd40ccff4163336ebd5acf5159483ad8",
+    "dcf742de7b174557a429b674f558e62d": "48e5c4d97dbb0c18fe31bf3657a9f5985586f5666a06a36785af80c18ce541c2",
+    "e28ab59ac9204a258cc60d431a8d3f3c": "97ea34a35400563a9cc1cb570a94f9ad851ee6e8c1ab6281a6ee4d6a03524025",
+    "e79c4474957644c081c1975409c43a3b": "0f2a5f257e7f2f130cfb392d33a4c864bec024facc3b650c337f6e3c4ce43f74",
+    "eb7b95dbf5b34f69a0c41e97626df6cb": "ac5bc2f0f1d829779a437208448c1df836fc6731fc436c773e24f48c3e54a094",
+    "f4c4560d3c214491914c067adc0782fb": "a41d64fb8634f840a3e3b78cb5ff8dd119c25b3030fd41beca509c30329c22d0",
+    "f8a3d5c90d9945d2ac774654864df258": "bb39b7a5e02a0c000be96bc62f83ee161071eb67fd95a798865f315683318c5a",
+    "fa5b20a8f092437b9ce53b4573e6ea8b": "79dac70fdb1b9d0dc3be1a6dd4911ba9cbaee35ec0f1494a71520c2d645bf860",
+    "fca5f1754f334c81bf04fd9417281836": "7253d75c51d3a937c6ea92e2d07ed832975ccc5fd05c4950059f5ef78c65e22e",
+    "fca8da49a5a14f7da875e55c90e22347": "a0e38591ce9aadbd9cb2f81b24b34647ca3d1b86f5936e03a2483b24e5dcd320"
+  },
+  "rows": {
+    "atlas": {
+      "attempt_ids": [
+        "6b44efa5cbac4cce91192d9a3ac33cde",
+        "6fc1a81be1ba4664993a0af5b2dec088",
+        "e28ab59ac9204a258cc60d431a8d3f3c",
+        "fa5b20a8f092437b9ce53b4573e6ea8b"
+      ],
+      "bindings": {
+        "available": true,
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "schedule_free",
+          "scoring_weights": "state_selected"
+        },
+        "configuration_id": null,
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "recipe_sha256": "a186235341b37123e9944253a40ed2105993354954ca37f6b527f2cae44a1132",
+        "recorded_source_origin_commits": [
+          "928b485ffbe6e17d79b41d307ae8b6275489b37a"
+        ],
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "source_origin_commit": "928b485ffbe6e17d79b41d307ae8b6275489b37a",
+        "task_contracts": {
+          "ae_gan_hold_tier1_policy_selected_cloud_v1": "49db8f85542369a7b4d9f2043552bfd30b208b3a4249d144c459c0eacf0109e4",
+          "clockfree_audit_tier1_policy_selected_cloud_v1": "97f55db4ee008d78d45b7bed5ab2470d2c934e2bd105631179612ba166ce44ff",
+          "five_word_joint_acquisition_tier1_policy_selected_cloud_v1": "10c0518587bf87ec27e6cede15f9413631c055ad95e095489aa304dd8463ec8f",
+          "gaussian1d_acquisition_tier1_policy_selected_cloud_v1": "c6e3eabc8bb42311628adc9ed04dc8150e64e118c2103444bacd8984b383d340",
+          "ring16_acquisition_tier1_policy_selected_cloud_v1": "ba7b6337317e827aa586612a16c94ea03657cb3f52a28c4cfdca03f6003850c0",
+          "two_pole_tier1_policy_selected_cloud_v1": "d7a1891175360e066b12933991b60a7c3fd3487e4ba9dcbe4abf2d0796d82c46",
+          "unused_token_hold_tier1_policy_selected_cloud_v1": "820b39f100033805befb9620f9bbc0ff9bff3a6e44049afb2495049de573b5de"
+        },
+        "task_keys_sha256": "038ee1a85c648ae3455b724d78826be15fe2a5971e4ecb59043b94168c0d476d",
+        "trainer_family": null
+      },
+      "blockers": [],
+      "candidate_id": "atlas",
+      "candidate_revision": "2f2806b54846656bc87e008e616f8fc7eae9b1f24e080f4eeaaf88bf3fb4b098",
+      "cohort": "df620730e3d310e590a2841155c9a78fb3cacbb57a97be2e4f9a3799ff0e243c",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 67.83239944593515
+      },
+      "evidence_scope": "current",
+      "lifecycle": "awaiting_readout",
+      "nonrequired_tasks": [],
+      "pending_readout": true,
+      "qualified_tier": 0,
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "status": "FAIL",
+      "tasks": [
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "d89a35bbce5dd67ae82427030fa702e770a3124bff20ed0a628a9d4ed28423da",
+          "status": "FAIL",
+          "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "d89a35bbce5dd67ae82427030fa702e770a3124bff20ed0a628a9d4ed28423da",
+          "status": "FAIL",
+          "task_id": "two_pole_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "bd06e68adb3c1d3ae769affd763e86a798ec3fa6717e0e61a346c97540cb089b",
+          "status": "BLOCKED",
+          "task_id": "unused_token_hold_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "00d375742fa6a8ba92b722a48667d2c78ac7e79c443871c7c186399be03c6e91",
+          "status": "BLOCKED",
+          "task_id": "ae_gan_hold_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "d89a35bbce5dd67ae82427030fa702e770a3124bff20ed0a628a9d4ed28423da",
+          "status": "FAIL",
+          "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "167339a171e1eeb6a94d7148a2e1c4719bac2361b4efc3bb9ef59977215a7adb",
+          "status": "BLOCKED",
+          "task_id": "five_word_joint_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "e8740eec83e4917e5125cef4f76c242210e605025f099c93112efe224edec38e",
+          "status": "FAIL",
+          "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+        }
+      ],
+      "technique": "Atlas",
+      "tiers": {
+        "1": {
+          "counts": {
+            "BLOCKED": 3,
+            "FAIL": 4
+          },
+          "passed": 0,
+          "total": 7
+        }
+      },
+      "trainer_family": "atlas"
+    },
+    "e22": {
+      "attempt_ids": [
+        "0b72648afcc544d6a579c44063225f8a",
+        "14a06006efc24c9a9f22579e7c2df958",
+        "7995e31c7afd49a1af49b97d2af747d8",
+        "94d550c4fe694660b0ef433a546b2920"
+      ],
+      "bindings": {
+        "available": true,
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "schedule_free",
+          "scoring_weights": "state_selected"
+        },
+        "configuration_id": null,
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "recipe_sha256": "563e9c1a40681807e4c9e7700dee871a164aadce9b31ab23364cea8293ccac8e",
+        "recorded_source_origin_commits": [
+          "928b485ffbe6e17d79b41d307ae8b6275489b37a"
+        ],
+        "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+        "source_origin_commit": "928b485ffbe6e17d79b41d307ae8b6275489b37a",
+        "task_contracts": {
+          "ae_gan_hold_tier1_policy_selected_cloud_v1": "49db8f85542369a7b4d9f2043552bfd30b208b3a4249d144c459c0eacf0109e4",
+          "clockfree_audit_tier1_policy_selected_cloud_v1": "97f55db4ee008d78d45b7bed5ab2470d2c934e2bd105631179612ba166ce44ff",
+          "five_word_joint_acquisition_tier1_policy_selected_cloud_v1": "10c0518587bf87ec27e6cede15f9413631c055ad95e095489aa304dd8463ec8f",
+          "gaussian1d_acquisition_tier1_policy_selected_cloud_v1": "c6e3eabc8bb42311628adc9ed04dc8150e64e118c2103444bacd8984b383d340",
+          "ring16_acquisition_tier1_policy_selected_cloud_v1": "ba7b6337317e827aa586612a16c94ea03657cb3f52a28c4cfdca03f6003850c0",
+          "two_pole_tier1_policy_selected_cloud_v1": "d7a1891175360e066b12933991b60a7c3fd3487e4ba9dcbe4abf2d0796d82c46",
+          "unused_token_hold_tier1_policy_selected_cloud_v1": "820b39f100033805befb9620f9bbc0ff9bff3a6e44049afb2495049de573b5de"
+        },
+        "task_keys_sha256": "4e18531d5398e97612a4e428cf3d54612bab870303ddb31470353027c6d8215b",
+        "trainer_family": null
+      },
+      "blockers": [],
+      "candidate_id": "e22",
+      "candidate_revision": "54aa80772e121ccadfc3f7069ddf6c6ddd5453080817d1caa07b32130a9e2552",
+      "cohort": "86d6d01295ddd70a2ae388fdca78eb28539b091d0ab667651bf1f1a560314588",
+      "cost": {
+        "measured_tasks": 4,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 64.90174444718286
+      },
+      "evidence_scope": "current",
+      "lifecycle": "awaiting_readout",
+      "nonrequired_tasks": [],
+      "pending_readout": true,
+      "qualified_tier": 0,
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "status": "FAIL",
+      "tasks": [
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "d89a35bbce5dd67ae82427030fa702e770a3124bff20ed0a628a9d4ed28423da",
+          "status": "FAIL",
+          "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "d89a35bbce5dd67ae82427030fa702e770a3124bff20ed0a628a9d4ed28423da",
+          "status": "FAIL",
+          "task_id": "two_pole_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "bd06e68adb3c1d3ae769affd763e86a798ec3fa6717e0e61a346c97540cb089b",
+          "status": "BLOCKED",
+          "task_id": "unused_token_hold_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "00d375742fa6a8ba92b722a48667d2c78ac7e79c443871c7c186399be03c6e91",
+          "status": "BLOCKED",
+          "task_id": "ae_gan_hold_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "d89a35bbce5dd67ae82427030fa702e770a3124bff20ed0a628a9d4ed28423da",
+          "status": "FAIL",
+          "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "167339a171e1eeb6a94d7148a2e1c4719bac2361b4efc3bb9ef59977215a7adb",
+          "status": "BLOCKED",
+          "task_id": "five_word_joint_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "e8740eec83e4917e5125cef4f76c242210e605025f099c93112efe224edec38e",
+          "status": "FAIL",
+          "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+        }
+      ],
+      "technique": "E22",
+      "tiers": {
+        "1": {
+          "counts": {
+            "BLOCKED": 3,
+            "FAIL": 4
+          },
+          "passed": 0,
+          "total": 7
+        }
+      },
+      "trainer_family": "e22"
+    }
+  },
+  "schema": "forge_tier1_scoped_evidence_v1",
+  "scientific_rows_sha256": {
+    "atlas": "7f258d42d4ba42538aa1ff51f9a3752627dec177ea06a5b194f236b651d2dffe",
+    "e22": "486efc1724e01515c46f59eea206799ff52243ec186719a73674c49ecf99d855"
+  },
+  "source_commit": "928b485ffbe6e17d79b41d307ae8b6275489b37a",
+  "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
+  "status_reasons": {
+    "00d375742fa6a8ba92b722a48667d2c78ac7e79c443871c7c186399be03c6e91": [
+      "ae_gan_hold_tier1_policy_selected_cloud_v1: the frozen posterior/encoder MoG law needs a routed AE formulation; an independent cloud policy is not that law"
+    ],
+    "167339a171e1eeb6a94d7148a2e1c4719bac2361b4efc3bb9ef59977215a7adb": [
+      "five_word_joint_acquisition_tier1_policy_selected_cloud_v1: the frozen five-row joint BiGAN needs complete generator/encoder/policy ownership and a separately scoped minimum-population contract"
+    ],
+    "32ae43ca7b0f744bf45140c5ebcca7fe103a6190f6db56e5a4408a773fb882cd": [
+      "ae_gan_hold_tier1_policy_selected_cloud_v1: Tier 1 selected policy cohort requires the actual schedule-free public policy recipe; ae_gan_hold_tier1_policy_selected_cloud_v1: the frozen posterior/encoder MoG law needs a routed AE formulation; an independent cloud policy is not that law"
+    ],
+    "5381e5b5846595ef35b3392049ac62e27950b24723fadfb290960ff71e694a2f": [
+      "five_word_joint_acquisition_tier1_policy_selected_cloud_v1: Tier 1 selected policy cohort requires the actual schedule-free public policy recipe; five_word_joint_acquisition_tier1_policy_selected_cloud_v1: the frozen five-row joint BiGAN needs complete generator/encoder/policy ownership and a separately scoped minimum-population contract"
+    ],
+    "8de2a8fea52d21ede60a60da60343446d7358dc8eb5a50a81d2d70a5c0c2b6d7": [
+      "unused_token_hold_tier1_policy_selected_cloud_v1: Tier 1 selected policy cohort requires the actual schedule-free public policy recipe; unused_token_hold_tier1_policy_selected_cloud_v1: shared/slot parameters require a conditional RoutedRows mechanism; independent Atlas/E22 cannot claim its protected-context law"
+    ],
+    "9d83719444f936e4db6ff3987dcac15f89ae332ef1e4c82f43fca384bdffce3e": [
+      "ring16_acquisition_tier1_policy_selected_cloud_v1: Tier 1 selected policy cohort requires the actual schedule-free public policy recipe"
+    ],
+    "bd06e68adb3c1d3ae769affd763e86a798ec3fa6717e0e61a346c97540cb089b": [
+      "unused_token_hold_tier1_policy_selected_cloud_v1: shared/slot parameters require a conditional RoutedRows mechanism; independent Atlas/E22 cannot claim its protected-context law"
+    ],
+    "bf047a2679b51a5278fcf5c95b0d2357a46b2b695513a0ebcd8696487d604e84": [
+      "two_pole_tier1_policy_selected_cloud_v1: Tier 1 selected policy cohort requires the actual schedule-free public policy recipe"
+    ],
+    "d89a35bbce5dd67ae82427030fa702e770a3124bff20ed0a628a9d4ed28423da": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "dea90086fff1a5f17cdf068dc5bbfe44223e474af1117429b17c38515e9c2ab7": [
+      "gaussian1d_acquisition_tier1_policy_selected_cloud_v1: Tier 1 selected policy cohort requires the actual schedule-free public policy recipe"
+    ],
+    "e075b1a66e6da8bd541d839fdaeb270de319cfbb301002029d5cb41a54250ced": [
+      "clockfree_audit_tier1_policy_selected_cloud_v1: Tier 1 selected policy cohort requires the actual schedule-free public policy recipe"
+    ],
+    "e8740eec83e4917e5125cef4f76c242210e605025f099c93112efe224edec38e": [
+      "step_label changed the update or common-prefix state"
+    ]
+  },
+  "task_contracts": {
+    "02aee3b007bde21d3a72aa40099e31af90fd0149de254f578bd7620d69b79b77": {
+      "adapter": "transfer_vector",
+      "evaluation_sha256": "f030ee2a1540a97b198a3ceb8e2c09699f2026b256600cae328aeaf349dbe751",
+      "execution_sha256": "ff6727f785e803c71a35ebf6a30b0d7757013506373a105ce4146501e847975e",
+      "host": "gaussian1d_acquisition",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "alpha_bar",
+            "batch_size",
+            "conditioning",
+            "distance_reduction",
+            "encoder_mode",
+            "model",
+            "num_classes",
+            "num_particles",
+            "observation_sigma",
+            "prior_reg",
+            "reconstruction_weight",
+            "routing_temperature",
+            "total_steps",
+            "ucd_target",
+            "ucd_weight",
+            "z_dim"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "batch_size": 2048,
+          "num_particles": 20000,
+          "total_steps": 7000,
+          "z_dim": 2
+        },
+        "host_definition": {
+          "batch": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "covariances": [
+            [
+              [
+                0.25
+              ]
+            ]
+          ],
+          "d_every": 1,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.995,
+          "family": "gaussian1d_acquisition",
+          "fourier": 2,
+          "g_every": 1,
+          "hidden": 32,
+          "identifiable": true,
+          "kind": "gaussian_mixture",
+          "layers": 2,
+          "lr": 0.00425,
+          "masses": [
+            1.0
+          ],
+          "means": [
+            [
+              2.0
+            ]
+          ],
+          "particles": 256,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reg_arm": "k3p",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "split": "development",
+          "steps": 1000,
+          "z_dim": 2
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "1b23570b62828bd336b92df0a3414953bbf52f262cc0b334b587744f1cc81bb8",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 1000,
+      "timeout_seconds": 120
+    },
+    "10c0518587bf87ec27e6cede15f9413631c055ad95e095489aa304dd8463ec8f": {
+      "adapter": "word_joint",
+      "evaluation_sha256": "9f9c7d5fc94ceef2f5d985519d79d1dbc97ce2d7198aef6c58363a8c3be5fe67",
+      "execution_sha256": "0d5320afe0a25dd73e0372f17bc50abc3100f716abb5e35efee6321dfe28e170",
+      "host": "five_word_joint",
+      "host_definition_sha256": "df90bb4ce77e9d276cc2120be1ecceff8f0b38c8f81bee224484ef57c135e567",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 20001,
+      "timeout_seconds": 900
+    },
+    "1dace95f907cdff1411ffa0622a09c84ad01cd8d5884e66a1be995e057b85988": {
+      "adapter": "word_joint",
+      "evaluation_sha256": "9f9c7d5fc94ceef2f5d985519d79d1dbc97ce2d7198aef6c58363a8c3be5fe67",
+      "execution_sha256": "0d5320afe0a25dd73e0372f17bc50abc3100f716abb5e35efee6321dfe28e170",
+      "host": "five_word_joint",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "prior_reg"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {},
+        "host_definition": {
+          "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+          "encoder_widths": [
+            168,
+            128,
+            64,
+            2
+          ],
+          "generator_widths": [
+            2,
+            64,
+            128,
+            168
+          ],
+          "joint_critic_widths": [
+            170,
+            256,
+            128,
+            1
+          ],
+          "length": 6,
+          "resources": {
+            "batch_size": 256,
+            "num_particles": 5,
+            "z_dim": 2
+          },
+          "words": [
+            "apple",
+            "grape",
+            "lemon",
+            "melon",
+            "berry"
+          ]
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "five_word_joint_acquisition_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "df90bb4ce77e9d276cc2120be1ecceff8f0b38c8f81bee224484ef57c135e567",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 20001,
+      "timeout_seconds": 900
+    },
+    "25ee9f3cbbdccf26c465626f199652becf2f73188c39c3d3a55bcf87e18f0a2e": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "d09a0cc3a9b0212b23dd31f7c21ea8cf2f76118569117bf5cb9853c6c93a05d6",
+      "execution_sha256": "e4626c605892a229e9dd17deb05292fdac9054a513ee3ba676022aca9d6fd671",
+      "host": "ae_gan_hold",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "alpha_bar",
+            "batch_size",
+            "conditioning",
+            "distance_reduction",
+            "encoder_mode",
+            "model",
+            "num_classes",
+            "num_particles",
+            "observation_sigma",
+            "prior_reg",
+            "reconstruction_weight",
+            "routing_temperature",
+            "total_steps",
+            "ucd_target",
+            "ucd_weight",
+            "z_dim"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 2048,
+          "conditioning": "scalar",
+          "encoder_mode": "none",
+          "model": "gan",
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "prior_reg": 0.05,
+          "reconstruction_weight": 1.0,
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 250
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "ae_gan_hold_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "6e5f35073acb406b11b21d0b9fe54bb9aac4fb97b198fd22be5c469ed752d18c",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 250,
+      "timeout_seconds": 300
+    },
+    "324339a5b72df2bd9a1502264e485a6dc7d0eadf01387e662227e2a691d5472e": {
+      "adapter": "clockfree_audit",
+      "evaluation_sha256": "95e2da4eee8d9bebdb75912f5e262b933563205b581b6bd99a63f5efbc57e29d",
+      "execution_sha256": "9ca94da9e3dca95234e5c324cd7fed6beab0bb48d07e81cbda26bdd0b794db1a",
+      "host": null,
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "alpha_bar",
+            "batch_size",
+            "conditioning",
+            "distance_reduction",
+            "encoder_mode",
+            "model",
+            "num_classes",
+            "num_particles",
+            "observation_sigma",
+            "prior_reg",
+            "reconstruction_weight",
+            "routing_temperature",
+            "total_steps",
+            "ucd_target",
+            "ucd_weight",
+            "z_dim"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "batch_size": 2048,
+          "num_particles": 20000,
+          "total_steps": 7000,
+          "z_dim": 2
+        },
+        "host_definition": {},
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 24,
+      "timeout_seconds": 300
+    },
+    "49db8f85542369a7b4d9f2043552bfd30b208b3a4249d144c459c0eacf0109e4": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "d09a0cc3a9b0212b23dd31f7c21ea8cf2f76118569117bf5cb9853c6c93a05d6",
+      "execution_sha256": "e4626c605892a229e9dd17deb05292fdac9054a513ee3ba676022aca9d6fd671",
+      "host": "ae_gan_hold",
+      "host_definition_sha256": "6e5f35073acb406b11b21d0b9fe54bb9aac4fb97b198fd22be5c469ed752d18c",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 250,
+      "timeout_seconds": 300
+    },
+    "59034216034ef52b05bf4a353215df5393327f71c3cc83391d360241e7cd2760": {
+      "adapter": "transfer_vector",
+      "evaluation_sha256": "f030ee2a1540a97b198a3ceb8e2c09699f2026b256600cae328aeaf349dbe751",
+      "execution_sha256": "ff6727f785e803c71a35ebf6a30b0d7757013506373a105ce4146501e847975e",
+      "host": "gaussian1d_acquisition",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "prior_reg"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {},
+        "host_definition": {
+          "batch": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "covariances": [
+            [
+              [
+                0.25
+              ]
+            ]
+          ],
+          "d_every": 1,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.995,
+          "family": "gaussian1d_acquisition",
+          "fourier": 2,
+          "g_every": 1,
+          "hidden": 32,
+          "identifiable": true,
+          "kind": "gaussian_mixture",
+          "layers": 2,
+          "lr": 0.00425,
+          "masses": [
+            1.0
+          ],
+          "means": [
+            [
+              2.0
+            ]
+          ],
+          "particles": 256,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reg_arm": "k3p",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "split": "development",
+          "steps": 1000,
+          "z_dim": 2
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "1b23570b62828bd336b92df0a3414953bbf52f262cc0b334b587744f1cc81bb8",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 1000,
+      "timeout_seconds": 120
+    },
+    "5f264f83c065b4ac0fa8f0ad3be6bedd15e8d29ca38cbcd21563572a65d56479": {
+      "adapter": "transfer_vector",
+      "evaluation_sha256": "13deb61a7135ca32c3c1ad2e3698d8a7d44c7d9ab3428f194cdc6aec14dc10f1",
+      "execution_sha256": "c5a7a447691473bee4eabe144a25fd2ce5998464c92c88803e0defddf6fc5bc3",
+      "host": "ring16_acquisition",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "prior_reg"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {},
+        "host_definition": {
+          "batch": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "covariances": [
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ]
+          ],
+          "d_every": 1,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.995,
+          "family": "ring16_acquisition",
+          "fourier": 2,
+          "g_every": 1,
+          "hidden": 64,
+          "identifiable": true,
+          "kind": "gaussian_mixture",
+          "layers": 2,
+          "lr": 0.00425,
+          "masses": [
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625
+          ],
+          "means": [
+            [
+              3.0,
+              0.0
+            ],
+            [
+              2.77163859753386,
+              1.1480502970952693
+            ],
+            [
+              2.121320343559643,
+              2.1213203435596424
+            ],
+            [
+              1.1480502970952695,
+              2.77163859753386
+            ],
+            [
+              1.8369701987210297e-16,
+              3.0
+            ],
+            [
+              -1.1480502970952693,
+              2.77163859753386
+            ],
+            [
+              -2.1213203435596424,
+              2.121320343559643
+            ],
+            [
+              -2.77163859753386,
+              1.1480502970952697
+            ],
+            [
+              -3.0,
+              3.6739403974420594e-16
+            ],
+            [
+              -2.7716385975338604,
+              -1.148050297095269
+            ],
+            [
+              -2.121320343559643,
+              -2.1213203435596424
+            ],
+            [
+              -1.148050297095271,
+              -2.7716385975338595
+            ],
+            [
+              -5.51091059616309e-16,
+              -3.0
+            ],
+            [
+              1.14805029709527,
+              -2.77163859753386
+            ],
+            [
+              2.121320343559642,
+              -2.121320343559643
+            ],
+            [
+              2.7716385975338595,
+              -1.148050297095271
+            ]
+          ],
+          "particles": 256,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reg_arm": "k3p",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "split": "development",
+          "steps": 400,
+          "z_dim": 4
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "5e863829436d8ce7e3c18e21b3a3ddf4abc11fc5824d46ab7de45917e81fd9d2",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 400,
+      "timeout_seconds": 300
+    },
+    "602e0e5874feffb10c22470051c644b8e61c18ef378cd61a87251b92f62d5549": {
+      "adapter": "word_joint",
+      "evaluation_sha256": "9f9c7d5fc94ceef2f5d985519d79d1dbc97ce2d7198aef6c58363a8c3be5fe67",
+      "execution_sha256": "0d5320afe0a25dd73e0372f17bc50abc3100f716abb5e35efee6321dfe28e170",
+      "host": "five_word_joint",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "alpha_bar",
+            "batch_size",
+            "conditioning",
+            "distance_reduction",
+            "encoder_mode",
+            "model",
+            "num_classes",
+            "num_particles",
+            "observation_sigma",
+            "prior_reg",
+            "reconstruction_weight",
+            "routing_temperature",
+            "total_steps",
+            "ucd_target",
+            "ucd_weight",
+            "z_dim"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "batch_size": 2048,
+          "num_particles": 20000,
+          "total_steps": 7000,
+          "z_dim": 2
+        },
+        "host_definition": {
+          "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+          "encoder_widths": [
+            168,
+            128,
+            64,
+            2
+          ],
+          "generator_widths": [
+            2,
+            64,
+            128,
+            168
+          ],
+          "joint_critic_widths": [
+            170,
+            256,
+            128,
+            1
+          ],
+          "length": 6,
+          "resources": {
+            "batch_size": 256,
+            "num_particles": 5,
+            "z_dim": 2
+          },
+          "words": [
+            "apple",
+            "grape",
+            "lemon",
+            "melon",
+            "berry"
+          ]
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "five_word_joint_acquisition_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "df90bb4ce77e9d276cc2120be1ecceff8f0b38c8f81bee224484ef57c135e567",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 20001,
+      "timeout_seconds": 900
+    },
+    "6e45e93a0c1185e63949bb79e4d004493dae6825d801993afe30a691e20548f6": {
+      "adapter": "transfer_vector",
+      "evaluation_sha256": "13deb61a7135ca32c3c1ad2e3698d8a7d44c7d9ab3428f194cdc6aec14dc10f1",
+      "execution_sha256": "c5a7a447691473bee4eabe144a25fd2ce5998464c92c88803e0defddf6fc5bc3",
+      "host": "ring16_acquisition",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "alpha_bar",
+            "batch_size",
+            "conditioning",
+            "distance_reduction",
+            "encoder_mode",
+            "model",
+            "num_classes",
+            "num_particles",
+            "observation_sigma",
+            "prior_reg",
+            "reconstruction_weight",
+            "routing_temperature",
+            "total_steps",
+            "ucd_target",
+            "ucd_weight",
+            "z_dim"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "batch_size": 2048,
+          "num_particles": 20000,
+          "total_steps": 7000,
+          "z_dim": 2
+        },
+        "host_definition": {
+          "batch": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "covariances": [
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ]
+          ],
+          "d_every": 1,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.995,
+          "family": "ring16_acquisition",
+          "fourier": 2,
+          "g_every": 1,
+          "hidden": 64,
+          "identifiable": true,
+          "kind": "gaussian_mixture",
+          "layers": 2,
+          "lr": 0.00425,
+          "masses": [
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625
+          ],
+          "means": [
+            [
+              3.0,
+              0.0
+            ],
+            [
+              2.77163859753386,
+              1.1480502970952693
+            ],
+            [
+              2.121320343559643,
+              2.1213203435596424
+            ],
+            [
+              1.1480502970952695,
+              2.77163859753386
+            ],
+            [
+              1.8369701987210297e-16,
+              3.0
+            ],
+            [
+              -1.1480502970952693,
+              2.77163859753386
+            ],
+            [
+              -2.1213203435596424,
+              2.121320343559643
+            ],
+            [
+              -2.77163859753386,
+              1.1480502970952697
+            ],
+            [
+              -3.0,
+              3.6739403974420594e-16
+            ],
+            [
+              -2.7716385975338604,
+              -1.148050297095269
+            ],
+            [
+              -2.121320343559643,
+              -2.1213203435596424
+            ],
+            [
+              -1.148050297095271,
+              -2.7716385975338595
+            ],
+            [
+              -5.51091059616309e-16,
+              -3.0
+            ],
+            [
+              1.14805029709527,
+              -2.77163859753386
+            ],
+            [
+              2.121320343559642,
+              -2.121320343559643
+            ],
+            [
+              2.7716385975338595,
+              -1.148050297095271
+            ]
+          ],
+          "particles": 256,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reg_arm": "k3p",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "split": "development",
+          "steps": 400,
+          "z_dim": 4
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "5e863829436d8ce7e3c18e21b3a3ddf4abc11fc5824d46ab7de45917e81fd9d2",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 400,
+      "timeout_seconds": 300
+    },
+    "820b39f100033805befb9620f9bbc0ff9bff3a6e44049afb2495049de573b5de": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "4093b932b9f8c5d68ed9b4caccddf2ea2d8d5f2119fe0c651a23d4252110a8e2",
+      "execution_sha256": "4dd7aadc445e7abb86c26daa352bc9c229016162c4471d426e673bec84548530",
+      "host": "unused_token_hold",
+      "host_definition_sha256": "1ff599cc1584b50b63b21e786d99326becdf8d898626022a669d6064bb0d2b70",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_learned_parameter_measurement",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 200,
+      "timeout_seconds": 300
+    },
+    "87527cfd0c7373835f29e0a8a947dcdf5a364a41915b4971deee37b8a4506e94": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "d09a0cc3a9b0212b23dd31f7c21ea8cf2f76118569117bf5cb9853c6c93a05d6",
+      "execution_sha256": "e4626c605892a229e9dd17deb05292fdac9054a513ee3ba676022aca9d6fd671",
+      "host": "ae_gan_hold",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "prior_reg"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "prior_reg": 1.0
+        },
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 250
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "ae_gan_hold_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "6e5f35073acb406b11b21d0b9fe54bb9aac4fb97b198fd22be5c469ed752d18c",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 250,
+      "timeout_seconds": 300
+    },
+    "8cbb8a462b03bfd7996d0835a4e4a6d94fa8a34f4b3b44d3e5e77edfe5d924cb": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "4093b932b9f8c5d68ed9b4caccddf2ea2d8d5f2119fe0c651a23d4252110a8e2",
+      "execution_sha256": "4dd7aadc445e7abb86c26daa352bc9c229016162c4471d426e673bec84548530",
+      "host": "unused_token_hold",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "alpha_bar",
+            "batch_size",
+            "conditioning",
+            "distance_reduction",
+            "encoder_mode",
+            "model",
+            "num_classes",
+            "num_particles",
+            "observation_sigma",
+            "prior_reg",
+            "reconstruction_weight",
+            "routing_temperature",
+            "total_steps",
+            "ucd_target",
+            "ucd_weight",
+            "z_dim"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 2048,
+          "conditioning": "scalar",
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "model": "gan",
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "prior_reg": 0.05,
+          "reconstruction_weight": 1.0,
+          "routing_temperature": 0.25,
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 200
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "unused_token_hold_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "1ff599cc1584b50b63b21e786d99326becdf8d898626022a669d6064bb0d2b70",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_learned_parameter_measurement",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 200,
+      "timeout_seconds": 300
+    },
+    "97f55db4ee008d78d45b7bed5ab2470d2c934e2bd105631179612ba166ce44ff": {
+      "adapter": "clockfree_audit",
+      "evaluation_sha256": "95e2da4eee8d9bebdb75912f5e262b933563205b581b6bd99a63f5efbc57e29d",
+      "execution_sha256": "9ca94da9e3dca95234e5c324cd7fed6beab0bb48d07e81cbda26bdd0b794db1a",
+      "host": null,
+      "host_definition_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 24,
+      "timeout_seconds": 300
+    },
+    "a4ec60d49ee8deb349cbd1de92d9f772d7c0e4fa08edf7fe18b105679eae524f": {
+      "adapter": "clockfree_audit",
+      "evaluation_sha256": "95e2da4eee8d9bebdb75912f5e262b933563205b581b6bd99a63f5efbc57e29d",
+      "execution_sha256": "9ca94da9e3dca95234e5c324cd7fed6beab0bb48d07e81cbda26bdd0b794db1a",
+      "host": null,
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "prior_reg"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {},
+        "host_definition": {},
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 24,
+      "timeout_seconds": 300
+    },
+    "ba7b6337317e827aa586612a16c94ea03657cb3f52a28c4cfdca03f6003850c0": {
+      "adapter": "transfer_vector",
+      "evaluation_sha256": "13deb61a7135ca32c3c1ad2e3698d8a7d44c7d9ab3428f194cdc6aec14dc10f1",
+      "execution_sha256": "c5a7a447691473bee4eabe144a25fd2ce5998464c92c88803e0defddf6fc5bc3",
+      "host": "ring16_acquisition",
+      "host_definition_sha256": "5e863829436d8ce7e3c18e21b3a3ddf4abc11fc5824d46ab7de45917e81fd9d2",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 400,
+      "timeout_seconds": 300
+    },
+    "c6e3eabc8bb42311628adc9ed04dc8150e64e118c2103444bacd8984b383d340": {
+      "adapter": "transfer_vector",
+      "evaluation_sha256": "f030ee2a1540a97b198a3ceb8e2c09699f2026b256600cae328aeaf349dbe751",
+      "execution_sha256": "ff6727f785e803c71a35ebf6a30b0d7757013506373a105ce4146501e847975e",
+      "host": "gaussian1d_acquisition",
+      "host_definition_sha256": "1b23570b62828bd336b92df0a3414953bbf52f262cc0b334b587744f1cc81bb8",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 1000,
+      "timeout_seconds": 120
+    },
+    "cb8854c1d3b5d72c78f7ac3dcba002178a28a9269032cfbcd2eec7f5dedf6967": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "0feebf28923a79ea0f08c338ba04d3771d341760b7fe03c9dad7d8740ad42768",
+      "execution_sha256": "f750e2c3a9b1c9e4e4e5db3ddb9d2b74b0a7c573e62305a2cac2bf4d976c87b4",
+      "host": "two_pole",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "alpha_bar",
+            "batch_size",
+            "conditioning",
+            "distance_reduction",
+            "encoder_mode",
+            "model",
+            "num_classes",
+            "num_particles",
+            "observation_sigma",
+            "prior_reg",
+            "reconstruction_weight",
+            "routing_temperature",
+            "total_steps",
+            "ucd_target",
+            "ucd_weight",
+            "z_dim"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 2048,
+          "conditioning": "scalar",
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "model": "gan",
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "prior_reg": 0.05,
+          "reconstruction_weight": 1.0,
+          "routing_temperature": 0.25,
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 80
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "two_pole_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "4a6623126813b1d2060dd1795366cfc36fcf1e711a10cb1d56d9000c8aa10818",
+      "host_profiles": {},
+      "initialization": {
+        "critic": "stored_host_weights",
+        "particles": "zeros"
+      },
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_learned_particles_and_critic_gradient",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 80,
+      "timeout_seconds": 300
+    },
+    "d7a1891175360e066b12933991b60a7c3fd3487e4ba9dcbe4abf2d0796d82c46": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "0feebf28923a79ea0f08c338ba04d3771d341760b7fe03c9dad7d8740ad42768",
+      "execution_sha256": "f750e2c3a9b1c9e4e4e5db3ddb9d2b74b0a7c573e62305a2cac2bf4d976c87b4",
+      "host": "two_pole",
+      "host_definition_sha256": "4a6623126813b1d2060dd1795366cfc36fcf1e711a10cb1d56d9000c8aa10818",
+      "host_profiles": {},
+      "initialization": {
+        "critic": "stored_host_weights",
+        "particles": "zeros"
+      },
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_learned_particles_and_critic_gradient",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 80,
+      "timeout_seconds": 300
+    },
+    "f0d9841975dc4dfa39205b9818398432d6059a8d6c405614c130be2e6fc20816": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "0feebf28923a79ea0f08c338ba04d3771d341760b7fe03c9dad7d8740ad42768",
+      "execution_sha256": "f750e2c3a9b1c9e4e4e5db3ddb9d2b74b0a7c573e62305a2cac2bf4d976c87b4",
+      "host": "two_pole",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "prior_reg"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "prior_reg": 1.0
+        },
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 80
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "two_pole_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "4a6623126813b1d2060dd1795366cfc36fcf1e711a10cb1d56d9000c8aa10818",
+      "host_profiles": {},
+      "initialization": {
+        "critic": "stored_host_weights",
+        "particles": "zeros"
+      },
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_learned_particles_and_critic_gradient",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 80,
+      "timeout_seconds": 300
+    },
+    "f97a821437a196916ac01fc5a71f83ce679fe1db1fc7cf7f507d61effa7b30c7": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "4093b932b9f8c5d68ed9b4caccddf2ea2d8d5f2119fe0c651a23d4252110a8e2",
+      "execution_sha256": "4dd7aadc445e7abb86c26daa352bc9c229016162c4471d426e673bec84548530",
+      "host": "unused_token_hold",
+      "host_adaptation": {
+        "contract": {
+          "recipe_fields": [
+            "prior_reg"
+          ],
+          "schema_version": 1
+        },
+        "delegated_reference_values": {
+          "prior_reg": 1.0
+        },
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 200
+        },
+        "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+        "owner": "frozen task resources and original host objectives",
+        "schema_version": 1,
+        "task_id": "unused_token_hold_tier1_policy_selected_cloud_v1"
+      },
+      "host_definition_sha256": "1ff599cc1584b50b63b21e786d99326becdf8d898626022a669d6064bb0d2b70",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_learned_parameter_measurement",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 200,
+      "timeout_seconds": 300
+    }
+  },
+  "view": "tier1_policy_coverage"
+}

@@ -11,6 +11,7 @@ from dataclasses import dataclass, replace
 
 
 from ..observation import checkpoint, schedule_optimizer
+from particlegan.optim.constraint_geometry import constraint_geometry_backward
 
 import torch
 
@@ -141,7 +142,10 @@ class SharedSlotStudent(nn.Module):
         super().__init__()
         self.shared = nn.Parameter(torch.zeros(DIM))
         self.slot = nn.Parameter(torch.zeros(N_SLOTS, DIM))
-        self.register_buffer("neu", NEU.clone())
+        neu = NEU.detach().to(device=self.shared.device, dtype=self.shared.dtype)
+        if neu.data_ptr() == NEU.data_ptr():
+            neu = neu.clone()
+        self.register_buffer("neu", neu)
 
     def embeds(self, scale: float) -> torch.Tensor:
         # Scale 0 is the adapter-off identity (Anima UNI scale 0).
@@ -163,6 +167,13 @@ class SlotCritic(nn.Module):
         return self.hidden(z)
 
 
+def _placed(reference: torch.Tensor, like: torch.Tensor) -> torch.Tensor:
+    """Move a frozen fixture onto ``like`` without drawing new values."""
+    if reference.device == like.device and reference.dtype == like.dtype:
+        return reference
+    return reference.detach().to(device=like.device, dtype=like.dtype)
+
+
 def _batch(vector: torch.Tensor, rows: int = N_ROWS) -> torch.Tensor:
     return vector.detach().unsqueeze(0).expand(rows, -1)
 
@@ -170,19 +181,20 @@ def _batch(vector: torch.Tensor, rows: int = N_ROWS) -> torch.Tensor:
 def score_student(student: SharedSlotStudent) -> dict[str, float]:
     """Unused hold and concept move at scale +1. Scale 0 is identity."""
     embeds = student.embeds(1.0).detach()
+    concept_dir = _placed(CONCEPT_DIR, embeds)
     unused = embeds[UNUSED]
     concept = embeds[CONCEPT]
     pin = student.neu[UNUSED]
     origin = student.neu[CONCEPT]
     dist = float((unused - pin).norm())
-    target_norm = float(CONCEPT_DIR.norm())
+    target_norm = float(concept_dir.norm())
     hold = 1.0 - min(1.0, dist / target_norm)
     delta = concept - origin
     delta_norm = float(delta.norm())
     if delta_norm <= 1e-8:
         cos = 0.0
     else:
-        cos = float(F.cosine_similarity(delta.unsqueeze(0), CONCEPT_DIR.unsqueeze(0)))
+        cos = float(F.cosine_similarity(delta.unsqueeze(0), concept_dir.unsqueeze(0)))
     mag = max(0.0, 1.0 - abs(delta_norm / target_norm - 1.0))
     move = max(0.0, cos) * mag
     scale0 = student.embeds(0.0).detach()
@@ -218,7 +230,7 @@ def _make_regularizer(recipe: UnusedHoldRecipe) -> GradientPenalty:
 
 
 def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
-          *, noise_policy=None) -> dict:
+          *, noise_policy=None, components=None) -> dict:
     """Fit one arm. Prints a tailable line at the checkpoints."""
     torch.manual_seed(int(recipe.seed))
     student = SharedSlotStudent()
@@ -237,7 +249,10 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
-    real = _batch(CONCEPT_DIR)
+    if components is not None:
+        opt_g, opt_d, gan, reg = components.bind(
+            generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
+    real = _batch(_placed(CONCEPT_DIR, student.shared))
     pairs = hold_pairs(recipe.pairing)
     bcap_applied = 0
     for step in range(int(recipe.steps)):
@@ -268,14 +283,36 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
             fake_feat = critic.features(fake_g).mean(0)
             g_loss = g_loss + float(recipe.fm_weight) * (real_feat - fake_feat).pow(2).mean()
         loss = g_loss
+        protected = (g_loss,)
         if float(recipe.hold_weight) != 0.0:
             embeds = student.embeds(1.0)
-            loss = loss + float(recipe.hold_weight) * unused_hold_loss(embeds, student.neu, pairs)
-        loss.backward()
+            hold = unused_hold_loss(embeds, student.neu, pairs)
+            loss = loss + float(recipe.hold_weight) * hold
+            protected = (g_loss, hold)
+        if components is not None:
+            # Only the original trained concept output enters transport.
+            # The unused slot retains its original masked hold objective.
+            loss = components.add_transport_loss(loss, fake_g, real)
+        def protected_evaluator():
+            current = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1)
+            adversarial = gan.g_loss(critic(current), critic(real).detach())
+            if float(recipe.fm_weight) != 0.0:
+                adversarial = adversarial + float(recipe.fm_weight) * (
+                    critic.features(real).detach().mean(0) - critic.features(current).mean(0)).pow(2).mean()
+            return ((adversarial, unused_hold_loss(student.embeds(1.0), student.neu, pairs))
+                    if float(recipe.hold_weight) != 0.0 else (adversarial,))
+        constraint_geometry_backward(loss, opt_g, protected, protected_evaluator=protected_evaluator)
         critic.requires_grad_(True)
         schedule_optimizer(opt_g, step)
         opt_g.step()
-        checkpoint(step + 1, lambda: score_student(student))
+        def observe_student():
+            metrics = score_student(student)
+            if components is not None:
+                target = student.neu.clone()
+                target[CONCEPT] = CONCEPT_DIR
+                components.constraint_geometry_capture(step + 1, target, student.embeds(1.0), metrics, kind="line")
+            return metrics
+        checkpoint(step + 1, observe_student)
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == int(recipe.steps):
             _log(recipe.name, step + 1, score_student(student))

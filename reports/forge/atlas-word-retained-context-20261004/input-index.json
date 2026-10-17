@@ -1,0 +1,123 @@
+{
+  "file_count": 23,
+  "files": [
+    {
+      "bytes": 6395,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/final-inputs.json",
+      "sha256": "f287d51757c4e9397afb5435e7b3848877915b6326ba59d0659b32fab20c6be2"
+    },
+    {
+      "bytes": 383347,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/results.json",
+      "sha256": "0a175519b59b5180078d9669519060b79dc30d596daca3c8be1aca2dd9ce1d5f"
+    },
+    {
+      "bytes": 5349,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/actual-publication-final-audit.json",
+      "sha256": "4c68a3ca0061efc6d7b44c95cc43299baead0ad3e0b91a39f3c23ca6fd29b2e5"
+    },
+    {
+      "bytes": 4147493,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/study.json",
+      "sha256": "721adfbf299568bffc9bc7f72da0204a2fb5c87d283aa17d3bd32caa62540c4c"
+    },
+    {
+      "bytes": 197018,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/raw-result.json",
+      "sha256": "e26ec506c81e8cdd74447c466d516ef30785de501da28dd50e698c115ebe7515"
+    },
+    {
+      "bytes": 901,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/graded-result.json",
+      "sha256": "5eb697cf6678ef764204ca5cd9e755a9d2f6f1fe0530c58a608b18ee9e3d766a"
+    },
+    {
+      "bytes": 4861315,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/resolved.json",
+      "sha256": "52a639183e9ed3c541b90311a16d0968ed85cd7cb039c64d0df693f4cc43bbc1"
+    },
+    {
+      "bytes": 175165,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/ad1874d14a0a76749ee50cc399423347e1ad5f49db96a1a83853866f4bc5f30e/supervisor-request.json",
+      "sha256": "f0c53bec2dd271f2ca6fb54d28e43e317792e6389cb6cffd6b59a05f8238820c"
+    },
+    {
+      "bytes": 171329,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/forge-source.json",
+      "sha256": "d1dd4b67ec65eedbed9468ecc61cbd684d774f2504d82511ea4bdf6e9f823a5a"
+    },
+    {
+      "bytes": 150,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/ad1874d14a0a76749ee50cc399423347e1ad5f49db96a1a83853866f4bc5f30e/supervisor-terminal.json",
+      "sha256": "e3ce2139a8808b0c99d170adba2e21afd0da356f3784bb250bc45ed41c37348e"
+    },
+    {
+      "bytes": 3865,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1-media.json",
+      "sha256": "c51e08932cbd4e3aab0ec6bee2e0cc9a70bcfa55b77243262af453b5fd7687ef"
+    },
+    {
+      "bytes": 673600,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_000834.npz",
+      "sha256": "94b1e358af8f8d385b4b84e34cc78528499d627a9ffdf9ae16887077293f90fd"
+    },
+    {
+      "bytes": 534709,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_003334.npz",
+      "sha256": "0479401dc35618f4fcdede300376186f13717e6261088cfbf84c9dcb61516cd7"
+    },
+    {
+      "bytes": 682046,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_005834.npz",
+      "sha256": "8857ccc7c3d1d3a478fad9461549a13d1e65382e1bbc8e7074bf0982f2e1d38c"
+    },
+    {
+      "bytes": 681647,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_008334.npz",
+      "sha256": "89404a8dcf672903bab180fcba628adc408cb3379e245f6c7f6b32ae97d8efd8"
+    },
+    {
+      "bytes": 667941,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_010834.npz",
+      "sha256": "dd824e1cfa43e3d00c842ebd2f85ac1e6b4c56f10a72683def8e4ee693f7e613"
+    },
+    {
+      "bytes": 62719,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_012501.npz",
+      "sha256": "d2f45255f845a5d5733fc609bf6645a78d64134dd14943da55dfaf6f08501800"
+    },
+    {
+      "bytes": 173084,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_015001.npz",
+      "sha256": "87fd590e14487dbc0ec600a744d1e70426e7c4c1cf5be7538a5e17ac4c35fd96"
+    },
+    {
+      "bytes": 19827,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_017501.npz",
+      "sha256": "c0750bab99566b2bbb3ebdb04511d3154a55abdfe2fb41b7f78654f786a44bbf"
+    },
+    {
+      "bytes": 21372,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_020001.npz",
+      "sha256": "a3b12b4fd82b0064367e32a557ca3d7c3be779113884ea5761039bec4c5eb213"
+    },
+    {
+      "bytes": 513356,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1-goal.gif",
+      "sha256": "6e70906af5df22fb369de292955fe9c5a077a963f8174f99cf5645fb3ea42b4e"
+    },
+    {
+      "bytes": 7325,
+      "path": "/ml2/hypergan/pg-word-dimension-health-review-20261004/DIAGNOSIS.md",
+      "sha256": "7f74f3bdc73ed8a55cc0840991adc87c6e12a2efb8caa7018717f2dac2d99694"
+    },
+    {
+      "bytes": 27303,
+      "path": "/ml2/hypergan/pg-word-dimension-health-review-20261004/diagnosis.json",
+      "sha256": "e914ace15d8d65d587ea5518804c1e9dd8417f114ac166ef8ef34a69f7eea3cc"
+    }
+  ],
+  "input_bytes_changed": false,
+  "no_checkpoint_loaded": true,
+  "schema": "pg_atlas_word_retained_context_input_index_v1"
+}

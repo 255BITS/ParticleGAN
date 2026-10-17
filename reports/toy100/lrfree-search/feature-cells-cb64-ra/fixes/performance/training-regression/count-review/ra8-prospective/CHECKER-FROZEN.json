@@ -1,0 +1,13 @@
+{
+  "status": "FROZEN_CPU_ONLY_AUDITOR",
+  "files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/prepare_checker.py": "97e3b52bfcedf89e33de9f31511521442852d737b162fc596a3ce06815c63d70",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/audit_checkpoints.py": "2dbc740f3a81651173dd4b95a5601456953e542463893e15a313bbe36769b548",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/DERIVATION.json": "463cf1d31ad9a349b0597c77f2f35f0e228efec6749897fdc3ad202733e19e9c"
+  },
+  "original_checker": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra7-prospective/audit_checkpoints.py": "bbaaad0a8b37163b38818d4bbfb813559d78deae75c5a4cea2fdfe2a34bf1070"
+  },
+  "prospective_ready_sha256": "f2f117d650dbe8eca58c0313d07b661a25ad953bd6b3b30c99507510ca9e5949",
+  "lane_freeze_sha256": "1292ef86f6b16d8928923fda267fb9f1efc6d8ac746a1f091a01397e032a3cf3"
+}

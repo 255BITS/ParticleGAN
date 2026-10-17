@@ -1,0 +1,344 @@
+{
+  "all_raw_file_identities_before_media": {
+    "G16-checkpoint.pt": {
+      "attestation": "review_time_only",
+      "bytes": 525797,
+      "sha256": "b9ba6846da92c8c528f0709f1293532437ff842859c65c678b1dbabe39d584b4"
+    },
+    "G16.jsonl": {
+      "attestation": "published_original_source_card",
+      "bytes": 2110429,
+      "sha256": "df65bcdcead90fa8d2645a2541d5affddc4b4bb3b59245cfe39b5d689908420e"
+    },
+    "G64-checkpoint.pt": {
+      "attestation": "review_time_only",
+      "bytes": 518053,
+      "sha256": "ff4b6006a374ff3647f31907920d2d21eb7b89de6a93dddc70c2cd5c1039ebe7"
+    },
+    "G64.jsonl": {
+      "attestation": "published_original_source_card",
+      "bytes": 2110787,
+      "sha256": "4f8cc99c3323d0a918cc2b78d5d2c37bebfcb8d7e95343a87e5040b9d1cc127c"
+    },
+    "protocol.json": {
+      "attestation": "published_original_source_card",
+      "bytes": 10067,
+      "sha256": "f302530f82d9f0ff6ce28d7e6b38b3e547212c5313b7631813acbd7ee8f1bd3d"
+    },
+    "result.json": {
+      "attestation": "published_original_source_card",
+      "bytes": 57049,
+      "sha256": "f644810d02a8e004178463bdf3c6fa1fba9fce836be9699e5cbcd38ae0062a52"
+    },
+    "source.py": {
+      "attestation": "published_original_source_card",
+      "bytes": 24950,
+      "sha256": "85e23d03a3c8a583c2b928b024fa48b3c16a425364c64f0f92c03bb194d7adba"
+    }
+  },
+  "curves": {
+    "G16": [
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 0.0005141192814335227,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 0.0005141192814335227,
+        "served_source": "fast",
+        "step": 0
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 0.0005157925188541412,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 0.0005157925188541412,
+        "served_source": "fast",
+        "step": 1
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 0.00014636135892942548,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 0.00014636135892942548,
+        "served_source": "fast",
+        "step": 50
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 4.483586235437542e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 4.483586235437542e-05,
+        "served_source": "fast",
+        "step": 100
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 4.717870615422726e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 4.717870615422726e-05,
+        "served_source": "fast",
+        "step": 150
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 2.1085117623442784e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 2.1085117623442784e-05,
+        "served_source": "fast",
+        "step": 200
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.768894617271144e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.768894617271144e-05,
+        "served_source": "fast",
+        "step": 250
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.3724800737691112e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.3724800737691112e-05,
+        "served_source": "fast",
+        "step": 300
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.7884945918922313e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.7884945918922313e-05,
+        "served_source": "fast",
+        "step": 350
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.1181731679243967e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.1181731679243967e-05,
+        "served_source": "fast",
+        "step": 400
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.176340265374165e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.176340265374165e-05,
+        "served_source": "fast",
+        "step": 450
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.0215697329840623e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.0215697329840623e-05,
+        "served_source": "fast",
+        "step": 500
+      }
+    ],
+    "G64": [
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 0.0005141192814335227,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 0.0005141192814335227,
+        "served_source": "fast",
+        "step": 0
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 0.0005158475833013654,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 0.0005158475833013654,
+        "served_source": "fast",
+        "step": 1
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 0.0001420391781721264,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 0.0001420391781721264,
+        "served_source": "fast",
+        "step": 50
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 4.610594260157086e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 4.610594260157086e-05,
+        "served_source": "fast",
+        "step": 100
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 3.989458491560072e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 3.989458491560072e-05,
+        "served_source": "fast",
+        "step": 150
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.818881355575286e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.818881355575286e-05,
+        "served_source": "fast",
+        "step": 200
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.4791850844630972e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.4791850844630972e-05,
+        "served_source": "fast",
+        "step": 250
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.1492847988847643e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.1492847988847643e-05,
+        "served_source": "fast",
+        "step": 300
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 1.1521033229655586e-05,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 1.1521033229655586e-05,
+        "served_source": "fast",
+        "step": 350
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 8.858814908307977e-06,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 8.858814908307977e-06,
+        "served_source": "fast",
+        "step": 400
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 7.919661584310234e-06,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 7.919661584310234e-06,
+        "served_source": "fast",
+        "step": 450
+      },
+      {
+        "irreducible_population_error": 0.0225,
+        "live_excess_error": 8.308770702569745e-06,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only",
+        "served_excess_error": 8.308770702569745e-06,
+        "served_source": "fast",
+        "step": 500
+      }
+    ]
+  },
+  "head_sha": "e71265fd7b77ae2ab70ccbf8b7f0049c3d539b84",
+  "limits": [
+    "Relative fixed endpoint gate, not absolute fit or sustained convergence",
+    "G64 worse2.83% at100 retained",
+    "G64 processes4timesG examples per update; no equalcompute speedup",
+    "PublicDV12 private stream consumption can differ with batchshape",
+    "No intermediate prediction arrays retained; GIF should animate actual metrics only",
+    "Actual task gain0.0008224<0.001; no scientific continuation/defaultpromotion"
+  ],
+  "model_rescoring_during_review": false,
+  "native_training_updates_during_review": 0,
+  "raw_inputs": [
+    {
+      "attestation": "published_original_source_card",
+      "path": "/ml2/hypergan/routed-generator-batch-v2-artifacts-20261002/result.json",
+      "sha256": "f644810d02a8e004178463bdf3c6fa1fba9fce836be9699e5cbcd38ae0062a52"
+    },
+    {
+      "attestation": "published_original_source_card",
+      "path": "/ml2/hypergan/routed-generator-batch-v2-artifacts-20261002/G16.jsonl",
+      "sha256": "df65bcdcead90fa8d2645a2541d5affddc4b4bb3b59245cfe39b5d689908420e"
+    },
+    {
+      "attestation": "published_original_source_card",
+      "path": "/ml2/hypergan/routed-generator-batch-v2-artifacts-20261002/G64.jsonl",
+      "sha256": "4f8cc99c3323d0a918cc2b78d5d2c37bebfcb8d7e95343a87e5040b9d1cc127c"
+    },
+    {
+      "attestation": "published_original_source_card",
+      "path": "/ml2/hypergan/routed-generator-batch-v2-artifacts-20261002/source.py",
+      "sha256": "85e23d03a3c8a583c2b928b024fa48b3c16a425364c64f0f92c03bb194d7adba"
+    },
+    {
+      "attestation": "published_original_source_card",
+      "path": "/ml2/hypergan/routed-generator-batch-v2-artifacts-20261002/protocol.json",
+      "sha256": "f302530f82d9f0ff6ce28d7e6b38b3e547212c5313b7631813acbd7ee8f1bd3d"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/protocol.json",
+      "sha256": "5b15235646e42e9dfb76c41f413e3f2f3366298aab743cc192a34100da207163"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/result.json",
+      "sha256": "e25d979722a0ca91719f1166810f650680c3002133eb2b13282121c730088422"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/supervisor.json",
+      "sha256": "544ee4cb21630c77b1603d55bbeaa45459264c9bd7a10a2e7591298d638951eb"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/source-manifest.json",
+      "sha256": "d444001a7e8f09e8483e86593498688bf9d6969d75f6190ad661e13d2e9906bb"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/verification/starting-parity.json",
+      "sha256": "c0715aad189467a15296ac321f955de82931fa2044d1b14890746ae7986a8bba"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/verification/neutral-G16-replay.json",
+      "sha256": "2a7b9f56dbdb1c39fc342391ffe3201b7ad8f4b9064a0c78ece476f5bea654c1"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/verification/matched-caller.json",
+      "sha256": "caf4444f7bd3e19d2eea4bcb6f220a9599c1d3f31a2fca2b7afa002a35863e17"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/decoded-receipt.json",
+      "sha256": "438059634cf91ffd68065e1b9c7a13e3ecd64b0de8081beb6cbef6f180b44ce7"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/control_g16/decoded-176-004700.json",
+      "sha256": "ef3174dbf1eb19de2d8c3d574ad70dbea508704dd35261323c5e71910da1c949"
+    },
+    {
+      "attestation": "published_separate_real100_cohort",
+      "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/candidate_g64/decoded-176-004700.json",
+      "sha256": "80b72582cf48f65cfd8f9b1f6910d1c613f94f3cf70d17d03b324f100ac61675"
+    }
+  ],
+  "recommendation": "PRESERVE_AND_ADD",
+  "recommended_definition_tier": "4/5 bounded diagnostic",
+  "schema": "particlegan_pr236_independent_scientific_review_v1",
+  "scientific_original_toy_gate": "PASS",
+  "separate_real_transfer": "FAIL",
+  "source": {
+    "constants_identical": [
+      "STEPS",
+      "SECONDS",
+      "SEEDS",
+      "BASE_SHA"
+    ],
+    "historical_source_sha256": "85e23d03a3c8a583c2b928b024fa48b3c16a425364c64f0f92c03bb194d7adba",
+    "native_scientific_files_identical_original_cohort": 30,
+    "public_source_files_verified": 37,
+    "publication_scientifically_rerun": false,
+    "publication_source_sha256": "2481c62706b7cf846499c3c5d07f4e2cc82585efcc22d098368e571ff1fbb1ca",
+    "scientific_ast_nodes_identical": 26
+  }
+}

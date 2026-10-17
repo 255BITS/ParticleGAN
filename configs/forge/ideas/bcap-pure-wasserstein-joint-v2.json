@@ -1,0 +1,34 @@
+{
+  "api_changes": [
+    "GANLoss.joint_g_loss supplies both generator and encoder adversarial streams on joint hosts"
+  ],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Reusable pure BCAP recipe with constant Adam rates and moments",
+    "Adversarial loss: wasserstein",
+    "Explicit two-stream generator/encoder objective on joint hosts"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "bcap-pure-wasserstein-joint-v2",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Native Adam and fixed real/fake BCAP only. Task-owned auxiliary objectives and conditions remain in tasks. The relativistic update is unchanged; unpaired joint objectives reverse both critic streams.",
+  "parent": "bcap-pure-wasserstein-v1",
+  "prior_art": [
+    "bcap-pure-wasserstein-v1"
+  ],
+  "recipe_overrides": {
+    "loss": "wasserstein"
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

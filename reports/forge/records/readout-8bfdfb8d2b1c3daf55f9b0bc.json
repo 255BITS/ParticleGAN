@@ -1,0 +1,74 @@
+{
+  "attempt_ids": [
+    "299aba837ed24be8a61b0b48074fc7a1"
+  ],
+  "candidate_id": "forge-onboarding-anchor-ablation",
+  "candidate_revision": "e356a8bd7091ac1e130819a62c362fe3b40a5119a4c457793faa889abd9785c7",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "BCap passed the same fixed smoke and five quality tasks in this source/runtime cohort. K3P, KA2 and matched R1/R2 remain smoke-negative; this does not rank unmeasured quality or replace earlier protocol-specific evidence.",
+  "conclusion": "This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.07678461074829102, 'mean_abs': 0.10482493042945862}. One completed attempt cost 5.449001096 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.",
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Removing the public critic EMA-anchor term may weaken short-horizon adversarial movement; the fixed CPU smoke gate should reject a harmful ablation before larger tests.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "299aba837ed24be8a61b0b48074fc7a1",
+        "result_hash": "309f2bd4d11a850ecc4e4824a430d8414e94db85d29315e8cc54cd6c608fae05",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "publication": {
+    "kind": "compact_readout_projection",
+    "original_archive_member": "full-readouts/readout-8bfdfb8d2b1c3daf55f9b0bc.json",
+    "original_file_sha256": "c78c9bc806f0e4f0d249669383dc211198c587634c42c311cba5a1ea5c076a88",
+    "qualification_input": false
+  },
+  "qualification_reuse": false,
+  "record_id": "readout-8bfdfb8d2b1c3daf55f9b0bc",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/299aba837ed24be8a61b0b48074fc7a1.json"
+  },
+  "task_results": [
+    {
+      "_attempt_id": "299aba837ed24be8a61b0b48074fc7a1",
+      "compatibility_key": "fd4064877d42e26d026e075e8dbca9582c84eae83b82b9956e0dcb74d0412d4a",
+      "cost": {
+        "adapter_seconds": 0.3491256800480187,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 5.449001096014399,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.375064236985054,
+        "wall_seconds": 5.449001096014399
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.07678461074829102,
+        "mean_abs": 0.10482493042945862
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    }
+  ]
+}

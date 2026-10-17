@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "884aeb8501af26e14507462676cb6bf8cc03ce6434b18b2c4a0a45ae5757b4f1",
+  "kind": "actual_training_saved_images_gif",
+  "observation_count": 24,
+  "observations_sha256": "604251f7f2d0eddb411202b8d97053d7d85b742894a5196c20bc447e9f25eeba",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/ef8c8eeb03b64c47bc53cd3c1c51698f/observed-images.pt": "d49c7271d4afcc042611422426b0f3ed23be21e256888447b83dfe3d55295bda"
+  },
+  "task_id": "img_bars4"
+}

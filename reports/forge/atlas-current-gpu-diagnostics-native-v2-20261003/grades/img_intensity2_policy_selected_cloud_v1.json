@@ -1,0 +1,77 @@
+{
+  "grades": {
+    "img_intensity2_policy_selected_cloud_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.875,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 525,
+          "first_pass_step": 350,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 10,
+          "passing_suffix": 8,
+          "stable_from_seconds": null,
+          "stable_from_step": 425
+        },
+        "metrics": [
+          {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          },
+          {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.0,
+        "hq": 1.0,
+        "mean_rmse": 0.02307453751564026,
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "step": 600
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "raw_hash": "691693b2c1ec9dee7ae8ac5c2e9b07b0aea42b746b5ea22546cae89f9ac90568",
+  "schema_version": 1,
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "telemetry": {
+    "independent_grading_seconds": 0.7733605389948934,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 665030656
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}

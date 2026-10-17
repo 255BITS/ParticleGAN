@@ -1,0 +1,137 @@
+{
+  "schema": "particlegan_policy_family_search_v1",
+  "id": "policy-family-defaults-round3-v1",
+  "families": [
+    "atlas",
+    "e22"
+  ],
+  "seed": 24002,
+  "grid": {
+    "lr": [
+      0.0031875,
+      0.0053125
+    ],
+    "prior_lr_mult": [
+      1.0,
+      2.0
+    ]
+  },
+  "cases": [
+    {
+      "id": "image-develop-img_intensity2-source-transpose12",
+      "tier": 1,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-vector-two-broad",
+      "tier": 1,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-grid100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-rotated100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-staggered100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-vector-unequal-mass",
+      "tier": 2,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-vector-anisotropic",
+      "tier": 2,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "image-develop-img_bars4-source-transpose12",
+      "tier": 2,
+      "timeout_seconds": 180
+    }
+  ],
+  "backend": "cuda",
+  "frames": 9,
+  "candidate_budget_seconds": 5400,
+  "budget_seconds": 10336.011929200264,
+  "family_budget_seconds": {
+    "atlas": 5163.721507438924,
+    "e22": 5172.2904217613395
+  },
+  "export_grace_seconds": 120,
+  "stability": {
+    "confirmation_checks": 5,
+    "post_confirmation_hold_checks": 5,
+    "first_window_only": true,
+    "all_subsequent_primary_checks": true
+  },
+  "speed_ranking": false,
+  "default_adoption": false,
+  "representation_card": {
+    "path": "reports/forge/family-winner-round1/policy-representation.json",
+    "sha256": "729f084b5e7b076cfb5d06d65810cec1b823f5df0ebe645767d8cd43fcb74c38"
+  },
+  "rationale": "One new finite intermediate LR/prior-rate grid: .75x and1.25x the actual .00425 public preset LR, crossed with prior multiplier1 or2. Saved high/lower grids show a nonmonotonic acquisition\u2013retention bracket: half-rate prior1 acquires too late; both default-rate settings acquire then lose a faithful image hold; high1.5x/prior2 retained intensity but later failed projected Gaussian shape. These four new settings test whether an intermediate rate retains earlier acquisition. No improvement is promised and no optimizer cause is inferred. Seed, cases, full horizons, gate, serving and hold stay unchanged; no old failed knob pair is repeated.",
+  "timeout_rationale": "Original full CPU1 API acquisition wall times on the historical 5d75e655 source were 1748.815,1720.797,1701.546s for grid/rotated/staggered; 21.605,22.684,23.453s for selected vectors; 11.998,12.243s for selected images. New2100s native caps exceed those observed original full CPU horizons;180s smaller-host caps permit substantial device/contention overhead. These old times are context, not current GPU speed estimates or convergence-time reuse. Original steps/batches/scoring/draw counts remain unchanged; time caps never adapt after failure.",
+  "budget_scope": "Continuation of the SAME original10800s policy search cap. Debits retain the unsupported-CLI setup, completed high-rate grid and completed baseline/half-rate grid with exact per-family measured costs. The intermediate grid receives only the unspent disjoint quotas. No borrowing, timeout/gate relaxation, continuation of failed attempts or new paid allowance.",
+  "capacity_scope": "Current CPU public restored selected/served snapshot witnesses support the exact parameterization and numerical tolerance with zero ordinary optimizer updates. They are necessary capacity evidence, not trained quality/stability or guaranteed GPU convergence. Failed alternatives and original source identities remain separately retained.",
+  "execution_repair": {
+    "kind": "unsupported_cli_flag_removed",
+    "original_study_id": "policy-family-defaults-round1-v1",
+    "original_source_commit": "563cb337937a05494a1577376e5740f0aa2e2777",
+    "original_study_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/study.json",
+    "original_study_sha256": "bba8374f395d4c8040c87f8db0e83995b3f0e7f7e583d47f4294148d794493b9",
+    "original_paid_setup_seconds": 6.16541115893051,
+    "original_optimizer_updates": 0,
+    "original_scientific_status": "UNMEASURED",
+    "repair": "Use supported child CLI arguments; require actual case protocol seed24002 in preflight. Family/knobs/gates/horizons/samplers and protected source bindings are unchanged.",
+    "automatic_retry": false,
+    "round_paid_cap_including_original_setup_seconds": 10800
+  },
+  "parent_results": {
+    "study_id": "policy-family-defaults-round2-v1",
+    "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+    "combined_path": "/ml2/hypergan/forge-policy-family-round2-20261002/current-policy-family-results.json",
+    "combined_sha256": "52b9b85f9c6e4139c6a51ad7dfa5641c241fa822ea2bd70877543616ebf8351c",
+    "archive_manifest": "reports/forge/family-winner-round1/policy-round2-archive.json",
+    "paid_seconds": 189.03142790216953,
+    "family_paid_seconds": {
+      "atlas": 93.26545849721879,
+      "e22": 95.76596940495074
+    },
+    "earlier_parent_results": {
+      "study_id": "policy-family-defaults-round1-cli-recovery-v2",
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "combined_path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/current-policy-family-results.json",
+      "combined_sha256": "62079914653b9c27efec277c2ce4a57c50b42c856bb25f827a46af16b1f3cd3f",
+      "archive_manifest": "reports/forge/family-winner-round1/policy-round1-archive.json",
+      "paid_seconds": 268.79123173863627,
+      "family_paid_seconds": {
+        "atlas": 136.84762290492654,
+        "e22": 131.94360883370973
+      },
+      "original_paid_cap_seconds": 10800,
+      "original_cli_setup_paid_seconds": 6.16541115893051,
+      "remaining_paid_seconds": 10525.043357102433
+    },
+    "original_paid_cap_seconds": 10800,
+    "total_prior_paid_seconds": 463.9880707997363,
+    "remaining_paid_seconds": 10336.011929200264
+  },
+  "source_cohort_scope": "New coordinator source admits exactly one additional frozen two-rate profile; configuration counts and strict complete-receipt/cost controls remain. Protected public trainer/presets, API cases/providers, gates and capacity bindings retain the previous scientific bytes. Report-only publisher changes add team-visible media without changing execution. Earlier trained passes do not fill this cohort; historical pattern comparisons remain diagnostic.",
+  "ordering_rationale": "Keep original case order: image fidelity smoke before broad-mixture shape smoke, then grid/rotated/staggered native quality and original unequal-mass/anisotropic/bar quality. Deeper cases remain required UNKNOWN after early failure.",
+  "observed_failure_rationale": {
+    "atlas_default_prior1": "Intensity acquires375 then fails475: HQ.41015625, finite-template TV.58984375, modes1; later terminal originalPASS does not erase studyFAIL.",
+    "atlas_default_prior2": "Intensity acquires375 then fails425: HQ.791015625 and finite-templateTV.2099609375; later terminal originalPASS.",
+    "half_rate_prior1": "Both families acquire525, leaving3hold checks rather than required5.",
+    "half_rate_prior2_family_divergence": "E22 saved reopen event at360 and first acquisition600/0hold yields originalPASS/studyINCOMPLETE; Atlas no reopen and endpoint HQ.625/modes1 yields originalFAIL. Initial clouds match through350 and diverge375; no counterfactual causal estimate or complete algorithm equivalence claimed."
+  }
+}

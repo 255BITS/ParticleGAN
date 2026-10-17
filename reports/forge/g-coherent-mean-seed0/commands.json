@@ -1,0 +1,115 @@
+{
+  "interpreter": "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+  "coordinator_argv": [
+    "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+    "-u",
+    "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/coordinate.py"
+  ],
+  "per_attempt": [
+    {
+      "attempt_id": "2fd62fa187b24ca0a04d44ae23ea9f2e",
+      "supervisor_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.worker",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/2fd62fa187b24ca0a04d44ae23ea9f2e/request.json"
+      ],
+      "training_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.runtime",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/2fd62fa187b24ca0a04d44ae23ea9f2e/request.json"
+      ],
+      "grading_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.evaluate",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/2fd62fa187b24ca0a04d44ae23ea9f2e/request.json"
+      ],
+      "working_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/snapshots/573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "request_sha256": "38f1cb808ab72c373a2996bee950a7891cc63dcaa882e2dab9d6db66069813a7"
+    },
+    {
+      "attempt_id": "bfe18c8581014733a953f4ddfef4f8f5",
+      "supervisor_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.worker",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/bfe18c8581014733a953f4ddfef4f8f5/request.json"
+      ],
+      "training_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.runtime",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/bfe18c8581014733a953f4ddfef4f8f5/request.json"
+      ],
+      "grading_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.evaluate",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/bfe18c8581014733a953f4ddfef4f8f5/request.json"
+      ],
+      "working_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/snapshots/573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "request_sha256": "879853cb64eddc6cda980c566eebe2d2b2d5673fdb1e26447d649947a2470f86"
+    },
+    {
+      "attempt_id": "99b65cb02a794fe89633be8907139909",
+      "supervisor_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.worker",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/99b65cb02a794fe89633be8907139909/request.json"
+      ],
+      "training_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.runtime",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/99b65cb02a794fe89633be8907139909/request.json"
+      ],
+      "grading_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.evaluate",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-baseline-20261014/99b65cb02a794fe89633be8907139909/request.json"
+      ],
+      "working_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/snapshots/573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "request_sha256": "d4c5a084c94ac4c0eb2890d5d45fa0d15da3f4f09365d2d57ec439d077ce16d6"
+    },
+    {
+      "attempt_id": "63bae83b0c5e40dda401e0eeca967fe8",
+      "supervisor_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.worker",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/63bae83b0c5e40dda401e0eeca967fe8/request.json"
+      ],
+      "training_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.runtime",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/63bae83b0c5e40dda401e0eeca967fe8/request.json"
+      ],
+      "grading_argv": [
+        "/ml2/codex-storage/future-workspaces/2026-10-11/task-065316dc-aa48-4ba6-ae3b-0059df3ab4a3/artifacts/cohort-research-runtime/venv/bin/python",
+        "-u",
+        "-m",
+        "experiments.forge.evaluate",
+        "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/g-coherence-candidate-20261014/63bae83b0c5e40dda401e0eeca967fe8/request.json"
+      ],
+      "working_directory": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/gradient-response-20261014/queue/snapshots/573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+      "request_sha256": "82ebdc4a2163176811db61cf7257284182c1935d7f395cc13e271c3f6161558d"
+    }
+  ],
+  "provenance": "Exact argv reconstructed from the executed coordinator/Queue/worker code and saved requests; no original shell command transcript is claimed."
+}

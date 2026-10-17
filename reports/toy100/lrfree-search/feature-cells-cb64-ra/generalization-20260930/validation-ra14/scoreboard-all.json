@@ -1,0 +1,85 @@
+{
+  "status": "ERROR",
+  "group": "all",
+  "started": 1790807443.477629,
+  "results": [
+    {
+      "kind": "screen",
+      "task": "mode_hold",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "img_intensity2",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "img_blobs4",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "img_bars4",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "vector_unequal_mass",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "img_stripes2",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "vector_two_broad",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "vector_unequal_width",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "vector_anisotropic",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "vector_overlap",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "vector_spiral",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "ring_shift",
+      "status": "PASS"
+    },
+    {
+      "kind": "screen",
+      "task": "stationary",
+      "status": "PASS"
+    }
+  ],
+  "integrity": {
+    "status": "VALID",
+    "files": 103,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de"
+  },
+  "current": {
+    "kind": "moving",
+    "task": "grid100"
+  },
+  "error": "RuntimeError('run_moving.py grid100 failed; read /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/moving-grid100.log')",
+  "completed": 1790809827.9620697
+}

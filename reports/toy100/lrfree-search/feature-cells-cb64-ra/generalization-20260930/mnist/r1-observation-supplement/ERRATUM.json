@@ -1,0 +1,12 @@
+{
+  "status": "PROSE_CORRECTION_WITH_ORIGINAL_PRESERVED",
+  "original_report": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/REPORT.md",
+  "original_report_sha256": "9607d053d0f0c368935e40c48715c9107b20407ff7f8026706de2f65e904ae3c",
+  "original_closure_sha256": "39f50d2f54e04c06ad0bcd441b6057295bc90a2944fb5c051d45c8baf087716c",
+  "correct": "First MNIST critic guard clipping is at completed update201.",
+  "incorrect_prose": "First clipping at update202.",
+  "authoritative_raw_analysis": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/analysis.json",
+  "authoritative_raw_analysis_sha256": "35f4aa07d3445e72b235a065b8c113729e5ec7838905ece574d8c00e6421bae8",
+  "confirmation": "Raw analysis already correctly recorded201. The aggregate threshold streak begins at begin192; causal interpretation is unchanged.",
+  "source_mutations": 0
+}

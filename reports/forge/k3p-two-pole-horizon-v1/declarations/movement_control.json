@@ -1,0 +1,783 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.d_lr_mult=1.0",
+    "Recipe.lr=0.006375",
+    "Recipe.prior_lr_mult=1.0",
+    "Recipe.reg_coeff=1.0"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "configuration_id": "01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+  "decision_contract": {
+    "candidate_binding_sha256": "a26b31628f0fafd4bfcf0771397c3da0a48b2c62f3b076118d3bd9f013746c6a",
+    "competing_explanation": "Additional execution may only extend a low-force plateau. Stretching the whole declared schedule changes LR/noise windows and LR-dependent critic behavior; longer execution can activate the existing guard after200. No single-factor or full-family qualification claim follows.",
+    "control": {
+      "binding_sha256": "e730b9330703a940e68b66079af7a3c5c9d1a7d5e8bf9370329f161a3c8d2091",
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "task_map": {
+        "two_pole_800_schedule800_diagnostic_v1": "two_pole",
+        "two_pole_800_schedule80_diagnostic_v1": "two_pole"
+      }
+    },
+    "falsifier": {
+      "metric": "mean_abs",
+      "op": "<",
+      "phase": "final",
+      "task_id": "two_pole_800_schedule800_diagnostic_v1",
+      "threshold": 0.3
+    },
+    "prediction": {
+      "metric": "mean_abs",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "two_pole_800_schedule800_diagnostic_v1",
+      "threshold": 0.3
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_revision": "7c9ea7c422fdacc4f9bbee35883893cf0d6abb2693341b515598e52b8a47cfa5",
+          "id": "k3p-coeff170-cap1",
+          "source_digest": "4ff32ae9e41adf0814fbf9a35bb81376b1ff7940ca9a497a43bf4526722561ef"
+        },
+        "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+        "selector": [],
+        "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed",
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d",
+          "study": "k3p-global-tier1-v3"
+        },
+        "path": "reports/forge/k3p-global-tier1-v3/summary.json",
+        "selector": [],
+        "sha256": "1e45b4e4c50b9ce8a0bd2ce17f03d145983e91eda93e7bf0c645d2b6aaba03e5",
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "id": "k3p-direct-rate-analysis-v1",
+          "source_digest": "8778d4c7fc0d714b7b571dccabdfbd08093625e645b97519ea009f2b4b66f48d"
+        },
+        "path": "reports/forge/k3p-global-tier1-v3/direct-rate-analysis.json",
+        "selector": [],
+        "sha256": "c66f70e77c7eef5bfab2000d6d1155fbd6400d138b70b1f5dfe44f32f77247d3",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 1200,
+      "candidate_budget_seconds": 600,
+      "execution_backend": "cpu",
+      "jobs_sha256": "c33239e85f0d4f5da17e05a93686dd654124452839d3927ac1aaea787b6917bf",
+      "max_rounds": 1,
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_cohort_sha256": "08c253c372ec69a95d34fbb64fa0ee669b960109584356932cc7886f2efd53e5",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "task_ids": [
+        "two_pole_800_schedule800_diagnostic_v1",
+        "two_pole_800_schedule80_diagnostic_v1"
+      ],
+      "through_tier": 1,
+      "view": "k3p_two_pole_horizon"
+    },
+    "status": "ready",
+    "substantive_delta": [
+      {
+        "after": {
+          "absent": true
+        },
+        "before": true,
+        "path": [
+          "budget",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "absent"
+        ]
+      },
+      {
+        "after": [
+          80,
+          200,
+          400,
+          800
+        ],
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "checkpoints"
+        ]
+      },
+      {
+        "after": "two_pole_force_v1",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "kind"
+        ]
+      },
+      {
+        "after": 80,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "prefix_horizon"
+        ]
+      },
+      {
+        "after": 1,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "schema_version"
+        ]
+      },
+      {
+        "after": 800,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "execution",
+          "original_schedule_horizon"
+        ]
+      },
+      {
+        "after": 800,
+        "before": 80,
+        "path": [
+          "budget",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "execution",
+          "steps"
+        ]
+      },
+      {
+        "after": {
+          "absent": true
+        },
+        "before": true,
+        "path": [
+          "budget",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "absent"
+        ]
+      },
+      {
+        "after": [
+          80,
+          200,
+          400,
+          800
+        ],
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "checkpoints"
+        ]
+      },
+      {
+        "after": "two_pole_force_v1",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "kind"
+        ]
+      },
+      {
+        "after": 80,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "prefix_horizon"
+        ]
+      },
+      {
+        "after": 1,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "execution",
+          "horizon_diagnostic",
+          "schema_version"
+        ]
+      },
+      {
+        "after": 80,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "execution",
+          "original_schedule_horizon"
+        ]
+      },
+      {
+        "after": 800,
+        "before": 80,
+        "path": [
+          "budget",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "execution",
+          "steps"
+        ]
+      },
+      {
+        "after": "bb0ef441a18b71ca9aef0781bc4f0600f0ed320e2dfbb96042484e21ebf33c6c",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "evaluation",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "sources",
+          "reports/forge/k3p-two-pole-horizon-v1/prepare.py"
+        ]
+      },
+      {
+        "after": "a09e93c791c5b9c4dc6145ea3483b4e97ad8707aabfc46215713303e70924341",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "evaluation",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "sources",
+          "reports/forge/k3p-two-pole-horizon-v1/run.py"
+        ]
+      },
+      {
+        "after": "bb0ef441a18b71ca9aef0781bc4f0600f0ed320e2dfbb96042484e21ebf33c6c",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "evaluation",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "sources",
+          "reports/forge/k3p-two-pole-horizon-v1/prepare.py"
+        ]
+      },
+      {
+        "after": "a09e93c791c5b9c4dc6145ea3483b4e97ad8707aabfc46215713303e70924341",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "evaluation",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "sources",
+          "reports/forge/k3p-two-pole-horizon-v1/run.py"
+        ]
+      },
+      {
+        "after": {
+          "absent": true
+        },
+        "before": true,
+        "path": [
+          "host",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "absent"
+        ]
+      },
+      {
+        "after": [
+          80,
+          200,
+          400,
+          800
+        ],
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "checkpoints"
+        ]
+      },
+      {
+        "after": "two_pole_force_v1",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "kind"
+        ]
+      },
+      {
+        "after": 80,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "prefix_horizon"
+        ]
+      },
+      {
+        "after": 1,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "schema_version"
+        ]
+      },
+      {
+        "after": "public_recipe_with_explicit_diagnostic_horizon",
+        "before": "public_recipe_with_frozen_host_horizon",
+        "path": [
+          "host",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "adapter_parameters",
+          "schedule_policy"
+        ]
+      },
+      {
+        "after": 800,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "bound",
+          "definition",
+          "schedule_horizon"
+        ]
+      },
+      {
+        "after": 800,
+        "before": 80,
+        "path": [
+          "host",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "bound",
+          "definition",
+          "steps"
+        ]
+      },
+      {
+        "after": {
+          "absent": true
+        },
+        "before": true,
+        "path": [
+          "host",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "absent"
+        ]
+      },
+      {
+        "after": [
+          80,
+          200,
+          400,
+          800
+        ],
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "checkpoints"
+        ]
+      },
+      {
+        "after": "two_pole_force_v1",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "kind"
+        ]
+      },
+      {
+        "after": 80,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "prefix_horizon"
+        ]
+      },
+      {
+        "after": 1,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "adapter_parameters",
+          "horizon_diagnostic",
+          "schema_version"
+        ]
+      },
+      {
+        "after": "public_recipe_with_explicit_diagnostic_horizon",
+        "before": "public_recipe_with_frozen_host_horizon",
+        "path": [
+          "host",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "adapter_parameters",
+          "schedule_policy"
+        ]
+      },
+      {
+        "after": 80,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "bound",
+          "definition",
+          "schedule_horizon"
+        ]
+      },
+      {
+        "after": 800,
+        "before": 80,
+        "path": [
+          "host",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "bound",
+          "definition",
+          "steps"
+        ]
+      },
+      {
+        "after": 800,
+        "before": 80,
+        "path": [
+          "recipe",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "total_steps"
+        ]
+      },
+      {
+        "after": "5abbea9d48380d6d952504185357959000a045862917b944d6ce15ec51acb9bc",
+        "before": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+        "path": [
+          "task_identity",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "evaluation"
+        ]
+      },
+      {
+        "after": "34ac07bf77f85e4916fcef2a3d1963d6485143903ba7cfe007204781f1b1df5e",
+        "before": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83",
+        "path": [
+          "task_identity",
+          "two_pole_800_schedule800_diagnostic_v1",
+          "execution"
+        ]
+      },
+      {
+        "after": "5abbea9d48380d6d952504185357959000a045862917b944d6ce15ec51acb9bc",
+        "before": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+        "path": [
+          "task_identity",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "evaluation"
+        ]
+      },
+      {
+        "after": "e2b2b12ec98df5d12e9f91a4c933892cef262056939543f9269a903afdb60552",
+        "before": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83",
+        "path": [
+          "task_identity",
+          "two_pole_800_schedule80_diagnostic_v1",
+          "execution"
+        ]
+      }
+    ],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "diagnostic_ancestor": {
+    "qualification_reuse": false,
+    "receipt": {
+      "bytes": 40177,
+      "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+      "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+    },
+    "use": "motivation_only"
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+  "id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+  "lifecycle": "proposed",
+  "mechanism_class": "floor_constant",
+  "mechanism_rationale": "Explicit activation of the already implemented positive critic input-noise control, within the existing K3P family. This crosses the clean parent's activation boundary and is declared as a structural successor rather than disguised as a strict numerical search. No optimizer, penalty kernel or GAN technique is added.",
+  "parent": "k3p-global-input-noise-v1",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_art": [
+    "reports/forge/configuration-search/k3p-global-tier1-v2.json",
+    "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json"
+  ],
+  "recipe_overrides": {
+    "amsgrad": false,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "ema_decay": 0.995,
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.5,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.006375,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_lr_mult": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "table_release_rule": "any"
+  },
+  "recipe_scope": "global_existing_settings_task_owned_conditions_only",
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "resolved_configuration_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.5,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.006375,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 1.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 7000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "schema_version": 2,
+  "search_report": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+  "search_study_id": "k3p-global-tier1-v3",
+  "trainer_family": "k3p"
+}

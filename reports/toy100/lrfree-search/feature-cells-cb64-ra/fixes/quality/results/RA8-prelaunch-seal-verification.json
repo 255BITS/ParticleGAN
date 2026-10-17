@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-30T07:41:58.429184+00:00",
+  "authoritative_cpu_seals": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/independent-source/FINAL-FROZEN.json": "1a22c732f05e27805b26af28d322c690708b7cbf544d1965c72b425e02c39488",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/integration-contract/FROZEN.json": "4e54760c015e0e6536b8339ff84b2873b03d6918773f297c863a27825b96f1ea"
+  },
+  "root_ready_sha256": "f2f117d650dbe8eca58c0313d07b661a25ad953bd6b3b30c99507510ca9e5949",
+  "lane_source_freeze_sha256": "1292ef86f6b16d8928923fda267fb9f1efc6d8ac746a1f091a01397e032a3cf3",
+  "checked_hashes": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/independent-source/FINAL-FROZEN.json": 131,
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/integration-contract/FROZEN.json": 74,
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/READY.json": 54,
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/source-freeze.json": 144
+  },
+  "numerical_quality_verdict": null,
+  "frozen_sources_modified": false
+}

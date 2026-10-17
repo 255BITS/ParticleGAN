@@ -1,0 +1,167 @@
+{
+  "candidate_id": "k3p",
+  "candidate_revision": "87e0ea7906b4c59c4209ed43e45c2b204fe779b17b78b048264ea0e928812cb7",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "k3p-toy-img_intensity2",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3p-eb1183895ce1",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 24.510229282081127,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_intensity2/result.json",
+            "artifact_sha256": "b8956714ff6082879989c939947452281f6d9ddab4ed0d7296261f4a44f52792",
+            "id": "k3p-toy-img_intensity2",
+            "snapshot": "results/k3p-toy-img_intensity2.json.gz",
+            "snapshot_sha256": "3e62e45d26ab06ba753ea874e713523cfdfb058f8c2deb2e23ac79c7e7ebdbae"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-img_intensity2/result.json",
+        "artifact_sha256": "b8956714ff6082879989c939947452281f6d9ddab4ed0d7296261f4a44f52792",
+        "candidate": "k3p",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "k3p-toy-img_intensity2",
+        "kind": "toy",
+        "live": {
+          "distribution_tv": 0.0,
+          "hq": 1.0,
+          "mean_rmse": 0.03273952752351761,
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "modes": 2,
+          "quality_mode_fractions": [
+            0.5,
+            0.5
+          ]
+        },
+        "raw_status": "PASS",
+        "seconds": 24.510229282081127,
+        "snapshot": "results/k3p-toy-img_intensity2.json.gz",
+        "snapshot_sha256": "3e62e45d26ab06ba753ea874e713523cfdfb058f8c2deb2e23ac79c7e7ebdbae",
+        "task": "img_intensity2",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.9166666666666666,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 22.125435212859884,
+            "confirmed_step": 550,
+            "first_pass_step": 375,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 9,
+            "passing_suffix": 7,
+            "stable_from_seconds": 18.155728393932804,
+            "stable_from_step": 450
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.09999999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 1.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "img_intensity2"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "file_count": 11,
+  "files": [
+    {
+      "bytes": 424435,
+      "path": "/ml2/hypergan/pg-grid100-output-kernel-endpoint-supervised-v2-20261003/endpoint/primary-pairs.npz",
+      "sha256": "b239ff21f73bae071f8e13b74ab4b8d5623da9df69b2f7251f03910aeb120809"
+    },
+    {
+      "bytes": 2116989,
+      "path": "/ml2/hypergan/pg-grid100-output-kernel-endpoint-supervised-v2-20261003/endpoint/holdout-pairs.npz",
+      "sha256": "ae22cb45ba8a5e55dbd49392de850bbc6610dfb42b3c33514efea9aefe51fd7c"
+    },
+    {
+      "bytes": 1804,
+      "path": "/ml2/hypergan/pg-grid100-output-kernel-endpoint-supervised-v2-20261003/cost.json",
+      "sha256": "de52fa367da529532718ff4666eaf467618095fb09e58929685a98305cb14114"
+    },
+    {
+      "bytes": 355384,
+      "path": "/ml2/hypergan/pg-grid100-output-kernel-endpoint-supervised-v2-20261003/study.json",
+      "sha256": "e451c447e7806faf2693dc24c0120c033d9dee8c20acda77605e801ffcd593e0"
+    },
+    {
+      "bytes": 359746,
+      "path": "/ml2/hypergan/pg-grid100-output-kernel-endpoint-supervised-v2-20261003/resolved.json",
+      "sha256": "f4b3daa1b532413a4fce36093c7a3ad98e2be132fbe9e52ca61d5499e5e54481"
+    },
+    {
+      "bytes": 184673,
+      "path": "/ml2/hypergan/pg-grid100-output-kernel-diagnostic-v2-20261003/protocol.json",
+      "sha256": "9626b5c39966d425dd49422069c5f4d80040f0a7afd5a9f24fd1926bbdf03257"
+    },
+    {
+      "bytes": 25812,
+      "path": "/ml2/hypergan/pg-grid100-output-kernel-diagnostic-v2-20261003/run_grid100_output_kernel.py",
+      "sha256": "596a30fa791297c000037c9b8e8bd3971d45878fe16775755119057f7e6ec5fd"
+    },
+    {
+      "bytes": 26049,
+      "path": "/ml2/hypergan/pg-grid100-output-kernel-supervisor-v2-20261003/run_supervised.py",
+      "sha256": "d2a3ed322577e8d4e68d7f69632d0aab8903508003cef4e8c334f10a0541e5b2"
+    },
+    {
+      "bytes": 352990,
+      "path": "/ml2/hypergan/.pg-grid100-output-kernel-endpoint-supervised-v2-20261003.endpoint-supervision.json",
+      "sha256": "c6969c06a184b8f9710f4ba4c055d57364567f726e7231de0a052bc10ccc4d8b"
+    },
+    {
+      "bytes": 171296,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/06c4f8b86e643a82592b8ac11b1ba2f3ab809f3addb95f6bb9c4da79ffc75c1b/supervisor-request.json",
+      "sha256": "51c604161cecf01b1ba8c88245b7903f193c6a249c0fc777411e76a6d8eea41f"
+    },
+    {
+      "bytes": 150,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/06c4f8b86e643a82592b8ac11b1ba2f3ab809f3addb95f6bb9c4da79ffc75c1b/supervisor-terminal.json",
+      "sha256": "c059e7e4f1e812802e565bd45ab4138b69bfa7d89ffd5d851bcc9ade193927be"
+    }
+  ],
+  "qualification_input": false,
+  "raw_files_changed": false,
+  "schema": "pg_grid100_endpoint_public_inputs_v1"
+}

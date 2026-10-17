@@ -1,0 +1,235 @@
+{
+  "campaign_ceiling_seconds": 293400,
+  "configuration_count": 6,
+  "cpu_threads": 1,
+  "families": [
+    {
+      "campaign_ceiling_seconds": 97800,
+      "family": "k3p",
+      "grouped_job_ceiling_seconds": 90600,
+      "nominal_absolute_prior_base_lr": 0.0012,
+      "rates": [
+        0.00425,
+        0.006375
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "spec": "configs/forge/searches/k3p-global-repair-rates-v1.json",
+      "spec_sha256": "732b4cf9c855a2321cd88b0ac48eb65de499713baf09d21a9b16d6fa787ea499",
+      "study": "k3p-global-repair-rates-v1",
+      "trials": [
+        {
+          "candidate": "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+          "candidate_revision": "1a9eb1831acf7de8a0a96d1a2db0fc239b9836d19cfaec2986937cb0cd00e7ed",
+          "configuration_id": "370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+          "decision_status": "READY",
+          "scientific_signature": "4fc1a64b848f20430688512b62ddb8705bc09b8024431818a0be15dcb342b7f9",
+          "settings": {
+            "lr": 0.00425,
+            "prior_lr_mult": 0.28235294117647053
+          },
+          "task_count": 26
+        },
+        {
+          "candidate": "k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d",
+          "candidate_revision": "f415e58283e06eaf2679a31dbf0317b69bda8fd3e1a880e62209ac9318f1eaf8",
+          "configuration_id": "9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d",
+          "decision_status": "READY",
+          "scientific_signature": "68d167ec98f16171e97254566e9a7ec8ef69b790c65b1ce1539c933771f8ff36",
+          "settings": {
+            "lr": 0.006375,
+            "prior_lr_mult": 0.18823529411764706
+          },
+          "task_count": 26
+        }
+      ]
+    },
+    {
+      "campaign_ceiling_seconds": 97800,
+      "family": "ka2",
+      "grouped_job_ceiling_seconds": 90600,
+      "nominal_absolute_prior_base_lr": 6e-05,
+      "rates": [
+        0.00425,
+        0.006375
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "spec": "configs/forge/searches/ka2-global-repair-rates-v1.json",
+      "spec_sha256": "580dee185562a835f2e60e051896b55df9e0ce8eedd58d4d89b97aa9952ba1a2",
+      "study": "ka2-global-repair-rates-v1",
+      "trials": [
+        {
+          "candidate": "ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca",
+          "candidate_revision": "0cb6ee2042006b122ef7c2c91b9ecdc74b703aa8ee51ac3e36a5164abde58a98",
+          "configuration_id": "4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca",
+          "decision_status": "READY",
+          "scientific_signature": "e2057e08f545c402d0e3cdef5cec3c939ca66e44715196403c26739da5e148e2",
+          "settings": {
+            "lr": 0.006375,
+            "prior_lr_mult": 0.009411764705882354
+          },
+          "task_count": 26
+        },
+        {
+          "candidate": "ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4",
+          "candidate_revision": "8ff7b28082062dbb985e5b9ceb2f5cda878c7afc57ca55b9b00221e5dd2e80e3",
+          "configuration_id": "8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4",
+          "decision_status": "READY",
+          "scientific_signature": "e0b7bbdbe85f752a98c941754a4aa5733ae0fc8ef2bdc0c42b80b2f2d5d4ae48",
+          "settings": {
+            "lr": 0.00425,
+            "prior_lr_mult": 0.014117647058823528
+          },
+          "task_count": 26
+        }
+      ]
+    },
+    {
+      "campaign_ceiling_seconds": 97800,
+      "family": "r1r2",
+      "grouped_job_ceiling_seconds": 90600,
+      "nominal_absolute_prior_base_lr": 0.0024,
+      "rates": [
+        0.006375,
+        0.0085
+      ],
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        }
+      },
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "spec": "configs/forge/searches/r1r2-global-repair-rates-v1.json",
+      "spec_sha256": "73fc3c0539467a555ad38aeacd41d1c43afff87f5fbdb547997f119aaf17345c",
+      "study": "r1r2-global-repair-rates-v1",
+      "trials": [
+        {
+          "candidate": "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+          "candidate_revision": "98d01c8b382226c46c312202c5a952ad5d37355192778c149090a03b8fd17bfc",
+          "configuration_id": "724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+          "decision_status": "READY",
+          "scientific_signature": "448784061165c02a4cc7996d6e2f088ec6fb09432712c0bacf0b25d2536b724f",
+          "settings": {
+            "lr": 0.0085,
+            "prior_lr_mult": 0.28235294117647053
+          },
+          "task_count": 26
+        },
+        {
+          "candidate": "r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e",
+          "candidate_revision": "ecd7497dc47ac901328a0e28a32d2657cf2ce0601db5690c629b1f33a6626d45",
+          "configuration_id": "f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e",
+          "decision_status": "READY",
+          "scientific_signature": "e2ec2b37b12cc74284246be7defef0ec7543797ffe4d18f3eb430bd12a4a97b7",
+          "settings": {
+            "lr": 0.006375,
+            "prior_lr_mult": 0.3764705882352941
+          },
+          "task_count": 26
+        }
+      ]
+    }
+  ],
+  "gpu": 0,
+  "grouped_job_ceiling_seconds": 271800,
+  "limits": "Six complete global configurations, no per-task recipe override, new technique/objective/architecture, seed study, gate weakening, prior-only first-gate twins, scientific repeats or automatic further paid round. Ordinary failures leave later cells unmeasured.",
+  "schema_version": 1,
+  "scientific_python_executable": "/usr/bin/python",
+  "scope": "bounded_global_numeric_search",
+  "seed": 0,
+  "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+  "workers": 1
+}

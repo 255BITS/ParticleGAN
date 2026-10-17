@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "family-defaults-round1-v1",
+  "based_on_develop": "83b2d96f3f042c8c4f16d020d081a07934f64822",
+  "goal": "One shared config per family passes all24 discriminator_stability requirements; best observed partials remain research candidates.",
+  "studies": [
+    "bcap-family-defaults-round1-v1",
+    "k3p-family-defaults-round1-v1",
+    "ka2-family-defaults-round1-v1",
+    "r1r2-modern-family-round1-v1",
+    "release07-gan-v3-mog-family-defaults-round1-v1"
+  ],
+  "family_order": [
+    "bcap",
+    "k3p",
+    "ka2",
+    "r1r2",
+    "release07-gan-v3-mog"
+  ],
+  "config_order": "configuration content hash ascending within each declared family",
+  "declared_configs": 28,
+  "required_denominator_by_tier": [
+    3,
+    19,
+    2
+  ],
+  "worst_case_campaign_reservation_seconds": 1234800.0,
+  "paid_execution_stop_seconds": 10800,
+  "unmeasured_after_stop": "UNKNOWN; comparison remains provisional",
+  "representation_policy": "Reuse exact compatible witnesses before host admission; unresolved complete-suite capacity remains visible and prevents final family-choice claims. Reference fits grant zero ordinary qualification.",
+  "resource_policy": {
+    "gpus": [
+      0,
+      1
+    ],
+    "forge_workers_per_gpu": 1,
+    "allow_forge_sharing": false,
+    "external_gpu_services": "Recorded, preserved; no cross-device fastest-time claim with external contention.",
+    "cpu_threads_per_task": 1,
+    "max_gpu_memory_mb_per_task": 2048,
+    "minimum_free_gpu_memory_mb_before_start": 12288,
+    "speed_selection": "UNAVAILABLE until a matched exclusive-resource first-acquisition cohort is declared."
+  },
+  "confirmation": "All declared survivors advance; selection is exploratory, not independent confirmation or default adoption.",
+  "followup_policy_track": {
+    "families": [
+      "atlas",
+      "e22"
+    ],
+    "cohort": "Public policy-aware API toy variants, explicit particle cloud and actual served law; separate from current MoG/clean-live cells.",
+    "reuse": "Original Atlas19 remains linked, no unchanged rerun or pooled qualification."
+  }
+}

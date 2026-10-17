@@ -1,0 +1,249 @@
+{
+  "attempt_ids": [
+    "21bdde76d2f045e98b829627eb9071f1",
+    "bd148c44722a49ceb91c21c309c25514"
+  ],
+  "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+  "candidate_revision": "3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "The schedule80 variant exactly reproduces all24 historical80-update measurements and its effective recipe. The schedule800 contrast changes the declared schedule bundle; both variants start from matching states. Historical words and current main-view cells retain their original identities.",
+  "conclusion": "Both800-update diagnostic variants PASS movement/slope: original-schedule1.0542289019 and stretched-schedule .9759703279. These are diagnostic passes only and grant no ordinary qualification.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "21bdde76d2f045e98b829627eb9071f1",
+        "bd148c44722a49ceb91c21c309c25514"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "contract_sha256": "4ebe3cbb49ff1edbf9a326ab0ba492f10b635429a4a564a63257561c33a2aedd",
+        "execution_backend": "cpu",
+        "round": {
+          "budget_seconds": 600,
+          "job_keys": [
+            "2a674de0bf74ae7596163970f7db3daeb9f2ad165b4767bf99534d1a2a1163a9",
+            "f8284b617709c21ae56d0a942bbde5b5c24bb3d7c53d89cd891fe6268879bf28"
+          ],
+          "max_rounds": 1,
+          "round_id": "c83f55d1803dde52076c171c9af9d6a288df6c1d53dc06ca9366626c497488d0"
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        },
+        "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0"
+      },
+      "cohort_sha256": "b24c4968851e9e4a54b8d1354e8b9f73a6e04c8df19e6832fa1a343a94ab181f",
+      "contract_sha256": "4ebe3cbb49ff1edbf9a326ab0ba492f10b635429a4a564a63257561c33a2aedd",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 0.9759703278541565
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 0.9759703278541565
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "21bdde76d2f045e98b829627eb9071f1",
+          "result_hash": "e705a4e489612c381937c096ff6ebea0914bb098e1885477f14cf5da71caff61",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "bd148c44722a49ceb91c21c309c25514",
+          "result_hash": "2f8f7a911fccfc2e3eda6449cdf7e442de2d37b719c2b8691b06860a32cd5416",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "schema_version": 1
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "21bdde76d2f045e98b829627eb9071f1",
+        "result_hash": "e705a4e489612c381937c096ff6ebea0914bb098e1885477f14cf5da71caff61",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "bd148c44722a49ceb91c21c309c25514",
+        "result_hash": "2f8f7a911fccfc2e3eda6449cdf7e442de2d37b719c2b8691b06860a32cd5416",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-a91dbccf086504f9accaee6b",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/21bdde76d2f045e98b829627eb9071f1/result.json"
+  },
+  "task_results": [
+    {
+      "compatibility_key": "f8284b617709c21ae56d0a942bbde5b5c24bb3d7c53d89cd891fe6268879bf28",
+      "cost": {
+        "adapter_seconds": 3.223108345991932,
+        "charged_task": "two_pole_800_schedule800_diagnostic_v1",
+        "device": "cpu",
+        "execution_seconds": 8.064475679013412,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 5.057631175033748,
+        "wall_seconds": 8.064475679013412
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.2925,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 234,
+          "first_pass_step": 100,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 100
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.9221107289195061,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.07788927108049393
+          },
+          "mean_abs": {
+            "margin": 0.6759703278541564,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.9759703278541565
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.07788927108049393,
+        "mean_abs": 0.9759703278541565
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole_800_schedule800_diagnostic_v1"
+    },
+    {
+      "compatibility_key": "2a674de0bf74ae7596163970f7db3daeb9f2ad165b4767bf99534d1a2a1163a9",
+      "cost": {
+        "adapter_seconds": 3.350578639016021,
+        "charged_task": "two_pole_800_schedule80_diagnostic_v1",
+        "device": "cpu",
+        "execution_seconds": 8.145442325039767,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 5.191376417002175,
+        "wall_seconds": 8.145442325039767
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.25,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 200,
+          "first_pass_step": 67,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 23,
+          "passing_suffix": 23,
+          "stable_from_seconds": null,
+          "stable_from_step": 67
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.7685019969940186,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.23149800300598145
+          },
+          "mean_abs": {
+            "margin": 0.7542289018630981,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 1.0542289018630981
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.23149800300598145,
+        "mean_abs": 1.0542289018630981
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole_800_schedule80_diagnostic_v1"
+    }
+  ]
+}

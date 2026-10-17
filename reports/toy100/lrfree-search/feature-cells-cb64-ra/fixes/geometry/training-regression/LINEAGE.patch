@@ -1,0 +1,383 @@
+diff --git a/particlegan/feature_cells.py b/particlegan/feature_cells.py
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -78,6 +78,110 @@
+     return SmallPopulationReferenceBirthDeath(trainer, seed)
+ 
+ 
++class LatentLineage:
++    """Bounded symmetric row-copy links; semantic state shared by live/EMA.
++
++    Overwriting a row removes all its old incident edges. New parent/child
++    pairs are inserted newest first. A full endpoint evicts its oldest edge
++    symmetrically. Links refer to current row incarnations, not old positions.
++    """
++    def __init__(self, n, degree, device):
++        if (type(n) is not int or n <= 0 or type(degree) is not int
++                or not 0 < degree <= min(PARENT_RESERVOIR, n-1)):
++            raise ValueError("invalid latent lineage size/degree")
++        self.n, self.degree = n, degree
++        self.neighbors = torch.full((n, degree), -1, dtype=torch.long, device=device)
++        self.work = dict(updates=0, copied_rows=0, reciprocal_slots=0,
++                         maximum_reciprocal_slots=0, maximum_parent_rows=0)
++
++    def _rows(self, rows):
++        if (not isinstance(rows, torch.Tensor) or rows.ndim != 1 or rows.dtype != torch.long
++                or rows.device != self.neighbors.device
++                or bool(((rows < 0) | (rows >= self.n)).any())):
++            raise ValueError("invalid latent lineage row indices")
++
++    def validate(self, neighbors):
++        if (not isinstance(neighbors, torch.Tensor) or neighbors.shape != self.neighbors.shape
++                or neighbors.dtype != torch.long
++                or bool(((neighbors < -1) | (neighbors >= self.n)).any())):
++            raise ValueError("invalid latent lineage checkpoint shape/indices")
++        valid = neighbors >= 0
++        rows, slots = valid.nonzero(as_tuple=True)
++        partners = neighbors[rows, slots]
++        if bool((rows == partners).any()):
++            raise ValueError("latent lineage cannot contain self edges")
++        ordered = neighbors.masked_fill(~valid, self.n).sort(1).values
++        if bool(((ordered[:, 1:] == ordered[:, :-1]) & (ordered[:, 1:] < self.n)).any()):
++            raise ValueError("latent lineage contains repeated neighbors")
++        if len(rows) and not bool((neighbors[partners] == rows[:, None]).any(1).all()):
++            raise ValueError("latent lineage must be symmetric")
++
++    def _compact(self, rows):
++        old = self.neighbors[rows]
++        slots = torch.arange(self.degree, device=old.device)[None].expand_as(old)
++        order = torch.where(old >= 0, slots, slots+self.degree).argsort(dim=1, stable=True)
++        return old.gather(1, order)
++
++    @torch.no_grad()
++    def _remove_reciprocals(self, sources, adjacent):
++        # Only known neighbors of touched endpoints are read. Padding uses a
++        # masked row0 read; it never writes row0 merely because a slot is empty.
++        targets = adjacent.clamp_min(0)
++        remove = (self.neighbors[targets] == sources[:, None, None]) & (adjacent >= 0)[:, :, None]
++        slots = torch.arange(self.degree, device=adjacent.device)
++        flat = targets[:, :, None]*self.degree+slots
++        self.neighbors.view(-1)[flat[remove]] = -1
++        amount = len(sources)*self.degree*self.degree
++        self.work["reciprocal_slots"] += amount
++        self.work["maximum_reciprocal_slots"] = max(self.work["maximum_reciprocal_slots"], amount)
++
++    @torch.no_grad()
++    def register_copies(self, children, parents):
++        self._rows(children); self._rows(parents)
++        if children.shape != parents.shape or len(torch.unique(children)) != len(children):
++            raise ValueError("lineage copies require distinct paired child rows")
++        if not len(children):
++            return
++        self.work["updates"] += 1
++        self.work["copied_rows"] += len(children)
++        self._remove_reciprocals(children,self.neighbors[children].clone())
++        self.neighbors[children] = -1
++        # A parent overwritten in this same simultaneous batch refers to its
++        # previous incarnation, so no edge to its current row is registered.
++        ordered_children = children.sort().values
++        positions = torch.searchsorted(ordered_children,parents)
++        keep = (positions == len(children)) | (ordered_children[positions.clamp_max(max(0,len(children)-1))] != parents)
++        children, parents = children[keep], parents[keep]
++        if not len(children):
++            return
++        # Group repeated manual-copy parents in one batch. Later entries in a
++        # simultaneous copy batch are newest; keep at most degree children per
++        # parent. Internal reaction plans already use distinct parents.
++        order = parents.argsort(stable=True)
++        unique, counts = torch.unique_consecutive(parents[order],return_counts=True)
++        ends = counts.cumsum(0)
++        slots = torch.arange(self.degree,device=parents.device)[None]
++        locations = ends[:,None]-1-slots
++        present = locations >= (ends-counts)[:,None]
++        incoming = children[order[locations.clamp_min(0)]].masked_fill(~present,-1)
++        room = self.degree-counts.clamp_max(self.degree)
++        old = self._compact(unique)
++        evicted = old.masked_fill(slots < room[:,None],-1)
++        # Truncate both endpoints before re-reading updated rows. This prevents
++        # two touched parents from reintroducing an edge one of them evicted.
++        self.neighbors[unique] = old.masked_fill(slots >= room[:,None],-1)
++        self._remove_reciprocals(unique,evicted)
++        old = self._compact(unique)
++        used = counts.clamp_max(self.degree)
++        old_slots = (slots-used[:,None]).clamp_min(0)
++        self.neighbors[unique] = torch.where(slots < used[:,None],incoming,old.gather(1,old_slots))
++        selected = incoming >= 0
++        selected_children = incoming[selected]
++        selected_parents = unique[:,None].expand_as(incoming)[selected]
++        self.neighbors[selected_children,0] = selected_parents
++        self.work["maximum_parent_rows"] = max(self.work["maximum_parent_rows"],len(unique))
++
++
+ class BoundedLatentGeometry:
+     """Prior-derived anisotropic width and bounded local DV12 latent radius.
+ 
+@@ -91,16 +195,18 @@
+     candidates divided by sqrt(2), the pair-difference variance factor. This
+     prevents an isotropic norm ball from ignoring narrow local coordinates.
+     """
+-    def __init__(self, *, rank=8, neighbors=64, chunk=256):
++    def __init__(self, *, rank=8, neighbors=64, chunk=256, lineage=None):
+         for name, value in (("rank", rank), ("neighbors", neighbors), ("chunk", chunk)):
+             if type(value) is not int or value <= 0:
+                 raise ValueError(f"{name} must be a positive integer")
+         self.rank, self.neighbors, self.chunk = rank, neighbors, chunk
++        self.lineage = lineage
+         self.clear()
+ 
+     def clear(self):
+         self._entries = {}
+-        self.work = dict(builds=0, distance_pairs=0, max_query_rows=0, max_candidates=0)
++        self.work = dict(builds=0, distance_pairs=0, max_query_rows=0, max_candidates=0,
++                         lineage_distance_pairs=0)
+ 
+     @torch.no_grad()
+     def _orders(self, points):
+@@ -126,32 +232,46 @@
+         return orders
+ 
+     @torch.no_grad()
+-    def radius(self, latent, prior):
+-        return self._local_geometry(latent, prior)[0]
+-
+-    @torch.no_grad()
+-    def _local_geometry(self, latent, prior):
++    def radius(self, latent, prior, *, rows=None):
++        return self._local_geometry(latent, prior, rows=rows)[0]
++
++    @torch.no_grad()
++    def _local_geometry(self, latent, prior, *, rows=None):
+         points = prior.z
++        if self.lineage is not None and rows is not None:
++            self.lineage._rows(rows)
++            if len(rows) != len(latent) or len(points) != self.lineage.n:
++                raise ValueError("latent rows and lineage table must match")
+         orders = self._orders(points)
+         if not orders:
+             return latent.new_zeros(len(latent)), torch.zeros_like(latent)
+         output, widths = [], []
+-        for block in latent.detach().split(self.chunk):
++        for start in range(0, len(latent), self.chunk):
++            block = latent.detach()[start:start+self.chunk]
+             distances, point_ids = [], []
+-            for index, (axis, values, rows) in enumerate(orders):
++            for index, (axis, values, axis_rows) in enumerate(orders):
+                 count = self.neighbors//len(orders)+(index < self.neighbors % len(orders))
+                 if not count:
+                     continue
+                 offsets = torch.arange(-(count//2), count-count//2, device=block.device)
+                 positions = torch.searchsorted(values, block[:, axis].contiguous())[:, None]+offsets
+                 valid = (positions >= 0) & (positions < len(values))
+-                candidates = rows[positions.clamp(0, len(values)-1)]
++                candidates = axis_rows[positions.clamp(0, len(values)-1)]
+                 distance = (block[:, None]-points.detach()[candidates]).square().sum(-1)
+                 distance.masked_fill_(~valid | (distance == 0), float("inf"))
+                 distances.append(distance); point_ids.append(candidates)
+                 self.work["distance_pairs"] += len(block)*count
++            linked = 0
++            if self.lineage is not None and rows is not None:
++                candidates = self.lineage.neighbors[rows[start:start+len(block)]]
++                distance = (block[:, None]-points.detach()[candidates.clamp_min(0)]).square().sum(-1)
++                distance.masked_fill_((candidates < 0) | (distance == 0), float("inf"))
++                distances.append(distance); point_ids.append(candidates.clamp_min(0))
++                linked = self.lineage.degree
++                self.work["distance_pairs"] += len(block)*linked
++                self.work["lineage_distance_pairs"] += len(block)*linked
+             self.work["max_query_rows"] = max(self.work["max_query_rows"], len(block))
+-            self.work["max_candidates"] = max(self.work["max_candidates"], self.neighbors)
++            self.work["max_candidates"] = max(self.work["max_candidates"], self.neighbors+linked)
+             distances, point_ids = torch.cat(distances, 1), torch.cat(point_ids, 1)
+             nearest = distances.min(1).values.sqrt()
+             output.append(torch.where(torch.isfinite(nearest), .5*nearest, torch.zeros_like(nearest)))
+@@ -164,8 +284,8 @@
+             widths.append((difference2.sum(1)/(2*valid.sum(1).clamp_min(1)[:, None])).sqrt())
+         return torch.cat(output), torch.cat(widths)
+ 
+-    def displacement(self, latent, prior, bandwidth, noise, *, record=None):
+-        radius, local_width = self._local_geometry(latent, prior)
++    def displacement(self, latent, prior, bandwidth, noise, *, record=None, rows=None):
++        radius, local_width = self._local_geometry(latent, prior, rows=rows)
+         global_width = torch.as_tensor(bandwidth, device=latent.device, dtype=latent.dtype)
+         applied_width = torch.minimum(global_width, local_width)
+         delta = applied_width*noise
+@@ -178,7 +298,7 @@
+                                clipped_fraction=float((fraction < 1.).float().mean()),
+                                global_bandwidth_mean=float(global_width.mean()),
+                                local_bandwidth_mean=float(applied_width.mean()),
+-                               backend="feature_cells", kernel="bounded_local_dv12"))
++                               backend="feature_cells", kernel="bounded_local_dv12_lineage" if self.lineage else "bounded_local_dv12"))
+             del record[:-2]
+         return delta
+ 
+@@ -760,7 +880,7 @@
+ 
+ class FeatureCellBirthDeath(ParticleBirthDeath):
+     """Actual GANTrainer backend; keeps original FIFO and row-copy mechanics."""
+-    BACKEND_SCHEMA = 3
++    BACKEND_SCHEMA = 4
+ 
+     def __init__(self,trainer,seed):
+         super().__init__(trainer,seed)
+@@ -772,12 +892,17 @@
+                              chunk=recipe.birth_death_chunk,parent_policy=recipe.birth_death_parent_policy,
+                              lloyd=LLOYD_PASSES,power=POWER_PASSES,parent_reservoir=PARENT_RESERVOIR,
+                              real_anchors=1,parent_rank=None,
+-                             latent_kernel="bounded_local_dv12",latent_neighbors=PARENT_RESERVOIR,
++                             latent_kernel="bounded_local_dv12_lineage",latent_neighbors=PARENT_RESERVOIR,
+                              latent_rank=recipe.birth_death_metric_rank,
++                             lineage_degree=min(recipe.birth_death_metric_rank,PARENT_RESERVOIR,self.N-1),
++                             lineage_policy="symmetric_copy_links_newest_first_invalidate_overwrites",
++                             latent_candidate_bound=PARENT_RESERVOIR+min(recipe.birth_death_metric_rank,PARENT_RESERVOIR,self.N-1),
+                              mass_policy="reference_topology_vacancies_unique_parents_v3",
+                              isolation_parent_pool="supported_same_cell_without_replacement")
++        self.lineage = LatentLineage(self.N,self.settings["lineage_degree"],trainer.device)
+         self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
+-                                                   neighbors=PARENT_RESERVOIR, chunk=recipe.birth_death_chunk)
++                          neighbors=PARENT_RESERVOIR,chunk=recipe.birth_death_chunk,lineage=self.lineage)
++        self._copy_parent_rows = None
+         self._sampling_prior, self._sampling_controller = trainer.prior, trainer.controller
+         self.snapshot = None
+         self.snapshot_serial = 0
+@@ -787,23 +912,36 @@
+ 
+     @torch.no_grad()
+     def _jitter(self,trainer,latent,prior,noise):
+-        return self.latent_geometry.displacement(latent, prior, trainer.controller.latent_bandwidth, noise)
+-
+-    def perturb_latent(self,latent,stream,controller=None,record=False,*,prior=None):
++        return self.latent_geometry.displacement(latent, prior, trainer.controller.latent_bandwidth, noise,
++                                                 rows=self._copy_parent_rows)
++
++    @torch.no_grad()
++    def _move(self,trainer,child,parent):
++        self._copy_parent_rows = parent
++        try:
++            super()._move(trainer,child,parent)
++        finally:
++            self._copy_parent_rows = None
++        self.lineage.register_copies(child,parent)
++
++    def perturb_latent(self,latent,stream,controller=None,record=False,*,prior=None,rows=None):
+         controller = self._sampling_controller if controller is None else controller
+         prior = self._sampling_prior if prior is None else prior
+         noise = torch.randn(latent.shape,device=latent.device,dtype=latent.dtype,generator=stream)
+         delta = self.latent_geometry.displacement(latent, prior, controller.latent_bandwidth, noise,
+-                            record=controller.latent_applications if record else None)
++                            record=controller.latent_applications if record else None,rows=rows)
+         return latent+delta
+ 
+     @torch.no_grad()
+-    def _capture_generated(self,trainer,latent,*,sigma=0.,jitter=False):
++    def _capture_generated(self,trainer,latent,*,sigma=0.,jitter=False,rows=None):
+         features = []
+-        for block in latent.split(self.settings["chunk"]):
++        for start in range(0,len(latent),self.settings["chunk"]):
++            block=latent[start:start+self.settings["chunk"]]
+             if jitter:
+                 noise = torch.randn(block.shape,device=block.device,dtype=block.dtype,generator=self.stream)
+-                block = block+self._jitter(trainer,block,trainer.prior,noise)
++                block = block+self.latent_geometry.displacement(block,trainer.prior,
++                    trainer.controller.latent_bandwidth,noise,
++                    rows=None if rows is None else rows[start:start+len(block)])
+             raw = trainer.G(block)
+             if tuple(raw.shape[1:]) != self.sample_shape:
+                 raise ValueError("generator output shape does not match the real FIFO")
+@@ -838,7 +976,7 @@
+                                               rank=self.settings["rank"],chunk=self.settings["chunk"])
+             self.snapshot = snapshot
+             pick = torch.randint(self.N,(self.N,),device=z.device,generator=self.stream)
+-            F = self._capture_generated(trainer,z[pick],sigma=sigma,jitter=True)
++            F = self._capture_generated(trainer,z[pick],sigma=sigma,jitter=True,rows=pick)
+             flags,pvalues,_ = snapshot.support(q)
+             if not self.isolation:
+                 flags.zero_()
+@@ -910,24 +1048,26 @@
+         result = super().diagnostics()
+         result.update(backend="feature_cells",settings=dict(self.settings),snapshot_serial=self.snapshot_serial,
+                       snapshot_work=None if self.snapshot is None else dict(self.snapshot.work),
+-                      population_policy=dict(self.population_policy))
++                      population_policy=dict(self.population_policy),
++                      lineage_edges=int((self.lineage.neighbors>=0).sum())//2)
+         return result
+ 
+     def state_dict(self):
+         result = super().state_dict()
+         result.update(backend="feature_cells",backend_schema=self.BACKEND_SCHEMA,settings=dict(self.settings),
+                       sample_shape=self.sample_shape,snapshot_serial=self.snapshot_serial,
+-                      population_policy=dict(self.population_policy))
++                      population_policy=dict(self.population_policy),lineage_neighbors=self.lineage.neighbors.clone())
+         return result
+ 
+     def check_state(self,state):
+-        extra = {"backend","backend_schema","settings","sample_shape","snapshot_serial","population_policy"}
++        extra = {"backend","backend_schema","settings","sample_shape","snapshot_serial","population_policy","lineage_neighbors"}
+         base = set(self._TENSORS)|{"fill","cursor","rows_since_eval","counters","last","stream"}
+         if (not isinstance(state,dict) or set(state)!=base|extra or state.get("backend")!="feature_cells"
+                 or state.get("backend_schema")!=self.BACKEND_SCHEMA or state.get("settings")!=self.settings
+                 or state.get("population_policy")!=self.population_policy):
+             raise ValueError("invalid or incompatible feature-cell checkpoint backend/settings")
+         super().check_state({key:state[key] for key in base})
++        self.lineage.validate(state["lineage_neighbors"])
+         for key in ("fill","cursor","rows_since_eval","snapshot_serial"):
+             value=state[key]
+             if type(value) is not int or value<0:
+@@ -971,5 +1111,7 @@
+         self.snapshot_serial=state["snapshot_serial"]
+         self.snapshot=None
+         self.moved_rows=None
++        self._copy_parent_rows=None
++        self.lineage.neighbors=state["lineage_neighbors"].clone().to(self.S.device)
+         self.latent_geometry.clear()
+         self._heads=None
+diff --git a/particlegan/training.py b/particlegan/training.py
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -253,12 +253,12 @@
+         """The output-noise std that ``sample`` currently adds (a float)."""
+         return float(self._output_sigma(output_noise_std(self.recipe, self.completed_steps)))
+ 
+-    def _generate(self, model, latent, sigma, stream):
++    def _generate(self, model, latent, sigma, stream, *, rows=None):
+         """``model(latent) + sigma * eps``; no draw when sigma == 0."""
+         if self.birth_death is not None and hasattr(self.birth_death, "perturb_latent"):
+             prior = self.ema_prior if model is self.ema_G else self.prior
+             latent = self.birth_death.perturb_latent(latent, stream, self.controller,
+-                                                   record=stream is self.noise_generator, prior=prior)
++                                                   record=stream is self.noise_generator, prior=prior, rows=rows)
+         elif self.controller is not None:
+             prior = self.ema_prior if model is self.ema_G else self.prior
+             latent = self.controller.perturb_latent(latent, stream, prior, record=stream is self.noise_generator)
+@@ -395,10 +395,10 @@
+         self.D.train()
+         self.G.eval()
+         with torch.no_grad():
+-            latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
++            latent, indices_d = self.prior.sample(len(real), generator=self.latent_generator)
+             if self.controller is not None:
+                 self.controller.observe_support(self.G, self.D, latent, sigma_out, noise)
+-            fake = self._generate(self.G, latent, sigma_out, noise)
++            fake = self._generate(self.G, latent, sigma_out, noise, rows=indices_d)
+         if self.controller is not None:
+             self.controller.observe_pair(real, fake)
+         loss_d = self.loss.d_loss(critic(real), critic(fake))
+@@ -418,7 +418,7 @@
+         try:
+             self.D.requires_grad_(False)
+             latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
++            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
+             real_g = generator_real() if callable(generator_real) else generator_real
+             real_g = real if real_g is None else self._batch(real_g, "generator_real")
+             if real_g.shape[1:] != real.shape[1:]:
+@@ -529,9 +529,9 @@
+             model.eval()
+             prior.eval()
+             with torch.random.fork_rng(devices=devices):
+-                latent, _ = prior.sample(n, generator=stream)
++                latent, rows = prior.sample(n, generator=stream)
+                 return self._generate(model, latent,
+-                                      self._output_sigma(output_noise_std(self.recipe, self.completed_steps)), stream)
++                                      self._output_sigma(output_noise_std(self.recipe, self.completed_steps)), stream, rows=rows)
+         finally:
+             for module, flag in modes:
+                 module.training = flag

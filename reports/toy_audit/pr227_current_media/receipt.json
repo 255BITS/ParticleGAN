@@ -1,0 +1,513 @@
+{
+  "schema": "toy_audit_pr227_current_supplemental_media_v1",
+  "source_commit": "b370cb7a49429e67f106e41752abea078327c5d0",
+  "renderer_sha256": "ef2f188f0585833ed4b3740b4e5e48b534cbb9353c16015092fa9a45d8eb8b32",
+  "style_helper_sha256": "d47524627a02762964abc2a40f62f8cb713db7450d17d46f9f92a2025854ff5b",
+  "training_updates": 0,
+  "software_replay_updates": 0,
+  "model_states_loaded": 0,
+  "metrics_recomputed": 0,
+  "original_media_preserved_sha256": {
+    "reports/toy_audit/media/media.json": "6a84af5992d632af518ee0432639ef32fd003025320394e468265e03af9be1b9",
+    "reports/toy_audit/media/pr227.gif": "564d15cb400485acd2c4def058eb7f13ae1622e03574a85b6f18b53920fe3469",
+    "reports/toy_audit/media/pr227.png": "1bf62ff6cf758e7725b81c55ed1d84df054b5ea19e55c27b036343695f307c42"
+  },
+  "records": [
+    {
+      "protocol": "guided_pair",
+      "task_id": "routed_convergence_guided_pair_v1",
+      "archive": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1",
+      "fresh_execution_status": "COMPLETE",
+      "provenance_review_status": "QUALIFIED",
+      "scientific_status": "INITIALIZATION_SUPPORT",
+      "qualification_credit": "none",
+      "input_sha256": {
+        "receipt.json": "8b762c123afaa9bb9c5ed43a0ed9155dc9e077858a52f7b92230e87efa0b6248",
+        "independent-review.json": "3d63111f65181183ee0c83ac04698572e0cc2994334fdb496add151f68e384d1",
+        "independent-qualified-summary.json": "f2a820efa55c1e572ad8df7f68ba889548f66efaf050a4bfa81c5d7b2a7c2c5e",
+        "common-judge-curves.jsonl": "036d04da137bc14848f3046fc225b90483ba9cf26eddb291045611778fda04d9",
+        "execution-completion.json": "a6ef88e25c16ebfa4563b4502504b5f65dc2145f61d6a2b3d1e0438ce5e5d107",
+        "independent-review.json.completion.json": "cd64b63ac46026ef08336eaeade3d97a807bc350e9f4eca6dce1b6c1cfde2b09",
+        "data.pt": "0f2b8bb9ac60384ae22f8f5acc500081e9226d06cc349e4fdb586829e6a39146"
+      },
+      "committed_docs_sha256": {
+        "card": "2ca1cf8b59fd1dbd02b7e388bcd88aec87d0d8b2cfa78c5d09c8f90f40591fbd",
+        "results": "11a3cea2d39fb67d947a395c91e754559c3888c69b1c290029e00a36dd476991",
+        "original_plot_receipt": "e6f12104e77272ea9f88629dc0998d4ee5f7a1e9461e2ae595df3b10693abb9f"
+      },
+      "source_hashes": {
+        "docs/e22_routed_convergence_guided_pair_v1.json": "2ca1cf8b59fd1dbd02b7e388bcd88aec87d0d8b2cfa78c5d09c8f90f40591fbd",
+        "examples/e22_routed_convergence_guided_campaign.py": "0737b8baf169c457b47cd255d4130ab993da1d7e5eb60e5a57b178e9e54062b4",
+        "examples/run_e22_routed_convergence_guided_pair.py": "1a4ad6013f26d5172fb97f3d762acbf493735d260da2daa2395e67ade7c3d9ba",
+        "examples/review_e22_routed_convergence_guided_pair.py": "25ed8f9cd4308864131c1b1f7a8b95d67ea828ca6822e117e049d0c4b42fe459",
+        "examples/e22_routed_convergence_guided_pair.py": "5a0bcd4ef7ee31f8b25921c1957b9e7bdac619e162e9ca650db4b9ceddd7d1c0",
+        "tests/test_e22_routed_convergence_guided_pair.py": "83cabdbe8f2268fcac4ecfe20a5f04ec1a3c4b22352da66ad99635eff3dc59d2",
+        "tests/test_e22_routed_convergence_guided_campaign.py": "6188446585662fde6456bb73eb7d8bc833149c9685f5e266d3bc7e7ca2092ecb",
+        "examples/review_e22_routed_convergence_rotated_teacher.py": "1a5cf8461249ea4efe9481f71f17129544528ca123c0444d700070f3fef6f70d",
+        "docs/e22_routed_convergence_rotated_teacher_v1.json": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+        "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+        "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+        "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+        "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+        "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+        "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+        "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+        "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
+      },
+      "native_bindings": {
+        "native_revision": "d5d42399f21f0111301dd5313f53bbcc446d976f",
+        "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+        "native_source_hash": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b"
+      },
+      "source_archive_digest": "3b9a8926606dddadae5f5a04e085eeafd53216dc173da0c4616842d616c9ba64",
+      "verified_artifact_manifest_digest": "7e94eb61e4f1ea60f1bd8df0a833c49bbd732b5b994323ad25256878c595e45c",
+      "verified_artifact_files": 157,
+      "data_digest": "cf2a96ecb6886c7402df6f0926afb2620feb64a3586d50022d8cfa884a1461e4",
+      "judges": {
+        "ordinary_native_game@800": "7511649dc936baa4a3737573bdaedea96080e9b983e13b218483fc28ee8a0e51",
+        "ordinary_native_game@6400": "3af06efe87e6ee923531a7aa34963649977a8512ff600fdfff16ec919af7a33f",
+        "particle_native_game@800": "1af750a82a7616a2cce43a9ddc9ebafb71a3038e42a6882fcb817af0d51e4164",
+        "particle_native_game@6400": "be8d2aad06732fe0e6b9f55e04bfcf0fc4b4993df8f71a934b354f212d365d89"
+      },
+      "runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "device": "cpu",
+        "threads": 1,
+        "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35"
+      },
+      "serving": "clean FAST model; original fixed private Gaussian critic-input panels; held-out test pool",
+      "original_review_checks": 570039,
+      "frame_steps": [
+        0,
+        200,
+        400,
+        600,
+        800,
+        1000,
+        1200,
+        1400,
+        1600,
+        1800,
+        2000,
+        2200,
+        2400,
+        2600,
+        2800,
+        3000,
+        3200,
+        3400,
+        3600,
+        3800,
+        4000,
+        4200,
+        4400,
+        4600,
+        4800,
+        5000,
+        5120,
+        5200,
+        5400,
+        5600,
+        5800,
+        6000,
+        6200,
+        6400
+      ],
+      "observations_per_arm": 34,
+      "plotted_scalar_count": 408,
+      "interpolation": false,
+      "excluded_software_replay_state_step": 802,
+      "gates": {
+        "original_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": 0.09983086585998535,
+          "ordinary_native_game@6400": 0.33138298988342285,
+          "particle_native_game@800": 0.04186391830444336,
+          "particle_native_game@6400": 0.6647495031356812
+        },
+        "neutral_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.2507596015930176,
+          "ordinary_native_game@6400": -0.3014106750488281,
+          "particle_native_game@800": -0.34640228748321533,
+          "particle_native_game@6400": -0.254874587059021
+        },
+        "paired_game_H_b_improvement": {
+          "ordinary_native_game@800": 0.35059046745300293,
+          "ordinary_native_game@6400": 0.632793664932251,
+          "particle_native_game@800": 0.3882662057876587,
+          "particle_native_game@6400": 0.9196240901947021
+        },
+        "original_particle_gap_reproduced": true,
+        "endpoint_gap_reduction": {
+          "ordinary_native_game@6400": 1.909553852341248,
+          "particle_native_game@6400": 1.383414482984576
+        },
+        "support_gate_applicable": true,
+        "retained_particle_gate": {
+          "particle_native_game": true,
+          "neutral_particle_native_game": true
+        },
+        "H_b_support_gate": true,
+        "neutral_beats_ordinary_all_four": true,
+        "remaining_neutral_gap_witness": false
+      },
+      "endpoint_test_paired_game": {
+        "5120": {
+          "ordinary_native_game@800": {
+            "ordinary_native_game": 1.5675305128097534,
+            "particle_native_game": 1.4118541479110718,
+            "neutral_particle_native_game": 1.1357594728469849
+          },
+          "ordinary_native_game@6400": {
+            "ordinary_native_game": 2.2398579120635986,
+            "particle_native_game": 2.471388816833496,
+            "neutral_particle_native_game": 1.9730031490325928
+          },
+          "particle_native_game@800": {
+            "ordinary_native_game": 1.7773493528366089,
+            "particle_native_game": 1.5353108644485474,
+            "neutral_particle_native_game": 1.242274522781372
+          },
+          "particle_native_game@6400": {
+            "ordinary_native_game": 2.2412922382354736,
+            "particle_native_game": 2.7799055576324463,
+            "neutral_particle_native_game": 1.9907708168029785
+          }
+        },
+        "6400": {
+          "ordinary_native_game@800": {
+            "ordinary_native_game": 1.2454025745391846,
+            "particle_native_game": 1.34523344039917,
+            "neutral_particle_native_game": 0.994642972946167
+          },
+          "ordinary_native_game@6400": {
+            "ordinary_native_game": 2.02201771736145,
+            "particle_native_game": 2.353400707244873,
+            "neutral_particle_native_game": 1.720607042312622
+          },
+          "particle_native_game@800": {
+            "ordinary_native_game": 1.3907538652420044,
+            "particle_native_game": 1.4326177835464478,
+            "neutral_particle_native_game": 1.044351577758789
+          },
+          "particle_native_game@6400": {
+            "ordinary_native_game": 1.9725369215011597,
+            "particle_native_game": 2.637286424636841,
+            "neutral_particle_native_game": 1.7176623344421387
+          }
+        }
+      },
+      "accepted_structural_moves": {
+        "ordinary_native_game": 0,
+        "particle_native_game": 0,
+        "neutral_particle_native_game": 0
+      },
+      "media": {
+        "gif": "guided_pair.gif",
+        "sha256": "bbfa88b0593b96ca2740435fbc54ce8099448aa92dd8e99b17648d8516188af0",
+        "bytes": 977948,
+        "frames": 34,
+        "interpolation": false,
+        "poster": "guided_pair.png",
+        "poster_sha256": "9c0072b168b07f2a01226b8a9a4d2f80ad7493f7e9473fbe8110fc8663ca7e62",
+        "fixed_y_limits": {
+          "ordinary_native_game@800": [
+            0.8809039294719696,
+            2.8582134544849396
+          ],
+          "ordinary_native_game@6400": [
+            1.643248701095581,
+            2.988093709945679
+          ],
+          "particle_native_game@800": [
+            0.9116644084453582,
+            3.2183798134326933
+          ],
+          "particle_native_game@6400": [
+            1.6214028239250182,
+            3.2948373913764955
+          ]
+        },
+        "frame_steps": [
+          0,
+          200,
+          400,
+          600,
+          800,
+          1000,
+          1200,
+          1400,
+          1600,
+          1800,
+          2000,
+          2200,
+          2400,
+          2600,
+          2800,
+          3000,
+          3200,
+          3400,
+          3600,
+          3800,
+          4000,
+          4200,
+          4400,
+          4600,
+          4800,
+          5000,
+          5120,
+          5200,
+          5400,
+          5600,
+          5800,
+          6000,
+          6200,
+          6400
+        ],
+        "width": 920,
+        "height": 650
+      }
+    },
+    {
+      "protocol": "rotated_teacher",
+      "task_id": "routed_convergence_rotated_teacher_v1",
+      "archive": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-rotated-v1",
+      "fresh_execution_status": "COMPLETE",
+      "provenance_review_status": "QUALIFIED",
+      "scientific_status": "GAP_REPRODUCTION_FAIL",
+      "qualification_credit": "none",
+      "input_sha256": {
+        "receipt.json": "b141ff7656057552097cf83ecbc5b8729356da2de1f5ceb89cbc9a6d92b81894",
+        "independent-review.json": "4a2854c3d7e72ea455ce1ed41035ebaf11582ee09f38113c1a51142b0e3ee5b1",
+        "independent-qualified-summary.json": "b5de9e0bcc57fd5b8f2d78e33721c91f61d5505d9e596594e0c5e2433cd79732",
+        "data.pt": "1461315f6a2da21f09a025ca86a0c0ca2abb735a997abc8fa465f1660834a556",
+        "common-judge-curves.jsonl": "93d52f0ea36129e2814c258ec36574629ed7deab27a6196cf1732b14ade40752"
+      },
+      "committed_docs_sha256": {
+        "card": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+        "results": "cbe02fa275faaf4edc8af4f2ddc8ac84d52d463beb8b7733331573f12bd0e971"
+      },
+      "source_hashes": {
+        "docs/e22_routed_convergence_rotated_teacher_v1.json": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+        "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+        "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+        "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+        "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+        "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+        "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+        "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+        "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
+      },
+      "native_bindings": {
+        "native_revision": "49ec2b377f7767916c7ae9d5ccd5b7ae99b02f06",
+        "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+        "native_source_hash": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b"
+      },
+      "source_archive_digest": "9d7f0ad377a7cd5c50822cde16b85b49667fba9e8522d1b00140ec107295abd7",
+      "verified_artifact_manifest_digest": "de34b4714467064c77727b2cff12ad1eec87ac81f1711522fa83bb5b00658fd5",
+      "verified_artifact_files": 149,
+      "data_digest": "c672c6e5f9bc758a216613992ea5244beaee0a402d44ff57f8b42d6085b1815a",
+      "judges": {
+        "ordinary_native_game@800": "beeb836096cafbe2816846295526d5caa2063fe6c1af2924eed116539a141ebf",
+        "ordinary_native_game@6400": "552cffe6ee1d76b553bb01eb6dc614fa5d52a2f2d836b522d4814477ee190df7",
+        "particle_native_game@800": "2334e11566789c67781a42483e43cbd99ca47f40149dc0faee8af1c9148de3de",
+        "particle_native_game@6400": "b12fec61ce19f01e58810d08dcbbc87d15c4d2e77d7537b37394b5695d8c0a9e"
+      },
+      "runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "device": "cpu",
+        "threads": 1,
+        "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35"
+      },
+      "serving": "clean FAST model; original fixed private Gaussian critic-input panels; held-out test pool",
+      "original_review_checks": 569601,
+      "frame_steps": [
+        0,
+        200,
+        400,
+        600,
+        800,
+        1000,
+        1200,
+        1400,
+        1600,
+        1800,
+        2000,
+        2200,
+        2400,
+        2600,
+        2800,
+        3000,
+        3200,
+        3400,
+        3600,
+        3800,
+        4000,
+        4200,
+        4400,
+        4600,
+        4800,
+        5000,
+        5120,
+        5200,
+        5400,
+        5600,
+        5800,
+        6000,
+        6200,
+        6400
+      ],
+      "observations_per_arm": 34,
+      "plotted_scalar_count": 408,
+      "interpolation": false,
+      "excluded_software_replay_state_step": 802,
+      "gates": {
+        "original_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.8667887449264526,
+          "ordinary_native_game@6400": -0.12230968475341797,
+          "particle_native_game@800": -0.8303190469741821,
+          "particle_native_game@6400": 0.14214563369750977
+        },
+        "neutral_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.5936425924301147,
+          "ordinary_native_game@6400": -0.18477070331573486,
+          "particle_native_game@800": -0.6352794170379639,
+          "particle_native_game@6400": -0.0573582649230957
+        },
+        "paired_game_H_b_improvement": {
+          "ordinary_native_game@800": -0.2731461524963379,
+          "ordinary_native_game@6400": 0.062461018562316895,
+          "particle_native_game@800": -0.19503962993621826,
+          "particle_native_game@6400": 0.19950389862060547
+        },
+        "original_particle_gap_reproduced": false,
+        "endpoint_gap_reduction": null,
+        "support_gate_applicable": false,
+        "retained_particle_gate": {
+          "particle_native_game": true,
+          "neutral_particle_native_game": true
+        },
+        "H_b_support_gate": false,
+        "neutral_beats_ordinary_all_four": true,
+        "remaining_neutral_gap_witness": false
+      },
+      "endpoint_test_paired_game": {
+        "5120": {
+          "ordinary_native_game@800": {
+            "ordinary_native_game": 2.1632866859436035,
+            "particle_native_game": 1.0165250301361084,
+            "neutral_particle_native_game": 1.3868218660354614
+          },
+          "ordinary_native_game@6400": {
+            "ordinary_native_game": 2.428239345550537,
+            "particle_native_game": 2.049360990524292,
+            "neutral_particle_native_game": 2.011557102203369
+          },
+          "particle_native_game@800": {
+            "ordinary_native_game": 2.3152618408203125,
+            "particle_native_game": 1.1802228689193726,
+            "neutral_particle_native_game": 1.5377717018127441
+          },
+          "particle_native_game@6400": {
+            "ordinary_native_game": 2.493513584136963,
+            "particle_native_game": 2.4370322227478027,
+            "neutral_particle_native_game": 2.212592124938965
+          }
+        },
+        "6400": {
+          "ordinary_native_game@800": {
+            "ordinary_native_game": 1.8185640573501587,
+            "particle_native_game": 0.951775312423706,
+            "neutral_particle_native_game": 1.224921464920044
+          },
+          "ordinary_native_game@6400": {
+            "ordinary_native_game": 2.06630277633667,
+            "particle_native_game": 1.943993091583252,
+            "neutral_particle_native_game": 1.881532073020935
+          },
+          "particle_native_game@800": {
+            "ordinary_native_game": 1.921654224395752,
+            "particle_native_game": 1.0913351774215698,
+            "neutral_particle_native_game": 1.286374807357788
+          },
+          "particle_native_game@6400": {
+            "ordinary_native_game": 2.173814296722412,
+            "particle_native_game": 2.315959930419922,
+            "neutral_particle_native_game": 2.1164560317993164
+          }
+        }
+      },
+      "accepted_structural_moves": {
+        "ordinary_native_game": 0,
+        "particle_native_game": 0,
+        "neutral_particle_native_game": 0
+      },
+      "media": {
+        "gif": "rotated_teacher.gif",
+        "sha256": "1562b0b682d2cfeaa4fc7581acfa5d71d832cbb3f83510eaa2bc226d53cf2e95",
+        "bytes": 976168,
+        "frames": 34,
+        "interpolation": false,
+        "poster": "rotated_teacher.png",
+        "poster_sha256": "c60edeb11d5bd98074388b829de14e405a9fd200218165874eeb53529ca1010e",
+        "fixed_y_limits": {
+          "ordinary_native_game@800": [
+            0.801161652803421,
+            3.393646115064621
+          ],
+          "ordinary_native_game@6400": [
+            1.782828784584999,
+            3.4987474912405014
+          ],
+          "particle_native_game@800": [
+            0.9377901846170426,
+            3.607110828757286
+          ],
+          "particle_native_game@6400": [
+            2.0443032956123353,
+            3.2986508631706237
+          ]
+        },
+        "frame_steps": [
+          0,
+          200,
+          400,
+          600,
+          800,
+          1000,
+          1200,
+          1400,
+          1600,
+          1800,
+          2000,
+          2200,
+          2400,
+          2600,
+          2800,
+          3000,
+          3200,
+          3400,
+          3600,
+          3800,
+          4000,
+          4200,
+          4400,
+          4600,
+          4800,
+          5000,
+          5120,
+          5200,
+          5400,
+          5600,
+          5800,
+          6000,
+          6200,
+          6400
+        ],
+        "width": 920,
+        "height": 650
+      }
+    }
+  ]
+}

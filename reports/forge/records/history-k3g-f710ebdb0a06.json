@@ -1,0 +1,168 @@
+{
+  "candidate_id": "k3g",
+  "candidate_revision": "4efc458cd68b748d9add02642664d4d3fa3f8f160fce1062bf0699baa8a72301",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "k3g-toy-vector_spiral",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3g-f710ebdb0a06",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 73.54476851783693,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_spiral/result.json",
+            "artifact_sha256": "f93674036a87e0554394432d2b363175ffb4e5f66aa91ffc9cf60fef53be7d47",
+            "id": "k3g-toy-vector_spiral",
+            "snapshot": "results/k3g-toy-vector_spiral.json.gz",
+            "snapshot_sha256": "da64f97d34b593c5b32d1d56bfe2dc5ed28001f49312e74c401a055fb12b1e62"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3g-toy-vector_spiral/result.json",
+        "artifact_sha256": "f93674036a87e0554394432d2b363175ffb4e5f66aa91ffc9cf60fef53be7d47",
+        "candidate": "k3g",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "k3g-toy-vector_spiral",
+        "kind": "toy",
+        "live": {
+          "covariance_error": 0.06836308538913727,
+          "mean_error": 0.03604443743824959,
+          "sample_count": 4096,
+          "sw1_normalized": 0.03512130699240562,
+          "target_scale": 1.240945816040039
+        },
+        "raw_status": "PASS",
+        "seconds": 73.54476851783693,
+        "snapshot": "results/k3g-toy-vector_spiral.json.gz",
+        "snapshot_sha256": "da64f97d34b593c5b32d1d56bfe2dc5ed28001f49312e74c401a055fb12b1e62",
+        "task": "vector_spiral",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.25,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 19.094323611119762,
+            "confirmed_step": 400,
+            "first_pass_step": 134,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 23,
+            "passing_suffix": 23,
+            "stable_from_seconds": 6.659237499115989,
+            "stable_from_step": 134
+          },
+          "metrics": [
+            {
+              "margin": 0.14487869300759437,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.03512130699240562
+            },
+            {
+              "margin": 0.1139555625617504,
+              "metric": "mean_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.03604443743824959
+            },
+            {
+              "margin": 0.38163691461086274,
+              "metric": "covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.45,
+              "value": 0.06836308538913727
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "vector_spiral"
+    }
+  ]
+}

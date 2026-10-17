@@ -1,0 +1,23 @@
+{
+  "base_candidate": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+  "campaign": {
+    "budget_seconds": 55440,
+    "candidate_budget_seconds": 5040,
+    "description": "One fixed recipe per family; complete Tier 1 only. One documented infrastructure-repair retry per task at most; no scientific retry or tuning.",
+    "id": "tier1-completion-v1"
+  },
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.006375
+    ]
+  },
+  "id": "tier1-completion-v1-release07-gan-v3",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "Admission registration for one existing selected configuration; no tuning, new card, recipe change or independent confirmation.",
+  "schema_version": 1,
+  "trainer_family": "release07-gan-v3-mog",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

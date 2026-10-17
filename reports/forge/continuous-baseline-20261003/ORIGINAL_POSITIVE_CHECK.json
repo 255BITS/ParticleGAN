@@ -1,0 +1,293 @@
+{
+  "attempt_key": "4e4344b8fe99e3917835737ab59a4398c73a351c87d4d26913d70bca7c267a8f",
+  "case_id": "atlas-original19-portability-img_intensity2",
+  "checkpoint": {
+    "bytes": 392235,
+    "covers": "Models, optimizer/controller/policy state, prior, named streams, CPU/CUDA RNG and completed-step cursor.",
+    "exact_byte_equality": true,
+    "metadata_from_original_reference": {
+      "backend": "knn",
+      "checkpoint_sha256": "21b8942b29a1fc2c52980a760bbabc0e226dc6c5e6c993cc6e38eb9a0a523469",
+      "completed_steps": 600,
+      "generator_noise_factor": 1.0,
+      "guard_schema": 1,
+      "output_shape": [
+        1,
+        8,
+        8
+      ]
+    },
+    "sha256": "21b8942b29a1fc2c52980a760bbabc0e226dc6c5e6c993cc6e38eb9a0a523469"
+  },
+  "clean_diagnostic_gate": "PASS",
+  "completed_updates": 600,
+  "configuration": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "effective_resources": {
+      "batch_size": 32,
+      "num_particles": 32,
+      "seed": 0,
+      "z_dim": 8
+    },
+    "options": {
+      "diagnostics": true,
+      "eval_output_noise": true,
+      "evaluation_generate": "indexed",
+      "image_prior_perturb": false,
+      "initialization": "batch_feature_zero",
+      "ring_frozen_control": false,
+      "save_final_state": true,
+      "serial_backward_argument": true,
+      "strict_streams": true
+    },
+    "options_exact": true,
+    "overrides_exact": true,
+    "resolved_recipe_exact": true,
+    "strict_stream_deviations": 0
+  },
+  "confirmed_step": 325,
+  "current_directory": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_intensity2",
+  "current_preparation": {
+    "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/.baseline-atlas19.atlas19-preparation.json",
+    "sha256": "e1f72c610c74d584de2053008463001c944bd47c0f1b3b6a9c6e7008c970df9b"
+  },
+  "current_source_commit": "a0d6d89fb470f551b3f790016a237c40a377e1e8",
+  "current_source_digest": "e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985",
+  "first_arrival": 225,
+  "historical_directory": "/ml2/hypergan/gan-attempts/develop-gates-20261001/atlas-original19/portability/img_intensity2",
+  "historical_reference": {
+    "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/develop-gates-20261001/atlas19-replay.json",
+    "sha256": "1e1b536bfd66e20a240436b417d429059d22ea55c2b6ecfff31e796b96c470fa"
+  },
+  "historical_source_commit": "fa2c378d5ea4dd8f66eabeb17973818a174732ef",
+  "historical_source_freeze": {
+    "path": "/tmp/particlegan-develop-atlas-qualification-20261001-attempt2/source-freeze.json",
+    "sha256": "3584cf8a906ad5c77fe99ffc78a8ba2d34c8d31df84df9ca76e9d9b634e7a32a"
+  },
+  "input_files": {
+    "final-state.pt": {
+      "current_bytes": 392235,
+      "current_sha256": "21b8942b29a1fc2c52980a760bbabc0e226dc6c5e6c993cc6e38eb9a0a523469",
+      "historical_sha256": "21b8942b29a1fc2c52980a760bbabc0e226dc6c5e6c993cc6e38eb9a0a523469"
+    },
+    "goal-metrics.gif": {
+      "current_bytes": 80846,
+      "current_sha256": "5e9d0919d530f4881de2b8758be2b4217a29b96e3ab7dd1205b8eb617955b426",
+      "historical_sha256": null
+    },
+    "job-header.json": {
+      "current_bytes": 2812,
+      "current_sha256": "34baec95d15403050f9021c2667471db1807c02b8ab30bb697f92d61ad1aec36",
+      "historical_sha256": "2774cf07b57c41a1d1cbc4b5af88bb637b0e158944bcd35b5e9a1ae45b5e05c1"
+    },
+    "metrics.jsonl": {
+      "current_bytes": 169721,
+      "current_sha256": "3f4f6ed755c9d438e55b2d8981e4e474abcd3a82c0f3a3ab18de00746b182ac6",
+      "historical_sha256": "8a5598ea0d69fc5592ac459c6f5d92c85398eb02e13ebe2bfae28ef74d604612"
+    },
+    "rates.jsonl": {
+      "current_bytes": 75994,
+      "current_sha256": "a3fca095a8f9506a3b1cd92991a27cf909ba56561ed49e774cb129bf91f9db33",
+      "historical_sha256": "a3fca095a8f9506a3b1cd92991a27cf909ba56561ed49e774cb129bf91f9db33"
+    },
+    "result.json": {
+      "current_bytes": 6756,
+      "current_sha256": "83a013849ef2656855a1963a4b62aa3b7ac0115805bbed8869beff503cdeeedf",
+      "historical_sha256": "0b5fb7cb773ce3ea353c82011080d8c53bcbcb5d2529632148790cbd0c88cb2c"
+    }
+  },
+  "media": {
+    "actual_steps": [
+      25,
+      75,
+      150,
+      225,
+      300,
+      375,
+      450,
+      525,
+      600
+    ],
+    "bytes": 80846,
+    "dimensions": [
+      800,
+      550
+    ],
+    "frames": 9,
+    "metric_only": true,
+    "new_draws": false,
+    "no_resampling_or_rescoring": true,
+    "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_intensity2/goal-metrics.gif",
+    "pixel_sha256_per_frame": [
+      "75919a7c7a3ac6e8b12ee07df9511aff1de43dd233a5b8d7b72d31d51610c491",
+      "c2a1e3b9a57b9f050330aaa23faae1313560fb4a525411e65added3a8b53d1a2",
+      "cf23602832ad28d4eab25b44ae405aebc8568a8604d803f53eb1dc9f76fd3a13",
+      "04a6bd94bbe538c843577b126ea1b1a2f5570241ffe04b2c1222edba31cb537f",
+      "682d0c047b1bcdfa4853120a5d2fbf8a7303a7fdfb8800a0e38acb2eb14d4543",
+      "0dce95f664bd2208dead43a1248facd12b63601657cf7a5fea57dcf2c7bf7287",
+      "26f10dfafed13cac65cb67c2adc3022b2c67df3ff65d00d71db736ea8f4c7080",
+      "dffb2ffb149bcf74871b393c1126bdc97f7385158b01537d6c69d1eb2dd00dc2",
+      "aefad1f6f81c37653f06a9cddd2d6a39990f139990737821a3d25a184c964d6e"
+    ],
+    "sha256": "5e9d0919d530f4881de2b8758be2b4217a29b96e3ab7dd1205b8eb617955b426",
+    "training_updates": 0,
+    "visual_review": "Readable fixed axes, original modes>=2/HQ>=.9 bounds, actual steps and noisy-only qualification scope. Frame0 has one observation without a marker; its point is not visible. Middle/final curves illustrate crossing and sustained success.",
+    "visual_review_frames": [
+      0,
+      4,
+      8
+    ]
+  },
+  "metrics": {
+    "all_other_values_types_and_keys_exact": true,
+    "normalized_trace_sha256": "a6dd967833cbdbde87dd4a7c9f0f403905cae32f931cbbefe741ab657c232fca",
+    "observations": 24,
+    "only_excluded_paths": [
+      "/0/seconds",
+      "/1/seconds",
+      "/2/seconds",
+      "/3/seconds",
+      "/4/seconds",
+      "/5/seconds",
+      "/6/seconds",
+      "/7/seconds",
+      "/8/seconds",
+      "/9/seconds",
+      "/10/seconds",
+      "/11/seconds",
+      "/12/seconds",
+      "/13/seconds",
+      "/14/seconds",
+      "/15/seconds",
+      "/16/seconds",
+      "/17/seconds",
+      "/18/seconds",
+      "/19/seconds",
+      "/20/seconds",
+      "/21/seconds",
+      "/22/seconds",
+      "/23/seconds"
+    ],
+    "rate_observations": 600,
+    "rate_values_exact_without_any_exclusion": true,
+    "steps": [
+      25,
+      50,
+      75,
+      100,
+      125,
+      150,
+      175,
+      200,
+      225,
+      250,
+      275,
+      300,
+      325,
+      350,
+      375,
+      400,
+      425,
+      450,
+      475,
+      500,
+      525,
+      550,
+      575,
+      600
+    ]
+  },
+  "original_gate": "PASS",
+  "raw_artifacts_unchanged": true,
+  "review": {
+    "model_forwards": 0,
+    "new_draws": 0,
+    "rescoring": false,
+    "training_updates": 0,
+    "verifier_path": "/tmp/verify_atlas_original_positive_20261003.py",
+    "verifier_sha256": "77c4ec7ec808920d67a303d8a410c975e781f1f557b1bad142bccaf9e03538d5"
+  },
+  "runtime": {
+    "current_lane_runtime": {
+      "cuda": "12.6",
+      "cuda_device_model": "NVIDIA RTX A6000",
+      "device": "cuda:0",
+      "python": "3.12.13",
+      "torch": "2.13.0+cu126",
+      "torch_threads": 1
+    },
+    "current_paid_seconds": 28.750350603833795,
+    "different_physical_gpu": {
+      "current": "1",
+      "historical": "0"
+    },
+    "historical_execution_wall_seconds": 31.040062189102173,
+    "matching_keys": {
+      "cuda": "12.6",
+      "device": "cuda:0",
+      "gpu": "NVIDIA RTX A6000",
+      "host": "pop-os",
+      "python": "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+      "torch": "2.13.0+cu126"
+    },
+    "no_speed_comparison_claim": true
+  },
+  "sampling": {
+    "checkpoint_stored_served_source": "fast",
+    "evaluation_generator_seed": "402 + completed_steps +1901",
+    "initial_output_sigma": 0.029,
+    "noise_mode": "learnable",
+    "other_cohorts": [
+      "EMA diagnostics",
+      "clean diagnostics"
+    ],
+    "primary": "Original noisy observer reads trainer.G and trainer.prior (not ema=True or an explicit served_model call), evaluates all32 ordered prior rows through indexed _generate, and disables latent perturbation. Those public references may already contain policy-applied served parameters; this checkpoint records fast serving.",
+    "stored_served_source_is_not_a_new_public_served_sampler_qualification": true
+  },
+  "schema": "original_atlas_positive_independent_check_v1",
+  "scope": "One original Atlas image diagnostic; no Forge MoG/policy-hold/default credit.",
+  "source": {
+    "changed_package_source_files": {
+      "k3p.py": {
+        "current": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+        "historical": "72fa32ae0d423d2904f310958721c0138823fa4d06ceca6ec451aaf86280607d"
+      },
+      "policy.py": {
+        "current": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+        "historical": "5b6877ab14170340433e54f5d0e0409b2f72721d31145b8d4867890686317ebc"
+      },
+      "recipe_schedules.py": {
+        "current": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+        "historical": null
+      },
+      "recipes.py": {
+        "current": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+        "historical": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b"
+      },
+      "training.py": {
+        "current": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+        "historical": "319bc2d32f2ba106d428607575447dcda419f190cfe02fabdb22fc49ddcc5f77"
+      }
+    },
+    "current_package_sha256": "5a63765e278f9a7c911b946777fffbb6b7b97c2e84700730dae0af4c2df10f3b",
+    "historical_package_sha256": "deab9ad5f04600fd37cd0fbf0a47442cda7fbdd6b73539e49fd8d5880e52662a",
+    "limit": "Exact observed trajectory/checkpoint agreement does not establish global API or algorithm equivalence.",
+    "location_wrapper_receipt": {
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/portability/img_intensity2/adapter-relocation.json",
+      "sha256": "d414032cb83725fc5076b8b78b2342c8627f8c4d9535c658e013bb4feb14e11b"
+    },
+    "original_math_adapters": {
+      "current_api_fixtures.py": {
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/atlas19-external/adapter/current_api_fixtures.py",
+        "sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12"
+      },
+      "screen_current.py": {
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/atlas19-external/adapter/screen_current.py",
+        "sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+      }
+    },
+    "unchanged_package_source_files": 25
+  },
+  "status": "PASS",
+  "terminal_passing_observations": 16
+}

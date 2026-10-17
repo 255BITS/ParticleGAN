@@ -1,0 +1,18 @@
+{
+  "status": "VALID",
+  "frozen_ready_sha256": "949ea3f183781b891e71a54a926740a68405cf7ae48ed2b6be82c1b1f21213be",
+  "ready_package_digest_kind": "sha256_of_sorted_JSON_source_manifest",
+  "manifest_key_prefix": "particlegan/",
+  "json_options": {
+    "sort_keys": true,
+    "separators": "default comma-space and colon-space",
+    "encoding": "UTF-8"
+  },
+  "ready_package_digest": "1e76684f30a272ea1d539f044c51d61e18b76b0c88d4eb989c8c28ebf161a2fc",
+  "ready_base_digest": "b2ea8c5912025dd38e18a4c42a8089149c17ee63203c17230214b1b78c66674a",
+  "canonical_digest_kind": "sorted relative-to-particlegan path UTF8 + NUL + complete file bytes + NUL",
+  "canonical_package_sha256": "d5824cc5a0a2632d4c55ff4084ccd0d6282fe699ffd2c1fc2ab92e5506273112",
+  "canonical_base_package_sha256": "e34bcb21aaa64caa0601cea5dc1f9b8eaebee9578686ebff39b459676063deb2",
+  "all_source_byte_maps_match": true,
+  "note": "Frozen READY is preserved; verify its declared manifest digest separately from the canonical byte digest."
+}

@@ -1,0 +1,21 @@
+{
+  "status": "CPU_ARTIFACT_AUDIT_EXITED",
+  "returncode": 0,
+  "pid": 1344737,
+  "startticks": "169015755",
+  "finished_utc": "2026-09-30T17:12:19.077316+00:00",
+  "elapsed_seconds": 1.673390283016488,
+  "child_absent_after_wait": true,
+  "launch_sha256": "2249295118b69dbf2efaa2b5b26b1cb8c34140251ebdf2e61d5c63b0c7298b89",
+  "closed_log_sha256": "ede0ba14084995625c0043ce1e922cd73a0c2927fae0a1a8af2362df3f8c619c",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-grid-artifact-audit/audit_completed.py",
+    "--input-freeze",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-grid-artifact-audit/attempt1-inputs/INPUTS-FROZEN.json",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-grid-artifact-audit/accepted-attempt1"
+  ]
+}

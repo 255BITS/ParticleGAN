@@ -1,0 +1,278 @@
+{
+  "1": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "g-coherence-research-seed1",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "research": {
+      "cohort_id": "g-coherence-paired-seeds1-6-20261014",
+      "purpose": "paired_replication"
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 1
+  },
+  "2": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "g-coherence-research-seed2",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "research": {
+      "cohort_id": "g-coherence-paired-seeds1-6-20261014",
+      "purpose": "paired_replication"
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 2
+  },
+  "3": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "g-coherence-research-seed3",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "research": {
+      "cohort_id": "g-coherence-paired-seeds1-6-20261014",
+      "purpose": "paired_replication"
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 3
+  },
+  "4": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "g-coherence-research-seed4",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "research": {
+      "cohort_id": "g-coherence-paired-seeds1-6-20261014",
+      "purpose": "paired_replication"
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 4
+  },
+  "5": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "g-coherence-research-seed5",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "research": {
+      "cohort_id": "g-coherence-paired-seeds1-6-20261014",
+      "purpose": "paired_replication"
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 5
+  },
+  "6": {
+    "budgets": {
+      "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+      "default_through_tier": 1,
+      "per_task": "TaskSpec.execution and resources.timeout_seconds"
+    },
+    "calibration_status": "provisional",
+    "id": "g-coherence-research-seed6",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "research": {
+      "cohort_id": "g-coherence-paired-seeds1-6-20261014",
+      "purpose": "paired_replication"
+    },
+    "revision": 1,
+    "rng": {
+      "candidate_identity_in_seed": false,
+      "component_scoped": true,
+      "derivation": "forge-rng-v1",
+      "streams": [
+        "init",
+        "data",
+        "prior",
+        "noise",
+        "eval"
+      ],
+      "unintended_deviations": 0
+    },
+    "robustness": {
+      "cross_seed_reuse": false,
+      "enabled_for_screening": false,
+      "requires_frozen_candidate": true,
+      "requires_preregistered_seed_set": true
+    },
+    "schema_version": 1,
+    "scoring": {
+      "best_checkpoint": "diagnostic_only",
+      "ema": "separate_view_required",
+      "weights": "live"
+    },
+    "seed": 6
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "grades": {
+    "unused_token_hold_routed_policy_selected_cloud_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.585,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 117,
+          "first_pass_step": 84,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 15,
+          "passing_suffix": 15,
+          "stable_from_seconds": null,
+          "stable_from_step": 84
+        },
+        "metrics": [
+          {
+            "margin": 0.14592122202739122,
+            "metric": "unused_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9959212220273912
+          },
+          {
+            "margin": 0.14539007431438622,
+            "metric": "concept_move",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9953900743143862
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos": 0.9999703168869019,
+        "concept_delta_norm": 1.0045803785324097,
+        "concept_move": 0.9953900743143862,
+        "scale0_err": 0.0,
+        "step": 200,
+        "unused_dist": 0.004078777972608805,
+        "unused_hold": 0.9959212220273912
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "raw_hash": "f7d7163ea89b31cc5da6b9f47078eb6de0a29dce4f5355b221f61b46302801e8",
+  "schema_version": 1,
+  "source_digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+  "telemetry": {
+    "independent_grading_seconds": 0.857630023965612,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 663216128
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "campaign": "technique-inventory-word-split-v1",
+  "optimizer_updates_added": 0,
+  "policy": {
+    "fallback_after_invalid_selected_evidence": false,
+    "ordering": [
+      "preferred_candidate_first",
+      "candidate_id",
+      "candidate_revision",
+      "attempt_id"
+    ],
+    "preferred_candidate": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "use_grades_for_selection": false,
+    "version": 1
+  },
+  "qualification_input": false,
+  "queue_state_sha256": "0ac92815476858b6f1832386a417c8b88d75fef05ef7687033b8afcd1868a3a8",
+  "required_unmeasured_task_ids": [
+    "cover_leftover",
+    "five_word_joint_hold",
+    "gaussian1d_stability",
+    "grid100",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "img_stripes2",
+    "mid_scale_identity",
+    "mode_hold",
+    "residual_student",
+    "rotated100",
+    "staggered100",
+    "trajectory",
+    "unipolar",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width"
+  ],
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_tasks": [
+    {
+      "attempt_id": "b6d5eb6149d244669b6ac2069e4e8b56",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "executed_candidate_count": 5,
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "932de39b0da24e8d95b13f1d37cdde5f",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "executed_candidate_count": 5,
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "8a2c607601884c039c551c5bc2652d68",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "executed_candidate_count": 5,
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "4a5687bf78db4967aebe1ca068163a07",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "executed_candidate_count": 5,
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "FAIL",
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "795acf9d536c4969a5542c43b8f75f0c",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "executed_candidate_count": 5,
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "5a88de9e4729431ca039607a02e0f7b9",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "executed_candidate_count": 5,
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "8ed478b6a2bb469ab9efc8c9542fed06",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "executed_candidate_count": 5,
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "task_id": "unused_token_hold"
+    }
+  ]
+}

@@ -77,7 +77,7 @@ class DrawSource(ParticlePrior):
         nn.Module.__init__(self)
         if kind not in ("gaussian", "fixed", "learned", "zero"):
             raise ValueError(f"unknown source {kind}")
-        self.kind, self.dim = kind, dim
+        self.kind, self.dim, self.init_std = kind, dim, 1.0
         init_rng = torch.Generator(device=device).manual_seed(seed)
         table = torch.randn((count, dim), generator=init_rng, device=device)
         if kind == "learned":

@@ -1,0 +1,19 @@
+{
+  "status": "PREPARED_NOT_FROZEN_NOT_TRAINED",
+  "candidate": "RA13-settled",
+  "package": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled",
+  "config": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA13-settled.json",
+  "ports": 13,
+  "native_static": 3,
+  "moving": 3,
+  "moving_protocol": {
+    "steps": 1500,
+    "turn_every": 500,
+    "degrees": 30
+  },
+  "scorers_changed": false,
+  "thresholds_changed": false,
+  "seeds_changed": false,
+  "budgets_changed": false,
+  "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation"
+}

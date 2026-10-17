@@ -1,0 +1,32 @@
+{
+  "budgets": {
+    "campaign_seconds": 5400,
+    "candidate_seconds": 5400,
+    "task_seconds": {
+      "residual_student": 1800,
+      "trajectory": 1800,
+      "unipolar": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "current-k3p-mog-cpu-reference-a-v2",
+  "profile": "current-k3p-mog-v2",
+  "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+  "purpose": "Measure the three shortest independent CPU reference hosts for the frozen K3P baseline before authorizing further reference work. All are explicit particle-cloud or nonsampled controls; these do not establish learned-MoG quality. Preserve the full 16-task reference denominator and all smoke failures. This selection spends no GPU capacity and makes no ordinary qualification claim.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "A current reference-positive baseline has not been established. Inspect baseline quality on three independent 400-update hosts before spending on the remaining reference cells or other controls.",
+      "tasks": [
+        "trajectory",
+        "residual_student",
+        "unipolar"
+      ]
+    }
+  ],
+  "view": "discriminator_stability"
+}

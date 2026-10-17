@@ -1,0 +1,56 @@
+{
+  "accepted_goal_gif": null,
+  "certified": false,
+  "completed_updates": null,
+  "cost": {
+    "allowance_seconds": 3600.0,
+    "certified": false,
+    "charged_seconds": 438.0422697348986,
+    "completed_terminal": true,
+    "overrun_seconds": 0.0,
+    "paid_wall_seconds": 438.0422697348986,
+    "reserved_seconds": 0.0,
+    "terminal_status": "completed",
+    "unmeasured_interrupt_reserved_seconds": 0.0
+  },
+  "default_adoption": false,
+  "frozen_request_digest": "0d513edef45f13b629884816e1f018dc657281e9826ee69915e8b801b7e6ce80",
+  "full_protocol_complete": false,
+  "grade": null,
+  "last_observation_is_attested_completed_updates": false,
+  "last_retained_observation_step": 2500,
+  "measured_whole26_ranking": false,
+  "numerical_status": "UNAVAILABLE",
+  "observed_error": {
+    "function": "allocate_anchor_births",
+    "line": 132,
+    "message": "index 2 is out of bounds for dimension 0 with size 2",
+    "source_file": "particlegan/birth_phase.py",
+    "type": "IndexError"
+  },
+  "original_terminal_sha256": "ea8b771a98ab352496833e1d2e109ab16210ad45d840a8e95ab22ada77ca3574",
+  "partial_artifact_pins": {
+    "INITIALIZATION.json": {
+      "bytes": 14508,
+      "sha256": "1e3611ea17f0fcc0a55692a7ad11b0b184a246c63f95cf541d478c2992475fa2"
+    },
+    "MODEL_STARTED.json": {
+      "bytes": 402,
+      "sha256": "5bcffd834fe1772f5d652b385eddaaf63872e2a0629f8c61b6a76faa10ef62bf"
+    }
+  },
+  "qualification_credit": false,
+  "reason": "Stopped execution has no accepted complete child attestation; no numerical grade or goal GIF is certified.",
+  "retained_capture_sha256": "85ba47725e98e37449166dad086d7f0301c637f958a44154add2a1122744657c",
+  "same_source_whole26_claim": false,
+  "schema": "pg_common26_public_execution_error_v1",
+  "source": {
+    "digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb",
+    "origin_commit": "7f7037a54edc54cfb8f7466f6a98aee56e17b6db"
+  },
+  "speed_ranking": false,
+  "status": "INVALID",
+  "study_sha256": "1ff38e2b9ac4bb1a95201b7c35f7d7a5da35a7bdbb8430d260a8cdbd2d243758",
+  "task_id": "staggered100",
+  "token_sha256": "c4b337c1f5bc9a9fed4216c079dc56ea796ad0e43bcee08572eddf6d388574a0"
+}

@@ -1,0 +1,50 @@
+{
+  ".gitignore": {
+    "bytes": 50,
+    "sha256": "d7e3478b47752db9776aa9e0172573945cdba96907965909f572130b4df8053f"
+  },
+  "README.md": {
+    "bytes": 1877,
+    "sha256": "5e59dcb49fb1c7cd67dac946480805eb498630955f1c13a2315f3f2bb1ada1c9"
+  },
+  "results.json": {
+    "bytes": 163519,
+    "sha256": "66551a0018a22cc96ffe88bd27754634ddb5768c5fd896cf6f5dd262e72aa38b"
+  },
+  "two_pole/INITIALIZATION.json": {
+    "bytes": 2646,
+    "sha256": "1b0f4a967ca11ee380cef1765a5b3e0897f9d03bbe2636eab23da4bb90b78e11"
+  },
+  "two_pole/MODEL_STARTED.json": {
+    "bytes": 380,
+    "sha256": "892e127ae04a6bea7b8684c04d04fc7fcc83c934141cae594c974ddf6779d7c2"
+  },
+  "two_pole/attestation.json": {
+    "bytes": 4235,
+    "sha256": "1e7b1e54e097083f860adccc59fcd785d61b49387d8ca37670ca21ae67ea8330"
+  },
+  "two_pole/goal-final.png": {
+    "bytes": 44588,
+    "sha256": "7a052184037150514a8d019f3a0f2d9ef273b61b8577a07927ca0866cd21c67b"
+  },
+  "two_pole/goal-states.json": {
+    "bytes": 41753,
+    "sha256": "0b3307776834e095ea55d7b9230ff433cf7d8aac7e4957c13ea287a3e29bba57"
+  },
+  "two_pole/goal.gif": {
+    "bytes": 161382,
+    "sha256": "cd5f383ea14ad2cd58d9ce064b07bc50535f468961c002ca652f1e8f3a05880c"
+  },
+  "two_pole/grade.json": {
+    "bytes": 1130,
+    "sha256": "44653124dbd0de7f9211765cb26e67d34fb69c782bc834b5bfa25b815501aa9a"
+  },
+  "two_pole/raw-result.json": {
+    "bytes": 35767,
+    "sha256": "b5a4e769b5a1700351e93159be4e4b9f22ada70d4560e58ec1b861af007a3727"
+  },
+  "two_pole/state.pt": {
+    "bytes": 106881,
+    "sha256": "3c6363f0dd6536ff4ef2afd8b008bf44902753fa43d7c705f92d5eefc126a1f9"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "candidate_id": "bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe",
+  "exporter_sha256": "09bb54dabbe539f42e03052ee13de2872b59e8178f6c273fb6b92b9fa264b888",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "setup_refusals_without_training": [
+    {
+      "attempt_id": "c6e477ce08814b4e986e0e9539c4041b",
+      "gif": null,
+      "setup_error": {
+        "message": "dualnorm supports matrix weights and vector/scalar biases only",
+        "type": "ValueError"
+      },
+      "task_id": "img_stripes2",
+      "training_started": false
+    },
+    {
+      "attempt_id": "cb16cc9e32d442c0a1c65694cc0e0694",
+      "gif": null,
+      "setup_error": {
+        "message": "dualnorm supports matrix weights and vector/scalar biases only",
+        "type": "ValueError"
+      },
+      "task_id": "img_bars4",
+      "training_started": false
+    },
+    {
+      "attempt_id": "b1cb4f4f056c45c9932e07b66e1fe280",
+      "gif": null,
+      "setup_error": {
+        "message": "dualnorm supports matrix weights and vector/scalar biases only",
+        "type": "ValueError"
+      },
+      "task_id": "img_blobs4",
+      "training_started": false
+    },
+    {
+      "attempt_id": "8bb703da98474e3b9349c0a1753ab15d",
+      "gif": null,
+      "setup_error": {
+        "message": "dualnorm supports matrix weights and vector/scalar biases only",
+        "type": "ValueError"
+      },
+      "task_id": "img_intensity2",
+      "training_started": false
+    }
+  ],
+  "study_id": "bcap-tier2-smoothing-v1",
+  "tasks": [
+    {
+      "attempt_id": "030f31f7ed0149e0bc4df3b43895f56f",
+      "gif": "cover_leftover.gif",
+      "gif_sha256": "a53cad89c968a49b66c48e8972c8f2786a324e03e1c1c2cd1df11b05c140958c",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "cover_leftover.json",
+      "renderer_receipt_sha256": "289b4979b8666325faeb3d0f56c9636817740c58c1e50b1b9476abe0f32b7dc2",
+      "task_id": "cover_leftover"
+    },
+    {
+      "attempt_id": "5332700ada034759915a5fe82f4cc8c2",
+      "gif": "five_word_joint_hold.gif",
+      "gif_sha256": "cf8e82f83408ccde4495af759a8657a62b67962b4725b8d3843f0b3662b38d34",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "five_word_joint_hold.json",
+      "renderer_receipt_sha256": "9c1ce675f5cbf7ff62b3bf8a90ddd954482e7cf0512913f9703b275b7f5b5e80",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "attempt_id": "d8fe118c02aa42e4a85263ea0862d423",
+      "gif": "gaussian1d_stability.gif",
+      "gif_sha256": "2faed76005de3689f4f55eb39c909a54d53e7a6224157bcde0392ef632fe23dd",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "gaussian1d_stability.json",
+      "renderer_receipt_sha256": "ee2a1db6beb681d6886fe3e3a8db5db3a3519ade42043641c37451f550b728e5",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "attempt_id": "404314afcc7b4068b69577c9c7424c12",
+      "gif": "grid100.gif",
+      "gif_sha256": "ef50a487e3737895d41357a0cd7000394c0fb4ae01ce2d439950a0583fae44ba",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "grid100.json",
+      "renderer_receipt_sha256": "904b8303994ecef4b7fc0e3db1c61dcda206b20b00396622c627dbbd00b54596",
+      "task_id": "grid100"
+    },
+    {
+      "attempt_id": "e5b057f1b750454da2adf0d439032cbc",
+      "gif": "mid_scale_identity.gif",
+      "gif_sha256": "7240d9bddc34fdc5741b06732a8fc863aba7261503298096cd0d7b137b969ff9",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "mid_scale_identity.json",
+      "renderer_receipt_sha256": "b6886e476320dc44a61fbb4019ac4266fd677c5fc6fc58ca1fa40bd2211bf29f",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "attempt_id": "6c80259d9fbb4e27b706a0caa1e4c0c0",
+      "gif": "mode_hold.gif",
+      "gif_sha256": "4f15e30752714b2b4207d320d08b31b95311f6dcc4a81cc4dd4c458cb63defd2",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "mode_hold.json",
+      "renderer_receipt_sha256": "53b94754eedb33bd26ecf673b93d543cc4c7eaf54a6549ef373229213d98e149",
+      "task_id": "mode_hold"
+    },
+    {
+      "attempt_id": "2d76d71aa0cc4f58921dd7a9ed849433",
+      "gif": "residual_student.gif",
+      "gif_sha256": "538cf686c15a84396bb5d9ae9353aed8321bda624201dc8ebc9052a89f00fde2",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "residual_student.json",
+      "renderer_receipt_sha256": "a1cb4579025fc9da9b1e42ff4ac8c2e04dc3e77645cec7d8da5981987dabc020",
+      "task_id": "residual_student"
+    },
+    {
+      "attempt_id": "dc2105add0e94635b370c5df5dae5c78",
+      "gif": "rotated100.gif",
+      "gif_sha256": "2f3886ad29176b4d51f2279a4c3468da97532bbc552dfdc7da9a95bcb3faf1d8",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "rotated100.json",
+      "renderer_receipt_sha256": "01f081e678373506741293143a2da391421a3b866db47be0c18a4b8d3e3292d5",
+      "task_id": "rotated100"
+    },
+    {
+      "attempt_id": "a76c5cbaa9f748c094991b24561eaa3a",
+      "gif": "staggered100.gif",
+      "gif_sha256": "d3dd10a34353203f04da9065ba1d6dacd37c38fe08d7717ab22cac9d05db298e",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "staggered100.json",
+      "renderer_receipt_sha256": "91297d60cfb8e92eea024e94747964c610177bad8898c54413591bd8bde9e2dc",
+      "task_id": "staggered100"
+    },
+    {
+      "attempt_id": "25b395525da44b29806153b121e11cc0",
+      "gif": "trajectory.gif",
+      "gif_sha256": "e8bf834f078cf55a141f04d2b0817fc023703fef05a273aff5e0aa1c100586f1",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "trajectory.json",
+      "renderer_receipt_sha256": "40d48a2d8d1b1f6e0ce83b2379efe85c591f840cabecbdfb84f49e967e5c9688",
+      "task_id": "trajectory"
+    },
+    {
+      "attempt_id": "2585f3198dc44415b71aef572ca84603",
+      "gif": "unipolar.gif",
+      "gif_sha256": "6e68d0911790e61959de167a756b5dd40267eb9c818a4813ad3a7d10c90df028",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "unipolar.json",
+      "renderer_receipt_sha256": "2c4c7e2d0e8754a3dd0675149ecb61bc6244c9044bd369286b4b424e08e9f8d0",
+      "task_id": "unipolar"
+    },
+    {
+      "attempt_id": "fc8d0c46807d4647b46f1fd4f2d8efc1",
+      "gif": "vector_anisotropic.gif",
+      "gif_sha256": "2e209787bdafd9c2739947a73aa16de3a6ae5f1844d9a556b2111caa6c781ce2",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "vector_anisotropic.json",
+      "renderer_receipt_sha256": "a4a33c8244119e7499b3014a784c9008546ba8bfd4732a3d528d33dbdbd398b8",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "attempt_id": "4798d7ea1ffb41529d8ce695753b83c4",
+      "gif": "vector_overlap.gif",
+      "gif_sha256": "f7bd872dace05ae1a9d42f2e41b1b17093fd8cf28b78cad205a7049fb68e231f",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "vector_overlap.json",
+      "renderer_receipt_sha256": "eef58657748d8131505bb79391512a08bc96c4eda83dbe0e56a1b4a9398b972d",
+      "task_id": "vector_overlap"
+    },
+    {
+      "attempt_id": "d8a9d2c9cd0e472b9d3f78201729a57a",
+      "gif": "vector_spiral.gif",
+      "gif_sha256": "ec248f7fa4f50ffd2b8b4db557c575e475a21356af9675ba257e3c00e309540f",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "vector_spiral.json",
+      "renderer_receipt_sha256": "ad505b5b97b4fb6783c576585beaa1d52d9c5c058e92b33e172b2bbf991cf55f",
+      "task_id": "vector_spiral"
+    },
+    {
+      "attempt_id": "dbbb65e63c984991a8d8fa75effc7182",
+      "gif": "vector_two_broad.gif",
+      "gif_sha256": "63816f7f8923e4ea68f4979afecfade403731702ac0b1a7cb8a9244b2e3079cf",
+      "recorded_grade": "PASS",
+      "renderer_receipt": "vector_two_broad.json",
+      "renderer_receipt_sha256": "2f815a7c89b2383c7c465d95c16cbf8c3d39d7abe8653b2b55994f5f80331915",
+      "task_id": "vector_two_broad"
+    },
+    {
+      "attempt_id": "72a5a3cae25e456092338d3e591a43f8",
+      "gif": "vector_unequal_mass.gif",
+      "gif_sha256": "a543ae0d03196b69c09d3b779feff564e3148cb2349140ef964c0344be943521",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "vector_unequal_mass.json",
+      "renderer_receipt_sha256": "77b9cdebfbdb70bf5e5d4437bdbd5cd65e3c4521a59e411b9131f8f434e4658d",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "attempt_id": "fb7d837090014713ab378cb9b7c422b9",
+      "gif": "vector_unequal_width.gif",
+      "gif_sha256": "e8e0ba7dd0c3c928e8976afa5217c284515bb89d19b910c033ba77d7f0ed0d0a",
+      "recorded_grade": "FAIL",
+      "renderer_receipt": "vector_unequal_width.json",
+      "renderer_receipt_sha256": "18ddde7b02c3551f9c9246bf8ebe58eac389ad30d83db8eeed72b6c62eef9471",
+      "task_id": "vector_unequal_width"
+    }
+  ]
+}

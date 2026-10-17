@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/run_ra10_mechanics.py"
+  ],
+  "pid": 1021002,
+  "startticks": "167393490",
+  "started_UTC": "2026-09-30T12:41:54.754589+00:00",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA10-mechanics-driver.log",
+  "phase_ready_sha256": "33432e4989e7c72d54e2fd4c3a8a3b850b2c0720dea6c60c8d38d452dcc0c7b1",
+  "source_integrity": "VALID",
+  "numerical_parallelism": 1,
+  "quality_verdict": null
+}

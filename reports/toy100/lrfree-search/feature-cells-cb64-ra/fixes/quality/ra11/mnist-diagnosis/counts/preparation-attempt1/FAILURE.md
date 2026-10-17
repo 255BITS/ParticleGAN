@@ -1,0 +1,1 @@
+Source preparation only: timeline.py seal exited1 at line55 assert all(f.is_file() for f in files). Incorrect source-freeze location was learned/source-freeze.json; authoritative lane source-freeze.json is in its parent. No derived timeline ran; no Torch/PT/forwards. Corrected helper paths before successful preseal.

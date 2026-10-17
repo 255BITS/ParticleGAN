@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra16-replay/launch_replay.py"
+  ],
+  "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+  "fresh_training_planned": false,
+  "gpu_operations": 0,
+  "original_learned_training_source": "RA13-settled",
+  "package_sha256": "ba20f8e6353b2aca4725258835a68c1dfaa056a0484b2d683a5bb74a1eca0aa0",
+  "replay_runner_byte_identical_to_closed_RA14": true,
+  "required_fresh_replay_updates": 40,
+  "status": "SOURCE_PREPARED_UNLAUNCHED_CPU_CHECK_PENDING",
+  "training_updates": 0,
+  "update_scorer_stream_seed_changed": false
+}

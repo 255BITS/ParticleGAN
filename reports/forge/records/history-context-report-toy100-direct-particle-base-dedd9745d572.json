@@ -1,0 +1,83 @@
+{
+  "candidate_id": "context:report/toy100/direct-particle-base",
+  "candidate_revision": "aa2e884b643dc01ab678cd4b726fcba146264e8aff3b6eace3ce59e82e1868dc",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Previous research base: direct_particle_response",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/direct-particle-base",
+      "narrative_sources": [
+        {
+          "git_blob": "1f2cec64ff52f45c58fad960323552b89c1ecd13",
+          "path": "reports/toy100/direct-particle-base/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2c9bcaac8cdb61c7bb35ddc4139726dfccd020fec8615155a3e676aaab2703dd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/direct-particle-base/README.md"
+        },
+        {
+          "git_blob": "fe9b9b9eaf45d2aa548e5524f4d329957c3e66dd",
+          "path": "reports/toy100/direct-particle-base/launcher/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a3e12a5d5ac18c0722d5beb786f7065218af804838b8c8b2c41a55c4831bcc83",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/direct-particle-base/launcher/README.md"
+        },
+        {
+          "git_blob": "10a45d818461fafe7930154d1057c14497abbaa5",
+          "path": "reports/toy100/direct-particle-base/launcher/try-gan.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f5e52fc5960e14c26375a7f50203f8dbfedf15574d63d46071a7c1fab63a1e50",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/direct-particle-base/launcher/try-gan.md"
+        },
+        {
+          "git_blob": "629620309e6c776985c3c0ddfb54e90652dabb29",
+          "path": "reports/toy100/direct-particle-base/original-attempt-report.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7622b8fe7500fd440424badb425f4b9ddeaa7212f8a913df77c8488cb9affef9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/direct-particle-base/original-attempt-report.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Previous research base: direct_particle_response\n\nThis historical research/launcher base has been superseded by\n[K3P](../k3p-base/README.md). The measurements and sources below describe this\nearlier formulation.\nIt remains an Rp logistic GAN with the parent dimension-RMS critic penalty.\nPublic training-package defaults are unchanged; release qualification is pending.\n\n**15 PASS / 1 FAIL / 6 NOT_RUN across the 22 GPU toys.** All seven initial\ngates pass. Unequal-width covariance is the remaining measured failure:\ncomponent covariance error .981321 exceeds .85, with zero terminal passing\nchecks. Its first component contributes error 2.72220; mass, HQ, SW1 and the\nminimum-eigenvalue bounds pass. There were 11 passing observations out of 24,\nso an earlier passing check would have hidden the failure.\n\nThe critic retains the parent's penalty:\n\n`lambda/2 * (mean(||grad D(real)||\u00b2 / d) + mean(relu(||grad D(fake)|| / sqrt(d) - kappa)\u00b2))`\n\nHere d counts input elements per example; lambda=kappa=1. This is normalized\nreal R1 and fake RMS b-cap, with the original schedules and auxiliary host terms.\nThe new response applies only to direct sample-particle optimizer groups,\nexcluding registered ParticlePrior latent parameters and network parameters.\nFor their ordinary Adam update it uses betas (0,.9) and multiplies the scheduled\nlearning rate by `1 + clamp(cos(center(g_t), center(g_previous)"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-direct-particle-base-dedd9745d572",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "1f2cec64ff52f45c58fad960323552b89c1ecd13",
+    "path": "reports/toy100/direct-particle-base/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "2c9bcaac8cdb61c7bb35ddc4139726dfccd020fec8615155a3e676aaab2703dd",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/direct-particle-base/README.md"
+  },
+  "task_results": []
+}

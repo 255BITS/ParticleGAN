@@ -1,0 +1,519 @@
+{
+  "task_id": "routed_convergence_guided_pair_v1",
+  "status": "authorized fixed guided-pair convergence diagnostic; no quality results yet",
+  "scope": "standalone_policy_aware_diagnostic; no Forge/default/full-Supra qualification",
+  "question": "Does the shared-parameter conditional/unconditional CFG=3 output law reproduce the ordinary-versus-particle native-game convergence gap absent from the qualified unguided rotated teacher?",
+  "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+  "parent_card_sha256": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+  "parent_neutral_card_sha256": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+  "sources": {
+    "examples/e22_routed_convergence_guided_campaign.py": "0737b8baf169c457b47cd255d4130ab993da1d7e5eb60e5a57b178e9e54062b4",
+    "examples/run_e22_routed_convergence_guided_pair.py": "1a4ad6013f26d5172fb97f3d762acbf493735d260da2daa2395e67ade7c3d9ba",
+    "examples/review_e22_routed_convergence_guided_pair.py": "25ed8f9cd4308864131c1b1f7a8b95d67ea828ca6822e117e049d0c4b42fe459",
+    "examples/e22_routed_convergence_guided_pair.py": "5a0bcd4ef7ee31f8b25921c1957b9e7bdac619e162e9ca650db4b9ceddd7d1c0",
+    "tests/test_e22_routed_convergence_guided_pair.py": "83cabdbe8f2268fcac4ecfe20a5f04ec1a3c4b22352da66ad99635eff3dc59d2",
+    "tests/test_e22_routed_convergence_guided_campaign.py": "6188446585662fde6456bb73eb7d8bc833149c9685f5e266d3bc7e7ca2092ecb",
+    "examples/review_e22_routed_convergence_rotated_teacher.py": "1a5cf8461249ea4efe9481f71f17129544528ca123c0444d700070f3fef6f70d",
+    "docs/e22_routed_convergence_rotated_teacher_v1.json": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+    "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+    "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+    "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+    "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+    "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+    "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+    "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+    "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
+  },
+  "changed_factors": [
+    "Shared two-half host execution with unchanged conditional sources and fixed mean-source unconditional context; final guided output is unconditional+3*(conditional-unconditional). Guided teacher outputs, frozen base and fit residual scales are derived from that law."
+  ],
+  "teacher_geometry": {
+    "rho": 0.027625366713810866,
+    "rho_source": "mean historical ordinary linear-delta energy within fresh sampled Supra down span, across 71 fixed sites",
+    "audit_report_sha256": "bfd38b84d558559ebe048ae93302270e6059253a4ccf6149f22eb8117f428241",
+    "equation": "D_initial.T=Q@R; D_teacher=R.T@(sqrt(rho)*Q.T+sqrt(1-rho)*O.T)",
+    "complement": "lexicographic canonical axes, projected against Q and previously accepted columns, with two reorthogonalization passes; no new random draws",
+    "invariants": [
+      "Exactly the qualified rotated teacher down/up weights and within-rank Gram",
+      "All existing fresh student parameter tensors and named initialization seeds",
+      "Conditional source/input/time/latent panels; no new random draws"
+    ],
+    "software_expected": "Teacher and student tensors equal the qualified rotated parent; both adapter families reproduce the complete new guided teacher exactly on every pool; only fresh H/b are neutralized before policy/EMA in the neutral arm."
+  },
+  "host": {
+    "sites": 2,
+    "width": 16,
+    "tokens_per_context": 16,
+    "adapter_rank": 2,
+    "frozen_precision": "bfloat16",
+    "trainable_precision": "float32",
+    "particle_formula": "up(h + tanh(Hh+b) + h*tanh(Cz)); h=down(x)",
+    "routing": "Two sequential shared-bank sites on physical 2B halves; route logits [B,2,T,N], second site recomputed after the first bank-dependent edit; candidate output guards consume the complete guided function.",
+    "critic": "16->48->16 tanh features; pooled context score; explicit 769-dimensional source/time condition",
+    "penalty": "native KA2 in 16-coordinate token units",
+    "halves_per_context": 2,
+    "final_output_precision": "float32 guided combination; each half preserves held BF16 boundaries"
+  },
+  "prior": {
+    "kind": "particle_cloud",
+    "num_particles": 128,
+    "z_dim": 4,
+    "sigma": 0,
+    "exception_reason": "The subject is the shared routed ParticleGAN bank used by Supra, not a learned-MoG host.",
+    "initialization": "public particlegan.init.deterministic_orthogonal_ R2 cloud"
+  },
+  "initialization": {
+    "networks": "public particlegan.init.initialize_, sample_distributions_v1, distinct CPU generators bound to semantic parameter names",
+    "shared": "bitwise identical ordinary/particle down/up and critic initial tensors; up factors zeroed after API initialization",
+    "teacher": "Exact qualified rotated teacher down/up weights, with the same public sampled named initialization history; only its two-half guided execution changes. Both families remain bitwise exactly teacher-reachable.",
+    "reachability_gate": "Install unchanged rotated teacher down/up into both guided families and zero particle H/C/b; require bitwise exact final guided outputs on fit, guard and test before training.",
+    "supra_difference": "This named sampled network initialization is explicit and differs from the earlier Supra deterministic-orthogonal network cohort."
+  },
+  "data": {
+    "fit_contexts": 96,
+    "guard_contexts": 24,
+    "test_contexts": 96,
+    "source_classes": 6,
+    "flow_times": 4,
+    "fit_times": [
+      0.1,
+      0.35,
+      0.6,
+      0.85
+    ],
+    "fit_latent_grids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "guard_times": [
+      0.22,
+      0.72
+    ],
+    "guard_latent_grids": [
+      4,
+      5
+    ],
+    "test_times": [
+      0.18,
+      0.43,
+      0.68,
+      0.93
+    ],
+    "test_latent_grids": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "latent_geometry": "first 2 of 16 token activations weighted sqrt(7), remaining 14 weighted 1, then normalized to overall RMS 0.77; fixed input heterogeneity, never an error-selected training weight",
+    "condition": "Unchanged conditional 768-dimensional source vectors/time and frozen source projection; unconditional vector is their fixed six-source FP32 mean, using the same latent/time input.",
+    "fit_batch_size": 4,
+    "schedule": "editing only; same fixed context order across arms",
+    "critic_coordinate_scale": "New guided fit teacher-minus-guided-base standard deviation per coordinate, clamped at0.04 and held fixed; this derived scale cannot be selected for a favorable score.",
+    "rng": "isolated named initialization, fit-index, paired-base, DV12, birth/death and private evaluation streams; no seed scan"
+  },
+  "arms": [
+    {
+      "id": "ordinary_native_game",
+      "adapter": "ordinary down/up LoRA",
+      "optimizer": "native generator AMSGrad beta=(0,0.999), paired RpGAN and KA2 critic, native stationarity/noise policy",
+      "scaffold": "public UpdatePolicy with frozen unoptimized R2 table; no router/table optimizer groups; both row controls disabled",
+      "comparison_limit": "Native owner-dependent support-floor and noise eligibility can differ from the full particle arm. This is a configuration comparison, not a pure architecture ablation."
+    },
+    {
+      "id": "particle_native_game",
+      "adapter": "gated_particle_v3",
+      "optimizer": "full public e22_routed, AMSGrad beta=(0,0.999), paired RpGAN and KA2 critic",
+      "shared_additions": {
+        "birth_death_backend": "auto",
+        "reopen_guard": "settled"
+      },
+      "row_controls": "enabled; full-model candidate reruns; per-site DV12 and usage attribution",
+      "guard": "zero per-context learned-critic-feature harm on FAST and EMA; output guards disabled",
+      "probe_interval": 100
+    },
+    {
+      "id": "neutral_particle_native_game",
+      "parent": "particle_native_game",
+      "sole_change": "Zero fresh H/b after identical sampled initialization and before policy/EMA construction; C remains bit-exact and trainable.",
+      "optimizer": "Same full native e22_routed game, controls, rates, guard and named streams as particle_native_game."
+    }
+  ],
+  "native_nominal_rates": {
+    "generator": 5e-05,
+    "router": 5e-05,
+    "table": 0.0085,
+    "critic": 0.00425,
+    "learned_noise": 0.00425
+  },
+  "output_noise_std": 0.125,
+  "execution": {
+    "device": "cpu",
+    "threads": 1,
+    "steps_per_arm": 6400,
+    "checkpoint_cadence": 200,
+    "software_recovery_witness": [
+      800,
+      802
+    ],
+    "arm_wall_budget_seconds": 900,
+    "total_wall_budget_seconds": 2700,
+    "budget_includes": "all three quality arms, fixed-panel evaluation, six replay software updates, and independent qualification; preparation software is reported separately; wall timeout or missing review is incomplete qualification",
+    "quality_training_launched": false,
+    "execution_authorized": true,
+    "artifact_archive": "Exact held source/card/native Python bytes under source/, plus frozen data.pt and full-file SHA; checkpoint and raw-score manifests preserve all declared states.",
+    "completion_receipts": "Actual execution-completion.json and independent-review.json.completion.json bind report file SHAs and complete=true. Wrapper preflight and final serialization/review writes count in2700 seconds; incomplete/overrun companions confer no qualification.",
+    "authorization": {
+      "request": "isolate the problem into a toy problem",
+      "authorized_before_first_quality_update": true,
+      "authorization_utc": "2026-10-02 00:15 UTC",
+      "source_only_card_sha256": "bd524f6b7def926d11b9df3310dab1e9bd6b5d5fa30fa61200422cb1c4fec49f",
+      "source_readiness_sha256": "898a3b7fcc1ea2e85a1ebe82fa1679b1b0f939356a044a349adcf1234347b36e",
+      "scientific_law_budget_gates_unchanged": true
+    }
+  },
+  "evaluation": {
+    "mandatory_common_judges": [
+      "ordinary_native_game@800",
+      "ordinary_native_game@6400",
+      "particle_native_game@800",
+      "particle_native_game@6400"
+    ],
+    "judges": "All four actual newly trained baseline weights mandatory; no neutral or metric-selected critic replaces them.",
+    "score": "Native paired generator game on clean FAST outputs under fixed private Gaussian critic-input panels; all fit/guard/test pools. Exact same panel law, seeds and sigma as parent.",
+    "endpoints": [
+      5120,
+      6400
+    ],
+    "all_saved_curves": "All fixed 200-update checkpoints, including zero; no best-checkpoint or head selection.",
+    "anchor": "Zero teacher residual log2 under the original fixed common judges.",
+    "output_metrics": "Offline diagnostic only; prohibited in optimizer, structural decisions/guards, stopping and checkpoint/horizon/head selection.",
+    "neutral_support_gate": "At6400 improve original particles >1e-4 under all four judges, and reduce the original particle-versus-ordinary gap at least50% under both endpoint judges, with live retained particles.",
+    "beat_ordinary_gate": "At6400 neutral particles score lower than ordinary native game by >1e-4 under all four common judges.",
+    "remaining_gap_witness": "At6400 original particles are worse than ordinary by>1e-4 under BOTH fixed endpoint judges AND neutral particles remain worse by>1e-4 under BOTH, with live retained particles. Otherwise report no remaining original-gap witness, while retaining every signed score.",
+    "particle_gate": "Final H/b/C, bank and router remain trainable; C norms are nonzero at both sites; bank/router acquired live gradients; final zero-code game differs from live game>1e-6 under exactly all four mandatory critics. Report final gradients and every signed code gain.",
+    "denominator_policy": "If either original particle-minus-ordinary endpoint gap<=1e-4, the50% gap-reduction support test is inapplicable; report null reductions rather than negative or infinite fractions. H/b improvements and ordinary wins remain separate.",
+    "reference_path": "All four newly trained judges, all pools, all fixed residual fractions[0,.25,.5,1], log2 zero-residual anchor. Report weak or reversed judge directions without substituting heads; learned-game gains alone do not establish output accuracy.",
+    "historical_mse_reference": "No new MSE-trained arm. Unguided PR227 and historical Supra metrics use different execution/targets/scales/judges and cannot be used as matched guided-task references."
+  },
+  "limits": [
+    "One fixed guidance3 task and named stream; no CFG, source-correlation, angle, amplitude, seed or horizon scan.",
+    "The qualified unguided rotated task did not consistently reproduce the original particle gap; this new mechanism is a separate hypothesis and does not retrofit that result.",
+    "The two-site width16/rank2 host is a small BF16 surrogate, not the full Supra transformer, caption/null-caption encoder, attention, VAE or spatial/token distribution.",
+    "The unconditional vector is a deterministic mean of six unchanged synthetic source vectors. Supra uses its real null-caption sequence and mask; that transfer distinction remains.",
+    "Conditional activations stay bitwise exact; replacement of their source contribution is FP32 arithmetic. It shares the same mathematical latent/time input, rather than reconstructing separately rounded original latent tensors.",
+    "Host activations physically use2B while native route logits/mixes use[B,2,T,N/Z]. Evidence remainsB contexts and row proposals rerun the entire guided model.",
+    "Each half retains held BF16 branch boundaries. The new final combination isFP32; this changes final output support/transient shapes alongside the guidance law and is reported rather than hidden.",
+    "The teacher remains exactly ordinary-LoRA reachable and inherits fixedrho=.0276253667, a severe rank2/width16 acquisition regime; neither feature isolates every full-Supra difficulty.",
+    "Guided targets/base/whitening and newly trained critic heads change together. Absolute game scores, output RMSE or gap percentages cannot be subtracted from the unguided task as causal effect sizes.",
+    "Native owner-dependent floors, noise eligibility, LR/controller responses can differ between ordinary and routed configurations. Retain all four heads, signed scores and actual control records.",
+    "Output metrics remain offline diagnostics and never enter the optimizer, structural decisions/guards, stopping, or head/checkpoint selection.",
+    "Qualification is this standalone CPU task only, with no Forge/default/full-Supra promotion credit.",
+    "Exact held code-object SHA binds the current Python interpreter and absolute checkout filename; source bytes, callbacks, runtime, archives and native package identity are also explicitly bound."
+  ],
+  "next_action": "Finish source-only readiness and bounded software checks, then root reviews the concrete held card before any single quality launch. No launch, continuation, CFG/scale/angle/seed scan or Forge promotion is authorized by this source-only preparation.",
+  "launch_condition": "Quality execution remains disabled until the root review freezes and explicitly authorizes this single new guidance-pair law before the first quality update.",
+  "streams": {
+    "data_fit_indices": {
+      "device": "cpu",
+      "seed": 7
+    },
+    "paired_training_gaussian": {
+      "device": "cpu",
+      "seed": 43
+    },
+    "private_evaluation_panels": {
+      "device": "cpu",
+      "seed": 72
+    },
+    "native_policy_seed": 21,
+    "initialization": "semantic-name CPU generators from held public sample_distributions_v1 helper; no seed search"
+  },
+  "native_python_source_digest": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
+  "authorization_provenance": {
+    "user_request": "continue isolating the Supra convergence problem into a ParticleGAN toy",
+    "current_scope": "prepare and verify the single guidance-pair transfer; no quality launch yet",
+    "quality_training_performed": false,
+    "unguided_rotated_result": "Qualified artifacts did not reproduce a consistent original-particle disadvantage. Neutral particles beat ordinary under all four judges at both endpoints and all six subjects; no basis-angle explanation was established.",
+    "parent_results_sha256": "cbe02fa275faaf4edc8af4f2ddc8ac84d52d463beb8b7733331573f12bd0e971",
+    "parent_review_sha256": "4a2854c3d7e72ea455ce1ed41035ebaf11582ee09f38113c1a51142b0e3ee5b1",
+    "parent_training_and_review_seconds": 817.7648168131709,
+    "supra_qualification_pending": true
+  },
+  "parent_rotated_card_sha256": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+  "orchestration_adapter": {
+    "id": "isolated_guided_campaign_namespace_v1",
+    "task": "routed_convergence_guided_pair_v1",
+    "code_object_hash_law": "SHA256(canonical JSON of all public code fields recursively); includes checkout filenames and interpreter bytecode, excludes marshal refcount/intern flags",
+    "python_cache_tag": "cpython-312",
+    "held_runner": {
+      "source_hashes": {
+        "callable_code_sha256": "1cd3e086722b89944b3adb4232c73db2e9e987a1c6622eae65f756a1d199500d",
+        "unwrapped_code_sha256": "1cd3e086722b89944b3adb4232c73db2e9e987a1c6622eae65f756a1d199500d"
+      },
+      "archive_sources": {
+        "callable_code_sha256": "3bd25ee3e592e203b5f54152d07f80cd156c72cc51d7f038d591ec06af99fcd5",
+        "unwrapped_code_sha256": "3bd25ee3e592e203b5f54152d07f80cd156c72cc51d7f038d591ec06af99fcd5"
+      },
+      "validate_contract": {
+        "callable_code_sha256": "5b87aad19affbdaff20aadcbac50001a9d000268630fad887a06408665d51d2a",
+        "unwrapped_code_sha256": "5b87aad19affbdaff20aadcbac50001a9d000268630fad887a06408665d51d2a"
+      },
+      "checkpoint_steps": {
+        "callable_code_sha256": "cfbc7e29953481ddb3301335121a384a9f2ba0b52b6053a4a99a59c878262f7a",
+        "unwrapped_code_sha256": "cfbc7e29953481ddb3301335121a384a9f2ba0b52b6053a4a99a59c878262f7a"
+      },
+      "curve_steps": {
+        "callable_code_sha256": "4abbee86aa88137f40b858504581c97ac759e91224f123ea51cf6a8d2ce352de",
+        "unwrapped_code_sha256": "4abbee86aa88137f40b858504581c97ac759e91224f123ea51cf6a8d2ce352de"
+      },
+      "load_judge": {
+        "callable_code_sha256": "4f3dd83a3af747ed9eceef4dce72d744721f1ecedf6b50905041a0d27986a5ac",
+        "unwrapped_code_sha256": "4f3dd83a3af747ed9eceef4dce72d744721f1ecedf6b50905041a0d27986a5ac"
+      },
+      "immutable_scores": {
+        "callable_code_sha256": "d4d39fc6d5f507de89cc805e4e779921e75df1d28866a3d470ec1ba548620ff2",
+        "unwrapped_code_sha256": "d4d39fc6d5f507de89cc805e4e779921e75df1d28866a3d470ec1ba548620ff2"
+      },
+      "compact_scores": {
+        "callable_code_sha256": "5992e1323c86635a9a7006cb504a4a499bad10f854e2796caac2250462607294",
+        "unwrapped_code_sha256": "5992e1323c86635a9a7006cb504a4a499bad10f854e2796caac2250462607294"
+      },
+      "final_gates": {
+        "callable_code_sha256": "63b682e78eb14186f3fe05c0245c18080bd57aa92526a19db57d57a8affe8b83",
+        "unwrapped_code_sha256": "63b682e78eb14186f3fe05c0245c18080bd57aa92526a19db57d57a8affe8b83"
+      },
+      "main": {
+        "callable_code_sha256": "d0e89e6e7e8e0be60897d0dbd46270411e09816b244c076e97ec7a10449c019b",
+        "unwrapped_code_sha256": "d0e89e6e7e8e0be60897d0dbd46270411e09816b244c076e97ec7a10449c019b"
+      }
+    },
+    "held_reviewer": {
+      "sha": {
+        "callable_code_sha256": "87d0f2d51ef0d6b756c325cbff273c708e3e3dc016d90c39640f2c8fc038b636",
+        "unwrapped_code_sha256": "87d0f2d51ef0d6b756c325cbff273c708e3e3dc016d90c39640f2c8fc038b636"
+      },
+      "read": {
+        "callable_code_sha256": "2c37d105b6387ec8fdc2e3f57d9e2583aa49926a8e7ccf8fd734e7d84b6957d5",
+        "unwrapped_code_sha256": "2c37d105b6387ec8fdc2e3f57d9e2583aa49926a8e7ccf8fd734e7d84b6957d5"
+      },
+      "load": {
+        "callable_code_sha256": "b25b2b54fc2dd01ad97dc10839e83a4bc9292b1c4d2f8b55e3039698bab842a8",
+        "unwrapped_code_sha256": "b25b2b54fc2dd01ad97dc10839e83a4bc9292b1c4d2f8b55e3039698bab842a8"
+      },
+      "native_hash": {
+        "callable_code_sha256": "b445515688d8ac94ce8c32e391829df03a87d946ba999c0e6676adcb343f3667",
+        "unwrapped_code_sha256": "b445515688d8ac94ce8c32e391829df03a87d946ba999c0e6676adcb343f3667"
+      },
+      "finite_tensors": {
+        "callable_code_sha256": "899d7b469a1b775be4ac71d187b3a71509c40092f3cf472935eeb41abcd0dca9",
+        "unwrapped_code_sha256": "899d7b469a1b775be4ac71d187b3a71509c40092f3cf472935eeb41abcd0dca9"
+      },
+      "diagnostic_nonfinite": {
+        "callable_code_sha256": "a26ee9409e41f55cac942f8af9de884c6f4bfed6f40147f2b51ad043d9d715d0",
+        "unwrapped_code_sha256": "a26ee9409e41f55cac942f8af9de884c6f4bfed6f40147f2b51ad043d9d715d0"
+      },
+      "frozen_owners": {
+        "callable_code_sha256": "e11c49facc8ea2d117b5c7a2019e566a35c6d7e34da44e1b432a3a583a0e8eef",
+        "unwrapped_code_sha256": "e11c49facc8ea2d117b5c7a2019e566a35c6d7e34da44e1b432a3a583a0e8eef"
+      },
+      "json_native": {
+        "callable_code_sha256": "c4680b87af63a1ab0fdbc33ae891d9799489ce92bf6d4838090427f2e8b9a16d",
+        "unwrapped_code_sha256": "c4680b87af63a1ab0fdbc33ae891d9799489ce92bf6d4838090427f2e8b9a16d"
+      },
+      "expected_streams": {
+        "callable_code_sha256": "be7644bfaa89bdb0de61ac5c3c05ba8d57e9c249061afd884df5367dd4fecf57",
+        "unwrapped_code_sha256": "be7644bfaa89bdb0de61ac5c3c05ba8d57e9c249061afd884df5367dd4fecf57"
+      },
+      "check_trace_row": {
+        "callable_code_sha256": "64913857662e2eab78e1abf6108b63e0ca14c4e0ad45ec24308de8f58a8f6f65",
+        "unwrapped_code_sha256": "64913857662e2eab78e1abf6108b63e0ca14c4e0ad45ec24308de8f58a8f6f65"
+      },
+      "check_state": {
+        "callable_code_sha256": "e9d5e581d83e141059e5cc967edae447698bd3d6e06c9b877d3f07cdc4f79e2c",
+        "unwrapped_code_sha256": "e9d5e581d83e141059e5cc967edae447698bd3d6e06c9b877d3f07cdc4f79e2c"
+      },
+      "score_residual": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "119fc3f81150b234414f8e05476e1c0d8f40d633c27e9b108dd9467fb8e5a745"
+      },
+      "score_prediction": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "1a47ee54f8fa42510a4274c883f7ee71111ede934faf78286b93ff6896aa259b"
+      },
+      "compare_score": {
+        "callable_code_sha256": "ec3a2b56f77cf32cd0e7df383a93b675d673d2fcdcc2214bfbd70c414f5976c8",
+        "unwrapped_code_sha256": "ec3a2b56f77cf32cd0e7df383a93b675d673d2fcdcc2214bfbd70c414f5976c8"
+      },
+      "by_subject": {
+        "callable_code_sha256": "fe338ea8a81dab6b3180cd754f44a0ffc62a474447a6d1b068fffb6d834e77df",
+        "unwrapped_code_sha256": "fe338ea8a81dab6b3180cd754f44a0ffc62a474447a6d1b068fffb6d834e77df"
+      },
+      "predictions": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "af51f07c469dbb5c3ef45fcc6fe164782f21289af4bfac9c4fddf91ac93813bc"
+      },
+      "compact_scores": {
+        "callable_code_sha256": "5b1ebc27ee9bf0e5ba3c4c7b5f612636637731a7248bf92f7a0f84b72e99502f",
+        "unwrapped_code_sha256": "5b1ebc27ee9bf0e5ba3c4c7b5f612636637731a7248bf92f7a0f84b72e99502f"
+      },
+      "independent_gates": {
+        "callable_code_sha256": "5c8b18e8a6354bf414c51e385fe7ba2e36fa50cdf9f6e747ce4d3508b40f2b7d",
+        "unwrapped_code_sha256": "5c8b18e8a6354bf414c51e385fe7ba2e36fa50cdf9f6e747ce4d3508b40f2b7d"
+      },
+      "source_readiness": {
+        "callable_code_sha256": "f882669a517ba684a8490a43421e77db4488575b51a60eec48ea3d8317df32d8",
+        "unwrapped_code_sha256": "f882669a517ba684a8490a43421e77db4488575b51a60eec48ea3d8317df32d8"
+      },
+      "review_run": {
+        "callable_code_sha256": "0151eece7f4d77808bdb6d850d6c5360afea6e487c409ae05c506f156f4bac0b",
+        "unwrapped_code_sha256": "0151eece7f4d77808bdb6d850d6c5360afea6e487c409ae05c506f156f4bac0b"
+      },
+      "compare_nested": {
+        "callable_code_sha256": "9a4b9f97c15b822cf3b93207176e55b690506a311fea953c2bd55d460b40f2f5",
+        "unwrapped_code_sha256": "9a4b9f97c15b822cf3b93207176e55b690506a311fea953c2bd55d460b40f2f5"
+      },
+      "main": {
+        "callable_code_sha256": "7ef16843767d41b46f88bdb0f22515aa5b4df6aa660613ebac7f48e5f8243b35",
+        "unwrapped_code_sha256": "7ef16843767d41b46f88bdb0f22515aa5b4df6aa660613ebac7f48e5f8243b35"
+      }
+    },
+    "held_native_helpers": {
+      "make_loop": {
+        "callable_code_sha256": "894fdcf6bb46f10f48b5d32db033d2c2968f55758c7d4c42a0617491b86106c4",
+        "unwrapped_code_sha256": "894fdcf6bb46f10f48b5d32db033d2c2968f55758c7d4c42a0617491b86106c4"
+      },
+      "update": {
+        "callable_code_sha256": "d112db0be281d4f206900ee879aade0a899591965bd907ede3961ccc93f8463a",
+        "unwrapped_code_sha256": "d112db0be281d4f206900ee879aade0a899591965bd907ede3961ccc93f8463a"
+      },
+      "forward": {
+        "callable_code_sha256": "108339f49b75b74979ca1d1d9119576056c0b949f2471d487da967409088ee47",
+        "unwrapped_code_sha256": "108339f49b75b74979ca1d1d9119576056c0b949f2471d487da967409088ee47"
+      },
+      "checkpoint": {
+        "callable_code_sha256": "d69f92ab7f4fe94a83b4180da86d5017d599d07f2131dad40459e410670ef525",
+        "unwrapped_code_sha256": "d69f92ab7f4fe94a83b4180da86d5017d599d07f2131dad40459e410670ef525"
+      },
+      "restore": {
+        "callable_code_sha256": "9ff659c42a57ad4992890fbeb3c43b7b4469ecb07a86506aa3d9bdfa3fa050fc",
+        "unwrapped_code_sha256": "9ff659c42a57ad4992890fbeb3c43b7b4469ecb07a86506aa3d9bdfa3fa050fc"
+      },
+      "evaluate": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "7e610084c4a1894f1da5dda78148a0d70cd852e6456e151870dafd39d0e74579"
+      },
+      "score_residual": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "0d2a4cfda6d09315083a289b7001229deb800c572ae39acbac6b4e2038780bf3"
+      }
+    },
+    "held_factory": {
+      "id": "isolated_held_code_namespace_v1",
+      "held_function": "examples.e22_routed_convergence.make_loop",
+      "held_file_sha256": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+      "held_code_object_sha256": "8bd4d280d0998b73a8d709c9645288a9d2270c4d58d05ba350e8f3ccba5d6e62",
+      "code_object_runtime": {
+        "python": "3.12.13 (main, Mar 24 2026, 22:49:22) [Clang 22.1.1 ]",
+        "co_filename": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/examples/e22_routed_convergence.py"
+      },
+      "bindings": {
+        "Host": "GuidedHost bound to frozen projection/mean-source data",
+        "model_forward": "guided_model_forward"
+      },
+      "held_globals_mutated": false,
+      "update_checkpoint_restore_score": "held examples.e22_routed_convergence functions, unchanged"
+    },
+    "guided_factory_callbacks": {
+      "guided_model_forward": {
+        "callable_code_sha256": "b47723086d4bd5523fe58c67cd0426ff318f2ee4492513ced92488deca8c6602",
+        "unwrapped_code_sha256": "b47723086d4bd5523fe58c67cd0426ff318f2ee4492513ced92488deca8c6602"
+      },
+      "factory_namespace": {
+        "callable_code_sha256": "7dda741f1eda87c4d6aa0e73bcd4501888b9a1a9ecdf06616bc1ba55c8d0ebd5",
+        "unwrapped_code_sha256": "7dda741f1eda87c4d6aa0e73bcd4501888b9a1a9ecdf06616bc1ba55c8d0ebd5"
+      },
+      "factory_binding_manifest": {
+        "callable_code_sha256": "2d0b4f54e14d53e8463c7e73771d33fae7e66f1afb4d42e3ccc88883cfb8d329",
+        "unwrapped_code_sha256": "2d0b4f54e14d53e8463c7e73771d33fae7e66f1afb4d42e3ccc88883cfb8d329"
+      },
+      "make_guided_data": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "d311e6d06b9b5ef9234cc73094ac5aad79d4150628125526e828f493e9df24e0"
+      },
+      "make_guided_loop": {
+        "callable_code_sha256": "12d3f81baf64e71848f3e58841f21eeba8ee4a0c961c9dbb20ec989ebfa6f3cb",
+        "unwrapped_code_sha256": "12d3f81baf64e71848f3e58841f21eeba8ee4a0c961c9dbb20ec989ebfa6f3cb"
+      },
+      "reachability_witness": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "f90c169ff34d154e3a9c4cb9b1dfcf55e77636ba73dbe4a51de2614c79ab4161"
+      },
+      "initial_difference_witness": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "49dfa5ba25126792ce89f1d026c0b1a404e6b3cf6505c0e9d5e326a8041c44ff"
+      },
+      "initialization_witness": {
+        "callable_code_sha256": "6809b3358cfe84f351e65f6e0b06fc3906990b67f178e45de98b16804902b745",
+        "unwrapped_code_sha256": "6809b3358cfe84f351e65f6e0b06fc3906990b67f178e45de98b16804902b745"
+      },
+      "feasibility_witness": {
+        "callable_code_sha256": "2fc984a565369a9d75cfea9a15865d74a7aaf31e812413ce90cf19b5f1695da5",
+        "unwrapped_code_sha256": "8d5b5a51215e047be35b5d97d05172020c1ab666e1c96ff8b4df40f58de924d6"
+      }
+    },
+    "guided_host_methods": {
+      "__init__": "4d6eb67f8ceb08aaa92acda7baa0179cdfd81d42c08d885bbadb42cbd853210c",
+      "half_inputs": "5c0797a32e1a686a8abb6f03b092731a0a43f37e92cbe54efaf03e90f7cbd12d",
+      "combine": "8d9c9938329f1fa8b88fde5f37a7a4851e73e32d5c5f39c02f0085fc3290beff",
+      "forward": "a1ab63a41120f054260f789ce5d9ecc0b52def4489a5594b0f34784db891f475",
+      "forward_routed": "723e30eade62f1c4fb9d0247d3d33edfc763ceb6b3208eb4f5db39fd7001a790"
+    },
+    "global_bindings": {
+      "law": "new guided factory; local held-name aliases only",
+      "base": "held native helpers; reachability_witness bound to guided factory",
+      "common": "held I/O/finiteness; extra frozen CFG buffers; new schema writer",
+      "reviewer": "new actual source path, new source/card validator, frozen CFG buffer owners"
+    },
+    "schema_translation": {
+      "routed_convergence_rotated_execution_v1": "routed_convergence_guided_pair_execution_v1",
+      "routed_convergence_rotated_independent_review_v1": "routed_convergence_guided_pair_independent_review_v1"
+    },
+    "held_module_globals_mutated": false,
+    "loop_or_scoring_source_copied": false
+  },
+  "guided_pair": {
+    "guidance": 3.0,
+    "unconditional_source": "fixed mean of the unchanged six parent source vectors",
+    "conditional_source": "exact parent six source vectors and frozen source projection; no correlation change",
+    "input_law": "The conditional panel stays bitwise exact. The unconditional half adds (mean_source-source)@source_projection.T to that same latent/time activation, in FP32; no additional draws.",
+    "physical_host_order": "[conditional batch B, unconditional batch B], each [T,16]",
+    "routed_logits_and_codes": "Chunk physical 2B then stack [B,2,T,N] logits and [B,2,T,Z] codes; inverse is cat(code[:,0],code[:,1]) along batch, not reshape.",
+    "dv12": "Public native RoutedRows perturbs flattened mixed codes independently for each half/token/site; no custom optimizer/noise law.",
+    "coupling": "Each candidate reruns both shared-parameter sites and both halves, including second-site keys from candidate-dependent first-site outputs, then the final guided combination.",
+    "effective_sample_size": "B=4 contextual observations; mean across halves/tokens then equally across sites. Neither 2B, tokens nor sites inflate evidence.",
+    "precision": "Held BF16 frozen projections and BF16 adapter boundaries per half; final guided combination is FP32 in Supra arithmetic order u+3*(c-u), mathematically3c-2u; no final BF16 recast.",
+    "frozen_buffers": [
+      "cfg_source_projection",
+      "cfg_unconditional_source"
+    ],
+    "factory_adapter": {
+      "id": "isolated_held_code_namespace_v1",
+      "held_function": "examples.e22_routed_convergence.make_loop",
+      "held_file_sha256": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+      "held_code_object_sha256": "8bd4d280d0998b73a8d709c9645288a9d2270c4d58d05ba350e8f3ccba5d6e62",
+      "code_object_runtime": {
+        "python": "3.12.13 (main, Mar 24 2026, 22:49:22) [Clang 22.1.1 ]",
+        "co_filename": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/examples/e22_routed_convergence.py"
+      },
+      "bindings": {
+        "Host": "GuidedHost bound to frozen projection/mean-source data",
+        "model_forward": "guided_model_forward"
+      },
+      "held_globals_mutated": false,
+      "update_checkpoint_restore_score": "held examples.e22_routed_convergence functions, unchanged"
+    }
+  }
+}

@@ -1,0 +1,2256 @@
+{
+  "budget_seconds": 60,
+  "capacity_scope": "Legacy Forge scalar64x2/256-row4D continuousMoGsigma.025 sampling only. Public-policy Atlas/E22 feature/DV12 served sampling requires independent witnesses.",
+  "declaration_files_sha256": {
+    "configs/forge/ideas/k3p-bcap-matched-v1.json": "7eed5eb795a0cedf1200e3333ea225736e06a3db67d6b48720115a144fda71a8",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "configs/forge/tasks/vector_anisotropic.json": "98f09361b018da6b1694da0ffb93eca764c941db5a9085b55f4ad11e1cf189b9",
+    "configs/forge/tasks/vector_overlap.json": "21c41f0fe309cc5ba9869fca34cddd57d5be5e69692f34f86bd76ef2ba7405b5",
+    "configs/forge/tasks/vector_spiral.json": "6eacc9f3e98d8e4c1927d542bef4d0352d18585e66e78ed328a8fe1eeb819798",
+    "configs/forge/tasks/vector_two_broad.json": "e41a0826473806a0f57c378c84b47aa46753c071c2aef60ee0c727c8b75fe0b2",
+    "configs/forge/tasks/vector_unequal_mass.json": "84f7a51b2c979e4cfb886c918be36e49b82223355c2154f63869eedd16459169",
+    "configs/forge/tasks/vector_unequal_width.json": "dee5ddc9e513f88642eef46eb6541229e2f96ad88a1fd6bc7b39e645516f60b6"
+  },
+  "default_adoption": false,
+  "elapsed_seconds": 6.441062617115676,
+  "fitting_updates": 0,
+  "frozen_request": "/ml2/hypergan/forge-family-winner-round1-20261002/queue/queue/requests/8c2f749c258303009e73f873.json",
+  "frozen_request_sha256": "114275a4e35b839b8c1dbe2443ed8040a0ddbc92db01669b4d3462d58dc51bd4",
+  "global_torch_rng_unchanged": true,
+  "protocol_seed": 0,
+  "qualification_credit": false,
+  "raw_receipt": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-host-bound/receipt.json",
+  "raw_receipt_sha256": "c1df7f24427ac91c86a26786a385b6799a27055c439016906cd3f6925bad0902",
+  "records": [
+    {
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-host-bound/vector_two_broad",
+      "construction": {
+        "covariance_matrices": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "departure_bound_scope": "|selector noise|<=1 and each target noise coordinate<=4 give exact component affine maps in real arithmetic; count rounding and finite float are separate",
+        "first_hidden_used_units": 14,
+        "floating_point_probe_max_abs_error": 1.3113021850585938e-06,
+        "law_scope": "finite numeric target tolerance; tiny far-tail piecewise-map departures and row mass quantization, not an exact Gaussian mixture identity",
+        "local_map": "Cholesky(target_covariance)/.025 times independent latent axes1/2",
+        "mass_quantization_tv": 0.0,
+        "mean_ramp_half_width": 0.1,
+        "prior_sigma": 0.025,
+        "real_arithmetic_departure_union_bound": 2.555501760215293e-57,
+        "row_masses": [
+          0.5,
+          0.5
+        ],
+        "rows_per_component": [
+          128,
+          128
+        ],
+        "selector_bin_half_width": 5.0,
+        "selector_locations": [
+          0.0,
+          10.0
+        ],
+        "target_masses": [
+          0.5,
+          0.5
+        ],
+        "type": "piecewise_affine_gaussian_components"
+      },
+      "declared_optimizer_budget": 1200,
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "forge-vector-full-component-v1",
+          "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+          "retained_from": "transfer-vectors-v2"
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+        },
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ]
+      },
+      "fitting_updates": 0,
+      "holdout": {
+        "component_core_covariance_error": 0.005450581724289805,
+        "component_core_covariance_errors": [
+          0.009281824342906475,
+          0.0016193391056731343
+        ],
+        "component_core_eigen_ratios": [
+          0.9884304404258728,
+          0.9988333582878113
+        ],
+        "component_core_min_eigen_ratio": 0.9884304404258728,
+        "component_counts": [
+          50010,
+          49990
+        ],
+        "component_covariance_error": 0.006201218580827117,
+        "component_covariance_errors": [
+          0.008908761665225029,
+          0.003493675496429205
+        ],
+        "component_mass": [
+          0.5001000165939331,
+          0.4999000132083893
+        ],
+        "component_min_eigen_ratio": 0.9902216792106628,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.011177764274179935,
+          0.011142228730022907
+        ],
+        "covariance_error": 0.004119837656617165,
+        "hq": 0.9888399839401245,
+        "mass_tv": 0.00010000169277191162,
+        "max_component_spill": 0.011177764274179935,
+        "mean_error": 0.002774561522528529,
+        "min_mass_ratio": 0.9998000264167786,
+        "resolved_core_covariance_error": 0.005450581724289805,
+        "resolved_core_min_eigen_ratio": 0.9884304404258728,
+        "resolved_max_component_spill": 0.011177764274179935,
+        "sample_count": 100000,
+        "sw1_normalized": 0.0025931374892462287,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0621148347854614
+      },
+      "host_definition": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "separated_broad",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ],
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1200,
+        "z_dim": 4
+      },
+      "initial_model_hashes": {
+        "critic": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+        "generator": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+        "prior": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af"
+      },
+      "negative_control": {
+        "metrics": {
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "hq": 0.0,
+          "mass_tv": 0.5,
+          "sw1_normalized": 0.6114531466852452
+        },
+        "passed": false
+      },
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true,
+        "worst_metrics": {
+          "component_covariance_error": 0.030953300185501575,
+          "component_min_eigen_ratio": 0.9582329392433167,
+          "hq": 0.988037109375,
+          "mass_tv": 0.015380859375,
+          "sw1_normalized": 0.026891108666198288
+        }
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "FormulationContext",
+        "Recipe",
+        "GANTrainer.sample"
+      ],
+      "qualified": false,
+      "raw_metrics_sha256": "13e10dad296d93637abc3d1251c29c96301668d2e4509c58c38c371efafd8b47",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"samples\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "07bfa6378617c21986f0a059bc2e5ecb1e64780b5ee505fca40aa56f4fe8cbdb",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 1.8224978209473193,
+      "state_file_sha256": "f6f09556aaa0eb7a7d856176bee3452d34779c276c36147ef24fc4a5f6795877",
+      "task_id": "vector_two_broad",
+      "task_sha256": "e41a0826473806a0f57c378c84b47aa46753c071c2aef60ee0c727c8b75fe0b2",
+      "training_updates": 0,
+      "witness_sha256": "9b9d8a28f63697724b167824dfaca8b1f497c3d395585a401fa18c07c56326ab"
+    },
+    {
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-host-bound/vector_unequal_mass",
+      "construction": {
+        "covariance_matrices": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "departure_bound_scope": "|selector noise|<=1 and each target noise coordinate<=4 give exact component affine maps in real arithmetic; count rounding and finite float are separate",
+        "first_hidden_used_units": 30,
+        "floating_point_probe_max_abs_error": 2.300739288330078e-05,
+        "law_scope": "finite numeric target tolerance; tiny far-tail piecewise-map departures and row mass quantization, not an exact Gaussian mixture identity",
+        "local_map": "Cholesky(target_covariance)/.025 times independent latent axes1/2",
+        "mass_quantization_tv": 0.0015624999999999858,
+        "mean_ramp_half_width": 0.1,
+        "prior_sigma": 0.025,
+        "real_arithmetic_departure_union_bound": 4.1890029293116313e-109,
+        "row_masses": [
+          0.55078125,
+          0.30078125,
+          0.12890625,
+          0.01953125
+        ],
+        "rows_per_component": [
+          141,
+          77,
+          33,
+          5
+        ],
+        "selector_bin_half_width": 5.0,
+        "selector_locations": [
+          0.0,
+          10.0,
+          20.0,
+          30.0
+        ],
+        "target_masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "type": "piecewise_affine_gaussian_components"
+      },
+      "declared_optimizer_budget": 1200,
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "forge-vector-full-component-v1",
+          "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+          "retained_from": "transfer-vectors-v2"
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+        },
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ]
+      },
+      "fitting_updates": 0,
+      "holdout": {
+        "component_core_covariance_error": 0.013190270750783384,
+        "component_core_covariance_errors": [
+          0.009303495287895203,
+          0.0020141866989433765,
+          0.015158929862082005,
+          0.02628447115421295
+        ],
+        "component_core_eigen_ratios": [
+          0.9878522157669067,
+          0.9971535205841064,
+          0.9993194341659546,
+          0.967258095741272
+        ],
+        "component_core_min_eigen_ratio": 0.967258095741272,
+        "component_counts": [
+          54953,
+          30354,
+          12832,
+          1861
+        ],
+        "component_covariance_error": 0.013649111613631248,
+        "component_covariance_errors": [
+          0.009087715297937393,
+          0.0034397095441818237,
+          0.015784550458192825,
+          0.02628447115421295
+        ],
+        "component_mass": [
+          0.549530029296875,
+          0.3035399913787842,
+          0.12831999361515045,
+          0.018610000610351562
+        ],
+        "component_min_eigen_ratio": 0.967258095741272,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.011209579184651375,
+          0.010772880166769028,
+          0.011533665470778942,
+          0.01397098321467638
+        ],
+        "covariance_error": 0.009913289919495583,
+        "hq": 0.9888299703598022,
+        "mass_tv": 0.003539981320500374,
+        "max_component_spill": 0.01397098321467638,
+        "mean_error": 0.004460848867893219,
+        "min_mass_ratio": 0.9305000305175781,
+        "resolved_core_covariance_error": 0.008825537282973528,
+        "resolved_core_min_eigen_ratio": 0.9878522157669067,
+        "resolved_max_component_spill": 0.011533665470778942,
+        "sample_count": 100000,
+        "sw1_normalized": 0.004046146411598024,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7804062366485596
+      },
+      "host_definition": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1200,
+        "z_dim": 4
+      },
+      "initial_model_hashes": {
+        "critic": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+        "generator": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+        "prior": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af"
+      },
+      "negative_control": {
+        "metrics": {
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "hq": 0.0,
+          "mass_tv": 0.44999998807907104,
+          "min_mass_ratio": 0.0,
+          "sw1_normalized": 0.7612578663229059
+        },
+        "passed": false
+      },
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true,
+        "worst_metrics": {
+          "component_covariance_error": 0.07933601038530469,
+          "component_min_eigen_ratio": 0.8328830003738403,
+          "hq": 0.988037109375,
+          "mass_tv": 0.020087888464331627,
+          "min_mass_ratio": 0.93994140625,
+          "sw1_normalized": 0.028050441445760275
+        }
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "FormulationContext",
+        "Recipe",
+        "GANTrainer.sample"
+      ],
+      "qualified": false,
+      "raw_metrics_sha256": "e67592faff57d55b12dc15ce5c907e2c4a7a33639de333ab47a3ffb7f790d927",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"samples\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "09dc2566a73fc40eba03d2e1077d261f7e4bed9ca116ce906cf9446c54c4fc9d",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.9497042098082602,
+      "state_file_sha256": "23d7fd1a872e4242bb25f09711720677ed14ab7d2a16df0aaaba663587e3c8f8",
+      "task_id": "vector_unequal_mass",
+      "task_sha256": "84f7a51b2c979e4cfb886c918be36e49b82223355c2154f63869eedd16459169",
+      "training_updates": 0,
+      "witness_sha256": "f87ec351a9183ec1116b346ddae9ffa2e911beab2b5bb149a010399b66028646"
+    },
+    {
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-host-bound/vector_unequal_width",
+      "construction": {
+        "covariance_matrices": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "departure_bound_scope": "|selector noise|<=1 and each target noise coordinate<=4 give exact component affine maps in real arithmetic; count rounding and finite float are separate",
+        "first_hidden_used_units": 30,
+        "floating_point_probe_max_abs_error": 2.5510787963867188e-05,
+        "law_scope": "finite numeric target tolerance; tiny far-tail piecewise-map departures and row mass quantization, not an exact Gaussian mixture identity",
+        "local_map": "Cholesky(target_covariance)/.025 times independent latent axes1/2",
+        "mass_quantization_tv": 0.0,
+        "mean_ramp_half_width": 0.1,
+        "prior_sigma": 0.025,
+        "real_arithmetic_departure_union_bound": 2.962586153582588e-40,
+        "row_masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "rows_per_component": [
+          64,
+          64,
+          64,
+          64
+        ],
+        "selector_bin_half_width": 5.0,
+        "selector_locations": [
+          0.0,
+          10.0,
+          20.0,
+          30.0
+        ],
+        "target_masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "type": "piecewise_affine_gaussian_components"
+      },
+      "declared_optimizer_budget": 1200,
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "forge-vector-full-component-v1",
+          "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+          "retained_from": "transfer-vectors-v2"
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+        },
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ]
+      },
+      "fitting_updates": 0,
+      "holdout": {
+        "component_core_covariance_error": 0.01085543807130307,
+        "component_core_covariance_errors": [
+          0.018268482759594917,
+          0.003994823899120092,
+          0.009221762418746948,
+          0.01193668320775032
+        ],
+        "component_core_eigen_ratios": [
+          0.9751458168029785,
+          1.001393437385559,
+          0.9875349402427673,
+          0.9943295121192932
+        ],
+        "component_core_min_eigen_ratio": 0.9751458168029785,
+        "component_counts": [
+          25073,
+          24936,
+          24993,
+          24998
+        ],
+        "component_covariance_error": 0.01096280652564019,
+        "component_covariance_errors": [
+          0.017135586589574814,
+          0.007068678271025419,
+          0.007027133367955685,
+          0.01261982787400484
+        ],
+        "component_mass": [
+          0.2507300078868866,
+          0.24935999512672424,
+          0.2499299943447113,
+          0.24998000264167786
+        ],
+        "component_min_eigen_ratio": 0.9777162075042725,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.01072867214679718,
+          0.011629772372543812,
+          0.010883047245442867,
+          0.011440915055572987
+        ],
+        "covariance_error": 0.004393843002617359,
+        "hq": 0.9888299703598022,
+        "mass_tv": 0.0007300078868865967,
+        "max_component_spill": 0.011629772372543812,
+        "mean_error": 0.001476583769544959,
+        "min_mass_ratio": 0.997439980506897,
+        "resolved_core_covariance_error": 0.01085543807130307,
+        "resolved_core_min_eigen_ratio": 0.9751458168029785,
+        "resolved_max_component_spill": 0.011629772372543812,
+        "sample_count": 100000,
+        "sw1_normalized": 0.0017384845991304334,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1385016441345215
+      },
+      "host_definition": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1200,
+        "z_dim": 4
+      },
+      "initial_model_hashes": {
+        "critic": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+        "generator": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+        "prior": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af"
+      },
+      "negative_control": {
+        "metrics": {
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "hq": 0.0,
+          "mass_tv": 0.75,
+          "sw1_normalized": 0.6297729612399221
+        },
+        "passed": false
+      },
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true,
+        "worst_metrics": {
+          "component_covariance_error": 0.05270982580259442,
+          "component_min_eigen_ratio": 0.9257556796073914,
+          "hq": 0.988037109375,
+          "mass_tv": 0.015380859375,
+          "sw1_normalized": 0.03000302352332986
+        }
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "FormulationContext",
+        "Recipe",
+        "GANTrainer.sample"
+      ],
+      "qualified": false,
+      "raw_metrics_sha256": "486b48bca3fb4f0a99a5356c47b515821bc4e39ecd04c1000165ae317c098b36",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"samples\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "d93636c863a9c22f2d48e7746592452c3095ec0e265678342f1eed47898dafa6",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.9209250351414084,
+      "state_file_sha256": "685589f579eb21ce5c6f2e331adc5f39bb195f60fee49daa094ff33c9682dd80",
+      "task_id": "vector_unequal_width",
+      "task_sha256": "dee5ddc9e513f88642eef46eb6541229e2f96ad88a1fd6bc7b39e645516f60b6",
+      "training_updates": 0,
+      "witness_sha256": "df22965cf26eb94851593d9048b09dd36e85397dcd596919fdce39fadf7c6868"
+    },
+    {
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-host-bound/vector_anisotropic",
+      "construction": {
+        "covariance_matrices": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "departure_bound_scope": "|selector noise|<=1 and each target noise coordinate<=4 give exact component affine maps in real arithmetic; count rounding and finite float are separate",
+        "first_hidden_used_units": 22,
+        "floating_point_probe_max_abs_error": 2.4557113647460938e-05,
+        "law_scope": "finite numeric target tolerance; tiny far-tail piecewise-map departures and row mass quantization, not an exact Gaussian mixture identity",
+        "local_map": "Cholesky(target_covariance)/.025 times independent latent axes1/2",
+        "mass_quantization_tv": 0.0026041666666666574,
+        "mean_ramp_half_width": 0.1,
+        "prior_sigma": 0.025,
+        "real_arithmetic_departure_union_bound": 1.089164251581049e-38,
+        "row_masses": [
+          0.3359375,
+          0.33203125,
+          0.33203125
+        ],
+        "rows_per_component": [
+          86,
+          85,
+          85
+        ],
+        "selector_bin_half_width": 5.0,
+        "selector_locations": [
+          0.0,
+          10.0,
+          20.0
+        ],
+        "target_masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "type": "piecewise_affine_gaussian_components"
+      },
+      "declared_optimizer_budget": 1200,
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "forge-vector-full-component-v1",
+          "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+          "retained_from": "transfer-vectors-v2"
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+        },
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ]
+      },
+      "fitting_updates": 0,
+      "holdout": {
+        "component_core_covariance_error": 0.009485540290673574,
+        "component_core_covariance_errors": [
+          0.021009691059589386,
+          0.0049940743483603,
+          0.0024528554640710354
+        ],
+        "component_core_eigen_ratios": [
+          0.97890704870224,
+          1.002676010131836,
+          0.9972386360168457
+        ],
+        "component_core_min_eigen_ratio": 0.97890704870224,
+        "component_counts": [
+          33511,
+          33247,
+          33242
+        ],
+        "component_covariance_error": 0.009491961488189796,
+        "component_covariance_errors": [
+          0.018849380314350128,
+          0.008777116425335407,
+          0.0008493877248838544
+        ],
+        "component_mass": [
+          0.33511000871658325,
+          0.33246999979019165,
+          0.3324199914932251
+        ],
+        "component_min_eigen_ratio": 0.9811084866523743,
+        "component_resolved": [
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.011190355755388737,
+          0.011249135248363018,
+          0.011070332489907742
+        ],
+        "covariance_error": 0.001628554193302989,
+        "hq": 0.9888299703598022,
+        "mass_tv": 0.00177668035030365,
+        "max_component_spill": 0.011249135248363018,
+        "mean_error": 0.0011902821715921164,
+        "min_mass_ratio": 0.9972599744796753,
+        "resolved_core_covariance_error": 0.009485540290673574,
+        "resolved_core_min_eigen_ratio": 0.97890704870224,
+        "resolved_max_component_spill": 0.011249135248363018,
+        "sample_count": 100000,
+        "sw1_normalized": 0.001277832091964158,
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "target_scale": 2.038231134414673
+      },
+      "host_definition": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1200,
+        "z_dim": 4
+      },
+      "initial_model_hashes": {
+        "critic": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+        "generator": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+        "prior": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af"
+      },
+      "negative_control": {
+        "metrics": {
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "hq": 0.0,
+          "mass_tv": 0.6666666865348816,
+          "sw1_normalized": 0.612462259608842
+        },
+        "passed": false
+      },
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true,
+        "worst_metrics": {
+          "component_covariance_error": 0.0438762561728557,
+          "component_min_eigen_ratio": 0.9334490895271301,
+          "hq": 0.988037109375,
+          "mass_tv": 0.015055343508720398,
+          "sw1_normalized": 0.030921762274484444
+        }
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "FormulationContext",
+        "Recipe",
+        "GANTrainer.sample"
+      ],
+      "qualified": false,
+      "raw_metrics_sha256": "f3db4e9bdea0c5af47bbe546029d1d3bafcb7d87aca7d8cadd7747109a0c593d",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"samples\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "71758aef8acdb15a9a2f6cd4bbd142a31ab567d03cc0191e7026d2276156e255",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.9271933159325272,
+      "state_file_sha256": "faba6d19780648313f0cc61e034230a30921f6e95ef34901938e05cb7a544748",
+      "task_id": "vector_anisotropic",
+      "task_sha256": "98f09361b018da6b1694da0ffb93eca764c941db5a9085b55f4ad11e1cf189b9",
+      "training_updates": 0,
+      "witness_sha256": "daef5b8e990b4c5efd260cb19a64f7ca540589fd95726fa7b5e55cc614d94b31"
+    },
+    {
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-host-bound/vector_overlap",
+      "construction": {
+        "covariance_matrices": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "departure_bound_scope": "|selector noise|<=1 and each target noise coordinate<=4 give exact component affine maps in real arithmetic; count rounding and finite float are separate",
+        "first_hidden_used_units": 14,
+        "floating_point_probe_max_abs_error": 1.1920928955078125e-06,
+        "law_scope": "finite numeric target tolerance; tiny far-tail piecewise-map departures and row mass quantization, not an exact Gaussian mixture identity",
+        "local_map": "Cholesky(target_covariance)/.025 times independent latent axes1/2",
+        "mass_quantization_tv": 0.0,
+        "mean_ramp_half_width": 0.1,
+        "prior_sigma": 0.025,
+        "real_arithmetic_departure_union_bound": 7.046031212940908e-13,
+        "row_masses": [
+          0.5,
+          0.5
+        ],
+        "rows_per_component": [
+          128,
+          128
+        ],
+        "selector_bin_half_width": 5.0,
+        "selector_locations": [
+          0.0,
+          10.0
+        ],
+        "target_masses": [
+          0.5,
+          0.5
+        ],
+        "type": "piecewise_affine_gaussian_components"
+      },
+      "declared_optimizer_budget": 1200,
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "forge-vector-full-component-v1",
+          "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+          "retained_from": "transfer-vectors-v2"
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+        },
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ]
+      },
+      "fitting_updates": 0,
+      "holdout": {
+        "covariance_error": 0.008805809542536736,
+        "mean_error": 0.0035480705555528402,
+        "sample_count": 100000,
+        "sw1_normalized": 0.003793463177222916,
+        "target_scale": 0.8545511364936829
+      },
+      "host_definition": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1200,
+        "z_dim": 4
+      },
+      "initial_model_hashes": {
+        "critic": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+        "generator": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+        "prior": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af"
+      },
+      "negative_control": {
+        "metrics": {
+          "covariance_error": 1.0,
+          "mean_error": 0.010041308589279652,
+          "sw1_normalized": 0.5635832671074094
+        },
+        "passed": false
+      },
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true,
+        "worst_metrics": {
+          "covariance_error": 0.04477787762880325,
+          "mean_error": 0.029872972518205643,
+          "sw1_normalized": 0.02449283270157249
+        }
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "FormulationContext",
+        "Recipe",
+        "GANTrainer.sample"
+      ],
+      "qualified": false,
+      "raw_metrics_sha256": "207f98d66a894dc486a32c624794611be112894b4356dfb0233a03122124450d",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"samples\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "1ef0839a3d975cf18768eac7b62226a11c7866612007cceb642ec641805792f1",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.9116662270389497,
+      "state_file_sha256": "90694c0683c518d2f9843ec0df1fddaf850211827ce2b137bda3229a99fab89f",
+      "task_id": "vector_overlap",
+      "task_sha256": "21c41f0fe309cc5ba9869fca34cddd57d5be5e69692f34f86bd76ef2ba7405b5",
+      "training_updates": 0,
+      "witness_sha256": "68f88f3dab8610b440bb2e42cdfa69885ce7ab0144bad2677a03e34ada5d9bab"
+    },
+    {
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-host-bound/vector_spiral",
+      "construction": {
+        "affine_scale": 3.1999999999999997,
+        "law_scope": "256 midpoint curve approximation convolved with exact target isotropic Gaussian width; not identical continuous u law",
+        "midpoints": 256,
+        "output_sigma": 0.08,
+        "prior_sigma": 0.025,
+        "real_arithmetic_W1_absolute_coupling_bound": 0.036964961521372554,
+        "type": "uniform_midpoint_spiral_pushforward",
+        "u_policy": "(k+.5)/256; fixed analytic midpoint quadrature, no fitting"
+      },
+      "declared_optimizer_budget": 1600,
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "forge-vector-full-component-v1",
+          "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise.",
+          "retained_from": "transfer-vectors-v2"
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+        },
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ]
+      },
+      "fitting_updates": 0,
+      "holdout": {
+        "covariance_error": 0.012490607798099518,
+        "mean_error": 0.005539114587008953,
+        "sample_count": 100000,
+        "sw1_normalized": 0.004674349380486763,
+        "target_scale": 1.2298402786254883
+      },
+      "host_definition": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "curved_continuous",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "kind": "spiral",
+        "layers": 2,
+        "lr": 0.001,
+        "noise": 0.08,
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "radius_max": 2.0,
+        "radius_min": 0.3,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1600,
+        "turns": 1.5,
+        "z_dim": 4
+      },
+      "initial_model_hashes": {
+        "critic": "dfce1e190acd3e6ea14608db962b00a49bae053adf982189d5df57edf4e3a118",
+        "generator": "bfe1cd95c1a4b7e6832c0641ab678c1a52e9791486fe4778cd5a3b5e52288825",
+        "prior": "9291eccb6fa141312acf3eba12609ad0a3e0c369c3cfb70146a0dc500bc266af"
+      },
+      "negative_control": {
+        "metrics": {
+          "covariance_error": 1.0,
+          "mean_error": 0.2012919783592224,
+          "sw1_normalized": 0.5973226808481673
+        },
+        "passed": false
+      },
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true,
+        "worst_metrics": {
+          "covariance_error": 0.04873940348625183,
+          "mean_error": 0.013622342608869076,
+          "sw1_normalized": 0.017927035340694602
+        }
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "FormulationContext",
+        "Recipe",
+        "GANTrainer.sample"
+      ],
+      "qualified": false,
+      "raw_metrics_sha256": "84a1a7a2218807e6a2b5b4287c9a421efb7b173e99380c974bd88f7a1ae90eb6",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1600,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"samples\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "5eaee499bca61173157fe29e0a4f080cbe7043ebcbe84db5b05e300549430f07",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.9075345189776272,
+      "state_file_sha256": "2529fb394507a475144084f7306f787a5f112aaf34745a4c4b2f33a6b7ef671b",
+      "task_id": "vector_spiral",
+      "task_sha256": "6eacc9f3e98d8e4c1927d542bef4d0352d18585e66e78ed328a8fe1eeb819798",
+      "training_updates": 0,
+      "witness_sha256": "795aafc04fedbb207bd854dc829afbbe664f56c522eaa83ac87b2a019e484a01"
+    }
+  ],
+  "reproducible_external_source": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-host-bound/source.py",
+  "runtime": {
+    "device": "cpu",
+    "numpy": "2.5.2",
+    "python": "3.12.13",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "schema": "particlegan_legacy_vector_representation_compact_round1_v1",
+  "scope": "Constructed states in the actual frozen public64x2 host with256-row4D continuousMoGsigma.025 and output_noise=False. Five capacity draws, not optimizer trajectory or terminal suffix.",
+  "script_sha256": "97039df1e2a2d8f76a29e8dad75faf09204abf72881b41311b2654d14c46316f",
+  "setup_attempts": [
+    {
+      "receipt": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002/execution-summary.json",
+      "sha256": "90272c0c026978e24a79f6eac59bc30aeaa97436fe78b23098e84c9c4559045e",
+      "summary": {
+        "completed_cases": [],
+        "error": "Source-only Forge snapshot excludes configs/forge declarations; external observer attempted to read the base card from snapshot rather than frozen request metadata.",
+        "fitting_updates": 0,
+        "log": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002.log",
+        "schema": "particlegan_capacity_setup_error_v1",
+        "source_modified": false,
+        "source_sha256": "806364afa8bfffba1a6eaf59029fee450b2d061737141e8a9752e020e265d8dc",
+        "status": "SETUP_ERROR",
+        "training_updates": 0
+      }
+    },
+    {
+      "receipt": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-request-bound/execution-summary.json",
+      "sha256": "65b3b5a8185a9bb190cb4be5af320867a03833c107b476f9ae6dfbdf0f07c3a8",
+      "summary": {
+        "completed_cases": [],
+        "error": "Frozen request adds preflight_blockers:[] to the unchanged card. External observer full dict equality wrongly rejected this one empty metadata field; original source/recipe/law unchanged.",
+        "fitting_updates": 0,
+        "log": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-request-bound.log",
+        "schema": "particlegan_capacity_setup_error_v1",
+        "source_sha256": "8259291efaa44f60f6a6ce9c205726abe6a955b7ff87919831ba0e1d732b640a",
+        "status": "SETUP_ERROR",
+        "training_updates": 0
+      }
+    },
+    {
+      "receipt": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-preflight-bound/execution-summary.json",
+      "sha256": "c949843e7ceabb7729d7a533992f5dedf6ba16c1a0be1e1fd3e6ef6a59c5fd77",
+      "summary": {
+        "completed_cases": [],
+        "error": "External observer appended scoring thresholds before the strict public host factory. Original adapter correctly appends them after construction. Observer order corrected; no source/card/recipe change.",
+        "fitting_updates": 0,
+        "log": "/ml2/hypergan/toy-forge-family-round1-vector-representation-20261002-preflight-bound.log",
+        "schema": "particlegan_capacity_setup_error_v1",
+        "source_sha256": "fa7f9c8503212ebdf35c9c7ab2b57fa6c3732e7059a78df5f2d60c9d92326f57",
+        "status": "SETUP_ERROR",
+        "training_updates": 0
+      }
+    }
+  ],
+  "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e",
+  "source_files_sha256": {
+    "benchmarks/transfer_suite/public_default_verification.py": "65fcb3d70cc026d36c56f7448722de46b8c01235bb0281b16b575019f1a96ace",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+    "experiments/forge/adapters.py": "93edaca886aad9b73c88ce4bfee74d1a1778408c5cd44ba1ed99882736b737ae",
+    "experiments/forge/api.py": "fb4d49b9702aa1569f5ad9c9ed459904fcf5ab33d33a6f6a43b58f7f3df3a468",
+    "experiments/forge/taskrecipes.py": "c11739bd935256e7083875f4e67d6c29fad1b9ea5915976dd32ed1eb7531d285",
+    "experiments/forge/vectorprofiles.py": "aee1141add8e80a806037f378870e006777c1f5f48b64ed9d9ebf3bb9b0709df",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+  },
+  "source_root": "/ml2/hypergan/forge-family-winner-round1-20261002/queue/snapshots/9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e",
+  "training_movie": null,
+  "training_updates": 0
+}

@@ -1,0 +1,104 @@
+{
+  "candidate_id": "context:report/cifar-particle-ae",
+  "candidate_revision": "1279c70e3896f85ed5b22a2494b2dfdfa91efb726edd363335b0d09683968a8a",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Direct CIFAR particle autoencoder: first matched baseline",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/cifar-particle-ae",
+      "narrative_sources": [
+        {
+          "git_blob": "11a1d816f9bf3242bdaf090935e1ba626e5d3c58",
+          "path": "reports/cifar-particle-ae/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c341f06b8ec183b0dd67dd41a85dd489387428fc01d31d6bea2fc699d730b98c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ae/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "fda902fc6551c986d224d2c4480bf4a3e947f910",
+          "path": "reports/cifar-particle-ae/PROTOCOL.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "266be3eb8dcb6dde9331dfc9bf87476657e5fe513ea12f4aa34b20d8c0c23c43",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ae/PROTOCOL.md"
+        },
+        {
+          "git_blob": "d88e161e03c6986b8f4bcf18c2ba66b2f054ccea",
+          "path": "reports/cifar-particle-ae/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "c7eca2d1c7d79e1f788d09de50bdf057daccdfb0a0dd5497d2e46cf9b6d0fbbd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ae/README.md"
+        },
+        {
+          "git_blob": "6ef21258068aa902d0d2d93e346ecd3d1e108c2d",
+          "path": "reports/cifar-particle-ae/particle_overlap_sweep_smoke/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a3f43ff9a7a5a013a28f2cabb5228b5aca99844e558d129b1c45785ab6d7d6dc",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ae/particle_overlap_sweep_smoke/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "3058dae310facdb816fd7e6e30b2b828e1a87961",
+          "path": "reports/cifar-particle-ae/particle_overlap_training_smoke/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "baa10f1cb54a36de69ac1e20dfffbf9b1dd887876ff55d3941932071d3403cc4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ae/particle_overlap_training_smoke/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "b2c5c97c8b31eb99f305561d8556dfd07daf2d32",
+          "path": "reports/cifar-particle-ae/variation/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "419dc3e91f2de97db58c0b808ee6a097facff77623bea771134bdabd3348654c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ae/variation/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "2c2a2cf315d50f2c26c12b7f4dcdb92e6001d22b",
+          "path": "reports/cifar-particle-ae/variation/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5e93ff4d762170253680995e3f04fb076684dcbe58abb7eb888d492b01a52b4b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ae/variation/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Direct CIFAR particle autoencoder: first matched baseline\n\nCompleted 2026-09-17. **The bounded autoencoder finishes substantially better\nthan the matched GAN, at 7.8% extra training time, but both deteriorate late in\ntraining. This establishes a cheap, measurable image experiment; it does not\nyet establish a stable generation advantage.**\n\n| Final EMA, 10k updates | FID50k \u2193 | Test reconstruction MSE \u2193 | Training min | Total min |\n|---|---:|---:|---:|---:|\n| Bounded particle autoencoder + GAN | **33.266** | 0.06337 | 8.61 | 10.84 |\n| Matched MoG GAN | 81.411 | \u2014 | 7.99 | 10.32 |\n\nOne shared seed, identical G/D/E/prior initialization and data/prior RNG streams,\nunconditional CIFAR-10 at native 32x32, no label input. 1024 particles, latent64,\nfixed sigma 0.212616. G has 645,123 parameters; E 428,320. D reuses the frozen\nResNet18 feature critic with a scalar head and constant context. Both models\ngenerate directly from a code, without noisy-image conditioning or diffusion.\nSee the [prespecified protocol](PROTOCOL.md) and [full leaderboard](LEADERBOARD.md).\n\nA later [numerical conditional-variation audit](variation/README.md) finds that\nadding noise at 0.5x sigma around the encoded point produces eight distinct\noutputs per input, with +5.8% reconstruction MSE and 99.34% own-reconstruction\nretrieval. This is inference-time perturbation, not a trained stochastic encoder.\n\nThe main "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-cifar-particle-ae-f33e77856a0f",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "d88e161e03c6986b8f4bcf18c2ba66b2f054ccea",
+    "path": "reports/cifar-particle-ae/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "c7eca2d1c7d79e1f788d09de50bdf057daccdfb0a0dd5497d2e46cf9b6d0fbbd",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/cifar-particle-ae/README.md"
+  },
+  "task_results": []
+}

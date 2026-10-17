@@ -1,0 +1,345 @@
+{
+  "clock_audits": [],
+  "final_measurements": [],
+  "frozen_report_input_digest": "d9cca85b2666f83d46f1d4c4c1f4024d400b1af835d4b9dd68fd143acc389876",
+  "parent_qualification_credit": false,
+  "policy_fingerprint": "8bbcc385c79532adaf9050dfff9713fb9dc52bf5d43648b5a1c6295ca899c372",
+  "projection": "Existing normal knowledge/technique_board and certificate-validating project_receipt; only candidate display roster restricted to Atlas, no scientific definition changed.",
+  "qualification_input": false,
+  "receipt_result_hashes": {
+    "810dabfbc7724e789d9210e457978b0a": "03dea35bab45ae0225d30ec593c0608c0e76fe3f5b9e5dafb9788981fa415834",
+    "b1e6f8aaf1d7487696108fbb0f7322bf": "862c25749d604abd8510dcc1f4fbd575a8576d8bed5a4730f1bc56c3f9d9e0ff",
+    "fcd5df9c44d64d1c9add83a0015700e9": "4ceabbe8ab0441a975c6a9003b309b01ccf1ca6e557b2780ed75f771a285901c"
+  },
+  "rows": {
+    "atlas": {
+      "attempt_ids": [
+        "810dabfbc7724e789d9210e457978b0a",
+        "b1e6f8aaf1d7487696108fbb0f7322bf",
+        "fcd5df9c44d64d1c9add83a0015700e9"
+      ],
+      "bindings": {
+        "available": true,
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "schedule_free",
+          "scoring_weights": "state_selected"
+        },
+        "configuration_id": null,
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "recipe_sha256": "2125e52371d7f67520971a84db3555d3e1a2f7ba45b3bfd4a965ec7d4e336ee9",
+        "rng_sha256": "8c053a383ea8c093174884805e5820c646b414f95671b9c348b3945baf8ed1aa",
+        "source_digest": "c8c3f5d3860358e5a65514c99bba951882168a1fdd58e8a0bff9851db580c1de",
+        "source_origin_commit": null,
+        "task_contracts": {
+          "ae_gan_hold_tier1_policy_selected_cloud_v1": "f044e501fbf3cfd10f0d8bf367af9f4cf3b5c9de6ae948aefb43ae07b5ab1184",
+          "clockfree_audit_tier1_policy_selected_cloud_v1": "4d335f0f4ec9551aaaa2fd46da5df5c4e411959ff015f40c85dc7a2e70c98c65",
+          "five_word_joint_acquisition_tier1_policy_selected_cloud_v1": "59c399f55a1991914316457921ad87d3c8e0c659c2de6f3dd35d9ee7bcd4cb79",
+          "gaussian1d_acquisition_tier1_policy_selected_cloud_v1": "c33e94c27ff7df113b75dac02f898dadd57a94e6d22fa4669e87b7404b863f42",
+          "ring16_acquisition_tier1_policy_selected_cloud_v1": "982bb3440fa08ae6d467dcfb103d3031723c56bb0954328a0163687aa6a21eee",
+          "two_pole_tier1_policy_selected_cloud_v1": "141edd84e234ad91beb7894640f52a0cc7471cefe04379df7138cea09cf8b885",
+          "unused_token_hold_tier1_policy_selected_cloud_v1": "bc69d61b4d42cbe073112df84841368bfb7f2e1d8eedd7d5191a741bf17094de"
+        },
+        "task_keys_sha256": "5e158c02936abe08dd9594fc376a2705b9e126eaa802b705df34b83a37889fba",
+        "trainer_family": null
+      },
+      "blockers": [],
+      "candidate_id": "atlas",
+      "candidate_revision": "85e0b2bc5534e61ef196456dbea0ec77fa29f31191d350cfb0723243f05a07d0",
+      "cohort": "24b67c8a3d6c64df06d076ba62892780d5ae5e76ca72294c18e4b95f573ecaad",
+      "cost": {
+        "measured_tasks": 3,
+        "unmeasured_tasks": 0,
+        "wall_seconds": 94.13518967101118
+      },
+      "evidence_scope": "current",
+      "lifecycle": "awaiting_readout",
+      "nonrequired_tasks": [],
+      "pending_readout": true,
+      "qualified_tier": 0,
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cuda": {
+            "autograd_multithreading_enabled": false,
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "595.99.02",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.4.4",
+            "scipy": "1.17.1",
+            "torch": "2.11.0+cu128"
+          },
+          "python": "3.11.15",
+          "system": "Linux"
+        }
+      },
+      "status": "FAIL",
+      "tasks": [
+        {
+          "gate_status": "INCOMPLETE",
+          "reasons_sha256": "475efe06910c000970ab3e2f59f8ff5239bf80d0b13892ba7c5a69cce5b166c1",
+          "status": "INCOMPLETE",
+          "task_id": "gaussian1d_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "4858a147d36a1a4934307746f426edb9bbda7f1a9ce9be71ebaecdb1e3fd79e5",
+          "status": "BLOCKED",
+          "task_id": "two_pole_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "4858a147d36a1a4934307746f426edb9bbda7f1a9ce9be71ebaecdb1e3fd79e5",
+          "status": "BLOCKED",
+          "task_id": "unused_token_hold_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "4858a147d36a1a4934307746f426edb9bbda7f1a9ce9be71ebaecdb1e3fd79e5",
+          "status": "BLOCKED",
+          "task_id": "ae_gan_hold_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "INCOMPLETE",
+          "reasons_sha256": "475efe06910c000970ab3e2f59f8ff5239bf80d0b13892ba7c5a69cce5b166c1",
+          "status": "INCOMPLETE",
+          "task_id": "ring16_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "BLOCKED",
+          "reasons_sha256": "167339a171e1eeb6a94d7148a2e1c4719bac2361b4efc3bb9ef59977215a7adb",
+          "status": "BLOCKED",
+          "task_id": "five_word_joint_acquisition_tier1_policy_selected_cloud_v1"
+        },
+        {
+          "gate_status": "FAIL",
+          "reasons_sha256": "e8740eec83e4917e5125cef4f76c242210e605025f099c93112efe224edec38e",
+          "status": "FAIL",
+          "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+        }
+      ],
+      "technique": "Atlas",
+      "tiers": {
+        "1": {
+          "counts": {
+            "BLOCKED": 4,
+            "FAIL": 1,
+            "INCOMPLETE": 2
+          },
+          "passed": 0,
+          "total": 7
+        }
+      },
+      "trainer_family": "atlas"
+    }
+  },
+  "schema": "forge_tier1_scoped_evidence_v1",
+  "scientific_rows_sha256": {
+    "atlas": "a2694427c745186e5eefea2d099e5c4d2d33286542910d01c2cd5a168a63a911"
+  },
+  "source_commit": "dacf96749a4effc0648a7a0945266d508804110e",
+  "source_digest": "c8c3f5d3860358e5a65514c99bba951882168a1fdd58e8a0bff9851db580c1de",
+  "source_origin_note": "Execution copy had no .git metadata: original receipts retain origin_commit null. Every one of its 1215 scientific members was independently byte-matched to develop dacf96749a4effc0648a7a0945266d508804110e; source_commit here records that verified byte origin.",
+  "status_reasons": {
+    "167339a171e1eeb6a94d7148a2e1c4719bac2361b4efc3bb9ef59977215a7adb": [
+      "five_word_joint_acquisition_tier1_policy_selected_cloud_v1: the frozen five-row joint BiGAN needs complete generator/encoder/policy ownership and a separately scoped minimum-population contract"
+    ],
+    "475efe06910c000970ab3e2f59f8ff5239bf80d0b13892ba7c5a69cce5b166c1": [
+      {
+        "message": "Out of range float values are not JSON compliant",
+        "type": "ValueError"
+      }
+    ],
+    "4858a147d36a1a4934307746f426edb9bbda7f1a9ce9be71ebaecdb1e3fd79e5": [
+      "unsupported explicit component transport consumer"
+    ],
+    "e8740eec83e4917e5125cef4f76c242210e605025f099c93112efe224edec38e": [
+      "step_label changed the update or common-prefix state"
+    ]
+  },
+  "task_contracts": {
+    "141edd84e234ad91beb7894640f52a0cc7471cefe04379df7138cea09cf8b885": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "cecca3998407c847928f290e17f0feef1c59a4b9505226220a3aa6bd11d59e14",
+      "execution_sha256": "4ff00d5188511eb194faff772937ef59d4525fd05c2f5c28013556c8434d17f9",
+      "host": "two_pole",
+      "host_definition_sha256": "4a6623126813b1d2060dd1795366cfc36fcf1e711a10cb1d56d9000c8aa10818",
+      "host_profiles": {},
+      "initialization": {
+        "critic": "stored_host_weights",
+        "particles": "zeros"
+      },
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_learned_particles_and_critic_gradient",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 80,
+      "timeout_seconds": 300
+    },
+    "4d335f0f4ec9551aaaa2fd46da5df5c4e411959ff015f40c85dc7a2e70c98c65": {
+      "adapter": "clockfree_audit",
+      "evaluation_sha256": "98eb0d84bda8fd8dbb3d59844340d2ee12256a56404dc0631de4ca784a6befe2",
+      "execution_sha256": "cf1606d60225c9ea5709d87908291f29c5dcf88551257cd5963a3c549ddf5a48",
+      "host": null,
+      "host_definition_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 24,
+      "timeout_seconds": 300
+    },
+    "59c399f55a1991914316457921ad87d3c8e0c659c2de6f3dd35d9ee7bcd4cb79": {
+      "adapter": "word_joint",
+      "evaluation_sha256": "9eaaf7a1695bb3429778d1e9c7ca087845c22c6f0e452c755ca8aabb5dd99605",
+      "execution_sha256": "4b65a381c4a98b8c371f1a71b8c953b558f49cb05a41a93bcf5f216bb6df5c1a",
+      "host": "five_word_joint",
+      "host_definition_sha256": "df90bb4ce77e9d276cc2120be1ecceff8f0b38c8f81bee224484ef57c135e567",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 20001,
+      "timeout_seconds": 900
+    },
+    "982bb3440fa08ae6d467dcfb103d3031723c56bb0954328a0163687aa6a21eee": {
+      "adapter": "transfer_vector",
+      "evaluation_sha256": "6900cf798975687e6cda5680919b5c13a3f725282700fd0d5a6d6b58cdce0550",
+      "execution_sha256": "508dae65124083d81e3e242508a48333416a5c714ce17effef6b0fa72eadc47d",
+      "host": "ring16_acquisition",
+      "host_definition_sha256": "743f3901ad793fa7d82a5502728e14b1697f9242cb362e98ccc661bae47f3e65",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 1600,
+      "timeout_seconds": 300
+    },
+    "bc69d61b4d42cbe073112df84841368bfb7f2e1d8eedd7d5191a741bf17094de": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "c0c4c217e9da0a91e00fb85d828ccb52ce38b72eb5d641cb1dc9e9dcbfba942f",
+      "execution_sha256": "59b06f140f5a8346e98a9ecebaad1bbf8c83bdfc9b18d0eae5c69ece7672046c",
+      "host": "unused_token_hold",
+      "host_definition_sha256": "1ff599cc1584b50b63b21e786d99326becdf8d898626022a669d6064bb0d2b70",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_learned_parameter_measurement",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 200,
+      "timeout_seconds": 300
+    },
+    "c33e94c27ff7df113b75dac02f898dadd57a94e6d22fa4669e87b7404b863f42": {
+      "adapter": "transfer_vector",
+      "evaluation_sha256": "b37846a3dde79e91be8f27d93056b4db95fccc9579993c685a649ccdf553e83b",
+      "execution_sha256": "e83b56ac36f2d82351ffb9801e6b429e620907e77862a422ca3c56f29e0d7716",
+      "host": "gaussian1d_acquisition",
+      "host_definition_sha256": "1b23570b62828bd336b92df0a3414953bbf52f262cc0b334b587744f1cc81bb8",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 1000,
+      "timeout_seconds": 120
+    },
+    "f044e501fbf3cfd10f0d8bf367af9f4cf3b5c9de6ae948aefb43ae07b5ab1184": {
+      "adapter": "transfer_behavior",
+      "evaluation_sha256": "adfd13c0d0c451baf9a07561077c3ecd524c43663cb47a20ac508db7614672dd",
+      "execution_sha256": "c26cc7558d88be92d6316de5e84f10b96264ee9117e6877cea9795da038ffe80",
+      "host": "ae_gan_hold",
+      "host_definition_sha256": "6e5f35073acb406b11b21d0b9fe54bb9aac4fb97b198fd22be5c469ed752d18c",
+      "host_profiles": {},
+      "initialization": null,
+      "prior": {
+        "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+        "kind": "particle_cloud",
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "steps": 250,
+      "timeout_seconds": 300
+    }
+  },
+  "view": "tier1_policy_coverage"
+}

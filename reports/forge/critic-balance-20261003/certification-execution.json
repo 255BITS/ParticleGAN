@@ -1,0 +1,42 @@
+{
+  "capacity_sampler_replay": true,
+  "certifier_source_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+  "child_returncode": 0,
+  "combined": {
+    "bytes": 1343621,
+    "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/combined.json",
+    "sha256": "49d0b2286a0b5bcd599c918f421bc7b84e361a2dbbc6c045a5ba20df15368fb1"
+  },
+  "command": [
+    "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+    "-B",
+    "reports/forge/critic-balance-20261003/run_critic_balance.py",
+    "combine",
+    "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/study.json",
+    "--archive",
+    "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/study.json",
+    "--output",
+    "/ml2/hypergan/forge-critic-balance-20261003-v2/combined.json"
+  ],
+  "cpu_threads": 1,
+  "cuda_visible_devices": "",
+  "function": "combine_studies",
+  "ordinary_training_updates": 0,
+  "publication_draws": 0,
+  "publication_model_restores": 0,
+  "publication_optimizer_updates": 0,
+  "publication_rescores": 0,
+  "publisher_returncode": 0,
+  "retained_numeric_trace_rescore": true,
+  "schema": "particlegan_critic_balance_certification_execution_v1",
+  "stdout": {
+    "bytes": 1343621,
+    "path": "/ml2/hypergan/critic-balance-v2-combine-20261003.log",
+    "sha256": "49d0b2286a0b5bcd599c918f421bc7b84e361a2dbbc6c045a5ba20df15368fb1"
+  },
+  "trusted_certification": {
+    "bytes": 10000,
+    "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/certification.json",
+    "sha256": "e32d8dc2e906d737a592801050baf4fd6eb2599df840b82f3b18bd3786d34c97"
+  }
+}

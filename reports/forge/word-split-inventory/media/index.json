@@ -1,0 +1,380 @@
+{
+  "campaign": "technique-inventory-word-split-v1",
+  "exported_gifs": 7,
+  "live_execution_guard": "Model construction/forward, GANTrainer step/sample and prior sampling disabled during export.",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "required_unmeasured_task_ids": [
+    "cover_leftover",
+    "five_word_joint_hold",
+    "gaussian1d_stability",
+    "grid100",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "img_stripes2",
+    "mid_scale_identity",
+    "mode_hold",
+    "residual_student",
+    "rotated100",
+    "staggered100",
+    "trajectory",
+    "unipolar",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width"
+  ],
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "one_actual_training_visualization_per_executed_task",
+  "script_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "selected_task_count": 7,
+  "selection_policy": {
+    "fallback_after_invalid_selected_evidence": false,
+    "ordering": [
+      "preferred_candidate_first",
+      "candidate_id",
+      "candidate_revision",
+      "attempt_id"
+    ],
+    "preferred_candidate": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+    "use_grades_for_selection": false,
+    "version": 1
+  },
+  "selection_sha256": "2b5d0ca3ad68676e42e92b752823b4160ae0c9889a0a5ec2607331f6d1485370",
+  "source_commits": [
+    "737592c128ef84cf596c7f198b0ce8aad7c65700"
+  ],
+  "tasks": [
+    {
+      "attempt_id": "b6d5eb6149d244669b6ac2069e4e8b56",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "certificate_sha256": {
+        "evidence.json": "efc1b73383ba88c7feab3a4107667a990b8271f07ee9d2fd58c3b8370ded2669",
+        "request.json": "c8c0013b3575b32827544f1c99944830720e9afceb15db9812df5580ccd32d36",
+        "result.json": "d5401251e057c6e4ad5c3653c9d77cb3277ee27011af30a4f1180c5c6d067da7"
+      },
+      "executed_candidate_count": 5,
+      "frames": 9,
+      "gif": "ae_gan_hold.gif",
+      "gif_sha256": "fdb68d743800246ba96d570946baff6ad3eed3d796b49835979292a35597ea8e",
+      "media_status": "EXPORTED",
+      "observation_count": 24,
+      "observations_sha256": "06f7138226299785483d00aee479e5ecea9f03adc250f0eaead6d2d676778e29",
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "renderer_kind": "forge_saved_observations",
+      "renderer_receipt": "ae_gan_hold.json",
+      "renderer_receipt_sha256": "c0f72275f6d18135cf326c5be8e7f3aa332f1037cca830a96201ffb0501f3e4b",
+      "retained_provenance": {
+        "artifact_manifest_sha256": "df5c8a043ef1b3701ce6197d7c988e8749265f0ffdb84b42e60bef1d81089b3c",
+        "bytes": 63353,
+        "completed_steps": 250,
+        "path": "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/b6d5eb6149d244669b6ac2069e4e8b56/provenance/provenance-state.pt",
+        "purpose": "provenance_only",
+        "sha256": "27bde5de7b03424dd7f7e2d6ca04a7df33900b12d18cf461a46a24966fb80209",
+        "state_sha256": "3ad81667678dffff5e3cc704bfd0c35e424af5e9841fa033db4ae9ef85168630"
+      },
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "source_inputs": {},
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "932de39b0da24e8d95b13f1d37cdde5f",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "certificate_sha256": {
+        "evidence.json": "591ae63d7a5046036e0b7ac0e16d8469ade689ba05f03082aaef06eb69330ab7",
+        "request.json": "0c02471ea3a2f303eaea1ad8b54a637a861cd8e69ceeedc08bfc4babc45ec84d",
+        "result.json": "0b804c59aa0143804a80ec4f12f085a2c8b815619a2f83eb8ce1759e1a912dab"
+      },
+      "executed_candidate_count": 5,
+      "frames": 4,
+      "gif": "clockfree_audit_measurement_v1.gif",
+      "gif_sha256": "f9abae004213133933cab4acd728a7a51d4c1e8572a44d1c301a701ce83b5494",
+      "media_status": "EXPORTED",
+      "observation_count": 4,
+      "observations_sha256": "26d2fe8e5dccfb9175779de99d432f00ae37890238fc8e5a92a6f60e4971aef0",
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "renderer_kind": "forge_saved_observations",
+      "renderer_receipt": "clockfree_audit_measurement_v1.json",
+      "renderer_receipt_sha256": "d9519c61a0749e2d9a7891eba1fba6e332ff1f400524b8cfbd8746fff083ef15",
+      "retained_provenance": null,
+      "selected_observation_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/932de39b0da24e8d95b13f1d37cdde5f/clockfree-proof/comparisons.pt": "029e8beb6571126714d6ecae660209a7a8f0d4b004742de713764aa227453ae3"
+      },
+      "task_id": "clockfree_audit_measurement_v1"
+    },
+    {
+      "attempt_id": "8a2c607601884c039c551c5bc2652d68",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "certificate_sha256": {
+        "evidence.json": "4320127ad3695f6ebcb988203201382e72c8d750317d0f1bad6c21d130f4df5c",
+        "request.json": "00ac68492a4b45bedb6a13735b6cdfee2494ba5cf3496f6b15cb27d38313f7dd",
+        "result.json": "2761946d386ba989aa223d1136f30ccceff7c6dcaa7c97faaf53b15d04048fc7"
+      },
+      "executed_candidate_count": 5,
+      "frames": 9,
+      "gif": "five_word_joint_smoke.gif",
+      "gif_sha256": "9988e871ba21ea4ebd937da0a9b0b12ff77eb31b0e8dac3c57d6e0f149f1fa08",
+      "media_status": "EXPORTED",
+      "observation_count": 24,
+      "observations_sha256": "ce34a1a5f84e0af49f0a009fbdb27d51a24f07a8ea87d708ce225e3e7d88362a",
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "renderer_kind": "forge_saved_observations",
+      "renderer_receipt": "five_word_joint_smoke.json",
+      "renderer_receipt_sha256": "e0f6a233a7ab7300bfcdf84993e359a44cbdca038b2b59ada049d7de55d9e825",
+      "retained_provenance": {
+        "artifact_manifest_sha256": "de4698948dcaa8f3e9880af82a2a65a0dc78c3b6759208f2568d0a04ec719f69",
+        "bytes": 840309,
+        "completed_steps": 20001,
+        "path": "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/8a2c607601884c039c551c5bc2652d68/provenance/provenance-state.pt",
+        "purpose": "provenance_only",
+        "sha256": "f81051d0aff1d9971521dacdc8bb99e1b9aabeb65554b724180f9b84762ab995",
+        "state_sha256": "c95364973779c920554cb79ad46c26e71786e0c8f8703320902d238fcdb99975"
+      },
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/8a2c607601884c039c551c5bc2652d68/observed-records.pt": "7b457beb713ca0faf6491a91d01197a905fb7476b3bbe44cbb805126c6c128c9"
+      },
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "attempt_id": "4a5687bf78db4967aebe1ca068163a07",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "certificate_sha256": {
+        "evidence.json": "32e199ad4b8992cdb367e4ba294710d1986975247b310cf019ba35730ac2ceec",
+        "request.json": "eb7362177b9c079e602997e8ba4b21dd3f926878559ecff0b1eef885c483b4d8",
+        "result.json": "a4e6c51a93f4797a5a15c343ac756f039016c56012c86e3d8ea9a266ee6d75a2"
+      },
+      "executed_candidate_count": 5,
+      "frames": 9,
+      "gif": "gaussian1d_smoke.gif",
+      "gif_sha256": "43e4d4d9926cd4ef10383a5681d509e96f7eb8bbc0635f56c5e4d7d5ff555a47",
+      "media_status": "EXPORTED",
+      "observation_count": 24,
+      "observations_sha256": "d472e190e5340ab1073c827770097dee214f3ef581db4ab5dac65c79c359a2d3",
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "FAIL",
+      "renderer_kind": "forge_saved_observations",
+      "renderer_receipt": "gaussian1d_smoke.json",
+      "renderer_receipt_sha256": "551d8b6c7261380f5c4b89da3898dc36802d66cba68ee3da3ffbfb0026933542",
+      "retained_provenance": {
+        "artifact_manifest_sha256": "971acc2065d25a37b362c797f7ca91b87eb7bdd34bec6f3b3de1dc7a2bf9a28b",
+        "bytes": 64767,
+        "completed_steps": 1000,
+        "path": "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/4a5687bf78db4967aebe1ca068163a07/provenance/provenance-state.pt",
+        "purpose": "provenance_only",
+        "sha256": "c07280356a06fbe6d79b0a55403db8bb5c439dd6ac9932ba1b7f0ffda22dfae8",
+        "state_sha256": "9dfc69637f86b8248593873ddfea00035b7f0e6e1155f6003ede6d4c8ff992e8"
+      },
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/4a5687bf78db4967aebe1ca068163a07/evaluator/observed-samples.pt": "64b3f439b603809a23273f585605d09d2cbb509cb815d2cfe19e7d88768e7335"
+      },
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "attempt_id": "795acf9d536c4969a5542c43b8f75f0c",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "certificate_sha256": {
+        "evidence.json": "2c801728b3671991f458f85a0ffd189313e3592ff097adf8640712efa42af86a",
+        "request.json": "ae330244cdbba877f79e88b55538efa77e45bdba974ae5bac66948fbb5668116",
+        "result.json": "c05cb67772bb9b6df665b0a654e917c70b5235864d8bfac28873a1fc5029da35"
+      },
+      "executed_candidate_count": 5,
+      "frames": 9,
+      "gif": "ring16_acquisition.gif",
+      "gif_sha256": "e235dd4fdd69edb9b8e3620622fe80f6a8782054b769f795d14712b4d7abb8bf",
+      "media_status": "EXPORTED",
+      "observation_count": 96,
+      "observations_sha256": "af3084ad366bbcfc3741f713c287e754a0207e330cbf41ececfb9e8b16a5aafd",
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "renderer_kind": "forge_saved_observations",
+      "renderer_receipt": "ring16_acquisition.json",
+      "renderer_receipt_sha256": "b5c71ff8abd0e72c234688a222e60243648c6a219ba122f95d8a1cac859eaf9f",
+      "retained_provenance": {
+        "artifact_manifest_sha256": "b6f212d9a4fca0ea1f518b1ce32add741d5dba0ea385702c558e4f98b3086dd5",
+        "bytes": 109689,
+        "completed_steps": 1600,
+        "path": "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/795acf9d536c4969a5542c43b8f75f0c/provenance/provenance-state.pt",
+        "purpose": "provenance_only",
+        "sha256": "19fdc56acf5fab55986a4d44f1d9a1014446fdd98d3c6920b78eeb1ec2b78d77",
+        "state_sha256": "609ba868b041bf95895171676ffff656da7b5555eedd34689786d7554199483b"
+      },
+      "selected_observation_indices": [
+        0,
+        12,
+        24,
+        36,
+        48,
+        59,
+        71,
+        83,
+        95
+      ],
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "source_inputs": {
+        "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/795acf9d536c4969a5542c43b8f75f0c/observed-samples.pt": "8f4fb4e451453785445588e923e0fdc2679a4c15b39d5a321becab3a19138d0b"
+      },
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "5a88de9e4729431ca039607a02e0f7b9",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "certificate_sha256": {
+        "evidence.json": "471fb8823d3c4bafc88622fba16054ac4917a128f10043cabbe085911102def7",
+        "request.json": "24445515440a3e392db5f02b2eaf1caf3714adeeb1e597de3ee35e16fd0ffe46",
+        "result.json": "9a829cde63a05f8e071251215933c9c723bfa46135dcc22e4d58c4cc3a971e61"
+      },
+      "executed_candidate_count": 5,
+      "frames": 9,
+      "gif": "two_pole.gif",
+      "gif_sha256": "7bdd29de49eeb369e5518d84609b11df39f19d403a87bceeb1cbf7cb01b3e276",
+      "media_status": "EXPORTED",
+      "observation_count": 24,
+      "observations_sha256": "d4e0b990e32691d9d403da6ab9ce48a749716ea6558d59cf41e9b0fa3c60164f",
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "renderer_kind": "forge_saved_observations",
+      "renderer_receipt": "two_pole.json",
+      "renderer_receipt_sha256": "db67ec1d24fd19c14b9119b8068eb6437c10440daf45b0d19dfefd222180ca0e",
+      "retained_provenance": {
+        "artifact_manifest_sha256": "1bc83c1831b23f3763ec5c841a6ac5c6d37eb885d0eb3a8ff42a989603407e74",
+        "bytes": 46063,
+        "completed_steps": 80,
+        "path": "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/5a88de9e4729431ca039607a02e0f7b9/provenance/provenance-state.pt",
+        "purpose": "provenance_only",
+        "sha256": "d8af0c71a9f9d832f04f1508971dc4f22b23a90d6a1c32c10b3f6f25e6ca16ab",
+        "state_sha256": "82ff366773f8212758d0c9b7f53b7568475d23d50df69f36ef625234f4a01197"
+      },
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "source_inputs": {},
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "8ed478b6a2bb469ab9efc8c9542fed06",
+      "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+      "candidate_revision": "0dafea3188efdf6c38d57695a299a9cf3a42e33323be9dd4399bb89232420b92",
+      "certificate_sha256": {
+        "evidence.json": "bb9814f70847a355cd4c76bcb25aa410a40416da3c975854284f66faacaf47f8",
+        "request.json": "89c861d5acf36cf6a81788833b9a516b31788fe827679909b05c9f956c81f796",
+        "result.json": "070f17fb803a67910be21f831aafa9f1a66cc10bd4d2200f234447dbaf9b2e6a"
+      },
+      "executed_candidate_count": 5,
+      "frames": 9,
+      "gif": "unused_token_hold.gif",
+      "gif_sha256": "fe73984edfddbbcd272e32b34b44096974e2df8bbc5864dc49f0e512eedfd989",
+      "media_status": "EXPORTED",
+      "observation_count": 24,
+      "observations_sha256": "40a028cf5abdbcd42a0dcab656cbf6e326f274a23a6ee5d277497ed999a6c22b",
+      "qualification_tier": 1,
+      "raw_status": "completed",
+      "recorded_grade": "PASS",
+      "renderer_kind": "forge_saved_observations",
+      "renderer_receipt": "unused_token_hold.json",
+      "renderer_receipt_sha256": "b27e821f777a3080f828c66c0b9aa2861704a41a60e1f7da4114ec87c78ef99e",
+      "retained_provenance": {
+        "artifact_manifest_sha256": "c348933ca6695c8f842abe7d96055e7a7ce25a2b76078c259ecebb8e21295ed4",
+        "bytes": 49927,
+        "completed_steps": 200,
+        "path": "/home/martyn/dev/ParticleGAN-word-split-tier-results/runs/forge-word-split/technique-inventory-word-split-v1/8ed478b6a2bb469ab9efc8c9542fed06/provenance/provenance-state.pt",
+        "purpose": "provenance_only",
+        "sha256": "abc08ad74c00a85b248931889bb1b06f7391cd03f0a83d8f1c9755dc18390d30",
+        "state_sha256": "3ef54649a24f47fa0854bcece45fe3d6567cd47977d373bc218dceb5a1a7a467"
+      },
+      "selected_observation_indices": [
+        0,
+        3,
+        6,
+        9,
+        12,
+        14,
+        17,
+        20,
+        23
+      ],
+      "source_commit": "737592c128ef84cf596c7f198b0ce8aad7c65700",
+      "source_digest": "cbb19c5e55e93aff93abd4092bbbe79e10c03a8b9f65a3f5db3b97f0f557d1ec",
+      "source_inputs": {},
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "unavailable_gifs": 0
+}

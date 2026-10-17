@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "410b2ef8c859562fee139e0c19a7a190fece54b2e8fee8f07fc637d9014cff11",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "3822e201507d4e14fdf5af5239e1ec269696b6b32e1ea62948f8685b87a29dca",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/03c095b4e7b347148ec00ec51885ed01/observed-samples.pt": "6d869383fcaa40a24e90f60d55247947730590dcb30879f17de0ae1f138988ba"
+  },
+  "task_id": "vector_overlap"
+}

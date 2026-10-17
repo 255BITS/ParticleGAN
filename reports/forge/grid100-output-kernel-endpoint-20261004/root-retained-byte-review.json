@@ -1,0 +1,28 @@
+{
+  "schema": "pg_grid100_endpoint_root_retained_byte_review_v1",
+  "status": "VERIFIED",
+  "receipt_sha256": "f8e61ad002e2ecf5d743b334ba61ede26d3fe5439c8f41fa07a1ae62fd644e72",
+  "original100k_clean_bit_identity": true,
+  "panels": [
+    {
+      "panel": "primary",
+      "rows_per_law": 20000,
+      "saved_clean_plus_kernel_bit_identity": true,
+      "finite_saved_arrays": true,
+      "live_shadow_stream_proof": "producer receipt only; shadow terminal stream is not separately retained"
+    },
+    {
+      "panel": "holdout",
+      "rows_per_law": 100000,
+      "saved_clean_plus_kernel_bit_identity": true,
+      "finite_saved_arrays": true,
+      "live_shadow_stream_proof": "producer receipt only; shadow terminal stream is not separately retained"
+    }
+  ],
+  "inclusive_engineering_charge_seconds": 11.62249431014061,
+  "new_optimizer_updates": 0,
+  "new_models_draws_scoring": 0,
+  "qualification_input": false,
+  "speed_ranking": false,
+  "original_clean_verdict": "FAIL"
+}

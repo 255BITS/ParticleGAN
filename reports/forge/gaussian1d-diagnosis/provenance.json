@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "analysis_source_parent_commit": "502cdb8d6fb3cb47d011cd45b190f91228221319",
+  "analysis_source_path": "benchmarks/toy_audit/gaussian1d_diagnosis.py",
+  "analysis_source_sha256": "7c190d0492012790be9c05e670ecd2bc1c309071c1b8f1496f847cb177f97acb",
+  "protocol_sha256": "50ef26b3508513689b90c054856b07b2e7b758b36082a34783b9c964d8fe3935",
+  "raw_root": "runs/api/gaussian1d-diagnosis-v1",
+  "log_path": "runs/api/gaussian1d-diagnosis-v1.log",
+  "archive": {
+    "path": "artifacts/gaussian1d-diagnosis-v1.tar.gz",
+    "bytes": 25982,
+    "sha256": "4dc3e21b0643ae59f869c8569af52bfcb7e1ad83f53e0130d3c6b22765688c61"
+  },
+  "archive_restore": "tar -xzf artifacts/gaussian1d-diagnosis-v1.tar.gz",
+  "parent_archives": {
+    "prior_sha256": "0ab6a34f0dbb27b7bd6647ef44918a1f022abc2732826c0d50190064d96ccd7d",
+    "duration_sha256": "18e339a2e78b73d95798b871914ac7a9301057e8b49a89c610f34dd7992d2480"
+  },
+  "checks": {
+    "saved_metric_recomputations": 97,
+    "exact_context_restorations": 3,
+    "training_state_unchanged_by_probes": true,
+    "affine_capacity_passes": 24,
+    "affine_capacity_checks": 24,
+    "training_updates": 0,
+    "scientific_qualification_credit": false
+  },
+  "cost": {
+    "analysis_loop_seconds": 1.1434768689796329,
+    "scope": "New numerical analysis loop only; excludes environment/setup, renderer and archive. Original training costs remain in their original records."
+  },
+  "tail_proof": {
+    "left_tail": 0.0,
+    "right_tail": 0.0,
+    "global_outside_grid_upper_bound": 6.22096057427174e-16
+  },
+  "runtime": {
+    "python": "3.14.7",
+    "torch": "2.14.0+cu130",
+    "device": "cuda:0",
+    "gpu": "NVIDIA RTX A6000"
+  },
+  "publication": {
+    "renderer": "reports/forge/gaussian1d-diagnosis/publish.py",
+    "render_source_sha256": "fd81814a0c2b0297ec94bb71589ad3a066aac28bb7378a47ca25a4fce586ffdb",
+    "results_sha256": "acab54648e6dfad59f33f25edf42dca2018008c598db0dde9a71fa1bf8753812",
+    "trajectory_sha256": "dd534ea20f6c778f6d11d986c9966a1909ad9f2a07019971d2abba640b463937"
+  }
+}

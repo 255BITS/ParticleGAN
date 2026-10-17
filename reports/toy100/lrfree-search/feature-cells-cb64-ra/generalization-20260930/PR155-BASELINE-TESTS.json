@@ -1,0 +1,23 @@
+{
+  "branch_head": "c05ea9f8fe48d5d0e499bc4e6801170b452886f8",
+  "candidate_test_status": "PENDING",
+  "log_sha256": "71450d9d9f49b46de5bd15cb1a8e853275dc2a224adc07073f545d088d333291",
+  "passed": 1350,
+  "pr155_head": "f459cb6d6aaaabeb1af076ec53ad7a963618de90",
+  "scope": "unchanged current PR155 package + archived reports branch",
+  "skipped": 12,
+  "skips": [
+    "SKIPPED [1] tests/test_gym_data.py:4: could not import 'gymnasium': No module named 'gymnasium'",
+    "SKIPPED [1] tests/test_gym_lander_live.py:13: could not import 'gymnasium': No module named 'gymnasium'",
+    "SKIPPED [1] tests/test_gym_probe.py:4: could not import 'gymnasium': No module named 'gymnasium'",
+    "SKIPPED [1] tests/test_lunar_flight.py:6: could not import 'gymnasium': No module named 'gymnasium'",
+    "SKIPPED [4] tests/test_cifar_resume.py:19: opt-in real-data CUDA integration test",
+    "SKIPPED [1] tests/test_image_ddgan.py:72: could not import 'torch_fidelity': No module named 'torch_fidelity'",
+    "SKIPPED [1] tests/test_particle_native_2d.py:29: platform-sensitive convergence gate; opt in with RUN_PARTICLE_NATIVE_RESEARCH_GATE=1",
+    "SKIPPED [1] tests/test_toy100_device.py:45: asserts CUDA is absent",
+    "SKIPPED [1] tests/test_toy100_device.py:55: asserts CUDA is absent"
+  ],
+  "status": "PASS_WITH_SKIPS",
+  "subtests_passed": 18,
+  "wall_seconds": 498.75
+}

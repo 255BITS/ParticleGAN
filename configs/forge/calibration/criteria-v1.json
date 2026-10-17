@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "calibration-criteria-v1",
+  "status": "frozen_before_reducer_evaluation",
+  "scope": "Retrospective saved-evidence calibration; criteria are not claimed to precede the original experiments.",
+  "minimum_paired_lineages": 3,
+  "minimum_reference_positives": 1,
+  "minimum_reference_negatives": 2,
+  "minimum_paired_fraction": 0.9,
+  "maximum_false_reject_fraction": 0.0,
+  "maximum_false_accept_fraction": 0.1,
+  "maximum_smoke_wall_seconds": 900.0,
+  "maximum_smoke_to_reference_wall_ratio": 0.1,
+  "require_complete_smoke_cost": true,
+  "require_complete_reference_cost": true,
+  "require_new_mog_cohort": true,
+  "unknowns_count_as_failures": false,
+  "reference_rule": "FAIL if any independent required reference fails; PASS only if every independent required reference passes; otherwise UNKNOWN. Blocked/error/missing tests remain unknown, never scientific failures.",
+  "adoption_rule": "Every criterion must pass within each declared prior/runtime cohort; missing evidence blocks adoption. Zero training is authorized by this calibration.",
+  "false_accept_denominator": "All paired lineages with an independent FAIL reference (false_accept + true_reject).",
+  "false_reject_denominator": "All paired lineages with an independent PASS reference (false_reject + true_accept).",
+  "cost_rule": "Both complete task-cost vectors required; compare the maximum observed smoke sum and maximum per-lineage smoke/reference ratio, within each exact prior/runtime cohort. Unknown costs never count as zero."
+}

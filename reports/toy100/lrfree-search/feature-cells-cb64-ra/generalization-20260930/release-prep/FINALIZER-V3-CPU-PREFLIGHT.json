@@ -1,0 +1,18 @@
+{
+  "GPU_operations": 0,
+  "actual_finalized_quality_receipts": 19,
+  "actual_quality_passes": 19,
+  "latest_original_learned_replay_status": "PENDING_NOT_USED_FOR_QUALIFICATION",
+  "latest_suite_status": "PENDING_NOT_USED_FOR_QUALIFICATION",
+  "model_calls": 0,
+  "observed_pinned_files": 466,
+  "original_learned_training_label": "RA13-settled",
+  "retained_original_errors": true,
+  "routes": {
+    "RA14_executions": 15,
+    "RA15_affected_executions": 4
+  },
+  "source_helper_sha256": "0f493a9332dc52c6c3e4d85857c5d07c08d826170cd068df0be74d418a120432",
+  "status": "PASS_SOURCE_ONLY_ROUTE_AND_ORIGINAL_RECEIPT_PREFLIGHT",
+  "tensor_loads": 0
+}

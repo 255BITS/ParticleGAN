@@ -1,0 +1,50 @@
+{
+  "inputs": [
+    {
+      "batch": 128,
+      "grade_reproduced": true,
+      "hash_verified": true,
+      "saved_sample_recomputations": 97,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "batch": 128,
+      "grade_reproduced": true,
+      "hash_verified": true,
+      "saved_sample_recomputations": 241,
+      "task": "ring16_acquisition"
+    },
+    {
+      "batch": 512,
+      "grade_reproduced": true,
+      "hash_verified": true,
+      "saved_sample_recomputations": 97,
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "batch": 512,
+      "grade_reproduced": true,
+      "hash_verified": true,
+      "saved_sample_recomputations": 241,
+      "task": "ring16_acquisition"
+    }
+  ],
+  "model_sampling_draws": 0,
+  "new_batch_real_streams_match_original_prefix": {
+    "model_sampling_draws": 0,
+    "tasks": {
+      "gaussian1d_acquisition": {
+        "first_4000_microbatches_sha256": "a3b2f48e279bc16fe035cc754f57bc1085465e3a75b34c03c092d8ef9198fb8d",
+        "original_segments_exact": true
+      },
+      "ring16_acquisition": {
+        "first_4000_microbatches_sha256": "2c47d7e5e7803ae3d4471aedc5a87d2efcf3e6bcb40bf12eb94db49e83d3146e",
+        "original_segments_exact": true
+      }
+    },
+    "training_updates": 0
+  },
+  "publication_source_sha256": "6112303a9f4288b5f2f376784a74122ae0b7eb94146b7d82c48367bdf1cdbc17",
+  "total_sample_recomputations": 676,
+  "training_updates": 0
+}

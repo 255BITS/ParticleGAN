@@ -1,0 +1,55 @@
+{
+  "byte_original_media_and_gif": true,
+  "default_adoption": false,
+  "execution_status": "INVALID",
+  "files": {
+    "README.md": {
+      "bytes": 3829,
+      "path": "/ml2/hypergan/pg-atlas-word-retained-context-20261004/publication-v1/README.md",
+      "sha256": "cecb9d1b69ab3d01e71cd984c77cdd20d516bc72d8efff30c0455869536ff68a"
+    },
+    "audit.json": {
+      "bytes": 1412,
+      "path": "/ml2/hypergan/pg-atlas-word-retained-context-20261004/publication-v1/audit.json",
+      "sha256": "1fd814f52968c160295d839e703d1ac250ab6ce4220c0f284de31462267ed153"
+    },
+    "context.json": {
+      "bytes": 19330,
+      "path": "/ml2/hypergan/pg-atlas-word-retained-context-20261004/publication-v1/context.json",
+      "sha256": "54d61041c72befd8b4196f78d368374ac1c98470fd5742d4772f9cb6da5bcbdd"
+    },
+    "input-index.json": {
+      "bytes": 6868,
+      "path": "/ml2/hypergan/pg-atlas-word-retained-context-20261004/publication-v1/input-index.json",
+      "sha256": "b5fe10f92fd894ab0de488c40bf1e532ff8a1106cb49fee385881e128a0fd9f8"
+    },
+    "word-retained-goal.gif": {
+      "bytes": 513356,
+      "path": "/ml2/hypergan/pg-atlas-word-retained-context-20261004/publication-v1/word-retained-goal.gif",
+      "sha256": "6e70906af5df22fb369de292955fe9c5a077a963f8174f99cf5645fb3ea42b4e"
+    },
+    "word-retained-media.json": {
+      "bytes": 3865,
+      "path": "/ml2/hypergan/pg-atlas-word-retained-context-20261004/publication-v1/word-retained-media.json",
+      "sha256": "c51e08932cbd4e3aab0ec6bee2e0cc9a70bcfa55b77243262af453b5fd7687ef"
+    }
+  },
+  "frozen_original_publication_unchanged": true,
+  "gif_frames": 9,
+  "no_checkpoint_or_scorer_calls": true,
+  "numeric_gate": "UNAVAILABLE",
+  "original_inputs_unchanged": true,
+  "privacy": "PASS",
+  "qualification_input": false,
+  "raw_clock": 20001,
+  "recorded_pure_reads": 24,
+  "schema": "pg_atlas_word_context_independent_check_v1",
+  "source_helper": {
+    "bytes": 20049,
+    "path": "/ml2/hypergan/pg-atlas-word-retained-context-20261004/publish_context.py",
+    "sha256": "3fc112d61d294fd0be5a99095a5329c8f7bf2631e032d77842d64f032604a5be"
+  },
+  "speed_ranking": false,
+  "status": "PASS",
+  "verified_inputs": 23
+}

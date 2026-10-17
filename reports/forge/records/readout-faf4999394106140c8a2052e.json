@@ -1,0 +1,74 @@
+{
+  "attempt_ids": [
+    "3e1d8ca0f47a4954b41119cbe605548e"
+  ],
+  "candidate_id": "k3p",
+  "candidate_revision": "2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "BCap passed the same fixed smoke and five quality tasks in this source/runtime cohort. K3P, KA2 and matched R1/R2 remain smoke-negative; this does not rank unmeasured quality or replace earlier protocol-specific evidence.",
+  "conclusion": "This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.0637243241071701, 'mean_abs': 0.10652091354131699}. One completed attempt cost 5.581290134 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.",
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "3e1d8ca0f47a4954b41119cbe605548e",
+        "result_hash": "96085d9d195268205902eb0504d5d5fbe9fda9f8e59de5332404fa25f3be4b89",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "publication": {
+    "kind": "compact_readout_projection",
+    "original_archive_member": "full-readouts/readout-faf4999394106140c8a2052e.json",
+    "original_file_sha256": "4f3be3894d7751f47773896d6ef96408f71121d1e782c894324fd09aa2521bd8",
+    "qualification_input": false
+  },
+  "qualification_reuse": false,
+  "record_id": "readout-faf4999394106140c8a2052e",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json"
+  },
+  "task_results": [
+    {
+      "_attempt_id": "3e1d8ca0f47a4954b41119cbe605548e",
+      "compatibility_key": "678c5610a53a41bf0b4071a4a7d908cadc2814c67e9e67b7f69b552ca1459589",
+      "cost": {
+        "adapter_seconds": 0.35305398202035576,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 5.581290133995935,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.352653356967494,
+        "wall_seconds": 5.581290133995935
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.0637243241071701,
+        "mean_abs": 0.10652091354131699
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    }
+  ]
+}

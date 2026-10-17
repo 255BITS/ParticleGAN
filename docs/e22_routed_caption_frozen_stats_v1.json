@@ -1,0 +1,238 @@
+{
+  "task": "routed_caption_frozen_scalar_moments_v1",
+  "status": "Prepared NEW frozen scalar-moment variant; no science executed",
+  "parent_commit": "68cc4361689531ce1b1a7fd441a49effb242440e",
+  "question": "Does calibration of frozen per-tensor scalar moments alone remove the untied-head terminal win in the generated caption task?",
+  "arms": [
+    "ordinary_BF16",
+    "particle_BF16",
+    "particle_untied_BF16"
+  ],
+  "geometry": {
+    "width": 576,
+    "text": 768,
+    "rank": 16,
+    "tokens": 256,
+    "length": 128,
+    "heads": 9,
+    "output": 16,
+    "frequency": 256
+  },
+  "sites": [
+    "ctx_proj",
+    "block.self_attn.qkv",
+    "block.self_attn.proj",
+    "block.cross_attn.q",
+    "block.cross_attn.kv",
+    "block.cross_attn.proj"
+  ],
+  "steps": 512,
+  "seconds": 300,
+  "device": "cuda:0",
+  "physical_gpu": 0,
+  "external_timeout_seconds": 300,
+  "external_kill_grace_seconds": 5,
+  "formula": "U_h[h+tanh(Hh+b)] + U_p[h*tanh(Cz)] with one shared Down; H/b0, sampledC, both Ups0 before optimizers/EMA.",
+  "changed_factors": [
+    "Only the fresh frozen backbone sampling distributions change:29 full-shape mean/population-std scalar profiles calibrated once from retained actual pure-base tensors, preserving Uniform Linear/Normal position families and all original named CPU streams. Realized sample moments remain descriptive; no rescaling/direction or tensor copy. The same paired teacher/student, flow/caption contexts, architecture, native game, horizon and numeric gates remain. Numerical untrained FIT standard deviations and digests are recomputed consequences."
+  ],
+  "accuracy_thresholds": {
+    "relative_aggregate_improvement_gte": 0.001,
+    "source_harm_lte": 1e-06,
+    "relative_code_benefit_gte": 0.001,
+    "strict_code_benefit_each_source": true,
+    "bank_router_live_fraction_gte": 0.9,
+    "live_denominator": 511,
+    "all_six_particle_Up_and_C_nonzero": true
+  },
+  "primary_gate": "Untied terminal TEST48 physical float64 RMSE improves BOTH fresh controls by>=.1%, harms no source by>1e-6 against EITHER control; code zero worsens aggregate by>=.1% and strictly every source; bank/query>=90% updates2..512, all6 U_p/C norms finite positive.",
+  "evaluation": {
+    "metric": "Unscaled physical source-prediction minus frozen positive-caption-teacher RMSE; float64 coordinate/context reductions. Offline only.",
+    "endpoint": 512,
+    "test_contexts": 48,
+    "sources": 6,
+    "contexts_per_source": 8,
+    "source_weighting": "Aggregate over all48 contexts; six separate equally sized source reductions.",
+    "code_ablation": "Untied at512 only: public native routed generation with all six mixed codes replaced by zero; shared Down/main H-term remains active. No training.",
+    "no_output_training": "No output-MSE objective, structural guard, scale/epsilon choice, checkpoint selection or stopping rule. Fixed pretraining FIT std freezes the game units; physical TEST metric is offline only.",
+    "oracle_destructive_controls": "Exact-zero and unit-error oracle, known positive gate, no-change failure, one-source-harm failure and nonfinite rejection before any training."
+  },
+  "input_law": {
+    "captions": "13 fixed synthetic captions; retained measured masked pooled Gram/mask lengths/valid and padded scalar statistics, generated token and padding directions.",
+    "latent_stream": "CPU102, original iid array addressing; each pool/source/occurrence uses its first two time draws as independent a,b; remaining original arrays consumed unused.",
+    "caption_residual_stream": "CPU103",
+    "fit": "48: sixsources\u00d7times[.1,.35,.6,.85]\u00d7two latent draws",
+    "guard": "12: sixsources\u00d7times[.22,.72]\u00d7one disjoint draw",
+    "test": "48: sixsources\u00d7times[.18,.43,.68,.93]\u00d7two disjoint draws",
+    "source_to_target": "Synthetic indices1..6\u21927..12; empty0. Distinct paired captions, live teacher in every host forward.",
+    "difference_from_actual_caption": "Latents remain theoretical marginal N(0,I) with the same flow correlations/grids and synthetic token directions. Frozen scalar moments are calibrated; learned weight directions, channel correlations, positional structure and actual varying latent amplitude remain unmatched.",
+    "effective_independent_trajectories": {
+      "fit": 12,
+      "guard": 6,
+      "test": 12
+    }
+  },
+  "prior": {
+    "kind": "particle_cloud",
+    "sigma": 0,
+    "num_particles": 128,
+    "z_dim": 4,
+    "exception": "The task requires one shared trainable dense routing bank. This explicit particle-cloud/R2 exception supplies no Forge learned-MoG or public-default qualification.",
+    "initialization": "Public init.deterministic_orthogonal_ on recipe.make_prior(); preserve prior.to(device).z nn.Parameter ownership."
+  },
+  "precision_backend": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "initialization": {
+    "api": "Public init.initialize_(method=sample_distributions_v1), before EMA/policy construction.",
+    "named_stream": "sha256(routed-caption-geometry-v1:{role}:{full_parameter_name}) first8 little-endian modulo2**63-1; retained exactly from prior geometry fixture.",
+    "teacher": "One fresh public-initialized backbone with call-local calibrated distributions; freeze before both disjoint student/live-teacher copies, identical weights. Source-to-positive caption switch remains the only teacher/student input difference. No adapter teacher or reachability assertion.",
+    "branches": "Common named Down values; Up0; particle H/b0 and sampled nonzeroC. Both Down/Up use BF16 matmuls, stored parameters remainFP32.",
+    "restore": "Public E22Policy.load_state_dict; explicit registered UntiedAdapter survives restoration, no trained-owner initialization, caller streams/modes/gradients preserved.",
+    "placeholder_change": "Inherited unchanged from the PR239/240 helpers: their public prior nn.Parameter choice differs from the older geometry ancestor. This scalar-moment variant changes neither prior values nor ownership.",
+    "extra_head": "Registered nn.Linear Parameter owners and public initialize_ before native optimizer/policy/EMA, then fresh both heads zeroed. Common Down/main-Up/H/b/C/query/D values preserve original named streams.",
+    "dead_control": "C-zero is destructive software-only; combining zero U_p and C creates a dead conditional path. Science retains sampled nonzero C.",
+    "frozen_distributions": "Full shipped profile; Linear tensors Uniform(mu-sqrt3*population_std,mu+sqrt3*population_std), pos Normal(mu,std), public initialize_(distributions=...) before requires_grad_(False). No global registry modification. Draw addresses and learned initialization remain unchanged."
+  },
+  "native_law": {
+    "particle_recipe": "e22_routed",
+    "ordinary_recipe": "e22 with conditional rows and atom-only row evidence/birth controls disabled",
+    "sigma": 0.125,
+    "batch_size": 4,
+    "guidance": 3,
+    "cfg_layout": "physicalB4\u2192B8 conditional-first/unconditional-second; routed mixer sees B\u00d72 halves",
+    "generator_router_lr": 5e-05,
+    "bank_critic_noise_rates": "Recipe defaults",
+    "D_G_DV12": "Unchanged public native particle forwarding, perturb=True for both native game forwards.",
+    "row_controls": "Public RoutedRows, shared full-model reruns, feature-only decision law, max_context_harm0/output_error_guardFalse, probe_interval100/reopen_guardsettled.",
+    "penalty": "Recipe.make_critic_penalty on per-token view with token pooling cancellation,16-dimensional native penalty coordinates.",
+    "sampling": "CPU7 B4 fit rows with replacement; CPU43 two Gaussian arrays perupdate; owned CPU/CUDA900 native penalty streams; policyseed21."
+  },
+  "reuse": "Immutable flow.context_data/latent_description plus normalization helpers and common.preflight/run/data-native-update. NEW builder owns only fresh calibrated frozen initialization and derived FIT baseline/provenance. No patched globals, FunctionType or copied native optimizer/training loop.",
+  "fresh_cli": "Always fresh three-arm512 run, entirely self-contained. Compatible historical controls may only be reused in separately declared external root evidence; no reuse option or historical failure gate in CLI.",
+  "media_steps": [
+    0,
+    64,
+    128,
+    256,
+    384,
+    512
+  ],
+  "media_indices": [
+    0,
+    8,
+    16,
+    24,
+    32,
+    40,
+    1,
+    9
+  ],
+  "media": {
+    "role": "Visual-only actual clean native observations; does not alter the terminal scientific gate.",
+    "context": "First six indices give one query/source atTESTtime.18, latent occurrence3; last two are fixed occurrence4 B4 padding. Render first six.",
+    "arrays": "Actual observed physical residuals, zero target-residual arrays and fixed context/source identities; no stock or reconstructed training trajectory.",
+    "immutability": "Each capture checks native policy state including diagnostics/RNG, plus owned caller streams/globals, modes, gradient buffers and closed route lifecycle.",
+    "goal": "Four rows target0/ordinary/shared/untied; actual clean observations at the unchanged fixed six source cameras and updates; NEW frozen scalar-moment toy header.",
+    "axes_colors": "Constant16x16 patch axes, white0/redinitial observed maximum. Initial-only scale fixed across all frames.",
+    "render_seconds": 60,
+    "render_device": "cpu",
+    "render_models_or_native_updates": 0,
+    "optional_render_dependencies": "NumPy/Pillow>=10.1; exclusive GIF/PNG/receipt files, no overwrites.",
+    "command": "python -m examples.render_e22_routed_caption_frozen_stats --run-directory runs/caption-frozen-stats-v1"
+  },
+  "oracle_controls": "Bundled unscaled F64 exact-zero/unit-error and nonfinite scorer; new positive-both-controls, loses-one-control, source-harm, dead-head destructive gates before training.",
+  "api": "Record actual imported package path/hash and require within-run immutability only; no native revision/hash allowlist. Future improvements can PASS without historical failure reproduction.",
+  "exit_codes": {
+    "0": "completed scientificPASS",
+    "1": "completed scientificFAIL",
+    "2": "incomplete/error/overrun"
+  },
+  "cli": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_frozen_stats --run --out runs/caption-frozen-stats-v1",
+  "software": "One aggregate externally<=60s CPU process on NEW tests only; reduced geometry/public initializer and strict scalar/distribution/destructive oracles, paired frozen-owner/learned-role/EMA-scale/restore/tangent contracts, exactly2+2 tiny native updates for replay (4total). Zero full576host/CUDA/quality; old suites not rerun.",
+  "budget": "One fresh3x512 physicalGPU0 campaign,300s from NEW wrapper startup through fullhost data/normalization/preflight, native updates, all captures, cleanup and finalwrites. Separate saved-state CPU60s renderer. No seed/scale/epsilon/depth/horizon scan.",
+  "limits": [
+    "PASS rejects this scalar-moment calibration as sufficient to reproduce the actual-caption failure in this fixed generated fixture; FAIL retains failed bounds without proving a unique direction/position/layer mechanism.",
+    "Gate unchanged: >=.1% gain BOTH controls, each-source harm<=1e-6 BOTH, useful codes >=.1% aggregate and strictly all6, bank/query>=90%511, all6 C/U_p positive. No historical-failure requirement.",
+    "All29 scalar moments are embedded before science from a single saved-tensor inventory. No trial accuracy, token mean fraction, scale or seed is used to choose or modify them.",
+    "Matching per-tensor mean/std does not match learned tensor directions, spectra, covariance, positional structure or higher moments. Random finite sample moments are not forced to the profile.",
+    "FIT std rule remains correction1/eps1e-8 with pretraining nondegeneracy refusal; observed numerical units and residual/token contrast are new descriptive consequences.",
+    "Actual varying latent amplitude, semantic caption-token directions and pretrained teacher Jacobian remain different. Initial mean/centered powers are recorded without a42% matching gate.",
+    "Old studies/tests/cards/results remain immutable. Actual-caption/full-Supra strict failure remains unresolved and no promotion follows."
+  ],
+  "zero_update_full_prerequisite": "All3 fresh outputs/common Down/main-Up/D match; shared/untied H/b/C,query,bank and recipe equal; public fresh-owner restore exact. Also native RpGAN initial ordinary-main-Up gradients EXACT with sampledC/DV12 and all6 U_p gradients finite positive on FITindices[0,8,16,24], privateCPU72 Gaussian panel sigma.125, with full native/caller/modes/gradients state restored. No D/G updates or outputobjective; GPU proof is initial-point only.",
+  "population_reporting": "Controller events include rejected/skipped attempts; accepted_row_moves sums event.moves and accepted_proposals counts event.accepted, reported separately.",
+  "execution_helper_task": "routed_caption_untied_up_v1",
+  "normalization": {
+    "statistic": "untrained FIT residual coordinate std, correction=1, flattened contexts and tokens",
+    "epsilon": 1e-08,
+    "reject_std_lte_epsilon": true,
+    "previous_floor": 0.04,
+    "shared_across_all_arms_and_D_EMA_features": true
+  },
+  "sources": {
+    "examples/e22_routed_caption_frozen_stats.py": "a8489fc0369bf03bdfe5b8a5bb92c9a7c9b3f66aea83166f5fdd53f8dab99047",
+    "examples/render_e22_routed_caption_frozen_stats.py": "ea369cc340f349f042a498d131429cba75563c03aa9e9e232255ea2c8fb374d9",
+    "tests/test_e22_routed_caption_frozen_stats.py": "707cdb18f8436d4dc0d36e18a664c18684b865cf14d73aaffb8f218cd93caea4",
+    "docs/e22_routed_caption_frozen_stats_profile_v1.json": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+    "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "flow": {
+    "anchor_time": 0.1,
+    "reference_cosine": 0.992,
+    "reference_time_delta": 0.1,
+    "angular_rate": 1.2657558596272396,
+    "formula": "z(t)=cos(omega*(t-.1))*a+sin(omega*(t-.1))*b",
+    "anchor_stream": "CPU102, original iid row addressing; first two time rows per pool/source/occurrence",
+    "independent_trajectories": {
+      "fit": 12,
+      "guard": 6,
+      "test": 12
+    },
+    "same_time_marginal": "N(0,I); independent a,b with no normalization or orthogonalization",
+    "expected_grid_adjacent_cosine": 0.9503495796694267
+  },
+  "flow_calibration_provenance": {
+    "scope": "Rounded retained adjacent-time correlation .992; one fixed angular rate, no coefficient/seed search. Actual receipt nearest cross-time pairing does not establish true trajectory IDs.",
+    "actual_geometry_audit_sha256": "bb8aa6914cbe7bc64add54155e9c0c61eb0b2e3384d0f6565f28ba4023d61cff",
+    "actual_reference_cosine_mean": 0.9921336409563316
+  },
+  "normalization_evidence": "Recompute untrained NEW calibrated-host FIT residuals through the identical source/positive paired frozen host, then unchanged FIT std correction1/epsilon1e-8. Retain raw and normalized token-mean/centered power without altering target or metric.",
+  "intended_forward_counts": {
+    "data_construction_untrained_paired_residual_forwards": 12,
+    "initial_prerequisite_paired_residual_forwards": 6,
+    "native_quality_updates": 1536,
+    "core_training_paired_residual_forwards": 3072,
+    "fixed_media_paired_residual_forwards": 36,
+    "terminal_three_arm_capture_and_public_restore_repeat_forwards": 72,
+    "terminal_code_ablation_forwards": 12,
+    "fixed_nontraining_paired_residual_forwards_total": 138,
+    "scope": "Each paired residual call includes one source and one live positive-caption teacher backbone call. Counts are exact mandatory source call sites; native feature-guard/candidate reruns and native critic/penalty/monitor internals remain policy-managed extras, not silently claimed absent. No extra original iid host or quality-control rerun."
+  },
+  "frozen_calibration": {
+    "Linear": "Uniform(mean-sqrt(3)*population_std,mean+sqrt(3)*population_std)",
+    "pos_embed": "Normal(mean,population_std)",
+    "std_correction": 0,
+    "draw_stream": "unchanged routed-caption-geometry-v1:frozen_backbone:{full_name}",
+    "realized_moments": "descriptive only; no recentering/rescaling after sampling"
+  },
+  "profile_sha256": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+  "frozen_profile_provenance": {
+    "bundled_path": "docs/e22_routed_caption_frozen_stats_profile_v1.json",
+    "profile_sha256": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+    "source_capsule_sha256": "fc18f90e1422a4a03287e368071cd71cab0d38c4e6cba1337c001b2d82598afc",
+    "inventory_sha256": "c7abed11bb97a4dc118728246e1c3b9ab79f719c9b6f351358a4e23986b079a0",
+    "tensor_count": 29,
+    "source_statistic": "float64 mean/population std correction0, initial saved pure pretrained-base tensors; no trained particle update involved",
+    "runtime_assets": "Shipped scalar profile only; no /ml2 source/checkpoint/provenance files are required by the CLI. Historical absolute paths are descriptive identities."
+  },
+  "calibrated_input_artifact": "frozen-stats-inputs.pt: all29 newly sampled frozen FP32 tensors, all60 unchanged flow anchors,108 actual contexts and per-row metadata, new FIT residuals/scales, realized-moment/profile/owner/input evidence. Raw files remain ignored; no old-host forward."
+}

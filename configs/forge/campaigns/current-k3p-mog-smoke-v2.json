@@ -1,0 +1,49 @@
+{
+  "budgets": {
+    "campaign_seconds": 2400,
+    "candidate_seconds": 900,
+    "task_seconds": {
+      "ae_gan_hold": 300,
+      "two_pole": 300,
+      "unused_token_hold": 300
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "current-k3p-mog-smoke-v2",
+  "profile": "current-k3p-mog-v2",
+  "profile_sha256": "10141560f4a07a35f03a25415752ea19dca7cfed3acc7b14ace98158e221189e",
+  "purpose": "Collect the eight remaining cheap cells under corrected seed-receipt source c673226c. The ordinary corrected-source fresh-checkout run supplies penalty-ablation two_pole. No learning or gate change; v1 remains a separate pinned cohort, never an independent replicate. No deeper tasks or GPU execution.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "Fill all remaining cheap smoke cells at the frozen paired cohort. The penalty ablation already has a compatible ordinary two_pole FAIL from fresh-checkout acceptance; do not repeat it.",
+      "tasks": [
+        "two_pole",
+        "unused_token_hold",
+        "ae_gan_hold"
+      ]
+    },
+    {
+      "lineage_id": "forge-onboarding-anchor-ablation",
+      "reason": "Fill all remaining cheap smoke cells at the frozen paired cohort. The penalty ablation already has a compatible ordinary two_pole FAIL from fresh-checkout acceptance; do not repeat it.",
+      "tasks": [
+        "two_pole",
+        "unused_token_hold",
+        "ae_gan_hold"
+      ]
+    },
+    {
+      "lineage_id": "forge-no-critic-penalty",
+      "reason": "Fill all remaining cheap smoke cells at the frozen paired cohort. The penalty ablation already has a compatible ordinary two_pole FAIL from fresh-checkout acceptance; do not repeat it.",
+      "tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ]
+    }
+  ],
+  "view": "discriminator_stability"
+}

@@ -1,0 +1,4044 @@
+{
+  "GPU_calls": 0,
+  "analytic_geometry_source": {
+    "bytes": 2428,
+    "path": "/ml2/hypergan/diagnostic-source/snapshots/db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037/benchmarks/toy100/problems.py",
+    "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d"
+  },
+  "checkpoint_deserializations": 0,
+  "consumed_inputs": [
+    {
+      "bytes": 4369079,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/study.json",
+      "sha256": "7594771d9fa8abff4ba66cd4945fb72bff6b1d0faba64e98235ed4f5531f59da"
+    },
+    {
+      "bytes": 2428,
+      "path": "/ml2/hypergan/diagnostic-source/snapshots/db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037/benchmarks/toy100/problems.py",
+      "sha256": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d"
+    },
+    {
+      "bytes": 35877,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_run.py",
+      "sha256": "44a770e6fbeca4d9e2d7d1e74d3107ab2d9ef2f284d76d6e7a0d60cce6f1a5e7"
+    },
+    {
+      "bytes": 10394,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_contract.py",
+      "sha256": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28"
+    },
+    {
+      "bytes": 146695,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/raw-result.json",
+      "sha256": "f45387bc30d4f84a9a3c7a1837ebea24d1211c5d1a6bd2214eca61a9fd2646de"
+    },
+    {
+      "bytes": 2079,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/graded-result.json",
+      "sha256": "d4135bc991c02034727e1f6e49b5020fcc58b0f4f813b26cdb56726b9aecbe66"
+    },
+    {
+      "bytes": 6219107,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/resolved.json",
+      "sha256": "42281fb4bd5061240d54257aa9ef77257ba055e20fadd2d47fe5f6fcaa462076"
+    },
+    {
+      "bytes": 151,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/277fcfd1d40b88f830d2311021243f644d43e6e5806923600689c269fa162f49/supervisor-terminal.json",
+      "sha256": "6f56943d915b6aeee30956fe50ff578dd3819a75d2bed839f74c87c5e01cb09f"
+    },
+    {
+      "bytes": 316253,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/two_pole_policy_selected_cloud_v1-goal.gif",
+      "sha256": "170b703f6c4a8e98c1d35a20d923cd1146579861428db4cd734e4f9bd9319b38"
+    },
+    {
+      "bytes": 3411,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/two_pole_policy_selected_cloud_v1-media.json",
+      "sha256": "b689feb656caa70539f42f45573f2c79742d5716f8e5963b193fdb024d0a510c"
+    },
+    {
+      "bytes": 1089,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000004.npz",
+      "sha256": "391253b798a2fe81de0c91aea0e045344db1cbbf3b42e3b6888d2b46c0b90a81"
+    },
+    {
+      "bytes": 1090,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000014.npz",
+      "sha256": "f6aff5618db0a614f6894de187e678c2687585169ce25bf6ebe5f3e95c3b2cce"
+    },
+    {
+      "bytes": 1092,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000024.npz",
+      "sha256": "6797546d8f53868ea1a0ca2ba8bc015400e8f445ae672a85c3310f8a00ac02ed"
+    },
+    {
+      "bytes": 1090,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000034.npz",
+      "sha256": "8d54c1e2d432e4d20a817622a75dd96152b0a380d2b3dd171fb9412be29072eb"
+    },
+    {
+      "bytes": 1089,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000044.npz",
+      "sha256": "02deeb173eda621a2b2907e7bd90b1a44930ff4e28e936d936a469cc058548a1"
+    },
+    {
+      "bytes": 1089,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000050.npz",
+      "sha256": "a6af1605ec7262a2d63b8c7b82bbb406875ab818778b6c4e6d683095fa1459b1"
+    },
+    {
+      "bytes": 1088,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000060.npz",
+      "sha256": "53761f3aed7ed104e1d4e1424c1b07841e5bd6d1df6e10085dda529484b7f700"
+    },
+    {
+      "bytes": 1089,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000070.npz",
+      "sha256": "f5b4dad14c6a4b50f5b92b5fa5ff4aede2ecbf0193289851a96cbda091e42a12"
+    },
+    {
+      "bytes": 1090,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000080.npz",
+      "sha256": "b462851973c7d840ad181917b4b70dc763989a5eca822b0884458dbebada3f6b"
+    },
+    {
+      "bytes": 316253,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/atlas-current-gpu-diagnostics-native-v2-20261003/gifs/two_pole_policy_selected_cloud_v1.gif",
+      "sha256": "170b703f6c4a8e98c1d35a20d923cd1146579861428db4cd734e4f9bd9319b38"
+    },
+    {
+      "bytes": 218959,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/raw-result.json",
+      "sha256": "3bcd85a64c6bc75c8c98b3c05ccca8cabcaaa488488b78237318c2be2250cb14"
+    },
+    {
+      "bytes": 14004,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/graded-result.json",
+      "sha256": "a0f4a9aaf500aab35d38ff3997a12e0d9ff1f58938c68877318ed9db0404d449"
+    },
+    {
+      "bytes": 6219102,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/resolved.json",
+      "sha256": "68c48d20c228063c5917306845538062454a6e33c7f828c22ef5e269c2d560a9"
+    },
+    {
+      "bytes": 150,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/96f20a4dad3d6d73784250bea2ac9aa7b0bbcfcee15bbdbd213021ad83e0acf8/supervisor-terminal.json",
+      "sha256": "a9648d964a8a161d6548af95b97fc5c3066c793fbe2d53374eeb7c75406928aa"
+    },
+    {
+      "bytes": 306692,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/grid100_policy_selected_cloud_v1-goal.gif",
+      "sha256": "f31110b3a6172c10bb62c686529f340df77480c39e0d9c85d5147d90c2a1d595"
+    },
+    {
+      "bytes": 3965,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/grid100_policy_selected_cloud_v1-media.json",
+      "sha256": "87915e817011cef277b49fa5127623391a6e9fc8a7429e239fb27e4cee21fef7"
+    },
+    {
+      "bytes": 90426,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000000.npz",
+      "sha256": "49376bdc929c5d3fb6e4a2753bdfbc3456d24251ed951fcb4020192b5105b783"
+    },
+    {
+      "bytes": 90214,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000050.npz",
+      "sha256": "f5e735e77ed77fbe9ed3ec606973f9879eb68d8cd7f37d477a786bd5684f476d"
+    },
+    {
+      "bytes": 90009,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000750.npz",
+      "sha256": "d2adfce28250101f7e2ce2ae2af96fdd506dfe8c99e7b250337aa20a17396a44"
+    },
+    {
+      "bytes": 85509,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_001750.npz",
+      "sha256": "e026dc028194dfb3197b8c93b865da9bbe7337d22ee13bcbd7f5c615013da94b"
+    },
+    {
+      "bytes": 83822,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_002750.npz",
+      "sha256": "6e212f4ab3e7e8a32cc59fe0169c8951feadbc55ecc0a876487a3d348368f168"
+    },
+    {
+      "bytes": 83929,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_004000.npz",
+      "sha256": "6f27806265b9a6ae551b802ac29ec601537291a48842f7eaeec2fbd9fc644b7c"
+    },
+    {
+      "bytes": 83871,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_005000.npz",
+      "sha256": "9a5184ab7300a9fb8b1260a4b57db8b5e95469b9388f4ab0f6aa1eb70f6729a1"
+    },
+    {
+      "bytes": 84073,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_006000.npz",
+      "sha256": "871b34943a64598106452978b6deb5857d13d4a3d32dc00b16aa6db3e3ab6706"
+    },
+    {
+      "bytes": 84120,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_007000.npz",
+      "sha256": "cccacf8a46014c044e365c6fbaaf95d55be4a86414fc27544f4ead0e3e41a557"
+    },
+    {
+      "bytes": 7184,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/summary.json",
+      "sha256": "026365831ebaf7b905253a136881f01e7306526326cbb3cfe7729e24cf6c6ae4"
+    },
+    {
+      "bytes": 67332,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/events.jsonl",
+      "sha256": "e97ecc729c77355a9ca532ae3ffd847a3f1c7c930d146eda629c16632e9fbd85"
+    },
+    {
+      "bytes": 306692,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/atlas-current-gpu-diagnostics-native-v2-20261003/gifs/grid100_policy_selected_cloud_v1.gif",
+      "sha256": "f31110b3a6172c10bb62c686529f340df77480c39e0d9c85d5147d90c2a1d595"
+    },
+    {
+      "bytes": 409858,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/raw-result.json",
+      "sha256": "2ecb7ccbcd3ac2a2ccf4db62cce6439e70dcc22ff033554b23150de2a5f64cc4"
+    },
+    {
+      "bytes": 14096,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/graded-result.json",
+      "sha256": "37b413651aa5939160470aca68f6b20d103536fa7cd7252ebc1117d330c0c8fc"
+    },
+    {
+      "bytes": 6219120,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/resolved.json",
+      "sha256": "10adefeb1b218d01733dd4d06afcaae66fb19977a19642ef60645b4dd1a4d9ed"
+    },
+    {
+      "bytes": 150,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/e26afd1148bcdf2b525445ce45e51f3c86f166efbe3902c7adf2af06b68f2c28/supervisor-terminal.json",
+      "sha256": "82aeebc0ff1ea4768c657224f65b4059f2af283ed44fdd656313e1ed52a5f310"
+    },
+    {
+      "bytes": 309777,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/rotated100_policy_selected_cloud_v1-goal.gif",
+      "sha256": "782044697ea79e68a7d0c829bd1f8be7fd3f06c208dd9da16082d6c35b17837d"
+    },
+    {
+      "bytes": 4040,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/rotated100_policy_selected_cloud_v1-media.json",
+      "sha256": "38e166ab6d977cb10de351fee8faa5e5d747e95fbd1fad1041937e1287d54e53"
+    },
+    {
+      "bytes": 91263,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000000.npz",
+      "sha256": "e697300c2525bff0a80cb409602b6058e01a638bfb4716b11f64edd6b5d76677"
+    },
+    {
+      "bytes": 91024,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000050.npz",
+      "sha256": "d755584aa336544a132964625ddd0be00e2d505163f2b27bfdbf179754859c21"
+    },
+    {
+      "bytes": 90837,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000750.npz",
+      "sha256": "ab3b82f35b9773e7f8962242bfc696db959003ff1e0b0f33ac6f5d0f9be31eba"
+    },
+    {
+      "bytes": 90742,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_001750.npz",
+      "sha256": "33faaf9dc21c2f3180fe4a061078838d25bc77317c4b11a3be7cb68fc2f9b4bf"
+    },
+    {
+      "bytes": 90572,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_002750.npz",
+      "sha256": "16d103f020afa2719afe809135657d063f7697914b333e84c932a4c7ba53455c"
+    },
+    {
+      "bytes": 90248,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_004000.npz",
+      "sha256": "42289e2f4144974475087872b674fce38848c3e98a073982ae0980a419937cc0"
+    },
+    {
+      "bytes": 90051,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_005000.npz",
+      "sha256": "9f4c3132534f942f8e61d8306ad29acb5b5453ca9c16c434f7ec87ae11af1470"
+    },
+    {
+      "bytes": 90091,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_006000.npz",
+      "sha256": "66842dec56014600df7043faca5301129a6cfb851fb1dbf915d51097e63665dd"
+    },
+    {
+      "bytes": 89995,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_007000.npz",
+      "sha256": "993c3f317aacb3ab05758189c51640eb21ced3ef341bc466d09a0df75c766954"
+    },
+    {
+      "bytes": 7238,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/summary.json",
+      "sha256": "24c963468f84e8de71eb8ff31259895b81b77308d1794abb62788b6a9e17aca3"
+    },
+    {
+      "bytes": 67051,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/events.jsonl",
+      "sha256": "05ea33317ab1a46eb06b0c8017432125f982a0da7eab6905095e4dea00d4e674"
+    },
+    {
+      "bytes": 309777,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/atlas-current-gpu-diagnostics-native-v2-20261003/gifs/rotated100_policy_selected_cloud_v1.gif",
+      "sha256": "782044697ea79e68a7d0c829bd1f8be7fd3f06c208dd9da16082d6c35b17837d"
+    },
+    {
+      "bytes": 220286,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/raw-result.json",
+      "sha256": "515cf8bd3268c2c8fd6e974717a9e9daa2649e405e42ffbc60f3177380935dde"
+    },
+    {
+      "bytes": 14142,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/graded-result.json",
+      "sha256": "bd6d123e62ee812930d618ca25113c93b6c5a48b686567a1b35a6992bf0c92c5"
+    },
+    {
+      "bytes": 6219132,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/resolved.json",
+      "sha256": "8ff25197e997e2fdd445d6cd3282989f933d2b63c8a78db863f3a58b37b8518c"
+    },
+    {
+      "bytes": 150,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/cd279441b3e6d94e63ace800b0e1a6e31f0dc2a235edecb2c61b7d387239bcae/supervisor-terminal.json",
+      "sha256": "8fb73cf3679d458e297e8ab82e21a4270c8a3fbfef592a9b778b7a6b3b7ab1df"
+    },
+    {
+      "bytes": 301985,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/staggered100_policy_selected_cloud_v1-goal.gif",
+      "sha256": "fc68156fd1fcd135081feac7e6da2ea2440196ec76a5c905a7ebe9b7b35554c7"
+    },
+    {
+      "bytes": 4090,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/staggered100_policy_selected_cloud_v1-media.json",
+      "sha256": "a6233cccc544502e06f39ed9d119b4e40f0114f34b41da2b101dcb9ee1f414b3"
+    },
+    {
+      "bytes": 90991,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000000.npz",
+      "sha256": "cad26702b75525609c24d061e4a66419c59687e010b4c1435195dc86892a6ee2"
+    },
+    {
+      "bytes": 90848,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000050.npz",
+      "sha256": "cd620108a65b5e344d752b2f477708cea66b4de450ca19e7e80100cb6c4f0f65"
+    },
+    {
+      "bytes": 90214,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000750.npz",
+      "sha256": "3ca1cc96caeccbc81bf930f5bae1ccda180844259fddba5f7e209bb37693d32a"
+    },
+    {
+      "bytes": 88412,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_001750.npz",
+      "sha256": "fe5a909854656fdebbe4d21a3c7ca94755b991663dd1ad4641d1dd2117f966f8"
+    },
+    {
+      "bytes": 87840,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_002750.npz",
+      "sha256": "dec784c5d3554b400eb03267e4380675d1dcdda115b187da1cf528a41b01db5c"
+    },
+    {
+      "bytes": 87796,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_004000.npz",
+      "sha256": "e8244797e207f0203a98525870fa9ac639d57a97074a456322f9c4bc1a20365c"
+    },
+    {
+      "bytes": 87741,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_005000.npz",
+      "sha256": "fe79ee2c25945d670d5a9df76b499f54140805c5eb5780df0f13f9ea14994c88"
+    },
+    {
+      "bytes": 87828,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_006000.npz",
+      "sha256": "9abbc8346e234dc22c7b47d5d3868d139083918e5b148bb3a13d921b8a924f45"
+    },
+    {
+      "bytes": 87885,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_007000.npz",
+      "sha256": "dbc63c0a17a00dfe25465650aaab9e32a5df73e75ea6c76c5028d0d68eaad715"
+    },
+    {
+      "bytes": 7250,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/summary.json",
+      "sha256": "38ee114a336296e2ff8980993a8bb7d42ee5a2f67607f03217a67fa64b9e0156"
+    },
+    {
+      "bytes": 67869,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/events.jsonl",
+      "sha256": "d55a7da8e87fd6cfa93b3f4bc0e144f9674d322fe04b1cbe348a873d3ada1ed5"
+    },
+    {
+      "bytes": 301985,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/atlas-current-gpu-diagnostics-native-v2-20261003/gifs/staggered100_policy_selected_cloud_v1.gif",
+      "sha256": "fc68156fd1fcd135081feac7e6da2ea2440196ec76a5c905a7ebe9b7b35554c7"
+    }
+  ],
+  "display_cost_scope": "CPU rendering and post-import validation; source preparation/imports outside this clock; excluded from paid scientific acquisition and speed/convergence ranking",
+  "display_cost_seconds": 10.04845321085304,
+  "display_iteration_history": [
+    {
+      "directory": "/ml2/hypergan/atlas-current-gpu-publication-views-build-20261003",
+      "measured_display_cost_seconds": null,
+      "note": "No scientific execution; generic renderer rejected an empty local viewport.",
+      "status": "DISPLAY_ERROR_EMPTY_VIEW"
+    },
+    {
+      "directory": "/ml2/hypergan/atlas-current-gpu-publication-views-build-v2-20261003",
+      "measured_display_cost_seconds": 10.683796012075618,
+      "note": "No scientific execution; one-column plotting used index-versus-value. Final publication uses explicit scalar-as-x/y=0 coordinates.",
+      "status": "PIXEL_REVIEW_REQUIRED_1D_COORDINATE_CORRECTION"
+    },
+    {
+      "directory": "/ml2/hypergan/atlas-current-gpu-publication-views-build-v3-20261003",
+      "measured_display_cost_seconds": 10.04845321085304,
+      "status": "EXPORTED_PIXEL_REVIEW_PASS"
+    }
+  ],
+  "metrics_or_gates_changed": false,
+  "model_constructions": 0,
+  "new_draws": 0,
+  "official_scorer_calls": 0,
+  "optimizer_updates": 0,
+  "original_study": {
+    "bytes": 4369079,
+    "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/study.json",
+    "sha256": "7594771d9fa8abff4ba66cd4945fb72bff6b1d0faba64e98235ed4f5531f59da"
+  },
+  "publication_artifacts_byte_identical_to_render_export": true,
+  "qualification_input": false,
+  "raw_files_unchanged": true,
+  "records": [
+    {
+      "actual_steps": [
+        4,
+        14,
+        24,
+        34,
+        44,
+        50,
+        60,
+        70,
+        80
+      ],
+      "annotations": {
+        "default_verdict_displayed": "FAIL",
+        "goal_annotations": [],
+        "numeric_observations_changed": false
+      },
+      "display_projection": [
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000004.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.030048541724681854,
+            "mean_abs": 0.03270360082387924,
+            "step": 4
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 4,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "ffdc24b526a161de83751ffc154c60d59483567bd35b8122d42df406ddfe993f",
+            "weight_selector": "state_selected"
+          },
+          "step": 4
+        },
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000014.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.0024493634700775146,
+            "mean_abs": 0.036720238626003265,
+            "step": 14
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 14,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "2cfd7f4bc5a822e05dee085c8dcb9518f025964049bf0db1f46a736ccfb7e8b0",
+            "weight_selector": "state_selected"
+          },
+          "step": 14
+        },
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000024.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.0005953311920166016,
+            "mean_abs": 0.028670992702245712,
+            "step": 24
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 24,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "ca1a062477f42e13d1d1a4ca7a2d4589de391855d85b673a793630601a69a03d",
+            "weight_selector": "state_selected"
+          },
+          "step": 24
+        },
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000034.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.004886552691459656,
+            "mean_abs": 0.017147017642855644,
+            "step": 34
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 34,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "f0ea38ff67ea2ed270a816ca61f057b011a4083a1393e9aabc300d35652f6bd6",
+            "weight_selector": "state_selected"
+          },
+          "step": 34
+        },
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000044.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.012857310473918915,
+            "mean_abs": 0.006178298499435186,
+            "step": 44
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 44,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "3e463bf5d1c1efb4131526051af0056caa94b5155a8fdfae242e5a5a308a445a",
+            "weight_selector": "state_selected"
+          },
+          "step": 44
+        },
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000050.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.031711190938949585,
+            "mean_abs": 0.005240315571427345,
+            "step": 50
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 50,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "e1617c6e767386132b4ccc58d273026b9c871c9864f200a26b1642604f69f71c",
+            "weight_selector": "state_selected"
+          },
+          "step": 50
+        },
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000060.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.016099147498607635,
+            "mean_abs": 0.005151970777660608,
+            "step": 60
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 60,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "1494991cab0e4f7d8b3488a42de148d580da491f64383fcd1856f6f9e79761f2",
+            "weight_selector": "state_selected"
+          },
+          "step": 60
+        },
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000070.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.0109538733959198,
+            "mean_abs": 0.008932914584875107,
+            "step": 70
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 70,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "2d0f295d14c90ec04fb8104e751e1fa33ae3a04f25726ba80776ad65f1e7bad6",
+            "weight_selector": "state_selected"
+          },
+          "step": 70
+        },
+        {
+          "display_projection": "original scalar values as x; display-only y=0; every original row retained",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/policy-behavior/observations/step_000080.npz",
+          "measurement": "selected_table_and_critic_gradient",
+          "original_metrics": {
+            "grad_med": 0.020121388137340546,
+            "mean_abs": 0.013669781386852264,
+            "step": 80
+          },
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "knn",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                1
+              ],
+              "population_policy": {
+                "actual_backend": "knn",
+                "calibration_rows": 6,
+                "finite_resolution_feasible": false,
+                "matching_sampler": "controller_reference",
+                "maximum_guard_flags": 0,
+                "minimum_bh_flags": 35,
+                "population": 12,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 1,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "finite_resolution_infeasible"
+            },
+            "completed_steps": 80,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "not_applied_to_parameter_measurement",
+            "observed": true,
+            "output_noise": false,
+            "parameter_measurement": "selected_table_and_critic_gradient",
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "served_snapshot",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "037d5fd16214e5b1d08672c7d0978cb9ffd86674d853f3a78aa07a99fff0c681",
+            "weight_selector": "state_selected"
+          },
+          "step": 80
+        }
+      ],
+      "frames": 9,
+      "original_grade": {
+        "bytes": 2079,
+        "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/graded-result.json",
+        "sha256": "d4135bc991c02034727e1f6e49b5020fcc58b0f4f813b26cdb56726b9aecbe66"
+      },
+      "original_media": {
+        "gif": {
+          "bytes": 316253,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/two_pole_policy_selected_cloud_v1-goal.gif",
+          "sha256": "170b703f6c4a8e98c1d35a20d923cd1146579861428db4cd734e4f9bd9319b38"
+        },
+        "receipt": {
+          "bytes": 3411,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/two_pole_policy_selected_cloud_v1-media.json",
+          "sha256": "b689feb656caa70539f42f45573f2c79742d5716f8e5963b193fdb024d0a510c"
+        }
+      },
+      "original_raw": {
+        "bytes": 146695,
+        "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/two_pole_policy_selected_cloud_v1/raw-result.json",
+        "sha256": "f45387bc30d4f84a9a3c7a1837ebea24d1211c5d1a6bd2214eca61a9fd2646de"
+      },
+      "original_repo_gif": "reports/forge/atlas-current-gpu-diagnostics-native-v2-20261003/gifs/two_pole_policy_selected_cloud_v1.gif",
+      "original_verdict": "FAIL",
+      "pixel_review": {
+        "goal_and_metrics_readable": true,
+        "method": "view_image of final decoded GIF poster",
+        "original_fail_label_readable": true,
+        "projection_or_width_reference_readable": true,
+        "reviewer": "/root/failure_diagnosis",
+        "scope": "final displayed state; no numerical or scientific reclassification"
+      },
+      "pixels_review": "PASS",
+      "poster": {
+        "bytes": 65729,
+        "file": "two_pole-1d-goal-poster.png",
+        "sha256": "2c360867826290fb505d2782243d1ccf2626f473856ea1e119d15a6ec0c9f44f"
+      },
+      "qualification_upgrade": false,
+      "supplement_gif": {
+        "bytes": 402167,
+        "dimensions": [
+          920,
+          575
+        ],
+        "file": "two_pole-1d-goal.gif",
+        "frames": 9,
+        "sha256": "970e6e60c12df89538c377228bbc55ba428db0344e8e1f9200b27105ba275c0a"
+      },
+      "task_id": "two_pole_policy_selected_cloud_v1",
+      "training_or_rescoring": false,
+      "views_projection_sha256": "88e2fdd7553fa8c2ccf28b431db821f8add4079d712dbc5bc56d1ecaaa0c4937"
+    },
+    {
+      "actual_steps": [
+        0,
+        50,
+        750,
+        1750,
+        2750,
+        4000,
+        5000,
+        6000,
+        7000
+      ],
+      "annotations": {
+        "default_verdict_displayed": "FAIL",
+        "goal_annotations": [],
+        "numeric_observations_changed": false
+      },
+      "display_projection": [
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "pending",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": null,
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": null,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "awaiting_first_real_shape"
+            },
+            "completed_steps": 0,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "69d2e39c05d340df355ed940c967bf023393d611a512ad726e66e90146e380a5",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 0,
+          "step": 0,
+          "visible_samples": 0
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000050.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 50,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "d400a73846c68d2919f1351e095112141c3645702ceb97abc2528bd16c2537c1",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 50,
+          "step": 50,
+          "visible_samples": 1
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "b362378818371b4c5c4d2c19201668fa8aa574b7085cefd3b94d596e8e5e4d42",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 750,
+          "step": 750,
+          "visible_samples": 0
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_001750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 1750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "002ae1f40026ea0e2834dbbd847ba421cbdbafd8a8b3d0fc171328575a7abf14",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 1750,
+          "step": 1750,
+          "visible_samples": 42
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_002750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 2750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "dc0777885d018aab48c25df00d077a2d64851572b65fa6655b23b4b23d57ddbb",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 2750,
+          "step": 2750,
+          "visible_samples": 38
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_004000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 4000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "49d2c421f63c876150713b0952699002c37b2edbb622da8fd08e40315d04e69c",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 4000,
+          "step": 4000,
+          "visible_samples": 48
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_005000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 5000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "c1c4ca11a400fa2c75a85ba17de33f7acb640bb59e7c721d19927567f5497c67",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 5000,
+          "step": 5000,
+          "visible_samples": 27
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_006000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 6000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "c413e6d1fd9c55a305390ce0a1a1654112080bc0488a44aeae6345e10b8306f3",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 6000,
+          "step": 6000,
+          "visible_samples": 34
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_007000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -4.5,
+            -4.5
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 7000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "07afd25dffdb2bf1c40086fa8b4fdf0bb5529ee5ca38ae92ef897a02101450e8",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 7000,
+          "step": 7000,
+          "visible_samples": 38
+        }
+      ],
+      "frames": 9,
+      "original_grade": {
+        "bytes": 14004,
+        "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/graded-result.json",
+        "sha256": "a0f4a9aaf500aab35d38ff3997a12e0d9ff1f58938c68877318ed9db0404d449"
+      },
+      "original_media": {
+        "gif": {
+          "bytes": 306692,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/grid100_policy_selected_cloud_v1-goal.gif",
+          "sha256": "f31110b3a6172c10bb62c686529f340df77480c39e0d9c85d5147d90c2a1d595"
+        },
+        "receipt": {
+          "bytes": 3965,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/grid100_policy_selected_cloud_v1-media.json",
+          "sha256": "87915e817011cef277b49fa5127623391a6e9fc8a7429e239fb27e4cee21fef7"
+        }
+      },
+      "original_raw": {
+        "bytes": 218959,
+        "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/raw-result.json",
+        "sha256": "3bcd85a64c6bc75c8c98b3c05ccca8cabcaaa488488b78237318c2be2250cb14"
+      },
+      "original_repo_gif": "reports/forge/atlas-current-gpu-diagnostics-native-v2-20261003/gifs/grid100_policy_selected_cloud_v1.gif",
+      "original_verdict": "FAIL",
+      "pixel_review": {
+        "goal_and_metrics_readable": true,
+        "method": "view_image of final decoded GIF poster",
+        "original_fail_label_readable": true,
+        "projection_or_width_reference_readable": true,
+        "reviewer": "/root/failure_diagnosis",
+        "scope": "final displayed state; no numerical or scientific reclassification"
+      },
+      "pixels_review": "PASS",
+      "poster": {
+        "bytes": 91324,
+        "file": "grid100-mode0-goal-poster.png",
+        "sha256": "9bba708dfced2bd290370323df16b86d0a53a0d79184cfa38b98b8680f7ba4bc"
+      },
+      "qualification_upgrade": false,
+      "supplement_gif": {
+        "bytes": 488063,
+        "dimensions": [
+          920,
+          635
+        ],
+        "file": "grid100-mode0-goal.gif",
+        "frames": 9,
+        "sha256": "9ab92de401c6c5e209217cd3a60eb7a35a801ed4b7949cd700d393ceabc1fba3"
+      },
+      "task_id": "grid100_policy_selected_cloud_v1",
+      "training_or_rescoring": false,
+      "views_projection_sha256": "1a683e48eccef94983916e178ee45d6ef1d422a0aa639952debc5a1a801ada05"
+    },
+    {
+      "actual_steps": [
+        0,
+        50,
+        750,
+        1750,
+        2750,
+        4000,
+        5000,
+        6000,
+        7000
+      ],
+      "annotations": {
+        "default_verdict_displayed": "FAIL",
+        "goal_annotations": [],
+        "numeric_observations_changed": false
+      },
+      "display_projection": [
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "pending",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": null,
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": null,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "awaiting_first_real_shape"
+            },
+            "completed_steps": 0,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "69d2e39c05d340df355ed940c967bf023393d611a512ad726e66e90146e380a5",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 0,
+          "step": 0,
+          "visible_samples": 0
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000050.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 50,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "353034ecfd888c16322cf0b0dff57b61972afec8aa6a40bd141f7edb87d53b1c",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 50,
+          "step": 50,
+          "visible_samples": 0
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "048de23c5e01424e2647a0a539c6409ae9997efe0fd8c8e8fdca3cd64b9b585e",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 750,
+          "step": 750,
+          "visible_samples": 8
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_001750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 1750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "132ae637eaf40b17f3405b19ab376027ea686f56c60d8e3652ef555f92796773",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 1750,
+          "step": 1750,
+          "visible_samples": 17
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_002750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 2750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "afbf100f1d9da513ceffde1a0923960014a2d9cd350c71f226a2ce9318da718b",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 2750,
+          "step": 2750,
+          "visible_samples": 15
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_004000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 4000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "a20231cf234a67720d50f03d7b6ab7cb06eae0bb8689bccf37c3b885af77302a",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 4000,
+          "step": 4000,
+          "visible_samples": 52
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_005000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 5000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "fdd27987c98565e470098198403afd0d0a9326a4ce120e8ec392f08d7e102b6e",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 5000,
+          "step": 5000,
+          "visible_samples": 48
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_006000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 6000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "2f9723f1ba976eafa3f7de1457b4f2eaf8bd73435bbda67b467fa30824784a91",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 6000,
+          "step": 6000,
+          "visible_samples": 55
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_007000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -2.176602863831777,
+            -5.980167219498072
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 7000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "90aa2838c72d83f52761a33cf550ddafe45ce13648423b739b4d2b38df65f688",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 7000,
+          "step": 7000,
+          "visible_samples": 31
+        }
+      ],
+      "frames": 9,
+      "original_grade": {
+        "bytes": 14096,
+        "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/graded-result.json",
+        "sha256": "37b413651aa5939160470aca68f6b20d103536fa7cd7252ebc1117d330c0c8fc"
+      },
+      "original_media": {
+        "gif": {
+          "bytes": 309777,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/rotated100_policy_selected_cloud_v1-goal.gif",
+          "sha256": "782044697ea79e68a7d0c829bd1f8be7fd3f06c208dd9da16082d6c35b17837d"
+        },
+        "receipt": {
+          "bytes": 4040,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/rotated100_policy_selected_cloud_v1-media.json",
+          "sha256": "38e166ab6d977cb10de351fee8faa5e5d747e95fbd1fad1041937e1287d54e53"
+        }
+      },
+      "original_raw": {
+        "bytes": 409858,
+        "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/raw-result.json",
+        "sha256": "2ecb7ccbcd3ac2a2ccf4db62cce6439e70dcc22ff033554b23150de2a5f64cc4"
+      },
+      "original_repo_gif": "reports/forge/atlas-current-gpu-diagnostics-native-v2-20261003/gifs/rotated100_policy_selected_cloud_v1.gif",
+      "original_verdict": "FAIL",
+      "pixel_review": {
+        "goal_and_metrics_readable": true,
+        "method": "view_image of final decoded GIF poster",
+        "original_fail_label_readable": true,
+        "projection_or_width_reference_readable": true,
+        "reviewer": "/root/failure_diagnosis",
+        "scope": "final displayed state; no numerical or scientific reclassification"
+      },
+      "pixels_review": "PASS",
+      "poster": {
+        "bytes": 91881,
+        "file": "rotated100-mode0-goal-poster.png",
+        "sha256": "b12a40ea0235f922f660f7e969d914adee4188a81b45bef3f90a8da70c1e7307"
+      },
+      "qualification_upgrade": false,
+      "supplement_gif": {
+        "bytes": 494624,
+        "dimensions": [
+          920,
+          635
+        ],
+        "file": "rotated100-mode0-goal.gif",
+        "frames": 9,
+        "sha256": "232d20aef4f6e37b9d41e265ac88897ff75ea593fffa546920bc6cab7f42f916"
+      },
+      "task_id": "rotated100_policy_selected_cloud_v1",
+      "training_or_rescoring": false,
+      "views_projection_sha256": "8cb1e90a5e6e315ff8b4a656bb609b804d38433b9871f73dde3452119c930cf3"
+    },
+    {
+      "actual_steps": [
+        0,
+        50,
+        750,
+        1750,
+        2750,
+        4000,
+        5000,
+        6000,
+        7000
+      ],
+      "annotations": {
+        "default_verdict_displayed": "FAIL",
+        "goal_annotations": [],
+        "numeric_observations_changed": false
+      },
+      "display_projection": [
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "pending",
+              "generator_noise_factor": 1.0,
+              "moment_rank_bound": 8,
+              "output_shape": null,
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": null,
+              "requested_backend": "auto",
+              "sampling_backend": "controller_reference",
+              "schema": 1,
+              "selection_reason": "awaiting_first_real_shape"
+            },
+            "completed_steps": 0,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "69d2e39c05d340df355ed940c967bf023393d611a512ad726e66e90146e380a5",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 0,
+          "step": 0,
+          "visible_samples": 0
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000050.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 50,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "340d08624b5993710e5021c58cda923ec40895da999264605ea39c8793b35669",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 50,
+          "step": 50,
+          "visible_samples": 0
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "fast",
+            "snapshot_sha256": "da6eb62b95b1f9cf0081526423a3f342a11fb208199f9fc342ebf51f7d2022f4",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 750,
+          "step": 750,
+          "visible_samples": 28
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_001750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 1750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "a3bf285ee682cb6027eee4304376cad87f17e167e172a0f4b825936134c489cb",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 1750,
+          "step": 1750,
+          "visible_samples": 35
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_002750.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 2750,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "c3cb943892790ff712b2b964f6b1904b52e65373f05b0bdd99420fa17e304b2d",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 2750,
+          "step": 2750,
+          "visible_samples": 40
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_004000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 4000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "73b10a7f888228946a725a0b21d2a380e2e9a36d79d3cf4ef4e51991f09342dc",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 4000,
+          "step": 4000,
+          "visible_samples": 41
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_005000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 5000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "c3036ceceaf53ac4007e8882bab43353f97c061eef9b3454f9b62cb0e634cf57",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 5000,
+          "step": 5000,
+          "visible_samples": 50
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_006000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 6000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "cf9b382c0ea3c805922d5fc109c2e6b9602d323abf61c1d945c0084d5d4b97a6",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 6000,
+          "step": 6000,
+          "visible_samples": 42
+        },
+        {
+          "actual_weights": "state_selected",
+          "display_selection": "all4096 original coordinates translated by declaredmode0; axes clip to +/-4sigma viewport",
+          "input": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_007000.npz",
+          "metric_fields": [
+            "modes",
+            "min_cov_eig_ratio",
+            "min_radial_median_ratio",
+            "mass_tv",
+            "abs_cov_trace_bias",
+            "radial_ks"
+          ],
+          "mode0_center": [
+            -3.8249999999999997,
+            -4.75
+          ],
+          "original_event_model_label": "live",
+          "selected_policy_observation": {
+            "backend_selection": {
+              "actual_backend": "feature_cells",
+              "generator_noise_factor": 0.25,
+              "moment_rank_bound": 8,
+              "output_shape": [
+                2
+              ],
+              "population_policy": {
+                "actual_backend": "feature_cells",
+                "calibration_rows": 10000,
+                "finite_resolution_feasible": true,
+                "matching_sampler": "feature_cells",
+                "maximum_guard_flags": 1000,
+                "minimum_bh_flags": 40,
+                "population": 20000,
+                "q": 0.05,
+                "requested_backend": "feature_cells",
+                "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+                "schema": 1
+              },
+              "rate_mapping": [
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "generator"
+                  },
+                  {
+                    "base_rate": 0.00796875,
+                    "factor": 1.0,
+                    "rate": 0.00796875,
+                    "role": "table"
+                  },
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 0.25,
+                    "rate": 0.001328125,
+                    "role": "noise"
+                  }
+                ],
+                [
+                  {
+                    "base_rate": 0.0053125,
+                    "factor": 1.0,
+                    "rate": 0.0053125,
+                    "role": "critic"
+                  }
+                ]
+              ],
+              "raw_output_width": 2,
+              "requested_backend": "auto",
+              "sampling_backend": "feature_cells",
+              "schema": 1,
+              "selection_reason": "finite_resolution_and_complete_raw_moment_frame"
+            },
+            "completed_steps": 7000,
+            "controller": "dv12",
+            "diagnostic_credit": false,
+            "diagnostic_weights": [
+              "forced_ema"
+            ],
+            "eval_streams": "forge-rng-v1_isolated",
+            "latent_policy": "actual_selected_public_policy",
+            "observed": true,
+            "output_noise": false,
+            "policy_owner": "particlegan.UpdatePolicy",
+            "row_selection": "original_task_strategy",
+            "sampler": "GANTrainer.sample",
+            "schema_version": 1,
+            "selected_source": "averaged",
+            "snapshot_sha256": "4ec895279227a7eecdd17be17399ee32d6869f4f7c03762ba3813f540825b788",
+            "weight_selector": "state_selected"
+          },
+          "sigma": 0.03,
+          "source_metric_step": 7000,
+          "step": 7000,
+          "visible_samples": 40
+        }
+      ],
+      "frames": 9,
+      "original_grade": {
+        "bytes": 14142,
+        "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/graded-result.json",
+        "sha256": "bd6d123e62ee812930d618ca25113c93b6c5a48b686567a1b35a6992bf0c92c5"
+      },
+      "original_media": {
+        "gif": {
+          "bytes": 301985,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/staggered100_policy_selected_cloud_v1-goal.gif",
+          "sha256": "fc68156fd1fcd135081feac7e6da2ea2440196ec76a5c905a7ebe9b7b35554c7"
+        },
+        "receipt": {
+          "bytes": 4090,
+          "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/staggered100_policy_selected_cloud_v1-media.json",
+          "sha256": "a6233cccc544502e06f39ed9d119b4e40f0114f34b41da2b101dcb9ee1f414b3"
+        }
+      },
+      "original_raw": {
+        "bytes": 220286,
+        "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/raw-result.json",
+        "sha256": "515cf8bd3268c2c8fd6e974717a9e9daa2649e405e42ffbc60f3177380935dde"
+      },
+      "original_repo_gif": "reports/forge/atlas-current-gpu-diagnostics-native-v2-20261003/gifs/staggered100_policy_selected_cloud_v1.gif",
+      "original_verdict": "FAIL",
+      "pixel_review": {
+        "goal_and_metrics_readable": true,
+        "method": "view_image of final decoded GIF poster",
+        "original_fail_label_readable": true,
+        "projection_or_width_reference_readable": true,
+        "reviewer": "/root/failure_diagnosis",
+        "scope": "final displayed state; no numerical or scientific reclassification"
+      },
+      "pixels_review": "PASS",
+      "poster": {
+        "bytes": 91559,
+        "file": "staggered100-mode0-goal-poster.png",
+        "sha256": "c660386ba18383d00f6d901dd19c9d34bb4014f8445319184c3581d847513caf"
+      },
+      "qualification_upgrade": false,
+      "supplement_gif": {
+        "bytes": 487393,
+        "dimensions": [
+          920,
+          635
+        ],
+        "file": "staggered100-mode0-goal.gif",
+        "frames": 9,
+        "sha256": "92a087be23a07f3a8f3f449b6345b6bad0f964e6a6a2ac0599365a9567f860a1"
+      },
+      "task_id": "staggered100_policy_selected_cloud_v1",
+      "training_or_rescoring": false,
+      "views_projection_sha256": "ae31701f8f3a2923ef3c210e0547140ed3f3835e0892ad289a3c14154135f6b0"
+    }
+  ],
+  "renderer_sources": {
+    "benchmarks/toy_audit/api_contract.py": {
+      "bytes": 10394,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_contract.py",
+      "sha256": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28"
+    },
+    "benchmarks/toy_audit/api_run.py": {
+      "bytes": 35877,
+      "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/benchmarks/toy_audit/api_run.py",
+      "sha256": "44a770e6fbeca4d9e2d7d1e74d3107ab2d9ef2f284d76d6e7a0d60cce6f1a5e7"
+    }
+  },
+  "sampler_calls": 0,
+  "schema": "particlegan_atlas_retained_goal_supplements_v1",
+  "scientific_paid_cost_unchanged": 2996.7973392466083,
+  "scientific_source": {
+    "commit": "9563dea57bb150f2a0275bbe8d785bf76210fca3",
+    "digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+    "executable_files_pre_post_verified": 1366,
+    "snapshot": "/ml2/hypergan/diagnostic-source/snapshots/db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037"
+  },
+  "script": {
+    "bytes": 17707,
+    "path": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003/reports/forge/atlas-current-gpu-publication-views-20261003/render_retained_views.py",
+    "sha256": "7ab6553ca9ef5c4a78a61ecccacee0366424c91c7a47ec100c4f58d3d62ff880"
+  },
+  "status": "EXPORTED_PIXEL_REVIEW_PASS"
+}

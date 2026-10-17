@@ -1,0 +1,77 @@
+{
+  "archive_bytes": 12151037,
+  "archive_sha256": "c9943e53634115ffc6fe4b1c6a7d625f960313111e8322d837330b702b6278e1",
+  "attempt_ids": [
+    "0d93422aa0ff4852bba4f0de4a1e6926",
+    "2f43521c43294c3a872be42d999debf1",
+    "3472d2f10e984168a3cb9877d287d069",
+    "5b5f7aab977745aea97e1b47871a351f",
+    "7e3c91a39a1448699c75162cb49479e7",
+    "9007daae982e4bc3b8c9f4019d48bd26",
+    "a399cef53ff04eaa930b5c231f64db52",
+    "a4a15aa781654502ae87fd689c75e346",
+    "abb9e24f625d449da70f6641ec1bce0a",
+    "c26b1bda31b4435c8ecf2c01fa37dad9",
+    "e2fcaf0f2965415db4c7234a024d3031",
+    "eb05f11341ca4916a7cf30233311a7fb"
+  ],
+  "audit": {
+    "bytes": 868,
+    "path": "reports/forge/family-wide-word-repairs/archive-audit.json",
+    "reproducer": "reports/forge/family-wide-word-repairs/verify_archive.py",
+    "sha256": "7ab311bebb8f23e058d9542d66f5dde574fcffabeee93b32021754c6bf27d4b6"
+  },
+  "candidate_count": 9,
+  "charged_wall_seconds": 82.97583594993921,
+  "execution_concurrency": {
+    "actual_maximum_cpu_workers": 1,
+    "actual_maximum_cuda_workers": 1,
+    "actual_maximum_supervisors": 2,
+    "configured_workers_per_gpu": 1,
+    "consequence": "Execution-concurrency deviation disclosed additively; frozen declarations, observations, certificates and grades unchanged. Per-job budgets and cohort bindings remain valid. No speed comparison, timing benefit, rerun or extra scientific work is claimed.",
+    "cpu_threads_per_worker": 1,
+    "intended_global_worker_cap": 1,
+    "overlapping_attempts": [
+      {
+        "attempt_id": "eb05f11341ca4916a7cf30233311a7fb",
+        "candidate_id": "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+        "device": "0",
+        "finished_at_epoch": 1791044788.9522355,
+        "started_at_epoch": 1791044776.9228277,
+        "task_id": "ring16_acquisition"
+      },
+      {
+        "attempt_id": "a399cef53ff04eaa930b5c231f64db52",
+        "candidate_id": "r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e",
+        "device": "cpu",
+        "finished_at_epoch": 1791044785.974786,
+        "started_at_epoch": 1791044777.68455,
+        "task_id": "two_pole"
+      }
+    ],
+    "reason": "The existing standard Queue/drain scheduler automatically adds an independent CPU fallback slot. The final CPU first-gate attempt overlapped the sole CUDA ring attempt despite the intended one-worker campaign. Earlier attempts were serial."
+  },
+  "inventory_entries": 2518,
+  "inventory_sha256": "50ba789bbc6bf0d4ecab1014f952a51d13cdc1b7504aae57247126f334ac8b24",
+  "measured_task_count": 12,
+  "original_local_logs_retained": true,
+  "primary_archive_path": "/home/martyn/dev/ParticleGAN/artifacts/forge/family-wide-word-repairs-12-attempts-v1.tar.gz",
+  "publication_addendum": "This card and current rates-summary include the post-closure concurrency disclosure. Archived publication copies retain their exact archive-closure identities; archived raw terminal intervals independently establish the overlap.",
+  "qualification": "Archive preserves the ordinary certified outcomes and UNKNOWN prerequisite-gated cells. Compact summaries, media and this card do not independently qualify a candidate.",
+  "regular_files": 2519,
+  "restore": "Extract into an isolated directory. durable/<attempt> retains the ordinary request/result/evidence certificate; raw/<attempt> retains exact saved observations and worker logs; sources/<commit> is the actual executed source. Full original queue metadata and declarations are included. Do not rewrite raw absolute paths or transplant this evidence into another candidate/source cohort.",
+  "sampling_draws_added_by_archive": 0,
+  "schema_version": 1,
+  "scope": "ordinary_global_candidates",
+  "source_manifests": {
+    "36ed5655d9e6cfd7f92626cc4ca8c18e07edcb45": {
+      "digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "files": 1137
+    },
+    "9d089ca777e647c6d3b6ad56529ac27f171fdcb6": {
+      "digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "files": 1137
+    }
+  },
+  "training_updates_added_by_archive": 0
+}

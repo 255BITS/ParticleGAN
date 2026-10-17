@@ -1,0 +1,191 @@
+{
+  "case_id": "api-gaussian1d-acquisition",
+  "controls": [
+    {
+      "control": "independent_target",
+      "control_passed": true,
+      "expected_pass": true,
+      "failed_bounds": [],
+      "metrics": {
+        "cdf_ks": 0.018778564685256294,
+        "finite_fraction": 1.0,
+        "mean": 1.9912921045324765,
+        "mean_error_sigma": 0.01741579093504697,
+        "sample_count": 4096,
+        "std": 0.5007800365314662,
+        "std_ratio": 1.0015600730629324
+      },
+      "passed": true
+    },
+    {
+      "control": "collapsed_width",
+      "control_passed": true,
+      "expected_pass": false,
+      "failed_bounds": [
+        "std_ratio >= 0.8",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.5,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "mean_error_sigma": 0.0,
+        "sample_count": 4096,
+        "std": 0.0,
+        "std_ratio": 0.0
+      },
+      "passed": false
+    },
+    {
+      "control": "wrong_location",
+      "control_passed": true,
+      "expected_pass": false,
+      "failed_bounds": [
+        "mean_error_sigma <= 0.2",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.37409675399506637,
+        "finite_fraction": 1.0,
+        "mean": 2.491292105813045,
+        "mean_error_sigma": 0.9825842116260901,
+        "sample_count": 4096,
+        "std": 0.5007800358245866,
+        "std_ratio": 1.0015600716491733
+      },
+      "passed": false
+    },
+    {
+      "control": "doubled_width",
+      "control_passed": true,
+      "expected_pass": false,
+      "failed_bounds": [
+        "std_ratio <= 1.2",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.17308021882066904,
+        "finite_fraction": 1.0,
+        "mean": 1.982584209064953,
+        "mean_error_sigma": 0.03483158187009394,
+        "sample_count": 4096,
+        "std": 1.0015600730629324,
+        "std_ratio": 2.0031201461258648
+      },
+      "passed": false
+    },
+    {
+      "control": "same_moment_two_atoms",
+      "control_passed": true,
+      "expected_pass": false,
+      "failed_bounds": [
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.3413447460685429,
+        "finite_fraction": 1.0,
+        "mean": 2.0,
+        "mean_error_sigma": 0.0,
+        "sample_count": 4096,
+        "std": 0.5,
+        "std_ratio": 1.0
+      },
+      "passed": false
+    },
+    {
+      "control": "same_moment_uniform",
+      "control_passed": true,
+      "expected_pass": false,
+      "failed_bounds": [
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.05738547780263853,
+        "finite_fraction": 1.0,
+        "mean": 2.0000000000873115,
+        "mean_error_sigma": 1.7462298274040222e-10,
+        "sample_count": 4096,
+        "std": 0.5001220627050009,
+        "std_ratio": 1.0002441254100018
+      },
+      "passed": false
+    },
+    {
+      "control": "nonfinite",
+      "control_passed": true,
+      "expected_pass": false,
+      "failed_bounds": [
+        "finite_fraction == 1.0",
+        "mean_error_sigma <= 0.2",
+        "std_ratio >= 0.8",
+        "std_ratio <= 1.2",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": null,
+        "finite_fraction": 0.0,
+        "mean": null,
+        "mean_error_sigma": null,
+        "sample_count": 4096,
+        "std": null,
+        "std_ratio": null
+      },
+      "passed": false
+    },
+    {
+      "control": "undersized",
+      "control_passed": true,
+      "expected_pass": false,
+      "failed_bounds": [
+        "sample_count >= 4096",
+        "cdf_ks <= 0.05"
+      ],
+      "metrics": {
+        "cdf_ks": 0.059254295444278404,
+        "finite_fraction": 1.0,
+        "mean": 1.9808395504951477,
+        "mean_error_sigma": 0.03832089900970459,
+        "sample_count": 128,
+        "std": 0.5183752530097696,
+        "std_ratio": 1.0367505060195392
+      },
+      "passed": false
+    }
+  ],
+  "evaluation_seed": 78013,
+  "passed": true,
+  "schema": "gaussian1d-scorer-controls-v1",
+  "thresholds": [
+    [
+      "sample_count",
+      ">=",
+      4096
+    ],
+    [
+      "finite_fraction",
+      "==",
+      1.0
+    ],
+    [
+      "mean_error_sigma",
+      "<=",
+      0.2
+    ],
+    [
+      "std_ratio",
+      ">=",
+      0.8
+    ],
+    [
+      "std_ratio",
+      "<=",
+      1.2
+    ],
+    [
+      "cdf_ks",
+      "<=",
+      0.05
+    ]
+  ],
+  "training_updates": 0
+}

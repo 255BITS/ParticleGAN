@@ -1,0 +1,723 @@
+{
+  "candidate_id": "unresolved:reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+  "candidate_revision": "ed0cb655262ea352b82b227115317fa29fa40ac6e6a7acc2cbec70a3aa03d586",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: FAIL=2, PASS=6",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "training_formulation",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "supporting_receipts": [
+        {
+          "content": {
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "amsgrad": true,
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "conditioning": "scalar",
+            "continuous_policy": "dv12",
+            "d_guard_min_steps": 200,
+            "d_guard_ratio": 5.0,
+            "d_lr_mult": 1.0,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "direct_particle_gain": true,
+            "distance_reduction": "sum",
+            "ema_decay": 0.995,
+            "encoder_mode": "none",
+            "initialization": "batch_feature_zero",
+            "input_noise_anneal_end": 0.1,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.5,
+            "lr": 0.00425,
+            "lr_anneal_start": 0.6,
+            "lr_control": "stationarity",
+            "lr_floor": 0.05,
+            "model": "gan",
+            "network_lr_floor": 0.01,
+            "network_lr_horizon_cap": 1600,
+            "num_classes": null,
+            "num_particles": 12,
+            "observation_sigma": 0.03,
+            "output_noise_mode": "learnable",
+            "output_noise_std": 0.029,
+            "output_noise_warmup": 0.0,
+            "prior_betas": null,
+            "prior_kind": "particles",
+            "prior_lr_mult": 2.0,
+            "prior_reg": 0.0,
+            "reconstruction_weight": 1.0,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "reg_coeff": 3.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "routing_temperature": 0.25,
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "total_steps": null,
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "z_dim": 4
+          },
+          "git_blob": "ff630f13851d378753c40d2504a041e46c20b4a2",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/overrides.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "f6fe88fef8e7721f9b49c30bade05018a27794029e837afd6a5a13ff1ed724e0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/overrides.json"
+        },
+        {
+          "content": {
+            "device": "cpu",
+            "engine_sha256": "ee95ec804be45b8bd74e10be3bf67c8a61fb340a5ca08fa3c7dccbe2d773a798",
+            "engine_version": "custom22-engine-1",
+            "level": "L1",
+            "overrides": {
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": true,
+              "batch_size": 128,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "conditioning": "scalar",
+              "continuous_policy": "dv12",
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 5.0,
+              "d_lr_mult": 1.0,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": true,
+              "distance_reduction": "sum",
+              "ema_decay": 0.995,
+              "encoder_mode": "none",
+              "initialization": "batch_feature_zero",
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "latent_damping_max_rate": 0.5,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.6,
+              "lr_control": "stationarity",
+              "lr_floor": 0.05,
+              "model": "gan",
+              "network_lr_floor": 0.01,
+              "network_lr_horizon_cap": 1600,
+              "num_classes": null,
+              "num_particles": 12,
+              "observation_sigma": 0.03,
+              "output_noise_mode": "learnable",
+              "output_noise_std": 0.029,
+              "output_noise_warmup": 0.0,
+              "prior_betas": null,
+              "prior_kind": "particles",
+              "prior_lr_mult": 2.0,
+              "prior_reg": 0.0,
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 1.0,
+              "reg_coeff": 3.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "routing_temperature": 0.25,
+              "sigma_rel": 0.0,
+              "standardize": true,
+              "total_steps": null,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 4
+            },
+            "package_root": "/ml2/hypergan/lrfree-20260926/candidates/dv12-st-directadam/package",
+            "package_sha256": "dd8b18b8d02396d6822be3aaaa06ac4a4458e270295a37c22c17c5d275976e74",
+            "results": [
+              {
+                "config": "c1",
+                "coverage": {
+                  "a2": {
+                    "observed": 12000,
+                    "started": false,
+                    "total": 12000
+                  },
+                  "anchor_started": true,
+                  "blend_reached": true,
+                  "controller": {
+                    "game_trust": 0.9982696731258163,
+                    "mobility": 0.6561033968912094,
+                    "payoff_error": 0.5415657976146603
+                  },
+                  "ema_reseeds": 0,
+                  "ema_updates": 150,
+                  "guard_clipped": 0,
+                  "ka2_calls": 1000,
+                  "last_output_sigma": 0.01234773825854063,
+                  "settle": {
+                    "d0": {
+                      "counts": {
+                        "drift": 1,
+                        "dropped_pairs": 0,
+                        "frozen": 0,
+                        "inconclusive": 3,
+                        "mixed": 0,
+                        "rebases": 0,
+                        "reopens": 0,
+                        "restarts": 0,
+                        "reversal": 1,
+                        "stationary": 1
+                      },
+                      "s": 0.5,
+                      "windows": 5
+                    },
+                    "g0": {
+                      "counts": {
+                        "drift": 0,
+                        "dropped_pairs": 0,
+                        "frozen": 0,
+                        "inconclusive": 5,
+                        "mixed": 0,
+                        "rebases": 0,
+                        "reopens": 0,
+                        "restarts": 0,
+                        "reversal": 0,
+                        "stationary": 0
+                      },
+                      "s": 1.0,
+                      "windows": 5
+                    },
+                    "g1": {
+                      "counts": {
+                        "drift": 2,
+                        "dropped_pairs": 0,
+                        "frozen": 0,
+                        "inconclusive": 5,
+                        "mixed": 0,
+                        "rebases": 0,
+                        "reopens": 0,
+                        "restarts": 0,
+                        "reversal": 0,
+                        "stationary": 0
+                      },
+                      "s": 1.0,
+                      "windows": 7
+                    },
+                    "g2": {
+                      "counts": {
+                        "drift": 2,
+                        "dropped_pairs": 0,
+                        "frozen": 0,
+                        "inconclusive": 4,
+                        "mixed": 0,
+                        "rebases": 0,
+                        "reopens": 0,
+                        "restarts": 0,
+                        "reversal": 0,
+                        "stationary": 0
+                      },
+                      "s": 1.0,
+                      "windows": 6
+                    }
+                  }
+                },
+                "device": "cpu",
+                "first_mismatch": null,
+                "resources": {
+                  "batch_size": 128,
+                  "num_particles": 12,
+                  "z_dim": 4
+                },
+                "seconds": 22.4,
+                "status": "PASS",
+                "steps_compared": 1000,
+                "steps_requested": 1000
+              },
+              {
+                "config": "c2",
+                "coverage": {
+                  "a2": {
+                    "observed": 60249,
+                    "started": true,
+                    "total": 512000
+                  },
+                  "anchor_started": true,
+                  "blend_reached": true,
+                  "controller": {
+                    "game_trust": 1.0,
+                    "mobility": 0.48403150623196745,
+                    "payoff_error": 0.438001482244841
+                  },
+                  "ema_reseeds": 0,
+                  "ema_updates": 0,
+                  "guard_clipped": 5,
+                  "ka2_calls": 1000,
+                  "last_output_sigma": 0.010990672744810581,
+                  "settle": {
+                    "d0": {
+                      "counts": {
+                        "drift": 4,
+                        "dropped_pairs": 0,
+                        "frozen": 0,
+                        "inconclusive": 0,
+                        "mixed": 2,
+                        "rebases": 0,
+                        "reopens": 0,
+                        "restarts": 0,
+                        "reversal": 4,
+                        "stationary": 2
+                      },
+                      "s": 1.0,
+                      "windows": 8
+                    },
+                    "g0": {
+                      "counts": {
+                        "drift": 4,
+                        "dropped_pairs": 0,
+                        "frozen": 0,
+                        "inconclusive": 4,
+                        "mixed": 0,
+                        "rebases": 0,
+                        "reopens": 0,
+                        "restarts": 0,
+                        "reversal": 2,
+                        "stationary": 1
+                      },
+                      "s": 1.0,
+                      "windows": 9
+                    },
+                    "g1": {
+                      "counts": {
+                        "drift": 18,
+                        "dropped_pairs": 0,
+                        "frozen": 0,
+                        "inconclusive": 7,
+                        "mixed": 0,
+                        "rebases": 0,
+                        "reopens": 0,
+                        "restarts": 0,
+                        "reversal": 3,
+                        "stationary": 2
+                      },
+                      "s": 0.5,
+                      "windows": 27
+                    },
+                    "g2": {
+                      "counts": {
+                        "drift": 2,
+                        "dropped_pairs": 0,
+                        "frozen": 0,
+                        "inconclusive": 6,
+                        "mixed": 0,
+                        "rebases": 0,
+                        "reopens": 0,
+                        "restarts": 0,
+                        "reversal": 0,
+                        "stationary": 0
+                      },
+                      "s": 1.0,
+                      "windows": 8
+                    }
+                  }
+                },
+                "device": "cpu",
+                "first_mismatch": null,
+                "resources": {
+                  "batch_size": 64,
+                  "num_particles": 512,
+                  "z_dim": 2
+                },
+                "seconds": 17.51,
+                "status": "PASS",
+                "steps_compared": 1000,
+                "steps_requested": 1000
+              }
+            ],
+            "status": "PASS",
+            "steps": 1000,
+            "time": "2026-09-27T22:12:33",
+            "torch": "2.13.0+cu126"
+          },
+          "git_blob": "4f774f65f88dfdbf4483b19ad60163dae32382ba",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/parity.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "9cde9fa7e61ee914e4a5140b22d2783792b7e86fb454fd8b31bf002e90504d68",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/parity.json"
+        }
+      ]
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-unresolved-reports-toy100-lrfree-search-direct-particle-adam-sum-5d6d73a3abe4",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+    "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": 80,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final_streak": 7,
+        "first_arrival": 60,
+        "observations": 24,
+        "passing_checks": 7
+      },
+      "raw_result": {
+        "completed_steps": 80,
+        "final_streak": 7,
+        "first_arrival": 60,
+        "observations": 24,
+        "passing_checks": 7,
+        "status": "PASS"
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "two_pole"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": 400,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "final_streak": 0,
+        "first_arrival": null,
+        "observations": 24,
+        "passing_checks": 0
+      },
+      "raw_result": {
+        "completed_steps": 400,
+        "final_streak": 0,
+        "first_arrival": null,
+        "observations": 24,
+        "passing_checks": 0,
+        "status": "FAIL"
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "trajectory"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": 400,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final_streak": 19,
+        "first_arrival": 50,
+        "observations": 24,
+        "passing_checks": 21
+      },
+      "raw_result": {
+        "completed_steps": 400,
+        "final_streak": 19,
+        "first_arrival": 50,
+        "observations": 24,
+        "passing_checks": 21,
+        "status": "PASS"
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "residual_student"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": 400,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final_streak": 15,
+        "first_arrival": 167,
+        "observations": 24,
+        "passing_checks": 15
+      },
+      "raw_result": {
+        "completed_steps": 400,
+        "final_streak": 15,
+        "first_arrival": 167,
+        "observations": 24,
+        "passing_checks": 15,
+        "status": "PASS"
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "unipolar"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": 250,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final_streak": 23,
+        "first_arrival": 21,
+        "observations": 24,
+        "passing_checks": 23
+      },
+      "raw_result": {
+        "completed_steps": 250,
+        "final_streak": 23,
+        "first_arrival": 21,
+        "observations": 24,
+        "passing_checks": 23,
+        "status": "PASS"
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": 800,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final_streak": 13,
+        "first_arrival": 400,
+        "observations": 24,
+        "passing_checks": 13
+      },
+      "raw_result": {
+        "completed_steps": 800,
+        "final_streak": 13,
+        "first_arrival": 400,
+        "observations": 24,
+        "passing_checks": 13,
+        "status": "PASS"
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "cover_leftover"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": 200,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "final_streak": 2,
+        "first_arrival": 192,
+        "observations": 24,
+        "passing_checks": 2
+      },
+      "raw_result": {
+        "completed_steps": 200,
+        "final_streak": 2,
+        "first_arrival": 192,
+        "observations": 24,
+        "passing_checks": 2,
+        "status": "FAIL"
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": 800,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "37f8206b163c68d037796d5f18fe03607d1cad6d",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/summary.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "4276bfca9e8662b3d11e3b3744597247b39e7fdfff92b13c900da2ca82c3a2d3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final_streak": 12,
+        "first_arrival": 434,
+        "observations": 24,
+        "passing_checks": 12
+      },
+      "raw_result": {
+        "completed_steps": 800,
+        "final_streak": 12,
+        "first_arrival": 434,
+        "observations": 24,
+        "passing_checks": 12,
+        "status": "PASS"
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "mid_scale_identity"
+    }
+  ]
+}

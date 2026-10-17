@@ -1,0 +1,13 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -696,6 +696,10 @@
+ 
+     def _group_counts(self, counts):
+         groups = self._mass_topology()
++        if counts.dtype in (torch.int32, torch.int64) and counts.ndim == 1 and len(counts) == len(groups):
++            members = groups[None] == torch.arange(self.mass_groups,device=groups.device)[:,None]
++            # Integer sums retain exact quotas; the matrix is bounded by K*K.
++            return counts[None].expand(self.mass_groups,-1).masked_fill(~members,0).sum(1)
+         return torch.stack([counts[groups==group].sum() for group in range(self.mass_groups)])
+ 
+ 

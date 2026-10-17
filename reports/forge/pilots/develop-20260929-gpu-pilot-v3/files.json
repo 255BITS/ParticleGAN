@@ -1,0 +1,106 @@
+{
+  "files": {
+    "attempts/661bd9830be94225891954f5fb690342/cancel.json": {
+      "bytes": 102,
+      "sha256": "81060fc32a415566743e4202ff2a649b730e304b16b3f78b9af10ff1f8907ee5"
+    },
+    "attempts/661bd9830be94225891954f5fb690342/child.json": {
+      "bytes": 136,
+      "sha256": "43b4fc58dc905e7a3998ed3505c8a804b80802776ca4f6ec05b0a1c00f7653b4"
+    },
+    "attempts/661bd9830be94225891954f5fb690342/heartbeat.json": {
+      "bytes": 178,
+      "sha256": "199c79184510429294f1fef4bb735e12d7485a510e5fff601486d0b52333966a"
+    },
+    "attempts/661bd9830be94225891954f5fb690342/process.json": {
+      "bytes": 935,
+      "sha256": "f0f982b6ed5130a30a69aab3a46a47346f118fdc282078a08ebc01c34ac6a8ad"
+    },
+    "attempts/661bd9830be94225891954f5fb690342/run.log": {
+      "bytes": 7406,
+      "sha256": "1a37632707364e7e28cb5c9cc5879b363cb2bfad29a7a61a48eab3ee9275cfa0"
+    },
+    "attempts/661bd9830be94225891954f5fb690342/terminal.json": {
+      "bytes": 808,
+      "sha256": "e76c92b5521e766e6e6a6f22561d0e7d40216d974494dc9fe9730c6cbc9a2436"
+    },
+    "attempts/e572cb95deeb49a18e712fa80f13e9c6/child.json": {
+      "bytes": 161,
+      "sha256": "33fb6ddd88765da89e03aa35f6994b2e27ad346295bf3bbb5a7ba0f56ec3d45c"
+    },
+    "attempts/e572cb95deeb49a18e712fa80f13e9c6/heartbeat.json": {
+      "bytes": 179,
+      "sha256": "5c2de9b405663387c84391a2b3c44d76c6f0a3e5623d9f16861e5dec8cf760fb"
+    },
+    "attempts/e572cb95deeb49a18e712fa80f13e9c6/process.json": {
+      "bytes": 935,
+      "sha256": "09075d8de381f567ff27b1bca8e8b045de8221d7c1e625bd197a141def5c34c4"
+    },
+    "attempts/e572cb95deeb49a18e712fa80f13e9c6/run.log": {
+      "bytes": 29714,
+      "sha256": "218525127be3e8e588f15c5b42343996aa676c55c88f5e1baac9fedc54b7d1d5"
+    },
+    "attempts/e572cb95deeb49a18e712fa80f13e9c6/terminal.json": {
+      "bytes": 64951,
+      "sha256": "d800b145760d863e3febec491e9a1d91315febea4388c4bfda0d304ef7cdbdd8"
+    },
+    "attempts/f04fd435083a46b68ff8bf278a8eb26d/child.json": {
+      "bytes": 161,
+      "sha256": "01652366c443f312980e2dd5ddfc7454338622448fbdb87b5e7fca55c50d5bec"
+    },
+    "attempts/f04fd435083a46b68ff8bf278a8eb26d/heartbeat.json": {
+      "bytes": 179,
+      "sha256": "e795ab0f5de8a5540ba1b5afe54819ce8bb4f00e414f7c17459ec14ddd31f0d0"
+    },
+    "attempts/f04fd435083a46b68ff8bf278a8eb26d/process.json": {
+      "bytes": 935,
+      "sha256": "0d34a181f43fb9545a8c16d48155429971ba090f1ec5b22f3644680d6653edc8"
+    },
+    "attempts/f04fd435083a46b68ff8bf278a8eb26d/run.log": {
+      "bytes": 29606,
+      "sha256": "3ae65337eaeaaeaf5f346897c5cae2d2b18cc3f4f2c45ce4338d4606e00ea617"
+    },
+    "attempts/f04fd435083a46b68ff8bf278a8eb26d/terminal.json": {
+      "bytes": 64833,
+      "sha256": "37584e865dcea12b53ae80786b5d4106c91949989e6669f33f98d6c15d1d29ac"
+    },
+    "campaign-progress.jsonl": {
+      "bytes": 103317,
+      "sha256": "a365e652cc167f679aab36a2b3f2108877fc14065ee842690fd6265e32efb0f9"
+    },
+    "coordinator-1.log": {
+      "bytes": 87,
+      "sha256": "a934ad8dd9f9d9e0d2b23be7925c6ab45c5c3d4aab61fed64ae82bb099dd036b"
+    },
+    "coordinator-2.log": {
+      "bytes": 87,
+      "sha256": "a934ad8dd9f9d9e0d2b23be7925c6ab45c5c3d4aab61fed64ae82bb099dd036b"
+    },
+    "independent-review.md": {
+      "bytes": 2379,
+      "sha256": "b8f322bd8a6f223c42cb355ac1e0cdb402f0642044b6817b8ea64e446a92fbdb"
+    },
+    "orchestration-source.py": {
+      "bytes": 29546,
+      "sha256": "b2d9bf03529fa65d0b23f20d890b714bed97ea45ee05e781b534d6ddfcc4df48"
+    },
+    "orchestration.jsonl": {
+      "bytes": 6870,
+      "sha256": "037d982a65df145b41264f2a7ab71ba048baaa1f1ed01a7f16d1659387f2118e"
+    },
+    "preflight.json": {
+      "bytes": 2785,
+      "sha256": "f7b87ff14a6cd7e08bf8f373c3a244a40358384b044106ebc978102ef1146ec2"
+    },
+    "retiering-proof.json": {
+      "bytes": 20560,
+      "sha256": "c5d8ffeb39bc05c132357130f279ea36e9c792106902bff5d76063c4d7340a0a"
+    },
+    "summary.json": {
+      "bytes": 155412,
+      "sha256": "b210555577f9a6db72253b888ec852656daf8d2d30c29d1acdcda4ec986f47f5"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Operational pilot proof; immutable scientific requests/results live in reports/forge/attempts."
+}

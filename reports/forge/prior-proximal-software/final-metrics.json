@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "scope": "public_api_software_illustration",
+  "protocol_seed": 0,
+  "question": "Does the initial-position spring consume actual owned rows and resume exactly during public BCAP training?",
+  "target": {
+    "kind": "gaussian_mixture",
+    "means": [
+      [
+        2.0
+      ]
+    ],
+    "covariances": [
+      [
+        [
+          0.25
+        ]
+      ]
+    ],
+    "masses": [
+      1.0
+    ]
+  },
+  "steps": 64,
+  "batch_size": 32,
+  "eval_samples": 512,
+  "prior": {
+    "kind": "mog",
+    "particles": 32,
+    "z_dim": 2,
+    "sigma": 0.1,
+    "standardize": false
+  },
+  "architecture": "G 2\u21928\u21921, D 1\u21928\u21921, tanh, public deterministic initializer",
+  "cadence": 8,
+  "software_gate": {
+    "spring_steps": 64,
+    "spring_owned_row_updates": "equals captured unique owned rows; >0",
+    "finite_fraction": 1,
+    "exact_resume": true,
+    "max_restoration": ">0"
+  },
+  "fidelity_thresholds": {
+    "cdf_ks": [
+      "<=",
+      0.05
+    ],
+    "mean_error_sigma": [
+      "<=",
+      0.2
+    ],
+    "std_ratio": [
+      "range",
+      [
+        0.8,
+        1.2
+      ]
+    ]
+  },
+  "oracle": {
+    "sample_count": 512,
+    "finite_fraction": 1.0,
+    "mean": 2.0,
+    "std": 0.4993680540671454,
+    "mean_error_sigma": 0.0,
+    "std_ratio": 0.9987361081342908,
+    "cdf_ks": 0.000976562500000222
+  },
+  "destructive": {
+    "sample_count": 512,
+    "finite_fraction": 1.0,
+    "mean": 4.0,
+    "std": 0.4993680540671454,
+    "mean_error_sigma": 4.0,
+    "std_ratio": 0.9987361081342908,
+    "cdf_ks": 0.9554731669954363
+  },
+  "metrics": {
+    "0.0": {
+      "final": {
+        "sample_count": 512,
+        "finite_fraction": 1.0,
+        "mean": 2.3670107762445696,
+        "std": 0.6842618255550833,
+        "mean_error_sigma": 0.7340215524891391,
+        "std_ratio": 1.3685236511101666,
+        "cdf_ks": 0.4199683767296718
+      },
+      "fidelity_pass": false,
+      "spring": {},
+      "matched_state_sha256": "9db83d0bd493cd041317dc784dd27f1057669a95e32f6c53b8beef6cf45d2550",
+      "recipe": {
+        "name": "bcap",
+        "critic_formulation": "bcap",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 32,
+        "prior_kind": "mog",
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 32,
+        "total_steps": 64,
+        "continuous_policy": null,
+        "lr": 0.012,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.5,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.0,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "direct_particle_gain": false,
+        "d_guard_ratio": 0.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "optimizer_convolution": "per_offset",
+        "constraint_geometry_mode": "direction_blend",
+        "loss": "non_saturating"
+      },
+      "exact_resume": true,
+      "captured_owned_rows": 1295
+    },
+    "1.0": {
+      "final": {
+        "sample_count": 512,
+        "finite_fraction": 1.0,
+        "mean": 2.0165944541804492,
+        "std": 0.7671617025771214,
+        "mean_error_sigma": 0.033188908360898495,
+        "std_ratio": 1.5343234051542427,
+        "cdf_ks": 0.21161471367612783
+      },
+      "fidelity_pass": false,
+      "spring": {
+        "steps": 64,
+        "rows": 1295,
+        "max_restoration": 0.021317824721336365,
+        "sum_squared_restoration": 0.18857098372607084
+      },
+      "matched_state_sha256": "07e7edd878db2e1530ba89ec49a6d8299b3d8bbfc36f492223da0bce8897779a",
+      "recipe": {
+        "name": "bcap",
+        "critic_formulation": "bcap",
+        "model": "gan",
+        "z_dim": 2,
+        "num_particles": 32,
+        "prior_kind": "mog",
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 32,
+        "total_steps": 64,
+        "continuous_policy": null,
+        "lr": 0.012,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.5,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "prior_proximal_strength": 1.0,
+        "ema_decay": 0.0,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "direct_particle_gain": false,
+        "d_guard_ratio": 0.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "optimizer_convolution": "per_offset",
+        "constraint_geometry_mode": "direction_blend",
+        "loss": "non_saturating"
+      },
+      "exact_resume": true,
+      "captured_owned_rows": 1295
+    }
+  },
+  "status": "PASS",
+  "qualification": false,
+  "baseline_parity": {
+    "source_commit": "0337bbbc2300fd351e77e9a222b92401137fd421",
+    "pass": true,
+    "matched_state_sha256": "9db83d0bd493cd041317dc784dd27f1057669a95e32f6c53b8beef6cf45d2550",
+    "scope": "All models, optimizer packets, trainer RNG and named consumed streams after64 updates"
+  },
+  "source": {
+    "base_commit": "0337bbbc2300fd351e77e9a222b92401137fd421",
+    "execution": "feature working tree before commit",
+    "files_sha256": {
+      "particlegan/recipes.py": "082660e850746ace81a08f20849a22170bf5b9f3ca071b450319215e97218038",
+      "particlegan/optim/dualnorm.py": "749fe763a28ba274e222bdd3e70fd117dc937fa65b353fe1312a516edf2205fa",
+      "particlegan/optim/prior_proximal.py": "50b20c11f0e7f7cabb9496d4874136172f36ce9997baf6db8d5dce91e3ca32ea",
+      "particlegan/recipe_compat.py": "89110a73cba22c740e9df42d94c9783309ec403862c09ea731241be820705801",
+      "benchmarks/toy_audit/prior_proximal_smoke.py": "e1f78fc72d6bcda99aa56e20dcf1e4ec327dda668308afb599d9b30e9903edd4"
+    }
+  }
+}

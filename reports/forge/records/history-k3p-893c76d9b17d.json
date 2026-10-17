@@ -1,0 +1,209 @@
+{
+  "candidate_id": "k3p",
+  "candidate_revision": "d171c8a42006436bde3ec09a387615835ca7fac6e819bc01eab3cafc700435ce",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "k3p-toy-vector_anisotropic",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3p-893c76d9b17d",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 84.47461107186973,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_anisotropic/result.json",
+            "artifact_sha256": "6d0ed42565a5224c227ddac7c0903ae0ba0036832eb3e753e007fa6feaa424a9",
+            "id": "k3p-toy-vector_anisotropic",
+            "snapshot": "results/k3p-toy-vector_anisotropic.json.gz",
+            "snapshot_sha256": "11ab2594fc8557dc20890ace275bea7519d5bcc9e7f7245ebb82a4ee91343f7f"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-vector_anisotropic/result.json",
+        "artifact_sha256": "6d0ed42565a5224c227ddac7c0903ae0ba0036832eb3e753e007fa6feaa424a9",
+        "candidate": "k3p",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "k3p-toy-vector_anisotropic",
+        "kind": "toy",
+        "live": {
+          "component_counts": [
+            1328,
+            1384,
+            1384
+          ],
+          "component_covariance_error": 0.17823812241355577,
+          "component_covariance_errors": [
+            0.30351415276527405,
+            0.055450569838285446,
+            0.17574964463710785
+          ],
+          "component_mass": [
+            0.32421875,
+            0.337890625,
+            0.337890625
+          ],
+          "component_min_eigen_ratio": 0.38240739703178406,
+          "covariance_error": 0.15525811910629272,
+          "hq": 0.981689453125,
+          "mass_tv": 0.009114578366279602,
+          "mean_error": 0.047765571624040604,
+          "min_mass_ratio": 0.97265625,
+          "sample_count": 4096,
+          "sw1_normalized": 0.05291578076109902,
+          "target_mass": [
+            0.3333333432674408,
+            0.3333333432674408,
+            0.3333333432674408
+          ],
+          "target_scale": 2.040409564971924
+        },
+        "raw_status": "PASS",
+        "seconds": 84.47461107186973,
+        "snapshot": "results/k3p-toy-vector_anisotropic.json.gz",
+        "snapshot_sha256": "11ab2594fc8557dc20890ace275bea7519d5bcc9e7f7245ebb82a4ee91343f7f",
+        "task": "vector_anisotropic",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.5416666666666666,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 46.15031552501023,
+            "confirmed_step": 650,
+            "first_pass_step": 150,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 21,
+            "passing_suffix": 16,
+            "stable_from_seconds": 32.02715994999744,
+            "stable_from_step": 450
+          },
+          "metrics": [
+            {
+              "margin": 0.12708421923890098,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.05291578076109902
+            },
+            {
+              "margin": 0.1408854216337204,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.009114578366279602
+            },
+            {
+              "margin": 0.13168945312500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.981689453125
+            },
+            {
+              "margin": 0.6717618775864442,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.17823812241355577
+            },
+            {
+              "margin": 0.23240739703178406,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.38240739703178406
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "vector_anisotropic"
+    }
+  ]
+}

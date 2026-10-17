@@ -1,0 +1,1114 @@
+{
+  "additional_unchanged_git_scopes": [
+    "reports/forge/technique-inventory.md",
+    "reports/forge/technique-inventory.json",
+    "reports/forge/policy-family-inventory.md",
+    "reports/forge/policy-family-inventory.json",
+    "particlegan",
+    "lib",
+    "configs/100gaussians"
+  ],
+  "all18_recorded_arms": [
+    {
+      "arm": "k3p-clean-full-low-rate",
+      "receipt_sha256": "1df9ef49a590ad4475abab6f4e70e51fd91e0f8c9ed2414a8d421cf6cee04863",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    },
+    {
+      "arm": "k3p-clean-full-original-rate",
+      "receipt_sha256": "51bf3b85ff196ec7c2e103a1644caf536e269db0887560fe9cfb52e83942b4f2",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    },
+    {
+      "arm": "k3p-coeff1-cap0p1",
+      "receipt_sha256": "bdec0a7da41b2b19d8b0b191e481fcb4294ea58fbf86261173b474f8b4aa3ffe",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289"
+    },
+    {
+      "arm": "k3p-coeff170-cap0p1",
+      "receipt_sha256": "cb585a1828fc363bed46cd233190ae685f55f86a95aa2e46fc4c5967fb6cacd3",
+      "recorded_gate": "PASS",
+      "recorded_suffix": 24,
+      "source_commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289"
+    },
+    {
+      "arm": "k3p-coeff170-cap1",
+      "receipt_sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed",
+      "recorded_gate": "PASS",
+      "recorded_suffix": 24,
+      "source_commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289"
+    },
+    {
+      "arm": "k3p-low-rate-original-noise",
+      "receipt_sha256": "6fa40bd34c044810f4617d6b2a91b3d0939b8a831de28b5c2034803561b3185f",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    },
+    {
+      "arm": "k3p-slow-prior-0p1",
+      "receipt_sha256": "81023e2dfeffeeab1e2274ad7ae4b8e9613c149c5c5b962f198223ead48ffd2e",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57"
+    },
+    {
+      "arm": "k3p-slow-prior-0p25",
+      "receipt_sha256": "65cb82105a95ea8347ae748a6d35f32df61bd914442ead884ffec6dd9ea5244c",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57"
+    },
+    {
+      "arm": "k3p-slow-prior-0p5",
+      "receipt_sha256": "86d2a3390d4210bc6844dfdd154a83d6060d980d8580cc6726816a690ac0a584",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57"
+    },
+    {
+      "arm": "ka2-clean-full-low-rate",
+      "receipt_sha256": "96afc81051be801bba6c03e533830c5c9dbf9b253ac279248c5029009b4a7a1a",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    },
+    {
+      "arm": "ka2-clean-full-original-rate",
+      "receipt_sha256": "328237bd975b638bc0e3cc89aaf06c65360b4b3be73b672f79c56173e36813d2",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    },
+    {
+      "arm": "ka2-low-rate-original-noise",
+      "receipt_sha256": "1e1ee50466041e0cdbb67c8b1ec5733f25d17a5c7b56daa77f3518b00accf2d1",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    },
+    {
+      "arm": "ka2-slow-prior-0p1",
+      "receipt_sha256": "bdf4c73e51647f79c2b7e485f442e92ad6334857e2f4a4cad5fc2e6ec022addc",
+      "recorded_gate": "PASS",
+      "recorded_suffix": 21,
+      "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57"
+    },
+    {
+      "arm": "ka2-slow-prior-0p25",
+      "receipt_sha256": "bd9bf0afae2268d7564641da31e125a641b6ef9415744a02dd5f9fc9d8815472",
+      "recorded_gate": "PASS",
+      "recorded_suffix": 11,
+      "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57"
+    },
+    {
+      "arm": "ka2-slow-prior-0p5",
+      "receipt_sha256": "72547f9b30c285146ec13eaaa0590234aef4e81794a51037f1321bdb0f8a1daf",
+      "recorded_gate": "FAIL",
+      "recorded_suffix": 0,
+      "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57"
+    },
+    {
+      "arm": "r1r2-low-rate-fast-roles",
+      "receipt_sha256": "a5cadc9b59174dc939471acc9c452e388984a63c971ac5c3458ae01a174d302f",
+      "recorded_gate": "PASS",
+      "recorded_suffix": 6,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    },
+    {
+      "arm": "r1r2-low-rate-original-roles",
+      "receipt_sha256": "2f35ad65ed5baffdd822692e94b2921b0d2b8aaeed97b0895d54a1000471a12a",
+      "recorded_gate": "PASS",
+      "recorded_suffix": 9,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    },
+    {
+      "arm": "r1r2-mid-rate-fast-roles",
+      "receipt_sha256": "f6bea957a6eb13ef2ec377b576773de4cf66b30b721fefb8b202747d12c5adfd",
+      "recorded_gate": "PASS",
+      "recorded_suffix": 22,
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    }
+  ],
+  "committed_archive_audit": {
+    "bytes": 65160,
+    "path": "reports/forge/word-root-cause/publication-audit.json",
+    "sha256": "f803f6a5739d656afebbbf44109adbc4d09210c28a5286cd5b83045a3ef1f1ae"
+  },
+  "definition_quality": "4/5",
+  "distinct_purpose": "Substantive host-binding/rate/noise/horizon/penalty-unit diagnosis of an existing failing task; three selected recipes are alternatives for one retained question.",
+  "head": "c68d77e8ee61de5edfd98828792cf55edbab285f",
+  "limits": [
+    "No fresh training, model forward, scorer execution, observation resampling, GPU run or branch mutation occurred in this review.",
+    "Reported full suffixes, finite tensors, optimizer counts and RNG guards are source-bound recorded claims; raw tensors/streams are absent and were not independently revalidated.",
+    "K3P/KA2 clean/full ablations cross original-parent mechanism activation boundaries, even though no new technique is introduced.",
+    "Synthetic A2/direct-particle probes do not establish their activation during these runs.",
+    "K3P coeff170 cap1/cap0.1 equality covers saved observations/final models as attested; the pair is not independent robustness evidence.",
+    "No whole Tier1/view, default adoption, cross-task transfer or speed winner credit."
+  ],
+  "media_receipts": {
+    "bytes": 3865,
+    "path": "reports/forge/word-root-cause/media/receipts.json",
+    "sha256": "e32415a55686b81d99eec1b2a58447e12653675e1543871c95956e7de2a19232"
+  },
+  "pr": 265,
+  "preservation_independently_verified": {
+    "base_commit": "153c0dd4fc9b725785e133722c9194d849324f10",
+    "base_sha256_of_path_hashes": "2b57d29d9422c426802704ab2d22e069268a909e6bb12c043795e4c9cef899a8",
+    "changed": [],
+    "current_sha256_of_path_hashes": "2b57d29d9422c426802704ab2d22e069268a909e6bb12c043795e4c9cef899a8",
+    "exclusions": [
+      "reports/forge/EXPERIMENT_MEMORY.md and reports/forge/compilation.json are generated outputs intentionally refreshed; they are outside this byte-preservation claim.",
+      "New task-only diagnostic receipts, source-history records, and reports are additions; only files already present at base_commit are compared here.",
+      "Task source pins and implementation/test files intentionally changed by the fix are outside these preservation scopes."
+    ],
+    "existing_file_counts_by_scope": {
+      "configs/forge/configurations": 32,
+      "configs/forge/selections": 1,
+      "reports/forge/configuration-search": 11,
+      "reports/forge/leaderboards": 5,
+      "reports/forge/records": 257,
+      "reports/forge/technique-receipts": 292
+    },
+    "existing_files_checked": 598,
+    "scopes": [
+      "reports/forge/leaderboards",
+      "reports/forge/technique-receipts",
+      "reports/forge/configuration-search",
+      "configs/forge/configurations",
+      "configs/forge/selections",
+      "reports/forge/records"
+    ]
+  },
+  "public_api": {
+    "caller": "reports/forge/word-root-cause/reproduce.py -> experiments.forge.word_adapter.run_word -> WordFixture.step",
+    "components": [
+      "Recipe",
+      "ParticlePrior",
+      "recipe optimizers/penalty",
+      "public named streams"
+    ],
+    "execution_path": "public_components",
+    "limitations": [
+      "Historical source commit or archived source snapshot must be restored; source/hash guards reject changed task providers.",
+      "The diagnostic CLI prints a scientific FAIL but returns normally; graders/continuous orchestrators must read compact grade.gate_status, not infer PASS from exit0.",
+      "Rendering reads saved observed-records.pt and runs no updates or resampling, but its --render command first executes CPU control/constructor validation. This is not a stdlib-only renderer."
+    ],
+    "reproduction_source_commits": [
+      "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+      "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+      "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+    ]
+  },
+  "question": "Can the existing joint adversarial encoder/generator learn five equally likely confident canonical words and the correctly paired inverse using existing recipe controls?",
+  "raw_archive": {
+    "bytes": 59447213,
+    "exists_locally": false,
+    "format": "tar.gz",
+    "independent_byte_or_full_raw_revalidation": "UNVERIFIED_LOCALLY",
+    "path": "/home/martyn/dev/ParticleGAN/artifacts/forge/word-root-cause-18-arms-v1.tar.gz",
+    "sha256": "f67ffff63dc71c1490b77618660c8d8154975742f0b889c6e1511e7b0ee3f796"
+  },
+  "recommendation": "KEEP / integrate as bounded task-only diagnosis after root code/CI review; no raw scientific recertification or ordinary qualification.",
+  "recorded_adapter_seconds": 2839.2046527308994,
+  "recorded_counts": {
+    "FAIL": 11,
+    "PASS": 7
+  },
+  "records": [
+    {
+      "activation_transitions": {
+        "network_horizon_cap": {
+          "executed": false,
+          "parent": true
+        },
+        "output_noise_warmup": {
+          "executed": false,
+          "parent": true
+        },
+        "training_input_noise": {
+          "executed": false,
+          "parent": true
+        },
+        "training_output_noise": {
+          "executed": false,
+          "parent": true
+        }
+      },
+      "arm": "k3p-coeff170-cap1",
+      "compact_receipt": {
+        "bytes": 40177,
+        "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+        "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+      },
+      "export_recipe_sha256": "64782df39059682002e457daa3c2ba4ef8d6c2a819d2643f3c9ba87c4efc8bb3",
+      "family": "k3p",
+      "final_recorded_metrics_consistent_with_original_bounds": [
+        {
+          "metric": "sample_count",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 1024,
+          "value": 1024
+        },
+        {
+          "metric": "quality_fraction",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.95,
+          "value": 1.0
+        },
+        {
+          "metric": "modes",
+          "op": "==",
+          "recorded_endpoint_consistent": true,
+          "threshold": 5,
+          "value": 5
+        },
+        {
+          "metric": "mass_tv",
+          "op": "<=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.1,
+          "value": 0.024218749999999983
+        },
+        {
+          "metric": "reconstruction_exact",
+          "op": "==",
+          "recorded_endpoint_consistent": true,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "metric": "minimum_reconstruction_token_probability",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.9,
+          "value": 0.9971027970314026
+        }
+      ],
+      "full_raw_scientific_revalidation": "UNVERIFIED_LOCALLY",
+      "inactive_mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 20001,
+          "eligible": 0,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "gain": 2.0,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        }
+      },
+      "initialization": {
+        "discriminator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "encoder": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.1.bias": 8635568878908975799,
+            "net.1.weight": 2352436766040047569,
+            "net.3.bias": 4684962440974121638,
+            "net.3.weight": 1013739058699418041,
+            "net.5.bias": 1863516330406637661,
+            "net.5.weight": 4393974776920474204
+          }
+        },
+        "generator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "local_compact_identity_status": "PASS",
+      "media": {
+        "arm": "k3p-coeff170-cap1",
+        "bytes": 538988,
+        "decoded_pixel_sha256": [
+          "236f9528bb7f4b8cf032655575119443e3c708d3fe46e31475505588ea4f2ae4",
+          "f208f1f75165351a138550fade273cf9082158f196e25c48dfda8762ed5382e6",
+          "0dc19dcf27984731f1f770c4919213e0f9c4536fdd8f3cc6049dc86186bb0a38",
+          "6ad6099a191eaeecd922086c8f55b68b13727d01e640943e925f6883c2b3e573",
+          "66c34ddf0fe569b4af5dc37e579562337b1ba984509b4d270241e2d64809ab02",
+          "dde54e1fbb7dd16934acc290ae2838397363b9705db75097736bd5e7e4e7bb89",
+          "fb1c9be23bbeda3b6ce440d5162324ac66add0edfe231a8bbe1ac62d164a87ca",
+          "7264d998f36cb5149905cfb6e6307ca793441c3712b825e250b52ce8366a5aa1",
+          "e19ce94c9e91c563da80dcdf87c78549df450780c91db57676dacc4c4e4f93b0"
+        ],
+        "dimensions": [
+          1380,
+          1048
+        ],
+        "distinct_decoded_frames": 9,
+        "family": "k3p",
+        "frame_updates": [
+          0,
+          2501,
+          5001,
+          7501,
+          10001,
+          12501,
+          15001,
+          17501,
+          20001
+        ],
+        "frames": 9,
+        "local_media_identity_status": "PASS",
+        "new_sampling_draws": 0,
+        "optimizer_updates": 0,
+        "path": "reports/forge/word-root-cause/media/k3p.gif",
+        "raw_media_to_observations_status": "UNVERIFIED_LOCALLY",
+        "renderer": {
+          "matplotlib": "3.11.1",
+          "pillow": "12.3.0",
+          "python": "3.12.13",
+          "torch": "2.14.0+cu130"
+        },
+        "scope": "Nine frames selected from saved actual training observations; numerical grade uses all 24 checks.",
+        "selected_record_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21,
+          24
+        ],
+        "sha256": "d19a104aa086c9a587ece982ffac70d7ba9cabd63faf5ceab28453f27ba3d7aa",
+        "source_receipt": {
+          "bytes": 40177,
+          "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+          "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+        },
+        "stored_observations": {
+          "bytes": 35388269,
+          "sha256": "9586c1e3c9e5600c3987185cfc39f280babcbd7cd908763b915cd5ce4b3948b8"
+        },
+        "visual_review": "Matched canonical reconstruction, probability strips, sampled generated strings and actual-update/final-vs-instant gate labels are readable. Some adjacent panel titles touch; no material goal ambiguity.",
+        "visual_review_frames": [
+          0,
+          4,
+          8
+        ]
+      },
+      "normalized_recipe_sha256": "3a83914fb3685d239f6b2283590c7440062047b3919117279f62b35b911f5fea",
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protocol": {
+        "bytes": 5294,
+        "path": "reports/forge/word-root-cause/round3-protocol.json",
+        "sha256": "11d307370d7e769c2189d2b73c415e308edb7dc44dc8cbebce0bffd28d6a98b2"
+      },
+      "raw_directory": "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round3/k3p-coeff170-cap1",
+      "raw_directory_exists": false,
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.0006,
+        "network_lr_horizon_cap": null,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 2.0,
+        "reg_coeff": 170.0,
+        "reg_kappa": 1.0
+      },
+      "recorded_confirmed_step": 4167,
+      "recorded_first_pass": 834,
+      "recorded_optimizer_updates": {
+        "discriminator": 20001,
+        "encoder": 20001,
+        "generator": 20001,
+        "prior": 20001
+      },
+      "recorded_scientific_gate": "PASS",
+      "recorded_stable_from": 834,
+      "recorded_strict_rng_deviations": 0,
+      "recorded_terminal_suffix": 24,
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "runtime": {
+        "cpu_threads": 1,
+        "cublas_workspace_config": ":4096:8",
+        "cuda_matmul_allow_tf32": false,
+        "cudnn_allow_tf32": false,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "gpu": "NVIDIA RTX A6000",
+        "python": "3.14.7",
+        "torch": "2.14.0+cu130"
+      },
+      "source_commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+      "source_digest": "4ff32ae9e41adf0814fbf9a35bb81376b1ff7940ca9a497a43bf4526722561ef",
+      "source_pins_verified_from_git": [
+        {
+          "commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+          "path": "benchmarks/locked_shared/baseline.py",
+          "sha256": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b"
+        },
+        {
+          "commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+          "path": "benchmarks/locked_shared/observation.py",
+          "sha256": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b"
+        },
+        {
+          "commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+          "path": "benchmarks/toy_audit/api_images.py",
+          "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+        },
+        {
+          "commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+          "path": "benchmarks/toy_audit/definition_quality.py",
+          "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+        },
+        {
+          "commit": "575d485eedca99bd0d4a7ae7b8cbdb9c4634d289",
+          "path": "benchmarks/transfer_suite/protocol.py",
+          "sha256": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+        }
+      ],
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "activation_transitions": {
+        "network_horizon_cap": {
+          "executed": false,
+          "parent": true
+        },
+        "output_noise_warmup": {
+          "executed": false,
+          "parent": true
+        },
+        "training_input_noise": {
+          "executed": false,
+          "parent": true
+        },
+        "training_output_noise": {
+          "executed": false,
+          "parent": true
+        }
+      },
+      "arm": "ka2-slow-prior-0p1",
+      "compact_receipt": {
+        "bytes": 40024,
+        "path": "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json",
+        "sha256": "bdf4c73e51647f79c2b7e485f442e92ad6334857e2f4a4cad5fc2e6ec022addc"
+      },
+      "export_recipe_sha256": "b7062ebda2ce46a9d56e18225e383f022cfcc7b58d4bd8207daff38ca6c5fec8",
+      "family": "ka2",
+      "final_recorded_metrics_consistent_with_original_bounds": [
+        {
+          "metric": "sample_count",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 1024,
+          "value": 1024
+        },
+        {
+          "metric": "quality_fraction",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.95,
+          "value": 1.0
+        },
+        {
+          "metric": "modes",
+          "op": "==",
+          "recorded_endpoint_consistent": true,
+          "threshold": 5,
+          "value": 5
+        },
+        {
+          "metric": "mass_tv",
+          "op": "<=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.1,
+          "value": 0.024218749999999983
+        },
+        {
+          "metric": "reconstruction_exact",
+          "op": "==",
+          "recorded_endpoint_consistent": true,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "metric": "minimum_reconstruction_token_probability",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.9,
+          "value": 0.9999419450759888
+        }
+      ],
+      "full_raw_scientific_revalidation": "UNVERIFIED_LOCALLY",
+      "inactive_mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 20001,
+          "eligible": 0,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "gain": 2.0,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        }
+      },
+      "initialization": {
+        "discriminator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "encoder": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.1.bias": 8635568878908975799,
+            "net.1.weight": 2352436766040047569,
+            "net.3.bias": 4684962440974121638,
+            "net.3.weight": 1013739058699418041,
+            "net.5.bias": 1863516330406637661,
+            "net.5.weight": 4393974776920474204
+          }
+        },
+        "generator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "local_compact_identity_status": "PASS",
+      "media": {
+        "arm": "ka2-slow-prior-0p1",
+        "bytes": 540865,
+        "decoded_pixel_sha256": [
+          "26ee502ce6c6f3c5eca510543d2f6068665f9d65db95981edcbdd7a48e037d95",
+          "295b3926eb5c70aa433aa6e18e87ec3c2b9a089fd0a83045ab59da651d7d061f",
+          "4feb84721d9dd69b3eaa60fb497e546e4cfa6eecf20f524982712f288b18c0ee",
+          "7f9ff088a560bfe19daa24c11d8877bb01c37443194672d246ab02d01810bd54",
+          "c8c6bfcf8ee8a6ab3d0a9eb95b0e466efa1f58b5157e30bafd2f4117246d6476",
+          "da84d0d8448f8928456df2cbad8ec3c24702e3b9147010ea9db5c6858d9d1421",
+          "c72b1dee879c430676814915ffc8b405f70c00da26346f3f4c891ebeaddcdac8",
+          "5a033ee49487bb5e0642f57011e943b63eaebe57b9046c6676b4e790ec1336e8",
+          "f04df22e6a59c0cbdd64fd93da26e129e6a2b80ffca3160d2067da8bd0cf79c2"
+        ],
+        "dimensions": [
+          1380,
+          1048
+        ],
+        "distinct_decoded_frames": 9,
+        "family": "ka2",
+        "frame_updates": [
+          0,
+          2501,
+          5001,
+          7501,
+          10001,
+          12501,
+          15001,
+          17501,
+          20001
+        ],
+        "frames": 9,
+        "local_media_identity_status": "PASS",
+        "new_sampling_draws": 0,
+        "optimizer_updates": 0,
+        "path": "reports/forge/word-root-cause/media/ka2.gif",
+        "raw_media_to_observations_status": "UNVERIFIED_LOCALLY",
+        "renderer": {
+          "matplotlib": "3.11.1",
+          "pillow": "12.3.0",
+          "python": "3.12.13",
+          "torch": "2.14.0+cu130"
+        },
+        "scope": "Nine frames selected from saved actual training observations; numerical grade uses all 24 checks.",
+        "selected_record_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21,
+          24
+        ],
+        "sha256": "f1eca0a24e69819b7a7b3c6ffb592dce25216cf042e3877e65059ddbf46ac524",
+        "source_receipt": {
+          "bytes": 40024,
+          "path": "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json",
+          "sha256": "bdf4c73e51647f79c2b7e485f442e92ad6334857e2f4a4cad5fc2e6ec022addc"
+        },
+        "stored_observations": {
+          "bytes": 35388269,
+          "sha256": "d2f41d92a889179073dd46ba36f8cd5b7cbaa5ffe294c851f817f7dfc0ea2d6e"
+        },
+        "visual_review": "Matched canonical reconstruction, probability strips, sampled generated strings and actual-update/final-vs-instant gate labels are readable. Some adjacent panel titles touch; no material goal ambiguity.",
+        "visual_review_frames": [
+          0,
+          4,
+          8
+        ]
+      },
+      "normalized_recipe_sha256": "2506e7be53699ba32afa6dd68be77e0be733ce15293e4ad437dee4825e9c70fd",
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protocol": {
+        "bytes": 6896,
+        "path": "reports/forge/word-root-cause/round2-protocol.json",
+        "sha256": "f196f58c1f775c0d4ca83733fc0a0f5d0ae8ca133e68e6e3ecc7238bb43c16a0"
+      },
+      "raw_directory": "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round2/ka2-slow-prior-0p1",
+      "raw_directory_exists": false,
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.0006,
+        "network_lr_horizon_cap": null,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 0.1
+      },
+      "recorded_confirmed_step": 6667,
+      "recorded_first_pass": 3334,
+      "recorded_optimizer_updates": {
+        "discriminator": 20001,
+        "encoder": 20001,
+        "generator": 20001,
+        "prior": 20001
+      },
+      "recorded_scientific_gate": "PASS",
+      "recorded_stable_from": 3334,
+      "recorded_strict_rng_deviations": 0,
+      "recorded_terminal_suffix": 21,
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "runtime": {
+        "cpu_threads": 1,
+        "cublas_workspace_config": ":4096:8",
+        "cuda_matmul_allow_tf32": false,
+        "cudnn_allow_tf32": false,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "gpu": "NVIDIA RTX A6000",
+        "python": "3.14.7",
+        "torch": "2.14.0+cu130"
+      },
+      "source_commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+      "source_digest": "4c08e90d89bcde6da9387d85bf8fc75171c1ca58b553f07dd7c04666f741109d",
+      "source_pins_verified_from_git": [
+        {
+          "commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+          "path": "benchmarks/locked_shared/baseline.py",
+          "sha256": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b"
+        },
+        {
+          "commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+          "path": "benchmarks/locked_shared/observation.py",
+          "sha256": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b"
+        },
+        {
+          "commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+          "path": "benchmarks/toy_audit/api_images.py",
+          "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+        },
+        {
+          "commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+          "path": "benchmarks/toy_audit/definition_quality.py",
+          "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+        },
+        {
+          "commit": "1a2c8d06de6baa1f762eb66d3e5655b672922c57",
+          "path": "benchmarks/transfer_suite/protocol.py",
+          "sha256": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+        }
+      ],
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "activation_transitions": {},
+      "arm": "r1r2-mid-rate-fast-roles",
+      "compact_receipt": {
+        "bytes": 39856,
+        "path": "reports/forge/word-root-cause/receipts/r1r2-mid-rate-fast-roles.json",
+        "sha256": "f6bea957a6eb13ef2ec377b576773de4cf66b30b721fefb8b202747d12c5adfd"
+      },
+      "export_recipe_sha256": "f38a3e9a989509d8c3890f6bd7b9eee1a89495c5715a9f5691766d1a7005d63e",
+      "family": "r1r2",
+      "final_recorded_metrics_consistent_with_original_bounds": [
+        {
+          "metric": "sample_count",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 1024,
+          "value": 1024
+        },
+        {
+          "metric": "quality_fraction",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.95,
+          "value": 1.0
+        },
+        {
+          "metric": "modes",
+          "op": "==",
+          "recorded_endpoint_consistent": true,
+          "threshold": 5,
+          "value": 5
+        },
+        {
+          "metric": "mass_tv",
+          "op": "<=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.1,
+          "value": 0.024218749999999983
+        },
+        {
+          "metric": "reconstruction_exact",
+          "op": "==",
+          "recorded_endpoint_consistent": true,
+          "threshold": 1,
+          "value": 1
+        },
+        {
+          "metric": "minimum_reconstruction_token_probability",
+          "op": ">=",
+          "recorded_endpoint_consistent": true,
+          "threshold": 0.9,
+          "value": 0.9961368441581726
+        }
+      ],
+      "full_raw_scientific_revalidation": "UNVERIFIED_LOCALLY",
+      "inactive_mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        }
+      },
+      "initialization": {
+        "discriminator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 3734295931346225499,
+            "net.0.weight": 8910211641772985932,
+            "net.2.bias": 1656871869629328331,
+            "net.2.weight": 9070382962554913347,
+            "net.4.bias": 333772184539410714,
+            "net.4.weight": 3220091654461954378
+          }
+        },
+        "encoder": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.1.bias": 8635568878908975799,
+            "net.1.weight": 2352436766040047569,
+            "net.3.bias": 4684962440974121638,
+            "net.3.weight": 1013739058699418041,
+            "net.5.bias": 1863516330406637661,
+            "net.5.weight": 4393974776920474204
+          }
+        },
+        "generator": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "net.0.bias": 2669906441505372968,
+            "net.0.weight": 3213176745718584912,
+            "net.2.bias": 265576875384124118,
+            "net.2.weight": 5825468874490035566,
+            "net.4.bias": 6418902638380629685,
+            "net.4.weight": 3028787476376713866
+          }
+        },
+        "prior": {
+          "initializer": "deterministic_orthogonal_named_parameters_v1",
+          "parameter_seeds": {
+            "z": 6640234621280078221
+          }
+        }
+      },
+      "local_compact_identity_status": "PASS",
+      "media": {
+        "arm": "r1r2-mid-rate-fast-roles",
+        "bytes": 540793,
+        "decoded_pixel_sha256": [
+          "fb263ef3eeffaf258e70b63dddb97b5dadf1a0477f6ccb081a9cc8a6c66727d8",
+          "f14b7eeb1aa902611c97d5c21f7837b81bd44577052ef3caf553c5f36b663ce3",
+          "06749010ae8684a3dfb0a599329869e97a3634577163537b4b52fcee54304b64",
+          "7d720df9adf3957ff6e127392db731affa7c54da46a1432fa847d5f24be4a3bc",
+          "d3ea845ec0ecc25b455189a4bc2ca067c83f40540b5f93dc0041ac135aaabbdd",
+          "aeeafbd46a2f76de93bf324bdfee83bf003e791be507b073cdd1b6486a2a21fe",
+          "95cc06d693e0f4167988c851177bbc3973389109cab61c76f036c1c2376a59af",
+          "d8ef9caef961d4f0e7d6c45ba704b630e3a3fe7d1592b5d9cc6432239e5dc103",
+          "64699e90db5a089f9eb954c63c73dca161c0f4d75f6c40d4e4eb6a5b7db0e7a7"
+        ],
+        "dimensions": [
+          1380,
+          1048
+        ],
+        "distinct_decoded_frames": 9,
+        "family": "r1r2",
+        "frame_updates": [
+          0,
+          2501,
+          5001,
+          7501,
+          10001,
+          12501,
+          15001,
+          17501,
+          20001
+        ],
+        "frames": 9,
+        "local_media_identity_status": "PASS",
+        "new_sampling_draws": 0,
+        "optimizer_updates": 0,
+        "path": "reports/forge/word-root-cause/media/r1r2.gif",
+        "raw_media_to_observations_status": "UNVERIFIED_LOCALLY",
+        "renderer": {
+          "matplotlib": "3.11.1",
+          "pillow": "12.3.0",
+          "python": "3.12.13",
+          "torch": "2.14.0+cu130"
+        },
+        "scope": "Nine frames selected from saved actual training observations; numerical grade uses all 24 checks.",
+        "selected_record_indices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21,
+          24
+        ],
+        "sha256": "0a1bcf0bbd4e3b7f63c5306fd7db0209b0d031b9985fa23421e59e0a74f489bf",
+        "source_receipt": {
+          "bytes": 39856,
+          "path": "reports/forge/word-root-cause/receipts/r1r2-mid-rate-fast-roles.json",
+          "sha256": "f6bea957a6eb13ef2ec377b576773de4cf66b30b721fefb8b202747d12c5adfd"
+        },
+        "stored_observations": {
+          "bytes": 35388269,
+          "sha256": "2f67de89189bd005729cbe5c7345850cd47b4ecade19e3808a3eda2328a96427"
+        },
+        "visual_review": "Matched canonical reconstruction, probability strips, sampled generated strings and actual-update/final-vs-instant gate labels are readable. Some adjacent panel titles touch; no material goal ambiguity.",
+        "visual_review_frames": [
+          0,
+          4,
+          8
+        ]
+      },
+      "normalized_recipe_sha256": "31846539c62b0d533351ccb22ee7a37166c1e78fb3878b3bb97589555b7f2a40",
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protocol": {
+        "bytes": 7129,
+        "path": "reports/forge/word-root-cause/round1-protocol.json",
+        "sha256": "1bfe08d9b07f6a2d69d8bca6f3a51c42cbe1ba571b1ba2d82107a206b19ce760"
+      },
+      "raw_directory": "/home/martyn/dev/ParticleGAN-word-task-fix/runs/forge/word-root-cause-round1/r1r2-mid-rate-fast-roles",
+      "raw_directory_exists": false,
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "lr": 0.0012,
+        "prior_lr_mult": 2.0
+      },
+      "recorded_confirmed_step": 5834,
+      "recorded_first_pass": 834,
+      "recorded_optimizer_updates": {
+        "discriminator": 20001,
+        "encoder": 20001,
+        "generator": 20001,
+        "prior": 20001
+      },
+      "recorded_scientific_gate": "PASS",
+      "recorded_stable_from": 2501,
+      "recorded_strict_rng_deviations": 0,
+      "recorded_terminal_suffix": 22,
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "runtime": {
+        "cpu_threads": 1,
+        "cublas_workspace_config": ":4096:8",
+        "cuda_matmul_allow_tf32": false,
+        "cudnn_allow_tf32": false,
+        "cudnn_benchmark": false,
+        "cudnn_deterministic": true,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "gpu": "NVIDIA RTX A6000",
+        "python": "3.14.7",
+        "torch": "2.14.0+cu130"
+      },
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "7a93dcd9515a0ffa1e92853d92fb304e30556332c424c4b3e2ac1fd763e62cc3",
+      "source_pins_verified_from_git": [
+        {
+          "commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+          "path": "benchmarks/locked_shared/baseline.py",
+          "sha256": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b"
+        },
+        {
+          "commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+          "path": "benchmarks/locked_shared/observation.py",
+          "sha256": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b"
+        },
+        {
+          "commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+          "path": "benchmarks/toy_audit/api_images.py",
+          "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+        },
+        {
+          "commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+          "path": "benchmarks/toy_audit/definition_quality.py",
+          "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+        },
+        {
+          "commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+          "path": "benchmarks/transfer_suite/protocol.py",
+          "sha256": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+        }
+      ],
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    }
+  ],
+  "reviewer_verifier": {
+    "path": "/tmp/review_pr265_compact_20261003.py",
+    "sha256": "9d5c2979329397c52dfe22a83b9e5b3131f87798ba141568b1ffe5d8daea2fe5"
+  },
+  "root_ci_review_required": true,
+  "schema": "pr265_independent_compact_evidence_review_v1",
+  "selection": {
+    "bytes": 32387,
+    "path": "configs/forge/selections/word-joint-task-v1.json",
+    "sha256": "9e1c77de1914e386eeb1032bd8cf586b4c45b99775ab71b983ee77a4d618edbb"
+  },
+  "status": "COMPACT_SOURCE_MEDIA_AND_PRESERVATION_PASS_WITH_RAW_UNAVAILABLE"
+}

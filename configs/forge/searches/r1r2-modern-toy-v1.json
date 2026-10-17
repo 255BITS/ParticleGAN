@@ -1,0 +1,36 @@
+{
+  "base_candidate": "r3gan-stacked-training-toy-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 3600,
+    "candidate_budget_seconds": 900,
+    "id": "r1r2-modern-toy-search-v1"
+  },
+  "execution_backend": "cpu",
+  "grid": {
+    "lr": [
+      0.00425,
+      0.0085
+    ],
+    "penalty": [
+      {
+        "reg_coeff": 1.0,
+        "reg_coeff_end": 0.1
+      },
+      {
+        "reg_coeff": 0.1,
+        "reg_coeff_end": 0.01
+      }
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Under the unchanged fixed toy-host movement/convergence gates, larger constant learning rates and paired R1/R2 gamma schedules may improve the failed Modern GAN training adaptation.",
+  "id": "r1r2-modern-toy-v1",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "Four substantive Recipe configurations preserve the plain Adam implementation, task horizons, beta2 burn-in, fixed prior, initialization and clean/live sampling. The failed canonical 0.0002 LR is excluded. Only tier1 is used for selection; 19 quality and 2 endurance tasks remain holdouts. Provisional gates supply no default adoption.",
+  "schema_version": 1,
+  "trainer_family": "r1r2",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

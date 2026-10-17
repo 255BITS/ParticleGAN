@@ -1,0 +1,341 @@
+{
+  "status": "VALID",
+  "scope": "Reserved alternative, not a candidate acceptance or production-law implementation",
+  "saved": [
+    {
+      "step": 500,
+      "required_rows": 973,
+      "current_window_participation": {
+        "r_b": 488,
+        "r_2b": 277
+      },
+      "pair_completion_bounds": {
+        "r_b": [
+          {
+            "observed_rows": 231,
+            "absent_rows": 793,
+            "survivor_mean": 0.04242417088395299,
+            "full_population_identification_interval": [
+              -0.7648437661384833,
+              0.7839843588615167
+            ]
+          },
+          {
+            "observed_rows": 288,
+            "absent_rows": 736,
+            "survivor_mean": -0.050033101095727436,
+            "full_population_identification_interval": [
+              -0.7328218096831733,
+              0.7046781903168267
+            ]
+          },
+          {
+            "observed_rows": 345,
+            "absent_rows": 679,
+            "survivor_mean": -0.03527259534575801,
+            "full_population_identification_interval": [
+              -0.6749697708928579,
+              0.6512021041071421
+            ]
+          },
+          {
+            "observed_rows": 427,
+            "absent_rows": 597,
+            "survivor_mean": -0.05079257021717012,
+            "full_population_identification_interval": [
+              -0.6041879174636051,
+              0.5618277075363949
+            ]
+          },
+          {
+            "observed_rows": 492,
+            "absent_rows": 532,
+            "survivor_mean": -0.09433359431000654,
+            "full_population_identification_interval": [
+              -0.564855594141136,
+              0.47420690585886405
+            ]
+          }
+        ],
+        "r_2b": [
+          {
+            "observed_rows": 286,
+            "absent_rows": 738,
+            "survivor_mean": -0.05626121981369032,
+            "full_population_identification_interval": [
+              -0.7364167078776518,
+              0.7049895421223482
+            ]
+          },
+          {
+            "observed_rows": 447,
+            "absent_rows": 577,
+            "survivor_mean": -0.07967346063262931,
+            "full_population_identification_interval": [
+              -0.5982558954128763,
+              0.5286972295871237
+            ]
+          }
+        ]
+      },
+      "table_s": 1.0,
+      "table_b": 16.0,
+      "table_stamp": 1,
+      "population_active": false,
+      "last_population": {
+        "event": "decision",
+        "step": 312,
+        "participating_rows": null,
+        "required_rows": 973,
+        "coverage_rejected": false,
+        "scheduling_decision": "inconclusive"
+      },
+      "generator_s": 0.25,
+      "generator_stamp": -1,
+      "generator_stationary_decisions": 2,
+      "cumulative_moves": 3094,
+      "paired_latent_rms_descriptive_only": 0.025274474171088107
+    },
+    {
+      "step": 1000,
+      "required_rows": 973,
+      "current_window_participation": {
+        "r_b": 299,
+        "r_2b": 152
+      },
+      "pair_completion_bounds": {
+        "r_b": [
+          {
+            "observed_rows": 149,
+            "absent_rows": 875,
+            "survivor_mean": -0.021313382428289458,
+            "full_population_identification_interval": [
+              -0.8575934511541163,
+              0.8513909238458837
+            ]
+          },
+          {
+            "observed_rows": 202,
+            "absent_rows": 822,
+            "survivor_mean": -0.010877998794733298,
+            "full_population_identification_interval": [
+              -0.8048802302309923,
+              0.8005885197690077
+            ]
+          },
+          {
+            "observed_rows": 295,
+            "absent_rows": 729,
+            "survivor_mean": 0.09474276458623551,
+            "full_population_identification_interval": [
+              -0.6846200043428325,
+              0.7392081206571675
+            ]
+          },
+          {
+            "observed_rows": 445,
+            "absent_rows": 579,
+            "survivor_mean": -0.10043442850916783,
+            "full_population_identification_interval": [
+              -0.609075508482988,
+              0.521783866517012
+            ]
+          }
+        ],
+        "r_2b": [
+          {
+            "observed_rows": 152,
+            "absent_rows": 872,
+            "survivor_mean": -0.13002335236064697,
+            "full_population_identification_interval": [
+              -0.8708628413660335,
+              0.8322621586339665
+            ]
+          },
+          {
+            "observed_rows": 304,
+            "absent_rows": 720,
+            "survivor_mean": -0.05041761954290498,
+            "full_population_identification_interval": [
+              -0.7180927308017999,
+              0.6881572691982001
+            ]
+          }
+        ]
+      },
+      "table_s": 1.0,
+      "table_b": 32.0,
+      "table_stamp": 1,
+      "population_active": false,
+      "last_population": {
+        "event": "decision",
+        "step": 696,
+        "participating_rows": 591,
+        "required_rows": 973,
+        "coverage_rejected": true,
+        "scheduling_decision": "inconclusive"
+      },
+      "generator_s": 0.125,
+      "generator_stamp": -1,
+      "generator_stationary_decisions": 3,
+      "cumulative_moves": 6201,
+      "paired_latent_rms_descriptive_only": 0.0275040551043529
+    },
+    {
+      "step": 2000,
+      "required_rows": 973,
+      "current_window_participation": {
+        "r_b": 281,
+        "r_2b": 75
+      },
+      "pair_completion_bounds": {
+        "r_b": [
+          {
+            "observed_rows": 75,
+            "absent_rows": 949,
+            "survivor_mean": 0.03276568551858266,
+            "full_population_identification_interval": [
+              -0.9243579820176819,
+              0.9291576429823181
+            ]
+          },
+          {
+            "observed_rows": 155,
+            "absent_rows": 869,
+            "survivor_mean": -0.28527208512588853,
+            "full_population_identification_interval": [
+              -0.8918136456977663,
+              0.8054519793022337
+            ]
+          },
+          {
+            "observed_rows": 282,
+            "absent_rows": 742,
+            "survivor_mean": -0.1450134629106268,
+            "full_population_identification_interval": [
+              -0.7645447231843718,
+              0.6846740268156282
+            ]
+          },
+          {
+            "observed_rows": 359,
+            "absent_rows": 665,
+            "survivor_mean": -0.1478408098059984,
+            "full_population_identification_interval": [
+              -0.7012449714065951,
+              0.5975831535934049
+            ]
+          }
+        ],
+        "r_2b": [
+          {
+            "observed_rows": 75,
+            "absent_rows": 949,
+            "survivor_mean": -0.18149030280609926,
+            "full_population_identification_interval": [
+              -0.9400505592875561,
+              0.9134650657124439
+            ]
+          },
+          {
+            "observed_rows": 283,
+            "absent_rows": 741,
+            "survivor_mean": -0.21752215936029654,
+            "full_population_identification_interval": [
+              -0.783748799901332,
+              0.663516825098668
+            ]
+          }
+        ]
+      },
+      "table_s": 1.0,
+      "table_b": 64.0,
+      "table_stamp": 1,
+      "population_active": false,
+      "last_population": {
+        "event": "decision",
+        "step": 1464,
+        "participating_rows": 323,
+        "required_rows": 973,
+        "coverage_rejected": true,
+        "scheduling_decision": "inconclusive"
+      },
+      "generator_s": 0.0625,
+      "generator_stamp": -1,
+      "generator_stationary_decisions": 4,
+      "cumulative_moves": 11052,
+      "paired_latent_rms_descriptive_only": 0.021121379452620312
+    }
+  ],
+  "synthetic": {
+    "rows": 64,
+    "dimension": 2,
+    "replaced_rows_per_block": 3,
+    "blocks": 20,
+    "required_current_row_participants": 61,
+    "current_row_participants": 49,
+    "all_population_flux_pairs": 10,
+    "all_population_flux_cosines": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0
+    ],
+    "maximum_reaction_flux": 2.7755575615628914e-17,
+    "maximum_flux_accounting_error": 1.734723475976807e-18,
+    "note": "Every coordinate moves; deterministic permutations invalidate rows but preserve all population observables."
+  },
+  "mean_cancellation_counterexample": {
+    "first_moments": [
+      0.0,
+      0.0
+    ],
+    "bounded_second_moments": [
+      0.5800256583859739,
+      0.9293491751468356
+    ]
+  },
+  "bounded_betting_example": {
+    "lambdas": [
+      "1/4",
+      "1/2",
+      "3/4",
+      "1"
+    ],
+    "alpha": "1/80",
+    "threshold": 80,
+    "fixed_all_negative_crossing_pairs": 8,
+    "fair_null_sequences": 4096,
+    "null_anytime_crossings": 16,
+    "null_anytime_probability": "1/256",
+    "exact_null_final_expectation": 1,
+    "null": "Conditional population-flux cosine mean >=0, not full-density equilibrium.",
+    "limits": "Epoch/scale allocation and certificate expiry remain necessary; this is not production implementation."
+  },
+  "input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/continuous.py": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/training.py": "8961dc8596230bc0ff5f153606694aa21745e77f5577a0fc93664d9107d5b005",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA7/particlegan/feature_cells.py": "eee5469b420d9c750d9ad015172af58052e8aab161d93d4f16fc323be12f9245",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra7/READY.json": "f300089ce4fece3a812b890d4060e0567e833dddd236e5a955993f65ef15e1dd",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/source-freeze.json": "1724fc603970338b0ae94d58d6055a734e3cd424fcd514a53bb1ca9297426b3d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra7-prospective/FINAL-FROZEN.json": "36df2b0c6c754b4eca0daf0fa09eada081b649eda0f3d29fa4723753a2a3dda2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-0500.pt": "132f9351b3c5857b0e434c7d9b294de12084bc09f8012e01c53159e9e78f7612",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-1000.pt": "5ca98bdfbe400930d42f52306e6fa0eac330b6d87a8f6ae5254594daa5c7edb2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/checkpoint-2000.pt": "94ee1c70def3f8256140ec23a2f7c9ef997699ca1a63815ce9a51bd1e85db3c2"
+  },
+  "script_sha256": "14dee6acb6201c2b42e651d1ef14d0497b7a61759ea74d6de5f2ab508f5cf836",
+  "frozen_sources_and_inputs_unchanged": true,
+  "global_rng_unchanged": true,
+  "cuda_initialized": false,
+  "model_forward_calls": 0,
+  "model_gradient_calls": 0,
+  "optimizer_calls": 0,
+  "new_seeds": 0,
+  "new_quality_emissions": 0
+}

@@ -1,0 +1,84 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -389,6 +389,18 @@
+     return allocated.sum(0)
+ 
+ 
++CELL_RESOLUTION_POLICY = "even_fit_average_rows_per_effective_rank_floor1_v1"
++
++
++def _fit_cell_count(requested_cells, fitted_rows, effective_rank):
++    """Average finite-fit resolution cap, not a per-cell occupancy guarantee.
++
++    Rank zero uses denominator one; its metric/discoveries remain disabled.
++    Only even fitted rows and their effective metric rank determine the cap.
++    """
++    return min(requested_cells, max(1, fitted_rows // max(1, effective_rank)))
++
++
+ class FeatureCellSnapshot:
+     """One reference-only fitted critic snapshot; queries are original features.
+ 
+@@ -430,7 +442,7 @@
+         else:
+             self.basis = real.new_zeros((self.width, 0))
+         x = self.transform(ref)
+-        self.cells = min(cells, len(x))
++        self.cells = _fit_cell_count(cells, len(x), self.rank)
+         centers = x.new_empty((self.cells, self.rank))
+         selected = (x-x.mean(0)).square().sum(1).argmin()
+         nearest = x.new_full((len(x),), float("inf"))
+@@ -1387,7 +1399,7 @@
+ 
+ class FeatureCellBirthDeath(ParticleBirthDeath):
+     """Actual GANTrainer backend; keeps original FIFO and row-copy mechanics."""
+-    BACKEND_SCHEMA = 7
++    BACKEND_SCHEMA = 8
+ 
+     def __init__(self,trainer,seed):
+         super().__init__(trainer,seed)
+@@ -1402,6 +1414,7 @@
+             novel_birth_trust="per_model_prior_rms_coordinate_spread")
+         self.settings.update(paired_average_policy="ema_support_inside_current_real_group_Q_v1",
+                              paired_average_expiry="strictly_less_than_one_real_fifo_turnover_v1")
++        self.settings.update(resolution_policy=CELL_RESOLUTION_POLICY)
+         self.lineage = LatentLineage(self.N,self.settings["lineage_degree"],trainer.device)
+         self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
+                           neighbors=PARENT_RESERVOIR,chunk=recipe.birth_death_chunk,lineage=self.lineage)
+@@ -1713,7 +1726,8 @@
+                     and stamp["coherent_rows"]<max(0,stamp["same_group_rows"]+stamp["ema_eligible_rows"]-self.N))
+                 or (stamp["finite_rows"]<self.N
+                     and any(stamp[k] for k in ("groups","same_group_rows","ema_eligible_rows","coherent_rows")))
+-                or stamp["groups"]>stamp["cells"] or stamp["rank"]>self.settings["rank"]
++                or stamp["groups"]>stamp["cells"]
++                or stamp["rank"]>min(self.settings["rank"],(self.N+1)//2-1)
+                 or stamp["cells"]>min(self.settings["cells"],(self.N+1)//2)):
+             raise ValueError("inconsistent paired-average counts/chart")
+         expected = (stamp["chart_valid"] and stamp["duplicate_ok"] and stamp["finite_rows"]==self.N
+@@ -1736,6 +1750,26 @@
+             raise ValueError("inconsistent paired-average reaction stamp")
+         if stamp["snapshot"]:
+             last = state["last"]
++            fitted_rows = (self.N+1)//2
++            actual_cells = _fit_cell_count(self.settings["cells"],fitted_rows,stamp["rank"])
++            q = Fraction(str(Q))
++            ordinal = (fitted_rows*(q.denominator-q.numerator)+q.denominator-1)//q.denominator
++            partition = dict(rule="even_fit_score_order_statistic",q=Q,fitted_rows=fitted_rows,
++                             ordinal=ordinal,ties="inside",categories=2*actual_cells)
++            saved_partition = last.get("count_partition")
++            if (stamp["cells"]!=actual_cells
++                    or type(last.get("count_categories")) is not int
++                    or last["count_categories"]!=2*actual_cells
++                    or type(last.get("count_multiplicity")) is not int
++                    or last["count_multiplicity"]!=3*actual_cells+2
++                    or type(last.get("count_cutoff")) is not float
++                    or last["count_cutoff"]!=Q/(3*actual_cells+2)
++                    or not isinstance(saved_partition,dict) or saved_partition.keys()!=partition.keys()
++                    or any(type(saved_partition[key]) is not int for key in ("fitted_rows","ordinal","categories"))
++                    or type(saved_partition["q"]) is not float
++                    or any(type(saved_partition[key]) is not str for key in ("rule","ties"))
++                    or saved_partition!=partition):
++                raise ValueError("resolution/count diagnostics disagree with the actual even-fit chart")
+             if any(type(last.get(key)) is not int or last[key]!=stamp[field]
+                    for key,field in (("cells","cells"),("metric_rank","rank"),("calibration_rows","calibration_rows"))):
+                 raise ValueError("paired-average stamp disagrees with its reaction chart")

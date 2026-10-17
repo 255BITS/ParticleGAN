@@ -1,0 +1,192 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -5,6 +5,7 @@
+ """
+ import math
+ import time
++import weakref
+ import torch
+ from .birth_death import ParticleBirthDeath
+ 
+@@ -19,8 +20,113 @@
+ Q = .05
+ 
+ 
++class BoundedLatentGeometry:
++    """Prior-derived anisotropic width and bounded local DV12 latent radius.
++
++    At most ``neighbors`` candidates come from coordinate sort neighborhoods
++    on the ``rank`` most varying latent coordinates. Distances use the full
++    latent vector. The radius can exceed the exact nearest-other radius, so
++    this is an approximate DV12 kernel, not an exact nearest-neighbor claim.
++    Setup is O(rank*N*log(N)); queries use O(neighbors*latent_width) per row.
++    Deterministic caches are derived, versioned and never checkpointed.
++    Coordinate width is bounded by the local RMS of the nearest ``rank``
++    candidates divided by sqrt(2), the pair-difference variance factor. This
++    prevents an isotropic norm ball from ignoring narrow local coordinates.
++    """
++    def __init__(self, *, rank=8, neighbors=64, chunk=256):
++        for name, value in (("rank", rank), ("neighbors", neighbors), ("chunk", chunk)):
++            if type(value) is not int or value <= 0:
++                raise ValueError(f"{name} must be a positive integer")
++        self.rank, self.neighbors, self.chunk = rank, neighbors, chunk
++        self.clear()
++
++    def clear(self):
++        self._entries = {}
++        self.work = dict(builds=0, distance_pairs=0, max_query_rows=0, max_candidates=0)
++
++    @torch.no_grad()
++    def _orders(self, points):
++        key = id(points)
++        entry = self._entries.get(key)
++        if entry is not None and entry[0]() is points and entry[1] == points._version:
++            return entry[2]
++        spread = points.detach().std(0, unbiased=False)
++        count = min(self.rank, int((spread > 0).sum()))
++        axes = spread.argsort(descending=True, stable=True)[:count]
++        orders = []
++        for axis in axes:
++            values, rows = points.detach()[:, axis].sort(stable=True)
++            unique, counts = torch.unique_consecutive(values, return_counts=True)
++            # Skip entire tied-coordinate groups. This avoids losing every
++            # candidate when many row copies have exactly identical centers.
++            first = counts.cumsum(0)-counts
++            orders.append((axis, unique, rows[first]))
++        if len(self._entries) >= 2:
++            self._entries.pop(next(iter(self._entries)))
++        self._entries[key] = (weakref.ref(points), points._version, orders)
++        self.work["builds"] += 1
++        return orders
++
++    @torch.no_grad()
++    def radius(self, latent, prior):
++        return self._local_geometry(latent, prior)[0]
++
++    @torch.no_grad()
++    def _local_geometry(self, latent, prior):
++        points = prior.z
++        orders = self._orders(points)
++        if not orders:
++            return latent.new_zeros(len(latent)), torch.zeros_like(latent)
++        output, widths = [], []
++        for block in latent.detach().split(self.chunk):
++            distances, point_ids = [], []
++            for index, (axis, values, rows) in enumerate(orders):
++                count = self.neighbors//len(orders)+(index < self.neighbors % len(orders))
++                if not count:
++                    continue
++                offsets = torch.arange(-(count//2), count-count//2, device=block.device)
++                positions = torch.searchsorted(values, block[:, axis].contiguous())[:, None]+offsets
++                valid = (positions >= 0) & (positions < len(values))
++                candidates = rows[positions.clamp(0, len(values)-1)]
++                distance = (block[:, None]-points.detach()[candidates]).square().sum(-1)
++                distance.masked_fill_(~valid | (distance == 0), float("inf"))
++                distances.append(distance); point_ids.append(candidates)
++                self.work["distance_pairs"] += len(block)*count
++            self.work["max_query_rows"] = max(self.work["max_query_rows"], len(block))
++            self.work["max_candidates"] = max(self.work["max_candidates"], self.neighbors)
++            distances, point_ids = torch.cat(distances, 1), torch.cat(point_ids, 1)
++            nearest = distances.min(1).values.sqrt()
++            output.append(torch.where(torch.isfinite(nearest), .5*nearest, torch.zeros_like(nearest)))
++            selected = distances.argsort(dim=1, stable=True)[:, :min(self.rank, distances.shape[1])]
++            valid = torch.isfinite(distances.gather(1, selected))
++            neighbors = points.detach()[point_ids.gather(1, selected)]
++            difference2 = (block[:, None]-neighbors).square()*valid[:, :, None]
++            # A difference between independent local draws has twice their
++            # coordinate variance. Reuse rank as the bounded local sample size.
++            widths.append((difference2.sum(1)/(2*valid.sum(1).clamp_min(1)[:, None])).sqrt())
++        return torch.cat(output), torch.cat(widths)
++
++    def displacement(self, latent, prior, bandwidth, noise, *, record=None):
++        radius, local_width = self._local_geometry(latent, prior)
++        global_width = torch.as_tensor(bandwidth, device=latent.device, dtype=latent.dtype)
++        applied_width = torch.minimum(global_width, local_width)
++        delta = applied_width*noise
++        fraction = (radius/delta.norm(dim=1).clamp_min(1e-20)).clamp_max(1.)
++        delta = delta*fraction[:, None]
++        if record is not None:
++            record.append(dict(radius_min=float(radius.min()), radius_mean=float(radius.mean()),
++                               radius_max=float(radius.max()),
++                               perturbation_rms=float(delta.detach().square().mean().sqrt()),
++                               clipped_fraction=float((fraction < 1.).float().mean()),
++                               global_bandwidth_mean=float(global_width.mean()),
++                               local_bandwidth_mean=float(applied_width.mean()),
++                               backend="feature_cells", kernel="bounded_local_dv12"))
++            del record[:-2]
++        return delta
++
++
+ def bounded_jitter(latent, noise):
+-    """The same fixed kernel for training, sampling, fake pools and copies."""
++    """Historical fixed kernel, retained for explicit comparison diagnostics."""
+     delta = JITTER_STD * noise
+     fraction = (JITTER_CAP / delta.norm(dim=1).clamp_min(1e-20)).clamp_max(1.)
+     return delta * fraction[:, None]
+@@ -377,7 +483,7 @@
+ 
+ class FeatureCellBirthDeath(ParticleBirthDeath):
+     """Actual GANTrainer backend; keeps original FIFO and row-copy mechanics."""
+-    BACKEND_SCHEMA = 1
++    BACKEND_SCHEMA = 2
+ 
+     def __init__(self,trainer,seed):
+         super().__init__(trainer,seed)
+@@ -385,7 +491,12 @@
+         self.settings = dict(cells=recipe.birth_death_cells,rank=recipe.birth_death_metric_rank,
+                              chunk=recipe.birth_death_chunk,parent_policy=recipe.birth_death_parent_policy,
+                              lloyd=LLOYD_PASSES,power=POWER_PASSES,parent_reservoir=PARENT_RESERVOIR,
+-                             real_anchors=REAL_ANCHORS,parent_rank=PARENT_RANK_CAP,jitter_std=JITTER_STD,jitter_cap=JITTER_CAP)
++                             real_anchors=REAL_ANCHORS,parent_rank=PARENT_RANK_CAP,
++                             latent_kernel="bounded_local_dv12",latent_neighbors=PARENT_RESERVOIR,
++                             latent_rank=recipe.birth_death_metric_rank)
++        self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
++                                                   neighbors=PARENT_RESERVOIR, chunk=recipe.birth_death_chunk)
++        self._sampling_prior, self._sampling_controller = trainer.prior, trainer.controller
+         self.snapshot = None
+         self.snapshot_serial = 0
+         self.counters.update({key:0 for key in ("cell_evals","cell_discoveries","ordinary_moves","feature_rebuilds",
+@@ -394,17 +505,14 @@
+ 
+     @torch.no_grad()
+     def _jitter(self,trainer,latent,prior,noise):
+-        return bounded_jitter(latent,noise)
+-
+-    def perturb_latent(self,latent,stream,controller=None,record=False):
++        return self.latent_geometry.displacement(latent, prior, trainer.controller.latent_bandwidth, noise)
++
++    def perturb_latent(self,latent,stream,controller=None,record=False,*,prior=None):
++        controller = self._sampling_controller if controller is None else controller
++        prior = self._sampling_prior if prior is None else prior
+         noise = torch.randn(latent.shape,device=latent.device,dtype=latent.dtype,generator=stream)
+-        delta = bounded_jitter(latent,noise)
+-        if record and controller is not None and hasattr(controller,"latent_applications"):
+-            clipped = (JITTER_STD*noise).norm(dim=1)>JITTER_CAP
+-            controller.latent_applications.append(dict(radius_min=JITTER_CAP,radius_mean=JITTER_CAP,radius_max=JITTER_CAP,
+-                perturbation_rms=float(delta.detach().square().mean().sqrt()),clipped_fraction=float(clipped.float().mean()),
+-                backend="feature_cells"))
+-            controller.latent_applications = controller.latent_applications[-2:]
++        delta = self.latent_geometry.displacement(latent, prior, controller.latent_bandwidth, noise,
++                            record=controller.latent_applications if record else None)
+         return latent+delta
+ 
+     @torch.no_grad()
+@@ -573,4 +681,5 @@
+         self.snapshot_serial=state["snapshot_serial"]
+         self.snapshot=None
+         self.moved_rows=None
++        self.latent_geometry.clear()
+         self._heads=None
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -256,8 +256,9 @@
+     def _generate(self, model, latent, sigma, stream):
+         """``model(latent) + sigma * eps``; no draw when sigma == 0."""
+         if self.recipe.birth_death_backend == "feature_cells":
++            prior = self.ema_prior if model is self.ema_G else self.prior
+             latent = self.birth_death.perturb_latent(latent, stream, self.controller,
+-                                                   record=stream is self.noise_generator)
++                                                   record=stream is self.noise_generator, prior=prior)
+         elif self.controller is not None:
+             prior = self.ema_prior if model is self.ema_G else self.prior
+             latent = self.controller.perturb_latent(latent, stream, prior, record=stream is self.noise_generator)

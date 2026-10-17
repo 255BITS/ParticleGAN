@@ -1,0 +1,20 @@
+{
+  "GPU_operations": 0,
+  "additional_source_changes": [
+    "fresh helper preparation path",
+    "revision metadata",
+    "retain earlier small release-prep snapshots in archive"
+  ],
+  "corrected_source_sha256": "3615d1e71a0e21c0ca1e48798cab0599326642536998919e160754edb3a9ab71",
+  "gates_or_quality_criteria_changed": false,
+  "model_calls": 0,
+  "original_source_sha256": "828f3b8e349183f6916d2d6fef3791a16152f55c9e41051b5270518027dcb8e5",
+  "package_or_config_changed": false,
+  "retained_cancelled_receipt_sha256": "be44eb33088ab78d7ad28048e0ad1cb97d245f26aa4391e0a025a6919db32d01",
+  "retained_first_snapshot": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/final-v3-attempt1",
+  "retained_first_snapshot_sha256": "1ca721d00570736434d50bdd5dde54ae95cc50f949145e453cb834d8eed1e60a",
+  "runtime_validator_change": "Exact retained cancellation status comparison only",
+  "status": "PASS_METADATA_ONLY_SOURCE_EQUIVALENCE",
+  "suite_or_replay_checks_changed": false,
+  "tensor_loads": 0
+}

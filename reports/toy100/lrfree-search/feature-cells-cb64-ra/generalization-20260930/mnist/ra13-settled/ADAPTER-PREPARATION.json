@@ -1,0 +1,48 @@
+{
+  "status": "PREPARED_WAITING_FOR_ROOT_PACKAGE_REVIEW_FREEZE",
+  "source_contract": {
+    "original_image_scorer_ast_identical": true,
+    "original_toy_gate_ast_identical": true,
+    "original_models_metrics_byte_pinned": true,
+    "original_checkpoint_budget_preserved": true,
+    "original_primary_output_noise_explicit": true,
+    "extra_begin_step_calls": 0,
+    "transformed_runner_sha256": "71d96c56f77ffa070bee27e84c67eeb704376d25e0ff062dcdc24aebfa3bf6b1"
+  },
+  "shared_config": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA13-settled.json",
+  "proposed_commands": [
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/launch_first.py",
+      "--problem",
+      "toy"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/launch_first.py",
+      "--problem",
+      "mnist"
+    ]
+  ],
+  "training_updates": 0,
+  "cuda_contexts": 0,
+  "root_authorized_gpu": false,
+  "local_sources": {
+    "adapter.py": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+    "audit_source.py": "ec9f114d40c85fce203cda78d661886d8555374f976477b4251d5edf25f7ba5d",
+    "build_adapter.py": "52509a9f59d4783de2eb1666d595cee4da83d3bdb4143db051a192e0aa3c8de0",
+    "common.py": "8da895fad8baf14c5478dcc30d37b6b79e1087488528d87e81438b2556a0aa3c",
+    "contracts.py": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+    "freeze.py": "d70c0d264b4f5c2dff86e13dfbd35d98d13a1e6682b4821432e9b4444a7fb2d0",
+    "init_parity_cpu.py": "78ab91a2492bbdaae1ba06abde2ada6e8898f135b7cba3e8023c982458cbcc85",
+    "launch_first.py": "c1e38df1938a10fe786b0f1239acbc73d893886966b628502dfe1c70df520d57",
+    "preflight_cpu.py": "b8ff1b483514524f93abd8546dec5b66d5ae673d25cc911252d9f67adc9dd99a",
+    "replay.py": "8c8d84b649a80b945e67a1c835ef62d0ef3ab2b91550de933eb1f3b948cef93c",
+    "run_training.py": "71d96c56f77ffa070bee27e84c67eeb704376d25e0ff062dcdc24aebfa3bf6b1",
+    "summarize.py": "ff298f99f0e4e7365326a5cd4c049cc69b3aa4a8867a03f5022b04077759247f"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "9639b44a458f4d5756486be1f23f3c62047f0549f1259d047cbdf0f3ba816247",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "8b7cc59c674f79f39b1d66a330e14d9ae356953e396f253eee7a1faa5f92d4f9",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN-bcap-six/runs/forge/bcap-six-smoothing-v1/552b402395d740029c82a38fc206b187/evaluator/observed-samples.pt": "f43252d987adee74313f7d88c0520a2856064d72678dc7ef5eaf96d8cfc08a68"
+  },
+  "task_id": "gaussian1d_smoke"
+}

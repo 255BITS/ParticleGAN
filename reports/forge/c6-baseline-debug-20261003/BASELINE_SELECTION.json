@@ -1,0 +1,4543 @@
+{
+  "current_source_learning_qualification": "UNVERIFIED: selection is bound to original8021 source, not a new integrated develop cohort",
+  "decision": {
+    "baseline": "Retain original C6Atlas andE22 separately, shared lr.0053125/P1.5 and exact frozen per-host Recipes; prioritize broad own-state1250/1300 CDF failure for causal debug while retaining intensity passing control.",
+    "not_blockers": [
+      "ColdQ1SUPPORTED is a necessarycapacityresult, notlearning credit.",
+      "Historical19PASS and currentholdFAIL are both retained truth under different protocols; no package regression established."
+    ],
+    "parity_blockers": [
+      "A new integrated source must bind original8021 protected bytes, casehashes and effective Recipe. Matchingfamilyname orLR/Palone is insufficient.",
+      "Keep host-owned Dmultipliers1(image/native)/1.5(vector), prior_reg,betas,particles,batch,initializer,seedandselectedserving law.",
+      "Changing timeout/fullhorizon/cadence,noiseorforcedEMAcreatesnewcohort; no scientificunchangedrerun is authorized by this review.",
+      "Complete restore must preserve alloptimizer/controller/prior/outputnoise/serving/data/policy RNG/cursor state. ExistingH2metadata proves its specific old-state restore; futurediagnostic must bind it."
+    ],
+    "qualification": "No whole8configuration qualified; quality6UNKNOWN in both chosenfamilies; no adopteddefault orspeedwinner."
+  },
+  "default_adoption": false,
+  "git_commands": false,
+  "historical_atlas19": {
+    "configuration": {
+      "overrides": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_gate": true,
+        "row_evidence_null": "scaled",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "path_in_snapshot": "configs/100gaussians/atlas.json",
+      "sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    },
+    "declared_updates": 48800,
+    "old_broad_definition": {
+      "discriminator_card": null,
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "separated_broad",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Basic learnable multimodal distribution and within-mode spread.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ],
+        "name": "vector_two_broad",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      }
+    },
+    "old_intensity_host": {
+      "adam_betas": [
+        0.0,
+        0.99
+      ],
+      "architecture": "residual_upsample",
+      "batch_size": 32,
+      "ema_decay": 0.99,
+      "family": "image_conv_transpose",
+      "gan_mode": "rp",
+      "gradient_penalty": "b_cap",
+      "importance_reason": "Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.",
+      "kappa": 1.25,
+      "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+      "loss_type": "logistic",
+      "lr_d": 0.0017,
+      "lr_g": 0.0017,
+      "modes": 2,
+      "name": "img_intensity2",
+      "noise_std": 0.01,
+      "particles": 32,
+      "pattern": "intensity2",
+      "penalty_coeff": 3.0,
+      "prior_learnable": true,
+      "prior_lr_multiplier": 1.0,
+      "prior_weight": 0.05,
+      "runner": "image",
+      "split": "development",
+      "steps": 600,
+      "thresholds": {
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.25,
+        "minimum_stable_checks": 5,
+        "modes": 2,
+        "observations": 24,
+        "quality_rmse": 0.06
+      },
+      "tier": "ranking",
+      "width": 16,
+      "z_dim": 8
+    },
+    "original_passes": 19,
+    "original_positive_check": {
+      "bytes": 11165,
+      "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/continuous-baseline-20261003/ORIGINAL_POSITIVE_CHECK.json",
+      "sha256": "336b8a650cba93a9aae5db8161bd24219485c70669cbf3246fbce3f7e9483349"
+    },
+    "paid_seconds": 5210.63884702418,
+    "qualifies_current_eight": false,
+    "required_original_diagnostics": 19,
+    "scope": "Original 19 diagnostic questions stay PASS. Old fa2\u2192a0d6 intensity replay has byte-identical full checkpoint and all24 metrics excluding only wall time; current8 requirements remain separate.",
+    "source_commit": "a0d6d89fb470f551b3f790016a237c40a377e1e8"
+  },
+  "historical_comparability": [
+    {
+      "Atlas19": ".00425/P2/D1/prior_reg0/betas(0,.999), config hash a3ee5c67...; dimensions then bound by old frozen host",
+      "C6": ".0053125/P1.5 with hostD1 image/native andD1.5 vector; vector prior_reg.05/betas(0,.99)",
+      "effect": "Different training configuration; a failed later contrast is not a replay of Atlas19.",
+      "factor": "Shared nominal settings"
+    },
+    {
+      "Atlas19": "Intensity residual_upsample16; batch32/N32/z8; four images use frozen published profiles",
+      "C6": "Required intensity and bars are transpose12; batch32/N32/z8",
+      "effect": "Architecture changes representability and optimization; do not import old image passes.",
+      "factor": "Image host"
+    },
+    {
+      "Atlas19": "seed0, RA11 batch_feature_zero; shared globalCUDA image real+2 latent stream, indexed generation/strictstreams; vector latentseed1/penaltyseed2, CUDA data",
+      "C6": "seed24002; public deterministic_orthogonal G/D (prior seed+2 for images); independent policy/data streams, vector data onCPU, eval34002",
+      "effect": "No trajectory or backend parity claimed between these hosts. These are protocol bindings, not causal diagnoses.",
+      "factor": "Initialization and streams"
+    },
+    {
+      "Atlas19": "All32 prior rows enumerated once; image_prior_perturbFalse; recipe output noise enabled; direct trainer.G/prior and separateclean/EMAdiagnostics",
+      "C6": "1024 sampled publicserved draws; outputnoiseFalse but policy latent perturbation retained; selected fast/average policy; no separateforcedEMA panel",
+      "effect": "Different stochastic law and mass weighting. Direct trainer.G can already hold policy-applied served weights; not globally rawlive.",
+      "factor": "Image observer"
+    },
+    {
+      "Atlas19": "4096 original noisy draws from direct trainer.G/prior; separateclean andEMA; existing five broad gates",
+      "C6": "4096 publicselected served draws outputnoiseFalse +DV12; added analytic projectionKS<=.06 and minimum sample count",
+      "effect": "Outputnoiseoff does not imply clean unperturbed atoms; added CDF gate detects collapsed/biased density even with occupancy.",
+      "factor": "Vector observer"
+    },
+    {
+      "Atlas19": "Complete source schedule, at leastfive terminal passes (phase-owned rules for rings/moving)",
+      "C6": "OriginalAPI lastfive passes plus new firstfive-success window and at leastfive later passes; everylater primary observation mustpass",
+      "effect": "Old terminal pass is insufficient for current first-window/hold. C6broad1200PASS/holdINCOMPLETE; H2holdFAIL.",
+      "factor": "Persistence"
+    },
+    {
+      "Atlas19": "7000updates,34noisy checks,finalfive20k +independent100kaccuracy; separateclean/EMA diagnostics",
+      "C6": "7000updates,24postupdate20k primary checks +step0/mediaextras,lastfive bothcoverage/fidelity; noisyprimary, samepolicy outputnoiseoff diagnostic; noindependent100k orforcedEMA panel",
+      "effect": "Both evaluate100modes but different whole protocols. Static rotated25degree geometry differs from historical moving turns.",
+      "factor": "Native evaluation"
+    },
+    {
+      "Atlas19": "Currentreplaya0d6,RTXA6000 logicalcuda0/physicalGPU1,torch2.13+cu126,CPU1",
+      "C6": "8021,RTXA6000 logicalcuda0,torch2.13+cu126,CPU1; H2wrapper82c85 executesbound8021",
+      "effect": "All30packagebytes match acrossC6/a0d6/maintained. Equaldevicefamily alone doesnotestablish RNG/host/observer parity or a speedwinner.",
+      "factor": "Runtime/source"
+    }
+  ],
+  "hold_extensions": [
+    {
+      "appended_observations": [
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "projection_ks": 0.1058236784588924,
+          "step": 1250
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "projection_ks": 0.07763309513521596,
+          "step": 1300
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "projection_ks": 0.05125856533298834,
+          "step": 1350
+        }
+      ],
+      "checkpoint_sampler_parity_metadata": {
+        "completed_steps": 1200,
+        "evaluations": 1,
+        "new_scientific_observations": 0,
+        "passed": true,
+        "samples": 4096,
+        "seed": 34002
+      },
+      "clock": 1350,
+      "compound_hold": {
+        "first_confirmed_step": 1100,
+        "full_protocol_complete": true,
+        "hold_checks": 5,
+        "hold_passed": 3,
+        "new_hold_checks": 3,
+        "original_gate": "PASS",
+        "original_hold_checks": 2,
+        "original_study_gate": "INCOMPLETE",
+        "passed": false,
+        "required_hold_checks": 5,
+        "speed_eligible": false,
+        "status": "FAIL"
+      },
+      "cost": {
+        "charged_seconds": 15.290889646159485,
+        "paid_seconds": 15.290889646159485,
+        "reserved_seconds": 0.0
+      },
+      "evidence_scope": "Already-captured certified restore/array parity metadata is cited; this review did not deserialize any checkpoint, replay sampling or rescore.",
+      "family": "atlas",
+      "id": "c6-atlas-broad-hold-1200-to-1350",
+      "maintained_source": {
+        "commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+        "execution_digest": "429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760",
+        "manifest_sha256": "fc1b3613ab512f15360ce4b83f5e6ac3ba7d435f112c47e93cf5653ff313dc9b",
+        "protected_files_sha256": {
+          "reports/forge/continuous-baseline-20261003/run_hold_continuation.py": "adcfbd92b39e3affa2626965bf32101bd4ade8a0ad00c9a4e4bbd4a0df4a0b58"
+        },
+        "snapshot_file_count": 3534,
+        "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760"
+      },
+      "original_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "original_recipe_matches_selected": true,
+      "original_source": {
+        "commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "file_count": 148,
+        "files_sha256_digest": "676452cc8c0dd82c03000c1b494a1ccf3f9f0f4b479aa2a14faf535204b55598",
+        "full_manifest_location": "hash-bound original raw C6 receipt and maintained snapshot"
+      },
+      "protocol": {
+        "acquisition_cap_seconds": 180.0,
+        "evaluation_samples": 4096,
+        "evaluation_seed": 34002,
+        "export_grace_seconds": 60.0,
+        "initial_completed_updates": 1200,
+        "new_observation_steps": [
+          1250,
+          1300,
+          1350
+        ],
+        "new_updates": 150,
+        "total_execution_limit": 1350
+      },
+      "restore_metadata": {
+        "appended_update_limit": 150,
+        "complete_checkpoint_restore": true,
+        "only_external_cap_changed": true,
+        "original_completed_updates": 1200,
+        "recipe_schedule_changed": false
+      }
+    },
+    {
+      "appended_observations": [
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "projection_ks": 0.1058236784588924,
+          "step": 1250
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "projection_ks": 0.07763309513521596,
+          "step": 1300
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "projection_ks": 0.05125856533298834,
+          "step": 1350
+        }
+      ],
+      "checkpoint_sampler_parity_metadata": {
+        "completed_steps": 1200,
+        "evaluations": 1,
+        "new_scientific_observations": 0,
+        "passed": true,
+        "samples": 4096,
+        "seed": 34002
+      },
+      "clock": 1350,
+      "compound_hold": {
+        "first_confirmed_step": 1100,
+        "full_protocol_complete": true,
+        "hold_checks": 5,
+        "hold_passed": 3,
+        "new_hold_checks": 3,
+        "original_gate": "PASS",
+        "original_hold_checks": 2,
+        "original_study_gate": "INCOMPLETE",
+        "passed": false,
+        "required_hold_checks": 5,
+        "speed_eligible": false,
+        "status": "FAIL"
+      },
+      "cost": {
+        "charged_seconds": 15.893738066079095,
+        "paid_seconds": 15.893738066079095,
+        "reserved_seconds": 0.0
+      },
+      "evidence_scope": "Already-captured certified restore/array parity metadata is cited; this review did not deserialize any checkpoint, replay sampling or rescore.",
+      "family": "e22",
+      "id": "c6-e22-broad-hold-1200-to-1350",
+      "maintained_source": {
+        "commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+        "execution_digest": "429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760",
+        "manifest_sha256": "fc1b3613ab512f15360ce4b83f5e6ac3ba7d435f112c47e93cf5653ff313dc9b",
+        "protected_files_sha256": {
+          "reports/forge/continuous-baseline-20261003/run_hold_continuation.py": "adcfbd92b39e3affa2626965bf32101bd4ade8a0ad00c9a4e4bbd4a0df4a0b58"
+        },
+        "snapshot_file_count": 3534,
+        "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760"
+      },
+      "original_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "e22",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "original_recipe_matches_selected": true,
+      "original_source": {
+        "commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "file_count": 148,
+        "files_sha256_digest": "676452cc8c0dd82c03000c1b494a1ccf3f9f0f4b479aa2a14faf535204b55598",
+        "full_manifest_location": "hash-bound original raw C6 receipt and maintained snapshot"
+      },
+      "protocol": {
+        "acquisition_cap_seconds": 180.0,
+        "evaluation_samples": 4096,
+        "evaluation_seed": 34002,
+        "export_grace_seconds": 60.0,
+        "initial_completed_updates": 1200,
+        "new_observation_steps": [
+          1250,
+          1300,
+          1350
+        ],
+        "new_updates": 150,
+        "total_execution_limit": 1350
+      },
+      "restore_metadata": {
+        "appended_update_limit": 150,
+        "complete_checkpoint_restore": true,
+        "only_external_cap_changed": true,
+        "original_completed_updates": 1200,
+        "recipe_schedule_changed": false
+      }
+    }
+  ],
+  "inputs": {
+    "atlas19_and_h2": {
+      "bytes": 574945,
+      "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/continuous-baseline-20261003/results.json",
+      "sha256": "4cdbec6b54e31ecdaac5ee2cd887258004c5da7c9a7102261e1c1c8c3939b66a"
+    },
+    "atlas19_preparation": {
+      "bytes": 840303,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/.baseline-atlas19.atlas19-preparation.json",
+      "sha256": "e1f72c610c74d584de2053008463001c944bd47c0f1b3b6a9c6e7008c970df9b"
+    },
+    "atlas_c6_study": {
+      "bytes": 128013,
+      "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/study.json",
+      "sha256": "5e64e4885fb2d65b00940d728a37d1112d22b26e7bfdc6a17f214615bcb1bcae"
+    },
+    "atlas_h2_result": {
+      "bytes": 27347,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/result.json",
+      "sha256": "1844252366b6b5dfa65a382736572ef236448e9320446653443ac994f1d42cd3"
+    },
+    "critic-rate": {
+      "bytes": 83682,
+      "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/publication-v1/results.json",
+      "sha256": "b935f088d53dff90de31a9bec768e140a3505c0c03729cf5f3d814f9f993b35f"
+    },
+    "e22_c6_study": {
+      "bytes": 126380,
+      "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/study.json",
+      "sha256": "b45325d5c5db3effb958432fcbf648fc5327be93048e14859f131ef8509e4665"
+    },
+    "e22_h2_result": {
+      "bytes": 27332,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/result.json",
+      "sha256": "4c0d798b25208bf897dc0df3582ae2e96be4331e7ef965c721a85453cb8ad2b6"
+    },
+    "generator-half": {
+      "bytes": 92866,
+      "path": "/ml2/hypergan/forge-generator-step-20261003/publication-v1/results.json",
+      "sha256": "a9da2ae3af04d50873cc7f0199eedd34a0f2ba768efc86ada866a40d293c6c63"
+    },
+    "old_image_tasks": {
+      "bytes": 4527,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/atlas19-external/harness/tasks/image_task_specs.json",
+      "sha256": "60aff41072a8f88d3ca7fa63252af65aeec18e94f57600c7b3413f84139280b4"
+    },
+    "old_vector_tasks": {
+      "bytes": 14323,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/atlas19-external/harness/tasks/vector_task_specs.json",
+      "sha256": "c751c10571ba32403b1e048d167991da1b6a79c5786db7bf99f4e2675feb9cbd"
+    },
+    "policy-family-defaults-round1-cli-recovery-v2_combined": {
+      "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/current-policy-family-results.json",
+      "sha256": "62079914653b9c27efec277c2ce4a57c50b42c856bb25f827a46af16b1f3cd3f"
+    },
+    "policy-family-defaults-round2-v1_combined": {
+      "path": "/ml2/hypergan/forge-policy-family-round2-20261002/current-policy-family-results.json",
+      "sha256": "52b9b85f9c6e4139c6a51ad7dfa5641c241fa822ea2bd70877543616ebf8351c"
+    },
+    "policy-family-defaults-round3-v1_combined": {
+      "path": "/ml2/hypergan/forge-policy-family-round3-20261002/current-policy-family-results.json",
+      "sha256": "7b55b4aa8b60bffb0d213f5b5863711691ea27875b96ef546e0b87b295cdd916"
+    },
+    "policy-family-defaults-round4-prior-balance-v1_combined": {
+      "path": "/ml2/hypergan/forge-policy-family-round4-20261002/current-policy-family-results.json",
+      "sha256": "0f36a1dd85bde72220f3c89151cc9c73515d6c6b4d0a077eacf3fc4f5b10be62"
+    },
+    "primary_policy_board": {
+      "bytes": 921753,
+      "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/policy-family-inventory.json",
+      "sha256": "b36cf5d76adc736adc09184afef38d81b708313864e0e94c38a47a75ace004dc"
+    },
+    "prior_read_only_index": {
+      "bytes": 185197,
+      "path": "/ml2/hypergan/pg-shared-score-index-20261003/index.json",
+      "sha256": "d27fb286339ba876f6e64f9dd94891561cbec6fdc0ce5868ee5fcb1ce7e7bfb7"
+    }
+  },
+  "kind": "Derived read-only baseline selection for causal debugging, not a replacement leaderboard or certifier",
+  "metric_rescoring": false,
+  "model_or_array_loading": false,
+  "new_sampler_calls": 0,
+  "new_training_updates": 0,
+  "notes_frozen": true,
+  "observed_original_receipts": [
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 14.858818002045155,
+        "acquired_step": 475,
+        "hold_checks": 5,
+        "hold_passed": 5,
+        "reason": "first acquisition and uninterrupted hold",
+        "speed_eligible": false,
+        "status": "PASS"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 379481,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "9d22906492417a9bbb786221b8ef6c6db19cb51d2b67fa2a5f2ab3ff38e570a2"
+        },
+        "goal.gif": {
+          "bytes": 220376,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "ce19fb8b4c60976f22996ffc7ff82b5b66043093d6db759a111733682425fed3"
+        },
+        "observations.npz": {
+          "bytes": 6094402,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "45fa7538ffa883ba79cc41aa25d1906fc8985b4dfcd3de3aa839b137725afe97"
+        }
+      },
+      "case": "image-develop-img_intensity2-source-transpose12",
+      "family": "atlas",
+      "final_metrics": {
+        "completed_steps": 600.0,
+        "distribution_tv": 0.0576171875,
+        "finite_template_tv": 0.0576171875,
+        "hq": 0.998046875,
+        "mean_rmse": 0.01153051108121872,
+        "modes": 2.0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 1.0,
+        "rejected_mass": 0.001953125,
+        "samples": 1024.0,
+        "served_averaged": 0.0
+      },
+      "flags": [
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 0
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 25
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 50
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 75
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 100
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 125
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 150
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 175
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 200
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 225
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 250
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 275
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 300
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 325
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 350
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 375
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 400
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 425
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 450
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 475
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 500
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 525
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 550
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 575
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 600
+        }
+      ],
+      "original_gate": "PASS",
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "receipt": {
+        "bytes": 44622,
+        "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "4f2bbbcb1ced5a8f092670413729be6ef202b2b2060e0ac1c2443db882199a6d"
+      },
+      "recipe_group": "atlas-image",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "study_gate": "PASS"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 28.892384918872267,
+        "acquired_step": 1100,
+        "hold_checks": 2,
+        "hold_passed": 2,
+        "reason": "fewer than five post-confirmation hold observations",
+        "speed_eligible": false,
+        "status": "INCOMPLETE"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 450187,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/final-state.pt",
+          "sha256": "95401e3063a5f0bba29cae59835f50bd1e7f8387776944b09aceea5ba4738075"
+        },
+        "goal.gif": {
+          "bytes": 689019,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/goal.gif",
+          "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0"
+        },
+        "observations.npz": {
+          "bytes": 3070137,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/observations.npz",
+          "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a"
+        }
+      },
+      "case": "api-vector-two-broad",
+      "family": "atlas",
+      "final_metrics": {
+        "component_core_covariance_error": 0.10467602871358395,
+        "component_core_min_eigen_ratio": 0.8284796476364136,
+        "component_covariance_error": 0.10638302005827427,
+        "component_min_eigen_ratio": 0.8284796476364136,
+        "covariance_error": 0.03893938660621643,
+        "hq": 0.992431640625,
+        "mass_tv": 0.002685546875,
+        "max_component_spill": 0.010199125856161118,
+        "mean_error": 0.023431727662682533,
+        "min_mass_ratio": 0.99462890625,
+        "projection_ks": 0.05444427459011636,
+        "resolved_core_covariance_error": 0.10467602871358395,
+        "resolved_core_min_eigen_ratio": 0.8284796476364136,
+        "resolved_max_component_spill": 0.010199125856161118,
+        "sample_count": 4096,
+        "sw1_normalized": 0.020053852674527455,
+        "target_scale": 1.0555585622787476
+      },
+      "flags": [
+        {
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "component_min_eigen_ratio >= 0.15",
+            "hq >= 0.85",
+            "mass_tv <= 0.15",
+            "projection_ks <= 0.06",
+            "sw1_normalized <= 0.18"
+          ],
+          "passed": false,
+          "step": 0
+        },
+        {
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 50
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 100
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 150
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 200
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 250
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 300
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 350
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 400
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 450
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 500
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 550
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 600
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 650
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 700
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 750
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 800
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 850
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 900
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 950
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1000
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1050
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1100
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1150
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1200
+        }
+      ],
+      "original_gate": "PASS",
+      "protocol": {
+        "default_evaluation_samples": 4096,
+        "default_updates": 1200,
+        "evaluation_samples": 4096,
+        "evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 1200,
+        "wall_cap_seconds": 180.0
+      },
+      "receipt": {
+        "bytes": 75781,
+        "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/receipt.json",
+        "sha256": "e2bfc5fdc66ea2c32e77b22d16a00346a83852b3192d9f4b4ee2da2619da20a6"
+      },
+      "recipe_group": "atlas-vector",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "study_gate": "INCOMPLETE"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 16.116873980034143,
+        "acquired_step": 475,
+        "hold_checks": 5,
+        "hold_passed": 5,
+        "reason": "first acquisition and uninterrupted hold",
+        "speed_eligible": false,
+        "status": "PASS"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 378073,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "172849006f18d4a425ac6b4cfe8e103cc23df19f85235a4ada3a80308ecb346c"
+        },
+        "goal.gif": {
+          "bytes": 220376,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "ce19fb8b4c60976f22996ffc7ff82b5b66043093d6db759a111733682425fed3"
+        },
+        "observations.npz": {
+          "bytes": 6094402,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "45fa7538ffa883ba79cc41aa25d1906fc8985b4dfcd3de3aa839b137725afe97"
+        }
+      },
+      "case": "image-develop-img_intensity2-source-transpose12",
+      "family": "e22",
+      "final_metrics": {
+        "completed_steps": 600.0,
+        "distribution_tv": 0.0576171875,
+        "finite_template_tv": 0.0576171875,
+        "hq": 0.998046875,
+        "mean_rmse": 0.01153051108121872,
+        "modes": 2.0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 1.0,
+        "rejected_mass": 0.001953125,
+        "samples": 1024.0,
+        "served_averaged": 0.0
+      },
+      "flags": [
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 0
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 25
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 50
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 75
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 100
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 125
+        },
+        {
+          "failed_bounds": [
+            "distribution_tv",
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 150
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 175
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 200
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 225
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 250
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 275
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq",
+            "modes"
+          ],
+          "passed": false,
+          "step": 300
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 325
+        },
+        {
+          "failed_bounds": [
+            "finite_template_tv",
+            "hq"
+          ],
+          "passed": false,
+          "step": 350
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 375
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 400
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 425
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 450
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 475
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 500
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 525
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 550
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 575
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 600
+        }
+      ],
+      "original_gate": "PASS",
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "receipt": {
+        "bytes": 44416,
+        "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "19017a0c294d4e295de3bc2c4ff09c7a6ba46df347a7dd8bde959e59a76fdbf0"
+      },
+      "recipe_group": "e22-image",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "study_gate": "PASS"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 28.53343412396498,
+        "acquired_step": 1100,
+        "hold_checks": 2,
+        "hold_passed": 2,
+        "reason": "fewer than five post-confirmation hold observations",
+        "speed_eligible": false,
+        "status": "INCOMPLETE"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 448779,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/final-state.pt",
+          "sha256": "c68b983b89db276b3e1bc3352c2e176066d84e3d9eef54ac9c49c8201a1d89b8"
+        },
+        "goal.gif": {
+          "bytes": 689019,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/goal.gif",
+          "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0"
+        },
+        "observations.npz": {
+          "bytes": 3070137,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/observations.npz",
+          "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a"
+        }
+      },
+      "case": "api-vector-two-broad",
+      "family": "e22",
+      "final_metrics": {
+        "component_core_covariance_error": 0.10467602871358395,
+        "component_core_min_eigen_ratio": 0.8284796476364136,
+        "component_covariance_error": 0.10638302005827427,
+        "component_min_eigen_ratio": 0.8284796476364136,
+        "covariance_error": 0.03893938660621643,
+        "hq": 0.992431640625,
+        "mass_tv": 0.002685546875,
+        "max_component_spill": 0.010199125856161118,
+        "mean_error": 0.023431727662682533,
+        "min_mass_ratio": 0.99462890625,
+        "projection_ks": 0.05444427459011636,
+        "resolved_core_covariance_error": 0.10467602871358395,
+        "resolved_core_min_eigen_ratio": 0.8284796476364136,
+        "resolved_max_component_spill": 0.010199125856161118,
+        "sample_count": 4096,
+        "sw1_normalized": 0.020053852674527455,
+        "target_scale": 1.0555585622787476
+      },
+      "flags": [
+        {
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "component_min_eigen_ratio >= 0.15",
+            "hq >= 0.85",
+            "mass_tv <= 0.15",
+            "projection_ks <= 0.06",
+            "sw1_normalized <= 0.18"
+          ],
+          "passed": false,
+          "step": 0
+        },
+        {
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 50
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 100
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 150
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 200
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 250
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 300
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 350
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 400
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 450
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 500
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 550
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 600
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 650
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 700
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 750
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 800
+        },
+        {
+          "failed_bounds": [
+            "projection_ks <= 0.06"
+          ],
+          "passed": false,
+          "step": 850
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 900
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 950
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1000
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1050
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1100
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1150
+        },
+        {
+          "failed_bounds": [],
+          "passed": true,
+          "step": 1200
+        }
+      ],
+      "original_gate": "PASS",
+      "protocol": {
+        "default_evaluation_samples": 4096,
+        "default_updates": 1200,
+        "evaluation_samples": 4096,
+        "evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 1200,
+        "wall_cap_seconds": 180.0
+      },
+      "receipt": {
+        "bytes": 75571,
+        "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/receipt.json",
+        "sha256": "bf6005d2118b3f6994ca240e706a5e8a4e5ef94818f8b54ecc695a6fb00a03dd"
+      },
+      "recipe_group": "e22-vector",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "study_gate": "INCOMPLETE"
+    }
+  ],
+  "ordinary_mog_context": {
+    "interpretation": "OrdinaryKA2/K3P4/5Tier1 under declared learnedMoG/cleanlive hosts is a separate comparison; Tier2/3unknown and qualifiedtier0. It supplies no evidence for Atlas/E22 finiteparticle publicserved baseline or this hold extension.",
+    "required_denominators": {
+      "tier1": 5,
+      "tier2": 19,
+      "tier3": 2
+    },
+    "selected": [
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+        "family": "k3p",
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "fe683eea09623330b1e95774977e0ba58ce10f040a536849e0d0fe7361fda857"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.006375,
+          "prior_lr_mult": 1.0,
+          "total_steps": 7000
+        },
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "PASS": 4
+            },
+            "passed": 4,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+        "family": "ka2",
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "50787d2adfbc21ec74b5f79f2d85181c0d3bc96c21bcc08722be0395d2e913fe"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.006375,
+          "prior_lr_mult": 1.0,
+          "total_steps": 7000
+        },
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "PASS": 4
+            },
+            "passed": 4,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      }
+    ],
+    "source_metadata": {
+      "bytes": 1710051,
+      "path": "/ml2/hypergan/ParticleGAN-generator-step-20261003/reports/forge/technique-inventory.json",
+      "sha256": "01513191552cb57846582acd609a89571e130576b30ea509ce73ab213e4296bd"
+    }
+  },
+  "read_only_checks": {
+    "actual_receipt_recipe_matches": 4,
+    "c6_full_receipt_sources_verified": 148,
+    "full_planned_recipe_hash_matches": 16,
+    "new_scientific_execution": 0,
+    "package_unchanged_files": 30,
+    "raw_result_hash_matches": 2,
+    "selected_raw_artifact_hash_matches": 12
+  },
+  "recent_failed_contrasts": [
+    {
+      "counts": {
+        "capacity": {
+          "SUPPORTED": 16
+        },
+        "execution": {
+          "FAIL": 2,
+          "UNKNOWN": 14
+        },
+        "goal_gifs": 2,
+        "original_gates": {
+          "FAIL": 2,
+          "UNAVAILABLE": 14
+        },
+        "study_gates": {
+          "FAIL": 2,
+          "UNAVAILABLE": 14
+        }
+      },
+      "first_window_reasons": [
+        {
+          "reason": "no five-check acquisition window",
+          "status": "FAIL"
+        },
+        {
+          "reason": "no five-check acquisition window",
+          "status": "FAIL"
+        }
+      ],
+      "name": "critic-rate",
+      "recipe_overrides": {
+        "d_lr_mult": 2.25,
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.5
+      },
+      "same_as_selected_original_config": false,
+      "scope": "Two complete intensity scientificFAILs/14UNKNOWN; changing nominal rates does not measure actual displacement or retroactively fail the original C6 baseline.",
+      "source_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55"
+    },
+    {
+      "counts": {
+        "capacity": {
+          "SUPPORTED": 16
+        },
+        "execution": {
+          "FAIL": 2,
+          "UNKNOWN": 14
+        },
+        "goal_gifs": 2,
+        "original_gates": {
+          "FAIL": 2,
+          "UNAVAILABLE": 14
+        },
+        "study_gates": {
+          "FAIL": 2,
+          "UNAVAILABLE": 14
+        }
+      },
+      "first_window_reasons": [
+        {
+          "reason": "no five-check acquisition window",
+          "status": "FAIL"
+        },
+        {
+          "reason": "no five-check acquisition window",
+          "status": "FAIL"
+        }
+      ],
+      "name": "generator-half",
+      "recipe_overrides": {
+        "d_lr_mult": 4.5,
+        "lr": 0.00265625,
+        "prior_lr_mult": 3.0
+      },
+      "same_as_selected_original_config": false,
+      "scope": "Two complete intensity scientificFAILs/14UNKNOWN; changing nominal rates does not measure actual displacement or retroactively fail the original C6 baseline.",
+      "source_commit": "488b792e2fb875894f017cf7043420f2bb66190f"
+    }
+  ],
+  "recipe_metadata_method": {
+    "method": "AST literal parsing of frozen Recipe annotated defaults and get_recipe preset dictionaries; exact source to_dict omissions applied to scalar/list/dict metadata; no imports or constructors",
+    "observed_receipt_equalities": 4,
+    "planned_hash_matches": 16,
+    "source": {
+      "bytes": 53612,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source/particlegan/recipes.py",
+      "sha256": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+    },
+    "unexecuted_cases_stay_unknown": true
+  },
+  "remote_queries": false,
+  "required_domains": [
+    {
+      "architecture": "transpose",
+      "batch_size": 32,
+      "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+      "eval_samples": 1024,
+      "evaluation_seed": 34002,
+      "goal": "Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass.",
+      "host_recipe_options": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "sigma_rel": 0,
+        "z_dim": 8
+      },
+      "id": "image-develop-img_intensity2-source-transpose12",
+      "kind": "image",
+      "law": {},
+      "metric_evaluation_steps": [
+        0,
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "no_native_100k_holdout_in_this_API_protocol": false,
+      "primary_output_noise": false,
+      "sampling": {
+        "cohort": "New public-API variant; historical results are not imported",
+        "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+        "prior": "32 uniformly sampled trainable particle rows",
+        "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+        "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+      },
+      "source": {
+        "head": "664ce464e3add5c65d06c8b324c6f9892e644eec",
+        "path": "benchmarks/transfer_suite/image_tasks.py",
+        "sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58"
+      },
+      "spec": {},
+      "status_for_selected_each_family": "PASS",
+      "steps": 600,
+      "terminal_metric_checks": 5,
+      "thresholds": {
+        "distribution_tv_max": 0.1,
+        "finite_template_tv_max": 0.1,
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.25,
+        "minimum_stable_checks": 5,
+        "modes": 2,
+        "observations": 24,
+        "quality_rmse": 0.06
+      },
+      "training_seed": 24002,
+      "width": 12,
+      "z_dim": 8
+    },
+    {
+      "architecture": null,
+      "batch_size": 128,
+      "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+      "eval_samples": 4096,
+      "evaluation_seed": 34002,
+      "goal": "Basic learnable multimodal distribution and within-mode spread.",
+      "host_recipe_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "num_particles": 256,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "id": "api-vector-two-broad",
+      "kind": "vector",
+      "law": {
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ]
+      },
+      "metric_evaluation_steps": [
+        0,
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "no_native_100k_holdout_in_this_API_protocol": false,
+      "primary_output_noise": false,
+      "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "source": null,
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "separated_broad",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Basic learnable multimodal distribution and within-mode spread.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ],
+        "name": "vector_two_broad",
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "status_for_selected_each_family": "INCOMPLETE",
+      "steps": 1200,
+      "terminal_metric_checks": 5,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "training_seed": 24002,
+      "width": null,
+      "z_dim": 4
+    },
+    {
+      "architecture": null,
+      "batch_size": 2048,
+      "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+      "eval_samples": 20000,
+      "evaluation_seed": 34002,
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host_recipe_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "id": "api-grid100",
+      "kind": "native100",
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "grid100",
+        "sigma": 0.03
+      },
+      "metric_evaluation_steps": [
+        0,
+        292,
+        584,
+        875,
+        1167,
+        1459,
+        1750,
+        2042,
+        2334,
+        2625,
+        2917,
+        3209,
+        3500,
+        3792,
+        4084,
+        4375,
+        4667,
+        4959,
+        5250,
+        5542,
+        5834,
+        6125,
+        6417,
+        6709,
+        7000
+      ],
+      "no_native_100k_holdout_in_this_API_protocol": true,
+      "primary_output_noise": true,
+      "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "source": null,
+      "spec": {},
+      "status_for_selected_each_family": "UNKNOWN",
+      "steps": 7000,
+      "terminal_metric_checks": 5,
+      "thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "training_seed": 24002,
+      "width": null,
+      "z_dim": 2
+    },
+    {
+      "architecture": null,
+      "batch_size": 2048,
+      "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+      "eval_samples": 20000,
+      "evaluation_seed": 34002,
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host_recipe_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "id": "api-rotated100",
+      "kind": "native100",
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "rotated100",
+        "sigma": 0.03
+      },
+      "metric_evaluation_steps": [
+        0,
+        292,
+        584,
+        875,
+        1167,
+        1459,
+        1750,
+        2042,
+        2334,
+        2625,
+        2917,
+        3209,
+        3500,
+        3792,
+        4084,
+        4375,
+        4667,
+        4959,
+        5250,
+        5542,
+        5834,
+        6125,
+        6417,
+        6709,
+        7000
+      ],
+      "no_native_100k_holdout_in_this_API_protocol": true,
+      "primary_output_noise": true,
+      "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "source": null,
+      "spec": {},
+      "status_for_selected_each_family": "UNKNOWN",
+      "steps": 7000,
+      "terminal_metric_checks": 5,
+      "thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "training_seed": 24002,
+      "width": null,
+      "z_dim": 2
+    },
+    {
+      "architecture": null,
+      "batch_size": 2048,
+      "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+      "eval_samples": 20000,
+      "evaluation_seed": 34002,
+      "goal": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "host_recipe_options": {
+        "batch_size": 2048,
+        "num_particles": 20000,
+        "z_dim": 2
+      },
+      "id": "api-staggered100",
+      "kind": "native100",
+      "law": {
+        "kind": "equal100_gaussian",
+        "problem": "staggered100",
+        "sigma": 0.03
+      },
+      "metric_evaluation_steps": [
+        0,
+        292,
+        584,
+        875,
+        1167,
+        1459,
+        1750,
+        2042,
+        2334,
+        2625,
+        2917,
+        3209,
+        3500,
+        3792,
+        4084,
+        4375,
+        4667,
+        4959,
+        5250,
+        5542,
+        5834,
+        6125,
+        6417,
+        6709,
+        7000
+      ],
+      "no_native_100k_holdout_in_this_API_protocol": true,
+      "primary_output_noise": true,
+      "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+      "source": null,
+      "spec": {},
+      "status_for_selected_each_family": "UNKNOWN",
+      "steps": 7000,
+      "terminal_metric_checks": 5,
+      "thresholds": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "native": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        }
+      },
+      "training_seed": 24002,
+      "width": null,
+      "z_dim": 2
+    },
+    {
+      "architecture": null,
+      "batch_size": 128,
+      "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+      "eval_samples": 4096,
+      "evaluation_seed": 34002,
+      "goal": "Checks target occupancy including the rare 2% component, not uniformity.",
+      "host_recipe_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "num_particles": 256,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "id": "api-vector-unequal-mass",
+      "kind": "vector",
+      "law": {
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ]
+      },
+      "metric_evaluation_steps": [
+        0,
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "no_native_100k_holdout_in_this_API_protocol": false,
+      "primary_output_noise": false,
+      "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "source": null,
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "resolved_core_covariance_error",
+            "<=",
+            0.5
+          ],
+          [
+            "resolved_core_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "resolved_max_component_spill",
+            "<=",
+            0.05
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "status_for_selected_each_family": "UNKNOWN",
+      "steps": 1200,
+      "terminal_metric_checks": 5,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "resolved_core_covariance_error",
+          "<=",
+          0.5
+        ],
+        [
+          "resolved_core_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "resolved_max_component_spill",
+          "<=",
+          0.05
+        ],
+        [
+          "min_mass_ratio",
+          ">=",
+          0.25
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "training_seed": 24002,
+      "width": null,
+      "z_dim": 4
+    },
+    {
+      "architecture": null,
+      "batch_size": 128,
+      "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+      "eval_samples": 4096,
+      "evaluation_seed": 34002,
+      "goal": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+      "host_recipe_options": {
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "num_particles": 256,
+        "prior_reg": 0.05,
+        "z_dim": 4
+      },
+      "id": "api-vector-anisotropic",
+      "kind": "vector",
+      "law": {
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ]
+      },
+      "metric_evaluation_steps": [
+        0,
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750,
+        800,
+        850,
+        900,
+        950,
+        1000,
+        1050,
+        1100,
+        1150,
+        1200
+      ],
+      "no_native_100k_holdout_in_this_API_protocol": false,
+      "primary_output_noise": false,
+      "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+      "source": null,
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "resolved_core_covariance_error",
+            "<=",
+            0.5
+          ],
+          [
+            "resolved_core_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "resolved_max_component_spill",
+            "<=",
+            0.05
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "status_for_selected_each_family": "UNKNOWN",
+      "steps": 1200,
+      "terminal_metric_checks": 5,
+      "thresholds": [
+        [
+          "sw1_normalized",
+          "<=",
+          0.18
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "resolved_core_covariance_error",
+          "<=",
+          0.5
+        ],
+        [
+          "resolved_core_min_eigen_ratio",
+          ">=",
+          0.15
+        ],
+        [
+          "resolved_max_component_spill",
+          "<=",
+          0.05
+        ],
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "projection_ks",
+          "<=",
+          0.06
+        ]
+      ],
+      "training_seed": 24002,
+      "width": null,
+      "z_dim": 4
+    },
+    {
+      "architecture": "transpose",
+      "batch_size": 32,
+      "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+      "eval_samples": 1024,
+      "evaluation_seed": 34002,
+      "goal": "Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass.",
+      "host_recipe_options": {
+        "batch_size": 32,
+        "num_particles": 32,
+        "prior_kind": "particles",
+        "sigma_rel": 0,
+        "z_dim": 8
+      },
+      "id": "image-develop-img_bars4-source-transpose12",
+      "kind": "image",
+      "law": {},
+      "metric_evaluation_steps": [
+        0,
+        25,
+        50,
+        75,
+        100,
+        125,
+        150,
+        175,
+        200,
+        225,
+        250,
+        275,
+        300,
+        325,
+        350,
+        375,
+        400,
+        425,
+        450,
+        475,
+        500,
+        525,
+        550,
+        575,
+        600
+      ],
+      "no_native_100k_holdout_in_this_API_protocol": false,
+      "primary_output_noise": false,
+      "sampling": {
+        "cohort": "New public-API variant; historical results are not imported",
+        "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+        "prior": "32 uniformly sampled trainable particle rows",
+        "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+        "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+      },
+      "source": {
+        "head": "664ce464e3add5c65d06c8b324c6f9892e644eec",
+        "path": "benchmarks/transfer_suite/image_tasks.py",
+        "sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58"
+      },
+      "spec": {},
+      "status_for_selected_each_family": "UNKNOWN",
+      "steps": 600,
+      "terminal_metric_checks": 5,
+      "thresholds": {
+        "distribution_tv_max": 0.1,
+        "finite_template_tv_max": 0.1,
+        "hq_min": 0.9,
+        "min_mode_fraction": 0.125,
+        "minimum_stable_checks": 5,
+        "modes": 4,
+        "observations": 24,
+        "quality_rmse": 0.1
+      },
+      "training_seed": 24002,
+      "width": 12,
+      "z_dim": 8
+    }
+  ],
+  "resolved_recipe_groups": {
+    "atlas-image": {
+      "nominal_rates": {
+        "D": 0.0053125,
+        "G": 0.0053125,
+        "prior": 0.00796875
+      },
+      "rate_scope": "Nominal optimizer base rates only; endogenous stationarity/mobility/payoff/row/feature controls can change actual effective rates and displacement.",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 32,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 32,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 8
+      },
+      "sha256": "8569265702f682b316c09f15a2396b75e97e4381943cf2ba46e558ef8b069b0c"
+    },
+    "atlas-native100": {
+      "nominal_rates": {
+        "D": 0.0053125,
+        "G": 0.0053125,
+        "prior": 0.00796875
+      },
+      "rate_scope": "Nominal optimizer base rates only; endogenous stationarity/mobility/payoff/row/feature controls can change actual effective rates and displacement.",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "sha256": "802ef265b8abaa7146ef7051074982abc8f4ba284925793d9989dad0f5b8155b"
+    },
+    "atlas-vector": {
+      "nominal_rates": {
+        "D": 0.00796875,
+        "G": 0.0053125,
+        "prior": 0.00796875
+      },
+      "rate_scope": "Nominal optimizer base rates only; endogenous stationarity/mobility/payoff/row/feature controls can change actual effective rates and displacement.",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b"
+    },
+    "e22-image": {
+      "nominal_rates": {
+        "D": 0.0053125,
+        "G": 0.0053125,
+        "prior": 0.00796875
+      },
+      "rate_scope": "Nominal optimizer base rates only; endogenous stationarity/mobility/payoff/row/feature controls can change actual effective rates and displacement.",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 32,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "e22",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 32,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 8
+      },
+      "sha256": "576d2dbabf781a87782fa166044db8f9ac64866fefd937793466098b8adf42e2"
+    },
+    "e22-native100": {
+      "nominal_rates": {
+        "D": 0.0053125,
+        "G": 0.0053125,
+        "prior": 0.00796875
+      },
+      "rate_scope": "Nominal optimizer base rates only; endogenous stationarity/mobility/payoff/row/feature controls can change actual effective rates and displacement.",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "e22",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "sha256": "3cd8b3f0869a8a4b2a1795766301fbea34d43e95b5044441e5c1992151288dc6"
+    },
+    "e22-vector": {
+      "nominal_rates": {
+        "D": 0.00796875,
+        "G": 0.0053125,
+        "prior": 0.00796875
+      },
+      "rate_scope": "Nominal optimizer base rates only; endogenous stationarity/mobility/payoff/row/feature controls can change actual effective rates and displacement.",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "e22",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "sha256": "eafcb532a5ddea456c06e6b62766295b07ecc566818302e073fe8f5e1f033bb8"
+    }
+  },
+  "schema": "atlas_e22_exact_baseline_selection_review_v1",
+  "selected": [
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0",
+      "original_passes": 2,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "INCOMPLETE",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be",
+      "original_passes": 2,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "INCOMPLETE",
+      "study_passes": 1,
+      "unknown": 6
+    }
+  ],
+  "selection_rule": "Within each retained source/spec/runtime cohort keep whole-configuration denominators. For debug choose the common Atlas/E22 setting with the largest observed original PASS count; do not pool cases, confer current-source qualification or override the published board tie-break.",
+  "source_parity": {
+    "c6_complete_receipt_source_files_verified": 148,
+    "c6_study_source_files_verified_each": 66,
+    "copy_root": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source",
+    "critical_harness_function_AST_equalities": {
+      "benchmarks/toy_audit/api_family_search.py:acquisition_hold": true,
+      "benchmarks/toy_audit/api_family_search.py:host_recipe_options": true,
+      "benchmarks/toy_audit/api_family_search.py:resolved_recipe": true,
+      "benchmarks/toy_audit/api_run.py:render_gif": true,
+      "benchmarks/toy_audit/api_run.py:run_case": true
+    },
+    "critical_provider_files_unchanged": {
+      "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+      "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+      "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+      "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9"
+    },
+    "maintained_harness_differences": {
+      "api_family_search.py": "Maintained source closure, CPU1 runtime, dedicated shared PolicyCoordinator admission/accounting/reuse; host_recipe_options, resolved_recipe and acquisition_hold unchanged.",
+      "api_run.py": "Atomic JSON writing plus snapshot/collector source attribution; source-only diff shows run_case and render_gif/scientific math unchanged."
+    },
+    "scope": "This checks local retained/maintained bytes; it does not qualify a future checkout or prove complete Atlas/E22 algorithmic equivalence.",
+    "unchanged_package_files_c6_a0d6_maintained": {
+      "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+      "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+      "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+      "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+      "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+      "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    }
+  },
+  "speed_winner": null,
+  "whole_configuration_comparison": [
+    {
+      "cohort_id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "status": "FAIL",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057",
+      "original_passes": 0,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf",
+      "original_passes": 0,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "status": "FAIL",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--5d4d276493d67e29887fbfc3c98925b989e2c8c28ed32344c5a0588ddc02cf8c",
+      "original_passes": 0,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--65e42a03035ec9ef2bad19032ac8a0b849c81b24ef8f8cbf6476da1ae8c8ff4c",
+      "original_passes": 0,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--da75137238384f27a182b60f6232cd1900263fbf4a6875568c6f8cda4edc77bf",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.002125,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--916ab8dff81a16119a6bc772c47362b5637af746c063572c75a3945d6c467816",
+      "original_passes": 0,
+      "recipe_overrides": {
+        "lr": 0.002125,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--9723217ce64dfdcc88fb37aec35b3476562104f2bce63b25273d33e2098bf7bf",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--d04d2c7e0c56516cafca40ff4622c41986a3d2afb6d1546032c11d313837b691",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.00425,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--4a3ce5cf0e28c856de95243f2f8faaf2974269bc09bfdaabb2a3cf42875566db",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.002125,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--88a864cb691ec876eff8841c110860c62830ca6986ab986b2cd065c1d5e5d2d6",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.00425,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--ab19c4f54e43cf88ec26d5988012d01e23ae84d2f23c5454e1b53a82a61e0914",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.002125,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--cb221ca2bd300bbcc744ad7f03825740fb747beb5f1f1043f5ccc22acc11949e",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round3-v1--531021742ad2",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "status": "FAIL",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round3-v1--531021742ad2",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "status": "FAIL",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round3-v1--531021742ad2",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round3-v1--531021742ad2",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round3-v1--531021742ad2",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "status": "FAIL",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round3-v1--531021742ad2",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "required": 8,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "status": "FAIL",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round3-v1--531021742ad2",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round3-v1--531021742ad2",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "required": 8,
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "status": "INCOMPLETE",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "FAIL",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0",
+      "original_passes": 2,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "INCOMPLETE",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "atlas",
+      "fully_qualified": false,
+      "id": "atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514",
+      "original_passes": 0,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 0.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be",
+      "original_passes": 2,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "INCOMPLETE",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "FAIL",
+      "study_passes": 1,
+      "unknown": 6
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a",
+      "original_passes": 0,
+      "recipe_overrides": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 0.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    },
+    {
+      "cohort_id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "family": "e22",
+      "fully_qualified": false,
+      "id": "e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611",
+      "original_passes": 1,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.5
+      },
+      "required": 8,
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "status": "FAIL",
+      "study_passes": 0,
+      "unknown": 7
+    }
+  ]
+}

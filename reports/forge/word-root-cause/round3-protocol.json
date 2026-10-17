@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "word-root-cause-k3p-critic-scale-round3-v1",
+  "task": "five_word_joint_acquisition",
+  "base_commit": "153c0dd4fc9b725785e133722c9194d849324f10",
+  "purpose": "Independent bounded existing-parameter contrast after low-rate/noise/horizon and slower-prior diagnostics: tune positive K3P critic coefficient/cap strengths on the unchanged 170-dimensional word/latent joint host. Compare against the already-completed clean/full low-rate baseline without rerunning it. No penalty swap, new objective, seed study or qualification bypass credit.",
+  "qualification_input": false,
+  "protocol_seed": 0,
+  "device": "cuda:0",
+  "cpu_threads": 1,
+  "workers": 1,
+  "task_updates": 20001,
+  "observations": 24,
+  "terminal_passes": 5,
+  "run_timeout_seconds": 900,
+  "round_reserved_seconds": 2700,
+  "maximum_runs": 3,
+  "arms": [
+    {
+      "id": "k3p-coeff1-cap0p1",
+      "family": "k3p",
+      "base_candidate": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+      "base_candidate_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+      "recipe_delta": {
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0,
+        "input_noise_std": 0.0,
+        "output_noise_std": 0.0,
+        "network_lr_horizon_cap": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 0.1
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "k3p-coeff170-cap1",
+      "family": "k3p",
+      "base_candidate": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+      "base_candidate_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+      "recipe_delta": {
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0,
+        "input_noise_std": 0.0,
+        "output_noise_std": 0.0,
+        "network_lr_horizon_cap": null,
+        "reg_coeff": 170.0,
+        "reg_kappa": 1.0
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "k3p-coeff170-cap0p1",
+      "family": "k3p",
+      "base_candidate": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+      "base_candidate_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+      "recipe_delta": {
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0,
+        "input_noise_std": 0.0,
+        "output_noise_std": 0.0,
+        "network_lr_horizon_cap": null,
+        "reg_coeff": 170.0,
+        "reg_kappa": 0.1
+      },
+      "prior_reg": 0.0
+    }
+  ],
+  "changed_factors": [
+    "Only existing positive Recipe.reg_coeff and Recipe.reg_kappa vary versus the clean-full-low-rate comparator; all optimizer/noise/horizon settings remain fixed to that measured baseline. Full recipe_delta records ancestor differences."
+  ],
+  "held_fixed": [
+    "Five canonical words, six tokens, generator/encoder/joint-critic architecture",
+    "Task-owned nonstandardized learned five-row 2D particle cloud",
+    "Named initialization/data/prior/noise/evaluation streams and seed0",
+    "Existing penalty kernels, optimizer intervention flags, beta2/penalty schedules and auxiliary objectives of the parent",
+    "prior_reg stays0; no added spread, cycle, reconstruction, contrastive or stabilization objective",
+    "Clean/live evaluation, 1024samples, all24checks, five consecutive terminal passes"
+  ],
+  "predictions": [
+    {
+      "id": "k3p-existing-critic-scale",
+      "question": "Does strengthening the existing critic regularization at the declared joint-input scale restore five confident generated words and their paired inverse?",
+      "prediction": "At least one of the three frozen coefficient/cap arms passes five consecutive terminal checks of the unchanged full word gate.",
+      "falsifier": "All three frozen coefficient/cap arms fail the unchanged full gate.",
+      "limits": "The baseline coeff1/cap1 is already measured and is not rerun. Coeff170 cancels the pure-A division by joint dimension170, matching initial L2 unit magnitude only; later blended kernels and schedules remain different from R1/R2. Endpoint-gradient comparisons are correlations, not causal proof by themselves."
+    }
+  ],
+  "historical_receipts": [
+    "reports/forge/technique-receipts/51169502a0e64466b5005e7c870b5592.json",
+    "reports/forge/technique-receipts/8e0a35381d6543bd8a3ecb6056351c06.json",
+    "reports/forge/word-root-cause/receipts/k3p-clean-full-low-rate.json",
+    "reports/forge/word-root-cause/receipts/ka2-clean-full-low-rate.json",
+    "reports/forge/word-root-cause/receipts/k3p-slow-prior-0p25.json"
+  ],
+  "next_round_rule": "Stop after these three frozen arms. No automatic continuation, new methods, seed repeats, unbounded tuning or default adoption.",
+  "decision": "All three R1/R2 round1 arms passed and KA2 slow-prior .1/.25 passed. K3P slower-prior controls failed; saved-state analysis shows duplicate/missing generator basins rather than just inverse-code lag. Positive existing coefficient/cap settings test the observed critic-gradient-scale discrepancy without adding a technique.",
+  "comparators": {
+    "k3p": "reports/forge/word-root-cause/receipts/k3p-clean-full-low-rate.json"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "status": "PASS_PUBLIC_INIT_EXACT_ORIGINAL_PARITY",
+  "current_api_root": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay",
+  "fixtures": {
+    "toy": {
+      "actual_hashes": {
+        "initial_generator_sha256": "ce13940f85f08ec43a7da04fab97a7a216e45493f06b7033d599165faa5dbb0d",
+        "initial_critic_sha256": "4f122f3eb2483ce917016e8a6664d3e8e826e761adadc2711a1315336bbf25e5",
+        "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+      },
+      "expected_hashes": {
+        "initial_generator_sha256": "ce13940f85f08ec43a7da04fab97a7a216e45493f06b7033d599165faa5dbb0d",
+        "initial_critic_sha256": "4f122f3eb2483ce917016e8a6664d3e8e826e761adadc2711a1315336bbf25e5",
+        "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+      },
+      "exact_initial_hash_parity": true,
+      "public_init_rng_consumed": false
+    },
+    "mnist": {
+      "actual_hashes": {
+        "initial_generator_sha256": "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+        "initial_critic_sha256": "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+        "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+      },
+      "expected_hashes": {
+        "initial_generator_sha256": "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+        "initial_critic_sha256": "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+        "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286"
+      },
+      "exact_initial_hash_parity": true,
+      "public_init_rng_consumed": false
+    }
+  },
+  "training_updates": 0,
+  "policy_constructions": 0,
+  "model_forwards": 0,
+  "sampling_calls": 0,
+  "evaluator_calls": 0,
+  "cuda_context_initialized": false,
+  "source_file_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/INPUTS.json": "35eb2c2ed7d6c655e1e0e3e6f226f71dd7177a72cdb30d6d5e484831354b046b",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/models_metrics.py": "ae4113c9c7523e0ac17df05cb2c93731b96740c5594daa7085e4bf39ad9c7e47",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/init.py": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/particle_prior.py": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/init_parity_cpu.py": "df6ea9496b2bfbb4d848c39657af4d5adfe53c8e6ee045ac090bf930d2c55267"
+  }
+}

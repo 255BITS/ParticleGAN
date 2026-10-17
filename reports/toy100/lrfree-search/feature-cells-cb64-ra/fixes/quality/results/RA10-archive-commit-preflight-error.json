@@ -1,0 +1,13 @@
+{
+  "status": "FROZEN_REPORT_WHITESPACE_EXCEPTION_RECORDED",
+  "UTC": "2026-09-30T14:31:51.477616+00:00",
+  "initial_diff_check_returncode": 2,
+  "path": "integration/review/ra10-toy-artifact-audit/accepted-attempt1/REPORT.md",
+  "lines": [
+    19,
+    24
+  ],
+  "reason": "Two existing trailing spaces in an immutable audited report. Source and archive hashes match. Preserve evidence bytes; exclude only this report from style check alongside literal unified diff patch files.",
+  "frozen_report_sha256": "9143b05cb369dab3acc4a7645c0e388c9441481021258b4906dd36658667949d",
+  "candidate_sources_changed": false
+}

@@ -1,0 +1,37 @@
+{
+  "candidate_id": "gaussian-smoke-inventory-v3",
+  "candidate_revision": "b6785b969529198b81035767e4511390f4852a7bd76bb650e755d631e03ea666",
+  "changed_factors": [
+    "Separate Gaussian acquisition smoke from Tier 2 continuous stability.",
+    "New ordinary Gaussian task IDs bind a learned MoG sigma 0.1; archived Gaussian task identities retain their original priors and verdicts.",
+    "Repair the public adapter's execution allowance without changing its original schedule horizon.",
+    "Retain complete public model, prior, optimizer/controller and consumed-stream provenance separately from checkpoint prerequisite eligibility."
+  ],
+  "conclusion": "The exact 52-candidate CUDA roster admits 23 whole candidates. 0 pass all six required Tier 1 tasks and unlock Tier 2. All newly eligible Tier 2 jobs ran: True. 62 certified attempts cost 2897.205946 seconds; no scientific retries or cross-source task pooling. This source was interrupted; it retains missing checkpoint limitations and does not establish campaign completion. The linked readout preserves every candidate, refusal and measured scalar metric.",
+  "evidence_scope": "source_bound_campaign_readout",
+  "goal": "discriminator_stability",
+  "hypothesis": "A confirmed can-it-pass Gaussian Tier 1 gate can unlock ordinary Tier 2 while preserving the separate continuous-stability question.",
+  "lifecycle": "closed_partial_cut",
+  "mechanism_class": "task_gate_reform_and_source_repair",
+  "next_action": "Use the single regenerated technique inventory for whole-family selection; retain blocked and failed cells. No calibration, default promotion or new tuning follows from this readout.",
+  "provenance": {
+    "all_completed_tasks_have_certified_full_state": false,
+    "attempt_count": 62,
+    "readout_collector_sha256": "a7241e872f92d7dc09de8e60f21989ee3bd99cf712ebb0839409023966dabc14",
+    "scientific_retries": 0,
+    "seed": 0,
+    "source_commit": "a4caa21d1039684d23e57be8e133b51b3b120775",
+    "source_digest": "82e38ced4add542a5b6af78be26a5eff1974a380346f2c1e21a84abcc63da05e"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "gaussian-smoke-inventory-v3-readout",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/gaussian-smoke-inventory/interrupted-v3/readout.json",
+    "sha256": "87499be4d691ef9a79290e5bb57fef160720ea7adde749363273d7a77f1bb406"
+  },
+  "task_results": [],
+  "task_results_note": "Campaign-level recall only. Candidate-specific metrics stay in the linked whole-row readout with candidate/revision/source identity; no aggregate scientific task cell or synthetic family qualification."
+}

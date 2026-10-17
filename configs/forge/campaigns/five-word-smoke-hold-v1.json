@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "five-word-smoke-hold-v1",
+  "budget_seconds": 1200,
+  "candidate_budget_seconds": 1200,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Task-only selected BCAP verification: confirmed full20,001-update word smoke900s followed by own earliest confirmed checkpoint4,000-update hold300s if eligible. No full-tier qualification credit."
+}

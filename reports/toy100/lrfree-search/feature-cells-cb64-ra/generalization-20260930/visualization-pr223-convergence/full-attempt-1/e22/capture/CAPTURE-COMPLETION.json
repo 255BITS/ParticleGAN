@@ -1,0 +1,55 @@
+{
+  "all_observations_owned_state_exact": true,
+  "external_cursor_sha256": "36b5a604264600a878ef276abaf6f5a346137c435952b298c522730f53c730e9",
+  "frames": 153,
+  "interpolation": false,
+  "observed_states": 151,
+  "original_acceptance_draws": 20000,
+  "original_gate_seeds": [
+    1637,
+    1636
+  ],
+  "original_quality_status": "PASS",
+  "original_snapshot_seeds": [
+    77,
+    78
+  ],
+  "original_verdict": {
+    "passed_periods": 2,
+    "periods": [
+      {
+        "hq": 0.881,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "rotated100"
+      },
+      {
+        "hq": 0.8399,
+        "modes": 100,
+        "period_end": 1000,
+        "target_deg": 30,
+        "task": "rotated100"
+      },
+      {
+        "hq": 0.9473,
+        "modes": 100,
+        "period_end": 1500,
+        "target_deg": 60,
+        "task": "rotated100"
+      }
+    ],
+    "pre_turn_hq": 0.881,
+    "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+    "status": "PASS",
+    "task": "rotated100",
+    "turns": 2
+  },
+  "preservation_checks": 151,
+  "status": "COMPLETE",
+  "target_shift_events": 2,
+  "training_updates": 1500,
+  "variant": "E22",
+  "visualization_metrics_are_acceptance": false,
+  "visualization_points": 4096
+}

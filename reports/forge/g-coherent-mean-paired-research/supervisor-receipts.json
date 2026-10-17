@@ -1,0 +1,485 @@
+[
+  {
+    "attempt": "abb7de8a6ec64c21be831cad854c1ac2",
+    "exit_code": null,
+    "exit_evidence": "known supervisor absent with original terminal receipt",
+    "lease": {
+      "gpu": 0,
+      "inode": 3941,
+      "lease_gpu": 0,
+      "lease_slot": 0,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot0.lock",
+      "slot": 0
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed1-control/abb7de8a6ec64c21be831cad854c1ac2/run.log",
+    "recovered": true,
+    "study": "paired-g-coherence-seed1-control",
+    "supervisor_charge_scope": "recorded launch to terminal-publication UTC; process absence verified",
+    "supervisor_pid": 934809,
+    "supervisor_seconds": 33.759676933288574,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791949451.707
+  },
+  {
+    "attempt": "97e2bce2af7e4dda82587668b42db725",
+    "exit_code": null,
+    "exit_evidence": "known supervisor absent with original terminal receipt",
+    "lease": {
+      "gpu": 0,
+      "inode": 4005,
+      "lease_gpu": 0,
+      "lease_slot": 1,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot1.lock",
+      "slot": 1
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed1-candidate/97e2bce2af7e4dda82587668b42db725/run.log",
+    "recovered": true,
+    "study": "paired-g-coherence-seed1-candidate",
+    "supervisor_charge_scope": "recorded launch to terminal-publication UTC; process absence verified",
+    "supervisor_pid": 934856,
+    "supervisor_seconds": 37.75230383872986,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791949458.198
+  },
+  {
+    "attempt": "331cbd27cf8244fe98530f0316a3857a",
+    "exit_code": null,
+    "exit_evidence": "known supervisor absent with original terminal receipt",
+    "lease": {
+      "gpu": 0,
+      "inode": 846966,
+      "lease_gpu": 0,
+      "lease_slot": 2,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot2.lock",
+      "slot": 2
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed2-control/331cbd27cf8244fe98530f0316a3857a/run.log",
+    "recovered": true,
+    "study": "paired-g-coherence-seed2-control",
+    "supervisor_charge_scope": "recorded launch to terminal-publication UTC; process absence verified",
+    "supervisor_pid": 934983,
+    "supervisor_seconds": 34.51517915725708,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791949458.032
+  },
+  {
+    "attempt": "c853c76487cd416fb9054e5769f35ccb",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 846970,
+      "lease_gpu": 0,
+      "lease_slot": 6,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot6.lock",
+      "slot": 0
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed4-control/c853c76487cd416fb9054e5769f35ccb/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed4-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951782,
+    "supervisor_seconds": 52.44126719702035,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950232.5765517
+  },
+  {
+    "attempt": "a103b7af2a08422e982eef64baa1c68c",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 846968,
+      "lease_gpu": 0,
+      "lease_slot": 4,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot4.lock",
+      "slot": 4
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed3-control/a103b7af2a08422e982eef64baa1c68c/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed3-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951723,
+    "supervisor_seconds": 59.28991794999456,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950236.1404827
+  },
+  {
+    "attempt": "832064ebaad34d5380c377978515aa91",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 846972,
+      "lease_gpu": 0,
+      "lease_slot": 8,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot8.lock",
+      "slot": 2
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed5-control/832064ebaad34d5380c377978515aa91/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed5-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951836,
+    "supervisor_seconds": 56.102330185996834,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950238.9776006
+  },
+  {
+    "attempt": "5bd53d89fc7c4021b9be10a92ff2915f",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 846967,
+      "lease_gpu": 0,
+      "lease_slot": 3,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot3.lock",
+      "slot": 3
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed2-candidate/5bd53d89fc7c4021b9be10a92ff2915f/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed2-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951703,
+    "supervisor_seconds": 67.21691285897396,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950242.1136105
+  },
+  {
+    "attempt": "24e1fd9a5a324c9e8e87852a236e9725",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 846971,
+      "lease_gpu": 0,
+      "lease_slot": 7,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot7.lock",
+      "slot": 1
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed4-candidate/24e1fd9a5a324c9e8e87852a236e9725/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed4-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951816,
+    "supervisor_seconds": 60.74774162299582,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950242.3381364
+  },
+  {
+    "attempt": "f085afc822144439bfac5b65cb559768",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 4006,
+      "lease_gpu": 1,
+      "lease_slot": 0,
+      "path": "/tmp/ember-pg-20261012-slots/gpu1-slot0.lock",
+      "slot": 4
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed6-control/f085afc822144439bfac5b65cb559768/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed6-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951878,
+    "supervisor_seconds": 57.27086624299409,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950242.6461678
+  },
+  {
+    "attempt": "6dfbd6e78e7445399c754704415438cc",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 846969,
+      "lease_gpu": 0,
+      "lease_slot": 5,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot5.lock",
+      "slot": 5
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed3-candidate/6dfbd6e78e7445399c754704415438cc/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed3-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951745,
+    "supervisor_seconds": 71.86760626701289,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950250.3630092
+  },
+  {
+    "attempt": "ecb236a6c7114540b5c3c46cab6ca3db",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 846973,
+      "lease_gpu": 0,
+      "lease_slot": 9,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot9.lock",
+      "slot": 3
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed5-candidate/ecb236a6c7114540b5c3c46cab6ca3db/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed5-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951869,
+    "supervisor_seconds": 66.32470683101565,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950250.6007078
+  },
+  {
+    "attempt": "cff6f0553fac4a71ba94f65e437b72cc",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 4007,
+      "lease_gpu": 1,
+      "lease_slot": 1,
+      "path": "/tmp/ember-pg-20261012-slots/gpu1-slot1.lock",
+      "slot": 5
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed6-candidate/cff6f0553fac4a71ba94f65e437b72cc/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed6-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951887,
+    "supervisor_seconds": 64.6242779569875,
+    "task_id": "gaussian1d_smoke",
+    "terminal_unix": 1791950250.8454595
+  },
+  {
+    "attempt": "738de7060dce401796bd0f32f5e564fe",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 3941,
+      "lease_gpu": 0,
+      "lease_slot": 0,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot0.lock",
+      "slot": 0
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed1-control/738de7060dce401796bd0f32f5e564fe/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed1-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951605,
+    "supervisor_seconds": 248.5872319379996,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950417.355687
+  },
+  {
+    "attempt": "a2c715896e7b4972931bf7a22c34e155",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 846966,
+      "lease_gpu": 0,
+      "lease_slot": 2,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot2.lock",
+      "slot": 2
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed2-control/a2c715896e7b4972931bf7a22c34e155/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed2-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951665,
+    "supervisor_seconds": 257.290108857007,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950430.352386
+  },
+  {
+    "attempt": "49794de17e1f4b7b846b5d5e42c012b3",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 4005,
+      "lease_gpu": 0,
+      "lease_slot": 1,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot1.lock",
+      "slot": 1
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed1-candidate/49794de17e1f4b7b846b5d5e42c012b3/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed1-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 951642,
+    "supervisor_seconds": 281.946489998023,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950452.9874337
+  },
+  {
+    "attempt": "8f0b97b3b50c4d81b35385e7fc93a03e",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 846970,
+      "lease_gpu": 0,
+      "lease_slot": 6,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot6.lock",
+      "slot": 0
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed4-control/8f0b97b3b50c4d81b35385e7fc93a03e/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed4-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 953816,
+    "supervisor_seconds": 239.13055578398053,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950473.8581445
+  },
+  {
+    "attempt": "5f5fc269c42d496c8b2dd3cc3ca4df6c",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 846968,
+      "lease_gpu": 0,
+      "lease_slot": 4,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot4.lock",
+      "slot": 4
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed3-control/5f5fc269c42d496c8b2dd3cc3ca4df6c/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed3-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 953866,
+    "supervisor_seconds": 236.25382227700902,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950474.1960695
+  },
+  {
+    "attempt": "b51bcc33fa8f47739ad8180ad9147285",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 846972,
+      "lease_gpu": 0,
+      "lease_slot": 8,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot8.lock",
+      "slot": 2
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed5-control/b51bcc33fa8f47739ad8180ad9147285/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed5-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 953927,
+    "supervisor_seconds": 249.8184029069962,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950491.4815924
+  },
+  {
+    "attempt": "5bddfbc1b91348a39b322115c2cd0f79",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 846967,
+      "lease_gpu": 0,
+      "lease_slot": 3,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot3.lock",
+      "slot": 3
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed2-candidate/5bddfbc1b91348a39b322115c2cd0f79/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed2-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 954011,
+    "supervisor_seconds": 262.29517996899085,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950508.085811
+  },
+  {
+    "attempt": "f56a36e252bc4afe8d9e826772c17e29",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 4006,
+      "lease_gpu": 1,
+      "lease_slot": 0,
+      "path": "/tmp/ember-pg-20261012-slots/gpu1-slot0.lock",
+      "slot": 4
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed6-control/f56a36e252bc4afe8d9e826772c17e29/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed6-control",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 954090,
+    "supervisor_seconds": 258.7464619469829,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950508.5514467
+  },
+  {
+    "attempt": "8737957bf0f44fb89b33d8977f887e3a",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 0,
+      "inode": 846969,
+      "lease_gpu": 0,
+      "lease_slot": 5,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot5.lock",
+      "slot": 5
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed3-candidate/8737957bf0f44fb89b33d8977f887e3a/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed3-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 954192,
+    "supervisor_seconds": 253.30572502000723,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950508.9329844
+  },
+  {
+    "attempt": "426e6f4d226d449bba8051e22993dee0",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 846971,
+      "lease_gpu": 0,
+      "lease_slot": 7,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot7.lock",
+      "slot": 1
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed4-candidate/426e6f4d226d449bba8051e22993dee0/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed4-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 954067,
+    "supervisor_seconds": 283.631322508998,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950531.9786556
+  },
+  {
+    "attempt": "ad8314c6e0ae45398a3f73e371a9b473",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 846973,
+      "lease_gpu": 0,
+      "lease_slot": 9,
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot9.lock",
+      "slot": 3
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed5-candidate/ad8314c6e0ae45398a3f73e371a9b473/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed5-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 954216,
+    "supervisor_seconds": 273.96410418697633,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950532.45311
+  },
+  {
+    "attempt": "fbd44c1cac3d4d9fa236df053968af05",
+    "exit_code": 0,
+    "lease": {
+      "gpu": 1,
+      "inode": 4007,
+      "lease_gpu": 1,
+      "lease_slot": 1,
+      "path": "/tmp/ember-pg-20261012-slots/gpu1-slot1.lock",
+      "slot": 5
+    },
+    "log": "/ml2/codex-storage/future-workspaces/2026-10-12/task-6cb02f9f-bdb9-4a7c-8534-f3f3181152aa/paired-replication-20261014/queue/paired-g-coherence-seed6-candidate/fbd44c1cac3d4d9fa236df053968af05/run.log",
+    "recovered": false,
+    "study": "paired-g-coherence-seed6-candidate",
+    "supervisor_charge_scope": "Popen to observed process exit monotonic",
+    "supervisor_pid": 954259,
+    "supervisor_seconds": 273.05406974599464,
+    "task_id": "gaussian1d_stability",
+    "terminal_unix": 1791950532.8612392
+  }
+]

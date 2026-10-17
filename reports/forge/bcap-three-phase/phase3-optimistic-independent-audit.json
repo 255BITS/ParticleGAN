@@ -1,0 +1,769 @@
+{
+  "accounting": [
+    {
+      "campaign_accounting": {
+        "bcap-moonshot-optimistic-v1": {
+          "definition": {
+            "budget_seconds": 48000,
+            "candidate_budget_seconds": 24000,
+            "id": "bcap-moonshot-optimistic-v1"
+          },
+          "paused": false,
+          "reserved_seconds": 0.0,
+          "spent_seconds": 7947.115454701318
+        }
+      },
+      "executed_full_allowances_seconds": 49440,
+      "execution_retries": 2,
+      "paid_attempts": 32,
+      "pending_work": [],
+      "queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue",
+      "scope": "research_diagnostic",
+      "selected_paid_seconds": 7947.115454701318
+    }
+  ],
+  "actual_training_gifs": 30,
+  "authorized_execution_retries": [
+    {
+      "predecessor": "99cd2b12eb4a40a2b7804d8115d134ba",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+      "successor": "b3f715451602481094efcfafb66008a3"
+    },
+    {
+      "predecessor": "e939011f991640c3a7676abc9c595e41",
+      "reason": "User-authorized execution repair after computer reboot cleared documented severe host memory/I/O pressure; preserve predecessor, frozen source, recipe, protocol seed, original task allowance and campaign ceilings. No scientific quality failure is retried.",
+      "successor": "a381e8d7e57649a3a0f83e38641c41c6"
+    }
+  ],
+  "exact_chosen_baseline": true,
+  "optimizer_updates_added": 0,
+  "original_placement_counts": {
+    "tier1": 6,
+    "tier2": 10
+  },
+  "original_task_count": 16,
+  "outcomes": {
+    "baseline": {
+      "FAIL": 9,
+      "PASS": 7
+    },
+    "candidate": {
+      "BLOCKED": 2,
+      "FAIL": 11,
+      "PASS": 3
+    }
+  },
+  "own_checkpoint_producers": [
+    {
+      "history_reset": false,
+      "parent_attempt_id": "ad56692c15604de4bb53587de0d4ce13",
+      "parent_checkpoint_sha256": "d8d3d9a2f843c54f6e345e867bc54b067b37f1682ad1dd5bf9843f737e9fb271",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+      "parent_state_sha256": "b43667a202b109743169bd1bc89eff8002d6916318b99a0186763e1f6965dedd",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "baseline",
+      "scope": "research_diagnostic",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "b3f715451602481094efcfafb66008a3",
+      "parent_checkpoint_sha256": "cbe4fc817337c6caf0f740686b3cdf7d8795ea6afd6174f1ff7ac7bd0eb2cd6d",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+      "parent_state_sha256": "10d40e918d81abc67c3a6108615c8b25f44c3b8dee5e23c989724544c4bb0802",
+      "parent_task_id": "five_word_joint_smoke",
+      "prefix_steps": 834,
+      "restored_exactly": true,
+      "role": "baseline",
+      "scope": "research_diagnostic",
+      "task_id": "five_word_joint_hold"
+    }
+  ],
+  "paid_seconds": 7947.115454701318,
+  "protected_historical_files": 10,
+  "publication": "/home/martyn/dev/ParticleGAN-bcap-moonshot-optimistic/reports/forge/bcap-moonshot-optimistic",
+  "qualification_input": false,
+  "queue_jobs": 32,
+  "repository": "/home/martyn/dev/ParticleGAN-bcap-moonshot-optimistic",
+  "sampling_draws_added": 0,
+  "saved_state_comparisons": [
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 250,
+        "candidate": 250
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "90e88a8d4ae27b53f010a9df6d11333f0c0a0443dd4b442c80ac6445c09ec7e0",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "802d40761dbde34ac8bfe4a1e9fe0224bab629a1b510af52c931ea9a31d469fc",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/710c07a38dc9425081ac59725b9481fd/provenance",
+          "bytes": 66169,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a78bff1d7875f0f97a619ac22068f0e2a6a69c629eb429ae9694aa333e285cef",
+          "state_sha256": "ae3c3e069d6fdedc71c25b49612d977028ef53a24ddf88df6eb9253794733004"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "34fd613af975d8605acf4a2c8aeecb17a54e1d1fe095da6ddab057e2dcfc884d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/fe6e41653bd944beba7ee6c07ff12eda/provenance",
+          "bytes": 72909,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "4226baebfc775ae90c3498794e5983633f44322b844f22b8db8d83113c4294fe",
+          "state_sha256": "213314408f3dd9602ef34362b87f26373d0c01f047571f42f728339a81d3fc58"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "baseline"
+      ],
+      "completed_steps": {
+        "baseline": 4834
+      },
+      "consumed_non_eval_streams_and_batches_equal": false,
+      "consumption_comparison": "Only available complete states; missing arms/different completed budgets remain unverified",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "5576c99df126d5c816d8d3218b5206008be79a973115e00dc5901a09bde01eea",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/dc403bb329524b649b45d56c7b56e465/provenance",
+          "bytes": 841461,
+          "completed_steps": 4834,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d8fcadf05cc5f94d71f57d004de325f5e481291973bebad32951dfce29f1c0b8",
+          "state_sha256": "53b968e9f031f7ee491042c4896e6779569cf1c1dc85899c44b1b2c6c28605b1"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 20001,
+        "candidate": 20001
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "2b1fa42486c46e6c952b737d084571d34222af079ab6ee2d57804ee7c79dd262",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/b3f715451602481094efcfafb66008a3/provenance",
+          "bytes": 840501,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "be60e4337a9f6f452fba39c6c508c806ae5bed96f13d49e47907359cd69f02db",
+          "state_sha256": "d90ff21ffeb74fec79bf1a4768c930c60902051a520f6911f23240d12f6bc24d"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "62b5a53826010c1c9f20cbfa02b77bd5db109599e0684c9b359c70cdb305ad56",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/15de7403874c4d08b890bd8ce013d29a/provenance",
+          "bytes": 1394733,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8e327bdf83b854312519898e70734138fa522273f5a2247b566ff829ab0d1ddb",
+          "state_sha256": "762545465a4c677e2a42668c274813a005f181444ce9cc2581bd07e41811056a"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1000,
+        "candidate": 1000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "0e0283c91857ba7f66bb20444694157daf7a67363625cb09265c8e445c942947",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/ad56692c15604de4bb53587de0d4ce13/provenance",
+          "bytes": 64959,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "607f8cb3cff9f0d499e2403599fcbfb152bc4d2c4194ae8759865ce5f12662eb",
+          "state_sha256": "b43667a202b109743169bd1bc89eff8002d6916318b99a0186763e1f6965dedd"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "59120b1b55966ad088b3e71a3fcf0c391e8af172e0b653cd9e6cab68f3101832",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/0d9652d58f9046ce9a758095d24bc277/provenance",
+          "bytes": 81683,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "db08bb71f3e469b507223d4162cdd0d2daaf01f10306425d9a0e855c8c3fca66",
+          "state_sha256": "ef455d4ad57a7d8f1e8b382a3295816fb0890ae41e990ed7d48d872642d6e520"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "all_declared_arms_present": false,
+      "completed_roles": [
+        "baseline"
+      ],
+      "completed_steps": {
+        "baseline": 6000
+      },
+      "consumed_non_eval_streams_and_batches_equal": false,
+      "consumption_comparison": "Only available complete states; missing arms/different completed budgets remain unverified",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": false,
+      "named_training_bindings_equal": false,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "09dc86786a75e7b77a1dfc93e0c34f943195dc4347a8610fdde1e9bd0e3564ad",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/7cd89448d31d4bd59e5ae867ab2b823a/provenance",
+          "bytes": 65215,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c42528a3a9c3ce2149a0f90c231e27da0a695435973ea24d76a43d6bf6a44cee",
+          "state_sha256": "99954048a8d0ddfb60915359149d767e9415ec07b2ebff092c1a8c0555ade018"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "3c1a1449c4e61bf2f0923e4940d990d214679d30339d416e5c9d8c61ddc946c3",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/a381e8d7e57649a3a0f83e38641c41c6/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "761519c94eadb40fefb110dca9b0fab63c281898d27617d998d01364c39acbf3",
+          "state_sha256": "91d382f350af6b1bb732402e64f42d61cece3d087a2c242857f8b5a1e07e567b"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "9c69f88fc3f13110989842eef75f2483b79508992d015fe68cc8bb10e88e0bf3",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/931c0ef677494db2b39fea029b0f979b/provenance",
+          "bytes": 1228617,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f8a233c77398dbbce5ac611f8ee457f215c334d8957a112334a85e2a009acd38",
+          "state_sha256": "8e91287f6cc4f5c686daaa2206f42e961261e2613ce96d1b41f350d78e7ecd57"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "grid100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 400,
+        "candidate": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b77c158751c7bb55e14aaa7fb5e5a8e9d8f2a50e4cd9746c922a0d6975b1a50",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "33370662f02aeb8f51ca6bfcfe6574cfc823ca15ae96e2b83edc29866d75c51f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5a29230c9c504ac398e327555334e5d1/provenance",
+          "bytes": 164001,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "784e47a337666bfd13d11696ea695aad7cbb4bb6aa51c778e3b7a47b48da2dfb",
+          "state_sha256": "b69f36d1f87bfffaf531c45e168f0c94138820ab24b37aff0d86c6178af9df80"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "a3678e351fedbf0d692c7510c26b93564e08bf7e7962913a4d146309b885804d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/ac767e9ac39a4dab901575bac487a2c1/provenance",
+          "bytes": 220341,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "57d23fd0b4cbaf70f0638a58c7029d8ccf1fcaccf338201ae28116d744f5e73a",
+          "state_sha256": "e0a06bd282f196d85520b58a011b6f8860ec97ccef74d63cc71d5f17755d3fbb"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "residual_student"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1600,
+        "candidate": 1600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "1890ad7433961804f8309794225ebe95074ce1aac1931d193c4ba9ae1967b1fc",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "13bb97d6c6d48b12c77153f63ae2d713e2339a23dbe713fb72ea511d1ee1fb66",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/06fcb77f8ab54566a73d4ee4eab4cb54/provenance",
+          "bytes": 109945,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "567e93300bb676d4b1ed9a5eda0f9ae2eb72e39bd24e69a109e5fd44a388139f",
+          "state_sha256": "0543aa0891bfbeed0e1c4c78b9be370c7865ee323447590605191fb4953f10e4"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "a28f08797c8b05a2440dd5d05be6d3809d34843ced09abacf6727bd6e9e18830",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/e8080343e4f74876a749c4354fa16728/provenance",
+          "bytes": 157005,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1ac6bd95280d7426fade5c30a41aca2b30ca23364890dca7ab8dc49ed151f330",
+          "state_sha256": "a450bf6fa9340525c2fa75982619cd500a896900f5fbc0d0675bb9105aed4965"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "db9f42801c426a6dffb9fb8390223d17279f2a0af654583b13c3f1ee3574ec4e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/d91782c6aae249dfaf0f2635e723a021/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f7f18b217947ef62df2394e8d8ef9bafc7cf6eac03ca2c3da9ced80ee0342783",
+          "state_sha256": "a26d8046cc528834b1eac82e3698b99abcb2db299073068cff8f0f350fa26296"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "af502a6d29ce2c1b0fd71749dd023678922a9c18f239d0d9002bb1da1aa91f57",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/579e45af316f4f2d9008a56a0a8b6008/provenance",
+          "bytes": 1228617,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8a2f80fd9a8ef60348ad724e92f1267c4424aacd4deb18fc917f137e622ea1b4",
+          "state_sha256": "6d39f629fcab9a96c4fc8eb104692b7d46cf26d49a19c70b0a2db5dd252587e1"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "rotated100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "ef258a73a08c35557aab34e88876fa9d5a6a923ef25d2d49db33af8716fa922c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/c083b3d2018e45afaa30bd334e50ed98/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c42e4522abf2cfd1daf168f20d9bd82c10c0e88a71ad37f6a6cc302d36f565a3",
+          "state_sha256": "6a706cab946da75a24014d747df2f2d7635b32fec35695d02d1102d6fcfb05b6"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "dfaf677c7391892b5f9a9b9884485bae2100ff96cfed41a3e0bd79fcd753f5ba",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5231e094a7cf46488905edf12176a5af/provenance",
+          "bytes": 1228617,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1801a900619a38f6a48d3e9658cb14c2c16fc0a831dc306ba43896da0c5a155f",
+          "state_sha256": "c0a13e622e756db5966195ac9ee052ecf1cc1f7cb9cb59cf01fd82a1e6712ed7"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "staggered100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 400,
+        "candidate": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "eb561b73c7a7c49a48c2c956ad62d8aa31cb71c094b984689d6d94442e68aaf8",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "1916c6b0b8345b6bed6cb2016d320b7b96591860a165822017ee7b1c448462f2",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/10caa7a57fee4c9e8f076f8b974d42f0/provenance",
+          "bytes": 163809,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f7da90672c8469933df4850b6eeb3f9d0633866cf893d8f9cd1bc1c033fac1fc",
+          "state_sha256": "26ed95dd3f7f9f4a17bf584b88c5c86cc297515828c696d9409f082c7caa25a2"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "2a3c7751628db68bac3e9e8434beb70235e48a007af03bf39c5ffecf441aed87",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/3f83503bf4584ed7a2ecf96c986bfc81/provenance",
+          "bytes": 220085,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "9b96e16935a5d0de372e1c96dca7a3e8888acfc7b08d015522d7d7ac87912588",
+          "state_sha256": "275c94992edafd7db929d232fad50c6877851ab74adebf6cf2efbd1f079984c6"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "trajectory"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 80,
+        "candidate": 80
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "c7152b451861e1b2affe2a0ede54658a7ee5dc5c6c4907985151a2a7c7ef6632",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "d4a5595cfb19c8a22a4aa11f9f900c82d1423e8ecf4cae670af2afe612645593",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/79e9c9cf65764cdabfba6d2c24d29a34/provenance",
+          "bytes": 48175,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ae3c4a0bd6a10f3139cfd936f6e8bb716c2da4e17225cd226fdd380c9c0bb4af",
+          "state_sha256": "1872ff94a771b204a1467045d2cc1a7a96eb6f031158e02d5c6b004521a1e6c7"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "a253fffcbf9017bb945a795bb97fac7f00c34c37f92aa2372bde60f3f7960d6a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/0e3cd03bcfbf49e495a00a736cc6f496/provenance",
+          "bytes": 50701,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "3e487214d373eac9f5066fd2a03418e61307ad59e247e15477854ad252bce2e7",
+          "state_sha256": "58f007c30f38a9eec00f5818e7b7be4ffc08fa400279aa4b8159240651aeb44e"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "two_pole"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 200,
+        "candidate": 200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b0f2929edd45c75b970b5c8192a0310d100939fe797b8563cb6b47de53335cf",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "2ac434f9e764caf94448ed38af6608a6b74657751cfde476b13119b2cffe5f63",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/eea5fd6969d7441dbcd007abee76d1a5/provenance",
+          "bytes": 52039,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8ed68a81045024c117a5fdee790655a7e037612f61ec7c95151bbd145c6e12ba",
+          "state_sha256": "ba89e1473d359d80896b47e7353ae0a6d09ef5998ee9bca58b8201ee0210bcb4"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "5ef18f8ae98da4850fd275635c3c5d09af20461c388873a3d17ebf000964262e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/49703b54274d438f8f25f4a357d27a21/provenance",
+          "bytes": 55723,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "ccba0e10e8df165a71d1e200c2b1266dcd6d80e36c7fab565441bc97a2003ba0",
+          "state_sha256": "87d08b071d672731af00dbb624a9a2e12794c899c274a5057f410500f6a9e334"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "063873708b29f140e07f729b70cfee81877f3bf7b69b8de58914e82ae7d1ef60",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/d956d18dc19f4ecd8a14bace6fd6ffa9/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e2f7bd226a49e627e5e11601b23f3292cf32622c60302ec8c779827ee919cb69",
+          "state_sha256": "97db7b025c6964bfed7434c3d6c0910e1f4b93352f289377ed3aad4ceabab000"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "bd00b06ae050393b58639b24b61f885c2d6b10a0bf472e2ece97b12c067bab17",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/5a9ecda5b7ba4f18b70c1131c2ffafe9/provenance",
+          "bytes": 157005,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "584505bfaef37c4de57372b62c61bda11684ac786418b3f3637f1f088155509a",
+          "state_sha256": "e0d7967861872c001049d7718015b994b6d2fecb7d3da5304b1c13a2df05cbf7"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "a28330caa89f5a8b9c93132f8c4de1a206537af7445353968c1ccfea902ef81a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/9840fac6881a4ffaa1ee73f55d25827a/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8e0f57c5db34980a7035d424b77656bd4dc56c1f6b74134a47de6045fe2e4c17",
+          "state_sha256": "97ce167277677936fe9087dd16fc6a01049ea8932db20bd33dc98c0fc78ae382"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "fc11162ea6607f2201b206d949a0a78b13bf250f98c6a5760584d3f5b91f0ae7",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/d5f87d27c68c4cff9c7d4fb24d7fc2de/provenance",
+          "bytes": 157005,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "cc64c39d87920108093b7e404c8216176ac861b29366a778e76b9069c6097f02",
+          "state_sha256": "6ee1256d5a68b0d97afb8b4d0e72809b2ce81ea515f33067d8812d109d08d909"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "8a643e7c94fe7a28d719b90bac357bf4a76ee7ee47d7adc39bb4989e9b08e320",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/6c075bfdc9764da0ab1fc8b42f178509/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "eadfa38fd155dce7712a2f6e3c88fc8cd7ab52b1b9bdedb946254e3c3a576182",
+          "state_sha256": "765247582b49ea0074382caa64a89f7ced616a0cee7b91be32c4af86391796d4"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "75f20779c65503002027e39359009e279aed9c663680d2c2ca923aa5c9da9c5a",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/bcap-moonshot-optimistic-v1/31677609d5c647bd81b7d8343377d88f/provenance",
+          "bytes": 157005,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c0ca5f21d53734e4cf2ab3f81716cbe949fcf6eb4a81b92b890a565cf1e5efe5",
+          "state_sha256": "3ae82790fd38611d284105cb9672a6b43a9a18eeadd89832b11094caaf5c7dae"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "scope": "independent_phase3_saved_evidence_audit",
+  "source_checks": [
+    {
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/snapshots/84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6",
+      "frozen_snapshots": [
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/snapshots/84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6"
+      ],
+      "published_files_equal": true,
+      "scientific_files_verified": 1207,
+      "snapshot_manifests": [
+        {
+          "origin_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/moonshots/optimistic/phase3-queue/snapshots/84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6/forge-source.json",
+          "sha256": "d08a104dab741a1448b48b7f87ce09d43b702e34b82017a1aae3dffd7ef7790c"
+        }
+      ],
+      "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+      "source_commits": [
+        "5cb95a39f799a493efd731c0c49960b8f7fa8bb8"
+      ],
+      "source_digest": "84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6"
+    }
+  ],
+  "source_commit": "5cb95a39f799a493efd731c0c49960b8f7fa8bb8",
+  "source_digest": "84b179b329810589cf248c01ef7453523a0081819f1bfc14a910f0ba5b1ae0d6",
+  "status": "PASS",
+  "task_results_sha256": "e8936340b8f266d2c85027d81c9f37fd3e634333d381f79adfc8540627cc85c0",
+  "unavailable_complete_states": []
+}

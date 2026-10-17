@@ -1,0 +1,3016 @@
+{
+  "baseline": {
+    "candidate": {
+      "api_changes": [],
+      "api_version": "forge-api-v1",
+      "capabilities": [
+        "public_trainer",
+        "public_components",
+        "scalar_gan",
+        "mog_prior",
+        "learned_locations",
+        "uniform_masses",
+        "fixed_prior_width",
+        "checkpoint",
+        "named_rng",
+        "live_sampling"
+      ],
+      "changed_factors": [
+        "Fresh same-source exact protectedNS+coefficient1 transport baseline; no scientific formulation change"
+      ],
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "guide": "EXPERIMENTATION.md",
+      "id": "balanced-primary-fresh-control-v2",
+      "mechanism_class": "structural",
+      "mechanism_rationale": "Fresh matched control; historical35/72 result provides no new qualification.",
+      "parent": "balanced-primary-gaussian-v1",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "recipe_overrides": {
+        "constraint_geometry_mode": "direction_blend",
+        "d_lr_mult": 1.5,
+        "generator_gradient_response": "none",
+        "generator_idle_mode": "ema_confidence_lr",
+        "generator_idle_se": 1.0,
+        "kinetic_transport_protect_primary": true,
+        "kinetic_transport_weight": 1.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "recipe_preset": "bcap",
+      "requires_capabilities": [
+        "learned_locations",
+        "named_rng"
+      ],
+      "resolved_recipe": {
+        "adam_variant": "pytorch",
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constant_lr": false,
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "critic_step_mode": "none",
+        "d_betas": null,
+        "d_eps": null,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "generator_gradient_response": "none",
+        "generator_idle_mode": "ema_confidence_lr",
+        "generator_idle_se": 1.0,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_protect_primary": true,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_decay_rate": 0.96,
+        "lr_decay_staircase": false,
+        "lr_decay_steps": 50000,
+        "lr_floor": 1.0,
+        "lr_schedule": "cosine",
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_adam_lr": null,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_momentum": 0.0,
+        "optimizer_smoothing": 0.001,
+        "optimizer_svd_backend": "native",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_coulomb_confinement": 0.35,
+        "prior_coulomb_neighbors": 8,
+        "prior_coulomb_softening": 0.1,
+        "prior_eps": null,
+        "prior_kind": "mog",
+        "prior_l2": 0.0,
+        "prior_lr_mult": 2.5,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_sigreg_knots": 17,
+        "prior_sigreg_projections": 32,
+        "prior_update": "learned",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "schema_version": 3,
+      "trainer_family": "bcap-dualnorm"
+    },
+    "candidate_revision": "a7ebb3ecaac46cb51a1deb4ec08c32ff7639df339fe41b601fad467246fdb76a",
+    "study": {
+      "campaign": {
+        "budget_seconds": 720,
+        "candidate_budget_seconds": 720,
+        "id": "g-coherence-baseline-20261014"
+      },
+      "candidate": "balanced-primary-fresh-control-v2",
+      "competing_explanation": "Inactive source additions might change the historical baseline despite8-update tensor/RNG parity; the complete fresh control detects that without borrowing old passes.",
+      "control": {
+        "candidate_id": "balanced-primary-g-coherent-mean-v1",
+        "task_map": {}
+      },
+      "falsifier": {
+        "metric": "cdf_ks",
+        "op": "<=",
+        "phase": "final",
+        "task_id": "gaussian1d_stability",
+        "threshold": 0.05
+      },
+      "hypothesis": "Fresh off arm of the explicitly authorized same-source A/B comparison: preserve historical protectedNS+transport formulation, contrast the active G-only response under identical original task/protocol. This is a control, not a new baseline improvement.",
+      "id": "g-coherence-baseline-study",
+      "max_rounds": 1,
+      "prediction": {
+        "metric": "cdf_ks",
+        "op": ">",
+        "phase": "final",
+        "task_id": "gaussian1d_stability",
+        "threshold": 0.05
+      },
+      "prior_evidence": [
+        {
+          "identity": {
+            "qualification_input": false,
+            "qualification_reuse": false,
+            "schema": "forge_test_display_evidence_v1"
+          },
+          "path": "reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+          "selector": [],
+          "use": "motivation_only"
+        }
+      ],
+      "schema_version": 1,
+      "scope": {
+        "cuda_model": "NVIDIA RTX A6000",
+        "execution_backend": "cuda",
+        "through_tier": 2,
+        "view": "confidence-lr-gaussian-own-retention-v1"
+      },
+      "status": "ready",
+      "terminal_rules": {
+        "falsified": "stop_revision",
+        "incomplete": "request_missing_evidence",
+        "inconclusive": "stop_and_readout",
+        "prediction_observed": "review_saved_diagnostics"
+      }
+    },
+    "study_review": {
+      "actual_bindings": {
+        "candidate": {
+          "budget": {
+            "gaussian1d_smoke": {
+              "execution": {
+                "execution_resources": {
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 2048,
+                  "gpus": 1,
+                  "timeout_seconds": 120
+                },
+                "original_schedule_horizon": 1000,
+                "steps": 1000
+              },
+              "resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 120
+              }
+            },
+            "gaussian1d_stability": {
+              "execution": {
+                "execution_resources": {
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 2048,
+                  "gpus": 1,
+                  "timeout_seconds": 600
+                },
+                "original_schedule_horizon": 1000,
+                "preserve_prefix_steps": 1000,
+                "steps": 6000
+              },
+              "resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 600
+              }
+            }
+          },
+          "evaluation": {
+            "gaussian1d_smoke": {
+              "confirmation": "independent_draw_same_state",
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-smoke-v1",
+                "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_smoke",
+              "observations": 24,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+              },
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            },
+            "gaussian1d_stability": {
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-stability-v1",
+                "rationale": "Tier2continuous learning: all72stationary postsmoke checks, shifted five-terminal deadline reacquisition and all24remaining shifted holdchecks. Ownstate/nohistory reset."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_stability",
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "reacquisition_deadline": 5000,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "shift_checks": 48,
+              "shift_end": 6000,
+              "shift_hold_checks": 24,
+              "shift_mean": 3.0,
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+              },
+              "stationary_checks": 72,
+              "stationary_end": 4000,
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            }
+          },
+          "host": {
+            "gaussian1d_smoke": {
+              "adapter_parameters": {
+                "host": "gaussian1d_acquisition",
+                "prior_contract": "recipe_owned_v1",
+                "produces_state": true,
+                "protocol": "screening"
+              },
+              "bound": {
+                "definition": {
+                  "batch": 128,
+                  "covariances": [
+                    [
+                      [
+                        0.25
+                      ]
+                    ]
+                  ],
+                  "family": "gaussian1d_acquisition",
+                  "fourier": 2,
+                  "hidden": 32,
+                  "identifiable": true,
+                  "kind": "gaussian_mixture",
+                  "layers": 2,
+                  "masses": [
+                    1.0
+                  ],
+                  "means": [
+                    [
+                      2.0
+                    ]
+                  ],
+                  "particles": 256,
+                  "split": "development",
+                  "steps": 1000,
+                  "z_dim": 2
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+              }
+            },
+            "gaussian1d_stability": {
+              "adapter_parameters": {
+                "continuation_of": "gaussian1d_smoke",
+                "host": "gaussian1d_acquisition",
+                "prior_contract": "recipe_owned_v1",
+                "produces_state": true,
+                "protocol": "screening"
+              },
+              "bound": {
+                "definition": {
+                  "batch": 128,
+                  "covariances": [
+                    [
+                      [
+                        0.25
+                      ]
+                    ]
+                  ],
+                  "family": "gaussian1d_acquisition",
+                  "fourier": 2,
+                  "hidden": 32,
+                  "identifiable": true,
+                  "kind": "gaussian_mixture",
+                  "layers": 2,
+                  "masses": [
+                    1.0
+                  ],
+                  "means": [
+                    [
+                      2.0
+                    ]
+                  ],
+                  "particles": 256,
+                  "split": "development",
+                  "steps": 1000,
+                  "z_dim": 2
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+              }
+            }
+          },
+          "initialization": {
+            "gaussian1d_smoke": {
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            },
+            "gaussian1d_stability": {
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            }
+          },
+          "prior": {
+            "gaussian1d_smoke": {
+              "kind": "mog",
+              "sigma": 0.1,
+              "standardize": false
+            },
+            "gaussian1d_stability": {
+              "kind": "mog",
+              "sigma": 0.1,
+              "standardize": false
+            }
+          },
+          "recipe": {
+            "gaussian1d_smoke": {
+              "adam_variant": "pytorch",
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": false,
+              "batch_size": 128,
+              "beta2_anneal_end": 0.2,
+              "beta2_end": null,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "birth_death_backend": "knn",
+              "birth_death_cells": 64,
+              "birth_death_chunk": 256,
+              "birth_death_feature_scale": "none",
+              "birth_death_isolation": false,
+              "birth_death_metric_rank": 8,
+              "birth_death_parent_policy": "real_anchor",
+              "birth_death_space": "data",
+              "conditioning": "scalar",
+              "constant_lr": false,
+              "constraint_geometry_mode": "direction_blend",
+              "continuous_policy": null,
+              "critic_formulation": "bcap",
+              "critic_payoff_damping": true,
+              "critic_r1_real": true,
+              "critic_step_mode": "none",
+              "d_betas": null,
+              "d_eps": null,
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 0.0,
+              "d_lr_mult": 1.5,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": false,
+              "distance_reduction": "sum",
+              "ema_decay": 0.0,
+              "encoder_mode": "none",
+              "eps": 1e-08,
+              "generator_gradient_response": "none",
+              "generator_idle_mode": "ema_confidence_lr",
+              "generator_idle_se": 1.0,
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "kinetic_transport_local_weight": 0.0,
+              "kinetic_transport_projections": 32,
+              "kinetic_transport_protect_primary": true,
+              "kinetic_transport_weight": 1.0,
+              "latent_damping_max_rate": 0.0,
+              "loss": "non_saturating",
+              "loss_labels": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_control": "mobility",
+              "lr_decay_rate": 0.96,
+              "lr_decay_staircase": false,
+              "lr_decay_steps": 50000,
+              "lr_floor": 1.0,
+              "lr_schedule": "cosine",
+              "model": "gan",
+              "network_lr_floor": 1.0,
+              "network_lr_horizon_cap": null,
+              "num_classes": null,
+              "num_particles": 256,
+              "observation_sigma": 0.03,
+              "optimizer_adam_lr": null,
+              "optimizer_convolution": "per_offset",
+              "optimizer_family": "dualnorm",
+              "optimizer_momentum": 0.0,
+              "optimizer_smoothing": 0.001,
+              "optimizer_svd_backend": "native",
+              "output_noise_mode": "fixed",
+              "output_noise_std": 0.0,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": false,
+              "prior_betas": null,
+              "prior_coulomb_confinement": 0.35,
+              "prior_coulomb_neighbors": 8,
+              "prior_coulomb_softening": 0.1,
+              "prior_eps": null,
+              "prior_kind": "mog",
+              "prior_l2": 0.0,
+              "prior_lr_mult": 2.5,
+              "prior_proximal_strength": 0.0,
+              "prior_reg": 0.0,
+              "prior_reg_eps": 0.0001,
+              "prior_reg_target_std": 1.0,
+              "prior_regularizer": "vicreg",
+              "prior_sigreg_knots": 17,
+              "prior_sigreg_projections": 32,
+              "prior_update": "learned",
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 0.0,
+              "reg_arm": "b_cap",
+              "reg_coeff": 1.0,
+              "reg_coeff_anneal_end": 0.2,
+              "reg_coeff_end": null,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "reopen_anchor": "hold",
+              "reopen_guard": null,
+              "reopen_signal": "data",
+              "routing_temperature": 0.25,
+              "row_evidence_exclude": true,
+              "row_evidence_gate": false,
+              "row_evidence_hold": true,
+              "row_evidence_hot": true,
+              "row_evidence_null": "theory",
+              "row_policy": "independent",
+              "serve_average": 0.0,
+              "sigma_rel": 0.0,
+              "standardize": false,
+              "table_release_rule": "any",
+              "total_steps": 1000,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 2
+            },
+            "gaussian1d_stability": {
+              "adam_variant": "pytorch",
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": false,
+              "batch_size": 128,
+              "beta2_anneal_end": 0.2,
+              "beta2_end": null,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "birth_death_backend": "knn",
+              "birth_death_cells": 64,
+              "birth_death_chunk": 256,
+              "birth_death_feature_scale": "none",
+              "birth_death_isolation": false,
+              "birth_death_metric_rank": 8,
+              "birth_death_parent_policy": "real_anchor",
+              "birth_death_space": "data",
+              "conditioning": "scalar",
+              "constant_lr": false,
+              "constraint_geometry_mode": "direction_blend",
+              "continuous_policy": null,
+              "critic_formulation": "bcap",
+              "critic_payoff_damping": true,
+              "critic_r1_real": true,
+              "critic_step_mode": "none",
+              "d_betas": null,
+              "d_eps": null,
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 0.0,
+              "d_lr_mult": 1.5,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": false,
+              "distance_reduction": "sum",
+              "ema_decay": 0.0,
+              "encoder_mode": "none",
+              "eps": 1e-08,
+              "generator_gradient_response": "none",
+              "generator_idle_mode": "ema_confidence_lr",
+              "generator_idle_se": 1.0,
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "kinetic_transport_local_weight": 0.0,
+              "kinetic_transport_projections": 32,
+              "kinetic_transport_protect_primary": true,
+              "kinetic_transport_weight": 1.0,
+              "latent_damping_max_rate": 0.0,
+              "loss": "non_saturating",
+              "loss_labels": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_control": "mobility",
+              "lr_decay_rate": 0.96,
+              "lr_decay_staircase": false,
+              "lr_decay_steps": 50000,
+              "lr_floor": 1.0,
+              "lr_schedule": "cosine",
+              "model": "gan",
+              "network_lr_floor": 1.0,
+              "network_lr_horizon_cap": null,
+              "num_classes": null,
+              "num_particles": 256,
+              "observation_sigma": 0.03,
+              "optimizer_adam_lr": null,
+              "optimizer_convolution": "per_offset",
+              "optimizer_family": "dualnorm",
+              "optimizer_momentum": 0.0,
+              "optimizer_smoothing": 0.001,
+              "optimizer_svd_backend": "native",
+              "output_noise_mode": "fixed",
+              "output_noise_std": 0.0,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": false,
+              "prior_betas": null,
+              "prior_coulomb_confinement": 0.35,
+              "prior_coulomb_neighbors": 8,
+              "prior_coulomb_softening": 0.1,
+              "prior_eps": null,
+              "prior_kind": "mog",
+              "prior_l2": 0.0,
+              "prior_lr_mult": 2.5,
+              "prior_proximal_strength": 0.0,
+              "prior_reg": 0.0,
+              "prior_reg_eps": 0.0001,
+              "prior_reg_target_std": 1.0,
+              "prior_regularizer": "vicreg",
+              "prior_sigreg_knots": 17,
+              "prior_sigreg_projections": 32,
+              "prior_update": "learned",
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 0.0,
+              "reg_arm": "b_cap",
+              "reg_coeff": 1.0,
+              "reg_coeff_anneal_end": 0.2,
+              "reg_coeff_end": null,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "reopen_anchor": "hold",
+              "reopen_guard": null,
+              "reopen_signal": "data",
+              "routing_temperature": 0.25,
+              "row_evidence_exclude": true,
+              "row_evidence_gate": false,
+              "row_evidence_hold": true,
+              "row_evidence_hot": true,
+              "row_evidence_null": "theory",
+              "row_policy": "independent",
+              "serve_average": 0.0,
+              "sigma_rel": 0.0,
+              "standardize": false,
+              "table_release_rule": "any",
+              "total_steps": 1000,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 2
+            }
+          },
+          "sampling": {
+            "gaussian1d_smoke": {
+              "eval_output_noise": "clean",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live"
+            },
+            "gaussian1d_stability": {
+              "eval_output_noise": "clean",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live"
+            }
+          },
+          "task_identity": {
+            "gaussian1d_smoke": {
+              "evaluation": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+              "execution": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+            },
+            "gaussian1d_stability": {
+              "evaluation": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+              "execution": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+            }
+          }
+        },
+        "control": {
+          "budget": {
+            "gaussian1d_smoke": {
+              "execution": {
+                "execution_resources": {
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 2048,
+                  "gpus": 1,
+                  "timeout_seconds": 120
+                },
+                "original_schedule_horizon": 1000,
+                "steps": 1000
+              },
+              "resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 120
+              }
+            },
+            "gaussian1d_stability": {
+              "execution": {
+                "execution_resources": {
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 2048,
+                  "gpus": 1,
+                  "timeout_seconds": 600
+                },
+                "original_schedule_horizon": 1000,
+                "preserve_prefix_steps": 1000,
+                "steps": 6000
+              },
+              "resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 600
+              }
+            }
+          },
+          "evaluation": {
+            "gaussian1d_smoke": {
+              "confirmation": "independent_draw_same_state",
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-smoke-v1",
+                "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_smoke",
+              "observations": 24,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+              },
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            },
+            "gaussian1d_stability": {
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-stability-v1",
+                "rationale": "Tier2continuous learning: all72stationary postsmoke checks, shifted five-terminal deadline reacquisition and all24remaining shifted holdchecks. Ownstate/nohistory reset."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_stability",
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "reacquisition_deadline": 5000,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "shift_checks": 48,
+              "shift_end": 6000,
+              "shift_hold_checks": 24,
+              "shift_mean": 3.0,
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+              },
+              "stationary_checks": 72,
+              "stationary_end": 4000,
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            }
+          },
+          "host": {
+            "gaussian1d_smoke": {
+              "adapter_parameters": {
+                "host": "gaussian1d_acquisition",
+                "prior_contract": "recipe_owned_v1",
+                "produces_state": true,
+                "protocol": "screening"
+              },
+              "bound": {
+                "definition": {
+                  "batch": 128,
+                  "covariances": [
+                    [
+                      [
+                        0.25
+                      ]
+                    ]
+                  ],
+                  "family": "gaussian1d_acquisition",
+                  "fourier": 2,
+                  "hidden": 32,
+                  "identifiable": true,
+                  "kind": "gaussian_mixture",
+                  "layers": 2,
+                  "masses": [
+                    1.0
+                  ],
+                  "means": [
+                    [
+                      2.0
+                    ]
+                  ],
+                  "particles": 256,
+                  "split": "development",
+                  "steps": 1000,
+                  "z_dim": 2
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+              }
+            },
+            "gaussian1d_stability": {
+              "adapter_parameters": {
+                "continuation_of": "gaussian1d_smoke",
+                "host": "gaussian1d_acquisition",
+                "prior_contract": "recipe_owned_v1",
+                "produces_state": true,
+                "protocol": "screening"
+              },
+              "bound": {
+                "definition": {
+                  "batch": 128,
+                  "covariances": [
+                    [
+                      [
+                        0.25
+                      ]
+                    ]
+                  ],
+                  "family": "gaussian1d_acquisition",
+                  "fourier": 2,
+                  "hidden": 32,
+                  "identifiable": true,
+                  "kind": "gaussian_mixture",
+                  "layers": 2,
+                  "masses": [
+                    1.0
+                  ],
+                  "means": [
+                    [
+                      2.0
+                    ]
+                  ],
+                  "particles": 256,
+                  "split": "development",
+                  "steps": 1000,
+                  "z_dim": 2
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+              }
+            }
+          },
+          "initialization": {
+            "gaussian1d_smoke": {
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            },
+            "gaussian1d_stability": {
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            }
+          },
+          "prior": {
+            "gaussian1d_smoke": {
+              "kind": "mog",
+              "sigma": 0.1,
+              "standardize": false
+            },
+            "gaussian1d_stability": {
+              "kind": "mog",
+              "sigma": 0.1,
+              "standardize": false
+            }
+          },
+          "recipe": {
+            "gaussian1d_smoke": {
+              "adam_variant": "pytorch",
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": false,
+              "batch_size": 128,
+              "beta2_anneal_end": 0.2,
+              "beta2_end": null,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "birth_death_backend": "knn",
+              "birth_death_cells": 64,
+              "birth_death_chunk": 256,
+              "birth_death_feature_scale": "none",
+              "birth_death_isolation": false,
+              "birth_death_metric_rank": 8,
+              "birth_death_parent_policy": "real_anchor",
+              "birth_death_space": "data",
+              "conditioning": "scalar",
+              "constant_lr": false,
+              "constraint_geometry_mode": "direction_blend",
+              "continuous_policy": null,
+              "critic_formulation": "bcap",
+              "critic_payoff_damping": true,
+              "critic_r1_real": true,
+              "critic_step_mode": "none",
+              "d_betas": null,
+              "d_eps": null,
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 0.0,
+              "d_lr_mult": 1.5,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": false,
+              "distance_reduction": "sum",
+              "ema_decay": 0.0,
+              "encoder_mode": "none",
+              "eps": 1e-08,
+              "generator_gradient_response": "coherent_G_mean_v1",
+              "generator_idle_mode": "ema_confidence_lr",
+              "generator_idle_se": 1.0,
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "kinetic_transport_local_weight": 0.0,
+              "kinetic_transport_projections": 32,
+              "kinetic_transport_protect_primary": true,
+              "kinetic_transport_weight": 1.0,
+              "latent_damping_max_rate": 0.0,
+              "loss": "non_saturating",
+              "loss_labels": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_control": "mobility",
+              "lr_decay_rate": 0.96,
+              "lr_decay_staircase": false,
+              "lr_decay_steps": 50000,
+              "lr_floor": 1.0,
+              "lr_schedule": "cosine",
+              "model": "gan",
+              "network_lr_floor": 1.0,
+              "network_lr_horizon_cap": null,
+              "num_classes": null,
+              "num_particles": 256,
+              "observation_sigma": 0.03,
+              "optimizer_adam_lr": null,
+              "optimizer_convolution": "per_offset",
+              "optimizer_family": "dualnorm",
+              "optimizer_momentum": 0.0,
+              "optimizer_smoothing": 0.001,
+              "optimizer_svd_backend": "native",
+              "output_noise_mode": "fixed",
+              "output_noise_std": 0.0,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": false,
+              "prior_betas": null,
+              "prior_coulomb_confinement": 0.35,
+              "prior_coulomb_neighbors": 8,
+              "prior_coulomb_softening": 0.1,
+              "prior_eps": null,
+              "prior_kind": "mog",
+              "prior_l2": 0.0,
+              "prior_lr_mult": 2.5,
+              "prior_proximal_strength": 0.0,
+              "prior_reg": 0.0,
+              "prior_reg_eps": 0.0001,
+              "prior_reg_target_std": 1.0,
+              "prior_regularizer": "vicreg",
+              "prior_sigreg_knots": 17,
+              "prior_sigreg_projections": 32,
+              "prior_update": "learned",
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 0.0,
+              "reg_arm": "b_cap",
+              "reg_coeff": 1.0,
+              "reg_coeff_anneal_end": 0.2,
+              "reg_coeff_end": null,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "reopen_anchor": "hold",
+              "reopen_guard": null,
+              "reopen_signal": "data",
+              "routing_temperature": 0.25,
+              "row_evidence_exclude": true,
+              "row_evidence_gate": false,
+              "row_evidence_hold": true,
+              "row_evidence_hot": true,
+              "row_evidence_null": "theory",
+              "row_policy": "independent",
+              "serve_average": 0.0,
+              "sigma_rel": 0.0,
+              "standardize": false,
+              "table_release_rule": "any",
+              "total_steps": 1000,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 2
+            },
+            "gaussian1d_stability": {
+              "adam_variant": "pytorch",
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": false,
+              "batch_size": 128,
+              "beta2_anneal_end": 0.2,
+              "beta2_end": null,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "birth_death_backend": "knn",
+              "birth_death_cells": 64,
+              "birth_death_chunk": 256,
+              "birth_death_feature_scale": "none",
+              "birth_death_isolation": false,
+              "birth_death_metric_rank": 8,
+              "birth_death_parent_policy": "real_anchor",
+              "birth_death_space": "data",
+              "conditioning": "scalar",
+              "constant_lr": false,
+              "constraint_geometry_mode": "direction_blend",
+              "continuous_policy": null,
+              "critic_formulation": "bcap",
+              "critic_payoff_damping": true,
+              "critic_r1_real": true,
+              "critic_step_mode": "none",
+              "d_betas": null,
+              "d_eps": null,
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 0.0,
+              "d_lr_mult": 1.5,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": false,
+              "distance_reduction": "sum",
+              "ema_decay": 0.0,
+              "encoder_mode": "none",
+              "eps": 1e-08,
+              "generator_gradient_response": "coherent_G_mean_v1",
+              "generator_idle_mode": "ema_confidence_lr",
+              "generator_idle_se": 1.0,
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "kinetic_transport_local_weight": 0.0,
+              "kinetic_transport_projections": 32,
+              "kinetic_transport_protect_primary": true,
+              "kinetic_transport_weight": 1.0,
+              "latent_damping_max_rate": 0.0,
+              "loss": "non_saturating",
+              "loss_labels": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_control": "mobility",
+              "lr_decay_rate": 0.96,
+              "lr_decay_staircase": false,
+              "lr_decay_steps": 50000,
+              "lr_floor": 1.0,
+              "lr_schedule": "cosine",
+              "model": "gan",
+              "network_lr_floor": 1.0,
+              "network_lr_horizon_cap": null,
+              "num_classes": null,
+              "num_particles": 256,
+              "observation_sigma": 0.03,
+              "optimizer_adam_lr": null,
+              "optimizer_convolution": "per_offset",
+              "optimizer_family": "dualnorm",
+              "optimizer_momentum": 0.0,
+              "optimizer_smoothing": 0.001,
+              "optimizer_svd_backend": "native",
+              "output_noise_mode": "fixed",
+              "output_noise_std": 0.0,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": false,
+              "prior_betas": null,
+              "prior_coulomb_confinement": 0.35,
+              "prior_coulomb_neighbors": 8,
+              "prior_coulomb_softening": 0.1,
+              "prior_eps": null,
+              "prior_kind": "mog",
+              "prior_l2": 0.0,
+              "prior_lr_mult": 2.5,
+              "prior_proximal_strength": 0.0,
+              "prior_reg": 0.0,
+              "prior_reg_eps": 0.0001,
+              "prior_reg_target_std": 1.0,
+              "prior_regularizer": "vicreg",
+              "prior_sigreg_knots": 17,
+              "prior_sigreg_projections": 32,
+              "prior_update": "learned",
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 0.0,
+              "reg_arm": "b_cap",
+              "reg_coeff": 1.0,
+              "reg_coeff_anneal_end": 0.2,
+              "reg_coeff_end": null,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "reopen_anchor": "hold",
+              "reopen_guard": null,
+              "reopen_signal": "data",
+              "routing_temperature": 0.25,
+              "row_evidence_exclude": true,
+              "row_evidence_gate": false,
+              "row_evidence_hold": true,
+              "row_evidence_hot": true,
+              "row_evidence_null": "theory",
+              "row_policy": "independent",
+              "serve_average": 0.0,
+              "sigma_rel": 0.0,
+              "standardize": false,
+              "table_release_rule": "any",
+              "total_steps": 1000,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 2
+            }
+          },
+          "sampling": {
+            "gaussian1d_smoke": {
+              "eval_output_noise": "clean",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live"
+            },
+            "gaussian1d_stability": {
+              "eval_output_noise": "clean",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live"
+            }
+          },
+          "task_identity": {
+            "gaussian1d_smoke": {
+              "evaluation": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+              "execution": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+            },
+            "gaussian1d_stability": {
+              "evaluation": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+              "execution": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+            }
+          }
+        }
+      },
+      "blockers": [],
+      "causal_judgment": "requires_review",
+      "expected": {
+        "candidate_binding_sha256": "516cc8018ee0e2a4581a86f8334e95d1814e56b6a58b338a0593d7b8fc3b7563",
+        "control_binding_sha256": "3a1fa8a01b722bb97997aa858488eec77e06871de938594d43a782aaa201d707",
+        "execution_backend": "cuda",
+        "jobs_sha256": "6feca877f1776f075d01a83cafc88b1e2e4de7a3989a6d8b5b922446894a93b1",
+        "prior_evidence": [
+          {
+            "identity": {
+              "qualification_input": false,
+              "qualification_reuse": false,
+              "schema": "forge_test_display_evidence_v1"
+            },
+            "path": "reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+            "selector": [],
+            "sha256": "c6d10e4cc07a1b3fb00de5d88b8b0a1e1e992359983256f2907f25b336d0979c",
+            "use": "motivation_only"
+          }
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort_sha256": "13df7e57ad8e074517788d4f3903b6d4cf0500d010208c285f7e029183eea71c",
+        "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+        "substantive_delta": [
+          {
+            "after": "none",
+            "before": "coherent_G_mean_v1",
+            "path": [
+              "recipe",
+              "gaussian1d_smoke",
+              "generator_gradient_response"
+            ]
+          },
+          {
+            "after": "none",
+            "before": "coherent_G_mean_v1",
+            "path": [
+              "recipe",
+              "gaussian1d_stability",
+              "generator_gradient_response"
+            ]
+          }
+        ],
+        "task_ids": [
+          "gaussian1d_smoke",
+          "gaussian1d_stability"
+        ],
+        "task_map": {
+          "gaussian1d_smoke": "gaussian1d_smoke",
+          "gaussian1d_stability": "gaussian1d_stability"
+        }
+      },
+      "qualification_input": false,
+      "receipt": {
+        "binding_sha256": "516cc8018ee0e2a4581a86f8334e95d1814e56b6a58b338a0593d7b8fc3b7563",
+        "contract_sha256": "18a5ca9643929dbb82acaf6fec295c0154f274b49407d3b884fd2982dbaed00c",
+        "control_binding_sha256": "3a1fa8a01b722bb97997aa858488eec77e06871de938594d43a782aaa201d707",
+        "policy_fingerprint": "6de40cd08e7bbe24544552d4bab72ab94a6c1b0ad58ae682ca7b64b8520cfa7d",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "c3a8b89e341c4d5dbf3888ffb4498f0d5004723230fd6f11b82778a0d0a5201e"
+      },
+      "schema_version": 1,
+      "status": "READY"
+    },
+    "through_tier": 2,
+    "view": {
+      "assignments": [
+        {
+          "importance": "required",
+          "order": 0,
+          "qualification_tier": 1,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "importance": "required",
+          "order": 1,
+          "qualification_tier": 2,
+          "task": "gaussian1d_stability"
+        }
+      ],
+      "calibration": {
+        "status": "provisional"
+      },
+      "eligibility": {},
+      "goal": "confidence_lr_gaussian_own_retention",
+      "id": "confidence-lr-gaussian-own-retention-v1",
+      "policy_change_reason": "Fresh matched original Gaussian acquisition+own-retention comparison. Scoped original pair retains its registered request tiers1/2; current public discriminator_stability revision10 classifies retention asTier3. No historical receipt retiered or global qualification granted.",
+      "ranking": {
+        "compare_compatible_cohorts": true,
+        "cost_separate": true,
+        "policy": "qualified_tier_only_with_raw_metrics"
+      },
+      "revision": 1,
+      "schema_version": 1
+    }
+  },
+  "candidate": {
+    "candidate": {
+      "api_changes": [
+        "Opt-in generator_gradient_response mode; full checkpointed G gradient history; original-prior and default-off behavior retained."
+      ],
+      "api_version": "forge-api-v1",
+      "capabilities": [
+        "public_trainer",
+        "public_components",
+        "scalar_gan",
+        "mog_prior",
+        "learned_locations",
+        "uniform_masses",
+        "fixed_prior_width",
+        "checkpoint",
+        "named_rng",
+        "live_sampling"
+      ],
+      "changed_factors": [
+        "G-only EMA7/8 gradient mean before original normalized operator;G-only coherence LR with fixed1/effective-weight-count floor; prior current-gradient/critic-confidence law retained"
+      ],
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "guide": "EXPERIMENTATION.md",
+      "id": "balanced-primary-g-coherent-mean-v1",
+      "mechanism_class": "structural",
+      "mechanism_rationale": "Saved original-law8-panel/9&13-quadrature G-only directions passed; joint-response variants were rejected. Complete original acquisition and retention still unmeasured.",
+      "parent": "balanced-primary-gaussian-v1",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "recipe_overrides": {
+        "constraint_geometry_mode": "direction_blend",
+        "d_lr_mult": 1.5,
+        "generator_gradient_response": "coherent_G_mean_v1",
+        "generator_idle_mode": "ema_confidence_lr",
+        "generator_idle_se": 1.0,
+        "kinetic_transport_protect_primary": true,
+        "kinetic_transport_weight": 1.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 1.0,
+        "network_lr_floor": 1.0,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "prior_lr_mult": 2.5,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0
+      },
+      "recipe_preset": "bcap",
+      "requires_capabilities": [
+        "learned_locations",
+        "named_rng"
+      ],
+      "resolved_recipe": {
+        "adam_variant": "pytorch",
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constant_lr": false,
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "critic_step_mode": "none",
+        "d_betas": null,
+        "d_eps": null,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "generator_gradient_response": "coherent_G_mean_v1",
+        "generator_idle_mode": "ema_confidence_lr",
+        "generator_idle_se": 1.0,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_local_weight": 0.0,
+        "kinetic_transport_projections": 32,
+        "kinetic_transport_protect_primary": true,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "loss_labels": [
+          0.0,
+          1.0,
+          1.0
+        ],
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_decay_rate": 0.96,
+        "lr_decay_staircase": false,
+        "lr_decay_steps": 50000,
+        "lr_floor": 1.0,
+        "lr_schedule": "cosine",
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_adam_lr": null,
+        "optimizer_convolution": "per_offset",
+        "optimizer_family": "dualnorm",
+        "optimizer_momentum": 0.0,
+        "optimizer_smoothing": 0.001,
+        "optimizer_svd_backend": "native",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_coulomb_confinement": 0.35,
+        "prior_coulomb_neighbors": 8,
+        "prior_coulomb_softening": 0.1,
+        "prior_eps": null,
+        "prior_kind": "mog",
+        "prior_l2": 0.0,
+        "prior_lr_mult": 2.5,
+        "prior_proximal_strength": 0.0,
+        "prior_reg": 0.0,
+        "prior_reg_eps": 0.0001,
+        "prior_reg_target_std": 1.0,
+        "prior_regularizer": "vicreg",
+        "prior_sigreg_knots": 17,
+        "prior_sigreg_projections": 32,
+        "prior_update": "learned",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "schema_version": 3,
+      "trainer_family": "bcap-dualnorm"
+    },
+    "candidate_revision": "34ea8eebfd45a1b3fb18c6337a4eff7b2b0e1949204be350ecae7edf7cf007ed",
+    "study": {
+      "campaign": {
+        "budget_seconds": 720,
+        "candidate_budget_seconds": 720,
+        "id": "g-coherence-candidate-20261014"
+      },
+      "candidate": "balanced-primary-g-coherent-mean-v1",
+      "competing_explanation": "Finite-state history can lag under changing G/D geometry or leave sample noise; no analytical result implies original retention qualification.",
+      "control": {
+        "candidate_id": "balanced-primary-fresh-control-v2",
+        "task_map": {}
+      },
+      "falsifier": {
+        "metric": "cdf_ks",
+        "op": ">",
+        "phase": "final",
+        "task_id": "gaussian1d_stability",
+        "threshold": 0.05
+      },
+      "hypothesis": "Saved original-law8-panel/9&13-quadrature G-only directions passed; joint-response variants were rejected. Complete original acquisition and retention still unmeasured.",
+      "id": "g-coherence-candidate-study",
+      "max_rounds": 1,
+      "prediction": {
+        "metric": "cdf_ks",
+        "op": "<=",
+        "phase": "final",
+        "task_id": "gaussian1d_stability",
+        "threshold": 0.05
+      },
+      "prior_evidence": [
+        {
+          "identity": {
+            "qualification_input": false,
+            "qualification_reuse": false,
+            "schema": "forge_test_display_evidence_v1"
+          },
+          "path": "reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+          "selector": [],
+          "use": "motivation_only"
+        }
+      ],
+      "schema_version": 1,
+      "scope": {
+        "cuda_model": "NVIDIA RTX A6000",
+        "execution_backend": "cuda",
+        "through_tier": 2,
+        "view": "confidence-lr-gaussian-own-retention-v1"
+      },
+      "status": "ready",
+      "terminal_rules": {
+        "falsified": "stop_revision",
+        "incomplete": "request_missing_evidence",
+        "inconclusive": "stop_and_readout",
+        "prediction_observed": "review_saved_diagnostics"
+      }
+    },
+    "study_review": {
+      "actual_bindings": {
+        "candidate": {
+          "budget": {
+            "gaussian1d_smoke": {
+              "execution": {
+                "execution_resources": {
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 2048,
+                  "gpus": 1,
+                  "timeout_seconds": 120
+                },
+                "original_schedule_horizon": 1000,
+                "steps": 1000
+              },
+              "resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 120
+              }
+            },
+            "gaussian1d_stability": {
+              "execution": {
+                "execution_resources": {
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 2048,
+                  "gpus": 1,
+                  "timeout_seconds": 600
+                },
+                "original_schedule_horizon": 1000,
+                "preserve_prefix_steps": 1000,
+                "steps": 6000
+              },
+              "resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 600
+              }
+            }
+          },
+          "evaluation": {
+            "gaussian1d_smoke": {
+              "confirmation": "independent_draw_same_state",
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-smoke-v1",
+                "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_smoke",
+              "observations": 24,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+              },
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            },
+            "gaussian1d_stability": {
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-stability-v1",
+                "rationale": "Tier2continuous learning: all72stationary postsmoke checks, shifted five-terminal deadline reacquisition and all24remaining shifted holdchecks. Ownstate/nohistory reset."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_stability",
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "reacquisition_deadline": 5000,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "shift_checks": 48,
+              "shift_end": 6000,
+              "shift_hold_checks": 24,
+              "shift_mean": 3.0,
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+              },
+              "stationary_checks": 72,
+              "stationary_end": 4000,
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            }
+          },
+          "host": {
+            "gaussian1d_smoke": {
+              "adapter_parameters": {
+                "host": "gaussian1d_acquisition",
+                "prior_contract": "recipe_owned_v1",
+                "produces_state": true,
+                "protocol": "screening"
+              },
+              "bound": {
+                "definition": {
+                  "batch": 128,
+                  "covariances": [
+                    [
+                      [
+                        0.25
+                      ]
+                    ]
+                  ],
+                  "family": "gaussian1d_acquisition",
+                  "fourier": 2,
+                  "hidden": 32,
+                  "identifiable": true,
+                  "kind": "gaussian_mixture",
+                  "layers": 2,
+                  "masses": [
+                    1.0
+                  ],
+                  "means": [
+                    [
+                      2.0
+                    ]
+                  ],
+                  "particles": 256,
+                  "split": "development",
+                  "steps": 1000,
+                  "z_dim": 2
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+              }
+            },
+            "gaussian1d_stability": {
+              "adapter_parameters": {
+                "continuation_of": "gaussian1d_smoke",
+                "host": "gaussian1d_acquisition",
+                "prior_contract": "recipe_owned_v1",
+                "produces_state": true,
+                "protocol": "screening"
+              },
+              "bound": {
+                "definition": {
+                  "batch": 128,
+                  "covariances": [
+                    [
+                      [
+                        0.25
+                      ]
+                    ]
+                  ],
+                  "family": "gaussian1d_acquisition",
+                  "fourier": 2,
+                  "hidden": 32,
+                  "identifiable": true,
+                  "kind": "gaussian_mixture",
+                  "layers": 2,
+                  "masses": [
+                    1.0
+                  ],
+                  "means": [
+                    [
+                      2.0
+                    ]
+                  ],
+                  "particles": 256,
+                  "split": "development",
+                  "steps": 1000,
+                  "z_dim": 2
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+              }
+            }
+          },
+          "initialization": {
+            "gaussian1d_smoke": {
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            },
+            "gaussian1d_stability": {
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            }
+          },
+          "prior": {
+            "gaussian1d_smoke": {
+              "kind": "mog",
+              "sigma": 0.1,
+              "standardize": false
+            },
+            "gaussian1d_stability": {
+              "kind": "mog",
+              "sigma": 0.1,
+              "standardize": false
+            }
+          },
+          "recipe": {
+            "gaussian1d_smoke": {
+              "adam_variant": "pytorch",
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": false,
+              "batch_size": 128,
+              "beta2_anneal_end": 0.2,
+              "beta2_end": null,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "birth_death_backend": "knn",
+              "birth_death_cells": 64,
+              "birth_death_chunk": 256,
+              "birth_death_feature_scale": "none",
+              "birth_death_isolation": false,
+              "birth_death_metric_rank": 8,
+              "birth_death_parent_policy": "real_anchor",
+              "birth_death_space": "data",
+              "conditioning": "scalar",
+              "constant_lr": false,
+              "constraint_geometry_mode": "direction_blend",
+              "continuous_policy": null,
+              "critic_formulation": "bcap",
+              "critic_payoff_damping": true,
+              "critic_r1_real": true,
+              "critic_step_mode": "none",
+              "d_betas": null,
+              "d_eps": null,
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 0.0,
+              "d_lr_mult": 1.5,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": false,
+              "distance_reduction": "sum",
+              "ema_decay": 0.0,
+              "encoder_mode": "none",
+              "eps": 1e-08,
+              "generator_gradient_response": "coherent_G_mean_v1",
+              "generator_idle_mode": "ema_confidence_lr",
+              "generator_idle_se": 1.0,
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "kinetic_transport_local_weight": 0.0,
+              "kinetic_transport_projections": 32,
+              "kinetic_transport_protect_primary": true,
+              "kinetic_transport_weight": 1.0,
+              "latent_damping_max_rate": 0.0,
+              "loss": "non_saturating",
+              "loss_labels": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_control": "mobility",
+              "lr_decay_rate": 0.96,
+              "lr_decay_staircase": false,
+              "lr_decay_steps": 50000,
+              "lr_floor": 1.0,
+              "lr_schedule": "cosine",
+              "model": "gan",
+              "network_lr_floor": 1.0,
+              "network_lr_horizon_cap": null,
+              "num_classes": null,
+              "num_particles": 256,
+              "observation_sigma": 0.03,
+              "optimizer_adam_lr": null,
+              "optimizer_convolution": "per_offset",
+              "optimizer_family": "dualnorm",
+              "optimizer_momentum": 0.0,
+              "optimizer_smoothing": 0.001,
+              "optimizer_svd_backend": "native",
+              "output_noise_mode": "fixed",
+              "output_noise_std": 0.0,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": false,
+              "prior_betas": null,
+              "prior_coulomb_confinement": 0.35,
+              "prior_coulomb_neighbors": 8,
+              "prior_coulomb_softening": 0.1,
+              "prior_eps": null,
+              "prior_kind": "mog",
+              "prior_l2": 0.0,
+              "prior_lr_mult": 2.5,
+              "prior_proximal_strength": 0.0,
+              "prior_reg": 0.0,
+              "prior_reg_eps": 0.0001,
+              "prior_reg_target_std": 1.0,
+              "prior_regularizer": "vicreg",
+              "prior_sigreg_knots": 17,
+              "prior_sigreg_projections": 32,
+              "prior_update": "learned",
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 0.0,
+              "reg_arm": "b_cap",
+              "reg_coeff": 1.0,
+              "reg_coeff_anneal_end": 0.2,
+              "reg_coeff_end": null,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "reopen_anchor": "hold",
+              "reopen_guard": null,
+              "reopen_signal": "data",
+              "routing_temperature": 0.25,
+              "row_evidence_exclude": true,
+              "row_evidence_gate": false,
+              "row_evidence_hold": true,
+              "row_evidence_hot": true,
+              "row_evidence_null": "theory",
+              "row_policy": "independent",
+              "serve_average": 0.0,
+              "sigma_rel": 0.0,
+              "standardize": false,
+              "table_release_rule": "any",
+              "total_steps": 1000,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 2
+            },
+            "gaussian1d_stability": {
+              "adam_variant": "pytorch",
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": false,
+              "batch_size": 128,
+              "beta2_anneal_end": 0.2,
+              "beta2_end": null,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "birth_death_backend": "knn",
+              "birth_death_cells": 64,
+              "birth_death_chunk": 256,
+              "birth_death_feature_scale": "none",
+              "birth_death_isolation": false,
+              "birth_death_metric_rank": 8,
+              "birth_death_parent_policy": "real_anchor",
+              "birth_death_space": "data",
+              "conditioning": "scalar",
+              "constant_lr": false,
+              "constraint_geometry_mode": "direction_blend",
+              "continuous_policy": null,
+              "critic_formulation": "bcap",
+              "critic_payoff_damping": true,
+              "critic_r1_real": true,
+              "critic_step_mode": "none",
+              "d_betas": null,
+              "d_eps": null,
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 0.0,
+              "d_lr_mult": 1.5,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": false,
+              "distance_reduction": "sum",
+              "ema_decay": 0.0,
+              "encoder_mode": "none",
+              "eps": 1e-08,
+              "generator_gradient_response": "coherent_G_mean_v1",
+              "generator_idle_mode": "ema_confidence_lr",
+              "generator_idle_se": 1.0,
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "kinetic_transport_local_weight": 0.0,
+              "kinetic_transport_projections": 32,
+              "kinetic_transport_protect_primary": true,
+              "kinetic_transport_weight": 1.0,
+              "latent_damping_max_rate": 0.0,
+              "loss": "non_saturating",
+              "loss_labels": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_control": "mobility",
+              "lr_decay_rate": 0.96,
+              "lr_decay_staircase": false,
+              "lr_decay_steps": 50000,
+              "lr_floor": 1.0,
+              "lr_schedule": "cosine",
+              "model": "gan",
+              "network_lr_floor": 1.0,
+              "network_lr_horizon_cap": null,
+              "num_classes": null,
+              "num_particles": 256,
+              "observation_sigma": 0.03,
+              "optimizer_adam_lr": null,
+              "optimizer_convolution": "per_offset",
+              "optimizer_family": "dualnorm",
+              "optimizer_momentum": 0.0,
+              "optimizer_smoothing": 0.001,
+              "optimizer_svd_backend": "native",
+              "output_noise_mode": "fixed",
+              "output_noise_std": 0.0,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": false,
+              "prior_betas": null,
+              "prior_coulomb_confinement": 0.35,
+              "prior_coulomb_neighbors": 8,
+              "prior_coulomb_softening": 0.1,
+              "prior_eps": null,
+              "prior_kind": "mog",
+              "prior_l2": 0.0,
+              "prior_lr_mult": 2.5,
+              "prior_proximal_strength": 0.0,
+              "prior_reg": 0.0,
+              "prior_reg_eps": 0.0001,
+              "prior_reg_target_std": 1.0,
+              "prior_regularizer": "vicreg",
+              "prior_sigreg_knots": 17,
+              "prior_sigreg_projections": 32,
+              "prior_update": "learned",
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 0.0,
+              "reg_arm": "b_cap",
+              "reg_coeff": 1.0,
+              "reg_coeff_anneal_end": 0.2,
+              "reg_coeff_end": null,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "reopen_anchor": "hold",
+              "reopen_guard": null,
+              "reopen_signal": "data",
+              "routing_temperature": 0.25,
+              "row_evidence_exclude": true,
+              "row_evidence_gate": false,
+              "row_evidence_hold": true,
+              "row_evidence_hot": true,
+              "row_evidence_null": "theory",
+              "row_policy": "independent",
+              "serve_average": 0.0,
+              "sigma_rel": 0.0,
+              "standardize": false,
+              "table_release_rule": "any",
+              "total_steps": 1000,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 2
+            }
+          },
+          "sampling": {
+            "gaussian1d_smoke": {
+              "eval_output_noise": "clean",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live"
+            },
+            "gaussian1d_stability": {
+              "eval_output_noise": "clean",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live"
+            }
+          },
+          "task_identity": {
+            "gaussian1d_smoke": {
+              "evaluation": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+              "execution": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+            },
+            "gaussian1d_stability": {
+              "evaluation": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+              "execution": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+            }
+          }
+        },
+        "control": {
+          "budget": {
+            "gaussian1d_smoke": {
+              "execution": {
+                "execution_resources": {
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 2048,
+                  "gpus": 1,
+                  "timeout_seconds": 120
+                },
+                "original_schedule_horizon": 1000,
+                "steps": 1000
+              },
+              "resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 120
+              }
+            },
+            "gaussian1d_stability": {
+              "execution": {
+                "execution_resources": {
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 2048,
+                  "gpus": 1,
+                  "timeout_seconds": 600
+                },
+                "original_schedule_horizon": 1000,
+                "preserve_prefix_steps": 1000,
+                "steps": 6000
+              },
+              "resources": {
+                "cpu_threads": 1,
+                "gpu_memory_mb": 2048,
+                "gpus": 1,
+                "timeout_seconds": 600
+              }
+            }
+          },
+          "evaluation": {
+            "gaussian1d_smoke": {
+              "confirmation": "independent_draw_same_state",
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-smoke-v1",
+                "rationale": "Can-it-pass acquisition smoke: any scheduled full pass plus independent draw at the same state; all1000updates and24paired observations complete."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_smoke",
+              "observations": 24,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+              },
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            },
+            "gaussian1d_stability": {
+              "eval_output_noise": "clean",
+              "eval_samples": 4096,
+              "evaluator": "experiments.forge.gaussian_tasks:grade",
+              "gate_policy": {
+                "finite_atom_exemptions": false,
+                "id": "gaussian1d-stability-v1",
+                "rationale": "Tier2continuous learning: all72stationary postsmoke checks, shifted five-terminal deadline reacquisition and all24remaining shifted holdchecks. Ownstate/nohistory reset."
+              },
+              "guards": {
+                "finite_state": true,
+                "mechanism_exercised": true,
+                "optimizer_roles": [
+                  "generator",
+                  "discriminator",
+                  "prior"
+                ],
+                "rng_isolation": true
+              },
+              "kind": "gaussian_stability",
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "reacquisition_deadline": 5000,
+              "sample_evaluator": "benchmarks.toy_audit.gaussian1d_quality:score_samples",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live",
+              "shift_checks": 48,
+              "shift_end": 6000,
+              "shift_hold_checks": 24,
+              "shift_mean": 3.0,
+              "sources": {
+                "benchmarks/toy_audit/gaussian1d_quality.py": "7ec72e07c1aea87e77c85401b7e822f23d5a248ba45d718180045a1ad64ccd8b",
+                "experiments/forge/gaussian_tasks.py": "536863c58e7fcc35583b1ea5c890e6fd7093802f23f58fb36dacb5bdd7054619"
+              },
+              "stationary_checks": 72,
+              "stationary_end": 4000,
+              "thresholds": [
+                [
+                  "sample_count",
+                  ">=",
+                  4096
+                ],
+                [
+                  "finite_fraction",
+                  "==",
+                  1.0
+                ],
+                [
+                  "mean_error_sigma",
+                  "<=",
+                  0.2
+                ],
+                [
+                  "std_ratio",
+                  ">=",
+                  0.8
+                ],
+                [
+                  "std_ratio",
+                  "<=",
+                  1.2
+                ],
+                [
+                  "cdf_ks",
+                  "<=",
+                  0.05
+                ]
+              ]
+            }
+          },
+          "host": {
+            "gaussian1d_smoke": {
+              "adapter_parameters": {
+                "host": "gaussian1d_acquisition",
+                "prior_contract": "recipe_owned_v1",
+                "produces_state": true,
+                "protocol": "screening"
+              },
+              "bound": {
+                "definition": {
+                  "batch": 128,
+                  "covariances": [
+                    [
+                      [
+                        0.25
+                      ]
+                    ]
+                  ],
+                  "family": "gaussian1d_acquisition",
+                  "fourier": 2,
+                  "hidden": 32,
+                  "identifiable": true,
+                  "kind": "gaussian_mixture",
+                  "layers": 2,
+                  "masses": [
+                    1.0
+                  ],
+                  "means": [
+                    [
+                      2.0
+                    ]
+                  ],
+                  "particles": 256,
+                  "split": "development",
+                  "steps": 1000,
+                  "z_dim": 2
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+              }
+            },
+            "gaussian1d_stability": {
+              "adapter_parameters": {
+                "continuation_of": "gaussian1d_smoke",
+                "host": "gaussian1d_acquisition",
+                "prior_contract": "recipe_owned_v1",
+                "produces_state": true,
+                "protocol": "screening"
+              },
+              "bound": {
+                "definition": {
+                  "batch": 128,
+                  "covariances": [
+                    [
+                      [
+                        0.25
+                      ]
+                    ]
+                  ],
+                  "family": "gaussian1d_acquisition",
+                  "fourier": 2,
+                  "hidden": 32,
+                  "identifiable": true,
+                  "kind": "gaussian_mixture",
+                  "layers": 2,
+                  "masses": [
+                    1.0
+                  ],
+                  "means": [
+                    [
+                      2.0
+                    ]
+                  ],
+                  "particles": 256,
+                  "split": "development",
+                  "steps": 1000,
+                  "z_dim": 2
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/toy_audit/gaussian1d_quality.py"
+              }
+            }
+          },
+          "initialization": {
+            "gaussian1d_smoke": {
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            },
+            "gaussian1d_stability": {
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            }
+          },
+          "prior": {
+            "gaussian1d_smoke": {
+              "kind": "mog",
+              "sigma": 0.1,
+              "standardize": false
+            },
+            "gaussian1d_stability": {
+              "kind": "mog",
+              "sigma": 0.1,
+              "standardize": false
+            }
+          },
+          "recipe": {
+            "gaussian1d_smoke": {
+              "adam_variant": "pytorch",
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": false,
+              "batch_size": 128,
+              "beta2_anneal_end": 0.2,
+              "beta2_end": null,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "birth_death_backend": "knn",
+              "birth_death_cells": 64,
+              "birth_death_chunk": 256,
+              "birth_death_feature_scale": "none",
+              "birth_death_isolation": false,
+              "birth_death_metric_rank": 8,
+              "birth_death_parent_policy": "real_anchor",
+              "birth_death_space": "data",
+              "conditioning": "scalar",
+              "constant_lr": false,
+              "constraint_geometry_mode": "direction_blend",
+              "continuous_policy": null,
+              "critic_formulation": "bcap",
+              "critic_payoff_damping": true,
+              "critic_r1_real": true,
+              "critic_step_mode": "none",
+              "d_betas": null,
+              "d_eps": null,
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 0.0,
+              "d_lr_mult": 1.5,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": false,
+              "distance_reduction": "sum",
+              "ema_decay": 0.0,
+              "encoder_mode": "none",
+              "eps": 1e-08,
+              "generator_gradient_response": "none",
+              "generator_idle_mode": "ema_confidence_lr",
+              "generator_idle_se": 1.0,
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "kinetic_transport_local_weight": 0.0,
+              "kinetic_transport_projections": 32,
+              "kinetic_transport_protect_primary": true,
+              "kinetic_transport_weight": 1.0,
+              "latent_damping_max_rate": 0.0,
+              "loss": "non_saturating",
+              "loss_labels": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_control": "mobility",
+              "lr_decay_rate": 0.96,
+              "lr_decay_staircase": false,
+              "lr_decay_steps": 50000,
+              "lr_floor": 1.0,
+              "lr_schedule": "cosine",
+              "model": "gan",
+              "network_lr_floor": 1.0,
+              "network_lr_horizon_cap": null,
+              "num_classes": null,
+              "num_particles": 256,
+              "observation_sigma": 0.03,
+              "optimizer_adam_lr": null,
+              "optimizer_convolution": "per_offset",
+              "optimizer_family": "dualnorm",
+              "optimizer_momentum": 0.0,
+              "optimizer_smoothing": 0.001,
+              "optimizer_svd_backend": "native",
+              "output_noise_mode": "fixed",
+              "output_noise_std": 0.0,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": false,
+              "prior_betas": null,
+              "prior_coulomb_confinement": 0.35,
+              "prior_coulomb_neighbors": 8,
+              "prior_coulomb_softening": 0.1,
+              "prior_eps": null,
+              "prior_kind": "mog",
+              "prior_l2": 0.0,
+              "prior_lr_mult": 2.5,
+              "prior_proximal_strength": 0.0,
+              "prior_reg": 0.0,
+              "prior_reg_eps": 0.0001,
+              "prior_reg_target_std": 1.0,
+              "prior_regularizer": "vicreg",
+              "prior_sigreg_knots": 17,
+              "prior_sigreg_projections": 32,
+              "prior_update": "learned",
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 0.0,
+              "reg_arm": "b_cap",
+              "reg_coeff": 1.0,
+              "reg_coeff_anneal_end": 0.2,
+              "reg_coeff_end": null,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "reopen_anchor": "hold",
+              "reopen_guard": null,
+              "reopen_signal": "data",
+              "routing_temperature": 0.25,
+              "row_evidence_exclude": true,
+              "row_evidence_gate": false,
+              "row_evidence_hold": true,
+              "row_evidence_hot": true,
+              "row_evidence_null": "theory",
+              "row_policy": "independent",
+              "serve_average": 0.0,
+              "sigma_rel": 0.0,
+              "standardize": false,
+              "table_release_rule": "any",
+              "total_steps": 1000,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 2
+            },
+            "gaussian1d_stability": {
+              "adam_variant": "pytorch",
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": false,
+              "batch_size": 128,
+              "beta2_anneal_end": 0.2,
+              "beta2_end": null,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "birth_death_backend": "knn",
+              "birth_death_cells": 64,
+              "birth_death_chunk": 256,
+              "birth_death_feature_scale": "none",
+              "birth_death_isolation": false,
+              "birth_death_metric_rank": 8,
+              "birth_death_parent_policy": "real_anchor",
+              "birth_death_space": "data",
+              "conditioning": "scalar",
+              "constant_lr": false,
+              "constraint_geometry_mode": "direction_blend",
+              "continuous_policy": null,
+              "critic_formulation": "bcap",
+              "critic_payoff_damping": true,
+              "critic_r1_real": true,
+              "critic_step_mode": "none",
+              "d_betas": null,
+              "d_eps": null,
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 0.0,
+              "d_lr_mult": 1.5,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": false,
+              "distance_reduction": "sum",
+              "ema_decay": 0.0,
+              "encoder_mode": "none",
+              "eps": 1e-08,
+              "generator_gradient_response": "none",
+              "generator_idle_mode": "ema_confidence_lr",
+              "generator_idle_se": 1.0,
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "kinetic_transport_local_weight": 0.0,
+              "kinetic_transport_projections": 32,
+              "kinetic_transport_protect_primary": true,
+              "kinetic_transport_weight": 1.0,
+              "latent_damping_max_rate": 0.0,
+              "loss": "non_saturating",
+              "loss_labels": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "lr": 0.012,
+              "lr_anneal_start": 0.6,
+              "lr_control": "mobility",
+              "lr_decay_rate": 0.96,
+              "lr_decay_staircase": false,
+              "lr_decay_steps": 50000,
+              "lr_floor": 1.0,
+              "lr_schedule": "cosine",
+              "model": "gan",
+              "network_lr_floor": 1.0,
+              "network_lr_horizon_cap": null,
+              "num_classes": null,
+              "num_particles": 256,
+              "observation_sigma": 0.03,
+              "optimizer_adam_lr": null,
+              "optimizer_convolution": "per_offset",
+              "optimizer_family": "dualnorm",
+              "optimizer_momentum": 0.0,
+              "optimizer_smoothing": 0.001,
+              "optimizer_svd_backend": "native",
+              "output_noise_mode": "fixed",
+              "output_noise_std": 0.0,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": false,
+              "prior_betas": null,
+              "prior_coulomb_confinement": 0.35,
+              "prior_coulomb_neighbors": 8,
+              "prior_coulomb_softening": 0.1,
+              "prior_eps": null,
+              "prior_kind": "mog",
+              "prior_l2": 0.0,
+              "prior_lr_mult": 2.5,
+              "prior_proximal_strength": 0.0,
+              "prior_reg": 0.0,
+              "prior_reg_eps": 0.0001,
+              "prior_reg_target_std": 1.0,
+              "prior_regularizer": "vicreg",
+              "prior_sigreg_knots": 17,
+              "prior_sigreg_projections": 32,
+              "prior_update": "learned",
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 0.0,
+              "reg_arm": "b_cap",
+              "reg_coeff": 1.0,
+              "reg_coeff_anneal_end": 0.2,
+              "reg_coeff_end": null,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "reopen_anchor": "hold",
+              "reopen_guard": null,
+              "reopen_signal": "data",
+              "routing_temperature": 0.25,
+              "row_evidence_exclude": true,
+              "row_evidence_gate": false,
+              "row_evidence_hold": true,
+              "row_evidence_hot": true,
+              "row_evidence_null": "theory",
+              "row_policy": "independent",
+              "serve_average": 0.0,
+              "sigma_rel": 0.0,
+              "standardize": false,
+              "table_release_rule": "any",
+              "total_steps": 1000,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 2
+            }
+          },
+          "sampling": {
+            "gaussian1d_smoke": {
+              "eval_output_noise": "clean",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live"
+            },
+            "gaussian1d_stability": {
+              "eval_output_noise": "clean",
+              "sampling_contract_version": 1,
+              "sampling_law": "public_prior_without_output_noise",
+              "scoring_weights": "live"
+            }
+          },
+          "task_identity": {
+            "gaussian1d_smoke": {
+              "evaluation": "79f374405eba68caf60abed3a49a745144c23c48903014fab7d9acbe1ace56da",
+              "execution": "3243e3e82b6d18efc3bc6d8e438edbadffd5d8186c9754354ceb3f3056686edb"
+            },
+            "gaussian1d_stability": {
+              "evaluation": "107ee8dfab4ca07f3915056f2623ca27e0d42e1334caa7baf4cd20613cc42958",
+              "execution": "cb5f5d9feaef514abc7b7736033f6726bdac2917771cb0c0aef3cb9e0bba0ca4"
+            }
+          }
+        }
+      },
+      "blockers": [],
+      "causal_judgment": "requires_review",
+      "expected": {
+        "candidate_binding_sha256": "3a1fa8a01b722bb97997aa858488eec77e06871de938594d43a782aaa201d707",
+        "control_binding_sha256": "516cc8018ee0e2a4581a86f8334e95d1814e56b6a58b338a0593d7b8fc3b7563",
+        "execution_backend": "cuda",
+        "jobs_sha256": "c0dd6120217ac3cc2939423b6c452c24465debb8ce6eb672afbf0568bf48d59c",
+        "prior_evidence": [
+          {
+            "identity": {
+              "qualification_input": false,
+              "qualification_reuse": false,
+              "schema": "forge_test_display_evidence_v1"
+            },
+            "path": "reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+            "selector": [],
+            "sha256": "c6d10e4cc07a1b3fb00de5d88b8b0a1e1e992359983256f2907f25b336d0979c",
+            "use": "motivation_only"
+          }
+        ],
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort_sha256": "13df7e57ad8e074517788d4f3903b6d4cf0500d010208c285f7e029183eea71c",
+        "source_digest": "573962a8257329de8522082db5b1f3bee3df950d04beced76b547f04d9ea214d",
+        "substantive_delta": [
+          {
+            "after": "coherent_G_mean_v1",
+            "before": "none",
+            "path": [
+              "recipe",
+              "gaussian1d_smoke",
+              "generator_gradient_response"
+            ]
+          },
+          {
+            "after": "coherent_G_mean_v1",
+            "before": "none",
+            "path": [
+              "recipe",
+              "gaussian1d_stability",
+              "generator_gradient_response"
+            ]
+          }
+        ],
+        "task_ids": [
+          "gaussian1d_smoke",
+          "gaussian1d_stability"
+        ],
+        "task_map": {
+          "gaussian1d_smoke": "gaussian1d_smoke",
+          "gaussian1d_stability": "gaussian1d_stability"
+        }
+      },
+      "qualification_input": false,
+      "receipt": {
+        "binding_sha256": "3a1fa8a01b722bb97997aa858488eec77e06871de938594d43a782aaa201d707",
+        "contract_sha256": "6c2d6faf76e527196c194eda5280db42730e2d1a5b71a4a50f60c15941ce450a",
+        "control_binding_sha256": "516cc8018ee0e2a4581a86f8334e95d1814e56b6a58b338a0593d7b8fc3b7563",
+        "policy_fingerprint": "6de40cd08e7bbe24544552d4bab72ab94a6c1b0ad58ae682ca7b64b8520cfa7d",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "db1d440f225c8d5bb97d3df4112d3298a37fac9a2f4ceb3d219742618c73a33a"
+      },
+      "schema_version": 1,
+      "status": "READY"
+    },
+    "through_tier": 2,
+    "view": {
+      "assignments": [
+        {
+          "importance": "required",
+          "order": 0,
+          "qualification_tier": 1,
+          "task": "gaussian1d_smoke"
+        },
+        {
+          "importance": "required",
+          "order": 1,
+          "qualification_tier": 2,
+          "task": "gaussian1d_stability"
+        }
+      ],
+      "calibration": {
+        "status": "provisional"
+      },
+      "eligibility": {},
+      "goal": "confidence_lr_gaussian_own_retention",
+      "id": "confidence-lr-gaussian-own-retention-v1",
+      "policy_change_reason": "Fresh matched original Gaussian acquisition+own-retention comparison. Scoped original pair retains its registered request tiers1/2; current public discriminator_stability revision10 classifies retention asTier3. No historical receipt retiered or global qualification granted.",
+      "ranking": {
+        "compare_compatible_cohorts": true,
+        "cost_separate": true,
+        "policy": "qualified_tier_only_with_raw_metrics"
+      },
+      "revision": 1,
+      "schema_version": 1
+    }
+  }
+}

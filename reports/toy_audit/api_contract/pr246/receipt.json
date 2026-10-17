@@ -1,0 +1,313 @@
+{
+  "schema": "pr246_observation_goal_media_v1",
+  "reviewed_pr_head": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+  "scientific_status": "FAIL",
+  "original_scientific_checks": {
+    "source_exact": true,
+    "teacher_qualified": true,
+    "initial_owners_match": true,
+    "G16_native_health": true,
+    "G64_native_health": true,
+    "G16_converges_at100": true,
+    "G64_converges_at100": true,
+    "G64_better_at100": false,
+    "G16_converges_at200": true,
+    "G64_converges_at200": true,
+    "G64_better_at200": false,
+    "G16_beats_codeblind_bound": false,
+    "G64_beats_codeblind_bound": false,
+    "caller_streams_match": true,
+    "fixed400_complete": true,
+    "within60s": true
+  },
+  "data": {
+    "scientific_status": "FAIL",
+    "cohort": "original frozen V2",
+    "actual_updates": [
+      0,
+      100,
+      200
+    ],
+    "native_updates_per_arm": 200,
+    "original_checks": {
+      "source_exact": true,
+      "teacher_qualified": true,
+      "initial_owners_match": true,
+      "G16_native_health": true,
+      "G64_native_health": true,
+      "G16_converges_at100": true,
+      "G64_converges_at100": true,
+      "G64_better_at100": false,
+      "G16_converges_at200": true,
+      "G64_converges_at200": true,
+      "G64_better_at200": false,
+      "G16_beats_codeblind_bound": false,
+      "G64_beats_codeblind_bound": false,
+      "caller_streams_match": true,
+      "fixed400_complete": true,
+      "within60s": true
+    },
+    "failed_original_checks": [
+      "G64_better_at100",
+      "G64_better_at200",
+      "G16_beats_codeblind_bound",
+      "G64_beats_codeblind_bound"
+    ],
+    "fixture_hash": "a460cf5d50c193ce0b145da5171137f4b4358b7c26f78aac71456b4a6ca4d0cb",
+    "teacher_hash": "ef4f828da6191e6dd3ae57e8409ae7709153925703070f9a5f9a9dd382d5c354",
+    "calibration": {
+      "mean": [
+        -0.013075649738311768,
+        -0.01493869535624981
+      ],
+      "std": [
+        0.004309856332838535,
+        0.002184599870815873
+      ],
+      "law": "fit-only population channel std clamp1e-4"
+    },
+    "V": 0.0005061657866463065,
+    "evaluations": {
+      "G16": [
+        {
+          "step": 0,
+          "live_mask_error": 56.984703063964844,
+          "live_full_error": 61.6086540222168,
+          "served_mask_error": 56.984703063964844,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        },
+        {
+          "step": 100,
+          "live_mask_error": 2.9455859661102295,
+          "live_full_error": 2.673997640609741,
+          "served_mask_error": 2.9455859661102295,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        },
+        {
+          "step": 200,
+          "live_mask_error": 1.5986964702606201,
+          "live_full_error": 1.4933761358261108,
+          "served_mask_error": 1.5986964702606201,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        }
+      ],
+      "G64": [
+        {
+          "step": 0,
+          "live_mask_error": 56.984703063964844,
+          "live_full_error": 61.6086540222168,
+          "served_mask_error": 56.984703063964844,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        },
+        {
+          "step": 100,
+          "live_mask_error": 2.9461498260498047,
+          "live_full_error": 2.673090934753418,
+          "served_mask_error": 2.9461498260498047,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        },
+        {
+          "step": 200,
+          "live_mask_error": 1.5947275161743164,
+          "live_full_error": 1.490707278251648,
+          "served_mask_error": 1.5947275161743164,
+          "served_source": "fast",
+          "codeblind_mask_lower_bound": 0.0005061657866463065,
+          "metric": "fixed64remote-conditioned maskMSE, evaluation only"
+        }
+      ]
+    },
+    "contrast_endpoint": {
+      "G16": {
+        "pair_MSE": 1.5986967302194772,
+        "midpoint_loss": 1.5981903897461365,
+        "conditional_error": 0.0005063404733407389,
+        "conditional_error_over_V": 1.000345117546545,
+        "alpha": 0.00030064236355146454,
+        "predicted_contrast_power_over_V": 0.000946466857368776,
+        "target_contrast_power_over_V": 0.9999999354162792,
+        "decomposition_identity_error": 1.0625181290357943e-17,
+        "marker_learned": false,
+        "prediction_sha256": "5dc434f10ad2292119168df5173329ffe295da86926763d76cdfa36455ad267a",
+        "public_native_and_caller_replay_exact": true
+      },
+      "G64": {
+        "pair_MSE": 1.5947275253341386,
+        "midpoint_loss": 1.5942232442037811,
+        "conditional_error": 0.0005042811303575079,
+        "conditional_error_over_V": 0.9962766027682634,
+        "alpha": 0.004269536803996634,
+        "predicted_contrast_power_over_V": 0.004815740959977524,
+        "target_contrast_power_over_V": 0.9999999354162792,
+        "decomposition_identity_error": 9.974659986866641e-18,
+        "marker_learned": false,
+        "prediction_sha256": "d5cd0cdb5af472ed73389f80f1a5bd81ab0940624ed9c1c72c7b05716c632e07",
+        "public_native_and_caller_replay_exact": true
+      }
+    },
+    "contrast_observations": {
+      "G16": [
+        {
+          "step": 200,
+          "pair_MSE": 1.5986967302194772,
+          "midpoint_loss": 1.5981903897461365,
+          "conditional_error": 0.0005063404733407389,
+          "conditional_error_over_V": 1.000345117546545,
+          "alpha": 0.00030064236355146454,
+          "predicted_contrast_power_over_V": 0.000946466857368776,
+          "target_contrast_power_over_V": 0.9999999354162792,
+          "decomposition_identity_error": 1.0625181290357943e-17,
+          "marker_learned": false,
+          "prediction_sha256": "5dc434f10ad2292119168df5173329ffe295da86926763d76cdfa36455ad267a",
+          "public_native_and_caller_replay_exact": true
+        }
+      ],
+      "G64": [
+        {
+          "step": 200,
+          "pair_MSE": 1.5947275253341386,
+          "midpoint_loss": 1.5942232442037811,
+          "conditional_error": 0.0005042811303575079,
+          "conditional_error_over_V": 0.9962766027682634,
+          "alpha": 0.004269536803996634,
+          "predicted_contrast_power_over_V": 0.004815740959977524,
+          "target_contrast_power_over_V": 0.9999999354162792,
+          "decomposition_identity_error": 9.974659986866641e-18,
+          "marker_learned": false,
+          "prediction_sha256": "d5cd0cdb5af472ed73389f80f1a5bd81ab0940624ed9c1c72c7b05716c632e07",
+          "public_native_and_caller_replay_exact": true
+        }
+      ]
+    },
+    "contrast_scope": "Separate previously executed saved200 diagnostic (9 forwards,0 updates); endpoint only.",
+    "contrast_available_steps": [
+      200
+    ],
+    "elapsed_seconds": 16.410747226094827,
+    "training_identity": {
+      "reference_package_git_sha": "c4b53495d04a2052e266739a82053317b7f49698",
+      "checkout_git_sha": "45e621f11de05816204151a271e87144ebded90a",
+      "identity_guard": "sha256 of every frozen package/driver/contract/guide source",
+      "verified_source_files": 35
+    },
+    "source_manifest": {
+      "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+      "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+      "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+      "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+      "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+      "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "pyproject.toml": "9037d73fe240aed03b781e28b2153618a05d2f661676b0c1e05cf70d9ff59a6d",
+      "examples/routed_generator_batch_reference_20261002.py": "2481c62706b7cf846499c3c5d07f4e2cc82585efcc22d098368e571ff1fbb1ca",
+      "examples/routed_remote_conditioning.py": "6b0b65d39e4cf5bc9588ae8de4632e9c0ede784d41884560509197d7a89f1c34",
+      "tests/test_routed_remote_conditioning_public.py": "0d78f464ba39079ca7b0781acf170bc490b2a1ef1b1ea494df0ce24ccb2fe647",
+      "docs/routed_remote_conditioning_20261002.md": "59c6e4b8ccebbd9173b52db791e830f5a8675f636cd64952c797dd8677eb0b63"
+    },
+    "observation_limit": "No intermediate model image arrays retained; GIF uses recorded metric points only."
+  },
+  "input_files": {
+    "/ml2/hypergan/ParticleGAN-toy-pr246-media-followup/docs/routed_remote_conditioning_results_20261002.json": {
+      "sha256": "c0e70b1b9b47866b49ea487e97460de42301d1bce1b82f4c45bc9c80e21b0996",
+      "bytes": 9313,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/routed-remote-conditioning-v2-artifacts-20261002/protocol.json": {
+      "sha256": "b1cd007e46f8c616bbfad8a56dfee5a0da4d33fe0a126802045b68095f504ed5",
+      "bytes": 11125,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/routed-remote-conditioning-v2-artifacts-20261002/source.py": {
+      "sha256": "6b0b65d39e4cf5bc9588ae8de4632e9c0ede784d41884560509197d7a89f1c34",
+      "bytes": 25596,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/routed-remote-conditioning-v2-artifacts-20261002/result.json": {
+      "sha256": "5d7cfc667692d6c9fc32a654b51560405aeae37700a4d24f5177d7f2562cd45d",
+      "bytes": 50907,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/routed-remote-conditioning-v2-artifacts-20261002/G16.jsonl": {
+      "sha256": "7227bf55d80b5114579cd40dab9e051c11f95030768c1732454366054b6be892",
+      "bytes": 749910,
+      "attestation": "review_time_only"
+    },
+    "/ml2/hypergan/routed-remote-conditioning-v2-artifacts-20261002/G64.jsonl": {
+      "sha256": "8476a3922079775a8f9322e43c671bf505b1db557d2394c5d26454cbf3d95dbd",
+      "bytes": 749880,
+      "attestation": "review_time_only"
+    },
+    "/ml2/hypergan/routed-remote-conditioning-decomposition-20261002/result.json": {
+      "sha256": "b04ad4f8e44ddb193a2131211b6458b0d2a335f889abe45b325424a71919b558",
+      "bytes": 1623,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/routed-remote-conditioning-decomposition-20261002/decompose.py": {
+      "sha256": "a71651547c3968145a92c73d9b65c133774633840aecaee3741e38becc40c610",
+      "bytes": 7274,
+      "attestation": "original_public_receipt"
+    },
+    "/ml2/hypergan/routed-remote-conditioning-decomposition-20261002/protocol.json": {
+      "sha256": "eb3200accfec8d21037ea4a6baeafa3c898ffbaa4493073f8df0a1690fe0f337",
+      "bytes": 8422,
+      "attestation": "original_public_receipt"
+    }
+  },
+  "exporter_source": {
+    "commit": "7afd6e3ca021f5b3cf69daf28513986cf6092ef8",
+    "files_sha256": {
+      "benchmarks/toy_audit/remote_conditioning_media.py": "3474fd610e6fe218f54c8df7943d7cb124736d9f2792dcc9983067a1519f5a8b",
+      "benchmarks/toy_audit/recent_toy_media.py": "71fb5ea6a15f40f87d0d586394b1ae80326517ac0362bc2172926095fc732a98"
+    }
+  },
+  "original_inputs_unchanged": true,
+  "training_updates": 0,
+  "model_forwards": 0,
+  "new_draws": 0,
+  "metric_rescoring": false,
+  "model_image_arrays_available": false,
+  "goal_gif": {
+    "path": "goal.gif",
+    "sha256": "06280ca31807fab3ef3e78f45635b9c0f0463c0e4bbf1958519c56d487887f2e",
+    "bytes": 210467,
+    "frames": 3,
+    "actual_updates": [
+      0,
+      100,
+      200
+    ]
+  }
+}

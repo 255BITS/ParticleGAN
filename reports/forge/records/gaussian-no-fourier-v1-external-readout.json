@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "record_id": "gaussian-no-fourier-v1-external-readout",
+  "record_type": "scientific",
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "d0ebccd0900ed102d1fa7ce028e862f53bf5e89b0e30d719950cfd6f43a4b990",
+  "trainer_family": "bcap-dualnorm",
+  "goal": "discriminator_stability",
+  "evidence_scope": "task_architecture_diagnostic",
+  "lifecycle": "concluded",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "hypothesis": "Removing the scalar critic's Fourier features could improve Gaussian acquisition and stability while preserving the winning BCAP learner.",
+  "mechanism_class": "task_owned_architecture",
+  "changed_factors": [
+    "Critic Fourier features 2 to 0 only; public first-layer initialization changes with fan-in 5 to 1. Width 32, depth 2, latent dimension 2, learned 256-component MoG sigma 0.1 and batch 128 are preserved."
+  ],
+  "conclusion": "The bounded Fourier ablation fails the confirmed Gaussian smoke: 0 of 24 primary checks pass within 1,000 updates. Its diagnostic continuation also fails: stationary hold 3 of 72, missed shifted reacquisition deadline and shifted hold 1 of 24; frozen control 0 of 48. The final 6,000-update endpoint passes individually (KS 0.0458484), which does not replace the missed acquisition or stability gates. Exactly 6,000 CUDA updates cost 49.887372 adapter-loop seconds. Six exact restores, 219 saved-sample recomputations and two actual-training GIFs validate the published evidence. PR 323 remains the separate negative ablation; its implementation is not adopted.",
+  "next_action": "Retain Fourier 2 in the ordinary Gaussian architecture. Stop this exact Fourier 0 arm; use the independent shallow diagnostic and separate Tier 1 smoke/Tier 2 stability questions without transferring their gates across architectures. No new training, tuning, seeds or default adoption follows.",
+  "source": {
+    "url": "https://github.com/255BITS/ParticleGAN/blob/37eb6bef4a71fd21660e4c37a781392371f59c5f/reports/forge/gaussian-no-fourier/results.json",
+    "sha256": "f546f552af852baa4595a74de05c0b78eeed312498edade7b7babddb502cd259"
+  },
+  "provenance": {
+    "source_commit": "7c3409a194fc7d7f130306e8f03d571d6711c757",
+    "source_digest": "c5209202f5c7fe0d7a2d20e8817a84e56fd577c815cfc9a1ae2a16fabd027edc",
+    "publication_commit": "37eb6bef4a71fd21660e4c37a781392371f59c5f",
+    "pr": "https://github.com/255BITS/ParticleGAN/pull/323",
+    "report": "https://github.com/255BITS/ParticleGAN/blob/37eb6bef4a71fd21660e4c37a781392371f59c5f/reports/forge/gaussian-no-fourier/README.md",
+    "archive_receipt": "https://github.com/255BITS/ParticleGAN/blob/37eb6bef4a71fd21660e4c37a781392371f59c5f/reports/forge/gaussian-no-fourier/archive-receipt.json",
+    "archive_storage": "Ignored local immutable archive; original archive remains in the Fourier worktree.",
+    "archive_path": "/home/martyn/dev/ParticleGAN-gaussian-no-fourier/artifacts/gaussian-no-fourier-v1.tar.gz",
+    "archive_sha256": "8c5515862f5afd51fb09fcf8bee963b013014aaaa04a80846a26974f9c44e812",
+    "archive_bytes": 3575254,
+    "protocol_sha256": "9f6199b6e56fda838f3b54d3000e57bf71d9d5d667bdf45b37ae3b5ad63007da",
+    "new_training_updates": 6000,
+    "trainer_delta": "none"
+  },
+  "task_results": [
+    {
+      "task_id": "gaussian1d_smoke_no_fourier_v1",
+      "gate_status": "FAIL",
+      "metrics": {"checks": 24, "primary_passes": 0, "confirmed_states": 0, "step": 1000, "cdf_ks": 0.25775910800729407},
+      "cost": {"wall_seconds": 8.809734788024798},
+      "reason": "Task architecture diagnostic only; no confirmed full passing state by 1,000 updates."
+    },
+    {
+      "task_id": "gaussian1d_stability_no_fourier_v1",
+      "gate_status": "FAIL",
+      "metrics": {"stationary_passes": 3, "stationary_checks": 72, "shift_hold_passes": 1, "shift_hold_checks": 24, "frozen_passes": 0, "frozen_checks": 48, "step": 6000, "endpoint_cdf_ks": 0.045848430623458},
+      "cost": {"wall_seconds": 41.07763741805684},
+      "reason": "Task architecture diagnostic only; stationary hold, shifted deadline and shifted hold fail. A late endpoint does not replace the gate."
+    }
+  ]
+}

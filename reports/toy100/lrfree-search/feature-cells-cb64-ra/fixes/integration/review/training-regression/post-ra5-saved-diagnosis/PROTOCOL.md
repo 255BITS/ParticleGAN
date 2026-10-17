@@ -1,0 +1,11 @@
+# Saved RA5 read-only diagnosis
+
+Analyze sealed existing checkpoints only; root owns CUDA/training. Run with CUDA hidden, one CPU thread, fixed evaluator source/centres/radius/coverage definition and original data. No emissions, seeds, optimizer/model/prior/stream changes, geometry/gate fitting on labels, proposals, horizon changes or source edits. All prior frozen artifacts remain read-only. Outputs/logs are new private diagnosis files.
+
+At each existing checkpoint compare clean training-fast and clean EMA tables, the serving decision recorded by the prior tester, saved emitted/served metrics, and matched RA4/E22 clean/EMA/saved metrics. Use observed raw nearest-mode labels for annotation only. Track mode counts and lost/restored coverage across snapshots, latest observed birth rows, checkpoint-interval cumulative birth averages, population-participation expiry/rejection counters and required95% continuity.
+
+For filled FIFO snapshots refit the unchanged even/odd feature geometry on saved current critic/FIFO and recorded CPU RNG. Quantify p>Q/inside parent supply and initial physical real cell/group vacancies, cells without parents, and per-mode annotated target/accessibility. This CPU refit describes the saved state and cannot reproduce historical GPU cells. Do not reuse recorded GPU target cell IDs as IDs in the refit.
+
+Full per-reaction events and per-row incarnation IDs are not checkpointed. Report the latest observed birth event and interval averages; later row persistence cannot prove survival of the same birth incarnation across unlogged reactions. Birth-row raw/support status at the saved checkpoint can be compared to its reaction age but is not exact birth-time support. These limitations remain in receipts/reports.
+
+Read a stable complete metrics prefix once and archive that prefix privately, so continued root training may append to its live metrics file. Verify checkpoint/source hashes remain unchanged before/after. Inputs are original sealed checkpoints and captured metric prefixes. Only saved emitted results decide quality; CPU clean/support diagnosis has no quality verdict. Initial100/update1000/final2000 reports may use separate new output directories with unchanged analysis source, without source/level/seed sweeps.

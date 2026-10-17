@@ -1,0 +1,12 @@
+{
+  "status": "READY",
+  "lane_source_sha256": {
+    "DECLARED-API-EXPECTATION.json": "63491843c766817fca438bcfc6aa5a668f14c43027e0e81289a41771879d79d4",
+    "candidate-options.json": "0ff74e93d37e8a38d2bdc6551f1c96a0a4271a40aeb9e4f5b9a4ed0f04a64664",
+    "collect.py": "13bb8f1cf5d434de2ad06c341009e428249ce3467f71214cdc65701cbe3d63a3",
+    "lane.py": "6d2047a0535051c710f7727ef95d1f2a8c6df8bdad05284ac9fee5b3b5b04258",
+    "run_screen.py": "7605a0c79847abffac286cb0a9b91ff06a627c90be984be59e3567d1db2288b3",
+    "source-freeze.json": "2ef1bf9c27aa3a79b5bc1e614afbf7d10898caa40daf84e0b7a58cff5761d45a"
+  },
+  "source_freeze_sha256": "2ef1bf9c27aa3a79b5bc1e614afbf7d10898caa40daf84e0b7a58cff5761d45a"
+}

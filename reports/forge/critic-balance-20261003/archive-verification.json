@@ -1,0 +1,19 @@
+{
+  "all_members_individually_inspected": 10411,
+  "archive_bytes": 64385103,
+  "archive_path": "/ml2/hypergan/forge-critic-balance-archive-20261003/critic-balance-capacity16-learning2-v1.tar.gz",
+  "archive_sha256": "292061adad594577d9186207234929afa42437cdf9e5539128d9ca4865a7b533",
+  "availability": "LOCAL_ONLY",
+  "bootstrap_members_inspected_and_hydrated": 17,
+  "durable_attempts": 3,
+  "full_index_sha256": "3f8e917f81bbaa8c9bd3e85613c4b23bd0297532837acc3b5a023f4a456bc41a",
+  "new_sampler_calls": 0,
+  "new_training_updates": 0,
+  "original_inputs_unchanged": true,
+  "publication_required_inputs": 6971,
+  "qualification_changed": false,
+  "remote_replication": "NOT_PERFORMED",
+  "resolver": "experiments.forge.artifact_resolver",
+  "schema": "particlegan_critic_balance_archive_verification_v1",
+  "status": "PASS"
+}

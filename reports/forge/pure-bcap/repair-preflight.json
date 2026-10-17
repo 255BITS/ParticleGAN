@@ -1,0 +1,97 @@
+{
+  "admission_started": false,
+  "aggregate_original_ceiling_seconds": 25200,
+  "blockers": [
+    "GPU 0 and GPU 1 unavailable; freeze source/runtime bindings on the actual two-GPU host."
+  ],
+  "candidate_review_status": "READY",
+  "compute_profile_observed": {
+    "availability": "unavailable",
+    "backend": "cuda",
+    "deterministic": true,
+    "model": "NVIDIA RTX A6000",
+    "tf32": false,
+    "threads": 1
+  },
+  "configuration_count": 8,
+  "execution_bindings_frozen": false,
+  "maximum_new_paid_seconds": 20160,
+  "original_paid_seconds": 1038.7521727493731,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "unexecuted_corrected_round_declaration_review",
+  "specs": [
+    "configs/forge/searches/pure-bcap-hinge-joint-rates-v2.json",
+    "configs/forge/searches/pure-bcap-least-squares-joint-rates-v2.json",
+    "configs/forge/searches/pure-bcap-non-saturating-joint-rates-v2.json",
+    "configs/forge/searches/pure-bcap-wasserstein-joint-rates-v2.json"
+  ],
+  "status": "BLOCKED_COMPUTE",
+  "training_started": false,
+  "trials": [
+    {
+      "candidate_id": "bcap-pure--b097e283dc35eb5ff38878e138eacc4845dc3fc6e1a9d5d14bba34899d763657",
+      "declared_worst_case_seconds": 2520,
+      "settings": {
+        "lr": 0.00425
+      },
+      "submission_status": "READY"
+    },
+    {
+      "candidate_id": "bcap-pure--fd25cf2436cc9b68ebf995ebe006a326976082bc711a57a6e116f17efb7b991d",
+      "declared_worst_case_seconds": 2520,
+      "settings": {
+        "lr": 0.0010625
+      },
+      "submission_status": "READY"
+    },
+    {
+      "candidate_id": "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4",
+      "declared_worst_case_seconds": 2520,
+      "settings": {
+        "lr": 0.00425
+      },
+      "submission_status": "READY"
+    },
+    {
+      "candidate_id": "bcap-pure--08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d",
+      "declared_worst_case_seconds": 2520,
+      "settings": {
+        "lr": 0.0010625
+      },
+      "submission_status": "READY"
+    },
+    {
+      "candidate_id": "bcap-pure--6532492dc44ac33fea7a61332f0d62faba0bc351c68dd07fde38eb40c7a8537c",
+      "declared_worst_case_seconds": 2520,
+      "settings": {
+        "lr": 0.0010625
+      },
+      "submission_status": "READY"
+    },
+    {
+      "candidate_id": "bcap-pure--af8db09ebc6580e3d94cd29b89b2624cb6c8107947e4b44aa714d23a64ea096c",
+      "declared_worst_case_seconds": 2520,
+      "settings": {
+        "lr": 0.00425
+      },
+      "submission_status": "READY"
+    },
+    {
+      "candidate_id": "bcap-pure--06f49dc26a020d0ffb6b887e7156a203bc22927b2a6b96a8e5021bb16d4d2cf7",
+      "declared_worst_case_seconds": 2520,
+      "settings": {
+        "lr": 0.00425
+      },
+      "submission_status": "READY"
+    },
+    {
+      "candidate_id": "bcap-pure--dc8f9b409a2b40ab12abbdc38707c69f25bf7cfab45895c1369700a8236b3844",
+      "declared_worst_case_seconds": 2520,
+      "settings": {
+        "lr": 0.0010625
+      },
+      "submission_status": "READY"
+    }
+  ]
+}

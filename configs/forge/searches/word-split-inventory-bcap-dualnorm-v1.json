@@ -1,0 +1,32 @@
+{
+  "base_candidate": "bcap-dualnorm-zero-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 326340,
+    "candidate_budget_seconds": 46620,
+    "id": "technique-inventory-word-split-v1",
+    "purpose": "Revision8 complete-current-tier inventory of7 currently selected solution families through Tier3. Per-family full reservation including optional clock diagnostic:2520s smoke +40500s Tier2 +3600s grouped endurance =46620s; seven families326340s. Word hold adds300s in Tier2. Historical campaigns and receipts remain immutable. Expanded rosters require a new campaign identity and checked reservation.",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "d_lr_mult": [
+      1.5
+    ],
+    "lr": [
+      0.012
+    ],
+    "prior_lr_mult": [
+      2.5
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Remeasure the exact currently selected global recipe under revision 8: confirmed can-it-pass five-word acquisition in Tier 1 and strict own-checkpoint hold in Tier 2. Complete all runnable Tier 1 tasks; run all eligible Tier 2 tasks only after six required Tier 1 passes. Smoothing stays off; existing numerical-rank truncation and disabled autograd multithreading remain fixed. One configuration, protocol seed 0, no retuning, no scientific retries, no cross-source qualification pooling.",
+  "id": "word-split-inventory-bcap-dualnorm-v1",
+  "protocol": "screening",
+  "schema_version": 2,
+  "trainer_family": "bcap-dualnorm",
+  "tuning_through_tier": 2,
+  "view": "discriminator_stability"
+}

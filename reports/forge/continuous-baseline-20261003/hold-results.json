@@ -1,0 +1,1840 @@
+{
+  "schema": "particlegan_c6_retained_hold_results_v1",
+  "created_utc": "2026-10-03T08:52:29.235523+00:00",
+  "analysis_scope": {
+    "retained_data_only": true,
+    "new_model_constructions": 0,
+    "new_model_draws": 0,
+    "new_optimizer_updates": 0,
+    "gate_rescoring": false,
+    "default_adoption": false,
+    "qualification_input": false,
+    "ranking": false,
+    "method": "CPU torch.load of four saved fixture states; tensor byte/value comparisons, recorded metrics and bounds, retained NumPy array comparisons, SHA256 and GIF frame readers. Paired source-owned diagnostic NaNs are structurally equal; model/optimizer tensors are compared directly and by bytes."
+  },
+  "source": {
+    "scientific_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+    "scientific_snapshot": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source",
+    "scientific_manifest_sha256": "676452cc8c0dd82c03000c1b494a1ccf3f9f0f4b479aa2a14faf535204b55598",
+    "scientific_file_count": 148,
+    "scientific_files_independently_verified": 148,
+    "continuation_helper": {
+      "commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+      "execution_digest": "429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760",
+      "files_sha256": {
+        "reports/forge/continuous-baseline-20261003/run_hold_continuation.py": "adcfbd92b39e3affa2626965bf32101bd4ade8a0ad00c9a4e4bbd4a0df4a0b58"
+      }
+    },
+    "continuation_snapshot": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760",
+    "declared_full_execution_inventory_count": 3534,
+    "full_execution_inventory_scope": "The3534-entry full snapshot inventory is bound by study/request hashes; this readout checks all148 scientific files and the maintained helper, not every archive file.",
+    "placement_guard": {
+      "required_cuda_visible_devices": "1",
+      "logical_device": "cuda:0",
+      "gpu_memory_fraction": 0.2,
+      "source": "run_hold_continuation.py:503-506;786"
+    }
+  },
+  "case": {
+    "id": "api-vector-two-broad",
+    "law": {
+      "covariances": [
+        [
+          [
+            0.0625,
+            0.0
+          ],
+          [
+            0.0,
+            0.0625
+          ]
+        ],
+        [
+          [
+            0.0625,
+            0.0
+          ],
+          [
+            0.0,
+            0.0625
+          ]
+        ]
+      ],
+      "kind": "gaussian_mixture",
+      "masses": [
+        0.5,
+        0.5
+      ],
+      "means": [
+        [
+          -1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ]
+      ]
+    },
+    "law_sha256": "10fcc33b5dbe139b41e688597b6a1534f76b5b93d7c0b24ba5094e41fc8392e7",
+    "particles": 256,
+    "z_dim": 4,
+    "batch_size": 128,
+    "default_steps": 1200,
+    "eval_samples": 4096,
+    "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+    "thresholds": [
+      [
+        "sw1_normalized",
+        "<=",
+        0.18
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ],
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "projection_ks",
+        "<=",
+        0.06
+      ]
+    ]
+  },
+  "summary": {
+    "execution": "Two COMPLETE continuations to1350,150 updates each",
+    "science": "Two FAIL persistence outcomes:3/5 later holds pass",
+    "originals_unchanged": true,
+    "original_statuses": {
+      "original_gate": "PASS",
+      "original_study_gate": "INCOMPLETE"
+    },
+    "new_scientific_updates_executed_by_root": 300,
+    "qualification_credit": 0
+  },
+  "selected_chronology": [
+    {
+      "step": 900,
+      "phase": "original acquisition",
+      "passed": true,
+      "failed_bounds": [],
+      "metrics": {
+        "projection_ks": 0.030572887644965574,
+        "sw1_normalized": 0.01984417511127183,
+        "mean_error": 0.007646745070815086,
+        "mass_tv": 0.0029296875,
+        "hq": 0.98974609375,
+        "component_covariance_error": 0.0856775064021349,
+        "component_min_eigen_ratio": 0.8065464496612549
+      }
+    },
+    {
+      "step": 950,
+      "phase": "original acquisition",
+      "passed": true,
+      "failed_bounds": [],
+      "metrics": {
+        "projection_ks": 0.038210064975236824,
+        "sw1_normalized": 0.021227665167984296,
+        "mean_error": 0.01704149693250656,
+        "mass_tv": 0.00439453125,
+        "hq": 0.987060546875,
+        "component_covariance_error": 0.1307929791510105,
+        "component_min_eigen_ratio": 0.8456839323043823
+      }
+    },
+    {
+      "step": 1000,
+      "phase": "original acquisition",
+      "passed": true,
+      "failed_bounds": [],
+      "metrics": {
+        "projection_ks": 0.057708764293614156,
+        "sw1_normalized": 0.020455050003574386,
+        "mean_error": 0.027344124391674995,
+        "mass_tv": 0.00244140625,
+        "hq": 0.98974609375,
+        "component_covariance_error": 0.14662405848503113,
+        "component_min_eigen_ratio": 0.8304718732833862
+      }
+    },
+    {
+      "step": 1050,
+      "phase": "original acquisition",
+      "passed": true,
+      "failed_bounds": [],
+      "metrics": {
+        "projection_ks": 0.05751784930247322,
+        "sw1_normalized": 0.028184674392611263,
+        "mean_error": 0.02585444040596485,
+        "mass_tv": 0.00341796875,
+        "hq": 0.98974609375,
+        "component_covariance_error": 0.1358303502202034,
+        "component_min_eigen_ratio": 0.7523663640022278
+      }
+    },
+    {
+      "step": 1100,
+      "phase": "original acquisition",
+      "passed": true,
+      "failed_bounds": [],
+      "metrics": {
+        "projection_ks": 0.05929161405696359,
+        "sw1_normalized": 0.03957581422881289,
+        "mean_error": 0.0025275808293372393,
+        "mass_tv": 0.002685546875,
+        "hq": 0.994873046875,
+        "component_covariance_error": 0.18916824460029602,
+        "component_min_eigen_ratio": 0.7333799004554749
+      }
+    },
+    {
+      "step": 1150,
+      "phase": "original hold",
+      "passed": true,
+      "failed_bounds": [],
+      "metrics": {
+        "projection_ks": 0.05206046040426304,
+        "sw1_normalized": 0.02244384585552455,
+        "mean_error": 0.028427673503756523,
+        "mass_tv": 0.002685546875,
+        "hq": 0.986572265625,
+        "component_covariance_error": 0.07874043472111225,
+        "component_min_eigen_ratio": 0.9518780708312988
+      }
+    },
+    {
+      "step": 1200,
+      "phase": "original hold",
+      "passed": true,
+      "failed_bounds": [],
+      "metrics": {
+        "projection_ks": 0.05444427459011636,
+        "sw1_normalized": 0.020053852674527455,
+        "mean_error": 0.023431727662682533,
+        "mass_tv": 0.002685546875,
+        "hq": 0.992431640625,
+        "component_covariance_error": 0.10638302005827427,
+        "component_min_eigen_ratio": 0.8284796476364136
+      }
+    },
+    {
+      "step": 1250,
+      "phase": "appended hold",
+      "passed": false,
+      "failed_bounds": [
+        "projection_ks <= 0.06"
+      ],
+      "metrics": {
+        "projection_ks": 0.1058236784588924,
+        "sw1_normalized": 0.049858608460374626,
+        "mean_error": 0.07269597053527832,
+        "mass_tv": 0.001953125,
+        "hq": 0.985107421875,
+        "component_covariance_error": 0.13045796006917953,
+        "component_min_eigen_ratio": 0.8127355575561523
+      }
+    },
+    {
+      "step": 1300,
+      "phase": "appended hold",
+      "passed": false,
+      "failed_bounds": [
+        "projection_ks <= 0.06"
+      ],
+      "metrics": {
+        "projection_ks": 0.07763309513521596,
+        "sw1_normalized": 0.04398083236783495,
+        "mean_error": 0.037943191826343536,
+        "mass_tv": 0.001953125,
+        "hq": 0.989013671875,
+        "component_covariance_error": 0.1540997475385666,
+        "component_min_eigen_ratio": 0.7903342247009277
+      }
+    },
+    {
+      "step": 1350,
+      "phase": "appended hold",
+      "passed": true,
+      "failed_bounds": [],
+      "metrics": {
+        "projection_ks": 0.05125856533298834,
+        "sw1_normalized": 0.020485099482001976,
+        "mean_error": 0.023797115311026573,
+        "mass_tv": 0.001953125,
+        "hq": 0.989501953125,
+        "component_covariance_error": 0.07043411210179329,
+        "component_min_eigen_ratio": 0.9053506255149841
+      }
+    }
+  ],
+  "records": [
+    {
+      "family": "atlas",
+      "case_id": "api-vector-two-broad",
+      "candidate_id": "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0",
+      "original_gate": "PASS",
+      "original_study_gate": "INCOMPLETE",
+      "fresh_execution_status": "COMPLETE",
+      "added_hold_status": "FAIL",
+      "protocol": {
+        "initial_completed_updates": 1200,
+        "total_execution_limit": 1350,
+        "new_updates": 150,
+        "new_observation_steps": [
+          1250,
+          1300,
+          1350
+        ],
+        "evaluation_samples": 4096,
+        "evaluation_seed": 34002,
+        "acquisition_cap_seconds": 180.0,
+        "export_grace_seconds": 60.0
+      },
+      "compound_hold": {
+        "status": "FAIL",
+        "passed": false,
+        "first_confirmed_step": 1100,
+        "original_hold_checks": 2,
+        "new_hold_checks": 3,
+        "hold_checks": 5,
+        "hold_passed": 3,
+        "required_hold_checks": 5,
+        "full_protocol_complete": true,
+        "speed_eligible": false,
+        "original_gate": "PASS",
+        "original_study_gate": "INCOMPLETE"
+      },
+      "recipe": {
+        "name": "atlas",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 256,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 128,
+        "total_steps": null,
+        "continuous_policy": "dv12",
+        "lr": 0.0053125,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 1.5,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": true,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "learnable",
+        "lr_control": "stationarity",
+        "particle_birth_death": true,
+        "row_evidence_gate": true,
+        "table_release_rule": "anchor",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "critic",
+        "serve_average": 4.0,
+        "reopen_signal": "optimizer",
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "row_evidence_null": "scaled",
+        "birth_death_isolation": true,
+        "birth_death_feature_scale": "std",
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_metric_rank": 8,
+        "birth_death_chunk": 256,
+        "birth_death_parent_policy": "real_anchor",
+        "row_policy": "independent"
+      },
+      "recipe_sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b",
+      "runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "device": "cuda:0",
+        "cuda": "12.6",
+        "torch_threads": 1,
+        "cuda_device_model": "NVIDIA RTX A6000"
+      },
+      "study": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/study.json",
+        "sha256": "55701698dc8cc0c933b9b2aa0e2f0bd4fb00df86124977b35711fc66e68b5859"
+      },
+      "result": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/result.json",
+        "sha256": "1844252366b6b5dfa65a382736572ef236448e9320446653443ac994f1d42cd3"
+      },
+      "request": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/request.json",
+        "sha256": "511c57926bcdda028adce5bb1961f0725d9812bfd85be823b5b01ae9cbbb54f0"
+      },
+      "log": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/run.log",
+        "sha256": "6e8909b4928847bfb9141d615068c7541be9c33b4c2ad9469d09891eeb116521"
+      },
+      "parent": {
+        "artifacts": {
+          "final-state.pt": {
+            "bytes": 450187,
+            "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/final-state.pt",
+            "sha256": "95401e3063a5f0bba29cae59835f50bd1e7f8387776944b09aceea5ba4738075"
+          },
+          "goal.gif": {
+            "bytes": 689019,
+            "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/goal.gif",
+            "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0"
+          },
+          "observations.npz": {
+            "bytes": 3070137,
+            "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/observations.npz",
+            "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a"
+          }
+        },
+        "candidate_id": "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0",
+        "family": "atlas",
+        "original_gate": "PASS",
+        "original_study_gate": "INCOMPLETE",
+        "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/receipt.json",
+        "receipt_sha256": "e2bfc5fdc66ea2c32e77b22d16a00346a83852b3192d9f4b4ee2da2619da20a6",
+        "state_sha256": "95401e3063a5f0bba29cae59835f50bd1e7f8387776944b09aceea5ba4738075"
+      },
+      "artifacts": {
+        "appended-observations.npz": {
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/appended-observations.npz",
+          "sha256": "f49fc8c1f72e857c07e984ec54c06374b1f4acf1c431ab67a9c986137cbe0056",
+          "bytes": 368574
+        },
+        "continued-state.pt": {
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/continued-state.pt",
+          "sha256": "467455f881f843a08cfe9c143c323d216dd0714f8a018c32b62992bc6698ebd1",
+          "bytes": 450735
+        },
+        "goal.gif": {
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/goal.gif",
+          "sha256": "b56db2674a5f785c7979ff4bfb8ae6d4c309880cb29c3f45a8a72bb16b2f7822",
+          "bytes": 1128406
+        }
+      },
+      "media_steps": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750,
+        900,
+        1050,
+        1200,
+        1250,
+        1300,
+        1350
+      ],
+      "frames": 12,
+      "cost": {
+        "paid_wall_seconds": 15.290889646159485,
+        "acquisition_seconds": 5.319037588080391,
+        "export_seconds": 5.851987988920882,
+        "allowance_seconds": 240.0
+      },
+      "restoration": {
+        "complete_checkpoint_restore": true,
+        "only_external_cap_changed": true,
+        "original_completed_updates": 1200,
+        "appended_update_limit": 150,
+        "recipe_schedule_changed": false
+      },
+      "checkpoint_sampler_parity": {
+        "passed": true,
+        "evaluations": 1,
+        "completed_steps": 1200,
+        "seed": 34002,
+        "samples": 4096,
+        "new_scientific_observations": 0
+      },
+      "observer_purity": true,
+      "original_inputs_unchanged": true,
+      "endpoint_snapshots": [
+        {
+          "step": 1200,
+          "execution_limit": 1200,
+          "served_source": "fast",
+          "output_sigma_state": 0.028999999165534973,
+          "backend_selection": {
+            "schema": 1,
+            "requested_backend": "auto",
+            "actual_backend": "knn",
+            "selection_reason": "finite_resolution_infeasible",
+            "output_shape": [
+              2
+            ],
+            "raw_output_width": 2,
+            "moment_rank_bound": 8,
+            "population_policy": {
+              "schema": 1,
+              "requested_backend": "feature_cells",
+              "population": 256,
+              "q": 0.05,
+              "calibration_rows": 128,
+              "minimum_bh_flags": 40,
+              "maximum_guard_flags": 12,
+              "finite_resolution_feasible": false,
+              "actual_backend": "knn",
+              "matching_sampler": "controller_reference",
+              "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)"
+            },
+            "generator_noise_factor": 1.0,
+            "rate_mapping": [
+              [
+                {
+                  "role": "generator",
+                  "base_rate": 0.0053125,
+                  "factor": 1.0,
+                  "rate": 0.0053125
+                },
+                {
+                  "role": "table",
+                  "base_rate": 0.00796875,
+                  "factor": 1.0,
+                  "rate": 0.00796875
+                },
+                {
+                  "role": "noise",
+                  "base_rate": 0.0053125,
+                  "factor": 1.0,
+                  "rate": 0.0053125
+                }
+              ],
+              [
+                {
+                  "role": "critic",
+                  "base_rate": 0.00796875,
+                  "factor": 1.0,
+                  "rate": 0.00796875
+                }
+              ]
+            ],
+            "sampling_backend": "controller_reference"
+          },
+          "controller": {
+            "variant": "dv12",
+            "updates": 1200,
+            "reopens": 0,
+            "closed": true,
+            "mobility": 0.002449639206617857,
+            "game_trust": 0.5355708360653842,
+            "game_ratio": 1.9312178278355758
+          },
+          "latent_bandwidth": [
+            0.25011181831359863,
+            0.24987518787384033,
+            0.24998408555984497,
+            0.2500387132167816
+          ],
+          "birth_death_counters": {
+            "evals": 600,
+            "dim_skips": 0,
+            "discoveries": 2794,
+            "realised_deaths": 1305,
+            "realised_births": 11,
+            "stays": 1478,
+            "moves": 11,
+            "matched": 11,
+            "normalised": 0,
+            "waited_deaths": 1294,
+            "waited_births": 0,
+            "stale_resets": 89,
+            "iso_evals": 600,
+            "iso_flagged": 389,
+            "iso_acted": 0,
+            "iso_skipped": 4,
+            "iso_moves": 0,
+            "iso_dup_skips": 0
+          },
+          "row_evidence_counters": {
+            "updates": 1200,
+            "flagged_rows_sum": 20166,
+            "resets": 11,
+            "scale_sum": 19416.635503391757,
+            "hold_steps": 835
+          },
+          "surprise": {
+            "fires": 0,
+            "anchor_events": 0,
+            "since_calm": 0,
+            "last_ratio": 1.1461780298306845,
+            "last_ratios": {
+              "0.0": 1.0951975169893369,
+              "0.1": 1.1860896518786495,
+              "1.0": 1.1591677004994354
+            },
+            "log": []
+          },
+          "reopen_guard": {
+            "schema": 1,
+            "ka2_anchor_started": true,
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "excursion": null,
+            "epoch_rebases": 1
+          },
+          "optimizer_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.00597655784264745
+            ]
+          ],
+          "rng_sha256": {
+            "latent_generator": "9569d870219dc377051cdb3e0e9669a089b89d0641aebae3d6d74123263be016",
+            "penalty_generator": "68d254a7013673330b0221cafa61810d81df4f8855d3dba2a80b10420fd134b9",
+            "eval_generator": "480ab042e7fce576dde25022b174c3025e3e92425ffed6fd0dfebbc24d5d077a",
+            "noise_generator": "323f4e0e6479eafa29c32cebb3f074d5995cf5af9311f63fd1ce5eef9da856f5",
+            "caller_data": "c8ca5573e0dc2f49ea07b47e0fa0e0c700c2af209d9a6afd341e6f7a4f29882c",
+            "global_cpu": "96fc357f4670f5dde133e2eb78fb442c353972d4e8694f5695b38c535a5ff2e6",
+            "global_cuda": "8bae18a9158f1442695d7d6c1bfc6898161af4fd68c999386e0e3fc3f85298dc"
+          }
+        },
+        {
+          "step": 1350,
+          "execution_limit": 1350,
+          "served_source": "fast",
+          "output_sigma_state": 0.028999999165534973,
+          "backend_selection": {
+            "schema": 1,
+            "requested_backend": "auto",
+            "actual_backend": "knn",
+            "selection_reason": "finite_resolution_infeasible",
+            "output_shape": [
+              2
+            ],
+            "raw_output_width": 2,
+            "moment_rank_bound": 8,
+            "population_policy": {
+              "schema": 1,
+              "requested_backend": "feature_cells",
+              "population": 256,
+              "q": 0.05,
+              "calibration_rows": 128,
+              "minimum_bh_flags": 40,
+              "maximum_guard_flags": 12,
+              "finite_resolution_feasible": false,
+              "actual_backend": "knn",
+              "matching_sampler": "controller_reference",
+              "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)"
+            },
+            "generator_noise_factor": 1.0,
+            "rate_mapping": [
+              [
+                {
+                  "role": "generator",
+                  "base_rate": 0.0053125,
+                  "factor": 1.0,
+                  "rate": 0.0053125
+                },
+                {
+                  "role": "table",
+                  "base_rate": 0.00796875,
+                  "factor": 1.0,
+                  "rate": 0.00796875
+                },
+                {
+                  "role": "noise",
+                  "base_rate": 0.0053125,
+                  "factor": 1.0,
+                  "rate": 0.0053125
+                }
+              ],
+              [
+                {
+                  "role": "critic",
+                  "base_rate": 0.00796875,
+                  "factor": 1.0,
+                  "rate": 0.00796875
+                }
+              ]
+            ],
+            "sampling_backend": "controller_reference"
+          },
+          "controller": {
+            "variant": "dv12",
+            "updates": 1350,
+            "reopens": 0,
+            "closed": true,
+            "mobility": 0.0011554106179527755,
+            "game_trust": 0.9916214811486534,
+            "game_ratio": 1.0919201368993567
+          },
+          "latent_bandwidth": [
+            0.2503148019313812,
+            0.24994724988937378,
+            0.2498711347579956,
+            0.2497767210006714
+          ],
+          "birth_death_counters": {
+            "evals": 675,
+            "dim_skips": 0,
+            "discoveries": 2886,
+            "realised_deaths": 1305,
+            "realised_births": 11,
+            "stays": 1570,
+            "moves": 11,
+            "matched": 11,
+            "normalised": 0,
+            "waited_deaths": 1294,
+            "waited_births": 0,
+            "stale_resets": 89,
+            "iso_evals": 675,
+            "iso_flagged": 389,
+            "iso_acted": 0,
+            "iso_skipped": 4,
+            "iso_moves": 0,
+            "iso_dup_skips": 0
+          },
+          "row_evidence_counters": {
+            "updates": 1350,
+            "flagged_rows_sum": 22639,
+            "resets": 11,
+            "scale_sum": 19761.055126254294,
+            "hold_steps": 943
+          },
+          "surprise": {
+            "fires": 0,
+            "anchor_events": 0,
+            "since_calm": 0,
+            "last_ratio": 0.8711017685734491,
+            "last_ratios": {
+              "0.0": 0.8370905441147989,
+              "0.1": 0.8968300875082048,
+              "1.0": 0.8804892955748069
+            },
+            "log": []
+          },
+          "reopen_guard": {
+            "schema": 1,
+            "ka2_anchor_started": true,
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.125
+              }
+            },
+            "excursion": null,
+            "epoch_rebases": 1
+          },
+          "optimizer_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.005976560606208149
+            ]
+          ],
+          "rng_sha256": {
+            "latent_generator": "c5d350d2e99270d250046c5c7200ac8de9a1346b1b6331556c43d3e51a4fca04",
+            "penalty_generator": "68d254a7013673330b0221cafa61810d81df4f8855d3dba2a80b10420fd134b9",
+            "eval_generator": "480ab042e7fce576dde25022b174c3025e3e92425ffed6fd0dfebbc24d5d077a",
+            "noise_generator": "5ed43867b611ef32175467679d1eeead4f465639bf2fffb7e113f5c246dc228b",
+            "caller_data": "f96ef16161234cd941c4e4a7625ced517736ad0a86fe02670760fedfea0dcae2",
+            "global_cpu": "96fc357f4670f5dde133e2eb78fb442c353972d4e8694f5695b38c535a5ff2e6",
+            "global_cuda": "8bae18a9158f1442695d7d6c1bfc6898161af4fd68c999386e0e3fc3f85298dc"
+          }
+        }
+      ],
+      "endpoint_model_changes": {
+        "G": {
+          "tensor_count": 6,
+          "max_abs_parameter_change": 0.07114293426275253
+        },
+        "D": {
+          "tensor_count": 7,
+          "max_abs_parameter_change": 0.03705844283103943
+        },
+        "prior": {
+          "tensor_count": 1,
+          "max_abs_parameter_change": 0.07028669118881226
+        },
+        "ema_G": {
+          "tensor_count": 6,
+          "max_abs_parameter_change": 0.03050285577774048
+        },
+        "ema_prior": {
+          "tensor_count": 1,
+          "max_abs_parameter_change": 0.04229855537414551
+        }
+      }
+    },
+    {
+      "family": "e22",
+      "case_id": "api-vector-two-broad",
+      "candidate_id": "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be",
+      "original_gate": "PASS",
+      "original_study_gate": "INCOMPLETE",
+      "fresh_execution_status": "COMPLETE",
+      "added_hold_status": "FAIL",
+      "protocol": {
+        "initial_completed_updates": 1200,
+        "total_execution_limit": 1350,
+        "new_updates": 150,
+        "new_observation_steps": [
+          1250,
+          1300,
+          1350
+        ],
+        "evaluation_samples": 4096,
+        "evaluation_seed": 34002,
+        "acquisition_cap_seconds": 180.0,
+        "export_grace_seconds": 60.0
+      },
+      "compound_hold": {
+        "status": "FAIL",
+        "passed": false,
+        "first_confirmed_step": 1100,
+        "original_hold_checks": 2,
+        "new_hold_checks": 3,
+        "hold_checks": 5,
+        "hold_passed": 3,
+        "required_hold_checks": 5,
+        "full_protocol_complete": true,
+        "speed_eligible": false,
+        "original_gate": "PASS",
+        "original_study_gate": "INCOMPLETE"
+      },
+      "recipe": {
+        "name": "e22",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 256,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 128,
+        "total_steps": null,
+        "continuous_policy": "dv12",
+        "lr": 0.0053125,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 1.5,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.0,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": true,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "learnable",
+        "lr_control": "stationarity",
+        "particle_birth_death": true,
+        "row_evidence_gate": true,
+        "table_release_rule": "anchor",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "critic",
+        "serve_average": 4.0,
+        "reopen_signal": "optimizer",
+        "reopen_anchor": "release",
+        "row_evidence_null": "scaled",
+        "birth_death_isolation": true,
+        "birth_death_feature_scale": "std",
+        "row_policy": "independent"
+      },
+      "recipe_sha256": "eafcb532a5ddea456c06e6b62766295b07ecc566818302e073fe8f5e1f033bb8",
+      "runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "device": "cuda:0",
+        "cuda": "12.6",
+        "torch_threads": 1,
+        "cuda_device_model": "NVIDIA RTX A6000"
+      },
+      "study": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/study.json",
+        "sha256": "7a0ee36f9550d970e3c3a9a337a798405b70891dfcdae3bc135296920ce8d336"
+      },
+      "result": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/result.json",
+        "sha256": "4c0d798b25208bf897dc0df3582ae2e96be4331e7ef965c721a85453cb8ad2b6"
+      },
+      "request": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/request.json",
+        "sha256": "26d43b64c36ab851d4f0320992399752009215b8a78cb8205fc15b03f1df9485"
+      },
+      "log": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/run.log",
+        "sha256": "85bc5f50a46911b8ff54ac4329006114505667a2ccb3d2bb44e760ff2fc04e39"
+      },
+      "parent": {
+        "artifacts": {
+          "final-state.pt": {
+            "bytes": 448779,
+            "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/final-state.pt",
+            "sha256": "c68b983b89db276b3e1bc3352c2e176066d84e3d9eef54ac9c49c8201a1d89b8"
+          },
+          "goal.gif": {
+            "bytes": 689019,
+            "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/goal.gif",
+            "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0"
+          },
+          "observations.npz": {
+            "bytes": 3070137,
+            "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/observations.npz",
+            "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a"
+          }
+        },
+        "candidate_id": "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be",
+        "family": "e22",
+        "original_gate": "PASS",
+        "original_study_gate": "INCOMPLETE",
+        "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/receipt.json",
+        "receipt_sha256": "bf6005d2118b3f6994ca240e706a5e8a4e5ef94818f8b54ecc695a6fb00a03dd",
+        "state_sha256": "c68b983b89db276b3e1bc3352c2e176066d84e3d9eef54ac9c49c8201a1d89b8"
+      },
+      "artifacts": {
+        "appended-observations.npz": {
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/appended-observations.npz",
+          "sha256": "f49fc8c1f72e857c07e984ec54c06374b1f4acf1c431ab67a9c986137cbe0056",
+          "bytes": 368574
+        },
+        "continued-state.pt": {
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/continued-state.pt",
+          "sha256": "45df3f3d1e5799f7be92506cffa90324e456fd95cd2bad83bb3a0435f0181426",
+          "bytes": 449327
+        },
+        "goal.gif": {
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/goal.gif",
+          "sha256": "b56db2674a5f785c7979ff4bfb8ae6d4c309880cb29c3f45a8a72bb16b2f7822",
+          "bytes": 1128406
+        }
+      },
+      "media_steps": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750,
+        900,
+        1050,
+        1200,
+        1250,
+        1300,
+        1350
+      ],
+      "frames": 12,
+      "cost": {
+        "paid_wall_seconds": 15.893738066079095,
+        "acquisition_seconds": 6.044062115019187,
+        "export_seconds": 5.584694528020918,
+        "allowance_seconds": 240.0
+      },
+      "restoration": {
+        "complete_checkpoint_restore": true,
+        "only_external_cap_changed": true,
+        "original_completed_updates": 1200,
+        "appended_update_limit": 150,
+        "recipe_schedule_changed": false
+      },
+      "checkpoint_sampler_parity": {
+        "passed": true,
+        "evaluations": 1,
+        "completed_steps": 1200,
+        "seed": 34002,
+        "samples": 4096,
+        "new_scientific_observations": 0
+      },
+      "observer_purity": true,
+      "original_inputs_unchanged": true,
+      "endpoint_snapshots": [
+        {
+          "step": 1200,
+          "execution_limit": 1200,
+          "served_source": "fast",
+          "output_sigma_state": 0.028999999165534973,
+          "backend_selection": null,
+          "controller": {
+            "variant": "dv12",
+            "updates": 1200,
+            "reopens": 0,
+            "closed": true,
+            "mobility": 0.002449639206617857,
+            "game_trust": 0.5355708360653842,
+            "game_ratio": 1.9312178278355758
+          },
+          "latent_bandwidth": [
+            0.25011181831359863,
+            0.24987518787384033,
+            0.24998408555984497,
+            0.2500387132167816
+          ],
+          "birth_death_counters": {
+            "evals": 600,
+            "dim_skips": 0,
+            "discoveries": 2794,
+            "realised_deaths": 1305,
+            "realised_births": 11,
+            "stays": 1478,
+            "moves": 11,
+            "matched": 11,
+            "normalised": 0,
+            "waited_deaths": 1294,
+            "waited_births": 0,
+            "stale_resets": 89,
+            "iso_evals": 600,
+            "iso_flagged": 389,
+            "iso_acted": 0,
+            "iso_skipped": 4,
+            "iso_moves": 0,
+            "iso_dup_skips": 0
+          },
+          "row_evidence_counters": {
+            "updates": 1200,
+            "flagged_rows_sum": 20166,
+            "resets": 11,
+            "scale_sum": 19416.635503391757,
+            "hold_steps": 835
+          },
+          "surprise": {
+            "fires": 0,
+            "anchor_events": 0,
+            "since_calm": 302,
+            "last_ratio": 1.9344821235083223,
+            "last_ratios": {
+              "0.0": 1.8332423898645258,
+              "0.1": 2.3310322650422926,
+              "1.0": 1.6940490724631176
+            },
+            "log": []
+          },
+          "reopen_guard": null,
+          "optimizer_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.00597655784264745
+            ]
+          ],
+          "rng_sha256": {
+            "latent_generator": "9569d870219dc377051cdb3e0e9669a089b89d0641aebae3d6d74123263be016",
+            "penalty_generator": "68d254a7013673330b0221cafa61810d81df4f8855d3dba2a80b10420fd134b9",
+            "eval_generator": "480ab042e7fce576dde25022b174c3025e3e92425ffed6fd0dfebbc24d5d077a",
+            "noise_generator": "323f4e0e6479eafa29c32cebb3f074d5995cf5af9311f63fd1ce5eef9da856f5",
+            "caller_data": "c8ca5573e0dc2f49ea07b47e0fa0e0c700c2af209d9a6afd341e6f7a4f29882c",
+            "global_cpu": "7e19b72fb489a0c049eab4b263f9df30c1dec5ca01a8ba072a54d38f421622f7",
+            "global_cuda": "aa7cdca139bb324928ce345f95c451c0885e6756fb69e292f4d231516ee8dd60"
+          }
+        },
+        {
+          "step": 1350,
+          "execution_limit": 1350,
+          "served_source": "fast",
+          "output_sigma_state": 0.028999999165534973,
+          "backend_selection": null,
+          "controller": {
+            "variant": "dv12",
+            "updates": 1350,
+            "reopens": 0,
+            "closed": true,
+            "mobility": 0.0011554106179527755,
+            "game_trust": 0.9916214811486534,
+            "game_ratio": 1.0919201368993567
+          },
+          "latent_bandwidth": [
+            0.2503148019313812,
+            0.24994724988937378,
+            0.2498711347579956,
+            0.2497767210006714
+          ],
+          "birth_death_counters": {
+            "evals": 675,
+            "dim_skips": 0,
+            "discoveries": 2886,
+            "realised_deaths": 1305,
+            "realised_births": 11,
+            "stays": 1570,
+            "moves": 11,
+            "matched": 11,
+            "normalised": 0,
+            "waited_deaths": 1294,
+            "waited_births": 0,
+            "stale_resets": 89,
+            "iso_evals": 675,
+            "iso_flagged": 389,
+            "iso_acted": 0,
+            "iso_skipped": 4,
+            "iso_moves": 0,
+            "iso_dup_skips": 0
+          },
+          "row_evidence_counters": {
+            "updates": 1350,
+            "flagged_rows_sum": 22639,
+            "resets": 11,
+            "scale_sum": 19761.055126254294,
+            "hold_steps": 943
+          },
+          "surprise": {
+            "fires": 0,
+            "anchor_events": 0,
+            "since_calm": 452,
+            "last_ratio": 1.4460947350027615,
+            "last_ratios": {
+              "0.0": 1.3595194500387426,
+              "0.1": 1.734958848273619,
+              "1.0": 1.2820814937300775
+            },
+            "log": []
+          },
+          "reopen_guard": null,
+          "optimizer_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.005976560606208149
+            ]
+          ],
+          "rng_sha256": {
+            "latent_generator": "c5d350d2e99270d250046c5c7200ac8de9a1346b1b6331556c43d3e51a4fca04",
+            "penalty_generator": "68d254a7013673330b0221cafa61810d81df4f8855d3dba2a80b10420fd134b9",
+            "eval_generator": "480ab042e7fce576dde25022b174c3025e3e92425ffed6fd0dfebbc24d5d077a",
+            "noise_generator": "5ed43867b611ef32175467679d1eeead4f465639bf2fffb7e113f5c246dc228b",
+            "caller_data": "f96ef16161234cd941c4e4a7625ced517736ad0a86fe02670760fedfea0dcae2",
+            "global_cpu": "7e19b72fb489a0c049eab4b263f9df30c1dec5ca01a8ba072a54d38f421622f7",
+            "global_cuda": "aa7cdca139bb324928ce345f95c451c0885e6756fb69e292f4d231516ee8dd60"
+          }
+        }
+      ],
+      "endpoint_model_changes": {
+        "G": {
+          "tensor_count": 6,
+          "max_abs_parameter_change": 0.07114293426275253
+        },
+        "D": {
+          "tensor_count": 7,
+          "max_abs_parameter_change": 0.03705844283103943
+        },
+        "prior": {
+          "tensor_count": 1,
+          "max_abs_parameter_change": 0.07028669118881226
+        },
+        "ema_G": {
+          "tensor_count": 6,
+          "max_abs_parameter_change": 0.03050285577774048
+        },
+        "ema_prior": {
+          "tensor_count": 1,
+          "max_abs_parameter_change": 0.04229855537414551
+        }
+      }
+    }
+  ],
+  "equivalence": {
+    "appended_metric_scalar_comparisons": 51,
+    "appended_metrics_exactly_equal": true,
+    "original_metric_observation_records_equal": 25,
+    "arrays": {
+      "appended_cross_family": {
+        "keys": 18,
+        "keys_identical": true,
+        "all_arrays_bitwise_equal": true,
+        "values": 98316,
+        "all_finite": true,
+        "old_keys": [
+          "step1200_view0_target",
+          "step1200_view0_samples",
+          "step1200_view1_target",
+          "step1200_view1_samples",
+          "step1200_view2_target",
+          "step1200_view2_samples"
+        ]
+      },
+      "1250": {
+        "samples_changed_from1200": true,
+        "sample_coordinates": 8192,
+        "max_abs_coordinate_change": 0.30755820870399475,
+        "rms_coordinate_change": 0.08449292583415961,
+        "target_bitwise_equal_to1200": true
+      },
+      "1300": {
+        "samples_changed_from1200": true,
+        "sample_coordinates": 8192,
+        "max_abs_coordinate_change": 0.32690340280532837,
+        "rms_coordinate_change": 0.08564500805032844,
+        "target_bitwise_equal_to1200": true
+      },
+      "1350": {
+        "samples_changed_from1200": true,
+        "sample_coordinates": 8192,
+        "max_abs_coordinate_change": 0.3203285038471222,
+        "rms_coordinate_change": 0.06319489306319268,
+        "target_bitwise_equal_to1200": true
+      }
+    },
+    "checkpoint_groups": {
+      "1200": {
+        "models": {
+          "equal_nan_aware": true,
+          "tensor_count": 21,
+          "tensor_values": 16199,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 21,
+          "all_tensor_bytes_equal": true
+        },
+        "optimizers": {
+          "equal_nan_aware": true,
+          "tensor_count": 64,
+          "tensor_values": 37661,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 64,
+          "all_tensor_bytes_equal": true
+        },
+        "controller": {
+          "equal_nan_aware": true,
+          "tensor_count": 2,
+          "tensor_values": 4614,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 2,
+          "all_tensor_bytes_equal": true
+        },
+        "birth_death": {
+          "equal_nan_aware": true,
+          "tensor_count": 8,
+          "tensor_values": 2832,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 8,
+          "all_tensor_bytes_equal": true
+        },
+        "row_evidence": {
+          "equal_nan_aware": true,
+          "tensor_count": 5,
+          "tensor_values": 2048,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 5,
+          "all_tensor_bytes_equal": true
+        },
+        "lr_settle": {
+          "equal_nan_aware": true,
+          "tensor_count": 44,
+          "tensor_values": 35361,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 44,
+          "all_tensor_bytes_equal": true
+        },
+        "policy": {
+          "equal_nan_aware": true,
+          "tensor_count": 0,
+          "tensor_values": 0,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0
+        },
+        "streams": {
+          "equal_nan_aware": true,
+          "tensor_count": 4,
+          "tensor_values": 64,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 4,
+          "all_tensor_bytes_equal": true
+        },
+        "cpu_rng": {
+          "equal_nan_aware": false,
+          "tensor_count": 1,
+          "tensor_values": 5056,
+          "different_leaves": 1,
+          "max_tensor_abs_difference": 254.0
+        },
+        "cuda_rng": {
+          "equal_nan_aware": false,
+          "tensor_count": 1,
+          "tensor_values": 16,
+          "different_leaves": 1,
+          "max_tensor_abs_difference": 166.0
+        },
+        "recipe": {
+          "equal_nan_aware": false,
+          "tensor_count": 0,
+          "tensor_values": 0,
+          "different_leaves": 7,
+          "max_tensor_abs_difference": 0.0
+        },
+        "surprise": {
+          "equal_nan_aware": false,
+          "tensor_count": 4,
+          "tensor_values": 4,
+          "different_leaves": 13,
+          "max_tensor_abs_difference": 0.0
+        },
+        "reopen_guard": {
+          "equal_nan_aware": false,
+          "tensor_count": 0,
+          "tensor_values": 0,
+          "different_leaves": 1,
+          "max_tensor_abs_difference": 0.0
+        },
+        "backend_selection": {
+          "equal_nan_aware": false,
+          "tensor_count": 0,
+          "tensor_values": 0,
+          "different_leaves": 1,
+          "max_tensor_abs_difference": 0.0
+        },
+        "data_rng": {
+          "equal_nan_aware": true,
+          "tensor_count": 1,
+          "tensor_values": 5056,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0
+        }
+      },
+      "1350": {
+        "models": {
+          "equal_nan_aware": true,
+          "tensor_count": 21,
+          "tensor_values": 16199,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 21,
+          "all_tensor_bytes_equal": true
+        },
+        "optimizers": {
+          "equal_nan_aware": true,
+          "tensor_count": 64,
+          "tensor_values": 37661,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 64,
+          "all_tensor_bytes_equal": true
+        },
+        "controller": {
+          "equal_nan_aware": true,
+          "tensor_count": 2,
+          "tensor_values": 4614,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 2,
+          "all_tensor_bytes_equal": true
+        },
+        "birth_death": {
+          "equal_nan_aware": true,
+          "tensor_count": 8,
+          "tensor_values": 2832,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 8,
+          "all_tensor_bytes_equal": true
+        },
+        "row_evidence": {
+          "equal_nan_aware": true,
+          "tensor_count": 5,
+          "tensor_values": 2048,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 5,
+          "all_tensor_bytes_equal": true
+        },
+        "lr_settle": {
+          "equal_nan_aware": true,
+          "tensor_count": 52,
+          "tensor_values": 39210,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 52,
+          "all_tensor_bytes_equal": true
+        },
+        "policy": {
+          "equal_nan_aware": true,
+          "tensor_count": 0,
+          "tensor_values": 0,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0
+        },
+        "streams": {
+          "equal_nan_aware": true,
+          "tensor_count": 4,
+          "tensor_values": 64,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0,
+          "bitwise_equal_tensors": 4,
+          "all_tensor_bytes_equal": true
+        },
+        "cpu_rng": {
+          "equal_nan_aware": false,
+          "tensor_count": 1,
+          "tensor_values": 5056,
+          "different_leaves": 1,
+          "max_tensor_abs_difference": 254.0
+        },
+        "cuda_rng": {
+          "equal_nan_aware": false,
+          "tensor_count": 1,
+          "tensor_values": 16,
+          "different_leaves": 1,
+          "max_tensor_abs_difference": 166.0
+        },
+        "recipe": {
+          "equal_nan_aware": false,
+          "tensor_count": 0,
+          "tensor_values": 0,
+          "different_leaves": 7,
+          "max_tensor_abs_difference": 0.0
+        },
+        "surprise": {
+          "equal_nan_aware": false,
+          "tensor_count": 4,
+          "tensor_values": 4,
+          "different_leaves": 10,
+          "max_tensor_abs_difference": 0.0
+        },
+        "reopen_guard": {
+          "equal_nan_aware": false,
+          "tensor_count": 0,
+          "tensor_values": 0,
+          "different_leaves": 1,
+          "max_tensor_abs_difference": 0.0
+        },
+        "backend_selection": {
+          "equal_nan_aware": false,
+          "tensor_count": 0,
+          "tensor_values": 0,
+          "different_leaves": 1,
+          "max_tensor_abs_difference": 0.0
+        },
+        "data_rng": {
+          "equal_nan_aware": true,
+          "tensor_count": 1,
+          "tensor_values": 5056,
+          "different_leaves": 0,
+          "max_tensor_abs_difference": 0.0
+        }
+      }
+    },
+    "recipe_serialization_differences": [
+      {
+        "path": "root.birth_death_backend",
+        "reason": "missing",
+        "a": true,
+        "b": false
+      },
+      {
+        "path": "root.birth_death_cells",
+        "reason": "missing",
+        "a": true,
+        "b": false
+      },
+      {
+        "path": "root.birth_death_chunk",
+        "reason": "missing",
+        "a": true,
+        "b": false
+      },
+      {
+        "path": "root.birth_death_metric_rank",
+        "reason": "missing",
+        "a": true,
+        "b": false
+      },
+      {
+        "path": "root.birth_death_parent_policy",
+        "reason": "missing",
+        "a": true,
+        "b": false
+      },
+      {
+        "path": "root.name",
+        "reason": "scalar",
+        "a": "atlas",
+        "b": "e22"
+      },
+      {
+        "path": "root.reopen_guard",
+        "reason": "missing",
+        "a": true,
+        "b": false
+      }
+    ],
+    "surprise_state_differences_1350": [
+      {
+        "path": "root.fast.0.2",
+        "reason": "missing",
+        "a": false,
+        "b": true
+      },
+      {
+        "path": "root.last_ratio",
+        "reason": "scalar",
+        "a": 0.8711017685734491,
+        "b": 1.4460947350027615
+      },
+      {
+        "path": "root.last_ratios.0.0",
+        "reason": "scalar",
+        "a": 0.8370905441147989,
+        "b": 1.3595194500387426
+      },
+      {
+        "path": "root.last_ratios.0.1",
+        "reason": "scalar",
+        "a": 0.8968300875082048,
+        "b": 1.734958848273619
+      },
+      {
+        "path": "root.last_ratios.1.0",
+        "reason": "scalar",
+        "a": 0.8804892955748069,
+        "b": 1.2820814937300775
+      },
+      {
+        "path": "root.since_calm",
+        "reason": "scalar",
+        "a": 0,
+        "b": 452
+      },
+      {
+        "path": "root.slow.0.0",
+        "reason": "scalar",
+        "a": -0.3854968596455453,
+        "b": -0.868156860173665
+      },
+      {
+        "path": "root.slow.0.1",
+        "reason": "scalar",
+        "a": -0.8858178296388851,
+        "b": -1.5445671075149616
+      },
+      {
+        "path": "root.slow.0.2",
+        "reason": "missing",
+        "a": false,
+        "b": true
+      },
+      {
+        "path": "root.slow.1.0",
+        "reason": "scalar",
+        "a": -0.695437255303794,
+        "b": -1.071754153905154
+      }
+    ],
+    "whole_checkpoint_equivalence": false,
+    "scope_limit": "Observed arrays and endpoint learned/control owners match; global RNG, surprise, guard/backend and recipe metadata differ. No assertion of every unsaved update or full policy equality."
+  },
+  "engineering_history": {
+    "automatic_retry": false,
+    "ordinary_updates": 0,
+    "paid_seconds": 6.8186783420387655,
+    "reason": "New explicit engineering cohort repairs strict PEP420 namespace admission only; original scientific source and parents unchanged.",
+    "records": [
+      {
+        "artifacts": {
+          "request.json": {
+            "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/atlas/c6-atlas-broad-hold-1200-to-1350/request.json",
+            "sha256": "ecf016dea5ac00bdb6beab89d149cacc53b3ecd52cab467f09b88a904b6e176a"
+          },
+          "run.log": {
+            "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/atlas/c6-atlas-broad-hold-1200-to-1350/run.log",
+            "sha256": "c6f7b6c055085ffab8a027b224778e0d27adf904ddadc2645bbf7866f9298cd4"
+          }
+        },
+        "family": "atlas",
+        "paid_wall_seconds": 3.440489402040839,
+        "scientific_updates": 0,
+        "source": {
+          "commit": "e97cae6d897369354588c29b65b02893ab066484",
+          "execution_digest": "29069307aaaefe61b6ab5c2c9b5b26a8b536323570db4054f2abea8f64dd7b29",
+          "files_sha256": {
+            "reports/forge/continuous-baseline-20261003/run_hold_continuation.py": "93342f094a40d1e36df7161b0d250cef90ff7a9ffb965e0041c8365f13e85128"
+          }
+        },
+        "status": "INCOMPLETE",
+        "study_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/atlas/study.json",
+        "study_sha256": "e551fe443879ab2a487de8e372c54295206bef3fdb04dc7b7ed0e096956bb54d"
+      },
+      {
+        "artifacts": {
+          "request.json": {
+            "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/e22/c6-e22-broad-hold-1200-to-1350/request.json",
+            "sha256": "7afeaaf39ccf9b00d317b06099c0b9a6e53896a6e3c7f347f13b9d883afd0684"
+          },
+          "run.log": {
+            "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/e22/c6-e22-broad-hold-1200-to-1350/run.log",
+            "sha256": "c6f7b6c055085ffab8a027b224778e0d27adf904ddadc2645bbf7866f9298cd4"
+          }
+        },
+        "family": "e22",
+        "paid_wall_seconds": 3.3781889399979264,
+        "scientific_updates": 0,
+        "source": {
+          "commit": "e97cae6d897369354588c29b65b02893ab066484",
+          "execution_digest": "29069307aaaefe61b6ab5c2c9b5b26a8b536323570db4054f2abea8f64dd7b29",
+          "files_sha256": {
+            "reports/forge/continuous-baseline-20261003/run_hold_continuation.py": "93342f094a40d1e36df7161b0d250cef90ff7a9ffb965e0041c8365f13e85128"
+          }
+        },
+        "status": "INCOMPLETE",
+        "study_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/e22/study.json",
+        "study_sha256": "7a3f7c1be32d95c65c95dede31f11c0663f815c09e27ae00dfda39ec6d87b661"
+      }
+    ]
+  },
+  "cost": {
+    "previous_paid_seconds": 6.8186783420387655,
+    "new_paid_seconds": 31.18462771223858,
+    "spent_seconds": 38.003306054277346,
+    "total_paid_cap_seconds": 480.0,
+    "speed_ranking": false
+  },
+  "raw_summary": {
+    "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/hold-continuation.json",
+    "sha256": "e0c5a3db254792388574429290997660163275f90abf9bd75c31eeb124de9430"
+  },
+  "baseline_prerequisite_capture": {
+    "scope": "Original one-host Atlas img_intensity2 PASS only; no19/19 aggregate credit.",
+    "ledger_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/study.json",
+    "captured_ledger_sha256": "82a1c166b41f14f359d4f31d216b662d84f900ca9228c122ce3970072ea02ff8",
+    "maintained_source_commit": "a0d6d89fb470f551b3f790016a237c40a377e1e8",
+    "note": "Ongoing baseline ledger can grow; its captured hash is not relabeled to later bytes."
+  },
+  "findings": [
+    {
+      "claim": "Post-confirmation sampled shape leaves tolerance at1250/1300 and recovers at1350.",
+      "evidence": "Only projection_ks exceeds.06; other declared bounds pass.",
+      "confidence": "direct recorded observation"
+    },
+    {
+      "claim": "The short1200 horizon was not the sole remaining barrier to persistence PASS.",
+      "evidence": "The added three boundaries complete all five later checks but two fail.",
+      "confidence": "direct bounded continuation outcome"
+    },
+    {
+      "claim": "No new discrete relocation, surprise firing or controller reopening is recorded during the extension.",
+      "evidence": "Cumulative moves/births stay11, isolation moves0, resets11, surprise fires0/empty log, reopens0. Continuous observations/controls still evolve.",
+      "confidence": "recorded cumulative counters"
+    },
+    {
+      "claim": "No family capacity failure or specific optimizer/controller cause is proven.",
+      "evidence": "Original/final clouds pass; G/prior/D and continuous state change jointly. No1250/1300 checkpoint or full action trace.",
+      "confidence": "causal limit"
+    }
+  ],
+  "missing_artifacts_for_attribution": [
+    "Source-bound1250/1300 fixture checkpoints with learned G/D/prior/averages, serving selection and controller state.",
+    "Per-update effective role-rate/guard, row-hold and sampler-application actions over1201\u20131350."
+  ],
+  "next_action_scope": "Attribution requires a separate bounded diagnostic, retaining all old and new grades; this readout confers no default or eight-case qualification.",
+  "next_hypothesis": {
+    "status": "PROPOSAL_ONLY_NOT_EXECUTED",
+    "question": "Does a different positive adaptive averaging timescale improve fidelity when the public policy actually selects averaged serving?",
+    "existing_average": {
+      "all42_retained_original_receipts": {
+        "serve_average": 4.0,
+        "ema_decay": 0.995,
+        "independently_checked_against_receipt_hashes": true
+      },
+      "prior_grid_specs": [
+        {
+          "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/family-winner-round1/policy-search.json",
+          "sha256": "371cfb4ec472430fce08ac6a30b23923b7548f20346dca10c12ef83d13e5d53d",
+          "grid": {
+            "lr": [
+              0.006375,
+              0.0085
+            ],
+            "prior_lr_mult": [
+              1.0,
+              2.0
+            ]
+          }
+        },
+        {
+          "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/family-winner-round1/policy-search-round2.json",
+          "sha256": "2911618b34898599fa149e3918e1586b6f6e113840c6b7dc12c3e7f7a76c6b53",
+          "grid": {
+            "lr": [
+              0.002125,
+              0.00425
+            ],
+            "prior_lr_mult": [
+              1.0,
+              2.0
+            ]
+          }
+        },
+        {
+          "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/family-winner-round1/policy-search-round3.json",
+          "sha256": "64881f90a4ef8cca65f849b9fb8354ad54f1c82132937ff511c4c24f22752acf",
+          "grid": {
+            "lr": [
+              0.0031875,
+              0.0053125
+            ],
+            "prior_lr_mult": [
+              1.0,
+              2.0
+            ]
+          }
+        },
+        {
+          "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/family-winner-round1/policy-search-round4.json",
+          "sha256": "4e7e64121615f3c88c1ff0fe054cadf45d5ba3ca0053558f87b4a40c3bf6617d",
+          "grid": {
+            "lr": [
+              0.0053125,
+              0.006375
+            ],
+            "prior_lr_mult": [
+              0.5,
+              1.5
+            ]
+          }
+        }
+      ],
+      "source": "particlegan/policy.py:761-793,1047-1070,1086-1112",
+      "table_tester_1200_and1350": {
+        "s": 1.0,
+        "b": 64.0,
+        "last_decisive": 1,
+        "adaptive_update_rate_at_snapshot": 0.00390625,
+        "selected_serving": "fast"
+      }
+    },
+    "mechanism": "For positive serve_average, the average update rate is min(1,s/(serve_average*b)); table last_decisive=-1 gates averaged serving on the reference backend. Changing a positive magnitude changes averaging memory but does not change this selection condition. Stored ema_decay.995 is the fallback, not the applied adaptive update rate at these endpoints.",
+    "hypothesis_strength": "Conditional serving-memory question; weak as a direct remedy for the demonstrated fast-state excursions. Averaging was already present and the retained endpoint clouds use fast parameters. Intermediate serving selection is unknown.",
+    "public_api_boundary": {
+      "recipe_field_validity": "Recipe accepts finite nonnegative serve_average, but a nonzero positive contrast retains averaging rather than disabling it.",
+      "audit_runner": "serve_average is classified hyperparameter but is not in Forge TUNABLE_FIELDS; api_contract.validate_recipe_overrides and the frozen LR/prior-only family grid do not admit it.",
+      "source": "experiments/forge/boundaries.py:23-46;benchmarks/toy_audit/api_contract.py:101-120;particlegan/recipes.py:301-303"
+    },
+    "minimal_contract": {
+      "candidate": "One independently named complete shared-config positive serve_average contrast; no value selected or run in this note.",
+      "unchanged": "Original architecture, target law, seeds, all gates, full recipe controls and ordinary horizons; every required case under one complete config; retain separate original and persistence statuses.",
+      "binding_requirements": [
+        "Explicit new declaration/admission for this currently unlisted Recipe hyperparameter, with full effective Recipe equality and new frozen source identity.",
+        "Exact family/case capacity packet rebound to the declared complete Recipe and selected serving/controller/average snapshot, with held-out original gates and actual public sampler.",
+        "Record served-source selection at every scored boundary, matched G/prior averaging pair, table decision and averaging rate; no forced EMA or policy bypass.",
+        "Keep output-noise-off variant explicit; it supplies no historical noisy Atlas19 credit.",
+        "If the public selected source remains fast, report that null serving exposure rather than conclude averaging improved the failed clouds."
+      ],
+      "budget": "No additional scientific budget authorized or spent by this note; root controls any future finite admission."
+    },
+    "limits": "No retained1250/1300 checkpoint, average-law evaluation, new draw, rescore or intervention was performed. This is neither a winning config nor a proven causal repair."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "candidate_id": "context:lrfree/direct-particle-adam",
+  "candidate_revision": "cf0e41d77393b88f97bd962f0671528a964ea12259329167378a346029bdf1eb",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Direct-particle Adam: a one-host improvement for `st-10`",
+  "mechanism_class": "training_formulation",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/direct-particle-adam",
+      "narrative_sources": [
+        {
+          "git_blob": "e52b8cc97211dc9cabc1a7f127b308dd0962ce63",
+          "path": "reports/toy100/lrfree-search/direct-particle-adam/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "0e4f14368e06b6c1958e078dcfac985f69270708a8a1b88b98ad0992cb3086db",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/direct-particle-adam/results/ae_gan_hold.json",
+        "reports/toy100/lrfree-search/direct-particle-adam/results/cover_leftover.json",
+        "reports/toy100/lrfree-search/direct-particle-adam/results/mid_scale_identity.json",
+        "reports/toy100/lrfree-search/direct-particle-adam/results/residual_student.json",
+        "reports/toy100/lrfree-search/direct-particle-adam/results/trajectory.json",
+        "reports/toy100/lrfree-search/direct-particle-adam/results/two_pole.json",
+        "reports/toy100/lrfree-search/direct-particle-adam/results/unipolar.json",
+        "reports/toy100/lrfree-search/direct-particle-adam/results/unused_token_hold.json",
+        "reports/toy100/lrfree-search/direct-particle-adam/summary.json"
+      ],
+      "summary_excerpt": "# Direct-particle Adam: a one-host improvement for `st-10`\n\nThe new 22-check screen exposed a specific optimizer failure in `two_pole`: its\n12 parameters are the samples themselves, and their gradients fall sharply\nafter the first updates. The recipe-wide AMSGrad flag retains the initial\nsecond-moment maximum, suppressing the subsequent direct-particle response.\n\n`recipe.patch` changes `Recipe.make_generator_optimizer` so the explicitly\nregistered `direct_particles` group uses ordinary Adam, while all other\ngenerator, latent-table and critic groups retain the recipe's AMSGrad choice.\nIt adds no host-specific test or numerical threshold. Apply the patch to\n`candidates/dv12-st/package/particlegan/recipes.py` in the LR-free harness;\n`overrides.json` is the unchanged `st-10` recipe.\n\n| `st-10` custom host | Baseline | Direct-particle Adam |\n|---|---:|---:|\n| `two_pole`, 80 updates | FAIL 0/24 | **PASS 7/24**, first 60, final streak 7, final mean_abs .7502 |\n| Other seven custom hosts | 5/7 | **5/7**; all 24 observation rows exactly equal, excluding seconds |\n| Custom total | 5/8 | **6/8** |\n\nThe patched package passed the harness's 1,000-step bitwise CPU parity gate\nagainst its own `GANTrainer` for both scalar and sparse-table configurations.\nThe eight custom hosts were rerun at their frozen budgets with noisy scoring;\ntheir raw `result.json` files are under `results/`. `summary.js"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-direct-particle-adam-6a84b5d12821",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "e52b8cc97211dc9cabc1a7f127b308dd0962ce63",
+    "path": "reports/toy100/lrfree-search/direct-particle-adam/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "0e4f14368e06b6c1958e078dcfac985f69270708a8a1b88b98ad0992cb3086db",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/direct-particle-adam/README.md"
+  },
+  "task_results": []
+}

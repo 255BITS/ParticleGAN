@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "8a9dde59b3b52ab56eb16be85edcd4f50b6b5bbea27c054733751291c0719abb",
+  "kind": "actual_training_saved_images_gif",
+  "observation_count": 24,
+  "observations_sha256": "8685cc2e631a35f062d017c3c9131b871ef0daef9bbe22df45963687756d9cb6",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "ade9b3b8eb4aa590f29f94e74b2a5fab5a5e0198c59a800bf7e4e5925bbb3148",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bcap-develop-integration-next/diagnostic-queue/bcap-develop-integration-deeper-v1/c3c4f71fbc264121ad25434062a2c349/observed-images.pt": "99436087ee213bd548563d864ee6070b57492404e560f34cda114e634dfa9476"
+  },
+  "task_id": "img_stripes2"
+}

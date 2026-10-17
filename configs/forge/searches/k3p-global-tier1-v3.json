@@ -1,0 +1,38 @@
+{
+  "base_candidate": "k3p-global-input-noise-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 16800,
+    "candidate_budget_seconds": 2100,
+    "id": "k3p-global-tier1-v3"
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "d_lr_mult": [
+      0.5,
+      1.0
+    ],
+    "lr": [
+      0.006375
+    ],
+    "prior_lr_mult": [
+      0.5,
+      1.0
+    ],
+    "reg_coeff": [
+      0.5,
+      1.0
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+  "id": "k3p-global-tier1-v3",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "The previous coefficient1/D1.5/nominal-prior-LR.0012 candidates passed the first three tasks but failed ring covariance and high-quality fraction. The historical 4/5 incumbent instead used D1/prior1 at LR.006375 (nominal prior LR.006375). Its 1600-step network cap is inactive on the 400-update ring, so cap removal cannot explain that ring difference. Output noise and source cohorts also differ; this is no single-cause proof. Saved scored outputs show broad component cores as well as tails: recentering alone barely changes quality, and the four-sigma core covariance error still exceeds .85. The finite grid holds base LR.006375, existing input noise.5, output noise0, full schedule, moments and all mechanism flags fixed. D.5/1 and prior.5/1 test declared role balance; coefficients .5/1 remain positive. Words remain an ordinary required task; the historical word win supplies no transferable qualification. One separately bounded round of complete global K3P recipes under all five ordinary Tier 1 tasks. Existing numerical controls only; no new technique, task-specific optimizer override, objective, architecture, initializer, sampling law, seed study, gate change, unchanged whole-recipe repeat, paid base/control run, higher-tier execution or automatic further paid round. Ordinary required failures stop later tasks, which remain UNKNOWN. Historical word passes motivate the design and grant no qualification. Screening is provisional; no public-default adoption.",
+  "schema_version": 1,
+  "trainer_family": "k3p",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

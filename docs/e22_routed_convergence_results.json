@@ -1,0 +1,283 @@
+{
+  "schema": "routed_convergence_compact_v1",
+  "scope": "fixed learned-game diagnostic; no Forge/default/Supra qualification",
+  "bindings": {
+    "source_hashes": {
+      "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+      "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+      "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6"
+    },
+    "native_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "native_source_hash": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b"
+  },
+  "data_digest": "48a7d5a6ef912dbef2eb9e8161301054239e09f897624e0c3a6573e774f79df8",
+  "private_panel_digest": "5af4a090d2b3517a3f70d486a5a8ecfca5a502b675c49d424746f5183e3696bb",
+  "judges": {
+    "ordinary_native_game@800": "b54415bad7c5f15a8987f13cdba21c114052f417c54e426c8a427a789f551f40",
+    "ordinary_native_game@6400": "8c00874f68c59b436e5fc175f8c2dde494e0a271b39ebb7862a604170551bff7",
+    "particle_native_game@800": "ae39d851d92357dcbf54691f5d1240680eb60faab61bcc56391cc4ee79e79ca5",
+    "particle_native_game@6400": "4b479af6036dd85c68513eb0e1f59aaf6ebc873713d3c60390f622250f1c5d40"
+  },
+  "reachable_teacher": {
+    "ordinary": {
+      "fit": true,
+      "guard": true,
+      "test": true
+    },
+    "particle": {
+      "fit": true,
+      "guard": true,
+      "test": true
+    }
+  },
+  "steps_per_arm": 6400,
+  "batch_size": 4,
+  "wall_seconds": 234.280783331953,
+  "particle_gap_reproduced": true,
+  "particle_minus_ordinary_endpoint_game": {
+    "ordinary_native_game@6400": 0.580811083316803,
+    "particle_native_game@6400": 1.3741511106491089
+  },
+  "endpoint_test_scores": {
+    "ordinary_native_game@1600": {
+      "ordinary_native_game@800": {
+        "paired_game": 2.184312343597412,
+        "feature_proxy": 0.5445702075958252,
+        "output_rmse_diagnostic": 0.18860192596912384
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 1.7600970268249512,
+        "feature_proxy": 0.6192981600761414,
+        "output_rmse_diagnostic": 0.18860192596912384
+      },
+      "particle_native_game@800": {
+        "paired_game": 3.2211337089538574,
+        "feature_proxy": 0.7256825566291809,
+        "output_rmse_diagnostic": 0.18860192596912384
+      },
+      "particle_native_game@6400": {
+        "paired_game": 2.547010898590088,
+        "feature_proxy": 0.6013506054878235,
+        "output_rmse_diagnostic": 0.18860192596912384
+      }
+    },
+    "ordinary_native_game@6400": {
+      "ordinary_native_game@800": {
+        "paired_game": 0.7190849781036377,
+        "feature_proxy": 0.0026178378611803055,
+        "output_rmse_diagnostic": 0.047492627054452896
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 0.9235867857933044,
+        "feature_proxy": 0.14690561592578888,
+        "output_rmse_diagnostic": 0.047492627054452896
+      },
+      "particle_native_game@800": {
+        "paired_game": 0.7252562642097473,
+        "feature_proxy": 0.001963397953659296,
+        "output_rmse_diagnostic": 0.047492627054452896
+      },
+      "particle_native_game@6400": {
+        "paired_game": 0.9307924509048462,
+        "feature_proxy": 0.07475440949201584,
+        "output_rmse_diagnostic": 0.047492627054452896
+      }
+    },
+    "particle_native_game@1600": {
+      "ordinary_native_game@800": {
+        "paired_game": 1.395241618156433,
+        "feature_proxy": 0.308008074760437,
+        "output_rmse_diagnostic": 0.21180814504623413
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 1.7422124147415161,
+        "feature_proxy": 0.6391757130622864,
+        "output_rmse_diagnostic": 0.21180814504623413
+      },
+      "particle_native_game@800": {
+        "paired_game": 2.050689697265625,
+        "feature_proxy": 0.4064761698246002,
+        "output_rmse_diagnostic": 0.21180814504623413
+      },
+      "particle_native_game@6400": {
+        "paired_game": 2.970527172088623,
+        "feature_proxy": 0.7212608456611633,
+        "output_rmse_diagnostic": 0.21180814504623413
+      }
+    },
+    "particle_native_game@6400": {
+      "ordinary_native_game@800": {
+        "paired_game": 1.0228853225708008,
+        "feature_proxy": 0.12883378565311432,
+        "output_rmse_diagnostic": 0.1356312483549118
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 1.5043978691101074,
+        "feature_proxy": 0.4987052381038666,
+        "output_rmse_diagnostic": 0.1356312483549118
+      },
+      "particle_native_game@800": {
+        "paired_game": 1.1854112148284912,
+        "feature_proxy": 0.14812450110912323,
+        "output_rmse_diagnostic": 0.1356312483549118
+      },
+      "particle_native_game@6400": {
+        "paired_game": 2.304943561553955,
+        "feature_proxy": 0.5326003432273865,
+        "output_rmse_diagnostic": 0.1356312483549118
+      }
+    },
+    "ordinary_mse_reference@1600": {
+      "ordinary_native_game@800": {
+        "paired_game": 2.210287094116211,
+        "feature_proxy": 0.5727283358573914,
+        "output_rmse_diagnostic": 0.15289200842380524
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 1.6304218769073486,
+        "feature_proxy": 0.5625091195106506,
+        "output_rmse_diagnostic": 0.15289200842380524
+      },
+      "particle_native_game@800": {
+        "paired_game": 2.8808751106262207,
+        "feature_proxy": 0.644601047039032,
+        "output_rmse_diagnostic": 0.15289200842380524
+      },
+      "particle_native_game@6400": {
+        "paired_game": 2.270333766937256,
+        "feature_proxy": 0.5330330729484558,
+        "output_rmse_diagnostic": 0.15289200842380524
+      }
+    },
+    "ordinary_mse_reference@6400": {
+      "ordinary_native_game@800": {
+        "paired_game": 0.7091378569602966,
+        "feature_proxy": 0.0008079325198195875,
+        "output_rmse_diagnostic": 0.03127415105700493
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 0.8198766112327576,
+        "feature_proxy": 0.08288559317588806,
+        "output_rmse_diagnostic": 0.03127415105700493
+      },
+      "particle_native_game@800": {
+        "paired_game": 0.7098462581634521,
+        "feature_proxy": 0.0004339042061474174,
+        "output_rmse_diagnostic": 0.03127415105700493
+      },
+      "particle_native_game@6400": {
+        "paired_game": 0.8312075734138489,
+        "feature_proxy": 0.042204346507787704,
+        "output_rmse_diagnostic": 0.03127415105700493
+      }
+    }
+  },
+  "particle_zero_code_test": {
+    "ordinary_native_game@800": {
+      "paired_game": 1.5952919721603394,
+      "output_rmse_diagnostic": 0.16658547520637512
+    },
+    "ordinary_native_game@6400": {
+      "paired_game": 1.6351256370544434,
+      "output_rmse_diagnostic": 0.16658547520637512
+    },
+    "particle_native_game@800": {
+      "paired_game": 2.0373921394348145,
+      "output_rmse_diagnostic": 0.16658547520637512
+    },
+    "particle_native_game@6400": {
+      "paired_game": 2.60311222076416,
+      "output_rmse_diagnostic": 0.16658547520637512
+    }
+  },
+  "arms": {
+    "ordinary_native_game": {
+      "active_parameter_counts": {
+        "generator": 128,
+        "critic": 38529,
+        "router": 0,
+        "active_bank": 0,
+        "noise": 1
+      },
+      "moves": 0,
+      "proposal_events": 0,
+      "wall_seconds": 54.522196877980605,
+      "evaluation_seconds": 3.910489045083523,
+      "recovery_witness": {
+        "from_step": 800,
+        "to_step": 802,
+        "rows_exact": true,
+        "state_exact": true,
+        "software_updates": 2,
+        "wall_seconds": 0.09113323502242565
+      },
+      "initial_frozen_owner_digest": "a82d938bc3a3e6ef0f1a5936080d5ed1ccd4224a682afc086451343de72657d6",
+      "final_frozen_owner_digest": "a82d938bc3a3e6ef0f1a5936080d5ed1ccd4224a682afc086451343de72657d6"
+    },
+    "particle_native_game": {
+      "active_parameter_counts": {
+        "generator": 156,
+        "critic": 38529,
+        "router": 136,
+        "active_bank": 512,
+        "noise": 1
+      },
+      "moves": 0,
+      "proposal_events": 64,
+      "wall_seconds": 155.0558822110761,
+      "evaluation_seconds": 9.038852367084473,
+      "recovery_witness": {
+        "from_step": 800,
+        "to_step": 802,
+        "rows_exact": true,
+        "state_exact": true,
+        "software_updates": 2,
+        "wall_seconds": 0.220462930155918
+      },
+      "initial_frozen_owner_digest": "33f8a4dd66003021df2c6ec1534ef5d7edb2ad4f84c5cca600c823ccf5057286",
+      "final_frozen_owner_digest": "33f8a4dd66003021df2c6ec1534ef5d7edb2ad4f84c5cca600c823ccf5057286"
+    },
+    "ordinary_mse_reference": {
+      "active_parameter_counts": {
+        "generator": 128
+      },
+      "moves": 0,
+      "proposal_events": 0,
+      "wall_seconds": 6.900457411073148,
+      "evaluation_seconds": 3.2041619119700044,
+      "recovery_witness": {
+        "from_step": 800,
+        "to_step": 802,
+        "rows_exact": true,
+        "state_exact": true,
+        "software_updates": 2,
+        "wall_seconds": 0.01855453592725098
+      },
+      "initial_frozen_owner_digest": "cfa22cc93bdab4c80d8a7a6c0506f23693f3401858ff35f119163993e8de80ae",
+      "final_frozen_owner_digest": "cfa22cc93bdab4c80d8a7a6c0506f23693f3401858ff35f119163993e8de80ae"
+    }
+  },
+  "independent_review": {
+    "qualified": true,
+    "checks": 132008,
+    "checkpoint_files_per_arm": 34,
+    "fixed_curve_rows": 99,
+    "independent_recovery_updates": 6,
+    "held_source_sha256": {
+      "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+      "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+      "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02"
+    },
+    "native_source_hash": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
+    "elapsed_seconds": 32.31548128509894,
+    "review_attempt_note": "The first full-state/replay prefix passed, then a rawmean tolerance was corrected; final artifact scoring performs no additional native updates."
+  },
+  "raw_artifacts_local": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-v1",
+  "limits": [
+    "LoRA-generated, basis-aligned teacher; rank2/2site host is not full Supra.",
+    "Named sampled network initialization differs from the previous Supra orthogonal cohort.",
+    "Only the historical ordinary reference uses an MSE optimizer.",
+    "Baseline ranking reproduces a gap; the separately declared H/b-neutral intervention tests its initialization cause."
+  ]
+}

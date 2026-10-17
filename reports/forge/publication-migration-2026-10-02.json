@@ -1,0 +1,29 @@
+{
+  "kind": "maintained-policy-publication-migration",
+  "original_commit": "b8feb1fe8e672c3e7a6b579329af0bd89a069ff0",
+  "originals_preserved": [
+    {
+      "git_blob": "dd6ba8605e24ff1f1b579286e7ef15cf77f2ef76",
+      "maintained_path": "experiments/forge/policy_publication.py",
+      "path": "reports/forge/family-winner-round1/publish_policy_results.py",
+      "role": "publisher",
+      "sha256": "8f0f0b929152316b88ddcf4aacb458f99c949ee68175b66eddb32c2e1503caf2"
+    },
+    {
+      "git_blob": "a2e3fe69051e5e6b70cc9eb5bde84d84a693eb90",
+      "maintained_path": "experiments/forge/policy_family_readout.py",
+      "path": "reports/forge/family-winner-round1/policy_family_readout.py",
+      "role": "readout",
+      "sha256": "e4269840d790cf1855a1cbe6b0cc9ddd0fca3d779d997120179e4b21fcb10497"
+    },
+    {
+      "git_blob": "4014779b29b6855ceb1d0239e07db9531e2a574c",
+      "maintained_path": "tests/test_forge_policy_publication.py",
+      "path": "reports/forge/family-winner-round1/test_publish_policy_results.py",
+      "role": "software_controls",
+      "sha256": "8327dba4222a64f9743993b13059c3daf45935f4ddc90dab909deaddcd70ee57"
+    }
+  ],
+  "qualification_changed": false,
+  "schema_version": 1
+}

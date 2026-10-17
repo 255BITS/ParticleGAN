@@ -1,0 +1,131 @@
+{
+  "CPU_rng_unchanged": true,
+  "begin_step_calls": 0,
+  "checkpoint_loads": 2,
+  "cuda_context_initialized": false,
+  "fixtures": {
+    "mnist": {
+      "FIFO_sample_shape": [
+        1,
+        28,
+        28
+      ],
+      "R1_fires": 0,
+      "checkpoint_sha256": "e19d6b656d18c62d73b19d5454ef059054ce3f086cd90cb9bb983488b3069491",
+      "completed_steps": 1000,
+      "data_position": 256000,
+      "endpoint_source": "RA13-settled",
+      "frozen_output_shape": [
+        1,
+        28,
+        28
+      ],
+      "new_shape_guard_accepts_original_checkpoint": true,
+      "rng_buffers": {
+        "birth_death.stream": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "cpu_rng": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 5056
+        },
+        "cuda_rng": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.eval_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.latent_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.noise_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.penalty_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        }
+      },
+      "selected_backend": "knn",
+      "source_recipe_schema_matches": true,
+      "status": "PASS",
+      "table_lastblock_blocks_alias_identical": true
+    },
+    "toy": {
+      "FIFO_sample_shape": [
+        2
+      ],
+      "R1_fires": 0,
+      "checkpoint_sha256": "4388d45f7e157cca89a3b1b035757c6b1264ae11e86e217208b6b62a9a1db884",
+      "completed_steps": 1000,
+      "data_position": 256000,
+      "endpoint_source": "RA13-settled",
+      "frozen_output_shape": [
+        2
+      ],
+      "new_shape_guard_accepts_original_checkpoint": true,
+      "rng_buffers": {
+        "birth_death.stream": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "cpu_rng": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 5056
+        },
+        "cuda_rng": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.eval_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.latent_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.noise_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.penalty_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        }
+      },
+      "selected_backend": "feature_cells",
+      "source_recipe_schema_matches": true,
+      "status": "PASS",
+      "table_lastblock_blocks_alias_identical": true
+    }
+  },
+  "inputs_sha256": "f6fa0b84dbcf21eacf20314086517f0d53cba30b059a78c639e69bd3034f7209",
+  "limitations": [
+    "No model construction or live CUDA restoration occurred; original40update CUDA replay remains required."
+  ],
+  "model_calls": 0,
+  "sampling_calls": 0,
+  "source_freeze_sha256": "b830d92f2051a03719fc308f7b9658967ac3eaf5aba0f72cd33327f4d1ea2acb",
+  "status": "PASS_SAVED_CHECKPOINT_SOURCE_ALIAS_PREFLIGHT",
+  "training_updates": 0
+}

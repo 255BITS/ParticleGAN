@@ -1,0 +1,362 @@
+{
+  "completed_protocol": {
+    "completed_updates": 7000,
+    "final_five_steps": [
+      6000,
+      6250,
+      6500,
+      6750,
+      7000
+    ],
+    "fresh_seed": 0,
+    "goal_frames": 9,
+    "goal_state_steps": [
+      0,
+      1,
+      100,
+      1000,
+      2250,
+      3500,
+      4750,
+      6000,
+      7000
+    ],
+    "independent_holdout_samples": 100000,
+    "metric_observations": 34,
+    "observation_steps": [
+      0,
+      1,
+      10,
+      25,
+      50,
+      100,
+      250,
+      500,
+      750,
+      1000,
+      1250,
+      1500,
+      1750,
+      2000,
+      2250,
+      2500,
+      2750,
+      3000,
+      3250,
+      3500,
+      3750,
+      4000,
+      4250,
+      4500,
+      4750,
+      5000,
+      5250,
+      5500,
+      5750,
+      6000,
+      6250,
+      6500,
+      6750,
+      7000
+    ],
+    "primary_archive_joins": 41,
+    "primary_sample_count": 20000,
+    "selected_primary_receipts": 35
+  },
+  "initialization_projections": [
+    {
+      "receipt": {
+        "completed_steps": 0,
+        "critic": {
+          "fourier": 3,
+          "layers": 3,
+          "width": 128
+        },
+        "critic_observed_steps": 0,
+        "data_cursor": 0,
+        "generator": {
+          "bias_zero": true,
+          "identity_affine": true
+        },
+        "object_bindings": {
+          "all_original_policy_owners": true,
+          "critic_optimizer": true,
+          "generator_optimizer": true,
+          "policy_critic": true,
+          "policy_generator": true,
+          "policy_prior": true,
+          "policy_table": true,
+          "prior_optimizer": true,
+          "trainer_policy": true,
+          "unique_parameter_ownership": true
+        },
+        "optimizer_state_entries": {
+          "critic": 0,
+          "generator": 0
+        },
+        "phase": "ready",
+        "policy_updates": 0,
+        "resolved_recipe_sha256": "152ee607b4a2b18d99e9f440985b920363a481a14236ae12409747e9c283738a",
+        "restored": false,
+        "seed": 0,
+        "semantic_state_sha256": "c652266131a27808f76c68e75be9e532371f6f4ba211e8bf1da21f26ec07c833",
+        "source_contract_sha256": "2878b1a135fe508a6ca430866b363a04b03b0a23fb0bffbe191d42b03dfd2086",
+        "source_request_sha256": "d42f4c223ad0b765974da50716e0e34a8e41a9211824e7363fe103b458dfeda9",
+        "table": {
+          "actual_range": [
+            -4.999840259552002,
+            4.999967575073242
+          ],
+          "archived_seed1234_hash_used": false,
+          "requires_grad": true,
+          "sha256": "66bccd8026e028509594be267e5ab499813cd53fe5367f67e149a792ded69333",
+          "shape": [
+            20000,
+            2
+          ],
+          "uniform_bounds": [
+            -5.0,
+            5.0
+          ]
+        }
+      },
+      "task_id": "grid100"
+    },
+    {
+      "receipt": {
+        "completed_steps": 0,
+        "critic": {
+          "fourier": 3,
+          "layers": 3,
+          "width": 128
+        },
+        "critic_observed_steps": 0,
+        "data_cursor": 0,
+        "generator": {
+          "bias_zero": true,
+          "identity_affine": true
+        },
+        "object_bindings": {
+          "all_original_policy_owners": true,
+          "critic_optimizer": true,
+          "generator_optimizer": true,
+          "policy_critic": true,
+          "policy_generator": true,
+          "policy_prior": true,
+          "policy_table": true,
+          "prior_optimizer": true,
+          "trainer_policy": true,
+          "unique_parameter_ownership": true
+        },
+        "optimizer_state_entries": {
+          "critic": 0,
+          "generator": 0
+        },
+        "phase": "ready",
+        "policy_updates": 0,
+        "resolved_recipe_sha256": "152ee607b4a2b18d99e9f440985b920363a481a14236ae12409747e9c283738a",
+        "restored": false,
+        "seed": 0,
+        "semantic_state_sha256": "daf489222343b90cf60ab7a612d86c82e68e6eb06ed12af343d24f22e8193de3",
+        "source_contract_sha256": "2878b1a135fe508a6ca430866b363a04b03b0a23fb0bffbe191d42b03dfd2086",
+        "source_request_sha256": "bcf5cfdd69e1f532aa0371f5fe94a346b6124bea87837c2038de09549f418bf6",
+        "table": {
+          "actual_range": [
+            -4.999840259552002,
+            4.999967575073242
+          ],
+          "archived_seed1234_hash_used": false,
+          "requires_grad": true,
+          "sha256": "66bccd8026e028509594be267e5ab499813cd53fe5367f67e149a792ded69333",
+          "shape": [
+            20000,
+            2
+          ],
+          "uniform_bounds": [
+            -5.0,
+            5.0
+          ]
+        }
+      },
+      "task_id": "rotated100"
+    },
+    {
+      "receipt": {
+        "completed_steps": 0,
+        "critic": {
+          "fourier": 3,
+          "layers": 3,
+          "width": 128
+        },
+        "critic_observed_steps": 0,
+        "data_cursor": 0,
+        "generator": {
+          "bias_zero": true,
+          "identity_affine": true
+        },
+        "object_bindings": {
+          "all_original_policy_owners": true,
+          "critic_optimizer": true,
+          "generator_optimizer": true,
+          "policy_critic": true,
+          "policy_generator": true,
+          "policy_prior": true,
+          "policy_table": true,
+          "prior_optimizer": true,
+          "trainer_policy": true,
+          "unique_parameter_ownership": true
+        },
+        "optimizer_state_entries": {
+          "critic": 0,
+          "generator": 0
+        },
+        "phase": "ready",
+        "policy_updates": 0,
+        "resolved_recipe_sha256": "152ee607b4a2b18d99e9f440985b920363a481a14236ae12409747e9c283738a",
+        "restored": false,
+        "seed": 0,
+        "semantic_state_sha256": "a23edf4a1bd0c2b4e97517317e6e8c6025ae530adf295c45a8be99b63ddca060",
+        "source_contract_sha256": "2878b1a135fe508a6ca430866b363a04b03b0a23fb0bffbe191d42b03dfd2086",
+        "source_request_sha256": "3a27bedeea8ffed58e8fe8cf4ac987dac8492cd1aba8048dc8a27fbb4ada6175",
+        "table": {
+          "actual_range": [
+            -4.999840259552002,
+            4.999967575073242
+          ],
+          "archived_seed1234_hash_used": false,
+          "requires_grad": true,
+          "sha256": "66bccd8026e028509594be267e5ab499813cd53fe5367f67e149a792ded69333",
+          "shape": [
+            20000,
+            2
+          ],
+          "uniform_bounds": [
+            -5.0,
+            5.0
+          ]
+        }
+      },
+      "task_id": "staggered100"
+    }
+  ],
+  "original_attestation_pins": [
+    {
+      "bytes": 25187,
+      "sha256": "e778347354e1607a7385fc0680fa8bb385390ee5ec383a22c3291584bb422f1b",
+      "task_id": "grid100"
+    },
+    {
+      "bytes": 25187,
+      "sha256": "657980e7233572c3792b9b0dbc4481ce0e6e6b8e8032e6f7f8f061cf899d396e",
+      "task_id": "rotated100"
+    },
+    {
+      "bytes": 25188,
+      "sha256": "4b06c943cdf71acc28f28365a3079460832c62f4c6bb47192e5b6e7af2e6c4d5",
+      "task_id": "staggered100"
+    }
+  ],
+  "original_certificate_pins": [
+    {
+      "copied_preflight_sha256": "2f9056e8e8dfb9033611f1a3ed459399f9a87ef1c6228cd18fb96304630e0be8",
+      "frozen_request_sha256": "1219ad963f450df54dd7ee1dfb51be81ef10ccba141578f2988eb95d60a3313c",
+      "full_child_manifest_files": 116,
+      "full_manifest_bytes_verified": true,
+      "independent_grade_sha256": "4249a087e353e9dad986c6960ba573cf6a54b92ff573f9d54c40df79f56f37fd",
+      "initialization_sha256": "0a288e8e95cd71fb803ce1af2e063e1aa6efe10c1e10761f2a585a90d9c64de0",
+      "original_attestation_sha256": "e778347354e1607a7385fc0680fa8bb385390ee5ec383a22c3291584bb422f1b",
+      "original_certificate_sha256": "cdfcc419a3fc228a9ff4ceceeb9d9f7c34da0170496e4a289011b5de92284746",
+      "packet_bytes": 1569316,
+      "packet_sha256": "ea16f853609557e229158dfd7341c49f6d67c31f8b34c7d578db7984cd001f90",
+      "task_id": "grid100",
+      "token_matched_durable_terminal": true,
+      "unchanged_original_certificate": true
+    },
+    {
+      "copied_preflight_sha256": "136eb06b9a06ade125a2c900480ad099e2abcb7fe2c079746eacd1c4604f98d3",
+      "frozen_request_sha256": "447bede9848a6353ec8459a4aa026e1d0e53d3dfe6ed61ecf1b8b2aff58d41cd",
+      "full_child_manifest_files": 116,
+      "full_manifest_bytes_verified": true,
+      "independent_grade_sha256": "5776b810578d57c4047dfd959fa625dde497fac64f5b6d10dea895f2c33b3bd1",
+      "initialization_sha256": "c9f2ba963c76a9a55462a661addfe54c5efa7d4e26742a7748082744f8f3521f",
+      "original_attestation_sha256": "657980e7233572c3792b9b0dbc4481ce0e6e6b8e8032e6f7f8f061cf899d396e",
+      "original_certificate_sha256": "cf2096720dd2431a61152a00731d066c9a0998aca52fe154a4286027723f984e",
+      "packet_bytes": 1569373,
+      "packet_sha256": "c13fa6b27a25c6075fecbe4713089949501e0c27b721726290b28edd27269ede",
+      "task_id": "rotated100",
+      "token_matched_durable_terminal": true,
+      "unchanged_original_certificate": true
+    },
+    {
+      "copied_preflight_sha256": "c1db53ee4860fa9460438af8934fa6d128e29024c129406b4e3a59d405b9d57c",
+      "frozen_request_sha256": "4c8e3d08438d9794e89e83c820653bf17e8a285638dbbe898876886292a3d929",
+      "full_child_manifest_files": 116,
+      "full_manifest_bytes_verified": true,
+      "independent_grade_sha256": "b3b57983580df86cb33b781730adb965c290b9d682c757276678b8f8d055ec3b",
+      "initialization_sha256": "8e4b54a4497dd6b14570f12d8d5bbf08b14b062f27fe44fc0d01654f72eb9ad1",
+      "original_attestation_sha256": "4b06c943cdf71acc28f28365a3079460832c62f4c6bb47192e5b6e7af2e6c4d5",
+      "original_certificate_sha256": "2ea69bd7766eb857df9a808957f6b1afeeb69add8526ff46392a3fe45d512dad",
+      "packet_bytes": 1569411,
+      "packet_sha256": "b46114f66b87d511f9f4e4700fbd5bd6aebe618539922aa2b38bbfb36d8b6f01",
+      "task_id": "staggered100",
+      "token_matched_durable_terminal": true,
+      "unchanged_original_certificate": true
+    }
+  ],
+  "private_evidence_retained": true,
+  "public_media_joins": [
+    {
+      "child_attested": false,
+      "frame_index": 8,
+      "input_gif_bytes": 224390,
+      "input_gif_sha256": "1a4f573f3c1b00ddab9139230ec635c45aa2f78a4d11f58fbe045b55028df320",
+      "output_bytes": 72668,
+      "output_sha256": "30035e016ad29e51f8f72676b3e55042d1e7ba7727a976979032b37b5a7a6e6c",
+      "published_relative": "receipts/native/grid100/goal-final.png",
+      "step": 7000
+    },
+    {
+      "child_attested": false,
+      "frame_index": 8,
+      "input_gif_bytes": 224231,
+      "input_gif_sha256": "cec0b51b02d2a45251245555d0bd51abecdaa947ce3746862d991faec6a08225",
+      "output_bytes": 79611,
+      "output_sha256": "3a3a2c937a6f58840f7f072b3f67537c75001291bafea57e6d73a00d422c873f",
+      "published_relative": "receipts/native/rotated100/goal-final.png",
+      "step": 7000
+    },
+    {
+      "child_attested": false,
+      "frame_index": 8,
+      "input_gif_bytes": 226379,
+      "input_gif_sha256": "113bbb3330a3023561d6d447f6ab51d8aeca0735896a2c613177f3f25e9b501a",
+      "output_bytes": 77411,
+      "output_sha256": "30f4d3cd61cd0fbcbdcac589c0d685e6a2f683619d6e0cb25505b5bc2b5c74b1",
+      "published_relative": "receipts/native/staggered100/goal-final.png",
+      "step": 7000
+    }
+  ],
+  "schema": "pg_atlas_restoration_public_verification_v1",
+  "scientific_calls_during_publication": {
+    "draws": 0,
+    "forwards": 0,
+    "models": 0,
+    "scores": 0,
+    "state_restores": 0,
+    "updates": 0
+  },
+  "source_scopes": [
+    {
+      "copied_source_file_count": 3914,
+      "execution_digest": "00c19ef01f68e3222888a9b0edc6fcc5f635a384b982260c4e005832c1ed09ae",
+      "full_copied_source_bytes_reverified": true,
+      "manifest_bytes": 622247,
+      "manifest_sha256": "4582cbde7e0ad337fdae1ebe3e8609b569d2e7ac9a3385875e11cd6981215a56",
+      "origin_commit": "9da0e927a0a4242ee813ceb0340e9fee70ccdc40"
+    },
+    {
+      "execution_digest": "8693fcf0f2b3ebea741782b414e88099d411e114ccc92928fcc8fd3464dd72bb",
+      "origin_commit": "7f7037a54edc54cfb8f7466f6a98aee56e17b6db"
+    }
+  ]
+}

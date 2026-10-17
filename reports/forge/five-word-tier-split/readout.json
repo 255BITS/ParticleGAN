@@ -1,0 +1,714 @@
+{
+  "candidate_revision": "d0ebccd0900ed102d1fa7ce028e862f53bf5e89b0e30d719950cfd6f43a4b990",
+  "device": "cuda:0",
+  "id": "five-word-tier-split-v1",
+  "new_optimizer_updates": 24001,
+  "original_sustained_task_unchanged": true,
+  "protocol_sha256": "4ff760dc8627e9cc947fc8e01f84d2003c5dc3d0509f0e7a9a20c7545cdc3f7d",
+  "qualification_input": false,
+  "reserved_seconds": 1200,
+  "rows": [
+    {
+      "adapter_loop_seconds": 806.1107658860274,
+      "checkpoint": {
+        "completed_steps": 1667,
+        "path": "acquired-state.pt",
+        "selection": "earliest_confirmed_passing_state",
+        "sha256": "abb9b1f3b9202f8b574452bc8a762c81761f89c2133cf753e102314fe428c5b5",
+        "state_sha256": "fd1e96c5369c612019b0a5f924d4816f45ef34bf235c99c9adea0e5ee5194778",
+        "training_state_sha256": "c183e71987c8f250f6fac8487e05b3edcc39be8df3f4c334bc3572f480bb65a2"
+      },
+      "completed_steps": 20001,
+      "continuity": null,
+      "evaluator_result": {
+        "confirmed_checks": 13,
+        "confirmed_steps": [
+          1667,
+          2501,
+          3334,
+          4167,
+          5834,
+          10001,
+          12501,
+          14168,
+          15001,
+          16668,
+          17501,
+          19168,
+          20001
+        ],
+        "endpoint_passed": true,
+        "first_confirmed_step": 1667,
+        "observations": 24,
+        "passing_observations": 13
+      },
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1875,
+        "mass_berry": 0.1953125,
+        "mass_grape": 0.2109375,
+        "mass_lemon": 0.2080078125,
+        "mass_melon": 0.1982421875,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": -0.0,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "gate_status": "PASS",
+      "gif_path": "../../toy_audit/api_contract/five_word_smoke_hold/media/five_word_joint_smoke.gif",
+      "gif_sha256": "6975bb5800f584ce3e27a0832b7c980fd602169009bf4211447f62feac6d7270",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 20001,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 20001,
+              "calls": 20001,
+              "eligible": 20001,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "host": {
+        "definition": {
+          "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+          "encoder_widths": [
+            168,
+            128,
+            64,
+            2
+          ],
+          "generator_widths": [
+            2,
+            64,
+            128,
+            168
+          ],
+          "joint_critic_widths": [
+            170,
+            256,
+            128,
+            1
+          ],
+          "length": 6,
+          "resources": {
+            "batch_size": 256,
+            "num_particles": 5,
+            "z_dim": 2
+          },
+          "words": [
+            "apple",
+            "grape",
+            "lemon",
+            "melon",
+            "berry"
+          ]
+        },
+        "initial_prior_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+        "models": {
+          "discriminator": {
+            "class": "benchmarks.toy_audit.api_images.WordJointCritic",
+            "initial_state_sha256": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+            "parameter_shapes": {
+              "net.0.bias": [
+                256
+              ],
+              "net.0.weight": [
+                256,
+                170
+              ],
+              "net.2.bias": [
+                128
+              ],
+              "net.2.weight": [
+                128,
+                256
+              ],
+              "net.4.bias": [
+                1
+              ],
+              "net.4.weight": [
+                1,
+                128
+              ]
+            },
+            "parameters": 76801
+          },
+          "encoder": {
+            "class": "benchmarks.toy_audit.api_images.WordEncoder",
+            "initial_state_sha256": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+            "parameter_shapes": {
+              "net.1.bias": [
+                128
+              ],
+              "net.1.weight": [
+                128,
+                168
+              ],
+              "net.3.bias": [
+                64
+              ],
+              "net.3.weight": [
+                64,
+                128
+              ],
+              "net.5.bias": [
+                2
+              ],
+              "net.5.weight": [
+                2,
+                64
+              ]
+            },
+            "parameters": 30018
+          },
+          "generator": {
+            "class": "benchmarks.toy_audit.api_images.WordGenerator",
+            "initial_state_sha256": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+            "parameter_shapes": {
+              "net.0.bias": [
+                64
+              ],
+              "net.0.weight": [
+                64,
+                2
+              ],
+              "net.2.bias": [
+                128
+              ],
+              "net.2.weight": [
+                128,
+                64
+              ],
+              "net.4.bias": [
+                168
+              ],
+              "net.4.weight": [
+                168,
+                128
+              ]
+            },
+            "parameters": 30184
+          }
+        },
+        "profile": null
+      },
+      "new_optimizer_updates": 20001,
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "raw_receipt_sha256": "c1cde4bd4639d6cc4804454fc24663c92c30d6b83b7a9e798d110eb7be83fafe",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 5,
+        "observation_sigma": 0.03,
+        "optimizer_family": "dualnorm",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 20000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "rng_manifest_sha256": "56b98b1d59aa50f78ba7a525436854ae0aff2929855a7ec6f94d9ae09db8971c",
+      "task": "five_word_joint_smoke",
+      "task_fingerprint": "c3089786450708dfb1032acb5efd633214c32df853c69a593c1d5ec0c301c1ea"
+    },
+    {
+      "adapter_loop_seconds": 124.31956831598654,
+      "checkpoint": null,
+      "completed_steps": 5667,
+      "continuity": {
+        "history_reset": false,
+        "parent_candidate_revision": "d0ebccd0900ed102d1fa7ce028e862f53bf5e89b0e30d719950cfd6f43a4b990",
+        "parent_checkpoint_sha256": "abb9b1f3b9202f8b574452bc8a762c81761f89c2133cf753e102314fe428c5b5",
+        "parent_compatibility_key": "6e2a20a38d6b15198190a693162c64228276cd075ccc785aa168e9d67ace381e",
+        "parent_confirmed_step": 1667,
+        "parent_smoke_status": "PASS",
+        "parent_state_sha256": "fd1e96c5369c612019b0a5f924d4816f45ef34bf235c99c9adea0e5ee5194778",
+        "prefix_steps": 1667,
+        "restored_exactly": true,
+        "same_recipe_prior_architecture": true
+      },
+      "evaluator_result": {
+        "confirmed_checks": 20,
+        "confirmed_steps": [
+          1667,
+          1834,
+          2001,
+          2167,
+          2334,
+          2501,
+          2667,
+          2834,
+          3167,
+          3334,
+          3501,
+          3667,
+          3834,
+          4001,
+          4167,
+          4334,
+          4501,
+          4667,
+          4834,
+          5667
+        ],
+        "endpoint_passed": true,
+        "first_confirmed_step": 1667,
+        "observations": 25,
+        "passing_observations": 20
+      },
+      "final_metrics": {
+        "completed_steps": 5667.0,
+        "mass_apple": 0.2236328125,
+        "mass_berry": 0.1943359375,
+        "mass_grape": 0.1884765625,
+        "mass_lemon": 0.1826171875,
+        "mass_melon": 0.2109375,
+        "mass_tv": 0.034570312500000006,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": -0.0,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 5667
+      },
+      "gate_status": "FAIL",
+      "gif_path": "../../toy_audit/api_contract/five_word_smoke_hold/media/five_word_joint_hold.gif",
+      "gif_sha256": "fd67f2bb9ca27919ffb306f3ce3b1dd288c8e030022084fbde4ebc7eaff0e364",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 4000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 4000,
+              "calls": 4000,
+              "eligible": 4000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 5667,
+          "encoder": 5667,
+          "generator": 5667,
+          "prior": 5667
+        },
+        "unintended_rng_deviations": 0
+      },
+      "host": {
+        "definition": {
+          "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+          "encoder_widths": [
+            168,
+            128,
+            64,
+            2
+          ],
+          "generator_widths": [
+            2,
+            64,
+            128,
+            168
+          ],
+          "joint_critic_widths": [
+            170,
+            256,
+            128,
+            1
+          ],
+          "length": 6,
+          "resources": {
+            "batch_size": 256,
+            "num_particles": 5,
+            "z_dim": 2
+          },
+          "words": [
+            "apple",
+            "grape",
+            "lemon",
+            "melon",
+            "berry"
+          ]
+        },
+        "initial_prior_sha256": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89",
+        "models": {
+          "discriminator": {
+            "class": "benchmarks.toy_audit.api_images.WordJointCritic",
+            "initial_state_sha256": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+            "parameter_shapes": {
+              "net.0.bias": [
+                256
+              ],
+              "net.0.weight": [
+                256,
+                170
+              ],
+              "net.2.bias": [
+                128
+              ],
+              "net.2.weight": [
+                128,
+                256
+              ],
+              "net.4.bias": [
+                1
+              ],
+              "net.4.weight": [
+                1,
+                128
+              ]
+            },
+            "parameters": 76801
+          },
+          "encoder": {
+            "class": "benchmarks.toy_audit.api_images.WordEncoder",
+            "initial_state_sha256": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+            "parameter_shapes": {
+              "net.1.bias": [
+                128
+              ],
+              "net.1.weight": [
+                128,
+                168
+              ],
+              "net.3.bias": [
+                64
+              ],
+              "net.3.weight": [
+                64,
+                128
+              ],
+              "net.5.bias": [
+                2
+              ],
+              "net.5.weight": [
+                2,
+                64
+              ]
+            },
+            "parameters": 30018
+          },
+          "generator": {
+            "class": "benchmarks.toy_audit.api_images.WordGenerator",
+            "initial_state_sha256": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+            "parameter_shapes": {
+              "net.0.bias": [
+                64
+              ],
+              "net.0.weight": [
+                64,
+                2
+              ],
+              "net.2.bias": [
+                128
+              ],
+              "net.2.weight": [
+                128,
+                64
+              ],
+              "net.4.bias": [
+                168
+              ],
+              "net.4.weight": [
+                168,
+                128
+              ]
+            },
+            "parameters": 30184
+          }
+        },
+        "profile": null
+      },
+      "new_optimizer_updates": 4000,
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "raw_receipt_sha256": "d23f5515cc9fd4a5e473cb19dffbe623135e4622d1d0bd8510a3a2f82ee5cc10",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 5,
+        "observation_sigma": 0.03,
+        "optimizer_family": "dualnorm",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 20000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "rng_manifest_sha256": "56b98b1d59aa50f78ba7a525436854ae0aff2929855a7ec6f94d9ae09db8971c",
+      "task": "five_word_joint_hold",
+      "task_fingerprint": "0bc3b68e7ef21bdbc618fb26daa5cd86799d6cb181da590c5e76f0851eb28e6a"
+    }
+  ],
+  "runtime": {
+    "autograd_multithreading": false,
+    "cusolver_automatic_fallback_warnings": 1,
+    "driver_changed": false,
+    "scientific_retry": false,
+    "torch": "2.14.0+cu130",
+    "warning_claim": "Observed automatic fallback; its causal role was not tested."
+  },
+  "saved_array_verification": {
+    "acquisition_checkpoint_verified": true,
+    "final_checkpoints_verified": true,
+    "grades_recomputed": [
+      {
+        "gate_status": "PASS",
+        "task": "five_word_joint_smoke"
+      },
+      {
+        "gate_status": "FAIL",
+        "task": "five_word_joint_hold"
+      }
+    ],
+    "metrics_recomputed": 100,
+    "new_optimizer_updates": 0,
+    "new_sampling_draws": 0
+  },
+  "schema_version": 1,
+  "scope": "task_only_cuda_gate_verification",
+  "seed": 0,
+  "source_commit": "0270a501b7d90f4d6c34b4c3e9ef4166f877b301",
+  "source_digest": "3c82db6c7b24642887dfaab8d7ba13e0f7ea11689f6839bc687d2dd59126e478",
+  "total_wall_seconds": 947.7544655730017
+}

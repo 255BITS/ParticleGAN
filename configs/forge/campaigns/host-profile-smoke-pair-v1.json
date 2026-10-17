@@ -1,0 +1,30 @@
+{
+  "budgets": {
+    "campaign_seconds": 3600,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "img_intensity2_residual16": 1800,
+      "mode_hold": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "host-profile-smoke-pair-v1",
+  "profile": "host-profile-transfer-v1",
+  "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+  "purpose": "Complete only the two missing K3P smoke cells after the registered native grid failure established an independent negative reference. This enables a smoke/reference pairing without filling the other quality tasks of a known-negative candidate. Keep source/cohort, gates, candidate, seed and prior fixed. No quality rerun or promotion.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "Complete the current smoke predicate for one independently known-negative lineage; retain all unknown reference costs and other lineages.",
+      "tasks": [
+        "mode_hold",
+        "img_intensity2_residual16"
+      ]
+    }
+  ],
+  "view": "host_profile_transfer"
+}

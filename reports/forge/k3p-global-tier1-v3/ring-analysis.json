@@ -1,0 +1,872 @@
+{
+  "archives": [
+    {
+      "path": "/home/martyn/dev/ParticleGAN/artifacts/forge/k3p-global-tier1-v2-v1.tar.gz",
+      "sha256": "218cb718e61fd8828e89f03364edb067a3a5dadcd7c23084571fb6239b926064"
+    },
+    {
+      "bytes": 43004589,
+      "path": "/home/martyn/dev/ParticleGAN/artifacts/forge/tier1-existing-configs-v1.tar.gz",
+      "sha256": "1ea74b7b92cd36848a6204bd39d9ce087470f8da4210f9dc0e4bd670c11057d9"
+    }
+  ],
+  "bounded_global_search_recommendation": {
+    "existing_numeric_axes": {
+      "d_lr_mult": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "nominal_prior_base_lr": [
+        0.0012,
+        0.0031875,
+        0.006375
+      ]
+    },
+    "hold": {
+      "input_noise_std": 0.5,
+      "lr": 0.006375,
+      "network_lr_horizon_cap": null,
+      "output_noise_std": 0.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0
+    },
+    "limits": "Use whole reusable recipes through all five unchanged Tier 1 gates; retain first-fail stops and full 26-task UNKNOWN denominator. Prior2 at LR.006375 previously failed ring, so faster is not presumed better. This suggestion changes no objective, technique, task resource or gate."
+  },
+  "failures": [
+    {
+      "actual_recipe_differences_from_incumbent": {
+        "d_lr_mult": {
+          "failed": 1.5,
+          "incumbent": 1.0
+        },
+        "network_lr_horizon_cap": {
+          "failed": null,
+          "incumbent": 1600
+        },
+        "output_noise_std": {
+          "failed": 0.0,
+          "incumbent": 0.029
+        },
+        "prior_lr_mult": {
+          "failed": 0.18823529411764706,
+          "incumbent": 1.0
+        }
+      },
+      "all_24_recomputed_gate_observations_match": true,
+      "all_finite": true,
+      "attempt_id": "7ea5954f54ab44a497cd6a303828e836",
+      "candidate_id": "k3p--8072e0db5de655465437a1de7db530340beb273340f909fcfc0e8c731e92bd6f",
+      "candidate_revision": "fb50c4f8a4cbdeb99b0b8926f15df0a2fcd092f19628f937c2d80afc3439e7e5",
+      "completed_steps": 400,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "final_components": [
+        {
+          "beyond_four_sigma_fraction": 0.19678714871406555,
+          "centroid_offset_sigma": 1.5476434230804443,
+          "component": 0,
+          "count": 249,
+          "covariance_relative_frobenius_error": 4.664371490478516,
+          "four_sigma_core_covariance_error": 1.5125908851623535,
+          "hq_fraction": 0.6867470145225525,
+          "maximum_eigenvalue_ratio": 6.806205749511719,
+          "minimum_eigenvalue_ratio": 4.130605220794678,
+          "radial_variance_ratio": 6.344210624694824,
+          "tangential_variance_ratio": 4.592600345611572
+        },
+        {
+          "beyond_four_sigma_fraction": 0.10087719559669495,
+          "centroid_offset_sigma": 0.2250024825334549,
+          "component": 1,
+          "count": 228,
+          "covariance_relative_frobenius_error": 3.4908180236816406,
+          "four_sigma_core_covariance_error": 1.4290910959243774,
+          "hq_fraction": 0.8157894611358643,
+          "maximum_eigenvalue_ratio": 5.572498321533203,
+          "minimum_eigenvalue_ratio": 2.861149787902832,
+          "radial_variance_ratio": 2.878338575363159,
+          "tangential_variance_ratio": 5.5553107261657715
+        },
+        {
+          "beyond_four_sigma_fraction": 0.11469534039497375,
+          "centroid_offset_sigma": 0.8847299218177795,
+          "component": 2,
+          "count": 279,
+          "covariance_relative_frobenius_error": 5.87258768081665,
+          "four_sigma_core_covariance_error": 1.416007399559021,
+          "hq_fraction": 0.7885304689407349,
+          "maximum_eigenvalue_ratio": 8.79125690460205,
+          "minimum_eigenvalue_ratio": 3.875912666320801,
+          "radial_variance_ratio": 8.765318870544434,
+          "tangential_variance_ratio": 3.90185284614563
+        },
+        {
+          "beyond_four_sigma_fraction": 0.012698412872850895,
+          "centroid_offset_sigma": 0.06703298538923264,
+          "component": 3,
+          "count": 315,
+          "covariance_relative_frobenius_error": 1.6170215606689453,
+          "four_sigma_core_covariance_error": 1.4508640766143799,
+          "hq_fraction": 0.9015873074531555,
+          "maximum_eigenvalue_ratio": 3.278432846069336,
+          "minimum_eigenvalue_ratio": 0.8043954372406006,
+          "radial_variance_ratio": 0.9803938865661621,
+          "tangential_variance_ratio": 3.1024348735809326
+        },
+        {
+          "beyond_four_sigma_fraction": 0.10384615510702133,
+          "centroid_offset_sigma": 0.593932569026947,
+          "component": 4,
+          "count": 260,
+          "covariance_relative_frobenius_error": 1.7769776582717896,
+          "four_sigma_core_covariance_error": 0.8686497807502747,
+          "hq_fraction": 0.8269230723381042,
+          "maximum_eigenvalue_ratio": 3.1583969593048096,
+          "minimum_eigenvalue_ratio": 2.2870984077453613,
+          "radial_variance_ratio": 2.9181501865386963,
+          "tangential_variance_ratio": 2.5273451805114746
+        },
+        {
+          "beyond_four_sigma_fraction": 0.06953642517328262,
+          "centroid_offset_sigma": 0.33077937364578247,
+          "component": 5,
+          "count": 302,
+          "covariance_relative_frobenius_error": 2.2987446784973145,
+          "four_sigma_core_covariance_error": 1.3139363527297974,
+          "hq_fraction": 0.8443708419799805,
+          "maximum_eigenvalue_ratio": 4.214488983154297,
+          "minimum_eigenvalue_ratio": 0.5147024989128113,
+          "radial_variance_ratio": 0.5199277400970459,
+          "tangential_variance_ratio": 4.209264278411865
+        },
+        {
+          "beyond_four_sigma_fraction": 0.12033195048570633,
+          "centroid_offset_sigma": 1.1902976036071777,
+          "component": 6,
+          "count": 241,
+          "covariance_relative_frobenius_error": 2.309518575668335,
+          "four_sigma_core_covariance_error": 1.0499569177627563,
+          "hq_fraction": 0.7551867365837097,
+          "maximum_eigenvalue_ratio": 4.245473861694336,
+          "minimum_eigenvalue_ratio": 0.6330526471138,
+          "radial_variance_ratio": 0.6558889150619507,
+          "tangential_variance_ratio": 4.222638130187988
+        },
+        {
+          "beyond_four_sigma_fraction": 0.1666666716337204,
+          "centroid_offset_sigma": 0.2266603708267212,
+          "component": 7,
+          "count": 288,
+          "covariance_relative_frobenius_error": 4.121592998504639,
+          "four_sigma_core_covariance_error": 1.9076260328292847,
+          "hq_fraction": 0.7430555820465088,
+          "maximum_eigenvalue_ratio": 6.810914993286133,
+          "minimum_eigenvalue_ratio": 0.5435693860054016,
+          "radial_variance_ratio": 0.5509265065193176,
+          "tangential_variance_ratio": 6.803558349609375
+        },
+        {
+          "beyond_four_sigma_fraction": 0.13939394056797028,
+          "centroid_offset_sigma": 0.8461978435516357,
+          "component": 8,
+          "count": 330,
+          "covariance_relative_frobenius_error": 1.760685682296753,
+          "four_sigma_core_covariance_error": 0.27258577942848206,
+          "hq_fraction": 0.8060606122016907,
+          "maximum_eigenvalue_ratio": 3.2579917907714844,
+          "minimum_eigenvalue_ratio": 2.0495247840881348,
+          "radial_variance_ratio": 2.1042652130126953,
+          "tangential_variance_ratio": 3.203251361846924
+        },
+        {
+          "beyond_four_sigma_fraction": 0.12444444745779037,
+          "centroid_offset_sigma": 0.33246785402297974,
+          "component": 9,
+          "count": 225,
+          "covariance_relative_frobenius_error": 3.1597506999969482,
+          "four_sigma_core_covariance_error": 1.2955684661865234,
+          "hq_fraction": 0.8444444537162781,
+          "maximum_eigenvalue_ratio": 5.3927226066589355,
+          "minimum_eigenvalue_ratio": 0.1802210509777069,
+          "radial_variance_ratio": 0.19927102327346802,
+          "tangential_variance_ratio": 5.3736724853515625
+        },
+        {
+          "beyond_four_sigma_fraction": 0.15131579339504242,
+          "centroid_offset_sigma": 0.4024203419685364,
+          "component": 10,
+          "count": 304,
+          "covariance_relative_frobenius_error": 3.9718716144561768,
+          "four_sigma_core_covariance_error": 1.025357961654663,
+          "hq_fraction": 0.7072368264198303,
+          "maximum_eigenvalue_ratio": 6.002940654754639,
+          "minimum_eigenvalue_ratio": 3.553842544555664,
+          "radial_variance_ratio": 5.730156898498535,
+          "tangential_variance_ratio": 3.8266279697418213
+        },
+        {
+          "beyond_four_sigma_fraction": 0.06422018259763718,
+          "centroid_offset_sigma": 0.6619814038276672,
+          "component": 11,
+          "count": 218,
+          "covariance_relative_frobenius_error": 2.2802953720092773,
+          "four_sigma_core_covariance_error": 1.3923553228378296,
+          "hq_fraction": 0.8119266033172607,
+          "maximum_eigenvalue_ratio": 4.2020368576049805,
+          "minimum_eigenvalue_ratio": 0.617310106754303,
+          "radial_variance_ratio": 0.6188066601753235,
+          "tangential_variance_ratio": 4.200540542602539
+        },
+        {
+          "beyond_four_sigma_fraction": 0.12888889014720917,
+          "centroid_offset_sigma": 0.4609737992286682,
+          "component": 12,
+          "count": 225,
+          "covariance_relative_frobenius_error": 2.2590103149414062,
+          "four_sigma_core_covariance_error": 0.543948233127594,
+          "hq_fraction": 0.8355555534362793,
+          "maximum_eigenvalue_ratio": 4.194250106811523,
+          "minimum_eigenvalue_ratio": 1.0549616813659668,
+          "radial_variance_ratio": 1.056746006011963,
+          "tangential_variance_ratio": 4.192465782165527
+        },
+        {
+          "beyond_four_sigma_fraction": 0.19889502227306366,
+          "centroid_offset_sigma": 1.4248712062835693,
+          "component": 13,
+          "count": 181,
+          "covariance_relative_frobenius_error": 4.478003025054932,
+          "four_sigma_core_covariance_error": 2.460415840148926,
+          "hq_fraction": 0.6298342347145081,
+          "maximum_eigenvalue_ratio": 7.329641342163086,
+          "minimum_eigenvalue_ratio": 1.2016518115997314,
+          "radial_variance_ratio": 1.2072540521621704,
+          "tangential_variance_ratio": 7.324039936065674
+        },
+        {
+          "beyond_four_sigma_fraction": 0.0476190485060215,
+          "centroid_offset_sigma": 0.8244901895523071,
+          "component": 14,
+          "count": 231,
+          "covariance_relative_frobenius_error": 1.7803726196289062,
+          "four_sigma_core_covariance_error": 1.356562614440918,
+          "hq_fraction": 0.8008658289909363,
+          "maximum_eigenvalue_ratio": 3.209362745285034,
+          "minimum_eigenvalue_ratio": 2.2075467109680176,
+          "radial_variance_ratio": 2.597093343734741,
+          "tangential_variance_ratio": 2.819817304611206
+        },
+        {
+          "beyond_four_sigma_fraction": 0.30454546213150024,
+          "centroid_offset_sigma": 1.6352136135101318,
+          "component": 15,
+          "count": 220,
+          "covariance_relative_frobenius_error": 5.258686065673828,
+          "four_sigma_core_covariance_error": 0.6803818941116333,
+          "hq_fraction": 0.5863636136054993,
+          "maximum_eigenvalue_ratio": 8.413073539733887,
+          "minimum_eigenvalue_ratio": 1.5948985815048218,
+          "radial_variance_ratio": 2.8272252082824707,
+          "tangential_variance_ratio": 7.180746078491211
+        }
+      ],
+      "final_diagnostics": {
+        "beyond_four_sigma_fraction": 0.12451171875,
+        "beyond_four_sigma_share_of_centered_covariance_energy": 0.5161038637161255,
+        "components_exceeding_aggregate_covariance_bound_individually": 16,
+        "hq_after_empirical_recentering_diagnostic_only": 0.78759765625,
+        "mean_centroid_offset_sigma": 0.7284184363670647,
+        "mean_maximum_eigenvalue_ratio": 5.304980516433716,
+        "mean_radial_variance_ratio": 2.49712335690856,
+        "mean_tangential_variance_ratio": 4.564760386943817,
+        "target_mean_distance_sigma_quantiles": {
+          "p50": 1.847689151763916,
+          "p85": 3.579442262649536,
+          "p90": 4.452917098999023,
+          "p95": 5.315704345703125,
+          "p99": 7.877877235412598
+        }
+      },
+      "final_metrics": {
+        "component_core_covariance_error": 1.2484936658293009,
+        "component_covariance_error": 3.1937692537903786,
+        "component_min_eigen_ratio": 0.1802210509777069,
+        "hq": 0.779052734375,
+        "mass_tv": 0.06982421875,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "gate_status": "FAIL",
+      "initializer": "deterministic_orthogonal",
+      "maximum_recomputed_scalar_absolute_error": 0.0,
+      "nominal_prior_base_lr": 0.0012,
+      "optimizer_updates": {
+        "discriminator": 400,
+        "generator": 400,
+        "prior": 400
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "recipe_controls": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.006375,
+        "network_lr_horizon_cap": null,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 0.18823529411764706,
+        "prior_reg": 0.0,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "total_steps": 400
+      },
+      "sampling_law": "public_prior_without_output_noise",
+      "saved_outputs": {
+        "bytes": 794217,
+        "kind": "scored_vector_samples_v1",
+        "observation_count": 24,
+        "optimizer_updates_added": 0,
+        "path": "observed-samples.pt",
+        "sampling_draws_added": 0,
+        "sha256": "0dca917bcf8584ba8aecafaf5060492db45a98eadd297327bcde086063ab01c0"
+      },
+      "scoring_weights": "live",
+      "selected_checkpoint_metrics": [
+        {
+          "component_covariance_error": 22.253687113523483,
+          "hq": 0.122314453125,
+          "step": 200
+        },
+        {
+          "component_covariance_error": 5.310390532016754,
+          "hq": 0.61962890625,
+          "step": 300
+        },
+        {
+          "component_covariance_error": 3.810838833451271,
+          "hq": 0.684326171875,
+          "step": 334
+        },
+        {
+          "component_covariance_error": 3.3022661805152893,
+          "hq": 0.76708984375,
+          "step": 367
+        },
+        {
+          "component_covariance_error": 3.1937692537903786,
+          "hq": 0.779052734375,
+          "step": 400
+        }
+      ],
+      "source_commit": "846190389b0e423054fc9912ab1a69d06bd5348c",
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "unintended_rng_deviations": 0
+    },
+    {
+      "actual_recipe_differences_from_incumbent": {
+        "d_lr_mult": {
+          "failed": 1.5,
+          "incumbent": 1.0
+        },
+        "lr": {
+          "failed": 0.0085,
+          "incumbent": 0.006375
+        },
+        "network_lr_horizon_cap": {
+          "failed": null,
+          "incumbent": 1600
+        },
+        "output_noise_std": {
+          "failed": 0.0,
+          "incumbent": 0.029
+        },
+        "prior_lr_mult": {
+          "failed": 0.14117647058823526,
+          "incumbent": 1.0
+        }
+      },
+      "all_24_recomputed_gate_observations_match": true,
+      "all_finite": true,
+      "attempt_id": "9f7ed4bb35be41f0a18e55e291606a4e",
+      "candidate_id": "k3p--a9f37c77c97987a31d1ae35ae01de536de29d59914640ebcdc06bfebaf1ceadc",
+      "candidate_revision": "f47aff633ed80313d287c8ef0cdec004ffac2e45237f3bc16e11606fe91f96b7",
+      "completed_steps": 400,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "final_components": [
+        {
+          "beyond_four_sigma_fraction": 0.05263157933950424,
+          "centroid_offset_sigma": 0.4694672226905823,
+          "component": 0,
+          "count": 190,
+          "covariance_relative_frobenius_error": 1.4571224451065063,
+          "four_sigma_core_covariance_error": 0.5767357349395752,
+          "hq_fraction": 0.8684210777282715,
+          "maximum_eigenvalue_ratio": 3.0591928958892822,
+          "minimum_eigenvalue_ratio": 0.9216667413711548,
+          "radial_variance_ratio": 0.9293295741081238,
+          "tangential_variance_ratio": 3.051530361175537
+        },
+        {
+          "beyond_four_sigma_fraction": 0.05775076150894165,
+          "centroid_offset_sigma": 0.3223874270915985,
+          "component": 1,
+          "count": 329,
+          "covariance_relative_frobenius_error": 1.8445836305618286,
+          "four_sigma_core_covariance_error": 1.0310733318328857,
+          "hq_fraction": 0.8510638475418091,
+          "maximum_eigenvalue_ratio": 3.5807414054870605,
+          "minimum_eigenvalue_ratio": 1.3804620504379272,
+          "radial_variance_ratio": 1.3825526237487793,
+          "tangential_variance_ratio": 3.578650712966919
+        },
+        {
+          "beyond_four_sigma_fraction": 0.20060789585113525,
+          "centroid_offset_sigma": 1.6106443405151367,
+          "component": 2,
+          "count": 329,
+          "covariance_relative_frobenius_error": 13.291515350341797,
+          "four_sigma_core_covariance_error": 1.9532346725463867,
+          "hq_fraction": 0.6474164128303528,
+          "maximum_eigenvalue_ratio": 19.08099937438965,
+          "minimum_eigenvalue_ratio": 6.138689041137695,
+          "radial_variance_ratio": 19.0798282623291,
+          "tangential_variance_ratio": 6.139863967895508
+        },
+        {
+          "beyond_four_sigma_fraction": 0.25773194432258606,
+          "centroid_offset_sigma": 1.210237979888916,
+          "component": 3,
+          "count": 194,
+          "covariance_relative_frobenius_error": 5.602991104125977,
+          "four_sigma_core_covariance_error": 0.6187577247619629,
+          "hq_fraction": 0.7061855792999268,
+          "maximum_eigenvalue_ratio": 7.795468330383301,
+          "minimum_eigenvalue_ratio": 5.075368404388428,
+          "radial_variance_ratio": 7.146758079528809,
+          "tangential_variance_ratio": 5.724079132080078
+        },
+        {
+          "beyond_four_sigma_fraction": 0.23188406229019165,
+          "centroid_offset_sigma": 1.4137771129608154,
+          "component": 4,
+          "count": 276,
+          "covariance_relative_frobenius_error": 3.8513224124908447,
+          "four_sigma_core_covariance_error": 1.3505898714065552,
+          "hq_fraction": 0.6594203114509583,
+          "maximum_eigenvalue_ratio": 6.446590423583984,
+          "minimum_eigenvalue_ratio": 0.9950478672981262,
+          "radial_variance_ratio": 1.014746904373169,
+          "tangential_variance_ratio": 6.426890850067139
+        },
+        {
+          "beyond_four_sigma_fraction": 0.16460905969142914,
+          "centroid_offset_sigma": 0.7383704781532288,
+          "component": 5,
+          "count": 243,
+          "covariance_relative_frobenius_error": 3.938697338104248,
+          "four_sigma_core_covariance_error": 2.0072216987609863,
+          "hq_fraction": 0.6748971343040466,
+          "maximum_eigenvalue_ratio": 6.567977428436279,
+          "minimum_eigenvalue_ratio": 1.1558799743652344,
+          "radial_variance_ratio": 1.159272313117981,
+          "tangential_variance_ratio": 6.564585208892822
+        },
+        {
+          "beyond_four_sigma_fraction": 0.09638553857803345,
+          "centroid_offset_sigma": 0.6162955164909363,
+          "component": 6,
+          "count": 249,
+          "covariance_relative_frobenius_error": 2.426800012588501,
+          "four_sigma_core_covariance_error": 0.6738478541374207,
+          "hq_fraction": 0.8554216623306274,
+          "maximum_eigenvalue_ratio": 4.4284820556640625,
+          "minimum_eigenvalue_ratio": 1.1556499004364014,
+          "radial_variance_ratio": 2.089785575866699,
+          "tangential_variance_ratio": 3.494347333908081
+        },
+        {
+          "beyond_four_sigma_fraction": 0.08796296268701553,
+          "centroid_offset_sigma": 0.642846941947937,
+          "component": 7,
+          "count": 216,
+          "covariance_relative_frobenius_error": 3.463195562362671,
+          "four_sigma_core_covariance_error": 2.400881290435791,
+          "hq_fraction": 0.6990740895271301,
+          "maximum_eigenvalue_ratio": 5.893716812133789,
+          "minimum_eigenvalue_ratio": 0.8025698661804199,
+          "radial_variance_ratio": 0.8199819326400757,
+          "tangential_variance_ratio": 5.87630558013916
+        },
+        {
+          "beyond_four_sigma_fraction": 0.13824884593486786,
+          "centroid_offset_sigma": 0.28556522727012634,
+          "component": 8,
+          "count": 217,
+          "covariance_relative_frobenius_error": 3.2942686080932617,
+          "four_sigma_core_covariance_error": 0.795164942741394,
+          "hq_fraction": 0.774193525314331,
+          "maximum_eigenvalue_ratio": 5.647760391235352,
+          "minimum_eigenvalue_ratio": 1.320508599281311,
+          "radial_variance_ratio": 1.4635562896728516,
+          "tangential_variance_ratio": 5.504713535308838
+        },
+        {
+          "beyond_four_sigma_fraction": 0.16470588743686676,
+          "centroid_offset_sigma": 0.909853994846344,
+          "component": 9,
+          "count": 255,
+          "covariance_relative_frobenius_error": 3.3988561630249023,
+          "four_sigma_core_covariance_error": 1.6910606622695923,
+          "hq_fraction": 0.7098039388656616,
+          "maximum_eigenvalue_ratio": 5.803993225097656,
+          "minimum_eigenvalue_ratio": 0.8384665846824646,
+          "radial_variance_ratio": 0.8552380204200745,
+          "tangential_variance_ratio": 5.787222385406494
+        },
+        {
+          "beyond_four_sigma_fraction": 0.0445544570684433,
+          "centroid_offset_sigma": 0.5109638571739197,
+          "component": 10,
+          "count": 202,
+          "covariance_relative_frobenius_error": 1.1813273429870605,
+          "four_sigma_core_covariance_error": 0.932096540927887,
+          "hq_fraction": 0.8811880946159363,
+          "maximum_eigenvalue_ratio": 2.5554261207580566,
+          "minimum_eigenvalue_ratio": 1.6096867322921753,
+          "radial_variance_ratio": 1.621779441833496,
+          "tangential_variance_ratio": 2.5433337688446045
+        },
+        {
+          "beyond_four_sigma_fraction": 0.07116104662418365,
+          "centroid_offset_sigma": 0.5377941727638245,
+          "component": 11,
+          "count": 267,
+          "covariance_relative_frobenius_error": 3.147132635116577,
+          "four_sigma_core_covariance_error": 2.3926138877868652,
+          "hq_fraction": 0.7715355753898621,
+          "maximum_eigenvalue_ratio": 5.408339023590088,
+          "minimum_eigenvalue_ratio": 0.38727468252182007,
+          "radial_variance_ratio": 0.3943633735179901,
+          "tangential_variance_ratio": 5.401250839233398
+        },
+        {
+          "beyond_four_sigma_fraction": 0.1461794078350067,
+          "centroid_offset_sigma": 0.7655578851699829,
+          "component": 12,
+          "count": 301,
+          "covariance_relative_frobenius_error": 3.1916146278381348,
+          "four_sigma_core_covariance_error": 1.6209981441497803,
+          "hq_fraction": 0.7209302186965942,
+          "maximum_eigenvalue_ratio": 5.333517074584961,
+          "minimum_eigenvalue_ratio": 2.2623116970062256,
+          "radial_variance_ratio": 2.2830755710601807,
+          "tangential_variance_ratio": 5.312753677368164
+        },
+        {
+          "beyond_four_sigma_fraction": 0.11627907305955887,
+          "centroid_offset_sigma": 0.19628332555294037,
+          "component": 13,
+          "count": 258,
+          "covariance_relative_frobenius_error": 3.4821555614471436,
+          "four_sigma_core_covariance_error": 1.007750153541565,
+          "hq_fraction": 0.8410852551460266,
+          "maximum_eigenvalue_ratio": 5.080121040344238,
+          "minimum_eigenvalue_ratio": 3.7574315071105957,
+          "radial_variance_ratio": 4.199739456176758,
+          "tangential_variance_ratio": 4.637814521789551
+        },
+        {
+          "beyond_four_sigma_fraction": 0.024922117590904236,
+          "centroid_offset_sigma": 0.24278244376182556,
+          "component": 14,
+          "count": 321,
+          "covariance_relative_frobenius_error": 1.678525686264038,
+          "four_sigma_core_covariance_error": 1.3828784227371216,
+          "hq_fraction": 0.9096572995185852,
+          "maximum_eigenvalue_ratio": 3.352175712585449,
+          "minimum_eigenvalue_ratio": 0.6803641319274902,
+          "radial_variance_ratio": 0.7110656499862671,
+          "tangential_variance_ratio": 3.32147479057312
+        },
+        {
+          "beyond_four_sigma_fraction": 0.0401606410741806,
+          "centroid_offset_sigma": 0.5598063468933105,
+          "component": 15,
+          "count": 249,
+          "covariance_relative_frobenius_error": 1.8817847967147827,
+          "four_sigma_core_covariance_error": 1.3279937505722046,
+          "hq_fraction": 0.8634538054466248,
+          "maximum_eigenvalue_ratio": 3.6548967361450195,
+          "minimum_eigenvalue_ratio": 0.8162840604782104,
+          "radial_variance_ratio": 0.8382089734077454,
+          "tangential_variance_ratio": 3.632972002029419
+        }
+      ],
+      "final_diagnostics": {
+        "beyond_four_sigma_fraction": 0.1181640625,
+        "beyond_four_sigma_share_of_centered_covariance_energy": 0.5471197962760925,
+        "components_exceeding_aggregate_covariance_bound_individually": 16,
+        "hq_after_empirical_recentering_diagnostic_only": 0.79248046875,
+        "mean_centroid_offset_sigma": 0.689539642073214,
+        "mean_maximum_eigenvalue_ratio": 5.855587378144264,
+        "mean_radial_variance_ratio": 2.8743301276117563,
+        "mean_tangential_variance_ratio": 4.812361791729927,
+        "target_mean_distance_sigma_quantiles": {
+          "p50": 1.9176487922668457,
+          "p85": 3.612744092941284,
+          "p90": 4.266861915588379,
+          "p95": 5.186019420623779,
+          "p99": 6.357276439666748
+        }
+      },
+      "final_metrics": {
+        "component_core_covariance_error": 1.3601811677217484,
+        "component_covariance_error": 3.570743329823017,
+        "component_min_eigen_ratio": 0.38727468252182007,
+        "hq": 0.776123046875,
+        "mass_tv": 0.070556640625,
+        "modes": 16,
+        "sample_count": 4096
+      },
+      "gate_status": "FAIL",
+      "initializer": "deterministic_orthogonal",
+      "maximum_recomputed_scalar_absolute_error": 0.0,
+      "nominal_prior_base_lr": 0.0012,
+      "optimizer_updates": {
+        "discriminator": 400,
+        "generator": 400,
+        "prior": 400
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "recipe_controls": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.5,
+        "lr": 0.0085,
+        "network_lr_horizon_cap": null,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 0.14117647058823526,
+        "prior_reg": 0.0,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "total_steps": 400
+      },
+      "sampling_law": "public_prior_without_output_noise",
+      "saved_outputs": {
+        "bytes": 794217,
+        "kind": "scored_vector_samples_v1",
+        "observation_count": 24,
+        "optimizer_updates_added": 0,
+        "path": "observed-samples.pt",
+        "sampling_draws_added": 0,
+        "sha256": "741abe8ffabc69b0f2ac969f35cb3c91a6a3855b12d09c9b8eff207ab2e3e969"
+      },
+      "scoring_weights": "live",
+      "selected_checkpoint_metrics": [
+        {
+          "component_covariance_error": 24.684313237667084,
+          "hq": 0.14794921875,
+          "step": 200
+        },
+        {
+          "component_covariance_error": 5.405577629804611,
+          "hq": 0.6064453125,
+          "step": 300
+        },
+        {
+          "component_covariance_error": 4.550359889864922,
+          "hq": 0.7314453125,
+          "step": 334
+        },
+        {
+          "component_covariance_error": 3.883753828704357,
+          "hq": 0.763427734375,
+          "step": 367
+        },
+        {
+          "component_covariance_error": 3.570743329823017,
+          "hq": 0.776123046875,
+          "step": 400
+        }
+      ],
+      "source_commit": "846190389b0e423054fc9912ab1a69d06bd5348c",
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "unintended_rng_deviations": 0
+    }
+  ],
+  "id": "k3p-ring-broadness-forensics-v1",
+  "incumbent": {
+    "all_finite": true,
+    "attempt_id": "8235957023aa443bb6ddca752b291dbb",
+    "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+    "candidate_revision": "412dbcba924680e57d9b0874082220f04b43e8b31f8e81fc60a7bcbad5f701a1",
+    "completed_steps": 400,
+    "convergence": {
+      "complete": true,
+      "confirmed_seconds": null,
+      "confirmed_step": 400,
+      "first_pass_step": 334,
+      "minimum_stable_checks": 5,
+      "observations": 24,
+      "passing_observations": 5,
+      "passing_suffix": 5,
+      "stable_from_seconds": null,
+      "stable_from_step": 334
+    },
+    "final_metrics": {
+      "component_core_covariance_error": 0.4549317844212055,
+      "component_covariance_error": 0.6216468531638384,
+      "component_min_eigen_ratio": 0.3237893283367157,
+      "hq": 0.937255859375,
+      "mass_tv": 0.0810546875,
+      "modes": 16,
+      "sample_count": 4096
+    },
+    "gate_status": "PASS",
+    "initializer": "deterministic_orthogonal",
+    "nominal_prior_base_lr": 0.006375,
+    "optimizer_updates": {
+      "discriminator": 400,
+      "generator": 400,
+      "prior": 400
+    },
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "recipe_controls": {
+      "d_lr_mult": 1.0,
+      "input_noise_std": 0.5,
+      "lr": 0.006375,
+      "network_lr_horizon_cap": 1600,
+      "output_noise_std": 0.029,
+      "prior_lr_mult": 1.0,
+      "prior_reg": 0.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "total_steps": 400
+    },
+    "sampling_law": "public_prior_without_output_noise",
+    "saved_tensor_availability": "No scored tensors or ring checkpoints were retained; exact archived observations only.",
+    "scoring_weights": "live",
+    "selected_checkpoint_metrics": [
+      {
+        "component_covariance_error": 15.278630584478378,
+        "hq": 0.150390625,
+        "step": 200
+      },
+      {
+        "component_covariance_error": 1.856187928467989,
+        "hq": 0.826904296875,
+        "step": 300
+      },
+      {
+        "component_covariance_error": 0.8032887754961848,
+        "hq": 0.919189453125,
+        "step": 334
+      },
+      {
+        "component_covariance_error": 0.7317048748955131,
+        "hq": 0.93310546875,
+        "step": 367
+      },
+      {
+        "component_covariance_error": 0.6216468531638384,
+        "hq": 0.937255859375,
+        "step": 400
+      }
+    ],
+    "source_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+    "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+    "unintended_rng_deviations": 0
+  },
+  "interpretation": [
+    "Mode occupancy and mass balance pass; all 16 components are individually too broad by the aggregate covariance bound.",
+    "Tangential variance, tails and broad four-sigma cores explain local covariance failure better than centroid offsets alone. Recentring is an analysis diagnostic, not a changed gate.",
+    "Both runs improve late in the fixed horizon. A larger generator LR does not improve final local quality; extending the task horizon is not justified by this forensic analysis.",
+    "Historical comparison changes prior LR, critic LR and fake-only training output noise together; it does not isolate a causal control. Cap1600 and no cap are equivalent at 400 updates.",
+    "No task geometry, prior, initialization, sampling-cohort or scoring implementation misbinding was found. The grading equality revision does not change these >=/<= gates.",
+    "No saved ring checkpoint permits attribution to latent-table displacement or generator Jacobians. Original whole-candidate words remain UNKNOWN in these two trials."
+  ],
+  "qualification_input": false,
+  "reproduction": "python reports/forge/k3p-global-tier1-v3/ring-analysis.py",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "saved_scored_ring_outputs_forensic_analysis",
+  "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+  "thresholds": [
+    [
+      "sample_count",
+      ">=",
+      4096
+    ],
+    [
+      "modes",
+      ">=",
+      16
+    ],
+    [
+      "mass_tv",
+      "<=",
+      0.15
+    ],
+    [
+      "hq",
+      ">=",
+      0.85
+    ],
+    [
+      "component_covariance_error",
+      "<=",
+      0.85
+    ],
+    [
+      "component_min_eigen_ratio",
+      ">=",
+      0.15
+    ]
+  ],
+  "training_updates_added": 0,
+  "validation": {
+    "cpu_rng_state_unchanged": true,
+    "durable_result_certificates": true,
+    "exact_archive_and_target_member_hashes": true,
+    "raw_grading_source_and_recipe_bindings": true,
+    "same_clean_live_serving_cohort": true,
+    "same_initial_rng_bindings": true,
+    "same_named_initialization_and_model_initial_state_hashes": true,
+    "same_task_execution_geometry_prior_budget": true,
+    "same_thresholds_and_sample_scorer_sources": true
+  }
+}

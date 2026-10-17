@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "f6e591d99c07ac84ad9fe5a99ca514f619c4298e95022863248936f913516039",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "51d3ca3a14e130c862a99937c7a94f08e6822a6068a02c1ad0613d7c7eab4a52",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/forge/pure-bcap-joint-loss-repair-v2/queue/pure-bcap-joint-loss-repair-v2/a74caa11c7544b779df1191f890d7072/observed-records.pt": "1554ee003be77b42e93265660664f07497b83aa329cff8075a290e9571fc8a9b"
+  },
+  "task_id": "five_word_joint_acquisition"
+}

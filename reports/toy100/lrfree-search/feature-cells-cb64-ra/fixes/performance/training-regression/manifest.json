@@ -1,0 +1,24 @@
+{
+  "status": "DIAGNOSED_CPU_ONLY",
+  "adoption": "NO_NEW_SCORE_OR_GATE_CHANGE",
+  "generated_sha256": {
+    "REPORT.md": "b425143a1dd7ded4d057aef77d2d45fb9d4e6ce3f138717bf38d85381798c12c",
+    "LEADERBOARD.md": "312f0545143694e66b7380392d6ce87c0d026abd3c2f82bbfd8e548581550f66",
+    "results.json": "f45a018f54ad414a4ec8b67b7f311b5fef9d1d6393babeaba25b9179f507ee7f"
+  },
+  "input_sha256": {
+    "PROTOCOL.md": "e05eb9aa3808a2c0cbc5eede11997b944d30ef6ee3ad4c57ad9a47df5e28f169",
+    "diagnose_state.py": "c48221c6393592c1509beca0917cbd30cecc2438904f2f978dfd5eeae28c8056",
+    "diagnose_support_counts.py": "872cc81397b1d3ac59d771b319f3241854cd2fde43018dbd40d938dd11ce7c55",
+    "state-diagnosis.json": "1ef3be619daa60e57b8ef49e0a82099208f83da31056f27c78455a2d6b2c28ea",
+    "support-count-diagnosis.json": "07debfadf12096aede7d5c8b5ae7bb2d26cff5992d6c39b0a8a1a733c942be2d"
+  },
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "qualifications": "Conditional CPU diagnosis; unchanged frozen CUDA outcomes; no canonical CPU-to-GPU inference",
+  "failed_preparatory_logs": [
+    "failed-default-python.log",
+    "failed-strict-json.log"
+  ],
+  "root_only_gpu_execution_preserved": true
+}

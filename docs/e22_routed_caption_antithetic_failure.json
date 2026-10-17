@@ -1,0 +1,153 @@
+{
+  "schema": "public_routed_antithetic_variance_negative_evidence_v1",
+  "outcome": "Complete variance FAIL, ownership checks PASS",
+  "hypothesis": "Averaging Gaussian signs in the unchanged native G game sufficiently reduces total routed-generator gradient variance to warrant a quality trial.",
+  "predeclared_gate": {
+    "sigma": 0.125,
+    "fixed_fit_batches": 2,
+    "contexts_per_batch": 4,
+    "independent_private_DV12_Gaussian_pairs_per_batch": 16,
+    "maximum_full_generator_variance_ratio": 0.75,
+    "maximum_total_seconds": 120,
+    "native_training_updates": 0,
+    "method": "Each pair uses one fresh coupled six-site DV12 host forward; both Gaussian signs share it. Every following pair draws new DV12 and Gaussian noise. Population centered gradient energies are computed within each batch; primary is ratio of the two mean variances."
+  },
+  "actual_task": {
+    "model": "Pretrained depth-one Supra,576width/rank16, six shared-bank routed sites128x4, actual conditional/unconditional CFG3 caption execution",
+    "checkpoint_arm": "H/b-neutral particle",
+    "checkpoint_step": 6400,
+    "checkpoint_source_native": "6ec7e5 (prior caption producer)",
+    "observer_native_base": "664ce464e3add5c65d06c8b324c6f9892e644eec",
+    "recipe": "Public e22_routed default formulation; recipe dictionary identical to retained checkpoint",
+    "batch_law": [
+      "Clone of saved CPU7 next fit B4 draw",
+      "First fit context of four fixed sources4,5,15,16"
+    ],
+    "restoration": "Fresh public initialize_ before direct E22Policy/public policy.load_state_dict; native/caller streams, modes and gradients restored; no cloned training loop"
+  },
+  "measurement": {
+    "total_dv12_gaussian": {
+      "generator": {
+        "single_variance": 0.15675406903028488,
+        "antithetic_variance": 0.14437174797058105,
+        "ratio": 0.921007976786162,
+        "mean_gradient_energy": 1.090711385011673
+      },
+      "router": {
+        "single_variance": 0.0020692770194727927,
+        "antithetic_variance": 0.0018042559968307614,
+        "ratio": 0.8719257885009746,
+        "mean_gradient_energy": 0.006924021989107132
+      },
+      "table": {
+        "single_variance": 3.378135016163242e-08,
+        "antithetic_variance": 3.206187138005134e-08,
+        "ratio": 0.9490997614555384,
+        "mean_gradient_energy": 1.9960038599720065e-07
+      },
+      "residual_upstream": {
+        "single_variance": 0.050106439739465714,
+        "antithetic_variance": 0.040878452360630035,
+        "ratio": 0.8158323076471272,
+        "mean_gradient_energy": 0.1746678650379181
+      }
+    },
+    "clean_fixed_gaussian": {
+      "generator": {
+        "single_variance": 0.014000349212437868,
+        "antithetic_variance": 0.0004579240194289014,
+        "ratio": 0.03270804266954163,
+        "mean_gradient_energy": 1.230586588382721
+      },
+      "router": {
+        "single_variance": 0.00021636804740410298,
+        "antithetic_variance": 4.700742010754766e-06,
+        "ratio": 0.021725675612237493,
+        "mean_gradient_energy": 0.012831834144890308
+      },
+      "table": {
+        "single_variance": 2.3410427485437424e-09,
+        "antithetic_variance": 6.229657588396886e-11,
+        "ratio": 0.026610610132053663,
+        "mean_gradient_energy": 2.1282870221739358e-07
+      },
+      "residual_upstream": {
+        "single_variance": 0.009371900465339422,
+        "antithetic_variance": 0.00018217266188003123,
+        "ratio": 0.019438177192957786,
+        "mean_gradient_energy": 0.2155766263604164
+      }
+    }
+  },
+  "generator_batch_observations": [
+    {
+      "ratio": 0.8798499128010473,
+      "mean_gradient_energy": 1.642379879951477,
+      "single_signal_to_noise": 15.810027635713501,
+      "antithetic_signal_to_noise": 17.94891060970707,
+      "transport_discrepancy_relative_rms": 0.011788822710514069,
+      "transport_discrepancy_max_abs": 0.003344133496284485
+    },
+    {
+      "ratio": 0.9414042504702774,
+      "mean_gradient_energy": 0.5390428900718689,
+      "single_signal_to_noise": 2.5714508513472754,
+      "antithetic_signal_to_noise": 2.7268803823777037,
+      "transport_discrepancy_relative_rms": 0.016978807747364044,
+      "transport_discrepancy_max_abs": 0.004889696836471558
+    }
+  ],
+  "f32_upstream_transport_max_abs": 1.862645149230957e-09,
+  "baseline_point_checks": {
+    "finite_learned_state_and_moments": true,
+    "all240_clean_test_residual_replay": "Exact saved checkpoint replay",
+    "four_fixed_judge_native_games_all240contexts_all6subjects": "Matched producer values within2e-6",
+    "game_means": {
+      "ordinary_native_game@800": 2.5958542823791504,
+      "ordinary_native_game@6400": 2.5723867416381836,
+      "particle_native_game@800": 2.879880428314209,
+      "particle_native_game@6400": 2.5632359981536865
+    },
+    "native_and_caller_state_unchanged_before_restore": true,
+    "final_state_restoration": "Exact identity including native monitor NaN sentinel bytes"
+  },
+  "cost": {
+    "launcher_exit_code": 1,
+    "outer_seconds": 8.962900300975889,
+    "report_elapsed_seconds": 8.208905175095424,
+    "completion_elapsed_seconds": 8.209572514984757,
+    "native_training_updates": 0,
+    "quality_trial": "Not authorized after failed gate"
+  },
+  "provenance_sha256": {
+    "executed_protocol": "9998ba683581b90f1a1ed8b8415e70fabf9c3bb1e5c2fe1847fbd55c29e3e25c",
+    "executed_report": "a212e8f9069e40a596ea76ca8057b54666817ca9d26ef6297a521e8f450c42fd",
+    "executed_completion": "e4a9cf0491d7a37f24ef74c70bd0416f57aec13bb7289b8a7c6202d39458e6a4",
+    "executed_launcher_receipt": "0dd50cec507d3978601648393dff3f6e5ff0bffd4bedb5ffa46f372a61b52a3e",
+    "executed_public_probe_source": "5b4f8f456b400ad0f583c21173d2b8f7d1476c9a90913808c9ccbb56d0462fb3",
+    "executed_machine_adapter_source": "9c8b68c93a25e4944e7ce1f4b19af5844f5b7dd744cc89e8ac470cadea5a76f3",
+    "native6400_state": "ee70f0a1583256f4bdbb890a519ef91bfd62765f24f7107a3e460c6e4fd4a720",
+    "retained_test_residual": "0c4c4bff499a02a1fd4eb55da380b38b4982ceef2c0b857130c61102b9d81cd7",
+    "private_panels": "acf9e4849f3950a08b2e435d5dd7e2f5521786332fac6c64e74a01ff6453eb87",
+    "producer_report": "e6ec5b485ddb3ad9f1851bef12cd29dc76595513e2383c1204fa9afe9f81b223"
+  },
+  "portable_fixed_fixture": {
+    "first_measurement": "routed-dv12 coefficient1, BF16, same predeclared .75 gate; fixed streams; no coefficient/seed/rate/noise scan",
+    "first_variance_ratio": 0.9785470252362619,
+    "first_outcome": "FAIL",
+    "ownership_checks": "PASS",
+    "first_receipt_sha256": "5cf572b523de579c1779b0a0dcfd6b2120d71af51bdedfbe756d7ea11a14104f",
+    "native_training_updates": 0,
+    "scope": "Estimator transport/variance limitation only, not a caption-convergence or full-Supra reproduction"
+  },
+  "interpretation": "Gaussian-only variance is suppressed97%, but total fullG variance improves only7.9%, missing the25% gate in both batches. DV12-associated host/gradient variation dominates this frozen panel. Gaussian pairing alone is not eligible for a quality trial under this protocol.",
+  "limits": [
+    "Two fixed fit batches and16pairs each; no confidence interval or general default claim.",
+    "Clean-fixed versus DV12 includes changed host Jacobians and critic inputs; their variance difference is not an exact independent variance-component decomposition.",
+    "No causal attribution of the convergence gap to DV12, and no recommendation to remove it.",
+    "No per-site code/displacement RMS was captured; native bank geometry mismatch cannot be inferred from this panel.",
+    "BF16 averaged-loss gradient differs from averaging already transported gradients; actual averaged-loss gradient supplies the primary metric.",
+    "The old caption campaign failed its existing CPU audit and remains provisional; this new6400 point check does not qualify earlier states or change old tests.",
+    "The published software example is self-contained. Machine-specific observer/card/checkpoints/raw logs remain external and are not runtime dependencies."
+  ]
+}

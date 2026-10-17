@@ -1,0 +1,22 @@
+{
+  "candidate_quality_result": null,
+  "candidate_updates_completed": 0,
+  "control_quality_result": null,
+  "correction": "Compare tensor dtype/shape/raw uint8bytes exactly; allow scalarfloatNaN only when both values are floatNaN.",
+  "failure": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/attempt-1/ERROR.json",
+  "package_sources_unchanged": true,
+  "prior_freeze_sha256": "e8f0cdbac7a1a9241d39e5e779a4203baee112499029101ccce00dec512629f4",
+  "prior_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15",
+  "read_only_file_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/SOURCE-FREEZE.json": "e8f0cdbac7a1a9241d39e5e779a4203baee112499029101ccce00dec512629f4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/attempt-1/ERROR.json": "9d2ad877920f1dd555acbb4a351db3b264deef349f01e70c78897b720323e39c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/attempt-1/control/LAUNCH.json": "f71efa0746d4b235db6fd60320df68c5f79cf8338672ea35082ae342305e8251",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/attempt-1/control/run.log": "4c47802664ef73029b1b1adb3c7ca8f68f6ecc8f96130c9b37973fc7add8757a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/run_pair.py": "0405f5041fa3ad0d311c391baa09c1592d1141f08ede2a2104cc42dc0dc66b09",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/window_support.py": "2fa89b91ea89f3cdff9ac876e96e5c27dfdded2ab2abdd55c45d52b4bef0f245"
+  },
+  "reason": "Original equality falsely rejects identical NaN-containing tensors and scalarNaNs.",
+  "runtime_numerical_updates_completed": 0,
+  "seeds_scorer_schedule_thresholds_unchanged": true,
+  "status": "PREPARED_RETAINED_ZERO_UPDATE_ADAPTER_FAILURE"
+}

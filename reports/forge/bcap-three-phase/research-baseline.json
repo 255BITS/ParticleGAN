@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "status": "measured_research_baseline",
+  "candidate_id": "bcap-projection-baseline-review-direction-v1",
+  "candidate_revision": "a70ab6f1b5ae46fc21cb8ddf6521ce3e928696aca7873852b7b40c356dd25a8b",
+  "study_id": "bcap-projection-baseline-review-direction-v1-study",
+  "baseline_pr": "https://github.com/255BITS/ParticleGAN/pull/383",
+  "host_integration_pr": "https://github.com/255BITS/ParticleGAN/pull/377",
+  "measured_source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+  "scientific_source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+  "registration_sha256": "91e303bf4422f80cd07cc94d8bec021bcdea0c3ee6c80d0102f514b830e1ad1b",
+  "recipe_preset": "bcap",
+  "global_recipe_overrides": {
+    "d_lr_mult": 1.5,
+    "loss": "non_saturating",
+    "lr": 0.012,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "optimizer_convolution": "per_offset",
+    "optimizer_family": "dualnorm",
+    "optimizer_smoothing": 0.001,
+    "prior_lr_mult": 2.5,
+    "reg_coeff": 1.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "constraint_geometry_mode": "direction_blend"
+  },
+  "trainer_delta": {
+    "constraint_geometry_mode": {
+      "baseline": "none",
+      "candidate": "direction_blend"
+    }
+  },
+  "protocol_seed": 0,
+  "scope": "research_diagnostic",
+  "qualification_input": false,
+  "required_tier1_outcome": {
+    "PASS": 6
+  },
+  "selected_tier2_outcome": {
+    "PASS": 3,
+    "FAIL": 7
+  },
+  "verified_consumption_pairs": 16,
+  "tier2_repairs": [
+    "residual_student",
+    "trajectory"
+  ],
+  "preserved_tier2_passes": [
+    "five_word_joint_hold"
+  ],
+  "results_sha256": "8a3a390819a5dab4921ae88c4f9049cbc08a56e40827b0ab998aea7390afd70b",
+  "independent_audit_sha256": "d83f24a388771aac36cb8af962895d97860aa00d191e99c582eb73b277581393",
+  "comparison_path": "reports/forge/bcap-three-phase/projection-comparison.json",
+  "comparison_sha256": "05b4cd615952c2b1d05dff8e5219304c022925ff7026b9e7559f466e925d1bf0",
+  "selected_paid_seconds": 3541.1636059249986,
+  "selection_rule": "Six Tier1 passes, at least one complete verified Tier2 repair, all baseline Tier2 passes preserved, and zero unresolved gate or consumed-state comparisons.",
+  "previous_baseline": {
+    "path": "reports/forge/bcap-three-phase/baseline.json",
+    "sha256": "e1d7570d5e77606a9398b99d9097b20131ab175952a2ce8564b40e02a93bf86e"
+  },
+  "limitations": [
+    "Only ten of twenty-one original Tier2 questions measured.",
+    "Gaussian retention, unequal mass, unequal width, anisotropic and all three native100 gates remain FAIL.",
+    "Research baseline selection grants no ordinary qualification, automatic merge or public default adoption."
+  ],
+  "publication_commit": "babfe7b83d5eff2cf865bbf6c05cbf9241091adf",
+  "publication_evidence": {
+    "README.md": {
+      "path": "reports/forge/bcap-projection-baseline-review/README.md",
+      "sha256": "0f2dd7dacce99a06e3169dcb449f35fa8def1982b73b148fbd61c57daeefe474",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/README.md"
+    },
+    "analysis.md": {
+      "path": "reports/forge/bcap-projection-baseline-review/analysis.md",
+      "sha256": "0aee489044ee4800570f5e8c8d9f5a2a743d44c9ea5e1c327067f9d169d59e07",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/analysis.md"
+    },
+    "phase3-results.json": {
+      "path": "reports/forge/bcap-projection-baseline-review/phase3-results.json",
+      "sha256": "8a3a390819a5dab4921ae88c4f9049cbc08a56e40827b0ab998aea7390afd70b",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/phase3-results.json"
+    },
+    "counter-proof.json": {
+      "path": "reports/forge/bcap-projection-baseline-review/counter-proof.json",
+      "sha256": "23f458cf4b38e38980638723f48a4536c443ac3bdd53bcf1de545fcd113d5b75",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/counter-proof.json"
+    },
+    "counter-proof-history.json": {
+      "path": "reports/forge/bcap-projection-baseline-review/counter-proof-history.json",
+      "sha256": "bb826d985da3f4b56fc8c5ef370f3e442eda1355499a1ec5a6bdf19098c4985d",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/counter-proof-history.json"
+    },
+    "publication-receipt.json": {
+      "path": "reports/forge/bcap-projection-baseline-review/publication-receipt.json",
+      "sha256": "1c757a2f767554bb8ef6860e2aecbb7c4fc22c50251f9b443c357a9ad46aa361",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/publication-receipt.json"
+    },
+    "media/index.json": {
+      "path": "reports/forge/bcap-projection-baseline-review/media/index.json",
+      "sha256": "d4cb571e97fdb3cd58096af3c3cd7f8af4f804066571ca6a96506d9aa9f6c9e4",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/babfe7b83d5eff2cf865bbf6c05cbf9241091adf/reports/forge/bcap-projection-baseline-review/media/index.json"
+    }
+  }
+}

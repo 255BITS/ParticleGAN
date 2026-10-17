@@ -1,0 +1,38 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Disable A2 only: recipe_overrides.latent_damping_max_rate=0; remove its required capability because this mechanism is intentionally absent.",
+    "Pin the K3P formulation explicitly: parent records provenance, not recipe inheritance; the current public default is KA2."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Diagnostic hypothesis: removing the active A2 sparse-row damping may change the late covariance undershoot on the unchanged named affine grid100 learned-MoG host. This isolates one mechanism; saved evidence does not predict a positive result, and no full-reference or adoption claim is made.",
+  "id": "k3p-a2-off-native-diagnostic",
+  "lifecycle": "proposed",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "One-factor removal of the public sparse-row update mechanism. Historical A2/no-op comparisons motivate a diagnostic but do not establish A2 as the cause of this new MoG host failure. Keep every other resolved recipe value, prior, screening seed, named initialization, training horizon and live terminal/holdout gate.",
+  "parent": "k3p",
+  "prior_art": [
+    "reports/toy100/continuous-practical-leaderboard.md",
+    "reports/transfer_suite/solvability/mog/README.md",
+    "reports/forge/attempts/dca8c7aa0eca484c9270d07125f7cb0b/result.json",
+    "reports/forge/studies/A2_OFF_NATIVE_DIAGNOSTIC.md"
+  ],
+  "recipe_overrides": {
+    "latent_damping_max_rate": 0,
+    "name": "k3p",
+    "critic_formulation": "k3p"
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 1
+}

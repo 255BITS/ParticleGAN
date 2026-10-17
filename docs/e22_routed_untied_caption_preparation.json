@@ -1,0 +1,107 @@
+{
+  "task": "caption_untied_Up_accuracy_v1",
+  "preparation_status": "PASS",
+  "science_executed": false,
+  "quality_updates": 0,
+  "native_software_updates_total": 4,
+  "software_optimizer_steps_total": 8,
+  "CUDA_initialized": false,
+  "full_geometry_host_forwards": 0,
+  "core_software": {
+    "initial_cases": 20,
+    "initial_passes": 19,
+    "initial_failures": 1,
+    "initial_pytest_seconds": 1.39,
+    "initial_process_seconds": 3.319535163929686,
+    "native_updates": 4,
+    "failure": "NEWWIP zero-update tangent test left Drequires_gradFalse beforepublicload; nativeguard correctlyrefused checkpoint. Gradientmath assertions alreadypassed.",
+    "log_sha256": "a66dbf25639ebc972b18808443698bdcc636c7c489c51936914c3e1646e9fb99",
+    "execution_receipt_sha256": "1d64d3247b87cc972e99e2cc499826260d88457be6db32f65a722d112b2080c8",
+    "repair": {
+      "scope": "OnlyNEWtest restores originalDflags beforepublicload; no native/oldsource/testchanges.",
+      "cases": 1,
+      "pass": true,
+      "pytest_seconds": 0.93,
+      "process_seconds": 2.7187446961179376,
+      "native_updates": 0,
+      "log_sha256": "0962451141434ef7d59ea6fd2c1ce82ff36bb6638aa306583a41a2f60fad2984",
+      "execution_receipt_sha256": "f8fe6797e6ffed81ce28f7a98cbf68c3e86587162bb30c3feecce829bf02e87e"
+    },
+    "distinct_cases_passed": 20,
+    "full_suite_repeated": false,
+    "budget_seconds": 60
+  },
+  "renderer_software": {
+    "cases": 9,
+    "status": "PASS",
+    "pytest_seconds": 0.38,
+    "native_updates": 0,
+    "model_forwards": 0,
+    "CUDA": false,
+    "scope": "Peer-owned NEW renderer tests; observedpeer toolreceipt, not independentlyrerun."
+  },
+  "actual_CPU_input_owner_preflight": {
+    "status": "PASS",
+    "child_seconds": 4.897068231832236,
+    "process_seconds": 5.474464853992686,
+    "external_limit_seconds": 60,
+    "host_forwards": 0,
+    "native_updates": 0,
+    "CUDA_initialized": false,
+    "FAST_EMA_linear_oracles": 36,
+    "EMA_parameter_forward_independent": true,
+    "new_UpP_owned_by_native_G_optimizer": true,
+    "common_fresh_models_averages_flags_table_recipe_roles_rates_CPU7_43_exact": true,
+    "global_CPU_RNG_restored": true,
+    "log_sha256": "0c575b2404d5c19285fbdf069a0ed9e7102a1d92a312fa061130777c80cd647e",
+    "execution_receipt_sha256": "8db185d1600b9832280e7044ce6979e0bb85d7a682c50e15f0aab0e1f3fffb5a",
+    "observed_card_sha256": "b34aa729ed97ebb0e18f40931c4ddb6bea91c10ac4faea9a7143a3eb9f8b56bf",
+    "post_preflight_change": "ROOT requested logging-only publicoutput_sigma+DgroupLRs every200 steps; no update/owner/math change. Finalsource/card pins below; no software/native repeats."
+  },
+  "prepared_checkout": "fc19f89e8d37b9b7e823ac718f3025161c41bbf0",
+  "observed_imported_native": {
+    "imported_file": "/ml2/hypergan/ParticleGAN-supra-untied-caption-develop/particlegan/__init__.py",
+    "package_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+    "git_HEAD": "fc19f89e8d37b9b7e823ac718f3025161c41bbf0"
+  },
+  "observed_backend_flags": {
+    "float32_matmul_precision": "highest",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true,
+    "allow_bf16_reduced_precision_reduction": true,
+    "allow_fp16_reduced_precision_reduction": true
+  },
+  "permanent_native_allowlist": false,
+  "source_pins": {
+    "examples/e22_routed_untied_caption.py": "b2db3275ae9b3ce2dd11bac32e8be861ea2018e795fabb8aa8c86f62e7e27bf2",
+    "examples/run_e22_routed_untied_caption.py": "30e122585d787f64fb52393f4213979d3d3fd42a4e8be7583f1df284b4b1e84e",
+    "tests/test_e22_routed_untied_caption.py": "53628b2cd514b5c450084260a0bcb70ca960bc2a1401c8927b6171567c5afd9d",
+    "examples/render_e22_routed_untied_caption.py": "f8ffce9a3cc02796099a1ffb46df3d1d1f34ebea7672cbfee3bd43b8d6d83faa",
+    "tests/test_e22_routed_untied_caption_renderer.py": "4d8ec065f28803254fb0d2dc223aef32b80e62408a202d7d8092725c539426b5"
+  },
+  "card_sha256": "731ea9e7ab8b49ed5b2dd3ce6590e66f0729b30815a802b29b47ebbc48e19b28",
+  "preserved_prior_BF16_report_sha256": "183158eeb9a07e86a63984d7dd40b4af23bf8a6384783c5e83a556b09019d7d3",
+  "budget": {
+    "candidate_steps": 6400,
+    "GPU0_startup_final_seconds": 1750,
+    "own_candidate_replay_updates": 2,
+    "old_neutral_replay_updates": 0,
+    "CPU_media_seconds_separate": 60
+  },
+  "proof_scope": [
+    "Publicfresh common canonical Parameters intact; extra82944publicinitialized zeroheadsbeforeoptimizerEMA, sampledC/Hb0.",
+    "BothheadBF16/F32return, optimizerownership/EMAnoalias, exact2+2tiny publicreplay+trainedsubclassrestore withoutinitialize_.",
+    "InitialmainUp gradientexactordinary andall6codeheadspositive undernativeDV12; zero-update rollbackflags correctedbeforepublicrestore.",
+    "F64rawRMSE oracle/destructivebothcontrol/source/code/live gates; importedpackage identityrecorded+withinrun only.",
+    "ActualCPUinput/class/owner preflight0host/updates; rootstillmustrunGPUbaseline/initialpublic predictionwitnesses beforequality."
+  ],
+  "limits": [
+    "Software/preflightPASS is not actualcaptionconvergencePASS.",
+    "Additional82944parameters andseparateBF16headrounding; no uniquetied-head cause ornativeoptimizerfix.",
+    "Cached native-game ordinary andtiedBF16 controls areprovisional; publicendpointreplaysdo notqualify wholehistories.",
+    "OriginalfullSupra historicalordinary top score remainsunbeaten.",
+    "Executedoldtests/sources/cards/results remainunchanged."
+  ],
+  "science_command": "CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python -u -m examples.run_e22_routed_untied_caption --plan docs/e22_routed_untied_caption_v1.json --out runs/caption-untied-Up-accuracy-v1",
+  "media_command": "CUDA_VISIBLE_DEVICES= python -m examples.render_e22_routed_untied_caption --report runs/caption-untied-Up-accuracy-v1/report.json --completion runs/caption-untied-Up-accuracy-v1/completion.json --media runs/caption-untied-Up-accuracy-v1/observed-media.pt --out runs/caption-untied-Up-accuracy-v1-media"
+}

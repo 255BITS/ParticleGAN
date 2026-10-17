@@ -1,0 +1,811 @@
+{
+  "accounting": [
+    {
+      "campaign_accounting": {
+        "bcap-projection-baseline-repair-v1": {
+          "definition": {
+            "budget_seconds": 48000,
+            "candidate_budget_seconds": 24000,
+            "id": "bcap-projection-baseline-repair-v1"
+          },
+          "paused": false,
+          "reserved_seconds": 0.0,
+          "spent_seconds": 3541.1636059249986
+        }
+      },
+      "executed_full_allowances_seconds": 45840,
+      "execution_retries": 0,
+      "paid_attempts": 32,
+      "pending_work": [],
+      "queue_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue",
+      "scope": "research_diagnostic",
+      "selected_paid_seconds": 3541.1636059249986
+    }
+  ],
+  "actual_training_gifs": 32,
+  "authorized_execution_retries": [],
+  "exact_chosen_baseline": true,
+  "optimizer_updates_added": 0,
+  "original_placement_counts": {
+    "tier1": 6,
+    "tier2": 10
+  },
+  "original_task_count": 16,
+  "outcomes": {
+    "baseline": {
+      "FAIL": 9,
+      "PASS": 7
+    },
+    "candidate": {
+      "FAIL": 7,
+      "PASS": 9
+    }
+  },
+  "own_checkpoint_producers": [
+    {
+      "history_reset": false,
+      "parent_attempt_id": "8df86429cfd540d7907f9560710108eb",
+      "parent_checkpoint_sha256": "cfa88d3356b72e2240036616b5669d40aac5784c7195b83aed383a0c94bf996a",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+      "parent_state_sha256": "687b27a9e6c11bac52e464607a19fb00415940e24e194bd4687dbb4a7b59f0c4",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "baseline",
+      "scope": "research_diagnostic",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "c6a614778cff4056bae61a68d80792f8",
+      "parent_checkpoint_sha256": "4aa03be301e78b21d7dfdcbeb9bb3af0d8bce32c2af093dfeec1f74a767c2715",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+      "parent_state_sha256": "8c29835e9354f393164cbbdff298d7d2c4625a1033643c3b4c5f21fc20e4a0cc",
+      "parent_task_id": "five_word_joint_smoke",
+      "prefix_steps": 834,
+      "restored_exactly": true,
+      "role": "baseline",
+      "scope": "research_diagnostic",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "e99c12b29ab842c09bde37586cfcdf60",
+      "parent_checkpoint_sha256": "c775b8313efb47c83a9eafcb06845212212bef71bb8ea8bea48ce7bafa4ad808",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+      "parent_state_sha256": "723ce76478249cb7aa0407932f26606a11d4d8cd1ebaf69420cc472e03fc0ccc",
+      "parent_task_id": "five_word_joint_smoke",
+      "prefix_steps": 834,
+      "restored_exactly": true,
+      "role": "candidate",
+      "scope": "research_diagnostic",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "history_reset": false,
+      "parent_attempt_id": "a4013a6b0d284ac2b6d95f78894f8eae",
+      "parent_checkpoint_sha256": "38b1c272b6dbfe8768c67c0bfb0c8c9d8adeafec6fe979ade140ee2b31a9a32e",
+      "parent_scope": "research_diagnostic",
+      "parent_source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+      "parent_state_sha256": "f5d241950a1fc0746bb93edae01ebe607196e02732dee9efe8143cf3812dae29",
+      "parent_task_id": "gaussian1d_smoke",
+      "prefix_steps": 1000,
+      "restored_exactly": true,
+      "role": "candidate",
+      "scope": "research_diagnostic",
+      "task_id": "gaussian1d_stability"
+    }
+  ],
+  "paid_seconds": 3541.1636059249986,
+  "protected_historical_files": 10,
+  "publication": "/home/martyn/dev/ParticleGAN-bcap-projection-baseline-review/reports/forge/bcap-projection-baseline-review",
+  "qualification_input": false,
+  "queue_jobs": 32,
+  "repository": "/home/martyn/dev/ParticleGAN-bcap-projection-baseline-review",
+  "sampling_draws_added": 0,
+  "saved_state_comparisons": [
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 250,
+        "candidate": 250
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "90e88a8d4ae27b53f010a9df6d11333f0c0a0443dd4b442c80ac6445c09ec7e0",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "77635b0d80a00479bb7ab741f5c3da39e909c10da769cfc1e81acd9c2dedf244",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/55505e32492b4165ac6e0fb2fc80e930/provenance",
+          "bytes": 66105,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "8b4666e9bfb04fb041938cd19617bcedfea2140f63f0ecc766ff8c7719844a05",
+          "state_sha256": "94daaf4082ff3e90dcb7133384b3ee163f214d8dce6337d75c50d8844e289961"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "d47e3793b4509f271985d177536ba0dba1430af4d080110de15dcf98c34f72cc",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/5b9e42b6cf914d17b51119e1c936c0c7/provenance",
+          "bytes": 66489,
+          "completed_steps": 250,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "657ba24f93bb0119855a44b3185505cbe993c260538cb17fd7d76a5ef85b1945",
+          "state_sha256": "9c9a5fedec82780bfc5bb1a737dd3450fe16928bdf2c72ed44732f13567f72b8"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 4834,
+        "candidate": 4834
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "688760cd75b7a650740e720e5c68ae0ee5dec461d0146813cf73066f58958118",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/a703dcca9218453b9d5a2360dce2d173/provenance",
+          "bytes": 841461,
+          "completed_steps": 4834,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f51d22c57b0749d8d0dafc484eac0dd97289fb5434cffb09697011065fce291d",
+          "state_sha256": "49778d5f0872ac1c1c656c94121a63258d953864001191fab068ad2f732e3ca8"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "2bda6cae4b9f0854151d25b3ed270e88277070e055d44d68748d3dd4dfc2f216",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/55b8eb51eb1b4ba28eb38c3116bbd6c5/provenance",
+          "bytes": 841973,
+          "completed_steps": 4834,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "bca405385e7eca83bd4bc57fbaeefe230b47d7b36f73e605468d3ce7c78a4bd3",
+          "state_sha256": "f92c6009af191a153cf83e94f83a75e399879ef0b1425fa76504a731625ceb1a"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 20001,
+        "candidate": 20001
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "be4101425d6d883e78ea348714bb29b3b9c4667dac4f24fc528815a6d1b5d537",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "83db2317af0eeac7cc747a0271d78291f4643186fb0f4d65f00d177f8f843fdc",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/c6a614778cff4056bae61a68d80792f8/provenance",
+          "bytes": 840501,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "dcd14e101e32559a7f7aa34d77962d7766b9308cb063b28bc0f2bd76e44a77b2",
+          "state_sha256": "0691cc024570e7fd95fd1df530ed8b2bcb858e7bcab04c662698bbe20caa22a8"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "044a72328acc0e756a9e92fc9261b4d7964dc5466c14e8dfe002b57a59045d41",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/e99c12b29ab842c09bde37586cfcdf60/provenance",
+          "bytes": 841013,
+          "completed_steps": 20001,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "863296af299359255cc0dbb6893ce72b1a88cdb7f5981b6506c2f38c4a0c1852",
+          "state_sha256": "9e2184f2a4503f55f272df0e226caefa4cce1f4a9c2f8bdd64697cff7e334473"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "five_word_joint_smoke"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1000,
+        "candidate": 1000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "40bd031f9615613c8bc2e06998d1bb92b8463258757f26dc240bfaae4e9a5f54",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/8df86429cfd540d7907f9560710108eb/provenance",
+          "bytes": 64959,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "0da1792cf2bef68ce684c71e43491a81f1887107d630991133ca3674d6b16d8b",
+          "state_sha256": "687b27a9e6c11bac52e464607a19fb00415940e24e194bd4687dbb4a7b59f0c4"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "3eb55ffe1aeb1d72c105589dc84c786574d038133e01975c2bbe87a4f504aee1",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/a4013a6b0d284ac2b6d95f78894f8eae/provenance",
+          "bytes": 65471,
+          "completed_steps": 1000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "88ea70527d94469cddddb3b012bf5dd39342ab4866f67d75389821c6b5e89dd6",
+          "state_sha256": "f5d241950a1fc0746bb93edae01ebe607196e02732dee9efe8143cf3812dae29"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 6000,
+        "candidate": 6000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "0684bc5adfa987960f90493bc55a18f9a799ebd58d7883c9efeb39cfd1329f68",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "10276202bfd8ca29488bc3a69b92333f3890f30aefd484a09e5af276451780a1",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/92e331a55f9b4941bd04507aba35949b/provenance",
+          "bytes": 65215,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "007ff7cb65834805f2874eec46b6f2e700efe7ca611c8811281de68a774822c7",
+          "state_sha256": "ea4ce7579b980b00289a412385bfcf921c09acbb225bd0efee2179401f269ac6"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "5a8aef34d8d1e943c2e09f2c4ecb99440ae6cf7d0b7c8ca1718ccf5ffcc3e167",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/7b657d12f20e4d0eba83c529a4b128e7/provenance",
+          "bytes": 65727,
+          "completed_steps": 6000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1e63336a4effd498e4290f4abb6957466cbc208cebb38f54894e726fee69e79d",
+          "state_sha256": "ce108bcdc059a36c6ad167970d25ecedbafd8d207e04f551c9bb780cfec19587"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "fb28d6c998513167f67421584b761d3fe862db34d5b4636e7840666f41f7ebef",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/95783509513544789795115246ca5f1e/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1d4eb1edc213884d482c66a9427e930e982da44f5519526c8089831a42b3b613",
+          "state_sha256": "d1bb3cfe28169933664d613a4425bc6938aa5d917c8daaafcce04e1d63091dfc"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "ed1651faf28efc75e47a74a7fdc986c2360a36753ca2cc27bfec0be8a80ae2d0",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/ff24c5b10de14ef5af45afc2791981a8/provenance",
+          "bytes": 770525,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "c66efcab72b0b3d8af1dbb1f40a8841d20471eb01aef94fc9a78f23efe94dc9d",
+          "state_sha256": "f03e0bf579c49b94d0b94619679b0471f26481c6acc3270c44534a6bb8a6916d"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "grid100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 400,
+        "candidate": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b77c158751c7bb55e14aaa7fb5e5a8e9d8f2a50e4cd9746c922a0d6975b1a50",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "95df88b1d2d6e4913a0521a619518dc343b31fa4bc62e7396d76c861a65ef59d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/527b96ac6bc74121b4c1fb6aa73418f2/provenance",
+          "bytes": 163937,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "eb856cecdb36b17c405092383dd7ddb394aaa417b723df23b08eed5349baa6d5",
+          "state_sha256": "de3f0590fed2cd4d156abf4671d9bbb2f667f3b2cdcf06f29dcd8106b58076f8"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "56efecc20f0545cd4f041eb8d521fb196636a3f3ec5ca4bef2d3319b4d2553eb",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/3f5a3ad628df48278690408385bd8cac/provenance",
+          "bytes": 164321,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "169273cf2b840daa4a7426399f046eff433c0ceca6f523158169274bd2e2b918",
+          "state_sha256": "8220f122f06aee74bcc693d7f587f6666ee5a2a32eb6940cb06dbd3aaf74358b"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "residual_student"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1600,
+        "candidate": 1600
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "1890ad7433961804f8309794225ebe95074ce1aac1931d193c4ba9ae1967b1fc",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "b5bb2d84cb1fa251f7db23564c68cf19baa3b1582d69b2393ae893755e718530",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/c2006112b3d74a7c8e902f5074263b1d/provenance",
+          "bytes": 109945,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "85953d5a7d56db3dfc07d296db706cb6b1f16c03e4d51851101b41f98198a900",
+          "state_sha256": "9a4e1e7fc4c5b084eeab4b32513473b1c6adc2b102cc373290a3bd5318998b90"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "14a40f10cc4ecd7880a39b4c1840f3bd7f830fbefabb01695cf13ef3b82fda10",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/da06ddd0a30f457b80b422ffbc767f4e/provenance",
+          "bytes": 110457,
+          "completed_steps": 1600,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "1577fccc0a73b9fa4625aa7cd95332eded81f68bd940351273890c7e92b012e4",
+          "state_sha256": "5fe14230088873a796917aa5d669042b819c3d7380ee185b547e54f141039dd9"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "3e862fa0d55141bbf11a574f03e8d65df3128dd7ed83fa898a979abc30dcc3d2",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/c4edb85cd12346139a1ecbe88121889b/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "4c624057e041e41d65377f75973897a0ee2ff3fa300ffe1fef0652b439f3660b",
+          "state_sha256": "6db1a0aea6e7bb766c4490557fe121a1349ea5f6a5c74efe461b65839a7f4482"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "9807e0d7d2faf1c956d833626db6008b3999be5c502270c4348cfbc75524547e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/cedcf248adb04d59a84581ae8a0d4b40/provenance",
+          "bytes": 770525,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d2a60bf036ec956c7c8042e9db4c1b2d323e5fdd3c8869830a3bf4c82078fb86",
+          "state_sha256": "fca2c7fcdf794207a4221908e154d9f29c2094205a850445e9eac0054afc21f9"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "rotated100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 7000,
+        "candidate": 7000
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7df1344abbfdd528311751074ed55be256b81b9dd001dcab3795d05140fb1f85",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "0e6c6576d68c42e865e296d878934d162358f221de6ab0bbec0489c8b1858d57",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/ded00074e24e4f1cbb34e5b034a1ef92/provenance",
+          "bytes": 770013,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d2f493df89caff4927a584279ebc9f5355d5fb6f1d3512cee431b39beff3f234",
+          "state_sha256": "d8900fa1d589eb2a7dfb3fe448a982914e20326e135bfa539fa4e6d41c41e13a"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "d40a851a3940f2f4375c1f3ef7f6edccb8e8612bb83942df358fde061aa85deb",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/2484a62d778844ca8e7344000721c0fc/provenance",
+          "bytes": 770525,
+          "completed_steps": 7000,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "e047240beea02fc62a293254afce555c0a7f1f496767e94a4045c9f7f26440d8",
+          "state_sha256": "bc6900868fb1ab14507e6707251011d998b025a3a48dcdf4167ee10c21c742d2"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "staggered100"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 400,
+        "candidate": 400
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "eb561b73c7a7c49a48c2c956ad62d8aa31cb71c094b984689d6d94442e68aaf8",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "d465a8361e7ec2ab12ebd0f8a96cf3f1ee03e8aef519ab608ab86c6f43b59e9b",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/c4c282a9d3974f628d20aee680256a7a/provenance",
+          "bytes": 163681,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "05f3ed139e9fb56aa678837fff9562e30d00d00f81398e10ad04f3944dd61dd0",
+          "state_sha256": "07e577b1b473568b6efecbc49cde04755b44f6918f6cbd887f365acb8eb79b7a"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "adf720067219974e58281229493eecc85d4f4c43deb908dd6dec7b1a21c388d4",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/957d53a4c59e4676952cfa87acba6ad0/provenance",
+          "bytes": 164065,
+          "completed_steps": 400,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "25bb3c93c86befc0f4505764343eebed6515eab31324d110f1b31be3bc5b5412",
+          "state_sha256": "2ff9fae0c5dff4edc1a100e209fe6916d66fed8c0f90e2ade91641a85b45f452"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "trajectory"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 80,
+        "candidate": 80
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "c7152b451861e1b2affe2a0ede54658a7ee5dc5c6c4907985151a2a7c7ef6632",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "824dab87999174c2fa0af13c96f52ee6e1197a8f8da985aa896937080dee6198",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/60af638043374daf9d0679992dbad468/provenance",
+          "bytes": 48047,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "56967c7312b6433b1b1e932e63f5972285977d64ba8418e010819ffa961acacc",
+          "state_sha256": "2b4a1ee034f102f33166dc1c64cdfc0eebf68a8f4ce3010e8ca32073a90f2344"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "d3e94375666906d8ef95daaeefd8aab3406f246d22ee7ec758cc8e5d52053564",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/24e34f49f7774cc2b0852f187754b54e/provenance",
+          "bytes": 48623,
+          "completed_steps": 80,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "13b20e1dc3977b5ba6dc396db7a7eb47f758ea8acfab3c37000c4508478e807e",
+          "state_sha256": "70f5c4a251a703aa1708a4d5c6db94d8710ded855a4a508b742c802a3b862387"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "two_pole"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 200,
+        "candidate": 200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "8b0f2929edd45c75b970b5c8192a0310d100939fe797b8563cb6b47de53335cf",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "58494603e6b807f51aeb42c3775d82bc89345dc9d136ba0752784f5ccf77a13f",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/cf31a1525bdf46938a06849bc6f41d23/provenance",
+          "bytes": 51911,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "854a4dd4098b1bb4590103434492c010b22152a5047ebe7922ea4ab7e8744ce7",
+          "state_sha256": "78fd0a218aa15cbf86e6eeca73f7a958dd11cf16a071a12ea7b7ccfa61c215c5"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "927b58754e875155d4ac7aef39ea6f7137ee3efca2c284ac5c390a19e224f25d",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/5efcd2550b8b4428b44b8e3d9c2f0176/provenance",
+          "bytes": 52871,
+          "completed_steps": 200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "a01debed1f3415c10c93aba0f4df87e92ba8e0f1ece66349656ce1e8b8fd0171",
+          "state_sha256": "5664f836dd10827c2e9a0d4ce64feed5561c8be8fd3e802873a6f5cead579b87"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "ad3f25245213b968335aed097697b9c53171d327d5c491a80e30ad6c7dde71c8",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/7065d68be54d4781bf64ebca3fb36f89/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "72c2f37ba02026ca2fb1550dc91d7de58eee7da12a555446935d1415b3fb3e8f",
+          "state_sha256": "b2cb69e37ce682fa2d13cc55598e40ffb46415fb6ffb685e68d44ff7adfa1ecb"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "2f723aac2e4ca8b5b95154998ee456f719ce1d3a424f0c60c4f809a7a8cc70da",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/60a2a38b875541e58ed29175c70086e3/provenance",
+          "bytes": 110393,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "b6e82265566b976176303c19167c8a41ee1b01e7729b89bec16bde31dd04f13e",
+          "state_sha256": "2a5d15d99dafc12324a65d43d696adbe5729bc882c0ff09b2bf48fa11cbc0368"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "163bcc7f6f6d4c1a8f343780b138e37f114844226f0af11bdbc2dfc1fb79299c",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/39730c4e599845d5968f27cab672803e/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "d1fa70dfd69bc96c7735be08b7a778d4afb1389f0c2810ff35843b315b433f34",
+          "state_sha256": "7ee907ab146a5960fad0724fcec2f708b71cb85e01a39096302655764199ffa9"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "b9082f55d4950c9c2c65425413e78663e704d3638ecd365a9f108d32f4fa08f9",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/1bd3c4f9ecb642db984f9ab9aeed885c/provenance",
+          "bytes": 110393,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "5c9c3f3cef90487f2a5f53ec87f12463e966177f0388c430dfbea0fdd352a1ef",
+          "state_sha256": "862e1c3228e80566abb28168f14cb128cdffe61885e4e918070ff8ad6e5bf47c"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "all_declared_arms_present": true,
+      "completed_roles": [
+        "baseline",
+        "candidate"
+      ],
+      "completed_steps": {
+        "baseline": 1200,
+        "candidate": 1200
+      },
+      "consumed_non_eval_streams_and_batches_equal": true,
+      "consumption_comparison": "Exact complete consumed states",
+      "initial_state_proof_sha256": "7d401fbafa8af81a139b98107197184feb57d266182679ac9c488064fe7a6b61",
+      "initialization_and_prior_equal": true,
+      "named_training_bindings_equal": true,
+      "saved_state_references": {
+        "baseline": {
+          "artifact_manifest_sha256": "50dc14ac1236512e5bc1719875bbdec32d828f385963b52df058e46b0354c9ed",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/aeeda4d16c834df28217bcf4d44e8f3d/provenance",
+          "bytes": 109881,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "b86adea8a699428cf15a8705706eda40a11127fa32a48f711f6eb908b79878ec",
+          "state_sha256": "23ca9ee023e4e9bbd502e98bfe83246230a39e8c7cb8c6f7c00a05cf3534f865"
+        },
+        "candidate": {
+          "artifact_manifest_sha256": "31309848ae8e74b611efb61bbcde0b9823c26c8da282754ad010993bee56931e",
+          "artifact_root": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/bcap-projection-baseline-repair-v1/ff32da5f63d943958f8383399fca82ae/provenance",
+          "bytes": 110393,
+          "completed_steps": 1200,
+          "path": "provenance-state.pt",
+          "prerequisite_eligible": false,
+          "purpose": "provenance_only",
+          "sha256": "f500ff9f3de64cac638eccc9eea1e1f751288beab3df7f9f94444977f3cc2e5d",
+          "state_sha256": "6268f085aa0e8b6a1126b7c9504cd1b158a5fe4391fb12d46275e2d5491288b4"
+        }
+      },
+      "saved_variant": "final",
+      "task_id": "vector_unequal_width"
+    }
+  ],
+  "scope": "independent_phase3_saved_evidence_audit",
+  "source_checks": [
+    {
+      "frozen_snapshot": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+      "frozen_snapshots": [
+        "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+      ],
+      "published_files_equal": true,
+      "scientific_files_verified": 1206,
+      "snapshot_manifests": [
+        {
+          "origin_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+          "path": "/mnt/ml7tb/ParticleGAN-forge/bcap-tier1-repair-next/baseline-repairs/projection/phase3-queue/snapshots/d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f/forge-source.json",
+          "sha256": "9b70f667686ff84e5cce61b0e028ecd372d03357a8ac34e0c2dc790f9af8145b"
+        }
+      ],
+      "source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+      "source_commits": [
+        "442dc7ef52658a727cad6014e2e2d5fbcb1787a5"
+      ],
+      "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f"
+    }
+  ],
+  "source_commit": "442dc7ef52658a727cad6014e2e2d5fbcb1787a5",
+  "source_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+  "status": "PASS",
+  "task_results_sha256": "8a3a390819a5dab4921ae88c4f9049cbc08a56e40827b0ab998aea7390afd70b",
+  "unavailable_complete_states": []
+}

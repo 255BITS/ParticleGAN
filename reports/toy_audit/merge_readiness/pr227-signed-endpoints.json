@@ -1,0 +1,95 @@
+{
+  "format": "pr227_beneficial_signed_gate_reclassification_v2",
+  "original_proposal_head": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+  "gate": "zero_code_minus_live > 1e-6 under all four mandatory judges",
+  "saved_tensor_assertion": "PASS",
+  "scores": {
+    "ordinary_native_game@800": {
+      "ordinary_native_game": 0.7190849781036377,
+      "particle_native_game": 1.0228853225708008,
+      "ordinary_mse_reference": 0.7091378569602966,
+      "neutral_particle": 0.7022917866706848,
+      "zero_code_minus_live": 0.7556473612785339
+    },
+    "ordinary_native_game@6400": {
+      "ordinary_native_game": 0.9235858917236328,
+      "particle_native_game": 1.5043978691101074,
+      "ordinary_mse_reference": 0.8198766112327576,
+      "neutral_particle": 0.8027129769325256,
+      "zero_code_minus_live": 0.584847629070282
+    },
+    "particle_native_game@800": {
+      "ordinary_native_game": 0.7252561450004578,
+      "particle_native_game": 1.1854112148284912,
+      "ordinary_mse_reference": 0.7098462581634521,
+      "neutral_particle": 0.7045040130615234,
+      "zero_code_minus_live": 1.1852797269821167
+    },
+    "particle_native_game@6400": {
+      "ordinary_native_game": 0.9307908415794373,
+      "particle_native_game": 2.304943323135376,
+      "ordinary_mse_reference": 0.8312075734138489,
+      "neutral_particle": 0.8007082939147949,
+      "zero_code_minus_live": 0.9303702116012573
+    }
+  },
+  "harmful_direction_controls": {
+    "ordinary_native_game@800": {
+      "rejected": true,
+      "synthetic_zero_code_minus_live": -0.010000000000000009
+    },
+    "ordinary_native_game@6400": {
+      "rejected": true,
+      "synthetic_zero_code_minus_live": -0.010000000000000009
+    },
+    "particle_native_game@800": {
+      "rejected": true,
+      "synthetic_zero_code_minus_live": -0.010000000000000009
+    },
+    "particle_native_game@6400": {
+      "rejected": true,
+      "synthetic_zero_code_minus_live": -0.010000000000000009
+    }
+  },
+  "synthetic_control_is_training_evidence": false,
+  "source_proof": {
+    "changes": [
+      "fresh neutral loop before fixed checkpoint evaluation",
+      "signed beneficial-particle evaluation gate"
+    ],
+    "training_ast_unchanged": true,
+    "trained_retained_particle_gate": "unsigned_effect_v1",
+    "evaluated_retained_particle_gate": "beneficial_signed_v2"
+  },
+  "patched_source_sha256": {
+    "examples/e22_routed_convergence_neutral.py": "e831f67173d5499303a2cc01232388cdb8f338452a8189e09d1f9a6a69e14972",
+    "examples/evaluate_e22_routed_convergence_neutral.py": "42ffd267126b725e052ec63e74307f8b9f3b4aab673c7def114cb80886bf6c96",
+    "tests/test_e22_routed_convergence_long.py": "aa7c4964f079a8a799578bf281deec4f355ce3853d4a54dc3439480719a8633b",
+    "tests/test_e22_routed_convergence_signed_gate.py": "797297d0b59572e9659c09f16df45842b5311824b4b3c9a8534213decb9af71a",
+    "docs/e22_routed_convergence_signed_gate.md": "99e5bb90e43a4d0bd28bf2344065bfb79dfc84a948516a7b4df3ceb5ae9f5240"
+  },
+  "native_source_hash": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
+  "original_artifact_sha256": {
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-v1/receipt.json": "6d0b3bb22c701f15968ce742afaa09e36af6083449d76245cf5306c2d24eaf60",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-neutral-v1/recovered-evaluation-receipt.json": "4f5a671db3844b0510ca2a0cdd67de8909632decc389968400b317f8830cbce8",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-neutral-v1/training-receipt-error.json": "e89814f84d3cb00f6d253106f5055ab640edbe2ee1a576d9a87aec99f301a442",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-neutral-v1/training-source-504df385.py": "504df385659576c0da967866849926e3c2a213e11c2f7d63168cfcadf829c8aa",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-neutral-v1/step-6400.pt": "e129c3870fbd24fde5e4c6f03ef33178a32aded1d0aebae4f29e282f7a7fcd08",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-v1/ordinary_native_game/step-0800.pt": "860259c35a7415753484f4837ac2acdbd363f737278a1a163441136e45a41048",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-v1/ordinary_native_game/step-6400.pt": "2cd6272b564932995e8c8212585b3be7391cf1b59b82965478482aa19f443e33",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-v1/particle_native_game/step-0800.pt": "4e88bff07a4324f686798d894e063f4c2735f095f2690abb658b087327540902",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-v1/particle_native_game/step-6400.pt": "b737bb91640dd005664df37c507e5e4852db482e48ca7aa350381a7dd676040e",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-v1/ordinary_mse_reference/step-6400.pt": "8efd29330c812f63e4b761d857e01f8304ee57038130f6cb1e745fc5c3548abe"
+  },
+  "original_artifacts_unchanged": true,
+  "original_training_bindings_unchanged": true,
+  "owned_state_and_RNG_unchanged": true,
+  "global_RNG_isolation": "new loop constructors and scoring run inside fork_rng",
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "device": "cpu"
+  },
+  "new_training_updates": 0,
+  "qualification_credit": "none"
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "id": "release07-gan-v3-task-adapted-v1",
+  "parent": "release07-gan-v3-mog-v1",
+  "goal": "discriminator_stability",
+  "hypothesis": "Make the released v0.7 optimizer and BCap training recipe executable across frozen toy hosts through explicit task-owned resource and objective bindings; measure ordinary gates without importing native or historical credit.",
+  "changed_factors": [
+    "Explicit task ownership of dimensions, batch size, horizon and behavioral objectives instead of imposing the single native-host reference values",
+    "Retain released BCap6/cap1.25, betas(0,.99), LR/prior multiplier, cosine schedule, scalar prior spread .05 and disabled K3P hooks/noise"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Host integration successor, not a retuned formulation: reference recipe remains pinned; declared adaptation delegates only fields already owned by each adapter. Behavioral objectives omit the scalar prior-spread term; scalar trainer hosts retain it.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "name": "gan_v3",
+    "model": "gan",
+    "z_dim": 2,
+    "num_particles": 20000,
+    "num_classes": null,
+    "conditioning": "scalar",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 2048,
+    "total_steps": 7000,
+    "lr": 0.00425,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 2.0,
+    "betas": [
+      0.0,
+      0.99
+    ],
+    "prior_betas": null,
+    "reg_arm": "b_cap",
+    "reg_coeff": 6.0,
+    "reg_kappa": 1.25,
+    "reg_every": 1,
+    "prior_reg": 0.05,
+    "ema_decay": 0.995,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "encoder_mode": "none",
+    "routing_temperature": 0.25,
+    "distance_reduction": "sum",
+    "observation_sigma": 0.03,
+    "reconstruction_weight": 1.0,
+    "network_lr_floor": null,
+    "network_lr_horizon_cap": null,
+    "reg_anchor_weight": 0.0,
+    "d_guard_ratio": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "direct_particle_gain": false,
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "api_changes": [],
+  "claim_contract": {
+    "schedule": "scheduled",
+    "scoring_weights": "live",
+    "sampling_law": "task_declared"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "reports/forge/studies/FORMULATION_COMPARISON_CONTINUATION.md",
+    "tests/fixtures/release07-public-api.json",
+    "reports/forge/TECHNIQUE_ROSTER.md",
+    "reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md"
+  ],
+  "guide": "EXPERIMENTATION.md",
+  "host_adaptation": {
+    "schema_version": 1,
+    "recipe_fields": [
+      "alpha_bar",
+      "batch_size",
+      "conditioning",
+      "distance_reduction",
+      "encoder_mode",
+      "model",
+      "num_classes",
+      "num_particles",
+      "observation_sigma",
+      "prior_reg",
+      "reconstruction_weight",
+      "routing_temperature",
+      "total_steps",
+      "ucd_target",
+      "ucd_weight",
+      "z_dim"
+    ]
+  }
+}

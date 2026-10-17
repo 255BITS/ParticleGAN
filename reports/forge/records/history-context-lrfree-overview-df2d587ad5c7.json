@@ -1,0 +1,76 @@
+{
+  "candidate_id": "context:lrfree/overview",
+  "candidate_revision": "563db19d2df865dcf8df58df5f045b022afd3f28b731094d99313e6f07629cf7",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "LR-free GAN base search \u2014 September 27",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/overview",
+      "narrative_sources": [
+        {
+          "git_blob": "cd407a8a3db6f2ce6ed3ecd09ea1c02d2ff0022b",
+          "path": "reports/toy100/lrfree-search/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "18a2b3413146cdaac3dba6c581f2f5194f133c097f11d802e61fae64e1baf77c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/README.md"
+        },
+        {
+          "git_blob": "6571a0cfae1f2494e4ba7bc57682c779330d6e00",
+          "path": "reports/toy100/lrfree-search/candidates.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "e49beeedf3681c24da4fcc464c987f6b34f925fbed4ddb984d2bc338ffe5e0e9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/candidates.md"
+        },
+        {
+          "git_blob": "5f108fbc67b1e0a542c81a9f3f82856fb7bcfce9",
+          "path": "reports/toy100/lrfree-search/pr155-previous-body.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "228d79cf495d02c4e0de77aa583604c95ed9810bf66360e70d90a4fc436ae8ad",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/pr155-previous-body.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# LR-free GAN base search \u2014 September 27\n\n## Direct-particle follow-up (September 28)\n\nThe [direct-particle Adam report](direct-particle-adam/README.md) archives a\nsmall `st-10` policy patch and its eight custom-host reruns. `two_pole` changes\nfrom FAIL 0/24 to PASS 7/24; the other seven custom hosts reproduce every\nnon-time observation row exactly. This makes the custom subtotal **6/8** and\nimplies **17/22** from the unchanged 11 quick and 0 native results. It does\nnot fix a native 100-Gaussian gate. The separate latest grid100 structural\nlanes all failed; the [paired birth/death graft](paired-bd-graft/README.md)\nwas the strongest completed native directional improvement, but still missed\ncentre and covariance limits.\n\n## 22-check leaderboard: all eight custom hosts now run (September 27, night)\n\nThe eight custom hosts of the 22-toy suite now run for any candidate package in the LR-free harness\n([custom22 report](custom22/README.md); the harness is committed at [`harness/`](harness/)). The candidate's own\npolicy (controller, KA2, amsgrad, noise) is bitwise parity-checked against its `GANTrainer.step`, and the host\ncopies are verbatim. As a known-good control, develop K3P with its annealed schedule passes 8/8 through the same\nengine. Noisy scoring throughout.\n\n| Candidate | Quick 11 | Custom 8 | Native 3 | **/22** | ring / stationary |\n|---|---:|---:|---:|---:|---|\n| `st-10` (s"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-overview-df2d587ad5c7",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "cd407a8a3db6f2ce6ed3ecd09ea1c02d2ff0022b",
+    "path": "reports/toy100/lrfree-search/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "18a2b3413146cdaac3dba6c581f2f5194f133c097f11d802e61fae64e1baf77c",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/README.md"
+  },
+  "task_results": []
+}

@@ -1,0 +1,22 @@
+{
+  "status": "FROZEN_CPU_LOCK_REVIEW",
+  "utc": "2026-09-30T05:39:01.516759+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/run_group_profile.py": "88eba85ce2519fd29f8b8c58a158514e102b31282e9de6aebf4e9cc243dfb4b3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/run_group_profile_v2.py": "5bc48310ee58859a4389dd547599934f3f46fdf803e7e548d85bdc4091168707",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/group-profile-phase/READY.json": "8dd57424f2c64bbfbe27ceff3e059cc8cd73e840c3319b253e5e66ad34f70d45",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/group-profile-phase-v2/PREPARATION.json": "1fda9828e929a7dab0e2a8e19d56774fe95b78d860b88c49c50514f63668dfbb",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/REPORT.md": "e584bea034a736f2e00e746daf4b1ffcf593af1a65fad414862df24f6bb68453",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/check_lock.py": "ddb62b882b29eccd33e792b04faf88fbfa455df0e5710b928b44d03bb8d39c7e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/child-done.json": "9ba274ada23b532e9ccdd6696ddeb0c012665dd1456c4b96681ecb74e2d95b4b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/child-ready.json": "e9fd4a134a1e93cc7614c24a38193be315ee27205fa59e45a79cc6c1eb3eee75",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/dummy-child.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/parent.json": "5e12907c7bef5659ebd7b3c10450d34703e0c6113acc89d011dcae7e2463e4d3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/private.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/receipt.json": "c04ff48f180c3ba1ee3034c9e9f75cf53c56a88aa0615ce375f6c38c9bf644f0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-v2-review/release": "a5320f2f692e968a9f611ad9609490adf1fb34b9922ba2cf91945cd2dcdd7b5d"
+  },
+  "cuda_used": false,
+  "signals": 0,
+  "private_cpu_subprocess_fixture_count": 1
+}

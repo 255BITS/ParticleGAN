@@ -9,7 +9,7 @@ import torch
 from torch import nn
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe
+from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe, init
 
 
 def main():
@@ -29,7 +29,11 @@ def main():
     generator = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
                               nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
     discriminator = BatchDistanceDiscriminator().to(device)
-    trainer = GANTrainer(recipe, generator, discriminator, seed=0)
+    # Deterministic initial weights and R2 particle table, before training starts.
+    init.deterministic_orthogonal_(generator, seed=0)
+    init.deterministic_orthogonal_(discriminator, seed=1)
+    prior = init.deterministic_orthogonal_(recipe.make_prior().to(device))
+    trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0)
     data_rng = torch.Generator(device=device).manual_seed(0)
     if args.resume:
         checkpoint = torch.load(args.resume, map_location="cpu", weights_only=True)

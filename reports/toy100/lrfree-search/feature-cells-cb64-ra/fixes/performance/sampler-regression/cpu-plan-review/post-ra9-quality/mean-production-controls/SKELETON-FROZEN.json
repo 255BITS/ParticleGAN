@@ -1,0 +1,14 @@
+{
+  "files": {
+    "PROTOCOL.md": "fb2b8258d7a7532ca21b12bf1fbcdf6cddf452a855b7d17b205d5eb2e6067396",
+    "controls_skeleton.py": "9756d9c94105dc7169deb5ae2e3f82452e452bdc2d20af464e8cab43bd14a8ea"
+  },
+  "pending": [
+    "owner source/helper/fixture preseal",
+    "actual backend9 construction outputs/complete hook trace",
+    "new sealed runnable revision",
+    "root composition and independent source audit"
+  ],
+  "scope": "Protocol and dormant observer primitives only; no imports of production/Torch or interpreted tensor reads, forwards, RNG draws or tests",
+  "status": "SOURCE_ONLY_PREPARATION_FROZEN"
+}

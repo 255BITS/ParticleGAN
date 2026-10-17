@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "r1r2-tier1-refresh-v1",
+  "trainer_family": "r1r2",
+  "base_candidate": "r3gan-stacked-training-toy-v1",
+  "grid": [
+    {
+      "lr": [
+        0.00425,
+        0.0085
+      ],
+      "penalty": [
+        {
+          "reg_coeff": 1.0,
+          "reg_coeff_end": 0.1
+        },
+        {
+          "reg_coeff": 0.1,
+          "reg_coeff_end": 0.01
+        }
+      ]
+    },
+    {
+      "lr": [
+        0.0085
+      ],
+      "decay": [
+        {
+          "lr_anneal_start": 0.2,
+          "lr_floor": 0.1,
+          "network_lr_floor": 0.1
+        },
+        {
+          "lr_anneal_start": 0.2,
+          "lr_floor": 0.25,
+          "network_lr_floor": 0.25
+        },
+        {
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.1,
+          "network_lr_floor": 0.1
+        },
+        {
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.25,
+          "network_lr_floor": 0.25
+        }
+      ],
+      "d_lr_mult": [
+        0.5,
+        1.0
+      ]
+    }
+  ],
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability",
+  "execution_backend": "cuda",
+  "cuda_model": "NVIDIA RTX A6000",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "campaign": {
+    "schema_version": 1,
+    "id": "tier1-existing-configs-v1",
+    "budget_seconds": 98700,
+    "candidate_budget_seconds": 2100,
+    "accept_shared_cost_transfer": false,
+    "purpose": "Updated revision-3 Tier 1 readout for exactly 15 existing ideas and 32 existing configurations, without new parameters or seed changes. All five refreshed finite studies and ordinary idea requests share this immutable campaign. The complete five-task allowance is 2100 seconds per candidate and 47 candidates reserve at most 98700 seconds. Required non-passes stop remaining ordinary work, including within Tier 1; unsupported hosts spend nothing. Existing incompatible receipts retain their original identity. Tier 2 and Tier 3 are not authorized; provisional gates grant no calibration, robustness, or default adoption."
+  },
+  "hypothesis": "Re-evaluate the exact previously declared complete r1r2 configurations against all five current Tier 1 requirements, including ring acquisition and paired five-word joint acquisition, under one frozen source and CUDA runtime.",
+  "rationale": "User-requested updated Tier 1 readout of existing configurations only. The finite recipe settings are the exact union of r1r2-modern-toy-v1, r1r2-modern-family-round1-v1. No new parameter combinations, seeds, host definitions, gate thresholds or task budgets are introduced. Earlier receipts retain their recorded source/view/runtime and are reused only for identical scientific task keys. All ordinary required failures stop the configuration immediately; every unknown and blocked requirement remains in the 5/19/2 denominator. Selection uses complete configuration PASS counts and the existing content-hash tie-break, confined to Tier 1. Quality and endurance stay unmeasured holdouts; provisional placement supplies no default adoption.",
+  "guide": "EXPERIMENTATION.md"
+}

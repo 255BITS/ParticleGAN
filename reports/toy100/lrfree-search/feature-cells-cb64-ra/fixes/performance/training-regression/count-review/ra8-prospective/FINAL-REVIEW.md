@@ -1,0 +1,9 @@
+# RA8 completed toy evidence audit
+
+Evidence VALID at all ten original sealed checkpoints. All 165 frozen source/input guards remain exact. The unchanged original artifact auditor validates typed GPU initialization fingerprints from CPU storage, inputs, stream/data cursors, configuration and the saved result. Its strict saved-metric toy gate is PASS: precision .96533203125, 25 modes, mass TV .0521142578125. No quality samples, model forwards, gradients, optimizer updates, seeds or CUDA context were produced by this audit.
+
+Backend7/trainer5 are intentional. Typed geometry state, same reaction/snapshot chart identity, exact FIFO age/history, scalar semantic fields and old6/policy/boolean-step/future-step rejection pass at every endpoint. Population, row resets, bounded symmetric lineage, copy/novel budgets, count multiplicity, certificate accounting, JSON and stored RNG placement also pass. The final newborns have zero own optimizer/history/evidence/lineage entries with the shared step2000 retained.
+
+Every earlier recorded checkpoint geometry lease vetoes averaging; at1750 joint963/973 and age768 real rows. At2000 joint977/973, snapshot250, age0 permits the paired average. Table stationarity remains inactive with s1/b64; no 973-row optimizer requirement was relaxed. This is an empirical anti-blur lease, not a stationarity, distribution-equivalence or every-update emitted support guarantee. Intermediate reaction decisions between saved milestones are not reconstructed.
+
+The original full Grid100 remains required and is running under the same frozen package. This toy evidence does not qualify the combined target. All private audit logs were closed before this final seal; the evolving global validation journal is deliberately not pinned in this toy-only receipt. Other learned phases/replay are not claimed here.

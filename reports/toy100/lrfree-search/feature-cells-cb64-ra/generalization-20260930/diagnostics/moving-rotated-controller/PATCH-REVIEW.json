@@ -1,0 +1,48 @@
+{
+  "changed_modules": [
+    "feature_cells.py",
+    "feature_policy.py",
+    "mean_transport.py",
+    "output_moments.py"
+  ],
+  "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+  "constraints": {
+    "active_mask_frozen_pre_odd_and_pre_actions": true,
+    "all_odd_rows_retained": true,
+    "alpha_and_radius_unchanged": true,
+    "checkpoint_and_recipe_schema_unchanged": true,
+    "current_support_checked_only_initially_active": true,
+    "default_flag": false,
+    "full_raw_axes_cap8_unchanged": true,
+    "inactive_proposal_and_preview_filters_before_division": true,
+    "inactive_weights_and_directions_zero": true,
+    "initially_active_empty_group_veto": true,
+    "original_R1_guard_KA2_optimizer_unchanged": true,
+    "serving_coherence95percent_unchanged": true,
+    "shared_action_budget_unchanged": true,
+    "trigger": "FeatureFacade typed policy.surprise.fires>0",
+    "weights_renormalized": false
+  },
+  "gpu_operations": 0,
+  "limits": [
+    "Source review and CPU bridge do not prove a new quality gate pass.",
+    "No-fire parity fixture is18updates and2reactions; longer unchanged-path semantics follow explicit positive-weight/count invariants."
+  ],
+  "model_calls": 0,
+  "no_fire_source_proof": [
+    "Default freeze_moment rejects any missing EMA group exactly as before.",
+    "Original valid fixed moments have every even count>=2, positive even weights, and positive EMA counts.",
+    "New proposal and preview filters are identities for every original valid default moment.",
+    "Default run_mean_phase uses the original all-group empty-count veto; the partial mask executes only when True.",
+    "No odd_witness, projection, budget, serving certificate, optimizer or detector source changed."
+  ],
+  "package_sha256": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+  "source_bridge_sha256": "dd6ccd6ea182ee705e33a3aaed2f83c79bcf72fe8181da797275eec9200175b4",
+  "source_sha256": {
+    "feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+    "feature_policy.py": "e51fd208b0d601dc5823be8cc5a01e32f93ce42df67740ad0dfe4c409d0f5060",
+    "mean_transport.py": "51f1af4f4b05018a11f6286b6a52f8375cd4d1bb9476550bb19d68976c83091c",
+    "output_moments.py": "4cef280ece3c873cab5426a01b1e0e28c34d0445e90d522df3dd563afed6636c"
+  },
+  "status": "PASS_INDEPENDENT_SOURCE_REVIEW"
+}

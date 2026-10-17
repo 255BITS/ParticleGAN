@@ -1,0 +1,271 @@
+{
+  "actions": {
+    "draws": false,
+    "git_mutations": false,
+    "gpu": false,
+    "models": false,
+    "pytest_runs": false,
+    "queue_mutations": false,
+    "raw_hydrations": false,
+    "regrades": false,
+    "renderer_runs": false,
+    "source_edits": false
+  },
+  "author_evidence": {
+    "handoff.json": {
+      "bytes": 5095,
+      "path": "/ml2/hypergan/half-base-one-table-display-proof-20261004/handoff.json",
+      "sha256": "aa2bbdfa55ba04a03ed0adac2c8b99ffde57080c76fac0a9a0e4f34511a7c05a"
+    },
+    "proof.json": {
+      "bytes": 14297,
+      "path": "/ml2/hypergan/half-base-one-table-display-proof-20261004/proof.json",
+      "sha256": "4a79e7a8c32e55e5d8951b7e9619d95c0953e4c81d0a5970ba5a189cd28177df"
+    }
+  },
+  "base": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+  "cherry_pick_commits": [
+    "df57afed8fd7e9612fbb6b64c7b97b891949fac0",
+    "eb8c6287340aae8e448d41e704098747d21d5785"
+  ],
+  "cross_cohort_pooling": false,
+  "default_adoption": false,
+  "findings": [],
+  "half_base_accounting": {
+    "gpu0_charged_seconds": 234.82608077581972,
+    "gpu1_charged_seconds": 1231.8432376992423,
+    "inclusive_charged_seconds": 1466.669318475062
+  },
+  "head": "eb8c6287340aae8e448d41e704098747d21d5785",
+  "independent_saved_byte_review": {
+    "added_field": [
+      "word_half_base_diagnostic"
+    ],
+    "archive": {
+      "byte_identical_to_original_suffix": true,
+      "bytes": 17654,
+      "local_target_files": 18,
+      "missing_local_targets": [],
+      "path": "reports/forge/shared-score-index-20261003/ARCHIVED_REPORTS.md",
+      "sha256": "823c7b5a24b05a0dd022e317c3fe29a5a9955c735930d50b0c1cab76844b2902"
+    },
+    "changed_common_field": [
+      "provenance"
+    ],
+    "evidence_manifest": {
+      "byte_identical": true,
+      "bytes": 17619,
+      "path": "reports/forge/technique-evidence/manifest.json",
+      "sha256": "a51cb0da6ec07a62ef7f4413275f2ff63094d1cd1e0224802fb29ea47c979fc3"
+    },
+    "existing_nonprovenance_field_count": 24,
+    "existing_nonprovenance_fields_preserved": [
+      "archived_evidence_rows",
+      "archived_policies",
+      "atlas_unblocking_progress",
+      "baseline_debugging",
+      "completed_api_studies",
+      "configuration_rows",
+      "evidence_rows",
+      "evidence_sources",
+      "execution_backend",
+      "policy_fingerprint",
+      "protocol_contracts",
+      "publication_scope",
+      "qualification_input",
+      "qualification_reuse",
+      "recipe_contracts",
+      "reducer_version",
+      "rows",
+      "schema_version",
+      "status_reasons",
+      "task_contracts",
+      "tier_requirements",
+      "trainer_families",
+      "view",
+      "view_revision"
+    ],
+    "layouts": {
+      "reports/forge/shared-score-index-20261003/README.md": {
+        "baseline_first": true,
+        "columns": 3,
+        "data_rows": 18,
+        "diagnostic_rows": 7,
+        "generic_atlas_fallback_displayed": false,
+        "local_target_files": 28,
+        "missing_local_targets": [],
+        "ordinary_display_rows": 11,
+        "source_scopes_separate": true,
+        "tables": 1
+      },
+      "reports/forge/technique-inventory.md": {
+        "baseline_first": true,
+        "columns": 3,
+        "data_rows": 18,
+        "diagnostic_rows": 7,
+        "generic_atlas_fallback_displayed": false,
+        "local_target_files": 32,
+        "missing_local_targets": [],
+        "ordinary_display_rows": 11,
+        "source_scopes_separate": true,
+        "tables": 1
+      }
+    },
+    "ordinary_data_rows": 12,
+    "ordinary_rows_and_order_unchanged": true,
+    "ordinary_rows_sha256": "d9f54efffdf969677752f7c60eade9c08a4e6d1a17450c0ba01f189bcb126c3a",
+    "required_tiers": {
+      "1": 5,
+      "2": 19,
+      "3": 2
+    }
+  },
+  "integration_notes": [
+    "Commit root-owned half-base compact results/readout/GIF together with the renderer changes before CI or generation.",
+    "Regenerate EXPERIMENTS_BY_TIER.md after final mainboard/JSON/compile outputs to resolve the separately diagnosed artifact-footer freshness failure.",
+    "Actual GitHub Markdown rendering and focused integration/freshness checks remain root-owned."
+  ],
+  "no_write_handoff": true,
+  "owned_source_files": {
+    "reports/forge/regenerate_technique_inventory.py": {
+      "bytes": 106222,
+      "sha256": "44763e125623e706168cd9939af4f40603221d9d5f09dd605904d0a7f0b3315e"
+    },
+    "reports/forge/shared-score-index-20261003/ARCHIVED_REPORTS.md": {
+      "bytes": 17654,
+      "sha256": "823c7b5a24b05a0dd022e317c3fe29a5a9955c735930d50b0c1cab76844b2902"
+    },
+    "reports/forge/shared-score-index-20261003/README.md": {
+      "bytes": 8504,
+      "sha256": "7afcd9d3949091fef1b535dfc0ec3d47ce9130b8b4774a43303db71040881af8"
+    },
+    "reports/forge/technique-inventory.json": {
+      "bytes": 2198650,
+      "sha256": "cac33438c9e2fc29d8c462e744d43893115c1a34493d47e52109d2175b06da09"
+    },
+    "reports/forge/technique-inventory.md": {
+      "bytes": 18315,
+      "sha256": "037799226423ecb2373e1a0ade0e872c9e3fe2c4f30555ef39ce60573873682d"
+    },
+    "tests/test_forge_current_technique_inventory.py": {
+      "bytes": 67584,
+      "sha256": "254164500aa129827814d22cd06d5fc053ccf57950daf4c10443e6cd02a3b856"
+    }
+  },
+  "qualification_input": false,
+  "render_scope_review": {
+    "author_older_render_byte_equality_evidence": true,
+    "generic_atlas_hidden_only_when_actual_progress_present": true,
+    "github_render_required_by_root": true,
+    "independent_renderer_executed": false,
+    "ordinary_current_only": true,
+    "recorded_policy_and_quality_paths_source_inspected": true
+  },
+  "reviewed_at_utc": "2026-10-04T04:54:40.398933+00:00",
+  "root_integration_prerequisites": {
+    "reports/forge/word-half-base-20261004/README.md": {
+      "bytes": 3715,
+      "included_in_six_file_source_commits": false,
+      "owned_by_root": true,
+      "sha256": "08db1485b912d00558af0f3496dff6332c9b27d2cb13dfca68496f8a90d54bbe"
+    },
+    "reports/forge/word-half-base-20261004/media/goal.gif": {
+      "bytes": 449923,
+      "included_in_six_file_source_commits": false,
+      "owned_by_root": true,
+      "sha256": "2d94247b902d6384ef172faa99db0ae4d655bd0171ae6a4ef4d77eaadbc1012b"
+    },
+    "reports/forge/word-half-base-20261004/results.json": {
+      "bytes": 12453,
+      "included_in_six_file_source_commits": false,
+      "owned_by_root": true,
+      "sha256": "d2bc198d65c935ca31160505510b8efc7aa2cf9e5f62ac6429f758173e7ca8b7"
+    }
+  },
+  "schema": "pg_single_score_table_independent_review_v1",
+  "software_controls": {
+    "author_elapsed_seconds": 10.86,
+    "author_passed": 92,
+    "independent_suite_run": false,
+    "log": {
+      "bytes": 180,
+      "path": "/ml2/hypergan/half-base-one-table-display-controls-final-20261004.log",
+      "sha256": "c3439bdf0210d8edf810edecbafc58fcf350effbef6527a1283c6df56e2b99a7"
+    }
+  },
+  "source_scoped_rows": [
+    {
+      "configuration": "Atlas C6 .0053125 / prior1.5 with explicit host exceptions",
+      "counts": {
+        "BLOCKED": 8,
+        "FAIL": 11,
+        "PASS": 7
+      },
+      "representation": "Particles",
+      "required": 26,
+      "scope": "selected-policy diagnostic",
+      "source_prefix": "9563dea5"
+    },
+    {
+      "counts": {
+        "NOT_RUN": 22,
+        "PASS": 4
+      },
+      "family": "atlas_conditional",
+      "required": 26,
+      "source_prefix": "ff94453b"
+    },
+    {
+      "counts": {
+        "NOT_RUN": 25,
+        "PASS": 1
+      },
+      "family": "atlas_ae_routed",
+      "representation": "MoG fixed sigma .025 / routed AE",
+      "required": 26,
+      "source_prefix": "ff94453b"
+    },
+    {
+      "counts": {
+        "NOT_RUN": 25,
+        "PASS": 1
+      },
+      "family": "atlas_routed",
+      "required": 26,
+      "source_prefix": "fb7acc77"
+    },
+    {
+      "counts": {
+        "NOT_RUN": 25,
+        "PASS": 1
+      },
+      "family": "atlas_multibank",
+      "required": 26,
+      "source_prefix": "fb7acc77"
+    },
+    {
+      "accepted_numeric": "UNAVAILABLE",
+      "counts": {
+        "INVALID": 1,
+        "NOT_RUN": 25
+      },
+      "family": "atlas_word_joint_min11",
+      "required": 26,
+      "source_prefix": "fb7acc77"
+    },
+    {
+      "accepted_numeric": "FAIL",
+      "configuration": "half_base .00265625 / prior1.5 / D1",
+      "counts": {
+        "FAIL": 1,
+        "NOT_RUN": 25
+      },
+      "execution_status": "COMPLETE",
+      "family": "atlas_word_joint_min11_rates",
+      "required": 26,
+      "source_prefix": "f9f7ed9d"
+    }
+  ],
+  "speed_ranking": false,
+  "status": "CLEAR_FROZEN_DISPLAY_SOURCE"
+}

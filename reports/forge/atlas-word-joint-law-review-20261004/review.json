@@ -1,0 +1,981 @@
+{
+  "cohort": "word_joint_policy_min11_v1",
+  "family": "atlas_word_joint_min11",
+  "input_files": 46,
+  "inputs": {
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/benchmarks/toy_audit/api_images.py": {
+      "bytes": 86556,
+      "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/benchmarks/toy_audit/definition_quality.py": {
+      "bytes": 19193,
+      "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json": {
+      "bytes": 15010,
+      "sha256": "cbb8fad29b406e9a997101be7ba5ca1d1669dc5be1d7f6f982409d2c092f2ebb"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/experiments/forge/policy_adapters.py": {
+      "bytes": 15130,
+      "sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/experiments/forge/views.py": {
+      "bytes": 74085,
+      "sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/experiments/forge/word_joint_policy_adapters.py": {
+      "bytes": 24294,
+      "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/experiments/forge/word_joint_policy_contracts.py": {
+      "bytes": 11445,
+      "sha256": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/forge-source.json": {
+      "bytes": 171329,
+      "sha256": "d1dd4b67ec65eedbed9468ecc61cbd684d774f2504d82511ea4bdf6e9f823a5a"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/birth_death.py": {
+      "bytes": 45396,
+      "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/continuous.py": {
+      "bytes": 60875,
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/feature_policy.py": {
+      "bytes": 14650,
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/gan_loss.py": {
+      "bytes": 1016,
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/particle_prior.py": {
+      "bytes": 17899,
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/policy.py": {
+      "bytes": 85594,
+      "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/particlegan/recipes.py": {
+      "bytes": 54485,
+      "sha256": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/graded-result.json": {
+      "bytes": 901,
+      "sha256": "5eb697cf6678ef764204ca5cd9e755a9d2f6f1fe0530c58a608b18ee9e3d766a"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/raw-result.json": {
+      "bytes": 197018,
+      "sha256": "e26ec506c81e8cdd74447c466d516ef30785de501da28dd50e698c115ebe7515"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/resolved.json": {
+      "bytes": 4861315,
+      "sha256": "52a639183e9ed3c541b90311a16d0968ed85cd7cb039c64d0df693f4cc43bbc1"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_000834.npz": {
+      "bytes": 673600,
+      "sha256": "94b1e358af8f8d385b4b84e34cc78528499d627a9ffdf9ae16887077293f90fd"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_001667.npz": {
+      "bytes": 671357,
+      "sha256": "b27e7d004183b08f4c8b7acfa1fb6a210c97d8765c3926f31c1ed91eae469847"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_002501.npz": {
+      "bytes": 672475,
+      "sha256": "43533501462255e48e5dd98344490a4bb37569ea07449d5e983479bb0d116588"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_003334.npz": {
+      "bytes": 534709,
+      "sha256": "0479401dc35618f4fcdede300376186f13717e6261088cfbf84c9dcb61516cd7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_004167.npz": {
+      "bytes": 412303,
+      "sha256": "3fdcd8973de945270ce16a0ee91115c1c2d94d346e59d77e6f96f73461916b30"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_005001.npz": {
+      "bytes": 652104,
+      "sha256": "16362dd48ec56783f08de63b395daec574e36e20e31791d11d182c4caa658d6a"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_005834.npz": {
+      "bytes": 682046,
+      "sha256": "8857ccc7c3d1d3a478fad9461549a13d1e65382e1bbc8e7074bf0982f2e1d38c"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_006667.npz": {
+      "bytes": 678672,
+      "sha256": "25b015f466b767607f901391e193dd5b5583546407dccff14b6e51b869824ee9"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_007501.npz": {
+      "bytes": 679201,
+      "sha256": "a9ebb4bf5d9ef88e4955231c30da6a9f4c34b5e98a7433b29ae0a68350081dd7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_008334.npz": {
+      "bytes": 681647,
+      "sha256": "89404a8dcf672903bab180fcba628adc408cb3379e245f6c7f6b32ae97d8efd8"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_009168.npz": {
+      "bytes": 672852,
+      "sha256": "705dd615fe8e7fef522c4d457ef62e74c805e1c54291bc8adb37b1c30e2bdca6"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_010001.npz": {
+      "bytes": 678324,
+      "sha256": "1f860bd19eeffca6055ade8baa93b6524bc8c785f641d71925841071e9ab44e4"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_010834.npz": {
+      "bytes": 667941,
+      "sha256": "dd824e1cfa43e3d00c842ebd2f85ac1e6b4c56f10a72683def8e4ee693f7e613"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_011668.npz": {
+      "bytes": 555474,
+      "sha256": "e87d954bf62725eb4b413c6cb79019957fd5ae0162a3f092f223aa01bf86c683"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_012501.npz": {
+      "bytes": 62719,
+      "sha256": "d2f45255f845a5d5733fc609bf6645a78d64134dd14943da55dfaf6f08501800"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_013334.npz": {
+      "bytes": 138894,
+      "sha256": "5f182bd82d62e6fe0cc8c4c5cbb177209a2cad858aa4da89ebe79aab4cc3dc60"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_014168.npz": {
+      "bytes": 96631,
+      "sha256": "d2dadf4778b24869f3d7940f2d6d99959fd7f913b7216effe99bff0a5db3192f"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_015001.npz": {
+      "bytes": 173084,
+      "sha256": "87fd590e14487dbc0ec600a744d1e70426e7c4c1cf5be7538a5e17ac4c35fd96"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_015835.npz": {
+      "bytes": 14875,
+      "sha256": "4859149f1aea39cf6176690cc33ef1f0f568c84f588425f2278582c41c83033f"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_016668.npz": {
+      "bytes": 21097,
+      "sha256": "bb45be37be9254af3813c7f9b05780a252b4890f37b99978459238340607146a"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_017501.npz": {
+      "bytes": 19827,
+      "sha256": "c0750bab99566b2bbb3ebdb04511d3154a55abdfe2fb41b7f78654f786a44bbf"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_018335.npz": {
+      "bytes": 19520,
+      "sha256": "e39532569b49307da2ce4b5f9ef36d99f1e541de9e0b83b337e692e0decf0ce7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_019168.npz": {
+      "bytes": 19531,
+      "sha256": "7a3fe821d558a0c9c88b36abf8a759609b03a3f29d5929fda21ac71c9d6f0320"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_020001.npz": {
+      "bytes": 21372,
+      "sha256": "a3b12b4fd82b0064367e32a557ca3d7c3be779113884ea5761039bec4c5eb213"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/state.pt": {
+      "bytes": 4544387,
+      "sha256": "16388c4e59a657a154a4730e285191acfd18fbc23d41102d0c3ba82227efb8a7"
+    },
+    "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/study.json": {
+      "bytes": 4147493,
+      "sha256": "721adfbf299568bffc9bc7f72da0204a2fb5c87d283aa17d3bd32caa62540c4c"
+    },
+    "/ml2/hypergan/pg-word-goal-diagnosis-20261004/WORD_GOALS.md": {
+      "bytes": 10061,
+      "sha256": "836b758716b1721d9a664d00b32789ca6bd0ee5c898eaa0398b78c0695f0265a"
+    },
+    "/ml2/hypergan/pg-word-goal-diagnosis-20261004/analysis.json": {
+      "bytes": 107003,
+      "sha256": "bbb53358b3288dd44c1591aab4c7d449ccac934e3c0ff8b451468926f2744c9f"
+    }
+  },
+  "later_matched_noise_variant": {
+    "different_declared_family_and_objective_required": true,
+    "limitations": [
+      "Matching noise kernels alone does not match mixture centers or masses",
+      "No prospective winner or success claim",
+      "No original grade or capacity credit",
+      "Fresh capacity evidence under the declared new law required"
+    ],
+    "required_disclosures": [
+      "Real encoded-code kernel and fake prior-code kernel, their candidate/controller and masses",
+      "Word-coordinate output noise on both critic distributions",
+      "Real/fake critic-input noise and regularization consistency",
+      "Same effective code and selected inverse serving law",
+      "Complete G/E/prior/noise/D ownership and exact source/gradient/RNG/checkpoint controls"
+    ],
+    "status": "CONCEPT_ONLY_NOT_PROPOSED_FOR_EXECUTION"
+  },
+  "missing_evidence": [
+    "A source-bound capacity witness for finite gates under this exact law",
+    "Same-state matched DV12-off inverse observations",
+    "Complete per-update G/E/prior/D parameter/loss trajectory",
+    "Earlier complete checkpoints",
+    "Identification of how much finite critic exploits code/output-noise mismatch"
+  ],
+  "preserved": {
+    "cost_unchanged": true,
+    "execution_status": "INVALID",
+    "numeric_gate_status": "UNAVAILABLE",
+    "paid_seconds": 558.5739127129782,
+    "rejected_grade": {
+      "gate_status": "FAIL",
+      "reasons": [
+        "observed public policy state is nonfinite"
+      ],
+      "status": "FAIL"
+    },
+    "rejected_grade_is_accepted_numeric_verdict": false,
+    "reserved_seconds": 0
+  },
+  "prior_analysis": {
+    "bytes": 107003,
+    "path": "/ml2/hypergan/pg-word-goal-diagnosis-20261004/analysis.json",
+    "sha256": "bbb53358b3288dd44c1591aab4c7d449ccac934e3c0ff8b451468926f2744c9f"
+  },
+  "prior_goal_report": {
+    "bytes": 10061,
+    "path": "/ml2/hypergan/pg-word-goal-diagnosis-20261004/WORD_GOALS.md",
+    "sha256": "836b758716b1721d9a664d00b32789ca6bd0ee5c898eaa0398b78c0695f0265a"
+  },
+  "rates_only_candidates": [
+    {
+      "capacity_claim": false,
+      "causal_identification": false,
+      "competing_explanation": "No direct inverse objective and the stochastic joint law may dominate; endogenous scales will differ.",
+      "id": "word-min11-quarter-base-rate-v1",
+      "overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.001328125,
+        "prior_lr_mult": 1.5
+      },
+      "rationale": "Reduce nominal motion of every role fourfold at preserved ratios; test whether sharp wrong-token/coverage excursions persist.",
+      "scientific_credit": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "worst_case_seconds": 900
+    },
+    {
+      "capacity_claim": false,
+      "causal_identification": false,
+      "competing_explanation": "Birth/death transport and DV12 geometry are endogenous; eleven distinct terminal rows are not collapsed latent support.",
+      "id": "word-min11-slower-prior-v1",
+      "overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.0053125,
+        "prior_lr_mult": 0.15
+      },
+      "rationale": "Reduce only nominal row motion tenfold; test a moving-support hypothesis suggested by changing saved code geometry and many table moves.",
+      "scientific_credit": false,
+      "status": "PROPOSED_NOT_EXECUTED",
+      "worst_case_seconds": 900
+    }
+  ],
+  "rates_only_limits": {
+    "both_unexecuted_at_review": true,
+    "draws_per_observation": 1024,
+    "each_full_allowance_seconds": 900,
+    "full_updates": 20001,
+    "interpretation": "Persistent failure weakens only the proposed excessive-nominal-step or nominal-prior-chasing explanation; endogenous damping, transport and latent geometry remain distinct.",
+    "maximum_new_single_attempts": 2,
+    "new_total_allowance_at_most_seconds": 1800,
+    "no_retries_or_budget_reset": true,
+    "observations": 24,
+    "original_terminal_checks": 5,
+    "seed": 0,
+    "source_bound_new_cohort_required": true,
+    "unchanged_law_and_gates": true
+  },
+  "raw_result": {
+    "bytes": 197018,
+    "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/raw-result.json",
+    "sha256": "e26ec506c81e8cdd74447c466d516ef30785de501da28dd50e698c115ebe7515"
+  },
+  "recorded_actual_law": {
+    "all_selected_sources": [
+      "fast"
+    ],
+    "backend": {
+      "actual_backend": "knn",
+      "generator_noise_factor": 1.0,
+      "moment_rank_bound": 8,
+      "output_shape": [
+        170
+      ],
+      "population_policy": {
+        "actual_backend": "knn",
+        "calibration_rows": 5,
+        "finite_resolution_feasible": false,
+        "matching_sampler": "controller_reference",
+        "maximum_guard_flags": 0,
+        "minimum_bh_flags": 37,
+        "population": 11,
+        "q": 0.05,
+        "requested_backend": "feature_cells",
+        "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+        "schema": 1
+      },
+      "rate_mapping": [
+        [
+          {
+            "base_rate": 0.0053125,
+            "factor": 1.0,
+            "rate": 0.0053125,
+            "role": "generator"
+          },
+          {
+            "base_rate": 0.0053125,
+            "factor": 1.0,
+            "rate": 0.0053125,
+            "role": "encoder"
+          },
+          {
+            "base_rate": 0.00796875,
+            "factor": 1.0,
+            "rate": 0.00796875,
+            "role": "table"
+          },
+          {
+            "base_rate": 0.0053125,
+            "factor": 1.0,
+            "rate": 0.0053125,
+            "role": "noise"
+          }
+        ],
+        [
+          {
+            "base_rate": 0.0053125,
+            "factor": 1.0,
+            "rate": 0.0053125,
+            "role": "critic"
+          }
+        ]
+      ],
+      "raw_output_width": 170,
+      "requested_backend": "auto",
+      "sampling_backend": "controller_reference",
+      "schema": 1,
+      "selection_reason": "caller_callbacks_own_representation"
+    },
+    "full_recipe": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 256,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.0053125,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "atlas",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 11,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 1.5,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": false,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    },
+    "full_recipe_sha256": "869b0c02f058487f50be796e4614d2463c0f1be909d0a6a9f692c60dc9d36903",
+    "last_training_latent_bandwidth": [
+      0.12243864685297012,
+      0.18044087290763855
+    ],
+    "last_training_output_sigma": 0.028999999165534973,
+    "last_two_training_latent_applications": [
+      {
+        "clipped_fraction": 0.49609375,
+        "perturbation_rms": 0.10547961294651031,
+        "radius_max": 0.37529662251472473,
+        "radius_mean": 0.1891341656446457,
+        "radius_min": 0.07111953943967819
+      },
+      {
+        "clipped_fraction": 0.4765625,
+        "perturbation_rms": 0.11041469871997833,
+        "radius_max": 0.37529662251472473,
+        "radius_mean": 0.18976587057113647,
+        "radius_min": 0.07111953943967819
+      }
+    ],
+    "output_noise_during_selected_observation": false
+  },
+  "reproducer": {
+    "bytes": 6458,
+    "input_availability": "Original raw evidence and source snapshot are local-only; JSON pins are portable. No raw hydration is performed.",
+    "operation": "Read/hash existing bytes and compare saved arrays only; no checkpoint deserialization, Torch, models, forwards, draws or scorers",
+    "path": "check_retained_codes.py",
+    "sha256": "52d271adaa8f094a8c196168e5505266dd32d0c4626c205c678d0940a0702228"
+  },
+  "retained_codes": {
+    "comparison": "Numeric equality of existing finite float32 codes; displacement norms computed in float64; no model or official metric re-evaluation",
+    "counts": {
+      "every_prior_table_has_eleven_distinct_rows": true,
+      "generated_changed": 24576,
+      "generated_codes": 24576,
+      "generated_effective_equal_any_encoder": 0,
+      "inverse_changed": 120,
+      "inverse_codes": 120,
+      "observations": 24
+    },
+    "observations": [
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.4946324259382348,
+        "generated_displacement_l2_min": 0.016215739821176463,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 834
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.2482453479340784,
+        "generated_displacement_l2_min": 0.008356919417637458,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 1667
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.23431679403403013,
+        "generated_displacement_l2_min": 0.011311950385286103,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 2501
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.706036906603899,
+        "generated_displacement_l2_min": 0.004644347170564738,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 3334
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.4210415728274341,
+        "generated_displacement_l2_min": 0.005046026514691695,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 4167
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.18488676312481148,
+        "generated_displacement_l2_min": 0.00454411481418961,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 5001
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.1096577544521818,
+        "generated_displacement_l2_min": 0.004109345373648004,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 5834
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.1622117613461581,
+        "generated_displacement_l2_min": 0.0010312822639929214,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 6667
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.18113215825944948,
+        "generated_displacement_l2_min": 0.001279664202545973,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 7501
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.10980707364554304,
+        "generated_displacement_l2_min": 0.005052881071850122,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 8334
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.036585148916422915,
+        "generated_displacement_l2_min": 0.001736700859634337,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 9168
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.08306983704729536,
+        "generated_displacement_l2_min": 0.00015751992706191674,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 10001
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.03715064131068072,
+        "generated_displacement_l2_min": 0.002932530236042186,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 10834
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.08003043846457551,
+        "generated_displacement_l2_min": 0.0016216205039763442,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 11668
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.17068818031470845,
+        "generated_displacement_l2_min": 0.0042955170538655696,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 12501
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.2800786600868485,
+        "generated_displacement_l2_min": 0.004450687522303836,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 13334
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.15864425351363037,
+        "generated_displacement_l2_min": 0.005560657645710913,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 14168
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.14321602685767051,
+        "generated_displacement_l2_min": 0.003941706973709204,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 15001
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.13840973706966497,
+        "generated_displacement_l2_min": 0.0017747984773903527,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 15835
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.2920290701255515,
+        "generated_displacement_l2_min": 0.015511883794030266,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 16668
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.27415644546755946,
+        "generated_displacement_l2_min": 0.004023812042804599,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 17501
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.4407979345968857,
+        "generated_displacement_l2_min": 0.013466513658733107,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 18335
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.36187941271338897,
+        "generated_displacement_l2_min": 0.004321765243958108,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 19168
+      },
+      {
+        "generated_changed": 1024,
+        "generated_code_count": 1024,
+        "generated_displacement_l2_max": 0.37458022900244126,
+        "generated_displacement_l2_min": 0.007629118159064207,
+        "generated_effective_equal_any_encoder": 0,
+        "inverse_changed": 5,
+        "inverse_code_count": 5,
+        "prior_unique_rows": 11,
+        "step": 20001
+      }
+    ]
+  },
+  "schema": "pg_word_joint_law_review_v1",
+  "scope": {
+    "capacity_certificate": false,
+    "cross_cohort_credit": false,
+    "default_adoption": false,
+    "new_objective": false,
+    "new_scientific_test": false,
+    "numerical_regrading": false,
+    "qualification_input": false,
+    "saved_evidence_only": true,
+    "speed_qualification": false
+  },
+  "source": {
+    "commit": "fb7acc775b3a1a6184d36b55e035b9da04531492",
+    "consumed_files": {
+      "benchmarks/toy_audit/api_images.py": {
+        "bytes": 86556,
+        "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+      },
+      "benchmarks/toy_audit/definition_quality.py": {
+        "bytes": 19193,
+        "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+      },
+      "configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json": {
+        "bytes": 15010,
+        "sha256": "cbb8fad29b406e9a997101be7ba5ca1d1669dc5be1d7f6f982409d2c092f2ebb"
+      },
+      "experiments/forge/policy_adapters.py": {
+        "bytes": 15130,
+        "sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+      },
+      "experiments/forge/views.py": {
+        "bytes": 74085,
+        "sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+      },
+      "experiments/forge/word_joint_policy_adapters.py": {
+        "bytes": 24294,
+        "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+      },
+      "experiments/forge/word_joint_policy_contracts.py": {
+        "bytes": 11445,
+        "sha256": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec"
+      },
+      "particlegan/birth_death.py": {
+        "bytes": 45396,
+        "sha256": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed"
+      },
+      "particlegan/continuous.py": {
+        "bytes": 60875,
+        "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+      },
+      "particlegan/feature_policy.py": {
+        "bytes": 14650,
+        "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+      },
+      "particlegan/gan_loss.py": {
+        "bytes": 1016,
+        "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+      },
+      "particlegan/particle_prior.py": {
+        "bytes": 17899,
+        "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+      },
+      "particlegan/policy.py": {
+        "bytes": 85594,
+        "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+      },
+      "particlegan/recipes.py": {
+        "bytes": 54485,
+        "sha256": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1"
+      }
+    },
+    "digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+    "manifest": {
+      "bytes": 171329,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed/forge-source.json",
+      "sha256": "d1dd4b67ec65eedbed9468ecc61cbd684d774f2504d82511ea4bdf6e9f823a5a"
+    },
+    "snapshot_path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/named-diagnostic-source/snapshots/f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed"
+  },
+  "source_line_anchors": [
+    {
+      "claim": "Same effective G/joint code; Gaussian output noise touches words only",
+      "first_line": 43,
+      "last_line": 60,
+      "path": "experiments/forge/word_joint_policy_adapters.py",
+      "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+    },
+    {
+      "claim": "Original G, free E, prior, D and output-noise ownership",
+      "first_line": 105,
+      "last_line": 120,
+      "path": "experiments/forge/word_joint_policy_adapters.py",
+      "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+    },
+    {
+      "claim": "Deterministic real joint and perturbed fake joint; no reconstruction training loss",
+      "first_line": 138,
+      "last_line": 146,
+      "path": "experiments/forge/word_joint_policy_adapters.py",
+      "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+    },
+    {
+      "claim": "Ordered actual D then G/E/table updates",
+      "first_line": 153,
+      "last_line": 174,
+      "path": "experiments/forge/word_joint_policy_adapters.py",
+      "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+    },
+    {
+      "claim": "Selected G/E/prior; DV12 inverse and generated codes retained; pure observation",
+      "first_line": 262,
+      "last_line": 293,
+      "path": "experiments/forge/word_joint_policy_adapters.py",
+      "sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+    },
+    {
+      "claim": "Callback-owned representation selects knn/controller_reference",
+      "first_line": 100,
+      "last_line": 135,
+      "path": "particlegan/feature_policy.py",
+      "sha256": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2"
+    },
+    {
+      "claim": "Geometry-derived bandwidth and Gaussian DV12 clipped displacement; zero-kernel degeneracy",
+      "first_line": 134,
+      "last_line": 192,
+      "path": "particlegan/continuous.py",
+      "sha256": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41"
+    },
+    {
+      "claim": "Selected serving applies controller before callback even with output noise off",
+      "first_line": 137,
+      "last_line": 155,
+      "path": "particlegan/policy.py",
+      "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+    },
+    {
+      "claim": "Learnable output sigma and state-dependent floor",
+      "first_line": 919,
+      "last_line": 957,
+      "path": "particlegan/policy.py",
+      "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+    },
+    {
+      "claim": "Training generation applies selected backend/controller before output noise",
+      "first_line": 966,
+      "last_line": 991,
+      "path": "particlegan/policy.py",
+      "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+    },
+    {
+      "claim": "Selected generator, encoder, table and controller snapshot",
+      "first_line": 1131,
+      "last_line": 1159,
+      "path": "particlegan/policy.py",
+      "sha256": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42"
+    },
+    {
+      "claim": "Uniform discrete raw prior row indices",
+      "first_line": 94,
+      "last_line": 114,
+      "path": "particlegan/particle_prior.py",
+      "sha256": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f"
+    },
+    {
+      "claim": "Finite paired logistic joint critic loss",
+      "first_line": 6,
+      "last_line": 23,
+      "path": "particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    {
+      "claim": "Original finite G/E/D scaffolds",
+      "first_line": 1020,
+      "last_line": 1047,
+      "path": "benchmarks/toy_audit/api_images.py",
+      "sha256": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491"
+    },
+    {
+      "claim": "Finite normalized word, mass and paired inverse measurements",
+      "first_line": 102,
+      "last_line": 127,
+      "path": "benchmarks/toy_audit/definition_quality.py",
+      "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+    },
+    {
+      "claim": "Original exact thresholds",
+      "first_line": 31,
+      "last_line": 34,
+      "path": "experiments/forge/word_joint_policy_contracts.py",
+      "sha256": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec"
+    },
+    {
+      "claim": "Full 20001 horizon, 24 observations, 1024 draws and terminal-five contract",
+      "first_line": 136,
+      "last_line": 145,
+      "path": "experiments/forge/word_joint_policy_contracts.py",
+      "sha256": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec"
+    }
+  ],
+  "status": "COMPLETE_PASSIVE_EVIDENCE_REVIEW",
+  "supported_implications": [
+    {
+      "claim": "Real code is deterministic E(one-hot word); fake G input and appended code are the same DV12-perturbed code. Selected inverse queries also retain DV12.",
+      "kind": "source_fact"
+    },
+    {
+      "claim": "Every saved generated and inverse code is perturbed; saved generated code sets contain none of the corresponding five encoded queries. Final recorded training bandwidth, radius and displacement are nonzero.",
+      "kind": "retained_fact"
+    },
+    {
+      "assumptions": [
+        "Usual ideal continuous Gaussian noise, rather than finite PRNG/float support",
+        "Observed positive two-axis bandwidth and positive support radii",
+        "Fixed observed selected parameters/controller"
+      ],
+      "claim": "Real code marginal is supported on at most five atoms; this nondegenerate two-dimensional clipped Gaussian fake code marginal assigns those points zero probability. Exact full joint equality is incompatible at these observed states. Fake-only positive word-coordinate noise adds a mismatch.",
+      "kind": "conditional_mathematical_inference"
+    },
+    {
+      "claim": "Zero bandwidth or degenerate support can yield zero perturbation. This is not a theorem of incapacity for every family state, a certified critic separation, or a cause identified from the failed training.",
+      "kind": "limitation"
+    },
+    {
+      "claim": "Original gates test finite word probabilities, modes, mass and paired reconstruction; they do not require equal code marginals. Exact joint mismatch does not itself prove these gates unattainable. No full-law finite-gate capacity witness has been established.",
+      "kind": "finite_gate_distinction"
+    }
+  ],
+  "task_id": "five_word_joint_acquisition_word_joint_policy_min11_v1"
+}

@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/toy100/search",
+  "candidate_revision": "7cdfa3072b1fdebd97ff674e9dffb88a42588bab849604ceb9e7fc7687bd36f4",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Configuration search ledger",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/search",
+      "narrative_sources": [
+        {
+          "git_blob": "1b3ad95ca5158b58b664124c8fff7383968b0298",
+          "path": "reports/toy100/search/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "e97a1d3bdc767177e914dd7bf661b10d9fce328b8d2dbbe73b3e9165a7764801",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/search/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Configuration search ledger\n\nEvery completed attempt is listed, including failures. The seed and gate thresholds were fixed. Times include evaluation and are device-specific. A row passing one problem does not certify the suite.\n\n[Configs, provenance, and complete evaluation curves](trials.json)\n\n| Trial | Problem | Device | Budget | Modes | HQ | Mass TV | First 100 | Stable from | Gate | Seconds |\n| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | ---: |\n| direct-disk7 | grid100 | cpu | 4000 | 85 | 0.8672 | 0.1867 | \u2014 | \u2014 | FAIL | 34.9 |\n| direct-uniform5-f2 | grid100 | cpu | 4000 | 100 | 0.9787 | 0.0425 | 500 | \u2014 | FAIL | 38.0 |\n| direct-uniform5-f3 | grid100 | cpu | 4000 | 100 | 0.9793 | 0.0478 | 750 | 3000 | PASS | 36.4 |\n| direct-uniform5-noisy | grid100 | cpu | 4000 | 100 | 0.9637 | 0.0534 | 3000 | \u2014 | FAIL | 35.3 |\n| direct-uniform5-small-lr | grid100 | cpu | 3000 | 100 | 0.9773 | 0.0424 | 1000 | \u2014 | FAIL | 26.5 |\n| instance-noise/control | grid100 | cuda:0 | 7000 | 97 | 0.9873 | 0.1206 | \u2014 | \u2014 | FAIL | 72.6 |\n| instance-noise/sigma05 | grid100 | cuda:0 | 7000 | 100 | 0.9900 | 0.0665 | 5500 | 6000 | PASS | 67.7 |\n| instance-noise/sigma05 | rotated100 | cuda:0 | 7000 | 100 | 0.9878 | 0.0577 | 5500 | 6000 | PASS | 79.3 |\n| instance-noise/sigma05 | staggered100 | cuda:0 | 7000 | 99 | 0.9807 | 0.1052 | \u2014 | \u2014 | FAIL | 91.4 |\n| instance-noise-cpu/sigma05 | g"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-search-008d0b30e272",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "1b3ad95ca5158b58b664124c8fff7383968b0298",
+    "path": "reports/toy100/search/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "e97a1d3bdc767177e914dd7bf661b10d9fce328b8d2dbbe73b3e9165a7764801",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/search/README.md"
+  },
+  "task_results": []
+}

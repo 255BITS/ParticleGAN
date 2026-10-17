@@ -1,0 +1,17 @@
+{
+  "anchor_to_clean": "unpaired empirical distribution difference",
+  "functions": {
+    "draw": "67c5f95bf400e017f5b77d03d4466cb8d3e38921454af17d9d4e864b55b1820c",
+    "draw_holdout": "5e672dcf151651634bdd6a12c790a81e90722e20e86c8c2ada953bc3fea6da35",
+    "score_dir": "f918c0cb3eb311cd56699440a5329aa836d206ac85edf9f4f8b8f5892ae7c4bb"
+  },
+  "immutable_function_ast": {
+    "head_features": "3ab35fc3933a3b1efef4461f869dcfb0eaf67d8f8db7baffc20f199a49f55eb8",
+    "raw_affine": "ae4b43ef2eb80acef1b9b99ebdc3aeaa186ea7c3312932deac4a42b82755996c",
+    "tensor_state_hash": "c7a4398baf824c86e8f657f02638677a23d6aaa0a6026406da0435fd60932920"
+  },
+  "numerical_imports_PT_objects_models_charts_or_forwards": 0,
+  "paired_feature_frame": "g(C) selects both group bin and center/scale/clip frame for C and Y",
+  "pairing": "same original draw; no row permutation",
+  "status": "PASS_SOURCE_ONLY"
+}

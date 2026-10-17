@@ -1,0 +1,372 @@
+{
+  "claims": [
+    {
+      "claim": "dt075 grid/staggered 14k continuation after stationarity-ladder release",
+      "gap_id": "dt075-14k",
+      "status": "UNBOUND"
+    },
+    {
+      "claim": "EMA .995 D-tracking native 3/3",
+      "gap_id": "ema995-dtracking",
+      "status": "UNBOUND"
+    },
+    {
+      "claim": "sub-0.03 sigma center-error sensitivity",
+      "gap_id": "center-sensitivity",
+      "status": "UNBOUND"
+    }
+  ],
+  "closest_bound_source": {
+    "candidate": "cf1-bdpair-dtracks-075-prior",
+    "distinction": "This saved 7k narrative is not the reported later 14k/EMA995/sensitivity evidence.",
+    "git_blob": "f4a70551bdaa85a213b0eea3ca2389923eab7a35",
+    "package_sha256": "8cdcc534c348d51afaad8b65b1058cb2018beb656af6b8fb842733c886731d90",
+    "path": "reports/toy100/lrfree-search/row-em-renew/bd-pair-sigma-release-plan.md",
+    "recorded_budget_steps": 7000,
+    "recorded_status": "2/3 native; grid PASS, rotated PASS, staggered FAIL; 8 custom-host parity ERRORs",
+    "revision": "bb9036e33557b23b30293811dd95829a04112388",
+    "sha256": "cd15b08e6165c37a131a547c07849598cdfccf45c3381c418bec4ef16546f0ca"
+  },
+  "conclusion": "No later receipts located in these specific local worktrees, ignored/compressed report scopes or latest pinned PR155 notes. Absence here does not disprove the reported experiments.",
+  "current_qualification_reuse": false,
+  "evidence_scope": "historical_source_search",
+  "next_action": "Obtain the exact later archived results, package/config hashes, fixed-fixture/evaluator identity, 14k timeline/checkpoint provenance and separate live/EMA sensitivity diagnostics. Keep the three claims unbound until those bytes are available.",
+  "receipt_import_count": 0,
+  "referenced_external_archive": {
+    "available_locally": false,
+    "path": "/ml2/hypergan/gan-attempts/formulations-20260928T040504Z/custom_follow/20260928T040504Z-4138988"
+  },
+  "schema_version": 1,
+  "scopes": [
+    {
+      "branch": "codex/k3p-continuous-search",
+      "match_review": "Matches are generic EMA .995 settings, unrelated control studies, or incidental digits in metric/hash values; no matching later claim receipt.",
+      "matching_files": [
+        {
+          "git_blob": "c2a2cf2cb75346c798ed4bf684687f960ef959d3",
+          "path": "experiments/train_cifar_ddgan.py",
+          "sha256": "37b833fc561d72567bc0804613f900f9aeb71ed5fe1565c183308b74fa73dcb7"
+        },
+        {
+          "git_blob": "ffc52381db8db4951ed5681d698f2f46d5b8ec0a",
+          "path": "experiments/train_cifar_particle_ae.py",
+          "sha256": "7bacf9b0dcce4fb229a448d4624d7791ecee6d4e54bff91002caa4109e4f3267"
+        },
+        {
+          "git_blob": "39104394b979c8ccb7962be06fd5c5cf18c8d8bb",
+          "path": "experiments/train_cifar_particle_ddgan.py",
+          "sha256": "d08b4bd24ef5781d0ba09e3dc57f7cf1535d891a20903af01772bac3f8125dd0"
+        },
+        {
+          "git_blob": "f629c7787dfb54f795ef0de256ce8df488cdea57",
+          "path": "experiments/train_sparse.py",
+          "sha256": "3bc5723ea450e4c98d0020eb2d7126a163dfa580db0e4dbb4b5cdf925bbf3716"
+        },
+        {
+          "git_blob": "32daf78023187f7835f806a40294ac26dc3f33b8",
+          "path": "experiments/train_trajectory.py",
+          "sha256": "e7870623139b0a22d81e6f90d9c8ba7084f055e06404415ba8668ec5f5ed09d7"
+        },
+        {
+          "git_blob": "fa8f35603c896dd0cf5b96784cd4caaa42f17488",
+          "path": "reports/toy100/continuous-round-1/attempts/adaptive_anchor/result.md",
+          "sha256": "8e5438ca0a17ef96cfffac9d0ffb6da30abb28020382308a73ff2cdedb0971fb"
+        },
+        {
+          "git_blob": "5dbca84e6d1e0a4988b7d9b1a4603f79d98db8f0",
+          "path": "reports/toy100/continuous-round-1/attempts/reversible_plasticity/result.md",
+          "sha256": "5d3be4b2da81c9ac7ec4d843c02100976a9b21cd9fde70eeb4863e1b3b6220a2"
+        },
+        {
+          "git_blob": "496653bcbf90f527b1871f0d1eabcfb3b2739e86",
+          "path": "reports/toy100/continuous-round-2/attempts/verify_a3_gates/result.md",
+          "sha256": "22908975bd5e5df7f37fffdbf37b005b5adf88c146c10afc971aeebdf5a8a69c"
+        },
+        {
+          "git_blob": "80aff819bd9327e301e00e0a07b67a8cc0e5d3ef",
+          "path": "reports/toy100/continuous-round-3/completed-trust/attempts/k3p_joint_trust/result.md",
+          "sha256": "13e906fb907222072a919a09f2f2e861663f4fe2182b7137be7bcad9930117b3"
+        },
+        {
+          "git_blob": "abe2dc0d6d7d6f8a8a6159388ed5020fde564d62",
+          "path": "reports/toy100/continuous-round-3/stop-inventory/184042/evidence/e4ee63e4ba45c8340486a5900f8a296c2a3b6ea9937fa6731b9e6c2532204721.json.gz",
+          "sha256": "3a08ad110f296aee3b0bad9f80b8fae036025276c088c2500bbefc7726e25cf7"
+        },
+        {
+          "git_blob": "abe2dc0d6d7d6f8a8a6159388ed5020fde564d62",
+          "path": "reports/toy100/continuous-round-3/stop-inventory/184042/recovered/repair_continuous_qualification/out/identity-prefix.json.gz",
+          "sha256": "3a08ad110f296aee3b0bad9f80b8fae036025276c088c2500bbefc7726e25cf7"
+        },
+        {
+          "git_blob": "4efa8ad73889b16a2fc9aa830cd4b16dcf48e877",
+          "path": "reports/toy100/continuous-round-3/stop-inventory/184728/recovered/k3p_projected_discrepancy/repo/reports/toy100/k3p-projected-discrepancy/runs/pd1-hold/mechanism-receipt.json.gz",
+          "sha256": "98ef07fb992be2ef79e1818ce1a5d1efc2c2118606ad5779ca6197a6c63bce15"
+        },
+        {
+          "git_blob": "d3bdc33d0b3cd8666692f1961db14d33d333f3f4",
+          "path": "reports/toy100/continuous-round-3/stop-inventory/184728/recovered/k3p_projected_discrepancy/repo/reports/toy100/k3p-projected-discrepancy/runs/pd1-shift/mechanism-receipt.json.gz",
+          "sha256": "5843c383986331c12a5238e71d54007eafc7df6ad60ab9175b46062001a41011"
+        },
+        {
+          "git_blob": "67b5ce4cafa97d861b04eb042d58bd18d94cc790",
+          "path": "reports/toy100/public-default-baseline/README.md",
+          "sha256": "8d35bab85a89483462f58baff5d3b346123392757c7d3bee436b90349654649e"
+        },
+        {
+          "git_blob": "bb3a6ef2ce2b133df94ccc12c654e1f96b12dd9b",
+          "path": "reports/toy100/shared22/README.md",
+          "sha256": "7dfff3eef35523b869ab97bf729fc6ecb03e797dea8a6d7744be2ec7e471de19"
+        },
+        {
+          "git_blob": "a24b757a4a10b9a64b1cf2f2f14acb798e037016",
+          "path": "reports/toy100/simpler22/README.md",
+          "sha256": "46bae43c9b7df6e1f497ae6b634e00f515c4c2d00dd18a4c32c1320b70391140"
+        }
+      ],
+      "matching_paths": [
+        "experiments/train_trajectory.py",
+        "experiments/train_sparse.py",
+        "experiments/train_cifar_particle_ddgan.py",
+        "experiments/train_cifar_particle_ae.py",
+        "experiments/train_cifar_ddgan.py",
+        "reports/toy100/public-default-baseline/README.md",
+        "reports/toy100/continuous-round-3/completed-trust/attempts/k3p_joint_trust/result.md",
+        "reports/toy100/continuous-round-3/stop-inventory/184728/recovered/k3p_projected_discrepancy/repo/reports/toy100/k3p-projected-discrepancy/runs/pd1-shift/mechanism-receipt.json.gz",
+        "reports/toy100/continuous-round-3/stop-inventory/184728/recovered/k3p_projected_discrepancy/repo/reports/toy100/k3p-projected-discrepancy/runs/pd1-hold/mechanism-receipt.json.gz",
+        "reports/toy100/simpler22/README.md",
+        "reports/toy100/continuous-round-3/stop-inventory/184042/recovered/repair_continuous_qualification/out/identity-prefix.json.gz",
+        "reports/toy100/continuous-round-3/stop-inventory/184042/evidence/e4ee63e4ba45c8340486a5900f8a296c2a3b6ea9937fa6731b9e6c2532204721.json.gz",
+        "reports/toy100/shared22/README.md",
+        "reports/toy100/continuous-round-2/attempts/verify_a3_gates/result.md",
+        "reports/toy100/continuous-round-1/attempts/reversible_plasticity/result.md",
+        "reports/toy100/continuous-round-1/attempts/adaptive_anchor/result.md"
+      ],
+      "relevant_later_receipts_found": false,
+      "revision": "7e64df02408614b71cd6cf07479fbcf74a1490fb",
+      "scoped_git_status": [
+        "?? runs/public-default-baseline/hold.log",
+        "?? runs/public-default-baseline/hold/declaration.json",
+        "?? runs/public-default-baseline/hold/final-state.pt",
+        "?? runs/public-default-baseline/hold/metrics.jsonl",
+        "?? runs/public-default-baseline/hold/result.json",
+        "?? runs/public-default-baseline/hold/source.zip",
+        "?? runs/public-default-baseline/shift.log",
+        "?? runs/public-default-baseline/shift/declaration.json",
+        "?? runs/public-default-baseline/shift/final-state.pt",
+        "?? runs/public-default-baseline/shift/metrics.jsonl",
+        "?? runs/public-default-baseline/shift/result.json",
+        "?? runs/public-default-baseline/shift/shift-state.pt",
+        "?? runs/public-default-baseline/shift/source.zip"
+      ],
+      "scoped_git_status_sha256": "6ae8c040c7978296550b44ed0e6f4ebd15d00a0ac1f9fe229ff118e011f7ce7e",
+      "search_command": [
+        "rg",
+        "-l",
+        "-uuu",
+        "-z",
+        "-i",
+        "-g",
+        "*.md",
+        "-g",
+        "*.json",
+        "-g",
+        "*.py",
+        "-g",
+        "*.txt",
+        "-g",
+        "*.json.gz",
+        "-g",
+        "*.md.gz",
+        "dt075|dtracks[-_]075|\\bd[ -]?tracking\\b|\\bema\\b.{0,20}(\\.995|995)|sub.{0,20}\\.03.{0,10}sigma|stationarity.ladder",
+        "reports/toy100",
+        "experiments",
+        "runs"
+      ],
+      "search_exit_code": 0,
+      "searched_roots": [
+        "reports/toy100",
+        "experiments",
+        "runs"
+      ],
+      "worktree": "/home/martyn/dev/ParticleGAN-continuous-search"
+    },
+    {
+      "branch": "toy-refactor/lr_control_research",
+      "match_review": "Matches are generic EMA .995 settings, unrelated control studies, or incidental digits in metric/hash values; no matching later claim receipt.",
+      "matching_files": [
+        {
+          "git_blob": "155c700bd403168545988197656da83c6fb6619f",
+          "path": "experiments/train_cifar_ddgan.py",
+          "sha256": "7a2d40400681d04e1111ddb81eb27c64adc40136be158d97fc53828107e8dc8c"
+        },
+        {
+          "git_blob": "e5aeb5d90f695139357fa10e3d466cf2b5355a09",
+          "path": "experiments/train_cifar_particle_ae.py",
+          "sha256": "3862401e75f034fae5e850e365a1c835bcb02d17481d3264e44aafabdfcbad0d"
+        },
+        {
+          "git_blob": "14639e1c7e3286377830456da89b9e5834c1676e",
+          "path": "experiments/train_cifar_particle_ddgan.py",
+          "sha256": "5acbf93cfac81348ade5167dd299274ee6d529a0ff789e71e916cef4e773ad5d"
+        },
+        {
+          "git_blob": "89db4c1fbcd14373385cdbaa6529f22f58c2e929",
+          "path": "experiments/train_sparse.py",
+          "sha256": "ce48ca4e7876132a39df1836d86e179fda07d90ffad0f73eb2eb5b5490ab7eb9"
+        },
+        {
+          "git_blob": "19ebeed8d79f9d058097ed6ae110e50fe3af10c6",
+          "path": "experiments/train_trajectory.py",
+          "sha256": "3104306e308c19fa0f89941eac21b533e5663fb84c4a63e4ba35c27ce522a296"
+        },
+        {
+          "git_blob": "bb3a6ef2ce2b133df94ccc12c654e1f96b12dd9b",
+          "path": "reports/toy100/shared22/README.md",
+          "sha256": "7dfff3eef35523b869ab97bf729fc6ecb03e797dea8a6d7744be2ec7e471de19"
+        },
+        {
+          "git_blob": "a24b757a4a10b9a64b1cf2f2f14acb798e037016",
+          "path": "reports/toy100/simpler22/README.md",
+          "sha256": "46bae43c9b7df6e1f497ae6b634e00f515c4c2d00dd18a4c32c1320b70391140"
+        }
+      ],
+      "matching_paths": [
+        "experiments/train_trajectory.py",
+        "experiments/train_sparse.py",
+        "experiments/train_cifar_particle_ddgan.py",
+        "experiments/train_cifar_particle_ae.py",
+        "experiments/train_cifar_ddgan.py",
+        "reports/toy100/simpler22/README.md",
+        "reports/toy100/shared22/README.md"
+      ],
+      "relevant_later_receipts_found": false,
+      "revision": "ceeae78f08f1475a9752f61dc63d5235c59a063f",
+      "scoped_git_status": [],
+      "scoped_git_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "search_command": [
+        "rg",
+        "-l",
+        "-uuu",
+        "-z",
+        "-i",
+        "-g",
+        "*.md",
+        "-g",
+        "*.json",
+        "-g",
+        "*.py",
+        "-g",
+        "*.txt",
+        "-g",
+        "*.json.gz",
+        "-g",
+        "*.md.gz",
+        "dt075|dtracks[-_]075|\\bd[ -]?tracking\\b|\\bema\\b.{0,20}(\\.995|995)|sub.{0,20}\\.03.{0,10}sigma|stationarity.ladder",
+        "reports/toy100",
+        "experiments"
+      ],
+      "search_exit_code": 0,
+      "searched_roots": [
+        "reports/toy100",
+        "experiments"
+      ],
+      "worktree": "/home/martyn/dev/ParticleGAN/.claude/worktrees/wf_c8e8433a-30f-29"
+    },
+    {
+      "branch": "k3p-dv12-default",
+      "match_review": "Matches are generic EMA .995 settings, unrelated control studies, or incidental digits in metric/hash values; no matching later claim receipt.",
+      "matching_files": [
+        {
+          "git_blob": "83402d9d8ea0d104b5d3c10f81f027d1d6674d52",
+          "path": "experiments/train_cifar_ddgan.py",
+          "sha256": "19e2f23bcb0e901d7883201905448bc87de203d60c6837013d51ba6a12193c66"
+        },
+        {
+          "git_blob": "29d0e0a0eb33336d874c5409109bcf5b6b5f2a23",
+          "path": "experiments/train_cifar_particle_ae.py",
+          "sha256": "22ed25444497dd3e9479fa25364f20988963d25f4c94c0232b6323328fcce14c"
+        },
+        {
+          "git_blob": "f08e5c3ff532fc0b14834b61008772781a83f61c",
+          "path": "experiments/train_cifar_particle_ddgan.py",
+          "sha256": "67a6e499bd0bcc677aecacacb106da100868dc745746b53f5bd056f2947c1e78"
+        },
+        {
+          "git_blob": "a055588f9a66368e637a4bbac1e89e22cf220e9d",
+          "path": "experiments/train_sparse.py",
+          "sha256": "245e81ace079ff0902a8171dd4119b2e87c9348b79cb5809365753c0f32c292c"
+        },
+        {
+          "git_blob": "d77edf2b7f4d99069b9f11e5eb814f1a54bb01e2",
+          "path": "experiments/train_trajectory.py",
+          "sha256": "b4a05d355be8687088f5e23d47a0e1b800b34b1b399cd571835110cd246ae6bf"
+        },
+        {
+          "git_blob": "bb3a6ef2ce2b133df94ccc12c654e1f96b12dd9b",
+          "path": "reports/toy100/shared22/README.md",
+          "sha256": "7dfff3eef35523b869ab97bf729fc6ecb03e797dea8a6d7744be2ec7e471de19"
+        },
+        {
+          "git_blob": "a24b757a4a10b9a64b1cf2f2f14acb798e037016",
+          "path": "reports/toy100/simpler22/README.md",
+          "sha256": "46bae43c9b7df6e1f497ae6b634e00f515c4c2d00dd18a4c32c1320b70391140"
+        }
+      ],
+      "matching_paths": [
+        "experiments/train_sparse.py",
+        "experiments/train_trajectory.py",
+        "experiments/train_cifar_particle_ddgan.py",
+        "experiments/train_cifar_ddgan.py",
+        "experiments/train_cifar_particle_ae.py",
+        "reports/toy100/simpler22/README.md",
+        "reports/toy100/shared22/README.md"
+      ],
+      "relevant_later_receipts_found": false,
+      "revision": "5852f380cea2391dee42aeeda3ae9dba1cfe3dee",
+      "scoped_git_status": [],
+      "scoped_git_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "search_command": [
+        "rg",
+        "-l",
+        "-uuu",
+        "-z",
+        "-i",
+        "-g",
+        "*.md",
+        "-g",
+        "*.json",
+        "-g",
+        "*.py",
+        "-g",
+        "*.txt",
+        "-g",
+        "*.json.gz",
+        "-g",
+        "*.md.gz",
+        "dt075|dtracks[-_]075|\\bd[ -]?tracking\\b|\\bema\\b.{0,20}(\\.995|995)|sub.{0,20}\\.03.{0,10}sigma|stationarity.ladder",
+        "reports/toy100",
+        "experiments"
+      ],
+      "search_exit_code": 0,
+      "searched_roots": [
+        "reports/toy100",
+        "experiments"
+      ],
+      "worktree": "/home/martyn/dev/ParticleGAN/.claude/worktrees/agent-a736c848eeea4e443"
+    }
+  ],
+  "search_date": "2026-09-28",
+  "search_limitations": [
+    "Only the listed worktrees and relative roots were content-searched; other machines or removed worktrees are outside this audit.",
+    "Ignored text and gzip reports were included. Binary checkpoints and ZIP archives were not searched for text.",
+    "No additional training, Git mutation, remote filesystem access, or source receipt import was performed."
+  ],
+  "training_runs": 0,
+  "worktree_directory_discovery": {
+    "directories_containing_lrfree_reports": [],
+    "directory_count": 72,
+    "directory_list_sha256": "45a52e70895a96be9395eabd8897ddd69d75d1f918ce7a6700b8a10d896d7a18",
+    "names_matching_lrfree_continuous_stationarity": [],
+    "root": "/home/martyn/dev/ParticleGAN/.claude/worktrees"
+  }
+}

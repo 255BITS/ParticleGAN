@@ -1,0 +1,56 @@
+{
+  "task": "routed_G_only_clean_convergence_v1",
+  "execution_authorized": true,
+  "status": "Root authorized one fixed CPU512-per-arm test after twelve software cases, zero-update preflight and independent source review; scientific criteria unchanged",
+  "native_commit": "664ce464e3add5c65d06c8b324c6f9892e644eec",
+  "source_sha256": "4386576cebcf05669f2daff8f7cd8b8f28a60bd966b37e2de795de72ee6d045d",
+  "native_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+  "test_sha256": "18ed686478e52c5ab80110271e5c1c087683b6c6eccf9d4e09a66eb6fda61a5b",
+  "arms": [
+    "native",
+    "G_clean"
+  ],
+  "steps": 512,
+  "seconds": 300,
+  "cpu_threads": 1,
+  "device": "CPU only; CUDA_VISIBLE_DEVICES=''",
+  "initialization": "Both arms use identical public initialize_(sample_distributions_v1) with fixed per-role/per-parameter private streams; fresh Up=0,H=0,b=0,C stays sampled. Public deterministic_orthogonal_ initializes the128x4 R2 bank. No C0 combination, seed scan or trained-owner reinitialization.",
+  "host": "Self-contained two sequential frozen BF16 nonlinear sites, width16/rank2, shared bank128x4, B4,T16, source/time conditioning, two CFG halves, FP32 guidance3. Teacher uses the identical frozen backbone with a fixed conditioning-vector switch and no adapter; no exact ordinary-LoRA reachability assumption.",
+  "data": "Deterministic analytic source/target vectors and latent contexts only: fit48,guard12,test48; six source IDs; disjoint time/draw pools. Source condition includes source vector+time, never target. Frozen initial residual standard deviation with floor0.04 establishes critic coordinates only.",
+  "changed_factor": "Only differentiable G forward uses perturb=False in G_clean. D remains native DV12. First discard the native noisy G forward under no_grad to match native draw shapes/counts/diagnostics; this costs512 extra full forwards. No speed claim.",
+  "preserved": "Public E22/RoutedRows optimizers, KA2 token units, learned paired output noise, all native row controls, zero feature-context harm, no output-error guard; identical branch/query rates5e-5 and native bank rate; fixed CPU7 fitting,CPU43 paired Gaussian, policy21 streams.",
+  "curves": [
+    0,
+    64,
+    128,
+    192,
+    256,
+    320,
+    384,
+    448,
+    512
+  ],
+  "judges": [
+    "native@128",
+    "native@512",
+    "G_clean@128",
+    "G_clean@512"
+  ],
+  "clean_noisy_scoring": "All curves retain clean predictions and16 privateCPU91 native-DV12 predictions per state/arm. Each noisy realization is scored separately then averaged. Four fixedCPU72 Gaussian draws sigma0.125 are shared across every arm/state/judge. Terminal zero-code ablation retains all other learned parameters.",
+  "metric": "Maximum across ALL4 common trained critics of terminal G_clean clean paired RpGAN game minus terminal native clean paired RpGAN game; lower is better.",
+  "win_margin": 0.0001,
+  "code_margin": 1e-06,
+  "PASS": "Metric < -1e-4, plus ALL4 zero-code-minus-live terminal games >1e-6; each fixed critic ranks alpha[0,.25,.5,1] initial-error reference path with nondecrease tolerance1e-5 and totalincrease>1e-4; trainable C nonzero and bank/query gradients live. Every requirement is mandatory. Exit0 PASS, exit1 complete scientificFAIL; exceptions/incomplete receipts are execution failures.",
+  "no_output_objective_guard_or_selection": true,
+  "ordinary_comparison": "UNAVAILABLE: two particle arms only. A toy win permits planning a real caption comparison against existing ordinary, not full-Supra promotion.",
+  "limits": "One fixed geometry/horizon/panel/initialization; no tuning or automatic next trial on failure. High variance, code noise scale, or a toy win alone do not establish mean-gradient bias or a universal DV12 defect. No external model/data/local-Supra dependency.",
+  "cost_scope": "Fixed300 CPU seconds starts before imports and includes initialization, BOTH512-update arms, all fixed curves/16draws/common scoring, hashes/retained tensors/report/completion writes. Cheap zero-update preflight is a separate prerequisite and not quality credit.",
+  "commands": {
+    "preflight": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python -m examples.e22_routed_g_clean --preflight",
+    "software": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python -m pytest -q tests/test_e22_routed_g_clean.py",
+    "first_quality_root_only": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. timeout --signal=INT --kill-after=5s 300s python -u -m examples.e22_routed_g_clean --run --out runs/routed-g-clean-v1"
+  },
+  "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. python -m examples.e22_routed_g_clean --run --out runs/routed-g-clean-v1",
+  "run_contract": "The shipped fixed protocol runs directly with explicit --run and a fresh --out; no authorization metadata edits or external inputs are needed. Metadata records preparation/first-run status only.",
+  "finite_state": "Both final arms: finite learned models, averaged models, table, output noise, gradients and optimizer moments. Native monitor sentinel validity belongs to public state restore, without a bespoke monitor schema."
+}

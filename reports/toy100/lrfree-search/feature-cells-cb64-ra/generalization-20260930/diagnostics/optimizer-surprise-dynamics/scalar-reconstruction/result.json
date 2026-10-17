@@ -1,0 +1,5594 @@
+{
+  "candidate_source_sha256": "0342b0b19a6e5e177ec38840775886576d22e21dc6608e6aa2bb49aa53e1bef4",
+  "cases": {
+    "mnist": {
+      "exact_legacy_default_rows": 115,
+      "guarded_fires": [],
+      "legacy_fires": [
+        202
+      ],
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/mnist/trace.jsonl",
+      "source_sha256": "26f8b0ae35aeb3eac2e6eb6e25d1edab5dd3ef80a17d0eb8f2694ee98f2f9691",
+      "stop": "first original or proposed action; no post-divergence quality inference",
+      "tested_prefix": [
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.0061208769187326,
+          "step": 100,
+          "streak": 0,
+          "update": 101
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.9566121841057756,
+          "step": 101,
+          "streak": 0,
+          "update": 102
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.9195437081760086,
+          "step": 102,
+          "streak": 0,
+          "update": 103
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.8609359476374628,
+          "step": 103,
+          "streak": 0,
+          "update": 104
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.736705739294519,
+          "step": 104,
+          "streak": 0,
+          "update": 105
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.6904274827927257,
+          "step": 105,
+          "streak": 0,
+          "update": 106
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.6376066933329597,
+          "step": 106,
+          "streak": 0,
+          "update": 107
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.5979614504135998,
+          "step": 107,
+          "streak": 0,
+          "update": 108
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.5418259902669406,
+          "step": 108,
+          "streak": 0,
+          "update": 109
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.5215360380861758,
+          "step": 109,
+          "streak": 0,
+          "update": 110
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.4918493533615661,
+          "step": 110,
+          "streak": 0,
+          "update": 111
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.4884285849144483,
+          "step": 111,
+          "streak": 0,
+          "update": 112
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.4697068476770333,
+          "step": 112,
+          "streak": 0,
+          "update": 113
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.4471913745355323,
+          "step": 113,
+          "streak": 0,
+          "update": 114
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.4245665042256155,
+          "step": 114,
+          "streak": 0,
+          "update": 115
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.39527054536238043,
+          "step": 115,
+          "streak": 0,
+          "update": 116
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.37076827748120855,
+          "step": 116,
+          "streak": 0,
+          "update": 117
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3559063717528102,
+          "step": 117,
+          "streak": 0,
+          "update": 118
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3366446088092008,
+          "step": 118,
+          "streak": 0,
+          "update": 119
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.33315523926005813,
+          "step": 119,
+          "streak": 0,
+          "update": 120
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.32259761751738925,
+          "step": 120,
+          "streak": 0,
+          "update": 121
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3105426577187952,
+          "step": 121,
+          "streak": 0,
+          "update": 122
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2943633798550469,
+          "step": 122,
+          "streak": 0,
+          "update": 123
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3024093939812838,
+          "step": 123,
+          "streak": 0,
+          "update": 124
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.29162438347150443,
+          "step": 124,
+          "streak": 0,
+          "update": 125
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2767430110103384,
+          "step": 125,
+          "streak": 0,
+          "update": 126
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.27623267304790994,
+          "step": 126,
+          "streak": 0,
+          "update": 127
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.27210320302653906,
+          "step": 127,
+          "streak": 0,
+          "update": 128
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2666491606820518,
+          "step": 128,
+          "streak": 0,
+          "update": 129
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2583018605751373,
+          "step": 129,
+          "streak": 0,
+          "update": 130
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.25522374058424196,
+          "step": 130,
+          "streak": 0,
+          "update": 131
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.25686110451954985,
+          "step": 131,
+          "streak": 0,
+          "update": 132
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2562998415622549,
+          "step": 132,
+          "streak": 0,
+          "update": 133
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.26117323261683284,
+          "step": 133,
+          "streak": 0,
+          "update": 134
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2572467857289685,
+          "step": 134,
+          "streak": 0,
+          "update": 135
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.25059474090468314,
+          "step": 135,
+          "streak": 0,
+          "update": 136
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.25329576762849265,
+          "step": 136,
+          "streak": 0,
+          "update": 137
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2428875654763059,
+          "step": 137,
+          "streak": 0,
+          "update": 138
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.24302783887165574,
+          "step": 138,
+          "streak": 0,
+          "update": 139
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2472365379843195,
+          "step": 139,
+          "streak": 0,
+          "update": 140
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.24802440171310838,
+          "step": 140,
+          "streak": 0,
+          "update": 141
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2513743019408795,
+          "step": 141,
+          "streak": 0,
+          "update": 142
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2508498254201795,
+          "step": 142,
+          "streak": 0,
+          "update": 143
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.25935297200669466,
+          "step": 143,
+          "streak": 0,
+          "update": 144
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.265861831157533,
+          "step": 144,
+          "streak": 0,
+          "update": 145
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.2643116268924727,
+          "step": 145,
+          "streak": 0,
+          "update": 146
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.27756015498223463,
+          "step": 146,
+          "streak": 0,
+          "update": 147
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.28212531451947565,
+          "step": 147,
+          "streak": 0,
+          "update": 148
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.29199075631065285,
+          "step": 148,
+          "streak": 0,
+          "update": 149
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3004341569481815,
+          "step": 149,
+          "streak": 0,
+          "update": 150
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3027881347104076,
+          "step": 150,
+          "streak": 0,
+          "update": 151
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.31073878666579546,
+          "step": 151,
+          "streak": 0,
+          "update": 152
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3140122701672528,
+          "step": 152,
+          "streak": 0,
+          "update": 153
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3306200192704076,
+          "step": 153,
+          "streak": 0,
+          "update": 154
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.34776299603604505,
+          "step": 154,
+          "streak": 0,
+          "update": 155
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3607722935342974,
+          "step": 155,
+          "streak": 0,
+          "update": 156
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.37268050472033043,
+          "step": 156,
+          "streak": 0,
+          "update": 157
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3699108942554308,
+          "step": 157,
+          "streak": 0,
+          "update": 158
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3962174350017893,
+          "step": 158,
+          "streak": 0,
+          "update": 159
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.3959539551201847,
+          "step": 159,
+          "streak": 0,
+          "update": 160
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.4115955087392355,
+          "step": 160,
+          "streak": 0,
+          "update": 161
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.4314164031019684,
+          "step": 161,
+          "streak": 0,
+          "update": 162
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.457415205936448,
+          "step": 162,
+          "streak": 0,
+          "update": 163
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.4850686504232802,
+          "step": 163,
+          "streak": 0,
+          "update": 164
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.5061397459519918,
+          "step": 164,
+          "streak": 0,
+          "update": 165
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.5387921856362522,
+          "step": 165,
+          "streak": 0,
+          "update": 166
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.5536585037284093,
+          "step": 166,
+          "streak": 0,
+          "update": 167
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.5800024213485186,
+          "step": 167,
+          "streak": 0,
+          "update": 168
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.6045002732431534,
+          "step": 168,
+          "streak": 0,
+          "update": 169
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.6525098645884488,
+          "step": 169,
+          "streak": 0,
+          "update": 170
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.6934020845853266,
+          "step": 170,
+          "streak": 0,
+          "update": 171
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.7387374792062279,
+          "step": 171,
+          "streak": 0,
+          "update": 172
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.7677412654715916,
+          "step": 172,
+          "streak": 0,
+          "update": 173
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.8361523746904393,
+          "step": 173,
+          "streak": 0,
+          "update": 174
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.9005941857305771,
+          "step": 174,
+          "streak": 0,
+          "update": 175
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 0.9640275552401911,
+          "step": 175,
+          "streak": 0,
+          "update": 176
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.0197750639690777,
+          "step": 176,
+          "streak": 0,
+          "update": 177
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.0761648504480983,
+          "step": 177,
+          "streak": 0,
+          "update": 178
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.1296886797824006,
+          "step": 178,
+          "streak": 0,
+          "update": 179
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.1942671535867964,
+          "step": 179,
+          "streak": 0,
+          "update": 180
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.266947592778262,
+          "step": 180,
+          "streak": 0,
+          "update": 181
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.3348675818193025,
+          "step": 181,
+          "streak": 0,
+          "update": 182
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.3832716143902817,
+          "step": 182,
+          "streak": 0,
+          "update": 183
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.428154386549327,
+          "step": 183,
+          "streak": 0,
+          "update": 184
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.3942834440254308,
+          "step": 184,
+          "streak": 0,
+          "update": 185
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.4611426695293104,
+          "step": 185,
+          "streak": 0,
+          "update": 186
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.5082636501982618,
+          "step": 186,
+          "streak": 0,
+          "update": 187
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.556055555420207,
+          "step": 187,
+          "streak": 0,
+          "update": 188
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.5957347656280503,
+          "step": 188,
+          "streak": 0,
+          "update": 189
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.6246638150296313,
+          "step": 189,
+          "streak": 0,
+          "update": 190
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.7022424042020545,
+          "step": 190,
+          "streak": 0,
+          "update": 191
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 1.8471091429951605,
+          "step": 191,
+          "streak": 0,
+          "update": 192
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.049420696407031,
+          "step": 192,
+          "streak": 0,
+          "update": 193
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.257863730912647,
+          "step": 193,
+          "streak": 0,
+          "update": 194
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.395267898189286,
+          "step": 194,
+          "streak": 0,
+          "update": 195
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.6780214261480673,
+          "step": 195,
+          "streak": 0,
+          "update": 196
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.887916992270001,
+          "step": 196,
+          "streak": 0,
+          "update": 197
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.866501905108476,
+          "step": 197,
+          "streak": 0,
+          "update": 198
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.942542760469931,
+          "step": 198,
+          "streak": 0,
+          "update": 199
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.9553065775245266,
+          "step": 199,
+          "streak": 0,
+          "update": 200
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.995647126709231,
+          "step": 200,
+          "streak": 0,
+          "update": 201
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 3.00854557581371,
+          "step": 201,
+          "streak": 0,
+          "update": 202
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {},
+              "step": 180
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {},
+          "ratio": 2.974452941065293,
+          "step": 202,
+          "streak": 0,
+          "update": 203
+        }
+      ],
+      "total_rows": 115
+    },
+    "moving1000": {
+      "exact_legacy_default_rows": 35,
+      "guarded_fires": [
+        1021
+      ],
+      "legacy_fires": [
+        1021
+      ],
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-1000/trace.jsonl",
+      "source_sha256": "439f2ca9bb63d188674d8d9be68f05f50505717516e63bdbfc14fb07da7f0b4a",
+      "stop": "first original or proposed action; no post-divergence quality inference",
+      "tested_prefix": [
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 0.686294461110431,
+          "step": 1000,
+          "streak": 0,
+          "update": 1001
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 0.7233316736559277,
+          "step": 1001,
+          "streak": 0,
+          "update": 1002
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 0.7793153244344233,
+          "step": 1002,
+          "streak": 0,
+          "update": 1003
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 0.8574437694713613,
+          "step": 1003,
+          "streak": 0,
+          "update": 1004
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 0.9617727647130629,
+          "step": 1004,
+          "streak": 0,
+          "update": 1005
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 1.075172583339944,
+          "step": 1005,
+          "streak": 0,
+          "update": 1006
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 1.250371083131315,
+          "step": 1006,
+          "streak": 0,
+          "update": 1007
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 1.5111530251533056,
+          "step": 1007,
+          "streak": 0,
+          "update": 1008
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 1.7237196266073773,
+          "step": 1008,
+          "streak": 0,
+          "update": 1009
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 1.8719044363558404,
+          "step": 1009,
+          "streak": 0,
+          "update": 1010
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 2.014995123154036,
+          "step": 1010,
+          "streak": 1,
+          "update": 1011
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 2.2090034716940705,
+          "step": 1011,
+          "streak": 2,
+          "update": 1012
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 2.5198106841531898,
+          "step": 1012,
+          "streak": 3,
+          "update": 1013
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 2.8239024499191276,
+          "step": 1013,
+          "streak": 4,
+          "update": 1014
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 3.0878457492319464,
+          "step": 1014,
+          "streak": 5,
+          "update": 1015
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 3.3857257009359203,
+          "step": 1015,
+          "streak": 6,
+          "update": 1016
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 3.508775008314809,
+          "step": 1016,
+          "streak": 7,
+          "update": 1017
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.0078125
+            }
+          },
+          "ratio": 3.497287566631835,
+          "step": 1017,
+          "streak": 8,
+          "update": 1018
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.00390625
+            }
+          },
+          "ratio": 3.6164586866919977,
+          "step": 1018,
+          "streak": 9,
+          "update": 1019
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.00390625
+            }
+          },
+          "ratio": 3.792875568934389,
+          "step": 1019,
+          "streak": 10,
+          "update": 1020
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.0078125
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.0078125
+                }
+              },
+              "step": 1006
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.00390625
+            }
+          },
+          "ratio": 4.0860315494727795,
+          "step": 1020,
+          "streak": 11,
+          "update": 1021
+        },
+        {
+          "fire": true,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "1.0": {
+              "role": "critic",
+              "scale": 0.00390625
+            }
+          },
+          "ratio": 4.471551647087308,
+          "step": 1021,
+          "streak": 0,
+          "update": 1022
+        }
+      ],
+      "total_rows": 35
+    },
+    "moving500": {
+      "exact_legacy_default_rows": 35,
+      "guarded_fires": [
+        514
+      ],
+      "legacy_fires": [
+        514
+      ],
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-500/trace.jsonl",
+      "source_sha256": "c0435f810a5db39cd6fa64420807915812bfeac5e33645676943ae848a655f24",
+      "stop": "first original or proposed action; no post-divergence quality inference",
+      "tested_prefix": [
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 1.0144383818864575,
+          "step": 500,
+          "streak": 0,
+          "update": 501
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 1.3512579112820484,
+          "step": 501,
+          "streak": 0,
+          "update": 502
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 1.888434413262359,
+          "step": 502,
+          "streak": 0,
+          "update": 503
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 2.493709838958638,
+          "step": 503,
+          "streak": 1,
+          "update": 504
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 3.352832789260144,
+          "step": 504,
+          "streak": 2,
+          "update": 505
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 4.308119917911351,
+          "step": 505,
+          "streak": 3,
+          "update": 506
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 5.505830624705663,
+          "step": 506,
+          "streak": 4,
+          "update": 507
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 6.804564575801416,
+          "step": 507,
+          "streak": 5,
+          "update": 508
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 8.183950536726147,
+          "step": 508,
+          "streak": 6,
+          "update": 509
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 9.409396729859113,
+          "step": 509,
+          "streak": 7,
+          "update": 510
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 10.612798194658644,
+          "step": 510,
+          "streak": 8,
+          "update": 511
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 12.222510201336092,
+          "step": 511,
+          "streak": 9,
+          "update": 512
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 13.147917965013638,
+          "step": 512,
+          "streak": 10,
+          "update": 513
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.5
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.5
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.25
+                }
+              },
+              "step": 501
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 13.975599220309562,
+          "step": 513,
+          "streak": 11,
+          "update": 514
+        },
+        {
+          "fire": true,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.25
+            }
+          },
+          "ratio": 14.342852613692193,
+          "step": 514,
+          "streak": 0,
+          "update": 515
+        }
+      ],
+      "total_rows": 35
+    },
+    "toy": {
+      "exact_legacy_default_rows": 85,
+      "guarded_fires": [],
+      "legacy_fires": [
+        820
+      ],
+      "source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/toy/trace.jsonl",
+      "source_sha256": "58ca9b634ba8bd3a2d4b1f2e2fbfa29d3f03515334c482d17f70622da37f09d5",
+      "stop": "first original or proposed action; no post-divergence quality inference",
+      "tested_prefix": [
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 750
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.3729457995907395,
+          "step": 750,
+          "streak": 0,
+          "update": 751
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 750
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.4169683901070822,
+          "step": 751,
+          "streak": 0,
+          "update": 752
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 750
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.4151687193838924,
+          "step": 752,
+          "streak": 0,
+          "update": 753
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 750
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.361134239655883,
+          "step": 753,
+          "streak": 0,
+          "update": 754
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {},
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 750
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.3121427516828792,
+          "step": 754,
+          "streak": 0,
+          "update": 755
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2282783910283175,
+          "step": 755,
+          "streak": 0,
+          "update": 756
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1672466035885343,
+          "step": 756,
+          "streak": 0,
+          "update": 757
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1437606702946177,
+          "step": 757,
+          "streak": 0,
+          "update": 758
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.121839059880417,
+          "step": 758,
+          "streak": 0,
+          "update": 759
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.151266712606658,
+          "step": 759,
+          "streak": 0,
+          "update": 760
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.126357008786797,
+          "step": 760,
+          "streak": 0,
+          "update": 761
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1948995603965857,
+          "step": 761,
+          "streak": 0,
+          "update": 762
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1315977386227696,
+          "step": 762,
+          "streak": 0,
+          "update": 763
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.164835731646113,
+          "step": 763,
+          "streak": 0,
+          "update": 764
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 764
+            },
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2712763266143234,
+          "step": 764,
+          "streak": 0,
+          "update": 765
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2429175877858498,
+          "step": 765,
+          "streak": 0,
+          "update": 766
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1947655389666223,
+          "step": 766,
+          "streak": 0,
+          "update": 767
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2030115159431478,
+          "step": 767,
+          "streak": 0,
+          "update": 768
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.198101124593633,
+          "step": 768,
+          "streak": 0,
+          "update": 769
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2115260234508367,
+          "step": 769,
+          "streak": 0,
+          "update": 770
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1864024749460544,
+          "step": 770,
+          "streak": 0,
+          "update": 771
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2243758036460726,
+          "step": 771,
+          "streak": 0,
+          "update": 772
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.225053182387646,
+          "step": 772,
+          "streak": 0,
+          "update": 773
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.189440601673876,
+          "step": 773,
+          "streak": 0,
+          "update": 774
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2245210567517324,
+          "step": 774,
+          "streak": 0,
+          "update": 775
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.235882670537611,
+          "step": 775,
+          "streak": 0,
+          "update": 776
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2152029580018149,
+          "step": 776,
+          "streak": 0,
+          "update": 777
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1927285382988382,
+          "step": 777,
+          "streak": 0,
+          "update": 778
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1321258665675829,
+          "step": 778,
+          "streak": 0,
+          "update": 779
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.0871283292093916,
+          "step": 779,
+          "streak": 0,
+          "update": 780
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.0616322383631263,
+          "step": 780,
+          "streak": 0,
+          "update": 781
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.0798270831609855,
+          "step": 781,
+          "streak": 0,
+          "update": 782
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1152588680660929,
+          "step": 782,
+          "streak": 0,
+          "update": 783
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1191237236120037,
+          "step": 783,
+          "streak": 0,
+          "update": 784
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1222488839632918,
+          "step": 784,
+          "streak": 0,
+          "update": 785
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1809090855015563,
+          "step": 785,
+          "streak": 0,
+          "update": 786
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1913661261707005,
+          "step": 786,
+          "streak": 0,
+          "update": 787
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1877054494191064,
+          "step": 787,
+          "streak": 0,
+          "update": 788
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1504627457703116,
+          "step": 788,
+          "streak": 0,
+          "update": 789
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1864233511178628,
+          "step": 789,
+          "streak": 0,
+          "update": 790
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1596030754686435,
+          "step": 790,
+          "streak": 0,
+          "update": 791
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1043614344214696,
+          "step": 791,
+          "streak": 0,
+          "update": 792
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.0544512346722053,
+          "step": 792,
+          "streak": 0,
+          "update": 793
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.0252416055398792,
+          "step": 793,
+          "streak": 0,
+          "update": 794
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 0.9676472903045145,
+          "step": 794,
+          "streak": 0,
+          "update": 795
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 0.925937674931671,
+          "step": 795,
+          "streak": 0,
+          "update": 796
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 0.9497911998525601,
+          "step": 796,
+          "streak": 0,
+          "update": 797
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 0.9672329318618327,
+          "step": 797,
+          "streak": 0,
+          "update": 798
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.0373610213811704,
+          "step": 798,
+          "streak": 0,
+          "update": 799
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 0,
+            "excursion": null,
+            "ka2_anchor_started": false,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.052189147484648,
+          "step": 799,
+          "streak": 0,
+          "update": 800
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.0,
+          "step": 800,
+          "streak": 0,
+          "update": 801
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.1569666582979794,
+          "step": 801,
+          "streak": 0,
+          "update": 802
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.2559074996657025,
+          "step": 802,
+          "streak": 0,
+          "update": 803
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.3645988686249033,
+          "step": 803,
+          "streak": 0,
+          "update": 804
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.4080821929678082,
+          "step": 804,
+          "streak": 0,
+          "update": 805
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.4829614998577945,
+          "step": 805,
+          "streak": 0,
+          "update": 806
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.672872092131784,
+          "step": 806,
+          "streak": 0,
+          "update": 807
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.7328011019819287,
+          "step": 807,
+          "streak": 0,
+          "update": 808
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.7657674689996636,
+          "step": 808,
+          "streak": 0,
+          "update": 809
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.845343328784837,
+          "step": 809,
+          "streak": 0,
+          "update": 810
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.8257813678156574,
+          "step": 810,
+          "streak": 0,
+          "update": 811
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.9162976413479313,
+          "step": 811,
+          "streak": 0,
+          "update": 812
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 2.0963576345691375,
+          "step": 812,
+          "streak": 1,
+          "update": 813
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 2.10497989251049,
+          "step": 813,
+          "streak": 2,
+          "update": 814
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 2.0534257375960094,
+          "step": 814,
+          "streak": 3,
+          "update": 815
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 2.094027400113822,
+          "step": 815,
+          "streak": 4,
+          "update": 816
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 2.0787893506925843,
+          "step": 816,
+          "streak": 5,
+          "update": 817
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 2.07345257797892,
+          "step": 817,
+          "streak": 6,
+          "update": 818
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.9595650308238808,
+          "step": 818,
+          "streak": 0,
+          "update": 819
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.91144955007518,
+          "step": 819,
+          "streak": 0,
+          "update": 820
+        },
+        {
+          "fire": false,
+          "guard": {
+            "calm_network": {
+              "0.0": {
+                "role": "generator",
+                "scale": 0.125
+              },
+              "1.0": {
+                "role": "critic",
+                "scale": 0.015625
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": {
+              "network": {
+                "0.0": {
+                  "role": "generator",
+                  "scale": 0.125
+                },
+                "1.0": {
+                  "role": "critic",
+                  "scale": 0.015625
+                }
+              },
+              "step": 802
+            },
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.125
+            },
+            "1.0": {
+              "role": "critic",
+              "scale": 0.015625
+            }
+          },
+          "ratio": 1.8349447319796757,
+          "step": 820,
+          "streak": 0,
+          "update": 821
+        }
+      ],
+      "total_rows": 85
+    }
+  },
+  "cuda_initialized": false,
+  "draws": 0,
+  "forwards": 0,
+  "global_cpu_rng_unchanged": true,
+  "limitations": [
+    "Observed scalar windows are not fresh guarded training trajectories.",
+    "Legacy scalar history initializes the analysis prefix; this is not resumable guarded state.",
+    "No quality or complete-run retention claim follows from suppressed or retained events."
+  ],
+  "models": 0,
+  "pt_reads": 0,
+  "scorers": 0,
+  "status": "COMPLETE_DETECTOR_ONLY_RECONSTRUCTION",
+  "updates": 0
+}

@@ -1,0 +1,8 @@
+{
+  "status": "GO_ONE_COMPLETED_TOY_ARTIFACT_AUDIT",
+  "utc": "2026-09-30T16:26:12.611188+00:00",
+  "input_seal_sha256": "919ec21c173e9b3ce363699b57dee5d6d8511e60d27b0fb6f2d724209b7521ad",
+  "helper_sha256": "28513e434d50cb25e942aa46d853f2ae69a0494181e81ad759f929c8c19df57c",
+  "root_verified_raw_guard_count": 194,
+  "scope": "Exactly one all10 saved-state CPU validity audit; no constructors/forwards/draws/updates/rescoring."
+}

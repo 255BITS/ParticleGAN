@@ -1,0 +1,507 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -5,6 +5,7 @@
+ """
+ import math
+ import time
++from fractions import Fraction
+ import torch
+ from .birth_death import ParticleBirthDeath
+ 
+@@ -17,6 +18,63 @@
+ JITTER_STD = .025
+ JITTER_CAP = .05
+ Q = .05
++
++
++def population_policy(n):
++    """Whether finite conformal/BH resolution permits the existing guard.
++
++    An N-row FIFO leaves floor(N/2) independent calibration rows. A flagged
++    set needs ceil(N / (Q*(M+1))) rows, while the guard permits floor(Q*N).
++    Use exact rational arithmetic: this is a feasibility rule, not a cutoff
++    fitted to task quality.
++    """
++    if type(n) is not int or n <= 0:
++        raise ValueError("population must be a positive integer")
++    q = Fraction(str(Q))
++    calibration_rows = n // 2
++    denominator = q.numerator * (calibration_rows + 1)
++    minimum_flags = (n * q.denominator + denominator - 1) // denominator
++    allowed_flags = n * q.numerator // q.denominator
++    feasible = minimum_flags <= allowed_flags
++    return dict(schema=1, requested_backend="feature_cells", population=n,
++                q=Q, calibration_rows=calibration_rows,
++                minimum_bh_flags=minimum_flags, maximum_guard_flags=allowed_flags,
++                finite_resolution_feasible=feasible,
++                actual_backend="feature_cells" if feasible else "knn",
++                matching_sampler="feature_cells" if feasible else "controller_reference",
++                rule="ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)")
++
++
++class SmallPopulationReferenceBirthDeath(ParticleBirthDeath):
++    """Unchanged reference reaction/sampling law with explicit route metadata."""
++    def __init__(self, trainer, seed):
++        super().__init__(trainer, seed)
++        self.population_policy = population_policy(self.N)
++        if self.population_policy["finite_resolution_feasible"]:
++            raise ValueError("reference fallback requires impossible feature-cell resolution")
++
++    def diagnostics(self):
++        result = super().diagnostics()
++        result.update(backend="knn", population_policy=dict(self.population_policy))
++        return result
++
++    def state_dict(self):
++        result = super().state_dict()
++        result["population_policy"] = dict(self.population_policy)
++        return result
++
++    def check_state(self, state):
++        if (not isinstance(state, dict)
++                or state.get("population_policy") != self.population_policy):
++            raise ValueError("incompatible small-population backend/sampler metadata")
++        super().check_state({key: value for key, value in state.items()
++                             if key != "population_policy"})
++
++
++def make_feature_cell_birth_death(trainer, seed):
++    if population_policy(len(trainer.prior.z))["finite_resolution_feasible"]:
++        return FeatureCellBirthDeath(trainer, seed)
++    return SmallPopulationReferenceBirthDeath(trainer, seed)
+ 
+ 
+ def bounded_jitter(latent, noise):
+@@ -262,9 +320,90 @@
+             counts[cell] = len(selected)
+         return ids,pool,counts,eligible_counts
+ 
+-    @torch.no_grad()
+-    def select_parents(self, query_features, flags, *, ordinary_children=None, generator, pvalues=None):
+-        """Real-anchor isolation plan; detail contains the actual final candidate ball."""
++    def _mass_targets(self, rows):
++        """Full reference mass for action quotas; tests still use heldout rows."""
++        counts = self.reference_counts + self.real_calibration_counts
++        quota = counts.double() * (rows / int(counts.sum()))
++        target = quota.floor().long()
++        remaining = rows - int(target.sum())
++        if remaining:
++            order = (quota-target).argsort(descending=True,stable=True)
++            target[order[:remaining]] += 1
++        return target
++
++    def _mass_topology(self):
++        """Real-only coarse support, using only the bounded K centre graph.
++
++        A fine partition responds to within-support width as well as mass.
++        Conserve mass within connected centre neighborhoods before allowing
++        transfers between them. The deterministic minimum spanning tree is
++        cut at the maximum between-class variance split of log edge lengths;
++        neither labels nor query/fake rows choose this action partition.
++        This derived topology is not used by either original statistical test.
++        """
++        if hasattr(self,"mass_group_ids"):
++            return self.mass_group_ids
++        k = self.cells
++        device = self.device
++        group_ids = torch.arange(k,device=device,dtype=torch.long)
++        threshold = None
++        if k > 2:
++            distance = self._distance(self.centers,self.centers)
++            distance.fill_diagonal_(float("inf"))
++            used = torch.zeros(k,device=device,dtype=torch.bool); used[0] = True
++            nearest = distance[0].clone()
++            parent = torch.zeros(k,device=device,dtype=torch.long)
++            edge_parent,edge_child,edge_length = [],[],[]
++            for _ in range(k-1):
++                child = nearest.masked_fill(used,float("inf")).argmin()
++                edge_parent.append(parent[child].clone()); edge_child.append(child.clone())
++                edge_length.append(nearest[child].clone())
++                used[child] = True
++                shorter = distance[child] < nearest
++                nearest = torch.minimum(nearest,distance[child])
++                parent[shorter] = child
++            edge_parent,edge_child,edge_length = map(torch.stack,(edge_parent,edge_child,edge_length))
++            logs = edge_length.clamp_min(torch.finfo(edge_length.dtype).tiny).log().sort().values
++            cumulative = logs.cumsum(0)
++            cut = torch.arange(1,len(logs),device=device,dtype=logs.dtype)
++            left = cumulative[:-1]/cut
++            right = (cumulative[-1]-cumulative[:-1])/(len(logs)-cut)
++            separation = cut*(len(logs)-cut)*(left-right).square()
++            split = separation.argmax()
++            threshold_tensor = ((logs[split]+logs[split+1])*.5).exp()
++            threshold = float(threshold_tensor)
++            connected = torch.eye(k,device=device,dtype=torch.bool)
++            retained = edge_length <= threshold_tensor
++            a,b = edge_parent[retained],edge_child[retained]
++            connected[a,b] = True; connected[b,a] = True
++            for _ in range(k):
++                updated = group_ids[None].expand(k,-1).masked_fill(~connected,k).min(1).values
++                if torch.equal(updated,group_ids):
++                    break
++                group_ids = updated
++            group_ids = torch.unique(group_ids,sorted=True,return_inverse=True)[1]
++        self.mass_group_ids = group_ids
++        self.mass_groups = int(group_ids.max())+1
++        self.mass_topology = dict(rule="reference_center_mst_log_between_class_variance",
++                                  groups=self.mass_groups,threshold_squared=threshold)
++        self._update_storage()
++        return group_ids
++
++    def _group_counts(self, counts):
++        groups = self._mass_topology()
++        return torch.stack([counts[groups==group].sum() for group in range(self.mass_groups)])
++
++    @torch.no_grad()
++    def select_parents(self, query_features, flags, *, ordinary_children=None, ordinary_parents=None,
++                       generator, pvalues=None):
++        """Vacancy-limited anchor repair with distinct supported parents.
++
++        Clean supported rows, including planned ordinary moves, reserve their
++        reference mass first. Each target cell supplies only its own bounded
++        parent ball. A parent can seed at most one copy in the whole reaction;
++        unfilled holes wait for later snapshots rather than borrowing full-cell
++        mass or multiplying one surviving rare row.
++        """
+         features = self.transform(query_features)
+         if flags.shape != (len(features),) or flags.dtype != torch.bool or flags.device != self.device:
+             raise ValueError("invalid isolation flags")
+@@ -283,45 +422,104 @@
+             allowed = torch.ones(len(features),device=self.device,dtype=torch.bool)
+             allowed[ordinary_children] = False
+             dead = dead[allowed[dead]]
++        if ordinary_parents is not None:
++            if ordinary_children is None or len(ordinary_parents) != len(ordinary_children):
++                raise ValueError("ordinary children/parents must be paired")
++            eligible[ordinary_parents] = False
+         ids,pool,counts,eligible_counts = self._pool(features,eligible,generator)
+-        accessible = counts > 0
++        target = self._mass_targets(len(features))
++        groups = self._mass_topology()
++        kept = torch.bincount(ids[~flags],minlength=self.cells)
++        if ordinary_parents is not None:
++            kept -= torch.bincount(ids[ordinary_children],minlength=self.cells)
++            kept += torch.bincount(ids[ordinary_parents],minlength=self.cells)
++        vacancies = (self._group_counts(target)-self._group_counts(kept)).clamp_min(0)
++        # Partition membership and the unchanged support p>Q criterion
++        # define this own-cell pool. The old cross-cell 2*nearest ball could
++        # shrink 64 supported rows to one and repeatedly clone that family;
++        # it is redundant once parent and vacancy must share the same cell.
++        balls = pool >= 0
++        self.work["parent_candidate_cells"] += pool.numel()
++        supply = balls.sum(1)
++        capacity = supply*(vacancies[groups]>0)
++        accessible = capacity > 0
+         detail["accessible_cells"] = int(accessible.sum())
+-        deficit = (len(features)*self.real_calibration_counts.double()/self.calibration_rows-eligible_counts).clamp_min(0.)
+-        detail["inaccessible_deficit"] = float(deficit[~accessible].sum())
++        group_supply = self._group_counts(supply)
++        detail.update(inaccessible_deficit=float(vacancies[group_supply==0].sum()),target_counts=target,
++                      kept_counts=kept,group_vacancies=vacancies,eligible_parent_counts=eligible_counts,
++                      unique_parent_capacity=capacity,requested_repairs=len(dead),
++                      candidate_policy="supported_same_cell_without_replacement",mass_topology=dict(self.mass_topology))
+         if not bool(accessible.any()) or not len(dead):
+             return empty,empty,detail
+         children,parents,candidates,masks,anchor_rows,anchor_cells = [],[],[],[],[],[]
+-        anchors_to_query = min(REAL_ANCHORS,self.cells)
+-        for block_rows in dead.split(self.chunk):
+-            distances = self._distance(features[block_rows],self.real_representatives)
+-            distances[:,~accessible] = float("inf")
+-            closest = distances.argsort(dim=1,stable=True)[:,:anchors_to_query]
+-            anchor = closest[:,0]
+-            candidate = pool[closest].reshape(len(block_rows),-1)
+-            valid = candidate >= 0
+-            candidate_features = features[candidate.clamp_min(0)]
+-            distance = (candidate_features-self.real_representatives[anchor,None]).norm(dim=2)
+-            distance[~valid] = float("inf")
+-            self.work["distance_cells"] += distance.numel()
+-            self.work["parent_candidate_cells"] += distance.numel()
+-            self.work["max_distance_rows"] = max(self.work["max_distance_rows"],len(block_rows))
+-            self.work["max_distance_columns"] = max(self.work["max_distance_columns"],distance.shape[1])
+-            cap = min(PARENT_RANK_CAP,distance.shape[1])
+-            limit = torch.minimum(2*distance.min(1).values,distance.topk(cap,dim=1,largest=False).values[:,-1])
+-            ball = valid & (distance <= limit[:,None])
+-            draw = torch.rand(distance.shape,device=self.device,dtype=torch.float64,generator=generator)
+-            selected = draw.masked_fill(~ball,-1).argmax(1)
+-            accepted = ball.any(1)
+-            children.append(block_rows[accepted])
+-            parents.append(candidate[torch.arange(len(block_rows),device=self.device),selected][accepted])
+-            candidates.append(candidate[accepted])
+-            masks.append(ball[accepted])
+-            anchor_rows.append(self.real_representative_rows[anchor][accepted])
+-            anchor_cells.append(anchor[accepted])
++        distances = torch.cat([self._distance(features[block],self.real_representatives)
++                               for block in dead.split(self.chunk)])
++        available = torch.ones(len(dead),device=self.device,dtype=torch.bool)
++        remaining_capacity = capacity.clone()
++        remaining_vacancies = vacancies.clone()
++        assignments = torch.full((len(dead),),-1,device=self.device,dtype=torch.long)
++        # Child-first proposals preserve learned-feature locality. Each cell
++        # accepts its nearest proposals up to its vacancy and parent supply;
++        # rejected children try the next nonfull cell. A contested round fills
++        # at least one cell, so there are at most K rounds (no table search).
++        for _ in range(self.cells):
++            accessible = (remaining_capacity>0)&(remaining_vacancies[groups]>0)
++            if not bool(available.any()) or not bool(accessible.any()):
++                break
++            current = distances.masked_fill(~accessible[None],float("inf"))
++            nearest_distance,nearest = current.min(1)
++            nearest_group = groups[nearest]
++            alternative = current.masked_fill(groups[None]==nearest_group[:,None],float("inf")).min(1).values
++            regret = alternative-nearest_distance
++            for group in range(self.mass_groups):
++                rows = (available&(nearest_group==group)).nonzero().flatten()
++                if not len(rows) or not int(remaining_vacancies[group]):
++                    continue
++                # Preserve children with the worst alternative when a local
++                # mass quota is contested; absolute closeness alone can use
++                # that quota on flexible children and force distant repairs.
++                rows = rows[nearest_distance[rows].argsort(stable=True)]
++                rows = rows[regret[rows].argsort(descending=True,stable=True)]
++                proposals = rows[:int(remaining_vacancies[group])]
++                for cell_tensor in (groups==group).nonzero().flatten():
++                    cell = int(cell_tensor)
++                    local = proposals[nearest[proposals]==cell]
++                    take = min(len(local),int(remaining_capacity[cell]))
++                    if take:
++                        chosen = local[:take]
++                        assignments[chosen] = cell
++                        available[chosen] = False
++                        remaining_capacity[cell] -= take
++                        remaining_vacancies[group] -= take
++        quota = capacity-remaining_capacity
++        detail["birth_allocation"] = quota
++        detail["unfilled_repairs"] = int(available.sum())
++        detail["assignment_policy"] = "nearest_reference_group_regret_then_capacity"
++        for cell in range(self.cells):
++            selected_child = (assignments==cell).nonzero().flatten()
++            count = len(selected_child)
++            if not count:
++                continue
++            slots = balls[cell].nonzero().flatten()
++            priority = torch.rand(len(slots),device=self.device,dtype=torch.float64,generator=generator)
++            selected_slot = slots[priority.argsort(stable=True)[:count]]
++            candidate = pool[cell].expand(count,-1).clone()
++            mask = balls[cell].expand(count,-1).clone()
++            previous = (torch.arange(count,device=self.device)[:,None]
++                        >torch.arange(count,device=self.device)[None]).nonzero()
++            if len(previous):
++                mask[previous[:,0],selected_slot[previous[:,1]]] = False
++            children.append(dead[selected_child])
++            parents.append(pool[cell,selected_slot])
++            candidates.append(candidate)
++            masks.append(mask)
++            anchor_rows.append(self.real_representative_rows[cell].expand(count))
++            anchor_cells.append(torch.full((count,),cell,device=self.device,dtype=torch.long))
+         child,parent = torch.cat(children),torch.cat(parents)
+         detail.update(candidate_ids=torch.cat(candidates),candidate_mask=torch.cat(masks),
+                       anchor_reference_rows=torch.cat(anchor_rows),anchor_cell_ids=torch.cat(anchor_cells),
+-                      parent_cell_ids=ids[parent],parent_cell_deficits=deficit[ids[parent]])
++                      parent_cell_ids=ids[parent],parent_cell_deficits=vacancies[groups[ids[parent]]],
++                      remaining_group_vacancies=remaining_vacancies)
+         return child,parent,detail
+ 
+     @torch.no_grad()
+@@ -346,46 +544,102 @@
+         difference = comparison["difference"]
+         death_capacity = torch.floor(len(features)*difference.clamp_min(0.)+1e-10).long()*comparison["excess"]
+         birth_capacity = torch.floor(len(features)*(-difference).clamp_min(0.)+1e-10).long()*comparison["deficit"]
+-        available_deaths = torch.bincount(ids[~flags],minlength=self.cells)
++        target = self._mass_targets(len(features))
++        clean_counts = torch.bincount(ids,minlength=self.cells)
++        excess = (clean_counts-target).clamp_min(0)
++        vacancies = (target-clean_counts).clamp_min(0)
++        # Emitted iid count evidence certifies direction. Actual clean rows
++        # determine how much mass can move, avoiding repeated moves generated
++        # solely by emission/pool fluctuation after the table is balanced.
++        death_capacity = torch.minimum(death_capacity,excess)
++        birth_capacity = torch.minimum(birth_capacity,vacancies)
++        # Retain an actual eligible parent, rather than merely leaving an
++        # arbitrary nonflagged row that might itself have p<=Q.
++        protected = torch.full((self.cells,),-1,device=self.device,dtype=torch.long)
++        retain = (target>0)&(pool_counts>0)
++        protected[retain] = pool[retain,0]
++        death_eligible = ~flags&(torch.arange(len(features),device=self.device)!=protected[ids])
++        available_deaths = torch.bincount(ids[death_eligible],minlength=self.cells)
+         death_capacity = torch.minimum(death_capacity,available_deaths)
+         inaccessible = birth_capacity[pool_counts==0].sum()
+-        birth_capacity[pool_counts==0] = 0
++        birth_capacity = torch.minimum(birth_capacity,pool_counts)
+         budget = math.floor(Q*len(features)) if max_moves is None else min(int(max_moves),math.floor(Q*len(features)))
+-        pairs = min(int(death_capacity.sum()),int(birth_capacity.sum()),max(0,budget))
+-        deaths = _integer_allocate(death_capacity,pairs)
+-        births = _integer_allocate(birth_capacity,pairs)
++        groups = self._mass_topology()
++        group_target,group_clean = self._group_counts(target),self._group_counts(clean_counts)
++        within_capacity = torch.minimum(self._group_counts(death_capacity),self._group_counts(birth_capacity))
++        within = _integer_allocate(within_capacity,max(0,budget))
++        within_deaths,within_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
++        for group in range(self.mass_groups):
++            members = groups==group
++            within_deaths += _integer_allocate(death_capacity*members,int(within[group]))
++            within_births += _integer_allocate(birth_capacity*members,int(within[group]))
++        remaining_death,remaining_birth = death_capacity-within_deaths,birth_capacity-within_births
++        group_death = torch.minimum(self._group_counts(remaining_death),(group_clean-group_target).clamp_min(0))
++        group_birth = torch.minimum(self._group_counts(remaining_birth),(group_target-group_clean).clamp_min(0))
++        cross_pairs = min(int(group_death.sum()),int(group_birth.sum()),max(0,budget-int(within.sum())))
++        cross_group_death,cross_group_birth = _integer_allocate(group_death,cross_pairs),_integer_allocate(group_birth,cross_pairs)
++        cross_deaths,cross_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
++        for group in range(self.mass_groups):
++            members = groups==group
++            cross_deaths += _integer_allocate(remaining_death*members,int(cross_group_death[group]))
++            cross_births += _integer_allocate(remaining_birth*members,int(cross_group_birth[group]))
++        deaths,births = within_deaths+cross_deaths,within_births+cross_births
+         priorities = torch.rand(len(features),device=self.device,dtype=torch.float64,generator=generator)
+-        children,parents = [],[]
++        empty = torch.empty(0,device=self.device,dtype=torch.long)
++        children_by_cell,parents_by_cell = [],[]
+         for cell in range(self.cells):
+             count = int(deaths[cell])
+             if count:
+-                rows = ((ids==cell)&~flags).nonzero().flatten()
+-                children.append(rows[priorities[rows].argsort(stable=True)[:count]])
++                rows = ((ids==cell)&death_eligible).nonzero().flatten()
++                children_by_cell.append(rows[priorities[rows].argsort(stable=True)[:count]])
++            else:
++                children_by_cell.append(empty)
+             count = int(births[cell])
+             if count:
+-                draw = torch.randint(int(pool_counts[cell]),(count,),device=self.device,generator=generator)
+-                parents.append(pool[cell,draw])
+-        empty = torch.empty(0,device=self.device,dtype=torch.long)
++                draw = torch.randperm(int(pool_counts[cell]),device=self.device,generator=generator)[:count]
++                parents_by_cell.append(pool[cell,draw])
++            else:
++                parents_by_cell.append(empty)
++        children,parents = [],[]
++        # Match the conservative within-neighborhood phase inside its group.
++        # Only the explicit residual phase can move mass between groups.
++        for group in range(self.mass_groups):
++            for cell in (groups==group).nonzero().flatten():
++                index = int(cell)
++                children.append(children_by_cell[index][:int(within_deaths[index])])
++                parents.append(parents_by_cell[index][:int(within_births[index])])
++        for cell in range(self.cells):
++            children.append(children_by_cell[cell][int(within_deaths[cell]):])
++            parents.append(parents_by_cell[cell][int(within_births[cell]):])
+         child = torch.cat(children) if children else empty
+         parent = torch.cat(parents) if parents else empty
+         detail = dict(excess_cells=int(comparison["excess"].sum()),deficit_cells=int(comparison["deficit"].sum()),
+                       discoveries=int((comparison["excess"]|comparison["deficit"]).sum()),
+                       inaccessible_birth_quota=int(inaccessible),budget=budget,moves=len(child),
+-                      death_allocation=deaths,birth_allocation=births,eligible_parent_counts=eligible_counts)
++                      death_allocation=deaths,birth_allocation=births,eligible_parent_counts=eligible_counts,
++                      target_counts=target,clean_counts=clean_counts,clean_vacancies=vacancies,
++                      unique_parent_count=len(torch.unique(parent)),mass_topology=dict(self.mass_topology),
++                      group_target_counts=group_target,group_clean_counts=group_clean,
++                      within_group_moves=int(within.sum()),between_group_moves=cross_pairs)
+         return child,parent,detail
+ 
+ 
+ class FeatureCellBirthDeath(ParticleBirthDeath):
+     """Actual GANTrainer backend; keeps original FIFO and row-copy mechanics."""
+-    BACKEND_SCHEMA = 1
++    BACKEND_SCHEMA = 3
+ 
+     def __init__(self,trainer,seed):
+         super().__init__(trainer,seed)
++        self.population_policy = population_policy(self.N)
++        if not self.population_policy["finite_resolution_feasible"]:
++            raise ValueError("use make_feature_cell_birth_death for an infeasible small population")
+         recipe = trainer.recipe
+         self.settings = dict(cells=recipe.birth_death_cells,rank=recipe.birth_death_metric_rank,
+                              chunk=recipe.birth_death_chunk,parent_policy=recipe.birth_death_parent_policy,
+                              lloyd=LLOYD_PASSES,power=POWER_PASSES,parent_reservoir=PARENT_RESERVOIR,
+-                             real_anchors=REAL_ANCHORS,parent_rank=PARENT_RANK_CAP,jitter_std=JITTER_STD,jitter_cap=JITTER_CAP)
++                             real_anchors=1,parent_rank=None,jitter_std=JITTER_STD,jitter_cap=JITTER_CAP,
++                             mass_policy="reference_topology_vacancies_unique_parents_v2",
++                             isolation_parent_pool="supported_same_cell_without_replacement")
+         self.snapshot = None
+         self.snapshot_serial = 0
+         self.counters.update({key:0 for key in ("cell_evals","cell_discoveries","ordinary_moves","feature_rebuilds",
+@@ -396,7 +650,7 @@
+     def _jitter(self,trainer,latent,prior,noise):
+         return bounded_jitter(latent,noise)
+ 
+-    def perturb_latent(self,latent,stream,controller=None,record=False):
++    def perturb_latent(self,latent,stream,controller=None,record=False,*,prior=None):
+         noise = torch.randn(latent.shape,device=latent.device,dtype=latent.dtype,generator=stream)
+         delta = bounded_jitter(latent,noise)
+         if record and controller is not None and hasattr(controller,"latent_applications"):
+@@ -455,7 +709,7 @@
+             snapshot.cache_queries(q)
+             comparison = snapshot.cell_comparison(F)
+             child,parent,ordinary = snapshot.ordinary_transport(q,flags,comparison,generator=self.stream,pvalues=pvalues)
+-            iso_child,iso_parent,anchored = snapshot.select_parents(q,flags,ordinary_children=child,
++            iso_child,iso_parent,anchored = snapshot.select_parents(q,flags,ordinary_children=child,ordinary_parents=parent,
+                                                                  generator=self.stream,pvalues=pvalues)
+             c = self.counters
+             c["feature_rebuilds"] += 1
+@@ -480,7 +734,12 @@
+                         calibration_rows=snapshot.calibration_rows,pvalue_floor=1/(snapshot.calibration_rows+1),
+                         minimum_bh_flag_fraction=1/(Q*(snapshot.calibration_rows+1)),
+                         duplicate_fraction=snapshot.duplicate_fraction,statistic="conditional_categorical_transport",
+-                        density_ratio=None,statistical_limit="conditional iid cell test; no repeated adaptive guarantee")
++                        density_ratio=None,statistical_limit="conditional iid cell test; no repeated adaptive guarantee",
++                        mass_topology=dict(snapshot.mass_topology),
++                        ordinary_within_group_moves=ordinary["within_group_moves"],
++                        ordinary_between_group_moves=ordinary["between_group_moves"],
++                        unique_reaction_parents=len(torch.unique(torch.cat((parent,iso_parent)))),
++                        isolation_unfilled=anchored.get("unfilled_repairs",int(flags.sum())))
+             if not snapshot.valid_metric:
+                 last["skip"] = "no varying learned features"
+             if not self.dry_run:
+@@ -514,20 +773,23 @@
+     def diagnostics(self):
+         result = super().diagnostics()
+         result.update(backend="feature_cells",settings=dict(self.settings),snapshot_serial=self.snapshot_serial,
+-                      snapshot_work=None if self.snapshot is None else dict(self.snapshot.work))
++                      snapshot_work=None if self.snapshot is None else dict(self.snapshot.work),
++                      population_policy=dict(self.population_policy))
+         return result
+ 
+     def state_dict(self):
+         result = super().state_dict()
+         result.update(backend="feature_cells",backend_schema=self.BACKEND_SCHEMA,settings=dict(self.settings),
+-                      sample_shape=self.sample_shape,snapshot_serial=self.snapshot_serial)
++                      sample_shape=self.sample_shape,snapshot_serial=self.snapshot_serial,
++                      population_policy=dict(self.population_policy))
+         return result
+ 
+     def check_state(self,state):
+-        extra = {"backend","backend_schema","settings","sample_shape","snapshot_serial"}
++        extra = {"backend","backend_schema","settings","sample_shape","snapshot_serial","population_policy"}
+         base = set(self._TENSORS)|{"fill","cursor","rows_since_eval","counters","last","stream"}
+         if (not isinstance(state,dict) or set(state)!=base|extra or state.get("backend")!="feature_cells"
+-                or state.get("backend_schema")!=self.BACKEND_SCHEMA or state.get("settings")!=self.settings):
++                or state.get("backend_schema")!=self.BACKEND_SCHEMA or state.get("settings")!=self.settings
++                or state.get("population_policy")!=self.population_policy):
+             raise ValueError("invalid or incompatible feature-cell checkpoint backend/settings")
+         super().check_state({key:state[key] for key in base})
+         for key in ("fill","cursor","rows_since_eval","snapshot_serial"):
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -171,8 +171,8 @@
+         self.birth_death = None
+         if recipe.particle_birth_death:
+             if recipe.birth_death_backend == "feature_cells":
+-                from .feature_cells import FeatureCellBirthDeath
+-                self.birth_death = FeatureCellBirthDeath(self, seed + 6)
++                from .feature_cells import make_feature_cell_birth_death
++                self.birth_death = make_feature_cell_birth_death(self, seed + 6)
+             else:
+                 from .birth_death import ParticleBirthDeath
+                 self.birth_death = ParticleBirthDeath(self, seed + 6)
+@@ -255,9 +255,10 @@
+ 
+     def _generate(self, model, latent, sigma, stream):
+         """``model(latent) + sigma * eps``; no draw when sigma == 0."""
+-        if self.recipe.birth_death_backend == "feature_cells":
++        if self.birth_death is not None and hasattr(self.birth_death, "perturb_latent"):
++            prior = self.ema_prior if model is self.ema_G else self.prior
+             latent = self.birth_death.perturb_latent(latent, stream, self.controller,
+-                                                   record=stream is self.noise_generator)
++                                                   record=stream is self.noise_generator, prior=prior)
+         elif self.controller is not None:
+             prior = self.ema_prior if model is self.ema_G else self.prior
+             latent = self.controller.perturb_latent(latent, stream, prior, record=stream is self.noise_generator)

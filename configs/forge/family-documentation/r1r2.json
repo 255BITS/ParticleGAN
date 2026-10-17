@@ -1,0 +1,78 @@
+{
+  "overview": "The R1/R2 family now uses the Modern GAN training adaptation: paired relativistic logistic loss, native Adam, and squared critic input-gradient penalties on both real and fake samples. Its early schedule raises Adam's second-moment decay while reducing penalty strength. The retained older R1/R2 entry only swapped K3P's penalty and kept K3P's optimizer controls; it is a different complete recipe.",
+  "symbols": "$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\\epsilon_{\\mathrm{in}})$ with a fresh draw. $\\mathbb E$ means a sample mean, $\\lVert\\cdot\\rVert_2$ is the Euclidean norm, $(a)_+=\\max(a,0)$ and $\\operatorname{softplus}(a)=\\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\\nabla_x C(x)$ and $g_f=\\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\\lambda$ is penalty strength and $\\kappa$ the cap threshold. $\\gamma(t)$ is scheduled R1/R2 strength, $\\beta_2(t)$ Adam second-moment decay, $t$ completed updates and $T$ the resolved recipe horizon. $c(t)$ is the early cosine interpolation weight.",
+  "pseudocode": [
+    "For each training iteration:",
+    "  Apply the resolved LR schedule; cosine-interpolate beta2 and gamma over the first 20% of the task horizon.",
+    "  Draw real x and prior z; fake = detach(G(z)).",
+    "  Compute the paired critic adversarial loss shown above.",
+    "  g_r = gradient(D(x),x); g_f = gradient(D(fake),fake), using detached input copies.",
+    "  Add the fixed real/fake input-gradient penalty shown above.",
+    "  Backpropagate L_D; take a native Adam critic step with no spike guard or global clipping.",
+    "  Freeze D parameters; draw fresh z, regenerate fake and recompute both scores.",
+    "  Compute the paired generator adversarial loss from the updated critic; add only the host's declared auxiliary objective.",
+    "  Backpropagate L_G; update G and any learned prior with native Adam.",
+    "  Do not apply A2, critic anchoring, direct-particle gain or additive training noise.",
+    "  Score the live model with the frozen task's sampling law."
+  ],
+  "training_details": {
+    "loss": "Paired relativistic logistic, the RpGAN component of the Modern GAN baseline. Forge uses the host's toy architecture and prior; this is not a reproduction of the paper's image architecture or full Stacked MNIST experiment.",
+    "optimizer": "Modern canonical and selected cards use native torch.optim.Adam, $\\beta_1=0$, $\\varepsilon=10^{-8}$, AMSGrad off. $\\beta_2$ cosine-interpolates $0.9$ to $0.99$ over the first $20\\%$ of each resolved task horizon, then holds. Observer bookkeeping does not alter Adam's update.",
+    "learning_rates": "Canonical modern card keeps $0.0002$ constant for $G$ and $D$ and learned prior. The selected whole variant uses $0.0085$, critic/prior multipliers $1$, no short network horizon cap, and cosine LR decay from $20\\%$ of the resolved horizon to a $10\\%$ floor. Exact host binding determines the horizon.",
+    "gradient_clipping": "Disabled in modern canonical/selected cards: $\\texttt{d\\_guard\\_ratio}=0$ and no global gradient-norm clip. The squared input-gradient penalty changes the critic loss rather than clipping parameter gradients. The historical K3P swap retains its inherited spike guard.",
+    "critic_penalty": "Apply $\\gamma(t)/2$ times the sum of real and fake mean squared L2 input-gradient norms. $\\gamma$ cosine-interpolates from $1$ to $0.1$ over the first $20\\%$ of the resolved horizon; apply the penalty each step. No cap threshold, RMS rescaling, LR handover or EMA proximity term is active.",
+    "damping_and_guards": "Modern cards disable A2, direct-particle gain, critic spike guard and anchor. The older k3p-r1r2-matched-v1 keeps those K3P controls where its host supports them; they must not be attributed to the modern native-Adam baseline.",
+    "noise": "Modern cards have zero additive critic-input and generated-output noise. A learned MoG may still have task-declared latent sampling noise; disabling training-output noise does not remove that prior law.",
+    "averaging": "Modern cards set generator/prior EMA decay to zero and use live scoring. The paper's EMA image evaluation is not imported. Historical K3P penalty-swap receipts retain their own averaging configuration."
+  },
+  "configuration_notes": [
+    "Each result retains its executed source, recipe, task prior, initialization, budget and sampling law. These descriptions do not change or requalify recorded measurements.",
+    "Task-owned objectives and active components matter: direct sample particles, learned latent rows and a generator network are different parameter roles. A declared recipe switch does not imply that every host can apply it.",
+    "The selected r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f was recorded at source 928b485ffbe6e17d79b41d307ae8b6275489b37a. Its .0085 rate and LR cosine differ from the canonical constant-.0002 card.",
+    "Toy component hosts retain their original direct-particle, conditional, joint or reconstruction objectives. A shorter host horizon scales the declared schedules through the explicit binding; an external execution cap does not silently redefine them.",
+    "The modern training adaptation, historical fixed R1/R2 swap and their recorded sources cannot pool successful cells or establish a single-change comparison."
+  ],
+  "references": [
+    {
+      "title": "The GAN is dead; long live the GAN! A Modern GAN Baseline",
+      "url": "https://arxiv.org/abs/2501.05441",
+      "component": "RpGAN with R1/R2 and the modern training baseline; Forge adapts its training to toy hosts."
+    },
+    {
+      "title": "Which Training Methods for GANs do actually Converge?",
+      "url": "https://arxiv.org/abs/1801.04406",
+      "component": "Zero-centered input-gradient regularization; not the full repository formulation."
+    },
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "url": "https://arxiv.org/abs/1412.6980",
+      "component": "Base optimizer. Guard, damping and controller rules are repository additions."
+    }
+  ],
+  "sources": [
+    "configs/forge/ideas/r3gan-stacked-training-toy-v1.json",
+    "configs/forge/ideas/k3p-r1r2-matched-v1.json",
+    "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json",
+    "particlegan/recipe_schedules.py",
+    "particlegan/grad_regularizers.py",
+    "experiments/forge/taskrecipes.py",
+    "reports/forge/R3GAN_BASELINE_READOUT.md"
+  ],
+  "equations": [
+    {
+      "label": "Default paired adversarial loss",
+      "latex": "\\begin{aligned}\\ell_D&=\\mathbb E\\!\\left[\\operatorname{softplus}(C(y)-C(x))\\right],\\\\\\ell_G&=\\mathbb E\\!\\left[\\operatorname{softplus}(C(x)-C(y))\\right].\\end{aligned}",
+      "explanation": "These scalar losses are minimized. The critic objective is $\\ell_D+R$; the generator adds only its declared auxiliary objectives. Critic fakes are detached, and generator fakes and both scores are recomputed after the critic step. $C$ includes any declared fresh input noise."
+    },
+    {
+      "label": "Squared real and fake input-gradient penalty",
+      "latex": "R_{\\mathrm{R1/R2}}=\\frac{\\gamma(t)}{2}\\left[\\mathbb E\\lVert g_r\\rVert_2^2+\\mathbb E\\lVert g_f\\rVert_2^2\\right].",
+      "explanation": "R1 regularizes real-input gradients and R2 fake-input gradients. These are squared L2 norms, without a cap threshold, RMS normalization or EMA proximity. The modern canonical and selected recipes use native Adam; the retained older penalty-swap recipe has its own inherited K3P controls."
+    },
+    {
+      "label": "Early moment and penalty schedules",
+      "latex": "\\begin{aligned}c(t)&=\\frac{1+\\cos\\!\\left(\\pi\\min\\!\\left(1,\\frac{t}{0.2T}\\right)\\right)}{2},\\\\\\beta_2(t)&=0.99+(0.9-0.99)c(t),\\\\\\gamma(t)&=0.1+(1-0.1)c(t).\\end{aligned}",
+      "explanation": "Over the first $20\\%$ of the resolved recipe horizon $T$, the second-moment decay moves from $0.9$ to $0.99$ while penalty strength moves from $1$ to $0.1$. Both then hold. This schedule is separate from LR: the canonical card keeps $0.0002$ constant, whereas the selected $0.0085$ variant uses its declared LR cosine."
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "capacity_evidence": "separate zero-update admission; no trained qualification",
+  "case_original_gate": "NO_RECEIPT",
+  "case_study_gate": "NO_RECEIPT",
+  "cause": "coordinator passes --seed, but frozen api_run parser has no --seed option",
+  "execution_source_commit": "563cb337937a05494a1577376e5740f0aa2e2777",
+  "next_step": "root-owned engineering correction under a new frozen source; preserve this source/archive/cost",
+  "original_archive_unchanged": true,
+  "raw_study": {
+    "path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/study.json",
+    "sha256": "bba8374f395d4c8040c87f8db0e83995b3f0e7f7e583d47f4294148d794493b9"
+  },
+  "records": [
+    {
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "error": "argparse: unrecognized arguments: --seed 24002",
+      "execution_status": "INVALID",
+      "goal_gif_present": false,
+      "log": {
+        "bytes": 432,
+        "path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12.log",
+        "sha256": "92ae772bca66139e2e6d84d2d6b289354f1c7e78acfa0b48d408239ed6e6e597"
+      },
+      "optimizer_updates": 0,
+      "paid_seconds": 1.6664601480588317,
+      "receipt_present": false,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 2.0
+      },
+      "scientific_status": "UNMEASURED",
+      "trial_id": "atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057"
+    },
+    {
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "error": "argparse: unrecognized arguments: --seed 24002",
+      "execution_status": "INVALID",
+      "goal_gif_present": false,
+      "log": {
+        "bytes": 432,
+        "path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12.log",
+        "sha256": "92ae772bca66139e2e6d84d2d6b289354f1c7e78acfa0b48d408239ed6e6e597"
+      },
+      "optimizer_updates": 0,
+      "paid_seconds": 1.6162624061107635,
+      "receipt_present": false,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 2.0
+      },
+      "scientific_status": "UNMEASURED",
+      "trial_id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1"
+    },
+    {
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "error": "argparse: unrecognized arguments: --seed 24002",
+      "execution_status": "INVALID",
+      "goal_gif_present": false,
+      "log": {
+        "bytes": 432,
+        "path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12.log",
+        "sha256": "92ae772bca66139e2e6d84d2d6b289354f1c7e78acfa0b48d408239ed6e6e597"
+      },
+      "optimizer_updates": 0,
+      "paid_seconds": 1.466294368961826,
+      "receipt_present": false,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "scientific_status": "UNMEASURED",
+      "trial_id": "atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50"
+    },
+    {
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "error": "argparse: unrecognized arguments: --seed 24002",
+      "execution_status": "INVALID",
+      "goal_gif_present": false,
+      "log": {
+        "bytes": 432,
+        "path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12.log",
+        "sha256": "92ae772bca66139e2e6d84d2d6b289354f1c7e78acfa0b48d408239ed6e6e597"
+      },
+      "optimizer_updates": 0,
+      "paid_seconds": 1.416394235799089,
+      "receipt_present": false,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 1.0
+      },
+      "scientific_status": "UNMEASURED",
+      "trial_id": "atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf"
+    }
+  ],
+  "required_cases_per_config": 8,
+  "rescoring": false,
+  "retries": 0,
+  "schema": "policy_family_engineering_launch_diagnosis_v1",
+  "scientific_status": "UNMEASURED",
+  "total_optimizer_updates": 0,
+  "total_paid_seconds": 6.16541115893051,
+  "training_failure": false
+}

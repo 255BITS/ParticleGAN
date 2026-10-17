@@ -1,0 +1,183 @@
+{
+  "actual_full_budget_cases": 5,
+  "analysis_training_updates": 0,
+  "current_readout_sha256": "b5f2badf7e0f8329dd361b67b7312b74654534b6f984d7e6cdd5000d9477a1a6",
+  "executed_source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+  "fully_qualified_configs": [],
+  "media_qa": [
+    {
+      "actual_media_steps": [
+        0,
+        75,
+        150,
+        225,
+        300,
+        375,
+        450,
+        525,
+        600
+      ],
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "frame_count": 9,
+      "gif": {
+        "bytes": 221497,
+        "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12/goal.gif",
+        "sha256": "6203d9766e332ade0f0f999ac16bdadc075d9df7b42058d88b04cec4d6330ef2"
+      },
+      "limitation": "Displays the first eight served image draws; whole-law mass is numeric evidence, not inferred from that subset.",
+      "original_gate_displayed": "FAIL",
+      "posters_inspected": [
+        "/ml2/hypergan/toy-policy-atlas-goal-qa-20261002/9cf9647fdc66-intensity-final.png",
+        "/ml2/hypergan/toy-policy-atlas-goal-qa-20261002/acquired450.png",
+        "/ml2/hypergan/toy-policy-atlas-goal-qa-20261002/hold-failure525.png"
+      ],
+      "separate_study_gate": "FAIL",
+      "trial_id": "atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057",
+      "visual_goal_status": "ILLUSTRATIVE_AND_READABLE"
+    },
+    {
+      "actual_media_steps": [
+        0,
+        75,
+        150,
+        225,
+        300,
+        375,
+        450,
+        525,
+        600
+      ],
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "frame_count": 9,
+      "gif": {
+        "bytes": 220076,
+        "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12/goal.gif",
+        "sha256": "bb6f45c2aa0cb6fbedb9714596a00fd01c213c62fc29e1835ec363900fca0415"
+      },
+      "limitation": "Displays the first eight served image draws; whole-law mass is numeric evidence, not inferred from that subset.",
+      "original_gate_displayed": "PASS",
+      "posters_inspected": [
+        "/ml2/hypergan/toy-policy-atlas-goal-qa-20261002/ca0901b6679b-intensity-final.png"
+      ],
+      "separate_study_gate": "PASS",
+      "trial_id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+      "visual_goal_status": "ILLUSTRATIVE_AND_READABLE"
+    },
+    {
+      "actual_media_steps": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750,
+        900,
+        1050,
+        1200
+      ],
+      "case_id": "api-vector-two-broad",
+      "frame_count": 9,
+      "gif": {
+        "bytes": 652307,
+        "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/api-vector-two-broad/goal.gif",
+        "sha256": "e85966896f44a6cbf166368c62a3198998b44f3c0dca65aab0930e6db00ff99b"
+      },
+      "limitation": "The mass/local-width panels illustrate the target; projection-KS is in the bound numeric receipt but omitted by the compact GIF footer. No gate is inferred from appearance.",
+      "original_gate_displayed": "FAIL",
+      "posters_inspected": [
+        "/ml2/hypergan/toy-policy-atlas-goal-qa-20261002/ca0901b6679b-broad-initial.png",
+        "/ml2/hypergan/toy-policy-atlas-goal-qa-20261002/ca0901b6679b-broad-final.png"
+      ],
+      "separate_study_gate": "FAIL",
+      "trial_id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+      "visual_goal_status": "ILLUSTRATIVE_AND_READABLE"
+    },
+    {
+      "actual_media_steps": [
+        0,
+        75,
+        150,
+        225,
+        300,
+        375,
+        450,
+        525,
+        600
+      ],
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "frame_count": 9,
+      "gif": {
+        "bytes": 219219,
+        "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12/goal.gif",
+        "sha256": "237df51571fafc0d0b42f14af8926896277d17387535ec35dd881db49390d89c"
+      },
+      "limitation": "Displays the first eight served image draws; whole-law mass is numeric evidence, not inferred from that subset.",
+      "original_gate_displayed": "PASS",
+      "posters_inspected": [
+        "/ml2/hypergan/toy-policy-atlas-goal-qa-20261002/e6f3c9f400a4-intensity-final.png"
+      ],
+      "separate_study_gate": "INCOMPLETE",
+      "trial_id": "atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50",
+      "visual_goal_status": "ILLUSTRATIVE_AND_READABLE"
+    },
+    {
+      "actual_media_steps": [
+        0,
+        75,
+        150,
+        225,
+        300,
+        375,
+        450,
+        525,
+        600
+      ],
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "frame_count": 9,
+      "gif": {
+        "bytes": 221170,
+        "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12/goal.gif",
+        "sha256": "df53ff4e193538bebbd75a11fb3037ed8e793b1afadd891edd2e8350b4be5d29"
+      },
+      "limitation": "Displays the first eight served image draws; whole-law mass is numeric evidence, not inferred from that subset.",
+      "original_gate_displayed": "FAIL",
+      "posters_inspected": [
+        "/ml2/hypergan/toy-policy-atlas-goal-qa-20261002/fc4e6516e79a-intensity-final.png"
+      ],
+      "separate_study_gate": "FAIL",
+      "trial_id": "atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf",
+      "visual_goal_status": "ILLUSTRATIVE_AND_READABLE"
+    }
+  ],
+  "original_case_gate_counts": {
+    "FAIL": 3,
+    "PASS": 2
+  },
+  "original_receipts_and_artifacts_unchanged": true,
+  "original_study": {
+    "path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/study.json",
+    "sha256": "af1a5bf83cae45d633d7bdc48e4152aadca5f2e0f3d7b55c1c602b5150ab4c9a"
+  },
+  "paid_seconds": 136.84762290492654,
+  "quality_tier_cases_attempted": 0,
+  "required_atlas_case_cells": 32,
+  "rescoring": false,
+  "schema": "atlas_policy_family_readonly_assessment_v1",
+  "scientific_limits": [
+    "No supported whole-config winner on the required eight cases.",
+    "INCOMPLETE after late acquisition is not an original toy FAIL.",
+    "No native quality-tier conclusion or full-suite family exclusion from stopped smoke tests.",
+    "No policy/clean-MoG pooling, robustness, calibrated default adoption or speed ranking.",
+    "Recorded failing gates describe failure, not a verified optimizer/critic cause."
+  ],
+  "study_case_gate_counts": {
+    "FAIL": 3,
+    "INCOMPLETE": 1,
+    "PASS": 1
+  },
+  "unmeasured_atlas_case_cells": 27,
+  "whole_config_status_counts": {
+    "FAIL": 3,
+    "INCOMPLETE": 1
+  }
+}

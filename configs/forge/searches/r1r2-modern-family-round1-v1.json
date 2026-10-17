@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "r1r2-modern-family-round1-v1",
+  "trainer_family": "r1r2",
+  "base_candidate": "r3gan-stacked-training-toy-v1",
+  "grid": {
+    "lr": [0.0085],
+    "decay": [
+      {"lr_anneal_start": 0.2, "lr_floor": 0.1, "network_lr_floor": 0.1},
+      {"lr_anneal_start": 0.2, "lr_floor": 0.25, "network_lr_floor": 0.25},
+      {"lr_anneal_start": 0.6, "lr_floor": 0.1, "network_lr_floor": 0.1},
+      {"lr_anneal_start": 0.6, "lr_floor": 0.25, "network_lr_floor": 0.25}
+    ],
+    "d_lr_mult": [0.5, 1.0]
+  },
+  "tuning_through_tier": 3,
+  "view": "discriminator_stability",
+  "execution_backend": "cuda",
+  "cuda_model": "NVIDIA RTX A6000",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "campaign": {
+    "id": "r1r2-modern-family-round1-v1",
+    "budget_seconds": 352800,
+    "candidate_budget_seconds": 44100,
+    "accept_shared_cost_transfer": false
+  },
+  "hypothesis": "The previous constant-LR 0.0085, gamma 1-to-0.1 Modern GAN configuration passed all smoke tasks but failed trajectory identity at every observation. Preserve its early transport rate and penalty schedule, then reduce later network and prior steps together; comparing equal and half-rate critics tests whether the conditional game benefits from slower critic adaptation under the same short horizons.",
+  "rationale": "Eight new complete shared Recipe configurations cross two cosine decay starts, two tied network/prior floors, and two discriminator role multipliers. The exact failed constant-rate configurations are excluded. Plain Adam, beta1 zero, beta2 0.9-to-0.99 over 20%, gamma 1-to-0.1 over 20%, per-update R1/R2, prior multiplier one, data/host architecture, initialization, seed, horizons, task priors and sampling remain fixed. Late decay is an optimization hypothesis, not a demonstrated cause of the historical failure. Every smoke survivor receives the same ordinary later gates while its full next-task allowance fits the frozen round budget. No per-toy settings or public-default adoption; qualification and speed remain provisional without complete coverage and calibration. The campaign ceiling is the exact eight-config worst-case task reservation, not measured cost or permission to bypass the separately frozen shared-round allowance and GPU ownership.",
+  "guide": "EXPERIMENTATION.md"
+}

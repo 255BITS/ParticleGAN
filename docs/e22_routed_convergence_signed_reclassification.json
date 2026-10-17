@@ -1,0 +1,266 @@
+{
+  "schema": "routed_endpoint_beneficial_signed_reclassification_v1",
+  "trained_particle_gate": "unsigned_effect_v1",
+  "evaluated_particle_gate": "beneficial_signed_v2",
+  "scope": "Hash-bound original saved endpoint metrics; no new tensor scoring or trained-source qualification",
+  "quality_training_updates": 0,
+  "software_replay_updates": 0,
+  "model_or_optimizer_updates": 0,
+  "original_evidence_unchanged": true,
+  "qualification_credit": "none",
+  "classification_source_sha256": "d795e06eddfc78803c737aec9a85c2ea815567bf3849f9440b5a7c1f76d42433",
+  "independent_gate_repair_proof": {
+    "changes": [
+      "absolute code effect to positive beneficial code effect"
+    ],
+    "other_source_ast_unchanged": true,
+    "archived_sha256": "1a5cf8461249ea4efe9481f71f17129544528ca123c0444d700070f3fef6f70d",
+    "repaired_sha256": "5ab74070024e086d14c64db46b2d7bfdd825dfdb999c08942b9053ad6180b2a0"
+  },
+  "separate_guided_metadata_repair_proof": {
+    "changes": [
+      "marshal code bytes to canonical code fields",
+      "bind actual factory defaults"
+    ],
+    "other_source_ast_unchanged": true,
+    "archived_sha256": "5a0bcd4ef7ee31f8b25921c1957b9e7bdac619e162e9ca650db4b9ceddd7d1c0",
+    "repaired_sha256": "da3b0850fa438d4001c65cff1ae2a54c2930e98155b093748787fd51c11a2f2a",
+    "qualification": "New metadata identity only; existing cards, data and checkpoints retain original identities"
+  },
+  "records": [
+    {
+      "task": "routed_convergence_rotated_teacher_v1",
+      "original_run": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-rotated-v1",
+      "original_input_sha256": {
+        "published_summary": "cbe02fa275faaf4edc8af4f2ddc8ac84d52d463beb8b7733331573f12bd0e971",
+        "independent_review": "4a2854c3d7e72ea455ce1ed41035ebaf11582ee09f38113c1a51142b0e3ee5b1"
+      },
+      "original_execution_receipt_sha256": "b141ff7656057552097cf83ecbc5b8729356da2de1f5ceb89cbc9a6d92b81894",
+      "original_artifact_manifest_digest": "de34b4714467064c77727b2cff12ad1eec87ac81f1711522fa83bb5b00658fd5",
+      "verified_artifact_files": 149,
+      "verified_saved_states": 105,
+      "original_review_checks": 569601,
+      "original_source_hashes": {
+        "docs/e22_routed_convergence_rotated_teacher_v1.json": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+        "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+        "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+        "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+        "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+        "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+        "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+        "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+        "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
+      },
+      "evaluation_repair_proofs": {
+        "examples/run_e22_routed_convergence_rotated_teacher.py": {
+          "changes": [
+            "absolute code effect to positive beneficial code effect"
+          ],
+          "other_source_ast_unchanged": true,
+          "archived_sha256": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+          "repaired_sha256": "f2c88461c946c0e43adee1514d6d83a962ec7fb6aed5f21cc9dd1b738ad1a26c"
+        }
+      },
+      "old_gates": {
+        "original_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.8667887449264526,
+          "ordinary_native_game@6400": -0.12230968475341797,
+          "particle_native_game@800": -0.8303190469741821,
+          "particle_native_game@6400": 0.14214563369750977
+        },
+        "neutral_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.5936425924301147,
+          "ordinary_native_game@6400": -0.18477070331573486,
+          "particle_native_game@800": -0.6352794170379639,
+          "particle_native_game@6400": -0.0573582649230957
+        },
+        "paired_game_H_b_improvement": {
+          "ordinary_native_game@800": -0.2731461524963379,
+          "ordinary_native_game@6400": 0.062461018562316895,
+          "particle_native_game@800": -0.19503962993621826,
+          "particle_native_game@6400": 0.19950389862060547
+        },
+        "original_particle_gap_reproduced": false,
+        "endpoint_gap_reduction": null,
+        "support_gate_applicable": false,
+        "retained_particle_gate": {
+          "particle_native_game": true,
+          "neutral_particle_native_game": true
+        },
+        "H_b_support_gate": false,
+        "neutral_beats_ordinary_all_four": true,
+        "remaining_neutral_gap_witness": false
+      },
+      "signed_gates": {
+        "original_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.8667887449264526,
+          "ordinary_native_game@6400": -0.12230968475341797,
+          "particle_native_game@800": -0.8303190469741821,
+          "particle_native_game@6400": 0.14214563369750977
+        },
+        "neutral_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.5936425924301147,
+          "ordinary_native_game@6400": -0.18477070331573486,
+          "particle_native_game@800": -0.6352794170379639,
+          "particle_native_game@6400": -0.0573582649230957
+        },
+        "paired_game_H_b_improvement": {
+          "ordinary_native_game@800": -0.2731461524963379,
+          "ordinary_native_game@6400": 0.062461018562316895,
+          "particle_native_game@800": -0.19503962993621826,
+          "particle_native_game@6400": 0.19950389862060547
+        },
+        "original_particle_gap_reproduced": false,
+        "endpoint_gap_reduction": null,
+        "support_gate_applicable": false,
+        "retained_particle_gate": {
+          "particle_native_game": true,
+          "neutral_particle_native_game": true
+        },
+        "H_b_support_gate": false,
+        "neutral_beats_ordinary_all_four": true,
+        "remaining_neutral_gap_witness": false
+      },
+      "gate_decisions_unchanged": true,
+      "signed_code_deltas": {
+        "particle_native_game": {
+          "ordinary_native_game@800": 0.5513062477111816,
+          "ordinary_native_game@6400": 0.39504122734069824,
+          "particle_native_game@800": 0.8144055604934692,
+          "particle_native_game@6400": 0.21647357940673828
+        },
+        "neutral_particle_native_game": {
+          "ordinary_native_game@800": 0.5221133232116699,
+          "ordinary_native_game@6400": 0.5034438371658325,
+          "particle_native_game@800": 0.8768723011016846,
+          "particle_native_game@6400": 0.3481106758117676
+        }
+      }
+    },
+    {
+      "task": "routed_convergence_guided_pair_v1",
+      "original_run": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1",
+      "original_input_sha256": {
+        "published_summary": "11a3cea2d39fb67d947a395c91e754559c3888c69b1c290029e00a36dd476991",
+        "independent_review": "3d63111f65181183ee0c83ac04698572e0cc2994334fdb496add151f68e384d1",
+        "review_completion": "cd64b63ac46026ef08336eaeade3d97a807bc350e9f4eca6dce1b6c1cfde2b09",
+        "execution_completion": "a6ef88e25c16ebfa4563b4502504b5f65dc2145f61d6a2b3d1e0438ce5e5d107"
+      },
+      "original_execution_receipt_sha256": "8b762c123afaa9bb9c5ed43a0ed9155dc9e077858a52f7b92230e87efa0b6248",
+      "original_artifact_manifest_digest": "7e94eb61e4f1ea60f1bd8df0a833c49bbd732b5b994323ad25256878c595e45c",
+      "verified_artifact_files": 157,
+      "verified_saved_states": 105,
+      "original_review_checks": 570039,
+      "original_source_hashes": {
+        "docs/e22_routed_convergence_guided_pair_v1.json": "2ca1cf8b59fd1dbd02b7e388bcd88aec87d0d8b2cfa78c5d09c8f90f40591fbd",
+        "examples/e22_routed_convergence_guided_campaign.py": "0737b8baf169c457b47cd255d4130ab993da1d7e5eb60e5a57b178e9e54062b4",
+        "examples/run_e22_routed_convergence_guided_pair.py": "1a4ad6013f26d5172fb97f3d762acbf493735d260da2daa2395e67ade7c3d9ba",
+        "examples/review_e22_routed_convergence_guided_pair.py": "25ed8f9cd4308864131c1b1f7a8b95d67ea828ca6822e117e049d0c4b42fe459",
+        "examples/e22_routed_convergence_guided_pair.py": "5a0bcd4ef7ee31f8b25921c1957b9e7bdac619e162e9ca650db4b9ceddd7d1c0",
+        "tests/test_e22_routed_convergence_guided_pair.py": "83cabdbe8f2268fcac4ecfe20a5f04ec1a3c4b22352da66ad99635eff3dc59d2",
+        "tests/test_e22_routed_convergence_guided_campaign.py": "6188446585662fde6456bb73eb7d8bc833149c9685f5e266d3bc7e7ca2092ecb",
+        "examples/review_e22_routed_convergence_rotated_teacher.py": "1a5cf8461249ea4efe9481f71f17129544528ca123c0444d700070f3fef6f70d",
+        "docs/e22_routed_convergence_rotated_teacher_v1.json": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+        "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+        "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+        "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+        "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+        "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+        "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+        "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+        "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
+      },
+      "evaluation_repair_proofs": {
+        "examples/run_e22_routed_convergence_rotated_teacher.py": {
+          "changes": [
+            "absolute code effect to positive beneficial code effect"
+          ],
+          "other_source_ast_unchanged": true,
+          "archived_sha256": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+          "repaired_sha256": "f2c88461c946c0e43adee1514d6d83a962ec7fb6aed5f21cc9dd1b738ad1a26c"
+        }
+      },
+      "old_gates": {
+        "original_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": 0.09983086585998535,
+          "ordinary_native_game@6400": 0.33138298988342285,
+          "particle_native_game@800": 0.04186391830444336,
+          "particle_native_game@6400": 0.6647495031356812
+        },
+        "neutral_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.2507596015930176,
+          "ordinary_native_game@6400": -0.3014106750488281,
+          "particle_native_game@800": -0.34640228748321533,
+          "particle_native_game@6400": -0.254874587059021
+        },
+        "paired_game_H_b_improvement": {
+          "ordinary_native_game@800": 0.35059046745300293,
+          "ordinary_native_game@6400": 0.632793664932251,
+          "particle_native_game@800": 0.3882662057876587,
+          "particle_native_game@6400": 0.9196240901947021
+        },
+        "original_particle_gap_reproduced": true,
+        "endpoint_gap_reduction": {
+          "ordinary_native_game@6400": 1.909553852341248,
+          "particle_native_game@6400": 1.383414482984576
+        },
+        "support_gate_applicable": true,
+        "retained_particle_gate": {
+          "particle_native_game": true,
+          "neutral_particle_native_game": true
+        },
+        "H_b_support_gate": true,
+        "neutral_beats_ordinary_all_four": true,
+        "remaining_neutral_gap_witness": false
+      },
+      "signed_gates": {
+        "original_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": 0.09983086585998535,
+          "ordinary_native_game@6400": 0.33138298988342285,
+          "particle_native_game@800": 0.04186391830444336,
+          "particle_native_game@6400": 0.6647495031356812
+        },
+        "neutral_particle_minus_ordinary_game": {
+          "ordinary_native_game@800": -0.2507596015930176,
+          "ordinary_native_game@6400": -0.3014106750488281,
+          "particle_native_game@800": -0.34640228748321533,
+          "particle_native_game@6400": -0.254874587059021
+        },
+        "paired_game_H_b_improvement": {
+          "ordinary_native_game@800": 0.35059046745300293,
+          "ordinary_native_game@6400": 0.632793664932251,
+          "particle_native_game@800": 0.3882662057876587,
+          "particle_native_game@6400": 0.9196240901947021
+        },
+        "original_particle_gap_reproduced": true,
+        "endpoint_gap_reduction": {
+          "ordinary_native_game@6400": 1.909553852341248,
+          "particle_native_game@6400": 1.383414482984576
+        },
+        "support_gate_applicable": true,
+        "retained_particle_gate": {
+          "particle_native_game": true,
+          "neutral_particle_native_game": true
+        },
+        "H_b_support_gate": true,
+        "neutral_beats_ordinary_all_four": true,
+        "remaining_neutral_gap_witness": false
+      },
+      "gate_decisions_unchanged": true,
+      "signed_code_deltas": {
+        "particle_native_game": {
+          "ordinary_native_game@800": 0.2471853494644165,
+          "ordinary_native_game@6400": 0.08314132690429688,
+          "particle_native_game@800": 0.3114579916000366,
+          "particle_native_game@6400": 0.07859230041503906
+        },
+        "neutral_particle_native_game": {
+          "ordinary_native_game@800": 0.4586350917816162,
+          "ordinary_native_game@6400": 0.38222527503967285,
+          "particle_native_game@800": 0.5441509485244751,
+          "particle_native_game@6400": 0.4871847629547119
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+  "candidate_revision": "5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426",
+  "read_only": true,
+  "watched_files_unchanged": 11,
+  "frozen_source_files_verified": 1029,
+  "rows": [
+    {
+      "attempt": "49d41e284fde41698212677403ca5d67",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "seconds": 17.93031075700128,
+      "raw_durable_and_science_hashes_verified": true,
+      "exact_frozen_grade_reproduced": true,
+      "diagnostic_registration_verified": true,
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "eval_output_noise": "clean"
+      },
+      "recorded_rng_audits": 24,
+      "recorded_rng_deviations": 0,
+      "actual_a2": {
+        "applied": 0,
+        "calls": 1200,
+        "eligible": 0,
+        "enabled": true,
+        "probe": {
+          "kind": "synthetic_public_component",
+          "measurements": {
+            "damping_branch_applied": true,
+            "initial_sparse_history_total": 8,
+            "optimizer_updates": 2
+          },
+          "status": "PASS",
+          "synthetic_state": true,
+          "training_evidence": false
+        },
+        "reason": "host conditions did not activate the branch; targeted component check required",
+        "requested": true
+      },
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 4.5106520652771,
+        "hq": 0.998779296875,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      }
+    },
+    {
+      "attempt": "5693d7b9c35844c78f4440ed15bad4a2",
+      "task": "img_intensity2_residual16",
+      "status": "PASS",
+      "seconds": 11.143371591999312,
+      "raw_durable_and_science_hashes_verified": true,
+      "exact_frozen_grade_reproduced": true,
+      "diagnostic_registration_verified": true,
+      "prior": {
+        "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "sampling": {
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise",
+        "eval_output_noise": "clean"
+      },
+      "recorded_rng_audits": 24,
+      "recorded_rng_deviations": 0,
+      "actual_a2": {
+        "applied": 0,
+        "calls": 600,
+        "eligible": 0,
+        "enabled": true,
+        "probe": {
+          "kind": "synthetic_public_component",
+          "measurements": {
+            "damping_branch_applied": true,
+            "initial_sparse_history_total": 8,
+            "optimizer_updates": 2
+          },
+          "status": "PASS",
+          "synthetic_state": true,
+          "training_evidence": false
+        },
+        "reason": "host conditions did not activate the branch; targeted component check required",
+        "requested": true
+      },
+      "metrics": {
+        "distribution_tv": 0.0,
+        "hq": 0.90625,
+        "mean_rmse": 0.025580957531929016,
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.5,
+          0.40625
+        ],
+        "step": 600
+      },
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 8,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 8,
+        "first_pass_step": 425,
+        "stable_from_step": 425,
+        "stable_from_seconds": null,
+        "confirmed_step": 525,
+        "confirmed_seconds": null
+      }
+    }
+  ],
+  "smoke_pair_seconds": 29.073682349000592,
+  "calibration": {
+    "profile": "host-profile-transfer-v1",
+    "exact_saved_reduction_reproduced": true,
+    "true_reject": 1,
+    "measured_cells": 5,
+    "total_cells": 57,
+    "unknown_cells": 52,
+    "smoke_seconds": 40.2437992010091,
+    "total_known_seconds": 156.2837659950019,
+    "reference_full_cost": null,
+    "adoption": "BLOCKED",
+    "receipt_issues": []
+  },
+  "queue": {
+    "current_revision_submissions": {
+      "5885f849de55d9603a1bdac7": {
+        "status": "completed",
+        "lifecycle": "awaiting_readout",
+        "campaign": "calibration-host-profile-smoke-pair-v1"
+      },
+      "89ee9af850e27926df7661de": {
+        "status": "completed",
+        "lifecycle": "awaiting_readout",
+        "campaign": "calibration-host-profile-first-cells-v1"
+      }
+    },
+    "active_k3p_submissions": [],
+    "terminal_subscribed_jobs": 5,
+    "inert_unsubscribed_unattempted_placeholders": 31,
+    "current_revision_live_worker_processes": 0,
+    "reserved_seconds": 0
+  },
+  "safe_to_conclude_current_baseline": true,
+  "conclusion_scope": "Close this completed baseline evidence batch; this is not qualification or calibration adoption. No lifecycle command was issued."
+}

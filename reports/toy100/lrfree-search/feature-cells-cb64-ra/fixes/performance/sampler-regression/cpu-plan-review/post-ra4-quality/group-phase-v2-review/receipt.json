@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-09-30T05:38:09.326482+00:00",
+  "finished_utc": "2026-09-30T05:38:09.382225+00:00",
+  "scope": "one private CPU subprocess inherited-flock fixture and read-only wrapper delta/83-map proof",
+  "wrapper_source_sha256": "5bc48310ee58859a4389dd547599934f3f46fdf803e7e548d85bdc4091168707",
+  "preparation_sha256": "1fda9828e929a7dab0e2a8e19d56774fe95b78d860b88c49c50514f63668dfbb",
+  "base_phase_ready_sha256": "8dd57424f2c64bbfbe27ceff3e059cc8cd73e840c3319b253e5e66ad34f70d45",
+  "base_source_sha256": "88eba85ce2519fd29f8b8c58a158514e102b31282e9de6aebf4e9cc243dfb4b3",
+  "verified_base_inputs": 83,
+  "full_v1_bytes_restored_after_two_changes": true,
+  "private_parent": {
+    "parent": 627990,
+    "child": 627991,
+    "fd": 3
+  },
+  "private_child": {
+    "pid": 627991,
+    "ppid": 1286,
+    "fd": 3,
+    "ino": 138098098
+  },
+  "parent_exited_before_lock_probe": true,
+  "lock_blocked_while_orphan_child_alive": true,
+  "lock_acquired_after_child_exit": true,
+  "child_terminal_state": "gone",
+  "child_held_fd_until_exit": true,
+  "real_job_operations": 0,
+  "signals": 0,
+  "cuda_imports": 0,
+  "unchanged": [
+    "owner gpu_command",
+    "all numerical inputs/law",
+    "GPU settings",
+    "pre/post guards",
+    "output paths",
+    "normal-path receipts"
+  ],
+  "remaining_limit": "An interrupted phase may still lack PHASE-RESULT; preserve partial evidence. The inherited serial lock now prevents another cooperative phase until the profiler exits."
+}

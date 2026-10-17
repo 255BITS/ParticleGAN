@@ -1,0 +1,29 @@
+{
+ "steps": 7000,
+ "seed": 1234,
+ "num_particles": 20000,
+ "z_dim": 2,
+ "batch_size": 2048,
+ "toy100_model": "affine_square_v1",
+ "g_hidden": 128,
+ "d_hidden": 128,
+ "n_hidden": 3,
+ "fourier": 3,
+ "eval_samples": 20000,
+ "snapshot_samples": 4096,
+ "eval_interval": 250,
+ "snapshot_interval": 250,
+ "stable_evals": 5,
+ "early_eval_steps": [
+  0,
+  1,
+  10,
+  25,
+  50,
+  100
+ ],
+ "threads": 1,
+ "problem": "grid100",
+ "device": "cuda:0",
+ "host": "frozen native100 (constraints_simple_regularization.json resources, canonical CUDA fixture); learner = candidate public GANTrainer, see job-header.json"
+}

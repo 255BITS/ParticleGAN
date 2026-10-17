@@ -1,0 +1,74 @@
+{
+  "attempt_ids": [
+    "33bc62d63509425e9f7237ef19ee7374"
+  ],
+  "candidate_id": "forge-no-critic-penalty",
+  "candidate_revision": "aa9e200be9f520bf97e8d3408829b852188c80e2b64aa6f02430f58eaec117c9",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "BCap passed the same fixed smoke and five quality tasks in this source/runtime cohort. K3P, KA2 and matched R1/R2 remain smoke-negative; this does not rank unmeasured quality or replace earlier protocol-specific evidence.",
+  "conclusion": "This technique failed the full 80-update two_pole smoke gate: {'grad_med': 1.2546037435531616, 'mean_abs': 0.4477476179599762}. One completed attempt cost 7.827370992 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.",
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Removing the public critic gradient penalty tests whether cheap stability gates reject a substantively weakened formulation before quality work.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "33bc62d63509425e9f7237ef19ee7374",
+        "result_hash": "df936efa36ecc13b2b5e3bd39266602ab10d6a0b63b07d75e40ea8cd3d8a96f8",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "publication": {
+    "kind": "compact_readout_projection",
+    "original_archive_member": "full-readouts/readout-28f0c9140b4cfeef57f23dd2.json",
+    "original_file_sha256": "b4513072a7118bfd9ec309e6d11325850eb621b27720b53bbf46aae9f87eaa45",
+    "qualification_input": false
+  },
+  "qualification_reuse": false,
+  "record_id": "readout-28f0c9140b4cfeef57f23dd2",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/33bc62d63509425e9f7237ef19ee7374.json"
+  },
+  "task_results": [
+    {
+      "_attempt_id": "33bc62d63509425e9f7237ef19ee7374",
+      "compatibility_key": "99aa4bfdc1cab66094d61e69a2307c09407a35f1a9aa16f2094d3da6dc7d804a",
+      "cost": {
+        "adapter_seconds": 0.33725218300241977,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 7.827370991988573,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.33492768695578,
+        "wall_seconds": 7.827370991988573
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 1.2546037435531616,
+        "mean_abs": 0.4477476179599762
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    }
+  ]
+}

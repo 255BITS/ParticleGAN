@@ -1,0 +1,90 @@
+{
+  "byte_unchanged_from_base": {
+    "configs/forge/tasks/ring16_acquisition.json": "f891d49905521dc73baccc7d60db42f8ffbd4e15da8c96dea211a75e6a4a0084",
+    "reports/forge/gaussian-smoke-inventory/final-v4/readout.json": "d3f62ea8e01f8d8c4efe2c97e01c84b8af4da6776612b4519934944f8ff118c9",
+    "reports/forge/technique-inventory.json": "7a21ba2118ff46f5079aaa5d661f8f47298763e89b8a9f590be4b31b8701390a",
+    "reports/forge/technique-inventory.md": "ff3dbaec98de9328d676943a94301414e78baeca30071a62df93790185bd7a45"
+  },
+  "definitions": {
+    "candidates": 405,
+    "family_documentation": {
+      "families": 22,
+      "status": "valid",
+      "tags": 12
+    },
+    "studies": [
+      "pure-bcap-baseline-v1"
+    ],
+    "tasks": 64,
+    "training_launched": false,
+    "views": [
+      "adaptation",
+      "clockfree_continuous",
+      "discriminator_stability",
+      "formulation_comparison",
+      "host_profile_transfer",
+      "k3p_two_pole_horizon",
+      "quality_coverage",
+      "tier1_policy_coverage"
+    ]
+  },
+  "history_coverage": {
+    "declared_count": 11774,
+    "missing": [],
+    "stale": [],
+    "tracked_count": 11774,
+    "unclassified": [],
+    "valid": true
+  },
+  "input_files": {
+    "reports/forge/records/ring16-failure-saved-diagnosis-v1.json": "f18da07789418c422c66155c7d490504eee4f595dff6d8fad2cb2ded67ce4e25",
+    "reports/forge/ring16-failure/README.md": "b3b5afaa3415bf0bde78312401d7055522d69060f473078718f073b46702f684",
+    "reports/forge/ring16-failure/analyze_saved.py": "55dcfc132d98c9521456a00af12c7d91439a2ba7f08cc5e6b587e10a4407d7a5",
+    "reports/forge/ring16-failure/metrics.svg": "7fa13d9024b1679c8c85ea781602cf813da62f9d53170921c8de403d400ea971",
+    "reports/forge/ring16-failure/plot_saved.py": "32d1cdebf591a9f2bf0f4e3f9dbb608cbf53539b27bc20f6f8d04731fd90bd04",
+    "reports/forge/ring16-failure/results.json": "9f4008f7d0d79e0ffc4ce56b87ecd15f3c4c4fdaf11b9549155f2ec22d20ace8"
+  },
+  "memory_check": {
+    "added_inputs": [],
+    "changed_inputs": [],
+    "coverage_scope": "Registered compact publication schemas and normalized records; original artifact availability is separate.",
+    "fresh": true,
+    "inventory_coverage": {
+      "declared_count": 11774,
+      "missing": [],
+      "stale": [],
+      "tracked_count": 11774,
+      "unclassified": [],
+      "valid": true
+    },
+    "memory_current": true,
+    "next_action": null,
+    "publication_materialization_current": true,
+    "publication_record_count": 304,
+    "qualification_refresh": {
+      "mode": "preserved_published_evidence",
+      "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
+      "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
+    },
+    "record_count": 602,
+    "reducer_current": true,
+    "removed_inputs": [],
+    "status": "CURRENT",
+    "view_count": 8
+  },
+  "new_model_forwards": false,
+  "new_sampling_draws": false,
+  "new_training": false,
+  "plot_visual_check": "Saved metric plot labels, bounds, log axis, component indices and execution-history legends verified.",
+  "preserved_base_commit": "2859975707eb3ea4d31958ad1b03e9e69e148a53",
+  "qualification_input": false,
+  "report_links_checked": 16,
+  "saved_analysis": "19 input files hashed;91 scientific files matched;24 historical/current prefix and96 v3/v4 exact sample pairs;14 final named stream pairs;16-component covariance reconstruction/decomposition on both endpoints;original grades and full schedules checked.",
+  "schema_version": 1,
+  "scientific_code_and_declaration_diff": [],
+  "scope": "reporting_verification",
+  "stdout": {
+    "path": "runs/reports/ring16-failure/verification.log",
+    "sha256": "1ac614f8d6ab0bd3edb5bbd91bd4343c20ac3251509814c76f10ff26c8ef2fb5"
+  }
+}

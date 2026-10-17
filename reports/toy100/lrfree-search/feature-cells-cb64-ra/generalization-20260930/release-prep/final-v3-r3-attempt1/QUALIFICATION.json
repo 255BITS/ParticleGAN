@@ -1,0 +1,1682 @@
+{
+  "GPU_operations": 0,
+  "actual_CUDA_default_portability_regression": {
+    "actual_step_calls": 40,
+    "actual_tests": [
+      {
+        "node": "integration-prep/ra16-portability/tests/test_feature_portability.py::test_cuda_default_preserves_feature_reactions_and_checkpoint_replay",
+        "outcome": "passed"
+      }
+    ],
+    "candidate": "RA16-portability",
+    "completed": 1790818545.7889,
+    "quality_scorer_calls": 0,
+    "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/ra16-portable-gpu/attempt-1/COMPLETION.json",
+    "status": "PASS"
+  },
+  "candidate": "RA16-portability",
+  "created_utc": "2026-10-01T01:55:22.227850+00:00",
+  "defects": [],
+  "evidence_validity": "VALID",
+  "finalized_receipt_count": 19,
+  "finalizer_revision": 3,
+  "finalizer_version": 3,
+  "full_suite": {
+    "counts": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 1445,
+      "skipped": 12,
+      "subtests_passed": 18,
+      "xfailed": 0,
+      "xpassed": 0
+    },
+    "evidence_validity": "VALID",
+    "log_sha256": "f88dc03edc69f06b188217c432e118e377a796f18a8ccbf763e142fcfe92f02e",
+    "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra16/FULL-TESTS.json",
+    "returncode": 0,
+    "skip_reasons": [
+      "SKIPPED [1] tests/test_gym_data.py:4: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_gym_lander_live.py:13: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_gym_probe.py:4: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_lunar_flight.py:6: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [4] tests/test_cifar_resume.py:19: opt-in real-data CUDA integration test",
+      "SKIPPED [1] tests/test_image_ddgan.py:72: could not import 'torch_fidelity': No module named 'torch_fidelity'",
+      "SKIPPED [1] tests/test_particle_native_2d.py:29: platform-sensitive convergence gate; opt in with RUN_PARTICLE_NATIVE_RESEARCH_GATE=1",
+      "SKIPPED [1] tests/test_toy100_device.py:45: asserts CUDA is absent",
+      "SKIPPED [1] tests/test_toy100_device.py:55: asserts CUDA is absent"
+    ],
+    "status": "PASS",
+    "summary_line": "1445 passed, 12 skipped, 18 subtests passed in 393.52s (0:06:33)"
+  },
+  "gate_counts": {
+    "moving": {
+      "failed": 0,
+      "passed": 3,
+      "total": 3
+    },
+    "native": {
+      "failed": 0,
+      "passed": 3,
+      "total": 3
+    },
+    "portability": {
+      "failed": 0,
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "gates": [
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "cover": 1.0,
+        "effective_modes": 7.494993209838867,
+        "hq": 0.976806640625,
+        "modes": 8,
+        "n_modes": 8,
+        "pass": true,
+        "seconds": 57.652,
+        "sharp_clean": 1.2606853246688843,
+        "sharp_noisy": 1.3520134687423706,
+        "step": 1200
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "mode_hold"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "distribution_tv": 0.03125,
+        "hq": 1.0,
+        "mean_rmse": 0.031898438930511475,
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "modes": 2,
+        "pass": true,
+        "quality_mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "seconds": 26.545,
+        "sharp_rmse_clean": 0.009162217378616333,
+        "sharp_rmse_noisy": 0.03143363073468208,
+        "step": 600
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "img_intensity2"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "distribution_tv": 0.03125,
+        "hq": 1.0,
+        "mean_rmse": 0.032342731952667236,
+        "mode_fractions": [
+          0.25,
+          0.28125,
+          0.21875,
+          0.25
+        ],
+        "modes": 4,
+        "pass": true,
+        "quality_mode_fractions": [
+          0.25,
+          0.28125,
+          0.21875,
+          0.25
+        ],
+        "seconds": 25.192,
+        "sharp_rmse_clean": 0.0007570504676550627,
+        "sharp_rmse_noisy": 0.030378051102161407,
+        "step": 600
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "img_blobs4"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "distribution_tv": 0.0625,
+        "hq": 0.9375,
+        "mean_rmse": 0.036570727825164795,
+        "mode_fractions": [
+          0.3125,
+          0.25,
+          0.1875,
+          0.25
+        ],
+        "modes": 4,
+        "pass": true,
+        "quality_mode_fractions": [
+          0.25,
+          0.25,
+          0.1875,
+          0.25
+        ],
+        "seconds": 28.998,
+        "sharp_rmse_clean": 0.00031166852568276227,
+        "sharp_rmse_noisy": 0.030419325456023216,
+        "step": 600
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "img_bars4"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "component_counts": [
+          2149,
+          1376,
+          522,
+          49
+        ],
+        "component_covariance_error": 0.5758006386458874,
+        "component_covariance_errors": [
+          0.09259645640850067,
+          0.24094142019748688,
+          0.18632207810878754,
+          1.7833425998687744
+        ],
+        "component_mass": [
+          0.524658203125,
+          0.3359375,
+          0.12744140625,
+          0.011962890625
+        ],
+        "component_min_eigen_ratio": 0.9824706315994263,
+        "covariance_error": 0.1194351464509964,
+        "hq": 0.965087890625,
+        "mass_tv": 0.03593749552965164,
+        "mean_error": 0.08278263360261917,
+        "min_mass_ratio": 0.59814453125,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 66.155,
+        "step": 1200,
+        "sw1_normalized": 0.06416949939426786,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7948341369628906
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_unequal_mass"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "distribution_tv": 0.0,
+        "hq": 1.0,
+        "mean_rmse": 0.03383317217230797,
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "modes": 2,
+        "pass": true,
+        "quality_mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "seconds": 26.304,
+        "sharp_rmse_clean": 0.009935623034834862,
+        "sharp_rmse_noisy": 0.03268525004386902,
+        "step": 600
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "img_stripes2"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "component_counts": [
+          2132,
+          1964
+        ],
+        "component_covariance_error": 0.04582448583096266,
+        "component_covariance_errors": [
+          0.029468761757016182,
+          0.062180209904909134
+        ],
+        "component_mass": [
+          0.5205078125,
+          0.4794921875
+        ],
+        "component_min_eigen_ratio": 0.9130980968475342,
+        "covariance_error": 0.014958265237510204,
+        "hq": 0.989501953125,
+        "mass_tv": 0.0205078125,
+        "mean_error": 0.0442313551902771,
+        "min_mass_ratio": 0.958984375,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 47.281,
+        "step": 1200,
+        "sw1_normalized": 0.03474474542515049,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0601637363433838
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_two_broad"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "component_counts": [
+          1017,
+          1047,
+          1002,
+          1030
+        ],
+        "component_covariance_error": 0.2680711420252919,
+        "component_covariance_errors": [
+          0.25894054770469666,
+          0.3352530002593994,
+          0.41735488176345825,
+          0.06073613837361336
+        ],
+        "component_mass": [
+          0.248291015625,
+          0.255615234375,
+          0.24462890625,
+          0.25146484375
+        ],
+        "component_min_eigen_ratio": 0.4256795346736908,
+        "covariance_error": 0.025261344388127327,
+        "hq": 0.983154296875,
+        "mass_tv": 0.007080078125,
+        "mean_error": 0.024808622896671295,
+        "min_mass_ratio": 0.978515625,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 67.404,
+        "step": 1200,
+        "sw1_normalized": 0.02183454354168964,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.138371229171753
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_unequal_width"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "component_counts": [
+          1269,
+          1481,
+          1346
+        ],
+        "component_covariance_error": 0.09949495798597734,
+        "component_covariance_errors": [
+          0.015144900418817997,
+          0.23125939071178436,
+          0.052080582827329636
+        ],
+        "component_mass": [
+          0.309814453125,
+          0.361572265625,
+          0.32861328125
+        ],
+        "component_min_eigen_ratio": 0.6999159455299377,
+        "covariance_error": 0.027186516672372818,
+        "hq": 0.985107421875,
+        "mass_tv": 0.028238937258720398,
+        "mean_error": 0.02992950938642025,
+        "min_mass_ratio": 0.929443359375,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 61.771,
+        "step": 1200,
+        "sw1_normalized": 0.02808553555065623,
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "target_scale": 2.040409564971924
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_anisotropic"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "covariance_error": 0.07984843105077744,
+        "mean_error": 0.014165406115353107,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 38.546,
+        "step": 1200,
+        "sw1_normalized": 0.02576811382492637,
+        "target_scale": 0.8509407043457031
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_overlap"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "covariance_error": 0.04437887668609619,
+        "mean_error": 0.027347680181264877,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 54.778,
+        "step": 1600,
+        "sw1_normalized": 0.026478310166719695,
+        "target_scale": 1.240945816040039
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_spiral"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "cover": 1.0,
+        "effective_modes": 7.998276710510254,
+        "hq": 0.991943359375,
+        "modes": 8,
+        "n_modes": 8,
+        "pass": true,
+        "seconds": 1048.274,
+        "step": 7500
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/stationary/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "stationary"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "acc_abs_cov_trace_bias": 0.014538749700289122,
+        "acc_accuracy_pass": true,
+        "acc_accuracy_score": 0.46727010256809565,
+        "acc_center_rms_sigma": 0.16660712176422504,
+        "acc_cov_trace_bias": 0.014538749700289122,
+        "acc_frozen_pass": true,
+        "acc_mass_tv": 0.03280000000000001,
+        "acc_passed": true,
+        "acc_radial_ks": 0.01375962551126797,
+        "holdout_abs_cov_trace_bias": 0.012156725314119488,
+        "holdout_accuracy_pass": true,
+        "holdout_accuracy_score": 0.34655958134088716,
+        "holdout_center_rms_sigma": 0.13973261075607618,
+        "holdout_cov_trace_bias": 0.012156725314119488,
+        "holdout_frozen_pass": true,
+        "holdout_mass_tv": 0.019510000000000003,
+        "holdout_passed": true,
+        "holdout_precision": 0.98453,
+        "holdout_radial_ks": 0.009633654071012243,
+        "hq": 0.9825,
+        "mass_tv": 0.032799999999999996,
+        "max_cov_eig_ratio": 1.3475564418456727,
+        "max_mode_mass": 0.01155,
+        "max_radial_median_ratio": 1.1780665798263272,
+        "min_cov_eig_ratio": 0.6634834837761125,
+        "min_hq_mode_mass": 0.0084,
+        "min_radial_median_ratio": 0.8814416511708483,
+        "modes": 100,
+        "output_sigma": 0.028999999165534973,
+        "precision": 0.9825,
+        "sharp_clean": 0.29834476113319397,
+        "sharp_noisy": 1.1995784044265747,
+        "step": 7000
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "native",
+      "latest_source_equivalence": "Explicit zero-fire then defaultCPU/valid-checkpoint bridges",
+      "native": {
+        "accuracy_status": "PASS",
+        "coverage_final": {
+          "acc_abs_cov_trace_bias": 0.014538749700289122,
+          "acc_accuracy_pass": true,
+          "acc_accuracy_score": 0.46727010256809565,
+          "acc_center_rms_sigma": 0.16660712176422504,
+          "acc_cov_trace_bias": 0.014538749700289122,
+          "acc_frozen_pass": true,
+          "acc_mass_tv": 0.03280000000000001,
+          "acc_passed": true,
+          "acc_radial_ks": 0.01375962551126797,
+          "holdout_abs_cov_trace_bias": 0.012156725314119488,
+          "holdout_accuracy_pass": true,
+          "holdout_accuracy_score": 0.34655958134088716,
+          "holdout_center_rms_sigma": 0.13973261075607618,
+          "holdout_cov_trace_bias": 0.012156725314119488,
+          "holdout_frozen_pass": true,
+          "holdout_mass_tv": 0.019510000000000003,
+          "holdout_passed": true,
+          "holdout_precision": 0.98453,
+          "holdout_radial_ks": 0.009633654071012243,
+          "hq": 0.9825,
+          "mass_tv": 0.032799999999999996,
+          "max_cov_eig_ratio": 1.3475564418456727,
+          "max_mode_mass": 0.01155,
+          "max_radial_median_ratio": 1.1780665798263272,
+          "min_cov_eig_ratio": 0.6634834837761125,
+          "min_hq_mode_mass": 0.0084,
+          "min_radial_median_ratio": 0.8814416511708483,
+          "modes": 100,
+          "output_sigma": 0.028999999165534973,
+          "precision": 0.9825,
+          "sharp_clean": 0.29834476113319397,
+          "sharp_noisy": 1.1995784044265747,
+          "step": 7000
+        },
+        "coverage_status": "PASS",
+        "holdout": {
+          "abs_cov_trace_bias": 0.012156725314119488,
+          "accuracy_pass": true,
+          "center_rms_sigma": 0.13973261075607618,
+          "frozen_pass": true,
+          "mass_tv": 0.019510000000000003,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98453,
+          "radial_ks": 0.009633654071012243
+        },
+        "paired_clouds": "Original five20k terminal clouds + final20k + independent100k; shapes qualified by unchanged collector",
+        "terminal_checks": [
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.020286077335551767,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.15942999612840997,
+              "frozen_pass": true,
+              "mass_tv": 0.033350000000000005,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.984,
+              "radial_ks": 0.0137365997872122
+            },
+            "passed": true,
+            "step": 6000
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.020367928598869378,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.16353114349610257,
+              "frozen_pass": true,
+              "mass_tv": 0.033350000000000005,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.98255,
+              "radial_ks": 0.015768824119447022
+            },
+            "passed": true,
+            "step": 6250
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.016642410619821746,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.16334958638842786,
+              "frozen_pass": true,
+              "mass_tv": 0.033350000000000005,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.98225,
+              "radial_ks": 0.013177837472568399
+            },
+            "passed": true,
+            "step": 6500
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.020743922125255443,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.1733646048214234,
+              "frozen_pass": true,
+              "mass_tv": 0.0335,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9824,
+              "radial_ks": 0.015158844669902694
+            },
+            "passed": true,
+            "step": 6750
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.014538749700289122,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.16660712176422504,
+              "frozen_pass": true,
+              "mass_tv": 0.03280000000000001,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9825,
+              "radial_ks": 0.01375962551126797
+            },
+            "passed": true,
+            "step": 7000
+          }
+        ]
+      },
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/grid100/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-native.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "grid100"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "acc_abs_cov_trace_bias": 0.017777074394604186,
+        "acc_accuracy_pass": true,
+        "acc_accuracy_score": 0.4288592283949333,
+        "acc_center_rms_sigma": 0.1364375762756252,
+        "acc_cov_trace_bias": 0.017777074394604186,
+        "acc_frozen_pass": true,
+        "acc_mass_tv": 0.030449999999999998,
+        "acc_passed": true,
+        "acc_radial_ks": 0.013919131530222617,
+        "holdout_abs_cov_trace_bias": 0.006633538810075557,
+        "holdout_accuracy_pass": true,
+        "holdout_accuracy_score": 0.26187963059897773,
+        "holdout_center_rms_sigma": 0.11644842800795982,
+        "holdout_cov_trace_bias": 0.006633538810075557,
+        "holdout_frozen_pass": true,
+        "holdout_mass_tv": 0.014029999999999997,
+        "holdout_passed": true,
+        "holdout_precision": 0.98462,
+        "holdout_radial_ks": 0.0066043064368809246,
+        "hq": 0.98535,
+        "mass_tv": 0.030450000000000005,
+        "max_cov_eig_ratio": 1.3948209113094188,
+        "max_mode_mass": 0.01195,
+        "max_radial_median_ratio": 1.1508061909538145,
+        "min_cov_eig_ratio": 0.69270186331834,
+        "min_hq_mode_mass": 0.0083,
+        "min_radial_median_ratio": 0.8851457552813397,
+        "modes": 100,
+        "output_sigma": 0.028999999165534973,
+        "precision": 0.98535,
+        "sharp_clean": 0.2781251072883606,
+        "sharp_noisy": 1.1951535940170288,
+        "step": 7000
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "native",
+      "latest_source_equivalence": "Explicit zero-fire then defaultCPU/valid-checkpoint bridges",
+      "native": {
+        "accuracy_status": "PASS",
+        "coverage_final": {
+          "acc_abs_cov_trace_bias": 0.017777074394604186,
+          "acc_accuracy_pass": true,
+          "acc_accuracy_score": 0.4288592283949333,
+          "acc_center_rms_sigma": 0.1364375762756252,
+          "acc_cov_trace_bias": 0.017777074394604186,
+          "acc_frozen_pass": true,
+          "acc_mass_tv": 0.030449999999999998,
+          "acc_passed": true,
+          "acc_radial_ks": 0.013919131530222617,
+          "holdout_abs_cov_trace_bias": 0.006633538810075557,
+          "holdout_accuracy_pass": true,
+          "holdout_accuracy_score": 0.26187963059897773,
+          "holdout_center_rms_sigma": 0.11644842800795982,
+          "holdout_cov_trace_bias": 0.006633538810075557,
+          "holdout_frozen_pass": true,
+          "holdout_mass_tv": 0.014029999999999997,
+          "holdout_passed": true,
+          "holdout_precision": 0.98462,
+          "holdout_radial_ks": 0.0066043064368809246,
+          "hq": 0.98535,
+          "mass_tv": 0.030450000000000005,
+          "max_cov_eig_ratio": 1.3948209113094188,
+          "max_mode_mass": 0.01195,
+          "max_radial_median_ratio": 1.1508061909538145,
+          "min_cov_eig_ratio": 0.69270186331834,
+          "min_hq_mode_mass": 0.0083,
+          "min_radial_median_ratio": 0.8851457552813397,
+          "modes": 100,
+          "output_sigma": 0.028999999165534973,
+          "precision": 0.98535,
+          "sharp_clean": 0.2781251072883606,
+          "sharp_noisy": 1.1951535940170288,
+          "step": 7000
+        },
+        "coverage_status": "PASS",
+        "holdout": {
+          "abs_cov_trace_bias": 0.006633538810075557,
+          "accuracy_pass": true,
+          "center_rms_sigma": 0.11644842800795982,
+          "frozen_pass": true,
+          "mass_tv": 0.014029999999999997,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98462,
+          "radial_ks": 0.0066043064368809246
+        },
+        "paired_clouds": "Original five20k terminal clouds + final20k + independent100k; shapes qualified by unchanged collector",
+        "terminal_checks": [
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.013655686655786203,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.12296672028515564,
+              "frozen_pass": true,
+              "mass_tv": 0.03189999999999999,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.98695,
+              "radial_ks": 0.010102303534271662
+            },
+            "passed": true,
+            "step": 6000
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.018938503730609346,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.1280875380541503,
+              "frozen_pass": true,
+              "mass_tv": 0.031099999999999996,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9874,
+              "radial_ks": 0.01218688215378938
+            },
+            "passed": true,
+            "step": 6250
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.01906384695504637,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.14285840897459395,
+              "frozen_pass": true,
+              "mass_tv": 0.0306,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9865,
+              "radial_ks": 0.013396587078247757
+            },
+            "passed": true,
+            "step": 6500
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.021830433788105008,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.13608617286921781,
+              "frozen_pass": true,
+              "mass_tv": 0.0306,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9847,
+              "radial_ks": 0.01460870236118983
+            },
+            "passed": true,
+            "step": 6750
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.017777074394604186,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.1364375762756252,
+              "frozen_pass": true,
+              "mass_tv": 0.030449999999999998,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9854,
+              "radial_ks": 0.013919131530222617
+            },
+            "passed": true,
+            "step": 7000
+          }
+        ]
+      },
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/rotated100/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-native.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "rotated100"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "acc_abs_cov_trace_bias": 0.003013395044575873,
+        "acc_accuracy_pass": true,
+        "acc_accuracy_score": 0.33241022167893947,
+        "acc_center_rms_sigma": 0.13574737701973882,
+        "acc_cov_trace_bias": -0.003013395044575873,
+        "acc_frozen_pass": true,
+        "acc_mass_tv": 0.029099999999999997,
+        "acc_passed": true,
+        "acc_radial_ks": 0.005430802046852201,
+        "holdout_abs_cov_trace_bias": 0.013583609196344826,
+        "holdout_accuracy_pass": true,
+        "holdout_accuracy_score": 0.2709135386538677,
+        "holdout_center_rms_sigma": 0.11397180765418091,
+        "holdout_cov_trace_bias": -0.013583609196344826,
+        "holdout_frozen_pass": true,
+        "holdout_mass_tv": 0.015850000000000003,
+        "holdout_passed": true,
+        "holdout_precision": 0.98659,
+        "holdout_radial_ks": 0.004551694308578047,
+        "hq": 0.9863,
+        "mass_tv": 0.0291,
+        "max_cov_eig_ratio": 1.309702555511581,
+        "max_mode_mass": 0.0122,
+        "max_radial_median_ratio": 1.165496004207532,
+        "min_cov_eig_ratio": 0.6405448350673867,
+        "min_hq_mode_mass": 0.0082,
+        "min_radial_median_ratio": 0.8673405272585325,
+        "modes": 100,
+        "output_sigma": 0.028999999165534973,
+        "precision": 0.9863,
+        "sharp_clean": 0.21592609584331512,
+        "sharp_noisy": 1.1808825731277466,
+        "step": 7000
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "native",
+      "latest_source_equivalence": "Explicit zero-fire then defaultCPU/valid-checkpoint bridges",
+      "native": {
+        "accuracy_status": "PASS",
+        "coverage_final": {
+          "acc_abs_cov_trace_bias": 0.003013395044575873,
+          "acc_accuracy_pass": true,
+          "acc_accuracy_score": 0.33241022167893947,
+          "acc_center_rms_sigma": 0.13574737701973882,
+          "acc_cov_trace_bias": -0.003013395044575873,
+          "acc_frozen_pass": true,
+          "acc_mass_tv": 0.029099999999999997,
+          "acc_passed": true,
+          "acc_radial_ks": 0.005430802046852201,
+          "holdout_abs_cov_trace_bias": 0.013583609196344826,
+          "holdout_accuracy_pass": true,
+          "holdout_accuracy_score": 0.2709135386538677,
+          "holdout_center_rms_sigma": 0.11397180765418091,
+          "holdout_cov_trace_bias": -0.013583609196344826,
+          "holdout_frozen_pass": true,
+          "holdout_mass_tv": 0.015850000000000003,
+          "holdout_passed": true,
+          "holdout_precision": 0.98659,
+          "holdout_radial_ks": 0.004551694308578047,
+          "hq": 0.9863,
+          "mass_tv": 0.0291,
+          "max_cov_eig_ratio": 1.309702555511581,
+          "max_mode_mass": 0.0122,
+          "max_radial_median_ratio": 1.165496004207532,
+          "min_cov_eig_ratio": 0.6405448350673867,
+          "min_hq_mode_mass": 0.0082,
+          "min_radial_median_ratio": 0.8673405272585325,
+          "modes": 100,
+          "output_sigma": 0.028999999165534973,
+          "precision": 0.9863,
+          "sharp_clean": 0.21592609584331512,
+          "sharp_noisy": 1.1808825731277466,
+          "step": 7000
+        },
+        "coverage_status": "PASS",
+        "holdout": {
+          "abs_cov_trace_bias": 0.013583609196344826,
+          "accuracy_pass": true,
+          "center_rms_sigma": 0.11397180765418091,
+          "frozen_pass": true,
+          "mass_tv": 0.015850000000000003,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98659,
+          "radial_ks": 0.004551694308578047
+        },
+        "paired_clouds": "Original five20k terminal clouds + final20k + independent100k; shapes qualified by unchanged collector",
+        "terminal_checks": [
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.005800317572324354,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.14064659287257308,
+              "frozen_pass": true,
+              "mass_tv": 0.0297,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.98475,
+              "radial_ks": 0.0063510195005216374
+            },
+            "passed": true,
+            "step": 6000
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.003821248727405746,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.1283157155902482,
+              "frozen_pass": true,
+              "mass_tv": 0.0297,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9841,
+              "radial_ks": 0.006113996507375652
+            },
+            "passed": true,
+            "step": 6250
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.0022736006951313836,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.12705786036697572,
+              "frozen_pass": true,
+              "mass_tv": 0.029249999999999995,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9858,
+              "radial_ks": 0.005231347781138651
+            },
+            "passed": true,
+            "step": 6500
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.0028026074678463297,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.13548131925847373,
+              "frozen_pass": true,
+              "mass_tv": 0.02915,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9853,
+              "radial_ks": 0.005658636531089001
+            },
+            "passed": true,
+            "step": 6750
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.003013395044575873,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.13574737701973882,
+              "frozen_pass": true,
+              "mass_tv": 0.029099999999999997,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9863,
+              "radial_ks": 0.005430802046852201
+            },
+            "passed": true,
+            "step": 7000
+          }
+        ]
+      },
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/staggered100/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-native.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "staggered100"
+    },
+    {
+      "baseline": {
+        "hq": 0.9464,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "grid100"
+      },
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA15-partial-recovery",
+      "fresh_latest_candidate_execution": false,
+      "kind": "moving",
+      "latest_source_equivalence": "Explicit RA15\u2192latest defaultCPU/valid-checkpoint bridge",
+      "original_fresh_execution": true,
+      "postturn": [
+        {
+          "hq": 0.9379,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.8517600000000001,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.962,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1500,
+          "required_hq": 0.8517600000000001,
+          "target_deg": 60
+        }
+      ],
+      "quality_status": "PASS",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/grid100/COMPLETION.json",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+      "task": "grid100"
+    },
+    {
+      "baseline": {
+        "hq": 0.9609,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "rotated100"
+      },
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA15-partial-recovery",
+      "fresh_latest_candidate_execution": false,
+      "kind": "moving",
+      "latest_source_equivalence": "Explicit RA15\u2192latest defaultCPU/valid-checkpoint bridge",
+      "original_fresh_execution": true,
+      "postturn": [
+        {
+          "hq": 0.9609,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.86481,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.9259,
+          "modes": 98,
+          "passed": true,
+          "period_end": 1500,
+          "required_hq": 0.86481,
+          "target_deg": 60
+        }
+      ],
+      "quality_status": "PASS",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/COMPLETION.json",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+      "task": "rotated100"
+    },
+    {
+      "baseline": {
+        "hq": 0.9548,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "staggered100"
+      },
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA15-partial-recovery",
+      "fresh_latest_candidate_execution": false,
+      "kind": "moving",
+      "latest_source_equivalence": "Explicit RA15\u2192latest defaultCPU/valid-checkpoint bridge",
+      "original_fresh_execution": true,
+      "postturn": [
+        {
+          "hq": 0.934,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.85932,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.9476,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1500,
+          "required_hq": 0.85932,
+          "target_deg": 60
+        }
+      ],
+      "quality_status": "PASS",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/staggered100/COMPLETION.json",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+      "task": "staggered100"
+    },
+    {
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA15-partial-recovery",
+      "final": {
+        "cover": 1.0,
+        "effective_modes": 7.995912075042725,
+        "hq": 0.9951171875,
+        "modes": 8,
+        "n_modes": 8,
+        "pass": true,
+        "seconds": 640.628,
+        "step": 4600
+      },
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit RA15\u2192latest defaultCPU/valid-checkpoint bridge",
+      "native": null,
+      "original_fresh_execution": true,
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/runs/ring_shift/acceptance-receipt.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+      "task": "ring_shift"
+    }
+  ],
+  "historical_RA13_full_suite": {
+    "candidate": "RA13-settled",
+    "inherited_as_ra14_test_counts": false,
+    "log_sha256": "f8eac0d5371d833a7ae280db88495dfb8fec22843be2314c351a83ff4c5bfd07",
+    "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2/FULL-TESTS.json",
+    "skip_reasons": [
+      "SKIPPED [1] tests/test_gym_data.py:4: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_gym_lander_live.py:13: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_gym_probe.py:4: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_lunar_flight.py:6: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [4] tests/test_cifar_resume.py:19: opt-in real-data CUDA integration test",
+      "SKIPPED [1] tests/test_image_ddgan.py:72: could not import 'torch_fidelity': No module named 'torch_fidelity'",
+      "SKIPPED [1] tests/test_particle_native_2d.py:29: platform-sensitive convergence gate; opt in with RUN_PARTICLE_NATIVE_RESEARCH_GATE=1",
+      "SKIPPED [1] tests/test_toy100_device.py:45: asserts CUDA is absent",
+      "SKIPPED [1] tests/test_toy100_device.py:55: asserts CUDA is absent"
+    ],
+    "status": "PASS",
+    "summary_line": "1404 passed, 12 skipped, 18 subtests passed in 844.97s (0:14:04)"
+  },
+  "historical_RA14_moving_gates": [
+    {
+      "baseline": {
+        "hq": 0.9464,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "grid100"
+      },
+      "evidence_validity": "VALID",
+      "kind": "moving",
+      "postturn": [
+        {
+          "hq": 0.9416,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.8517600000000001,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.9624,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1500,
+          "required_hq": 0.8517600000000001,
+          "target_deg": 60
+        }
+      ],
+      "quality_status": "PASS",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/grid100/COMPLETION.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-moving.json",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "grid100"
+    },
+    {
+      "baseline": {
+        "hq": 0.9609,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "rotated100"
+      },
+      "evidence_validity": "VALID",
+      "kind": "moving",
+      "postturn": [
+        {
+          "hq": 0.9548,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.86481,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.8557,
+          "modes": 99,
+          "passed": false,
+          "period_end": 1500,
+          "required_hq": 0.86481,
+          "target_deg": 60
+        }
+      ],
+      "quality_status": "FAIL",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/rotated100/COMPLETION.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-moving.json",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "rotated100"
+    },
+    {
+      "baseline": {
+        "hq": 0.9548,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "staggered100"
+      },
+      "evidence_validity": "VALID",
+      "kind": "moving",
+      "postturn": [
+        {
+          "hq": 0.9325,
+          "modes": 99,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.85932,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.9728,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1500,
+          "required_hq": 0.85932,
+          "target_deg": 60
+        }
+      ],
+      "quality_status": "PASS",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/staggered100/COMPLETION.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-moving.json",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "staggered100"
+    }
+  ],
+  "historical_RA14_moving_queue": {
+    "closed_for_scope": true,
+    "lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+    "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-moving.json",
+    "recorded_count": 3,
+    "required_count": 3,
+    "retained_interrupted_all": false,
+    "status": "FAIL"
+  },
+  "latest_source_bridges": {
+    "no_fire": {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/NO-FIRE-EXECUTION-BRIDGE.json",
+      "sha256": "f32b789b6bcb62af3b797844465d56b13182ab8207d486301844c66a98b2a8fe",
+      "status": "PASS_SOURCE_EQUIVALENCE_ONLY_FRESH_AFFECTED_GATES_PENDING"
+    },
+    "portability": {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra16/EXECUTION-BRIDGE.json",
+      "sha256": "2c24e8b23be4a5f756938e2e13f44907c3cf9b05595a044c819ef32064e18b66",
+      "status": "PASS_DEFAULT_CPU_VALID_CHECKPOINT_SOURCE_EQUIVALENCE_ONLY"
+    }
+  },
+  "learned": {
+    "candidate": "RA14-replay restoration-only bridge",
+    "fresh_latest_training_updates": 0,
+    "fresh_ra14_training_updates": 0,
+    "fresh_updates_per_fixture": 2000,
+    "inherited_final_metrics": {
+      "mnist": {
+        "active_embedding": {
+          "embedding_frechet": 0.5444880363760234,
+          "embedding_precision": 0.869140625,
+          "embedding_recall": 0.84716796875
+        },
+        "class_mass_tv": 0.03639648437499999,
+        "confident_class_coverage": 10,
+        "confident_class_mass": [
+          0.082275390625,
+          0.09033203125,
+          0.064453125,
+          0.065185546875,
+          0.079345703125,
+          0.066162109375,
+          0.074462890625,
+          0.070556640625,
+          0.05908203125,
+          0.07568359375
+        ],
+        "confident_fraction": 0.7275390625,
+        "mean_classifier_confidence": 0.9037254452705383,
+        "pixel_clipping_fraction": 0.40906819701194763,
+        "predicted_class_mass": [
+          0.096923828125,
+          0.099853515625,
+          0.0869140625,
+          0.1015625,
+          0.109130859375,
+          0.08984375,
+          0.09814453125,
+          0.097412109375,
+          0.102783203125,
+          0.117431640625
+        ],
+        "raw_embedding": {
+          "embedding_frechet": 6.852170897247333,
+          "embedding_precision": 0.8798828125,
+          "embedding_recall": 0.85546875
+        }
+      },
+      "toy": {
+        "centre_distance": 0.042550504207611084,
+        "clean_particle_centres": {
+          "centre_distance": 0.02287120744585991,
+          "coverage": 25,
+          "covered_centroid_rms": 0.010440723970532417,
+          "mass_tv": 0.0366796875,
+          "precision": 0.9990234375,
+          "supported_mass": [
+            0.037109375,
+            0.041015625,
+            0.03515625,
+            0.0341796875,
+            0.0390625,
+            0.03515625,
+            0.041015625,
+            0.04296875,
+            0.0361328125,
+            0.041015625,
+            0.0400390625,
+            0.0390625,
+            0.037109375,
+            0.048828125,
+            0.0380859375,
+            0.0361328125,
+            0.041015625,
+            0.044921875,
+            0.041015625,
+            0.0361328125,
+            0.041015625,
+            0.0458984375,
+            0.04296875,
+            0.04296875,
+            0.041015625
+          ],
+          "unsupported_mass": 0.0009765625
+        },
+        "coverage": 25,
+        "covered_centroid_rms": 0.009175768122076988,
+        "mass_tv": 0.05211425781250001,
+        "precision": 0.96533203125,
+        "supported_mass": [
+          0.03515625,
+          0.037353515625,
+          0.0341796875,
+          0.0357666015625,
+          0.03857421875,
+          0.03271484375,
+          0.04248046875,
+          0.0391845703125,
+          0.036865234375,
+          0.0382080078125,
+          0.0399169921875,
+          0.0384521484375,
+          0.0350341796875,
+          0.0455322265625,
+          0.0390625,
+          0.033203125,
+          0.03857421875,
+          0.0421142578125,
+          0.037841796875,
+          0.03955078125,
+          0.03857421875,
+          0.045166015625,
+          0.0413818359375,
+          0.040771484375,
+          0.0396728515625
+        ],
+        "unsupported_mass": 0.03466796875
+      }
+    },
+    "latest_candidate": "RA16-portability",
+    "latest_replay": {
+      "candidate": "RA16-portability",
+      "closed_sha256": "a3457841cc50a3182ba64f696e53eeed9d34244439199595773afae5d3938b71",
+      "fixtures": {
+        "mnist": "PASS",
+        "toy": "PASS"
+      },
+      "fresh_replay_updates_total": 40,
+      "fresh_training_updates": 0,
+      "original_fresh_learned_training_source": "RA13-settled",
+      "original_updates_per_fixture": 2000,
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra16-replay/CLOSED.json",
+      "status": "PASS"
+    },
+    "latest_scope": "Explicit source equivalence plus actual latest native/CPU-map CUDA40 replay",
+    "mnist_comparison": "All10 metric/LR records match corrected E22",
+    "mnist_original_gate": null,
+    "origin": "RA13-settled fresh training",
+    "original_fresh_training_source": "RA13-settled",
+    "replay": {
+      "mnist": "PASS",
+      "toy": "PASS"
+    },
+    "replay_semantic_exclusion": "birth_death.last.eval_seconds only",
+    "toy_original_gate": "PASS"
+  },
+  "model_calls": 0,
+  "numerical_labels": "15 original RA14 quality executions,4 fresh RA15 affected gates, RA13 fresh learned training; latest source qualifies through explicit bridges and actual latest CUDA replay/full suite.",
+  "original_adapter_bridge": {
+    "changes": {
+      "freeze.py": {
+        "after": "caaf3acd3de6459053720d33dca43274a65324fdc317dd36a87c6c2f622cb44d",
+        "before": "bbbcf376e254e6347bffd0b9953802f2871a7f499d565cc012098f8a37f2b6d7"
+      },
+      "run_moving.py": {
+        "after": "c2f8d399416b328886ba2452e86a1398f511c7357c915eb6437617f54cf69df9",
+        "before": "bc3e8eda5d838c942999eada6b1d51cf4cef04009432609f580639bf6559a3a4"
+      },
+      "run_screen.py": {
+        "after": "9e432c55647df3ccd50eca753965f54bfca5a1aa20bd603eca48a537c19eba8b",
+        "before": "7161705fabe419616d5ec93021014011f9a24d1833e925751c73b985b12da5ac"
+      }
+    },
+    "corrected_arithmetic": "Unchanged; diagnostic owner access and frozen harness import path only",
+    "corrected_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+    "original_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+    "preparation": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/ADAPTER-CORRECTIONS.json",
+    "shared_external_file_count": 93,
+    "shared_external_manifest_sha256": "17b7cbbe71b79ae99839bd35f4ea99bd7e8de5b58ddf1f3aabd6d86ad42ad02e",
+    "source_freezes": {
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-moving-r2": "1ef7f4e91457f3bac63d6132bae6a61fb38f2f2b64e62cfc8c0eeca4712b76a9",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f"
+    },
+    "status": "VALID"
+  },
+  "overall_qualification": "PASS",
+  "pending": [],
+  "qualification_base": {
+    "candidate_draft_PR": 223,
+    "observed_upstream_commit": "cabe2084284db923d525918cbf3e18de6f20faac",
+    "observed_upstream_commit_source": "Root fetched and independently reviewed PR155 advancement",
+    "observed_upstream_source_qualification": "PENDING_SEPARATE_BRIDGE_OR_FRESH_EXECUTIONS_AND_SUITE",
+    "original_reference_commit": "f459cb6d6aaaabeb1af076ec53ad7a963618de90",
+    "qualified_RA16_source_commit": "b25de08cfbeef9fe8aa06522324e132c3e71ae0f",
+    "reference_PR": 155,
+    "repository_HEAD_before_RA16_source_commit": "c05ea9f8fe48d5d0e499bc4e6801170b452886f8",
+    "tested_package_source_identity": "Byte-pinned RA16 source based on the original f459 reference"
+  },
+  "quality_qualification": "PASS",
+  "repository_mutations": 0,
+  "required_gate_count": 19,
+  "retained_RA15_cancelled_suite": {
+    "original_waiting_receipt_sha256": "7abbab7c52516cbdaceb3128f36dc7c54294b7e5b32b7668f229e3562208bab9",
+    "owned_pid": 2508216,
+    "owned_pid_start_ticks": 171894418,
+    "reason": "Read-only integration review confirmed two portability/checkpoint defects; latest source suite will run after fixes. Original package/lane/source guards preserved.",
+    "status": "CANCELLED_BEFORE_TEST_EXECUTION",
+    "test_updates": 0
+  },
+  "retained_RA15_replay": "FROZEN_PREPARED_UNLAUNCHED",
+  "retained_attempts": {
+    "original_all": {
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "status": "ERROR"
+    },
+    "original_moving": {
+      "baseline": {
+        "hq": 0.9464,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "grid100"
+      },
+      "completed_updates": 500,
+      "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/moving-grid100.log",
+      "status": "ERROR"
+    },
+    "original_native": {
+      "completed_updates": 0,
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-native.json",
+      "status": "ERROR"
+    },
+    "separate_moving_preparation": {
+      "lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-moving-r2",
+      "source_freeze_sha256": "1ef7f4e91457f3bac63d6132bae6a61fb38f2f2b64e62cfc8c0eeca4712b76a9",
+      "status": "FROZEN_PREPARATION_NEVER_LAUNCHED"
+    }
+  },
+  "retained_failures": [
+    "RA12 static false fires and learned regressions",
+    "RA13 strict learned native/CPU-map replay FAIL",
+    "RA14 first zero-update bridge normalization failure",
+    "RA14 original ALL moving diagnostic ERROR after500 and zero-update native import ERROR",
+    "RA14 original moving rotated100 qualityFAIL at1500",
+    "First RA15 paired window NaN comparison ERROR before updates",
+    "Separate moving-r2 prepared lane and RA15 learned replay prepared but never launched",
+    "RA15 full suite cancelled before execution",
+    "RA15 CPU factory meta mismatch and malformed shape restored before reaction error",
+    "All source preparation failures retained without quality inference"
+  ],
+  "scoreboard_routes": [
+    {
+      "closed_for_scope": true,
+      "lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "recorded_count": 13,
+      "required_count": 13,
+      "retained_interrupted_all": true,
+      "status": "ERROR"
+    },
+    {
+      "closed_for_scope": true,
+      "lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-native.json",
+      "recorded_count": 3,
+      "required_count": 3,
+      "retained_interrupted_all": false,
+      "status": "PASS"
+    },
+    {
+      "closed_for_scope": true,
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/scoreboard-moving.json",
+      "recorded_count": 3,
+      "required_count": 3,
+      "status": "PASS"
+    }
+  ],
+  "scorer_calls": 0,
+  "source_identities": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14": {
+      "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "frozen_file_count": 103,
+      "package_manifest_sha256": "cfd04148d34257e90a4ba734515167c38937870f98e571541cc36f7f7e536bc6",
+      "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-moving-r2": {
+      "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "frozen_file_count": 104,
+      "package_manifest_sha256": "cfd04148d34257e90a4ba734515167c38937870f98e571541cc36f7f7e536bc6",
+      "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+      "source_freeze_sha256": "1ef7f4e91457f3bac63d6132bae6a61fb38f2f2b64e62cfc8c0eeca4712b76a9"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2": {
+      "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "frozen_file_count": 104,
+      "package_manifest_sha256": "cfd04148d34257e90a4ba734515167c38937870f98e571541cc36f7f7e536bc6",
+      "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15": {
+      "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "frozen_file_count": 376,
+      "package_manifest_sha256": "892148b1d08a5629819d3db4aed634719888ff5c9a03eb3a99a25d6049e6141d",
+      "package_sha256": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra16": {
+      "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "frozen_file_count": 410,
+      "package_manifest_sha256": "63371124b57db8ab51db056c2ade564dffaf5b3832ae4193773122830fa1fba1",
+      "package_sha256": "ba20f8e6353b2aca4725258835a68c1dfaa056a0484b2d683a5bb74a1eca0aa0",
+      "source_freeze_sha256": "159ed1a111082918ef7d2fb725541d8a5199fe0ea46b6fc684f7634bcc54d15e"
+    }
+  },
+  "status": "COMPLETE",
+  "tensor_loads": 0
+}

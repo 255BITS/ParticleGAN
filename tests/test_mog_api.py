@@ -8,7 +8,7 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import calibrate_mog_sigma, MoGParticlePrior, ParticlePrior, ParticleRegularizer, Recipe, get_recipe
+from particlegan import DEFAULT_RECIPE, calibrate_mog_sigma, MoGParticlePrior, ParticlePrior, ParticleRegularizer, Recipe, get_recipe
 
 
 def test_mog_components_use_common_training_defaults_and_explicit_resources():
@@ -17,7 +17,7 @@ def test_mog_components_use_common_training_defaults_and_explicit_resources():
     assert prior.z.shape == (400, 2) and prior.sigma_rel == 1/40 and prior.standardize
     assert prior.sigma > 0 and prior.sigma == prior.d0 * prior.sigma_rel
     assert recipe.num_particles == 400 and recipe.total_steps == 28000
-    assert recipe.prior_lr_mult == 2 and recipe.betas == (0., .999) and recipe.prior_betas is None
+    assert recipe.prior_lr_mult == get_recipe().prior_lr_mult and recipe.betas == (0., .999) and recipe.prior_betas is None
     assert isinstance(recipe.make_prior(), MoGParticlePrior)
     assert type(get_recipe().make_prior()) is ParticlePrior
     assert Recipe(**json.loads(json.dumps(recipe.to_dict()))) == recipe
@@ -55,7 +55,7 @@ def test_explicit_ddgan_mog_study_config_and_overrides():
                          total_steps=2000, lr_floor=.05)
     assert changed.num_classes == 8 and changed.make_prior().z.shape == (32, 6)
     assert changed.total_steps == 2000 and changed.lr_floor == .05
-    assert get_recipe().lr == .00425
+    assert get_recipe().lr == get_recipe(DEFAULT_RECIPE).lr
     assert get_recipe(model='ddgan').total_steps == 7000
     assert get_recipe(model='ddgan', num_classes=4, conditioning='ucd').prior_kind == "particles"
 
@@ -158,7 +158,7 @@ def test_calibration_exact_even_median_and_torch_only_fallback(monkeypatch, use_
 
 @pytest.mark.parametrize('model', ['gan', 'ddgan'])
 def test_mog_recipe_optimizer_updates_raw_means_and_preserves_fixed_buffers(model):
-    recipe = get_recipe(model=model, prior_kind='mog', sigma_rel=.025, num_particles=12, z_dim=2, prior_betas=[.5, .999])
+    recipe = get_recipe(trainer='ka2', model=model, prior_kind='mog', sigma_rel=.025, num_particles=12, z_dim=2, prior_betas=[.5, .999])
     prior = recipe.make_prior()
     generator, critic = nn.Linear(2, 2), nn.Linear(2, 1)
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, foreach=False)
@@ -178,9 +178,10 @@ def test_mog_recipe_optimizer_updates_raw_means_and_preserves_fixed_buffers(mode
         ema.z.lerp_(prior.z, .1)
     torch.testing.assert_close(ema.means().mean(0), torch.zeros(2), atol=1e-6, rtol=0)
     assert not torch.equal(ema.means(), prior.means()) and torch.equal(sigma, ema.sigma)
-    frozen = recipe.make_prior(learnable=False)
+    frozen_recipe = recipe.replace(prior_update="frozen")
+    frozen = frozen_recipe.make_prior()
     assert not list(frozen.parameters())
-    assert len(recipe.make_optimizers(generator, critic, frozen)[0].param_groups) == 1
+    assert len(frozen_recipe.make_optimizers(generator, critic, frozen)[0].param_groups) == 1
 
 
 @pytest.mark.parametrize('sigma', [-1, float('nan'), float('inf'), -float('inf'),
@@ -315,6 +316,7 @@ def test_recipe_calibrates_original_centers_with_legacy_rounding(dtype):
     means = (centers - centers.mean(0)) / (centers.std(0) + 1e-6)
     points = means.cpu().double().numpy()
     d0 = centers.new_tensor(float(np.median(cKDTree(points).query(points, k=2)[0][:, 1])))
+    # This migration contract compares the historical random centers.
     prior = get_recipe('mog', num_particles=16, z_dim=3).make_prior(dtype=dtype, generator=b)
     assert torch.equal(prior.z, centers) and torch.equal(a.get_state(), b.get_state())
     assert torch.equal(prior.d0, d0) and torch.equal(prior.sigma, d0 * .025)

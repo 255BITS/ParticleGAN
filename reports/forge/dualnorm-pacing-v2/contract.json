@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "bcap-dualnorm-pacing-v2",
+  "stage_a_spec": "configs/forge/searches/bcap-dualnorm-pacing-v2-a.json",
+  "campaign": "configs/forge/campaigns/bcap-dualnorm-pacing-v2.json",
+  "rates_a": [0.01],
+  "discriminator_ratios": [0.5, 0.75, 1.0, 1.5, 2.0],
+  "prior_steps": [0.003, 0.01, 0.03, 0.1],
+  "rates_b": [0.012, 0.016, 0.022],
+  "momenta_c": [0.5, 0.9],
+  "momentum_base_candidate": "bcap-dualnorm-momentum-v1",
+  "control": {
+    "lr": 0.01,
+    "d_lr_mult": 1.5,
+    "prior_step": 0.03,
+    "optimizer_momentum": 0.0,
+    "justification": "One current-source starter control is necessary after optimizer/API/observer fixes. This is a new scientific source cohort, not a rerun solely for a merge or a seed repetition. The historical 15eb result remains frozen."
+  },
+  "selection_objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+  "activation": {
+    "stage_b": {
+      "minimum_required_passes": 3,
+      "at_least_current_control": true,
+      "selection_scope": "all Stage A whole recipes",
+      "held_pace": "selected whole recipe's discriminator ratio and absolute sampled-prior step",
+      "revision_reason": "Revises the audit's unexecuted >=4-pass proposal before spending: intermediate rates can resolve ring HQ/covariance tradeoffs even when pacing does not add a complete gate."
+    },
+    "stage_c": {
+      "minimum_required_passes": 3,
+      "at_least_current_control": true,
+      "selection_scope": "all admitted Stage A and Stage B whole recipes",
+      "held_pace": "selected whole recipe's generator rate, discriminator ratio and absolute sampled-prior step"
+    },
+    "execution_completeness": "All seven actual task attempts must reach terminal evidence for every admitted recipe before conditional selection; a selected row requires PASS/FAIL on all seven. Missing, invalid or incomplete selected evidence cannot activate a branch."
+  },
+  "required_tasks": [
+    "gaussian1d_acquisition", "two_pole", "unused_token_hold", "ae_gan_hold",
+    "ring16_acquisition", "five_word_joint_acquisition"
+  ],
+  "diagnostic_task": "clockfree_audit_measurement_v1",
+  "maximum_admitted_recipes": 25,
+  "maximum_paid_reserved_seconds": 63000,
+  "maximum_elapsed_seconds": 43200,
+  "cleanup_grace_seconds": 30,
+  "automatic_retries": 0,
+  "automatic_expansions": 0,
+  "qualification_through_tier": 1,
+  "default_adoption": false,
+  "deferred": ["Tier 2", "new optimizer form", "epsilon sweep", "Adam reruns", "seeds", "R1/R2", "native 7k", "scale transfer"],
+  "prior_evidence": {
+    "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+    "source_commit": "15eb7cb0911905e401bdfcd7e264945a7ea64d97",
+    "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+    "starter_receipt": "reports/forge/dualnorm-tier1/starter-selection.json",
+    "original_analysis": "reports/forge/dualnorm-tier1/analysis.json",
+    "audit_branch": "report/dualnorm-hyperparameter-audit",
+    "reuse": "Only exact current source/runtime/protocol/task/job compatibility may be reused; these historical receipts do not qualify the changed trainer."
+  }
+}

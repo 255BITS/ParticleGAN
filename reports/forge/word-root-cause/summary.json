@@ -1,0 +1,103 @@
+{
+  "cap_note": "Coefficient170/cap1 and coefficient170/cap0.1 have identical recorded observations and final model tensors, not independent robustness replications or evidence of cap improvement.",
+  "classification_note": "Clean/full K3P/KA2 arms cross strict original-parent activation boundaries for training_input_noise, training_output_noise, output_noise_warmup and network_horizon_cap. They are authorized existing-control ablation diagnostics, not ordinary same-signature configuration_search outputs. Frozen legacy numeric-knob classification and round1 inherited search/configuration fields are ancestor metadata, not qualification. Round2 and round3 retain actual measured clean/full comparator signatures. Both old and new serving gates remain clean/live; noise changes concern training only.",
+  "eligible_for_default": false,
+  "execution_errors": 0,
+  "failed_runs": 11,
+  "historical_r1r2_note": "The original R1/R2 word task was unmeasured because its earlier ring failure stopped ordinary progression. That UNKNOWN was not a word-task FAIL.",
+  "id": "word-root-cause-final-v1",
+  "mechanism_note": "No new stabilization technique, auxiliary objective or spread regularization; all 18 arms prior_reg0. A2 and direct particle gain are inactive in actual K3P/KA2 training. Historical source-shaped word KA2 prior_reg1 stays distinct.",
+  "paid_adapter_seconds": 2839.2046527308994,
+  "passing_runs": 7,
+  "prediction_results": {
+    "round1": [
+      {
+        "falsifier": "Neither low-rate clean/full K3P nor KA2 has five terminalpasses.",
+        "falsifier_triggered": true,
+        "id": "clean-long-optimization-bundle",
+        "limits": "Noise and horizon are a bundle, not isolated single-factor causal proof.",
+        "observed_passing_arms": [],
+        "prediction": "At least one low-rate clean/full K3P or KA2 arm has >=5 consecutive terminal passes on the unchanged full word gate.",
+        "prediction_met": false,
+        "question": "Does removing fake-output support mismatch and restoring the full network schedule improve the two current word failures?"
+      },
+      {
+        "falsifier": "All three R1/R2 rate arms fail.",
+        "falsifier_triggered": false,
+        "id": "existing-r1r2-capacity",
+        "limits": "Its original beta2 and gamma schedules remain fixed; no claim of global impossibility.",
+        "observed_passing_arms": [
+          "r1r2-low-rate-fast-roles",
+          "r1r2-mid-rate-fast-roles",
+          "r1r2-low-rate-original-roles"
+        ],
+        "prediction": "At least one of its three frozen rate arms passes the unchanged sustained gate.",
+        "prediction_met": true,
+        "question": "Can current R1/R2 learn the same joint/inverse problem through role-rate settings alone?"
+      }
+    ],
+    "round2": [
+      {
+        "falsifier": "All three frozen slow-prior arms for this family fail the unchanged full gate.",
+        "falsifier_triggered": true,
+        "id": "k3p-slower-codebook",
+        "limits": "No seed variation; holding the rest of the clean/full low-rate bundle fixed. A negative bounded search does not prove global impossibility.",
+        "observed_passing_arms": [],
+        "prediction": "At least one of the three frozen slow-prior arms for this family reaches five consecutive terminal passes.",
+        "prediction_met": false,
+        "question": "Does reducing only the existing prior role rate restore a confident five-word/inverse mapping?"
+      },
+      {
+        "falsifier": "All three frozen slow-prior arms for this family fail the unchanged full gate.",
+        "falsifier_triggered": false,
+        "id": "ka2-slower-codebook",
+        "limits": "No seed variation; holding the rest of the clean/full low-rate bundle fixed. A negative bounded search does not prove global impossibility.",
+        "observed_passing_arms": [
+          "ka2-slow-prior-0p1",
+          "ka2-slow-prior-0p25"
+        ],
+        "prediction": "At least one of the three frozen slow-prior arms for this family reaches five consecutive terminal passes.",
+        "prediction_met": true,
+        "question": "Does reducing only the existing prior role rate restore a confident five-word/inverse mapping?"
+      }
+    ],
+    "round3": [
+      {
+        "falsifier": "All three frozen coefficient/cap arms fail the unchanged full gate.",
+        "falsifier_triggered": false,
+        "id": "k3p-existing-critic-scale",
+        "limits": "The baseline coeff1/cap1 is already measured and is not rerun. Coeff170 cancels the pure-A division by joint dimension170, matching initial L2 unit magnitude only; later blended kernels and schedules remain different from R1/R2. Endpoint-gradient comparisons are correlations, not causal proof by themselves.",
+        "observed_passing_arms": [
+          "k3p-coeff170-cap1",
+          "k3p-coeff170-cap0p1"
+        ],
+        "prediction": "At least one of the three frozen coefficient/cap arms passes five consecutive terminal checks of the unchanged full word gate.",
+        "prediction_met": true,
+        "question": "Does strengthening the existing critic regularization at the declared joint-input scale restore five confident generated words and their paired inverse?"
+      }
+    ]
+  },
+  "preservation_scope": {
+    "configuration_cards": 32,
+    "exclusions": [
+      "Generated EXPERIMENT_MEMORY.md and compilation.json refreshed",
+      "New diagnostic additions",
+      "Task source pins and implementation fixes"
+    ],
+    "immutable_memory_history_records": 257,
+    "per_goal_leaderboards": 5,
+    "preexisting_files": 598,
+    "search_receipts": 11,
+    "selection": 1,
+    "technique_receipts": 292
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "readout": "reports/forge/word-root-cause/README.md",
+  "recipes": "configs/forge/selections/word-joint-task-v1.json",
+  "reserved_seconds": 16200,
+  "runs": 18,
+  "scale_note": "Coefficient170 matches only the initial pure-A real-gradient R1 coefficient. The fake term remains capped, not R2, and later caps/proximity are rescaled; this is not a whole-R1 penalty match.",
+  "schema_version": 1,
+  "scope": "task_only_diagnostic"
+}

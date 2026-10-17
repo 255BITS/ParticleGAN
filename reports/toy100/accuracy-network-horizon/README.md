@@ -6,7 +6,7 @@ it does not establish a passing shared recipe across all 22 toys.
 
 All three runs use byte-identical [configuration](declared_config.json),
 [model and schedule options](model_options.json), [probe source](probe_source.py),
-and [actual optimizer-rate traces](optimizer_actions.jsonl). The generic
+and [actual optimizer-rate traces](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/accuracy-network-horizon/optimizer_actions.jsonl). The generic
 uniform square [-5, 5]² initialization and identity affine generator use no
 target samples, labels, or centers. The learned prior retains its normal
 7,000-update cosine schedule. G and D use the same cosine with its horizon

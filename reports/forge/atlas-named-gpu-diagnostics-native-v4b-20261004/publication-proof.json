@@ -1,0 +1,123 @@
+{
+  "copied_artifacts_byte_original": true,
+  "copied_logs_checkpoints_arrays": 0,
+  "cost": {
+    "convergence_time_available": false,
+    "current_paid_seconds": 649.2088527791202,
+    "current_reserved_seconds": 0.0,
+    "flops_available": false,
+    "historical_charged_seconds": 261.03029037988745,
+    "inclusive_charged_seconds": 910.2391431590077,
+    "lanes": {
+      "0": {
+        "cap_seconds": 7500,
+        "current_paid_seconds": 0.0,
+        "current_reserved_seconds": 0.0,
+        "inclusive_charged_seconds": 234.82608077581972,
+        "prior_engineering_paid_seconds": 12.873334385920316,
+        "prior_v3_paid_seconds": 221.9527463898994
+      },
+      "1": {
+        "cap_seconds": 3000,
+        "current_paid_seconds": 649.2088527791202,
+        "current_reserved_seconds": 0.0,
+        "inclusive_charged_seconds": 675.4130623831879,
+        "prior_engineering_paid_seconds": 12.449620655039325,
+        "prior_v3_paid_seconds": 13.754588949028403
+      }
+    },
+    "original_cap_seconds": 10500,
+    "prior_engineering_paid_seconds": 25.32295504095964,
+    "prior_v3_paid_seconds": 235.7073353389278
+  },
+  "counts": {
+    "attempted_adapted_questions": 3,
+    "declared_adapted_questions": 3,
+    "required_family_cells": 130,
+    "required_slots_per_family": 26,
+    "statuses": {
+      "INVALID": 1,
+      "NOT_RUN": 127,
+      "PASS": 2
+    },
+    "terminal_families": 3,
+    "tiers_per_family": {
+      "1": 5,
+      "2": 19,
+      "3": 2
+    }
+  },
+  "current_original_grade_gifs": 2,
+  "default_adoption": false,
+  "files": {
+    "README.md": {
+      "bytes": 6925,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/README.md",
+      "sha256": "b19e175f1617ddc630938d5785467229a76aa494afc41a853ef3dbaffb4965f9"
+    },
+    "gifs/cover_leftover_multibank_policy_v1.gif": {
+      "bytes": 310330,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/gifs/cover_leftover_multibank_policy_v1.gif",
+      "sha256": "4af89bb0f0cd18af2a4f852685b854b4c3691d5fa8350972d2456c10b55dbeb7"
+    },
+    "gifs/unused_token_hold_routed_policy_selected_cloud_v1.gif": {
+      "bytes": 404476,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/gifs/unused_token_hold_routed_policy_selected_cloud_v1.gif",
+      "sha256": "76a5b02abc36f92fd66bdb91f1a1677ae0d8712e7f5ba0887961fe7cb039d4c7"
+    },
+    "grades/cover_leftover_multibank_policy_v1.json": {
+      "bytes": 3435,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/grades/cover_leftover_multibank_policy_v1.json",
+      "sha256": "e9f68fe6950dbbefd4a1b0056ac21abaafbcb789d1978a644dbdfa01cad886f5"
+    },
+    "grades/unused_token_hold_routed_policy_selected_cloud_v1.json": {
+      "bytes": 2252,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/grades/unused_token_hold_routed_policy_selected_cloud_v1.json",
+      "sha256": "e2e7b186085e3c64106b6e6fac84f34025ce586956b8f55660a0e36e9c6a0c21"
+    },
+    "input-index.json": {
+      "bytes": 944460,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/input-index.json",
+      "sha256": "8c57ff6e02a69eda41b39cb10c0bdd8c3f41040504b3eda1f11534b2a6d82ce4"
+    },
+    "media/cover_leftover_multibank_policy_v1.json": {
+      "bytes": 3510,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/media/cover_leftover_multibank_policy_v1.json",
+      "sha256": "f43c133b6248ec4cb2ff70295e3ceaf6ee1b9c24294be5dfa3817f6247996bbc"
+    },
+    "media/unused_token_hold_routed_policy_selected_cloud_v1.json": {
+      "bytes": 3707,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/media/unused_token_hold_routed_policy_selected_cloud_v1.json",
+      "sha256": "e13b2d664824950209985cf5b751454473319121c97ab12f462774d6b060fa8f"
+    },
+    "results.json": {
+      "bytes": 383347,
+      "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final/results.json",
+      "sha256": "0a175519b59b5180078d9669519060b79dc30d596daca3c8be1aca2dd9ce1d5f"
+    }
+  },
+  "helper_sha256": "99970901e2793961c433164f5f8c73094316c19d2f92c77c5c8d3e5e6617187a",
+  "input_files_unchanged": true,
+  "original_n5": "BLOCKED separate law",
+  "preserved_v3_pass_references": 5,
+  "privacy_plaintext_private_fields": 0,
+  "publication": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/publication-final",
+  "publisher_models_draws_rescoring_gpu_queue_calls": 0,
+  "qualification_input": false,
+  "schema": "pg_atlas_named_native_v4b_actual_publication_audit_v1",
+  "source": {
+    "digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+    "origin_commit": "fb7acc775b3a1a6184d36b55e035b9da04531492"
+  },
+  "spec_sha256": "b9b2c1d47e68e68837a0483de67b44ff903db25b660b3afc40191f9992052890",
+  "speed_ranking": false,
+  "status": "PASS",
+  "trusted_cut": {
+    "bytes": 6395,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v4b-publication-20261003/final-inputs.json",
+    "sha256": "f287d51757c4e9397afb5435e7b3848877915b6326ba59d0659b32fab20c6be2"
+  },
+  "verified_input_files": 3039,
+  "word_goal_gif": "UNAVAILABLE",
+  "word_original_status": "INVALID"
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "revision": 1,
+  "protocol": "screening",
+  "view": "discriminator_stability",
+  "through_tier": 1,
+  "prior": {
+    "kind": "mog",
+    "sigma": 0.025,
+    "standardize": false,
+    "learnable": true
+  },
+  "prior_trainability": {
+    "locations": true,
+    "width": false,
+    "mixture_weights": false
+  },
+  "seed_policy": "one_screening_seed; preregistered_finished_default_promotion_exception_only"
+}

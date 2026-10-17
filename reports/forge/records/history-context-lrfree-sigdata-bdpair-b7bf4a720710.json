@@ -1,0 +1,66 @@
+{
+  "candidate_id": "context:lrfree/sigdata-bdpair",
+  "candidate_revision": "d009775f755c6a49a90a8e6dbfad87e6d3508bf0b0430ba70d1ef8b7006d37e7",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "sigdata-v1 + paired birth/death graft: native100 2/3 (honest generator fix)",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/sigdata-bdpair",
+      "narrative_sources": [
+        {
+          "git_blob": "491714b37f31350b0f6ef0b8df5da657bfffab70",
+          "path": "reports/toy100/lrfree-search/sigdata-bdpair/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "d7ec839cd86c62141f6eae4a74f63e4900ff8a41c9bcddd774413485e81e4974",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/sigdata-bdpair/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/sigdata-bdpair/grid100-result.json",
+        "reports/toy100/lrfree-search/sigdata-bdpair/rotated100-result.json",
+        "reports/toy100/lrfree-search/sigdata-bdpair/staggered100-result.json"
+      ],
+      "summary_excerpt": "# sigdata-v1 + paired birth/death graft: native100 2/3 (honest generator fix)\n\nFirst core (non-sampler) candidate to pass grid100 **and** staggered100 with the\nreal generator law. The preceding paired-BD graft on `sigfloor-v3` failed grid\n(centre .26\u03c3). This graft puts the same `bdguard-dRpair` transport on the\n`sigdata-v1` base (settle-gated learnable sigma, init .029) and passes 2/3.\n\n## Candidate (one declared mechanism)\n\n- Base: `/ml2/hypergan/lrfree-20260926/candidates/sigdata-v1/package`\n  (all files byte-identical except below).\n- Graft: `particlegan/birth_death.py` replaced by the `bdguard-dRpair` file\n  (d_R guard: use the real-law dimension directly clamped to [1, D_out];\n  paired-only transport, zero neutral clones). `training.py`, `continuous.py`,\n  controller, sigma rule, init, seeds, `total_steps=null` all unchanged.\n- Overrides: sigdata-v1 overrides + `particle_birth_death: true` only\n  (`overrides.json`). Runner package SHA-256 `df0515e1...` (see job headers).\n- Grid run reproduced the sigdata-v1 baseline first (prec .9686 / centre .265 /\n  min-eig .627 / max-eig 2.39 / TV .061), then the graft beat it on every column.\n\n## Frozen results (7,000 updates, QR `batch_feature_zero`, noisy scoring)\n\n| Task | Verdict | Checks | Arrival | Streak | Prec | Centre/\u03c3 | Eig range | TV | Trace | KS | \u03c3 | Holdout prec |\n|---|---|---:|---:|---:|---:|---:|---|---:|---:|---:|---:"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-sigdata-bdpair-b7bf4a720710",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "491714b37f31350b0f6ef0b8df5da657bfffab70",
+    "path": "reports/toy100/lrfree-search/sigdata-bdpair/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "d7ec839cd86c62141f6eae4a74f63e4900ff8a41c9bcddd774413485e81e4974",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/sigdata-bdpair/README.md"
+  },
+  "task_results": []
+}

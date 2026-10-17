@@ -1,0 +1,20 @@
+{
+  "status": "OWNED_CPU_WATCHER_IDENTITY_VALID",
+  "utc": "2026-09-30T12:54:31.623642+00:00",
+  "pid": 1030112,
+  "startticks": 167460340,
+  "process_state": "S",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+    "--validation",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra10-monitor",
+    "--watch"
+  ],
+  "children": [],
+  "cuda_visible_devices": "",
+  "numerical_jobs_started": 0
+}

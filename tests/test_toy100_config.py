@@ -70,7 +70,20 @@ def test_unselected_invalid_override_blocks_individual_run(tmp_path, monkeypatch
     assert not args.output.exists()
 
 
-def test_default_command_uses_shared_winner_and_strict_accuracy():
+def test_default_command_uses_legacy_bcap_and_clean_strict_accuracy():
     args = cli._parser().parse_args(["run", "--output", "/tmp/toy100-example", "--no-render"])
     assert str(args.config) == "configs/toy100/constraints_simple_regularization.json"
     assert args.require_accuracy is True
+    assert args.eval_output_noise is None
+
+
+@pytest.mark.parametrize("bad", [None, 0, 1, "true"])
+def test_evaluation_sampling_selector_requires_a_boolean(bad):
+    from benchmarks.toy100.train import resolve_config
+    with pytest.raises(ValueError, match="eval_output_noise must be a boolean"):
+        resolve_config({"eval_output_noise": bad})
+
+
+def test_sampling_law_cannot_vary_by_problem():
+    with pytest.raises(ValueError, match="cannot set eval_output_noise"):
+        validate_manifest({"problem_overrides": {"grid100": {"eval_output_noise": True}}})

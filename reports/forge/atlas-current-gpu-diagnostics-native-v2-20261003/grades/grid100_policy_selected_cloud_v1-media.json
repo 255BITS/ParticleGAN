@@ -1,0 +1,83 @@
+{
+  "actual_steps": [
+    0,
+    50,
+    750,
+    1750,
+    2750,
+    4000,
+    5000,
+    6000,
+    7000
+  ],
+  "draws": 0,
+  "gif": {
+    "bytes": 306692,
+    "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/grid100_policy_selected_cloud_v1-goal.gif",
+    "sha256": "f31110b3a6172c10bb62c686529f340df77480c39e0d9c85d5147d90c2a1d595"
+  },
+  "inputs": [
+    {
+      "bytes": 90426,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000000.npz",
+      "sha256": "49376bdc929c5d3fb6e4a2753bdfbc3456d24251ed951fcb4020192b5105b783"
+    },
+    {
+      "bytes": 90214,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000050.npz",
+      "sha256": "f5e735e77ed77fbe9ed3ec606973f9879eb68d8cd7f37d477a786bd5684f476d"
+    },
+    {
+      "bytes": 90009,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_000750.npz",
+      "sha256": "d2adfce28250101f7e2ce2ae2af96fdd506dfe8c99e7b250337aa20a17396a44"
+    },
+    {
+      "bytes": 85509,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_001750.npz",
+      "sha256": "e026dc028194dfb3197b8c93b865da9bbe7337d22ee13bcbd7f5c615013da94b"
+    },
+    {
+      "bytes": 83822,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_002750.npz",
+      "sha256": "6e212f4ab3e7e8a32cc59fe0169c8951feadbc55ecc0a876487a3d348368f168"
+    },
+    {
+      "bytes": 83929,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_004000.npz",
+      "sha256": "6f27806265b9a6ae551b802ac29ec601537291a48842f7eaeec2fbd9fc644b7c"
+    },
+    {
+      "bytes": 83871,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_005000.npz",
+      "sha256": "9a5184ab7300a9fb8b1260a4b57db8b5e95469b9388f4ab0f6aa1eb70f6729a1"
+    },
+    {
+      "bytes": 84073,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_006000.npz",
+      "sha256": "871b34943a64598106452978b6deb5857d13d4a3d32dc00b16aa6db3e3ab6706"
+    },
+    {
+      "bytes": 84120,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/snapshots/step_007000.npz",
+      "sha256": "cccacf8a46014c044e365c6fbaaf95d55be4a86414fc27544f4ead0e3e41a557"
+    },
+    {
+      "bytes": 7184,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/summary.json",
+      "sha256": "026365831ebaf7b905253a136881f01e7306526326cbb3cfe7729e24cf6c6ae4"
+    },
+    {
+      "bytes": 67332,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/grid100_policy_selected_cloud_v1/native100/grid100/events.jsonl",
+      "sha256": "e97ecc729c77355a9ca532ae3ffd847a3f1c7c930d146eda629c16632e9fbd85"
+    }
+  ],
+  "optimizer_updates": 0,
+  "original_gate": "FAIL",
+  "qualification_input": false,
+  "renderer_sha256": "fda26cea46ce2dab200e418c3d04e288e3234d61609deecaebe53b1624bf4101",
+  "schema": "particlegan_atlas_current_gpu_diagnostics_v1_media",
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "task": "grid100_policy_selected_cloud_v1"
+}

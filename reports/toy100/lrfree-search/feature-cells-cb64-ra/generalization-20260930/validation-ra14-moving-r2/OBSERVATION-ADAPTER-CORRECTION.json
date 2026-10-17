@@ -1,0 +1,23 @@
+{
+  "after_run_moving_sha256": "c2f8d399416b328886ba2452e86a1398f511c7357c915eb6437617f54cf69df9",
+  "before_run_moving_sha256": "bc3e8eda5d838c942999eada6b1d51cf4cef04009432609f580639bf6559a3a4",
+  "configuration_changed": false,
+  "corrected_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-moving-r2",
+  "host_changed": false,
+  "model_or_optimizer_arithmetic_changed": false,
+  "new_expression": "surprise=None if trainer.policy.surprise is None else trainer.policy.surprise.diagnostics()",
+  "old_expression": "surprise=None if trainer.surprise is None else trainer.surprise.diagnostics()",
+  "original_baseline": {
+    "hq": 0.9464,
+    "modes": 100
+  },
+  "original_checkpoint": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/moving/grid100/checkpoint-000500.pt",
+  "original_completed_updates": 500,
+  "original_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+  "package_changed": false,
+  "retained_error": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/logs/moving-grid100.log",
+  "schedule_changed": false,
+  "scorer_changed": false,
+  "status": "OBSERVATIONAL_ACCESS_CORRECTED_BEFORE_TRAINING",
+  "thresholds_changed": false
+}

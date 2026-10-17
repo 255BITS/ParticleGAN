@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "d9771376145bfcda31744db02fa4536635de6962990ca1ac17124bc2571be594",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "9fef0df56143543d3f2bdaf50567ee5602d4a4fa957249814c30265d88e965eb",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/forge/pure-bcap-joint-loss-repair-v2/queue/pure-bcap-joint-loss-repair-v2/dbd399f7dfcb4745849f6c6e9ec4ea1c/observed-samples.pt": "756d52d2a4dd7d4d9e052cd89dbb3a2511cb2253bfdb0f21f0d25df90e4ed962"
+  },
+  "task_id": "ring16_acquisition"
+}

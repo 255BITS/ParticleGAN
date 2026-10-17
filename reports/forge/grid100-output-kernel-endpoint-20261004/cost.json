@@ -1,0 +1,23 @@
+{
+  "charged_seconds": 6.161060315091163,
+  "convergence_credit": false,
+  "default_adoption": false,
+  "inclusive_charged_seconds": 11.62249431014061,
+  "inclusive_paid_seconds": 11.62249431014061,
+  "original_campaign_cap_seconds": 180.0,
+  "overrun_seconds": 0.0,
+  "paid_cap_seconds": 174.53856600495055,
+  "paid_wall_seconds": 6.161060315091163,
+  "prior_engineering_paid_seconds": 5.461433995049447,
+  "qualification_input": false,
+  "raw_cost_identity": {
+    "bytes": 1804,
+    "path": "/ml2/hypergan/pg-grid100-output-kernel-endpoint-supervised-v2-20261003/cost.json",
+    "sha256": "de52fa367da529532718ff4666eaf467618095fb09e58929685a98305cb14114"
+  },
+  "retry_authorized": false,
+  "schema": "pg_grid100_endpoint_public_cost_v1",
+  "speed_ranking": false,
+  "status": "COMPLETE_DIAGNOSTIC",
+  "unmeasured_interrupt_reserved_seconds": 0.0
+}

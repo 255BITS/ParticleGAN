@@ -23,7 +23,7 @@ import torch
 from benchmarks.legacy.gan_loss import GANLoss
 from benchmarks.legacy.grad_regularizers import GradientPenalty
 from . import mode_hold, trajectory, two_pole
-from .observation import recording, sustained, OBSERVATIONS, MIN_STABLE_CHECKS
+from .observation import recording, sustained, threshold_margin, OBSERVATIONS, MIN_STABLE_CHECKS
 from .hosts import ae_gan_hold, cover_leftover, mid_scale_identity, residual_student, unipolar, unused_token_hold
 
 VERSION = "behavior-v2"
@@ -137,12 +137,14 @@ def protocol():
 def score_metrics(values, requirements):
     cells = []
     for name, op, threshold in requirements:
+        threshold_margin(threshold, op, threshold)
         value = values.get(name)
         numeric = isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
-        ok = numeric and (value >= threshold if op == ">=" else value <= threshold)
+        margin = threshold_margin(value, op, threshold) if numeric else None
+        ok = numeric and margin >= 0
         cells.append({"metric": name, "value": value if numeric else None, "op": op, "threshold": threshold,
                       "status": "PASS" if ok else "FAIL" if numeric else "MISSING",
-                      "margin": (value - threshold if op == ">=" else threshold - value) if numeric else None})
+                      "margin": margin})
     return cells
 
 

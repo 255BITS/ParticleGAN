@@ -1,0 +1,10 @@
+{
+  "completed_updates": 0,
+  "device": "cpu",
+  "frozen_request_digest": "33cbc4a31c32680819c884d989c8ace5d2ce748aea587107cf772e79c7036a23",
+  "gpus": 0,
+  "initialization_sha256": "1b0f4a967ca11ee380cef1765a5b3e0897f9d03bbe2636eab23da4bb90b78e11",
+  "initialized_monotonic": 2051608.970688792,
+  "models_constructed": true,
+  "schema": "pg_canonical_two_pole_actual_start_v1"
+}

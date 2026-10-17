@@ -1,0 +1,26 @@
+{
+  "task": "routed_caption_frozen_scalar_moments_v1",
+  "complete": true,
+  "report_sha256": "cd84e25a039d19966e55861f41ce3bae7ccda39095521d45babb6ae45bb5dd66",
+  "completion_sha256": "47de07833dc25c310c11dedb1ddd0ae822a7aa2f7a9089ab0147039ab46884f6",
+  "observed_media_sha256": "6c58d4e805bc4c594af7901c5f4261bb3b9218cb396201515ce060aa6a32b9f3",
+  "protocol_sha256": "95ff4941aee85074614d0bd1fe1ff477f0e343a80b27f324526d95c4f6e4cb81",
+  "renderer_source_sha256": "ea369cc340f349f042a498d131429cba75563c03aa9e9e232255ea2c8fb374d9",
+  "pure_frame_helper_sha256": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b",
+  "gif_sha256": "3d8c583be32b799d18aba5f1a7d6096b3f465e6b59f01b368eac811fc6077f36",
+  "png_sha256": "06f96800b66cfd481bd064f2eaf47784d10a6d89f18204badbc4796ef39b6ec2",
+  "media_steps": [
+    0,
+    64,
+    128,
+    256,
+    384,
+    512
+  ],
+  "fixed_initial_only_color_limit": 2.308841825120657,
+  "native_updates": 0,
+  "host_forwards": 0,
+  "scientific_status_unchanged": "PASS",
+  "seconds": 1.355937350075692,
+  "limit_seconds": 60
+}

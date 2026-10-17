@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "utc": "2026-09-30T15:58:55.319966+00:00",
+  "pid": 1218277,
+  "startticks": "168575547",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra10-quality/linear-output-production/run_mechanics.py",
+    "--device",
+    "cpu",
+    "--package-root",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra10-quality/linear-output-production/pkg-OUTPUT-MEAN",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra10-quality/linear-output-production/cpu-contract-attempt1/result.json"
+  ],
+  "cwd": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929",
+  "CPU_only": true,
+  "CUDA_VISIBLE_DEVICES": "",
+  "threads": 1,
+  "source_freeze_sha256": "1294e397fcb1a59bfb8629c373a12eb866384f0ebcf1344276234bd97b0291f3",
+  "root_GO_sha256": "80404cf3a68edc6133dda2ff6c86110b8378c3c3341b682186f18cf7bb27d233",
+  "numerical_invocations": 1,
+  "per_case_reactions": 1,
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra10-quality/linear-output-production/numerical-attempt1.log"
+}

@@ -1,0 +1,1689 @@
+{
+  "status": "VALID",
+  "evidence_status": "VALID",
+  "scope": "All ten original RA9 toy saved-artifact endpoints, CPU-only independent review",
+  "source_guards": 162,
+  "sealed_steps": [
+    0,
+    100,
+    250,
+    500,
+    750,
+    1000,
+    1250,
+    1500,
+    1750,
+    2000
+  ],
+  "endpoints": [
+    {
+      "step": 0,
+      "checkpoint_sha256": "0fe67decc643392622b95265dcf03f20d143d9e53e54dba93307ad9fa5effdc9",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 1.0,
+        "last_decisive": 0,
+        "undo_s": null,
+        "coverage_rejections": 0,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 0,
+        "last_population": {},
+        "last_decision": {},
+        "log": [],
+        "current_window_participants_b": 0,
+        "current_window_participants_2b": 0
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 0,
+          "step": 0,
+          "rows": 1024,
+          "required": 973,
+          "cells": 0,
+          "rank": 0,
+          "groups": 0,
+          "calibration_rows": 0,
+          "chart_valid": false,
+          "duplicate_ok": false,
+          "finite_rows": 0,
+          "same_group_rows": 0,
+          "ema_eligible_rows": 0,
+          "coherent_rows": 0,
+          "eligible": false
+        },
+        "age_real_rows": 0,
+        "age_steps": 0,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.25,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": null,
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ]
+    },
+    {
+      "step": 100,
+      "checkpoint_sha256": "a8755f22483a96d9f18f1941efe6ee2f6ec4bd488bd27c144298ebb0095a90c0",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 4.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 0,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 12,
+        "last_population": {
+          "event": "decision",
+          "step": 24,
+          "participating_rows": null,
+          "required_rows": 973,
+          "coverage_rejected": false,
+          "scheduling_decision": "drift"
+        },
+        "last_decision": {
+          "decision": "drift",
+          "step": 24,
+          "tested_b": 1.0,
+          "verdict_b": 0,
+          "verdict_2b": 1,
+          "evidence_scale": 2.0,
+          "t_b": 1.7360267920349213,
+          "t_2b": 4.354180569965402,
+          "mean_r_b": 0.17611631751060486,
+          "mean_r_2b": 0.32248540967702866,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ]
+        ],
+        "current_window_participants_b": 316,
+        "current_window_participants_2b": 365
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 12,
+          "step": 96,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 924,
+          "ema_eligible_rows": 95,
+          "coherent_rows": 95,
+          "eligible": false
+        },
+        "age_real_rows": 512,
+        "age_steps": 4,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.0625,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 96,
+        "ordinary_mass_moves": 0,
+        "ordinary_support_moves": 10,
+        "ordinary_global_moves": 37,
+        "ordinary_novel_birth_moves": 4,
+        "ordinary_copy_moves": 47,
+        "ordinary_moves": 51,
+        "iso_moves": 0,
+        "moves": 51
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          0.00053125,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.0031868848725320614
+        ]
+      ]
+    },
+    {
+      "step": 250,
+      "checkpoint_sha256": "b879f46930f767e2b5d626e787885878506baa8a41d5efa1d53703dd6a8be2d8",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 8.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 0,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 31,
+        "last_population": {
+          "event": "decision",
+          "step": 120,
+          "participating_rows": null,
+          "required_rows": 973,
+          "coverage_rejected": false,
+          "scheduling_decision": "inconclusive"
+        },
+        "last_decision": {
+          "decision": "inconclusive",
+          "step": 120,
+          "tested_b": 4.0,
+          "verdict_b": 0,
+          "verdict_2b": 0,
+          "evidence_scale": 4.0,
+          "t_b": 2.04827865867349,
+          "t_2b": 3.0642527375272928,
+          "mean_r_b": 0.07616542380613585,
+          "mean_r_2b": 0.09212621254846454,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ],
+          [
+            120,
+            "inconclusive",
+            1.0,
+            8.0
+          ]
+        ],
+        "current_window_participants_b": 575,
+        "current_window_participants_2b": 569
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 31,
+          "step": 248,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 894,
+          "ema_eligible_rows": 263,
+          "coherent_rows": 259,
+          "eligible": false
+        },
+        "age_real_rows": 256,
+        "age_steps": 2,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.03125,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 248,
+        "ordinary_mass_moves": 4,
+        "ordinary_support_moves": 23,
+        "ordinary_global_moves": 20,
+        "ordinary_novel_birth_moves": 4,
+        "ordinary_copy_moves": 47,
+        "ordinary_moves": 51,
+        "iso_moves": 0,
+        "moves": 51
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          0.00053125,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.003187488520080762
+        ]
+      ]
+    },
+    {
+      "step": 500,
+      "checkpoint_sha256": "1b25a3d53b89c54862869bbc3fe5891ca67101d2da99ea08e75b4c9fbe717e95",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 16.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 0,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 62,
+        "last_population": {
+          "event": "decision",
+          "step": 312,
+          "participating_rows": null,
+          "required_rows": 973,
+          "coverage_rejected": false,
+          "scheduling_decision": "inconclusive"
+        },
+        "last_decision": {
+          "decision": "inconclusive",
+          "step": 312,
+          "tested_b": 8.0,
+          "verdict_b": 0,
+          "verdict_2b": 0,
+          "evidence_scale": 8.0,
+          "t_b": -0.804317541920708,
+          "t_2b": 0.8185639518366854,
+          "mean_r_b": -0.021388070269798238,
+          "mean_r_2b": 0.01724175239602725,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ],
+          [
+            120,
+            "inconclusive",
+            1.0,
+            8.0
+          ],
+          [
+            312,
+            "inconclusive",
+            1.0,
+            16.0
+          ]
+        ],
+        "current_window_participants_b": 488,
+        "current_window_participants_2b": 277
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 62,
+          "step": 496,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 964,
+          "ema_eligible_rows": 522,
+          "coherent_rows": 521,
+          "eligible": false
+        },
+        "age_real_rows": 512,
+        "age_steps": 4,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.015625,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 496,
+        "ordinary_mass_moves": 2,
+        "ordinary_support_moves": 26,
+        "ordinary_global_moves": 19,
+        "ordinary_novel_birth_moves": 4,
+        "ordinary_copy_moves": 47,
+        "ordinary_moves": 51,
+        "iso_moves": 0,
+        "moves": 51
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          0.000265625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.0031874987620779663
+        ]
+      ]
+    },
+    {
+      "step": 750,
+      "checkpoint_sha256": "0ef06a70c087e9f3076abe7b4d9051cc032d4bd2b46b77ef336ac2c19b92a5f1",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 32.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 1,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 91,
+        "last_population": {
+          "event": "decision",
+          "step": 696,
+          "participating_rows": 591,
+          "required_rows": 973,
+          "coverage_rejected": true,
+          "scheduling_decision": "inconclusive"
+        },
+        "last_decision": {
+          "decision": "inconclusive",
+          "step": 696,
+          "tested_b": 16.0,
+          "verdict_b": -1,
+          "verdict_2b": -1,
+          "evidence_scale": 16.0,
+          "t_b": -2.8791529728078697,
+          "t_2b": -4.692073901626567,
+          "mean_r_b": -0.06979460843528311,
+          "mean_r_2b": -0.11138333093064527,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ],
+          [
+            120,
+            "inconclusive",
+            1.0,
+            8.0
+          ],
+          [
+            312,
+            "inconclusive",
+            1.0,
+            16.0
+          ],
+          [
+            696,
+            "inconclusive",
+            1.0,
+            32.0
+          ]
+        ],
+        "current_window_participants_b": 0,
+        "current_window_participants_2b": 0
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 93,
+          "step": 744,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1019,
+          "ema_eligible_rows": 854,
+          "coherent_rows": 852,
+          "eligible": false
+        },
+        "age_real_rows": 768,
+        "age_steps": 6,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.0078125,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 744,
+        "ordinary_mass_moves": 0,
+        "ordinary_support_moves": 6,
+        "ordinary_global_moves": 41,
+        "ordinary_novel_birth_moves": 4,
+        "ordinary_copy_moves": 47,
+        "ordinary_moves": 51,
+        "iso_moves": 0,
+        "moves": 51
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          0.0001328125,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.003187499706303243
+        ]
+      ]
+    },
+    {
+      "step": 1000,
+      "checkpoint_sha256": "9707b1f1786173a7dd3617e41cafa0db392e3def80b0d7ce1a30036379ae25dd",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 32.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 1,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 123,
+        "last_population": {
+          "event": "decision",
+          "step": 696,
+          "participating_rows": 591,
+          "required_rows": 973,
+          "coverage_rejected": true,
+          "scheduling_decision": "inconclusive"
+        },
+        "last_decision": {
+          "decision": "inconclusive",
+          "step": 696,
+          "tested_b": 16.0,
+          "verdict_b": -1,
+          "verdict_2b": -1,
+          "evidence_scale": 16.0,
+          "t_b": -2.8791529728078697,
+          "t_2b": -4.692073901626567,
+          "mean_r_b": -0.06979460843528311,
+          "mean_r_2b": -0.11138333093064527,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ],
+          [
+            120,
+            "inconclusive",
+            1.0,
+            8.0
+          ],
+          [
+            312,
+            "inconclusive",
+            1.0,
+            16.0
+          ],
+          [
+            696,
+            "inconclusive",
+            1.0,
+            32.0
+          ]
+        ],
+        "current_window_participants_b": 299,
+        "current_window_participants_2b": 152
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 125,
+          "step": 1000,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 952,
+          "ema_eligible_rows": 642,
+          "coherent_rows": 638,
+          "eligible": false
+        },
+        "age_real_rows": 0,
+        "age_steps": 0,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.0078125,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 1000,
+        "ordinary_mass_moves": 0,
+        "ordinary_support_moves": 8,
+        "ordinary_global_moves": 39,
+        "ordinary_novel_birth_moves": 4,
+        "ordinary_copy_moves": 47,
+        "ordinary_moves": 51,
+        "iso_moves": 0,
+        "moves": 51
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          0.0001328125,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.0031874988883657425
+        ]
+      ]
+    },
+    {
+      "step": 1250,
+      "checkpoint_sha256": "32bdc81253e2019d5e40c6b374429693014f8bbba5b7cf361fca74534a521f15",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 32.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 1,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 147,
+        "last_population": {
+          "event": "decision",
+          "step": 696,
+          "participating_rows": 591,
+          "required_rows": 973,
+          "coverage_rejected": true,
+          "scheduling_decision": "inconclusive"
+        },
+        "last_decision": {
+          "decision": "inconclusive",
+          "step": 696,
+          "tested_b": 16.0,
+          "verdict_b": -1,
+          "verdict_2b": -1,
+          "evidence_scale": 16.0,
+          "t_b": -2.8791529728078697,
+          "t_2b": -4.692073901626567,
+          "mean_r_b": -0.06979460843528311,
+          "mean_r_2b": -0.11138333093064527,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ],
+          [
+            120,
+            "inconclusive",
+            1.0,
+            8.0
+          ],
+          [
+            312,
+            "inconclusive",
+            1.0,
+            16.0
+          ],
+          [
+            696,
+            "inconclusive",
+            1.0,
+            32.0
+          ]
+        ],
+        "current_window_participants_b": 461,
+        "current_window_participants_2b": 206
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 156,
+          "step": 1248,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1023,
+          "ema_eligible_rows": 943,
+          "coherent_rows": 943,
+          "eligible": false
+        },
+        "age_real_rows": 256,
+        "age_steps": 2,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.0078125,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 1248,
+        "ordinary_mass_moves": 0,
+        "ordinary_support_moves": 9,
+        "ordinary_global_moves": 38,
+        "ordinary_novel_birth_moves": 4,
+        "ordinary_copy_moves": 47,
+        "ordinary_moves": 51,
+        "iso_moves": 0,
+        "moves": 51
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          6.640625e-05,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.0031874998331365848
+        ]
+      ]
+    },
+    {
+      "step": 1500,
+      "checkpoint_sha256": "4e945d98ef581bf41c0d9ce66c8b8f19816547f807a20c8fadde07ca0a1cdff6",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 64.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 2,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 171,
+        "last_population": {
+          "event": "decision",
+          "step": 1464,
+          "participating_rows": 323,
+          "required_rows": 973,
+          "coverage_rejected": true,
+          "scheduling_decision": "inconclusive"
+        },
+        "last_decision": {
+          "decision": "inconclusive",
+          "step": 1464,
+          "tested_b": 32.0,
+          "verdict_b": 0,
+          "verdict_2b": -1,
+          "evidence_scale": 64.0,
+          "t_b": -1.7715576537255968,
+          "t_2b": -5.580571922391524,
+          "mean_r_b": -0.056651645534050964,
+          "mean_r_2b": -0.22989637156327566,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ],
+          [
+            120,
+            "inconclusive",
+            1.0,
+            8.0
+          ],
+          [
+            312,
+            "inconclusive",
+            1.0,
+            16.0
+          ],
+          [
+            696,
+            "inconclusive",
+            1.0,
+            32.0
+          ],
+          [
+            1464,
+            "inconclusive",
+            1.0,
+            64.0
+          ]
+        ],
+        "current_window_participants_b": 0,
+        "current_window_participants_2b": 0
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 187,
+          "step": 1496,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1008,
+          "ema_eligible_rows": 887,
+          "coherent_rows": 881,
+          "eligible": false
+        },
+        "age_real_rows": 512,
+        "age_steps": 4,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.00390625,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 1496,
+        "ordinary_mass_moves": 5,
+        "ordinary_support_moves": 41,
+        "ordinary_global_moves": 1,
+        "ordinary_novel_birth_moves": 4,
+        "ordinary_copy_moves": 47,
+        "ordinary_moves": 51,
+        "iso_moves": 0,
+        "moves": 51
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          6.640625e-05,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.003187499701719703
+        ]
+      ]
+    },
+    {
+      "step": 1750,
+      "checkpoint_sha256": "76ac6b1f922522ddb6368393769872246f1adb60768a17b64ab49ff05f65a086",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 64.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 2,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 195,
+        "last_population": {
+          "event": "decision",
+          "step": 1464,
+          "participating_rows": 323,
+          "required_rows": 973,
+          "coverage_rejected": true,
+          "scheduling_decision": "inconclusive"
+        },
+        "last_decision": {
+          "decision": "inconclusive",
+          "step": 1464,
+          "tested_b": 32.0,
+          "verdict_b": 0,
+          "verdict_2b": -1,
+          "evidence_scale": 64.0,
+          "t_b": -1.7715576537255968,
+          "t_2b": -5.580571922391524,
+          "mean_r_b": -0.056651645534050964,
+          "mean_r_2b": -0.22989637156327566,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ],
+          [
+            120,
+            "inconclusive",
+            1.0,
+            8.0
+          ],
+          [
+            312,
+            "inconclusive",
+            1.0,
+            16.0
+          ],
+          [
+            696,
+            "inconclusive",
+            1.0,
+            32.0
+          ],
+          [
+            1464,
+            "inconclusive",
+            1.0,
+            64.0
+          ]
+        ],
+        "current_window_participants_b": 225,
+        "current_window_participants_2b": 0
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 218,
+          "step": 1744,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1016,
+          "ema_eligible_rows": 970,
+          "coherent_rows": 963,
+          "eligible": false
+        },
+        "age_real_rows": 768,
+        "age_steps": 6,
+        "eligible_now": false,
+        "derived_served_model": "fast",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "fast",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.00390625,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 1744,
+        "ordinary_mass_moves": 0,
+        "ordinary_support_moves": 0,
+        "ordinary_global_moves": 0,
+        "ordinary_novel_birth_moves": 0,
+        "ordinary_copy_moves": 0,
+        "ordinary_moves": 0,
+        "iso_moves": 0,
+        "moves": 0
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          6.640625e-05,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.0031874999073967128
+        ]
+      ]
+    },
+    {
+      "step": 2000,
+      "checkpoint_sha256": "b5a86ee4ce5d95cc5d5b64348b0944d8908aa8b053dc9d44263f41a3301b9efd",
+      "population": {
+        "active": false,
+        "mask_rows": 0,
+        "required_rows": 973,
+        "s": 1.0,
+        "b": 64.0,
+        "last_decisive": 1,
+        "undo_s": null,
+        "coverage_rejections": 2,
+        "expiries": 0,
+        "accepted_stationary": 0,
+        "rebases": 220,
+        "last_population": {
+          "event": "decision",
+          "step": 1464,
+          "participating_rows": 323,
+          "required_rows": 973,
+          "coverage_rejected": true,
+          "scheduling_decision": "inconclusive"
+        },
+        "last_decision": {
+          "decision": "inconclusive",
+          "step": 1464,
+          "tested_b": 32.0,
+          "verdict_b": 0,
+          "verdict_2b": -1,
+          "evidence_scale": 64.0,
+          "t_b": -1.7715576537255968,
+          "t_2b": -5.580571922391524,
+          "mean_r_b": -0.056651645534050964,
+          "mean_r_2b": -0.22989637156327566,
+          "n_b": 12,
+          "n_2b": 6,
+          "early": false,
+          "log_bf_b": NaN,
+          "log_bf_2b": NaN
+        },
+        "log": [
+          [
+            24,
+            "drift",
+            1.0,
+            4.0
+          ],
+          [
+            120,
+            "inconclusive",
+            1.0,
+            8.0
+          ],
+          [
+            312,
+            "inconclusive",
+            1.0,
+            16.0
+          ],
+          [
+            696,
+            "inconclusive",
+            1.0,
+            32.0
+          ],
+          [
+            1464,
+            "inconclusive",
+            1.0,
+            64.0
+          ]
+        ],
+        "current_window_participants_b": 281,
+        "current_window_participants_2b": 75
+      },
+      "paired_average": {
+        "stamp": {
+          "schema": 1,
+          "policy": "ema_support_inside_current_real_group_Q_v1",
+          "snapshot": 250,
+          "step": 2000,
+          "rows": 1024,
+          "required": 973,
+          "cells": 64,
+          "rank": 8,
+          "groups": 25,
+          "calibration_rows": 512,
+          "chart_valid": true,
+          "duplicate_ok": true,
+          "finite_rows": 1024,
+          "same_group_rows": 1018,
+          "ema_eligible_rows": 982,
+          "coherent_rows": 977,
+          "eligible": true
+        },
+        "age_real_rows": 0,
+        "age_steps": 0,
+        "eligible_now": true,
+        "derived_served_model": "EMA",
+        "chart_absent_semantic_view": true,
+        "rejected_atomic_controls": [
+          "old-backend7",
+          "wrong-geometry-policy",
+          "boolean-step",
+          "future-step"
+        ],
+        "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+      },
+      "serving": {
+        "served_model": "EMA",
+        "derived_from_frozen_RA9_geometry_predicate": true,
+        "average_rate": 0.00390625,
+        "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+      },
+      "last_phase": {
+        "step": 2000,
+        "ordinary_mass_moves": 0,
+        "ordinary_support_moves": 7,
+        "ordinary_global_moves": 41,
+        "ordinary_novel_birth_moves": 3,
+        "ordinary_copy_moves": 48,
+        "ordinary_moves": 51,
+        "iso_moves": 0,
+        "moves": 51
+      },
+      "base_learning_rates": [
+        [
+          0.0010625,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.00425
+        ]
+      ],
+      "applied_learning_rates": [
+        [
+          6.640625e-05,
+          0.0085,
+          0.0010625
+        ],
+        [
+          0.003187499705744193
+        ]
+      ]
+    }
+  ],
+  "original_artifact_auditor_unchanged": true,
+  "original_auditor_toy_subgate": {
+    "status": "PASS",
+    "checks": {
+      "precision": true,
+      "coverage": true,
+      "mass_tv": true
+    },
+    "thresholds": {
+      "precision_min": 0.9,
+      "coverage": 25,
+      "mass_tv_max": 0.1
+    }
+  },
+  "unchanged_root_full_toy_gate": {
+    "status": "PASS",
+    "checks": {
+      "precision": true,
+      "coverage": true,
+      "mass_tv": true,
+      "supported_mass_length": true,
+      "min_mass": true
+    },
+    "thresholds": {
+      "precision_min": 0.9,
+      "coverage": 25,
+      "mass_tv_max": 0.1,
+      "supported_mass_length": 25,
+      "min_mass_min": 0.01
+    }
+  },
+  "final_metrics": {
+    "precision": 0.96533203125,
+    "coverage": 25,
+    "mass_tv": 0.05211425781250001,
+    "centre_distance": 0.042550504207611084,
+    "covered_centroid_rms": 0.009175768122076988,
+    "supported_mass": [
+      0.03515625,
+      0.037353515625,
+      0.0341796875,
+      0.0357666015625,
+      0.03857421875,
+      0.03271484375,
+      0.04248046875,
+      0.0391845703125,
+      0.036865234375,
+      0.0382080078125,
+      0.0399169921875,
+      0.0384521484375,
+      0.0350341796875,
+      0.0455322265625,
+      0.0390625,
+      0.033203125,
+      0.03857421875,
+      0.0421142578125,
+      0.037841796875,
+      0.03955078125,
+      0.03857421875,
+      0.045166015625,
+      0.0413818359375,
+      0.040771484375,
+      0.0396728515625
+    ],
+    "unsupported_mass": 0.03466796875,
+    "clean_particle_centres": {
+      "precision": 0.9990234375,
+      "coverage": 25,
+      "mass_tv": 0.0366796875,
+      "centre_distance": 0.02287120744585991,
+      "covered_centroid_rms": 0.010440723970532417,
+      "supported_mass": [
+        0.037109375,
+        0.041015625,
+        0.03515625,
+        0.0341796875,
+        0.0390625,
+        0.03515625,
+        0.041015625,
+        0.04296875,
+        0.0361328125,
+        0.041015625,
+        0.0400390625,
+        0.0390625,
+        0.037109375,
+        0.048828125,
+        0.0380859375,
+        0.0361328125,
+        0.041015625,
+        0.044921875,
+        0.041015625,
+        0.0361328125,
+        0.041015625,
+        0.0458984375,
+        0.04296875,
+        0.04296875,
+        0.041015625
+      ],
+      "unsupported_mass": 0.0009765625
+    }
+  },
+  "backend_schema": 8,
+  "trainer_schema": 5,
+  "requested_cells": 128,
+  "actual_cells": 64,
+  "count_multiplicity": 194,
+  "named_index_API_frozen": true,
+  "matched_inputs_initialization_runtime_and_stream_cursors": true,
+  "population_LR_law_unchanged": true,
+  "geometry_serving_independent_from_stationarity": true,
+  "geometry_epoch_and_FIFO_history_exact": true,
+  "typed_resolution_count_partition_exact": true,
+  "scalar_geometry_fields_without_timings": true,
+  "final_newborn_rows": [
+    0,
+    1,
+    3
+  ],
+  "final_newborn_moments_history_evidence_graph_reset": true,
+  "watcher_exited": true,
+  "overall_quality": "Toy PASS; full original Grid100 remains separately required. Candidate unqualified by this toy-only audit.",
+  "model_forwards": 0,
+  "gradients": 0,
+  "optimizer_updates": 0,
+  "new_emissions": 0,
+  "new_seeds": 0,
+  "cuda_initialized": false,
+  "global_cpu_rng_unchanged": true,
+  "verified_hashes": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/prepare_checker.py": "ac77dbd831a43bd48f1382945a30ee1e693a229a30b92c01cced004a7cdf0317",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/audit_checkpoints.py": "e9c55f1e45b487985201979413dc471864b55f390aea21dbe729164c87ae80e5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/DERIVATION.json": "84d40acaf6183c3769db26895711581e17e59a8c52a6c04ba0f2bff25e44c967",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/source-freeze.json": "09e6e11fd7c862d7d98fca9b5209e93be971d034ab0c6553cbd9a18bdeb6bec2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/__init__.py": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/birth_phase.py": "aa794152ad55a44673adf3bac4284f6ab4bc3b559fac8cb4e7169fe7fafd633d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/continuous.py": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/feature_cells.py": "39558fb3839090eb9d933b8b37e4c73b7dfc3cf123b24c2ef58d818cc4052fcc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/training.py": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA9/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/COMPOSITION.json": "9e4766abe810c857e7790ca55277b62550ae2ff8ab690185b58373223a563d59",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/independent-source/FROZEN.json": "56bfa56d877c604dd46700148f1fc0d5cf016c3df56f066b3fb554d7a2f21936",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/independent-source/REPORT.md": "9352dd867d1ab62ca09a08e4c815907cd9e4ac14242f963d6fe602f4b2172c83",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/independent-source/receipt.json": "03345995160f38137cd1a02305d948ff232a8a3e5714dc2ea655531696bf02e6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/FROZEN.json": "3f13e4ae5ae66f250618c6a2e541cf4fb168ba59de46d6f34d536e258c1a1fdf",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/PREPARATION-FROZEN.json": "9763e0a1e8cc03a8a14d0f09c21f742b6098dc150296489983ebc4335035c9e0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/REPORT.md": "73934178a9b22ec69f8bd4c5ccb4e089f35e244133c030fdec7526123c0e944f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/attempt1.log": "ef4952c6a04b9ac522601af85b3102f3d850f955c4c7264164367039f958613a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/receipt.json": "434fb0e41d7f56b8a2da7145a22e8e0ba4c1e6a9df2caf9fe3a500d3e5e4cf0a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/freeze_candidate.py": "e16d3a0b91f6b9afe0061e425ee74d682c2cdddb1724e130069dfc70ad8f31c5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/prepare_lane.py": "7d1ad35d9b7a82dd3c99dbea6bd9356a19d101fd0cbd6cba97000c87d2b752df",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/nested_slot.py": "39776a239efc3c47c22a3869d098f44480bf2278196a0687c69b2e251d2ae251",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/PROTOCOL.md": "ef6fa60380ce5b6db415d0c58e11440431b64e0f9fafd3f187dd1287e8409c13",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA9.json": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/READY.json": "f2f117d650dbe8eca58c0313d07b661a25ad953bd6b3b30c99507510ca9e5949",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/compose_ra9.py": "ac742e98ab70b5e7514303d596a047cc02a5d9e69302bbacd84db7964de0c0b1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/RA9-PLAN.md": "91f46f9082c7d72bb927021434756009c4d9c133a09c4a43670b533d80d9752e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/READY.json": "f5afd255877d747a6113881aedffdcb8a62d01e01a3c4f7b486e4e1da62081af",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/FROZEN.json": "fa9aee80a4d62fe6d611e69508caaa66ab909dd6bf176d918cee6e5581a47a40",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/SOURCE-FROZEN.json": "06649bc07d660c2c54f2927c6b39c0a8c995a2f5f4f7877182ebdf83f9e65294",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/PROTOCOL.md": "ee0076023bed7bb025ff4ea912b4b99e999def846057cd40100a002227142420",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/QUALITY-TARGETS.md": "ef6fa60380ce5b6db415d0c58e11440431b64e0f9fafd3f187dd1287e8409c13",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/launch.py": "f7e5654a0a176266d4eaee293798a59abfc53dd3db75c77fbd6ebdcd06dd01e5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/INPUTS.json": "bc2a47c638d64b95f66326f0503efde76d8d1434190d817de85def7da5ec67e6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/PROTOCOL.md": "ee0076023bed7bb025ff4ea912b4b99e999def846057cd40100a002227142420",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/READY.json": "6c4b4f18517130ee8532313fbc5a0148c4585504c6ad7dc79d9037dfa4700c17",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/SOURCE-FREEZE.json": "2e566764ae330e3131134789c1129d804f3cf8df3d6b884bd3be2eba09dc948b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/common.py": "231f221f393ec11f9349111fbb3a9bb132620402f8a51e4767df0cc6a8e7d43c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/preparation-receipt.json": "fc704cbebbc31309affa41fe1c7cff0929b56df8e4773acd1a3ed21a002fee98",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/replay.py": "6b7ac41dab7a52ead34870917235d64c85824bd561dd44cb97b7602468cb2a0d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/DECLARED-API-EXPECTATION.json": "63491843c766817fca438bcfc6aa5a668f14c43027e0e81289a41771879d79d4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/READY.json": "6d8c2a1f06a8b7f4bdce09ca8bf9c5ebbf685e1c81fd66fed392226920bf38a3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/candidate-options.json": "0ff74e93d37e8a38d2bdc6551f1c96a0a4271a40aeb9e4f5b9a4ed0f04a64664",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/collect.py": "13bb8f1cf5d434de2ad06c341009e428249ce3467f71214cdc65701cbe3d63a3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/lane.py": "815fea93fadd264537b4bb21910e262d680d1003614ad55700f15616afadfb74",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/run_screen.py": "f577c27b806ed2afe4fb29acfe645d9067930882cf8bf86cc54383f94f603d43",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/screens/source-freeze.json": "f0bcf204eaa5f718a65ac719cf8bc2bc7389e040e7607d16a9d91a3b5eac9bcd",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/candidate-freeze.json": "852f6f439350b3f77d60785961d3db165611a95d1ef36ac77d88b69700281116",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/implementation/READY.json": "0d8f674fa2fac7b736b592e472310ca892037d4acf9e1de6d9f6a03e55710ac2",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/run_training.py": "de995630b74a9084e8b7a27e5ecfda0d4cb0c99d0f5976392640a854b405bb10",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/replay.py": "d3a9eb2cf3fe7ec95364c61ede923f9f95eac3e01a5c297bdaeb1a05dbd13ad3",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/PROTOCOL.md": "92d346f9349eb2ef1055706719d4c24ac44e1491faf099bf2b6bc177286c6c7c",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/models_metrics.py": "ae4113c9c7523e0ac17df05cb2c93731b96740c5594daa7085e4bf39ad9c7e47",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data-receipt.json": "8888d5a4d5ae5dec0e8edc78b933f1ca8111e19e81e4834695ab956b695398f3",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/evaluator.pt": "9872b10008933497cd2b0de80ea7d7d804e58f5a2a9f6dd0ccd5db3cb4f6f05b",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/toy-stream.pt": "d7d1fbf0bd8ef52d87ad8644cb3959926a604bc9647063064561679c8ba3964c",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/image-stream.pt": "c035df45f2b4e2e189279a43cf4369b4a3b3714650ee284efe2cd15ac31c98c1",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-images-idx3-ubyte.gz": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-labels-idx1-ubyte.gz": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-labels-idx1-ubyte": "ff7bcfd416de33731a308c3f266cc351222c34898ecbeaf847f06e48f7ec33f2",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-labels-idx1-ubyte": "65a50cbbf4e906d70832878ad85ccda5333a97f0f4c3dd2ef09a8a9eef7101c5",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-images-idx3-ubyte": "ba891046e6505d7aadcbbe25680a0738ad16aec93bde7f9b65e87a2fc25776db",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-images-idx3-ubyte.gz": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-labels-idx1-ubyte.gz": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-images-idx3-ubyte": "0fa7898d509279e482958e8ce81c8e77db3f2f8254e26661ceb7762c4d494ce7",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/runs/toy/E22/config.json": "f1db860262d8ff9bf80153d62adf54b35e8cfb143ce26c023bc05ef35c62fe38",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/runs/mnist/E22/config.json": "00dce3b332689e848985365ef9d7a11ee5ae788bbcf1ba784366432919a1c2ac",
+    "/ml2/hypergan/lrfree-20260926/harness/native100_diagnostics.py": "46e54896b8725499cb775fbb112b7bf27074ae01d8a7997e4fbb4384c9c44a2e",
+    "/ml2/hypergan/lrfree-20260926/harness/admissibility_lint.py": "f609def87ee49546fb550d112fd0a926598e58f790d51914e8decc55de1dcf97",
+    "/ml2/hypergan/lrfree-20260926/harness/wait.py": "6dd43c2fd868f2522bf10daba24f0383804676ea48583a28fff4a25a80735a77",
+    "/ml2/hypergan/lrfree-20260926/harness/native_failmodes.py": "75aa594d3577e88347fa12c79f5e73fb2504060a61edc54b61d6c6c4e5ea9afd",
+    "/ml2/hypergan/lrfree-20260926/harness/components.py": "9a4ac201e3efce9aa29c387441f36fbf14d9befb0439cc80b30afa1752e173ea",
+    "/ml2/hypergan/lrfree-20260926/harness/submit.py": "d837e8d459a75c593b242584939a71cd73b8bb720b85816ed5db743f300943ea",
+    "/ml2/hypergan/lrfree-20260926/harness/components_parity.py": "762e5ec7b0bc9ccfdf6785f357715f5e5126c7c105e83bab66d07fadb55b4652",
+    "/ml2/hypergan/lrfree-20260926/harness/validate_all.py": "5a5d4fa02f5280a974e88ee978c5fe017d128caa311661c27c9f47127611a79e",
+    "/ml2/hypergan/lrfree-20260926/harness/native100_score.py": "10cc14edfcd98ab34fd3768aaba2ee835dc2241dc1face2e18998c8f2b687feb",
+    "/ml2/hypergan/lrfree-20260926/harness/lrlib.py": "3e5b02ff12b2516940e8a978bed4e2b5095f8f7f23bc54bab8d0dc9d42ca5ac3",
+    "/ml2/hypergan/lrfree-20260926/harness/custom22.py": "bae0aaaa93c13bbf8849122f4557424bd427236169b8ba467e4df265db030017",
+    "/ml2/hypergan/lrfree-20260926/harness/pool.py": "d6b4f532b3df2f053a6e0dcd91576a0ed9da59bb8918576960a6f9e3ad72cc89",
+    "/ml2/hypergan/lrfree-20260926/harness/screen.py": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c",
+    "/ml2/hypergan/lrfree-20260926/harness/compare.py": "47b65e9d595fac8eda76d5e65befcd9a42af2e7c9a4d67665e03cc224d4f4df8",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/ring_host.py": "312c29e7629848a12f54006e90d1b8d7de7470b1313175a7d437ebb879552ed6",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/vector_host.py": "7d6b7da9e940f0e3d81e63c587cb55f5373aeb400424a46aee029cbdd5414294",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/mode_hold_fixture_receipt.json": "532cbfadb0e5e254ae849568e59e452ea4da7a0f6301649b0f94e437e499cbbc",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/frozen_shared_critic.py": "02588724d95d8df300e3d953a8a9539525f48be5891d15f606e3608818a30d6a",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/mode_hold_host.py": "848869361678a9aaa59cda94d50c62fbf28d34f5c3b85a46682b20f0730cc37c",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/image_host.py": "98dfe053295760f7a86eb4a1011587718a735bec94f36ee86481fd1f50ce7c8d",
+    "/ml2/hypergan/lrfree-20260926/harness/tests/custom22_host_policy.py": "6247fdb004eadfb71a3f0488b025b5c8eb884f2d0205b673d759788da3cb58da",
+    "/ml2/hypergan/lrfree-20260926/harness/tests/test_components_parity.py": "72de6bab4276ab228e7adf1aa3856dce1f56f2424650206e1a3d8e7b5fe811c0",
+    "/ml2/hypergan/lrfree-20260926/harness/tests/custom22_host_noise.py": "df6f1f94738b41a42184fd099faa088b136ad2059a56d5660fb44c1564013dc0",
+    "/ml2/hypergan/lrfree-20260926/harness/tests/test_native100_motion.py": "658a49c0bf68d3af925e779f0edb2d8c2ea0d2849319716e755a429ea84b75ba",
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/native100_fixture.json": "95a0afa02e03522bd33b1a3851041551c0802f2da87d81bc67fd89ec9695932d",
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/vector_task_specs.json": "c751c10571ba32403b1e048d167991da1b6a79c5786db7bf99f4e2675feb9cbd",
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/mode_hold_protocol.json": "f70ebbe84e2fa97c2daf2a83a88dbe642ac41140b8dce58a6ccf1f41845c7d7c",
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/ring_reference_declaration_dv2.json": "eb1d1dcc30b013743708d401f95689b9e3fd43b4a5a480bb2a8c2b7a22eb4733",
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/native100_constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/custom22_specs.json": "873dc4fb49e7b3c2f0b416afd84245ec03d165aebb15f35a20d3ff96cbfa5ec8",
+    "/ml2/hypergan/lrfree-20260926/harness/tasks/image_task_specs.json": "60aff41072a8f88d3ca7fa63252af65aeec18e94f57600c7b3413f84139280b4",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/MANIFEST.json": "5da2d114837057aba0acca16e497e86bcacd50cc2db17fe7119a5cd5ac3e51df",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/frozen_verdict.py": "ba86d55641d6d7c9beb7e360076eae7109242ab0cafcbd39410efc5ea38715fa",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/__init__.py": "531e371b8585ce42258e1c3b0c50db12d7c1c0ac24a0f1c8248b82d91a1368a6",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/gan_v3.py": "f9f282164b2000ecd561e0d5b71679a13c9aad65869b1464e1e9e365081689b9",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/trajectory.py": "bb03be3bbb9ee15638d28854e3638d3d580e46143db4f47fc067be608f28fd2b",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/two_pole.py": "167d6d2b77ebb163d063fbf4e7d4752b32a87947bbbb4483631913e49670ffe1",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/__init__.py": "42d088d373ba432f90d97a7fee7e3dcff97083eced013c904904571df3c493c3",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/observation.py": "f46626fa341dd2b3e1d42f0c85fbc0d3dc0b86f22d4d7e6dbb7ac24137120e4b",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/legacy/recipe.py": "2225cab93c7a66852c513062ae112a070a856533f71f2bfc813dcea3173c3e5a",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/legacy/__init__.py": "745f7b64d07941e3ef625edbac5b1bffda9d65b674a28aeccdeea208ec09cc6c",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/legacy/gan_loss.py": "53dc988c0c84f23cb4d5a976347eb0891e0dacd978e0195a01795f31d6c1ed12",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/legacy/grad_regularizers.py": "3b8c75766c1781996e2a9f95aa26afe383edf70b97749cd8c24b2cf25bacab14",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/legacy/locked_shared.py": "edaa4210efe9b8b999921bfe4d71eb4bf91f1c37c47e57980b276db9f2cee70f",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/toy100/device.py": "7cc754d91d893fb86570cda42ad7d9eaf99acca722b5e6ac044c5b7e47abac8e",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/toy100/__init__.py": "7ca52801044b065295a7b48ccbc03a29eb992e2e51c6c9d84d1c1a8ce11f41da",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/hosts/unused_token_hold.py": "c05271c6a4ff26c37be81b84c44c4d6a7dd1d9c91584944d04d3156ea5e90d28",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/hosts/cover_leftover.py": "601de2b20a3db230e859250803be2bcfd5602003e6375e6a9f3611f446b9faab",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/hosts/__init__.py": "b080b914484502f6ee805e485434f426c5c604f6ab7071c997a18301f8c9aa2b",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/hosts/unipolar.py": "b49ce312300358f3fbe1e5b8b0358ce2f0102cfab5c13f1d7b16a3321a46e128",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/hosts/ae_gan_hold.py": "64a7a8f47d3be4aaf916a62d27d382ecb6e40a1e2e4423c85314b687ff515ed9",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/hosts/residual_student.py": "579add350a17147fc3c5713e5d5f28bf029eb6e4f439e0cfc1633ee82be2e239",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/custom/benchmarks/locked_shared/hosts/mid_scale_identity.py": "3c741360d9b9a6124e2ad07e01e55a4bb4d473d4119b32657fd9329107afa680",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/mode_hold_batch_receipts.jsonl.gz": "729aa85b893e482f439f78c42ae765127bf4a7ba8106326e91c17120719e7dac",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/train.py": "88b0f4d9dbe540d9ccd9276af663e60becf25515819cf05ae63326fcd8675472",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/models.py": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy_evidence.py": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/gate.py": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/config.py": "0cadc75ddcf68e970102074a7f04a91fc23c0e169c7abbafb5e25133af6b5983",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/benchmarks/toy100/device.py": "b6777948db2c5e4692c49a3aae594c94145ce32e51f3eb548c8ad7a5b2453a67",
+    "/ml2/hypergan/ParticleGAN-k3p-continuous-search/lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/prepare-cb64-ra9-quality.py": "f1cf1f34322a6ba92e76fc9bd5bd9a1a21a059cc6ced07247a495bf134f93cfe",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/prepare_validation4.py": "5f8a88e86e38e13bf1ee4de4fab8e864b5d6bcfff00d6a9843e2fd4cb3d0c4a2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/audit_checkpoints.py": "2dbc740f3a81651173dd4b95a5601456953e542463893e15a313bbe36769b548",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/audit_learned.py": "683acf472985084a911edd6763d63d411772563d7fcb71df4a547d2a502347ba",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/CHECKER-FROZEN.json": "b4dbf631a9ddfe79dbe9c01d79649b7d6872740a5820331161e4842aafcf48c0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/SOURCE-RECEIPT.json": "ecd79a77155d1d76da7ba7235c4eb529783fd503b51043125b72c1e6a8ee43d3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/SOURCE-FROZEN.json": "adb1a1eb6834ac0d7402879f8ce99e36bce1c6ce5bf5d1d5d053155c53a5729b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0000.json": "e29bd60c70ebbd870f4ba95ba35f78cc0bb5e423cbb273e952a3af4aefb14df2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0000.pt": "0fe67decc643392622b95265dcf03f20d143d9e53e54dba93307ad9fa5effdc9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/config.json": "0d688ed67096859cff0f2fc04bab285af5fda4075b12e510409cc77b21f6c671",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0000-FROZEN.json": "d7d5d82862edf0b6cab83781604c61289cfe710edbfd1546e30d268c4aebdf9c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0100.json": "a4546be07eb634384172e31f2b6b33608045d8aac0656f5037bd8c7e42602862",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0100.pt": "a8755f22483a96d9f18f1941efe6ee2f6ec4bd488bd27c144298ebb0095a90c0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0100-FROZEN.json": "90ee53e7a7ee3e0c65300093de0e90aa540d124f6fdc11d2f973b98db1c46c5e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0250.json": "4d1dba70533fa158e8442484200601874243c2cf63764f3ef1293e7cf769136e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0250.pt": "b879f46930f767e2b5d626e787885878506baa8a41d5efa1d53703dd6a8be2d8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0250-FROZEN.json": "d378760ee75c4b45116fa9474ccb15d4942a20b4ffed9e0253222a5b3b5358fc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0500.json": "197755deac53fb2e95bf024c071535f1a7ae9a8780920e57df8dbb2696a33e46",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0500.pt": "1b25a3d53b89c54862869bbc3fe5891ca67101d2da99ea08e75b4c9fbe717e95",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0500-FROZEN.json": "f780277d9065206b9db24d57cd563b951f5d8f5b3975cf03b5923c8363c97e91",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0750.json": "9925d9e96b4139d42b55a027095dfff92fefc878957dd487571d192d29193f6f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-0750.pt": "0ef06a70c087e9f3076abe7b4d9051cc032d4bd2b46b77ef336ac2c19b92a5f1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-0750-FROZEN.json": "f34d6ccde8ed7a8ef2d8fd783c84955a209bd5d8c34cec0e7fb11af2bf945741",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1000.json": "fcd75a0046e39997e29284b465c013da6dbb65a64898cfd60b5e784af2df386f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-1000.pt": "9707b1f1786173a7dd3617e41cafa0db392e3def80b0d7ce1a30036379ae25dd",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1000-FROZEN.json": "f3e36d20c0891a648446a7221c882ba55ab87037cd76ff84663e00b656753f45",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1250.json": "8b20ab3af9cb89ecea3bc6da16a1eb5e8b732fcd5e52e9473cbcd62f283f8e5f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-1250.pt": "32bdc81253e2019d5e40c6b374429693014f8bbba5b7cf361fca74534a521f15",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1250-FROZEN.json": "a4670ee87bbcba6a574f4d3abba22ea6933031c3d5a98906f4b730a467055b59",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1500.json": "220dc56262e3f1e4db7128b5bff1cef64f7eaa2c8e00ff838bf5bf42e148468b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-1500.pt": "4e945d98ef581bf41c0d9ce66c8b8f19816547f807a20c8fadde07ca0a1cdff6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1500-FROZEN.json": "b0fa9f85ac0e90e9a86c084776c01c071bdc5594519daf46d68f0733f4269bfb",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1750.json": "01115d7ffb5edc57c7ad8b7110ee38a16d3955bf49d0962bf595e7e579267448",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-1750.pt": "76ac6b1f922522ddb6368393769872246f1adb60768a17b64ab49ff05f65a086",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-1750-FROZEN.json": "d94fef349eb64745bd30cf5744a844ff1e5a4f3b653c2737c6773fac6cbb9c4c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-2000.json": "8f1b7e9de783d1b83690382a0ca0ff8cb1bc91a76502e6ef6b7cd041e6ba3679",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/checkpoint-2000.pt": "b5a86ee4ce5d95cc5d5b64348b0944d8908aa8b053dc9d44263f41a3301b9efd",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/checkpoint-2000-FROZEN.json": "c9ceca2f5646c5284600ee8476061196149935226129db0e101b997779e14c91",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/metrics.jsonl": "5809eb76b8c75299a12b47cef3bca023b12c9f69cd06abd03f2b75041efb29d7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/learned/training/toy/CB64-RA9/result.json": "b41eec6f75673a397d7d300db225a6867c2c2c585f9093099fddc0ab5cdf84ab",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/final_review.py": "2da745a9790efc9d8600295d5dd06435d71dd8534e059d1cafb431c2ddcdbb5e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/accepted-attempt1/summary.json": "70cddbf70ed545e3fbb4ffd9960ace92d580d042ce2c5211eec5ddf36f9cea0b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/watcher.log": "c32ab01508f4a6bc269db619cb30cc73212dbc898ddcb513f48c35d60203ade6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/WATCHER.json": "3844c3a56a1470fa123fe96503172ad87e47660db93d6b5ae2c106bba25659ed",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/start_watcher.py": "7e5f1c11debb863754bd9f785bdc0c8d6b29234610ff4a6b4a965f44d70542c1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/initial-attempt1.log": "42bda7e08266f7a91cd7c25b4dea32b6ee17feab2dc9ff18d8d9dcb12db55cbe",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/prepare-attempt1.log": "b4dd371415c09ecdb3c5baff67ac8b80ddb7f1ff059bb48fe74dbfbddb62656a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra9-prospective/original-artifact-attempt1.log": "18e2870de5e915a3f34c7a4f6c2b7cc0ed9410f646bebdd44e10feb64f5b4ee2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/logs/learned-toy-CB64-RA9.log": "7bf9cce4af92922f40137f0d35c27486134ce93c65fb741bff851d63616a03ff",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra9-final-learned-artifact-audit/summary.json": "522707b4920a02803ce150c6de59c889d3501da3822d29a00e92ea49b38a8233",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra9-final-learned-artifact-audit/REPORT.md": "ea970d7c345b7f5f9c26f9d27871ce4d71ff86c2a6dc2b4fdc8a9db4e29c1c0b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra9-final-learned-artifact-audit/AUDITOR-IDENTITY.json": "0bc8214e553db39a7a3cfbe5865a65c9b4770bf672383a018a7b61692460395f"
+  }
+}

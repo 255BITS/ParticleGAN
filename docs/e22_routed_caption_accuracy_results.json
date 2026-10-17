@@ -1,0 +1,246 @@
+{
+  "task": "routed_caption_accuracy_v1",
+  "complete": true,
+  "scientific_status": "FAIL",
+  "conclusion": "Current particles miss the fixed terminal accuracy gate: aggregate RMSE is worse than ordinary LoRA and five of six sources exceed the 1e-6 harm tolerance. Codes help all six sources and ownership/numerics checks pass; no optimizer remedy is established.",
+  "variant_scope": "New public-API fixed-endpoint accuracy variant of the generated six-site caption fixture; prior game-ranking and actual-task gates remain unchanged. Future imported APIs may PASS without reproducing historical failure.",
+  "fixed_protocol": {
+    "steps_each_arm": 512,
+    "arms": [
+      "ordinary_BF16",
+      "particle_BF16"
+    ],
+    "test_contexts": 48,
+    "contexts_each_source": 8,
+    "tokens": 256,
+    "output_coordinates": 16,
+    "total_scalar_coordinates": 196608,
+    "metric": "Unscaled physical paired residual RMSE, float64 reduction, terminal only; offline evaluation never enters native game/structural controls.",
+    "thresholds": {
+      "relative_aggregate_improvement_gte": 0.001,
+      "per_source_harm_lte": 1e-06,
+      "relative_code_benefit_gte": 0.001,
+      "strictly_beneficial_code_each_source": true,
+      "bank_router_live_fraction_gte": 0.9,
+      "denominator": 511
+    }
+  },
+  "accuracy": {
+    "ordinary_BF16_RMSE": 0.006489918631166267,
+    "particle_BF16_RMSE": 0.006506938519664952,
+    "zero_code_RMSE": 0.006614909084987629,
+    "particle_minus_ordinary": 1.7019888498685277e-05,
+    "particle_relative_RMSE_excess": 0.0026225118473675035,
+    "code_relative_RMSE_excess_when_removed": 0.01659314361068165,
+    "by_source": {
+      "0": {
+        "ordinary": 0.0064765666031385985,
+        "particle": 0.006487325314658033,
+        "zero_code": 0.00669643590506763,
+        "particle_minus_ordinary": 1.0758711519434118e-05,
+        "zero_code_minus_particle": 0.00020911059040959728
+      },
+      "1": {
+        "ordinary": 0.006493289599499693,
+        "particle": 0.006510053620327607,
+        "zero_code": 0.006526989330308351,
+        "particle_minus_ordinary": 1.6764020827913888e-05,
+        "zero_code_minus_particle": 1.6935709980744375e-05
+      },
+      "2": {
+        "ordinary": 0.006432832856963881,
+        "particle": 0.006510023689070444,
+        "zero_code": 0.006547237152876445,
+        "particle_minus_ordinary": 7.719083210656289e-05,
+        "zero_code_minus_particle": 3.72134638060009e-05
+      },
+      "3": {
+        "ordinary": 0.006548754832801855,
+        "particle": 0.0065533339365834034,
+        "zero_code": 0.006633809920391648,
+        "particle_minus_ordinary": 4.579103781548674e-06,
+        "zero_code_minus_particle": 8.047598380824493e-05
+      },
+      "4": {
+        "ordinary": 0.0064956577826819776,
+        "particle": 0.006522276640716353,
+        "zero_code": 0.006598705250138454,
+        "particle_minus_ordinary": 2.6618858034375276e-05,
+        "zero_code_minus_particle": 7.642860942210124e-05
+      },
+      "5": {
+        "ordinary": 0.006491874905726111,
+        "particle": 0.00645822102593162,
+        "zero_code": 0.0066844319349647205,
+        "particle_minus_ordinary": -3.365387979449141e-05,
+        "zero_code_minus_particle": 0.00022621090903310066
+      }
+    }
+  },
+  "gate": {
+    "pass": false,
+    "aggregate_accuracy_improved": false,
+    "no_source_harmed": false,
+    "aggregate_code_benefit": true,
+    "code_beneficial_each_source": true,
+    "bank_live": true,
+    "query_live": true,
+    "C_live_all_six_sites": true,
+    "relative_accuracy_improvement": -0.0026225118473675035,
+    "relative_code_benefit": 0.01659314361068165,
+    "relative_margin": 0.001,
+    "per_source_harm_tolerance": 1e-06,
+    "live_fraction_threshold": 0.9,
+    "live_denominator": 511
+  },
+  "sources_exceeding_harm_tolerance": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "live_and_controls": {
+    "bank_updates": 511,
+    "query_updates": 511,
+    "denominator": 511,
+    "C_norms": {
+      "ctx_proj": 1.0270382165908813,
+      "block.self_attn.qkv": 1.0570497512817383,
+      "block.self_attn.proj": 1.0521643161773682,
+      "block.cross_attn.q": 1.180156946182251,
+      "block.cross_attn.kv": 1.0149720907211304,
+      "block.cross_attn.proj": 0.9132020473480225
+    },
+    "accepted_moves": 0,
+    "proposal_events": 5,
+    "population_changes": "No accepted moves; three rejected proposals and two skipped events."
+  },
+  "producer_integrity_witnesses": {
+    "public_terminal_restore_output_exact": true,
+    "learned_weights_gradients_moments_finite": true,
+    "capture_native_and_caller_unchanged": true,
+    "caller_CPU_CUDA_RNG_restored": true,
+    "package_source_card_prep_unchanged": true,
+    "scorer_oracles_and_destructive_controls": {
+      "zero_target_oracle": true,
+      "unit_error_oracle": true,
+      "positive_gate_oracle": true,
+      "no_change_harmed_source_and_nonfinite_controls_rejected": true
+    }
+  },
+  "read_only_publication_checks": {
+    "report_completion_hash_exact": true,
+    "gate_reduced_from_report_scalars": true,
+    "all_512_trace_rows_each_arm_finite": true,
+    "matched_data_Gaussian_native_penalty_streams_reduced_exact": true,
+    "models_constructed_or_host_forwards_or_native_updates": 0,
+    "scope": "JSON/scalar/source hashing only; native/teacher/endpoint tensor replay proofs remain producer runtime witnesses."
+  },
+  "cost_seconds": {
+    "external_start_through_exit": 91.65191303589381,
+    "child_startup_through_cleanup_writes": 90.87025069189258,
+    "external_limit": 300,
+    "exit_code": 1,
+    "timed_out": false,
+    "quality_native_updates": 1024,
+    "quality_replay_updates": 0,
+    "separate_CPU_software_seconds": 1.81,
+    "separate_CPU_software_updates": 4,
+    "separate_CPU_media_seconds": 1.3369465570431203
+  },
+  "api": {
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+    "within_run_unchanged": true,
+    "permanent_version_allowlist": false,
+    "precision_backend": {
+      "allow_tf32": false,
+      "float32_matmul_precision": "highest",
+      "allow_bf16_reduced_precision_reduction": true
+    }
+  },
+  "provenance": {
+    "prepared_checkout": "00b37cb8",
+    "source_pins": {
+      "docs/e22_routed_caption_accuracy_software.json": "6c0ad629c101dae4ae657c362d0c5dc3d390a8a6e1504cb465bd2dd0d10048f5",
+      "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+      "examples/render_e22_routed_caption_accuracy.py": "1cdc113f648fabc506e093d23e13ba8b1ecf6b2ed970848c23c0b2159a6b2a7a",
+      "tests/test_e22_routed_caption_accuracy.py": "39b0a0c100ee8646bac08a9c4735f6c7e57d0563862c945e122fcebb0f4e1bad",
+      "docs/e22_routed_caption_accuracy_v1.json": "8fecbf89f1e8f8339eda49fd3d88536a18f49d782e2725dc8e5f330f9ed125bb"
+    },
+    "report_sha256": "a6c7ea362704a48c41841fbf6e13be7f1f3b98f7701b61931664696831b47c79",
+    "completion_sha256": "071a3e98fdbdaf39e23f072cf431e3f08439c6c23d71c83fd4b75cb7ec2ba520",
+    "external_receipt_sha256": "77fff4e0147e7fcf267a0cecf9b3045d4d4e8ecaf9f1373976be08add87862e4",
+    "external_launcher_sha256": "e38aed76fff113d11a3b6a3358be52904879002f25cef701f6fcaacdbc39ba59",
+    "data_digest": "b7755bae0c0cddd0557b5128da4a6a14acf7843e5c19d0d3b61ac0ad05ca6986",
+    "endpoint_residual_sha256": "ce9404e959f8d0d81c3dc4a94fd64d3693930d7fe50796b3660806a885e27b08",
+    "observed_media_sha256": "75d28d09cbb9546bbe5cd086d5f45e1bc727589453dc6b5bf5059ba6be25ae38",
+    "trace_bindings": {
+      "ordinary_BF16": {
+        "sha256": "85e3e2b1a09448ed04c8a5d5970053f8430cf102acb312615842bd556883e76b",
+        "rows": 512,
+        "accepted_moves": 0,
+        "proposal_events": 0
+      },
+      "particle_BF16": {
+        "sha256": "5d0ae5ebb1bd1c276702adec765c6ac9445caed50b452b89d026acae5f371425",
+        "rows": 512,
+        "accepted_moves": 0,
+        "proposal_events": 5
+      }
+    }
+  },
+  "media": {
+    "steps": [
+      0,
+      64,
+      128,
+      256,
+      384,
+      512
+    ],
+    "actual_training_GIF": "docs/e22_routed_caption_accuracy/goal.gif",
+    "gif_sha256": "86ac7be8bb31a2ce1ebcf875154b5f5c3ea2786e6d51fbae8935919e8107f5a3",
+    "receipt": "docs/e22_routed_caption_accuracy/media_receipt.json",
+    "receipt_sha256": "b461d382d29d8ed97c425251ae97d387a4b1c74a69422fd9c005d961158de3b4",
+    "fixed_initial_only_color_limit": 0.026183441794510952,
+    "separate_CPU_seconds": 1.3369465570431203,
+    "separate_CPU_limit_seconds": 60,
+    "model_forwards_native_updates": 0,
+    "scientific_status_unchanged": "FAIL",
+    "rendered_by_parent": true,
+    "scope": "Saved actual native-observed target and residual states only; no posthoc quality rerun."
+  },
+  "actual_BF16_transfer_negative": {
+    "terminal_steps": 6400,
+    "test_contexts": 240,
+    "ordinary_RMSE": 0.05039700311972803,
+    "particle_FP32_RMSE": 0.05047672925613336,
+    "candidate_BF16_RMSE": 0.050601121474222424,
+    "candidate_minus_ordinary": 0.0002041183544943953,
+    "authoritative_report_sha256": "183158eeb9a07e86a63984d7dd40b4af23bf8a6384783c5e83a556b09019d7d3",
+    "compact_negative_readout_sha256": "17980b9d70095fc199ecab6b9910600c30e17fcbf45eb2c841971b6ce9ad4087",
+    "control_scope": "Prior controls provisional; direct public endpoint/recovery witnesses retained. Actual source/caption fixture differs from generated task.",
+    "conclusion": "Actual BF16 still loses to ordinary LoRA; precision is not a verified repair."
+  },
+  "limits": [
+    "Generated caption vectors and frozen model, no pretrained Supra/T5 assets.",
+    "TEST has novel times/latents; actual caption FIT/TEST share the ten-time grid.",
+    "No claim of a unique precision cause, optimizer fix, population-law improvement or full-Supra win.",
+    "Original full-Supra top score remains unbeaten.",
+    "This one fixed cohort does not establish universal convergence or seed robustness.",
+    "Frozen prior sources/cards/tests/results were not revised."
+  ],
+  "reproduce_science": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_accuracy --run --out runs/routed-caption-accuracy-v1",
+  "reproduce_media": "python -m examples.render_e22_routed_caption_accuracy --run-directory runs/routed-caption-accuracy-v1",
+  "exit_codes": {
+    "0": "scientific PASS",
+    "1": "completed scientific FAIL",
+    "2": "incomplete/error"
+  },
+  "independent_read_only_review": {
+    "path": "docs/e22_routed_caption_accuracy_independent_review.json",
+    "sha256": "e09159111c77145f84253f0d4c4e9b397c65e953d4fb1c6363c8105ebd27e3eb",
+    "scope": "Independent retained-tensor/JSON/stream reduction; no new model forwards or native updates. Confirms current accuracy FAIL and integrity evidence."
+  }
+}

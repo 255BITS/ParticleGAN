@@ -1,0 +1,81 @@
+{
+  "active_tasks": 16,
+  "complete_recipe_delta": {
+    "constraint_geometry_mode": {
+      "baseline": "none",
+      "candidate": "direction_blend"
+    }
+  },
+  "dependencies": {
+    "five_word_joint_hold": [
+      {
+        "kind": "checkpoint",
+        "task": "five_word_joint_smoke"
+      }
+    ],
+    "gaussian1d_stability": [
+      {
+        "kind": "checkpoint",
+        "task": "gaussian1d_smoke"
+      }
+    ]
+  },
+  "frozen_scientific_digest": "d944540c70e280d8f981367368792920a70bbec0d919d681b4bdf0770a96f59f",
+  "inactive_fields": {
+    "critic_step_mode": "none",
+    "kinetic_transport_local_weight": 0.0,
+    "kinetic_transport_weight": 0.0,
+    "optimizer_momentum": 0.0,
+    "optimizer_svd_backend": "native",
+    "prior_reg": 0.0
+  },
+  "limitations": [
+    "READY is read-only preflight, not queue admission or authorization",
+    "FP full-step rounding can activate actual dot criterion even with aligned ideal directions",
+    "Historical task IDs/source contracts retain original grades"
+  ],
+  "original_task_conditions_exact_across_arms": true,
+  "paid_attempts": 0,
+  "paid_ceiling": 48000,
+  "paired_reservation": 45840,
+  "per_arm_reservation": 22920,
+  "planning": {
+    "baseline": {
+      "candidate_revision": "209e00269e2bf265f4f8b761721000a653572dc712ef8bea8c9dd5808c464a47",
+      "computed_preflight": "READY"
+    },
+    "candidate": {
+      "candidate_revision": "a70ab6f1b5ae46fc21cb8ddf6521ce3e928696aca7873852b7b40c356dd25a8b",
+      "computed_preflight": "READY"
+    }
+  },
+  "production_edits": 0,
+  "protocol_seed": 0,
+  "requests_submitted": 0,
+  "schema_version": 1,
+  "scope": "read_only_preparation",
+  "software_allowance": 300,
+  "source_files_checked": 1206,
+  "source_head": "9005ed73a09a740174f590fbfd543440935040eb",
+  "source_rebindings": {},
+  "task_ownership_deltas": {
+    "ae_gan_hold": "Only intentional technique ownership value/source; complete task conditions equal",
+    "five_word_joint_hold": "Only intentional technique ownership value/source; complete task conditions equal",
+    "five_word_joint_smoke": "Only intentional technique ownership value/source; complete task conditions equal",
+    "gaussian1d_smoke": "Only intentional technique ownership value/source; complete task conditions equal",
+    "gaussian1d_stability": "Only intentional technique ownership value/source; complete task conditions equal",
+    "grid100": "Only intentional technique ownership value/source; complete task conditions equal",
+    "residual_student": "Only intentional technique ownership value/source; complete task conditions equal",
+    "ring16_acquisition": "Only intentional technique ownership value/source; complete task conditions equal",
+    "rotated100": "Only intentional technique ownership value/source; complete task conditions equal",
+    "staggered100": "Only intentional technique ownership value/source; complete task conditions equal",
+    "trajectory": "Only intentional technique ownership value/source; complete task conditions equal",
+    "two_pole": "Only intentional technique ownership value/source; complete task conditions equal",
+    "unused_token_hold": "Only intentional technique ownership value/source; complete task conditions equal",
+    "vector_anisotropic": "Only intentional technique ownership value/source; complete task conditions equal",
+    "vector_unequal_mass": "Only intentional technique ownership value/source; complete task conditions equal",
+    "vector_unequal_width": "Only intentional technique ownership value/source; complete task conditions equal"
+  },
+  "tests_rerun": 0,
+  "workers_launched": 0
+}

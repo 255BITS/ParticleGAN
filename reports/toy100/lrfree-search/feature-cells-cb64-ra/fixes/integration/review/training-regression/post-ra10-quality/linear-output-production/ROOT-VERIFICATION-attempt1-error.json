@@ -1,0 +1,6 @@
+{
+  "status": "PREPARATION_ONLY_VERIFIER_FAILURE_RETAINED",
+  "failure": "Root recursive verifier initially treated package-relative __init__.py as manifest-relative. No GO or numerical invocation occurred. Corrected verifier checks absolute raw guards plus reviewer-local maps; source/config relative maps were independently verified earlier.",
+  "source_freeze_sha256": "1294e397fcb1a59bfb8629c373a12eb866384f0ebcf1344276234bd97b0291f3",
+  "utc": "2026-09-30T15:57:18.111050+00:00"
+}

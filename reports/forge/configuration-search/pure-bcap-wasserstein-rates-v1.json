@@ -1,0 +1,4744 @@
+{
+  "base_candidate": "bcap-pure-wasserstein-v1",
+  "base_declaration": {
+    "api_changes": [],
+    "api_version": "forge-api-v1",
+    "changed_factors": [
+      "Native Adam and fixed BCAP only",
+      "Constant rates and moments; zero additive training noise",
+      "Adversarial loss: wasserstein"
+    ],
+    "claim_contract": {
+      "sampling_law": "task_declared",
+      "schedule": "scheduled",
+      "scoring_weights": "live"
+    },
+    "decision_contract": {
+      "candidate_binding_sha256": "TODO",
+      "competing_explanation": "TODO: state the alternative explanation this observation distinguishes",
+      "control": {
+        "binding_sha256": "TODO",
+        "candidate_id": "k3p-bcap-matched-v1",
+        "task_map": {}
+      },
+      "falsifier": {
+        "metric": "TODO",
+        "op": "<",
+        "phase": "final",
+        "task_id": "TODO",
+        "threshold": 0.0
+      },
+      "prediction": {
+        "metric": "TODO",
+        "op": ">=",
+        "phase": "final",
+        "task_id": "TODO",
+        "threshold": 0.0
+      },
+      "prior_evidence": [
+        {
+          "identity": {
+            "record_id": "TODO"
+          },
+          "path": "TODO: source-bound JSON",
+          "selector": [],
+          "sha256": "TODO",
+          "use": "motivation_only"
+        }
+      ],
+      "schema_version": 1,
+      "scope": {
+        "campaign_budget_seconds": 900,
+        "candidate_budget_seconds": 900,
+        "execution_backend": "cuda",
+        "jobs_sha256": "TODO",
+        "max_rounds": 1,
+        "protocol_sha256": "TODO",
+        "runtime_cohort_sha256": "TODO",
+        "source_digest": "TODO",
+        "task_ids": [],
+        "through_tier": 1,
+        "view": "discriminator_stability"
+      },
+      "status": "draft",
+      "substantive_delta": [],
+      "terminal_rules": {
+        "falsified": "stop_revision",
+        "incomplete": "request_missing_evidence",
+        "inconclusive": "stop_and_readout",
+        "prediction_observed": "review_saved_diagnostics"
+      }
+    },
+    "execution_path": "public_trainer",
+    "goal": "discriminator_stability",
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "Pure BCAP with wasserstein loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+    "id": "bcap-pure-wasserstein-v1",
+    "lifecycle": "proposed",
+    "mechanism_class": "structural",
+    "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
+    "parent": "k3p-bcap-matched-v1",
+    "prior": {
+      "kind": "mog",
+      "learnable": true,
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "prior_art": [
+      "k3p-bcap-matched-v1"
+    ],
+    "recipe_overrides": {
+      "loss": "wasserstein"
+    },
+    "recipe_preset": "bcap",
+    "requires_capabilities": [
+      "learned_locations",
+      "named_rng"
+    ],
+    "schema_version": 2
+  },
+  "blocked_count": 0,
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 25200,
+    "candidate_budget_seconds": 2520,
+    "id": "pure-bcap-losses-v1"
+  },
+  "campaign_accounting": {
+    "definition": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 25200,
+      "candidate_budget_seconds": 2520,
+      "id": "pure-bcap-losses-v1"
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 1038.7521727493731
+  },
+  "cost": {
+    "evidence_wall_seconds": 39.83448206610046,
+    "new_paid_wall_seconds": 1038.7521727493731,
+    "observed_attempts": 6,
+    "wall_seconds": 39.83448206610046
+  },
+  "declared_worst_case_seconds": 5040,
+  "default_adoption": false,
+  "execution_backend": "cuda",
+  "holdout_tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "mode_hold",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "img_stripes2",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "grid100",
+    "rotated100",
+    "staggered100",
+    "ring_hold",
+    "ring_extension"
+  ],
+  "independent_confirmation": "not_performed",
+  "input_digest": "7152e5c562ebe2313b3ec797db62d2d3606206b53bae323e781366c99c7f5195",
+  "logs": "/home/martyn/dev/ParticleGAN-bcap-pure/runs/forge/pure-bcap-losses-v1/queue/events.jsonl",
+  "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+  "progression": {
+    "comparison_complete": false,
+    "configured_through_tier": 1,
+    "default_adoption": false,
+    "full_view_qualified_candidate_ids": [],
+    "full_view_winner_candidate_id": null,
+    "outcome": "pending",
+    "policy": "every declared configuration advances independently through ordinary prerequisites to the tier cap",
+    "smoke_survivor_candidate_ids": []
+  },
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_scope": "declared tuning tasks only; provisional Forge gates",
+  "queue_root": "/home/martyn/dev/ParticleGAN-bcap-pure/runs/forge/pure-bcap-losses-v1/queue",
+  "runtime_cohort": {
+    "compute_profiles": {
+      "cpu": {
+        "backend": "cpu",
+        "deterministic": true,
+        "machine": "x86_64",
+        "model": "AMD Ryzen 9 5900X 12-Core Processor",
+        "tf32": false,
+        "threads": 1
+      },
+      "cuda": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "execution_backend": "cuda",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "all_trials_terminal": false,
+    "calibration_status": "provisional",
+    "default_adoption": false,
+    "independent_confirmation": "not_performed",
+    "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+    "qualified": false,
+    "required_pass_count": null,
+    "required_passes_by_tier": null,
+    "required_task_bindings": [],
+    "required_total": null,
+    "selected_candidate_id": null,
+    "selected_configuration_id": null,
+    "selection_complete": false,
+    "selection_kind": "pending",
+    "source_digest": null,
+    "tuning_through_tier": 1
+  },
+  "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+  "source_digests": [
+    "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac"
+  ],
+  "spec": {
+    "base_candidate": "bcap-pure-wasserstein-v1",
+    "campaign": {
+      "accept_shared_cost_transfer": false,
+      "budget_seconds": 25200,
+      "candidate_budget_seconds": 2520,
+      "id": "pure-bcap-losses-v1"
+    },
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "grid": {
+      "lr": [
+        0.0010625,
+        0.00425
+      ]
+    },
+    "guide": "EXPERIMENTATION.md",
+    "hypothesis": "Pure BCAP with wasserstein loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+    "id": "pure-bcap-wasserstein-rates-v1",
+    "protocol": "screening",
+    "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "rationale": "Two constant global rates at one fixed loss. Same task-owned prior, initialization, architecture, duration and gates. Complete all runnable Tier 1 peers, preserve CPU behavioral objectives, stop before higher tiers. Five loss studies share one finite campaign. No seed trials, automatic tuning, criteria edits or default adoption.",
+    "schema_version": 1,
+    "trainer_family": "bcap-pure",
+    "tuning_through_tier": 1,
+    "view": "discriminator_stability"
+  },
+  "spec_hash": "a750bc141fca4cb9149f7f096b77370fa985d25ba344717f717143f972ccb583",
+  "speed_selection": {
+    "reason": "No frozen comparable first-acquisition timing contract is implemented for this search. Not all required adapters record per-observation seconds; original terminal-suffix or coverage-only times cannot supply full-quality first-acquisition speed.",
+    "selected_candidate_id": null,
+    "status": "UNAVAILABLE",
+    "wall_time_ranking": false
+  },
+  "stage": "enqueued",
+  "study_id": "pure-bcap-wasserstein-rates-v1",
+  "submitted_count": 2,
+  "technique_signature": {
+    "digest": "d3e8a3651a368c7c4e13e82d3b5abb6065e655f145cf38756dc33fda45ccc3c4",
+    "fixed_recipe_fields": {
+      "birth_death_backend": "knn",
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "continuous_policy": null,
+      "critic_formulation": "bcap",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "direct_particle_gain": false,
+      "distance_reduction": "sum",
+      "encoder_mode": "none",
+      "loss": "wasserstein",
+      "lr_control": "mobility",
+      "model": "gan",
+      "num_classes": null,
+      "optimizer_family": "adam",
+      "output_noise_mode": "fixed",
+      "particle_birth_death": false,
+      "reg_arm": "b_cap",
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "table_release_rule": "any",
+      "ucd_target": "class"
+    },
+    "mechanisms": {
+      "amsgrad": false,
+      "averaged_serving": false,
+      "beta2_schedule": {
+        "declared": false,
+        "network_changing": false,
+        "prior_changing": false
+      },
+      "critic_anchor": false,
+      "critic_guard": false,
+      "critic_penalty": {
+        "initial": true,
+        "terminal": true
+      },
+      "direct_particle_moments": null,
+      "gradient_cap": true,
+      "k3p_penalty_lr_floor": null,
+      "latent_damping": false,
+      "network_horizon_cap": false,
+      "network_moments": [
+        false,
+        true
+      ],
+      "network_terminal_updates": true,
+      "output_noise_warmup": false,
+      "penalty_schedule": {
+        "changing": false,
+        "declared": false
+      },
+      "prior_moments": [
+        false,
+        true
+      ],
+      "prior_regularization": false,
+      "prior_terminal_updates": true,
+      "reconstruction_objective": null,
+      "scheduled_learning_rates": true,
+      "terminal_second_moment": true,
+      "training_input_noise": false,
+      "training_output_noise": false,
+      "ucd_objective": null
+    },
+    "schema_version": 1
+  },
+  "trainer_family": "bcap-pure",
+  "trials": [
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "33f8a3a2df494506b3b1c793556c7c83",
+          "gate_statuses": {
+            "unused_token_hold": "PASS"
+          },
+          "result_hash": "34c7ac672a4ccae3fd7b41f4191983f765650d870c4386ac00e2c8e77772eda9",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.471655826084316
+        },
+        {
+          "attempt_id": "b812d90758a84198be73f68c9673f370",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "76f77a512421716bd4a64d1cda001389065ed09968231135ae8afdcab8b06f35",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.192651285906322
+        },
+        {
+          "attempt_id": "d020e2bc803a4ab8ad181f76f8753dc4",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "b70fbc123757426e5e06913c8989738cc278b8a515f2d1e12bace45dd4742a59",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.098756002029404
+        }
+      ],
+      "attempt_ids": [
+        "33f8a3a2df494506b3b1c793556c7c83",
+        "b812d90758a84198be73f68c9673f370",
+        "d020e2bc803a4ab8ad181f76f8753dc4"
+      ],
+      "candidate_id": "bcap-pure--43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+      "candidate_revision": "61b5c86289eada345408f765e861ddcff146ddcc351f18798eaef00f8b52ddd9",
+      "configuration_id": "43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+      "cost": {
+        "evidence_wall_seconds": 19.763063114020042,
+        "new_paid_wall_seconds": 19.763063114020042,
+        "wall_seconds": 19.763063114020042
+      },
+      "counts": {
+        "FAIL": 1,
+        "PASS": 2,
+        "UNKNOWN": 25
+      },
+      "declaration": {
+        "api_changes": [],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.lr=0.00425"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+        "decision_contract": {
+          "candidate_binding_sha256": "4aee1e417177b7724b1741185d42edf64982ed52ed71378b1898f1fe45537f8c",
+          "competing_explanation": "The old BCAP evidence uses K3P optimizers, schedules and noise. It motivates this baseline but is not a matched causal control. Finite task budgets and rate endpoints may fail; one passing endpoint is insufficient for the unchanged sustained task gate. Behavioral objectives belong to the tests.",
+          "control": {
+            "binding_sha256": "7075d43e0fb653e7545b5a0c9c95cc098c6edbf26758baaec3db72eb616a2856",
+            "candidate_id": "k3p-bcap-matched-v1",
+            "task_map": {
+              "ae_gan_hold": "ae_gan_hold",
+              "clockfree_audit_measurement_v1": "clockfree_audit_measurement_v1",
+              "five_word_joint_acquisition": "five_word_joint_acquisition",
+              "gaussian1d_acquisition": "gaussian1d_acquisition",
+              "ring16_acquisition": "ring16_acquisition",
+              "two_pole": "two_pole",
+              "unused_token_hold": "unused_token_hold"
+            }
+          },
+          "falsifier": {
+            "metric": "cdf_ks",
+            "op": ">",
+            "phase": "final",
+            "task_id": "gaussian1d_acquisition",
+            "threshold": 0.05
+          },
+          "prediction": {
+            "metric": "cdf_ks",
+            "op": "<=",
+            "phase": "final",
+            "task_id": "gaussian1d_acquisition",
+            "threshold": 0.05
+          },
+          "prior_evidence": [
+            {
+              "identity": {
+                "study_id": "bcap-tier1-refresh-v1"
+              },
+              "path": "reports/forge/configuration-search/bcap-tier1-refresh-v1.json",
+              "selector": [],
+              "sha256": "30d3f63dc83f7d651d8243527d0cba131105b1f6d103cd875da0b53eb6ae8924",
+              "use": "motivation_only"
+            }
+          ],
+          "schema_version": 1,
+          "scope": {
+            "campaign_budget_seconds": 25200,
+            "candidate_budget_seconds": 2520,
+            "execution_backend": "cuda",
+            "jobs_sha256": "1c58d0d98f20f90991449ceb1bb05da2ac0d3844284e0da0f3d59babce7985e2",
+            "max_rounds": 1,
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort_sha256": "f03804f032a7d5815d018b45c9fa112c1765013224d393e7a702a172b585735d",
+            "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+            "task_ids": [
+              "ae_gan_hold",
+              "clockfree_audit_measurement_v1",
+              "five_word_joint_acquisition",
+              "gaussian1d_acquisition",
+              "ring16_acquisition",
+              "two_pole",
+              "unused_token_hold"
+            ],
+            "through_tier": 1,
+            "view": "discriminator_stability"
+          },
+          "status": "ready",
+          "substantive_delta": [
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "two_pole",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "two_pole",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "two_pole",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "two_pole",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "two_pole",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "two_pole",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "two_pole",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "two_pole",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "two_pole",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "two_pole",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "two_pole",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "two_pole",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "two_pole",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "two_pole",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "loss"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "reg_anchor_weight"
+              ]
+            }
+          ],
+          "terminal_rules": {
+            "falsified": "stop_revision",
+            "incomplete": "request_missing_evidence",
+            "inconclusive": "stop_and_readout",
+            "prediction_observed": "review_saved_diagnostics"
+          }
+        },
+        "execution_path": "public_trainer",
+        "goal": "discriminator_stability",
+        "guide": "EXPERIMENTATION.md",
+        "hypothesis": "Pure BCAP with wasserstein loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+        "id": "bcap-pure--43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c",
+        "lifecycle": "proposed",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
+        "parent": "bcap-pure-wasserstein-v1",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "prior_art": [
+          "k3p-bcap-matched-v1"
+        ],
+        "recipe_overrides": {
+          "loss": "wasserstein",
+          "lr": 0.00425
+        },
+        "recipe_preset": "bcap",
+        "requires_capabilities": [
+          "learned_locations",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 0.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "ema_decay": 0.0,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.0,
+          "loss": "wasserstein",
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 1.0,
+          "model": "gan",
+          "name": "bcap",
+          "network_lr_floor": 1.0,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 0.0,
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 2,
+        "search_report": "reports/forge/configuration-search/pure-bcap-wasserstein-rates-v1.json",
+        "search_study_id": "pure-bcap-wasserstein-rates-v1",
+        "trainer_family": "bcap-pure"
+      },
+      "declared_worst_case_seconds": 2520,
+      "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 2,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 2,
+          "UNKNOWN": 24
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 2,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 2,
+              "UNKNOWN": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 2,
+        "tuning_required_total": 6
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "33f8a3a2df494506b3b1c793556c7c83",
+          "result_hash": "34c7ac672a4ccae3fd7b41f4191983f765650d870c4386ac00e2c8e77772eda9",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "b812d90758a84198be73f68c9673f370",
+          "result_hash": "76f77a512421716bd4a64d1cda001389065ed09968231135ae8afdcab8b06f35",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "d020e2bc803a4ab8ad181f76f8753dc4",
+          "result_hash": "b70fbc123757426e5e06913c8989738cc278b8a515f2d1e12bace45dd4742a59",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "loss": "wasserstein",
+        "lr": 0.00425
+      },
+      "recipe_preset": "bcap",
+      "request_id": "bad049cbb442f778e3d0204a",
+      "request_path": "/home/martyn/dev/ParticleGAN-bcap-pure/runs/forge/pure-bcap-losses-v1/queue/queue/requests/bad049cbb442f778e3d0204a.json",
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "wasserstein",
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "b35a8aa56e6af11981b257858ac5b717dd7a5083837ed6e9854ca17b468c2076",
+      "selected_attempt_ids": [
+        "33f8a3a2df494506b3b1c793556c7c83",
+        "b812d90758a84198be73f68c9673f370",
+        "d020e2bc803a4ab8ad181f76f8753dc4"
+      ],
+      "settings": {
+        "lr": 0.00425
+      },
+      "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "cancelled by request",
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "compatibility_key": "fd2ed76ec66ee0181616cd3ab72a9bb14e7ec49a0d042c4d7356f84dfeab6335",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "gaussian1d_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_acquisition"
+        },
+        {
+          "attempt_id": "b812d90758a84198be73f68c9673f370",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "929d67d8a3d0a0c3606ec5fb17677bd06f402ae0b1c512842f637acec99bee19",
+          "cost": {
+            "adapter_seconds": 0.25725810695439577,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.192651285906322,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.5735650659771636,
+            "wall_seconds": 6.192651285906322
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.13019117712974548,
+            "mean_abs": 0.012421281076967716
+          },
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "attempt_id": "33f8a3a2df494506b3b1c793556c7c83",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "f5bf158ad1af68c8ad465d6996d4dd16870cf9ee7c21e53f17bf114228bf5701",
+          "cost": {
+            "adapter_seconds": 0.5157675199443474,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.471655826084316,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.8200797450263053,
+            "wall_seconds": 6.471655826084316
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 167,
+              "first_pass_step": 84,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 14,
+              "passing_suffix": 9,
+              "stable_from_seconds": null,
+              "stable_from_step": 134
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.9881880963882423,
+            "unused_hold": 0.9876703899353743
+          },
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "attempt_id": "d020e2bc803a4ab8ad181f76f8753dc4",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "9607fd526929ac02815ef0de56b9febcd5885c28133890b068cc9f3ff9d40682",
+          "cost": {
+            "adapter_seconds": 1.0944600770017132,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 7.098756002029404,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.4026219659717754,
+            "wall_seconds": 7.098756002029404
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 63,
+              "first_pass_step": 21,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 23,
+              "passing_suffix": 23,
+              "stable_from_seconds": null,
+              "stable_from_step": 21
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.010169580578804016,
+            "recon_mse": 0.013462427072227001
+          },
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "23e463607ae2e550e0c1b67542cd1bc8160215f4bec38ac871a17e2a9667b208",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "compatibility_key": "9d2dff05895bfb53a6d2ef88a24bd163086ce638d508c6be91efdf666b7822d0",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "0439382e3de7c866f4abe17c1e01af69e9a36c3eceedef4fa1004512f2462485",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "diagnostic",
+          "metrics": {},
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "a95b7f15b2463142e016dee3df455d5191cb601c14031d1366521aced48883bc",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f5b6b222c3dd92a117e29f0d2417604f601fcb9ce68c8796498da7576aae14a7",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "49adf7f81c6708d394a990ecc3c24ecb9ed06a768e6201cbc501354cb640e9b8",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "9d73467b15e33b9138acd1ba976e84a2ea7efe3a865522aded0db01f3608ce3b",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "d1d6b86780012e3e29c54c538f43cef4528af5c0f1d57a1bb80ad9adeb31998b",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "4df374113899d03aafb5f91df865592dbe68aed786d2d1c031ffc2349b61e928",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "23b09696e6247a2733de919f720573c7174a8ea3fbeef84ee8281795712f5714",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "0c510b706103329c7f06e536db544e83437bc5bfffaa34f0b08820a4196b7cb8",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "8743ca83e0b4264840b086156e9b19f22c14749e5142cdde1d5aa40d5e11d11c",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "e104721c1b50e1ac119f7e0c144c510131611f8298b86b86c1d98d4916e8a497",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f72e3d324196232a24dbb662a000700c8989065b7c7a622fbf3a04a8da0a2eba",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "c26a4a4a03c8a3ce6a14e0e07a0065c03d018337f76410e0984042f30e0e0b08",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "32fa0b8aa71a6ee8ff69be62bb9ad1caa9ccd77dd6f7ad22b104e41ab2184e8e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "20c37476f8eb332edb7c3a007f7ec17657dfd492dcb61ba00319a393d91f61de",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "a454d479b89bd57cf52f584f5bc3dc7da6f11ac2bc135c44d335a60dc19917bd",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "adecc597591c771441a37792be5fa49c38e472b7caa3e0e4c0c30101273c045f",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "be9628a20cd3cd936ca43ed8ad5a5c6c736a6174474efcf49ad81c8244cfaa4e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "3cc257b1b2bff6650d11c2cc3d30d25273d77bb9ecd1c41d690e8378e7bf9093",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "c7690436b7baf7e03238cf58f1437b93194228f453069d9f6f499d92f3358575",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "74d83b3f6ec94e27cdb3d1c6b9ef061e477f5cd41e76a195a6d5d90c4bdad07b",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "74d83b3f6ec94e27cdb3d1c6b9ef061e477f5cd41e76a195a6d5d90c4bdad07b",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "d3e8a3651a368c7c4e13e82d3b5abb6065e655f145cf38756dc33fda45ccc3c4",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "loss": "wasserstein",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": "b_cap",
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": false,
+          "critic_guard": false,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "direct_particle_moments": null,
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": false,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "bcap-pure",
+      "unreused_worst_case_seconds": 2520
+    },
+    {
+      "attempt_history": [
+        {
+          "attempt_id": "02f803b831d44861820adce18355a59e",
+          "gate_statuses": {
+            "two_pole": "FAIL"
+          },
+          "result_hash": "df5328b3fe04ddeab2a8da4f38b994c5ee18b8b5583d25f66a82d18fc8279cf6",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.394618719932623
+        },
+        {
+          "attempt_id": "a43d949bc0094a80a87dbfaa976636ae",
+          "gate_statuses": {
+            "ae_gan_hold": "PASS"
+          },
+          "result_hash": "99bed11029257063cd571bd02ae51d0b6d583566f05cd6ca77e0260f45bdd4b5",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 7.16299256705679
+        },
+        {
+          "attempt_id": "fdc40f446d964237b012235b3c6a283f",
+          "gate_statuses": {
+            "unused_token_hold": "FAIL"
+          },
+          "result_hash": "30b80105f9ee8c13b783967d009891a1d56e01d2010a3878ded6bc606f8328d8",
+          "superseded_by": null,
+          "valid_receipt": true,
+          "wall_seconds": 6.513807665091008
+        }
+      ],
+      "attempt_ids": [
+        "02f803b831d44861820adce18355a59e",
+        "a43d949bc0094a80a87dbfaa976636ae",
+        "fdc40f446d964237b012235b3c6a283f"
+      ],
+      "candidate_id": "bcap-pure--b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+      "candidate_revision": "18a217e7897c4593e54c3d65295bfc5ed982fea10f86ecdd707d8653e4ea06ea",
+      "configuration_id": "b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+      "cost": {
+        "evidence_wall_seconds": 20.07141895208042,
+        "new_paid_wall_seconds": 20.07141895208042,
+        "wall_seconds": 20.07141895208042
+      },
+      "counts": {
+        "FAIL": 2,
+        "PASS": 1,
+        "UNKNOWN": 25
+      },
+      "declaration": {
+        "api_changes": [],
+        "api_version": "forge-api-v1",
+        "changed_factors": [
+          "Recipe.lr=0.0010625"
+        ],
+        "claim_contract": {
+          "sampling_law": "task_declared",
+          "schedule": "scheduled",
+          "scoring_weights": "live"
+        },
+        "configuration_id": "b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+        "decision_contract": {
+          "candidate_binding_sha256": "2eab98875fbbd6092608df75c32333c2f0536a9d995937ee088405e7ccfcf178",
+          "competing_explanation": "The old BCAP evidence uses K3P optimizers, schedules and noise. It motivates this baseline but is not a matched causal control. Finite task budgets and rate endpoints may fail; one passing endpoint is insufficient for the unchanged sustained task gate. Behavioral objectives belong to the tests.",
+          "control": {
+            "binding_sha256": "7075d43e0fb653e7545b5a0c9c95cc098c6edbf26758baaec3db72eb616a2856",
+            "candidate_id": "k3p-bcap-matched-v1",
+            "task_map": {
+              "ae_gan_hold": "ae_gan_hold",
+              "clockfree_audit_measurement_v1": "clockfree_audit_measurement_v1",
+              "five_word_joint_acquisition": "five_word_joint_acquisition",
+              "gaussian1d_acquisition": "gaussian1d_acquisition",
+              "ring16_acquisition": "ring16_acquisition",
+              "two_pole": "two_pole",
+              "unused_token_hold": "unused_token_hold"
+            }
+          },
+          "falsifier": {
+            "metric": "cdf_ks",
+            "op": ">",
+            "phase": "final",
+            "task_id": "gaussian1d_acquisition",
+            "threshold": 0.05
+          },
+          "prediction": {
+            "metric": "cdf_ks",
+            "op": "<=",
+            "phase": "final",
+            "task_id": "gaussian1d_acquisition",
+            "threshold": 0.05
+          },
+          "prior_evidence": [
+            {
+              "identity": {
+                "study_id": "bcap-tier1-refresh-v1"
+              },
+              "path": "reports/forge/configuration-search/bcap-tier1-refresh-v1.json",
+              "selector": [],
+              "sha256": "30d3f63dc83f7d651d8243527d0cba131105b1f6d103cd875da0b53eb6ae8924",
+              "use": "motivation_only"
+            }
+          ],
+          "schema_version": 1,
+          "scope": {
+            "campaign_budget_seconds": 25200,
+            "candidate_budget_seconds": 2520,
+            "execution_backend": "cuda",
+            "jobs_sha256": "2d01e85e6b9f907486dec438f4e131cab012c7291caf5b5d13fdcb599b5d4515",
+            "max_rounds": 1,
+            "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+            "runtime_cohort_sha256": "f03804f032a7d5815d018b45c9fa112c1765013224d393e7a702a172b585735d",
+            "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+            "task_ids": [
+              "ae_gan_hold",
+              "clockfree_audit_measurement_v1",
+              "five_word_joint_acquisition",
+              "gaussian1d_acquisition",
+              "ring16_acquisition",
+              "two_pole",
+              "unused_token_hold"
+            ],
+            "through_tier": 1,
+            "view": "discriminator_stability"
+          },
+          "status": "ready",
+          "substantive_delta": [
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "ae_gan_hold",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "clockfree_audit_measurement_v1",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "five_word_joint_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "gaussian1d_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "ring16_acquisition",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "two_pole",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "two_pole",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "two_pole",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "two_pole",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "two_pole",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "two_pole",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "two_pole",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "two_pole",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "two_pole",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "two_pole",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "two_pole",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "two_pole",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "two_pole",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "two_pole",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "two_pole",
+                "reg_anchor_weight"
+              ]
+            },
+            {
+              "after": "bcap",
+              "before": "k3p",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "critic_formulation"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 5.0,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "d_guard_ratio"
+              ]
+            },
+            {
+              "after": false,
+              "before": true,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "direct_particle_gain"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.995,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "ema_decay"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "input_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.5,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "latent_damping_max_rate"
+              ]
+            },
+            {
+              "after": "wasserstein",
+              "before": "relativistic",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "loss"
+              ]
+            },
+            {
+              "after": 0.0010625,
+              "before": 0.00425,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "lr"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.05,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "lr_floor"
+              ]
+            },
+            {
+              "after": 1.0,
+              "before": 0.01,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "network_lr_floor"
+              ]
+            },
+            {
+              "after": null,
+              "before": 1600,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "network_lr_horizon_cap"
+              ]
+            },
+            {
+              "after": "adam",
+              "before": "formulation",
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "optimizer_family"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.029,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "output_noise_std"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 0.2,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "output_noise_warmup"
+              ]
+            },
+            {
+              "after": 0.0,
+              "before": 1.0,
+              "path": [
+                "recipe",
+                "unused_token_hold",
+                "reg_anchor_weight"
+              ]
+            }
+          ],
+          "terminal_rules": {
+            "falsified": "stop_revision",
+            "incomplete": "request_missing_evidence",
+            "inconclusive": "stop_and_readout",
+            "prediction_observed": "review_saved_diagnostics"
+          }
+        },
+        "execution_path": "public_trainer",
+        "goal": "discriminator_stability",
+        "guide": "EXPERIMENTATION.md",
+        "hypothesis": "Pure BCAP with wasserstein loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+        "id": "bcap-pure--b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9",
+        "lifecycle": "proposed",
+        "mechanism_class": "floor_constant",
+        "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
+        "parent": "bcap-pure-wasserstein-v1",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "prior_art": [
+          "k3p-bcap-matched-v1"
+        ],
+        "recipe_overrides": {
+          "loss": "wasserstein",
+          "lr": 0.0010625
+        },
+        "recipe_preset": "bcap",
+        "requires_capabilities": [
+          "learned_locations",
+          "named_rng"
+        ],
+        "resolved_configuration_recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 0.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "ema_decay": 0.0,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.0,
+          "loss": "wasserstein",
+          "lr": 0.0010625,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 1.0,
+          "model": "gan",
+          "name": "bcap",
+          "network_lr_floor": 1.0,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 0.0,
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 7000,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "schema_version": 2,
+        "search_report": "reports/forge/configuration-search/pure-bcap-wasserstein-rates-v1.json",
+        "search_study_id": "pure-bcap-wasserstein-rates-v1",
+        "trainer_family": "bcap-pure"
+      },
+      "declared_worst_case_seconds": 2520,
+      "policy_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541",
+      "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 1,
+        "required_statuses": {
+          "FAIL": 2,
+          "PASS": 1,
+          "UNKNOWN": 24
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 1,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 2,
+              "PASS": 1,
+              "UNKNOWN": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 1,
+        "tuning_required_total": 6
+      },
+      "receipt_bindings": [
+        {
+          "attempt_id": "02f803b831d44861820adce18355a59e",
+          "result_hash": "df5328b3fe04ddeab2a8da4f38b994c5ee18b8b5583d25f66a82d18fc8279cf6",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a43d949bc0094a80a87dbfaa976636ae",
+          "result_hash": "99bed11029257063cd571bd02ae51d0b6d583566f05cd6ca77e0260f45bdd4b5",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "fdc40f446d964237b012235b3c6a283f",
+          "result_hash": "30b80105f9ee8c13b783967d009891a1d56e01d2010a3878ded6bc606f8328d8",
+          "valid_receipt": true
+        }
+      ],
+      "recipe_overrides": {
+        "loss": "wasserstein",
+        "lr": 0.0010625
+      },
+      "recipe_preset": "bcap",
+      "request_id": "cc374dd28205aaa6112eab56",
+      "request_path": "/home/martyn/dev/ParticleGAN-bcap-pure/runs/forge/pure-bcap-losses-v1/queue/queue/requests/cc374dd28205aaa6112eab56.json",
+      "resolved_recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "beta2_anneal_end": 0.2,
+        "beta2_end": null,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bcap",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "eps": 1e-08,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "wasserstein",
+        "lr": 0.0010625,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bcap",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "optimizer_family": "adam",
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_coeff_anneal_end": 0.2,
+        "reg_coeff_end": null,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_guard": null,
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "scientific_signature": "43b985516c53baff8c3c0d5c917845091bdae0256ac1e471b20a93a48ea1b71f",
+      "selected_attempt_ids": [
+        "02f803b831d44861820adce18355a59e",
+        "a43d949bc0094a80a87dbfaa976636ae",
+        "fdc40f446d964237b012235b3c6a283f"
+      ],
+      "settings": {
+        "lr": 0.0010625
+      },
+      "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+      "status": "FAIL",
+      "submission_blockers": [],
+      "submission_reason": "cancelled by request",
+      "submission_status": "cancelled",
+      "tasks": [
+        {
+          "blockers": [],
+          "budget_seconds": 120,
+          "compatibility_key": "7324b4a19a017dba3cc7521ee990f01a40856934ad60415a7c56d5abcd2bcce3",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "gaussian1d_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "gaussian1d_acquisition"
+        },
+        {
+          "attempt_id": "02f803b831d44861820adce18355a59e",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "c7dc2839b74ea8d641310edaf24497f793d08585bf4265fce41e3f0e78959ce3",
+          "cost": {
+            "adapter_seconds": 0.26859223609790206,
+            "charged_task": "two_pole",
+            "device": "cpu",
+            "execution_seconds": 6.394618719932623,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.588889529928565,
+            "wall_seconds": 6.394618719932623
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "two_pole",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "grad_med": 0.12501758337020874,
+            "mean_abs": 0.08286131918430328
+          },
+          "order": 1,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "two_pole"
+        },
+        {
+          "attempt_id": "fdc40f446d964237b012235b3c6a283f",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "2414c9cbda4419c4b9cdf20353590f0bb895db94d16d625cf2ee99a71441e019",
+          "cost": {
+            "adapter_seconds": 0.5248282949905843,
+            "charged_task": "unused_token_hold",
+            "device": "cpu",
+            "execution_seconds": 6.513807665091008,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 2.8762090109521523,
+            "wall_seconds": 6.513807665091008
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unused_token_hold",
+          "execution_group_blockers": [],
+          "gate_status": "FAIL",
+          "importance": "required",
+          "metrics": {
+            "concept_move": 0.6033504677854822,
+            "unused_hold": 0.9898760169744492
+          },
+          "order": 2,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unused_token_hold"
+        },
+        {
+          "attempt_id": "a43d949bc0094a80a87dbfaa976636ae",
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "53fae5cb54622fe9805120ad24022f33a07323ee7f2e2fde22358f9bf5028fdd",
+          "cost": {
+            "adapter_seconds": 1.0619298570090905,
+            "charged_task": "ae_gan_hold",
+            "device": "cpu",
+            "execution_seconds": 7.16299256705679,
+            "flops": {
+              "kind": "unavailable",
+              "value": null
+            },
+            "runner_seconds": 3.42031726508867,
+            "wall_seconds": 7.16299256705679
+          },
+          "evaluator_timing": {
+            "invalid_timing_fields": [],
+            "original_evaluator_convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": 136,
+              "first_pass_step": 94,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 16,
+              "passing_suffix": 16,
+              "stable_from_seconds": null,
+              "stable_from_step": 94
+            },
+            "semantics": "complete live curve and terminal passing suffix",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ae_gan_hold",
+          "execution_group_blockers": [],
+          "gate_status": "PASS",
+          "importance": "required",
+          "metrics": {
+            "hold": 0.00808912143111229,
+            "recon_mse": 0.014130453579127789
+          },
+          "order": 3,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": "completed",
+          "reason": "recomputed complete live curve and terminal suffix",
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ae_gan_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "44bd949cd56ff8bf4408c856737ae31870e585c2cf5c8b28fd94e9b9402ba060",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring16_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring16_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 900,
+          "compatibility_key": "e36d4aae86f944e5f1a7d775f23908558f3f3e53e72449865f82cda3e3585efe",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "five_word_joint_acquisition",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "five_word_joint_acquisition"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 300,
+          "compatibility_key": "4e22c06a9b859a092875ff7e1b8ff3c2b6823d3dea502ab71abcf82154709960",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "clockfree_audit_measurement_v1",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "diagnostic",
+          "metrics": {},
+          "order": 100,
+          "permitted_by_tier_cap": true,
+          "qualification_tier": 1,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "clockfree_audit_measurement_v1"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "2235cb6f3588f12919dae81812537ceb6455894aae995ba36b09fe5b55bc8bcd",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "trajectory",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "trajectory"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "5c8f2296df8902c42065e5222ba8de0ff9a0061702974b8c661e20ba8b67e8b5",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "residual_student",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "residual_student"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "8a15733c42131bf853331ebd4baa9c3e8d485379bd0b8f12fa1466afd84e3697",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "unipolar",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 2,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "unipolar"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "ee152fab06ed56e5717d65322da3c51b8babae7611ef7bc674bae3b109aaf23c",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "cover_leftover",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 3,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "cover_leftover"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "1b5df617b06236dda58b10b7ca4d0dd94f1daec791d0e3344c8143ee9aa10436",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mid_scale_identity",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 4,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mid_scale_identity"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "0eb2f303df87f5c649232a8e2dce9eb8d00ce8cd05a12a30f7f1d2966708e95c",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "mode_hold",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 5,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "mode_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "7cdb7892de98617ffd62ff0198c17568ba456bdf962378e0b34ea72306c76465",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_two_broad",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 6,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_two_broad"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "68861175bbca19628c2e6607717d536a3307fdf2d15e5e4429b90130326bc887",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_mass",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 7,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_mass"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "1d8e2d5438ffabc5271d2a7def7fc300c8d0ed98fafcbe2b8faa0559c9307a96",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_unequal_width",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 8,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_unequal_width"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "f8ba9394a19b229eb62ccf3e313ed131c0da43ca11e863686429a7459228d83c",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_anisotropic",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 9,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_anisotropic"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "740044b6204dbf0d427d69ab613ed237b1add68addfed1d593b3d751ef98a79e",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_overlap",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 10,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_overlap"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "9d1af91a2d577d1674c272a2f858001fa6de724884fe11c19d5f0ced6200b82a",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "vector_spiral",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 11,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "vector_spiral"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "fbdf0a144ee4d7b99e3d070d8cc8376652dca20f47077257ca511d446ad6fcb9",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_stripes2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 12,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_stripes2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "34c7a892b5ce1dbe8798372cf2d58f140fe4294d48c3b43abcd61901e1290154",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_bars4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 13,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_bars4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "75a4f5a41131d173c013e2b4b0ac5d789fac8cafa163c6d25018117fc8d251a5",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_blobs4",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 14,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_blobs4"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 1800,
+          "compatibility_key": "7d8d4351594fbeb2a9b293ff86eb0f4abd20b8c8241c89953420f691244a25a4",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "img_intensity2",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 15,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "img_intensity2"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "93c8e0c9dac000afafff0827d35bdb47bdcac4eb071259a0c5849cc61aebe690",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "grid100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 16,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "grid100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "47116eb8814c7a59d106082245162a8ce04bc23b9dc5d8880649896a1a303318",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "rotated100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 17,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "rotated100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "a0941036704f7badafeaa4fca1fd50cf6b968274f4e4889a127cac3a8f545477",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "staggered100",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 18,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 2,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "staggered100"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "2108c5961b4ca06e88e7c4446f38c3ec1471188f25376106a17149cdbe2b3e41",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 0,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_hold"
+        },
+        {
+          "blockers": [],
+          "budget_seconds": 3600,
+          "compatibility_key": "2108c5961b4ca06e88e7c4446f38c3ec1471188f25376106a17149cdbe2b3e41",
+          "cost": {},
+          "evaluator_timing": {
+            "reason": "no currently certified evaluator result",
+            "speed_qualified": false,
+            "status": "UNAVAILABLE"
+          },
+          "execution_group": "ring_endurance",
+          "execution_group_blockers": [],
+          "gate_status": "UNKNOWN",
+          "importance": "required",
+          "metrics": {},
+          "order": 1,
+          "permitted_by_tier_cap": false,
+          "qualification_tier": 3,
+          "raw_status": null,
+          "reusable": false,
+          "shared_pending": false,
+          "task": "ring_extension"
+        }
+      ],
+      "technique_signature": {
+        "digest": "d3e8a3651a368c7c4e13e82d3b5abb6065e655f145cf38756dc33fda45ccc3c4",
+        "fixed_recipe_fields": {
+          "birth_death_backend": "knn",
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "bcap",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "direct_particle_gain": false,
+          "distance_reduction": "sum",
+          "encoder_mode": "none",
+          "loss": "wasserstein",
+          "lr_control": "mobility",
+          "model": "gan",
+          "num_classes": null,
+          "optimizer_family": "adam",
+          "output_noise_mode": "fixed",
+          "particle_birth_death": false,
+          "reg_arm": "b_cap",
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "table_release_rule": "any",
+          "ucd_target": "class"
+        },
+        "mechanisms": {
+          "amsgrad": false,
+          "averaged_serving": false,
+          "beta2_schedule": {
+            "declared": false,
+            "network_changing": false,
+            "prior_changing": false
+          },
+          "critic_anchor": false,
+          "critic_guard": false,
+          "critic_penalty": {
+            "initial": true,
+            "terminal": true
+          },
+          "direct_particle_moments": null,
+          "gradient_cap": true,
+          "k3p_penalty_lr_floor": null,
+          "latent_damping": false,
+          "network_horizon_cap": false,
+          "network_moments": [
+            false,
+            true
+          ],
+          "network_terminal_updates": true,
+          "output_noise_warmup": false,
+          "penalty_schedule": {
+            "changing": false,
+            "declared": false
+          },
+          "prior_moments": [
+            false,
+            true
+          ],
+          "prior_regularization": false,
+          "prior_terminal_updates": true,
+          "reconstruction_objective": null,
+          "scheduled_learning_rates": true,
+          "terminal_second_moment": true,
+          "training_input_noise": false,
+          "training_output_noise": false,
+          "ucd_objective": null
+        },
+        "schema_version": 1
+      },
+      "trainer_family": "bcap-pure",
+      "unreused_worst_case_seconds": 2520
+    }
+  ],
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

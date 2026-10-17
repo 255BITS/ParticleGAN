@@ -1,0 +1,362 @@
+{
+  "arms": [
+    {
+      "arm_id": "word_positive_schedule80",
+      "candidate_id": "k3p-global-repair-v1",
+      "charged_wall_seconds": 8.153427460987587,
+      "diagnostic_gate_status": "FAIL",
+      "final_metrics": {
+        "grad_med": 0.006353974342346191,
+        "mean_abs": 0.08969766646623611
+      },
+      "receipt": {
+        "bytes": 35738,
+        "path": "reports/forge/k3p-two-pole-horizon-v1/receipts/word_positive_schedule80.json",
+        "sha256": "bfd974120be5610110b4b9851eae8ed363f4bab3618678203561f61462602ea2"
+      },
+      "recipe_label": "word_positive",
+      "schedule_horizon": 80
+    },
+    {
+      "arm_id": "word_positive_schedule800",
+      "candidate_id": "k3p-global-repair-v1",
+      "charged_wall_seconds": 10.303621676983312,
+      "diagnostic_gate_status": "FAIL",
+      "final_metrics": {
+        "grad_med": 0.004468120634555817,
+        "mean_abs": 0.11110240966081619
+      },
+      "receipt": {
+        "bytes": 35551,
+        "path": "reports/forge/k3p-two-pole-horizon-v1/receipts/word_positive_schedule800.json",
+        "sha256": "7ee35ccb9c544b63bc8b3b8edbd157d2e978c28c5f4b0bac67fa6e878a506467"
+      },
+      "recipe_label": "word_positive",
+      "schedule_horizon": 800
+    },
+    {
+      "arm_id": "movement_control_schedule80",
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "charged_wall_seconds": 8.145442325039767,
+      "diagnostic_gate_status": "PASS",
+      "final_metrics": {
+        "grad_med": 0.23149800300598145,
+        "mean_abs": 1.0542289018630981
+      },
+      "receipt": {
+        "bytes": 35690,
+        "path": "reports/forge/k3p-two-pole-horizon-v1/receipts/movement_control_schedule80.json",
+        "sha256": "6ebc0c211b6f5d5756c931857dd80a682f740e164378fdcb47250aaa192ab015"
+      },
+      "recipe_label": "movement_control",
+      "schedule_horizon": 80
+    },
+    {
+      "arm_id": "movement_control_schedule800",
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "charged_wall_seconds": 8.064475679013412,
+      "diagnostic_gate_status": "PASS",
+      "final_metrics": {
+        "grad_med": 0.07788927108049393,
+        "mean_abs": 0.9759703278541565
+      },
+      "receipt": {
+        "bytes": 35587,
+        "path": "reports/forge/k3p-two-pole-horizon-v1/receipts/movement_control_schedule800.json",
+        "sha256": "c7751c03f8f2ed1b88a942179332dc8087b3c94eb3c9829fb566a06ed9152be8"
+      },
+      "recipe_label": "movement_control",
+      "schedule_horizon": 800
+    }
+  ],
+  "campaign_ceiling_seconds": 1200,
+  "candidate_ceiling_seconds": 600,
+  "charged_wall_seconds": 34.66696714202408,
+  "comparisons": [
+    {
+      "global_recipe_unchanged": true,
+      "initial_component_states_identical": true,
+      "milestone_deltas_stretched_minus_fixed": [
+        {
+          "adversarial_gradient_norm": -5.611719097942114e-05,
+          "grad_med": -0.0013404041528701782,
+          "l2_gradient_norm": 0.00013681355630978942,
+          "mean_abs": 0.012755632400512695,
+          "nearest_pole_distance": -0.01275569200515747,
+          "particle_std": 5.855434574186802e-05,
+          "step": 80
+        },
+        {
+          "adversarial_gradient_norm": -0.00016152265015989542,
+          "grad_med": -0.0017770230770111084,
+          "l2_gradient_norm": 0.0009478457504883409,
+          "mean_abs": 0.08199110627174377,
+          "nearest_pole_distance": -0.08199101686477661,
+          "particle_std": -0.0002729747211560607,
+          "step": 200
+        },
+        {
+          "adversarial_gradient_norm": -0.0002516417298465967,
+          "grad_med": -0.0024068504571914673,
+          "l2_gradient_norm": 0.0007082695956341922,
+          "mean_abs": 0.06152855604887009,
+          "nearest_pole_distance": -0.06152844429016113,
+          "particle_std": -0.00014566059689968824,
+          "step": 400
+        },
+        {
+          "adversarial_gradient_norm": -0.0004269357305020094,
+          "grad_med": -0.0018858537077903748,
+          "l2_gradient_norm": 0.00024773995392024517,
+          "mean_abs": 0.021404743194580078,
+          "nearest_pole_distance": -0.021404564380645752,
+          "particle_std": -0.00042495751404203475,
+          "step": 800
+        }
+      ],
+      "only_effective_recipe_difference": "task-owned total_steps schedule horizon80 versus800",
+      "recipe_label": "word_positive",
+      "scope": "Declared schedule bundle: LR/noise durations and LR-dependent K3P behavior; no isolated LR causal claim."
+    },
+    {
+      "global_recipe_unchanged": true,
+      "initial_component_states_identical": true,
+      "milestone_deltas_stretched_minus_fixed": [
+        {
+          "adversarial_gradient_norm": -0.019406188279390335,
+          "grad_med": -0.13371390849351883,
+          "l2_gradient_norm": -0.005451925797387958,
+          "mean_abs": -0.4846278354525566,
+          "nearest_pole_distance": 0.4846278429031372,
+          "particle_std": -0.46969664096832275,
+          "step": 80
+        },
+        {
+          "adversarial_gradient_norm": -0.021656555123627186,
+          "grad_med": -0.18068553507328033,
+          "l2_gradient_norm": 0.0019934349693357944,
+          "mean_abs": 0.1748255491256714,
+          "nearest_pole_distance": -0.17482557892799377,
+          "particle_std": 0.17283785343170166,
+          "step": 200
+        },
+        {
+          "adversarial_gradient_norm": -0.02730429545044899,
+          "grad_med": -0.2277381345629692,
+          "l2_gradient_norm": 0.0005847280845046043,
+          "mean_abs": 0.052379310131073,
+          "nearest_pole_distance": -0.05237928032875061,
+          "particle_std": 0.050723254680633545,
+          "step": 400
+        },
+        {
+          "adversarial_gradient_norm": -0.02280410099774599,
+          "grad_med": -0.15360873192548752,
+          "l2_gradient_norm": -0.0009179962798953056,
+          "mean_abs": -0.07825857400894165,
+          "nearest_pole_distance": -0.04934307187795639,
+          "particle_std": -0.07951968908309937,
+          "step": 800
+        }
+      ],
+      "only_effective_recipe_difference": "task-owned total_steps schedule horizon80 versus800",
+      "recipe_label": "movement_control",
+      "scope": "Declared schedule bundle: LR/noise durations and LR-dependent K3P behavior; no isolated LR causal claim."
+    }
+  ],
+  "decisions": {
+    "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5": {
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "4ebe3cbb49ff1edbf9a326ab0ba492f10b635429a4a564a63257561c33a2aedd",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 0.9759703278541565
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 0.9759703278541565
+        }
+      },
+      "outcome": "prediction_observed",
+      "qualification_input": false,
+      "schema_version": 1
+    },
+    "k3p-global-repair-v1": {
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "80440f2683d0aa22ace80e856acdf22d27a72cd5ba3f65951c034219fce7d298",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "stop_revision",
+      "observed": {
+        "falsifier": {
+          "satisfied": true,
+          "value": 0.11110240966081619
+        },
+        "prediction": {
+          "satisfied": false,
+          "value": 0.11110240966081619
+        }
+      },
+      "outcome": "falsified",
+      "qualification_input": false,
+      "schema_version": 1
+    }
+  },
+  "declarations": [
+    "configs/forge/campaigns/k3p-two-pole-horizon-v1.json",
+    "configs/forge/tasks/two_pole.json",
+    "configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json",
+    "configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json",
+    "configs/forge/views/k3p_two_pole_horizon.json",
+    "reports/forge/k3p-two-pole-horizon-v1/declarations/movement_control.json",
+    "reports/forge/k3p-two-pole-horizon-v1/declarations/word_positive.json",
+    "reports/forge/k3p-two-pole-horizon-v1/plans.json"
+  ],
+  "default_adoption": false,
+  "historical_prefix_controls": [
+    {
+      "all24prefix_observations_exactly_match": true,
+      "charged_wall_seconds_added": 0,
+      "final_metrics": {
+        "grad_med": 0.004666268825531006,
+        "mean_abs": 0.04687126353383064,
+        "step": 80
+      },
+      "limit": "Exact recorded trajectory agreement across source identities supports comparability; original optimizer/critic checkpoints were not retained to prove state identity. No historical qualification is transferred.",
+      "original_attempt_id": "abb9e24f625d449da70f6641ec1bce0a",
+      "original_candidate_id": "k3p-global-repair-v1",
+      "original_candidate_revision": "9bc3da4de808300aaa74effda23f1114910ce2c819bda3fcd579bb8b6d5f5e8e",
+      "original_prefix_observations_sha256": "051fa99d1e3740fcd39053b40239dcba2e3543260a584698601eeddc5b3265d9",
+      "original_result_stable_hash": "600ac4a9b0e1915a3c9893e95299f88742aa20aabf269f7c0899545826ad8ba6",
+      "original_source_commit": "9d089ca777e647c6d3b6ad56529ac27f171fdcb6",
+      "original_source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "qualification_input": false,
+      "raw_effective_recipe_exactly_matches": true,
+      "recipe_label": "word_positive",
+      "reference_artifacts": [
+        {
+          "archive_member": "references/word_positive/durable/request.json",
+          "bytes": 1647918,
+          "path": "/home/martyn/dev/ParticleGAN-family-wide/reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/request.json",
+          "sha256": "356b94d4fb2976060c1afd7f403ab2fa6cf84ddce5d2e9d95825f4c4b14b778e"
+        },
+        {
+          "archive_member": "references/word_positive/durable/result.json",
+          "bytes": 113214,
+          "path": "/home/martyn/dev/ParticleGAN-family-wide/reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/result.json",
+          "sha256": "05b632ce46301c162203b955564fe619082f0b4ddcb217473215cf60ea325107"
+        },
+        {
+          "archive_member": "references/word_positive/durable/evidence.json",
+          "bytes": 138771,
+          "path": "/home/martyn/dev/ParticleGAN-family-wide/reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/evidence.json",
+          "sha256": "9705839787f05f1a1181e237f297f3e4be04ec7aab3567a274b69941e3bc14e0"
+        },
+        {
+          "archive_member": "references/word_positive/raw/raw-result.json",
+          "bytes": 47732,
+          "path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repairs-v1/queue/family-wide-word-repairs-v1/abb9e24f625d449da70f6641ec1bce0a/raw-result.json",
+          "sha256": "099ec8f569098ad16629c269278f77c49e726ccd6f7f1fb080804668c930812a"
+        },
+        {
+          "archive_member": "references/word_positive/raw/graded-result.json",
+          "bytes": 2032,
+          "path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repairs-v1/queue/family-wide-word-repairs-v1/abb9e24f625d449da70f6641ec1bce0a/graded-result.json",
+          "sha256": "4cd900b4045ee89419896bf3a57f8a45fbbf4e98678bd4893ef9a6e743836fff"
+        }
+      ]
+    },
+    {
+      "all24prefix_observations_exactly_match": true,
+      "charged_wall_seconds_added": 0,
+      "final_metrics": {
+        "grad_med": 0.2004294991493225,
+        "mean_abs": 0.5928364992141724,
+        "step": 80
+      },
+      "limit": "Exact recorded trajectory agreement across source identities supports comparability; original optimizer/critic checkpoints were not retained to prove state identity. No historical qualification is transferred.",
+      "original_attempt_id": "1e0e2fbd6d1840bd9271785ac1eaf2ca",
+      "original_candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "original_candidate_revision": "6d51dba8dfc9eaec9c9eead65aeb5a59706fcb65c7b492b88647043eb322d0b9",
+      "original_prefix_observations_sha256": "f5ad3027eabd946313c0d04099d327cfd8557cef8a3b54747bc0c8c2dda71755",
+      "original_result_stable_hash": "7bd4f84c7adbacdffb8454196e66905215bd3be6747bee379276192e2ed995b3",
+      "original_source_commit": "72da7275034422bc171f9b9b1955c9b150cda045",
+      "original_source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d",
+      "qualification_input": false,
+      "raw_effective_recipe_exactly_matches": true,
+      "recipe_label": "movement_control",
+      "reference_artifacts": [
+        {
+          "archive_member": "references/movement_control/durable/request.json",
+          "bytes": 1256707,
+          "path": "/home/martyn/dev/ParticleGAN-k3p-search-more/reports/forge/attempts/1e0e2fbd6d1840bd9271785ac1eaf2ca/request.json",
+          "sha256": "c425ddd046a3e81389364bf3332dae1e9d3f337c9d241414777a906a94d3a4a0"
+        },
+        {
+          "archive_member": "references/movement_control/durable/result.json",
+          "bytes": 113105,
+          "path": "/home/martyn/dev/ParticleGAN-k3p-search-more/reports/forge/attempts/1e0e2fbd6d1840bd9271785ac1eaf2ca/result.json",
+          "sha256": "9e0ea10c3f7a626a4896abde04fb3453cc3cd23f5d163ca6e5a66e1a41882291"
+        },
+        {
+          "archive_member": "references/movement_control/durable/evidence.json",
+          "bytes": 138996,
+          "path": "/home/martyn/dev/ParticleGAN-k3p-search-more/reports/forge/attempts/1e0e2fbd6d1840bd9271785ac1eaf2ca/evidence.json",
+          "sha256": "7190a7f3e442edbd9a11a3778abeb81f977d8f839beb0e0d39084d7d4797f0e7"
+        },
+        {
+          "archive_member": "references/movement_control/raw/raw-result.json",
+          "bytes": 47708,
+          "path": "/home/martyn/dev/ParticleGAN-k3p-search-more/runs/forge/k3p-global-tier1-v3/queue/k3p-global-tier1-v3/1e0e2fbd6d1840bd9271785ac1eaf2ca/raw-result.json",
+          "sha256": "c69f592f1bd8b8f5af2f69e341b5effc69ddf7b92d8d5cbad4fe7742da71c271"
+        },
+        {
+          "archive_member": "references/movement_control/raw/graded-result.json",
+          "bytes": 2005,
+          "path": "/home/martyn/dev/ParticleGAN-k3p-search-more/runs/forge/k3p-global-tier1-v3/queue/k3p-global-tier1-v3/1e0e2fbd6d1840bd9271785ac1eaf2ca/graded-result.json",
+          "sha256": "70c92f25c1fa5afaa48e40654f199be2885c6f0c16829dfbbb552f0e0aca2315"
+        }
+      ]
+    }
+  ],
+  "interpretation_limits": [
+    "Movement and bounded slope do not establish two-pole mass balance or coverage.",
+    "Clean zero-origin coordinates can separate through the existing paired relativistic payoff; report measured sign balance and spread rather than infer two-mode acquisition from movement.",
+    "Horizon800 stretches input-noise duration8 to80 for the noisy recipe and changes LR-dependent penalty/anchor timing. Continuing800updates may activate the existing fixed200-step critic guard.",
+    "Neither diagnostic horizon supplies ordinary Tier1 qualification, word-task evidence, calibrated screening or default adoption."
+  ],
+  "ordinary_gate_changes": 0,
+  "ordinary_qualification_reuse": 0,
+  "publication_optimizer_updates": 0,
+  "publication_sampling_draws": 0,
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "bounded_two_recipe_two_horizon_diagnostic",
+  "source_commits": [
+    "d376a1d0426dce945b51e7f662c0a65aa69ca740"
+  ],
+  "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+  "statuses": {
+    "FAIL": 2,
+    "PASS": 2
+  },
+  "study": "k3p-two-pole-horizon-v1",
+  "task_ceiling_seconds": 300,
+  "validation": {
+    "force_trace_arithmetic_and_actual_milestone_states": true,
+    "formal_decisions_complete": true,
+    "four_durable_certificates_and_raw_grades": true,
+    "full_source_snapshots": true,
+    "paired_initial_states_identical": true,
+    "two_historical80prefixes_exact_all24_observation_agreement": true,
+    "unchanged_global_recipes_and_behavior_thresholds": true
+  }
+}

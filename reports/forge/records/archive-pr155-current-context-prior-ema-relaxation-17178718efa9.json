@@ -1,0 +1,346 @@
+{
+  "candidate_id": "context:pr155-current:prior-ema-relaxation",
+  "candidate_revision": "5ba3da0268f733c48893ece3d3c3e3177171f640610fc59107ab26fe3f36ab98",
+  "claim_contract": {
+    "clock_free_eligibility": "unverified",
+    "clock_free_eligible": null,
+    "ema_decay": 0.995,
+    "learning_regime": "Prior EMA is a training mechanism, not output-EMA scoring.",
+    "sampling_law": {
+      "eval_output_noise": true,
+      "options": null
+    },
+    "scoring_weights": "recorded_fast_live",
+    "training_and_public_sampling_identical": "unverified"
+  },
+  "conclusion": "Prior-EMA training relaxation: diagnostic fresh-callback host recorded3/3; original cached-callback canonical staggered100 FAIL (4/5 terminal accuracy, final centre.20266sigma). Distinct hosts; no frozen-host3/3, no current MoG credit.",
+  "evidence_scope": "historical",
+  "hypothesis": "Preserve the prior-EMA relaxation host correction and original evidence as context, without fresh normalized trials.",
+  "mechanism_class": "historical_training_mechanism_context",
+  "next_action": "Keep corrected diagnostic and canonical hosts separate; consult unchanged prior audit for outstanding source gaps. No current qualification or new run authorized.",
+  "prior": {
+    "kind": "particles",
+    "scope": "Original particle-prior config; no current learned-MoG substitution.",
+    "sigma": 0.0,
+    "sigma_units": "relative",
+    "standardize": true,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "bundle_manifest": {
+      "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+      "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+      "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+    },
+    "config": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 128,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "initialization": "batch_feature_zero",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 12,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    "context": {
+      "aggregate_cost_seconds": null,
+      "bundle_manifest": {
+        "path": "reports/forge/supplemental/pr155-current-archive-v1/manifest.json",
+        "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+        "sha256": "bc8986b9037adaf58bdbd95edf4cf9cfdbf5456a41945cd1f1db312e6fb29a1e"
+      },
+      "cost_note": "Context only; no costs added or inferred for diagnostic/canonical summaries.",
+      "critical_originals": [
+        {
+          "git_blob": "5f97c55ae7ce3891efddc0c9104d7de6cece0dbb",
+          "original_path": "reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "3b7fc301cb52343a8ecc4da3eca6c2f780aac2223aa06d872d3fc1c89a33001e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/README.md"
+        },
+        {
+          "git_blob": "ade7882627d96aaf7d30a47eb1d2f006a8b9296a",
+          "original_path": "reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/job-header.json",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/job-header.json",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "5dd03d28e992e533ead75f8c0601c5aaa0bb7e37f0cafee659655b5fb9501399",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/job-header.json"
+        },
+        {
+          "git_blob": "12d3d7ba5eb9fb6288de9e7fe29267e06ca33ad6",
+          "original_path": "reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/native-noisy-verdict.json",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/native-noisy-verdict.json",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "665080def9845e88ded1b18b9bb40ffff6580970d5d13f6ddb66137e244277c2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/native-noisy-verdict.json"
+        },
+        {
+          "git_blob": "94769a2191b35292e234f2ebf59de65c66f8a090",
+          "original_path": "reports/toy100/lrfree-search/prior-ema-relaxation/manifest.json",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/prior-ema-relaxation/manifest.json",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "793ad255c4b7f6b839d6358598ab39f4733fc8777713f41e0dcc3476328a7e39",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/manifest.json"
+        },
+        {
+          "git_blob": "3bc7e0bb80283bf1c4f9133ad04fb7700966362c",
+          "original_path": "reports/toy100/lrfree-search/prior-ema-relaxation/overrides.json",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/prior-ema-relaxation/overrides.json",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "ea80e19b283cf921f162b2c01d9fccc992cffacd2e8bc581cdfd80659b7d6b9f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/overrides.json"
+        }
+      ],
+      "declared_config": {
+        "content": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": true,
+          "batch_size": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "conditioning": "scalar",
+          "continuous_policy": "dv12",
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "initialization": "batch_feature_zero",
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "stationarity",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "num_classes": null,
+          "num_particles": 12,
+          "observation_sigma": 0.03,
+          "output_noise_mode": "learnable",
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": true,
+          "prior_betas": null,
+          "prior_kind": "particles",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_coeff": 3.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "routing_temperature": 0.25,
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "total_steps": null,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 4
+        },
+        "scope": "Original declared overrides, not a substituted native executed recipe."
+      },
+      "earlier_audit": {
+        "path": "reports/forge/calibration/followup-source-audit.json",
+        "sha256": "5769c31b33f05be1887ee2f309d2946123736bbd0e85c2cdaa83bede8930724a"
+      },
+      "eval_output_noise": true,
+      "family": "prior-ema-relaxation",
+      "host_scopes": {
+        "canonical": {
+          "description": "Original cached-real-callback host",
+          "evidence": {
+            "git_blob": "12d3d7ba5eb9fb6288de9e7fe29267e06ca33ad6",
+            "original_path": "reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/native-noisy-verdict.json",
+            "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/native-noisy-verdict.json",
+            "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+            "sha256": "665080def9845e88ded1b18b9bb40ffff6580970d5d13f6ddb66137e244277c2",
+            "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/native-noisy-verdict.json"
+          },
+          "harness_sha256": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c",
+          "recorded_summary": {
+            "evidence": "canonical-staggered100/native-noisy-verdict.json",
+            "final_center_rms_sigma": 0.20266461741728897,
+            "passing_checks": 22,
+            "status": "FAIL",
+            "terminal_checks_passed": 4
+          }
+        },
+        "diagnostic": {
+          "description": "diagnostic fresh batch per callback; differs from original frozen cached callback",
+          "harness_sha256": "9ac36d8ccdbe66f526a8af00f3c856426b522fba687828eeaa9fdc92584b65c5",
+          "qualification_reuse": false,
+          "recorded_summary": {
+            "grid100": {
+              "diagnostic_errors": 0,
+              "final_center_rms_sigma": 0.15325364089717539,
+              "final_precision": 0.98575,
+              "final_streak": 15,
+              "first_arrival": 1000,
+              "holdout_center_rms_sigma": 0.12154056116531162,
+              "holdout_precision": 0.98466,
+              "passing_checks": 21,
+              "status": "PASS",
+              "terminal_center_rms_range": [
+                0.15325364089717539,
+                0.1605729029308114
+              ],
+              "terminal_checks_passed": 5
+            },
+            "rotated100": {
+              "diagnostic_errors": 0,
+              "final_center_rms_sigma": 0.15669541777263024,
+              "final_precision": 0.97275,
+              "final_streak": 8,
+              "first_arrival": 5250,
+              "holdout_center_rms_sigma": 0.1217028707115101,
+              "holdout_precision": 0.97108,
+              "passing_checks": 8,
+              "status": "PASS",
+              "terminal_center_rms_range": [
+                0.1414934908421716,
+                0.15669541777263024
+              ],
+              "terminal_checks_passed": 5
+            },
+            "staggered100": {
+              "diagnostic_errors": 0,
+              "final_center_rms_sigma": 0.1839971936865418,
+              "final_precision": 0.9787,
+              "final_streak": 10,
+              "first_arrival": 2250,
+              "holdout_center_rms_sigma": 0.1558973261824636,
+              "holdout_precision": 0.97852,
+              "passing_checks": 19,
+              "status": "PASS",
+              "terminal_center_rms_range": [
+                0.18323098676245714,
+                0.1923218376988616
+              ],
+              "terminal_checks_passed": 5
+            }
+          },
+          "strict_streams": false
+        }
+      },
+      "narrative_sources": [
+        {
+          "git_blob": "5f97c55ae7ce3891efddc0c9104d7de6cece0dbb",
+          "original_path": "reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+          "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+          "sha256": "3b7fc301cb52343a8ecc4da3eca6c2f780aac2223aa06d872d3fc1c89a33001e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/README.md"
+        }
+      ],
+      "normalized_task_rows": 0,
+      "package_sha256": "64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc",
+      "path_inventory": {
+        "copied_files": 5,
+        "family_files": 96,
+        "path": "reports/forge/supplemental/pr155-current-archive-v1/delta-classification.json",
+        "sha256": "91b9d6b302ca89f15f2e2171be7b7d4920a23120b50f19ee74243a2af024993a"
+      },
+      "scoring_weights": "recorded_fast_live",
+      "seed": null,
+      "seed_note": "Original fixed task seed policy retained; no substituted numeric seed.",
+      "structured_sources_imported": [],
+      "summary_excerpt": "Prior-EMA training relaxation: diagnostic fresh-callback host recorded3/3; original cached-callback canonical staggered100 FAIL (4/5 terminal accuracy, final centre.20266sigma). Distinct hosts; no frozen-host3/3, no current MoG credit.",
+      "unbound_claims_remain": [
+        "dt075 14k continuation",
+        "EMA .995 D-tracking native 3/3",
+        "sub-.03 sigma sensitivity"
+      ]
+    },
+    "importer_version": "forge-supplemental-pr155-current-archive-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": "64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc",
+    "reuse_eligible": false,
+    "source_revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "verification": "Five original file blobs/hashes match the prior audit and archive; all96 paths classified. Context only, without independent regrading or additional trials.",
+    "verified_by_forge": false
+  },
+  "record_id": "archive-pr155-current-context-prior-ema-relaxation-17178718efa9",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "5f97c55ae7ce3891efddc0c9104d7de6cece0dbb",
+    "original_path": "reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+    "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+    "revision": "da3b0470918fc0045175441ce24e69777b5d5990",
+    "sha256": "3b7fc301cb52343a8ecc4da3eca6c2f780aac2223aa06d872d3fc1c89a33001e",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/da3b0470918fc0045175441ce24e69777b5d5990/reports/toy100/lrfree-search/prior-ema-relaxation/README.md"
+  },
+  "task_results": []
+}

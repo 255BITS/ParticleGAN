@@ -1,0 +1,6 @@
+{
+  "status": "NOT_EXECUTED_SUPERSEDED",
+  "reason": "Inherited serial-lock descriptor added in separately reviewed v2 wrapper before CUDA; numerical profile command unchanged.",
+  "replacement_ready": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/group-profile-phase-v2/READY.json",
+  "replacement_ready_sha256": "ed7da8badaf3372f72b22ca5935edc003d6b50716715fd5f401e5bc958c2de26"
+}

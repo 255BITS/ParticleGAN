@@ -81,6 +81,6 @@ and ring checkpoints retain raw samples and optimizer state.
 The originating discriminator-signal search tested 766 distinct configurations
 and 1,820 gates including H's failed hold. Exactly one candidate passed all ten
 cold gates. Its final full unit suite passed 1,329 tests and 27 subtests, with
-10 skips and one expected failure; [JUnit evidence](full-suite-final.xml) is
+10 skips and one expected failure; [JUnit evidence](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/critic_signal_attempt/full-suite-final.xml) is
 retained. Those are original-attempt results, not a claim that the complete
 production benchmark or this publication checkout has passed.

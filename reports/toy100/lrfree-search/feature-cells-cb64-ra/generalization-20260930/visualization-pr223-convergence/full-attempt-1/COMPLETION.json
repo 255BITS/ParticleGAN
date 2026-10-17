@@ -1,0 +1,128 @@
+{
+  "completed": 1790825288.2616758,
+  "evidence_validity": "VALID",
+  "original_scoring_and_acceptance_unchanged": true,
+  "scope": "fresh original moving rotated100 E22 versus Atlas",
+  "source_integrity_after": {
+    "files": 104,
+    "packages": {
+      "Atlas": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+      "E22": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316"
+    },
+    "source_freeze_sha256": "24821dcbc3d85f5188b42a2389293254742db384e9c206f893b7371be9d566e3",
+    "status": "VALID"
+  },
+  "status": "COMPLETE",
+  "variants": {
+    "Atlas": {
+      "all_observations_owned_state_exact": true,
+      "external_cursor_sha256": "36b5a604264600a878ef276abaf6f5a346137c435952b298c522730f53c730e9",
+      "frames": 153,
+      "interpolation": false,
+      "observed_states": 151,
+      "original_acceptance_draws": 20000,
+      "original_gate_seeds": [
+        1637,
+        1636
+      ],
+      "original_quality_status": "PASS",
+      "original_snapshot_seeds": [
+        77,
+        78
+      ],
+      "original_verdict": {
+        "passed_periods": 2,
+        "periods": [
+          {
+            "hq": 0.9609,
+            "modes": 100,
+            "period_end": 500,
+            "target_deg": 0,
+            "task": "rotated100"
+          },
+          {
+            "hq": 0.9609,
+            "modes": 100,
+            "period_end": 1000,
+            "target_deg": 30,
+            "task": "rotated100"
+          },
+          {
+            "hq": 0.9259,
+            "modes": 98,
+            "period_end": 1500,
+            "target_deg": 60,
+            "task": "rotated100"
+          }
+        ],
+        "pre_turn_hq": 0.9609,
+        "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+        "status": "PASS",
+        "task": "rotated100",
+        "turns": 2
+      },
+      "preservation_checks": 151,
+      "status": "COMPLETE",
+      "target_shift_events": 2,
+      "training_updates": 1500,
+      "variant": "Atlas",
+      "visualization_metrics_are_acceptance": false,
+      "visualization_points": 4096
+    },
+    "E22": {
+      "all_observations_owned_state_exact": true,
+      "external_cursor_sha256": "36b5a604264600a878ef276abaf6f5a346137c435952b298c522730f53c730e9",
+      "frames": 153,
+      "interpolation": false,
+      "observed_states": 151,
+      "original_acceptance_draws": 20000,
+      "original_gate_seeds": [
+        1637,
+        1636
+      ],
+      "original_quality_status": "PASS",
+      "original_snapshot_seeds": [
+        77,
+        78
+      ],
+      "original_verdict": {
+        "passed_periods": 2,
+        "periods": [
+          {
+            "hq": 0.881,
+            "modes": 100,
+            "period_end": 500,
+            "target_deg": 0,
+            "task": "rotated100"
+          },
+          {
+            "hq": 0.8399,
+            "modes": 100,
+            "period_end": 1000,
+            "target_deg": 30,
+            "task": "rotated100"
+          },
+          {
+            "hq": 0.9473,
+            "modes": 100,
+            "period_end": 1500,
+            "target_deg": 60,
+            "task": "rotated100"
+          }
+        ],
+        "pre_turn_hq": 0.881,
+        "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+        "status": "PASS",
+        "task": "rotated100",
+        "turns": 2
+      },
+      "preservation_checks": 151,
+      "status": "COMPLETE",
+      "target_shift_events": 2,
+      "training_updates": 1500,
+      "variant": "E22",
+      "visualization_metrics_are_acceptance": false,
+      "visualization_points": 4096
+    }
+  }
+}

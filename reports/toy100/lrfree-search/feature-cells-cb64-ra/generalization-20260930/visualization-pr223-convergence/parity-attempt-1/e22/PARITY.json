@@ -1,0 +1,42 @@
+{
+  "control": {
+    "external_cursor_sha256": "ffa82f122a29e79ba7917cdf3a186c41660cde5e70774917357e1565d854ca80",
+    "first_update": 1,
+    "last_update": 20,
+    "observed": false,
+    "original_evaluation_score": {
+      "hq": 0.04084999859333038,
+      "modes": 38
+    },
+    "original_seed": 1234,
+    "preservation_checks": 0,
+    "private_streams_in_saved_state": true,
+    "status": "COMPLETE",
+    "training_updates": 20,
+    "variant": "E22"
+  },
+  "exact_losses": true,
+  "exact_original_evaluation": true,
+  "exclusions": [
+    "birth_death.last.eval_seconds"
+  ],
+  "observed": {
+    "external_cursor_sha256": "ffa82f122a29e79ba7917cdf3a186c41660cde5e70774917357e1565d854ca80",
+    "first_update": 1,
+    "last_update": 20,
+    "observed": true,
+    "original_evaluation_score": {
+      "hq": 0.04084999859333038,
+      "modes": 38
+    },
+    "original_seed": 1234,
+    "preservation_checks": 21,
+    "private_streams_in_saved_state": true,
+    "status": "COMPLETE",
+    "training_updates": 20,
+    "variant": "E22"
+  },
+  "runtime_state_differences": [],
+  "semantic_state_differences": [],
+  "status": "PASS"
+}

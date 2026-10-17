@@ -1,0 +1,29 @@
+{
+  "CUDA_context": false,
+  "RNG_draws": 0,
+  "Torch_import": false,
+  "checkpoint_reads": false,
+  "created_utc": "2026-09-30T11:22:04.223670+00:00",
+  "execution_blocked": true,
+  "final_receipt_target": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra10/integration-contract/receipt.json",
+  "final_source_fields_and_fixture_binding_pending": true,
+  "local_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/mean-api-review/PLAN.md": "1ee290ee4ad415d1b535b0de52fb4cea956b4533c8850a513664869a2ced3734",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/mean-api-review/check_api_skeleton.py": "e048eade50078565be7a97650a5606be4ae4f2b6705b2078a2628a564019e5b3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/mean-api-review/seal_skeleton.py": "4008ea37623c20d617f997005fe5302057726203f47982d67cec7d541c28accd"
+  },
+  "numerical_tests": false,
+  "optimizer_updates": 0,
+  "production_edits": false,
+  "quality_samples": 0,
+  "sample_calls": 0,
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA9.json": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/check_api.py": "691288e5ff87e524139e78735906cdfbc9df2bb6f48a137d6e788c9e8970cf4f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra9-quality/mean-checkpoint-design/FROZEN.json": "9cd9f3459fbee03007c51c2c54da95d3dca6404bead693821aaad3d120b9264b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/integration-contract/check_api.py": "36ab993ffcd9408ae84f9c35a1d35c41cb6d40176e42f54121878d416cddac61",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/READY.json": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+    "/ml2/hypergan/lrfree-20260926/harness/hosts/native100/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3"
+  },
+  "status": "SOURCE_ONLY_UNEXECUTED_SKELETON"
+}

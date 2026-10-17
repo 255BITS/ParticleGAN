@@ -1,0 +1,22 @@
+{
+  "status": "COMPLETE",
+  "started_utc": "2026-09-30T20:54:46.109631+00:00",
+  "completed_utc": "2026-09-30T20:55:17.208717+00:00",
+  "returncode": 0,
+  "wall_seconds": 31.099104905035347,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay.py",
+    "RA12-auto"
+  ],
+  "result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/replay-RA12-auto.json",
+  "result_sha256": "cdf551415793347fa76f3a056497391556d32d235da429b985ac86c63196c54e",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/logs/RA12-auto-replay.log",
+  "log_sha256": "55dae336b83a8d45712d838f4088d54d300f3e098d49768c103e75ff4ede3779",
+  "source_freeze_sha256": "678f1230a5305fecc6ba6f7054d6b18095d57d1970dc3233e3de2150cae7e0ca",
+  "inputs_sha256": "23696807a2dc96aa4056a0044540873245676e5ae5e8544960d01e7bc75c213e",
+  "original_supervisor_still_parked": true,
+  "signaled_processes": []
+}

@@ -1,0 +1,134 @@
+{
+  "candidate_id": "develop-original-atlas19-and-gate-diagnosis",
+  "candidate_revision": "fae8ce2a6d7f69f4a12d2b21b62a8444e2ad8a91ffdb1606f1fb53691772ad78",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "learning_regime": "unverified",
+    "scoring_weights": "Original noisy state-selected Atlas serving; legacy BCap live weights; clean diagnostics remain separate."
+  },
+  "conclusion": "Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 native, 13 portability, 3 moving) for 48,800 updates and 6,546.906 wall seconds under current contention. All three static native endpoints exactly match the original qualified metrics. Public formulation and Atlas configuration are unchanged. PR #209 had changed native scoring to clean while transfer scoring stayed noisy; explicit sampling-law binding repairs that mixed-cohort checker. All three Atlas clean diagnostics still fail. The first corrected legacy runtime passed 22/22 locally, while the next hosted runtime truly failed 19/22 (grid100, unequal-mass and unequal-width vectors). The completed portable CPU profile also truly fails 19/22: native 3/3, transfer 16/19, with trajectory, mode hold and unequal-width vectors failing unchanged live gates. Timed local/45-minute attempts remain incomplete. Two completed portable native tasks have exact saved-draw equality across Ryzen/EPYC (82 files, 246 arrays); this supplies no aggregate or vendor-causation claim. Software CI passes 2,249 tests and 18 subtests; history/memory checks pass 37 tests. Earlier clean-MoG K3P/BCap/R1-R2/release failures and infeasible profiles remain valid. Neither the replay nor sampling repair qualifies current Forge MoG/clean-live, clock-free behavior or public-default adoption.",
+  "evidence_scope": "historical",
+  "hypothesis": "Determine whether post-merge gate failures changed the E22/Atlas formulation or instead tested a different candidate, prior, initialization, sampler or runtime.",
+  "mechanism_class": "original_cohort_replay_and_sampling_contract_audit",
+  "next_action": "Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.",
+  "prior": {
+    "kind": "particles",
+    "scope": "Original Atlas particle-cloud/noisy and separately declared legacy BCap cohorts; not Forge learned MoG.",
+    "sigma": 0.0
+  },
+  "provenance": {
+    "atlas_execution_source_freeze_sha256": "3584cf8a906ad5c77fe99ffc78a8ba2d34c8d31df84df9ca76e9d9b634e7a32a",
+    "atlas_package_sha256": "deab9ad5f04600fd37cd0fbf0a47442cda7fbdd6b73539e49fd8d5880e52662a",
+    "audit_files": [
+      {
+        "path": "reports/develop-gates-20261001/README.md",
+        "sha256": "3df031c25a73e6ea835b24fdc44566fe6ac32269f1bbcc754e5d8ef10b83a353"
+      },
+      {
+        "path": "reports/develop-gates-20261001/PROTOCOL.md",
+        "sha256": "6397833d58725c4df663fe0eda6c84f5ee0587377eaf1ee6ac34c34db1e35771"
+      },
+      {
+        "path": "reports/develop-gates-20261001/atlas19-replay.json",
+        "sha256": "1e1b536bfd66e20a240436b417d429059d22ea55c2b6ecfff31e796b96c470fa"
+      },
+      {
+        "path": "reports/develop-gates-20261001/paired-sampling.json",
+        "sha256": "19e9830afe972c12af4349aa4216c6253cfd9127404fc2738e46970eedefe976"
+      },
+      {
+        "path": "reports/develop-gates-20261001/common22-local-original-runtime.json",
+        "sha256": "667a393d0096799af0727bf2873cc890831df547be93358723fab4f8739813c1"
+      },
+      {
+        "path": "reports/develop-gates-20261001/common22-ci-original-runtime.json",
+        "sha256": "8fbb69d8db6ecd68155cc0e60f326e73534ca9505b5ce343407e9ca31a4d6266"
+      },
+      {
+        "path": "reports/develop-gates-20261001/common22-ci-portable-runtime.json",
+        "sha256": "e8b0b17d85e2e6aec5ed20b5258716f471eed58333b9a29b4fcbc28d5f5f2cad"
+      },
+      {
+        "path": "reports/develop-gates-20261001/common22-portable-local-timeout.json",
+        "sha256": "76e03b56565b9df68421fd0983a692595225ff87a63ea0c0ceea56b3c0bc1eca"
+      },
+      {
+        "path": "reports/develop-gates-20261001/common22-portable-ci-timeout.json",
+        "sha256": "948fca886113f3e2dbd1ff8eb60f9b44bca255b708b83b095ffdd6e0c0706c08"
+      },
+      {
+        "path": "reports/develop-gates-20261001/cpu-sampling-probe.json",
+        "sha256": "6eb9b5ee6ab7bd81b0185992ee8dc4629f105d29c1585693930713e845edcdec"
+      },
+      {
+        "path": "reports/develop-gates-20261001/cpu-sampling-probe-compatible.json",
+        "sha256": "e3ebdc662346caa47bde9b7619b1abea316383d2c4e8e2b77cd74dc5df320d0c"
+      },
+      {
+        "path": "reports/develop-gates-20261001/cpu-portable-saved-draw-parity.json",
+        "sha256": "f36c3aa60bbb5acf3bd85858906954c931cf22dc97638bc32b2c4147e25756b0"
+      },
+      {
+        "path": "reports/develop-gates-20261001/software-ci.json",
+        "sha256": "b714aa45ea9f5957b2d0a6c29b5c2539fd945227bf20c32843a3a53ba2dc8090"
+      },
+      {
+        "path": "reports/develop-gates-20261001/evaluator-revision.json",
+        "sha256": "fe1bb4270c3d78a7488bffff46941c9d9922091132caf8f12aea647cb379d21b"
+      },
+      {
+        "path": "reports/develop-gates-20261001/audit_atlas.py",
+        "sha256": "2f7a5ca081ec06f2551fd8625c4e01c55e0617fed1063a0bd53243dbf7e7f7d0"
+      },
+      {
+        "path": "reports/develop-gates-20261001/collect_common22.py",
+        "sha256": "7f72da8451a72ff97e62139eabb715981f99a38c97e08c0a5c8f7101cbd11d61"
+      },
+      {
+        "path": "reports/develop-gates-20261001/replay_atlas.py",
+        "sha256": "07b02495f2ae830271a149543de3ebad0efac0806a9bd019b13c9ae9336208dc"
+      },
+      {
+        "path": "reports/develop-gates-20261001/probe_cpu_sampling.py",
+        "sha256": "a7b0a258215a8e110a2d54987673066dbeae48e7698bcdf8ea6e5d5475cada91"
+      }
+    ],
+    "existing_memory_records_preserved": 242,
+    "importer_version": "develop-original-cohort-replay-context-v1",
+    "original_qualified_source_revision": "bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f",
+    "reuse_eligible": false,
+    "source_revision": "de9b9ae5fa9873c3a41407029221556c246a0442",
+    "verification": "Independent original-host native regrade, full schedule/RNG/checkpoint/backend audit, 60 identical original protocol inputs, exact qualified endpoint comparison and 140-file executable-source binding for complete legacy receipts. This is original-cohort context, not normalized current Forge qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f",
+  "record_type": "family_context",
+  "results_summary": {
+    "current_forge_mog_clean_qualification": false,
+    "original_atlas19": {
+      "clean_native_diagnostics_failed": 3,
+      "new_training_updates": 48800,
+      "passed": 19,
+      "required": 19,
+      "status": "PASS"
+    },
+    "portable_cpu_legacy_common22": {
+      "canonical_passed": 16,
+      "failed": [
+        "trajectory",
+        "mode_hold",
+        "vector_unequal_width"
+      ],
+      "native_passed": 3,
+      "passed": 19,
+      "required": 22,
+      "status": "FAIL"
+    },
+    "release_or_default_promotion": false
+  },
+  "schema_version": 1,
+  "source": {
+    "path": "reports/develop-gates-20261001/README.md"
+  },
+  "task_results": []
+}

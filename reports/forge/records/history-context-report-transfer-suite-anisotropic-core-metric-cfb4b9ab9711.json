@@ -1,0 +1,91 @@
+{
+  "candidate_id": "context:report/transfer_suite/anisotropic_core_metric",
+  "candidate_revision": "925a5e5ac53fc79b133a0df9f873196265c5c880f0f38bc0d4e496fca10627c6",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Anisotropic core metric and SiLU critic screen",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/transfer_suite/anisotropic_core_metric",
+      "narrative_headings": [
+        "Anisotropic core metric and SiLU critic screen",
+        "Problem and fix",
+        "A. vector_anisotropic, 7 critic arms",
+        "B. SiLU screen on the other development tasks",
+        "Recommendations",
+        "Protocol v4: unequal width and unequal mass",
+        "Whole-suite pass count (current protocol, 8 development tasks)",
+        "Recommendations (v4)",
+        "Follow-up: SiLU rare-mode collapse",
+        "Follow-up: protocol v5"
+      ],
+      "narrative_sources": [
+        {
+          "git_blob": "a4d5c2aec63d6f4c9e5ffcabcb284fbd7da7f87d",
+          "path": "reports/transfer_suite/anisotropic_core_metric/README.md",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "b7d7733877120a9b8d66814247fb2a13f537fb4c2fbcf503ccfd8ab434f4bd9c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/anisotropic_core_metric/README.md"
+        }
+      ],
+      "normalization_limit": "JSONL summary/oracle schemas are not normalized by this importer; linked prose and rows do not establish Forge task verdicts or compatible sampling laws.",
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Anisotropic core metric and SiLU critic screen\n\n`python run.py` runs 21 CPU episodes (seed 0, 1 thread each, fixed cosine, same\nrecipe as the suite) in parallel in about 25 s. `run.log` has one line per\nepisode, and `results.jsonl` has one record per episode with final live metrics,\nthe sustained verdict and the failing thresholds at each observation.\nVerdict = `run_episode` convergence: the whole schedule completed and the final\npassing suffix is at least 5 of 24 observations.\n`python run.py --v4` reruns the 4 protocol v4 episodes (about 10 s) into\n`run_v4.log` and `results_v4.jsonl`; see the last section.\n\n## Problem and fix\n\n`vector_anisotropic` gated on `component_covariance_error`. That metric assigns\neach sample to its nearest mean and takes the relative Frobenius error of the\ncomponent's whole covariance. The target covariances are tiny (norm \u22480.09), so\n1\u20138% of stray samples 1\u20132 units away dominate the error. The task was measuring\nspill, not shape.\n\nThe task now gates on shape inside each component's 4\u03c3 core (squared Mahalanobis\n\u226416) and bounds stray mass separately:\n`component_core_covariance_error \u2264.5`, `component_core_min_eigen_ratio \u2265.15`,\n`max_component_spill \u2264.05` (the largest per-component fraction of samples beyond\n3\u03c3; \u22481.1% for a true Gaussian). SW1, TV and HQ are unchanged. The old metrics\nare still reported everywhere and still gate the other tasks.\n\n## A. ",
+      "unmapped_structured_sources": [
+        {
+          "git_blob": "c76430ca8751b163e0367bf466fd026226e0726c",
+          "path": "reports/transfer_suite/anisotropic_core_metric/results.jsonl",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "de04c6ef4086e89d2278ae6d32b9b23f344e45581b2d91ef11fb8d381718eccf",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/anisotropic_core_metric/results.jsonl"
+        },
+        {
+          "git_blob": "c04c4af68edf1127dacb7029ccadb2503d269ac1",
+          "path": "reports/transfer_suite/anisotropic_core_metric/results_v4.jsonl",
+          "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+          "sha256": "5ca26d352169b2c71db62a9ea42986c63364ea11d1d9d4500ef982cac8f423e3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/anisotropic_core_metric/results_v4.jsonl"
+        }
+      ]
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-transfer-suite-anisotropic-core-metric-cfb4b9ab9711",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "a4d5c2aec63d6f4c9e5ffcabcb284fbd7da7f87d",
+    "path": "reports/transfer_suite/anisotropic_core_metric/README.md",
+    "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
+    "sha256": "b7d7733877120a9b8d66814247fb2a13f537fb4c2fbcf503ccfd8ab434f4bd9c",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/a8b9d3977701ca700d9918ac66d40ac814b9f9ba/reports/transfer_suite/anisotropic_core_metric/README.md"
+  },
+  "task_results": []
+}

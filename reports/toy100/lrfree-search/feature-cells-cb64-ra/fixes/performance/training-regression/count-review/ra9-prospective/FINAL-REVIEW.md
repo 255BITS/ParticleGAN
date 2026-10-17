@@ -1,0 +1,7 @@
+# RA9 completed toy evidence audit
+
+Evidence VALID at all ten original sealed checkpoints. All 162 source/input guards remain exact. The unchanged original completed-artifact auditor confirms saved source/runtime/input/initialization/cursor and artifact hashes. The full unchanged root toy gate, including minimum supported mode mass .01, is PASS: P 0.96533203125, modes 25, TV 0.05211425781250001, minimum mass 0.03271484375.
+
+Backend8/trainer5, requested128/actual64, typed even-fit partition, actual3K+2 family, reaction snapshot and FIFO expiry are consistent. Population masks and old-law atomic rejection, row reset ledger, bounded symmetric graph, copy/novel budget and gross certificates, scalar JSON metadata and CPU uint8 RNG placement pass. The final newborn rows have zero own optimizer/history/evidence/graph state. No models, forwards, draws, updates, new seeds or CUDA were used.
+
+The paired average remains an empirical anti-blur FIFO lease. It is independent of table population stationarity, with no distribution equivalence, every-update support or quality guarantee. Intermediate unsaved reaction decisions are not reconstructed. Only completed toy evidence is sealed here; the full original Grid100 and any later phases require their own valid evidence and unchanged gates. Private processes/logs are closed before the authoritative final seal. The evolving lane journal is not pinned.

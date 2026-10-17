@@ -1,0 +1,64 @@
+{
+  "candidate_id": "context:lrfree/prior-rate-coupling",
+  "candidate_revision": "eead5f92c1f30c51767eda8c10030d02a552bd9085d1bb56ab77c7ada4bca044",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Prior-rate coupling native100 near miss",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/prior-rate-coupling",
+      "narrative_sources": [
+        {
+          "git_blob": "6d86dea6d475359cec45fb3e984f91ac103887a0",
+          "path": "reports/toy100/lrfree-search/prior-rate-coupling/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "e4fe3600f338f78aa173e7789cae347e15296e147bbaad9bcceb54edb3f64c5c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/prior-rate-coupling/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/prior-rate-coupling/grid100-result.json"
+      ],
+      "summary_excerpt": "# Prior-rate coupling native100 near miss\n\nThis completed 7,000-update native grid100 test is the strongest directional result after the paired birth/death graft. It **fails** the frozen gate: noisy precision is slightly below the required 0.97 in both the final grid and independent 100k holdout. No rotated/staggered or 22-check score is claimed.\n\nThe sole source change relative to the committed paired-BD graft caps the applied prior stationarity scale at the lowest non-sigma generator scale. The prior table therefore cannot update faster in intrinsic settle time than the map that moves its samples. The recipe and BD code are byte-identical to the graft, with QR `batch_feature_zero` initialization, learnable output noise initialized at 0.02, no horizon (`total_steps: null`), and noisy sampling-law scoring.\n\n| Frozen live measure | Result | Requirement |\n|---|---:|---:|\n| Modes | 100 | 100 |\n| Noisy precision | .96875 | \u2265 .97000 |\n| Centre RMS / data \u03c3 | .12646 | \u2264 .20 |\n| Covariance eigenvalue ratios | .57226\u20131.32953 | .40\u20131.70 |\n| Mass TV | .03370 | \u2264 .06 |\n| Radial KS | .03298 | \u2264 .04 |\n| Independent 100k precision | .96946 | \u2265 .97000 |\n| Frozen verdict | **FAIL 0/34** | final five + holdout |\n\nPrecision rose from .96415 at step 4,750 to .96875 at step 7,000. At the end, applied G/prior scales were both 1/64, with G/prior rates 6.640625e-5 / 1.328125e-4. The raw prior tester "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-prior-rate-coupling-57cfb10e6b76",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "6d86dea6d475359cec45fb3e984f91ac103887a0",
+    "path": "reports/toy100/lrfree-search/prior-rate-coupling/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "e4fe3600f338f78aa173e7789cae347e15296e147bbaad9bcceb54edb3f64c5c",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/prior-rate-coupling/README.md"
+  },
+  "task_results": []
+}

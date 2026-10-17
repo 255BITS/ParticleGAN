@@ -1,0 +1,32 @@
+{
+  "budgets": {
+    "campaign_seconds": 7200,
+    "candidate_seconds": 7200,
+    "task_seconds": {
+      "grid100_affine_square_named_v1": 3600,
+      "img_bars4_residual16": 1800,
+      "vector_unequal_mass_published": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "host-profile-first-cells-v1",
+  "profile": "host-profile-transfer-v1",
+  "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+  "purpose": "Three independent K3P host-transfer diagnostics on GPU 0: bars4 residual16 (600 updates), published unequal-mass critic (1200) and native named affine grid100 (7000). Preserve learned MoG/native uniform location initialization, explicit image cloud exception, clean live gates, seed 0 and full 16-reference denominator. Continue only these preregistered diagnostics after a science failure to measure independent applicability/reference quality; no adoption, whole-suite positivity, ordinary qualification or historical parity claim. Review costs/outcomes before any further batch.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "One bounded cell per newly bound host family before expanding current-cohort calibration.",
+      "tasks": [
+        "img_bars4_residual16",
+        "vector_unequal_mass_published",
+        "grid100_affine_square_named_v1"
+      ]
+    }
+  ],
+  "view": "host_profile_transfer"
+}

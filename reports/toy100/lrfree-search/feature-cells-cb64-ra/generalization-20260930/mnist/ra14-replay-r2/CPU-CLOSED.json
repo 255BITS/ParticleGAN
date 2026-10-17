@@ -1,0 +1,19 @@
+{
+  "status": "PASS_ORIGINAL_FIXTURE_CURRENT_API_PREFLIGHT",
+  "training_updates": 0,
+  "model_forwards": 0,
+  "sampling_calls": 0,
+  "begin_step_calls": 0,
+  "cuda_context_initialized": false,
+  "file_sha256": {
+    "SOURCE-FREEZE.json": "8a94e5da8c8e5f3978160f92becf11ce542b66f47d063eb157cca931fce51514",
+    "INPUTS.json": "a24ca2248affefed5f8c3c660d1b398095776d61e6a496573eaacc15824073ec",
+    "preparation-receipt.json": "d30c44124ad7c1fb3f56878c9fb1a3713411bea14c09c5bd2fdc9781157bcfb7",
+    "preflight-cpu.json": "d2162adab71aca27a67229fab72a1c06186ccf0dcf340e14362ade01cf727498",
+    "logs/preflight-cpu.log": "6be9a21639a0084a2935cd2b329255e83232145845c137b537bbc69125e81013",
+    "ADAPTER-PREPARATION.json": "a6403f19de2187965f6b82dfd7b0551a2a2fbe41750f3061aa683215e40c3f2e",
+    "source-transform-receipt.json": "66033be2b5ea0bd67a41c65fac31f833d5497a22ae52ad32f521b0b198b9ff54",
+    "RESTORATION-BRIDGE.json": "3e62f776b3be351d067915315951db640fec73e002f62c99bf6b73284707964e",
+    "bridge-preflight-cpu.json": "0274d51e3cfc121719249087ef97722ae370b88fb669a9033c5567af31f9954e"
+  }
+}

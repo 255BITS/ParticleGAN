@@ -1,0 +1,304 @@
+{
+  "all_member_hashes_verified": true,
+  "archive_member_count": 11572,
+  "availability": "LOCAL_ONLY",
+  "baseline": {
+    "PASS": 19,
+    "required": 19
+  },
+  "bytes": 159261059,
+  "cost": {
+    "charged_seconds": 5248.642153078457,
+    "declared_combined_paid_cap_seconds": 11280.0,
+    "paid_seconds": 5248.642153078457,
+    "reserved_seconds": 0.0,
+    "scope": "Summed supervisory attempt cost, including H1 exactly once; not global elapsed time, FLOPs or speed ranking."
+  },
+  "engineering_startup_attempts": {
+    "INCOMPLETE": 2,
+    "paid_seconds": 6.8186783420387655
+  },
+  "files": [
+    {
+      "archive_path": "parents/atlas/receipt.json",
+      "bytes": 75781,
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/receipt.json",
+      "sha256": "e2bfc5fdc66ea2c32e77b22d16a00346a83852b3192d9f4b4ee2da2619da20a6"
+    },
+    {
+      "archive_path": "parents/e22/receipt.json",
+      "bytes": 75571,
+      "original_path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/receipt.json",
+      "sha256": "bf6005d2118b3f6994ca240e706a5e8a4e5ef94818f8b54ecc695a6fb00a03dd"
+    },
+    {
+      "archive_path": "runs/.baseline-atlas19.atlas19-preparation.json",
+      "bytes": 840303,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/.baseline-atlas19.atlas19-preparation.json",
+      "sha256": "e1f72c610c74d584de2053008463001c944bd47c0f1b3b6a9c6e7008c970df9b"
+    },
+    {
+      "archive_path": "runs/.hold-continuation-v2.hold-preparation.json",
+      "bytes": 818117,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/.hold-continuation-v2.hold-preparation.json",
+      "sha256": "70830567eb53323034fcc91da8bbc7ff42f231770a8dcc46b34bf0b19f61cd86"
+    },
+    {
+      "archive_path": "runs/.hold-continuation.hold-preparation.json",
+      "bytes": 814818,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/.hold-continuation.hold-preparation.json",
+      "sha256": "75cebbe9242dcb794b82d5e07a5894d66f7c6cb8dca6437e6b33baf4101dd72a"
+    },
+    {
+      "archive_path": "runs/baseline-atlas19/study.json",
+      "bytes": 969399,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-atlas19/study.json",
+      "sha256": "39351f2d8ed5290b37b160b08f327d49b56dd7551368474f1e8c6380086e92ec"
+    },
+    {
+      "archive_path": "runs/baseline-native-dispatch.log",
+      "bytes": 1395,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/baseline-native-dispatch.log",
+      "sha256": "3f4c6ab3234a3f35b825c0da1d07ebaacd03bf14537c07ad4dd09b54bd3c8276"
+    },
+    {
+      "archive_path": "runs/hold-continuation-v2/atlas/study.json",
+      "bytes": 825911,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/study.json",
+      "sha256": "55701698dc8cc0c933b9b2aa0e2f0bd4fb00df86124977b35711fc66e68b5859"
+    },
+    {
+      "archive_path": "runs/hold-continuation-v2/e22/study.json",
+      "bytes": 825875,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/study.json",
+      "sha256": "7a0ee36f9550d970e3c3a9a337a798405b70891dfcdae3bc135296920ce8d336"
+    },
+    {
+      "archive_path": "runs/hold-continuation-v2/hold-continuation.json",
+      "bytes": 1722665,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/hold-continuation.json",
+      "sha256": "e0c5a3db254792388574429290997660163275f90abf9bd75c31eeb124de9430"
+    },
+    {
+      "archive_path": "runs/hold-continuation/atlas/study.json",
+      "bytes": 820514,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/atlas/study.json",
+      "sha256": "e551fe443879ab2a487de8e372c54295206bef3fdb04dc7b7ed0e096956bb54d"
+    },
+    {
+      "archive_path": "runs/hold-continuation/e22/study.json",
+      "bytes": 820501,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/e22/study.json",
+      "sha256": "7a3f7c1be32d95c65c95dede31f11c0663f815c09e27ae00dfda39ec6d87b661"
+    },
+    {
+      "archive_path": "runs/publication-v1/results.json",
+      "bytes": 574945,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/publication-v1/results.json",
+      "sha256": "4cdbec6b54e31ecdaac5ee2cd887258004c5da7c9a7102261e1c1c8c3939b66a"
+    },
+    {
+      "archive_path": "source-snapshots/atlas19/forge-source.json",
+      "bytes": 610823,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/atlas19/snapshots/e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985/forge-source.json",
+      "sha256": "b972ed69da6aae40e2807f074105c21c90733d5fd0f06ede519195f6ab2df6ad"
+    },
+    {
+      "archive_path": "source-snapshots/hold-h1/forge-source.json",
+      "bytes": 567286,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/29069307aaaefe61b6ab5c2c9b5b26a8b536323570db4054f2abea8f64dd7b29/forge-source.json",
+      "sha256": "a778045fdc35a7430d92dd86ab576f9f2498da22964ddb8a67909f397a08e9f1"
+    },
+    {
+      "archive_path": "source-snapshots/hold-h2/forge-source.json",
+      "bytes": 567426,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/forge-source.json",
+      "sha256": "fc1b3613ab512f15360ce4b83f5e6ac3ba7d435f112c47e93cf5653ff313dc9b"
+    },
+    {
+      "archive_path": "supervisors/032c36fe2629c6f536393622910bfc7aa245ff2c20ef4a3d37c8b5bde4444bae/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/032c36fe2629c6f536393622910bfc7aa245ff2c20ef4a3d37c8b5bde4444bae/supervisor-terminal.json",
+      "sha256": "f4ebfe0ed8482209efc7109e2da52f32a4f03e9f2d226e9758328bec49514d9c"
+    },
+    {
+      "archive_path": "supervisors/09aa803b495acaa71eda0a39f6f33c0640451f64ba7650b9f864fb12d5702051/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/09aa803b495acaa71eda0a39f6f33c0640451f64ba7650b9f864fb12d5702051/supervisor-terminal.json",
+      "sha256": "c76f8fc4966edd07ed75d4d0df2682e7be9b4a91eef582766859d79c853b0c6c"
+    },
+    {
+      "archive_path": "supervisors/19222c0b519cf4f4f844565803a581edef47fb3696b10c0e91ba8bba30f8614a/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/19222c0b519cf4f4f844565803a581edef47fb3696b10c0e91ba8bba30f8614a/supervisor-terminal.json",
+      "sha256": "e9a89ae693e9a65ee1e62c83ff879db9a002a578ce9560cca1a0f4f8029b8130"
+    },
+    {
+      "archive_path": "supervisors/1acd1a8ad2089dfdb3bc44f62541a8e03d771508cd5ee3cf5aa15aed3dfc94ce/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/1acd1a8ad2089dfdb3bc44f62541a8e03d771508cd5ee3cf5aa15aed3dfc94ce/supervisor-terminal.json",
+      "sha256": "861fc613709ac9a10f80e7c7afe224e8bf341e9b0baef1d81044fbf2ecda6f8d"
+    },
+    {
+      "archive_path": "supervisors/21a76cb428741643fc9af108a060f07e4c22f6d554bb31ccc0b548d944775051/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/21a76cb428741643fc9af108a060f07e4c22f6d554bb31ccc0b548d944775051/supervisor-terminal.json",
+      "sha256": "f1e8d64f25738b3e47f79178a2325186a8eb8cea8b40a359c3810e4e2a43cb3e"
+    },
+    {
+      "archive_path": "supervisors/23aad60933502e460536bc55ea78068d907dc084e7ed72cabcb9a9145f622660/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/23aad60933502e460536bc55ea78068d907dc084e7ed72cabcb9a9145f622660/supervisor-terminal.json",
+      "sha256": "fed709871b2e18f5b4a086e3b5b9fa6192d3ce5486135dc70fe887f8481e3134"
+    },
+    {
+      "archive_path": "supervisors/299a5de0fbd7ae21340603fee81feb2a35913d6397714e8a1165b7332e26c666/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/299a5de0fbd7ae21340603fee81feb2a35913d6397714e8a1165b7332e26c666/supervisor-terminal.json",
+      "sha256": "9aed79897f395bb413822cb7b4e254d98a9a61d0e26581cb37ef40042ece7624"
+    },
+    {
+      "archive_path": "supervisors/2fa1465a0d74ed8112b48ca19f65cdd1ac2507f261372e6be6aecea53b295f28/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/2fa1465a0d74ed8112b48ca19f65cdd1ac2507f261372e6be6aecea53b295f28/supervisor-terminal.json",
+      "sha256": "8dd78ffcc1b9fc4a4daca6bfc3ba6706c3adf8faab4c6ae98a8cdd63e056d9e3"
+    },
+    {
+      "archive_path": "supervisors/3a951d408e2100d53813de5aba7680981b295ecc365f630027438a3a61fc6001/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/3a951d408e2100d53813de5aba7680981b295ecc365f630027438a3a61fc6001/supervisor-terminal.json",
+      "sha256": "e093c7d9c958cd5e37115d8cd38ec39e55369bce739c668545a79d25281dee81"
+    },
+    {
+      "archive_path": "supervisors/4e4344b8fe99e3917835737ab59a4398c73a351c87d4d26913d70bca7c267a8f/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/4e4344b8fe99e3917835737ab59a4398c73a351c87d4d26913d70bca7c267a8f/supervisor-terminal.json",
+      "sha256": "af31630f7d116a330601fd9ca321c12b5a5629afdd0189faf5b716b5614e5ffc"
+    },
+    {
+      "archive_path": "supervisors/5bec468fa905fc5a2a875066ce9e5979b3872195f374fc9e836e1157f95f2caa/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/5bec468fa905fc5a2a875066ce9e5979b3872195f374fc9e836e1157f95f2caa/supervisor-terminal.json",
+      "sha256": "5017446572975cd1a29416698216b09de317e45e6a4644b28e2eff8d5f9d4ed6"
+    },
+    {
+      "archive_path": "supervisors/69a949cfcb74c07f8df0b103421a869a34bb6cc4731a18ad6a8f4add791cdf43/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/69a949cfcb74c07f8df0b103421a869a34bb6cc4731a18ad6a8f4add791cdf43/supervisor-terminal.json",
+      "sha256": "02b42b57a2170c738097022a8db57b52d8513861ba1d22293a82641a78169cc7"
+    },
+    {
+      "archive_path": "supervisors/72d4c92689000425f12ef456bd24afe549b051179e7e8998c0a6630bd572d331/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/72d4c92689000425f12ef456bd24afe549b051179e7e8998c0a6630bd572d331/supervisor-terminal.json",
+      "sha256": "c6c9d52694a739602c837be0df57ceb1358edc904cd7e5b3ee33ad12dfceff9c"
+    },
+    {
+      "archive_path": "supervisors/7568eea246dd434e76f5decc06ad13f02fd22d7f5f19685ba33da3013674bd8a/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/7568eea246dd434e76f5decc06ad13f02fd22d7f5f19685ba33da3013674bd8a/supervisor-terminal.json",
+      "sha256": "3e41404671291abbf073b9cd96938a6a29ed8c33155a94ef8a44bf146a855e07"
+    },
+    {
+      "archive_path": "supervisors/801333f788c66da167efc23797a3fa12285bcf79c2f7be841232c3bb1f23da23/supervisor-terminal.json",
+      "bytes": 149,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/801333f788c66da167efc23797a3fa12285bcf79c2f7be841232c3bb1f23da23/supervisor-terminal.json",
+      "sha256": "db6a94bda24c7d22ea97c756c9e8fd92841feb8dca15555efaeafd51b4546c91"
+    },
+    {
+      "archive_path": "supervisors/816349efbafc320c1cb9633d9c5bacefe55b65a524e89fefeb00058371e964a7/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/816349efbafc320c1cb9633d9c5bacefe55b65a524e89fefeb00058371e964a7/supervisor-terminal.json",
+      "sha256": "30c6a11aa9b6aca5709e818725bde05d2e395c745a128f8448ba0ee2ec22d69b"
+    },
+    {
+      "archive_path": "supervisors/9453d2b12f03d8b97f7faaebccb2bc89ecaea38b79a1f54d4e6ec10bb85bd799/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9453d2b12f03d8b97f7faaebccb2bc89ecaea38b79a1f54d4e6ec10bb85bd799/supervisor-terminal.json",
+      "sha256": "8372b85a1cb0b4897127cd0bee3ba279d7f6857dbf768ae0447d28782ef91677"
+    },
+    {
+      "archive_path": "supervisors/9be43046a46e97738f1eae10b4e29cce0e8450ff7145c265918ce9e881a3dc5f/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9be43046a46e97738f1eae10b4e29cce0e8450ff7145c265918ce9e881a3dc5f/supervisor-terminal.json",
+      "sha256": "61f84270f6d876f8ea87dfc7383f32886c3e9be996399d7a0162180a9cd23143"
+    },
+    {
+      "archive_path": "supervisors/a7036db6bf512929eb1ef4db44f0f52ddff2a9f03dfc6781cbb5606409189a52/supervisor-terminal.json",
+      "bytes": 149,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/a7036db6bf512929eb1ef4db44f0f52ddff2a9f03dfc6781cbb5606409189a52/supervisor-terminal.json",
+      "sha256": "9b08c58c55604dcb48e37080b2f45a9d1aa26b7a5615384c76fc110f122ed331"
+    },
+    {
+      "archive_path": "supervisors/c01ad4375bc6933247cf25073045a0a2b00883895825ff642c911fdcafc1d980/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/c01ad4375bc6933247cf25073045a0a2b00883895825ff642c911fdcafc1d980/supervisor-terminal.json",
+      "sha256": "53bb21a72402180564ac15fc1fe30fa743d332ef72e23b2c1fde0ea6a3eba9d2"
+    },
+    {
+      "archive_path": "supervisors/c157623165b7b84dada079452e499f44d3e2ced24395cea5f5cad59ebc681fe6/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/c157623165b7b84dada079452e499f44d3e2ced24395cea5f5cad59ebc681fe6/supervisor-terminal.json",
+      "sha256": "64b3f42ed44e2404b08c4778c16a471919e6fb4841dbf4a3960b257211ae0d45"
+    },
+    {
+      "archive_path": "supervisors/c50cf8fca60bbd26fd0c022ba3fac4321d26f7ed4d08e4ea408d01ccbcdece68/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/c50cf8fca60bbd26fd0c022ba3fac4321d26f7ed4d08e4ea408d01ccbcdece68/supervisor-terminal.json",
+      "sha256": "9d9786e81aa4734fddfc5acadc7c3bca3af362a6763faf1ac6989fc8fb38cf3d"
+    },
+    {
+      "archive_path": "supervisors/df14223952139c05ba92634e5fb83e28be02e6ee3fb12108194028a3a2a1b064/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/df14223952139c05ba92634e5fb83e28be02e6ee3fb12108194028a3a2a1b064/supervisor-terminal.json",
+      "sha256": "79d457c871dd8888bceb72ecf697571dc72d142f54c942c68dc5eccf6acc55a7"
+    },
+    {
+      "archive_path": "full-index.json",
+      "bytes": 5791539,
+      "original_path": "/ml2/hypergan/forge-continuous-leaderboard-archive-20261003/full-index.json",
+      "sha256": "38bb5904845be87d53143c735cb8dd9724532833657f3f82aebf2782093e92e7"
+    }
+  ],
+  "full_index": {
+    "archive_path": "full-index.json",
+    "bytes": 5791539,
+    "original_path": "/ml2/hypergan/forge-continuous-leaderboard-archive-20261003/full-index.json",
+    "sha256": "38bb5904845be87d53143c735cb8dd9724532833657f3f82aebf2782093e92e7"
+  },
+  "hold_continuations": {
+    "FAIL": 2,
+    "required": 2
+  },
+  "new_sampler_calls": 0,
+  "new_training_updates": 0,
+  "original_inputs_unchanged": true,
+  "path": "/ml2/hypergan/forge-continuous-leaderboard-archive-20261003/continuous-atlas19-c6-holds-v1.tar.gz",
+  "qualification_changed": false,
+  "remote_replication": "NOT_PERFORMED",
+  "retain_until": "UNDECLARED",
+  "retention_owner": "UNASSIGNED",
+  "schema": "particlegan-continuous-archive-card-v1",
+  "sha256": "e160acbcc6b98e1ea7a4ff928911033515774d6781d0e83ebeedc5a565d892d0",
+  "source_cohorts": [
+    {
+      "execution_digest": "e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985",
+      "name": "atlas19",
+      "origin_commit": "a0d6d89fb470f551b3f790016a237c40a377e1e8",
+      "snapshot_file_count": 3825
+    },
+    {
+      "execution_digest": "29069307aaaefe61b6ab5c2c9b5b26a8b536323570db4054f2abea8f64dd7b29",
+      "name": "hold-h1",
+      "origin_commit": "e97cae6d897369354588c29b65b02893ab066484",
+      "snapshot_file_count": 3533
+    },
+    {
+      "execution_digest": "429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760",
+      "name": "hold-h2",
+      "origin_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+      "snapshot_file_count": 3534
+    }
+  ],
+  "source_commit": "fe8d005faa19f12ef6191a275c3fef9271958f7f"
+}

@@ -1,0 +1,232 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -248,6 +248,21 @@
+     if work is not None:
+         work["count_test_terms"] += terms
+     return result
++
++
++def _group_integer_allocate(capacity, groups, totals):
++    """Same stable largest remainders for every disjoint group, in one batch."""
++    members = groups[None] == torch.arange(len(totals),device=groups.device)[:,None]
++    capacities = capacity[None]*members
++    sums = capacities.sum(1)
++    requested = torch.minimum(totals,sums).clamp_min(0)
++    quota = capacities.double()*(requested.double()/sums.clamp_min(1).double())[:,None]
++    allocated = quota.floor().long()
++    remaining = requested-allocated.sum(1)
++    order = (quota-allocated).argsort(dim=1,descending=True,stable=True)
++    increments = (torch.arange(len(capacity),device=capacity.device)[None] < remaining[:,None]).long()
++    allocated += torch.zeros_like(allocated).scatter(1,order,increments)
++    return allocated.sum(0)
+ 
+ 
+ class FeatureCellSnapshot:
+@@ -775,11 +790,8 @@
+         if isolation_guard_rejects:
+             within_capacity = torch.minimum(within_capacity,(group_target-group_clean).clamp_min(0))
+         within = _integer_allocate(within_capacity,max(0,budget))
+-        within_deaths,within_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
+-        for group in range(self.mass_groups):
+-            members = groups==group
+-            within_deaths += _integer_allocate(death_capacity*members,int(within[group]))
+-            within_births += _integer_allocate(birth_capacity*members,int(within[group]))
++        within_deaths = _group_integer_allocate(death_capacity,groups,within)
++        within_births = _group_integer_allocate(birth_capacity,groups,within)
+         remaining_death,remaining_birth = death_capacity-within_deaths,birth_capacity-within_births
+         if isolation_guard_rejects:
+             group_death = self._group_counts(remaining_death)
+@@ -790,25 +802,28 @@
+             group_birth = torch.minimum(self._group_counts(remaining_birth),(group_target-group_clean).clamp_min(0))
+         cross_pairs = min(int(group_death.sum()),int(group_birth.sum()),max(0,budget-int(within.sum())))
+         cross_group_death,cross_group_birth = _integer_allocate(group_death,cross_pairs),_integer_allocate(group_birth,cross_pairs)
+-        cross_deaths,cross_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
+-        for group in range(self.mass_groups):
+-            members = groups==group
+-            cross_deaths += _integer_allocate(remaining_death*members,int(cross_group_death[group]))
+-            cross_births += _integer_allocate(remaining_birth*members,int(cross_group_birth[group]))
++        cross_deaths = _group_integer_allocate(remaining_death,groups,cross_group_death)
++        cross_births = _group_integer_allocate(remaining_birth,groups,cross_group_birth)
+         deaths,births = within_deaths+cross_deaths,within_births+cross_births
++        # One bounded metadata transfer preserves the original cell/RNG order.
++        death_rows,birth_rows,within_death_rows,within_birth_rows,pool_rows,group_rows = torch.stack(
++            (deaths,births,within_deaths,within_births,pool_counts,groups)).cpu().tolist()
++        group_cells = [[] for _ in range(self.mass_groups)]
++        for cell,group in enumerate(group_rows):
++            group_cells[group].append(cell)
+         priorities = torch.rand(len(features),device=self.device,dtype=torch.float64,generator=generator)
+         empty = torch.empty(0,device=self.device,dtype=torch.long)
+         children_by_cell,parents_by_cell = [],[]
+         for cell in range(self.cells):
+-            count = int(deaths[cell])
++            count = death_rows[cell]
+             if count:
+                 rows = ((ids==cell)&death_eligible).nonzero().flatten()
+                 children_by_cell.append(rows[priorities[rows].argsort(stable=True)[:count]])
+             else:
+                 children_by_cell.append(empty)
+-            count = int(births[cell])
++            count = birth_rows[cell]
+             if count:
+-                draw = torch.randperm(int(pool_counts[cell]),device=self.device,generator=generator)[:count]
++                draw = torch.randperm(pool_rows[cell],device=self.device,generator=generator)[:count]
+                 parents_by_cell.append(pool[cell,draw])
+             else:
+                 parents_by_cell.append(empty)
+@@ -816,13 +831,12 @@
+         # Match the conservative within-neighborhood phase inside its group.
+         # Only the explicit residual phase can move mass between groups.
+         for group in range(self.mass_groups):
+-            for cell in (groups==group).nonzero().flatten():
+-                index = int(cell)
+-                children.append(children_by_cell[index][:int(within_deaths[index])])
+-                parents.append(parents_by_cell[index][:int(within_births[index])])
++            for index in group_cells[group]:
++                children.append(children_by_cell[index][:within_death_rows[index]])
++                parents.append(parents_by_cell[index][:within_birth_rows[index]])
+         for cell in range(self.cells):
+-            children.append(children_by_cell[cell][int(within_deaths[cell]):])
+-            parents.append(parents_by_cell[cell][int(within_births[cell]):])
++            children.append(children_by_cell[cell][within_death_rows[cell]:])
++            parents.append(parents_by_cell[cell][within_birth_rows[cell]:])
+         child = torch.cat(children) if children else empty
+         parent = torch.cat(parents) if parents else empty
+         detail = dict(excess_cells=int(comparison["excess"].sum()),deficit_cells=int(comparison["deficit"].sum()),
+@@ -891,36 +905,36 @@
+         within_capacity = torch.minimum(self._group_counts(death_capacity),self._group_counts(birth_capacity))
+         within_capacity = torch.minimum(within_capacity,(group_target-group_clean).clamp_min(0))
+         within = _integer_allocate(within_capacity,max(0,budget))
+-        within_deaths,within_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
+-        for group in range(self.mass_groups):
+-            members = groups==group
+-            within_deaths += _integer_allocate(death_capacity*members,int(within[group]))
+-            within_births += _integer_allocate(birth_capacity*members,int(within[group]))
++        within_deaths = _group_integer_allocate(death_capacity,groups,within)
++        within_births = _group_integer_allocate(birth_capacity,groups,within)
+         remaining_death,remaining_birth = death_capacity-within_deaths,birth_capacity-within_births
+         group_death = self._group_counts(remaining_death)
+         remaining_vacancies = (group_target-group_clean-self._group_counts(within_births)).clamp_min(0)
+         group_birth = torch.minimum(self._group_counts(remaining_birth),remaining_vacancies)
+         cross_pairs = min(int(group_death.sum()),int(group_birth.sum()),max(0,budget-int(within.sum())))
+         cross_group_death,cross_group_birth = _integer_allocate(group_death,cross_pairs),_integer_allocate(group_birth,cross_pairs)
+-        cross_deaths,cross_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
+-        for group in range(self.mass_groups):
+-            members = groups==group
+-            cross_deaths += _integer_allocate(remaining_death*members,int(cross_group_death[group]))
+-            cross_births += _integer_allocate(remaining_birth*members,int(cross_group_birth[group]))
++        cross_deaths = _group_integer_allocate(remaining_death,groups,cross_group_death)
++        cross_births = _group_integer_allocate(remaining_birth,groups,cross_group_birth)
+         deaths,births = within_deaths+cross_deaths,within_births+cross_births
++        # One bounded metadata transfer preserves the original cell/RNG order.
++        death_rows,birth_rows,within_death_rows,within_birth_rows,pool_rows,group_rows = torch.stack(
++            (deaths,births,within_deaths,within_births,pool_counts,groups)).cpu().tolist()
++        group_cells = [[] for _ in range(self.mass_groups)]
++        for cell,group in enumerate(group_rows):
++            group_cells[group].append(cell)
+         priorities = torch.rand(len(features),device=self.device,dtype=torch.float64,generator=generator)
+         empty = torch.empty(0,device=self.device,dtype=torch.long)
+         children_by_cell,parents_by_cell = [],[]
+         for cell in range(self.cells):
+-            count = int(deaths[cell])
++            count = death_rows[cell]
+             if count:
+                 rows = ((ids==cell)&death_eligible).nonzero().flatten()
+                 children_by_cell.append(rows[priorities[rows].argsort(stable=True)[:count]])
+             else:
+                 children_by_cell.append(empty)
+-            count = int(births[cell])
++            count = birth_rows[cell]
+             if count:
+-                draw = torch.randperm(int(pool_counts[cell]),device=self.device,generator=generator)[:count]
++                draw = torch.randperm(pool_rows[cell],device=self.device,generator=generator)[:count]
+                 parents_by_cell.append(pool[cell,draw])
+             else:
+                 parents_by_cell.append(empty)
+@@ -928,13 +942,12 @@
+         # Match the conservative within-neighborhood phase inside its group.
+         # Only the explicit residual phase can move mass between groups.
+         for group in range(self.mass_groups):
+-            for cell in (groups==group).nonzero().flatten():
+-                index = int(cell)
+-                children.append(children_by_cell[index][:int(within_deaths[index])])
+-                parents.append(parents_by_cell[index][:int(within_births[index])])
++            for index in group_cells[group]:
++                children.append(children_by_cell[index][:within_death_rows[index]])
++                parents.append(parents_by_cell[index][:within_birth_rows[index]])
+         for cell in range(self.cells):
+-            children.append(children_by_cell[cell][int(within_deaths[cell]):])
+-            parents.append(parents_by_cell[cell][int(within_births[cell]):])
++            children.append(children_by_cell[cell][within_death_rows[cell]:])
++            parents.append(parents_by_cell[cell][within_birth_rows[cell]:])
+         child = torch.cat(children) if children else empty
+         parent = torch.cat(parents) if parents else empty
+         detail = dict(excess_cells=int(comparison["excess"].sum()),deficit_cells=int(comparison["deficit"].sum()),
+@@ -1011,36 +1024,36 @@
+         within_capacity = torch.minimum(self._group_counts(death_capacity),self._group_counts(birth_capacity))
+         within_capacity = torch.minimum(within_capacity,(group_target-group_clean).clamp_min(0))
+         within = _integer_allocate(within_capacity,certified_budget)
+-        within_deaths,within_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
+-        for group in range(self.mass_groups):
+-            members = groups==group
+-            within_deaths += _integer_allocate(death_capacity*members,int(within[group]))
+-            within_births += _integer_allocate(birth_capacity*members,int(within[group]))
++        within_deaths = _group_integer_allocate(death_capacity,groups,within)
++        within_births = _group_integer_allocate(birth_capacity,groups,within)
+         remaining_death,remaining_birth = death_capacity-within_deaths,birth_capacity-within_births
+         group_death = self._group_counts(remaining_death)
+         remaining_vacancies = (group_target-group_clean-self._group_counts(within_births)).clamp_min(0)
+         group_birth = torch.minimum(self._group_counts(remaining_birth),remaining_vacancies)
+         cross_pairs = min(int(group_death.sum()),int(group_birth.sum()),max(0,certified_budget-int(within.sum())))
+         cross_group_death,cross_group_birth = _integer_allocate(group_death,cross_pairs),_integer_allocate(group_birth,cross_pairs)
+-        cross_deaths,cross_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
+-        for group in range(self.mass_groups):
+-            members = groups==group
+-            cross_deaths += _integer_allocate(remaining_death*members,int(cross_group_death[group]))
+-            cross_births += _integer_allocate(remaining_birth*members,int(cross_group_birth[group]))
++        cross_deaths = _group_integer_allocate(remaining_death,groups,cross_group_death)
++        cross_births = _group_integer_allocate(remaining_birth,groups,cross_group_birth)
+         deaths,births = within_deaths+cross_deaths,within_births+cross_births
++        # One bounded metadata transfer preserves the original cell/RNG order.
++        death_rows,birth_rows,within_death_rows,within_birth_rows,pool_rows,group_rows = torch.stack(
++            (deaths,births,within_deaths,within_births,pool_counts,groups)).cpu().tolist()
++        group_cells = [[] for _ in range(self.mass_groups)]
++        for cell,group in enumerate(group_rows):
++            group_cells[group].append(cell)
+         priorities = torch.rand(len(features),device=self.device,dtype=torch.float64,generator=generator)
+         empty = torch.empty(0,device=self.device,dtype=torch.long)
+         children_by_cell,parents_by_cell = [],[]
+         for cell in range(self.cells):
+-            count = int(deaths[cell])
++            count = death_rows[cell]
+             if count:
+                 rows = ((ids==cell)&death_eligible).nonzero().flatten()
+                 children_by_cell.append(rows[priorities[rows].argsort(stable=True)[:count]])
+             else:
+                 children_by_cell.append(empty)
+-            count = int(births[cell])
++            count = birth_rows[cell]
+             if count:
+-                draw = torch.randperm(int(pool_counts[cell]),device=self.device,generator=generator)[:count]
++                draw = torch.randperm(pool_rows[cell],device=self.device,generator=generator)[:count]
+                 parents_by_cell.append(pool[cell,draw])
+             else:
+                 parents_by_cell.append(empty)
+@@ -1048,13 +1061,12 @@
+         # Match the conservative within-neighborhood phase inside its group.
+         # Only the explicit residual phase can move mass between groups.
+         for group in range(self.mass_groups):
+-            for cell in (groups==group).nonzero().flatten():
+-                index = int(cell)
+-                children.append(children_by_cell[index][:int(within_deaths[index])])
+-                parents.append(parents_by_cell[index][:int(within_births[index])])
++            for index in group_cells[group]:
++                children.append(children_by_cell[index][:within_death_rows[index]])
++                parents.append(parents_by_cell[index][:within_birth_rows[index]])
+         for cell in range(self.cells):
+-            children.append(children_by_cell[cell][int(within_deaths[cell]):])
+-            parents.append(parents_by_cell[cell][int(within_births[cell]):])
++            children.append(children_by_cell[cell][within_death_rows[cell]:])
++            parents.append(parents_by_cell[cell][within_birth_rows[cell]:])
+         child = torch.cat(children) if children else empty
+         parent = torch.cat(parents) if parents else empty
+         detail = dict(excess_cells=int(comparison["excess"].sum()),deficit_cells=int(comparison["deficit"].sum()),

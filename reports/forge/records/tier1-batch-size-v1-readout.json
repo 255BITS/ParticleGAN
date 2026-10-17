@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "record_id": "tier1-batch-size-v1-readout",
+  "record_type": "scientific",
+  "goal": "discriminator_stability",
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_revision": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200",
+  "trainer_family": "bcap-dualnorm",
+  "evidence_scope": "task_only_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "lifecycle": "concluded",
+  "hypothesis": "A larger batch may stabilize scalar acquisition and continued learning while retaining ring quality under the unchanged selected BCAP recipe.",
+  "mechanism_class": "task_owned_batch_size_and_stationary_hold",
+  "changed_factors": [
+    "Task-only batch128 versus512; total4000 external cap. Original recipe horizons, architecture, prior, initializer, seed, numerical bounds and cadence fixed within each task. New separately scoped all-check stationary hold. Same flat real-example stream grouped into larger batches; data exposure and prior-row update frequency change."
+  ],
+  "conclusion": "Batch512 does not repair Gaussian: both batches have longest full passing streak1 and no five-check window through4000. Gaussian final KS is .09594 at128 and .12660 at512. Ring128 passes acquisition and all144/144 hold checks, ending with150 consecutive passes. Ring512 acquires earlier (first five-check window784 versus1584) but has one covariance failure at2384, so its declared strict hold fails143/144 despite passing acquisition and endpoint. All three new CUDA trials complete10400 updates for122.683 new loop seconds, with exact prefix reuse, four exact final restores and676 metric recomputations. No current task, original qualification or calibration result changes.",
+  "next_action": "Stop this bounded batch round and retain adopted ring batch128. Gaussian needs a separately declared mechanism comparison; the user favors extrapolation from the past after compaction. Hold batch fixed and use one whole trainer across tasks; judge live acquisition, continued quality and separately declared target-shift response. No automatic larger batch, retry, seed study or new training.",
+  "source": {
+    "path": "reports/forge/tier1-batch-size/results.json",
+    "sha256": "c40780c95d3002a5d6300aa99113dd8fff644e7096baee730e9d78e3bd94ab98"
+  },
+  "provenance": {
+    "source_commit": "34871d418152d23cf260b29d14e82b6b4874b89d",
+    "protocol_sha256": "562825e3e95306201d3b05e2d2934b2b56fcb2046c468d8089da6d488bf37798",
+    "archive_sha256": "32580b2591ec6750b2e3c62b9ad8e446f8525072d4a0f46b9918b49453808588",
+    "parent_archives": {
+      "prior": "0ab6a34f0dbb27b7bd6647ef44918a1f022abc2732826c0d50190064d96ccd7d",
+      "duration": "18e339a2e78b73d95798b871914ac7a9301057e8b49a89c610f34dd7992d2480"
+    },
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    },
+    "trainer_delta": "none",
+    "new_training_updates": 10400,
+    "report": "reports/forge/tier1-batch-size/README.md",
+    "receipt": "reports/forge/tier1-batch-size/provenance.json"
+  },
+  "task_results": [
+    {
+      "task_id": "gaussian1d_acquisition__batch128__hold4000",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.09594186020319784,
+        "finite_fraction": 1.0,
+        "mean": 2.1376790918875486,
+        "mean_error_sigma": 0.27535818377509713,
+        "sample_count": 4096,
+        "std": 0.8739799948613184,
+        "std_ratio": 1.7479599897226368,
+        "acquisition_suffix": 1,
+        "hold_pass_checks": 1,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 1
+      },
+      "cost": {
+        "wall_seconds": 0.0
+      },
+      "reason": "Task-only combined acquisition/strict all-check hold diagnostic; acquisition FAIL, hold 1/72. Mode reuse_complete; 0 new updates. Original prefix grades/costs retained; no ordinary qualification credit."
+    },
+    {
+      "task_id": "ring16_acquisition__batch128__hold4000",
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.45829672552645206,
+        "component_core_min_eigen_ratio": 0.278278112411499,
+        "component_covariance_error": 0.563845245167613,
+        "component_min_eigen_ratio": 0.278278112411499,
+        "covariance_error": 0.04163460433483124,
+        "hq": 0.970703125,
+        "mass_tv": 0.057373046875,
+        "max_component_spill": 0.07364340871572495,
+        "mean_error": 0.05096924304962158,
+        "min_hq_mass_ratio": 0.69921875,
+        "min_mass_ratio": 0.73828125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.03942264963803208,
+        "target_scale": 3.0029242038726807,
+        "acquisition_suffix": 6,
+        "hold_pass_checks": 144,
+        "hold_total_checks": 144,
+        "longest_pass_streak": 150
+      },
+      "cost": {
+        "wall_seconds": 32.35213467210997
+      },
+      "reason": "Task-only combined acquisition/strict all-check hold diagnostic; acquisition PASS, hold 144/144. Mode resume; 2400 new updates. Original prefix grades/costs retained; no ordinary qualification credit."
+    },
+    {
+      "task_id": "gaussian1d_acquisition__batch512__hold4000",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.1265957567567726,
+        "finite_fraction": 1.0,
+        "mean": 1.9419262418377912,
+        "mean_error_sigma": 0.11614751632441767,
+        "sample_count": 4096,
+        "std": 0.34789691748985857,
+        "std_ratio": 0.6957938349797171,
+        "acquisition_suffix": 1,
+        "hold_pass_checks": 3,
+        "hold_total_checks": 72,
+        "longest_pass_streak": 1
+      },
+      "cost": {
+        "wall_seconds": 35.98861301410943
+      },
+      "reason": "Task-only combined acquisition/strict all-check hold diagnostic; acquisition FAIL, hold 3/72. Mode fresh; 4000 new updates. Original prefix grades/costs retained; no ordinary qualification credit."
+    },
+    {
+      "task_id": "ring16_acquisition__batch512__hold4000",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.3730748873203993,
+        "component_core_min_eigen_ratio": 0.35285958647727966,
+        "component_covariance_error": 0.37184890545904636,
+        "component_min_eigen_ratio": 0.35285958647727966,
+        "covariance_error": 0.11892427504062653,
+        "hq": 0.983642578125,
+        "mass_tv": 0.08203125,
+        "max_component_spill": 0.03875968977808952,
+        "mean_error": 0.0409502275288105,
+        "min_hq_mass_ratio": 0.62109375,
+        "min_mass_ratio": 0.625,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "sw1_normalized": 0.045335458564814135,
+        "target_scale": 3.0029242038726807,
+        "acquisition_suffix": 54,
+        "hold_pass_checks": 143,
+        "hold_total_checks": 144,
+        "longest_pass_streak": 100
+      },
+      "cost": {
+        "wall_seconds": 54.34209606796503
+      },
+      "reason": "Task-only combined acquisition/strict all-check hold diagnostic; acquisition PASS, hold 143/144. Mode fresh; 4000 new updates. Original prefix grades/costs retained; no ordinary qualification credit."
+    }
+  ]
+}

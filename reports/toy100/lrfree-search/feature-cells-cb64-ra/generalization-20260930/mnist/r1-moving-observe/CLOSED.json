@@ -1,0 +1,31 @@
+{
+  "status": "COMPLETE_FROZEN_70_UPDATE_ORIGINAL_MOVING_OBSERVATION_ONLY",
+  "closed_utc": "2026-09-30T21:31:54.366010+00:00",
+  "total_updates": 70,
+  "scoring_calls": 0,
+  "sample_calls": 0,
+  "source_mutations": 0,
+  "file_sha256": {
+    "COMPLETION.json": "b83d8962fd4d81c1d827fd4db58e8559f4f295d364e616c468e2edabe5b733d6",
+    "INPUTS.json": "29dcf35a0a679adb223c55ca539fe0843ba8e80ef0fef2b6e9e953a1a80c3542",
+    "LAUNCH.json": "fa8d02aa80a8872fcd4a8f6d1ca9459fdf974157de6c0e6242130caca4686166",
+    "PREFLIGHT.json": "93d5905b2d406e0a1509857c360b8671da34db4c07359913205c907ba02f1aff",
+    "REPORT.md": "c8384215689abc99ad0162dcb4d1525c294f7218401d3a0d62296586c383352d",
+    "SOURCE-FREEZE.json": "35ea2c173c42e795de4f61c9d37e3c520a2a0e9c7d83902e50f1bfe33bbbe743",
+    "analysis.json": "cc36cb864f2430d37c21386e9bc96a81f45678ed94c49c1427a2308157ea6c01",
+    "capture.py": "64fac01bbff1c4fb4bfea3ce71c0fd77f929704a1c2cb31e8564785c2cb0f958",
+    "frozen_data.py": "8fd623a048e243ba8c61f1f4e03d785ff6d9683ac515ee14c435582d520b78ae",
+    "launch.py": "952419d6a93a35451bcacbc058ff26f7f0e0771e70bf69f453bfc1ec172da59f",
+    "observe.log": "066d406e0468daa08b8bcda6b3ebd887991480d90a70c3b4c93afc7b0deea4c0",
+    "result.json": "8ada56fd775c3a9f9eb9be71ed42525fd6f32d728612c3a15a7366e749bbca75",
+    "run_observe.py": "7977613fcc8561ea54d74e8b480795e0096ace880c3f9cf237bc39fa718b36b0",
+    "window-1000/endpoint.pt": "441b4b578883b080db5915582cb549fc3b9d9a4322aeeb162edf4b49bd200f9d",
+    "window-1000/real-stream-start.pt": "69d852b29e78060f6bd3f944eb75d43994fd2cae10672f4ed9f0f543ac30760d",
+    "window-1000/result.json": "5af081572b0a363da53725b54bce4314bf0d8a8034c1c99be483a89fdd6eabc8",
+    "window-1000/trace.jsonl": "439f2ca9bb63d188674d8d9be68f05f50505717516e63bdbfc14fb07da7f0b4a",
+    "window-500/endpoint.pt": "aacf3f89f0b3df598649712159dda535119df2dd00f5e26d99c39f0abd0dfed6",
+    "window-500/real-stream-start.pt": "3dc90e144a910b02ed8c1b8721096639ffcfb2c7bb3f3055ca775eabeca6cc3e",
+    "window-500/result.json": "18d406bf79066332b5c2f515e918254df238bc80f60e2e2761217e6092a25056",
+    "window-500/trace.jsonl": "c0435f810a5db39cd6fa64420807915812bfeac5e33645676943ae848a655f24"
+  }
+}

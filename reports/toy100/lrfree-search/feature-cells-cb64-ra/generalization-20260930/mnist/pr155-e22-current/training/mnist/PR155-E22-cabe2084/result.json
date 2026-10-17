@@ -1,0 +1,1270 @@
+{
+  "status": "COMPLETE",
+  "problem": "mnist",
+  "variant": "PR155-E22-cabe2084",
+  "steps": 2000,
+  "training_seconds": 106.98692517913878,
+  "whole_run_seconds": 109.43320064805448,
+  "process_seconds": 110.48640639986843,
+  "updates_per_second": 18.6938730751557,
+  "peak_gpu_allocated_bytes": 252374528,
+  "peak_gpu_reserved_bytes": 339738624,
+  "peak_cpu_rss_bytes": 2012454912,
+  "device": "cuda:0",
+  "final": {
+    "step": 2000,
+    "training_seconds": 106.98692517913878,
+    "wall_seconds": 109.36704273708165,
+    "evaluation_seconds": 0.12337414105422795,
+    "metrics": {
+      "class_mass_tv": 0.133030859375,
+      "predicted_class_mass": [
+        0.06494140625,
+        0.147216796875,
+        0.079345703125,
+        0.11572265625,
+        0.113037109375,
+        0.07177734375,
+        0.058349609375,
+        0.093994140625,
+        0.0849609375,
+        0.170654296875
+      ],
+      "confident_class_mass": [
+        0.04248046875,
+        0.102294921875,
+        0.02734375,
+        0.05078125,
+        0.064697265625,
+        0.031982421875,
+        0.019287109375,
+        0.05322265625,
+        0.037109375,
+        0.078125
+      ],
+      "confident_class_coverage": 10,
+      "confident_fraction": 0.50732421875,
+      "mean_classifier_confidence": 0.8246971368789673,
+      "raw_embedding": {
+        "embedding_frechet": 27.996749421718505,
+        "embedding_precision": 0.7763671875,
+        "embedding_recall": 0.72998046875
+      },
+      "active_embedding": {
+        "embedding_frechet": 1.8809686577404747,
+        "embedding_precision": 0.767578125,
+        "embedding_recall": 0.71923828125
+      },
+      "pixel_clipping_fraction": 0.41346707940101624
+    },
+    "diagnostics": {
+      "output_sigma": 0.028999999165534973,
+      "lr": [
+        [
+          0.00425,
+          0.0085,
+          0.00425
+        ],
+        [
+          0.0016364265183681668
+        ]
+      ],
+      "controller": {
+        "latent_applications": [
+          {
+            "radius_min": 0.010539949871599674,
+            "radius_mean": 4.447068214416504,
+            "radius_max": 7.814969062805176,
+            "perturbation_rms": 0.45240530371665955,
+            "clipped_fraction": 1.0
+          },
+          {
+            "radius_min": 0.20046097040176392,
+            "radius_mean": 4.447720527648926,
+            "radius_max": 7.690579414367676,
+            "perturbation_rms": 0.4520485997200012,
+            "clipped_fraction": 1.0
+          }
+        ],
+        "latent_bandwidth": [
+          0.9885934591293335,
+          1.0873756408691406,
+          1.0445351600646973,
+          1.0700368881225586,
+          0.9997313022613525,
+          1.0343023538589478,
+          1.062439203262329,
+          1.0431455373764038,
+          1.078721284866333,
+          1.019026279449463,
+          1.0435478687286377,
+          1.0456485748291016,
+          1.034306287765503,
+          1.1228870153427124,
+          1.1178984642028809,
+          1.0182950496673584,
+          1.0202585458755493,
+          1.0245246887207031,
+          0.9589056372642517,
+          1.0040901899337769,
+          1.0646088123321533,
+          0.9976507425308228,
+          1.0853735208511353,
+          1.0302307605743408,
+          1.0375862121582031,
+          1.122246503829956,
+          1.068727731704712,
+          1.0180631875991821,
+          1.0365209579467773,
+          1.0916922092437744,
+          0.9488127827644348,
+          1.0345157384872437,
+          1.0667121410369873,
+          1.0855984687805176,
+          0.9461351633071899,
+          1.1634522676467896,
+          1.04314124584198,
+          0.9780678749084473,
+          1.0193079710006714,
+          1.0477368831634521,
+          1.02627432346344,
+          1.0279229879379272,
+          1.0147273540496826,
+          1.0535469055175781,
+          1.05106782913208,
+          0.9943003058433533,
+          1.0837233066558838,
+          1.0247786045074463,
+          1.0765093564987183,
+          0.9950997233390808,
+          1.0261427164077759,
+          1.072952151298523,
+          0.9654276371002197,
+          1.0110297203063965,
+          1.0437732934951782,
+          1.0582069158554077,
+          1.05089271068573,
+          1.0627816915512085,
+          1.063703179359436,
+          1.0769048929214478,
+          1.0345271825790405,
+          1.063929557800293,
+          1.0329692363739014,
+          1.065551519393921,
+          1.0540292263031006,
+          1.0222088098526,
+          1.0019314289093018,
+          1.0839548110961914,
+          1.0710234642028809,
+          0.9604580998420715,
+          1.0870535373687744,
+          1.0300090312957764,
+          1.0804535150527954,
+          1.0370031595230103,
+          1.0169634819030762,
+          1.0496423244476318,
+          1.0378079414367676,
+          0.9666637182235718,
+          1.0915409326553345,
+          1.0141805410385132,
+          1.048840880393982,
+          0.9175919890403748,
+          1.0189743041992188,
+          1.0009121894836426,
+          1.0036944150924683,
+          0.9743853807449341,
+          1.0402791500091553,
+          1.039626955986023,
+          1.13466477394104,
+          1.0446287393569946,
+          1.0656133890151978,
+          1.0817327499389648,
+          1.0525927543640137,
+          0.9640121459960938,
+          0.9604607820510864,
+          1.0242937803268433,
+          1.08512544631958,
+          1.0518829822540283,
+          1.007140040397644,
+          0.9808822870254517,
+          0.9922551512718201,
+          1.035489797592163,
+          1.1083680391311646,
+          1.1222132444381714,
+          1.0984022617340088,
+          0.9782915711402893,
+          1.0563102960586548,
+          1.1020424365997314,
+          1.0609022378921509,
+          1.0344750881195068,
+          1.0484355688095093,
+          1.0209797620773315,
+          1.0452899932861328,
+          1.1004095077514648,
+          1.0111154317855835,
+          1.0161551237106323,
+          1.0205473899841309,
+          0.9495872259140015,
+          1.0315495729446411,
+          1.0100034475326538,
+          1.0485035181045532,
+          1.0704079866409302,
+          1.0259418487548828,
+          1.0412040948867798,
+          1.017575979232788,
+          1.0219972133636475,
+          1.0676206350326538,
+          0.9665902256965637
+        ],
+        "data_memory": 0.0,
+        "payoff_error": 0.969197784236106,
+        "game_trust": 1.0,
+        "game_ratio": 0.5519130692965147,
+        "variant": "dv12",
+        "mobility": 0.9970737172884919,
+        "alignment": -0.34014203633935114,
+        "data_score": 0.0,
+        "data_drive": 0.0,
+        "last_cosine": 0.09842867404222488,
+        "updates": 2000,
+        "reopens": 0,
+        "closed": false
+      },
+      "lr_settle": {
+        "g0": {
+          "s": 1.0,
+          "b": 1.0,
+          "tau": 0.0,
+          "windows": 50,
+          "last": {
+            "decision": "drift",
+            "step": 1978,
+            "tested_b": 2.0,
+            "verdict_b": 1,
+            "verdict_2b": 1,
+            "evidence_scale": 2.0,
+            "t_b": 3.5215667779251913,
+            "t_2b": 8.312133049497511,
+            "mean_r_b": 0.033815258866525255,
+            "mean_r_2b": 0.07450673791269462,
+            "n_b": 12,
+            "n_2b": 6
+          },
+          "counts": {
+            "drift": 33,
+            "stationary": 0,
+            "mixed": 2,
+            "inconclusive": 15,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 1,
+            "restarts": 0,
+            "rebases": 0
+          },
+          "log": [
+            [
+              1714,
+              "inconclusive",
+              1.0,
+              2.0
+            ],
+            [
+              1762,
+              "drift",
+              1.0,
+              1.0
+            ],
+            [
+              1786,
+              "inconclusive",
+              1.0,
+              2.0
+            ],
+            [
+              1834,
+              "drift",
+              1.0,
+              1.0
+            ],
+            [
+              1858,
+              "inconclusive",
+              1.0,
+              2.0
+            ],
+            [
+              1906,
+              "drift",
+              1.0,
+              1.0
+            ],
+            [
+              1930,
+              "mixed",
+              1.0,
+              2.0
+            ],
+            [
+              1978,
+              "drift",
+              1.0,
+              1.0
+            ]
+          ],
+          "pairs_in_window": 11,
+          "blocks_in_window": 22,
+          "intrinsic_steps_to_next_decision": 2.0
+        },
+        "g1": {
+          "s": 1.0,
+          "b": 64.0,
+          "tau": 14.0,
+          "windows": 7,
+          "last": {
+            "decision": "drift",
+            "step": 1666,
+            "tested_b": 32.0,
+            "verdict_b": 1,
+            "verdict_2b": 0,
+            "evidence_scale": 32.0,
+            "t_b": 3.603288446703425,
+            "t_2b": 2.1939300576844043,
+            "mean_r_b": 0.12985951622249559,
+            "mean_r_2b": 0.14216455934365513,
+            "n_b": 12,
+            "n_2b": 6,
+            "early": false,
+            "log_bf_b": NaN,
+            "log_bf_2b": NaN
+          },
+          "counts": {
+            "drift": 5,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 2,
+            "reversal": 0,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 1,
+            "restarts": 0,
+            "rebases": 78,
+            "early": 0,
+            "held": 0,
+            "drift_blocked": 0
+          },
+          "log": [
+            [
+              24,
+              "drift",
+              1.0,
+              4.0
+            ],
+            [
+              120,
+              "drift",
+              1.0,
+              16.0
+            ],
+            [
+              226,
+              "drift",
+              1.0,
+              4.0
+            ],
+            [
+              322,
+              "drift",
+              1.0,
+              8.0
+            ],
+            [
+              514,
+              "inconclusive",
+              1.0,
+              16.0
+            ],
+            [
+              898,
+              "inconclusive",
+              1.0,
+              32.0
+            ],
+            [
+              1666,
+              "drift",
+              1.0,
+              64.0
+            ]
+          ],
+          "pairs_in_window": 2,
+          "blocks_in_window": 5,
+          "intrinsic_steps_to_next_decision": 1202.0,
+          "top1pct_row_energy_share": 0.07046981441828098,
+          "last_row_pair_overlap": 0.8046875,
+          "sequential": true,
+          "hold_descent": false,
+          "excluded_rows": 0,
+          "b_anchor": null,
+          "early_decisions": 0,
+          "looks": 72,
+          "last_look": {
+            "step": 1922,
+            "n_b": 2,
+            "n_2b": 1,
+            "t_b": 57.937983329530624,
+            "t_2b": NaN,
+            "log_bf_b": 2.104324618408854,
+            "log_bf_2b": -Infinity
+          }
+        },
+        "g2": {
+          "s": 1.0,
+          "b": 1.0,
+          "tau": 0.0,
+          "windows": 81,
+          "last": {
+            "decision": "frozen",
+            "step": 1978,
+            "tested_b": 1.0,
+            "verdict_b": null,
+            "verdict_2b": 0,
+            "evidence_scale": 1.0,
+            "t_b": NaN,
+            "t_2b": NaN,
+            "mean_r_b": NaN,
+            "mean_r_2b": NaN,
+            "n_b": 0,
+            "n_2b": 0
+          },
+          "counts": {
+            "drift": 14,
+            "stationary": 0,
+            "mixed": 0,
+            "inconclusive": 1,
+            "reversal": 0,
+            "frozen": 66,
+            "dropped_pairs": 1193,
+            "reopens": 1,
+            "restarts": 0,
+            "rebases": 0
+          },
+          "log": [
+            [
+              1810,
+              "frozen",
+              1.0,
+              1.0
+            ],
+            [
+              1834,
+              "frozen",
+              1.0,
+              1.0
+            ],
+            [
+              1858,
+              "frozen",
+              1.0,
+              1.0
+            ],
+            [
+              1882,
+              "frozen",
+              1.0,
+              1.0
+            ],
+            [
+              1906,
+              "frozen",
+              1.0,
+              1.0
+            ],
+            [
+              1930,
+              "frozen",
+              1.0,
+              1.0
+            ],
+            [
+              1954,
+              "frozen",
+              1.0,
+              1.0
+            ],
+            [
+              1978,
+              "frozen",
+              1.0,
+              1.0
+            ]
+          ],
+          "pairs_in_window": 11,
+          "blocks_in_window": 22,
+          "intrinsic_steps_to_next_decision": 2.0
+        },
+        "d0": {
+          "s": 0.5,
+          "b": 8.0,
+          "tau": 2.7884339885432285,
+          "windows": 7,
+          "last": {
+            "decision": "inconclusive",
+            "step": 1852,
+            "tested_b": 4.0,
+            "verdict_b": 0,
+            "verdict_2b": 1,
+            "evidence_scale": 4.0,
+            "t_b": 0.4849393703747805,
+            "t_2b": 3.7268100869022365,
+            "mean_r_b": 0.017715845567484696,
+            "mean_r_2b": 0.1400006761153539,
+            "n_b": 12,
+            "n_2b": 6
+          },
+          "counts": {
+            "drift": 4,
+            "stationary": 1,
+            "mixed": 0,
+            "inconclusive": 2,
+            "reversal": 1,
+            "frozen": 0,
+            "dropped_pairs": 0,
+            "reopens": 1,
+            "restarts": 0,
+            "rebases": 0
+          },
+          "log": [
+            [
+              494,
+              "drift",
+              1.0,
+              1.0
+            ],
+            [
+              1080,
+              "drift",
+              1.0,
+              1.0
+            ],
+            [
+              1304,
+              "drift",
+              1.0,
+              1.0
+            ],
+            [
+              1381,
+              "drift",
+              1.0,
+              1.0
+            ],
+            [
+              1455,
+              "inconclusive",
+              1.0,
+              2.0
+            ],
+            [
+              1584,
+              "stationary",
+              0.5,
+              4.0
+            ],
+            [
+              1852,
+              "inconclusive",
+              0.5,
+              8.0
+            ]
+          ],
+          "pairs_in_window": 3,
+          "blocks_in_window": 6,
+          "intrinsic_steps_to_next_decision": 141.21156601145677
+        }
+      },
+      "birth_death": {
+        "k": 8,
+        "s_k": 0.5160174700446224,
+        "fill": 1024,
+        "rows_since_eval": 0,
+        "counters": {
+          "evals": 250,
+          "dim_skips": 0,
+          "discoveries": 196689,
+          "realised_deaths": 183241,
+          "realised_births": 504,
+          "stays": 12944,
+          "moves": 504,
+          "matched": 504,
+          "normalised": 0,
+          "waited_deaths": 182737,
+          "waited_births": 0,
+          "stale_resets": 14233,
+          "iso_evals": 250,
+          "iso_flagged": 140133,
+          "iso_acted": 5,
+          "iso_skipped": 156,
+          "iso_moves": 237,
+          "iso_dup_skips": 0
+        },
+        "last": {
+          "step": 2000,
+          "k": 8,
+          "d_R": 10.303079919974254,
+          "d_F": 3.827011010379996,
+          "d": 10.303079919974254,
+          "eligible": 623,
+          "discoveries": 211,
+          "zstar": 2.856018437918557,
+          "excess": 178,
+          "deficit": 33,
+          "realised_deaths": 68,
+          "realised_births": 14,
+          "matched": 14,
+          "normalised": 0,
+          "waited_deaths": 54,
+          "waited_births": 0,
+          "moves": 14,
+          "mean_abs_x": 1.5019362683631483,
+          "iso_flagged": 0,
+          "iso_moves": 0
+        },
+        "in_excursion": 459,
+        "eligible_now": 280,
+        "iso_recent": [
+          [
+            1768,
+            0,
+            0
+          ],
+          [
+            1776,
+            0,
+            0
+          ],
+          [
+            1784,
+            92,
+            0
+          ],
+          [
+            1792,
+            0,
+            0
+          ],
+          [
+            1800,
+            0,
+            0
+          ],
+          [
+            1808,
+            0,
+            0
+          ],
+          [
+            1816,
+            0,
+            0
+          ],
+          [
+            1824,
+            0,
+            0
+          ],
+          [
+            1832,
+            0,
+            0
+          ],
+          [
+            1840,
+            0,
+            0
+          ],
+          [
+            1848,
+            0,
+            0
+          ],
+          [
+            1856,
+            201,
+            0
+          ],
+          [
+            1864,
+            0,
+            0
+          ],
+          [
+            1872,
+            0,
+            0
+          ],
+          [
+            1880,
+            0,
+            0
+          ],
+          [
+            1888,
+            0,
+            0
+          ],
+          [
+            1896,
+            0,
+            0
+          ],
+          [
+            1904,
+            51,
+            1
+          ],
+          [
+            1912,
+            0,
+            0
+          ],
+          [
+            1920,
+            0,
+            0
+          ],
+          [
+            1928,
+            0,
+            0
+          ],
+          [
+            1936,
+            0,
+            0
+          ],
+          [
+            1944,
+            0,
+            0
+          ],
+          [
+            1952,
+            0,
+            0
+          ],
+          [
+            1960,
+            0,
+            0
+          ],
+          [
+            1968,
+            0,
+            0
+          ],
+          [
+            1976,
+            0,
+            0
+          ],
+          [
+            1984,
+            0,
+            0
+          ],
+          [
+            1992,
+            0,
+            0
+          ],
+          [
+            2000,
+            0,
+            0
+          ]
+        ]
+      },
+      "row_evidence": {
+        "counters": {
+          "updates": 2000,
+          "flagged_rows_sum": 0,
+          "resets": 741,
+          "scale_sum": 2000.0008234687807
+        },
+        "fraction": 0.0,
+        "n_eff_max": 98.35103864260564,
+        "asymptotic_cap": 99.0,
+        "required": 384.0
+      },
+      "surprise": {
+        "fires": 1,
+        "armed": true,
+        "streak": 0,
+        "last_ratio": 1.1001282097513212,
+        "log": [
+          [
+            202,
+            3.984
+          ]
+        ],
+        "anchor_event": null,
+        "anchor_events": 0
+      }
+    },
+    "peak_gpu_allocated_bytes": 252374528,
+    "peak_gpu_reserved_bytes": 339738624,
+    "baseline_recipe_contract": {
+      "upstream_base_commit": "cabe2084284db923d525918cbf3e18de6f20faac",
+      "source_label": "PR155-E22-cabe2084",
+      "named_e22_training_fields_exact": true,
+      "report_name_only_difference": true,
+      "backend": "original_knn",
+      "guard": null,
+      "reopen_signal": "optimizer",
+      "reopen_anchor": "release",
+      "original_base_lrs": true,
+      "completed_steps": 2000,
+      "fixture": "mnist"
+    },
+    "rng_buffer_placement": {
+      "cpu_rng": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 5056
+      },
+      "cuda_rng": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16
+      },
+      "streams.latent_generator": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16
+      },
+      "streams.penalty_generator": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16
+      },
+      "streams.eval_generator": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16
+      },
+      "streams.noise_generator": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16
+      },
+      "birth_death.stream": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16
+      }
+    }
+  },
+  "receipt": {
+    "problem": "mnist",
+    "variant": "PR155-E22-cabe2084",
+    "seed": 314159,
+    "steps": 2000,
+    "recipe": {
+      "name": "ka2",
+      "model": "gan",
+      "z_dim": 128,
+      "num_particles": 1024,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 128,
+      "total_steps": null,
+      "continuous_policy": "dv12",
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": null,
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "prior_reg": 0.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "direct_particle_gain": true,
+      "d_guard_ratio": 5.0,
+      "d_guard_min_steps": 200,
+      "latent_damping_max_rate": 0.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "input_noise_std": 0.0,
+      "input_noise_anneal_end": 0.1,
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0,
+      "amsgrad": true,
+      "critic_r1_real": true,
+      "critic_payoff_damping": true,
+      "output_noise_mode": "learnable",
+      "lr_control": "stationarity",
+      "particle_birth_death": true,
+      "row_evidence_gate": true,
+      "table_release_rule": "anchor",
+      "row_evidence_hot": true,
+      "row_evidence_exclude": true,
+      "row_evidence_hold": true,
+      "birth_death_space": "critic",
+      "serve_average": 4.0,
+      "reopen_signal": "optimizer",
+      "reopen_anchor": "release",
+      "row_evidence_null": "scaled",
+      "birth_death_isolation": true,
+      "birth_death_feature_scale": "std",
+      "row_policy": "independent"
+    },
+    "initial_generator_sha256": "5220caa667003987e4a0c4b0d0e53d99de0a2a9d36068002a3d7ea8ad2a5a917",
+    "initial_critic_sha256": "45a0467c60011e01d9886fe4555e54e8d35f9ce28fd297cf277cf67f32618978",
+    "initial_prior_sha256": "5440a940d3a788954a7a03f835297dc5529d622fd09974bcf4ae5060b7652286",
+    "package": {
+      "config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_gate": true,
+        "row_evidence_null": "scaled",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "config_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/configs/pr155-e22.json",
+      "config_sha256": "03a8c7a8d35512a4e06735c37c375895f6ecc24011c4411a606eddd92f4c202c",
+      "intervention": "Fresh current PR155 E22 baseline, optimizer reopening/release retained; no Atlas controls.",
+      "package_root": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084",
+      "package_sha256": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316",
+      "source_sha256": {
+        "__init__.py": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+        "_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+        "autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+        "conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "continuous.py": "365a1e7b2f8e4eb4bc63bd04d05d645da8c2154159d596cb1564bec29f9eacc5",
+        "diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+        "discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+        "init.py": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+        "k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+        "ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+        "particle_prior.py": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+        "policy.py": "0a5dd9112a8796eb88f3fadaa55604620c5950d56dc44b48d8c52e27ace77530",
+        "recipes.py": "640b934f0b4697cd8fb6c49bf9bfaf40d4e9d9646a99e7bac133072514695abd",
+        "routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+        "row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+        "training.py": "dcfba088e0e3cd2dbe312578545a29f6e110340276e07ae5299d10ba58d11959",
+        "vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "source_variant": "PR155-E22-cabe2084",
+      "upstream_base_commit": "cabe2084284db923d525918cbf3e18de6f20faac"
+    },
+    "serial_backward": true,
+    "prior_learnable": true,
+    "generator_parameters": 445697,
+    "critic_parameters": 108977,
+    "previous_gpu_initialization_verified": true,
+    "device": "cuda:0",
+    "fixture_sources": {
+      "original_image_scorer_ast_identical": true,
+      "original_toy_gate_ast_identical": true,
+      "original_training_loop_ast_identical": true,
+      "original_init_and_primary_sampler_ast_identical": true,
+      "original_models_metrics_byte_pinned": true,
+      "original2000_updates_preserved": true,
+      "original10_checkpoints_preserved": true,
+      "output_noise_explicit": true,
+      "extra_begin_step_calls": 0
+    },
+    "initial_streams": {
+      "latent_generator": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16,
+        "sha256": "545bf8ab0614f9498ebb5d1d4f06d89a434979eb94488ecf968b05511b6ffbd8"
+      },
+      "penalty_generator": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16,
+        "sha256": "8e6fd183bff1aa2c2596cca5e0c547463688bbd047044b250d7910db05c46628"
+      },
+      "eval_generator": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16,
+        "sha256": "c58ea68faf65486b02553199afc7494857ebb730db4a9f5e26b5c9a9168b9b02"
+      },
+      "noise_generator": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16,
+        "sha256": "29bda6989686048726d8ddd1c4f2511a28f6e36dfafbdb911f3bdcefb985f67b"
+      },
+      "birth_death.stream": {
+        "device": "cpu",
+        "dtype": "torch.uint8",
+        "numel": 16,
+        "sha256": "23f023691524dcb54cb62256f60cdb1676450c72c6af6e05d47daae56fb06e2f"
+      }
+    },
+    "primary_sampling": {
+      "output_noise": true,
+      "scorer": "unchanged original"
+    },
+    "started_at": "2026-10-01T03:14:46.198579+00:00",
+    "source_freeze_sha256": "8bb844c6a89c7aa258a04837fa1150fa55b43811668fe6321f67da87592185ab",
+    "inputs_sha256": "b316bbf28bc659c7bbc13a32fa22e7fd78b25923bcca48721727055ded046fd5",
+    "protocol_sha256": "33b0b035b222c05f8c97d803b28eab370dc2dd11384f0c930b5cc5b0dc7c2ff4",
+    "preparation_receipt_sha256": "0daf8e28cf15422cfe9cd88f1eae3eb36b515e75d22ca4378bf77a7030af2771",
+    "local_source_sha256": {
+      "PROTOCOL.md": "33b0b035b222c05f8c97d803b28eab370dc2dd11384f0c930b5cc5b0dc7c2ff4",
+      "adapter.py": "f96f4c86c04df329a84c6d5d07b9d2b4073cb027b245669c9f817b59ec8f4cd2",
+      "common.py": "4e437277bec7ddf78212d0c726ec67c881c743490b380368ba854e65f3d36ae7",
+      "contracts.py": "b45f44e5ab38e8bccd9b3240628a5e5b1038a673aef9baae55bc94e5ba13f87a",
+      "launch_training.py": "8aa28ddecd28d7f2634e6606ca93639a596ec0dbc512a5e76bca4631b380f70c",
+      "preflight_cpu.py": "db8078beef62c779c365d735f6dd51f541530a2a0e2608d95537f88c46b0708a",
+      "prepare.py": "aab110f5ca7a81f235a25abf7af7cf9e0a2f228cde2c1108b3ce6a801d557f6b",
+      "run_training.py": "ac3292c5795dd14cb143ca6988146e213ac4ec934234b4bb17cc744d3802fe76",
+      "source-transform-receipt.json": "acf1230994f85e2fce647f2be905a1ef8f9e17dce8769949aa52b246b8ecb1a8"
+    },
+    "read_only_file_sha256": {
+      "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/implementation/READY.json": "0d8f674fa2fac7b736b592e472310ca892037d4acf9e1de6d9f6a03e55710ac2",
+      "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/PROTOCOL.md": "92d346f9349eb2ef1055706719d4c24ac44e1491faf099bf2b6bc177286c6c7c",
+      "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/candidate-freeze.json": "852f6f439350b3f77d60785961d3db165611a95d1ef36ac77d88b69700281116",
+      "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/replay.py": "d3a9eb2cf3fe7ec95364c61ede923f9f95eac3e01a5c297bdaeb1a05dbd13ad3",
+      "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/run_training.py": "de995630b74a9084e8b7a27e5ecfda0d4cb0c99d0f5976392640a854b405bb10",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/config.json": "4b0b54bdaa432e0ade412400091ac9ea1d37f57802c8c6756b76c9936046a153",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/evaluator.json": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/metrics.jsonl": "4afa89d2f9bc673990c5d7cb678116beafc23d706ebb27d0624325eae963419f",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/mnist/E22/result.json": "08c3fdd74b30275dcc7c9369697924a0badb94bd9c8f824d70954b05e180aeac",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/config.json": "e101a2385b54d8c10c2cf26e0a96cf923754c5b81ae5b78526ee3a2da1108752",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/metrics.jsonl": "32e6a195aa0d0ca99ae98fccb7725b06463b4a5f315227f751c23800e0823e90",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/result.json": "d981bf9ce9a38c276a09bda4978320bcca030a5cf50c6e43bfa08ddb468d5fe6",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/leaderboard.py": "b515a0ac4d2ed191d3b7a61266a6515f4d65f18dd38b6feb271962bc09a66428",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/INPUTS.json": "35eb2c2ed7d6c655e1e0e3e6f226f71dd7177a72cdb30d6d5e484831354b046b",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/common.py": "4275dffed197f83c19a2b8697233bed1733f9ff76e6daeb26c3eb78fc1a724ba",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/replay.py": "6b7ac41dab7a52ead34870917235d64c85824bd561dd44cb97b7602468cb2a0d",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/mnist/CB64-RA11/config.json": "05fe8a48225b181447cfee43d7f40411ef1bc1ce3ffa73786409751cec1c8525",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/mnist/CB64-RA11/evaluator.json": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/mnist/CB64-RA11/metrics.jsonl": "107eed644dcfe5be9083dfeb3d8c1585e7f7bf77af223d7a41b52d820cbdb0cc",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/mnist/CB64-RA11/result.json": "a4eb46d07e0693bac9106aaf267216fb759e1625f967b2281d33296b3f72681d",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/toy/CB64-RA11/config.json": "3703d7d007d92ec828368690ff9c0697c20b2f3f86377931167ee4d1acac2ba3",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/toy/CB64-RA11/metrics.jsonl": "b37632b7eca17948b9854c7ddfdd5fba6a4d937ec83c94b07ddb0c480d2af2eb",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/toy/CB64-RA11/result.json": "c6579ef8d596a6fc780c0244ecedd7e3ea11ac334466458019f6d90cdffa9963",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/RA13-SOURCE-REVIEW.json": "cfc23d27e01fe69f9d8c44e428dea5f844dab296a8914d1464ab605458c4be1b",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA11-R1-historical-rates.json": "aee755f9efde228a9547f36db36aa018f1f20b0b0e0fcbcc5dba34e7a8541c52",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA13-settled.json": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/CLOSED.json": "facec0ba1f6f07decf2a1bf8abab1b8d2434810b95ae50f60831851cd3ee453e",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/config.json": "bd00fb5d90c029c4aab3eff4bf2735c042aa3846c3e4e8b99ccc1a238281c28b",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/evaluator.json": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/metrics.jsonl": "b0f003b1cf4db6b4c0750c9b293f67ef6cb22ca5838b5d9a89fdb87d012a08a5",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/mnist/RA12-auto/result.json": "ab9e6944490c2a9a27e04face9a64c55434ca41181c78c05d7f91f2204015501",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/config.json": "8718e043966bd788bcbf14011c9983792b6253d2e8b48519d172dae196feea0a",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/metrics.jsonl": "3cfd6754dfc67b73c21520c7cc87921a1194afb6d5eccc8a1c481fd336d2c740",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra12-auto/training/toy/RA12-auto/result.json": "d663758b7012163a8a6f410f02e9bda9727997d80d3107bd9d03a56ae91f3e80",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/CLOSED.json": "b1fdad84be2a18918f25220fd8118a9a4181d56fe90ec90997d7a7be4522d971",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/INPUTS.json": "86b89fc333279fa6a8dca22af4790b940314fec1b2fdbb71ef2db7ac4ade86b0",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/PARENT-ADAPTER.json": "e982b59a8419195edf2a6e39b3b5d8f680c9a3f699b471252afec8c5acf2ec56",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/SOURCE-FREEZE.json": "26c3654df83056303135c12312e5f9b74c75b2063deda1cb84e598e17228c3a5",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/adapter.py": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/common.py": "8da895fad8baf14c5478dcc30d37b6b79e1087488528d87e81438b2556a0aa3c",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/contracts.py": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/run_training.py": "71d96c56f77ffa070bee27e84c67eeb704376d25e0ff062dcdc24aebfa3bf6b1",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/config.json": "e7f54390a97e68a2df1da7ea03d1a13ebc7a669446c080a18afe5c43d56a259c",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/evaluator.json": "b860e611e9c77ddcbf52ffb0fa24278a0ea2cea37fba5fcda116c71efc1df992",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/metrics.jsonl": "93b930c21a0c27df56e7fddd111111ff5b6455de4ddc3fe715aa09dbc2b05fbb",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/result.json": "53efa51a09e75598950507bb13a698fa39355c36092f5e364267f93a0761e36d",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/config.json": "f8fe4fc4794430ae3f84b7e2809b9fa96c677e91026264e5c081d47210b22e20",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/metrics.jsonl": "bb3a5b905645df4e1efc2812750aa99897e84a835d2f4d87b44938d05b5b02ca",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/result.json": "48fd19d855c29196b145744aba6b941f3962bc73aa1a0f7d7c1d6e86e8991103",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra17-replay/CLOSED.json": "f44bdf7eefda2c485b6dc59984e6f7f69ed0afe416f869a15e5f155cfe209b7e",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/ra17-current-pr155/SOURCE-BRIDGE.json": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/ra17-current-pr155/SOURCE-FREEZE.json": "4fd0ff0ea5ffa0c9f60a98f44f1ad8737e8a6a1d957f216db5142aff750c507d",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/final-v4-attempt1/FROZEN.json": "7a24164988d1301b19c68aae237782ca2fab7f0a36932fb6fa5472f4b0694f7d",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/final-v4-attempt1/QUALIFICATION.json": "031f5b21f61758967afa4374f2f534dafac462a94a2d09166bc4fb80b860bf16",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/BASELINE-SOURCE-FREEZE.json": "2c34fe4f5f8950c16f1f551a9ede4e3082e64af1d19e69655b254b25677225e4",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/E22-RECIPE-IDENTITY.json": "e3f50f74a696b8fb781b5e95f7fd5813e8a8ba017eed0d912490163bb3d5d018",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/configs/pr155-e22.json": "03a8c7a8d35512a4e06735c37c375895f6ecc24011c4411a606eddd92f4c202c",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/__init__.py": "87dc3795187c3563dc211c1baaeeaf7c75e37bb7baa3dcfd9c14e6eb1151a34f",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/continuous.py": "365a1e7b2f8e4eb4bc63bd04d05d645da8c2154159d596cb1564bec29f9eacc5",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/init.py": "dd2e6ce49e57735f19383f3d1d54c2377dd1619008920ec8418ca2dcc5c4bf30",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/particle_prior.py": "4771d54d1512f292dbd72509905789f4dc2b199f75d8b35686cfb666e04d63ac",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/policy.py": "0a5dd9112a8796eb88f3fadaa55604620c5950d56dc44b48d8c52e27ace77530",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/recipes.py": "640b934f0b4697cd8fb6c49bf9bfaf40d4e9d9646a99e7bac133072514695abd",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/training.py": "dcfba088e0e3cd2dbe312578545a29f6e110340276e07ae5299d10ba58d11959",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/pkg-pr155-e22-cabe2084/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/source-reference/README.md": "5425e7597b55f83edfce6d6e4cbf9ace47a12723e999255363cfd2f2e394ea75",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223-convergence/source-reference/docs/e22.md": "d08fab46e24d1cb095697ce90bfc2ee4b639e333a050044905e4d88ad70ecc49",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data-receipt.json": "8888d5a4d5ae5dec0e8edc78b933f1ca8111e19e81e4834695ab956b695398f3",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-images-idx3-ubyte": "0fa7898d509279e482958e8ce81c8e77db3f2f8254e26661ceb7762c4d494ce7",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-images-idx3-ubyte.gz": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-labels-idx1-ubyte": "ff7bcfd416de33731a308c3f266cc351222c34898ecbeaf847f06e48f7ec33f2",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/t10k-labels-idx1-ubyte.gz": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-images-idx3-ubyte": "ba891046e6505d7aadcbbe25680a0738ad16aec93bde7f9b65e87a2fc25776db",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-images-idx3-ubyte.gz": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-labels-idx1-ubyte": "65a50cbbf4e906d70832878ad85ccda5333a97f0f4c3dd2ef09a8a9eef7101c5",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/MNIST/raw/train-labels-idx1-ubyte.gz": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/image-stream.pt": "c035df45f2b4e2e189279a43cf4369b4a3b3714650ee284efe2cd15ac31c98c1",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/data/toy-stream.pt": "d7d1fbf0bd8ef52d87ad8644cb3959926a604bc9647063064561679c8ba3964c",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/evaluator.pt": "9872b10008933497cd2b0de80ea7d7d804e58f5a2a9f6dd0ccd5db3cb4f6f05b",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/models_metrics.py": "ae4113c9c7523e0ac17df05cb2c93731b96740c5594daa7085e4bf39ad9c7e47",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/runs/mnist/E22/config.json": "00dce3b332689e848985365ef9d7a11ee5ae788bbcf1ba784366432919a1c2ac",
+      "/ml2/hypergan/gan-attempts/scaling-portability-20260929/validation/runs/toy/E22/config.json": "f1db860262d8ff9bf80153d62adf54b35e8cfb143ce26c023bc05ef35c62fe38"
+    },
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/pr155-e22-current/run_training.py",
+      "--variant",
+      "PR155-E22-cabe2084",
+      "--problem",
+      "mnist"
+    ],
+    "runtime": {
+      "device": "cuda:0",
+      "physical_gpu": {
+        "physical_index": 0,
+        "uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "pci_bus_id": "00000000:24:00.0",
+        "name": "NVIDIA RTX A6000",
+        "memory_total": "49140 MiB"
+      },
+      "visible_devices": "0",
+      "cuda_uuid_raw": "72c1b506-891d-b8bc-b353-e020585e1c47",
+      "cuda_uuid_normalized": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+      "cuda_memory_fraction": 0.2,
+      "cpu_threads": 2,
+      "interop_threads": 1,
+      "deterministic_algorithms": true,
+      "cublas_workspace_config": ":4096:8",
+      "cuda_device_order": "PCI_BUS_ID",
+      "tf32_matmul": false,
+      "tf32_cudnn": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "torch": "2.13.0+cu126",
+      "cuda_runtime": "12.6",
+      "cudnn_version": 91002
+    }
+  },
+  "checkpoint_sha256": {
+    "checkpoint-0000.pt": "08cfee335d64f7125adef9d248fa4e21ab06b172ed9a5e215f24ccefab495f12",
+    "checkpoint-0100.pt": "c3356a7783795958ec89fe724dd2f7b2f915c8c8abe68ea18b11939572e703ce",
+    "checkpoint-0250.pt": "327cb338e7331ee011dc94686ed53229d4cd7525ccd40e2e20b605cb41ed6dd6",
+    "checkpoint-0500.pt": "321bb56ce92b05f4632bfbd3345997bfa8b60e5a7ee00bd34a203f09f0e25869",
+    "checkpoint-0750.pt": "7980bb264462582b4206f6cf966ddcfa2bd5c8c21c6fe5adcf8ba7f024021325",
+    "checkpoint-1000.pt": "8407c319b4ae270bee894c7f94190536eeb45ec5bf5329ba08996867d0c8fb6a",
+    "checkpoint-1250.pt": "a51243aebf246cb010aebb0ea775ff098474ef8f06815321cb704655ff82efaf",
+    "checkpoint-1500.pt": "3b50d24d24a16f34da3f54064fdd97799837fbeef785ca7f1aff381117062e57",
+    "checkpoint-1750.pt": "e165f92acc1b111c98b9fee7175d1eebb19c45924f04e22a66b051280c12d6f3",
+    "checkpoint-2000.pt": "b849f208418facfabfc887071da506762287568e312038145b4966722e03e990"
+  },
+  "original_quality_gate": null
+}

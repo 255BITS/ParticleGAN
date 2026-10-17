@@ -1,0 +1,11 @@
+# CPU-map checkpoint alias repair
+
+SOURCE/CPU READY: four new alias/rebase checks and fifty-four existing controls pass (58 total), CUDA_VISIBLE_DEVICES=0, no CUDA initialization or global Torch patch. The separate RA14 package changes only policy._state_to_device. Its config is byte-identical to RA13; schemas and parameters are unchanged. Frozen RA13 artifacts remain untouched.
+
+Both original replay continuations differed only in the table tester's last_block: native and CPU-map models, losses, optimizers, streams and every other semantic leaf were exact. Checkpoint1000 stores last_block and blocks[-1] as the same Tensor object. Independent .to calls preserved that identity in the same-device native branch but broke it in the allocating CPU-map branch. Subsequent row rebases inserted NaNs into blocks without updating the stale last_block copy. Toy differed at42 rows/5376 coordinates; MNIST atrow717/128 coordinates. This is a real state restoration defect.
+
+The helper now memoizes each original Tensor object within one control tree, including nested dictionaries, lists and tuples. Dtypes, shapes, devices and values stay unchanged. The diagnostic forces .to allocation using a local Tensor subclass, reconstructs the old bug, and verifies native/fixed byte parity after a row rebase and its NaN row-energy calculation. It also checks uint8 buffers and real meta-device allocation. No global monkeypatch is used.
+
+Source-only bridge proof: all27 other modules and every non-helper byte in policy.py are identical to RA13; every external helper call is in validation/restoration. Fresh training code is byte-identical. The existing sealed RA13 checkpoint1000 can therefore feed the original two-by-ten-update replay under RA14, preserving original provenance and comparing the new native branch to the sealed old native branch plus both new branches per update/sample. This exact GPU replay remains to be run by the parent lane.
+
+Memoization covers repeated Tensor object identity; it does not reconstruct distinct Tensor views or shared Python containers. The observed defect uses an identical Tensor object. Apply helper-only.patch and add test_state_transfer_alias.py to repository tests.

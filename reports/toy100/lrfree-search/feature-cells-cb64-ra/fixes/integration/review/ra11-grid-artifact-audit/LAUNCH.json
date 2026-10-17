@@ -1,0 +1,28 @@
+{
+  "status": "ONE_AUTHORIZED_CPU_ARTIFACT_AUDIT_LAUNCHED",
+  "started_utc": "2026-09-30T17:12:17.403934+00:00",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-grid-artifact-audit/audit_completed.py",
+    "--input-freeze",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-grid-artifact-audit/attempt1-inputs/INPUTS-FROZEN.json",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-grid-artifact-audit/accepted-attempt1"
+  ],
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "pid": 1344737,
+  "startticks": "169015755",
+  "checker_sha256": "e0dcaffcd10ccb0f7dd8b3f8f06709d65a258db96662a8796842db5b60e16b3e",
+  "input_seal_sha256": "8e3e157819e4d47768cbd9fabf9b5aecb65a69d7b92e0bafca904014da081f77",
+  "root_go_sha256": "574d85d5e4c69402fd7498b28cd3a73d6bf85daa4c659f6d9b85021bd906cc14",
+  "raw_source_input_guard_count": 285,
+  "CPU_only": true
+}

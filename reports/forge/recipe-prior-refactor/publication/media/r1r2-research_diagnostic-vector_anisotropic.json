@@ -1,0 +1,28 @@
+{
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
+  "gif_sha256": "e885e421f6298d7784650adecd2f5d2b72b36e53f180f64390efc736b2755e24",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "b0f9ba426d5cb7c4b1570b2fa6fd067dab0d2fbde28a5567dcbd523cd35eb72c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/recipe-owned-priors-20261010/queue/recipe-prior-refactor-selected-leaders-v1/3d23616361024fc3bf6be19493100eab/observed-samples.pt": "05e28a3c76ff128c32bb2baff3c5aca2e4f87f900d533e43b03bf8f244259530"
+  },
+  "task_id": "vector_anisotropic"
+}

@@ -1,0 +1,15 @@
+{
+  "checkpoint_sha256": "16388c4e59a657a154a4730e285191acfd18fbc23d41102d0c3ba82227efb8a7",
+  "cuda_initialized": false,
+  "models_constructed": 0,
+  "numeric_regrading": false,
+  "optimizer_updates": 0,
+  "original_status_remains": "INVALID",
+  "patched_health_accepts": true,
+  "raw_bytes_and_state_unchanged": true,
+  "sampler_calls": 0,
+  "schema": "pg_word_dimension_health_patch_read_only_check_v1",
+  "source_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+  "training_restores": 0,
+  "typed_state_sha256": "485ca3f1de4139d00118d081c9d501ab4ec3cc6adfc82b1ce01f7158d5727ef5"
+}

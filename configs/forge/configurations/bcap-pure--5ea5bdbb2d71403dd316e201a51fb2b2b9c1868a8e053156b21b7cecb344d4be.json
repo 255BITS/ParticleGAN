@@ -1,0 +1,1029 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.lr=0.00425"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "configuration_id": "5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+  "decision_contract": {
+    "candidate_binding_sha256": "9aeec8f4dff8a1cf704042dcf76d8ec3cf44eebb8de704d2e21c207df493bb25",
+    "competing_explanation": "The old BCAP evidence uses K3P optimizers, schedules and noise. It motivates this baseline but is not a matched causal control. Finite task budgets and rate endpoints may fail; one passing endpoint is insufficient for the unchanged sustained task gate. Behavioral objectives belong to the tests.",
+    "control": {
+      "binding_sha256": "7075d43e0fb653e7545b5a0c9c95cc098c6edbf26758baaec3db72eb616a2856",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "task_map": {
+        "ae_gan_hold": "ae_gan_hold",
+        "clockfree_audit_measurement_v1": "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition": "five_word_joint_acquisition",
+        "gaussian1d_acquisition": "gaussian1d_acquisition",
+        "ring16_acquisition": "ring16_acquisition",
+        "two_pole": "two_pole",
+        "unused_token_hold": "unused_token_hold"
+      }
+    },
+    "falsifier": {
+      "metric": "cdf_ks",
+      "op": ">",
+      "phase": "final",
+      "task_id": "gaussian1d_acquisition",
+      "threshold": 0.05
+    },
+    "prediction": {
+      "metric": "cdf_ks",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "gaussian1d_acquisition",
+      "threshold": 0.05
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "study_id": "bcap-tier1-refresh-v1"
+        },
+        "path": "reports/forge/configuration-search/bcap-tier1-refresh-v1.json",
+        "selector": [],
+        "sha256": "30d3f63dc83f7d651d8243527d0cba131105b1f6d103cd875da0b53eb6ae8924",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 25200,
+      "candidate_budget_seconds": 2520,
+      "execution_backend": "cuda",
+      "jobs_sha256": "a37aa831ecfd28d1ab224603e22127ccc7ce7034b8c038b5caf0a7d1416c518b",
+      "max_rounds": 1,
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_cohort_sha256": "f03804f032a7d5815d018b45c9fa112c1765013224d393e7a702a172b585735d",
+      "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    "status": "ready",
+    "substantive_delta": [
+      {
+        "after": "bcap",
+        "before": "k3p",
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "critic_formulation"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 5.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "d_guard_ratio"
+        ]
+      },
+      {
+        "after": false,
+        "before": true,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "direct_particle_gain"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.995,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "ema_decay"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "latent_damping_max_rate"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.05,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "lr_floor"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.01,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "network_lr_floor"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": "adam",
+        "before": "formulation",
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "optimizer_family"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.2,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "output_noise_warmup"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "reg_anchor_weight"
+        ]
+      },
+      {
+        "after": "bcap",
+        "before": "k3p",
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "critic_formulation"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 5.0,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "d_guard_ratio"
+        ]
+      },
+      {
+        "after": false,
+        "before": true,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "direct_particle_gain"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.995,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "ema_decay"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "latent_damping_max_rate"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.05,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "lr_floor"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.01,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "network_lr_floor"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": "adam",
+        "before": "formulation",
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "optimizer_family"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.2,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "output_noise_warmup"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "clockfree_audit_measurement_v1",
+          "reg_anchor_weight"
+        ]
+      },
+      {
+        "after": "bcap",
+        "before": "k3p",
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "critic_formulation"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 5.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "d_guard_ratio"
+        ]
+      },
+      {
+        "after": false,
+        "before": true,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "direct_particle_gain"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.995,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "ema_decay"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "latent_damping_max_rate"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.05,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "lr_floor"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.01,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "network_lr_floor"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": "adam",
+        "before": "formulation",
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "optimizer_family"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.2,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "output_noise_warmup"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "reg_anchor_weight"
+        ]
+      },
+      {
+        "after": "bcap",
+        "before": "k3p",
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "critic_formulation"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 5.0,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "d_guard_ratio"
+        ]
+      },
+      {
+        "after": false,
+        "before": true,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "direct_particle_gain"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.995,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "ema_decay"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "latent_damping_max_rate"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.05,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "lr_floor"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.01,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "network_lr_floor"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": "adam",
+        "before": "formulation",
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "optimizer_family"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.2,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "output_noise_warmup"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "reg_anchor_weight"
+        ]
+      },
+      {
+        "after": "bcap",
+        "before": "k3p",
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "critic_formulation"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 5.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "d_guard_ratio"
+        ]
+      },
+      {
+        "after": false,
+        "before": true,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "direct_particle_gain"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.995,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "ema_decay"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "latent_damping_max_rate"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.05,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "lr_floor"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.01,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "network_lr_floor"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": "adam",
+        "before": "formulation",
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "optimizer_family"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.2,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "output_noise_warmup"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "reg_anchor_weight"
+        ]
+      },
+      {
+        "after": "bcap",
+        "before": "k3p",
+        "path": [
+          "recipe",
+          "two_pole",
+          "critic_formulation"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 5.0,
+        "path": [
+          "recipe",
+          "two_pole",
+          "d_guard_ratio"
+        ]
+      },
+      {
+        "after": false,
+        "before": true,
+        "path": [
+          "recipe",
+          "two_pole",
+          "direct_particle_gain"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.995,
+        "path": [
+          "recipe",
+          "two_pole",
+          "ema_decay"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "two_pole",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "two_pole",
+          "latent_damping_max_rate"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.05,
+        "path": [
+          "recipe",
+          "two_pole",
+          "lr_floor"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.01,
+        "path": [
+          "recipe",
+          "two_pole",
+          "network_lr_floor"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "two_pole",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": "adam",
+        "before": "formulation",
+        "path": [
+          "recipe",
+          "two_pole",
+          "optimizer_family"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "two_pole",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.2,
+        "path": [
+          "recipe",
+          "two_pole",
+          "output_noise_warmup"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "two_pole",
+          "reg_anchor_weight"
+        ]
+      },
+      {
+        "after": "bcap",
+        "before": "k3p",
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "critic_formulation"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 5.0,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "d_guard_ratio"
+        ]
+      },
+      {
+        "after": false,
+        "before": true,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "direct_particle_gain"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.995,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "ema_decay"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "input_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.5,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "latent_damping_max_rate"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.05,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "lr_floor"
+        ]
+      },
+      {
+        "after": 1.0,
+        "before": 0.01,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "network_lr_floor"
+        ]
+      },
+      {
+        "after": null,
+        "before": 1600,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "network_lr_horizon_cap"
+        ]
+      },
+      {
+        "after": "adam",
+        "before": "formulation",
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "optimizer_family"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.029,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "output_noise_std"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 0.2,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "output_noise_warmup"
+        ]
+      },
+      {
+        "after": 0.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "reg_anchor_weight"
+        ]
+      }
+    ],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Pure BCAP with relativistic loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+  "id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+  "lifecycle": "proposed",
+  "mechanism_class": "floor_constant",
+  "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
+  "parent": "bcap-pure-adam-v1",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_art": [
+    "k3p-bcap-matched-v1"
+  ],
+  "recipe_overrides": {
+    "loss": "relativistic",
+    "lr": 0.00425
+  },
+  "recipe_preset": "bcap",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "resolved_configuration_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "bcap",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "distance_reduction": "sum",
+    "ema_decay": 0.0,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "loss": "relativistic",
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 1.0,
+    "model": "gan",
+    "name": "bcap",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "adam",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 7000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "schema_version": 2,
+  "search_report": "reports/forge/configuration-search/pure-bcap-relativistic-rates-v1.json",
+  "search_study_id": "pure-bcap-relativistic-rates-v1",
+  "trainer_family": "bcap-pure"
+}

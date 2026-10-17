@@ -1,0 +1,10 @@
+{
+  "status": "GO_ONE_AFFECTED_CPU_API_INVOCATION",
+  "utc": "2026-09-30T16:05:12.864854+00:00",
+  "input_seal_sha256": "854460cd4584fdac9bcca58e03034129ba50249b4e40c2ecfce1d9cf9b21b7c1",
+  "helper_sha256": "d0fb23b4cda41d17302f7e9c5d0428d2d16f0e48b189f11eb97ee2ceba33afa5",
+  "API_sample_calls": 3,
+  "CPU_updates_total": 2,
+  "root_verified_raw_guard_count": 390,
+  "scope": "One exact presealed affected checkpoint/continuation invocation. CPU only; no quality emissions or seed experiments."
+}

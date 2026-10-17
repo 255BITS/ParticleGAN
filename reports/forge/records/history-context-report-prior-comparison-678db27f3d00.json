@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/prior-comparison",
+  "candidate_revision": "d68f0cb3ca25af16629127a2783debd12bb7c20483ef8d3adfe5c0ba9c08064a",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Matched prior comparison: 100 Gaussians",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/prior-comparison",
+      "narrative_sources": [
+        {
+          "git_blob": "036dd0716ff0b83c3acc6db5c5f3ae1112f9a450",
+          "path": "reports/prior-comparison/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ff038d717d64f2b069fd6408fbe6e026582f0d2cbbb292a7b4071ea6adb05e3d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/prior-comparison/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Matched prior comparison: 100 Gaussians\n\nAll three particle runs reached 100 high-quality modes after 7,000 steps, with\nmean HQ **98.61%**. Frozen and fresh Gaussian controls produced much broader\nsamples under this same recipe. This supports better concentration near target\nmodes and high-quality coverage in this experiment; it does not establish full\nGaussian calibration or a guarantee against collapse.\n\nParticle core width averaged 0.857 times the target, but mean within-mode\ncovariance eigenvalue ratios were **2.09 / 42.37**, and **0.838%** of samples\nwere more than 10\u03c3 from their nearest center. Those unequal, inflated second\nmoments remain a substantial shape error. The finite particle table also\nproduced only about **19,869 distinct outputs** among 100,000 draws.\n\n## Final results\n\nEvery run is included. \u201cModes\u201d counts centers receiving at least ten samples\nwithin 3\u03c3; \u201crecall\u201d counts sufficiently populated nearest-center regions without\na distance cutoff. The Gaussian controls often have recall 1.0 despite low HQ,\nso their broad output should not all be described as mode collapse.\n\n| Prior | Seed | Modes | HQ (%) | Recall | Core | Cov min / max | Tail (%) | W1 | W2 | Unique |\n|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|\n| Particles | 23001 | 100 | 98.85 | 0.99 | 0.883 | 0.71 / 33.10 | 0.619 | 0.259 | 0.536 | 19,874 |\n| Particles | 23002 | 100 | 98.04 | 1.00 "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-prior-comparison-678db27f3d00",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "036dd0716ff0b83c3acc6db5c5f3ae1112f9a450",
+    "path": "reports/prior-comparison/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "ff038d717d64f2b069fd6408fbe6e026582f0d2cbbb292a7b4071ea6adb05e3d",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/prior-comparison/README.md"
+  },
+  "task_results": []
+}

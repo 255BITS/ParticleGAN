@@ -1,0 +1,67 @@
+{
+  "candidate": "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+  "candidate_revision": "98d01c8b382226c46c312202c5a952ad5d37355192778c149090a03b8fd17bfc",
+  "gif": {
+    "bytes": 101671,
+    "path": "reports/forge/family-wide-word-repairs/media/r1r2-lr0.0085-unused_token_hold.gif",
+    "sha256": "148a1585e0582147923a7b925ee1b23b7e4d0fbe0e4cbbaacb6c7bbddd036887"
+  },
+  "kind": "actual_training_numerical_goal_gif",
+  "observation_count": 24,
+  "observations_sha256": "cc0c118545130732125621e5b055168305fc48e81b2c9fa4ab5304d54fa9c236",
+  "optimizer_updates": 0,
+  "raw_result": {
+    "bytes": 52597,
+    "path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/r1r2-global-repair-rates-v1/7e3c91a39a1448699c75162cb49479e7/raw-result.json",
+    "sha256": "5187fb9574af76ce6f489e3cd8d7ce318ac4381d52aff4a7a6d27858ed7ca43e"
+  },
+  "renderer": {
+    "matplotlib": "3.11.1",
+    "pillow": "12.3.0",
+    "python": "3.12.13",
+    "source_sha256": "9b1fb30c93c26dd4d04e8f781ed6836e60929498755e22c4bbff814913d220f4"
+  },
+  "resolved_request": {
+    "bytes": 1608980,
+    "path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/r1r2-global-repair-rates-v1/7e3c91a39a1448699c75162cb49479e7/request.json",
+    "sha256": "4c7894f27b8b7169e32d204582c30cb5535a2fac673ccf1c1c817efad20848e5"
+  },
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "Saved API metric outputs against declared gate targets; no invented samples or parameter interpolation. Numerical grader retains all recorded observations.",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "task": "unused_token_hold",
+  "thresholds": [
+    [
+      "unused_hold",
+      ">=",
+      0.85
+    ],
+    [
+      "concept_move",
+      ">=",
+      0.85
+    ]
+  ],
+  "updates": [
+    9,
+    34,
+    59,
+    84,
+    109,
+    125,
+    150,
+    175,
+    200
+  ]
+}

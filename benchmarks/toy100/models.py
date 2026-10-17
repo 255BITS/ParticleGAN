@@ -38,7 +38,13 @@ class LearnableOutputScale(nn.Module):
 
 
 class OutputNoise(nn.Module):
-    """Add fresh isotropic output noise in both training and sampling."""
+    """Add fresh isotropic output noise to training fakes.
+
+    Inside :func:`clean_output_noise` the wrapper returns the clean
+    prediction without drawing, so evaluation scores the generator itself.
+    """
+
+    _clean = False
 
     def __init__(self, model: nn.Module, std: float, learnable: bool = False):
         super().__init__()
@@ -66,7 +72,7 @@ class OutputNoise(nn.Module):
 
     def forward(self, latent: torch.Tensor) -> torch.Tensor:
         prediction = self.model(latent)
-        if self.std == 0:
+        if self.std == 0 or self._clean:
             return prediction
         # GANTrainer.sample forks the global RNG, so evaluation leaves this
         # training noise stream untouched and fixed-seed frames replay exactly.
@@ -120,6 +126,46 @@ class IsolatedOutputNoise(OutputNoise):
     def draw_receipt(self) -> dict[str, int]:
         return {"calls": int(self.noise_draw_calls),
                 "elements": int(self.noise_draw_elements)}
+
+
+@contextmanager
+def clean_output_noise(models):
+    """Disable output noise (and its draws) on the given wrappers for scoring.
+
+    Output noise is a training regularizer: evaluation should score the clean
+    generator. No stream is touched, so training noise replays exactly.
+    """
+    wrappers = tuple(dict.fromkeys(
+        model for model in models if isinstance(model, OutputNoise)
+    ))
+    saved = tuple(model._clean for model in wrappers)
+    try:
+        for model in wrappers:
+            model._clean = True
+        yield
+    finally:
+        for model, flag in zip(wrappers, saved):
+            model._clean = flag
+
+
+def sample_clean(trainer, n: int, **options) -> torch.Tensor:
+    """``trainer.sample`` without the benchmark's training output noise."""
+    with clean_output_noise((trainer.G, trainer.ema_G)):
+        return trainer.sample(n, **options)
+
+
+def sample_evaluation(trainer, n: int, *, eval_output_noise=False, **options) -> torch.Tensor:
+    """Select clean scoring or the benchmark's original served sampling law.
+
+    This benchmark owns output noise through its generator wrapper; its trainer
+    recipe has neutral output-noise settings. The ordinary sampler preserves
+    that wrapper's fixed/learned noise without adding it twice.
+    """
+    if type(eval_output_noise) is not bool:
+        raise ValueError("eval_output_noise must be a boolean")
+    if eval_output_noise:
+        return trainer.sample(n, **options)
+    return sample_clean(trainer, n, **options)
 
 
 @contextmanager

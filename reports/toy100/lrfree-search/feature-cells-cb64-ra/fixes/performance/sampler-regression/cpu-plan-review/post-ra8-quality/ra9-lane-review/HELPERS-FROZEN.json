@@ -1,0 +1,9 @@
+{
+  "status": "FROZEN_BEFORE_PRELAUNCH_LANE_REVIEW",
+  "utc": "2026-09-30T09:08:55.985037+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/ra9-lane-review/audit_lane.py": "ffe98086d006fcfcaf53d02083e3d77d5eb27fd384ff0a1dcb7099c8b3ba5e24",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra7-quality/ra8-lane-review/audit_lane.py": "c1ecd784a81ed65326d2bc3d19d6b4427c07223f70c76600297b9c630971ec2a"
+  },
+  "scope": "Hash/AST/recipe-path review only; no model or CUDA imports or numerical jobs."
+}
