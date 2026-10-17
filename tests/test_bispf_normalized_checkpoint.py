@@ -128,3 +128,31 @@ def test_bcap_observer_packet_keeps_its_original_fields():
     optimizer = get_recipe("bcap").make_critic_optimizer(nn.Linear(2, 1))
     assert set(optimizer.state_dict()["regularizer"]["record"]) == {
         "lr_max", "lr_last", "anchor_started", "calls", "observed_steps"}
+
+
+@pytest.mark.parametrize("family", [None, "adam", "formulation"])
+def test_validation_probe_does_not_change_live_thermal_cache(family):
+    from particlegan.policy import _validate_optimizer_state
+    live = trainer(family)
+    live.opt_d.record._thermal_scale = .2
+    saved = live.opt_d.state_dict()
+    live.opt_d.record._thermal_scale = .8
+    _LAST_THERMAL_SCALE[torch.device("cpu")] = .8
+    _validate_optimizer_state(live.opt_d, saved)
+    assert live.opt_d.record._thermal_scale == .8
+    assert _LAST_THERMAL_SCALE == {torch.device("cpu"): .8}
+
+
+@pytest.mark.parametrize("family", [None, "adam", "formulation"])
+def test_late_rng_rejection_preserves_live_state_and_thermal_cache(family):
+    live = trainer(family)
+    live.opt_d.record._thermal_scale = .2
+    saved = live.state_dict()
+    saved["streams"]["eval_generator"] = torch.zeros(1, dtype=torch.uint8)
+    live.opt_d.record._thermal_scale = .8
+    _LAST_THERMAL_SCALE[torch.device("cpu")] = .8
+    before = live.state_dict()
+    with pytest.raises(ValueError, match="invalid checkpoint RNG state"):
+        live.load_state_dict(saved)
+    equal(before, live.state_dict())
+    assert _LAST_THERMAL_SCALE == {torch.device("cpu"): .8}
