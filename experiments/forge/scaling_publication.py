@@ -108,6 +108,7 @@ def validate_receipt(receipt):
         _fail("performance comparisons require protocol seed 0")
     for key in ("image_size", "batch_size", "base_channels", "warmup_updates", "measured_updates"):
         _number(spec.get(key), "spec." + key, positive=key != "warmup_updates")
+    _initial_model_for_comparison(receipt)
     status = performance_status(receipt)
     if status == "COMPLETE":
         _digest(identity.get("initialization_sha256"), "initialization digest")
@@ -141,8 +142,33 @@ def hardware_key(receipt):
             if key not in {"contention_before", "contention_after", "contention_status"}}
 
 
+def _initial_model_for_comparison(receipt):
+    """Bind the initial prior before recipe-owned regularizer buffers exist."""
+    identity = receipt["identity"]
+    model = deepcopy(identity.get("initial_model_sha256"))
+    api = receipt.get("api")
+    if api is not None and not isinstance(api, dict):
+        _fail("public API initialization receipt must be an object")
+    initialization = (api or {}).get("initialization")
+    if initialization is None:
+        return model, "strict_post_setup_state"
+    if not isinstance(initialization, dict):
+        _fail("public initialization proof must be an object")
+    for component in ("generator", "discriminator", "prior"):
+        proof = initialization.get(component)
+        if not isinstance(proof, dict):
+            _fail("missing public initialization proof for " + component)
+        _digest(proof.get("initial_state_sha256"), "public initialization " + component + " digest")
+    if identity.get("initialization_sha256") != stable_hash(initialization):
+        _fail("public initialization proof digest mismatch")
+    if model is not None:
+        model["prior"] = initialization["prior"]["initial_state_sha256"]
+    return model, "public_initializer_prior_state"
+
+
 def comparison_key(receipt, *, receipt_sha256=None):
     identity = receipt["identity"]
+    initial_model, prior_basis = _initial_model_for_comparison(receipt)
     hardware = receipt["hardware"]
     contention = hardware.get("contention_status", "unknown")
     # Unknown or contended observations remain displayable. They cannot silently
@@ -152,7 +178,7 @@ def comparison_key(receipt, *, receipt_sha256=None):
                         "runtime": identity["runtime_sha256"], "hardware": hardware_key(receipt),
                         "task": identity["task_sha256"],
                         "initialization": identity.get("initialization_sha256"),
-                        "initial_model": identity.get("initial_model_sha256"),
+                        "initial_model": initial_model, "initial_prior_basis": prior_basis,
                         "batches": identity.get("batch_sequence_sha256"),
                         "timing_scope": TIMING_SCOPE, "contention": contention,
                         "unmatched_receipt": private})

@@ -136,6 +136,62 @@ def test_physical_device_dtype_initialization_batch_and_contention_split_compari
     assert publication.comparison_key(result, receipt_sha256="a" * 64) != publication.comparison_key(result, receipt_sha256="b" * 64)
 
 
+def with_public_initialization(result):
+    initialization = {component: {"initializer": "deterministic_orthogonal_named_parameters_v1",
+                                   "initial_state_sha256": result["identity"]["initial_model_sha256"][component]}
+                      for component in ("generator", "discriminator", "prior")}
+    result["api"] = {"initialization": initialization}
+    result["identity"]["initialization_sha256"] = stable_hash(initialization)
+    return result
+
+
+def test_recipe_owned_prior_buffers_do_not_change_public_initial_distribution_cohort():
+    original = with_public_initialization(receipt())
+    buffered = deepcopy(original)
+    buffered["identity"]["initial_model_sha256"]["prior"] = "1" * 64
+    publication.validate_receipt(buffered)
+    assert publication.comparison_key(buffered) == publication.comparison_key(original)
+    assert buffered["identity"]["initial_model_sha256"]["prior"] == "1" * 64
+    assert buffered["api"]["initialization"]["prior"]["initial_state_sha256"] == "e" * 64
+
+
+@pytest.mark.parametrize("component", ("generator", "discriminator", "prior"))
+def test_changed_public_initialization_splits_comparison(component):
+    original = with_public_initialization(receipt())
+    changed = deepcopy(original)
+    changed["api"]["initialization"][component]["initial_state_sha256"] = "1" * 64
+    changed["identity"]["initialization_sha256"] = stable_hash(changed["api"]["initialization"])
+    publication.validate_receipt(changed)
+    assert publication.comparison_key(changed) != publication.comparison_key(original)
+
+
+@pytest.mark.parametrize("component", ("generator", "discriminator"))
+def test_public_prior_proof_keeps_strict_generator_discriminator_and_batch_identity(component):
+    original = with_public_initialization(receipt())
+    changed = deepcopy(original)
+    changed["identity"]["initial_model_sha256"][component] = "1" * 64
+    assert publication.comparison_key(changed) != publication.comparison_key(original)
+    changed = deepcopy(original)
+    changed["identity"]["batch_sequence_sha256"]["critic"] = "1" * 64
+    assert publication.comparison_key(changed) != publication.comparison_key(original)
+
+
+def test_public_initialization_proof_is_validated_and_manual_receipts_keep_strict_prior():
+    original = with_public_initialization(receipt())
+    changed = deepcopy(original)
+    changed["api"]["initialization"]["prior"]["initial_state_sha256"] = "invalid"
+    with pytest.raises(ValueError, match="public initialization prior digest"):
+        publication.validate_receipt(changed)
+    changed = deepcopy(original)
+    changed["api"]["initialization"]["prior"]["initial_state_sha256"] = "1" * 64
+    with pytest.raises(ValueError, match="public initialization proof digest mismatch"):
+        publication.validate_receipt(changed)
+    manual = receipt()
+    changed = deepcopy(manual)
+    changed["identity"]["initial_model_sha256"]["prior"] = "1" * 64
+    assert publication.comparison_key(changed) != publication.comparison_key(manual)
+
+
 def test_cross_resolution_global_recipe_changes_rejected(tmp_path):
     first = write_receipt(tmp_path, receipt())
     result = receipt(size=64)

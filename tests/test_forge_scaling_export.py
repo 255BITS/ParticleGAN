@@ -151,10 +151,43 @@ def test_partial_publication_is_explicit_and_running_cells_stay_unknown(campaign
     assert "running" in (campaign["root"] / "reports/forge/technique-inventory.md").read_text()
 
 
+def test_completed_diagnostic_with_preflight_blocked_unattempted_job_publishes_explicitly(campaign):
+    # Forge completes diagnostic submissions after excluding known unsupported
+    # tasks from execution. Their stored jobs remain pending with zero attempts.
+    state = campaign["state"]
+    request = state["submissions"]["request-one"]["request"]
+    blockers = ["DCGAN performance requires the unconditional scalar GANTrainer API",
+                "selected encoder recipe is unsupported by this host"]
+    request["tasks"]["r32"]["preflight_blockers"] = blockers
+    job = state["jobs"]["job-one"]
+    job.update(status="pending", attempts=[], result=None)
+    save_state(campaign)
+    before_queue = (campaign["queue"] / "queue/state.json").read_bytes()
+
+    result = publish(campaign["root"], campaign["queue"], "performance-v1")
+
+    assert result["partial_snapshot"] is False
+    assert result["counts"] == {"UNSUPPORTED": 1}
+    evidence = load_performance(campaign["root"])
+    assert evidence["records"] == []
+    outcome = evidence["unavailable"][0]
+    assert outcome["status"] == "UNSUPPORTED" and outcome["reason"] == "; ".join(blockers)
+    proof = read_json(campaign["root"] / outcome["receipt"])
+    assert proof["measurements_available"] is False
+    assert "metrics" not in proof and "identity" not in proof
+    assert "attempt_id" not in proof["export_provenance"]
+    assert proof["export_provenance"]["preflight_blockers"] == blockers
+    assert (campaign["queue"] / "queue/state.json").read_bytes() == before_queue
+    assert "selected encoder recipe is unsupported" in (campaign["root"] / "reports/forge/technique-inventory.md").read_text()
+
+
 @pytest.mark.parametrize("attempt_status,status,detail", [("error", "ERROR", {}),
     ("timeout", "INCOMPLETE", {}), ("error", "OOM", {"error": {"type": "OutOfMemoryError", "message": "CUDA out of memory"}}),
     ("error", "UNSUPPORTED", {"applicability": {"status": "unsupported", "reason": "encoder unavailable"}})])
 def test_no_core_failures_keep_exact_queue_outcome_without_measurements(campaign, attempt_status, status, detail):
+    # An existing paid attempt always retains its actual outcome, even if a
+    # later/cache diagnostic flag also says the task is unsupported.
+    campaign["state"]["submissions"]["request-one"]["request"]["tasks"]["r32"]["preflight_blockers"] = ["cached unsupported flag"]
     job = campaign["state"]["jobs"]["job-one"]
     job["result"]["raw"] = {"attempt_status": attempt_status, "result": detail, "reason": "original failure"}
     job["result"]["task_results"][0]["gate_status"] = "INCOMPLETE"

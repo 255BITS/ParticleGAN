@@ -215,7 +215,10 @@ def publish(root, queue_root, registration, *, allow_partial=False, refresh=True
                 job = state["jobs"].get(definition["compatibility_key"])
                 if job and job["definition"] != definition:
                     _fail("queue job differs from its frozen definition")
-            if not allow_partial and (job is None or job.get("status") in {"pending", "running"}):
+            preflight_blockers = request["tasks"][task_id].get("preflight_blockers", []) if request else []
+            unattempted_preflight = bool(preflight_blockers) and not (
+                job and (job.get("attempts") or job.get("result") or job.get("status") == "running"))
+            if not allow_partial and not unattempted_preflight and (job is None or job.get("status") in {"pending", "running"}):
                 if submission.get("status") not in {"blocked", "cancelled", "concluded"}:
                     _fail("campaign has unfinished cells; wait or pass --allow-partial")
             provenance = {"schema": EXPORT_SCHEMA, "registration": registration_id,
@@ -231,6 +234,8 @@ def publish(root, queue_root, registration, *, allow_partial=False, refresh=True
                           "observed_queue_cell_sha256": stable_hash(job) if job else None,
                           "frozen_task_sha256": card["task_contract_sha256"][task_id],
                           "original_files": {}, "local_artifact_root": None}
+            if unattempted_preflight:
+                provenance["preflight_blockers"] = deepcopy(preflight_blockers)
             result = job.get("result") if job else None
             summary = None
             if job and job.get("status") == "terminal" and result:
@@ -271,7 +276,10 @@ def publish(root, queue_root, registration, *, allow_partial=False, refresh=True
                                                      "the collector supersedes the runner's result.json filename.")
                     summary["export_provenance"] = provenance
             if summary is None:
-                status, reason = _unavailable_status(submission, job, result)
+                if unattempted_preflight:
+                    status, reason = "UNSUPPORTED", "; ".join(preflight_blockers)
+                else:
+                    status, reason = _unavailable_status(submission, job, result)
                 summary = {"schema": UNAVAILABLE_SCHEMA, "candidate_id": candidate, "task_id": task_id,
                            "status": status, "reason": reason, "measurements_available": False,
                            "qualification_input": False, "default_adoption": False,
