@@ -124,7 +124,7 @@ def test_performance_view_never_qualifies_a_recipe():
 def test_actual_frozen_performance_enqueue_accepts_all_eight_selected_recipes_without_launch(tmp_path):
     from experiments.forge.queue import Queue
     from experiments.forge.sources import verify_snapshot
-    manifest = scaling._load(ROOT, "dcgan-performance-cloud-v1")
+    manifest = scaling._load(ROOT, "dcgan-performance-cloud-v2")
     queue = Queue(tmp_path / "queue", report_root=ROOT / "reports/forge")
     result = scaling.enqueue(ROOT, queue.root, manifest["id"], queue=queue)
     assert len(result["submissions"]) == len(manifest["family_selections"]) == 8

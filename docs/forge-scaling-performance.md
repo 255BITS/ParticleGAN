@@ -101,6 +101,14 @@ updates; the Forge worker enforces the hard reservation deadline.
 
 ## Bounded execution and logs
 
+The current execution registration is `dcgan-performance-cloud-v2`, frozen from
+commit `58ade47791367abd46c68ede8d5e7d9fea3dbafb`. Its GPU tasks reserve 24 GiB
+each, independently of the measured allocator peaks. The earlier v1 registration
+retains its original task/reservation bindings; its unstarted requests were
+cancelled for telemetry and reservation corrections with zero paid execution.
+It cannot be replayed against the revised task contracts. Choose a new
+registration ID for future execution after any source or declaration change.
+
 Read `EXPERIMENTATION.md` and compiled memory first. Registration freezes the
 currently selected complete recipes and creates ready diagnostic studies with a
 finite campaign reservation. A new source, task or candidate declaration requires
@@ -108,10 +116,10 @@ a new registration ID. Planning and registration launch no training. Run from th
 repository root in the project's Python environment:
 
 ```sh
-python -m experiments.forge --queue-root runs/forge-scaling scaling register image-performance-v1 --device cuda
-python -m experiments.forge --queue-root runs/forge-scaling scaling plan image-performance-v1
-python -m experiments.forge --queue-root runs/forge-scaling scaling enqueue image-performance-v1
-python -m experiments.forge --queue-root runs/forge-scaling drain --gpus 0 --workers-per-gpu 1 --campaign image-performance-v1
+python -m experiments.forge --queue-root runs/forge-scaling scaling register image-performance-next --device cuda
+python -m experiments.forge --queue-root runs/forge-scaling scaling plan image-performance-next
+python -m experiments.forge --queue-root runs/forge-scaling scaling enqueue image-performance-next
+python -m experiments.forge --queue-root runs/forge-scaling drain --gpus 0 --workers-per-gpu 1 --campaign image-performance-next
 ```
 
 Use a single GPU for a complete comparable recipe matrix. A second GPU can run a
@@ -123,8 +131,8 @@ excluded.
 In another terminal:
 
 ```sh
-python -m experiments.forge --queue-root runs/forge-scaling logs --follow --campaign image-performance-v1
-tail -F runs/forge-scaling/events.jsonl
+python -m experiments.forge --queue-root runs/forge logs --follow --campaign dcgan-performance-cloud-v2
+tail -F runs/forge/events.jsonl
 ```
 
 Each run's stdout prints one flushed JSON line per update. Tail the run's
@@ -134,6 +142,34 @@ storage or an artifact archive. Commit compact final receipts, source/protocol
 declarations and reports; never force-add bulk logs.
 
 ## Compact publication without training
+
+Publish a completed registration directly from its queue evidence:
+
+```sh
+python -m experiments.forge --queue-root runs/forge scaling publish dcgan-performance-cloud-v2
+```
+
+This command validates the exact frozen requests, jobs, source maps, candidate
+and task bindings and independent grading receipts. It projects final core fields
+from the queue's canonical raw result, because collection replaces the runner's
+`result.json` with the canonical queue receipt. Compact content-addressed receipts
+retain original file byte hashes, attempt and request IDs, frozen job identity,
+registration family, current inventory display family, artifact root and bulk
+artifact hashes. BCAP's registration-family label does not change its actual
+selected recipe or current inventory ownership. Bulk logs, checkpoints and GIFs
+stay in their original local/archive storage. Missing bulk originals keep their
+recorded hashes and are explicit as unavailable locally.
+
+By default publication refuses queued, running or unsubmitted cells. Use
+`--allow-partial` only to request a labelled partial snapshot; pending timings stay
+unknown. Hard timeouts, unsupported capability and errors without a core summary
+produce compact queue-outcome receipts with no fabricated model or metric fields.
+The same Performance section displays those outcomes and reasons. Repeating
+publication with unchanged evidence is deterministic. It never launches or retries
+training and never writes another leaderboard.
+
+For importing already archived compact summaries, the lower-level workflow below
+remains available.
 
 Copy each run's compact final `result.json` to a stable path under
 `reports/forge/scaling-receipts/`; preserve its source, recipe, initialization,

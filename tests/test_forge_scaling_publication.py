@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
+from experiments.forge.contracts import atomic_json, canonical, file_hash, read_json, stable_hash
 from experiments.forge import scaling_publication as publication
 
 
@@ -193,6 +193,8 @@ def test_refresh_only_changes_performance_and_provenance_and_is_idempotent(tmp_p
     page.write_text("# Current scientific results\n\n81/81 recorded.\n\n## Research recipes and separate diagnostics\n\nOriginal archive.\n")
     publication.refresh_performance(tmp_path)
     after = read_json(path)
+    assert path.read_text() == canonical(after) + "\n"
+    assert path.read_text().count("\n") == 1
     assert after["rows"] == original["rows"] and after["qualification"] == original["qualification"]
     assert page.read_text().count(publication.START) == 1
     assert "81/81 recorded." in page.read_text() and "Original archive." in page.read_text()

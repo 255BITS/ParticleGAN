@@ -133,6 +133,9 @@ def parser():
     scaling_register.add_argument("--family", action="append", help="select a current family; repeat, default all")
     for stage in ("plan", "enqueue"):
         scaling_stages.add_parser(stage).add_argument("registration")
+    scaling_publish = scaling_stages.add_parser("publish", help="export frozen queue performance summaries and refresh the current overview; no training")
+    scaling_publish.add_argument("registration")
+    scaling_publish.add_argument("--allow-partial", action="store_true", help="explicitly publish a snapshot with queued/running cells marked unknown")
     tiers = commands.add_parser("experiments-by-tier", help="review experiment tiers, questions, published results and GIFs; no training")
     tiers.add_argument("--view", help="show one view; default all current views")
     tiers.add_argument("--json", action="store_true", help="render machine-readable inventory instead of Markdown")
@@ -394,6 +397,9 @@ def main(argv=None):
                           cuda_model=args.cuda_model, family_ids=args.family))
         elif args.stage == "plan":
             emit(plan(root, queue_root, args.registration, queue=queue))
+        elif args.stage == "publish":
+            from .scaling_export import publish as publish_scaling
+            emit(publish_scaling(root, queue_root, args.registration, allow_partial=args.allow_partial))
         else:
             emit(enqueue(root, queue_root, args.registration, queue=queue))
     elif command == "search":

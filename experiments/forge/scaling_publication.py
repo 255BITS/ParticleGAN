@@ -14,7 +14,7 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 
-from .contracts import atomic_json, atomic_text, file_hash, identifier, read_json, stable_hash
+from .contracts import atomic_json, atomic_text, canonical, file_hash, identifier, read_json, stable_hash
 
 MANIFEST = Path("reports/forge/scaling-performance.json")
 SCOPE = "dcgan_mock_performance"
@@ -60,6 +60,9 @@ def _number(value, label, *, positive=False):
 
 def performance_status(receipt):
     """Keep execution failures explicit without suggesting image quality passed."""
+    independent = receipt.get("independent_evaluation", {}).get("gate_status")
+    if independent and independent != "PASS" and receipt.get("status") == "PASS":
+        return "UNSUPPORTED" if independent == "BLOCKED" else independent
     detail = str(receipt.get("benchmark_status", "")).upper()
     if "OOM" in detail or "OUT_OF_MEMORY" in detail:
         return "OOM"
@@ -239,6 +242,45 @@ def _validate_manifest(root, manifest):
             _fail("duplicate performance cell; choose one current receipt explicitly")
         seen.add(cell)
         records.append({**row, "result": receipt})
+    unavailable_cells = set()
+    for row in manifest.get("unavailable", []):
+        for key in ("trainer_family", "candidate_id", "task_id"):
+            identifier(row[key], key)
+        path = _path(root, row["receipt"])
+        if file_hash(path) != row["receipt_sha256"]:
+            _fail("unavailable execution receipt bytes changed")
+        receipt = read_json(path)
+        if (receipt.get("schema") != "forge_scaling_unavailable_v1"
+                or receipt.get("candidate_id") != row["candidate_id"]
+                or receipt.get("task_id") != row["task_id"] or row["task_id"] not in tasks
+                or receipt.get("status") != row["status"] or receipt.get("reason") != row["reason"]
+                or receipt.get("measurements_available") is not False
+                or receipt.get("qualification_input") is not False
+                or receipt.get("default_adoption") is not False
+                or row["status"] not in {"UNKNOWN", "BLOCKED", "UNSUPPORTED", "ERROR", "OOM", "INCOMPLETE"}
+                or "metrics" in receipt or "identity" in receipt):
+            _fail("invalid unavailable execution receipt; no fabricated measurements allowed")
+        key = row["trainer_family"], row["candidate_id"], row["task_id"]
+        if key in unavailable_cells or any(key == (item["trainer_family"], item["candidate_id"], item["task_id"])
+                                           for item in records):
+            _fail("duplicate completed/unavailable performance cell")
+        unavailable_cells.add(key)
+    roster = (manifest.get("export") or {}).get("family_selections")
+    if roster is not None:
+        families, pairs = set(), set()
+        for item in roster:
+            family, candidate = item["trainer_family"], item["candidate_id"]
+            identifier(family, "registered display family")
+            identifier(candidate, "registered candidate")
+            if family in families:
+                _fail("duplicate family in the registered performance roster")
+            families.add(family)
+            pairs.add((family, candidate))
+        expected = {(family, candidate, task) for family, candidate in pairs for task in tasks}
+        cells = [(item["trainer_family"], item["candidate_id"], item["task_id"])
+                 for item in [*records, *manifest.get("unavailable", [])]]
+        if set(cells) != expected or len(cells) != len(expected):
+            _fail("performance roster must account for every registered recipe/task cell once")
     return records
 
 
@@ -252,6 +294,8 @@ def load_performance(root):
     return {"manifest": MANIFEST.as_posix(), "manifest_sha256": file_hash(path),
             "input_digest": manifest["input_digest"], "tasks": manifest["tasks"],
             "timing_scope": manifest["timing_scope"], "records": records,
+            "unavailable": manifest.get("unavailable", []),
+            "export": manifest.get("export"),
             "qualification_input": False, "default_adoption": False}
 
 
@@ -280,8 +324,11 @@ def _link(root, page, label, target):
 def _selected(publication):
     labels = {family["id"]: family["label"]
               for family in publication.get("family_progress", {}).get("families", [])}
+    roster = (publication.get("scaling_performance", {}).get("export") or {}).get("family_selections")
+    registered = {row["trainer_family"] for row in roster} if roster is not None else None
     return [(row["trainer_family"], row["candidate_id"], labels.get(row["trainer_family"], row["trainer_family"]))
-            for row in publication.get("rows", []) if row.get("trainer_family")]
+            for row in publication.get("rows", []) if row.get("trainer_family")
+            and (registered is None or row["trainer_family"] in registered)]
 
 
 def render_performance(root, publication, page, *, family_id=None):
@@ -308,8 +355,15 @@ def render_performance(root, publication, page, *, family_id=None):
               _link(root, page, "Compact performance evidence index", evidence["manifest"]) + " · " +
               _link(root, page, "Protocol and bounded reproduction", "docs/forge-scaling-performance.md"), ""]
     selected = [item for item in _selected(publication) if family_id is None or item[0] == family_id]
+    roster = (evidence.get("export") or {}).get("family_selections")
+    if roster is not None:
+        lines += [f"This registration covers {len(roster)} complete recipes. Historical alternatives outside its "
+                  "registered family roster add no missing benchmark cells. A changed selected recipe within "
+                  "a registered family remains unknown until measured.", ""]
     wanted = {(family, candidate) for family, candidate, _ in selected}
     records = [row for row in evidence["records"] if (row["trainer_family"], row["candidate_id"]) in wanted]
+    unavailable = [row for row in evidence.get("unavailable", [])
+                   if (row["trainer_family"], row["candidate_id"]) in wanted]
     groups = defaultdict(list)
     for row in records:
         result = row["result"]
@@ -317,7 +371,20 @@ def render_performance(root, publication, page, *, family_id=None):
                stable_hash(hardware_key(result)))
         groups[key].append(row)
     if not groups:
-        lines += ["No current selected-recipe performance cells are measured; all declared tasks are **unknown**.", ""]
+        lines += ["No current selected-recipe update timings are measured. Missing timing cells remain **unknown**.", ""]
+    if unavailable:
+        lines += ["### Executions without a final timing receipt", "",
+                  "These exact queue outcomes provide no update-time or memory measurement. "
+                  "Queued and running cells appear only in an explicitly requested partial publication.", "",
+                  "| Family / recipe | Task | Execution | Reason | Evidence |",
+                  "| --- | --- | --- | --- | --- |"]
+        labels = {(family, candidate): label for family, candidate, label in selected}
+        for row in unavailable:
+            label = labels[row["trainer_family"], row["candidate_id"]]
+            cells = [label + " · `" + row["candidate_id"] + "`", row["task_id"], row["status"], row["reason"],
+                     _link(root, page, "queue outcome", row["receipt"])]
+            lines.append("| " + " | ".join(_cell(value) for value in cells) + " |")
+        lines += [""]
     for (source, runtime_hash, _), rows in sorted(groups.items()):
         sample = rows[0]["result"]
         hardware, runtime = sample["hardware"], sample["runtime"]
@@ -403,7 +470,9 @@ def refresh_performance(root):
     old_digest = claimed
     markdown = markdown.replace(f"Publication input digest `{old_digest}`.",
                                 f"Publication input digest `{publication['provenance']['input_digest']}`.")
-    json_text = json.dumps(publication, sort_keys=True, indent=2, allow_nan=False) + "\n"
+    # Match the existing inventory's compact serialization; its historical
+    # scientific evidence must not acquire a formatting-only publication diff.
+    json_text = canonical(publication) + "\n"
     if json_path.read_text() != json_text:
         atomic_text(json_path, json_text)
     if page.read_text() != markdown:
