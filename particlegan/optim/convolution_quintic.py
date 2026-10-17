@@ -37,6 +37,8 @@ def quintic_direction(matrices, *, smoothing):
         raise ValueError("quintic smoothing must be finite and nonnegative")
     if not matrices.numel():
         return torch.zeros_like(matrices)
+    if not bool(torch.isfinite(matrices).all()):
+        raise ValueError("quintic directions require finite matrix entries")
     original_shape, original_dtype = matrices.shape, matrices.dtype
     # Disable the caller's AMP casting locally; the declared filter uses FP32,
     # including when the surrounding model runs under autocast.

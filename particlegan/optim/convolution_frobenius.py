@@ -22,6 +22,8 @@ def frobenius_direction(matrices, *, smoothing):
         raise ValueError("Frobenius smoothing must be finite and nonnegative")
     if not matrices.numel():
         return torch.zeros_like(matrices)
+    if not bool(torch.isfinite(matrices).all()):
+        raise ValueError("Frobenius directions require finite matrix entries")
     dtype = (torch.float64 if matrices.dtype == torch.float64
              or smoothing > torch.finfo(torch.float32).max else torch.float32)
     work = matrices.to(dtype)
