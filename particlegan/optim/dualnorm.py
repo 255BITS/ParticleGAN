@@ -110,6 +110,68 @@ def _convolution_matrices(tensor, metadata):
                 yield matrix.T if transposed else matrix
 
 
+def _convolution_batch(tensor, metadata):
+    """Return channel matrices in [group, row, column] order."""
+    groups = metadata["groups"]
+    inputs = metadata["in_channels"] // groups
+    outputs = metadata["out_channels"] // groups
+    kernel = metadata["kernel_size"]
+    transposed = metadata["layout"] == "conv_transpose2d_in_out"
+    channels = (inputs, outputs) if transposed else (outputs, inputs)
+    storage = tensor.reshape(groups, *channels, *kernel)
+    return storage.permute(0, 3, 4, 2, 1) if transposed else storage.permute(0, 3, 4, 1, 2)
+
+
+def _newton_schulz_polar(matrices, *, smoothing):
+    """Batched, regularized polar approximation with exact failure fallback.
+
+    Twenty-four coupled Newton--Schulz iterations approximate
+    M (M.T M + smoothing**2 I)**(-1/2), using the smaller channel Gram
+    matrix. Each matrix is scaled before forming its Gram matrix to avoid
+    overflow. A nonfinite result or inverse-root residual infinity norm above
+    1e-3 falls back to the original exact SVD rule for that matrix alone.
+
+    This opt-in numerical rule differs from native SVD: its successful fast
+    branch has finite iteration and Gram rounding error, and omits the hard
+    numerical-rank cutoff. Smoothing stays in the original absolute units.
+    """
+    original_shape = matrices.shape
+    original_dtype = matrices.dtype
+    value = matrices.reshape(-1, *original_shape[-2:])
+    if original_dtype not in (torch.float32, torch.float64):
+        value = value.float()
+    transpose = value.shape[-2] < value.shape[-1]
+    oriented = value.mT if transpose else value
+    width = oriented.shape[-1]
+    identity = torch.eye(width, device=value.device, dtype=value.dtype)
+    normalizer = oriented.abs().amax(dim=(-2, -1), keepdim=True).clamp_min(smoothing)
+    scaled = oriented / normalizer
+    regularizer = (smoothing / normalizer).square()
+    gram = scaled.mT @ scaled + regularizer * identity
+    trace = gram.diagonal(dim1=-2, dim2=-1).sum(-1)[..., None, None]
+    normalized_gram = gram / trace
+    root = normalized_gram
+    inverse = identity.expand_as(root).clone()
+    for _ in range(24):
+        correction = .5 * (3 * identity - inverse @ root)
+        root = root @ correction
+        inverse = correction @ inverse
+    result = scaled @ inverse / trace.sqrt()
+    # Check against the saved input Gram matrix, rather than just the coupled
+    # iterates, whose roundoff errors can drift together.
+    residual = (identity - inverse @ normalized_gram @ inverse).abs().sum(-1).amax(-1)
+    failed = (~torch.isfinite(result).all(dim=(-2, -1))
+              | ~torch.isfinite(residual) | (residual > 1e-3))
+    # The single device-to-host decision replaces two synchronizations and one
+    # SVD per spatial offset in the native path. Failed slices are uncommon for
+    # the supported smoothed training regime, but never receive unchecked steps.
+    for index in failed.nonzero(as_tuple=False).flatten().tolist():
+        result[index] = polar_factor(oriented[index], smoothing=smoothing)
+    if transpose:
+        result = result.mT
+    return result.reshape(original_shape).to(dtype=original_dtype)
+
+
 def polar_factor(matrix, *, smoothing=0., backend="native"):
     """Return the polar direction with optional fixed-scale spectral smoothing.
 
@@ -174,10 +236,12 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("optimizer convolution must be none or per_offset")
         if convolution != "none" and family != "dualnorm":
             raise ValueError("optimizer convolution requires the dualnorm family")
-        if svd_backend not in ("native", "cpu"):
-            raise ValueError("optimizer SVD backend must be native or cpu")
+        if svd_backend not in ("native", "cpu", "newton_schulz"):
+            raise ValueError("optimizer SVD backend must be native, cpu or newton_schulz")
         if svd_backend != "native" and family != "dualnorm":
             raise ValueError("optimizer SVD backend requires the dualnorm family")
+        if svd_backend == "newton_schulz" and (convolution != "per_offset" or not smoothing):
+            raise ValueError("newton_schulz requires per_offset convolution and positive smoothing")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -376,6 +440,19 @@ class NormalizedOptimizer(Optimizer):
                         metadata = group["dualnorm_convolution"]
                         factor = math.sqrt(metadata["out_channels"] / metadata["in_channels"])
                         factor /= math.prod(metadata["kernel_size"])
+                        if self.svd_backend == "newton_schulz":
+                            gradient_batch = _convolution_batch(gradient, metadata)
+                            direction_batch = _convolution_batch(direction, metadata)
+                            update = _newton_schulz_polar(direction_batch, smoothing=self.smoothing)
+                            active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
+                                      & (direction_batch.norm(dim=(-2, -1)) >= eps))
+                            update = update * active[..., None, None]
+                            if metadata["layout"] == "conv_transpose2d_in_out":
+                                update = update.permute(0, 4, 3, 1, 2)
+                            else:
+                                update = update.permute(0, 3, 4, 1, 2)
+                            parameter.add_(update.reshape_as(parameter), alpha=-rate * factor)
+                            continue
                         matrices = zip(_convolution_matrices(parameter, metadata),
                                        _convolution_matrices(gradient, metadata),
                                        _convolution_matrices(direction, metadata))
@@ -393,7 +470,7 @@ class NormalizedOptimizer(Optimizer):
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
-                        if self.svd_backend == "native":
+                        if self.svd_backend in ("native", "newton_schulz"):
                             update = (polar_factor(direction, smoothing=self.smoothing)
                                       if self.smoothing else polar_factor(direction))
                         else:
