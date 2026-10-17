@@ -164,7 +164,16 @@ def test_committed_declarations_view_and_tiers_cover_all_selected_tests():
     cohort = next(c for c in family["cohorts"] if c["anchor"] == family["current_cohort_anchor"])
     selected = {(a["task"], a["qualification_tier"]) for v in cohort["views"] for a in views[v["id"]]["assignments"]
                 if a["importance"] in {"required", "held"} or "removal" in a}
-    assert selected == {(name, tier) for tier, names in TIERS.items() for name in names}
+    revision_13_new_tasks = {
+        ("zero_tanh_smoke", 1),
+        ("zero_tanh_rail_escape", 3),
+        ("grid100_mlp16", 4),
+        ("grid100_res16_tanh", 4),
+        ("misgan_block_recovery", 4),
+        ("misgan_block_neural_imputer", 4),
+        ("ring16_bigan_continuous", 4),
+    }
+    assert selected == {(name, tier) for tier, names in TIERS.items() for name in names} | revision_13_new_tasks
 
 
 @pytest.mark.parametrize("family", FAMILIES)

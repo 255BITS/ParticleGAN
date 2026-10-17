@@ -531,3 +531,34 @@ def test_cli_rejects_invalid_non_positive_tiers():
         p.parse_args(["board", "--tier", "-1"])
     with pytest.raises(SystemExit):
         p.parse_args(["retier", "view", "--task", "t", "--tier", "0", "--reason", "r"])
+
+
+def test_task_recipe_resources_defensive_particle_fallback():
+    """Verify task_recipe_resources gracefully defaults num_particles to 256 when omitted."""
+    from experiments.forge.api import task_recipe_resources
+
+    dummy_task = {
+        "adapter": "transfer_vector",
+        "execution": {
+            "host_definition": {
+                "z_dim": 8,
+                "batch": 2048,
+            }
+        }
+    }
+    resources = task_recipe_resources(dummy_task)
+    assert resources == {"num_particles": 256, "z_dim": 8, "batch_size": 2048}
+
+
+def test_misgan_tasks_host_definition_particles_declared():
+    """Verify misgan tasks explicitly declare particles: 256 in host_definition."""
+    from pathlib import Path
+    from experiments.forge.planning import load_tasks
+
+    tasks = load_tasks(Path("."))
+    for task_id in ("misgan_block_recovery", "misgan_block_neural_imputer"):
+        assert task_id in tasks
+        host_def = tasks[task_id]["execution"]["host_definition"]
+        assert "particles" in host_def, f"{task_id} missing particles in host_definition"
+        assert host_def["particles"] == 256
+

@@ -22,7 +22,8 @@
       "imputation": "ppost",
       "steps": 7000,
       "batch": 2048,
-      "z_dim": 8
+      "z_dim": 8,
+      "particles": 256
     },
     "prior_contract": "recipe_owned_v1"
   },

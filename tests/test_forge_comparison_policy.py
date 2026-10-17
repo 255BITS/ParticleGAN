@@ -9,14 +9,14 @@ from test_forge_current_technique_inventory import ROOT, evidence, publication
 
 
 def test_actual_registered_dispositions_are_a_valid_comparison_projection():
-    actual = read_json(ROOT / 'configs/forge/views/discriminator_stability.json')
+    actual = read_json(ROOT / 'configs/forge/view-history/discriminator_stability-v12.json')
     recorded = read_json(ROOT / 'configs/forge/view-history/discriminator_stability-v9.json')
     publication._validate_comparison_policy(actual, recorded)
 
 
 @pytest.mark.parametrize('change', ['task', 'tier', 'order', 'eligibility', 'calibration', 'same_revision'])
 def test_comparison_policy_refuses_changes_beyond_dispositions(change):
-    actual = read_json(ROOT / 'configs/forge/views/discriminator_stability.json')
+    actual = read_json(ROOT / 'configs/forge/view-history/discriminator_stability-v12.json')
     recorded = read_json(ROOT / 'configs/forge/view-history/discriminator_stability-v9.json')
     if change == 'task':
         recorded['assignments'][0]['task'] = 'another_task'

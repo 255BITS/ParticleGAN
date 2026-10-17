@@ -107,7 +107,7 @@ def task_recipe_resources(task):
     execution, adapter = task["execution"], task["adapter"]
     if adapter in {"transfer_vector", "paired_adaptation", "transfer_image"}:
         spec = execution["host_definition"]
-        return {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
+        return {"num_particles": spec.get("particles", 256), "z_dim": spec["z_dim"],
                 "batch_size": spec["batch_size"] if adapter == "transfer_image" else spec["batch"]}
     if adapter == "ring_endurance" or (adapter == "transfer_behavior" and execution.get("host") == "mode_hold"):
         from benchmarks.legacy.locked_shared import LOCKED_SHARED

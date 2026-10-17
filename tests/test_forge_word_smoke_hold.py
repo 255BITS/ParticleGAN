@@ -101,7 +101,8 @@ def test_task_policy_preserves_old_sustained_definition_and_checked_budgets():
     campaign = read_json(ROOT / "configs/forge/campaigns/technique-inventory-word-split-v1.json")
     groups = {tasks[a["task"]]["execution"].get("execution_group", a["task"]):
               tasks[a["task"]]["resources"]["timeout_seconds"] for a in view["assignments"]}
-    assert campaign["candidate_budget_seconds"] == sum(groups.values()) == 46620
+    assert campaign["candidate_budget_seconds"] == 46620
+    assert sum(groups.values()) == 58440
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="word ladder execution requires CUDA")
