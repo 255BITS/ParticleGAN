@@ -2406,6 +2406,8 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
         result["provenance"]["common26_display_audit_sha256"] = (
             file_hash(audit) if audit.is_file() else None)
     result["provenance"]["publication_reducer_sha256"] = file_hash(Path(__file__))
+    from experiments.forge.scaling_publication import attach_performance
+    attach_performance(root, result)
     result["provenance"].pop("input_digest", None)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
@@ -3055,6 +3057,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         result["family_progress"] = build_progress(root, result, selection_card=pending_selection)
     if fallback_reporting is not None:
         result["current_fallback_reporting_scope"] = fallback_reporting
+    from experiments.forge.scaling_publication import attach_performance
+    attach_performance(root, result)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
@@ -3102,7 +3106,17 @@ def main(argv=None):
     parser.add_argument("--refresh-publication", action="store_true",
                         help="refresh displayed evidence and view coverage, preserving registered scores and selections; "
                              "always pass it after a view revision")
+    parser.add_argument("--refresh-performance", action="store_true",
+                        help="refresh only the compact DCGAN performance block; preserve scientific results and family pages")
     args = parser.parse_args(argv)
+    if args.refresh_performance:
+        if (args.output_prefix or args.recorded_policy or args.advance_policy or args.ownership_migration
+                or args.refresh_publication or args.source_commit or args.declaration_registration
+                or args.device != "all" or args.goal != "discriminator_stability"):
+            parser.error("--refresh-performance preserves current evidence; source, policy, goal and device overrides are unsupported")
+        from experiments.forge.scaling_publication import refresh_performance
+        print(_json_text(refresh_performance(args.root)), end="")
+        return
     if args.output_prefix is not None:
         if args.recorded_policy or args.advance_policy or args.ownership_migration or args.refresh_publication:
             parser.error("independent --output-prefix cannot register or refresh current evidence/selection")

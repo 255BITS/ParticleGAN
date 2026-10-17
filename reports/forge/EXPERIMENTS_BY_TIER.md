@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **154 tasks**; **117 assigned** to at least one view; **37 unassigned**. Showing **20/20 views**.
+Catalog: **161 tasks**; **124 assigned** to at least one view; **37 unassigned**. Showing **22/22 views**.
 
-Declared priors across the catalog: **55 MoGParticlePrior**, **99 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **56 MoGParticlePrior**, **105 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. Within each task, candidates share architecture, data law, batch size, prior, initialization, training budget, evaluation cadence and sampling law. Only the declared trainer change varies. The initialization column exposes fixed controls and component policies that take precedence over the deterministic orthogonal fallback; these are separate comparison cohorts. Historical results retain their original bindings.
 
@@ -41,6 +41,8 @@ This report follows changing declarations and published evidence; it selects no 
 | [bcap-tier1-stability-repairs-diagnostic-v1](../../configs/forge/views/bcap-tier1-stability-repairs-diagnostic-v1.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | provisional |
 | [bcap_convolution_images](../../configs/forge/views/bcap_convolution_images.json) | 1 | 4 diagnostic | 0 tasks | 0 tasks | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 4 | 4 required | 9 required, 10 held | 1 required, 4 held, 2 diagnostic (2 removed from the count) | provisional |
+| [dcgan_performance](../../configs/forge/views/dcgan_performance.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | undeclared |
+| [dcgan_performance_cpu_smoke](../../configs/forge/views/dcgan_performance_cpu_smoke.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | undeclared |
 | [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 11 | 6 required, 1 diagnostic | 10 required, 11 held | 1 required, 1 diagnostic (1 removed from the count) | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 2 | 3 required | 9 required, 10 held, 15 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 5 | 3 required | 9 required, 10 held, 13 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | provisional |
@@ -369,6 +371,71 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 | [rotated100_14k](../../configs/forge/tasks/rotated100_14k.json) | [held: prerequisite rotated100 is held](test-dispositions-20261015/README.md#rotated100_14k) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-rotated100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [rotated100](../../configs/forge/tasks/rotated100.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json) | [held: prerequisite staggered100 is held](test-dispositions-20261015/README.md#staggered100_14k) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-staggered100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [staggered100](../../configs/forge/tasks/staggered100.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json) | [held: no recipe has passed its current declaration](test-dispositions-20261015/README.md#target_shift_recovery) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | paired_adaptation / paired_adaptation | 3600 | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate) |
+
+## dcgan_performance
+
+Declaration: [dcgan_performance](../../configs/forge/views/dcgan_performance.json); revision 1; goal: `image_performance`.
+
+Declared calibration status: **undeclared**.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+6 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [dcgan_performance_r32](../../configs/forge/tasks/dcgan_performance_r32.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; — | [Question, results, GIFs](#experiment-dcgan-performance-r32) | dcgan_performance_v1 / image_training_performance | 13 | 180 | — |
+| [dcgan_performance_r64](../../configs/forge/tasks/dcgan_performance_r64.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; — | [Question, results, GIFs](#experiment-dcgan-performance-r64) | dcgan_performance_v1 / image_training_performance | 13 | 180 | — |
+| [dcgan_performance_r128](../../configs/forge/tasks/dcgan_performance_r128.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; — | [Question, results, GIFs](#experiment-dcgan-performance-r128) | dcgan_performance_v1 / image_training_performance | 13 | 180 | — |
+| [dcgan_performance_r256](../../configs/forge/tasks/dcgan_performance_r256.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; — | [Question, results, GIFs](#experiment-dcgan-performance-r256) | dcgan_performance_v1 / image_training_performance | 13 | 300 | — |
+| [dcgan_performance_b64](../../configs/forge/tasks/dcgan_performance_b64.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; — | [Question, results, GIFs](#experiment-dcgan-performance-b64) | dcgan_performance_v1 / image_training_performance | 13 | 180 | — |
+| [dcgan_performance_w128](../../configs/forge/tasks/dcgan_performance_w128.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; — | [Question, results, GIFs](#experiment-dcgan-performance-w128) | dcgan_performance_v1 / image_training_performance | 13 | 180 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+## dcgan_performance_cpu_smoke
+
+Declaration: [dcgan_performance_cpu_smoke](../../configs/forge/views/dcgan_performance_cpu_smoke.json); revision 1; goal: `image_performance`.
+
+Declared calibration status: **undeclared**.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+1 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [dcgan_performance_cpu_smoke](../../configs/forge/tasks/dcgan_performance_cpu_smoke.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; — | [Question, results, GIFs](#experiment-dcgan-performance-cpu-smoke) | dcgan_performance_v1 / image_training_performance | 3 | 120 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
 
 ## discriminator_stability
 
@@ -1405,6 +1472,160 @@ Related public-API demonstrations, with their own recorded contracts:
 | Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | [api-guarded-leftover](../toy_audit/api_contract/media/api-guarded-leftover.gif) | Cover both signed poles while preserving content and removing the guarded leak Scope: New caller-owned clean paired-error RpGAN/KA2 host; historical results remain unchanged. | MoGParticlePrior (sigma_rel=0.25) | COMPLETE / PASS; 800/800 updates | conditional_ka2 / cpu / 58bcb6febe12 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
+
+### Experiment: dcgan-performance-b64
+
+Execute the declared image_training_performance gate.
+
+Forge declarations: [dcgan_performance_b64](../../configs/forge/tasks/dcgan_performance_b64.json).
+
+Declared Forge numerical gates and sampling:
+
+[dcgan_performance_b64](../../configs/forge/tasks/dcgan_performance_b64.json)
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | training_update_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: dcgan-performance-cpu-smoke
+
+Execute the declared image_training_performance gate.
+
+Forge declarations: [dcgan_performance_cpu_smoke](../../configs/forge/tasks/dcgan_performance_cpu_smoke.json).
+
+Declared Forge numerical gates and sampling:
+
+[dcgan_performance_cpu_smoke](../../configs/forge/tasks/dcgan_performance_cpu_smoke.json)
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.1) |
+| Sampling law | training_update_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: dcgan-performance-r128
+
+Execute the declared image_training_performance gate.
+
+Forge declarations: [dcgan_performance_r128](../../configs/forge/tasks/dcgan_performance_r128.json).
+
+Declared Forge numerical gates and sampling:
+
+[dcgan_performance_r128](../../configs/forge/tasks/dcgan_performance_r128.json)
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | training_update_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: dcgan-performance-r256
+
+Execute the declared image_training_performance gate.
+
+Forge declarations: [dcgan_performance_r256](../../configs/forge/tasks/dcgan_performance_r256.json).
+
+Declared Forge numerical gates and sampling:
+
+[dcgan_performance_r256](../../configs/forge/tasks/dcgan_performance_r256.json)
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | training_update_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: dcgan-performance-r32
+
+Execute the declared image_training_performance gate.
+
+Forge declarations: [dcgan_performance_r32](../../configs/forge/tasks/dcgan_performance_r32.json).
+
+Declared Forge numerical gates and sampling:
+
+[dcgan_performance_r32](../../configs/forge/tasks/dcgan_performance_r32.json)
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | training_update_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: dcgan-performance-r64
+
+Execute the declared image_training_performance gate.
+
+Forge declarations: [dcgan_performance_r64](../../configs/forge/tasks/dcgan_performance_r64.json).
+
+Declared Forge numerical gates and sampling:
+
+[dcgan_performance_r64](../../configs/forge/tasks/dcgan_performance_r64.json)
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | training_update_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: dcgan-performance-w128
+
+Execute the declared image_training_performance gate.
+
+Forge declarations: [dcgan_performance_w128](../../configs/forge/tasks/dcgan_performance_w128.json).
+
+Declared Forge numerical gates and sampling:
+
+[dcgan_performance_w128](../../configs/forge/tasks/dcgan_performance_w128.json)
+
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | training_update_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
 
 ### Experiment: five-word-joint
 
@@ -4194,6 +4415,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `fa30256f217bda7aaa7ad97f645623c522d56449da5be327c804284390e68f9d`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `c69e5fc21d99b60b3e0e94c9764a9d636294019512665fc97e2616c70be310f2`. The JSON form includes the individual task and view file hashes.
 
 Published artifact input digest: `fe4ef90926246010e166e12dd7a8aaf1b28534de28944f7032268daf523e6d94`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

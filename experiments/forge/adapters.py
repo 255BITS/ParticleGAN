@@ -80,6 +80,9 @@ def adapter_preflight(task, candidate, *, root=None):
     if adapter == "word_joint":
         from .word_adapter import word_preflight
         return word_preflight(task, candidate, root=root)
+    if adapter == "dcgan_performance_v1":
+        from .scaling_adapter import preflight
+        return preflight(task, candidate)
     supported = {"transfer_behavior", "transfer_vector", "transfer_image", "native100",
                  "native100_continuation", "ring_endurance", "clockfree_audit", "paired_adaptation"}
     if adapter not in supported:
@@ -750,6 +753,9 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     if adapter == "word_joint":
         from .word_adapter import run_word
         return run_word(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
+    if adapter == "dcgan_performance_v1":
+        from .scaling_adapter import run
+        return run(request, task, output_dir, device)
     if adapter == "transfer_behavior":
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)
