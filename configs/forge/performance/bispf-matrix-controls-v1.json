@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "budget_seconds": 4800,
+    "candidate_budget_seconds": 1200,
+    "id": "bispf-matrix-performance-v1"
+  },
+  "comparison_scope": "same task, runtime and hardware; exact selected global recipes; synthetic data; no image quality claim",
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "family_selections": [
+    {
+      "candidate_declaration_sha256": "0cf5ae7d3bb048d93ec477eebe7f6d6d2089591f6d964e76b974dee9551cdd63",
+      "candidate_id": "bispf-v2",
+      "family": "bispf",
+      "label": "BISPF",
+      "study": "bispf-matrix-controls-v1-bispf"
+    },
+    {
+      "candidate_declaration_sha256": "f93f64d4872fc8965ecde70d006f640a3d3c0e2a00aa44a03f4c1ec5c6283b67",
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "family": "r1r2",
+      "label": "R1/R2",
+      "study": "bispf-matrix-controls-v1-r1r2"
+    }
+  ],
+  "id": "bispf-matrix-controls-v1",
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema": "forge_image_performance_campaign_v1",
+  "studies": [
+    "bispf-matrix-controls-v1-bispf",
+    "bispf-matrix-controls-v1-r1r2"
+  ],
+  "task_contract_sha256": {
+    "dcgan_performance_b64": "9e69ba0b9a12a76932de3643fa87aabf5e8c51edb872d3b3a5f384f99ab9e049",
+    "dcgan_performance_r128": "e35f31e1405f6377ce79eb266efa4e2e213b0608573650dea664a3f1095806a9",
+    "dcgan_performance_r256": "72395affdf0be7d0088e345bc64ccf1aae8042cbd7391a0e8632bf11cd0d68d0",
+    "dcgan_performance_r32": "e34d9bb3a410f4aa9170df4bb77be4bd1b0837da3c617ceb1d69547fdf19f48d",
+    "dcgan_performance_r64": "7fd1bc3fca3e6af87fbb57d4c861993e51dda82e6cd149398c5c75fa3a402be8",
+    "dcgan_performance_w128": "9f2580a40560f3b388d2bbe44778497efe1c20af4d108e73a38ee4432b0262b1"
+  },
+  "task_ids": [
+    "dcgan_performance_r32",
+    "dcgan_performance_r64",
+    "dcgan_performance_r128",
+    "dcgan_performance_r256",
+    "dcgan_performance_b64",
+    "dcgan_performance_w128"
+  ],
+  "view": "dcgan_performance"
+}
