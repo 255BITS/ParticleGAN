@@ -1211,6 +1211,13 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
         cells += _score_cells(root, page, family, cohort, cohort, bold=True)
         lines.append("| " + " | ".join(cells) + " |")
     lines += [""]
+    for row in publication.get("rows", []):
+        actual = row.get("executed_policy_qualification")
+        if actual:
+            lines += [f"**{row['technique']}:** comparison policy revision {publication['view_revision']}, "
+                      f"tier {row.get('qualified_tier', 0)}; actual executed-policy qualification "
+                      f"**tier {actual['qualified_tier']}**, revision {actual['view_revision']} "
+                      f"({actual['status']}). These are separate policy results; no qualification reuse.", ""]
     declared = {view["id"]: view["revision"] for view in progress.get("views", [])}
     recorded = publication.get("view")
     if recorded in declared and declared[recorded] != publication.get("view_revision"):
@@ -1538,12 +1545,19 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         current_anchor = family.get("current_cohort_anchor")
         cohort_label = ("Current benchmark" if cohort["anchor"] == current_anchor else
                         "Archived runtime cohort") if current_anchor else cohort["backend"].upper() + " results"
+        actual = row.get("executed_policy_qualification")
+        qualification = (
+            f"Comparison policy: {publication['view']} revision {publication['view_revision']}, "
+            f"**tier {row.get('qualified_tier', 0)}**. Actual executed-policy qualification: "
+            f"**tier {actual['qualified_tier']}**, {publication['view']} revision {actual['view_revision']} "
+            f"({actual['status']}). These are separate policy results; no qualification reuse."
+            if actual else
+            f"Recorded qualification: **tier {row.get('qualified_tier', 0)}**, "
+            f"{publication['view']} revision {publication['view_revision']}. "
+            "Other view rows below are navigation over recorded task evidence, not recomputed qualification." + declared_note)
         lines += [*_heading(2, cohort_label, base), f"Runtime: **{cohort['backend']}**. Selected configuration: " +
                   _existing_link(root, page, configuration_label, config) + ".", "",
-                  f"Recorded qualification: **tier {row.get('qualified_tier', 0)}**, "
-                  f"{publication['view']} revision {publication['view_revision']}. "
-                  "Other view rows below are navigation over recorded task evidence, not recomputed qualification." +
-                  declared_note, "",
+                  qualification, "",
                   "<details>", "<summary>Configuration, source and runtime provenance</summary>", "",
                   f"Source digest: `{source or 'unbound'}`. Candidate revision: `{row.get('candidate_revision') or 'unbound'}`. "
                   f"Runtime cohort: `{row.get('cohort') or 'unbound'}`.", "",

@@ -102,3 +102,30 @@ def test_explicit_cached_comparison_preserves_registered_rows_without_regrading(
 def test_independent_projection_requires_a_frozen_source(tmp_path):
     with pytest.raises(ValueError, match='exact frozen source'):
         publication.regenerate(tmp_path, comparison_policy=Path('policy.json'))
+
+
+def test_pending_snapshot_overlay_is_read_only_hash_checked_and_restored_on_failure(tmp_path):
+    from experiments.forge.test_performance import Inputs
+    pending = tmp_path / 'reports/forge/technique-evidence/new.json'
+    text = '{"new_source": true}\n'
+    import hashlib
+    expected = hashlib.sha256(text.encode()).hexdigest()
+    original = Inputs.__init__
+    with pytest.raises(RuntimeError, match='render failed'):
+        with publication._pending_publication_inputs(tmp_path, (pending, text)):
+            inputs = Inputs(tmp_path)
+            assert inputs.read('reports/forge/technique-evidence/new.json', sha256=expected) == {'new_source': True}
+            with pytest.raises(ValueError, match='bytes changed'):
+                inputs.read('reports/forge/technique-evidence/new.json', sha256='wrong')
+            assert not pending.exists()
+            raise RuntimeError('render failed')
+    assert Inputs.__init__ is original
+    assert not pending.exists()
+    with pytest.raises(FileNotFoundError):
+        Inputs(tmp_path).read('reports/forge/technique-evidence/new.json')
+    pending.parent.mkdir(parents=True)
+    pending.write_text('{}\n')
+    with pytest.raises(ValueError, match='conflicts'):
+        with publication._pending_publication_inputs(tmp_path, (pending, text)):
+            pytest.fail('conflicting immutable source must not be overlaid')
+    assert pending.read_text() == '{}\n'

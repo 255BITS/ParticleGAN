@@ -1097,3 +1097,17 @@ def test_real_selected_bispf_headline_includes_all_eleven_held_failures():
     failed = {name for _, cohort in _selected_cohorts(progress) for name in full_suite_tasks(progress)
               if cohort["tasks"][name]["status"] == "FAIL"}
     assert failed <= described
+
+
+def test_comparison_projection_labels_actual_execution_policy_separately(report):
+    root, publication = report
+    publication['rows'][0]['executed_policy_qualification'] = {
+        'view_revision': 11, 'qualified_tier': 3, 'status': 'PASS'}
+    publication['family_progress'] = build_progress(root, publication)
+    pages = generated_pages(root, publication)
+    family_page = pages[root / 'reports/forge/families/k3p.md']
+    assert 'Comparison policy: alpha revision 1, **tier 0**' in family_page
+    assert 'Actual executed-policy qualification: **tier 3**, alpha revision 11 (PASS)' in family_page
+    assert 'no qualification reuse' in family_page
+    overview = render_leaderboard(root, publication, root / 'reports/forge/technique-inventory.md')
+    assert 'comparison policy revision 1, tier 0; actual executed-policy qualification **tier 3**, revision 11 (PASS)' in overview

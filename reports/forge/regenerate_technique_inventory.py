@@ -2566,6 +2566,33 @@ def _family_pages(root, result):
     return pages
 
 
+@contextmanager
+def _pending_publication_inputs(root, pending_snapshot):
+    """Render the staged immutable snapshot without writing it before validation."""
+    if pending_snapshot is None:
+        yield
+        return
+    from experiments.forge.test_performance import Inputs
+    path, data = pending_snapshot
+    path, root = Path(path).resolve(), Path(root).resolve()
+    name = path.relative_to(root).as_posix()
+    encoded = data.encode("utf-8")
+    if path.exists() and path.read_bytes() != encoded:
+        raise ValueError("pending immutable source snapshot conflicts with existing bytes")
+    value, digest = json.loads(data), hashlib.sha256(encoded).hexdigest()
+    original = Inputs.__init__
+    def initialize(inputs, directory):
+        original(inputs, directory)
+        if inputs.root == root:
+            inputs.cache[name] = deepcopy(value)
+            inputs.hashes[name] = digest
+    Inputs.__init__ = initialize
+    try:
+        yield
+    finally:
+        Inputs.__init__ = original
+
+
 def _write_family_pages(root, pages):
     if not pages:
         return
@@ -3194,7 +3221,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
-    pages = _family_pages(root, result)
+    with _pending_publication_inputs(root, pending_snapshot):
+        pages = _family_pages(root, result)
     shared_archive = (_shared_score_archive(root)
                       if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
