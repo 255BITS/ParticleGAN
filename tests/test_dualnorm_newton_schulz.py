@@ -198,6 +198,22 @@ def test_zero_current_slice_never_moves_on_stale_momentum():
     assert torch.equal(module.weight, before)
 
 
+def test_inactive_slice_stays_fixed_when_smoothing_underflows_computation_dtype():
+    native = nn.Conv2d(64, 64, (1, 2), bias=False)
+    fast = deepcopy(native)
+    old = configuration(optimizer_svd_backend="native", optimizer_smoothing=1e-300).make_generator_optimizer(native)
+    new = configuration(optimizer_smoothing=1e-300).make_generator_optimizer(fast)
+    native.weight.grad = torch.zeros_like(native.weight)
+    native.weight.grad[:, :, 0, 1] = torch.eye(64)
+    fast.weight.grad = native.weight.grad.clone()
+    inactive_before = fast.weight[:, :, 0, 0].detach().clone()
+    old.step()
+    new.step()
+    assert torch.equal(fast.weight[:, :, 0, 0], inactive_before)
+    assert torch.isfinite(fast.weight).all()
+    torch.testing.assert_close(fast.weight, native.weight, rtol=1e-5, atol=1e-6)
+
+
 def test_all_dense_vector_and_sampled_prior_paths_are_bitwise_native():
     native = nn.Linear(4, 3, dtype=torch.float64)
     fast = deepcopy(native)

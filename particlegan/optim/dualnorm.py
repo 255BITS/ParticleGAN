@@ -461,7 +461,10 @@ class NormalizedOptimizer(Optimizer):
                             update = _newton_schulz_polar(direction_batch, smoothing=self.smoothing)
                             active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
                                       & (direction_batch.norm(dim=(-2, -1)) >= eps))
-                            update = update * active[..., None, None]
+                            # A skipped slice must remain fixed even when an
+                            # extreme, dtype-underflowing smoothing value makes
+                            # its unused solver output undefined (NaN * 0 is NaN).
+                            update = torch.where(active[..., None, None], update, 0.)
                             if metadata["layout"] == "conv_transpose2d_in_out":
                                 update = update.permute(0, 4, 3, 1, 2)
                             else:
