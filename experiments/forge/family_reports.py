@@ -962,7 +962,7 @@ def _full_suite_section(root, publication, page, selected):
         name = family["label"]
         if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
             name += " (" + cohort["backend"] + ")"
-        label = "**" + link(root, page, name, family["page"]) + "**"
+        label = link(root, page, name, family["page"])
         if cohort.get("configuration_family"):
             configuration = next(item for item in progress.get("configuration_families", [])
                                  if item["id"] == cohort["configuration_family"])
@@ -1136,8 +1136,9 @@ def _uncounted_section(root, page, summed, selected):
     record = (" in " + link(root, page, "the decision record", records[0]) + ", which also defines the words used."
               if len(records) == 1 else ".")
     lines = ["## Held and removed tests", "",
-             "A **held** test is still declared, run and shown with its history, but it is not counted in the totals "
-             "above or in qualification. It counts again once its re-entry rule is met. A test **removed from the "
+             "A **held** test is still declared, run and shown with its history. It is excluded from the qualification "
+             "totals above, but included in the full-suite results. It counts toward qualification again once its re-entry "
+             "rule is met. A test **removed from the "
              "count** stays in its views as a diagnostic, because another counted test already carries its question "
              "or it cannot run as declared. Rows come from the notes stored in the view declarations; each details "
              "link opens that test's explanation" + record, "",
@@ -1188,30 +1189,28 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "For example, BCAP's selected recipe uses DualNorm; Confidence LR, Finite critic cap and Positive evidence "
              "are separate BCAP research recipes, with their own scores.", "",
              "Click a count for its gates, measurements and evidence. Required lower tiers must pass before advancing.", "",
-             *_full_suite_section(root, publication, page, list(_selected_cohorts(progress))),
-             "<details>", "<summary>Qualification subset — held failures excluded from these scores</summary>", "",
-             "## Selected recipes — qualification subset", "",
-             "**This subset excludes held tests. Use the full-suite results above to compare failures.**", "",
+             "## Selected recipes", "",
              "Passes / required-view instances for one selected recipe per family. Shared tests count once in every view "
              f"that requires them: **{counted} means {counted} counted view requirements, including repeated tests**, "
              f"from {distinct} distinct test" + ("" if distinct == 1 else "s") + ". " +
              (uncounted + f" view assignments ({uncounted_tests}) are still measured and listed under "
               "**Held and removed tests** below. " if uncounted else "") +
-             "These totals retain the selected recipe's recorded qualification; separate diagnostic runs appear below.", "",
+             "These totals retain the selected recipe's recorded qualification. Held failures remain visible in the "
+             "full-suite results below; separate diagnostic runs appear below.", "",
              *_table_header(selected=True)]
     selected = list(_selected_cohorts(progress))
     for family, cohort in selected:
         name = family["label"]
         if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
             name += " (" + cohort["backend"] + ")"
-        cells = [link(root, page, name, family["page"])]
+        cells = ["**" + link(root, page, name, family["page"]) + "**"]
         if cohort.get("configuration_family"):
             configuration = next(item for item in progress.get("configuration_families", [])
                                  if item["id"] == cohort["configuration_family"])
             cells[0] += " · " + link(root, page, configuration["label"], configuration["page"])
         cells += _score_cells(root, page, family, cohort, cohort, bold=True)
         lines.append("| " + " | ".join(cells) + " |")
-    lines += ["", "</details>", ""]
+    lines += [""]
     declared = {view["id"]: view["revision"] for view in progress.get("views", [])}
     recorded = publication.get("view")
     if recorded in declared and declared[recorded] != publication.get("view_revision"):
@@ -1225,6 +1224,7 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
                   f"recipe/test pairs attempted (selected and research)**; {attempts.get('pending', 0)} pending and {attempts.get('running', 0)} running. " +
                   link(root, page, "Outcomes, blocked attempts and setup", "reports/forge/ATTEMPT_COVERAGE.md") +
                   ". This counts attempts, including start refusals, rather than passes or qualification.", ""]
+    lines += _full_suite_section(root, publication, page, selected)
     lines += _uncounted_section(root, page, summed, selected)
     if any(research.values()):
         declared_view = publication.get("declared_view", {})
