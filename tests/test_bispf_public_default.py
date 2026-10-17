@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_public_default_matches_every_selected_candidate_field_except_label():
-    candidate = json.loads((ROOT / "configs/forge/ideas/bispf-optimized-quintic-v1.json").read_text())
+    candidate = json.loads((ROOT / "configs/forge/ideas/bispf-throughput-v1.json").read_text())
     actual = json.loads(json.dumps(asdict(get_recipe())))
     assert DEFAULT_RECIPE == actual["name"] == "bispf_optimized"
     for field, value in candidate["recipe_overrides"].items():
@@ -25,6 +25,8 @@ def test_public_default_matches_every_selected_candidate_field_except_label():
             assert actual[field] == value, field
     assert get_recipe() == get_recipe("bispf_optimized")
     assert Recipe(**get_recipe().to_dict()) == get_recipe()
+    assert actual["optimizer_svd_backend"] == "batched"
+    assert actual["training_precision"] == "bf16_channels_last"
     # Existing direct construction and explicit preset keep their old meaning.
     assert Recipe() == get_recipe("ka2")
     assert get_recipe("bispf").optimizer_family == "formulation"
@@ -54,6 +56,8 @@ values = module.get_recipe_fields('ae_gan', z_dim=3)
 assert values['name'] == 'ae_gan'
 assert values['z_dim'] == 3 and values['optimizer_family'] == 'dualnorm'
 assert values['optimizer_convolution_rule'] == 'quintic'
+assert values['optimizer_svd_backend'] == 'batched'
+assert values['training_precision'] == 'bf16_channels_last'
 assert 'torch' not in sys.modules and 'particlegan' not in sys.modules
 """
     subprocess.run([sys.executable, "-I", "-c", script, str(source)], check=True)

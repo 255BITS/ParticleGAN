@@ -24,6 +24,7 @@ _CONVOLUTION_VERSION = "per_offset_polar_v1"
 _FROBENIUS_CONVOLUTION_VERSION = "per_offset_frobenius_hybrid_v1"
 _QUINTIC_CONVOLUTION_VERSION = "per_offset_quintic_hybrid_v1"
 _NEWTON_SCHULZ_VERSION = 3
+_BATCHED_SVD_VERSION = 1
 
 
 def _convolution_version(rule):
@@ -303,6 +304,23 @@ def polar_factor(matrix, *, smoothing=0., backend="native"):
     return ((left * (singular > threshold)) @ right).to(dtype=original_dtype)
 
 
+def _batched_polar(matrices, *, smoothing):
+    """Native smoothed SVD law in a single batch of small channel matrices.
+
+    CUDA may choose a different SVD kernel for batched inputs. This is an
+    explicit backend, with the same per-matrix rank cutoff and absolute
+    smoothing, rather than a bitwise equivalence promise.
+    """
+    dtype = matrices.dtype
+    value = matrices if dtype in (torch.float32, torch.float64) else matrices.float()
+    left, singular, right = torch.linalg.svd(value, full_matrices=False)
+    threshold = max(value.shape[-2:]) * torch.finfo(value.dtype).eps * singular[..., :1]
+    weights = singular > threshold
+    if smoothing:
+        weights = weights * (singular / torch.hypot(singular, torch.full_like(singular, smoothing)))
+    return ((left * weights.unsqueeze(-2)) @ right).to(dtype=dtype)
+
+
 class NormalizedOptimizer(Optimizer):
     """Role-aware optimizer, with native Adam only in the isolation arms.
 
@@ -333,17 +351,19 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("optimizer convolution must be none or per_offset")
         if convolution != "none" and family != "dualnorm":
             raise ValueError("optimizer convolution requires the dualnorm family")
-        if svd_backend not in ("native", "cpu", "newton_schulz"):
-            raise ValueError("optimizer SVD backend must be native, cpu or newton_schulz")
+        if svd_backend not in ("native", "cpu", "newton_schulz", "batched"):
+            raise ValueError("optimizer SVD backend must be native, cpu, newton_schulz or batched")
         if svd_backend != "native" and family != "dualnorm":
             raise ValueError("optimizer SVD backend requires the dualnorm family")
         if svd_backend == "newton_schulz" and (convolution != "per_offset" or not smoothing):
             raise ValueError("newton_schulz requires per_offset convolution and positive smoothing")
+        if svd_backend == "batched" and convolution != "per_offset":
+            raise ValueError("batched SVD requires per_offset convolution")
         if convolution_rule not in ("polar", "frobenius", "quintic"):
             raise ValueError("optimizer convolution rule must be polar, frobenius or quintic")
         if convolution_rule != "polar" and (
-                family != "dualnorm" or convolution != "per_offset" or svd_backend != "native"):
-            raise ValueError("nonpolar rules require full dualnorm, per_offset convolution and native SVD backend")
+                family != "dualnorm" or convolution != "per_offset" or svd_backend not in ("native", "batched")):
+            raise ValueError("nonpolar rules require full dualnorm, per_offset convolution and native or batched SVD backend")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -438,7 +458,8 @@ class NormalizedOptimizer(Optimizer):
     def __getstate__(self):
         # Optimizer's default pickle omits the role family, observer and native
         # Adam component; public checkpoint preflight also deep-copies us.
-        return {key: value for key, value in self.__dict__.items() if key != "_newton_graphs"}
+        return {key: value for key, value in self.__dict__.items()
+                if key not in ("_newton_graphs", "_quintic_graphs")}
 
     def set_sampled_rows(self, table, rows):
         """Record actual sampled indices, never infer ownership from gradients."""
@@ -544,6 +565,20 @@ class NormalizedOptimizer(Optimizer):
                         factor = math.sqrt(metadata["out_channels"] / metadata["in_channels"])
                         factor /= math.prod(metadata["kernel_size"])
                         largest_channel = max(metadata["in_channels"], metadata["out_channels"]) // metadata["groups"]
+                        if (self.svd_backend == "batched" and parameter.device.type == "cuda"
+                                and largest_channel <= 32):
+                            gradient_batch = _convolution_batch(gradient, metadata)
+                            direction_batch = _convolution_batch(direction, metadata)
+                            update = _batched_polar(direction_batch, smoothing=self.smoothing)
+                            active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
+                                      & (direction_batch.norm(dim=(-2, -1)) >= eps))
+                            update = torch.where(active[..., None, None], update, 0.)
+                            if metadata["layout"] == "conv_transpose2d_in_out":
+                                update = update.permute(0, 4, 3, 1, 2)
+                            else:
+                                update = update.permute(0, 3, 4, 1, 2)
+                            parameter.add_(update.reshape_as(parameter), alpha=-rate * factor)
+                            continue
                         if (self.convolution_rule != "polar" and parameter.device.type == "cuda"
                                 and largest_channel > 32):
                             gradient_batch = _convolution_batch(gradient, metadata)
@@ -551,8 +586,13 @@ class NormalizedOptimizer(Optimizer):
                             if self.convolution_rule == "frobenius":
                                 update = frobenius_direction(direction_batch, smoothing=self.smoothing)
                             else:
-                                from .convolution_quintic import quintic_direction
-                                update = quintic_direction(direction_batch, smoothing=self.smoothing)
+                                from .convolution_quintic import QuinticGraphCache, quintic_direction
+                                if self.svd_backend == "batched":
+                                    if getattr(self, "_quintic_graphs", None) is None:
+                                        self._quintic_graphs = QuinticGraphCache()
+                                    update = self._quintic_graphs.direction(direction_batch, smoothing=self.smoothing)
+                                else:
+                                    update = quintic_direction(direction_batch, smoothing=self.smoothing)
                             active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
                                       & (direction_batch.norm(dim=(-2, -1)) >= eps))
                             update = torch.where(active[..., None, None], update, 0.)
@@ -591,7 +631,7 @@ class NormalizedOptimizer(Optimizer):
                             if bool(gradient_matrix.norm() < eps) or bool(direction_matrix.norm() < eps):
                                 continue
                             update = (polar_factor(direction_matrix, smoothing=self.smoothing)
-                                      if self.svd_backend in ("native", "newton_schulz") else
+                                      if self.svd_backend in ("native", "newton_schulz", "batched") else
                                       polar_factor(direction_matrix, smoothing=self.smoothing,
                                                    backend=self.svd_backend))
                             weight_matrix.add_(update, alpha=-rate * factor)
@@ -599,7 +639,7 @@ class NormalizedOptimizer(Optimizer):
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
-                        if self.svd_backend in ("native", "newton_schulz"):
+                        if self.svd_backend in ("native", "newton_schulz", "batched"):
                             update = (polar_factor(direction, smoothing=self.smoothing)
                                       if self.smoothing else polar_factor(direction))
                         else:
@@ -636,6 +676,8 @@ class NormalizedOptimizer(Optimizer):
             result["dualnorm"]["svd_backend"] = self.svd_backend
         if self.svd_backend == "newton_schulz":
             result["dualnorm"]["solver_version"] = _NEWTON_SCHULZ_VERSION
+        if self.svd_backend == "batched":
+            result["dualnorm"]["solver_version"] = _BATCHED_SVD_VERSION
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -662,6 +704,10 @@ class NormalizedOptimizer(Optimizer):
             expected_meta.add("solver_version")
             if not isinstance(meta, dict) or meta.get("solver_version") != _NEWTON_SCHULZ_VERSION:
                 raise ValueError("checkpoint Newton-Schulz solver version differs")
+        if self.svd_backend == "batched":
+            expected_meta.add("solver_version")
+            if not isinstance(meta, dict) or meta.get("solver_version") != _BATCHED_SVD_VERSION:
+                raise ValueError("checkpoint batched SVD version differs")
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
@@ -762,6 +808,7 @@ class NormalizedOptimizer(Optimizer):
         regularizer = state.pop("regularizer", None)
         super().load_state_dict(state)
         self.__dict__.pop("_newton_graphs", None)
+        self.__dict__.pop("_quintic_graphs", None)
         self._refresh_adam()
         self.clear_sampled_rows()
         for group, rows in zip(self.param_groups, metadata["sampled_rows"]):

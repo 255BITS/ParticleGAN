@@ -26,7 +26,8 @@
   "configuration_notes": [
     "BISPF combines the Elastic Born-Infeld Transport-Chord Regularizer (EBI-TCR), zero-mean logit gauge, Stratified Blue-Noise Particle (SBNP) prior regularizer, and Harmonic Mode Capture thermal cooling under constant learning rates.",
     "The SBNP prior regularizer automatically adapts to prior table capacity: when $N \\le 2 k_{\\mathrm{nn}} + d_z$ (such as the 5-row discrete word codebook), covariance tethering and $k$-NN repulsion are disabled so discrete codebooks are unperturbed; for continuous particle clouds ($N > 2 k_{\\mathrm{nn}} + d_z$), both the initial-moment tether and scale-free $k$-NN log-repulsion are active.",
-    "One global trainer configuration supplies every displayed result across Tier 1, Tier 2 and Tier 3; task-owned architectures, priors, initializations, budgets and gates remain fixed."
+    "One global trainer configuration supplies every displayed result across Tier 1, Tier 2 and Tier 3; task-owned architectures, priors, initializations, budgets and gates remain fixed.",
+    "The opt-in throughput recipe combines optimizer_svd_backend=\"batched\" with training_precision=\"bf16_channels_last\". See the [source-bound throughput and quality study](../bispf-throughput/README.md) for workload-specific measurements, unchanged failures and separate current-policy versus endurance-diagnostic results. It does not change the selected recipe or public default."
   ],
   "references": [
     {

@@ -2,8 +2,11 @@
 
 ## Current default
 
-The root animation is generated from `get_recipe()` and follows the selected
-public default. In 0.9.0 that is optimized BISPF. The
+The root `100gaussians.gif` was generated from `get_recipe()` in **0.9.0** and
+retains that exact recipe and its original receipt. The 0.9.1 README additionally
+illustrates its faster default with [actual candidate image training](../forge/bispf-throughput/README.md).
+The 100-Gaussian evidence below remains an explicitly archived 0.9.0 cohort;
+no training is repeated merely for the release. The
 [current protocol](CURRENT_PROTOCOL.md) declares the fixed task, seed-0 public
 initialization, separate RNG streams, budget and mode-acquisition gate before
 execution. Historical K3P evidence below retains its original identity.
@@ -41,11 +44,13 @@ the 20,000 evaluation outputs bit for bit. A four-plus-four-update resume smoke
 also matches uninterrupted execution in every model/optimizer tensor and
 training/data RNG state.
 
-Recommendation: use this actual endpoint to illustrate the selected default;
+Recommendation: use this actual endpoint to illustrate the archived 0.9.0 default;
 keep the precision failure visible. Reuse the saved observations for visual
 changes. A grid-accuracy investigation would be a separate research task.
 
-Generate the current animation from one actual public-API training run:
+Reproduce this animation from its original source checkout and recorded recipe.
+The commands below describe that original checkout, whose `get_recipe()` resolved
+the 0.9.0 policy; a current-default run has a different recipe identity:
 
 ```bash
 CUBLAS_WORKSPACE_CONFIG=:4096:8 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \

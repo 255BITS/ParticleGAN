@@ -1,0 +1,133 @@
+{
+  "attempt_id": "e434707ab69249be8eb3b4a98e421d89",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-quality-v1",
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-quality-v1",
+    "request": "8a415d710a71e5715c2296fb",
+    "revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "6fc5474e09e61faa1baa3155910260c2fe278e3806f853e136d3a99d36daf7a0",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/e434707ab69249be8eb3b4a98e421d89/evidence.json",
+        "sha256": "40a88a8494afd378a2973faea945a1574142642e2037d85fd98e687c3109ae26"
+      },
+      "request": {
+        "path": "reports/forge/attempts/e434707ab69249be8eb3b4a98e421d89/request.json",
+        "sha256": "96c31daf1a1d3d0ba12c6784808d5a80de30b5ca6d6401237a08441530892c3e"
+      },
+      "result": {
+        "path": "reports/forge/attempts/e434707ab69249be8eb3b4a98e421d89/result.json",
+        "sha256": "5296b3f3f24477e42bf1d1585db64e5fe25e4617adb128152196500f505b193b"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "8a415d710a71e5715c2296fb",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "598a9dcce73df7bdb5b7e0388905be8f8fc914ac018ce327dadde81133bbce4d",
+      "cost": {
+        "adapter_loop_seconds": 85.70585300703533,
+        "adapter_seconds": 86.40332706796471,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "0",
+        "execution_seconds": 91.82263061299454,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 83.68344950000755,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9229068252025172
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.06966023868881166
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 81.69088243611623
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 87.47018035501242,
+        "wall_seconds": 91.82263061299454
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 2,
+        "stationary_checks": 72,
+        "stationary_passes": 6
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.07031856505709322,
+        "finite_fraction": 1.0,
+        "mean": 3.027367955102818,
+        "mean_error_sigma": 0.054735910205636173,
+        "sample_count": 4096,
+        "std": 0.4382549978248519,
+        "std_ratio": 0.8765099956497038,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "reasons": [
+        "stationary hold, deadline reacquisition and shifted hold"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "FAIL",
+      "task_id": "gaussian1d_stability"
+    }
+  ]
+}

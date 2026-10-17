@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {
+      "passed": 109,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/tests-initial.log",
+      "sha256": "ec343780493f26c93e6fa9cd97ecb07e9eca56c05bea9ff26787e29c5220804b"
+    },
+    {
+      "passed": 209,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/tests-broad.log",
+      "sha256": "807940fae7ad3dd9bdd66ff1686592e84c61cbbe45723a4903253d4a7be8a675"
+    },
+    {
+      "passed": 14,
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/tests-cache-layout-final.log",
+      "sha256": "4ef8dc8d8a9577917d7f7cbec29b460b643b97c212969b7b33cc25b2c13d4b06"
+    }
+  ],
+  "layout_test": {
+    "cause": "Canonical contiguous graph inputs can change the reduction rounding of strided eager kernels. The corrected contract requires bitwise replay of the same contiguous calculation plus numerical agreement with strided eager output; no implementation or trained gate was changed.",
+    "final_passes": 14,
+    "original_failed_log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/tests-cache-layout.log",
+      "sha256": "34212898f66d7546926c2203261f291e868e2dc0af198a3a4cc1077ba2791c1a"
+    }
+  },
+  "qualification_input": false,
+  "schema": "bispf_throughput_software_checks_v1"
+}

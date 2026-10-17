@@ -39,6 +39,8 @@ class Recipe:
     name: str = "ka2"
     critic_formulation: str = "ka2"
     model: str = "gan"
+    # CUDA convolutional networks only; weights, optimizers and sampling stay FP32.
+    training_precision: str = "float32"
     z_dim: int = 2
     num_particles: int = 20_000
     prior_kind: str = "particles"
@@ -247,6 +249,8 @@ class Recipe:
     lr_decay_staircase: bool = False
 
     def __post_init__(self):
+        if self.training_precision not in ("float32", "bf16_channels_last"):
+            raise ValueError("training_precision must be float32 or bf16_channels_last")
         if self.prior_update not in ("learned", "frozen"):
             raise ValueError("prior_update must be learned or frozen")
         from .coulomb_prior import CoulombPriorRegularizer
@@ -309,15 +313,17 @@ class Recipe:
             raise ValueError("optimizer_convolution_rule must be polar, frobenius or quintic")
         if self.optimizer_convolution_rule != "polar" and (
                 self.optimizer_family != "dualnorm" or self.optimizer_convolution != "per_offset"
-                or self.optimizer_svd_backend != "native"):
-            raise ValueError("nonpolar rules require full dualnorm, per_offset convolution and native SVD backend")
-        if self.optimizer_svd_backend not in ("native", "cpu", "newton_schulz"):
-            raise ValueError("optimizer_svd_backend must be native, cpu or newton_schulz")
+                or self.optimizer_svd_backend not in ("native", "batched")):
+            raise ValueError("nonpolar rules require full dualnorm, per_offset convolution and native or batched SVD backend")
+        if self.optimizer_svd_backend not in ("native", "cpu", "newton_schulz", "batched"):
+            raise ValueError("optimizer_svd_backend must be native, cpu, newton_schulz or batched")
         if self.optimizer_svd_backend != "native" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_svd_backend requires optimizer_family='dualnorm'")
         if self.optimizer_svd_backend == "newton_schulz" and (
                 self.optimizer_convolution != "per_offset" or self.optimizer_smoothing <= 0):
             raise ValueError("newton_schulz requires per_offset convolution and positive optimizer_smoothing")
+        if self.optimizer_svd_backend == "batched" and self.optimizer_convolution != "per_offset":
+            raise ValueError("batched SVD requires per_offset convolution")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):
@@ -1173,7 +1179,8 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     regularization, EMA serving and additive training noise.
     ``"bispf_optimized"`` is the selected BISPF research default: zero-momentum
     DualNorm, non-saturating loss, the Born-Infeld chord penalty, SBNP prior
-    regularization and the optimized per-offset convolution filter. Its current
+    regularization, batched convolution updates and BF16/channels-last training
+    for supported CUDA convolutional networks. Its current
     evidence retains 19 task passes and 11 failures; selection does not add
     calibration or natural-image quality credit.
     ``"bispf"`` retains the original Born-Infeld Sinkhorn Particle Flow formulation
@@ -1253,6 +1260,7 @@ def get_recipe_fields(name="gan", *, trainer=None, **overrides):
         **presets["bcap"], "critic_formulation": "bispf", "reg_arm": None,
         "optimizer_convolution_rule": "quintic", "prior_regularizer": "sbnp",
         "prior_reg": .01, "lr_schedule": "cosine",
+        "optimizer_svd_backend": "batched", "training_precision": "bf16_channels_last",
     }
     presets["atlas"] = {**presets["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}

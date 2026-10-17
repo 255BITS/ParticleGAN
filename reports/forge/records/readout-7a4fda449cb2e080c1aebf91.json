@@ -1,0 +1,420 @@
+{
+  "attempt_ids": [
+    "06a4b951486740d38b64b45ed8d819ac",
+    "8cb1a93f913d4d1d8d6f6d3755659ad6"
+  ],
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Matched original-quintic controls also pass; the numerical policy preserves exercised wide-channel quality with unchanged data, initialization, prior, budget and cadence.",
+  "conclusion": "Both width 64 image tasks PASS all original sustained gates at 600 updates: HQ 1,2 stripe modes and 4 bar modes, with passing suffixes 12 and 9.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "06a4b951486740d38b64b45ed8d819ac",
+        "8cb1a93f913d4d1d8d6f6d3755659ad6"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "e925cd68507b48540c01d4e2ae63e313e114d7560dc719883a7918be77a15682",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 1.0
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 1.0
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "06a4b951486740d38b64b45ed8d819ac",
+          "producer_request_id": "1780eec306b9d0a704e4b4b3",
+          "producer_study_id": "bispf-throughput-wide-v1-candidate",
+          "result_hash": "ec76589a97ca5fe4175173f500f1c5fec9572772d7119845176230ca43b8ee50",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "8cb1a93f913d4d1d8d6f6d3755659ad6",
+          "producer_request_id": "1780eec306b9d0a704e4b4b3",
+          "producer_study_id": "bispf-throughput-wide-v1-candidate",
+          "result_hash": "a47611ec0cf9278b0cf147d4f084cf9ade0e340aa240d04b5c81618e5d2b971a",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "0d14699aae29a5e6a3dd74214fa2d7692412e51e73932fe82c7aaf89358d067a",
+        "contract_sha256": "e925cd68507b48540c01d4e2ae63e313e114d7560dc719883a7918be77a15682",
+        "control_binding_sha256": "130f9b7099afcd47ce1f4cecc69733b19b5f5b74f5a2e8f4d9df558ebdba1e06",
+        "policy_fingerprint": "1f7397ed90f686616c7254136629b9dba731a6e48f40b63a799eeb7e2d2d0b8b",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "3a1953f4a3cee7b8d960cac053f01ace37ee05934e1b54db713fc051a00736f8"
+      },
+      "study_id": "bispf-throughput-wide-v1-candidate",
+      "study_sha256": "3a1953f4a3cee7b8d960cac053f01ace37ee05934e1b54db713fc051a00736f8"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "full_readout_archive": {
+    "bytes": 12681,
+    "git_blob_oid": "2fe7d2f0f48aadd944490581a12c37a580914125",
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/archive/readouts/readout-7a4fda449cb2e080c1aebf91.json",
+    "sha256": "29af94c32a4debe6d37639b0132ce2daf4dcc4c151a8662c1dc43671010f99cf"
+  },
+  "full_readout_sha256": "29af94c32a4debe6d37639b0132ce2daf4dcc4c151a8662c1dc43671010f99cf",
+  "goal": "bispf_fastpath_quality",
+  "hypothesis": "Preserve both incumbent width64 image passes under the unchanged full numerical gates, using one declared throughput recipe. Performance does not imply quality.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Retain this positive diagnostic beside ordinary quality and the completed performance matrix; no natural-image quality or automatic promotion claim.",
+  "original_source": {
+    "path": "reports/forge/attempts/06a4b951486740d38b64b45ed8d819ac/result.json"
+  },
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "06a4b951486740d38b64b45ed8d819ac",
+        "result_hash": "ec76589a97ca5fe4175173f500f1c5fec9572772d7119845176230ca43b8ee50",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "8cb1a93f913d4d1d8d6f6d3755659ad6",
+        "result_hash": "a47611ec0cf9278b0cf147d4f084cf9ade0e340aa240d04b5c81618e5d2b971a",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-7a4fda449cb2e080c1aebf91",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bispf-throughput/README.md"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 1200,
+      "candidate_budget_seconds": 600,
+      "id": "bispf-throughput-wide-v1"
+    },
+    "candidate": "bispf-throughput-v1",
+    "competing_explanation": "BF16 and SVD batching change rounding; finite losses and endpoint HQ do not establish sustained coverage. Keep the full 600 updates and all 24 gates; require both wide controls before ordinary qualification.",
+    "control": {
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic",
+      "threshold": 0.9
+    },
+    "hypothesis": "Preserve both incumbent width64 image passes under the unchanged full numerical gates, using one declared throughput recipe. Performance does not imply quality.",
+    "id": "bispf-throughput-wide-v1-candidate",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bispf-v2",
+          "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+        },
+        "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+        "selector": [],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "schema": "bispf_fastpath_scorer_controls_v1"
+        },
+        "path": "reports/forge/bispf-optimized/fastpath-scorer-controls.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bispf_fastpath_quality"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bispf-throughput-wide-v1-candidate",
+  "study_sha256": "3a1953f4a3cee7b8d960cac053f01ace37ee05934e1b54db713fc051a00736f8",
+  "summary_curation": "Certified final metrics, verdicts, decision outcomes and source/receipt identities retained. Per-update evidence is archived byte-exactly outside Git. This display summary cannot replace original qualification receipts.",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "attempt_id": "06a4b951486740d38b64b45ed8d819ac",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "98edd1039b8a709fcdfbbdcadbcb5b7fa42cdaf61859817593bab838b7ccd329",
+      "cost": {
+        "adapter_loop_seconds": 11.96530514000915,
+        "adapter_seconds": 12.417113651055843,
+        "charged_task": "img_bars4_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 17.80701033794321,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 11.662322714575566,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.02013880794402212
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.062402287032455206
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 11.579781619599089
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 13.446860422962345,
+        "wall_seconds": 17.80701033794321
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.8333333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 500,
+          "first_pass_step": 400,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 9,
+          "passing_suffix": 9,
+          "stable_from_seconds": null,
+          "stable_from_step": 400
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4,
+            "value": 4
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_trainer",
+      "final_metrics_sha256": "1d18e2f29ec97d5cd7b48b99a00a8c885fd8903384974b1927f37e15a4be23d5",
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.15625,
+        "hq": 1.0,
+        "mean_rmse": 0.0004174435744062066,
+        "mode_fractions": [
+          0.375,
+          0.28125,
+          0.125,
+          0.21875
+        ],
+        "modes": 4,
+        "quality_mode_fractions": [
+          0.375,
+          0.28125,
+          0.125,
+          0.21875
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise"
+      },
+      "status": "PASS",
+      "task_id": "img_bars4_w64_optimizer_diagnostic"
+    },
+    {
+      "api_version": "forge-api-v1",
+      "attempt_id": "8cb1a93f913d4d1d8d6f6d3755659ad6",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "aefeb13c02b0c43446dc26d855153ed9f88ad4be0c82c1cc32b6566dea4cd542",
+      "cost": {
+        "adapter_loop_seconds": 11.924856403027661,
+        "adapter_seconds": 12.375443596974947,
+        "charged_task": "img_stripes2_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 17.814013240044005,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 11.621153845218942,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.020118467626161873
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.06175141327548772
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 11.539283964317292
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 13.455323594040237,
+        "wall_seconds": 17.814013240044005
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.7083333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 425,
+          "first_pass_step": 325,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 12,
+          "passing_suffix": 12,
+          "stable_from_seconds": null,
+          "stable_from_step": 325
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_trainer",
+      "final_metrics_sha256": "015c548748de0549961f9a9bdfe232be9eeff1d6b79342719765a0eda6b3ebc7",
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.15625,
+        "hq": 1.0,
+        "mean_rmse": 0.0003251322777941823,
+        "mode_fractions": [
+          0.65625,
+          0.34375
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.65625,
+          0.34375
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise"
+      },
+      "status": "PASS",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic"
+    }
+  ]
+}

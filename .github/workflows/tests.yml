@@ -131,6 +131,8 @@ jobs:
           assert DDGAN().steps == 4
           default = get_recipe()
           assert DEFAULT_RECIPE == "bispf_optimized"
+          assert default.optimizer_svd_backend == "batched"
+          assert default.training_precision == "bf16_channels_last"
           assert default == get_recipe(DEFAULT_RECIPE)
           assert Recipe(**get_recipe_fields()) == default
           assert Recipe(**default.to_dict()) == default
