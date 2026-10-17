@@ -20,6 +20,7 @@ NORMALIZED_FAMILIES = (
 )
 _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
 _CONVOLUTION_VERSION = "per_offset_polar_v1"
+_NEWTON_SCHULZ_VERSION = 2
 
 
 def convolution_parameter_groups(groups, modules, *, family):
@@ -125,11 +126,16 @@ def _convolution_batch(tensor, metadata):
 def _newton_schulz_polar(matrices, *, smoothing):
     """Batched, regularized polar approximation with exact failure fallback.
 
-    Twenty-four coupled Newton--Schulz iterations approximate
-    M (M.T M + smoothing**2 I)**(-1/2), using the smaller channel Gram
-    matrix. Each matrix is scaled before forming its Gram matrix to avoid
-    overflow. A nonfinite result or inverse-root residual infinity norm above
-    1e-3 falls back to the original exact SVD rule for that matrix alone.
+    Orthogonalize the augmented matrix [M; smoothing I] in at most 24 cubic
+    Newton--Schulz iterations. Its top block is the desired smoothed polar
+    direction. Keeping both blocks avoids squaring the input condition number
+    in a rounded Gram matrix before the iteration begins. Scaling the input
+    first avoids overflow while retaining smoothing in its absolute units.
+
+    At iterations 8, 12, 16, 20 and 24, check the augmented orthogonality
+    residual. Stop when the whole batch also passes its relation to the
+    original M and smoothing. Nonfinite or unconverged matrices use native
+    SVD individually. Both residual limits are 1e-3.
 
     This opt-in numerical rule differs from native SVD: its successful fast
     branch has finite iteration and Gram rounding error, and omits the hard
@@ -146,25 +152,32 @@ def _newton_schulz_polar(matrices, *, smoothing):
     identity = torch.eye(width, device=value.device, dtype=value.dtype)
     normalizer = oriented.abs().amax(dim=(-2, -1), keepdim=True).clamp_min(smoothing)
     scaled = oriented / normalizer
-    regularizer = (smoothing / normalizer).square()
-    gram = scaled.mT @ scaled + regularizer * identity
-    trace = gram.diagonal(dim1=-2, dim2=-1).sum(-1)[..., None, None]
-    normalized_gram = gram / trace
-    root = normalized_gram
-    inverse = identity.expand_as(root).clone()
-    for _ in range(24):
-        correction = .5 * (3 * identity - inverse @ root)
-        root = root @ correction
-        inverse = correction @ inverse
-    result = scaled @ inverse / trace.sqrt()
-    # Check against the saved input Gram matrix, rather than just the coupled
-    # iterates, whose roundoff errors can drift together.
-    residual = (identity - inverse @ normalized_gram @ inverse).abs().sum(-1).amax(-1)
-    failed = (~torch.isfinite(result).all(dim=(-2, -1))
-              | ~torch.isfinite(residual) | (residual > 1e-3))
-    # The single device-to-host decision replaces two synchronizations and one
-    # SVD per spatial offset in the native path. Failed slices are uncommon for
-    # the supported smoothed training regime, but never receive unchecked steps.
+    regularizer = smoothing / normalizer
+    trace = scaled.square().sum(dim=(-2, -1), keepdim=True) + width * regularizer.square()
+    result = scaled / trace.sqrt()
+    lower = regularizer * identity / trace.sqrt()
+    for iteration in range(1, 25):
+        correction = .5 * (3 * identity - result.mT @ result - lower.mT @ lower)
+        result = result @ correction
+        lower = lower @ correction
+        if iteration not in (8, 12, 16, 20, 24):
+            continue
+        residual = (identity - result.mT @ result - lower.mT @ lower).abs().sum(-1).amax(-1)
+        failed = ~torch.isfinite(residual) | (residual > 1e-3)
+        if iteration != 24 and bool(failed.any()):
+            continue
+        # Orthogonality alone does not ensure the returned direction still
+        # corresponds to the input. The shared right updates preserve
+        # smoothing * result == M * lower; verify its relative error too.
+        denominator = regularizer.flatten() * result.norm(dim=(-2, -1))
+        relation = ((regularizer * result - scaled @ lower).norm(dim=(-2, -1))
+                    / denominator.clamp_min(torch.finfo(value.dtype).tiny))
+        failed = (failed | ~torch.isfinite(result).all(dim=(-2, -1))
+                  | ~torch.isfinite(relation) | (relation > 1e-3))
+        if iteration == 24 or not bool(failed.any()):
+            break
+    # Host decisions are made per kernel batch rather than per spatial offset.
+    # Every rejected slice retains the original exact SVD update.
     for index in failed.nonzero(as_tuple=False).flatten().tolist():
         result[index] = polar_factor(oriented[index], smoothing=smoothing)
     if transpose:
@@ -440,7 +453,9 @@ class NormalizedOptimizer(Optimizer):
                         metadata = group["dualnorm_convolution"]
                         factor = math.sqrt(metadata["out_channels"] / metadata["in_channels"])
                         factor /= math.prod(metadata["kernel_size"])
-                        if self.svd_backend == "newton_schulz":
+                        largest_channel = max(metadata["in_channels"], metadata["out_channels"]) // metadata["groups"]
+                        if (self.svd_backend == "newton_schulz" and parameter.device.type == "cuda"
+                                and largest_channel > 32):
                             gradient_batch = _convolution_batch(gradient, metadata)
                             direction_batch = _convolution_batch(direction, metadata)
                             update = _newton_schulz_polar(direction_batch, smoothing=self.smoothing)
@@ -462,7 +477,7 @@ class NormalizedOptimizer(Optimizer):
                             if bool(gradient_matrix.norm() < eps) or bool(direction_matrix.norm() < eps):
                                 continue
                             update = (polar_factor(direction_matrix, smoothing=self.smoothing)
-                                      if self.svd_backend == "native" else
+                                      if self.svd_backend in ("native", "newton_schulz") else
                                       polar_factor(direction_matrix, smoothing=self.smoothing,
                                                    backend=self.svd_backend))
                             weight_matrix.add_(update, alpha=-rate * factor)
@@ -503,6 +518,8 @@ class NormalizedOptimizer(Optimizer):
             result["dualnorm"]["convolution"] = self.convolution
         if self.svd_backend != "native":
             result["dualnorm"]["svd_backend"] = self.svd_backend
+        if self.svd_backend == "newton_schulz":
+            result["dualnorm"]["solver_version"] = _NEWTON_SCHULZ_VERSION
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -523,6 +540,10 @@ class NormalizedOptimizer(Optimizer):
             expected_meta.add("convolution")
         if self.svd_backend != "native":
             expected_meta.add("svd_backend")
+        if self.svd_backend == "newton_schulz":
+            expected_meta.add("solver_version")
+            if not isinstance(meta, dict) or meta.get("solver_version") != _NEWTON_SCHULZ_VERSION:
+                raise ValueError("checkpoint Newton-Schulz solver version differs")
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")

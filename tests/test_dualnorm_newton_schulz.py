@@ -79,7 +79,32 @@ def test_unconverged_slice_falls_back_to_exact_svd_without_replacing_healthy_sli
     actual = dualnorm._newton_schulz_polar(torch.stack([healthy, difficult]), smoothing=.001)
     assert len(calls) == 1 and torch.equal(calls[0], difficult)
     assert torch.equal(actual[1], original(difficult, smoothing=.001))
-    torch.testing.assert_close(actual[0], original(healthy, smoothing=.001), rtol=1e-12, atol=1e-12)
+    torch.testing.assert_close(actual[0], original(healthy, smoothing=.001), rtol=1e-5, atol=1e-6)
+
+
+def test_augmented_iteration_handles_ill_conditioned_gradient_without_svd_fallback(monkeypatch):
+    generator = torch.Generator(device="cuda:0").manual_seed(0)
+    left = torch.linalg.qr(torch.randn(64, 32, generator=generator)).Q
+    right = torch.linalg.qr(torch.randn(32, 32, generator=generator)).Q
+    singular = torch.logspace(-.7, -8, 32)
+    matrix = (left * singular) @ right.T
+    expected = dualnorm.polar_factor(matrix, smoothing=.001)
+    # A float64 SVD without the hard rank mask is an independent oracle for
+    # the mathematical function used by the successful approximate branch.
+    left64, singular64, right64 = torch.linalg.svd(matrix.double(), full_matrices=False)
+    unmasked = ((left64 * (singular64 / torch.hypot(singular64, singular64.new_tensor(.001))))
+                @ right64).float()
+    calls = []
+    original = dualnorm.polar_factor
+    def observed(*args, **kwargs):
+        calls.append(1)
+        return original(*args, **kwargs)
+    monkeypatch.setattr(dualnorm, "polar_factor", observed)
+    actual = dualnorm._newton_schulz_polar(matrix[None], smoothing=.001)[0]
+    assert calls == []
+    assert (actual - expected).norm() / expected.norm() < 1e-3
+    assert (actual - unmasked).norm() / unmasked.norm() < 1e-4
+    assert (actual - unmasked).abs().amax() < 1e-4
 
 
 @pytest.mark.parametrize("scale", [1e-30, 1e30])
@@ -108,6 +133,58 @@ def test_grouped_kernel_layout_and_momentum_match_native(kind, channels, kernel,
         torch.testing.assert_close(fast.weight, native.weight, rtol=1e-11, atol=1e-12)
         assert torch.equal(fast_optimizer.state[fast.weight]["momentum_buffer"],
                            native_optimizer.state[native.weight]["momentum_buffer"])
+
+
+def test_small_kernel_dispatch_is_bitwise_native(monkeypatch):
+    native = nn.Conv2d(12, 12, 3)
+    fast = deepcopy(native)
+    old = configuration(optimizer_svd_backend="native").make_generator_optimizer(native)
+    new = configuration().make_generator_optimizer(fast)
+    def forbidden(*args, **kwargs):
+        raise AssertionError("small convolutions must retain native SVD")
+    monkeypatch.setattr(dualnorm, "_newton_schulz_polar", forbidden)
+    native.weight.grad = torch.arange(native.weight.numel()).reshape_as(native.weight).sin()
+    native.bias.grad = torch.ones_like(native.bias)
+    fast.weight.grad, fast.bias.grad = native.weight.grad.clone(), native.bias.grad.clone()
+    old.step()
+    new.step()
+    assert torch.equal(native.weight, fast.weight) and torch.equal(native.bias, fast.bias)
+
+
+def test_cpu_kernel_dispatch_is_bitwise_native(monkeypatch):
+    native = nn.Conv2d(64, 64, 1, bias=False, device="cpu")
+    fast = deepcopy(native)
+    old = configuration(optimizer_svd_backend="native").make_generator_optimizer(native)
+    new = configuration().make_generator_optimizer(fast)
+    def forbidden(*args, **kwargs):
+        raise AssertionError("CPU convolutions must retain native SVD")
+    monkeypatch.setattr(dualnorm, "_newton_schulz_polar", forbidden)
+    native.weight.grad = torch.arange(native.weight.numel(), device="cpu").reshape_as(native.weight).sin()
+    fast.weight.grad = native.weight.grad.clone()
+    old.step()
+    new.step()
+    assert torch.equal(native.weight, fast.weight)
+
+
+@pytest.mark.parametrize("kind", [nn.Conv2d, nn.ConvTranspose2d])
+def test_large_grouped_kernel_uses_solver_with_correct_channel_layout(kind, monkeypatch):
+    native = kind(64, 128, (2, 1), groups=2, bias=False)
+    fast = deepcopy(native)
+    old = configuration(optimizer_svd_backend="native").make_generator_optimizer(native)
+    new = configuration().make_generator_optimizer(fast)
+    generator = torch.Generator(device="cuda:0").manual_seed(0)
+    native.weight.grad = torch.randn(native.weight.shape, generator=generator) * .001
+    fast.weight.grad = native.weight.grad.clone()
+    original = dualnorm._newton_schulz_polar
+    calls = []
+    def observed(matrices, **kwargs):
+        calls.append(tuple(matrices.shape))
+        return original(matrices, **kwargs)
+    monkeypatch.setattr(dualnorm, "_newton_schulz_polar", observed)
+    old.step()
+    new.step()
+    assert calls == [(2, 2, 1, 64, 32)]
+    torch.testing.assert_close(native.weight, fast.weight, rtol=1e-4, atol=1e-6)
 
 
 def test_zero_current_slice_never_moves_on_stale_momentum():
@@ -158,9 +235,9 @@ def test_public_checkpoint_restores_exact_next_update_and_rejects_backend_switch
     def build():
         recipe = configuration(num_particles=8, z_dim=2, batch_size=4, total_steps=8,
                                standardize=False, prior_kind="mog", sigma_rel=.1)
-        generator = nn.Sequential(nn.Unflatten(1, (2, 1, 1)), nn.ConvTranspose2d(2, 3, 3),
-                                  nn.Tanh(), nn.Conv2d(3, 1, 1))
-        critic = nn.Sequential(nn.Conv2d(1, 2, 3), nn.Tanh(), nn.Flatten(), nn.Linear(2, 1))
+        generator = nn.Sequential(nn.Unflatten(1, (2, 1, 1)), nn.ConvTranspose2d(2, 64, 3),
+                                  nn.Tanh(), nn.Conv2d(64, 1, 1))
+        critic = nn.Sequential(nn.Conv2d(1, 64, 3), nn.Tanh(), nn.Flatten(), nn.Linear(64, 1))
         prior = recipe.make_prior()
         for module in (generator, critic, prior):
             deterministic_orthogonal_(module, seed=0)
@@ -183,3 +260,20 @@ def test_public_checkpoint_restores_exact_next_update_and_rejects_backend_switch
     with pytest.raises(ValueError):
         restored.load_state_dict(invalid)
     assert state_digest(restored.state_dict()) == before
+
+
+@pytest.mark.parametrize("version", [None, 1, 3])
+def test_previous_or_unknown_solver_checkpoint_version_is_rejected_atomically(version):
+    module = nn.Conv2d(2, 64, 1)
+    optimizer = configuration().make_generator_optimizer(module)
+    saved = deepcopy(optimizer.state_dict())
+    assert saved["dualnorm"]["solver_version"] == 2
+    if version is None:
+        saved["dualnorm"].pop("solver_version")
+    else:
+        saved["dualnorm"]["solver_version"] = version
+    saved["param_groups"][0]["lr"] = 123.
+    before = state_digest(optimizer.state_dict())
+    with pytest.raises(ValueError, match="solver version"):
+        optimizer.load_state_dict(saved)
+    assert state_digest(optimizer.state_dict()) == before
