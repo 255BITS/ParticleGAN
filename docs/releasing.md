@@ -5,6 +5,10 @@ version is declared in `pyproject.toml`; release 0.9.0 changes the public recipe
 default. Explicit presets and saved recipe restoration retain their documented
 contracts. A software release does not requalify archived scientific results.
 
+The [0.10 preparation](releases/0.10.0.md) broadens Forge's requirements while
+retaining the 0.9.0 runtime default. Review its linked generated technique
+inventory and failed or unmeasured requirements separately from software CI.
+
 ## CI
 
 [Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml) runs

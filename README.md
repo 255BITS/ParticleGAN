@@ -20,6 +20,7 @@ The [0.10 Forge requirements](reports/forge/convergence-policy-010/README.md)
 make accurate acquisition, settling, endurance and recovery required again.
 The [generated technique inventory](reports/forge/technique-inventory.md) shows
 the expanded requirements alongside the original source-bound results.
+[0.10 release preparation](docs/releases/0.10.0.md) records the release scope.
 
 [![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
 
@@ -67,7 +68,7 @@ ending at 98.3–98.6% of samples within 3σ after 7,000 updates:
 Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
 
 ```bash
-python -m pip install particlegan           # the library (0.9.0)
+python -m pip install particlegan           # published package; 0.10.0 is in preparation
 ```
 
 For the examples, experiments and tests, install from source:

@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.10.0 — Unreleased
+
+- **Broader Forge qualification.** Accurate acquisition, Gaussian settling,
+  native 100-Gaussian endurance and target-shift recovery are required again.
+  The ordinary views expand from 81 to 106 counted requirements across 27
+  distinct tests. Numerical thresholds and task/trainer contracts are retained;
+  each previous view is archived exactly. See the
+  [policy and preservation proof](reports/forge/convergence-policy-010/README.md).
+- **Regenerated technique inventory.** The selected BISPF evidence projects to
+  81/106 under the broader requirements; no selected recipe passes the complete
+  set. Original qualification packets keep their original policy and source.
+  This software release adds no scientific training or qualification credit.
+  Review the [current leaderboard](reports/forge/technique-inventory.md).
+- **Actual current-default README animation.** The visualizer resolves
+  `get_recipe()`, records public-API observations and can render them without
+  retraining. The 20k optimized-BISPF trajectory reaches 100 modes with 42.115%
+  within 3σ, retaining its failed precision goal and historical evidence.
+- The public default remains optimized BISPF. This release changes Forge's
+  requirements and reporting, without changing the 0.9.0 trainer or checkpoint
+  law. [Release notes](docs/releases/0.10.0.md) explain scope and readiness.
+- Manual CI runs now follow the `develop`/`master` scope already used for pushes
+  and PR targets. Superseded PR runs cancel automatically; tagged release checks
+  retain their exact source binding.
+
 ## 0.9.0 — 2026-10-17
 
 - **Optimized BISPF is the public recipe default.** `get_recipe()`, `"gan"`

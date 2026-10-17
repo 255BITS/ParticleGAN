@@ -4148,10 +4148,14 @@
       "experiments/forge/scaling_publication.py",
       "experiments/forge/source_bound_board.py",
       "experiments/forge/test_performance.py",
-      "experiments/forge/test_performance_render.py"
+      "experiments/forge/test_performance_render.py",
+      "reports/readme-100gaussians/CURRENT_PROTOCOL.md",
+      "reports/readme-100gaussians/record.py",
+      "reports/readme-100gaussians/render.py",
+      "reports/readme-100gaussians/summary-current.json"
     ],
     "stale": [],
-    "tracked_count": 11810,
+    "tracked_count": 11814,
     "unclassified": [],
     "valid": false
   },
