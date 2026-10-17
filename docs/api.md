@@ -1420,6 +1420,7 @@ other graph parameters:
 ```python
 groups = [{"params": generator_parameters, "role": "generator", "lr": recipe.lr}]
 opt_g = recipe.make_generator_optimizer(groups, modules=[generator, encoder])
+base_rates = [group["lr"] for group in opt_g.param_groups]
 # Conv kernels can split a caller's group. Apply schedules to every result.
 for group_index, group in enumerate(opt_g.param_groups):
     scale = prior_scale if group["role"] in ("prior", "table") else network_scale
@@ -1438,7 +1439,8 @@ constructing optimizers.
 
 Freezing weights does not disable gradients to their inputs. Keep the forward
 graph when a fixed feature backbone must send gradients to an upstream network;
-manage train/eval mode separately for dropout and running buffers. Rebuild or
+manage train/eval mode separately for dropout and running buffers. Clear stale
+gradients when freezing parameters after construction. Rebuild or
 explicitly migrate optimizer groups and state when unfreezing parameters that
 were omitted at construction. Save trainability, modes, buffers, the resolved
 recipe and optimizer state in a caller-owned checkpoint. Custom high-rank

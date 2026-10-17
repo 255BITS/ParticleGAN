@@ -104,8 +104,9 @@ def test_bound_groups_have_identical_updates_and_resume_to_module_factory():
             explicit.load_state_dict(deepcopy(automatic.state_dict()))
 
 
-def test_frozen_pretrained_parameters_keep_values_and_input_gradients():
-    trunk = nn.Sequential(nn.Linear(3, 4), nn.Tanh()).requires_grad_(False)
+@pytest.mark.parametrize("trainable", [False, True])
+def test_pretrained_parameters_keep_values_and_input_gradients(trainable):
+    trunk = nn.Sequential(nn.Linear(3, 4), nn.Tanh()).requires_grad_(trainable)
     head = nn.Linear(4, 2)
     model = nn.Sequential(trunk, head)
     original = deepcopy(model.state_dict())
@@ -115,14 +116,17 @@ def test_frozen_pretrained_parameters_keep_values_and_input_gradients():
         {"params": model.parameters(), "role": "generator"}
     ], modules=model)
     owned = {id(parameter) for group in optimizer.param_groups for parameter in group["params"]}
-    assert owned == {id(parameter) for parameter in head.parameters()}
+    assert owned == {id(parameter) for parameter in model.parameters() if parameter.requires_grad}
     assert all(torch.equal(value, original[key]) for key, value in model.state_dict().items())
     inputs = torch.ones(2, 3, requires_grad=True)
     model(inputs).square().mean().backward()
     assert inputs.grad is not None and inputs.grad.norm() > 0
     optimizer.step()
-    for key, value in trunk.state_dict().items():
-        assert torch.equal(value, original["0." + key])
+    if not trainable:
+        for key, value in trunk.state_dict().items():
+            assert torch.equal(value, original["0." + key])
+    else:
+        assert not torch.equal(trunk[0].weight, original["0.0.weight"])
     assert not torch.equal(head.weight, original["1.weight"])
 
 
@@ -130,3 +134,11 @@ def test_module_binding_rejects_non_module_owners():
     model = nn.Linear(2, 1)
     with pytest.raises(TypeError, match="torch.nn.Module"):
         configuration().make_generator_optimizer(model.parameters(), modules=[object()])
+
+
+def test_shared_weights_cannot_claim_conflicting_module_layouts():
+    convolution = nn.Conv2d(2, 3, 1, bias=False)
+    transpose = nn.ConvTranspose2d(3, 2, 1, bias=False)
+    transpose.weight = convolution.weight
+    with pytest.raises(ValueError, match="incompatible module layouts"):
+        configuration().make_generator_optimizer([convolution.weight], modules=[convolution, transpose])
