@@ -950,16 +950,19 @@ Each setting can be overridden explicitly.
 `optimizer_svd_backend="newton_schulz"` selects a separate numerical backend
 for annotated per-offset convolutions. It requires full DualNorm, positive
 `optimizer_smoothing`, and `optimizer_convolution="per_offset"`. It batches
-the smoothed polar computation with at most 24 augmented Newton-Schulz iterations,
-checking convergence at iterations 8, 12, 16, 20, and 24. Orthogonality and the
+the smoothed polar computation with at most 32 augmented Newton-Schulz iterations,
+checking convergence every four iterations from iteration 8. Optimizer-local
+CUDA graphs replay four-iteration blocks. Orthogonality and the
 relation to the original gradient must pass numerical checks; failing slices
 fall back to native SVD. CPU kernels and kernels whose largest channel-matrix
 dimension is at most 32 also retain native SVD.
 Dense weights retain native SVD; prior, bias, learning rates, and momentum laws
-are unchanged. Finite iterations and Gram-matrix rounding differ from native
-SVD, so this option is a declared trainer change requiring its own quality
-evidence. Its checkpoints bind solver version 2 and reject experimental version-1
-states. Native remains the default.
+are unchanged. The accelerated branch omits native SVD's hard numerical-rank
+cutoff; finite iterations and floating-point rounding also differ. This option
+is a declared trainer change requiring its own quality evidence. Its checkpoints
+bind solver version 3 and reject earlier experimental solver states. CUDA graph
+caches are disposable execution state and are rebuilt after restoration. Native
+remains the default.
 When selecting another optimizer family, use `bcap_adam` as the base or also
 set `constraint_geometry_mode="none"`, `optimizer_smoothing=0.0`, and
 `optimizer_convolution="none"`. Direction blending requires zero-momentum full
