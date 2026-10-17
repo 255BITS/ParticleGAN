@@ -17,9 +17,20 @@ on:
 permissions:
   contents: read
 
+# Replace obsolete PR checks; keep each branch, manual and release run independent.
+concurrency:
+  group: particlegan-tests-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   cpu-tests:
     name: CPU / Python ${{ matrix.python }} / shard ${{ matrix.shard }}
+    # Push and PR triggers already filter branches. Apply the same scope to
+    # manual dispatches while preserving immutable-source release checks.
+    if: >-
+      github.event_name != 'workflow_dispatch' ||
+      github.ref == 'refs/heads/develop' ||
+      github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:

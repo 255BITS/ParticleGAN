@@ -8,8 +8,12 @@ contracts. A software release does not requalify archived scientific results.
 ## CI
 
 [Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml) runs
-on pull requests and pushes to `develop` and `master`, manual dispatches and
-calls from the release workflow.
+on pull requests targeting `develop` or `master` and pushes to those branches.
+Manual dispatches execute tests only on `develop` or `master`; dispatching on
+another branch skips the jobs. The release workflow also calls these checks
+against its immutable tagged source, including releases targeted by commit SHA.
+New commits to a PR automatically cancel that PR's superseded test run. Branch,
+manual and release runs remain independent and are not canceled by PR updates.
 
 - Python 3.12 runs the complete regression suite in four deterministic file
   shards with CPU PyTorch, with the bounded late-phase renderer in a separate
