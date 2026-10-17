@@ -1,9 +1,9 @@
 """Shared hyperparameters and small component factories; callers own control flow."""
 import math
-from dataclasses import asdict, dataclass, replace
+from dataclasses import asdict, dataclass, fields, replace
 
 # Promote a registered trainer preset here; model-family factories inherit it.
-DEFAULT_RECIPE = "bcap"
+DEFAULT_RECIPE = "bispf_optimized"
 
 
 def _reject_table_storage_owners(table, tensors):
@@ -796,7 +796,7 @@ class Recipe:
                              ema_critic=ema_critic, anchor_min_decay=self.reg_anchor_min_decay,
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
 
-    def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
+    def make_generator_optimizer(self, params, *, modules=None, latent_table=None, direct_particles=None, **adam_kwargs):
         """Optimizer over ``params`` (module, tensors or param groups) whose ``step()`` does the
         recipe's generator-side work (A2 damping of the sparse
         ``latent_table``, e.g. ``prior.z`` alone in its group with beta1 == 0,
@@ -810,8 +810,16 @@ class Recipe:
         prior requires ``set_sampled_rows(prior.z, indices)`` before stepping;
         the public trainer/policy records generator-side sample IDs automatically.
         A supplied module binds Conv2d/ConvTranspose2d weights automatically when
-        ``optimizer_convolution='per_offset'``. Bare high-rank tensor iterables
-        lack this layout contract and are rejected by DualNorm.
+        ``optimizer_convolution='per_offset'``. When passing custom parameter
+        groups, supply their owning module(s) with ``modules=`` for the same
+        binding. Only parameters in ``params`` are optimized; module traversal
+        never adds parameters. This path excludes frozen parameters while
+        preserving group fields and order, splitting groups only for kernels.
+        Schedule every resulting group by its role instead of its position.
+        Bare high-rank tensor iterables lack this layout contract and are
+        rejected by DualNorm. Loaded values are never initialized or changed
+        during construction. Rebuild the optimizer explicitly after unfreezing
+        parameters that were excluded at construction.
 
         With ``constraint_geometry_mode != 'none'``, call
         ``particlegan.optim.constraint_geometry.constraint_geometry_backward``
@@ -830,6 +838,14 @@ class Recipe:
         if latent_table is not None and self.prior_update == "frozen" and latent_table.requires_grad:
             raise ValueError("trainable latent_table contradicts Recipe.prior_update='frozen'")
         module = params if isinstance(params, nn.Module) else None
+        if modules is None:
+            module_owners = [] if module is None else [module]
+        else:
+            module_owners = [modules] if isinstance(modules, nn.Module) else list(modules)
+            if any(not isinstance(owner, nn.Module) for owner in module_owners):
+                raise TypeError("modules must contain only torch.nn.Module instances")
+            if module is not None:
+                module_owners.insert(0, module)
         if module is not None:
             params = [p for p in module.parameters() if p.requires_grad]
         if latent_table is not None and self.prior_update == "frozen":
@@ -848,6 +864,18 @@ class Recipe:
                 owners.extend(module.buffers())
             _reject_table_storage_owners(latent_table, owners)
             latent_table = None
+        if modules is not None:
+            # The explicit module binding is a new construction contract.
+            # Keep historical bare-group checkpoint layouts unchanged.
+            values = list(params)
+            if values and isinstance(values[0], dict):
+                params = []
+                for value in values:
+                    group = {**value, "params": [p for p in value["params"] if p.requires_grad]}
+                    if group["params"]:
+                        params.append(group)
+            else:
+                params = [p for p in values if p.requires_grad]
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
@@ -875,8 +903,8 @@ class Recipe:
                 if uses_adam and self.optimizer_adam_lr is not None:
                     group["lr"] = self.optimizer_adam_lr * (self.prior_lr_mult if is_prior else 1.)
                 groups.append(group)
-            if module is not None and self.optimizer_convolution == "per_offset":
-                groups = convolution_parameter_groups(groups, [module], family=self.optimizer_family,
+            if module_owners and self.optimizer_convolution == "per_offset":
+                groups = convolution_parameter_groups(groups, module_owners, family=self.optimizer_family,
                                                       convolution_rule=self.optimizer_convolution_rule)
             return make_normalized_optimizer(self, groups, **options)
         from .k3p import K3PGeneratorAdam
@@ -1107,6 +1135,15 @@ class Recipe:
 
 
 def get_recipe(name="gan", *, trainer=None, **overrides):
+    """Build and validate the selected recipe; see ``get_recipe_fields``.
+
+    Restore resolved checkpoints with ``Recipe(**saved_fields)`` instead of
+    resolving the current default again.
+    """
+    return Recipe(**get_recipe_fields(name, trainer=trainer, **overrides))
+
+
+def get_recipe_fields(name="gan", *, trainer=None, **overrides):
     """Select a model family or a policy preset with explicit overrides.
 
     Model families share the trainer preset selected by ``DEFAULT_RECIPE``.
@@ -1134,11 +1171,23 @@ def get_recipe(name="gan", *, trainer=None, **overrides):
     recipe. ``"bcap_adam"`` retains the earlier native-Adam
     preset. Both disable the guard, anchor, latent damping, extra
     regularization, EMA serving and additive training noise.
-    ``"bispf"`` selects the Born-Infeld Sinkhorn Particle Flow formulation
+    ``"bispf_optimized"`` is the selected BISPF research default: zero-momentum
+    DualNorm, non-saturating loss, the Born-Infeld chord penalty, SBNP prior
+    regularization and the optimized per-offset convolution filter. Its current
+    evidence retains 19 task passes and 11 failures; selection does not add
+    calibration or natural-image quality credit.
+    ``"bispf"`` retains the original Born-Infeld Sinkhorn Particle Flow formulation
     (scale-free Sinkhorn relativistic pairing, Elastic Born-Infeld chord
     regularization, zero-mean logit gauge with no EMA critic copy, SBNP
     prior regularization, and constant learning rates).
     No research configuration file is read at runtime.
+
+    Return every declarative field without constructing runtime components.
+    This function can be loaded directly from ``recipes.py`` by configuration
+    tools that do not import Torch. Preset names and field names are checked;
+    call ``get_recipe`` or ``Recipe(**fields)`` for value validation before
+    training. Returned fields are independent of the legacy ``Recipe()``
+    restoration defaults.
 
     Use ``Recipe(**saved_fields)`` for resolved checkpoints and
     ``recipe.replace(name=...)`` for custom report labels.
@@ -1197,6 +1246,14 @@ def get_recipe(name="gan", *, trainer=None, **overrides):
         "optimizer_convolution": "per_offset",
         "constraint_geometry_mode": "direction_blend",
     }
+    # This complete preset matches the selected Forge candidate without reading
+    # research files at runtime. Keep the original BISPF/Adam preset and Recipe
+    # dataclass defaults intact for explicit callers and saved configurations.
+    presets["bispf_optimized"] = {
+        **presets["bcap"], "critic_formulation": "bispf", "reg_arm": None,
+        "optimizer_convolution_rule": "quintic", "prior_regularizer": "sbnp",
+        "prior_reg": .01, "lr_schedule": "cosine",
+    }
     presets["atlas"] = {**presets["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}
     presets["e22_routed"] = {**presets["e22"], "row_policy": "routed_paired"}
@@ -1224,7 +1281,11 @@ def get_recipe(name="gan", *, trainer=None, **overrides):
         raise ValueError(f"Unknown recipe {name!r}; choose {', '.join((*models, *presets))}")
     if name != "gan":
         options = {**options, "name": name}
-    return Recipe(**{**options, **overrides})
+    defaults = {field.name: field.default for field in fields(Recipe)}
+    unknown = overrides.keys() - defaults.keys()
+    if unknown:
+        raise TypeError(f"Unknown recipe field(s): {', '.join(sorted(unknown))}")
+    return {**defaults, **options, **overrides}
 
 
 def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):

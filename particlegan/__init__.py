@@ -22,6 +22,7 @@ from .recipes import (
     NetworkLRTransition,
     Recipe,
     get_recipe,
+    get_recipe_fields,
     learning_rate_scale,
     learning_rate_scales,
     scale_learning_rates,
@@ -60,6 +61,6 @@ __all__ = [
     "StratifiedBlueNoisePrior", "SBNPPriorRegularizer", "ContinuousThermalCooler", "BISPFEngine", "BISPFLossAdapter",
     "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss",
     "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
-    "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
+    "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "get_recipe_fields", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
 ]

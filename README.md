@@ -21,19 +21,27 @@ the work of covering the data to the generator; when it cannot, modes go
 missing. ParticleGAN replaces that noise with a table of learnable latent
 vectors (*particles*) that are optimized together with the generator, so the
 prior itself can move toward the data's modes. The default training recipe is
-the selected **BCAP** leader: non-saturating loss, a fixed cap penalty on critic
-input gradients, zero-momentum DualNorm, direction blending and constant rates.
+the selected **optimized BISPF** leader: non-saturating loss, a Born-Infeld
+critic penalty, an SBNP prior regularizer, zero-momentum DualNorm and constant
+rates. Its quintic rule accelerates CUDA convolution kernels with more than
+32 channels per group; dense weights and smaller or CPU kernels retain native
+updates.
 [Recipe settings and evidence](docs/api.md#recipes-and-defaults) explain the
 configuration. You write an ordinary PyTorch GAN loop; the recipe builds the pieces.
 
 Future promotions change one line in [particlegan/recipes.py](particlegan/recipes.py):
-`DEFAULT_RECIPE = "bcap"`. All model-family factories inherit that trainer preset.
+`DEFAULT_RECIPE = "bispf_optimized"`. All model-family factories inherit that trainer preset.
 Explicit presets such as `get_recipe("ka2")` remain available. This is the
-best-observed research default; Forge calibration remains provisional.
+owner-selected research default; Forge calibration remains provisional.
+The [optimization readout](reports/forge/bispf-optimized/README.md) preserves
+19 passing and 11 failing task verdicts. The overview's 81/81 counts repeated
+view requirements across 18 distinct counted tests; held failures remain
+visible. These results do not establish natural-image convergence or a
+universal architecture guarantee.
 
-![100 Gaussians: historical KA2 recipe converging with live weights](100gaussians.gif)
+![100 Gaussians: historical K3P recipe converging with live weights](100gaussians.gif)
 
-Recorded with the historical 0.8.0 KA2 recipe and its original random initialization, live weights, seed 1234:
+Recorded with the historical 0.8.0 K3P recipe and its original random initialization, live weights, seed 1234:
 **100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
 at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
 
@@ -50,7 +58,7 @@ ending at 98.3–98.6% of samples within 3σ after 7,000 updates:
 Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
 
 ```bash
-python -m pip install particlegan           # the library (0.8.0)
+python -m pip install particlegan           # the library (0.9.0)
 ```
 
 For the examples, experiments and tests, install from source:
@@ -63,14 +71,17 @@ python -m pip install -e '.[experiments,dev]'  # plus examples, experiments and 
 
 ## Train a GAN
 
-Everything comes from role-named factories on a recipe; the loop is yours.
+Version 0.9.0 makes the optimized BISPF preset the default and retains explicit
+historical presets and saved recipe restoration. See the [changelog](CHANGELOG.md)
+for the release and its compatibility limits.
+
+You supply ordinary PyTorch modules; `GANTrainer` binds the recipe's optimizers,
+critic penalty and prior regularizer:
 
 ```python
-import copy
 import torch
 from torch import nn
-from particlegan import get_recipe, init, scale_learning_rates
-from particlegan.optim.constraint_geometry import constraint_geometry_backward
+from particlegan import GANTrainer, get_recipe, init
 
 def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
     angle = torch.randint(8, (n, 1)) * torch.pi / 4
@@ -79,50 +90,27 @@ def real_batch(n):  # replace with your DataLoader: 8 Gaussians on a ring
 recipe = get_recipe(total_steps=2000)
 G = nn.Sequential(nn.Linear(recipe.z_dim, 128), nn.LeakyReLU(0.2), nn.Linear(128, 2))
 D = nn.Sequential(nn.Linear(2, 128), nn.LeakyReLU(0.2), nn.Linear(128, 1))
-init.deterministic_orthogonal_(G, seed=0)        # optional: repeatable weights
+init.deterministic_orthogonal_(G, seed=0)
 init.deterministic_orthogonal_(D, seed=1)
-prior = init.deterministic_orthogonal_(recipe.make_prior())  # the learnable particle table
-opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
-penalty, gan = recipe.make_critic_penalty(opt_d), recipe.make_loss()
-base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-
-for step in range(recipe.total_steps):
-    scale_learning_rates(step, recipe, (opt_g, opt_d), base_lrs, prior)
-    real = real_batch(recipe.batch_size)
-    z, indices = prior.sample(recipe.batch_size)
-    fake = G(z)
-
-    d_loss = gan.d_loss(D(real), D(fake.detach())) + penalty(D, real, fake.detach())
-    opt_d.zero_grad(); d_loss.backward(); opt_d.step()
-
-    g_loss = gan.g_loss(D(fake), D(real))
-    opt_g.zero_grad()
-    if hasattr(opt_g, "set_sampled_rows"):
-        opt_g.set_sampled_rows(prior.z, indices)
-    constraint_geometry_backward(g_loss, opt_g, (g_loss,))
-    opt_g.step()
-```
-
-The optimizers' `state_dict()` holds their update state, so checkpoint them
-as usual. The generator step records sampled prior rows and protects the
-adversarial objective during direction blending.
-[`examples/pytorch_loop.py`](examples/pytorch_loop.py) provides a complete
-caller-owned loop; `GANTrainer` handles these bindings automatically.
-
-Or let `GANTrainer` run exactly that default update:
-
-```python
-from particlegan import GANTrainer
-
-recipe = get_recipe()
 prior = init.deterministic_orthogonal_(recipe.make_prior())
-trainer = GANTrainer(recipe, G, D, prior=prior)
-for _ in range(trainer.recipe.total_steps):
-    trainer.step(real_batch(trainer.recipe.batch_size))
+trainer = GANTrainer(recipe, G, D, prior=prior, seed=0)
+for _ in range(recipe.total_steps):
+    trainer.step(real_batch(recipe.batch_size))
 samples = trainer.sample(1024)
 ```
 
-Without `prior=`, the trainer builds a plain randomly drawn particle table.
+Without `prior=`, the trainer builds a randomly drawn particle table. Networks
+and device placement belong to the caller. The trainer does not reinitialize
+supplied modules, so load pretrained weights before constructing it and
+initialize only fresh parameters. Optimizers exclude frozen parameters while
+retaining gradients through frozen modules to trainable inputs.
+
+Caller-owned loops use the recipe's role-named factories, including
+`make_optimizers`, `make_critic_penalty` and `make_prior_regularizer`.
+Save the resolved `recipe.to_dict()` and the complete `trainer.state_dict()`
+for continuation; changing the current default does not migrate an old run.
+See the [API reference](docs/api.md#recipes-and-defaults) for component ownership
+and optimizer contracts.
 
 ## Repeatable initialization
 
@@ -187,7 +175,8 @@ transport their parent's Adam history at half mass.
 
 ## Learn more
 
-- [How the training formulation works](docs/ka2.md), including several critics and conditional critics
+- [Optimized BISPF settings and measured behavior](reports/forge/bispf-optimized/README.md)
+- [Historical KA2 formulation](docs/ka2.md), including several critics and conditional critics
 - [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
 - [ParticleGAN Atlas](docs/atlas.md): illustrated E22 comparison, local population corrections and automatic backend selection
 - [Routed paired E22](docs/e22_routed.md): conditional row evidence, guarded moves and clean serving

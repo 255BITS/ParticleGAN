@@ -3,6 +3,7 @@ from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 
 from experiments.forge.contracts import file_hash, read_json
 from experiments.forge.decision_contracts import validate_legacy_admission
@@ -50,3 +51,30 @@ def test_word_goal_correction_admits_main_tier1_without_changing_candidate_revis
     original = deepcopy(request["candidate"])
     original["goal"] = "five_word_joint"
     assert candidate_revision_for(request["source"]["digest"], original) == request["candidate_revision"]
+
+
+def test_current_word_checkpoint_source_refresh_preserves_questions_and_archived_variants():
+    receipt = read_json(ROOT / "reports/forge/release-090/source-bindings.json")
+    member = receipt["source_member"]
+    for source in ("previous_bound_source", "current_bound_source"):
+        identity = receipt[source]
+        original = subprocess.check_output(["git", "show", identity["commit"] + ":" + member], cwd=ROOT)
+        assert hashlib.sha256(original).hexdigest() == identity["sha256"]
+    for binding in receipt["tasks"]:
+        original_bytes = subprocess.check_output([
+            "git", "show", receipt["pre_refresh_task_declaration_commit"] + ":" + binding["path"]], cwd=ROOT)
+        assert hashlib.sha256(original_bytes).hexdigest() == binding["previous_sha256"]
+        original = json.loads(original_bytes)
+        assert file_hash(ROOT / binding["path"]) == binding["current_sha256"]
+        current = read_json(ROOT / binding["path"])
+        revision = current["evaluation"]["evaluator_revision"]
+        assert revision["previous_revision"] == original["evaluation"]["evaluator_revision"]
+        assert revision["previous_source_sha256"] == {member: original["evaluation"]["sources"][member]}
+        assert current["evaluation"]["sources"][member] == file_hash(ROOT / member)
+        current["evaluation"]["sources"][member] = original["evaluation"]["sources"][member]
+        current["evaluation"]["evaluator_revision"] = original["evaluation"]["evaluator_revision"]
+        assert current == original
+    for path, digest in receipt["preserved_historical_policy_variants"].items():
+        assert file_hash(ROOT / path) == digest
+    assert receipt["qualification_input"] is receipt["qualification_regraded"] is False
+    assert receipt["scientific_training_launched"] is receipt["automatic_cross_source_reuse"] is False

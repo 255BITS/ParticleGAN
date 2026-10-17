@@ -742,6 +742,8 @@ class NormalizedOptimizer(Optimizer):
                     or regularizer["ema"] is not None or regularizer["guard"] is not None):
                 raise ValueError("invalid normalized critic observer")
             record = regularizer["record"]
+            if hasattr(self.record, "base_state"):
+                record = self.record.base_state(record)
             if not isinstance(record, dict) or set(record) != set(CriticStepRecord.KEYS):
                 raise ValueError("invalid normalized critic record")
             if record["anchor_started"] is not False or any(type(record[k]) is not int or record[k] < 0 for k in ("calls", "observed_steps")):
@@ -767,6 +769,8 @@ class NormalizedOptimizer(Optimizer):
                 self.set_sampled_rows(group["params"][0], rows)
         if regularizer is not None:
             self.record.load_state_dict(regularizer["record"])
+            if hasattr(self.record, "restore_device_state"):
+                self.record.restore_device_state(self.param_groups[0]["params"][0].device)
 
 
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
@@ -798,5 +802,9 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
-        optimizer.record = CriticStepRecord()
+        if recipe.effective_critic_formulation == "bispf":
+            from ..bispf import _BISPFObserverStepRecord
+            optimizer.record = _BISPFObserverStepRecord()
+        else:
+            optimizer.record = CriticStepRecord()
     return optimizer
