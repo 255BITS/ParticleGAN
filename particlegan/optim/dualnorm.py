@@ -20,7 +20,7 @@ NORMALIZED_FAMILIES = (
 )
 _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
 _CONVOLUTION_VERSION = "per_offset_polar_v1"
-_NEWTON_SCHULZ_VERSION = 2
+_NEWTON_SCHULZ_VERSION = 3
 
 
 def convolution_parameter_groups(groups, modules, *, family):
@@ -123,64 +123,135 @@ def _convolution_batch(tensor, metadata):
     return storage.permute(0, 3, 4, 2, 1) if transposed else storage.permute(0, 3, 4, 1, 2)
 
 
-def _newton_schulz_polar(matrices, *, smoothing):
-    """Batched, regularized polar approximation with exact failure fallback.
-
-    Orthogonalize the augmented matrix [M; smoothing I] in at most 24 cubic
-    Newton--Schulz iterations. Its top block is the desired smoothed polar
-    direction. Keeping both blocks avoids squaring the input condition number
-    in a rounded Gram matrix before the iteration begins. Scaling the input
-    first avoids overflow while retaining smoothing in its absolute units.
-
-    At iterations 8, 12, 16, 20 and 24, check the augmented orthogonality
-    residual. Stop when the whole batch also passes its relation to the
-    original M and smoothing. Nonfinite or unconverged matrices use native
-    SVD individually. Both residual limits are 1e-3.
-
-    This opt-in numerical rule differs from native SVD: its successful fast
-    branch has finite iteration and Gram rounding error, and omits the hard
-    numerical-rank cutoff. Smoothing stays in the original absolute units.
-    """
-    original_shape = matrices.shape
-    original_dtype = matrices.dtype
-    value = matrices.reshape(-1, *original_shape[-2:])
-    if original_dtype not in (torch.float32, torch.float64):
-        value = value.float()
-    transpose = value.shape[-2] < value.shape[-1]
-    oriented = value.mT if transpose else value
+def _polar_initial(oriented, smoothing):
     width = oriented.shape[-1]
-    identity = torch.eye(width, device=value.device, dtype=value.dtype)
+    identity = torch.eye(width, device=oriented.device, dtype=oriented.dtype)
     normalizer = oriented.abs().amax(dim=(-2, -1), keepdim=True).clamp_min(smoothing)
     scaled = oriented / normalizer
     regularizer = smoothing / normalizer
     trace = scaled.square().sum(dim=(-2, -1), keepdim=True) + width * regularizer.square()
     result = scaled / trace.sqrt()
     lower = regularizer * identity / trace.sqrt()
-    for iteration in range(1, 25):
+    return scaled, regularizer, result, lower, identity
+
+
+def _polar_block(result, lower, identity):
+    for _ in range(4):
         correction = .5 * (3 * identity - result.mT @ result - lower.mT @ lower)
         result = result @ correction
         lower = lower @ correction
-        if iteration not in (8, 12, 16, 20, 24):
-            continue
-        residual = (identity - result.mT @ result - lower.mT @ lower).abs().sum(-1).amax(-1)
-        failed = ~torch.isfinite(residual) | (residual > 1e-3)
-        if iteration != 24 and bool(failed.any()):
-            continue
-        # Orthogonality alone does not ensure the returned direction still
-        # corresponds to the input. The shared right updates preserve
-        # smoothing * result == M * lower; verify its relative error too.
-        denominator = regularizer.flatten() * result.norm(dim=(-2, -1))
-        relation = ((regularizer * result - scaled @ lower).norm(dim=(-2, -1))
-                    / denominator.clamp_min(torch.finfo(value.dtype).tiny))
-        failed = (failed | ~torch.isfinite(result).all(dim=(-2, -1))
-                  | ~torch.isfinite(relation) | (relation > 1e-3))
-        if iteration == 24 or not bool(failed.any()):
-            break
+    return result, lower
+
+
+def _polar_failed(result, lower, scaled, regularizer, identity):
+    residual = (identity - result.mT @ result - lower.mT @ lower).abs().sum(-1).amax(-1)
+    # Orthogonality alone is insufficient: shared right updates also preserve
+    # smoothing * result == M * lower. Check that original-input relation.
+    denominator = regularizer.flatten() * result.norm(dim=(-2, -1))
+    relation = ((regularizer * result - scaled @ lower).norm(dim=(-2, -1))
+                / denominator.clamp_min(torch.finfo(result.dtype).tiny))
+    return (~torch.isfinite(result).all(dim=(-2, -1)) | ~torch.isfinite(residual)
+            | (residual > 1e-3) | ~torch.isfinite(relation) | (relation > 1e-3))
+
+
+class _PolarGraphs:
+    """Pure tensor blocks; no parameter, optimizer state or RNG is captured."""
+
+    def __init__(self, oriented, smoothing, *, stream, pool):
+        self.scaled, self.regularizer, self.result, self.lower, self.identity = [
+            value.clone() for value in _polar_initial(oriented, smoothing)]
+        stream.wait_stream(torch.cuda.current_stream())
+        with torch.cuda.stream(stream):
+            # Establish cuBLAS workspaces outside capture on the shared stream.
+            for _ in range(3):
+                _polar_block(self.result, self.lower, self.identity)
+                _polar_failed(self.result, self.lower, self.scaled, self.regularizer, self.identity)
+        torch.cuda.current_stream().wait_stream(stream)
+        self.block = torch.cuda.CUDAGraph()
+        self.guard = torch.cuda.CUDAGraph()
+        with torch.cuda.graph(self.block, stream=stream, pool=pool):
+            result, lower = _polar_block(self.result, self.lower, self.identity)
+            self.result.copy_(result)
+            self.lower.copy_(lower)
+        with torch.cuda.graph(self.guard, stream=stream, pool=pool):
+            self.failed = _polar_failed(self.result, self.lower, self.scaled,
+                                        self.regularizer, self.identity)
+        torch.cuda.current_stream().wait_stream(stream)
+
+    def solve(self, oriented, smoothing):
+        initial = _polar_initial(oriented, smoothing)
+        for target, source in zip((self.scaled, self.regularizer, self.result, self.lower), initial):
+            target.copy_(source)
+        for iteration in range(4, 33, 4):
+            self.block.replay()
+            if iteration >= 8:
+                self.guard.replay()
+                if not bool(self.failed.any()):
+                    break
+        return self.result, self.failed
+
+
+class _PolarGraphCache:
+    """Optimizer-local graph ownership, including one workspace stream/device.
+
+    Live entries retain their shared pool. Recreating a pool handle after all
+    graphs have been freed is required by the CUDA allocator; this entire cache
+    is discarded on checkpoint restore/deepcopy rather than partially evicted.
+    """
+
+    def __init__(self):
+        self.entries, self.resources = {}, {}
+
+    def solve(self, oriented, smoothing):
+        key = (oriented.device, oriented.dtype, tuple(oriented.shape), smoothing,
+               torch.backends.cuda.matmul.allow_tf32, torch.get_float32_matmul_precision(),
+               torch.are_deterministic_algorithms_enabled(),
+               torch.is_autocast_enabled("cuda"), torch.get_autocast_dtype("cuda"))
+        with torch.cuda.device(oriented.device):
+            if key not in self.entries:
+                if oriented.device not in self.resources:
+                    self.resources[oriented.device] = (torch.cuda.Stream(device=oriented.device),
+                                                       torch.cuda.graph_pool_handle())
+                stream, pool = self.resources[oriented.device]
+                self.entries[key] = _PolarGraphs(oriented, smoothing, stream=stream, pool=pool)
+            return self.entries[key].solve(oriented, smoothing)
+
+
+def _newton_schulz_polar(matrices, *, smoothing, cache=None):
+    """Batched regularized polar approximation, bounded at 32 cubic iterations.
+
+    Orthogonalize [M; smoothing I] using the smaller channel Gram coordinates.
+    Check orthogonality and the original-input relation every four iterations
+    starting at eight; each residual limit is 1e-3. Failed matrices fall back
+    individually to native SVD. Optimizer-owned CUDA graphs replay the same
+    four-iteration tensor block and guards without recording model state or RNG.
+
+    This explicitly different numerical rule retains absolute smoothing but
+    has iteration/rounding error and omits native SVD's hard rank cutoff on its
+    successful branch. For ill-conditioned directions that cutoff difference
+    can be material; quality qualification is separate from solver convergence.
+    """
+    original_shape, original_dtype = matrices.shape, matrices.dtype
+    value = matrices.reshape(-1, *original_shape[-2:])
+    if original_dtype not in (torch.float32, torch.float64):
+        value = value.float()
+    oriented = value.mT if value.shape[-2] < value.shape[-1] else value
+    oriented = oriented.contiguous()
+    if cache is not None:
+        result, failed = cache.solve(oriented, smoothing)
+    else:
+        scaled, regularizer, result, lower, identity = _polar_initial(oriented, smoothing)
+        for iteration in range(4, 33, 4):
+            result, lower = _polar_block(result, lower, identity)
+            if iteration >= 8:
+                failed = _polar_failed(result, lower, scaled, regularizer, identity)
+                if not bool(failed.any()):
+                    break
     # Host decisions are made per kernel batch rather than per spatial offset.
     # Every rejected slice retains the original exact SVD update.
     for index in failed.nonzero(as_tuple=False).flatten().tolist():
         result[index] = polar_factor(oriented[index], smoothing=smoothing)
-    if transpose:
+    if value.shape[-2] < value.shape[-1]:
         result = result.mT
     return result.reshape(original_shape).to(dtype=original_dtype)
 
@@ -348,7 +419,7 @@ class NormalizedOptimizer(Optimizer):
     def __getstate__(self):
         # Optimizer's default pickle omits the role family, observer and native
         # Adam component; public checkpoint preflight also deep-copies us.
-        return dict(self.__dict__)
+        return {key: value for key, value in self.__dict__.items() if key != "_newton_graphs"}
 
     def set_sampled_rows(self, table, rows):
         """Record actual sampled indices, never infer ownership from gradients."""
@@ -458,7 +529,10 @@ class NormalizedOptimizer(Optimizer):
                                 and largest_channel > 32):
                             gradient_batch = _convolution_batch(gradient, metadata)
                             direction_batch = _convolution_batch(direction, metadata)
-                            update = _newton_schulz_polar(direction_batch, smoothing=self.smoothing)
+                            if getattr(self, "_newton_graphs", None) is None:
+                                self._newton_graphs = _PolarGraphCache()
+                            update = _newton_schulz_polar(direction_batch, smoothing=self.smoothing,
+                                                        cache=self._newton_graphs)
                             active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
                                       & (direction_batch.norm(dim=(-2, -1)) >= eps))
                             # A skipped slice must remain fixed even when an
@@ -642,6 +716,7 @@ class NormalizedOptimizer(Optimizer):
         metadata = state.pop("dualnorm")
         regularizer = state.pop("regularizer", None)
         super().load_state_dict(state)
+        self.__dict__.pop("_newton_graphs", None)
         self._refresh_adam()
         self.clear_sampled_rows()
         for group, rows in zip(self.param_groups, metadata["sampled_rows"]):

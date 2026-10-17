@@ -4,6 +4,7 @@ Quality evidence belongs to separately registered public-API Forge tasks.
 These fixtures check its bounded solver, layouts and checkpoint semantics.
 """
 from copy import deepcopy
+from io import BytesIO
 
 import pytest
 import torch
@@ -105,6 +106,18 @@ def test_augmented_iteration_handles_ill_conditioned_gradient_without_svd_fallba
     assert (actual - expected).norm() / expected.norm() < 1e-3
     assert (actual - unmasked).norm() / unmasked.norm() < 1e-4
     assert (actual - unmasked).abs().amax() < 1e-4
+
+
+def test_extended_iteration_bound_converges_slow_regularized_null_block_without_fallback(monkeypatch):
+    matrix = torch.zeros(64, 64)
+    matrix[0, 0] = 10.
+    def forbidden(*args, **kwargs):
+        raise AssertionError("the extended 32-iteration bound should avoid an SVD fallback")
+    monkeypatch.setattr(dualnorm, "polar_factor", forbidden)
+    actual = dualnorm._newton_schulz_polar(matrix[None], smoothing=.001)[0]
+    expected = torch.zeros_like(matrix)
+    expected[0, 0] = 10 / (100 + .001**2)**.5
+    torch.testing.assert_close(actual, expected)
 
 
 @pytest.mark.parametrize("scale", [1e-30, 1e30])
@@ -262,11 +275,23 @@ def test_public_checkpoint_restores_exact_next_update_and_rejects_backend_switch
     trainer = build()
     batch = torch.arange(36, dtype=torch.float32).reshape(4, 1, 3, 3).sin()
     trainer.step(batch)
+    assert len(trainer.opt_g._newton_graphs.entries) == 2
+    assert len(trainer.opt_g._newton_graphs.resources) == 1
+    copied = deepcopy(trainer.opt_g)
+    assert not hasattr(copied, "_newton_graphs")
+    assert state_digest(copied.state_dict()) == state_digest(trainer.opt_g.state_dict())
+    serialized = BytesIO()
+    torch.save(trainer.opt_g, serialized)
+    serialized.seek(0)
+    unpickled = torch.load(serialized, weights_only=False)
+    assert not hasattr(unpickled, "_newton_graphs")
+    assert state_digest(unpickled.state_dict()) == state_digest(trainer.opt_g.state_dict())
     saved = deepcopy(trainer.state_dict())
     trainer.step(batch)
     expected = state_digest(trainer.state_dict())
     restored = build()
     restored.load_state_dict(saved)
+    assert not hasattr(restored.opt_g, "_newton_graphs")
     restored.step(batch)
     assert state_digest(restored.state_dict()) == expected
     invalid = deepcopy(restored.state_dict())
@@ -278,12 +303,12 @@ def test_public_checkpoint_restores_exact_next_update_and_rejects_backend_switch
     assert state_digest(restored.state_dict()) == before
 
 
-@pytest.mark.parametrize("version", [None, 1, 3])
+@pytest.mark.parametrize("version", [None, 1, 2, 4])
 def test_previous_or_unknown_solver_checkpoint_version_is_rejected_atomically(version):
     module = nn.Conv2d(2, 64, 1)
     optimizer = configuration().make_generator_optimizer(module)
     saved = deepcopy(optimizer.state_dict())
-    assert saved["dualnorm"]["solver_version"] == 2
+    assert saved["dualnorm"]["solver_version"] == 3
     if version is None:
         saved["dualnorm"].pop("solver_version")
     else:
@@ -293,3 +318,39 @@ def test_previous_or_unknown_solver_checkpoint_version_is_rejected_atomically(ve
     with pytest.raises(ValueError, match="solver version"):
         optimizer.load_state_dict(saved)
     assert state_digest(optimizer.state_dict()) == before
+
+
+def test_graph_capture_preserves_rng_caller_stream_device_and_eager_result():
+    values = torch.arange(2 * 64 * 3, dtype=torch.float32).reshape(2, 64, 3)
+    matrices = values.sin() * .001
+    expected = dualnorm._newton_schulz_polar(matrices, smoothing=.001)
+    cpu_rng, cuda_rng = torch.get_rng_state().clone(), torch.cuda.get_rng_state().clone()
+    device_before = torch.cuda.current_device()
+    caller = torch.cuda.Stream()
+    caller.wait_stream(torch.cuda.current_stream())
+    cache = dualnorm._PolarGraphCache()
+    with torch.cuda.stream(caller):
+        actual = dualnorm._newton_schulz_polar(matrices, smoothing=.001, cache=cache)
+        assert torch.cuda.current_stream() == caller
+        assert torch.cuda.current_device() == device_before
+    torch.cuda.current_stream().wait_stream(caller)
+    assert torch.equal(actual, expected)
+    assert torch.equal(torch.get_rng_state(), cpu_rng)
+    assert torch.equal(torch.cuda.get_rng_state(), cuda_rng)
+
+
+def test_mixed_shape_shared_graph_pool_never_aliases_live_results():
+    cache = dualnorm._PolarGraphCache()
+    first_values = torch.arange(2 * 64 * 3, dtype=torch.float32).reshape(2, 64, 3)
+    second_values = torch.arange(2 * 128 * 64, dtype=torch.float32).reshape(2, 128, 64)
+    first, second = first_values.sin() * .001, second_values.cos() * .001
+    actual_first = dualnorm._newton_schulz_polar(first, smoothing=.001, cache=cache)
+    saved_first = actual_first.clone()
+    actual_second = dualnorm._newton_schulz_polar(second, smoothing=.001, cache=cache)
+    saved_second = actual_second.clone()
+    assert torch.equal(actual_first, saved_first)
+    expected_first = dualnorm._newton_schulz_polar(first * 2, smoothing=.001)
+    replayed_first = dualnorm._newton_schulz_polar(first * 2, smoothing=.001, cache=cache)
+    assert torch.equal(replayed_first, expected_first)
+    assert torch.equal(actual_second, saved_second)
+    assert len(cache.entries) == 2 and len(cache.resources) == 1
