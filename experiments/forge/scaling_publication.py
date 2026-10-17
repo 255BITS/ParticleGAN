@@ -282,6 +282,15 @@ def _validate_manifest(root, manifest):
             or manifest.get("default_adoption") is not False
             or manifest.get("timing_scope") != TIMING_SCOPE):
         _fail("manifest scope differs from performance-only contract")
+    export = manifest.get("export") or {}
+    if export.get("schema") == "forge_scaling_composite_v1":
+        if not export.get("sources"):
+            _fail("composite manifest requires archived source proofs")
+        for source in export["sources"]:
+            path = _path(root, source["path"])
+            if (file_hash(path) != source["sha256"]
+                    or read_json(path).get("input_digest") != source["input_digest"]):
+                _fail("archived composite source bytes changed: " + source["path"])
     tasks = {}
     for task in manifest["tasks"]:
         identifier(task["id"], "task id")

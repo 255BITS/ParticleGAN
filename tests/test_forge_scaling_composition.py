@@ -62,3 +62,14 @@ def test_overlay_rejects_changed_original_receipt(tmp_path):
     atomic_json(tmp_path / row["receipt"], changed)
     with pytest.raises(ValueError, match="receipt bytes changed"):
         publication.compose_manifests(tmp_path, [path])
+
+
+def test_loading_composite_rechecks_exact_archived_manifest_bytes(tmp_path):
+    path, document = archive(tmp_path, "original", [("bispf", "bispf-v2")])
+    result = publication.compose_manifests(tmp_path, [path])
+    atomic_json(tmp_path / publication.MANIFEST, result)
+    assert publication.load_performance(tmp_path)["records"]
+    document["export"]["registration"] = "changed"
+    atomic_json(tmp_path / path, document)
+    with pytest.raises(ValueError, match="archived composite source bytes changed"):
+        publication.load_performance(tmp_path)
