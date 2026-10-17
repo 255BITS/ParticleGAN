@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "id": "lazy_cadence_coverage",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "evidence_scope": "research_diagnostic",
+  "assignments": [
+    {
+      "task": "gaussian1d_smoke",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 0
+    },
+    {
+      "task": "two_pole",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 1
+    },
+    {
+      "task": "unused_token_hold",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 2
+    },
+    {
+      "task": "ae_gan_hold",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 3
+    },
+    {
+      "task": "ring16_acquisition",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 4
+    },
+    {
+      "task": "five_word_joint_smoke",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 5
+    },
+    {
+      "task": "gaussian1d_stability",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 6
+    },
+    {
+      "task": "five_word_joint_hold",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 7
+    },
+    {
+      "task": "trajectory",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 8
+    },
+    {
+      "task": "residual_student",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 9
+    },
+    {
+      "task": "unipolar",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 10
+    },
+    {
+      "task": "cover_leftover",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 11
+    },
+    {
+      "task": "mid_scale_identity",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 12
+    },
+    {
+      "task": "mode_hold",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 13
+    },
+    {
+      "task": "vector_two_broad",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 14
+    },
+    {
+      "task": "vector_unequal_mass",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 15
+    },
+    {
+      "task": "vector_unequal_width",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 16
+    },
+    {
+      "task": "vector_anisotropic",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 17
+    },
+    {
+      "task": "vector_overlap",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 18
+    },
+    {
+      "task": "vector_spiral",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 19
+    },
+    {
+      "task": "img_stripes2",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 20
+    },
+    {
+      "task": "img_bars4",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 21
+    },
+    {
+      "task": "img_blobs4",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 22
+    },
+    {
+      "task": "img_intensity2",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 23
+    },
+    {
+      "task": "grid100",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 24
+    },
+    {
+      "task": "rotated100",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 25
+    },
+    {
+      "task": "staggered100",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 26
+    },
+    {
+      "task": "ring_hold",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 27
+    },
+    {
+      "task": "ring_extension",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 28
+    },
+    {
+      "task": "clockfree_audit_measurement_v1",
+      "importance": "diagnostic",
+      "qualification_tier": 1,
+      "order": 29
+    }
+  ],
+  "eligibility": {},
+  "ranking": {
+    "policy": "diagnostic_outcomes_only",
+    "cost_separate": true
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "policy_change_reason": "Explicit accuracy study of the public lazy policy across original tiered tasks. Ungate independent peers only; preserve all task definitions and actual parent gate/checkpoint dependencies. Original tier/role assignments are frozen in cadence registration for display. No ordinary qualification credit."
+}

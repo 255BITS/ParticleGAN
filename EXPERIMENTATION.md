@@ -597,6 +597,12 @@ no complete smoke pass has no qualified winner. Later tiers remain untouched
 during selection, and the provisional screen still requires calibration before
 scientific ranking or default adoption.
 
+For matched lazy-regularization comparisons, use the reusable
+[cadence study workflow](docs/forge-cadence-studies.md). It varies only
+`reg_every`, retains the kernel's built-in strength compensation, records actual
+penalty activity and generates a paired metric report. Explicit cross-tier
+coverage is a separate diagnostic scope and supplies no ordinary qualification.
+
 ```sh
 # Read-only cost/coverage plan, then explicit gated execution.
 python -m experiments.forge inventory plan --through-tier 3

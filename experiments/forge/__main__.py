@@ -30,6 +30,26 @@ def queue_location(root: Path, override=None) -> Path:
     return repository / "runs/forge"
 
 
+def _qualification_tier(val: str) -> int:
+    try:
+        i = int(val)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid qualification tier integer: {val!r}")
+    if i < 1:
+        raise argparse.ArgumentTypeError(f"qualification tier must be >= 1, got {i}")
+    return i
+
+
+def _minimum_tier(val: str) -> int:
+    try:
+        i = int(val)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid tier integer: {val!r}")
+    if i < 0:
+        raise argparse.ArgumentTypeError(f"tier must be >= 0, got {i}")
+    return i
+
+
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2], help="Forge checkout containing declarations and durable reports")
@@ -71,7 +91,8 @@ def parser():
         c.add_argument("candidate")
         c.add_argument("--view")
         c.add_argument("--study", help="explicit research study id or JSON path")
-        c.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=None)
+        c.add_argument("--through-tier", type=_qualification_tier, default=None,
+                       help="maximum qualification tier (>= 1)")
         c.add_argument("--device", choices=("cpu", "cuda"), default=None, help="compute cohort (default CUDA; run infers it from --gpus)")
         c.add_argument("--cuda-model", help="required CUDA model on heterogeneous machines")
         if name == "plan":
@@ -103,7 +124,7 @@ def parser():
     b.add_argument("--json", action="store_true", help="emit full machine-readable board instead of a compact table")
     b.add_argument("--scope", choices=("all", "current", "pinned", "historical", "calibration_diagnostic"), default="all")
     b.add_argument("--candidate", help="filter candidate names by substring")
-    b.add_argument("--tier", type=int, choices=(0, 1, 2, 3), help="minimum qualified tier")
+    b.add_argument("--tier", type=_minimum_tier, help="minimum qualified tier (>= 0)")
     b.add_argument("--outcome", help="filter status or presence of a task gate status")
     b.add_argument("--family", action="append", help="display task/host/source family; repeat for alternatives")
     b.add_argument("--evidence-quality", action="append", help="display receipt provenance, e.g. certified_pinned or imported_recorded; repeat for alternatives")
@@ -117,7 +138,8 @@ def parser():
     for stage in ("plan", "enqueue", "run"):
         inv = inventory_stages.add_parser(stage)
         inv.add_argument("--view", default="discriminator_stability")
-        inv.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=3)
+        inv.add_argument("--through-tier", type=_qualification_tier, default=3,
+                         help="maximum qualification tier (>= 1)")
         inv.add_argument("--device", choices=("cpu", "cuda"), default=None)
         inv.add_argument("--cuda-model")
         inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory-word-split-v1.json"))
@@ -154,6 +176,15 @@ def parser():
         trial.add_argument("spec", help="search id or configs/forge/searches JSON path")
         if stage == "run":
             trial.add_argument("--gpus", default=None, help="physical GPU indices, or cpu; must match the fixed spec")
+    cadence = commands.add_parser("cadence", help="matched lazy-regularization studies and generated comparisons")
+    cadence_stages = cadence.add_subparsers(dest="stage", required=True)
+    for stage in ("plan", "enqueue", "run", "report"):
+        c = cadence_stages.add_parser(stage)
+        c.add_argument("spec", help="cadence study id or JSON path; any supported base technique")
+        c.add_argument("--output", type=Path, help="write the generated .md report and compact .json companion")
+        c.add_argument("--json", action="store_true", help="include complete per-task comparison details on stdout")
+        if stage == "run":
+            c.add_argument("--gpus", help="physical GPU indices or cpu; must match the declaration")
     r = commands.add_parser("recall", help="find successes, failures and unknowns before a new idea")
     r.add_argument("--query", default="")
     r.add_argument("--goal")
@@ -190,7 +221,8 @@ def parser():
     retier = commands.add_parser("retier", help="change only view policy, archive the previous revision, validate and recompute; never enqueue")
     retier.add_argument("view")
     retier.add_argument("--task", required=True)
-    retier.add_argument("--tier", type=int, choices=(1, 2, 3), required=True)
+    retier.add_argument("--tier", type=_qualification_tier, required=True,
+                        help="new qualification tier (>= 1)")
     retier.add_argument("--reason", required=True)
     dispositions = commands.add_parser("test-dispositions", help="check or apply held/removed-from-count test dispositions as archived view revisions; no training")
     dispositions.add_argument("stage", choices=("check", "apply"), help="check writes nothing and exits 1 on drift; apply archives first and is idempotent")
@@ -302,7 +334,7 @@ def main(argv=None):
     # The inventory already records every attempt in the live event stream.
     # Compile the full set of boards once after draining this campaign.
     batch_inventory = (args.command in {"run", "drain"}
-                       or (args.command in {"inventory", "search"} and args.stage == "run"))
+                       or (args.command in {"inventory", "search", "cadence"} and args.stage == "run"))
     queue = Queue(queue_root, report_root=root / "reports/forge",
                   on_completion=None if batch_inventory else publish)
     command = args.command
@@ -433,6 +465,32 @@ def main(argv=None):
         else:
             emit(run_search(root, queue_root, args.spec, devices=args.gpus.split(",") if args.gpus else None, queue=queue))
             publish()
+    elif command == "cadence":
+        from .cadence_study import (plan_study, comparison_report, enqueue_study,
+                                    run_study, report_study, write_report)
+        if args.stage == "plan":
+            result = comparison_report(plan_study(root, queue_root, args.spec, queue=queue))
+        elif args.stage == "enqueue":
+            result = enqueue_study(root, queue_root, args.spec, queue=queue)
+        elif args.stage == "report":
+            result = report_study(root, queue_root, args.spec, queue=queue)
+        else:
+            result = run_study(root, queue_root, args.spec, queue=queue,
+                               devices=args.gpus.split(",") if args.gpus else None)
+        destination = args.output
+        if destination is None and args.stage in {"run", "report"}:
+            destination = Path("reports/forge/cadence-studies") / f"{result['study_id']}.md"
+        if destination:
+            output = destination if destination.is_absolute() else root / destination
+            result["outputs"] = write_report(result, output)
+        if args.json:
+            emit(result)
+        else:
+            emit({**{key: value for key, value in result.items() if key != "lanes"},
+                  "lanes": {lane: {"recommendation": details["recommendation"],
+                                     "evidence_scope": details["evidence_scope"],
+                                     "arms": len(details["trials"])}
+                            for lane, details in result["lanes"].items()}})
     elif command in {"compile", "recall", "board", "readout"}:
         from . import knowledge
         if command == "compile":

@@ -1088,12 +1088,13 @@ def test_real_selected_bispf_headline_keeps_all_eleven_failures_after_restoring_
     progress = publication["family_progress"]
     cohort = next(cohort for family, cohort in _selected_cohorts(progress) if family["id"] == "bispf")
     counts = full_suite_outcomes(cohort, full_suite_tasks(progress))
-    # The restored clock prerequisite adds one unmeasured task, not a pass.
-    assert counts == {"passed": 18, "failed": 11, "other": {"UNKNOWN": 5}, "total": 34}
+    # The restored clock prerequisite and 7 new tasks add unmeasured tasks, not passes.
+    assert counts == {"passed": 18, "failed": 11, "other": {"UNKNOWN": 12}, "total": 41}
     definitions = json.loads((root / "reports/forge/problem-definitions.json").read_text())
     described = {item["task"] for item in definitions["problems"]}
     held = {a["task"] for view in progress["views"] for a in view["assignments"]
-            if a["importance"] == "held" and view["id"] not in progress["scoped_views"]}
+            if a["importance"] == "held" and view["id"] not in progress["scoped_views"]
+            and a.get("qualification_tier", 1) <= 2}
     assert held <= described
     failed = {name for _, cohort in _selected_cohorts(progress) for name in full_suite_tasks(progress)
               if cohort["tasks"][name]["status"] == "FAIL"}

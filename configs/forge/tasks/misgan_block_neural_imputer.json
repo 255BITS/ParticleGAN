@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "misgan_block_neural_imputer",
+  "description": "3-pair MisGAN grading neural imputer G_i([x*m, m, z_i]) on held-out ambiguous single-sensor queries without ppost.",
+  "adapter": "transfer_vector",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "host": "misgan_block_neural_imputer",
+    "steps": 7000,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "host_definition": {
+      "problem": "block",
+      "dimension": 8,
+      "pairs": 3,
+      "neural_imputer": true,
+      "steps": 7000,
+      "batch": 2048,
+      "z_dim": 8
+    },
+    "prior_contract": "recipe_owned_v1"
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "misgan_block_neural_imputer",
+    "eval_samples": 4096,
+    "thresholds": [
+      ["observed_max_error", "<=", 1e-6],
+      ["acc", ">=", 0.95],
+      ["acc_lo", ">=", 0.65],
+      ["missing_std_ratio", ">=", 0.70],
+      ["missing_std_ratio", "<=", 1.30]
+    ]
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

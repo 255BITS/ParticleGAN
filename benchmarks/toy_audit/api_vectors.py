@@ -30,6 +30,69 @@ VERSION = "toy-public-api-vectors-v2"
 DEFAULT_EVAL = 4096
 PROJECTION_KS_MAX = .06
 
+
+class ZeroTanhGenerator(nn.Module):
+    """2-layer MLP with final nn.Tanh() output head for Dirac contraction."""
+    def __init__(self, z_dim: int = 2, hidden_dim: int = 32, out_dim: int = 2):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(z_dim, hidden_dim),
+            nn.LeakyReLU(0.2, inplace=False),
+            nn.Linear(hidden_dim, out_dim),
+            nn.Tanh(),
+        )
+
+    def forward(self, z: torch.Tensor) -> torch.Tensor:
+        return self.net(z)
+
+
+class ResidualBlock(nn.Module):
+    """Residual block with 2 Linear layers and LeakyReLU(0.2)."""
+    def __init__(self, dim: int):
+        super().__init__()
+        self.linear1 = nn.Linear(dim, dim)
+        self.act = nn.LeakyReLU(0.2, inplace=False)
+        self.linear2 = nn.Linear(dim, dim)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return x + self.linear2(self.act(self.linear1(x)))
+
+
+class ResidualMLPGenerator(nn.Module):
+    """16-layer residual MLP generator with identity-initialized skip connections and scaled tanh head.
+
+    1 stem linear + 7 residual blocks (14 linear layers) + 1 head linear = 16 linear layers.
+    Identity initialization: block.linear2 weights and biases are zeroed.
+    """
+    def __init__(self, z_dim: int = 2, hidden_dim: int = 128, n_blocks: int = 7, out_dim: int = 2, scale: float = 5.25):
+        super().__init__()
+        self.scale = scale
+        self.stem = nn.Sequential(
+            nn.Linear(z_dim, hidden_dim),
+            nn.LeakyReLU(0.2, inplace=False),
+        )
+        self.blocks = nn.ModuleList([ResidualBlock(hidden_dim) for _ in range(n_blocks)])
+        self.head = nn.Linear(hidden_dim, out_dim)
+        self.init_weights()
+
+    def init_weights(self):
+        for block in self.blocks:
+            nn.init.orthogonal_(block.linear1.weight)
+            nn.init.zeros_(block.linear1.bias)
+            nn.init.zeros_(block.linear2.weight)
+            nn.init.zeros_(block.linear2.bias)
+        nn.init.orthogonal_(self.stem[0].weight)
+        nn.init.zeros_(self.stem[0].bias)
+        nn.init.orthogonal_(self.head.weight)
+        nn.init.zeros_(self.head.bias)
+
+    def forward(self, z: torch.Tensor) -> torch.Tensor:
+        h = self.stem(z)
+        for block in self.blocks:
+            h = block(h)
+        return self.scale * torch.tanh(self.head(h) / self.scale)
+
+
 # Frozen mathematical proposal definitions and actual arm initializers are
 # expanded below. These dictionaries contain no executable training code.
 PROPOSAL_BASE_SPEC = {'kind': 'gaussian_mixture',
@@ -380,6 +443,68 @@ def _registry():
             resource_change=dict(original_actual_rows=12, current_rows=particles, latent_dim=4, configured_20000_was_not_actual_resource=True),
             phase_prerequisites={"acquisition_step": 1200, "hold_step": 2400, "shift_step": 2401, "recovery_deadline": 2800},
             adaptation="Public GANTrainer host;256 rows are an explicit resource reform, not a rerating of the source's12-row run. Warm/cold restarts use identical bound checkpoints; causal shift qualification also needs the matched frozen checkpoint control.")
+    cases["api-zero-tanh-smoke"] = _case(
+        "api-zero-tanh-smoke", ["zero-tanh-smoke"], "Zero tanh smoke: Dirac point mass contraction",
+        "Contract non-zero latent prior variance (sigma=0.1) to (0.0, 0.0) where tanh'(0)=1.0 without oscillating or saturating at rails.",
+        kind="zero_tanh", steps=1000, batch=128, evaluation=4096, particles=256, z_dim=2,
+        default_recipe="k3p",
+        prior_options=dict(prior_kind="mog", sigma=0.1, standardize=False),
+        thresholds=[
+            ["mean_abs_error", "<=", 0.005],
+            ["rms_error", "<=", 0.01],
+            ["p99_abs_error", "<=", 0.025],
+            ["saturated_fraction", "==", 0.0],
+        ],
+        sampling="public served latent law; output_noise=False",
+        law=dict(kind="dirac_zero", center=[0.0, 0.0]),
+        adaptation="Public GANTrainer host with 2-layer MLP and nn.Tanh() output head; MoGParticlePrior(sigma=0.1)."
+    )
+    cases["api-zero-tanh-rail-escape"] = _case(
+        "api-zero-tanh-rail-escape", ["zero-tanh-rail-escape"], "Zero tanh rail escape: (+0.9, -0.9) to (0, 0)",
+        "Escape the tanh saturation rail at (+0.9, -0.9) after update 1000 shift and achieve sustained settling at (0, 0) within 400 updates.",
+        kind="zero_tanh_rail_escape", steps=2000, batch=128, evaluation=4096, particles=256, z_dim=2,
+        default_recipe="k3p",
+        prior_options=dict(prior_kind="mog", sigma=0.1, standardize=False),
+        thresholds=[
+            ["mean_abs_error", "<=", 0.005],
+            ["rms_error", "<=", 0.01],
+            ["p99_abs_error", "<=", 0.025],
+            ["saturated_fraction", "==", 0.0],
+        ],
+        shift_step=1001,
+        settling_window=400,
+        initial_target=[0.90, -0.90],
+        shifted_target=[0.0, 0.0],
+        sampling="public served latent law; output_noise=False",
+        law=dict(kind="target_shift", initial=[0.90, -0.90], shifted=[0.0, 0.0], shift_step=1001),
+        adaptation="Public GANTrainer host with 2-layer MLP and nn.Tanh() output head; dynamic target shift at step 1001."
+    )
+    cases["api-grid100-mlp16"] = _case(
+        "api-grid100-mlp16", ["deep100g-mlp16"], "100 Gaussians 16-layer MLP stress",
+        "Recover all 100 equal-weight Gaussian modes with a 16-hidden-layer 128-wide LeakyReLU MLP generator.",
+        kind="grid100_mlp16", steps=7000, batch=2048, evaluation=20000, particles=20000, z_dim=2,
+        default_recipe="k3p",
+        problem="grid100",
+        prior_options=dict(prior_kind="mog", sigma=0.025, standardize=False),
+        thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS)},
+        sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus output noise; diagnostics remove additive output noise only",
+        law=dict(kind="equal100_gaussian", problem="grid100", sigma=0.03),
+        adaptation="Public GANTrainer host with 16-hidden-layer 128-wide LeakyReLU(0.2) MLP generator and 3-layer Fourier-2 critic."
+    )
+    cases["api-grid100-res16-tanh"] = _case(
+        "api-grid100-res16-tanh", ["deep100g-res16-tanh"], "100 Gaussians 16-layer ResMLP + scaled tanh",
+        "Recover all 100 equal-weight Gaussian modes with a 16-layer residual MLP generator and S=5.25 bounded tanh head without rail saturation.",
+        kind="grid100_res16_tanh", steps=7000, batch=2048, evaluation=20000, particles=20000, z_dim=2,
+        default_recipe="k3p",
+        problem="grid100",
+        scale=5.25,
+        max_saturated_fraction=0.001,
+        prior_options=dict(prior_kind="mog", sigma=0.025, standardize=False),
+        thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS), "saturated_fraction": 0.001},
+        sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus output noise; diagnostics remove additive output noise only",
+        law=dict(kind="equal100_gaussian", problem="grid100", sigma=0.03),
+        adaptation="Public GANTrainer host with 16-layer residual MLP generator (identity-initialized skip connections) and S=5.25 scaled tanh head."
+    )
     return cases
 
 
@@ -423,10 +548,46 @@ def _empirical_projection_ks(points, reference):
 def score_case(metadata, samples, completed_steps=0):
     """Pure evaluator for supplied held-out samples; no trainer or optimizer."""
     points = torch.as_tensor(samples).detach().to(device="cpu", dtype=torch.float32)
-    if points.ndim != 2 or len(points) == 0 or not torch.isfinite(points).all():
+    if points.ndim != 2 or len(points) == 0:
+        raise ValueError("the vector gate needs nonempty, finite row-major points")
+    if not torch.isfinite(points).all():
+        kind = metadata["kind"]
+        if kind in ("zero_tanh", "zero_tanh_rail_escape"):
+            metrics = dict(mean_abs_error=float("inf"), rms_error=float("inf"),
+                           p99_abs_error=float("inf"), saturated_fraction=1.0, all_finite=False)
+            return dict(metrics=metrics, passed=False, failed_bounds=["all_finite == true"])
+        elif kind in ("native100", "grid100_mlp16", "grid100_res16_tanh"):
+            metrics = dict(all_finite=False, modes=0, hq=0.0, precision=0.0)
+            return dict(metrics=metrics, passed=False, failed_bounds=["all_finite == true"])
         raise ValueError("the vector gate needs nonempty, finite row-major points")
     kind = metadata["kind"]
-    if kind == "native100":
+    if kind == "zero_tanh":
+        if points.shape[1] != 2:
+            raise ValueError("zero_tanh points need two coordinates")
+        abs_errors = torch.abs(points)
+        mae = float(abs_errors.mean())
+        rmse = float(torch.sqrt((points ** 2).mean()))
+        p99 = float(torch.quantile(abs_errors, 0.99))
+        saturated = float((abs_errors >= 0.99).float().mean())
+        metrics = dict(mean_abs_error=mae, rms_error=rmse, p99_abs_error=p99,
+                       saturated_fraction=saturated, all_finite=True)
+        failed = _bounds(metrics, metadata["thresholds"])
+    elif kind == "zero_tanh_rail_escape":
+        if points.shape[1] != 2:
+            raise ValueError("zero_tanh_rail_escape points need two coordinates")
+        shift_step = metadata.get("shift_step", 1001)
+        target_center = torch.tensor(metadata.get("initial_target", [0.90, -0.90]), dtype=points.dtype) if completed_steps < shift_step else torch.tensor(metadata.get("shifted_target", [0.0, 0.0]), dtype=points.dtype)
+        diff = points - target_center
+        abs_errors = torch.abs(diff)
+        mae = float(abs_errors.mean())
+        rmse = float(torch.sqrt((diff ** 2).mean()))
+        p99 = float(torch.quantile(abs_errors, 0.99))
+        saturated = float((torch.abs(points) >= 0.99).float().mean())
+        metrics = dict(mean_abs_error=mae, rms_error=rmse, p99_abs_error=p99,
+                       saturated_fraction=saturated, all_finite=True,
+                       target_center_x=float(target_center[0]), target_center_y=float(target_center[1]))
+        failed = _bounds(metrics, metadata["thresholds"])
+    elif kind in ("native100", "grid100_mlp16", "grid100_res16_tanh"):
         if points.shape[1] != 2:
             raise ValueError("100-mode points need two coordinates")
         theta = _native_angle(metadata, completed_steps)
@@ -442,6 +603,13 @@ def score_case(metadata, samples, completed_steps=0):
         failed.extend(_bounds(metrics, [["accuracy_" + key, "<=", value] for key, value in accuracy.LIMITS.items()]))
         if not accuracy.passes_accuracy(exact) and not any(x.startswith("accuracy_") for x in failed):
             failed.append("accuracy sample validity")
+        if kind == "grid100_res16_tanh":
+            scale = metadata.get("scale", 5.25)
+            sat = float((torch.abs(points / scale) >= 0.99).float().mean())
+            metrics["saturated_fraction"] = sat
+            max_sat = metadata.get("max_saturated_fraction", 0.001)
+            if sat > max_sat:
+                failed.append(f"saturated_fraction <= {max_sat}")
     elif kind == "vector":
         spec = metadata["spec"]
         dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
@@ -499,7 +667,14 @@ def _rotation(theta, *, device="cpu"):
 
 def _target(case, n, rng, step, *, device="cpu"):
     kind = case["kind"]
-    if kind == "native100":
+    if kind == "zero_tanh":
+        return torch.zeros((n, 2), device=device, dtype=torch.float32)
+    if kind == "zero_tanh_rail_escape":
+        if step >= case.get("shift_step", 1001):
+            return torch.zeros((n, 2), device=device, dtype=torch.float32)
+        initial = torch.tensor(case.get("initial_target", [0.90, -0.90]), device=device, dtype=torch.float32)
+        return initial.expand(n, 2).clone()
+    if kind in ("native100", "grid100_mlp16", "grid100_res16_tanh"):
         return problems.sample_real(case["problem"], n, device=device, generator=rng) @ _rotation(_native_angle(case, step), device=device).T
     if kind == "vector":
         # Mathematical helper accepts CPU generators; the caller moves only data.
@@ -560,9 +735,12 @@ class VectorFixture:
         options.update(case.get("recipe_overrides", {}))
         from .api_contract import validate_recipe_overrides
         self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_vectors"}, recipe_name, recipe_overrides)
+        if case.get("prior_options", {}).get("prior_kind") == "mog":
+            options.update(prior_kind="mog", standardize=case["prior_options"].get("standardize", False),
+                           sigma_rel=case["prior_options"].get("sigma_rel", 0.025))
         options.update(self.recipe_overrides)
         self.recipe = get_recipe(recipe_name, **options)
-        data_device = "cpu" if case["kind"] in ("vector", "two_pole") else self.device
+        data_device = "cpu" if case["kind"] in ("vector", "two_pole", "zero_tanh", "zero_tanh_rail_escape") else self.device
         self.data_rng = torch.Generator(device=data_device).manual_seed(seed)
         self.generator_data_rng = torch.Generator(device=data_device).manual_seed(seed + 101)
         self.batch_sequence_sha256 = hashlib.sha256(b"toy-batches-v2").hexdigest()
@@ -583,6 +761,20 @@ class VectorFixture:
                     with torch.no_grad():
                         generator.weight.copy_(torch.eye(2, device=self.device)); generator.bias.zero_()
                     critic = SimpleMLPDiscriminator(2, 128, 3, 3)
+                elif case["kind"] == "grid100_mlp16":
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
+                    generator = SimpleMLPGenerator(self.recipe.z_dim, 128, 16, 2)
+                    critic = SimpleMLPDiscriminator(2, 128, 3, 2)
+                    init.deterministic_orthogonal_(generator, seed=seed)
+                elif case["kind"] == "grid100_res16_tanh":
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
+                    generator = ResidualMLPGenerator(self.recipe.z_dim, 128, 7, 2, scale=case.get("scale", 5.25))
+                    critic = SimpleMLPDiscriminator(2, 128, 3, 2)
+                elif case["kind"] in ("zero_tanh", "zero_tanh_rail_escape"):
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
+                    generator = ZeroTanhGenerator(self.recipe.z_dim, 32, 2)
+                    critic = SimpleMLPDiscriminator(2, 32, 2, 2)
+                    init.deterministic_orthogonal_(generator, seed=seed)
                 elif case["kind"] == "two_pole":
                     from benchmarks.locked_shared.two_pole import HostCritic
                     generator = nn.Linear(1, 1)
@@ -680,7 +872,7 @@ class VectorFixture:
         # minimum-size gate. A smaller diagnostic cannot earn a full gate PASS.
         actual_n = 12 if self.metadata["kind"] == "two_pole" else n
         sample_rng = torch.Generator(device=self.device).manual_seed(seed)
-        output_noise = self.metadata["kind"] == "native100"
+        output_noise = self.metadata["kind"] in ("native100", "grid100_mlp16", "grid100_res16_tanh")
         if self.metadata.get("caller_owned"):
             prior = self.prior
             samples = self.generator(prior.sample(actual_n, generator=sample_rng)[0])
@@ -689,11 +881,11 @@ class VectorFixture:
                                           fixed_first_n=self.metadata["kind"] == "two_pole")
         samples = samples.detach().cpu()
         scored = score_case(self.metadata, samples, self.completed_steps)
-        rng_device = "cpu" if self.metadata["kind"] in ("vector", "two_pole") else self.device
+        rng_device = "cpu" if self.metadata["kind"] in ("vector", "two_pole", "zero_tanh", "zero_tanh_rail_escape") else self.device
         target_rng = torch.Generator(device=rng_device).manual_seed(seed + 100003)
         target = _target(self.metadata, actual_n, target_rng, self.completed_steps, device=self.device).detach().cpu()
         views = [_view("Whole target law", target, samples, self.metadata)]
-        if self.metadata["kind"] == "native100":
+        if self.metadata["kind"] in ("native100", "grid100_mlp16", "grid100_res16_tanh"):
             clean = self.trainer.sample(actual_n, generator=torch.Generator(device=self.device).manual_seed(seed), output_noise=False).cpu()
             clean_score = score_case(self.metadata, clean, self.completed_steps)
             scored["metrics"].update({"clean_" + key: value for key, value in clean_score["metrics"].items()})
@@ -718,9 +910,15 @@ class VectorFixture:
         return scored
 
     def _centers(self):
-        if self.metadata["kind"] == "native100":
+        if self.metadata["kind"] in ("native100", "grid100_mlp16", "grid100_res16_tanh"):
             centers = problems.evaluation_geometry(self.metadata["problem"])[0]
             return centers @ _rotation(_native_angle(self.metadata, self.completed_steps)).T
+        if self.metadata["kind"] == "zero_tanh":
+            return torch.zeros((1, 2))
+        if self.metadata["kind"] == "zero_tanh_rail_escape":
+            if self.completed_steps >= self.metadata.get("shift_step", 1001):
+                return torch.zeros((1, 2))
+            return torch.tensor(self.metadata.get("initial_target", [0.90, -0.90]))[None, :]
         if self.metadata["kind"] == "vector" and self.metadata["spec"]["kind"] == "gaussian_mixture":
             return torch.tensor(self.metadata["spec"]["means"]) * vector_tasks.target_scale(self.metadata["spec"], self.completed_steps)
         if self.metadata["kind"] == "ring":
@@ -730,8 +928,10 @@ class VectorFixture:
         return None
 
     def _zoom_sigma(self):
-        if self.metadata["kind"] == "native100":
+        if self.metadata["kind"] in ("native100", "grid100_mlp16", "grid100_res16_tanh"):
             return .03
+        if self.metadata["kind"] in ("zero_tanh", "zero_tanh_rail_escape"):
+            return .10
         if self.metadata["kind"] == "ring":
             return .07
         spec = self.metadata["spec"]
