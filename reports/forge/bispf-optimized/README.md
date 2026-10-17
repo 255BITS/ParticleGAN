@@ -47,9 +47,31 @@ before iteration. It checks both augmented orthogonality and the relation of
 the result to the original gradient. This removes all observed late-window
 convolution fallbacks at 64 pixels, with a plain median of 102.02 ms. Its
 24-iteration limit still rejects large critic kernels at 256 pixels, giving
-1,513.20 ms. Increasing the bound and reducing launch overhead are the next
-measured engineering steps. This iteration also has no full quality or
-performance campaign execution.
+1,513.20 ms. This iteration also has no full quality or performance campaign execution.
+
+The third solver adds optimizer-local CUDA graphs, checks from eight through
+32 iterations, and retains the same fail-closed numerical guards. At source
+`4d70a8039e1e5d969d01c664dec0c2b4ea47f612`, plain medians improve to
+71.74 ms at 64 pixels but remain 1,426.41 ms at 256 pixels. Peak allocated memory
+rises from about 222 to 349 MiB at 64 pixels, and from 2,119 to 2,344 MiB at 256.
+The first update pays graph-capture overhead. The large-image target still fails.
+
+Its ordinary quality study was started before the 256-pixel profile finished,
+then canceled when that profile failed the target. Preserve the completed
+Gaussian smoke PASS (attempt `697e75ed0af449a7b3beb42dfcbd3763`, 1,000
+updates, 23.45 seconds worker wall time) and the canceled two-pole attempt
+`a6c0a67123eb4403b9dc10b5af0a9436`. Neither constitutes full qualification.
+The other ordinary tasks and all six performance-matrix arms were unexecuted.
+
+A separately bounded [guard capture](guard-capture.json) reproduces the original
+final state and captures every failed batch rather than one representative per
+shape. Eager, cold-cache and warm-cache replay are bitwise equal: the graph
+cache is not the cause. Large early critic gradients make the fixed absolute
+smoothing scale too small for reliable FP32 inverse-root recovery. Raising the
+iteration count can increase relation drift after a slice briefly converges.
+The original guards correctly reject those slices. The [kernel audit](KERNEL_AUDIT.md)
+retains the actual-input solver alternatives, prototype identities and negative
+results; its microbenchmarks provide no training-quality credit.
 
 Every successful approximate branch omits native SVD's hard numerical-rank
 cutoff. This is an explicit numerical trainer change. On one captured 512×512
