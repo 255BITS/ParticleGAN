@@ -59,6 +59,39 @@ The tighter initial norm bound reduced actual generator examples from twelve
 to eight cubic steps, including 17.68→11.58 ms on a repeated 512×512 batch. It
 did not resolve the ill-conditioned critic failures.
 
+## What scales with larger images
+
+For a convolution with `g` groups and a `kh×kw` kernel, the optimizer constructs
+`g·kh·kw` channel matrices, each `Cout/g × Cin/g`. Native per-offset DualNorm
+runs a separate thin SVD for each active matrix. Its cost therefore depends on
+channel widths, kernel offsets, grouping and the number of layers; image pixel
+count is not an input to these decompositions. In this DCGAN benchmark,
+increasing resolution from 64 to 256 also adds two network stages, including
+additional deep blocks at the 512-channel cap. The observed optimizer scaling
+combines that architectural growth with the larger image computation.
+
+The Frobenius rule uses reductions and pointwise operations over the matrix
+entries. The quintic rule orients each matrix as `m×n`, with `n≤m`, and performs
+five fixed rounds of matrix multiplication: two products involving an `m×n`
+block and three `n×n` products per round. Its work still grows cubically for
+square channel matrices and retains an auxiliary `n×n` block per offset.
+Grouping changes both matrix count and matrix dimensions, so neither filter
+has a single speed factor that applies to every convolution architecture.
+
+These are hybrid dispatches: only CUDA convolution groups with more than 32
+channels on at least one side use the changed rule. CPU, smaller per-group
+kernels, dense weights, vector updates and prior updates retain native behavior.
+A model dominated by large dense layers can therefore retain the SVD bottleneck.
+Both alternatives also change the update law, requiring their own quality gates.
+
+Every rule still pays for the full generator/critic forward and backward work
+and BISPF's differentiable critic-input gradient penalty. Larger spatial feature
+maps and their retained gradient activations continue to increase full-step
+time and peak memory; removing SVD does not remove that image-resolution cost.
+Use Forge's complete-update latency and allocated/reserved memory receipts to
+assess that limit. Mock-image performance and the width-64 toy quality gates
+provide no large-natural-image quality claim.
+
 To replay these algebra prototypes without launching training, restore the
 byte-exact input artifacts and run:
 
