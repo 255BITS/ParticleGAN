@@ -19,6 +19,18 @@
       "duration_seconds": 2.19,
       "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/software-checks/bispf-alternative-selection-final-tests.log",
       "log_sha256": "34e8cd5f40765b868993c92c10fd23441a3a54bc9937ba0393aeef6c4172718b"
+    },
+    {
+      "scope": "current inventory, family reports, comparison-policy regression",
+      "source_commit": "8cc67eb201c64f1c238de64f1c36ca177325e81b",
+      "command": "CUDA_VISIBLE_DEVICES='' /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_family_reports.py tests/test_forge_comparison_policy.py",
+      "result": "248 PASS; generated-artifact freshness pending final publication",
+      "passed": 248,
+      "failed": 1,
+      "duration_seconds": 44.83,
+      "failure": "test_committed_pages_and_every_drilldown_link_match_the_generator: new diagnostic declarations/history are not yet included in current family_progress; final inventory generation is intentionally deferred until quality selection",
+      "local_log": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/publication-regression-tests.log",
+      "log_sha256": "2d2e42a001ec2778ace86a2be2cb2e5f60122282af7bff6c2dd4a457e0093704"
     }
   ],
   "limitations": [
