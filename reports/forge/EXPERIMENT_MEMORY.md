@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 817. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 820. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -20,7 +20,7 @@ Records: 817. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Pending readouts
 
-k3p-global-repair-v1, ka2-global-repair-v1, r1r2-global-repair-v1
+atlas, bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212, bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5, bcap--148a58dc4036cfc2d71a10b427582aeea304b4ac70874ff2fe7ec02f31cee561, bcap--17c9d255a2f8e1adfc1e4ec686e3cee3c7e3fd40fc7979328d4e1955cc2d29a1, bcap--263d190ebb4c40ddb21337a16a598f5ffcca4639031b3b70aaa3036aec67b31e, bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604, bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3, bcap--655141ae1d99b0b08dcbac36abbb6f135473d47d389f2ec9d41d9aa6d1201fbe, bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0, bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc, bcap--6c72e4aaf8ffe22be663a6e041971cc22bbee9402bb0095c4935aa167b6ccb03, bcap--8a9884cad1e87d5d950d8dff3d4901a787e8f94fc99b00e83877fdf6e1a932c2, bcap--90dcc2c3039f9f4c7ed2b1de03dec0c75cec2e9d386de0bb302f90a5f923de23, bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9, bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e, bcap--c89e202b7830cfc38743c25fc1b34ca8ceef3f113c4f091017cac7c843972da3, bcap--ccfa83125643932bdfc88a2178a94ec019a2687d7915dae1ed0d6852925f603d, bcap--e8c9fcd62a13b748b0a1c97543b828ee618833ea45789681323a37c9c300d773, bcap--f0163dead110803a0e982cacfa2589918cd7345eea1655c76a3e3f21b0037887, bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383, bcap-ada-nsgda--2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675, bcap-ada-nsgda--628f53f4f05a987ec17de0f5b2e780b2a43ec37a7e9bc13a92f9fcf529498ece, bcap-ada-nsgda--85e094213523086f45b393ee1dbb31f4d2786bfb648fa6343db420ead0089cf6, bcap-ada-nsgda--ecd97e3001a4e027dee7fb01f7e5b355a18314a17cc15b157514d2b6af27188e, bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d, bcap-dualnorm--5b1ef16597377d87cbc5a4cc4a152d207884e3d3c3b7ca48968f98c77a11fa36, bcap-dualnorm--716c59d5ea2fde1ff06d1170c4e856f4201eab877f94fa2bbb5fc1a50a63f724, bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249, bcap-dualnorm--9b189bf88659e26fb9d6ffac60dc8e768953bb81cc4e5a08bb621315eb23df50, bcap-dualnorm--9bd14ef912f8eb82e2dfd1a2c3be9449c6522e783c6372b970029f18faf26afd, bcap-dualnorm--a0b49070f142c7e5fa0a02b59704572c8fad809c8580ddbd6460e53e25566a1f, bcap-dualnorm--a181de95ac0bc6f5aacbc1bf7012f0ef141335e07e24cd0f9c777dd75fff3adb, bcap-dualnorm--b58b1cb2ad10de49ce185b1599285ce0b2c1c955f116e0da5e3b9d5464f57d21, bcap-dualnorm--cb59801fb5f793c77441fab1518bf61c4a60c5bf8ac707d6826c89d8d7b6a436, bcap-dualnorm--ece92e92b60d647e1ab34eeebe1b91ad9def7934ce50fc7d67b654884f06051e, bcap-dualnorm--f195eee9cc636a0db466b10192705a4f2f82484bf617abd0d4b567bad99c5b5e, bcap-dualnorm--f808b02bc8ccb3b4784bc24996f8e942ac2f4d072ca73cb4eb52980aec664b6c, bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864, bcap-dualnorm-d-only--d0e7f03963ecb85678d3319f54f6ab31fbd4ac4ad7e77e5394ecca6bfd12af4a, bcap-dualnorm-d-only--d3d5a2efb99e4946fbad23c361d86c7779b089269b3913059af97d837f9180bc, bcap-dualnorm-d-only--ef8fd85100fad0bbebaa0362be3ab81445c46c885050ad9568428225f0636085, bcap-nsgda-global--393c89658046680194170061b341d39118adfb1de6ef06a60154e41e3c2f89e7, bcap-nsgda-global--4d46c3064ad21b57f692a8edda5a7d6978e793ba7713f533fafdee6ee684e8d0, bcap-nsgda-global--9486b7a0c32346f4d1d598ee3954920068af501e85b4fcbda0a77047c508dfb5, bcap-nsgda-global--d3217ee7c19546a7c3ee4eb42d16c32ac0d4e2860bea465e28d26daf5a0cc42d, bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b, bcap-nsgda-layer--5dbe4d241e23201e8fbf62c975602d3950c7c0b0a943785666f4956a55b882d9, bcap-nsgda-layer--914acba8f40d868382473145641a488139d5b13be7100ca510250dd4a1484dae, bcap-nsgda-layer--cdf76062b3cde40373c7f5702696cd8a605eaa3cc7b2aad7be47e9e9365f3efa, bcap-original-horizon-diagnostics-v1, bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823, bcap-particle-rownorm-only--c6ce0bcdd200531af05a8c88a9f53f4a3234b967048d8452d15673f332583ca4, bcap-particle-rownorm-only--dd858a09e394fe2722054ee23b18c6d0dede5665f266400c7b1b22284f94c04f, bcap-pure--2889aefa5f93bfa03e80c20614756f076e9def9b54969089929bbe6ee65ec58f, bcap-pure--51ceca8aa8932f319fe403a184501292b5b004f9f072468a4bbb1af93f516519, bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9, bcap-pure--8e5f19612de4c3b1a27e0e143aaed4621e79696fb37050a30271fa2f823cd9bf, bcap-pure--f1334418d949b79276fef9885d312d59193e888a647f3d11a75a7558acbb80c9, bcap-sgda--47c831d444f171a81e1efe3c1f0ce5e59792d4fb0ad0d86a1b5a183000188736, bcap-sgda--64346f2fe9f5eaa642c065acc8657011d4ede6f576ea5eb698231f36c280982d, bcap-sgda--64dd4c5c27562ac16f3b12b17903312f7c0f03e541aa4df906323026d96addc9, bcap-sgda--8abf3d4551b0152f3ed4416099b66fb9f299f8455bca0587e0b4fa71861a13f7, bcap-sgda--d6bc8507ebb19649754af5075970942d5044a3b6bc10b1019d29edcbd8de2201, bcap-tier2-round6-control-v1, bcap-tier2-round6-half-network-v1, bcap-tier2-round6-late-anneal-v1, bcap-tier2-round6-prior-smoothing-v1, bcap-tier2-round6-zero-damping-v1, bispf-v2, constraint_geometry-control-v1, constraint_geometry-nonascent-v1, e22, five-word-joint-ka2-v1, forge-no-critic-penalty, forge-onboarding-anchor-ablation, hydraulic-output-travel-v1, information_geometry_spectral_half_v1, k3p, k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b, k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c, k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a, k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f, k3p-a2-off-native-diagnostic, k3p-bcap-matched-v1, k3p-no-output-noise-diagnostic, k3p-r1r2-matched-v1, ka2, ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f, ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d, ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f, ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03, kinetic_transport_sliced_v1, r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b, r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6, r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46, r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f, r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27, r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595, r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d, r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd, r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff, r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743, r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe, r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a, r3gan-stacked-training-toy-v1, release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c, release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f, release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e, release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26, release07-gan-v3-task-adapted-v1, thermodynamic-bcap-optimism-v1
 
 ## Experiment and family records
 
@@ -4456,6 +4456,22 @@ The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed For
 
 [Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
 
+### bispf-v2 · readout-c2d279f7d47ac009ee80d771
+
+**Scope:** current; scientific; revision `96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967`.
+
+BISPF v2 repairs at least 6/11 Tier 2 failures on discriminator_stability reaching >= 16/21 passes while preserving all 7 Tier 1 passes (22/22 across views) and all 10 passing Tier 2 tasks with 0 regressions.
+
+**Observed:** {'FAIL': 11, 'PASS': 19}; wall seconds 2565.992; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.9519, mass_tv=0.092041
+
+Born-Infeld Sinkhorn Particle Flow v2 (BISPF v2, bispf-v2) achieves full qualification through Tier 3: passing 7/7 Tier 1 tasks (100% across all 6 views), 10/10 required Tier 2 baseline tasks with 0 regressions, and Tier 3 endurance qualification with ring_hold (1200/1200 checks, 0 failures) and ring_extension (300/300 checks, 0 failures) PASS. Recomputed complete live curves and terminal suffixes confirm stability under direct thermal hook scaling, SBNP covariance tethering, and late-training harmonic mode capture.
+
+**Next:** Promote bispf-v2 to repository-wide default selection in family-current-v1.json, refresh publication records, and compile final memory.
+
+[Evidence](../../reports/forge/bispf/README.md) · [Record](records/readout-c2d279f7d47ac009ee80d771.json)
+
 ### k3p · readout-c3df7159c90725fdef1cb700
 
 **Scope:** calibration_diagnostic; scientific; revision `ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4`.
@@ -4648,6 +4664,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### ring16-duration-20261011 · ring16-duration-20261011-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `257f8c355e756a3d615c369ef3774220951ff6bf121b60a4392a39b98a50d4de`.
+
+More unchanged training may repair the three selected ring density failures beyond 1,600 updates.
+
+**Observed:** {'FAIL': 3}; wall seconds 137.861; mechanism `execution_budget_only`.
+
+ring16_acquisition__r1r2__duration6400: modes=16, hq=0.94775, mass_tv=0.051514; ring16_acquisition__ka2__duration6400: modes=16, hq=0.87598, mass_tv=0.064697; ring16_acquisition__k3p__duration6400: modes=16, hq=0.89648, mass_tv=0.070312
+
+Three exact archived public-API CUDA continuations add 14,400 updates without replaying prefixes. All three fail the terminal gate at 6,400 updates. R1/R2 first reaches five consecutive passes at update 5,217 and its longest streak is 19 checks. It ends with only three terminal passes because minimum eigenvalue spread fails at update 6,350 (0.13328 < 0.15), despite a fully passing endpoint: HQ 0.947754 and covariance error 0.525637. KA2 and K3P have no full passing observations and finish with HQ 0.875977/0.896484 and covariance error 1.783269/1.599982. More unchanged updates improve all three recipes, but duration alone does not establish reliable terminal quality. The 400-update schedule stays fixed, so this study does not isolate schedule decay as the cause. Exact restores, cap-only extensions, final optimizer counts, complete consumed RNG checkpoints, matching continuation target batches and saved-sample checks pass. Original 1,600-update FAIL grades and the current leaderboard remain unchanged.
+
+**Next:** Stop this bounded duration round. A separately declared schedule-horizon comparison at a fixed 6,400-update cap is the next useful option for KA2/K3P. R1/R2 also needs local spread retention assessed. Preserve recipes, prior, target, architecture, seed 0, cadence and full gates; reuse the saved longer-budget baseline. No automatic follow-up, seed study, qualification or default adoption.
+
+[Evidence](../../reports/forge/ring16-duration-20261011/results.json) · [Record](records/ring16-duration-20261011-readout.json)
+
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-failure-saved-diagnosis-v1
 
 **Scope:** saved_output_and_checkpoint_diagnosis; family_context; revision `e90fc925c996dccff3a054913a040cd4b3b76023972294062139fe5815d7db50`.
@@ -4695,6 +4727,22 @@ Four CUDA controls exactly reproduce historical ordinary critic gradients. Seria
 **Next:** Prioritize deterministic continuous truncation and retain weak-gradient noise as a second supported candidate for a separately frozen whole-configuration Tier1 comparison. Exact reload attribution needs scoped graph-construction/scheduling controls or executed-node order capture. Run Tier2 retention only after required ordinary gates pass. Stop completed every-step damping/sign-flip negatives; no seed study, automatic continuation, default adoption or qualification follows.
 
 [Evidence](../../reports/forge/ring16-followup/results.json) · [Record](records/ring16-runtime-and-interventions-v1.json)
+
+### ring16-schedule-20261011 · ring16-schedule-20261011-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `a6bf9a8d59af365fca1e7fa319c512dac16ccca1c2fe71e3e5ef942cbfb56df7`.
+
+At fixed 6,400 updates, full-budget schedules improve sustained ring density compared with the saved 400-horizon baselines.
+
+**Observed:** {'PASS': 3}; wall seconds 178.244; mechanism `bundled_schedule_horizon_intervention`.
+
+ring16_full_schedule6400_v1__r1r2: modes=16, hq=0.97754, mass_tv=0.050293; ring16_full_schedule6400_v1__ka2: modes=16, hq=0.97485, mass_tv=0.054688; ring16_full_schedule6400_v1__k3p: modes=16, hq=0.96338, mass_tv=0.040771
+
+All three full-schedule runs pass the original full ring gate at 6,400 updates: K3P has 66 terminal passing observations, KA2 47 and R1/R2 exactly 5 (required minimum 5). Matched saved 400-horizon baselines have terminal streaks 0/0/3 respectively and all fail. Final covariance errors change K3P 1.599982 to 0.567272, KA2 1.783269 to 0.563027 and R1/R2 0.525637 to 0.423491 (limit 0.85). All endpoints recover 16 modes with mass TV below 0.15 and HQ above 0.85. This supports schedule exhaustion as a major contributor to the ring failures; the coupled intervention does not identify LR alone as the cause. R1/R2 is fragile: update 6,317 fails minimum eigenvalue spread, and its endpoint ratio 0.157181 barely clears 0.15. KA2 last fails minimum spread at 5,617; K3P last fails covariance at 5,300. Every new arm still fails at the sampled 1,600/3,200/4,800 budget cuts. Frozen archived source/runtime, initial tensors/prior, actual target batches, cadence, clean-live sampling and the serialization boundary at 1,600 match. The first 1,600 baseline batches are verified by frozen-law replay and endpoint RNG state; the subsequent 4,800 by the actual baseline trace digest. No baseline is retrained. Source-bound receipts, restored states, final optimizer counts and saved-sample gate recomputations pass. This ring-only diagnostic changes neither original qualification results nor the current leaderboard. The separate clock audit remains unresolved.
+
+**Next:** Conclude this bounded three-run round. Prioritize K3P and KA2 for a future declared full-budget schedule policy comparison across the required task suite before selecting any global recipe. Inspect saved R1/R2 per-component spread and covariance near its late failures before proposing a repair. Treat clock-free eligibility as a separate mechanism question: longer schedules retain explicit time dependence. No automatic additional training, seed study, qualification or default adoption.
+
+[Evidence](../../reports/forge/ring16-schedule-20261011/results.json) · [Record](records/ring16-schedule-20261011-readout.json)
 
 ### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · ring16-serialized-live-v1
 
@@ -5237,4 +5285,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `4ff6b2481bc3060d6505864448a6b24a430342cd66aa60091fa982a3913c3219`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `e3d4fcf770e3b394559fcd5f99c80852df0ba0184ca6a9f6f96cdbe604660c02`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

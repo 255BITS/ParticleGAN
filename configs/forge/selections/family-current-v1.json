@@ -905,22 +905,22 @@
       "trainer_family": "bcap-dualnorm"
     },
     {
-      "candidate_id": "bispf-v1",
-      "candidate_revision": "45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b",
-      "cohort": "c05372e7eb5c236de0a296c2b77ba9f572ee36ca06da7d7afcafa62653bbebcd",
+      "candidate_id": "bispf-v2",
+      "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967",
+      "cohort": "32a72f2c08988465153a840f30f0926f2f6164347cde45c03d69dbb1c8a852a6",
       "execution_backend": "cuda",
       "measurement_views": [
         "discriminator_stability"
       ],
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "Complete Tier 1 and Tier 2 ordinary CUDA measurement of Born-Infeld Sinkhorn Particle Flow (BISPF) on the BCAP DualNorm leader recipe.",
+      "reason": "Complete Tier 1, Tier 2, and Tier 3 ordinary CUDA measurement of Born-Infeld Sinkhorn Particle Flow v2 (BISPF-v2) on the BCAP DualNorm leader recipe.",
       "recipe_sha256": "2ff56ec5abd077ede8ec957ad679fa1d2e0ab9611ab3fbbd354c7bc419d81ae3",
       "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
-      "runtime_cohort_sha256": "6421ba55ca8249f676197d4c8920ffe4cc5286a6cc078f675d9ab3909662c694",
-      "scientific_row_sha256": "d3979921c5b9824d92d5d0d33587cc6f1b529e856faf24a613e433dcd1e07b25",
+      "runtime_cohort_sha256": "3faddec347a0533b6f201221400e07a0fbf0223d672bd6fb4403ccd4588ef110",
+      "scientific_row_sha256": "0cbf26323981730d0da2cad1aad167af8787b03ca33b3d217f7c2a1fd4785ffb",
       "selection_kind": "current_measurement",
-      "source_digest": "fafd661541083840ae55fe9b4b282aa575f68f5f6652ecbe7b6e8e234ae36d8f",
-      "task_keys_sha256": "ebe03eac37a7bd0a489a8e057e3ff5f709847d3a8fc2f1f48cab5ce23a6dcfbc",
+      "source_digest": "df5ba19b79b329442f5141da24e4b22fa04569b8def42eb849b7af6d1693e141",
+      "task_keys_sha256": "8bd4fa5b69650ac88dbc1dd50de20f3fd222b38e1cdf8f2b86a4fa671fd3c74a",
       "trainer_family": "bispf"
     },
     {

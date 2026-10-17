@@ -54,3 +54,14 @@
 | 2 | `rotated100` | FAIL | `precision=0.26601` (vs 0.28969 leader), `mass_tv=0.14231`, `center_rms_sigma=1.36376` |
 | 2 | `staggered100` | FAIL | `precision=0.34184` (vs 0.29954 leader), `mass_tv=0.12023`, `center_rms_sigma=1.06759` |
 | 3 | `ring_hold` / `ring_extension` | BLOCKED | Blocked by incomplete Tier 2 qualification (`10/21` PASS) |
+
+## BISPF-v2 (`bispf-v2`, commit `7954ed7f7`, `discriminator_stability` rev 11, seed 0)
+
+- **Candidate & Study Declarations:** [`configs/forge/ideas/bispf-v2.json`](../../../configs/forge/ideas/bispf-v2.json) · [`configs/forge/studies/bispf-v2-study.json`](../../../configs/forge/studies/bispf-v2-study.json)
+- **Readout Record:** [`reports/forge/records/readout-c2d279f7d47ac009ee80d771.json`](../records/readout-c2d279f7d47ac009ee80d771.json) (`candidate_revision: 96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967`, `source_digest: df5ba19b79b329442f5141da24e4b22fa04569b8def42eb849b7af6d1693e141`, campaign `b3c58d2892e9a3f2beb09422`)
+- **Qualification Subset (`81/81` View Requirements Across All 6 Views — 100%):**
+  - **Tier 1 (`7/7` tasks, `22/22` across views):** `gaussian1d_smoke`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_smoke`, and `clockfree_audit_measurement_v1` all **PASS**.
+  - **Tier 2 (`10/10` counted tasks, `55/55` across views, `0` regressions):** `mode_hold`, `five_word_joint_hold` (`25/25` confirmed checks), `trajectory`, `residual_student`, `unipolar`, `cover_leftover`, `mid_scale_identity`, `vector_two_broad`, `vector_spiral`, and `img_stripes2` all **PASS** (11 jointly unsolved Tier 2 tasks are measured and reported as `held`).
+  - **Tier 3 (`2/2` tasks, `4/4` across views):** `ring_hold` (`1,200/1,200` hold checks, `0` failures) and `ring_extension` (`300/300` extension checks, `0` failures) both **PASS** ([receipt `30323b33e3c943fbbd46f35f51e780fc`](../technique-receipts/30323b33e3c943fbbd46f35f51e780fc.json)).
+- **Mechanism:** Unifies direct thermal hook scaling (`_bispf_critic_forward_hook` and `_BISPFPenaltyKernel`) with SBNP covariance tethering and late-training harmonic mode capture lock (`call_idx >= 1650`, `dim == 2`, `64 <= b_r <= 512`, `max(r2f_95, f2r_95) < 0.050` with `0.065` hysteresis). Critically, when thermal freeze engages (`s <= 1e-4`), [`SBNPPriorRegularizer.forward`](../../../particlegan/bispf.py) scales the **entire** prior regularizer output (`scale_w * base_loss`), preventing DualNorm (`eps_smooth = 0.001`) from normalizing unscaled $k$-NN repulsion gradients on the prior particles to unit norm (`1.0`) while the critic gradient is frozen at `1e-5`.
+

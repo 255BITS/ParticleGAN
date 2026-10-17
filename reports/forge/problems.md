@@ -52,7 +52,7 @@ Test: `gaussian1d_stability` · Held for qualification; included in full-suite r
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-gaussian1d_stability) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-gaussian1d_stability) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) |
@@ -86,7 +86,7 @@ Test: `vector_unequal_mass` · Held for qualification; included in full-suite re
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_unequal_mass) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-vector_unequal_mass) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) |
@@ -119,7 +119,7 @@ Test: `vector_unequal_width` · Held for qualification; included in full-suite r
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_unequal_width) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-vector_unequal_width) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) |
@@ -152,7 +152,7 @@ Test: `vector_anisotropic` · Held for qualification; included in full-suite res
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_anisotropic) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-vector_anisotropic) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) |
@@ -185,7 +185,7 @@ Test: `vector_overlap` · Held for qualification; included in full-suite results
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-vector_overlap) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-vector_overlap) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) |
@@ -218,7 +218,7 @@ Test: `img_bars4` · Held for qualification; included in full-suite results.
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-img_bars4) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-img_bars4) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) |
@@ -251,7 +251,7 @@ Test: `img_blobs4` · Held for qualification; included in full-suite results.
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-img_blobs4) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-img_blobs4) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) |
@@ -284,7 +284,7 @@ Test: `img_intensity2` · Held for qualification; included in full-suite results
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-img_intensity2) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-img_intensity2) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) |
@@ -317,7 +317,7 @@ Test: `grid100` · Held for qualification; included in full-suite results.
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-grid100) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-grid100) |
@@ -350,7 +350,7 @@ Test: `rotated100` · Held for qualification; included in full-suite results.
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-rotated100) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) |
@@ -383,7 +383,7 @@ Test: `staggered100` · Held for qualification; included in full-suite results.
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [FAIL](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [FAIL](families/bispf.md#cohort-cuda-3faddec347a0-experiment-staggered100) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) |
@@ -416,7 +416,7 @@ Test: `grid100_14k` · Held for qualification; included in full-suite results.
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [NOT MEASURED](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-grid100_14k) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [NOT MEASURED](families/bispf.md#cohort-cuda-3faddec347a0-experiment-grid100_14k) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) |
@@ -449,7 +449,7 @@ Test: `rotated100_14k` · Held for qualification; included in full-suite results
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [NOT MEASURED](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-rotated100_14k) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [NOT MEASURED](families/bispf.md#cohort-cuda-3faddec347a0-experiment-rotated100_14k) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) |
@@ -482,7 +482,7 @@ Test: `staggered100_14k` · Held for qualification; included in full-suite resul
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [NOT MEASURED](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-staggered100_14k) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [NOT MEASURED](families/bispf.md#cohort-cuda-3faddec347a0-experiment-staggered100_14k) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) |
@@ -515,7 +515,7 @@ Test: `target_shift_recovery` · Held for qualification; included in full-suite 
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [NOT MEASURED](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-target_shift_recovery) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [NOT MEASURED](families/bispf.md#cohort-cuda-3faddec347a0-experiment-target_shift_recovery) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) |
@@ -548,7 +548,7 @@ Test: `mode_hold` · Required for qualification and included in full-suite resul
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [PASS](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-mode_hold) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [PASS](families/bispf.md#cohort-cuda-3faddec347a0-experiment-mode_hold) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) |
@@ -581,7 +581,7 @@ Test: `ring_extension` · Required for qualification and included in full-suite 
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [NOT MEASURED](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-ring_extension) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [PASS](families/bispf.md#cohort-cuda-3faddec347a0-experiment-ring_extension) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) |
@@ -614,7 +614,7 @@ Test: `ring16_acquisition` · Required for qualification and included in full-su
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [PASS](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-ring16_acquisition) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [PASS](families/bispf.md#cohort-cuda-3faddec347a0-experiment-ring16_acquisition) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) |
@@ -647,7 +647,7 @@ Test: `clockfree_audit_measurement_v1` · Required for qualification and include
 | Selected recipe | Result |
 | --- | --- |
 | [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [PASS](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) |
-| [BISPF](families/bispf.md#cohort-cuda-6421ba55ca82) | [PASS](families/bispf.md#cohort-cuda-6421ba55ca82-experiment-clockfree_audit_measurement_v1) |
+| [BISPF](families/bispf.md#cohort-cuda-3faddec347a0) | [PASS](families/bispf.md#cohort-cuda-3faddec347a0-experiment-clockfree_audit_measurement_v1) |
 | [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) |
 | [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [BLOCKED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) |
 | [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [FAIL](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) |

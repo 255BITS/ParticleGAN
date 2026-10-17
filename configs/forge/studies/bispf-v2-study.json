@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 60000.0,
+    "candidate_budget_seconds": 60000.0,
+    "id": "bispf-v2-study"
+  },
+  "candidate": "bispf-v2",
+  "competing_explanation": "If within-basin step scaling or anisotropic covariance adaptation disturbs the zero-mean gauge or SBNP tethering, mode_hold or five_word_joint_hold will regress.",
+  "control": {
+    "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "hypothesis": "BISPF v2 repairs at least 6/11 Tier 2 failures on discriminator_stability reaching >= 16/21 passes while preserving all 7 Tier 1 passes (22/22 across views) and all 10 passing Tier 2 tasks with 0 regressions.",
+  "id": "bispf-v2-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "precision",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "grid100",
+    "threshold": 0.7
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bispf-v1",
+        "candidate_revision": "45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b"
+      },
+      "path": "reports/forge/records/readout-3f3f893ae724d651f1655fc9.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 3,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

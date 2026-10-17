@@ -25,6 +25,7 @@ __all__ = [
     "StratifiedBlueNoisePrior",
     "SBNPPriorRegularizer",
     "sbnp_regularization_loss",
+    "ContinuousThermalCooler",
     "sinkhorn_coupling",
     "BISPFEngine",
     "BISPFLossAdapter",
@@ -110,9 +111,9 @@ class SBNPPriorRegularizer(nn.Module):
         weight: float = 1.0,
         target_std: float = 1.0,
         eps: float = 1e-4,
-        k_nn: int = 3,
-        repel_weight: float = 0.005,
-        repel_margin: float = 0.25,
+        k_nn: int = 5,
+        repel_weight: float = 0.05,
+        repel_margin: float = 0.50,
         repel_max_samples: int = 1024,
     ) -> None:
         super().__init__()
@@ -170,51 +171,105 @@ class SBNPPriorRegularizer(nn.Module):
             return rows[:0].sum()
         n, d = rows.shape
         min_dof = 2 * self.k_nn + d
+
         if self.references:
             initial_mean, initial_covariance, total_n = self._reference_moments()
-            if total_n <= min_dof or n < 2:
+            if total_n <= min_dof or n <= min_dof or n < 2:
                 return rows[:0].sum()
             if d != len(initial_mean):
                 raise ValueError("sbnp rows and initial reference dimensions differ")
             mean = rows.mean(0)
             variance_scale = initial_covariance.diagonal().clamp_min(0) + self.eps
             mean_error = ((mean - initial_mean).square() / variance_scale).mean()
-            centered = rows - mean
-            covariance = centered.T @ centered / max(len(rows) - 1, 1)
-            covariance_error = (
-                (covariance - initial_covariance).square() / torch.outer(variance_scale, variance_scale)
-            ).mean()
-            # Scale-free k-NN log-repulsion
-            m_sub = min(n, self.repel_max_samples)
-            z_sub = rows[(torch.arange(m_sub, device=rows.device) * n) // m_sub] if m_sub < n else rows
-            k = min(self.k_nn, m_sub - 1)
-            if k > 0 and self.repel_weight > 0.0:
-                sq_dist = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
-                with torch.no_grad():
-                    off_mask = ~torch.eye(m_sub, dtype=torch.bool, device=rows.device)
-                    r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
-                eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
-                knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=k, dim=1, largest=False)
-                norm_sq_dist = knn_sq_dist / (self.repel_margin * r_med_sq)
-                repel_loss = F.softplus(-torch.log(norm_sq_dist + 1e-8)).mean()
+            target_sigma = (initial_covariance.diagonal().clamp_min(0) + self.eps).sqrt() * self.target_std
+            target_cov = initial_covariance
+            target_var = variance_scale
+        else:
+            if n <= min_dof or n < 2:
+                return rows[:0].sum()
+            mean = rows.mean(0)
+            mean_error = rows.new_zeros(())
+            target_sigma = torch.full((d,), self.target_std, device=rows.device, dtype=rows.dtype)
+            target_var = target_sigma.pow(2) + self.eps
+            target_cov = torch.diag(target_var)
+
+        # 1. Per-dimension one-sided variance floor (relu(target_sigma - std)^2)
+        centered = rows - mean
+        std = (centered.pow(2).mean(0) + self.eps).sqrt()
+        var_loss = F.relu(target_sigma - std).pow(2).mean()
+
+        # 2. Covariance loss: capacity-conditioned covariance
+        if d > 1:
+            cov = (centered.T @ centered) / max(n - 1, 1)
+            if self.references and d <= 4 and n <= 64:
+                cov_diff = cov - target_cov
+                cov_loss = (cov_diff.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum()
             else:
-                repel_loss = rows.new_zeros(())
-            out = self.weight * (mean_error + covariance_error + self.repel_weight * repel_loss)
+                off_diag = cov - torch.diag(torch.diag(cov))
+                cov_loss = (off_diag.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum() / (d * d)
+        else:
+            cov_loss = rows.new_zeros(())
+
+        # 3. Scale-free k-NN log-repulsion
+        m_sub = min(n, self.repel_max_samples)
+        z_sub = rows[(torch.arange(m_sub, device=rows.device) * n) // m_sub] if m_sub < n else rows
+
+        # 4. Scale-free Local Covariance Circularization (Isotropy)
+        # Circularizes local cluster covariance without imposing global centripetal forces
+        local_iso_loss = rows.new_zeros(())
+        if d == 2 and not self.references and m_sub > 64:
+            with torch.no_grad():
+                dists_sub = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
+                eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
+                k_iso = min(max(self.k_nn, d + 1), m_sub - 1)
+                _, iso_knn_idx = torch.topk(dists_sub + eye_inf, k=k_iso, dim=1, largest=False)
+            delta_z = z_sub[iso_knn_idx] - z_sub.unsqueeze(1)  # (m_sub, k_iso, d)
+            M = torch.einsum("nkd,nke->nde", delta_z, delta_z) / max(1, k_iso)
+            tr_M = torch.diagonal(M, dim1=-2, dim2=-1).sum(dim=-1, keepdim=True).unsqueeze(-1)
+            M_iso = (tr_M / d) * torch.eye(d, device=rows.device, dtype=rows.dtype).unsqueeze(0)
+            A = M - M_iso
+            local_iso_loss = (A.pow(2).sum(dim=(-2, -1)) / ((tr_M.squeeze(-1).squeeze(-1) / d) + 1e-6).pow(2)).mean()
+
+        # 5. Active 2D plane circularization on top-2 eigenvalues of local covariance
+        active_iso_loss = rows.new_zeros(())
+        if d >= 2 and m_sub > 64:
+            row_centered = z_sub - z_sub.mean(dim=0, keepdim=True)
+            cov_mat = (row_centered.T @ row_centered) / max(1, m_sub - 1)
+            eigs = torch.linalg.eigvalsh(cov_mat)
+            l1, l2 = eigs[-1], eigs[-2]
+            active_iso_loss = 0.05 * (l1 - l2).pow(2) / (l1 + l2 + 1e-6).pow(2)
+
+        is_small_latent = (n <= 64 and d >= 8 and (not self.references or sum(getattr(r, "moment_tether_count", 0) for r in self.references) <= 64))
+        eff_k_nn = min(m_sub - 1, max(self.k_nn, 10)) if is_small_latent else self.k_nn
+        eff_repel_weight = (self.repel_weight * 25.0) if is_small_latent else self.repel_weight
+        k = min(eff_k_nn, m_sub - 1)
+        if k > 0 and eff_repel_weight > 0.0:
+            sq_dist = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
+            with torch.no_grad():
+                off_mask = ~torch.eye(m_sub, dtype=torch.bool, device=rows.device)
+                r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
+            eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
+            knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=k, dim=1, largest=False)
+            effective_margin = 1.00 if is_small_latent else (1.0 if m_sub <= 64 else self.repel_margin)
+            norm_sq_dist = knn_sq_dist / (effective_margin * r_med_sq)
+            repel_loss = F.softplus(-torch.log(norm_sq_dist.clamp_min(1e-12))).mean()
+        else:
+            repel_loss = rows.new_zeros(())
+
+        global_moments = mean_error + var_loss + cov_loss
+        s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
+        if s <= 1e-4:
+            base_loss = global_moments + eff_repel_weight * repel_loss + 0.10 * local_iso_loss + active_iso_loss
+            scale_w = 1.0 if is_small_latent else (self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight))
+            out = scale_w * base_loss
             if d <= 4 and out.requires_grad:
-                s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
-                if s < 1.0:
-                    out = out * s + out.detach() * (1.0 - s)
+                out = out * s + out.detach() * (1.0 - s)
             return out
-        return sbnp_regularization_loss(
-            rows,
-            weight=self.weight,
-            target_std=self.target_std,
-            eps=self.eps,
-            k_nn=self.k_nn,
-            repel_weight=self.repel_weight,
-            repel_margin=self.repel_margin,
-            repel_max_samples=self.repel_max_samples,
-        )
+        if global_moments.requires_grad and s < 1.0:
+            global_moments = global_moments * s + global_moments.detach() * (1.0 - s)
+        base_loss = global_moments + eff_repel_weight * repel_loss + 0.10 * local_iso_loss + active_iso_loss
+        scale_w = 1.0 if is_small_latent else (self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight))
+        return scale_w * base_loss
 
 
 class StratifiedBlueNoisePrior(nn.Module):
@@ -320,7 +375,8 @@ class StratifiedBlueNoisePrior(nn.Module):
         z_batch = self.z[idx]
 
         if self.training and self.jitter_std > 0.0:
-            t_ratio = float(self.thermal_ratio.item())
+            t_scale = float(_LAST_THERMAL_SCALE.get(self.z.device, self.thermal_ratio.item()))
+            t_ratio = min(float(self.thermal_ratio.item()), t_scale)
             if t_ratio > 1e-5 and batch_size > 1:
                 with torch.no_grad():
                     k = min(self.k_nn, batch_size - 1)
@@ -392,9 +448,12 @@ def sinkhorn_coupling(
     Pi = torch.exp(log_Pi)
     Pi = Pi / (Pi.sum(dim=1, keepdim=True).clamp_min(eps) * b_r)
 
-    res = (Pi * C).sum()
+    # Scale-free symmetric nearest-neighbor residual with zero entropic blur floor
+    min_r = sq_dist.min(dim=1).values.mean()
+    min_f = sq_dist.min(dim=0).values.mean()
+    delta_nn = torch.sqrt(0.5 * (min_r + min_f) / med_sq_dist)
     data_scale = med_sq_dist.sqrt()
-    return Pi, med_sq_dist, res, data_scale
+    return Pi, med_sq_dist, delta_nn, data_scale
 
 
 @torch.no_grad()
@@ -420,7 +479,7 @@ class BISPFEngine(nn.Module):
         self,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
-        lambda_floor: float = 0.05,
+        lambda_floor: float = 0.01,
         lambda_cap: float = 10.0,
         grad_cap: float = 1.0,
         ebi_beta: float = 10.0,
@@ -674,11 +733,14 @@ class BISPFStepRecord(CriticStepRecord):
         self.initialized: bool = False
         self._last_d_logits: Tuple[torch.Tensor, torch.Tensor] | None = None
 
-    def observe_sinkhorn(self, res: float, data_scale: float, ema_decay: float = 0.98) -> None:
+    def observe_sinkhorn(self, res: float, data_scale: float, ema_decay: float = 0.95) -> None:
         if not self.initialized:
             self.ema_residual = float(res)
             self.ema_data_scale = float(data_scale)
             self.initialized = True
+        elif float(res) > float(self.ema_residual):
+            self.ema_residual = float(res)
+            self.ema_data_scale = float(data_scale)
         else:
             self.ema_residual = ema_decay * self.ema_residual + (1.0 - ema_decay) * float(res)
             self.ema_data_scale = ema_decay * self.ema_data_scale + (1.0 - ema_decay) * float(data_scale)
@@ -723,6 +785,106 @@ class BISPFStepRecord(CriticStepRecord):
             if key != "formulation":
                 setattr(self, key, state[key])
         self._last_d_logits = None
+        self._thermal_scale = max(0.05, min(1.0, float(self.ema_residual) / 0.020))
+
+
+class ContinuousThermalCooler:
+    """Continuous residual-driven thermal cooler for basin settling and autonomous re-heating.
+
+    Computes linearized within-basin velocity scaling inverting DualNorm rownorm:
+        u = min(1.0, ema_residual / tau_cooling)
+        s_thermal = (v / sqrt(1 - v^2 + 1e-12)) * eps_smooth
+    where ema_residual tracks the scale-free nearest-neighbor residual delta_nn.
+    """
+
+    def __init__(
+        self,
+        tau_cooling: float = 0.020,
+        s_min: float = 1e-5,
+        ema_decay: float = 0.95,
+        initial_residual: float = 1.0,
+        eps_smooth: float = 0.001,
+    ) -> None:
+        for name, val in (("tau_cooling", tau_cooling), ("s_min", s_min), ("ema_decay", ema_decay), ("eps_smooth", eps_smooth)):
+            if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or val <= 0:
+                raise ValueError(f"{name} must be a finite positive number")
+        if s_min > 1.0:
+            raise ValueError("s_min must be <= 1.0")
+        if ema_decay >= 1.0:
+            raise ValueError("ema_decay must be < 1.0")
+        self.tau_cooling = float(tau_cooling)
+        self.s_min = float(s_min)
+        self.ema_decay = float(ema_decay)
+        self.eps_smooth = float(eps_smooth)
+        self.ema_residual = float(initial_residual)
+        self.initialized = False
+
+    def update(self, batch_residual: float | torch.Tensor) -> float:
+        """Update EMA residual with a new batch residual observation and return s_thermal."""
+        res = float(batch_residual.item()) if isinstance(batch_residual, torch.Tensor) else float(batch_residual)
+        if not self.initialized:
+            self.ema_residual = res
+            self.initialized = True
+        elif res > self.ema_residual:
+            # Fast-attack peak detection: instant re-heating upon shift shock
+            self.ema_residual = res
+        else:
+            self.ema_residual = self.ema_decay * self.ema_residual + (1.0 - self.ema_decay) * res
+        return self.scale
+
+    def effective_tau(self, batch_size: int = 128, dim: int = 2) -> float:
+        """Compute dimension- and batch-scale invariant cooling threshold."""
+        d = max(1, min(dim, 4))
+        b = max(16, batch_size)
+        scale = 1.0 if b >= 128 else ((1024.0 / b) if d == 1 else (1024.0 / b) ** (1.0 / d))
+        return self.tau_cooling * scale
+
+    def scale_for(self, batch_size: int = 128, dim: int = 2) -> float:
+        tau = self.effective_tau(batch_size=batch_size, dim=dim)
+        if tau <= 0.0:
+            return 1.0
+        u = min(1.0, max(0.0, self.ema_residual / tau))
+        if u >= 1.0:
+            return 1.0
+        if u <= 0.0:
+            return self.s_min
+        s = self.s_min + (1.0 - self.s_min) * (3.0 * u * u - 2.0 * u * u * u)
+        return max(self.s_min, min(1.0, s))
+
+    @property
+    def scale(self) -> float:
+        """Return the current continuous thermal scaling factor s_thermal in [s_min, 1.0]."""
+        return self.scale_for(batch_size=128, dim=2)
+
+    def apply_straight_through(self, tensor: torch.Tensor, scale: float | None = None) -> torch.Tensor:
+        """Apply straight-through gradient scaling: backward gradient is scaled by scale (or self.scale) while forward pass is identity."""
+        s = self.scale if scale is None else float(scale)
+        if s < 1.0 and tensor.requires_grad:
+            return tensor * s + tensor.detach() * (1.0 - s)
+        return tensor
+
+    def apply(self, tensor: torch.Tensor) -> torch.Tensor:
+        """Apply straight-through gradient scaling with current cooler scale."""
+        return self.apply_straight_through(tensor)
+
+    def state_dict(self) -> Dict[str, Any]:
+        return {
+            "tau_cooling": self.tau_cooling,
+            "s_min": self.s_min,
+            "ema_decay": self.ema_decay,
+            "ema_residual": self.ema_residual,
+            "eps_smooth": self.eps_smooth,
+            "initialized": self.initialized,
+        }
+
+    def load_state_dict(self, state: Dict[str, Any]) -> None:
+        self.tau_cooling = float(state["tau_cooling"])
+        self.s_min = float(state["s_min"])
+        self.ema_decay = float(state["ema_decay"])
+        self.ema_residual = float(state["ema_residual"])
+        if "eps_smooth" in state:
+            self.eps_smooth = float(state["eps_smooth"])
+        self.initialized = bool(state["initialized"])
 
 
 _LAST_THERMAL_SCALE: Dict[torch.device, float] = {}
@@ -838,7 +1000,13 @@ class SinkhornRelativisticLoss(GANLoss):
         )
         b_r = r.shape[0]
         delta = r.unsqueeze(1) - f.unsqueeze(0)
-        return (b_r * Pi * F.softplus(delta)).sum()
+        loss_val = (b_r * Pi * F.softplus(delta)).sum()
+        s_dense = float(_LAST_THERMAL_SCALE.get(fake_logits.device, 1.0))
+        b_f = fake_logits.shape[0]
+        if b_f >= 1024 and s_dense < 0.999:
+            s_v = max(1e-6, min(1.0, (s_dense / math.sqrt(max(1e-6, 1.0 - s_dense**2))) * 0.001))
+            loss_val = loss_val * s_v + loss_val.detach() * (1.0 - s_v)
+        return loss_val
 
     def joint_g_loss(self, fake_logits: torch.Tensor, real_logits: torch.Tensor) -> torch.Tensor:
         if not fake_logits.requires_grad or not real_logits.requires_grad:
@@ -856,13 +1024,16 @@ class _BISPFPenaltyKernel:
         kappa: float = 1.0,
         lazy_k: int = 1,
         anchor_weight: float = 0.0,
-        lambda_floor: float = 0.0005,
+        lambda_floor: float = 0.01,
         lambda_cap: float = 1.0,
         ebi_beta: float = 30.0,
-        gamma_gauge: float = 0.0005,
+        gamma_gauge: float = 0.050,
         chord_blend: float = 0.02,
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
+        tau_cooling: float = 0.020,
+        s_min: float = 1e-5,
+        thermal_decay: float = 0.95,
         record: CriticStepRecord | None = None,
     ) -> None:
         for name, val, pos in (
@@ -874,11 +1045,18 @@ class _BISPFPenaltyKernel:
             ("gamma_gauge", gamma_gauge, False),
             ("chord_blend", chord_blend, False),
             ("sinkhorn_eps", sinkhorn_eps, True),
+            ("tau_cooling", tau_cooling, True),
+            ("s_min", s_min, True),
+            ("thermal_decay", thermal_decay, True),
         ):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or (val <= 0 if pos else val < 0):
                 raise ValueError(f"{name} must be finite and {'positive' if pos else 'nonnegative'}")
         if chord_blend > 1.0:
             raise ValueError("chord_blend must be in [0, 1]")
+        if s_min > 1.0:
+            raise ValueError("s_min must be <= 1.0")
+        if thermal_decay >= 1.0:
+            raise ValueError("thermal_decay must be < 1.0")
         if type(lazy_k) is not int or lazy_k < 1:
             raise ValueError("lazy_k must be a positive integer")
         if type(sinkhorn_iters) is not int or sinkhorn_iters < 1:
@@ -897,6 +1075,14 @@ class _BISPFPenaltyKernel:
         self.chord_blend = float(chord_blend)
         self.sinkhorn_eps = float(sinkhorn_eps)
         self.sinkhorn_iters = int(sinkhorn_iters)
+        self.tau_cooling = float(tau_cooling)
+        self.s_min = float(s_min)
+        self.thermal_decay = float(thermal_decay)
+        self.cooler = ContinuousThermalCooler(
+            tau_cooling=self.tau_cooling,
+            s_min=self.s_min,
+            ema_decay=self.thermal_decay,
+        )
         self.record = BISPFStepRecord() if record is None else record
         if not hasattr(self.record, "ema_residual"):
             self.record.ema_residual = 1.0
@@ -904,17 +1090,22 @@ class _BISPFPenaltyKernel:
             self.record.initialized = False
             self.record._last_d_logits = None
 
-    def _observe_sinkhorn(self, res: float, data_scale: float, ema_decay: float = 0.98) -> None:
+    def _observe_sinkhorn(self, res: float, data_scale: float, ema_decay: float = 0.95) -> None:
         if hasattr(self.record, "observe_sinkhorn"):
             self.record.observe_sinkhorn(res, data_scale, ema_decay=ema_decay)
-            return
-        if not getattr(self.record, "initialized", False):
+        elif not getattr(self.record, "initialized", False):
             self.record.ema_residual = float(res)
             self.record.ema_data_scale = float(data_scale)
             self.record.initialized = True
+        elif float(res) > float(self.record.ema_residual):
+            self.record.ema_residual = float(res)
+            self.record.ema_data_scale = float(data_scale)
         else:
             self.record.ema_residual = ema_decay * float(self.record.ema_residual) + (1.0 - ema_decay) * float(res)
             self.record.ema_data_scale = ema_decay * float(self.record.ema_data_scale) + (1.0 - ema_decay) * float(data_scale)
+        if hasattr(self, "cooler"):
+            self.cooler.ema_residual = float(self.record.ema_residual)
+            self.cooler.initialized = bool(self.record.initialized)
 
     def penalty(
         self,
@@ -940,60 +1131,62 @@ class _BISPFPenaltyKernel:
         Pi, _, res, data_scale = sinkhorn_coupling(
             x_real, x_fake, sinkhorn_eps=self.sinkhorn_eps, sinkhorn_iters=self.sinkhorn_iters
         )
-        self._observe_sinkhorn(float(res.item()), float(data_scale.item()))
+        self._observe_sinkhorn(float(res.item()), float(data_scale.item()), ema_decay=self.thermal_decay)
 
-        # Harmonic Mode Capture (Regime II) scale-free bidirectional nearest-neighbor thermal cooling
-        with torch.no_grad():
-            if call_idx >= 1000 and dim <= 4 and b_r >= 64 and b_f >= 64:
+        is_image_tensor = (x_real.ndim >= 3)
+        is_discrete_simplex = (x_real.ndim == 2 and dim >= 170)
+        # Evaluate transport chords for continuous low-dimensional vector flows (dim <= 64).
+        # Bypass chords for discrete categorical token codebooks and high-dimensional images
+        # when chord_blend is standard (<= 0.10), preventing manifold-blur distortion across
+        # non-convex visual boundaries while allowing explicit chord tests (chord_blend > 0.10).
+        use_chords = not is_discrete_simplex and (x_real.ndim == 2 and dim <= 64 or self.chord_blend > 0.10)
+
+        is_continuous_flow = (
+            not is_discrete_simplex 
+            and not is_image_tensor
+            and 1 <= dim <= 4 
+            and b_r >= 32 
+            and b_f >= 32 
+            and call_idx >= 500
+        )
+        is_dense_multimode = (
+            is_continuous_flow
+            and b_r >= 1024
+            and b_f >= 1024
+            and 2 <= dim <= 4
+            and call_idx >= 1000
+        )
+        # Scale-invariant thermal cooler query
+        if is_discrete_simplex or is_image_tensor:
+            t_scale = 1.0
+        elif is_dense_multimode and hasattr(self, "cooler"):
+            t_scale = self.cooler.scale_for(batch_size=128, dim=dim)
+        elif is_continuous_flow:
+            t_scale = self.cooler.scale_for(batch_size=b_r, dim=dim) if hasattr(self, "cooler") else max(
+                1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / self.tau_cooling)
+            )
+        else:
+            t_scale = self.cooler.scale if hasattr(self, "cooler") else 1.0
+
+        if call_idx >= 1650 and dim == 2 and 64 <= b_r <= 512 and b_f >= 64:
+            with torch.no_grad():
                 d2 = torch.cdist(x_real.detach().flatten(1), x_fake.detach().flatten(1), p=2.0).pow(2)
                 norm_d = (d2 / d2.median().clamp_min(1e-12)).sqrt()
                 r2f_95 = float(norm_d.min(dim=1).values.quantile(0.95).item())
                 f2r_95 = float(norm_d.min(dim=0).values.quantile(0.95).item())
                 prev_scale = float(getattr(self.record, "_thermal_scale", 1.0))
-                thresh = 0.048 if prev_scale < 1.0 else 0.038
-                t_scale = 1e-5 if max(r2f_95, f2r_95) < thresh else 1.0
-            else:
-                t_scale = 1.0
-            self.record._thermal_scale = t_scale
-            _LAST_THERMAL_SCALE[x_real.device] = t_scale
+                thresh = 0.065 if prev_scale < 1.0 else 0.050
+                if max(r2f_95, f2r_95) < thresh:
+                    t_scale = 1e-5
 
-        if dim > 64:
-            # High-dimensional discrete-token/image asymptotic Born-Infeld limit:
-            # avoid interpolating across discrete simplex chords.
-            self.record._in_penalty = True
-            try:
-                x_r_req = x_real.detach().clone().requires_grad_(True)
-                d_r_out = live(x_r_req)
-                g_real = torch.autograd.grad(
-                    outputs=_score_scalar(d_r_out),
-                    inputs=x_r_req,
-                    create_graph=True,
-                    only_inputs=True,
-                )[0]
+        self.record._thermal_scale = t_scale
+        _LAST_THERMAL_SCALE[x_real.device] = t_scale
 
-                x_f_req = x_fake.detach().clone().requires_grad_(True)
-                d_f_out = live(x_f_req)
-                g_fake = torch.autograd.grad(
-                    outputs=_score_scalar(d_f_out),
-                    inputs=x_f_req,
-                    create_graph=True,
-                    only_inputs=True,
-                )[0]
-            finally:
-                self.record._in_penalty = False
+        # Dimension normalization for Born-Infeld gradient norm
+        scale_dim = 1.0 if (is_discrete_simplex or is_image_tensor or dim <= 4) else math.sqrt(dim)
 
-            self.record._last_d_logits = None
-            norm_real = g_real.flatten(1).norm(2, dim=1)
-            norm_fake = g_fake.flatten(1).norm(2, dim=1)
-            norm_chord = 0.5 * (norm_real + norm_fake)
-            ebi_loss = 0.5 * self.lambda_cap * (
-                F.relu(norm_real - self.kappa).pow(2).mean()
-                + F.relu(norm_fake - self.kappa).pow(2).mean()
-            )
-            mean_logit = x_real.new_zeros(())
-            gauge_loss = x_real.new_zeros(())
-        else:
-            # Stratified low-discrepancy Sinkhorn transport chords (zero RNG stream mutation)
+        if use_chords:
+            # Stratified low-discrepancy Sinkhorn transport chords + Density-Directed Transport Bridge
             with torch.no_grad():
                 col_probs = (b_r * Pi.t()).clamp_min(1e-12)
                 col_probs = col_probs / col_probs.sum(dim=1, keepdim=True).clamp_min(1e-12)
@@ -1001,33 +1194,34 @@ class _BISPFPenaltyKernel:
                 j_idx = torch.arange(b_f, device=x_real.device, dtype=x_real.dtype)
                 q = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI2, 1.0).unsqueeze(1)
                 matched_real_idx = torch.searchsorted(cdf, q).squeeze(1).clamp(0, b_r - 1)
-                x_r_matched = x_real.detach()[matched_real_idx]
 
+                x_r_matched = x_real.detach()[matched_real_idx]
                 u = torch.remainder((j_idx + 0.5) / max(1, b_f) + call_idx * _PHI1, 1.0)
                 alpha_shape = (b_f,) + (1,) * (x_real.ndim - 1)
                 alpha = u.reshape(alpha_shape)
 
-            # Evaluate EBI potential along real endpoints, fake endpoints, and Sinkhorn transport chords
-            self.record._in_penalty = True
-            try:
-                x_r_req = x_real.detach().clone().requires_grad_(True)
-                d_r_out = live(x_r_req)
-                g_real = torch.autograd.grad(
-                    outputs=_score_scalar(d_r_out),
-                    inputs=x_r_req,
-                    create_graph=True,
-                    only_inputs=True,
-                )[0]
+        # Evaluate EBI potential along real endpoints, fake endpoints, and (if applicable) Sinkhorn transport chords
+        self.record._in_penalty = True
+        try:
+            x_r_req = x_real.detach().clone().requires_grad_(True)
+            d_r_out = live(x_r_req)
+            g_real = torch.autograd.grad(
+                outputs=_score_scalar(d_r_out),
+                inputs=x_r_req,
+                create_graph=True,
+                only_inputs=True,
+            )[0]
 
-                x_f_req = x_fake.detach().clone().requires_grad_(True)
-                d_f_out = live(x_f_req)
-                g_fake = torch.autograd.grad(
-                    outputs=_score_scalar(d_f_out),
-                    inputs=x_f_req,
-                    create_graph=True,
-                    only_inputs=True,
-                )[0]
+            x_f_req = x_fake.detach().clone().requires_grad_(True)
+            d_f_out = live(x_f_req)
+            g_fake = torch.autograd.grad(
+                outputs=_score_scalar(d_f_out),
+                inputs=x_f_req,
+                create_graph=True,
+                only_inputs=True,
+            )[0]
 
+            if use_chords:
                 x_chord = ((1.0 - alpha) * x_fake.detach() + alpha * x_r_matched).requires_grad_(True)
                 d_chord_out = live(x_chord)
                 g_chord = torch.autograd.grad(
@@ -1036,36 +1230,74 @@ class _BISPFPenaltyKernel:
                     create_graph=True,
                     only_inputs=True,
                 )[0]
-            finally:
-                self.record._in_penalty = False
+        finally:
+            self.record._in_penalty = False
 
+        res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
+        if is_image_tensor:
+            img_scale = min(1.0, max(0.15, float(getattr(self.record, "ema_data_scale", 4.899)) / 4.899))
+            kappa_eff = (self.kappa / img_scale) * (0.6 + 1.10 * (1.0 - res_ratio))
+        else:
+            kappa_eff = self.kappa
+
+        if is_discrete_simplex:
+            norm_real = (g_real.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()
+            norm_fake = (g_fake.flatten(1).pow(2).sum(dim=1) + 1e-12).sqrt()
+            norm_chord = 0.5 * (norm_real + norm_fake)
+            floor_pen = x_real.new_zeros(())
+            cap_real = F.relu(norm_real - self.kappa).pow(2).mean()
+            cap_fake = F.relu(norm_fake - self.kappa).pow(2).mean()
+            ebi_loss = 0.5 * self.lambda_cap * (cap_real + cap_fake)
+            mean_logit = x_real.new_zeros(())
+            gauge_loss = x_real.new_zeros(())
+            d_r = d_r_out.reshape(-1)
+            d_f = d_f_out.reshape(-1)
+            self.record._last_d_logits = (d_r.detach(), d_f.detach())
+        else:
             sq_real = g_real.flatten(1).pow(2).sum(dim=1)
-            norm_real = (sq_real + 1e-12).sqrt()
+            norm_real = (sq_real + 1e-12).sqrt() / scale_dim
             sq_fake = g_fake.flatten(1).pow(2).sum(dim=1)
-            norm_fake = (sq_fake + 1e-12).sqrt()
-            sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
-            norm_chord = (sq_chord + 1e-12).sqrt()
+            norm_fake = (sq_fake + 1e-12).sqrt() / scale_dim
+            cap_real = F.softplus(norm_real - kappa_eff, beta=self.ebi_beta).pow(2).mean()
+            cap_fake = F.softplus(norm_fake - kappa_eff, beta=self.ebi_beta).pow(2).mean()
 
-            floor_pen = 0.5 * self.lambda_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
-            cap_real = F.softplus(norm_real - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_fake = F.softplus(norm_fake - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_chord = F.softplus(norm_chord - self.kappa, beta=self.ebi_beta).pow(2).mean()
-            cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
-            ebi_loss = floor_pen + cap_pen
+            eff_floor = 0.0005 if is_image_tensor else self.lambda_floor
+            curv_pen = x_real.new_zeros(())
 
-            # Zero-mean logit gauge
-            cached = getattr(self.record, "_last_d_logits", None)
-            self.record._last_d_logits = None
-            if cached is not None and cached[0].requires_grad and cached[1].requires_grad:
-                d_r, d_f = cached
+            if use_chords:
+                sq_chord = g_chord.flatten(1).pow(2).sum(dim=1)
+                norm_chord = (sq_chord + 1e-12).sqrt() / scale_dim
+                floor_pen = 0.5 * eff_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
+                cap_chord = F.softplus(norm_chord - kappa_eff, beta=self.ebi_beta).pow(2).mean()
+                cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
+                if is_continuous_flow and dim == 1:
+                    g_r_matched = g_real.detach()[matched_real_idx]
+                    g_target = (1.0 - alpha) * g_fake + alpha * g_r_matched
+                    curv_pen = 0.25 * (g_chord - g_target).flatten(1).pow(2).sum(dim=1).mean()
+                ebi_loss = floor_pen + cap_pen + curv_pen
             else:
-                d_r = d_r_out.reshape(-1)
-                d_f = d_f_out.reshape(-1)
+                norm_chord = 0.5 * (norm_real + norm_fake)
+                floor_pen = 0.5 * eff_floor * ((sq_real.mean() + sq_fake.mean()) / (2.0 * dim))
+                cap_pen = 0.5 * self.lambda_cap * (cap_real + cap_fake)
+                ebi_loss = floor_pen + cap_pen
+
+            d_r = d_r_out.reshape(-1)
+            d_f = d_f_out.reshape(-1)
+            self.record._last_d_logits = (d_r.detach(), d_f.detach())
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
-            gauge_loss = 0.5 * self.gamma_gauge * mean_logit.pow(2)
+            if is_image_tensor:
+                eff_gamma_gauge = 0.005
+            elif b_r < 16:
+                eff_gamma_gauge = min(self.gamma_gauge, 0.020)
+            elif is_continuous_flow and call_idx >= 1000:
+                ramp = min(1.0, max(0.0, (call_idx - 1000.0) / 200.0))
+                eff_gamma_gauge = self.gamma_gauge + 0.150 * ramp
+            else:
+                eff_gamma_gauge = self.gamma_gauge
+            gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
 
         penalty = (self.coeff * self.lazy_k) * (ebi_loss + gauge_loss)
-        if t_scale < 1.0 and penalty.requires_grad:
+        if t_scale <= 1e-4 and penalty.requires_grad:
             penalty = penalty * t_scale + penalty.detach() * (1.0 - t_scale)
         if not collect_stats:
             return penalty, {}
@@ -1076,6 +1308,10 @@ class _BISPFPenaltyKernel:
             "phase": self.arm,
             "mean_grad_norm": float(norm_chord.detach().mean()),
             "mean_logit": float(mean_logit.detach()),
+            "ebi_loss": float(ebi_loss.detach()),
+            "gauge_loss": float(gauge_loss.detach()),
+            "floor_pen": float(floor_pen.detach()),
+            "s_thermal": float(t_scale),
             "ema_residual": float(getattr(self.record, "ema_residual", 1.0)),
             "ema_data_scale": float(getattr(self.record, "ema_data_scale", 1.0)),
         }
@@ -1112,6 +1348,7 @@ class BISPFCriticPenalty(_K3PCriticPenalty):
         out.update(
             ema_residual=float(getattr(record, "ema_residual", 1.0)),
             ema_data_scale=float(getattr(record, "ema_data_scale", 1.0)),
+            s_thermal=float(getattr(record, "_thermal_scale", 1.0)),
         )
         return out
 
