@@ -154,6 +154,15 @@ def parser():
         trial.add_argument("spec", help="search id or configs/forge/searches JSON path")
         if stage == "run":
             trial.add_argument("--gpus", default=None, help="physical GPU indices, or cpu; must match the fixed spec")
+    cadence = commands.add_parser("cadence", help="matched lazy-regularization studies and generated comparisons")
+    cadence_stages = cadence.add_subparsers(dest="stage", required=True)
+    for stage in ("plan", "enqueue", "run", "report"):
+        c = cadence_stages.add_parser(stage)
+        c.add_argument("spec", help="cadence study id or JSON path; any supported base technique")
+        c.add_argument("--output", type=Path, help="write the generated .md report and compact .json companion")
+        c.add_argument("--json", action="store_true", help="include complete per-task comparison details on stdout")
+        if stage == "run":
+            c.add_argument("--gpus", help="physical GPU indices or cpu; must match the declaration")
     r = commands.add_parser("recall", help="find successes, failures and unknowns before a new idea")
     r.add_argument("--query", default="")
     r.add_argument("--goal")
@@ -302,7 +311,7 @@ def main(argv=None):
     # The inventory already records every attempt in the live event stream.
     # Compile the full set of boards once after draining this campaign.
     batch_inventory = (args.command in {"run", "drain"}
-                       or (args.command in {"inventory", "search"} and args.stage == "run"))
+                       or (args.command in {"inventory", "search", "cadence"} and args.stage == "run"))
     queue = Queue(queue_root, report_root=root / "reports/forge",
                   on_completion=None if batch_inventory else publish)
     command = args.command
@@ -433,6 +442,32 @@ def main(argv=None):
         else:
             emit(run_search(root, queue_root, args.spec, devices=args.gpus.split(",") if args.gpus else None, queue=queue))
             publish()
+    elif command == "cadence":
+        from .cadence_study import (plan_study, comparison_report, enqueue_study,
+                                    run_study, report_study, write_report)
+        if args.stage == "plan":
+            result = comparison_report(plan_study(root, queue_root, args.spec, queue=queue))
+        elif args.stage == "enqueue":
+            result = enqueue_study(root, queue_root, args.spec, queue=queue)
+        elif args.stage == "report":
+            result = report_study(root, queue_root, args.spec, queue=queue)
+        else:
+            result = run_study(root, queue_root, args.spec, queue=queue,
+                               devices=args.gpus.split(",") if args.gpus else None)
+        destination = args.output
+        if destination is None and args.stage in {"run", "report"}:
+            destination = Path("reports/forge/cadence-studies") / f"{result['study_id']}.md"
+        if destination:
+            output = destination if destination.is_absolute() else root / destination
+            result["outputs"] = write_report(result, output)
+        if args.json:
+            emit(result)
+        else:
+            emit({**{key: value for key, value in result.items() if key != "lanes"},
+                  "lanes": {lane: {"recommendation": details["recommendation"],
+                                     "evidence_scope": details["evidence_scope"],
+                                     "arms": len(details["trials"])}
+                            for lane, details in result["lanes"].items()}})
     elif command in {"compile", "recall", "board", "readout"}:
         from . import knowledge
         if command == "compile":

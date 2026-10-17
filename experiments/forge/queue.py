@@ -250,7 +250,8 @@ class Queue:
             if stable_hash(campaign) != stable_hash(expected):
                 raise ValueError("promotion campaign differs from frozen budgets/policy")
         else:
-            validate_screening_submission(request)
+            validate_screening_submission(request,
+                root=self.report_root.parent.parent if self.report_root else None, campaign=campaign)
         from .sampling import validate_request_sampling
         validate_request_sampling(request, task_ids=task_ids)
         from .hostprofiles import validate_request_host_profiles

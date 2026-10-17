@@ -34,6 +34,12 @@ def _report_path(root, study_id):
     return Path(root) / "reports/forge/configuration-search" / f"{study_id}.json"
 
 
+def _comparison_binding(task):
+    """Freeze the task law and allowance, excluding candidate field ownership."""
+    from .views import task_fingerprint
+    return stable_hash({"task": task_fingerprint(task), "resources": task.get("resources")})
+
+
 def _load_spec(root, spec, *, validate_current_protocol=True):
     if isinstance(spec, dict):
         value = deepcopy(spec)
@@ -526,9 +532,11 @@ def _prepare(root, queue_root, spec, queue):
                  "runtime_cohort": {"runtime": request["runtime"], "execution_backend": request["execution_backend"],
                                     "compute_profiles": request["compute_profiles"]},
                  "protocol_hash": stable_hash(request["protocol"]),
+                 "evidence_scope": request["view"].get("evidence_scope", "ordinary"),
                  "submission_status": "BLOCKED" if blockers else "READY", "submission_blockers": blockers,
                  "declared_worst_case_seconds": ceiling, "unreused_worst_case_seconds": planned["worst_case_seconds"],
-                 "tasks": [{**a, "compatibility_key": next(job["compatibility_key"] for job in request["jobs"]
+                 "tasks": [{**a, "comparison_binding": _comparison_binding(request["tasks"][a["task"]]),
+                            "compatibility_key": next(job["compatibility_key"] for job in request["jobs"]
                             if a["task"] in job["task_ids"]), "gate_status": "UNKNOWN"}
                            for a in planned["tasks"]], "request_id": None, "attempt_ids": [],
                  "cost": {"wall_seconds": 0.0}, "status": "UNKNOWN"}
@@ -552,6 +560,7 @@ def _prepare(root, queue_root, spec, queue):
                "base_declaration": _base_declaration(root, spec),
                "technique_signature": technique_signature(_resolved_recipe(_base_declaration(root, spec))),
                "spec": spec, "spec_hash": stable_hash(spec), "view": spec["view"],
+               "evidence_scope": requests[0]["view"].get("evidence_scope", "ordinary"),
                "tuning_through_tier": spec["tuning_through_tier"],
                "execution_backend": spec["execution_backend"], "source_digests": sources,
                "source_digest": sources[0] if len(sources) == 1 else None,
@@ -720,13 +729,15 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
         trial["attempt_ids"] = []
         evidence, observed = [], {}
         for task in trial["tasks"]:
+            if entry:
+                task.setdefault("comparison_binding", _comparison_binding(entry["request"]["tasks"][task["task"]]))
             job = state.get("jobs", {}).get(task["compatibility_key"], {})
             for item in job.get("attempts", []):
                 original = by_id.get(item["attempt_id"])
                 if original:
                     observed[original["attempt_id"]] = original
             result = job.get("result")
-            task.update(gate_status="UNKNOWN", raw_status=None, metrics={}, cost={},
+            task.update(gate_status="UNKNOWN", raw_status=None, metrics={}, cost={}, cadence=None,
                         evaluator_timing={"status": "UNAVAILABLE", "speed_qualified": False,
                                           "reason": "no currently certified evaluator result"})
             if not result:
@@ -751,6 +762,12 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
                             attempt_id=result["attempt_id"])
                 if valid:
                     task["evaluator_timing"] = _evaluator_timing(entry["request"]["tasks"][task["task"]], grade)
+                    evidence_row = row.get("evidence")
+                    evidence_row = evidence_row if isinstance(evidence_row, dict) else {}
+                    guards = evidence_row.get("guards")
+                    guards = guards if isinstance(guards, dict) else {}
+                    audit = guards.get("mechanism_audit", evidence_row.get("mechanism_audit"))
+                    task["cadence"] = deepcopy(audit.get("penalty_cadence")) if isinstance(audit, dict) else None
                 trial["attempt_ids"].append(result["attempt_id"])
                 evidence.append({"attempt_id": result["attempt_id"], "result_hash": stable_hash(result),
                                  "valid_receipt": valid})
