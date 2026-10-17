@@ -38,6 +38,36 @@ def statuses(row):
     return values
 
 
+def recipe_comparison_hash(recipe):
+    """Only the new implicit polar default may differ in an archived packet."""
+    recipe = deepcopy(recipe)
+    if recipe.get('optimizer_convolution_rule', 'polar') == 'polar':
+        recipe.pop('optimizer_convolution_rule', None)
+    return stable_hash(recipe)
+
+
+def optimizer_delta(before, after):
+    before = {**before, 'optimizer_convolution_rule': before.get('optimizer_convolution_rule', 'polar')}
+    after = {**after, 'optimizer_convolution_rule': after.get('optimizer_convolution_rule', 'polar')}
+    delta = {key: [before.get(key), after.get(key)] for key in before.keys() | after.keys()
+             if before.get(key) != after.get(key)}
+    allowed = [
+        {'optimizer_svd_backend': ['native', 'newton_schulz']},
+        {'optimizer_convolution_rule': ['polar', 'frobenius']},
+        {'optimizer_convolution_rule': ['polar', 'quintic']},
+    ]
+    require(delta in allowed, 'undeclared global recipe delta')
+    require(after.get('optimizer_family') == 'dualnorm' and after.get('optimizer_convolution') == 'per_offset',
+            'optimized rule requires full per-offset DualNorm')
+    rule = after['optimizer_convolution_rule']
+    backend = after.get('optimizer_svd_backend', 'native')
+    require((rule == 'polar' and backend == 'newton_schulz') or (rule != 'polar' and backend == 'native'),
+            'optimizer rule and SVD backend disagree')
+    return delta, dict(convolution_rule=rule, svd_backend=backend,
+                       convolution_update_version=('per_offset_polar_v1' if rule == 'polar'
+                                                   else f'per_offset_{rule}_hybrid_v1'))
+
+
 def quality_proof(root, source_report, candidate):
     report, pointers = _published_report(root, source_report)
     require(report.get('publication_scope') == 'frozen_source', 'quality must retain an independently frozen source')
@@ -51,6 +81,9 @@ def quality_proof(root, source_report, candidate):
     actual_rows = [item for item in actual.get('rows', []) if item['candidate_revision'] == row['candidate_revision']]
     require(len(actual_rows) == 1, 'missing unique actual executed-policy row')
     measured = actual_rows[0]
+    require(all(measured.get(key) == row.get(key) for key in
+                ('candidate_id', 'candidate_revision', 'bindings', 'attempt_ids', 'runtime_cohort')),
+            'actual executed-policy cohort differs from projected row')
     view = read_json(root / 'configs/forge/views/discriminator_stability.json')
     require(actual.get('policy_fingerprint') == stable_hash(view), 'actual qualification uses another declared policy')
     require(measured['status'] == 'PASS' and measured['qualified_tier'] == 3, 'complete ordinary qualification has not passed')
@@ -66,12 +99,15 @@ def quality_proof(root, source_report, candidate):
     require(row['bindings']['task_contracts'] == incumbent['bindings']['task_contracts'], 'task contracts differ from incumbent')
     before = inventory['recipe_contracts'][incumbent['bindings']['recipe_sha256']]
     after = report['recipe_contracts'][row['bindings']['recipe_sha256']]
-    delta = {key: [before.get(key), after.get(key)] for key in before.keys() | after.keys() if before.get(key) != after.get(key)}
-    require(delta == {'optimizer_svd_backend': ['native', 'newton_schulz']}, 'undeclared global recipe delta')
+    require(stable_hash(before) == incumbent['bindings']['recipe_sha256']
+            and stable_hash(after) == row['bindings']['recipe_sha256'], 'quality recipe contract hash differs')
+    delta, optimizer = optimizer_delta(before, after)
     row['trainer_family'] = 'bispf'
     return row, dict(source_commit=report['frozen_source']['commit'], source_digest=row['bindings']['source_digest'],
                      candidate_revision=row['candidate_revision'], actual_policy_revision=actual['view_revision'],
                      recipe_sha256=row['bindings']['recipe_sha256'], native_recipe_sha256=incumbent['bindings']['recipe_sha256'],
+                     recipe_comparison_sha256=recipe_comparison_hash(after),
+                     native_recipe_comparison_sha256=recipe_comparison_hash(before), optimizer_contract=optimizer,
                      incumbent_passes=sorted(old_passes), counted_passes=sorted(required), recipe_delta=delta,
                      source_report_sha256=pointers['json_sha256'])
 
@@ -97,6 +133,10 @@ def performance_proof(root, manifests, candidate, quality):
             require(receipt['forge_binding']['source_digest'] == quality['source_digest'], 'performance source manifest differs from qualification')
             if entry['candidate_id'] == candidate:
                 require(receipt['forge_binding']['candidate_revision'] == quality['candidate_revision'], 'performance candidate revision differs')
+                require(receipt['recipe'].get('optimizer_convolution_rule', 'polar')
+                        == quality['optimizer_contract']['convolution_rule']
+                        and receipt['recipe'].get('optimizer_svd_backend', 'native')
+                        == quality['optimizer_contract']['svd_backend'], 'performance optimizer rule differs from qualification')
             records[key] = receipt
     require(set(records) == {(c, t) for c in (candidate, NATIVE, R1R2) for t in expected}, 'measure all six workloads for candidate and both controls')
     require(len({r['identity']['global_recipe_sha256'] for (c, _), r in records.items() if c == candidate}) == 1,
@@ -134,8 +174,10 @@ def wide_proof(root, attempts, candidate, quality):
         result = read_json(directory / 'result.json')
         name = request['candidate']['id']
         require(name in {candidate, NATIVE} and request['protocol']['seed'] == 0, 'wide attempt uses another candidate or seed')
-        expected_recipe = quality['recipe_sha256'] if name == candidate else quality['native_recipe_sha256']
-        require(stable_hash(request['candidate']['resolved_recipe']) == expected_recipe, 'wide diagnostic changed the global recipe')
+        expected_recipe = (quality['recipe_comparison_sha256'] if name == candidate
+                           else quality['native_recipe_comparison_sha256'])
+        require(recipe_comparison_hash(request['candidate']['resolved_recipe']) == expected_recipe,
+                'wide diagnostic changed the global recipe')
         if name == candidate:
             require(request['candidate_revision'] == quality['candidate_revision'], 'wide diagnostic candidate revision differs')
         require(request['source']['origin_commit'] == quality['source_commit'] and request['source']['digest'] == quality['source_digest'],

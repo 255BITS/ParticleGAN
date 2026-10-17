@@ -50,6 +50,59 @@ def test_quality_proposal_includes_every_incumbent_pass_including_clock(quality)
     assert 'clockfree_audit_measurement_v1' in expected
 
 
+def replace_quality_recipe(report, recipe):
+    row = report['rows'][0]
+    row['bindings']['recipe_sha256'] = stable_hash(recipe)
+    report['recipe_contracts'] = {stable_hash(recipe): recipe}
+    actual = report['comparison_policy_projection']['actual_qualification']
+    actual['rows'][0]['bindings'] = deepcopy(row['bindings'])
+    report['comparison_policy_projection']['actual_qualification_sha256'] = stable_hash(actual)
+
+
+@pytest.mark.parametrize('rule', ['polar', 'frobenius', 'quintic'])
+def test_quality_accepts_only_the_declared_single_optimizer_delta(quality, rule):
+    root, report, incumbent = quality
+    inventory = read_json(root / 'reports/forge/technique-inventory.json')
+    before = inventory['recipe_contracts'][incumbent['bindings']['recipe_sha256']]
+    after = {**before, 'optimizer_convolution_rule': rule}
+    if rule == 'polar':
+        after['optimizer_svd_backend'] = 'newton_schulz'
+    replace_quality_recipe(report, after)
+    _, proof = selection.quality_proof(root, Path('source.json'), 'optimized')
+    expected = ({'optimizer_svd_backend': ['native', 'newton_schulz']} if rule == 'polar'
+                else {'optimizer_convolution_rule': ['polar', rule]})
+    assert proof['recipe_delta'] == expected
+    assert proof['optimizer_contract']['convolution_rule'] == rule
+    assert proof['optimizer_contract']['convolution_update_version'] == (
+        'per_offset_polar_v1' if rule == 'polar' else f'per_offset_{rule}_hybrid_v1')
+    assert proof['recipe_sha256'] == stable_hash(after)
+    assert proof['native_recipe_sha256'] == stable_hash(before)
+    assert proof['native_recipe_comparison_sha256'] == selection.recipe_comparison_hash(before)
+
+
+@pytest.mark.parametrize('change', ['combined_backend', 'rate', 'prior_policy', 'unknown_rule', 'actual_source'])
+def test_alternative_quality_rejects_additional_changes_or_foreign_actual_cohort(quality, change):
+    root, report, incumbent = quality
+    inventory = read_json(root / 'reports/forge/technique-inventory.json')
+    before = inventory['recipe_contracts'][incumbent['bindings']['recipe_sha256']]
+    after = {**before, 'optimizer_convolution_rule': 'frobenius'}
+    if change == 'combined_backend':
+        after['optimizer_svd_backend'] = 'newton_schulz'
+    elif change == 'rate':
+        after['lr'] *= 2
+    elif change == 'prior_policy':
+        after['prior_update'] = 'frozen'
+    elif change == 'unknown_rule':
+        after['optimizer_convolution_rule'] = 'other'
+    replace_quality_recipe(report, after)
+    if change == 'actual_source':
+        actual = report['comparison_policy_projection']['actual_qualification']
+        actual['rows'][0]['bindings']['source_digest'] = 'foreign'
+        report['comparison_policy_projection']['actual_qualification_sha256'] = stable_hash(actual)
+    with pytest.raises(ValueError, match='BISPF selection'):
+        selection.quality_proof(root, Path('source.json'), 'optimized')
+
+
 @pytest.mark.parametrize('change', ['clock_regression', 'unfinished', 'recipe_delta', 'actual_proof'])
 def test_quality_proposal_rejects_regression_or_incomplete_evidence(quality, change):
     root, report, _ = quality
@@ -72,7 +125,8 @@ def test_quality_proposal_rejects_regression_or_incomplete_evidence(quality, cha
         selection.quality_proof(root, Path('source.json'), 'optimized')
 
 
-def performance_fixture(tmp_path, *, slow=False, unknown=True, missing=False, wrong_source=False):
+def performance_fixture(tmp_path, *, slow=False, unknown=True, missing=False, wrong_source=False,
+                        rule='polar', wrong_rule=False):
     tasks = ['dcgan_performance_' + suffix for suffix in ('r32', 'r64', 'r128', 'r256', 'b64', 'w128')]
     atomic_json(tmp_path / 'configs/forge/views/dcgan_performance.json',
                 {'assignments': [{'task': task} for task in tasks]})
@@ -83,6 +137,13 @@ def performance_fixture(tmp_path, *, slow=False, unknown=True, missing=False, wr
             if missing and index == 0 and task == tasks[-1]:
                 continue
             data = receipt(candidate=candidate)
+            if index == 0:
+                data['recipe']['optimizer_convolution_rule'] = 'other' if wrong_rule else rule
+                if rule == 'polar':
+                    data['recipe']['optimizer_svd_backend'] = 'newton_schulz'
+                data['identity']['recipe_sha256'] = stable_hash(data['recipe'])
+                data['identity']['global_recipe_sha256'] = stable_hash({key: value for key, value in data['recipe'].items()
+                    if key not in {'batch_size', 'num_particles', 'z_dim', 'total_steps'}})
             data['task_id'] = task
             data['forge_binding'] = {'source_digest': 'new-source', 'candidate_revision': 'new-revision'}
             if wrong_source and index == 0:
@@ -99,21 +160,28 @@ def performance_fixture(tmp_path, *, slow=False, unknown=True, missing=False, wr
     return manifests
 
 
-def test_observed_performance_targets_remain_unpaired_when_contention_unknown(tmp_path):
-    manifests = performance_fixture(tmp_path)
+def performance_quality(rule='polar'):
+    return dict(source_commit='a' * 40, source_digest='new-source', candidate_revision='new-revision',
+                optimizer_contract={'convolution_rule': rule,
+                                    'svd_backend': 'newton_schulz' if rule == 'polar' else 'native'})
+
+
+@pytest.mark.parametrize('rule', ['polar', 'frobenius', 'quintic'])
+def test_observed_performance_targets_remain_unpaired_when_contention_unknown(tmp_path, rule):
+    manifests = performance_fixture(tmp_path, rule=rule)
     proof = selection.performance_proof(tmp_path, manifests, 'optimized',
-                {'source_commit': 'a' * 40, 'source_digest': 'new-source', 'candidate_revision': 'new-revision'})
+                performance_quality(rule))
     assert not proof['certified_paired_speed_ranking']
     assert len(proof['observations']) == 6
     assert proof['observations']['dcgan_performance_r256']['observed_native_speedup'] == 16
 
 
-@pytest.mark.parametrize('change', ['slow', 'missing', 'wrong_source'])
+@pytest.mark.parametrize('change', ['slow', 'missing', 'wrong_source', 'wrong_rule'])
 def test_performance_proposal_refuses_target_misses_or_incompatible_evidence(tmp_path, change):
     manifests = performance_fixture(tmp_path, **{change: True})
     with pytest.raises(ValueError, match='BISPF selection'):
         selection.performance_proof(tmp_path, manifests, 'optimized',
-            {'source_commit': 'a' * 40, 'source_digest': 'new-source', 'candidate_revision': 'new-revision'})
+            performance_quality())
 
 
 def test_propose_preserves_current_selection_and_every_other_family(quality, monkeypatch):
@@ -139,7 +207,9 @@ def wide(tmp_path, monkeypatch):
     attempts, envelopes, results = [], {}, {}
     native_recipe, fast_recipe = {'optimizer_svd_backend': 'native'}, {'optimizer_svd_backend': 'newton_schulz'}
     quality = dict(source_commit='a' * 40, source_digest='source', candidate_revision='new',
-                   recipe_sha256=stable_hash(fast_recipe), native_recipe_sha256=stable_hash(native_recipe))
+                   recipe_sha256=stable_hash(fast_recipe), native_recipe_sha256=stable_hash(native_recipe),
+                   recipe_comparison_sha256=selection.recipe_comparison_hash(fast_recipe),
+                   native_recipe_comparison_sha256=selection.recipe_comparison_hash(native_recipe))
     for candidate in ('optimized', selection.NATIVE):
         for task in selection.WIDE:
             definition = read_json(ROOT / 'configs/forge/tasks' / (task + '.json'))
@@ -183,7 +253,37 @@ def test_exercised_wide_quality_preserves_passes_and_keeps_shared_failure_visibl
     assert not proof['qualification_reuse']
 
 
-@pytest.mark.parametrize('change', ['budget', 'native_pass_loss', 'no_positive', 'recipe', 'revision', 'initialization', 'gif', 'task'])
+def test_wide_native_allows_only_the_new_implicit_polar_default(wide):
+    root, quality, attempts, envelopes, results = wide
+    for request in envelopes.values():
+        request['candidate']['resolved_recipe']['optimizer_convolution_rule'] = 'polar'
+    rewrite_wide(root, attempts, envelopes, results)
+    assert selection.wide_proof(root, attempts, 'optimized', quality)
+    envelopes[selection.NATIVE + '-stripes']['candidate']['resolved_recipe']['optimizer_convolution_rule'] = 'quintic'
+    rewrite_wide(root, attempts, envelopes, results)
+    with pytest.raises(ValueError, match='global recipe'):
+        selection.wide_proof(root, attempts, 'optimized', quality)
+
+
+@pytest.mark.parametrize('rule', ['frobenius', 'quintic'])
+def test_wide_alternatives_require_the_exact_qualified_rule(wide, rule):
+    root, quality, attempts, envelopes, results = wide
+    recipe = {'optimizer_svd_backend': 'native', 'optimizer_convolution_rule': rule}
+    quality['recipe_sha256'] = stable_hash(recipe)
+    quality['recipe_comparison_sha256'] = selection.recipe_comparison_hash(recipe)
+    for request in envelopes.values():
+        if request['candidate']['id'] == 'optimized':
+            request['candidate']['resolved_recipe'] = deepcopy(recipe)
+    rewrite_wide(root, attempts, envelopes, results)
+    assert selection.wide_proof(root, attempts, 'optimized', quality)
+    envelopes['optimized-stripes']['candidate']['resolved_recipe']['optimizer_convolution_rule'] = 'polar'
+    rewrite_wide(root, attempts, envelopes, results)
+    with pytest.raises(ValueError, match='global recipe'):
+        selection.wide_proof(root, attempts, 'optimized', quality)
+
+
+@pytest.mark.parametrize('change', ['budget', 'native_pass_loss', 'no_positive', 'recipe', 'revision', 'initialization',
+                                    'source_commit', 'source_manifest', 'gif', 'task'])
 def test_wide_quality_rejects_missing_or_incompatible_training_evidence(wide, change):
     root, quality, attempts, envelopes, results = wide
     stripes = 'optimized-stripes'
@@ -200,6 +300,10 @@ def test_wide_quality_rejects_missing_or_incompatible_training_evidence(wide, ch
         envelopes[stripes]['candidate_revision'] = 'foreign'
     elif change == 'initialization':
         results[stripes]['initialization'] = {'G': 'different'}
+    elif change == 'source_commit':
+        envelopes[stripes]['source']['origin_commit'] = 'b' * 40
+    elif change == 'source_manifest':
+        envelopes[stripes]['source']['digest'] = 'foreign'
     elif change == 'gif':
         (root / 'queue/wide' / stripes / 'training.gif').unlink()
     else:
