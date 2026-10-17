@@ -1,0 +1,287 @@
+{
+  "benchmark": "dcgan_performance_v1",
+  "default_adoption": false,
+  "entries": [
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "2012567672570f96c20fde88f139ed268f34521fb9c7959d23cc37d161b4eef1",
+      "identity_sha256": "3eb71f82219a426d4cdd5cd41c7d7ed0debb3b9c0e5b079d640e32b9a3c0dee6",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/bispf-dcgan_performance_b64-e0e42459d8728fbb.json",
+      "receipt_sha256": "ef46b7505c32c7a4414e8fe897a178c630cfd15c2a81a3fe4d44900819ac67c5",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "a1403032f0bb0f7aafc2d60d218d3a46478d38437f15ad4e03a0c41149a58503",
+      "identity_sha256": "aae77cce7052d737ccb210e9214d9a41480d6ae7f68dc5edaf77ca4915f38766",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/bispf-dcgan_performance_r128-f058b27858a2ecc9.json",
+      "receipt_sha256": "d508057ac4f759344f26a732d19065c2d9508df1b38737e6e25a19f4c7256e75",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "089824513ee90b09c46b964d3caec4162b8f7a8e1eb9329e5f037cc49c7bab59",
+      "identity_sha256": "6bd8b6fa5965d096239daa471ec0eebd4ea27fd96167a5d2aac8ccc7ef7244ae",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/bispf-dcgan_performance_r256-6bb27f9cb7619157.json",
+      "receipt_sha256": "4800175eb98aa0764bd90235b85a7aa503a40cbeda9d68ccea22ed01eceec65d",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "b5254b249e6e45580a04d2a1436c6f13befa20aee19150766a2384e5c44f43c5",
+      "identity_sha256": "8e9bd5164fc1fe92eab04a5a563415dae749aafa0c94d692994447743d7dbc72",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/bispf-dcgan_performance_r32-221bb2285c379ba5.json",
+      "receipt_sha256": "bb68e83a93709b2c4f77e51e526a9d93b4a7fbd2b8e035c9ea9cf10dc62105cc",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "056ab95b57e5b38dc3128b2db09327608b7dbb36522bf4dfbfc527ec54d412c9",
+      "identity_sha256": "0eca386fdaf3c38a2f5bb71cfdd74efd8e3309642d94fee4c79dfd972eb538a2",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/bispf-dcgan_performance_r64-c2d364cfb2dcbf77.json",
+      "receipt_sha256": "747b18e3eeca50c66ba54e0899d08dcf344f12eeae0398d03e20f780b7f79db9",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "bispf-v2",
+      "comparison_key": "b37747e33ade424531774db0641c79eee9e5e842ace793b9315ce1973a5989f9",
+      "identity_sha256": "f843e7a6cd6238acb78be7042254589fadc7133b3dc69fda91bf91840d028087",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/bispf-dcgan_performance_w128-5efda52d5c838381.json",
+      "receipt_sha256": "a5c7b761a419f83587e1e9591cda3250b7d9c1aec640506cdddd75de45e9e922",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "bispf"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "9d6b0d6c87586f827eb15231f954113aeddedb280ac9621c65162ba796976ab6",
+      "identity_sha256": "41c87853f96fae25b252fa4273505d4d961dc07ebf27a0ad79130783640b0b80",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/r1r2-dcgan_performance_b64-5a5a675636385b97.json",
+      "receipt_sha256": "a97fdf37bc93159ec5ab0c4f07d76b400e251ed1c7516023de24401a639a73c5",
+      "task_id": "dcgan_performance_b64",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "47de9b0e1be0fb199f707936a94d8f42a2b730531b343bf0584679602e7ce79c",
+      "identity_sha256": "6b93d87afbf002098ca40712b9a6974fbb11213de30ac53f190bd28db9a6d538",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/r1r2-dcgan_performance_r128-1c0454438c92e7a7.json",
+      "receipt_sha256": "119308ad32404dfc178880c90ee753afb47518961a882a3bf4173d1b317586ab",
+      "task_id": "dcgan_performance_r128",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "587577308f3e7e524ea83543c5fde5e38bcf215b962ea64c0bdbbf69295c6172",
+      "identity_sha256": "c7a1d48c837bb3118ae1fa01c9e143166b4d637c852a58872ae7be33991aea2d",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/r1r2-dcgan_performance_r256-e7c08b77cf14c8fd.json",
+      "receipt_sha256": "26d8a420897cc19a8a8015468d259eccbca13633b5b88bd70b3596bd6f325bcb",
+      "task_id": "dcgan_performance_r256",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "51f48764eb7a0915a2195f5d6b4a0c8b991a3accb7be0895847c0368548afacb",
+      "identity_sha256": "886fd1c26a22d5a9ae94c7f9545c5d39e3f931abfb8c86313a0745834b52b71b",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/r1r2-dcgan_performance_r32-cb4bc5c131abb7f1.json",
+      "receipt_sha256": "7aeda1090594f2dcb4cac4e1158fec095680c92859ccfa68bca44643607fb010",
+      "task_id": "dcgan_performance_r32",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "b6b16ed78982fa7e277d4c6f08793ceb82a779cdd0b1952d57b6aadb333d952b",
+      "identity_sha256": "7d19241b52af09563d9239650bf8168dfff102866144f01e5d586dfdeb9a38f3",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/r1r2-dcgan_performance_r64-9bd59d2e5dad6d82.json",
+      "receipt_sha256": "095d2b0dc2f421e3c3e0e1427cb8f91442e001ed383cda6af04b38f521819c88",
+      "task_id": "dcgan_performance_r64",
+      "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "comparison_key": "3cebfcdefdd811c28d9593cfb2b0e0b91e01ce6c98be2d98aff569c09d59dd80",
+      "identity_sha256": "82871827b8f5f1f6a6b840da3ba13c94f62350bac7ebf32d9df44f1b78bb0759",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-controls-v1/r1r2-dcgan_performance_w128-92da401baaf3becb.json",
+      "receipt_sha256": "4ff48b3beac555f635e0bcb44349d999ea0aa00ce99e0aec5e061d76699a13d5",
+      "task_id": "dcgan_performance_w128",
+      "trainer_family": "r1r2"
+    }
+  ],
+  "export": {
+    "counts": {
+      "COMPLETE": 12
+    },
+    "exporter_sha256": "41b1d0262d17e6aaf08463888dbdb734f4288e725e84abc76f2e61c1a2f47838",
+    "family_selections": [
+      {
+        "candidate_id": "bispf-v2",
+        "registration_family": "bispf",
+        "trainer_family": "bispf"
+      },
+      {
+        "candidate_id": "recipe-prior-refactor-r1r2-v1",
+        "registration_family": "r1r2",
+        "trainer_family": "r1r2"
+      }
+    ],
+    "partial_snapshot": false,
+    "qualification_input": false,
+    "registration": "bispf-matrix-controls-v1",
+    "registration_file": {
+      "path": "/home/martyn/dev/ParticleGAN-bispf-optimized/configs/forge/performance/bispf-matrix-controls-v1.json",
+      "sha256": "bd5265217ddcda2c7af5a1e4f0739fe0c7f902a9313e099e0d4f034c7e502ed7"
+    },
+    "schema": "forge_scaling_export_v1",
+    "training_launched": false
+  },
+  "input_digest": "5548b679072dd0a9e8de25c93c9d9b2ad5c8898bb9c1ed9a71d694908d4b15e2",
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "dcgan_mock_performance",
+  "tasks": [
+    {
+      "id": "dcgan_performance_b64",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 64,
+        "image_size": 64,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "f8b52af13cd2e7d1131983a71fac9ed5bc1dd5e4699825eab6ace5399f112df2"
+    },
+    {
+      "id": "dcgan_performance_r128",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 16,
+        "image_size": 128,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "35a57d89ecf108814d001d1ad84190ea1268f661d978d68c454415b5145f4344"
+    },
+    {
+      "id": "dcgan_performance_r256",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 16,
+        "image_size": 256,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 270.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "8125cf61a6d5efb28c32bc9076facb0cbc7b7312f6976f5c30b52de886cc7d88"
+    },
+    {
+      "id": "dcgan_performance_r32",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 16,
+        "image_size": 32,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "7f98c9b997c36af81e1578d51be268afd568d1a267070e46a6cda4779d4b682a"
+    },
+    {
+      "id": "dcgan_performance_r64",
+      "spec": {
+        "base_channels": 64,
+        "batch_size": 16,
+        "image_size": 64,
+        "latent_dim": 128,
+        "max_channels": 512,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "5c385d34f5780cd8420fc5505e895aef0bdd3a9714626c10086fff8dedb1751e"
+    },
+    {
+      "id": "dcgan_performance_w128",
+      "spec": {
+        "base_channels": 128,
+        "batch_size": 16,
+        "image_size": 64,
+        "latent_dim": 128,
+        "max_channels": 1024,
+        "max_seconds": 150.0,
+        "measured_updates": 10,
+        "n_particles": 256,
+        "prior": {
+          "exception_reason": "Performance-only finite-table workload supports all selected policy recipes under one common initial prior. No stochastic distribution-quality claim or qualification credit.",
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "profile_updates": 0,
+        "seed": 0,
+        "warmup_updates": 3
+      },
+      "spec_sha256": "29f678ed0d7f313c2120c3975fa0da4b353f5944d15e3f95f2750dbc814abc4e"
+    }
+  ],
+  "timing_scope": "Synchronized wall time for one public trainer update, including its critic/generator/prior work; warmup, construction, mock-data generation, evaluation, GIFs and checkpoint writes are excluded.",
+  "unavailable": []
+}
