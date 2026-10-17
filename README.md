@@ -39,9 +39,9 @@ view requirements across 18 distinct counted tests; held failures remain
 visible. These results do not establish natural-image convergence or a
 universal architecture guarantee.
 
-![100 Gaussians: historical KA2 recipe converging with live weights](100gaussians.gif)
+![100 Gaussians: historical K3P recipe converging with live weights](100gaussians.gif)
 
-Recorded with the historical 0.8.0 KA2 recipe and its original random initialization, live weights, seed 1234:
+Recorded with the historical 0.8.0 K3P recipe and its original random initialization, live weights, seed 1234:
 **100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
 at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
 
