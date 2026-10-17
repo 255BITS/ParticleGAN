@@ -33,6 +33,11 @@
       "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/tests-release-091-compat-final.log",
       "sha256": "4a89c6b8df9fadbc51dcf12fc066a16a03315178ef7538a0d0a6cbcc8c1b502e",
       "passed": 66
+    },
+    {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/tests-release-091-readme.log",
+      "sha256": "1d3314562a9345a9f75b1adf32d61168822c00d316f7db85833230bba023e448",
+      "passed": 3
     }
   ]
 }

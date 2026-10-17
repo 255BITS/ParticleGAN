@@ -46,11 +46,18 @@ DCGAN updates and about 2.3× faster small image updates versus 0.9.0. Across
 all six DCGAN workloads, speedups range from 1.02× to 2.15×. These results
 do not establish natural-image convergence or a universal architecture guarantee.
 
-![Actual 100-Gaussian training with the optimized BISPF default: particle outputs, target modes and numerical learning curves](100gaussians.gif)
+![Actual training of the 0.9.1 BISPF default on the stripes task, with numerical quality observations](reports/forge/bispf-throughput/media/bispf-throughput-v1/img_stripes2.gif)
+
+The 0.9.1 default passes this fixed 600-update stripes task with all required
+modes. Its matched mean update throughput improves 2.30× over 0.9.0;
+[metrics and source-bound evidence](reports/forge/bispf-throughput/README.md)
+include the unchanged bars failure and separate wide-channel controls.
+
+![Archived 0.9.0 100-Gaussian training: particle outputs, target modes and numerical learning curves](100gaussians.gif)
 
 Recorded with the **0.9.0 optimized BISPF default**, public deterministic initialization,
 live weights and protocol seed 0: **100/100 modes, 42.1% within 3σ after 20,000 updates**.
-The 95% precision goal is not met. The animation follows the selected public default;
+The 95% precision goal is not met. This animation retains its 0.9.0 recipe;
 [metrics and reproduction](reports/readme-100gaussians/README.md#current-default)
 preserve the full result and the historical K3P animation.
 

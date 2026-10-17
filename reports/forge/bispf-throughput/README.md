@@ -62,7 +62,7 @@ The measured implementation was frozen at `bbd95834c`, based on `origin/develop`
 
 - [All final metrics, matched-pair proofs, current-policy qualification and original archive receipts](results.json).
 - [Source integrity](source-integrity.json), [unchanged leaderboard/pin proof](publication-integrity.json), and [software checks](software-checks.json).
-- [0.9.1 default-promotion verification](release-verification.json) and its [reproduction source](verify_release.py): exact recipe binding, two changed scientific source files, unchanged training body outside the capability gate, and 187 passing release checks.
+- [0.9.1 default-promotion verification](release-verification.json) and its [reproduction source](verify_release.py): exact recipe binding, two changed scientific source files, unchanged training body outside the capability gate, and 190 passing release checks.
 - [Development probes](probes.json), including the first probe’s mismatched preliminary declaration and the retained layout-test failure. They grant no quality credit; the final registered comparison has separate correct bindings.
 - Actual-training GIFs: [small stripes](media/bispf-throughput-v1/img_stripes2.gif), [wide bars](media/bispf-throughput-v1/img_bars4_w64_optimizer_diagnostic.gif), [256-pixel finite updates](media/bispf-throughput-v1/dcgan_performance_r256.gif), and [endurance checks](media/bispf-throughput-v1/ring_extension.gif). Publication adds no updates or sampling draws.
 

@@ -51,7 +51,8 @@ changed = [name for name, digest in source['files'].items()
            if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest]
 assert set(changed) == {'particlegan/recipes.py', 'particlegan/training.py'}
 checks = []
-for name, count in [('tests-release-091-final.log', 121), ('tests-release-091-compat-final.log', 66)]:
+for name, count in [('tests-release-091-final.log', 121), ('tests-release-091-compat-final.log', 66),
+                    ('tests-release-091-readme.log', 3)]:
     log = args.artifacts / name
     assert f'{count} passed' in log.read_text(), name
     checks.append({'path': str(log), 'sha256': hashlib.sha256(log.read_bytes()).hexdigest(), 'passed': count})
