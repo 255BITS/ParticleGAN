@@ -11,8 +11,10 @@ contracts. A software release does not requalify archived scientific results.
 on pull requests and pushes to `develop` and `master`, manual dispatches and
 calls from the release workflow.
 
-- Python 3.12 runs the regression suite with CPU PyTorch, with the bounded
-  late-phase renderer in a separate process.
+- Python 3.12 runs the complete regression suite in four deterministic file
+  shards with CPU PyTorch, with the bounded late-phase renderer in a separate
+  process. Before building distributions, CI verifies that the shard receipts
+  collected the same suite and cover every test exactly once.
 - Python 3.11 runs the Lunar smoke pipeline and GIF exports.
 - Python 3.10, 3.11 and 3.12 each build and smoke-test a wheel outside the
   checkout, including public recipe restoration and checkpoint examples.
