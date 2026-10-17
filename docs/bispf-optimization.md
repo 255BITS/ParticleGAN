@@ -95,3 +95,37 @@ quality study, capped at 46,620 seconds. The selection proof checks all 19
 incumbent numerical passes, the counted current-policy gates, both direct wide
 controls and the declared observed timing targets before proposing a whole-row
 BISPF replacement. It never applies the selection itself.
+
+## Reconstructing the executed source closure
+
+The final candidate ran from a sparse H2 checkout. Its captured 1,273-file source
+map has digest
+`c82ed2dc712e4c9ebda80678e453635bd8a16dc74fae1450234ed368aa956213`.
+The optional `reports/transfer_suite/unadjusted/leading_profile.json` was absent.
+A full checkout can introduce that catalog support file and change the source
+identity, even at the same Git commit. Reconstruct the same file set explicitly:
+
+```sh
+git worktree add --no-checkout --detach /tmp/bispf-h2-repro \
+  d9d72d53761c898bce20102e1995fc3d899c1447
+git -C /tmp/bispf-h2-repro sparse-checkout set \
+  particlegan experiments benchmarks lib configs reports/forge \
+  reports/toy100/gap-fill-20260925/sources/k3p
+git -C /tmp/bispf-h2-repro checkout d9d72d53761c898bce20102e1995fc3d899c1447
+```
+
+Use the project environment from that checkout. Planning launches no training:
+
+```sh
+cd /tmp/bispf-h2-repro
+python -m experiments.forge --queue-root /tmp/bispf-h2-plan-queue \
+  plan bispf-optimized-quintic-v1 --study bispf-optimized-quintic-v1-quality
+```
+
+The saved requests bind the precise recipe, seed, task contracts, initialization,
+RNGs, runtime and hardware separately. Matching the source map alone does not
+reproduce timing on different hardware. Frozen publication asks H2's own catalog
+helpers which optional files matter, preserves their captured presence/absence,
+and verifies original study support, source bytes and admission signatures. Its
+closure receipt records the omitted profile explicitly. A completed measured
+study disappearing into unresolved declarations is an error, never qualification.
