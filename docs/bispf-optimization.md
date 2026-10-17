@@ -47,3 +47,51 @@ local Forge artifact directory. Publish compact receipts, provenance, reports,
 reproduction sources and actual-training GIFs. The host's GPU contention
 telemetry was unavailable in the preceding campaign; verify it before asserting
 a certified paired speed ranking, and label unknown contention explicitly.
+
+## Alternative optimizer round
+
+The guarded polar solvers are retained as negative evidence. Source
+`d9d72d53761c898bce20102e1995fc3d899c1447` freezes two further single-field
+recipe changes from native BISPF, with no learning-rate, momentum or budget
+retuning:
+
+- `optimizer_convolution_rule="frobenius"` uses
+  `M / sqrt(||M||_F^2 + lambda^2)`. This gives a unit operator bound but can
+  substantially reduce displacement relative to polar normalization.
+- `optimizer_convolution_rule="quintic"` applies five fixed FP32 polynomial
+  steps to the augmented matrix `[M; lambda I]`, using coefficients
+  `(3.4445, -4.775, 2.0315)`, and divides its top block by `1.21`. It is a
+  bounded spectral filter inspired by Muon, not an equivalent polar solver
+  or the PyTorch Muon optimizer.
+
+Both rules dispatch only to CUDA per-offset convolution matrices whose largest
+channel count per group exceeds 32. CPU, tiny convolution, dense, bias and prior
+updates retain the native law. The existing channel-ratio/kernel-area factor
+and absolute smoothing parameter remain in effect. Defaults and archived
+native checkpoint metadata retain their original meaning. Changed rules and
+checkpoint versions are explicit.
+
+The four-arm profile reserves 960 seconds in total. A storage failure interrupted
+the first Frobenius 256-pixel arm; retain its error and partial artifacts. Charge
+that failed allocation conservatively 60 seconds and give its separately
+identified infrastructure recovery at most 180 seconds, preserving the original
+240-second slot and total cap. The completed Frobenius 64-pixel arm is not
+repeated. The two unexecuted quintic arms retain their 240-second slots.
+
+`bispf-fastpath-alternatives-v1` then reserves 1,800 seconds for six direct
+training arms: native BISPF and both alternatives on the same two width-64 image
+tasks, with 300 seconds per arm. Require preservation of native passes and a
+positive optimized stripes pass before broader execution. The tasks retain
+600 updates, 24 evaluations, public initialization and seed 0. Their numerical
+results and actual-training GIFs are diagnostics; they do not replace ordinary
+quality gates or establish natural-image quality.
+
+The final matrix campaign `bispf-matrix-performance-v1` reserves at most 4,800
+seconds: four recipes times the six unchanged DCGAN performance workloads.
+Measure surviving alternatives and both same-source controls serially on the
+same physical GPU. Leave unnecessary losing-candidate arms unexecuted. Only a
+surviving global recipe proceeds through its separately declared ordinary
+quality study, capped at 46,620 seconds. The selection proof checks all 19
+incumbent numerical passes, the counted current-policy gates, both direct wide
+controls and the declared observed timing targets before proposing a whole-row
+BISPF replacement. It never applies the selection itself.

@@ -1,0 +1,26 @@
+{
+  "schema": "bispf_software_checks_v1",
+  "trainer_source_commit": "d9d72d53761c898bce20102e1995fc3d899c1447",
+  "checks": [
+    {
+      "scope": "alternative primitives, finite guards, integration, native compatibility, guarded NS, scaling benchmark/profile/publication/composition/export",
+      "result": "PASS",
+      "passed": 385,
+      "duration_seconds": 33.44,
+      "command": "CUDA_VISIBLE_DEVICES=1 /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_convolution_rule_nonfinite.py tests/test_convolution_quintic.py tests/test_dualnorm_frobenius.py tests/test_dualnorm_newton_schulz.py tests/test_dualnorm_convolution.py tests/test_dualnorm_smoothing.py tests/test_dualnorm_optimizers.py tests/test_dualnorm_default_parity.py tests/test_forge_dualnorm_convolution.py tests/test_forge_dualnorm_contracts.py tests/test_forge_scaling.py tests/test_forge_scaling_profile.py tests/test_forge_scaling_publication.py tests/test_forge_scaling_composition.py tests/test_forge_scaling_export.py tests/test_forge_scaling_benchmark.py",
+      "local_log": "/tmp/bispf-integrated-checks.log"
+    },
+    {
+      "scope": "selection proof including both alternative rules, strict recipe/source/performance/wide bindings",
+      "source_commit": "64819c1a5",
+      "result": "PASS",
+      "passed": 35,
+      "duration_seconds": 2.19,
+      "local_log": "/tmp/bispf-alternative-selection-final-tests.log"
+    }
+  ],
+  "limitations": [
+    "Software checks establish implementation contracts; trained quality and observed performance are separate evidence.",
+    "The optimizer step is not an atomic transaction across parameter groups; checkpoint loading validates compatibility before applying state."
+  ]
+}
