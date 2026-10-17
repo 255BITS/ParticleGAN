@@ -63,7 +63,7 @@ def score(samples, centers):
                 passed=modes == 100 and hq >= .95)
 
 
-def make_trainer(recipe, device):
+def make_trainer(recipe, device, *, max_steps=None):
     devices = [device.index] if device.type == "cuda" else []
     with torch.random.fork_rng(devices=devices):
         torch.manual_seed(STREAM_SEEDS["constructor"])
@@ -74,14 +74,16 @@ def make_trainer(recipe, device):
     streams = {name: torch.Generator(device=device).manual_seed(seed)
                for name, seed in STREAM_SEEDS.items() if name.endswith("_generator")}
     trainer = GANTrainer(recipe, generator.to(device), critic.to(device), prior=prior.to(device),
-                         seed=SEED, **streams)
+                         seed=SEED, max_steps=max_steps, **streams)
     trainer.readme_constructor_rng = constructor_rng
     return trainer
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--steps", type=int, help="Explicit demo budget; default: get_recipe().total_steps.")
+    parser.add_argument("--steps", type=int, default=20_000,
+                        help="External demo budget (default: 20000); recipe and schedules stay unchanged.")
+    parser.add_argument("--resume-run", type=Path, help="Continue a saved recording, retaining all scored observations.")
     parser.add_argument("--frames", type=int, default=250)
     parser.add_argument("--frame-power", type=float, default=2.)
     parser.add_argument("--fps", type=int, default=25)
@@ -92,8 +94,7 @@ def main():
     parser.add_argument("--record-only", action="store_true")
     args = parser.parse_args()
     default = get_recipe()  # Follow the public default; never select a different favorite for the demo.
-    recipe = default if args.steps is None else get_recipe(total_steps=args.steps)
-    total = recipe.total_steps
+    recipe, total = default, args.steps
     if total is None or total <= 0 or args.frames <= 0 or not np.isfinite(args.frame_power) or args.frame_power <= 0:
         parser.error("a positive budget, --frames and finite --frame-power are required")
     if args.fps <= 0 or 100 % args.fps or not np.isfinite(args.hold_seconds) or args.hold_seconds < 0:
@@ -114,23 +115,67 @@ def main():
         torch.cuda.set_device(device)
         device = torch.device("cuda", torch.cuda.current_device())
     torch.manual_seed(SEED)
-    trainer = make_trainer(recipe, device)
+    parent, prior_data, saved = None, None, None
+    if args.resume_run is not None:
+        parent_path = args.resume_run.resolve()
+        parent = json.loads((parent_path / "summary.json").read_text())
+        if (digest(parent_path / "final.pt") != parent["final_checkpoint_sha256"]
+                or digest(parent_path / "observations.npz") != parent["observations_sha256"]):
+            raise ValueError("resume artifacts do not match the parent receipt")
+        if parent["recipe"] != json.loads(json.dumps(recipe.to_dict())):
+            raise ValueError("resume recipe differs from the current public default")
+        if (parent["seed"] != SEED or parent["stream_seeds"] != STREAM_SEEDS
+                or parent["completed_steps"] >= total or parent["device"] != str(device)):
+            raise ValueError("resume protocol/device differs or the new budget does not extend it")
+        for name, expected in parent["source_sha256"].items():
+            if name.startswith(("particlegan/", "lib/")) and digest(ROOT / name) != expected:
+                raise ValueError(f"resume numerical source changed: {name}")
+        saved = torch.load(parent_path / "final.pt", weights_only=False)
+        with np.load(parent_path / "observations.npz", allow_pickle=False) as archive:
+            prior_data = {name: archive[name] for name in archive.files}
+        old_cap = saved["trainer"].get("max_steps", recipe.total_steps)
+        trainer = make_trainer(recipe, device, max_steps=old_cap)
+    else:
+        trainer = make_trainer(recipe, device, max_steps=total)
+    initial_hashes = {name: module_digest(module) for name, module in
+                      [("G", trainer.G), ("D", trainer.D), ("prior", trainer.prior)]}
     data = torch.Generator(device=device).manual_seed(STREAM_SEEDS["data"])
     evaluation_initial = trainer.eval_generator.get_state().clone()
     reference = torch.Generator(device=device).manual_seed(STREAM_SEEDS["reference"])
-    target = sample_100gaussians(EVAL_SAMPLES, device, generator=reference)
+    if saved is not None:
+        if initial_hashes != parent["initial_sha256"]:
+            raise ValueError("resume public initializer no longer matches the parent")
+        trainer.load_state_dict(saved["trainer"])
+        trainer.extend_execution(total)
+        trainer.readme_constructor_rng = saved["constructor_rng"]
+        data.set_state(saved["data_rng"])
+        reference.set_state(saved["reference_rng"])
+        evaluation_initial = saved["evaluation_initial"]
+        target = torch.as_tensor(prior_data["target"], device=device)
+    else:
+        target = sample_100gaussians(EVAL_SAMPLES, device, generator=reference)
+    start_step = trainer.completed_steps
     centers = torch.cartesian_prod(torch.arange(10, device=device), torch.arange(10, device=device)).float() - 4.5
     oracle, collapsed = score(target, centers), score(torch.zeros_like(target), centers)
     if not oracle["passed"] or collapsed["passed"]:
         raise ValueError("coverage scorer failed oracle/collapse controls")
     media = [0, *frame_steps(total, args.frames, args.frame_power)]
-    scoring = sorted(set(round(total * i / min(24, total)) for i in range(1, min(24, total) + 1)))
+    checks = min(24, total - start_step)
+    scoring = sorted(set(start_step + round((total - start_step) * i / checks)
+                         for i in range(1, checks + 1)))
+    if parent is not None:
+        # Reuse real prefix observations nearest below desired display steps.
+        # Every original scoring check remains present; only media selection changes.
+        media = sorted(set([start_step, *[
+            int(prior_data["steps"][np.searchsorted(prior_data["steps"], step, side="right") - 1])
+            if step <= start_step else step for step in media]]))
+        scoring = sorted(set(parent["scoring_steps"] + scoring))
     sources = [*sorted((ROOT / "particlegan").rglob("*.py")),
                ROOT / "lib/toy_models.py", ROOT / "lib/denoising_toy.py", ROOT / "lib/toy_metrics.py",
                Path(__file__), Path(__file__).with_name("generate.py")]
     contract = dict(
         schema=1, scope="README mode-acquisition illustration; not Forge qualification",
-        seed=SEED, default_recipe=default.name, recipe=recipe.to_dict(),
+        seed=SEED, default_recipe=default.name, recipe=recipe.to_dict(), execution_budget=total,
         version=tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]["version"],
         task=dict(target="uniform 10x10 Gaussian grid", sigma=.03,
                   generator="SimpleMLPGenerator(width=128, depth=3)",
@@ -142,13 +187,19 @@ def main():
                   terminal_checks=5, evaluation_samples=EVAL_SAMPLES, full_default_budget=default.total_steps),
         scoring_steps=scoring, media_steps=media, stream_seeds=STREAM_SEEDS,
         controls=dict(oracle=oracle, collapsed=collapsed),
-        initial_sha256={name: module_digest(module) for name, module in
-                        [("G", trainer.G), ("D", trainer.D), ("prior", trainer.prior)]},
+        initial_sha256=initial_hashes,
         source_sha256={str(path.relative_to(ROOT)): digest(path) for path in sources},
         git_commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
         device=str(device), torch=torch.__version__,
         gpu=torch.cuda.get_device_name(device) if device.type == "cuda" else None,
         cublas_workspace_config=os.environ.get("CUBLAS_WORKSPACE_CONFIG"))
+    if parent is not None:
+        contract["continuation"] = dict(
+            parent_directory=str(parent_path), parent_summary_sha256=digest(parent_path / "summary.json"),
+            parent_observations_sha256=parent["observations_sha256"],
+            parent_checkpoint_sha256=parent["final_checkpoint_sha256"],
+            start_step=start_step, parent_status=parent["status"], prefix_updates_repeated=0,
+            recipe_unchanged=True, original_scoring_checks_retained=True)
     (out / "contract.json").write_text(json.dumps(contract, indent=2) + "\n")
 
     def checkpoint(name):
@@ -161,6 +212,15 @@ def main():
     print(json.dumps(dict(event="start", output_dir=str(out), recipe=recipe.name,
                           total_steps=total, device=str(device), controls=contract["controls"])), flush=True)
     observations, coordinates = [], []
+    if parent is not None:
+        for i, step in enumerate(prior_data["steps"]):
+            observations.append(dict(step=int(step), modes=int(prior_data["modes"][i]),
+                hq=float(prior_data["hq"][i]), mode_tv=float(prior_data["mode_tv"][i]),
+                passed=bool(prior_data["modes"][i] == 100 and prior_data["hq"][i] >= .95),
+                scoring=bool(prior_data["scoring"][i]), frame=int(step) in media))
+            coordinates.append(prior_data["samples"][i])
+        with (out / "metrics.jsonl").open("w") as stream:
+            stream.writelines(json.dumps(row) + "\n" for row in observations)
     final_samples = None
 
     @torch.no_grad()
@@ -182,10 +242,11 @@ def main():
         if step == total:
             final_samples = samples
 
-    observe(0)
+    if parent is None:
+        observe(0)
     wanted = set(media + scoring)
     train_seconds = 0.
-    for step in range(1, total + 1):
+    for step in range(start_step + 1, total + 1):
         tick = time.perf_counter()
         stats = trainer.step(sample_100gaussians(recipe.batch_size, device, generator=data),
                              generator_real=lambda: sample_100gaussians(recipe.batch_size, device, generator=data))
@@ -205,7 +266,7 @@ def main():
     distribution = grid_metrics(final_samples, torch.zeros(EVAL_SAMPLES, device=device, dtype=torch.long),
                                 GaussianGrid(device, .03, 1), target)
     checked = [row for row in observations if row["scoring"]]
-    passed = total == default.total_steps and len(checked) >= 5 and all(row["passed"] for row in checked[-5:])
+    passed = total >= (default.total_steps or 1) and len(checked) >= 5 and all(row["passed"] for row in checked[-5:])
     np.savez_compressed(out / "observations.npz", samples=np.stack(coordinates),
                         steps=np.array([row["step"] for row in observations]),
                         hq=np.array([row["hq"] for row in observations]),
@@ -216,7 +277,9 @@ def main():
                         target=target.cpu().numpy(), final_evaluation=final_samples.cpu().numpy())
     summary = dict(**contract, completed_steps=trainer.completed_steps, status="PASS" if passed else "FAIL",
                    final=observations[-1], terminal_checks=checked[-5:], distribution_metrics=distribution,
-                   train_seconds=train_seconds, record_seconds=time.perf_counter() - started,
+                   train_seconds=train_seconds + (parent["train_seconds"] if parent else 0),
+                   new_updates=total - start_step, new_train_seconds=train_seconds,
+                   record_seconds=time.perf_counter() - started,
                    observations_sha256=digest(out / "observations.npz"),
                    final_checkpoint_sha256=digest(out / "final.pt"),
                    final_data_rng_sha256=hashlib.sha256(data.get_state().numpy().tobytes()).hexdigest(),

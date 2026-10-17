@@ -2,7 +2,7 @@
 
 This is one bounded illustration of the selected public default, resolved with
 `get_recipe()` at execution. For 0.9.0 this is `bispf_optimized`. No recipe field
-is tuned for the animation. The full illustration uses the default 7,000 updates,
+is tuned for the animation. The initial illustration used the default 7,000 updates,
 batch 2,048, a 20,000-row, two-dimensional particle cloud, the example's width-128,
 three-layer MLP generator and Fourier-feature critic, and a uniform 10×10 mixture
 of Gaussians with σ = 0.03. The particle-cloud exception is explicit: the example
@@ -27,7 +27,20 @@ The GIF includes the endpoint and a hold, without best-checkpoint selection.
 Its caption and receipt preserve any failed gate. This supplies no Forge
 qualification and makes no comparison to the historical K3P/seed-1234 runs.
 
-Budget: one full 7,000-update run; no seed sweep, retuning or extension. Bounded
+Budget: the original 7,000 updates plus one user-requested continuation to a total
+of 20,000 updates. Resume the actual saved state through
+`GANTrainer.extend_execution(20_000)`; no recipe/schedule field changes. The
+0.9.0 recipe has constant rates, so this keeps its training law unchanged.
+Retain the original 7k FAIL under its original source and budget. The new
+20k verdict requires five final checks at the same 100-mode/95% bounds.
+All original scoring checks remain present; add 24 evenly spaced checks across
+the 13,000-update continuation. Reuse saved prefix observations for the media;
+only real saved steps may be shown. No prefix updates are repeated, no seed
+sweep or retuning is performed, and the run ends at 20k regardless of outcome.
+
+The reproduction command's default external budget is now 20,000; the library
+recipe remains exactly `get_recipe()`, including its original schedule horizon.
+The explicit execution cap owns the illustration's budget. Bounded
 software smokes may use four updates to verify the public API, RNG isolation,
 checkpoint and renderer. Raw logs, observations and checkpoints stay outside Git.
 Re-render saved observations for visual iterations rather than retraining.

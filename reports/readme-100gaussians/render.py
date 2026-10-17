@@ -48,7 +48,8 @@ def read_run(directory):
     passed = ((data["modes"] == summary["gate"]["modes"])
               & (data["hq"] >= summary["gate"]["hq_min"]))
     terminal = passed[data["scoring"]][-summary["gate"]["terminal_checks"]:]
-    full = (summary["completed_steps"] == summary["gate"]["full_default_budget"]
+    full = (summary["completed_steps"] == summary.get("execution_budget", summary["gate"]["full_default_budget"])
+            and summary["completed_steps"] >= summary["gate"]["full_default_budget"]
             and len(terminal) == summary["gate"]["terminal_checks"] and bool(terminal.all()))
     if summary["status"] != ("PASS" if full else "FAIL"):
         raise ValueError("gate verdict differs from the fixed numerical checks")

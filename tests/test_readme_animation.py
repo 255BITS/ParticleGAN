@@ -12,7 +12,8 @@ def test_readme_animation_uses_the_current_default():
     receipt = json.loads((ROOT / 'reports/readme-100gaussians/summary-current.json').read_text())
     expected = json.loads(json.dumps(get_recipe().to_dict()))
     assert receipt['recipe'] == expected, 'Regenerate the README animation when promoting a new default'
-    assert receipt['completed_steps'] == expected['total_steps']
+    assert receipt['completed_steps'] == receipt.get('execution_budget', expected['total_steps'])
+    assert receipt['completed_steps'] >= expected['total_steps']
     assert receipt['seed'] == 0
     assert receipt['task']['initialization'] == {'generator': 0, 'critic': 1, 'prior': 2}
 
