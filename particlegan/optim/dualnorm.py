@@ -12,6 +12,7 @@ import torch
 from torch.optim import Optimizer
 
 from ..grad_regularizers import CriticStepRecord
+from .convolution_frobenius import frobenius_direction
 
 
 NORMALIZED_FAMILIES = (
@@ -20,15 +21,28 @@ NORMALIZED_FAMILIES = (
 )
 _ROLES = {"generator", "encoder", "router", "noise", "critic", "prior", "table"}
 _CONVOLUTION_VERSION = "per_offset_polar_v1"
+_FROBENIUS_CONVOLUTION_VERSION = "per_offset_frobenius_hybrid_v1"
+_QUINTIC_CONVOLUTION_VERSION = "per_offset_quintic_hybrid_v1"
+_NEWTON_SCHULZ_VERSION = 3
 
 
-def convolution_parameter_groups(groups, modules, *, family):
+def _convolution_version(rule):
+    if rule == "frobenius":
+        return _FROBENIUS_CONVOLUTION_VERSION
+    if rule == "quintic":
+        return _QUINTIC_CONVOLUTION_VERSION
+    return _CONVOLUTION_VERSION
+
+
+def convolution_parameter_groups(groups, modules, *, family, convolution_rule="polar"):
     """Bind kernel updates to module semantics, never infer layout from shape.
 
     Only DualNorm kernel groups are split. Groups without eligible kernels
     retain their original parameters and fields, including checkpoint layout.
     A bare parameter iterable has no module contract and cannot use this hook.
     """
+    if convolution_rule not in ("polar", "frobenius", "quintic"):
+        raise ValueError("optimizer convolution rule must be polar, frobenius or quintic")
     if family not in ("dualnorm", "dualnorm_D_only"):
         return groups
     kernels = {}
@@ -39,7 +53,7 @@ def convolution_parameter_groups(groups, modules, *, family):
             if not isinstance(module, (torch.nn.Conv2d, torch.nn.ConvTranspose2d)):
                 continue
             metadata = {
-                "update_version": _CONVOLUTION_VERSION,
+                "update_version": _convolution_version(convolution_rule),
                 "layout": ("conv_transpose2d_in_out" if isinstance(module, torch.nn.ConvTranspose2d)
                            else "conv2d_out_in"),
                 "groups": module.groups, "in_channels": module.in_channels,
@@ -75,12 +89,12 @@ def convolution_parameter_groups(groups, modules, *, family):
     return result
 
 
-def _validate_convolution_group(group):
+def _validate_convolution_group(group, convolution_rule="polar"):
     metadata = group["dualnorm_convolution"]
     fields = {"update_version", "layout", "groups", "in_channels", "out_channels", "kernel_size"}
     if (group["algorithm"] != "dualnorm" or len(group["params"]) != 1
             or not isinstance(metadata, dict) or set(metadata) != fields
-            or metadata["update_version"] != _CONVOLUTION_VERSION
+            or metadata["update_version"] != _convolution_version(convolution_rule)
             or metadata["layout"] not in ("conv2d_out_in", "conv_transpose2d_in_out")):
         raise ValueError("invalid DualNorm convolution group or update version")
     for key in ("groups", "in_channels", "out_channels"):
@@ -108,6 +122,151 @@ def _convolution_matrices(tensor, metadata):
             for column in range(metadata["kernel_size"][1]):
                 matrix = tensor[group * per_group:(group + 1) * per_group, :, row, column]
                 yield matrix.T if transposed else matrix
+
+
+def _convolution_batch(tensor, metadata):
+    """Return channel matrices in [group, row, column] order."""
+    groups = metadata["groups"]
+    inputs = metadata["in_channels"] // groups
+    outputs = metadata["out_channels"] // groups
+    kernel = metadata["kernel_size"]
+    transposed = metadata["layout"] == "conv_transpose2d_in_out"
+    channels = (inputs, outputs) if transposed else (outputs, inputs)
+    storage = tensor.reshape(groups, *channels, *kernel)
+    return storage.permute(0, 3, 4, 2, 1) if transposed else storage.permute(0, 3, 4, 1, 2)
+
+
+def _polar_initial(oriented, smoothing):
+    width = oriented.shape[-1]
+    identity = torch.eye(width, device=oriented.device, dtype=oriented.dtype)
+    normalizer = oriented.abs().amax(dim=(-2, -1), keepdim=True).clamp_min(smoothing)
+    scaled = oriented / normalizer
+    regularizer = smoothing / normalizer
+    trace = scaled.square().sum(dim=(-2, -1), keepdim=True) + width * regularizer.square()
+    result = scaled / trace.sqrt()
+    lower = regularizer * identity / trace.sqrt()
+    return scaled, regularizer, result, lower, identity
+
+
+def _polar_block(result, lower, identity):
+    for _ in range(4):
+        correction = .5 * (3 * identity - result.mT @ result - lower.mT @ lower)
+        result = result @ correction
+        lower = lower @ correction
+    return result, lower
+
+
+def _polar_failed(result, lower, scaled, regularizer, identity):
+    residual = (identity - result.mT @ result - lower.mT @ lower).abs().sum(-1).amax(-1)
+    # Orthogonality alone is insufficient: shared right updates also preserve
+    # smoothing * result == M * lower. Check that original-input relation.
+    denominator = regularizer.flatten() * result.norm(dim=(-2, -1))
+    relation = ((regularizer * result - scaled @ lower).norm(dim=(-2, -1))
+                / denominator.clamp_min(torch.finfo(result.dtype).tiny))
+    return (~torch.isfinite(result).all(dim=(-2, -1)) | ~torch.isfinite(residual)
+            | (residual > 1e-3) | ~torch.isfinite(relation) | (relation > 1e-3))
+
+
+class _PolarGraphs:
+    """Pure tensor blocks; no parameter, optimizer state or RNG is captured."""
+
+    def __init__(self, oriented, smoothing, *, stream, pool):
+        self.scaled, self.regularizer, self.result, self.lower, self.identity = [
+            value.clone() for value in _polar_initial(oriented, smoothing)]
+        stream.wait_stream(torch.cuda.current_stream())
+        with torch.cuda.stream(stream):
+            # Establish cuBLAS workspaces outside capture on the shared stream.
+            for _ in range(3):
+                _polar_block(self.result, self.lower, self.identity)
+                _polar_failed(self.result, self.lower, self.scaled, self.regularizer, self.identity)
+        torch.cuda.current_stream().wait_stream(stream)
+        self.block = torch.cuda.CUDAGraph()
+        self.guard = torch.cuda.CUDAGraph()
+        with torch.cuda.graph(self.block, stream=stream, pool=pool):
+            result, lower = _polar_block(self.result, self.lower, self.identity)
+            self.result.copy_(result)
+            self.lower.copy_(lower)
+        with torch.cuda.graph(self.guard, stream=stream, pool=pool):
+            self.failed = _polar_failed(self.result, self.lower, self.scaled,
+                                        self.regularizer, self.identity)
+        torch.cuda.current_stream().wait_stream(stream)
+
+    def solve(self, oriented, smoothing):
+        initial = _polar_initial(oriented, smoothing)
+        for target, source in zip((self.scaled, self.regularizer, self.result, self.lower), initial):
+            target.copy_(source)
+        for iteration in range(4, 33, 4):
+            self.block.replay()
+            if iteration >= 8:
+                self.guard.replay()
+                if not bool(self.failed.any()):
+                    break
+        return self.result, self.failed
+
+
+class _PolarGraphCache:
+    """Optimizer-local graph ownership, including one workspace stream/device.
+
+    Live entries retain their shared pool. Recreating a pool handle after all
+    graphs have been freed is required by the CUDA allocator; this entire cache
+    is discarded on checkpoint restore/deepcopy rather than partially evicted.
+    """
+
+    def __init__(self):
+        self.entries, self.resources = {}, {}
+
+    def solve(self, oriented, smoothing):
+        key = (oriented.device, oriented.dtype, tuple(oriented.shape), smoothing,
+               torch.backends.cuda.matmul.allow_tf32, torch.get_float32_matmul_precision(),
+               torch.are_deterministic_algorithms_enabled(),
+               torch.is_autocast_enabled("cuda"), torch.get_autocast_dtype("cuda"))
+        with torch.cuda.device(oriented.device):
+            if key not in self.entries:
+                if oriented.device not in self.resources:
+                    self.resources[oriented.device] = (torch.cuda.Stream(device=oriented.device),
+                                                       torch.cuda.graph_pool_handle())
+                stream, pool = self.resources[oriented.device]
+                self.entries[key] = _PolarGraphs(oriented, smoothing, stream=stream, pool=pool)
+            return self.entries[key].solve(oriented, smoothing)
+
+
+def _newton_schulz_polar(matrices, *, smoothing, cache=None):
+    """Batched regularized polar approximation, bounded at 32 cubic iterations.
+
+    Orthogonalize [M; smoothing I] using the smaller channel Gram coordinates.
+    Check orthogonality and the original-input relation every four iterations
+    starting at eight; each residual limit is 1e-3. Failed matrices fall back
+    individually to native SVD. Optimizer-owned CUDA graphs replay the same
+    four-iteration tensor block and guards without recording model state or RNG.
+
+    This explicitly different numerical rule retains absolute smoothing but
+    has iteration/rounding error and omits native SVD's hard rank cutoff on its
+    successful branch. For ill-conditioned directions that cutoff difference
+    can be material; quality qualification is separate from solver convergence.
+    """
+    original_shape, original_dtype = matrices.shape, matrices.dtype
+    value = matrices.reshape(-1, *original_shape[-2:])
+    if original_dtype not in (torch.float32, torch.float64):
+        value = value.float()
+    oriented = value.mT if value.shape[-2] < value.shape[-1] else value
+    oriented = oriented.contiguous()
+    if cache is not None:
+        result, failed = cache.solve(oriented, smoothing)
+    else:
+        scaled, regularizer, result, lower, identity = _polar_initial(oriented, smoothing)
+        for iteration in range(4, 33, 4):
+            result, lower = _polar_block(result, lower, identity)
+            if iteration >= 8:
+                failed = _polar_failed(result, lower, scaled, regularizer, identity)
+                if not bool(failed.any()):
+                    break
+    # Host decisions are made per kernel batch rather than per spatial offset.
+    # Every rejected slice retains the original exact SVD update.
+    for index in failed.nonzero(as_tuple=False).flatten().tolist():
+        result[index] = polar_factor(oriented[index], smoothing=smoothing)
+    if value.shape[-2] < value.shape[-1]:
+        result = result.mT
+    return result.reshape(original_shape).to(dtype=original_dtype)
 
 
 def polar_factor(matrix, *, smoothing=0., backend="native"):
@@ -159,7 +318,7 @@ class NormalizedOptimizer(Optimizer):
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
                  eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none",
-                 svd_backend="native", **options):
+                 svd_backend="native", convolution_rule="polar", **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -174,10 +333,17 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("optimizer convolution must be none or per_offset")
         if convolution != "none" and family != "dualnorm":
             raise ValueError("optimizer convolution requires the dualnorm family")
-        if svd_backend not in ("native", "cpu"):
-            raise ValueError("optimizer SVD backend must be native or cpu")
+        if svd_backend not in ("native", "cpu", "newton_schulz"):
+            raise ValueError("optimizer SVD backend must be native, cpu or newton_schulz")
         if svd_backend != "native" and family != "dualnorm":
             raise ValueError("optimizer SVD backend requires the dualnorm family")
+        if svd_backend == "newton_schulz" and (convolution != "per_offset" or not smoothing):
+            raise ValueError("newton_schulz requires per_offset convolution and positive smoothing")
+        if convolution_rule not in ("polar", "frobenius", "quintic"):
+            raise ValueError("optimizer convolution rule must be polar, frobenius or quintic")
+        if convolution_rule != "polar" and (
+                family != "dualnorm" or convolution != "per_offset" or svd_backend != "native"):
+            raise ValueError("nonpolar rules require full dualnorm, per_offset convolution and native SVD backend")
         if isinstance(lr, bool) or not math.isfinite(lr) or lr < 0:
             raise ValueError("optimizer step size must be finite and nonnegative")
         if isinstance(eps, bool) or not math.isfinite(eps) or eps <= 0:
@@ -193,6 +359,7 @@ class NormalizedOptimizer(Optimizer):
         self.family, self.momentum = family, float(momentum)
         self.smoothing = float(smoothing)
         self.convolution = convolution
+        self.convolution_rule = convolution_rule
         self.svd_backend = svd_backend
         self.recipe_optimizer_family = family
         self._sampled_rows = {}
@@ -244,7 +411,7 @@ class NormalizedOptimizer(Optimizer):
         if "dualnorm_convolution" in group:
             if self.convolution != "per_offset":
                 raise ValueError("DualNorm convolution metadata requires convolution='per_offset'")
-            _validate_convolution_group(group)
+            _validate_convolution_group(group, self.convolution_rule)
         elif algorithm == "dualnorm" and any(p.ndim > 2 for p in group["params"]):
             raise ValueError("dualnorm high-rank weights require explicit Conv2d/ConvTranspose2d module metadata")
 
@@ -271,7 +438,7 @@ class NormalizedOptimizer(Optimizer):
     def __getstate__(self):
         # Optimizer's default pickle omits the role family, observer and native
         # Adam component; public checkpoint preflight also deep-copies us.
-        return dict(self.__dict__)
+        return {key: value for key, value in self.__dict__.items() if key != "_newton_graphs"}
 
     def set_sampled_rows(self, table, rows):
         """Record actual sampled indices, never infer ownership from gradients."""
@@ -311,7 +478,7 @@ class NormalizedOptimizer(Optimizer):
         # chosen rule cannot consume a gradient.
         for group in self.param_groups:
             if "dualnorm_convolution" in group:
-                _validate_convolution_group(group)
+                _validate_convolution_group(group, self.convolution_rule)
             for parameter in group["params"]:
                 if parameter.grad is None:
                     continue
@@ -376,6 +543,45 @@ class NormalizedOptimizer(Optimizer):
                         metadata = group["dualnorm_convolution"]
                         factor = math.sqrt(metadata["out_channels"] / metadata["in_channels"])
                         factor /= math.prod(metadata["kernel_size"])
+                        largest_channel = max(metadata["in_channels"], metadata["out_channels"]) // metadata["groups"]
+                        if (self.convolution_rule != "polar" and parameter.device.type == "cuda"
+                                and largest_channel > 32):
+                            gradient_batch = _convolution_batch(gradient, metadata)
+                            direction_batch = _convolution_batch(direction, metadata)
+                            if self.convolution_rule == "frobenius":
+                                update = frobenius_direction(direction_batch, smoothing=self.smoothing)
+                            else:
+                                from .convolution_quintic import quintic_direction
+                                update = quintic_direction(direction_batch, smoothing=self.smoothing)
+                            active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
+                                      & (direction_batch.norm(dim=(-2, -1)) >= eps))
+                            update = torch.where(active[..., None, None], update, 0.)
+                            if metadata["layout"] == "conv_transpose2d_in_out":
+                                update = update.permute(0, 4, 3, 1, 2)
+                            else:
+                                update = update.permute(0, 3, 4, 1, 2)
+                            parameter.add_(update.reshape_as(parameter), alpha=-rate * factor)
+                            continue
+                        if (self.svd_backend == "newton_schulz" and parameter.device.type == "cuda"
+                                and largest_channel > 32):
+                            gradient_batch = _convolution_batch(gradient, metadata)
+                            direction_batch = _convolution_batch(direction, metadata)
+                            if getattr(self, "_newton_graphs", None) is None:
+                                self._newton_graphs = _PolarGraphCache()
+                            update = _newton_schulz_polar(direction_batch, smoothing=self.smoothing,
+                                                        cache=self._newton_graphs)
+                            active = ((gradient_batch.norm(dim=(-2, -1)) >= eps)
+                                      & (direction_batch.norm(dim=(-2, -1)) >= eps))
+                            # A skipped slice must remain fixed even when an
+                            # extreme, dtype-underflowing smoothing value makes
+                            # its unused solver output undefined (NaN * 0 is NaN).
+                            update = torch.where(active[..., None, None], update, 0.)
+                            if metadata["layout"] == "conv_transpose2d_in_out":
+                                update = update.permute(0, 4, 3, 1, 2)
+                            else:
+                                update = update.permute(0, 3, 4, 1, 2)
+                            parameter.add_(update.reshape_as(parameter), alpha=-rate * factor)
+                            continue
                         matrices = zip(_convolution_matrices(parameter, metadata),
                                        _convolution_matrices(gradient, metadata),
                                        _convolution_matrices(direction, metadata))
@@ -385,7 +591,7 @@ class NormalizedOptimizer(Optimizer):
                             if bool(gradient_matrix.norm() < eps) or bool(direction_matrix.norm() < eps):
                                 continue
                             update = (polar_factor(direction_matrix, smoothing=self.smoothing)
-                                      if self.svd_backend == "native" else
+                                      if self.svd_backend in ("native", "newton_schulz") else
                                       polar_factor(direction_matrix, smoothing=self.smoothing,
                                                    backend=self.svd_backend))
                             weight_matrix.add_(update, alpha=-rate * factor)
@@ -393,7 +599,7 @@ class NormalizedOptimizer(Optimizer):
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
-                        if self.svd_backend == "native":
+                        if self.svd_backend in ("native", "newton_schulz"):
                             update = (polar_factor(direction, smoothing=self.smoothing)
                                       if self.smoothing else polar_factor(direction))
                         else:
@@ -424,8 +630,12 @@ class NormalizedOptimizer(Optimizer):
             result["dualnorm"]["smoothing"] = self.smoothing
         if self.convolution != "none":
             result["dualnorm"]["convolution"] = self.convolution
+        if self.convolution_rule != "polar":
+            result["dualnorm"]["convolution_rule"] = self.convolution_rule
         if self.svd_backend != "native":
             result["dualnorm"]["svd_backend"] = self.svd_backend
+        if self.svd_backend == "newton_schulz":
+            result["dualnorm"]["solver_version"] = _NEWTON_SCHULZ_VERSION
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -444,8 +654,14 @@ class NormalizedOptimizer(Optimizer):
             expected_meta.add("smoothing")
         if self.convolution != "none":
             expected_meta.add("convolution")
+        if self.convolution_rule != "polar":
+            expected_meta.add("convolution_rule")
         if self.svd_backend != "native":
             expected_meta.add("svd_backend")
+        if self.svd_backend == "newton_schulz":
+            expected_meta.add("solver_version")
+            if not isinstance(meta, dict) or meta.get("solver_version") != _NEWTON_SCHULZ_VERSION:
+                raise ValueError("checkpoint Newton-Schulz solver version differs")
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
@@ -453,6 +669,8 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("checkpoint optimizer smoothing differs")
         if meta.get("convolution", "none") != self.convolution:
             raise ValueError("checkpoint optimizer convolution differs")
+        if meta.get("convolution_rule", "polar") != self.convolution_rule:
+            raise ValueError("checkpoint optimizer convolution rule differs")
         if meta.get("svd_backend", "native") != self.svd_backend:
             raise ValueError("checkpoint optimizer SVD backend differs")
         groups, values = saved["param_groups"], saved["state"]
@@ -463,7 +681,7 @@ class NormalizedOptimizer(Optimizer):
         seen = set()
         for index, (actual, group) in enumerate(zip(self.param_groups, groups)):
             if "dualnorm_convolution" in actual:
-                _validate_convolution_group(actual)
+                _validate_convolution_group(actual, self.convolution_rule)
             if not isinstance(group, dict) or set(group) != set(actual) or not isinstance(group.get("params"), list):
                 raise ValueError("invalid normalized optimizer group fields")
             if len(group["params"]) != len(actual["params"]):
@@ -541,6 +759,7 @@ class NormalizedOptimizer(Optimizer):
         metadata = state.pop("dualnorm")
         regularizer = state.pop("regularizer", None)
         super().load_state_dict(state)
+        self.__dict__.pop("_newton_graphs", None)
         self._refresh_adam()
         self.clear_sampled_rows()
         for group, rows in zip(self.param_groups, metadata["sampled_rows"]):
@@ -574,6 +793,7 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
                                     momentum=recipe.optimizer_momentum,
                                     smoothing=recipe.optimizer_smoothing,
                                     convolution=recipe.optimizer_convolution,
+                                    convolution_rule=recipe.optimizer_convolution_rule,
                                     svd_backend=recipe.optimizer_svd_backend, **options)
     if critic is not None:
         optimizer.critic = critic

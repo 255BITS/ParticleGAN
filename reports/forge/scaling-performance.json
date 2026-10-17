@@ -111,56 +111,56 @@
       "trainer_family": "bcap-dualnorm"
     },
     {
-      "candidate_id": "bispf-v2",
-      "comparison_key": "eedd0a26764ae3ec4bde35e7cf86c77c3114c14f870573541bc38ce8076197c6",
-      "identity_sha256": "ccf82c47c49585378747455ca38e9b9edbe378fc720b72917c0456719278a0cc",
-      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_b64-8980e3805d46c8aa.json",
-      "receipt_sha256": "80b59a2ab07d3f87785d1195dfa08a1c48703d7765acaad9b1efe9ea4287fa4b",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "comparison_key": "8044d208d08029fb7f832e3414f0b2920b0de3acd4a15850c7f45eb40b2ea081",
+      "identity_sha256": "f723c1d03cbfa832755effae0cc8be58d33cdaaaf79fa8b356d43eadcde81c20",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-quintic-v1/bispf-dcgan_performance_b64-a21ff39ef8602094.json",
+      "receipt_sha256": "17d89cd361073719dd781fbd6c61560272dc7f02c2ccdf7470e3b1a4bbabee1d",
       "task_id": "dcgan_performance_b64",
       "trainer_family": "bispf"
     },
     {
-      "candidate_id": "bispf-v2",
-      "comparison_key": "603af9e788d99f9ae9ea14789781c018667801e4c97b30839903a4802f10e0ed",
-      "identity_sha256": "8a3d8a19af85f5a672560acffe19dda97dee4d26448a087bad24d1e19fe8768c",
-      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_r128-c1e1d9fdb1e6e01b.json",
-      "receipt_sha256": "272be3ca241cb2dc258442d570d0638742df11e4f835d425f5a50e61f29a64ef",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "comparison_key": "0b0199d451f2f837b38b4bd7a4f589a16ae2160fcbdf61d861dc14a3f0b098cd",
+      "identity_sha256": "cc7ee7d5e2c1f60002ba29ae79f7fad30be3051b3538c392d5cd4ec5d50253b8",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-quintic-v1/bispf-dcgan_performance_r128-9a04aed69b14ebb1.json",
+      "receipt_sha256": "ecae99f335034db51db88a0ee4519d2f3a0766e1cc14d10014cdd704e045b248",
       "task_id": "dcgan_performance_r128",
       "trainer_family": "bispf"
     },
     {
-      "candidate_id": "bispf-v2",
-      "comparison_key": "84f752c9d664511e051e8fa3ecd54b734afa381902f93c74ee9ea98191e06793",
-      "identity_sha256": "6a611845e1d73b50486075a17db9280fa5d129ecd4db3c86add9505f0c9daac3",
-      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_r256-ad812b07ff959bbc.json",
-      "receipt_sha256": "32a21aa08b4a1fb621d765023cf65dfad8b7778d9f8b1b01dfeb435e0686e1cf",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "comparison_key": "3c2cf90a97275465ef8621883ea64fabb2653e4f946d32c6f38227b85ccc76f6",
+      "identity_sha256": "1260432871ade94200d609d431342356ab49b51b0fe6501058f63b1a6d9336e7",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-quintic-v1/bispf-dcgan_performance_r256-bcb2c41fb22f6ca0.json",
+      "receipt_sha256": "716874cd7511b4860914adc143f59b6a7d7f61da8de79bb8475f61f79e289385",
       "task_id": "dcgan_performance_r256",
       "trainer_family": "bispf"
     },
     {
-      "candidate_id": "bispf-v2",
-      "comparison_key": "66ecde1f427c246dcda9992633f060265ccb3bbb83129a13e1ebf5e9b022e600",
-      "identity_sha256": "69e70d6cc7f668e1a721bff90112eb999ae7f06aaf0f6814053a1b57d6745979",
-      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_r32-98e39beaee3a0b77.json",
-      "receipt_sha256": "c58e109bf9741107143ee8f7299739128836073a49611150c1c6863e0601a655",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "comparison_key": "033f3ac63506260bd2a59fc1fb39af046bb044db42a47c7422917e2ffbe4f40e",
+      "identity_sha256": "e04639007776967b512010c657ca056afba9aeffaf714b1db964848cb33984a2",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-quintic-v1/bispf-dcgan_performance_r32-49f7641618532c97.json",
+      "receipt_sha256": "c9ea388844b6d2b178c2267a194faa5d7a1560c6dcd23a7973d0a0dc8b0b944b",
       "task_id": "dcgan_performance_r32",
       "trainer_family": "bispf"
     },
     {
-      "candidate_id": "bispf-v2",
-      "comparison_key": "4504235950521b2610601b26f464056d2e7b28a574c49db9d3653677c33ce181",
-      "identity_sha256": "937804c7be613323469124fd1640df26fceab2384a28e5f0e6cfbad8c1d4a1dc",
-      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_r64-666c107d181c8e78.json",
-      "receipt_sha256": "2246ecafadad00145bf30d12e3d0fc3051595ed4f500f64d9ff3eb607a7269ed",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "comparison_key": "a4405c524de69ef9e3ef6e13be47618983327a4242b9da4448525c8730f36e81",
+      "identity_sha256": "ba1d5bbd9869ccaf453c9c935eb2263e06407c19690217903f23626d623a8a53",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-quintic-v1/bispf-dcgan_performance_r64-f372be8873947ad2.json",
+      "receipt_sha256": "f8ad89e60e2d0202faa55979ecdbf1bf60eadd874b20a7af631487d207ac6cc5",
       "task_id": "dcgan_performance_r64",
       "trainer_family": "bispf"
     },
     {
-      "candidate_id": "bispf-v2",
-      "comparison_key": "60c16d28eb11aa33c5889df4ef7aeb7ab71d96a2a38289f60b16169a22514340",
-      "identity_sha256": "a99b8f9e5a183f3e27816a154fe71db3ec4fa89a3c02c6ce4f51a76c487d3144",
-      "receipt": "reports/forge/scaling-receipts/dcgan-performance-cloud-v2/bispf-dcgan_performance_w128-916fe46e41bccbc8.json",
-      "receipt_sha256": "9cf46dc9ea0b5a7f062c9f8dda75166ded11235c6b2f617eb7e660ec03e07075",
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "comparison_key": "5300c9404f44c9c8594ad88e836cd0b177b70dc455d707fe77dfc3b3a251bbbe",
+      "identity_sha256": "15e28fa2bf9d2a433c5412b28dc5856914b28fd75eece2778303bcd6f30a7686",
+      "receipt": "reports/forge/scaling-receipts/bispf-matrix-quintic-v1/bispf-dcgan_performance_w128-1c2822376bde9d90.json",
+      "receipt_sha256": "06309210933fe57e724fa0fa21e00cce6cfde1e680c05d008e2b5b49fcf05556",
       "task_id": "dcgan_performance_w128",
       "trainer_family": "bispf"
     },
@@ -436,10 +436,7 @@
     }
   ],
   "export": {
-    "counts": {
-      "COMPLETE": 48
-    },
-    "exporter_sha256": "41b1d0262d17e6aaf08463888dbdb734f4288e725e84abc76f2e61c1a2f47838",
+    "composition": "complete family matrices; later archived sources replace earlier families",
     "family_selections": [
       {
         "candidate_id": "atlas",
@@ -452,7 +449,7 @@
         "trainer_family": "bcap-dualnorm"
       },
       {
-        "candidate_id": "bispf-v2",
+        "candidate_id": "bispf-optimized-quintic-v1",
         "registration_family": "bispf",
         "trainer_family": "bispf"
       },
@@ -482,17 +479,25 @@
         "trainer_family": "release07-gan-v3"
       }
     ],
-    "partial_snapshot": false,
     "qualification_input": false,
-    "registration": "dcgan-performance-cloud-v2",
-    "registration_file": {
-      "path": "/home/martyn/dev/ParticleGAN-forge-scaling/configs/forge/performance/dcgan-performance-cloud-v2.json",
-      "sha256": "2c5a96bd9158407a51c1ec853ed67136cc92e3085dec95fb4b3cd5dbacf49fe5"
-    },
-    "schema": "forge_scaling_export_v1",
+    "schema": "forge_scaling_composite_v1",
+    "sources": [
+      {
+        "input_digest": "c12d4245e8411413a973db4600e240fe50d202d40cd678ce322cb9506ad05987",
+        "path": "reports/forge/scaling-history/before-bispf-h2-50a61c321a579985.json",
+        "registration": "dcgan-performance-cloud-v2",
+        "sha256": "50a61c321a579985155680d9f08d8965cfd8fea9be78c898491ee98025c2b98b"
+      },
+      {
+        "input_digest": "09c65dcf164c12c35bc341c29a6a7b79416b0fea19d33a8ee798faeefb8c61ed",
+        "path": "reports/forge/scaling-history/bispf-matrix-quintic-v1-7c73a339487b7bfb.json",
+        "registration": "bispf-matrix-quintic-v1",
+        "sha256": "7c73a339487b7bfb64b3d2c410330d46ddf96191d8b6b8590b6d0ce21988dbac"
+      }
+    ],
     "training_launched": false
   },
-  "input_digest": "c12d4245e8411413a973db4600e240fe50d202d40cd678ce322cb9506ad05987",
+  "input_digest": "e76dfe4f562760e819395b18f8dd5afb2d83dbda36fa8d778871cf4c4966200d",
   "qualification_input": false,
   "schema_version": 1,
   "scope": "dcgan_mock_performance",

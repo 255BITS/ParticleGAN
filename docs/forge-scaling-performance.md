@@ -221,3 +221,98 @@ existing overview's Performance block and display provenance, preserving scienti
 rows, gates, archived text and family pages. Ordinary publication regeneration
 also includes the section and adds filtered performance evidence to family pages.
 The old scientific qualification and default-selection files remain authoritative.
+
+## Component profiling
+
+`python -m experiments.forge.scaling_profile` provides a separate bounded
+diagnostic. First use `declare` with explicit candidate IDs, task IDs, source
+commit and total reservation, then use `run` once for each declared arm. Run it
+from a frozen source checkout or snapshot. The declaration records all relevant
+source hashes and refuses changed source before construction; each arm uses an
+exclusive output directory and permits no paid retries.
+
+Each arm executes the unchanged public benchmark twice. Its first replay has no
+component wrappers and supplies plain complete-update latency. Its second replay
+instruments the final three updates, synchronizing nested model, penalty,
+transport, prior, backward and optimizer spans. Only the first two instrumented
+updates enter component medians; the final update separately exports a Torch
+profiler trace. Inclusive spans overlap. Exclusive spans subtract nested spans;
+neither replaces the plain latency measurement because synchronization perturbs
+execution. Initial model/prior proofs, seen data and final learned parameter
+hashes must agree between replays.
+
+When the optional Newton–Schulz optimizer backend is present, the component replay
+counts processed matrices and exact-SVD fallbacks. Its final profiler update also
+saves representative actual gradient matrices for solver diagnosis. These tensor
+bundles, traces, logs, checkpoints and GIFs stay in local artifacts. A compact
+readout may reference their exact paths and hashes. All ordinary qualification,
+sampling and default-adoption rules remain unchanged.
+
+The separate `bispf_fastpath_quality` research diagnostic keeps the original
+8×8 stripe and four-bar target laws and numerical gates while increasing the
+convolutional width from 12 to 64. Its named task variants compare native and
+optimized BISPF on the same wider architecture, initialization, batches, prior,
+600 updates and 24 observations. The wider kernels exercise the CUDA fast path;
+the ordinary small image hosts remain on the native dispatch. Balanced target
+samples must pass the actual scorer; mode collapse, uniform blur, a terminal
+failure and nonfinite images must fail or be rejected. The frozen scorer control
+receipt is [published with the optimization evidence](../reports/forge/bispf-optimized/fastpath-scorer-controls.json).
+The initial unexecuted polar-solver campaign reserves 1,200 seconds for four
+arms. The separately declared `bispf-fastpath-alternatives-v1` campaign reserves
+1,800 seconds for six arms: native BISPF, Frobenius and quintic on both tasks.
+Each campaign permits no paid retries and grants no ordinary qualification or
+natural-image quality credit. The actual six-arm readout and training GIFs are
+[published separately](../reports/forge/bispf-optimized/wide-quality.json).
+
+## Comparing a new source with an older recorded policy
+
+When a later view changes only counted/held dispositions, the explicit
+`--comparison-policy` option can compare a new measured source with the existing
+inventory without regrading historical implementations:
+
+```sh
+python reports/forge/regenerate_technique_inventory.py \
+  --source-commit EXECUTED_COMMIT --device cuda \
+  --comparison-policy configs/forge/view-history/discriminator_stability-v9.json \
+  --output-prefix /tmp/forge-new-source-comparison
+```
+
+The frozen reader first reconstructs and grades the actual admitted study under
+its original view. It then reuses those verified requests to reduce the new
+receipts under the comparison policy. Task identities, tiers, ordering, gates,
+initialization, prior, sampling and budget contracts must match the recorded
+family measurement; numerical task verdicts cannot change. Actual executed-view
+qualification remains separately signed in `comparison_policy_projection` and
+on each measured row. An actual revision-11 Tier 3 pass does not confer revision-9
+Tier 3 qualification when its required failures remain.
+
+After reviewing the complete quality and performance evidence, register with the
+same source and comparison-policy arguments, omitting `--output-prefix`, and pin
+one verified whole candidate row. Cached regeneration accepts the same explicit
+comparison policy and never regrades historical rows. `--advance-policy` and
+`--recorded-policy` remain separate operations. Public default adoption retains
+its existing calibration requirements.
+
+For the hybrid BISPF optimizer rules, the existing ordinary image-quality hosts
+have at most 24 convolution channels and use the preserved native path. Their
+passes establish preservation of the known suite; the widened diagnostics
+exercise the changed CUDA rule. DCGAN mock-data benchmarks establish complete
+update latency and memory. Image quality on large natural images remains
+unmeasured.
+
+## Incremental whole-family performance publication
+
+A new performance registration may explicitly override a selected family's
+candidate with `scaling register --candidate FAMILY=CANDIDATE` and use an
+immutable shared campaign. Each candidate still reserves the complete six-task
+allowance and uses one recipe across the whole matrix. This is a diagnostic
+choice, independent of ordinary qualification or family selection.
+
+`scaling_publication.compose_manifests(root, paths)` combines exact archived
+manifests from oldest to newest. It replaces an entire family's six-task matrix,
+validates task contracts and archive file/input digests, and preserves the other
+families' original source-bound cells. It never chooses individual winning cells
+or mixes sources into a certified paired timing cohort. The pure helper writes
+nothing; archive each input and publish the resulting current manifest only
+when the selected recipe is ready. The technique inventory remains the single
+current performance overview.

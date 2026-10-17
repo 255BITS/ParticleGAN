@@ -7,7 +7,7 @@ from pathlib import Path
 from .contracts import atomic_json, file_hash, identifier, read_json, stable_hash
 from .planning import load_idea, plan_summary, resolve_idea
 from .studies import scaffold, study_path, validate_study
-from .trainer_families import CURRENT_SELECTION, current_family_candidates
+from .trainer_families import CURRENT_SELECTION, current_family_candidates, family_for_candidate
 from .views import load_tasks, load_view
 
 
@@ -29,7 +29,7 @@ def _write_immutable(path, value):
 
 
 def register(root, registration, *, view_id="dcgan_performance", execution_backend="cuda",
-             cuda_model=None, family_ids=None):
+             cuda_model=None, family_ids=None, candidate_overrides=None, campaign=None):
     """Freeze one exact selected recipe per family and the complete reservation.
 
     The old image toy is only a host-change declaration control. It is never a
@@ -44,21 +44,44 @@ def register(root, registration, *, view_id="dcgan_performance", execution_backe
         raise ValueError("image performance registration requires only explicit performance diagnostics")
     if execution_backend not in {"cpu", "cuda"} or (cuda_model and execution_backend != "cuda"):
         raise ValueError("select a CPU or CUDA performance cohort")
-    choices = current_family_candidates(root, family_ids=family_ids)
+    choices = deepcopy(current_family_candidates(root, family_ids=family_ids))
     if not choices or (family_ids is not None and set(family_ids) != {c["family"] for c in choices}):
         raise ValueError("performance registration must select known current families")
+    overrides = dict(candidate_overrides or {})
+    if set(overrides) - {choice["family"] for choice in choices}:
+        raise ValueError("performance candidate overrides must name selected families")
+    for choice in choices:
+        if choice["family"] not in overrides:
+            continue
+        candidate_id = identifier(overrides[choice["family"]], "performance candidate override")
+        declaration = load_idea(root, candidate_id)
+        family = family_for_candidate(root, candidate_id, declaration, current_presentation=True)
+        if family.get("reporting_family", family["id"]) != choice["family"]:
+            raise ValueError("performance candidate override belongs to another trainer family")
+        choice["candidate_id"] = candidate_id
     task_ids = [a["task"] for a in view["assignments"]]
     allowance = sum(tasks[name]["resources"]["timeout_seconds"] for name in task_ids)
-    campaign = {"id": registration, "candidate_budget_seconds": allowance,
-                "budget_seconds": allowance * len(choices)}
+    if campaign is None:
+        campaign = {"id": registration, "candidate_budget_seconds": allowance,
+                    "budget_seconds": allowance * len(choices)}
+    else:
+        campaign = deepcopy(campaign)
+        if (set(campaign) != {"id", "candidate_budget_seconds", "budget_seconds"}
+                or type(campaign["candidate_budget_seconds"]) not in (int, float)
+                or campaign["candidate_budget_seconds"] != allowance
+                or type(campaign["budget_seconds"]) not in (int, float)
+                or not allowance * len(choices) <= campaign["budget_seconds"] < float("inf")):
+            raise ValueError("performance campaign must reserve the full selected matrix and exact per-candidate allowance")
+        identifier(campaign["id"], "performance campaign")
     studies, selections = [], []
     for choice in choices:
         candidate = load_idea(root, choice["candidate_id"])
         if "decision_contract" in candidate:
             raise ValueError("a legacy embedded-contract candidate needs an explicit v3 declaration before this new study")
         study_id = f"{registration}-{choice['family']}"
+        recipe_scope = "declared" if overrides else "selected"
         study = scaffold(study_id, choice["candidate_id"], choice["candidate_id"], view_id,
-                         hypothesis="Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact selected global recipe.",
+                         hypothesis=f"Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact {recipe_scope} global recipe.",
                          execution_backend=execution_backend)
         study["status"] = "ready"
         if cuda_model:
@@ -89,8 +112,11 @@ def register(root, registration, *, view_id="dcgan_performance", execution_backe
                 "campaign": campaign, "protocol_seed": 0,
                 "qualification_input": False, "qualification_reuse": False,
                 "comparison_scope": "same task, runtime and hardware; exact selected global recipes; synthetic data; no image quality claim"}
+    if overrides:
+        manifest["candidate_overrides"] = overrides
+        manifest["comparison_scope"] = "same task, runtime and hardware; exact declared global recipes including explicit candidate overrides; synthetic data; no image quality claim"
     _write_immutable(manifest_path(root, registration), manifest)
-    _write_immutable(root / "configs/forge/campaigns" / f"{registration}.json", campaign)
+    _write_immutable(root / "configs/forge/campaigns" / f"{campaign['id']}.json", campaign)
     return {"registration": str(manifest_path(root, registration)), **manifest, "training_launched": False}
 
 
@@ -128,7 +154,7 @@ def prepare(root, queue_root, registration, *, queue):
     return manifest, requests, {"schema": SCHEMA, "stage": "planned", "registration": manifest["id"],
                                 "campaign": manifest["campaign"], "view": manifest["view"],
                                 "execution_backend": manifest["execution_backend"], "families": rows,
-                                "declared_worst_case_seconds": manifest["campaign"]["budget_seconds"],
+                                "declared_worst_case_seconds": sum(row["worst_case_seconds"] for row in rows),
                                 "qualification_input": False, "logs": str(Path(queue_root) / "events.jsonl")}
 
 

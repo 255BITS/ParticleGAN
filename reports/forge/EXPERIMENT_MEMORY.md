@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 828. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 833. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3896,6 +3896,22 @@ The public EMA-anchor ablation failed two_pole after 80 fixed-seed CPU updates: 
 
 [Evidence](../../reports/forge/attempts/c0178716dd3c4d5695b391919bf9ab81/result.json) · [Record](records/readout-10242573330bec1494c7602b.json)
 
+### bispf-optimized-quintic-v1 · readout-10ed0ff3f18514315a760f4a
+
+**Scope:** current; scientific; revision `8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def`.
+
+The single global quintic convolution-rule delta preserves every incumbent BISPF pass on the unchanged ordinary task suite while reducing large-image update latency; direct wide-image diagnostics independently test the accelerated path.
+
+**Observed:** {'FAIL': 11, 'PASS': 19}; wall seconds 3155.051; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0036687
+
+The single global quintic convolution-rule delta preserves all 19 incumbent BISPF passes across the complete 30-task ordinary suite, with all 11 historical failures retained and no pass regressions. Both ring phases pass every 1200 hold and 300 extension check; actual 3282 updates satisfy the fixed first-convergence stop rule under the maximum 7500-update allowance. All jobs finish without cancellation or retry.
+
+**Next:** Review the complete same-source performance matrix and direct wide-channel diagnostics together with this preserved full ordinary pass set before selecting one whole BISPF measurement row. Retain all failures, archived controls, exact source identities and unknown performance contention. No public-default adoption or natural-image quality claim follows automatically.
+
+[Evidence](../../reports/forge/bispf-optimized/README.md) · [Record](records/readout-10ed0ff3f18514315a760f4a.json)
+
 ### forge-no-critic-penalty · readout-15e86dd160a1d64a04ceee04
 
 **Scope:** current; scientific; revision `8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8`.
@@ -3992,6 +4008,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
 
+### bispf-v2 · readout-3721266a32807c156725dfc8
+
+**Scope:** research_diagnostic; scientific; revision `34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef`.
+
+Measure incumbent native BISPF on explicit width64 architecture-portability variants of stripes2 and bars4. These new larger-capacity task identities retain the original target, numerical gates, prior and 600-update budget and provide the actual native control for a later matched optimized solver comparison.
+
+**Observed:** {'FAIL': 1, 'PASS': 1}; wall seconds 145.379; mechanism `structural`.
+
+img_bars4_w64_optimizer_diagnostic: modes=4, hq=0.90625; img_stripes2_w64_optimizer_diagnostic: modes=2, hq=1
+
+Native BISPF on the two explicitly wider architecture-portability hosts passes stripes (HQ1,2 modes,14 terminal passing checks) and fails bars (endpoint HQ0.90625,4 modes but only2 terminal passing checks versus5 required). Both arms complete600 updates and24 observations with finite states and seed0 public initialization.
+
+**Next:** Retain both native outcomes as controls. Quintic passes both wider tasks and proceeds to separately frozen full performance and ordinary quality; Frobenius regresses stripes and stops. No default adoption follows.
+
+[Evidence](../../reports/forge/attempts/91832bb54bc74d1abc42a8576d9fc7e7/result.json) · [Record](records/readout-3721266a32807c156725dfc8.json)
+
 ### bispf-v1 · readout-3f3f893ae724d651f1655fc9
 
 **Scope:** current; scientific; revision `45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b`.
@@ -4055,6 +4087,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/0d93422aa0ff4852bba4f0de4a1e6926/result.json) · [Record](records/readout-457f93f65c1e6782fba74306.json)
+
+### bispf-optimized-v3 · readout-47d84c98f42853a07d20becb
+
+**Scope:** current; scientific; revision `e38fbbdd10585f61ef6ff2a694e2087746956511dff55afa441fbb63497267c6`.
+
+The frozen CUDA-graph augmented-polar BISPF optimizer version 3 reduces DCGAN update latency while preserving every incumbent counted task pass: all six Tier 1 tasks, all ten counted Tier 2 tasks, the counted ring endurance verdict, and the separate clock and ring-hold diagnostic passes. The complete unchanged held task set remains measured and visible; no original result is replaced or inherited.
+
+**Observed:** {'PASS': 1}; wall seconds 23.453; mechanism `structural`.
+
+
+
+Stop this numerical-backend revision: graph acceleration improves the 64-pixel profile but misses the declared 256-pixel target. The ordinary quality study was started prematurely and canceled after one completed smoke pass, giving no full qualification.
+
+**Next:** Retain the rejected solver and partial costs under their original identities. Test separately declared optimizer-rule alternatives with direct wide-channel controls before an ordinary full study or selection.
+
+[Evidence](../../reports/forge/attempts/697e75ed0af449a7b3beb42dfcbd3763/result.json) · [Record](records/readout-47d84c98f42853a07d20becb.json)
 
 ### k3p · readout-4bd94051f203bbbb28a3e7a6
 
@@ -4263,6 +4311,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/9007daae982e4bc3b8c9f4019d48bd26/result.json) · [Record](records/readout-813a2ad71ca3580b4a8d46c1.json)
+
+### bispf-optimized-frobenius-v1 · readout-85a714c5fc9c0b038c400b22
+
+**Scope:** research_diagnostic; scientific; revision `c6dadb65374f5c93fe3922c2e10e32b5964105d4dc13ff80b97773c85b9f1aff`.
+
+The global frobenius rule retains the native BISPF pass set on both unchanged width-64 image tasks, including a positive stripes acquisition pass, under the same seed, public initializer, data sequence, prior, sampling, 600 updates and 24 checks.
+
+**Observed:** {'FAIL': 2}; wall seconds 29.708; mechanism `structural`.
+
+img_stripes2_w64_optimizer_diagnostic: modes=1, hq=0.96875; img_bars4_w64_optimizer_diagnostic: modes=2, hq=0.8125
+
+Frobenius convolution rule fails both width64 image gates at600 updates: stripes HQ0.96875 but1 mode versus2 required, bars HQ0.8125 with2 modes versus4 required. Both terminal passing suffixes are0. Public API runs remain finite with no unintended RNG deviations.
+
+**Next:** Stop this exact Frobenius revision; do not run full performance or ordinary qualification for selection. Preserve the collapse failure and its actual-training GIFs; no outcome-based rerun, seed repeat or gate change.
+
+[Evidence](../../reports/forge/attempts/63fe579365654297972e5ee55c5bd970/result.json) · [Record](records/readout-85a714c5fc9c0b038c400b22.json)
 
 ### forge-onboarding-anchor-ablation · readout-8aacfe961f0e62b062e621fa
 
@@ -4519,6 +4583,22 @@ This exact global configuration passed two_pole, unused_token_hold and ae_gan_ho
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/5b5f7aab977745aea97e1b47871a351f/result.json) · [Record](records/readout-b42a8f277178ec58808d6b5c.json)
+
+### bispf-optimized-quintic-v1 · readout-bbadc8452e77fa75caff13c6
+
+**Scope:** research_diagnostic; scientific; revision `8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def`.
+
+The global quintic rule retains the native BISPF pass set on both unchanged width-64 image tasks, including a positive stripes acquisition pass, under the same seed, public initializer, data sequence, prior, sampling, 600 updates and 24 checks.
+
+**Observed:** {'PASS': 2}; wall seconds 40.113; mechanism `structural`.
+
+img_stripes2_w64_optimizer_diagnostic: modes=2, hq=1; img_bars4_w64_optimizer_diagnostic: modes=4, hq=1
+
+Quintic convolution rule passes both width64 gates at600 updates: stripes HQ1 with2 modes and12 terminal passing checks; bars HQ1 with4 modes and9 terminal passing checks. Both exceed the required5-check stable suffix. All optimizer groups complete600 updates and all states remain finite.
+
+**Next:** Proceed only with separately frozen matched full DCGAN performance and ordinary quality campaigns from H2. Selection requires the declared latency targets and preservation of every incumbent ordinary pass; no public-default adoption follows this diagnostic.
+
+[Evidence](../../reports/forge/attempts/1902c3ab92d14b7590efd8c5751d4019/result.json) · [Record](records/readout-bbadc8452e77fa75caff13c6.json)
 
 ### r3gan-stacked-training-toy-v1 · readout-bc440d0469187c9299bd524c
 
@@ -5413,4 +5493,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `7cd2b21deea1a2023d8ad1897f6ae96ca8214d798b4da1ee76568687d937216b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `aa0cf42c3fa64430b2b1b00a4ed63c6d09d681fdc08d7bd6bf11748bbf06912d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

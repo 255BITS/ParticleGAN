@@ -106,6 +106,59 @@ def test_registration_is_finite_recipe_pinned_and_task_pinned(tmp_path, monkeypa
         scaling._load(tmp_path, "bounded-test")
 
 
+def test_explicit_candidate_registration_shares_budget_without_changing_selection(tmp_path, monkeypatch):
+    tasks, view = load_tasks(ROOT), load_view(ROOT, "dcgan_performance")
+    choices = [{"family": "example", "label": "Example", "candidate_id": "example"}]
+    for name in ("example", "example-new"):
+        atomic_json(tmp_path / "configs/forge/ideas" / f"{name}.json",
+                    {"id": name, "trainer_family": "example"})
+    selection = tmp_path / scaling.CURRENT_SELECTION
+    atomic_json(selection, {"immutable": "existing selection"})
+    original = selection.read_bytes()
+    monkeypatch.setattr(scaling, "load_tasks", lambda root: deepcopy(tasks))
+    monkeypatch.setattr(scaling, "load_view", lambda root, name: deepcopy(view))
+    monkeypatch.setattr(scaling, "load_idea", lambda root, name: {"id": name})
+    monkeypatch.setattr(scaling, "current_family_candidates", lambda root, family_ids: choices)
+    monkeypatch.setattr(scaling, "family_for_candidate", lambda *args, **kwargs: {"id": "example"})
+    campaign = {"id": "shared-performance", "candidate_budget_seconds": 1200, "budget_seconds": 2400}
+    control = scaling.register(tmp_path, "control", family_ids=["example"], campaign=campaign)
+    candidate = scaling.register(tmp_path, "candidate", family_ids=["example"], campaign=campaign,
+                                 candidate_overrides={"example": "example-new"})
+    assert control["campaign"] == candidate["campaign"] == campaign
+    assert control["family_selections"][0]["candidate_id"] == "example"
+    assert candidate["family_selections"][0]["candidate_id"] == "example-new"
+    assert candidate["candidate_overrides"] == {"example": "example-new"}
+    assert choices[0]["candidate_id"] == "example"
+    assert selection.read_bytes() == original
+    assert scaling._load(tmp_path, "candidate")["campaign"] == campaign
+    assert scaling.register(tmp_path, "candidate", family_ids=["example"], campaign=campaign,
+                            candidate_overrides={"example": "example-new"}) == candidate
+    changed_campaign = {**campaign, "budget_seconds": 3600}
+    with pytest.raises(ValueError, match="immutable"):
+        scaling.register(tmp_path, "candidate", family_ids=["example"], campaign=changed_campaign,
+                         candidate_overrides={"example": "example-new"})
+
+
+@pytest.mark.parametrize("change", ["unknown_family", "another_family", "small_campaign", "wrong_candidate_cap"])
+def test_explicit_performance_registration_rejects_wrong_family_and_budget(tmp_path, monkeypatch, change):
+    monkeypatch.setattr(scaling, "load_tasks", lambda root: load_tasks(ROOT))
+    monkeypatch.setattr(scaling, "load_view", lambda root, name: load_view(ROOT, "dcgan_performance"))
+    monkeypatch.setattr(scaling, "current_family_candidates", lambda root, family_ids: [
+        {"family": "example", "label": "Example", "candidate_id": "example"}])
+    monkeypatch.setattr(scaling, "load_idea", lambda root, name: {"id": name})
+    monkeypatch.setattr(scaling, "family_for_candidate", lambda *args, **kwargs: {
+        "id": "another" if change == "another_family" else "example"})
+    campaign = {"id": "shared", "candidate_budget_seconds": 1200, "budget_seconds": 2400}
+    if change == "small_campaign":
+        campaign["budget_seconds"] = 1199
+    if change == "wrong_candidate_cap":
+        campaign["candidate_budget_seconds"] = 1199
+    overrides = {"unknown" if change == "unknown_family" else "example": "example-new"}
+    with pytest.raises(ValueError, match="selected families|another trainer family|full selected matrix"):
+        scaling.register(tmp_path, "invalid", candidate_overrides=overrides, campaign=campaign)
+    assert not (tmp_path / "configs/forge/performance").exists()
+
+
 def test_performance_view_never_qualifies_a_recipe():
     tasks = load_tasks(ROOT)
     view = load_view(ROOT, "dcgan_performance")

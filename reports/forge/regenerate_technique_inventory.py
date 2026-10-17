@@ -390,6 +390,61 @@ def _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_mod
     return current
 
 
+def _validate_comparison_policy(actual, comparison):
+    """Permit only older assignment dispositions, never another task or tier."""
+    metadata = {"revision", "previous_revision", "policy_change_reason"}
+    if (comparison.get("id") != actual.get("id")
+            or type(comparison.get("revision")) is not int
+            or comparison["revision"] >= actual["revision"]
+            or {key: value for key, value in actual.items() if key not in metadata | {"assignments"}}
+               != {key: value for key, value in comparison.items() if key not in metadata | {"assignments"}}):
+        raise ValueError("comparison policy must change only older assignment dispositions")
+    def structural(view):
+        return [{key: value for key, value in assignment.items()
+                 if key not in {"importance", "hold", "removal"}}
+                for assignment in view["assignments"]]
+    if structural(actual) != structural(comparison):
+        raise ValueError("comparison policy changes task identities, tiers or ordering")
+
+
+def _comparison_projection(actual, projected, comparison):
+    """Bind a policy-only projection to the original measured rows and tasks."""
+    from copy import deepcopy
+    from experiments.forge.contracts import stable_hash
+    originals = {row["candidate_revision"]: row for row in actual["rows"] if row.get("attempt_ids")}
+    observed = set()
+    def statuses(row):
+        return {item["task_id"]: item["status"] for key in ("tasks", "nonrequired_tasks") for item in row[key]}
+    for row in projected["rows"]:
+        if not row.get("attempt_ids"):
+            continue
+        original = originals.get(row["candidate_revision"])
+        family = row["bindings"]["trainer_family"]
+        if (original is None or row["bindings"]["task_contracts"] != comparison["reference_task_contracts"].get(family)
+                or any(row.get(key) != original.get(key) for key in
+                       ("candidate_id", "candidate_revision", "cohort", "bindings", "runtime_cohort", "attempt_ids", "cost"))):
+            raise ValueError("comparison projection changes recorded task contracts or measured cohort")
+        if statuses(row) != statuses(original):
+            raise ValueError("comparison policy projection changed numerical task verdicts")
+        observed.add(row["candidate_revision"])
+        row["executed_policy_qualification"] = dict(
+            view_revision=actual["view_revision"], policy_fingerprint=actual["policy_fingerprint"],
+            status=original["status"], qualified_tier=original["qualified_tier"], tiers=deepcopy(original["tiers"]),
+            note="Separate actual executed-policy result; this does not change the projected comparison tiers.")
+    if observed != set(originals):
+        raise ValueError("comparison projection lost an original measured row")
+    qualification = {key: deepcopy(actual[key]) for key in
+                     ("view", "view_revision", "policy_fingerprint", "tier_requirements")}
+    qualification["rows"] = deepcopy(list(originals.values()))
+    projected["comparison_policy_projection"] = dict(
+        path=comparison["path"], sha256=comparison["sha256"],
+        policy_fingerprint=stable_hash(comparison["policy"]), actual_policy_fingerprint=actual["policy_fingerprint"],
+        task_contracts_unchanged=True, numerical_verdicts_unchanged=True,
+        original_admissions_reconstructed_before_projection=True, qualification_input=False, qualification_reuse=False,
+        note="Projected tiers use the older comparison policy only. Actual executed-policy qualification is separate; no projected Tier 3 claim follows from an actual-policy pass.",
+        actual_qualification=qualification, actual_qualification_sha256=stable_hash(qualification))
+
+
 def _extract_source(root, commit, destination, manifests, study_support=None):
     for name, digest in (study_support or {}).items():
         if (Path(name).is_absolute() or ".." in Path(name).parts or Path(name).suffix != ".json"
@@ -428,18 +483,95 @@ def _extract_source(root, commit, destination, manifests, study_support=None):
     for name, digest in (study_support or {}).items():
         if not (destination / name).is_file() or file_hash(destination / name) != digest:
             raise ValueError("frozen Git study prior-evidence differs from its original admission hash")
-    _overlay_reports(root / "reports", destination / "reports")
+    closure = _catalog_support_closure(_frozen_catalog_support(destination), manifests, study_support or {})
+    closure["frozen_rule_files_sha256"] = {
+        name: file_hash(destination / name) for name in
+        ("experiments/forge/planning.py", "experiments/forge/hostprofiles.py") if (destination / name).is_file()}
+    _overlay_reports(root / "reports", destination / "reports",
+                     excluded=[Path(name).relative_to("reports") for name in closure["preserved_absent_paths"]])
+    return closure
 
 
-def _overlay_reports(original, destination):
+def _frozen_catalog_support(root):
+    """Ask the executed planner's helpers which optional catalog files it sees."""
+    program = """
+import json, sys
+from pathlib import Path
+from experiments.forge.views import load_tasks
+try:
+    from experiments.forge.hostprofiles import profile_source_paths
+except ImportError:
+    profile_source_paths = None
+paths = set()
+for task in load_tasks(Path(sys.argv[1])).values():
+    paths.update(task.get('evaluation', {}).get('sources', {}))
+    if profile_source_paths is not None:
+        try:
+            paths.update(profile_source_paths(task))
+        except (KeyError, TypeError, ValueError):
+            pass
+print(json.dumps(sorted(paths)))
+"""
+    environment = {**os.environ, "PYTHONPATH": str(root), "PYTHONDONTWRITEBYTECODE": "1",
+                   "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1"}
+    output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(root)],
+                                     cwd=root, env=environment, text=True, stderr=subprocess.PIPE)
+    return json.loads(output)
+
+
+def _catalog_support_closure(support, manifests, study_support=()):
+    """Retain captured optional files and preserve recorded report-file absence."""
+    absent, present = [], []
+    for name in sorted(set(support)):
+        path = Path(name)
+        if path.is_absolute() or ".." in path.parts:
+            raise ValueError("unsafe frozen catalog support path")
+        if not path.parts or path.parts[0] != "reports":
+            continue
+        captured = {name in source["files"] for source in manifests.values()}
+        if len(captured) != 1:
+            raise ValueError("conflicting captured catalog support presence; publish source cohorts separately: " + name)
+        if True in captured:
+            present.append(name)
+        elif name not in study_support:
+            absent.append(name)
+    return {"captured_present_paths": present, "preserved_absent_paths": absent,
+            "source_manifest_digests": sorted(manifests),
+            "scope": "Frozen planner catalog evaluator/profile inventory only; captured source and original study support retain their exact bytes. Read-only report overlays cannot introduce previously absent optional source files.",
+            "qualification_reuse": False}
+
+
+def _overlay_reports(original, destination, *, excluded=()):
     """Expose current knowledge read-only while retaining frozen report helpers."""
     destination.mkdir(parents=True, exist_ok=True)
     for source in original.iterdir():
+        relative = [Path(path) for path in excluded if Path(path).parts[0] == source.name]
+        if any(len(path.parts) == 1 for path in relative):
+            continue
         target = destination / source.name
-        if not target.exists():
+        if relative and source.is_dir():
+            # Do not symlink an ancestor of an excluded optional source: the
+            # missing descendant must remain absent without touching live data.
+            target.mkdir(parents=True, exist_ok=True)
+            _overlay_reports(source, target, excluded=[Path(*path.parts[1:]) for path in relative])
+        elif not target.exists():
             target.symlink_to(source.resolve(), target_is_directory=source.is_dir())
         elif source.is_dir() and target.is_dir():
             _overlay_reports(source, target)
+
+
+def _validate_recorded_study_projection(studies, result, view_id, execution_backend):
+    """An unresolved declaration cannot erase a completed original study."""
+    from experiments.forge.views import diagnostic_evidence_scope
+    expected = {record["request"]["candidate"]["id"] for record in studies
+                if record["request"]["view"]["id"] == view_id
+                and (execution_backend is None or record["request"]["execution_backend"] == execution_backend)
+                and not diagnostic_evidence_scope(record["request"])}
+    reconstructed = {proof["candidate_id"] for proof in result.get("registered_study_reconstruction", [])}
+    measured = {row["candidate_id"] for row in result["rows"] if row.get("attempt_ids")}
+    if not expected.issubset(reconstructed & measured):
+        raise ValueError("frozen publication lost recorded study admission or measured rows: "
+                         + ", ".join(sorted(expected - (reconstructed & measured))))
 
 
 def _publication_rows(result):
@@ -495,7 +627,7 @@ def _bound_publication_rows(result, allowed_sources):
 
 
 def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary,
-                   declaration_registration=None):
+                   declaration_registration=None, comparison_policy=None):
     commit = _resolve_commit(root, source_commit)
     manifests = _receipt_manifests(root, commit)
     studies, support = _recorded_studies(root, manifests)
@@ -522,29 +654,57 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
                   "candidate_ids": sorted(ids), "measured_candidate_ids": sorted(measured),
                   "execution_backend": "cuda", "qualification_transfer": False}
     frozen_root = temporary / "source"
-    _extract_source(root, commit, frozen_root, manifests, study_support=support)
+    catalog_closure = _extract_source(root, commit, frozen_root, manifests, study_support=support)
     contract = temporary / "manifests.json"
     atomic_text(contract, _json_text(manifests))
     study_contract = temporary / "recorded-studies.json"
     atomic_text(study_contract, _json_text(studies))
     roster_contract = temporary / "declaration-roster.json"
     atomic_text(roster_contract, _json_text(roster))
+    comparison = None
+    if comparison_policy is not None:
+        comparison_path = Path(comparison_policy)
+        if not comparison_path.is_absolute():
+            comparison_path = root / comparison_path
+        policy = read_json(comparison_path)
+        _validate_comparison_policy(read_json(frozen_root / "configs/forge/views" / f"{view_id}.json"), policy)
+        recorded = read_json(root / CURRENT_PREFIX.with_suffix(".json"))
+        manifest = read_json(root / EVIDENCE_MANIFEST)
+        if stable_hash(policy) != manifest["policy_fingerprint"] or recorded["policy_fingerprint"] != stable_hash(policy):
+            raise ValueError("comparison policy must match the registered inventory policy")
+        # Validate compact original evidence, without reconstructing or grading
+        # any historical implementation. Only the new source is regraded.
+        verified = set()
+        for entry in manifest["cohorts"]:
+            _, rows = _snapshot(root, entry, manifest)
+            verified.update(row["candidate_revision"] for row in rows.values())
+        reference = {}
+        for row in recorded["rows"]:
+            if row.get("attempt_ids") and row.get("candidate_revision") in verified:
+                reference[row["trainer_family"]] = row["bindings"]["task_contracts"]
+        comparison = {"policy": policy, "path": os.path.relpath(comparison_path, root),
+                      "sha256": file_hash(comparison_path), "reference_task_contracts": reference}
+    comparison_contract = temporary / "comparison-policy.json"
+    atomic_text(comparison_contract, _json_text(comparison))
     prefix = temporary / "inventory"
     # A fresh process is essential: already imported live model/resolver
     # modules cannot grade a reconstructed older checkout faithfully.
-    program = inspect.getsource(_recorded_study_question) + """
+    program = (inspect.getsource(_recorded_study_question) + inspect.getsource(_validate_comparison_policy)
+               + inspect.getsource(_comparison_projection)) + """
 import json, sys
 import torch
 torch.set_num_threads(1)
 from pathlib import Path
 from experiments.forge.sources import inspect_source
 from experiments.forge.technique_board import write_report
-root, contract, study_contract, prefix, goal, backend, roster_contract = sys.argv[1:]
+root, contract, study_contract, prefix, goal, backend, roster_contract, comparison_contract = sys.argv[1:]
 root = Path(root)
 manifests = json.loads(Path(contract).read_text())
 recorded_studies = json.loads(Path(study_contract).read_text())
 declaration_roster = json.loads(Path(roster_contract).read_text())
+comparison = json.loads(Path(comparison_contract).read_text())
 study_proofs = []
+admitted_requests = {}
 for expected in manifests.values():
     actual = inspect_source(root, list(expected['files']))
     if actual['digest'] != expected['digest'] or actual['files'] != expected['files']:
@@ -624,8 +784,10 @@ if (root / 'experiments/forge/knowledge.py').is_file():
                     planning.declaration_paths = previous_paths
             planning.load_idea = full_catalog_load_idea
     def question_request(root, idea_id, view_id, execution_backend='cuda', cuda_model=None):
-        return _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_model,
-                                       recorded_studies, study_proofs)
+        request = _recorded_study_question(root, idea_id, view_id, execution_backend, cuda_model,
+                                          recorded_studies, study_proofs)
+        admitted_requests[(idea_id, view_id, execution_backend, cuda_model)] = deepcopy(request)
+        return request
     knowledge._current_request = question_request
 if (root / 'reports/forge/word_checkpoint_publication.py').is_file():
     from reports.forge.word_checkpoint_publication import install
@@ -633,6 +795,41 @@ if (root / 'reports/forge/word_checkpoint_publication.py').is_file():
 result = write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
 report_path = Path(result['json'])
 report = json.loads(report_path.read_text())
+if comparison is not None:
+    from experiments.forge import views
+    from experiments.forge.contracts import stable_hash
+    actual = deepcopy(report)
+    actual_policy = views.load_view(root, goal)
+    _validate_comparison_policy(actual_policy, comparison['policy'])
+    for row in actual['rows']:
+        if not row.get('attempt_ids'):
+            continue
+        family = row['bindings']['trainer_family']
+        if row['bindings']['task_contracts'] != comparison['reference_task_contracts'].get(family):
+            raise ValueError('comparison projection changes recorded task contracts: ' + str(family))
+    # All admission/source reconstruction above used the original view. The
+    # projection may only reuse those verified requests, never reconstruct a
+    # study with its view overridden.
+    original_view_reader = views.load_view
+    original_question = knowledge._current_request
+    def comparison_view(directory, name):
+        if Path(directory).resolve() == root.resolve() and name == goal:
+            return deepcopy(comparison['policy'])
+        return original_view_reader(directory, name)
+    def admitted_question(directory, idea_id, view_id, execution_backend='cuda', cuda_model=None):
+        key = (idea_id, view_id, execution_backend, cuda_model)
+        if key not in admitted_requests:
+            raise ValueError('comparison projection requested an unverified admission')
+        return deepcopy(admitted_requests[key])
+    try:
+        views.load_view = comparison_view
+        knowledge._current_request = admitted_question
+        write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
+        report = json.loads(report_path.read_text())
+    finally:
+        views.load_view = original_view_reader
+        knowledge._current_request = original_question
+    _comparison_projection(actual, report, comparison)
 report['registered_study_reconstruction'] = study_proofs
 if declaration_roster is not None:
     report['declaration_roster'] = declaration_roster
@@ -647,13 +844,16 @@ print(json.dumps(result, sort_keys=True))
     try:
         output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(frozen_root),
                                           str(contract), str(study_contract), str(prefix), view_id, execution_backend or "all",
-                                          str(roster_contract)],
+                                          str(roster_contract), str(comparison_contract)],
                                          cwd=frozen_root, env=environment, text=True, stderr=subprocess.PIPE)
     except subprocess.CalledProcessError as error:
         raise ValueError("frozen independent report failed: " + error.stderr.strip()) from error
     metadata = json.loads(output)
     result = read_json(metadata["json"])
     result["rows"], unresolved = _bound_publication_rows(result, set(manifests))
+    _validate_recorded_study_projection(studies, result, view_id, execution_backend)
+    if catalog_closure is not None:
+        result["frozen_catalog_support_closure"] = catalog_closure
     if roster is not None:
         if {row["candidate_id"] for row in result["rows"] + unresolved} != set(roster["candidate_ids"]):
             raise ValueError("frozen publication omits a registered leader")
@@ -671,11 +871,13 @@ print(json.dumps(result, sort_keys=True))
 
 def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_stability", execution_backend="cuda",
                output_prefix: Path | str = "reports/forge/technique-inventory", source_commit=None,
-               declaration_registration=None) -> dict:
+               declaration_registration=None, comparison_policy=None) -> dict:
     """Regrade original evidence and publish deterministic compact artifacts."""
     root = Path(root).resolve()
     if declaration_registration is not None and source_commit is None:
         raise ValueError("declaration roster requires exact frozen source reconstruction")
+    if comparison_policy is not None and source_commit is None:
+        raise ValueError("independent comparison projection requires an exact frozen source")
     prefix = Path(output_prefix)
     if not prefix.is_absolute():
         prefix = root / prefix
@@ -701,9 +903,10 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
                 result["snapshot_row_scope"] = "all_configuration_variants"
             commit, frozen_digests = None, []
         else:
+            comparison_options = {"comparison_policy": comparison_policy} if comparison_policy is not None else {}
             metadata, result, commit, frozen_digests = _frozen_report(
                 root, source_commit, view_id=view_id, execution_backend=execution_backend, temporary=Path(temporary),
-                declaration_registration=declaration_registration)
+                declaration_registration=declaration_registration, **comparison_options)
     attempt_ids = sorted({attempt for row in result["rows"] for attempt in row.get("attempt_ids", [])})
     if published_attempts - set(attempt_ids):
         if source_commit is None:
@@ -745,6 +948,8 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
                (" --source-commit " + commit if commit else ""))
     if declaration_registration is not None:
         command += " --declaration-registration " + shlex.quote(str(declaration_registration))
+    if comparison_policy is not None:
+        command += " --comparison-policy " + shlex.quote(str(comparison_policy))
     lines = markdown.splitlines()
     lines = [command if line.startswith("python -m experiments.forge techniques ") else line for line in lines]
     markdown = "\n".join(lines) + "\n\nPublished receipt summaries retain final metrics, gate outcomes and original file hashes. " \
@@ -2441,6 +2646,33 @@ def _family_pages(root, result):
     return pages
 
 
+@contextmanager
+def _pending_publication_inputs(root, pending_snapshot):
+    """Render the staged immutable snapshot without writing it before validation."""
+    if pending_snapshot is None:
+        yield
+        return
+    from experiments.forge.test_performance import Inputs
+    path, data = pending_snapshot
+    path, root = Path(path).resolve(), Path(root).resolve()
+    name = path.relative_to(root).as_posix()
+    encoded = data.encode("utf-8")
+    if path.exists() and path.read_bytes() != encoded:
+        raise ValueError("pending immutable source snapshot conflicts with existing bytes")
+    value, digest = json.loads(data), hashlib.sha256(encoded).hexdigest()
+    original = Inputs.__init__
+    def initialize(inputs, directory):
+        original(inputs, directory)
+        if inputs.root == root:
+            inputs.cache[name] = deepcopy(value)
+            inputs.hashes[name] = digest
+    Inputs.__init__ = initialize
+    try:
+        yield
+    finally:
+        Inputs.__init__ = original
+
+
 def _write_family_pages(root, pages):
     if not pages:
         return
@@ -2622,7 +2854,7 @@ def _retain_recorded_measurements(root, reports):
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
                     execution_backend=None, recorded_policy=None, advance_policy=False,
-                    ownership_migration=None, declaration_registration=None):
+                    ownership_migration=None, declaration_registration=None, comparison_policy=None):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     if (root / "reports/forge/word_checkpoint_publication.py").is_file():
@@ -2632,6 +2864,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     manifest = read_json(manifest_path) if manifest_path.is_file() else None
     if recorded_policy is not None and source_commit is not None:
         raise ValueError("recorded policy publication cannot register new source evidence")
+    if comparison_policy is not None and (recorded_policy is not None or advance_policy or ownership_migration is not None):
+        raise ValueError("comparison policy preserves registered qualification; policy advance/recorded-policy are separate")
     if advance_policy and (source_commit is None or recorded_policy is not None):
         raise ValueError("advancing the evidence policy requires --source-commit and no recorded policy")
     if ownership_migration is not None and not (advance_policy and source_commit and recorded_policy is None):
@@ -2652,7 +2886,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if manifest is not None:
         if manifest.get("schema_version") != 1 or manifest.get("view") != view_id:
             raise ValueError("unsupported current technique evidence manifest/view")
-        policy_path = root / "configs/forge/views" / (view_id + ".json")
+        policy_path = (Path(comparison_policy) if comparison_policy is not None else
+                       root / "configs/forge/views" / (view_id + ".json"))
+        if not policy_path.is_absolute():
+            policy_path = root / policy_path
         if recorded_view is not None or policy_path.is_file():
             policy = recorded_view if recorded_view is not None else read_json(policy_path)
             if (policy.get("id") != view_id or policy.get("revision") != manifest["view_revision"]
@@ -2681,6 +2918,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
             roster_options = ({"declaration_registration": declaration_registration}
                               if declaration_registration is not None else {})
+            if comparison_policy is not None:
+                roster_options["comparison_policy"] = comparison_policy
             metadata = regenerate(root, view_id=view_id, execution_backend=execution_backend,
                                   source_commit=source_commit, output_prefix=Path(temporary) / "evidence",
                                   **roster_options)
@@ -3062,7 +3301,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
-    pages = _family_pages(root, result)
+    with _pending_publication_inputs(root, pending_snapshot):
+        pages = _family_pages(root, result)
     shared_archive = (_shared_score_archive(root)
                       if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
@@ -3099,6 +3339,8 @@ def main(argv=None):
                         help="enumerate the exact seven-leader ordinary CUDA registration recorded at --source-commit; keep full control lookup")
     parser.add_argument("--recorded-policy", type=Path,
                         help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
+    parser.add_argument("--comparison-policy", type=Path,
+                        help="explicit registered older comparison policy: new-source grades retain separate actual qualification; cached use never regrades")
     parser.add_argument("--advance-policy", action="store_true",
                         help="with --source-commit, archive earlier policy cohorts and register evidence for the current view revision")
     parser.add_argument("--ownership-migration", type=Path,
@@ -3110,7 +3352,7 @@ def main(argv=None):
                         help="refresh only the compact DCGAN performance block; preserve scientific results and family pages")
     args = parser.parse_args(argv)
     if args.refresh_performance:
-        if (args.output_prefix or args.recorded_policy or args.advance_policy or args.ownership_migration
+        if (args.output_prefix or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration
                 or args.refresh_publication or args.source_commit or args.declaration_registration
                 or args.device != "all" or args.goal != "discriminator_stability"):
             parser.error("--refresh-performance preserves current evidence; source, policy, goal and device overrides are unsupported")
@@ -3123,11 +3365,12 @@ def main(argv=None):
         print(_json_text(regenerate(args.root, view_id=args.goal,
                                    execution_backend=None if args.device == "all" else args.device,
                                    source_commit=args.source_commit, output_prefix=args.output_prefix,
-                                   declaration_registration=args.declaration_registration)), end="")
+                                   declaration_registration=args.declaration_registration,
+                                   comparison_policy=args.comparison_policy)), end="")
         return
     # A later declared view can refresh navigation without advancing/regrading
     # the immutable recorded policy. Keep the default one-command workflow usable.
-    if not (args.refresh_publication or args.source_commit or args.recorded_policy
+    if not (args.refresh_publication or args.source_commit or args.recorded_policy or args.comparison_policy
             or args.advance_policy or args.device != "all"):
         manifest_path = args.root / EVIDENCE_MANIFEST
         view_path = args.root / "configs/forge/views" / (args.goal + ".json")
@@ -3136,7 +3379,7 @@ def main(argv=None):
             if stable_hash(read_json(view_path)) != manifest.get("policy_fingerprint"):
                 args.refresh_publication = True
     if args.refresh_publication:
-        if args.source_commit or args.recorded_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.device != "all":
+        if args.source_commit or args.recorded_policy or args.comparison_policy or args.advance_policy or args.ownership_migration or args.declaration_registration or args.device != "all":
             parser.error("--refresh-publication preserves the existing cohorts; source, policy and device overrides are unsupported")
         print(_json_text(refresh_publication(args.root, view_id=args.goal)), end="")
         return
@@ -3144,7 +3387,8 @@ def main(argv=None):
                                 execution_backend=None if args.device == "all" else args.device,
                                 source_commit=args.source_commit, recorded_policy=args.recorded_policy,
                                 advance_policy=args.advance_policy, ownership_migration=args.ownership_migration,
-                                declaration_registration=args.declaration_registration)), end="")
+                                declaration_registration=args.declaration_registration,
+                                comparison_policy=args.comparison_policy)), end="")
 
 
 if __name__ == "__main__":

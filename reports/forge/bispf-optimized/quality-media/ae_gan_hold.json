@@ -1,0 +1,19 @@
+{
+  "adapter_note": "Strict exporter rejected extra initial/display records: scored output and numerical observation schedules differ",
+  "gif_sha256": "2b35cd53179d3c864a73e8ad509554a056ab795a5556040e23f584bc08ac2ee6",
+  "kind": "actual_training_saved_observations_gif",
+  "metric_labels": "Scalar display labels only; original saved metrics and views are unchanged",
+  "observation_count": 24,
+  "observations_sha256": "34411002d1ea7d4b381b469f4231de03516096f719e9812a7d599b741266c7c2",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer": "benchmarks.toy_audit.api_run:render_gif",
+  "retained_records": 31,
+  "sampling_draws_added": 0,
+  "selection": "All scored scheduled records from the original saved training views",
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/1794aa9a44ec4397b0383f5470bdc915/constraint_geometry-scored-outputs.pt": "a11c8e5a30bd721f910c307c71971e29f710453bbdefc7de99f9d217d83a9d3a"
+  },
+  "task_id": "ae_gan_hold"
+}

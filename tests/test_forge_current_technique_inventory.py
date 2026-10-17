@@ -1069,7 +1069,7 @@ def test_explicit_policy_advance_preserves_original_cohorts_without_new_credit(e
     assert original in baseline["evidence_rows"]
     assert all((root / relative).read_bytes() == content for relative, content in protected.items())
     markdown = Path(result["report"]).read_text()
-    assert "0(*)/5" in markdown
+    assert "0/5 (4 not run)" in markdown
     assert "Complete numerical publication and provenance" in markdown
     assert len(list((root / "reports/forge").glob("technique-inventory.md"))) == 1
     outputs = _outputs(root)

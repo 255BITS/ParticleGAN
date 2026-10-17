@@ -131,6 +131,10 @@ def parser():
     scaling_register.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     scaling_register.add_argument("--cuda-model")
     scaling_register.add_argument("--family", action="append", help="select a current family; repeat, default all")
+    scaling_register.add_argument("--candidate", action="append", default=[], metavar="FAMILY=CANDIDATE",
+                                  help="explicit diagnostic candidate override within a selected family; repeat")
+    scaling_register.add_argument("--campaign", type=Path,
+                                  help="optional immutable shared performance campaign JSON")
     for stage in ("plan", "enqueue"):
         scaling_stages.add_parser(stage).add_argument("registration")
     scaling_publish = scaling_stages.add_parser("publish", help="export frozen queue performance summaries and refresh the current overview; no training")
@@ -393,8 +397,15 @@ def main(argv=None):
     elif command == "scaling":
         from .scaling import register, plan, enqueue
         if args.stage == "register":
+            overrides = {}
+            for value in args.candidate:
+                family, separator, candidate = value.partition("=")
+                if not separator or not family or not candidate or family in overrides:
+                    raise ValueError("performance --candidate requires distinct FAMILY=CANDIDATE entries")
+                overrides[family] = candidate
             emit(register(root, args.registration, view_id=args.view, execution_backend=args.device,
-                          cuda_model=args.cuda_model, family_ids=args.family))
+                          cuda_model=args.cuda_model, family_ids=args.family, candidate_overrides=overrides,
+                          campaign=read_json(args.campaign) if args.campaign else None))
         elif args.stage == "plan":
             emit(plan(root, queue_root, args.registration, queue=queue))
         elif args.stage == "publish":

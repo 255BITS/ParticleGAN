@@ -223,6 +223,54 @@ def build_manifest(root, entries, *, tasks=None):
     return manifest
 
 
+def compose_manifests(root, paths):
+    """Overlay complete family measurements without losing other families.
+
+    Inputs are immutable archived manifests, in oldest-to-newest order. Each
+    input must explicitly register its complete family/task roster. Replacing a
+    family replaces that entire recipe's matrix; individual favorable cells
+    cannot be selected. Original receipts and source identities are untouched.
+    The caller owns archiving and publishing; this function writes nothing.
+    """
+    root = Path(root).resolve()
+    if not paths:
+        _fail("composition requires archived performance manifests")
+    tasks, rosters, completed, unavailable, sources = None, {}, {}, {}, []
+    for name in paths:
+        path = _path(root, name)
+        document = read_json(path)
+        _validate_manifest(root, document)
+        roster = (document.get("export") or {}).get("family_selections")
+        if not roster:
+            _fail("composition requires a complete registered family roster")
+        if tasks is None:
+            tasks = document["tasks"]
+        elif tasks != document["tasks"]:
+            _fail("composition cannot mix different performance task contracts")
+        for selected in roster:
+            family = selected["trainer_family"]
+            rosters[family] = deepcopy(selected)
+            completed[family] = [row for row in document["entries"]
+                                 if row["trainer_family"] == family]
+            unavailable[family] = [row for row in document.get("unavailable", [])
+                                   if row["trainer_family"] == family]
+        sources.append({"path": name, "sha256": file_hash(path),
+                        "input_digest": document["input_digest"],
+                        "registration": document.get("export", {}).get("registration")})
+    result = build_manifest(root, [row for rows in completed.values() for row in rows], tasks=tasks)
+    result["unavailable"] = [row for family in sorted(unavailable) for row in unavailable[family]]
+    result["export"] = {
+        "schema": "forge_scaling_composite_v1", "sources": sources,
+        "family_selections": [rosters[family] for family in sorted(rosters)],
+        "composition": "complete family matrices; later archived sources replace earlier families",
+        "training_launched": False, "qualification_input": False,
+    }
+    result.pop("input_digest")
+    result["input_digest"] = stable_hash(result)
+    _validate_manifest(root, result)
+    return result
+
+
 def _validate_manifest(root, manifest):
     check = deepcopy(manifest)
     digest = check.pop("input_digest", None)
@@ -234,6 +282,15 @@ def _validate_manifest(root, manifest):
             or manifest.get("default_adoption") is not False
             or manifest.get("timing_scope") != TIMING_SCOPE):
         _fail("manifest scope differs from performance-only contract")
+    export = manifest.get("export") or {}
+    if export.get("schema") == "forge_scaling_composite_v1":
+        if not export.get("sources"):
+            _fail("composite manifest requires archived source proofs")
+        for source in export["sources"]:
+            path = _path(root, source["path"])
+            if (file_hash(path) != source["sha256"]
+                    or read_json(path).get("input_digest") != source["input_digest"]):
+                _fail("archived composite source bytes changed: " + source["path"])
     tasks = {}
     for task in manifest["tasks"]:
         identifier(task["id"], "task id")
