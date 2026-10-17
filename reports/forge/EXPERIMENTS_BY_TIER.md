@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **163 tasks**; **126 assigned** to at least one view; **37 unassigned**. Showing **23/23 views**.
+Catalog: **163 tasks**; **126 assigned** to at least one view; **37 unassigned**. Showing **25/25 views**.
 
 Declared priors across the catalog: **56 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
@@ -41,6 +41,8 @@ This report follows changing declarations and published evidence; it selects no 
 | [bcap-tier1-stability-repairs-diagnostic-v1](../../configs/forge/views/bcap-tier1-stability-repairs-diagnostic-v1.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | provisional |
 | [bcap_convolution_images](../../configs/forge/views/bcap_convolution_images.json) | 1 | 4 diagnostic | 0 tasks | 0 tasks | provisional |
 | [bispf_fastpath_quality](../../configs/forge/views/bispf_fastpath_quality.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | undeclared |
+| [bispf_throughput_endurance](../../configs/forge/views/bispf_throughput_endurance.json) | 2 | 3 diagnostic | 0 tasks | 0 tasks | undeclared |
+| [bispf_throughput_small](../../configs/forge/views/bispf_throughput_small.json) | 2 | 2 diagnostic | 0 tasks | 0 tasks | undeclared |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 5 | 4 required | 12 required, 7 held | 6 required, 1 diagnostic (1 removed from the count) | provisional |
 | [dcgan_performance](../../configs/forge/views/dcgan_performance.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | undeclared |
 | [dcgan_performance_cpu_smoke](../../configs/forge/views/dcgan_performance_cpu_smoke.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | undeclared |
@@ -328,6 +330,69 @@ No published solution leaderboard for this view yet; task registration and relat
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [img_stripes2_w64_optimizer_diagnostic](../../configs/forge/tasks/img_stripes2_w64_optimizer_diagnostic.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-stripes2) | transfer_image / transfer_sustained | 600 | 300 | — |
 | [img_bars4_w64_optimizer_diagnostic](../../configs/forge/tasks/img_bars4_w64_optimizer_diagnostic.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-bars4) | transfer_image / transfer_sustained | 600 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+## bispf_throughput_endurance
+
+Declaration: [bispf_throughput_endurance](../../configs/forge/views/bispf_throughput_endurance.json); revision 2; goal: `discriminator_stability`.
+
+Declared calibration status: **undeclared**.
+
+Declared evidence scope: `research_diagnostic`.
+
+Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventory.md).
+
+### Tier 1: smoke
+
+3 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [mode_hold](../../configs/forge/tasks/mode_hold.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | transfer_behavior / transfer_sustained | 1200 | 1800 | — |
+| [ring_hold](../../configs/forge/tasks/ring_hold.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
+| [ring_extension](../../configs/forge/tasks/ring_extension.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+## bispf_throughput_small
+
+Declaration: [bispf_throughput_small](../../configs/forge/views/bispf_throughput_small.json); revision 2; goal: `discriminator_stability`.
+
+Declared calibration status: **undeclared**.
+
+Declared evidence scope: `research_diagnostic`.
+
+Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventory.md).
+
+### Tier 1: smoke
+
+2 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [img_stripes2](../../configs/forge/tasks/img_stripes2.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-stripes2) | transfer_image / transfer_sustained | 600 | 1800 | — |
+| [img_bars4](../../configs/forge/tasks/img_bars4.json) | diagnostic | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-img-bars4) | transfer_image / transfer_sustained | 600 | 1800 | — |
 
 ### Tier 2: quality
 
@@ -4445,6 +4510,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `c64a6ac4453a090fe8c81f288f51e591c62eecb9e82d3de21305da4de8937b55`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `3eec9ce334b64bce550ff4d383330a2ab2063b4a2cf42951dfbb0914662eab59`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `95aec451efbe0e0e98e9600a892f91afba52ed1a755a379c8bb8ad67c33deead`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `ebc5f9c9673f0cdaadcfffcff7032085f36760dc0b27ba0a648fb5bb9c36ee84`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

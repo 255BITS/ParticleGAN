@@ -7,7 +7,7 @@
   "candidate": "bispf-optimized-quintic-v1",
   "competing_explanation": "BF16 and SVD batching change rounding; finite losses and endpoint HQ do not establish sustained coverage. Keep the full 600 updates and all 24 gates; require both wide controls before ordinary qualification.",
   "control": {
-    "candidate_id": "bispf-optimized-quintic-v1",
+    "candidate_id": "bispf-throughput-v1",
     "task_map": {}
   },
   "falsifier": {
@@ -17,7 +17,7 @@
     "task_id": "img_stripes2_w64_optimizer_diagnostic",
     "threshold": 0.9
   },
-  "hypothesis": "Preserve both incumbent width64 image passes under the unchanged full numerical gates, using one declared throughput recipe. Performance does not imply quality.",
+  "hypothesis": "Matched original-quintic control for the throughput recipe on the two unchanged wide-image tasks, comparing the exercised precision and optimizer execution changes.",
   "id": "bispf-throughput-wide-v1-control",
   "max_rounds": 1,
   "prediction": {

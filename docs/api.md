@@ -965,6 +965,38 @@ bind solver version 3 and reject earlier experimental solver states. CUDA graph
 caches are disposable execution state and are rebuilt after restoration. Native
 remains the default.
 
+`optimizer_svd_backend="batched"` is an opt-in CUDA execution backend for
+per-offset DualNorm convolutions. Channel matrices with both dimensions at
+most 32 use one batched native SVD per kernel, preserving the per-matrix rank
+cutoff and absolute smoothing. With the quintic rule, larger matrices replay
+the existing FP32 polynomial in optimizer-local CUDA graphs. Dense, bias,
+prior-row and CPU updates retain their original laws. Batched SVD may select
+different numerical kernels; graph input copies use contiguous storage, which
+can change reduction rounding for strided kernels. Bitwise agreement with the
+native backend is not promised. Checkpoints bind backend version 1; graph caches are rebuilt after
+restore and are omitted from copies and checkpoints.
+
+`training_precision="bf16_channels_last"` separately opts `GANTrainer` into
+BF16 training for CUDA generator/critic networks containing a Conv2d or
+ConvTranspose2d whose largest channel-matrix dimension exceeds 32. These
+networks use channels-last parameter storage and critic inputs. Only network
+forwards use autocast; outputs, losses, master parameters, optimizer arithmetic
+and prior regularization remain FP32. Sampling and evaluation run outside this
+training autocast. Smaller, CPU and nonconvolutional networks retain their
+original execution. This is a numerical trainer change requiring its own
+quality evidence. Caller-owned component loops do not acquire autocast merely
+by carrying this field; they must explicitly implement the declared policy.
+
+For the combined, opt-in BISPF throughput recipe:
+
+```python
+recipe = get_recipe("bispf_optimized", optimizer_svd_backend="batched",
+                    training_precision="bf16_channels_last")
+```
+
+See the [source-bound throughput study](../reports/forge/bispf-throughput/README.md)
+for measured workload limits and quality gates. The existing default is unchanged.
+
 `optimizer_convolution_rule="quintic"` selects a separately declared hybrid
 optimizer: large CUDA per-offset channel matrices use five fixed FP32 polynomial
 steps on `[M; optimizer_smoothing I]`, with coefficients

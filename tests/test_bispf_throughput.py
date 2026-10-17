@@ -38,6 +38,23 @@ def test_quintic_graph_replays_eager_bitwise_for_changing_inputs():
             cache.direction(matrices, smoothing=.001)
 
 
+@pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA graph layout verification')
+def test_quintic_graph_pool_handles_interleaved_shapes_and_noncontiguous_kernels():
+    with torch.no_grad():
+        cache = QuinticGraphCache()
+        kernel = torch.arange(64 * 48 * 2 * 3, device='cuda', dtype=torch.float32).sin().reshape(64, 48, 2, 3)
+        matrices = kernel.permute(2, 3, 0, 1)
+        other = matrices.mT
+        for value in (matrices, other, matrices * .3, other * .7, matrices):
+            # Graph inputs use canonical contiguous storage. Reduction rounding
+            # can differ from eager evaluation directly on strided kernels.
+            expected = quintic_direction(value.contiguous(), smoothing=.001)
+            actual = cache.direction(value, smoothing=.001)
+            torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+            torch.testing.assert_close(actual, quintic_direction(value, smoothing=.001),
+                                       rtol=3e-4, atol=5e-6)
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA optimizer dispatch')
 @pytest.mark.parametrize('kind', [nn.Conv2d, nn.ConvTranspose2d])
 def test_batched_optimizer_handles_groups_zero_slices_and_momentum(kind):

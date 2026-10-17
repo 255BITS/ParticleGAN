@@ -521,5 +521,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `cd6f7af36ef00dfdb68d596de83305cff9b7d26a256132ad107c06c18c83fba8`.
+Publication input digest `6128182838c15b4413b652d53800941d149e8467433d4984219c04a204134c2f`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

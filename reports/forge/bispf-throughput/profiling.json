@@ -1,0 +1,459 @@
+{
+  "declaration": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/profile/declaration.json",
+    "sha256": "7179369b2df6c78f049a8662a83568ce8a99642df096b316ba29bab50c1f0870"
+  },
+  "profiles": [
+    {
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "component_medians": {
+        "complete_update": {
+          "calls": 1.0,
+          "exclusive_ms": 1.8923779716715217,
+          "inclusive_ms": 341.681124526076
+        },
+        "critic.autograd.grad": {
+          "calls": 2.0,
+          "exclusive_ms": 21.00555703509599,
+          "inclusive_ms": 21.00555703509599
+        },
+        "critic.backward": {
+          "calls": 1.0,
+          "exclusive_ms": 149.67811800306663,
+          "inclusive_ms": 149.67811800306663
+        },
+        "critic.critic_forward": {
+          "calls": 4.0,
+          "exclusive_ms": 19.96904652332887,
+          "inclusive_ms": 19.96904652332887
+        },
+        "critic.optimizer": {
+          "calls": 1.0,
+          "exclusive_ms": 2.6912804460152984,
+          "inclusive_ms": 29.355931968893856
+        },
+        "critic.optimizer.polar": {
+          "calls": 1.0,
+          "exclusive_ms": 0.17236103303730488,
+          "inclusive_ms": 0.530368008185178
+        },
+        "critic.optimizer.quintic": {
+          "calls": 6.0,
+          "exclusive_ms": 26.13428351469338,
+          "inclusive_ms": 26.13428351469338
+        },
+        "critic.optimizer.svd": {
+          "calls": 1.0,
+          "exclusive_ms": 0.35800697514787316,
+          "inclusive_ms": 0.35800697514787316
+        },
+        "critic.penalty": {
+          "calls": 1.0,
+          "exclusive_ms": 0.8043315028771758,
+          "inclusive_ms": 33.1592449801974
+        },
+        "critic.sinkhorn": {
+          "calls": 1.0,
+          "exclusive_ms": 1.3641634723171592,
+          "inclusive_ms": 1.3641634723171592
+        },
+        "generator.autograd.grad": {
+          "calls": 1.0,
+          "exclusive_ms": 23.6986989621073,
+          "inclusive_ms": 23.6986989621073
+        },
+        "generator.backward": {
+          "calls": 1.0,
+          "exclusive_ms": 25.02074697986245,
+          "inclusive_ms": 25.02074697986245
+        },
+        "generator.constraint_backward": {
+          "calls": 1.0,
+          "exclusive_ms": 1.4044930576346815,
+          "inclusive_ms": 50.123938999604434
+        },
+        "generator.critic_forward": {
+          "calls": 2.0,
+          "exclusive_ms": 10.052143479697406,
+          "inclusive_ms": 10.052143479697406
+        },
+        "generator.forward": {
+          "calls": 2.0,
+          "exclusive_ms": 21.24882402131334,
+          "inclusive_ms": 21.24882402131334
+        },
+        "generator.optimizer": {
+          "calls": 1.0,
+          "exclusive_ms": 5.7388178538531065,
+          "inclusive_ms": 32.45567495469004
+        },
+        "generator.optimizer.quintic": {
+          "calls": 7.0,
+          "exclusive_ms": 26.716857100836933,
+          "inclusive_ms": 26.716857100836933
+        },
+        "policy.after_critic_step": {
+          "calls": 1.0,
+          "exclusive_ms": 0.017715501599013805,
+          "inclusive_ms": 0.017715501599013805
+        },
+        "policy.after_generator_backward": {
+          "calls": 1.0,
+          "exclusive_ms": 0.02419052179902792,
+          "inclusive_ms": 0.02419052179902792
+        },
+        "policy.after_generator_step": {
+          "calls": 1.0,
+          "exclusive_ms": 0.01616997178643942,
+          "inclusive_ms": 0.01616997178643942
+        },
+        "policy.begin_step": {
+          "calls": 1.0,
+          "exclusive_ms": 0.06862555164843798,
+          "inclusive_ms": 0.06862555164843798
+        },
+        "policy.finish_step": {
+          "calls": 1.0,
+          "exclusive_ms": 0.5361880175769329,
+          "inclusive_ms": 0.5361880175769329
+        },
+        "policy.observe_critic_pair": {
+          "calls": 1.0,
+          "exclusive_ms": 0.015989993698894978,
+          "inclusive_ms": 0.015989993698894978
+        },
+        "policy.observe_support": {
+          "calls": 1.0,
+          "exclusive_ms": 0.01322553725913167,
+          "inclusive_ms": 0.01322553725913167
+        },
+        "prior.regularizer": {
+          "calls": 1.0,
+          "exclusive_ms": 2.7900509885512292,
+          "inclusive_ms": 2.7900509885512292
+        },
+        "prior.sample": {
+          "calls": 2.0,
+          "exclusive_ms": 0.24886050960049033,
+          "inclusive_ms": 0.24886050960049033
+        }
+      },
+      "component_note": "median of last two non-torch-profile updates; inclusive overlaps, exclusive subtracts nested spans; added synchronization perturbs timing",
+      "convolution_helpers": {
+        "frobenius": {
+          "calls": 0,
+          "matrix_count": 0
+        },
+        "quintic": {
+          "calls": 39,
+          "matrix_count": 624
+        }
+      },
+      "declaration_sha256": "7179369b2df6c78f049a8662a83568ce8a99642df096b316ba29bab50c1f0870",
+      "hardware": {
+        "contention_after": {
+          "available": false,
+          "benchmark_pid": 3453143,
+          "compute_process_rows": [
+            "GPU 0: NVIDIA RTX A6000 (GPU-ed080e41-3193-3755-6756-f3d46c433331)",
+            "GPU 1: NVIDIA RTX A6000 (GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce)"
+          ],
+          "gpu_rows": [
+            "0, GPU-ed080e41-3193-3755-6756-f3d46c433331, , 538, 0",
+            "1, GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce, , 516, 0"
+          ],
+          "scope": "point-in-time before/after; does not prove exclusive occupancy"
+        },
+        "contention_before": {
+          "available": false,
+          "benchmark_pid": 3453143,
+          "compute_process_rows": [
+            "GPU 0: NVIDIA RTX A6000 (GPU-ed080e41-3193-3755-6756-f3d46c433331)",
+            "GPU 1: NVIDIA RTX A6000 (GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce)"
+          ],
+          "gpu_rows": [
+            "0, GPU-ed080e41-3193-3755-6756-f3d46c433331, , 538, 0",
+            "1, GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce, , 516, 0"
+          ],
+          "scope": "point-in-time before/after; does not prove exclusive occupancy"
+        },
+        "contention_status": "unknown",
+        "cpu": "x86_64",
+        "cuda_visible_devices": null,
+        "device": "cuda:0",
+        "name": "NVIDIA RTX A6000",
+        "pci_bus_id": null,
+        "physical_uuid": "GPU-ed080e41-3193-3755-6756-f3d46c433331",
+        "platform": "Linux-7.2.5-200.fc44.x86_64-x86_64-with-glibc2.43",
+        "total_memory_mib": 48538.75,
+        "type": "cuda"
+      },
+      "newton_schulz": {
+        "exact_fallback_count": 0,
+        "matrix_count": 0,
+        "matrix_samples_sha256": null,
+        "observation_scope": "final three instrumented updates; diagnostic counters; representative gradients saved only in final torch-profile update"
+      },
+      "original_summary": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/profile/bispf-optimized-quintic-v1-dcgan_performance_r256/summary.json",
+        "sha256": "ec5925fc35ed77beb16ba58e14d594821078ac52fe78c050d98e9c4ab056bcd2"
+      },
+      "passed": true,
+      "plain_metrics": {
+        "completed_updates": 13,
+        "finite_update_fraction": 1.0,
+        "first_update_ms": 830.8908850885928,
+        "images_per_second": 47.61275794424092,
+        "measured_updates": 10,
+        "parameter_count_discriminator": 11156224,
+        "parameter_count_generator": 12196736,
+        "peak_allocated_mib": 2119.283203125,
+        "peak_reserved_mib": 2310.0,
+        "total_wall_seconds": 8.984980000997894,
+        "update_ms_median": 336.4349140319973,
+        "update_ms_p95": 337.78208213625476,
+        "warmup_ms_median": 339.32080096565187
+      },
+      "polar_shapes": {
+        "(1, 8192)": 3
+      },
+      "replay_parity": {
+        "batch_sequence_sha256": true,
+        "final_parameter_sha256": true,
+        "initial_model_sha256": true,
+        "initial_parameter_sha256": true,
+        "initialization_sha256": true,
+        "public_api_initial_prior": true
+      },
+      "schema": "forge_dcgan_component_profile_v1",
+      "source_commit": "de43f22f0",
+      "task_id": "dcgan_performance_r256"
+    },
+    {
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "component_medians": {
+        "complete_update": {
+          "calls": 1.0,
+          "exclusive_ms": 1.784729422070086,
+          "inclusive_ms": 59.29461750201881
+        },
+        "critic.autograd.grad": {
+          "calls": 2.0,
+          "exclusive_ms": 2.379548968747258,
+          "inclusive_ms": 2.379548968747258
+        },
+        "critic.backward": {
+          "calls": 1.0,
+          "exclusive_ms": 13.543074543122202,
+          "inclusive_ms": 13.543074543122202
+        },
+        "critic.critic_forward": {
+          "calls": 4.0,
+          "exclusive_ms": 2.7705521206371486,
+          "inclusive_ms": 2.7705521206371486
+        },
+        "critic.optimizer": {
+          "calls": 1.0,
+          "exclusive_ms": 1.5838935505598783,
+          "inclusive_ms": 9.038197516929358
+        },
+        "critic.optimizer.polar": {
+          "calls": 1.0,
+          "exclusive_ms": 0.1755465054884553,
+          "inclusive_ms": 0.5321985227055848
+        },
+        "critic.optimizer.quintic": {
+          "calls": 4.0,
+          "exclusive_ms": 6.922105443663895,
+          "inclusive_ms": 6.922105443663895
+        },
+        "critic.optimizer.svd": {
+          "calls": 1.0,
+          "exclusive_ms": 0.35665201721712947,
+          "inclusive_ms": 0.35665201721712947
+        },
+        "critic.penalty": {
+          "calls": 1.0,
+          "exclusive_ms": 1.0389009257778525,
+          "inclusive_ms": 6.078580510802567
+        },
+        "critic.sinkhorn": {
+          "calls": 1.0,
+          "exclusive_ms": 1.2844125158153474,
+          "inclusive_ms": 1.2844125158153474
+        },
+        "generator.autograd.grad": {
+          "calls": 1.0,
+          "exclusive_ms": 2.998753043357283,
+          "inclusive_ms": 2.998753043357283
+        },
+        "generator.backward": {
+          "calls": 1.0,
+          "exclusive_ms": 4.280889988876879,
+          "inclusive_ms": 4.280889988876879
+        },
+        "generator.constraint_backward": {
+          "calls": 1.0,
+          "exclusive_ms": 0.8215094567276537,
+          "inclusive_ms": 8.101152488961816
+        },
+        "generator.critic_forward": {
+          "calls": 2.0,
+          "exclusive_ms": 1.3546335394494236,
+          "inclusive_ms": 1.3546335394494236
+        },
+        "generator.forward": {
+          "calls": 2.0,
+          "exclusive_ms": 2.409199601970613,
+          "inclusive_ms": 2.409199601970613
+        },
+        "generator.optimizer": {
+          "calls": 1.0,
+          "exclusive_ms": 3.313905035611242,
+          "inclusive_ms": 11.861764476634562
+        },
+        "generator.optimizer.quintic": {
+          "calls": 5.0,
+          "exclusive_ms": 8.54785944102332,
+          "inclusive_ms": 8.54785944102332
+        },
+        "policy.after_critic_step": {
+          "calls": 1.0,
+          "exclusive_ms": 0.017365033272653818,
+          "inclusive_ms": 0.017365033272653818
+        },
+        "policy.after_generator_backward": {
+          "calls": 1.0,
+          "exclusive_ms": 0.023455009795725346,
+          "inclusive_ms": 0.023455009795725346
+        },
+        "policy.after_generator_step": {
+          "calls": 1.0,
+          "exclusive_ms": 0.018869992345571518,
+          "inclusive_ms": 0.018869992345571518
+        },
+        "policy.begin_step": {
+          "calls": 1.0,
+          "exclusive_ms": 0.05649548256769776,
+          "inclusive_ms": 0.05649548256769776
+        },
+        "policy.finish_step": {
+          "calls": 1.0,
+          "exclusive_ms": 0.4970974987372756,
+          "inclusive_ms": 0.4970974987372756
+        },
+        "policy.observe_critic_pair": {
+          "calls": 1.0,
+          "exclusive_ms": 0.015019963029772043,
+          "inclusive_ms": 0.015019963029772043
+        },
+        "policy.observe_support": {
+          "calls": 1.0,
+          "exclusive_ms": 0.014359946362674236,
+          "inclusive_ms": 0.014359946362674236
+        },
+        "prior.regularizer": {
+          "calls": 1.0,
+          "exclusive_ms": 2.883092500269413,
+          "inclusive_ms": 2.883092500269413
+        },
+        "prior.sample": {
+          "calls": 2.0,
+          "exclusive_ms": 0.20269595552235842,
+          "inclusive_ms": 0.20269595552235842
+        }
+      },
+      "component_note": "median of last two non-torch-profile updates; inclusive overlaps, exclusive subtracts nested spans; added synchronization perturbs timing",
+      "convolution_helpers": {
+        "frobenius": {
+          "calls": 0,
+          "matrix_count": 0
+        },
+        "quintic": {
+          "calls": 27,
+          "matrix_count": 432
+        }
+      },
+      "declaration_sha256": "7179369b2df6c78f049a8662a83568ce8a99642df096b316ba29bab50c1f0870",
+      "hardware": {
+        "contention_after": {
+          "available": false,
+          "benchmark_pid": 3452103,
+          "compute_process_rows": [
+            "GPU 0: NVIDIA RTX A6000 (GPU-ed080e41-3193-3755-6756-f3d46c433331)",
+            "GPU 1: NVIDIA RTX A6000 (GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce)"
+          ],
+          "gpu_rows": [
+            "0, GPU-ed080e41-3193-3755-6756-f3d46c433331, , 538, 0",
+            "1, GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce, , 516, 0"
+          ],
+          "scope": "point-in-time before/after; does not prove exclusive occupancy"
+        },
+        "contention_before": {
+          "available": false,
+          "benchmark_pid": 3452103,
+          "compute_process_rows": [
+            "GPU 0: NVIDIA RTX A6000 (GPU-ed080e41-3193-3755-6756-f3d46c433331)",
+            "GPU 1: NVIDIA RTX A6000 (GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce)"
+          ],
+          "gpu_rows": [
+            "0, GPU-ed080e41-3193-3755-6756-f3d46c433331, , 538, 0",
+            "1, GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce, , 516, 0"
+          ],
+          "scope": "point-in-time before/after; does not prove exclusive occupancy"
+        },
+        "contention_status": "unknown",
+        "cpu": "x86_64",
+        "cuda_visible_devices": null,
+        "device": "cuda:0",
+        "name": "NVIDIA RTX A6000",
+        "pci_bus_id": null,
+        "physical_uuid": "GPU-ed080e41-3193-3755-6756-f3d46c433331",
+        "platform": "Linux-7.2.5-200.fc44.x86_64-x86_64-with-glibc2.43",
+        "total_memory_mib": 48538.75,
+        "type": "cuda"
+      },
+      "newton_schulz": {
+        "exact_fallback_count": 0,
+        "matrix_count": 0,
+        "matrix_samples_sha256": null,
+        "observation_scope": "final three instrumented updates; diagnostic counters; representative gradients saved only in final torch-profile update"
+      },
+      "original_summary": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/profile/bispf-optimized-quintic-v1-dcgan_performance_r64/summary.json",
+        "sha256": "be0bf90b5ce38798088e0e5c0f13b15ae46dff6eaeb84b021f7f0d39bc911eef"
+      },
+      "passed": true,
+      "plain_metrics": {
+        "completed_updates": 13,
+        "finite_update_fraction": 1.0,
+        "first_update_ms": 656.070775934495,
+        "images_per_second": 319.9297082635076,
+        "measured_updates": 10,
+        "parameter_count_discriminator": 2765568,
+        "parameter_count_generator": 3806080,
+        "peak_allocated_mib": 221.77978515625,
+        "peak_reserved_mib": 316.0,
+        "total_wall_seconds": 2.8159358280245215,
+        "update_ms_median": 50.003548501990736,
+        "update_ms_p95": 50.36477700341493,
+        "warmup_ms_median": 52.30216705240309
+      },
+      "polar_shapes": {
+        "(1, 8192)": 3
+      },
+      "replay_parity": {
+        "batch_sequence_sha256": true,
+        "final_parameter_sha256": true,
+        "initial_model_sha256": true,
+        "initial_parameter_sha256": true,
+        "initialization_sha256": true,
+        "public_api_initial_prior": true
+      },
+      "schema": "forge_dcgan_component_profile_v1",
+      "source_commit": "de43f22f0",
+      "task_id": "dcgan_performance_r64"
+    }
+  ],
+  "schema": "bispf_throughput_component_readout_v1"
+}

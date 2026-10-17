@@ -1,0 +1,166 @@
+{
+  "attempt_id": "1bcdae31a8dc4d6c873a57629e5f9c33",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-quality-v1",
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-quality-v1",
+    "request": "8a415d710a71e5715c2296fb",
+    "revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "d05d586adeb8745fceef103bef6b448b4ded5776938dd83fe1dd12102434d3fb",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/1bcdae31a8dc4d6c873a57629e5f9c33/evidence.json",
+        "sha256": "e764decf62313ea455b15a434584609566fefea3a508fba4c3f97c07357373d5"
+      },
+      "request": {
+        "path": "reports/forge/attempts/1bcdae31a8dc4d6c873a57629e5f9c33/request.json",
+        "sha256": "652971355827b4c39460d4c60d5fd7aa8cdf41e38494c9b74d89676ca14ecbc9"
+      },
+      "result": {
+        "path": "reports/forge/attempts/1bcdae31a8dc4d6c873a57629e5f9c33/result.json",
+        "sha256": "6c47a679ea81f495364467d9a94a286d7472691b60b832118bdb09d03fe6446c"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "8a415d710a71e5715c2296fb",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "e45f1ac87a33c06fa3a1bdab5eeddab943f0573a547f3236dbd0d2a1b19e37ec",
+      "cost": {
+        "adapter_seconds": 23.34591236698907,
+        "charged_task": "cover_leftover",
+        "device": "0",
+        "execution_seconds": 29.227027637069114,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 24.475028224056587,
+        "wall_seconds": 29.227027637069114
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.2925,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 234,
+          "first_pass_step": 100,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 22,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 100
+        },
+        "metric_checks": {
+          "content_kept": {
+            "margin": 0.2124077882045795,
+            "metric": "content_kept",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.75,
+            "value": 0.9624077882045795
+          },
+          "leak_ratio": {
+            "margin": 0.18213661713390195,
+            "metric": "leak_ratio",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.2,
+            "value": 0.01786338286609806
+          },
+          "pole_rel_err_minus": {
+            "margin": 0.17414576262235643,
+            "metric": "pole_rel_err_minus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.2,
+            "value": 0.025854237377643585
+          },
+          "pole_rel_err_plus": {
+            "margin": 0.17478396259248258,
+            "metric": "pole_rel_err_plus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.2,
+            "value": 0.025216037407517433
+          },
+          "same_dir": {
+            "margin": 0.23699011558192107,
+            "metric": "same_dir",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.013009884418078939
+          },
+          "u_kept": {
+            "margin": 0.14909483387349265,
+            "metric": "u_kept",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9990948338734926
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "metrics": {
+        "content_kept": 0.9624077882045795,
+        "leak_ratio": 0.01786338286609806,
+        "pole_rel_err_minus": 0.025854237377643585,
+        "pole_rel_err_plus": 0.025216037407517433,
+        "same_dir": 0.013009884418078939,
+        "u_kept": 0.9990948338734926
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "cover_leftover"
+    }
+  ]
+}
