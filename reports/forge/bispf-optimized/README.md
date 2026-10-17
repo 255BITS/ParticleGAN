@@ -79,6 +79,43 @@ critic gradient, the converged unmasked result differs from the masked native
 direction by about 1.16% in relative Frobenius norm. Small residuals alone do
 not establish equality to the masked update or preservation of image quality.
 
+## Alternative optimizer result
+
+The cheap Frobenius rule removes the bottleneck but fails both direct training
+diagnostics. At the original rates and 600-update budget it collapses stripes
+to one mode and retains only two of four bars modes. Its HQ-only automatic study
+prediction says `prediction_observed`, but the actual numerical gate is FAIL.
+The immutable prediction is retained and the recipe is stopped; no full quality
+or performance-matrix execution follows.
+
+The surviving `bispf-optimized-quintic-v1` changes one global field,
+`optimizer_convolution_rule="quintic"`. It applies five fixed FP32 steps with
+coefficients `(3.4445, -4.775, 2.0315)` to the augmented matrix `[M; lambda I]`,
+then divides the top block by `1.21`. The filter has an operator bound in exact
+arithmetic, retains absolute smoothing and the original channel/kernel factor,
+and introduces no momentum or learning-rate retuning. It is an explicitly
+different optimizer inspired by Muon's polynomial, with no SVD equivalence or
+inverse-root convergence claim. [Kernel details and scaling](KERNEL_AUDIT.md)
+explain the remaining forward/backward and activation-memory costs.
+
+At frozen source `d9d72d53761c898bce20102e1995fc3d899c1447`, the initial
+unwrapped profiles measure 48.82 ms at 64 pixels and 335.20 ms at 256 pixels,
+with the same peak allocated memory as the corresponding native profiles.
+The final same-source performance matrix and full ordinary quality study are
+required before selection.
+
+The [six-arm direct training readout](wide-quality.json) passes all shared
+initialization, public-prior, task, initial RNG and final consumed-data-stream
+checks. Native BISPF passes stripes and fails the sustained bars gate; quintic
+passes both. Each run uses the same 600 updates and 24 observations. Quintic's
+stripes first pass is at update 325 versus native 275; both retain the required
+five-check suffix. Quintic bars retain nine passing terminal checks versus
+native two, with endpoint HQ 1.0 versus 0.90625. This improves that sustained
+gate, not every metric: endpoint bars distribution TV is 0.1875 versus native
+0.125. Actual-training GIFs and exact receipts are linked in the readout and
+add no training updates or sampling draws. Total charged worker time is
+215.20 seconds of the declared 1,800-second campaign.
+
 ## Quality scope
 
 CPU kernels, tiny convolution kernels, dense weights, vector updates and sampled
