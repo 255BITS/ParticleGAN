@@ -12,6 +12,7 @@ from experiments.forge.contracts import atomic_json, file_hash
 from experiments.forge.sampling import expected_policy
 from experiments.forge.trainer_families import current_family_candidates
 from experiments.forge.views import grade_result, load_tasks, load_view, qualify, validate_view
+from test_forge_configuration_search import checkout
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -118,3 +119,43 @@ def test_performance_view_never_qualifies_a_recipe():
         assignment["importance"] = "required"
     with pytest.raises(ValueError, match="cannot grant qualification"):
         validate_view(view, tasks)
+
+
+@pytest.mark.parametrize("family", ["atlas", "bispf"])
+def test_actual_frozen_performance_enqueue_accepts_selected_legacy_and_v3_recipes_without_launch(tmp_path, family):
+    from experiments.forge.planning import resolve_idea
+    from experiments.forge.queue import Queue
+    from experiments.forge.sources import verify_snapshot
+    manifest = scaling._load(ROOT, "dcgan-performance-cloud-v1")
+    choice = next(row for row in manifest["family_selections"] if row["family"] == family)
+    queue = Queue(tmp_path / "queue", report_root=ROOT / "reports/forge")
+    request = resolve_idea(ROOT, choice["candidate_id"], study=choice["study"],
+                           freeze_source=True, queue_root=queue.root)
+    verify_snapshot(Path(request["source"]["snapshot_path"]), request["source"])
+    entry = queue.submit(request, manifest["campaign"])
+    assert entry["status"] == "queued"
+    saved = queue.inspect()
+    assert len(saved["submissions"]) == 1
+    assert len(saved["jobs"]) == 6
+    assert saved["charges"] == []
+    assert saved["campaigns"][manifest["campaign"]["id"]]["spent_seconds"] == 0
+    assert saved["campaigns"][manifest["campaign"]["id"]]["reserved_seconds"] == 0
+    assert all(job["attempts"] == [] and job["status"] == "pending" for job in saved["jobs"].values())
+
+
+def test_legacy_recipe_exception_does_not_admit_other_diagnostics(checkout):
+    from experiments.forge.contracts import read_json
+    from experiments.forge.planning import resolve_idea
+    from experiments.forge.promotion import validate_screening_submission
+    from test_forge_studies import ready_study
+    study = ready_study(checkout)
+    view = read_json(checkout / "configs/forge/views/stability.json")
+    view.update(id="probe", evidence_scope="research_diagnostic")
+    view["assignments"] = [{"task": "t1", "qualification_tier": 1, "importance": "diagnostic", "order": 0}]
+    atomic_json(checkout / "configs/forge/views/probe.json", view)
+    study["scope"]["view"] = "probe"
+    atomic_json(scaling.study_path(checkout, study["id"]), study)
+    request = resolve_idea(checkout, "reusable", study=study["id"])
+    request["candidate"]["schema_version"] = 1
+    with pytest.raises(ValueError, match="research diagnostics require a ready v2"):
+        validate_screening_submission(request)

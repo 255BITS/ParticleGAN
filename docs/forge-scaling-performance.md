@@ -21,7 +21,7 @@ seed 0, three warmup updates and ten measured updates:
 | `dcgan_performance_r128` | 128×128 | 16 | 64 / 512 |
 | `dcgan_performance_r256` | 256×256 | 16 | 64 / 512 |
 | `dcgan_performance_b64` | 64×64 | 64 | 64 / 512 |
-| `dcgan_performance_w128` | 64×64 | 16 | 128 / 512 |
+| `dcgan_performance_w128` | 64×64 | 16 | 128 / 1024 |
 
 The generator uses ConvTranspose2d, BatchNorm, ReLU and a Tanh RGB output. The
 critic uses Conv2d, BatchNorm and LeakyReLU with scalar logits. All recipes use a
