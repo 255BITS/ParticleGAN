@@ -5,13 +5,10 @@
     "id": "bispf-fastpath-quality-v1"
   },
   "candidate": "bispf-optimized-v3",
-  "competing_explanation": "Finite polar iteration and omission of native hard rank masking can change trained behavior despite small numerical residuals, and width64 changes the task capacity relative to the original width12 hosts. Independently grade all four declared native/optimized arms under their unchanged sustained gates, retain native and optimized failures, and make no natural-image or ordinary qualification claim. Lower latency on mock data does not establish image quality. No paid retries, seed repeats, outcome-based task pruning or gate changes are authorized.",
+  "competing_explanation": "Finite polar iteration and omission of native hard rank masking can change trained behavior despite small numerical residuals, and width 64 changes the task capacity relative to the original width 12 hosts. Independently grade all four declared native/optimized arms under their unchanged sustained gates, retain native and optimized failures, and make no natural-image or ordinary qualification claim. Lower latency on mock data does not establish image quality. No paid retries, seed repeats, outcome-based task pruning or gate changes are authorized.",
   "control": {
     "candidate_id": "bispf-v2",
-    "task_map": {
-      "img_bars4_w64_optimizer_diagnostic": "img_bars4_w64_optimizer_diagnostic",
-      "img_stripes2_w64_optimizer_diagnostic": "img_stripes2_w64_optimizer_diagnostic"
-    }
+    "task_map": {}
   },
   "falsifier": {
     "metric": "hq",
@@ -20,8 +17,8 @@
     "task_id": "img_stripes2_w64_optimizer_diagnostic",
     "threshold": 0.9
   },
-  "hypothesis": "The frozen optimized BISPF solver version3 (bounded32-iteration augmented polar with guarded CUDA graph blocks) passes the unchanged sustained fidelity and mode-coverage gates on both explicit width64 stripe and bar tasks while preserving every native BISPF pass on those same wider hosts. Architecture, initial models/prior, target law and batches, sampling,600-update budget and24-observation cadence remain identical across arms. Ordinary tiny-image passes alone cannot establish the exercised fast-path claim.",
-  "id": "bispf-fastpath-quality-optimized-v1",
+  "hypothesis": "The frozen optimized BISPF solver version 3 (bounded 32-iteration augmented polar with guarded CUDA graph blocks) passes the unchanged sustained fidelity and mode-coverage gates on both explicit width 64 stripe and bar tasks while preserving every native BISPF pass on those same wider hosts. Architecture, initial models/prior, target law and batches, sampling, 600-update budget and 24-observation cadence remain identical across arms. Ordinary tiny-image passes alone cannot establish the exercised fast-path claim.",
+  "id": "bispf-fastpath-quality-optimized-v3",
   "max_rounds": 1,
   "prediction": {
     "metric": "hq",
