@@ -1093,8 +1093,7 @@ def test_real_selected_bispf_headline_keeps_all_eleven_failures_after_restoring_
     definitions = json.loads((root / "reports/forge/problem-definitions.json").read_text())
     described = {item["task"] for item in definitions["problems"]}
     held = {a["task"] for view in progress["views"] for a in view["assignments"]
-            if a["importance"] == "held" and view["id"] not in progress["scoped_views"]
-            and a.get("qualification_tier", 1) <= 2}
+            if a["importance"] == "held" and view["id"] not in progress["scoped_views"]}
     assert held <= described
     failed = {name for _, cohort in _selected_cohorts(progress) for name in full_suite_tasks(progress)
               if cohort["tasks"][name]["status"] == "FAIL"}

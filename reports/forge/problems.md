@@ -30,6 +30,12 @@ Passer summaries reflect the evidence audit dated **2026-10-15**. Selected-resul
 | [Keep a learned ring stable for a long run](problems.md#ring_extension) | Acquire all eight ring blobs, hold them for 1,200 consecutive checks, then survive 300 additional checks on the same uninterrupted run. | Yes: BISPF in a saved separate-runtime diagnostic; no selected ordinary PASS. |
 | [Learn sixteen distinct clusters from scratch](problems.md#ring16_acquisition) | Learn all sixteen blobs on a ring with balanced populations and real within-blob spread, rather than sixteen collapsed points. | Yes: selected BCAP and BISPF recipes. |
 | [Learning must not depend on external clock labels](problems.md#clockfree_audit_measurement_v1) | Check that the same learning state and inputs produce the same update despite changed step labels, declared horizon, evaluation cadence or a save/restart. | Yes: selected BCAP and BISPF recipes. |
+| [Escape a tanh saturation rail after the target shifts to zero](problems.md#zero_tanh_rail_escape) | First converge near the tanh saturation rail at (+0.90, -0.90) where tanh' is attenuated (~0.19), then escape the rail within 400 updates when the target shifts to (0.0, 0.0) at update 1,001 and stay settled there. | Yes in standalone public-API seed-0 execution (K3P); not yet measured across the full selected-family roster. |
+| [Survive a 16-layer unnormalized MLP generator on the 100-cluster grid](problems.md#grid100_mlp16) | Learn all 100 equal-weight Gaussian modes on `grid100` using a 16-hidden-layer 128-wide LeakyReLU(0.2) MLP generator without residual skips or normalization layers. | No full PASS under the current clean-sampling declaration; constructive capacity witness passes. |
+| [Learn the 100-cluster grid with a 16-layer residual MLP and bounded tanh head](problems.md#grid100_res16_tanh) | Recover all 100 Gaussian modes on `grid100` using a 16-layer identity-skip residual MLP generator and a bounded `S=5.25` scaled `tanh` output head without saturating the `\|x\| > 0.99 * 5.25` rails. | No full PASS under the current declaration; constructive residual-tanh witness passes with zero saturation. |
+| [Recover an 8D lifted 100-mode manifold from incomplete block-masked data (MisGAN + ppost)](problems.md#misgan_block_recovery) | Train a 2-pair incomplete-data MisGAN (`(G_x, D_x)` + `(G_m, D_m)` with detached mask gradient in `L_x`) observing only masked 8D data `(x * m, m)` under structured block dropout, then impute held-out rows via native Bayesian particle-posterior (`ppost`) resampling from `G_x`. | Solvable via detached-mask MisGAN + `ppost` (`acc_lo = 0.759` in `origin/misgan-toy` and `tests/test_solvability_misgan.py`); default `ka2` public-API baseline fails. |
+| [Learn a multimodal neural imputer on ambiguous single-sensor block masks without ppost](problems.md#misgan_block_neural_imputer) | Train a 3-pair MisGAN (`(G_x, D_x)` + `(G_m, D_m)` + `(G_i, D_i)`) and grade the neural imputer `G_i([x * m, m, z_i])` directly on the 16 held-out ambiguous single-sensor queries without `ppost` particle resampling. | No adversarial recipe PASS yet; trained supervised neural witness in `tests/test_solvability_misgan.py` passes all gates. |
+| [Learn a continuous 16-mode ring joint Encoder-Generator-Critic BiGAN](problems.md#ring16_bigan_continuous) | Train a continuous 2D multimodal joint BiGAN `(G(z), E(x), D(x, z))` on the 16-Gaussian ring (`MoGParticlePrior(sigma=0.1)`), simultaneously satisfying forward 16-mode generation and paired round-trip reconstruction `x -> G(E(x))`. | No full adversarial PASS yet (passes 2 of 5 gates out of the box under `bcap`); trained `(G, E)` witness in `tests/test_solvability_bigan.py` passes all gates. |
 
 <a name="gaussian1d_stability"></a>
 
@@ -658,3 +664,201 @@ Test: `clockfree_audit_measurement_v1` · Required for qualification and include
 **What remains to solve.** Use saved internal state rather than external labels for adaptation, or explicitly version the desired policy. Do not silently treat an annealed recipe as clock-free.
 
 Evidence: [Test-by-test evidence](test-dispositions-20261015/README.md#clockfree_audit).
+
+
+<a name="zero_tanh_rail_escape"></a>
+
+## Escape a tanh saturation rail after the target shifts to zero
+
+Test: `zero_tanh_rail_escape` · Held for qualification; included in full-suite results.
+
+**What it tests.** First converge near the tanh saturation rail at (+0.90, -0.90) where tanh' is attenuated (~0.19), then escape the rail within 400 updates when the target shifts to (0.0, 0.0) at update 1,001 and stay settled there.
+
+**The problem.** Bounded tanh heads attenuate pre-activation gradients near +/-1. Recipes that allow large pre-activation drift during the first 1,000 updates can lock into the rail or overshoot and oscillate around zero after the shift; no ordinary selected-cohort qualification run has been recorded on this newly added Tier 3 gate yet.
+
+**Has any configuration beaten it?** Yes in standalone public-API seed-0 execution (K3P); not yet measured across the full selected-family roster.
+
+- Standalone public-API execution of `k3p` at seed 0 passes all 5 terminal checks (`mean_abs_error = 0.00298 <= 0.005`, `rms_error = 0.00421 <= 0.01`, `p99_abs_error = 0.01416 <= 0.025`, `saturated_fraction = 0.0`).
+- The 3-level solvability suite (`tests/test_solvability_tanh.py`) verifies 200/200 oracle passes and a constructive network witness.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+| [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) |
+
+**What remains to solve.** Run the full Tier 3 qualified family roster (`k3p`, `ka2`, `r1r2`, `bcap-pure`, `bcap-dualnorm`, `atlas`, `e22`, `release07-gan-v3`) in ordinary cohorts and promote from held to required once a global recipe passes it together with all counted Tier 1-3 requirements.
+
+Evidence: [Public-API readout](../toy_audit/api_contract/api-zero-tanh-rail-escape/readout.md) · [Task declaration](../../configs/forge/tasks/zero_tanh_rail_escape.json).
+
+
+<a name="grid100_mlp16"></a>
+
+## Survive a 16-layer unnormalized MLP generator on the 100-cluster grid
+
+Test: `grid100_mlp16` · Held for qualification; included in full-suite results.
+
+**What it tests.** Learn all 100 equal-weight Gaussian modes on `grid100` using a 16-hidden-layer 128-wide LeakyReLU(0.2) MLP generator without residual skips or normalization layers.
+
+**The problem.** Increasing generator depth from 3 to 16 hidden layers contracts initial output spread by ~156x and attenuates first-layer and particle-prior gradients by ~73x at step 1. In the standalone seed-0 `k3p` run, the 16-layer generator collapses to 0/100 modes (`output_sigma = 0.029`, `mass_tv = 0.99`).
+
+**Has any configuration beaten it?** No full PASS under the current clean-sampling declaration; constructive capacity witness passes.
+
+- Constructive 16-layer capacity witness in `tests/test_solvability_deep100g.py` recovers 100/100 modes and passes all coverage and 100k accuracy bounds, proving the 16-layer architecture can represent the target.
+- Oracle sampler passes 200/200 draws with >= 2x noise-floor headroom.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+| [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_mlp16) |
+
+**What remains to solve.** Pair layer-wise gradient normalization (such as `bcap-nsgda-layer` or `bcap-dualnorm`) with balanced prior-to-generator step scaling so early updates do not collapse the 16-layer Jacobian before particles separate across the 10x10 grid.
+
+Evidence: [Public-API readout](../toy_audit/api_contract/api-grid100-mlp16/readout.md) · [Task declaration](../../configs/forge/tasks/grid100_mlp16.json).
+
+
+<a name="grid100_res16_tanh"></a>
+
+## Learn the 100-cluster grid with a 16-layer residual MLP and bounded tanh head
+
+Test: `grid100_res16_tanh` · Held for qualification; included in full-suite results.
+
+**What it tests.** Recover all 100 Gaussian modes on `grid100` using a 16-layer identity-skip residual MLP generator and a bounded `S=5.25` scaled `tanh` output head without saturating the `|x| > 0.99 * 5.25` rails.
+
+**The problem.** Identity skip connections prevent the 16-layer vanishing-gradient collapse of `grid100_mlp16`, but under unscaled critic updates (`k3p` at seed 0) 96.4% of generated samples are pushed into the `tanh` saturation rails (`saturated_fraction = 0.9639` vs. `<= 0.001` bound, `modes = 0/100`).
+
+**Has any configuration beaten it?** No full PASS under the current declaration; constructive residual-tanh witness passes with zero saturation.
+
+- Constructive 16-layer residual + `S=5.25` tanh witness in `tests/test_solvability_deep100g.py` passes all 100-mode coverage, 100k accuracy, and `saturated_fraction <= 0.001` bounds (`saturated_fraction = 0.0`).
+- Oracle sampler passes 200/200 draws.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+| [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-grid100_res16_tanh) |
+
+**What remains to solve.** Control pre-tanh logit growth via bounded step norms (`bcap-ada-nsgda` / `bcap-dualnorm`) or critic-gradient damping near the `S=5.25` boundary so residual branches do not drive particles onto the rails.
+
+Evidence: [Public-API readout](../toy_audit/api_contract/api-grid100-res16-tanh/readout.md) · [Task declaration](../../configs/forge/tasks/grid100_res16_tanh.json).
+
+
+<a name="misgan_block_recovery"></a>
+
+## Recover an 8D lifted 100-mode manifold from incomplete block-masked data (MisGAN + ppost)
+
+Test: `misgan_block_recovery` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train a 2-pair incomplete-data MisGAN (`(G_x, D_x)` + `(G_m, D_m)` with detached mask gradient in `L_x`) observing only masked 8D data `(x * m, m)` under structured block dropout, then impute held-out rows via native Bayesian particle-posterior (`ppost`) resampling from `G_x`.
+
+**The problem.** When 10% of rows observe only sensor `{7}`, naive conditional generators collapse the multimodal posterior. In the standalone seed-0 `ka2` public-API run, unbalanced multi-pair updates allow off-plane leakage (`off_plane = 3.55` vs. `<= 0.04`, `modes = 3/100`, `mask_tv = 0.956`).
+
+**Has any configuration beaten it?** Solvable via detached-mask MisGAN + `ppost` (`acc_lo = 0.759` in `origin/misgan-toy` and `tests/test_solvability_misgan.py`); default `ka2` public-API baseline fails.
+
+- Constructive witness and `origin/misgan-toy` detached-mask `G_x` + `ppost` achieve 100/100 modes, `hq >= 0.99`, and `acc_lo = 0.759 >= 0.70` (with 2.88x noise-floor headroom relative to the 0.777 Bayes ceiling).
+- Oracle `bayes_posterior` + `ppost` passes 200/200 draws in `tests/test_solvability_misgan.py`.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+| [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) |
+
+**What remains to solve.** Balance data-pair `(G_x, D_x)` and mask-pair `(G_m, D_m)` critic regularization under a global recipe so `G_x` stays concentrated on the 2D subspace embedded in R^8 without off-plane drift.
+
+Evidence: [Public-API readout](../toy_audit/api_contract/api-misgan-block-recovery/readout.md) · [Task declaration](../../configs/forge/tasks/misgan_block_recovery.json).
+
+
+<a name="misgan_block_neural_imputer"></a>
+
+## Learn a multimodal neural imputer on ambiguous single-sensor block masks without ppost
+
+Test: `misgan_block_neural_imputer` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train a 3-pair MisGAN (`(G_x, D_x)` + `(G_m, D_m)` + `(G_i, D_i)`) and grade the neural imputer `G_i([x * m, m, z_i])` directly on the 16 held-out ambiguous single-sensor queries without `ppost` particle resampling.
+
+**The problem.** Standard neural imputers `G_i([x * m, m, z_i])` satisfy the observed-sensor identity (`observed_max_error = 0.0`) and global missing-coordinate spread (`missing_std_ratio = 0.803` in `[0.7, 1.3]`), but suffer from conditionalGAN `z_i` noise-channel ignore on the 10% single-sensor rows (`acc_lo = 0.00019` vs. `>= 0.65`).
+
+**Has any configuration beaten it?** No adversarial recipe PASS yet; trained supervised neural witness in `tests/test_solvability_misgan.py` passes all gates.
+
+- Trained PyTorch neural network witness `G_i` in `tests/test_solvability_misgan.py` passes 100% of gates (`observed_max_error <= 1e-6`, `acc >= 0.95`, `acc_lo >= 0.65`, `missing_std_ratio` in `[0.70, 1.30]`), proving the neural imputer architecture has sufficient capacity.
+- Oracle posterior sampler passes 200/200 draws with >= 2x noise headroom.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+| [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) |
+
+**What remains to solve.** Couple the imputer latent `z_i` to the particle prior or add an explicit conditional diversity / mutual-information pressure so `D_i` penalizes mode-averaging on single-sensor masks.
+
+Evidence: [Public-API readout](../toy_audit/api_contract/api-misgan-block-neural-imputer/readout.md) · [Task declaration](../../configs/forge/tasks/misgan_block_neural_imputer.json).
+
+
+<a name="ring16_bigan_continuous"></a>
+
+## Learn a continuous 16-mode ring joint Encoder-Generator-Critic BiGAN
+
+Test: `ring16_bigan_continuous` · Held for qualification; included in full-suite results.
+
+**What it tests.** Train a continuous 2D multimodal joint BiGAN `(G(z), E(x), D(x, z))` on the 16-Gaussian ring (`MoGParticlePrior(sigma=0.1)`), simultaneously satisfying forward 16-mode generation and paired round-trip reconstruction `x -> G(E(x))`.
+
+**The problem.** In the standalone seed-0 `bcap` public-API run, the joint game discovers all 16/16 modes (`modes = 16`) and achieves high round-trip mode consistency (`mode_consistency = 0.9951 >= 0.98`) and near-passing mass balance (`mass_tv = 0.1557` vs. `<= 0.15`), but within-mode variance remains too broad (`hq = 0.238` vs. `>= 0.85`, `recon_rmse = 0.220` vs. `<= 0.12`).
+
+**Has any configuration beaten it?** No full adversarial PASS yet (passes 2 of 5 gates out of the box under `bcap`); trained `(G, E)` witness in `tests/test_solvability_bigan.py` passes all gates.
+
+- Trained PyTorch `(G, E)` witness in `tests/test_solvability_bigan.py` passes all forward generation and round-trip reconstruction gates (`modes = 16`, `hq >= 0.85`, `mass_tv <= 0.15`, `recon_rmse <= 0.12`, `mode_consistency >= 0.98`).
+- Oracle joint sampler passes 200/200 draws with >= 2x noise headroom.
+
+**Selected recipes' recorded results:**
+
+| Selected recipe | Result |
+| --- | --- |
+| [BCAP](families/bcap-pure.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bcap-pure.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [BISPF](families/bispf.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [Atlas](families/atlas.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/atlas.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [E22](families/e22.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/e22.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/release07-gan-v3.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [K3P](families/k3p.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/k3p.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [KA2](families/ka2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/ka2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+| [R1/R2](families/r1r2.md#cohort-cuda-1bf9d7d34422) | [NOT MEASURED](families/r1r2.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) |
+
+**What remains to solve.** Tighten joint-critic `(x, z)` local curvature regularization (`k3p` or `bcap-dualnorm`) so `G(z)` and `E(x)` contract within-mode variance without losing 16-mode coverage.
+
+Evidence: [Public-API readout](../toy_audit/api_contract/api-ring16-bigan-continuous/readout.md) · [Task declaration](../../configs/forge/tasks/ring16_bigan_continuous.json).
