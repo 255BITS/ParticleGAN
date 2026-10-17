@@ -68,6 +68,21 @@ def optimizer_delta(before, after):
                                                    else f'per_offset_{rule}_hybrid_v1'))
 
 
+def cohort_bindings(bindings, commit, *, published):
+    """Validate reporter-added origins before comparing the scientific packet."""
+    require(isinstance(commit, str) and len(commit) == 40 and set(commit) <= set('0123456789abcdef'),
+            'invalid frozen source commit')
+    fields = {'source_origin_commit', 'recorded_source_origin_commits'}
+    origins = {key: bindings[key] for key in fields if key in bindings}
+    verified = {'source_origin_commit': commit, 'recorded_source_origin_commits': [commit]}
+    # The independently graded actual row precedes _publication_provenance:
+    # its source reader has no Git origin, so it records None (or no field).
+    # A nonempty origin claim must contain both exact publication annotations.
+    allowed = [verified] if published else [{}, {'source_origin_commit': None}, verified]
+    require(origins in allowed, 'source origin annotations differ from frozen commit or are partial')
+    return {key: value for key, value in bindings.items() if key not in fields}
+
+
 def quality_proof(root, source_report, candidate):
     report, pointers = _published_report(root, source_report)
     require(report.get('publication_scope') == 'frozen_source', 'quality must retain an independently frozen source')
@@ -81,8 +96,12 @@ def quality_proof(root, source_report, candidate):
     actual_rows = [item for item in actual.get('rows', []) if item['candidate_revision'] == row['candidate_revision']]
     require(len(actual_rows) == 1, 'missing unique actual executed-policy row')
     measured = actual_rows[0]
+    commit = report['frozen_source']['commit']
+    require(cohort_bindings(measured['bindings'], commit, published=False)
+            == cohort_bindings(row['bindings'], commit, published=True),
+            'actual executed-policy scientific bindings differ from projected row')
     require(all(measured.get(key) == row.get(key) for key in
-                ('candidate_id', 'candidate_revision', 'bindings', 'attempt_ids', 'runtime_cohort')),
+                ('candidate_id', 'candidate_revision', 'cohort', 'attempt_ids', 'runtime_cohort')),
             'actual executed-policy cohort differs from projected row')
     view = read_json(root / 'configs/forge/views/discriminator_stability.json')
     require(actual.get('policy_fingerprint') == stable_hash(view), 'actual qualification uses another declared policy')

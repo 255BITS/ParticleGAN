@@ -29,6 +29,8 @@ def quality(tmp_path, monkeypatch):
     after = {**before, 'optimizer_svd_backend': 'newton_schulz'}
     row['bindings']['recipe_sha256'] = stable_hash(after)
     row['bindings']['source_digest'] = 'new-source'
+    row['bindings']['source_origin_commit'] = 'a' * 40
+    row['bindings']['recorded_source_origin_commits'] = ['a' * 40]
     actual = deepcopy(row)
     actual.update(status='PASS', qualified_tier=3)
     qualification = {'view_revision': view['revision'], 'policy_fingerprint': stable_hash(view), 'rows': [actual]}
@@ -48,6 +50,63 @@ def test_quality_proposal_includes_every_incumbent_pass_including_clock(quality)
     assert len(expected) == 19
     assert set(proof['incumbent_passes']) == expected
     assert 'clockfree_audit_measurement_v1' in expected
+
+
+@pytest.mark.parametrize('origin_stage', ['absent', 'frozen_placeholder', 'published'])
+def test_quality_origin_annotations_are_validated_without_mutating_actual_proof(quality, origin_stage):
+    root, report, _ = quality
+    actual = report['comparison_policy_projection']['actual_qualification']
+    bindings = actual['rows'][0]['bindings']
+    if origin_stage != 'published':
+        bindings.pop('recorded_source_origin_commits')
+        bindings.pop('source_origin_commit')
+        if origin_stage == 'frozen_placeholder':
+            bindings['source_origin_commit'] = None
+    report['comparison_policy_projection']['actual_qualification_sha256'] = stable_hash(actual)
+    before = deepcopy(report)
+    row, proof = selection.quality_proof(root, Path('source.json'), 'optimized')
+    assert report == before
+    assert row['bindings']['source_origin_commit'] == proof['source_commit'] == 'a' * 40
+
+
+@pytest.mark.parametrize('location', ['actual', 'projected'])
+@pytest.mark.parametrize('change', ['wrong_origin', 'wrong_list', 'missing_origin', 'missing_list', 'multiple', 'empty_list'])
+def test_quality_rejects_forged_wrong_or_partial_origin_claims(quality, location, change):
+    root, report, _ = quality
+    actual = report['comparison_policy_projection']['actual_qualification']
+    row = actual['rows'][0] if location == 'actual' else report['rows'][0]
+    bindings = row['bindings']
+    if change == 'wrong_origin':
+        bindings['source_origin_commit'] = 'b' * 40
+    elif change == 'wrong_list':
+        bindings['recorded_source_origin_commits'] = ['b' * 40]
+    elif change == 'missing_origin':
+        bindings.pop('source_origin_commit')
+    elif change == 'missing_list':
+        bindings.pop('recorded_source_origin_commits')
+    elif change == 'multiple':
+        bindings['recorded_source_origin_commits'].append('a' * 40)
+    else:
+        bindings['recorded_source_origin_commits'] = []
+    report['comparison_policy_projection']['actual_qualification_sha256'] = stable_hash(actual)
+    with pytest.raises(ValueError, match='source origin annotations'):
+        selection.quality_proof(root, Path('source.json'), 'optimized')
+
+
+@pytest.mark.parametrize('change', ['source_digest', 'recipe_sha256', 'task_contracts', 'cohort'])
+def test_origin_compatibility_never_hides_other_scientific_binding_or_cohort_changes(quality, change):
+    root, report, _ = quality
+    actual = report['comparison_policy_projection']['actual_qualification']
+    row = actual['rows'][0]
+    row['bindings'].pop('recorded_source_origin_commits')
+    row['bindings']['source_origin_commit'] = None
+    if change == 'cohort':
+        row['cohort'] = 'foreign'
+    else:
+        row['bindings'][change] = {'foreign': 'contract'} if change == 'task_contracts' else 'foreign'
+    report['comparison_policy_projection']['actual_qualification_sha256'] = stable_hash(actual)
+    with pytest.raises(ValueError, match='actual executed-policy'):
+        selection.quality_proof(root, Path('source.json'), 'optimized')
 
 
 def replace_quality_recipe(report, recipe):
