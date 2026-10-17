@@ -221,3 +221,29 @@ existing overview's Performance block and display provenance, preserving scienti
 rows, gates, archived text and family pages. Ordinary publication regeneration
 also includes the section and adds filtered performance evidence to family pages.
 The old scientific qualification and default-selection files remain authoritative.
+
+## Component profiling
+
+`python -m experiments.forge.scaling_profile` provides a separate bounded
+diagnostic. First use `declare` with explicit candidate IDs, task IDs, source
+commit and total reservation, then use `run` once for each declared arm. Run it
+from a frozen source checkout or snapshot. The declaration records all relevant
+source hashes and refuses changed source before construction; each arm uses an
+exclusive output directory and permits no paid retries.
+
+Each arm executes the unchanged public benchmark twice. Its first replay has no
+component wrappers and supplies plain complete-update latency. Its second replay
+instruments the final three updates, synchronizing nested model, penalty,
+transport, prior, backward and optimizer spans. Only the first two instrumented
+updates enter component medians; the final update separately exports a Torch
+profiler trace. Inclusive spans overlap. Exclusive spans subtract nested spans;
+neither replaces the plain latency measurement because synchronization perturbs
+execution. Initial model/prior proofs, seen data and final learned parameter
+hashes must agree between replays.
+
+When the optional Newton–Schulz optimizer backend is present, the component replay
+counts processed matrices and exact-SVD fallbacks. Its final profiler update also
+saves representative actual gradient matrices for solver diagnosis. These tensor
+bundles, traces, logs, checkpoints and GIFs stay in local artifacts. A compact
+readout may reference their exact paths and hashes. All ordinary qualification,
+sampling and default-adoption rules remain unchanged.
