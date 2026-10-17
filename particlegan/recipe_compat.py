@@ -13,6 +13,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "kinetic_transport_projections": 32,
     "optimizer_smoothing": 0.0,
     "optimizer_convolution": "none",
+    "optimizer_convolution_rule": "polar",
     "optimizer_svd_backend": "native",
     "d_betas": None, "d_eps": None, "prior_eps": None,
     "loss_labels": (0.0, 1.0, 1.0), "adam_variant": "pytorch",

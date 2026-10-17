@@ -215,6 +215,8 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
+    # Hybrid nonpolar rules change only CUDA channel matrices larger than 32.
+    optimizer_convolution_rule: str = "polar"
     # Non-native backends are explicit numerical trainer changes. Newton-Schulz
     # accelerates annotated convolution kernels; dense matrices retain native SVD.
     # Native retains the original computation and archived checkpoint identity.
@@ -303,6 +305,12 @@ class Recipe:
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
+        if self.optimizer_convolution_rule not in ("polar", "frobenius", "quintic"):
+            raise ValueError("optimizer_convolution_rule must be polar, frobenius or quintic")
+        if self.optimizer_convolution_rule != "polar" and (
+                self.optimizer_family != "dualnorm" or self.optimizer_convolution != "per_offset"
+                or self.optimizer_svd_backend != "native"):
+            raise ValueError("nonpolar rules require full dualnorm, per_offset convolution and native SVD backend")
         if self.optimizer_svd_backend not in ("native", "cpu", "newton_schulz"):
             raise ValueError("optimizer_svd_backend must be native, cpu or newton_schulz")
         if self.optimizer_svd_backend != "native" and self.optimizer_family != "dualnorm":
@@ -771,7 +779,8 @@ class Recipe:
                 options["lr"] = self.optimizer_adam_lr * self.d_lr_mult
             params = [{"params": [p for p in critic.parameters() if p.requires_grad], "role": "critic"}]
             if self.optimizer_convolution == "per_offset":
-                params = convolution_parameter_groups(params, [critic], family=self.optimizer_family)
+                params = convolution_parameter_groups(params, [critic], family=self.optimizer_family,
+                                                      convolution_rule=self.optimizer_convolution_rule)
             return make_normalized_optimizer(self, params, critic=critic, **options)
         if self.effective_critic_formulation == "bispf":
             from .bispf import BISPFCriticAdam
@@ -867,7 +876,8 @@ class Recipe:
                     group["lr"] = self.optimizer_adam_lr * (self.prior_lr_mult if is_prior else 1.)
                 groups.append(group)
             if module is not None and self.optimizer_convolution == "per_offset":
-                groups = convolution_parameter_groups(groups, [module], family=self.optimizer_family)
+                groups = convolution_parameter_groups(groups, [module], family=self.optimizer_family,
+                                                      convolution_rule=self.optimizer_convolution_rule)
             return make_normalized_optimizer(self, groups, **options)
         from .k3p import K3PGeneratorAdam
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
@@ -1071,7 +1081,8 @@ class Recipe:
                 if self.optimizer_convolution == "per_offset":
                     from .optim.dualnorm import convolution_parameter_groups
                     role_groups = convolution_parameter_groups(role_groups, [generator, encoder],
-                                                               family=self.optimizer_family)
+                                                               family=self.optimizer_family,
+                                                               convolution_rule=self.optimizer_convolution_rule)
                 groups.extend(role_groups)
         if g_params and not normalized:
             groups.append({"params": g_params, "lr": self.lr})
