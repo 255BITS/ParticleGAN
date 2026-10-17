@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "adaptation",
-  "revision": 3,
+  "revision": 4,
   "goal": "adaptation",
   "assignments": [
     {
@@ -184,62 +184,26 @@
     {
       "task": "grid100",
       "qualification_tier": 2,
-      "importance": "held",
-      "order": 16,
-      "hold": {
-        "schema": "forge_hold_v1",
-        "previous_importance": "required",
-        "reason": "unsolved",
-        "blocked_by": [],
-        "summary": "100 tiny blobs on a grid: BCAP puts 24% and BISPF 37% of samples on target; 97% is required (a perfect sampler scores 98.9%). The best 7,000-update result under this clean-sampling declaration is 54%, and none passes.",
-        "explanation": "reports/forge/test-dispositions-20261015/README.md#grid100",
-        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review."
-      }
+      "importance": "required",
+      "order": 16
     },
     {
       "task": "rotated100",
       "qualification_tier": 2,
-      "importance": "held",
-      "order": 17,
-      "hold": {
-        "schema": "forge_hold_v1",
-        "previous_importance": "required",
-        "reason": "unsolved",
-        "blocked_by": [],
-        "summary": "The same 100-blob test rotated by 25 degrees: BCAP 26% and BISPF 27% of samples on target against 97%. The best 7,000-update result under this clean-sampling declaration is 51%, and none passes.",
-        "explanation": "reports/forge/test-dispositions-20261015/README.md#rotated100",
-        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review. In practice it returns with grid100."
-      }
+      "importance": "required",
+      "order": 17
     },
     {
       "task": "staggered100",
       "qualification_tier": 2,
-      "importance": "held",
-      "order": 18,
-      "hold": {
-        "schema": "forge_hold_v1",
-        "previous_importance": "required",
-        "reason": "unsolved",
-        "blocked_by": [],
-        "summary": "The same 100-blob test with alternate rows shifted: BCAP 30% and BISPF 34% of samples on target against 97%. The best 7,000-update result under this clean-sampling declaration is 56%, and none passes.",
-        "explanation": "reports/forge/test-dispositions-20261015/README.md#staggered100",
-        "reentry": "Count again when one global recipe has an ordinary PASS on this unchanged declaration (clean sampling, live weights, five final checks and the 100,000-sample holdout) and still passes every counted Tier 1 and Tier 2 test. A diagnostic PASS only triggers a review. In practice it returns with grid100."
-      }
+      "importance": "required",
+      "order": 18
     },
     {
       "task": "target_shift_recovery",
       "qualification_tier": 3,
-      "importance": "held",
-      "order": 0,
-      "hold": {
-        "schema": "forge_hold_v1",
-        "previous_importance": "required",
-        "reason": "unsolved",
-        "blocked_by": [],
-        "summary": "Learn an 8-blob ring, hold it, then recover within 400 updates after it shifts. BISPF recovers but 220 updates late; BCAP flickers before and after the shift. No recipe has passed its current declaration.",
-        "explanation": "reports/forge/test-dispositions-20261015/README.md#target_shift_recovery",
-        "reentry": "Count again in adaptation and clockfree_continuous when one global recipe passes all four parts in one cohort (5/5, 120/120, 81/81 after the deadline, frozen copy 0/81) and every counted Tier 1 and Tier 2 test plus the counted ring endurance test."
-      }
+      "importance": "required",
+      "order": 0
     }
   ],
   "eligibility": {},
@@ -252,10 +216,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Test dispositions 2026-10-15 (reports/forge/test-dispositions-20261015/README.md). The ten Tier 2 tests (four vector density, three image and three 100-blob tests) are held: still declared, run and shown, but not counted until one global recipe passes them together with every counted test. target_shift_recovery, the only Tier 3 test, is held because no recipe has passed it. While it is held this view counts the same tests as quality_coverage and reports HELD, never PASS. Task declarations, gates and earlier grades are unchanged; revision 2 is archived.",
+  "policy_change_reason": "0.10 convergence policy: accurate acquisition, Gaussian settling and post-acquisition endurance/recovery are required even when no current recipe passes. The owner explicitly restores these requirements; their previous holds are archived, not satisfied or regraded. Task protocols, numerical bounds, recipe/source selections and historical qualifications remain unchanged.",
   "previous_revision": {
-    "revision": 2,
-    "archive": "configs/forge/view-history/adaptation-v2.json",
-    "policy_fingerprint": "3154a08df89ffe889548faeff59023b55bb72040c30434bbac48fee43e61ce81"
+    "revision": 3,
+    "archive": "configs/forge/view-history/adaptation-v3.json",
+    "policy_fingerprint": "41cac2c9c5c17d5e0f73d709bf26b87cc935b782cd02ee2bef6be4cec4855843"
   }
 }

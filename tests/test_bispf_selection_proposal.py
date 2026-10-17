@@ -33,7 +33,8 @@ def quality(tmp_path, monkeypatch):
     assert before.get('optimizer_convolution_rule', 'polar') == 'polar'
     atomic_json(tmp_path / 'reports/forge/technique-inventory.json',
                 {'rows': [incumbent], 'recipe_contracts': {incumbent['bindings']['recipe_sha256']: before}})
-    view = read_json(ROOT / 'configs/forge/views/discriminator_stability.json')
+    # This replays the original optimization proposal under its executed policy.
+    view = read_json(ROOT / 'configs/forge/view-history/discriminator_stability-v11.json')
     atomic_json(tmp_path / 'configs/forge/views/discriminator_stability.json', view)
     row = deepcopy(incumbent)
     row.update(candidate_id='optimized', candidate_revision='new-revision', pending_readout=False)
@@ -52,6 +53,17 @@ def quality(tmp_path, monkeypatch):
     monkeypatch.setattr(selection, '_published_report', lambda *args: (report, {'json_sha256': 'proof'}))
     monkeypatch.setattr(selection, '_validate_published_row', lambda *args: None)
     return tmp_path, report, incumbent
+
+
+def test_historical_quality_does_not_pass_the_expanded_convergence_policy(quality):
+    root, report, _ = quality
+    view = read_json(ROOT / 'configs/forge/views/discriminator_stability.json')
+    atomic_json(root / 'configs/forge/views/discriminator_stability.json', view)
+    actual = report['comparison_policy_projection']['actual_qualification']
+    actual.update(view_revision=view['revision'], policy_fingerprint=stable_hash(view))
+    report['comparison_policy_projection']['actual_qualification_sha256'] = stable_hash(actual)
+    with pytest.raises(ValueError, match='a counted gate or incumbent pass regressed'):
+        selection.quality_proof(root, Path('source.json'), 'optimized')
 
 
 def test_quality_proposal_includes_every_incumbent_pass_including_clock(quality):

@@ -16,6 +16,11 @@ comparisons and recommendations behind the recorded results. These views are
 regenerated as experiments and candidate solutions change; release selection
 requires completed Forge qualification and review of the winner.
 
+The [0.10 Forge requirements](reports/forge/convergence-policy-010/README.md)
+make accurate acquisition, settling, endurance and recovery required again.
+The [generated technique inventory](reports/forge/technique-inventory.md) shows
+the expanded requirements alongside the original source-bound results.
+
 [![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
 
 A GAN usually draws its latent code from a fixed Gaussian and leaves all of
