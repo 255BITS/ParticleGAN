@@ -947,6 +947,15 @@ DualNorm recipe. `get_recipe()` and the model-family factories inherit this
 BCAP preset. Explicit trainer presets remain fixed. The dataclass `Recipe()`
 retains its KA2 field defaults for saved-configuration restoration.
 Each setting can be overridden explicitly.
+`optimizer_svd_backend="newton_schulz"` selects a separate numerical backend
+for annotated per-offset convolutions. It requires full DualNorm, positive
+`optimizer_smoothing`, and `optimizer_convolution="per_offset"`. It batches
+the smoothed polar computation with 24 regularized Newton-Schulz iterations
+and falls back to native SVD when the numerical convergence check fails.
+Dense weights retain native SVD; prior, bias, learning rates, and momentum laws
+are unchanged. Finite iterations and Gram-matrix rounding differ from native
+SVD, so this option is a declared trainer change requiring its own quality
+evidence. Native remains the default.
 When selecting another optimizer family, use `bcap_adam` as the base or also
 set `constraint_geometry_mode="none"`, `optimizer_smoothing=0.0`, and
 `optimizer_convolution="none"`. Direction blending requires zero-momentum full

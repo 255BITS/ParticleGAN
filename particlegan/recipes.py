@@ -215,7 +215,8 @@ class Recipe:
     optimizer_smoothing: float = 0.0
     # Explicit convolution adaptation; dense/default checkpoint packets stay unchanged.
     optimizer_convolution: str = "none"
-    # CPU full-SVD is an explicit numerical trainer change on accelerator inputs.
+    # Non-native backends are explicit numerical trainer changes. Newton-Schulz
+    # accelerates annotated convolution kernels; dense matrices retain native SVD.
     # Native retains the original computation and archived checkpoint identity.
     optimizer_svd_backend: str = "native"
     # Opt-in protection of existing G/encoder/prior objectives. Component
@@ -302,10 +303,13 @@ class Recipe:
             raise ValueError("optimizer_convolution must be none or per_offset")
         if self.optimizer_convolution != "none" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_convolution requires optimizer_family='dualnorm'")
-        if self.optimizer_svd_backend not in ("native", "cpu"):
-            raise ValueError("optimizer_svd_backend must be native or cpu")
+        if self.optimizer_svd_backend not in ("native", "cpu", "newton_schulz"):
+            raise ValueError("optimizer_svd_backend must be native, cpu or newton_schulz")
         if self.optimizer_svd_backend != "native" and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_svd_backend requires optimizer_family='dualnorm'")
+        if self.optimizer_svd_backend == "newton_schulz" and (
+                self.optimizer_convolution != "per_offset" or self.optimizer_smoothing <= 0):
+            raise ValueError("newton_schulz requires per_offset convolution and positive optimizer_smoothing")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):
