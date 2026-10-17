@@ -2,6 +2,7 @@
 import json
 
 import pytest
+import torch
 
 from particlegan import get_recipe
 from experiments.forge import scaling_profile
@@ -52,3 +53,24 @@ def test_immutable_source_declaration_blocks_mutation_before_execution(tmp_path)
         scaling_profile.declare(root, output, candidates=["candidate"], tasks=["task"], source_commit="frozen")
     with pytest.raises(ValueError, match="frozen profiling source changed"):
         scaling_profile.run(root, output, candidate_id="candidate", task_id="task", device="cpu")
+
+
+def test_hybrid_lookup_wrappers_count_batched_matrices_and_restore_aliases(tmp_path):
+    import particlegan.optim.dualnorm as dualnorm
+    import particlegan.optim.convolution_quintic as quintic
+    original_frobenius, original_quintic = dualnorm.frobenius_direction, quintic.quintic_direction
+    spans = scaling_profile.ComponentSpans("cpu", tmp_path)
+    spans.active = True
+    matrices = torch.ones(2, 3, 4, 4, 2)
+    with spans.attach():
+        dualnorm.frobenius_direction(matrices, smoothing=.001)
+        # Match optimizer.step's actual lazy-import lookup.
+        from particlegan.optim.convolution_quintic import quintic_direction
+        quintic_direction(matrices, smoothing=.001)
+    assert dualnorm.frobenius_direction is original_frobenius
+    assert quintic.quintic_direction is original_quintic
+    rows = {row["name"]: row for row in spans.rows}
+    for name in ("critic.optimizer.frobenius", "critic.optimizer.quintic"):
+        assert rows[name]["matrix_count"] == 24
+        assert rows[name]["shape"] == list(matrices.shape)
+        assert rows[name]["inclusive_ms"] > 0

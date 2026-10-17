@@ -8,6 +8,7 @@ checkpoints remain local. The immutable declaration must exist before execution.
 from __future__ import annotations
 
 import argparse
+import importlib
 from contextlib import ExitStack, contextmanager
 from copy import deepcopy
 import json
@@ -91,7 +92,8 @@ class ComponentSpans:
 
     def wrap(self, function, name, *, matrix=False):
         def measured(*args, **kwargs):
-            metadata = {"shape": list(args[0].shape)} if matrix and args else {}
+            metadata = ({"shape": list(args[0].shape), "matrix_count": math.prod(args[0].shape[:-2])}
+                        if matrix and args else {})
             label = name() if callable(name) else name
             with self.span(label, **metadata):
                 return function(*args, **kwargs)
@@ -119,6 +121,19 @@ class ComponentSpans:
                     (torch.autograd, "backward", lambda: self.stage + ".backward", False),
                     (training, "constraint_geometry_backward", "generator.constraint_backward", False)):
                 stack.enter_context(patch.object(owner, attr, self.wrap(getattr(owner, attr), label, matrix=matrix)))
+            # Frobenius is imported into dualnorm at module load; quintic is
+            # imported inside step(). Patch their actual lookup locations so
+            # the first lazy import and already-loaded modules both work.
+            if hasattr(dualnorm, "frobenius_direction"):
+                stack.enter_context(patch.object(dualnorm, "frobenius_direction",
+                    self.wrap(dualnorm.frobenius_direction,
+                              lambda: self.stage + ".optimizer.frobenius", matrix=True)))
+            quintic_path = Path(dualnorm.__file__).with_name("convolution_quintic.py")
+            if quintic_path.is_file():
+                quintic = importlib.import_module("particlegan.optim.convolution_quintic")
+                stack.enter_context(patch.object(quintic, "quintic_direction",
+                    self.wrap(quintic.quintic_direction,
+                              lambda: self.stage + ".optimizer.quintic", matrix=True)))
             if hasattr(dualnorm, "_newton_schulz_polar"):
                 original_newton = dualnorm._newton_schulz_polar
                 def newton(matrices, **kwargs):
@@ -251,6 +266,11 @@ def run(root, output, *, candidate_id, task_id, device="cuda:0"):
         observation_scope="final three instrumented updates; diagnostic counters; representative gradients saved only in final torch-profile update",
         matrix_samples_sha256=(file_hash(component_dir / "actual-gradient-matrices.pt")
                                if (component_dir / "actual-gradient-matrices.pt").exists() else None))
+    summary["convolution_helpers"] = {
+        name: dict(calls=sum(row["name"].endswith("." + name) for row in rows),
+                   matrix_count=sum(row.get("matrix_count", 1) for row in rows
+                                    if row["name"].endswith("." + name)))
+        for name in ("frobenius", "quintic")}
     atomic_json(arm / "summary.json", summary)
     print(canonical(dict(event="profile_complete", candidate=candidate_id, task=task_id,
                          passed=summary["passed"], plain_ms=plain["metrics"]["update_ms_median"],
