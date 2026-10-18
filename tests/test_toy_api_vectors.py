@@ -92,11 +92,14 @@ def test_checkpoint_cannot_transfer_to_a_different_comparison_condition(changed_
 
 def test_every_owned_historical_question_and_all_proposal_arms_are_mapped():
     cases = api.list_cases()
-    assert len(cases) == len({case["id"] for case in cases}) == 54
+    # 54 plus api-zero-tanh-smoke, api-zero-tanh-rail-escape, api-grid100-mlp16
+    # and api-grid100-res16-tanh.
+    assert len(cases) == len({case["id"] for case in cases}) == 58
     catalog = json.loads((Path(__file__).parents[1] / "reports/toy_audit/catalog.json").read_text())["cases"]
     expected = {case["id"] for case in catalog if case["id"].startswith("atlas-")
                 or case.get("spec", {}).get("kind") in {"gaussian_mixture", "spiral", "annulus"}}
-    expected |= {"develop-two_pole", "develop-mode_hold", "source-family-10", "source-family-16"}
+    expected |= {"develop-two_pole", "develop-mode_hold", "source-family-10", "source-family-16",
+                 "zero-tanh-smoke", "zero-tanh-rail-escape", "deep100g-mlp16", "deep100g-res16-tanh"}
     assert {old for case in cases for old in case["legacy_ids"]} == expected
     for case in cases:
         assert case["goal"] and case["thresholds"] and case["sampling"] and case["scope"]
