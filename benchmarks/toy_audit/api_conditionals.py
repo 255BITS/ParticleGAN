@@ -523,6 +523,8 @@ def _task(name):
     if name.startswith("routes"): return RouteTask(name.split("-")[1])
     if name.startswith("transitions"): return RouteTask(name.split("-")[1],True)
     if name.startswith("mask"): return MaskTask(name.removeprefix("mask-").replace("-","_"))
+    if name == "misgan-block-recovery": return MisGANBlockRecoveryTask()
+    if name == "misgan-block-neural-imputer": return MisGANBlockNeuralImputerTask()
     return PairedTask(name)
 
 
@@ -826,6 +828,61 @@ def score_misgan_neural_imputer(predict_fn, problem=None, eval_seed=99123):
     return observation(metrics, failures, views)
 
 
+class MisGANBlockRecoveryTask:
+    """Exact incomplete-data law for the 2-pair block recovery gate."""
+    name = "misgan-block-recovery"
+    paired = False
+
+    def __init__(self):
+        self.problem = misgan.Problem("block", 20000, 10000, 0, "cpu")
+
+    def exact_law(self, n, rng):
+        idx = torch.randint(len(self.problem.m_train), (n,), generator=rng)
+        return self.problem.x_train_full[idx], self.problem.m_train[idx]
+
+    def evaluate(self, predict, n, seed):
+        x, m = predict(n, _rng(seed))
+        return score_misgan_recovery(x, m, self.problem, eval_seed=seed, use_ppost=True)
+
+
+class MisGANBlockNeuralImputerTask:
+    """Bayes imputation witness for the 3-pair neural-imputer gate."""
+    name = "misgan-block-neural-imputer"
+    paired = False
+
+    def __init__(self):
+        self.problem = misgan.Problem("block", 20000, 10000, 0, "cpu")
+
+    def exact_law(self, x, m, rng):
+        _, samples = misgan.bayes_posterior(self.problem, x, m, draws=16, generator=rng)
+        return samples
+
+    def evaluate(self, predict, n, seed):
+        # The declared scorer uses the fixed held-out test panel, same as the fixture.
+        return score_misgan_neural_imputer(predict, self.problem, eval_seed=seed)
+
+
+class _ModuleBundle(nn.Module):
+    """One public module over the pair networks. Parameters stay the originals."""
+
+    def __init__(self, **modules):
+        super().__init__()
+        for name, module in modules.items():
+            self.add_module(name, module)
+
+
+def _count_critic_steps(optimizer):
+    """Record each real critic Adam step. These hosts keep that Adam update."""
+    from particlegan.grad_regularizers import CriticStepRecord
+    optimizer.record = CriticStepRecord()
+
+    def _after(opt, args, kwargs):
+        opt.record.calls += 1
+        opt.record.record_step(opt)
+
+    optimizer.register_step_post_hook(_after)
+
+
 class MisGANRecoveryFixture:
     api_components = (
         "Recipe.make_prior",
@@ -891,6 +948,8 @@ class MisGANRecoveryFixture:
         if self.prior is not None:
             init.deterministic_orthogonal_(self.prior, seed=self.seed + 5)
 
+        self.G = _ModuleBundle(G_x=self.G_x, G_m=self.G_m)
+        self.D = _ModuleBundle(D_x=self.D_x, D_m=self.D_m)
         self.opt_g = torch.optim.Adam(
             list(self.G_x.parameters()) + list(self.G_m.parameters()),
             lr=self.recipe.lr,
@@ -899,6 +958,7 @@ class MisGANRecoveryFixture:
             list(self.D_x.parameters()) + list(self.D_m.parameters()),
             lr=self.recipe.lr,
         )
+        _count_critic_steps(self.opt_d)
         self.loss = self.recipe.make_loss()
         self.last_losses = {}
 
@@ -1067,6 +1127,8 @@ class MisGANNeuralImputerFixture:
         if self.prior is not None:
             init.deterministic_orthogonal_(self.prior, seed=self.seed + 7)
 
+        self.G = _ModuleBundle(G_x=self.G_x, G_m=self.G_m, G_i=self.G_i)
+        self.D = _ModuleBundle(D_x=self.D_x, D_m=self.D_m, D_i=self.D_i)
         self.opt_g = torch.optim.Adam(
             list(self.G_x.parameters()) + list(self.G_m.parameters()) + list(self.G_i.parameters()),
             lr=self.recipe.lr,
@@ -1075,6 +1137,7 @@ class MisGANNeuralImputerFixture:
             list(self.D_x.parameters()) + list(self.D_m.parameters()) + list(self.D_i.parameters()),
             lr=self.recipe.lr,
         )
+        _count_critic_steps(self.opt_d)
         self.loss = self.recipe.make_loss()
         self.last_losses = {}
 
