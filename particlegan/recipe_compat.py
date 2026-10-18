@@ -24,9 +24,16 @@ SEARCH_RECIPE_DEFAULTS = {
 }
 
 
-def without_default_additions(values):
+def without_default_additions(values, *, fields=None):
+    """Omit registered defaults, optionally limited to a serializer's additions.
+
+    Older full-recipe receipts retain their existing fields; they can project
+    only fields added after that receipt contract instead of changing its shape.
+    """
     result = dict(values)
-    for name, default in SEARCH_RECIPE_DEFAULTS.items():
+    defaults = (SEARCH_RECIPE_DEFAULTS if fields is None else
+                {name: SEARCH_RECIPE_DEFAULTS[name] for name in fields})
+    for name, default in defaults.items():
         value = result.get(name, default)
         if name == "loss_labels" and isinstance(value, (list, tuple)):
             value = tuple(value)
