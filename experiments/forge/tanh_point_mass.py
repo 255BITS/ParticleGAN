@@ -50,6 +50,26 @@ def accepts_origin_smoke(task: dict, spec: dict) -> bool:
             and is_tanh_point_mass_host(spec))
 
 
+def refuse_unsupported_tanh(task: dict, spec: dict) -> None:
+    """Refuse every tanh host except the published origin smoke card.
+
+    ``zero_tanh_rail_escape`` shares the host field set and is included.
+    Its shifting target is a different law and is not implemented here.
+    Gaussian and spiral hosts do not carry this activation and pass through.
+    """
+    if not is_tanh_point_mass_host(spec) or accepts_origin_smoke(task, spec):
+        return
+    from .api import CapabilityError
+    evaluation = task.get("evaluation") if isinstance(task, dict) else None
+    kind = evaluation.get("kind") if isinstance(evaluation, dict) else None
+    name = task.get("id") if isinstance(task, dict) and isinstance(task.get("id"), str) else "tanh host"
+    detail = f"{name}: unsupported tanh host"
+    if isinstance(kind, str):
+        detail += f" {kind}"
+    raise CapabilityError([
+        detail + "; only zero_tanh_smoke is routed"])
+
+
 def sample_target(spec, count, rng, completed_steps):
     """Origin Dirac. The draw does not consume ``rng`` or any training stream."""
     del rng, completed_steps

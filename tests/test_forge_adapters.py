@@ -459,3 +459,23 @@ def test_zero_tanh_smoke_card_runs_through_transfer_vector_and_sample_target(tmp
     archived = torch.load(tmp_path / "observed-samples.pt", weights_only=False)
     samples = archived[0]["samples"]
     assert samples.shape == (4096, 2) and torch.isfinite(samples).all() and torch.all(samples.abs() < 1)
+
+
+def test_zero_tanh_rail_escape_is_refused_at_validation_and_routing(tmp_path):
+    """The Tier-3 rail-escape card is a tanh host with no routed law.
+
+    Validation and transfer_vector routing each raise CapabilityError.
+    The frozen vector law is left unchanged, so this card is not sampled.
+    """
+    from experiments.forge.vectorprofiles import resolve_vector_spec
+
+    card = json.loads((ROOT / "configs/forge/tasks/zero_tanh_rail_escape.json").read_text())
+    assert card["adapter"] == "transfer_vector"
+    assert card["id"] == "zero_tanh_rail_escape"
+    assert card["evaluation"]["kind"] == "zero_tanh_rail_escape"
+    host = card["execution"]["host_definition"]
+    assert host["output_activation"] == "tanh" and "kind" not in host
+    with pytest.raises(CapabilityError, match="unsupported tanh host zero_tanh_rail_escape"):
+        resolve_vector_spec(card)
+    with pytest.raises(CapabilityError, match="unsupported tanh host zero_tanh_rail_escape"):
+        adapters.run_task(request(card), {"task_id": card["id"]}, tmp_path, "cpu")

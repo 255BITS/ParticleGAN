@@ -35,9 +35,10 @@ TARGET_FIELDS = {
     "spiral": frozenset({"turns", "radius_min", "radius_max", "noise"}),
 }
 OPTIONAL_FIELDS = frozenset({"d_hidden", "d_layers", "research_discriminator"})
-# Declared point-mass tanh hosts (zero_tanh_smoke and zero_tanh_rail_escape).
-# output_activation is part of that card; it is not a gaussian_mixture or spiral
-# profile and must not be rewritten into one.
+# Point-mass tanh host field set. zero_tanh_smoke is the only routed card.
+# zero_tanh_rail_escape uses the same fields and is refused at card validation.
+# output_activation is part of that declaration; it is not a gaussian_mixture
+# or spiral profile and must not be rewritten into one.
 TANH_HOST_FIELDS = frozenset({"hidden", "layers", "fourier", "z_dim", "particles", "batch", "steps", "output_activation"})
 # The adapter attaches gate thresholds after the card is validated. They are not
 # part of the host declaration and must not be required to recognize the card.
@@ -160,6 +161,8 @@ def resolve_vector_spec(task: dict, *, root: Path | str | None = None) -> dict:
         raise ValueError("vector profiles apply only to transfer_vector tasks")
     spec = deepcopy(task["execution"]["host_definition"])
     _validate_spec(spec)
+    from .tanh_point_mass import refuse_unsupported_tanh
+    refuse_unsupported_tanh(task, spec)
     if "vector_profile" not in task["execution"]:
         if "research_discriminator" in spec:
             raise ValueError("research_discriminator requires an explicit supported vector profile")
