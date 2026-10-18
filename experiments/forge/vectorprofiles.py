@@ -35,6 +35,10 @@ TARGET_FIELDS = {
     "spiral": frozenset({"turns", "radius_min", "radius_max", "noise"}),
 }
 OPTIONAL_FIELDS = frozenset({"d_hidden", "d_layers", "research_discriminator"})
+# Declared point-mass tanh hosts (zero_tanh_smoke and zero_tanh_rail_escape).
+# output_activation is part of that card; it is not a gaussian_mixture or spiral
+# profile and must not be rewritten into one.
+TANH_HOST_FIELDS = frozenset({"hidden", "layers", "fourier", "z_dim", "particles", "batch", "steps", "output_activation"})
 CRITIC_FIELDS = {
     "shared_batch_feature_v1": frozenset({"name", "implementation", "width", "layers", "fourier",
         "trunk_normalization", "softplus_beta", "feature", "placement", "kernel_scales", "eps",
@@ -95,7 +99,16 @@ def _published_architecture(task, root):
     return _architecture(spec)
 
 
+def _declared_tanh_host(spec):
+    return isinstance(spec, dict) and spec.get("output_activation") == "tanh" and set(spec) == TANH_HOST_FIELDS
+
+
 def _validate_spec(spec):
+    if _declared_tanh_host(spec):
+        for key in ("hidden", "layers", "z_dim", "particles", "batch", "steps", "fourier"):
+            if type(spec[key]) is not int or spec[key] < (0 if key == "fourier" else 1):
+                raise ValueError(f"invalid vector dimension: {key}")
+        return
     if not isinstance(spec, dict) or not isinstance(spec.get("kind"), str) or spec["kind"] not in TARGET_FIELDS:
         raise ValueError("unsupported vector target declaration")
     required = COMMON_FIELDS | TARGET_FIELDS[spec["kind"]]
