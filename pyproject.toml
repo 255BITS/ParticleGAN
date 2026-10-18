@@ -41,3 +41,4 @@ namespaces = false
 testpaths = ["tests"]
 pythonpath = ["."]
 addopts = "-ra"
+markers = ["cuda: requires an explicitly admitted CUDA device"]

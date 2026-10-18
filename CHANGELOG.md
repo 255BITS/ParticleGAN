@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Add opt-in `optimizer_dense_profile="gram_fp64_guarded_v1"` for FP32 dense
+  DualNorm matrices: FP64 Gram/eigh with the original FP32 cutoff, absolute
+  `.001` smoothing and a guard on the factors actually used. Default, convolution,
+  vector and prior laws are unchanged. Selected checkpoints require the same
+  profile. Guard failures require full-state restoration, with no solver
+  fallback or rollback. See the [contract and evidence](reports/gram-profile/README.md).
+
 ## 0.9.1 — 2026-10-17
 
 - **Faster BISPF execution is the public default.** `bispf_optimized`,
