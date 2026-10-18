@@ -67,3 +67,57 @@ JSON/JUnit evidence. Raw stdout, telemetry and tensor-free benchmark detail stay
 outside Git. Independent core/math/serialization, integration, benchmark/docs
 and supervisor source reviews closed with no remaining material findings.
 Repository CI is tracked on the draft PR separately.
+
+## Actual Sana benchmark on the PR branch
+
+Tested code head `90ae663551dd0fa35749d56e1859f276a4d09587` through the imported
+public PG API, with an isolated source-bound Sana host profile. The original
+installed host and old training cohorts were unchanged. Both disposable arms
+restored the same CP500 numerical state; only source/profile identity changed.
+The selected profile covers ordinary dense G and D parameters. Model, rows,
+conditions, FP32 arithmetic, batch2, rates and hardware were matched.
+
+| Measurement | Default | Guarded Gram | Speedup |
+| --- | ---: | ---: | ---: |
+| Frozen real all224-gradient public DirectionBlend step | 17.1004 s | 8.48881 s | 2.01447x |
+| Native full training update | 19.2530 s | 10.0377 s | 1.91806x |
+| Native G optimizer step | 17.7800 s | 8.54653 s | 2.08037x |
+| Native D optimizer step | 0.0055134 s | 0.0127239 s | slower |
+
+One warmup was excluded per arm; each median has two measured samples. Frozen
+replay restores CP500 afresh each time. Native arms each perform three ordinary
+updates: warmup501 and measured502/503. Timers synchronize at optimizer boundaries,
+so these are instrumented full-update measurements. Both include the selected
+same-factor guard. Warmup-only cProfile recorded112 guard calls and2.03475 s
+cumulative Python time including GPU waits; it is not an exclusive CUDA cost or
+an additive production overhead estimate.
+
+Both arms started with training-row q `[0.31516149, 0.74955386]`. After three
+updates, default reached `[0.31401577, 0.74785414]` and Gram
+`[0.31401590, 0.74785539]`; losses stayed finite and penalties positive. This is
+short learning sanity, not convergence, heldout transfer or image quality.
+The old-default numerical fidelity holds remain; no trajectory parity claim.
+
+Supervisor completed/exit0 in268.267 s under the300 s cap, with8.976 GiB sampled
+RSS,15.166 GiB peak Torch-reserved GPU memory, maximum70 C and226.89 W.
+Original checkpoint/source/base checks passed. Owned group was absent, CUDA
+released and both leases available at postflight. No checkpoint or weights
+were published and the old long training runs were not restarted.
+
+The real Sana result is consistent with the earlier research2x measurement.
+The1.15x synthetic result above uses a different, repeated full-rank gradient
+bank and a plain NormalizedOptimizer; it does not predict Sana throughput.
+[Compact measured results and artifact hashes](sana-speed.json).
+
+## Repository compatibility follow-up
+
+The24 new applied-recipe compatibility failures found by the first CI run were
+fixed at90ae663 by omitting the unselected default field from historical receipts
+after validating the full Recipe/ownership registry. The unchanged24 historical
+comparisons and3 added receipt cases passed locally. CI then passed those cases
+and exposed4 stale Forge scorer/source bindings. Current task cards append an
+explicit source-only revision, retaining the complete previous card/revision,
+thresholds, laws, budgets and archived variants. Historical fixtures are tested
+with their exact archived Git objects; missing objects were hydrated rather than
+removing checks. Seven failures reproduced on unchanged develop remain separately
+tracked on the PR and are outside this numerical-profile change.
