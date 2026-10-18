@@ -266,9 +266,18 @@ def test_repaired_hosts_and_replay_declarations_pin_current_sources():
     for path in cards:
         task = json.loads(path.read_text())
         revision = task["evaluation"].get("evaluator_revision") or {}
+        refreshed = set()
+        if revision.get("id") == "guarded-gram-default-receipt-source-binding-v1":
+            # One exact source-only layer retains the original PR399 question;
+            # include its rebound source in the same strict live-byte check.
+            assert revision["previous_task_commit"] == "90ae663551dd0fa35749d56e1859f276a4d09587"
+            assert revision["previous_task_path"] == str(path.relative_to(root))
+            assert set(revision["previous_source_sha256"]) == {"experiments/forge/behavior_adapters.py"}
+            refreshed = set(revision["previous_source_sha256"])
+            revision = revision["previous_revision"]
         if revision.get("id") != "pr399-host-device-replay-source-only-v1":
             continue
-        changed = set(revision["previous_source_sha256"]) | set(revision["added_source_members"])
+        changed = set(revision["previous_source_sha256"]) | set(revision["added_source_members"]) | refreshed
         for name in changed:
             digest = task["evaluation"]["sources"][name]
             assert hashlib.sha256((root / name).read_bytes()).hexdigest() == digest, (path, name)
