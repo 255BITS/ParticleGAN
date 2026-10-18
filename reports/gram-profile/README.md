@@ -37,9 +37,33 @@ errors and preserve HOLDs.
 
 ## Package qualification
 
-The expanded CPU optimizer/recipe suites passed 437 tests with 244 CUDA skips.
-One additional archived-history migration regression passed after fetching its
-exact historical commits. The standalone benchmark contracts passed 19 tests;
-independent core and integration reviews found no remaining material issue.
-Bounded final GPU qualification is pending. Raw stdout and JUnit files remain
-outside Git; compact final measurements will be added here.
+Implementation commit `ba725989f279121be55a8bd2f083bd957a93d32d`, based on
+`develop` at `7b8908c0a55ad58250626c44b3b4324a66debbc9`:
+
+- Expanded CPU optimizer/recipe suites: **437 passed, 244 CUDA skips**. One
+  history-dependent regression initially lacked its archived Git commits and
+  passed separately after fetching those exact commits. Standalone benchmark
+  contracts: **19 passed**. Initial fixture failures are preserved locally.
+- Bounded CUDA suite: **158 passed**, including 15 new selected-profile tests
+  for CPU64 agreement, active/inactive protection, pending restore, fixed next
+  updates and terminal cutoff holds.
+- Public `NormalizedOptimizer.step` benchmark: 112 FP32 1152x1152 matrices plus
+  112 biases, repeated identical synthetic full-rank inputs, seed0 initializer,
+  one warmup and two measured fresh-state repeats. Default median **11.1761252 s**;
+  guarded median **9.68237786 s**, **1.15427x**. Both include their complete update;
+  the guarded number includes same-factor guard work. This measures neither
+  DirectionBlend nor model forward/backward and is not whole-training throughput.
+- Guarded rounded-update relative error against the independent CPU64 SVD map:
+  **1.63098e-9** maximum across measured repeats, max absolute **4.54747e-13**.
+  Default relative error on this fixture was **3.74374e-4**. A completed benchmark
+  does not mean equality with the default or a waiver of historical holds.
+- Supervisor: **completed / exit0**, 142.626 s (300 s worker cap), 3.701 GiB
+  sampled aggregate RSS, maximum 63 C and 224.52 W; owned group absent and CUDA
+  released at completion. Resident process identity and both device leases were
+  preserved. No training or pretrained model was loaded.
+
+[Compact results, hashes and source pins](qualification.json) bind the local raw
+JSON/JUnit evidence. Raw stdout, telemetry and tensor-free benchmark detail stay
+outside Git. Independent core/math/serialization, integration, benchmark/docs
+and supervisor source reviews closed with no remaining material findings.
+Repository CI is tracked on the draft PR separately.
