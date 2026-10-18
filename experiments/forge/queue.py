@@ -250,7 +250,8 @@ class Queue:
             if stable_hash(campaign) != stable_hash(expected):
                 raise ValueError("promotion campaign differs from frozen budgets/policy")
         else:
-            validate_screening_submission(request)
+            validate_screening_submission(request,
+                root=self.report_root.parent.parent if self.report_root else None, campaign=campaign)
         from .sampling import validate_request_sampling
         validate_request_sampling(request, task_ids=task_ids)
         from .hostprofiles import validate_request_host_profiles
@@ -258,8 +259,8 @@ class Queue:
         identifier(campaign["id"], "campaign")
         positive_number(campaign["budget_seconds"], "campaign budget_seconds")
         positive_number(campaign["candidate_budget_seconds"], "candidate_budget_seconds")
-        if request["through_tier"] not in (1, 2, 3):
-            raise ValueError("through_tier must be 1, 2 or 3")
+        if not isinstance(request["through_tier"], int) or isinstance(request["through_tier"], bool) or request["through_tier"] < 1:
+            raise ValueError("through_tier must be an integer >= 1")
         # Campaign is part of request identity, but not scientific compatibility.
         request = {**request, "campaign_id": campaign["id"], "queue_root": str(self.root)}
         request_id = stable_hash(request)[:24]

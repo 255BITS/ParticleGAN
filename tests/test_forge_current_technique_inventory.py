@@ -1837,7 +1837,7 @@ def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_sepa
     assert {row["trainer_family"] for row in result["rows"]} == families
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert text.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
-                      " | Tier 3 requirements | Total view requirements |") == 1
+                      " | Tier 3 requirements | Tier 4 requirements | Total view requirements |") == 1
     selected, details = text.split("## Full-suite results — failures included", 1)
     assert "<details>" not in selected
     table = [line for line in selected.splitlines() if line.startswith("|")][2:]

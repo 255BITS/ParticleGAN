@@ -1,0 +1,158 @@
+{
+  "attempt_id": "2ebe573901d14e569bdc394fd90c0a3b",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-quality-v1",
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-quality-v1",
+    "request": "8a415d710a71e5715c2296fb",
+    "revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "40b55b11e7651b767bfe09bd894670f29ac37f4605a9e984b9ea3516fcfc0c07",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/2ebe573901d14e569bdc394fd90c0a3b/evidence.json",
+        "sha256": "ffc712640b512458fa0e5bd7af019e36a629f7aac4a53bc2268402df7eb30e5f"
+      },
+      "request": {
+        "path": "reports/forge/attempts/2ebe573901d14e569bdc394fd90c0a3b/request.json",
+        "sha256": "765231eabf416504f5a2329f90a063352058cbe6ca219d3958a335e857f1f578"
+      },
+      "result": {
+        "path": "reports/forge/attempts/2ebe573901d14e569bdc394fd90c0a3b/result.json",
+        "sha256": "8ed1c2235e4e761c47140fbde216b8833bf0dab27cea8853096f4110e39768ba"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "8a415d710a71e5715c2296fb",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "6f93a00c03c14bc2b5d2a489e922202f2e8d4ec1fea1933bcadfa8722e53d632",
+      "cost": {
+        "adapter_loop_seconds": 10.144891644013114,
+        "adapter_seconds": 10.633296469924971,
+        "charged_task": "img_intensity2",
+        "completed_steps": 600,
+        "device": "1",
+        "execution_seconds": 16.23357036395464,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 9.85093579790555,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.01931943220552057
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.009322311729192734
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 9.822294053970836
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 11.71060357207898,
+        "wall_seconds": 16.23357036395464
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.55625,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.34375
+          },
+          "modes": {
+            "margin": -2,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 2,
+            "value": 0
+          }
+        },
+        "passed": false,
+        "shortfall": 0.8090277777777778,
+        "status": "FAIL"
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.03125,
+        "hq": 0.34375,
+        "mean_rmse": 0.07303109765052795,
+        "modes": 0,
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "enumerated_prior_without_output_noise"
+      },
+      "status": "FAIL",
+      "task_id": "img_intensity2"
+    }
+  ]
+}

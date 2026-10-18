@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 5400,
+    "candidate_budget_seconds": 5400,
+    "id": "bispf-throughput-endurance-v1"
+  },
+  "candidate": "bispf-throughput-v1",
+  "competing_explanation": "These dense hosts intentionally retain native arithmetic, so passing them establishes implementation/source regression coverage only and grants no wide-network quality or current-policy qualification. Ordinary revision12 failures remain unchanged; passing own mode_hold dependency and all original endurance observations remain mandatory.",
+  "control": {
+    "candidate_id": "bispf-optimized-quintic-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "ring_extension",
+    "threshold": 0.9
+  },
+  "hypothesis": "Preserve the two archived incumbent endurance PASS verdicts under their original task protocols, with a separately scoped nonqualifying diagnostic after current revision12 restores four previously held Tier2 failures.",
+  "id": "bispf-throughput-endurance-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "ring_extension",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bispf-v2",
+        "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+      },
+      "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bispf_throughput_endurance"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -218,7 +218,7 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
     text = renderer._current_markdown(report, tmp_path, tmp_path / "reports/forge/technique-inventory.md")
     table = [line for line in text.splitlines() if line.startswith("|")]
     assert text.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
-                      " | Tier 3 requirements | Total view requirements |") == 1
+                      " | Tier 3 requirements | Tier 4 requirements | Total view requirements |") == 1
     pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
     families = {pin["trainer_family"] for pin in pins}
     assert len(pins) == len(families)

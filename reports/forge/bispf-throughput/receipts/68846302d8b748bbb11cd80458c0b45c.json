@@ -1,0 +1,121 @@
+{
+  "attempt_id": "68846302d8b748bbb11cd80458c0b45c",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-quality-v1",
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-quality-v1",
+    "request": "8a415d710a71e5715c2296fb",
+    "revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "6366b2e430f76542b8cbf6fe970be582c4d0c5cdc6fafbc3df3353b2b757e987",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/68846302d8b748bbb11cd80458c0b45c/evidence.json",
+        "sha256": "aa96dacf0a1a7b97b8626a8979b8084eb9a4c60ea093bedf26ba285e28681c47"
+      },
+      "request": {
+        "path": "reports/forge/attempts/68846302d8b748bbb11cd80458c0b45c/request.json",
+        "sha256": "b9db90b3d293dde1639892cbbd7236193f9e6f1fc38b542f6eafa0247fc900c5"
+      },
+      "result": {
+        "path": "reports/forge/attempts/68846302d8b748bbb11cd80458c0b45c/result.json",
+        "sha256": "3af68e2978b7bdd2c149031785ed63fae5845db184cf45751cfbefb85dd5ea6d"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "8a415d710a71e5715c2296fb",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "9ad76aaa41d259466b62d611584a442db47b0a04a8d84263351ebf652d00548a",
+      "cost": {
+        "adapter_seconds": 8.944293599925004,
+        "charged_task": "trajectory",
+        "device": "0",
+        "execution_seconds": 14.542050855932757,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 10.070004657958634,
+        "wall_seconds": 14.542050855932757
+      },
+      "device": "cuda:0",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.46,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 184,
+          "first_pass_step": 117,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 18,
+          "passing_suffix": 18,
+          "stable_from_seconds": null,
+          "stable_from_step": 117
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": 0.01978034431114793,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.02,
+            "value": 0.00021965568885207176
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "metrics": {
+        "identity_mse": 0.00021965568885207176
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "trajectory"
+    }
+  ]
+}

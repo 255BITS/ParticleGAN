@@ -25,7 +25,7 @@ def test_canonical_board_keeps_scored_research_and_existing_navigation():
     assert first == second == page.read_text()
     lines = first.splitlines()
     header = ("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements | Tier 3 requirements"
-              " | Total view requirements |")
+              " | Tier 4 requirements | Total view requirements |")
     assert next(line for line in lines if line.startswith("|")) == header
     selected, full_suite = first.split("## Full-suite results — failures included", 1)
     assert "<details>" not in selected and "<summary>Qualification subset" not in first

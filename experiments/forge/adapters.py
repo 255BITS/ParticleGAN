@@ -475,8 +475,16 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
             from benchmarks.toy_audit.ring16_quality import score_samples
         else:
             raise CapabilityError([f"unsupported vector sample evaluator: {scorer}"])
+    from .tanh_point_mass import accepts_origin_smoke, refuse_unsupported_tanh
     from .vectorprofiles import build_vector_models, resolve_vector_spec
+    # Routing refusal is independent of card validation. An unsupported tanh
+    # host, including zero_tanh_rail_escape, stops here.
+    refuse_unsupported_tanh(task, task.get("execution", {}).get("host_definition"))
     spec = resolve_vector_spec(task)
+    # The frozen vector law has no tanh branch. Only the published origin
+    # smoke card is redirected; every other host keeps the import above.
+    if scorer is None and accepts_origin_smoke(task, spec):
+        from .tanh_point_mass import sample_target, score_samples
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)

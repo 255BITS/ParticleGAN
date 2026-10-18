@@ -144,7 +144,7 @@ def test_ranking_assignments_keep_their_declared_role(inventory):
 @pytest.mark.parametrize("mutation,match", [
     (lambda v: v["assignments"][0].update(task="missing"), "missing task"),
     (lambda v: v["assignments"].append(deepcopy(v["assignments"][0])), "duplicate assignment"),
-    (lambda v: v["assignments"][0].update(qualification_tier=4), "qualification_tier"),
+    (lambda v: v["assignments"][0].update(qualification_tier=0), "qualification_tier"),
     (lambda v: v["assignments"][0].update(importance="optional"), "importance"),
 ])
 def test_invalid_view_declarations_are_not_silently_omitted(inventory, mutation, match):

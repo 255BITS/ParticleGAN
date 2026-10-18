@@ -1,0 +1,445 @@
+{
+  "attempt_ids": [
+    "ad0d2c24d73941ae9fa4d32992ebf403",
+    "be3676541d324b628bb35584b91b9cf1"
+  ],
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "This separately scoped diagnostic preserves the two archived numerical endurance passes after revision 12 restores four failed Tier 2 requirements; it grants no ordinary qualification.",
+  "conclusion": "The prerequisite mode_hold passes; all 1200 hold checks and 300 extension checks pass at the unchanged first-convergence stop of 3282 updates.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "ad0d2c24d73941ae9fa4d32992ebf403",
+        "be3676541d324b628bb35584b91b9cf1"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "9c664f56ff7a9defcece362f54588f687f992529f0b5f20e6fd0e101d4584f9c",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": null,
+          "value": null
+        },
+        "prediction": {
+          "satisfied": null,
+          "value": null
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "ad0d2c24d73941ae9fa4d32992ebf403",
+          "producer_request_id": "c94a79c33ae1c6e6512aaaf2",
+          "producer_study_id": "bispf-throughput-endurance-v1",
+          "result_hash": "1fb2bd86f0ae698c4a70887c90b6161f453f70c769d054fc2968bf6bc6bb569f",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "be3676541d324b628bb35584b91b9cf1",
+          "producer_request_id": "c94a79c33ae1c6e6512aaaf2",
+          "producer_study_id": "bispf-throughput-endurance-v1",
+          "result_hash": "11b6a760f72720c108c812ddeb05744dd359fd24bf0c420f508be5d7ef4100e9",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "49d1764a5bf3b76266b52dbd547c07bb35f574b7457155763bb973127cb74ee4",
+        "contract_sha256": "9c664f56ff7a9defcece362f54588f687f992529f0b5f20e6fd0e101d4584f9c",
+        "control_binding_sha256": "0179c1059baba89d0bc8256f00fea4554cfdd0c2e471be13b0a09094477284a7",
+        "policy_fingerprint": "0fcefe315626e23066a6479e61a47be29556575a7e59d6b8a77cee3f1e4ef7cd",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "6622d4991d8ee849457784b3b4cd5f0371f0799ee961dec55e859653a15a2886"
+      },
+      "study_id": "bispf-throughput-endurance-v1",
+      "study_sha256": "6622d4991d8ee849457784b3b4cd5f0371f0799ee961dec55e859653a15a2886"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "full_readout_archive": {
+    "bytes": 14031,
+    "git_blob_oid": "7f6bf918990d9d306cbf420276fa72beda018b8e",
+    "path": "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/archive/readouts/readout-cd9493a6a30096475d381175.json",
+    "sha256": "f7ea66f27ac046c142acab5b841fc49dce718096758e02604d42b85ff2291ea5"
+  },
+  "full_readout_sha256": "f7ea66f27ac046c142acab5b841fc49dce718096758e02604d42b85ff2291ea5",
+  "goal": "bispf_throughput_endurance",
+  "hypothesis": "Preserve the two archived incumbent endurance PASS verdicts under their original task protocols, with a separately scoped nonqualifying diagnostic after current revision12 restores four previously held Tier2 failures.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Retain the explicit diagnostic scope and original checkpoint/initialization/stream identities; keep current-policy Tier 3 blocked.",
+  "original_source": {
+    "path": "reports/forge/attempts/ad0d2c24d73941ae9fa4d32992ebf403/result.json"
+  },
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "ad0d2c24d73941ae9fa4d32992ebf403",
+        "result_hash": "1fb2bd86f0ae698c4a70887c90b6161f453f70c769d054fc2968bf6bc6bb569f",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "be3676541d324b628bb35584b91b9cf1",
+        "result_hash": "11b6a760f72720c108c812ddeb05744dd359fd24bf0c420f508be5d7ef4100e9",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-cd9493a6a30096475d381175",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/bispf-throughput/README.md"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 5400,
+      "candidate_budget_seconds": 5400,
+      "id": "bispf-throughput-endurance-v1"
+    },
+    "candidate": "bispf-throughput-v1",
+    "competing_explanation": "These dense hosts intentionally retain native arithmetic, so passing them establishes implementation/source regression coverage only and grants no wide-network quality or current-policy qualification. Ordinary revision12 failures remain unchanged; passing own mode_hold dependency and all original endurance observations remain mandatory.",
+    "control": {
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "ring_extension",
+      "threshold": 0.9
+    },
+    "hypothesis": "Preserve the two archived incumbent endurance PASS verdicts under their original task protocols, with a separately scoped nonqualifying diagnostic after current revision12 restores four previously held Tier2 failures.",
+    "id": "bispf-throughput-endurance-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "ring_extension",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bispf-v2",
+          "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+        },
+        "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bispf_throughput_endurance"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bispf-throughput-endurance-v1",
+  "study_sha256": "6622d4991d8ee849457784b3b4cd5f0371f0799ee961dec55e859653a15a2886",
+  "summary_curation": "Certified final metrics, verdicts, decision outcomes and source/receipt identities retained. Per-update evidence is archived byte-exactly outside Git. This display summary cannot replace original qualification receipts.",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "attempt_id": "be3676541d324b628bb35584b91b9cf1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "0a1a392bbe10bf26a5a6a648f90859f7eb5633e34f738f954e65833b2181d330",
+      "cost": {
+        "adapter_loop_seconds": 36.61189329996705,
+        "adapter_seconds": 36.9434145638952,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 42.4493807349354,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 36.13862841343507,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.012021537986584008
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008676527068018913
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 36.11793034838047
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 38.001266829902306,
+        "wall_seconds": 42.4493807349354
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.7916666666666666,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 950,
+          "first_pass_step": 750,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 10,
+          "passing_suffix": 10,
+          "stable_from_seconds": null,
+          "stable_from_step": 750
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.06923828124999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.96923828125
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 8,
+            "value": 8
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_trainer",
+      "final_metrics_sha256": "12a8712b967d65b7904d7a1715703436f94aeb83b1414d5dc9f97019ec0a18bf",
+      "gate_status": "PASS",
+      "metrics": {
+        "cover": 1.0,
+        "effective_modes": 7.588357448577881,
+        "hq": 0.96923828125,
+        "modes": 8,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "PASS",
+      "task_id": "mode_hold"
+    },
+    {
+      "api_version": "forge-api-v1",
+      "attempt_id": "ad0d2c24d73941ae9fa4d32992ebf403",
+      "compatibility_key": "b8a2c2057aa29cc83f245efeec26bec282323ffddc9e7a15f9a30fe0469eeb71",
+      "cost": {
+        "adapter_loop_seconds": 104.43783826706931,
+        "charged_task": "ring_hold",
+        "completed_steps": 3282,
+        "device": "1",
+        "execution_seconds": 110.29372970596887,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 3282,
+          "generator": 3282,
+          "prior": 3282
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 102.67902952211443,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 2082,
+              "seconds": 1.0115313602145761
+            },
+            "sampling": {
+              "calls": 2082,
+              "seconds": 0.7782356920652092
+            },
+            "training_updates": {
+              "calls": 3282,
+              "seconds": 100.88926246983465
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "wall_seconds": 0
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "final_metrics_sha256": "30da1f1082d1b26e6108901c721c49c7818d9c1caef6804f05f2b1ff562472d3",
+      "gate_status": "PASS",
+      "metrics": {
+        "confirmation_checks": 200,
+        "converged_step": 1782,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "extension_checks": 300,
+        "extension_passing": 300,
+        "first_hold_failure": null,
+        "frozen_toy_verdicts_unchanged": true,
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "hold_budget": 1200,
+        "hold_budget_complete": true,
+        "hold_checks": 1200,
+        "longest_settling_streak": 200,
+        "min_hq": 0.9,
+        "modes": 8,
+        "name": "first_convergence_then_hold_v1",
+        "settling_budget": 4800,
+        "settling_checks": 582,
+        "settling_failures": 5,
+        "start_step": 1200,
+        "status": "PASS",
+        "training_feedback": false
+      },
+      "raw_status": "completed",
+      "reason": "recomputed every extension observation without selecting another window",
+      "reasons": [
+        "recomputed every extension observation without selecting another window"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "PASS",
+      "task_id": "ring_extension"
+    },
+    {
+      "api_version": "forge-api-v1",
+      "attempt_id": "ad0d2c24d73941ae9fa4d32992ebf403",
+      "compatibility_key": "b8a2c2057aa29cc83f245efeec26bec282323ffddc9e7a15f9a30fe0469eeb71",
+      "cost": {
+        "adapter_loop_seconds": 104.43783826706931,
+        "charged_task": "ring_hold",
+        "completed_steps": 3282,
+        "device": "1",
+        "execution_seconds": 110.29372970596887,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 3282,
+          "generator": 3282,
+          "prior": 3282
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 102.67902952211443,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 2082,
+              "seconds": 1.0115313602145761
+            },
+            "sampling": {
+              "calls": 2082,
+              "seconds": 0.7782356920652092
+            },
+            "training_updates": {
+              "calls": 3282,
+              "seconds": 100.88926246983465
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "wall_seconds": 110.29372970596887
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "final_metrics_sha256": "d14faa9c0d86b894de58a751bba7e98e1774c48a828a5270fd84d369bfe96e86",
+      "gate_status": "PASS",
+      "metrics": {
+        "confirmation_checks": 200,
+        "converged_step": 1782,
+        "convergence": "first consecutive qualifying window; operational quality criterion",
+        "first_hold_failure": null,
+        "frozen_toy_verdicts_unchanged": true,
+        "hold": "the next updates, disjoint from confirmation; no restart after failure",
+        "hold_budget": 1200,
+        "hold_budget_complete": true,
+        "hold_checks": 1200,
+        "longest_settling_streak": 200,
+        "min_hq": 0.9,
+        "modes": 8,
+        "name": "first_convergence_then_hold_v1",
+        "settling_budget": 4800,
+        "settling_checks": 582,
+        "settling_failures": 5,
+        "start_step": 1200,
+        "status": "PASS",
+        "training_feedback": false
+      },
+      "raw_status": "completed",
+      "reason": "recomputed first-convergence hold",
+      "reasons": [
+        "recomputed first-convergence hold"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "PASS",
+      "task_id": "ring_hold"
+    }
+  ]
+}

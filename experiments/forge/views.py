@@ -361,8 +361,8 @@ def validate_view(view: dict, tasks: dict) -> None:
         if tasks[name]["id"] != name:
             raise ValueError("task index and id disagree")
         tier = assignment.get("qualification_tier")
-        if type(tier) is not int or tier not in (1, 2, 3):
-            raise ValueError("qualification_tier must be 1, 2, or 3")
+        if type(tier) is not int or isinstance(tier, bool) or tier < 1:
+            raise ValueError("qualification_tier must be an integer >= 1")
         if assignment.get("importance") not in IMPORTANCES:
             raise ValueError("unknown task importance")
         if assignment["importance"] == "held":

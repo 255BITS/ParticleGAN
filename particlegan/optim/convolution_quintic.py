@@ -39,6 +39,11 @@ def quintic_direction(matrices, *, smoothing):
         return torch.zeros_like(matrices)
     if not bool(torch.isfinite(matrices).all()):
         raise ValueError("quintic directions require finite matrix entries")
+    return _quintic_direction(matrices, smoothing=smoothing)
+
+
+def _quintic_direction(matrices, *, smoothing):
+    """Validated tensor-only calculation, also used by disposable CUDA graphs."""
     original_shape, original_dtype = matrices.shape, matrices.dtype
     # Disable the caller's AMP casting locally; the declared filter uses FP32,
     # including when the surrounding model runs under autocast.
@@ -66,3 +71,43 @@ def quintic_direction(matrices, *, smoothing):
         if transposed:
             result = result.mT
         return result.reshape(original_shape).to(dtype=original_dtype)
+
+
+class QuinticGraphCache:
+    """Optimizer-owned pure kernels; no parameters, gradients or RNG captured.
+
+    Outputs are scratch storage valid until the next call with this key. The
+    optimizer consumes them immediately. Discard this cache on restore/copy.
+    """
+
+    def __init__(self):
+        self.entries, self.resources = {}, {}
+
+    def direction(self, matrices, *, smoothing):
+        # Match the eager public function's finite-input rejection outside capture.
+        if not bool(torch.isfinite(matrices).all()):
+            raise ValueError("quintic directions require finite matrix entries")
+        key = (matrices.device, matrices.dtype, tuple(matrices.shape), smoothing,
+               torch.backends.cuda.matmul.allow_tf32, torch.get_float32_matmul_precision(),
+               torch.are_deterministic_algorithms_enabled())
+        with torch.cuda.device(matrices.device):
+            if key not in self.entries:
+                if matrices.device not in self.resources:
+                    self.resources[matrices.device] = (torch.cuda.Stream(device=matrices.device),
+                                                        torch.cuda.graph_pool_handle())
+                stream, pool = self.resources[matrices.device]
+                source = matrices.clone(memory_format=torch.contiguous_format)
+                stream.wait_stream(torch.cuda.current_stream())
+                with torch.cuda.stream(stream):
+                    for _ in range(3):
+                        _quintic_direction(source, smoothing=smoothing)
+                torch.cuda.current_stream().wait_stream(stream)
+                graph = torch.cuda.CUDAGraph()
+                with torch.cuda.graph(graph, stream=stream, pool=pool):
+                    result = _quintic_direction(source, smoothing=smoothing)
+                torch.cuda.current_stream().wait_stream(stream)
+                self.entries[key] = source, result, graph
+            source, result, graph = self.entries[key]
+            source.copy_(matrices)
+            graph.replay()
+            return result

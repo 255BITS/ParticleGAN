@@ -199,8 +199,8 @@ def _validate_record(record, registry, tasks):
     if record["explanation"].split("#")[0] != registry["explanations"]:
         raise ValueError(f"{label}: explanation must link into {registry['explanations']}")
     views = record["views"]
-    if not isinstance(views, dict) or any(type(tier) is not int or tier not in (1, 2, 3) for tier in views.values()):
-        raise ValueError(f"{label}: views must map view ids to tiers 1-3")
+    if not isinstance(views, dict) or any(type(tier) is not int or isinstance(tier, bool) or tier < 1 for tier in views.values()):
+        raise ValueError(f"{label}: views must map view ids to positive integer tiers")
     if kind in {"NO_CHANGE", "FIX"}:
         if views:
             raise ValueError(f"{label}: {kind} records change no view")
@@ -354,8 +354,9 @@ def _differences(expected: dict, live: dict) -> list[str]:
 
 
 def _tier_counts(view: dict) -> dict:
+    highest = max((a["qualification_tier"] for a in view.get("assignments", [])), default=1)
     def count(match):
-        return [sum(match(a) and a["qualification_tier"] == tier for a in view["assignments"]) for tier in (1, 2, 3)]
+        return [sum(match(a) and a["qualification_tier"] == tier for a in view["assignments"]) for tier in range(1, highest + 1)]
     return {"required": count(lambda a: a["importance"] == "required"),
             "held": count(lambda a: a["importance"] == "held"),
             "removed": count(lambda a: "removal" in a)}

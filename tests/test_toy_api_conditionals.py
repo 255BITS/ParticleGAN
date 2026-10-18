@@ -35,6 +35,8 @@ def oracle(task):
         def predict(c,r):
             k=len(task.ids);base=c[:k]
             return api.misgan.bayes_posterior(task.problem,base[:,:8],base[:,8:],draws=len(c)//k,generator=r)[1].reshape(-1,8)
+    elif isinstance(task,(api.MisGANBlockRecoveryTask,api.MisGANBlockNeuralImputerTask)):
+        return task.exact_law
     elif task.name.startswith("trajectory"):
         def predict(c,r): return task.fast[torch.cdist(c,task.slow).argmin(1)]
     else:

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 833. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 841. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4008,6 +4008,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold PASS, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/9cd112e7346b45ed8cb241e1498685ad/result.json) · [Record](records/readout-2c30cecb0a3f37d001ce3b28.json)
 
+### bispf-optimized-quintic-v1 · readout-322bc05e8bb593d80d65cb36
+
+**Scope:** research_diagnostic; scientific; revision `fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248`.
+
+Measure update throughput and preserve the sustained stripe PASS on unchanged small-image task contracts. Retain the held bars outcome.
+
+**Observed:** {'FAIL': 1, 'PASS': 1}; wall seconds 55.034; mechanism `structural`.
+
+img_bars4: modes=2, hq=0.96875; img_stripes2: modes=2, hq=1
+
+Original small-image controls retain stripes PASS and bars FAIL at the unchanged 600-update budget.
+
+**Next:** Preserve these exact controls and do not repeat unchanged experiments.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-322bc05e8bb593d80d65cb36.json)
+
 ### bispf-v2 · readout-3721266a32807c156725dfc8
 
 **Scope:** research_diagnostic; scientific; revision `34571ac88b53ec2ad8c9dead16a5b23ba3bb408dcd2f2cf3d8c6d8c290d93eef`.
@@ -4087,6 +4103,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/0d93422aa0ff4852bba4f0de4a1e6926/result.json) · [Record](records/readout-457f93f65c1e6782fba74306.json)
+
+### bispf-optimized-quintic-v1 · readout-464567d128031fee54c42252
+
+**Scope:** research_diagnostic; scientific; revision `fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248`.
+
+Matched original-quintic control for the throughput recipe on the two unchanged wide-image tasks, comparing the exercised precision and optimizer execution changes.
+
+**Observed:** {'PASS': 2}; wall seconds 45.999; mechanism `structural`.
+
+img_bars4_w64_optimizer_diagnostic: modes=4, hq=1; img_stripes2_w64_optimizer_diagnostic: modes=2, hq=1
+
+Both unchanged width 64 image controls PASS their complete 600-update sustained gates.
+
+**Next:** Retain the source-bound controls and actual-training GIFs; do not rerun unchanged arms.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-464567d128031fee54c42252.json)
 
 ### bispf-optimized-v3 · readout-47d84c98f42853a07d20becb
 
@@ -4295,6 +4327,22 @@ The explicit published residual16 intensity host passed all sustained/terminal r
 **Next:** Bind published vector/native architecture and initialization policies explicitly through shared public components before expanding the full reference matrix. Keep this positive, prior failures and costs in separate compatible cohorts. Register any further diagnostic narrowly; no automatic control/reference sweep or adoption is justified by one image pass.
 
 [Evidence](../../reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json) · [Record](records/readout-7650981f9a48a164aebbd631.json)
+
+### bispf-throughput-v1 · readout-7a4fda449cb2e080c1aebf91
+
+**Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Preserve both incumbent width64 image passes under the unchanged full numerical gates, using one declared throughput recipe. Performance does not imply quality.
+
+**Observed:** {'PASS': 2}; wall seconds 35.621; mechanism `structural`.
+
+img_bars4_w64_optimizer_diagnostic: modes=4, hq=1; img_stripes2_w64_optimizer_diagnostic: modes=2, hq=1
+
+Both width 64 image tasks PASS all original sustained gates at 600 updates: HQ 1,2 stripe modes and 4 bar modes, with passing suffixes 12 and 9.
+
+**Next:** Retain this positive diagnostic beside ordinary quality and the completed performance matrix; no natural-image quality or automatic promotion claim.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-7a4fda449cb2e080c1aebf91.json)
 
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
@@ -4680,6 +4728,22 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 [Evidence](../../reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json) · [Record](records/readout-c723a88e5122f97011aabad9.json)
 
+### bispf-throughput-v1 · readout-cd9493a6a30096475d381175
+
+**Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Preserve the two archived incumbent endurance PASS verdicts under their original task protocols, with a separately scoped nonqualifying diagnostic after current revision12 restores four previously held Tier2 failures.
+
+**Observed:** {'PASS': 3}; wall seconds 152.743; mechanism `structural`.
+
+mode_hold: modes=8, hq=0.96924; ring_extension: modes=8; ring_hold: modes=8
+
+The prerequisite mode_hold passes; all 1200 hold checks and 300 extension checks pass at the unchanged first-convergence stop of 3282 updates.
+
+**Next:** Retain the explicit diagnostic scope and original checkpoint/initialization/stream identities; keep current-policy Tier 3 blocked.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-cd9493a6a30096475d381175.json)
+
 ### release07-gan-v3-mog-v1 · readout-d5a99d9470252f695a717dfc
 
 **Scope:** calibration_diagnostic; scientific; revision `a9b2aa0ace96762b024a30c0979a0eedce8d07f9fae5cb5dc03868522132962c`.
@@ -4711,6 +4775,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/a399cef53ff04eaa930b5c231f64db52/result.json) · [Record](records/readout-da2ac34b1675880ab8ace248.json)
+
+### bispf-throughput-v1 · readout-dbb540fd1a0d83052f31aef8
+
+**Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Measure update throughput and preserve the sustained stripe PASS on unchanged small-image task contracts. Retain the held bars outcome.
+
+**Observed:** {'FAIL': 1, 'PASS': 1}; wall seconds 30.959; mechanism `structural`.
+
+img_bars4: modes=2, hq=0.96875; img_stripes2: modes=2, hq=1
+
+Original small stripes PASS and bars FAIL; all 600 updates and 24 observations complete.
+
+**Next:** Retain the global batched backend as an opt-in; keep the narrow bars failure visible.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-dbb540fd1a0d83052f31aef8.json)
 
 ### r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595 · readout-dc31730b85dde3cf85253359
 
@@ -4760,6 +4840,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/a4a15aa781654502ae87fd689c75e346/result.json) · [Record](records/readout-e3ab30a3f7ae4a6debe66e5d.json)
 
+### bispf-throughput-v1 · readout-e5cf5311e83c25cc0b333270
+
+**Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact declared global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 60.995; mechanism `structural`.
+
+
+
+All six finite-update DCGAN performance tasks PASS. Observed speedups versus matched quintic controls range 1.02×–2.15×, geometric mean 1.66×;256 px 2.15× and batch 64 2.14× meet the target.
+
+**Next:** Offer the two-field opt-in recipe; profile remaining 32/64 px overhead before another bounded implementation change. Keep defaults and existing selection pins unchanged.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-e5cf5311e83c25cc0b333270.json)
+
 ### recipe-prior-refactor-ka2-v1 · readout-e6e872f73024fd6c0b2b2d42
 
 **Scope:** research_diagnostic; scientific; revision `d271e37be7bfbc9c110b7acecd2d78316eaa1360d4af9db352b1fe26cb1e46a1`.
@@ -4775,6 +4871,22 @@ All six declared DCGAN mock-data performance workloads completed their finite pu
 **Next:** Use the published scaling measurements to budget larger-image pilots; restore verifiable contention telemetry before paired timing claims. Profile complete-update components before changing recipes. Keep the default unchanged and require separate quality evidence for adoption.
 
 [Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/ka2-dcgan_performance_b64-0dcd26728de3eb07.json) · [Record](records/readout-e6e872f73024fd6c0b2b2d42.json)
+
+### bispf-throughput-v1 · readout-e96805cfab19f80314e3ec20
+
+**Scope:** current; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
+
+Preserve every counted and previously passing ordinary BISPF gate with one global throughput recipe. Retain every held failure.
+
+**Observed:** {'FAIL': 11, 'PASS': 17}; wall seconds 2463.782; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0036687
+
+The unchanged ordinary revision 12 tier completes 28 tasks with 17 PASS and 11 FAIL. All 17 measured incumbent ordinary passes remain; four restored required failures block ordinary Tier 3. The separately scoped endurance study supplies two further preserved numerical passes, not qualification.
+
+**Next:** Retain the opt-in throughput recipe and existing selected/default recipe; do not claim revision 12 Tier 3 qualification or tune the unchanged failed gates as part of this latency study.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-e96805cfab19f80314e3ec20.json)
 
 ### recipe-prior-refactor-k3p-v1 · readout-ea9a34c10e46857f904487a0
 
@@ -4839,6 +4951,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 0.1
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/8ff64e32bf294e5597d8deb036527075.json) · [Record](records/readout-f61373e09376e33fc4c501c8.json)
+
+### bispf-optimized-quintic-v1 · readout-f7a1657c1890cbb69c8d89f4
+
+**Scope:** research_diagnostic; scientific; revision `fbc1bf4bda35c195efe7830c359d1851febdbca85b4257b4415d66187ed3d248`.
+
+Measure complete public GANTrainer update time and memory as image resolution, batch and width grow, preserving the exact declared global recipe.
+
+**Observed:** {'PASS': 6}; wall seconds 64.729; mechanism `structural`.
+
+
+
+All six current-source quintic DCGAN controls complete their frozen finite-update budgets with finite states.
+
+**Next:** Archive the complete matched matrix and preserve the current selected/default recipe; no unchanged reruns.
+
+[Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-f7a1657c1890cbb69c8d89f4.json)
 
 ### bcap-dualnorm--8db70e3cb9fd3da9b5cc6a117731e8572cba837d64e7ee721d012d3157c9a3fe · readout-fa5fada954b7b255ec86d748
 
@@ -5493,4 +5621,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `3596ea6d96e1bd1467bcf7c2f6dc69c0d043355150b653bee785d1c3262822d9`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `6de67c6665786a58e1c666d0cfdfe91eb7aff04f528a2610c507f25c73fa0222`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

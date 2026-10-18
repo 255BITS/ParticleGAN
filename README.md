@@ -31,9 +31,9 @@ vectors (*particles*) that are optimized together with the generator, so the
 prior itself can move toward the data's modes. The default training recipe is
 the selected **optimized BISPF** leader: non-saturating loss, a Born-Infeld
 critic penalty, an SBNP prior regularizer, zero-momentum DualNorm and constant
-rates. Its quintic rule accelerates CUDA convolution kernels with more than
-32 channels per group; dense weights and smaller or CPU kernels retain native
-updates.
+rates. Batched convolution updates and BF16/channels-last training accelerate
+supported CUDA image networks; weights, optimizer arithmetic and sampling stay
+FP32. CPU and nonconvolutional networks retain their previous execution.
 [Recipe settings and evidence](docs/api.md#recipes-and-defaults) explain the
 configuration. You write an ordinary PyTorch GAN loop; the recipe builds the pieces.
 
@@ -41,17 +41,24 @@ Future promotions change one line in [particlegan/recipes.py](particlegan/recipe
 `DEFAULT_RECIPE = "bispf_optimized"`. All model-family factories inherit that trainer preset.
 Explicit presets such as `get_recipe("ka2")` remain available. This is the
 owner-selected research default; Forge calibration remains provisional.
-The [optimization readout](reports/forge/bispf-optimized/README.md) preserves
-19 passing and 11 failing task verdicts. The overview's 81/81 counts repeated
-view requirements across 18 distinct counted tests; held failures remain
-visible. These results do not establish natural-image convergence or a
-universal architecture guarantee.
+The [throughput readout](reports/forge/bispf-throughput/README.md) preserves
+19 passing and 11 failing task verdicts, while measuring 2.15× faster 256×256
+DCGAN updates and about 2.3× faster small image updates versus 0.9.0. Across
+all six DCGAN workloads, speedups range from 1.02× to 2.15×. These results
+do not establish natural-image convergence or a universal architecture guarantee.
 
-![Actual 100-Gaussian training with the optimized BISPF default: particle outputs, target modes and numerical learning curves](100gaussians.gif)
+![Actual training of the 0.9.1 BISPF default on the stripes task, with numerical quality observations](reports/forge/bispf-throughput/media/bispf-throughput-v1/img_stripes2.gif)
+
+The 0.9.1 default passes this fixed 600-update stripes task with all required
+modes. Its matched mean update throughput improves 2.30× over 0.9.0;
+[metrics and source-bound evidence](reports/forge/bispf-throughput/README.md)
+include the unchanged bars failure and separate wide-channel controls.
+
+![Archived 0.9.0 100-Gaussian training: particle outputs, target modes and numerical learning curves](100gaussians.gif)
 
 Recorded with the **0.9.0 optimized BISPF default**, public deterministic initialization,
 live weights and protocol seed 0: **100/100 modes, 42.1% within 3σ after 20,000 updates**.
-The 95% precision goal is not met. The animation follows the selected public default;
+The 95% precision goal is not met. This animation retains its 0.9.0 recipe;
 [metrics and reproduction](reports/readme-100gaussians/README.md#current-default)
 preserve the full result and the historical K3P animation.
 
@@ -68,7 +75,7 @@ ending at 98.3–98.6% of samples within 3σ after 7,000 updates:
 Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
 
 ```bash
-python -m pip install particlegan           # published package; 0.10.0 is in preparation
+python -m pip install particlegan           # published package is 0.9.1; 0.10.0 is in preparation
 ```
 
 For the examples, experiments and tests, install from source:
@@ -81,8 +88,8 @@ python -m pip install -e '.[experiments,dev]'  # plus examples, experiments and 
 
 ## Train a GAN
 
-Version 0.9.0 makes the optimized BISPF preset the default and retains explicit
-historical presets and saved recipe restoration. See the [changelog](CHANGELOG.md)
+Version 0.9.1 makes the faster BISPF execution policy the default and retains
+explicit historical settings and saved recipe restoration. See the [changelog](CHANGELOG.md)
 for the release and its compatibility limits.
 
 You supply ordinary PyTorch modules; `GANTrainer` binds the recipe's optimizers,
