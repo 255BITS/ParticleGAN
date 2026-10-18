@@ -6,6 +6,7 @@ player. The graft uses the norm of Adam's *unit-learning-rate* direction,
 so the scheduled learning rate is applied exactly once.
 """
 from copy import deepcopy
+from dataclasses import asdict
 import math
 
 import torch
@@ -14,6 +15,7 @@ from torch.optim import Optimizer
 from ..grad_regularizers import CriticStepRecord
 from .convolution_frobenius import frobenius_direction
 from .gram_polar import GRAM_DENSE_PROFILE, guarded_gram_polar
+from .gram_svd_fallback import VERSION as FALLBACK_DENSE_PROFILE, Counters, svd_fallback_polar
 
 
 NORMALIZED_FAMILIES = (
@@ -360,7 +362,7 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("newton_schulz requires per_offset convolution and positive smoothing")
         if svd_backend == "batched" and convolution != "per_offset":
             raise ValueError("batched SVD requires per_offset convolution")
-        if type(dense_profile) is not str or dense_profile not in ("default", GRAM_DENSE_PROFILE):
+        if type(dense_profile) is not str or dense_profile not in ("default", GRAM_DENSE_PROFILE, FALLBACK_DENSE_PROFILE):
             raise ValueError("unknown optimizer dense_profile")
         if dense_profile != "default" and (family != "dualnorm" or momentum != 0
                 or smoothing != .001 or svd_backend not in ("native", "batched")):
@@ -389,6 +391,7 @@ class NormalizedOptimizer(Optimizer):
         self.convolution_rule = convolution_rule
         self.svd_backend = svd_backend
         self.dense_profile = dense_profile
+        self._dense_profile_leaf_counters = {}
         self.recipe_optimizer_family = family
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
@@ -480,7 +483,28 @@ class NormalizedOptimizer(Optimizer):
         # Optimizer's default pickle omits the role family, observer and native
         # Adam component; public checkpoint preflight also deep-copies us.
         return {key: value for key, value in self.__dict__.items()
-                if key not in ("_newton_graphs", "_quintic_graphs")}
+                if key not in ("_newton_graphs", "_quintic_graphs", "_dense_profile_leaf_counters")}
+
+    @property
+    def dense_profile_stats(self):
+        """Detached runtime snapshot; not checkpoint identity/state.
+
+        Keys identify zero-based group:param positions. A successful public load
+        resets these diagnostics; rejected loads retain them. HOLD may follow
+        earlier leaf writes/clock advances and requires whole-state recovery.
+        Primary timing is host wall; fallback timing includes selected-device
+        transfer completion. Timers are not independent additive GPU costs.
+        """
+        per_leaf = {key: asdict(value) for key, value in
+                    getattr(self, "_dense_profile_leaf_counters", {}).items()}
+        aggregate = {key: value for key, value in asdict(Counters()).items()
+                     if key != "last_fallback"}
+        for counters in per_leaf.values():
+            for key in aggregate:
+                aggregate[key] += counters[key]
+        return {"profile": self.dense_profile, "aggregate": aggregate,
+                "per_leaf": per_leaf, "serialized": False,
+                "reset_on_successful_load": True}
 
     def set_sampled_rows(self, table, rows):
         """Record actual sampled indices, never infer ownership from gradients."""
@@ -539,9 +563,9 @@ class NormalizedOptimizer(Optimizer):
                         squared = parameter.grad.square().sum()
                         norms[player] = squared if player not in norms else norms[player] + squared
         norms = {player: value.sqrt() for player, value in norms.items()}
-        for group in self.param_groups:
+        for group_index, group in enumerate(self.param_groups):
             algorithm, rate, eps = group["algorithm"], group["lr"], group["eps"]
-            for parameter in group["params"]:
+            for parameter_index, parameter in enumerate(group["params"]):
                 gradient = parameter.grad
                 if gradient is None or algorithm == "adam":
                     continue
@@ -663,6 +687,13 @@ class NormalizedOptimizer(Optimizer):
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
                         if self.dense_profile == GRAM_DENSE_PROFILE:
                             update = guarded_gram_polar(direction, smoothing=self.smoothing)
+                        elif self.dense_profile == FALLBACK_DENSE_PROFILE:
+                            if not hasattr(self, "_dense_profile_leaf_counters"):
+                                self._dense_profile_leaf_counters = {}
+                            counters = self._dense_profile_leaf_counters.setdefault(
+                                f"{group_index}:{parameter_index}", Counters())
+                            update = svd_fallback_polar(direction, smoothing=self.smoothing,
+                                                            counters=counters)
                         elif self.svd_backend in ("native", "newton_schulz", "batched"):
                             update = (polar_factor(direction, smoothing=self.smoothing)
                                       if self.smoothing else polar_factor(direction))
@@ -850,6 +881,8 @@ class NormalizedOptimizer(Optimizer):
             self.record.load_state_dict(regularizer["record"])
             if hasattr(self.record, "restore_device_state"):
                 self.record.restore_device_state(self.param_groups[0]["params"][0].device)
+
+        self._dense_profile_leaf_counters = {}
 
 
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):

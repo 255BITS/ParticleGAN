@@ -328,7 +328,8 @@ class Recipe:
         if self.optimizer_svd_backend == "batched" and self.optimizer_convolution != "per_offset":
             raise ValueError("batched SVD requires per_offset convolution")
         if (type(self.optimizer_dense_profile) is not str
-                or self.optimizer_dense_profile not in ("default", "gram_fp64_guarded_v1")):
+                or self.optimizer_dense_profile not in ("default", "gram_fp64_guarded_v1",
+                    "gram_fp64_svd_diagnostic_v2")):
             raise ValueError("unknown optimizer_dense_profile")
         if self.optimizer_dense_profile != "default" and (
                 self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
