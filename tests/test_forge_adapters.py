@@ -398,13 +398,14 @@ def test_zero_tanh_smoke_card_runs_through_transfer_vector_and_sample_target(tmp
     """Execute the published origin point-mass card, not a rewritten mixture.
 
     edaf273 admits the card in ``_validate_spec`` and then raises KeyError('kind')
-    in ``build_vector_models`` and ``sample_target``. One real update is enough
-    to take both paths and the point-mass scorer; the 1000-update budget stays
-    on the card.
+    in ``build_vector_models`` and the frozen ``sample_target``. One real update
+    is enough to take the routed construction, sampling and scoring paths; the
+    1000-update budget stays on the card.
     """
     import math
     from benchmarks.transfer_suite import vector_tasks
-    from experiments.forge.vectorprofiles import TanhPointMassGenerator, resolve_vector_spec
+    from experiments.forge import tanh_point_mass
+    from experiments.forge.vectorprofiles import resolve_vector_spec
     from lib.toy_models import SimpleMLPDiscriminator
 
     original = json.loads((ROOT / "configs/forge/tasks/zero_tanh_smoke.json").read_text())
@@ -415,24 +416,29 @@ def test_zero_tanh_smoke_card_runs_through_transfer_vector_and_sample_target(tmp
     spec = resolve_vector_spec(original)
     assert spec == host
     batch = host["batch"]
-    origin = vector_tasks.sample_target(spec, batch, torch.Generator().manual_seed(0), 0)
+    with pytest.raises(KeyError, match="kind"):
+        vector_tasks.sample_target(spec, 1, torch.Generator().manual_seed(0), 0)
+    rng = torch.Generator().manual_seed(0)
+    before = rng.get_state().clone()
+    origin = tanh_point_mass.sample_target(spec, batch, rng, 0)
+    assert torch.equal(rng.get_state(), before)
     assert origin.shape == (batch, 2) and torch.equal(origin, torch.zeros_like(origin))
-    perfect = vector_tasks.score_samples(torch.zeros(16, 2), spec, 0)
+    perfect = tanh_point_mass.score_samples(torch.zeros(16, 2), spec, 0)
     assert perfect["mean_abs_error"] == 0.0 and perfect["rms_error"] == 0.0
     assert perfect["p99_abs_error"] == 0.0 and perfect["saturated_fraction"] == 0.0
-    saturated = vector_tasks.score_samples(torch.full((16, 2), 0.995), spec, 0)
+    saturated = tanh_point_mass.score_samples(torch.full((16, 2), 0.995), spec, 0)
     assert saturated["saturated_fraction"] == 1.0
     assert saturated["mean_abs_error"] > 0.005
 
     seen = []
-    draw = vector_tasks.sample_target
+    draw = tanh_point_mass.sample_target
 
-    def capture(card, count, rng, completed_steps):
-        points = draw(card, count, rng, completed_steps)
+    def capture(card, count, generator, completed_steps):
+        points = draw(card, count, generator, completed_steps)
         seen.append((count, completed_steps, points.detach().clone()))
         return points
 
-    monkeypatch.setattr(vector_tasks, "sample_target", capture)
+    monkeypatch.setattr(tanh_point_mass, "sample_target", capture)
     running = deepcopy(original)
     running["execution"]["steps"] = 1
     raw = adapters.run_task(request(running), {"task_id": running["id"]}, tmp_path, "cpu")
@@ -445,7 +451,7 @@ def test_zero_tanh_smoke_card_runs_through_transfer_vector_and_sample_target(tmp
     definition = raw["evidence"]["host"]["definition"]
     assert definition == host and "kind" not in definition
     models = raw["evidence"]["host"]["models"]
-    assert models["generator"]["class"].endswith(TanhPointMassGenerator.__name__)
+    assert models["generator"]["class"].endswith(tanh_point_mass.TanhPointMassGenerator.__name__)
     assert models["generator"]["parameter_shapes"]["net.0.weight"] == [host["hidden"], host["z_dim"]]
     assert models["generator"]["parameter_shapes"]["net.2.weight"] == [2, host["hidden"]]
     assert "net.4.weight" not in models["generator"]["parameter_shapes"]

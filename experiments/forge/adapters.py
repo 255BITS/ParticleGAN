@@ -477,6 +477,12 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
             raise CapabilityError([f"unsupported vector sample evaluator: {scorer}"])
     from .vectorprofiles import build_vector_models, resolve_vector_spec
     spec = resolve_vector_spec(task)
+    # The frozen vector law has no tanh branch. Only the published origin
+    # smoke card is redirected; every other host keeps the import above.
+    if scorer is None:
+        from .tanh_point_mass import accepts_origin_smoke
+        if accepts_origin_smoke(task, spec):
+            from .tanh_point_mass import sample_target, score_samples
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)

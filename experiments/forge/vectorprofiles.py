@@ -13,8 +13,6 @@ import hashlib
 import json
 from pathlib import Path
 
-import torch.nn as nn
-
 from .contracts import canonical, identifier
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -119,32 +117,6 @@ def is_tanh_point_mass_host(spec) -> bool:
     return set(spec) - TANH_HOST_RUNTIME_FIELDS == TANH_HOST_FIELDS
 
 
-class TanhPointMassGenerator(nn.Module):
-    """MLP whose range is tanh, for the declared origin point-mass host.
-
-    ``layers`` counts Linear maps. The zero_tanh_smoke card's ``layers: 2`` is
-    Linear(z, hidden), LeakyReLU(0.2), Linear(hidden, 2), Tanh. That is the
-    2-layer tanh head, not an extra hidden block on top of SimpleMLPGenerator.
-    """
-
-    def __init__(self, z_dim: int, hidden: int, layers: int, out_dim: int = 2) -> None:
-        super().__init__()
-        if type(layers) is not int or layers < 1:
-            raise ValueError("tanh host layers must be a positive integer")
-        blocks = []
-        in_dim = z_dim
-        for _ in range(layers - 1):
-            blocks.append(nn.Linear(in_dim, hidden))
-            blocks.append(nn.LeakyReLU(0.2, inplace=False))
-            in_dim = hidden
-        blocks.append(nn.Linear(in_dim, out_dim))
-        blocks.append(nn.Tanh())
-        self.net = nn.Sequential(*blocks)
-
-    def forward(self, z):
-        return self.net(z)
-
-
 def _validate_spec(spec):
     if _declared_tanh_host(spec):
         for key in ("hidden", "layers", "z_dim", "particles", "batch", "steps", "fourier"):
@@ -239,6 +211,7 @@ def build_vector_models(context, spec: dict):
     from benchmarks.transfer_suite.public_default_verification import vector_discriminator
     if _declared_tanh_host(spec):
         # Point mass in R^2. This card has no kind and no means.
+        from .tanh_point_mass import TanhPointMassGenerator
         dimension = 2
         generator = context.construct(lambda: TanhPointMassGenerator(
             context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
