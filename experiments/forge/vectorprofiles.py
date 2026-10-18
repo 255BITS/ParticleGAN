@@ -13,6 +13,8 @@ import hashlib
 import json
 from pathlib import Path
 
+import torch.nn as nn
+
 from .contracts import canonical, identifier
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -39,6 +41,9 @@ OPTIONAL_FIELDS = frozenset({"d_hidden", "d_layers", "research_discriminator"})
 # output_activation is part of that card; it is not a gaussian_mixture or spiral
 # profile and must not be rewritten into one.
 TANH_HOST_FIELDS = frozenset({"hidden", "layers", "fourier", "z_dim", "particles", "batch", "steps", "output_activation"})
+# The adapter attaches gate thresholds after the card is validated. They are not
+# part of the host declaration and must not be required to recognize the card.
+TANH_HOST_RUNTIME_FIELDS = frozenset({"thresholds"})
 CRITIC_FIELDS = {
     "shared_batch_feature_v1": frozenset({"name", "implementation", "width", "layers", "fourier",
         "trunk_normalization", "softplus_beta", "feature", "placement", "kernel_scales", "eps",
@@ -101,6 +106,43 @@ def _published_architecture(task, root):
 
 def _declared_tanh_host(spec):
     return isinstance(spec, dict) and spec.get("output_activation") == "tanh" and set(spec) == TANH_HOST_FIELDS
+
+
+def is_tanh_point_mass_host(spec) -> bool:
+    """Origin point-mass tanh card, including keys attached only for scoring.
+
+    The card has ``output_activation: tanh`` and no ``kind``. Gaussian and
+    spiral hosts keep ``kind`` and are not rewritten into this law.
+    """
+    if not isinstance(spec, dict) or spec.get("output_activation") != "tanh" or "kind" in spec:
+        return False
+    return set(spec) - TANH_HOST_RUNTIME_FIELDS == TANH_HOST_FIELDS
+
+
+class TanhPointMassGenerator(nn.Module):
+    """MLP whose range is tanh, for the declared origin point-mass host.
+
+    ``layers`` counts Linear maps. The zero_tanh_smoke card's ``layers: 2`` is
+    Linear(z, hidden), LeakyReLU(0.2), Linear(hidden, 2), Tanh. That is the
+    2-layer tanh head, not an extra hidden block on top of SimpleMLPGenerator.
+    """
+
+    def __init__(self, z_dim: int, hidden: int, layers: int, out_dim: int = 2) -> None:
+        super().__init__()
+        if type(layers) is not int or layers < 1:
+            raise ValueError("tanh host layers must be a positive integer")
+        blocks = []
+        in_dim = z_dim
+        for _ in range(layers - 1):
+            blocks.append(nn.Linear(in_dim, hidden))
+            blocks.append(nn.LeakyReLU(0.2, inplace=False))
+            in_dim = hidden
+        blocks.append(nn.Linear(in_dim, out_dim))
+        blocks.append(nn.Tanh())
+        self.net = nn.Sequential(*blocks)
+
+    def forward(self, z):
+        return self.net(z)
 
 
 def _validate_spec(spec):
@@ -195,9 +237,15 @@ def build_vector_models(context, spec: dict):
         raise ValueError("vector latent dimension differs from its formulation context")
     from lib.toy_models import SimpleMLPGenerator
     from benchmarks.transfer_suite.public_default_verification import vector_discriminator
-    dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
-    generator = context.construct(lambda: SimpleMLPGenerator(
-        context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
+    if _declared_tanh_host(spec):
+        # Point mass in R^2. This card has no kind and no means.
+        dimension = 2
+        generator = context.construct(lambda: TanhPointMassGenerator(
+            context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
+    else:
+        dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
+        generator = context.construct(lambda: SimpleMLPGenerator(
+            context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
     if dimension == 1:
         from lib.toy_models import SimpleMLPDiscriminator
         discriminator = context.construct(lambda: SimpleMLPDiscriminator(

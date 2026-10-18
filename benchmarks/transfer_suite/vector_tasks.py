@@ -164,8 +164,16 @@ def target_scale(spec, completed_steps):
     return start+(end-start)*progress
 
 
+def _tanh_point_mass_host(spec):
+    from experiments.forge.vectorprofiles import is_tanh_point_mass_host
+    return is_tanh_point_mass_host(spec)
+
+
 def sample_target(spec, count, rng, completed_steps):
     """Only explicit generators are used; target draws cannot touch training RNGs."""
+    if _tanh_point_mass_host(spec):
+        # Declared origin Dirac. No noise draw, so the training RNG is untouched.
+        return torch.zeros(count, 2)
     kind = spec["kind"]
     if kind == "gaussian_mixture":
         means = torch.tensor(spec["means"], dtype=torch.float32)
@@ -188,8 +196,31 @@ def sample_target(spec, count, rng, completed_steps):
     return points*target_scale(spec, completed_steps)
 
 
+def _score_tanh_point_mass(fake, spec, completed_steps):
+    """Same four gates as the zero_tanh_smoke card: error against the origin Dirac.
+
+    Saturation is the fraction of coordinates on the tanh rail (|y| >= 0.99).
+    Non-finite or wrong-shaped draws leave the gates unset instead of inventing
+    a finite error.
+    """
+    names = ("mean_abs_error", "rms_error", "p99_abs_error", "saturated_fraction")
+    if (not torch.is_tensor(fake) or fake.ndim != 2 or fake.shape[1] != 2 or len(fake) == 0
+            or not torch.isfinite(fake).all()):
+        return {name: None for name in names}
+    center = sample_target(spec, len(fake), torch.Generator().manual_seed(991), completed_steps)
+    error = fake - center
+    absolute = error.abs()
+    return {"mean_abs_error": float(absolute.mean()),
+            "rms_error": float(error.square().mean().sqrt()),
+            "p99_abs_error": float(torch.quantile(absolute.reshape(-1), 0.99)),
+            "saturated_fraction": float((fake.abs() >= 0.99).float().mean()),
+            "sample_count": int(len(fake))}
+
+
 @torch.no_grad()
 def score_samples(fake, spec, completed_steps):
+    if _tanh_point_mass_host(spec):
+        return _score_tanh_point_mass(fake, spec, completed_steps)
     if not torch.isfinite(fake).all():
         return {key: None for key, _, _ in spec["thresholds"]}
     real = sample_target(spec, len(fake), torch.Generator().manual_seed(991), completed_steps)

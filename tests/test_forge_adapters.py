@@ -392,3 +392,64 @@ def test_behavior_dispatch_uses_the_shared_component_adapter(tmp_path, monkeypat
     behavior.run_behavior = lambda req, selected, output, device: sentinel
     monkeypatch.setitem(sys.modules, behavior.__name__, behavior)
     assert adapters.run_task(request(value), {"task_id": value["id"]}, tmp_path, "cpu") is sentinel
+
+
+def test_zero_tanh_smoke_card_runs_through_transfer_vector_and_sample_target(tmp_path, monkeypatch):
+    """Execute the published origin point-mass card, not a rewritten mixture.
+
+    edaf273 admits the card in ``_validate_spec`` and then raises KeyError('kind')
+    in ``build_vector_models`` and ``sample_target``. One real update is enough
+    to take both paths and the point-mass scorer; the 1000-update budget stays
+    on the card.
+    """
+    import math
+    from benchmarks.transfer_suite import vector_tasks
+    from experiments.forge.vectorprofiles import TanhPointMassGenerator, resolve_vector_spec
+    from lib.toy_models import SimpleMLPDiscriminator
+
+    original = json.loads((ROOT / "configs/forge/tasks/zero_tanh_smoke.json").read_text())
+    assert original["adapter"] == "transfer_vector"
+    assert original["execution"]["steps"] == 1000
+    host = original["execution"]["host_definition"]
+    assert host["output_activation"] == "tanh" and "kind" not in host
+    spec = resolve_vector_spec(original)
+    assert spec == host
+    batch = host["batch"]
+    origin = vector_tasks.sample_target(spec, batch, torch.Generator().manual_seed(0), 0)
+    assert origin.shape == (batch, 2) and torch.equal(origin, torch.zeros_like(origin))
+    perfect = vector_tasks.score_samples(torch.zeros(16, 2), spec, 0)
+    assert perfect["mean_abs_error"] == 0.0 and perfect["rms_error"] == 0.0
+    assert perfect["p99_abs_error"] == 0.0 and perfect["saturated_fraction"] == 0.0
+    saturated = vector_tasks.score_samples(torch.full((16, 2), 0.995), spec, 0)
+    assert saturated["saturated_fraction"] == 1.0
+    assert saturated["mean_abs_error"] > 0.005
+
+    seen = []
+    draw = vector_tasks.sample_target
+
+    def capture(card, count, rng, completed_steps):
+        points = draw(card, count, rng, completed_steps)
+        seen.append((count, completed_steps, points.detach().clone()))
+        return points
+
+    monkeypatch.setattr(vector_tasks, "sample_target", capture)
+    running = deepcopy(original)
+    running["execution"]["steps"] = 1
+    raw = adapters.run_task(request(running), {"task_id": running["id"]}, tmp_path, "cpu")
+    assert {(count, step) for count, step, _ in seen} == {(batch, 0), (4096, 1)}
+    assert all(torch.equal(points, torch.zeros_like(points)) and points.shape[1] == 2 for _, _, points in seen)
+    row = raw["evidence"]["live"]
+    for name in ("mean_abs_error", "rms_error", "p99_abs_error", "saturated_fraction"):
+        value = row[name]
+        assert type(value) is float and math.isfinite(value)
+    definition = raw["evidence"]["host"]["definition"]
+    assert definition == host and "kind" not in definition
+    models = raw["evidence"]["host"]["models"]
+    assert models["generator"]["class"].endswith(TanhPointMassGenerator.__name__)
+    assert models["generator"]["parameter_shapes"]["net.0.weight"] == [host["hidden"], host["z_dim"]]
+    assert models["generator"]["parameter_shapes"]["net.2.weight"] == [2, host["hidden"]]
+    assert "net.4.weight" not in models["generator"]["parameter_shapes"]
+    assert models["discriminator"]["class"].endswith(SimpleMLPDiscriminator.__name__)
+    archived = torch.load(tmp_path / "observed-samples.pt", weights_only=False)
+    samples = archived[0]["samples"]
+    assert samples.shape == (4096, 2) and torch.isfinite(samples).all() and torch.all(samples.abs() < 1)
