@@ -1,0 +1,4203 @@
+{
+  "baseline": "bispf-optimized-quintic-v1",
+  "cap_seconds": 3480,
+  "cases": [
+    {
+      "batch_size": 64,
+      "default_recipe": "bispf-optimized-quintic-v1",
+      "default_steps": 5000,
+      "encoder_mode": "ae",
+      "eval_samples": 2048,
+      "evaluation_observations": 24,
+      "forge_thresholds": [
+        [
+          "final_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "final_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "final_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "final_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t1_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t1_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t1_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t1_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t1_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t1_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t1_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t1_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t2_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t2_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t2_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t2_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t2_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t2_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t2_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t2_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t3_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t3_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t3_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t3_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t3_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t3_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t3_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t3_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t4_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t4_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t4_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t4_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t4_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t4_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t4_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t4_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "panel_count",
+          "==",
+          8
+        ],
+        [
+          "samples_per_panel",
+          ">=",
+          2048
+        ],
+        [
+          "final_hq",
+          ">=",
+          0.95
+        ],
+        [
+          "final_mode_mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "final_local_mean_sigma",
+          "<=",
+          0.5
+        ],
+        [
+          "final_local_covariance_min",
+          ">=",
+          0.5
+        ],
+        [
+          "final_local_covariance_max",
+          "<=",
+          1.5
+        ],
+        [
+          "paired_nmse",
+          "<=",
+          0.1
+        ],
+        [
+          "paired_worst_axis_nrmse",
+          "<=",
+          0.25
+        ],
+        [
+          "paired_shuffled_gain",
+          ">=",
+          3.0
+        ],
+        [
+          "paired_reverse_steps",
+          "==",
+          4
+        ]
+      ],
+      "goal": "Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality",
+      "id": "api-model-ae-ddgan-bimodal-chain",
+      "kind": "ae_ddgan_chain",
+      "legacy_ids": [
+        "ae_ddgan-public-composition",
+        "denoising-toy-full-chain",
+        "api-model-ae-ddgan-bimodal-chain"
+      ],
+      "provider": "api_model_ae_ddgan",
+      "sampling": "Public DDGAN [1,.9,.5,.05,.0001]; N(0,I) terminal start; fresh independent learned-MoG latent/kernel noise and Gaussian reverse noise at EVERY step; eight heldout time/observation transition panels; separate paired cohort: encode held-out clean input once, hold its deterministic AE code through all four reverse steps from independent N(0,I), fresh Gaussian reverse noise each step; shuffled-code control shares identical start and reverse noise",
+      "scope": "New scoped public ae_ddgan composition: same analytic target, schedule, G/D architecture and prior as the DDGAN task, plus a learned 2x32 encoder. Clean paired reconstruction and independent-prior generation are separate cohorts. Historical denoising results retain their identities.",
+      "target": "bimodal",
+      "terminal_observations": 5,
+      "thresholds": {
+        "conditional_and_final": {
+          "covariance_eigen_max": 1.4,
+          "covariance_eigen_min": 0.65,
+          "normalized_mean_max": 0.25,
+          "projection_cdf_max": 0.12
+        },
+        "final_hq_min": 0.95,
+        "final_mode_mass_tv_max": 0.1,
+        "local_covariance_eigenvalues": [
+          0.5,
+          1.5
+        ],
+        "local_mean_sigma_max": 0.5,
+        "paired": [
+          [
+            "paired_nmse",
+            "<=",
+            0.1
+          ],
+          [
+            "paired_worst_axis_nrmse",
+            "<=",
+            0.25
+          ],
+          [
+            "paired_shuffled_gain",
+            ">=",
+            3.0
+          ],
+          [
+            "paired_reverse_steps",
+            "==",
+            4
+          ]
+        ]
+      },
+      "tier": 2,
+      "title": "AE-DDGAN bimodal paired reconstruction and independent chain"
+    },
+    {
+      "batch_size": 64,
+      "default_recipe": "bispf-optimized-quintic-v1",
+      "default_steps": 2500,
+      "encoder_mode": "ae",
+      "eval_samples": 2048,
+      "evaluation_observations": 24,
+      "forge_thresholds": [
+        [
+          "final_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "final_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "final_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "final_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t1_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t1_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t1_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t1_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t1_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t1_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t1_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t1_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t2_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t2_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t2_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t2_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t2_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t2_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t2_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t2_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t3_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t3_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t3_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t3_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t3_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t3_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t3_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t3_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t4_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t4_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t4_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t4_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t4_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t4_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t4_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t4_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "panel_count",
+          "==",
+          8
+        ],
+        [
+          "samples_per_panel",
+          ">=",
+          2048
+        ],
+        [
+          "paired_nmse",
+          "<=",
+          0.1
+        ],
+        [
+          "paired_worst_axis_nrmse",
+          "<=",
+          0.25
+        ],
+        [
+          "paired_shuffled_gain",
+          ">=",
+          3.0
+        ],
+        [
+          "paired_reverse_steps",
+          "==",
+          4
+        ]
+      ],
+      "goal": "Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality",
+      "id": "api-model-ae-ddgan-gaussian-chain",
+      "kind": "ae_ddgan_chain",
+      "legacy_ids": [
+        "ae_ddgan-public-composition",
+        "denoising-toy-full-chain",
+        "api-model-ae-ddgan-gaussian-chain"
+      ],
+      "provider": "api_model_ae_ddgan",
+      "sampling": "Public DDGAN [1,.9,.5,.05,.0001]; N(0,I) terminal start; fresh independent learned-MoG latent/kernel noise and Gaussian reverse noise at EVERY step; eight heldout time/observation transition panels; separate paired cohort: encode held-out clean input once, hold its deterministic AE code through all four reverse steps from independent N(0,I), fresh Gaussian reverse noise each step; shuffled-code control shares identical start and reverse noise",
+      "scope": "New scoped public ae_ddgan composition: same analytic target, schedule, G/D architecture and prior as the DDGAN task, plus a learned 2x32 encoder. Clean paired reconstruction and independent-prior generation are separate cohorts. Historical denoising results retain their identities.",
+      "target": "gaussian",
+      "terminal_observations": 5,
+      "thresholds": {
+        "conditional_and_final": {
+          "covariance_eigen_max": 1.4,
+          "covariance_eigen_min": 0.65,
+          "normalized_mean_max": 0.25,
+          "projection_cdf_max": 0.12
+        },
+        "paired": [
+          [
+            "paired_nmse",
+            "<=",
+            0.1
+          ],
+          [
+            "paired_worst_axis_nrmse",
+            "<=",
+            0.25
+          ],
+          [
+            "paired_shuffled_gain",
+            ">=",
+            3.0
+          ],
+          [
+            "paired_reverse_steps",
+            "==",
+            4
+          ]
+        ]
+      },
+      "tier": 1,
+      "title": "AE-DDGAN gaussian paired reconstruction and independent chain"
+    },
+    {
+      "adaptation": "New four-mode target, deterministic public initializer, 1200 updates and strict shape/mass gates; preserves the historical two-anchor 250-update source and api-ae-anchor-hold identities.",
+      "batch_size": 128,
+      "default_recipe": "bispf-optimized-quintic-v1",
+      "default_steps": 1200,
+      "eval_samples": 4096,
+      "evaluation_observations": 24,
+      "forge_thresholds": [
+        [
+          "reconstruction_mse",
+          "<=",
+          0.025
+        ],
+        [
+          "reconstruction_mode_agreement",
+          ">=",
+          0.98
+        ],
+        [
+          "modes",
+          ">=",
+          4
+        ],
+        [
+          "precision",
+          ">=",
+          0.9
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.1
+        ],
+        [
+          "component_max_eigen_ratio",
+          "<=",
+          4.0
+        ],
+        [
+          "component_center_rms_sigma",
+          "<=",
+          1.0
+        ]
+      ],
+      "goal": "Reconstruct four equally weighted noisy corner Gaussians and independently generate their modes, masses and within-mode shapes.",
+      "host_definition": {
+        "adversarial": true,
+        "batch_size": 128,
+        "case_id": "api-model-ae-gan-multimodal",
+        "fourier": 2,
+        "hidden": 64,
+        "init_std": 0.5,
+        "layers": 2,
+        "num_particles": 64,
+        "provider": "benchmarks.toy_audit.api_model_ae",
+        "recipe_fields": {
+          "conditioning": "scalar",
+          "encoder_mode": "ae",
+          "model": "gan",
+          "reconstruction_weight": 1.0
+        },
+        "resources": {
+          "batch_size": 128,
+          "num_particles": 64,
+          "z_dim": 2
+        },
+        "target": {
+          "kind": "gaussian_mixture",
+          "masses": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "means": [
+            [
+              -1.0,
+              -1.0
+            ],
+            [
+              -1.0,
+              1.0
+            ],
+            [
+              1.0,
+              -1.0
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ],
+          "sigma": 0.08
+        },
+        "z_dim": 2
+      },
+      "id": "api-model-ae-gan-multimodal",
+      "initialization": "particlegan.init.deterministic_orthogonal_: G seed0, D seed1, E seed2, prior seed3 R2Normal(init_std=.5); seeds denote isolated components within protocol seed0.",
+      "kind": "vector",
+      "legacy_ids": [
+        "develop-ae_gan_hold",
+        "api-ae-anchor-hold",
+        "api-model-ae-gan-multimodal"
+      ],
+      "protocol_seed": 0,
+      "provider": "api_model_ae",
+      "sampling": "Clean live G(MoG): 64 uniform learned locations in R2, fixed sigma=.025, standardize=False. Reconstruction uses deterministic public AE routing and bounded local offsets; no output noise, EMA or best-checkpoint selection.",
+      "scope": "Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Reconstruction and all prior gates must pass together.",
+      "task_sha256": "2acb31f6444a86769333b0cd2cff1906bce8ed992c17688e64733080faf32382",
+      "terminal_observations": 5,
+      "thresholds": [
+        [
+          "reconstruction_mse",
+          "<=",
+          0.025
+        ],
+        [
+          "reconstruction_mode_agreement",
+          ">=",
+          0.98
+        ],
+        [
+          "modes",
+          ">=",
+          4
+        ],
+        [
+          "precision",
+          ">=",
+          0.9
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.1
+        ],
+        [
+          "component_max_eigen_ratio",
+          "<=",
+          4.0
+        ],
+        [
+          "component_center_rms_sigma",
+          "<=",
+          1.0
+        ]
+      ],
+      "title": "Particle AE: multimodal reconstruction and prior generation",
+      "trainer_configuration": "configs/forge/ideas/bispf-optimized-quintic-v1.json"
+    },
+    {
+      "adaptation": "New four-mode target, deterministic public initializer, 1200 updates and strict shape/mass gates; preserves the historical two-anchor 250-update source and api-ae-anchor-hold identities.",
+      "batch_size": 128,
+      "default_recipe": "bispf-optimized-quintic-v1",
+      "default_steps": 1200,
+      "eval_samples": 4096,
+      "evaluation_observations": 24,
+      "forge_thresholds": [
+        [
+          "reconstruction_mse",
+          "<=",
+          0.025
+        ],
+        [
+          "reconstruction_mode_agreement",
+          ">=",
+          0.98
+        ]
+      ],
+      "goal": "Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control.",
+      "host_definition": {
+        "adversarial": false,
+        "batch_size": 128,
+        "case_id": "api-model-ae-reconstruction",
+        "fourier": 2,
+        "hidden": 64,
+        "init_std": 0.5,
+        "layers": 2,
+        "num_particles": 64,
+        "provider": "benchmarks.toy_audit.api_model_ae",
+        "recipe_fields": {
+          "conditioning": "scalar",
+          "encoder_mode": "ae",
+          "model": "gan",
+          "reconstruction_weight": 1.0
+        },
+        "resources": {
+          "batch_size": 128,
+          "num_particles": 64,
+          "z_dim": 2
+        },
+        "target": {
+          "kind": "gaussian_mixture",
+          "masses": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "means": [
+            [
+              -1.0,
+              -1.0
+            ],
+            [
+              -1.0,
+              1.0
+            ],
+            [
+              1.0,
+              -1.0
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ],
+          "sigma": 0.08
+        },
+        "z_dim": 2
+      },
+      "id": "api-model-ae-reconstruction",
+      "initialization": "particlegan.init.deterministic_orthogonal_: G seed0, D seed1, E seed2, prior seed3 R2Normal(init_std=.5); seeds denote isolated components within protocol seed0.",
+      "kind": "vector",
+      "legacy_ids": [
+        "develop-ae_gan_hold",
+        "api-ae-anchor-hold",
+        "api-model-ae-reconstruction"
+      ],
+      "protocol_seed": 0,
+      "provider": "api_model_ae",
+      "sampling": "Clean live G(MoG): 64 uniform learned locations in R2, fixed sigma=.025, standardize=False. Reconstruction uses deterministic public AE routing and bounded local offsets; no output noise, EMA or best-checkpoint selection.",
+      "scope": "Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required.",
+      "task_sha256": "4ead437cbc6c345b2c7f0bf4ba2781a0fda8bee17ca0e24f0a8ca7d1f828eae0",
+      "terminal_observations": 5,
+      "thresholds": [
+        [
+          "reconstruction_mse",
+          "<=",
+          0.025
+        ],
+        [
+          "reconstruction_mode_agreement",
+          ">=",
+          0.98
+        ]
+      ],
+      "title": "Particle AE: reconstruction control",
+      "trainer_configuration": "configs/forge/ideas/bispf-optimized-quintic-v1.json"
+    },
+    {
+      "batch_size": 64,
+      "default_recipe": "bispf-optimized-quintic-v1",
+      "default_steps": 5000,
+      "eval_samples": 2048,
+      "evaluation_observations": 24,
+      "forge_thresholds": [
+        [
+          "final_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "final_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "final_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "final_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t1_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t1_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t1_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t1_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t1_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t1_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t1_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t1_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t2_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t2_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t2_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t2_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t2_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t2_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t2_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t2_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t3_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t3_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t3_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t3_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t3_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t3_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t3_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t3_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t4_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t4_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t4_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t4_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t4_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t4_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t4_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t4_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "panel_count",
+          "==",
+          8
+        ],
+        [
+          "samples_per_panel",
+          ">=",
+          2048
+        ],
+        [
+          "final_hq",
+          ">=",
+          0.95
+        ],
+        [
+          "final_mode_mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "final_local_mean_sigma",
+          "<=",
+          0.5
+        ],
+        [
+          "final_local_covariance_min",
+          ">=",
+          0.5
+        ],
+        [
+          "final_local_covariance_max",
+          "<=",
+          1.5
+        ]
+      ],
+      "goal": "Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API",
+      "id": "api-model-ddgan-bimodal-chain",
+      "kind": "ddgan_chain",
+      "legacy_ids": [
+        "denoising-toy-full-chain",
+        "api-model-ddgan-bimodal-chain"
+      ],
+      "provider": "api_model_ddgan",
+      "sampling": "Public DDGAN [1,.9,.5,.05,.0001]; N(0,I) terminal start; fresh independent learned-MoG latent/kernel noise and Gaussian reverse noise at EVERY step; eight heldout time/observation transition panels",
+      "scope": "New small analytic bimodal target, 2x32 MLPs and clean live serving. Actual forward-pair transition training and four-step reverse sampling; no historical 100-Gaussian or direct-posterior qualification.",
+      "target": "bimodal",
+      "terminal_observations": 5,
+      "thresholds": {
+        "conditional_and_final": {
+          "covariance_eigen_max": 1.4,
+          "covariance_eigen_min": 0.65,
+          "normalized_mean_max": 0.25,
+          "projection_cdf_max": 0.12
+        },
+        "final_hq_min": 0.95,
+        "final_mode_mass_tv_max": 0.1,
+        "local_covariance_eigenvalues": [
+          0.5,
+          1.5
+        ],
+        "local_mean_sigma_max": 0.5
+      },
+      "tier": 2,
+      "title": "DDGAN bimodal transitions and four-step chain"
+    },
+    {
+      "batch_size": 64,
+      "default_recipe": "bispf-optimized-quintic-v1",
+      "default_steps": 2500,
+      "eval_samples": 2048,
+      "evaluation_observations": 24,
+      "forge_thresholds": [
+        [
+          "final_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "final_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "final_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "final_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t1_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t1_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t1_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t1_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t1_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t1_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t1_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t1_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t2_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t2_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t2_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t2_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t2_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t2_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t2_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t2_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t3_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t3_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t3_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t3_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t3_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t3_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t3_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t3_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t4_q0_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t4_q0_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t4_q0_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t4_q0_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "t4_q1_projection_cdf",
+          "<=",
+          0.12
+        ],
+        [
+          "t4_q1_normalized_mean",
+          "<=",
+          0.25
+        ],
+        [
+          "t4_q1_covariance_eigen_min",
+          ">=",
+          0.65
+        ],
+        [
+          "t4_q1_covariance_eigen_max",
+          "<=",
+          1.4
+        ],
+        [
+          "panel_count",
+          "==",
+          8
+        ],
+        [
+          "samples_per_panel",
+          ">=",
+          2048
+        ]
+      ],
+      "goal": "Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API",
+      "id": "api-model-ddgan-gaussian-chain",
+      "kind": "ddgan_chain",
+      "legacy_ids": [
+        "denoising-toy-full-chain",
+        "api-model-ddgan-gaussian-chain"
+      ],
+      "provider": "api_model_ddgan",
+      "sampling": "Public DDGAN [1,.9,.5,.05,.0001]; N(0,I) terminal start; fresh independent learned-MoG latent/kernel noise and Gaussian reverse noise at EVERY step; eight heldout time/observation transition panels",
+      "scope": "New small analytic gaussian target, 2x32 MLPs and clean live serving. Actual forward-pair transition training and four-step reverse sampling; no historical 100-Gaussian or direct-posterior qualification.",
+      "target": "gaussian",
+      "terminal_observations": 5,
+      "thresholds": {
+        "conditional_and_final": {
+          "covariance_eigen_max": 1.4,
+          "covariance_eigen_min": 0.65,
+          "normalized_mean_max": 0.25,
+          "projection_cdf_max": 0.12
+        }
+      },
+      "tier": 1,
+      "title": "DDGAN gaussian transitions and four-step chain"
+    },
+    {
+      "architecture": {
+        "activation": "LeakyReLU(.2)",
+        "critic": [
+          2,
+          32,
+          1
+        ],
+        "decoder": [
+          2,
+          32,
+          2
+        ],
+        "encoder": [
+          2,
+          32,
+          2
+        ]
+      },
+      "batch_size": 64,
+      "default_recipe": "bispf-optimized-quintic-v1",
+      "default_steps": 1200,
+      "encoder_mode": "categorical",
+      "eval_samples": 4096,
+      "evaluation_observations": 24,
+      "forge_thresholds": [
+        [
+          "reconstruction_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "shuffle_reconstruction_ratio",
+          ">=",
+          5.0
+        ],
+        [
+          "posterior_mutual_information",
+          ">=",
+          0.3
+        ],
+        [
+          "posterior_noise_variance_ratio",
+          ">=",
+          0.8
+        ],
+        [
+          "posterior_noise_variance_ratio",
+          "<=",
+          1.2
+        ],
+        [
+          "kl_identity_error",
+          "<=",
+          1e-05
+        ],
+        [
+          "elbo_identity_error",
+          "<=",
+          0.0001
+        ],
+        [
+          "decoder_mean_hq",
+          ">=",
+          0.85
+        ],
+        [
+          "decoder_mean_mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "decoder_mean_modes",
+          ">=",
+          2
+        ],
+        [
+          "likelihood_hq",
+          ">=",
+          0.85
+        ],
+        [
+          "likelihood_mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "likelihood_modes",
+          ">=",
+          2
+        ]
+      ],
+      "goal": "Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes?",
+      "id": "api-model-vae-categorical",
+      "initialization": "particlegan.init.deterministic_orthogonal_: E seed0, G seed1, D seed2, prior R2 seed3; isolated constructor scope seed0",
+      "kind": "vector",
+      "legacy_ids": [
+        "mog-vae-scout",
+        "mog-vae-stability",
+        "api-model-vae-categorical"
+      ],
+      "prior": {
+        "kind": "mog",
+        "num_particles": 16,
+        "sigma": 0.025,
+        "standardize": false,
+        "z_dim": 2
+      },
+      "protocol_seed": 0,
+      "provider": "api_model_vae",
+      "sampling": "Independent uniform learned MoG prior with fixed latent sigma=.025; live decoder means and separate Gaussian likelihood draws G(z)+.03*epsilon. Reconstructions use eight posterior draws with prior-matching local Gaussian noise.",
+      "scope": "New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE.",
+      "target": {
+        "anchors": [
+          [
+            -1.5,
+            0.0
+          ],
+          [
+            1.5,
+            0.0
+          ]
+        ],
+        "sigma": 0.05,
+        "weights": [
+          0.5,
+          0.5
+        ]
+      },
+      "terminal_observations": 5,
+      "thresholds": [
+        [
+          "reconstruction_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "shuffle_reconstruction_ratio",
+          ">=",
+          5.0
+        ],
+        [
+          "posterior_mutual_information",
+          ">=",
+          0.3
+        ],
+        [
+          "posterior_noise_variance_ratio",
+          ">=",
+          0.8
+        ],
+        [
+          "posterior_noise_variance_ratio",
+          "<=",
+          1.2
+        ],
+        [
+          "kl_identity_error",
+          "<=",
+          1e-05
+        ],
+        [
+          "elbo_identity_error",
+          "<=",
+          0.0001
+        ],
+        [
+          "decoder_mean_hq",
+          ">=",
+          0.85
+        ],
+        [
+          "decoder_mean_mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "decoder_mean_modes",
+          ">=",
+          2
+        ],
+        [
+          "likelihood_hq",
+          ">=",
+          0.85
+        ],
+        [
+          "likelihood_mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "likelihood_modes",
+          ">=",
+          2
+        ]
+      ],
+      "title": "Categorical particle VAE: two noisy anchors"
+    },
+    {
+      "architecture": {
+        "activation": "LeakyReLU(.2)",
+        "critic": [
+          2,
+          32,
+          1
+        ],
+        "decoder": [
+          2,
+          32,
+          2
+        ],
+        "encoder": [
+          2,
+          32,
+          2
+        ]
+      },
+      "batch_size": 64,
+      "default_recipe": "bispf-optimized-quintic-v1",
+      "default_steps": 1200,
+      "encoder_mode": "hard",
+      "eval_samples": 4096,
+      "evaluation_observations": 24,
+      "forge_thresholds": [
+        [
+          "reconstruction_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "shuffle_reconstruction_ratio",
+          ">=",
+          5.0
+        ],
+        [
+          "posterior_mutual_information",
+          ">=",
+          0.3
+        ],
+        [
+          "posterior_noise_variance_ratio",
+          ">=",
+          0.8
+        ],
+        [
+          "posterior_noise_variance_ratio",
+          "<=",
+          1.2
+        ],
+        [
+          "kl_identity_error",
+          "<=",
+          1e-05
+        ],
+        [
+          "elbo_identity_error",
+          "<=",
+          0.0001
+        ],
+        [
+          "decoder_mean_hq",
+          ">=",
+          0.85
+        ],
+        [
+          "decoder_mean_mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "decoder_mean_modes",
+          ">=",
+          2
+        ],
+        [
+          "likelihood_hq",
+          ">=",
+          0.85
+        ],
+        [
+          "likelihood_mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "likelihood_modes",
+          ">=",
+          2
+        ]
+      ],
+      "goal": "Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes?",
+      "id": "api-model-vae-hard",
+      "initialization": "particlegan.init.deterministic_orthogonal_: E seed0, G seed1, D seed2, prior R2 seed3; isolated constructor scope seed0",
+      "kind": "vector",
+      "legacy_ids": [
+        "mog-vae-scout",
+        "mog-vae-stability",
+        "api-model-vae-hard"
+      ],
+      "prior": {
+        "kind": "mog",
+        "num_particles": 16,
+        "sigma": 0.025,
+        "standardize": false,
+        "z_dim": 2
+      },
+      "protocol_seed": 0,
+      "provider": "api_model_vae",
+      "sampling": "Independent uniform learned MoG prior with fixed latent sigma=.025; live decoder means and separate Gaussian likelihood draws G(z)+.03*epsilon. Reconstructions use eight posterior draws with prior-matching local Gaussian noise.",
+      "scope": "New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE.",
+      "target": {
+        "anchors": [
+          [
+            -1.5,
+            0.0
+          ],
+          [
+            1.5,
+            0.0
+          ]
+        ],
+        "sigma": 0.05,
+        "weights": [
+          0.5,
+          0.5
+        ]
+      },
+      "terminal_observations": 5,
+      "thresholds": [
+        [
+          "reconstruction_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "shuffle_reconstruction_ratio",
+          ">=",
+          5.0
+        ],
+        [
+          "posterior_mutual_information",
+          ">=",
+          0.3
+        ],
+        [
+          "posterior_noise_variance_ratio",
+          ">=",
+          0.8
+        ],
+        [
+          "posterior_noise_variance_ratio",
+          "<=",
+          1.2
+        ],
+        [
+          "kl_identity_error",
+          "<=",
+          1e-05
+        ],
+        [
+          "elbo_identity_error",
+          "<=",
+          0.0001
+        ],
+        [
+          "decoder_mean_hq",
+          ">=",
+          0.85
+        ],
+        [
+          "decoder_mean_mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "decoder_mean_modes",
+          ">=",
+          2
+        ],
+        [
+          "likelihood_hq",
+          ">=",
+          0.85
+        ],
+        [
+          "likelihood_mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "likelihood_modes",
+          ">=",
+          2
+        ]
+      ],
+      "title": "Hard particle VAE: two noisy anchors"
+    }
+  ],
+  "no_cross_cohort_pooling": true,
+  "paid_cpu_seconds": 78.52839434202178,
+  "protocol_sha256": "f7931ad2921c0f1632a319b6b45a7baea9a90ed6c8da5d90eee14c34a8912d0d",
+  "qualification_input": false,
+  "readouts": [
+    {
+      "completed_updates": 3,
+      "default_updates": 5000,
+      "execution_status": "SOFTWARE_PREFIX_ONLY",
+      "failed_bounds": [
+        "model_ae_ddgan_gaussian_chain",
+        "model_ddgan_gaussian_chain",
+        "model_vae_hard"
+      ],
+      "final_metrics": {
+        "final_covariance_eigen_max": 0.07935052914163286,
+        "final_covariance_eigen_min": 0.02122680601807642,
+        "final_hq": 0.15576171875,
+        "final_local_covariance_max": 0.3121805873395517,
+        "final_local_covariance_min": 0.021165410644067385,
+        "final_local_mean_sigma": 3.8781101609372763,
+        "final_mode_mass_tv": 0.2314453125,
+        "final_normalized_mean": 0.16790898077722458,
+        "final_projection_cdf": 0.4994666313419944,
+        "paired_nmse": 0.9872169089736147,
+        "paired_reverse_steps": 4,
+        "paired_shuffled_gain": 1.0070487133206956,
+        "paired_worst_axis_nrmse": 0.9946277601080216,
+        "panel_count": 8,
+        "samples_per_panel": 2048,
+        "t1_q0_covariance_eigen_max": 0.4894735950815392,
+        "t1_q0_covariance_eigen_min": 0.0897175436482262,
+        "t1_q0_normalized_mean": 4.476929674178463,
+        "t1_q0_projection_cdf": 0.9954839518035866,
+        "t1_q1_covariance_eigen_max": 0.4246330383208401,
+        "t1_q1_covariance_eigen_min": 0.0890677536788668,
+        "t1_q1_normalized_mean": 3.4958845541987413,
+        "t1_q1_projection_cdf": 0.9827932659023997,
+        "t2_q0_covariance_eigen_max": 0.7724745054567146,
+        "t2_q0_covariance_eigen_min": 0.24465492413423268,
+        "t2_q0_normalized_mean": 0.5737313871255799,
+        "t2_q0_projection_cdf": 0.49568875924293176,
+        "t2_q1_covariance_eigen_max": 0.7978685675390425,
+        "t2_q1_covariance_eigen_min": 0.2354914025730396,
+        "t2_q1_normalized_mean": 0.3973824955715377,
+        "t2_q1_projection_cdf": 0.42452542122783304,
+        "t3_q0_covariance_eigen_max": 1.0379720875521858,
+        "t3_q0_covariance_eigen_min": 0.6270391980017546,
+        "t3_q0_normalized_mean": 0.07197432281153465,
+        "t3_q0_projection_cdf": 0.08593426216823236,
+        "t3_q1_covariance_eigen_max": 0.9435937837928169,
+        "t3_q1_covariance_eigen_min": 0.6322746671162742,
+        "t3_q1_normalized_mean": 0.022971457896037144,
+        "t3_q1_projection_cdf": 0.07006424249161813,
+        "t4_q0_covariance_eigen_max": 1.057986852881,
+        "t4_q0_covariance_eigen_min": 1.0162668732375246,
+        "t4_q0_normalized_mean": 0.013084769045154694,
+        "t4_q0_projection_cdf": 0.020778272451017488,
+        "t4_q1_covariance_eigen_max": 1.0315037822653144,
+        "t4_q1_covariance_eigen_min": 0.9277575649750451,
+        "t4_q1_normalized_mean": 0.06618493630231406,
+        "t4_q1_projection_cdf": 0.04284206709493121,
+        "worst_transition_cdf": 0.9954839518035866
+      },
+      "full_protocol_complete": false,
+      "gif": "media/api-model-ae-ddgan-bimodal-chain.gif",
+      "goal": "Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality",
+      "id": "api-model-ae-ddgan-bimodal-chain",
+      "qualification_input": false,
+      "scope": "New scoped public ae_ddgan composition: same analytic target, schedule, G/D architecture and prior as the DDGAN task, plus a learned 2x32 encoder. Clean paired reconstruction and independent-prior generation are separate cohorts. Historical denoising results retain their identities.",
+      "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "task_contract_sha256": "78507dd8927b2ee27aaab68ba1ebeba6e4751e5d256e6440f4a2a6efb5a3b940",
+      "task_id": "model_ae_ddgan_bimodal_chain",
+      "terminal_observations": 3,
+      "terminal_passes": 0,
+      "tier": 2,
+      "verdict": "BLOCKED"
+    },
+    {
+      "completed_updates": 2500,
+      "default_updates": 2500,
+      "execution_status": "COMPLETE",
+      "failed_bounds": [
+        "final_covariance_eigen_max",
+        "final_normalized_mean",
+        "final_projection_cdf",
+        "t1_q0_covariance_eigen_min",
+        "t1_q0_normalized_mean",
+        "t1_q0_projection_cdf",
+        "t1_q1_covariance_eigen_min",
+        "t1_q1_normalized_mean",
+        "t1_q1_projection_cdf",
+        "t2_q0_normalized_mean",
+        "t2_q0_projection_cdf",
+        "last 5 post-update metric observations do not all pass"
+      ],
+      "final_metrics": {
+        "final_covariance_eigen_max": 1.525788308358236,
+        "final_covariance_eigen_min": 1.175797625707041,
+        "final_normalized_mean": 0.5973940376636387,
+        "final_projection_cdf": 0.18311283346834928,
+        "paired_nmse": 0.030386758489284807,
+        "paired_reverse_steps": 4,
+        "paired_shuffled_gain": 65.31286360856024,
+        "paired_worst_axis_nrmse": 0.1877374734714363,
+        "panel_count": 8,
+        "samples_per_panel": 2048,
+        "t1_q0_covariance_eigen_max": 1.2578323270254619,
+        "t1_q0_covariance_eigen_min": 0.6089214896157675,
+        "t1_q0_normalized_mean": 0.28756519700246236,
+        "t1_q0_projection_cdf": 0.20170384320146606,
+        "t1_q1_covariance_eigen_max": 0.6884497370264415,
+        "t1_q1_covariance_eigen_min": 0.44320869089488796,
+        "t1_q1_normalized_mean": 0.5111426660065264,
+        "t1_q1_projection_cdf": 0.2711668099394876,
+        "t2_q0_covariance_eigen_max": 0.9103678314249987,
+        "t2_q0_covariance_eigen_min": 0.7244552538122547,
+        "t2_q0_normalized_mean": 0.3095477516833266,
+        "t2_q0_projection_cdf": 0.13853458012382902,
+        "t2_q1_covariance_eigen_max": 1.0070297126008563,
+        "t2_q1_covariance_eigen_min": 0.7568535281491734,
+        "t2_q1_normalized_mean": 0.19434995811744862,
+        "t2_q1_projection_cdf": 0.09535391342187616,
+        "t3_q0_covariance_eigen_max": 1.0983405817679397,
+        "t3_q0_covariance_eigen_min": 0.9423518317172656,
+        "t3_q0_normalized_mean": 0.018597471524103022,
+        "t3_q0_projection_cdf": 0.023511038823060215,
+        "t3_q1_covariance_eigen_max": 1.012974922145338,
+        "t3_q1_covariance_eigen_min": 0.9697027670370484,
+        "t3_q1_normalized_mean": 0.07819077492885604,
+        "t3_q1_projection_cdf": 0.042889859511675676,
+        "t4_q0_covariance_eigen_max": 1.0727140795768288,
+        "t4_q0_covariance_eigen_min": 1.0353052823704425,
+        "t4_q0_normalized_mean": 0.02225581392522468,
+        "t4_q0_projection_cdf": 0.023692817456361315,
+        "t4_q1_covariance_eigen_max": 1.0427672258350198,
+        "t4_q1_covariance_eigen_min": 0.9508038684735661,
+        "t4_q1_normalized_mean": 0.08015493116397643,
+        "t4_q1_projection_cdf": 0.04420736389324631,
+        "worst_transition_cdf": 0.2711668099394876
+      },
+      "full_protocol_complete": true,
+      "gif": "media/api-model-ae-ddgan-gaussian-chain.gif",
+      "goal": "Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality",
+      "id": "api-model-ae-ddgan-gaussian-chain",
+      "qualification_input": false,
+      "scope": "New scoped public ae_ddgan composition: same analytic target, schedule, G/D architecture and prior as the DDGAN task, plus a learned 2x32 encoder. Clean paired reconstruction and independent-prior generation are separate cohorts. Historical denoising results retain their identities.",
+      "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "task_contract_sha256": "70e8396f686068835eff8f1796005e1db4e7e6a3b0795b02c79060d578b7c771",
+      "task_id": "model_ae_ddgan_gaussian_chain",
+      "terminal_observations": 5,
+      "terminal_passes": 0,
+      "tier": 1,
+      "verdict": "FAIL"
+    },
+    {
+      "completed_updates": 1200,
+      "default_updates": 1200,
+      "execution_status": "COMPLETE",
+      "failed_bounds": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "final_metrics": {
+        "component_center_rms_sigma": 0.6359610876540546,
+        "component_max_eigen_ratio": 1.0484813451766968,
+        "component_min_eigen_ratio": 0.27633488178253174,
+        "mass_tv": 0.11767578125,
+        "modes": 4,
+        "precision": 0.996826171875,
+        "reconstruction_mode_agreement": 0.9970703125,
+        "reconstruction_mse": 0.009270203299820423,
+        "sample_count": 4096
+      },
+      "full_protocol_complete": true,
+      "gif": "media/api-model-ae-gan-multimodal.gif",
+      "goal": "Reconstruct four equally weighted noisy corner Gaussians and independently generate their modes, masses and within-mode shapes.",
+      "id": "api-model-ae-gan-multimodal",
+      "qualification_input": false,
+      "scope": "Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Reconstruction and all prior gates must pass together.",
+      "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "task_contract_sha256": "26b3f3249f908024b520162aedf2fee8c738d942893683f4155d0fe528ed3f6e",
+      "task_id": "model_ae_gan_multimodal",
+      "terminal_observations": 5,
+      "terminal_passes": 5,
+      "tier": 1,
+      "verdict": "PASS"
+    },
+    {
+      "completed_updates": 1200,
+      "default_updates": 1200,
+      "execution_status": "COMPLETE",
+      "failed_bounds": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "final_metrics": {
+        "component_center_rms_sigma": 3.681531310545565,
+        "component_max_eigen_ratio": 21.423988342285156,
+        "component_min_eigen_ratio": 3.046807289123535,
+        "mass_tv": 0.0498046875,
+        "modes": 4,
+        "precision": 0.6328125,
+        "reconstruction_mode_agreement": 1.0,
+        "reconstruction_mse": 0.0044268714264035225,
+        "sample_count": 4096
+      },
+      "full_protocol_complete": true,
+      "gif": "media/api-model-ae-reconstruction.gif",
+      "goal": "Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control.",
+      "id": "api-model-ae-reconstruction",
+      "qualification_input": false,
+      "scope": "Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required.",
+      "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "task_contract_sha256": "00da82995f5ccbc0e8de915dc21d5eeb2f48bda90379385f40e2d6c20aca211e",
+      "task_id": "model_ae_reconstruction",
+      "terminal_observations": 5,
+      "terminal_passes": 5,
+      "tier": 1,
+      "verdict": "PASS"
+    },
+    {
+      "completed_updates": 3,
+      "default_updates": 5000,
+      "execution_status": "SOFTWARE_PREFIX_ONLY",
+      "failed_bounds": [
+        "model_ae_ddgan_gaussian_chain",
+        "model_ddgan_gaussian_chain",
+        "model_vae_hard"
+      ],
+      "final_metrics": {
+        "final_covariance_eigen_max": 0.08743028294723189,
+        "final_covariance_eigen_min": 0.02102167678704736,
+        "final_hq": 0.1552734375,
+        "final_local_covariance_max": 0.31880969013331273,
+        "final_local_covariance_min": 0.023697648270426128,
+        "final_local_mean_sigma": 3.914991759583327,
+        "final_mode_mass_tv": 0.259765625,
+        "final_normalized_mean": 0.3052264056419862,
+        "final_projection_cdf": 0.49965300603990986,
+        "panel_count": 8,
+        "samples_per_panel": 2048,
+        "t1_q0_covariance_eigen_max": 0.4706903487745598,
+        "t1_q0_covariance_eigen_min": 0.0992882672924122,
+        "t1_q0_normalized_mean": 4.55162606927346,
+        "t1_q0_projection_cdf": 0.995692693706883,
+        "t1_q1_covariance_eigen_max": 0.41861871849038046,
+        "t1_q1_covariance_eigen_min": 0.09741582561445582,
+        "t1_q1_normalized_mean": 3.5415875896177558,
+        "t1_q1_projection_cdf": 0.9844477922723681,
+        "t2_q0_covariance_eigen_max": 0.7738658242532763,
+        "t2_q0_covariance_eigen_min": 0.24340726870493112,
+        "t2_q0_normalized_mean": 0.5947228889672015,
+        "t2_q0_projection_cdf": 0.5040592767109267,
+        "t2_q1_covariance_eigen_max": 0.799777796229826,
+        "t2_q1_covariance_eigen_min": 0.23495964779398354,
+        "t2_q1_normalized_mean": 0.42702411870352985,
+        "t2_q1_projection_cdf": 0.4269159326988074,
+        "t3_q0_covariance_eigen_max": 1.0381675249224611,
+        "t3_q0_covariance_eigen_min": 0.627155046051677,
+        "t3_q0_normalized_mean": 0.0891828328430769,
+        "t3_q0_projection_cdf": 0.08896891331218715,
+        "t3_q1_covariance_eigen_max": 0.9440719958759972,
+        "t3_q1_covariance_eigen_min": 0.6319581935896403,
+        "t3_q1_normalized_mean": 0.050375506393708414,
+        "t3_q1_projection_cdf": 0.07223071986699886,
+        "t4_q0_covariance_eigen_max": 1.0580691114691039,
+        "t4_q0_covariance_eigen_min": 1.0163205477709225,
+        "t4_q0_normalized_mean": 0.007147841578757107,
+        "t4_q0_projection_cdf": 0.021176423997519067,
+        "t4_q1_covariance_eigen_max": 1.0313813768161084,
+        "t4_q1_covariance_eigen_min": 0.9278382423164812,
+        "t4_q1_normalized_mean": 0.06301074808148793,
+        "t4_q1_projection_cdf": 0.04162724499159298,
+        "worst_transition_cdf": 0.995692693706883
+      },
+      "full_protocol_complete": false,
+      "gif": "media/api-model-ddgan-bimodal-chain.gif",
+      "goal": "Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API",
+      "id": "api-model-ddgan-bimodal-chain",
+      "qualification_input": false,
+      "scope": "New small analytic bimodal target, 2x32 MLPs and clean live serving. Actual forward-pair transition training and four-step reverse sampling; no historical 100-Gaussian or direct-posterior qualification.",
+      "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "task_contract_sha256": "5f1510d041499716404b3922d6b30a6ca3c89973668904a89d87dd4d2e8cb78e",
+      "task_id": "model_ddgan_bimodal_chain",
+      "terminal_observations": 3,
+      "terminal_passes": 0,
+      "tier": 2,
+      "verdict": "BLOCKED"
+    },
+    {
+      "completed_updates": 2500,
+      "default_updates": 2500,
+      "execution_status": "COMPLETE",
+      "failed_bounds": [
+        "final_covariance_eigen_min",
+        "final_normalized_mean",
+        "final_projection_cdf",
+        "t1_q0_covariance_eigen_max",
+        "t1_q0_normalized_mean",
+        "t1_q0_projection_cdf",
+        "t1_q1_covariance_eigen_max",
+        "t1_q1_normalized_mean",
+        "t1_q1_projection_cdf",
+        "t2_q0_normalized_mean",
+        "t2_q0_projection_cdf",
+        "t2_q1_covariance_eigen_min",
+        "t2_q1_normalized_mean",
+        "t2_q1_projection_cdf",
+        "last 5 post-update metric observations do not all pass"
+      ],
+      "final_metrics": {
+        "final_covariance_eigen_max": 1.398722490869161,
+        "final_covariance_eigen_min": 0.5499189424785275,
+        "final_normalized_mean": 0.6056332609240245,
+        "final_projection_cdf": 0.2022633460624323,
+        "panel_count": 8,
+        "samples_per_panel": 2048,
+        "t1_q0_covariance_eigen_max": 1.5688282936824673,
+        "t1_q0_covariance_eigen_min": 0.8931827541055654,
+        "t1_q0_normalized_mean": 1.1555381742511794,
+        "t1_q0_projection_cdf": 0.42795975312463663,
+        "t1_q1_covariance_eigen_max": 2.4374239160286817,
+        "t1_q1_covariance_eigen_min": 0.7816622391813361,
+        "t1_q1_normalized_mean": 0.6233973212970109,
+        "t1_q1_projection_cdf": 0.21419970708459818,
+        "t2_q0_covariance_eigen_max": 0.8366764640324108,
+        "t2_q0_covariance_eigen_min": 0.7176342972690191,
+        "t2_q0_normalized_mean": 0.4791106827942708,
+        "t2_q0_projection_cdf": 0.20884118228729903,
+        "t2_q1_covariance_eigen_max": 0.8617685281818246,
+        "t2_q1_covariance_eigen_min": 0.6072135984759013,
+        "t2_q1_normalized_mean": 0.3089228166193501,
+        "t2_q1_projection_cdf": 0.16183166484448286,
+        "t3_q0_covariance_eigen_max": 0.9993030343961423,
+        "t3_q0_covariance_eigen_min": 0.866962743268448,
+        "t3_q0_normalized_mean": 0.12572053147884005,
+        "t3_q0_projection_cdf": 0.058778856422960435,
+        "t3_q1_covariance_eigen_max": 0.9154922844097153,
+        "t3_q1_covariance_eigen_min": 0.8798763435062107,
+        "t3_q1_normalized_mean": 0.14188434043911385,
+        "t3_q1_projection_cdf": 0.06471864649575676,
+        "t4_q0_covariance_eigen_max": 1.0667204731254925,
+        "t4_q0_covariance_eigen_min": 1.027428499498334,
+        "t4_q0_normalized_mean": 0.04087049924249799,
+        "t4_q0_projection_cdf": 0.031705732060090086,
+        "t4_q1_covariance_eigen_max": 1.0322756227877503,
+        "t4_q1_covariance_eigen_min": 0.9448780611892132,
+        "t4_q1_normalized_mean": 0.03537410142013931,
+        "t4_q1_projection_cdf": 0.03113424744624349,
+        "worst_transition_cdf": 0.42795975312463663
+      },
+      "full_protocol_complete": true,
+      "gif": "media/api-model-ddgan-gaussian-chain.gif",
+      "goal": "Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API",
+      "id": "api-model-ddgan-gaussian-chain",
+      "qualification_input": false,
+      "scope": "New small analytic gaussian target, 2x32 MLPs and clean live serving. Actual forward-pair transition training and four-step reverse sampling; no historical 100-Gaussian or direct-posterior qualification.",
+      "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "task_contract_sha256": "ebed6f821b44912915a31f9c9b861d71d88672795d0052cffcc986b064664183",
+      "task_id": "model_ddgan_gaussian_chain",
+      "terminal_observations": 5,
+      "terminal_passes": 0,
+      "tier": 1,
+      "verdict": "FAIL"
+    },
+    {
+      "completed_updates": 1200,
+      "default_updates": 1200,
+      "execution_status": "COMPLETE",
+      "failed_bounds": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "final_metrics": {
+        "aggregate_effective_components": 8.58007458474775,
+        "decoder_mean_hq": 0.99365234375,
+        "decoder_mean_mass_tv": 0.009765625,
+        "decoder_mean_modes": 2,
+        "elbo_identity_error": 4.440892098500626e-16,
+        "kl_identity_error": 4.910334274743633e-07,
+        "kl_nats": 1.316622018814087,
+        "likelihood_hq": 0.985595703125,
+        "likelihood_mass_tv": 0.014404296875,
+        "likelihood_modes": 2,
+        "negative_elbo_nats": 0.3309417414005633,
+        "posterior_effective_components": 4.288627629166566,
+        "posterior_mutual_information": 0.6934758245232868,
+        "posterior_noise_variance_ratio": 0.9955912828445435,
+        "posterior_pair_rms": 0.03460557758808136,
+        "reconstruction_mse": 0.0037706026532764924,
+        "shuffle_reconstruction_ratio": 592.3989743751856,
+        "shuffled_reconstruction_mse": 2.233701144577348
+      },
+      "full_protocol_complete": true,
+      "gif": "media/api-model-vae-categorical.gif",
+      "goal": "Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes?",
+      "id": "api-model-vae-categorical",
+      "qualification_input": false,
+      "scope": "New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE.",
+      "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "task_contract_sha256": "e093194afd10c739bdb78684451d04d58c600a99560b5d2454606327c520ac5b",
+      "task_id": "model_vae_categorical",
+      "terminal_observations": 5,
+      "terminal_passes": 5,
+      "tier": 1,
+      "verdict": "PASS"
+    },
+    {
+      "completed_updates": 1200,
+      "default_updates": 1200,
+      "execution_status": "COMPLETE",
+      "failed_bounds": [
+        "last 5 post-update metric observations do not all pass"
+      ],
+      "final_metrics": {
+        "aggregate_effective_components": 4.357929291878556,
+        "decoder_mean_hq": 0.955322265625,
+        "decoder_mean_mass_tv": 0.070068359375,
+        "decoder_mean_modes": 2,
+        "elbo_identity_error": 1.3322676295501878e-15,
+        "kl_identity_error": 7.618617292592944e-09,
+        "kl_nats": 2.7725889682769775,
+        "likelihood_hq": 0.9150390625,
+        "likelihood_mass_tv": 0.0849609375,
+        "likelihood_modes": 2,
+        "negative_elbo_nats": 3.7974167579843803,
+        "posterior_effective_components": 1.0,
+        "posterior_mutual_information": 1.4719970114891407,
+        "posterior_noise_variance_ratio": 1.0051920413970947,
+        "posterior_pair_rms": 0.03137028217315674,
+        "reconstruction_mse": 0.005580060080720941,
+        "shuffle_reconstruction_ratio": 423.58843838508824,
+        "shuffled_reconstruction_mse": 2.3636489356875527
+      },
+      "full_protocol_complete": true,
+      "gif": "media/api-model-vae-hard.gif",
+      "goal": "Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes?",
+      "id": "api-model-vae-hard",
+      "qualification_input": false,
+      "scope": "New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE.",
+      "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "task_contract_sha256": "2e16532d87f325d34d2f3242b595c1b4de742265e20f82f09e5ae4e078a1837b",
+      "task_id": "model_vae_hard",
+      "terminal_observations": 5,
+      "terminal_passes": 3,
+      "tier": 1,
+      "verdict": "FAIL"
+    }
+  ],
+  "runs": [
+    {
+      "adapter_receipt_sha256": "e5ea2bd7e9cdc2e91e3c33bcff3536a2ef6bc4c3922d948d9c0682e8423e455a",
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 237119,
+          "sha256": "7d9588f03cd776bace6d4082bfb73fe2dd670cb12e22b0894ad1a5d264c297e6"
+        },
+        "goal.gif": {
+          "bytes": 468069,
+          "sha256": "56e550ff49b509ae2ff5eee9040e7c995cb548fe9f7c0673c4865f6aa1fbd815"
+        },
+        "observations.npz": {
+          "bytes": 586444,
+          "sha256": "6b32f27817bec75082f0d378bc29b151e197d0805746b1ef6baaafc3d080724c"
+        }
+      },
+      "cost_seconds": 0.6358917680045124,
+      "gif_sha256": "56e550ff49b509ae2ff5eee9040e7c995cb548fe9f7c0673c4865f6aa1fbd815",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 3,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 3,
+              "calls": 3,
+              "eligible": 3,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 3,
+            "observations": {
+              "applied": 3,
+              "calls": 3,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 3,
+              "applied_record_calls_in_window": 3,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 3,
+              "observed_steps_in_window": 3,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 3
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 3,
+                "last": 1.0346358299255372,
+                "max": 1.1611801385879517,
+                "min": 1.0275592803955078,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 3,
+                "last": 0.27839036136865614,
+                "max": 0.27886801958084106,
+                "min": 0.25816357135772705,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 3,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 3,
+          "encoder": 3,
+          "generator": 3,
+          "prior": 3
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "api-model-ae-ddgan-bimodal-chain",
+      "qualification_input": false,
+      "raw_receipt": "/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_ae_ddgan_bimodal_chain/api/receipt.json",
+      "raw_receipt_sha256": "6f0005f98d63ade43998a347c7509cdf0e0ea4e2ea3b9f459fd52da23d71c44f",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "ae",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "ddgan",
+        "name": "bispf",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 128,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 5000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_sha256": "3dd95109d5b1e4cd859b0849e4d3e86ed46a369527ebb3203a0aa9f57b3ede25",
+      "reproducibility": {
+        "batch_sequence_sha256": "c29f52da2986c29994fd54cdef73ef1b1d8411b8a6e2667bffd3cd80873c7616",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "7238043946f6b9f13d9f9c534c253870505ea2c11a37c6e0297f443d3d867484",
+          "E": "efcef2774eae78f2e8da80d98e027bbbcb3064b6082b0a748a8c6c7c35227118",
+          "G": "b8fae6b59782adfc70d2cdedd9a9e3db213c48af8435cf87e85a78d9d77356fb",
+          "prior": "86d4a4f9168ae1dcedc189d8d77701133acdc3c54da0881e532d584a235ca88d"
+        },
+        "initial_state_sha256": "84d07b5d318356273e2c02a85ac4d3464e8adbd0be551384a26c354e09f14af4"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cpu",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "source_identity": "ba35fb2b55bb422326a9e47f8ab2c2cae2b10a090af18eb1f0d268e7da9072c2",
+      "source_manifest": {
+        "commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+        "manifest_sha256": "ba35fb2b55bb422326a9e47f8ab2c2cae2b10a090af18eb1f0d268e7da9072c2"
+      },
+      "task_id": "model_ae_ddgan_bimodal_chain"
+    },
+    {
+      "adapter_receipt_sha256": "e3246c71daf843cac7fc94ef6423bde871b40e8241ba47c99c62ceaabc164eb3",
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 237183,
+          "sha256": "4bb5f2d96e1c6a2b44e23c554111c9e2cabeb2d4f3fc2347b942245a7b277ee4"
+        },
+        "goal.gif": {
+          "bytes": 1199927,
+          "sha256": "8d9bbccc9a564567806dbd5b09f1c6ea5e45febebfb40e357ab1f147a920f482"
+        },
+        "observations.npz": {
+          "bytes": 3659165,
+          "sha256": "7b2eb12c455504e8d52d13f87e7e6d190074d4f672c3f4b7d998db9752096196"
+        }
+      },
+      "cost_seconds": 24.14754085500317,
+      "gif_sha256": "8d9bbccc9a564567806dbd5b09f1c6ea5e45febebfb40e357ab1f147a920f482",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 2500,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 2500,
+              "calls": 2500,
+              "eligible": 2500,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 2500,
+            "observations": {
+              "applied": 2500,
+              "calls": 2500,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 2500,
+              "applied_record_calls_in_window": 2500,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 2500,
+              "observed_steps_in_window": 2500,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 2500
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 2500,
+                "last": 1.047225956791173,
+                "max": 1.2859281301498413,
+                "min": 0.8360018730163574,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 2500,
+                "last": 0.3153465025471296,
+                "max": 0.4564320147037506,
+                "min": 0.24574093520641327,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 2500,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 2500,
+          "encoder": 2500,
+          "generator": 2500,
+          "prior": 2500
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "api-model-ae-ddgan-gaussian-chain",
+      "qualification_input": false,
+      "raw_receipt": "/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_ae_ddgan_gaussian_chain/api/receipt.json",
+      "raw_receipt_sha256": "d7495d061836a793cfc27586b14988bb4c97ee02b33c995b71c7ffe2dcb58ea0",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "ae",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "ddgan",
+        "name": "bispf",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 128,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 2500,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_sha256": "fde63ee2df5bf6cfb2fa715ca7d2e15bd0cc5ae99ddeb6e8d5cc6e9ce53905d9",
+      "reproducibility": {
+        "batch_sequence_sha256": "1f64ffe0d3ad8bdebc856f5560e346aa69709a99ea0d7bec48b52edeec456fd8",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "7238043946f6b9f13d9f9c534c253870505ea2c11a37c6e0297f443d3d867484",
+          "E": "efcef2774eae78f2e8da80d98e027bbbcb3064b6082b0a748a8c6c7c35227118",
+          "G": "b8fae6b59782adfc70d2cdedd9a9e3db213c48af8435cf87e85a78d9d77356fb",
+          "prior": "86d4a4f9168ae1dcedc189d8d77701133acdc3c54da0881e532d584a235ca88d"
+        },
+        "initial_state_sha256": "2e42ff189ed4f569caccf5edae48b9f279ab52b796e870dd4bad136043b587dc"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cpu",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "source_identity": "ba35fb2b55bb422326a9e47f8ab2c2cae2b10a090af18eb1f0d268e7da9072c2",
+      "source_manifest": {
+        "commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+        "manifest_sha256": "ba35fb2b55bb422326a9e47f8ab2c2cae2b10a090af18eb1f0d268e7da9072c2"
+      },
+      "task_id": "model_ae_ddgan_gaussian_chain"
+    },
+    {
+      "adapter_receipt_sha256": "b0605d84cd8f40ee6da0a95f855c3cb1d4699fc7abda3595c5dd44b94164d9d2",
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 177401,
+          "sha256": "cf6b325d739a94937f979260f600b355f6822e9669bad0bdc548a0fa4cae3826"
+        },
+        "goal.gif": {
+          "bytes": 410437,
+          "sha256": "336764207efe5a197c8e1af397e75b2c7b67670f2d8ed42757d6763eeba55810"
+        },
+        "observations.npz": {
+          "bytes": 2808652,
+          "sha256": "ead6373dfdefe899027586de3194ebc02f6230fc1a2bd333d96eb69e7d04270f"
+        }
+      },
+      "cost_seconds": 12.715816731011728,
+      "gif_sha256": "336764207efe5a197c8e1af397e75b2c7b67670f2d8ed42757d6763eeba55810",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1200,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1200,
+              "calls": 1200,
+              "eligible": 1200,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 1200,
+            "observations": {
+              "applied": 1200,
+              "calls": 1200,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 1200,
+              "applied_record_calls_in_window": 1200,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 1200,
+              "observed_steps_in_window": 1200,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 1200
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 1200,
+                "last": 2.007075070239508,
+                "max": 2.1028428077697754,
+                "min": 1.4169527292251587,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 1200,
+                "last": 0.027011139605185593,
+                "max": 0.8216349482536316,
+                "min": 0.024227051555826863,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 1200,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "api-model-ae-gan-multimodal",
+      "qualification_input": false,
+      "raw_receipt": "/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_ae_gan_multimodal/api/receipt.json",
+      "raw_receipt_sha256": "f999fd367ba77e78b11a67602f3ab82963f7390471f4b91f3087770cf6c54b3e",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "ae",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bispf",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 64,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "recipe_sha256": "29b9ff4ba509a6a934dbd9994f8f11de8709dbc28e0e7b4ea22cdc5ba518aa57",
+      "reproducibility": {
+        "batch_sequence_sha256": "7f8954cf9a23a52f8deeb07925035eb19f07dd61a5f9ce6604eee971ddaf1432",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "628b11d60904f7f5c4a1810b998648d274f7ba5928f5b077e71ec025f8775984",
+          "E": "0c2cf90960233a7933f7b5fc92ef0213790cea6c3d737f2e5cb4bb66b28bea41",
+          "G": "63b42b463c89dfa8af417e259e2b90b5bf58c91076e402124462cc1c489262c0",
+          "prior": "9c8900fa2259ca0d24fc4d66614d7a3bff762f43c7fa2b60899c481ceaec7593"
+        },
+        "initial_state_sha256": "96bafcf3677c0eb0b3d1aae4622272a88099d6833b573b17a66b2e44cdec2986"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cpu",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "source_identity": "1e57b5216ea37f6cc8054af825907e6de12c1123351cede61d19f2b80d0722e7",
+      "source_manifest": {
+        "commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+        "manifest_sha256": "1e57b5216ea37f6cc8054af825907e6de12c1123351cede61d19f2b80d0722e7"
+      },
+      "task_id": "model_ae_gan_multimodal"
+    },
+    {
+      "adapter_receipt_sha256": "84367b4806588962f3ea7ff9ac8697ad4dd9ed2eebe7edd869ce31b392c22c62",
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 177273,
+          "sha256": "85d61efe4c114fa267e1a98690cf3424ae8639f3e28052fa1b945101dc475376"
+        },
+        "goal.gif": {
+          "bytes": 496861,
+          "sha256": "f21d61e9e578c22b87c09a36ac88b581d57c60e64e78c8a6dfe10388e82cc73e"
+        },
+        "observations.npz": {
+          "bytes": 2842672,
+          "sha256": "d99a810e0af732ec3f1249367060aa9cb71f58357ca7cea700b08b2132252155"
+        }
+      },
+      "cost_seconds": 6.075429343996802,
+      "gif_sha256": "f21d61e9e578c22b87c09a36ac88b581d57c60e64e78c8a6dfe10388e82cc73e",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": true,
+              "reason": "requested penalty did not apply within the frozen host budget",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": null,
+            "last_application_update": null,
+            "observations": {
+              "applied": 0,
+              "calls": 0,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 0,
+              "applied_record_calls_in_window": 0,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 0,
+              "observed_steps_in_window": 0,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {},
+            "ranges": {
+              "ema_data_scale": {
+                "count": 0,
+                "last": null,
+                "max": null,
+                "min": null,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 0,
+                "last": null,
+                "max": null,
+                "min": null,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 0,
+                "last": null,
+                "max": null,
+                "min": null,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 0,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "api-model-ae-reconstruction",
+      "qualification_input": false,
+      "raw_receipt": "/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_ae_reconstruction/api/receipt.json",
+      "raw_receipt_sha256": "4774b62c23ad031cc093499d0c0435f27ac9233e95f65e78c11762658b346b10",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "ae",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bispf",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 64,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "recipe_sha256": "29b9ff4ba509a6a934dbd9994f8f11de8709dbc28e0e7b4ea22cdc5ba518aa57",
+      "reproducibility": {
+        "batch_sequence_sha256": "7f8954cf9a23a52f8deeb07925035eb19f07dd61a5f9ce6604eee971ddaf1432",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "628b11d60904f7f5c4a1810b998648d274f7ba5928f5b077e71ec025f8775984",
+          "E": "0c2cf90960233a7933f7b5fc92ef0213790cea6c3d737f2e5cb4bb66b28bea41",
+          "G": "63b42b463c89dfa8af417e259e2b90b5bf58c91076e402124462cc1c489262c0",
+          "prior": "9c8900fa2259ca0d24fc4d66614d7a3bff762f43c7fa2b60899c481ceaec7593"
+        },
+        "initial_state_sha256": "d76517fa53af4dfefa46dc650530b0369793b4165763acd9e945548cae58d5aa"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cpu",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "source_identity": "1e57b5216ea37f6cc8054af825907e6de12c1123351cede61d19f2b80d0722e7",
+      "source_manifest": {
+        "commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+        "manifest_sha256": "1e57b5216ea37f6cc8054af825907e6de12c1123351cede61d19f2b80d0722e7"
+      },
+      "task_id": "model_ae_reconstruction"
+    },
+    {
+      "adapter_receipt_sha256": "e200f92281f5f5de50f742c86769429ae54089139bfeffd5a31737e476255a1d",
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 206231,
+          "sha256": "da54a46aca46b50a41ded40c4898f705493e7165ee4f54ee8bc7f317331063aa"
+        },
+        "goal.gif": {
+          "bytes": 331333,
+          "sha256": "3e0c86dddd4f927ccc59631ebbbd3d2618f444a8a30267d05b7e2a324ff37c50"
+        },
+        "observations.npz": {
+          "bytes": 368574,
+          "sha256": "00b6a3ce9ccf49d65645e9e2c5623d13990451aded379e6fee90bd1917eeed1f"
+        }
+      },
+      "cost_seconds": 0.5842560800083447,
+      "gif_sha256": "3e0c86dddd4f927ccc59631ebbbd3d2618f444a8a30267d05b7e2a324ff37c50",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 3,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 3,
+              "calls": 3,
+              "eligible": 3,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 3,
+            "observations": {
+              "applied": 3,
+              "calls": 3,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 3,
+              "applied_record_calls_in_window": 3,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 3,
+              "observed_steps_in_window": 3,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 3
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 3,
+                "last": 1.0340437293052673,
+                "max": 1.1611801385879517,
+                "min": 1.0268075466156006,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 3,
+                "last": 0.2782360196113587,
+                "max": 0.2787167429924011,
+                "min": 0.25816357135772705,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 3,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 3,
+          "encoder": 0,
+          "generator": 3,
+          "prior": 3
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "api-model-ddgan-bimodal-chain",
+      "qualification_input": false,
+      "raw_receipt": "/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_ddgan_bimodal_chain/api/receipt.json",
+      "raw_receipt_sha256": "2bc2339e7b381b16fd7cd2c7244eef5adc10e000576a265ec16d9d93bb17d56a",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "ddgan",
+        "name": "bispf",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 128,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 5000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_sha256": "8e589ded55903c2129faf183c2943827678d91facd390241562ccca21fff750a",
+      "reproducibility": {
+        "batch_sequence_sha256": "c29f52da2986c29994fd54cdef73ef1b1d8411b8a6e2667bffd3cd80873c7616",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "7238043946f6b9f13d9f9c534c253870505ea2c11a37c6e0297f443d3d867484",
+          "G": "b8fae6b59782adfc70d2cdedd9a9e3db213c48af8435cf87e85a78d9d77356fb",
+          "prior": "86d4a4f9168ae1dcedc189d8d77701133acdc3c54da0881e532d584a235ca88d"
+        },
+        "initial_state_sha256": "d43b7085924a04c4bb3874a62af8af1107d491b7daf95c0f2ecc6aa8d4e7aa31"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cpu",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "source_identity": "ba35fb2b55bb422326a9e47f8ab2c2cae2b10a090af18eb1f0d268e7da9072c2",
+      "source_manifest": {
+        "commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+        "manifest_sha256": "ba35fb2b55bb422326a9e47f8ab2c2cae2b10a090af18eb1f0d268e7da9072c2"
+      },
+      "task_id": "model_ddgan_bimodal_chain"
+    },
+    {
+      "adapter_receipt_sha256": "615654f93234a3ae738efde38aaa17042e8d995162053971ac46de230c2fc99d",
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 206295,
+          "sha256": "829e073d516ad7201af1429e9f796048f7321ba2b351b6ec2682ae3c349d062b"
+        },
+        "goal.gif": {
+          "bytes": 854430,
+          "sha256": "6c7590a4bdd357ee5db45b4d9cd27a1cd97afb06d8c9a7714d3deb752467d53d"
+        },
+        "observations.npz": {
+          "bytes": 2296979,
+          "sha256": "385a3d6c246512640a772f4125923321f73ae7845034ca6c993be9fb80bc0c98"
+        }
+      },
+      "cost_seconds": 18.97200583400263,
+      "gif_sha256": "6c7590a4bdd357ee5db45b4d9cd27a1cd97afb06d8c9a7714d3deb752467d53d",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 2500,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 2500,
+              "calls": 2500,
+              "eligible": 2500,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 2500,
+            "observations": {
+              "applied": 2500,
+              "calls": 2500,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 2500,
+              "applied_record_calls_in_window": 2500,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 2500,
+              "observed_steps_in_window": 2500,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 2500
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 2500,
+                "last": 1.077091254987995,
+                "max": 1.2894580364227295,
+                "min": 0.8564148545265198,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 2500,
+                "last": 0.3151785348971894,
+                "max": 0.4605347514152527,
+                "min": 0.24574093520641327,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 2500,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 2500,
+          "encoder": 0,
+          "generator": 2500,
+          "prior": 2500
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "api-model-ddgan-gaussian-chain",
+      "qualification_input": false,
+      "raw_receipt": "/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_ddgan_gaussian_chain/api/receipt.json",
+      "raw_receipt_sha256": "bd96e8e49feb576faabde5b407f3b0130e031896a0890fee46e2709dddf2832c",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "ddgan",
+        "name": "bispf",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 128,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 2500,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_sha256": "13b366c6002194fe54bd092305946fc4380f77dfcd401821ece8f3bb8c44c380",
+      "reproducibility": {
+        "batch_sequence_sha256": "1f64ffe0d3ad8bdebc856f5560e346aa69709a99ea0d7bec48b52edeec456fd8",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "7238043946f6b9f13d9f9c534c253870505ea2c11a37c6e0297f443d3d867484",
+          "G": "b8fae6b59782adfc70d2cdedd9a9e3db213c48af8435cf87e85a78d9d77356fb",
+          "prior": "86d4a4f9168ae1dcedc189d8d77701133acdc3c54da0881e532d584a235ca88d"
+        },
+        "initial_state_sha256": "624aa1e407a2621137a557d3255d44b35c134ababdc1fb2e5251c73adb05dce3"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cpu",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "source_identity": "48177d41bb0bbb0d1b08b8f6b8e5b75b38c8d3d08767dc561b522b2cfb1f345f",
+      "source_manifest": {
+        "commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+        "manifest_sha256": "48177d41bb0bbb0d1b08b8f6b8e5b75b38c8d3d08767dc561b522b2cfb1f345f"
+      },
+      "task_id": "model_ddgan_gaussian_chain"
+    },
+    {
+      "adapter_receipt_sha256": "996104cad944c67aa26d85d9cbfcc0894426595ea9fb2dce3a4fe2342b8295b6",
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 101100,
+          "sha256": "856b73d974adc6a3cc692f7ec56bae48b385ba7f17b3179cc1cbdd7fb288be4d"
+        },
+        "goal.gif": {
+          "bytes": 320499,
+          "sha256": "4e17cffc5bbf1bd7cb76135890c8696609b28abd4f7994cfdd53fb96dd66be9c"
+        },
+        "observations.npz": {
+          "bytes": 4483353,
+          "sha256": "288d964350622530218e2a543d5895cda3c30da04e9ac641f741fcb4b3df97ee"
+        }
+      },
+      "cost_seconds": 7.983408132000477,
+      "gif_sha256": "4e17cffc5bbf1bd7cb76135890c8696609b28abd4f7994cfdd53fb96dd66be9c",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1200,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1200,
+              "calls": 1200,
+              "eligible": 1200,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 1200,
+            "observations": {
+              "applied": 1200,
+              "calls": 1200,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 1200,
+              "applied_record_calls_in_window": 1200,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 1200,
+              "observed_steps_in_window": 1200,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 1200
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 1200,
+                "last": 0.44984358937069785,
+                "max": 2.2944175071921755,
+                "min": 0.16258005797863007,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 1200,
+                "last": 0.4226575293717906,
+                "max": 0.7637477517127991,
+                "min": 0.1477655811241334,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 1200,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "api-model-vae-categorical",
+      "qualification_input": false,
+      "raw_receipt": "/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_vae_categorical/api/receipt.json",
+      "raw_receipt_sha256": "6ac59fc435bb1de4a58671ede61ce2b189bbb212e4fe67d3395961719afd22e3",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "categorical",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bispf",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 16,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "recipe_sha256": "572d4f2c2b7d6d31a12cda9557a49e6a9116e0381da6bc427f1a6722b926adfa",
+      "reproducibility": {
+        "batch_sequence_sha256": "5854de9ddd8e4759cb31dd1a98e0b5e72ee7e12540e14a540c53837fbbe20b06",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "a4d25e32fdda2c5c3c18bbb5ba2fbd8697def8be11aae1470ac710b09bf107ad",
+          "E": "d8377efc91c3ce6f15b493d1803f17cb12c144e7a0c31e87e97791ac1989e323",
+          "G": "62dec125363d1f17e0618649ff47f8b8ed1da837e3d3b2111f68e3b35bde41aa",
+          "prior": "360b7e0d34e5fd7972186351dc0022b5032c99cfc98d9584f660825e9be031f1"
+        },
+        "initial_state_sha256": "b3ad060d6cd97ee2aefac528bf1f9b9106aa9cc3b0ba5978c0c113e5d8f5dac0"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cpu",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "source_identity": "48177d41bb0bbb0d1b08b8f6b8e5b75b38c8d3d08767dc561b522b2cfb1f345f",
+      "source_manifest": {
+        "commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+        "manifest_sha256": "48177d41bb0bbb0d1b08b8f6b8e5b75b38c8d3d08767dc561b522b2cfb1f345f"
+      },
+      "task_id": "model_vae_categorical"
+    },
+    {
+      "adapter_receipt_sha256": "728ad8657be6ddf3171ca2704a0172bc730a0ba07feb973bf9556d8f119fe3d0",
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 101036,
+          "sha256": "450ae89384b09af931b5e6bc65b558e74464c2d7a3c258b0a50aa83b8a10a3e9"
+        },
+        "goal.gif": {
+          "bytes": 318641,
+          "sha256": "92e11d9c71d8d05871a979ca6568acbddd414df841fabce3fb7c05ce25b99eb9"
+        },
+        "observations.npz": {
+          "bytes": 4483785,
+          "sha256": "3e0725ace68d341fa03900b9810889ce2ffcd1b15e8e456ca1e897004eb5932d"
+        }
+      },
+      "cost_seconds": 7.414045597994118,
+      "gif_sha256": "92e11d9c71d8d05871a979ca6568acbddd414df841fabce3fb7c05ce25b99eb9",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1200,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1200,
+              "calls": 1200,
+              "eligible": 1200,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 1200,
+            "observations": {
+              "applied": 1200,
+              "calls": 1200,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 1200,
+              "applied_record_calls_in_window": 1200,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 1200,
+              "observed_steps_in_window": 1200,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 1200
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 1200,
+                "last": 0.26356935046613217,
+                "max": 1.9403549056294171,
+                "min": 0.16153329610824585,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 1200,
+                "last": 0.2020001659169793,
+                "max": 0.7637477517127991,
+                "min": 0.13069880462016442,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 1200,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "api-model-vae-hard",
+      "qualification_input": false,
+      "raw_receipt": "/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_vae_hard/api/receipt.json",
+      "raw_receipt_sha256": "a5c0f1035bbddbddc8693c3120484e26a9266fec3505ffb97dc5fac462ad063b",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "hard",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 1.0,
+        "model": "gan",
+        "name": "bispf",
+        "network_lr_floor": 1.0,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 16,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "recipe_sha256": "c0a7a80ad3c2158db0c87b5d362bf33f6e32d0f88f606754f3dd46efe822505b",
+      "reproducibility": {
+        "batch_sequence_sha256": "5854de9ddd8e4759cb31dd1a98e0b5e72ee7e12540e14a540c53837fbbe20b06",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "a4d25e32fdda2c5c3c18bbb5ba2fbd8697def8be11aae1470ac710b09bf107ad",
+          "E": "d8377efc91c3ce6f15b493d1803f17cb12c144e7a0c31e87e97791ac1989e323",
+          "G": "62dec125363d1f17e0618649ff47f8b8ed1da837e3d3b2111f68e3b35bde41aa",
+          "prior": "360b7e0d34e5fd7972186351dc0022b5032c99cfc98d9584f660825e9be031f1"
+        },
+        "initial_state_sha256": "a9d0fb76a0f11ead22adf0684ec081e78cb73ce4133f351f7d0883e9cbf9a86b"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cpu",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "source_identity": "48177d41bb0bbb0d1b08b8f6b8e5b75b38c8d3d08767dc561b522b2cfb1f345f",
+      "source_manifest": {
+        "commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+        "manifest_sha256": "48177d41bb0bbb0d1b08b8f6b8e5b75b38c8d3d08767dc561b522b2cfb1f345f"
+      },
+      "task_id": "model_vae_hard"
+    }
+  ],
+  "schema": "forge_api_model_research_v1",
+  "seed": 0
+}

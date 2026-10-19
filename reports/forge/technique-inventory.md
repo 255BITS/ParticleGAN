@@ -69,6 +69,23 @@ While grid100_mlp16, grid100_res16_tanh, misgan_block_neural_imputer, misgan_blo
 | `ring16_bigan_continuous` | held: no recipe has passed its current declaration | discriminator_stability (Tier 4) | Continuous 2D multimodal joint BiGAN (G, E, D) on 16-Gaussian ring held pending passing generation and reconstruction recipe. | Count again when one global recipe passes ring16_bigan_continuous under its unchanged declaration. | 0 of 8 | [explanation](test-dispositions-20261015/README.md#unresolved) |
 | `ring_hold` | removed: phase of ring_extension (counted there) | clockfree_continuous (Tier 3), discriminator_stability (Tier 3), formulation_comparison (Tier 3), host_profile_transfer (Tier 3) | Same uninterrupted ring run as ring_extension, whose counted verdict already replays this acquisition and 1,200-check hold. Kept as a visible phase and counted once, through ring_extension. | — | 1 of 8 | [explanation](test-dispositions-20261015/README.md#ring_hold) |
 
+## AE, VAE and DDGAN API research
+
+One fixed BISPF recipe on new model-mode tasks, protocol seed 0. These source-bound CPU research results keep their own gates, prior, initialization, budget and sampling; they add no selected-family qualification credit. [Proposal, failed bounds and recommendations](api-model-toys/README.md).
+
+| Task | Declared tier | Full-budget result | Completed / required updates | Terminal passing checks | Actual training |
+| --- | ---: | --- | ---: | ---: | --- |
+| `model_ae_ddgan_bimodal_chain` | 2 | **BLOCKED** | 3 / 5000 | 0 / 5 | [GIF](../toy_audit/api_contract/model_modes/media/api-model-ae-ddgan-bimodal-chain.gif) |
+| `model_ae_ddgan_gaussian_chain` | 1 | **FAIL** | 2500 / 2500 | 0 / 5 | [GIF](../toy_audit/api_contract/model_modes/media/api-model-ae-ddgan-gaussian-chain.gif) |
+| `model_ae_gan_multimodal` | 1 | **PASS** | 1200 / 1200 | 5 / 5 | [GIF](../toy_audit/api_contract/model_modes/media/api-model-ae-gan-multimodal.gif) |
+| `model_ae_reconstruction` | 1 | **PASS** | 1200 / 1200 | 5 / 5 | [GIF](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) |
+| `model_ddgan_bimodal_chain` | 2 | **BLOCKED** | 3 / 5000 | 0 / 5 | [GIF](../toy_audit/api_contract/model_modes/media/api-model-ddgan-bimodal-chain.gif) |
+| `model_ddgan_gaussian_chain` | 1 | **FAIL** | 2500 / 2500 | 0 / 5 | [GIF](../toy_audit/api_contract/model_modes/media/api-model-ddgan-gaussian-chain.gif) |
+| `model_vae_categorical` | 1 | **PASS** | 1200 / 1200 | 5 / 5 | [GIF](../toy_audit/api_contract/model_modes/media/api-model-vae-categorical.gif) |
+| `model_vae_hard` | 1 | **FAIL** | 1200 / 1200 | 3 / 5 | [GIF](../toy_audit/api_contract/model_modes/media/api-model-vae-hard.gif) |
+
+Tier 2 full runs require every basic model task to pass. A blocked task may have a separately declared three-update software GIF; that prefix is INCOMPLETE and grants no deeper training credit.
+
 <!-- Forge scaling performance: start -->
 
 ## Performance
@@ -529,5 +546,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `72725cc213900f659b229bf447bccf6325a8bdb43a73914a5e99f49e4bd2e4bd`.
+Publication input digest `961ed28348e5bb59ff5733494815385bcb0651ee77515fc1bf7b5d5adf5f6c1b`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

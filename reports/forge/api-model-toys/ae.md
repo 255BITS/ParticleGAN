@@ -1,10 +1,59 @@
-# AE coverage: frozen proposal and software acceptance
+# AE coverage: completed four-mode toy readout
 
-This adds two prospective public-API tasks using the selected global
-`bispf-optimized-quintic-v1` recipe unchanged. Both enter the existing
-`discriminator_stability` view as required Tier 1 questions. Tier calibration
-remains provisional; failure must remain visible and cannot justify weakening a
-gate or silently moving a task out of the counted requirements.
+Both AE cases **PASS** their full frozen 1,200-update protocols using the
+selected global `bispf-optimized-quintic-v1` recipe. Each passes all 24
+post-update scoring checks, including the required final five at updates 1000,
+1050, 1100, 1150 and 1200. Source is
+`bee9f06ed21695e518c1cb702e12a385ab9389e8`, protocol seed 0; source bindings
+remained unchanged throughout execution. Both remain required Tier 1 questions
+in the existing `discriminator_stability` view. Scientific tier calibration
+remains provisional and this bounded research is no public-default promotion.
+
+| Completed task | Final reconstruction MSE | Final paired mode agreement | Terminal passing suffix | Actual training |
+|---|---:|---:|---:|---|
+| Reconstruction-only AE control | .004427 | 1.000000 | 24/24 checks | [goal GIF](../../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) |
+| AE-GAN: reconstruction + independent generation | .009270 | .997070 | 24/24 checks | [goal GIF](../../toy_audit/api_contract/model_modes/media/api-model-ae-gan-multimodal.gif) |
+
+The AE-GAN endpoint independently generates all four modes with precision
+`.996826`, mass TV `.117676`, component eigenvalue ratios `.276335` to
+`1.048481`, and component centroid RMS `.635961` target sigma. Every declared
+gate passes. Across the final five checks, the worst precision is `.985107`,
+maximum mass TV `.117676`, minimum eigenvalue ratio `.276335`, maximum
+eigenvalue ratio `1.601173`, maximum centroid RMS `.963244`, maximum
+reconstruction MSE `.009270`, and minimum paired mode agreement `.997070`.
+The centroid gate has the smallest final-window margin; these results establish
+the declared tolerances rather than exact distribution recovery.
+
+The reconstruction control reaches lower reconstruction error but its independent
+prior output has precision `.632813`, maximum eigenvalue ratio `21.423988`, and
+centroid RMS `3.681531` target sigma. Those generation diagnostics are outside
+the stronger AE-GAN bounds and do not belong to the control's narrower pass
+criterion. The control therefore demonstrates why reconstruction quality alone
+cannot establish generative quality. Keep both tasks at Tier 1: the same selected
+baseline passes their unchanged declarations, and they test distinct API behavior.
+
+The [compact publication](../../toy_audit/api_contract/model_modes/publication.json)
+retains metrics, raw-receipt identities, guards, source manifests and artifacts.
+Both runs use the identical resolved recipe SHA256
+`29b9ff4ba509a6a934dbd9994f8f11de8709dbc28e0e7b4ea22cdc5ba518aa57`:
+learned prior locations, SBNP prior regularization `.01`, DualNorm with quintic
+convolution rule, learning rate `.012`, prior multiplier `2.5`, critic multiplier
+`1.5`, and reconstruction weight `1`. The task-owned horizon is 1,200; no
+model-specific rate or regularizer tuning occurred. These are clean, live
+four-Gaussian vector results with an independent MoG prior, not image-model,
+noisy-serving, VAE, or DDGAN evidence.
+
+Execution used CPU, Python 3.12.13 and PyTorch 2.14.0+cu130, one Torch thread,
+deterministic algorithms and serial autograd. Recorded costs are 6.075 seconds
+for the control and 12.716 seconds for AE-GAN (18.791 total CPU seconds).
+Finite-state and RNG-isolation guards pass with zero unintended RNG deviations.
+G, E and learned prior each receive exactly 1,200 optimizer updates per task;
+D receives zero for the explicit reconstruction control and 1,200 for AE-GAN.
+The publication marks these bounded research receipts `qualification_input=false`;
+they supply no automatic whole-view qualification or default promotion. The
+existing single Forge leaderboard remains the comparison authority. Retain this
+coverage and stop these completed protocols; further scope would require a new
+falsifiable task or trainer hypothesis rather than unchanged reruns.
 
 | Case | Falsifiable question | Frozen numerical gate |
 |---|---|---|
@@ -67,14 +116,18 @@ and its [published API audit](../../toy_audit/api_contract/RUN_REPORT.md).
 Neither historical result is regraded or replaced by these four-mode tasks.
 
 Software acceptance before scientific execution: 19 targeted tests passed.
-These tests run at most two updates per fixture and supply no trained-quality
-qualification. Full training will run only after the combined source and task
-contracts are committed. Raw stdout/JSONL/checkpoints belong under
-`/nvme/dev/particlegan/artifacts/api-model-toys/ae`; final compact receipts and
-actual-training GIFs will be linked here after execution. The existing single
-Forge leaderboard remains the comparison authority.
+These short software tests supply no trained-quality qualification. The reported
+full training ran after the combined source and scientific contracts were
+committed. Raw stdout, JSONL, observations and checkpoints remain outside Git:
+`/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_ae_reconstruction`
+and the sibling `model_ae_gan_multimodal` directory. Raw API receipt SHA256s are
+`4774b62c23ad031cc093499d0c0435f27ac9233e95f65e78c11762658b346b10`
+and `f999fd367ba77e78b11a67602f3ab82963f7390471f4b91f3087770cf6c54b3e`,
+respectively; their original numerical observations and GIFs were preserved when
+the report exporter was repaired to rehydrate serialized recipes.
 
 Declaration validation compares task gates, target, prior, architecture, resources,
 budget and cadence against executable constants; changing task JSON cannot change
 its own expected scorer. Focused regression tests reject those contract changes
-and incompatible injected recipes. No full scientific training has run yet.
+and incompatible injected recipes. No gates, budgets, protocols or training
+sources were changed during this readout.

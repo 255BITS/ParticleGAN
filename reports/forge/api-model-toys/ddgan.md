@@ -1,10 +1,11 @@
 # Full DDGAN public-API toys
 
-The frozen proposal adds an actual adversarial diffusion transition game and
-four-step ancestral sampling. It does not reuse the direct clean-posterior toy
-as a substitute for a DDGAN chain. Full training results and actual-training
-GIFs will be recorded after the common source freeze; no trained-quality PASS
-is claimed by the implementation or its oracle controls.
+The Gaussian task completed its frozen 2,500-update budget and **FAILS trained
+distribution quality**. Its public-API transition game, four-step sampling,
+checkpoints and numerical observations execute successfully. The bimodal full
+run is **BLOCKED** by the declared basic-task gates; its separately budgeted
+three-update software prefix is **INCOMPLETE** against the 5,000-update task.
+Neither result establishes a DDGAN quality pass.
 
 The original [100-Gaussian denoising study](../../denoising-toy/README.md) retains
 its own source, initialization, budgets, seeds and reported quality. These new
@@ -29,10 +30,11 @@ fail closed rather than silently losing their mechanisms.
 | `model_ddgan_gaussian_chain` | Gaussian mean `(0.6,-0.35)`, diagonal standard deviation `(0.45,0.30)` | 2,500 updates | Tier 1, basic transition and chain functionality |
 | `model_ddgan_bimodal_chain` | Equal mixture at `(-0.75,0)` and `(0.75,0)`, isotropic standard deviation `0.18` | 5,000 updates | Tier 2, multimodal conditional uncertainty and local spread |
 
-The multimodal target is a separately declared harder claim, with no checkpoint
-dependency. Failures remain visible in the full suite; final required/held
-placement follows Forge's existing disposition rule and the shared recipe's
-measured evidence. A failed gate does not authorize tuning its bound or recipe.
+The multimodal target is a separately declared harder claim, with a Gaussian
+gate dependency and no checkpoint dependency. The campaign also requires all
+six basic tasks to pass before either full Tier 2 run. All six completed:
+three passed and three failed. Initial Tier 1/Tier 2 placements and numerical
+gates are unchanged; failure-driven re-tiering, tuning and reruns were not used.
 
 Both tasks use protocol seed `0`, batch `64`, `128` initial MoG locations in
 four latent dimensions, absolute fixed kernel standard deviation `0.25`, and
@@ -77,6 +79,78 @@ The bimodal final distribution additionally requires three-sigma quality
 within `[0.50,1.50]`. Nonfinite output fails explicitly. The exact complete
 metric/operator/bound lists are exported as `case.forge_thresholds` and stored
 unchanged in the corresponding Forge task declarations.
+
+## Frozen research results
+
+All receipts bind source
+[`bee9f06ed21695e518c1cb702e12a385ab9389e8`](https://github.com/255BITS/ParticleGAN/tree/bee9f06ed21695e518c1cb702e12a385ab9389e8),
+global recipe `bispf-optimized-quintic-v1`, protocol seed 0, public deterministic
+initialization, clean live serving and CPU execution with one Torch thread.
+The [shared protocol](protocol.json) records the exact task and recipe binding;
+the [compact publication](../../toy_audit/api_contract/model_modes/publication.json)
+retains the observed metrics and original artifact identities. Source remained
+unchanged throughout both executions. A later report-only export repair read
+the saved receipts and GIFs; it changed no training, sampling or observations.
+
+**Gaussian: FAIL**, 2,500/2,500 updates, 24 post-update observations, 2,048 draws
+per panel, 18.97200583400263 seconds. All updates and final metrics were finite.
+No post-update observation passed all bounds (0/24); all final five failed.
+The endpoint values below are copied from the saved receipt, with conditional
+extrema taken across the eight endpoint panels.
+
+| Endpoint metric | Observed | Gate |
+| --- | ---: | ---: |
+| Final-chain projection CDF error | 0.2022633460624323 | <=0.12 |
+| Final-chain normalized mean error | 0.6056332609240245 | <=0.25 |
+| Final-chain minimum covariance eigenvalue | 0.5499189424785275 | >=0.65 |
+| Final-chain maximum covariance eigenvalue | 1.398722490869161 | <=1.40 |
+| Worst transition projection CDF, `t1_q0` | 0.42795975312463663 | <=0.12 |
+| Worst transition normalized mean, `t1_q0` | 1.1555381742511794 | <=0.25 |
+| Minimum transition covariance eigenvalue, `t2_q1` | 0.6072135984759013 | >=0.65 |
+| Maximum transition covariance eigenvalue, `t1_q1` | 2.4374239160286817 | <=1.40 |
+
+The exact endpoint failed metric bounds are
+`final_covariance_eigen_min`, `final_normalized_mean`, `final_projection_cdf`,
+`t1_q0_covariance_eigen_max`, `t1_q0_normalized_mean`, `t1_q0_projection_cdf`,
+`t1_q1_covariance_eigen_max`, `t1_q1_normalized_mean`, `t1_q1_projection_cdf`,
+`t2_q0_normalized_mean`, `t2_q0_projection_cdf`, `t2_q1_covariance_eigen_min`,
+`t2_q1_normalized_mean`, and `t2_q1_projection_cdf`. The full verdict also fails
+the requirement that all last five post-update observations pass.
+
+[Actual Gaussian training GIF](../../toy_audit/api_contract/model_modes/media/api-model-ddgan-gaussian-chain.gif)
+shows nine real observed states. The actual four reverse steps are executed at
+every observation; media does not interpolate a successful chain.
+
+**Bimodal: full 5,000-update run BLOCKED; prefix INCOMPLETE**, 3/5,000 updates,
+three post-update checks, 2,048 draws per panel, 0.5842560800083447 seconds.
+The prefix verifies finite execution and media only. Its endpoint final CDF
+error is `0.49965300603990986`, normalized mean `0.3052264056419862`, covariance
+eigenvalues `[0.02102167678704736,0.08743028294723189]`, HQ
+`0.1552734375`, mode-mass TV `0.259765625`, local mean error
+`3.914991759583327` sigma and local covariance eigenvalues
+`[0.023697648270426128,0.31880969013331273]`. Worst conditional CDF is
+`0.995692693706883`, worst normalized mean `4.55162606927346`, minimum
+covariance eigenvalue `0.09741582561445582`, and maximum `1.0580691114691039`.
+
+Prefix failed bounds are `final_covariance_eigen_min`, `final_hq`,
+`final_local_covariance_min`, `final_local_mean_sigma`, `final_mode_mass_tv`,
+`final_normalized_mean`, `final_projection_cdf`; `covariance_eigen_min`,
+`normalized_mean` and `projection_cdf` for every panel in
+`{t1_q0,t1_q1,t2_q0,t2_q1}`; and `covariance_eigen_min` for both
+`{t3_q0,t3_q1}`. Its raw API verdict is FAIL because the full budget/cadence
+and five terminal passing observations were not completed. The publication
+labels this **INCOMPLETE**, not a measured 5,000-update quality failure.
+[Actual three-update bimodal prefix GIF](../../toy_audit/api_contract/model_modes/media/api-model-ddgan-bimodal-chain.gif)
+contains four saved states including initialization.
+
+The completed Gaussian endpoint passes all four high-noise panels (`t3` and
+`t4`), while the lower-noise panels and final marginal fail. This localizes the
+observed weakness to the clean end of the chain; it does not identify its cause.
+Before proposing another bounded trainer hypothesis, inspect saved low-noise
+transition predictions, conditional residual means/covariances and critic
+gradients against the exact posterior. No new training, continuation, tuning or
+promotion is authorized by this readout. Results remain in the single existing
+[Forge leaderboard](../technique-inventory.md).
 
 ## Software and scorer validation
 

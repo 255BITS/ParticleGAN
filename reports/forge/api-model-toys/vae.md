@@ -1,8 +1,10 @@
 # Public-API particle VAE toys
 
-This new seed-0 cohort tests the API's hard constant-KL VAE and genuine soft
-categorical VAE on two balanced Gaussian anchors. Both are proposed Tier 1
-requirements. Their gates remain provisional: scorer controls do not calibrate
+The soft categorical VAE **PASS**es the full two-anchor protocol; the hard
+constant-KL VAE completes its budget but **FAIL**s sustained generation quality.
+Both run the same `bispf-optimized-quintic-v1` trainer on protocol seed 0 at frozen
+source `bee9f06ed21695e518c1cb702e12a385ab9389e8`. Both are declared Tier 1
+requirements. Their gates remain provisional: these results do not calibrate
 a scientific screen or qualify any public default.
 
 Historical [12-arm scout](../../mog-vae/README.md) and
@@ -62,10 +64,85 @@ Nonfinite metrics fail. Oracle samples pass; shuffled reconstruction, collapsed
 posterior, missing local noise, missing KL and collapsed prior/likelihood samples
 are destructive controls and must fail their relevant bounds.
 
-Only compact final metrics, source receipts and actual-training GIFs will be
-published. Bulk stdout, checkpoints and observations are kept under
-`/nvme/dev/particlegan/artifacts/api-model-toys/vae`. Root maintains the one
-current goal leaderboard; this report does not create a second leaderboard.
+Both runs complete all 1,200 updates and 24 post-update observations, with
+4,096 evaluation inputs at each check. Initial encoder, decoder, critic and
+prior hashes match across modes, as does the target batch-sequence digest
+`5854de9ddd8e4759cb31dd1a98e0b5e72ee7e12540e14a540c53837fbbe20b06`.
+Each encoder, generator, prior and discriminator receives 1,200 updates;
+all trained states remain finite, the critic penalty applies 1,200 times,
+and the RNG guard records zero deviations. Execution takes 7.414 seconds for
+hard inference and 7.983 seconds for categorical inference on the recorded CPU
+runtime; these are quality tasks, not throughput comparisons.
 
-Status: implementation and software controls prepared; full scientific runs
-await the shared frozen-source commit. No trained-quality claim is made here.
+The categorical VAE passes 19/24 post-update checks and its final **15** checks
+consecutively. At update 1,200, reconstruction MSE is .00377060, shuffled-code
+MSE is 2.23370 (592.40 times higher), and posterior mutual information is .69348
+nats. Mean posterior effective component count is 4.2886 per input and aggregate
+effective usage is 8.5801 of 16. Local latent-noise second-moment ratio is
+.995591, decoded posterior pair RMS is .034606, categorical KL is 1.31662 nats,
+and Gaussian negative ELBO is .330942 nats. KL identity error is 4.91e-7 and
+ELBO identity error 4.44e-16. Independent decoder means have HQ .993652 and
+quality mass TV .009766; actual Gaussian likelihood samples have HQ .985596
+and TV .014404. Both laws cover both modes. These measurements establish useful
+stochastic input-dependent inference and the declared prior-quality gates on
+this two-mode law; they do not establish calibrated within-mode variance.
+
+The hard VAE passes 14/24 post-update checks, ending with only **two** consecutive
+passes. Its final update independently passes every metric: reconstruction MSE
+.00558006; shuffled-code MSE 2.36365 (423.59 times higher); posterior mutual
+information 1.4720 nats; local-noise ratio 1.005192; decoded pair RMS .031370;
+constant KL 2.77258897 nats (`log(16)`, not zero); and negative ELBO 3.79742 nats.
+Final decoder-mean HQ/TV are .955322/.070068, and likelihood HQ/TV are
+.915039/.084961; both modes remain covered. The hard posterior uses one
+component per input and 4.3579 effective components across held-out inputs.
+
+The five required terminal observations are updates 1,000, 1,050, 1,100, 1,150
+and 1,200. Updates 1,000 and 1,100 fail all four generation bounds below; updates
+1,050, 1,150 and 1,200 pass. The limits are HQ ≥.85 and quality mass TV ≤.15.
+
+| Hard-VAE update | Decoder-mean HQ | Decoder-mean TV | Likelihood HQ | Likelihood TV |
+|---:|---:|---:|---:|---:|
+| 1,000 | .753418 | .246582 | .757080 | .242920 |
+| 1,100 | .726318 | .273682 | .703125 | .296875 |
+
+This is recurring late distribution instability: generation also fails at
+updates 450, 500, 700, 750, 900 and 950, with intervening recoveries. It is not
+an ELBO arithmetic rejection or loss of the input code. Throughout the hard
+terminal window reconstruction MSE stays in [.002699, .008892], shuffling
+worsens it by at least 255.78 times, mutual information stays above 1.3339 nats,
+the local-noise ratio remains 1.005192, KL identity error is 7.62e-9, and ELBO
+identity error never exceeds 1.78e-15. The initial ELBO identity errors are also
+0 for hard and 2.27e-13 for categorical inference. The earlier float32
+diagnostic issue was repaired before the frozen run and cannot explain these
+HQ/mass failures. A passing final state or earlier checkpoint does not replace
+the failed five-observation requirement.
+
+Actual-training GIFs show fixed-axis targets beside observed reconstructions,
+decoder means and likelihood samples:
+[hard VAE](../../toy_audit/api_contract/model_modes/media/api-model-vae-hard.gif)
+and [categorical VAE](../../toy_audit/api_contract/model_modes/media/api-model-vae-categorical.gif).
+Media selection uses nine genuine observations; all 24 numerical checks remain
+in the verdict. The [single current goal readout](README.md) owns the comparison
+table, and the [publication receipt index](../../toy_audit/api_contract/model_modes/publication.json)
+owns exported identities. The publication exporter was repaired after numerical
+completion to tolerate omitted inactive recipe fields; it reused saved receipts
+and did not rerun training, change frozen source, or revise numerical verdicts.
+
+Retain the categorical case as observed passing coverage and retain the hard
+failure in the full comparison. Before another training hypothesis, a bounded
+saved-state analysis should test whether hard posterior routing leaves more
+uniform-prior rows weakly constrained. Aggregate posterior usage is smaller
+for hard inference (4.36 effective rows versus 8.58), but that is an association,
+not an established cause. Use only the two saved final checkpoints, one fixed
+4,096-input evaluation panel with eight posterior draws, and one 64-input
+gradient panel; cap analysis at 60 CPU seconds with zero optimizer updates.
+Measure posterior visitation, decoded distance and mode for each prior row,
+plus separate ELBO/adversarial/prior gradient norms. Reject this explanation if
+rarely visited rows do not account for larger decoder errors or generation
+mass imbalance. A later structural repair would require a separate proposal
+and fixed global trainer comparison; no tuning or follow-up run is launched.
+
+Bulk stdout, checkpoints, raw receipts and observations remain under
+`/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_vae_{hard,categorical}`;
+each run has a tail-friendly `stdout.log`. Only compact metrics, provenance and
+the actual-training GIFs are published.

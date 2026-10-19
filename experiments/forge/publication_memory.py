@@ -318,6 +318,8 @@ def input_paths(root: Path) -> list[Path]:
         if any(cut["schema"] == NATIVE3_REPAIRED_SCHEMA for cut in passive["cuts"]):
             paths.add(root / "experiments/forge/native3_publication_memory.py")
             paths.add(root / "experiments/forge/native3_repaired_publication_memory.py")
+    from .model_toy_publication import memory_inputs
+    paths.update(memory_inputs(root))
     return sorted(paths)
 
 
@@ -504,6 +506,8 @@ def normalize(root: Path) -> list[dict]:
                                   completion.get("policy_screen", {}).get("cohorts"),
                                   "cost_scope": completion.get("cost_scope")})
         records.append(record)
+    from .model_toy_publication import memory_records
+    records.extend(memory_records(root))
     identities = [record["record_id"] for record in records]
     if len(identities) != len(set(identities)):
         raise ValueError("duplicate publication recall identity")

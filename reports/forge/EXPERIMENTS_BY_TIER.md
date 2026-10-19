@@ -1602,6 +1602,8 @@ Related public-API demonstrations, with their own recorded contracts:
 | Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | [api-ae-anchor-hold](../toy_audit/api_contract/media/api-ae-anchor-hold.gif) | Reconstruct the noisy two-anchor inputs while the independently sampled prior covers both anchors Scope: New public Recipe.encode particle AE with reconstruction weight1 and applied GAN/KA2; independently sampled prior quality is separately scored. | MoGParticlePrior (sigma_rel=0.025) | COMPLETE / FAIL; 250/250 updates; quality_fraction, quality_mass_tv, last 5 post-update metric observations do not all pass | ae_gan / cpu / 3efb003d4c86 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
+| [api-model-ae-gan-multimodal](../toy_audit/api_contract/model_modes/media/api-model-ae-gan-multimodal.gif) | Reconstruct four equally weighted noisy corner Gaussians and independently generate their modes, masses and within-mode shapes. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Reconstruction and all prior gates must pass together. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+| [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: api-model-ae-ddgan-bimodal-chain
 
@@ -1678,7 +1680,11 @@ Execution guards: finite state = True; rng isolation = True; optimizer roles = g
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ae-ddgan-bimodal-chain](../toy_audit/api_contract/model_modes/media/api-model-ae-ddgan-bimodal-chain.gif) | Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality Scope: New scoped public ae_ddgan composition: same analytic target, schedule, G/D architecture and prior as the DDGAN task, plus a learned 2x32 encoder. Clean paired reconstruction and independent-prior generation are separate cohorts. Historical denoising results retain their identities. | MoGParticlePrior (sigma_rel=0) | SOFTWARE_PREFIX_ONLY / BLOCKED; 3/5000 updates; model_ae_ddgan_gaussian_chain, model_ddgan_gaussian_chain, model_vae_hard | bispf / cpu / ba35fb2b55bb | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: api-model-ae-ddgan-gaussian-chain
 
@@ -1750,7 +1756,11 @@ Execution guards: finite state = True; rng isolation = True; optimizer roles = g
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ae-ddgan-gaussian-chain](../toy_audit/api_contract/model_modes/media/api-model-ae-ddgan-gaussian-chain.gif) | Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality Scope: New scoped public ae_ddgan composition: same analytic target, schedule, G/D architecture and prior as the DDGAN task, plus a learned 2x32 encoder. Clean paired reconstruction and independent-prior generation are separate cohorts. Historical denoising results retain their identities. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 2500/2500 updates; final_covariance_eigen_max, final_normalized_mean, final_projection_cdf, t1_q0_covariance_eigen_min, t1_q0_normalized_mean, t1_q0_projection_cdf, t1_q1_covariance_eigen_min, t1_q1_normalized_mean, t1_q1_projection_cdf, t2_q0_normalized_mean, t2_q0_projection_cdf, last 5 post-update metric observations do not all pass | bispf / cpu / ba35fb2b55bb | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: api-model-ddgan-bimodal-chain
 
@@ -1823,7 +1833,11 @@ Execution guards: finite state = True; rng isolation = True; optimizer roles = g
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ddgan-bimodal-chain](../toy_audit/api_contract/model_modes/media/api-model-ddgan-bimodal-chain.gif) | Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API Scope: New small analytic bimodal target, 2x32 MLPs and clean live serving. Actual forward-pair transition training and four-step reverse sampling; no historical 100-Gaussian or direct-posterior qualification. | MoGParticlePrior (sigma_rel=0) | SOFTWARE_PREFIX_ONLY / BLOCKED; 3/5000 updates; model_ae_ddgan_gaussian_chain, model_ddgan_gaussian_chain, model_vae_hard | bispf / cpu / ba35fb2b55bb | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: api-model-ddgan-gaussian-chain
 
@@ -1891,7 +1905,11 @@ Execution guards: finite state = True; rng isolation = True; optimizer roles = g
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ddgan-gaussian-chain](../toy_audit/api_contract/model_modes/media/api-model-ddgan-gaussian-chain.gif) | Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API Scope: New small analytic gaussian target, 2x32 MLPs and clean live serving. Actual forward-pair transition training and four-step reverse sampling; no historical 100-Gaussian or direct-posterior qualification. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 2500/2500 updates; final_covariance_eigen_min, final_normalized_mean, final_projection_cdf, t1_q0_covariance_eigen_max, t1_q0_normalized_mean, t1_q0_projection_cdf, t1_q1_covariance_eigen_max, t1_q1_normalized_mean, t1_q1_projection_cdf, t2_q0_normalized_mean, t2_q0_projection_cdf, t2_q1_covariance_eigen_min, t2_q1_normalized_mean, t2_q1_projection_cdf, last 5 post-update metric observations do not all pass | bispf / cpu / 48177d41bb0b | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: api-model-vae-categorical
 
@@ -1934,7 +1952,11 @@ Execution guards: finite state = True; rng isolation = True; optimizer roles = e
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-vae-categorical](../toy_audit/api_contract/model_modes/media/api-model-vae-categorical.gif) | Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes? Scope: New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 48177d41bb0b | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: api-model-vae-hard
 
@@ -1977,7 +1999,11 @@ Execution guards: finite state = True; rng isolation = True; optimizer roles = e
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-vae-hard](../toy_audit/api_contract/model_modes/media/api-model-vae-hard.gif) | Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes? Scope: New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 1200/1200 updates; last 5 post-update metric observations do not all pass | bispf / cpu / 48177d41bb0b | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: clockfree-audit
 
@@ -3764,7 +3790,11 @@ Execution guards: finite state = True; rng isolation = True; optimizer roles = g
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ae-gan-multimodal](../toy_audit/api_contract/model_modes/media/api-model-ae-gan-multimodal.gif) | Reconstruct four equally weighted noisy corner Gaussians and independently generate their modes, masses and within-mode shapes. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Reconstruction and all prior gates must pass together. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: model-ae-reconstruction
 
@@ -3796,7 +3826,11 @@ Execution guards: finite state = True; rng isolation = True; optimizer roles = g
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: recipe-prior-refactor-legacy-clockfree-audit-measurement-v1
 
@@ -5343,4 +5377,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `2d1fc4048d26edc98ac6cb3ee6a981c56f525cc403ee3e4a2544b79da123268d`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `b2a7b4b780b199604d63ce7e130e688cb92a5ac618272a166c5c6e33f2dffcde`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `ae43b2e2f2b323bdf4362a63c2c8e20a497d4ccaba36f32644d6a127ee31e4d1`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

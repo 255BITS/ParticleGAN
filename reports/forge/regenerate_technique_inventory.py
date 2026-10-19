@@ -3240,6 +3240,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     completed_studies = completed_studies_projection.load_completed_studies(root)
     if completed_studies:
         result["completed_api_studies"] = completed_studies
+    from experiments.forge.model_toy_publication import load_publication as load_model_research
+    model_research = load_model_research(root)
+    if model_research is not None:
+        result["model_api_research"] = model_research
     if not recorded_policy and view_id == "discriminator_stability":
         result["standalone_api_scores"] = _standalone_api_scores(root)
         from experiments.forge import publication_memory

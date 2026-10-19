@@ -25,6 +25,7 @@ from experiments.forge.views import grade_result
 
 PROTOCOL = ROOT / "reports/forge/api-model-toys/protocol.json"
 PUBLICATION = ROOT / "reports/toy_audit/api_contract/model_modes/publication.json"
+REPORTING_REPAIR = PROTOCOL.with_name("export-repair.json")
 
 
 def event(**values):
@@ -109,7 +110,8 @@ def export(output, results):
             recipe = task_formulation_context(protocol["candidate_contract"], task, {"seed": 0}).recipe.to_dict()
         runs.append({"id": case["id"], "task_id": name, "recipe": recipe,
                      "recipe_sha256": stable_hash(recipe), "runtime": raw.get("runtime", {}),
-                     "source_identity": {"commit": raw.get("source", {}).get("commit"),
+                     "source_identity": stable_hash(raw.get("source", {})),
+                     "source_manifest": {"commit": raw.get("source", {}).get("commit"),
                                          "manifest_sha256": stable_hash(raw.get("source", {}))},
                      "raw_receipt": result.get("api_receipt"),
                      "raw_receipt_sha256": file_hash(result["api_receipt"]) if result.get("api_receipt") else None,
@@ -146,11 +148,28 @@ def main():
         results = read_json(output / "results.json")["results"]
     else:
         from experiments.forge.sources import inspect_source
-        if inspect_source(ROOT, extra_paths=protocol["source_extra_paths"])["digest"] != protocol["complete_source_digest"]:
+        source = inspect_source(ROOT, extra_paths=protocol["source_extra_paths"])
+        files = dict(source["files"])
+        repair = read_json(REPORTING_REPAIR) if REPORTING_REPAIR.is_file() else None
+        patches = {} if repair is None else repair["reporting_only_changes"]
+        if repair is not None and (repair.get("schema") != "api_model_reporting_only_repair_v1"
+                or repair["protocol_sha256"] != file_hash(PROTOCOL)
+                or set(patches) - {"reports/forge/api-model-toys/run.py", "experiments/forge/model_toy_publication.py",
+                                   "experiments/forge/publication_memory.py"}
+                or repair.get("training_updates_added") != 0 or repair.get("sampling_draws_added") != 0):
+            raise ValueError("unrecognized reporting-only source adapter")
+        for path, patch in patches.items():
+            if files.get(path) == patch["repaired_sha256"]:
+                files[path] = patch["frozen_sha256"]
+            elif files.get(path) != patch["frozen_sha256"]:
+                raise ValueError("reporting adapter bytes differ: " + path)
+        if stable_hash(files) != protocol["complete_source_digest"]:
             raise ValueError("the complete frozen scientific source has changed")
         for path, expected in protocol["source_sha256"].items():
-            if file_hash(ROOT / path) != expected:
+            if files[path] != expected:
                 raise ValueError("frozen research source changed: " + path)
+        if repair is not None:
+            event(reporting_adapter_sha256=file_hash(REPORTING_REPAIR), scientific_source=protocol["complete_source_digest"])
         output.mkdir(parents=True, exist_ok=False)
         basic = [name for name, tier in protocol["tiers"].items() if tier == 1]
         deeper = [name for name, tier in protocol["tiers"].items() if tier == 2]
