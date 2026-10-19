@@ -1,0 +1,59 @@
+{
+  "candidate_id": "api-model-vae-failure-investigation",
+  "candidate_revision": "94f596832d94bce175b5d4d6653b3584e17f6dbae570113717d570deb431a9b4",
+  "conclusion": "All archived final metrics reproduce exactly with zero updates. All 183 hard decoder-mean misses arise from 12 low-usage rows; the passing categorical control has the same association with 26 misses from seven low-usage rows. Hard ELBO prior gradients reach 4/16 rows versus 16/16 for categorical; adversarial and SBNP reach all rows. This supports a final-state coverage association but cannot establish the cause of the unsaved update-1000/1100 failures. Original hard FAIL/categorical PASS and all gates remain unchanged.",
+  "diagnostic_task_ids": [
+    "model_vae_hard",
+    "model_vae_categorical"
+  ],
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Hard routing leaves more uniform-prior rows weakly constrained by reconstruction; those rows account for larger independent-generation errors.",
+  "mechanism_class": "saved_state_failure_analysis",
+  "next_action": "Retain both outcomes. Propose one reconstruction-coverage mechanism across both unchanged VAE tasks with saved scheduled checkpoints before another causal experiment. No unchanged rerun, seed sweep, gate change or default promotion.",
+  "provenance": {
+    "analysis_protocol": {
+      "path": "reports/forge/vae-failure-investigation/protocol.json",
+      "sha256": "562533488d56afca673e89853eb26cfe858132cfb1a0a39ba5b9bd390c33a55e"
+    },
+    "analysis_result": {
+      "path": "reports/forge/vae-failure-investigation/results.json",
+      "sha256": "8ae07baaa18f7b515b60b2f6484b2d7e38b4799241fe70408cac6ec37ee3e0d3"
+    },
+    "analysis_source": {
+      "path": "reports/forge/vae-failure-investigation/analyze.py",
+      "sha256": "94f596832d94bce175b5d4d6653b3584e17f6dbae570113717d570deb431a9b4"
+    },
+    "archived_inputs": {
+      "categorical": {
+        "archived_verdict": "PASS",
+        "checkpoint_sha256": "856b73d974adc6a3cc692f7ec56bae48b385ba7f17b3179cc1cbdd7fb288be4d",
+        "receipt_sha256": "6ac59fc435bb1de4a58671ede61ce2b189bbb212e4fe67d3395961719afd22e3",
+        "recipe_sha256": "572d4f2c2b7d6d31a12cda9557a49e6a9116e0381da6bc427f1a6722b926adfa",
+        "scientific_sources_sha256": "57a7f8a9a0b8d67d689bf301ed18ae26dcb87dc2faaa8efb153c0f42a46a05c5"
+      },
+      "hard": {
+        "archived_verdict": "FAIL",
+        "checkpoint_sha256": "450ae89384b09af931b5e6bc65b558e74464c2d7a3c258b0a50aa83b8a10a3e9",
+        "receipt_sha256": "a5c0f1035bbddbddc8693c3120484e26a9266fec3505ffb97dc5fac462ad063b",
+        "recipe_sha256": "c0a7a80ad3c2158db0c87b5d362bf33f6e32d0f88f606754f3dd46efe822505b",
+        "scientific_sources_sha256": "57a7f8a9a0b8d67d689bf301ed18ae26dcb87dc2faaa8efb153c0f42a46a05c5"
+      }
+    },
+    "cpu_seconds": 0.8657755760000003,
+    "independent_confirmation": false,
+    "optimizer_updates": 0,
+    "reuse_eligible": false,
+    "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "api-model-vae-failure-investigation-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/vae-failure-investigation/README.md",
+    "sha256": "b1f4381ae39704a2b54f603c3f6fd469db016c94d9311dd8946f19e7d7fa70c6"
+  },
+  "task_results": []
+}

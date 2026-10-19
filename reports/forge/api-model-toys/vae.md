@@ -146,3 +146,10 @@ Bulk stdout, checkpoints, raw receipts and observations remain under
 `/nvme/dev/particlegan/artifacts/api-model-toys/research-v1/model_vae_{hard,categorical}`;
 each run has a tail-friendly `stdout.log`. Only compact metrics, provenance and
 the actual-training GIFs are published.
+
+The completed [saved-state investigation](../vae-failure-investigation/README.md)
+reproduces every final metric exactly. All 183 hard decoder-mean misses arise
+from low-usage prior rows, as do all 26 misses in the passing categorical control.
+Hard ELBO gradients reach four prior rows versus all 16 for categorical. These
+final-state associations do not identify the cause of the unsaved transient
+failures. The original terminal verdicts and gates remain unchanged.

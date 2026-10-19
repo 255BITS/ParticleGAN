@@ -91,6 +91,31 @@ def test_output_is_exclusive_before_loading_or_sampling(tmp_path, monkeypatch):
     assert output.read_text() == "retained evidence"
 
 
+def test_source_drift_is_rejected_after_validating_saved_files(tmp_path):
+    directory = tmp_path / "model_vae_hard/api"
+    directory.mkdir(parents=True)
+    checkpoint = directory / "final-state.pt"
+    checkpoint.write_bytes(b"trusted saved bytes; never loaded by this test")
+    source = tmp_path / "source/particlegan/autoencoder.py"
+    source.parent.mkdir(parents=True)
+    source.write_text("original scientific source")
+    sources = {"particlegan/autoencoder.py": analysis.file_hash(source)}
+    receipt = dict(source=dict(commit="archived", files_sha256=sources), source_unchanged=True,
+                   completed_updates=1200, default_protocol_complete=True,
+                   case=dict(id="api-model-vae-hard"), recipe={}, verdict="FAIL",
+                   artifacts={"final-state.pt": dict(sha256=analysis.file_hash(checkpoint))})
+    receipt_path = directory / "receipt.json"
+    receipt_path.write_text(json.dumps(receipt))
+    pin = dict(receipt_sha256=analysis.file_hash(receipt_path), checkpoint_sha256=analysis.file_hash(checkpoint),
+               recipe_sha256=analysis.stable_hash({}), archived_verdict="FAIL",
+               scientific_sources_sha256=analysis.stable_hash(sources))
+    protocol = dict(execution_commit="archived", inputs={"hard": pin})
+    assert analysis.validate_inputs(protocol, tmp_path, tmp_path / "source")
+    source.write_text("changed implementation")
+    with pytest.raises(ValueError, match="frozen scientific source differs"):
+        analysis.validate_inputs(protocol, tmp_path, tmp_path / "source")
+
+
 def test_protocol_retains_original_failure_and_publication_bindings():
     protocol = json.loads(PATH.with_name("protocol.json").read_text())
     publication = json.loads((ROOT / "reports/toy_audit/api_contract/model_modes/publication.json").read_text())
@@ -104,3 +129,20 @@ def test_protocol_retains_original_failure_and_publication_bindings():
         row = original[f"api-model-vae-{mode}"]
         assert pin["receipt_sha256"] == row["raw_receipt_sha256"]
         assert pin["checkpoint_sha256"] == row["artifact_hashes"]["final-state.pt"]["sha256"]
+
+
+def test_published_analysis_is_display_only_and_reproduces_original_final_metrics():
+    result = json.loads(PATH.with_name("results.json").read_text())
+    publication = json.loads((ROOT / "reports/toy_audit/api_contract/model_modes/publication.json").read_text())
+    original = {row["id"]: row for row in publication["readouts"]}
+    assert result["protocol_sha256"] == analysis.file_hash(PATH.with_name("protocol.json"))
+    assert result["analysis_source_sha256"] == analysis.file_hash(PATH)
+    assert result["optimizer_updates"] == 0 and not result["qualification_input"]
+    assert result["cpu_seconds"] <= 60
+    for mode, row in result["results"].items():
+        assert row["archived_verdict"] == original[f"api-model-vae-{mode}"]["verdict"]
+        assert row["reproduced_final_metrics"] == original[f"api-model-vae-{mode}"]["final_metrics"]
+        assert row["final_observation_exactly_reproduced"] and row["state_unchanged"]
+        assert row["optimizer_updates"] == 0
+    # This pattern is also present in the passing control; it is not a causal test.
+    assert all(row["row_attribution"]["association_prediction_supported"] for row in result["results"].values())
