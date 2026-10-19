@@ -51,6 +51,9 @@ def adapter_preflight(task, candidate, *, root=None):
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
+    if adapter == "public_api_model_toy":
+        from .model_toy_adapter import preflight
+        return preflight(task, candidate, root=root)
     from .tier1_policy import is_policy_task
     if is_policy_task(task):
         from .tier1_policy import validate
@@ -754,6 +757,9 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
+    if adapter == "public_api_model_toy":
+        from .model_toy_adapter import run
+        return run(request, task, output_dir, device)
     from .tier1_policy import blocked_host, is_policy_task
     if blocked_host(task) is not None:
         # Explicit ownership boundary: refuse before any host-specific setup.

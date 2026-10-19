@@ -102,7 +102,11 @@ def test_task_policy_preserves_old_sustained_definition_and_checked_budgets():
     groups = {tasks[a["task"]]["execution"].get("execution_group", a["task"]):
               tasks[a["task"]]["resources"]["timeout_seconds"] for a in view["assignments"]}
     assert campaign["candidate_budget_seconds"] == 46620
-    assert sum(groups.values()) == 58440
+    # The original campaign keeps its old allowance. New model-mode tasks add
+    # an explicit reservation; they cannot silently fit the historical cap.
+    assert sum(groups.values()) == 61920
+    original_groups = {key: value for key, value in groups.items() if not key.startswith("model_")}
+    assert sum(original_groups.values()) == 58440
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="word ladder execution requires CUDA")

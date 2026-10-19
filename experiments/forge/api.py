@@ -114,7 +114,7 @@ def task_recipe_resources(task):
         return {"num_particles": LOCKED_SHARED.n_particles, "z_dim": 4, "batch_size": 128}
     if adapter in {"native100", "native100_continuation"} and "native_profile" in execution:
         return deepcopy(execution["host_definition"]["resources"])
-    if adapter == "word_joint":
+    if adapter in {"word_joint", "public_api_model_toy"}:
         return deepcopy(execution["host_definition"]["resources"])
     return deepcopy(execution.get("resources", {}))
 
@@ -125,6 +125,11 @@ def task_recipe_overrides(candidate, task):
     from .tier1_policy import is_policy_task
     bound = bind_task_candidate(candidate, task)
     execution = task["execution"]
+    if task["adapter"] == "public_api_model_toy":
+        from .model_toy_adapter import validate_task
+        validate_task(task)
+        resources = {**task_recipe_resources(task), **execution["recipe_fields"]}
+        return host_recipe_overrides(bound, execution, resources)
     if (task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold"
             and not is_policy_task(task)):
         from .behavior_adapters import behavior_preflight
@@ -177,6 +182,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
                       extension_recipe_bindings=context.bindings["recipe"])
     if context.recipe.constraint_geometry_mode != "none":
         if (context.execution_path == "public_components"
+                and task["adapter"] != "public_api_model_toy"
                 and task["execution"].get("host") not in COMPONENT_OBJECTIVE_HOSTS):
             raise CapabilityError(["constraint_geometry protected-loss hook is unavailable for this host"])
         if context.recipe.constraint_geometry_mode == "strict_progress" and (

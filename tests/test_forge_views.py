@@ -107,15 +107,16 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     assert all(a["task"] != variant["task"] for a in stability["assignments"] + quality["assignments"])
     smoke = [a["task"] for a in stability["assignments"]
              if a["qualification_tier"] == 1 and a["importance"] == "required"]
-    assert smoke == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
+    assert smoke[:7] == ["gaussian1d_smoke", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_smoke", "zero_tanh_smoke"]
+    assert len(smoke) == 13 and all(tasks[name]["adapter"] == "public_api_model_toy" for name in smoke[7:])
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
     # 0.10 restores four accuracy/settling tasks; the former hold policy is archived.
-    assert stability["revision"] == 13 and stability["previous_revision"]["revision"] == 12
+    assert stability["revision"] == 14 and stability["previous_revision"]["revision"] == 13
     assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
         "ring_hold", "clockfree_audit_measurement_v1"]
     assert next(a for a in stability["assignments"] if a["task"] == "ring_hold")["removal"]["counted_by"] == "ring_extension"
-    for role, counts in (("required", [7, 14, 1, 0]), ("held", [0, 7, 1, 5])):
+    for role, counts in (("required", [13, 16, 1, 0]), ("held", [0, 7, 1, 5])):
         assert [sum(a["qualification_tier"] == tier and a["importance"] == role
                     for a in stability["assignments"]) for tier in (1, 2, 3, 4)] == counts
     archived = json.loads((ROOT / "configs/forge/view-history/discriminator_stability-v9.json").read_text())
@@ -153,7 +154,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
     view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
     smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
-    assert smoke["counts"] == {"required": 7, "held": 0, "ranking": 0, "diagnostic": 1}
+    assert smoke["counts"] == {"required": 13, "held": 0, "ranking": 0, "diagnostic": 1}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_smoke", 1000, 120),
                                    ("ring16_acquisition", 1600, 300),

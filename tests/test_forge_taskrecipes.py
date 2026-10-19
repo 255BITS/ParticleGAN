@@ -41,6 +41,7 @@ def test_original_24_task_adaptations_stay_ready_and_original_reference_stays_bl
                  "zero_tanh_rail_escape", "grid100_mlp16", "grid100_res16_tanh", "misgan_block_recovery",
                  "misgan_block_neural_imputer", "ring16_bigan_continuous"}
     original_hosts = set(adapted["tasks"]) - additions
+    original_hosts -= {name for name, task in adapted["tasks"].items() if task["adapter"] == "public_api_model_toy"}
     assert additions <= set(adapted["tasks"]) and len(original_hosts) == 24
     assert all(not adapted["tasks"][name]["preflight_blockers"] for name in original_hosts)
     assert sum(bool(original["tasks"][name]["preflight_blockers"]) for name in original_hosts) == 21

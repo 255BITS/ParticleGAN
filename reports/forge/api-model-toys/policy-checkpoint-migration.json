@@ -1,0 +1,25 @@
+{
+  "schema": "source_only_policy_checkpoint_binding_v1",
+  "qualification_results_changed": false,
+  "training_rerun": false,
+  "tasks": [
+    {
+      "task": "five_word_joint_smoke",
+      "original_commit": "33a3806fd0c9",
+      "original_path": "configs/forge/tasks/five_word_joint_smoke.json",
+      "original_blob": "1351e40c146924fd98400081d4f9d32d555a9d2b",
+      "original_task_sha256": "2b5225e4d0c6ea30698b4c6cdb374b796883f8c804ab884beaa97f74f6a1d54c",
+      "previous_policy_sha256": "7b904bec09c4bbcfaa59b74465102489e5b45456f5725441b6538da6adf2accc",
+      "current_policy_sha256": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+    },
+    {
+      "task": "five_word_joint_hold",
+      "original_commit": "33a3806fd0c9",
+      "original_path": "configs/forge/tasks/five_word_joint_hold.json",
+      "original_blob": "b16e3e7d4c317f3d7f666d09bb0cfa1dc70952dd",
+      "original_task_sha256": "188894eb648ae88da2cb1fc4c585b8986f5d8577b82a495502db3d792411ea70",
+      "previous_policy_sha256": "7b904bec09c4bbcfaa59b74465102489e5b45456f5725441b6538da6adf2accc",
+      "current_policy_sha256": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+    }
+  ]
+}

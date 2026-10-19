@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 13,
+  "revision": 14,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -350,6 +350,54 @@
         "explanation": "reports/forge/test-dispositions-20261015/README.md#unresolved",
         "reentry": "Count again when one global recipe passes ring16_bigan_continuous under its unchanged declaration."
       }
+    },
+    {
+      "task": "model_ae_ddgan_bimodal_chain",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 21
+    },
+    {
+      "task": "model_ae_ddgan_gaussian_chain",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 7
+    },
+    {
+      "task": "model_ae_gan_multimodal",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 8
+    },
+    {
+      "task": "model_ae_reconstruction",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 9
+    },
+    {
+      "task": "model_ddgan_bimodal_chain",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 22
+    },
+    {
+      "task": "model_ddgan_gaussian_chain",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 10
+    },
+    {
+      "task": "model_vae_categorical",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 11
+    },
+    {
+      "task": "model_vae_hard",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 12
     }
   ],
   "eligibility": {},
@@ -362,10 +410,10 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Milestone 4: Register extensible Tier 4 stress_and_formulations suite (grid100_mlp16, grid100_res16_tanh, misgan_block_recovery, misgan_block_neural_imputer, ring16_bigan_continuous) as held tasks, zero_tanh_rail_escape in Tier 3 as held, and zero_tanh_smoke in Tier 1 as required.",
+  "policy_change_reason": "Register AE, hard/categorical VAE, actual DDGAN chains and AE-DDGAN paired chains as public-API model tasks: six basic Tier1 requirements and two harder bimodal Tier2 requirements with Gaussian gate dependencies. Frozen historical grades and cohorts are unchanged; calibration remains provisional.",
   "previous_revision": {
-    "archive": "configs/forge/view-history/discriminator_stability-v12.json",
-    "policy_fingerprint": "efe09cd3a8b28b45585c6e16c52c1a11b4ae34f68a32217e27929ed529d55871",
-    "revision": 12
+    "archive": "configs/forge/view-history/discriminator_stability-v13.json",
+    "policy_fingerprint": "766297373255342be272f0270f687ba4a1610bfaae4f087e87c157997a195c66",
+    "revision": 13
   }
 }
