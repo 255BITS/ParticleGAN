@@ -18,8 +18,9 @@
   retraining. The 20k optimized-BISPF trajectory reaches 100 modes with 42.115%
   within 3σ, retaining its failed precision goal and historical evidence.
 - The public default remains optimized BISPF. This release changes Forge's
-  requirements and reporting, without changing the 0.9.0 trainer or checkpoint
-  law. [Release notes](docs/releases/0.10.0.md) explain scope and readiness.
+  requirements and reporting. 0.10.0 builds on 0.9.1, including that release's
+  default execution/BF16 settings and optimizer compatibility.
+  [Release notes](docs/releases/0.10.0.md) explain scope and readiness.
 - Manual CI runs now follow the `develop`/`master` scope already used for pushes
   and PR targets. Superseded PR runs cancel automatically; tagged release checks
   retain their exact source binding.
