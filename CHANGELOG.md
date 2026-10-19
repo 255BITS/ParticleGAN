@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.9.2 — 2026-10-18
+
+- **SBNP prior regularizer degree-of-freedom guard in high-dimensional latents.**
+  `SBNPPriorRegularizer` and `sbnp_regularization_loss` now only include the
+  latent dimension `d` in `min_dof = 2 * k_nn + (d if d <= 4 else 0)` when
+  operating in the `d <= 4` full-covariance regime. High-dimensional latents
+  (`d > 4`, where only marginal variance floor, normalized off-diagonal
+  covariance Frobenius norm, and `k_nn` repulsion are evaluated) remain active
+  at standard batch sizes (`n = 16, 32, 64`) and when `num_particles > 1024`
+  passes sampled unique batch rows from `GANTrainer._step`.
+
 ## 0.9.1 — 2026-10-17
 
 - **Faster BISPF execution is the public default.** `bispf_optimized`,

@@ -57,7 +57,8 @@ def sbnp_regularization_loss(
     if z.ndim != 2 or not z.shape[1]:
         raise ValueError("particles must have shape [batch, positive latent dimension]")
     n, d = z.shape
-    if n <= 2 * k_nn + d:
+    min_dof = 2 * k_nn + (d if d <= 4 else 0)
+    if n <= min_dof:
         return z[:0].sum()
 
     # 1. Per-dimension variance floor (std >= target_std)
@@ -170,7 +171,7 @@ class SBNPPriorRegularizer(nn.Module):
         if self.weight == 0.0 or not len(rows):
             return rows[:0].sum()
         n, d = rows.shape
-        min_dof = 2 * self.k_nn + d
+        min_dof = 2 * self.k_nn + (d if d <= 4 else 0)
 
         if self.references:
             initial_mean, initial_covariance, total_n = self._reference_moments()
