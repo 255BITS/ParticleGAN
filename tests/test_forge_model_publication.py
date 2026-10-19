@@ -115,3 +115,13 @@ def test_memory_tracks_protocol_publication_and_actual_media(publication):
     paths = set(input_paths(root))
     assert {root / PROTOCOL, root / PUBLICATION} <= paths
     assert {root / PUBLICATION.parent / row["gif"] for row in document["readouts"]} <= paths
+
+
+def test_current_board_json_retains_research_without_qualification_credit():
+    board = read_json(ROOT / "reports/forge/technique-inventory.json")
+    research = board["model_api_research"]
+    assert research == load_publication(ROOT)
+    assert research["qualification_input"] is False
+    assert board["publication_refresh"]["scientific_rows_preserved"] is True
+    assert board["publication_refresh"]["qualification_regraded"] is False
+    assert board["publication_refresh"]["training_launched"] is False

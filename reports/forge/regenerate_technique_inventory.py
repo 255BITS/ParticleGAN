@@ -2598,6 +2598,10 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     if registry_hash is not None:
         result["trainer_family_registry"] = read_json(root / REGISTRY)
     result["standalone_api_scores"] = _standalone_api_scores(root)
+    from experiments.forge.model_toy_publication import load_publication as load_model_research
+    model_research = load_model_research(root)
+    if model_research is not None:
+        result["model_api_research"] = model_research
     result["publication_refresh"] = {"scientific_rows_preserved": True, "qualification_regraded": False,
                                      "training_launched": False}
     if view_id == "discriminator_stability":

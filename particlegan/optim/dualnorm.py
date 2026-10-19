@@ -6,6 +6,7 @@ player. The graft uses the norm of Adam's *unit-learning-rate* direction,
 so the scheduled learning rate is applied exactly once.
 """
 from copy import deepcopy
+from dataclasses import asdict
 import math
 
 import torch
@@ -13,6 +14,8 @@ from torch.optim import Optimizer
 
 from ..grad_regularizers import CriticStepRecord
 from .convolution_frobenius import frobenius_direction
+from .gram_polar import GRAM_DENSE_PROFILE, guarded_gram_polar
+from .gram_svd_fallback import VERSION as FALLBACK_DENSE_PROFILE, Counters, svd_fallback_polar
 
 
 NORMALIZED_FAMILIES = (
@@ -336,7 +339,7 @@ class NormalizedOptimizer(Optimizer):
 
     def __init__(self, params, *, family="dualnorm", lr=.01, betas=(0., .999),
                  eps=1e-8, momentum=0., amsgrad=False, smoothing=0., convolution="none",
-                 svd_backend="native", convolution_rule="polar", **options):
+                 svd_backend="native", convolution_rule="polar", dense_profile="default", **options):
         if family not in NORMALIZED_FAMILIES:
             raise ValueError("unknown normalized optimizer family")
         if isinstance(momentum, bool) or momentum not in (0., .5, .9):
@@ -359,6 +362,12 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("newton_schulz requires per_offset convolution and positive smoothing")
         if svd_backend == "batched" and convolution != "per_offset":
             raise ValueError("batched SVD requires per_offset convolution")
+        if type(dense_profile) is not str or dense_profile not in ("default", GRAM_DENSE_PROFILE, FALLBACK_DENSE_PROFILE):
+            raise ValueError("unknown optimizer dense_profile")
+        if dense_profile != "default" and (family != "dualnorm" or momentum != 0
+                or smoothing != .001 or svd_backend not in ("native", "batched")):
+            raise ValueError("dense_profile requires zero-momentum full DualNorm, smoothing .001 "
+                             "and native or batched SVD backend")
         if convolution_rule not in ("polar", "frobenius", "quintic"):
             raise ValueError("optimizer convolution rule must be polar, frobenius or quintic")
         if convolution_rule != "polar" and (
@@ -381,6 +390,8 @@ class NormalizedOptimizer(Optimizer):
         self.convolution = convolution
         self.convolution_rule = convolution_rule
         self.svd_backend = svd_backend
+        self.dense_profile = dense_profile
+        self._dense_profile_leaf_counters = {}
         self.recipe_optimizer_family = family
         self._sampled_rows = {}
         defaults = {"lr": float(lr), "betas": betas, "eps": float(eps), "amsgrad": bool(amsgrad),
@@ -390,6 +401,7 @@ class NormalizedOptimizer(Optimizer):
         super().__init__(params, defaults)
         for group in self.param_groups:
             self._configure_group(group)
+        self._validate_dense_profile_parameters()
         self._adam = None
         adam_groups = [group for group in self.param_groups if group["algorithm"] == "adam"]
         if adam_groups:
@@ -398,6 +410,18 @@ class NormalizedOptimizer(Optimizer):
             self._refresh_adam()
         self.latent_damping = self.latent_history = None
         self.direct_response = self.direct_history = None
+
+    def _validate_dense_profile_parameters(self):
+        if self.dense_profile == "default":
+            return
+        for group in self.param_groups:
+            if group["algorithm"] != "dualnorm" or "dualnorm_convolution" in group:
+                continue
+            for parameter in group["params"]:
+                if parameter.ndim == 2 and (parameter.dtype != torch.float32
+                        or parameter.device.type not in ("cpu", "cuda")
+                        or parameter.layout != torch.strided):
+                    raise ValueError("dense_profile requires ordinary dense FP32 CPU/CUDA parameters")
 
     def _configure_group(self, group):
         role = group["role"]
@@ -459,7 +483,28 @@ class NormalizedOptimizer(Optimizer):
         # Optimizer's default pickle omits the role family, observer and native
         # Adam component; public checkpoint preflight also deep-copies us.
         return {key: value for key, value in self.__dict__.items()
-                if key not in ("_newton_graphs", "_quintic_graphs")}
+                if key not in ("_newton_graphs", "_quintic_graphs", "_dense_profile_leaf_counters")}
+
+    @property
+    def dense_profile_stats(self):
+        """Detached runtime snapshot; not checkpoint identity/state.
+
+        Keys identify zero-based group:param positions. A successful public load
+        resets these diagnostics; rejected loads retain them. HOLD may follow
+        earlier leaf writes/clock advances and requires whole-state recovery.
+        Primary timing is host wall; fallback timing includes selected-device
+        transfer completion. Timers are not independent additive GPU costs.
+        """
+        per_leaf = {key: asdict(value) for key, value in
+                    getattr(self, "_dense_profile_leaf_counters", {}).items()}
+        aggregate = {key: value for key, value in asdict(Counters()).items()
+                     if key != "last_fallback"}
+        for counters in per_leaf.values():
+            for key in aggregate:
+                aggregate[key] += counters[key]
+        return {"profile": self.dense_profile, "aggregate": aggregate,
+                "per_leaf": per_leaf, "serialized": False,
+                "reset_on_successful_load": True}
 
     def set_sampled_rows(self, table, rows):
         """Record actual sampled indices, never infer ownership from gradients."""
@@ -491,6 +536,7 @@ class NormalizedOptimizer(Optimizer):
 
     @torch.no_grad()
     def step(self, closure=None):
+        self._validate_dense_profile_parameters()
         loss = None
         if closure is not None:
             with torch.enable_grad():
@@ -517,9 +563,9 @@ class NormalizedOptimizer(Optimizer):
                         squared = parameter.grad.square().sum()
                         norms[player] = squared if player not in norms else norms[player] + squared
         norms = {player: value.sqrt() for player, value in norms.items()}
-        for group in self.param_groups:
+        for group_index, group in enumerate(self.param_groups):
             algorithm, rate, eps = group["algorithm"], group["lr"], group["eps"]
-            for parameter in group["params"]:
+            for parameter_index, parameter in enumerate(group["params"]):
                 gradient = parameter.grad
                 if gradient is None or algorithm == "adam":
                     continue
@@ -639,7 +685,16 @@ class NormalizedOptimizer(Optimizer):
                         if bool(gradient.norm() < eps) or bool(direction.norm() < eps):
                             continue
                         factor = math.sqrt(max(1., parameter.shape[0] / parameter.shape[1]))
-                        if self.svd_backend in ("native", "newton_schulz", "batched"):
+                        if self.dense_profile == GRAM_DENSE_PROFILE:
+                            update = guarded_gram_polar(direction, smoothing=self.smoothing)
+                        elif self.dense_profile == FALLBACK_DENSE_PROFILE:
+                            if not hasattr(self, "_dense_profile_leaf_counters"):
+                                self._dense_profile_leaf_counters = {}
+                            counters = self._dense_profile_leaf_counters.setdefault(
+                                f"{group_index}:{parameter_index}", Counters())
+                            update = svd_fallback_polar(direction, smoothing=self.smoothing,
+                                                            counters=counters)
+                        elif self.svd_backend in ("native", "newton_schulz", "batched"):
                             update = (polar_factor(direction, smoothing=self.smoothing)
                                       if self.smoothing else polar_factor(direction))
                         else:
@@ -678,6 +733,8 @@ class NormalizedOptimizer(Optimizer):
             result["dualnorm"]["solver_version"] = _NEWTON_SCHULZ_VERSION
         if self.svd_backend == "batched":
             result["dualnorm"]["solver_version"] = _BATCHED_SVD_VERSION
+        if self.dense_profile != "default":
+            result["dualnorm"]["dense_profile"] = self.dense_profile
         if hasattr(self, "record"):
             result["regularizer"] = {"optimizer_family": self.family,
                                      "record": self.record.state_dict(), "ema": None, "guard": None}
@@ -691,6 +748,8 @@ class NormalizedOptimizer(Optimizer):
         if not isinstance(saved, dict) or saved.keys() != expected_keys:
             raise ValueError("invalid normalized optimizer checkpoint schema")
         meta = saved["dualnorm"]
+        if isinstance(meta, dict) and meta.get("dense_profile", "default") != self.dense_profile:
+            raise ValueError("checkpoint optimizer dense profile differs")
         expected_meta = {"schema", "family", "momentum", "sampled_rows"}
         if self.smoothing:
             expected_meta.add("smoothing")
@@ -708,6 +767,8 @@ class NormalizedOptimizer(Optimizer):
             expected_meta.add("solver_version")
             if not isinstance(meta, dict) or meta.get("solver_version") != _BATCHED_SVD_VERSION:
                 raise ValueError("checkpoint batched SVD version differs")
+        if self.dense_profile != "default":
+            expected_meta.add("dense_profile")
         if (not isinstance(meta, dict) or set(meta) != expected_meta
                 or meta["schema"] != 1 or meta["family"] != self.family or meta["momentum"] != self.momentum):
             raise ValueError("checkpoint normalized optimizer family or momentum differs")
@@ -719,6 +780,8 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("checkpoint optimizer convolution rule differs")
         if meta.get("svd_backend", "native") != self.svd_backend:
             raise ValueError("checkpoint optimizer SVD backend differs")
+        if meta.get("dense_profile", "default") != self.dense_profile:
+            raise ValueError("checkpoint optimizer dense profile differs")
         groups, values = saved["param_groups"], saved["state"]
         if (not isinstance(groups, list) or len(groups) != len(self.param_groups)
                 or not isinstance(values, dict) or not isinstance(meta["sampled_rows"], list)
@@ -819,6 +882,8 @@ class NormalizedOptimizer(Optimizer):
             if hasattr(self.record, "restore_device_state"):
                 self.record.restore_device_state(self.param_groups[0]["params"][0].device)
 
+        self._dense_profile_leaf_counters = {}
+
 
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
@@ -845,7 +910,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
                                     smoothing=recipe.optimizer_smoothing,
                                     convolution=recipe.optimizer_convolution,
                                     convolution_rule=recipe.optimizer_convolution_rule,
-                                    svd_backend=recipe.optimizer_svd_backend, **options)
+                                    svd_backend=recipe.optimizer_svd_backend,
+                                    dense_profile=recipe.optimizer_dense_profile, **options)
     if critic is not None:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
