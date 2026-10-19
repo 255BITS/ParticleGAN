@@ -17,6 +17,7 @@ JOINT_WORDS_CLEAN = "generated_and_paired_reconstructed_prior_without_output_noi
 PARTICLES_AND_GRADIENT = "learned_particles_and_critic_gradient"
 PARAMETER_MEASUREMENT = "learned_parameter_measurement"
 TRAINING_UPDATE_MEASUREMENT = "training_update_measurement"
+MODEL_TOY_CLEAN = "task_model_kernel_and_posterior_without_serving_noise"
 
 # A scheduled policy remains the same policy when its configured amplitude is
 # zero. Prior kernels remain governed by execution.prior, never by this field.
@@ -29,6 +30,7 @@ POLICIES = {
     PARTICLES_AND_GRADIENT: "not_applied_to_measurement",
     PARAMETER_MEASUREMENT: "not_applied_to_measurement",
     TRAINING_UPDATE_MEASUREMENT: "not_applied_to_measurement",
+    MODEL_TOY_CLEAN: "clean",
 }
 # Scoped selected-policy laws cannot impersonate the original clean/live laws.
 # Each registered policy cohort has its own prefix (see tier1_policy cohorts).
@@ -48,6 +50,7 @@ POLICIES.update({prefix + law: SERVED_LEARNED_NOISE
                  for prefix in AS_SERVED_LAW_PREFIXES for law in AS_SERVED_LAWS.values()})
 
 ADAPTER_POLICIES = {
+    "public_api_model_toy": MODEL_TOY_CLEAN,
     "dcgan_performance_v1": TRAINING_UPDATE_MEASUREMENT,
     "word_joint": JOINT_WORDS_CLEAN,
     "transfer_vector": PUBLIC_PRIOR_CLEAN,

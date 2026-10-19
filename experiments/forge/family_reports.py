@@ -1250,6 +1250,8 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
                   ". This counts attempts, including start refusals, rather than passes or qualification.", ""]
     lines += _full_suite_section(root, publication, page, selected)
     lines += _uncounted_section(root, page, summed, selected)
+    from .model_toy_publication import board_section
+    lines += board_section(root, page)
     from .scaling_publication import performance_section
     lines += performance_section(root, publication, page)
     if any(research.values()):

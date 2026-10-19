@@ -424,7 +424,8 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
 
 @reproducible_execution
 def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
-             eval_samples=None, frames=9, seed=DEFAULT_SEED, recipe_overrides=None, wall_cap_seconds=None):
+             eval_samples=None, frames=9, seed=DEFAULT_SEED, recipe_overrides=None, wall_cap_seconds=None,
+             recipe=None, audit_fixture=None):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     steps = case["default_steps"] if steps is None else steps
@@ -470,8 +471,13 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
     completed = 0
     fixture = None
     def capture(step):
+        from experiments.forge.state import state_digest
+        check_state = case.get("provider") in contract.MODEL_PROVIDERS
+        before = state_digest(fixture.state_dict()) if check_state else None
         with isolated_evaluation():
             record = contract.validate_observation(fixture.observe(n=samples, seed=seed + 10000))
+        if check_state and state_digest(fixture.state_dict()) != before:
+            raise ValueError("model toy evaluation changed training state or consumed a training RNG")
         if torch.device(device).type == "cuda":
             torch.cuda.synchronize(torch.device(device))
         record.update(step=step, elapsed_seconds=time.monotonic() - started)
@@ -489,7 +495,10 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                           "failed_bounds": record["failed_bounds"][:5]}, allow_nan=False), flush=True)
     try:
         options = {"recipe_overrides": recipe_overrides} if recipe_overrides else {}
-        fixture = contract.build(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps, **options)
+        fixture = contract.build(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps,
+                                 recipe=recipe, **options)
+        if audit_fixture is not None:
+            audit_fixture(fixture)
         from experiments.forge.state import state_digest
         receipt["reproducibility"] = {
             "comparison_version": COMPARISON_VERSION,

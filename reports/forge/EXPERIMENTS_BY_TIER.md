@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **170 tasks**; **133 assigned** to at least one view; **37 unassigned**. Showing **26/26 views**.
+Catalog: **178 tasks**; **141 assigned** to at least one view; **37 unassigned**. Showing **26/26 views**.
 
-Declared priors across the catalog: **63 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **71 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. Within each task, candidates share architecture, data law, batch size, prior, initialization, training budget, evaluation cadence and sampling law. Only the declared trainer change varies. The initialization column exposes fixed controls and component policies that take precedence over the deterministic orthogonal fallback; these are separate comparison cohorts. Historical results retain their original bindings.
 
@@ -46,7 +46,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 5 | 4 required | 12 required, 7 held | 6 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [dcgan_performance](../../configs/forge/views/dcgan_performance.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
 | [dcgan_performance_cpu_smoke](../../configs/forge/views/dcgan_performance_cpu_smoke.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
-| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 13 | 7 required, 1 diagnostic | 14 required, 7 held | 1 required, 1 held, 1 diagnostic (1 removed from the count) | 5 held | provisional |
+| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 14 | 13 required, 1 diagnostic | 16 required, 7 held | 1 required, 1 held, 1 diagnostic (1 removed from the count) | 5 held | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 3 | 3 required | 12 required, 7 held, 15 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 6 | 3 required | 12 required, 7 held, 13 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
@@ -607,7 +607,7 @@ No tasks assigned.
 
 ## discriminator_stability
 
-Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 13; goal: `discriminator_stability`.
+Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 14; goal: `discriminator_stability`.
 
 Declared calibration status: **provisional**.
 
@@ -619,7 +619,7 @@ Tier 4, the highest tier, has only held tasks, so while they are held this view 
 
 ### Tier 1: smoke
 
-7 required, 1 diagnostic.
+13 required, 1 diagnostic.
 
 | Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -630,11 +630,17 @@ Tier 4, the highest tier, has only held tasks, so while they are held this view 
 | [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json) | required | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 1600 | 300 | — |
 | [five_word_joint_smoke](../../configs/forge/tasks/five_word_joint_smoke.json) | required | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / word_smoke | 20001 | 900 | — |
 | [zero_tanh_smoke](../../configs/forge/tasks/zero_tanh_smoke.json) | required | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-zero-tanh-smoke) | transfer_vector / zero_tanh_smoke | 1000 | 120 | — |
+| [model_ae_ddgan_gaussian_chain](../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json) | required | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ae-ddgan-gaussian-chain) | public_api_model_toy / transfer_sustained | 2500 | 180 | — |
+| [model_ae_gan_multimodal](../../configs/forge/tasks/model_ae_gan_multimodal.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-model-ae-gan-multimodal) | public_api_model_toy / transfer_sustained | 1200 | 600 | — |
+| [model_ae_reconstruction](../../configs/forge/tasks/model_ae_reconstruction.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-model-ae-reconstruction) | public_api_model_toy / transfer_sustained | 1200 | 600 | — |
+| [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json) | required | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ddgan-gaussian-chain) | public_api_model_toy / transfer_sustained | 2500 | 600 | — |
+| [model_vae_categorical](../../configs/forge/tasks/model_vae_categorical.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; component policy; screening | [Question, results, GIFs](#experiment-api-model-vae-categorical) | public_api_model_toy / transfer_sustained | 1200 | 300 | — |
+| [model_vae_hard](../../configs/forge/tasks/model_vae_hard.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; component policy; screening | [Question, results, GIFs](#experiment-api-model-vae-hard) | public_api_model_toy / transfer_sustained | 1200 | 300 | — |
 | [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
 
 ### Tier 2: quality
 
-14 required, 7 held.
+16 required, 7 held.
 
 | Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -659,6 +665,8 @@ Tier 4, the highest tier, has only held tasks, so while they are held this view 
 | [grid100](../../configs/forge/tasks/grid100.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-grid100) | native100 / native_accuracy | 7000 | 3600 | — |
 | [rotated100](../../configs/forge/tasks/rotated100.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-rotated100) | native100 / native_accuracy | 7000 | 3600 | — |
 | [staggered100](../../configs/forge/tasks/staggered100.json) | required | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-staggered100) | native100 / native_accuracy | 7000 | 3600 | — |
+| [model_ae_ddgan_bimodal_chain](../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json) | required | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ae-ddgan-bimodal-chain) | public_api_model_toy / transfer_sustained | 5000 | 300 | [model_ae_ddgan_gaussian_chain](../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json) (gate) |
+| [model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json) | required | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ddgan-bimodal-chain) | public_api_model_toy / transfer_sustained | 5000 | 600 | [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json) (gate) |
 
 ### Tier 3: endurance
 
@@ -1594,6 +1602,408 @@ Related public-API demonstrations, with their own recorded contracts:
 | Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | [api-ae-anchor-hold](../toy_audit/api_contract/media/api-ae-anchor-hold.gif) | Reconstruct the noisy two-anchor inputs while the independently sampled prior covers both anchors Scope: New public Recipe.encode particle AE with reconstruction weight1 and applied GAN/KA2; independently sampled prior quality is separately scored. | MoGParticlePrior (sigma_rel=0.025) | COMPLETE / FAIL; 250/250 updates; quality_fraction, quality_mass_tv, last 5 post-update metric observations do not all pass | ae_gan / cpu / 3efb003d4c86 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
+| [api-model-ae-gan-multimodal](../toy_audit/api_contract/model_modes/media/api-model-ae-gan-multimodal.gif) | Reconstruct four equally weighted noisy corner Gaussians and independently generate their modes, masses and within-mode shapes. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Reconstruction and all prior gates must pass together. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+| [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: api-model-ae-ddgan-bimodal-chain
+
+Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality
+
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ae-ddgan.md).
+
+Forge declarations: [model_ae_ddgan_bimodal_chain](../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_ae_ddgan_bimodal_chain](../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json)
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| final_hq | >= 0.95 |
+| final_mode_mass_tv | <= 0.1 |
+| final_local_mean_sigma | <= 0.5 |
+| final_local_covariance_min | >= 0.5 |
+| final_local_covariance_max | <= 1.5 |
+| paired_nmse | <= 0.1 |
+| paired_worst_axis_nrmse | <= 0.25 |
+| paired_shuffled_gain | >= 3 |
+| paired_reverse_steps | == 4 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.25) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ae-ddgan-bimodal-chain](../toy_audit/api_contract/model_modes/media/api-model-ae-ddgan-bimodal-chain.gif) | Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality Scope: New scoped public ae_ddgan composition: same analytic target, schedule, G/D architecture and prior as the DDGAN task, plus a learned 2x32 encoder. Clean paired reconstruction and independent-prior generation are separate cohorts. Historical denoising results retain their identities. | MoGParticlePrior (sigma_rel=0) | SOFTWARE_PREFIX_ONLY / BLOCKED; 3/5000 updates; model_ae_ddgan_gaussian_chain, model_ddgan_gaussian_chain, model_vae_hard | bispf / cpu / ba35fb2b55bb | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: api-model-ae-ddgan-gaussian-chain
+
+Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality
+
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ae-ddgan.md).
+
+Forge declarations: [model_ae_ddgan_gaussian_chain](../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_ae_ddgan_gaussian_chain](../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json)
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| paired_nmse | <= 0.1 |
+| paired_worst_axis_nrmse | <= 0.25 |
+| paired_shuffled_gain | >= 3 |
+| paired_reverse_steps | == 4 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.25) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ae-ddgan-gaussian-chain](../toy_audit/api_contract/model_modes/media/api-model-ae-ddgan-gaussian-chain.gif) | Reconstruct held-out inputs through a learned particle AE and four public DDGAN reverse steps while preserving independent generation and conditional-transition quality Scope: New scoped public ae_ddgan composition: same analytic target, schedule, G/D architecture and prior as the DDGAN task, plus a learned 2x32 encoder. Clean paired reconstruction and independent-prior generation are separate cohorts. Historical denoising results retain their identities. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 2500/2500 updates; final_covariance_eigen_max, final_normalized_mean, final_projection_cdf, t1_q0_covariance_eigen_min, t1_q0_normalized_mean, t1_q0_projection_cdf, t1_q1_covariance_eigen_min, t1_q1_normalized_mean, t1_q1_projection_cdf, t2_q0_normalized_mean, t2_q0_projection_cdf, last 5 post-update metric observations do not all pass | bispf / cpu / ba35fb2b55bb | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: api-model-ddgan-bimodal-chain
+
+Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API
+
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md).
+
+Forge declarations: [model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json)
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| final_hq | >= 0.95 |
+| final_mode_mass_tv | <= 0.1 |
+| final_local_mean_sigma | <= 0.5 |
+| final_local_covariance_min | >= 0.5 |
+| final_local_covariance_max | <= 1.5 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.25) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ddgan-bimodal-chain](../toy_audit/api_contract/model_modes/media/api-model-ddgan-bimodal-chain.gif) | Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API Scope: New small analytic bimodal target, 2x32 MLPs and clean live serving. Actual forward-pair transition training and four-step reverse sampling; no historical 100-Gaussian or direct-posterior qualification. | MoGParticlePrior (sigma_rel=0) | SOFTWARE_PREFIX_ONLY / BLOCKED; 3/5000 updates; model_ae_ddgan_gaussian_chain, model_ddgan_gaussian_chain, model_vae_hard | bispf / cpu / ba35fb2b55bb | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: api-model-ddgan-gaussian-chain
+
+Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API
+
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md).
+
+Forge declarations: [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json)
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.25) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ddgan-gaussian-chain](../toy_audit/api_contract/model_modes/media/api-model-ddgan-gaussian-chain.gif) | Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API Scope: New small analytic gaussian target, 2x32 MLPs and clean live serving. Actual forward-pair transition training and four-step reverse sampling; no historical 100-Gaussian or direct-posterior qualification. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 2500/2500 updates; final_covariance_eigen_min, final_normalized_mean, final_projection_cdf, t1_q0_covariance_eigen_max, t1_q0_normalized_mean, t1_q0_projection_cdf, t1_q1_covariance_eigen_max, t1_q1_normalized_mean, t1_q1_projection_cdf, t2_q0_normalized_mean, t2_q0_projection_cdf, t2_q1_covariance_eigen_min, t2_q1_normalized_mean, t2_q1_projection_cdf, last 5 post-update metric observations do not all pass | bispf / cpu / 48177d41bb0b | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: api-model-vae-categorical
+
+Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes? New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE.
+
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/vae.md).
+
+Forge declarations: [model_vae_categorical](../../configs/forge/tasks/model_vae_categorical.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_vae_categorical](../../configs/forge/tasks/model_vae_categorical.json)
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.05 |
+| shuffle_reconstruction_ratio | >= 5 |
+| posterior_mutual_information | >= 0.3 |
+| posterior_noise_variance_ratio | >= 0.8 |
+| posterior_noise_variance_ratio | <= 1.2 |
+| kl_identity_error | <= 1e-05 |
+| elbo_identity_error | <= 0.0001 |
+| decoder_mean_hq | >= 0.85 |
+| decoder_mean_mass_tv | <= 0.15 |
+| decoder_mean_modes | >= 2 |
+| likelihood_hq | >= 0.85 |
+| likelihood_mass_tv | <= 0.15 |
+| likelihood_modes | >= 2 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = encoder, generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-vae-categorical](../toy_audit/api_contract/model_modes/media/api-model-vae-categorical.gif) | Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes? Scope: New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 48177d41bb0b | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: api-model-vae-hard
+
+Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes? New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE.
+
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/vae.md).
+
+Forge declarations: [model_vae_hard](../../configs/forge/tasks/model_vae_hard.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_vae_hard](../../configs/forge/tasks/model_vae_hard.json)
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.05 |
+| shuffle_reconstruction_ratio | >= 5 |
+| posterior_mutual_information | >= 0.3 |
+| posterior_noise_variance_ratio | >= 0.8 |
+| posterior_noise_variance_ratio | <= 1.2 |
+| kl_identity_error | <= 1e-05 |
+| elbo_identity_error | <= 0.0001 |
+| decoder_mean_hq | >= 0.85 |
+| decoder_mean_mass_tv | <= 0.15 |
+| decoder_mean_modes | >= 2 |
+| likelihood_hq | >= 0.85 |
+| likelihood_mass_tv | <= 0.15 |
+| likelihood_modes | >= 2 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = encoder, generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-vae-hard](../toy_audit/api_contract/model_modes/media/api-model-vae-hard.gif) | Can a genuine particle VAE retain the input and posterior noise while independently generating both target modes? Scope: New constrained two-mode seed-0 public-component cohort; does not reproduce or qualify historical 100-mode results. Hard routing has constant log(K) KL and biased straight-through gradients; categorical routing uses the public leave-one-out score estimator and a variable KL. A stochastic no-KL AE is not a VAE. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 1200/1200 updates; last 5 post-update metric observations do not all pass | bispf / cpu / 48177d41bb0b | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
 ### Experiment: clockfree-audit
 
@@ -3344,6 +3754,84 @@ Related public-API demonstrations, with their own recorded contracts:
 | [api-ring8-resolution12](../toy_audit/api_contract/media/api-ring8-resolution12.gif) | Retain the original 12-row resource as a low-resource public-API control; assess the actual perturbed served law. A separate unperturbed twelve-equal-atom witness has a mass/width obstruction, which does not prove this stochastic served law impossible. Scope: A per-observation gate is not full-budget or sustained convergence; no historical verdict is replaced. | ParticlePrior (sigma=0) | COMPLETE / FAIL; 1200/1200 updates; hq >= 0.9, mass_tv <= 0.075, max_cov_eigen <= 1.5, max_radial_ks <= 0.1, min_cov_eigen >= 0.5, modes == 8, last 5 post-update metric observations do not all pass | atlas / cpu / d9d51eff83a2 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
 | [api-ring8-shift](../toy_audit/api_contract/media/api-ring8-shift-failure.gif) | After qualified acquisition/hold, adapt to a +1 x translation at update2401; require recovery by update2800 and retained width/mass through3600. Scope: A per-observation gate is not full-budget or sustained convergence; no historical verdict is replaced. | ParticlePrior (sigma=0) | ERROR / FAIL; 1200/3600 updates; API execution or metric error: RuntimeError: scientific prerequisite failed at update1200: ['hq >= 0.9', 'max_cov_eigen <= 1.5', 'max_radial_ks <= 0.1'] | atlas / cpu / d9d51eff83a2 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/failed-runs.json) |
 
+### Experiment: model-ae-gan-multimodal
+
+Reconstruct four equally weighted noisy corner Gaussians and independently generate their modes, masses and within-mode shapes.
+
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ae.md).
+
+Forge declarations: [model_ae_gan_multimodal](../../configs/forge/tasks/model_ae_gan_multimodal.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_ae_gan_multimodal](../../configs/forge/tasks/model_ae_gan_multimodal.json)
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.025 |
+| reconstruction_mode_agreement | >= 0.98 |
+| modes | >= 4 |
+| precision | >= 0.9 |
+| mass_tv | <= 0.15 |
+| component_min_eigen_ratio | >= 0.1 |
+| component_max_eigen_ratio | <= 4 |
+| component_center_rms_sigma | <= 1 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ae-gan-multimodal](../toy_audit/api_contract/model_modes/media/api-model-ae-gan-multimodal.gif) | Reconstruct four equally weighted noisy corner Gaussians and independently generate their modes, masses and within-mode shapes. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Reconstruction and all prior gates must pass together. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
+### Experiment: model-ae-reconstruction
+
+Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control.
+
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ae.md).
+
+Forge declarations: [model_ae_reconstruction](../../configs/forge/tasks/model_ae_reconstruction.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_ae_reconstruction](../../configs/forge/tasks/model_ae_reconstruction.json)
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.025 |
+| reconstruction_mode_agreement | >= 0.98 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior; exact optimizer updates = True; mechanism exercised = False.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
+
 ### Experiment: recipe-prior-refactor-legacy-clockfree-audit-measurement-v1
 
 Measure the original four clock/state parity conditions and zero-dependency condition for an explicitly scheduled recipe; diagnostic FAIL grants no clock-free claim or qualification.
@@ -4887,6 +5375,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `4ab4b8ace88c093662353d76485a0cc7d703dd0b62d279418b1cf0388a3c69f6`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `7d0a22d597c830ac50652012fd968a85b96bc13cd3fecbff5b0d5b67aa0e78ef`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `d66d741ffb994a89be4430d00e2b8dc772d92b475f6934b7d01eee878cb5a0fa`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `97daf3a262e99e22f004384fccb7b3b03c45350aeb0d67bdc26e91a9ce3931a2`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

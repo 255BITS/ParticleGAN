@@ -42,6 +42,12 @@ definitions block E22/Atlas policy cohorts before reservation until separate
 policy-aware tasks are frozen. Keep bulk execution logs outside Git as required
 by [`AGENTS.md`](AGENTS.md).
 
+The [API model-mode research](reports/forge/api-model-toys/README.md) adds AE,
+hard/categorical VAE, full DDGAN chains and AE-DDGAN composition tasks to the
+existing tier view. Its fixed BISPF CPU research cohort, source-bound numerical
+results and actual-training GIFs remain separate from ordinary whole-suite
+qualification and from older AE/VAE/DDGAN studies.
+
 ## Readiness and scope
 
 **The framework is ready to use.** The

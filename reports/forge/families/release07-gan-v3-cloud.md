@@ -110,7 +110,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [release07-gan-v3-cloud-v1](../../../configs/forge/ideas/release07-gan-v3-cloud-v1.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 13, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
+Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 14, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -127,7 +127,7 @@ Selection: historical_incumbent. Retain the exact recorded incumbent; its outcom
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) | [0/1 (1 not run)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-4) | [0/16 (1 not run, 15 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
 | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) | [0/4 (1 not run, 3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) | [0/6 (5 not run, 1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-4) | [0/22 (6 not run, 16 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
-| [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [0/7 (3 not run, 4 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | [0/14 (2 not run, 12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | [0/1 (1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | [0/22 (5 not run, 17 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [0/13 (6 not run, 7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
+| [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [0/13 (9 not run, 4 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | [0/16 (4 not run, 12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | [0/1 (1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | [0/30 (13 not run, 17 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [0/13 (6 not run, 7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
 | [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) | [0/1 (1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-4) | [0/16 (16 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
 | [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) | [0/1 (1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-4) | [0/16 (16 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
 | [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-4) | [0/15 (15 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
@@ -153,6 +153,12 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit_measurement_v1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) | UNKNOWN | recorded definition unavailable |
 | [five_word_joint_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_smoke) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_smoke) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_ae_ddgan_gaussian_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_gaussian_chain) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_ae_gan_multimodal](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_gan_multimodal) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_ae_reconstruction](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_reconstruction) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_gaussian_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_gaussian_chain) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_vae_categorical](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_vae_categorical) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_vae_hard](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_vae_hard) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [ring16_acquisition](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | BLOCKED | changed since run |
 | [two_pole](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-two_pole) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | BLOCKED | changed since run |
 | [unused_token_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-unused_token_hold) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | BLOCKED | changed since run |
@@ -173,6 +179,8 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [model_ae_ddgan_bimodal_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_bimodal_chain) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_bimodal_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_bimodal_chain) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
 | [residual_student](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-residual_student) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
@@ -731,9 +739,9 @@ No experiments assigned.
 
 ## discriminator_stability
 
-**discriminator_stability — revision 13**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 14**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **7 / 14 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 1 / 5**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **13 / 16 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 1 / 5**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -750,6 +758,12 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [ring16_acquisition](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition) | required | BLOCKED | changed since run |
 | [five_word_joint_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_smoke) | required | UNKNOWN | recorded definition unavailable |
 | [zero_tanh_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-zero_tanh_smoke) | required | UNKNOWN | recorded definition unavailable |
+| [model_ae_ddgan_gaussian_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_gaussian_chain) | required | UNKNOWN | recorded definition unavailable |
+| [model_ae_gan_multimodal](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_gan_multimodal) | required | UNKNOWN | recorded definition unavailable |
+| [model_ae_reconstruction](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_reconstruction) | required | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_gaussian_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_gaussian_chain) | required | UNKNOWN | recorded definition unavailable |
+| [model_vae_categorical](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_vae_categorical) | required | UNKNOWN | recorded definition unavailable |
+| [model_vae_hard](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_vae_hard) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_measurement_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2"></a>
@@ -779,6 +793,8 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | required | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | required | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | required | BLOCKED | changed since run |
+| [model_ae_ddgan_bimodal_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_bimodal_chain) | required | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_bimodal_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_bimodal_chain) | required | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3"></a>
 
@@ -2581,6 +2597,432 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_bimodal_chain"></a>
+
+### model_ae_ddgan_bimodal_chain
+
+**model_ae_ddgan_bimodal_chain: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| final_hq | >= 0.95 |
+| final_mode_mass_tv | <= 0.1 |
+| final_local_mean_sigma | <= 0.5 |
+| final_local_covariance_min | >= 0.5 |
+| final_local_covariance_max | <= 1.5 |
+| paired_nmse | <= 0.1 |
+| paired_worst_axis_nrmse | <= 0.25 |
+| paired_shuffled_gain | >= 3 |
+| paired_reverse_steps | == 4 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 5000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+Dependencies: model_ae_ddgan_gaussian_chain (gate).
+
+[Explanation and existing training artifacts](../api-model-toys/ae-ddgan.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_gaussian_chain"></a>
+
+### model_ae_ddgan_gaussian_chain
+
+**model_ae_ddgan_gaussian_chain: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| paired_nmse | <= 0.1 |
+| paired_worst_axis_nrmse | <= 0.25 |
+| paired_shuffled_gain | >= 3 |
+| paired_reverse_steps | == 4 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 2500 updates; timeout 180 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/ae-ddgan.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ae_gan_multimodal"></a>
+
+### model_ae_gan_multimodal
+
+**model_ae_gan_multimodal: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.025 |
+| reconstruction_mode_agreement | >= 0.98 |
+| modes | >= 4 |
+| precision | >= 0.9 |
+| mass_tv | <= 0.15 |
+| component_min_eigen_ratio | >= 0.1 |
+| component_max_eigen_ratio | <= 4 |
+| component_center_rms_sigma | <= 1 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/ae.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ae_reconstruction"></a>
+
+### model_ae_reconstruction
+
+**model_ae_reconstruction: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_reconstruction.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.025 |
+| reconstruction_mode_agreement | >= 0.98 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior; exact optimizer updates = True; mechanism exercised = False.
+
+Declared budget: 1200 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/ae.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_bimodal_chain"></a>
+
+### model_ddgan_bimodal_chain
+
+**model_ddgan_bimodal_chain: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| final_hq | >= 0.95 |
+| final_mode_mass_tv | <= 0.1 |
+| final_local_mean_sigma | <= 0.5 |
+| final_local_covariance_min | >= 0.5 |
+| final_local_covariance_max | <= 1.5 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 5000 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+Dependencies: model_ddgan_gaussian_chain (gate).
+
+[Explanation and existing training artifacts](../api-model-toys/ddgan.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_gaussian_chain"></a>
+
+### model_ddgan_gaussian_chain
+
+**model_ddgan_gaussian_chain: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 2500 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/ddgan.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_vae_categorical"></a>
+
+### model_vae_categorical
+
+**model_vae_categorical: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_categorical.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.05 |
+| shuffle_reconstruction_ratio | >= 5 |
+| posterior_mutual_information | >= 0.3 |
+| posterior_noise_variance_ratio | >= 0.8 |
+| posterior_noise_variance_ratio | <= 1.2 |
+| kl_identity_error | <= 1e-05 |
+| elbo_identity_error | <= 0.0001 |
+| decoder_mean_hq | >= 0.85 |
+| decoder_mean_mass_tv | <= 0.15 |
+| decoder_mean_modes | >= 2 |
+| likelihood_hq | >= 0.85 |
+| likelihood_mass_tv | <= 0.15 |
+| likelihood_modes | >= 2 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = encoder, generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/vae.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_vae_hard"></a>
+
+### model_vae_hard
+
+**model_vae_hard: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_hard.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.05 |
+| shuffle_reconstruction_ratio | >= 5 |
+| posterior_mutual_information | >= 0.3 |
+| posterior_noise_variance_ratio | >= 0.8 |
+| posterior_noise_variance_ratio | <= 1.2 |
+| kl_identity_error | <= 1e-05 |
+| elbo_identity_error | <= 0.0001 |
+| decoder_mean_hq | >= 0.85 |
+| decoder_mean_mass_tv | <= 0.15 |
+| decoder_mean_modes | >= 2 |
+| likelihood_hq | >= 0.85 |
+| likelihood_mass_tv | <= 0.15 |
+| likelihood_modes | >= 2 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = encoder, generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/vae.md)
 
 <a name="cohort-cuda-7f9c23eb0e27-experiment-residual_student"></a>
 
