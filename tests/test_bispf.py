@@ -1667,9 +1667,61 @@ def test_bispf_continuous_mobility_floor():
     assert torch.allclose(x_2d.grad, torch.full_like(x_2d.grad, 2.0 * 1e-5), atol=1e-5)
 
 
+def test_bispf_sbnp_high_dim_latents_standard_batches():
+    """Verify SBNP regularizer remains active (non-zero loss, finite non-zero gradients)
+    when latent dimension d >= batch_size (e.g. d=64, 128, 512 with n=16, 32, 64)
+    and when num_particles > 1024 so GANTrainer._step passes sampled unique rows.
+    """
+    from particlegan.bispf import SBNPPriorRegularizer, sbnp_regularization_loss
+    from particlegan.recipes import get_recipe
+    from particlegan.training import GANTrainer
 
+    torch.manual_seed(42)
 
+    for d in (64, 128, 512):
+        for n in (16, 32, 64):
+            assert d >= n
+            rows_fn = torch.randn(n, d, requires_grad=True)
+            loss_fn = sbnp_regularization_loss(rows_fn)
+            assert torch.isfinite(loss_fn) and loss_fn.item() > 0.0, (
+                f"sbnp_regularization_loss returned {loss_fn.item()} for n={n}, d={d}"
+            )
+            loss_fn.backward()
+            assert rows_fn.grad is not None
+            assert torch.isfinite(rows_fn.grad).all()
+            assert rows_fn.grad.norm().item() > 0.0
 
+            rows_mod = torch.randn(n, d, requires_grad=True)
+            reg = SBNPPriorRegularizer()
+            loss_mod = reg(rows_mod)
+            assert torch.isfinite(loss_mod) and loss_mod.item() > 0.0, (
+                f"SBNPPriorRegularizer returned {loss_mod.item()} for n={n}, d={d}"
+            )
+            loss_mod.backward()
+            assert rows_mod.grad is not None
+            assert torch.isfinite(rows_mod.grad).all()
+            assert rows_mod.grad.norm().item() > 0.0
 
+    # Verify num_particles > 1024 sampled-row path in bispf_optimized and GANTrainer._step
+    for batch_size in (16, 64):
+        recipe = get_recipe("bispf_optimized", z_dim=128, batch_size=batch_size, num_particles=4096)
+        prior = recipe.make_prior()
+        prior_reg = recipe.make_prior_regularizer(prior=prior, reference=prior)
 
+        _, indices = prior.sample(batch_size)
+        unique_idx = torch.unique(indices)
+        raw = prior.z[unique_idx]
+        reg_loss = prior_reg(raw)
+        assert torch.isfinite(reg_loss) and reg_loss.item() > 0.0
+        reg_loss.backward()
+        assert prior.z.grad is not None
+        assert torch.isfinite(prior.z.grad).all()
+        assert prior.z.grad[unique_idx].norm().item() > 0.0
+        prior.zero_grad()
+
+        gen = nn.Linear(128, 8)
+        disc = nn.Linear(8, 1)
+        trainer = GANTrainer(recipe, gen, disc, prior=prior, seed=0)
+        stats = trainer.step(torch.randn(batch_size, 8))
+        assert stats["prior_regularization"].item() > 0.0
 
