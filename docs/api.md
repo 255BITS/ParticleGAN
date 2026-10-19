@@ -976,6 +976,45 @@ can change reduction rounding for strided kernels. Bitwise agreement with the
 native backend is not promised. Checkpoints bind backend version 1; graph caches are rebuilt after
 restore and are omitted from copies and checkpoints.
 
+`optimizer_dense_profile="gram_fp64_guarded_v1"` explicitly selects the
+versioned guarded FP64 Gram/eigh profile for ordinary FP32 dense matrices:
+
+```python
+recipe = get_recipe("bispf_optimized",
+                    optimizer_dense_profile="gram_fp64_guarded_v1")
+# Direct component-loop equivalent:
+from particlegan.optim import NormalizedOptimizer
+optimizer = NormalizedOptimizer(parameters, family="dualnorm", momentum=0,
+                                smoothing=.001,
+                                dense_profile="gram_fp64_guarded_v1")
+```
+
+It requires full DualNorm, zero momentum, smoothing exactly `.001`, and the
+`native` or `batched` SVD backend. Only unannotated, two-dimensional strided
+FP32 CPU/CUDA parameters take this path. Annotated convolutions, vectors/biases
+and sampled-prior rows retain their laws, including batched/quintic convolution
+execution. No global precision, random-state or backend setting changes.
+
+The profile promotes **before** forming a scaled FP64 Gram matrix, then computes
+the full hard-thresholded, smoothed polar direction. The strict cutoff remains
+`max(G.shape) * eps_float32 * largest_singular_value`, with original dimensions
+and absolute damping `.001`. The direction is cast to FP32 before the existing
+parameter update. A fixed-margin error model checks orthogonality, factor
+residual, negative eigenvalues and cutoff ambiguity on that same decomposition.
+This screen is not an outward-rounded interval certificate or quality proof.
+
+`GramGuardError` rejects an unqualified direction; technical solver errors
+propagate. There is **no fallback, retry or transactional rollback**. Earlier
+leaves, clocks or protected state may already have changed. Discard the failed
+update and restore complete training state, including weights, optimizers,
+pending protection and caller-owned RNG/sampling state, before continuing.
+
+This is a numerical variant, with rounding that can differ from default SVD.
+`optimizer_dense_profile="default"` retains the existing path and omits the new
+field from legacy recipe/optimizer packets. Selected packets bind the profile
+and reject cross-profile restore. Restore saved resolved recipes; do not relabel
+an existing checkpoint. See the [qualification and reproduction commands](../reports/gram-profile/README.md).
+
 `training_precision="bf16_channels_last"` configures `GANTrainer` for
 BF16 training for CUDA generator/critic networks containing a Conv2d or
 ConvTranspose2d whose largest channel-matrix dimension exceeds 32. These

@@ -223,6 +223,9 @@ class Recipe:
     # accelerates annotated convolution kernels; dense matrices retain native SVD.
     # Native retains the original computation and archived checkpoint identity.
     optimizer_svd_backend: str = "native"
+    # Versioned dense-only numerical profile; annotated convolution, vector
+    # and sampled-prior rules remain owned by their existing settings.
+    optimizer_dense_profile: str = "default"
     # Opt-in protection of existing G/encoder/prior objectives. Component
     # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
@@ -324,6 +327,16 @@ class Recipe:
             raise ValueError("newton_schulz requires per_offset convolution and positive optimizer_smoothing")
         if self.optimizer_svd_backend == "batched" and self.optimizer_convolution != "per_offset":
             raise ValueError("batched SVD requires per_offset convolution")
+        if (type(self.optimizer_dense_profile) is not str
+                or self.optimizer_dense_profile not in ("default", "gram_fp64_guarded_v1",
+                    "gram_fp64_svd_diagnostic_v2")):
+            raise ValueError("unknown optimizer_dense_profile")
+        if self.optimizer_dense_profile != "default" and (
+                self.optimizer_family != "dualnorm" or self.optimizer_momentum != 0
+                or self.optimizer_smoothing != .001
+                or self.optimizer_svd_backend not in ("native", "batched")):
+            raise ValueError("optimizer_dense_profile requires zero-momentum full DualNorm, "
+                             "smoothing .001 and native or batched SVD backend")
         if self.optimizer_adam_lr is not None:
             if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
                     or self.optimizer_adam_lr <= 0):
