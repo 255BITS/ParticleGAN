@@ -173,7 +173,19 @@ def test_committed_declarations_view_and_tiers_cover_all_selected_tests():
         ("misgan_block_neural_imputer", 4),
         ("ring16_bigan_continuous", 4),
     }
-    assert selected == {(name, tier) for tier, names in TIERS.items() for name in names} | revision_13_new_tasks
+    # The frozen policy cohorts do not acquire new task variants implicitly.
+    revision_14_new_tasks = {
+        ("model_ae_reconstruction", 1),
+        ("model_ae_gan_multimodal", 1),
+        ("model_vae_hard", 1),
+        ("model_vae_categorical", 1),
+        ("model_ddgan_gaussian_chain", 1),
+        ("model_ae_ddgan_gaussian_chain", 1),
+        ("model_ddgan_bimodal_chain", 2),
+        ("model_ae_ddgan_bimodal_chain", 2),
+    }
+    assert selected == ({(name, tier) for tier, names in TIERS.items() for name in names}
+                        | revision_13_new_tasks | revision_14_new_tasks)
 
 
 @pytest.mark.parametrize("family", FAMILIES)

@@ -2,7 +2,7 @@
   "automation_digest": "391b85927f392edf67e5876d55583ddfa090cd4213d7436c2acbc522888a2f18",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "f3ffcd7bb1daf1f72edf45b0dbaa1d5e4a08c0b057c62a36f49f5fa963395f4a",
+  "input_digest": "1ec912868f97f311232e7d9b082a6e279988be3fe4c0287e6e9a3921306f4f98",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -723,7 +723,7 @@
     "configs/forge/search-spaces/bcap-tier2-search-v1.json": "9d0a765a1105b4a6be1b82750eb52990c9b229e9bcd5c2f277f9d7af5514d2a5",
     "configs/forge/search-spaces/halloween-transfer-v1.json": "99721d95a336e734f4fb72d2c094255765cdccd1fbaa6c825cb78517c5712885",
     "configs/forge/searches/bcap-dualnorm-pacing-v2-a.json": "64d8a61e0f86303f6d2fdc5948320e724d9cac07b9b9b842c7b1271f3cf6b973",
-    "configs/forge/searches/bcap-dualnorm-smoothing-tier1-v1.json": "edc10caf816ce987d47b4ac05402c575da0e2568f9618a2a4e0bf4f956e75b3d",
+    "configs/forge/searches/bcap-dualnorm-smoothing-tier1-v1.json": "bca36e0c57c400581b0265c1a86f127049afd48a7463a6f809a23bdde9d7a8ee",
     "configs/forge/searches/bcap-family-defaults-round1-v1.json": "80b71aedba00536c976e2116adf2dafa9df8ca577d5b2b89d45e4cf6c08db7d4",
     "configs/forge/searches/bcap-optim-ada-nsgda-tier1-v1.json": "9d5f447d5e4e737f2a26b5cffeb187b9c8c277c5ef865a1ea485b4f6a7c7ac4a",
     "configs/forge/searches/bcap-optim-adam-tier1-v1.json": "f53310bc5564015e7f083e84b73bdad99aba71feed8d1030be4605a797e75571",
@@ -4269,7 +4269,7 @@
   },
   "operational_lifecycle_digest": "1f0e327db0f43b33080ec349f0bf27ded2d185bf2b60c86d613105800dbbbf2c",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "2c41a5650b76b8825d4e8754f4c4aa22fa9b1839c92923c3dc5aa14d45a85195",
+    "reports/forge/EXPERIMENT_MEMORY.md": "667799d5aff8631fc9e2d995295bbecbd69203a7a4e468f524055abe999358bf",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
