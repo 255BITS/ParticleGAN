@@ -74,7 +74,7 @@ ending at 98.3–98.6% of samples within 3σ after 7,000 updates:
 Requires Python 3.10+, PyTorch, and NumPy (installed as dependencies).
 
 ```bash
-python -m pip install particlegan           # the library (0.9.2)
+python -m pip install particlegan           # the library (0.9.3)
 ```
 
 For the examples, experiments and tests, install from source:

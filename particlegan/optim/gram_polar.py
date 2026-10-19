@@ -76,7 +76,9 @@ def guarded_gram_polar(matrix, *, smoothing=.001):
     if 0 in matrix.shape:
         return torch.zeros_like(matrix)
     version = matrix._version
-    value = matrix.double()
+    transposed = matrix.shape[0] < matrix.shape[1]
+    work = matrix.mT if transposed else matrix
+    value = work.double()
     scale = value.abs().amax()
     safe_scale = torch.where(scale == 0, torch.ones_like(scale), scale)
     z = value / safe_scale
@@ -100,4 +102,4 @@ def guarded_gram_polar(matrix, *, smoothing=.001):
     _guard_factors(z, gram, eigen, vectors, constant)
     if matrix._version != version:
         raise GramGuardError("input changed during the guarded solve")
-    return output
+    return output.mT.contiguous() if transposed else output

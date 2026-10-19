@@ -365,3 +365,23 @@ def test_recipe_rejects_incompatible_dense_profile(options):
     configured.update(options)
     with pytest.raises(ValueError):
         get_recipe("bcap", **configured)
+
+
+@pytest.mark.parametrize("shape", [(1, 64), (2, 16)])
+def test_wide_matrices_use_short_side_gram_and_match_oracle(shape, monkeypatch):
+    generator = torch.Generator(device="cpu").manual_seed(0)
+    rows, columns = shape
+    matrix = torch.randn(rows, columns, generator=generator, dtype=torch.float32, device="cpu")
+    eigh_shapes = []
+    original_eigh = torch.linalg.eigh
+
+    def tracked_eigh(gram, *args, **kwargs):
+        eigh_shapes.append(tuple(gram.shape))
+        return original_eigh(gram, *args, **kwargs)
+
+    monkeypatch.setattr(torch.linalg, "eigh", tracked_eigh)
+    result = guarded_gram_polar(matrix)
+    assert eigh_shapes == [(rows, rows)]
+    assert result.is_contiguous() and result.shape == shape
+    assert_accuracy(result, oracle(matrix))
+

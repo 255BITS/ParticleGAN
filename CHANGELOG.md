@@ -1,13 +1,18 @@
 # Changelog
 
-## Unreleased
+## 0.9.3 — 2026-10-18
 
-- Add opt-in `optimizer_dense_profile="gram_fp64_guarded_v1"` for FP32 dense
-  DualNorm matrices: FP64 Gram/eigh with the original FP32 cutoff, absolute
-  `.001` smoothing and a guard on the factors actually used. Default, convolution,
+- **Opt-in guarded FP64 Gram and diagnostic SVD dense profiles.** Add
+  `optimizer_dense_profile="gram_fp64_guarded_v1"` and
+  `optimizer_dense_profile="gram_fp64_svd_diagnostic_v2"` for FP32 dense
+  DualNorm matrices: FP64 Gram/`eigh` with the original FP32 cutoff, absolute
+  `.001` smoothing, a guard on the factors actually used, and device-local
+  FP64 SVD fallback (`gram_fp64_svd_diagnostic_v2`) when the Gram rank cutoff
+  is ambiguous. Wide matrices (`rows < columns`) orient along the shorter
+  dimension `(rows, rows)` before forming the Gram matrix. Default, convolution,
   vector and prior laws are unchanged. Selected checkpoints require the same
-  profile. Guard failures require full-state restoration, with no solver
-  fallback or rollback. See the [contract and evidence](reports/gram-profile/README.md).
+  profile. See the [contract and evidence](reports/gram-profile/README.md) and
+  [diagnostic SVD profile docs](docs/gram-svd-diagnostic-profile.md).
 
 ## 0.9.2 — 2026-10-18
 
