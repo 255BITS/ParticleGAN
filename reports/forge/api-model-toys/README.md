@@ -114,3 +114,9 @@ again with **zero optimizer updates, sampling draws or rendered frames**; no
 experiment was rerun. Software checks separately cover exact checkpoint replay,
 evaluation isolation, independent training streams, recipe ownership, complete
 chain execution, scorer counterexamples and fail-closed publication.
+
+The [saved-state DDGAN investigation](../ddgan-failure-investigation/README.md)
+finds low-noise conditional errors at central and fresh marginal contexts. It
+measures how reverse noise masks poor clean predictions at later steps and
+checks the critic's local output-gradient direction. It adds zero training
+updates and leaves every original result, gate and tier unchanged.

@@ -216,3 +216,11 @@ Historical [denoising toy research](../../denoising-toy/README.md) remains under
 its original source, initializer, seed, architecture and sampling law. These
 new small analytic cases and the explicit learned AE composition neither
 regrade those results nor claim the historical 100-Gaussian question is solved.
+
+The completed [saved-state investigation](../ddgan-failure-investigation/README.md)
+retains the paired reconstruction subgate passes and independent generation
+failure. Low-noise transition errors also occur at central and fresh marginal
+contexts; the step-1 median CDF error over eight new contexts is .301. Local
+critic output gradients oppose mean correction on 4/8 fixed panels, without
+identifying the actual parameter-step direction or temporal cause. No training
+updates, gate changes or tier changes were made.

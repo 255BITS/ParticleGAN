@@ -186,3 +186,11 @@ local `.log`, and `tail -f` that log. Raw logs, observation arrays and checkpoin
 stay in the artifact directory. Publish compact final metrics and real training
 GIFs with the single shared current leaderboard for this goal; this report does
 not create a second leaderboard.
+
+The completed [saved-state investigation](../ddgan-failure-investigation/README.md)
+finds low-noise conditional errors beyond the frozen queries. Step-4 reverse
+noise supplies about 99% of the exact transition variance, allowing a poor clean
+predictor to pass that later transition panel. The saved critic's local output
+gradient opposes needed mean correction on 7/8 vanilla fixed panels; this does
+not establish the actual optimizer-step direction or a temporal cause. The
+original generation failure and blocked deeper run remain unchanged.

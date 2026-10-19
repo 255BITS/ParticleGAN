@@ -1,0 +1,979 @@
+{
+  "analysis_code_sha256": "e1a3a9e812dc568ed94e9774427708899f4469695d2415d049ee8ab423488b52",
+  "analysis_scope": "exploratory follow-up of previously inspected saved states; no independent validation",
+  "diagnostic_protocol": {
+    "backend": "cpu",
+    "contexts_per_step": 8,
+    "gradient_units": "negative per-example non-saturating loss gradient with respect to x_prev, before batch-mean 1/n",
+    "samples_per_panel": 4096,
+    "seed": 0,
+    "threads": 1,
+    "training_updates": 0
+  },
+  "original_publication_sha256": "3fe2d2f3b09d9e1c34b5dea5435e3d67a6aee30023e265acef25ffc6808fc6cd",
+  "qualification_input": false,
+  "schema": "ddgan_saved_state_diagnosis_v1",
+  "source": {
+    "files_verified": 1252,
+    "manifest_digest": "a3678967d9a293bd98cfac5909e138c19f66a27cc7cc6f5714445cd21c733413",
+    "origin_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+    "scientific_source_unchanged": true
+  },
+  "tasks": {
+    "model_ae_ddgan_gaussian_chain": {
+      "completed_training_updates": 2500,
+      "diagnostic_samples_per_panel": 4096,
+      "fixed_panels": {
+        "t1_q0": {
+          "clean_posterior": {
+            "covariance_eigen_max": 1.2679610354267856,
+            "covariance_eigen_min": 0.6612463625298838,
+            "normalized_mean": 0.27682992624685665,
+            "projection_cdf": 0.1715154488924147
+          },
+          "context": [
+            -0.5,
+            0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              -0.06618085503578186,
+              -0.027839168906211853
+            ],
+            "mean_correction_descent_alignment": 0.007090169005095959,
+            "mean_fake_score": -0.06172174960374832,
+            "mean_generator_descent": [
+              -0.11460483819246292,
+              0.01776193268597126
+            ],
+            "mean_oracle_score": -0.050697725266218185
+          },
+          "mechanism": {
+            "clean_coefficient": 1.0,
+            "context_coefficient": 0.0,
+            "context_mahalanobis": 2.433516025543213,
+            "gaussian_context_radial_tail": 0.05176711454987526,
+            "learned_clean_share_of_exact_transition_variance": [
+              1.0,
+              1.0
+            ],
+            "reverse_noise_variance": 0.0
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 1.2679610354267856,
+            "covariance_eigen_min": 0.6612463625298838,
+            "normalized_mean": 0.27682992624685665,
+            "projection_cdf": 0.1715154488924147
+          }
+        },
+        "t1_q1": {
+          "clean_posterior": {
+            "covariance_eigen_max": 0.6997054386355238,
+            "covariance_eigen_min": 0.4786557309190772,
+            "normalized_mean": 0.4801765999647956,
+            "projection_cdf": 0.2563583431022157
+          },
+          "context": [
+            0.5,
+            -0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.018829345703125,
+              0.10592007637023926
+            ],
+            "mean_correction_descent_alignment": -0.0006038908613845706,
+            "mean_fake_score": 0.014066099189221859,
+            "mean_generator_descent": [
+              0.01224991399794817,
+              -0.007879042997956276
+            ],
+            "mean_oracle_score": 0.011189975775778294
+          },
+          "mechanism": {
+            "clean_coefficient": 1.0,
+            "context_coefficient": 0.0,
+            "context_mahalanobis": 0.23271334171295166,
+            "gaussian_context_radial_tail": 0.9732855558395386,
+            "learned_clean_share_of_exact_transition_variance": [
+              1.0,
+              1.0
+            ],
+            "reverse_noise_variance": 0.0
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 0.6997054386355238,
+            "covariance_eigen_min": 0.4786557309190772,
+            "normalized_mean": 0.4801765999647956,
+            "projection_cdf": 0.2563583431022157
+          }
+        },
+        "t2_q0": {
+          "clean_posterior": {
+            "covariance_eigen_max": 0.9269374864178126,
+            "covariance_eigen_min": 0.5397874131726115,
+            "normalized_mean": 0.5289773871072299,
+            "projection_cdf": 0.22956419555970875
+          },
+          "context": [
+            -0.5,
+            0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.07895918190479279,
+              -0.12116841971874237
+            ],
+            "mean_correction_descent_alignment": -0.0008958090911619365,
+            "mean_fake_score": -0.01634807325899601,
+            "mean_generator_descent": [
+              -0.005056807771325111,
+              0.004097830969840288
+            ],
+            "mean_oracle_score": -0.017475441098213196
+          },
+          "mechanism": {
+            "clean_coefficient": 0.8432739973068237,
+            "context_coefficient": 0.14907124638557434,
+            "context_mahalanobis": 1.3692809343338013,
+            "gaussian_context_radial_tail": 0.3916192948818207,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.5739591717720032,
+              0.39778998494148254
+            ],
+            "reverse_noise_variance": 0.08888890594244003
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 0.975768349065177,
+            "covariance_eigen_min": 0.7215228120673929,
+            "normalized_mean": 0.35965124773558066,
+            "projection_cdf": 0.15524919600791343
+          }
+        },
+        "t2_q1": {
+          "clean_posterior": {
+            "covariance_eigen_max": 1.0717344061170269,
+            "covariance_eigen_min": 0.5980714073587787,
+            "normalized_mean": 0.23481145392050393,
+            "projection_cdf": 0.13735169854634055
+          },
+          "context": [
+            0.5,
+            -0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              -0.05058467388153076,
+              0.04635545611381531
+            ],
+            "mean_correction_descent_alignment": -5.888256782782264e-05,
+            "mean_fake_score": -0.018764019012451172,
+            "mean_generator_descent": [
+              -0.001904848963022232,
+              -0.003348877187818289
+            ],
+            "mean_oracle_score": -0.018247220665216446
+          },
+          "mechanism": {
+            "clean_coefficient": 0.8432739973068237,
+            "context_coefficient": 0.14907124638557434,
+            "context_mahalanobis": 0.09773224592208862,
+            "gaussian_context_radial_tail": 0.9952355623245239,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.5739591717720032,
+              0.39778998494148254
+            ],
+            "reverse_noise_variance": 0.08888890594244003
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 1.0207821266489236,
+            "covariance_eigen_min": 0.7740477792178394,
+            "normalized_mean": 0.163775135350302,
+            "projection_cdf": 0.08119265422183675
+          }
+        },
+        "t3_q0": {
+          "clean_posterior": {
+            "covariance_eigen_max": 1.3311147483132522,
+            "covariance_eigen_min": 0.8059658719833551,
+            "normalized_mean": 0.08223992567558842,
+            "projection_cdf": 0.07770721451511087
+          },
+          "context": [
+            -0.5,
+            0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              -0.02194705605506897,
+              0.0030179470777511597
+            ],
+            "mean_correction_descent_alignment": 4.6012479288037866e-05,
+            "mean_fake_score": -0.01976602151989937,
+            "mean_generator_descent": [
+              -0.001785892527550459,
+              0.0022589517757296562
+            ],
+            "mean_oracle_score": -0.01989581808447838
+          },
+          "mechanism": {
+            "clean_coefficient": 0.6698905825614929,
+            "context_coefficient": 0.16643567383289337,
+            "context_mahalanobis": 0.7292181849479675,
+            "gaussian_context_radial_tail": 0.7665314078330994,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.15953604876995087,
+              0.0782230794429779
+            ],
+            "reverse_noise_variance": 0.4736841917037964
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 1.0506352178064868,
+            "covariance_eigen_min": 0.9917335431468375,
+            "normalized_mean": 0.029535789647501316,
+            "projection_cdf": 0.02291072181977838
+          }
+        },
+        "t3_q1": {
+          "clean_posterior": {
+            "covariance_eigen_max": 1.411712201138324,
+            "covariance_eigen_min": 0.8454284278945203,
+            "normalized_mean": 0.19317243872764372,
+            "projection_cdf": 0.11263709414119083
+          },
+          "context": [
+            0.5,
+            -0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              -0.03971710801124573,
+              0.01149013638496399
+            ],
+            "mean_correction_descent_alignment": 0.00020517670782282948,
+            "mean_fake_score": -0.026418916881084442,
+            "mean_generator_descent": [
+              -0.006353843957185745,
+              -0.004106092732399702
+            ],
+            "mean_oracle_score": -0.02620791830122471
+          },
+          "mechanism": {
+            "clean_coefficient": 0.6698905825614929,
+            "context_coefficient": 0.16643567383289337,
+            "context_mahalanobis": 0.4126669466495514,
+            "gaussian_context_radial_tail": 0.9183772802352905,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.15953604876995087,
+              0.0782230794429779
+            ],
+            "reverse_noise_variance": 0.4736841917037964
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 1.0476973809738634,
+            "covariance_eigen_min": 0.985041840641621,
+            "normalized_mean": 0.05527923426217759,
+            "projection_cdf": 0.025583056624236156
+          }
+        },
+        "t4_q0": {
+          "clean_posterior": {
+            "covariance_eigen_max": 1.4883333799524503,
+            "covariance_eigen_min": 0.8865287900735765,
+            "normalized_mean": 0.19051235820016837,
+            "projection_cdf": 0.11328731833296463
+          },
+          "context": [
+            -0.5,
+            0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.014923572540283203,
+              -0.0013731569051742554
+            ],
+            "mean_correction_descent_alignment": -3.756898149731569e-05,
+            "mean_fake_score": -0.023718826472759247,
+            "mean_generator_descent": [
+              -0.002408258616924286,
+              0.0011864330153912306
+            ],
+            "mean_oracle_score": -0.023830652236938477
+          },
+          "mechanism": {
+            "clean_coefficient": 0.22318191826343536,
+            "context_coefficient": 0.042489539831876755,
+            "context_mahalanobis": 0.5659722089767456,
+            "gaussian_context_radial_tail": 0.8520055413246155,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.010525464080274105,
+              0.004705552011728287
+            ],
+            "reverse_noise_variance": 0.9481948614120483
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 1.021336848551566,
+            "covariance_eigen_min": 1.0046390501356206,
+            "normalized_mean": 0.015309733532086105,
+            "projection_cdf": 0.015728624063441998
+          }
+        },
+        "t4_q1": {
+          "clean_posterior": {
+            "covariance_eigen_max": 1.5215999227563797,
+            "covariance_eigen_min": 0.9004444861380574,
+            "normalized_mean": 0.18094775922538622,
+            "projection_cdf": 0.11995354550147774
+          },
+          "context": [
+            0.5,
+            -0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              -0.028132200241088867,
+              -0.031073447316884995
+            ],
+            "mean_correction_descent_alignment": 0.00031541698263026774,
+            "mean_fake_score": -0.03197181597352028,
+            "mean_generator_descent": [
+              -0.0072059244848787785,
+              -0.0036268418189138174
+            ],
+            "mean_oracle_score": -0.03104390762746334
+          },
+          "mechanism": {
+            "clean_coefficient": 0.22318191826343536,
+            "context_coefficient": 0.042489539831876755,
+            "context_mahalanobis": 0.5521079897880554,
+            "gaussian_context_radial_tail": 0.8586347699165344,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.010525464080274105,
+              0.004705552011728287
+            ],
+            "reverse_noise_variance": 0.9481948614120483
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 0.987116573455861,
+            "covariance_eigen_min": 0.974523916164218,
+            "normalized_mean": 0.042888180593147245,
+            "projection_cdf": 0.028853856818189194
+          }
+        }
+      },
+      "marginal_context_summary": {
+        "t1": {
+          "contexts": 8,
+          "mean_correction_opposed": 6,
+          "normalized_mean_max": 1.2527552741243824,
+          "normalized_mean_median": 0.6407328543278326,
+          "projection_cdf_max": 0.4497593635895215,
+          "projection_cdf_median": 0.3007048328608013
+        },
+        "t2": {
+          "contexts": 8,
+          "mean_correction_opposed": 4,
+          "normalized_mean_max": 0.8352771169669809,
+          "normalized_mean_median": 0.16463923452724094,
+          "projection_cdf_max": 0.30702446794831606,
+          "projection_cdf_median": 0.08561092660083636
+        },
+        "t3": {
+          "contexts": 8,
+          "mean_correction_opposed": 7,
+          "normalized_mean_max": 0.539806261410376,
+          "normalized_mean_median": 0.169045517393971,
+          "projection_cdf_max": 0.21343866576279752,
+          "projection_cdf_median": 0.06861664014573321
+        },
+        "t4": {
+          "contexts": 8,
+          "mean_correction_opposed": 2,
+          "normalized_mean_max": 0.042701769169955196,
+          "normalized_mean_median": 0.025267798740224362,
+          "projection_cdf_max": 0.028965539679914998,
+          "projection_cdf_median": 0.022721870114526255
+        }
+      },
+      "original_artifact_hashes": {
+        "adapter-receipt.json": "e3246c71daf843cac7fc94ef6423bde871b40e8241ba47c99c62ceaabc164eb3",
+        "final-state.pt": "4bb5f2d96e1c6a2b44e23c554111c9e2cabeb2d4f3fc2347b942245a7b277ee4",
+        "goal.gif": "8d9bbccc9a564567806dbd5b09f1c6ea5e45febebfb40e357ab1f147a920f482",
+        "observations.npz": "7b2eb12c455504e8d52d13f87e7e6d190074d4f672c3f4b7d998db9752096196",
+        "receipt.json": "d7495d061836a793cfc27586b14988bb4c97ee02b33c995b71c7ffe2dcb58ea0"
+      },
+      "purity": {
+        "caller_torch_rng_unchanged": true,
+        "models_gradients_modes_unchanged": true,
+        "optimizer_constructed": false,
+        "original_training_streams_consumed": false,
+        "training_updates_added": 0
+      },
+      "saved_terminal_suffix": {
+        "endpoint_failed_bounds": [
+          "final_covariance_eigen_max",
+          "final_normalized_mean",
+          "final_projection_cdf",
+          "t1_q0_covariance_eigen_min",
+          "t1_q0_normalized_mean",
+          "t1_q0_projection_cdf",
+          "t1_q1_covariance_eigen_min",
+          "t1_q1_normalized_mean",
+          "t1_q1_projection_cdf",
+          "t2_q0_normalized_mean",
+          "t2_q0_projection_cdf"
+        ],
+        "endpoint_metrics": {
+          "final_covariance_eigen_max": 1.525788308358236,
+          "final_covariance_eigen_min": 1.175797625707041,
+          "final_normalized_mean": 0.5973940376636387,
+          "final_projection_cdf": 0.18311283346834928,
+          "paired_nmse": 0.030386758489284807,
+          "paired_reverse_steps": 4,
+          "paired_shuffled_gain": 65.31286360856024,
+          "paired_worst_axis_nrmse": 0.1877374734714363,
+          "panel_count": 8,
+          "samples_per_panel": 2048,
+          "t1_q0_covariance_eigen_max": 1.2578323270254619,
+          "t1_q0_covariance_eigen_min": 0.6089214896157675,
+          "t1_q0_normalized_mean": 0.28756519700246236,
+          "t1_q0_projection_cdf": 0.20170384320146606,
+          "t1_q1_covariance_eigen_max": 0.6884497370264415,
+          "t1_q1_covariance_eigen_min": 0.44320869089488796,
+          "t1_q1_normalized_mean": 0.5111426660065264,
+          "t1_q1_projection_cdf": 0.2711668099394876,
+          "t2_q0_covariance_eigen_max": 0.9103678314249987,
+          "t2_q0_covariance_eigen_min": 0.7244552538122547,
+          "t2_q0_normalized_mean": 0.3095477516833266,
+          "t2_q0_projection_cdf": 0.13853458012382902,
+          "t2_q1_covariance_eigen_max": 1.0070297126008563,
+          "t2_q1_covariance_eigen_min": 0.7568535281491734,
+          "t2_q1_normalized_mean": 0.19434995811744862,
+          "t2_q1_projection_cdf": 0.09535391342187616,
+          "t3_q0_covariance_eigen_max": 1.0983405817679397,
+          "t3_q0_covariance_eigen_min": 0.9423518317172656,
+          "t3_q0_normalized_mean": 0.018597471524103022,
+          "t3_q0_projection_cdf": 0.023511038823060215,
+          "t3_q1_covariance_eigen_max": 1.012974922145338,
+          "t3_q1_covariance_eigen_min": 0.9697027670370484,
+          "t3_q1_normalized_mean": 0.07819077492885604,
+          "t3_q1_projection_cdf": 0.042889859511675676,
+          "t4_q0_covariance_eigen_max": 1.0727140795768288,
+          "t4_q0_covariance_eigen_min": 1.0353052823704425,
+          "t4_q0_normalized_mean": 0.02225581392522468,
+          "t4_q0_projection_cdf": 0.023692817456361315,
+          "t4_q1_covariance_eigen_max": 1.0427672258350198,
+          "t4_q1_covariance_eigen_min": 0.9508038684735661,
+          "t4_q1_normalized_mean": 0.08015493116397643,
+          "t4_q1_projection_cdf": 0.04420736389324631,
+          "worst_transition_cdf": 0.2711668099394876
+        },
+        "passing_joint_observations": 0,
+        "ranges": {
+          "final_normalized_mean": {
+            "max": 0.7754636390167327,
+            "min": 0.2958778308148785
+          },
+          "final_projection_cdf": {
+            "max": 0.285502762863928,
+            "min": 0.1471063398791197
+          },
+          "paired_nmse": {
+            "max": 0.04409267234218497,
+            "min": 0.02435194011542647
+          },
+          "paired_shuffled_gain": {
+            "max": 79.12556279513382,
+            "min": 45.17452524795841
+          },
+          "paired_worst_axis_nrmse": {
+            "max": 0.2134214730917655,
+            "min": 0.17044213795033214
+          },
+          "worst_transition_cdf": {
+            "max": 0.4707835884736232,
+            "min": 0.2711668099394876
+          }
+        },
+        "steps": [
+          2084,
+          2188,
+          2292,
+          2396,
+          2500
+        ]
+      }
+    },
+    "model_ddgan_gaussian_chain": {
+      "completed_training_updates": 2500,
+      "diagnostic_samples_per_panel": 4096,
+      "fixed_panels": {
+        "t1_q0": {
+          "clean_posterior": {
+            "covariance_eigen_max": 1.551581365622786,
+            "covariance_eigen_min": 0.9170758033428332,
+            "normalized_mean": 1.1314337900098688,
+            "projection_cdf": 0.417420440388004
+          },
+          "context": [
+            -0.5,
+            0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.10655446350574493,
+              0.23618753254413605
+            ],
+            "mean_correction_descent_alignment": -0.0017199041321873665,
+            "mean_fake_score": 0.002859993139281869,
+            "mean_generator_descent": [
+              -0.0165458582341671,
+              0.0001826138759497553
+            ],
+            "mean_oracle_score": 0.0002558510168455541
+          },
+          "mechanism": {
+            "clean_coefficient": 1.0,
+            "context_coefficient": 0.0,
+            "context_mahalanobis": 2.433516025543213,
+            "gaussian_context_radial_tail": 0.05176711454987526,
+            "learned_clean_share_of_exact_transition_variance": [
+              1.0,
+              1.0
+            ],
+            "reverse_noise_variance": 0.0
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 1.551581365622786,
+            "covariance_eigen_min": 0.9170758033428332,
+            "normalized_mean": 1.1314337900098688,
+            "projection_cdf": 0.417420440388004
+          }
+        },
+        "t1_q1": {
+          "clean_posterior": {
+            "covariance_eigen_max": 2.4404941913533595,
+            "covariance_eigen_min": 0.7696650216720379,
+            "normalized_mean": 0.5812225109795812,
+            "projection_cdf": 0.21403879088535538
+          },
+          "context": [
+            0.5,
+            -0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.14582225680351257,
+              0.045390307903289795
+            ],
+            "mean_correction_descent_alignment": -0.004312293138355017,
+            "mean_fake_score": -0.03286529332399368,
+            "mean_generator_descent": [
+              -0.02653844654560089,
+              -0.009746515192091465
+            ],
+            "mean_oracle_score": -0.04154451563954353
+          },
+          "mechanism": {
+            "clean_coefficient": 1.0,
+            "context_coefficient": 0.0,
+            "context_mahalanobis": 0.23271334171295166,
+            "gaussian_context_radial_tail": 0.9732855558395386,
+            "learned_clean_share_of_exact_transition_variance": [
+              1.0,
+              1.0
+            ],
+            "reverse_noise_variance": 0.0
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 2.4404941913533595,
+            "covariance_eigen_min": 0.7696650216720379,
+            "normalized_mean": 0.5812225109795812,
+            "projection_cdf": 0.21403879088535538
+          }
+        },
+        "t2_q0": {
+          "clean_posterior": {
+            "covariance_eigen_max": 0.72080896735445,
+            "covariance_eigen_min": 0.3590074476103791,
+            "normalized_mean": 0.6793153437144761,
+            "projection_cdf": 0.3499385566619943
+          },
+          "context": [
+            -0.5,
+            0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.1917961984872818,
+              0.09343361854553223
+            ],
+            "mean_correction_descent_alignment": -0.00126523501239717,
+            "mean_fake_score": 0.012002973817288876,
+            "mean_generator_descent": [
+              -0.005095852538943291,
+              -0.003081008791923523
+            ],
+            "mean_oracle_score": 0.008619534783065319
+          },
+          "mechanism": {
+            "clean_coefficient": 0.8432739973068237,
+            "context_coefficient": 0.14907124638557434,
+            "context_mahalanobis": 1.3692809343338013,
+            "gaussian_context_radial_tail": 0.3916192948818207,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.5739591717720032,
+              0.39778998494148254
+            ],
+            "reverse_noise_variance": 0.08888890594244003
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 0.8543631476516254,
+            "covariance_eigen_min": 0.7356980997366003,
+            "normalized_mean": 0.4852382390416208,
+            "projection_cdf": 0.2138178852865356
+          }
+        },
+        "t2_q1": {
+          "clean_posterior": {
+            "covariance_eigen_max": 0.6774142498081935,
+            "covariance_eigen_min": 0.23487362762447395,
+            "normalized_mean": 0.40284235563393384,
+            "projection_cdf": 0.2979472681325165
+          },
+          "context": [
+            0.5,
+            -0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.13050997257232666,
+              0.030740290880203247
+            ],
+            "mean_correction_descent_alignment": -0.003123905975371599,
+            "mean_fake_score": -0.02059229463338852,
+            "mean_generator_descent": [
+              -0.023087499663233757,
+              -0.003602981101721525
+            ],
+            "mean_oracle_score": -0.026604771614074707
+          },
+          "mechanism": {
+            "clean_coefficient": 0.8432739973068237,
+            "context_coefficient": 0.14907124638557434,
+            "context_mahalanobis": 0.09773224592208862,
+            "gaussian_context_radial_tail": 0.9952355623245239,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.5739591717720032,
+              0.39778998494148254
+            ],
+            "reverse_noise_variance": 0.08888890594244003
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 0.8478793438916601,
+            "covariance_eigen_min": 0.6349263802968195,
+            "normalized_mean": 0.2967149985171985,
+            "projection_cdf": 0.14338390719167682
+          }
+        },
+        "t3_q0": {
+          "clean_posterior": {
+            "covariance_eigen_max": 0.5199047574464034,
+            "covariance_eigen_min": 0.20258122062428424,
+            "normalized_mean": 0.37101702690111393,
+            "projection_cdf": 0.3140660416182268
+          },
+          "context": [
+            -0.5,
+            0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.008863389492034912,
+              0.09092195332050323
+            ],
+            "mean_correction_descent_alignment": -0.00030527656781487167,
+            "mean_fake_score": 0.01597815565764904,
+            "mean_generator_descent": [
+              -0.00471855141222477,
+              -0.0028975862078368664
+            ],
+            "mean_oracle_score": 0.015467377379536629
+          },
+          "mechanism": {
+            "clean_coefficient": 0.6698905825614929,
+            "context_coefficient": 0.16643567383289337,
+            "context_mahalanobis": 0.7292181849479675,
+            "gaussian_context_radial_tail": 0.7665314078330994,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.15953604876995087,
+              0.0782230794429779
+            ],
+            "reverse_noise_variance": 0.4736841917037964
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 0.9526274193334772,
+            "covariance_eigen_min": 0.9407596298583656,
+            "normalized_mean": 0.12738279319751394,
+            "projection_cdf": 0.06100065497316992
+          }
+        },
+        "t3_q1": {
+          "clean_posterior": {
+            "covariance_eigen_max": 0.4718763262277672,
+            "covariance_eigen_min": 0.12192137759116893,
+            "normalized_mean": 0.3065400638514282,
+            "projection_cdf": 0.33326849228359057
+          },
+          "context": [
+            0.5,
+            -0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.0974445641040802,
+              0.006865054368972778
+            ],
+            "mean_correction_descent_alignment": -0.001301234937272966,
+            "mean_fake_score": 0.0067630247212946415,
+            "mean_generator_descent": [
+              -0.01322238240391016,
+              -0.0018624095246195793
+            ],
+            "mean_oracle_score": 0.0026398675981909037
+          },
+          "mechanism": {
+            "clean_coefficient": 0.6698905825614929,
+            "context_coefficient": 0.16643567383289337,
+            "context_mahalanobis": 0.4126669466495514,
+            "gaussian_context_radial_tail": 0.9183772802352905,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.15953604876995087,
+              0.0782230794429779
+            ],
+            "reverse_noise_variance": 0.4736841917037964
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 0.944736634663504,
+            "covariance_eigen_min": 0.9018475458740802,
+            "normalized_mean": 0.1301521701280663,
+            "projection_cdf": 0.06145098006279026
+          }
+        },
+        "t4_q0": {
+          "clean_posterior": {
+            "covariance_eigen_max": 0.40633207225140183,
+            "covariance_eigen_min": 0.16345178483912073,
+            "normalized_mean": 0.4310432747013915,
+            "projection_cdf": 0.2933314107638666
+          },
+          "context": [
+            -0.5,
+            0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              -0.0017187967896461487,
+              0.012781791388988495
+            ],
+            "mean_correction_descent_alignment": -2.8777323677786626e-05,
+            "mean_fake_score": 0.022887330502271652,
+            "mean_generator_descent": [
+              -0.00458740908652544,
+              -0.002868310548365116
+            ],
+            "mean_oracle_score": 0.022573132067918777
+          },
+          "mechanism": {
+            "clean_coefficient": 0.22318191826343536,
+            "context_coefficient": 0.042489539831876755,
+            "context_mahalanobis": 0.5659722089767456,
+            "gaussian_context_radial_tail": 0.8520055413246155,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.010525464080274105,
+              0.004705552011728287
+            ],
+            "reverse_noise_variance": 0.9481948614120483
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 1.0150193836257932,
+            "covariance_eigen_min": 0.9940372350226252,
+            "normalized_mean": 0.013212587581927403,
+            "projection_cdf": 0.01553591215506267
+          }
+        },
+        "t4_q1": {
+          "clean_posterior": {
+            "covariance_eigen_max": 0.5349802836685212,
+            "covariance_eigen_min": 0.11426045845252948,
+            "normalized_mean": 0.3289671528316041,
+            "projection_cdf": 0.2707416921041934
+          },
+          "context": [
+            0.5,
+            -0.25
+          ],
+          "critic": {
+            "desired_mean_translation": [
+              0.020183220505714417,
+              -0.04135230928659439
+            ],
+            "mean_correction_descent_alignment": 1.2219350537634455e-05,
+            "mean_fake_score": 0.019927509129047394,
+            "mean_generator_descent": [
+              -0.006547397002577782,
+              -0.0034911453258246183
+            ],
+            "mean_oracle_score": 0.019579676911234856
+          },
+          "mechanism": {
+            "clean_coefficient": 0.22318191826343536,
+            "context_coefficient": 0.042489539831876755,
+            "context_mahalanobis": 0.5521079897880554,
+            "gaussian_context_radial_tail": 0.8586347699165344,
+            "learned_clean_share_of_exact_transition_variance": [
+              0.010525464080274105,
+              0.004705552011728287
+            ],
+            "reverse_noise_variance": 0.9481948614120483
+          },
+          "reverse_transition": {
+            "covariance_eigen_max": 0.9803626349039283,
+            "covariance_eigen_min": 0.9708764440888769,
+            "normalized_mean": 0.047117424148800935,
+            "projection_cdf": 0.03284014812879077
+          }
+        }
+      },
+      "marginal_context_summary": {
+        "t1": {
+          "contexts": 8,
+          "mean_correction_opposed": 8,
+          "normalized_mean_max": 1.0007148166117763,
+          "normalized_mean_median": 0.7468455221574071,
+          "projection_cdf_max": 0.416168402827927,
+          "projection_cdf_median": 0.2650946155199968
+        },
+        "t2": {
+          "contexts": 8,
+          "mean_correction_opposed": 8,
+          "normalized_mean_max": 0.4227060317403555,
+          "normalized_mean_median": 0.34506994894984,
+          "projection_cdf_max": 0.1882450620288283,
+          "projection_cdf_median": 0.16949630275135646
+        },
+        "t3": {
+          "contexts": 8,
+          "mean_correction_opposed": 8,
+          "normalized_mean_max": 0.17913953187306003,
+          "normalized_mean_median": 0.10298851663037224,
+          "projection_cdf_max": 0.08250763534047745,
+          "projection_cdf_median": 0.053377128327144197
+        },
+        "t4": {
+          "contexts": 8,
+          "mean_correction_opposed": 4,
+          "normalized_mean_max": 0.07473935114212955,
+          "normalized_mean_median": 0.05994579116410326,
+          "projection_cdf_max": 0.03523360302256162,
+          "projection_cdf_median": 0.0314656102661281
+        }
+      },
+      "original_artifact_hashes": {
+        "adapter-receipt.json": "615654f93234a3ae738efde38aaa17042e8d995162053971ac46de230c2fc99d",
+        "final-state.pt": "829e073d516ad7201af1429e9f796048f7321ba2b351b6ec2682ae3c349d062b",
+        "goal.gif": "6c7590a4bdd357ee5db45b4d9cd27a1cd97afb06d8c9a7714d3deb752467d53d",
+        "observations.npz": "385a3d6c246512640a772f4125923321f73ae7845034ca6c993be9fb80bc0c98",
+        "receipt.json": "bd96e8e49feb576faabde5b407f3b0130e031896a0890fee46e2709dddf2832c"
+      },
+      "purity": {
+        "caller_torch_rng_unchanged": true,
+        "models_gradients_modes_unchanged": true,
+        "optimizer_constructed": false,
+        "original_training_streams_consumed": false,
+        "training_updates_added": 0
+      },
+      "saved_terminal_suffix": {
+        "endpoint_failed_bounds": [
+          "final_covariance_eigen_min",
+          "final_normalized_mean",
+          "final_projection_cdf",
+          "t1_q0_covariance_eigen_max",
+          "t1_q0_normalized_mean",
+          "t1_q0_projection_cdf",
+          "t1_q1_covariance_eigen_max",
+          "t1_q1_normalized_mean",
+          "t1_q1_projection_cdf",
+          "t2_q0_normalized_mean",
+          "t2_q0_projection_cdf",
+          "t2_q1_covariance_eigen_min",
+          "t2_q1_normalized_mean",
+          "t2_q1_projection_cdf"
+        ],
+        "endpoint_metrics": {
+          "final_covariance_eigen_max": 1.398722490869161,
+          "final_covariance_eigen_min": 0.5499189424785275,
+          "final_normalized_mean": 0.6056332609240245,
+          "final_projection_cdf": 0.2022633460624323,
+          "panel_count": 8,
+          "samples_per_panel": 2048,
+          "t1_q0_covariance_eigen_max": 1.5688282936824673,
+          "t1_q0_covariance_eigen_min": 0.8931827541055654,
+          "t1_q0_normalized_mean": 1.1555381742511794,
+          "t1_q0_projection_cdf": 0.42795975312463663,
+          "t1_q1_covariance_eigen_max": 2.4374239160286817,
+          "t1_q1_covariance_eigen_min": 0.7816622391813361,
+          "t1_q1_normalized_mean": 0.6233973212970109,
+          "t1_q1_projection_cdf": 0.21419970708459818,
+          "t2_q0_covariance_eigen_max": 0.8366764640324108,
+          "t2_q0_covariance_eigen_min": 0.7176342972690191,
+          "t2_q0_normalized_mean": 0.4791106827942708,
+          "t2_q0_projection_cdf": 0.20884118228729903,
+          "t2_q1_covariance_eigen_max": 0.8617685281818246,
+          "t2_q1_covariance_eigen_min": 0.6072135984759013,
+          "t2_q1_normalized_mean": 0.3089228166193501,
+          "t2_q1_projection_cdf": 0.16183166484448286,
+          "t3_q0_covariance_eigen_max": 0.9993030343961423,
+          "t3_q0_covariance_eigen_min": 0.866962743268448,
+          "t3_q0_normalized_mean": 0.12572053147884005,
+          "t3_q0_projection_cdf": 0.058778856422960435,
+          "t3_q1_covariance_eigen_max": 0.9154922844097153,
+          "t3_q1_covariance_eigen_min": 0.8798763435062107,
+          "t3_q1_normalized_mean": 0.14188434043911385,
+          "t3_q1_projection_cdf": 0.06471864649575676,
+          "t4_q0_covariance_eigen_max": 1.0667204731254925,
+          "t4_q0_covariance_eigen_min": 1.027428499498334,
+          "t4_q0_normalized_mean": 0.04087049924249799,
+          "t4_q0_projection_cdf": 0.031705732060090086,
+          "t4_q1_covariance_eigen_max": 1.0322756227877503,
+          "t4_q1_covariance_eigen_min": 0.9448780611892132,
+          "t4_q1_normalized_mean": 0.03537410142013931,
+          "t4_q1_projection_cdf": 0.03113424744624349,
+          "worst_transition_cdf": 0.42795975312463663
+        },
+        "passing_joint_observations": 0,
+        "ranges": {
+          "final_normalized_mean": {
+            "max": 1.155430000618835,
+            "min": 0.6056332609240245
+          },
+          "final_projection_cdf": {
+            "max": 0.4742933231485661,
+            "min": 0.2022633460624323
+          },
+          "worst_transition_cdf": {
+            "max": 0.5008422603174664,
+            "min": 0.3817017512998638
+          }
+        },
+        "steps": [
+          2084,
+          2188,
+          2292,
+          2396,
+          2500
+        ]
+      }
+    }
+  }
+}
