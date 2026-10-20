@@ -54,10 +54,44 @@ wrong spread; unchanged DDGAN conditional scorer controls reject wrong-context
 and unconditional samples. Replay tests check the exact energy streams,
 initial-model equality, target-batch equality, observation purity and restored
 checkpoint equality. Actual training GIFs and compact final metrics will be
-published after execution. This goal has one current generated leaderboard.
+published after execution. This goal has one [current generated leaderboard](../leaderboards/ddgan_conditional_repair.md).
 
 Raw logs/checkpoints/arrays stay outside Git. Tail progress with:
 
 ```sh
 tail -F /nvme/dev/particlegan/artifacts/ddgan-bispf-20261019/progress.log
 ```
+
+Round1 completed two full Gaussian failures and two wall-time incomplete bimodal
+attempts. On matched GPU0 the auxiliary changes Gaussian endpoint final CDF
+from0.5905 to0.0937 and worst conditional CDF from0.6144 to0.1289, but remains
+FAIL: final covariance maximum1.5563 exceeds1.4, conditional bounds fail, and
+none of the last five complete observations passes every gate. Final-chain CDF
+ranges0.0578–0.2836 over those five checks. Endpoint improvement is not sustained
+success. Saved optimizer state records1448 blended conflict steps and zero
+Pareto stalls; it does not establish a causal finite-step defect.
+
+Both600-second bimodal workers expired before5000 updates. The last saved log
+observations are baseline3542 and energy3334; exact terminal update counts,
+checkpoints and full receipts were not written before the outer supervisor
+terminated them. These attempts are INCOMPLETE resource outcomes, with no
+trained quality verdict or claimed training GIF. Their raw logs remain archived.
+
+Round2 is a justified finite amendment after those outcomes, with the exact same
+scientific code digest `db83af24303b269185064c69aa6837b3c56fe1fa5460b7da39aecc0672c0fe32`.
+The auxiliary1/K8, adversarial coefficient1 and all BISPF mechanisms remain;
+one global recipe changes lr.012→.003, cosine annealing start.6→.3 and positive
+network/prior floors1→.05. This tests whether smaller terminal steps stabilize
+the observed oscillation. It does not assume that explanation is proven.
+
+The bimodal timeout-only variant raises wall allowance600→1200 seconds while
+holding5000 updates, initialization, batches, architecture, sampling and gates
+fixed. Its original incomplete identity remains in the publication. View
+revision1 is archived byte-for-byte; revision2 selects the unchanged Gaussian
+and this explicit resource variant as diagnostics. The completed Gaussian
+baseline is reused by Forge; a complete matched baseline bimodal run is requested.
+Ready studies `ddgan-repair-annealed-r2` and `ddgan-repair-baseline-wall-r2` reserve
+up to3600 seconds. At most one further globally fixed repair is permitted after
+round2 diagnosis. Amended whole-campaign ceiling:9 run attempts,35000 declared
+maximum generator updates (including incomplete allowances),7800 total reserved
+seconds. No active cap or recorded result is relaxed or rewritten.

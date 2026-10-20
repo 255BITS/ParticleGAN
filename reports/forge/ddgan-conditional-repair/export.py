@@ -42,11 +42,16 @@ def export(queue, campaigns):
                 protocol_seed=0, qualification_input=False,
                 attempt_status=terminal.get("attempt_status", "running"),
                 terminal_sha256=sha(terminal_path) if terminal_path.exists() else None,
-                artifact_directory=str(directory), completed_updates=0,
+                artifact_directory=str(directory), completed_updates=None,
                 verdict="INCOMPLETE", terminal_passes=0, final_metrics={}, failed_bounds=[])
             # The full source file map is already content-addressed in Forge;
             # retain compact manifest identities here, not another bulk copy.
             row["source"] = {key: value for key, value in row["source"].items() if key != "files"}
+            log = directory / "run.log"
+            if log.exists():
+                rows = [json.loads(line) for line in log.read_text().splitlines()
+                        if line.startswith('{"case"')]
+                row["last_observed_update"] = rows[-1]["step"] if rows else None
             if raw_path.exists():
                 raw = read(raw_path)
                 complete = raw.get("default_protocol_complete", False) and raw.get("status") == "COMPLETE"
@@ -75,6 +80,14 @@ def export(queue, campaigns):
                         prior_policy=adapter["evidence"]["prior_policy"],
                         initial_models=adapter["evidence"]["initial_models"],
                         batch_sequence_sha256=adapter["evidence"]["batch_sequence_sha256"])
+                graded = directory / "graded-result.json"
+                if graded.exists():
+                    row["forge_grade"] = read(graded)["grades"][job["task_id"]]
+                    row["graded_receipt_sha256"] = sha(graded)
+                    if complete:
+                        row["verdict"] = row["forge_grade"]["gate_status"]
+                elif row["verdict"] == "PASS":
+                    row["verdict"] = "INCOMPLETE"
             runs.append(row)
     # Check the actual task contract and consumed clean/timestep sequence agree
     # across all recipe arms; timeout-only variants compare as their own tasks.
@@ -83,9 +96,11 @@ def export(queue, campaigns):
         for name in ("initial_models", "batch_sequence_sha256"):
             if len({json.dumps(row.get(name), sort_keys=True) for row in measured}) > 1:
                 raise ValueError(f"unmatched {name} for {task}")
+    contracts = {row["task"]: row.pop("task_contract") for row in runs}
     result = dict(schema="ddgan_conditional_repair_publication_v1", qualification_input=False,
         goal="ddgan_conditional_repair", seed=0,
-        baseline="bispf-optimized-quintic-v1", campaigns=campaigns, runs=runs)
+        baseline="bispf-optimized-quintic-v1", campaigns=campaigns,
+        task_contracts=contracts, runs=runs)
     (REPORT / "results.json").write_text(json.dumps(result, indent=2) + "\n")
     board = ROOT / "reports/forge/leaderboards/ddgan_conditional_repair.md"
     board.parent.mkdir(exist_ok=True)
@@ -99,8 +114,10 @@ def export(queue, campaigns):
         final = f'{metrics["final_projection_cdf"]:.4f}' if "final_projection_cdf" in metrics else "—"
         worst = f'{metrics["worst_transition_cdf"]:.4f}' if "worst_transition_cdf" in metrics else "—"
         gif = f'[actual training](../../{Path(row["gif"]).relative_to("reports")})' if row.get("gif") else "—"
+        updates = row["completed_updates"]
+        displayed_updates = str(updates) if updates is not None else f'>={row["last_observed_update"]}'
         lines.append(f'| `{row["candidate"]}` | `{row["task"]}` | **{row["verdict"]}** | '
-            f'{row["completed_updates"]}/{row["task_contract"]["execution"]["steps"]} | '
+            f'{displayed_updates}/{contracts[row["task"]]["execution"]["steps"]} | '
             f'{row["terminal_passes"]}/5 | {final} | {worst} | {gif} |')
     lines += ["", "CDF bounds: each final and conditional panel <=0.12. A PASS also requires all mean, "
         "covariance and bimodal mode/local-spread bounds at every final five scheduled checks. "
