@@ -114,3 +114,9 @@ again with **zero optimizer updates, sampling draws or rendered frames**; no
 experiment was rerun. Software checks separately cover exact checkpoint replay,
 evaluation isolation, independent training streams, recipe ownership, complete
 chain execution, scorer counterexamples and fail-closed publication.
+
+The [saved-state VAE investigation](../vae-failure-investigation/README.md) reproduces
+the archived final metrics and attributes prior-sample errors to row usage. The
+same association occurs in the passing categorical control, so the cause of the
+unsaved hard-VAE terminal failures remains unresolved. It adds zero training
+updates and leaves every original result, gate and tier unchanged.

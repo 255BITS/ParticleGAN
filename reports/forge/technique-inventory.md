@@ -86,6 +86,8 @@ One fixed BISPF recipe on new model-mode tasks, protocol seed 0. These source-bo
 
 Tier 2 full runs require every basic model task to pass. A blocked task may have a separately declared three-update software GIF; that prefix is INCOMPLETE and grants no deeper training credit.
 
+Saved-state investigations: [VAE saved-state investigation](vae-failure-investigation/README.md). These diagnostics add no training, qualification or replacement for the recorded failures.
+
 <!-- Forge scaling performance: start -->
 
 ## Performance
@@ -546,5 +548,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `7a461d55db25fab2aa4c20e82248ef33605a0f08f04e39e1715aa87fb7aa53d4`.
+Publication input digest `e9e8c99ea59f21f9f429769c9812be323eb3fba963164ce730fcc43c0a801c4a`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

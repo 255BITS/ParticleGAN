@@ -1252,6 +1252,14 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     lines += _uncounted_section(root, page, summed, selected)
     from .model_toy_publication import board_section
     lines += board_section(root, page)
+    model_diagnostics = []
+    for model in ("vae", "ddgan"):
+        readout = f"reports/forge/{model}-failure-investigation/README.md"
+        if (root / readout).is_file():
+            model_diagnostics.append(link(root, page, f"{model.upper()} saved-state investigation", readout))
+    if model_diagnostics:
+        lines += ["Saved-state investigations: " + "; ".join(model_diagnostics)
+                  + ". These diagnostics add no training, qualification or replacement for the recorded failures.", ""]
     from .scaling_publication import performance_section
     lines += performance_section(root, publication, page)
     if any(research.values()):
