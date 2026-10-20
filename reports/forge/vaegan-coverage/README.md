@@ -139,6 +139,13 @@ saved GIFs and independent frozen-source grader receipts, adding no training,
 sampling or new rendering. Its reporting guard excludes candidate-derived field
 ownership from fixed task comparisons while retaining the full binding hash.
 
+The full CI shard found one stale generated-report guard: adding this diagnostic
+view had not refreshed the technique inventory’s display metadata. The
+[display-only repair](ci-report-refresh.json) refreshes the existing inventory
+and family navigation. The exact failing test passes; all nine selected
+scientific rows, their original task contracts and all six VAEGAN results stay
+byte-exact. No training, sampling or qualification regrading was added.
+
 Reproduce scientific runs from a frozen checkout using the three declared
 studies, with an unused external queue root. Planning is read-only:
 

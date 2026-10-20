@@ -6,6 +6,13 @@
   "all_metric_observations": 24,
   "all_scientific_source_equal": true,
   "all_target_batches_equal": true,
+  "ci_report_refresh": {
+    "qualification_regraded": false,
+    "receipt": "ci-report-refresh.json",
+    "related_tests_failed": 0,
+    "related_tests_passed": 141,
+    "scientific_results_unchanged": true
+  },
   "default_adoption": false,
   "failures": 4,
   "focused_tests": {
