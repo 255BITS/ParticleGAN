@@ -6,6 +6,443 @@
   "within_mode_covariance_calibration_claim": false,
   "rows": [
     {
+      "attempt_id": "3a5811fbd2d442cda18bb6591c9979c7",
+      "candidate_id": "bispf-misgan-transport-settle-v1",
+      "candidate_revision": "4361bc72b78e2e5cd1fe28820e168a71edf24dcce81f08516986a8666c04c04e",
+      "source_digest": "d2b5cf8eba1f69f89321d76a0a6f7efc2cf75aba8d99e03741bc12cf8e0768de",
+      "source_commit": "21efa29ae0adabfd30eb4753f1276242370c55ed",
+      "request_sha256": "01425d2b4abcd18134e600c21f581c95629fb3dc50c76ae3e9c743464af58d4b",
+      "result_sha256": "e1d5d341c91a342da0f46eef6a937233051a79b2d15dd71db64034a91d1ea612",
+      "artifact_directory": "/nvme/dev/particlegan/artifacts/misgan-bispf-20261019/queue/misgan-bispf-transport-settle-r2/3a5811fbd2d442cda18bb6591c9979c7",
+      "paid_seconds": 447.38884347100975,
+      "study": "misgan-bispf-transport-settle-r2",
+      "api_receipt_sha256": "7e350d7e0b02e675dba8dc4702e45462be33cda482ffb9c2dbe790c373439b1d",
+      "adapter_receipt_sha256": "86733ec283536c81ce7dfe845e63a0cb5050c3411c8e73aa3e4be00c8cce8b7b",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "imputer_component_weight": 5.0,
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.0,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "masked_transport_weight": 1.0,
+        "model": "gan",
+        "name": "bispf",
+        "network_lr_floor": 0.05,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 64,
+        "observation_sigma": 0.08,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "protocol": {
+        "default_evaluation_samples": 4096,
+        "default_updates": 1200,
+        "evaluation_samples": 4096,
+        "evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 1200,
+        "wall_cap_seconds": 1800
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "completed_updates": 1200,
+      "verdict": "PASS",
+      "forge_gate": "PASS",
+      "failed_bounds": [],
+      "final": {
+        "ambiguous_hq": 0.937255859375,
+        "ambiguous_mass_tv": 0.078125,
+        "ambiguous_query_coverage": 1.0,
+        "ambiguous_std_ratio": 0.9620333313941956,
+        "hq": 0.989013671875,
+        "imputer_accuracy": 0.97265625,
+        "imputer_observed_error": 0.0,
+        "mask_tv": 0.010595705360174179,
+        "mass_tv": 0.093994140625,
+        "modes": 4,
+        "off_plane": 0.0029731420800089836
+      },
+      "terminal": [
+        {
+          "step": 1000,
+          "passed": true,
+          "metrics": {
+            "ambiguous_hq": 0.931640625,
+            "ambiguous_mass_tv": 0.073486328125,
+            "ambiguous_query_coverage": 1.0,
+            "ambiguous_std_ratio": 0.965829074382782,
+            "hq": 0.986328125,
+            "imputer_accuracy": 0.97265625,
+            "imputer_observed_error": 0.0,
+            "mask_tv": 0.013769533485174179,
+            "mass_tv": 0.093994140625,
+            "modes": 4,
+            "off_plane": 0.004998736083507538
+          },
+          "failed_bounds": []
+        },
+        {
+          "step": 1050,
+          "passed": true,
+          "metrics": {
+            "ambiguous_hq": 0.93359375,
+            "ambiguous_mass_tv": 0.080322265625,
+            "ambiguous_query_coverage": 1.0,
+            "ambiguous_std_ratio": 0.9638193249702454,
+            "hq": 0.989013671875,
+            "imputer_accuracy": 0.97265625,
+            "imputer_observed_error": 0.0,
+            "mask_tv": 0.01889648661017418,
+            "mass_tv": 0.093994140625,
+            "modes": 4,
+            "off_plane": 0.003968849778175354
+          },
+          "failed_bounds": []
+        },
+        {
+          "step": 1100,
+          "passed": true,
+          "metrics": {
+            "ambiguous_hq": 0.934326171875,
+            "ambiguous_mass_tv": 0.081787109375,
+            "ambiguous_query_coverage": 1.0,
+            "ambiguous_std_ratio": 0.9644970893859863,
+            "hq": 0.989013671875,
+            "imputer_accuracy": 0.972412109375,
+            "imputer_observed_error": 0.0,
+            "mask_tv": 0.014257814735174179,
+            "mass_tv": 0.093994140625,
+            "modes": 4,
+            "off_plane": 0.0024876215029507875
+          },
+          "failed_bounds": []
+        },
+        {
+          "step": 1150,
+          "passed": true,
+          "metrics": {
+            "ambiguous_hq": 0.937255859375,
+            "ambiguous_mass_tv": 0.079345703125,
+            "ambiguous_query_coverage": 1.0,
+            "ambiguous_std_ratio": 0.9663872122764587,
+            "hq": 0.990478515625,
+            "imputer_accuracy": 0.972412109375,
+            "imputer_observed_error": 0.0,
+            "mask_tv": 0.011083986610174179,
+            "mass_tv": 0.093994140625,
+            "modes": 4,
+            "off_plane": 0.002304294379428029
+          },
+          "failed_bounds": []
+        },
+        {
+          "step": 1200,
+          "passed": true,
+          "metrics": {
+            "ambiguous_hq": 0.937255859375,
+            "ambiguous_mass_tv": 0.078125,
+            "ambiguous_query_coverage": 1.0,
+            "ambiguous_std_ratio": 0.9620333313941956,
+            "hq": 0.989013671875,
+            "imputer_accuracy": 0.97265625,
+            "imputer_observed_error": 0.0,
+            "mask_tv": 0.010595705360174179,
+            "mass_tv": 0.093994140625,
+            "modes": 4,
+            "off_plane": 0.0029731420800089836
+          },
+          "failed_bounds": []
+        }
+      ],
+      "passed_terminal_checks": 5,
+      "reproducibility": {
+        "batch_sequence_sha256": "82398353915e2d2559db0f3b09385beb1c313e62eb1d06d05ced56e8526b8a96",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "b9c76f22f83523b1c503aff81ebb6584ee2439462ac6c0e4bdc2107fd4d5a434",
+          "G": "f704b78d042fa78e6e8aea5e6d4a10da668f4ac5ad4c0c5ea179e81f15b1cb7e",
+          "prior": "92791b345e0e07e7258682803e2a8640bbce67f9df259ec4f37f27f4337dc461"
+        },
+        "initial_state_sha256": "f18c10458bcb1177813067abe00111f194415aa9786df0931633bb786fed5e01"
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1200,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1200,
+              "calls": 1200,
+              "eligible": 1200,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 1200,
+            "observations": {
+              "applied": 1200,
+              "calls": 1200,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 3600,
+              "applied_record_calls_in_window": 3600,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 1200,
+              "observed_steps_in_window": 1200,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 1200
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 1200,
+                "last": 4.508982181549072,
+                "max": 4.8249688148498535,
+                "min": 3.259047269821167,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 1200,
+                "last": 0.03972253203392029,
+                "max": 0.6015648245811462,
+                "min": 0.034096576273441315,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 1200,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 0,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "unintended_rng_deviations": 0
+      },
+      "gif": {
+        "path": "../../toy_audit/api_contract/misgan_bispf/media/bispf-misgan-transport-settle-v1.gif",
+        "sha256": "3b9877086b8b8f225e2f41657949be728c46a6369147a54e62021a5d1fa4ce86",
+        "frames": 9
+      },
+      "checkpoint": {
+        "bytes": 295395,
+        "sha256": "a6112f841ca278b9b680f2efe0bc4926e4368f48079d2475e38bc8b38688c13a"
+      }
+    },
+    {
       "attempt_id": "87717e5cd41745a0a3462c3fb1605f75",
       "candidate_id": "bispf-optimized-quintic-v1",
       "candidate_revision": "a2bdf3d01a3c507b273d49bdefa1bf0707963aed72d1ed10fcca32bf82e4cf6d",
@@ -449,7 +886,7 @@
         "unintended_rng_deviations": 0
       },
       "gif": {
-        "path": "media/bispf-optimized-quintic-v1.gif",
+        "path": "../../toy_audit/api_contract/misgan_bispf/media/bispf-optimized-quintic-v1.gif",
         "sha256": "ff1c9e5069de1bbdf26459f57bcd498f66243a07bef4752388d3c4a92c3a1ac0",
         "frames": 9
       },
@@ -899,7 +1336,7 @@
         "unintended_rng_deviations": 0
       },
       "gif": {
-        "path": "media/bispf-misgan-observed-v1.gif",
+        "path": "../../toy_audit/api_contract/misgan_bispf/media/bispf-misgan-observed-v1.gif",
         "sha256": "5236dc82f7c80f3f63669f213c9d1cff60fcc22674277e8df7a3a172ecb60262",
         "frames": 9
       },
@@ -1354,7 +1791,7 @@
         "unintended_rng_deviations": 0
       },
       "gif": {
-        "path": "media/bispf-misgan-amortized-v1.gif",
+        "path": "../../toy_audit/api_contract/misgan_bispf/media/bispf-misgan-amortized-v1.gif",
         "sha256": "ba5df349b568efd92664b15efec4ceac1282cb59949c386a8b816a035aa2e49d",
         "frames": 9
       },
@@ -1407,5 +1844,5 @@
   ],
   "matched_initial_models": true,
   "matched_observed_batch_sequences": true,
-  "paid_seconds": 1860.1006299090222
+  "paid_seconds": 2307.489473380032
 }

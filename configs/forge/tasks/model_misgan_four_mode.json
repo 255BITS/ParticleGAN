@@ -183,6 +183,7 @@
     "pr196-block-neural-imputer"
   ],
   "research_artifacts": {
-    "readout": "reports/forge/misgan-bispf/README.md"
+    "readout": "reports/forge/misgan-bispf/README.md",
+    "api_publication": "reports/toy_audit/api_contract/misgan_bispf/publication.json"
   }
 }

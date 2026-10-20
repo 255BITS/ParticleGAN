@@ -23,7 +23,24 @@ def oracle_fixture():
     x2a=torch.stack((raw_sum[None]/2+along/2.**.5,raw_sum[None]/2-along/2.**.5),-1)
     ambiguous=p.standardize(x2a@p.A.T)
     ambiguous=x*m+ambiguous*(1-m)
-    return p,generated,masks,p.x_test.clone(),ambiguous
+    # Genuine analytic conditional draws, including random ambiguous branches;
+    # the positive control never copies a hidden complete test row.
+    prediction=torch.zeros_like(p.x_test)
+    for pattern in p.m_test.unique(dim=0):
+        rows=(p.m_test==pattern).all(1); sensors=pattern.bool()
+        raw=p.x_test[rows][:,sensors]*p.std[sensors]+p.mean[sensors]
+        if int(sensors.sum())>1:
+            z=torch.linalg.lstsq(p.A[sensors],raw.T).solution.T
+        else:
+            total=raw[:,0]*8**.5
+            center_sums=centers.sum(1)
+            weights=(-.5*(total[:,None]-center_sums).square()/(2*SIGMA**2)).softmax(1)
+            ids=torch.multinomial(weights,1,generator=r).flatten()
+            along=(centers[ids,0]-centers[ids,1])/2.**.5+SIGMA*torch.randn(len(ids),generator=r)
+            z=torch.stack((total/2+along/2.**.5,total/2-along/2.**.5),1)
+        prediction[rows]=p.standardize(z@p.A.T)
+    prediction=p.x_test*p.m_test+prediction*(1-p.m_test)
+    return p,generated,masks,prediction,ambiguous
 
 
 def test_scorer_oracle_and_uncertainty_controls():

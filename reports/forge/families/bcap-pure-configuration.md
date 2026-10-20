@@ -1076,6 +1076,42 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-1bf9d7d34422-misgan-bispf-research-v1"></a>
+
+## misgan-bispf-research-v1
+
+**misgan-bispf-research-v1 — revision 1**. [View declaration](../../../configs/forge/views/misgan-bispf-research-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Scoped research diagnostic; no ordinary qualification or default adoption.
+
+<a name="cohort-cuda-1bf9d7d34422-misgan-bispf-research-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [model_misgan_four_mode](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-experiment-model_misgan_four_mode) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-1bf9d7d34422-misgan-bispf-research-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-misgan-bispf-research-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-misgan-bispf-research-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage"></a>
 
 ## quality_coverage
@@ -2957,6 +2993,45 @@ Declared budget: 2500 updates; timeout 600 seconds.
 Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
 [Explanation and existing training artifacts](../api-model-toys/ddgan.md)
+
+<a name="cohort-cuda-1bf9d7d34422-experiment-model_misgan_four_mode"></a>
+
+### model_misgan_four_mode
+
+**model_misgan_four_mode: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_misgan_four_mode.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [misgan-bispf-research-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-1bf9d7d34422-misgan-bispf-research-v1-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+| mass_tv | <= 0.1 |
+| off_plane | <= 0.04 |
+| mask_tv | <= 0.05 |
+| imputer_observed_error | <= 1e-06 |
+| imputer_accuracy | >= 0.94 |
+| ambiguous_hq | >= 0.9 |
+| ambiguous_mass_tv | <= 0.12 |
+| ambiguous_query_coverage | >= 0.9 |
+| ambiguous_std_ratio | >= 0.7 |
+| ambiguous_std_ratio | <= 1.3 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../misgan-bispf/README.md)
 
 <a name="cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical"></a>
 
@@ -5094,6 +5169,42 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-0d83d78027c5-misgan-bispf-research-v1"></a>
+
+## misgan-bispf-research-v1
+
+**misgan-bispf-research-v1 — revision 1**. [View declaration](../../../configs/forge/views/misgan-bispf-research-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Scoped research diagnostic; no ordinary qualification or default adoption.
+
+<a name="cohort-cuda-0d83d78027c5-misgan-bispf-research-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [model_misgan_four_mode](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-experiment-model_misgan_four_mode) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-0d83d78027c5-misgan-bispf-research-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-misgan-bispf-research-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-misgan-bispf-research-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-0d83d78027c5-quality_coverage"></a>
 
 ## quality_coverage
@@ -6990,6 +7101,45 @@ Declared budget: 2500 updates; timeout 600 seconds.
 Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
 
 [Explanation and existing training artifacts](../api-model-toys/ddgan.md)
+
+<a name="cohort-cuda-0d83d78027c5-experiment-model_misgan_four_mode"></a>
+
+### model_misgan_four_mode
+
+**model_misgan_four_mode: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_misgan_four_mode.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [misgan-bispf-research-v1 / Tier 1](bcap-pure-configuration.md#cohort-cuda-0d83d78027c5-misgan-bispf-research-v1-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+| mass_tv | <= 0.1 |
+| off_plane | <= 0.04 |
+| mask_tv | <= 0.05 |
+| imputer_observed_error | <= 1e-06 |
+| imputer_accuracy | >= 0.94 |
+| ambiguous_hq | >= 0.9 |
+| ambiguous_mass_tv | <= 0.12 |
+| ambiguous_query_coverage | >= 0.9 |
+| ambiguous_std_ratio | >= 0.7 |
+| ambiguous_std_ratio | <= 1.3 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 1800 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../misgan-bispf/README.md)
 
 <a name="cohort-cuda-0d83d78027c5-experiment-model_vae_categorical"></a>
 

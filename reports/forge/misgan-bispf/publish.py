@@ -18,7 +18,8 @@ def main():
     parser.add_argument('--queue',type=Path,required=True)
     args=parser.parse_args()
     destination=Path(__file__).resolve().parent
-    media=destination/'media';media.mkdir(exist_ok=True)
+    media=destination.parents[1]/'toy_audit/api_contract/misgan_bispf/media'
+    media.mkdir(parents=True,exist_ok=True)
     rows=[];errors=[]
     for directory in sorted(args.queue.glob('misgan-*/*')):
         if not directory.is_dir() or not (directory/'result.json').is_file():
@@ -50,7 +51,7 @@ def main():
                  terminal=[dict(step=o['step'],passed=o['passed'],metrics=o['metrics'],failed_bounds=o['failed_bounds']) for o in terminal],
                  passed_terminal_checks=sum(o['passed'] for o in terminal),
                  reproducibility=api['reproducibility'],guards=adapter['evidence']['guards'],
-                 gif=dict(path='media/'+gif_name,sha256=digest(media/gif_name),frames=api['gif_frames']),
+                 gif=dict(path='../../toy_audit/api_contract/misgan_bispf/media/'+gif_name,sha256=digest(media/gif_name),frames=api['gif_frames']),
                  checkpoint=api['artifacts']['final-state.pt'])
         rows.append(row)
     # Keep an honest stable comparison: full-gate status first, then the frozen
@@ -76,6 +77,26 @@ def main():
             f"Matched initial model hashes: {output['matched_initial_models']}; matched observed-batch digests: {output['matched_observed_batch_sequences']}.",
             '', 'Exact task, source, recipe, budget, RNG and sample-law identities are in [results.json](results.json). The gates do not certify within-mode covariance calibration.']
     (destination/'LEADERBOARD.md').write_text('\n'.join(lines)+'\n')
+    # The navigation supplement exposes the one recommended complete recipe;
+    # all comparison arms and failures stay in the single research board.
+    winner=next((row for row in rows if row['forge_gate']=='PASS'),None)
+    if winner is not None:
+        original=Path(winner['artifact_directory'])/'api/receipt.json'
+        if digest(original)!=winner['api_receipt_sha256']:
+            raise ValueError('executed API receipt changed before publication')
+        case=json.loads(original.read_text())['case']
+        publication=dict(schema='forge_misgan_research_v1',qualification_input=False,cases=[case],
+                         readouts=[dict(id=case['id'],goal=case['goal'],scope=case['scope']+' Absolute task-owned MoG sigma=.025; relative calibration is bypassed. Recommended scoped recipe: '+winner['candidate_id'],
+                                        execution_status='COMPLETE',verdict='PASS',completed_updates=winner['completed_updates'],
+                                        default_updates=case['default_steps'],failed_bounds=winner['failed_bounds'],
+                                        source_commit=winner['source_commit'],final_metrics=winner['final'],
+                                        gif='media/'+Path(winner['gif']['path']).name)],
+                         runs=[dict(id=case['id'],candidate_id=winner['candidate_id'],recipe=winner['recipe'],runtime=winner['runtime'],
+                                    source_identity=winner['source_digest'],source_commit=winner['source_commit'],
+                                    api_receipt_sha256=winner['api_receipt_sha256'],
+                                    gif='media/'+Path(winner['gif']['path']).name,gif_sha256=winner['gif']['sha256'],
+                                    completed_updates=winner['completed_updates'],guards=winner['guards'])])
+        (media.parent/'publication.json').write_text(json.dumps(publication,indent=2,allow_nan=False)+'\n')
 
 
 if __name__=='__main__':

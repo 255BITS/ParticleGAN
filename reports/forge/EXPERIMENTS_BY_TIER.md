@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **178 tasks**; **141 assigned** to at least one view; **37 unassigned**. Showing **26/26 views**.
+Catalog: **179 tasks**; **142 assigned** to at least one view; **37 unassigned**. Showing **27/27 views**.
 
-Declared priors across the catalog: **71 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **72 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. Within each task, candidates share architecture, data law, batch size, prior, initialization, training budget, evaluation cadence and sampling law. Only the declared trainer change varies. The initialization column exposes fixed controls and component policies that take precedence over the deterministic orthogonal fallback; these are separate comparison cohorts. Historical results retain their original bindings.
 
@@ -51,6 +51,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 6 | 3 required | 12 required, 7 held, 13 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [lazy_cadence_coverage](../../configs/forge/views/lazy_cadence_coverage.json) | 1 | 30 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
+| [misgan-bispf-research-v1](../../configs/forge/views/misgan-bispf-research-v1.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | provisional |
 | [policy_cloud_coverage](../../configs/forge/views/policy_cloud_coverage.json) | 1 | 7 required | 21 required | 7 required | 0 tasks | undeclared |
 | [policy_cloud_coverage_as_served](../../configs/forge/views/policy_cloud_coverage_as_served.json) | 1 | 7 required | 21 required | 7 required | 0 tasks | undeclared |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 4 | 3 required | 12 required, 7 held | 0 tasks | 0 tasks | provisional |
@@ -925,6 +926,44 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 | [ring_hold](../../configs/forge/tasks/ring_hold.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
 | [ring_extension](../../configs/forge/tasks/ring_extension.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
 | [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 4: stress_and_formulations
+
+0 tasks.
+
+No tasks assigned.
+
+## misgan-bispf-research-v1
+
+Declaration: [misgan-bispf-research-v1](../../configs/forge/views/misgan-bispf-research-v1.json); revision 1; goal: `misgan_recovery_and_imputation`.
+
+Declared calibration status: **provisional**.
+
+Scoped research diagnostic; no ordinary qualification or default adoption.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+1 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [model_misgan_four_mode](../../configs/forge/tasks/model_misgan_four_mode.json) | diagnostic | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-model-misgan-four-mode) | public_api_model_toy / transfer_sustained | 1200 | 1800 | — |
 
 ### Tier 2: quality
 
@@ -3832,6 +3871,52 @@ Related public-API demonstrations, with their own recorded contracts:
 | --- | --- | --- | --- | --- | --- |
 | [api-model-ae-reconstruction](../toy_audit/api_contract/model_modes/media/api-model-ae-reconstruction.gif) | Reconstruct four equally weighted noisy corner Gaussians with public deterministic particle-AE routing and bounded offsets; explicit reconstruction-only objective control. Scope: Four equally weighted Gaussians at (+/-1,+/-1), sigma=.08; independently drawn target and prior samples. Explicit reconstruction-only objective control; independent generation is measured but not required. | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates; recomputed complete live curve and terminal suffix | bispf / cpu / 1e57b5216ea3 | [definition](../toy_audit/api_contract/model_modes/publication.json); [readout](../toy_audit/api_contract/model_modes/publication.json); [recipe and provenance](../toy_audit/api_contract/model_modes/publication.json) |
 
+### Experiment: model-misgan-four-mode
+
+Learn an 8D four-mode complete distribution and the block-mask law using only incomplete rows, then learn a stochastic neural imputer whose held-out single-sensor queries cover both ambiguous branches with correct mass.
+
+Explanation, interpretation and reproduction: [experiment readout](misgan-bispf/README.md).
+
+Forge declarations: [model_misgan_four_mode](../../configs/forge/tasks/model_misgan_four_mode.json).
+
+Declared Forge numerical gates and sampling:
+
+[model_misgan_four_mode](../../configs/forge/tasks/model_misgan_four_mode.json)
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+| mass_tv | <= 0.1 |
+| off_plane | <= 0.04 |
+| mask_tv | <= 0.05 |
+| imputer_observed_error | <= 1e-06 |
+| imputer_accuracy | >= 0.94 |
+| ambiguous_hq | >= 0.9 |
+| ambiguous_mass_tv | <= 0.12 |
+| ambiguous_query_coverage | >= 0.9 |
+| ambiguous_std_ratio | >= 0.7 |
+| ambiguous_std_ratio | <= 1.3 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | task_model_kernel_and_posterior_without_serving_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-model-misgan-four-mode](../toy_audit/api_contract/misgan_bispf/media/bispf-misgan-transport-settle-v1.gif) | Learn an 8D four-mode complete distribution and the block-mask law using only incomplete rows, then learn a stochastic neural imputer whose held-out single-sensor queries cover both ambiguous branches with correct mass. Scope: Explicit four-corner sigma=.08 target with a fixed Hadamard 8x2 lift. Same four block masks and masses as original MisGAN; sensor7 sees x+y, leaving two equally probable branches at zero. Original 100-mode MLP questions remain unchanged. Absolute task-owned MoG sigma=.025; relative calibration is bypassed. Recommended scoped recipe: bispf-misgan-transport-settle-v1 | MoGParticlePrior (sigma_rel=0) | COMPLETE / PASS; 1200/1200 updates | bispf / cuda:0 / d2b5cf8eba1f | [definition](../toy_audit/api_contract/misgan_bispf/publication.json); [readout](../toy_audit/api_contract/misgan_bispf/publication.json); [recipe and provenance](../toy_audit/api_contract/misgan_bispf/publication.json) |
+
 ### Experiment: recipe-prior-refactor-legacy-clockfree-audit-measurement-v1
 
 Measure the original four clock/state parity conditions and zero-dependency condition for an explicitly scheduled recipe; diagnostic FAIL grants no clock-free claim or qualification.
@@ -5375,6 +5460,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `7d0a22d597c830ac50652012fd968a85b96bc13cd3fecbff5b0d5b67aa0e78ef`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `02106a24ade6c79edb4f2848645eaae9a59a5fef1af03904c1e9b797fa762de1`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `d2f9b784bf5752f012a2a225ed7fcc879e48b52d643e1e868abdeafa6652f262`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `0739a6acadabd450a8639d52eb82f43b00d361d885e2b892aa7185aa6cc95d1a`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
