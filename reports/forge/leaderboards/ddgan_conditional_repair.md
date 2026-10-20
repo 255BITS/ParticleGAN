@@ -8,5 +8,8 @@ GPU0 shared-load diagnostic only; no ordinary qualification or speed ranking. Al
 | `bispf-ddgan-energy-v1` | `ddgan_repair_bimodal_chain_v1` | **INCOMPLETE** | >=3334/5000 | 0/5 | — | — | — |
 | `bispf-optimized-quintic-v1` | `ddgan_repair_gaussian_chain_v1` | **FAIL** | 2500/2500 | 0/5 | 0.5905 | 0.6144 | [actual training](../../forge/ddgan-conditional-repair/media/bispf-optimized-quintic-v1-ddgan_repair_gaussian_chain_v1.gif) |
 | `bispf-ddgan-energy-v1` | `ddgan_repair_gaussian_chain_v1` | **FAIL** | 2500/2500 | 0/5 | 0.0937 | 0.1289 | [actual training](../../forge/ddgan-conditional-repair/media/bispf-ddgan-energy-v1-ddgan_repair_gaussian_chain_v1.gif) |
+| `bispf-optimized-quintic-v1` | `ddgan_repair_bimodal_chain_wall_v2` | **FAIL** | 5000/5000 | 0/5 | 0.3738 | 0.4728 | [actual training](../../forge/ddgan-conditional-repair/media/bispf-optimized-quintic-v1-ddgan_repair_bimodal_chain_wall_v2.gif) |
+| `bispf-ddgan-energy-annealed-v2` | `ddgan_repair_bimodal_chain_wall_v2` | **FAIL** | 5000/5000 | 0/5 | 0.0450 | 0.1272 | [actual training](../../forge/ddgan-conditional-repair/media/bispf-ddgan-energy-annealed-v2-ddgan_repair_bimodal_chain_wall_v2.gif) |
+| `bispf-ddgan-energy-annealed-v2` | `ddgan_repair_gaussian_chain_v1` | **FAIL** | 2500/2500 | 0/5 | 0.0617 | 0.1911 | [actual training](../../forge/ddgan-conditional-repair/media/bispf-ddgan-energy-annealed-v2-ddgan_repair_gaussian_chain_v1.gif) |
 
 CDF bounds: each final and conditional panel <=0.12. A PASS also requires all mean, covariance and bimodal mode/local-spread bounds at every final five scheduled checks. [Full failed bounds, provenance and exact final metrics](../ddgan-conditional-repair/results.json).

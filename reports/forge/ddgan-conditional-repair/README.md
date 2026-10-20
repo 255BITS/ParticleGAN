@@ -1,117 +1,172 @@
-# Conditional DDGAN repair with the selected BISPF recipe
+# DDGAN conditional-law repair on the selected BISPF recipe
 
-This bounded research tests an auxiliary conditional energy score on the plain
-DDGAN Gaussian and bimodal chains. The baseline is exactly
-`bispf-optimized-quintic-v1`, selected by the technique inventory. Its historical
-CPU Gaussian FAIL and blocked bimodal full run remain unchanged. A new matched
-GPU0 baseline supplies the comparison on this execution cohort. GPU0 is shared
-and under load; elapsed cost is recorded without any throughput comparison.
+The first two rounds improve independent generation but do not pass either
+complete DDGAN task. The annealed energy recipe passes all five terminal
+Gaussian marginal checks, while its fixed low-noise conditional query still
+fails. Bimodal generation has much better centering and mode means, but local
+spread, high-quality coverage and conditional gates remain unresolved. The final
+bounded objective-geometry round is running; no ordinary qualification or
+public-default credit is claimed.
 
-The [saved-state diagnosis](../ddgan-failure-investigation/README.md) found
-low-noise conditional mismatches at central and fresh contexts, while high-noise
-reverse kernels masked poor clean predictions. Endpoint critic gradients opposed
-mean correction on seven of eight fixed panels; these local gradients do not
-establish optimizer-step direction or critic lag as a cause.
+The [single current leaderboard](../leaderboards/ddgan_conditional_repair.md)
+retains every measured failure and incomplete attempt, numerical endpoints and
+actual-training GIFs. [Compact results](results.json) contain exact failed bounds,
+full-budget and terminal-window status, source/task/recipe identities, model and
+batch hashes, optimizer guards, actual artifact hashes and measured costs.
+
+## Diagnosis and proposed mechanism
+
+The baseline is exactly `bispf-optimized-quintic-v1`, selected by the technique
+inventory; its declared recipe SHA is
+`60ba0af155bfe843f31fc11606a9b37d690b74be69ffd7ea4243c4b0a891541e`.
+Its historical CPU Gaussian FAIL and blocked bimodal full run retain their
+original identity. New matched GPU 0 runs provide this comparison.
+
+The [saved-state investigation](../ddgan-failure-investigation/README.md) found
+low-noise conditional errors at central and fresh contexts. High-noise reverse
+kernels masked poor clean predictions. Local critic gradients opposed needed
+mean correction on seven of eight fixed panels; they do not establish actual
+parameter-step direction, critic lag or a temporal cause.
 
 The [DDGAN paper](https://arxiv.org/abs/2112.07804) and
 [official implementation](https://github.com/NVlabs/denoising-diffusion-gan/blob/main/train_ddgan.py)
-model each reverse transition using a stochastic conditional generator and the
-Gaussian posterior kernel. That core is retained. The auxiliary is the negative
-beta1 [energy score, equation 22](https://doi.org/10.1198/016214506000001437):
-`mean ||X-y|| - sum(i != j)||Xi-Xj|| / (2*K*(K-1))`, with eight independent
-samples per existing clean/context pair and weight1. Its repulsion preserves
-conditional spread and its off-diagonal U-statistic avoids the finite-ensemble
-underdispersion bias. Training uses only the existing forward-paired clean x0;
-no analytic posterior, target weights or evaluation query enters the objective.
+model reverse transitions with a stochastic conditional clean predictor and a
+Gaussian posterior kernel. This experiment retains that transition game and all
+four reverse sampling steps. It adds the negative beta-1
+[energy score, equation 22](https://doi.org/10.1198/016214506000001437):
 
-The public `conditional_energy_score` implements that objective. The existing
-public DDGAN fixture, Recipe factories, learned MoG, SBNP, Born–Infeld critic
-penalty, DualNorm and ordered UpdatePolicy still own actual updates. The GAN
-objective retains coefficient1; the existing backward API receives both
-objectives as protected losses where supported, without a nonascent guarantee. New energy latent/kernel streams are independent and checkpointed;
-existing data, timestep and adversarial streams are unchanged. Unsupported hosts
-refuse an active energy recipe before reservation or construction.
+`mean ||Xi-y|| - sum(i != j)||Xi-Xj|| / (2*K*(K-1))`.
 
-Both recipes share protocol seed0, the public deterministic initializer, the
-2x32 G/D MLPs, target laws, initial128-location four-dimensional MoG with sigma.25,
-batch64, independent D/G clean/timestep sequences, all four reverse sampling
-steps, evaluation2048 per panel, 24 scheduled checks and five passing terminal
-checks. Original numerical bounds remain exact. Gaussian trains2500 updates and
-bimodal5000. Separate diagnostic task identities remove ordinary tier dependency
-only for this explicitly scoped research; their results grant zero ordinary
+Eight independent prior draws share each existing generator training context;
+`y` is that forward pair's real clean example. The off-diagonal U-statistic
+avoids finite-ensemble underdispersion bias, while separation rewards conditional
+spread. No analytic posterior, privileged target parameters or evaluation query
+enters training. The public `conditional_energy_score` owns this sample-only
+loss. The existing public DDGAN fixture, Recipe factories, learned MoG, SBNP,
+Born–Infeld critic penalty, DualNorm and ordered UpdatePolicy own actual updates.
+The adversarial objective retains coefficient 1 throughout.
+
+## Frozen comparison and bounded rounds
+
+Both tasks retain seed 0 and public deterministic initialization; two-layer
+width-32 G/D MLPs; 128 initial four-dimensional MoG locations with absolute
+sigma 0.25 and no standardization; batch 64; separate D/G clean and timestep
+streams; the schedule `[1,.9,.5,.05,.0001]`; clean live four-step ancestral
+sampling with fresh latent, kernel and reverse noise at every step; 2,048
+samples per panel; 24 scheduled observations; and five passing terminal checks.
+Gaussian trains 2,500 updates and bimodal 5,000. Every original mean, covariance,
+projection-CDF, mode-mass, quality and local-spread gate remains exact.
+
+Auxiliary draws have independent checkpointed latent/kernel streams. Tests and
+the exporter verify identical initial model hashes and complete consumed clean
+and timestep batch digests across recipe arms. Evaluation leaves training state
+and RNGs unchanged. The scientific code digest is identical across all rounds:
+`db83af24303b269185064c69aa6837b3c56fe1fa5460b7da39aecc0672c0fe32`.
+One global recipe is used across both tasks in each round.
+
+- Round 1 adds only conditional energy weight 1 with 8 draws to the selected
+  recipe. Ready studies `ddgan-repair-baseline-r1` and `ddgan-repair-energy-r1`
+  reserved 2,400 seconds before execution at commit `71275a4c7`.
+- Round 2 retains those objectives and globally changes learning rate
+  `0.012 -> 0.003`, cosine annealing start `0.6 -> 0.3`, and positive network/prior
+  floors `1 -> 0.05`. Studies `ddgan-repair-annealed-r2` and
+  `ddgan-repair-baseline-wall-r2` were frozen at `34b7a7d6b`.
+- Round 3 changes only `constraint_geometry_mode: direction_blend -> none`,
+  minimizing the same summed GAN, energy and SBNP objectives with the same rates
+  and core BISPF mechanisms. It removes the optional per-objective common-descent
+  blend. This tests whether that constraint limits conditional correction; its
+  conflict counts alone do not prove a cause or a generic nonascent guarantee.
+  Study `ddgan-repair-unconstrained-r3` was frozen at `223d24568` before execution.
+
+Round-1 bimodal workers exhausted their frozen 600-second allowance before
+5,000 updates. The last actual logged observations were baseline 3,542 and
+energy 3,334; exact terminal update counts, checkpoints and full receipts were
+not written before supervisor termination. They remain **INCOMPLETE resource
+outcomes**, with no full-budget quality verdict or substituted GIF.
+
+The explicit timeout-only bimodal variant raises allowance to 1,200 seconds,
+holding all 5,000 updates and scientific gates fixed. View revision 1 is
+[archived byte-for-byte](../../../configs/forge/view-history/ddgan-conditional-repair-v1-v1.json).
+Revision 2 selects that resource variant and the unchanged Gaussian as research
+diagnostics. The completed Gaussian baseline is reused exactly, never rerun.
+Ordinary deeper-task prerequisites remain failed; these diagnostics grant no
 qualification and cannot fill the original blocked cells.
 
-Round1 is frozen by two ready Forge studies, `ddgan-repair-baseline-r1` and
-`ddgan-repair-energy-r1`, in one2400-second reservation campaign (600 seconds per
-full task). If the energy recipe fails, at most two further substantively
-justified global recipe revisions may run both unchanged tasks. Maximum scope:
-8 full runs,30000 generator updates and4800 reserved seconds. A stopped round is
-never continued, seed-repeated or retried for scientific failure. All failures
-remain visible. A changed task or capacity requires an explicit new cohort.
+After the resource failures, the finite amendment permits at most 9 attempts,
+35,000 maximum declared generator updates including incomplete allowances, and
+7,800 reserved seconds across all rounds. Round 2 reserves up to 3,600 seconds;
+the final round reserves 1,800. No active cap, scientific gate or recorded result
+is relaxed. GPU 0 is shared and under load; costs are recorded without a speed
+comparison. No seed trial, continuation or automatic extension follows.
 
-Scorer controls compare oracle draws with collapsed means, wrong means and
-wrong spread; unchanged DDGAN conditional scorer controls reject wrong-context
-and unconditional samples. Replay tests check the exact energy streams,
-initial-model equality, target-batch equality, observation purity and restored
-checkpoint equality. Actual training GIFs and compact final metrics will be
-published after execution. This goal has one [current generated leaderboard](../leaderboards/ddgan_conditional_repair.md).
+## Measured findings and current recommendation
 
-Raw logs/checkpoints/arrays stay outside Git. Tail progress with:
+The matched Gaussian baseline fails with final CDF 0.5905, mean error 1.4801 and
+worst conditional CDF 0.6144. Round 1 improves those endpoints to 0.0937, 0.2198
+and 0.1289, but covariance maximum 1.5563 exceeds 1.4. Its five terminal final
+CDF values span 0.0578–0.2836, and none passes every task bound. Endpoint
+improvement is not sustained success. The saved optimizer records 1,448 blended
+conflict steps and zero Pareto stalls; [the diagnosis](round1-diagnosis.json)
+adds no updates or sampling.
+
+Round 2 stabilizes the Gaussian marginal: all five final-chain checks pass,
+with CDF 0.0451–0.0855. Endpoint CDF is 0.0617, mean error 0.1348 and covariance
+[0.9905,1.0117]. The endpoint's remaining failures are fixed panel `t1_q0`:
+mean error 0.6195, covariance maximum 1.4775 and CDF 0.1911. Its optimizer records
+1,605 blended conflicts and zero Pareto stalls.
+[Saved-state readout](round2-diagnosis.json) adds no updates or sampling.
+
+The complete matched bimodal baseline fails with final CDF 0.3738, worst
+conditional CDF 0.4728, mean error 0.7641, local mean error 1.066 sigma and minimum
+local covariance 0.3522. Round 2 improves final CDF to 0.0450, mean error to 0.0376,
+local mean error to 0.208 sigma and worst conditional CDF to 0.1272. It still
+fails: high-quality coverage 0.9390 is below 0.95 and maximum local covariance
+1.7867 exceeds 1.5, alongside conditional and sustained-window bounds.
+
+Keep every complete task labelled FAIL and every capped attempt INCOMPLETE.
+Do not select separate recipes per target or promote the passing Gaussian
+marginal subgates to a task pass. The declared final round will test the single
+objective-geometry hypothesis before this campaign concludes.
+
+## Software validation and reproduction
+
+**72 focused tests pass**, covering proper-score oracle versus collapsed/wrong
+mean/wrong spread controls, off-diagonal normalization, independent same-context
+draws, rejection of analytic-posterior leakage, public component execution,
+exact checkpoint replay for both optimizer geometries, unchanged initial models
+and target batches, observation purity, and unsupported-host refusal.
+**124 training/recipe/model-toy regression tests pass** and Forge declarations
+validate. Original DDGAN scorer controls reject wrong contexts, unconditional
+samples, posterior-mean collapse, mode collapse and nonfinite output at the
+actual evaluation sample count. The source-only compatibility migration retains
+[all four original task Git blobs and source hashes](source-migration.json);
+no historical receipt or qualification was rewritten or rerun.
+
+Use a detached checkout of the pinned preregistration commit for the desired
+round and a new queue directory. For example, round 3 uses the public Forge
+pipeline and the repository's Python environment:
+
+```sh
+python -m experiments.forge --queue-root /outside-git/ddgan-reproduction/queue \
+  plan bispf-ddgan-energy-unconstrained-v3 --study ddgan-repair-unconstrained-r3
+python -m experiments.forge --queue-root /outside-git/ddgan-reproduction/queue \
+  enqueue bispf-ddgan-energy-unconstrained-v3 --study ddgan-repair-unconstrained-r3
+python -m experiments.forge --queue-root /outside-git/ddgan-reproduction/queue \
+  drain --gpus 0 --allow-sharing --workers-per-gpu 2 \
+  --campaign ddgan-conditional-repair-r3
+```
+
+`export.py` reads saved requests/receipts, verifies artifact hashes and shared
+model/batch/task/global-recipe invariants, and copies actual saved GIFs. It
+constructs no model, executes no update, draws no sample and does not regrade.
+It overwrites only this goal's current compact publication and leaderboard.
+
+Raw stdout, per-observation arrays, checkpoints and traces stay outside Git.
+The single progress log aggregates real job steps and statuses:
 
 ```sh
 tail -F /nvme/dev/particlegan/artifacts/ddgan-bispf-20261019/progress.log
 ```
 
-Round1 completed two full Gaussian failures and two wall-time incomplete bimodal
-attempts. On matched GPU0 the auxiliary changes Gaussian endpoint final CDF
-from0.5905 to0.0937 and worst conditional CDF from0.6144 to0.1289, but remains
-FAIL: final covariance maximum1.5563 exceeds1.4, conditional bounds fail, and
-none of the last five complete observations passes every gate. Final-chain CDF
-ranges0.0578–0.2836 over those five checks. Endpoint improvement is not sustained
-success. Saved optimizer state records1448 blended conflict steps and zero
-Pareto stalls; it does not establish a causal finite-step defect.
-
-Both600-second bimodal workers expired before5000 updates. The last saved log
-observations are baseline3542 and energy3334; exact terminal update counts,
-checkpoints and full receipts were not written before the outer supervisor
-terminated them. These attempts are INCOMPLETE resource outcomes, with no
-trained quality verdict or claimed training GIF. Their raw logs remain archived.
-
-Round2 is a justified finite amendment after those outcomes, with the exact same
-scientific code digest `db83af24303b269185064c69aa6837b3c56fe1fa5460b7da39aecc0672c0fe32`.
-The auxiliary1/K8, adversarial coefficient1 and all BISPF mechanisms remain;
-one global recipe changes lr.012→.003, cosine annealing start.6→.3 and positive
-network/prior floors1→.05. This tests whether smaller terminal steps stabilize
-the observed oscillation. It does not assume that explanation is proven.
-
-The bimodal timeout-only variant raises wall allowance600→1200 seconds while
-holding5000 updates, initialization, batches, architecture, sampling and gates
-fixed. Its original incomplete identity remains in the publication. View
-revision1 is archived byte-for-byte; revision2 selects the unchanged Gaussian
-and this explicit resource variant as diagnostics. The completed Gaussian
-baseline is reused by Forge; a complete matched baseline bimodal run is requested.
-Ready studies `ddgan-repair-annealed-r2` and `ddgan-repair-baseline-wall-r2` reserve
-up to3600 seconds. At most one further globally fixed repair is permitted after
-round2 diagnosis. Amended whole-campaign ceiling:9 run attempts,35000 declared
-maximum generator updates (including incomplete allowances),7800 total reserved
-seconds. No active cap or recorded result is relaxed or rewritten.
-
-The completed round-2 Gaussian is still an overall FAIL. All five terminal
-final-chain marginal observations now satisfy their original four distribution
-bounds: final CDF ranges 0.0451–0.0855, endpoint mean error is 0.1348 and endpoint
-covariance eigenvalues are [0.9905, 1.0117]. The endpoint's remaining failures
-are the fixed low-noise `t1_q0` panel: mean error 0.6195, covariance maximum
-1.4775 and CDF 0.1911. The original panel and every gate remain unchanged.
-The saved optimizer reports 1,605 blended conflict steps and zero Pareto stalls.
-
-The final bounded round 3 changes only `constraint_geometry_mode` from
-`direction_blend` to `none`. It retains the same summed GAN, conditional energy
-and SBNP objectives, coefficients, DualNorm optimizer, BISPF critic penalty,
-learned prior and round-2 rates/annealing. This removes the optional per-objective
-common-descent blend; it does not remove adversarial training or claim a generic
-nonascent guarantee. The hypothesis is that preserving an unhelpful local critic
-objective can limit conditional correction. Conflict counts alone do not prove
-that explanation. The ready `ddgan-repair-unconstrained-r3` study will launch
-both full tasks only after the two ongoing round-2 bimodal jobs conclude. Its
-1,800-second reservation is the final allowance within the amended campaign
-ceiling. No selective query, endpoint, task or recipe choice can confer PASS.
+Full execution logs are under
+`/nvme/dev/particlegan/ParticleGAN/runs/forge/ddgan-conditional-repair-r{1,2,3}/*/run.log`.

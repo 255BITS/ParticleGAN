@@ -45,6 +45,9 @@ def export(queue, campaigns):
                 source=request["source"], task_contract=request["tasks"][job["task_id"]],
                 protocol_seed=0, qualification_input=False,
                 attempt_status=terminal.get("attempt_status", "running"),
+                attempt_reason=terminal.get("reason"),
+                supervised_elapsed_seconds=terminal.get("elapsed_seconds"),
+                reservation_seconds=job["budget_seconds"],
                 terminal_sha256=sha(terminal_path) if terminal_path.exists() else None,
                 artifact_directory=str(directory), completed_updates=None,
                 verdict="INCOMPLETE", terminal_passes=0, final_metrics={}, failed_bounds=[])
@@ -59,6 +62,7 @@ def export(queue, campaigns):
             row["task_contract_sha256"] = value_sha(row["task_contract"])
             log = directory / "run.log"
             if log.exists():
+                row["execution_log_sha256"] = sha(log)
                 rows = [json.loads(line) for line in log.read_text().splitlines()
                         if line.startswith('{"case"')]
                 row["last_observed_update"] = rows[-1]["step"] if rows else None
@@ -68,6 +72,7 @@ def export(queue, campaigns):
                 scheduled = raw["protocol"]["metric_evaluation_steps"]
                 checks = [obs for obs in raw["observations"] if obs["step"] > 0 and obs["step"] in scheduled]
                 row.update(completed_updates=raw["completed_updates"],
+                    api_execution_status=raw.get("status"),
                     verdict=raw["verdict"] if complete else "INCOMPLETE",
                     full_protocol_complete=complete, terminal_passes=sum(obs["passed"] for obs in checks[-5:]),
                     scheduled_checks=len(checks), final_metrics=raw["observations"][-1]["metrics"],
@@ -120,7 +125,10 @@ def export(queue, campaigns):
     result = dict(schema="ddgan_conditional_repair_publication_v1", qualification_input=False,
         goal="ddgan_conditional_repair", seed=0,
         baseline="bispf-optimized-quintic-v1", campaigns=campaigns,
-        task_contracts=contracts, runs=runs)
+        task_contracts=contracts, runs=runs,
+        paid_supervised_seconds=sum(row.get("supervised_elapsed_seconds") or 0. for row in runs),
+        total_reserved_attempt_seconds=sum(row["reservation_seconds"] for row in runs),
+        cost_scope="Summed supervised attempt cost includes startup, actual updates, evaluation, media and independent grading; timed-out attempts are included. GPU0 was shared; no speed comparison.")
     (REPORT / "results.json").write_text(json.dumps(result, indent=2) + "\n")
     board = ROOT / "reports/forge/leaderboards/ddgan_conditional_repair.md"
     board.parent.mkdir(exist_ok=True)
