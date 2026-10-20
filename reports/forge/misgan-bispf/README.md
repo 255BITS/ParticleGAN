@@ -43,12 +43,14 @@ latents, wrong branches, incorrect mass, generator collapse and mask collapse.
 Run through the frozen research view and ready studies:
 
 ```sh
-python -m experiments.forge enqueue bispf-optimized-quintic-v1 --study misgan-bispf-baseline-r1
-python -m experiments.forge enqueue bispf-misgan-observed-v1 --study misgan-bispf-observed-r1
-python -m experiments.forge enqueue bispf-misgan-amortized-v1 --study misgan-bispf-amortized-r1
+python -m experiments.forge enqueue bispf-optimized-quintic-v1 --study misgan-bispf-baseline-r1-reviewed
+python -m experiments.forge enqueue bispf-misgan-observed-v1 --study misgan-bispf-observed-r1-reviewed
+python -m experiments.forge enqueue bispf-misgan-amortized-v1 --study misgan-bispf-amortized-r1-reviewed
 python -m experiments.forge drain --gpus 0 --workers-per-gpu 3 --allow-sharing --campaign misgan-bispf-four-mode-r1
 ```
 
 Local raw logs and state archives are under
 `/nvme/dev/particlegan/artifacts/misgan-bispf-20261019`; tail `progress.log`.
 GPU 0 is shared and elapsed costs are not speed benchmarks.
+
+Three initial unexecuted requests were cancelled before spend for a review repair: retain the fixture RNG state, modes and gradients, honor prior ownership, and match the imputer training/serving MoG kernel. Replacement `-reviewed` studies preserve those administrative identities.

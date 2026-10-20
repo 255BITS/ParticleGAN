@@ -73,6 +73,7 @@ class Problem:
         raw, self.y_test = draw(4096)
         self.x_test = self.standardize(raw)
         self.m_test = sample_masks("block", 4096, rng, device=device)
+        self.data_law_rng = rng.get_state().clone()
         self.centers = centers.to(device)
         self.patterns = torch.zeros(4, 8, device=device)
         for row, (sensors, _) in enumerate(BLOCK_PATTERNS):
@@ -183,7 +184,7 @@ class MisGANFixture:
             self.G = Generators().to(device)
             self.D = nn.ModuleDict(dict(data=critic(16), mask=critic(8), imputer=critic(16))).to(device)
             self.prior_constructor_rng = torch.Generator(device=self.device).manual_seed(0)
-            self.prior = self.recipe.replace(prior_update="learned").make_prior(sigma=.025, init_std=.5, device=device, generator=self.prior_constructor_rng)
+            self.prior = self.recipe.make_prior(sigma=.025, init_std=.5, device=device, generator=self.prior_constructor_rng)
             self.constructor_rng = torch.random.get_rng_state().clone()
             self.constructor_cuda_rng = torch.cuda.get_rng_state(device).clone() if self.device.type == "cuda" else None
             for index, model in enumerate((self.G, self.D, self.prior)):
@@ -254,7 +255,13 @@ class MisGANFixture:
             soft = ((ilogits-torch.log(-torch.log(u)))/.5).softmax(-1)
             hard = F.one_hot(soft.argmax(-1),64).to(soft)
             table = self.G.data(self.prior.z)
-            imputed = x_g + (1-m_g) * (((hard-soft).detach()+soft) @ table.detach())
+            component_codes = ((hard-soft).detach()+soft) @ self.prior.z.detach()
+            imputer_noise = torch.randn(component_codes.shape,generator=self.imputer_rng,device=self.device)
+            # Gradients reach the conditional logits through a frozen affine
+            # decoder; the sampled kernel is identical to serving.
+            decoded = F.linear(component_codes+self.prior.sigma*imputer_noise,
+                               self.G.data.weight.detach(),self.G.data.bias.detach())
+            imputed = x_g + (1-m_g) * decoded
             gx = self.loss.g_loss(self.D["data"](torch.cat((fake*mf.detach(),mf.detach()),1)),self.D["data"](torch.cat((x_g,m_g),1)))
             gm = self.loss.g_loss(self.D["mask"](mf),self.D["mask"](m_g))
             gi = self.loss.g_loss(self.D["imputer"](torch.cat((imputed,m_g),1)),self.D["imputer"](torch.cat((fake.detach(),m_g),1)))
@@ -296,6 +303,9 @@ class MisGANFixture:
         return deepcopy(dict(version=VERSION,metadata_sha256=_digest(self.metadata),recipe=self.recipe.to_dict(),execution_steps=self.execution_steps,
                              policy=self.policy.state_dict(),prior=self.prior.state_dict(),streams=streams,constructor_rng=self.constructor_rng,
                              constructor_cuda_rng=self.constructor_cuda_rng,batch_sequence_sha256=self.batch_sequence_sha256,
+                             data_law_rng=self.problem.data_law_rng,
+                             modes={role:{path:module.training for path,module in model.named_modules()} for role,model in (("G",self.G),("D",self.D),("prior",self.prior))},
+                             gradients={role:{name:None if param.grad is None else param.grad.clone() for name,param in model.named_parameters()} for role,model in (("G",self.G),("D",self.D),("prior",self.prior))},
                              **self.recipe.prior_regularizer_checkpoint(self.regularizer)))
 
     def load_state_dict(self,state):
@@ -309,6 +319,13 @@ class MisGANFixture:
         self.constructor_rng = state["constructor_rng"].clone()
         self.constructor_cuda_rng = state["constructor_cuda_rng"]
         self.batch_sequence_sha256 = state["batch_sequence_sha256"]
+        self.problem.data_law_rng = state["data_law_rng"].clone()
+        for role in ("G","D","prior"):
+            for path,module in getattr(self,role).named_modules():
+                module.training = state["modes"][role][path]
+            for name,param in getattr(self,role).named_parameters():
+                value = state["gradients"][role][name]
+                param.grad = None if value is None else value.to(param).clone()
 
 
 def build_case(case_id, **kwargs):
