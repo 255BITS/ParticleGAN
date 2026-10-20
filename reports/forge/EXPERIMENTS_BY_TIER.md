@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **178 tasks**; **141 assigned** to at least one view; **37 unassigned**. Showing **26/26 views**.
+Catalog: **181 tasks**; **143 assigned** to at least one view; **38 unassigned**. Showing **27/27 views**.
 
-Declared priors across the catalog: **71 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **74 MoGParticlePrior**, **107 ParticlePrior** (including **10 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. Within each task, candidates share architecture, data law, batch size, prior, initialization, training budget, evaluation cadence and sampling law. Only the declared trainer change varies. The initialization column exposes fixed controls and component policies that take precedence over the deterministic orthogonal fallback; these are separate comparison cohorts. Historical results retain their original bindings.
 
@@ -46,6 +46,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 5 | 4 required | 12 required, 7 held | 6 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [dcgan_performance](../../configs/forge/views/dcgan_performance.json) | 1 | 6 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
 | [dcgan_performance_cpu_smoke](../../configs/forge/views/dcgan_performance_cpu_smoke.json) | 1 | 1 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
+| [ddgan-conditional-repair-v1](../../configs/forge/views/ddgan-conditional-repair-v1.json) | 2 | 2 diagnostic | 0 tasks | 0 tasks | 0 tasks | undeclared |
 | [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 14 | 13 required, 1 diagnostic | 16 required, 7 held | 1 required, 1 held, 1 diagnostic (1 removed from the count) | 5 held | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 3 | 3 required | 12 required, 7 held, 15 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 6 | 3 required | 12 required, 7 held, 13 diagnostic | 1 required, 1 diagnostic (1 removed from the count) | 0 tasks | provisional |
@@ -586,6 +587,43 @@ No published solution leaderboard for this view yet; task registration and relat
 | Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [dcgan_performance_cpu_smoke](../../configs/forge/tasks/dcgan_performance_cpu_smoke.json) | diagnostic | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; — | [Question, results, GIFs](#experiment-dcgan-performance-cpu-smoke) | dcgan_performance_v1 / image_training_performance | 3 | 120 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 4: stress_and_formulations
+
+0 tasks.
+
+No tasks assigned.
+
+## ddgan-conditional-repair-v1
+
+Declaration: [ddgan-conditional-repair-v1](../../configs/forge/views/ddgan-conditional-repair-v1.json); revision 2; goal: `ddgan_conditional_repair`.
+
+Declared calibration status: **undeclared**.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+2 diagnostic.
+
+| Task | Importance | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [ddgan_repair_gaussian_chain_v1](../../configs/forge/tasks/ddgan_repair_gaussian_chain_v1.json) | diagnostic | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ddgan-gaussian-chain) | public_api_model_toy / transfer_sustained | 2500 | 600 | — |
+| [ddgan_repair_bimodal_chain_wall_v2](../../configs/forge/tasks/ddgan_repair_bimodal_chain_wall_v2.json) | diagnostic | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ddgan-bimodal-chain) | public_api_model_toy / transfer_sustained | 5000 | 1200 | — |
 
 ### Tier 2: quality
 
@@ -1464,6 +1502,7 @@ These catalog tasks have no tier placement. Add an assignment to a view to inclu
 
 | Task | Prior code path | Initialization / protocol | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [ddgan_repair_bimodal_chain_v1](../../configs/forge/tasks/ddgan_repair_bimodal_chain_v1.json) | MoGParticlePrior (sigma=0.25) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-api-model-ddgan-bimodal-chain) | public_api_model_toy / transfer_sustained | 5000 | 600 | — |
 | [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json) | ParticlePrior (sigma=0) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
 | [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json) | MoGParticlePrior (sigma=0.025) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / transfer_sustained | 1000 | 120 | — |
 | [gaussian1d_shallow_smoke](../../configs/forge/tasks/gaussian1d_shallow_smoke.json) | MoGParticlePrior (sigma=0.1) | deterministic_orthogonal; screening | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / gaussian_smoke | 1000 | 120 | — |
@@ -1764,15 +1803,15 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: api-model-ddgan-bimodal-chain
 
-Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API
+Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API; explicitly scoped GPU0 research diagnostic of original gates, no ordinary qualification
 
-Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md).
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md), [experiment readout](ddgan-conditional-repair/README.md).
 
-Forge declarations: [model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
+Forge declarations: [ddgan_repair_bimodal_chain_v1](../../configs/forge/tasks/ddgan_repair_bimodal_chain_v1.json), [ddgan_repair_bimodal_chain_wall_v2](../../configs/forge/tasks/ddgan_repair_bimodal_chain_wall_v2.json), [model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
 
 Declared Forge numerical gates and sampling:
 
-[model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json)
+[ddgan_repair_bimodal_chain_v1](../../configs/forge/tasks/ddgan_repair_bimodal_chain_v1.json), [ddgan_repair_bimodal_chain_wall_v2](../../configs/forge/tasks/ddgan_repair_bimodal_chain_wall_v2.json), [model_ddgan_bimodal_chain](../../configs/forge/tasks/model_ddgan_bimodal_chain.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -1841,15 +1880,15 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: api-model-ddgan-gaussian-chain
 
-Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API
+Learn conditional reverse transitions and the final ancestral distribution through the public DDGAN API; explicitly scoped GPU0 research diagnostic of original gates, no ordinary qualification
 
-Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md).
+Explanation, interpretation and reproduction: [experiment readout](api-model-toys/ddgan.md), [experiment readout](ddgan-conditional-repair/README.md).
 
-Forge declarations: [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
+Forge declarations: [ddgan_repair_gaussian_chain_v1](../../configs/forge/tasks/ddgan_repair_gaussian_chain_v1.json), [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
 
 Declared Forge numerical gates and sampling:
 
-[model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json)
+[ddgan_repair_gaussian_chain_v1](../../configs/forge/tasks/ddgan_repair_gaussian_chain_v1.json), [model_ddgan_gaussian_chain](../../configs/forge/tasks/model_ddgan_gaussian_chain.json)
 
 | Metric | Required bound |
 | --- | --- |
@@ -5375,6 +5414,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `7d0a22d597c830ac50652012fd968a85b96bc13cd3fecbff5b0d5b67aa0e78ef`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `9012631801c99944c9bf79ce2f900e88dae9316360547bcfbda9d6e1a98976ab`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `d2f9b784bf5752f012a2a225ed7fcc879e48b52d643e1e868abdeafa6652f262`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `47038c1c83a5a28354450c27e8ba4b316eae19c05fea7b989a12c121446f8efe`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

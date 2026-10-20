@@ -50,7 +50,7 @@ def export(queue, campaigns):
                 reservation_seconds=job["budget_seconds"],
                 terminal_sha256=sha(terminal_path) if terminal_path.exists() else None,
                 artifact_directory=str(directory), completed_updates=None,
-                verdict="INCOMPLETE", terminal_passes=0, final_metrics={}, failed_bounds=[])
+                verdict="INCOMPLETE", terminal_passes=None, final_metrics={}, failed_bounds=[])
             # The full source file map is already content-addressed in Forge;
             # retain compact manifest identities here, not another bulk copy.
             row["source"] = {key: value for key, value in row["source"].items() if key != "files"}
@@ -80,6 +80,13 @@ def export(queue, campaigns):
                     reproducibility=raw["reproducibility"], runtime=raw["runtime"],
                     raw_receipt_sha256=sha(raw_path), elapsed_seconds=raw["elapsed_seconds"],
                     artifact_hashes=raw["artifacts"])
+                artifact_root = (directory / "api").resolve()
+                for relative, recorded in raw["artifacts"].items():
+                    artifact = (artifact_root / relative).resolve()
+                    if (not artifact.is_relative_to(artifact_root) or not artifact.is_file()
+                            or sha(artifact) != recorded["sha256"]
+                            or artifact.stat().st_size != recorded["bytes"]):
+                        raise ValueError(f"saved API artifact differs: {artifact}")
                 gif = directory / "api/goal.gif"
                 if gif.exists():
                     if sha(gif) != raw["artifacts"]["goal.gif"]["sha256"]:
@@ -132,10 +139,28 @@ def export(queue, campaigns):
     (REPORT / "results.json").write_text(json.dumps(result, indent=2) + "\n")
     board = ROOT / "reports/forge/leaderboards/ddgan_conditional_repair.md"
     board.parent.mkdir(exist_ok=True)
+    active = {item["task"] for item in read(ROOT / "configs/forge/views/ddgan-conditional-repair-v1.json")["assignments"]}
+    summary = []
+    for candidate in sorted({row["candidate"] for row in runs}):
+        rows = [row for row in runs if row["candidate"] == candidate]
+        current = {row["task"]: row for row in rows if row["task"] in active}
+        passed = sum(row["verdict"] == "PASS" for row in current.values())
+        failed = sum(row["verdict"] == "FAIL" for row in current.values())
+        unknown = len(active) - passed - failed
+        summary.append((candidate, passed, failed, unknown,
+                        sum(row["verdict"] == "INCOMPLETE" for row in rows)))
+    summary.sort(key=lambda row: (-row[1], row[3], row[0]))
     lines = ["# DDGAN conditional repair: current research leaderboard", "",
-        "GPU0 shared-load diagnostic only; no ordinary qualification or speed ranking. "
-        "All runs use protocol seed0, clean live four-step sampling and unchanged scientific gates.", "",
-        "| Recipe | Task | Verdict | Updates | Last5 passes | Final CDF | Worst conditional CDF | GIF |",
+        "GPU 0 shared-load diagnostic only; no ordinary qualification or speed ranking. "
+        "All runs use protocol seed 0, clean live four-step sampling and unchanged scientific gates.", "",
+        "One global recipe per row; current tasks are Gaussian and the full-budget bimodal wall-allowance variant. "
+        "A missing full result remains unknown. Passing marginal subgates do not count as task passes.", "",
+        "| Global recipe | Current PASS / 2 | Current FAIL | Unknown | Retained incomplete attempts |",
+        "| --- | ---: | ---: | ---: | ---: |"]
+    for candidate, passed, failed, unknown, incomplete in summary:
+        lines.append(f"| `{candidate}` | {passed}/2 | {failed} | {unknown} | {incomplete} |")
+    lines += ["", "All retained attempts and exact endpoint metrics:", "",
+        "| Recipe | Task | Verdict | Updates | Last 5 passes | Final CDF | Worst conditional CDF | GIF |",
         "| --- | --- | --- | ---: | ---: | ---: | ---: | --- |"]
     for row in runs:
         metrics = row["final_metrics"]
@@ -143,10 +168,11 @@ def export(queue, campaigns):
         worst = f'{metrics["worst_transition_cdf"]:.4f}' if "worst_transition_cdf" in metrics else "—"
         gif = f'[actual training](../../{Path(row["gif"]).relative_to("reports")})' if row.get("gif") else "—"
         updates = row["completed_updates"]
-        displayed_updates = str(updates) if updates is not None else f'>={row["last_observed_update"]}'
+        displayed_updates = f"{updates:,}" if updates is not None else f'>={row["last_observed_update"]:,}'
+        terminal_passes = f'{row["terminal_passes"]}/5' if row.get("full_protocol_complete") else "—"
         lines.append(f'| `{row["candidate"]}` | `{row["task"]}` | **{row["verdict"]}** | '
-            f'{displayed_updates}/{contracts[row["task"]]["execution"]["steps"]} | '
-            f'{row["terminal_passes"]}/5 | {final} | {worst} | {gif} |')
+            f'{displayed_updates}/{contracts[row["task"]]["execution"]["steps"]:,} | '
+            f'{terminal_passes} | {final} | {worst} | {gif} |')
     lines += ["", "CDF bounds: each final and conditional panel <=0.12. A PASS also requires all mean, "
         "covariance and bimodal mode/local-spread bounds at every final five scheduled checks. "
         "[Full failed bounds, provenance and exact final metrics](../ddgan-conditional-repair/results.json).", ""]

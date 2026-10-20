@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 850. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 855. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3976,6 +3976,22 @@ All 34 complete measured revisions fail Ring16. Strongest complete repairs retai
 
 [Evidence](../../reports/forge/r1r2-concluded-archive/README.md) · [Record](records/r1r2-pr401-concluded-archive-v1.json)
 
+### bispf-optimized-quintic-v1 · readout-01bff4a5f0a8f6d91bc51c65
+
+**Scope:** research_diagnostic; scientific; revision `910c746cc18347ce72d108dcef81f283fc5f2efd2117fc6358f7b485ba172ae1`.
+
+A conditional energy score added to BISPF improves low-noise conditional-law calibration; the matched GPU0 selected-recipe control may retain the historical Gaussian failure.
+
+**Observed:** {'FAIL': 1, 'INCOMPLETE': 1}; wall seconds 1019.358; mechanism `structural`.
+
+
+
+MatchedGPU0 selected-recipe Gaussian completes2500updates and FAILS; bimodal is resource INCOMPLETE at600s.
+
+**Next:** Reuse complete Gaussian baseline exactly; finish separately registered1200s bimodal resource variant alongside the bounded global energy mobility repair. No unchanged Gaussian rerun or ordinary qualification.
+
+[Evidence](../../reports/forge/attempts/2e3b5af6c1fb4bf8a10bb16fc7b92f91/result.json) · [Record](records/readout-01bff4a5f0a8f6d91bc51c65.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -4408,6 +4424,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.130
 
 [Evidence](../../reports/forge/technique-receipts/813505867f5348bfbe113791d78ce0c5.json) · [Record](records/readout-6c0c2c5c6610ecfe73fe315d.json)
 
+### bispf-ddgan-energy-unconstrained-v3 · readout-6d9c721048b23e3d6b55e971
+
+**Scope:** research_diagnostic; scientific; revision `6f3641b574a34f3ac199275ce9a2d9a44cc5fb77f281e583777be601c73221b4`.
+
+Removing per-objective direction blending from the same low-mobility summed GAN/energy objective repairs low-noise conditional calibration while preserving the Gaussian marginal stability and genuine adversarial game.
+
+**Observed:** {'FAIL': 2}; wall seconds 739.185; mechanism `structural`.
+
+
+
+Both complete DDGAN tasks FAIL after the final registered one-field repair. Seven full-budget failures and two resource-incomplete attempts conclude the three-round campaign; no global recipe passes either strict task.
+
+**Next:** Stop all exact revisions with zero ordinary qualification. Retain generation-only subgate gains and complete failures. A future explicitly scoped timestep-conditioning/capacity architecture cohort needs matched controls and unchanged scientific gates; current results do not prove a capacity limit or authorize another seed/rate trial.
+
+[Evidence](../../reports/forge/attempts/08a9069e5fed443c86eade7922469492/result.json) · [Record](records/readout-6d9c721048b23e3d6b55e971.json)
+
 ### bispf-v2 · readout-7450f3d30d639bad8e4f25e5
 
 **Scope:** research_diagnostic; scientific; revision `e558bd3a50a3746df01baaf4759aaae09b48f465012d157796b76602cd2ce2e0`.
@@ -4631,6 +4663,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
+
+### bispf-optimized-quintic-v1 · readout-a324737f266da9156ed6ed2f
+
+**Scope:** research_diagnostic; scientific; revision `910c746cc18347ce72d108dcef81f283fc5f2efd2117fc6358f7b485ba172ae1`.
+
+A globally smaller normalized learning rate with positive cosine terminal floors stabilizes conditional-energy DDGAN calibration while preserving its stochastic distribution objective and genuine adversarial game.
+
+**Observed:** {'FAIL': 2}; wall seconds 1134.834; mechanism `structural`.
+
+
+
+The matchedGPU0 baseline bimodal completed all5000updates and FAILS its original conditional, marginal, local mean/spread and terminal-window gates. The Gaussian baseline was reused exactly without another paid run.
+
+**Next:** Retain this complete matched baseline and both original600s incomplete attempts. Compare the registered final one-field objective-geometry recipe on unchanged full tasks; no baseline rerun, gate relaxation or qualification.
+
+[Evidence](../../reports/forge/attempts/143d69245418426fad655771ac2a16fa/result.json) · [Record](records/readout-a324737f266da9156ed6ed2f.json)
 
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
@@ -4856,6 +4904,22 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 [Evidence](../../reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json) · [Record](records/readout-c723a88e5122f97011aabad9.json)
 
+### bispf-ddgan-energy-v1 · readout-c7a4fe6fbfe14b4e43558471
+
+**Scope:** research_diagnostic; scientific; revision `0179185c13fe852b4c1d86796abef1850412345fbe26aa96b4fcf234e470ff5b`.
+
+A conditional energy score added to BISPF improves low-noise conditional-law calibration; the matched GPU0 selected-recipe control may retain the historical Gaussian failure.
+
+**Observed:** {'FAIL': 1, 'INCOMPLETE': 1}; wall seconds 1090.469; mechanism `structural`.
+
+
+
+Gaussian completed2500updates and FAILS all-gate terminal stability despite endpointCDF improvement; bimodal timed out before5000updates and remains INCOMPLETE.
+
+**Next:** Stop exact revision; execute registered lower-mobility positive-floor energy repair on unchanged scientific tasks, with timeout-only1200s bimodal variant and exact complete Gaussian baseline reuse. No ordinary qualification or default adoption.
+
+[Evidence](../../reports/forge/attempts/868a95d8894d4476bde5c74294e47c8d/result.json) · [Record](records/readout-c7a4fe6fbfe14b4e43558471.json)
+
 ### bispf-throughput-v1 · readout-cd9493a6a30096475d381175
 
 **Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
@@ -4951,6 +5015,22 @@ Both800-update diagnostics FAIL movement: original-schedule .0896976665 and stre
 **Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
 
 [Evidence](../../reports/forge/attempts/200fd64ddd1a42a5bf300e5cae01e0b6/result.json) · [Record](records/readout-dd6ff59094d1d766c5b0fe2b.json)
+
+### bispf-ddgan-energy-annealed-v2 · readout-e2e0ab5b4a57b6aae957eec4
+
+**Scope:** research_diagnostic; scientific; revision `ae4202e9b9ea41b2007a5b37e81e695839718df0206bba202660de2124b8c8ef`.
+
+A globally smaller normalized learning rate with positive cosine terminal floors stabilizes conditional-energy DDGAN calibration while preserving its stochastic distribution objective and genuine adversarial game.
+
+**Observed:** {'FAIL': 2}; wall seconds 1228.839; mechanism `floor_constant`.
+
+
+
+Both full-budget DDGAN tasks remain FAIL. Gaussian passes all5 final marginal checks but retains fixed t1_q0 conditional errors. Bimodal improves marginal/mode means but fails local spread/HQ and conditional terminal gates.
+
+**Next:** Execute the already registered final one-field objective-geometry diagnostic: constraint_geometry_mode direction_blend to none, preserving the same summed GAN/energy/SBNP objectives, coefficients, rates, scientific source, all gates, fixed queries and complete budgets. No ordinary qualification or automatic continuation.
+
+[Evidence](../../reports/forge/attempts/189afbf0199a4b9b88daf1082e98f5ee/result.json) · [Record](records/readout-e2e0ab5b4a57b6aae957eec4.json)
 
 ### ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca · readout-e3ab30a3f7ae4a6debe66e5d
 
@@ -5750,4 +5830,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `3aa279e13001c206fe493e6a271c303da3876eaf7cdfffd72182d8e3a587f091`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `1b1bd8433926481114ba50b721578c901fb0a12ad8250278438daab0c0999b45`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

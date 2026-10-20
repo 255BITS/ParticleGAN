@@ -1,12 +1,11 @@
 # DDGAN conditional-law repair on the selected BISPF recipe
 
-The first two rounds improve independent generation but do not pass either
-complete DDGAN task. The annealed energy recipe passes all five terminal
-Gaussian marginal checks, while its fixed low-noise conditional query still
-fails. Bimodal generation has much better centering and mode means, but local
-spread, high-quality coverage and conditional gates remain unresolved. The final
-bounded objective-geometry round is running; no ordinary qualification or
-public-default credit is claimed.
+Three bounded repair rounds concluded with **seven full-budget FAILs and two
+resource-INCOMPLETE attempts**. The energy objective and annealing substantially
+improve independent generation, including five passing Gaussian marginal checks,
+but no one global recipe passes either complete task. Conditional distributions
+and bimodal local spread remain unresolved. This is a completed negative
+research result, with no ordinary qualification or public-default credit.
 
 The [single current leaderboard](../leaderboards/ddgan_conditional_repair.md)
 retains every measured failure and incomplete attempt, numerical endpoints and
@@ -124,9 +123,27 @@ fails: high-quality coverage 0.9390 is below 0.95 and maximum local covariance
 1.7867 exceeds 1.5, alongside conditional and sustained-window bounds.
 
 Keep every complete task labelled FAIL and every capped attempt INCOMPLETE.
-Do not select separate recipes per target or promote the passing Gaussian
-marginal subgates to a task pass. The declared final round will test the single
-objective-geometry hypothesis before this campaign concludes.
+Do not select separate recipes per target or promote passing marginal subgates
+to a task pass. Disabling the optional direction blend does not repair the conditional
+failure: it worsens the Gaussian fixed query. A next substantive
+question would test explicit timestep conditioning or task capacity in a new
+architecture cohort, with a matched selected-recipe control and the same
+scientific gates. Current evidence does not establish a capacity limit. Stop
+these exact revisions; no additional tuning, seed trial or promotion follows.
+
+The complete round-3 Gaussian also fails its fixed `t1_q0` panel. Marginal CDF
+is 0.0316 and mean error 0.0113, but conditional CDF worsens to 0.3707, mean error
+to 1.1197 and covariance maximum to 1.6634. Round-3 bimodal CDF is 0.0435, mean
+error 0.0146 and worst conditional CDF 0.1024, while quality 0.9453, local
+covariance maximum 1.6982 and conditional covariance/mean bounds still fail.
+Neither task has a passing five-observation terminal window.
+
+All nine attempts cost **4,793.664 supervised seconds**, including capped work,
+startup, training, scoring, media and independent grading. Actual attempt
+reservations total 7,200 seconds within the 7,800-second campaign ceiling.
+The exporter verifies exact matched model initialization and complete target/
+timestep sequences, one global recipe per candidate, seven real full-training
+GIFs and finite complete checkpoints. Costs supply accounting only.
 
 ## Software validation and reproduction
 
@@ -135,8 +152,11 @@ mean/wrong spread controls, off-diagonal normalization, independent same-context
 draws, rejection of analytic-posterior leakage, public component execution,
 exact checkpoint replay for both optimizer geometries, unchanged initial models
 and target batches, observation purity, and unsupported-host refusal.
-**124 training/recipe/model-toy regression tests pass** and Forge declarations
-validate. Original DDGAN scorer controls reject wrong contexts, unconditional
+**124 training/recipe/model-toy regression tests pass**. The committed-page
+freshness guard passes after a display-only publication refresh; a
+[provenance receipt](publication-refresh.json) verifies every registered
+scientific row and selected recipe remains unchanged. Forge declarations
+validate and compiled memory is CURRENT. Original DDGAN scorer controls reject wrong contexts, unconditional
 samples, posterior-mean collapse, mode collapse and nonfinite output at the
 actual evaluation sample count. The source-only compatibility migration retains
 [all four original task Git blobs and source hashes](source-migration.json);

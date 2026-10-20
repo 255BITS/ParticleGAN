@@ -6,7 +6,8 @@
   "baseline": "bispf-optimized-quintic-v1",
   "campaigns": [
     "ddgan-conditional-repair-r1",
-    "ddgan-conditional-repair-r2"
+    "ddgan-conditional-repair-r2",
+    "ddgan-conditional-repair-r3"
   ],
   "task_contracts": {
     "ddgan_repair_bimodal_chain_v1": {
@@ -1041,7 +1042,7 @@
       "artifact_directory": "/nvme/dev/particlegan/ParticleGAN/runs/forge/ddgan-conditional-repair-r1/2e3b5af6c1fb4bf8a10bb16fc7b92f91",
       "completed_updates": null,
       "verdict": "INCOMPLETE",
-      "terminal_passes": 0,
+      "terminal_passes": null,
       "final_metrics": {},
       "failed_bounds": [],
       "field_ownership_sha256": "c8fa121d4ce1d1fac88ddb640118ad0ade9cf6ab64287eb6a41eb3f40237da7b",
@@ -1072,7 +1073,7 @@
       "artifact_directory": "/nvme/dev/particlegan/ParticleGAN/runs/forge/ddgan-conditional-repair-r1/868a95d8894d4476bde5c74294e47c8d",
       "completed_updates": null,
       "verdict": "INCOMPLETE",
-      "terminal_passes": 0,
+      "terminal_passes": null,
       "final_metrics": {},
       "failed_bounds": [],
       "field_ownership_sha256": "df50112522456867781aa8bffbc8ce3670b39f309dbeca7621a7f95bad428ce1",
@@ -2961,9 +2962,752 @@
         "status": "FAIL"
       },
       "graded_receipt_sha256": "567526cdd52b30d5e8e1e68e9921a2df3e049ad24594506efbda74f0abe896aa"
+    },
+    {
+      "candidate": "bispf-ddgan-energy-unconstrained-v3",
+      "task": "ddgan_repair_gaussian_chain_v1",
+      "attempt": "08a9069e5fed443c86eade7922469492",
+      "campaign": "ddgan-conditional-repair-r3",
+      "request_id": "a7e06c5b1c4d85a6bb7e7363",
+      "candidate_revision": "6f3641b574a34f3ac199275ce9a2d9a44cc5fb77f281e583777be601c73221b4",
+      "source": {
+        "digest": "db83af24303b269185064c69aa6837b3c56fe1fa5460b7da39aecc0672c0fe32",
+        "origin_commit": "223d24568350c0056155c136297f0da41cb1fc2f",
+        "schema_version": 1,
+        "snapshot_path": "/nvme/dev/particlegan/ParticleGAN/runs/forge/snapshots/db83af24303b269185064c69aa6837b3c56fe1fa5460b7da39aecc0672c0fe32"
+      },
+      "protocol_seed": 0,
+      "qualification_input": false,
+      "attempt_status": "completed",
+      "attempt_reason": null,
+      "supervised_elapsed_seconds": 265.2305509989965,
+      "reservation_seconds": 600,
+      "terminal_sha256": "c5f0165cde4fd82d2d8da70bcae0016be205477fd88a1dc0fe0da8600a129790",
+      "artifact_directory": "/nvme/dev/particlegan/ParticleGAN/runs/forge/ddgan-conditional-repair-r3/08a9069e5fed443c86eade7922469492",
+      "completed_updates": 2500,
+      "verdict": "FAIL",
+      "terminal_passes": 0,
+      "final_metrics": {
+        "final_covariance_eigen_max": 0.9128017502953819,
+        "final_covariance_eigen_min": 0.8085639993571907,
+        "final_normalized_mean": 0.011331002514623123,
+        "final_projection_cdf": 0.03158361622988748,
+        "panel_count": 8,
+        "samples_per_panel": 2048,
+        "t1_q0_covariance_eigen_max": 1.6634169585518004,
+        "t1_q0_covariance_eigen_min": 1.1338241780256333,
+        "t1_q0_normalized_mean": 1.1196948463107488,
+        "t1_q0_projection_cdf": 0.3706794600903938,
+        "t1_q1_covariance_eigen_max": 0.9533269549691413,
+        "t1_q1_covariance_eigen_min": 0.8846678126517551,
+        "t1_q1_normalized_mean": 0.022915797210262167,
+        "t1_q1_projection_cdf": 0.054255019763132406,
+        "t2_q0_covariance_eigen_max": 0.9520842480902885,
+        "t2_q0_covariance_eigen_min": 0.887121501842325,
+        "t2_q0_normalized_mean": 0.12772831648107408,
+        "t2_q0_projection_cdf": 0.05981881602489736,
+        "t2_q1_covariance_eigen_max": 0.9580930590585721,
+        "t2_q1_covariance_eigen_min": 0.8955108238772717,
+        "t2_q1_normalized_mean": 0.08562628222961968,
+        "t2_q1_projection_cdf": 0.0428435192039725,
+        "t3_q0_covariance_eigen_max": 1.029969566694742,
+        "t3_q0_covariance_eigen_min": 0.9497592099607123,
+        "t3_q0_normalized_mean": 0.06400242277465937,
+        "t3_q0_projection_cdf": 0.03453734848818485,
+        "t3_q1_covariance_eigen_max": 1.0389605791371535,
+        "t3_q1_covariance_eigen_min": 0.9844754314178702,
+        "t3_q1_normalized_mean": 0.03735425067046021,
+        "t3_q1_projection_cdf": 0.030876058644540905,
+        "t4_q0_covariance_eigen_max": 1.0385306599141473,
+        "t4_q0_covariance_eigen_min": 0.9955615021913045,
+        "t4_q0_normalized_mean": 0.015156450095143692,
+        "t4_q0_projection_cdf": 0.021438155108539636,
+        "t4_q1_covariance_eigen_max": 1.0263876579101647,
+        "t4_q1_covariance_eigen_min": 0.9585566293984157,
+        "t4_q1_normalized_mean": 0.024214692194076407,
+        "t4_q1_projection_cdf": 0.028812316753084488,
+        "worst_transition_cdf": 0.3706794600903938
+      },
+      "failed_bounds": [
+        "t1_q0_covariance_eigen_max",
+        "t1_q0_normalized_mean",
+        "t1_q0_projection_cdf",
+        "last 5 post-update metric observations do not all pass"
+      ],
+      "field_ownership_sha256": "a966a21f03b9f3c5888ded32c3755ac958e2d229523afc7746e623e24e5c51b3",
+      "task_contract_sha256": "7657b59a617b52f6db3fe16552eef92d85f4b309ea976ddc3c11165042d87cc7",
+      "execution_log_sha256": "bb7ae4fa03c6ebddb42b71dc1fc795599f374b296c9357fd5d007bd2d484e701",
+      "last_observed_update": 2500,
+      "api_execution_status": "COMPLETE",
+      "full_protocol_complete": true,
+      "scheduled_checks": 24,
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditional_energy_weight": 1.0,
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.003,
+        "lr_anneal_start": 0.3,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "name": "bispf",
+        "network_lr_floor": 0.05,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 128,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 2500,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "reproducibility": {
+        "batch_sequence_sha256": "1f64ffe0d3ad8bdebc856f5560e346aa69709a99ea0d7bec48b52edeec456fd8",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "7238043946f6b9f13d9f9c534c253870505ea2c11a37c6e0297f443d3d867484",
+          "G": "b8fae6b59782adfc70d2cdedd9a9e3db213c48af8435cf87e85a78d9d77356fb",
+          "prior": "ce2bed1568ff9729c5e77d8a4071be68712b2f98ded8d09ab280688de0860fdb"
+        },
+        "initial_state_sha256": "ca96b54bea62b8dcd00dc65c24a57ab909f9ef848886e4e4bb234fc857e71809"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "raw_receipt_sha256": "a21ee42ab01208db441aa4053159b63638c6408f5a95c8dfae5f63abf1a4c5f9",
+      "elapsed_seconds": 254.85375885901158,
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 122138,
+          "sha256": "7d8097a097d342dcaadcd820d51922e21dc7d0f942382005f54bbc5094da02e4"
+        },
+        "goal.gif": {
+          "bytes": 947112,
+          "sha256": "94d9e74e770606eb66a1519020555c1d6dc911be18885fd8ed1587f4f8562591"
+        },
+        "observations.npz": {
+          "bytes": 2304891,
+          "sha256": "90a6f39c33706ab600c6f954ca41e10ca86c3e16e9626c27c53da5fe0bfbea69"
+        }
+      },
+      "gif": "reports/forge/ddgan-conditional-repair/media/bispf-ddgan-energy-unconstrained-v3-ddgan_repair_gaussian_chain_v1.gif",
+      "adapter_receipt_sha256": "fc368c5c0dd8c21356f1e59cfda8d606ad3955931a9beb0bfbaf8822dfe0a6d8",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 2500,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 2500,
+              "calls": 2500,
+              "eligible": 2500,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 2500,
+            "observations": {
+              "applied": 2500,
+              "calls": 2500,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 2500,
+              "applied_record_calls_in_window": 2500,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 2500,
+              "observed_steps_in_window": 2500,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 2500
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 2500,
+                "last": 1.067888468503952,
+                "max": 1.2227226495742798,
+                "min": 0.8493825793266296,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 2500,
+                "last": 0.33421877324581145,
+                "max": 0.47290951013565063,
+                "min": 0.2644065096974373,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 2500,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 2500,
+          "encoder": 0,
+          "generator": 2500,
+          "prior": 2500
+        },
+        "unintended_rng_deviations": 0
+      },
+      "prior_policy": {
+        "applicability": "latent_prior",
+        "contract": "recipe_owned_v1",
+        "eps": 0.0001,
+        "l2": 0.0,
+        "regularizer": "sbnp",
+        "target_std": 1.0,
+        "trainable_locations": true,
+        "update": "learned",
+        "weight": 0.01
+      },
+      "initial_models": {
+        "discriminator": "7238043946f6b9f13d9f9c534c253870505ea2c11a37c6e0297f443d3d867484",
+        "generator": "b8fae6b59782adfc70d2cdedd9a9e3db213c48af8435cf87e85a78d9d77356fb",
+        "prior": "ce2bed1568ff9729c5e77d8a4071be68712b2f98ded8d09ab280688de0860fdb"
+      },
+      "batch_sequence_sha256": "1f64ffe0d3ad8bdebc856f5560e346aa69709a99ea0d7bec48b52edeec456fd8",
+      "forge_grade": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "passed": false,
+          "shortfall": 0.11021460448405639,
+          "status": "FAIL"
+        },
+        "gate_status": "FAIL",
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "FAIL"
+      },
+      "graded_receipt_sha256": "e0ad2f2271055634bd575a95f5c439a454f9298e43cd2474ab1f31c2a8bbcb56"
+    },
+    {
+      "candidate": "bispf-ddgan-energy-unconstrained-v3",
+      "task": "ddgan_repair_bimodal_chain_wall_v2",
+      "attempt": "c7c66dbef51f4feabb7320823968266d",
+      "campaign": "ddgan-conditional-repair-r3",
+      "request_id": "a7e06c5b1c4d85a6bb7e7363",
+      "candidate_revision": "6f3641b574a34f3ac199275ce9a2d9a44cc5fb77f281e583777be601c73221b4",
+      "source": {
+        "digest": "db83af24303b269185064c69aa6837b3c56fe1fa5460b7da39aecc0672c0fe32",
+        "origin_commit": "223d24568350c0056155c136297f0da41cb1fc2f",
+        "schema_version": 1,
+        "snapshot_path": "/nvme/dev/particlegan/ParticleGAN/runs/forge/snapshots/db83af24303b269185064c69aa6837b3c56fe1fa5460b7da39aecc0672c0fe32"
+      },
+      "protocol_seed": 0,
+      "qualification_input": false,
+      "attempt_status": "completed",
+      "attempt_reason": null,
+      "supervised_elapsed_seconds": 473.95416118900175,
+      "reservation_seconds": 1200,
+      "terminal_sha256": "a4240f13cc6aab59c268942ad9e5a85073940c9db4bd98086fda012782975b70",
+      "artifact_directory": "/nvme/dev/particlegan/ParticleGAN/runs/forge/ddgan-conditional-repair-r3/c7c66dbef51f4feabb7320823968266d",
+      "completed_updates": 5000,
+      "verdict": "FAIL",
+      "terminal_passes": 0,
+      "final_metrics": {
+        "final_covariance_eigen_max": 0.9547818398338761,
+        "final_covariance_eigen_min": 0.7571718555702437,
+        "final_hq": 0.9453125,
+        "final_local_covariance_max": 1.6981969289174321,
+        "final_local_covariance_min": 0.721252467643301,
+        "final_local_mean_sigma": 0.2018554166862953,
+        "final_mode_mass_tv": 0.00634765625,
+        "final_normalized_mean": 0.014619305172392268,
+        "final_projection_cdf": 0.04355488745119518,
+        "panel_count": 8,
+        "samples_per_panel": 2048,
+        "t1_q0_covariance_eigen_max": 2.1215677510316207,
+        "t1_q0_covariance_eigen_min": 0.9445747856517749,
+        "t1_q0_normalized_mean": 0.23272982509427723,
+        "t1_q0_projection_cdf": 0.09502774830500976,
+        "t1_q1_covariance_eigen_max": 2.984871059215101,
+        "t1_q1_covariance_eigen_min": 0.8645607659030549,
+        "t1_q1_normalized_mean": 0.2568256279303318,
+        "t1_q1_projection_cdf": 0.10237237304553015,
+        "t2_q0_covariance_eigen_max": 0.9784643537880897,
+        "t2_q0_covariance_eigen_min": 0.6789783925920858,
+        "t2_q0_normalized_mean": 0.08084760911977677,
+        "t2_q0_projection_cdf": 0.09116232442138417,
+        "t2_q1_covariance_eigen_max": 0.9969908679909592,
+        "t2_q1_covariance_eigen_min": 0.8152487390174195,
+        "t2_q1_normalized_mean": 0.048997133665712296,
+        "t2_q1_projection_cdf": 0.05958449594221163,
+        "t3_q0_covariance_eigen_max": 1.0484537292698368,
+        "t3_q0_covariance_eigen_min": 0.9534012905835499,
+        "t3_q0_normalized_mean": 0.07118360396762481,
+        "t3_q0_projection_cdf": 0.04271486965704452,
+        "t3_q1_covariance_eigen_max": 1.082976046761844,
+        "t3_q1_covariance_eigen_min": 0.9940445531486085,
+        "t3_q1_normalized_mean": 0.08673225134978788,
+        "t3_q1_projection_cdf": 0.046112198793411274,
+        "t4_q0_covariance_eigen_max": 1.0451405817447943,
+        "t4_q0_covariance_eigen_min": 0.9951218056633715,
+        "t4_q0_normalized_mean": 0.0203667358766905,
+        "t4_q0_projection_cdf": 0.021043773822446377,
+        "t4_q1_covariance_eigen_max": 1.026888357014516,
+        "t4_q1_covariance_eigen_min": 0.9594973317301255,
+        "t4_q1_normalized_mean": 0.016252817493294117,
+        "t4_q1_projection_cdf": 0.025897623196870834,
+        "worst_transition_cdf": 0.10237237304553015
+      },
+      "failed_bounds": [
+        "final_hq",
+        "final_local_covariance_max",
+        "t1_q0_covariance_eigen_max",
+        "t1_q1_covariance_eigen_max",
+        "t1_q1_normalized_mean",
+        "last 5 post-update metric observations do not all pass"
+      ],
+      "field_ownership_sha256": "bde75c0258d84233f79f77b77456742ad169238c2fb27a43b63175da06d9650e",
+      "task_contract_sha256": "0209d0a1fbf179f5e13a2a108f8844b1aa1deaa38f41ba8e3e3d272de31d41ea",
+      "execution_log_sha256": "e781cecdeaada5e9917a74b9b74263323241526270618e69a8a6599cf7e599c2",
+      "last_observed_update": 5000,
+      "api_execution_status": "COMPLETE",
+      "full_protocol_complete": true,
+      "scheduled_checks": 24,
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditional_energy_weight": 1.0,
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.003,
+        "lr_anneal_start": 0.3,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "name": "bispf",
+        "network_lr_floor": 0.05,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 128,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 5000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "reproducibility": {
+        "batch_sequence_sha256": "68dd92b329109fb7c6a0febd8672afbaf4854becd89fdfd09eba2f290b904b39",
+        "comparison_version": "toy-comparison-v3-serial-autograd",
+        "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+        "historical_evidence": "original source, seed and initialization retained; no regrading",
+        "initial_models": {
+          "D": "7238043946f6b9f13d9f9c534c253870505ea2c11a37c6e0297f443d3d867484",
+          "G": "b8fae6b59782adfc70d2cdedd9a9e3db213c48af8435cf87e85a78d9d77356fb",
+          "prior": "ce2bed1568ff9729c5e77d8a4071be68712b2f98ded8d09ab280688de0860fdb"
+        },
+        "initial_state_sha256": "4346b7fd0ebd8f73856ecadf18959bfb90f841c79d02bb0cfbe187c51c6d985d"
+      },
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "raw_receipt_sha256": "ddd7496da3a4e9b0de8f43b1625734008b3f43e43df431133b32933273112415",
+      "elapsed_seconds": 463.8340788510104,
+      "artifact_hashes": {
+        "final-state.pt": {
+          "bytes": 122138,
+          "sha256": "2edce6fe4539b8117ecc597e8859d6788ff6158c80f0a1951649691f0d476c07"
+        },
+        "goal.gif": {
+          "bytes": 705728,
+          "sha256": "8920d4ab920cdb058186e0528990a8804ee9cb689f35849b6909edebb2eaa93b"
+        },
+        "observations.npz": {
+          "bytes": 2309131,
+          "sha256": "adb61ed538b37c6a3185b8a92e49614d3b121dd0f3409bd9e66e6df5152818b8"
+        }
+      },
+      "gif": "reports/forge/ddgan-conditional-repair/media/bispf-ddgan-energy-unconstrained-v3-ddgan_repair_bimodal_chain_wall_v2.gif",
+      "adapter_receipt_sha256": "5860b11a3759e437f391ff11ec06e76565f7eb7313f97c8e497b60712cfc6e2f",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 5000,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 5000,
+              "calls": 5000,
+              "eligible": 5000,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 5000,
+            "observations": {
+              "applied": 5000,
+              "calls": 5000,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 5000,
+              "applied_record_calls_in_window": 5000,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 5000,
+              "observed_steps_in_window": 5000,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 5000
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 5000,
+                "last": 1.265554536979482,
+                "max": 1.465359091758728,
+                "min": 0.9952268004417419,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 5000,
+                "last": 0.2747889267970533,
+                "max": 0.3980642259120941,
+                "min": 0.2364099102570364,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 5000,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 5000,
+          "encoder": 0,
+          "generator": 5000,
+          "prior": 5000
+        },
+        "unintended_rng_deviations": 0
+      },
+      "prior_policy": {
+        "applicability": "latent_prior",
+        "contract": "recipe_owned_v1",
+        "eps": 0.0001,
+        "l2": 0.0,
+        "regularizer": "sbnp",
+        "target_std": 1.0,
+        "trainable_locations": true,
+        "update": "learned",
+        "weight": 0.01
+      },
+      "initial_models": {
+        "discriminator": "7238043946f6b9f13d9f9c534c253870505ea2c11a37c6e0297f443d3d867484",
+        "generator": "b8fae6b59782adfc70d2cdedd9a9e3db213c48af8435cf87e85a78d9d77356fb",
+        "prior": "ce2bed1568ff9729c5e77d8a4071be68712b2f98ded8d09ab280688de0860fdb"
+      },
+      "batch_sequence_sha256": "68dd92b329109fb7c6a0febd8672afbaf4854becd89fdfd09eba2f290b904b39",
+      "forge_grade": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "passed": false,
+          "shortfall": 0.042135448865720244,
+          "status": "FAIL"
+        },
+        "gate_status": "FAIL",
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "FAIL"
+      },
+      "graded_receipt_sha256": "39814fddaad0c9c8d3b8066d0e687cadf62e62fe2058d8834f31f01d58c46ea9"
     }
   ],
-  "paid_supervised_seconds": 4054.4795295739896,
-  "total_reserved_attempt_seconds": 5400,
+  "paid_supervised_seconds": 4793.664241761988,
+  "total_reserved_attempt_seconds": 7200,
   "cost_scope": "Summed supervised attempt cost includes startup, actual updates, evaluation, media and independent grading; timed-out attempts are included. GPU0 was shared; no speed comparison."
 }
