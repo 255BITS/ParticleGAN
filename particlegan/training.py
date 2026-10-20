@@ -147,6 +147,8 @@ class GANTrainer:
                  optimizer_options=None, penalty_options=None, serial_backward=True):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
+        if recipe.conditional_energy_weight:
+            raise ValueError("conditional energy score requires a caller-owned paired conditional host")
         if type(serial_backward) is not bool:
             raise TypeError("serial_backward must be a boolean")
         if not serial_backward:

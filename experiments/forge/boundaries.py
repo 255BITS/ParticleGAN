@@ -47,6 +47,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "critic_step_mode",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
+    "conditional_energy_weight", "conditional_energy_samples",
     "prior_sigreg_projections", "prior_sigreg_knots",
     "kinetic_transport_projections",
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",
