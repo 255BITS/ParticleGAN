@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 843. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 844. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3864,6 +3864,22 @@ Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md) · [Record](records/pr344-smoothed-dualnorm-1e-4-context-v1.json)
 
+### r1r2-pr401-concluded-archive · r1r2-pr401-concluded-archive-v1
+
+**Scope:** historical; family_context; revision `2cf7b0a4c796e29ace6cca12d2e553ad67211b5c`.
+
+Historical R1/R2 global recipe repairs preserve the original task/protocol gates; this reporting archive proposes no new experiment.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `concluded_research_archive`.
+
+
+
+All 34 complete measured revisions fail Ring16. Strongest complete repairs retain 5/6 ordinary tasks plus clock PASS; original scheduled baseline has 5/6 plus clock FAIL. Energy-U and frozen-prior energy both fail covariance/HQ on all 96 saved Ring16 panels. All original acquisition/endpoint distinctions and sources remain unchanged; MMD is unmeasured deferred preparation.
+
+**Next:** Retain the stronger measured control and negative findings; stop these exact repairs. Accept compact evidence-only replacement before closing original mixed PR #401. Defer MMD runtime and paid execution; no budget change, qualification reuse or rerun.
+
+[Evidence](../../reports/forge/r1r2-concluded-archive/README.md) · [Record](records/r1r2-pr401-concluded-archive-v1.json)
+
 ### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
 
 **Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
@@ -5638,4 +5654,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `6c9dacec625dcf5417a9d5af2ee3e20b82755036042c9d4f5ed88eb324eb8990`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `129fa2437c3f18ff4f7c4348320516e29fa134505dbee0614353f7e11cd4cc8d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

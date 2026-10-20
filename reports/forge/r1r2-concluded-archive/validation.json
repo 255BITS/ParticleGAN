@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "scope": "archive_identity_and_reporting_validation",
+  "source_commit": "2cf7b0a4c796e29ace6cca12d2e553ad67211b5c",
+  "develop_base": "cded97fb978294fa2bbd2d62ed53019a2acf6d6e",
+  "qualification_input": false,
+  "original_gates_recomputed": false,
+  "archive_root_tree_verified": true,
+  "report_trees_verified": 13,
+  "document_result_blob_pins_verified": 39,
+  "gif_objects_readable": 364,
+  "publication_gif_hash_bindings_verified": 364,
+  "publication_media_sidecars_verified": 364,
+  "pinned_markdown_links_verified": 15,
+  "local_record_bindings_verified": true,
+  "unchanged_published_artifacts_sha256": {
+    "reports/forge/leaderboards/adaptation.md": "1bf14163c8a025d40afeb7344cdbf8eba30e61a015ae8eafc2057d32afa595ba",
+    "reports/forge/leaderboards/clockfree_continuous.md": "e5a685c31803795cfbbca5c3245b42df95df509ec05b6730b5f7a34a87a1c784",
+    "reports/forge/leaderboards/formulation_comparison.md": "2ede1396d420788d4c9cbc831b2b22211ed0063ee3eae34f9685f5e48aad208d",
+    "reports/forge/leaderboards/host_profile_transfer.md": "dd33cc2b21ef67a0e8cd4fbd783f0381973710b2389ed93afaadf5984d291081",
+    "reports/forge/leaderboards/quality_coverage.md": "3db5e283913faa81d44c24d95b5ea54a9dddd778d2e8a8c1856ed1258d8b3b37",
+    "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8",
+    "reports/forge/technique-inventory.json": "27db97259f727b071e97eb31ff5de7778bffa33e5a83ba13a19b47e77716fabc",
+    "reports/forge/technique-inventory.md": "a1c958c2b108b6db9105eedec15c3e4657735ddd7484fd31f7f8dffa5a4459e8"
+  },
+  "compilation_status": "CURRENT",
+  "publication_record_count_preserved": 501,
+  "original_inventory_coverage": {
+    "valid": false,
+    "missing_count": 75,
+    "unclassified_count": 3,
+    "note": "Existing develop catalog drift; no unrelated history rebuild performed."
+  },
+  "cleanup_training_updates": 0,
+  "cleanup_sampling_draws": 0,
+  "cleanup_paid_seconds": 0,
+  "result": "PASS"
+}
