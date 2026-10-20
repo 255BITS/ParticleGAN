@@ -2,7 +2,7 @@
   "automation_digest": "391b85927f392edf67e5876d55583ddfa090cd4213d7436c2acbc522888a2f18",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "ea8fa94ca75e7e92483cb20cdc251cf20ff68b952dafdba7359e292c08397616",
+  "input_digest": "3aa279e13001c206fe493e6a271c303da3876eaf7cdfffd72182d8e3a587f091",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -1458,6 +1458,11 @@
     "reports/forge/records/archive-pr155-current-e4nh-9d90739f8c00.json": "a8a2d9871ccaca858015d15bc817b88c6dec6b6098e5e14ee25928e5ecf1b1a5",
     "reports/forge/records/archive-pr155-current-e4nh14k-e4138ef980fe.json": "73f01f2fe720ca548ffcce0b61a85222da0934df0d5c43ec5126a28222334d9a",
     "reports/forge/records/archive-pr261-routed-latent-noise-coverage-7943dda321c1.json": "8aaf0fbba0fc39be84b1550b9c299dbefb96a285ea91a68f515ab2f549c57c64",
+    "reports/forge/records/archive-pr320-network-spectral-cap-c4627fb14619.json": "f51a0c55254a02a9727b604b96e08d79441e7c40cedfa52642c4413ae8ad99fc",
+    "reports/forge/records/archive-pr360-hydraulic-winner-bbac181e1281.json": "d7f160b0c0682d212a955686759f0dda6e1707e2cbe6c0ea3d89b4d60234a880",
+    "reports/forge/records/archive-pr395-four-bcap-repairs-51ee43476e8b.json": "7aa71c422c723b261d1e3b8c254a9931e71b959379b93734b40d889bda625712",
+    "reports/forge/records/archive-pr397-stall-reach-critic-read-de93dbf48cab.json": "45ee89a42e98ff3f327e1b90082494fe3604ad71bbc69a341475f7f57308b8df",
+    "reports/forge/records/archive-pr398-generator-idle-se-835e93900c21.json": "4e9225f65dde082ae8ec4c9c63c81d9bdce71442e1b084bc02e2f39be7de5609",
     "reports/forge/records/bcap-default-baseline-concluded-context-v1.json": "67f5d51d88b91263d083a91d546475c3b8e6ddc4bb1e4babb62b4125e62675b0",
     "reports/forge/records/bcap-moment-tradeoff-saved-diagnostic-v1.json": "2d969444a184fb7618f08b7fc9cb3b654f3b2c6869fd9bb1991309cdad395d09",
     "reports/forge/records/bcap-three-phase-concluded-context-v1.json": "8d021ebe420c90660c2bae2774e193f90105c2309b993c696867532098ed6842",
@@ -4272,7 +4277,7 @@
   },
   "operational_lifecycle_digest": "1f0e327db0f43b33080ec349f0bf27ded2d185bf2b60c86d613105800dbbbf2c",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "2b2c7bc46925d55443fc5c5c160631fda49729afe8643965af8e5f068ee33bd0",
+    "reports/forge/EXPERIMENT_MEMORY.md": "30b5842335d108d0a35e100ec84e4ece900aff7836ebc6f32771fbcc82d6c67a",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
@@ -4395,7 +4400,7 @@
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
     "source_manifest_digest": "a3591610f1d5622ecfcc34b72e30d75b2bb3ce4fe81001c4a45bf4010856b080"
   },
-  "record_count": 845,
+  "record_count": 850,
   "reducer_hashes": {
     "experiments.forge.knowledge": "4b5a96038574973d97fbdd938476a68ab282114121dcdbd4b5cb5a5854a47db4",
     "experiments.forge.publication_memory": "7e9d1e7ea3ce0e165c6df54d324ddffec8d220a0eb1e2ad268ca2d16778ad9c4"

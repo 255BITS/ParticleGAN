@@ -1,0 +1,1140 @@
+{
+  "all_checks_pass": true,
+  "cells": [
+    {
+      "arm": "control",
+      "attempt_id": "132021d287df44b9a077f7ff7cd55073",
+      "decisions": null,
+      "idle_steps": null,
+      "metrics": {
+        "hold": 0.015780961140990257,
+        "recon_mse": 0.004353014752268791
+      },
+      "reason": "recomputed complete live curve and terminal suffix",
+      "required": true,
+      "status": "PASS",
+      "task_id": "ae_gan_hold",
+      "tier": 1
+    },
+    {
+      "arm": "control",
+      "attempt_id": "96b555ef31024e11b69f5aff7a5551a3",
+      "decisions": null,
+      "idle_steps": null,
+      "metrics": {
+        "parity_comparisons": 4
+      },
+      "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+      "required": false,
+      "status": "PASS",
+      "task_id": "clockfree_audit_measurement_v1",
+      "tier": 1
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "cover_leftover",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "five_word_joint_hold",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "attempt_id": "b4bb0dd838cf4998bbb29039266c16cb",
+      "decisions": null,
+      "idle_steps": null,
+      "metrics": {},
+      "reason": "task wall-time budget exhausted",
+      "required": true,
+      "status": "INCOMPLETE",
+      "task_id": "five_word_joint_smoke",
+      "tier": 1
+    },
+    {
+      "arm": "control",
+      "attempt_id": "0433e9e64ebd4999ba0da863044c2e7e",
+      "decisions": null,
+      "idle_steps": null,
+      "metrics": {
+        "cdf_ks": 0.07184216175355329,
+        "finite_fraction": 1.0,
+        "mean": 2.062949220009614,
+        "mean_error_sigma": 0.12589844001922756,
+        "sample_count": 4096,
+        "std": 0.5315217191133498,
+        "std_ratio": 1.0630434382266996,
+        "step": 1000
+      },
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "required": true,
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke",
+      "tier": 1
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "gaussian1d_stability",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "grid100",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "img_bars4",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "img_blobs4",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "img_intensity2",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "img_stripes2",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "mid_scale_identity",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "mode_hold",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "residual_student",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "attempt_id": "281015e96d8347bdac5e1274a99ede65",
+      "decisions": null,
+      "idle_steps": null,
+      "metrics": {
+        "component_core_covariance_error": 0.46654487773776054,
+        "component_core_covariance_errors": [
+          0.3157356083393097,
+          0.36942389607429504,
+          0.5945930480957031,
+          0.518116295337677,
+          0.4329945147037506,
+          0.5378646850585938,
+          0.5752252340316772,
+          0.7327849268913269,
+          0.3124582767486572,
+          0.2916128933429718,
+          0.6207011938095093,
+          0.6076358556747437,
+          0.3628906011581421,
+          0.3795059621334076,
+          0.3145381510257721,
+          0.4986369013786316
+        ],
+        "component_core_eigen_ratios": [
+          0.5652746558189392,
+          0.6300055384635925,
+          0.423392653465271,
+          0.3579520583152771,
+          0.44109272956848145,
+          0.24270759522914886,
+          0.2734472155570984,
+          0.4367653429508209,
+          0.6246447563171387,
+          0.6056892275810242,
+          0.4688296616077423,
+          0.6781261563301086,
+          0.6620938777923584,
+          0.4657171964645386,
+          0.5741859078407288,
+          0.7827956080436707
+        ],
+        "component_core_min_eigen_ratio": 0.24270759522914886,
+        "component_counts": [
+          318,
+          233,
+          199,
+          249,
+          311,
+          244,
+          249,
+          209,
+          344,
+          223,
+          248,
+          197,
+          305,
+          259,
+          266,
+          242
+        ],
+        "component_covariance_error": 0.49656706117093563,
+        "component_covariance_errors": [
+          0.32679522037506104,
+          0.44739240407943726,
+          0.6356043815612793,
+          0.525579571723938,
+          0.4329945147037506,
+          0.5360129475593567,
+          0.5752252340316772,
+          0.8248099088668823,
+          0.3124582767486572,
+          0.2916128933429718,
+          0.7489075064659119,
+          0.6076358556747437,
+          0.40928933024406433,
+          0.3785661458969116,
+          0.29704540967941284,
+          0.5951433777809143
+        ],
+        "component_mass": [
+          0.07763671875,
+          0.056884765625,
+          0.048583984375,
+          0.060791015625,
+          0.075927734375,
+          0.0595703125,
+          0.060791015625,
+          0.051025390625,
+          0.083984375,
+          0.054443359375,
+          0.060546875,
+          0.048095703125,
+          0.074462890625,
+          0.063232421875,
+          0.06494140625,
+          0.05908203125
+        ],
+        "component_min_eigen_ratio": 0.24246710538864136,
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.03773584961891174,
+          0.055793993175029755,
+          0.04020100459456444,
+          0.0200803205370903,
+          0.025723472237586975,
+          0.02459016442298889,
+          0.024096384644508362,
+          0.06220095604658127,
+          0.029069768264889717,
+          0.013452914543449879,
+          0.10080645233392715,
+          0.04060913622379303,
+          0.032786883413791656,
+          0.0154440151527524,
+          0.030075188726186752,
+          0.08677686005830765
+        ],
+        "covariance_error": 0.06101250648498535,
+        "hq": 0.9609375,
+        "hq_component_counts": [
+          306,
+          220,
+          191,
+          244,
+          303,
+          238,
+          243,
+          196,
+          334,
+          220,
+          223,
+          189,
+          295,
+          255,
+          258,
+          221
+        ],
+        "mass_tv": 0.065185546875,
+        "max_component_spill": 0.10080645233392715,
+        "mean_error": 0.007996227592229843,
+        "min_hq_mass_ratio": 0.73828125,
+        "min_mass_ratio": 0.76953125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.026980774069312406,
+        "target_mass": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "recomputed complete live curve and terminal suffix",
+      "required": true,
+      "status": "PASS",
+      "task_id": "ring16_acquisition",
+      "tier": 1
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "rotated100",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "staggered100",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "trajectory",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "attempt_id": "55551141059d4408b1cefeef4212be0a",
+      "decisions": null,
+      "idle_steps": null,
+      "metrics": {
+        "grad_med": 0.9523457288742065,
+        "mean_abs": 0.958502471446991
+      },
+      "reason": "recomputed complete live curve and terminal suffix",
+      "required": true,
+      "status": "PASS",
+      "task_id": "two_pole",
+      "tier": 1
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "unipolar",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "attempt_id": "047f4683f8c24c809e606a3b7e9b5148",
+      "decisions": null,
+      "idle_steps": null,
+      "metrics": {
+        "concept_move": 0.9593252904536698,
+        "unused_hold": 0.9867020286619663
+      },
+      "reason": "recomputed complete live curve and terminal suffix",
+      "required": true,
+      "status": "PASS",
+      "task_id": "unused_token_hold",
+      "tier": 1
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_anisotropic",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_overlap",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_spiral",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_two_broad",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_unequal_mass",
+      "tier": 2
+    },
+    {
+      "arm": "control",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_unequal_width",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "attempt_id": "cf8767a9a5c947fcae7fe596a22af2dd",
+      "decisions": 250,
+      "idle_steps": 64,
+      "metrics": {
+        "hold": 0.012955067679286003,
+        "recon_mse": 0.0070239342749118805
+      },
+      "reason": "recomputed complete live curve and terminal suffix",
+      "required": true,
+      "status": "PASS",
+      "task_id": "ae_gan_hold",
+      "tier": 1
+    },
+    {
+      "arm": "idle1.0",
+      "attempt_id": "904c6258152c4be7a3b0de7d25533129",
+      "decisions": null,
+      "idle_steps": null,
+      "metrics": {
+        "parity_comparisons": 4
+      },
+      "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+      "required": false,
+      "status": "PASS",
+      "task_id": "clockfree_audit_measurement_v1",
+      "tier": 1
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "cover_leftover",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "five_word_joint_hold",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "attempt_id": "050fcb26432342ed8e1674c627cb2347",
+      "decisions": 20001,
+      "idle_steps": 10923,
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.1875,
+        "mass_berry": 0.2109375,
+        "mass_grape": 0.1953125,
+        "mass_lemon": 0.2080078125,
+        "mass_melon": 0.1982421875,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 0.9954173564910889,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.0004323056264155598,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "reason": "any scheduled full joint pass plus independent same-state confirmation",
+      "required": true,
+      "status": "PASS",
+      "task_id": "five_word_joint_smoke",
+      "tier": 1
+    },
+    {
+      "arm": "idle1.0",
+      "attempt_id": "5a537e61e7ad4694b46acbc508dc5a81",
+      "decisions": 1000,
+      "idle_steps": 429,
+      "metrics": {
+        "cdf_ks": 0.07042627273302315,
+        "finite_fraction": 1.0,
+        "mean": 2.0612324577814434,
+        "mean_error_sigma": 0.12246491556288674,
+        "sample_count": 4096,
+        "std": 0.5215082479409759,
+        "std_ratio": 1.0430164958819519,
+        "step": 1000
+      },
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "required": true,
+      "status": "PASS",
+      "task_id": "gaussian1d_smoke",
+      "tier": 1
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "gaussian1d_stability",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "grid100",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "img_bars4",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "img_blobs4",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "img_intensity2",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "img_stripes2",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "mid_scale_identity",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "mode_hold",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "residual_student",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "attempt_id": "85207b4387fb497b985df6f3458de058",
+      "decisions": 1600,
+      "idle_steps": 5,
+      "metrics": {
+        "component_core_covariance_error": 0.402685250621289,
+        "component_core_covariance_errors": [
+          0.6000713109970093,
+          0.46627452969551086,
+          0.41047799587249756,
+          0.2632175087928772,
+          0.31597551703453064,
+          0.5683135986328125,
+          0.5641681551933289,
+          0.4166516959667206,
+          0.45823055505752563,
+          0.3245161175727844,
+          0.6233262419700623,
+          0.4659980237483978,
+          0.13221000134944916,
+          0.10536953061819077,
+          0.24593470990657806,
+          0.48222851753234863
+        ],
+        "component_core_eigen_ratios": [
+          0.647717297077179,
+          0.7998054623603821,
+          0.6094661951065063,
+          0.72035813331604,
+          0.61420077085495,
+          0.36129555106163025,
+          0.28041887283325195,
+          0.47661837935447693,
+          0.4459276795387268,
+          0.5595610737800598,
+          0.6186665892601013,
+          0.7831929922103882,
+          0.8187617063522339,
+          0.8972007632255554,
+          0.9032846689224243,
+          0.6687965989112854
+        ],
+        "component_core_min_eigen_ratio": 0.28041887283325195,
+        "component_counts": [
+          215,
+          245,
+          230,
+          246,
+          373,
+          251,
+          214,
+          239,
+          362,
+          283,
+          187,
+          194,
+          268,
+          297,
+          265,
+          227
+        ],
+        "component_covariance_error": 3.0999061609618366,
+        "component_covariance_errors": [
+          39.42211151123047,
+          1.065224289894104,
+          0.7863552570343018,
+          0.2961142063140869,
+          0.31597551703453064,
+          0.5683135986328125,
+          0.6270161271095276,
+          0.4748973548412323,
+          3.31011962890625,
+          0.3245161175727844,
+          0.6855766773223877,
+          0.552822470664978,
+          0.12348451465368271,
+          0.15532614290714264,
+          0.23587752878665924,
+          0.654767632484436
+        ],
+        "component_mass": [
+          0.052490234375,
+          0.059814453125,
+          0.05615234375,
+          0.06005859375,
+          0.091064453125,
+          0.061279296875,
+          0.05224609375,
+          0.058349609375,
+          0.08837890625,
+          0.069091796875,
+          0.045654296875,
+          0.04736328125,
+          0.0654296875,
+          0.072509765625,
+          0.064697265625,
+          0.055419921875
+        ],
+        "component_min_eigen_ratio": 0.2958199083805084,
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.31162789463996887,
+          0.22448979318141937,
+          0.30434781312942505,
+          0.060975611209869385,
+          0.026809651404619217,
+          0.0,
+          0.09813084453344345,
+          0.05857740715146065,
+          0.05524861812591553,
+          0.035335689783096313,
+          0.05347593501210213,
+          0.04123711213469505,
+          0.033582091331481934,
+          0.06060606241226196,
+          0.049056604504585266,
+          0.12775330245494843
+        ],
+        "covariance_error": 0.07546184211969376,
+        "hq": 0.909912109375,
+        "hq_component_counts": [
+          148,
+          190,
+          160,
+          231,
+          363,
+          251,
+          193,
+          225,
+          342,
+          273,
+          177,
+          186,
+          259,
+          279,
+          252,
+          198
+        ],
+        "mass_tv": 0.076171875,
+        "max_component_spill": 0.31162789463996887,
+        "mean_error": 0.014028280973434448,
+        "min_hq_mass_ratio": 0.578125,
+        "min_mass_ratio": 0.73046875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.03829462360870355,
+        "target_mass": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "target_scale": 3.0029242038726807
+      },
+      "reason": "recomputed complete live curve and terminal suffix",
+      "required": true,
+      "status": "FAIL",
+      "task_id": "ring16_acquisition",
+      "tier": 1
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "rotated100",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "staggered100",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "trajectory",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "attempt_id": "c8980b6a5d934399bd5f05cda2702dec",
+      "decisions": 80,
+      "idle_steps": 1,
+      "metrics": {
+        "grad_med": 0.9795690774917603,
+        "mean_abs": 0.9469776153564453
+      },
+      "reason": "recomputed complete live curve and terminal suffix",
+      "required": true,
+      "status": "PASS",
+      "task_id": "two_pole",
+      "tier": 1
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "unipolar",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "attempt_id": "0d3a6198ffcf42a9ae88e74fd713b8f9",
+      "decisions": 200,
+      "idle_steps": 0,
+      "metrics": {
+        "concept_move": 0.9593252904536698,
+        "unused_hold": 0.9867020286619663
+      },
+      "reason": "recomputed complete live curve and terminal suffix",
+      "required": true,
+      "status": "PASS",
+      "task_id": "unused_token_hold",
+      "tier": 1
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_anisotropic",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_overlap",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_spiral",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_two_broad",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_unequal_mass",
+      "tier": 2
+    },
+    {
+      "arm": "idle1.0",
+      "required": true,
+      "status": "BLOCKED",
+      "task_id": "vector_unequal_width",
+      "tier": 2
+    }
+  ],
+  "checks": [
+    {
+      "arm": "control",
+      "check": "source digest matches registration",
+      "passed": true
+    },
+    {
+      "arm": "control",
+      "check": "declared trainer delta only",
+      "passed": true
+    },
+    {
+      "arm": "control",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "arm": "control",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "arm": "control",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "two_pole"
+    },
+    {
+      "arm": "control",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "two_pole"
+    },
+    {
+      "arm": "control",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "unused_token_hold"
+    },
+    {
+      "arm": "control",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "unused_token_hold"
+    },
+    {
+      "arm": "control",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "ae_gan_hold"
+    },
+    {
+      "arm": "control",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "ae_gan_hold"
+    },
+    {
+      "arm": "control",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "control",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "control",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "arm": "control",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "source digest matches registration",
+      "passed": true
+    },
+    {
+      "arm": "idle1.0",
+      "check": "declared trainer delta only",
+      "passed": true
+    },
+    {
+      "arm": "idle1.0",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "two_pole"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "two_pole"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "unused_token_hold"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "unused_token_hold"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "ae_gan_hold"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "ae_gan_hold"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "ring16_acquisition"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "idle row present only when enabled",
+      "passed": true,
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "arm": "idle1.0",
+      "check": "valid original receipt",
+      "passed": true,
+      "task": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "diagnostic": {
+    "cohort": "off_ladder_target_diagnostic",
+    "qualification_credit": false,
+    "rows": [
+      {
+        "arm": "control",
+        "decisions": null,
+        "gate_status": "FAIL",
+        "idle_steps": null,
+        "metrics": {
+          "cover": 1.0,
+          "effective_modes": 7.157970905303955,
+          "hq": 0.9892578125,
+          "modes": 8,
+          "n_modes": 8,
+          "step": 1200
+        },
+        "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+        "task_id": "mode_hold"
+      },
+      {
+        "arm": "control",
+        "decisions": null,
+        "gate_status": "FAIL",
+        "idle_steps": null,
+        "metrics": {
+          "cdf_ks": 0.3206228939608994,
+          "finite_fraction": 1.0,
+          "mean": 3.1276191812357865,
+          "mean_error_sigma": 0.25523836247157305,
+          "sample_count": 4096,
+          "std": 0.33116516834734117,
+          "std_ratio": 0.6623303366946823,
+          "step": 6000
+        },
+        "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+        "task_id": "gaussian1d_stability"
+      },
+      {
+        "arm": "idle1.0",
+        "decisions": 1200,
+        "gate_status": "FAIL",
+        "idle_steps": 0,
+        "metrics": {
+          "cover": 1.0,
+          "effective_modes": 7.157970905303955,
+          "hq": 0.9892578125,
+          "modes": 8,
+          "n_modes": 8,
+          "step": 1200
+        },
+        "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+        "task_id": "mode_hold"
+      },
+      {
+        "arm": "idle1.0",
+        "decisions": 6000,
+        "gate_status": "FAIL",
+        "idle_steps": 2844,
+        "metrics": {
+          "cdf_ks": 0.12697367365968248,
+          "finite_fraction": 1.0,
+          "mean": 2.843972281727474,
+          "mean_error_sigma": 0.31205543654505163,
+          "sample_count": 4096,
+          "std": 0.43238748557853524,
+          "std_ratio": 0.8647749711570705,
+          "step": 6000
+        },
+        "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+        "task_id": "gaussian1d_stability"
+      }
+    ]
+  },
+  "schema_version": 1,
+  "scope": "saved_receipts_only",
+  "source_commit": "94a6d429de0d01abc9fa3f993ed2089b741ef111",
+  "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+  "spec_sha256": "4025a6a49480adddfafc9e77add2f93fd9b84e317de91e7b77ea523416a639fe"
+}

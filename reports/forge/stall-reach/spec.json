@@ -1,0 +1,80 @@
+{
+  "acceptance": {
+    "minimum_matched_fail_to_pass": 1,
+    "ordinary_tier1_passes_required": 6,
+    "preserve_all_control_tier2_passes": true,
+    "primary": "mode_hold FAIL (suffix 3) -> PASS (suffix >= 5)",
+    "report_all_regressions": true
+  },
+  "archive": "/mnt/ml7tb/ParticleGAN-forge/stall-reach-20261011",
+  "baseline": "recipe-prior-refactor-bcap-pure-v1",
+  "candidate_id": "bcap-stall-reach-base-v1",
+  "closed_pr": 107,
+  "control_id": "bcap-stall-reach-control-v1",
+  "control_reuse": "Archived leader controls (e.g. bcap-prior-covariance-control-v1) are bound to source c63305181b75; this source differs, so one fresh unchanged-leader control runs.",
+  "diagnostics": [
+    "ring16 first confirmed acquisition update vs control",
+    "fraction of updates widened/stalled and max width",
+    "per-task wall cost of the 2d+1 stencil"
+  ],
+  "falsifier": "No matched Tier 2 FAIL->PASS, or any lost Tier 1 or control Tier 2 pass. One finite round: no width or window tuning and no retries.",
+  "full_reservation_seconds": 86040,
+  "hypothesis": "Closed PR #107 'stall reach': the generator reads the critic through a 2d+1 axis stencil whose width widens with the critic's measured input slope (max(.15, .5 min(u, 1/u))/kappa) and jumps to .5/kappa after 50 consecutive saturated (u >= .6) critic updates. Widening the generator's critic read when acquisition stalls lets particles see the missing mode. On the PR84 line it gave warm 200/200 and cold ring 8; here it should convert mode_hold FAIL (suffix 3) to a sustained PASS (suffix >= 5) under the unchanged BCAP direction-blend leader.",
+  "initializer": "deterministic_orthogonal",
+  "maximum_reserved_paid_seconds": 90000,
+  "name": "stall-reach",
+  "protocol_seed": 0,
+  "required_counts": {
+    "tier1": 6,
+    "tier2": 21,
+    "tier3": 2
+  },
+  "schema_version": 1,
+  "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+  "stop": "One finite round. Complete current-tier peers, then required non-PASS blocks higher tiers.",
+  "study_ids": [
+    "bcap-stall-reach-control-study-v1",
+    "bcap-stall-reach-study-v1"
+  ],
+  "task_contracts": {
+    "ae_gan_hold": "7aed199687a858ac5557c6dbb580ca86bdb001c6b0f87d70f901fd45bb66c599",
+    "clockfree_audit_measurement_v1": "5ae6d3fc5906ae3ad1693e6dbc6fa547bad8619cd70d04c73193b60fb7945e4d",
+    "cover_leftover": "89509bac28da342ada7e0a78e51a73f3355626e79d2a1523e5f5caf6535aa800",
+    "five_word_joint_hold": "17bb215d8cb01980eccf825da4db0dbb2fabc2a8122268998621fab74ab8acf6",
+    "five_word_joint_smoke": "164eb5229d8c3c960928a35297ca82a660be0a03f8303322a49dc8cd22a4d27e",
+    "gaussian1d_smoke": "105f10b0700ae6383fbd3516cd83388a28b4b6ebbd3f218ef300b51dd3dd143b",
+    "gaussian1d_stability": "b1d4df6ccd88a1b1126a4d89771b7e9497ce46ef628b8efc4fa0521695f2a409",
+    "grid100": "2cf02f4e0145487c0dbc0717401966c639adcad470bdd783574d8d85a15fd9dd",
+    "img_bars4": "a4301177d8977d618755f1da03bd6b30132a59b1a6e8fce5e5dffc941c9b41a5",
+    "img_blobs4": "4629e2dabe54d561323df009c8a2b7402ae18e33b10a6e0a3eaf3b0d8cd82e9b",
+    "img_intensity2": "3d706e970f5e9c64fc8750014ce4d20c7002aa2d480974c0acc3b713e16a6fe4",
+    "img_stripes2": "aee3a20029e473198fcb10d5bdd16430104eb93206414a1779884c02992ace9c",
+    "mid_scale_identity": "404ea7303e541fbabcae90e5c91859c8018379576867f5fdebdd231c391c2fbf",
+    "mode_hold": "475d959c29750ff5361abbb707e1daafc0bac6d6b2c492e5e1a125661a6d1d07",
+    "residual_student": "1de2f2a1e66517ce4fd4d512a91251f436b7af5dcb45f309f14f2d58a395f277",
+    "ring16_acquisition": "0bf8302f10132503190f9f3a0045c322beb34e3a59bd040cb6f1f116d169b918",
+    "ring_extension": "4b9bb7d5b109456d8b76231af434d40645a0ed1c23999680d5c741dd18dfad51",
+    "ring_hold": "d45e93066844237bb52c049df49c52e1bbefb902086bfcf7decf9a6b9460b990",
+    "rotated100": "ace274cfea66cf2ddad932c61fa066122f139f265290f5a3f705f725766b700e",
+    "staggered100": "1db335c837a729ce2cc04e683b20d8a098e8d2c47837677901aa66b6f741bfae",
+    "trajectory": "e603e0b3f8071a5d6e30c8f5dd5a510f0f48cdd39ca1cd2eb8a8a3974f976353",
+    "two_pole": "7eeba9a733c49ea8464588a0648dabd3f781a8c1dfdc9d33ce514e9a51524247",
+    "unipolar": "e485edf0c308a1f0a44f475f4168112eddaa83ca9c89617c4cb25e77c1b89439",
+    "unused_token_hold": "bd59e8399295d781a4159b7d58d2e49089a808bc7187119f0a1f54380c4b0930",
+    "vector_anisotropic": "3b439deb3e23f2fb9c9fab052a049e1443bf13ab4be36ff909ce0b6388cc36b5",
+    "vector_overlap": "0addaace696d30ccf5ccf9aedb915a03e7248a872452a9804194d3a99bb824a7",
+    "vector_spiral": "cf4e6ea960d50f28181b990e80bb48dd4dd94ee7c7e9d90bd9a2e365cef633d6",
+    "vector_two_broad": "f4a81d0c23951051fbc339f224c3a084fbf657dd561b76b6c954290c14eca917",
+    "vector_unequal_mass": "262f3895f75f4e0bacc066f610899a7ce711dc971a7c134abe762c9bd065a297",
+    "vector_unequal_width": "2b082193378101331223fb97cf3ff283f8b85abc8d8451d77ed4caaaba1ad1d2"
+  },
+  "through_tier": 2,
+  "trainer_delta": {
+    "generator_critic_read": {
+      "candidate": "stall_reach",
+      "control": "none"
+    }
+  },
+  "view": "discriminator_stability",
+  "view_revision": 9
+}
