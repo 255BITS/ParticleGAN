@@ -27,8 +27,8 @@ no analytic posterior, target weights or evaluation query enters the objective.
 The public `conditional_energy_score` implements that objective. The existing
 public DDGAN fixture, Recipe factories, learned MoG, SBNP, Born–Infeld critic
 penalty, DualNorm and ordered UpdatePolicy still own actual updates. The GAN
-objective retains coefficient1 and is a protected objective alongside the
-auxiliary. New energy latent/kernel streams are independent and checkpointed;
+objective retains coefficient1; the existing backward API receives both
+objectives as protected losses where supported, without a nonascent guarantee. New energy latent/kernel streams are independent and checkpointed;
 existing data, timestep and adversarial streams are unchanged. Unsupported hosts
 refuse an active energy recipe before reservation or construction.
 

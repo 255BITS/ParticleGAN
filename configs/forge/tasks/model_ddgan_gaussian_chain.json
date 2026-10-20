@@ -280,7 +280,7 @@
     },
     "sources": {
       "benchmarks/toy_audit/api_contract.py": "08a5eac1a186a22c09f47d324f69772af1f1922832383d372488ecb7091eb75d",
-      "benchmarks/toy_audit/api_model_ddgan.py": "2ca2b98fdc2797e01b8fe0142775403fdcfd638a11d7ec1663948bf7f625ee26",
+      "benchmarks/toy_audit/api_model_ddgan.py": "ce775bb6b43459b2a8ef4a004e380ca692a7041a365bc143d8b80d7a0b5d913c",
       "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
       "experiments/forge/model_toy_adapter.py": "714be671402d345a7a33be0d43f18c02da0b9cd30dbbc04dc04b465fe434bd54",
