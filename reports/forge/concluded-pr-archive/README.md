@@ -63,3 +63,14 @@ The local copies of #397/#398 readouts now label their archived runtime scope
 and link missing measurements, media and reproduction code to the exact original
 commit. The original recall records' hashes still identify the unchanged original
 reports; local archive notices and link repairs do not replace those identities.
+
+Run the [read-only verifier](verify.py) from a checkout retaining the referenced
+Git objects; it checks all five records, all 56 immutable document/blob/media
+pins, local report links and unchanged published snapshots. It reads no local
+training artifacts and performs no network access or training:
+
+```sh
+python reports/forge/concluded-pr-archive/verify.py
+python -m experiments.forge validate
+python -m experiments.forge compile --check
+```
