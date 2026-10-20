@@ -5,6 +5,10 @@ version is declared in `pyproject.toml`; release 0.9.0 changes the public recipe
 default. Explicit presets and saved recipe restoration retain their documented
 contracts. A software release does not requalify archived scientific results.
 
+`develop` always holds the next release. Keep upcoming work there rather than
+on a version-specific release branch. Prepare the version, changelog and release
+notes on `develop` once the release scope is chosen.
+
 ## CI
 
 [Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml) runs
@@ -57,9 +61,10 @@ managed through the existing PyPI account associated with 255labs.xyz.
    dated `CHANGELOG.md` entry and release notes. Finish the exact HyperGAN
    integration smoke locally before committing its dependency to a release.
 2. Wait for CI on the final `develop` commit and record its immutable SHA as
-   the release source. A reviewed `develop` to `master` release PR is optional;
-   the release workflow validates either tagged source without relying on the
-   target branch label. HyperGAN integration stays on HyperGAN's `develop`.
+   the release source, then tag that verified commit directly. A reviewed
+   `develop` to `master` PR may also align `master` with the published source;
+   the release workflow validates the tagged commit without relying on its
+   branch label. HyperGAN integration stays on HyperGAN's `develop`.
 3. Create and publish the GitHub release with a tag matching the package
    version. For example, with `RELEASE_SHA` set to that verified commit:
 
