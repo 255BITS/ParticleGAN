@@ -162,6 +162,14 @@ actual evaluation sample count. The source-only compatibility migration retains
 [all four original task Git blobs and source hashes](source-migration.json);
 no historical receipt or qualification was rewritten or rerun.
 
+**66 strict receipt-compatibility checks pass** against frozen develop and the
+maintained full-packet expectations. Inactive conditional-energy defaults are
+omitted from historical applied packets while older fields remain present. A
+[source-only receipt migration](receipt-compatibility-migration.json) preserves
+the complete revision ancestry and exact previous Git blobs for ten current
+task bindings; ten historical prior-refactor task cards remain byte-identical.
+This software repair changes no recorded training source, metrics or verdicts.
+
 Use a detached checkout of the pinned preregistration commit for the desired
 round and a new queue directory. For example, round 3 uses the public Forge
 pipeline and the repository's Python environment:
