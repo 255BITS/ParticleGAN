@@ -120,3 +120,9 @@ the archived final metrics and attributes prior-sample errors to row usage. The
 same association occurs in the passing categorical control, so the cause of the
 unsaved hard-VAE terminal failures remains unresolved. It adds zero training
 updates and leaves every original result, gate and tier unchanged.
+
+The [saved-state DDGAN investigation](../ddgan-failure-investigation/README.md)
+finds low-noise conditional errors at central and fresh marginal contexts. It
+measures how reverse noise masks poor clean predictions at later steps and
+checks the critic's local output-gradient direction. It adds zero training
+updates and leaves every original result, gate and tier unchanged.

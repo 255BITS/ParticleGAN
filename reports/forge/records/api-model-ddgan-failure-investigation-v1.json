@@ -1,0 +1,52 @@
+{
+  "candidate_id": "api-model-ddgan-failure-investigation",
+  "candidate_revision": "e1a3a9e812dc568ed94e9774427708899f4469695d2415d049ee8ab423488b52",
+  "conclusion": "Both saved Gaussian chains have low-noise conditional mismatches at central and fresh marginal contexts (step-1 median CDF errors 0.265 DDGAN, 0.301 AE-DDGAN). At step 4, analytic reverse noise supplies about 99 percent of transition variance; vanilla clean CDF error 0.271 can coexist with reverse CDF error 0.033. Local per-example output gradients oppose mean correction on 7/8 vanilla and 4/8 composed fixed panels; this does not identify parameter-step direction or a temporal cause. Original generation FAILs, paired reconstruction subgate PASS and blocked deeper runs remain unchanged.",
+  "diagnostic_task_ids": [
+    "model_ae_ddgan_gaussian_chain",
+    "model_ddgan_gaussian_chain"
+  ],
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Distinguish errors in low-noise conditional generation, unusual fixed contexts, high-noise kernel masking and the saved critic local correction field.",
+  "mechanism_class": "saved_state_failure_analysis",
+  "next_action": "Propose a separate bounded stationary-generator critic-fit diagnostic before changing a trainer. Preserve one global recipe, original gates and all failures; no new training, continuation, seed sweep or default promotion in this investigation.",
+  "provenance": {
+    "analysis_protocol": {
+      "path": "reports/forge/ddgan-failure-investigation/protocol.json",
+      "sha256": "ed547c5f81c17e50e086709ecdb98a2910725f85cae529d6c82a25bb589be071"
+    },
+    "analysis_result": {
+      "path": "reports/forge/ddgan-failure-investigation/results.json",
+      "sha256": "04797aacd93a340062e3c1db9ddd7cc8cc822c746fcbba7efddefe4f82fd81a5"
+    },
+    "analysis_source": {
+      "path": "reports/forge/ddgan-failure-investigation/diagnose.py",
+      "sha256": "e1a3a9e812dc568ed94e9774427708899f4469695d2415d049ee8ab423488b52"
+    },
+    "independent_confirmation": false,
+    "optimizer_updates": 0,
+    "original_publication": {
+      "path": "reports/toy_audit/api_contract/model_modes/publication.json",
+      "sha256": "3fe2d2f3b09d9e1c34b5dea5435e3d67a6aee30023e265acef25ffc6808fc6cd"
+    },
+    "reuse_eligible": false,
+    "source_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+    "source_manifest": {
+      "files_verified": 1252,
+      "manifest_digest": "a3678967d9a293bd98cfac5909e138c19f66a27cc7cc6f5714445cd21c733413",
+      "origin_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+      "scientific_source_unchanged": true
+    }
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "api-model-ddgan-failure-investigation-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/ddgan-failure-investigation/README.md",
+    "sha256": "b77978b1f7c66c22e6fb909b4bef5cf71408649b0e70198d9243112c24669a23"
+  },
+  "task_results": []
+}
