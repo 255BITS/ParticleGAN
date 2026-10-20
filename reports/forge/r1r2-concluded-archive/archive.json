@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "scope": "source_bound_historical_archive_index",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "original_pr": "https://github.com/255BITS/ParticleGAN/pull/401",
+  "source_commit": "2cf7b0a4c796e29ace6cca12d2e553ad67211b5c",
+  "archive_ref": "refs/heads/archive/pr401-2cf7b0a4c796e29ace6cca12d2e553ad67211b5c",
+  "source_root_tree": "b0b63834de0ffb77f575ea09fc969e5851c81b00",
+  "source_runtime_note": "Archive head is a navigation source, not the executed source of every measurement. Per-certificate source/protocol/runtime/initializer/stream identities remain authoritative.",
+  "reports": [
+    {
+      "phase": "baseline",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-baseline",
+      "git_tree": "7af0883aae3e9d860a6cb9eb442878e45c20133d",
+      "tracked_files": 5,
+      "actual_training_gifs": 0,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-baseline/README.md",
+          "git_blob": "210d2ca3ae3d3de2ffba9ee048d2c02e65526c8c",
+          "sha256": "b963c9bf87b1e41bca7eff802fc6543c6265fdb8ab2551ed84cc76004d408cb9",
+          "bytes": 13621
+        },
+        {
+          "path": "reports/forge/r1r2-baseline/results.json",
+          "git_blob": "d085d444d387b20962f567b1a4b190976b2be47c",
+          "sha256": "29ef8926634f453735238ed6385feb42c3a01b271944a4d8b04039a561ab1835",
+          "bytes": 46701
+        },
+        {
+          "path": "reports/forge/r1r2-baseline/validation.json",
+          "git_blob": "12ea7e81aafce26151550936a6cc1d0f349acb9e",
+          "sha256": "509e1bdab0d159b12aa9f6194af8f6da3423154069bba31a569af1df87f1195b",
+          "bytes": 1484
+        }
+      ]
+    },
+    {
+      "phase": "tier1-search",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-tier1-search",
+      "git_tree": "d1c4c9b4473558a165b27fc10b827d18523d4a53",
+      "tracked_files": 172,
+      "actual_training_gifs": 77,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-tier1-search/README.md",
+          "git_blob": "0fdf4caba001e25c4b37c605468d866d1cb69bb3",
+          "sha256": "30109be2cc5ce4a39adc1b2445a6a2b757ea1f1bab2f01763bfbf944495bd656",
+          "bytes": 23112
+        },
+        {
+          "path": "reports/forge/r1r2-tier1-search/publication/results.json",
+          "git_blob": "5d5cf7b1be6838d915aa94f793a3f13d44be944d",
+          "sha256": "4ab12840fc208149eb4a8d156109e86a99d85530dfa825e3d55db6f98c32046c",
+          "bytes": 735554
+        },
+        {
+          "path": "reports/forge/r1r2-tier1-search/round2-publication/results.json",
+          "git_blob": "a833b980b3de84e0cce0c727741f9cbe87074f5c",
+          "sha256": "22fef2cdad46996729999f3b708851628db986a1d9745add5b66b72e89ebb0fa",
+          "bytes": 432827
+        },
+        {
+          "path": "reports/forge/r1r2-tier1-search/validation.json",
+          "git_blob": "83a5e4acdb665d6b3500bb00be700f786c68807c",
+          "sha256": "3fb06a1605bc12bcd211e877684be98db2a54f2f0e33792b943b6db448ae271e",
+          "bytes": 2818
+        }
+      ]
+    },
+    {
+      "phase": "five-track-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-five-track-repair",
+      "git_tree": "9ee39fa57454d7a802b972be94bc342696ae4247",
+      "tracked_files": 107,
+      "actual_training_gifs": 42,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-five-track-repair/README.md",
+          "git_blob": "e81276f617ca632723f81b360397f4fed8ab2297",
+          "sha256": "635e7d5447bea745669badb5257669ed60b902800d5ccee9fe34c04eb6791792",
+          "bytes": 11149
+        },
+        {
+          "path": "reports/forge/r1r2-five-track-repair/publication/results.json",
+          "git_blob": "c9757ab580c54904b55b19b4f8f8a19896ff8839",
+          "sha256": "2188a7d158dfbbefe46aacb784c4cbe8d1e877801fafdefca48576dba6d116a5",
+          "bytes": 629741
+        },
+        {
+          "path": "reports/forge/r1r2-five-track-repair/validation.json",
+          "git_blob": "1a9e55df619bf79cc2db6c97ee1683c9d21849d3",
+          "sha256": "716cf925000facb9373aa1ae8df4607a25568c55010006e19a55a82ddd04e644",
+          "bytes": 4495
+        }
+      ]
+    },
+    {
+      "phase": "role-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-role-repair",
+      "git_tree": "d3bbd32fd447edf95cfb2542bf6d237b0a63c79d",
+      "tracked_files": 169,
+      "actual_training_gifs": 70,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-role-repair/README.md",
+          "git_blob": "1cbef16c573b94fe372a83b2c75853854b725149",
+          "sha256": "67cfcb1f3c65b9d72ebef520001a26247f9bc612fdf164310126dcb764589075",
+          "bytes": 9404
+        },
+        {
+          "path": "reports/forge/r1r2-role-repair/publication/results.json",
+          "git_blob": "7ce98bc1f7115a1e40f1d06e459f6dc331ab667b",
+          "sha256": "037e813e042e8f7fc9d3915cfcfb51555ecd3dbd95490fa0d1c0dada70ebc8bc",
+          "bytes": 1041786
+        },
+        {
+          "path": "reports/forge/r1r2-role-repair/validation.json",
+          "git_blob": "1650cb3e1870bbedea1a3b852232be9233c14e4f",
+          "sha256": "8180f439aa15537b3ccb7f57b824e5c5258a46b5b53786b16ca8e18e0b22a452",
+          "bytes": 5603
+        }
+      ]
+    },
+    {
+      "phase": "direction-floor-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-direction-floor-repair",
+      "git_tree": "3db96fad4893db32d6959de72a3116b6e84f9049",
+      "tracked_files": 92,
+      "actual_training_gifs": 35,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-direction-floor-repair/README.md",
+          "git_blob": "52d5483a3bd999fd07fbd35451e13b7101ef37c2",
+          "sha256": "9a60d099d5e939654d1a30d1292a11eed4766fea01018ddf54248c196a6f549e",
+          "bytes": 8165
+        },
+        {
+          "path": "reports/forge/r1r2-direction-floor-repair/publication/results.json",
+          "git_blob": "b4e6961753519fe850d77ed299ea6f19b7160a44",
+          "sha256": "24ecdc0cbeb6a848598b752906ac156107970769d40cdeaa10d4442fac974d3c",
+          "bytes": 529715
+        },
+        {
+          "path": "reports/forge/r1r2-direction-floor-repair/validation.json",
+          "git_blob": "6abba9bb658c687d67764161556234f2b46020c5",
+          "sha256": "b817f4a86a76a653f6aad4d685e761610dece197eedb2ac6334bed70616f7edc",
+          "bytes": 5779
+        }
+      ]
+    },
+    {
+      "phase": "spectral-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-spectral-repair",
+      "git_tree": "c71de7e60474647c047a224315622db67545a937",
+      "tracked_files": 91,
+      "actual_training_gifs": 35,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-spectral-repair/README.md",
+          "git_blob": "4954f9fa810439d4f8c7f13aeccb3b18c1fa9e09",
+          "sha256": "be3bf1d094d2885f238770956beff02c88bfeebd2f32bdac6934834938e47302",
+          "bytes": 7372
+        },
+        {
+          "path": "reports/forge/r1r2-spectral-repair/publication/results.json",
+          "git_blob": "2a58e575e37e5d0372bfb81a39649cfba4c0bac3",
+          "sha256": "72ff8796f9a440e12f722bd28230cebc3f204810d31488cf16adababe27970c7",
+          "bytes": 529951
+        },
+        {
+          "path": "reports/forge/r1r2-spectral-repair/validation.json",
+          "git_blob": "47a19a86c1b95333165fce9b572a4107c1dd2755",
+          "sha256": "ba46b3f4edee093f33393c05f60b6be1690a4afbef30ce1998494ae45469414b",
+          "bytes": 5456
+        }
+      ]
+    },
+    {
+      "phase": "objective-memory-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-objective-memory-repair",
+      "git_tree": "8dd88661b60761c33608dd41a7c03e1436a6ec0d",
+      "tracked_files": 92,
+      "actual_training_gifs": 35,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-objective-memory-repair/README.md",
+          "git_blob": "cb79324649075e3ecf5adfff76f34288efd0f63c",
+          "sha256": "cfb608adf0908e52cfda1a8ea365fa793cc69dd5acff2de17fd27f0d046acaf3",
+          "bytes": 8908
+        },
+        {
+          "path": "reports/forge/r1r2-objective-memory-repair/publication/results.json",
+          "git_blob": "5cbd7dfe1578810704b21c70497484985a86d3f3",
+          "sha256": "fc7abecd01fe989c8e37798512cda754363152bfb7fa28539d3677bd352a7d30",
+          "bytes": 530550
+        },
+        {
+          "path": "reports/forge/r1r2-objective-memory-repair/validation.json",
+          "git_blob": "0a19cea11dfee761aeb48265471928c76c413d6f",
+          "sha256": "f8b2b373ebc8c6ae0963bb1a77c864a65fd495ef0f80b8a46377c5d174821327",
+          "bytes": 7003
+        }
+      ]
+    },
+    {
+      "phase": "score-law-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-score-law-repair",
+      "git_tree": "b7d14d7e7b5bcabc6a92d0594296d1b6a360887b",
+      "tracked_files": 61,
+      "actual_training_gifs": 21,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-score-law-repair/README.md",
+          "git_blob": "71f98090223b1f51ef660fd27ad60eed1d7e3e42",
+          "sha256": "4382b523a96f60a49cf6f0cc2c97cf542fc097c452da245511ddb0a9ebb9da6d",
+          "bytes": 7657
+        },
+        {
+          "path": "reports/forge/r1r2-score-law-repair/publication/results.json",
+          "git_blob": "154ef5b8990347b3a4c130b2b91fc70774671c2f",
+          "sha256": "558a1127d623d34db6f525a750a91ad9cd58b91a9afdb727d2a4c7897fbc3cde",
+          "bytes": 324496
+        },
+        {
+          "path": "reports/forge/r1r2-score-law-repair/validation.json",
+          "git_blob": "70165b9dd6600f1f57489059017633d85b9b88e6",
+          "sha256": "7338b4a2e8672263d96881be17ee893e790cbfeec20792908dfa19dfa06e2143",
+          "bytes": 7604
+        }
+      ]
+    },
+    {
+      "phase": "weak-penalty-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-weak-penalty-repair",
+      "git_tree": "d75cf8ee6ea94492f9af865b0a3013372214d8f3",
+      "tracked_files": 64,
+      "actual_training_gifs": 21,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-weak-penalty-repair/README.md",
+          "git_blob": "18ce45b04f5d934e701d41c0c6098f6f5d896102",
+          "sha256": "52511024040637db423e857b63ccea896dbeb27233b591e25a8e848c4340a4d6",
+          "bytes": 7603
+        },
+        {
+          "path": "reports/forge/r1r2-weak-penalty-repair/publication/results.json",
+          "git_blob": "63ef68d4ea6d7e9c44c41ec498fbf58932858aa6",
+          "sha256": "65ea5172144e6715f010f1b8853df58f629b047afcebea7b568794ae8c9c2342",
+          "bytes": 325253
+        },
+        {
+          "path": "reports/forge/r1r2-weak-penalty-repair/validation.json",
+          "git_blob": "e86089937ec6b0f22c772bf8ebf9a58e4a9735a1",
+          "sha256": "8b85726cd2ccafa31df6eb7b6f52c32f32e2ee4e0fde5ab422395aebf6d9df57",
+          "bytes": 8761
+        }
+      ]
+    },
+    {
+      "phase": "energy-distance-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-energy-distance-repair",
+      "git_tree": "764d5e9ad3d5f9ffff29d8bb0fc615c2ba5691cc",
+      "tracked_files": 55,
+      "actual_training_gifs": 14,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-energy-distance-repair/README.md",
+          "git_blob": "147cb6b4fc891c6a657c2d6b25925228ca97f054",
+          "sha256": "679ef4b9370fa9c5df16d798df024e693c2ad5a3833ad2d1fde5be8130e64092",
+          "bytes": 9062
+        },
+        {
+          "path": "reports/forge/r1r2-energy-distance-repair/publication/results.json",
+          "git_blob": "51d853392eca4ddc90cef4fedb7baf0e4ba08423",
+          "sha256": "cb3f7b89d1677591a12dd86377d072b55cba1b95e99060b2841cdf42c418b75c",
+          "bytes": 224467
+        },
+        {
+          "path": "reports/forge/r1r2-energy-distance-repair/validation.json",
+          "git_blob": "e1ff069cb74ac514d6467f5d747474db5ebf5be6",
+          "sha256": "3c6caf5f345ca9474539e4f715ef139f178fdb19855763bb8d4472463a55aabb",
+          "bytes": 8679
+        }
+      ]
+    },
+    {
+      "phase": "energy-prior-freeze-repair",
+      "scope": "completed_historical_evidence",
+      "path": "reports/forge/r1r2-energy-prior-freeze-repair",
+      "git_tree": "5c479a03f3dd7fade10b891f398e46bd309ba076",
+      "tracked_files": 47,
+      "actual_training_gifs": 14,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-energy-prior-freeze-repair/README.md",
+          "git_blob": "efc7237a574d63b7c72f9c4dc31e2637bb1a65d7",
+          "sha256": "6c412c876a6edce1a6951cbf8ce4c2cada8defac4314c965d8af6db5a5ed0e04",
+          "bytes": 8796
+        },
+        {
+          "path": "reports/forge/r1r2-energy-prior-freeze-repair/publication/results.json",
+          "git_blob": "5bf91a481fbccf8e13663dd41baf026588bfbd6d",
+          "sha256": "013696f61094eb8c06e9d9c41a9422270315678992f9a1a9680430c56bf7f207",
+          "bytes": 224792
+        },
+        {
+          "path": "reports/forge/r1r2-energy-prior-freeze-repair/validation.json",
+          "git_blob": "7a645101c0128c5f018dd7021ef865aa10535d00",
+          "sha256": "26526d0922fbdf09cfd41c009215eb03e55ada90eff2d84e41dfff8fe4eb3ce2",
+          "bytes": 9982
+        }
+      ]
+    },
+    {
+      "phase": "next-repair-research",
+      "scope": "saved_only_review",
+      "path": "reports/forge/r1r2-next-repair-research",
+      "git_tree": "9a801f1a2e841d7cd70697d93df10fc3bc5af7bd",
+      "tracked_files": 8,
+      "actual_training_gifs": 0,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-next-repair-research/README.md",
+          "git_blob": "3323d7863d6d3ebadbf07475fb2ae818557292cf",
+          "sha256": "ea867d5d14aa7d20f7cb9f1356ae0c8ccd39a5bd3b6edff9e758a71d1ad451e0",
+          "bytes": 2902
+        },
+        {
+          "path": "reports/forge/r1r2-next-repair-research/budget-audit.json",
+          "git_blob": "ef2f79dc537f9c113b0e6c408122740f39b7912e",
+          "sha256": "6b967ce20c84be235fa5a5bcbf0dbb33e25afe298548562433cb314292f98a26",
+          "bytes": 8805
+        }
+      ]
+    },
+    {
+      "phase": "mmd-repair",
+      "scope": "unmeasured_deferred_preparation",
+      "path": "reports/forge/r1r2-mmd-repair",
+      "git_tree": "d5466f30217fa9e39c380fa91b908da38f7ec503",
+      "tracked_files": 10,
+      "actual_training_gifs": 0,
+      "pins": [
+        {
+          "path": "reports/forge/r1r2-mmd-repair/README.md",
+          "git_blob": "6e5b81f50d5fedc159f020ed9a902f9a5443e568",
+          "sha256": "26f883ab93d0172144a3c5f3b25ad4aa3d9dd31ccaadc73c08e3ed39e2f9eafe",
+          "bytes": 5274
+        },
+        {
+          "path": "reports/forge/r1r2-mmd-repair/validation.json",
+          "git_blob": "7b4f2a32dd8c3e8ebb5de31c6775bb264f146592",
+          "sha256": "672deca341a2693fb01a32e8ff74adca79789ba907e331fc62edce481bb247f5",
+          "bytes": 1497
+        },
+        {
+          "path": "reports/forge/r1r2-mmd-repair/preparation.json",
+          "git_blob": "27b8c08faf6aa31c8eaa46aaeea137a4d5aa5b5e",
+          "sha256": "792a3826fd8f0271519e2aee57bf5eed20df387eefbd7b4e2b060ec3fa1caef7",
+          "bytes": 16307
+        }
+      ]
+    }
+  ],
+  "final_measured_cohort": {
+    "scientific_source_digest": "2b04f2853c511c9bcd417ef41e8fd773e97e8c67c9e057da8abdd4fef2de5f12",
+    "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+    "fresh_control_and_energy_execution_commit": "67920d9090727bd74adbd331187f0e6f22533e48",
+    "frozen_prior_execution_commit": "3203c4e419cb7c2a4cd2021d2c48638980579901",
+    "complete_measured_revisions": 34,
+    "ring16_passing_revisions": 0,
+    "aggregate_unique_paid_attempts": 238,
+    "aggregate_paid_seconds": 7168.248061007995,
+    "aggregate_paid_cap_seconds": 8000,
+    "aggregate_charge_index_sha256": "21f77389c07b000aac495e5f5c5809db0aa02db91eb7d79a875bdc1d94fa35ef",
+    "last_contrast_new_attempts": 7,
+    "last_contrast_zero_charge_reuses": 7,
+    "last_contrast_paid_seconds": 197.33389144105604,
+    "cost_overlap_note": "This aggregate already includes earlier phases; do not add overlapping publication totals."
+  },
+  "preservation": {
+    "original_commits_rewritten": false,
+    "bulk_artifacts_copied": false,
+    "runtime_imported": false,
+    "training_updates": 0,
+    "new_sampling_draws": 0,
+    "qualification_recomputed": false,
+    "new_execution_authorized": false,
+    "mmd_status": "unmeasured and deferred; original studies remain draft with unchanged cap",
+    "raw_archive_root": "/mnt/ml7tb/ParticleGAN-forge",
+    "raw_archive_availability": "not re-audited; use original artifact receipts; absence does not authorize rerunning"
+  }
+}
