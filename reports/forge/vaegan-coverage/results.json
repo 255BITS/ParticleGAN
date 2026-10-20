@@ -1,9 +1,11 @@
 {
-  "actual_execution_seconds": 877.6244357109827,
+  "actual_execution_seconds": 1301.8471718530054,
   "default_adoption": false,
   "goal": "vaegan_coverage",
   "matched_initial_models": true,
+  "matched_scientific_source": true,
   "matched_target_batches": true,
+  "paid_worker_seconds": 1367.4227395120251,
   "protocol_sha256": "4680da1f4dc6712e0560c2b5ab6f44447f32852046cc31f97f71a92f2a5b5704",
   "qualification_input": false,
   "reserved_ceiling_seconds": 2400,
@@ -339,6 +341,7 @@
         "prior": "5739c60ec2769af6e1d8d0a62a0788fe8156f87c4d9d7e2bd867743d09a65943"
       },
       "metric_observations": 24,
+      "paid_worker_seconds": 227.84540201898199,
       "prior_policy": {
         "applicability": "latent_prior",
         "contract": "recipe_owned_v1",
@@ -643,7 +646,8 @@
       "stable_suffix": 2,
       "study_id": "vaegan-coverage-baseline-v1",
       "task": "model_vae_categorical",
-      "task_sha256": "258a19e913078c64605506c58da7796ddbe6d3cb97b0345a3e553dda5ac0ff68",
+      "task_binding_sha256": "258a19e913078c64605506c58da7796ddbe6d3cb97b0345a3e553dda5ac0ff68",
+      "task_sha256": "3e9e67067f71ed8d14fcba0324c7e6ceac077894371d8f35a5255db6514f7fb7",
       "terminal_checkpoints": [
         {
           "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round1-v1/78e897878ca8442d9f5e71f4c56a79ce/observation-checkpoints/step-001000.pt",
@@ -799,6 +803,7 @@
         }
       ],
       "terminal_passes": 3,
+      "terminal_receipt_sha256": "03df2c92d5e4ac059313ed48bb96cb37c1c1ef8c55e53274e196b6abefb37422",
       "verdict": "FAIL"
     },
     {
@@ -1141,6 +1146,7 @@
         "prior": "5739c60ec2769af6e1d8d0a62a0788fe8156f87c4d9d7e2bd867743d09a65943"
       },
       "metric_observations": 24,
+      "paid_worker_seconds": 224.84978489301284,
       "prior_policy": {
         "applicability": "latent_prior",
         "contract": "recipe_owned_v1",
@@ -1445,7 +1451,8 @@
       "stable_suffix": 1,
       "study_id": "vaegan-coverage-baseline-v1",
       "task": "model_vae_hard",
-      "task_sha256": "9c3211b61f6d683fc7c89f27f6e093f61a4f2f2cee5c6d8017b324f2a6eb0770",
+      "task_binding_sha256": "9c3211b61f6d683fc7c89f27f6e093f61a4f2f2cee5c6d8017b324f2a6eb0770",
+      "task_sha256": "5b983117a4accdf399634c1bdb32df1249e537cabc35ca85fc2c63662879a04b",
       "terminal_checkpoints": [
         {
           "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round1-v1/7189bb6b75074e46a28cb04fc37a4c10/observation-checkpoints/step-001000.pt",
@@ -1601,7 +1608,1560 @@
         }
       ],
       "terminal_passes": 2,
+      "terminal_receipt_sha256": "54a627be95d81753991398a76d2f58c895a2895a9b60f85eba3aacdb66ff5233",
       "verdict": "FAIL"
+    },
+    {
+      "adapter_receipt_sha256": "11ec9ad0d0b3ed516c1ed4ac87bc4cf6a460eeb9cb01eb9825d75677465fc323",
+      "attempt_id": "c8e35c60cb3c4957bad3e692f469541c",
+      "batch_sequence_sha256": "824f9ac27f2dc5ea76710ac3123a0d7b3bcf905f128352186e62f6782a4b541f",
+      "candidate": "bispf-vaegan-settle-v1",
+      "checkpoint_count": 25,
+      "checkpoint_index_sha256": "f57d7af0b9306de9600aeba1b4b869ee8798dad3d35c1f5a0f30b92a6b8f6a52",
+      "completed_updates": 1200,
+      "elapsed_execution_seconds": 211.9715366110031,
+      "failed_bounds": [],
+      "failed_terminal": [],
+      "final_metrics": {
+        "aggregate_effective_components": 5.750770418542283,
+        "decoder_mean_hq": 0.985595703125,
+        "decoder_mean_mass_tv": 0.014404296875,
+        "decoder_mean_modes": 2,
+        "elbo_identity_error": 6.661338147750939e-16,
+        "kl_identity_error": 6.987237128885937e-07,
+        "kl_nats": 1.717301368713379,
+        "likelihood_hq": 0.970947265625,
+        "likelihood_mass_tv": 0.029052734375,
+        "likelihood_modes": 2,
+        "negative_elbo_nats": 1.7049343005349167,
+        "posterior_effective_components": 2.8728002390193175,
+        "posterior_mutual_information": 0.6940465845368462,
+        "posterior_noise_variance_ratio": 1.0033035278320312,
+        "posterior_pair_rms": 0.06665504723787308,
+        "reconstruction_mse": 0.004646584385972777,
+        "shuffle_reconstruction_ratio": 482.7905313917409,
+        "shuffled_reconstruction_mse": 2.243326944860363
+      },
+      "full_protocol_complete": true,
+      "gif": "media/bispf-vaegan-settle-v1-model_vae_categorical.gif",
+      "gif_sha256": "ba0ba5481fb2586c52964c4c764b84b33e4c482d9ab6dcd2dce002758bab955f",
+      "grade": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 0.8333333333333334,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 1000,
+            "first_pass_step": 350,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 15,
+            "passing_suffix": 9,
+            "stable_from_seconds": null,
+            "stable_from_step": 800
+          },
+          "metrics": [
+            {
+              "margin": 0.045353415614027226,
+              "metric": "reconstruction_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.05,
+              "value": 0.004646584385972777
+            },
+            {
+              "margin": 477.7905313917409,
+              "metric": "shuffle_reconstruction_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 5.0,
+              "value": 482.7905313917409
+            },
+            {
+              "margin": 0.3940465845368462,
+              "metric": "posterior_mutual_information",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.3,
+              "value": 0.6940465845368462
+            },
+            {
+              "margin": 0.2033035278320312,
+              "metric": "posterior_noise_variance_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.8,
+              "value": 1.0033035278320312
+            },
+            {
+              "margin": 0.1966964721679687,
+              "metric": "posterior_noise_variance_ratio",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.2,
+              "value": 1.0033035278320312
+            },
+            {
+              "margin": 9.301276287111407e-06,
+              "metric": "kl_identity_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1e-05,
+              "value": 6.987237128885937e-07
+            },
+            {
+              "margin": 9.999999999933387e-05,
+              "metric": "elbo_identity_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.0001,
+              "value": 6.661338147750939e-16
+            },
+            {
+              "margin": 0.13559570312500002,
+              "metric": "decoder_mean_hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.985595703125
+            },
+            {
+              "margin": 0.135595703125,
+              "metric": "decoder_mean_mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.014404296875
+            },
+            {
+              "margin": 0,
+              "metric": "decoder_mean_modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.12094726562500002,
+              "metric": "likelihood_hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.970947265625
+            },
+            {
+              "margin": 0.120947265625,
+              "metric": "likelihood_mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.029052734375
+            },
+            {
+              "margin": 0,
+              "metric": "likelihood_modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "aggregate_effective_components": 5.750770418542283,
+          "decoder_mean_hq": 0.985595703125,
+          "decoder_mean_mass_tv": 0.014404296875,
+          "decoder_mean_modes": 2,
+          "elbo_identity_error": 6.661338147750939e-16,
+          "kl_identity_error": 6.987237128885937e-07,
+          "kl_nats": 1.717301368713379,
+          "likelihood_hq": 0.970947265625,
+          "likelihood_mass_tv": 0.029052734375,
+          "likelihood_modes": 2,
+          "negative_elbo_nats": 1.7049343005349167,
+          "posterior_effective_components": 2.8728002390193175,
+          "posterior_mutual_information": 0.6940465845368462,
+          "posterior_noise_variance_ratio": 1.0033035278320312,
+          "posterior_pair_rms": 0.06665504723787308,
+          "reconstruction_mse": 0.004646584385972777,
+          "shuffle_reconstruction_ratio": 482.7905313917409,
+          "shuffled_reconstruction_mse": 2.243326944860363,
+          "step": 1200
+        },
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "PASS"
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1200,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1200,
+              "calls": 1200,
+              "eligible": 1200,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 1200,
+            "observations": {
+              "applied": 1200,
+              "calls": 1200,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 1200,
+              "applied_record_calls_in_window": 1200,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 1200,
+              "observed_steps_in_window": 1200,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 1200
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 1200,
+                "last": 0.6347858969960224,
+                "max": 1.5719468593597412,
+                "min": 0.160356342792511,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 1200,
+                "last": 0.12105023766220219,
+                "max": 0.833529531955719,
+                "min": 0.09791774694766299,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 1200,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "unintended_rng_deviations": 0
+      },
+      "initial_models": {
+        "D": "a4d25e32fdda2c5c3c18bbb5ba2fbd8697def8be11aae1470ac710b09bf107ad",
+        "E": "d8377efc91c3ce6f15b493d1803f17cb12c144e7a0c31e87e97791ac1989e323",
+        "G": "62dec125363d1f17e0618649ff47f8b8ed1da837e3d3b2111f68e3b35bde41aa",
+        "prior": "5739c60ec2769af6e1d8d0a62a0788fe8156f87c4d9d7e2bd867743d09a65943"
+      },
+      "metric_observations": 24,
+      "paid_worker_seconds": 222.68541307901614,
+      "prior_policy": {
+        "applicability": "latent_prior",
+        "contract": "recipe_owned_v1",
+        "eps": 0.0001,
+        "l2": 0.0,
+        "regularizer": "sbnp",
+        "target_std": 1.0,
+        "trainable_locations": true,
+        "update": "learned",
+        "weight": 0.01
+      },
+      "qualification_input": false,
+      "raw_directory": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/c8e35c60cb3c4957bad3e692f469541c",
+      "raw_receipt_sha256": "2130c66f498add5055cbf605b8aa2cc4376a84d15ff201ed20aa67c5fa0f0807",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "categorical",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.0,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "bispf",
+        "network_lr_floor": 0.05,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 16,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "recipe_sha256": "fe17fe3bdd0ebaa7c2a4972c424f2a50763ebcaa87507e7405f01808193500f6",
+      "request_id": "8c774ad282114d1b9e790277",
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "scientific_job": {
+        "candidate_revision": "15cec064bfab5931854da2b176eb21f34230e1508407767ad76ab3f2fc721660",
+        "compute": {
+          "autograd_multithreading_enabled": false,
+          "backend": "cuda",
+          "compute_capability": "8.6",
+          "deterministic": true,
+          "driver": "615.78.08",
+          "model": "NVIDIA RTX A6000",
+          "tf32": false,
+          "threads": 1
+        },
+        "evaluation": {
+          "model_vae_categorical": "67ead7eae8c692147d0a50bf4634d6c83f6cd1702dee975c8a3ad41dc06f276a"
+        },
+        "evidence_use": "research_diagnostic",
+        "execution": {
+          "model_vae_categorical": "eaca96d2447bdcf81d91ccdfe1510598dc150481d2b4306b90ee19c9c601a53c"
+        },
+        "initializer": "deterministic_orthogonal",
+        "protocol": {
+          "budgets": {
+            "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+            "default_through_tier": 1,
+            "per_task": "TaskSpec.execution and resources.timeout_seconds"
+          },
+          "calibration_status": "provisional",
+          "id": "screening",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "revision": 1,
+          "rng": {
+            "candidate_identity_in_seed": false,
+            "component_scoped": true,
+            "derivation": "forge-rng-v1",
+            "streams": [
+              "init",
+              "data",
+              "prior",
+              "noise",
+              "eval"
+            ],
+            "unintended_deviations": 0
+          },
+          "robustness": {
+            "cross_seed_reuse": false,
+            "enabled_for_screening": false,
+            "requires_frozen_candidate": true,
+            "requires_preregistered_seed_set": true
+          },
+          "schema_version": 1,
+          "scoring": {
+            "best_checkpoint": "diagnostic_only",
+            "ema": "separate_view_required",
+            "weights": "live"
+          },
+          "seed": 0
+        },
+        "rng": {
+          "bindings": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": {
+              "component": "target",
+              "device": "cpu",
+              "family": "data",
+              "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+              "purpose": "training",
+              "seed": 2842969976240124311
+            },
+            "[\"eval\",\"sampler\",\"samples\",\"cpu\"]": {
+              "component": "sampler",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "9488d65f11be2e232c210ae5b27c29426ac74687551e6bc1597afc56159f8726",
+              "purpose": "samples",
+              "seed": 212130830619035767
+            },
+            "[\"eval\",\"target\",\"reference\",\"cpu\"]": {
+              "component": "target",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "905a51801f69a4375927533ecf1199816a077aea8b3164d15b2811fae33abf02",
+              "purpose": "reference",
+              "seed": 7189743471773393273
+            },
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+              "component": "discriminator",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+              "purpose": "construction",
+              "seed": 3363721576689578451
+            },
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+              "purpose": "construction",
+              "seed": 6942576180060350273
+            },
+            "[\"init\",\"prior\",\"locations\",\"cpu\"]": {
+              "component": "prior",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "ab1fa62c08db5e35d0b5c6be2418a849814f3490f8448c5b0e671be86de398ca",
+              "purpose": "locations",
+              "seed": 2562565386842645502
+            },
+            "[\"noise\",\"critic\",\"input\",\"cpu\"]": {
+              "component": "critic",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "d45c4d304b060206d27bed2cfb50b4e02d8d3a2a3ebc2bd23198f3119b34be6d",
+              "purpose": "input",
+              "seed": 5961379833291764029
+            },
+            "[\"noise\",\"generator\",\"output\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+              "purpose": "output",
+              "seed": 9214932872906931917
+            },
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cpu\"]": {
+              "component": "models",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "c2f7ba3cac65f7a2c9f1da18c52f973980852aaa4a916683301b0efdbb50edf9",
+              "purpose": "stochastic_layers",
+              "seed": 4481608677977550636
+            },
+            "[\"noise\",\"penalty\",\"training\",\"cpu\"]": {
+              "component": "penalty",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "e170727612c771e1a5db3740ca655a777d92c20f99fb8497de95c6cfdb6fdd84",
+              "purpose": "training",
+              "seed": 7930995805460461310
+            },
+            "[\"noise\",\"prior\",\"gaussian\",\"cpu\"]": {
+              "component": "prior",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "d6261b40f0efc71cdced90af99c43969a0675e1827f184a56c8790fee5a820d8",
+              "purpose": "gaussian",
+              "seed": 939191808430552031
+            },
+            "[\"prior\",\"latent\",\"indices\",\"cpu\"]": {
+              "component": "latent",
+              "device": "cpu",
+              "family": "prior",
+              "initial_state_sha256": "c20d03989eda9e8650239603a2db8efb7df1bab81c5257cce0283964a570c14a",
+              "purpose": "indices",
+              "seed": 5876435880110660064
+            }
+          },
+          "runtime": {
+            "rng": "torch.Generator",
+            "torch": "2.14.0+cu130"
+          },
+          "seed": 0,
+          "version": "forge-rng-v1"
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        },
+        "seed": 0,
+        "task_initializers": {
+          "model_vae_categorical": "deterministic_orthogonal"
+        }
+      },
+      "source_commit": "86ee9d9d8cb296e74cbf25bf8be0dc2bcb8ea351",
+      "source_digest": "7a7f80406f6c0fca2a8f5206e8c0c02d6a3b725de1834882afb0844bc89130ba",
+      "stable_suffix": 9,
+      "study_id": "vaegan-coverage-settle-v1",
+      "task": "model_vae_categorical",
+      "task_binding_sha256": "efccfa3e841e2f6823e7a45c5b1268941995f809db3798aee6bad3a07e8f5ac6",
+      "task_sha256": "3e9e67067f71ed8d14fcba0324c7e6ceac077894371d8f35a5255db6514f7fb7",
+      "terminal_checkpoints": [
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/c8e35c60cb3c4957bad3e692f469541c/observation-checkpoints/step-001000.pt",
+          "sha256": "9354a4e6ced98fc6a7be07a3521ac97ab317a800a53bb2ff578e37df35bb6fea",
+          "state_sha256": "5090ae3f21e4283b54ca3854caabf2f0154e9bff91e8797ae7d0cdf3a5174b27",
+          "step": 1000
+        },
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/c8e35c60cb3c4957bad3e692f469541c/observation-checkpoints/step-001050.pt",
+          "sha256": "5e7fe0e6dc585101815387b48c25d478653a6e0f52334c86bbc5ddaff67c5f09",
+          "state_sha256": "b078eece2b2302af9c7e1e61f97bb24b07b408a8eca2186b79ece6fcefe62662",
+          "step": 1050
+        },
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/c8e35c60cb3c4957bad3e692f469541c/observation-checkpoints/step-001100.pt",
+          "sha256": "ee833659240f040003ad40e0b571915f413839fe553487df60fbe47630bc0b2d",
+          "state_sha256": "781b85e1f361a6a5d8da93d55b265bcd4389c07b281c3526b9517c3dc9745132",
+          "step": 1100
+        },
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/c8e35c60cb3c4957bad3e692f469541c/observation-checkpoints/step-001150.pt",
+          "sha256": "4aabe20e269887ea76b30c296c8f1d088b20e20708a902f66c675d6ae53f8ed4",
+          "state_sha256": "6d3a3990975e9279913385a9e774e98d22eb6526c64d5d59753f0c0df9e28331",
+          "step": 1150
+        },
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/c8e35c60cb3c4957bad3e692f469541c/observation-checkpoints/step-001200.pt",
+          "sha256": "96176a1676a7e5425853c2a8723ed0d05d9e0af6cf1a574cb86f2386b60ac481",
+          "state_sha256": "809ffaa87c67d2c00354e46ebd04af3e4439e4d24b8ed21f47fc383da5a2914f",
+          "step": 1200
+        }
+      ],
+      "terminal_metrics": [
+        {
+          "metrics": {
+            "aggregate_effective_components": 5.690082675195913,
+            "decoder_mean_hq": 0.978759765625,
+            "decoder_mean_mass_tv": 0.021240234375,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 0.0,
+            "kl_identity_error": 6.526342206658597e-07,
+            "kl_nats": 1.7273399829864502,
+            "likelihood_hq": 0.964599609375,
+            "likelihood_mass_tv": 0.035400390625,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 2.029717827208751,
+            "posterior_effective_components": 2.8441061208602916,
+            "posterior_mutual_information": 0.6934759527539929,
+            "posterior_noise_variance_ratio": 1.0033035278320312,
+            "posterior_pair_rms": 0.06955889612436295,
+            "reconstruction_mse": 0.004929854967935037,
+            "shuffle_reconstruction_ratio": 454.4112271274286,
+            "shuffled_reconstruction_mse": 2.2401814455396103
+          },
+          "passed": true,
+          "step": 1000
+        },
+        {
+          "metrics": {
+            "aggregate_effective_components": 5.75512115728862,
+            "decoder_mean_hq": 0.98095703125,
+            "decoder_mean_mass_tv": 0.01904296875,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 0.0,
+            "kl_identity_error": 7.022730375005892e-07,
+            "kl_nats": 1.7162108421325684,
+            "likelihood_hq": 0.966064453125,
+            "likelihood_mass_tv": 0.033935546875,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 2.0045655395892545,
+            "posterior_effective_components": 2.875935086701015,
+            "posterior_mutual_information": 0.6937122255625285,
+            "posterior_noise_variance_ratio": 1.0033035278320312,
+            "posterior_pair_rms": 0.06829773634672165,
+            "reconstruction_mse": 0.004917234060225501,
+            "shuffle_reconstruction_ratio": 452.7873072333749,
+            "shuffled_reconstruction_mse": 2.2264611691657397
+          },
+          "passed": true,
+          "step": 1050
+        },
+        {
+          "metrics": {
+            "aggregate_effective_components": 5.7296535265069855,
+            "decoder_mean_hq": 0.981689453125,
+            "decoder_mean_mass_tv": 0.018310546875,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 2.220446049250313e-16,
+            "kl_identity_error": 6.790234121645256e-07,
+            "kl_nats": 1.7208203077316284,
+            "likelihood_hq": 0.964111328125,
+            "likelihood_mass_tv": 0.035888671875,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 1.7309432735563748,
+            "posterior_effective_components": 2.8627092431320893,
+            "posterior_mutual_information": 0.6938865980740456,
+            "posterior_noise_variance_ratio": 1.0033035278320312,
+            "posterior_pair_rms": 0.06722690165042877,
+            "reconstruction_mse": 0.004666825563966193,
+            "shuffle_reconstruction_ratio": 481.47369568838303,
+            "shuffled_reconstruction_mse": 2.246953751415825
+          },
+          "passed": true,
+          "step": 1100
+        },
+        {
+          "metrics": {
+            "aggregate_effective_components": 5.704537932654308,
+            "decoder_mean_hq": 0.97607421875,
+            "decoder_mean_mass_tv": 0.02392578125,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 1.3322676295501878e-15,
+            "kl_identity_error": 6.551989795156032e-07,
+            "kl_nats": 1.7253642082214355,
+            "likelihood_hq": 0.954833984375,
+            "likelihood_mass_tv": 0.045166015625,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 1.6616635491195977,
+            "posterior_effective_components": 2.8497305783233986,
+            "posterior_mutual_information": 0.6940375307437938,
+            "posterior_noise_variance_ratio": 1.0033035278320312,
+            "posterior_pair_rms": 0.0660187229514122,
+            "reconstruction_mse": 0.004600384199849305,
+            "shuffle_reconstruction_ratio": 488.35215563841484,
+            "shuffled_reconstruction_mse": 2.2466075407613126
+          },
+          "passed": true,
+          "step": 1150
+        },
+        {
+          "metrics": {
+            "aggregate_effective_components": 5.750770418542283,
+            "decoder_mean_hq": 0.985595703125,
+            "decoder_mean_mass_tv": 0.014404296875,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 6.661338147750939e-16,
+            "kl_identity_error": 6.987237128885937e-07,
+            "kl_nats": 1.717301368713379,
+            "likelihood_hq": 0.970947265625,
+            "likelihood_mass_tv": 0.029052734375,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 1.7049343005349167,
+            "posterior_effective_components": 2.8728002390193175,
+            "posterior_mutual_information": 0.6940465845368462,
+            "posterior_noise_variance_ratio": 1.0033035278320312,
+            "posterior_pair_rms": 0.06665504723787308,
+            "reconstruction_mse": 0.004646584385972777,
+            "shuffle_reconstruction_ratio": 482.7905313917409,
+            "shuffled_reconstruction_mse": 2.243326944860363
+          },
+          "passed": true,
+          "step": 1200
+        }
+      ],
+      "terminal_passes": 5,
+      "terminal_receipt_sha256": "4cde8f315382d83ff691560a76ec6cb5cdfa5171ee0c7575deae4e8dc5e6f8c4",
+      "verdict": "PASS"
+    },
+    {
+      "adapter_receipt_sha256": "b80b74f88567c918faf1460bbaed0f876cb92a86e79b869313e09bf08f769ea8",
+      "attempt_id": "2c33e91963ad464f990c4ae04f365e48",
+      "batch_sequence_sha256": "824f9ac27f2dc5ea76710ac3123a0d7b3bcf905f128352186e62f6782a4b541f",
+      "candidate": "bispf-vaegan-settle-v1",
+      "checkpoint_count": 25,
+      "checkpoint_index_sha256": "306305b1bee5d5cf02b397864980196ea99b41347060189520461656f67e8cc6",
+      "completed_updates": 1200,
+      "elapsed_execution_seconds": 212.25119953101967,
+      "failed_bounds": [],
+      "failed_terminal": [],
+      "final_metrics": {
+        "aggregate_effective_components": 2.4686049652775797,
+        "decoder_mean_hq": 0.9912109375,
+        "decoder_mean_mass_tv": 0.011474609375,
+        "decoder_mean_modes": 2,
+        "elbo_identity_error": 4.440892098500626e-16,
+        "kl_identity_error": 7.618617292592944e-09,
+        "kl_nats": 2.7725887298583984,
+        "likelihood_hq": 0.986083984375,
+        "likelihood_mass_tv": 0.013916015625,
+        "likelihood_modes": 2,
+        "negative_elbo_nats": 2.831860557153644,
+        "posterior_effective_components": 1.0,
+        "posterior_mutual_information": 0.9036531996995563,
+        "posterior_noise_variance_ratio": 1.0009006261825562,
+        "posterior_pair_rms": 0.05172229930758476,
+        "reconstruction_mse": 0.004711059499973276,
+        "shuffle_reconstruction_ratio": 473.3791590819527,
+        "shuffled_reconstruction_mse": 2.2301173844823943
+      },
+      "full_protocol_complete": true,
+      "gif": "media/bispf-vaegan-settle-v1-model_vae_hard.gif",
+      "gif_sha256": "d3b727576659da753921decbb1cc5446838b7fe14f93a69389220f29820eb4a4",
+      "grade": {
+        "evaluator_result": {
+          "attempted": true,
+          "confirmation_fraction": 0.9583333333333334,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": 1150,
+            "first_pass_step": 350,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 17,
+            "passing_suffix": 6,
+            "stable_from_seconds": null,
+            "stable_from_step": 950
+          },
+          "metrics": [
+            {
+              "margin": 0.04528894050002673,
+              "metric": "reconstruction_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.05,
+              "value": 0.004711059499973276
+            },
+            {
+              "margin": 468.3791590819527,
+              "metric": "shuffle_reconstruction_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 5.0,
+              "value": 473.3791590819527
+            },
+            {
+              "margin": 0.6036531996995562,
+              "metric": "posterior_mutual_information",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.3,
+              "value": 0.9036531996995563
+            },
+            {
+              "margin": 0.2009006261825561,
+              "metric": "posterior_noise_variance_ratio",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.8,
+              "value": 1.0009006261825562
+            },
+            {
+              "margin": 0.1990993738174438,
+              "metric": "posterior_noise_variance_ratio",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1.2,
+              "value": 1.0009006261825562
+            },
+            {
+              "margin": 9.992381382707408e-06,
+              "metric": "kl_identity_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 1e-05,
+              "value": 7.618617292592944e-09
+            },
+            {
+              "margin": 9.999999999955592e-05,
+              "metric": "elbo_identity_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.0001,
+              "value": 4.440892098500626e-16
+            },
+            {
+              "margin": 0.14121093750000002,
+              "metric": "decoder_mean_hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9912109375
+            },
+            {
+              "margin": 0.138525390625,
+              "metric": "decoder_mean_mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.011474609375
+            },
+            {
+              "margin": 0,
+              "metric": "decoder_mean_modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            },
+            {
+              "margin": 0.13608398437500002,
+              "metric": "likelihood_hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.986083984375
+            },
+            {
+              "margin": 0.136083984375,
+              "metric": "likelihood_mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.013916015625
+            },
+            {
+              "margin": 0,
+              "metric": "likelihood_modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 2,
+              "value": 2
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        },
+        "gate_status": "PASS",
+        "metrics": {
+          "aggregate_effective_components": 2.4686049652775797,
+          "decoder_mean_hq": 0.9912109375,
+          "decoder_mean_mass_tv": 0.011474609375,
+          "decoder_mean_modes": 2,
+          "elbo_identity_error": 4.440892098500626e-16,
+          "kl_identity_error": 7.618617292592944e-09,
+          "kl_nats": 2.7725887298583984,
+          "likelihood_hq": 0.986083984375,
+          "likelihood_mass_tv": 0.013916015625,
+          "likelihood_modes": 2,
+          "negative_elbo_nats": 2.831860557153644,
+          "posterior_effective_components": 1.0,
+          "posterior_mutual_information": 0.9036531996995563,
+          "posterior_noise_variance_ratio": 1.0009006261825562,
+          "posterior_pair_rms": 0.05172229930758476,
+          "reconstruction_mse": 0.004711059499973276,
+          "shuffle_reconstruction_ratio": 473.3791590819527,
+          "shuffled_reconstruction_mse": 2.2301173844823943,
+          "step": 1200
+        },
+        "reasons": [
+          "recomputed complete live curve and terminal suffix"
+        ],
+        "status": "PASS"
+      },
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "mechanism_audit": {
+          "mechanisms": {
+            "a2": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_anchor": {
+              "applied": 0,
+              "calls": 1200,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_guard": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            },
+            "critic_penalty": {
+              "applied": 1200,
+              "calls": 1200,
+              "eligible": 1200,
+              "enabled": true,
+              "reason": "actual host mechanism branch applied",
+              "requested": true
+            },
+            "direct_particle_gain": {
+              "applied": 0,
+              "calls": 0,
+              "eligible": 0,
+              "enabled": false,
+              "reason": "disabled by the declared formulation; no activation claimed",
+              "requested": false
+            }
+          },
+          "penalty_cadence": {
+            "application_updates_unavailable": 0,
+            "configured": {
+              "base_coefficient": 1.0,
+              "coefficient_scope": "initial_recipe_before_any_schedule",
+              "effective_coefficient": 1.0,
+              "k": 1,
+              "scheduled_end_base_coefficient": null
+            },
+            "first_application_update": 1,
+            "last_application_update": 1200,
+            "observations": {
+              "applied": 1200,
+              "calls": 1200,
+              "skipped": 0,
+              "unavailable": 0
+            },
+            "optimizer": {
+              "applied_record_calls_end": 1200,
+              "applied_record_calls_in_window": 1200,
+              "applied_record_calls_start": 0,
+              "observed_steps_end": 1200,
+              "observed_steps_in_window": 1200,
+              "observed_steps_start": 0
+            },
+            "phase_counts": {
+              "bispf": 1200
+            },
+            "ranges": {
+              "ema_data_scale": {
+                "count": 1200,
+                "last": 0.2639556587003172,
+                "max": 2.889840841293335,
+                "min": 0.17628610134124756,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "ema_residual": {
+                "count": 1200,
+                "last": 0.11821590268891304,
+                "max": 0.833529531955719,
+                "min": 0.08167981952440458,
+                "nonfinite": 0,
+                "unavailable": 0
+              },
+              "s_thermal": {
+                "count": 1200,
+                "last": 1.0,
+                "max": 1.0,
+                "min": 1.0,
+                "nonfinite": 0,
+                "unavailable": 0
+              }
+            },
+            "resets": 0,
+            "schema_version": 1,
+            "scope": "audit_window",
+            "start_reason": "attachment",
+            "update_clock": "one_based_critic_optimizer_update"
+          },
+          "schema_version": 1
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "encoder": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "unintended_rng_deviations": 0
+      },
+      "initial_models": {
+        "D": "a4d25e32fdda2c5c3c18bbb5ba2fbd8697def8be11aae1470ac710b09bf107ad",
+        "E": "d8377efc91c3ce6f15b493d1803f17cb12c144e7a0c31e87e97791ac1989e323",
+        "G": "62dec125363d1f17e0618649ff47f8b8ed1da837e3d3b2111f68e3b35bde41aa",
+        "prior": "5739c60ec2769af6e1d8d0a62a0788fe8156f87c4d9d7e2bd867743d09a65943"
+      },
+      "metric_observations": 24,
+      "paid_worker_seconds": 223.22055357601494,
+      "prior_policy": {
+        "applicability": "latent_prior",
+        "contract": "recipe_owned_v1",
+        "eps": 0.0001,
+        "l2": 0.0,
+        "regularizer": "sbnp",
+        "target_std": 1.0,
+        "trainable_locations": true,
+        "update": "learned",
+        "weight": 0.01
+      },
+      "qualification_input": false,
+      "raw_directory": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/2c33e91963ad464f990c4ae04f365e48",
+      "raw_receipt_sha256": "c6c5e729f9ea59a40ce63085c9dee8834ff7bf72a9d1d89106c3b2d08c88cd50",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "constraint_geometry_mode": "direction_blend",
+        "continuous_policy": null,
+        "critic_formulation": "bispf",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 0.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": false,
+        "distance_reduction": "sum",
+        "ema_decay": 0.0,
+        "encoder_mode": "hard",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "kinetic_transport_weight": 1.0,
+        "latent_damping_max_rate": 0.0,
+        "loss": "non_saturating",
+        "lr": 0.012,
+        "lr_anneal_start": 0.0,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "bispf",
+        "network_lr_floor": 0.05,
+        "network_lr_horizon_cap": null,
+        "num_classes": null,
+        "num_particles": 16,
+        "observation_sigma": 0.03,
+        "optimizer_convolution": "per_offset",
+        "optimizer_convolution_rule": "quintic",
+        "optimizer_family": "dualnorm",
+        "optimizer_smoothing": 0.001,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.01,
+        "prior_regularizer": "sbnp",
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 0.0,
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "recipe_sha256": "7d78b0217c2da3ebe8a5a158de3d269c92515b3658e5815a7afafa4cafe17df8",
+      "request_id": "8c774ad282114d1b9e790277",
+      "runtime": {
+        "autograd_multithreading_enabled": false,
+        "cuda": "13.0",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "cudnn_benchmark": false,
+        "cudnn_tf32": false,
+        "deterministic_algorithms": true,
+        "device": "cuda:0",
+        "matmul_tf32": false,
+        "python": "3.12.13",
+        "torch": "2.14.0+cu130",
+        "torch_threads": 1
+      },
+      "scientific_job": {
+        "candidate_revision": "15cec064bfab5931854da2b176eb21f34230e1508407767ad76ab3f2fc721660",
+        "compute": {
+          "autograd_multithreading_enabled": false,
+          "backend": "cuda",
+          "compute_capability": "8.6",
+          "deterministic": true,
+          "driver": "615.78.08",
+          "model": "NVIDIA RTX A6000",
+          "tf32": false,
+          "threads": 1
+        },
+        "evaluation": {
+          "model_vae_hard": "67ead7eae8c692147d0a50bf4634d6c83f6cd1702dee975c8a3ad41dc06f276a"
+        },
+        "evidence_use": "research_diagnostic",
+        "execution": {
+          "model_vae_hard": "3afb1cb8cc4eef60efc9656e5dd45f17ffd1cdeacd7c0d78b6492d26a80d6abd"
+        },
+        "initializer": "deterministic_orthogonal",
+        "protocol": {
+          "budgets": {
+            "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+            "default_through_tier": 1,
+            "per_task": "TaskSpec.execution and resources.timeout_seconds"
+          },
+          "calibration_status": "provisional",
+          "id": "screening",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "revision": 1,
+          "rng": {
+            "candidate_identity_in_seed": false,
+            "component_scoped": true,
+            "derivation": "forge-rng-v1",
+            "streams": [
+              "init",
+              "data",
+              "prior",
+              "noise",
+              "eval"
+            ],
+            "unintended_deviations": 0
+          },
+          "robustness": {
+            "cross_seed_reuse": false,
+            "enabled_for_screening": false,
+            "requires_frozen_candidate": true,
+            "requires_preregistered_seed_set": true
+          },
+          "schema_version": 1,
+          "scoring": {
+            "best_checkpoint": "diagnostic_only",
+            "ema": "separate_view_required",
+            "weights": "live"
+          },
+          "seed": 0
+        },
+        "rng": {
+          "bindings": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": {
+              "component": "target",
+              "device": "cpu",
+              "family": "data",
+              "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+              "purpose": "training",
+              "seed": 2842969976240124311
+            },
+            "[\"eval\",\"sampler\",\"samples\",\"cpu\"]": {
+              "component": "sampler",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "9488d65f11be2e232c210ae5b27c29426ac74687551e6bc1597afc56159f8726",
+              "purpose": "samples",
+              "seed": 212130830619035767
+            },
+            "[\"eval\",\"target\",\"reference\",\"cpu\"]": {
+              "component": "target",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "905a51801f69a4375927533ecf1199816a077aea8b3164d15b2811fae33abf02",
+              "purpose": "reference",
+              "seed": 7189743471773393273
+            },
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+              "component": "discriminator",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+              "purpose": "construction",
+              "seed": 3363721576689578451
+            },
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+              "purpose": "construction",
+              "seed": 6942576180060350273
+            },
+            "[\"init\",\"prior\",\"locations\",\"cpu\"]": {
+              "component": "prior",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "ab1fa62c08db5e35d0b5c6be2418a849814f3490f8448c5b0e671be86de398ca",
+              "purpose": "locations",
+              "seed": 2562565386842645502
+            },
+            "[\"noise\",\"critic\",\"input\",\"cpu\"]": {
+              "component": "critic",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "d45c4d304b060206d27bed2cfb50b4e02d8d3a2a3ebc2bd23198f3119b34be6d",
+              "purpose": "input",
+              "seed": 5961379833291764029
+            },
+            "[\"noise\",\"generator\",\"output\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+              "purpose": "output",
+              "seed": 9214932872906931917
+            },
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cpu\"]": {
+              "component": "models",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "c2f7ba3cac65f7a2c9f1da18c52f973980852aaa4a916683301b0efdbb50edf9",
+              "purpose": "stochastic_layers",
+              "seed": 4481608677977550636
+            },
+            "[\"noise\",\"penalty\",\"training\",\"cpu\"]": {
+              "component": "penalty",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "e170727612c771e1a5db3740ca655a777d92c20f99fb8497de95c6cfdb6fdd84",
+              "purpose": "training",
+              "seed": 7930995805460461310
+            },
+            "[\"noise\",\"prior\",\"gaussian\",\"cpu\"]": {
+              "component": "prior",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "d6261b40f0efc71cdced90af99c43969a0675e1827f184a56c8790fee5a820d8",
+              "purpose": "gaussian",
+              "seed": 939191808430552031
+            },
+            "[\"prior\",\"latent\",\"indices\",\"cpu\"]": {
+              "component": "latent",
+              "device": "cpu",
+              "family": "prior",
+              "initial_state_sha256": "c20d03989eda9e8650239603a2db8efb7df1bab81c5257cce0283964a570c14a",
+              "purpose": "indices",
+              "seed": 5876435880110660064
+            }
+          },
+          "runtime": {
+            "rng": "torch.Generator",
+            "torch": "2.14.0+cu130"
+          },
+          "seed": 0,
+          "version": "forge-rng-v1"
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        },
+        "seed": 0,
+        "task_initializers": {
+          "model_vae_hard": "deterministic_orthogonal"
+        }
+      },
+      "source_commit": "86ee9d9d8cb296e74cbf25bf8be0dc2bcb8ea351",
+      "source_digest": "7a7f80406f6c0fca2a8f5206e8c0c02d6a3b725de1834882afb0844bc89130ba",
+      "stable_suffix": 6,
+      "study_id": "vaegan-coverage-settle-v1",
+      "task": "model_vae_hard",
+      "task_binding_sha256": "ce579c6c1a2adfd0ff2e7bcf06dfb1a1d1bd3fc2ab9ed7a16d8602127990d309",
+      "task_sha256": "5b983117a4accdf399634c1bdb32df1249e537cabc35ca85fc2c63662879a04b",
+      "terminal_checkpoints": [
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/2c33e91963ad464f990c4ae04f365e48/observation-checkpoints/step-001000.pt",
+          "sha256": "9ba73f0ca394fb7aa6c39886989c32221da8ea085fda003b0244c4cd2b20af08",
+          "state_sha256": "79adee7172f9b4e510b0819496806e18c95f827ee649cea0abc1de2f5d4b16cf",
+          "step": 1000
+        },
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/2c33e91963ad464f990c4ae04f365e48/observation-checkpoints/step-001050.pt",
+          "sha256": "f33e11657098f35f8c59e93b4e3d8d2541d20f974993f409f1e8c0e5bb6909eb",
+          "state_sha256": "dca5c65fc37e8a28fcce064b91f9278f39e4ba3a51320b720e5101aaefdcc907",
+          "step": 1050
+        },
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/2c33e91963ad464f990c4ae04f365e48/observation-checkpoints/step-001100.pt",
+          "sha256": "915443d19236e5b87ad2e681d3b9da67c2fb06f8855f4f35f6d65e516666034d",
+          "state_sha256": "4efddd761bb21c16b1023159855565f764efe4e11a41ab7a0a6a09e86f256727",
+          "step": 1100
+        },
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/2c33e91963ad464f990c4ae04f365e48/observation-checkpoints/step-001150.pt",
+          "sha256": "32d47bdf80eaf95a485bf71c8775e15960f8a570eedae175be796c74d5a1da79",
+          "state_sha256": "c9bebc2a9aab7edcfca3dddbf83d163b912d113b08c7111d8c47afa0c31c00f3",
+          "step": 1150
+        },
+        {
+          "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round2-v1/2c33e91963ad464f990c4ae04f365e48/observation-checkpoints/step-001200.pt",
+          "sha256": "848c8866eacd58c93789915dc35e8bd740eafd53e0458bb71ba60b9b2ae39d04",
+          "state_sha256": "dd9227c54fa7c477d1f76e8a927cc9fb941933a8cd4b70c8a4888941e81b92ae",
+          "step": 1200
+        }
+      ],
+      "terminal_metrics": [
+        {
+          "metrics": {
+            "aggregate_effective_components": 2.3902730145508992,
+            "decoder_mean_hq": 0.9912109375,
+            "decoder_mean_mass_tv": 0.01171875,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 2.220446049250313e-16,
+            "kl_identity_error": 7.618617292592944e-09,
+            "kl_nats": 2.7725887298583984,
+            "likelihood_hq": 0.983642578125,
+            "likelihood_mass_tv": 0.016357421875,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 1.9854038970808325,
+            "posterior_effective_components": 1.0,
+            "posterior_mutual_information": 0.8714075914491028,
+            "posterior_noise_variance_ratio": 1.0009006261825562,
+            "posterior_pair_rms": 0.0529654361307621,
+            "reconstruction_mse": 0.003949248505907747,
+            "shuffle_reconstruction_ratio": 571.9648572602293,
+            "shuffled_reconstruction_mse": 2.2588313579666983
+          },
+          "passed": true,
+          "step": 1000
+        },
+        {
+          "metrics": {
+            "aggregate_effective_components": 3.4596965902928813,
+            "decoder_mean_hq": 0.988037109375,
+            "decoder_mean_mass_tv": 0.011962890625,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 4.440892098500626e-16,
+            "kl_identity_error": 7.618617292592944e-09,
+            "kl_nats": 2.7725887298583984,
+            "likelihood_hq": 0.97705078125,
+            "likelihood_mass_tv": 0.02294921875,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 1.9517909082930016,
+            "posterior_effective_components": 1.0,
+            "posterior_mutual_information": 1.2411808945577842,
+            "posterior_noise_variance_ratio": 1.0009006261825562,
+            "posterior_pair_rms": 0.056333862245082855,
+            "reconstruction_mse": 0.003918996815998699,
+            "shuffle_reconstruction_ratio": 566.4415130413734,
+            "shuffled_reconstruction_mse": 2.2198824860586277
+          },
+          "passed": true,
+          "step": 1050
+        },
+        {
+          "metrics": {
+            "aggregate_effective_components": 2.341723121225764,
+            "decoder_mean_hq": 0.98583984375,
+            "decoder_mean_mass_tv": 0.01416015625,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 0.0,
+            "kl_identity_error": 7.618617292592944e-09,
+            "kl_nats": 2.7725887298583984,
+            "likelihood_hq": 0.97119140625,
+            "likelihood_mass_tv": 0.02880859375,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 8.15555768900466,
+            "posterior_effective_components": 1.0,
+            "posterior_mutual_information": 0.8508870349696008,
+            "posterior_noise_variance_ratio": 1.0009006261825562,
+            "posterior_pair_rms": 0.05122845619916916,
+            "reconstruction_mse": 0.00950238691863919,
+            "shuffle_reconstruction_ratio": 236.27744159360535,
+            "shuffled_reconstruction_mse": 2.2451996701686108
+          },
+          "passed": true,
+          "step": 1100
+        },
+        {
+          "metrics": {
+            "aggregate_effective_components": 3.622164378954664,
+            "decoder_mean_hq": 0.990234375,
+            "decoder_mean_mass_tv": 0.011474609375,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 0.0,
+            "kl_identity_error": 7.618617292592944e-09,
+            "kl_nats": 2.7725887298583984,
+            "likelihood_hq": 0.984619140625,
+            "likelihood_mass_tv": 0.015380859375,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 2.7967372082022326,
+            "posterior_effective_components": 1.0,
+            "posterior_mutual_information": 1.2870717419086906,
+            "posterior_noise_variance_ratio": 1.0009006261825562,
+            "posterior_pair_rms": 0.05319153890013695,
+            "reconstruction_mse": 0.004679448485917006,
+            "shuffle_reconstruction_ratio": 478.14401546583383,
+            "shuffled_reconstruction_mse": 2.237450289221874
+          },
+          "passed": true,
+          "step": 1150
+        },
+        {
+          "metrics": {
+            "aggregate_effective_components": 2.4686049652775797,
+            "decoder_mean_hq": 0.9912109375,
+            "decoder_mean_mass_tv": 0.011474609375,
+            "decoder_mean_modes": 2,
+            "elbo_identity_error": 4.440892098500626e-16,
+            "kl_identity_error": 7.618617292592944e-09,
+            "kl_nats": 2.7725887298583984,
+            "likelihood_hq": 0.986083984375,
+            "likelihood_mass_tv": 0.013916015625,
+            "likelihood_modes": 2,
+            "negative_elbo_nats": 2.831860557153644,
+            "posterior_effective_components": 1.0,
+            "posterior_mutual_information": 0.9036531996995563,
+            "posterior_noise_variance_ratio": 1.0009006261825562,
+            "posterior_pair_rms": 0.05172229930758476,
+            "reconstruction_mse": 0.004711059499973276,
+            "shuffle_reconstruction_ratio": 473.3791590819527,
+            "shuffled_reconstruction_mse": 2.2301173844823943
+          },
+          "passed": true,
+          "step": 1200
+        }
+      ],
+      "terminal_passes": 5,
+      "terminal_receipt_sha256": "11fea393225c0199dcaa7ce9996798c90ff3483f5da4e2347190ee44c7350139",
+      "verdict": "PASS"
     },
     {
       "adapter_receipt_sha256": "da955039b2c3675df5fb77d15fae223688d17cfed1084b21964c84b0dcdc1285",
@@ -1965,6 +3525,7 @@
         "prior": "5739c60ec2769af6e1d8d0a62a0788fe8156f87c4d9d7e2bd867743d09a65943"
       },
       "metric_observations": 24,
+      "paid_worker_seconds": 234.89555626999936,
       "prior_policy": {
         "applicability": "latent_prior",
         "contract": "recipe_owned_v1",
@@ -2270,7 +3831,8 @@
       "stable_suffix": 0,
       "study_id": "vaegan-coverage-transport-v1",
       "task": "model_vae_categorical",
-      "task_sha256": "31c77478d6834a36080f955ea06af0a04bc5f431e79e73f3cb9135725697ab56",
+      "task_binding_sha256": "31c77478d6834a36080f955ea06af0a04bc5f431e79e73f3cb9135725697ab56",
+      "task_sha256": "3e9e67067f71ed8d14fcba0324c7e6ceac077894371d8f35a5255db6514f7fb7",
       "terminal_checkpoints": [
         {
           "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round1-v1/1d92fe13cbcf4b468328b4da57fad683/observation-checkpoints/step-001000.pt",
@@ -2426,6 +3988,7 @@
         }
       ],
       "terminal_passes": 0,
+      "terminal_receipt_sha256": "2a7f73747ec15a9c2df9f7d90a149749575f69aee00742304a5acf9e94fc931b",
       "verdict": "FAIL"
     },
     {
@@ -2790,6 +4353,7 @@
         "prior": "5739c60ec2769af6e1d8d0a62a0788fe8156f87c4d9d7e2bd867743d09a65943"
       },
       "metric_observations": 24,
+      "paid_worker_seconds": 233.92602967499988,
       "prior_policy": {
         "applicability": "latent_prior",
         "contract": "recipe_owned_v1",
@@ -3095,7 +4659,8 @@
       "stable_suffix": 0,
       "study_id": "vaegan-coverage-transport-v1",
       "task": "model_vae_hard",
-      "task_sha256": "bffaf425b9ed05a3dec377cd2f34f04c40d3ab6ff51fb7722cd1a7a950857d55",
+      "task_binding_sha256": "bffaf425b9ed05a3dec377cd2f34f04c40d3ab6ff51fb7722cd1a7a950857d55",
+      "task_sha256": "5b983117a4accdf399634c1bdb32df1249e537cabc35ca85fc2c63662879a04b",
       "terminal_checkpoints": [
         {
           "path": "/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/queue/vaegan-coverage-round1-v1/f44c4f91e1d44abd86a290d3e7c299f1/observation-checkpoints/step-001000.pt",
@@ -3251,6 +4816,7 @@
         }
       ],
       "terminal_passes": 0,
+      "terminal_receipt_sha256": "5ce14a5cc9bfb7221a1e37f5c3777b36fb2afc83a202ea9ec11591c4c5fb2f57",
       "verdict": "FAIL"
     }
   ],
