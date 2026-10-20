@@ -95,3 +95,23 @@ up to3600 seconds. At most one further globally fixed repair is permitted after
 round2 diagnosis. Amended whole-campaign ceiling:9 run attempts,35000 declared
 maximum generator updates (including incomplete allowances),7800 total reserved
 seconds. No active cap or recorded result is relaxed or rewritten.
+
+The completed round-2 Gaussian is still an overall FAIL. All five terminal
+final-chain marginal observations now satisfy their original four distribution
+bounds: final CDF ranges 0.0451–0.0855, endpoint mean error is 0.1348 and endpoint
+covariance eigenvalues are [0.9905, 1.0117]. The endpoint's remaining failures
+are the fixed low-noise `t1_q0` panel: mean error 0.6195, covariance maximum
+1.4775 and CDF 0.1911. The original panel and every gate remain unchanged.
+The saved optimizer reports 1,605 blended conflict steps and zero Pareto stalls.
+
+The final bounded round 3 changes only `constraint_geometry_mode` from
+`direction_blend` to `none`. It retains the same summed GAN, conditional energy
+and SBNP objectives, coefficients, DualNorm optimizer, BISPF critic penalty,
+learned prior and round-2 rates/annealing. This removes the optional per-objective
+common-descent blend; it does not remove adversarial training or claim a generic
+nonascent guarantee. The hypothesis is that preserving an unhelpful local critic
+objective can limit conditional correction. Conflict counts alone do not prove
+that explanation. The ready `ddgan-repair-unconstrained-r3` study will launch
+both full tasks only after the two ongoing round-2 bimodal jobs conclude. Its
+1,800-second reservation is the final allowance within the amended campaign
+ceiling. No selective query, endpoint, task or recipe choice can confer PASS.

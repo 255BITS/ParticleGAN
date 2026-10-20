@@ -42,9 +42,11 @@ def test_energy_score_oracle_beats_collapse_wrong_mean_and_wrong_spread():
     assert conditional_energy_score(oracle, target) < conditional_energy_score(torch.zeros_like(oracle), target) - .1
 
 
-def test_energy_objective_checkpoint_replay_and_matched_data_streams():
+@pytest.mark.parametrize("geometry", ["direction_blend", "none"])
+def test_energy_objective_checkpoint_replay_and_matched_data_streams(geometry):
     baseline = build_case("api-model-ddgan-gaussian-chain", max_steps=3)
-    recipe = baseline.recipe.replace(conditional_energy_weight=1., conditional_energy_samples=8)
+    recipe = baseline.recipe.replace(conditional_energy_weight=1., conditional_energy_samples=8,
+                                    constraint_geometry_mode=geometry)
     candidate = build_case("api-model-ddgan-gaussian-chain", recipe=recipe, max_steps=3)
     assert state_digest(baseline.G.state_dict()) == state_digest(candidate.G.state_dict())
     assert state_digest(baseline.prior.state_dict()) == state_digest(candidate.prior.state_dict())
