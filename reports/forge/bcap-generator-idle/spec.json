@@ -1,0 +1,76 @@
+{
+  "acceptance": {
+    "minimum_matched_fail_to_pass": 1,
+    "ordinary_tier1_passes_required": 6,
+    "preserve_all_control_tier2_passes_for_global_repair": true,
+    "report_all_regressions": true
+  },
+  "archive": "/home/martyn/dev/ParticleGAN/runs/forge/bcap-generator-idle-v1",
+  "axis": "generator_idle_se",
+  "baseline": "recipe-prior-refactor-bcap-pure-v1",
+  "control_id": "bcap-generator-idle-control-v1",
+  "control_study_id": "bcap-generator-idle-control-study-v1",
+  "falsifier": "gaussian1d_stability final std_ratio < .8 (the control's collapse persists).",
+  "full_reservation_seconds": 86040,
+  "hypothesis": "Skipping the G/prior step while the critic's paired real-fake gap is within one standard error of zero stops the constant-rate BCAP leader drifting during holds, repairing gaussian1d_stability and mode_hold without losing any control pass.",
+  "maximum_reserved_paid_seconds": 90000,
+  "name": "generator-idle",
+  "prediction": "gaussian1d_stability final std_ratio >= .8 and cdf_ks <= .05",
+  "protocol_seed": 0,
+  "required_counts": {
+    "tier1": 6,
+    "tier2": 21,
+    "tier3": 2
+  },
+  "schema_version": 1,
+  "search_id": "bcap-generator-idle-search-v1",
+  "source_digest": "2ffc95c341a76e99b6d6d36edeea7908d30d6b45f082c620656478f35e501183",
+  "stop": "One finite round. Complete current-tier peers, then required non-PASS blocks higher tiers. No automatic refinement or scientific retry.",
+  "target_gates": {
+    "gaussian1d_stability": "FAIL -> PASS",
+    "mode_hold": "FAIL -> PASS"
+  },
+  "task_contracts": {
+    "ae_gan_hold": "3350f8393e2939fc834a597bd7698374831af26e5478b2b511ccdd958f70d6aa",
+    "clockfree_audit_measurement_v1": "1692ec3f47d9a88d4583f720c39a04ebe0a72fd0dcf56c2e36b3fe627f40604e",
+    "cover_leftover": "bc14be8ef4afafcd2b3ffa629cbf7a79aad76526c63ed80fdde1213fe9aa8abd",
+    "five_word_joint_hold": "b382af035b81abf75ad0ed9f6652ae03009c62f4fc1c35702fb686c9c0bb0db1",
+    "five_word_joint_smoke": "b41b9839b099bff212062175edd23a9495c711beb6b231f1504f1463e5560958",
+    "gaussian1d_smoke": "16d56524445ca4b48009ebf7c15889d8290cbea361bcdc49d2d4330e63e56b42",
+    "gaussian1d_stability": "2df6a2d4c15cae40adbf041e56b68b81c9cdd961a8f9b07fe606ef0c96effac1",
+    "grid100": "8aa5c50aaeff6e665fd631de4daeaf874c6d5378b7aefe187c18f120b7ab1191",
+    "img_bars4": "8caebce28fc9e33c3b8f0cf3cadad6844e49b556676463ea6e718f70d1372420",
+    "img_blobs4": "1fc44b4ac15131a39b3226660a8b3f51763a57922faadddee94ac57a86c19ead",
+    "img_intensity2": "2ca9c1c93851d2ec4b06bc81823a72bc1f35ae795d788b3dd71c6bf0df58b813",
+    "img_stripes2": "164c36fe01f9344ead458e7e36a1981450eb4ed4237b56c15ba0f35c951e19b6",
+    "mid_scale_identity": "31aa2d4c3d50b1c0f00d5a0f8cb6555ee766ae4251638910bf2c956ad14f2eca",
+    "mode_hold": "ebfcace2e5f9ddc68314abcbe5d68b881e11a7e03dc3bf1a14fd9d2f03621ce8",
+    "residual_student": "6e46a54a7347dc5cea1c3228e9775dbf9c0eeb142392a0190f569a5ae3343c88",
+    "ring16_acquisition": "0a258e5b118f7415c0891827652322f1d6b7c25ec3edb737d3d56bb67c5144a2",
+    "ring_extension": "86f983e31a7be908efa46f443bbf855a5d1cdd38317b135ac75c2eee3fd273cc",
+    "ring_hold": "6f76d159e0718566619d57e82e383121e0fb96df0e15a5592319a808f8ad8863",
+    "rotated100": "dd3cec5b5ea3eb322b6a881935afbec490c40df854875c9bec476381adefc97c",
+    "staggered100": "d862946803b74e5acac4340e7e0948f9395a10c7f2fbd6bef37af16fe219c440",
+    "trajectory": "af8ade854853d4d381240a8afc9d8c89dd4b68f9a58400c5118490d613625c15",
+    "two_pole": "d5a3a60146c22ee74b48494fa94ca76ee5bf1325bbe416c8257b90afe7fe91ca",
+    "unipolar": "3bf291a6ac0c29dca8abf29b58c9d71c7558d14307451447a5106c19fc12e1df",
+    "unused_token_hold": "f90167a9c3ced6ce4c9fb01d4ddb451719dddc68002ad10a3eabed9bcf8f8b43",
+    "vector_anisotropic": "49a5344e97ae9ba01e0483ca9b58f2196d68a643a725a4262c324af4c3831a76",
+    "vector_overlap": "41212fe530d54b83df6c52b175bab083e62e298f8ff6b318bb671f882a77ccf5",
+    "vector_spiral": "57af3ff7ba16d323a7679605f3db13c869625a0624e221f354d898615f6ae26c",
+    "vector_two_broad": "7bd8502ff29ff58d33f85de711f760659d269aef97cba0775128420070409dd2",
+    "vector_unequal_mass": "c3ebc5b07437fa3257ef2534fcffce2c1d2a654eb2cc2457ca35bcaff94543f9",
+    "vector_unequal_width": "c33a8ccb8bae739131ca034c99fcf158a10c362de98482b347c1e85059476f94"
+  },
+  "through_tier": 2,
+  "trainer_delta": {
+    "generator_idle_se": {
+      "candidate": 1.0,
+      "control": null
+    }
+  },
+  "values": [
+    1.0
+  ],
+  "view_revision": 9
+}

@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 844. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 849. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -679,6 +679,86 @@ Yes, within the generated routed E22 FP32 fixture: growing shared training noise
 **Next:** If the routed or Supra latent-coverage question is picked up again, test expanded noise support on the actual frozen Supra teacher as one declared delta. Do not repeat the generated cohort and do not change defaults.
 
 [Evidence](../../reports/forge/continuous-baseline-20261003/OPEN_TOY_PR_REVIEW.md) · [Record](records/archive-pr261-routed-latent-noise-coverage-7943dda321c1.json)
+
+### archive:pr320:network-spectral-cap · archive-pr320-network-spectral-cap-c4627fb14619
+
+**Scope:** historical; family_context; revision `c4627fb14619ca0bcd1b8d904e7796d0834a4e8a`.
+
+Preserving small G/D gradient singular values at fixed nominal rates repairs Gaussian acquisition, retention and target-shift response while the prior retains row-normalized learning.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `network_spectral_cap`.
+
+
+
+Fixed G/D spectral cap scale .1 improves Gaussian shape but fails continuous learning in all three timing arms. Past extrapolation passes 43/96 stationary checks (41/72 retention), first five-pass window at update 3875, and 17/48 shifted checks (8/24 retention), ending shifted KS .03837; all acquisition and reacquisition suffixes are zero. Every ring arm passes 0/240 checks, versus original alternating control acquisition PASS and 144/144 retention. Stop this exact global recipe; prior sampled-row normalization was unchanged, so this does not evaluate a combined prior/network repair. Nine CUDA trials use 30000 new updates, 362.226751 loop seconds and zero scientific retries. This is a task-only diagnostic, not ordinary qualification.
+
+**Next:** Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/c4627fb14619ca0bcd1b8d904e7796d0834a4e8a/reports/forge/gaussian-network-magnitude/README.md) · [Record](records/archive-pr320-network-spectral-cap-c4627fb14619.json)
+
+### archive:pr360:hydraulic-winner · archive-pr360-hydraulic-winner-bbac181e1281
+
+**Scope:** historical; family_context; revision `bbac181e128160a1e5770b60490ba99ebaffbf01`.
+
+Bound joint G/prior output travel on the direction-blend BCAP winner; compare real-spacing radius with a gap-adaptive radius, preserving every original task gate and the five winner passes in the 17-cell diagnostic scope.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `hydraulic_winner`.
+
+
+
+Latest 17-public-trainer-task winner follow-up: travel and gap-adaptive each pass 4/17 versus archived winner 5/17, gain zero gates, and respectively lose ring16_acquisition and vector_spiral. Gaussian stationary/shift retention improves 2/72 and 0/24 to 71/72 and 23/24 (travel), or 68/72 and 22/24 (gap); full retention FAIL remains. Grid100 precision rises .24072 -> .49586/.6343 but native full shape/density gates fail. Travel exactly reproduces archived v1 on the bound hosts; direction blend is inactive there, not a fresh matched control. Both prespecified endpoint predictions are observed, but the global decision stops both revisions. 34 complete cells, zero retries, 5159.621962 paid seconds within 64000 ceiling. Earlier rounds retain separate source identities; no ordinary qualification or default change.
+
+**Next:** Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/README.md) · [Record](records/archive-pr360-hydraulic-winner-bbac181e1281.json)
+
+### archive:pr395:four-bcap-repairs · archive-pr395-four-bcap-repairs-51ee43476e8b
+
+**Scope:** historical; family_context; revision `51ee43476e8bfa64f0eb55f630fe3b0086dddd9b`.
+
+Four fixed global BCAP recipe changes must retain all Tier1 gates and every matched control Tier2 pass while adding at least one complete Tier2 repair.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `four_bcap_repairs`.
+
+
+
+No global winner. Fresh control passes 6/6 required Tier1 and 9/21 Tier2. Late annealing is 5/6, half G/E motion 4/6, prior smoothing .01 5/6; all 21 Tier2 cells for each are BLOCKED/unmeasured, not measured failures. Weak critic damping .05 passes 6/6 and 8/21, adding zero passes and losing the original word-hold gate. That legacy hold uses unequal acquired prefixes (control 834->4834, hybrid 1667->5667), so it is a separate original-gate cohort, not a same-clock causal comparison; other 20 Tier2 tasks match complete budgets/consumed streams and retain the same eight passes. Gaussian hybrid stationary/shift checks improve 2->15/72 and 0->3/24, but full gates fail. 77 paid attempts, 6773.287376 seconds, zero execution retries. Stop these four revisions; current selected recipe, qualifications and gates remain unchanged.
+
+**Next:** Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/51ee43476e8bfa64f0eb55f630fe3b0086dddd9b/reports/forge/bcap-tier2-round6/README.md) · [Record](records/archive-pr395-four-bcap-repairs-51ee43476e8b.json)
+
+### bcap-stall-reach-base-v1 · archive-pr397-stall-reach-critic-read-de93dbf48cab
+
+**Scope:** historical; family_context; revision `de93dbf48cabe6bb2913b3eccf93029655da5db9`.
+
+Closed PR #107 stall reach rebuilt on the BCAP direction-blend leader (opt-in generator_critic_read="stall_reach"): the generator reads the critic through a 2d+1 axis stencil of width max(.15,.5 min(u,1/u))/kappa, .5/kappa after 50 consecutive u>=.6 critic updates, converting mode_hold FAIL to a sustained PASS while keeping all six Tier 1 gates.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `generator_critic_read_stencil`.
+
+
+
+Falsified at Tier 1. Against its fresh matched leader control (same source cbba593bb98d, seed 0, deterministic_orthogonal, revision 9), stall_reach passes 4/6 Tier 1 versus 5/6: ring16_acquisition is lost (terminal suffix 0/5, 14/16 modes, HQ .530 versus control suffix 26, 16 modes, HQ .961, first pass 1184). Under BCAP the critic's input slope sits near its cap, so the saturation-only stall rule (PR #107's G trust factor has no current counterpart) latches: 1545/1600 ring16 updates are stalled and the wide read is on for 1597/1600, pinning the width at .5. Both arms' five_word_joint_smoke are INCOMPLETE at the 900 s allowance (control 17501/20001 updates under host CPU contention; stall_reach 10834, about 1.6x per-update cost from the 341-point read). All 21 Tier 2 tasks are BLOCKED for both arms; mode_hold is unmeasured. Public-API ring8 toy (after the review fix making its particle table deterministic): off path PASS (7 modes, HQ .917), stall_reach FAIL (6 modes, HQ .747, 1093/1200 stalled); both arms oscillate, so the toy only supports the ring16 result. PR #397 was closed unmerged; the option, its tests and the toy code are not on develop.
+
+**Next:** Do not re-run or tune this rule (widths, windows). A successor needs a stall signal that is selective under BCAP's saturated slope and a constant-cost read (a few random or antithetic directions, not every axis); register it as a new idea with a fresh control and screen it on ring8/ring16 toys first.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/README.md) · [Record](records/archive-pr397-stall-reach-critic-read-de93dbf48cab.json)
+
+### bcap-generator-idle-base-v1 · archive-pr398-generator-idle-se-835e93900c21
+
+**Scope:** historical; family_context; revision `835e93900c2103eef24ed4b62e18fcdbf19e41bf`.
+
+Closed PR #366 generator idle rule rebuilt on the recipe factories (opt-in generator_idle_se=1.0): skipping the G/prior step while the critic's paired real-fake gap is within one standard error of zero stops the constant-rate BCAP leader drifting during holds, repairing gaussian1d_stability and mode_hold without losing any control pass.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `generator_step_idle_gate`.
+
+
+
+Falsified at Tier 1. Against its matched BCAP leader control (source digest 2ffc95c341a7, seed 0, deterministic_orthogonal, revision 9), generator_idle_se=1.0 loses ring16_acquisition PASS->FAIL (terminal suffix 0/5, final component_covariance_error 3.09991 vs limit .85; control .496567, suffix 26) after skipping only 5/1600 G steps, so all 21 Tier 2 cells are BLOCKED. The control's five_word_joint_smoke was INCOMPLETE (19168/20001 updates at the 900 s allowance under shared-GPU contention; no retry). Idle fraction: gaussian1d_smoke 42.9%, ae_gan_hold 25.6%, five_word_joint_smoke 54.6%, two_pole 1.2%, unused_token_hold 0%, ring16 0.3%. Off-ladder diagnostic (separate cohort, no credit): gaussian1d_stability improves (stationary 2->14/72, shifted hold 0->6/24, std_ratio .662->.865, cdf_ks .321->.127) but mean_error_sigma worsens .255->.312 and the gate stays FAIL; mode_hold is unchanged FAIL because the rule never idles (0/1200). PR #398 was closed unmerged; the option and its tests are not on develop.
+
+**Next:** Do not sweep the threshold or re-run this rule. A successor must change the idle signal (it never fires on mode_hold and fires about half the time on easy holds), registered as a new structural idea with a fresh matched control.
+
+[Evidence](https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/README.md) · [Record](records/archive-pr398-generator-idle-se-835e93900c21.json)
 
 ### bcap-default-baseline-direction-v1 · bcap-default-baseline-concluded-context-v1
 
@@ -5654,4 +5734,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `31b637f6af752c00ae997f930335d61657386997a82477552253553bbcabcfb5`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `5e757634d251ead65baecacccb563b33a30a8b4d2fb01b241212eafd4c4e56f4`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -1,0 +1,13 @@
+{
+  "candidate_revisions": {
+    "base": "4d639af789c89c041d05781e4ed76cd68f3c90aecbf1e0e2cf62aa68c623accc",
+    "control": "14fa03863f56000951e5bd22e4d0d42240f857c1749b2e005eea159a77e8b7d4"
+  },
+  "preparation_commit": "84172cdf61dd4862357cb88ee865519f8f43ac8a",
+  "source_digest": "cbba593bb98dbd4ee9f158f9f089802465cd66ea19924cd05272ae0b90da761e",
+  "spec_sha256": "c64be636dba62a2aa4da730f0b803234681260a001fa136899ec9447bf2132b6",
+  "worst_case_seconds": {
+    "base": 43020,
+    "control": 43020
+  }
+}
