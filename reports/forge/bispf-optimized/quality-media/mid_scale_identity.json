@@ -1,0 +1,19 @@
+{
+  "adapter_note": "Strict exporter rejected extra initial/display records: unsupported format string passed to list.__format__",
+  "gif_sha256": "bc786a7970faecfea6e2027863e239a013950876bf5c602b5af270b498d62d9a",
+  "kind": "actual_training_saved_observations_gif",
+  "metric_labels": "Scalar display labels only; original saved metrics and views are unchanged",
+  "observation_count": 24,
+  "observations_sha256": "c49a30dc27d93af02b8a68157bf01f2f665cdf750455945704bb62c25574b3a1",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer": "benchmarks.toy_audit.api_run:render_gif",
+  "retained_records": 24,
+  "sampling_draws_added": 0,
+  "selection": "All scored scheduled records from the original saved training views",
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/e81eec8db83742b6bd6e1c14e8e95031/constraint_geometry-scored-outputs.pt": "ba3a19ee426cfc88489fac18c0fcfcd2cd7f73a4e8f458b058e4d69bd24b59b0"
+  },
+  "task_id": "mid_scale_identity"
+}

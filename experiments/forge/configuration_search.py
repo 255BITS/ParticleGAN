@@ -34,6 +34,12 @@ def _report_path(root, study_id):
     return Path(root) / "reports/forge/configuration-search" / f"{study_id}.json"
 
 
+def _comparison_binding(task):
+    """Freeze the task law and allowance, excluding candidate field ownership."""
+    from .views import task_fingerprint
+    return stable_hash({"task": task_fingerprint(task), "resources": task.get("resources")})
+
+
 def _load_spec(root, spec, *, validate_current_protocol=True):
     if isinstance(spec, dict):
         value = deepcopy(spec)
@@ -56,8 +62,8 @@ def _load_spec(root, spec, *, validate_current_protocol=True):
         raise ValueError("search spec missing required fields or unsupported schema")
     for key in ("id", "trainer_family", "base_candidate", "view", "protocol"):
         identifier(value[key], f"search {key}")
-    if value["tuning_through_tier"] not in (1, 2, 3) or isinstance(value["tuning_through_tier"], bool):
-        raise ValueError("tuning_through_tier must be 1, 2 or 3")
+    if not isinstance(value["tuning_through_tier"], int) or isinstance(value["tuning_through_tier"], bool) or value["tuning_through_tier"] < 1:
+        raise ValueError("tuning_through_tier must be an integer >= 1")
     if value["execution_backend"] not in {"cpu", "cuda"}:
         raise ValueError("execution_backend must be cpu or cuda")
     if validate_current_protocol:
@@ -392,16 +398,22 @@ def _persist(root, summary):
 
 
 def _qualification(trial, through_tier):
-    """Retain the full view denominator independently of the tuning cap."""
+    """Retain the full view denominator independently of the tuning cap.
+
+    Held tasks are never counted. A held-only tier neither passes nor breaks
+    progression, and a view whose highest tier is held is never fully qualified.
+    """
     required = [task for task in trial["tasks"] if task["importance"] == "required"]
+    held = [task for task in trial["tasks"] if task["importance"] == "held"]
     tuning = [task for task in required if task["qualification_tier"] <= through_tier]
+    held_only = {task["qualification_tier"] for task in held} - {task["qualification_tier"] for task in required}
     tiers, qualified_tier = [], 0
     advancing = not trial.get("submission_blockers")
     for tier in sorted({task["qualification_tier"] for task in required}):
         tasks = [task for task in required if task["qualification_tier"] == tier]
         counts = dict(sorted(Counter(task["gate_status"] for task in tasks).items()))
         passed = bool(tasks) and counts.get("PASS", 0) == len(tasks)
-        advancing = advancing and passed and tier == qualified_tier + 1
+        advancing = advancing and passed and all(t in held_only for t in range(qualified_tier + 1, tier))
         if advancing:
             qualified_tier = tier
         tiers.append({"tier": tier, "required_total": len(tasks),
@@ -412,13 +424,15 @@ def _qualification(trial, through_tier):
         task["gate_status"] == "PASS" for task in required)
     return {"qualified_tier": qualified_tier, "tuning_qualified": tuning_passed,
             "full_view_qualified": full_passed and qualified_tier == max(
-                (task["qualification_tier"] for task in required), default=0) and all(
+                (task["qualification_tier"] for task in required + held), default=0) and all(
                 task["qualification_tier"] <= through_tier for task in required),
             "required_total": len(required),
             "required_passed": sum(task["gate_status"] == "PASS" for task in required),
             "required_statuses": dict(sorted(Counter(task["gate_status"] for task in required).items())),
             "tuning_required_total": len(tuning),
             "tuning_required_passed": sum(task["gate_status"] == "PASS" for task in tuning),
+            **({"held_total": len(held), "held_passed": sum(task["gate_status"] == "PASS" for task in held)}
+               if held else {}),
             "tiers": tiers}
 
 
@@ -518,9 +532,11 @@ def _prepare(root, queue_root, spec, queue):
                  "runtime_cohort": {"runtime": request["runtime"], "execution_backend": request["execution_backend"],
                                     "compute_profiles": request["compute_profiles"]},
                  "protocol_hash": stable_hash(request["protocol"]),
+                 "evidence_scope": request["view"].get("evidence_scope", "ordinary"),
                  "submission_status": "BLOCKED" if blockers else "READY", "submission_blockers": blockers,
                  "declared_worst_case_seconds": ceiling, "unreused_worst_case_seconds": planned["worst_case_seconds"],
-                 "tasks": [{**a, "compatibility_key": next(job["compatibility_key"] for job in request["jobs"]
+                 "tasks": [{**a, "comparison_binding": _comparison_binding(request["tasks"][a["task"]]),
+                            "compatibility_key": next(job["compatibility_key"] for job in request["jobs"]
                             if a["task"] in job["task_ids"]), "gate_status": "UNKNOWN"}
                            for a in planned["tasks"]], "request_id": None, "attempt_ids": [],
                  "cost": {"wall_seconds": 0.0}, "status": "UNKNOWN"}
@@ -544,6 +560,7 @@ def _prepare(root, queue_root, spec, queue):
                "base_declaration": _base_declaration(root, spec),
                "technique_signature": technique_signature(_resolved_recipe(_base_declaration(root, spec))),
                "spec": spec, "spec_hash": stable_hash(spec), "view": spec["view"],
+               "evidence_scope": requests[0]["view"].get("evidence_scope", "ordinary"),
                "tuning_through_tier": spec["tuning_through_tier"],
                "execution_backend": spec["execution_backend"], "source_digests": sources,
                "source_digest": sources[0] if len(sources) == 1 else None,
@@ -562,8 +579,8 @@ def _prepare(root, queue_root, spec, queue):
 
 def select_configuration(trials: list[dict], through_tier: int) -> dict:
     """Frozen lexicographic objective, with a content-hash-only tie break."""
-    if not trials or through_tier not in (1, 2, 3):
-        raise ValueError("selection requires trials and a declared tuning tier")
+    if not trials or not isinstance(through_tier, int) or isinstance(through_tier, bool) or through_tier < 1:
+        raise ValueError("selection requires trials and a declared tuning tier >= 1")
     def counts(trial):
         return tuple(sum(t["importance"] == "required" and t["qualification_tier"] == tier
                          and t["gate_status"] == "PASS" for t in trial["tasks"])
@@ -712,13 +729,15 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
         trial["attempt_ids"] = []
         evidence, observed = [], {}
         for task in trial["tasks"]:
+            if entry:
+                task.setdefault("comparison_binding", _comparison_binding(entry["request"]["tasks"][task["task"]]))
             job = state.get("jobs", {}).get(task["compatibility_key"], {})
             for item in job.get("attempts", []):
                 original = by_id.get(item["attempt_id"])
                 if original:
                     observed[original["attempt_id"]] = original
             result = job.get("result")
-            task.update(gate_status="UNKNOWN", raw_status=None, metrics={}, cost={},
+            task.update(gate_status="UNKNOWN", raw_status=None, metrics={}, cost={}, cadence=None,
                         evaluator_timing={"status": "UNAVAILABLE", "speed_qualified": False,
                                           "reason": "no currently certified evaluator result"})
             if not result:
@@ -743,6 +762,12 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
                             attempt_id=result["attempt_id"])
                 if valid:
                     task["evaluator_timing"] = _evaluator_timing(entry["request"]["tasks"][task["task"]], grade)
+                    evidence_row = row.get("evidence")
+                    evidence_row = evidence_row if isinstance(evidence_row, dict) else {}
+                    guards = evidence_row.get("guards")
+                    guards = guards if isinstance(guards, dict) else {}
+                    audit = guards.get("mechanism_audit", evidence_row.get("mechanism_audit"))
+                    task["cadence"] = deepcopy(audit.get("penalty_cadence")) if isinstance(audit, dict) else None
                 trial["attempt_ids"].append(result["attempt_id"])
                 evidence.append({"attempt_id": result["attempt_id"], "result_hash": stable_hash(result),
                                  "valid_receipt": valid})

@@ -22,6 +22,7 @@ from .recipes import (
     NetworkLRTransition,
     Recipe,
     get_recipe,
+    get_recipe_fields,
     learning_rate_scale,
     learning_rate_scales,
     scale_learning_rates,
@@ -33,6 +34,17 @@ from .vicreg_loss import ParticleRegularizer
 from .coulomb_prior import CoulombPriorRegularizer
 from .sigreg import SIGReg
 from .initial_mmd import InitialMMDRegularizer
+from .bispf import (
+    BISPFCriticAdam,
+    BISPFCriticPenalty,
+    BISPFEngine,
+    BISPFLossAdapter,
+    BISPFStepRecord,
+    ContinuousThermalCooler,
+    SBNPPriorRegularizer,
+    SinkhornRelativisticLoss,
+    StratifiedBlueNoisePrior,
+)
 from . import init
 
 __all__ = [
@@ -45,7 +57,10 @@ __all__ = [
     "RoutedBatch", "RoutedCandidate", "RoutedExecution", "RoutedRows",
     "E22Policy", "UpdatePolicy", "ServedModel", "StepNoise",
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
-    "CoulombPriorRegularizer", "ParticleRegularizer", "InitialMMDRegularizer", "SIGReg", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
-    "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
+    "CoulombPriorRegularizer", "ParticleRegularizer", "InitialMMDRegularizer", "SIGReg",
+    "StratifiedBlueNoisePrior", "SBNPPriorRegularizer", "ContinuousThermalCooler", "BISPFEngine", "BISPFLossAdapter",
+    "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss",
+    "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
+    "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "get_recipe_fields", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
 ]

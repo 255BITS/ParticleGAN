@@ -35,6 +35,14 @@ TARGET_FIELDS = {
     "spiral": frozenset({"turns", "radius_min", "radius_max", "noise"}),
 }
 OPTIONAL_FIELDS = frozenset({"d_hidden", "d_layers", "research_discriminator"})
+# Point-mass tanh host field set. zero_tanh_smoke is the only routed card.
+# zero_tanh_rail_escape uses the same fields and is refused at card validation.
+# output_activation is part of that declaration; it is not a gaussian_mixture
+# or spiral profile and must not be rewritten into one.
+TANH_HOST_FIELDS = frozenset({"hidden", "layers", "fourier", "z_dim", "particles", "batch", "steps", "output_activation"})
+# The adapter attaches gate thresholds after the card is validated. They are not
+# part of the host declaration and must not be required to recognize the card.
+TANH_HOST_RUNTIME_FIELDS = frozenset({"thresholds"})
 CRITIC_FIELDS = {
     "shared_batch_feature_v1": frozenset({"name", "implementation", "width", "layers", "fourier",
         "trunk_normalization", "softplus_beta", "feature", "placement", "kernel_scales", "eps",
@@ -95,7 +103,27 @@ def _published_architecture(task, root):
     return _architecture(spec)
 
 
+def _declared_tanh_host(spec):
+    return isinstance(spec, dict) and spec.get("output_activation") == "tanh" and set(spec) == TANH_HOST_FIELDS
+
+
+def is_tanh_point_mass_host(spec) -> bool:
+    """Origin point-mass tanh card, including keys attached only for scoring.
+
+    The card has ``output_activation: tanh`` and no ``kind``. Gaussian and
+    spiral hosts keep ``kind`` and are not rewritten into this law.
+    """
+    if not isinstance(spec, dict) or spec.get("output_activation") != "tanh" or "kind" in spec:
+        return False
+    return set(spec) - TANH_HOST_RUNTIME_FIELDS == TANH_HOST_FIELDS
+
+
 def _validate_spec(spec):
+    if _declared_tanh_host(spec):
+        for key in ("hidden", "layers", "z_dim", "particles", "batch", "steps", "fourier"):
+            if type(spec[key]) is not int or spec[key] < (0 if key == "fourier" else 1):
+                raise ValueError(f"invalid vector dimension: {key}")
+        return
     if not isinstance(spec, dict) or not isinstance(spec.get("kind"), str) or spec["kind"] not in TARGET_FIELDS:
         raise ValueError("unsupported vector target declaration")
     required = COMMON_FIELDS | TARGET_FIELDS[spec["kind"]]
@@ -133,6 +161,8 @@ def resolve_vector_spec(task: dict, *, root: Path | str | None = None) -> dict:
         raise ValueError("vector profiles apply only to transfer_vector tasks")
     spec = deepcopy(task["execution"]["host_definition"])
     _validate_spec(spec)
+    from .tanh_point_mass import refuse_unsupported_tanh
+    refuse_unsupported_tanh(task, spec)
     if "vector_profile" not in task["execution"]:
         if "research_discriminator" in spec:
             raise ValueError("research_discriminator requires an explicit supported vector profile")
@@ -182,9 +212,16 @@ def build_vector_models(context, spec: dict):
         raise ValueError("vector latent dimension differs from its formulation context")
     from lib.toy_models import SimpleMLPGenerator
     from benchmarks.transfer_suite.public_default_verification import vector_discriminator
-    dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
-    generator = context.construct(lambda: SimpleMLPGenerator(
-        context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
+    if _declared_tanh_host(spec):
+        # Point mass in R^2. This card has no kind and no means.
+        from .tanh_point_mass import TanhPointMassGenerator
+        dimension = 2
+        generator = context.construct(lambda: TanhPointMassGenerator(
+            context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
+    else:
+        dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
+        generator = context.construct(lambda: SimpleMLPGenerator(
+            context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
     if dimension == 1:
         from lib.toy_models import SimpleMLPDiscriminator
         discriminator = context.construct(lambda: SimpleMLPDiscriminator(

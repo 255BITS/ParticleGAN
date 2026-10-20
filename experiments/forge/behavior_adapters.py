@@ -22,6 +22,7 @@ from torch import nn
 
 from particlegan import init, prior_capabilities
 from particlegan.recipes import learning_rate_scales
+from particlegan.recipe_compat import without_default_additions
 from particlegan.recipe_schedules import apply_optimizer_schedule
 from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputAdapter, _OutputAdapter
@@ -513,11 +514,18 @@ class BehaviorComponents:
 
     def receipt(self):
         from .boundaries import ownership_receipt
-        return dict(execution_path="public_components", recipe=asdict(self.recipe),
+        resolved_recipe = asdict(self.recipe)
+        recipe = without_default_additions(resolved_recipe, fields=("optimizer_dense_profile",))
+        ownership = ownership_receipt(self.reference_candidate, self.task, resolved_recipe,
+            self.protocol, self.context.initializer,
+            extension_recipe_bindings=self.context.bindings["recipe"])
+        # Validate the complete effective Recipe above, then preserve the
+        # historical applied-packet shape for an unselected optional profile.
+        ownership["recipe_fields"] = {name: value for name, value in ownership["recipe_fields"].items()
+                                      if name in recipe}
+        return dict(execution_path="public_components", recipe=recipe,
                     initializer=self.context.initializer, initialization=deepcopy(self.context.initialization),
-                    field_ownership=ownership_receipt(self.reference_candidate, self.task, asdict(self.recipe),
-                        self.protocol, self.context.initializer,
-                        extension_recipe_bindings=self.context.bindings["recipe"]),
+                    field_ownership=ownership,
                     **({"host_adaptation": self.host_adaptation} if self.host_adaptation else {}),
                     prior=self.context.prior_config, active_roles=sorted(self.role_parameters),
                     public_optimizers=[type(o).__name__ for opt in self.optimizers.values()

@@ -142,7 +142,10 @@ class SharedSlotStudent(nn.Module):
         super().__init__()
         self.shared = nn.Parameter(torch.zeros(DIM))
         self.slot = nn.Parameter(torch.zeros(N_SLOTS, DIM))
-        self.register_buffer("neu", NEU.clone())
+        neu = NEU.detach().to(device=self.shared.device, dtype=self.shared.dtype)
+        if neu.data_ptr() == NEU.data_ptr():
+            neu = neu.clone()
+        self.register_buffer("neu", neu)
 
     def embeds(self, scale: float) -> torch.Tensor:
         # Scale 0 is the adapter-off identity (Anima UNI scale 0).
@@ -164,6 +167,13 @@ class SlotCritic(nn.Module):
         return self.hidden(z)
 
 
+def _placed(reference: torch.Tensor, like: torch.Tensor) -> torch.Tensor:
+    """Move a frozen fixture onto ``like`` without drawing new values."""
+    if reference.device == like.device and reference.dtype == like.dtype:
+        return reference
+    return reference.detach().to(device=like.device, dtype=like.dtype)
+
+
 def _batch(vector: torch.Tensor, rows: int = N_ROWS) -> torch.Tensor:
     return vector.detach().unsqueeze(0).expand(rows, -1)
 
@@ -171,19 +181,20 @@ def _batch(vector: torch.Tensor, rows: int = N_ROWS) -> torch.Tensor:
 def score_student(student: SharedSlotStudent) -> dict[str, float]:
     """Unused hold and concept move at scale +1. Scale 0 is identity."""
     embeds = student.embeds(1.0).detach()
+    concept_dir = _placed(CONCEPT_DIR, embeds)
     unused = embeds[UNUSED]
     concept = embeds[CONCEPT]
     pin = student.neu[UNUSED]
     origin = student.neu[CONCEPT]
     dist = float((unused - pin).norm())
-    target_norm = float(CONCEPT_DIR.norm())
+    target_norm = float(concept_dir.norm())
     hold = 1.0 - min(1.0, dist / target_norm)
     delta = concept - origin
     delta_norm = float(delta.norm())
     if delta_norm <= 1e-8:
         cos = 0.0
     else:
-        cos = float(F.cosine_similarity(delta.unsqueeze(0), CONCEPT_DIR.unsqueeze(0)))
+        cos = float(F.cosine_similarity(delta.unsqueeze(0), concept_dir.unsqueeze(0)))
     mag = max(0.0, 1.0 - abs(delta_norm / target_norm - 1.0))
     move = max(0.0, cos) * mag
     scale0 = student.embeds(0.0).detach()
@@ -241,7 +252,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
     if components is not None:
         opt_g, opt_d, gan, reg = components.bind(
             generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
-    real = _batch(CONCEPT_DIR)
+    real = _batch(_placed(CONCEPT_DIR, student.shared))
     pairs = hold_pairs(recipe.pairing)
     bcap_applied = 0
     for step in range(int(recipe.steps)):

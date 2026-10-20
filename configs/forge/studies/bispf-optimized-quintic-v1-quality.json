@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 46620,
+    "candidate_budget_seconds": 46620,
+    "id": "bispf-optimized-quintic-v1-quality"
+  },
+  "candidate": "bispf-optimized-quintic-v1",
+  "competing_explanation": "CPU, tiny and dense hosts intentionally retain native updates, so an ordinary suite tie alone cannot establish accelerated large-convolution quality. The separately frozen width-64 tasks test the changed path; held failures, per-task budgets and historical source identities remain visible.",
+  "control": {
+    "candidate_id": "bispf-v2",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "hypothesis": "The single global quintic convolution-rule delta preserves every incumbent BISPF pass on the unchanged ordinary task suite while reducing large-image update latency; direct wide-image diagnostics independently test the accelerated path.",
+  "id": "bispf-optimized-quintic-v1-quality",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bispf-v2",
+        "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+      },
+      "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 3,
+    "view": "discriminator_stability"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

@@ -401,6 +401,15 @@ batch-feature correction, convolution storage, attention, and LoRA. The
 [research report](../reports/toy100/batch-feature-init/README.md) holds the
 22/22 frozen-suite evidence for the construction this API reproduces.
 
+The historical `benchmarks.toy100 --init NAME` runner records its installed
+construction hook as `deterministic_init` in the run manifest and resolved
+config. This field is replay metadata: passing it to `train(config, output)`
+does not install an initializer. Direct benchmark callers must install the
+declared hook before model construction. Affine receipt audits rebuild that
+initializer on the recorded device in a separate interpreter and check the
+actual prior and generator tensors; named initializer source files are pinned
+in the run archive.
+
 ## GANTrainer
 
 `GANTrainer(recipe, G, D, *, prior=None, seed=0, latent_generator=None,
@@ -498,11 +507,12 @@ Schedule-free E22 and Atlas retain `total_steps=None`; pass `max_steps` to bound
 their execution without inserting a schedule. Their policy hooks use that
 external allowance without changing the formulation.
 
-`get_recipe()` constructs the selected **BCAP** research recipe: non-saturating
-loss, fixed capped critic gradients, DualNorm, direction blending and constant
+`get_recipe()` constructs the selected **optimized BISPF** research recipe: non-saturating
+loss, the Born-Infeld chord penalty, DualNorm, direction blending and constant
 G/E, D and prior rates `.012`, `.018` and `.03`. `GANTrainer` binds sampled
 rows and the protected adversarial objective automatically. Additive training
-noise, EMA serving, prior regularization and KA2 interventions are disabled.
+noise, EMA serving and KA2 interventions are disabled. SBNP prior regularization
+has weight `.01`.
 See [the selected settings and evidence](#recipes-and-defaults).
 
 `get_recipe("ka2")` retains **KA2** ([details](ka2.md)): Rp logistic, the KA2
@@ -593,9 +603,9 @@ init.deterministic_orthogonal_(G, seed=0)   # optional deterministic start
 init.deterministic_orthogonal_(D, seed=1)
 prior = init.deterministic_orthogonal_(recipe.make_prior()).to(device)
 gan = recipe.make_loss()
-spread = recipe.make_prior_regularizer()
-# Optimizers follow the shared trainer preset; BCAP uses DualNorm and direction blending.
+# Optimizers follow the shared trainer preset, including module update semantics.
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
+spread = recipe.make_prior_regularizer(prior=prior)
 base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
 penalty = recipe.make_critic_penalty(opt_d)
 ema_g = copy.deepcopy(G).eval().requires_grad_(False)
@@ -934,10 +944,117 @@ coefficient 1, cap 1, penalty every update, G/E step `.012`, D step `.018`
 Transport weights remain zero, `critic_step_mode="none"`, and
 `optimizer_svd_backend="native"`. Use
 `get_recipe("bcap", constraint_geometry_mode="none")` for the earlier winning
-DualNorm recipe. `get_recipe()` and the model-family factories inherit this
-BCAP preset. Explicit trainer presets remain fixed. The dataclass `Recipe()`
+DualNorm recipe. Pin `trainer="bcap"` on a model family to select these settings;
+the shared default is optimized BISPF. The dataclass `Recipe()`
 retains its KA2 field defaults for saved-configuration restoration.
 Each setting can be overridden explicitly.
+`optimizer_svd_backend="newton_schulz"` selects a separate numerical backend
+for annotated per-offset convolutions. It requires full DualNorm, positive
+`optimizer_smoothing`, and `optimizer_convolution="per_offset"`. It batches
+the smoothed polar computation with at most 32 augmented Newton-Schulz iterations,
+checking convergence every four iterations from iteration 8. Optimizer-local
+CUDA graphs replay four-iteration blocks. Orthogonality and the
+relation to the original gradient must pass numerical checks; failing slices
+fall back to native SVD. CPU kernels and kernels whose largest channel-matrix
+dimension is at most 32 also retain native SVD.
+Dense weights retain native SVD; prior, bias, learning rates, and momentum laws
+are unchanged. The accelerated branch omits native SVD's hard numerical-rank
+cutoff; finite iterations and floating-point rounding also differ. This option
+is a declared trainer change requiring its own quality evidence. Its checkpoints
+bind solver version 3 and reject earlier experimental solver states. CUDA graph
+caches are disposable execution state and are rebuilt after restoration. Native
+remains the bare `Recipe()` default.
+
+`optimizer_svd_backend="batched"` is the `bispf_optimized` CUDA execution backend for
+per-offset DualNorm convolutions. Channel matrices with both dimensions at
+most 32 use one batched native SVD per kernel, preserving the per-matrix rank
+cutoff and absolute smoothing. With the quintic rule, larger matrices replay
+the existing FP32 polynomial in optimizer-local CUDA graphs. Dense, bias,
+prior-row and CPU updates retain their original laws. Batched SVD may select
+different numerical kernels; graph input copies use contiguous storage, which
+can change reduction rounding for strided kernels. Bitwise agreement with the
+native backend is not promised. Checkpoints bind backend version 1; graph caches are rebuilt after
+restore and are omitted from copies and checkpoints.
+
+`optimizer_dense_profile="gram_fp64_guarded_v1"` explicitly selects the
+versioned guarded FP64 Gram/eigh profile for ordinary FP32 dense matrices:
+
+```python
+recipe = get_recipe("bispf_optimized",
+                    optimizer_dense_profile="gram_fp64_guarded_v1")
+# Direct component-loop equivalent:
+from particlegan.optim import NormalizedOptimizer
+optimizer = NormalizedOptimizer(parameters, family="dualnorm", momentum=0,
+                                smoothing=.001,
+                                dense_profile="gram_fp64_guarded_v1")
+```
+
+It requires full DualNorm, zero momentum, smoothing exactly `.001`, and the
+`native` or `batched` SVD backend. Only unannotated, two-dimensional strided
+FP32 CPU/CUDA parameters take this path. Annotated convolutions, vectors/biases
+and sampled-prior rows retain their laws, including batched/quintic convolution
+execution. No global precision, random-state or backend setting changes.
+
+The profile promotes **before** forming a scaled FP64 Gram matrix, then computes
+the full hard-thresholded, smoothed polar direction. The strict cutoff remains
+`max(G.shape) * eps_float32 * largest_singular_value`, with original dimensions
+and absolute damping `.001`. The direction is cast to FP32 before the existing
+parameter update. A fixed-margin error model checks orthogonality, factor
+residual, negative eigenvalues and cutoff ambiguity on that same decomposition.
+This screen is not an outward-rounded interval certificate or quality proof.
+
+`GramGuardError` rejects an unqualified direction; technical solver errors
+propagate. There is **no fallback, retry or transactional rollback**. Earlier
+leaves, clocks or protected state may already have changed. Discard the failed
+update and restore complete training state, including weights, optimizers,
+pending protection and caller-owned RNG/sampling state, before continuing.
+
+This is a numerical variant, with rounding that can differ from default SVD.
+`optimizer_dense_profile="default"` retains the existing path and omits the new
+field from legacy recipe/optimizer packets. Selected packets bind the profile
+and reject cross-profile restore. Restore saved resolved recipes; do not relabel
+an existing checkpoint. See the [qualification and reproduction commands](../reports/gram-profile/README.md).
+
+`training_precision="bf16_channels_last"` configures `GANTrainer` for
+BF16 training for CUDA generator/critic networks containing a Conv2d or
+ConvTranspose2d whose largest channel-matrix dimension exceeds 32. These
+networks use channels-last parameter storage and critic inputs. Only network
+forwards use autocast; outputs, losses, master parameters, optimizer arithmetic
+and prior regularization remain FP32. Sampling and evaluation run outside this
+training autocast. Smaller, CPU and nonconvolutional networks retain their
+original execution, as do CUDA devices without native BF16 support. This is a numerical trainer change requiring its own
+quality evidence. Caller-owned component loops do not acquire autocast merely
+by carrying this field; they must explicitly implement the declared policy.
+
+The public BISPF default selects both policies:
+
+```python
+recipe = get_recipe()
+# Previous 0.9.0 execution settings, including for matching native checkpoints:
+previous = get_recipe("bispf_optimized", optimizer_svd_backend="native",
+                      training_precision="float32")
+```
+
+See the [source-bound throughput study](../reports/forge/bispf-throughput/README.md)
+for measured workload limits and quality gates. Save resolved fields and restore
+them with `Recipe(**saved_fields)`; do not resolve a new default when resuming.
+
+`optimizer_convolution_rule="quintic"` selects a separately declared hybrid
+optimizer: large CUDA per-offset channel matrices use five fixed FP32 polynomial
+steps on `[M; optimizer_smoothing I]`, with coefficients
+`(3.4445, -4.775, 2.0315)` and final scaling by `1/1.21`. This bounded filter
+changes the update law; it is not an exact polar solve or PyTorch Muon. The
+experimental `"frobenius"` rule uses `M / sqrt(||M||_F^2 + smoothing^2)` and
+failed the direct wide-channel mode-coverage controls. Neither rule changes the
+original channel/kernel factor, momentum, learning rates or sampled-prior law.
+They require full DualNorm, per-offset convolution and the native SVD backend.
+Only CUDA kernels whose largest channel count per group exceeds 32 use the new
+rule. CPU, tiny convolution, dense, bias and prior paths retain native behavior.
+The default `"polar"` preserves existing serialization and native checkpoints;
+nondefault rules bind their own checkpoint versions. See the
+[BISPF investigation](../reports/forge/bispf-optimized/README.md) for measured
+quality and latency, scope and reproduction sources.
+
 When selecting another optimizer family, use `bcap_adam` as the base or also
 set `constraint_geometry_mode="none"`, `optimizer_smoothing=0.0`, and
 `optimizer_convolution="none"`. Direction blending requires zero-momentum full
@@ -1099,17 +1216,20 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 ## Recipes and defaults
 
 ```python
-get_recipe(**overrides)        # Current default: the selected BCAP leader.
+get_recipe(**overrides)        # Current default: optimized BISPF.
 get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
 get_recipe("ka2", **overrides) # Previous public trainer, explicitly pinned.
 get_recipe("ae_gan", trainer="ka2", **overrides) # Model with a pinned trainer.
 get_recipe("bcap", **overrides) # Fixed BCAP, direction blend, constant DualNorm rates.
 get_recipe("bcap_adam", **overrides) # Earlier fixed BCAP/native Adam control.
+get_recipe("bispf_optimized", **overrides) # Selected BISPF/DualNorm/quintic recipe.
+get_recipe("bispf", **overrides) # Original BISPF/formulation optimizer preset.
 get_recipe("halloween", **overrides) # Explicit historical optimizer/loss transfer.
 get_recipe("e22", **overrides) # Schedule-free E22 policy, explicit task settings.
 get_recipe("e22_routed", **overrides) # Conditional dense-bank paired adaptation.
 recipe.replace(**overrides)   # A new immutable Recipe.
 recipe.to_dict()              # Restorable fields; compatible defaults stay implicit.
+get_recipe_fields(**overrides) # Plain complete fields; validate with Recipe before training.
 Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 ```
 
@@ -1120,14 +1240,47 @@ To promote a future registered trainer preset, change this single line in
 [`particlegan/recipes.py`](../particlegan/recipes.py):
 
 ```python
-DEFAULT_RECIPE = "bcap"
+DEFAULT_RECIPE = "bispf_optimized"
 ```
 
 The selector affects `get_recipe()`, `get_recipe("gan")` and all model-family
 recipes. Explicit presets and `Recipe(**saved_fields)` remain independent of
 it. Save resolved recipes, rather than resolving the current default when
-resuming. The selected recipe matches the [current BCAP family](../reports/forge/families/bcap-pure.md);
-this owner-directed research promotion adds no calibration or robustness credit.
+resuming. The selected recipe matches the complete
+[`bispf-throughput-v1` candidate](../configs/forge/ideas/bispf-throughput-v1.json),
+apart from its public preset label. This owner-directed release choice retains
+the [19 passes and 11 failures](../reports/forge/bispf-throughput/README.md) in the
+30-task ordinary readout; it adds no calibration, universal architecture or
+natural-image quality claim. Observed matched DCGAN speedups are 1.02–2.15×
+over the 0.9.0 quintic default across six tasks, with unknown GPU contention.
+
+`bispf_optimized` uses the Born-Infeld chord penalty and zero-mean logit gauge,
+non-saturating loss, zero-momentum DualNorm, smoothing `.001`, direction blending,
+learned sampled-prior row updates and SBNP regularization at `.01`. Generator,
+critic and prior step sizes are `.012`, `.018` and `.03`. Both schedule floors
+are `1`, so rates stay constant. Batched SVD handles small CUDA convolution
+kernels; larger quintic kernels use CUDA graphs. Supported wide convolutional
+networks use BF16/channels-last training. CPU and dense transformer matrices
+retain the native polar/SVD rule; transformer
+throughput is a separate profiling question. `get_recipe("bispf")`,
+`get_recipe("bcap")` and bare `Recipe()` preserve their earlier meanings.
+
+`get_recipe_fields(name="gan", trainer=None, **overrides)` returns all declarative
+fields without constructing or validating runtime components. Configuration
+tools may load `particlegan/recipes.py` directly without importing Torch;
+ordinary `from particlegan import ...` still imports the runtime package.
+Preset and field names are checked, while `Recipe(**fields)` validates values.
+Persist the returned complete fields with the run so later defaults cannot
+change its training method.
+
+BISPF checkpoints include transport residual/data-scale moving averages and
+the exact thermal scale alongside optimizer counters. Earlier normalized and
+plain-Adam BISPF packets omitted those earned moments and are rejected with an
+explicit compatibility error; use their original package source to inspect or
+continue them. Historical formulation-optimizer packets with the moments but
+without an exact thermal scale retain their previous reconstruction behavior.
+New packets preserve that scale exactly. BCAP and KA2 observer packets keep their
+existing formats.
 
 Model families share the default optimizer, loss, penalty and schedule;
 `trainer="ka2"` pins an explicit trainer while retaining the selected model
@@ -1146,6 +1299,8 @@ and fields are rejected. Restore a complete saved configuration with
 | Name | Components and dimensions |
 | --- | --- |
 | `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 2, no sampling noise |
+| `bispf_optimized` | Selected BISPF recipe; DualNorm, optimized convolution filter, direction blending, SBNP `.01` and constant rates |
+| `bispf` | Original BISPF recipe with relativistic Sinkhorn loss and formulation optimizer |
 | `bcap` | Scalar GAN, 20,000 particles, latent dimension 2; fixed BCAP, direction blending and DualNorm at constant rates |
 | `bcap_adam` | Earlier pure fixed BCAP preset with native Adam and constant rates |
 | `halloween` | Scalar GAN; distinct G/D rates, moments and epsilon, dense TensorFlow-v1 Adam, least-squares labels `(-1,1,1)`, constant rates and zero critic penalty |
@@ -1230,6 +1385,7 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.012`, `1.5`, `2.5` |
 | `optimizer_family`, `optimizer_momentum`, `optimizer_smoothing` | `dualnorm`, `0`, `.001` |
 | `optimizer_convolution`, `optimizer_svd_backend` | `per_offset`, `native` |
+| `optimizer_convolution_rule` | `quintic` (CUDA wide convolutions only; native fallback elsewhere) |
 | `betas`, `d_betas`, `prior_betas` | `(0, .999)`, `None`, `None` (role overrides inherit shared betas) |
 | `eps`, `d_eps`, `prior_eps` | `1e-8`, `None`, `None` (role overrides inherit shared epsilon) |
 | `adam_variant`, `loss_labels` | `pytorch`, `(0,1,1)` |
@@ -1237,10 +1393,10 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `lr_decay_rate`, `lr_decay_steps`, `lr_decay_staircase` | `.96`, `50000`, `False` (exponential schedule only) |
 | `loss` | `non_saturating` (also `relativistic`, `hinge`, `wasserstein`, `least_squares`) |
 | `constraint_geometry_mode` | `direction_blend` |
-| `critic_formulation`, `reg_arm` | `bcap`, `b_cap` |
-| `reg_coeff`, `reg_kappa` | `1`, `1` (critic penalty strength and cap) |
+| `critic_formulation`, `reg_arm` | `bispf`, `None` |
+| `reg_coeff`, `reg_kappa` | `1`, `1` (Born-Infeld penalty strength and chord scale) |
 | `reg_every` | `1` (apply the penalty every k-th step at k× coefficient) |
-| `prior_update`, `prior_reg`, `prior_l2`, `ema_decay` | `learned`, `0`, `0`, `0` |
+| `prior_update`, `prior_regularizer`, `prior_reg`, `prior_l2`, `ema_decay` | `learned`, `sbnp`, `.01`, `0`, `0` |
 | `lr_anneal_start`, `lr_floor` | `.6`, `1` (constant prior rate) |
 | `network_lr_horizon_cap`, `network_lr_floor` | `None`, `1` (constant G/D rates) |
 | `reg_anchor_min_decay`, `reg_anchor_weight`, `critic_r1_real` | `.9`, `0`, `True` (inactive KA2 settings) |
@@ -1262,9 +1418,9 @@ caller.
 | `recipe.make_loss()` | `GANLoss(recipe.loss, labels=recipe.loss_labels)` (default non-saturating logistic) |
 | `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Recipe-selected optimizer for one (additional) critic (see below) |
-| `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Recipe-selected optimizer for generator-side params (see below) |
+| `recipe.make_generator_optimizer(params, *, modules=None, latent_table=None, direct_particles=None, **adam_kwargs)` | Recipe-selected optimizer for generator-side params; `modules` binds kernel semantics alongside custom groups |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
-| `recipe.make_prior_regularizer(prior=None, reference=None, **kwargs)` | Selected VICReg, Coulomb, SIGReg, moment tether or initial MMD penalty, with `weight=recipe.prior_reg` applied once. `prior` and `reference` are aliases for the same initialized prior or tuple of priors. |
+| `recipe.make_prior_regularizer(prior=None, reference=None, **kwargs)` | Selected prior penalty, including SBNP, with `weight=recipe.prior_reg` applied once. `prior` and `reference` are aliases for the same initialized prior or tuple of priors. |
 | `recipe.prior_regularizer_checkpoint(module)` | Optional state for an active stochastic prior regularizer |
 | `recipe.restore_prior_regularizer(module, state)` | Validate/restore regularizer state for exact caller-owned continuation |
 
@@ -1280,7 +1436,7 @@ The previous K3P critic replays through
 `benchmarks.legacy.recipe` ([K3P](k3p.md#replaying-k3p)).
 
 The following loop and Adam controller descriptions use the explicit KA2 recipe.
-The default BCAP recipe uses the protected-backward contract below.
+The default optimized BISPF recipe also uses the protected-backward contract below.
 
 ```python
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
@@ -1297,7 +1453,7 @@ torch.save({"G": G.state_dict(), "D": D.state_dict(), "D2": D2.state_dict(),
             "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict(), "opt_d2": opt_d2.state_dict()}, path)
 ```
 
-- The default formulation optimizers are `torch.optim.Adam` subclasses: `param_groups`, LR
+- The KA2 formulation optimizers are `torch.optim.Adam` subclasses: `param_groups`, LR
   schedulers, closures and `state_dict()`/`load_state_dict()` work as usual.
   Their `state_dict()` adds a `"regularizer"` entry holding the EMA critic,
   KA2 controller, counters, guard count and A2/direct-particle histories, so the
@@ -1339,6 +1495,41 @@ Additional Adam options such as `fused=True` or `eps=1e-8` are passed to both
 optimizers; configure learning rates and betas through the recipe. You can
 still construct optimizers yourself, including separate prior optimizers or
 additional parameter groups for learned noise.
+
+For architecture builders such as HNDL, pass the owning modules alongside
+custom groups. The groups remain the authority for which parameters and rates
+are updated; traversing `modules` supplies convolution layout without adding
+other graph parameters:
+
+```python
+groups = [{"params": generator_parameters, "role": "generator", "lr": recipe.lr}]
+opt_g = recipe.make_generator_optimizer(groups, modules=[generator, encoder])
+base_rates = [group["lr"] for group in opt_g.param_groups]
+# Conv kernels can split a caller's group. Apply schedules to every result.
+for group_index, group in enumerate(opt_g.param_groups):
+    scale = prior_scale if group["role"] in ("prior", "table") else network_scale
+    group["lr"] = base_rates[group_index] * scale  # retain one base rate per group
+```
+
+Omit absent modules from this list. Passing a single module as `params` already
+does this binding automatically. With explicit `modules`, frozen parameters
+are removed and empty groups are omitted; bare historical parameter groups
+retain their explicit ownership contract. Module-aware construction uses
+effective per-parameter `requires_grad` and does not initialize loaded values.
+For a frozen pretrained trunk and a trainable head, only the head enters the
+optimizer. A trainable pretrained trunk keeps its loaded values and receives
+the declared update law. Initialize only newly created heads/adapters before
+constructing optimizers.
+
+Freezing weights does not disable gradients to their inputs. Keep the forward
+graph when a fixed feature backbone must send gradients to an upstream network;
+manage train/eval mode separately for dropout and running buffers. Clear stale
+gradients when freezing parameters after construction. Rebuild or
+explicitly migrate optimizer groups and state when unfreezing parameters that
+were omitted at construction. Save trainability, modes, buffers, the resolved
+recipe and optimizer state in a caller-owned checkpoint. Custom high-rank
+parameters, sparse gradients and quantized trainable weights need an explicitly
+supported update law; this module binding does not infer one from tensor rank.
 
 ### Protected backward for BCAP component loops
 
@@ -1430,7 +1621,7 @@ preserved; float16/bfloat16 inputs compute in float32 and cast the result back.
 This replaces the former Newton--Schulz fast path for matrices larger than 1024,
 so large full-rank matrices can cost more per update. Conv2d/ConvTranspose2d
 weights require module bindings and `optimizer_convolution="per_offset"`,
-enabled by the `bcap` preset; unlabelled high-rank tensors
+enabled by the `bcap` and `bispf_optimized` presets; unlabelled high-rank tensors
 remain unsupported. The [convolution contract](dualnorm-convolution.md) specifies
 channel-group layout, kernel scaling, smoothing and checkpoint compatibility.
 Older checkpoints load their stored state, but continue

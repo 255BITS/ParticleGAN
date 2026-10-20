@@ -1,0 +1,202 @@
+{
+  "attempt_id": "840c42e2ef4341fd94951cbd1ab57f23",
+  "attempt_status": "completed",
+  "campaign_id": "bispf-throughput-quality-v1",
+  "candidate_id": "bispf-throughput-v1",
+  "candidate_revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "bispf-throughput-quality-v1",
+    "request": "8a415d710a71e5715c2296fb",
+    "revision": "5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "ad8a76e092ea2dc6aa9bafbcc3f616a026ce11492b085ec9732cc98f6cc552c8",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/840c42e2ef4341fd94951cbd1ab57f23/evidence.json",
+        "sha256": "638cea4aea5d1a6b3bdf7fe999fb78b476336e0921d24aa9e4907c88568b4b9e"
+      },
+      "request": {
+        "path": "reports/forge/attempts/840c42e2ef4341fd94951cbd1ab57f23/request.json",
+        "sha256": "b379bc5c6d942dcdecd80638d8e090b4566f946a24096a7fdd97160d1c716a72"
+      },
+      "result": {
+        "path": "reports/forge/attempts/840c42e2ef4341fd94951cbd1ab57f23/result.json",
+        "sha256": "cdc544e551488e3ed2a1e101de3cd9639b3f5d107f38b7dcac36d8d4cb6e0366"
+      }
+    },
+    "source_digest": "014d8783a85da5a2814e278d59f2e6749620d79fafdbb884cea66a0183e022f8",
+    "source_origin_commit": "bbd95834c3854d31397a6004977036b2d35af358"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "8a415d710a71e5715c2296fb",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.8",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "377fa0c07d0eabddafb52de96104ae363af9657f66a169c45e365701fa1375ce",
+      "cost": {
+        "adapter_loop_seconds": 25.405478163971566,
+        "adapter_seconds": 25.88136845000554,
+        "charged_task": "vector_unequal_mass",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 31.41837039508391,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 24.84341604076326,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.36974206275772303
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007737178937532008
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 24.465936799068004
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 26.968654652009718,
+        "wall_seconds": 31.41837039508391
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": -0.9176393389701843,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 1.7676393389701843
+          },
+          "component_min_eigen_ratio": {
+            "margin": -0.15,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.15,
+            "value": 0.0
+          },
+          "hq": {
+            "margin": 0.12729492187500002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.977294921875
+          },
+          "mass_tv": {
+            "margin": 0.09257812947034835,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.05742187052965164
+          },
+          "min_mass_ratio": {
+            "margin": -0.25,
+            "metric": "min_mass_ratio",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.25,
+            "value": 0.0
+          },
+          "sw1_normalized": {
+            "margin": 0.07825643323344621,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.10174356676655379
+          }
+        },
+        "passed": false,
+        "shortfall": 0.5132626154843499,
+        "status": "FAIL"
+      },
+      "execution_path": "public_trainer",
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.5852136090397835,
+        "component_core_min_eigen_ratio": 0.0,
+        "component_covariance_error": 1.7676393389701843,
+        "component_min_eigen_ratio": 0.0,
+        "covariance_error": 0.13873308897018433,
+        "hq": 0.977294921875,
+        "mass_tv": 0.05742187052965164,
+        "max_component_spill": 1.0,
+        "mean_error": 0.13277165591716766,
+        "min_mass_ratio": 0.0,
+        "resolved_core_covariance_error": 0.4469514787197113,
+        "resolved_core_min_eigen_ratio": 0.25853991508483887,
+        "resolved_max_component_spill": 0.04197530820965767,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.10174356676655379,
+        "target_scale": 1.7593294382095337
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "FAIL",
+      "task_id": "vector_unequal_mass"
+    }
+  ]
+}

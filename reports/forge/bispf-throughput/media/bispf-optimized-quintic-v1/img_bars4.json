@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "e71235a8c660ce7fc09bf007bcc401b8c18d57d8a443fdb73f80560e598eadbe",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "10da5193ab0f310feb15a25a87c36353d118a34442ec5c4396008cec0541b65b",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/bispf-throughput-20261017/queue/bispf-throughput-small-v1/3231b6fdd0c249a3ab7cf5110c97ea61/observed-images.pt": "323d8aa30703cb97a404a90e2418b3047084953d9da922608cc5202b3a41e6b5"
+  },
+  "task_id": "img_bars4"
+}

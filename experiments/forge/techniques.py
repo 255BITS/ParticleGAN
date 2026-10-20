@@ -126,6 +126,8 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.optimizer_family == "dualnorm"
     if name == "optimizer_convolution":
         return recipe.optimizer_family == "dualnorm"
+    if name == "optimizer_convolution_rule":
+        return recipe.optimizer_family == "dualnorm" and recipe.optimizer_convolution == "per_offset"
     if name == "optimizer_adam_lr":
         return recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}
     if name in {"betas", "amsgrad", "beta2_end"}:
@@ -169,9 +171,9 @@ def recipe_field_active(name, value, *, task=None):
         return prior_active and recipe.prior_regularizer == "coulomb" and recipe.prior_reg > 0
     if name in {"prior_reg_target_std", "prior_reg_eps"} and recipe.prior_reg == 0:
         return False
-    if name == "prior_reg_target_std" and recipe.prior_regularizer != "vicreg":
+    if name == "prior_reg_target_std" and recipe.prior_regularizer not in {"vicreg", "sbnp"}:
         return False
-    if name == "prior_reg_eps" and recipe.prior_regularizer not in {"vicreg", "moment_tether"}:
+    if name == "prior_reg_eps" and recipe.prior_regularizer not in {"vicreg", "moment_tether", "sbnp"}:
         return False
     if name in {"prior_sigreg_projections", "prior_sigreg_knots"}:
         return prior_active and recipe.prior_regularizer == "sigreg" and recipe.prior_reg > 0

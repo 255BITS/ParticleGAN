@@ -47,7 +47,8 @@ class SliderFinetuneTests(unittest.TestCase):
             self.assertEqual(float(grad[:, :8].abs().sum()), 0.)
             self.assertEqual(float(grad[:, 10:].abs().sum()), 0.)
             self.assertGreater(float(grad[:, 8:10].abs().sum()), 0.)
-            recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8, total_steps=4, batch_size=4)
+            # Match the explicitly pinned trainer in train_gym_slider_finetune.
+            recipe = get_recipe(trainer="ka2", prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8, total_steps=4, batch_size=4)
             bundle["R"].requires_grad_(True)
             opt_r = recipe.make_critic_optimizer(bundle["R"], ema_critic=copy.deepcopy(bundle["R"]))
             penalty = recipe.make_critic_penalty(opt_r)

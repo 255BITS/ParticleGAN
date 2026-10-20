@@ -15,33 +15,45 @@
     "default_adoption": false,
     "documents": {
       "audit.json": {
+        "archive_commit": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
+        "git_blob": "c4c979cfac2f912298144c07d118f099ec6c84f3",
         "path": "reports/forge/bcap-generator-idle/audit.json",
         "sha256": "ab73751f3b2dab74d5cd03726f9a4d8a8b86199b00d642cb4ae2948b10a3f02f",
         "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/audit.json"
       },
       "measurements.md": {
+        "archive_commit": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
         "committed_on_develop": false,
+        "git_blob": "e2ff5b953f8a850acde140b4f9f0e810b854271d",
         "path": "reports/forge/bcap-generator-idle/measurements.md",
         "sha256": "eaf3c073bc820ac50f53ca98c0e79fbc55fe9221f69bb0ca063e921de05a1556",
         "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/measurements.md"
       },
       "prior_evidence.json": {
+        "archive_commit": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
+        "git_blob": "67056a603560b2d7e7c3571b4213d614e438c94a",
         "path": "reports/forge/bcap-generator-idle/prior_evidence.json",
         "sha256": "3dfbe1c03722de2480d5fc8e539a1290544d889905ac45ca7266107f4e5c8a7c",
         "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/prior_evidence.json"
       },
       "registration.json": {
+        "archive_commit": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
+        "git_blob": "06d37ce9fc05d294eb057ced9e9686901813a74b",
         "path": "reports/forge/bcap-generator-idle/registration.json",
         "sha256": "eebc1c3f7cad929c681310c4794c369d72c698b443082c4229b43ffddf30c142",
         "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/registration.json"
       },
       "results.json": {
+        "archive_commit": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
         "committed_on_develop": false,
+        "git_blob": "41b4bd8430c79e8000b63135964eea4f2dd564a0",
         "path": "reports/forge/bcap-generator-idle/results.json",
         "sha256": "42aca75a27f128f6184f0aa367b65450c8a5726b399422f1aa400ca6b0b2e30c",
         "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/results.json"
       },
       "spec.json": {
+        "archive_commit": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
+        "git_blob": "b156ccd8b5c84a2070a4a9b48823393fed210b03",
         "path": "reports/forge/bcap-generator-idle/spec.json",
         "sha256": "e73b6edd94ad138d9ff1ee7e8e5633f3c13427e0611d7a5c8d862c70c5fa3b2a",
         "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/spec.json"
@@ -87,6 +99,8 @@
   "reuse": false,
   "schema_version": 1,
   "source": {
+    "archive_commit": "835e93900c2103eef24ed4b62e18fcdbf19e41bf",
+    "git_blob": "2a452e447404e4a60acfa091b16a5d4427aa059a",
     "path": "reports/forge/bcap-generator-idle/README.md",
     "sha256": "837619b39d7a466cb761be0bfab8cecc980907f5c26ef7be0e0aeee878ccd4e1",
     "url": "https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/README.md"

@@ -1,5 +1,7 @@
 # Stall-reach critic read (closed PR #107): falsified at Tier 1
 
+Historical report from [closed source PR](https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/README.md). Its runtime options, tests and workflow are archived on that source; they are not imported by this recall-only publication. Original numerical verdicts and source identities are unchanged.
+
 The rebuilt stall-reach read **fails `ring16_acquisition`**, which its matched
 leader control passes. The falsifier is therefore met, and the candidate never
 reaches Tier 2, so `mode_hold` (the primary hypothesis) stays unmeasured. The
@@ -30,7 +32,7 @@ lost control pass. The result is **FALSIFIED**: Tier 1 is 4/6, and
   leader recipe: non-saturating BCAP, direction blend, zero-momentum DualNorm
   with smoothing .001, lr .012, D×1.5, prior×2.5, `reg_kappa` 1. The sole
   declared trainer delta is `generator_critic_read: none → stall_reach`
-  ([spec](spec.json), [ideas](../../../configs/forge/ideas/bcap-stall-reach-base-v1.json)).
+  ([spec](spec.json), [ideas](https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/configs/forge/ideas/bcap-stall-reach-base-v1.json)).
 - **Protocol.** Protocol seed 0, the `deterministic_orthogonal` initializer and
   the `discriminator_stability` view at revision 9. Task architectures, data
   laws, priors, sampling, budgets, cadence and gates are unchanged.
@@ -80,7 +82,7 @@ Mechanism (`particlegan/critic_read.py`):
   plan forbids retries, and the verdict rests on the measured ring16 FAIL, so
   the control was not rerun.
 
-Public-API toy, run separately ([toy README](../../toy_audit/api_contract/stall_reach/README.md)):
+Public-API toy, run separately ([toy README](https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/toy_audit/api_contract/stall_reach/README.md)):
 on the 8-mode ring through `GANTrainer`, the off path ends with 7 modes and HQ
 .917 (PASS). stall_reach ends with 6 modes and HQ .747 (FAIL; gate is modes ≥ 7
 and HQ ≥ .90), with 1093/1200 updates stalled. Both arms oscillate on this toy,
@@ -120,6 +122,6 @@ which removes the mode-resolving gradient.
    unchanged control missed it. Future rounds should not run CPU-heavy work
    beside it.
 
-Full per-task measurements: [measurements.md](measurements.md) ·
-[results.json](results.json) · actual-training GIFs in [media/](media/README.md)
-· reproduction: [workflow.py](workflow.py).
+Full per-task measurements: [measurements.md](https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/measurements.md) ·
+[results.json](results.json) · actual-training GIFs in [media/](https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/media/README.md)
+· reproduction: [workflow.py](https://github.com/255BITS/ParticleGAN/blob/de93dbf48cabe6bb2913b3eccf93029655da5db9/reports/forge/stall-reach/workflow.py).

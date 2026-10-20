@@ -1,0 +1,2024 @@
+{
+  "coverage": [
+    {
+      "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+      "family": "bcap-pure",
+      "scientific_row_sha256": "b0f224b5a71b817ebbe48e0255c700abe31e0425f0d04667691948e800c86225",
+      "tasks": {
+        "ae_gan_hold": {
+          "attempt_id": "f9d406c6d8094cbeb0a1ac58195a7392",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "clockfree_audit": {
+          "attempt_id": null,
+          "reasons": [
+            "No measurement in the selected runtime cohort; later-tier qualification is unavailable."
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "clockfree_audit_measurement_v1": {
+          "attempt_id": "00dd0a0638e04570800c05467cc322cd",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "cover_leftover": {
+          "attempt_id": "068d08ffad624489a4021e889f717b98",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "five_word_joint_hold": {
+          "attempt_id": "e50a9a6089a341e2a0928a3626c04579",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "five_word_joint_smoke": {
+          "attempt_id": "f4de332cb7064361bfef8234ca595e77",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_smoke": {
+          "attempt_id": "caa3d24c5c4a4932ac091e48a676d12d",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_stability": {
+          "attempt_id": "86a293bfddba4d4b8f00849bc1e2a4af",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "grid100": {
+          "attempt_id": "49ebc06d3f0e4ff09ac35594972f0100",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "grid100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent grid100: FAIL",
+            "Required gate parent clockfree_audit: NOT_RUN"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "img_bars4": {
+          "attempt_id": "733ce20e8935417ea194f6b4fa005081",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "img_blobs4": {
+          "attempt_id": "e17c9c29396d47b7abc99b1c3bf35c8e",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "img_intensity2": {
+          "attempt_id": "570232c3111e4e83b7c0ab9ab86a8de0",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "img_stripes2": {
+          "attempt_id": "49382f1a6b7147e1a90531551dd241ba",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "mid_scale_identity": {
+          "attempt_id": "20615d5f83ef41bfb716a58c4cc9a945",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "mode_hold": {
+          "attempt_id": "82126b7103d4431f86ccd2e71983bed0",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "residual_student": {
+          "attempt_id": "9f184a955de342859ae3083151c2c5fa",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "ring16_acquisition": {
+          "attempt_id": "0ca3e63cc6f343fcaa142b2a71d8d212",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "ring_extension": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent ring_hold: NOT_RUN"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "ring_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "rotated100": {
+          "attempt_id": "7806fdf3455644689fcbada741c868cc",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "rotated100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent rotated100: FAIL",
+            "Required gate parent clockfree_audit: NOT_RUN"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "staggered100": {
+          "attempt_id": "b8c91ebd5f154a08853fc36f94baf82d",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "staggered100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent staggered100: FAIL",
+            "Required gate parent clockfree_audit: NOT_RUN"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "target_shift_recovery": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "trajectory": {
+          "attempt_id": "c780286bf93e49e7a67d99dbfbc3e9b0",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "two_pole": {
+          "attempt_id": "b8c0aec18d634a079dc933ccd8ccf99d",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "unipolar": {
+          "attempt_id": "a500e3cc2295425ab171d035c50438b0",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "unused_token_hold": {
+          "attempt_id": "31cc71d5b81e4b2da6fdacc69e65f05d",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "vector_anisotropic": {
+          "attempt_id": "1dd490f4f9d741b0859add0917995260",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "vector_overlap": {
+          "attempt_id": "5f14fa4d37124005910b5b2e9e5493f1",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "vector_spiral": {
+          "attempt_id": "653214d55bfc40c68c462546f65d257f",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "vector_two_broad": {
+          "attempt_id": "87b68a1ee5b54806abdbbe7912ea570a",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "vector_unequal_mass": {
+          "attempt_id": "d36783f1bfbe4ab3ac2ceb9ac45fbd1a",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "vector_unequal_width": {
+          "attempt_id": "aadbfbf5dc444ab7ac3663cc9f3870f9",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        }
+      }
+    },
+    {
+      "candidate_id": "atlas",
+      "family": "atlas",
+      "scientific_row_sha256": "cf5af2edf6bcd24f642f4843bdf8afa2ff3508e726545665a0d92093da4656c9",
+      "tasks": {
+        "ae_gan_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "clockfree_audit": {
+          "attempt_id": null,
+          "reasons": [
+            "clockfree_audit: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "clockfree_audit_measurement_v1": {
+          "attempt_id": null,
+          "reasons": [
+            "clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "cover_leftover": {
+          "attempt_id": null,
+          "reasons": [
+            "cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "five_word_joint_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "five_word_joint_smoke": {
+          "attempt_id": null,
+          "reasons": [
+            "five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "gaussian1d_smoke": {
+          "attempt_id": null,
+          "reasons": [
+            "gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "gaussian1d_stability": {
+          "attempt_id": null,
+          "reasons": [
+            "gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "grid100": {
+          "attempt_id": null,
+          "reasons": [
+            "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "grid100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "grid100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "img_bars4": {
+          "attempt_id": null,
+          "reasons": [
+            "img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "img_blobs4": {
+          "attempt_id": null,
+          "reasons": [
+            "img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "img_intensity2": {
+          "attempt_id": null,
+          "reasons": [
+            "img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "img_stripes2": {
+          "attempt_id": null,
+          "reasons": [
+            "img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "mid_scale_identity": {
+          "attempt_id": null,
+          "reasons": [
+            "mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "mode_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "residual_student": {
+          "attempt_id": null,
+          "reasons": [
+            "residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "ring16_acquisition": {
+          "attempt_id": null,
+          "reasons": [
+            "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "ring_extension": {
+          "attempt_id": null,
+          "reasons": [
+            "ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "ring_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "rotated100": {
+          "attempt_id": null,
+          "reasons": [
+            "rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "rotated100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "rotated100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "staggered100": {
+          "attempt_id": null,
+          "reasons": [
+            "staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "staggered100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "staggered100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "target_shift_recovery": {
+          "attempt_id": null,
+          "reasons": [
+            "target_shift_recovery: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "trajectory": {
+          "attempt_id": null,
+          "reasons": [
+            "trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "two_pole": {
+          "attempt_id": null,
+          "reasons": [
+            "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "unipolar": {
+          "attempt_id": null,
+          "reasons": [
+            "unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "unused_token_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_anisotropic": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_overlap": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_spiral": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_two_broad": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_unequal_mass": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_unequal_width": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        }
+      }
+    },
+    {
+      "candidate_id": "e22",
+      "family": "e22",
+      "scientific_row_sha256": "d57317019bd729bc8f8653a3f25a6b9d1c2d8f1e73a426d0b46233f263922114",
+      "tasks": {
+        "ae_gan_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "clockfree_audit": {
+          "attempt_id": null,
+          "reasons": [
+            "clockfree_audit: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "clockfree_audit_measurement_v1": {
+          "attempt_id": null,
+          "reasons": [
+            "clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "cover_leftover": {
+          "attempt_id": null,
+          "reasons": [
+            "cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "five_word_joint_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "five_word_joint_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "five_word_joint_smoke": {
+          "attempt_id": null,
+          "reasons": [
+            "five_word_joint_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "gaussian1d_smoke": {
+          "attempt_id": null,
+          "reasons": [
+            "gaussian1d_smoke: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "gaussian1d_stability": {
+          "attempt_id": null,
+          "reasons": [
+            "gaussian1d_stability: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "grid100": {
+          "attempt_id": null,
+          "reasons": [
+            "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "grid100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "grid100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "img_bars4": {
+          "attempt_id": null,
+          "reasons": [
+            "img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "img_blobs4": {
+          "attempt_id": null,
+          "reasons": [
+            "img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "img_intensity2": {
+          "attempt_id": null,
+          "reasons": [
+            "img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "img_stripes2": {
+          "attempt_id": null,
+          "reasons": [
+            "img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "mid_scale_identity": {
+          "attempt_id": null,
+          "reasons": [
+            "mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "mode_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "residual_student": {
+          "attempt_id": null,
+          "reasons": [
+            "residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "ring16_acquisition": {
+          "attempt_id": null,
+          "reasons": [
+            "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "ring_extension": {
+          "attempt_id": null,
+          "reasons": [
+            "ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "ring_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "rotated100": {
+          "attempt_id": null,
+          "reasons": [
+            "rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "rotated100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "rotated100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "staggered100": {
+          "attempt_id": null,
+          "reasons": [
+            "staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "staggered100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "staggered100_14k: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "target_shift_recovery": {
+          "attempt_id": null,
+          "reasons": [
+            "target_shift_recovery: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "trajectory": {
+          "attempt_id": null,
+          "reasons": [
+            "trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "two_pole": {
+          "attempt_id": null,
+          "reasons": [
+            "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "unipolar": {
+          "attempt_id": null,
+          "reasons": [
+            "unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "unused_token_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_anisotropic": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_overlap": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_spiral": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_two_broad": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_unequal_mass": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "vector_unequal_width": {
+          "attempt_id": null,
+          "reasons": [
+            "vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        }
+      }
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-release07-gan-v3-v1",
+      "family": "release07-gan-v3",
+      "scientific_row_sha256": "aa55e46cc88a7b3dad38c403506b767801db6f383cf658d14eb530ae9210d25f",
+      "tasks": {
+        "ae_gan_hold": {
+          "attempt_id": "189b8573337541e1882ac34fb1824441",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "clockfree_audit": {
+          "attempt_id": null,
+          "reasons": [
+            "learning-rate annealing depends on completed steps and horizon"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "clockfree_audit_measurement_v1": {
+          "attempt_id": "12512c65969f45e8b64e9b21db88e31e",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "cover_leftover": {
+          "attempt_id": "4b3975c2a7fa434fb2ce336f88493e74",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "five_word_joint_hold": {
+          "attempt_id": "b018a0f93d184d34ab1d8410f44d1de9",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "five_word_joint_smoke": {
+          "attempt_id": "73a8af9f6a2348c58cb059d5d6766295",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_smoke": {
+          "attempt_id": "971a45c5a76646b8a89322f4a3315c69",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_stability": {
+          "attempt_id": "b5528e38af51420f9fb1f9640f05d1e3",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "grid100": {
+          "attempt_id": "41397b45ef544d1a8266b08e09b9598c",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "grid100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent grid100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "img_bars4": {
+          "attempt_id": "b2b382c2a5724f329bc14e199a7b0b5b",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "img_blobs4": {
+          "attempt_id": "99900a4d64a14d84bb373d78fe304857",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "img_intensity2": {
+          "attempt_id": "5a1510a83e6942a1926101a408541eae",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "img_stripes2": {
+          "attempt_id": "37ef975210fa4e458e068287613f19c8",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "mid_scale_identity": {
+          "attempt_id": "78b884d85820420d91618ac626a6c64b",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "mode_hold": {
+          "attempt_id": "1c15e255217b4244be7e542e08287cab",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "residual_student": {
+          "attempt_id": "afe8909976194aa2bfc5c99dad83159d",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "ring16_acquisition": {
+          "attempt_id": "426b64c6126e433eb97aedab98d5b179",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "ring_extension": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent ring_hold: NOT_RUN"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "ring_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "rotated100": {
+          "attempt_id": "0c25b00f24834f0384b6b58609e9f94d",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "rotated100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent rotated100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "staggered100": {
+          "attempt_id": "bc03a9fa49354738be7cacdccfb23717",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "staggered100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent staggered100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "target_shift_recovery": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "trajectory": {
+          "attempt_id": "c2013eaba1d2466fbfde47924ea1c986",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "two_pole": {
+          "attempt_id": "ec2040278df846ea82edd557f2e4f6ff",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "unipolar": {
+          "attempt_id": "55aeb12c69124e19aec8ea40ea4c057b",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "unused_token_hold": {
+          "attempt_id": "9b5bc4b2ce7046abb604eec946b53136",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "vector_anisotropic": {
+          "attempt_id": "c116b197c54348399a3ee53c6b29b48b",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "vector_overlap": {
+          "attempt_id": "e48d376b1f7f4e81aeb63534088678ce",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "vector_spiral": {
+          "attempt_id": "61a2110ce30f44c4909d380fd1881938",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_two_broad": {
+          "attempt_id": "c59446a0537f401cbefa35747f5fe734",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_unequal_mass": {
+          "attempt_id": "2dab03b6584d43b6b58820d8742fd494",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "vector_unequal_width": {
+          "attempt_id": "e5bb0691a94e4eaa86e8caac260f4d9b",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        }
+      }
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-k3p-v1",
+      "family": "k3p",
+      "scientific_row_sha256": "dedf84c53433de3109f1f5cf0c163cf9ed1a18b94cb17243c76e5e2d9082a097",
+      "tasks": {
+        "ae_gan_hold": {
+          "attempt_id": "51b38d42e6154a828b7683de6279448b",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "clockfree_audit": {
+          "attempt_id": null,
+          "reasons": [
+            "learning-rate annealing depends on completed steps and horizon",
+            "input-noise annealing depends on completed steps and horizon",
+            "output-noise warmup depends on completed steps and horizon",
+            "critic guard releases at a fixed minimum update count"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "clockfree_audit_measurement_v1": {
+          "attempt_id": "5adadcfcc5b94ea8b6f38d430f5106cc",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "cover_leftover": {
+          "attempt_id": "a3313905e33b4512aa51eedec04aff5d",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "five_word_joint_hold": {
+          "attempt_id": "abc9033cf537422d99bce34d6b3038f4",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "five_word_joint_smoke": {
+          "attempt_id": "99eecf2b8a434422a80d980f2a260f03",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_smoke": {
+          "attempt_id": "f98c82adb3c649e88477311c729a3e0e",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_stability": {
+          "attempt_id": "0dadb4d518ee4c13a2fefc6af01e1bde",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "grid100": {
+          "attempt_id": "07d2ec90ff834e03b9dbc7ece0403d0e",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "grid100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent grid100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "img_bars4": {
+          "attempt_id": "20588db8759149ad9d2b441309cc02d3",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "img_blobs4": {
+          "attempt_id": "26221ffa3624412d923a1e2b727419fc",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "img_intensity2": {
+          "attempt_id": "2c39e37966264bf6adc5680f05e84321",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "img_stripes2": {
+          "attempt_id": "58db9548c72d4381a8e8c420c2e56627",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "mid_scale_identity": {
+          "attempt_id": "4cbcc2fff8be48a0976298913c7b02f1",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "mode_hold": {
+          "attempt_id": "466bca0fd8914d359ed14a6cceafdc8c",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "residual_student": {
+          "attempt_id": "1387870dc563405ab9a24bad41652c79",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "ring16_acquisition": {
+          "attempt_id": "8dcd5de8cab147149e8f2bc3c13a2230",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "ring_extension": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent ring_hold: NOT_RUN"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "ring_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "rotated100": {
+          "attempt_id": "878353e582104073a3c082556da5e349",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "rotated100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent rotated100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "staggered100": {
+          "attempt_id": "c45d4990612945269639ba91d32f0db7",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "staggered100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent staggered100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "target_shift_recovery": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "trajectory": {
+          "attempt_id": "7e3a21c2fd29479698c655610fd1a8fc",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "two_pole": {
+          "attempt_id": "2902e49c05ca419cb2aa1c4e42d5c957",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "unipolar": {
+          "attempt_id": "4bbfe5e51262452fb3e2186844bfe8cc",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "unused_token_hold": {
+          "attempt_id": "dc7d28df5914444da53e7393fcd4040d",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "vector_anisotropic": {
+          "attempt_id": "32ed326c1fdb4119a659bfc9fca1525c",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_overlap": {
+          "attempt_id": "01772bc56f3745b29a315cf5ccc49556",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_spiral": {
+          "attempt_id": "38ffc86773674ba6a22f1bc3637ea09b",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_two_broad": {
+          "attempt_id": "5e3fe633e9fa4344ad1cc02ed6208f65",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_unequal_mass": {
+          "attempt_id": "dbf6a0f0c90146d0889191ada183b191",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "vector_unequal_width": {
+          "attempt_id": "5138663eef71422380d8b4adaecf3ecf",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        }
+      }
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-ka2-v1",
+      "family": "ka2",
+      "scientific_row_sha256": "ca801fd447fad45af6efbdf9338cf94bbf2eec311071887376add041202267e7",
+      "tasks": {
+        "ae_gan_hold": {
+          "attempt_id": "df10c2bc3cc84cd19029a0e2b24ce4e4",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "clockfree_audit": {
+          "attempt_id": null,
+          "reasons": [
+            "learning-rate annealing depends on completed steps and horizon",
+            "input-noise annealing depends on completed steps and horizon",
+            "output-noise warmup depends on completed steps and horizon",
+            "KA2 switches from pure A to blended penalty at call 800",
+            "critic guard releases at a fixed minimum update count"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "clockfree_audit_measurement_v1": {
+          "attempt_id": "03e41cd988964ae595209316567132d6",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "cover_leftover": {
+          "attempt_id": "d69bec8bc94b4ab5b03b704533cd981e",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "five_word_joint_hold": {
+          "attempt_id": "0ac781cdc7714b75aa1133595609592a",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "five_word_joint_smoke": {
+          "attempt_id": "89265e4e89d24ae3b9cfb7346b6ea1d2",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_smoke": {
+          "attempt_id": "96d60f12b5a248c9837dd769a69864cf",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_stability": {
+          "attempt_id": "bec7eee472f349ca80d85ab132dc994a",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "grid100": {
+          "attempt_id": "9834ce25cf3241ebb0eb892a1b37b7fc",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "grid100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent grid100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "img_bars4": {
+          "attempt_id": "ec09c37e438f48fcac23f8307420c8cd",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "img_blobs4": {
+          "attempt_id": "2c689ca05f4c418593c511dd668b615c",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "img_intensity2": {
+          "attempt_id": "5da18d12182347ffacb1e5c78ddb1631",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "img_stripes2": {
+          "attempt_id": "b1cefdeb7bdf49c1a9de6ccb04b3791f",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "mid_scale_identity": {
+          "attempt_id": "1756c15fd816401a9f1483d8b46dd2d7",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "mode_hold": {
+          "attempt_id": "8dbf6eefd6234fe4943fef208dd74b11",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "residual_student": {
+          "attempt_id": "7d2145a6635d4d4c83d0630762105d52",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "ring16_acquisition": {
+          "attempt_id": "5c7cd28c88684764b85cc9bcc4d5a5e3",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "ring_extension": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent ring_hold: NOT_RUN"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "ring_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "rotated100": {
+          "attempt_id": "a1c9251650434d05a0ab12a9352663ef",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "rotated100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent rotated100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "staggered100": {
+          "attempt_id": "dbf06b2b60f64b27a2da8cd3bbe5fdca",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "staggered100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent staggered100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "target_shift_recovery": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "trajectory": {
+          "attempt_id": "41437c2e1bc844e4a168f99ec94573ac",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "two_pole": {
+          "attempt_id": "e2790a2add2b4d32b78f104d48e51789",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "unipolar": {
+          "attempt_id": "9ab1b8aab44c4acc9c4eb9a26c6b21eb",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "unused_token_hold": {
+          "attempt_id": "9b389d1f0706465db68f2b90d6ce1893",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "vector_anisotropic": {
+          "attempt_id": "1a12ed39500b42e89bfd86406320cca8",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_overlap": {
+          "attempt_id": "76ee4df17d4d47b9b2d1d5a8f4539dbf",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "vector_spiral": {
+          "attempt_id": "462f536ffe6a4ede93934cee445e83b1",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_two_broad": {
+          "attempt_id": "1c559106f15047e595ea369821446dc8",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_unequal_mass": {
+          "attempt_id": "a8c777493ea34f6f9ca830a4807306a0",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "vector_unequal_width": {
+          "attempt_id": "eda18e925bce4511bce7d9a2ae444776",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        }
+      }
+    },
+    {
+      "candidate_id": "recipe-prior-refactor-r1r2-v1",
+      "family": "r1r2",
+      "scientific_row_sha256": "72faf767307d08e16d035a56b816b15b163c98333c50986ca71521ac8aec5a77",
+      "tasks": {
+        "ae_gan_hold": {
+          "attempt_id": "a3ba7157a9104cf5a68644751cc33df9",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "clockfree_audit": {
+          "attempt_id": null,
+          "reasons": [
+            "learning-rate annealing depends on completed steps and horizon"
+          ],
+          "scope": null,
+          "status": "BLOCKED"
+        },
+        "clockfree_audit_measurement_v1": {
+          "attempt_id": "12bc543e8b564690953453bfaf8720cc",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "cover_leftover": {
+          "attempt_id": "a883c535504e4f0188c158be61876122",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "five_word_joint_hold": {
+          "attempt_id": "d765aa2da2d1434b9234f7114309c60e",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "five_word_joint_smoke": {
+          "attempt_id": "8432785e8a6645378778b83f1f457819",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_smoke": {
+          "attempt_id": "361479682c4a40289d84aeef4f7e1c38",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "gaussian1d_stability": {
+          "attempt_id": "5a0746cd97484a21bb8796354083bffc",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "grid100": {
+          "attempt_id": "ae8e6b7d3d1040d3b7a73f5f4d6b92b3",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "grid100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent grid100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "img_bars4": {
+          "attempt_id": "ef8c8eeb03b64c47bc53cd3c1c51698f",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "img_blobs4": {
+          "attempt_id": "126ba972e468474ab4b7508a3a4a85b6",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "img_intensity2": {
+          "attempt_id": "a6e36eed204e4f46b30757e4623d8e9d",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "img_stripes2": {
+          "attempt_id": "76f146d7e62f4ef98cabed152e6bdc80",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "mid_scale_identity": {
+          "attempt_id": "674a3672f7194c23986f16aec2649fb7",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "mode_hold": {
+          "attempt_id": "b201c26bac404761b821819fede1b5e5",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "residual_student": {
+          "attempt_id": "6933434076f44383838e83886b8d6dfc",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "ring16_acquisition": {
+          "attempt_id": "a54bc96e82f34c9e98e7fa1f1d268a33",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "FAIL"
+        },
+        "ring_extension": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent ring_hold: NOT_RUN"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "ring_hold": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "rotated100": {
+          "attempt_id": "2518f074dc994db5afb4945717696c42",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "rotated100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent rotated100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "staggered100": {
+          "attempt_id": "60423cb79fb44a31bdd168ada7d512e5",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "staggered100_14k": {
+          "attempt_id": null,
+          "reasons": [
+            "Required checkpoint parent staggered100: FAIL",
+            "Required gate parent clockfree_audit: BLOCKED"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "target_shift_recovery": {
+          "attempt_id": null,
+          "reasons": [
+            "Required gate parent mode_hold: FAIL"
+          ],
+          "scope": null,
+          "status": "NOT_RUN"
+        },
+        "trajectory": {
+          "attempt_id": "96bccd212dd64ef3bd9f10b624d7aa51",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "two_pole": {
+          "attempt_id": "f9becf6fada64aad9c1f2dbf4851d510",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "unipolar": {
+          "attempt_id": "b08ee8fd3937468383335c604acac7a1",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "unused_token_hold": {
+          "attempt_id": "3744477eabd649c4b83a5f9f1e72dbdd",
+          "reasons": [],
+          "scope": "ordinary",
+          "status": "PASS"
+        },
+        "vector_anisotropic": {
+          "attempt_id": "3d23616361024fc3bf6be19493100eab",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_overlap": {
+          "attempt_id": "03c095b4e7b347148ec00ec51885ed01",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "vector_spiral": {
+          "attempt_id": "88d00849f6d94cdea2376c5c323c41ca",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_two_broad": {
+          "attempt_id": "b61e13c3c4ce4498a65c4af27250a0e4",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "PASS"
+        },
+        "vector_unequal_mass": {
+          "attempt_id": "7f469e1fedb0448f95e6ed86fe493a4e",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        },
+        "vector_unequal_width": {
+          "attempt_id": "d89713cf1071452b956987a173eb0bf0",
+          "reasons": [],
+          "scope": "research_diagnostic",
+          "status": "FAIL"
+        }
+      }
+    }
+  ],
+  "diagnostic_rows": [
+    {
+      "family": "release07-gan-v3",
+      "label": "Selected recipe Tier 2 diagnostics; seed 0",
+      "requirements": {
+        "1": [],
+        "2": [
+          "cover_leftover",
+          "five_word_joint_hold",
+          "gaussian1d_stability",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "unipolar",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "3": []
+      },
+      "runtime": "original recorded cohort",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "cover_leftover": "PASS",
+        "five_word_joint_hold": "FAIL",
+        "gaussian1d_stability": "FAIL",
+        "grid100": "FAIL",
+        "img_bars4": "PASS",
+        "img_blobs4": "FAIL",
+        "img_intensity2": "PASS",
+        "img_stripes2": "FAIL",
+        "mid_scale_identity": "PASS",
+        "mode_hold": "FAIL",
+        "residual_student": "PASS",
+        "rotated100": "FAIL",
+        "staggered100": "FAIL",
+        "trajectory": "PASS",
+        "unipolar": "PASS",
+        "vector_anisotropic": "FAIL",
+        "vector_overlap": "FAIL",
+        "vector_spiral": "PASS",
+        "vector_two_broad": "PASS",
+        "vector_unequal_mass": "FAIL",
+        "vector_unequal_width": "FAIL"
+      }
+    },
+    {
+      "family": "k3p",
+      "label": "Selected recipe Tier 2 diagnostics; seed 0",
+      "requirements": {
+        "1": [],
+        "2": [
+          "cover_leftover",
+          "five_word_joint_hold",
+          "gaussian1d_stability",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "unipolar",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "3": []
+      },
+      "runtime": "original recorded cohort",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "cover_leftover": "PASS",
+        "five_word_joint_hold": "PASS",
+        "gaussian1d_stability": "FAIL",
+        "grid100": "FAIL",
+        "img_bars4": "FAIL",
+        "img_blobs4": "FAIL",
+        "img_intensity2": "FAIL",
+        "img_stripes2": "PASS",
+        "mid_scale_identity": "PASS",
+        "mode_hold": "FAIL",
+        "residual_student": "PASS",
+        "rotated100": "FAIL",
+        "staggered100": "FAIL",
+        "trajectory": "PASS",
+        "unipolar": "PASS",
+        "vector_anisotropic": "PASS",
+        "vector_overlap": "PASS",
+        "vector_spiral": "PASS",
+        "vector_two_broad": "PASS",
+        "vector_unequal_mass": "FAIL",
+        "vector_unequal_width": "FAIL"
+      }
+    },
+    {
+      "family": "ka2",
+      "label": "Selected recipe Tier 2 diagnostics; seed 0",
+      "requirements": {
+        "1": [],
+        "2": [
+          "cover_leftover",
+          "five_word_joint_hold",
+          "gaussian1d_stability",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "unipolar",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "3": []
+      },
+      "runtime": "original recorded cohort",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "cover_leftover": "PASS",
+        "five_word_joint_hold": "PASS",
+        "gaussian1d_stability": "FAIL",
+        "grid100": "FAIL",
+        "img_bars4": "FAIL",
+        "img_blobs4": "FAIL",
+        "img_intensity2": "FAIL",
+        "img_stripes2": "PASS",
+        "mid_scale_identity": "PASS",
+        "mode_hold": "FAIL",
+        "residual_student": "PASS",
+        "rotated100": "FAIL",
+        "staggered100": "FAIL",
+        "trajectory": "PASS",
+        "unipolar": "PASS",
+        "vector_anisotropic": "PASS",
+        "vector_overlap": "FAIL",
+        "vector_spiral": "PASS",
+        "vector_two_broad": "PASS",
+        "vector_unequal_mass": "FAIL",
+        "vector_unequal_width": "FAIL"
+      }
+    },
+    {
+      "family": "r1r2",
+      "label": "Selected recipe Tier 2 diagnostics; seed 0",
+      "requirements": {
+        "1": [],
+        "2": [
+          "cover_leftover",
+          "five_word_joint_hold",
+          "gaussian1d_stability",
+          "grid100",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "img_stripes2",
+          "mid_scale_identity",
+          "mode_hold",
+          "residual_student",
+          "rotated100",
+          "staggered100",
+          "trajectory",
+          "unipolar",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width"
+        ],
+        "3": []
+      },
+      "runtime": "original recorded cohort",
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "cover_leftover": "PASS",
+        "five_word_joint_hold": "FAIL",
+        "gaussian1d_stability": "FAIL",
+        "grid100": "FAIL",
+        "img_bars4": "PASS",
+        "img_blobs4": "PASS",
+        "img_intensity2": "PASS",
+        "img_stripes2": "FAIL",
+        "mid_scale_identity": "PASS",
+        "mode_hold": "FAIL",
+        "residual_student": "FAIL",
+        "rotated100": "FAIL",
+        "staggered100": "FAIL",
+        "trajectory": "FAIL",
+        "unipolar": "PASS",
+        "vector_anisotropic": "PASS",
+        "vector_overlap": "FAIL",
+        "vector_spiral": "PASS",
+        "vector_two_broad": "PASS",
+        "vector_unequal_mass": "FAIL",
+        "vector_unequal_width": "FAIL"
+      }
+    },
+    {
+      "family": "bcap-pure",
+      "label": "Strict clock-free audit; separate Torch 2.13 cohort",
+      "requirements": {
+        "1": [],
+        "2": [],
+        "3": [
+          "clockfree_audit"
+        ]
+      },
+      "runtime": {
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "torch": "2.13.0+cu126"
+        },
+        "python": "3.12.13",
+        "system": "Linux"
+      },
+      "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+      "tasks": {
+        "clockfree_audit": "PASS"
+      }
+    }
+  ],
+  "inputs": {
+    "reports/forge/recipe-prior-refactor/publication/results.json": "bd7f939d195c7e35f615412e4f1aced921a806f4da08ba615350e573e7b0678c",
+    "reports/forge/tier-coverage-20261014/clockfree-receipt.json": "6462db0705d16407ad606c0cfe0b86447706e3a29f52aa8a7e0ec63febae8333",
+    "reports/forge/tier-coverage-20261014/collect.py": "2d4b45e60d07b95b90bf2572bca6acfbf53df8bd4f580870d3910ce860b5d7aa",
+    "reports/forge/tier-coverage-20261014/media/clockfree_audit.gif": "96ae77821247427d4586b5322c4be2d5a014c8c4f62e9a8144f99429a6dad000",
+    "reports/forge/tier-coverage-20261014/media/clockfree_audit.json": "2ca74c1c7c25894794faa63075c75a578174ea960a3d8744f781346961613d7d",
+    "reports/forge/tier-coverage-20261014/preflight.json": "3f2fbd72437f4ffc717f47655ae70110329bba2aad37a1569be16602f616140d",
+    "reports/forge/tier-coverage-20261014/preflight.py": "5e37028f2c3a90eb93e8beac6f027e4b748999af610e588550efe9da1aba1c97"
+  },
+  "maximum_concurrent_tests": 4,
+  "maximum_tests_per_gpu": 2,
+  "new_attempts": 1,
+  "new_paid_seconds": 8.569606298027793,
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "scope": "selected_family_diagnostic_coverage"
+}

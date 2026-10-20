@@ -158,22 +158,31 @@ def _recorded_qualification(request, assignments, rows):
         signatures = {stable_hash({key: row.get(key) for key in ("gate_status", "metrics", "reasons")}) for row in recorded}
         statuses[assignment["task"]] = ("NOT_RUN" if not recorded else "INVALID" if len(signatures) != 1
                                         else recorded[0].get("gate_status", "INVALID"))
-    qualified, status = 0, "INCOMPLETE"
+    qualified, status, stopped = 0, "INCOMPLETE", None
     tiers = sorted({a["qualification_tier"] for a in assignments})
     if not tiers or tiers != list(range(1, max(tiers) + 1)):
         return {"status": "UNAVAILABLE", "qualified_tier": None, "task_statuses": statuses}
     for tier in tiers:
         required = [statuses[a["task"]] for a in assignments if a["qualification_tier"] == tier and a["importance"] == "required"]
         if not required:
+            # A held-only tier neither passes nor stops progression; any other
+            # tier without a required task has no recorded qualification rule.
+            if any(a["qualification_tier"] == tier and a["importance"] == "held" for a in assignments):
+                continue
             return {"status": "UNAVAILABLE", "qualified_tier": None, "task_statuses": statuses}
         if all(value == "PASS" for value in required):
             qualified = tier
             status = "PASS"
         else:
             status = next((value for value in ("FAIL", "INVALID", "BLOCKED", "INCOMPLETE", "NOT_RUN") if value in required), "INVALID")
+            stopped = tier
             break
+    if stopped is None and qualified != tiers[-1]:
+        # Counted tiers passed (or none exist) but the capped view ends in a held tier.
+        status = "HELD"
     return {"status": "INCOMPLETE" if status == "NOT_RUN" else status,
-            "qualified_tier": qualified, "task_statuses": statuses}
+            "qualified_tier": qualified, "task_statuses": statuses,
+            **({"stopped_tier": stopped} if stopped is not None else {})}
 
 
 def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
@@ -267,7 +276,7 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
         request = entry["request"]
         if diagnostic_evidence_scope(request) or request.get("promotion"):
             continue
-        if type(request.get("through_tier")) is not int or request["through_tier"] not in (1, 2, 3):
+        if type(request.get("through_tier")) is not int or isinstance(request.get("through_tier"), bool) or request["through_tier"] < 1:
             unavailable_caps += 1
             continue
         assignments = [a for a in request["view"]["assignments"] if a["qualification_tier"] <= request["through_tier"]]
@@ -295,7 +304,8 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
         used_attempts.update(a["attempt_id"] for a in attempts if any(r.get("compatibility_key") in keys for r in a["task_results"]))
         values = [costs.get(name) for name in used_attempts]
         cost = sum(values) if values and all(v is not None for v in values) else None
-        rejected_tier = verdict.get("qualified_tier", 0) + 1 if verdict["status"] == "FAIL" else None
+        rejected_tier = (verdict.get("stopped_tier", verdict.get("qualified_tier", 0) + 1)
+                         if verdict["status"] == "FAIL" else None)
         avoided_keys = set()
         avoided_tasks = []
         if rejected_tier is not None and location is not None:

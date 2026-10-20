@@ -110,7 +110,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [release07-gan-v3-cloud-v1](../../../configs/forge/ideas/release07-gan-v3-cloud-v1.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 9. Other view rows below are navigation over recorded task evidence, not recomputed qualification. Their counts follow the declared view revisions (adaptation 4, clockfree_continuous 5, discriminator_stability 14, formulation_comparison 3, host_profile_transfer 6, quality_coverage 4); the recorded qualification keeps discriminator_stability revision 9 until new ordinary evidence is registered.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -123,22 +123,23 @@ Selection: historical_incumbent. Retain the exact recorded incumbent; its outcom
 
 </details>
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
-| --- | ---: | ---: | ---: | ---: |
-| [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation) | [0(*)/3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) | [0(*)/19](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) | [0(*)/1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3) | [0(*)/23](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation) |
-| [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) | [0(*)/4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) | [0(*)/19](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) | [0(*)/7](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | [0(*)/30](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) |
-| [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [0(*)/6](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | [0(*)/21](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | [0(*)/2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) | [0(*)/29](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) |
-| [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) | [0(*)/3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) | [0(*)/19](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) | [0(*)/2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) | [0(*)/24](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) |
-| [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) | [0(*)/3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) | [0(*)/19](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) | [0(*)/2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) | [0(*)/24](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) |
-| [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage) | [0(*)/3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | [0(*)/19](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-3) | [0(*)/22](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage) |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests | Held (measured, not counted) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) | [0/1 (1 not run)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-4) | [0/16 (1 not run, 15 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
+| [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) | [0/4 (1 not run, 3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) | [0/6 (5 not run, 1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-4) | [0/22 (6 not run, 16 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
+| [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [0/13 (9 not run, 4 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | [0/16 (4 not run, 12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | [0/1 (1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | [0/30 (13 not run, 17 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability) | [0/13 (6 not run, 7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
+| [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) | [0/1 (1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-4) | [0/16 (16 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
+| [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) | [0/1 (1 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-4) | [0/16 (16 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
+| [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage) | [0/3 (3 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | [0/12 (12 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-4) | [0/15 (15 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage) | [0/7 (7 incompatible)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-held) |
 
 Separate cohort coverage (excluded from family totals):
 
-| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
-| --- | ---: | ---: | ---: | ---: |
-| [tier1_policy_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage) | [0(*)/7](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-2) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-3) | [0(*)/7](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage) |
+| View | Tier 1 tests | Tier 2 tests | Tier 3 tests | Tier 4 tests | Total distinct tests |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| [lazy_cadence_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-2) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-4) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage) |
+| [tier1_policy_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage) | [0/7 (7 not run)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-2) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-3) | [0/0](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-4) | [0/7 (7 not run)](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage) |
 
-(*) means at least one required experiment has no recorded execution, including preflight blockers. PASS and FAIL both count as executed. Attempted errors retain their status and cause; test-definition compatibility is shown separately and does not add (*).
+With run-attempt coverage, not run means no attempt; incompatible means a constructor refusal; blocked means a missing required artifact; diagnostic attempts retain separate-runtime outcomes. Other cohorts retain their recorded missing/preflight counts. All remain in the required denominator. PASS and FAIL both count as executed. Attempted errors retain their status and cause; changes to today's test definition are shown separately from execution coverage.
 
 <a name="cohort-cuda-7f9c23eb0e27-tier-1"></a>
 
@@ -152,9 +153,16 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit_measurement_v1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) | UNKNOWN | recorded definition unavailable |
 | [five_word_joint_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_smoke) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_smoke) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_ae_ddgan_gaussian_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_gaussian_chain) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_ae_gan_multimodal](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_gan_multimodal) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_ae_reconstruction](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_reconstruction) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_gaussian_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_gaussian_chain) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_vae_categorical](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_vae_categorical) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
+| [model_vae_hard](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_vae_hard) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 | [ring16_acquisition](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | BLOCKED | changed since run |
 | [two_pole](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-two_pole) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | BLOCKED | changed since run |
 | [unused_token_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-unused_token_hold) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | BLOCKED | changed since run |
+| [zero_tanh_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-zero_tanh_smoke) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-7f9c23eb0e27-tier-2"></a>
 
@@ -168,21 +176,28 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [five_word_joint_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_hold) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
 | [gaussian1d_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_stability) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
 | [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
-| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
-| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
-| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [model_ae_ddgan_bimodal_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_bimodal_chain) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_bimodal_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_bimodal_chain) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) | UNKNOWN | recorded definition unavailable |
 | [residual_student](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-residual_student) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [trajectory](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-trajectory) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [unipolar](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-unipolar) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
-| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
-| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [vector_spiral](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_spiral) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [vector_two_broad](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_two_broad) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
+
+Held at this tier (measured and shown, not counted):
+
+| Experiment | Held in | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 | [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | changed since run |
 
@@ -197,18 +212,70 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | [clockfree_audit](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
 | [grid100_14k](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100_14k) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
 | [ring_extension](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_extension) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) | BLOCKED | changed since run |
-| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) | BLOCKED | changed since run |
 | [rotated100_14k](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100_14k) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
 | [staggered100_14k](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100_14k) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
 | [target_shift_recovery](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-target_shift_recovery) | [adaptation](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3), [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+
+Held at this tier (measured and shown, not counted):
+
+| Experiment | Held in | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [zero_tanh_rail_escape](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-zero_tanh_rail_escape) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) | UNKNOWN | recorded definition unavailable |
+
+Removed from the count at this tier (still measured):
+
+| Experiment | Removed in | Reason | Recorded result |
+| --- | --- | --- | --- |
+| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | [clockfree_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3), [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3), [formulation_comparison](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3), [host_profile_transfer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | BLOCKED |
+
+<a name="cohort-cuda-7f9c23eb0e27-tier-4"></a>
+
+### Tier 4 across views
+
+Shared experiments appear once in this list; the family numerator/denominator count their view requirements.
+
+| Experiment | Required by | Recorded result | Test definition |
+| --- | --- | --- | --- |
+
+Held at this tier (measured and shown, not counted):
+
+| Experiment | Held in | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [grid100_mlp16](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100_mlp16) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | recorded definition unavailable |
+| [grid100_res16_tanh](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100_res16_tanh) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | recorded definition unavailable |
+| [misgan_block_neural_imputer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-misgan_block_neural_imputer) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | recorded definition unavailable |
+| [misgan_block_recovery](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-misgan_block_recovery) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | recorded definition unavailable |
+| [ring16_bigan_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_bigan_continuous) | [discriminator_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-7f9c23eb0e27-held"></a>
+
+### Held tests (still measured)
+
+These tests keep running and keep this recipe's recorded result, but they do not count toward its totals or qualification. Each counts again once its re-entry rule is met.
+
+| Experiment | Held in | Recorded result | Reason | Summary | Re-entry rule |
+| --- | --- | --- | --- | --- | --- |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | Four bar pictures: BCAP and BISPF draw clean bars but only 2 of the 4. R1/R2 and GAN v3 pass it but fail Tier 1 tests and img_stripes2; under the current declarations no recipe passes both bars4 and stripes2. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | Four corner-blob pictures: BCAP covers 2 corners (24/32 clean), BISPF 3 (28/32); the test needs all 4 corners and 29/32 clean. Every recipe passing its current declaration fails or cannot run Tier 1 tests. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | Two brightness levels: BCAP draws both but 10 of 32 pictures are off in brightness; BISPF collapses to one level. The three recipes passing its current declaration fail Tier 1 tests that BCAP and BISPF pass. | Count again when one global recipe has an ordinary PASS on this unchanged declaration and, with the same configuration, still passes img_stripes2 and every other counted Tier 1 and Tier 2 test. |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | Three stretched, tilted blobs: BCAP and BISPF draw the shapes but the wrong amounts (mass TV 0.196 and 0.191; limit 0.15). Of the 16 recipes passing its current declaration, 12 fail Tier 1 ring16_acquisition, 1 timed out on it and 3 fail mode_hold. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | One broad cloud made of two overlapping blobs: BCAP and BISPF reach it early, then drift (centre error 0.39 and 0.28; limit 0.15). All 15 recipes passing its current declaration fail Tier 1 ring16_acquisition or mode_hold. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. |
+| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | The rare 2% blob loses its share or collapses (BCAP eigen ratio 0.009, BISPF 0.004; need 0.15). Perfect samples pass 200/200 runs. Its passers fail counted tests, except some round-5 research recipes that fail only held tests and never ran most of the counted suite. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. Round 5 shows it trades off against vector_unequal_width, so the two will likely return together. |
+| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2), [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2), [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2), [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2), [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2), [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | BLOCKED | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | Equal shares, very different widths: BCAP and BISPF get the shares wrong (mass TV 0.29 and 0.25; limit 0.15). Perfect samples pass 200/200 runs. Cell-moment passers fail counted tests; round-5 balanced assignment fails only held tests but never ran most of the counted suite. | Count again when one global recipe (one recipe hash and source, seed 0, the public initializer and one runtime) passes this test under its unchanged declaration and also passes every counted Tier 1 and Tier 2 test, including ring16_acquisition and mode_hold. Round 5 shows it trades off against vector_unequal_mass, so the two will likely return together. |
+| [zero_tanh_rail_escape](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-zero_tanh_rail_escape) | [discriminator_stability / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) | UNKNOWN | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | Dynamic target shift (+0.90, -0.90) -> (0.0, 0.0) rail escape with 400-update deadline held pending passing recipe. | Count again when one global recipe passes zero_tanh_rail_escape under its unchanged declaration and satisfies all Tier 1-3 requirements. |
+| [grid100_mlp16](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100_mlp16) | [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 16-hidden-layer 128-wide LeakyReLU MLP generator on grid100 target held pending passing recipe across all 100 modes. | Count again when one global recipe passes grid100_mlp16 under its unchanged declaration and satisfies all counted requirements. |
+| [grid100_res16_tanh](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100_res16_tanh) | [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 16-layer residual MLP with S=5.25 bounded tanh head on grid100 target held pending non-saturating passing recipe. | Count again when one global recipe passes grid100_res16_tanh under its unchanged declaration without saturation. |
+| [misgan_block_neural_imputer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-misgan_block_neural_imputer) | [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 3-pair MisGAN neural imputer on ambiguous single-sensor queries held pending passing recipe without ppost fallback. | Count again when one global recipe passes misgan_block_neural_imputer under its unchanged declaration. |
+| [misgan_block_recovery](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-misgan_block_recovery) | [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | 2-pair incomplete-data MisGAN on 8D block problem held pending passing recipe for manifold recovery and ppost imputation. | Count again when one global recipe passes misgan_block_recovery under its unchanged declaration. |
+| [ring16_bigan_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_bigan_continuous) | [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4) | UNKNOWN | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | Continuous 2D multimodal joint BiGAN (G, E, D) on 16-Gaussian ring held pending passing generation and reconstruction recipe. | Count again when one global recipe passes ring16_bigan_continuous under its unchanged declaration. |
 
 <a name="cohort-cuda-7f9c23eb0e27-adaptation"></a>
 
 ## adaptation
 
-**adaptation — revision 2**. [View declaration](../../../configs/forge/views/adaptation.json).
+**adaptation — revision 4**. [View declaration](../../../configs/forge/views/adaptation.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **3 / 19 / 1**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **3 / 12 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 0 / 0**.
 
 Calibration: **provisional**. Phase D historical calibration remains required
 
@@ -235,15 +302,15 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | required | BLOCKED | changed since run |
 | [vector_two_broad](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_two_broad) | required | BLOCKED | changed since run |
-| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | required | BLOCKED | changed since run |
-| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | required | BLOCKED | changed since run |
-| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | required | BLOCKED | changed since run |
-| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | required | BLOCKED | changed since run |
+| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | BLOCKED | changed since run |
+| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | BLOCKED | changed since run |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | BLOCKED | changed since run |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | BLOCKED | changed since run |
 | [vector_spiral](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_spiral) | required | BLOCKED | changed since run |
 | [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | required | BLOCKED | changed since run |
-| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | required | BLOCKED | changed since run |
-| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | required | BLOCKED | changed since run |
-| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | required | BLOCKED | changed since run |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | BLOCKED | changed since run |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | BLOCKED | changed since run |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | BLOCKED | changed since run |
 | [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | required | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | required | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | required | BLOCKED | changed since run |
@@ -255,6 +322,12 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [target_shift_recovery](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-7f9c23eb0e27-adaptation-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
 
 <a name="cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1"></a>
 
@@ -306,6 +379,12 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1"></a>
 
 ## bcap-projection-baseline-repair-diagnostic-v1
@@ -351,6 +430,12 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-diagnostic-v1"></a>
 
 ## bcap-tier1-stability-diagnostic-v1
@@ -381,6 +466,12 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-diagnostic-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-repairs-diagnostic-v1"></a>
 
 ## bcap-tier1-stability-repairs-diagnostic-v1
@@ -408,6 +499,12 @@ No experiments assigned.
 <a name="cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-repairs-diagnostic-v1-tier-3"></a>
 
 ### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-repairs-diagnostic-v1-tier-4"></a>
+
+### Tier 4
 
 No experiments assigned.
 
@@ -444,13 +541,56 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-bispf_fastpath_quality"></a>
+
+## bispf_fastpath_quality
+
+**bispf_fastpath_quality — revision 1**. [View declaration](../../../configs/forge/views/bispf_fastpath_quality.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-7f9c23eb0e27-bispf_fastpath_quality-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [img_stripes2_w64_optimizer_diagnostic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2_w64_optimizer_diagnostic) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_bars4_w64_optimizer_diagnostic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4_w64_optimizer_diagnostic) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-7f9c23eb0e27-bispf_fastpath_quality-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-bispf_fastpath_quality-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-bispf_fastpath_quality-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-clockfree_continuous"></a>
 
 ## clockfree_continuous
 
-**clockfree_continuous — revision 3**. [View declaration](../../../configs/forge/views/clockfree_continuous.json).
+**clockfree_continuous — revision 5**. [View declaration](../../../configs/forge/views/clockfree_continuous.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **4 / 19 / 7**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **4 / 12 / 6 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 0 / 0**.
 
 Calibration: **provisional**. Phase D historical calibration remains required
 
@@ -485,15 +625,15 @@ Additional eligibility requirements:
 | [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | required | BLOCKED | changed since run |
 | [vector_two_broad](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_two_broad) | required | BLOCKED | changed since run |
-| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | required | BLOCKED | changed since run |
-| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | required | BLOCKED | changed since run |
-| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | required | BLOCKED | changed since run |
-| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | required | BLOCKED | changed since run |
+| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | BLOCKED | changed since run |
+| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | BLOCKED | changed since run |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | BLOCKED | changed since run |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | BLOCKED | changed since run |
 | [vector_spiral](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_spiral) | required | BLOCKED | changed since run |
 | [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | required | BLOCKED | changed since run |
-| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | required | BLOCKED | changed since run |
-| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | required | BLOCKED | changed since run |
-| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | required | BLOCKED | changed since run |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | BLOCKED | changed since run |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | BLOCKED | changed since run |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | BLOCKED | changed since run |
 | [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | required | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | required | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | required | BLOCKED | changed since run |
@@ -505,20 +645,103 @@ Additional eligibility requirements:
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [clockfree_audit](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit) | required | UNKNOWN | recorded definition unavailable |
-| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | required | BLOCKED | changed since run |
+| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | BLOCKED | changed since run |
 | [ring_extension](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_extension) | required | BLOCKED | changed since run |
 | [grid100_14k](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100_14k) | required | UNKNOWN | recorded definition unavailable |
 | [rotated100_14k](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100_14k) | required | UNKNOWN | recorded definition unavailable |
 | [staggered100_14k](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100_14k) | required | UNKNOWN | recorded definition unavailable |
 | [target_shift_recovery](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
 
+<a name="cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance"></a>
+
+## dcgan_performance
+
+**dcgan_performance — revision 1**. [View declaration](../../../configs/forge/views/dcgan_performance.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [dcgan_performance_r32](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_r32) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r64](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_r64) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r128](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_r128) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_r256](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_r256) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_b64](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_b64) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [dcgan_performance_w128](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_w128) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance_cpu_smoke"></a>
+
+## dcgan_performance_cpu_smoke
+
+**dcgan_performance_cpu_smoke — revision 1**. [View declaration](../../../configs/forge/views/dcgan_performance_cpu_smoke.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance_cpu_smoke-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [dcgan_performance_cpu_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_cpu_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance_cpu_smoke-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance_cpu_smoke-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-dcgan_performance_cpu_smoke-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-discriminator_stability"></a>
 
 ## discriminator_stability
 
-**discriminator_stability — revision 9**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 14**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 21 / 2**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **13 / 16 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 1 / 5**. Its highest tier, Tier 4, has only held tests, so while they are held the view never shows PASS: a recipe that passes every counted tier gets HELD.
 
 Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provisional and require bounded calibration before scientific default adoption. Archived task declarations and gates retain their original identities.
 
@@ -534,6 +757,13 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [ae_gan_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ae_gan_hold) | required | BLOCKED | changed since run |
 | [ring16_acquisition](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition) | required | BLOCKED | changed since run |
 | [five_word_joint_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_smoke) | required | UNKNOWN | recorded definition unavailable |
+| [zero_tanh_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-zero_tanh_smoke) | required | UNKNOWN | recorded definition unavailable |
+| [model_ae_ddgan_gaussian_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_gaussian_chain) | required | UNKNOWN | recorded definition unavailable |
+| [model_ae_gan_multimodal](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_gan_multimodal) | required | UNKNOWN | recorded definition unavailable |
+| [model_ae_reconstruction](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_reconstruction) | required | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_gaussian_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_gaussian_chain) | required | UNKNOWN | recorded definition unavailable |
+| [model_vae_categorical](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_vae_categorical) | required | UNKNOWN | recorded definition unavailable |
+| [model_vae_hard](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_vae_hard) | required | UNKNOWN | recorded definition unavailable |
 | [clockfree_audit_measurement_v1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_measurement_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2"></a>
@@ -551,18 +781,20 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 | [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | required | BLOCKED | changed since run |
 | [vector_two_broad](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_two_broad) | required | BLOCKED | changed since run |
-| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | required | BLOCKED | changed since run |
-| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | required | BLOCKED | changed since run |
-| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | required | BLOCKED | changed since run |
-| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | required | BLOCKED | changed since run |
+| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | BLOCKED | changed since run |
+| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | BLOCKED | changed since run |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | BLOCKED | changed since run |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | BLOCKED | changed since run |
 | [vector_spiral](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_spiral) | required | BLOCKED | changed since run |
 | [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | required | BLOCKED | changed since run |
-| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | required | BLOCKED | changed since run |
-| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | required | BLOCKED | changed since run |
-| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | required | BLOCKED | changed since run |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | BLOCKED | changed since run |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | BLOCKED | changed since run |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | BLOCKED | changed since run |
 | [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | required | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | required | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | required | BLOCKED | changed since run |
+| [model_ae_ddgan_bimodal_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_bimodal_chain) | required | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_bimodal_chain](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_bimodal_chain) | required | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3"></a>
 
@@ -570,16 +802,29 @@ Calibration: **provisional**. Revision9 recipe-owned prior comparisons are provi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | required | BLOCKED | changed since run |
+| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | BLOCKED | changed since run |
 | [ring_extension](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_extension) | required | BLOCKED | changed since run |
+| [zero_tanh_rail_escape](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-zero_tanh_rail_escape) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4"></a>
+
+### Tier 4
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [grid100_mlp16](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100_mlp16) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | UNKNOWN | recorded definition unavailable |
+| [grid100_res16_tanh](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100_res16_tanh) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | UNKNOWN | recorded definition unavailable |
+| [misgan_block_recovery](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-misgan_block_recovery) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | UNKNOWN | recorded definition unavailable |
+| [misgan_block_neural_imputer](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-misgan_block_neural_imputer) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | UNKNOWN | recorded definition unavailable |
+| [ring16_bigan_continuous](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_bigan_continuous) | [held: no recipe has passed its current declaration](../test-dispositions-20261015/README.md#unresolved) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-7f9c23eb0e27-formulation_comparison"></a>
 
 ## formulation_comparison
 
-**formulation_comparison — revision 1**. [View declaration](../../../configs/forge/views/formulation_comparison.json).
+**formulation_comparison — revision 3**. [View declaration](../../../configs/forge/views/formulation_comparison.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **3 / 19 / 2**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **3 / 12 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 0 / 0**.
 
 Calibration: **provisional**. Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.
 
@@ -606,15 +851,15 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | required | BLOCKED | changed since run |
 | [vector_two_broad](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_two_broad) | required | BLOCKED | changed since run |
-| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | required | BLOCKED | changed since run |
-| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | required | BLOCKED | changed since run |
-| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | required | BLOCKED | changed since run |
-| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | required | BLOCKED | changed since run |
+| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | BLOCKED | changed since run |
+| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | BLOCKED | changed since run |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | BLOCKED | changed since run |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | BLOCKED | changed since run |
 | [vector_spiral](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_spiral) | required | BLOCKED | changed since run |
 | [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | required | BLOCKED | changed since run |
-| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | required | BLOCKED | changed since run |
-| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | required | BLOCKED | changed since run |
-| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | required | BLOCKED | changed since run |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | BLOCKED | changed since run |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | BLOCKED | changed since run |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | BLOCKED | changed since run |
 | [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | required | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | required | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | required | BLOCKED | changed since run |
@@ -640,16 +885,22 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | required | BLOCKED | changed since run |
+| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | BLOCKED | changed since run |
 | [ring_extension](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_extension) | required | BLOCKED | changed since run |
+
+<a name="cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
 
 <a name="cohort-cuda-7f9c23eb0e27-host_profile_transfer"></a>
 
 ## host_profile_transfer
 
-**host_profile_transfer — revision 4**. [View declaration](../../../configs/forge/views/host_profile_transfer.json).
+**host_profile_transfer — revision 6**. [View declaration](../../../configs/forge/views/host_profile_transfer.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **3 / 19 / 2**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **3 / 12 / 1 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 0 / 0**.
 
 Calibration: **provisional**. Host-profile transfer and full current-cohort positive/negative reference calibration remain required; no archived pass is imported.
 
@@ -676,15 +927,15 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 | [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | required | BLOCKED | changed since run |
 | [vector_two_broad](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_two_broad) | required | BLOCKED | changed since run |
-| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | required | BLOCKED | changed since run |
-| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | required | BLOCKED | changed since run |
-| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | required | BLOCKED | changed since run |
-| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | required | BLOCKED | changed since run |
+| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | BLOCKED | changed since run |
+| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | BLOCKED | changed since run |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | BLOCKED | changed since run |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | BLOCKED | changed since run |
 | [vector_spiral](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_spiral) | required | BLOCKED | changed since run |
 | [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | required | BLOCKED | changed since run |
-| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | required | BLOCKED | changed since run |
-| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | required | BLOCKED | changed since run |
-| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | required | BLOCKED | changed since run |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | BLOCKED | changed since run |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | BLOCKED | changed since run |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | BLOCKED | changed since run |
 | [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | required | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | required | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | required | BLOCKED | changed since run |
@@ -708,8 +959,14 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 | Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | required | BLOCKED | changed since run |
+| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | [removed: phase of ring_extension (counted there)](../test-dispositions-20261015/README.md#ring_hold) | BLOCKED | changed since run |
 | [ring_extension](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_extension) | required | BLOCKED | changed since run |
+
+<a name="cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
 
 <a name="cohort-cuda-7f9c23eb0e27-k3p_two_pole_horizon"></a>
 
@@ -742,13 +999,86 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-k3p_two_pole_horizon-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage"></a>
+
+## lazy_cadence_coverage
+
+**lazy_cadence_coverage — revision 1**. [View declaration](../../../configs/forge/views/lazy_cadence_coverage.json).
+
+Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
+
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **0 / 0 / 0 / 0**.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [two_pole](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-two_pole) | diagnostic | BLOCKED | changed since run |
+| [unused_token_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-unused_token_hold) | diagnostic | BLOCKED | changed since run |
+| [ae_gan_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ae_gan_hold) | diagnostic | BLOCKED | changed since run |
+| [ring16_acquisition](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition) | diagnostic | BLOCKED | changed since run |
+| [five_word_joint_smoke](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_stability](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_stability) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_hold) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [trajectory](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-trajectory) | diagnostic | BLOCKED | changed since run |
+| [residual_student](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-residual_student) | diagnostic | BLOCKED | changed since run |
+| [unipolar](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-unipolar) | diagnostic | BLOCKED | changed since run |
+| [cover_leftover](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-cover_leftover) | diagnostic | BLOCKED | changed since run |
+| [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | diagnostic | BLOCKED | changed since run |
+| [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | diagnostic | BLOCKED | changed since run |
+| [vector_two_broad](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_two_broad) | diagnostic | BLOCKED | changed since run |
+| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | diagnostic | BLOCKED | changed since run |
+| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | diagnostic | BLOCKED | changed since run |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | diagnostic | BLOCKED | changed since run |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | diagnostic | BLOCKED | changed since run |
+| [vector_spiral](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_spiral) | diagnostic | BLOCKED | changed since run |
+| [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | diagnostic | BLOCKED | changed since run |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | diagnostic | BLOCKED | changed since run |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | diagnostic | BLOCKED | changed since run |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | diagnostic | BLOCKED | changed since run |
+| [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | diagnostic | BLOCKED | changed since run |
+| [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | diagnostic | BLOCKED | changed since run |
+| [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | diagnostic | BLOCKED | changed since run |
+| [ring_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_hold) | diagnostic | BLOCKED | changed since run |
+| [ring_extension](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-ring_extension) | diagnostic | BLOCKED | changed since run |
+| [clockfree_audit_measurement_v1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_measurement_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-quality_coverage"></a>
 
 ## quality_coverage
 
-**quality_coverage — revision 2**. [View declaration](../../../configs/forge/views/quality_coverage.json).
+**quality_coverage — revision 4**. [View declaration](../../../configs/forge/views/quality_coverage.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **3 / 19 / 0**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **3 / 12 / 0 / 0**. Held counts (measured and shown, not counted): **0 / 7 / 0 / 0**.
 
 Calibration: **provisional**. Phase D historical calibration remains required
 
@@ -775,15 +1105,15 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | [mid_scale_identity](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity) | required | BLOCKED | changed since run |
 | [mode_hold](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-mode_hold) | required | BLOCKED | changed since run |
 | [vector_two_broad](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_two_broad) | required | BLOCKED | changed since run |
-| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | required | BLOCKED | changed since run |
-| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | required | BLOCKED | changed since run |
-| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | required | BLOCKED | changed since run |
-| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | required | BLOCKED | changed since run |
+| [vector_unequal_mass](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_mass) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_mass) | BLOCKED | changed since run |
+| [vector_unequal_width](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_unequal_width) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_unequal_width) | BLOCKED | changed since run |
+| [vector_anisotropic](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_anisotropic) | BLOCKED | changed since run |
+| [vector_overlap](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_overlap) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#vector_overlap) | BLOCKED | changed since run |
 | [vector_spiral](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-vector_spiral) | required | BLOCKED | changed since run |
 | [img_stripes2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_stripes2) | required | BLOCKED | changed since run |
-| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | required | BLOCKED | changed since run |
-| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | required | BLOCKED | changed since run |
-| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | required | BLOCKED | changed since run |
+| [img_bars4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_bars4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_bars4) | BLOCKED | changed since run |
+| [img_blobs4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_blobs4) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_blobs4) | BLOCKED | changed since run |
+| [img_intensity2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-img_intensity2) | [held: no one recipe passes it together with the counted tests](../test-dispositions-20261015/README.md#img_intensity2) | BLOCKED | changed since run |
 | [grid100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-grid100) | required | BLOCKED | changed since run |
 | [rotated100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-rotated100) | required | BLOCKED | changed since run |
 | [staggered100](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-staggered100) | required | BLOCKED | changed since run |
@@ -791,6 +1121,12 @@ Calibration: **provisional**. Phase D historical calibration remains required
 <a name="cohort-cuda-7f9c23eb0e27-quality_coverage-tier-3"></a>
 
 ### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-quality_coverage-tier-4"></a>
+
+### Tier 4
 
 No experiments assigned.
 
@@ -846,6 +1182,12 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1"></a>
 
 ## recipe-prior-refactor-ka2-diagnostic-v1
@@ -895,6 +1237,12 @@ No experiments assigned.
 <a name="cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-3"></a>
 
 ### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-4"></a>
+
+### Tier 4
 
 No experiments assigned.
 
@@ -950,6 +1298,12 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1"></a>
 
 ## recipe-prior-refactor-release07-gan-v3-diagnostic-v1
@@ -1002,6 +1356,48 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-selected-family-coverage-diagnostic-v1"></a>
+
+## selected-family-coverage-diagnostic-v1
+
+**selected-family-coverage-diagnostic-v1 — revision 1**. [View declaration](../../../configs/forge/views/selected-family-coverage-diagnostic-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-7f9c23eb0e27-selected-family-coverage-diagnostic-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [clockfree_audit](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-7f9c23eb0e27-selected-family-coverage-diagnostic-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-selected-family-coverage-diagnostic-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-selected-family-coverage-diagnostic-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-tier1_policy_coverage"></a>
 
 ## tier1_policy_coverage
@@ -1010,7 +1406,7 @@ No experiments assigned.
 
 Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 0 / 0**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3 / 4): **7 / 0 / 0 / 0**.
 
 Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
 
@@ -1040,6 +1436,12 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiments"></a>
 
 ## Experiment metrics and pass criteria
@@ -1054,9 +1456,9 @@ One evidence entry per experiment is shared by its view rows. Test-definition ch
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. ae_gan_hold: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'batch_size' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'conditioning' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'model' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'num_classes' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'num_particles' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'total_steps' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'z_dim' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'batch_size' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'conditioning' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'model' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'num_classes' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'num_particles' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'total_steps' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; ae_gan_hold: recipe override 'z_dim' is owned by the frozen host; revise its task specification
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -1083,9 +1485,9 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `607689de7b76e774f30f3d0cc26f5c5524b40d36ed86e353f29c29134a5a8c8b`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
 
@@ -1112,9 +1514,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
+Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [selected-family-coverage-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-selected-family-coverage-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1132,9 +1534,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+Used by: [clockfree_continuous / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1).
 
 Current pass criteria:
 
@@ -1152,7 +1554,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1174,9 +1576,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. cover_leftover: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'batch_size' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'conditioning' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'model' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'num_classes' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'num_particles' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'total_steps' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'z_dim' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'batch_size' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'conditioning' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'model' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'num_classes' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'num_particles' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'total_steps' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; cover_leftover: recipe override 'z_dim' is owned by the frozen host; revise its task specification
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -1198,6 +1600,139 @@ Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_b64"></a>
+
+### dcgan_performance_b64
+
+**dcgan_performance_b64: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_b64.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_cpu_smoke"></a>
+
+### dcgan_performance_cpu_smoke
+
+**dcgan_performance_cpu_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_cpu_smoke.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance_cpu_smoke / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-dcgan_performance_cpu_smoke-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 3 updates; timeout 120 seconds.
+
+Current measurement: mog prior (sigma 0.1); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_r128"></a>
+
+### dcgan_performance_r128
+
+**dcgan_performance_r128: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r128.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_r256"></a>
+
+### dcgan_performance_r256
+
+**dcgan_performance_r256: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r256.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_r32"></a>
+
+### dcgan_performance_r32
+
+**dcgan_performance_r32: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r32.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_r64"></a>
+
+### dcgan_performance_r64
+
+**dcgan_performance_r64: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_r64.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-dcgan_performance_w128"></a>
+
+### dcgan_performance_w128
+
+**dcgan_performance_w128: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/dcgan_performance_w128.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [dcgan_performance / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-dcgan_performance-tier-1).
+
+Current pass criteria:
+
+
+Declared budget: 13 updates; timeout 180 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); training_update_measurement; weights live; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
 
 ### five_word_joint_acquisition_tier1_policy_selected_cloud_v1
@@ -1206,7 +1741,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [five_word_joint_acquisition](../../../configs/forge/tasks/five_word_joint_acquisition.json); parent task SHA256 `26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1241,9 +1776,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1274,9 +1809,9 @@ Dependencies: five_word_joint_smoke (checkpoint).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1305,7 +1840,7 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [gaussian1d_acquisition](../../../configs/forge/tasks/gaussian1d_acquisition.json); parent task SHA256 `b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1339,9 +1874,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1370,9 +1905,9 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1402,11 +1937,11 @@ Dependencies: gaussian1d_smoke (checkpoint).
 
 **grid100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1445,7 +1980,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -1486,7 +2021,7 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2).
 
@@ -1525,7 +2060,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1556,6 +2091,47 @@ Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-grid100_mlp16"></a>
+
+### grid100_mlp16
+
+**grid100_mlp16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_mlp16.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.97 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+Dependencies: grid100 (gate).
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-grid100_release07_cloud_named_v1"></a>
 
 ### grid100_release07_cloud_named_v1
@@ -1564,7 +2140,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2).
 
@@ -1595,6 +2171,47 @@ Declared budget: 7000 updates; timeout 3600 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-grid100_res16_tanh"></a>
+
+### grid100_res16_tanh
+
+**grid100_res16_tanh: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_res16_tanh.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.97 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+Dependencies: grid100 (gate).
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-img_bars4"></a>
 
 ### img_bars4
@@ -1603,9 +2220,9 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1631,7 +2248,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1649,6 +2266,32 @@ Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-img_bars4_w64_optimizer_diagnostic"></a>
+
+### img_bars4_w64_optimizer_diagnostic
+
+**img_bars4_w64_optimizer_diagnostic: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4_w64_optimizer_diagnostic.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [bispf_fastpath_quality / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bispf_fastpath_quality-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-img_blobs4"></a>
 
 ### img_blobs4
@@ -1657,9 +2300,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1685,7 +2328,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1711,9 +2354,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1739,7 +2382,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1765,9 +2408,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
@@ -1793,7 +2436,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1811,6 +2454,32 @@ Declared budget: 600 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-img_stripes2_w64_optimizer_diagnostic"></a>
+
+### img_stripes2_w64_optimizer_diagnostic
+
+**img_stripes2_w64_optimizer_diagnostic: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2_w64_optimizer_diagnostic.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [bispf_fastpath_quality / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bispf_fastpath_quality-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 600 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_output_noise; weights live; output noise clean.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-mid_scale_identity"></a>
 
 ### mid_scale_identity
@@ -1819,9 +2488,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. mid_scale_identity: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'batch_size' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'conditioning' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'model' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'num_classes' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'num_particles' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'total_steps' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'z_dim' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'batch_size' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'conditioning' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'model' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'num_classes' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'num_particles' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'total_steps' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; mid_scale_identity: recipe override 'z_dim' is owned by the frozen host; revise its task specification
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -1845,6 +2514,62 @@ Declared budget: 800 updates; timeout 1800 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-misgan_block_neural_imputer"></a>
+
+### misgan_block_neural_imputer
+
+**misgan_block_neural_imputer: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_neural_imputer.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| observed_max_error | <= 1e-06 |
+| acc | >= 0.95 |
+| acc_lo | >= 0.65 |
+| missing_std_ratio | >= 0.7 |
+| missing_std_ratio | <= 1.3 |
+
+
+Declared budget: 7000 updates; timeout 1800 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights unbound; output noise clean.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-misgan_block_recovery"></a>
+
+### misgan_block_recovery
+
+**misgan_block_recovery: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/misgan_block_recovery.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | == 100 |
+| hq | >= 0.9 |
+| mass_tv | <= 0.1 |
+| off_plane | <= 0.04 |
+| mask_tv | <= 0.05 |
+| acc | >= 0.96 |
+| acc_lo | >= 0.7 |
+
+
+Declared budget: 7000 updates; timeout 1800 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights unbound; output noise clean.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-mode_hold"></a>
 
 ### mode_hold
@@ -1853,9 +2578,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1873,6 +2598,432 @@ Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_bimodal_chain"></a>
+
+### model_ae_ddgan_bimodal_chain
+
+**model_ae_ddgan_bimodal_chain: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_bimodal_chain.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| final_hq | >= 0.95 |
+| final_mode_mass_tv | <= 0.1 |
+| final_local_mean_sigma | <= 0.5 |
+| final_local_covariance_min | >= 0.5 |
+| final_local_covariance_max | <= 1.5 |
+| paired_nmse | <= 0.1 |
+| paired_worst_axis_nrmse | <= 0.25 |
+| paired_shuffled_gain | >= 3 |
+| paired_reverse_steps | == 4 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 5000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+Dependencies: model_ae_ddgan_gaussian_chain (gate).
+
+[Explanation and existing training artifacts](../api-model-toys/ae-ddgan.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ae_ddgan_gaussian_chain"></a>
+
+### model_ae_ddgan_gaussian_chain
+
+**model_ae_ddgan_gaussian_chain: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_ddgan_gaussian_chain.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| paired_nmse | <= 0.1 |
+| paired_worst_axis_nrmse | <= 0.25 |
+| paired_shuffled_gain | >= 3 |
+| paired_reverse_steps | == 4 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 2500 updates; timeout 180 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/ae-ddgan.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ae_gan_multimodal"></a>
+
+### model_ae_gan_multimodal
+
+**model_ae_gan_multimodal: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_gan_multimodal.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.025 |
+| reconstruction_mode_agreement | >= 0.98 |
+| modes | >= 4 |
+| precision | >= 0.9 |
+| mass_tv | <= 0.15 |
+| component_min_eigen_ratio | >= 0.1 |
+| component_max_eigen_ratio | <= 4 |
+| component_center_rms_sigma | <= 1 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/ae.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ae_reconstruction"></a>
+
+### model_ae_reconstruction
+
+**model_ae_reconstruction: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ae_reconstruction.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.025 |
+| reconstruction_mode_agreement | >= 0.98 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, encoder, prior; exact optimizer updates = True; mechanism exercised = False.
+
+Declared budget: 1200 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/ae.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_bimodal_chain"></a>
+
+### model_ddgan_bimodal_chain
+
+**model_ddgan_bimodal_chain: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_bimodal_chain.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+| final_hq | >= 0.95 |
+| final_mode_mass_tv | <= 0.1 |
+| final_local_mean_sigma | <= 0.5 |
+| final_local_covariance_min | >= 0.5 |
+| final_local_covariance_max | <= 1.5 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 5000 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+Dependencies: model_ddgan_gaussian_chain (gate).
+
+[Explanation and existing training artifacts](../api-model-toys/ddgan.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_ddgan_gaussian_chain"></a>
+
+### model_ddgan_gaussian_chain
+
+**model_ddgan_gaussian_chain: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_ddgan_gaussian_chain.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| final_projection_cdf | <= 0.12 |
+| final_normalized_mean | <= 0.25 |
+| final_covariance_eigen_min | >= 0.65 |
+| final_covariance_eigen_max | <= 1.4 |
+| t1_q0_projection_cdf | <= 0.12 |
+| t1_q0_normalized_mean | <= 0.25 |
+| t1_q0_covariance_eigen_min | >= 0.65 |
+| t1_q0_covariance_eigen_max | <= 1.4 |
+| t1_q1_projection_cdf | <= 0.12 |
+| t1_q1_normalized_mean | <= 0.25 |
+| t1_q1_covariance_eigen_min | >= 0.65 |
+| t1_q1_covariance_eigen_max | <= 1.4 |
+| t2_q0_projection_cdf | <= 0.12 |
+| t2_q0_normalized_mean | <= 0.25 |
+| t2_q0_covariance_eigen_min | >= 0.65 |
+| t2_q0_covariance_eigen_max | <= 1.4 |
+| t2_q1_projection_cdf | <= 0.12 |
+| t2_q1_normalized_mean | <= 0.25 |
+| t2_q1_covariance_eigen_min | >= 0.65 |
+| t2_q1_covariance_eigen_max | <= 1.4 |
+| t3_q0_projection_cdf | <= 0.12 |
+| t3_q0_normalized_mean | <= 0.25 |
+| t3_q0_covariance_eigen_min | >= 0.65 |
+| t3_q0_covariance_eigen_max | <= 1.4 |
+| t3_q1_projection_cdf | <= 0.12 |
+| t3_q1_normalized_mean | <= 0.25 |
+| t3_q1_covariance_eigen_min | >= 0.65 |
+| t3_q1_covariance_eigen_max | <= 1.4 |
+| t4_q0_projection_cdf | <= 0.12 |
+| t4_q0_normalized_mean | <= 0.25 |
+| t4_q0_covariance_eigen_min | >= 0.65 |
+| t4_q0_covariance_eigen_max | <= 1.4 |
+| t4_q1_projection_cdf | <= 0.12 |
+| t4_q1_normalized_mean | <= 0.25 |
+| t4_q1_covariance_eigen_min | >= 0.65 |
+| t4_q1_covariance_eigen_max | <= 1.4 |
+| panel_count | == 8 |
+| samples_per_panel | >= 2048 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 2500 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.25); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/ddgan.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_vae_categorical"></a>
+
+### model_vae_categorical
+
+**model_vae_categorical: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_categorical.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.05 |
+| shuffle_reconstruction_ratio | >= 5 |
+| posterior_mutual_information | >= 0.3 |
+| posterior_noise_variance_ratio | >= 0.8 |
+| posterior_noise_variance_ratio | <= 1.2 |
+| kl_identity_error | <= 1e-05 |
+| elbo_identity_error | <= 0.0001 |
+| decoder_mean_hq | >= 0.85 |
+| decoder_mean_mass_tv | <= 0.15 |
+| decoder_mean_modes | >= 2 |
+| likelihood_hq | >= 0.85 |
+| likelihood_mass_tv | <= 0.15 |
+| likelihood_modes | >= 2 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = encoder, generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/vae.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-model_vae_hard"></a>
+
+### model_vae_hard
+
+**model_vae_hard: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/model_vae_hard.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| reconstruction_mse | <= 0.05 |
+| shuffle_reconstruction_ratio | >= 5 |
+| posterior_mutual_information | >= 0.3 |
+| posterior_noise_variance_ratio | >= 0.8 |
+| posterior_noise_variance_ratio | <= 1.2 |
+| kl_identity_error | <= 1e-05 |
+| elbo_identity_error | <= 0.0001 |
+| decoder_mean_hq | >= 0.85 |
+| decoder_mean_mass_tv | <= 0.15 |
+| decoder_mean_modes | >= 2 |
+| likelihood_hq | >= 0.85 |
+| likelihood_mass_tv | <= 0.15 |
+| likelihood_modes | >= 2 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; rng isolation = True; optimizer roles = encoder, generator, prior, discriminator; exact optimizer updates = True; mechanism exercised = True.
+
+Declared budget: 1200 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); task_model_kernel_and_posterior_without_serving_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../api-model-toys/vae.md)
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-residual_student"></a>
 
 ### residual_student
@@ -1881,9 +3032,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. residual_student: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; residual_student: recipe override 'batch_size' is owned by the frozen host; revise its task specification; residual_student: recipe override 'conditioning' is owned by the frozen host; revise its task specification; residual_student: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; residual_student: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; residual_student: recipe override 'model' is owned by the frozen host; revise its task specification; residual_student: recipe override 'num_classes' is owned by the frozen host; revise its task specification; residual_student: recipe override 'num_particles' is owned by the frozen host; revise its task specification; residual_student: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; residual_student: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; residual_student: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; residual_student: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; residual_student: recipe override 'total_steps' is owned by the frozen host; revise its task specification; residual_student: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; residual_student: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; residual_student: recipe override 'z_dim' is owned by the frozen host; revise its task specification; residual_student: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; residual_student: recipe override 'batch_size' is owned by the frozen host; revise its task specification; residual_student: recipe override 'conditioning' is owned by the frozen host; revise its task specification; residual_student: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; residual_student: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; residual_student: recipe override 'model' is owned by the frozen host; revise its task specification; residual_student: recipe override 'num_classes' is owned by the frozen host; revise its task specification; residual_student: recipe override 'num_particles' is owned by the frozen host; revise its task specification; residual_student: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; residual_student: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; residual_student: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; residual_student: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; residual_student: recipe override 'total_steps' is owned by the frozen host; revise its task specification; residual_student: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; residual_student: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; residual_student: recipe override 'z_dim' is owned by the frozen host; revise its task specification
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -1910,9 +3061,9 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1942,7 +3093,7 @@ Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; w
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1966,6 +3117,33 @@ Declared budget: 400 updates; timeout 300 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior_without_output_noise; weights state_selected; output noise clean.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-ring16_bigan_continuous"></a>
+
+### ring16_bigan_continuous
+
+**ring16_bigan_continuous: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring16_bigan_continuous.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 4](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-4).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 16 |
+| hq | >= 0.85 |
+| mass_tv | <= 0.15 |
+| recon_rmse | <= 0.12 |
+| mode_consistency | >= 0.98 |
+
+
+Declared budget: 4000 updates; timeout 600 seconds.
+
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights unbound; output noise clean.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-ring_extension"></a>
 
 ### ring_extension
@@ -1974,9 +3152,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3).
+Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2006,9 +3184,9 @@ Dependencies: ring_hold (checkpoint).
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3).
+Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2036,11 +3214,11 @@ Dependencies: mode_hold (gate).
 
 **rotated100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2079,7 +3257,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -2120,7 +3298,7 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -2157,11 +3335,11 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource z_dim; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2200,7 +3378,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -2241,7 +3419,7 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -2280,7 +3458,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [adaptation / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3) · [clockfree_continuous / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -2303,9 +3481,9 @@ Dependencies: mode_hold (gate).
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. trajectory: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; trajectory: recipe override 'batch_size' is owned by the frozen host; revise its task specification; trajectory: recipe override 'conditioning' is owned by the frozen host; revise its task specification; trajectory: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; trajectory: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; trajectory: recipe override 'model' is owned by the frozen host; revise its task specification; trajectory: recipe override 'num_classes' is owned by the frozen host; revise its task specification; trajectory: recipe override 'num_particles' is owned by the frozen host; revise its task specification; trajectory: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; trajectory: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; trajectory: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; trajectory: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; trajectory: recipe override 'total_steps' is owned by the frozen host; revise its task specification; trajectory: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; trajectory: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; trajectory: recipe override 'z_dim' is owned by the frozen host; revise its task specification; trajectory: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; trajectory: recipe override 'batch_size' is owned by the frozen host; revise its task specification; trajectory: recipe override 'conditioning' is owned by the frozen host; revise its task specification; trajectory: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; trajectory: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; trajectory: recipe override 'model' is owned by the frozen host; revise its task specification; trajectory: recipe override 'num_classes' is owned by the frozen host; revise its task specification; trajectory: recipe override 'num_particles' is owned by the frozen host; revise its task specification; trajectory: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; trajectory: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; trajectory: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; trajectory: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; trajectory: recipe override 'total_steps' is owned by the frozen host; revise its task specification; trajectory: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; trajectory: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; trajectory: recipe override 'z_dim' is owned by the frozen host; revise its task specification
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); conditional_prior_centers_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -2330,9 +3508,9 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. two_pole: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; two_pole: recipe override 'batch_size' is owned by the frozen host; revise its task specification; two_pole: recipe override 'conditioning' is owned by the frozen host; revise its task specification; two_pole: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; two_pole: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; two_pole: recipe override 'model' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_classes' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_particles' is owned by the frozen host; revise its task specification; two_pole: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; two_pole: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; two_pole: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; two_pole: recipe override 'total_steps' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'z_dim' is owned by the frozen host; revise its task specification; two_pole: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; two_pole: recipe override 'batch_size' is owned by the frozen host; revise its task specification; two_pole: recipe override 'conditioning' is owned by the frozen host; revise its task specification; two_pole: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; two_pole: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; two_pole: recipe override 'model' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_classes' is owned by the frozen host; revise its task specification; two_pole: recipe override 'num_particles' is owned by the frozen host; revise its task specification; two_pole: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; two_pole: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; two_pole: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; two_pole: recipe override 'total_steps' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; two_pole: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; two_pole: recipe override 'z_dim' is owned by the frozen host; revise its task specification
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [bcap-tier1-stability-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-diagnostic-v1-tier-1) · [bcap-tier1-stability-repairs-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-repairs-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [bcap-tier1-stability-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-diagnostic-v1-tier-1) · [bcap-tier1-stability-repairs-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-tier1-stability-repairs-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -2359,7 +3537,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-k3p_two_pole_horizon-tier-1).
 
@@ -2388,7 +3566,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-k3p_two_pole_horizon-tier-1).
 
@@ -2417,7 +3595,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2446,9 +3624,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. unipolar: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; unipolar: recipe override 'batch_size' is owned by the frozen host; revise its task specification; unipolar: recipe override 'conditioning' is owned by the frozen host; revise its task specification; unipolar: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; unipolar: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; unipolar: recipe override 'model' is owned by the frozen host; revise its task specification; unipolar: recipe override 'num_classes' is owned by the frozen host; revise its task specification; unipolar: recipe override 'num_particles' is owned by the frozen host; revise its task specification; unipolar: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; unipolar: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; unipolar: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; unipolar: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; unipolar: recipe override 'total_steps' is owned by the frozen host; revise its task specification; unipolar: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; unipolar: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; unipolar: recipe override 'z_dim' is owned by the frozen host; revise its task specification; unipolar: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; unipolar: recipe override 'batch_size' is owned by the frozen host; revise its task specification; unipolar: recipe override 'conditioning' is owned by the frozen host; revise its task specification; unipolar: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; unipolar: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; unipolar: recipe override 'model' is owned by the frozen host; revise its task specification; unipolar: recipe override 'num_classes' is owned by the frozen host; revise its task specification; unipolar: recipe override 'num_particles' is owned by the frozen host; revise its task specification; unipolar: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; unipolar: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; unipolar: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; unipolar: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; unipolar: recipe override 'total_steps' is owned by the frozen host; revise its task specification; unipolar: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; unipolar: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; unipolar: recipe override 'z_dim' is owned by the frozen host; revise its task specification
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2475,9 +3653,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. unused_token_hold: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'batch_size' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'conditioning' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'model' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'num_classes' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'num_particles' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'total_steps' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'z_dim' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'alpha_bar' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'batch_size' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'conditioning' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'distance_reduction' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'encoder_mode' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'model' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'num_classes' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'num_particles' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'observation_sigma' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'prior_reg' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'reconstruction_weight' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'routing_temperature' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'total_steps' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'ucd_target' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'ucd_weight' is owned by the frozen host; revise its task specification; unused_token_hold: recipe override 'z_dim' is owned by the frozen host; revise its task specification
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2504,9 +3682,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
-Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `d12cabad3799d268a92325ee128599c171ea5515d474971be4f6d4cb7850c65a`. This measurement supplies no cells to the parent clean cohort.
 
 Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
 
@@ -2533,9 +3711,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2564,7 +3742,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -2593,9 +3771,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2622,7 +3800,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -2649,9 +3827,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2678,7 +3856,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -2705,9 +3883,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2736,7 +3914,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -2765,9 +3943,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2797,7 +3975,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -2827,9 +4005,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task; candidate overrides frozen host resource batch_size; declare a different task; candidate overrides frozen host resource num_particles; declare a different task; candidate overrides frozen host resource total_steps; declare a different task
 
-Execution: **no recorded execution (*)**.
+Execution: **incompatible; skipped**.
 
-Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -2858,7 +4036,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
 
-Execution: **no recorded execution (*)**.
+Execution: **not run**.
 
 Used by: [formulation_comparison / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -2878,6 +4056,61 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1200 updates; timeout 1800 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-zero_tanh_rail_escape"></a>
+
+### zero_tanh_rail_escape
+
+**zero_tanh_rail_escape: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_rail_escape.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 3](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| mean_abs_error | <= 0.005 |
+| rms_error | <= 0.01 |
+| p99_abs_error | <= 0.025 |
+| saturated_fraction | == 0 |
+
+Recovery deadline in updates: 400.
+
+Declared budget: 2000 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights unbound; output noise clean.
+
+Dependencies: zero_tanh_smoke (gate).
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-zero_tanh_smoke"></a>
+
+### zero_tanh_smoke
+
+**zero_tanh_smoke: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/zero_tanh_smoke.json).
+
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **not run**.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-cloud.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| mean_abs_error | <= 0.005 |
+| rms_error | <= 0.01 |
+| p99_abs_error | <= 0.025 |
+| saturated_fraction | == 0 |
+
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: mog prior (sigma 0.1); public_prior_without_output_noise; weights unbound; output noise clean.
 
 ## Historical and diagnostic evidence
 

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "277a0432eedfad2c44a6c3f4bf0cb186b63317b010643ded15fc3162befcca54",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "03485f8c2e079d0e19b1dadf87bc2329ea43f9c110de7dcd1cbcf4f79b2f513e",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/6141a1c953cc41189a24685cf8080743/evaluator/observed-samples.pt": "62322c5e2bba163b0c0e9800ceb03ed32512e731637b0388c2a5b5e32f0e0623"
+  },
+  "task_id": "gaussian1d_stability"
+}

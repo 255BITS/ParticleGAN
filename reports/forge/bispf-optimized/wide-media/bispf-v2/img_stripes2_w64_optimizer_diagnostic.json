@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "7324d6ee3eb676a69f82e6ce17fef24fc24343311441467f9e80b89bcef6f87f",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "3ee2901c1c98d09d6caa39aa607c37181d91083ca35318f6dec7cde34e3de7b7",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-fastpath-alternatives-v1/f99acd5cd1314fca9520b91931441c98/observed-images.pt": "75e3a1610a014a6893f12e1c2ed96ef51741910ce9d0258d990b4ffdf092aa73"
+  },
+  "task_id": "img_stripes2_w64_optimizer_diagnostic"
+}

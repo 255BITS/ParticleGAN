@@ -77,6 +77,8 @@ def validate_plain_adam_state(optimizer, state):
                 or extra["optimizer_family"] != "adam" or extra["ema"] is not None or extra["guard"] is not None):
             raise ValueError("invalid plain Adam critic observer checkpoint")
         record = extra["record"]
+        if hasattr(optimizer.record, "base_state"):
+            record = optimizer.record.base_state(record)
         if not isinstance(record, dict) or set(record) != set(CriticStepRecord.KEYS):
             raise ValueError("invalid plain Adam critic step record")
         for key in ("calls", "observed_steps"):
@@ -90,7 +92,7 @@ def validate_plain_adam_state(optimizer, state):
                 continue
             if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0:
                 raise ValueError("invalid plain Adam critic LR record")
-        copy(optimizer.record).load_state_dict(record)
+        copy(optimizer.record).load_state_dict(extra["record"])
     groups = state.get("param_groups", [])
     for actual, saved in zip(optimizer.param_groups, groups):
         if ("_recipe_initial_betas" in actual
@@ -111,6 +113,8 @@ def _load_native_before(optimizer, state):
 
 def _load_critic_after(optimizer):
     optimizer.record.load_state_dict(optimizer.__dict__.pop("_plain_pending_record"))
+    if hasattr(optimizer.record, "restore_device_state"):
+        optimizer.record.restore_device_state(optimizer.param_groups[0]["params"][0].device)
 
 
 def make_plain_adam(recipe, params, *, critic=None, **options):
@@ -132,7 +136,11 @@ def make_plain_adam(recipe, params, *, critic=None, **options):
     else:
         optimizer.critic = critic
         optimizer.ema_critic = optimizer.anchor = optimizer.guard = None
-        optimizer.record = CriticStepRecord()
+        if recipe.effective_critic_formulation == "bispf":
+            from .bispf import _BISPFObserverStepRecord
+            optimizer.record = _BISPFObserverStepRecord()
+        else:
+            optimizer.record = CriticStepRecord()
         optimizer.register_step_post_hook(_observe_critic_step)
         optimizer.register_state_dict_post_hook(_save_critic_observer)
         optimizer.register_load_state_dict_pre_hook(_load_critic_before)

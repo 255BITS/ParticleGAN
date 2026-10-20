@@ -347,6 +347,42 @@ def test_native_continuation_restores_own_prefix_and_matches_uninterrupted_state
         verify_native_prefix(continued, result["evidence"])
 
 
+def test_diagnostic_native_resume_accepts_failed_quality_without_forging_pass(tmp_path):
+    from experiments.forge.continuation import verify_native_prefix
+    parent = task("grid100", 2)
+    parent["evaluation"].update(eval_interval=1, early_eval_steps=[0, 1, 2], eval_samples=64)
+    parent["execution"]["resources"].update(num_particles=12, batch_size=4)
+    frozen = request(parent)
+    frozen["jobs"] = [{"task_id": "grid100", "compatibility_key": "fixture-prefix"}]
+    raw = adapters.run_task(frozen, {"task_id": "grid100"}, tmp_path / "parent", "cpu")
+    # Read the real continuation declaration: its ownership schema must match
+    # the producer, rather than being silently corrected by copying the parent.
+    child = task("grid100_14k", 4)
+    child["execution"]["resources"] = deepcopy(parent["execution"]["resources"])
+    child["execution"]["model"] = deepcopy(parent["execution"]["model"])
+    child["evaluation"] = deepcopy(parent["evaluation"])
+    child["execution"].update(steps=4, original_schedule_horizon=2, preserve_prefix_steps=2,
+                              continuation_of="grid100", incremental_steps=2)
+    frozen["tasks"][child["id"]] = child
+    receipt = dict(attempt_id="failed-prefix", candidate_revision=frozen["candidate_revision"],
+        compatibility_key="fixture-prefix", result_hash="fixture-only",
+        result={**raw, "task_id": "grid100", "compatibility_key": "fixture-prefix", "gate_status": "FAIL"})
+    job = dict(task_id=child["id"], prerequisites=dict(grid100=receipt))
+    with pytest.raises(CapabilityError, match="passing own-state"):
+        adapters.run_task(frozen, job, tmp_path / "ordinary", "cpu")
+    result = adapters.run_task(frozen, {**job, "diagnostic_continuation": True}, tmp_path / "diagnostic", "cpu")
+    verify_native_prefix(child, result["evidence"], diagnostic=True)
+    assert result["cost"]["completed_steps"] == 4
+    assert result["evidence"]["diagnostic_continuation"]["parent_gate_status"] == "FAIL"
+    assert receipt["result"]["gate_status"] == "FAIL"
+    with pytest.raises(ValueError, match="ordinary qualification"):
+        verify_native_prefix(child, result["evidence"])
+    forged = deepcopy(result["evidence"])
+    forged["diagnostic_continuation"]["parent_gate_status"] = "PASS"
+    with pytest.raises(ValueError, match="parent's recorded gate"):
+        verify_native_prefix(child, forged, diagnostic=True)
+
+
 def test_behavior_dispatch_uses_the_shared_component_adapter(tmp_path, monkeypatch):
     import sys
     from types import ModuleType
@@ -356,3 +392,90 @@ def test_behavior_dispatch_uses_the_shared_component_adapter(tmp_path, monkeypat
     behavior.run_behavior = lambda req, selected, output, device: sentinel
     monkeypatch.setitem(sys.modules, behavior.__name__, behavior)
     assert adapters.run_task(request(value), {"task_id": value["id"]}, tmp_path, "cpu") is sentinel
+
+
+def test_zero_tanh_smoke_card_runs_through_transfer_vector_and_sample_target(tmp_path, monkeypatch):
+    """Execute the published origin point-mass card, not a rewritten mixture.
+
+    edaf273 admits the card in ``_validate_spec`` and then raises KeyError('kind')
+    in ``build_vector_models`` and the frozen ``sample_target``. One real update
+    is enough to take the routed construction, sampling and scoring paths; the
+    1000-update budget stays on the card.
+    """
+    import math
+    from benchmarks.transfer_suite import vector_tasks
+    from experiments.forge import tanh_point_mass
+    from experiments.forge.vectorprofiles import resolve_vector_spec
+    from lib.toy_models import SimpleMLPDiscriminator
+
+    original = json.loads((ROOT / "configs/forge/tasks/zero_tanh_smoke.json").read_text())
+    assert original["adapter"] == "transfer_vector"
+    assert original["execution"]["steps"] == 1000
+    host = original["execution"]["host_definition"]
+    assert host["output_activation"] == "tanh" and "kind" not in host
+    spec = resolve_vector_spec(original)
+    assert spec == host
+    batch = host["batch"]
+    with pytest.raises(KeyError, match="kind"):
+        vector_tasks.sample_target(spec, 1, torch.Generator().manual_seed(0), 0)
+    rng = torch.Generator().manual_seed(0)
+    before = rng.get_state().clone()
+    origin = tanh_point_mass.sample_target(spec, batch, rng, 0)
+    assert torch.equal(rng.get_state(), before)
+    assert origin.shape == (batch, 2) and torch.equal(origin, torch.zeros_like(origin))
+    perfect = tanh_point_mass.score_samples(torch.zeros(16, 2), spec, 0)
+    assert perfect["mean_abs_error"] == 0.0 and perfect["rms_error"] == 0.0
+    assert perfect["p99_abs_error"] == 0.0 and perfect["saturated_fraction"] == 0.0
+    saturated = tanh_point_mass.score_samples(torch.full((16, 2), 0.995), spec, 0)
+    assert saturated["saturated_fraction"] == 1.0
+    assert saturated["mean_abs_error"] > 0.005
+
+    seen = []
+    draw = tanh_point_mass.sample_target
+
+    def capture(card, count, generator, completed_steps):
+        points = draw(card, count, generator, completed_steps)
+        seen.append((count, completed_steps, points.detach().clone()))
+        return points
+
+    monkeypatch.setattr(tanh_point_mass, "sample_target", capture)
+    running = deepcopy(original)
+    running["execution"]["steps"] = 1
+    raw = adapters.run_task(request(running), {"task_id": running["id"]}, tmp_path, "cpu")
+    assert {(count, step) for count, step, _ in seen} == {(batch, 0), (4096, 1)}
+    assert all(torch.equal(points, torch.zeros_like(points)) and points.shape[1] == 2 for _, _, points in seen)
+    row = raw["evidence"]["live"]
+    for name in ("mean_abs_error", "rms_error", "p99_abs_error", "saturated_fraction"):
+        value = row[name]
+        assert type(value) is float and math.isfinite(value)
+    definition = raw["evidence"]["host"]["definition"]
+    assert definition == host and "kind" not in definition
+    models = raw["evidence"]["host"]["models"]
+    assert models["generator"]["class"].endswith(tanh_point_mass.TanhPointMassGenerator.__name__)
+    assert models["generator"]["parameter_shapes"]["net.0.weight"] == [host["hidden"], host["z_dim"]]
+    assert models["generator"]["parameter_shapes"]["net.2.weight"] == [2, host["hidden"]]
+    assert "net.4.weight" not in models["generator"]["parameter_shapes"]
+    assert models["discriminator"]["class"].endswith(SimpleMLPDiscriminator.__name__)
+    archived = torch.load(tmp_path / "observed-samples.pt", weights_only=False)
+    samples = archived[0]["samples"]
+    assert samples.shape == (4096, 2) and torch.isfinite(samples).all() and torch.all(samples.abs() < 1)
+
+
+def test_zero_tanh_rail_escape_is_refused_at_validation_and_routing(tmp_path):
+    """The Tier-3 rail-escape card is a tanh host with no routed law.
+
+    Validation and transfer_vector routing each raise CapabilityError.
+    The frozen vector law is left unchanged, so this card is not sampled.
+    """
+    from experiments.forge.vectorprofiles import resolve_vector_spec
+
+    card = json.loads((ROOT / "configs/forge/tasks/zero_tanh_rail_escape.json").read_text())
+    assert card["adapter"] == "transfer_vector"
+    assert card["id"] == "zero_tanh_rail_escape"
+    assert card["evaluation"]["kind"] == "zero_tanh_rail_escape"
+    host = card["execution"]["host_definition"]
+    assert host["output_activation"] == "tanh" and "kind" not in host
+    with pytest.raises(CapabilityError, match="unsupported tanh host zero_tanh_rail_escape"):
+        resolve_vector_spec(card)
+    with pytest.raises(CapabilityError, match="unsupported tanh host zero_tanh_rail_escape"):
+        adapters.run_task(request(card), {"task_id": card["id"]}, tmp_path, "cpu")

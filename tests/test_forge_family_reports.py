@@ -7,6 +7,7 @@ import pytest
 
 from experiments.forge.contracts import atomic_json, read_json, stable_hash
 from experiments.forge.family_reports import (build_progress, certified_retry_successors,
+                                              full_suite_outcomes, full_suite_tasks,
                                               generated_pages, render_leaderboard, score)
 from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
 
@@ -59,6 +60,36 @@ def generate(report):
     publication["family_progress"] = build_progress(root, publication)
     assert publication["rows"] == before
     return publication["family_progress"]["families"][0]["cohorts"][0]
+
+
+@pytest.mark.parametrize("source,attached,unrecorded", [
+    ("source-one", True, False), ("different-source", False, False), ("source-one", True, True)])
+def test_run_attempt_display_requires_exact_source_recipe_and_task_binding(report, source, attached, unrecorded):
+    root, publication = report
+    selected = publication["rows"][0]
+    contract = publication["task_contracts"][selected["bindings"]["task_contracts"]["missing"]]
+    if unrecorded:
+        from experiments.forge.family_reports import COVERAGE_PREFLIGHT
+        selected["bindings"]["task_contracts"].pop("missing")
+        atomic_json(root / COVERAGE_PREFLIGHT, {
+            "scope": "selected_formulation_task_preflight_only", "qualification_input": False,
+            "qualification_reuse": False, "families": [{"candidate_id": selected["candidate_id"],
+            "candidate_revision": selected["candidate_revision"], "source_digest": "source-one",
+            "recipe_sha256": None, "tasks": {"missing": {**contract, "blockers": []}}}]})
+    key = [source, selected["candidate_revision"], "missing", contract["execution_sha256"],
+           contract["evaluation_sha256"]]
+    atomic_json(root / "reports/forge/attempt-coverage.json", {
+        "schema": "forge_attempt_coverage_v1", "qualification_input": False, "qualification_reuse": False,
+        "summary": {"total": 1, "attempted": 1, "pending": 0, "running": 0},
+        "records": [{"key": stable_hash(key), "source_digest": source,
+                     "candidate_revision": selected["candidate_revision"], "task": "missing",
+                     "execution_sha256": key[3], "evaluation_sha256": key[4],
+                     "status": "FAIL", "attempted": True, "evidence": "reports/forge/attempt-coverage.json"}]})
+    before = deepcopy(publication["rows"])
+    cohort = generate(report)
+    assert ("run_attempt" in cohort["tasks"]["missing"]) is attached
+    assert cohort["tasks"]["missing"]["status"] == "UNKNOWN"
+    assert publication["rows"] == before
 
 
 def test_optimizer_alias_selects_whole_best_configuration_and_preserves_evidence(report):
@@ -162,11 +193,23 @@ def test_hidden_inventory_entry_preserves_numerical_rows_without_navigation(repo
 def test_shared_tasks_count_per_view_and_diagnostics_never_fill_required_totals(report):
     cohort = generate(report)
     assert {tier: score(count) for tier, count in cohort["tiers"].items()} == {
-        "1": "2/2", "2": "1/2", "3": "0(*)/1"}
-    assert score(cohort["total"]) == "3(*)/5"
-    assert [score(view["total"]) for view in cohort["views"]] == ["1(*)/3", "2/2"]
+        "1": "2/2", "2": "1/2", "3": "0/1 (1 not run)"}
+    assert score(cohort["total"]) == "3/5 (1 not run)"
+    assert [score(view["total"]) for view in cohort["views"]] == ["1/3 (1 not run)", "2/2"]
     assert len(cohort["tasks"]) == 5  # Four unique requirements plus a diagnostic.
     assert cohort["tasks"]["diagnostic"]["status"] == "UNKNOWN"
+
+
+def test_unrun_and_incompatible_counts_are_disjoint_and_preserve_executed_failures(report):
+    root, publication = report
+    publication["rows"][0]["tasks"][3].update(status="BLOCKED", reason="required capability unavailable")
+    cohort = generate(report)
+    assert cohort["total"]["counts"] == {"BLOCKED": 1, "FAIL": 1, "PASS": 2, "UNKNOWN": 1}
+    assert cohort["total"]["not_run"] == cohort["total"]["incompatible"] == 1
+    assert score(cohort["total"]) == "2/5 (1 not run, 1 incompatible)"
+    assert score({"passed": 10, "total": 21, "not_run": 3, "incompatible": 6}) == "10/21 (3 not run, 6 incompatible)"
+    assert cohort["tasks"]["failed"]["execution_recorded"] is True
+    assert cohort["tasks"]["held"]["execution_recorded"] is False
 
 
 def test_completed_failure_has_no_marker_and_new_result_refreshes_every_total(report):
@@ -185,8 +228,8 @@ def test_unrun_family_defaults_to_zero_with_full_denominators(report):
     selected["tasks"] = []
     selected["attempt_ids"] = []
     cohort = generate(report)
-    assert score(cohort["total"]) == "0(*)/5"
-    assert [score(cohort["tiers"][tier]) for tier in ("1", "2", "3")] == ["0(*)/2", "0(*)/2", "0(*)/1"]
+    assert score(cohort["total"]) == "0/5 (5 not run)"
+    assert [score(cohort["tiers"][tier]) for tier in ("1", "2", "3")] == ["0/2 (2 not run)", "0/2 (2 not run)", "0/1 (1 not run)"]
 
 
 def test_changed_gate_preserves_recorded_failure_without_unrun_marker(report):
@@ -254,7 +297,7 @@ def test_no_task_execution_evidence_retains_marker_even_when_cohort_has_an_attem
     cohort = generate(report)
     assert cohort["tasks"]["missing"]["execution_recorded"] is False
     assert cohort["tasks"]["missing"]["attempt_id"] is None
-    assert score(cohort["views"][0]["tiers"]["3"]) == "0(*)/1"
+    assert score(cohort["views"][0]["tiers"]["3"]) == ("0/1 (1 incompatible)" if status == "BLOCKED" else "0/1 (1 not run)")
 
 
 def test_worker_launch_failure_with_zero_execution_retains_unrun_marker(report):
@@ -267,7 +310,7 @@ def test_worker_launch_failure_with_zero_execution_retains_unrun_marker(report):
     atomic_json(path, receipt)
     cohort = generate(report)
     assert cohort["tasks"]["failed"]["execution_recorded"] is False
-    assert score(cohort["views"][0]["tiers"]["2"]) == "0(*)/1"
+    assert score(cohort["views"][0]["tiers"]["2"]) == "0/1 (1 not run)"
     assert "worker launch failed" in next(iter(generated_pages(root, publication).values()))
 
 
@@ -342,7 +385,7 @@ def test_certified_repair_uses_successor_metrics_and_preserves_original_history_
     assert cohort["retry_history"][0]["attempt_id"] == "attempt-one"
     assert cohort["retry_history"][0]["superseded_by"] == "attempt-retry"
     assert cohort["retry_history"][0]["original_task_costs"] == {"failed": {"wall_seconds": 12.5}}
-    assert score(cohort["total"]) == "4(*)/5"
+    assert score(cohort["total"]) == "4/5 (1 not run)"
     text = next(iter(generated_pages(root, publication).values()))
     assert "Certified execution repair" in text and "attempt-one.json" in text and "attempt-retry.json" in text
     assert "original outcome and cost remain recorded" in text
@@ -413,8 +456,10 @@ def test_runtime_groups_never_sum_or_borrow_each_others_passes(report):
     publication["rows"].append(cpu)
     generate(report)
     cohorts = publication["family_progress"]["families"][0]["cohorts"]
-    assert [score(cohort["total"]) for cohort in cohorts] == ["3(*)/5", "0(*)/5"]
-    assert len(generated_pages(root, publication)) == 1
+    assert [score(cohort["total"]) for cohort in cohorts] == ["3/5 (1 not run)", "0/5 (5 not run)"]
+    pages = generated_pages(root, publication)
+    assert len([page for page in pages if page.parent.name == "families"]) == 1
+    assert root / "reports/forge/problems.md" in pages
     publication["rows"].append(deepcopy(cpu))
     with pytest.raises(ValueError, match="multiple selected configurations"):
         build_progress(root, publication)
@@ -474,7 +519,7 @@ def test_separate_policy_view_retains_required_results_without_expanding_parent_
     assert updated["total"] == original["total"] and updated["tiers"] == original["tiers"]
     assert publication["family_progress"]["scoped_views"] == ["policy-coverage"]
     assert updated["scoped_views"][0]["tiers"]["1"] == {"passed": 1, "total": 1,
-        "incomplete": False, "counts": {"PASS": 1}}
+        "incomplete": False, "not_run": 0, "incompatible": 0, "counts": {"PASS": 1}}
     text = next(iter(generated_pages(root, publication).values()))
     assert "Separate cohort coverage (excluded from family totals)" in text
     assert "This ordinary lane retains its own required gates" in text
@@ -491,7 +536,7 @@ def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report
         path.write_text(content)
     overview = root / "reports/forge/technique-inventory.md"
     text = render_leaderboard(root, publication, overview)
-    assert "**[3(*)/5]" in text and "↳ [alpha]" in text
+    assert "**[3/5 (1 not run)]" in text and "↳ [alpha]" in text
     table = text.split("| --- | ---: | ---: | ---: | ---: |", 1)[1].split("\n\n", 1)[0]
     for target in re.findall(r"\]\(([^)]+)\)", table):
         filename, _, fragment = target.partition("#")
@@ -605,7 +650,8 @@ def test_unmeasured_current_incumbents_receive_no_execution_or_qualification():
                    for task in row["tasks"] + row.get("nonrequired_tasks", []))
     publication["family_progress"] = progress
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
-    assert "Atlas/E22 retain (*) for blocked, unrun tests" in text
+    assert "constructor refusals as incompatible" in text
+    assert "earn no pass credit" in text
     assert publication["rows"] == rows
 
 
@@ -679,9 +725,11 @@ def test_legacy_gan_pages_preserve_original_whole_rows_and_do_not_enter_current_
         old_pins.setdefault(pin["trainer_family"], set()).add(pin["scientific_row_sha256"])
     for row in publication["historical_family_rows"]:
         assert scientific_row_hash(row) in old_pins[row["trainer_family"]]
-    aliases = publication["family_progress"]["historical_families"]
+    aliases = [family for family in publication["family_progress"]["historical_families"]
+               if family["id"].startswith("release07-gan-v3-")]
     historical_ids = {family["id"] for family in read_json(root / "configs/forge/trainer-families.json")["historical_families"]}
-    assert {family["id"] for family in aliases} == set(old_pins) & historical_ids
+    assert {family["id"] for family in aliases} == {
+        name for name in set(old_pins) & historical_ids if name.startswith("release07-gan-v3-")}
     assert not historical_ids & {family["id"] for family in publication["family_progress"]["families"]}
     pages = generated_pages(root, publication)
     for family in aliases:
@@ -705,4 +753,363 @@ def test_first_case_snapshot_is_archival_and_missing_later_reports_add_no_cells(
     assert archived["archived_snapshot"] is True
     assert archived["counts_scope"] == "AT_FIRST_ACCEPTED_CASE"
     assert archived["remaining_not_run"] == historical["remaining_not_run"]
-    assert score(progress["families"][0]["cohorts"][0]["total"]) == "3(*)/5"
+    assert score(progress["families"][0]["cohorts"][0]["total"]) == "3/5 (1 not run)"
+
+
+EXPLANATIONS = "reports/forge/test-dispositions-20261015/README.md"
+
+
+def hold_note(name, reason="no_global_recipe"):
+    return {"schema": "forge_hold_v1", "previous_importance": "required", "reason": reason, "blocked_by": [],
+            "summary": f"Fixture: {name} is measured and shown but not counted.",
+            "explanation": f"{EXPLANATIONS}#{name}", "reentry": f"Count {name} again when one recipe passes it with the rest."}
+
+
+def removal_note(name):
+    return {"schema": "forge_count_removal_v1", "previous_importance": "required", "reason": "superseded",
+            "counted_by": None, "summary": f"Fixture: {name} left the count of this view.",
+            "explanation": f"{EXPLANATIONS}#{name}"}
+
+
+def uncount(root, view, changes):
+    """Rewrite a fixture view as a disposition apply would: {task: (importance, note key, note)}."""
+    path = root / f"configs/forge/views/{view}.json"
+    definition = read_json(path)
+    for assignment in definition["assignments"]:
+        if assignment["task"] in changes:
+            importance, key, note = changes[assignment["task"]]
+            assignment.update({"importance": importance, key: note})
+    atomic_json(path, definition)
+
+
+def hold_alpha(root):
+    # alpha keeps one counted test; its Tier 2 and Tier 3 tests are held, its diagnostic is removed.
+    uncount(root, "alpha", {"failed": ("held", "hold", hold_note("failed")),
+                            "missing": ("held", "hold", hold_note("missing", "unsolved")),
+                            "diagnostic": ("diagnostic", "removal", removal_note("diagnostic"))})
+
+
+def assert_anchored_links_resolve(root, pages):
+    """Every page-and-anchor link, including explanation links, reaches its anchor."""
+    readme = root / EXPLANATIONS
+    readme.parent.mkdir(parents=True, exist_ok=True)
+    readme.write_text("".join(f'<a name="{name}"></a>\n\n' for name in ("failed", "missing", "diagnostic", "held")))
+    for path, content in pages.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content)
+    targets = [(path, target) for path, content in pages.items()
+               for target in re.findall(r"\]\(([^)]+#[^)]+)\)", content)]
+    assert any(EXPLANATIONS.rsplit("/", 2)[1] in target for _, target in targets)
+    for path, target in targets:
+        filename, _, fragment = target.partition("#")
+        linked = (path.parent / filename).resolve()
+        assert linked.is_file() and f'<a name="{fragment}"></a>' in linked.read_text(), (path, target)
+
+
+def test_views_without_held_tasks_add_no_held_sections_and_count_every_requirement(report):
+    root, publication = report
+    generate(report)
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "**5 means 5 counted view requirements, including repeated tests**, from 4 distinct tests. These totals" in text
+    for absent in ("Held and removed tests", "Held (measured, not counted)", "Counts follow the declared view revisions"):
+        assert absent not in text
+    page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert "Held tests (still measured)" not in page and "Held (measured, not counted)" not in page
+    assert "| [failed](k3p.md#" in page and "| required | FAIL |" in page
+    # Refresh guidance names the registered view whose change alone switches the plain command.
+    assert "always add `--refresh-publication`" in text and "only when alpha itself changed" in text
+
+
+def test_held_and_removed_tests_leave_the_count_and_are_listed_from_the_views(report):
+    root, publication = report
+    hold_alpha(root)
+    cohort = generate(report)
+    alpha, beta = cohort["views"]
+    assert score(alpha["total"]) == "1/1" and score(alpha["held"]) == "0/2 (1 not run)" and "held" not in beta
+    assert score(cohort["total"]) == "3/3"
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    summed = [read_json(root / f"configs/forge/views/{name}.json") for name in ("alpha", "beta")]
+    counted = sum(a["importance"] == "required" for view in summed for a in view["assignments"])
+    assert f"**{counted} means {counted} counted view requirements, including repeated tests**" in text
+    assert "2 held and 1 removed view assignments (2 held tests and 1 removed test) are still measured" in text
+    section = text.split("## Held and removed tests", 1)[1].split("\n## ", 1)[0]
+    rows = [line for line in section.splitlines() if line.startswith("| `")]
+    readme = "test-dispositions-20261015/README.md"
+    assert rows == [
+        "| `failed` | held: no one recipe passes it together with the counted tests | alpha (Tier 2) | "
+        f"{hold_note('failed')['summary']} | {hold_note('failed')['reentry']} | 0 of 1 | [explanation]({readme}#failed) |",
+        "| `missing` | held: no recipe has passed its current declaration | alpha (Tier 3) | "
+        f"{hold_note('missing')['summary']} | {hold_note('missing')['reentry']} | 0 of 1 | [explanation]({readme}#missing) |",
+        "| `diagnostic` | removed: replaced by newer tests | alpha (Tier 2) | "
+        f"{removal_note('diagnostic')['summary']} | — | 0 of 1 | [explanation]({readme}#diagnostic) |"]
+    assert "No new test was passed." in section
+    assert "K3P's recorded measurement fails no counted test: 3/3 pass. Every test it fails is held." in section
+    assert "K3P passes every counted test that any other selected recipe passes. It is not a new measurement of K3P." in section
+    assert ("the highest tier of alpha, Tier 3, has only held tests, so the view never shows PASS: a recipe that "
+            "passes every counted tier gets HELD, and a counted failure still shows as a failure.") in section
+    assert "Selected recipes passing (recorded result)" in section and "diagnostic runs" not in section
+    breakdown = text.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
+    assert "| Total view requirements | Held (measured, not counted) |" in breakdown
+    assert f"[0/2 (1 not run)](families/k3p.md#{cohort['anchor']}-held) |" in breakdown
+    assert breakdown.rstrip().endswith("| — |")  # beta holds nothing.
+    pages = generated_pages(root, publication)
+    pages[root / "reports/forge/technique-inventory.md"] = text
+    assert_anchored_links_resolve(root, pages)
+    # A held pass stays visible and is named, but it no longer counts.
+    publication["rows"][0]["tasks"][1]["status"] = "PASS"
+    assert score(generate(report)["total"]) == "3/3"
+    section = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md").split(
+        "## Held and removed tests", 1)[1].split("\n## ", 1)[0]
+    assert "| 1 of 1 | [explanation](test-dispositions-20261015/README.md#failed) |" in section
+    assert "Selected recipes' recorded results pass 1 of the held or removed view requirements" in section
+    assert "No new test was passed" not in section and "fails no counted test" not in section
+
+
+def test_disclosure_names_counted_requirements_without_a_recorded_pass(report):
+    root, publication = report
+    hold_alpha(root)
+    page = root / "reports/forge/technique-inventory.md"
+    for status, detail in (("UNKNOWN", "has no recorded result yet (UNKNOWN)"), ("BLOCKED", "is BLOCKED")):
+        publication["rows"][0]["tasks"][3]["status"] = status  # beta's counted task
+        generate(report)
+        assert (f"K3P's recorded measurement fails no counted test: 2/3 pass and the other 1 {detail}. "
+                "Every test it fails is held.") in render_leaderboard(root, publication, page)
+
+
+def test_view_counting_the_same_tests_as_another_while_its_top_tier_is_held_says_so(report):
+    root, publication = report
+    hold_alpha(root)
+    uncount(root, "beta", {"held": ("held", "hold", hold_note("held"))})
+    generate(report)
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert ("While missing is held, alpha counts the same tests as beta. Its highest tier, Tier 3, has only held "
+            "tests, so it never shows PASS: a recipe that passes every counted tier gets HELD, and a counted failure "
+            "still shows as a failure.") in text
+    assert "While held is held, beta counts the same tests as alpha. Its highest tier, Tier 2" in text
+    assert ("**2 means 2 counted view requirements, including repeated tests**, from 1 distinct test. 3 held and "
+            "1 removed view assignments (3 held tests and 1 removed test)") in text
+
+
+def test_family_page_links_held_roles_and_lists_each_held_test_with_its_recorded_result(report):
+    root, publication = report
+    hold_alpha(root)
+    cohort = generate(report)
+    page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    readme = "../test-dispositions-20261015/README.md"
+    assert f"| [held: no one recipe passes it together with the counted tests]({readme}#failed) | FAIL |" in page
+    assert f"| [held: no recipe has passed its current declaration]({readme}#missing) | UNKNOWN |" in page
+    assert f"| [removed: replaced by newer tests]({readme}#diagnostic) | UNKNOWN |" in page
+    assert ("Required counts (Tier 1 / 2 / 3): **1 / 0 / 0**. Held counts (measured and shown, not counted): "
+            "**0 / 1 / 1**. Its highest tier, Tier 3, has only held tests, so while they are held the view never "
+            "shows PASS: a recipe that passes every counted tier gets HELD.") in page
+    assert "| Total distinct tests | Held (measured, not counted) |" in page
+    assert f"[0/2 (1 not run)](k3p.md#{cohort['anchor']}-held) |" in page
+    held = page.split("### Held tests (still measured)", 1)[1].split("\n## ", 1)[0]
+    rows = [line for line in held.splitlines() if line.startswith("| [")]
+    assert [row.split("](")[0] for row in rows] == ["| [failed", "| [missing"]
+    assert f"| FAIL | [held: no one recipe passes it together with the counted tests]({readme}#failed) | " in rows[0]
+    assert rows[1].endswith(f"| {hold_note('missing')['summary']} | {hold_note('missing')['reentry']} |")
+    second = page.split("### Tier 2 across views", 1)[1].split("<a name=", 1)[0]
+    counted, uncounted = second.split("Held at this tier (measured and shown, not counted):")
+    assert "[held](k3p.md" in counted and "[failed](k3p.md" not in counted
+    held_rows, removed_rows = uncounted.split("Removed from the count at this tier (still measured):")
+    assert "[failed](k3p.md" in held_rows and "| FAIL | matches recorded run |" in held_rows
+    assert f"[removed: replaced by newer tests]({readme}#diagnostic) | UNKNOWN |" in removed_rows
+
+
+def test_declared_revision_note_follows_the_recorded_view_only_when_it_changed(report):
+    root, publication = report
+    path = root / "configs/forge/views/alpha.json"
+    definition = read_json(path)
+    definition["revision"] = 2
+    atomic_json(path, definition)
+    generate(report)
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert ("Counts follow the declared view revisions: alpha 2, beta 1. The recorded qualification keeps alpha "
+            "revision 1 until new ordinary evidence is registered; no recorded verdict was regraded.") in text
+    page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert ("Their counts follow the declared view revisions (alpha 2, beta 1); the recorded qualification keeps "
+            "alpha revision 1 until new ordinary evidence is registered.") in page
+
+
+def attempt_passes(report, *names):
+    """Record a separate diagnostic PASS of the selected recipe for each named task."""
+    root, publication = report
+    selected = publication["rows"][0]
+    records = []
+    for name in names:
+        contract = publication["task_contracts"][selected["bindings"]["task_contracts"][name]]
+        key = ["source-one", selected["candidate_revision"], name, contract["execution_sha256"], contract["evaluation_sha256"]]
+        records.append({"key": stable_hash(key), "source_digest": key[0], "candidate_revision": key[1], "task": name,
+                        "execution_sha256": key[3], "evaluation_sha256": key[4], "status": "PASS", "attempted": True,
+                        "diagnostic": True, "evidence": "reports/forge/attempt-coverage.json"})
+    atomic_json(root / "reports/forge/attempt-coverage.json", {
+        "schema": "forge_attempt_coverage_v1", "qualification_input": False, "qualification_reuse": False,
+        "summary": {"total": len(records), "attempted": len(records), "pending": 0, "running": 0}, "records": records})
+
+
+def test_held_table_counts_recorded_results_and_names_separate_diagnostic_passes(report):
+    root, publication = report
+    hold_alpha(root)
+    publication["rows"][0]["tasks"][3]["status"] = "UNKNOWN"  # beta's counted task has no recorded result.
+    attempt_passes(report, "missing", "held")
+    cohort = generate(report)
+    assert cohort["tasks"]["missing"]["status"] == "UNKNOWN"
+    section = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md").split(
+        "## Held and removed tests", 1)[1].split("\n## ", 1)[0]
+    assert "| Selected recipes passing (recorded result) | Details |" in section
+    assert "| 0 of 1; separate diagnostic runs only: K3P | [explanation](test-dispositions-20261015/README.md#missing) |" in section
+    assert "| 0 of 1 | [explanation](test-dispositions-20261015/README.md#failed) |" in section
+    assert ("No selected recipe's recorded result passes a held or removed view requirement, so every pass count is "
+            "unchanged") in section
+    assert ("Separate diagnostic runs of 1 selected recipe pass some of these tests (named in the table); a diagnostic "
+            "run never becomes a recorded result, so those passes count nowhere.") in section
+    assert ("K3P's recorded measurement fails no counted test: 2/3 pass and the other 1 has no recorded result yet "
+            "(UNKNOWN); a separate diagnostic run passes held, but a diagnostic run never becomes a recorded result. "
+            "Every test it fails is held.") in section
+    assert ("each details link opens that test's explanation in [the decision record]"
+            "(test-dispositions-20261015/README.md), which also defines the words used.") in section
+
+
+def test_one_global_recipe_sentence_needs_every_counted_pass_of_the_other_recipes():
+    from experiments.forge.family_reports import _uncounted_disclosure
+    view = {"id": "alpha", "assignments": [
+        {"task": "first", "qualification_tier": 1, "importance": "required"},
+        {"task": "second", "qualification_tier": 1, "importance": "required"},
+        {"task": "uncounted", "qualification_tier": 2, "importance": "held", "hold": hold_note("uncounted")}]}
+
+    def cohort(**statuses):
+        return {"tasks": {name: {"status": status} for name, status in statuses.items()}}
+
+    leader = ({"label": "Leader"}, cohort(first="PASS", second="UNKNOWN", uncounted="FAIL"))
+    rule = "That is the one-global-recipe rule at work"
+    weaker = ({"label": "Other"}, cohort(first="PASS", second="FAIL", uncounted="FAIL"))
+    text = _uncounted_disclosure([view], [leader, weaker])[0]
+    assert "Leader's recorded measurement fails no counted test: 1/2 pass" in text and text.count(rule) == 1
+    # Another selected recipe passes a counted test the leader does not: the sentence is withheld.
+    stronger = ({"label": "Other"}, cohort(first="PASS", second="PASS", uncounted="FAIL"))
+    text = _uncounted_disclosure([view], [leader, stronger])[0]
+    assert "Leader's recorded measurement fails no counted test: 1/2 pass" in text
+    assert "Leader passes every counted test" not in text
+    assert "Other passes every counted test that any other selected recipe passes" in text and text.count(rule) == 1
+
+
+def test_view_whose_every_test_is_held_counts_nothing_but_stays_in_the_totals(report):
+    root, publication = report
+    uncount(root, "beta", {"shared": ("held", "hold", hold_note("shared")), "held": ("held", "hold", hold_note("held"))})
+    cohort = generate(report)
+    assert [view["id"] for view in cohort["views"]] == ["alpha", "beta"]
+    beta = cohort["views"][1]
+    assert score(beta["total"]) == "0/0" and score(beta["held"]) == "2/2"
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "Nothing in beta is counted while held, shared are held, so it reports HELD for every recipe." in text
+    assert "beta counts the same tests" not in text
+    breakdown = text.split("<summary>Selected recipe breakdown by view", 1)[1].split("</details>", 1)[0]
+    assert f"[2/2](families/k3p.md#{cohort['anchor']}-held) |" in breakdown.splitlines()[-2]
+    page = generated_pages(root, publication)[root / "reports/forge/families/k3p.md"]
+    assert ("Required counts (Tier 1 / 2 / 3): **0 / 0 / 0**. Held counts (measured and shown, not counted): "
+            "**1 / 1 / 0**. Nothing here is counted while these tests are held, so the view reports HELD.") in page
+
+
+def test_research_rows_say_their_recorded_assignments_still_count_held_tests(report, monkeypatch):
+    from experiments.forge import research_tiers
+    root, publication = report
+    generate(report)
+    monkeypatch.setattr(research_tiers, "tier_rows", lambda root, page: {"k3p": ["| Research recipe | 1/1 | 0/2 | 0/1 | 1/4 |"]})
+    monkeypatch.setattr(research_tiers, "historical_seed_rows", lambda root, page: {})
+    publication["tier_requirements"] = {"1": ["shared"], "2": ["failed"], "3": ["missing"]}
+    publication["declared_view"] = {"revision": 2, "tier_requirements": {"1": ["shared"], "2": [], "3": []},
+                                    "no_longer_required_tasks": {"1": [], "2": ["failed"], "3": ["missing"]}}
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert ("Research recipes use their recorded revision 9 assignments. Those assignments still count the 2 tests "
+            "that alpha revision 2 holds or removes from the count (3 tests per row, against 1 counted in revision 2), "
+            "so research rows are not on the same scale as the selected-recipe totals.") in text
+    publication["declared_view"]["no_longer_required_tasks"] = {"1": [], "2": [], "3": []}
+    assert "not on the same scale" not in render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+
+
+def test_full_suite_keeps_held_failures_and_deduplicates_shared_tests(report):
+    root, publication = report
+    hold_alpha(root)
+    cohort = generate(report)
+    # Qualification is perfect only because its failed and missing tests are held.
+    assert score(cohort["total"]) == "3/3"
+    names = full_suite_tasks(publication["family_progress"])
+    assert names == ["failed", "held", "missing", "shared"]
+    assert full_suite_outcomes(cohort, names) == {
+        "passed": 2, "failed": 1, "other": {"UNKNOWN": 1}, "total": 4}
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    selected, full_suite = text.split("## Full-suite results — failures included", 1)
+    assert "| 2 | **1** | 1 not measured | 4 |" in full_suite
+    assert "A held FAIL is still a failure" in full_suite
+    assert "[3/3]" in selected and "[Problem list:" in full_suite
+    assert "<details>" not in selected and "<summary>Qualification subset" not in text
+
+
+def test_full_suite_never_borrows_diagnostic_passes_or_calls_errors_failures(report):
+    root, publication = report
+    cohort = generate(report)
+    cohort["tasks"]["missing"]["run_attempt"] = {"status": "PASS", "attempted": True}
+    for status in ("BLOCKED", "TIMEOUT", "ERROR", "INVALID", "INCOMPLETE", "UNKNOWN"):
+        cohort["tasks"]["missing"]["status"] = status
+        counts = full_suite_outcomes(cohort, full_suite_tasks(publication["family_progress"]))
+        assert counts == {"passed": 2, "failed": 1, "other": {status: 1}, "total": 4}
+
+
+def test_problem_page_explains_intent_failures_and_scoped_passers(report):
+    root, publication = report
+    hold_alpha(root)
+    definitions = {"schema": "forge_problem_definitions_v1", "problems": [{
+        "task": "failed", "title": "Keep a learned distribution stable",
+        "intent": "Stay correct while training continues.", "problem": "The model drifts away from its target.",
+        "pass_summary": "A research configuration passes; the selected recipe fails.",
+        "passers": ["Research config A passes this test but loses another."],
+        "next_step": "Preserve the repair on the other tests.",
+        "evidence": [{"label": "Audit", "path": EXPLANATIONS, "anchor": "failed"}]}]}
+    atomic_json(root / "reports/forge/problem-definitions.json", definitions)
+    generate(report)
+    pages = generated_pages(root, publication)
+    page = pages[root / "reports/forge/problems.md"]
+    assert "**What it tests.** Stay correct" in page
+    assert "**The problem.** The model drifts" in page
+    assert "**Has any configuration beaten it?** A research configuration passes" in page
+    assert "Research config A passes" in page and "Held for qualification; included in full-suite results." in page
+    assert "[FAIL](families/k3p.md#" in page
+    assert "problem-definitions.json" in str(publication["family_progress"]["input_hashes"])
+    # Includes the new page and all task-specific navigation targets.
+    assert_anchored_links_resolve(root, pages)
+
+
+def test_real_selected_bispf_headline_keeps_all_eleven_failures_after_restoring_gates():
+    import json
+    root = Path(__file__).resolve().parents[1]
+    publication = json.loads((root / "reports/forge/technique-inventory.json").read_text())
+    from experiments.forge.family_reports import _selected_cohorts
+    progress = publication["family_progress"]
+    cohort = next(cohort for family, cohort in _selected_cohorts(progress) if family["id"] == "bispf")
+    counts = full_suite_outcomes(cohort, full_suite_tasks(progress))
+    # New model-mode research keeps its own source; it cannot fill eight new
+    # cells in the previously selected whole recipe's ordinary evidence.
+    assert counts == {"passed": 18, "failed": 11, "other": {"UNKNOWN": 20}, "total": 49}
+    definitions = json.loads((root / "reports/forge/problem-definitions.json").read_text())
+    described = {item["task"] for item in definitions["problems"]}
+    held = {a["task"] for view in progress["views"] for a in view["assignments"]
+            if a["importance"] == "held" and view["id"] not in progress["scoped_views"]}
+    assert held <= described
+    failed = {name for _, cohort in _selected_cohorts(progress) for name in full_suite_tasks(progress)
+              if cohort["tasks"][name]["status"] == "FAIL"}
+    assert failed <= described
+
+
+def test_comparison_projection_labels_actual_execution_policy_separately(report):
+    root, publication = report
+    publication['rows'][0]['executed_policy_qualification'] = {
+        'view_revision': 11, 'qualified_tier': 3, 'status': 'PASS'}
+    publication['family_progress'] = build_progress(root, publication)
+    pages = generated_pages(root, publication)
+    family_page = pages[root / 'reports/forge/families/k3p.md']
+    assert 'Comparison policy: alpha revision 1, **tier 0**' in family_page
+    assert 'Actual executed-policy qualification: **tier 3**, alpha revision 11 (PASS)' in family_page
+    assert 'no qualification reuse' in family_page
+    overview = render_leaderboard(root, publication, root / 'reports/forge/technique-inventory.md')
+    assert 'comparison policy revision 1, tier 0; actual executed-policy qualification **tier 3**, revision 11 (PASS)' in overview

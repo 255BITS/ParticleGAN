@@ -154,3 +154,32 @@ def test_stale_main_table_label_preserves_recorded_score_cells(retained):
     old_cells = next(line for line in normal.splitlines() if line.startswith("| **")).split(" | ")[1:]
     new_cells = next(line for line in labeled.splitlines() if line.startswith("| **")).split(" | ")[1:]
     assert old_cells == new_cells
+
+
+def test_stale_label_follows_displayed_configuration_family(retained):
+    """A family row showing another configuration family's stale measurement is labeled."""
+    from experiments.forge.family_reports import render_leaderboard
+    root, row, _, _, _, _ = retained
+    _, metadata, _ = call(retained)
+    row["selection"] = metadata
+    row["trainer_family"] = "bcap-dualnorm"
+    count = {"passed": 0, "total": 6, "executed": 6, "incomplete": 0}
+    cohort = {"anchor": "original", "backend": "cuda", "views": [], "configuration_family": "bcap-dualnorm",
+              "total": count, "tiers": {str(i): count for i in range(1, 4)}}
+    family = {"id": "bcap-pure", "label": "BCAP", "page": "reports/forge/families/bcap-pure.md",
+              "current_cohort_anchor": "original", "cohorts": [cohort], "tags": []}
+    configurations = [{"id": "bcap-dualnorm", "label": "BCAP dualnorm",
+                       "page": "reports/forge/families/bcap-dualnorm.md"}]
+    result = {"rows": [row], "family_progress": {"families": [family], "configuration_families": configurations},
+              "provenance": {"input_digest": "fixture"}}
+    page = root / "reports/forge/technique-inventory.md"
+    normal = render_leaderboard(root, result, page)
+    labeled = publication._stale_measurement_labels(normal, result, root, page)
+    old = next(line for line in normal.splitlines() if line.startswith("| **"))
+    new = next(line for line in labeled.splitlines() if line.startswith("| **"))
+    first = new.split(" | ")[0]
+    assert "(families/bcap-dualnorm.md)" in first
+    assert first.endswith("<br>Recorded source measurement · **stale**; no current qualification")
+    assert old.split(" | ")[1:] == new.split(" | ")[1:]
+    row["selection"] = {**metadata, "freshness": None}
+    assert publication._stale_measurement_labels(normal, result, root, page).splitlines() == normal.splitlines()

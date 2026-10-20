@@ -107,14 +107,14 @@ def task_recipe_resources(task):
     execution, adapter = task["execution"], task["adapter"]
     if adapter in {"transfer_vector", "paired_adaptation", "transfer_image"}:
         spec = execution["host_definition"]
-        return {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
+        return {"num_particles": spec.get("particles", 256), "z_dim": spec["z_dim"],
                 "batch_size": spec["batch_size"] if adapter == "transfer_image" else spec["batch"]}
     if adapter == "ring_endurance" or (adapter == "transfer_behavior" and execution.get("host") == "mode_hold"):
         from benchmarks.legacy.locked_shared import LOCKED_SHARED
         return {"num_particles": LOCKED_SHARED.n_particles, "z_dim": 4, "batch_size": 128}
     if adapter in {"native100", "native100_continuation"} and "native_profile" in execution:
         return deepcopy(execution["host_definition"]["resources"])
-    if adapter == "word_joint":
+    if adapter in {"word_joint", "public_api_model_toy"}:
         return deepcopy(execution["host_definition"]["resources"])
     return deepcopy(execution.get("resources", {}))
 
@@ -122,10 +122,16 @@ def task_recipe_resources(task):
 def task_recipe_overrides(candidate, task):
     """Materialize task binding once, identically for planning and execution."""
     from .taskrecipes import bind_task_candidate
+    from .tier1_policy import is_policy_task
     bound = bind_task_candidate(candidate, task)
     execution = task["execution"]
+    if task["adapter"] == "public_api_model_toy":
+        from .model_toy_adapter import validate_task
+        validate_task(task)
+        resources = {**task_recipe_resources(task), **execution["recipe_fields"]}
+        return host_recipe_overrides(bound, execution, resources)
     if (task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold"
-            and task.get("task_cohort") != "tier1_policy_selected_cloud_v1"):
+            and not is_policy_task(task)):
         from .behavior_adapters import behavior_preflight
         blockers = behavior_preflight(task, bound)
         if blockers:
@@ -146,6 +152,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     from .nativeprofiles import native_host_initialization
     from .priors import task_prior
     from .taskrecipes import adaptation_receipt, bind_task_candidate
+    from .tier1_policy import is_policy_task
     bound = bind_task_candidate(candidate, task)
     blockers = task_policy_blockers(task, bound)
     if blockers:
@@ -159,12 +166,12 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")),
         component_transport=task["execution"].get("transport_consumer"),
         prior_contract=task["execution"].get("prior_contract"),
-        policy_task=task if task.get("task_cohort") == "tier1_policy_selected_cloud_v1" else None)
+        policy_task=task if is_policy_task(task) else None)
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
     blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
     if (task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold"
-            and task.get("task_cohort") != "tier1_policy_selected_cloud_v1"):
+            and not is_policy_task(task)):
         from .behavior_adapters import behavior_preflight
         blockers.extend(behavior_preflight(task, {"recipe_overrides": context.bindings["recipe"]}))
     if blockers:
@@ -175,6 +182,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
                       extension_recipe_bindings=context.bindings["recipe"])
     if context.recipe.constraint_geometry_mode != "none":
         if (context.execution_path == "public_components"
+                and task["adapter"] != "public_api_model_toy"
                 and task["execution"].get("host") not in COMPONENT_OBJECTIVE_HOSTS):
             raise CapabilityError(["constraint_geometry protected-loss hook is unavailable for this host"])
         if context.recipe.constraint_geometry_mode == "strict_progress" and (
@@ -193,18 +201,41 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    from .tier1_policy import blocked_host, is_policy_task
+    policy_task = is_policy_task(task)
+    if policy_task and blocked_host(task) is not None:
+        # An explicit ownership boundary is the actual reason; report it before
+        # inherited metadata (for example a component transport consumer).
+        from .tier1_policy import blockers
+        return blockers(task, recipe)
     consumer = task.get('execution', {}).get('transport_consumer')
+    # The selected-policy two-pole declaration inherits its parent's optional
+    # transport metadata. Its existing owner implements the original objective
+    # when transport is disabled; it does not implement a transport loss.
+    policy_two_pole = (policy_task
+        and task.get('execution', {}).get('host') == 'two_pole'
+        and not (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight))
     if consumer is not None and (consumer != 'output_marginal_v1'
             or task.get('adapter') not in ('transfer_behavior', 'word_joint')
             or task.get('execution', {}).get('host') not in COMPONENT_OBJECTIVE_HOSTS
-            or task.get('task_cohort') not in COMPONENT_TRANSPORT_COHORTS):
+            or (task.get('task_cohort') not in COMPONENT_TRANSPORT_COHORTS and not policy_two_pole)):
         return ['unsupported explicit component transport consumer']
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+    if policy_task:
         from .tier1_policy import blockers
         return blockers(task, recipe)
+    # Update throughput does not certify the generated sampling distribution.
+    # This explicit diagnostic host runs GANTrainer's full policy lifecycle;
+    # it never disables policy controls to fit an ordinary clean/live gate.
+    from .scaling_adapter import is_performance_task, validate_task as validate_performance_task
+    if is_performance_task(task):
+        try:
+            validate_performance_task(task)
+        except (KeyError, TypeError, ValueError) as error:
+            return [str(error)]
+        return []
     if not policy_controls(recipe):
         return []
     host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"

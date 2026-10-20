@@ -1,0 +1,373 @@
+{
+  "attempt_ids": [
+    "63fe579365654297972e5ee55c5bd970",
+    "d11a77cc46fe426aadfa1a6631c546f3"
+  ],
+  "candidate_id": "bispf-optimized-frobenius-v1",
+  "candidate_revision": "c6dadb65374f5c93fe3922c2e10e32b5964105d4dc13ff80b97773c85b9f1aff",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "The matched native control passes stripes and fails bars, so Frobenius regresses a native positive despite the provisional latency improvement. Source H2, architecture, public initialization, prior, named streams, data law, clean enumerated sampling and600-update/24-check budgets are held fixed.",
+  "conclusion": "Frobenius convolution rule fails both width64 image gates at600 updates: stripes HQ0.96875 but1 mode versus2 required, bars HQ0.8125 with2 modes versus4 required. Both terminal passing suffixes are0. Public API runs remain finite with no unintended RNG deviations.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "63fe579365654297972e5ee55c5bd970",
+        "d11a77cc46fe426aadfa1a6631c546f3"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "72f7126ded666d9825029d11132e491e2af68e43a3bd190ef50449bcfbc8d0d4",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 0.96875
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 0.96875
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "63fe579365654297972e5ee55c5bd970",
+          "producer_request_id": "ad4a14bec0e50939e7605f21",
+          "producer_study_id": "bispf-optimized-frobenius-v1-wide",
+          "result_hash": "345af3265897ff39fd4b8e886474bb84b2946cc2a1494bd6becbda8b5a1e067e",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "d11a77cc46fe426aadfa1a6631c546f3",
+          "producer_request_id": "ad4a14bec0e50939e7605f21",
+          "producer_study_id": "bispf-optimized-frobenius-v1-wide",
+          "result_hash": "eb74220e90accfc698b5c667edec266b776f91ed0e7f0f9c64a18e50134a5ee2",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "b0185087cb7ba60bcc7013478fee51794098a921848ab055b8c1c3c460c4a951",
+        "contract_sha256": "72f7126ded666d9825029d11132e491e2af68e43a3bd190ef50449bcfbc8d0d4",
+        "control_binding_sha256": "72ffa7e88fa52160f2ffe8e8ab5658a3be0828bdfcfb7f17183f6b20fc4d1360",
+        "policy_fingerprint": "1f7397ed90f686616c7254136629b9dba731a6e48f40b63a799eeb7e2d2d0b8b",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "4925a8538bcb68efef3c551080f31e34c6ecde5dcdb48521a45daea45c1c0677"
+      },
+      "study_id": "bispf-optimized-frobenius-v1-wide",
+      "study_sha256": "4925a8538bcb68efef3c551080f31e34c6ecde5dcdb48521a45daea45c1c0677"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "bispf_fastpath_quality",
+  "hypothesis": "The global frobenius rule retains the native BISPF pass set on both unchanged width-64 image tasks, including a positive stripes acquisition pass, under the same seed, public initializer, data sequence, prior, sampling, 600 updates and 24 checks.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact Frobenius revision; do not run full performance or ordinary qualification for selection. Preserve the collapse failure and its actual-training GIFs; no outcome-based rerun, seed repeat or gate change.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "63fe579365654297972e5ee55c5bd970",
+        "result_hash": "345af3265897ff39fd4b8e886474bb84b2946cc2a1494bd6becbda8b5a1e067e",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "d11a77cc46fe426aadfa1a6631c546f3",
+        "result_hash": "eb74220e90accfc698b5c667edec266b776f91ed0e7f0f9c64a18e50134a5ee2",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-85a714c5fc9c0b038c400b22",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/63fe579365654297972e5ee55c5bd970/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 1800,
+      "candidate_budget_seconds": 600,
+      "id": "bispf-fastpath-alternatives-v1"
+    },
+    "candidate": "bispf-optimized-frobenius-v1",
+    "competing_explanation": "The new matrix update changes direction and effective displacement. Reduced update magnitude or altered spectral weighting may undertrain or collapse modes at the original 600-update budget. Native controls use the same widened tasks; no seed-only repeat, task-local rate choice, extra steps or gate relaxation is allowed.",
+    "control": {
+      "candidate_id": "bispf-v2",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic",
+      "threshold": 0.9
+    },
+    "hypothesis": "The global frobenius rule retains the native BISPF pass set on both unchanged width-64 image tasks, including a positive stripes acquisition pass, under the same seed, public initializer, data sequence, prior, sampling, 600 updates and 24 checks.",
+    "id": "bispf-optimized-frobenius-v1-wide",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "hq",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic",
+      "threshold": 0.9
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_id": "bispf-v2",
+          "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+        },
+        "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+        "selector": [],
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "schema": "bispf_fastpath_scorer_controls_v1"
+        },
+        "path": "reports/forge/bispf-optimized/fastpath-scorer-controls.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bispf_fastpath_quality"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bispf-optimized-frobenius-v1-wide",
+  "study_sha256": "4925a8538bcb68efef3c551080f31e34c6ecde5dcdb48521a45daea45c1c0677",
+  "task_results": [
+    {
+      "compatibility_key": "2e55864bd248545c82cbeafdb46b75cc7fceee25c269d08134b8780cfbe07639",
+      "cost": {
+        "adapter_loop_seconds": 8.669790305080824,
+        "adapter_seconds": 9.006514242035337,
+        "charged_task": "img_stripes2_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 14.880459002102725,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 8.383003414957784,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.018391299759969115
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007650135084986687
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 8.356961980112828
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 10.367399428971112,
+        "wall_seconds": 14.880459002102725
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.06874999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.96875
+          },
+          "modes": {
+            "margin": -1,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 2,
+            "value": 1
+          }
+        },
+        "passed": false,
+        "shortfall": 0.25,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.5,
+        "hq": 0.96875,
+        "mean_rmse": 0.0429074689745903,
+        "mode_fractions": [
+          1.0,
+          0.0
+        ],
+        "modes": 1,
+        "quality_mode_fractions": [
+          0.96875,
+          0.0
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_stripes2_w64_optimizer_diagnostic"
+    },
+    {
+      "compatibility_key": "24c937bd4f8ad5561f196dff4c2c25f1cd5fce1d6f737c919b0797c96b9d6938",
+      "cost": {
+        "adapter_loop_seconds": 8.78295837494079,
+        "adapter_seconds": 9.135159029974602,
+        "charged_task": "img_bars4_w64_optimizer_diagnostic",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 14.82745244097896,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 8.499257582472637,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.01849289273377508
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.007703770650550723
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 8.473060919088311
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 10.470599423977546,
+        "wall_seconds": 14.82745244097896
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.08750000000000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.8125
+          },
+          "modes": {
+            "margin": -2,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 4,
+            "value": 2
+          }
+        },
+        "passed": false,
+        "shortfall": 0.2986111111111111,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.375,
+        "hq": 0.8125,
+        "mean_rmse": 0.09519217908382416,
+        "mode_fractions": [
+          0.40625,
+          0.46875,
+          0.0,
+          0.125
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.34375,
+          0.46875,
+          0.0,
+          0.0
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_bars4_w64_optimizer_diagnostic"
+    }
+  ]
+}

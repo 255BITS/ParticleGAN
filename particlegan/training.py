@@ -12,6 +12,31 @@ from .recipes import Recipe, learning_rate_scales
 from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std, output_noise_std
 
 
+def _convolution_autocast(module, enabled):
+    if not enabled or not any(isinstance(child, (nn.Conv2d, nn.ConvTranspose2d))
+                              and max(child.in_channels, child.out_channels) // child.groups > 32
+                              for child in module.modules()):
+        return False
+    parameter = next(module.parameters(), None)
+    if parameter is None or parameter.device.type != "cuda":
+        return False
+    with torch.cuda.device(parameter.device):
+        return torch.cuda.is_bf16_supported(including_emulation=False)
+
+
+def _float_output(value):
+    if isinstance(value, torch.Tensor):
+        result = value.float() if value.dtype == torch.bfloat16 else value
+        if hasattr(value, "_bispf_input"):
+            result._bispf_input = value._bispf_input
+        return result
+    if isinstance(value, tuple):
+        return tuple(_float_output(item) for item in value)
+    if isinstance(value, list):
+        return [_float_output(item) for item in value]
+    return value
+
+
 class InputNoise(nn.Module):
     """``critic(x + std * eps, ...)`` with fresh ``eps`` per call from ``generator``.
 
@@ -21,15 +46,26 @@ class InputNoise(nn.Module):
     ``std`` and noise stream).
     """
 
-    def __init__(self, critic, std=0.0, generator=None):
+    def __init__(self, critic, std=0.0, generator=None, *, bf16=False):
         super().__init__()
         self.critic, self.std, self.generator = critic, float(std), generator
+        self.bf16 = _convolution_autocast(critic, bf16)
+
+    def _forward(self, x, *args, **kwargs):
+        if not self.bf16 or x.device.type != "cuda":
+            return self.critic(x, *args, **kwargs)
+        with torch.autocast("cuda", dtype=torch.bfloat16):
+            return _float_output(self.critic(x.contiguous(memory_format=torch.channels_last), *args, **kwargs))
 
     def forward(self, x, *args, **kwargs):
         if self.std == 0:
-            return self.critic(x, *args, **kwargs)
+            return self._forward(x, *args, **kwargs)
         noise = torch.randn(x.shape, generator=self.generator, device=x.device, dtype=x.dtype)
-        return self.critic(x + self.std * noise, *args, **kwargs)
+        out = self._forward(x + self.std * noise, *args, **kwargs)
+        target = out[0] if isinstance(out, (tuple, list)) and out else out
+        if isinstance(target, torch.Tensor):
+            target._bispf_input = x
+        return out
 
 
 # Fields added to Recipe after checkpoints were written, with the value that
@@ -122,6 +158,10 @@ class GANTrainer:
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        for module in (self.G, self.D):
+            if (_convolution_autocast(module, recipe.training_precision == "bf16_channels_last")
+                    and next(module.parameters()).device.type == "cuda"):
+                module.to(memory_format=torch.channels_last)
         if recipe.constraint_geometry_mode == "strict_progress" and (recipe.input_noise_std or recipe.output_noise_std or recipe.standardize):
             raise ValueError("strict_progress requires zero additive noise and unstandardized prior for deterministic replay")
         if recipe.constraint_geometry_mode == "strict_progress" and any(
@@ -169,8 +209,9 @@ class GANTrainer:
             raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
+        ema_critic = None if recipe.effective_critic_formulation == "bispf" else deepcopy(self.D)
         self.opt_g, self.opt_d = recipe.make_optimizers(
-            self.G, self.D, self.prior, ema_critic=deepcopy(self.D),
+            self.G, self.D, self.prior, ema_critic=ema_critic,
             require_latent_damping=require_latent_damping, **self.optimizer_options)
         self.prior_mechanisms = self.opt_g.prior_mechanisms
         self.loss = recipe.make_loss()
@@ -217,7 +258,10 @@ class GANTrainer:
                 getattr(self, name) in (self.model_generator, global_stream)
                 for name in self._STREAMS if name not in ("eval_generator", "model_generator"))):
             raise ValueError("model stream must be separate from other training streams and global draws")
-        self._noisy_D = InputNoise(self.D, 0.0, self.input_noise_generator)
+        self._noisy_D = InputNoise(self.D, 0.0, self.input_noise_generator,
+                                   bf16=recipe.training_precision == "bf16_channels_last")
+        self._bf16_generator = _convolution_autocast(self.G, recipe.training_precision == "bf16_channels_last")
+        self._in_training_step = False
 
     @property
     def latent_damping(self):
@@ -259,6 +303,10 @@ class GANTrainer:
     def _generate(self, model, latent, sigma, stream, indices=None, *, rows=None):
         if indices is not None and rows is not None:
             raise ValueError("pass sampled row IDs as indices or rows, not both")
+        if self._in_training_step and self._bf16_generator and latent.device.type == "cuda":
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                return _float_output(self.policy.generate(latent, sigma=sigma, stream=stream, model=model,
+                                    rows=indices if rows is None else rows))
         return self.policy.generate(latent, sigma=sigma, stream=stream, model=model,
                                     rows=indices if rows is None else rows)
 
@@ -299,6 +347,7 @@ class GANTrainer:
         return True
 
     def _execute_step(self, real, *, generator_real=None, collect_stats=False):
+        self._in_training_step = True
         try:
             # Scope the entire update: graph construction can affect backward
             # accumulation order too. Restore the caller's setting on exit.
@@ -307,6 +356,8 @@ class GANTrainer:
         except Exception:
             self.policy.abort_step()
             raise
+        finally:
+            self._in_training_step = False
 
     def _serve_release(self):
         return self.policy._serve_release()

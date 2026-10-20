@@ -4,11 +4,16 @@
       "path": "reports/forge/tier1-completion/scoped-evidence.json",
       "sha256": "70fdfa1c341f0c919ce44dd6e2096160755ed8af8c26f89551035ba7f7c1d696",
       "view": "tier1_policy_coverage"
+    },
+    {
+      "path": "reports/forge/atlas-compatible-coverage-20261013/scoped-evidence.json",
+      "sha256": "424b1a4c4a9b2cbc7959f081c8d082dd3e171e38473fea5116e688ee50008818",
+      "view": "tier1_policy_coverage"
     }
   ],
   "media": {
-    "path": "reports/forge/pure-bcap/current-media-index.json",
-    "sha256": "b6ac8f9be74b288254a3c9561da6b5a477247040962b58636b2aab1041a483e4"
+    "path": "reports/forge/atlas-compatible-coverage-20261013/combined-media-index.json",
+    "sha256": "290e0d4677296a2d71fe98ed20464803048d22ca53c76f8b5277147e70ce4e39"
   },
   "qualification_input": false,
   "schema": "forge_scoped_publications_v1"

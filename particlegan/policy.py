@@ -63,8 +63,17 @@ def _validate_optimizer_state(optimizer, state):
             value = saved_ema[key]
             if not isinstance(value, torch.Tensor) or value.shape != tensor.shape or value.dtype != tensor.dtype:
                 raise ValueError(f"checkpoint EMA critic tensor {key} does not match its dtype or shape")
-    restored = deepcopy(optimizer)
-    restored.load_state_dict(deepcopy(state))
+    # BISPF optimizer loaders also restore a device-local thermal cache. A
+    # copied optimizer is only a validation probe: neither a successful probe
+    # nor a later rejected trainer checkpoint may change that live runtime state.
+    from .bispf import _LAST_THERMAL_SCALE
+    thermal_cache = dict(_LAST_THERMAL_SCALE)
+    try:
+        restored = deepcopy(optimizer)
+        restored.load_state_dict(deepcopy(state))
+    finally:
+        _LAST_THERMAL_SCALE.clear()
+        _LAST_THERMAL_SCALE.update(thermal_cache)
     if isinstance(restored, (torch.optim.Adam, torch.optim.AdamW)):
         for group in restored.param_groups:
             for parameter in group["params"]:
@@ -1228,10 +1237,28 @@ class UpdatePolicy:
 
     @staticmethod
     def _check_tensors(saved, expected, label):
+        def same_metadata(value, reference):
+            if type(value) is not type(reference):
+                return False
+            if isinstance(reference, dict):
+                return value.keys() == reference.keys() and all(same_metadata(value[k], v) for k, v in reference.items())
+            if isinstance(reference, (tuple, list)):
+                return len(value) == len(reference) and all(same_metadata(a, b) for a, b in zip(value, reference))
+            if isinstance(reference, torch.Tensor):
+                return value.dtype == reference.dtype and value.shape == reference.shape and torch.equal(value, reference)
+            return value == reference
+
         if not isinstance(saved, dict) or saved.keys() != expected.keys():
             raise ValueError(f"incompatible policy {label}")
         for key, tensor in expected.items():
             value = saved[key]
+            # Module state_dicts can carry immutable constructor metadata via
+            # get_extra_state (MoG stores sigma_rel and standardize this way).
+            # Validate it before restoring any model or optimizer state.
+            if not isinstance(tensor, torch.Tensor):
+                if not key.endswith("_extra_state") or not same_metadata(value, tensor):
+                    raise ValueError(f"incompatible policy {label} extra state {key}")
+                continue
             if not isinstance(value, torch.Tensor) or value.shape != tensor.shape or value.dtype != tensor.dtype:
                 raise ValueError(f"incompatible policy {label} tensor {key}")
 

@@ -45,17 +45,18 @@ def test_bcap_matches_the_complete_selected_leader_recipe():
         assert actual == value, key
 
 
-@pytest.mark.parametrize('preset', ['ka2', 'k3p', 'bcap_adam', 'bcap', 'halloween'])
+@pytest.mark.parametrize('preset', ['ka2', 'k3p', 'bcap_adam', 'bcap', 'bispf', 'bispf_optimized', 'halloween'])
 def test_one_selector_promotes_all_model_families_without_changing_explicit_presets(monkeypatch, preset):
     import particlegan.recipes as recipes
-    explicit = {name: get_recipe(name) for name in ('ka2', 'k3p', 'bcap_adam', 'bcap', 'e22', 'atlas', 'halloween')}
+    explicit = {name: get_recipe(name) for name in ('ka2', 'k3p', 'bcap_adam', 'bcap', 'bispf', 'bispf_optimized', 'e22', 'atlas', 'halloween')}
     monkeypatch.setattr(recipes, 'DEFAULT_RECIPE', preset)
     assert get_recipe() == explicit[preset]
     for model in ('gan', 'mog', 'ddgan', 'ddgan_mog', 'ae_gan', 'vae_gan', 'ae_ddgan'):
         # Task dimensions and component choices are tested separately below.
         recipe = get_recipe(model, lr=.002)
         for field in ('critic_formulation', 'optimizer_family', 'loss', 'reg_arm',
-                      'constraint_geometry_mode', 'continuous_policy', 'prior_update',
+                      'constraint_geometry_mode', 'optimizer_svd_backend', 'training_precision',
+                      'continuous_policy', 'prior_update',
                       'prior_regularizer', 'prior_reg', 'prior_l2'):
             assert getattr(recipe, field) == getattr(explicit[preset], field)
         assert recipe.lr == .002

@@ -1,5 +1,10 @@
 # Atlas: filling the selected inventory with valid evidence
 
+**2026-10-13 follow-up:** the unchanged develop implementation has now been measured on every normally admitted selected-cloud Tier 1 cell in [the new Atlas coverage report](atlas-compatible-coverage-20261013/README.md). Gaussian ran 1,000 updates/24 observations and Ring16 ran 1,600/96; both ended in checkpoint serialization ERROR (formal INCOMPLETE). The full clock probe ran 24 updates and is FAIL. Two-pole, unused-token, and AE are currently refused by the component-transport boundary; the five-row joint host remains refused by its ownership/population contract. No adapter, formulation, evaluator, numerical gate, source-selected qualification row, or tier assignment was changed.
+
+At the executed byte origin `dacf96749a4effc0648a7a0945266d508804110e`, ordinary Atlas coverage remains 0/152 repeated view requirements (35 distinct required tasks: 30 BLOCKED, five UNKNOWN). The source-scoped seven-question result is separately four BLOCKED, two INCOMPLETE/ERROR and one FAIL. The 2026-10-05 proposal below is retained as historical context; its 400-step Ring16 estimate and four-supported-host assumption are superseded by the exact current cards and guard receipts. Its old budget is not funding or pooled with this coordinator's work.
+
+
 The target is the Atlas row in [the family leaderboard](technique-inventory.md) and its [experiment cells](families/atlas.md). At audited develop commit `0229ecbdd826a8ca210b72589e3af81155283e50`, the row is **0(*)/150**. The six ordinary views repeat shared requirements: adaptation23, clockfree_continuous30, discriminator_stability27, formulation_comparison24, host_profile_transfer24 and quality_coverage22. These are150 view requirements, not150 distinct training attempts. The marker includes blocked, unknown and changed contracts; it does not mean150 numerical failures.
 
 ## The exact selected configuration

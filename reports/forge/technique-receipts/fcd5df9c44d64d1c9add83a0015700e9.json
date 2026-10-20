@@ -1,0 +1,92 @@
+{
+  "attempt_id": "fcd5df9c44d64d1c9add83a0015700e9",
+  "attempt_status": "completed",
+  "campaign_id": "atlas-unchanged-policy-coverage-20261013",
+  "candidate_id": "atlas",
+  "candidate_revision": "85e0b2bc5534e61ef196456dbea0ec77fa29f31191d350cfb0723243f05a07d0",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "atlas-unchanged-policy-coverage-20261013",
+    "request": "892b8dbb00080a7bc7db66d1",
+    "revision": "85e0b2bc5534e61ef196456dbea0ec77fa29f31191d350cfb0723243f05a07d0"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "4ceabbe8ab0441a975c6a9003b309b01ccf1ca6e557b2780ed75f771a285901c",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/fcd5df9c44d64d1c9add83a0015700e9/evidence.json",
+        "sha256": "c8696ca964b90f844f8909bd7ad1b6caba7aff49712b3ec21b1e09179294669b"
+      },
+      "request": {
+        "path": "reports/forge/attempts/fcd5df9c44d64d1c9add83a0015700e9/request.json",
+        "sha256": "9c8159b201c29715dae58eea8b7eae25f408ffe63d25cc9ea2b3b910becc5e27"
+      },
+      "result": {
+        "path": "reports/forge/attempts/fcd5df9c44d64d1c9add83a0015700e9/result.json",
+        "sha256": "0959f53353e1dcf766302b2567bcd1472aaec525dcbddc937d69581804cf67bc"
+      }
+    },
+    "source_digest": "c8c3f5d3860358e5a65514c99bba951882168a1fdd58e8a0bff9851db580c1de",
+    "source_origin_commit": null
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "892b8dbb00080a7bc7db66d1",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "torch": "2.11.0+cu128"
+    },
+    "python": "3.11.15",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "schedule_free",
+        "scoring_weights": "state_selected"
+      },
+      "compatibility_key": "f97adeef7a1ba65590612cff26b1dfba7c84b2cc5e6a601ab5ffeb9606d20cab",
+      "cost": {
+        "adapter_reported_inclusive_seconds": 2.030117454996798,
+        "adapter_seconds": 2.0375670170033118,
+        "charged_task": "clockfree_audit_tier1_policy_selected_cloud_v1",
+        "completed_updates": 24,
+        "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+        "device": "0",
+        "execution_seconds": 7.374810294000781,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.0320411050051916,
+        "wall_seconds": 7.374810294000781
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "FAIL",
+      "raw_status": "completed",
+      "reason": "step_label changed the update or common-prefix state",
+      "reasons": [
+        "step_label changed the update or common-prefix state"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "tier1_selected_public_prior_without_output_noise",
+        "scoring_weights": "state_selected"
+      },
+      "status": "FAIL",
+      "task_id": "clockfree_audit_tier1_policy_selected_cloud_v1"
+    }
+  ]
+}

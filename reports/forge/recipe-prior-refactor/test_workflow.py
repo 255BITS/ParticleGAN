@@ -50,6 +50,18 @@ def test_view_preserves_full_question_denominators_and_timeouts():
     assert workflow.PER_CANDIDATE - workflow.ORDINARY_ALLOWANCE == 1020
 
 
+def test_planning_refuses_a_later_live_view_while_the_contract_reads_revision_9():
+    # The contract reads the archived revision 9; planning resolves the live view,
+    # which a later revision (held and removed-from-count tests) has replaced.
+    assert workflow.ordinary_contract(workflow.ROOT)[0]["revision"] == 9
+    live = workflow.load_view(workflow.ROOT, workflow.VIEW)["revision"]
+    assert live > 9
+    with pytest.raises(ValueError, match=f"revision-9 recipe-owned ordinary view: .* which is revision {live}"):
+        workflow.require_live_revision_9(workflow.ROOT)
+    with pytest.raises(ValueError, match="revision-9 recipe-owned ordinary view"):
+        workflow.resolve_plans(workflow.ROOT, {"families": {}})
+
+
 @pytest.mark.parametrize("part", ["architecture", "gate", "prior_law", "budget", "cadence"])
 def test_question_projection_retains_scientific_changes(part):
     old = workflow.read_json(workflow.OUT / "legacy-task-cards/gaussian1d_smoke.json")
@@ -111,7 +123,24 @@ def test_unsupported_host_is_not_silently_replaced():
     assert blocked["trajectory"] == ["unsupported serving contract"]
 
 
-def test_declared_candidate_task_maps_are_readable_legacy_controls():
+@pytest.fixture
+def declared_roster(monkeypatch):
+    """Declare controls for the leaders this campaign recorded, not the live selection.
+
+    The campaign's own published pins (recipe-prior-refactor-*-v1) and BISPF
+    later replaced those leaders; declarations_for refuses any changed roster.
+    """
+    leaders = [dict(family=x["selection"]["family"], candidate_id=x["selection"]["candidate_id"])
+               for x in workflow.baseline()["leaders"]]
+    changed = deepcopy(leaders)
+    changed[0]["candidate_id"] += "-later"
+    monkeypatch.setattr(workflow, "current_family_candidates", lambda root: changed)
+    with pytest.raises(ValueError, match="Selected roster changed"):
+        workflow.declarations_for(workflow.ROOT)
+    monkeypatch.setattr(workflow, "current_family_candidates", lambda root: leaders)
+
+
+def test_declared_candidate_task_maps_are_readable_legacy_controls(declared_roster):
     declarations = workflow.declarations_for(workflow.ROOT)
     assert len(declarations) == 42
     studies = [d for p, d in declarations.items() if "/studies/" in p]
@@ -121,7 +150,7 @@ def test_declared_candidate_task_maps_are_readable_legacy_controls():
         assert all(f"configs/forge/tasks/{v}.json" in declarations for v in study["control"]["task_map"].values())
 
 
-def test_legacy_aliases_change_only_the_binding_identifier():
+def test_legacy_aliases_change_only_the_binding_identifier(declared_roster):
     declarations = workflow.declarations_for(workflow.ROOT)
     for name in workflow.baseline()["task_cards"]:
         original = workflow.read_json(workflow.OUT / "legacy-task-cards" / f"{name}.json")

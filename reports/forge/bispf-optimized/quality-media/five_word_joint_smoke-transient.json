@@ -1,0 +1,21 @@
+{
+  "gif_sha256": "3f6cd5540ea6d576055a49bd3fc324b55e7d16059ceef27884701a6817d88a43",
+  "kind": "actual_training_saved_observations_gif",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer": "benchmarks.toy_audit.api_run:render_gif",
+  "sampling_draws_added": 0,
+  "selected_steps": [
+    834,
+    15001,
+    15835,
+    16668,
+    20001
+  ],
+  "selection": "earliest confirmed acquisition, pre-failure, recorded failure, recovery, endpoint",
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized-quintic-v1-quality/92d31868c53c4b75bc4be574de0de3d7/observed-records.pt": "d59078d3439c7d25360d9e4c7c16928f50e06dab4d25d942854f094285168ade"
+  },
+  "task_id": "five_word_joint_smoke"
+}

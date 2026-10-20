@@ -1,0 +1,78 @@
+{
+  "publications": [
+    {
+      "path": "reports/forge/test-performance-evidence/atlas-location-screen.json",
+      "sha256": "8c7f5c8263efbf56419ce5ba2f5857c47cdd9fdb369709ae70c5591a3691f117"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/g-angle-width.json",
+      "sha256": "d0c99cc87d6445bcdc7392d854cccfaeafbfd747eb96ec29125b36252f24aa2f"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/g-angle-anisotropic.json",
+      "sha256": "ba5d6673ad6e838b0186c5582fb758c41ca1271c8959711d1051b4ddd1bb893f"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/atlas-location-confirmation.json",
+      "sha256": "0c79aca40f3f149778eb8739a511e3e192cfafb4291a5c5587b2e50e857cde2f"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/nonatlas-cell-moment-full-runs.json",
+      "sha256": "b359595a77cbfa2b8aa396ca356742bbc82d203190ed2a597cee7d34bad5df6a"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/nonatlas-finite-realization-prefix64.json",
+      "sha256": "a3e205f77a98f5cbf80cb159aefcc469296723805d76732327920dddc1c545e9"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/nonatlas-reconciled-204.json",
+      "sha256": "c6d10e4cc07a1b3fb00de5d88b8b0a1e1e992359983256f2907f25b336d0979c"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/astra-cumulative-24.json",
+      "sha256": "cffcbd7be99971b38881320564c034701cd6fd4a8387a0c6c55bb22cd70ca0b9"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-confidence-lr-tier1-6.json",
+      "sha256": "394fb58001a45f50cc517bd3af69da11cf8e5fb62be49e8e112dbb1a7fddca26"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-confidence-lr-own-retention-2.json",
+      "sha256": "33b3b907a0d9c61b7afa14dfd6ee4809fa504e992064d32df1e33221e08947a6"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-gaussian-finite-cap-1.json",
+      "sha256": "a6604b7eb2b0bc9eb8e2942780eed32e5e5c85753d2ac0a08f6375da545317ee"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-critic-orientation-2.json",
+      "sha256": "7f46d7e86984d41fda73de7d6c4bac393cd0efcb65e8193a4cc5ac59d5520ce3"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-signed-confidence-2.json",
+      "sha256": "f0daa9efbc7e89291e881f9ed046cf12a5741a6d2a9407247ce64ea5c587e20e"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-positive-evidence-2.json",
+      "sha256": "bdf2cee710a11685ea194a4fc2e3f8783e354250b8a7cb2f6684af12e020fbff"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-retained-successor-nonatlas-21.json",
+      "sha256": "ade708511a345262c07ab562fed340edf963917d2a30ececfeed584ecb2baca0"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-retained-atlas-seed0-diagnostics-3.json",
+      "sha256": "6cc3cd8bbcfb8306c57065c70f67de70e9899132ad92fc6fae5e495ef13c9301"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-retained-pr399-paired-tier1-12.json",
+      "sha256": "e85096d198e735640807bed50b981032522d099ad878aef9614f7d5d72f48378"
+    },
+    {
+      "path": "reports/forge/test-performance-evidence/pr399-retained-atlas-dynamics-6.json",
+      "sha256": "fe2420f19398069d8e2b9b66152eb6c5100ad173fdd47635aeda9195afe340a7"
+    }
+  ],
+  "qualification_input": false,
+  "schema": "forge_test_display_registry_v1"
+}

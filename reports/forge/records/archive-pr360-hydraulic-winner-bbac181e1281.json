@@ -1,0 +1,264 @@
+{
+  "candidate_id": "archive:pr360:hydraulic-winner",
+  "candidate_revision": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+  "conclusion": "Latest 17-public-trainer-task winner follow-up: travel and gap-adaptive each pass 4/17 versus archived winner 5/17, gain zero gates, and respectively lose ring16_acquisition and vector_spiral. Gaussian stationary/shift retention improves 2/72 and 0/24 to 71/72 and 23/24 (travel), or 68/72 and 22/24 (gap); full retention FAIL remains. Grid100 precision rises .24072 -> .49586/.6343 but native full shape/density gates fail. Travel exactly reproduces archived v1 on the bound hosts; direction blend is inactive there, not a fresh matched control. Both prespecified endpoint predictions are observed, but the global decision stops both revisions. 34 complete cells, zero retries, 5159.621962 paid seconds within 64000 ceiling. Earlier rounds retain separate source identities; no ordinary qualification or default change.",
+  "cross_cohort_pooling": false,
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "Bound joint G/prior output travel on the direction-blend BCAP winner; compare real-spacing radius with a gap-adaptive radius, preserving every original task gate and the five winner passes in the 17-cell diagnostic scope.",
+  "lifecycle": "concluded",
+  "mechanism_class": "hydraulic_winner",
+  "next_action": "Retain the archived findings and original source; stop these exact revisions. Any successor needs its own substantive hypothesis, frozen protocol and finite budget. No training or default adoption follows from this archive.",
+  "provenance": {
+    "actual_paid_seconds": {
+      "gap": 2740.5985924639826,
+      "travel": 2419.0233699420132
+    },
+    "archive_status": "recall_only_unmerged_branch",
+    "budget": {
+      "campaign_ceiling_seconds": 64000,
+      "per_arm_full_reservation_seconds": 31620,
+      "scientific_retries": 0,
+      "total_reserved_seconds": 63240,
+      "updates_and_cadence": "Unchanged per task; pinned diagnostic view and its source task declarations own each full allowance and own-checkpoint dependencies."
+    },
+    "control": {
+      "candidate_id": "bcap-default-baseline-direction-v1",
+      "reused": "archived ordinary results; not rerun",
+      "source_commit": "d378734f40b09ce223a389e8f54a9783ec6a0c75",
+      "source_digest": "6a225fcdd6922cdad37c9c947e163fb6f164f6ad4390293a3d3091b8f741ce44"
+    },
+    "control_binding": "Archived winner reused, not rerun. Scientific source parity and disabled-flag tensor parity documented in original report; direction blend inactive on bound public-trainer hosts. Historical caller-owned tasks are outside this diagnostic, not new measurements.",
+    "default_adoption": false,
+    "documents": {
+      "configs/forge/studies/bcap-hydraulic-winner-gap-v1-study.json": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "d65b3c1863dc8ad00b1f34e61ce10ef33c8ff1b7",
+        "path": "configs/forge/studies/bcap-hydraulic-winner-gap-v1-study.json",
+        "sha256": "01b03023384f72e4381bbad10fced337b78b28f3edbc52ffc6f55c0fff5a601c",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/configs/forge/studies/bcap-hydraulic-winner-gap-v1-study.json"
+      },
+      "configs/forge/studies/bcap-hydraulic-winner-travel-v1-study.json": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "2c39af9879f2bdd7d60c0e2f539fd97a5c7fe950",
+        "path": "configs/forge/studies/bcap-hydraulic-winner-travel-v1-study.json",
+        "sha256": "cd1d9adf35c9749e70765d4f07e0fb579f23b0f8dfc2ed63b6e48894f0a46585",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/configs/forge/studies/bcap-hydraulic-winner-travel-v1-study.json"
+      },
+      "configs/forge/views/bcap-hydraulic-winner-diagnostic-v1.json": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "7b3f759950eff76cdb46a02d6d38c3d38e22487d",
+        "path": "configs/forge/views/bcap-hydraulic-winner-diagnostic-v1.json",
+        "sha256": "7ceda764c0a73fadc75ce546919f4803f3a107514d37401a6ee4fa3f5d531b31",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/configs/forge/views/bcap-hydraulic-winner-diagnostic-v1.json"
+      },
+      "reports/forge/bcap-physics/hydraulic/README.md": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "174b589f0fc32d5a64335f63473133377cd95ecc",
+        "path": "reports/forge/bcap-physics/hydraulic/README.md",
+        "sha256": "a56356b722f3418746f8e9cc3b57d8aa60f50f9c6718d045aa25acfde1934e0d",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/README.md"
+      },
+      "reports/forge/bcap-physics/hydraulic/provenance.json": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "e0b391299e7300e42e6f7176f2ee3159460266d0",
+        "path": "reports/forge/bcap-physics/hydraulic/provenance.json",
+        "sha256": "70118455fa165cc7f209ab7a595c19254e18fcb4c864eb718e479138c321b0dc",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/provenance.json"
+      },
+      "reports/forge/bcap-physics/hydraulic/round2/README.md": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "71758a21703cf2c038496d4d2d0bde7073c446b3",
+        "path": "reports/forge/bcap-physics/hydraulic/round2/README.md",
+        "sha256": "ac33b47b5beeb35eed3a10aea50f313dfa74dbd2e370e817bd132fec0908b8b0",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/round2/README.md"
+      },
+      "reports/forge/bcap-physics/hydraulic/round2/provenance.json": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "48de187868efe91e462e2bea8f7aeea041a2f116",
+        "path": "reports/forge/bcap-physics/hydraulic/round2/provenance.json",
+        "sha256": "e9cf70cf67bbb673f9d6a417b6028fdcaaf08c80032bb61d6de63812ce21f56f",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/round2/provenance.json"
+      },
+      "reports/forge/bcap-physics/hydraulic/round3/README.md": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "16dfba1fa48e54e51190668215984558ca37822c",
+        "path": "reports/forge/bcap-physics/hydraulic/round3/README.md",
+        "sha256": "c096a4e54d86c41423fc37ebd6d45730edeb1029162830e70aa8ef3b1784cd88",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/round3/README.md"
+      },
+      "reports/forge/bcap-physics/hydraulic/round3/provenance.json": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "6411bd993572b5949388e4ca5bcb65c13ea92761",
+        "path": "reports/forge/bcap-physics/hydraulic/round3/provenance.json",
+        "sha256": "25cce6e5878d19704fd24b1e1ac914802757a1c53c152efb12551ec2fa9a31d6",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/round3/provenance.json"
+      },
+      "reports/forge/bcap-physics/hydraulic/winner/LEADERBOARD.md": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "4f5e93b7b0aa21eef353f44d0ecffa976788f9d0",
+        "path": "reports/forge/bcap-physics/hydraulic/winner/LEADERBOARD.md",
+        "sha256": "cb2e74df8bc84e0fe3fc12bd58167d8c1447da0e981da96def577d0d860227a4",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/LEADERBOARD.md"
+      },
+      "reports/forge/bcap-physics/hydraulic/winner/media/gap-vector_spiral.gif": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "cd4308d575799c15a6cabe6c7cf675cf0eaf8d37",
+        "path": "reports/forge/bcap-physics/hydraulic/winner/media/gap-vector_spiral.gif",
+        "sha256": "4b8dbc57a0260780841fd713193b8eae3931c4d1b079ccd2e1bababd149de33c",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/media/gap-vector_spiral.gif"
+      },
+      "reports/forge/bcap-physics/hydraulic/winner/media/index.json": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "99adecbd4e3f2a2a38dbd945e014859ddeb18e1b",
+        "path": "reports/forge/bcap-physics/hydraulic/winner/media/index.json",
+        "sha256": "332c13510c9a49e3f517fcb5545b1c63151e757618fef0c21c8c234e90dcef20",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/media/index.json"
+      },
+      "reports/forge/bcap-physics/hydraulic/winner/media/travel-gaussian1d_stability.gif": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "1129ca46dc83a352b366007403c2b3cb5dd6667b",
+        "path": "reports/forge/bcap-physics/hydraulic/winner/media/travel-gaussian1d_stability.gif",
+        "sha256": "f3cdb1ce5f0398873a1832ca8c652907c2c07fc3ebfeb273c70bc59e3f1abe35",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/media/travel-gaussian1d_stability.gif"
+      },
+      "reports/forge/bcap-physics/hydraulic/winner/media/travel-ring16_acquisition.gif": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "3d0690ada206d4f9e927bd29263b505c254ce892",
+        "path": "reports/forge/bcap-physics/hydraulic/winner/media/travel-ring16_acquisition.gif",
+        "sha256": "66c0545a9db3d40875d381f15c702f31727afa97d551b1a65f56b8f57599aae7",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/media/travel-ring16_acquisition.gif"
+      },
+      "reports/forge/bcap-physics/hydraulic/winner/publish.py": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "dd16746a4cbbb795fc578e4de444ee41c5190503",
+        "path": "reports/forge/bcap-physics/hydraulic/winner/publish.py",
+        "sha256": "79adcd2c65b8eda2b343063273ee74bc3687fbbc292f23c8ca73c87a3d78792f",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/publish.py"
+      },
+      "reports/forge/bcap-physics/hydraulic/winner/results.json": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "f6583998ad4fc8a34ae662288b5499fb4296bf7d",
+        "path": "reports/forge/bcap-physics/hydraulic/winner/results.json",
+        "sha256": "7190e9317f558fb5616573e98ff52a3705a795814dacb56250f2552237b7289a",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/results.json"
+      },
+      "reports/forge/bcap-physics/hydraulic/winner/workflow.py": {
+        "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+        "git_blob": "37f9aff1ee8b909e8fcf13d5f371b1211762ced6",
+        "path": "reports/forge/bcap-physics/hydraulic/winner/workflow.py",
+        "sha256": "373af105af08c34720407402a12ab27f70fc0ffad7a3cb8d5154e1ea71bda7c2",
+        "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/workflow.py"
+      }
+    },
+    "earlier_rounds": "Original rounds 1\u20133 stay separate under their pinned provenance and commits; rounds 3\u20135 cross-track summaries already preserve their negative results. This record adds the later winner comparison.",
+    "gained_passes": {
+      "gap": [],
+      "travel": []
+    },
+    "initializer": "Public deterministic initializer on learned tasks; source-pinned view/tasks retain all initial architecture, prior distribution/capacity and named stream contracts. Caller-owned fixed fixtures are outside this 17-task scope.",
+    "lost_winner_passes": {
+      "gap": [
+        "vector_spiral"
+      ],
+      "travel": [
+        "ring16_acquisition"
+      ]
+    },
+    "original_passes": {
+      "gap": 4,
+      "travel": 4,
+      "winner": 5
+    },
+    "prior": "Initial law/capacity task-owned and unchanged; learned locations and original regularizer unchanged by either hydraulic delta. Original cards/view and source-bound requests retain per-task values.",
+    "protocol_seed": 0,
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "raw_location": "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010",
+    "requests": {
+      "gap": {
+        "candidate_revision": "5ef1f2f21ce9243ceae194f62df2e37f7cbff0cb61f30a1a6f0ff216c32bb513",
+        "local_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/queue/requests/7981e71ff235563021dc89d2.json",
+        "recipe_overrides": {
+          "constraint_geometry_mode": "direction_blend",
+          "d_lr_mult": 1.5,
+          "hydraulic_travel_fraction": 1.0,
+          "hydraulic_travel_radius": "gap_adaptive",
+          "loss": "non_saturating",
+          "lr": 0.012,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 1.0,
+          "network_lr_floor": 1.0,
+          "optimizer_convolution": "per_offset",
+          "optimizer_family": "dualnorm",
+          "optimizer_smoothing": 0.001,
+          "prior_lr_mult": 2.5,
+          "reg_coeff": 1.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0
+        },
+        "request_id": "7981e71ff235563021dc89d2",
+        "sha256": "56b0bd18656c3f38de5ba08df7c779afe3a5cc09c7909adf3df3a53e7a788f37"
+      },
+      "travel": {
+        "candidate_revision": "6bed3a43035a9306f5c9363a3f6da06598be8a90a5d2b5efd4fbe29137566766",
+        "local_path": "/mnt/ml7tb/ParticleGAN-forge/bcap-hydraulic-winner-20261010/queue/queue/requests/2782783c5e834d00892c1a9b.json",
+        "recipe_overrides": {
+          "constraint_geometry_mode": "direction_blend",
+          "d_lr_mult": 1.5,
+          "hydraulic_travel_fraction": 1.0,
+          "hydraulic_travel_radius": "real_spacing",
+          "loss": "non_saturating",
+          "lr": 0.012,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 1.0,
+          "network_lr_floor": 1.0,
+          "optimizer_convolution": "per_offset",
+          "optimizer_family": "dualnorm",
+          "optimizer_smoothing": 0.001,
+          "prior_lr_mult": 2.5,
+          "reg_coeff": 1.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0
+        },
+        "request_id": "2782783c5e834d00892c1a9b",
+        "sha256": "3457d3bb27c2056b980918add362a6a2536fea0176670d97d402738cd36edf58"
+      }
+    },
+    "reuse_eligible": false,
+    "runtime_sha256": "640b92546b7cefb9a81f0bd8d7c20139fc353d7aff632548e34eec7736155ebc",
+    "sampling": "Original task-owned clean live law; replayed latents and prior rows use no additional RNG draws. Constructor/data/training-noise/evaluation streams checkpointed.",
+    "source_commit": "2087cbf29b8a77702c2b57b55fc0669683a23a50",
+    "source_digest": "3983c4fa7a97bc7b94029861cd11dca37e4d022ab5c03d3ec3e10104d6e04222",
+    "source_head": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+    "source_pr": 360,
+    "source_pr_url": "https://github.com/255BITS/ParticleGAN/pull/360",
+    "trainer_delta": {
+      "gap": {
+        "hydraulic_travel_fraction": 1,
+        "hydraulic_travel_radius": "gap_adaptive"
+      },
+      "shared": "No objective, nominal rate, prior learning or regularizer changes; one global recipe per arm.",
+      "travel": {
+        "hydraulic_travel_fraction": 1,
+        "hydraulic_travel_radius": "real_spacing"
+      }
+    },
+    "verified_by_forge": false
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "archive-pr360-hydraulic-winner-bbac181e1281",
+  "record_type": "family_context",
+  "reuse": false,
+  "schema_version": 1,
+  "source": {
+    "archive_commit": "bbac181e128160a1e5770b60490ba99ebaffbf01",
+    "git_blob": "8ae3f4000a3d35d1411c06fd858d2d3eecc70902",
+    "path": "reports/forge/bcap-physics/hydraulic/winner/README.md",
+    "sha256": "c0644c801548bb963364bcc22427d1b62bfc174be744ba6a917cc133aee32b56",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/bbac181e128160a1e5770b60490ba99ebaffbf01/reports/forge/bcap-physics/hydraulic/winner/README.md"
+  },
+  "task_results": [],
+  "task_results_note": "Recall only. Original numerical results retain their archived source, recipe, task and protocol identities. This record fills no current task cell and carries no qualification or additional cost.",
+  "trainer_family": "bcap-dualnorm"
+}

@@ -139,6 +139,9 @@ def _finished(root, request):
             selected.extend(rows)
         bound[attempt["attempt_id"]] = attempt["result_hash"]
     qualification = views.qualify(request["view"], request["tasks"], selected, candidate=request["candidate"])
+    if qualification["status"] == "HELD":
+        # Counted tiers may all pass, but the view's highest tier is held: never a PASS.
+        _block("the qualifying view's highest tier is held (measured, not counted); a held view cannot qualify a candidate")
     if qualification["status"] != "PASS" or not qualification["eligible"]:
         _block("candidate has not passed every applicable qualification gate")
     records, conflicts = knowledge._records(root)
@@ -309,7 +312,7 @@ def plan_promotion(root: Path, registration_id: str, queue_root: Path, *, freeze
     return requests
 
 
-def validate_screening_submission(request: dict) -> None:
+def validate_screening_submission(request: dict, *, root=None, campaign=None) -> None:
     """Enforce the fixed v1 screening draw at the queue's mutation boundary.
 
     The source-controlled v1 protocol declares seed zero. A new seed is never
@@ -349,20 +352,45 @@ def validate_screening_submission(request: dict) -> None:
     research_diagnostic = request.get("view", {}).get("evidence_scope") == "research_diagnostic"
     if research_diagnostic:
         views.validate_view(request["view"], request.get("tasks", {}))
-        from .studies import contract_for
-        contract = contract_for(request)
-        from .decision_contracts import validate_shape
-        if candidate.get("schema_version") not in (2, 3) or not isinstance(contract, dict):
-            _block("research diagnostics require a ready v2 bounded decision_contract")
-        validate_shape(contract)
-        review = request.get("study_review" if "study" in request else "decision_review", {})
-        admission = request.get("study_admission" if "study" in request else "decision_admission")
-        if (contract.get("status") != "ready" or review.get("status") != "READY"
-                or admission != review.get("receipt") or not review.get("receipt")
-                or request.get("through_tier") != 1 or contract["scope"]["view"] != request["view"]["id"]
-                or contract["scope"]["through_tier"] != 1
-                or set(contract["scope"]["task_ids"]) != {item["task"] for item in request["view"]["assignments"]}):
-            _block("research diagnostics require exact ready bounded scope and decision admission")
+        search_plan = request.get("search_plan")
+        registered_search = (candidate.get("schema_version") == 3 and candidate.get("configuration_id")
+                             and isinstance(search_plan, dict)
+                             and isinstance(search_plan.get("declaration"), dict)
+                             and search_plan["declaration"].get("schema_version") == 2)
+        if registered_search:
+            if root is None or campaign is None or type(request.get("through_tier")) is not int or request["through_tier"] != 1:
+                _block("research diagnostic searches require repository-bound registration, budgets and tier-1 scope")
+            # A caller-supplied search_plan is insufficient. Recheck the exact
+            # registered finite grid, source, task/view bindings and campaign.
+            from .decision_contracts import validate_registered_search
+            validate_registered_search(root, request, campaign)
+        else:
+            from .studies import contract_for
+            contract = contract_for(request)
+            from .decision_contracts import validate_shape
+            # Performance compares the exact selected recipe, including immutable
+            # legacy declarations such as Atlas/E22. Its new bounded study owns the
+            # question; converting the recipe card solely to admit it would change
+            # the selected identity. Queue.submit independently verifies this study
+            # against repository declarations before this screening check.
+            from .scaling_adapter import is_performance_task
+            study = request.get("study", {})
+            performance_study = (isinstance(study, dict) and study.get("schema_version") == 1
+                                 and study.get("status") == "ready" and study.get("candidate") == candidate.get("id")
+                                 and bool(request.get("tasks"))
+                                 and all(is_performance_task(task) for task in request["tasks"].values()))
+            if ((candidate.get("schema_version") not in (2, 3) and not performance_study)
+                    or not isinstance(contract, dict)):
+                _block("research diagnostics require a ready v2 bounded decision_contract")
+            validate_shape(contract)
+            review = request.get("study_review" if "study" in request else "decision_review", {})
+            admission = request.get("study_admission" if "study" in request else "decision_admission")
+            if (contract.get("status") != "ready" or review.get("status") != "READY"
+                    or admission != review.get("receipt") or not review.get("receipt")
+                    or request.get("through_tier") != 1 or contract["scope"]["view"] != request["view"]["id"]
+                    or contract["scope"]["through_tier"] != 1
+                    or set(contract["scope"]["task_ids"]) != {item["task"] for item in request["view"]["assignments"]}):
+                _block("research diagnostics require exact ready bounded scope and decision admission")
     for job in jobs:
         science = job.get("science", {})
         marker_ok = (science.get("evidence_use") == "research_diagnostic" if research_diagnostic

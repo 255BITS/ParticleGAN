@@ -1,0 +1,172 @@
+{
+  "unix": 1791951845.7127879,
+  "all_known_processes_absent": {
+    "934658": true,
+    "951816": true,
+    "953865": true,
+    "965514": true,
+    "953866": true,
+    "935820": true,
+    "935822": true,
+    "953872": true,
+    "953746": true,
+    "954259": true,
+    "965269": true,
+    "951703": true,
+    "963096": true,
+    "934809": true,
+    "954011": true,
+    "951836": true,
+    "953891": true,
+    "966563": true,
+    "962855": true,
+    "951723": true,
+    "965039": true,
+    "965685": true,
+    "951605": true,
+    "953914": true,
+    "951869": true,
+    "951745": true,
+    "953798": true,
+    "951878": true,
+    "934983": true,
+    "953927": true,
+    "935752": true,
+    "934856": true,
+    "953932": true,
+    "951887": true,
+    "954192": true,
+    "954067": true,
+    "953941": true,
+    "965719": true,
+    "965720": true,
+    "953816": true,
+    "951642": true,
+    "966361": true,
+    "951782": true,
+    "954216": true,
+    "954090": true,
+    "964075": true,
+    "951665": true,
+    "966643": true,
+    "953843": true,
+    "950905": true
+  },
+  "all12_existing_leases_free_unchanged": [
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot0.lock",
+      "inode": 3941,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot1.lock",
+      "inode": 4005,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot2.lock",
+      "inode": 846966,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot3.lock",
+      "inode": 846967,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot4.lock",
+      "inode": 846968,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot5.lock",
+      "inode": 846969,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot6.lock",
+      "inode": 846970,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot7.lock",
+      "inode": 846971,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot8.lock",
+      "inode": 846972,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu0-slot9.lock",
+      "inode": 846973,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu1-slot0.lock",
+      "inode": 4006,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    },
+    {
+      "path": "/tmp/ember-pg-20261012-slots/gpu1-slot1.lock",
+      "inode": 4007,
+      "size": 0,
+      "mode": "0o664",
+      "held": false
+    }
+  ],
+  "owned_running_jobs": 0,
+  "reservations": 0,
+  "actual_terminal_attempts": 24,
+  "paid_model_sessions": 0,
+  "all24_training_PIDs_absent": {
+    "951744": true,
+    "951922": true,
+    "935007": true,
+    "951698": true,
+    "954263": true,
+    "954315": true,
+    "951814": true,
+    "954052": true,
+    "951884": true,
+    "953940": true,
+    "954108": true,
+    "951835": true,
+    "934850": true,
+    "951768": true,
+    "951660": true,
+    "954208": true,
+    "953910": true,
+    "951722": true,
+    "951641": true,
+    "951875": true,
+    "934879": true,
+    "951936": true,
+    "953846": true,
+    "954089": true
+  },
+  "final_training_pid_check_unix": 1791952022.8055847
+}

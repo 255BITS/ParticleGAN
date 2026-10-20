@@ -2,10 +2,10 @@
   "base_candidate": "bcap-dualnorm-smoothed-v1",
   "campaign": {
     "accept_shared_cost_transfer": false,
-    "budget_seconds": 7560,
-    "candidate_budget_seconds": 2520,
+    "budget_seconds": 15660,
+    "candidate_budget_seconds": 5220,
     "id": "bcap-dualnorm-smoothing-tier1-v1",
-    "purpose": "Unexecuted bounded search example: three complete global recipes, original Tier1 tasks and diagnostic, no higher-tier spend, retries, seed variations or adoption.",
+    "purpose": "Unexecuted bounded search example: three complete global recipes, current view-v14 Tier1 tasks and diagnostic, no higher-tier spend, retries, seed variations or adoption. The expanded reservation is planning only; no search is launched.",
     "schema_version": 1
   },
   "cuda_model": "NVIDIA RTX A6000",

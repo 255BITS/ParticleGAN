@@ -1,0 +1,63 @@
+{
+  "campaign": {
+    "budget_seconds": 7200,
+    "candidate_budget_seconds": 3600,
+    "id": "bispf-throughput-small-v1"
+  },
+  "candidate": "bispf-optimized-quintic-v1",
+  "competing_explanation": "A small-matrix microbenchmark alone cannot establish complete-update speed. Measure the unchanged public trainer, batch sequence, initialization and all 24 quality observations; reuse compatible ordinary jobs.",
+  "control": {
+    "candidate_id": "bispf-throughput-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "img_stripes2",
+    "threshold": 0.9
+  },
+  "hypothesis": "Measure update throughput and preserve the sustained stripe PASS on unchanged small-image task contracts. Retain the held bars outcome.",
+  "id": "bispf-throughput-small-v1-control",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "img_stripes2",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bispf-v2",
+        "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+      },
+      "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "schema": "bispf_fastpath_scorer_controls_v1"
+      },
+      "path": "reports/forge/bispf-optimized/fastpath-scorer-controls.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bispf_throughput_small"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

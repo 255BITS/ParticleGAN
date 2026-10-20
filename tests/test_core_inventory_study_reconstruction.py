@@ -17,6 +17,16 @@ from test_forge_studies import ready_study
 @pytest.fixture
 def admitted(checkout):
     study = ready_study(checkout)
+    # Frozen reconstruction now consults the executed catalog reader before
+    # overlaying live reports. This synthetic source needs that reader too;
+    # it deliberately has no production planner or host-profile dependency.
+    catalog = checkout / "experiments/forge/views.py"
+    catalog.parent.mkdir(parents=True)
+    catalog.write_text("""import json
+def load_tasks(root):
+    return {path.stem: json.loads(path.read_text())
+            for path in sorted((root / 'configs/forge/tasks').glob('*.json'))}
+""")
     # Exact Git-pinned declarations and motivation, without a training process.
     subprocess.run(["git", "init", "-q"], cwd=checkout, check=True)
     subprocess.run(["git", "add", "."], cwd=checkout, check=True)

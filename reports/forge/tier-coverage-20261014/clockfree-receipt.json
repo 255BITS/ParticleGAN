@@ -1,0 +1,95 @@
+{
+  "attempt_id": "a61d4c1b615e49d4b6423bb7f6937923",
+  "attempt_status": "completed",
+  "campaign_id": "selected-family-coverage-20261014",
+  "candidate_id": "recipe-prior-refactor-bcap-pure-v1",
+  "candidate_revision": "f1c9188b6987d8ba26d7c9ed484d1db0db34065afab7ce4a05ecdf3711584540",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "selected-family-coverage-20261014",
+    "request": "fa48bced8bb576ab06d1c76d",
+    "revision": "f1c9188b6987d8ba26d7c9ed484d1db0db34065afab7ce4a05ecdf3711584540"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "30f6cbdb4682dcc5855600e85d77e430b0829dafdd6e179008fc48ee0fe15f62",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/a61d4c1b615e49d4b6423bb7f6937923/evidence.json",
+        "sha256": "b495f437849238e44eb273d9e567bd256b2a168d94a3e29ef5d52604be17622c"
+      },
+      "request": {
+        "path": "reports/forge/attempts/a61d4c1b615e49d4b6423bb7f6937923/request.json",
+        "sha256": "a0cb1b1c6cf231a34621d61f1fb8ce8b626db9c83e03099a4a31c647fb492361"
+      },
+      "result": {
+        "path": "reports/forge/attempts/a61d4c1b615e49d4b6423bb7f6937923/result.json",
+        "sha256": "542cc67651319218ea22c5eab11d10ad70aa24bc91f5a3737b5639f8584a21e4"
+      }
+    },
+    "source_digest": "a5eafc73e4c4a995cc388b9be00bea5aec289fd35863099e369008e7def0ab14",
+    "source_origin_commit": "a0493ca3c213d559523eadc76e244ec9f9c1f81f"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "fa48bced8bb576ab06d1c76d",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.18.1",
+      "torch": "2.13.0+cu126"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "a46c7dfd340bda8d4ada9a98d6d0b7b13f0b416515e5a58fcbe9acfb688de4ba",
+      "cost": {
+        "adapter_reported_inclusive_seconds": 1.8525741859921254,
+        "adapter_seconds": 1.917138774995692,
+        "charged_task": "clockfree_audit",
+        "completed_updates": 24,
+        "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+        "device": "0",
+        "execution_seconds": 8.569606298027793,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 4.222771756991278,
+        "wall_seconds": 8.569606298027793
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "metrics": {
+        "parity_comparisons": 4
+      },
+      "raw_status": "completed",
+      "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+      "reasons": [
+        "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "clockfree_audit"
+    }
+  ]
+}

@@ -19,8 +19,7 @@
     "prior": {
       "kind": "mog",
       "sigma": 0.025,
-      "standardize": false,
-      "learnable": true
+      "standardize": false
     },
     "protocol": "screening",
     "produces_state": true,
@@ -28,7 +27,8 @@
     "continuation_of": "grid100",
     "claim": "clockfree",
     "preserve_prefix_steps": 7000,
-    "original_schedule_horizon": 7000
+    "original_schedule_horizon": 7000,
+    "prior_contract": "recipe_owned_v1"
   },
   "evaluation": {
     "sampling_contract_version": 1,
@@ -70,15 +70,34 @@
       "radial_ks": 0.04
     },
     "sources": {
-      "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+      "benchmarks/toy100/gate.py": "561717e0a6c981b20efdf4a1d41e2cf9cace0c8c619546c4bf7f52748e09fbc3",
       "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
       "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
-      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2"
+      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "benchmarks/toy100/train.py": "d58a9a9862fbbdf31a53302fcee5d986ea4b10b5c337d901dbe51af2ca5ee649",
+      "benchmarks/toy100/__main__.py": "50b9d164a7aae10f8dc20684dbc7be86e5f19152d989ad1247d2a5b9335545ce",
+      "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+      "benchmarks/toy100/affine_replay.py": "6850a45ad099018aaf12126b998907e6eea0471de0a28b73a74eb5cac229b6c8",
+      "benchmarks/toy_suite.py": "8ce629b52ed6c7a52d41e2a4d632dc296168290f4a26949c7e705c2207a2beaf"
     },
     "evaluator_revision": {
-      "id": "native100-manifest-sampling-v2",
-      "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
-      "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged."
+      "id": "pr399-host-device-replay-source-only-v1",
+      "change": "Bind device-correct legacy fixtures and experiment RNG preservation plus recorded-device/initializer affine replay and receipt validation. No EMA-idle hooks are adopted. Architecture, target/data/prior/serving laws, optimizer policy, budgets, cadence and numerical gates are unchanged. Archived declarations and source-bound results retain their original identities.",
+      "previous_revision": {
+        "id": "native100-manifest-sampling-v2",
+        "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+        "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged."
+      },
+      "previous_source_sha256": {
+        "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6"
+      },
+      "added_source_members": [
+        "benchmarks/toy100/train.py",
+        "benchmarks/toy100/__main__.py",
+        "benchmarks/toy100/device.py",
+        "benchmarks/toy100/affine_replay.py",
+        "benchmarks/toy_suite.py"
+      ]
     }
   },
   "resources": {

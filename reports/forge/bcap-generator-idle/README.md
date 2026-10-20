@@ -1,5 +1,7 @@
 # BCAP generator idle rule (`generator_idle_se`)
 
+Historical report from [closed source PR](https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/README.md). Its runtime options, tests and workflow are archived on that source; they are not imported by this recall-only publication. Original numerical verdicts and source identities are unchanged.
+
 Closed PR [#366](https://github.com/255BITS/ParticleGAN/pull/366) proposed skipping the generator
 step while the critic cannot tell real from fake. It targeted the constant-LR "stay" failure noted
 in closed PR [#279](https://github.com/255BITS/ParticleGAN/pull/279), but was never scored. This
@@ -40,9 +42,9 @@ Off-ladder target diagnostic (separate cohort, no qualification credit):
 <!-- leaderboard:end -->
 
 This table compares two arms on one frozen source. The goal's single current leaderboard is still
-[technique-inventory.md](../technique-inventory.md). [measurements.md](measurements.md) and
-[results.json](results.json) hold every metric with its target. [audit.json](audit.json) is the
-saved-receipt audit, and every check passes. [media/](media/README.md) has actual-training GIFs
+[technique-inventory.md](../technique-inventory.md). [measurements.md](https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/measurements.md) and
+[results.json](https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/results.json) hold every metric with its target. [audit.json](audit.json) is the
+saved-receipt audit, and every check passes. [media/](https://github.com/255BITS/ParticleGAN/blob/835e93900c2103eef24ed4b62e18fcdbf19e41bf/reports/forge/bcap-generator-idle/media/README.md) has actual-training GIFs
 of every completed toy (13).
 
 ## Readout

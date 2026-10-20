@@ -1,0 +1,22 @@
+{
+  "gif_sha256": "96ae77821247427d4586b5322c4be2d5a014c8c4f62e9a8144f99429a6dad000",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "9a6ae9a7415a0e314e2cecb153c82d66c64b7450926e5e6d5568f850e7b8356c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "3a78dcf22069919926d4d492f032ed1e9638c5383349f4a08d7686b06d8fe999",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/ml2/hypergan/fill-tier-values-20261014-run/queue/selected-family-coverage-20261014/a61d4c1b615e49d4b6423bb7f6937923/clockfree-proof/comparisons.pt": "675321755cf3bac7179c11916f885b1aa323660f0c62429664ce84523e5dbc78"
+  },
+  "task_id": "clockfree_audit"
+}

@@ -1,0 +1,66 @@
+{
+  "campaign": {
+    "budget_seconds": 1200,
+    "candidate_budget_seconds": 600,
+    "id": "bispf-fastpath-quality-v1"
+  },
+  "candidate": "bispf-v2",
+  "competing_explanation": "Width64 changes capacity and initialization dimensions, so original width12 outcomes do not transfer. It is an explicit host portability control, not a speed comparison with width12 or ordinary quality qualification. All four native/optimized arms must use the same wider architecture and data/prior/seed/budget/scoring laws. Retain any native failure and optimizer failure; no outcome-based gate changes, task pruning, retries or seed repeats.",
+  "control": {
+    "candidate_id": "bispf-v2",
+    "task_map": {
+      "img_bars4_w64_optimizer_diagnostic": "img_bars4",
+      "img_stripes2_w64_optimizer_diagnostic": "img_stripes2"
+    }
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "img_stripes2_w64_optimizer_diagnostic",
+    "threshold": 0.9
+  },
+  "hypothesis": "Measure incumbent native BISPF on explicit width64 architecture-portability variants of stripes2 and bars4. These new larger-capacity task identities retain the original target, numerical gates, prior and 600-update budget and provide the actual native control for a later matched optimized solver comparison.",
+  "id": "bispf-fastpath-quality-native-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "img_stripes2_w64_optimizer_diagnostic",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bispf-v2",
+        "candidate_revision": "96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967"
+      },
+      "path": "reports/forge/records/readout-c2d279f7d47ac009ee80d771.json",
+      "selector": [],
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "schema": "bispf_fastpath_scorer_controls_v1"
+      },
+      "path": "reports/forge/bispf-optimized/fastpath-scorer-controls.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "bispf_fastpath_quality"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

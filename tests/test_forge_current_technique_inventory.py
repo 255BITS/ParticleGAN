@@ -4,6 +4,7 @@ from collections import Counter
 import importlib.util
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 
@@ -16,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("forge_current_inventory", ROOT / "reports/forge/regenerate_technique_inventory.py")
 publication = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(publication)
+# The board's diagnostics note may cite the historical Atlas replay in this one
+# scoped sentence (experiments/forge/family_reports.py), never as a score.
+ATLAS_HISTORY_NOTE = "Atlas's original 19/19 CUDA passes remain valid under their original task and sampling contracts."
 
 
 def test_publication_prefers_recorded_then_canonical_declarations(monkeypatch):
@@ -58,7 +62,12 @@ def _current_family_roster():
             assert row["selection"]["qualified"] is False
     # Editorial original-ID configuration alternatives need not manufacture
     # another row when their scientific declaration aliases an existing one.
-    assert unmeasured <= represented
+    # A hidden declaration-only family (inventory_visible false) that no current
+    # pin selects keeps only its historical row, as current_family_candidates skips it.
+    hidden = {family["id"] for family in registry if family.get("inventory_visible", True) is False}
+    assert unmeasured - hidden <= represented
+    historical = {row["trainer_family"] for row in report.get("historical_family_rows", [])}
+    assert (unmeasured & hidden) - pinned <= historical
     return represented
 
 
@@ -252,7 +261,8 @@ def test_completed_studies_cannot_replace_selected_family_configs_or_history(evi
     assert "<summary>Selected configurations and provenance</summary>" not in markdown
     assert "19/19" not in markdown and "2/2 hold FAIL" not in markdown
     assert "Original Atlas recipe and serving-law evidence" in _family_text(root, current, "atlas")
-    assert markdown.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
+    assert markdown.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
+                          " | Tier 3 requirements | Total view requirements |") == 1
     outputs = _outputs(root)
     mtimes = {path: path.stat().st_mtime_ns for path in outputs}
     assert publication.publish_current(root) == published
@@ -407,6 +417,44 @@ def test_publication_refresh_preserves_science_and_shows_new_unknown_requirement
     times = {path: path.stat().st_mtime_ns for path in before}
     assert publication.refresh_publication(root) == metadata
     assert _outputs(root) == before and times == {path: path.stat().st_mtime_ns for path in before}
+
+
+def test_publication_refresh_names_held_and_removed_tasks_without_counting_them(evidence):
+    root, manifest = evidence
+    baseline = read_json(publication.publish_current(root)["json"])
+    policy = read_json(root / "configs/forge/views/discriminator_stability.json")
+    atomic_json(root / "configs/forge/view-history/discriminator_stability-v2.json", policy)
+    policy["revision"] = 3
+    explanation = "reports/forge/test-dispositions-20261015/README.md"
+    for assignment in policy["assignments"]:
+        if assignment["task"] == "ae":
+            assignment.update(importance="held", hold=dict(
+                schema="forge_hold_v1", previous_importance="required", reason="no_global_recipe", blocked_by=[],
+                summary="Fixture: measured and shown, not counted.", explanation=explanation + "#ae",
+                reentry="Count again when one recipe passes it and every counted task."))
+        elif assignment["task"] == "token":
+            assignment.update(importance="diagnostic", removal=dict(
+                schema="forge_count_removal_v1", previous_importance="required", reason="superseded",
+                counted_by=None, summary="Fixture: replaced by a newer declaration.", explanation=explanation + "#token"))
+    atomic_json(root / "configs/forge/views/discriminator_stability.json", policy)
+    metadata = publication.refresh_publication(root)
+    current = read_json(metadata["json"])
+    for key in ("rows", "configuration_rows", "evidence_rows", "archived_evidence_rows", *publication.POLICY_FIELDS):
+        assert current.get(key) == baseline.get(key)
+    declared = current["declared_view"]
+    assert declared["tier_requirements"] == {"1": ["two_pole"], "2": [], "3": []}
+    assert declared["no_longer_required_tasks"]["1"] == ["token", "ae"]
+    assert declared["held_tasks"] == {"1": ["ae"], "2": [], "3": []}
+    assert declared["removed_from_count"] == {"1": [{"task": "token", "reason": "superseded", "counted_by": None}],
+                                              "2": [], "3": []}
+    markdown = Path(metadata["report"]).read_text()
+    assert ("**1 means 1 counted view requirements, including repeated tests**, from 1 distinct test. 1 held and "
+            "1 removed view assignments (1 held test and 1 removed test) are still measured") in markdown
+    assert ("Counts follow the declared view revisions: discriminator_stability 3. The recorded qualification keeps "
+            "discriminator_stability revision 2 until new ordinary evidence is registered") in markdown
+    assert "| `ae` | held: no one recipe passes it together with the counted tests | discriminator_stability (Tier 1) |" in markdown
+    assert "| `token` | removed: replaced by newer tests | discriminator_stability (Tier 1) |" in markdown
+    assert "always add `--refresh-publication`" in markdown
 
 
 @pytest.mark.parametrize("tamper,message", [("digest", "input digest"), ("row", "unregistered scientific row")])
@@ -623,7 +671,8 @@ def test_default_cli_refreshes_later_view_without_advancing_recorded_qualificati
     assert refreshed["rows"] == before["rows"] and refreshed["view_revision"] == 2
     assert refreshed["declared_view"]["revision"] == 3
     assert metadata["qualification_regraded"] is metadata["training_launched"] is False
-    assert "0(*)/4" in Path(metadata["report"]).read_text()
+    # The declared fourth task is counted and named as not run.
+    assert "[0/4 (3 not run)]" in Path(metadata["report"]).read_text()
 
 
 def test_standalone_scalar_display_binds_actual_receipt_and_never_changes_qualification():
@@ -845,7 +894,7 @@ def test_new_card_is_discovered_with_truthful_unknown_or_blocked_status(evidence
         assert new["candidate_revision"] is None
         assert new["bindings"] == {"source_origin_commit": None}
         markdown = (root / "reports/forge/technique-inventory.md").read_text()
-        assert "new-technique.md" in markdown and "0(*)/3" in markdown
+        assert "new-technique.md" in markdown and "[0/3 (2 not run, 1 incompatible)]" in markdown
         assert all(slot["fresh_common"]["passed"] is None
                    and slot["fresh_common"]["accepted_record"] is None
                    for slot in result["common26_display"]["rows"])
@@ -1020,7 +1069,7 @@ def test_explicit_policy_advance_preserves_original_cohorts_without_new_credit(e
     assert original in baseline["evidence_rows"]
     assert all((root / relative).read_bytes() == content for relative, content in protected.items())
     markdown = Path(result["report"]).read_text()
-    assert "0(*)/5" in markdown
+    assert "0/5 (4 not run)" in markdown
     assert "Complete numerical publication and provenance" in markdown
     assert len(list((root / "reports/forge").glob("technique-inventory.md"))) == 1
     outputs = _outputs(root)
@@ -1333,8 +1382,12 @@ def test_cli_has_one_default_destination(evidence, capsys):
     root, _ = evidence
     publication.main(["--root", str(root)])
     assert '"rows":2' in capsys.readouterr().out
+    outputs = _outputs(root)
+    # --output-prefix now writes an independent report; it can never refresh
+    # or register the one current board.
     with pytest.raises(SystemExit):
-        publication.main(["--root", str(root), "--output-prefix", "another-board"])
+        publication.main(["--root", str(root), "--output-prefix", "another-board", "--refresh-publication"])
+    assert _outputs(root) == outputs
 
 
 def test_raw_technique_export_cannot_replace_registered_current_evidence(evidence):
@@ -1424,7 +1477,7 @@ def test_main_policy_rows_link_separate_history_and_failed_hold_without_credit()
         assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in links
         assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in links
         assert row["qualified_tier"] == 0
-    assert "19/19" not in markdown
+    assert "19/19" not in markdown.replace(ATLAS_HISTORY_NOTE, "")
     assert "C6 baseline selection and retained diagnosis" in _family_text(ROOT, result, "atlas")
     assert result == before
     without_history = deepcopy(result)
@@ -1470,7 +1523,8 @@ def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ord
         "qualification_input", "qualification_reuse", "ordinary_tier_credit", "cross_cohort_pooling",
         "default_adoption", "speed_ranking"))
     markdown = Path(published["report"]).read_text()
-    assert markdown.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
+    assert markdown.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
+                          " | Tier 3 requirements | Total view requirements |") == 1
     assert "7/26 PASS" not in markdown and "4/26 PASS" not in markdown
     assert "INVALID 1" not in markdown and "7/8" not in markdown
     family_page = _family_text(root, after, "atlas")
@@ -1543,7 +1597,9 @@ def test_committed_atlas_progress_display_matches_its_generator_without_raw_evid
     assert {row["trainer_family"] for row in result["rows"]} == families
     cohort_count = len(result["family_progress"]["families"])
     assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == cohort_count
-    assert "Atlas unblocking progress" not in markdown and "7/8" not in markdown
+    # No standalone 7/8 progress score. Totals such as 77/81 (81 counted view
+    # requirements since the 2026-10-15 test dispositions) are not one.
+    assert "Atlas unblocking progress" not in markdown and re.search(r"(?<![\d/])7/8(?![\d/])", markdown) is None
 
 
 @pytest.mark.parametrize("name,prior,expected", [
@@ -1780,13 +1836,16 @@ def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_sepa
     assert len(result["rows"]) == len(families)
     assert {row["trainer_family"] for row in result["rows"]} == families
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
-    assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
-    table = [line for line in text.splitlines() if line.startswith("|")][2:]
+    assert text.count("| Family / selected recipe | Tier 1 requirements | Tier 2 requirements"
+                      " | Tier 3 requirements | Tier 4 requirements | Total view requirements |") == 1
+    selected, details = text.split("## Full-suite results — failures included", 1)
+    assert "<details>" not in selected
+    table = [line for line in selected.splitlines() if line.startswith("|")][2:]
     cohort_count = len(result["family_progress"]["families"])
     assert len([line for line in table if line.startswith("| **[")]) == cohort_count
     labels = [family["label"] for family in result["family_progress"]["families"]]
     assert labels.count("BCAP") == 1 and labels.count("BCAP with K3P") == 0
-    assert "tensorflow" not in text.lower() and "halloween" not in text.lower()
+    assert "tensorflow" not in "\n".join(table).lower() and "halloween" not in "\n".join(table).lower()
     bcap = next(family for family in result["family_progress"]["families"] if family["label"] == "BCAP")
     for cohort in bcap["cohorts"]:
         if cohort["anchor"] == bcap["current_cohort_anchor"]:
@@ -1800,9 +1859,9 @@ def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_sepa
     assert "Recorded observations" in page or "Metric" in page
     view_rows = sum(len(cohort["views"]) for family in result["family_progress"]["families"]
                     for cohort in family["cohorts"] if cohort["anchor"] == family["current_cohort_anchor"])
-    assert len([line for line in table if line.startswith("| ↳ [")]) == view_rows
+    assert sum(" | ↳ [" in line for line in details.splitlines() if line.startswith("|")) == view_rows
     assert all("families/" in line for line in table)
-    assert "19/19" not in text and "7/26 PASS" not in text and "0/26 PASS" not in text
+    assert "19/19" not in text.replace(ATLAS_HISTORY_NOTE, "") and "7/26 PASS" not in text and "0/26 PASS" not in text
     family_page = _family_text(ROOT, result, "atlas")
     assert "Original Atlas recipe and serving-law evidence" in family_page
     assert "Word half-base rate contrast" in family_page
@@ -1829,7 +1888,8 @@ def test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cel
     families = _current_family_roster()
     assert {row["trainer_family"] for row in result["rows"]} == families
     cohort_count = len(result["family_progress"]["families"])
-    assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == cohort_count
+    assert "19/19" not in text.replace(ATLAS_HISTORY_NOTE, "")
+    assert sum(line.startswith("| **[") for line in text.splitlines()) == cohort_count
     assert result == before
 
 
@@ -1909,9 +1969,12 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
     scoped_registry = Path("reports/forge/scoped-publications.json")
     if (ROOT / scoped_registry).is_file():
         # Replay the original navigation inputs, including its unchanged GIF
-        # index, rather than the later pure BCAP media successor.
+        # index, rather than the later pure BCAP media successor. Scoped
+        # cohorts registered after this round are not in its recorded registry.
         registry = read_json(ROOT / scoped_registry)
         original_media = Path("reports/forge/tier1-completion/media.json")
+        original_evidence = Path("reports/forge/tier1-completion/scoped-evidence.json")
+        registry["cohorts"] = [entry for entry in registry["cohorts"] if entry["path"] == original_evidence.as_posix()]
         registry["media"] = {"path": original_media.as_posix(),
                              "sha256": file_hash(tmp_path / original_media)}
         atomic_json(tmp_path / scoped_registry, registry)
@@ -1966,6 +2029,10 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
         parent = variant.get("execution", {}).get("policy_parent_definition")
         if parent is not None:
             relative = "configs/forge/tasks/" + parent["id"] + ".json"
+            # Later scoped cohorts may name questions added after this
+            # publication; those keep their current declarations here.
+            if relative not in original_task_paths:
+                continue
             archived_parent = __import__("json").loads(subprocess.check_output(
                 ["git", "show", original["source_commit"] + ":" + relative], cwd=ROOT, text=True))
             atomic_json(tmp_path / relative, archived_parent)

@@ -51,7 +51,11 @@ def adapter_preflight(task, candidate, *, root=None):
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
-    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+    if adapter == "public_api_model_toy":
+        from .model_toy_adapter import preflight
+        return preflight(task, candidate, root=root)
+    from .tier1_policy import is_policy_task
+    if is_policy_task(task):
         from .tier1_policy import validate
         try:
             validate(task, root=root)
@@ -60,9 +64,17 @@ def adapter_preflight(task, candidate, *, root=None):
         blockers = task_policy_blockers(task, candidate)
         if blockers:
             return blockers
-        if adapter == "transfer_behavior":
+        # The mode-hold ring is an ordinary unconditional public-trainer host
+        # (``_ring``); only the direct two-pole table uses the policy fixture.
+        if adapter == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
             from .policy_behavior_adapters import behavior_preflight
             return behavior_preflight(task, candidate)
+        if adapter == "transfer_vector" and task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
+            from .policy_gaussian import validate_task
+            try:
+                validate_task(task)
+            except (ValueError, KeyError, TypeError) as error:
+                return [str(error)]
         try:
             task_formulation_context(candidate, task, device="cpu", root=root)
         except (ValueError, KeyError) as error:
@@ -71,6 +83,9 @@ def adapter_preflight(task, candidate, *, root=None):
     if adapter == "word_joint":
         from .word_adapter import word_preflight
         return word_preflight(task, candidate, root=root)
+    if adapter == "dcgan_performance_v1":
+        from .scaling_adapter import preflight
+        return preflight(task, candidate)
     supported = {"transfer_behavior", "transfer_vector", "transfer_image", "native100",
                  "native100_continuation", "ring_endurance", "clockfree_audit", "paired_adaptation"}
     if adapter not in supported:
@@ -163,6 +178,120 @@ def _finite_tree(value):
     return not isinstance(value, float) or math.isfinite(value)
 
 
+class _MeasurementLaw:
+    """A registered policy cohort's declared evaluation output-noise law.
+
+    It replaces ``trainer.sample`` for every trainer whose samples a policy
+    task measures: its run trainer and evaluator-owned controls. ``clean``
+    removes the learned output noise (and refuses a request for it), as for
+    every ordinary task. ``as_served`` keeps it exactly as GANTrainer serves
+    it, ``GANTrainer.sample(output_noise=True)``: the learned sigma with its
+    policy floor at the measured state. The declared law governs every
+    measured draw, including evaluator call sites written for a parent's clean
+    law; such requests are counted. Draws use only the caller's isolated
+    evaluation streams; each records its role, model, size, the served sigma
+    and whether noise was applied. Nothing here trains or reads a target.
+    """
+    def __init__(self, trainer, task, *, draws=None, role="measured"):
+        from .tier1_policy import task_cohort
+        cohort = task_cohort(task)
+        if cohort is None:
+            raise ValueError("a declared measurement law binds only a registered policy task")
+        self.output_noise = cohort.measurement == "as_served"
+        if task["evaluation"]["policy_observation"]["output_noise"] is not self.output_noise:
+            raise ValueError("policy observation output noise differs from its cohort measurement")
+        self.task_id, self.law = task["id"], task["evaluation"]["eval_output_noise"]
+        self.draws = [] if draws is None else draws
+        self.role, self.timing, self.trainer = role, None, trainer
+        original = trainer.sample
+
+        def sample(*args, **kwargs):
+            requested = kwargs.get("output_noise")
+            if self.output_noise:
+                kwargs["output_noise"] = True
+            else:
+                if kwargs.get("output_noise", False) is not False:
+                    raise ValueError("Forge scalar scoring requires clean samples without output noise")
+                kwargs["output_noise"] = False
+            sigma = float(trainer.output_sigma())
+            sigma = sigma if math.isfinite(sigma) else None  # JSON receipts; the samples carry the effect.
+            if self.timing is None:
+                result = original(*args, **kwargs)
+            else:
+                with self.timing.measure("sampling"):
+                    result = original(*args, **kwargs)
+            n = args[0] if args else kwargs.get("n")
+            self.draws.append({"role": self.role, "model": "ema" if kwargs.get("ema") else "live", "n": n,
+                               "completed_steps": trainer.completed_steps, "output_noise": self.output_noise,
+                               "output_sigma": sigma, "requested_output_noise": requested})
+            return result
+        trainer.sample = sample
+        trainer._forge_measurement_law = self
+
+    def observed(self, mark):
+        """Draws since ``mark`` as one observation's measured-noise record."""
+        draws = self.draws[mark:]
+        if not draws:
+            return {}
+        applied = {draw["output_noise"] for draw in draws}
+        return {"output_noise": applied.pop() if len(applied) == 1 else "mixed",
+                "measured_draws": [{key: draw[key] for key in
+                                    ("role", "model", "n", "completed_steps", "output_noise", "output_sigma")}
+                                   for draw in draws]}
+
+    def receipt(self):
+        sigmas = [draw["output_sigma"] for draw in self.draws if draw["output_sigma"] is not None]
+        return {"law": self.law, "output_noise": self.output_noise, "sampler": "GANTrainer.sample",
+                "noise_source": ("learned sigma with its policy floor at the measured state, drawn from the "
+                                 "isolated evaluation stream" if self.output_noise else
+                                 "removed: the recorded served sigma is not applied"),
+                "draws": len(self.draws),
+                "control_draws": sum(draw["role"] != "measured" for draw in self.draws),
+                "draws_without_output_noise": sum(not draw["output_noise"] for draw in self.draws),
+                "evaluator_clean_requests_served": sum(draw["requested_output_noise"] is False and draw["output_noise"]
+                                                       for draw in self.draws),
+                "nonfinite_output_sigma_draws": sum(draw["output_sigma"] is None for draw in self.draws),
+                "output_sigma": {"first": sigmas[0], "last": sigmas[-1], "min": min(sigmas), "max": max(sigmas)}
+                                if sigmas else None}
+
+
+def training_state_receipt(state, completed_steps):
+    """Digest of the trained state that runs differing only in measurement share.
+
+    It covers every model, optimizer, policy controller, named training stream
+    and counter. It excludes only values that differ between worker processes
+    without describing training: the isolated evaluation streams (an as-served
+    draw consumes more of them), the process-global CPU/CUDA RNG snapshots
+    (Forge training draws only from named streams) and the feature-cell
+    backend's wall-clock ``eval_seconds`` diagnostic. GPU kernels can still be
+    nondeterministic, so a mismatch is reported, never graded.
+    """
+    from .policy_adapters import DIGEST_KIND, evaluation_state, typed_state_digest
+    value = evaluation_state(state)
+    trainer = value.get("trainer")
+    for owner in (trainer, value.get("policy"), trainer.get("policy") if isinstance(trainer, dict) else None):
+        if isinstance(owner, dict):
+            owner.pop("cpu_rng", None)
+            owner.pop("cuda_rng", None)
+            birth = owner.get("birth_death")
+            last = birth.get("last") if isinstance(birth, dict) else None
+            if isinstance(last, dict):
+                last.pop("eval_seconds", None)
+    return {"sha256": typed_state_digest(value), "completed_steps": completed_steps, "digest_kind": DIGEST_KIND,
+            "scope": ("complete public training state except isolated evaluation streams, global RNG snapshots "
+                      "and wall-clock diagnostics")}
+
+
+def bind_measurement_law(trainer, task, *, draws=None, role="measured"):
+    """Bind a policy task's declared measurement law once per trainer."""
+    bound = getattr(trainer, "_forge_measurement_law", None)
+    if bound is not None:
+        if bound.task_id != task["id"] or (draws is not None and bound.draws is not draws):
+            raise ValueError("this trainer already measures under another declared law")
+        return bound
+    return _MeasurementLaw(trainer, task, draws=draws, role=role)
+
+
 class _Run:
     """Shared progress, state, measured optimizer counts and RNG audit."""
     def __init__(self, context, trainer, output, task, *, sampling_law=PUBLIC_PRIOR_CLEAN):
@@ -187,16 +316,23 @@ class _Run:
         self.mechanism_audit = MechanismAudit(context.recipe, trainer.opt_d, [trainer.opt_g])
         self.timing = PhaseTimer(synchronize=(lambda: torch.cuda.synchronize(context.device))
                                 if context.device.type == "cuda" else None)
-        # One scoring law covers live/EMA observations and evaluator-owned
-        # holdouts. Clean removes training output noise, never the MoG kernel.
-        original_sample = trainer.sample
-        def measured_sample(*args, **kwargs):
-            if kwargs.get("output_noise", False) is not False:
-                raise ValueError("Forge scalar scoring requires clean samples without output noise")
-            kwargs["output_noise"] = False
-            with self.timing.measure("sampling"):
-                return original_sample(*args, **kwargs)
-        trainer.sample = measured_sample
+        self.measurement = None
+        if context.policy_task is not None:
+            # A policy cohort's declared output-noise law (clean or as served)
+            # covers live/EMA observations and evaluator-owned holdouts.
+            self.measurement = bind_measurement_law(trainer, task)
+            self.measurement.timing = self.timing
+        else:
+            # One scoring law covers live/EMA observations and evaluator-owned
+            # holdouts. Clean removes training output noise, never the MoG kernel.
+            original_sample = trainer.sample
+            def measured_sample(*args, **kwargs):
+                if kwargs.get("output_noise", False) is not False:
+                    raise ValueError("Forge scalar scoring requires clean samples without output noise")
+                kwargs["output_noise"] = False
+                with self.timing.measure("sampling"):
+                    return original_sample(*args, **kwargs)
+            trainer.sample = measured_sample
 
     def step(self, real):
         before = self.trainer.completed_steps
@@ -211,6 +347,7 @@ class _Run:
 
     def evaluate(self, function):
         policy_before = None
+        mark = len(self.measurement.draws) if self.measurement is not None else 0
         if self.policy_audit is not None:
             from .policy_adapters import evaluation_state, typed_state_digest
             policy_before = typed_state_digest(evaluation_state(self.context.state_dict()))
@@ -236,7 +373,11 @@ class _Run:
             pure = policy_before == after_digest
             self.policy_purity.append({"completed_steps": self.trainer.completed_steps,
                 "before_sha256": policy_before, "after_sha256": after_digest, "pure": pure})
-            self.policy_observations.append(observation_receipt(self.task, self.trainer.policy))
+            observation = observation_receipt(self.task, self.trainer.policy)
+            if self.measurement is not None:
+                # Observed, not declared: the draws this observation measured.
+                observation.update(self.measurement.observed(mark))
+            self.policy_observations.append(observation)
             if not pure:
                 raise RuntimeError("selected-policy observation changed public training state")
         self.finite = self.finite and _finite_tree(result)
@@ -282,6 +423,11 @@ class _Run:
             controls["cohort"] = self.task["task_cohort"]
             evidence.update(scoring_weights="state_selected", policy_controls=controls,
                 policy_purity=self.policy_purity, policy_observations=self.policy_observations)
+            if self.measurement is not None:
+                evidence["served_output_noise"] = self.measurement.receipt()
+            # Evaluation is audited as pure, so runs that differ only in their
+            # measurement law should end in the same training state.
+            evidence["training_state"] = training_state_receipt(state, trainer.completed_steps)
             guards["hooks_exercised"] = guards["hooks_exercised"] and controls["implementation_observed"]
         if evidence.get("artifact_root"):
             evidence["artifact_manifest"] = manifest_artifacts(evidence["artifact_root"])
@@ -332,8 +478,16 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
             from benchmarks.toy_audit.ring16_quality import score_samples
         else:
             raise CapabilityError([f"unsupported vector sample evaluator: {scorer}"])
+    from .tanh_point_mass import accepts_origin_smoke, refuse_unsupported_tanh
     from .vectorprofiles import build_vector_models, resolve_vector_spec
+    # Routing refusal is independent of card validation. An unsupported tanh
+    # host, including zero_tanh_rail_escape, stops here.
+    refuse_unsupported_tanh(task, task.get("execution", {}).get("host_definition"))
     spec = resolve_vector_spec(task)
+    # The frozen vector law has no tanh branch. Only the published origin
+    # smoke card is redirected; every other host keeps the import above.
+    if scorer is None and accepts_origin_smoke(task, spec):
+        from .tanh_point_mass import sample_target, score_samples
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)
@@ -449,7 +603,7 @@ def _ring(request, task, output, device, *, endurance=False):
     return run.receipt(evidence)
 
 
-def _native(request, task, output, device, *, prerequisites=None):
+def _native(request, task, output, device, *, prerequisites=None, diagnostic=False):
     from .paired_sampling import paired_sampling_blockers
     blockers = paired_sampling_blockers(task)
     if blockers:
@@ -466,8 +620,13 @@ def _native(request, task, output, device, *, prerequisites=None):
         validate_native_continuation(request["tasks"][task["execution"]["continuation_of"]], task)
     context = _context(request, task, device, spec["resources"] if spec else task["execution"]["resources"])
     g, d = build_native_models(context, spec) if spec else _models(context, task["execution"]["model"])
+    prefix_cap = context.recipe.total_steps
+    if task["execution"].get("preserve_prefix_steps") and prefix_cap is None:
+        # A schedule-free recipe has no horizon; its producer's external cap
+        # was the preserved prefix, so restore under that same allowance.
+        prefix_cap = task["execution"]["preserve_prefix_steps"]
     trainer = context.build_trainer(g, d,
-        max_steps=context.recipe.total_steps if task["execution"].get("preserve_prefix_steps") else task["execution"]["steps"])
+        max_steps=prefix_cap if task["execution"].get("preserve_prefix_steps") else task["execution"]["steps"])
     host_receipt = _host_receipt(spec, task["execution"]["native_profile"], g, d) if spec else None
     run = _Run(context, trainer, output, task)
     artifact_root = Path(output) / "native100"
@@ -482,7 +641,8 @@ def _native(request, task, output, device, *, prerequisites=None):
             raise CapabilityError(["continuation requires this candidate's certified prerequisite attempt"])
         expected = next(job["compatibility_key"] for job in request["jobs"]
                         if task["execution"]["continuation_of"] in job.get("task_ids", [job["task_id"]]))
-        if parent["compatibility_key"] != expected or parent["result"]["gate_status"] != "PASS":
+        allowed = {"PASS", "FAIL"} if diagnostic else {"PASS"}
+        if parent["compatibility_key"] != expected or parent["result"]["gate_status"] not in allowed:
             raise CapabilityError(["continuation prerequisite is not a compatible passing own-state result"])
         old = parent["result"]["evidence"]
         verify_artifacts(old["artifact_root"], old["artifact_manifest"])
@@ -498,6 +658,9 @@ def _native(request, task, output, device, *, prerequisites=None):
         if state["trainer"]["completed_steps"] != prefix_steps or state_digest(state) != old["checkpoint"]["state_sha256"]:
             raise ValueError("continuation checkpoint does not represent the exact original prefix")
         context.load_state_dict(state)
+        if run.policy_audit is not None:
+            # Attest only this continuation's own ordered public updates.
+            run.policy_audit.reset_after_restore()
         restored = context.state_dict()
         if state_digest(restored) != state_digest(state):
             raise ValueError("public restore changed prefix state")
@@ -512,18 +675,23 @@ def _native(request, task, output, device, *, prerequisites=None):
         with np.load(directory / "quality_checks" / f"step_{prefix_steps:06d}.npz", allow_pickle=False) as archive:
             reference = torch.from_numpy(archive["target"].copy()).to(device)
     (directory / "snapshots").mkdir(parents=True, exist_ok=True)
+    # Only a registered as-served policy cohort keeps the learned output noise;
+    # its run measurement law then applies it to the holdout draws as well.
+    served = run.measurement is not None and run.measurement.output_noise
     config = {"problem": problem, "steps": task["execution"]["steps"], "device": str(device),
               "seed": request["protocol"]["seed"], "eval_interval": evaluation["eval_interval"],
               "early_eval_steps": evaluation["early_eval_steps"], "eval_samples": evaluation["eval_samples"],
               "snapshot_samples": min(4096, evaluation["eval_samples"]),
-              "eval_output_noise": "clean",
+              "eval_output_noise": run.measurement.law if served else "clean",
               "forge_recipe": context.recipe.to_dict(), "forge_prior": context.prior_config}
     atomic_json(directory / "config.json", config)
     steps = evaluation_steps(config["steps"], config["eval_interval"], config["early_eval_steps"])
     if reference is None:
         reference = sample_real(problem, config["eval_samples"], device=device,
             generator=context.streams.generator("eval", component="target", purpose="reference"))
-    accuracy = AccuracyEvidence(config, directory, steps, reference)
+    # The holdout evaluator's boolean switch selects the trainer's own sampler
+    # (no benchmark wrapper exists here); the bound law adds the served noise.
+    accuracy = AccuracyEvidence({**config, "eval_output_noise": True} if served else config, directory, steps, reference)
     from .paired_sampling import FIELD, PairedOutputNoiseEvidence
     paired = (PairedOutputNoiseEvidence(context, config, artifact_root / "paired-output-noise", steps, reference)
               if FIELD in evaluation else None)
@@ -558,7 +726,7 @@ def _native(request, task, output, device, *, prerequisites=None):
     np.savez_compressed(directory / "final_samples.npz", **final_arrays)
     declaration, holdout = run.evaluate(lambda: accuracy.finish(trainer))
     summary = {"status": "complete", "problem": problem, "config": config,
-               "eval_output_noise": "clean",
+               "eval_output_noise": config["eval_output_noise"],
                "budget_steps": config["steps"], "completed_steps": trainer.completed_steps,
                "eval_steps": steps, "snapshot_steps": steps, "final_samples_file": "final_samples.npz",
                "final": final_metrics, "accuracy": declaration, "holdout": holdout}
@@ -578,6 +746,10 @@ def _native(request, task, output, device, *, prerequisites=None):
         evidence["paired_sampling_diagnostic"] = paired_receipt
     if prefix:
         evidence["prefix_parity"] = prefix
+        if diagnostic:
+            evidence["diagnostic_continuation"] = {"qualification_input": False, "qualification_reuse": False,
+                "parent_gate_status": parent["result"]["gate_status"],
+                "reason": "User-authorized diagnostic continuation after the parent's quality gate; exact own-state restoration required."}
     return run.receipt(evidence, save_state=False)
 
 
@@ -585,28 +757,48 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
+    if adapter == "public_api_model_toy":
+        from .model_toy_adapter import run
+        return run(request, task, output_dir, device)
+    from .tier1_policy import blocked_host, is_policy_task
+    if blocked_host(task) is not None:
+        # Explicit ownership boundary: refuse before any host-specific setup.
+        raise CapabilityError(task_policy_blockers(task, bind_task_candidate(request["candidate"], task)))
     if adapter == "word_joint":
         from .word_adapter import run_word
         return run_word(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
+    if adapter == "dcgan_performance_v1":
+        from .scaling_adapter import run
+        return run(request, task, output_dir, device)
     if adapter == "transfer_behavior":
-        if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
-            from .policy_behavior_adapters import run_behavior
-            return run_behavior(request, task, output_dir, device)
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)
+        if is_policy_task(task):
+            from .policy_behavior_adapters import run_behavior
+            return run_behavior(request, task, output_dir, device)
         from .behavior_adapters import run_behavior
         return run_behavior(request, task, output_dir, device)
     if adapter == "transfer_vector":
         if task["evaluation"].get("kind") in {"gaussian_smoke", "gaussian_stability"}:
-            from .gaussian_tasks import run_gaussian
-            return run_gaussian(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
+            if not is_policy_task(task):
+                # Ordinary Gaussian tasks keep their own continuation rules.
+                from .gaussian_tasks import run_gaussian
+                return run_gaussian(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
+            from .policy_gaussian import run_gaussian
+            from .tier1_policy import diagnostic_continuation_allowed
+            diagnostic = job.get("diagnostic_continuation") is True
+            if diagnostic and not diagnostic_continuation_allowed(task):
+                raise CapabilityError([f"{task['id']}: its cohort declares no diagnostic continuation for this task"])
+            return run_gaussian(request, task, output_dir, device, prerequisites=job.get("prerequisites"),
+                                diagnostic=diagnostic)
         return _vector(request, task, output_dir, device)
     if adapter == "transfer_image":
         return _image(request, task, output_dir, device)
     if adapter == "native100":
         return _native(request, task, output_dir, device)
     if adapter == "native100_continuation":
-        return _native(request, task, output_dir, device, prerequisites=job.get("prerequisites"))
+        return _native(request, task, output_dir, device, prerequisites=job.get("prerequisites"),
+                       diagnostic=job.get("diagnostic_continuation") is True)
     if adapter == "clockfree_audit":
         from .clockfree import run_clockfree
         return run_clockfree(request, task, output_dir, device)

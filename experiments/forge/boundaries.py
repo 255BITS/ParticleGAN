@@ -32,7 +32,8 @@ TUNABLE_FIELDS = frozenset({
 })
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({
-    "optimizer_svd_backend",
+    "training_precision",
+    "optimizer_svd_backend", "optimizer_convolution_rule", "optimizer_dense_profile",
     "prior_update", "prior_regularizer",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
@@ -86,8 +87,8 @@ def _behavior_host(task):
 
 def prior_control_binding(task):
     """Separate direct generated coordinates from a sampled latent prior."""
-    if (_behavior_host(task) == "two_pole"
-            and task.get("task_cohort") == "tier1_policy_selected_cloud_v1"):
+    from .tier1_policy import is_policy_task
+    if _behavior_host(task) == "two_pole" and is_policy_task(task):
         return {"representation": "policy_owned_direct_sample_coordinates",
                 "latent_table_controls": True, "construction": "public ParticlePrior with the original zero initialization",
                 "optimizer": "Recipe.make_generator_optimizer(latent_table=..., direct_particles=...)",
@@ -118,6 +119,8 @@ def task_owned_recipe_fields(task):
         owned |= BEHAVIOR_HOST_FIELDS
         if host != "ae_gan_hold":
             owned |= {"routing_temperature", "distance_reduction"}
+    if task.get("adapter") == "public_api_model_toy":
+        owned |= frozenset(task["execution"].get("recipe_fields", {}))
     if recipe_owned_prior(task):
         owned = owned - {"prior_reg"}
     return frozenset(owned)

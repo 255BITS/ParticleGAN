@@ -30,6 +30,26 @@ def queue_location(root: Path, override=None) -> Path:
     return repository / "runs/forge"
 
 
+def _qualification_tier(val: str) -> int:
+    try:
+        i = int(val)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid qualification tier integer: {val!r}")
+    if i < 1:
+        raise argparse.ArgumentTypeError(f"qualification tier must be >= 1, got {i}")
+    return i
+
+
+def _minimum_tier(val: str) -> int:
+    try:
+        i = int(val)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid tier integer: {val!r}")
+    if i < 0:
+        raise argparse.ArgumentTypeError(f"tier must be >= 0, got {i}")
+    return i
+
+
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2], help="Forge checkout containing declarations and durable reports")
@@ -71,7 +91,8 @@ def parser():
         c.add_argument("candidate")
         c.add_argument("--view")
         c.add_argument("--study", help="explicit research study id or JSON path")
-        c.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=None)
+        c.add_argument("--through-tier", type=_qualification_tier, default=None,
+                       help="maximum qualification tier (>= 1)")
         c.add_argument("--device", choices=("cpu", "cuda"), default=None, help="compute cohort (default CUDA; run infers it from --gpus)")
         c.add_argument("--cuda-model", help="required CUDA model on heterogeneous machines")
         if name == "plan":
@@ -88,6 +109,9 @@ def parser():
     d.add_argument("--watch", action="store_true")
     d.add_argument("--campaign")
     d.add_argument("--goal")
+    d.add_argument("--request", help="drain only this exact submitted request ID")
+    d.add_argument("--shared-fleet-fd", type=int, action="append", default=[],
+                   help="open external fleet lease descriptor to retain in every worker and child; repeat for each token")
     commands.add_parser("queue", help="show active/blocked requests, costs and log paths")
     commands.add_parser("stats", help="report measured automation costs, reuse, avoided work and execution limits")
     logs = commands.add_parser("logs", help="tail the collector's timestamped event stream")
@@ -100,7 +124,7 @@ def parser():
     b.add_argument("--json", action="store_true", help="emit full machine-readable board instead of a compact table")
     b.add_argument("--scope", choices=("all", "current", "pinned", "historical", "calibration_diagnostic"), default="all")
     b.add_argument("--candidate", help="filter candidate names by substring")
-    b.add_argument("--tier", type=int, choices=(0, 1, 2, 3), help="minimum qualified tier")
+    b.add_argument("--tier", type=_minimum_tier, help="minimum qualified tier (>= 0)")
     b.add_argument("--outcome", help="filter status or presence of a task gate status")
     b.add_argument("--family", action="append", help="display task/host/source family; repeat for alternatives")
     b.add_argument("--evidence-quality", action="append", help="display receipt provenance, e.g. certified_pinned or imported_recorded; repeat for alternatives")
@@ -114,12 +138,30 @@ def parser():
     for stage in ("plan", "enqueue", "run"):
         inv = inventory_stages.add_parser(stage)
         inv.add_argument("--view", default="discriminator_stability")
-        inv.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=3)
+        inv.add_argument("--through-tier", type=_qualification_tier, default=3,
+                         help="maximum qualification tier (>= 1)")
         inv.add_argument("--device", choices=("cpu", "cuda"), default=None)
         inv.add_argument("--cuda-model")
         inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory-word-split-v1.json"))
         if stage == "run":
             inv.add_argument("--gpus", default="0,1", help="physical GPU indices, or cpu")
+    scaling = commands.add_parser("scaling", help="bounded DCGAN mock-data speed and memory diagnostics; no qualification")
+    scaling_stages = scaling.add_subparsers(dest="stage", required=True)
+    scaling_register = scaling_stages.add_parser("register", help="freeze exact selected recipes, studies and finite reservation; no training")
+    scaling_register.add_argument("registration")
+    scaling_register.add_argument("--view", default="dcgan_performance")
+    scaling_register.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
+    scaling_register.add_argument("--cuda-model")
+    scaling_register.add_argument("--family", action="append", help="select a current family; repeat, default all")
+    scaling_register.add_argument("--candidate", action="append", default=[], metavar="FAMILY=CANDIDATE",
+                                  help="explicit diagnostic candidate override within a selected family; repeat")
+    scaling_register.add_argument("--campaign", type=Path,
+                                  help="optional immutable shared performance campaign JSON")
+    for stage in ("plan", "enqueue"):
+        scaling_stages.add_parser(stage).add_argument("registration")
+    scaling_publish = scaling_stages.add_parser("publish", help="export frozen queue performance summaries and refresh the current overview; no training")
+    scaling_publish.add_argument("registration")
+    scaling_publish.add_argument("--allow-partial", action="store_true", help="explicitly publish a snapshot with queued/running cells marked unknown")
     tiers = commands.add_parser("experiments-by-tier", help="review experiment tiers, questions, published results and GIFs; no training")
     tiers.add_argument("--view", help="show one view; default all current views")
     tiers.add_argument("--json", action="store_true", help="render machine-readable inventory instead of Markdown")
@@ -134,6 +176,15 @@ def parser():
         trial.add_argument("spec", help="search id or configs/forge/searches JSON path")
         if stage == "run":
             trial.add_argument("--gpus", default=None, help="physical GPU indices, or cpu; must match the fixed spec")
+    cadence = commands.add_parser("cadence", help="matched lazy-regularization studies and generated comparisons")
+    cadence_stages = cadence.add_subparsers(dest="stage", required=True)
+    for stage in ("plan", "enqueue", "run", "report"):
+        c = cadence_stages.add_parser(stage)
+        c.add_argument("spec", help="cadence study id or JSON path; any supported base technique")
+        c.add_argument("--output", type=Path, help="write the generated .md report and compact .json companion")
+        c.add_argument("--json", action="store_true", help="include complete per-task comparison details on stdout")
+        if stage == "run":
+            c.add_argument("--gpus", help="physical GPU indices or cpu; must match the declaration")
     r = commands.add_parser("recall", help="find successes, failures and unknowns before a new idea")
     r.add_argument("--query", default="")
     r.add_argument("--goal")
@@ -167,11 +218,15 @@ def parser():
     for stage in ("plan", "enqueue", "report"):
         stage_parser = stages.add_parser(stage)
         stage_parser.add_argument("registration")
-    retier = commands.add_parser("retier", help="change only view policy, validate and recompute; never enqueue")
+    retier = commands.add_parser("retier", help="change only view policy, archive the previous revision, validate and recompute; never enqueue")
     retier.add_argument("view")
     retier.add_argument("--task", required=True)
-    retier.add_argument("--tier", type=int, choices=(1, 2, 3), required=True)
+    retier.add_argument("--tier", type=_qualification_tier, required=True,
+                        help="new qualification tier (>= 1)")
     retier.add_argument("--reason", required=True)
+    dispositions = commands.add_parser("test-dispositions", help="check or apply held/removed-from-count test dispositions as archived view revisions; no training")
+    dispositions.add_argument("stage", choices=("check", "apply"), help="check writes nothing and exits 1 on drift; apply archives first and is idempotent")
+    dispositions.add_argument("--registry", type=Path, required=True, help="forge_test_dispositions_v1 JSON, relative to --root")
     out = commands.add_parser("readout", help="conclude an idea with comparison and recommendation, then compile memory")
     out.add_argument("candidate")
     out.add_argument("--study", help="conclude only this frozen study, preserving other uses of the recipe")
@@ -265,6 +320,12 @@ def main(argv=None):
         else:
             print(render_markdown(report, root), end="")
         return 0
+    if args.command == "test-dispositions":
+        from .dispositions import apply, check
+        registry = args.registry if args.registry.is_absolute() else root / args.registry
+        result = (check if args.stage == "check" else apply)(root, registry)
+        emit(result)
+        return int(args.stage == "check" and result["drift"])
     queue_root = queue_location(root, args.queue_root)
     from .queue import Queue, drain
     def publish():
@@ -272,7 +333,8 @@ def main(argv=None):
         compile_memory(root)
     # The inventory already records every attempt in the live event stream.
     # Compile the full set of boards once after draining this campaign.
-    batch_inventory = args.command in {"inventory", "search"} and args.stage == "run"
+    batch_inventory = (args.command in {"run", "drain"}
+                       or (args.command in {"inventory", "search", "cadence"} and args.stage == "run"))
     queue = Queue(queue_root, report_root=root / "reports/forge",
                   on_completion=None if batch_inventory else publish)
     command = args.command
@@ -317,10 +379,15 @@ def main(argv=None):
                   "request": str(queue_root / "queue/requests" / f"{entry['request']['request_id']}.json")})
             if command == "run":
                 drain(queue, args.gpus.split(","), campaign=campaign["id"])
+                from .knowledge import compile_memory
+                compile_memory(root, summaries_only=True)
                 emit(queue.inspect()["submissions"][entry["request"]["request_id"]]["status"])
     elif command == "drain":
         drain(queue, args.gpus.split(","), workers_per_gpu=args.workers_per_gpu,
-              allow_sharing=args.allow_sharing, watch=args.watch, campaign=args.campaign, goal=args.goal)
+              allow_sharing=args.allow_sharing, watch=args.watch, campaign=args.campaign, goal=args.goal,
+              request_filter=args.request, shared_fleet_fds=tuple(args.shared_fleet_fd))
+        from .knowledge import compile_memory
+        compile_memory(root, summaries_only=True)
         emit({"status": "drained", "logs": str(queue_root / "events.jsonl")})
     elif command == "queue":
         state = queue.inspect()
@@ -359,6 +426,25 @@ def main(argv=None):
         else:
             emit(run_inventory(root, queue_root, devices=args.gpus.split(","), queue=queue, **options))
             publish()
+    elif command == "scaling":
+        from .scaling import register, plan, enqueue
+        if args.stage == "register":
+            overrides = {}
+            for value in args.candidate:
+                family, separator, candidate = value.partition("=")
+                if not separator or not family or not candidate or family in overrides:
+                    raise ValueError("performance --candidate requires distinct FAMILY=CANDIDATE entries")
+                overrides[family] = candidate
+            emit(register(root, args.registration, view_id=args.view, execution_backend=args.device,
+                          cuda_model=args.cuda_model, family_ids=args.family, candidate_overrides=overrides,
+                          campaign=read_json(args.campaign) if args.campaign else None))
+        elif args.stage == "plan":
+            emit(plan(root, queue_root, args.registration, queue=queue))
+        elif args.stage == "publish":
+            from .scaling_export import publish as publish_scaling
+            emit(publish_scaling(root, queue_root, args.registration, allow_partial=args.allow_partial))
+        else:
+            emit(enqueue(root, queue_root, args.registration, queue=queue))
     elif command == "search":
         from .configuration_search import plan_search, enqueue_search, run_search, report_search
         from .search_space import (MANIFEST_SCHEMA, write_compilation, plan_compilation,
@@ -379,6 +465,32 @@ def main(argv=None):
         else:
             emit(run_search(root, queue_root, args.spec, devices=args.gpus.split(",") if args.gpus else None, queue=queue))
             publish()
+    elif command == "cadence":
+        from .cadence_study import (plan_study, comparison_report, enqueue_study,
+                                    run_study, report_study, write_report)
+        if args.stage == "plan":
+            result = comparison_report(plan_study(root, queue_root, args.spec, queue=queue))
+        elif args.stage == "enqueue":
+            result = enqueue_study(root, queue_root, args.spec, queue=queue)
+        elif args.stage == "report":
+            result = report_study(root, queue_root, args.spec, queue=queue)
+        else:
+            result = run_study(root, queue_root, args.spec, queue=queue,
+                               devices=args.gpus.split(",") if args.gpus else None)
+        destination = args.output
+        if destination is None and args.stage in {"run", "report"}:
+            destination = Path("reports/forge/cadence-studies") / f"{result['study_id']}.md"
+        if destination:
+            output = destination if destination.is_absolute() else root / destination
+            result["outputs"] = write_report(result, output)
+        if args.json:
+            emit(result)
+        else:
+            emit({**{key: value for key, value in result.items() if key != "lanes"},
+                  "lanes": {lane: {"recommendation": details["recommendation"],
+                                     "evidence_scope": details["evidence_scope"],
+                                     "arms": len(details["trials"])}
+                            for lane, details in result["lanes"].items()}})
     elif command in {"compile", "recall", "board", "readout"}:
         from . import knowledge
         if command == "compile":
@@ -418,7 +530,8 @@ def main(argv=None):
                     compute = f"{backend}: {profile['model']}" if profile.get("model") else backend
                     compute = compute.replace("|", "\\|")
                     print(f"| {name} | {revision} | {row.get('evidence_scope')} | {compute} | {row.get('qualified_tier', '—')} | "
-                          f"{counts.get('PASS', 0)}/{sum(counts.values())} | {counts.get('FAIL', 0)} | {counts.get('BLOCKED', 0)} | {seconds} | {row['status']} |")
+                          f"{counts.get('PASS', 0)}/{sum(counts.values())} | {counts.get('FAIL', 0)} | {counts.get('BLOCKED', 0)} | {seconds} | "
+                          f"{row['status']}{knowledge.held_note(row)} |")
                 print(f"\nFull evidence: reports/forge/leaderboards/{args.goal}.json; use --json for raw metrics/cohorts.")
         else:
             emit(knowledge.readout(root, args.candidate, args.conclusion, args.comparison, args.next_action, study_id=args.study))
@@ -430,8 +543,13 @@ def main(argv=None):
             return 1
     elif command == "validate":
         from .views import load_tasks, load_view
+        from .dispositions import unresolved_explanations
         tasks = load_tasks(root)
-        views = [load_view(root, p.stem)["id"] for p in sorted((root / "configs/forge/views").glob("*.json"))]
+        declared = [load_view(root, p.stem) for p in sorted((root / "configs/forge/views").glob("*.json"))]
+        problems = unresolved_explanations(root, declared)
+        if problems:
+            raise ValueError("; ".join(problems))
+        views = [view["id"] for view in declared]
         from .planning import declaration_paths, load_idea
         from .studies import load_study
         from .family_documentation import validate_family_documentation
@@ -472,7 +590,8 @@ def main(argv=None):
                 emit([{"request_id": queue.submit(request, request["promotion_campaign"])["request"]["request_id"],
                        "promotion": request["promotion"]} for request in requests])
     elif command == "retier":
-        from .views import load_tasks, load_view, validate_view
+        from .dispositions import write_view_revision
+        from .views import load_view
         view = load_view(root, args.view)
         found = False
         for assignment in view["assignments"]:
@@ -481,10 +600,8 @@ def main(argv=None):
                 found = True
         if not found:
             raise ValueError("task is not assigned to this view")
-        view["revision"] += 1
-        view["policy_change_reason"] = args.reason
-        validate_view(view, load_tasks(root))
-        atomic_json(root / "configs/forge/views" / f"{args.view}.json", view)
+        # Archives the live revision byte for byte first; refuses a different archive.
+        write_view_revision(root, view, args.reason)
         from .knowledge import board
         emit(board(root, args.view))
     elif command == "cancel":

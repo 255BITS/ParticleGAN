@@ -1,6 +1,90 @@
 # Changelog
 
-## Unreleased
+## 0.9.3 — 2026-10-18
+
+- **Opt-in guarded FP64 Gram and diagnostic SVD dense profiles.** Add
+  `optimizer_dense_profile="gram_fp64_guarded_v1"` and
+  `optimizer_dense_profile="gram_fp64_svd_diagnostic_v2"` for FP32 dense
+  DualNorm matrices: FP64 Gram/`eigh` with the original FP32 cutoff, absolute
+  `.001` smoothing, a guard on the factors actually used, and device-local
+  FP64 SVD fallback (`gram_fp64_svd_diagnostic_v2`) when the Gram rank cutoff
+  is ambiguous. Wide matrices (`rows < columns`) orient along the shorter
+  dimension `(rows, rows)` before forming the Gram matrix. Default, convolution,
+  vector and prior laws are unchanged. Selected checkpoints require the same
+  profile. See the [contract and evidence](reports/gram-profile/README.md) and
+  [diagnostic SVD profile docs](docs/gram-svd-diagnostic-profile.md).
+
+## 0.9.2 — 2026-10-18
+
+- **SBNP prior regularizer degree-of-freedom guard in high-dimensional latents.**
+  `SBNPPriorRegularizer` and `sbnp_regularization_loss` now only include the
+  latent dimension `d` in `min_dof = 2 * k_nn + (d if d <= 4 else 0)` when
+  operating in the `d <= 4` full-covariance regime. High-dimensional latents
+  (`d > 4`, where only marginal variance floor, normalized off-diagonal
+  covariance Frobenius norm, and `k_nn` repulsion are evaluated) remain active
+  at standard batch sizes (`n = 16, 32, 64`) and when `num_particles > 1024`
+  passes sampled unique batch rows from `GANTrainer._step`.
+
+## 0.9.1 — 2026-10-17
+
+- **Faster BISPF execution is the public default.** `bispf_optimized`,
+  `get_recipe()` and model-family factories now select batched convolution
+  updates and BF16/channels-last training for supported CUDA convolutional
+  networks. Parameters, optimizer arithmetic, losses and sampling stay FP32.
+  CPU, nonconvolutional and small networks retain their previous precision;
+  CUDA devices without native BF16 support also use FP32 network execution.
+- **Matched throughput:** 2.15× at 256×256 DCGAN, 2.14× at batch 64 and about
+  2.3× on the small Forge image tasks versus the 0.9.0 quintic default.
+  The six DCGAN workloads improve 1.02–2.15×, with a 1.66× geometric mean.
+  All 19 incumbent numerical passes and 11 existing failures are preserved.
+  Separate endurance controls pass; current revision-12 Tier 3 remains
+  blocked by existing required failures. This owner-directed default choice
+  adds no calibration or natural-image quality claim. See the
+  [source-bound readout](reports/forge/bispf-throughput/README.md).
+- **Restoration:** persist and restore complete recipe fields. To select the
+  0.9.0 execution policy explicitly, use
+  `get_recipe("bispf_optimized", optimizer_svd_backend="native", training_precision="float32")`.
+  Native and batched optimizer checkpoints reject mismatched backends; CUDA
+  graphs are disposable and rebuilt after restoration. Other named trainer
+  presets and bare `Recipe()` retain their earlier settings.
+
+## 0.9.0 — 2026-10-17
+
+- **Optimized BISPF is the public recipe default.** `get_recipe()`, `"gan"`
+  and model-family factories now select `"bispf_optimized"`, matching the
+  selected Forge recipe: non-saturating loss, Born-Infeld critic penalty,
+  SBNP prior regularization and zero-momentum DualNorm at constant rates.
+  Large annotated CUDA convolution kernels use the quintic update; CPU,
+  tiny kernels, dense matrices and sampled prior rows keep their native laws.
+  The owner-directed promotion adds no calibration or robustness credit.
+  Existing `"bcap"`, `"bispf"`, `"ka2"` and other explicit presets remain
+  available; `Recipe(**saved_fields)` retains its restoration semantics.
+- **Dependency-light recipe fields.** `get_recipe_fields` exposes resolved
+  preset settings for applications such as HyperGAN without constructing
+  networks or optimizer state.
+- **Module ownership for custom optimizer groups.**
+  `recipe.make_generator_optimizer(groups, modules=...)` binds convolution
+  layouts from ordinary PyTorch modules while preserving caller learning rates
+  and prior roles. Frozen parameters are excluded from this module-bound path;
+  no architecture-specific training wrapper is required.
+- **Complete BISPF observer checkpoints.** Normalized and plain-Adam BISPF
+  optimizers now save transport residual/data-scale moving averages and the
+  exact thermal scale, fixing divergence after restoring a training checkpoint.
+  Earlier packets that omitted these moments fail with a compatibility error
+  directing callers to their original package source. New formulation-optimizer
+  packets also retain the exact thermal scale; historical formulation packets
+  keep their earlier reconstruction behavior. BCAP and KA2 observer formats
+  remain unchanged.
+- **Measured optimization scope:** the frozen optimization cohort preserves
+  all 19 passing task verdicts and its 11 existing failures. The current
+  overview's 81/81 counts repeated view requirements from 18 distinct tests.
+  Wide synthetic image diagnostics exercise the accelerated path; these do
+  not establish CIFAR quality or transformer acceleration. See the
+  [complete readout](reports/forge/bispf-optimized/README.md).
+- **Release checks use the validated tagged commit.** Develop/master pull
+  requests and pushes run CPU CI; published releases run the complete existing
+  matrix and package checks regardless of the release target branch label.
+  The publisher uploads only the artifacts produced by those checks.
 
 - **Learned-noise floor release:** exclude the noise group's own stationarity
   scale from the model/table settlement gate, preventing clamped noise from
@@ -69,8 +153,8 @@
   `exp(log_sigma)` falls below the physical floor while `log_sigma` is at or
   above its log floor. The initial gradient stays active; ordinary floor
   gradients, native FP64 behavior and checkpoint parameter layout are retained.
-- **KA2 is the default critic formulation** ([docs](docs/ka2.md)); it replaces
-  K3P. Loss, optimizers, schedules and noise are unchanged. The critic penalty
+- **Explicit KA2 critic formulation** ([docs](docs/ka2.md)) replaces
+  K3P for the retained KA2 preset. Loss, optimizers, schedules and noise are unchanged. The critic penalty
   is RMS R1 plus a fake cap for its first 799 calls, then an even blend with
   one-sided caps and an EMA-critic gradient anchor. The anchor's gate and the
   EMA critic's decay (`reg_anchor_min_decay`, default .9, replacing

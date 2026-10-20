@@ -1,0 +1,37 @@
+{
+  "schema": "api_model_reporting_only_repair_v1",
+  "protocol_sha256": "f7931ad2921c0f1632a319b6b45a7baea9a90ed6c8da5d90eee14c34a8912d0d",
+  "frozen_execution_commit": "bee9f06ed",
+  "original_error": "KeyError: adam_variant in report validation after all numerical runs, checkpoint saves and GIF rendering completed. Public Recipe serialization omits inactive fields.",
+  "repair": "Rehydrate serialized recipes with public Recipe before metadata comparison. Main accepts this exact reporting adapter while verifying the complete unchanged scientific source manifest.",
+  "reporting_only_changes": {
+    "reports/forge/api-model-toys/run.py": {
+      "frozen_sha256": "03fd7ad1a6bc6b40841616b3f924a7ee4c270d500d05d186ca16a60a11ba5d37",
+      "repaired_sha256": "724d99ab233ead1a5cde415aaf600be673490d2acc9d215787c6f09c6c063d8f"
+    },
+    "experiments/forge/model_toy_publication.py": {
+      "frozen_sha256": "f46e0b43fae0b40c05fe1f180637b18de982507507b850cdd6b8f7f5d7a0a581",
+      "repaired_sha256": "f42d12ff03cebbc804f9ffcef11b74c82365184013c839cb1f0f68e6657a8c75"
+    },
+    "experiments/forge/publication_memory.py": {
+      "frozen_sha256": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785",
+      "repaired_sha256": "7e9d1e7ea3ce0e165c6df54d324ddffec8d220a0eb1e2ad268ca2d16778ad9c4"
+    }
+  },
+  "scientific_runner_functions_unchanged": [
+    "execute",
+    "execute_stage"
+  ],
+  "training_updates_added": 0,
+  "sampling_draws_added": 0,
+  "rendered_frames_added": 0,
+  "original_raw_receipts_unchanged": true,
+  "original_raw_logs": "/nvme/dev/particlegan/artifacts/api-model-toys/research.log",
+  "repair_log": "/nvme/dev/particlegan/artifacts/api-model-toys/export.log",
+  "reporting_export_logic_changes": [
+    "Rehydrate omitted public Recipe metadata in publication validation.",
+    "Export source_identity as the existing report readers string digest and retain structured provenance separately as source_manifest.",
+    "Add validated display-only recall projection and compact input hashes; preserve BLOCKED full runs and INCOMPLETE software-prefix diagnostics separately."
+  ],
+  "additional_export_error": "Tier report rejected structured source_identity where its established supplement contract expects a string digest; repaired saved-receipt export only."
+}

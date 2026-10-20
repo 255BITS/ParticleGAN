@@ -1,0 +1,53 @@
+{
+  "analysis_source_sha256": "94f596832d94bce175b5d4d6653b3584e17f6dbae570113717d570deb431a9b4",
+  "baseline": "bispf-optimized-quintic-v1",
+  "cpu_seconds_cap": 60,
+  "execution_commit": "bee9f06ed21695e518c1cb702e12a385ab9389e8",
+  "falsifiers": [
+    "Low-usage rows account for less than 75 percent of hard errors, or their error rate does not exceed higher-usage rows.",
+    "All original final metrics must reproduce exactly; otherwise stop without attribution.",
+    "Any checkpoint/RNG/gradient buffer mutation, source/input hash mismatch, missing state or CPU budget excess invalidates analysis."
+  ],
+  "hypothesis": "Hard routing leaves more uniform-prior rows weakly constrained by reconstruction; those rows account for larger independent-generation errors.",
+  "inputs": {
+    "categorical": {
+      "archived_verdict": "PASS",
+      "checkpoint_sha256": "856b73d974adc6a3cc692f7ec56bae48b385ba7f17b3179cc1cbdd7fb288be4d",
+      "receipt_sha256": "6ac59fc435bb1de4a58671ede61ce2b189bbb212e4fe67d3395961719afd22e3",
+      "recipe_sha256": "572d4f2c2b7d6d31a12cda9557a49e6a9116e0381da6bc427f1a6722b926adfa",
+      "scientific_sources_sha256": "57a7f8a9a0b8d67d689bf301ed18ae26dcb87dc2faaa8efb153c0f42a46a05c5"
+    },
+    "hard": {
+      "archived_verdict": "FAIL",
+      "checkpoint_sha256": "450ae89384b09af931b5e6bc65b558e74464c2d7a3c258b0a50aa83b8a10a3e9",
+      "receipt_sha256": "a5c0f1035bbddbddc8693c3120484e26a9266fec3505ffb97dc5fac462ad063b",
+      "recipe_sha256": "c0a7a80ad3c2158db0c87b5d362bf33f6e32d0f88f606754f3dd46efe822505b",
+      "scientific_sources_sha256": "57a7f8a9a0b8d67d689bf301ed18ae26dcb87dc2faaa8efb153c0f42a46a05c5"
+    }
+  },
+  "optimizer_updates": 0,
+  "panel": {
+    "evaluation_inputs": 4096,
+    "evaluation_seed": 10000,
+    "gradient_inputs": 64,
+    "low_usage_mass": 0.01,
+    "posterior_draws": 8,
+    "posterior_seed": 10001,
+    "prior_noise_seed": 10003,
+    "prior_seed": 10002
+  },
+  "predictions": [
+    "At least 75 percent of hard final decoder-mean errors arise from rows with expected posterior mass below 1 percent, and their error rate exceeds higher-usage rows.",
+    "Hard reconstruction/ELBO prior gradient reaches fewer rows than adversarial/SBNP terms on the fixed 64-input panel.",
+    "Report categorical control with identical analysis; concentration alone is not sufficient if it also occurs in the passing control."
+  ],
+  "protocol_seed": 0,
+  "qualification_input": false,
+  "schema": "vae_saved_failure_analysis_protocol_v1",
+  "scope": "Saved final checkpoints only; no causal claim about unsaved terminal states. No retraining, continuation, retiering, gate change, new trainer or new toy.",
+  "stopping_rules": [
+    "Analyze exactly the two archived final states, one 4096-input/eight-draw panel and one 64-input gradient panel per state.",
+    "No optimizer updates, training continuation, seed-only study, task gate edit, default promotion or extrapolation to unsaved states.",
+    "Preserve original hard FAIL/categorical PASS and reuse original actual-training GIFs."
+  ]
+}

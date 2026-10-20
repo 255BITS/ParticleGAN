@@ -1,0 +1,554 @@
+{
+  "alternative_measurements": [
+    {
+      "file": "failed-step004-call001.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 1.0000000220644427,
+      "max_error_vs_native": 0.00035708770155906677,
+      "median_ms": 2.1486710757017136,
+      "method": "masked_eigh64",
+      "relative_error_vs_native": 9.268720168620348e-05,
+      "shape": [
+        16,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "failed-step004-call001.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.9787735039640536,
+      "max_error_vs_native": 0.23433589935302734,
+      "median_ms": 1.0442559141665697,
+      "method": "muon5_augmented_bound1_21",
+      "relative_error_vs_native": 0.4217163324356079,
+      "shape": [
+        16,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "failed-step004-call001.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.9763326286641677,
+      "max_error_vs_native": 0.38543590903282166,
+      "median_ms": 0.10405003558844328,
+      "method": "frobenius_smoothed",
+      "relative_error_vs_native": 0.9692964553833008,
+      "shape": [
+        16,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "failed-step004-call004.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 1.0000000325427791,
+      "max_error_vs_native": 0.00030407801386900246,
+      "median_ms": 94.08095793332905,
+      "method": "masked_eigh64",
+      "relative_error_vs_native": 0.0002111362264258787,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call004.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.9935851747695963,
+      "max_error_vs_native": 0.24376696348190308,
+      "median_ms": 7.861282909289002,
+      "method": "muon5_augmented_bound1_21",
+      "relative_error_vs_native": 0.7312787175178528,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call004.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.6589989737362607,
+      "max_error_vs_native": 0.28552505373954773,
+      "median_ms": 0.3202810185030103,
+      "method": "frobenius_smoothed",
+      "relative_error_vs_native": 0.9931124448776245,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call005.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 1.0000000237184266,
+      "max_error_vs_native": 7.517216727137566e-05,
+      "median_ms": 89.45416298229247,
+      "method": "masked_eigh64",
+      "relative_error_vs_native": 0.000167113306815736,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call005.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.9936841611842103,
+      "max_error_vs_native": 0.28250959515571594,
+      "median_ms": 7.866812986321747,
+      "method": "muon5_augmented_bound1_21",
+      "relative_error_vs_native": 0.7435333132743835,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call005.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.6382998951653464,
+      "max_error_vs_native": 0.3653232157230377,
+      "median_ms": 0.32162200659513474,
+      "method": "frobenius_smoothed",
+      "relative_error_vs_native": 0.9915741086006165,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step013-call122.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.9999999963311695,
+      "max_error_vs_native": 5.535781383514404e-05,
+      "median_ms": 94.30761996190995,
+      "method": "masked_eigh64",
+      "relative_error_vs_native": 0.00013143122487235814,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step013-call122.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.9935811059869039,
+      "max_error_vs_native": 0.191356360912323,
+      "median_ms": 7.87363201379776,
+      "method": "muon5_augmented_bound1_21",
+      "relative_error_vs_native": 0.6682164669036865,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step013-call122.pt",
+      "finite": true,
+      "first_matrix_operator_norm": 0.533604803749145,
+      "max_error_vs_native": 0.3538130223751068,
+      "median_ms": 0.323721906170249,
+      "method": "frobenius_smoothed",
+      "relative_error_vs_native": 0.992487370967865,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    }
+  ],
+  "default_adoption": false,
+  "driver_measurements": [
+    {
+      "file": "failed-step004-call001.pt",
+      "max_error": 0.0,
+      "median_ms": 29.102907981723547,
+      "method": "batch_gesvdj",
+      "relative_error": 0.0,
+      "shape": [
+        16,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "failed-step004-call001.pt",
+      "max_error": 0.00035636499524116516,
+      "median_ms": 30.70573601871729,
+      "method": "batch_gesvd",
+      "relative_error": 8.97954378160648e-05,
+      "shape": [
+        16,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "failed-step004-call001.pt",
+      "max_error": 0.0003570728003978729,
+      "median_ms": 1.8796799704432487,
+      "method": "batch_gesvda",
+      "relative_error": 9.268715075450018e-05,
+      "shape": [
+        16,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "failed-step004-call001.pt",
+      "max_error": 0.0003573596477508545,
+      "median_ms": 5.889131920412183,
+      "method": "cpu_copy",
+      "relative_error": 9.593601862434298e-05,
+      "shape": [
+        16,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "failed-step004-call004.pt",
+      "max_error": 0.0,
+      "median_ms": 430.5609279545024,
+      "method": "batch_gesvdj",
+      "relative_error": 0.0,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call004.pt",
+      "max_error": 0.00031228692387230694,
+      "median_ms": 445.8357399562374,
+      "method": "batch_gesvd",
+      "relative_error": 0.0002300556079717353,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call004.pt",
+      "max_error": 0.0003040772571694106,
+      "median_ms": 85.75541398022324,
+      "method": "batch_gesvda",
+      "relative_error": 0.00021113705588504672,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call004.pt",
+      "max_error": 0.010489925742149353,
+      "median_ms": 573.9937629550695,
+      "method": "cpu_copy",
+      "relative_error": 0.005991130135953426,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call005.pt",
+      "max_error": 0.0,
+      "median_ms": 749.5097120990977,
+      "method": "batch_gesvdj",
+      "relative_error": 0.0,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "failed-step004-call005.pt",
+      "max_error": 0.00018713250756263733,
+      "median_ms": 417.8222380578518,
+      "method": "batch_gesvd",
+      "relative_error": 0.00018718010687734932,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    }
+  ],
+  "driver_run_status": {
+    "complete": false,
+    "reason": "gesvda failed to converge on step004-call005; remaining methods/last batch were not executed in this driver run"
+  },
+  "guard_diagnostics": [
+    {
+      "cold_eager_equal": true,
+      "cold_mixed_equal": true,
+      "cold_warm_equal": true,
+      "ever_passed_by64": 5,
+      "failed_at32": 11,
+      "file": "failed-step004-call001.pt",
+      "orthogonality_max32": 3.6038269996643066,
+      "parameter": "main.2.weight",
+      "relation_max32": 0.00617223558947444,
+      "relation_max64": 0.10927918553352356,
+      "relation_max64_evaluated_float64": 0.10886106346039798,
+      "saved_eager_equal": true,
+      "shape": [
+        16,
+        128,
+        64
+      ]
+    },
+    {
+      "cold_eager_equal": true,
+      "cold_mixed_equal": true,
+      "cold_warm_equal": true,
+      "ever_passed_by64": 0,
+      "failed_at32": 16,
+      "file": "failed-step004-call004.pt",
+      "orthogonality_max32": 6.71793270111084,
+      "parameter": "main.11.weight",
+      "relation_max32": 0.01128930039703846,
+      "relation_max64": 0.4682568311691284,
+      "relation_max64_evaluated_float64": 0.4664207832634154,
+      "saved_eager_equal": true,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "cold_eager_equal": true,
+      "cold_mixed_equal": true,
+      "cold_warm_equal": true,
+      "ever_passed_by64": 0,
+      "failed_at32": 16,
+      "file": "failed-step004-call005.pt",
+      "orthogonality_max32": 9.627691268920898,
+      "parameter": "main.14.weight",
+      "relation_max32": 0.05023366957902908,
+      "relation_max64": 6.758529186248779,
+      "relation_max64_evaluated_float64": 6.748470290621308,
+      "saved_eager_equal": true,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    },
+    {
+      "cold_eager_equal": true,
+      "cold_mixed_equal": true,
+      "cold_warm_equal": true,
+      "ever_passed_by64": 1,
+      "failed_at32": 16,
+      "file": "failed-step013-call122.pt",
+      "orthogonality_max32": 8.016133506316692e-06,
+      "parameter": "main.14.weight",
+      "relation_max32": 0.0014173573581501842,
+      "relation_max64": 0.001429188996553421,
+      "relation_max64_evaluated_float64": 0.001422009296321438,
+      "saved_eager_equal": true,
+      "shape": [
+        16,
+        512,
+        512
+      ]
+    }
+  ],
+  "initial_bound_measurements": [
+    {
+      "fallbacks": 0,
+      "iterations": 28,
+      "key": "critic:[512, 512]",
+      "median_ms": 43.01724804099649,
+      "method": "frob_augmented",
+      "relative_difference": 0.0
+    },
+    {
+      "fallbacks": 0,
+      "iterations": 28,
+      "key": "critic:[512, 512]",
+      "median_ms": 43.384709977544844,
+      "method": "spectral_upper_bound",
+      "relative_difference": 5.998836513754213e-06
+    },
+    {
+      "fallbacks": 0,
+      "iterations": 12,
+      "key": "generator:[512, 128]",
+      "median_ms": 2.8529739938676357,
+      "method": "frob_augmented",
+      "relative_difference": 0.0
+    },
+    {
+      "fallbacks": 0,
+      "iterations": 8,
+      "key": "generator:[512, 128]",
+      "median_ms": 1.8346690339967608,
+      "method": "spectral_upper_bound",
+      "relative_difference": 1.2694130191448494e-06
+    },
+    {
+      "fallbacks": 0,
+      "iterations": 12,
+      "key": "generator:[512, 512]",
+      "median_ms": 17.679609009064734,
+      "method": "frob_augmented",
+      "relative_difference": 0.0
+    },
+    {
+      "fallbacks": 0,
+      "iterations": 8,
+      "key": "generator:[512, 512]",
+      "median_ms": 11.578658013604581,
+      "method": "spectral_upper_bound",
+      "relative_difference": 6.463656063715462e-06
+    },
+    {
+      "fallbacks": 0,
+      "iterations": 12,
+      "key": "generator:[256, 512]",
+      "median_ms": 4.316341946832836,
+      "method": "frob_augmented",
+      "relative_difference": 0.0
+    },
+    {
+      "fallbacks": 0,
+      "iterations": 8,
+      "key": "generator:[256, 512]",
+      "median_ms": 2.7350339805707335,
+      "method": "spectral_upper_bound",
+      "relative_difference": 2.1320513496903004e-06
+    }
+  ],
+  "input_artifacts": [
+    {
+      "name": "failed-step004-call001.pt",
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step004-call001.pt",
+      "sha256": "49f4a3ec57b78b878345a183eccb1415f31713a41c4c635d092cabd3ee413d8d"
+    },
+    {
+      "name": "failed-step004-call004.pt",
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step004-call004.pt",
+      "sha256": "c17fbbb0838763a76944ee4a43d816197ccd5d5f2e178b754f1ad6049710c2a1"
+    },
+    {
+      "name": "failed-step004-call005.pt",
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step004-call005.pt",
+      "sha256": "791cf5f14f426e503da6b475145fbc6ed6f1c882b8b2ccc65025ce3284bc3961"
+    },
+    {
+      "name": "failed-step013-call122.pt",
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/failed-step013-call122.pt",
+      "sha256": "0c3a5f880110ac3aa71a0f7fc9f8c7394b533cac0481fdb266cceb21b36ffe70"
+    }
+  ],
+  "measurement_protocol": {
+    "inputs": "16 spatial-offset matrices per saved layer batch",
+    "note": "Alternative timings used algebra prototypes before public finite-input validation/dispatch was added. Use Forge end-to-end receipts for selected-recipe performance.",
+    "repeats": 3,
+    "timing": "Synchronized complete algebra function only; input loading and reference/norm evaluation excluded",
+    "warmup_calls": 1
+  },
+  "primary_references": [
+    "https://docs.pytorch.org/docs/2.14/generated/torch.optim.Muon.html",
+    "https://github.com/KellerJordan/Muon/blob/master/muon.py"
+  ],
+  "qualification_input": false,
+  "raw_artifact_receipts": {
+    "actual_alternatives_bench.jsonl": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/actual_alternatives_bench.jsonl",
+      "sha256": "2e517ebb13bec9bb01268246715f42a05a9dfc835d33dcded6533de5c947b0ea"
+    },
+    "actual_alternatives_bench.py": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/actual_alternatives_bench.py",
+      "sha256": "21fbc3fb7825627aadbd1f7de9dd2685950bcfcc5dbdf35e00b8127c7f28e861"
+    },
+    "actual_driver_bench.jsonl": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/actual_driver_bench.jsonl",
+      "sha256": "ca13e6d83d8b78a4ece25e5f702eeeb08c366cc7f4a6245da00b7e89d71b833b"
+    },
+    "actual_driver_bench.py": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/actual_driver_bench.py",
+      "sha256": "62841950df08c36181ed4976130484afbaf7f01eb1a90daa2cf5b73416e39652"
+    },
+    "failed_batch_audit.jsonl": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/failed_batch_audit.jsonl",
+      "sha256": "7c5e5e472ff81909ee74c7bcd8763074008e7e29c50feda5bbe2a9930ef27c59"
+    },
+    "failed_batch_audit.py": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/failed_batch_audit.py",
+      "sha256": "47d6172adcb0d0b8bb7791070caf7c017dd54ec5e8202f3ed3fed55861f68c3b"
+    },
+    "initial_bound_bench.jsonl": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/initial_bound_bench.jsonl",
+      "sha256": "bb362fa37c2c237793825db250d657eba4e11b40520bca70aa377fb2c8bfeb8c"
+    },
+    "initial_bound_bench.py": {
+      "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/initial_bound_bench.py",
+      "sha256": "1a43110fdd6b373ccf95bf0b96e62c25366ed0a8e06115e1e7dc0e71f5e253f1"
+    }
+  },
+  "reproduction": {
+    "path": "reports/forge/bispf-optimized/reproduce_kernels.py",
+    "requires": "Byte-exact saved matrix artifacts; do not rerun training to substitute missing inputs.",
+    "sha256": "5889c006314fd4d344755b23342557eabca723cca88ce58c1565fc4f45d1c240",
+    "validation": {
+      "all_finite": true,
+      "device": "cpu",
+      "exit_code": 0,
+      "final_rows": 12,
+      "input_hashes_verified": 4,
+      "log": {
+        "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/kernel-replay-cpu-validation.log",
+        "sha256": "7fd8d2dbcef8d11c8a7d8038d2b8a828b75e9b28a307d80bc970f30934fe2c7b"
+      },
+      "output": {
+        "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/kernel-replay-cpu-validation.json",
+        "sha256": "5a2c7e29e13733c81e0610e2ca233c5a801b71e753d857da3ac241535bca71db"
+      },
+      "repeats": 1,
+      "scope": "CLI/artifact-hash replay verification in a separate CPU cohort; does not repeat or replace historical GPU timings."
+    }
+  },
+  "runtime": {
+    "contention_status": "unknown",
+    "cublas_workspace_config": ":4096:8",
+    "cuda_visible_devices": "1",
+    "deterministic_algorithms": true,
+    "device_name": "NVIDIA RTX A6000",
+    "dtype": "float32",
+    "hardware_note": "Physical UUID and utilization were not recorded in the historical prototype logs; these measurements are unpaired.",
+    "physical_uuid": null,
+    "svd_eigh_diagnostic_dtype": "float64",
+    "tf32": false,
+    "threads": 1,
+    "torch_device": "cuda:0"
+  },
+  "schema": "bispf_kernel_audit_v1",
+  "scope": "Software microbenchmarks on frozen actual-gradient batches. No trainer latency, quality, qualification or promotion claim.",
+  "source_training_artifact": {
+    "path": "/home/martyn/dev/ParticleGAN/runs/forge/bispf-optimized/guard-replay-v1/declaration.json",
+    "sha256": "e250eef9203ad62bb9884d650b990e0ec838832eeba12670f1496ac1714386bb"
+  },
+  "source_training_commit": "4d70a8039"
+}

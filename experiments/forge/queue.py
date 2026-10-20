@@ -19,7 +19,7 @@ import sys
 import time
 import uuid
 
-from .contracts import (atomic_json, canonical, file_lock, identifier, positive_number,
+from .contracts import (atomic_json, canonical, file_hash, file_lock, identifier, positive_number,
                         read_json, stable_hash, utc_now)
 from .sources import verify_snapshot
 from .execution_policy import completes_tier, group_blockers, policy
@@ -250,7 +250,8 @@ class Queue:
             if stable_hash(campaign) != stable_hash(expected):
                 raise ValueError("promotion campaign differs from frozen budgets/policy")
         else:
-            validate_screening_submission(request)
+            validate_screening_submission(request,
+                root=self.report_root.parent.parent if self.report_root else None, campaign=campaign)
         from .sampling import validate_request_sampling
         validate_request_sampling(request, task_ids=task_ids)
         from .hostprofiles import validate_request_host_profiles
@@ -258,8 +259,8 @@ class Queue:
         identifier(campaign["id"], "campaign")
         positive_number(campaign["budget_seconds"], "campaign budget_seconds")
         positive_number(campaign["candidate_budget_seconds"], "candidate_budget_seconds")
-        if request["through_tier"] not in (1, 2, 3):
-            raise ValueError("through_tier must be 1, 2 or 3")
+        if not isinstance(request["through_tier"], int) or isinstance(request["through_tier"], bool) or request["through_tier"] < 1:
+            raise ValueError("through_tier must be an integer >= 1")
         # Campaign is part of request identity, but not scientific compatibility.
         request = {**request, "campaign_id": campaign["id"], "queue_root": str(self.root)}
         request_id = stable_hash(request)[:24]
@@ -479,7 +480,7 @@ class Queue:
         from .decision_contracts import available_round_budget
         return available_round_budget(state, request, seconds if new_round_reservation else 0, job_key=job_key)
 
-    def claim(self, slots: list[dict], *, campaign_filter=None, goal_filter=None) -> dict | None:
+    def claim(self, slots: list[dict], *, campaign_filter=None, goal_filter=None, request_filter=None) -> dict | None:
         """Called only by the drain owner; reservation is atomic with submissions."""
         with self.state() as state:
             self._refresh(state)
@@ -500,6 +501,8 @@ class Queue:
             pending = sorted(state["submissions"].items(), key=lambda kv: (
                 -(kv[1]["request"].get("priority", 0) + (time.time() - kv[1]["submitted_at"]) / 300), kv[0]))
             for request_id, entry in pending:
+                if request_filter is not None and request_id != request_filter:
+                    continue
                 request = entry["request"]
                 if entry["status"] not in {"queued", "running"}:
                     continue
@@ -596,7 +599,13 @@ class Queue:
                     return resolved
             return None
 
-    def launch(self, resolved: dict, *, module="experiments.forge.worker") -> subprocess.Popen:
+    def launch(self, resolved: dict, *, module="experiments.forge.worker", shared_slot_fd=None,
+               shared_fleet_fds=()) -> subprocess.Popen:
+        shared_fleet_fds = tuple(shared_fleet_fds)
+        if (shared_slot_fd is not None or shared_fleet_fds) and module == "experiments.forge.worker":
+            expected_worker = file_hash(Path(__file__).with_name("worker.py"))
+            if resolved["request"]["source"].get("files", {}).get("experiments/forge/worker.py") != expected_worker:
+                raise RuntimeError("external shared leases require the current FD-forwarding worker in the frozen source")
         worker = resolved["worker"]
         directory = Path(worker["directory"])
         # launch + registration remain under queue lock. Recovery also checks the
@@ -612,21 +621,54 @@ class Queue:
                                    CUBLAS_WORKSPACE_CONFIG=":4096:8", FORGE_LEASE_FD=str(lease.fileno()))
                 environment["CUDA_VISIBLE_DEVICES"] = "" if worker["device"] == "cpu" else str(worker["device"])
                 environment["PYTHONPATH"] = resolved["request"]["source"]["snapshot_path"]
+                inherited = (lease.fileno(),)
+                environment.pop("FORGE_SHARED_SLOT_FD", None)
+                environment.pop("FORGE_SHARED_FLEET_FDS", None)
+                if shared_slot_fd is not None:
+                    if type(shared_slot_fd) is not int or shared_slot_fd < 0:
+                        raise ValueError('shared slot descriptor must be an open nonnegative integer')
+                    os.fstat(shared_slot_fd)  # fail before process creation on a stale descriptor
+                    environment["FORGE_SHARED_SLOT_FD"] = str(shared_slot_fd)
+                    inherited += (shared_slot_fd,)
+                if shared_fleet_fds:
+                    for fd in shared_fleet_fds:
+                        if type(fd) is not int or fd < 0:
+                            raise ValueError('fleet descriptor must be an open nonnegative integer')
+                        os.fstat(fd)
+                    environment['FORGE_SHARED_FLEET_FDS'] = ','.join(map(str, shared_fleet_fds))
+                    inherited = tuple(dict.fromkeys((*inherited, *shared_fleet_fds)))
                 with (directory / "run.log").open("ab", buffering=0) as log:
                     process = subprocess.Popen([sys.executable, "-u", "-m", module, str(directory / "request.json")],
                         cwd=resolved["request"]["source"]["snapshot_path"], env=environment,
-                        stdout=log, stderr=subprocess.STDOUT, start_new_session=True, pass_fds=(lease.fileno(),))
+                        stdout=log, stderr=subprocess.STDOUT, start_new_session=True, pass_fds=inherited)
                 job["worker"].update(pid=process.pid, process_identity=process_identity(process.pid))
                 atomic_json(directory / "process.json", job["worker"])
                 return process
 
+    def _active_tier(self, state, submission) -> int | None:
+        if submission["status"] in {"blocked", "completed", "cancelled", "concluded"}:
+            return None
+        eligible, reason, running = self._eligible(state, submission)
+        if reason or (not eligible and not running):
+            return None
+        tiers = {a["task"]: a["qualification_tier"] for a in submission["request"]["view"]["assignments"]}
+        if eligible:
+            return min(tiers[state["jobs"][k]["definition"]["task_id"]] for k in eligible)
+        return min((tiers[j["task_id"]] for j in submission["request"]["jobs"]
+                    if state["jobs"][j["compatibility_key"]]["status"] == "running"
+                    and j["task_id"] in tiers), default=None)
+
     def collect(self, *, only_orphans=False):
         completions = 0
+        tier_completed = False
         with self.state() as state:
             # Dedicated admission may recover abandoned reservations, but must
             # not fence the collector's claim-to-launch registration window.
             if only_orphans and lease_held(self.root / "coordinator.lock"):
                 return 0
+            tiers_before = {req_id: self._active_tier(state, entry)
+                            for req_id, entry in state["submissions"].items()}
+            touched_requests = set()
             for key, job in state["jobs"].items():
                 if job["status"] != "running":
                     continue
@@ -702,6 +744,8 @@ class Queue:
                                 "runtime": request.get("runtime"), "local_artifact_root": str(directory),
                                 "portability": "local_artifacts_required" if any(r.get("evidence", {}).get("artifact_root") for r in rows) else "embedded"})
                 job.update(status="terminal", result=result, charged_seconds=job.get("charged_seconds", 0) + elapsed, reserved_seconds=0)
+                touched_requests.update(job.get("subscribers", []))
+                touched_requests.add(owner["request"])
                 completions += 1
                 self.event(state, "completed", candidate=request["candidate"]["id"], campaign=owner["campaign"],
                            attempt=worker["attempt"], worker=worker["attempt"], gpu=worker["device"], task=task_id,
@@ -709,7 +753,12 @@ class Queue:
                            cost={"wall_seconds": elapsed}, metrics={r["task_id"]: r.get("metrics", {}) for r in rows},
                            reason={r["task_id"]: r.get("reason") for r in rows})
             self._refresh(state)
-        if completions and self.on_completion:
+            if completions:
+                tier_completed = (not touched_requests or any(
+                    self._active_tier(state, state["submissions"][req_id]) != tiers_before.get(req_id)
+                    for req_id in touched_requests if req_id in state["submissions"]
+                ))
+        if tier_completed and self.on_completion:
             self.on_completion()
         return completions
 
@@ -913,7 +962,16 @@ def device_slots(devices: list[str], workers_per_gpu: int = 1, *, allow_sharing:
 
 
 def drain(queue: Queue, devices: list[str], *, workers_per_gpu=1, allow_sharing=False,
-          watch=False, campaign=None, goal=None, poll_seconds=.2):
+          watch=False, campaign=None, goal=None, poll_seconds=.2, request_filter=None,
+          shared_fleet_fds=()):
+    # External bounded schedulers can retain ownership across this normal drain
+    # and every training/evaluation child. Never infer ownership from inherited
+    # environment variables or create/replace an owner's lease files.
+    shared_fleet_fds = tuple(shared_fleet_fds)
+    for fd in shared_fleet_fds:
+        if type(fd) is not int or fd < 0:
+            raise ValueError('fleet descriptor must be an open nonnegative integer')
+        os.fstat(fd)
     with file_lock(queue.root / "coordinator.lock", blocking=False):
         processes = []
         try:
@@ -923,9 +981,10 @@ def drain(queue: Queue, devices: list[str], *, workers_per_gpu=1, allow_sharing=
                         processes.remove(process)
                 queue.collect()
                 slots = device_slots(devices, workers_per_gpu, allow_sharing=allow_sharing)
-                while claim := queue.claim(slots, campaign_filter=campaign, goal_filter=goal):
+                while claim := queue.claim(slots, campaign_filter=campaign, goal_filter=goal,
+                                           request_filter=request_filter):
                     try:
-                        processes.append(queue.launch(claim))
+                        processes.append(queue.launch(claim, shared_fleet_fds=shared_fleet_fds))
                     except (OSError, RuntimeError) as error:
                         atomic_json(Path(claim["worker"]["directory"]) / "terminal.json", {
                             "schema_version": 1, "token": claim["worker"]["token"],
@@ -934,7 +993,8 @@ def drain(queue: Queue, devices: list[str], *, workers_per_gpu=1, allow_sharing=
                         queue.collect()
                 queue.flush_events()
                 state = queue.inspect()
-                active = [e for e in state["submissions"].values() if e["status"] in {"queued", "running"}
+                active = [e for request_id, e in state["submissions"].items() if e["status"] in {"queued", "running"}
+                          and (request_filter is None or request_id == request_filter)
                           and (not campaign or e["request"]["campaign_id"] == campaign)
                           and (not goal or e["request"]["view"]["goal"] == goal)]
                 if not active and not watch:

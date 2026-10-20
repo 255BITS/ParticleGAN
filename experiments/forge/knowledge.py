@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 from contextlib import ExitStack
+from copy import deepcopy
 import json
 from pathlib import Path
 import re
@@ -307,8 +308,10 @@ def _historical_row(record: dict) -> dict:
 
 
 def _current_request(root: Path, idea_id: str, view_id: str, execution_backend="cuda", cuda_model=None) -> dict:
-    from .planning import load_idea, resolve_idea
-    idea = load_idea(root, idea_id)
+    from .planning import _ACTIVE_CACHE, load_idea, resolve_idea
+    idea = (_ACTIVE_CACHE.get_idea_ref(idea_id)
+            if _ACTIVE_CACHE is not None and Path(root).resolve() == _ACTIVE_CACHE.root
+            else load_idea(root, idea_id))
     # Reconstruct the declared question. The resolver retains the full view's
     # tasks regardless of this authorization cap, so qualification is unchanged.
     through_tier = idea.get("decision_contract", {}).get("scope", {}).get("through_tier", 3)
@@ -393,129 +396,155 @@ def _pinned_row(group, records, queue_states):
 def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
     """Read-only view; current hardware cohorts and pinned observations stay separate."""
     from . import views
+    from .planning import declaration_paths, resolution_cache
     root = Path(root)
-    view = views.load_view(root, view_id)
-    records, conflicts = _records(root)
-    attempts, receipt_issues = _attempts(root)
-    states = _queue_states(root, attempts)
-    conflicts.extend(receipt_issues)
-    current, matched_attempts, seen_cohorts = [], set(), set()
-    from .planning import declaration_paths
-    for path in declaration_paths(root):
-        idea = read_json(path)
-        idea_id = idea.get("id", path.stem)
-        configurations = {("cuda", None), ("cpu", None)}
+    with resolution_cache(root) as cache:
+        view = views.load_view(root, view_id)
+        records, conflicts = _records(root)
+        attempts, receipt_issues = _attempts(root)
+        states = _queue_states(root, attempts)
+        conflicts.extend(receipt_issues)
+        current, matched_attempts, seen_cohorts = [], set(), set()
+        attempt_configs: dict[str, set[tuple[str, str | None]]] = defaultdict(set)
+        attempts_by_cohort: dict[tuple, list[tuple[dict, dict[str, str]]]] = defaultdict(list)
         for attempt in attempts:
             original = attempt["request"]
-            if original.get("candidate", {}).get("id") != idea_id:
-                continue
+            cid = original.get("candidate", {}).get("id")
             backend = original.get("execution_backend")
-            if backend in {"cpu", "cuda"}:
+            if cid and backend in {"cpu", "cuda"}:
                 model = original.get("compute_profiles", {}).get("cuda", {}).get("model") if backend == "cuda" else None
-                configurations.add((backend, model))
-        for backend, model in sorted(configurations, key=lambda item: (item[0], item[1] or "")):
+                attempt_configs[cid].add((backend, model))
+            if not diagnostic_evidence_scope(original):
+                c_key = (
+                    original.get("candidate_revision"),
+                    original.get("source", {}).get("digest"),
+                    stable_hash(_runtime_cohort(original)),
+                )
+                old_fps = {tid: views.task_fingerprint(t) for tid, t in original.get("tasks", {}).items() if t}
+                attempts_by_cohort[c_key].append((attempt, old_fps))
+        view_task_fps: dict[str, str] = {}
+        qualify_cache: dict[tuple, dict] = {}
+        for path in declaration_paths(root):
             try:
-                request = _current_request(root, idea_id, view_id, backend, model)
-            except (ValueError, FileNotFoundError, ImportError) as exc:
-                current.append({"candidate_id": idea_id, "candidate_revision": None, "qualified_tier": 0,
-                                "runtime_cohort": {"execution_backend": backend, "cuda_model": model},
-                                "status": "BLOCKED", "lifecycle": "proposed", "evidence_scope": "current",
-                                "blockers": [{"reason": str(exc)}], "counts": {}, "cost": _cost([]),
-                                "next_action": "Resolve the candidate declaration/capability blocker."})
-                continue
-            expected = {task_id: job["compatibility_key"] for job in request["jobs"]
-                        for task_id in job.get("task_ids", [job["task_id"]])}
-            cohort = stable_hash({"candidate_revision": request["candidate_revision"], "keys": expected})
-            if cohort in seen_cohorts:
-                continue
-            seen_cohorts.add(cohort)
-            selected, evidence_attempts, invalid_tasks = [], [], set()
-            for attempt in attempts:
-                original = attempt["request"]
-                if diagnostic_evidence_scope(original):
+                idea = cache.get_idea_ref(path.stem)
+            except Exception:
+                idea = read_json(path)
+            idea_id = idea.get("id", path.stem)
+            configurations = {("cuda", None), ("cpu", None)} | attempt_configs.get(idea_id, set())
+            for backend, model in sorted(configurations, key=lambda item: (item[0], item[1] or "")):
+                try:
+                    request = _current_request(root, idea_id, view_id, backend, model)
+                except (ValueError, FileNotFoundError, ImportError) as exc:
+                    current.append({"candidate_id": idea_id, "candidate_revision": None, "qualified_tier": 0,
+                                    "runtime_cohort": {"execution_backend": backend, "cuda_model": model},
+                                    "status": "BLOCKED", "lifecycle": "proposed", "evidence_scope": "current",
+                                    "blockers": [{"reason": str(exc)}], "counts": {}, "cost": _cost([]),
+                                    "next_action": "Resolve the candidate declaration/capability blocker."})
                     continue
-                if (original.get("candidate_revision") != request["candidate_revision"]
-                        or original.get("source", {}).get("digest") != request.get("source", {}).get("digest")
-                        or _runtime_cohort(original) != _runtime_cohort(request)):
+                expected = {task_id: job["compatibility_key"] for job in request["jobs"]
+                            for task_id in job.get("task_ids", [job["task_id"]])}
+                cohort = stable_hash({"candidate_revision": request["candidate_revision"], "keys": expected})
+                if cohort in seen_cohorts:
                     continue
-                used = False
-                for row in attempt["task_results"]:
-                    if expected.get(row["task_id"]) != row.get("compatibility_key"):
-                        continue
-                    old_task = original.get("tasks", {}).get(row["task_id"])
-                    if not old_task or views.task_fingerprint(old_task) != views.task_fingerprint(request["tasks"][row["task_id"]]):
-                        continue
-                    selected.append(row)
-                    if not attempt["valid_receipt"]:
-                        invalid_tasks.add(row["task_id"])
-                    used = True
-                if used:
-                    evidence_attempts.append(attempt)
-                    matched_attempts.add(attempt["attempt_id"])
-            superseded = {a["attempt_id"] for a in evidence_attempts if a.get("superseded_by")}
-            safe = [{**row, "applicability": {"status": "unknown", "reason": "Durable receipt validation failed."}}
-                    if row["task_id"] in invalid_tasks else row for row in selected
-                    if row["_attempt_id"] not in superseded]
-            covered = {row["task_id"] for row in safe}
-            for task_id, task in request["tasks"].items():
-                if task_id not in covered and task.get("preflight_blockers"):
-                    safe.append({"task_id": task_id, "gate_status": "BLOCKED",
-                                 "reason": "; ".join(task["preflight_blockers"])})
-            qualified = views.qualify(view, request["tasks"], safe, candidate=request["candidate"])
-            if request.get("preflight_blockers"):
-                qualified.update(status="BLOCKED", eligible=False, qualified_tier=0)
-                qualified["blockers"] = [{"task_id": None, "status": "BLOCKED", "reasons": request["preflight_blockers"]},
-                                         *qualified["blockers"]]
-            lifecycle = _lifecycle(request, evidence_attempts, records, states)
-            row = {"candidate_id": idea_id, "candidate_revision": request["candidate_revision"],
-                            "evidence_scope": "research_diagnostic" if view.get("evidence_scope") == "research_diagnostic" else "current", "cohort": cohort,
-                            "runtime_cohort": _runtime_cohort(request),
-                            "source_digest": request.get("source", {}).get("digest"),
-                            "status": qualified["status"], "qualified_tier": qualified["qualified_tier"],
-                            "qualification": qualified,
-                            "counts": dict(sorted(Counter(qualified["task_statuses"].values()).items())),
-                            "cost": _cost(selected), "attempt_ids": sorted(a["attempt_id"] for a in evidence_attempts),
-                            "retry_history": _retry_history(evidence_attempts),
-                            **lifecycle,
-                            "mechanism_class": idea.get("mechanism_class"), "prior": request["candidate"].get("prior"),
-                            "claim_contract": request["candidate"].get("claim_contract"),
-                            "preflight_blockers": request.get("preflight_blockers", []),
-                            "next_action": "Publish an explanation, comparison, and next action." if lifecycle["pending_readout"]
-                                           else "Run the next eligible task within an explicit budget."}
-            if include_bindings:
-                from .technique_board import request_bindings
-                row["scientific_bindings"] = request_bindings(request)
-            current.append(row)
-    current.sort(key=lambda row: (-row["qualified_tier"], row["candidate_id"], row.get("cohort", "")))
-    historical = [_historical_row(record) for record in records
-                  if record.get("evidence_scope") == "historical" and record.get("record_type") != "family_context"]
-    historical.sort(key=lambda row: (str(row["candidate_id"]), row["record_id"]))
-    archived_groups = defaultdict(list)
-    for attempt in attempts:
-        if attempt["attempt_id"] not in matched_attempts:
-            request = attempt["request"]
-            identity = {k: request.get(k) for k in ("candidate_revision", "source", "protocol", "tasks")}
-            identity["runtime"] = _runtime_cohort(request)
-            identity["evidence_use"] = diagnostic_evidence_scope(request) or "qualification"
-            archived_groups[stable_hash(identity)].append(attempt)
-    archived_rows = [_pinned_row(group, records, states) for _, group in sorted(archived_groups.items())]
-    pinned = [row for row in archived_rows if row["evidence_scope"] == "pinned"]
-    diagnostic = [row for row in archived_rows if row["evidence_scope"] == "calibration_diagnostic"]
-    research = [row for row in archived_rows if row["evidence_scope"] == "research_diagnostic"]
-    archived = [{"attempt_id": a["attempt_id"], "candidate_id": a["request"].get("candidate", {}).get("id"),
-                 "candidate_revision": a["request"].get("candidate_revision"), "source": a["source"],
-                 "cost": _cost(a["task_results"]), "reason": "Bounded diagnostics cannot qualify a candidate."
-                 if diagnostic_evidence_scope(a["request"]) else "Pinned source/task/protocol/runtime differs from the current cohort."}
-                for a in attempts if a["attempt_id"] not in matched_attempts]
-    result = {"schema_version": 1, "view": view_id, "view_revision": view["revision"],
-            "policy_fingerprint": views.view_fingerprint(view), "calibration": view.get("calibration"),
-            "rows": current + pinned + diagnostic + research + historical, "current_rows": current, "historical_rows": historical,
-            "calibration_rows": diagnostic,
-            "research_rows": research,
-            "pinned_rows": pinned, "archived_attempts": archived, "conflicts": conflicts, "import_gaps": _gaps(root),
-            "ranking_note": "Ordered by attained tier, then candidate name/cohort; raw metrics and cost remain separate, with no aggregate metric ranking. CPU/CUDA and GPU models remain separate; pinned and historical verdicts are unranked and never automatically reused."}
-    from .board_filters import annotate_rows
-    return annotate_rows(root, result, attempts=attempts, records=records)
+                seen_cohorts.add(cohort)
+                selected, evidence_attempts, invalid_tasks = [], [], set()
+                cohort_key = (
+                    request["candidate_revision"],
+                    request.get("source", {}).get("digest"),
+                    stable_hash(_runtime_cohort(request)),
+                )
+                for attempt, old_fps in attempts_by_cohort.get(cohort_key, ()):
+                    used = False
+                    for row in attempt["task_results"]:
+                        tid = row["task_id"]
+                        if expected.get(tid) != row.get("compatibility_key"):
+                            continue
+                        if tid not in view_task_fps:
+                            view_task_fps[tid] = views.task_fingerprint(request["tasks"][tid])
+                        if old_fps.get(tid) != view_task_fps[tid]:
+                            continue
+                        selected.append(row)
+                        if not attempt["valid_receipt"]:
+                            invalid_tasks.add(tid)
+                        used = True
+                    if used:
+                        evidence_attempts.append(attempt)
+                        matched_attempts.add(attempt["attempt_id"])
+                superseded = {a["attempt_id"] for a in evidence_attempts if a.get("superseded_by")}
+                safe = [{**row, "applicability": {"status": "unknown", "reason": "Durable receipt validation failed."}}
+                        if row["task_id"] in invalid_tasks else row for row in selected
+                        if row["_attempt_id"] not in superseded]
+                covered = {row["task_id"] for row in safe}
+                for task_id, task in request["tasks"].items():
+                    if task_id not in covered and task.get("preflight_blockers"):
+                        safe.append({"task_id": task_id, "gate_status": "BLOCKED",
+                                     "reason": "; ".join(task["preflight_blockers"])})
+                if not selected:
+                    q_key = (
+                        tuple((r["task_id"], r["reason"]) for r in safe),
+                        tuple(views._candidate_eligibility(view, request["candidate"])),
+                    )
+                    if q_key not in qualify_cache:
+                        qualify_cache[q_key] = views.qualify(view, request["tasks"], safe, candidate=request["candidate"])
+                    qualified = deepcopy(qualify_cache[q_key]) if request.get("preflight_blockers") else dict(qualify_cache[q_key])
+                else:
+                    qualified = views.qualify(view, request["tasks"], safe, candidate=request["candidate"])
+                if request.get("preflight_blockers"):
+                    qualified.update(status="BLOCKED", eligible=False, qualified_tier=0)
+                    qualified["blockers"] = [{"task_id": None, "status": "BLOCKED", "reasons": request["preflight_blockers"]},
+                                             *qualified["blockers"]]
+                lifecycle = _lifecycle(request, evidence_attempts, records, states)
+                row = {"candidate_id": idea_id, "candidate_revision": request["candidate_revision"],
+                                "evidence_scope": "research_diagnostic" if view.get("evidence_scope") == "research_diagnostic" else "current", "cohort": cohort,
+                                "runtime_cohort": _runtime_cohort(request),
+                                "source_digest": request.get("source", {}).get("digest"),
+                                "status": qualified["status"], "qualified_tier": qualified["qualified_tier"],
+                                "qualification": qualified,
+                                "counts": dict(sorted(Counter(qualified["task_statuses"].values()).items())),
+                                "cost": _cost(selected), "attempt_ids": sorted(a["attempt_id"] for a in evidence_attempts),
+                                "retry_history": _retry_history(evidence_attempts),
+                                **lifecycle,
+                                "mechanism_class": idea.get("mechanism_class"), "prior": request["candidate"].get("prior"),
+                                "claim_contract": request["candidate"].get("claim_contract"),
+                                "preflight_blockers": request.get("preflight_blockers", []),
+                                "next_action": _next_action(qualified["status"], lifecycle["pending_readout"])}
+                if qualified.get("held_total"):
+                    # Held tasks are graded and shown, never counted; say so beside the status.
+                    row["held"] = {"total": qualified["held_total"], "passed": qualified["held_passed"]}
+                if include_bindings:
+                    from .technique_board import request_bindings
+                    row["scientific_bindings"] = request_bindings(request)
+                current.append(row)
+        current.sort(key=lambda row: (-row["qualified_tier"], row["candidate_id"], row.get("cohort", "")))
+        historical = [_historical_row(record) for record in records
+                      if record.get("evidence_scope") == "historical" and record.get("record_type") != "family_context"]
+        historical.sort(key=lambda row: (str(row["candidate_id"]), row["record_id"]))
+        archived_groups = defaultdict(list)
+        for attempt in attempts:
+            if attempt["attempt_id"] not in matched_attempts:
+                request = attempt["request"]
+                identity = {k: request.get(k) for k in ("candidate_revision", "source", "protocol", "tasks")}
+                identity["runtime"] = _runtime_cohort(request)
+                identity["evidence_use"] = diagnostic_evidence_scope(request) or "qualification"
+                archived_groups[stable_hash(identity)].append(attempt)
+        archived_rows = [_pinned_row(group, records, states) for _, group in sorted(archived_groups.items())]
+        pinned = [row for row in archived_rows if row["evidence_scope"] == "pinned"]
+        diagnostic = [row for row in archived_rows if row["evidence_scope"] == "calibration_diagnostic"]
+        research = [row for row in archived_rows if row["evidence_scope"] == "research_diagnostic"]
+        archived = [{"attempt_id": a["attempt_id"], "candidate_id": a["request"].get("candidate", {}).get("id"),
+                     "candidate_revision": a["request"].get("candidate_revision"), "source": a["source"],
+                     "cost": _cost(a["task_results"]), "reason": "Bounded diagnostics cannot qualify a candidate."
+                     if diagnostic_evidence_scope(a["request"]) else "Pinned source/task/protocol/runtime differs from the current cohort."}
+                    for a in attempts if a["attempt_id"] not in matched_attempts]
+        result = {"schema_version": 1, "view": view_id, "view_revision": view["revision"],
+                "policy_fingerprint": views.view_fingerprint(view), "calibration": view.get("calibration"),
+                "rows": current + pinned + diagnostic + research + historical, "current_rows": current, "historical_rows": historical,
+                "calibration_rows": diagnostic,
+                "research_rows": research,
+                "pinned_rows": pinned, "archived_attempts": archived, "conflicts": conflicts, "import_gaps": _gaps(root),
+                "ranking_note": "Ordered by attained tier, then candidate name/cohort; raw metrics and cost remain separate, with no aggregate metric ranking. CPU/CUDA and GPU models remain separate; pinned and historical verdicts are unranked and never automatically reused."}
+        from .board_filters import annotate_rows
+        return annotate_rows(root, result, attempts=attempts, records=records)
 
 
 def recall(root: Path, query: str = "", goal: str | None = None) -> list[dict]:
@@ -564,6 +593,21 @@ def _cell(value) -> str:
     return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
 
 
+def _next_action(status: str, pending_readout: bool) -> str:
+    if pending_readout:
+        return "Publish an explanation, comparison, and next action."
+    if status == "HELD":
+        return ("No counted task remains: the rest of this view is held, so it shows HELD, never PASS, "
+                "until a held test meets its re-entry rule.")
+    return "Run the next eligible task within an explicit budget."
+
+
+def held_note(row: dict) -> str:
+    """'; N held (M pass, not counted)' for a view with held tasks, else empty."""
+    held = row.get("held")
+    return f"; {held['total']} held ({held['passed']} pass, not counted)" if held else ""
+
+
 def _board_markdown(result: dict) -> str:
     lines = [f"# {result['view']} — revision {result['view_revision']}", "", result["ranking_note"], "",
              "| Candidate / exact revision | Scope | Tier | Outcomes | Wall seconds | Next action |",
@@ -577,7 +621,7 @@ def _board_markdown(result: dict) -> str:
             models = sorted({p.get("model") for p in runtime.get("compute_profiles", {}).values() if p and p.get("model")})
             if models:
                 identity += " (" + ", ".join(models) + ")"
-        counts = ", ".join(f"{key} {value}" for key, value in row.get("counts", {}).items()) or "unmeasured"
+        counts = (", ".join(f"{key} {value}" for key, value in row.get("counts", {}).items()) or "unmeasured") + held_note(row)
         seconds = row["cost"].get("wall_seconds")
         lines.append("| " + " | ".join(_cell(x) for x in (identity, row["evidence_scope"], row["qualified_tier"],
                      counts, round(seconds, 3) if seconds is not None else None, row.get("next_action"))) + " |")
@@ -608,33 +652,85 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         previous = read_json(output / "compilation.json") if (output / "compilation.json").is_file() else {}
         records, conflicts = _memory_records(root)
         boards = []
-        for path in sorted((root / "configs/forge/views").glob("*.json")):
-            if read_json(path).get("evidence_scope") == "research_diagnostic":
-                continue
-            if summaries_only:
-                result = {"view": path.stem, "current_rows": [], "pinned_rows": [], "calibration_rows": [], "conflicts": []}
-            else:
-                result = board(root, path.stem)
-            boards.append(result)
-            if summaries_only:
-                markdown_path = leaderboard_path(root, path.stem)
-                published_path = root / markdown_path
-                legacy_pointer = f"# {path.stem}\n\nThis view has no previously published goal table. "
-                if not published_path.exists() or published_path.read_text().startswith(legacy_pointer):
-                    _text_output(root / markdown_path,
-                                 f"# {path.stem}\n\n{DECLARATION_ONLY_BOARD}\n\nThis view has no previously published goal table. "
-                                 "The compact memory refresh records its declaration without replaying original receipts. "
-                                 f"Inspect `forge board --goal {path.stem} --json` with compatible original evidence "
-                                 "before making a qualification claim.\n")
-                continue
-            _json_output(output / "leaderboards" / (path.stem + ".json"), result)
-            markdown_path = leaderboard_path(root, path.stem)
-            if markdown_path.parent == Path("reports/forge/leaderboards"):
-                _text_output(root / markdown_path, _board_markdown(result))
-            else:
-                # This is generated output; numerical cohort evidence stays in
-                # the goal JSON and the inventory's evidence registry.
-                (output / "leaderboards" / (path.stem + ".md")).unlink(missing_ok=True)
+        from . import planning, sources, views
+        orig_inspect = sources.inspect_source
+        orig_planning_inspect = planning.inspect_source
+        orig_load_tasks = views.load_tasks
+        orig_attempts = _attempts
+        orig_records = _records
+        source_cache: dict = {}
+        tasks_cache: dict = {}
+        attempts_cache: dict = {}
+        records_cache: dict = {}
+
+        def cached_inspect(r: Path, extra_paths=()):
+            key = (str(Path(r).resolve()), tuple(sorted(str(p) for p in extra_paths)))
+            if key not in source_cache:
+                source_cache[key] = orig_inspect(r, extra_paths)
+            return dict(source_cache[key])
+
+        def cached_load_tasks(r: Path | str):
+            key = str(Path(r).resolve())
+            if key not in tasks_cache:
+                tasks_cache[key] = orig_load_tasks(r)
+            return tasks_cache[key]
+
+        def cached_attempts(r: Path):
+            key = str(Path(r).resolve())
+            if key not in attempts_cache:
+                attempts_cache[key] = orig_attempts(r)
+            items, issues = attempts_cache[key]
+            return list(items), list(issues)
+
+        def cached_records(r: Path):
+            key = str(Path(r).resolve())
+            if key not in records_cache:
+                records_cache[key] = orig_records(r)
+            items, issues = records_cache[key]
+            return list(items), list(issues)
+
+        if not summaries_only:
+            sources.inspect_source = cached_inspect
+            planning.inspect_source = cached_inspect
+            views.load_tasks = cached_load_tasks
+            globals()["_attempts"] = cached_attempts
+            globals()["_records"] = cached_records
+        try:
+            with planning.resolution_cache(root):
+                for path in sorted((root / "configs/forge/views").glob("*.json")):
+                    if read_json(path).get("evidence_scope") == "research_diagnostic":
+                        continue
+                    if summaries_only:
+                        result = {"view": path.stem, "current_rows": [], "pinned_rows": [], "calibration_rows": [], "conflicts": []}
+                    else:
+                        result = board(root, path.stem)
+                    boards.append(result)
+                    if summaries_only:
+                        markdown_path = leaderboard_path(root, path.stem)
+                        published_path = root / markdown_path
+                        legacy_pointer = f"# {path.stem}\n\nThis view has no previously published goal table. "
+                        if not published_path.exists() or published_path.read_text().startswith(legacy_pointer):
+                            _text_output(root / markdown_path,
+                                         f"# {path.stem}\n\n{DECLARATION_ONLY_BOARD}\n\nThis view has no previously published goal table. "
+                                         "The compact memory refresh records its declaration without replaying original receipts. "
+                                         f"Inspect `forge board --goal {path.stem} --json` with compatible original evidence "
+                                         "before making a qualification claim.\n")
+                        continue
+                    _json_output(output / "leaderboards" / (path.stem + ".json"), result)
+                    markdown_path = leaderboard_path(root, path.stem)
+                    if markdown_path.parent == Path("reports/forge/leaderboards"):
+                        _text_output(root / markdown_path, _board_markdown(result))
+                    else:
+                        # This is generated output; numerical cohort evidence stays in
+                        # the goal JSON and the inventory's evidence registry.
+                        (output / "leaderboards" / (path.stem + ".md")).unlink(missing_ok=True)
+        finally:
+            if not summaries_only:
+                sources.inspect_source = orig_inspect
+                planning.inspect_source = orig_planning_inspect
+                views.load_tasks = orig_load_tasks
+                globals()["_attempts"] = orig_attempts
+                globals()["_records"] = orig_records
         gaps = _gaps(root)
         inputs = _input_hashes(root, summaries_only=summaries_only)
         coverage = gaps.get("inventory_coverage", {"valid": False, "reason": "inventory unavailable"})

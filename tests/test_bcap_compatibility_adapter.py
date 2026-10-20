@@ -39,11 +39,13 @@ def test_adapter_refuses_modified_original_assertions():
 
 def test_scoped_adapter_reaches_subprocess_program_and_restores_on_failure(tmp_path):
     from conftest import _archived_inactive_comparison_scope
+    from tests.archived_forge_contracts import COMMITS
     module = helper()
     original_path = ROOT / module.INACTIVE
     original = original_path.read_bytes()
     fields = {"constraint_geometry_mode": "none"}
-    imported = SimpleNamespace(__file__=str(original_path), ROOT=ROOT, NEW_INACTIVE_FIELDS=fields)
+    imported = SimpleNamespace(__file__=str(original_path), ROOT=ROOT,
+        DEVELOP=COMMITS["bcap_legacy_questions"], NEW_INACTIVE_FIELDS=fields)
     with pytest.raises(RuntimeError, match="fixture teardown control"):
         with _archived_inactive_comparison_scope(imported, tmp_path):
             program = Path(imported.__file__)
@@ -53,12 +55,23 @@ def test_scoped_adapter_reaches_subprocess_program_and_restores_on_failure(tmp_p
                               and getattr(node.targets[0], "id", None) == "NEW_INACTIVE_FIELDS")
             defaults = ast.literal_eval(assignment.value)
             assert {name: defaults[name] for name in module.INACTIVE_DEFAULTS} == module.INACTIVE_DEFAULTS
-            assert imported.NEW_INACTIVE_FIELDS == {**fields, **module.INACTIVE_DEFAULTS}
-            assert imported.ROOT == ROOT
             receipt = json.loads((tmp_path / "adapter-receipt.json").read_text())
+            checked = receipt["checked_inactive_defaults"]
+            assert len(checked) == 15
+            assert checked["training_precision"] == "float32"
+            assert {name: defaults[name] for name in checked} == checked
+            assert imported.NEW_INACTIVE_FIELDS == {**fields, **checked}
+            # The subprocess keeps current code but asks the original task
+            # questions in a private checkout; no live declarations are edited.
+            assert imported.ROOT == tmp_path / "legacy-question-source"
+            assert (imported.ROOT / "particlegan/recipes.py").read_bytes() == (ROOT / "particlegan/recipes.py").read_bytes()
+            source_binding = json.loads((imported.ROOT / "legacy-software-source-bindings.json").read_text())
+            assert source_binding["original_task_source_commit"] == imported.DEVELOP
+            assert receipt["task_question_source_commit"] == imported.DEVELOP
             assert receipt["original_sha256"] == hashlib.sha256(original).hexdigest()
             assert receipt["adapted_sha256"] == hashlib.sha256(program.read_bytes()).hexdigest()
             raise RuntimeError("fixture teardown control")
     assert imported.__file__ == str(original_path)
+    assert imported.ROOT == ROOT
     assert imported.NEW_INACTIVE_FIELDS is fields
     assert original_path.read_bytes() == original

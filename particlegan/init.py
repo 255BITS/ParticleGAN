@@ -450,6 +450,7 @@ register(nn.PReLU, {"weight": KEEP})
 
 
 def _register_particlegan():
+    from .bispf import StratifiedBlueNoisePrior
     from .diffusion import DrawSource
     from .discriminators import BatchDistanceDiscriminator
     from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
@@ -469,6 +470,7 @@ def _register_particlegan():
             prior.d0.copy_(d0)
 
     register(ParticlePrior, lambda prior: {"z": R2Normal(0., prior.init_std)})
+    register(StratifiedBlueNoisePrior, lambda prior: {"z": R2Normal(0., prior.init_std)})
     register(MoGParticlePrior, finalize=recalibrate)
     register(DrawSource, {"table": R2Normal(0., 1.)})
     register(BatchDistanceDiscriminator, finalize=zero_batch_readout)

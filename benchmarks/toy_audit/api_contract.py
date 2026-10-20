@@ -20,7 +20,8 @@ import torch
 from particlegan import Recipe, get_recipe
 
 
-PROVIDERS = ("api_images", "api_vectors", "api_conditionals", "api_diagnostics", "api_ring16", "api_gaussian1d")
+MODEL_PROVIDERS = ("api_model_ae", "api_model_vae", "api_model_ddgan", "api_model_ae_ddgan")
+PROVIDERS = ("api_images", "api_vectors", "api_conditionals", "api_diagnostics", "api_ring16", "api_gaussian1d") + MODEL_PROVIDERS
 ROOT = Path(__file__).resolve().parents[2]
 CASE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
 
@@ -123,11 +124,15 @@ def validate_recipe_overrides(case, recipe_name, recipe_overrides):
     return result
 
 
-def build(case, *, device="cpu", seed=DEFAULT_SEED, recipe_name=None, max_steps=None, recipe_overrides=None):
+def build(case, *, device="cpu", seed=DEFAULT_SEED, recipe_name=None, max_steps=None, recipe_overrides=None, recipe=None):
     provider = import_module(f"benchmarks.toy_audit.{case['provider']}")
     recipe_name = recipe_name or case["default_recipe"]
     overrides = validate_recipe_overrides(case, recipe_name, recipe_overrides)
     options = {"recipe_overrides": overrides} if overrides else {}
+    if recipe is not None:
+        if case["provider"] not in MODEL_PROVIDERS or not isinstance(recipe, Recipe) or overrides:
+            raise ValueError("resolved Recipe injection requires a model toy without tuning overrides")
+        options["recipe"] = recipe
     with construction_rng(seed, device):
         fixture = provider.build_case(case["id"], device=device, seed=seed,
                                       recipe_name=recipe_name, max_steps=max_steps, **options)

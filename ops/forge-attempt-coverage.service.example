@@ -1,0 +1,19 @@
+[Unit]
+Description=ParticleGAN selected-family missing run attempts (4 workers, 2 per GPU)
+
+[Service]
+Type=simple
+WorkingDirectory=/path/to/reporting-checkout
+Environment=OMP_NUM_THREADS=1
+Environment=MKL_NUM_THREADS=1
+Environment=PYTHONUNBUFFERED=1
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/path/to/runtime/bin/python -m experiments.forge.attempt_coverage run --source-root /path/to/frozen-selected-source --state-root /path/to/local-attempt-state --gpus 0,1 --include-research --watch --refresh
+Restart=on-failure
+RestartPreventExitStatus=2
+RestartSec=60
+KillMode=process
+TimeoutStopSec=15
+
+[Install]
+WantedBy=default.target
