@@ -45,3 +45,28 @@ class NeuralComponentImputer(nn.Module):
     def draw_indices(self, observed, mask, *, draws, generator):
         return torch.multinomial(self(observed, mask).softmax(-1), draws,
                                  replacement=True, generator=generator).T
+
+
+def masked_quantile_transport_loss(generated, observed, mask, *, projections=32):
+    """Equal-mass projected quantile matching within each observed mask cohort.
+
+The same generated batch and actual mask rows are reused. No complete real
+data, mode labels, new noise, fitted mixture weights or altered sampling enter.
+Single-row mask cohorts contribute zero because empirical spread is undefined.
+"""
+    from .kinetic_transport import kinetic_transport_loss
+    if generated.ndim != 2 or generated.shape != observed.shape or mask.shape != observed.shape:
+        raise ValueError("expected matching generated/observed/mask [B,D]")
+    if not bool(((mask == 0) | (mask == 1)).all()):
+        raise ValueError("mask must be binary")
+    _, groups = torch.unique(mask, dim=0, return_inverse=True)
+    loss = generated[:0].sum()
+    for group in groups.unique():
+        rows = groups == group
+        count = int(rows.sum())
+        if count >= 2:
+            keep = mask[rows].bool()
+            fake = torch.where(keep, generated[rows], 0.)
+            real = torch.where(keep, observed[rows], 0.)
+            loss = loss + (count / len(generated)) * kinetic_transport_loss(fake, real, projections=projections)
+    return loss

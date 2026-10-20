@@ -11,6 +11,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "constraint_geometry_mode": "none",
     "kinetic_transport_weight": 0.0,
     "masked_mixture_weight": 0.0,
+    "masked_transport_weight": 0.0,
     "imputer_component_weight": 0.0,
     "kinetic_transport_local_weight": 0.0,
     "kinetic_transport_projections": 32,

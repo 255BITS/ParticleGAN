@@ -313,7 +313,7 @@
       "mechanism_exercised": true
     },
     "sources": {
-      "benchmarks/toy_audit/api_contract.py": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+      "benchmarks/toy_audit/api_contract.py": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a",
       "benchmarks/toy_audit/api_model_ddgan.py": "2ca2b98fdc2797e01b8fe0142775403fdcfd638a11d7ec1663948bf7f625ee26",
       "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",

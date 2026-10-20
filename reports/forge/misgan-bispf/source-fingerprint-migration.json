@@ -115,5 +115,87 @@
         }
       }
     }
+  ],
+  "round2_source_only_migration": [
+    {
+      "task": "configs/forge/tasks/model_vae_hard.json",
+      "original_git_blob": "7f1e216cb333d4276ee5df84f747c9c821e4b665",
+      "changes": {
+        "benchmarks/toy_audit/api_contract.py": {
+          "old_sha256": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+          "new_sha256": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a"
+        }
+      }
+    },
+    {
+      "task": "configs/forge/tasks/model_ddgan_gaussian_chain.json",
+      "original_git_blob": "61403baf3e55897dcd3fd669b9dc96a8afcb386f",
+      "changes": {
+        "benchmarks/toy_audit/api_contract.py": {
+          "old_sha256": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+          "new_sha256": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a"
+        }
+      }
+    },
+    {
+      "task": "configs/forge/tasks/model_vae_categorical.json",
+      "original_git_blob": "a21f6753155e184b458763430a99ccb30e827439",
+      "changes": {
+        "benchmarks/toy_audit/api_contract.py": {
+          "old_sha256": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+          "new_sha256": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a"
+        }
+      }
+    },
+    {
+      "task": "configs/forge/tasks/model_ae_ddgan_bimodal_chain.json",
+      "original_git_blob": "46c4aec01f895d322908ec1fda5f4a68fadb31de",
+      "changes": {
+        "benchmarks/toy_audit/api_contract.py": {
+          "old_sha256": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+          "new_sha256": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a"
+        }
+      }
+    },
+    {
+      "task": "configs/forge/tasks/model_ae_gan_multimodal.json",
+      "original_git_blob": "ef1f6994506532b6884063ef69d1f77ed8d2f48c",
+      "changes": {
+        "benchmarks/toy_audit/api_contract.py": {
+          "old_sha256": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+          "new_sha256": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a"
+        }
+      }
+    },
+    {
+      "task": "configs/forge/tasks/model_ae_ddgan_gaussian_chain.json",
+      "original_git_blob": "64bd245ca932d9797f48b6dc70f8e89e50166d8d",
+      "changes": {
+        "benchmarks/toy_audit/api_contract.py": {
+          "old_sha256": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+          "new_sha256": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a"
+        }
+      }
+    },
+    {
+      "task": "configs/forge/tasks/model_ddgan_bimodal_chain.json",
+      "original_git_blob": "1e2e510ba197882f68b9a2cdffd20578680a8685",
+      "changes": {
+        "benchmarks/toy_audit/api_contract.py": {
+          "old_sha256": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+          "new_sha256": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a"
+        }
+      }
+    },
+    {
+      "task": "configs/forge/tasks/model_ae_reconstruction.json",
+      "original_git_blob": "23a18c8722e6a2d7cd04c79b21226130343cc900",
+      "changes": {
+        "benchmarks/toy_audit/api_contract.py": {
+          "old_sha256": "2b47671abb006f9acd0467d7b0bda6b263c62547520fa364f7a902c4a2ed189f",
+          "new_sha256": "e0c49a247558d6c280e0e79193f8b768109e6b93c6323d3584f2c85096e9377a"
+        }
+      }
+    }
   ]
 }

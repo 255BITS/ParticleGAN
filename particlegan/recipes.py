@@ -116,6 +116,7 @@ class Recipe:
     reconstruction_weight: float = 1.0
     # Incomplete-data component callers only; unsupported hosts reject these.
     masked_mixture_weight: float = 0.0
+    masked_transport_weight: float = 0.0
     imputer_component_weight: float = 0.0
     # Opt-in label-free transport signal on the same G-phase target batch.
     kinetic_transport_weight: float = 0.0
@@ -574,7 +575,7 @@ class Recipe:
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
-                    "reconstruction_weight", "masked_mixture_weight", "imputer_component_weight"):
+                    "reconstruction_weight", "masked_mixture_weight", "masked_transport_weight", "imputer_component_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
         if len(self.betas) != 2 or any(not 0 <= b < 1 for b in self.betas):

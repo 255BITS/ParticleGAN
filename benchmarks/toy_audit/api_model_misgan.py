@@ -13,7 +13,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 from particlegan import Recipe, UpdatePolicy, init
-from particlegan.masked_mixture import NeuralComponentImputer, masked_mixture_nll
+from particlegan.masked_mixture import NeuralComponentImputer, masked_mixture_nll, masked_quantile_transport_loss
 from particlegan.optim.constraint_geometry import constraint_geometry_backward
 from .reproducibility import construction_rng
 from .api_sources.misgan import BLOCK_PATTERNS, sample_masks, pattern_index, pattern_probs
@@ -276,18 +276,22 @@ class MisGANFixture:
             mixture = masked_mixture_nll(x_g,m_g,table,sigma=self.recipe.observation_sigma)
             mask_ids = torch.cdist(m_g,self.problem.patterns).argmin(1)
             mask_nll = F.cross_entropy(logits,mask_ids)
-            auxiliary = self.recipe.masked_mixture_weight*(mixture+mask_nll) + self.recipe.imputer_component_weight*categorical
+            transport = (masked_quantile_transport_loss(fake,x_g,m_g,projections=self.recipe.kinetic_transport_projections)
+                         if self.recipe.masked_transport_weight else fake.new_zeros(()))
+            auxiliary = (self.recipe.masked_mixture_weight*mixture + self.recipe.masked_transport_weight*transport
+                         + (self.recipe.masked_mixture_weight+self.recipe.masked_transport_weight)*mask_nll
+                         + self.recipe.imputer_component_weight*categorical)
             regularization = self.recipe.prior_regularization(self.prior.z,regularizer=self.regularizer)
             self.policy.observe_sampled_rows(torch.arange(64,device=self.device))
             self.opt_g.zero_grad(set_to_none=True)
-            protected = (adversarial,auxiliary) if auxiliary.requires_grad and (self.recipe.masked_mixture_weight or self.recipe.imputer_component_weight) else (adversarial,)
+            protected = (adversarial,auxiliary) if auxiliary.requires_grad and (self.recipe.masked_mixture_weight or self.recipe.masked_transport_weight or self.recipe.imputer_component_weight) else (adversarial,)
             constraint_geometry_backward(adversarial+auxiliary+regularization,self.opt_g,protected)
             self.policy.after_generator_backward(loss_gan=adversarial.detach(),loss_critic=dl.detach())
             self.opt_g.step(); self.policy.after_generator_step()
         finally:
             self.D.requires_grad_(True)
         self.policy.finish_step()
-        return dict(step=self.completed_steps,loss_d=float(dl.detach()),loss_g=float(adversarial.detach()),masked_nll=float(mixture.detach()),synthetic_ce=float(categorical.detach()))
+        return dict(step=self.completed_steps,loss_d=float(dl.detach()),loss_g=float(adversarial.detach()),masked_nll=float(mixture.detach()),masked_transport=float(transport.detach()),synthetic_ce=float(categorical.detach()))
 
     @torch.no_grad()
     def observe(self,n=4096,seed=10000):

@@ -201,7 +201,7 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
-    if ((recipe.masked_mixture_weight or recipe.imputer_component_weight)
+    if ((recipe.masked_mixture_weight or recipe.masked_transport_weight or recipe.imputer_component_weight)
             and task.get("execution", {}).get("host_definition", {}).get("provider") != "benchmarks.toy_audit.api_model_misgan"):
         return ["masked mixture/imputer objectives require the explicit MisGAN component consumer"]
     from .tier1_policy import blocked_host, is_policy_task
