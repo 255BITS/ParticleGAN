@@ -342,8 +342,16 @@
       "benchmarks/toy_audit/api_model_ddgan.py": "2ca2b98fdc2797e01b8fe0142775403fdcfd638a11d7ec1663948bf7f625ee26",
       "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
-      "experiments/forge/model_toy_adapter.py": "714be671402d345a7a33be0d43f18c02da0b9cd30dbbc04dc04b465fe434bd54",
+      "experiments/forge/model_toy_adapter.py": "21022ea6351346589d5942617953a9ee6495ad464f719c5e726e0a1014a0fa35",
       "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+    },
+    "source_binding_revision": {
+      "change": "Optional read-only complete observation checkpoint recording; no training, sampling, gates or historical outcomes changed.",
+      "id": "model-observation-checkpoint-recording-v1",
+      "previous_revision": null,
+      "previous_source_sha256": {
+        "experiments/forge/model_toy_adapter.py": "714be671402d345a7a33be0d43f18c02da0b9cd30dbbc04dc04b465fe434bd54"
+      }
     }
   },
   "resources": {
@@ -362,8 +370,8 @@
   ],
   "dependencies": [
     {
-      "task": "model_ae_ddgan_gaussian_chain",
-      "kind": "gate"
+      "kind": "gate",
+      "task": "model_ae_ddgan_gaussian_chain"
     }
   ],
   "retained_question_ids": [

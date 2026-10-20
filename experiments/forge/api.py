@@ -215,11 +215,18 @@ def task_policy_blockers(task, candidate):
     policy_two_pole = (policy_task
         and task.get('execution', {}).get('host') == 'two_pole'
         and not (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight))
-    if consumer is not None and (consumer != 'output_marginal_v1'
+    execution = task.get('execution', {})
+    model_vae_transport = (task.get('adapter') == 'public_api_model_toy'
+        and task.get('task_cohort') == 'api_model_vae_seed0_v1'
+        and execution.get('host') in ('api-model-vae-hard', 'api-model-vae-categorical')
+        and execution.get('host_definition', {}).get('provider') == 'benchmarks.toy_audit.api_model_vae')
+    if consumer is not None and not model_vae_transport and (consumer != 'output_marginal_v1'
             or task.get('adapter') not in ('transfer_behavior', 'word_joint')
             or task.get('execution', {}).get('host') not in COMPONENT_OBJECTIVE_HOSTS
             or (task.get('task_cohort') not in COMPONENT_TRANSPORT_COHORTS and not policy_two_pole)):
         return ['unsupported explicit component transport consumer']
+    if model_vae_transport and consumer not in (None, 'output_marginal_v1'):
+        return ['unsupported explicit model VAE transport consumer']
     if (recipe.kinetic_transport_weight or recipe.kinetic_transport_local_weight) and task.get("execution", {}).get("execution_path") == "public_components" and consumer is None:
         return [f"{task.get('id', '<task>')}: frozen public_components host does not consume "
                 "Recipe kinetic transport sample-space losses; mechanism is unsupported"]
