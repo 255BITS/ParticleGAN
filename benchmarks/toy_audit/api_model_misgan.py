@@ -39,18 +39,20 @@ def _digest(value):
     return state_digest(value)
 
 
+FROZEN_HOST = {'provider': 'benchmarks.toy_audit.api_model_misgan', 'case_id': 'api-model-misgan-four-mode', 'resources': {'num_particles': 64, 'z_dim': 2, 'batch_size': 256}, 'num_particles': 64, 'z_dim': 2, 'batch_size': 256, 'init_std': 0.5, 'target': {'kind': 'four_corner_hadamard8', 'means': [[-1.0, -1.0], [-1.0, 1.0], [1.0, -1.0], [1.0, 1.0]], 'sigma': 0.08, 'masses': [0.25, 0.25, 0.25, 0.25]}, 'architecture': {'generator': 'affine_2_to_8', 'mask': 'categorical4_linear1', 'imputer': '16_64_64_64_neural_logits', 'critics': '64_64'}, 'recipe_fields': {'model': 'gan', 'conditioning': 'scalar', 'encoder_mode': 'none', 'observation_sigma': 0.08, 'reconstruction_weight': 1.0}}
+FROZEN_QUESTION = 'Learn an 8D four-mode complete distribution and the block-mask law using only incomplete rows, then learn a stochastic neural imputer whose held-out single-sensor queries cover both ambiguous branches with correct mass.'
+
 def list_cases():
-    task = json.loads((ROOT / f"configs/forge/tasks/{TASK_ID}.json").read_text())
     return [dict(id=CASE_ID, legacy_ids=["pr196-block-recovery", "pr196-block-neural-imputer"],
                  title="MisGAN: incomplete four-mode recovery and neural multimodal imputation",
-                 goal=task["description"], kind="vector", default_steps=1200,
+                 goal=FROZEN_QUESTION, kind="vector", default_steps=1200,
                  batch_size=256, eval_samples=4096, default_recipe=DEFAULT_RECIPE,
                  evaluation_observations=24, terminal_observations=5, protocol_seed=0,
                  thresholds=[list(x) for x in BOUNDS], forge_thresholds=[list(x) for x in BOUNDS],
                  sampling="Clean live learned MoG64 R2 sigma=.025 -> learned affine 8D G_x; learned four-pattern categorical G_m. G_i neural logits on x*m,m sample a component and independent MoG noise through G_x; no component distances, ppost or oracle at inference.",
                  scope="Explicit four-corner sigma=.08 target with a fixed Hadamard 8x2 lift. Same four block masks and masses as original MisGAN; sensor7 sees x+y, leaving two equally probable branches at zero. Original 100-mode MLP questions remain unchanged.",
                  adaptation="New identifiable target, affine generator, categorical mask support learned from observed masks, and neural categorical amortizer; no complete real data reaches training.",
-                 host_definition=deepcopy(task["execution"]["host_definition"]))]
+                 host_definition=deepcopy(FROZEN_HOST))]
 
 
 class Problem:
