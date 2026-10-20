@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 843. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 844. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -39,6 +39,22 @@ Both saved Gaussian chains have low-noise conditional mismatches at central and 
 **Next:** Propose a separate bounded stationary-generator critic-fit diagnostic before changing a trainer. Preserve one global recipe, original gates and all failures; no new training, continuation, seed sweep or default promotion in this investigation.
 
 [Evidence](../../reports/forge/ddgan-failure-investigation/README.md) · [Record](records/api-model-ddgan-failure-investigation-v1.json)
+
+### api-model-vae-failure-investigation · api-model-vae-failure-investigation-v1
+
+**Scope:** historical; family_context; revision `94f596832d94bce175b5d4d6653b3584e17f6dbae570113717d570deb431a9b4`.
+
+Hard routing leaves more uniform-prior rows weakly constrained by reconstruction; those rows account for larger independent-generation errors.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_state_failure_analysis`.
+
+
+
+All archived final metrics reproduce exactly with zero updates. All 183 hard decoder-mean misses arise from 12 low-usage rows; the passing categorical control has the same association with 26 misses from seven low-usage rows. Hard ELBO prior gradients reach 4/16 rows versus 16/16 for categorical; adversarial and SBNP reach all rows. This supports a final-state coverage association but cannot establish the cause of the unsaved update-1000/1100 failures. Original hard FAIL/categorical PASS and all gates remain unchanged.
+
+**Next:** Retain both outcomes. Propose one reconstruction-coverage mechanism across both unchanged VAE tasks with saved scheduled checkpoints before another causal experiment. No unchanged rerun, seed sweep, gate change or default promotion.
+
+[Evidence](../../reports/forge/vae-failure-investigation/README.md) · [Record](records/api-model-vae-failure-investigation-v1.json)
 
 ### pr155-e22-api-and-original-review-gaps · archive-pr155-current-api-and-review-gaps-183242edb5fb
 
@@ -5638,4 +5654,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `0f9790230e7a03ee52cf46ec44ab0d5fe68b679f73c645c4cdaa17427102c0a8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `31b637f6af752c00ae997f930335d61657386997a82477552253553bbcabcfb5`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
