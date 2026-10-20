@@ -94,3 +94,25 @@ def test_unsupported_ae_composition_refuses_energy_before_construction():
     with pytest.raises(ValueError, match="not bound"):
         task_recipe(AE_CASES["api-model-ae-ddgan-gaussian-chain"],
                     recipe=base.replace(conditional_energy_weight=1.))
+
+
+def test_auxiliary_uses_independent_same_context_draws_and_no_analytic_posterior(monkeypatch):
+    base = build_case("api-model-ddgan-gaussian-chain", max_steps=1)
+    fixture = build_case("api-model-ddgan-gaussian-chain", max_steps=1,
+                        recipe=base.recipe.replace(conditional_energy_weight=1.))
+    def forbidden(*args, **kwargs):
+        raise AssertionError("evaluation-only posterior leaked into training")
+    for name in ("posterior_parameters", "oracle_clean", "transition_parameters"):
+        monkeypatch.setattr(fixture.target, name, forbidden)
+    calls = []
+    original = fixture.G.forward
+    def recorded(xt, z, t):
+        calls.append((xt.detach().clone(), z.detach().clone(), t.detach().clone()))
+        return original(xt, z, t)
+    monkeypatch.setattr(fixture.G, "forward", recorded)
+    fixture.step()
+    assert [len(xt) for xt, _, _ in calls] == [64, 64, 512]
+    xt, z, t = calls[-1]
+    torch.testing.assert_close(xt.reshape(64, 8, 2), calls[1][0][:, None].expand(64, 8, 2))
+    torch.testing.assert_close(t.reshape(64, 8), calls[1][2][:, None].expand(64, 8))
+    assert ((z.reshape(64, 8, 4)[:, 1:] - z.reshape(64, 8, 4)[:, :1]).abs().sum(-1) > 0).all()

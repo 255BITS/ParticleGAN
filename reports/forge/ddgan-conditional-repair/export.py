@@ -23,6 +23,10 @@ def read(path):
     return json.loads(Path(path).read_text())
 
 
+def value_sha(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
 def export(queue, campaigns):
     runs = []
     for campaign in campaigns:
@@ -47,6 +51,12 @@ def export(queue, campaigns):
             # The full source file map is already content-addressed in Forge;
             # retain compact manifest identities here, not another bulk copy.
             row["source"] = {key: value for key, value in row["source"].items() if key != "files"}
+            # Forge adds candidate-specific resolved ownership to each task;
+            # it is not part of the shared authored task contract.
+            ownership = row["task_contract"].pop("field_ownership", None)
+            row["field_ownership_sha256"] = value_sha(ownership)
+            row["task_contract"].pop("preflight_blockers", None)
+            row["task_contract_sha256"] = value_sha(row["task_contract"])
             log = directory / "run.log"
             if log.exists():
                 rows = [json.loads(line) for line in log.read_text().splitlines()
@@ -82,7 +92,10 @@ def export(queue, campaigns):
                         batch_sequence_sha256=adapter["evidence"]["batch_sequence_sha256"])
                 graded = directory / "graded-result.json"
                 if graded.exists():
-                    row["forge_grade"] = read(graded)["grades"][job["task_id"]]
+                    grade = read(graded)["grades"][job["task_id"]]
+                    row["forge_grade"] = {key: value for key, value in grade.items() if key != "metrics"}
+                    evaluator = row["forge_grade"].get("evaluator_result", {})
+                    evaluator.pop("metrics", None)  # Same bounds/values are stored once above.
                     row["graded_receipt_sha256"] = sha(graded)
                     if complete:
                         row["verdict"] = row["forge_grade"]["gate_status"]
@@ -92,10 +105,17 @@ def export(queue, campaigns):
     # Check the actual task contract and consumed clean/timestep sequence agree
     # across all recipe arms; timeout-only variants compare as their own tasks.
     for task in {row["task"] for row in runs}:
+        if len({row["task_contract_sha256"] for row in runs if row["task"] == task}) > 1:
+            raise ValueError(f"shared task contract changed across arms: {task}")
         measured = [row for row in runs if row["task"] == task and row.get("full_protocol_complete")]
         for name in ("initial_models", "batch_sequence_sha256"):
             if len({json.dumps(row.get(name), sort_keys=True) for row in measured}) > 1:
                 raise ValueError(f"unmatched {name} for {task}")
+    for candidate in {row["candidate"] for row in runs}:
+        recipes = [{key: value for key, value in row["recipe"].items() if key != "total_steps"}
+                   for row in runs if row["candidate"] == candidate and row.get("recipe")]
+        if len({value_sha(recipe) for recipe in recipes}) > 1:
+            raise ValueError(f"candidate is not one global recipe: {candidate}")
     contracts = {row["task"]: row.pop("task_contract") for row in runs}
     result = dict(schema="ddgan_conditional_repair_publication_v1", qualification_input=False,
         goal="ddgan_conditional_repair", seed=0,
