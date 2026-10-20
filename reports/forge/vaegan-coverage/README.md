@@ -48,3 +48,42 @@ policy, constructor and named-stream states are saved at every actual check.
 
 Bulk artifacts and tail-friendly logs are outside Git:
 `/nvme/dev/particlegan/artifacts/vaegan-bispf-20261019/stdout.log`.
+
+<!-- current-comparison -->
+
+| Global recipe | Hard VAEGAN | Categorical VAEGAN | Task passes |
+| --- | --- | --- | ---: |
+| `bispf-optimized-quintic-v1` | [FAIL](media/bispf-optimized-quintic-v1-model_vae_hard.gif) (2/5 terminal; suffix 1) | [FAIL](media/bispf-optimized-quintic-v1-model_vae_categorical.gif) (3/5 terminal; suffix 2) | 0/2 |
+| `bispf-vaegan-transport-v1` | [FAIL](media/bispf-vaegan-transport-v1-model_vae_hard.gif) (0/5 terminal; suffix 0) | [FAIL](media/bispf-vaegan-transport-v1-model_vae_categorical.gif) (0/5 terminal; suffix 0) | 0/2 |
+
+All measured arms complete 1,200 updates and24 checks; the last five determine
+PASS. This table is the single current comparison for `vaegan_coverage`.
+Every revision and failure remains in [compact results](results.json).
+GPU0 was shared under load; recorded costs supply no speed ranking.
+
+<!-- /current-comparison -->
+
+Round1 completed all four full-budget runs and all failed the sustained gate.
+The matched baseline passes2/5 hard and3/5 categorical terminal observations,
+although both endpoints pass. Transport passes0/5 for both, with final likelihood
+HQ.8191/.6858 and decoder-mean HQ.8372/.6948 (hard/categorical). Good reconstruction
+remains insufficient. These GPU measurements do not replace the archived CPU
+categorical PASS; this study has not isolated the source of that cohort difference.
+
+The [saved terminal-state diagnosis](round1-diagnosis.json) uses zero updates and
+an explicitly separate CPU row-stratified panel. Baseline hard and categorical
+misses remain entirely concentrated on rows below1% expected posterior use at
+all five states. Transport also creates errors among higher-usage rows. Hard
+transport has13–14 low-usage rows versus11–12 for baseline; categorical has8–9
+versus7. The auxiliary did not repair posterior coverage. All state files remain
+byte-exact; the detailed row arrays stay in the artifact archive.
+
+Round2 keeps transport and activates the existing cosine schedule from update0,
+with network/prior floors.05, over the same1200-update task horizon. This is a
+schedule-only repair with one global recipe; it explicitly gives up the baseline's
+constant-rate claim. Saved update1000 groups still use G/E.012, prior.03 and
+D.018. Lowering these together tests whether finite normalized updates keep
+otherwise recoverable rows fluctuating. The cosine schedule is related to the
+annealing used in [SGDR](https://arxiv.org/abs/1608.03983); our single decay has
+no restarts and makes no general GAN convergence claim. The complete numerical
+gates decide success. This comparison cannot establish that transport is necessary.
