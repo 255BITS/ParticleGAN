@@ -86,7 +86,7 @@ One fixed BISPF recipe on new model-mode tasks, protocol seed 0. These source-bo
 
 Tier 2 full runs require every basic model task to pass. A blocked task may have a separately declared three-update software GIF; that prefix is INCOMPLETE and grants no deeper training credit.
 
-Saved-state investigations: [VAE saved-state investigation](vae-failure-investigation/README.md). These diagnostics add no training, qualification or replacement for the recorded failures.
+Saved-state investigations: [VAE saved-state investigation](vae-failure-investigation/README.md); [DDGAN saved-state investigation](ddgan-failure-investigation/README.md). These diagnostics add no training, qualification or replacement for the recorded failures.
 
 <!-- Forge scaling performance: start -->
 
