@@ -312,6 +312,10 @@ class Recipe:
                 self.effective_critic_formulation != "bispf" or self.optimizer_family != "dualnorm"
                 or self.optimizer_momentum != 0):
             raise ValueError("thermal displacement requires zero-momentum full DualNorm BISPF")
+        if self.bispf_thermal_application == "displacement" and self.constraint_geometry_mode == "strict_progress":
+            # Shortening an accepted finite nonconvex step can cross a higher
+            # loss region. Its endpoint certificate cannot certify the new one.
+            raise ValueError("thermal displacement cannot follow strict_progress without rechecking its finite protected losses")
         if self.constraint_geometry_mode not in ("none", "nonascent", "strict_progress", "direction_blend"):
             raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
         if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):

@@ -342,3 +342,23 @@ def test_public_trainer_generator_exception_restores_thermal_readers(monkeypatch
     assert trainer.penalty.regularizer.record._thermal_scale == 0.2
     assert _LAST_THERMAL_SCALE[trainer.device] == 0.2
     assert all(parameter.requires_grad for parameter in trainer.D.parameters())
+
+
+def test_displacement_rejects_uncertified_strict_progress_composition():
+    from particlegan import Recipe, get_recipe
+
+    baseline = get_recipe("bispf_optimized", constraint_geometry_mode="strict_progress")
+    assert baseline.bispf_thermal_application == "gradient"
+    message = "thermal displacement cannot follow strict_progress"
+    with pytest.raises(ValueError, match=message):
+        get_recipe("bispf_optimized", constraint_geometry_mode="strict_progress",
+                   bispf_thermal_application="displacement")
+    with pytest.raises(ValueError, match=message):
+        baseline.replace(bispf_thermal_application="displacement")
+    saved_fields = {**baseline.to_dict(), "bispf_thermal_application": "displacement"}
+    with pytest.raises(ValueError, match=message):
+        Recipe(**saved_fields)
+    # The measured cohort uses direction blending, whose directional property
+    # survives positive rescaling; this capability restriction leaves it valid.
+    measured = get_recipe("bispf_optimized", bispf_thermal_application="displacement")
+    assert measured.constraint_geometry_mode == "direction_blend"
