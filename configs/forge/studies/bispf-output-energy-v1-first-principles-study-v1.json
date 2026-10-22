@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "bispf-output-energy-v1-first-principles-study-v1",
+  "status": "draft",
+  "candidate": "bispf-output-energy-v1",
+  "control": {
+    "candidate_id": "bispf-optimized-quintic-v1",
+    "task_map": {}
+  },
+  "hypothesis": "The first-round best complete global recipe supplies a source-matched control for the new finite-step mechanics, retaining its measured anisotropic/blobs repairs.",
+  "scope": {
+    "view": "bispf-three-theme-repair-diagnostic-v1",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "bispf-first-principles-round2-v1",
+    "budget_seconds": 112080,
+    "candidate_budget_seconds": 28020
+  },
+  "max_rounds": 1,
+  "prior_evidence": [
+    {
+      "path": "reports/forge/three-theme-repairs-20261022/comparison.json",
+      "selector": [
+        "arms",
+        "bispf-optimized-quintic-v1"
+      ],
+      "identity": {
+        "candidate_revision": "f82d9e0600adac4921c941dc26fd7a1f2f360895860157c8a957b4af9632b608"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "prediction": {
+    "task_id": "img_blobs4",
+    "metric": "modes",
+    "op": ">=",
+    "threshold": 4,
+    "phase": "final"
+  },
+  "falsifier": {
+    "task_id": "mode_hold",
+    "metric": "hq",
+    "op": "<",
+    "threshold": 0.9,
+    "phase": "final"
+  },
+  "competing_explanation": "Finite-batch matching, local operator checks and stable output forces do not guarantee population convergence, sustained target fidelity or compatibility with the normalized shared network and learned prior. Existing original and energy controls isolate source drift; every failure and regression remains visible.",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "prediction_observed": "review_saved_diagnostics",
+    "inconclusive": "stop_and_readout",
+    "incomplete": "request_missing_evidence"
+  }
+}
