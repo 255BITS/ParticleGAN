@@ -140,6 +140,11 @@ def build_image_models(context, spec: dict):
     """
     _validate_spec(spec)
     from benchmarks.transfer_suite.image_tasks import Generator, Discriminator
+    from particlegan import declare_output_link
     generator = context.construct(lambda: Generator(spec), component="generator").to(context.device)
+    # Architecture capability belongs to this public construction bridge, not
+    # the frozen task/evaluator source. Post-sigmoid averaging is unsupported.
+    if generator.architecture != "uniform_generator":
+        declare_output_link(generator, kind="sigmoid", prelink_module="output")
     discriminator = context.construct(lambda: Discriminator(spec), component="discriminator").to(context.device)
     return generator, discriminator

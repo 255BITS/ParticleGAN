@@ -222,6 +222,8 @@ def build_vector_models(context, spec: dict):
         dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
         generator = context.construct(lambda: SimpleMLPGenerator(
             context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
+        from particlegan import declare_output_link
+        declare_output_link(generator, kind="identity")
     if dimension == 1:
         from lib.toy_models import SimpleMLPDiscriminator
         discriminator = context.construct(lambda: SimpleMLPDiscriminator(

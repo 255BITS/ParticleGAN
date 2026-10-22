@@ -90,10 +90,6 @@ class Generator(nn.Module):
         super().__init__()
         width = spec["width"]
         self.architecture = spec["architecture"]
-        # Metadata only: the actual forward and every tensor remain unchanged.
-        # Averaging after sigmoid has a different pullback and is not admitted.
-        if self.architecture != "uniform_generator":
-            self.particlegan_output_link = {"kind": "sigmoid", "prelink_module": "output"}
         self.input = nn.Linear(spec["z_dim"], width * 4)
         if self.architecture == "residual_upsample":
             self.first = nn.Conv2d(width, width, 3, padding=1)

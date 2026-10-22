@@ -126,7 +126,7 @@ def test_saturation_route_observer_uses_only_existing_cost_and_reports_known_for
 
 
 def _public_trainer(active=True, image=False):
-    from particlegan import GANTrainer, get_recipe, init
+    from particlegan import GANTrainer, declare_output_link, get_recipe, init
     from lib.toy_models import SimpleMLPGenerator, SimpleMLPDiscriminator
     from benchmarks.transfer_suite.image_tasks import Generator, Discriminator, TASKS
     recipe = get_recipe("bispf_optimized", num_particles=16, z_dim=2, batch_size=8,
@@ -137,8 +137,10 @@ def _public_trainer(active=True, image=False):
         if image:
             spec = {**next(s for s in TASKS if s["name"] == "img_intensity2"), "z_dim": 2}
             generator, critic = Generator(spec), Discriminator(spec)
+            declare_output_link(generator, kind="sigmoid", prelink_module="output")
         else:
             generator = SimpleMLPGenerator(2, 8, 1, 2)
+            declare_output_link(generator, kind="identity")
             critic = SimpleMLPDiscriminator(2, 8, 1, fourier=0)
         prior = recipe.make_prior()
         for index, module in enumerate((generator, critic, prior)):
@@ -237,6 +239,7 @@ def test_public_checkpoint_exact_continuation_and_capability_validation(image):
 
 def test_actual_selected_image_capabilities_and_uniform_host_refusal():
     from benchmarks.transfer_suite.image_tasks import Generator, TASKS, RESERVED
+    from particlegan import declare_output_link
     from particlegan.bregman_game import OutputLink
     with torch.random.fork_rng(devices=[]):
         for spec in [*TASKS, RESERVED]:
@@ -245,6 +248,7 @@ def test_actual_selected_image_capabilities_and_uniform_host_refusal():
                 with pytest.raises(ValueError, match="declared"):
                     OutputLink(host)
                 continue
+            declare_output_link(host, kind="sigmoid", prelink_module="output")
             link = OutputLink(host)
             inputs = torch.zeros(2, spec["z_dim"])
             with link.capture() as observed:
@@ -253,6 +257,49 @@ def test_actual_selected_image_capabilities_and_uniform_host_refusal():
             assert torch.equal(linked, observed[0].sigmoid())
             assert not host.output._forward_hooks
             assert link.contract == {"kind": "sigmoid", "prelink_module": "output"}
+
+
+def test_public_output_declaration_preserves_forward_tensors_rng_and_validates_contract():
+    from particlegan import declare_output_link
+    from benchmarks.transfer_suite.image_tasks import Generator, TASKS
+    from particlegan.bregman_game import OutputLink
+    with torch.random.fork_rng(devices=[]):
+        spec = next(s for s in TASKS if s["name"] == "img_intensity2")
+        generator = Generator(spec)
+        assert not hasattr(generator, "particlegan_output_link")
+        before = deepcopy(generator.state_dict())
+        inputs = torch.zeros(2, spec["z_dim"])
+        expected = generator(inputs)
+        rng = torch.get_rng_state().clone()
+        assert declare_output_link(generator, kind="sigmoid", prelink_module="output") is generator
+        assert torch.equal(rng, torch.get_rng_state())
+        _exact(before, generator.state_dict())
+        assert torch.equal(expected, generator(inputs))
+        assert OutputLink(generator).contract == {"kind": "sigmoid", "prelink_module": "output"}
+        with pytest.raises(ValueError, match="different contract"):
+            declare_output_link(generator, kind="identity")
+        undeclared = Generator(spec)
+        with pytest.raises(ValueError, match="existing named module"):
+            declare_output_link(undeclared, kind="sigmoid", prelink_module="missing")
+        assert not hasattr(undeclared, "particlegan_output_link")
+
+
+def test_shared_image_construction_bridge_declares_link_without_task_id():
+    from benchmarks.transfer_suite.image_tasks import TASKS
+    from experiments.forge.imageprofiles import build_image_models, HOST_FIELDS
+    from particlegan.bregman_game import OutputLink
+    class Context:
+        device = "cpu"
+        def construct(self, factory, *, component):
+            return factory()
+    with torch.random.fork_rng(devices=[]):
+        for spec in TASKS:
+            generator, _ = build_image_models(Context(), {name: spec[name] for name in HOST_FIELDS})
+            if spec["architecture"] == "uniform_generator":
+                with pytest.raises(ValueError, match="declared"):
+                    OutputLink(generator)
+            else:
+                assert OutputLink(generator).contract == {"kind": "sigmoid", "prelink_module": "output"}
 
 
 def test_output_contract_rejects_unknown_and_false_sigmoid_without_lingering_hook():

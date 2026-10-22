@@ -11,6 +11,36 @@ from torch import nn
 from torch.nn import functional as F
 
 
+def declare_output_link(generator, *, kind, prelink_module=None, capture_input=False):
+    """Declare a caller-owned architecture capability without changing its code.
+
+    Use at network construction, before GANTrainer. This attaches metadata,
+    never changes forward/tensors, and consumes no random stream. Sigmoid means
+    the named module's output (or input when explicit) goes directly through
+    sigmoid; every training forward verifies that actual tensor relation.
+    The caller must not declare sigmoid after an additional output transform.
+    """
+    if not isinstance(generator, nn.Module) or type(capture_input) is not bool:
+        raise ValueError("output capability requires a module and boolean capture_input")
+    if kind == "identity" and prelink_module is None and not capture_input:
+        contract = {"kind": "identity"}
+    elif kind == "sigmoid" and isinstance(prelink_module, str) and prelink_module:
+        try:
+            generator.get_submodule(prelink_module)
+        except AttributeError as error:
+            raise ValueError("sigmoid output capability requires an existing named module") from error
+        contract = {"kind": "sigmoid", "prelink_module": prelink_module}
+        if capture_input:
+            contract["capture_input"] = True
+    else:
+        raise ValueError("output capability requires identity or an explicit sigmoid prelink module")
+    existing = getattr(generator, "particlegan_output_link", None)
+    if existing is not None and existing != contract:
+        raise ValueError("output capability is already declared with a different contract")
+    generator.particlegan_output_link = contract
+    return generator
+
+
 def bregman_cost_matrix(fake, real, *, kind="identity", prelink=None):
     """Return c[i,j]=D_h(real[j] || fake[i]), retaining only fake gradients.
 

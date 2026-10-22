@@ -152,8 +152,10 @@ def adapter_preflight(task, candidate, *, root=None):
 
 
 def _models(context, spec):
+    from particlegan import declare_output_link
     from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
     g = context.construct(lambda: SimpleMLPGenerator(context.recipe.z_dim, spec["hidden"], spec["layers"], 2), component="generator")
+    declare_output_link(g, kind="identity")
     d = context.construct(lambda: SimpleMLPDiscriminator(2, spec.get("d_hidden", spec["hidden"]),
                                                       spec.get("d_layers", spec["layers"]), spec["fourier"]), component="discriminator")
     return g.to(context.device), d.to(context.device)

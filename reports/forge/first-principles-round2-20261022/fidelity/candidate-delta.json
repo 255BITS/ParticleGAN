@@ -5,6 +5,23 @@
   "implementation_base": "96af7be246261f27db9794a4fa787dbe2a0487a9",
   "recipe_delta": {"bispf_bregman_game": true},
   "effective_payoff": "learned_bregman_c_transform_v1",
+  "output_capability": {
+    "api": "particlegan.declare_output_link",
+    "owner": "explicit caller / shared Forge model construction bridge",
+    "bridge_files": [
+      "experiments/forge/adapters.py",
+      "experiments/forge/vectorprofiles.py",
+      "experiments/forge/imageprofiles.py"
+    ],
+    "public_api_files": ["particlegan/__init__.py", "particlegan/bregman_game.py"],
+    "restored_unchanged_model_sources": [
+      "lib/toy_models.py",
+      "benchmarks/transfer_suite/image_tasks.py"
+    ],
+    "image_task_evaluator_sha256": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+    "task_ids_used": false,
+    "task_or_evaluator_pins_changed": false
+  },
   "parent_loss_field_retained": "non_saturating",
   "prior_update": "learned",
   "prior_regularizer": "sbnp",
