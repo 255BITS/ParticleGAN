@@ -177,7 +177,7 @@ Reproduce the fixed diagnostic without training:
 ```sh
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -u \
   reports/forge/first-principles-round2-20261022/settling/cheap_controls.py \
-  --output /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls.json \
-  > /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls.log 2>&1
-tail -F /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls.log
+  --output /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls-reproduction.json \
+  > /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls-reproduction.log 2>&1
+tail -F /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls-reproduction.log
 ```
