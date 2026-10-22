@@ -6,7 +6,7 @@
   ],
   "api_version": "forge-api-v1",
   "changed_factors": [
-    "Retain the energy winner (output_energy_weight=1) and set bispf_generator_step=secant_extragradient. Replace the generator/prior update by a same-batch frozen-critic normalized-field predictor/corrector, using nine fixed dyadic local consistency trials and anchor protected normals. Probes replay already consumed latent rows and perturbations, restore optimizer/controller clocks, and consume no new draws. One final outer update commits once; failed bounded search applies zero movement. Critic, task conditions, learned prior/SBNP .01, sampling and numerical gates remain unchanged."
+    "Retain the energy winner (output_energy_weight=1) and set bispf_generator_step=secant_extragradient. Replace the generator/prior update by a same-batch frozen-critic predictor/corrector on the UNBLENDED normalized field, using nine fixed dyadic local consistency trials. Apply the existing anchor direction protection only to the final corrected movement; the consistency certificate precedes that protection and is not a finite-loss guarantee. Probes replay already consumed latent rows and perturbations, restore optimizer/controller clocks, and consume no new draws. One final outer update commits once; failed bounded search applies zero movement. Critic, task conditions, learned prior/SBNP .01, sampling and numerical gates remain unchanged."
   ],
   "claim_contract": {
     "sampling_law": "task_declared",
@@ -34,7 +34,7 @@
   },
   "id": "bispf-secant-extragradient-v1",
   "mechanism_class": "structural",
-  "mechanism_rationale": "Retain the energy winner (output_energy_weight=1) and set bispf_generator_step=secant_extragradient. Replace the generator/prior update by a same-batch frozen-critic normalized-field predictor/corrector, using nine fixed dyadic local consistency trials and anchor protected normals. Probes replay already consumed latent rows and perturbations, restore optimizer/controller clocks, and consume no new draws. One final outer update commits once; failed bounded search applies zero movement. Critic, task conditions, learned prior/SBNP .01, sampling and numerical gates remain unchanged.",
+  "mechanism_rationale": "Retain the energy winner (output_energy_weight=1) and set bispf_generator_step=secant_extragradient. Replace the generator/prior update by a same-batch frozen-critic predictor/corrector on the UNBLENDED normalized field, using nine fixed dyadic local consistency trials. Apply the existing anchor direction protection only to the final corrected movement; the consistency certificate precedes that protection and is not a finite-loss guarantee. Probes replay already consumed latent rows and perturbations, restore optimizer/controller clocks, and consume no new draws. One final outer update commits once; failed bounded search applies zero movement. Critic, task conditions, learned prior/SBNP .01, sampling and numerical gates remain unchanged.",
   "parent": "bispf-output-energy-v1",
   "recipe_overrides": {
     "adam_variant": "pytorch",

@@ -411,6 +411,8 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
+        if self.recipe.bispf_generator_step != "ordinary" and self.recipe.standardize:
+            raise CapabilityError(["secant_extragradient requires the task's unstandardized prior for exact latent replay"])
         self.prior_config["learnable"] = self.recipe.prior_update == "learned"
         if execution_path == "public_components" and (
                 self.recipe.output_energy_weight or self.recipe.fidelity_transport_weight or self.recipe.bispf_bregman_game

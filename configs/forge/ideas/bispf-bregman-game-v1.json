@@ -2,7 +2,9 @@
   "api_changes": [
     "particlegan/recipes.py",
     "particlegan/training.py",
-    "particlegan/bregman_game.py"
+    "particlegan/bregman_game.py",
+    "lib/toy_models.py",
+    "benchmarks/transfer_suite/image_tasks.py"
   ],
   "api_version": "forge-api-v1",
   "changed_factors": [

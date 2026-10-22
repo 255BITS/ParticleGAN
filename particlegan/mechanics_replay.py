@@ -19,7 +19,7 @@ def validate_recipe(recipe):
             or recipe.effective_critic_formulation != "bispf" or recipe.optimizer_family != "dualnorm"
             or recipe.optimizer_momentum != 0 or recipe.constraint_geometry_mode != "direction_blend"
             or recipe.bispf_thermal_application != "gradient"
-            or recipe.input_noise_std or recipe.output_noise_std or recipe.standardize
+            or recipe.input_noise_std or recipe.output_noise_std
             or recipe.continuous_policy is not None or recipe.lr_control != "mobility"
             or recipe.particle_birth_death or recipe.serve_average
             or recipe.row_evidence_gate or recipe.reopen_guard is not None
@@ -29,6 +29,8 @@ def validate_recipe(recipe):
 
 def validate(trainer):
     validate_recipe(trainer.recipe)
+    if trainer.recipe.standardize:
+        raise ValueError("secant_extragradient requires the task's unstandardized prior for exact latent replay")
     for owner in (trainer.G, trainer.D):
         for module in owner.modules():
             if isinstance(module, (nn.modules.batchnorm._BatchNorm, nn.modules.dropout._DropoutNd,

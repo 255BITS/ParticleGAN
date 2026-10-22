@@ -36,7 +36,8 @@ def _archived_inactive_comparison_scope(module, directory):
         "prior_coulomb_neighbors": 8, "prior_proximal_strength": 0.0,
         "optimizer_convolution_rule": "polar", "training_precision": "float32",
         "output_energy_weight": 0.0, "fidelity_transport_weight": 0.0,
-        "bispf_thermal_application": "gradient"}
+        "bispf_thermal_application": "gradient", "bispf_generator_step": "ordinary",
+        "bispf_bregman_game": False}
     original = (root / helper.INACTIVE).read_bytes()
     adapted, diff = helper.adapter_source(original)
     # This new inactive field has explicit not-applicable provenance on the

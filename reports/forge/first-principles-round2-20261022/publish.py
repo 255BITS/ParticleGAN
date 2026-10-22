@@ -102,6 +102,8 @@ def historical_control_check(rows):
 
 
 def numerical_note(task, cell):
+    if cell["status"] not in {"PASS", "FAIL"}:
+        return cell.get("reason") or "No completed scientific observation"
     metrics, evaluation = cell["metrics"], cell["evaluator_summary"]
     if task == "gaussian1d_smoke":
         return (f"first confirmed step {evaluation.get('first_confirmed_step')}; "
@@ -270,6 +272,21 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
             from experiments.forge.tier1_media import export_attempt
             export_attempt(durable, output / "media" / cid)
     if not partial:
+        # A failed own smoke cannot supply a continuation checkpoint. This is
+        # an unexecuted declared cell, never a fabricated scientific receipt.
+        for cid in ARMS:
+            for task in tasks:
+                if task in rows[cid]:
+                    continue
+                dependencies = requests[cid]["tasks"][task].get("dependencies", [])
+                dependencies = [d["task"] if isinstance(d, dict) else d for d in dependencies]
+                failed = [d for d in dependencies if d in rows[cid]
+                          and rows[cid][d]["gate_status"] != "PASS"]
+                if failed:
+                    rows[cid][task] = dict(task_id=task, gate_status="BLOCKED", raw_status="not_executed",
+                        reason="Own checkpoint/gate prerequisites did not pass: " + ", ".join(failed),
+                        metrics={}, evidence=dict(unexecuted_request_id=requests[cid]["request_id"]),
+                        _attempt_id=None)
         for cid in ARMS:
             require(set(rows[cid]) == set(tasks), f"{cid}: complete original evidence is not available")
     bindings = []

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "bispf-output-energy-v1-first-principles-study-v1",
-  "status": "draft",
+  "status": "ready",
   "candidate": "bispf-output-energy-v1",
   "control": {
     "candidate_id": "bispf-optimized-quintic-v1",

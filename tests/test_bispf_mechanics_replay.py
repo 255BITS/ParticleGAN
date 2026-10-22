@@ -189,8 +189,8 @@ def quadratic_fixture(monkeypatch, *, probe="ordinary"):
         generator[0].bias.fill_(1e-5)
     anchor = generator[0].bias.detach().clone()
     original_losses, calls = model._generator_losses, []
-    def objective(*args):
-        result = original_losses(*args)
+    def objective(*args, **kwargs):
+        result = original_losses(*args, **kwargs)
         parameter = model.G[0].bias
         if not calls or probe == "ordinary":
             potential = .5 * parameter.square().sum()
@@ -235,8 +235,8 @@ def test_failed_bounded_search_preserves_G_prior_bits_but_commits_one_clock(monk
 def test_constant_zero_force_leaves_exact_zeros_and_uses_no_trial_forward(monkeypatch):
     model = trainer()
     original = model._generator_losses
-    def zero(*args):
-        result = original(*args)
+    def zero(*args, **kwargs):
+        result = original(*args, **kwargs)
         potential = sum(p.sum() * 0 for group in model.opt_g.param_groups for p in group["params"])
         result["loss_g"], result["loss_gan"] = potential, potential
         return result
@@ -254,8 +254,8 @@ def test_frozen_opponent_bilinear_has_no_extragradient_circulation_correction(mo
     ordinary, candidate = trainer("ordinary"), trainer()
     for model in (ordinary, candidate):
         original = model._generator_losses
-        def linear(*args, owner=model, original=original):
-            result = original(*args)
+        def linear(*args, owner=model, original=original, **kwargs):
+            result = original(*args, **kwargs)
             potential = next(owner.G.parameters()).sum()
             result["loss_g"], result["loss_gan"] = potential, potential
             return result
@@ -272,8 +272,8 @@ def test_frozen_opponent_bilinear_has_no_extragradient_circulation_correction(mo
 def test_nonfinite_anchor_total_loss_rolls_back_before_proposals(monkeypatch):
     model = trainer()
     original, before = model._generator_losses, model.state_dict()
-    def nonfinite(*args):
-        result = original(*args)
+    def nonfinite(*args, **kwargs):
+        result = original(*args, **kwargs)
         result["loss_g"] = result["loss_g"] * float("nan")
         return result
     monkeypatch.setattr(model, "_generator_losses", nonfinite)
@@ -300,3 +300,24 @@ def test_forge_owns_field_and_refuses_unconsumed_component_path():
 def test_unsupported_replay_recipe_rejected_before_reservation(delta):
     with pytest.raises(ValueError, match="secant_extragradient"):
         get_recipe("bispf_optimized", bispf_generator_step="secant_extragradient", **delta)
+
+
+def test_unbound_recipe_waits_for_task_owned_prior_before_replay_admission():
+    import json
+    from pathlib import Path
+    from experiments.forge.api import CapabilityError, FormulationContext, resolve_public_recipe
+    root = Path(__file__).resolve().parents[1]
+    candidate = json.loads((root / "configs/forge/ideas/bispf-secant-extragradient-v1.json").read_text())
+    assert resolve_public_recipe(candidate).bispf_generator_step == "secant_extragradient"
+    context = FormulationContext(recipe_overrides=candidate["recipe_overrides"],
+        prior={"kind": "mog", "sigma": .025, "standardize": False})
+    assert context.recipe.standardize is False
+    with pytest.raises(CapabilityError, match="unstandardized prior"):
+        FormulationContext(recipe_overrides=candidate["recipe_overrides"],
+            prior={"kind": "mog", "sigma": .025, "standardize": True})
+
+
+def test_unmeasured_bregman_and_mechanics_composition_is_refused():
+    with pytest.raises(ValueError, match="bispf_bregman_game"):
+        get_recipe("bispf_optimized", bispf_bregman_game=True,
+                   bispf_generator_step="secant_extragradient")

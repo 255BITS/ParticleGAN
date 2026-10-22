@@ -102,5 +102,8 @@
     "bispf-bregman-game-v1": {
       "bispf_bregman_game": true
     }
+  },
+  "preadmission_operator_revision": {
+    "mechanics": "The protected-field prototype falsely passed the fixed convex-quadratic contraction control because DirectionBlend concealed a reversed trial force. Retain that counterexample. The single admitted numerical definition, if its unchanged controls pass, checks the unblended normalized field then applies anchor protection only once to the final move. No constant/gate/seed tuning; another fixed-control failure stops the candidate."
   }
 }
