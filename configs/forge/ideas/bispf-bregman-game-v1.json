@@ -3,8 +3,10 @@
     "particlegan/recipes.py",
     "particlegan/training.py",
     "particlegan/bregman_game.py",
-    "lib/toy_models.py",
-    "benchmarks/transfer_suite/image_tasks.py"
+    "particlegan/__init__.py",
+    "experiments/forge/adapters.py",
+    "experiments/forge/imageprofiles.py",
+    "experiments/forge/vectorprofiles.py"
   ],
   "api_version": "forge-api-v1",
   "changed_factors": [

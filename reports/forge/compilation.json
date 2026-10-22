@@ -2,7 +2,7 @@
   "automation_digest": "391b85927f392edf67e5876d55583ddfa090cd4213d7436c2acbc522888a2f18",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "91435afee59b72b673cd567ee23f563a247c22c3ba016488dc2c149703c9d380",
+  "input_digest": "9c2c49c4498776ea6d92806162e4ca7492b780e53f82e8a794902a0312015866",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -659,6 +659,7 @@
     "configs/forge/ideas/bcap-tier1-stability-repairs-cap-margin-v1.json": "eb6b5b0adec84d5acb247d62b516fe3f288633a41118ce08f3edeba8a505b400",
     "configs/forge/ideas/bcap-tier1-stability-repairs-finite-cap-v1.json": "90cb1fe352df267f920541e4df90c1b3d90c01cabe8b86873ec4f1410c07f95f",
     "configs/forge/ideas/bcap-tier1-stability-transport-v1.json": "1eb7806d4d46abec2bf30fb31775a876d81c4ce2adf25ab418119b1029b4cc25",
+    "configs/forge/ideas/bispf-bregman-game-v1.json": "96278bf7aac7a06ff429aa5243e1ce5467b4fa726084927baf68bfae95a42684",
     "configs/forge/ideas/bispf-fidelity-quartic-v1.json": "59e87833f7b17d0ab7e1b8bfd760a50462f5e382015c2140bffbd40fcc70f31c",
     "configs/forge/ideas/bispf-optimized-frobenius-v1.json": "b26b55d99f5c55558caf62a4739b9dc9e697f34ea8ca8e5e9236fb9aac315e42",
     "configs/forge/ideas/bispf-optimized-quintic-v1.json": "7d4db135c81511a76e89e0bfdd89e27a2171ed2e71cc243136e27cdb81483828",
@@ -666,6 +667,7 @@
     "configs/forge/ideas/bispf-optimized-v2.json": "d28704e37f476d096126dd32c37755c82473459dd3288884b035fa258da981ae",
     "configs/forge/ideas/bispf-optimized-v3.json": "cb3c846688392a39ddeda868c7104b69ad3147ce645befe04fd8af55d036fcfa",
     "configs/forge/ideas/bispf-output-energy-v1.json": "592309de2849b1788dafa9f815583724db68ffaa6ea8300bb628b4922a73f685",
+    "configs/forge/ideas/bispf-secant-extragradient-v1.json": "173a8c94a4218e2652d456e76742ee360f99a8b1c9177bd7a69001b83fb5d22a",
     "configs/forge/ideas/bispf-settling-displacement-v1.json": "0b564fa170e5ff06f02f96303e4e2b25a4d0c598e4903f20c8c1dd58f8987a34",
     "configs/forge/ideas/bispf-throughput-v1.json": "0795a2d34c63d2b917b53df55f421e6351a02d90b3531fc9e5e5f1fbe6b2ad34",
     "configs/forge/ideas/bispf-v1.json": "7512d181ef65c5b636cc77e9324600e88d26c0532ecba6baf3ec426381aaafb5",
@@ -890,6 +892,7 @@
     "configs/forge/studies/bcap-tier1-stability-repairs-finite-cap-study-v1.json": "5f43ec7435dd00881bd0f116fb69078e430aa2c4b28e05452aa37b7d6d2cd82e",
     "configs/forge/studies/bcap-tier1-stability-transport-study-v1.json": "3c0ae8724acce5a7ee9f137e14e8dc00961f612a79abdf7e5c73c3a5f874e4e1",
     "configs/forge/studies/bcap-tier2-smoothing-v1.json": "4ac5d50238868974c1816d196bc023faa732f36c99b192dc3401612ec0d22a5a",
+    "configs/forge/studies/bispf-bregman-game-v1-first-principles-study-v1.json": "f72d877b12df0040e67afa24381f86313d1c1fe0acebaa7dde4e96a8c236647c",
     "configs/forge/studies/bispf-fastpath-alternatives-native-v1.json": "5fae03dac4b11c3b188471036fa1733d65458a62040105a77830ca9c067135c0",
     "configs/forge/studies/bispf-fastpath-quality-native-v1.json": "92f47a71d5b9637a6573aae998a78b0365e1f92f52e298e534ecc667277cff3d",
     "configs/forge/studies/bispf-fastpath-quality-optimized-v3.json": "ee648da4dba1be8a6c44e66cadb2501ee23257a166ef1c5682af3ea6dc26fbd3",
@@ -912,10 +915,13 @@
     "configs/forge/studies/bispf-optimized-quality-v1.json": "cd1b38688af35c0e9f01a1810b4932aa65d0574f7e8f09051c47ace5eb03cde5",
     "configs/forge/studies/bispf-optimized-quality-v2.json": "40ae6729cbc124d46fb3ebb59f880124ecbacd3f50a334b1c8789b11e4367743",
     "configs/forge/studies/bispf-optimized-quality-v3.json": "c3141cf4adbfa80a3f5106a8238e566ec303dec3cd976891dc2720e61eaebe45",
+    "configs/forge/studies/bispf-optimized-quintic-v1-first-principles-study-v1.json": "df70ea8327bc1b4aca056645e2e7340d4b3ff9b5679bc598a40681529c3fa317",
     "configs/forge/studies/bispf-optimized-quintic-v1-quality.json": "34ceb9ec42d223841e41563343e1e18d4e17dcbc1cba41ac22af64de497cb66f",
     "configs/forge/studies/bispf-optimized-quintic-v1-three-theme-study-v1.json": "bec4c248cf67e93039387c6a368ef491a5316bd1c7a87f93a91a34e6b875b2dd",
     "configs/forge/studies/bispf-optimized-quintic-v1-wide.json": "c037b12ff5bd810e495671fbc507dff9d125289dea7da57e5d6945bc7f706991",
+    "configs/forge/studies/bispf-output-energy-v1-first-principles-study-v1.json": "32e233c5b1ea8660b2e093e1fb15d2f9d957fbac6166538909df68ea33210c21",
     "configs/forge/studies/bispf-output-energy-v1-three-theme-study-v1.json": "3a2a7142966fc0c6dadcd4ddea0588bdbe61f7fa4e7289a98565f873f2b8a834",
+    "configs/forge/studies/bispf-secant-extragradient-v1-first-principles-study-v1.json": "836d0ceb482b58a70301f5fbcae5f60fd16b80303b54638e80111745b625c984",
     "configs/forge/studies/bispf-settling-displacement-v1-three-theme-study-v1.json": "bd5d6575aa1c9f5b969756d1a173617be06c61ac5f86ef29c7b2f1fdf8ed84be",
     "configs/forge/studies/bispf-throughput-endurance-v1.json": "bb032de00a75a936ba708b69f2042997ae01ebaba94809a044d2a8c646399516",
     "configs/forge/studies/bispf-throughput-performance-control-v1-bispf.json": "dc274dc013fbbb4ce075c9ddcb1ffac491f82eeb42730c0aa954762907f78b88",
@@ -4240,6 +4246,7 @@
       "experiments/forge/tanh_point_mass.py",
       "experiments/forge/test_performance.py",
       "experiments/forge/test_performance_render.py",
+      "experiments/forge/update_trace.py",
       "reports/gram-profile/README.md",
       "reports/gram-profile/qualification.json",
       "reports/gram-profile/sana-speed.json",
@@ -4279,7 +4286,7 @@
       "reports/toy_audit/api_contract/model_modes/publication.json"
     ],
     "stale": [],
-    "tracked_count": 11857,
+    "tracked_count": 11858,
     "unclassified": [
       "reports/gram-profile/README.md",
       "reports/gram-profile/qualification.json",
@@ -4289,7 +4296,7 @@
   },
   "operational_lifecycle_digest": "1f0e327db0f43b33080ec349f0bf27ded2d185bf2b60c86d613105800dbbbf2c",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "cdde72481cac67c0ccf89cfe4c22ffbb6d63b857ffc9225d01ff0a644be709b8",
+    "reports/forge/EXPERIMENT_MEMORY.md": "28320ef2a255c17a0070461e1093a9e03c0bccb7c239d450dd7246d61ed41409",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [
