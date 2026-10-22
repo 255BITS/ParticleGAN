@@ -2,7 +2,7 @@
   "automation_digest": "391b85927f392edf67e5876d55583ddfa090cd4213d7436c2acbc522888a2f18",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "e504efdb7b886a250b59a86f177512dafca07d4220c27be188e1ad0ba71319c5",
+  "input_digest": "87ac14b797b517b07e11137e2017cc7c32eff361228ba96c56faa505c31a8a12",
   "input_hashes": {
     "configs/forge/cadence-studies/bispf-lazy-cadence-v1.json": "fc7302ac06b61fa093a39265d440545fdab176852a588c40b750be16adc1e58b",
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
@@ -682,6 +682,9 @@
     "configs/forge/ideas/ka2-global-repair-v1.json": "c2cbdbfcb068c16b637b33a385889b847905bdc3f4507b879cfe1e0bb61f01ab",
     "configs/forge/ideas/ka2.json": "bafc216a39aea2453241a01a6bd3b12e4b2d0b516a5f96601e1cbcd7bfebc09c",
     "configs/forge/ideas/r1r2-global-repair-v1.json": "85af1689b8c2e33f5462b7787c5305452ccdc3841a79ae5de025322521039add",
+    "configs/forge/ideas/r1r2-repair-control-20261022.json": "065bd8d9f86220439e2702c56018cc191291c71a9e5c535889bb39b4d573f11a",
+    "configs/forge/ideas/r1r2-repair-r1cycle-20261022.json": "a88dbdc698e621b54d8530bf8cdb454de43048064e80ff61176ce8f1dd17b2af",
+    "configs/forge/ideas/r1r2-repair-r1only-20261022.json": "a2d31e8d831acd50618e515ec4bebcfd2811436554734cc05525b8c5d3f3cac1",
     "configs/forge/ideas/r3gan-stacked-training-toy-v1.json": "aa695486c643018f66c6d843cb346b48b0b929efaeb99d0439142b4e4ca991d0",
     "configs/forge/ideas/recipe-prior-refactor-bcap-pure-v1.json": "88e229a18bd66149d192a94f9fb39f7c36758c5b2cee7f8e5201c0163ed57c2e",
     "configs/forge/ideas/recipe-prior-refactor-k3p-v1.json": "debf168d57b695c7ea49762478a0714336ca7e41a305e88d77e423661a16a04d",
@@ -937,6 +940,9 @@
     "configs/forge/studies/dcgan-performance-cloud-v2-r1r2.json": "1b01a42e7561271795e0349e9d2972a222a564c801f3ea22574e636d80cf9664",
     "configs/forge/studies/dcgan-performance-cloud-v2-release07-gan-v3.json": "63c171c41dae294fbb20694dd2710a282dead58b4d392a69a41a9eae727888c3",
     "configs/forge/studies/pure-bcap-baseline-v1.json": "d9eb76e9fb10ef8ff7e2aaacc7cb8a86999da44068374a2af15bfe01aa4cd33f",
+    "configs/forge/studies/r1r2-repair-control-20261022-tier1.json": "860d909fb111cb1fecca13042c319868849de379612e0e9ff20cbadaff9cab05",
+    "configs/forge/studies/r1r2-repair-r1cycle-20261022-tier1.json": "e7e7529a50f581f6bb97be17afbdb898a43fef147605493dc1aa9262f5ce9d23",
+    "configs/forge/studies/r1r2-repair-r1only-20261022-tier1.json": "f42a49e9aab030c3b0b78a184e3ca40cee764086710b1b4a55154b931fb5906c",
     "configs/forge/studies/recipe-prior-refactor-atlas-v1-ordinary-study.json": "bc815b459e8cd904ec95196f899145fa2d4d4dbfa4fa7341de8b36819b418894",
     "configs/forge/studies/recipe-prior-refactor-bcap-pure-v1-ordinary-study.json": "46cd5543a66235ffc6ae7f318080eeb015b7e0a69315309f3ae062f5cca6a569",
     "configs/forge/studies/recipe-prior-refactor-e22-v1-ordinary-study.json": "d6b5c5b38f3547d9b0c6c22ff6e17207a8f08084736366385f734006f062ae1e",
@@ -1025,8 +1031,8 @@
     "configs/forge/tasks/dcgan_performance_r64.json": "bb6c8a3fdeef54581e7798ecc3ba7e8f798dadef16464934eda8346c002aedf9",
     "configs/forge/tasks/dcgan_performance_w128.json": "3f2a1c650b01bfbfc9cafbe0fdc56a48274d039bd8593cc9d811aa625e21966c",
     "configs/forge/tasks/five_word_joint_acquisition.json": "555465029beb34b943734f0472e25382d49c474bdb424b4df4042a705ccb3e30",
-    "configs/forge/tasks/five_word_joint_hold.json": "1d5293086d009175574af7220cd2a427119523a670b7953116758307fedc4967",
-    "configs/forge/tasks/five_word_joint_smoke.json": "fcab8508f2c609f51ff26491a28b27689152d4b69f740ed204f0821b174e55ab",
+    "configs/forge/tasks/five_word_joint_hold.json": "8eb1a92e2ab984b8daabfa8e8e4d8f46fb30be0ae66cdc8ff2183f3eabf460a6",
+    "configs/forge/tasks/five_word_joint_smoke.json": "c69f7600bdf18ad951b36be55d227e572fa0bc79fd0ee905c2395eca3567ecde",
     "configs/forge/tasks/gaussian1d_acquisition.json": "e40c9b88694a110cf63453cd27b252fd7ea7c04bed08b7834479eb19332848b9",
     "configs/forge/tasks/gaussian1d_shallow_smoke.json": "a80ff6a75a25231c2270ba4648d59fe9153a07068789283dc9e653736a4dfcf3",
     "configs/forge/tasks/gaussian1d_shallow_stability.json": "ae67d44ba05834fbae83e1ba7ec58351c0b3dc0af7a21c126263b3482ce8b2fd",
@@ -4278,7 +4284,7 @@
   },
   "operational_lifecycle_digest": "1f0e327db0f43b33080ec349f0bf27ded2d185bf2b60c86d613105800dbbbf2c",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "943cb0067b71f506418951b38b30ca5201e473dda6d8ae146ac965852e79d26b",
+    "reports/forge/EXPERIMENT_MEMORY.md": "b06fb960c9f78329bcbb16b9ac91a49c3fe37372605a1a9d721e71702d18e617",
     "reports/forge/publication-records.json": "5174449ad10c00a8d22dee09d3ef50c8fb0fc76f196d85197271ee7c0766c9d8"
   },
   "pending_readout": [

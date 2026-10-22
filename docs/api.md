@@ -927,6 +927,23 @@ recipe. Explicit legacy arms select the K3P optimizer; `reg_arm="k3p"` selects
 the earlier K3P penalty too. `reg_arm=None` follows `critic_formulation`, whose
 restoration default is KA2. These choices are recorded in new source/formulation cohorts.
 
+For the fixed arms, `reg_real_weight` and `reg_fake_weight` separately multiply
+the two mean penalties. Both default to `1`; for example,
+`Recipe(reg_arm="a_r1r2", reg_fake_weight=0)` applies real-only R1 at the
+unchanged `reg_coeff / 2` coefficient. A zero-weight term performs no critic
+forward. Nondefault weights require an explicit fixed arm and form a new
+recipe/checkpoint identity.
+
+`joint_reconstruction_weight` defaults to `0`. An explicitly bound joint
+inverse host can add `recipe.joint_reconstruction_loss(reconstruction, target)`
+to its generator/encoder loss. Continuous values use mean squared error;
+passing `categorical_dim` interprets the reconstruction as raw logits and uses
+stable categorical cross entropy. Targets are detached. The five-word joint
+fixture consumes this objective as `G(E(real_words))` using its existing real
+batch, without extra draws or a change to generation. Scalar hosts without a
+joint inverse are inapplicable; ordinary AE/VAE reconstruction keeps its own
+declared objective.
+
 `get_recipe("bcap")` selects fixed BCAP with zero-momentum `dualnorm`,
 `constraint_geometry_mode="direction_blend"`, and constant G/D/prior step sizes.
 Direction blending protects existing task objectives across the joint

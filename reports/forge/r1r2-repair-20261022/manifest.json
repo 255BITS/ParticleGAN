@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "r1r2-repair-20261022",
+  "status": "ready_source_not_yet_enqueued",
+  "campaign": {
+    "id": "r1r2-repair-20261022",
+    "candidate_budget_seconds": 5220,
+    "budget_seconds": 24000
+  },
+  "maximum_candidate_roles": 3,
+  "current_roles": [
+    {
+      "role": "control",
+      "candidate": "r1r2-repair-control-20261022",
+      "study": "r1r2-repair-control-20261022-tier1"
+    },
+    {
+      "role": "r1only",
+      "candidate": "r1r2-repair-r1only-20261022",
+      "study": "r1r2-repair-r1only-20261022-tier1"
+    },
+    {
+      "role": "r1cycle",
+      "candidate": "r1r2-repair-r1cycle-20261022",
+      "study": "r1r2-repair-r1cycle-20261022-tier1"
+    }
+  ],
+  "pending_roles": [],
+  "ordinary_view": "discriminator_stability",
+  "ordinary_view_revision": 14,
+  "required_tier1_tasks": 13,
+  "optional_clock_tasks": 1,
+  "per_candidate_full_tier1_allowance_seconds": 5220,
+  "maximum_tier1_full_allowance_seconds": 15660,
+  "paid_campaign_ceiling_seconds": 24000,
+  "retries": 0,
+  "seed": 0,
+  "queue_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/queue",
+  "scientific_python_executable": "/usr/bin/python",
+  "old_campaign_unchanged": true,
+  "qualification_or_default_adoption": false
+}

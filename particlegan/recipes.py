@@ -63,11 +63,18 @@ class Recipe:
     # fixed R1/R2 and BCap retain their released L2 units.
     reg_arm: str | None = None
     reg_coeff: float = 1.0
+    # Explicit fixed-arm real/fake terms. Defaults preserve the paired kernels;
+    # R1-only is (1, 0), with the original half-gamma real coefficient retained.
+    reg_real_weight: float = 1.0
+    reg_fake_weight: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
     # Optional finite same-training-panel critic step guard; none preserves history.
     critic_step_mode: str = "none"
     prior_reg: float = 0.0
+    # Explicit joint inverse supervision; hosts supply paired reconstructed
+    # outputs (raw logits for categorical coordinates) and their actual targets.
+    joint_reconstruction_weight: float = 0.0
     # The recipe owns learning/freezing and every latent-prior penalty. Tasks
     # supply the initial distribution, capacity and sampling law.
     prior_update: str = "learned"
@@ -379,6 +386,13 @@ class Recipe:
         if self.reg_coeff_end is not None and (
                 isinstance(self.reg_coeff_end, bool) or not math.isfinite(self.reg_coeff_end) or self.reg_coeff_end < 0):
             raise ValueError("reg_coeff_end must be None or finite and nonnegative")
+        for name in ("reg_real_weight", "reg_fake_weight"):
+            value = getattr(self, name)
+            if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+                raise ValueError(f"{name} must be finite and nonnegative")
+        if ((self.reg_real_weight, self.reg_fake_weight) != (1., 1.)
+                and self.reg_arm not in ("a_r1r2", "b_cap")):
+            raise ValueError("real/fake penalty weights require an explicit fixed R1/R2 or BCap reg_arm")
         if self.optimizer_family != "formulation":
             if self.reg_arm not in ("a_r1r2", "b_cap") and self.critic_formulation != "bispf":
                 raise ValueError("plain optimizers require an explicit fixed R1/R2 or BCap reg_arm")
@@ -574,6 +588,9 @@ class Recipe:
                     "reconstruction_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
+        if (type(self.joint_reconstruction_weight) not in (int, float)
+                or not math.isfinite(self.joint_reconstruction_weight) or self.joint_reconstruction_weight < 0):
+            raise ValueError("joint_reconstruction_weight must be finite and nonnegative")
         if len(self.betas) != 2 or any(not 0 <= b < 1 for b in self.betas):
             raise ValueError("betas must contain two values in [0, 1)")
         if self.prior_betas is not None and (len(self.prior_betas) != 2 or any(not 0 <= b < 1 for b in self.prior_betas)):
@@ -697,6 +714,14 @@ class Recipe:
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
+    def joint_reconstruction_loss(self, reconstruction, target, *, categorical_dim=None):
+        """Weighted paired supervision for an explicitly bound joint inverse host."""
+        if self.joint_reconstruction_weight == 0:
+            return reconstruction[:0].sum()
+        from .joint_reconstruction import joint_reconstruction_loss
+        return self.joint_reconstruction_weight * joint_reconstruction_loss(
+            reconstruction, target, categorical_dim=categorical_dim)
+
     def kinetic_transport_loss(self, fake, real):
         """Weighted empirical transport on caller-owned G-phase output batches.
 
@@ -759,6 +784,8 @@ class Recipe:
                        "kappa": self.reg_kappa, "lazy_k": self.reg_every,
                        "anchor_weight": self.reg_anchor_weight,
                        "lr_floor": floor if floor < .5 else 0., **overrides}
+            if self.reg_arm in ("a_r1r2", "b_cap"):
+                options = {"real_weight": self.reg_real_weight, "fake_weight": self.reg_fake_weight, **options}
             from .grad_regularizers import GradientPenalty
             GradientPenalty(**options)
             return options
