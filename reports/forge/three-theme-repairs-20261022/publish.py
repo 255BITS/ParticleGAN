@@ -18,6 +18,8 @@ ARMS = ("bispf-optimized-quintic-v1", "bispf-output-energy-v1",
 CONTROL = ARMS[0]
 CONTROLS = ("gaussian1d_smoke", "ring16_acquisition", "mode_hold", "img_stripes2")
 LABELS = ("Control", "Allocation", "Settling", "Fidelity")
+ARCHIVED_CONTROL = Path("/mnt/ml7tb/ParticleGAN-forge/bispf-optimized-20261016/ordinary-quality-full-readout.json")
+ARCHIVED_CONTROL_SHA256 = "50f249158118686904c8d01bf817fcf802696acbe84f0c56567cbc3cab3dedfe"
 
 
 def require(condition, message):
@@ -47,6 +49,24 @@ def data_hashes(row):
 def completed_steps(row):
     evidence = row.get("evidence", {})
     return evidence.get("completed_steps", evidence.get("provenance_checkpoint", {}).get("completed_steps"))
+
+
+def historical_control_check(rows):
+    if not ARCHIVED_CONTROL.is_file():
+        return dict(status="UNAVAILABLE", path=str(ARCHIVED_CONTROL), expected_sha256=ARCHIVED_CONTROL_SHA256)
+    require(file_hash(ARCHIVED_CONTROL) == ARCHIVED_CONTROL_SHA256, "Archived control readout identity differs")
+    original = read_json(ARCHIVED_CONTROL)
+    archived = {row["task_id"]: row for row in original["task_results"]}
+    comparisons = {}
+    for task, row in rows.items():
+        old = archived.get(task)
+        comparisons[task] = dict(archived_task_present=old is not None,
+                                 gate_equal=old is not None and old["gate_status"] == row["gate_status"],
+                                 final_metrics_equal=old is not None and old.get("metrics", {}) == row.get("metrics", {}))
+    return dict(status="VERIFIED", path=str(ARCHIVED_CONTROL), sha256=ARCHIVED_CONTROL_SHA256,
+                source_commit="d9d72d53761c898bce20102e1995fc3d899c1447",
+                candidate_revision=original["candidate_revision"], tasks=comparisons,
+                preserves_original_qualification=True)
 
 
 def numerical_note(task, cell):
@@ -123,6 +143,12 @@ def write_appendix(summary, output, tasks):
               "Raw stdout, full readouts, per-update events, tensors and checkpoints remain in the artifact "
               "archive named in [protocol.json](protocol.json). Compact provenance includes their exact hashes. "
               "Historical selected results keep their original source and qualification identity.", ""]
+    historical = summary["archived_control_check"]
+    if historical["status"] == "VERIFIED":
+        equal = sum(c["gate_equal"] and c["final_metrics_equal"] for c in historical["tasks"].values())
+        lines += [f"The fresh control exactly reproduces {equal}/{len(tasks)} archived final metric dictionaries "
+                  "and gate verdicts. This numerical agreement does not merge evidence cohorts. The original "
+                  f"full-readout SHA-256 is `{historical['sha256']}` from source `{historical['source_commit']}`.", ""]
     (output / "numerical-results.md").write_text("\n".join(lines))
 
 
@@ -258,6 +284,7 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
                    matched_bindings=bindings, arms=compact,
                    total_paid_attempt_seconds=sum(charged.values()),
                    original_receipts=provenance, numerical_gates_unchanged=True)
+    summary["archived_control_check"] = historical_control_check(rows[CONTROL])
     atomic_json(output / "comparison.json", summary)
     if not partial:
         write_appendix(summary, output, tasks)
