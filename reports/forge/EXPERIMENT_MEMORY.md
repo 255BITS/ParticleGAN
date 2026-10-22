@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 850. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 851. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3960,6 +3960,22 @@ Smoothing 1e-4 repairs serial Gaussian acquisition and Ring16 passes in all four
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/6d3d5b21144d85061fce6349b706e9c2800b0f96/reports/forge/smooth-polar-factorial/README.md) · [Record](records/pr344-smoothed-dualnorm-1e-4-context-v1.json)
 
+### r1r2-saved-endpoint-diagnosis · r1r2-failure-diagnosis-20261022
+
+**Scope:** saved_state_diagnostic; family_context; revision `a771841dd17bd8780c03f8ebb6e34b8dfe19bc94`.
+
+Saved public-API states and an independent software oracle distinguish R1/R2 implementation defects from density, schedule and categorical-retention failures without retraining.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `frozen_state_force_and_implementation_audit`.
+
+
+
+No implementation defect or validated global recipe fix found. Original Ring16 failure is density quality despite all 16 modes. The strongest NS control has substantial critic gradients but its projected radial force contracts already narrow spread at both integration orders. Fixed-width MMD improves an output-space covariance derivative but worsens it after saved generator/prior and AMSGrad projection on both finite panels; it remains untrained. Selected word hold has 4/5 severely attenuated categorical atom gradients in float32 and float64 and no explicit reconstruction training loss. Independent G/D/learned-prior update oracle and adjacent suites: 110 tests pass. Original outcomes and the single current leaderboard remain unchanged.
+
+**Next:** Keep MMD deferred and stop the concluded optimizer/energy/prior-freeze revisions. Treat 6400-update schedule PASS as a distinct fragile diagnostic, not a 1600-update repair. A word logit-space reconstruction intervention is only a future explicit recipe hypothesis. Require a supported generator/optimizer-aware mechanism and a fresh bounded matched campaign before any global recipe replacement.
+
+[Evidence](../../reports/forge/r1r2-failure-diagnosis-20261022/README.md) · [Record](records/r1r2-failure-diagnosis-20261022.json)
+
 ### r1r2-pr401-concluded-archive · r1r2-pr401-concluded-archive-v1
 
 **Scope:** historical; family_context; revision `2cf7b0a4c796e29ace6cca12d2e553ad67211b5c`.
@@ -5750,4 +5766,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `3aa279e13001c206fe493e6a271c303da3876eaf7cdfffd72182d8e3a587f091`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `e504efdb7b886a250b59a86f177512dafca07d4220c27be188e1ad0ba71319c5`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
