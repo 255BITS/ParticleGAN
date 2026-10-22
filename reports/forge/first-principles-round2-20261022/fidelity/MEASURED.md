@@ -2,7 +2,7 @@
 
 `bispf-bregman-game-v1` finishes **6 PASS / 9 FAIL** across all fifteen unchanged tasks. It repairs four original failures: overlap, bars, blobs and intensity. It also loses two original controls, ring acquisition and mode hold, retaining **2/4 controls**. The fresh energy reference also passes six tasks and retains all four controls; the game additionally loses its anisotropic pass. **Reject a global replacement or qualification.** Preserve the measured image/overlap improvements as research evidence. No taskwise mixture of recipes is selected.
 
-The [campaign comparison](../README.md) owns the single current leaderboard, scientific admission, runtime/initialization/stream audit, paid-cost ledger and actual-training GIF publication. This report explains the complete game arm against both fresh fifteen-task references. The frozen [mechanism, predictions and cheap controls](README.md) remain unchanged.
+The [campaign comparison](../README.md) owns scientific admission, runtime/initialization/stream audit, paid-cost ledger and actual-training GIF publication. The [technique inventory](../../technique-inventory.md) remains the sole primary goal leaderboard. This report explains the complete game arm against both fresh fifteen-task references. The frozen [mechanism, predictions and cheap controls](README.md) remain unchanged.
 
 ## Contract and complete task results
 

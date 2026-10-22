@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "fc983052a798b48aff8567698b06d42e8ecfa7d0332b41a0fd0308548bbf93e4",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "57cd5b20ad5b8bb16478ac6e6ed546d81f6cf8153679c60ea69e9a5a7edf4448",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/c3e918bc2dc14cdeaa5dff22cfcee122/observed-images.pt": "fd3e13403e936ed8cc964c174d09e6b95304f52dc30aab743a322822bb96251f"
+  },
+  "task_id": "img_stripes2"
+}

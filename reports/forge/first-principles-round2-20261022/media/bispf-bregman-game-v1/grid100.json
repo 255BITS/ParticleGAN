@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "f2b972403eb8e5d7159413fe89c4f7a3b8e3382a1cee4b03c7bfd5d420ab4694",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "2f7cd92d6ac05574cae466c819dc41eda69c8305ba8a2c3ee0d3df36cbd81016",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/config.json": "2084f6925be066e8d11a5dce5c525ad7fc95a32186c5b89ee7f35b2714790e43",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/events.jsonl": "e6e03c17c7c00dd4de7d455f9eb317551644c5834f0a3b3e5c2d69890fc3c456",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_000000.npz": "fa252ee98ac000fe804d002d8a3c8260a3f26e452b4121ad0ccd0e1e1549e1d2",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_000050.npz": "da694d5ae8efce406013b7b6c6c76a2d316376ba161a659a71af98525b00927b",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_000750.npz": "77bb80bb02d6a4aa90e0bc84bb9547b4af644aacaad07dfb0ef2f3254fcb99de",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_001750.npz": "045128c323b9fc5747520a8ba4abb3fd17a480122c503ed4a01530e2fd18e9fb",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_002750.npz": "2877f8425314904dfe31092a19d88ad8f8fb01820d7a57fa29d989a46ecd8f1b",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_004000.npz": "d286820e0f808871e09f92400563eee56cfa38eb837cd26249715fcf57d7fcfc",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_005000.npz": "f9866cacf04f0fe0331537bcfef37c76b31371414a0c35b48791071b235248b8",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_006000.npz": "4bbda0928ce9f3ecbe85858999dc4d892ba789bd4e1e2e32d7dd0cb4f8f976f8",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/snapshots/step_007000.npz": "30f04975ec777b52523e8d7fc60df345140ac1686f888eab335a1b6c208fb3be",
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/d9144b009f3f4407a072a99a34022ce3/native100/grid100/summary.json": "e2ea4e509ab5316b3e3fa0adc4328ba8b33bf7e97066ebff860eb383dcb7f841"
+  },
+  "task_id": "grid100"
+}

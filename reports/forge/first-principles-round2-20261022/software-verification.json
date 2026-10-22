@@ -292,5 +292,158 @@
       "sha256": "cf0c2cc2867610db68ff0a051d55d0e206ddaa505c66c6ee68075be937872047"
     },
     "scientific_reruns": 0
+  },
+  "final_code_github_ci": {
+    "url": "https://github.com/255BITS/ParticleGAN/actions/runs/39835728209",
+    "head_commit": "e9704aad6c07f8ca7f9193da9d2747cc69a444b0",
+    "conclusion": "success",
+    "all_jobs_passed": false,
+    "jobs": [
+      {
+        "name": "CPU / Python 3.12 / shard 1",
+        "conclusion": "success",
+        "databaseId": 120023414815
+      },
+      {
+        "name": "CPU / Python 3.12 / shard 3",
+        "conclusion": "success",
+        "databaseId": 120023415093
+      },
+      {
+        "name": "CPU / Python 3.10 / shard 0",
+        "conclusion": "",
+        "databaseId": 120023415224
+      },
+      {
+        "name": "CPU / Python 3.12 / shard 0",
+        "conclusion": "success",
+        "databaseId": 120023415241
+      },
+      {
+        "name": "CPU / Python 3.12 / shard 2",
+        "conclusion": "success",
+        "databaseId": 120023415302
+      },
+      {
+        "name": "CPU / Python 3.11 / shard 0",
+        "conclusion": "success",
+        "databaseId": 120023415334
+      },
+      {
+        "name": "Build release distributions",
+        "conclusion": "success",
+        "databaseId": 120032102014
+      }
+    ],
+    "python312_shard_tests_passed": 7923,
+    "python312_subtests_passed": 149,
+    "late_phase_renderer_tests_passed": 3,
+    "raw_job_logs": [
+      {
+        "shard": 0,
+        "summaries": [
+          "1649 passed, 169 skipped, 6569 deselected, 8 warnings, 2 subtests passed in 887.56s (0:14:47)",
+          "3 passed in 0.32s"
+        ],
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/ci-final-code-py312-shard0.log",
+        "sha256": "edd265175900345d582f5991f420541c830b54f64f300fcef71f1f4ede3245c8"
+      },
+      {
+        "shard": 1,
+        "summaries": [
+          "2118 passed, 157 skipped, 6112 deselected, 2 warnings, 47 subtests passed in 552.41s (0:09:12)"
+        ],
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/ci-final-code-py312-shard1.log",
+        "sha256": "531bf87a4890bf811928daf78db582deec76c089a007c38963a17af61b6f64cb"
+      },
+      {
+        "shard": 2,
+        "summaries": [
+          "2308 passed, 74 skipped, 6005 deselected, 77 subtests passed in 769.32s (0:12:49)"
+        ],
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/ci-final-code-py312-shard2.log",
+        "sha256": "865f81df7bc489c9de7c2016e6a03e9fa65c38fdde3d764c87a1d9fadeaef111"
+      },
+      {
+        "shard": 3,
+        "summaries": [
+          "1848 passed, 63 skipped, 6475 deselected, 1 xfailed, 2 warnings, 23 subtests passed in 619.84s (0:10:19)"
+        ],
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/ci-final-code-py312-shard3.log",
+        "sha256": "43ebda22a6f64781457481e373ba119a856dd2ac8d29ecf025ae542a94081ba5"
+      }
+    ],
+    "job_metadata_pending": [
+      "CPU / Python 3.10 / shard 0"
+    ],
+    "scope": "GitHub run conclusion success; all four Python3.12 shards, renderer, Python3.11 and distributions completed successfully. Python3.10 job metadata still reports in_progress despite retained cleanup logs; prior complete publication CI passed every job."
+  },
+  "saved_game_reproduction": {
+    "all_45_reference_and_game_cells": true,
+    "all_fields_equal": true,
+    "optimizer_updates": 0,
+    "sampling_draws": 0,
+    "model_forwards": 0,
+    "artifact": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/fidelity-root-reproduction.json",
+      "sha256": "28b8372309a99d3b30a2809e5cb1b28df4d41dc1e686191297f7a2741c76c20b"
+    }
+  },
+  "independent_cross_review": {
+    "game_saved_only_reproduction": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/fidelity-crossreview-reproduction.json",
+      "sha256": "28b8372309a99d3b30a2809e5cb1b28df4d41dc1e686191297f7a2741c76c20b",
+      "byte_identical": true
+    },
+    "synthesis_thermal_scope_corrected": true,
+    "scientific_updates": 0,
+    "sampling_draws": 0
+  },
+  "saved_mechanics_reproduction": {
+    "matched_task_pairs": 15,
+    "public_update_rows": 37000,
+    "numerical_and_provenance_fields_equal": true,
+    "excluded_cpu_timers": [
+      "process_cpu_seconds"
+    ],
+    "optimizer_updates": 0,
+    "sampling_draws": 0,
+    "model_forwards": 0,
+    "artifact": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/mechanics-root-reproduction.json",
+      "sha256": "69bcb0adeb02def5f1ce4649f81a7dce7eceb15a738409e7ede0edb3d8b6d2f2"
+    }
+  },
+  "final_publication_audit": {
+    "completed_paid_attempts": 60,
+    "actual_training_gifs": 60,
+    "matched_bindings": 45,
+    "global_non_task_recipe_fields": 110,
+    "task_owned_recipe_fields": 7,
+    "source_files_verified": 1292,
+    "scientific_retries": 0,
+    "qualification_regraded": false,
+    "scientific_rows_preserved": true,
+    "paid_attempt_seconds": 17213.253551490256,
+    "reserved_seconds": 112080
+  },
+  "final_checks": {
+    "publication_tests": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/final-publication-tests.log",
+      "sha256": "95126e2e2f11d0d1703bba28b84ce4f6a00cb26ed5105a292e60ac2d301a7109",
+      "summary": "257 passed in 186.85s"
+    },
+    "memory_check": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/final-memory-check.log",
+      "sha256": "f1c8ac539b9f1ebf13d301db72965cdb66642ee788bb41436dd27a23dd427b14"
+    },
+    "forge_validate": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/final-forge-validation.log",
+      "sha256": "b141f9d7253918246200271126f24d9c8dee40b6fb63da896d01382bbf869410"
+    },
+    "inventory_refresh": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/publication-refresh-final.log",
+      "sha256": "86eded5d32e96834fd26f28322e45937a3f49437a2ad48f443fc4250619f3093"
+    }
   }
 }

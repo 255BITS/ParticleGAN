@@ -7,8 +7,8 @@ Scientific workers execute source
 The four frozen requests retain runtime, hardware, complete task definitions,
 resolved recipe ownership, original initialization and named-stream contracts.
 
-The original campaign is running or concluded when this document is read.
-Inspect its evidence before considering paid reproduction. These commands
+The original campaign completed all sixty paid attempts without scientific
+retries. Inspect its evidence before considering paid reproduction. These commands
 describe a separate checkout of the exact scientific commit, matching runtime
 and two-A6000 hardware, and an empty archive. They do not authorize rerunning
 unchanged work for a merge.

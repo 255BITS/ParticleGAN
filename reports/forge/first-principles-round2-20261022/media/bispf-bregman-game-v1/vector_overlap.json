@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "03be1c61f153188938c41a56ee44de8b0fcce6b7bc21839886c676659a5f7d68",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "76d90464c259c09572d6638b4bb5fe0c84de67c1eeecb3bf5556ecafa5c40e22",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/4e68fd992e414152884cac122270afc7/observed-samples.pt": "aa02833710583066ec93ac64212fa87a2b0eab3960770030b6d129cd6d52dbe9"
+  },
+  "task_id": "vector_overlap"
+}
