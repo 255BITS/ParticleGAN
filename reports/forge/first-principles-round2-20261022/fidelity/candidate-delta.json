@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "candidate_id": "bispf-bregman-game-v1",
+  "parent_candidate_id": "bispf-optimized-quintic-v1",
+  "implementation_base": "96af7be246261f27db9794a4fa787dbe2a0487a9",
+  "recipe_delta": {"bispf_bregman_game": true},
+  "effective_payoff": "learned_bregman_c_transform_v1",
+  "parent_loss_field_retained": "non_saturating",
+  "prior_update": "learned",
+  "prior_regularizer": "sbnp",
+  "prior_regularizer_coefficient_changed": false,
+  "critic_penalty_changed": false,
+  "extra_model_forwards_per_update": 0,
+  "extra_optimizer_updates_per_update": 0,
+  "extra_sampling_draws_per_update": 0,
+  "cost_complexity": "O(n*m*d), device-local matrix cost and row minimum",
+  "paid_training_executed_by_this_proposal": false,
+  "qualification_input": false
+}

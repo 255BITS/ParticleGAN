@@ -19,6 +19,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "optimizer_dense_profile": "default",
     "output_energy_weight": 0.0,
     "fidelity_transport_weight": 0.0,
+    "bispf_bregman_game": False,
     "bispf_thermal_application": "gradient",
     "d_betas": None, "d_eps": None, "prior_eps": None,
     "loss_labels": (0.0, 1.0, 1.0), "adam_variant": "pytorch",

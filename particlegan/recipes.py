@@ -229,6 +229,8 @@ class Recipe:
     # Opt-in research objectives consume the existing G-phase batches only.
     output_energy_weight: float = 0.0
     fidelity_transport_weight: float = 0.0
+    # Replace both adversarial payoffs by a learned Bregman c-transform game.
+    bispf_bregman_game: bool = False
     # Relocate existing BISPF G/prior cooling to the finite optimizer move.
     bispf_thermal_application: str = "gradient"
     # Opt-in protection of existing G/encoder/prior objectives. Component
@@ -306,6 +308,18 @@ class Recipe:
             value = getattr(self, field)
             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
                 raise ValueError(f"{field} must be finite and nonnegative")
+        if type(self.bispf_bregman_game) is not bool:
+            raise ValueError("bispf_bregman_game must be a boolean")
+        if self.bispf_bregman_game and (
+                self.effective_critic_formulation != "bispf" or self.loss != "non_saturating"
+                or self.model != "gan" or self.conditioning != "scalar" or self.encoder_mode != "none"
+                or self.input_noise_std or self.output_noise_std
+                or self.output_energy_weight or self.fidelity_transport_weight
+                or self.kinetic_transport_weight or self.kinetic_transport_local_weight
+                or self.bispf_thermal_application != "gradient"
+                or self.constraint_geometry_mode not in ("none", "direction_blend")):
+            raise ValueError("bispf_bregman_game requires scalar non_saturating BISPF, zero additive noise, "
+                             "no auxiliary transport/energy, gradient cooling and none/direction_blend protection")
         if self.bispf_thermal_application not in ("gradient", "displacement"):
             raise ValueError("bispf_thermal_application must be gradient or displacement")
         if self.bispf_thermal_application == "displacement" and (

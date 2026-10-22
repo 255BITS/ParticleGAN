@@ -24,6 +24,8 @@ class SimpleMLPGenerator(nn.Module):
     Strong enough for the toy problem but still minimal and CPU-friendly.
     """
 
+    particlegan_output_link = {"kind": "identity"}
+
     def __init__(
         self,
         z_dim: int = 4,
