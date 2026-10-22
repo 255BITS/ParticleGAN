@@ -1,9 +1,10 @@
 # Temporal settling readout: running
 
 Both fresh controls exactly reproduce their first-round Gaussian and overlap
-runs. Their retained actual update returns show **thermal scale 1 on all
-14,400 updates** across those six cells. Mechanics and the Bregman game remain
-pending; there is no completed successor comparison yet.
+runs. Mechanics repairs overlap's declared terminal window and improves
+Gaussian acquisition, shape and pass frequency, while Gaussian sustained
+settling still fails. The Bregman game remains pending; the cross-arm readout
+is incomplete.
 
 This is a saved-data diagnostic of the four admitted recipes. The
 [local exchangeability thermostat](README.md) failed its fixed cheap screen,
@@ -95,9 +96,60 @@ cooler scale. This directly shows that existing cooling never activates on
 these runs. It does not retroactively create missing first-round per-update
 telemetry.
 
-## Candidate measurements pending
+## Mechanics: reaches quality sooner, still fails sustained settling
 
-Secant mechanics and Bregman game measurements will be filled only
+The same-batch numerical correction is active and materially changes the
+trajectory. It passes smoke at the first independent confirmation at 125,
+with 10/24 primary passes and a passing final state. Continuing its own state
+raises stationary passes from energy's 12/72 to **40/72**, recovery passes
+from 4/24 to **11/24**, and shifted hold from 0/24 to **12/24**. Its first
+post-shift full pass is at **4042**, only 42 updates after the target changes;
+energy first passes at 4334 and original BISPF at 4709. The method follows
+the changed law quickly, then loses quality intermittently.
+
+The original stability gate remains **FAIL**: only 1/5 deadline checks passes,
+the longest stationary passing run is six, and shifted hold ends with only
+three consecutive passes. Its final KS .038687, mean error .044355 sigma and
+width .918820 all pass; an endpoint-only verdict would hide the temporal
+failure. KS fails at 57/120 checks, mean error at 26 and width at 18; these
+failures overlap. The descriptive moment-fit shape KS median falls from
+energy's .05943 to .02124, and from .08351 to .01656 during shifted hold.
+The final shape KS is .01087. Shape improves as well as centering, while
+stable quality remains unsolved.
+
+All 5000 continuation steps accept a bounded numerical trial, with no zero
+actual moves and no recorded secant-bound violations. Alpha is below 1 on
+84.8% of updates; its median is .25. The median **actual applied norm/base
+proposal norm** is .22877, a different measurement from alpha. Final anchor
+direction protection changes 1372/5000 proposals. These are Euclidean norms
+over combined G/prior parameters, not output-space displacement or separate
+role kinetics. The trace cannot establish which role dominates the norm.
+
+Thermal scale remains exactly 1 at every smoke and continuation update; the
+minimum continuation residual is .070802. The observed improvement therefore
+accompanies an active numerical update while the existing thermal cooler
+remains inactive. The local, pre-protection consistency check has no joint
+game or cross-batch stability certificate. Its successful trials and smaller
+combined moves do not override the failed temporal gate.
+
+Mechanics also repairs the declared overlap gate: **22/24 observations pass,
+with exactly five consecutive terminal passes at 1000–1200**. Excursions at
+550 and 950 remain visible. Its longest passing run is ten, versus energy's
+fourteen; energy nevertheless fails because its terminal suffix is only one.
+The mechanics endpoint passes with covariance error .124908, normalized SW1
+.049873 and mean error .059381. This is a repair of the fixed terminal-window
+requirement, not uniform stability over every observation.
+
+On overlap all 1200 numerical steps accept, alpha is below 1 on 979 steps,
+median alpha is .5 and median actual/base norm is .47279. Final protection
+changes 55 proposals. No zero actual move or secant violation is observed.
+Thermal scale is always 1, with minimum residual .164169. The overlap repair
+therefore occurs with active finite-step correction while the original
+thermal observer remains hot.
+
+## Remaining candidate measurements pending
+
+Bregman game measurements will be filled only
 after their own smoke/continuation/overlap jobs complete or their own checkpoint
 prerequisites block continuation. An unexecuted blocked continuation will be
 reported as such, without substituting another recipe's checkpoint.
