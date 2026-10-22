@@ -219,3 +219,126 @@ def test_critic_groups_reject_before_mutation():
     with pytest.raises(ValueError, match="generator"):
         thermal_optimizer_step(optimizer, 0.5)
     assert torch.equal(parameter, torch.ones(2))
+
+
+def _public_trainer(application="displacement"):
+    from particlegan import GANTrainer, get_recipe, init
+
+    recipe = get_recipe("bispf_optimized", num_particles=64, z_dim=2,
+                        prior_kind="mog", sigma_rel=0.025, standardize=False,
+                        batch_size=16, total_steps=8,
+                        bispf_thermal_application=application)
+    # This small fixture is a software integration check, not a scientific
+    # task/architecture substitute. Isolate constructor, model and every
+    # sampler stream while exercising the actual public initializer and API.
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(0)
+        generator = torch.nn.Sequential(torch.nn.Linear(2, 8), torch.nn.SiLU(), torch.nn.Linear(8, 2))
+        critic = torch.nn.Sequential(torch.nn.Linear(2, 8), torch.nn.SiLU(), torch.nn.Linear(8, 1))
+        prior = recipe.make_prior()
+        for index, module in enumerate((generator, critic, prior)):
+            init.deterministic_orthogonal_(module, seed=index)
+        streams = {name: torch.Generator().manual_seed(index + 100)
+                   for index, name in enumerate(("latent_generator", "penalty_generator",
+                       "noise_generator", "eval_generator", "input_noise_generator",
+                       "prior_noise_generator", "model_generator"))}
+        trainer = GANTrainer(recipe, generator, critic, prior=prior, seed=0, **streams)
+    return trainer
+
+
+def _force_software_thermal_fixture(monkeypatch, trainer, scale):
+    # Exercise the real penalty/controller path and its normal state writes;
+    # freeze only the cooler query to make finite movement assertions exact.
+    monkeypatch.setattr(trainer.penalty.regularizer.cooler, "scale_for",
+                        lambda *args, **kwargs: scale)
+
+
+def _public_batch():
+    return (torch.arange(32, dtype=torch.float32).reshape(16, 2) - 16) / 16
+
+
+def test_public_trainer_uncooled_candidate_matches_existing_trainer_exactly(monkeypatch):
+    baseline = _public_trainer("gradient")
+    candidate = _public_trainer()
+    for trainer in (baseline, candidate):
+        _force_software_thermal_fixture(monkeypatch, trainer, 1.0)
+    global_rng = torch.get_rng_state().clone()
+    for _ in range(3):
+        old = baseline.step(_public_batch(), collect_stats=True)
+        new = candidate.step(_public_batch(), collect_stats=True)
+        for field in ("loss_d", "loss_g", "loss_gan", "prior_regularization", "penalty"):
+            assert torch.equal(old[field], new[field])
+        assert "thermal_displacement" not in old
+        assert new["thermal_displacement"]["thermal_scale"] == 1.0
+        a, b = baseline.state_dict(), candidate.state_dict()
+        a.pop("recipe")
+        b.pop("recipe")
+        _assert_tree_equal(a, b)
+    assert torch.equal(torch.get_rng_state(), global_rng)
+
+
+@pytest.mark.parametrize("scale", [0.0, 0.2])
+def test_public_trainer_realized_move_and_cache_restoration(monkeypatch, scale):
+    trainer = _public_trainer()
+    _force_software_thermal_fixture(monkeypatch, trainer, scale)
+    originals = [p.detach().clone() for group in trainer.opt_g.param_groups for p in group["params"]]
+    stream_before = {name: getattr(trainer, name).get_state().clone() for name in trainer._STREAMS}
+    output = trainer.step(_public_batch(), collect_stats=True)
+    stats = output["thermal_displacement"]
+    assert stats["thermal_scale"] == scale
+    assert set(stats["roles"]) == {"generator", "prior"}
+    for role in stats["roles"].values():
+        assert role["base_squared_l2"] > 0
+        assert role["gradient_squared_l2"] > 0
+        assert role["applied_to_base_l2"] == pytest.approx(scale, abs=3e-6)
+    if scale == 0:
+        parameters = [p for group in trainer.opt_g.param_groups for p in group["params"]]
+        for current, original in zip(parameters, originals):
+            assert torch.equal(current, original)
+    assert trainer.completed_steps == 1
+    assert trainer.penalty.regularizer.record._thermal_scale == scale
+    assert _LAST_THERMAL_SCALE[trainer.device] == scale
+    assert all(parameter.requires_grad for parameter in trainer.D.parameters())
+    assert all(state["step"] == 1 for state in trainer.opt_g.state.values())
+    assert torch.equal(trainer.eval_generator.get_state(), stream_before["eval_generator"])
+    for name in ("latent_generator", "prior_noise_generator"):
+        assert not torch.equal(getattr(trainer, name).get_state(), stream_before[name])
+    assert set(trainer.state_dict()["streams"]) == set(trainer._STREAMS)
+
+
+def test_public_trainer_complete_checkpoint_resume_is_bit_exact(monkeypatch):
+    trainer = _public_trainer()
+    _force_software_thermal_fixture(monkeypatch, trainer, 0.2)
+    for _ in range(2):
+        trainer.step(_public_batch(), collect_stats=True)
+    checkpoint = deepcopy(trainer.state_dict())
+    assert checkpoint["recipe"]["bispf_thermal_application"] == "displacement"
+    first_output = trainer.step(_public_batch(), collect_stats=True)
+    first_samples = trainer.sample(32)
+    first_state = trainer.state_dict()
+
+    resumed = _public_trainer()
+    _force_software_thermal_fixture(monkeypatch, resumed, 0.2)
+    resumed.load_state_dict(checkpoint)
+    second_output = resumed.step(_public_batch(), collect_stats=True)
+    second_samples = resumed.sample(32)
+    _assert_tree_equal(first_output, second_output)
+    assert torch.equal(first_samples, second_samples)
+    _assert_tree_equal(first_state, resumed.state_dict())
+    assert _LAST_THERMAL_SCALE[resumed.device] == 0.2
+
+
+def test_public_trainer_generator_exception_restores_thermal_readers(monkeypatch):
+    trainer = _public_trainer()
+    _force_software_thermal_fixture(monkeypatch, trainer, 0.2)
+
+    def failed_generator_batch():
+        assert trainer.penalty.regularizer.record._thermal_scale == 1.0
+        assert _LAST_THERMAL_SCALE[trainer.device] == 1.0
+        raise RuntimeError("generator data probe")
+
+    with pytest.raises(RuntimeError, match="generator data probe"):
+        trainer.step(_public_batch(), generator_real=failed_generator_batch)
+    assert trainer.penalty.regularizer.record._thermal_scale == 0.2
+    assert _LAST_THERMAL_SCALE[trainer.device] == 0.2
+    assert all(parameter.requires_grad for parameter in trainer.D.parameters())
