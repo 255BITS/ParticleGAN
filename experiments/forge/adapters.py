@@ -344,6 +344,8 @@ class _Run:
         self.finite = self.finite and _finite_tree(self.last_update)
         if not self.finite:
             raise FloatingPointError("nonfinite public training loss")
+        from .update_trace import append_update
+        append_update(self.output, self.last_update)
 
     def evaluate(self, function):
         policy_before = None
@@ -415,6 +417,10 @@ class _Run:
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
                     **self.sampling_policy}
+        from .update_trace import receipt as update_trace_receipt
+        update_trace = update_trace_receipt(self.output)
+        if update_trace is not None:
+            evidence["public_update_trace"] = update_trace
         if self.optimizer_diagnostics is not None:
             evidence["optimizer_diagnostics"] = self.optimizer_diagnostics.receipt()
         if self.policy_audit is not None:
