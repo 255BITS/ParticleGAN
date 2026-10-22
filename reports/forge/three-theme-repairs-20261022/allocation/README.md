@@ -1,5 +1,9 @@
 # BISPF output-population repair: energy witness
 
+The [completed measured analysis](MEASURED.md) records **6/15 PASS versus 4/15**
+for the matched control, two sustained repairs and no lost control gates. The
+remaining preregistration below retains the proposal's original scope.
+
 **Candidate:** `bispf-output-energy-v1`, parent `bispf-optimized-quintic-v1`.
 The proposed single global delta is `output_energy_weight=1.0`. The common
 three-theme diagnostic study owns its frozen controls, task panel and finite
