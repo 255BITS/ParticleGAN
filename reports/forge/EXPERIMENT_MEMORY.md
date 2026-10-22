@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 854. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 855. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -807,6 +807,22 @@ Direction-only projection (PR383, constraint_geometry_mode=direction_blend) is t
 **Next:** Base future BCAP research on the exact PR383 direction-only recipe; stop all five exact moonshot revisions and retain their negative evidence. Inspect saved equal-clock full/core density, mass allocation, spill and controller evidence before composition; keep unavailable gradient-force measurements explicit. Any next global trainer comparison should isolate one causal mechanism with a fixed backend and numerical falsifier, measure force scaling and actual displacement, and preserve all six Tier 1 gates, trajectory, residual and word hold. A common-clock word hold would be a separately declared new cohort; never regrade these original own-prefix results.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/README.md) · [Record](records/bcap-three-phase-concluded-context-v1.json)
+
+### bispf-local-exchangeability-v1 · bispf-local-exchangeability-rejected-before-training-v1
+
+**Scope:** historical; family_context; revision `3a08647b436e71317bb3cc17ad2e95d79d6299b0b52627d13bdd5bdad02b38f1`.
+
+A fixed multiscale local real/fake sample-label exchangeability test can separate finite-sample equilibrium fluctuations from support loss before scaling the actual G/prior displacement.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_state_finite_sample_support_sensitive_observer_screen`.
+
+
+
+Rejected before API implementation or training: PASS-versus-severe AUROC .75 < the fixed .8 minimum; all 3 non-reference passing states remain fully hot (mobility 1). Full-window same-law controls have 0/20 full-heat cases, and all explicit missing rare/ring support, collapse and shifted-constant fixtures remain fully hot. These positives do not establish practical equivalence against the target: the saved-state reference is an earlier passing generated law, not an unavailable real batch. No public recipe, paid attempt, qualification or default claim was produced.
+
+**Next:** Do not implement or train this exact observer, tune its ranks/window/alpha or replace the reference after rejection. Any substantive future settling mechanism must distinguish achievable approximation from equality while preserving finite-sample and rare-support controls.
+
+[Evidence](../../reports/forge/first-principles-round2-20261022/settling/README.md) · [Record](records/bispf-local-exchangeability-rejected-before-training-v1.json)
 
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
@@ -5814,4 +5830,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `0706aadc1b21456e1feedd8824b81324b03abdbfc8034c27371e71585883d7df`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `d2ad3f0b66abd6b27fa47d149a591c09091088e4e5755c6cc0c3702ce6a6b67c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

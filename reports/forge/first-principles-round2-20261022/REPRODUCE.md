@@ -34,7 +34,8 @@ unexecuted BLOCKED, with zero attempt/cost and no invented GIF. The rejected
 thermostat has no paid request. No scientific retry, coefficient or seed sweep
 is part of this protocol.
 
-Passing Gaussian smoke supplies each arm's own continuation checkpoint.
+After Gaussian smoke's acquisition gate passes, continuation resumes each arm's
+own terminal 1,000-update checkpoint; that terminal state can fail output bounds.
 Those trained states differ by the intended recipe delta; no arm receives
 another arm's trained checkpoint. The shared initializer and prior identity
 apply to the original initialized training process.

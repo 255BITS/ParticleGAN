@@ -46,3 +46,36 @@ def test_trace_requires_finite_json_and_no_empty_evidence(tmp_path):
     import pytest
     with pytest.raises(ValueError):
         append_update(tmp_path, dict(step=1, loss=float("nan")))
+
+
+def test_publisher_resolves_real_checkpoint_layout_and_rejects_changed_trace(tmp_path, monkeypatch):
+    import copy
+    from pathlib import Path
+    import runpy
+
+    import pytest
+    from experiments.forge.artifacts import save_provenance_checkpoint
+
+    publisher = Path(__file__).resolve().parents[1] / "reports/forge/first-principles-round2-20261022/publish.py"
+    verify = runpy.run_path(str(publisher))["verify_update_trace"]
+    output = tmp_path / "adapter-output"
+    output.mkdir()
+    append_update(output, dict(step=1001, loss=1.))
+    append_update(output, dict(step=1002, loss=2.))
+    checkpoint = save_provenance_checkpoint(output, {"streams": {"states": {}}}, completed_steps=1002)
+    row = dict(evidence=dict(public_update_trace=receipt(output), provenance_checkpoint=checkpoint))
+    elsewhere = tmp_path / "unrelated-cwd"
+    elsewhere.mkdir()
+    (elsewhere / "public-updates.jsonl").write_text("wrong artifact\n")
+    monkeypatch.chdir(elsewhere)
+    result = verify(row)
+    assert result["status"] == "VERIFIED"
+    assert (result["first_step"], result["last_step"]) == (1001, 1002)
+    assert result["scalar_aggregates"]["loss"]["mean"] == 1.5
+    frozen = copy.deepcopy(row)
+    frozen["evidence"]["public_update_trace"].pop("path_base")
+    frozen["evidence"]["public_update_trace"]["path"] = str(output / "public-updates.jsonl")
+    assert verify(frozen)["scalar_aggregates"] == result["scalar_aggregates"]
+    append_update(output, dict(step=1003, loss=3.))
+    with pytest.raises(ValueError, match="trace identity differs"):
+        verify(row)

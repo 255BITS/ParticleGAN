@@ -78,7 +78,8 @@ Each arm runs the entire panel, rather than choosing a different recipe for
 each question. Task architectures, target/data laws, initial priors/capacities,
 public seed-0 initialization, named RNG streams, sampling, update allowances,
 observation schedules and numerical gates remain fixed. Each Gaussian stability
-run must continue its own valid passing smoke checkpoint; a missing parent stays
+run must continue its own terminal 1,000-update smoke checkpoint after the
+acquisition gate passes; the terminal state can fail output bounds. A missing parent stays
 blocked. Historical source-bound outcomes are not substituted for this control.
 
 The comparison uses one explicitly separate research-diagnostic view: every task

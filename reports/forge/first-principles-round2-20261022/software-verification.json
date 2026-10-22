@@ -186,5 +186,111 @@
     "scientific_rows_preserved": true,
     "qualification_regraded": false,
     "training_launched": false
+  },
+  "publication_github_ci": {
+    "url": "https://github.com/255BITS/ParticleGAN/actions/runs/39831098659",
+    "head_commit": "408c9c5a5faa0de58afcbeac0c0dd7c2cc7dc94a",
+    "conclusion": "success",
+    "all_jobs_passed": true,
+    "jobs": [
+      {
+        "name": "CPU / Python 3.10 / shard 0",
+        "conclusion": "success",
+        "databaseId": 120007738001
+      },
+      {
+        "name": "CPU / Python 3.12 / shard 2",
+        "conclusion": "success",
+        "databaseId": 120007738126
+      },
+      {
+        "name": "CPU / Python 3.12 / shard 1",
+        "conclusion": "success",
+        "databaseId": 120007738181
+      },
+      {
+        "name": "CPU / Python 3.12 / shard 0",
+        "conclusion": "success",
+        "databaseId": 120007738200
+      },
+      {
+        "name": "CPU / Python 3.11 / shard 0",
+        "conclusion": "success",
+        "databaseId": 120007738427
+      },
+      {
+        "name": "CPU / Python 3.12 / shard 3",
+        "conclusion": "success",
+        "databaseId": 120007738706
+      },
+      {
+        "name": "Build release distributions",
+        "conclusion": "success",
+        "databaseId": 120015665146
+      }
+    ],
+    "raw_job_logs": [
+      {
+        "shard": 0,
+        "summaries": [
+          "1649 passed, 169 skipped, 6568 deselected, 8 warnings, 2 subtests passed in 781.26s (0:13:01)",
+          "3 passed in 0.27s"
+        ],
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/ci-publication-py312-shard0.log",
+        "sha256": "5f20f830d301e86ef6fb1f72a280ebbf6d74bd4edef4a744911a44d55ef54867"
+      },
+      {
+        "shard": 1,
+        "summaries": [
+          "2117 passed, 157 skipped, 6112 deselected, 2 warnings, 47 subtests passed in 330.64s (0:05:30)"
+        ],
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/ci-publication-py312-shard1.log",
+        "sha256": "4e4354f223a00ee90c215ddd85c476a69dccc7a927574342780dac5d2cd16ffb"
+      },
+      {
+        "shard": 2,
+        "summaries": [
+          "2308 passed, 74 skipped, 6004 deselected, 77 subtests passed in 819.53s (0:13:39)"
+        ],
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/ci-publication-py312-shard2.log",
+        "sha256": "ad7a0f49da79d1d77b176f845dca428f26ead740cc63a663d7cf17f334a06246"
+      },
+      {
+        "shard": 3,
+        "summaries": [
+          "1848 passed, 63 skipped, 6474 deselected, 1 xfailed, 2 warnings, 23 subtests passed in 451.47s (0:07:31)"
+        ],
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/ci-publication-py312-shard3.log",
+        "sha256": "21591725090be146378f38395a58c78b7f74b759813ae25a1ad4facb80270c79"
+      }
+    ]
+  },
+  "saved_data_reproduction": {
+    "temporal_cells": 12,
+    "numerical_and_provenance_fields_equal": true,
+    "excluded_cpu_timers": [
+      "process_cpu_seconds",
+      "reduction_cpu_seconds"
+    ],
+    "optimizer_updates": 0,
+    "sampling_draws": 0,
+    "artifact": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/temporal-root-reproduction.json",
+      "sha256": "147042cdaeabe2aff4a480cf2d8102c6a879dd1a2775820f3961c7e811f139c2"
+    }
+  },
+  "publisher_trace_resolution": {
+    "summary": "4 passed in 0.07s",
+    "covers": [
+      "actual provenance checkpoint layout",
+      "unrelated current-directory artifact decoy",
+      "frozen absolute-path receipts",
+      "trace mutation rejection"
+    ],
+    "log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/publisher-path-regression-tests.log",
+      "sha256": "cf0c2cc2867610db68ff0a051d55d0e206ddaa505c66c6ee68075be937872047"
+    },
+    "scientific_reruns": 0
   }
 }

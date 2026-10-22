@@ -59,7 +59,7 @@ def verify_update_trace(row):
     path = Path(receipt["path"])
     if not path.is_absolute():
         require(receipt.get("path_base") == "adapter_output", "Unknown relative update-trace base")
-        path = Path(row["evidence"]["provenance_checkpoint"]["path"]).parent / path
+        path = Path(row["evidence"]["provenance_checkpoint"]["artifact_root"]).parent / path
     require(file_hash(path) == receipt["sha256"], "Public update trace identity differs")
     values = [json.loads(line) for line in path.read_text().splitlines()]
     require(len(values) == receipt["rows"] and values, "Public update trace is incomplete")
@@ -184,7 +184,8 @@ def write_appendix(summary, output, tasks):
               "non-evaluation RNG stream hashes. Gaussian data batches additionally have direct sequence hashes. "
               "Other tasks verify their fixed data law and identical consumed named streams; no direct batch "
               "fingerprint is claimed for those adapters. Evaluation draws retain their own isolated streams.", "",
-              "Gaussian continuation starts from each arm's own passing smoke checkpoint. Matching initialized "
+              "Gaussian continuation starts from each arm's own terminal 1,000-update smoke checkpoint, "
+              "after its acquisition gate passes; that terminal state can fail output bounds. Matching initialized "
               "model identities refer to the common public initialization contract, not equal trained continuation states.", "",
               "All admitted requests share the same complete source manifest, runtime and hardware profile. "
               "Raw stdout, full readouts, per-update events, tensors and checkpoints remain in the artifact "
@@ -218,6 +219,7 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
     for name, expected in reference["source"]["files"].items():
         require(file_hash(snapshot / name) == expected, f"Frozen source snapshot differs: {name}")
     deltas = protocol["recipe_deltas_vs_baseline"]
+    global_recipes = {}
     for cid, request in requests.items():
         require(request["source"] == reference["source"], "Source manifests differ")
         require(set(request["tasks"]) == set(reference["tasks"]), "Task rosters differ")
@@ -232,6 +234,12 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
             expected = {k: v["value"] for k, v in baseline_card["field_ownership"]["recipe_fields"].items()}
             expected.update(deltas[cid])
             require(recipe == expected, f"{cid}/{name}: undeclared resolved recipe delta")
+            global_recipe = {k: v["value"] for k, v in card["field_ownership"]["recipe_fields"].items()
+                             if v["owner"] != "task"}
+            if cid not in global_recipes:
+                global_recipes[cid] = global_recipe
+            require(global_recipe == global_recipes[cid],
+                    f"{cid}/{name}: trainer configuration differs across tasks")
         require(request["protocol"] == reference["protocol"] and request["protocol"]["seed"] == 0,
                 "Comparison protocol differs")
         require(request["runtime"] == reference["runtime"] and request["compute_profiles"] == reference["compute_profiles"],
@@ -245,6 +253,7 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
               if entry["owner"]["request"] in request_ids}
     require(len(ledger) == sum(entry["owner"]["request"] in request_ids for entry in state["charges"]),
             "Repeated attempt in the paid-cost ledger")
+    require(len(ledger) <= protocol["max_paid_attempts"], "Frozen paid-attempt cap exceeded")
     for job in state["jobs"].values():
         result = job.get("result")
         if job["status"] != "terminal" or not result:
@@ -382,6 +391,11 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
                    original_receipts=provenance, numerical_gates_unchanged=True)
     summary["verified_frozen_source_files"] = len(reference["source"]["files"])
     summary["publisher_code_sha256"] = file_hash(Path(__file__))
+    summary["global_trainer_configuration_audit"] = {
+        cid: dict(tasks_verified=len(requests[cid]["tasks"]),
+                  non_task_fields=len(recipe), values_sha256=stable_hash(recipe),
+                  identical_across_tasks=True)
+        for cid, recipe in global_recipes.items()}
     summary["original_request_sha256"] = original_request_hashes
     summary["archived_control_check"] = historical_control_check(rows[CONTROL])
     summary["first_round_control_reproduction"] = reproduced_controls
@@ -392,6 +406,7 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
             "Frozen per-arm budget exceeded")
     summary["cost_audit"] = dict(unique_paid_attempts=len(ledger), queue_charge_seconds=ledger_seconds,
                                  certificate_and_queue_charges_equal=True,
+                                 max_paid_attempts=protocol["max_paid_attempts"],
                                  reserved_seconds=protocol["reserved_seconds"],
                                  per_arm_reserved_seconds=protocol["candidate_reserved_seconds"])
     atomic_json(output / "comparison.json", summary)

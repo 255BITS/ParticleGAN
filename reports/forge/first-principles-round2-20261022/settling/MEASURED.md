@@ -32,8 +32,9 @@ with original BISPF. They are distinct global recipes.
 
 Gaussian smoke passes when at least one of 24 scheduled states passes every
 bound with an independent same-state confirmation. Its last sample can fail
-while smoke passes. Stability resumes that recipe's own passing smoke
-checkpoint, without resetting history. It requires all 72 stationary checks
+while smoke passes. Stability resumes that recipe's own terminal 1,000-update
+smoke checkpoint after the acquisition gate passes, without resetting history.
+That terminal state itself can fail output bounds. Stability requires all 72 stationary checks
 after step 1000, every last-five recovery check by step 5000, and all 24
 shifted hold checks. Each check requires 4096 finite samples, mean error <=.2
 target sigma, width ratio in [.8,1.2], and CDF KS <=.05. Target mean changes
