@@ -36,6 +36,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "optimizer_svd_backend", "optimizer_convolution_rule", "optimizer_dense_profile",
     "prior_update", "prior_regularizer",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
+    "output_energy_weight", "fidelity_transport_weight", "bispf_thermal_application",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
     "critic_r1_real", "critic_payoff_damping", "output_noise_mode", "lr_control",

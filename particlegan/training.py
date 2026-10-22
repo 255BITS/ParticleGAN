@@ -1,5 +1,6 @@
 """A checkpointable training loop using the current recipe formulation."""
 from copy import deepcopy
+from contextlib import nullcontext
 import math
 
 from particlegan.optim.constraint_geometry import constraint_geometry_backward
@@ -429,53 +430,75 @@ class GANTrainer:
         self.D.eval()
         self.G.train()
         flags = [p.requires_grad for p in self.D.parameters()]
+        thermal_displacement = recipe.bispf_thermal_application == "displacement"
+        if thermal_displacement:
+            from .settling_repair import unscaled_generator_gradients, thermal_optimizer_step
+            generator_context = unscaled_generator_gradients(self.penalty.regularizer.record, self.device)
+        else:
+            generator_context = nullcontext(1.0)
         try:
-            self.D.requires_grad_(False)
-            latent, indices = self._sample_training_prior(len(real))
-            fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
-            fake_logits = critic(fake_g)
-            real_g = generator_real() if callable(generator_real) else generator_real
-            real_g = real if real_g is None else self._batch(real_g, "generator_real")
-            if real_g.shape[1:] != real.shape[1:]:
-                raise ValueError("generator_real must match the real sample shape")
-            if len(real_g) != len(real):
-                raise ValueError("RpGAN generator_real must match the real batch size")
-            real_logits = critic(real_g)
-            loss_gan = self.loss.g_loss(fake_logits, real_logits)
-            transport = (recipe.kinetic_transport_loss(fake_g, real_g)
-                         if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
-            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
-                               if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
-            prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0):
-                # Keep the historical unweighted diagnostic, even at weight 0.
-                # Its contribution to the training objective is recipe.prior_reg.
-                raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
-                prior_reg = self.prior_regularizer(raw)
-            loss_g = loss_gan + recipe.prior_reg * prior_reg
-            if self.prior.z.requires_grad and recipe.prior_l2 > 0:
-                loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
-            if recipe.kinetic_transport_weight:
-                loss_g = loss_g + transport
-            if recipe.kinetic_transport_local_weight:
-                loss_g = loss_g + transport_local
-            self.opt_g.zero_grad()
-            protected_evaluator = None
-            if recipe.constraint_geometry_mode == "strict_progress":
-                # Same sampled indices and fixed within-component perturbation;
-                # probes never call a sampler or draw training/output noise.
-                locations = self.prior.z.detach().clone()
-                sampled_latent = latent.detach().clone()
-                def protected_evaluator():
-                    replay = sampled_latent + (self.prior.z[indices] - locations[indices])
-                    logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
-                    return (self.loss.g_loss(logits, real_logits),)
-            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
-                                         protected_evaluator=protected_evaluator)
-            self.policy.after_generator_backward(
-                loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
-            self.opt_g.step()
-            self.policy.after_generator_step()
+            with generator_context as thermal_scale:
+                self.D.requires_grad_(False)
+                latent, indices = self._sample_training_prior(len(real))
+                fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+                fake_logits = critic(fake_g)
+                real_g = generator_real() if callable(generator_real) else generator_real
+                real_g = real if real_g is None else self._batch(real_g, "generator_real")
+                if real_g.shape[1:] != real.shape[1:]:
+                    raise ValueError("generator_real must match the real sample shape")
+                if len(real_g) != len(real):
+                    raise ValueError("RpGAN generator_real must match the real batch size")
+                real_logits = critic(real_g)
+                loss_gan = self.loss.g_loss(fake_logits, real_logits)
+                transport = (recipe.kinetic_transport_loss(fake_g, real_g)
+                             if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
+                transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
+                                   if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
+                output_energy = loss_gan.new_zeros(())
+                if recipe.output_energy_weight:
+                    from .allocation_repair import energy_distance
+                    output_energy = recipe.output_energy_weight * energy_distance(fake_g, real_g)
+                fidelity_transport = loss_gan.new_zeros(())
+                if recipe.fidelity_transport_weight:
+                    from .fidelity_repair import sliced_quartic_transport
+                    fidelity_transport = recipe.fidelity_transport_weight * sliced_quartic_transport(fake_g, real_g)
+                prior_reg = loss_gan.new_zeros(())
+                if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0):
+                    # Keep the historical unweighted diagnostic, even at weight 0.
+                    # Its contribution to the training objective is recipe.prior_reg.
+                    raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+                    prior_reg = self.prior_regularizer(raw)
+                loss_g = loss_gan + recipe.prior_reg * prior_reg
+                if self.prior.z.requires_grad and recipe.prior_l2 > 0:
+                    loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
+                if recipe.kinetic_transport_weight:
+                    loss_g = loss_g + transport
+                if recipe.kinetic_transport_local_weight:
+                    loss_g = loss_g + transport_local
+                if recipe.output_energy_weight:
+                    loss_g = loss_g + output_energy
+                if recipe.fidelity_transport_weight:
+                    loss_g = loss_g + fidelity_transport
+                self.opt_g.zero_grad()
+                protected_evaluator = None
+                if recipe.constraint_geometry_mode == "strict_progress":
+                    # Same sampled indices and fixed within-component perturbation;
+                    # probes never call a sampler or draw training/output noise.
+                    locations = self.prior.z.detach().clone()
+                    sampled_latent = latent.detach().clone()
+                    def protected_evaluator():
+                        replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                        logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                        return (self.loss.g_loss(logits, real_logits),)
+                constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
+                                             protected_evaluator=protected_evaluator)
+                self.policy.after_generator_backward(
+                    loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
+                if thermal_displacement:
+                    thermal_step_stats = thermal_optimizer_step(self.opt_g, thermal_scale, collect_stats=collect_stats)
+                else:
+                    self.opt_g.step()
+                self.policy.after_generator_step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
@@ -489,6 +512,12 @@ class GANTrainer:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
             result["kinetic_transport_local"] = transport_local.detach()
+        if recipe.output_energy_weight:
+            result["output_energy"] = output_energy.detach()
+        if recipe.fidelity_transport_weight:
+            result["fidelity_transport"] = fidelity_transport.detach()
+        if thermal_displacement:
+            result["thermal_displacement"] = thermal_step_stats
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result
