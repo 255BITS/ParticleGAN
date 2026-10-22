@@ -86,3 +86,26 @@ ordinary Forge hosts uses this trainer, including native100. No second host
 training loop or recipe-specific evaluator is introduced. Other public
 component/model hosts require an explicit consumer before admitting an active
 candidate.
+
+The existing BISPF forward hook cools gradients through critic logits. The new
+direct energy term does not pass through that hook, just as existing SBNP is a
+separate regularizer. The combined normalized proposal still goes through the
+parent recipe's `direction_blend` protection of the original adversarial loss.
+Thus this arm measures an additional uncooled output field under that existing
+protection, not a replacement thermal controller or an unconstrained energy
+optimizer. Saved conflict/blend/stall counters can show intervention frequency;
+they cannot by themselves prove whether the energy field was removed.
+
+The read-only [mechanism reducer](reduce.py) accepts the two final complete
+15-task Forge readouts, checks initial state/prior/sampling/update and consumed
+non-evaluation stream metadata, and extracts endpoint populations, rare-support
+presence across scheduled observations, complete sustained convergence, shape
+and control regressions. Parent artifact auditing additionally verifies actual
+checkpoint bytes; JSON metadata matching alone does not establish artifact
+integrity. It emits a compact mechanism analysis, not another leaderboard:
+
+```sh
+python reports/forge/three-theme-repairs-20261022/allocation/reduce.py \
+  --control /path/to/control-readout.json --candidate /path/to/energy-readout.json \
+  --output /mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/allocation-analysis.json
+```
