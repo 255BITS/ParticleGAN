@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "a7ca62307992836888deaa24b304ea5c9961040fe3fe0a42d900d1354f2b54ae",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "ff5a0276c6d40dd92fa6c8313c5f2dcd69d3b29956f04bd74038c0475f9ff47c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/af1e8b91beca4b3db1b2efdd24a0f68e/evaluator/observed-samples.pt": "63988053b927133622fcd5c2fa53b9529bcce2a3f3a5968ab956511cde6ce257"
+  },
+  "task_id": "gaussian1d_stability"
+}

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "db0cf4f0d1b2eb44f61f84c2043c3069e310a0d2a0ada57436f5f1007acd9cc3",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "228cdc676faeb3934f645230c5c562702a23ee34eac5f92cac9f840fd0c5fa06",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/2df27a71eb034639b57a3384429024c3/observed-images.pt": "1ccad85cd9e7bbeddede369b1ce1a9985d03223acc33f8abfec899b4b2b836ec"
+  },
+  "task_id": "img_blobs4"
+}

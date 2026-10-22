@@ -1,4 +1,4 @@
-# Three BISPF repair hypotheses: matched diagnostic comparison
+# Three BISPF repair hypotheses: completed matched diagnostic comparison
 
 This study tests three global trainer changes against the selected
 `bispf-optimized-quintic-v1` recipe on one common committed source. The user
@@ -6,6 +6,47 @@ requested separate agents for output allocation, settling and local fidelity,
 followed by a comparison. Prior investigations are PRs #463–473. The
 [current technique inventory](../technique-inventory.md) remains the single
 goal leaderboard; this is a bounded research comparison, not qualification.
+
+**All 60 runs are complete. None of the three recipes repairs all eleven
+failures.** All four original passing controls survive under every recipe.
+
+- **Allocation: 6/15 PASS, two new sustained repairs.** Anisotropic mixtures and
+  corner blobs pass. Rare occupancy improves from 0 to 81/4096 at the endpoint,
+  but rare-axis shape remains unstable. Width and overlap improve without their
+  required terminal retention. See the [measured allocation report](allocation/MEASURED.md).
+- **Settling: 4/15 PASS, no new gate repairs.** Fourteen tasks exactly reproduce
+  the control's retained numerical trajectories and final model/optimizer
+  states, including Gaussian and overlap. Grid changes and improves precision
+  from .30497 to .35668, still failing with worse covariance bias. See the
+  [settling readout](settling-results.md) and its negative observer controls.
+- **Fidelity: 5/15 PASS, one new sustained repair.** Overlap passes with twenty
+  consecutive final checks. Width covariance error improves 9.68690 to 2.13772
+  but remains above .85. Image fidelity worsens: intensity has 9/32 clean images
+  versus 19/32, while blobs saturate toward blank output. See the
+  [fidelity readout](fidelity/README.md).
+
+The [complete numerical appendix](numerical-results.md) gives every task/arm
+verdict, continuous measurements and actual-training GIF. The
+[compact result](comparison.json) binds original request/result/certificate
+hashes. All 45 changed-arm/control pairs match initial models and priors,
+sampling, update counts and consumed non-evaluation streams. The fresh control
+exactly reproduces all 15 archived final metric dictionaries and gate verdicts;
+its distinct source/runtime cohort supplies the comparison, not new historical
+qualification.
+
+Paid cost is **6,604.419 seconds across 60 unique attempts**, independently
+equal to the queue ledger, within the frozen 112,080-second reservation. Each
+arm stays within its 28,020-second cap. Timing is potentially contended and
+does not establish relative speed.
+
+**Recommendation:** retain energy's two scoped gains as the strongest partial
+result, and keep the existing representative recipe. The next mechanism to
+isolate is a cooling signal that handles finite-sample noise while preserving
+incomplete mode acquisition, alongside saved-state rare-shape diagnostics.
+Moving an inactive factor cannot resolve the Gaussian/overlap failures; a
+naive energy replacement also fails explicit missing-mode controls. Quartic's
+overlap win does not justify its global image/tail tradeoffs. Do not combine
+per-task winners into an unmeasured recipe. No paid successor was launched.
 
 | Arm | Only global trainer delta | Intended question |
 | --- | --- | --- |
@@ -85,5 +126,35 @@ no additional training or sampling draws. Only compact results, provenance,
 readouts, reproduction sources and selected media enter Git. Reporting must
 preserve all earlier selected measurements and qualifications.
 
-Status: implementations and numerical software controls prepared; scientific
-measurements pending. No hypothesis is yet established as a repair.
+## Software and publication verification
+
+The executed scientific source is
+`2a2b662bdfa6249076b27dbea4c136e23d3e7a80`, manifest
+`8bfcc01cd7482b1b348edb2162567adfdcdaa7d308f75fc834774302c6ac4acb`.
+The publisher verifies all 1,289 retained source files and all 60 certified
+receipts. Four concluded research-diagnostic records retain the complete failed
+revisions in Forge memory; none grants qualification or default adoption.
+
+Before execution, 208 numerical/software controls passed. Additional checks
+pass for actual-develop checkpoint compatibility (63), the metadata adapter
+(3), generated family reporting (77) and the initializer registry (3). The
+original archived comparator retains its exact bytes and assertions; a scoped
+adapter checks the new inactive metadata defaults in both interpreters.
+
+After all 60 jobs finished, a separate API guard rejected
+`displacement + strict_progress`: interpolating an accepted nonconvex step can
+invalidate its protected finite-step guarantee. The measured recipe uses
+`direction_blend` throughout and is unaffected. The post-execution settling,
+consumer and adapter checks pass 29/29. This software guard is not substituted
+for the frozen scientific source and does not trigger an unchanged rerun.
+
+The [telemetry limit](settling.md#execution-telemetry-limit) records that applied
+thermal-movement histories were not retained. Optional optimizer post-hooks
+would observe proposals before interpolation; no claim of a measured cooled
+movement-ratio history is made. The retained tensor comparisons support the
+narrower conclusions above.
+
+See [reproduction and artifact verification](REPRODUCE.md) for the exact frozen
+commands, log paths and zero-training publication workflow. Bulk execution
+streams remain in the artifact archive; this report commits final metrics,
+compact provenance, reproduction sources and actual-training media.

@@ -103,7 +103,7 @@ experiment, automatic continuation or adoption.
 
 ## Software checks and reproduction
 
-`tests/test_bispf_settling_repair.py` has 21 passing checks: realized matrix,
+The frozen `tests/test_bispf_settling_repair.py` suite had 21 passing checks: realized matrix,
 bias and sampled-prior movement; untouched rows including signed-zero bits; unchanged gradients and
 optimizer histories; exact uncooled execution; critic-hook and SBNP gradient
 restoration; nested/exception/missing-cache behavior; no RNG consumption;
@@ -114,6 +114,10 @@ exception restoration. They are software
 evidence, not toy-training quality results. The common measured readout must supply
 public-API task receipts and actual-training GIFs before a research PR is
 presented as a training solution.
+
+The post-execution strict-progress composition guard adds one rejection check;
+the current suite passes 22 checks. It does not change the executed
+`direction_blend` recipe or its retained evidence.
 
 ```sh
 OMP_NUM_THREADS=1 python -m pytest -q tests/test_bispf_settling_repair.py

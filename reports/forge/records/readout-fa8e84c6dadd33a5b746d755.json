@@ -1,0 +1,2378 @@
+{
+  "attempt_ids": [
+    "28d5316fcc024520857e2e3c16d8786c",
+    "29414b5cf2b74f1a9f8bb5c58a561d12",
+    "29b95f867728494faf79c51145d11481",
+    "2da58d54f9c44e73a930a17401b4c522",
+    "38f791703bc64d4eb2591b015b828aa0",
+    "4e3e4c68f5dd419c8660d39f982cbebb",
+    "53853bf0beba4fdcb2a4e7b9a45688ed",
+    "53e6825111614dbcbf247657027a8b66",
+    "55f9531c389e4d0293ee48728914afb2",
+    "6534af8b7c174a0c99b497ccb8a8bc35",
+    "71c79acd1c244fa9a514d60924a1dde9",
+    "832b7edb5bfc4b0790f7115ab577a9f7",
+    "a0d456e0039543d395b0d1c0bcd25183",
+    "c69a650d56434d4db319a491717d1c03",
+    "d4151571391241e0a2025ff490113d70"
+  ],
+  "candidate_id": "bispf-output-energy-v1",
+  "candidate_revision": "f41fc85d86fb415a4b93eeff42b96785f69cf36923671dabd4513b0696a58b00",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Against the matched control, energy changes mass TV .175212 to .053385 on anisotropic and blobs from three modes/.8125 clean to four modes/.96875 clean. Rare support is retained but rare shape fails sustained checks; overlap improves to twenty of twenty-four complete checks but retains mean jitter and suffix one. Bars gains a mode while losing cleanliness. All three native precision/shape gates still fail.",
+  "conclusion": "Two of eleven original failures repaired under complete unchanged gates: vector_anisotropic and img_blobs4. Six of fifteen tasks PASS, nine FAIL, with all four regression controls retained. This is a partial diagnostic gain, not a complete global repair.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "28d5316fcc024520857e2e3c16d8786c",
+        "29414b5cf2b74f1a9f8bb5c58a561d12",
+        "29b95f867728494faf79c51145d11481",
+        "2da58d54f9c44e73a930a17401b4c522",
+        "38f791703bc64d4eb2591b015b828aa0",
+        "4e3e4c68f5dd419c8660d39f982cbebb",
+        "53853bf0beba4fdcb2a4e7b9a45688ed",
+        "53e6825111614dbcbf247657027a8b66",
+        "55f9531c389e4d0293ee48728914afb2",
+        "6534af8b7c174a0c99b497ccb8a8bc35",
+        "71c79acd1c244fa9a514d60924a1dde9",
+        "832b7edb5bfc4b0790f7115ab577a9f7",
+        "a0d456e0039543d395b0d1c0bcd25183",
+        "c69a650d56434d4db319a491717d1c03",
+        "d4151571391241e0a2025ff490113d70"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "contract_sha256": "a0aef1f557d5618c315c5ff8c0cddd796d92497817af19f0bd03015d08875124",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "review_saved_diagnostics",
+      "observed": {
+        "falsifier": {
+          "satisfied": false,
+          "value": 0.986328125
+        },
+        "prediction": {
+          "satisfied": true,
+          "value": 0.5464994311332703
+        }
+      },
+      "outcome": "prediction_observed",
+      "provenance": [
+        {
+          "attempt_id": "28d5316fcc024520857e2e3c16d8786c",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "f8e9ee10b56017fea0812da827826b25b8e31c82f4c749886c3067475214619f",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "29414b5cf2b74f1a9f8bb5c58a561d12",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "7b94366efc6e7c7aef9f209e8ea5e63628571e45434bfdf564ad31969996cb7f",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "29b95f867728494faf79c51145d11481",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "d93b3831a6aceb0bf1dd3751138b71bdf00d1956c6d0dcd0495ff592ed2de0bd",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "2da58d54f9c44e73a930a17401b4c522",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "6e3754f1775e1a3ce2e1840b994b644b391266d31dba6bc611325f352505b6a4",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "38f791703bc64d4eb2591b015b828aa0",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "54c8baff30614d58de1bdd8c1198ce1819ef0fbc6c9039e030842d1e94a9029c",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "4e3e4c68f5dd419c8660d39f982cbebb",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "9d7789125742e62c6b674b4c18e104da29d84d559716a095fbd918a2fe570ae6",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "53853bf0beba4fdcb2a4e7b9a45688ed",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "58ddfe29e0f84758b91cd3c2ce8db469d9c90b9ba3c8c5dced5ce445295907db",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "53e6825111614dbcbf247657027a8b66",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "6518e2aee60fed2061d990eac760f635f084b0172d70ea5f98a99da19c666845",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "55f9531c389e4d0293ee48728914afb2",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "2cb1135aaf75a751d73703e74a8661b0e80dc4722e8455c25a67a250867ced8b",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "6534af8b7c174a0c99b497ccb8a8bc35",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "733059175529f45c1a85c8e4a355073c83fcf2c94d5653c98e2666a31113aa78",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "71c79acd1c244fa9a514d60924a1dde9",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "3306a65656922e7bfe0a9c5a57558032fac4393d857bb2bcc77866b7554ad07d",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "832b7edb5bfc4b0790f7115ab577a9f7",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "e15eb468a7a334fb468814c557c651001a651743bcbe6fee88e9587d9e2ba03f",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "a0d456e0039543d395b0d1c0bcd25183",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "d36f95ab95cc0f59d00a83b512afa871491427f997c8f89af0e4179aa4868433",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "c69a650d56434d4db319a491717d1c03",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "1e08de5e5a27cc2ef0f214bbba41f28d630acc57a4ffa5a4819acef5088816fd",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "d4151571391241e0a2025ff490113d70",
+          "producer_request_id": "3321dea91320dcfeecc5f0d0",
+          "producer_study_id": "bispf-output-energy-v1-three-theme-study-v1",
+          "result_hash": "b9788480ab5ecbb90f983014885bcca31c61a40d3eba45f299762f1f8bf798b4",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "reuse_note": "Compatible original receipts; overlapping readouts are not independent runs or additive costs",
+      "schema_version": 1,
+      "study_binding": {
+        "binding_sha256": "b80927a65976f86690296895f3d9307a1814d44ce2258e9900256b1d57d6bf49",
+        "contract_sha256": "a0aef1f557d5618c315c5ff8c0cddd796d92497817af19f0bd03015d08875124",
+        "control_binding_sha256": "82d734402f1719c7990df5e3aacb699b66b9b1fd62a423162c460a2c3b107662",
+        "policy_fingerprint": "ecfe8a7fdacd8d2386489cf9a7c86042ab6b4e48bde56862e318fe93a9553b3c",
+        "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "study_sha256": "5d1acffff2398cecc9d33c6c1570c3c9161535b7ae4f23d3018469b221813bc9"
+      },
+      "study_id": "bispf-output-energy-v1-three-theme-study-v1",
+      "study_sha256": "5d1acffff2398cecc9d33c6c1570c3c9161535b7ae4f23d3018469b221813bc9"
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "bispf-three-theme-repair-diagnostic-v1",
+  "hypothesis": "A direct normalized energy-distance witness on the existing G-phase batches repairs generated component allocation without changing prior policy, sampling or tasks.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact revision as a global replacement. Retain its two sustained repairs and saved artifacts; isolate rare-shape instability, mean jitter and local image detail before any separately declared successor. No coefficient or seed sweep, continuation or default adoption.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "28d5316fcc024520857e2e3c16d8786c",
+        "result_hash": "f8e9ee10b56017fea0812da827826b25b8e31c82f4c749886c3067475214619f",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "29414b5cf2b74f1a9f8bb5c58a561d12",
+        "result_hash": "7b94366efc6e7c7aef9f209e8ea5e63628571e45434bfdf564ad31969996cb7f",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "29b95f867728494faf79c51145d11481",
+        "result_hash": "d93b3831a6aceb0bf1dd3751138b71bdf00d1956c6d0dcd0495ff592ed2de0bd",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "2da58d54f9c44e73a930a17401b4c522",
+        "result_hash": "6e3754f1775e1a3ce2e1840b994b644b391266d31dba6bc611325f352505b6a4",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "38f791703bc64d4eb2591b015b828aa0",
+        "result_hash": "54c8baff30614d58de1bdd8c1198ce1819ef0fbc6c9039e030842d1e94a9029c",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "4e3e4c68f5dd419c8660d39f982cbebb",
+        "result_hash": "9d7789125742e62c6b674b4c18e104da29d84d559716a095fbd918a2fe570ae6",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "53853bf0beba4fdcb2a4e7b9a45688ed",
+        "result_hash": "58ddfe29e0f84758b91cd3c2ce8db469d9c90b9ba3c8c5dced5ce445295907db",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "53e6825111614dbcbf247657027a8b66",
+        "result_hash": "6518e2aee60fed2061d990eac760f635f084b0172d70ea5f98a99da19c666845",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "55f9531c389e4d0293ee48728914afb2",
+        "result_hash": "2cb1135aaf75a751d73703e74a8661b0e80dc4722e8455c25a67a250867ced8b",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "6534af8b7c174a0c99b497ccb8a8bc35",
+        "result_hash": "733059175529f45c1a85c8e4a355073c83fcf2c94d5653c98e2666a31113aa78",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "71c79acd1c244fa9a514d60924a1dde9",
+        "result_hash": "3306a65656922e7bfe0a9c5a57558032fac4393d857bb2bcc77866b7554ad07d",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "832b7edb5bfc4b0790f7115ab577a9f7",
+        "result_hash": "e15eb468a7a334fb468814c557c651001a651743bcbe6fee88e9587d9e2ba03f",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "a0d456e0039543d395b0d1c0bcd25183",
+        "result_hash": "d36f95ab95cc0f59d00a83b512afa871491427f997c8f89af0e4179aa4868433",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "c69a650d56434d4db319a491717d1c03",
+        "result_hash": "1e08de5e5a27cc2ef0f214bbba41f28d630acc57a4ffa5a4819acef5088816fd",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "d4151571391241e0a2025ff490113d70",
+        "result_hash": "b9788480ab5ecbb90f983014885bcca31c61a40d3eba45f299762f1f8bf798b4",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-fa8e84c6dadd33a5b746d755",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/28d5316fcc024520857e2e3c16d8786c/result.json"
+  },
+  "study": {
+    "campaign": {
+      "budget_seconds": 112080,
+      "candidate_budget_seconds": 28020,
+      "id": "bispf-three-theme-repair-round1-v1"
+    },
+    "candidate": "bispf-output-energy-v1",
+    "competing_explanation": "A global energy distance can underweight small local shape defects; output attraction/repulsion can conflict with adversarial direction protection or regress acquisition.",
+    "control": {
+      "candidate_id": "bispf-optimized-quintic-v1",
+      "task_map": {}
+    },
+    "falsifier": {
+      "metric": "hq",
+      "op": "<",
+      "phase": "final",
+      "task_id": "mode_hold",
+      "threshold": 0.9
+    },
+    "hypothesis": "A direct normalized energy-distance witness on the existing G-phase batches repairs generated component allocation without changing prior policy, sampling or tasks.",
+    "id": "bispf-output-energy-v1-three-theme-study-v1",
+    "max_rounds": 1,
+    "prediction": {
+      "metric": "min_mass_ratio",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "vector_unequal_mass",
+      "threshold": 0.25
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate": "bispf-optimized-quintic-v1",
+          "candidate_revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def"
+        },
+        "path": "reports/forge/bispf-optimized/quality.json",
+        "selector": [],
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "cuda_model": "NVIDIA RTX A6000",
+      "execution_backend": "cuda",
+      "through_tier": 1,
+      "view": "bispf-three-theme-repair-diagnostic-v1"
+    },
+    "status": "ready",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "study_id": "bispf-output-energy-v1-three-theme-study-v1",
+  "study_sha256": "5d1acffff2398cecc9d33c6c1570c3c9161535b7ae4f23d3018469b221813bc9",
+  "task_results": [
+    {
+      "compatibility_key": "e26ead670f2c8a4a7a4f1bc91d12ff672334c7d2de2f20cca2284371ddf124aa",
+      "cost": {
+        "adapter_loop_seconds": 45.09354455396533,
+        "adapter_seconds": 45.38973966502817,
+        "charged_task": "mode_hold",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 51.47419651102973,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 44.32206805719761,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.013516143662855029
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.010386369365733117
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 44.298165544169024
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 46.525962084007915,
+        "wall_seconds": 51.47419651102973
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.9166666666666666,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 1100,
+          "first_pass_step": 500,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 14,
+          "passing_suffix": 7,
+          "stable_from_seconds": null,
+          "stable_from_step": 900
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.08632812499999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.986328125
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 8,
+            "value": 8
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cover": 1.0,
+        "effective_modes": 7.466307163238525,
+        "hq": 0.986328125,
+        "modes": 8,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "mode_hold"
+    },
+    {
+      "compatibility_key": "ad0e2fddc1cc563d7bfcbf9b9d38951f886dfab7936e859da339503fe87db8e8",
+      "cost": {
+        "adapter_loop_seconds": 22.877085977990646,
+        "adapter_seconds": 23.336419865954667,
+        "charged_task": "img_intensity2",
+        "completed_steps": 600,
+        "device": "1",
+        "execution_seconds": 29.283986414957326,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 22.537566256476566,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.01929948292672634
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.009831038129050285
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 22.50843573542079
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 24.466818490996957,
+        "wall_seconds": 29.283986414957326
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.4,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.5
+          },
+          "modes": {
+            "margin": -1,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 2,
+            "value": 1
+          }
+        },
+        "passed": false,
+        "shortfall": 0.4722222222222222,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.03125,
+        "hq": 0.5,
+        "mean_rmse": 0.06728824973106384,
+        "mode_fractions": [
+          0.53125,
+          0.46875
+        ],
+        "modes": 1,
+        "quality_mode_fractions": [
+          0.1875,
+          0.3125
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_intensity2"
+    },
+    {
+      "compatibility_key": "ec224ee5a82901856bfffb0aa38a97d0205902a642a480f64c3dbafee04f0558",
+      "cost": {
+        "adapter_loop_seconds": 27.701439134019893,
+        "adapter_seconds": 28.14518125000177,
+        "charged_task": "vector_anisotropic",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 34.23809015599545,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 27.027761124190874,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.38105765101499856
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008761277887970209
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 26.637942195287906
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 29.266892393992748,
+        "wall_seconds": 34.23809015599545
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.9583333333333334,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 1150,
+          "first_pass_step": 800,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 8,
+          "passing_suffix": 6,
+          "stable_from_seconds": null,
+          "stable_from_step": 950
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.682802765071392,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.16719723492860794
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.32310802340507505,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.4731080234050751
+          },
+          "hq": {
+            "margin": 0.12949218750000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9794921875
+          },
+          "mass_tv": {
+            "margin": 0.0966145783662796,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.0533854216337204
+          },
+          "sw1_normalized": {
+            "margin": 0.1200442502273574,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.05995574977264259
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.16719723492860794,
+        "component_core_covariance_errors": [
+          0.10447828471660614,
+          0.12175709754228592,
+          0.27535632252693176
+        ],
+        "component_core_eigen_ratios": [
+          0.4731080234050751,
+          0.8548597693443298,
+          0.5935748219490051
+        ],
+        "component_core_min_eigen_ratio": 0.4731080234050751,
+        "component_counts": [
+          1273,
+          1584,
+          1239
+        ],
+        "component_covariance_error": 0.16719723492860794,
+        "component_covariance_errors": [
+          0.10447828471660614,
+          0.12175709754228592,
+          0.27535632252693176
+        ],
+        "component_mass": [
+          0.310791015625,
+          0.38671875,
+          0.302490234375
+        ],
+        "component_min_eigen_ratio": 0.4731080234050751,
+        "component_resolved": [
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.014925372786819935,
+          0.04040404036641121,
+          0.0008071024785749614
+        ],
+        "covariance_error": 0.08234325796365738,
+        "hq": 0.9794921875,
+        "mass_tv": 0.0533854216337204,
+        "max_component_spill": 0.04040404036641121,
+        "mean_error": 0.0700560063123703,
+        "min_mass_ratio": 0.907470703125,
+        "resolved_core_covariance_error": 0.16719723492860794,
+        "resolved_core_min_eigen_ratio": 0.4731080234050751,
+        "resolved_max_component_spill": 0.04040404036641121,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.05995574977264259,
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "target_scale": 2.032285690307617
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_anisotropic"
+    },
+    {
+      "compatibility_key": "3d4894c52ac318b6415af9a19626634e355c1276640536d4884ede3bae7ff345",
+      "cost": {
+        "adapter_loop_seconds": 19.013242585991975,
+        "adapter_seconds": 19.554469808004797,
+        "charged_task": "gaussian1d_smoke",
+        "completed_steps": 1000,
+        "device": "1",
+        "execution_seconds": 25.178209716046695,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1000,
+          "generator": 1000,
+          "prior": 1000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 18.52765144559089,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.5971211476717144
+            },
+            "sampling": {
+              "calls": 50,
+              "seconds": 0.04628550208872184
+            },
+            "training_updates": {
+              "calls": 1000,
+              "seconds": 17.884244795830455
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 20.666449173993897,
+        "wall_seconds": 25.178209716046695
+      },
+      "evaluator_summary": {
+        "first_confirmed_step": 209,
+        "observations": 24,
+        "passing_observations": 8
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cdf_ks": 0.2927906287683192,
+        "finite_fraction": 1.0,
+        "mean": 2.3070316862140317,
+        "mean_error_sigma": 0.6140633724280633,
+        "sample_count": 4096,
+        "std": 0.4066686298931844,
+        "std_ratio": 0.8133372597863688,
+        "step": 1000
+      },
+      "raw_status": "completed",
+      "reason": "any scheduled full pass with independent same-state confirmation",
+      "task_id": "gaussian1d_smoke"
+    },
+    {
+      "compatibility_key": "7dfbd3c52b06715b12f9be03a0f97181edbc9aad0f06590394c6d353a3930c8e",
+      "cost": {
+        "adapter_loop_seconds": 557.5998513260274,
+        "adapter_seconds": 557.9003273780108,
+        "charged_task": "rotated100",
+        "completed_steps": 7000,
+        "device": "1",
+        "execution_seconds": 565.0770158669911,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 7000,
+          "generator": 7000,
+          "prior": 7000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 552.7226154918317,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 35,
+              "seconds": 4.386303806793876
+            },
+            "sampling": {
+              "calls": 70,
+              "seconds": 0.05935414298437536
+            },
+            "training_updates": {
+              "calls": 7000,
+              "seconds": 548.2769575420534
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 558.9640357299941,
+        "wall_seconds": 565.0770158669911
+      },
+      "evaluator_summary": {
+        "coverage_status": "FAIL",
+        "final_metrics": {
+          "abs_cov_trace_bias": 0.3662729719676756,
+          "accuracy_pass": false,
+          "accuracy_score": 5.797661334276182,
+          "all_finite": true,
+          "center_max_sigma": 2.7093050798819784,
+          "center_rms_sigma": 1.3832575823606397,
+          "cov_frob_rms": 0.6873387907609296,
+          "cov_trace_bias": 0.3662729719676756,
+          "frozen_pass": false,
+          "mass_tv": 0.1033,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.2457,
+          "precision_gap": 0.7431910034617577,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.4355984415583243,
+          "valid_n": 20000,
+          "within_radius_n": 4914
+        },
+        "holdout_ema_metrics": {
+          "abs_cov_trace_bias": 0.46799016537780025,
+          "accuracy_pass": false,
+          "accuracy_score": 6.005445014045224,
+          "all_finite": true,
+          "center_max_sigma": 2.2934179258851746,
+          "center_rms_sigma": 1.3471498778196245,
+          "cov_frob_rms": 0.6574124862324499,
+          "cov_trace_bias": 0.46799016537780025,
+          "frozen_pass": false,
+          "mass_tv": 0.09887,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.24826,
+          "precision_gap": 0.7406310034617577,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.4383318271988575,
+          "valid_n": 100000,
+          "within_radius_n": 24826
+        },
+        "holdout_metrics": {
+          "abs_cov_trace_bias": 0.46799016537780025,
+          "accuracy_pass": false,
+          "accuracy_score": 6.005445014045224,
+          "all_finite": true,
+          "center_max_sigma": 2.2934179258851746,
+          "center_rms_sigma": 1.3471498778196245,
+          "cov_frob_rms": 0.6574124862324499,
+          "cov_trace_bias": 0.46799016537780025,
+          "frozen_pass": false,
+          "mass_tv": 0.09887,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.24826,
+          "precision_gap": 0.7406310034617577,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.4383318271988575,
+          "valid_n": 100000,
+          "within_radius_n": 24826
+        },
+        "oracle_metrics": {
+          "abs_cov_trace_bias": 0.0002794404987662702,
+          "accuracy_pass": true,
+          "accuracy_score": 0.11341168891305634,
+          "all_finite": true,
+          "center_max_sigma": 0.10091261259577183,
+          "center_rms_sigma": 0.04173743532813978,
+          "cov_frob_rms": 0.056102729309039354,
+          "cov_trace_bias": 0.0002794404987662702,
+          "frozen_pass": true,
+          "mass_tv": 0.012260000000000004,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98914,
+          "precision_gap": 0.0002489965382422854,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.0015132736276212144,
+          "valid_n": 100000,
+          "within_radius_n": 98914
+        },
+        "passed": false,
+        "problem": "rotated100",
+        "reason": "coverage, sustained live accuracy, or independent holdout failed",
+        "status": "FAIL",
+        "terminal_summary": {
+          "checks": 5,
+          "passing_checks": 0,
+          "status_counts": {
+            "FAIL": 5
+          }
+        }
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "abs_cov_trace_bias": 0.46799016537780025,
+        "accuracy_pass": false,
+        "accuracy_score": 6.005445014045224,
+        "all_finite": true,
+        "center_max_sigma": 2.2934179258851746,
+        "center_rms_sigma": 1.3471498778196245,
+        "cov_frob_rms": 0.6574124862324499,
+        "cov_trace_bias": 0.46799016537780025,
+        "frozen_pass": false,
+        "mass_tv": 0.09887,
+        "n": 100000,
+        "passed": false,
+        "precision": 0.24826,
+        "precision_gap": 0.7406310034617577,
+        "problem": "rotated100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.4383318271988575,
+        "valid_n": 100000,
+        "within_radius_n": 24826
+      },
+      "raw_status": "completed",
+      "reason": "coverage, sustained live accuracy, or independent holdout failed",
+      "task_id": "rotated100"
+    },
+    {
+      "compatibility_key": "b0c0c098d5a17b27275c29540fe2dd5207b98832d92043b6226503325f5c0369",
+      "cost": {
+        "adapter_loop_seconds": 91.97235078900121,
+        "adapter_seconds": 92.51191723998636,
+        "charged_task": "gaussian1d_stability",
+        "completed_steps": 6000,
+        "device": "1",
+        "execution_seconds": 98.11090575298294,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 6000,
+          "generator": 6000,
+          "prior": 6000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 89.66929622448515,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 121,
+              "seconds": 1.9274244713597
+            },
+            "sampling": {
+              "calls": 121,
+              "seconds": 0.07152794033754617
+            },
+            "training_updates": {
+              "calls": 5000,
+              "seconds": 87.6703438127879
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 93.60514793603215,
+        "wall_seconds": 98.11090575298294
+      },
+      "evaluator_summary": {
+        "frozen_checks": 48,
+        "frozen_passes": 0,
+        "reacquisition_status": "FAIL",
+        "shift_hold_checks": 24,
+        "shift_hold_passes": 0,
+        "stationary_checks": 72,
+        "stationary_passes": 12
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.06514336521683961,
+        "finite_fraction": 1.0,
+        "mean": 3.014454087417107,
+        "mean_error_sigma": 0.02890817483421415,
+        "sample_count": 4096,
+        "std": 0.4628985274528263,
+        "std_ratio": 0.9257970549056526,
+        "step": 6000
+      },
+      "raw_status": "completed",
+      "reason": "stationary hold, deadline reacquisition and shifted hold",
+      "task_id": "gaussian1d_stability"
+    },
+    {
+      "compatibility_key": "70ab7f4282fab41a5f64d3dfe49d7102ca0c1aa14feffc767cd0ffceb120dcb9",
+      "cost": {
+        "adapter_loop_seconds": 593.3175386370276,
+        "adapter_seconds": 593.6538720550016,
+        "charged_task": "staggered100",
+        "completed_steps": 7000,
+        "device": "1",
+        "execution_seconds": 601.1124283699901,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 7000,
+          "generator": 7000,
+          "prior": 7000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 586.3694808821892,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 35,
+              "seconds": 4.543264031817671
+            },
+            "sampling": {
+              "calls": 70,
+              "seconds": 0.06022236216813326
+            },
+            "training_updates": {
+              "calls": 7000,
+              "seconds": 581.7659944882034
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 594.7590679719578,
+        "wall_seconds": 601.1124283699901
+      },
+      "evaluator_summary": {
+        "coverage_status": "FAIL",
+        "final_metrics": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.11919999999999999,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.29655,
+          "precision_gap": 0.6923410034617578,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 5931
+        },
+        "holdout_ema_metrics": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.11485000000000001,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.29757,
+          "precision_gap": 0.6913210034617577,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 29757
+        },
+        "holdout_metrics": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.11485000000000001,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.29757,
+          "precision_gap": 0.6913210034617577,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 29757
+        },
+        "oracle_metrics": {
+          "abs_cov_trace_bias": 0.0002794389468916414,
+          "accuracy_pass": true,
+          "accuracy_score": 0.11342085651107006,
+          "all_finite": true,
+          "center_max_sigma": 0.1009098996302996,
+          "center_rms_sigma": 0.041737403703950474,
+          "cov_frob_rms": 0.05610274891753917,
+          "cov_trace_bias": 0.0002794389468916414,
+          "frozen_pass": true,
+          "mass_tv": 0.012260000000000004,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98914,
+          "precision_gap": 0.0002489965382422854,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.0015147473888911245,
+          "valid_n": 100000,
+          "within_radius_n": 98914
+        },
+        "passed": false,
+        "problem": "staggered100",
+        "reason": "coverage, sustained live accuracy, or independent holdout failed",
+        "status": "FAIL",
+        "terminal_summary": {
+          "checks": 5,
+          "passing_checks": 0,
+          "status_counts": {
+            "FAIL": 5
+          }
+        }
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "abs_cov_trace_bias": null,
+        "accuracy_pass": false,
+        "accuracy_score": null,
+        "all_finite": true,
+        "center_max_sigma": null,
+        "center_rms_sigma": null,
+        "cov_frob_rms": null,
+        "cov_trace_bias": null,
+        "frozen_pass": false,
+        "mass_tv": 0.11485000000000001,
+        "n": 100000,
+        "passed": false,
+        "precision": 0.29757,
+        "precision_gap": 0.6913210034617577,
+        "problem": "staggered100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": null,
+        "valid_n": 100000,
+        "within_radius_n": 29757
+      },
+      "raw_status": "completed",
+      "reason": "coverage, sustained live accuracy, or independent holdout failed",
+      "task_id": "staggered100"
+    },
+    {
+      "compatibility_key": "55cf84ba0a1923dcecf8c9abd1f93609b41d13bb316c086f3b9a0cd8839ecf05",
+      "cost": {
+        "adapter_loop_seconds": 37.56682480900781,
+        "adapter_seconds": 38.056674988009036,
+        "charged_task": "ring16_acquisition",
+        "completed_steps": 1600,
+        "device": "0",
+        "execution_seconds": 43.98592892300803,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1600,
+          "generator": 1600,
+          "prior": 1600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 36.58236693579238,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 96,
+              "seconds": 2.0197526628617197
+            },
+            "sampling": {
+              "calls": 96,
+              "seconds": 0.03538747987477109
+            },
+            "training_updates": {
+              "calls": 1600,
+              "seconds": 34.52722679305589
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 39.16797640098957,
+        "wall_seconds": 43.98592892300803
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.5625,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 900,
+          "first_pass_step": 767,
+          "minimum_stable_checks": 5,
+          "observations": 96,
+          "passing_observations": 50,
+          "passing_suffix": 47,
+          "stable_from_seconds": null,
+          "stable_from_step": 834
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.3635753471404314,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.4864246528595686
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.19221893548965455,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.34221893548965454
+          },
+          "hq": {
+            "margin": 0.11191406250000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9619140625
+          },
+          "mass_tv": {
+            "margin": 0.088720703125,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.061279296875
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 16,
+            "value": 16
+          },
+          "sample_count": {
+            "margin": 0,
+            "metric": "sample_count",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4096,
+            "value": 4096
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.4336794000118971,
+        "component_core_covariance_errors": [
+          0.3984043300151825,
+          0.6863412857055664,
+          0.7497629523277283,
+          0.34873244166374207,
+          0.49472400546073914,
+          0.4294552803039551,
+          0.5301068425178528,
+          0.4815487265586853,
+          0.3255298137664795,
+          0.3781733512878418,
+          0.4478442370891571,
+          0.39130255579948425,
+          0.2518256902694702,
+          0.40708211064338684,
+          0.366928368806839,
+          0.25110840797424316
+        ],
+        "component_core_eigen_ratios": [
+          0.5871233344078064,
+          0.4777534604072571,
+          0.536401629447937,
+          0.5504767894744873,
+          0.4733372628688812,
+          0.4196222424507141,
+          0.3386249542236328,
+          0.5247437357902527,
+          0.5592493414878845,
+          0.5350144505500793,
+          0.43197065591812134,
+          0.47376805543899536,
+          0.78069007396698,
+          0.5278741717338562,
+          0.4903550148010254,
+          0.6689779162406921
+        ],
+        "component_core_min_eigen_ratio": 0.3386249542236328,
+        "component_counts": [
+          276,
+          225,
+          199,
+          258,
+          275,
+          199,
+          173,
+          241,
+          333,
+          265,
+          276,
+          250,
+          285,
+          254,
+          326,
+          261
+        ],
+        "component_covariance_error": 0.4864246528595686,
+        "component_covariance_errors": [
+          0.3984043300151825,
+          0.8073957562446594,
+          0.8210318088531494,
+          0.3766830861568451,
+          0.5421314239501953,
+          0.4294552803039551,
+          0.5700970888137817,
+          0.545730471611023,
+          0.31790632009506226,
+          0.3571116030216217,
+          0.46138012409210205,
+          0.37463292479515076,
+          0.35201379656791687,
+          0.7904303073883057,
+          0.3671357333660126,
+          0.27125439047813416
+        ],
+        "component_mass": [
+          0.0673828125,
+          0.054931640625,
+          0.048583984375,
+          0.06298828125,
+          0.067138671875,
+          0.048583984375,
+          0.042236328125,
+          0.058837890625,
+          0.081298828125,
+          0.064697265625,
+          0.0673828125,
+          0.06103515625,
+          0.069580078125,
+          0.06201171875,
+          0.07958984375,
+          0.063720703125
+        ],
+        "component_min_eigen_ratio": 0.34221893548965454,
+        "component_resolved": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "component_spill": [
+          0.010869565419852734,
+          0.057777777314186096,
+          0.060301508754491806,
+          0.027131782844662666,
+          0.0181818176060915,
+          0.01005025114864111,
+          0.034682080149650574,
+          0.07883817702531815,
+          0.048048049211502075,
+          0.030188679695129395,
+          0.032608695328235626,
+          0.03200000151991844,
+          0.07719298452138901,
+          0.06299212574958801,
+          0.021472392603754997,
+          0.01149425283074379
+        ],
+        "covariance_error": 0.05547255277633667,
+        "hq": 0.9619140625,
+        "hq_component_counts": [
+          273,
+          212,
+          187,
+          251,
+          270,
+          197,
+          167,
+          222,
+          317,
+          257,
+          267,
+          242,
+          263,
+          238,
+          319,
+          258
+        ],
+        "mass_tv": 0.061279296875,
+        "max_component_spill": 0.07883817702531815,
+        "mean_error": 0.07745673507452011,
+        "min_hq_mass_ratio": 0.65234375,
+        "min_mass_ratio": 0.67578125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 1600,
+        "sw1_normalized": 0.05683812045674309,
+        "target_mass": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "target_scale": 3.0029242038726807
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "ring16_acquisition"
+    },
+    {
+      "compatibility_key": "104bb4025602a59a42169d0b9b06658ab73f1c349e048f9aeb4151b713e7fc65",
+      "cost": {
+        "adapter_loop_seconds": 27.308465316949878,
+        "adapter_seconds": 27.751563449040987,
+        "charged_task": "vector_unequal_mass",
+        "completed_steps": 1200,
+        "device": "1",
+        "execution_seconds": 33.80507096200017,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 26.645216492004693,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3841747009428218
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008339001098647714
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 26.252702789963223
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 28.834590724960435,
+        "wall_seconds": 33.80507096200017
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 1000,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 2,
+          "passing_suffix": 1,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.5121217913925648,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.3378782086074352
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.11661518216133118,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.2666151821613312
+          },
+          "hq": {
+            "margin": 0.13486328125000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.98486328125
+          },
+          "mass_tv": {
+            "margin": 0.09082032889127731,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.05917967110872269
+          },
+          "min_mass_ratio": {
+            "margin": 0.29649943113327026,
+            "metric": "min_mass_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.5464994311332703
+          },
+          "sw1_normalized": {
+            "margin": 0.08686348213635355,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.09313651786364645
+          }
+        },
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.34822220355272293,
+        "component_core_covariance_errors": [
+          0.17235565185546875,
+          0.1868753731250763,
+          0.39384937286376953,
+          0.6398084163665771
+        ],
+        "component_core_eigen_ratios": [
+          0.8154677748680115,
+          0.7960803508758545,
+          0.44887813925743103,
+          0.2666151821613312
+        ],
+        "component_core_min_eigen_ratio": 0.2666151821613312,
+        "component_counts": [
+          2392,
+          1332,
+          291,
+          81
+        ],
+        "component_covariance_error": 0.3378782086074352,
+        "component_covariance_errors": [
+          0.17235565185546875,
+          0.14549939334392548,
+          0.39384937286376953,
+          0.6398084163665771
+        ],
+        "component_mass": [
+          0.583984375,
+          0.3251953125,
+          0.071044921875,
+          0.019775390625
+        ],
+        "component_min_eigen_ratio": 0.2666151821613312,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.0025083611253648996,
+          0.01876876875758171,
+          0.10652920603752136,
+          0.0
+        ],
+        "covariance_error": 0.16117852926254272,
+        "hq": 0.98486328125,
+        "mass_tv": 0.05917967110872269,
+        "max_component_spill": 0.10652920603752136,
+        "mean_error": 0.12365315854549408,
+        "min_mass_ratio": 0.5464994311332703,
+        "resolved_core_covariance_error": 0.2510267992814382,
+        "resolved_core_min_eigen_ratio": 0.44887813925743103,
+        "resolved_max_component_spill": 0.10652920603752136,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.09313651786364645,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_unequal_mass"
+    },
+    {
+      "compatibility_key": "1ec8f8cf775acbc10ce0a94e28e8151065d8fd463276547cb46d2453560e6e48",
+      "cost": {
+        "adapter_loop_seconds": 22.76574400201207,
+        "adapter_seconds": 23.191078699019272,
+        "charged_task": "img_bars4",
+        "completed_steps": 600,
+        "device": "1",
+        "execution_seconds": 29.124060201982502,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 22.422736069827806,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.01971302111633122
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.011313207913190126
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 22.391709840798285
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 24.27758921595523,
+        "wall_seconds": 29.124060201982502
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": -0.30625,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.59375
+          },
+          "modes": {
+            "margin": -1,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 4,
+            "value": 3
+          }
+        },
+        "passed": false,
+        "shortfall": 0.2951388888888889,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.28125,
+        "hq": 0.59375,
+        "mean_rmse": 0.06309401988983154,
+        "mode_fractions": [
+          0.25,
+          0.53125,
+          0.1875,
+          0.03125
+        ],
+        "modes": 3,
+        "quality_mode_fractions": [
+          0.25,
+          0.125,
+          0.1875,
+          0.03125
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_bars4"
+    },
+    {
+      "compatibility_key": "b30e89bac8fce1f0d2d5261417a610078b8aae094eb8236ef635b80dbe363fb0",
+      "cost": {
+        "adapter_loop_seconds": 47.688761145982426,
+        "adapter_seconds": 48.158837930997834,
+        "charged_task": "img_stripes2",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 53.99827154900413,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 46.77882806159323,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.04437555395998061
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.012404246954247355
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 46.722048260679
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 49.16720363800414,
+        "wall_seconds": 53.99827154900413
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 1.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 600,
+          "first_pass_step": 300,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 12,
+          "passing_suffix": 5,
+          "stable_from_seconds": null,
+          "stable_from_step": 500
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.09999999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 1.0
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 2,
+            "value": 2
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.09375,
+        "hq": 1.0,
+        "mean_rmse": 5.2564419830702924e-12,
+        "mode_fractions": [
+          0.59375,
+          0.40625
+        ],
+        "modes": 2,
+        "quality_mode_fractions": [
+          0.59375,
+          0.40625
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_stripes2"
+    },
+    {
+      "compatibility_key": "4a2cbdb7566c9757fa2e6e083ed9931a0ee0c58ab7f57c3fe00438f25a26211f",
+      "cost": {
+        "adapter_loop_seconds": 23.25600866304012,
+        "adapter_seconds": 23.729300962993875,
+        "charged_task": "img_blobs4",
+        "completed_steps": 600,
+        "device": "0",
+        "execution_seconds": 29.693199366971385,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 600,
+          "generator": 600,
+          "prior": 600
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 22.907878568861634,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.021613916906062514
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.009915300062857568
+            },
+            "training_updates": {
+              "calls": 600,
+              "seconds": 22.876349351892713
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 24.84602147800615,
+        "wall_seconds": 29.693199366971385
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.875,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 525,
+          "first_pass_step": 425,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 8,
+          "passing_suffix": 8,
+          "stable_from_seconds": null,
+          "stable_from_step": 425
+        },
+        "metric_checks": {
+          "hq": {
+            "margin": 0.06874999999999998,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.9,
+            "value": 0.96875
+          },
+          "modes": {
+            "margin": 0,
+            "metric": "modes",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 4,
+            "value": 4
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "distribution_tv": 0.15625,
+        "hq": 0.96875,
+        "mean_rmse": 0.008044025860726833,
+        "mode_fractions": [
+          0.21875,
+          0.3125,
+          0.125,
+          0.34375
+        ],
+        "modes": 4,
+        "quality_mode_fractions": [
+          0.21875,
+          0.3125,
+          0.125,
+          0.3125
+        ],
+        "step": 600
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "img_blobs4"
+    },
+    {
+      "compatibility_key": "79cecee57913015671a3183bd7374564bc75e478d2f0e8e4396280acdf78e649",
+      "cost": {
+        "adapter_loop_seconds": 27.473792361968663,
+        "adapter_seconds": 27.969834245974198,
+        "charged_task": "vector_unequal_width",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 33.785818158998154,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 26.795462481386494,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3940651000593789
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008881742018274963
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 26.39251563930884
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 29.064970172999892,
+        "wall_seconds": 33.785818158998154
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 700,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 4,
+          "passing_suffix": 1,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "component_covariance_error": {
+            "margin": 0.1335792303085327,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.7164207696914673
+          },
+          "component_min_eigen_ratio": {
+            "margin": 0.030935651063919073,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.18093565106391907
+          },
+          "hq": {
+            "margin": 0.14462890625000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.99462890625
+          },
+          "mass_tv": {
+            "margin": 0.060644531249999994,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.08935546875
+          },
+          "sw1_normalized": {
+            "margin": 0.08863451883448104,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.09136548116551896
+          }
+        },
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.3728843927383423,
+        "component_core_covariance_errors": [
+          0.6404219269752502,
+          0.39907804131507874,
+          0.22667443752288818,
+          0.22536316514015198
+        ],
+        "component_core_eigen_ratios": [
+          0.18093565106391907,
+          0.50594162940979,
+          0.6805381774902344,
+          0.7375393509864807
+        ],
+        "component_core_min_eigen_ratio": 0.18093565106391907,
+        "component_counts": [
+          834,
+          848,
+          1139,
+          1275
+        ],
+        "component_covariance_error": 0.7164207696914673,
+        "component_covariance_errors": [
+          0.6404219269752502,
+          0.39907804131507874,
+          1.6008199453353882,
+          0.22536316514015198
+        ],
+        "component_mass": [
+          0.20361328125,
+          0.20703125,
+          0.278076171875,
+          0.311279296875
+        ],
+        "component_min_eigen_ratio": 0.18093565106391907,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "component_spill": [
+          0.008393285796046257,
+          0.0,
+          0.013169446960091591,
+          0.0
+        ],
+        "covariance_error": 0.034062374383211136,
+        "hq": 0.99462890625,
+        "mass_tv": 0.08935546875,
+        "max_component_spill": 0.013169446960091591,
+        "mean_error": 0.1205730214715004,
+        "min_mass_ratio": 0.814453125,
+        "resolved_core_covariance_error": 0.3728843927383423,
+        "resolved_core_min_eigen_ratio": 0.18093565106391907,
+        "resolved_max_component_spill": 0.013169446960091591,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.09136548116551896,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.1343955993652344
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_unequal_width"
+    },
+    {
+      "compatibility_key": "30548a9e74f00e8c9a871d7dc4ce17ebb3b8e951fb22cdd469db5ca08f9e7124",
+      "cost": {
+        "adapter_loop_seconds": 26.923654337995686,
+        "adapter_seconds": 27.414861943980213,
+        "charged_task": "vector_overlap",
+        "completed_steps": 1200,
+        "device": "0",
+        "execution_seconds": 33.19097427098313,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 1200,
+          "generator": 1200,
+          "prior": 1200
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 26.258760257740505,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 24,
+              "seconds": 0.3392008671653457
+            },
+            "sampling": {
+              "calls": 24,
+              "seconds": 0.008385638939216733
+            },
+            "training_updates": {
+              "calls": 1200,
+              "seconds": 25.911173751635943
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 28.496677301998716,
+        "wall_seconds": 33.19097427098313
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 50,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 1,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "covariance_error": {
+            "margin": 0.2998738557100296,
+            "metric": "covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.45,
+            "value": 0.1501261442899704
+          },
+          "mean_error": {
+            "margin": 0.10938526093959808,
+            "metric": "mean_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.040614739060401917
+          },
+          "sw1_normalized": {
+            "margin": 0.12739028815375678,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.05260971184624321
+          }
+        },
+        "passed": false,
+        "shortfall": 0.0,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "covariance_error": 0.1501261442899704,
+        "mean_error": 0.040614739060401917,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.05260971184624321,
+        "target_scale": 0.8501437306404114
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "vector_overlap"
+    },
+    {
+      "compatibility_key": "b0d2010a71c55d8235a1abb4f1c46002e07ae0cab347fc8e324331fccdc1d0ec",
+      "cost": {
+        "adapter_loop_seconds": 567.705530776002,
+        "adapter_seconds": 568.0187949539977,
+        "charged_task": "grid100",
+        "completed_steps": 7000,
+        "device": "0",
+        "execution_seconds": 575.4248285299982,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "optimizer_updates": {
+          "discriminator": 7000,
+          "generator": 7000,
+          "prior": 7000
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 563.3085748898447,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 35,
+              "seconds": 4.288529428071342
+            },
+            "sampling": {
+              "calls": 70,
+              "seconds": 0.058652618958149105
+            },
+            "training_updates": {
+              "calls": 7000,
+              "seconds": 558.9613928428153
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "runner_seconds": 569.1113051960128,
+        "wall_seconds": 575.4248285299982
+      },
+      "evaluator_summary": {
+        "coverage_status": "FAIL",
+        "final_metrics": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.15930000000000002,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.323,
+          "precision_gap": 0.6658910034617578,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 6460
+        },
+        "holdout_ema_metrics": {
+          "abs_cov_trace_bias": 0.3475414467386062,
+          "accuracy_pass": false,
+          "accuracy_score": 6.027494251141491,
+          "all_finite": true,
+          "center_max_sigma": 2.338183156939042,
+          "center_rms_sigma": 1.4042197321389827,
+          "cov_frob_rms": 0.5644542660614436,
+          "cov_trace_bias": 0.3475414467386062,
+          "frozen_pass": false,
+          "mass_tv": 0.15737,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.32545,
+          "precision_gap": 0.6634410034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.4396252217260661,
+          "valid_n": 100000,
+          "within_radius_n": 32545
+        },
+        "holdout_metrics": {
+          "abs_cov_trace_bias": 0.3475414467386062,
+          "accuracy_pass": false,
+          "accuracy_score": 6.027494251141491,
+          "all_finite": true,
+          "center_max_sigma": 2.338183156939042,
+          "center_rms_sigma": 1.4042197321389827,
+          "cov_frob_rms": 0.5644542660614436,
+          "cov_trace_bias": 0.3475414467386062,
+          "frozen_pass": false,
+          "mass_tv": 0.15737,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.32545,
+          "precision_gap": 0.6634410034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.4396252217260661,
+          "valid_n": 100000,
+          "within_radius_n": 32545
+        },
+        "oracle_metrics": {
+          "abs_cov_trace_bias": 0.0002794449587595338,
+          "accuracy_pass": true,
+          "accuracy_score": 0.11341721050570538,
+          "all_finite": true,
+          "center_max_sigma": 0.10090990917529204,
+          "center_rms_sigma": 0.041737606908836516,
+          "cov_frob_rms": 0.05610274287219167,
+          "cov_trace_bias": 0.0002794449587595338,
+          "frozen_pass": true,
+          "mass_tv": 0.012260000000000004,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98914,
+          "precision_gap": 0.0002489965382422854,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.001514120982308409,
+          "valid_n": 100000,
+          "within_radius_n": 98914
+        },
+        "passed": false,
+        "problem": "grid100",
+        "reason": "coverage, sustained live accuracy, or independent holdout failed",
+        "status": "FAIL",
+        "terminal_summary": {
+          "checks": 5,
+          "passing_checks": 0,
+          "status_counts": {
+            "FAIL": 5
+          }
+        }
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "abs_cov_trace_bias": 0.3475414467386062,
+        "accuracy_pass": false,
+        "accuracy_score": 6.027494251141491,
+        "all_finite": true,
+        "center_max_sigma": 2.338183156939042,
+        "center_rms_sigma": 1.4042197321389827,
+        "cov_frob_rms": 0.5644542660614436,
+        "cov_trace_bias": 0.3475414467386062,
+        "frozen_pass": false,
+        "mass_tv": 0.15737,
+        "n": 100000,
+        "passed": false,
+        "precision": 0.32545,
+        "precision_gap": 0.6634410034617577,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.4396252217260661,
+        "valid_n": 100000,
+        "within_radius_n": 32545
+      },
+      "raw_status": "completed",
+      "reason": "coverage, sustained live accuracy, or independent holdout failed",
+      "task_id": "grid100"
+    }
+  ]
+}

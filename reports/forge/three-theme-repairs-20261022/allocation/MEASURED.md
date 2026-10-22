@@ -4,7 +4,7 @@
 It passes **6/15** diagnostic tasks versus the matched BISPF control's **4/15**,
 retaining Gaussian acquisition, ring16 acquisition, mode hold and stripes. Of
 the eleven original failing tasks, two pass and nine remain FAIL. The parent
-[comparison](../README.md) owns the single leaderboard; this is a mechanism
+[comparison](../README.md) owns the shared numerical table; this is a mechanism
 analysis, not ordinary qualification or public-default promotion.
 
 Both arms executed source `2a2b662bdfa6249076b27dbea4c136e23d3e7a80`, frozen
@@ -92,7 +92,7 @@ is an uncooled direct output term under the existing adversarial direction
 protection; the original critic and SBNP laws otherwise remain unchanged.
 
 This is a seed-0, clean/live diagnostic panel with each task's original
-architecture, initial MoG, data sequence and finite budget. It is not a
+architecture, task-declared initial prior, data sequence and finite budget. It is not a
 robustness study or the ordinary whole suite. The finite energy numerator is
 unbiased before normalization; its target-batch normalization makes the ratio
 biased and can correlate force strength with real minibatch composition. A

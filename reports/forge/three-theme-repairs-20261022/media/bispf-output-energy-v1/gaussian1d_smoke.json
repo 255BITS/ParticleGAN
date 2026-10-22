@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "dfdf96caad5d6d232574d8679819ee8ea789345bcfe42231542f072e2c6f4586",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "5c9e1af0db7b761f0c5d8500768dd420f458fde70e65fa30a713085d437912fc",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/2da58d54f9c44e73a930a17401b4c522/evaluator/observed-samples.pt": "fc665266ef93281739667f038beecec57e7f2cb91d438f664e7234d59d90cd8f"
+  },
+  "task_id": "gaussian1d_smoke"
+}

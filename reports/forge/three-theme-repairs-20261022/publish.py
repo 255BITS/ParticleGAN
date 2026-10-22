@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
-from reports.forge.regenerate_technique_inventory import _evaluator_summary
+from reports.forge.regenerate_technique_inventory import _evaluator_summary, project_receipt
 
 ARMS = ("bispf-optimized-quintic-v1", "bispf-output-energy-v1",
         "bispf-settling-displacement-v1", "bispf-fidelity-quartic-v1")
@@ -79,18 +79,22 @@ def numerical_note(task, cell):
                 f"shifted hold {evaluation['shift_hold_passes']}/{evaluation['shift_hold_checks']}; "
                 f"reacquisition {evaluation['reacquisition_status']}")
     convergence = evaluation.get("convergence", {})
-    suffix = (f"; terminal suffix {convergence['passing_suffix']}/{convergence['minimum_stable_checks']}"
+    suffix = (f"; terminal suffix {convergence['passing_suffix']} (required {convergence['minimum_stable_checks']})"
               if convergence else "")
     if task.startswith("img_"):
         return f"modes {metrics['modes']}; clean {metrics['hq']:.5f}" + suffix
     if task in {"grid100", "rotated100", "staggered100"}:
+        center = metrics.get("center_max_sigma")
+        covariance = metrics.get("cov_frob_rms")
+        center = "undefined" if center is None else f"{center:.4f}"
+        covariance = "undefined" if covariance is None else f"{covariance:.5f}"
         return (f"holdout precision {metrics['precision']:.5f}; mass TV {metrics['mass_tv']:.5f}; "
-                f"center max {metrics['center_max_sigma']:.4f} sigma; "
-                f"covariance RMS {metrics['cov_frob_rms']:.5f}; "
+                f"center max {center} sigma; covariance RMS {covariance}; "
                 f"terminal passes {evaluation['terminal_summary']['passing_checks']}/"
                 f"{evaluation['terminal_summary']['checks']}")
     names = [name for name in ("mass_tv", "min_mass_ratio", "component_covariance_error",
-                              "component_min_eigen_ratio", "covariance_error", "hq") if name in metrics]
+                              "component_min_eigen_ratio", "covariance_error", "mean_error",
+                              "sw1_normalized", "hq") if name in metrics]
     return "; ".join(f"{name} {metrics[name]:.6f}" for name in names) + suffix
 
 
@@ -167,6 +171,9 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
     sources = {r["source"]["digest"] for r in requests.values()}
     require(len(sources) == 1, "Arms do not share one executed source")
     reference = requests[CONTROL]
+    snapshot = Path(reference["source"]["snapshot_path"])
+    for name, expected in reference["source"]["files"].items():
+        require(file_hash(snapshot / name) == expected, f"Frozen source snapshot differs: {name}")
     deltas = {CONTROL: {}, ARMS[1]: {"output_energy_weight": 1.0},
               ARMS[2]: {"bispf_thermal_application": "displacement"},
               ARMS[3]: {"fidelity_transport_weight": 1.0}}
@@ -190,7 +197,13 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
                 "Runtime/hardware cohorts differ")
     rows = {cid: {} for cid in ARMS}
     provenance = {cid: [] for cid in ARMS}
+    original_request_hashes = {}
     charged = Counter()
+    request_ids = {request["request_id"] for request in requests.values()}
+    ledger = {entry["attempt_id"]: entry for entry in state["charges"]
+              if entry["owner"]["request"] in request_ids}
+    require(len(ledger) == sum(entry["owner"]["request"] in request_ids for entry in state["charges"]),
+            "Repeated attempt in the paid-cost ledger")
     for job in state["jobs"].values():
         result = job.get("result")
         if job["status"] != "terminal" or not result:
@@ -203,10 +216,18 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
         cid = matching[0]
         attempt = result["attempt_id"]
         durable = ROOT / "reports/forge/attempts" / attempt
+        projected = project_receipt(ROOT, attempt)
+        require(projected["candidate_id"] == cid
+                and projected["candidate_revision"] == requests[cid]["candidate_revision"]
+                and projected["request_id"] == requests[cid]["request_id"]
+                and projected["runtime"] == reference["runtime"], "Original attempt/request binding differs")
+        original_request_hashes[attempt] = file_hash(durable / "request.json")
         certificate = read_json(durable / "evidence.json")
         stored = read_json(durable / "result.json")
         require(stored == result and certificate["result_hash"] == stable_hash(result), "Original receipt result differs")
         require(certificate["source"] == reference["source"], "Attempt executed another source")
+        require(attempt in ledger and ledger[attempt]["seconds"] == result["raw"]["elapsed_seconds"]
+                == job["charged_seconds"], "Certified attempt time differs from the paid queue charge")
         charged[cid] += result.get("raw", {}).get("elapsed_seconds", 0)
         provenance[cid].append(dict(attempt=attempt, result_sha256=file_hash(durable / "result.json"),
                                     certificate_sha256=file_hash(durable / "evidence.json"),
@@ -270,7 +291,8 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
                     and rows[CONTROL].get(t, {}).get("gate_status") == "FAIL"]
         regressions = [t for t in tasks if rows[CONTROL].get(t, {}).get("gate_status") == "PASS"
                        and t in observed and cells[t]["status"] != "PASS"]
-        compact[cid] = dict(candidate_revision=requests[cid]["candidate_revision"], cells=cells,
+        compact[cid] = dict(request_id=requests[cid]["request_id"], study_id=requests[cid]["study"]["id"],
+                            candidate_revision=requests[cid]["candidate_revision"], cells=cells,
                             counts=dict(Counter(c["status"] for c in cells.values())),
                             repaired_vs_control=repaired, regressions_vs_control=regressions,
                             previously_failing_task_passes=sum(cells[t]["status"] == "PASS" for t in tasks if t not in CONTROLS),
@@ -284,7 +306,18 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
                    matched_bindings=bindings, arms=compact,
                    total_paid_attempt_seconds=sum(charged.values()),
                    original_receipts=provenance, numerical_gates_unchanged=True)
+    summary["verified_frozen_source_files"] = len(reference["source"]["files"])
+    summary["original_request_sha256"] = original_request_hashes
     summary["archived_control_check"] = historical_control_check(rows[CONTROL])
+    ledger_seconds = sum(entry["seconds"] for entry in ledger.values())
+    require(abs(ledger_seconds - summary["total_paid_attempt_seconds"]) < 1e-6, "Paid-cost totals differ")
+    require(ledger_seconds <= protocol["first_round_reserved_seconds"], "Frozen total budget exceeded")
+    require(all(value <= protocol["candidate_reserved_seconds"] for value in charged.values()),
+            "Frozen per-arm budget exceeded")
+    summary["cost_audit"] = dict(unique_paid_attempts=len(ledger), queue_charge_seconds=ledger_seconds,
+                                 certificate_and_queue_charges_equal=True,
+                                 first_round_reserved_seconds=protocol["first_round_reserved_seconds"],
+                                 per_arm_reserved_seconds=protocol["candidate_reserved_seconds"])
     atomic_json(output / "comparison.json", summary)
     if not partial:
         write_appendix(summary, output, tasks)
