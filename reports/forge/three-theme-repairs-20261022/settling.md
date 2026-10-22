@@ -118,3 +118,21 @@ Bulk logs, per-update metrics and states belong under
 `/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022`, outside Git. The
 parent common-source runner will publish the exact `tail -F` path and execution
 commands with the frozen study; no training command is fabricated here.
+
+## Execution telemetry limit
+
+The preregistration above requests per-update scale, base movement and applied
+movement by role. The public helper returns those diagnostics when requested,
+and the software controls verify its realized displacement law. However, these
+Forge adapters do not retain the trainer's returned `thermal_displacement`
+dictionary across updates. No complete trained movement-ratio trace is claimed
+for this cohort. Final observer states and certified saved model tensors remain
+available for the narrower comparisons in the measured readout.
+
+The optional `OptimizerDiagnostics` observer attaches post-hooks to the
+underlying `optimizer.step`, which runs before the helper interpolates the
+parameters. Its G/prior norms would therefore describe **base proposals before
+cooling**, despite its generic actual-step label. They must not be interpreted
+as realized cooled movements. Persisting diagnostics after the helper would be
+a separately versioned observer correction; it does not authorize rerunning
+unchanged scientific experiments or changing the frozen cohort.

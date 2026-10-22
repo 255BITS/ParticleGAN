@@ -1,0 +1,281 @@
+"""Verify original comparison receipts and publish compact results/saved GIFs."""
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+import json
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT))
+
+from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
+from reports.forge.regenerate_technique_inventory import _evaluator_summary
+
+ARMS = ("bispf-optimized-quintic-v1", "bispf-output-energy-v1",
+        "bispf-settling-displacement-v1", "bispf-fidelity-quartic-v1")
+CONTROL = ARMS[0]
+CONTROLS = ("gaussian1d_smoke", "ring16_acquisition", "mode_hold", "img_stripes2")
+LABELS = ("Control", "Allocation", "Settling", "Fidelity")
+
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def stream_hashes(row):
+    raw = row.get("evidence", {}).get("provenance_checkpoint", {}).get("named_stream_state_sha256", {})
+    result = {}
+    for key, value in raw.items():
+        family, component, purpose, device = json.loads(key)
+        if family == "eval":
+            continue
+        key = json.dumps([family, component, purpose, device.split(":")[0]])
+        require(key not in result or result[key] == value, "Conflicting device-normalized stream state")
+        result[key] = value
+    return result
+
+
+def data_hashes(row):
+    evidence = row.get("evidence", {})
+    return {key: value for key, value in evidence.items()
+            if ("data" in key or "batch_sequence" in key) and "sha256" in key}
+
+
+def completed_steps(row):
+    evidence = row.get("evidence", {})
+    return evidence.get("completed_steps", evidence.get("provenance_checkpoint", {}).get("completed_steps"))
+
+
+def numerical_note(task, cell):
+    metrics, evaluation = cell["metrics"], cell["evaluator_summary"]
+    if task == "gaussian1d_smoke":
+        return (f"first confirmed step {evaluation.get('first_confirmed_step')}; "
+                f"endpoint KS {metrics['cdf_ks']:.6f} (acquisition gate)")
+    if task == "gaussian1d_stability":
+        return (f"stationary {evaluation['stationary_passes']}/{evaluation['stationary_checks']}; "
+                f"shifted hold {evaluation['shift_hold_passes']}/{evaluation['shift_hold_checks']}; "
+                f"reacquisition {evaluation['reacquisition_status']}")
+    convergence = evaluation.get("convergence", {})
+    suffix = (f"; terminal suffix {convergence['passing_suffix']}/{convergence['minimum_stable_checks']}"
+              if convergence else "")
+    if task.startswith("img_"):
+        return f"modes {metrics['modes']}; clean {metrics['hq']:.5f}" + suffix
+    if task in {"grid100", "rotated100", "staggered100"}:
+        return (f"holdout precision {metrics['precision']:.5f}; mass TV {metrics['mass_tv']:.5f}; "
+                f"center max {metrics['center_max_sigma']:.4f} sigma; "
+                f"covariance RMS {metrics['cov_frob_rms']:.5f}; "
+                f"terminal passes {evaluation['terminal_summary']['passing_checks']}/"
+                f"{evaluation['terminal_summary']['checks']}")
+    names = [name for name in ("mass_tv", "min_mass_ratio", "component_covariance_error",
+                              "component_min_eigen_ratio", "covariance_error", "hq") if name in metrics]
+    return "; ".join(f"{name} {metrics[name]:.6f}" for name in names) + suffix
+
+
+def write_appendix(summary, output, tasks):
+    arms = summary["arms"]
+    lines = ["# Frozen numerical comparison", "",
+             "Generated from certified original receipts by [publish.py](publish.py). "
+             "This research panel does not change ordinary qualification or the "
+             "[goal leaderboard](../technique-inventory.md).", "",
+             f"Executed source `{summary['source_commit']}`, manifest `{summary['source_digest']}`; protocol seed 0. "
+             "All task gates and allowances are unchanged.", "",
+             "| Arm | Original failures repaired | Passing controls | New regressions | Paid attempt seconds |",
+             "| --- | ---: | ---: | ---: | ---: |"]
+    for cid, label in zip(ARMS, LABELS):
+        arm = arms[cid]
+        lines.append(f"| {label} | {arm['previously_failing_task_passes']}/11 | "
+                     f"{arm['regression_control_passes']}/4 | {len(arm['regressions_vs_control'])} | "
+                     f"{arm['paid_attempt_seconds']:.3f} |")
+    lines += ["", "Reserved cap: 112,080 seconds; total paid attempt time: "
+              f"{summary['total_paid_attempt_seconds']:.3f} seconds. "
+              "This is not a speed comparison.", "", "## All task verdicts", "",
+              "Each verdict links to an actual-training GIF rendered only from retained scored observations. "
+              "No training, sampling or rescoring was added.", "",
+              "| Task | " + " | ".join(LABELS) + " |", "| --- | --- | --- | --- | --- |"]
+    for task in tasks:
+        cells = []
+        for cid in ARMS:
+            cell = arms[cid]["cells"][task]
+            gif = Path("media") / cid / (task + ".gif")
+            cells.append(f"[{cell['status']}]({gif.as_posix()})" if (output / gif).is_file() else cell["status"])
+        lines.append(f"| `{task}` | " + " | ".join(cells) + " |")
+    lines += ["", "## Numerical detail", "",
+              "Endpoint metrics describe the last state; they do not replace sustained gates. "
+              "Gaussian smoke is an independently confirmed acquisition gate and may PASS with a failing endpoint. "
+              "The [compact JSON](comparison.json) retains every final metric, evaluator summary, "
+              "attempt identity and original receipt hash.", ""]
+    for task in tasks:
+        lines += [f"### `{task}`", ""]
+        for cid, label in zip(ARMS, LABELS):
+            cell = arms[cid]["cells"][task]
+            lines.append(f"- **{label}: {cell['status']}** — {numerical_note(task, cell)}.")
+        lines.append("")
+    lines += ["## Binding checks", "",
+              f"Verified {len(summary['matched_bindings'])} changed-arm/control task pairs: identical task "
+              "declarations, initial model hashes and priors, sampling laws, update counts and final consumed "
+              "non-evaluation RNG stream hashes. Gaussian data batches additionally have direct sequence hashes. "
+              "Other tasks verify their fixed data law and identical consumed named streams; no direct batch "
+              "fingerprint is claimed for those adapters. Evaluation draws retain their own isolated streams.", "",
+              "All four requests share the same complete source manifest, runtime and hardware profile. "
+              "Raw stdout, full readouts, per-update events, tensors and checkpoints remain in the artifact "
+              "archive named in [protocol.json](protocol.json). Compact provenance includes their exact hashes. "
+              "Historical selected results keep their original source and qualification identity.", ""]
+    (output / "numerical-results.md").write_text("\n".join(lines))
+
+
+def publish(queue_root, output, raw_root, *, partial=False, media=False):
+    state = read_json(queue_root / "queue/state.json")
+    protocol = read_json(output / "protocol.json")
+    tasks = protocol["tasks"]
+    requests = {}
+    for path in (queue_root / "queue/requests").glob("*.json"):
+        request = read_json(path)
+        cid = request["candidate"]["id"]
+        if cid in ARMS:
+            require(cid not in requests, "Multiple comparison revisions require separate readouts")
+            requests[cid] = request
+    require(set(requests) == set(ARMS), "Four frozen requests are required")
+    sources = {r["source"]["digest"] for r in requests.values()}
+    require(len(sources) == 1, "Arms do not share one executed source")
+    reference = requests[CONTROL]
+    deltas = {CONTROL: {}, ARMS[1]: {"output_energy_weight": 1.0},
+              ARMS[2]: {"bispf_thermal_application": "displacement"},
+              ARMS[3]: {"fidelity_transport_weight": 1.0}}
+    for cid, request in requests.items():
+        require(request["source"] == reference["source"], "Source manifests differ")
+        require(set(request["tasks"]) == set(reference["tasks"]), "Task rosters differ")
+        for name, card in request["tasks"].items():
+            baseline_card = reference["tasks"][name]
+            # Generated ownership receipts contain the declared trainer delta;
+            # the authoritative task declaration itself must remain identical.
+            require({k: v for k, v in card.items() if k != "field_ownership"}
+                    == {k: v for k, v in baseline_card.items() if k != "field_ownership"},
+                    f"{cid}/{name}: task declaration differs")
+            recipe = {k: v["value"] for k, v in card["field_ownership"]["recipe_fields"].items()}
+            expected = {k: v["value"] for k, v in baseline_card["field_ownership"]["recipe_fields"].items()}
+            expected.update(deltas[cid])
+            require(recipe == expected, f"{cid}/{name}: undeclared resolved recipe delta")
+        require(request["protocol"] == reference["protocol"] and request["protocol"]["seed"] == 0,
+                "Comparison protocol differs")
+        require(request["runtime"] == reference["runtime"] and request["compute_profiles"] == reference["compute_profiles"],
+                "Runtime/hardware cohorts differ")
+    rows = {cid: {} for cid in ARMS}
+    provenance = {cid: [] for cid in ARMS}
+    charged = Counter()
+    for job in state["jobs"].values():
+        result = job.get("result")
+        if job["status"] != "terminal" or not result:
+            continue
+        owner = job.get("cost_owner") or {}
+        request_id = owner.get("request")
+        matching = [cid for cid, request in requests.items() if request["request_id"] == request_id]
+        if not matching:
+            continue
+        cid = matching[0]
+        attempt = result["attempt_id"]
+        durable = ROOT / "reports/forge/attempts" / attempt
+        certificate = read_json(durable / "evidence.json")
+        stored = read_json(durable / "result.json")
+        require(stored == result and certificate["result_hash"] == stable_hash(result), "Original receipt result differs")
+        require(certificate["source"] == reference["source"], "Attempt executed another source")
+        charged[cid] += result.get("raw", {}).get("elapsed_seconds", 0)
+        provenance[cid].append(dict(attempt=attempt, result_sha256=file_hash(durable / "result.json"),
+                                    certificate_sha256=file_hash(durable / "evidence.json"),
+                                    local_artifact_root=certificate["local_artifact_root"]))
+        for row in result["task_results"]:
+            task = row["task_id"]
+            require(task in tasks and task not in rows[cid], "Unexpected or duplicate task")
+            rows[cid][task] = {**row, "_attempt_id": attempt}
+        if media:
+            from experiments.forge.tier1_media import export_attempt
+            export_attempt(durable, output / "media" / cid)
+    if not partial:
+        for cid in ARMS:
+            require(set(rows[cid]) == set(tasks), f"{cid}: complete original evidence is not available")
+    bindings = []
+    for cid in ARMS[1:]:
+        for task in tasks:
+            baseline, candidate = rows[CONTROL].get(task), rows[cid].get(task)
+            if baseline is None or candidate is None:
+                continue
+            comparable = all(completed_steps(r) is not None for r in (baseline, candidate))
+            if not comparable:
+                bindings.append(dict(candidate=cid, task=task, matched_training="UNAVAILABLE"))
+                continue
+            require(candidate["initial_prior"] == baseline["initial_prior"], f"{cid}/{task}: initial prior differs")
+            require(candidate["initialization"] == baseline["initialization"], f"{cid}/{task}: initial models differ")
+            require(candidate["evidence"]["sampling_law"] == baseline["evidence"]["sampling_law"], f"{cid}/{task}: sampling differs")
+            steps_equal = completed_steps(candidate) == completed_steps(baseline)
+            streams_equal = stream_hashes(candidate) == stream_hashes(baseline)
+            baseline_hashes, candidate_hashes = data_hashes(baseline), data_hashes(candidate)
+            require(bool(baseline_hashes) == bool(candidate_hashes), f"{cid}/{task}: data fingerprint availability differs")
+            batches_equal = baseline_hashes == candidate_hashes if baseline_hashes else None
+            if steps_equal:
+                require(streams_equal, f"{cid}/{task}: consumed training streams differ")
+                require(batches_equal is not False, f"{cid}/{task}: data sequence differs")
+            bindings.append(dict(candidate=cid, task=task, initial_models_and_prior_equal=True,
+                                 completed_steps_equal=steps_equal, consumed_training_streams_equal=streams_equal,
+                                 task_data_law_equal=True, recorded_data_fingerprints_equal=batches_equal,
+                                 data_verification="direct_batch_hash_and_named_streams" if baseline_hashes
+                                 else "fixed_task_law_and_identical_consumed_named_streams"))
+    compact = {}
+    for cid in ARMS:
+        observed = rows[cid]
+        full = dict(scope="source_bound_three_theme_repair_readout", qualification_input=False,
+                    candidate_id=cid, candidate_revision=requests[cid]["candidate_revision"],
+                    source=requests[cid]["source"], study=requests[cid]["study"],
+                    expected_tasks=tasks, complete=set(observed) == set(tasks),
+                    task_results=[observed[t] for t in tasks if t in observed], original_receipts=provenance[cid])
+        full_path = raw_root / "full-readouts" / (cid + ".json")
+        atomic_json(full_path, full)
+        cells = {}
+        for task in tasks:
+            row = observed.get(task)
+            if row is None:
+                cells[task] = dict(status="NOT_RUN", metrics={})
+            else:
+                cells[task] = dict(status=row["gate_status"], attempt=row["_attempt_id"],
+                                   metrics=row.get("metrics", {}), reason=row.get("reason"),
+                                   evaluator_summary=_evaluator_summary(row.get("evaluator_result", {})))
+        repaired = [t for t in tasks if t not in CONTROLS and cells[t]["status"] == "PASS"
+                    and rows[CONTROL].get(t, {}).get("gate_status") == "FAIL"]
+        regressions = [t for t in tasks if rows[CONTROL].get(t, {}).get("gate_status") == "PASS"
+                       and t in observed and cells[t]["status"] != "PASS"]
+        compact[cid] = dict(candidate_revision=requests[cid]["candidate_revision"], cells=cells,
+                            counts=dict(Counter(c["status"] for c in cells.values())),
+                            repaired_vs_control=repaired, regressions_vs_control=regressions,
+                            previously_failing_task_passes=sum(cells[t]["status"] == "PASS" for t in tasks if t not in CONTROLS),
+                            regression_control_passes=sum(cells[t]["status"] == "PASS" for t in CONTROLS),
+                            complete_repair=all(c["status"] == "PASS" for c in cells.values()),
+                            paid_attempt_seconds=charged[cid],
+                            original_full_readout=dict(path=str(full_path), sha256=file_hash(full_path)))
+    summary = dict(schema_version=1, qualification_input=False, protocol_sha256=file_hash(output / "protocol.json"),
+                   source_commit=reference["source"]["origin_commit"], source_digest=next(iter(sources)),
+                   seed=0, runtime=reference["runtime"], compute_profiles=reference["compute_profiles"],
+                   matched_bindings=bindings, arms=compact,
+                   total_paid_attempt_seconds=sum(charged.values()),
+                   original_receipts=provenance, numerical_gates_unchanged=True)
+    atomic_json(output / "comparison.json", summary)
+    if not partial:
+        write_appendix(summary, output, tasks)
+    print(json.dumps({cid: dict(counts=v["counts"], repaired=v["repaired_vs_control"],
+                               regressions=v["regressions_vs_control"]) for cid, v in compact.items()}), flush=True)
+    return summary
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--queue-root", type=Path, required=True)
+    parser.add_argument("--raw-root", type=Path, required=True)
+    parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parent)
+    parser.add_argument("--partial", action="store_true", help="Write explicitly incomplete live readouts")
+    parser.add_argument("--media", action="store_true", help="Render actual saved observations without training")
+    args = parser.parse_args()
+    publish(args.queue_root, args.output, args.raw_root, partial=args.partial, media=args.media)
+
+
+if __name__ == "__main__":
+    main()
