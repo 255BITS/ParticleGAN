@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "qualification_input": false,
+  "software_code_base_commit": "a03373da3421303b89c99a39898b091e22910134",
+  "python": "3.14.8",
+  "focused_checks": {
+    "mechanism_serialization_trace": 130,
+    "shared_trainer_forge_profiles": 143,
+    "immutable_archived_compatibility": 63,
+    "postfreeze_trace_adapters": 18
+  },
+  "full_cpu_shards": {
+    "0": {
+      "summary": "19 failed, 1573 passed, 173 skipped, 6565 deselected, 7 warnings, 32 errors, 2 subtests passed in 529.88s (0:08:49)",
+      "log": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/cpu-shard-0.log",
+        "sha256": "57ec159dfabf778a0b8ff502bbfa454c4b3eef0380caee3007ab6b62c7343b52"
+      },
+      "collection_receipt": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/cpu-shard-0-receipt.json",
+        "sha256": "0d35947e09e1959b8efa075fe5d50d6edd0961fa954c165c174128f2eca40ce5"
+      }
+    },
+    "1": {
+      "summary": "1 failed, 2113 passed, 161 skipped, 6087 deselected, 2 warnings, 47 subtests passed in 397.72s (0:06:37)",
+      "log": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/cpu-shard-1.log",
+        "sha256": "9e92c32a8fe6daabad9cf032d001cc4932e5ff65dfd1278122f9c603bb57142f"
+      },
+      "collection_receipt": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/cpu-shard-1-receipt.json",
+        "sha256": "da40c4566bb827b77ab6827cf30563b0a7ffbd023cf332749f29e3838132ced6"
+      }
+    },
+    "2": {
+      "summary": "3 failed, 2305 passed, 78 skipped, 5976 deselected, 1 warning, 77 subtests passed in 713.79s (0:11:53)",
+      "log": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/cpu-shard-2.log",
+        "sha256": "4c0dd1920474e711767c7f4f4c992d0038f0ffdf3a87d406cfe4bf4fb555046c"
+      },
+      "collection_receipt": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/cpu-shard-2-receipt.json",
+        "sha256": "e960d2d47c5eab119cd9ecc23bc31165687af1017c1102975ac885a1e2db8550"
+      }
+    },
+    "3": {
+      "summary": "1 failed, 1847 passed, 67 skipped, 6446 deselected, 1 xfailed, 5 warnings, 23 subtests passed in 435.53s (0:07:15)",
+      "log": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/cpu-shard-3.log",
+        "sha256": "5cc3fbd548b47eb5d65e5a7d2b62ea155aa22d1237d130421c42b4f95a4a33f8"
+      },
+      "collection_receipt": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/cpu-shard-3-receipt.json",
+        "sha256": "85413c4682565c86daee445c2e9250ac1fbf71c3fdc0d8f0703ea0d192e7ee88"
+      }
+    }
+  },
+  "full_suite_passed": false,
+  "triage": [
+    {
+      "kind": "existing_python314_e22_code_serializer",
+      "observed": "slice object in co_consts cannot be JSON encoded",
+      "parent_control": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/e22-parent-source-contract-control.log",
+        "sha256": "b2c2170dfb81ce8faebe1fb83c58dd5b85959beb6907679ce3ffca13c24914ab"
+      },
+      "parent_commit": "96af7be246261f27db9794a4fa787dbe2a0487a9",
+      "action": "Preserve as an existing local-runtime limitation; do not change unrelated source-bound E22 code."
+    },
+    {
+      "kind": "existing_local_environment",
+      "observed": [
+        "POT/ot package absent",
+        "isolated provider subprocess cannot find torch after dropping PYTHONPATH"
+      ],
+      "parent_control": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/parent-environment-failure-controls.log",
+        "sha256": "8432c949bd339c3409fbd8fa4cb7578b3d8e27b68005cbf9ced794cc21bb5fb1"
+      },
+      "parent_commit": "96af7be246261f27db9794a4fa787dbe2a0487a9",
+      "action": "No dependency/environment changes during frozen scientific campaign."
+    },
+    {
+      "kind": "new_trace_absolute_path_metadata",
+      "affected_checks": 2,
+      "action": "Future receipts now use adapter-relative paths; publisher accepts original frozen absolute receipts. Scientific data unchanged. 18 trace/adapter checks pass."
+    },
+    {
+      "kind": "workingtree_generated_comparison",
+      "affected_checks": 1,
+      "action": "Untracked partial comparison was present during clean-git check; final clean-checkout validation follows publication."
+    }
+  ],
+  "raw_logs_in_git": false,
+  "scientific_retries": 0,
+  "evaluator_sources_unchanged": true,
+  "archived_comparator_sha256": "0ef9c1a1cc30abe3ac02e999d989ef6fbb7374d3ca4b6e85bc87aa9ff7ad2211"
+}

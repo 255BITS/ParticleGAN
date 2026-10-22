@@ -25,10 +25,20 @@ def test_scalar_trace_is_read_only_and_binds_original_bytes(tmp_path):
     assert torch.equal(parameter, torch.tensor([1., 2.]))
     assert torch.equal(parameter.grad, torch.tensor([3., 4.]))
     first = receipt(tmp_path)
+    assert first["path"] == "public-updates.jsonl" and first["path_base"] == "adapter_output"
     assert first["rows"] == 1
     append_update(tmp_path, dict(step=4, loss=torch.tensor(0.)))
     assert receipt(tmp_path)["rows"] == 2
     assert receipt(tmp_path)["sha256"] != first["sha256"]
+
+
+def test_trace_receipt_is_equal_after_artifact_relocation(tmp_path):
+    import shutil
+    left, right = tmp_path / "left", tmp_path / "right"
+    left.mkdir()
+    append_update(left, dict(step=1, loss=torch.tensor(1.)))
+    shutil.copytree(left, right)
+    assert receipt(left) == receipt(right)
 
 
 def test_trace_requires_finite_json_and_no_empty_evidence(tmp_path):

@@ -22,6 +22,8 @@ corrected definition checks the raw normalized field before applying that
 protection. These negative controls were retained without changing their
 thresholds or coefficients.
 
+[Reproduction and log commands](REPRODUCE.md) pin the actual execution source.
+
 The [protocol](protocol.json) admits at most four paid arms: the original
 BISPF control, the first-round energy winner, and one successor for mechanics
 and fidelity. Each uses all fifteen declared tasks, protocol seed 0 and the
@@ -43,7 +45,10 @@ arm, and no task prior width/weight or scoring law changes.
 The common adapter retains scalar public step returns **after the complete
 update** in hashed external JSONL. This includes earned thermal scale, each
 active repair's diagnostics, and explicitly returned movement measurements.
-It adds no sampling draw or model forward. Optional optimizer diagnostics
+It adds no sampling draw or model forward. After source freeze, a software-only
+portability fix makes future trace paths relative to their adapter artifact
+directory; the executed campaign retains its original absolute-path receipts.
+The publisher accepts both versions. No trained result is rerun or rewritten. Optional optimizer diagnostics
 have their own scope; a pre-policy optimizer proposal is not silently called
 the final applied move. Bulk stdout, traces, tensors and checkpoints remain
 outside Git at:

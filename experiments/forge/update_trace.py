@@ -39,7 +39,7 @@ def receipt(output):
         return None
     with path.open() as stream:
         rows = sum(1 for _ in stream)
-    return dict(path=str(path.resolve()), sha256=file_hash(path), rows=rows,
+    return dict(path=path.name, path_base="adapter_output", sha256=file_hash(path), rows=rows,
                 scope="scalar_public_step_returns_after_complete_update",
                 observer_additional_forwards=0, observer_additional_draws=0,
                 movement_scope="only movement statistics explicitly returned by the trainer; "

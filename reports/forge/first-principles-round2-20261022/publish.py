@@ -57,6 +57,9 @@ def verify_update_trace(row):
     if receipt is None:
         return dict(status="UNAVAILABLE")
     path = Path(receipt["path"])
+    if not path.is_absolute():
+        require(receipt.get("path_base") == "adapter_output", "Unknown relative update-trace base")
+        path = Path(row["evidence"]["provenance_checkpoint"]["path"]).parent / path
     require(file_hash(path) == receipt["sha256"], "Public update trace identity differs")
     values = [json.loads(line) for line in path.read_text().splitlines()]
     require(len(values) == receipt["rows"] and values, "Public update trace is incomplete")
@@ -171,12 +174,18 @@ def write_appendix(summary, output, tasks):
             cell = arms[cid]["cells"][task]
             lines.append(f"- **{label}: {cell['status']}** — {numerical_note(task, cell)}.")
         lines.append("")
+    matched = [pair for pair in summary["matched_bindings"]
+               if pair.get("initial_models_and_prior_equal") and pair.get("completed_steps_equal")]
+    unavailable = len(summary["matched_bindings"]) - len(matched)
     lines += ["## Binding checks", "",
-              f"Verified {len(summary['matched_bindings'])} changed-arm/control task pairs: identical task "
+              f"Verified {len(matched)} completed changed-arm/control task pairs; "
+              f"{unavailable} pairs have unavailable or unequal completed training. Verified pairs have identical task "
               "declarations, initial model hashes and priors, sampling laws, update counts and final consumed "
               "non-evaluation RNG stream hashes. Gaussian data batches additionally have direct sequence hashes. "
               "Other tasks verify their fixed data law and identical consumed named streams; no direct batch "
               "fingerprint is claimed for those adapters. Evaluation draws retain their own isolated streams.", "",
+              "Gaussian continuation starts from each arm's own passing smoke checkpoint. Matching initialized "
+              "model identities refer to the common public initialization contract, not equal trained continuation states.", "",
               "All admitted requests share the same complete source manifest, runtime and hardware profile. "
               "Raw stdout, full readouts, per-update events, tensors and checkpoints remain in the artifact "
               "archive named in [protocol.json](protocol.json). Compact provenance includes their exact hashes. "
@@ -372,6 +381,7 @@ def publish(queue_root, output, raw_root, *, partial=False, media=False):
                    total_paid_attempt_seconds=sum(charged.values()),
                    original_receipts=provenance, numerical_gates_unchanged=True)
     summary["verified_frozen_source_files"] = len(reference["source"]["files"])
+    summary["publisher_code_sha256"] = file_hash(Path(__file__))
     summary["original_request_sha256"] = original_request_hashes
     summary["archived_control_check"] = historical_control_check(rows[CONTROL])
     summary["first_round_control_reproduction"] = reproduced_controls
