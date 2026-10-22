@@ -7,11 +7,13 @@ mechanism diagnostics, never a second ranking.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import hashlib
 import json
 from pathlib import Path
 import statistics
 
+import numpy as np
 import torch
 
 
@@ -87,15 +89,60 @@ def final_state_diagnostic(row):
         value = hashlib.sha256()
         append(value, tensors)
         hashes[model] = value.hexdigest()
+    optimizer_hashes = []
+    for optimizer in trainer["optimizers"]:
+        value = hashlib.sha256()
+        append(value, optimizer)
+        optimizer_hashes.append(value.hexdigest())
     record = trainer["optimizers"][1]["regularizer"]["record"]
     return {**receipt, "step": trainer["completed_steps"], "observer": record.get("bispf", record),
-        "model_tensor_sha256": hashes}
+        "model_tensor_sha256": hashes, "optimizer_state_sha256": optimizer_hashes}
 
 
 def samples(job, row):
     receipt = row["evidence"]["saved_observer_outputs"]
     root = Path(row["evidence"].get("artifact_root") or job["attempts"][-1]["path"])
     return load_saved(root / receipt["path"], receipt["sha256"])
+
+
+def observations(row):
+    evidence = row["evidence"]
+    if "observations" in evidence:
+        return evidence["observations"]
+    manifest = evidence.get("artifact_manifest", {}).get("files", {})
+    relative = f"{row['task_id']}/events.jsonl"
+    if relative in manifest:
+        path = Path(evidence["artifact_root"]) / relative
+        if digest(path) != manifest[relative]["sha256"]:
+            raise ValueError(f"native event artifact differs: {path}")
+        return [{key: value for key, value in item.items() if key != "elapsed"}
+                for item in map(json.loads, path.read_text().splitlines())
+                if item.get("event") == "eval" and item.get("model") == "live"]
+    return None
+
+
+def native_snapshot_comparison(baseline, candidate):
+    name = baseline["task_id"]
+    left = baseline["evidence"].get("artifact_manifest", {}).get("files", {})
+    right = candidate["evidence"].get("artifact_manifest", {}).get("files", {})
+    files = sorted(key for key in left.keys() & right.keys() if key.startswith(f"{name}/snapshots/") and key.endswith(".npz"))
+    if not files:
+        return None
+    different = []
+    same_steps = []
+    target_equal = True
+    for relative in files:
+        a = Path(baseline["evidence"]["artifact_root"]) / relative
+        b = Path(candidate["evidence"]["artifact_root"]) / relative
+        if digest(a) != left[relative]["sha256"] or digest(b) != right[relative]["sha256"]:
+            raise ValueError(f"native snapshot differs: {relative}")
+        with np.load(a) as x, np.load(b) as y:
+            step = int(Path(relative).stem.split("_")[-1])
+            (same_steps if np.array_equal(x["live"], y["live"]) else different).append(step)
+            target_equal &= np.array_equal(x["target"], y["target"])
+    return {"snapshots": len(files), "target_arrays_exact": target_equal,
+        "live_sample_arrays_exact": not different, "first_different_step": min(different) if different else None,
+        "last_exact_before_first_difference": max((step for step in same_steps if step < min(different)), default=None) if different else None}
 
 
 def same_law_sampling_floor(observed, passing_steps):
@@ -184,6 +231,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--queue-root", type=Path, default=Path("/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue"))
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--summary-output", type=Path)
     parser.add_argument("--allow-incomplete", action="store_true")
     args = parser.parse_args()
     state = json.loads((args.queue_root / "queue/state.json").read_text())
@@ -221,15 +269,27 @@ def main():
         raise SystemExit("Both 15-task requests must be terminal; use --allow-incomplete for a provisional readout")
     for task in sorted(rows["control"].keys() & rows["settling"].keys()):
         baseline, candidate = rows["control"][task], rows["settling"][task]
+        observed_a, observed_b = observations(baseline), observations(candidate)
         result["comparison"][task] = {"control": baseline["status"], "settling": candidate["status"],
             "endpoint_metrics_exact": baseline["metrics"] == candidate["metrics"],
-            "observations_exact": baseline["evidence"].get("observations") == candidate["evidence"].get("observations"),
+            "observations_exact": observed_a == observed_b if observed_a is not None and observed_b is not None else None,
+            "observation_count": len(observed_a) if observed_a is not None else None,
             "initialization_exact": baseline["initialization"] == candidate["initialization"],
             "rng_receipts_exact": baseline["rng"] == candidate["rng"]}
+        stream_a = baseline["evidence"].get("provenance_checkpoint", {}).get("named_stream_state_sha256")
+        stream_b = candidate["evidence"].get("provenance_checkpoint", {}).get("named_stream_state_sha256")
+        result["comparison"][task]["final_named_stream_states_exact"] = stream_a == stream_b if stream_a is not None and stream_b is not None else None
+        if observed_a is not None and observed_b is not None:
+            different = [a["step"] for a, b in zip(observed_a, observed_b) if a != b]
+            result["comparison"][task]["first_changed_observation_step"] = min(different) if different else None
+        snapshots = native_snapshot_comparison(baseline, candidate)
+        if snapshots is not None:
+            result["comparison"][task]["native_snapshots"] = snapshots
         final_a = result["requests"]["control"]["tasks"][task]["final_state"]
         final_b = result["requests"]["settling"]["tasks"][task]["final_state"]
         if final_a is not None and final_b is not None:
             result["comparison"][task]["final_model_tensors_exact"] = final_a["model_tensor_sha256"] == final_b["model_tensor_sha256"]
+            result["comparison"][task]["final_optimizer_states_exact"] = final_a["optimizer_state_sha256"] == final_b["optimizer_state_sha256"]
         if ("control", task) in panels and ("settling", task) in panels:
             a, b = panels["control", task], panels["settling", task]
             result["comparison"][task]["scored_sample_tensors_exact"] = len(a) == len(b) and all(
@@ -240,6 +300,25 @@ def main():
         args.output.write_text(text)
     else:
         print(text, end="")
+    if args.summary_output:
+        if args.output is None:
+            raise ValueError("--summary-output requires --output for the external full-analysis receipt")
+        summary = {key: value for key, value in result.items() if key not in ("requests", "saved_tensor_diagnostics")}
+        summary["arms"] = {}
+        for arm, data in result["requests"].items():
+            final = {task: row for task, row in data["tasks"].items() if row.get("status")}
+            summary["arms"][arm] = {"request_id": data["request_id"],
+                "status_counts": dict(Counter(row["status"] for row in final.values())),
+                "charged_seconds": sum(row["charged_seconds"] for row in final.values()),
+                "tasks": {task: {"status": row["status"], "metrics": row["metrics"],
+                    "attempt": row["attempt"], "final_checkpoint": {key: row["final_state"][key]
+                        for key in ("path", "sha256", "step", "observer")} if row["final_state"] else None}
+                    for task, row in final.items()}}
+        summary["control_saved_tensor_diagnostics"] = {task: arms["control"]
+            for task, arms in result["saved_tensor_diagnostics"].items() if "control" in arms}
+        summary["raw_analysis"] = {"path": str(args.output), "sha256": digest(args.output)}
+        summary["cost_scope"] = "charged attempt seconds; hardware contention and instrumentation preclude a speed ranking"
+        args.summary_output.write_text(json.dumps(summary, indent=2, sort_keys=True, allow_nan=False) + "\n")
 
 
 if __name__ == "__main__":

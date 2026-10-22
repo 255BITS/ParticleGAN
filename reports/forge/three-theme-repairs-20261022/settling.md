@@ -1,9 +1,12 @@
 # BISPF settling repair: apply cooling to finite movement
 
-Status: implemented and software-checked; common-source round one is running.
+Status: round one complete; **no repaired gates and no lost control passes**.
 The candidate is `bispf-settling-displacement-v1`. The common three-theme study
 owns the finite campaign, common-source execution and one comparison leaderboard.
 This document adds no qualification, default change or historical regrade.
+The [measured readout](settling-results.md) and [compact receipt](settling-results.json)
+record all 15 tasks: 4 PASS / 11 FAIL, 14 exact control trajectories at retained
+observations and checkpoints, and one changed but still failing Grid100 run.
 
 ## Question and prior evidence
 
@@ -105,9 +108,9 @@ bias and sampled-prior movement; untouched rows including signed-zero bits; unch
 optimizer histories; exact uncooled execution; critic-hook and SBNP gradient
 restoration; nested/exception/missing-cache behavior; no RNG consumption;
 checkpoint continuation; and rejection before mutation for invalid scales or
-critic optimizer groups. Public `GANTrainer` checks additionally cover
-equivalence, cooled and zero motion, exact complete checkpoint/stream
-continuation, and exception restoration. They are software
+critic optimizer groups. The checks also cover public `GANTrainer` equivalence,
+cooled and zero motion, exact complete checkpoint/stream continuation, and
+exception restoration. They are software
 evidence, not toy-training quality results. The common measured readout must supply
 public-API task receipts and actual-training GIFs before a research PR is
 presented as a training solution.
