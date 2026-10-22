@@ -52,6 +52,26 @@ def verify(path, expected):
     return path
 
 
+def archive_state(path, label):
+    """Bind the exact input bytes, including a live queue's atomic read."""
+    path = Path(path)
+    data = path.read_bytes()
+    digest = hashlib.sha256(data).hexdigest()
+    if path.name.startswith(f"{label}-") and path.name != f"{label}-{digest}.json":
+        raise ValueError("selected content-addressed input snapshot has changed")
+    archived = ROOT / "settling/inputs" / f"{label}-{digest}.json"
+    archived.parent.mkdir(parents=True, exist_ok=True)
+    if not archived.exists():
+        try:
+            with archived.open("xb") as stream:
+                stream.write(data)
+        except FileExistsError:
+            pass
+    if sha(archived) != digest:
+        raise ValueError("immutable input snapshot has conflicting bytes")
+    return json.loads(data), dict(path=str(archived), sha256=digest, bytes=len(data))
+
+
 def tree_hash(value):
     h = hashlib.sha256()
     def append(item):
@@ -304,11 +324,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--allow-incomplete", action="store_true")
+    parser.add_argument("--state-snapshot", type=Path, default=ROOT / "queue/queue/state.json")
+    parser.add_argument("--previous-state-snapshot", type=Path, default=OLD_ROOT / "queue/queue/state.json")
     args = parser.parse_args()
     began = time.process_time()
-    state_path, old_path = ROOT / "queue/queue/state.json", OLD_ROOT / "queue/queue/state.json"
-    state_bytes, old_bytes = state_path.read_bytes(), old_path.read_bytes()
-    state, old = json.loads(state_bytes), json.loads(old_bytes)
+    state, state_receipt = archive_state(args.state_snapshot, "round2-state")
+    old, old_receipt = archive_state(args.previous_state_snapshot, "round1-state")
     reqs, previous = requests(state), requests(old)
     result = dict(schema_version=1, scope="saved_trajectories_and_actual_update_returns_only", source_commit=SOURCE,
                   source_digest=DIGEST, tasks=list(TASKS), arms={}, repeated_controls={}, sampling_draws_added=0,
@@ -348,8 +369,7 @@ def main():
                 cells[task] = dict(status=row["gate_status"], reasons=row.get("reasons"), attempted=bool(job["attempts"]))
         result["arms"][arm] = dict(request_id=request_id, tasks=cells)
     result.update(complete=not pending, pending=pending, verified_artifacts=CHECKED,
-                  raw_state_receipts={str(state_path): hashlib.sha256(state_bytes).hexdigest(),
-                                      str(old_path): hashlib.sha256(old_bytes).hexdigest()},
+                  input_state_snapshots=dict(round2=state_receipt, round1=old_receipt),
                   reduction_cpu_seconds=time.process_time() - began, process_cpu_seconds=time.process_time())
     if pending and not args.allow_incomplete:
         raise ValueError(f"{len(pending)} required diagnostic cells pending")

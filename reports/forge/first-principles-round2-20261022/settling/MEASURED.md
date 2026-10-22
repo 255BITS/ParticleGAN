@@ -177,6 +177,14 @@ It constructs no model, performs no forward or optimizer update, and makes
 no sampling draw. A hard 120 CPU-second process limit bounds the reduction.
 Bulk traces and intermediate reduction outputs remain outside Git.
 
+Every invocation archives the exact two queue-state inputs under the raw
+`settling/inputs/` directory, using content-addressed filenames. The compact
+result binds those immutable paths, sizes and SHA256s. A live queue file is
+never the final evidence binding. Reproduction selects the retained inputs
+with `--state-snapshot` and `--previous-state-snapshot`; it does not depend on
+later queue/readout lifecycle changes. The final completed result will provide
+the exact snapshot paths in the command below.
+
 ```sh
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -u \
   reports/forge/first-principles-round2-20261022/settling/analyze_temporal.py \
