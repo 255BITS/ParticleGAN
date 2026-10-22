@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 851. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 857. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4024,6 +4024,22 @@ Learned-MoG vector_two_broad PASS after exactly one registered operational cance
 
 [Evidence](../../reports/forge/attempts/661bd9830be94225891954f5fb690342/result.json) · [Record](records/readout-060e7be73e2832e314b9573f.json)
 
+### r1r2-repair-control-20261022 · readout-0c965d99d82ddcae5d1d8d5a
+
+**Scope:** current; scientific; revision `3cca6de5d931b16469b0ef0fedbc0b5cb21f55b8af202a7868e94277fcef2037`.
+
+The exact archived stronger global R1/R2 reference retains its prior observed ordinary passes and still exposes the unresolved Ring16 density failure under one fresh matched source/runtime. This new-source operational repair fixes snapshot provider dependencies, preserves original runtime errors and routes the already-declared tanh evaluator; all original scientific gates and recipe values remain unchanged.
+
+**Observed:** {'FAIL': 3, 'PASS': 11}; wall seconds 495.821; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0068211; five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Complete unchanged current Tier1: 10/13 required PASS, 3 FAIL; separate clock PASS. Ring16, DDGAN Gaussian and AE-DDGAN Gaussian fail. The stronger NS/AMSGrad control reproduces its archived Ring endpoint and does not qualify globally.
+
+**Next:** Retain R2 and the selected historical recipe; no ordinary Tier2 or default promotion. Finish separately scoped own-checkpoint word hold, publish all failures, and require a demonstrated density-force/conditional-tracking prerequisite before another global candidate.
+
+[Evidence](../../reports/forge/r1r2-repair-20261022/README.md) · [Record](records/readout-0c965d99d82ddcae5d1d8d5a.json)
+
 ### forge-onboarding-anchor-ablation · readout-10242573330bec1494c7602b
 
 **Scope:** current; scientific; revision `39dc1cc8e516f8127e732edea196f82243ff8cdff4ed761020f0f802a3bcaf0f`.
@@ -4072,6 +4088,22 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold FAIL, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/result.json) · [Record](records/readout-15e86dd160a1d64a04ceee04.json)
 
+### r1r2-repair-r1cycle-20261022 · readout-15fd8ba9f7b947395f31c418
+
+**Scope:** research_diagnostic; scientific; revision `de3afa5bb4c97c9e51a2ef66817108ca2372525aebff8200537f9df9d3328421`.
+
+This exact source-bound global recipe can retain its own earliest independently confirmed word acquisition through every original scheduled primary and independent confirmation check, including the exact restored state, for4000 further updates. The original word_hold evaluator and all25 paired checks are authoritative; endpoint token probability alone cannot establish retention. This diagnostic changes scheduler placement only and grants no ordinary qualification.
+
+**Observed:** {'PASS': 2}; wall seconds 154.319; mechanism `structural`.
+
+five_word_joint_hold: modes=5, mass_tv=0.020898; five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Own-checkpoint acquisition and full4000-update hold PASS: all25 scheduled/restored-state checks confirmed, parent update834, endpoint minimum token probability0.9999691247940063. No ordinary qualification credit. The NS/AMSGrad reference already passes retention; explicit reconstruction improves confidence margin but is not necessary for these gates.
+
+**Next:** Close the finite three-role campaign. Keep R2; do not promote the failed global repairs. Preserve all ordinary failures and archived source identities. Require a demonstrated density or conditional-field prerequisite before another candidate.
+
+[Evidence](../../reports/forge/r1r2-repair-20261022/README.md) · [Record](records/readout-15fd8ba9f7b947395f31c418.json)
+
 ### k3p-a2-off-native-diagnostic · readout-170dc0a68d5b68737b370a5f
 
 **Scope:** current; scientific; revision `b5ae40d1428d03591c42cb5cddb8adea5042caaa34c8ea2b131565c0ccca72e9`.
@@ -4119,6 +4151,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 1.254
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/33bc62d63509425e9f7237ef19ee7374.json) · [Record](records/readout-28f0c9140b4cfeef57f23dd2.json)
+
+### r1r2-repair-control-20261022 · readout-2b96c09667e7a4aef944ce96
+
+**Scope:** research_diagnostic; scientific; revision `3cca6de5d931b16469b0ef0fedbc0b5cb21f55b8af202a7868e94277fcef2037`.
+
+This exact source-bound global recipe can retain its own earliest independently confirmed word acquisition through every original scheduled primary and independent confirmation check, including the exact restored state, for4000 further updates. The original word_hold evaluator and all25 paired checks are authoritative; endpoint token probability alone cannot establish retention. This diagnostic changes scheduler placement only and grants no ordinary qualification.
+
+**Observed:** {'PASS': 2}; wall seconds 158.69; mechanism `structural`.
+
+five_word_joint_hold: modes=5, mass_tv=0.020898; five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Own-checkpoint acquisition and full4000-update hold PASS: all25 scheduled/restored-state checks confirmed, parent update834, endpoint minimum token probability0.9979230761528015. No ordinary qualification credit. The NS/AMSGrad reference already passes retention; explicit reconstruction improves confidence margin but is not necessary for these gates.
+
+**Next:** Close the finite three-role campaign. Keep R2; do not promote the failed global repairs. Preserve all ordinary failures and archived source identities. Require a demonstrated density or conditional-field prerequisite before another candidate.
+
+[Evidence](../../reports/forge/r1r2-repair-20261022/README.md) · [Record](records/readout-2b96c09667e7a4aef944ce96.json)
 
 ### k3p · readout-2c2eb24207b627b2ad26ea18
 
@@ -4183,6 +4231,22 @@ Native BISPF on the two explicitly wider architecture-portability hosts passes s
 **Next:** Retain both native outcomes as controls. Quintic passes both wider tasks and proceeds to separately frozen full performance and ordinary quality; Frobenius regresses stripes and stops. No default adoption follows.
 
 [Evidence](../../reports/forge/attempts/91832bb54bc74d1abc42a8576d9fc7e7/result.json) · [Record](records/readout-3721266a32807c156725dfc8.json)
+
+### r1r2-repair-r1cycle-20261022 · readout-39165e761d4e5ea74a5a67d1
+
+**Scope:** current; scientific; revision `de3afa5bb4c97c9e51a2ef66817108ca2372525aebff8200537f9df9d3328421`.
+
+The single global R1-only plus explicit joint inverse reconstruction recipe repairs the unchanged Ring16 gate through its R1 critic change while retaining confident paired word acquisition with a stable raw-logit inverse signal and every other required Tier1 pass. This new-source operational repair fixes snapshot provider dependencies, preserves original runtime errors and routes the already-declared tanh evaluator; all original scientific gates and recipe values remain unchanged.
+
+**Observed:** {'FAIL': 4, 'PASS': 10}; wall seconds 379.634; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0084931; five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Word confidence signature observed, but global repair hypothesis fails: 9/13 required PASS, 4 FAIL; separate clock PASS. Word first confirmation returns to 834 and endpoint minimum token probability rises to .9999932051. All nonword numerical trajectories match R1-only; Ring, DDGAN, AE-DDGAN and AE-GAN failures remain.
+
+**Next:** Retain R2 and the selected historical recipe; no ordinary Tier2 or default promotion. Finish separately scoped own-checkpoint word hold, publish all failures, and require a demonstrated density-force/conditional-tracking prerequisite before another global candidate.
+
+[Evidence](../../reports/forge/r1r2-repair-20261022/README.md) · [Record](records/readout-39165e761d4e5ea74a5a67d1.json)
 
 ### bispf-v1 · readout-3f3f893ae724d651f1655fc9
 
@@ -4872,6 +4936,22 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 [Evidence](../../reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json) · [Record](records/readout-c723a88e5122f97011aabad9.json)
 
+### r1r2-repair-r1only-20261022 · readout-cd109ec1175f5a26582f9968
+
+**Scope:** current; scientific; revision `704c803e0c8bf425e1c0cd673b77e0332278cd8163ca9058a95c50a2f00fbdab`.
+
+Removing only R2 fake-input gradient pressure repairs the unchanged Ring16 local-density gate while retaining every other required Tier1 gate with one global native R1 recipe. This new-source operational repair fixes snapshot provider dependencies, preserves original runtime errors and routes the already-declared tanh evaluator; all original scientific gates and recipe values remain unchanged.
+
+**Observed:** {'FAIL': 4, 'PASS': 10}; wall seconds 487.193; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0084931; five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Hypothesis falsified: 9/13 required PASS, 4 FAIL; separate clock PASS. Ring covariance worsens to 3.00038088113 and mass TV .1591796875 fails, despite minimum spread improving to .25259119. DDGAN worsens and multimodal AE-GAN generation regresses. Reject R2 removal as a global repair.
+
+**Next:** Retain R2 and the selected historical recipe; no ordinary Tier2 or default promotion. Finish separately scoped own-checkpoint word hold, publish all failures, and require a demonstrated density-force/conditional-tracking prerequisite before another global candidate.
+
+[Evidence](../../reports/forge/r1r2-repair-20261022/README.md) · [Record](records/readout-cd109ec1175f5a26582f9968.json)
+
 ### bispf-throughput-v1 · readout-cd9493a6a30096475d381175
 
 **Scope:** research_diagnostic; scientific; revision `5519ffc77cf0cfd46928ca25fbbf29efb9a642d8da333482419f4c9af3a4300d`.
@@ -4999,6 +5079,22 @@ All six finite-update DCGAN performance tasks PASS. Observed speedups versus mat
 **Next:** Offer the two-field opt-in recipe; profile remaining 32/64 px overhead before another bounded implementation change. Keep defaults and existing selection pins unchanged.
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-e5cf5311e83c25cc0b333270.json)
+
+### r1r2-repair-r1only-20261022 · readout-e610d5af4bac226eabe47dcb
+
+**Scope:** research_diagnostic; scientific; revision `704c803e0c8bf425e1c0cd673b77e0332278cd8163ca9058a95c50a2f00fbdab`.
+
+This exact source-bound global recipe can retain its own earliest independently confirmed word acquisition through every original scheduled primary and independent confirmation check, including the exact restored state, for4000 further updates. The original word_hold evaluator and all25 paired checks are authoritative; endpoint token probability alone cannot establish retention. This diagnostic changes scheduler placement only and grants no ordinary qualification.
+
+**Observed:** {'PASS': 2}; wall seconds 141.642; mechanism `structural`.
+
+five_word_joint_hold: modes=5, mass_tv=0.03457; five_word_joint_smoke: modes=5, mass_tv=0.018945
+
+Own-checkpoint acquisition and full4000-update hold PASS: all25 scheduled/restored-state checks confirmed, parent update1667, endpoint minimum token probability0.9974690675735474. No ordinary qualification credit. The NS/AMSGrad reference already passes retention; explicit reconstruction improves confidence margin but is not necessary for these gates.
+
+**Next:** Close the finite three-role campaign. Keep R2; do not promote the failed global repairs. Preserve all ordinary failures and archived source identities. Require a demonstrated density or conditional-field prerequisite before another candidate.
+
+[Evidence](../../reports/forge/r1r2-repair-20261022/README.md) · [Record](records/readout-e610d5af4bac226eabe47dcb.json)
 
 ### recipe-prior-refactor-ka2-v1 · readout-e6e872f73024fd6c0b2b2d42
 
@@ -5766,4 +5862,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `87ac14b797b517b07e11137e2017cc7c32eff361228ba96c56faa505c31a8a12`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `7d3dbaefe8fb2e80049198346d619a1ae281e8703945eca4819b73fcb00fe793`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

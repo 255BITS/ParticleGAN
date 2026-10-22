@@ -1,4 +1,5 @@
 {
+  "display_metrics": "Saved scalar metrics; original structured metadata remains in certified evidence.",
   "gif_sha256": "6b45896f8ccd219cb733a250f6836b127f701d6df97a39de0b1e17ab7a814f54",
   "kind": "actual_training_saved_observations_gif",
   "observation_count": 24,
@@ -21,7 +22,7 @@
     23
   ],
   "source_inputs": {
-    "/mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/queue/r1r2-repair-20261022/4c1de877a26049d69cf45b8a244f2ae7/observed-records.pt": "2d651b2f91a860a7817902ee10f07d93b596e632243f844f211e9b2dedf7883e"
+    "/mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/queue/r1r2-repair-20261022/81025f9964384002bc6b8fa358067b52/observed-records.pt": "9c4593c87086eab78b22a174aad869f52248d46bd85f72c0c26e3f4001c384ae"
   },
   "task_id": "five_word_joint_smoke"
 }

@@ -98,6 +98,26 @@ An isolated frozen-source, actual NS/AMSGrad two-update integration cohort
 checks every model provider, exact update counts, RNG isolation and real GIFs;
 it cannot qualify or replace any full-budget task.
 
+The isolated snapshot check passed all eight model tasks; exact receipts and
+reproduction source are in infra-v2-snapshot-smoke.json. All six subsequent
+studies bind the same b33e375de0a1e9cf754f4d0fa24e0fd216db4fec86b1b549ccb5ea2bb0e4f175
+source and passed admission with no blockers.
+
+The separate word-retention view places the unchanged smoke and hold tasks in
+a research diagnostic cohort. It requires the diagnostic smoke's own earliest
+confirmed checkpoint and the original all-25-check hold evaluator. No ordinary
+Tier 1 failure is removed. The complete diagnostic reservation is 1,200 seconds
+per role (900 acquisition plus 300 hold), or 3,600 seconds for three roles.
+
+The initial admission note incorrectly expected automatic reuse of ordinary
+acquisition. The additional key assertion caught that ordinary and diagnostic
+smoke keys differ solely by science.evidence_use. The corrected admission proof
+retains both keys and records automatic_reuse=false. Keep both original
+receipts and physical charges; do not substitute an ordinary parent. The full
+campaign allowance is therefore 15,660 ordinary + 3,600 diagnostic + 384.252489
+already paid = **19,644.252489 seconds**, below 24,000. The 5,220-second candidate
+cap still requires its actual paid cost plus the next full job allowance to fit.
+
 ## Execution and tail paths
 
 Use /usr/bin/python (current Python 3.14.8, torch 2.14.0+cu130) with the two

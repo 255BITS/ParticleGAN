@@ -7,6 +7,10 @@ loss signs, half-gamma penalty, detach paths, native Adam updates or schedules.
 There is no demonstrated recipe that repairs the unchanged full ordinary task
 suite. This investigation preserves that result.
 
+The subsequent [bounded repair comparison](../r1r2-repair-20261022/README.md)
+trains the stronger reference, R1-only and explicit joint reconstruction
+controls. Its new source cohorts and results are separate from this audit.
+
 The [current family leaderboard](../technique-inventory.md) remains the only
 generated ranking. Its selected R1/R2 row records five passed tasks, two failed
 tasks and 42 not measured under its published projection. Recorded source
