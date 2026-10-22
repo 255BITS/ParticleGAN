@@ -100,8 +100,8 @@ experiment, automatic continuation or adoption.
 
 ## Software checks and reproduction
 
-`tests/test_bispf_settling_repair.py` has 15 passing checks: realized matrix,
-bias and sampled-prior movement; untouched rows; unchanged gradients and
+`tests/test_bispf_settling_repair.py` has 16 passing checks: realized matrix,
+bias and sampled-prior movement; untouched rows including signed-zero bits; unchanged gradients and
 optimizer histories; exact uncooled execution; critic-hook and SBNP gradient
 restoration; nested/exception/missing-cache behavior; no RNG consumption;
 checkpoint continuation; and rejection before mutation for invalid scales or

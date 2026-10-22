@@ -77,6 +77,16 @@ def test_gradient_cooling_alone_does_not_bound_a_normalized_move():
     assert move(1.0, 0.1) / full == pytest.approx(0.1)
 
 
+def test_untouched_prior_rows_retain_signed_zero_bits():
+    optimizer, parameters = _optimizer()
+    with torch.no_grad():
+        parameters[2][1].fill_(-0.0)
+    original_bits = parameters[2].detach().view(torch.int64).clone()
+    _gradients(optimizer, parameters)
+    thermal_optimizer_step(optimizer, 0.2)
+    assert torch.equal(parameters[2].detach().view(torch.int64)[[1, 3]], original_bits[[1, 3]])
+
+
 @pytest.mark.parametrize("collect_stats", [False, True])
 def test_uncooled_step_is_bit_exact_including_optimizer_state(collect_stats):
     control, a = _optimizer()

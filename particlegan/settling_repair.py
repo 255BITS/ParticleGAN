@@ -94,7 +94,10 @@ def thermal_optimizer_step(optimizer, scale, *, collect_stats=False):
         if collect_stats:
             base_squared = float((parameter.double() - original.double()).square().sum())
         if scale < 1.0:
-            parameter.copy_(torch.lerp(original, parameter, scale))
+            # lerp(-0, -0, t) can produce +0. Preserve exact untouched entries,
+            # including unsampled prior rows, instead of rewriting their bits.
+            parameter.copy_(torch.where(parameter == original, original,
+                                        torch.lerp(original, parameter, scale)))
         if collect_stats:
             stats = roles.setdefault(role, {"gradient_squared_l2": gradients.get(role, 0.0),
                 "base_squared_l2": 0.0, "applied_squared_l2": 0.0})
