@@ -211,7 +211,7 @@ def task_policy_blockers(task, candidate):
     consumer = task.get('execution', {}).get('transport_consumer')
     if task.get("execution", {}).get("execution_path") == "public_components" and (
             recipe.output_energy_weight or recipe.fidelity_transport_weight or recipe.bispf_bregman_game
-            or recipe.bispf_thermal_application != "gradient"):
+            or recipe.bispf_thermal_application != "gradient" or recipe.bispf_generator_step != "ordinary"):
         return ["frozen public_components hosts do not consume the three-theme repair mechanisms"]
     # The selected-policy two-pole declaration inherits its parent's optional
     # transport metadata. Its existing owner implements the original objective
@@ -414,7 +414,7 @@ class FormulationContext:
         self.prior_config["learnable"] = self.recipe.prior_update == "learned"
         if execution_path == "public_components" and (
                 self.recipe.output_energy_weight or self.recipe.fidelity_transport_weight or self.recipe.bispf_bregman_game
-                or self.recipe.bispf_thermal_application != "gradient"):
+                or self.recipe.bispf_thermal_application != "gradient" or self.recipe.bispf_generator_step != "ordinary"):
             raise CapabilityError(["public_components does not consume the three-theme repair mechanisms"])
         if execution_path == "public_components" and (self.recipe.kinetic_transport_weight or self.recipe.kinetic_transport_local_weight) and component_transport is None:
             raise CapabilityError(["public_components must explicitly consume Recipe kinetic transport losses; "

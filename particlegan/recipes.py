@@ -233,6 +233,8 @@ class Recipe:
     bispf_bregman_game: bool = False
     # Relocate existing BISPF G/prior cooling to the finite optimizer move.
     bispf_thermal_application: str = "gradient"
+    # Same-batch normalized G/prior predictor-corrector; critic remains fixed.
+    bispf_generator_step: str = "ordinary"
     # Opt-in protection of existing G/encoder/prior objectives. Component
     # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
@@ -316,12 +318,17 @@ class Recipe:
                 or self.input_noise_std or self.output_noise_std
                 or self.output_energy_weight or self.fidelity_transport_weight
                 or self.kinetic_transport_weight or self.kinetic_transport_local_weight
-                or self.bispf_thermal_application != "gradient"
+                or self.bispf_thermal_application != "gradient" or self.bispf_generator_step != "ordinary"
                 or self.constraint_geometry_mode not in ("none", "direction_blend")):
             raise ValueError("bispf_bregman_game requires scalar non_saturating BISPF, zero additive noise, "
                              "no auxiliary transport/energy, gradient cooling and none/direction_blend protection")
         if self.bispf_thermal_application not in ("gradient", "displacement"):
             raise ValueError("bispf_thermal_application must be gradient or displacement")
+        if self.bispf_generator_step not in ("ordinary", "secant_extragradient"):
+            raise ValueError("bispf_generator_step must be ordinary or secant_extragradient")
+        if self.bispf_generator_step == "secant_extragradient":
+            from .mechanics_replay import validate_recipe
+            validate_recipe(self)
         if self.bispf_thermal_application == "displacement" and (
                 self.effective_critic_formulation != "bispf" or self.optimizer_family != "dualnorm"
                 or self.optimizer_momentum != 0):

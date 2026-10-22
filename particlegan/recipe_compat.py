@@ -21,6 +21,7 @@ SEARCH_RECIPE_DEFAULTS = {
     "fidelity_transport_weight": 0.0,
     "bispf_bregman_game": False,
     "bispf_thermal_application": "gradient",
+    "bispf_generator_step": "ordinary",
     "d_betas": None, "d_eps": None, "prior_eps": None,
     "loss_labels": (0.0, 1.0, 1.0), "adam_variant": "pytorch",
     "lr_schedule": "cosine", "lr_decay_rate": 0.96, "lr_decay_steps": 50_000,
