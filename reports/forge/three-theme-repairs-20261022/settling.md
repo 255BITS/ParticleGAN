@@ -1,6 +1,6 @@
 # BISPF settling repair: apply cooling to finite movement
 
-Status: implemented and software-checked; no training has run on this branch.
+Status: implemented and software-checked; common-source round one is running.
 The candidate is `bispf-settling-displacement-v1`. The common three-theme study
 owns the finite campaign, common-source execution and one comparison leaderboard.
 This document adds no qualification, default change or historical regrade.
@@ -100,13 +100,15 @@ experiment, automatic continuation or adoption.
 
 ## Software checks and reproduction
 
-`tests/test_bispf_settling_repair.py` has 16 passing checks: realized matrix,
+`tests/test_bispf_settling_repair.py` has 21 passing checks: realized matrix,
 bias and sampled-prior movement; untouched rows including signed-zero bits; unchanged gradients and
 optimizer histories; exact uncooled execution; critic-hook and SBNP gradient
 restoration; nested/exception/missing-cache behavior; no RNG consumption;
 checkpoint continuation; and rejection before mutation for invalid scales or
-critic optimizer groups. These prescribed-gradient checks are software evidence,
-not toy-training quality results. The common measured readout must supply
+critic optimizer groups. Public `GANTrainer` checks additionally cover
+equivalence, cooled and zero motion, exact complete checkpoint/stream
+continuation, and exception restoration. They are software
+evidence, not toy-training quality results. The common measured readout must supply
 public-API task receipts and actual-training GIFs before a research PR is
 presented as a training solution.
 
@@ -136,3 +138,77 @@ cooling**, despite its generic actual-step label. They must not be interpreted
 as realized cooled movements. Persisting diagnostics after the helper would be
 a separately versioned observer correction; it does not authorize rerunning
 unchanged scientific experiments or changing the frozen cohort.
+## Saved-state signal screen: reject an unchanged energy observer
+
+The read-only analyses below add no inference draw or training update. They
+use certified checkpoints and actual scored output tensors from the new campaign.
+
+Baseline Gaussian checkpoints at steps 1000/4000/6000 have thermal scale 1 and
+EMA nearest-neighbor residuals .15909/.10741/.17516, above unchanged tau .020.
+Overlap's final scale is 1 with residual .23608. These sparse observations do
+not establish the whole history. However, 160 disjoint 128-versus-128 panels
+from Gaussian's passing saved outputs have same-law nearest-neighbor residual
+minimum .02499 and median .05627; overlap's 160 panels have minimum .09373 and
+median .12583. Every panel exceeds .020 even though both halves come from the
+same generated law. This exposes a finite-sample floor in the existing signal.
+
+One structural observer proposal was fixed before computation: use the signed,
+normalized energy U-statistic
+`[mean|R-F|-.5 mean_offdiag|R-R'|-.5 mean_offdiag|F-F'|]/RMS_offdiag(R-R')`,
+with scale 1 for a constant real batch. Its positive part would replace the
+raw nearest-neighbor residual. No signal threshold was picked or swept.
+
+Actual real training batches were not saved. This **separate saved-data
+diagnostic** therefore fixes references to the first receipt-PASS generated
+state: Gaussian smoke 209, shifted Gaussian 4709 and overlap 100. These are
+approximate empirical references, not historical real batches or an oracle
+training mechanism. Thirty-two disjoint 128-row panels per state use a fixed
+one-panel reference rotation, including at the reference state itself.
+
+| Diagnostic | Smoke | Gaussian continuation | Overlap |
+| --- | ---: | ---: | ---: |
+| Receipt-PASS / FAIL states | 6 / 18 | 10 / 110 | 10 / 14 |
+| State-mean signal AUROC, PASS versus FAIL | .99074 | .93818 | .85000 |
+| AUROC versus states at least 2x an original gate bound | 1 | 1 | 1 |
+| Median mean pointwise thermal scale on PASS states, tau .020 | .14384 | .12063 | .40410 |
+| Median final scale after 32 fixed-state panels under original fast-attack/.95 EMA | .86307 | .76366 | .99934 |
+
+The last row resets the EMA once per scored state and follows fixed saved-panel
+order; it does not reconstruct historical training. Threshold-free separation
+looks useful, but the unchanged peak detector reheats passing overlap states
+almost completely. A less biased input alone does not solve that controller.
+
+Explicit **analytical point-mass fixtures** additionally test premature cooling.
+They are separate zero-width controls, never substitutes for the original
+positive-width task laws. Exact population weighted distances remove sampled
+estimation noise:
+
+| Fixture | Mass TV | Normalized energy numerator | Unchanged tau .020 scale |
+| --- | ---: | ---: | ---: |
+| Four equal modes, one absent | .25 | .047420 | 1 |
+| Rare 2% corner absent, mass moved to largest corner | .02 | .000681 | .003408 |
+| Eight equal ring modes, one absent | .125 | .009069 | .430348 |
+| Sixteen equal ring modes, one absent | .0625 | .001994 | .027855 |
+
+Matched constant batches give energy 0 and scale .00001; distinct constants
+separated by one unit give energy 1 and scale 1. Collapsing saved Gaussian or
+overlap samples to their reference mean gives energy .16818/.19534 and scale 1.
+Complete collapse remains detectable, while a rare missing population or one
+missing ring component can be strongly cooled before acquisition is complete.
+
+**Decision: do not implement or spend on energy-U as an unchanged drop-in
+observer.** It would retain finite-batch peak reheating and introduce a clear
+partial-acquisition risk, repeating the concern behind prior idle/capture
+failures. Keep these negative controls. Finish round one, verify whether the
+displacement candidate was numerically inert, and require a support-sensitive,
+noise-aware observer proposal to pass saved-state controls before further
+training. No successor, threshold tuning or extra round is declared here.
+
+Reproduce the one fixed signal screen with raw per-observation scores outside
+Git and an optional compact summary:
+
+```sh
+OMP_NUM_THREADS=1 python reports/forge/three-theme-repairs-20261022/probe_settling_signal.py \
+  --output /mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/settling-signal-probe.json \
+  --summary-output /mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/settling-signal-summary.json
+```
