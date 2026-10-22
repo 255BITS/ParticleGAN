@@ -68,6 +68,63 @@ def test_gauge_invariance_target_detachment_and_rng_preservation():
     assert torch.equal(before, torch.random.get_rng_state())
 
 
+@pytest.mark.parametrize("kind", ["identity", "sigmoid"])
+def test_optional_diagnostics_preserve_loss_gradient_rng_and_match_canonical_force(kind):
+    a = torch.tensor([[-1.3, .2], [.7, 1.1]], dtype=torch.float64, requires_grad=True)
+    x = a.sigmoid() if kind == "sigmoid" else a
+    y = torch.tensor([[.1, .8], [.9, .2]], dtype=torch.float64)
+    prices = torch.tensor([.02, -.01], dtype=torch.float64)
+    arguments = {"kind": kind, "prelink": a if kind == "sigmoid" else None}
+    cost = bregman_cost_matrix(x, y, **arguments)
+    before = torch.get_rng_state().clone()
+    plain = generator_game_loss(cost, prices, thermal_scale=.3)
+    plain_gradient, = torch.autograd.grad(plain, a, retain_graph=True)
+    diagnostics = {}
+    observed = generator_game_loss(cost, prices, thermal_scale=.3,
+        diagnostics=diagnostics, fake=x, real=y, **arguments)
+    observed_gradient, = torch.autograd.grad(observed, a)
+    assert torch.equal(plain, observed) and torch.equal(plain_gradient, observed_gradient)
+    assert torch.equal(before, torch.get_rng_state())
+    assert all(type(value) is float for value in diagnostics.values())
+    assert diagnostics["price_min"] == pytest.approx(-.01)
+    assert diagnostics["price_max"] == pytest.approx(.02)
+    assert diagnostics["price_std"] == pytest.approx(.015)
+    assert diagnostics["canonical_thermal_force_rms"] == pytest.approx(float(observed_gradient.square().mean().sqrt()))
+    assert diagnostics["canonical_thermal_force_max"] == pytest.approx(float(observed_gradient.abs().max()))
+    assert diagnostics["canonical_force_rms"] * .3 == pytest.approx(diagnostics["canonical_thermal_force_rms"])
+    assert diagnostics["canonical_force_max"] * .3 == pytest.approx(diagnostics["canonical_thermal_force_max"])
+    assert 0 < diagnostics["used_target_fraction"] <= 1
+    assert 0 <= diagnostics["route_entropy_nats"] <= math.log(len(y))
+    assert diagnostics["output_min"] == float(x.detach().min())
+    if kind == "sigmoid":
+        assert diagnostics["prelink_min"] == -1.3
+    else:
+        assert "prelink_min" not in diagnostics
+
+
+def test_saturation_route_observer_uses_only_existing_cost_and_reports_known_force(monkeypatch):
+    import particlegan.bregman_game as mechanism
+    a = torch.full((2, 1), 40., requires_grad=True)
+    x, y = a.sigmoid(), torch.zeros_like(a)
+    cost = bregman_cost_matrix(x, y, kind="sigmoid", prelink=a)
+    def forbidden(*args, **kwargs):
+        raise AssertionError("the observer must not rebuild a cost matrix")
+    monkeypatch.setattr(mechanism, "bregman_cost_matrix", forbidden)
+    diagnostics = {}
+    loss = generator_game_loss(cost, torch.zeros(2), thermal_scale=.2,
+        diagnostics=diagnostics, fake=x, real=y, kind="sigmoid", prelink=a)
+    assert diagnostics["output_exact_endpoint_fraction"] == 1.
+    assert diagnostics["output_upper_near_saturation_fraction"] == 1.
+    assert diagnostics["output_lower_near_saturation_fraction"] == 0.
+    assert diagnostics["prelink_abs_ge16_fraction"] == 1.
+    assert diagnostics["used_target_fraction"] == .5
+    assert diagnostics["route_entropy_nats"] == 0.
+    assert diagnostics["selected_cost_mean"] == 40.
+    assert diagnostics["canonical_force_rms"] == .5
+    assert diagnostics["canonical_thermal_force_rms"] == pytest.approx(.1)
+    assert loss.requires_grad
+
+
 def _public_trainer(active=True, image=False):
     from particlegan import GANTrainer, get_recipe, init
     from lib.toy_models import SimpleMLPGenerator, SimpleMLPDiscriminator
@@ -222,6 +279,20 @@ def test_inactive_inherited_consumers_without_constructor_member_keep_original_p
     checkpoint = trainer.state_dict()
     assert "bregman_game" not in result and "bregman_output_link" not in checkpoint
     trainer.load_state_dict(checkpoint)
+
+
+@pytest.mark.parametrize("image", [False, True])
+def test_public_collect_stats_emits_scalars_without_changing_trajectory(image):
+    plain, observed = _public_trainer(image=image), _public_trainer(image=image)
+    real = _real(image)
+    plain_result = plain.step(real, collect_stats=False)
+    observed_result = observed.step(real, collect_stats=True)
+    assert "bregman_stats" not in plain_result
+    assert all(type(value) is float for value in observed_result["bregman_stats"].values())
+    assert ("prelink_min" in observed_result["bregman_stats"]) is image
+    for key, value in plain_result.items():
+        _exact(value, observed_result[key])
+    _exact(plain.state_dict(), observed.state_dict())
 
 
 def test_recipe_defaults_and_forge_ownership_admission():

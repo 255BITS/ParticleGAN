@@ -58,20 +58,78 @@ def critic_game_loss(cost, real_scores):
     return -(cost.detach() - scores[None, :]).min(1).values.mean() - scores.mean()
 
 
-def generator_game_loss(cost, real_scores, *, thermal_scale=1.):
+def generator_game_loss(cost, real_scores, *, thermal_scale=1., diagnostics=None,
+                        fake=None, real=None, kind="identity", prelink=None):
     """Semi-dual generator objective, with frozen routing prices and thermal law.
 
     Argmin indices are detached. The selected real-score subtraction affects
     the value but supplies no G gradient. At ties torch.min's deterministic
     first-index subgradient is used; no random tie-breaking is introduced.
+    An optional dictionary receives detached scalar diagnostics, reusing the
+    same cost and argmin. It needs the actual batches/link but adds no model
+    forward, cost matrix, RNG draw or backward. The returned loss is unchanged.
     """
     scores = real_scores.detach().reshape(-1)
     if cost.ndim != 2 or cost.shape[1] != len(scores):
         raise ValueError("Bregman cost/critic score dimensions differ")
     if not 0 <= thermal_scale <= 1:
         raise ValueError("Bregman thermal scale must lie in [0,1]")
-    routed = (cost - scores[None, :]).min(1).values.mean()
+    selected, indices = (cost - scores[None, :]).min(1)
+    routed = selected.mean()
+    if diagnostics is not None:
+        if not isinstance(diagnostics, dict):
+            raise TypeError("Bregman diagnostics must be a dictionary or None")
+        diagnostics.update(_generator_diagnostics(cost, scores, indices, fake, real,
+            kind=kind, prelink=prelink, thermal_scale=thermal_scale))
     return routed * thermal_scale + routed.detach() * (1 - thermal_scale)
+
+
+@torch.no_grad()
+def _generator_diagnostics(cost, scores, indices, fake, real, *, kind, prelink, thermal_scale):
+    """Observe canonical adversarial mean-loss force, not a parameter pullback.
+
+    The only target gather is n*d, never n*m*d. Sigmoid uses actual x from the
+    verified prelink capability: -dc/da=(y-x)/d. Identity uses -dc/dx with the
+    original detached real variance. Both include the G objective's 1/n.
+    """
+    if (fake is None or real is None or fake.shape[0] != cost.shape[0]
+            or real.shape[0] != cost.shape[1] or fake.shape[1:] != real.shape[1:]):
+        raise ValueError("Bregman diagnostics require the actual compatible fake/real batches")
+    x, y = fake.detach().flatten(1), real.detach().flatten(1)
+    force = (y[indices] - x) / x.numel()
+    if kind == "identity":
+        scale = (y - y.mean(0)).square().mean()
+        force = force / torch.where(scale > 0, scale, scale.new_ones(()))
+    elif kind != "sigmoid" or prelink is None or prelink.shape != fake.shape:
+        raise ValueError("Bregman sigmoid diagnostics require the actual prelink")
+    counts = torch.bincount(indices, minlength=len(scores))
+    probabilities = counts.to(dtype=x.dtype) / len(x)
+    nonzero = probabilities[probabilities > 0]
+    entropy = -(nonzero * nonzero.log()).sum()
+    force_rms, force_max = force.square().mean().sqrt(), force.abs().max()
+    entries = {
+        "price_min": scores.min(), "price_max": scores.max(),
+        "price_std": scores.std(correction=0),
+        "used_target_fraction": (counts > 0).to(dtype=x.dtype).mean(),
+        "route_entropy_nats": entropy,
+        "selected_cost_mean": cost.detach().gather(1, indices[:, None]).mean(),
+        "output_min": x.min(), "output_max": x.max(),
+        "canonical_force_rms": force_rms, "canonical_force_max": force_max,
+        "canonical_thermal_force_rms": force_rms * thermal_scale,
+        "canonical_thermal_force_max": force_max * thermal_scale,
+        "thermal_scale": x.new_tensor(thermal_scale),
+    }
+    if kind == "sigmoid":
+        a = prelink.detach()
+        entries.update({
+            "prelink_min": a.min(), "prelink_max": a.max(),
+            "prelink_abs_ge16_fraction": (a.abs() >= 16).to(dtype=x.dtype).mean(),
+            "output_lower_near_saturation_fraction": (x <= 1e-6).to(dtype=x.dtype).mean(),
+            "output_upper_near_saturation_fraction": (x >= 1-1e-6).to(dtype=x.dtype).mean(),
+            "output_exact_endpoint_fraction": ((x == 0) | (x == 1)).to(dtype=x.dtype).mean(),
+        })
+    values = torch.stack(list(entries.values())).cpu().tolist()
+    return dict(zip(entries, values))
 
 
 class OutputLink:

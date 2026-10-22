@@ -473,8 +473,11 @@ class GANTrainer:
                     loss_gan = self.loss.g_loss(fake_logits, real_logits)
                 else:
                     from .bregman_game import generator_game_loss
+                    bregman_stats = {} if collect_stats else None
                     loss_gan = generator_game_loss(bregman_link.cost(fake_g, real_g), real_logits,
-                        thermal_scale=float(self.penalty.regularizer.record._thermal_scale))
+                        thermal_scale=float(self.penalty.regularizer.record._thermal_scale),
+                        diagnostics=bregman_stats, fake=fake_g, real=real_g, kind=bregman_link.kind,
+                        prelink=getattr(fake_g, "_particlegan_prelink", None))
                 transport = (recipe.kinetic_transport_loss(fake_g, real_g)
                              if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
                 transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
@@ -535,6 +538,8 @@ class GANTrainer:
         result["step"] = self.completed_steps
         if bregman_link is not None:
             result["bregman_game"] = loss_gan.detach()
+            if collect_stats:
+                result["bregman_stats"] = bregman_stats
         if recipe.kinetic_transport_weight:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
