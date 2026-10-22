@@ -1,9 +1,9 @@
 # Temporal settling readout: running
 
-The fresh original control exactly reproduces the first round on both Gaussian
-tasks and overlap. Its retained actual update returns show **thermal scale 1
-on all 7,200 updates** in these three tasks. The three other arms are pending;
-there is no completed cross-arm repair conclusion yet.
+Both fresh controls exactly reproduce their first-round Gaussian and overlap
+runs. Their retained actual update returns show **thermal scale 1 on all
+14,400 updates** across those six cells. Mechanics and the Bregman game remain
+pending; there is no completed successor comparison yet.
 
 This is a saved-data diagnostic of the four admitted recipes. The
 [local exchangeability thermostat](README.md) failed its fixed cheap screen,
@@ -38,39 +38,66 @@ Overlap retains 24 observations and five required terminal passing checks,
 with mean error <=.15, covariance error <=.45 and normalized SW1 <=.18.
 Its endpoint and whole-curve diagnostics remain distinct.
 
-## Verified control repeat
+## Verified control repeats
 
-For Gaussian smoke, Gaussian stability and overlap, the new original control
-has exactly equal final metrics/gates, all scored metric dictionaries, all
-170 retained sample sets, final G/D/prior/EMA tensors, and both complete
-optimizer states relative to the first-round original control. Sample
+For Gaussian smoke, Gaussian stability and overlap, both fresh controls have
+exactly equal final metrics/gates, all scored metric dictionaries, all 340
+retained sample sets, final G/D/prior/EMA tensors, and both complete optimizer
+states relative to their own first-round controls. Sample
 comparisons include retained independent smoke confirmation draws and frozen
 shift controls. Source-specific state metadata hashes are excluded from
 sample equality; artifact bytes and model/optimizer tensor identities are
 verified separately. Both Gaussian data-sequence digests match as well.
 
-| Original control diagnostic | Measured |
-| --- | --- |
-| Smoke | PASS; 6/24 primary checks pass, 4 independent confirmations |
-| Stability: stationary | 6/72 pass |
-| Stability: recovery before deadline | 2/24 pass; only 1/5 deadline checks passes |
-| Stability: shifted hold | 2/24 pass |
-| Stability: frozen pre-shift control | 0/48 pass after shift |
-| Stability endpoint | Mean error .054736 sigma and width .876510 pass; KS .070319 fails |
-| Overlap | FAIL; 10/24 pass, terminal suffix 0 |
+| Diagnostic | Original control | Energy control |
+| --- | --- | --- |
+| Smoke | PASS; 6/24 primary checks pass, 4 confirmations | PASS; 8/24 primary checks pass, 6 confirmations |
+| First confirmed smoke pass | 500 | 209 |
+| Stability: stationary | 6/72 pass | 12/72 pass |
+| Stability: recovery | 2/24 pass | 4/24 pass |
+| Stability: last five by deadline | 1/5 pass: FAIL | 1/5 pass: FAIL |
+| Stability: shifted hold | 2/24 pass | 0/24 pass |
+| Frozen pre-shift control | 0/48 pass after shift | 0/48 pass after shift |
+| Stability endpoint mean error, sigma units | .054736 | .028908 |
+| Stability endpoint width ratio | .876510 | .925797 |
+| Stability endpoint KS | .070319: FAIL | .065143: FAIL |
+| Overlap passing observations | 10/24 | 20/24 |
+| Overlap longest passing run | 3 | 14 |
+| Overlap terminal suffix | 0: FAIL | 1: FAIL |
+
+Energy reaches Gaussian quality earlier and improves the final mean/width,
+but does not hold that quality. Its continuation fails KS at 104/120 checks,
+mean error at 65/120 and width at 41/120; the corresponding original counts
+are 110, 55 and 16. Failures can overlap within one observation. Energy also
+improves overlap shape: its final covariance error .150126, normalized SW1
+.052610 and mean error .040615 all pass. Nevertheless four observations fail
+translation, including one near the end, leaving only one terminal pass.
+This isolates sustained centering as its remaining overlap failure.
+
+A fixed descriptive Gaussian check removes each saved panel's own mean and
+population standard deviation, then measures empirical KS to the standard
+normal CDF. This same-panel moment-fit KS is invariant to positive location
+and scale changes, so it describes shape separately from those two moments.
+Across continuation its median is .03459 for original BISPF and .05943 for
+energy; in shifted hold the medians are .03678 and .08351. The final values
+are .03336 and .06720. Energy's better final mean/width therefore coexist
+with greater non-Gaussian shape departure. This is a descriptive empirical
+fit residual, not a calibrated normality p-value, an additive decomposition of
+target KS, or a replacement task gate. It uses the same 4096 saved samples
+per observation; no reference sample is drawn.
 
 The new trace closes the first round's sparse-telemetry limitation for this
-fresh, source-bound control. It records earned thermal scale exactly 1 for all
-1000 smoke, 5000 continuation and 1200 overlap updates. The minimum observed
-EMA residual is .080342 in smoke, .073971 in continuation and .172530 in
-overlap, each above the unchanged .020 cooler scale. This is direct evidence
-that existing cooling never activates on these runs, rather than an inference
-from a few checkpoints. It does not retroactively create missing first-round
-per-update telemetry.
+fresh, source-bound controls. Each records earned thermal scale exactly 1 for
+all 1000 smoke, 5000 continuation and 1200 overlap updates. Original minimum
+EMA residuals are .080342, .073971 and .172530 respectively; energy minima
+are .080687, .098649 and .167616. Every minimum is above the unchanged .020
+cooler scale. This directly shows that existing cooling never activates on
+these runs. It does not retroactively create missing first-round per-update
+telemetry.
 
 ## Candidate measurements pending
 
-Energy, secant mechanics and Bregman game measurements will be filled only
+Secant mechanics and Bregman game measurements will be filled only
 after their own smoke/continuation/overlap jobs complete or their own checkpoint
 prerequisites block continuation. An unexecuted blocked continuation will be
 reported as such, without substituting another recipe's checkpoint.

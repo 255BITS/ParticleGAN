@@ -29,6 +29,7 @@ ARMS = ("bispf-optimized-quintic-v1", "bispf-output-energy-v1",
         "bispf-secant-extragradient-v1", "bispf-bregman-game-v1")
 TASKS = ("gaussian1d_smoke", "gaussian1d_stability", "vector_overlap")
 CHECKED = {}
+SAMPLE_PANELS = {}
 
 
 def sha(path):
@@ -179,7 +180,8 @@ def trace(row):
             raise ValueError("update trace has a gap")
         first = step if first is None else first
         last, count = step, count + 1
-        for key in ("all", phase(row["task_id"], step)):
+        groups = ("all", phase(row["task_id"], step)) if row["task_id"] == "gaussian1d_stability" else ("all",)
+        for key in groups:
             arrays, counts = values[key], counters[key]
             counts["updates"] += 1
             for section, names in {
@@ -199,15 +201,26 @@ def trace(row):
             counts["thermal_below_one"] += thermal < 1.
             replay = item.get("generator_replay")
             if replay:
+                if replay["certificate_scope"] != "pre_protection":
+                    raise ValueError("unexpected mechanics certificate scope")
                 alphas[key][str(replay["applied_scale"])] += 1
                 counts["accepted"] += replay["accepted"]
                 counts["rejected"] += not replay["accepted"]
                 counts["actual_zero_move"] += replay["applied_l2"] == 0.
+                counts["rejected_nonzero_move"] += bool(not replay["accepted"] and replay["applied_l2"] != 0.)
                 lhs, rhs = replay["consistency_lhs"], replay["consistency_rhs"]
                 counts["accepted_consistency_violations"] += bool(replay["accepted"] and lhs is not None and lhs > rhs)
                 counts["nonzero_final_protection"] += bool(replay["protection_delta_l2"] is not None and replay["protection_delta_l2"] > 0)
                 if replay["base_proposal_l2"] > 0:
                     arrays["generator_replay.applied_over_base_norm"].append(replay["applied_l2"] / replay["base_proposal_l2"])
+            game = item.get("bregman_stats")
+            if game:
+                counts["canonical_force_nonzero"] += game["canonical_force_rms"] > 0.
+                counts["canonical_thermal_force_nonzero"] += game["canonical_thermal_force_rms"] > 0.
+                counts["game_thermal_scale_mismatch"] += not math.isclose(game["thermal_scale"], thermal, rel_tol=1e-6, abs_tol=1e-12)
+                counts["canonical_thermal_force_mismatch"] += not math.isclose(
+                    game["canonical_thermal_force_rms"], game["canonical_force_rms"] * thermal,
+                    rel_tol=1e-6, abs_tol=1e-12)
     if count != receipt["rows"]:
         raise ValueError("update trace row count differs")
     expected_first = 1001 if row["task_id"] == "gaussian1d_stability" else 1
@@ -219,12 +232,48 @@ def trace(row):
                         for key, arrays in values.items()})
 
 
-def saved_samples(job, row):
+def sample_panels(job, row):
     receipt = row["evidence"]["saved_observer_outputs"]
     base = Path(row["evidence"].get("artifact_root") or job["attempts"][-1]["path"])
-    data = torch.load(verify(base / receipt["path"], receipt["sha256"]), map_location="cpu", weights_only=False)
+    path = verify(base / receipt["path"], receipt["sha256"])
+    if str(path) not in SAMPLE_PANELS:
+        SAMPLE_PANELS[str(path)] = torch.load(path, map_location="cpu", weights_only=False)
+    return SAMPLE_PANELS[str(path)]
+
+
+def saved_samples(job, row):
+    data = sample_panels(job, row)
     return {item["step"]: tree_hash({k: item[k] for k in ("step", "samples", "confirmation_samples", "frozen_samples") if k in item})
             for item in data}
+
+
+def gaussian_shape(job, row):
+    """Descriptive empirical KS to a same-panel moment-fit Gaussian, no gate."""
+    scored = {r["step"] for r in row["evidence"]["observations"]}
+    values = defaultdict(list)
+    fitted = []
+    for item in sample_panels(job, row):
+        if item["step"] not in scored:
+            continue
+        x = item["samples"].double().flatten().sort().values
+        mean, std = x.mean(), x.std(correction=0)
+        ks = None
+        if bool(std > 0):
+            cdf = torch.special.ndtr((x - mean) / std)
+            left = torch.arange(len(x), dtype=torch.float64) / len(x)
+            ks = float(torch.maximum((cdf - left).max(), (left + 1 / len(x) - cdf).max()))
+        fitted.append(dict(step=item["step"], same_panel_mean=float(mean), same_panel_std=float(std),
+                           fitted_gaussian_ks=ks))
+        groups = ("all", phase(row["task_id"], item["step"])) if row["task_id"] == "gaussian1d_stability" else ("all",)
+        for group in groups:
+            if ks is not None:
+                values[group].append(ks)
+    if len(fitted) != len(scored):
+        raise ValueError("saved Gaussian panels do not cover every scored observation")
+    return dict(scope="descriptive same-panel mean/std fit; not a calibrated normality p-value or replacement task gate",
+                formula="sup_x |F_empirical(x)-Phi((x-sample_mean)/sample_std_population)|",
+                scored_panels=len(fitted), degenerate_panels=sum(v["fitted_gaussian_ks"] is None for v in fitted),
+                endpoint=fitted[-1], phases={k: summary(v) for k, v in values.items()})
 
 
 def final_state(row):
@@ -290,6 +339,8 @@ def main():
                     pending.append([arm, task])
             elif row["gate_status"] in ("PASS", "FAIL"):
                 cells[task] = dict(trajectory=trajectory(row, request["tasks"][task]), update_trace=trace(row))
+                if task.startswith("gaussian1d_"):
+                    cells[task]["gaussian_shape"] = gaussian_shape(job, row)
                 if arm in ARMS[:2]:
                     old_job, old_row = cell(old, previous[arm][0], task)
                     result["repeated_controls"].setdefault(arm, {})[task] = parity(old_job, old_row, job, row)
