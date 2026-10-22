@@ -1,10 +1,12 @@
-# Temporal settling readout: running
+# Temporal settling readout: completed twelve-cell diagnostic
 
 Both fresh controls exactly reproduce their first-round Gaussian and overlap
-runs. Mechanics repairs overlap's declared terminal window and improves
-Gaussian acquisition, shape and pass frequency, while Gaussian sustained
-settling still fails. The Bregman game remains pending; the cross-arm readout
-is incomplete.
+runs. Mechanics and the Bregman game both repair overlap's declared terminal
+window, while every recipe still fails Gaussian sustained settling. Both new
+mechanisms follow the Gaussian mean shift quickly and improve its shape;
+mechanics also improves pass frequency substantially. None of these gains
+establishes sustained Gaussian quality. The existing thermal cooler remains
+inactive on every retained update across all twelve cells.
 
 This is a saved-data diagnostic of the four admitted recipes. The
 [local exchangeability thermostat](README.md) failed its fixed cheap screen,
@@ -13,6 +15,10 @@ four paid arms replaces the thermal observer. The parent
 [comparison](../README.md) owns the complete fifteen-task results, certificate,
 stream and paid-cost audits; this report does not add a leaderboard or confer
 qualification.
+
+The [compact measured result](temporal-results.json) binds all twelve completed
+cells and exact immutable queue inputs. It does not claim completion of the
+parent campaign's remaining native/image/control cells.
 
 ## Frozen scope and temporal criteria
 
@@ -87,7 +93,7 @@ fit residual, not a calibrated normality p-value, an additive decomposition of
 target KS, or a replacement task gate. It uses the same 4096 saved samples
 per observation; no reference sample is drawn.
 
-The new trace closes the first round's sparse-telemetry limitation for this
+The new trace closes the first round's sparse-telemetry limitation for these
 fresh, source-bound controls. Each records earned thermal scale exactly 1 for
 all 1000 smoke, 5000 continuation and 1200 overlap updates. Original minimum
 EMA residuals are .080342, .073971 and .172530 respectively; energy minima
@@ -147,12 +153,49 @@ Thermal scale is always 1, with minimum residual .164169. The overlap repair
 therefore occurs with active finite-step correction while the original
 thermal observer remains hot.
 
-## Remaining candidate measurements pending
+## Bregman game: shape and fast response without stable centering
 
-Bregman game measurements will be filled only
-after their own smoke/continuation/overlap jobs complete or their own checkpoint
-prerequisites block continuation. An unexecuted blocked continuation will be
-reported as such, without substituting another recipe's checkpoint.
+Game smoke passes with five independently confirmed passing states, first at
+167, while its endpoint fails KS and mean error. Its own continuation passes
+**10/72 stationary, 4/24 recovery and 2/24 shifted hold** checks. It first
+recovers all bounds at 4042, matching mechanics' 42-update response, but
+the deadline still passes only 1/5 checks. No passing run exceeds two checks;
+the final state fails KS (.110321) and mean error (.231946 sigma), while
+width .913882 passes. KS fails at 104/120 observations, mean error at 55 and
+width at nine. The original stability gate remains **FAIL**.
+
+The same-panel moment-fit shape KS median is .02340 across continuation,
+.01723 in shifted hold and .01299 at the endpoint. These are much closer
+to mechanics' .02124, .01656 and .01087 than to energy's larger shape
+residuals. A nearly Gaussian shape can still move away from the target mean.
+The shape diagnostic does not turn a failed target-law gate into a pass or
+identify the cause of that motion.
+
+All 6000 game smoke and continuation updates have thermal scale exactly 1
+and nonzero canonical and thermally scaled force, with no recorded scaling
+mismatch. During continuation the canonical force RMS has median .00079480
+and range [.00023809, .00959807]; the selected minibatch cost median is
+.0012881, target-routing fraction median .53906 and price standard deviation
+median .010140. Thus the game is active and its small selected cost coexists
+with missed global distributional bounds. A selected-target minibatch cost
+does not enforce the full target marginal or certify temporal stability.
+
+Game overlap passes with **21/24 observations and nine consecutive terminal
+passes at 800–1200**. Translation excursions at 200, 700 and 750 remain
+visible; every covariance and SW1 check passes. Its endpoint covariance error
+.259825, mean error .059326 and normalized SW1 .080468 pass. This is a
+scoped terminal-window repair relative to original BISPF's zero terminal
+passes, distinct from its failed Gaussian centering and retention.
+
+All 1200 overlap updates have nonzero canonical force, thermal scale 1 and
+no force-scaling mismatch. The median force RMS is .0012036, selected cost
+.017110 and target-routing fraction .52344. These batch/output-coordinate
+quantities do not measure final parameter movement or prove uniform quality
+across the trajectory. The game has no observed cold update in its combined
+7200 smoke, continuation and overlap steps; minimum EMA residuals are
+.080029, .073429 and .162494 respectively.
+
+## What the return diagnostics can establish
 
 The reducer retains phase-wise actual thermal/residual ranges, mechanics
 acceptance and dyadic scale histograms, trial counts, raw normalized proposal
@@ -168,6 +211,40 @@ link; they include batch/dimension averaging. They are not parameter-space
 gradients or final finite optimizer movement. A nonzero force alone does not
 establish useful settling or support acquisition.
 
+The fixed temporal diagnostics compare acquisition, retention and shape:
+
+| Fixed diagnostic | Original | Energy | Mechanics | Bregman game |
+| --- | --- | --- | --- | --- |
+| First confirmed smoke pass | 500 | 209 | 125 | 167 |
+| Stationary full passes | 6/72 | 12/72 | 40/72 | 10/72 |
+| Recovery full passes | 2/24 | 4/24 | 11/24 | 4/24 |
+| First post-shift full pass | 4709 | 4334 | 4042 | 4042 |
+| Deadline last-five passes | 1/5 | 1/5 | 1/5 | 1/5 |
+| Shifted-hold full passes | 2/24 | 0/24 | 12/24 | 2/24 |
+| Stability endpoint passes all bounds | No | No | Yes | No |
+| Sustained stability gate | FAIL | FAIL | FAIL | FAIL |
+| Hold moment-fit shape KS median | .03678 | .08351 | .01656 | .01723 |
+| Overlap full passes | 10/24 | 20/24 | 22/24 | 21/24 |
+| Overlap longest passing run | 3 | 14 | 10 | 9 |
+| Overlap terminal suffix | 0 | 1 | 5 | 9 |
+| Overlap declared gate | FAIL | FAIL | PASS | PASS |
+
+All four recipes have exactly 7200 retained updates across these three tasks,
+and all **28,800** earned thermal scales are exactly 1. This is direct
+source-bound telemetry, rather than an inference from sparse checkpoints.
+No inactive-cooler result shows that a different observer would be safe:
+the local exchangeability proposal failed before training, and global
+energy-U controls previously cooled missing support prematurely.
+
+Keep mechanics' overlap repair and Gaussian progress as measured positives,
+while retaining every temporal failure. A future joint-game or noise-aware
+settling mechanism is a hypothesis requiring its own support and finite-sample
+controls, not a conclusion from the successful frozen-critic secant trials.
+No extra training or successor follows from this readout. The rejected local
+exchangeability observer and the earlier raw-NN/energy-U negative controls
+remain constraints on that future question; changing a cooling threshold
+does not resolve their practical-equivalence and missing-support failures.
+
 ## Reproduce without training
 
 [analyze_temporal.py](analyze_temporal.py) verifies saved artifact SHA256s,
@@ -182,16 +259,35 @@ Every invocation archives the exact two queue-state inputs under the raw
 result binds those immutable paths, sizes and SHA256s. A live queue file is
 never the final evidence binding. Reproduction selects the retained inputs
 with `--state-snapshot` and `--previous-state-snapshot`; it does not depend on
-later queue/readout lifecycle changes. The final completed result will provide
-the exact snapshot paths in the command below.
+later queue/readout lifecycle changes. The retained round-two input is
+21,958,924 bytes with SHA256
+`4402bf5f1950a63cf4e0607cfbfbcd8ede3726c2fb4856f77343af3b7310277a`;
+the round-one input is 24,634,480 bytes with SHA256
+`53d44a53c8239a9570c4948900d50bbad273b99fdfa85419d2e601b253bca139`.
 
 ```sh
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -u \
   reports/forge/first-principles-round2-20261022/settling/analyze_temporal.py \
+  --state-snapshot /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/inputs/round2-state-4402bf5f1950a63cf4e0607cfbfbcd8ede3726c2fb4856f77343af3b7310277a.json \
+  --previous-state-snapshot /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/inputs/round1-state-53d44a53c8239a9570c4948900d50bbad273b99fdfa85419d2e601b253bca139.json \
   --output /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/temporal-reproduction.json \
   > /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/temporal-reproduction.log 2>&1
 tail -F /mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/temporal-reproduction.log
 ```
+
+The completed reduction consumed **1.225 process CPU seconds** inside the
+reducer, or **2.197** including Python/Torch imports. A second reduction from
+the exact archived inputs reproduces every numerical and provenance field,
+excluding only the two measured CPU timers. Added optimizer updates, model
+forwards, sampling draws and GPU spend are zero. Neither this saved-state
+reduction nor the rejected thermostat is another scientific training run.
+
+| Retained artifact under the raw `settling/` directory | SHA256 |
+| --- | --- |
+| `temporal-final.json`, identical to committed `temporal-results.json` | `87a689335faf626058f52b279a1a6a27dd189a0f5cd1404ad62134b660a65afb` |
+| `temporal-final-reproduction.json` | `04885ea66c31d33d5f8cdd4f8a331323eb3561474a64581d63d8be4a4c706e9a` |
+| `temporal-final.log` | `feaa674ca6e538e7e7d69dcb1fd43c0cc09affb7428efb84aac27014cad28d54` |
+| `temporal-final-reproduction.log` | `270acb023b583a6b3bdba9ee0905c102bddec39fe182dcc1f9476b926b28e7a1` |
 
 The default reducer refuses pending cells. `--allow-incomplete` produces an
 explicitly incomplete intermediate result while the campaign runs; it does

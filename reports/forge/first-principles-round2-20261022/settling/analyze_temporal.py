@@ -333,7 +333,9 @@ def main():
     reqs, previous = requests(state), requests(old)
     result = dict(schema_version=1, scope="saved_trajectories_and_actual_update_returns_only", source_commit=SOURCE,
                   source_digest=DIGEST, tasks=list(TASKS), arms={}, repeated_controls={}, sampling_draws_added=0,
-                  optimizer_updates_added=0, model_forwards_added=0, qualification_input=False)
+                  optimizer_updates_added=0, model_forwards_added=0, qualification_input=False,
+                  analysis_source=dict(path="reports/forge/first-principles-round2-20261022/settling/analyze_temporal.py",
+                                       sha256=sha(__file__)))
     pending = []
     for arm in ARMS:
         request_id, request = reqs[arm]
