@@ -1260,6 +1260,15 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     if model_diagnostics:
         lines += ["Saved-state investigations: " + "; ".join(model_diagnostics)
                   + ". These diagnostics add no training, qualification or replacement for the recorded failures.", ""]
+    bispf_diagnostics = []
+    for directory, label in (("three-theme-repairs-20261022", "three repair hypotheses"),
+                             ("first-principles-round2-20261022", "first-principles successors")):
+        readout = f"reports/forge/{directory}/README.md"
+        if (root / readout).is_file():
+            bispf_diagnostics.append(link(root, page, label, readout))
+    if bispf_diagnostics:
+        lines += ["BISPF matched repair comparisons: " + "; ".join(bispf_diagnostics)
+                  + ". These separate diagnostic cohorts preserve all original failures and qualification.", ""]
     from .scaling_publication import performance_section
     lines += performance_section(root, publication, page)
     if any(research.values()):
