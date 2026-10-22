@@ -1433,7 +1433,7 @@ caller.
 | --- | --- |
 | `recipe.make_prior(**kwargs)` | Prior selected by `prior_kind`, tables drawn at random ([initialize](#initializing-priors) for R2) |
 | `recipe.make_loss()` | `GANLoss(recipe.loss, labels=recipe.loss_labels)` (default non-saturating logistic) |
-| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
+| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, separate_encoder_groups=False, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Recipe-selected optimizer for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, modules=None, latent_table=None, direct_particles=None, **adam_kwargs)` | Recipe-selected optimizer for generator-side params; `modules` binds kernel semantics alongside custom groups |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
@@ -1454,6 +1454,12 @@ The previous K3P critic replays through
 
 The following loop and Adam controller descriptions use the explicit KA2 recipe.
 The default optimized BISPF recipe also uses the protected-backward contract below.
+
+When binding G and E to `UpdatePolicy`, pass `separate_encoder_groups=True`.
+Native Adam then uses distinct homogeneous generator and encoder groups with
+identical network settings. Parameter updates and per-parameter Adam state are
+unchanged; the default retains the legacy combined-group checkpoint layout.
+Normalized optimizer families already separate these roles.
 
 ```python
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))

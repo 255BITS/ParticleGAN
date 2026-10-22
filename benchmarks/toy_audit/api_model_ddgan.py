@@ -279,7 +279,8 @@ class DDGANFixture:
         self.schedule = DDGAN(ALPHA_BAR, device=self.device)
         self.recipe.apply_prior_policy(self.prior)
         self.opt_g, self.opt_d = self.recipe.make_optimizers(self.G, self.D, self.prior,
-            encoder=self.E, ema_critic=None if self.recipe.effective_critic_formulation == "bispf" else deepcopy(self.D))
+            encoder=self.E, separate_encoder_groups=self.E is not None,
+            ema_critic=None if self.recipe.effective_critic_formulation == "bispf" else deepcopy(self.D))
         self.base_rates = [[group["lr"] for group in optimizer.param_groups] for optimizer in (self.opt_g, self.opt_d)]
         self.loss = self.recipe.make_loss()
         self.prior_regularizer = self.recipe.make_prior_regularizer(prior=self.prior)

@@ -1101,7 +1101,7 @@ class Recipe:
         return prior
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
-                        require_latent_damping=False, **adam_kwargs):
+                        require_latent_damping=False, separate_encoder_groups=False, **adam_kwargs):
         """Return ``(opt_g, opt_d)`` selected by ``optimizer_family``.
 
         ``opt_g`` covers G + optional E + prior (``make_generator_optimizer``;
@@ -1119,6 +1119,12 @@ class Recipe:
         multiplier of ``learning_rate_scales`` and everything else by the
         network one.
 
+        ``separate_encoder_groups=True`` gives G and E distinct homogeneous
+        groups, with the same network rate and optimizer settings. Use this
+        when binding both modules to ``UpdatePolicy``. The default preserves
+        legacy combined G/E groups and optimizer checkpoint layouts. Normalized
+        families already separate the two roles.
+
         Parameters are used as supplied; initialize fresh networks first (e.g.
         ``particlegan.init.deterministic_orthogonal_``).
 
@@ -1133,6 +1139,8 @@ class Recipe:
         groups and ``lr`` for normalized groups (the same role multipliers).
         """
         from .capabilities import prior_mechanisms
+        if type(separate_encoder_groups) is not bool:
+            raise TypeError("separate_encoder_groups must be a boolean")
         if prior is not None:
             self._validate_frozen_prior_ownership(prior, generator, discriminator, encoder, ema_critic)
             self.apply_prior_policy(prior)
@@ -1150,20 +1158,20 @@ class Recipe:
                         g_params.append(p)
                         role_params.append(p)
                         seen.add(id(p))
-            if normalized and role_params:
+            if (normalized or separate_encoder_groups) and role_params:
                 role_groups = [{"params": role_params, "lr": self.lr, "role": role}]
-                if self.optimizer_convolution == "per_offset":
+                if normalized and self.optimizer_convolution == "per_offset":
                     from .optim.dualnorm import convolution_parameter_groups
                     role_groups = convolution_parameter_groups(role_groups, [generator, encoder],
                                                                family=self.optimizer_family,
                                                                convolution_rule=self.optimizer_convolution_rule)
                 groups.extend(role_groups)
-        if g_params and not normalized:
+        if g_params and not (normalized or separate_encoder_groups):
             groups.append({"params": g_params, "lr": self.lr})
         if prior_params:
             groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
                            "betas": self.prior_betas if self.prior_betas is not None else self.betas,
-                           **({"role": "prior"} if normalized else {}),
+                           **({"role": "prior"} if normalized or separate_encoder_groups else {}),
                            **({"eps": self.prior_eps} if self.prior_eps is not None else {})})
         mechanisms = prior_mechanisms(prior,
             latent_damping_max_rate=self.latent_damping_max_rate if self.prior_update == "learned" else 0.,

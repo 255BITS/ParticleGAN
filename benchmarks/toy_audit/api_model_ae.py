@@ -181,7 +181,8 @@ class AEFixture:
                 init.deterministic_orthogonal_(model, seed=seed + offset)
         ema = None if self.recipe.effective_critic_formulation == "bispf" else deepcopy(self.D)
         self.opt_g, self.opt_d = self.recipe.make_optimizers(self.G, self.D, self.prior, encoder=self.E,
-                                                           ema_critic=ema, foreach=False, fused=False)
+                                                           ema_critic=ema, separate_encoder_groups=True,
+                                                           foreach=False, fused=False)
         self.loss = self.recipe.make_loss()
         self.penalty = self.recipe.make_critic_penalty(self.opt_d, collect_stats=True)
         self.regularizer = self.recipe.make_prior_regularizer(prior=self.prior)

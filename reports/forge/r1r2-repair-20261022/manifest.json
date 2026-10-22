@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "r1r2-repair-20261022",
-  "status": "ready_source_not_yet_enqueued",
+  "status": "infrastructure_repair_checks_before_v2_admission",
   "campaign": {
     "id": "r1r2-repair-20261022",
     "candidate_budget_seconds": 5220,
@@ -12,17 +12,17 @@
     {
       "role": "control",
       "candidate": "r1r2-repair-control-20261022",
-      "study": "r1r2-repair-control-20261022-tier1"
+      "study": "r1r2-repair-control-20261022-tier1-infra-v2"
     },
     {
       "role": "r1only",
       "candidate": "r1r2-repair-r1only-20261022",
-      "study": "r1r2-repair-r1only-20261022-tier1"
+      "study": "r1r2-repair-r1only-20261022-tier1-infra-v2"
     },
     {
       "role": "r1cycle",
       "candidate": "r1r2-repair-r1cycle-20261022",
-      "study": "r1r2-repair-r1cycle-20261022-tier1"
+      "study": "r1r2-repair-r1cycle-20261022-tier1-infra-v2"
     }
   ],
   "pending_roles": [],
@@ -38,5 +38,7 @@
   "queue_root": "/mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/queue",
   "scientific_python_executable": "/usr/bin/python",
   "old_campaign_unchanged": true,
-  "qualification_or_default_adoption": false
+  "qualification_or_default_adoption": false,
+  "original_source_interruption": "reports/forge/r1r2-repair-20261022/v1-infrastructure-interruption.json",
+  "original_unique_paid_seconds": 384.25248876283877
 }

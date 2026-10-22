@@ -1,0 +1,750 @@
+{
+  "campaign": "r1r2-repair-20261022",
+  "campaign_budget": {
+    "budget_seconds": 24000,
+    "candidate_budget_seconds": 5220,
+    "id": "r1r2-repair-20261022"
+  },
+  "comparisons": [],
+  "generated_leaderboard": false,
+  "interpretation": "Existing certified verdicts only. Sources, recipes, checkpoint parents and physical charges remain distinct. UNKNOWN, cancelled, BLOCKED and INCOMPLETE are not scientific FAILs.",
+  "physical_attempt_count": 0,
+  "physical_attempts": {},
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "source_separated_original_campaign_results",
+  "source_cohorts": {
+    "e481b63224fc2d8cf77b136ab54f06421f7ac0967e47509a63f95cfa42733464": {
+      "requests": [
+        {
+          "candidate": "r1r2-repair-r1cycle-20261022",
+          "candidate_revision": "218d4fa55f56749b270825b3dcac565adb5da60870e771d9782c05d8d556eefe",
+          "global_recipe": {
+            "adam_variant": "pytorch",
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "amsgrad": true,
+            "beta2_anneal_end": 0.2,
+            "beta2_end": null,
+            "betas": [
+              0.5,
+              0.99
+            ],
+            "birth_death_backend": "knn",
+            "birth_death_cells": 64,
+            "birth_death_chunk": 256,
+            "birth_death_feature_scale": "none",
+            "birth_death_isolation": false,
+            "birth_death_metric_rank": 8,
+            "birth_death_parent_policy": "real_anchor",
+            "birth_death_space": "data",
+            "conditioning": "scalar",
+            "constraint_geometry_mode": "none",
+            "continuous_policy": null,
+            "critic_formulation": "k3p",
+            "critic_payoff_damping": true,
+            "critic_r1_real": true,
+            "critic_step_mode": "none",
+            "d_betas": null,
+            "d_eps": null,
+            "d_guard_min_steps": 200,
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.0,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "direct_particle_gain": false,
+            "distance_reduction": "sum",
+            "ema_decay": 0.0,
+            "encoder_mode": "none",
+            "eps": 1e-08,
+            "input_noise_anneal_end": 0.1,
+            "input_noise_std": 0.0,
+            "joint_reconstruction_weight": 1.0,
+            "kinetic_transport_local_weight": 0.0,
+            "kinetic_transport_projections": 32,
+            "kinetic_transport_weight": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "loss_labels": [
+              0.0,
+              1.0,
+              1.0
+            ],
+            "lr": 0.0085,
+            "lr_anneal_start": 0.2,
+            "lr_control": "mobility",
+            "lr_decay_rate": 0.96,
+            "lr_decay_staircase": false,
+            "lr_decay_steps": 50000,
+            "lr_floor": 1.0,
+            "lr_schedule": "constant",
+            "model": "gan",
+            "name": "r3gan-stacked-training-toy-v1",
+            "network_lr_floor": 1.0,
+            "network_lr_horizon_cap": null,
+            "num_classes": null,
+            "observation_sigma": 0.03,
+            "optimizer_adam_lr": null,
+            "optimizer_convolution": "none",
+            "optimizer_family": "adam",
+            "optimizer_momentum": 0.0,
+            "optimizer_smoothing": 0.0,
+            "optimizer_svd_backend": "native",
+            "output_noise_mode": "fixed",
+            "output_noise_std": 0.0,
+            "output_noise_warmup": 0.2,
+            "particle_birth_death": false,
+            "prior_betas": [
+              0.0,
+              0.99
+            ],
+            "prior_eps": null,
+            "prior_l2": 0.0,
+            "prior_lr_mult": 1.0,
+            "prior_reg": 0.0,
+            "prior_reg_eps": 0.0001,
+            "prior_reg_target_std": 1.0,
+            "prior_regularizer": "vicreg",
+            "prior_update": "learned",
+            "reconstruction_weight": 1.0,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "a_r1r2",
+            "reg_coeff": 0.1,
+            "reg_coeff_anneal_end": 0.2,
+            "reg_coeff_end": null,
+            "reg_every": 1,
+            "reg_fake_weight": 0.0,
+            "reg_kappa": 1.0,
+            "reg_real_weight": 1.0,
+            "reopen_anchor": "hold",
+            "reopen_guard": null,
+            "reopen_signal": "data",
+            "routing_temperature": 0.25,
+            "row_evidence_exclude": true,
+            "row_evidence_gate": false,
+            "row_evidence_hold": true,
+            "row_evidence_hot": true,
+            "row_evidence_null": "theory",
+            "row_policy": "independent",
+            "serve_average": 0.0,
+            "table_release_rule": "any",
+            "ucd_target": "class",
+            "ucd_weight": 0.02
+          },
+          "reason": "cancelled by request",
+          "request_id": "727f034dbde120a51dced4d2",
+          "role": "r1cycle",
+          "status": "cancelled",
+          "study": "r1r2-repair-r1cycle-20261022-tier1",
+          "view_revision": 14
+        },
+        {
+          "candidate": "r1r2-repair-control-20261022",
+          "candidate_revision": "6e6d9b27bc5d44cfba28bf159016418b50c26b71235f733afe85c12f088fd414",
+          "global_recipe": {
+            "adam_variant": "pytorch",
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "amsgrad": true,
+            "beta2_anneal_end": 0.2,
+            "beta2_end": null,
+            "betas": [
+              0.5,
+              0.99
+            ],
+            "birth_death_backend": "knn",
+            "birth_death_cells": 64,
+            "birth_death_chunk": 256,
+            "birth_death_feature_scale": "none",
+            "birth_death_isolation": false,
+            "birth_death_metric_rank": 8,
+            "birth_death_parent_policy": "real_anchor",
+            "birth_death_space": "data",
+            "conditioning": "scalar",
+            "constraint_geometry_mode": "none",
+            "continuous_policy": null,
+            "critic_formulation": "k3p",
+            "critic_payoff_damping": true,
+            "critic_r1_real": true,
+            "critic_step_mode": "none",
+            "d_betas": null,
+            "d_eps": null,
+            "d_guard_min_steps": 200,
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.0,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "direct_particle_gain": false,
+            "distance_reduction": "sum",
+            "ema_decay": 0.0,
+            "encoder_mode": "none",
+            "eps": 1e-08,
+            "input_noise_anneal_end": 0.1,
+            "input_noise_std": 0.0,
+            "kinetic_transport_local_weight": 0.0,
+            "kinetic_transport_projections": 32,
+            "kinetic_transport_weight": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "loss_labels": [
+              0.0,
+              1.0,
+              1.0
+            ],
+            "lr": 0.0085,
+            "lr_anneal_start": 0.2,
+            "lr_control": "mobility",
+            "lr_decay_rate": 0.96,
+            "lr_decay_staircase": false,
+            "lr_decay_steps": 50000,
+            "lr_floor": 1.0,
+            "lr_schedule": "constant",
+            "model": "gan",
+            "name": "r3gan-stacked-training-toy-v1",
+            "network_lr_floor": 1.0,
+            "network_lr_horizon_cap": null,
+            "num_classes": null,
+            "observation_sigma": 0.03,
+            "optimizer_adam_lr": null,
+            "optimizer_convolution": "none",
+            "optimizer_family": "adam",
+            "optimizer_momentum": 0.0,
+            "optimizer_smoothing": 0.0,
+            "optimizer_svd_backend": "native",
+            "output_noise_mode": "fixed",
+            "output_noise_std": 0.0,
+            "output_noise_warmup": 0.2,
+            "particle_birth_death": false,
+            "prior_betas": [
+              0.0,
+              0.99
+            ],
+            "prior_eps": null,
+            "prior_l2": 0.0,
+            "prior_lr_mult": 1.0,
+            "prior_reg": 0.0,
+            "prior_reg_eps": 0.0001,
+            "prior_reg_target_std": 1.0,
+            "prior_regularizer": "vicreg",
+            "prior_update": "learned",
+            "reconstruction_weight": 1.0,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "a_r1r2",
+            "reg_coeff": 0.1,
+            "reg_coeff_anneal_end": 0.2,
+            "reg_coeff_end": null,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "reopen_anchor": "hold",
+            "reopen_guard": null,
+            "reopen_signal": "data",
+            "routing_temperature": 0.25,
+            "row_evidence_exclude": true,
+            "row_evidence_gate": false,
+            "row_evidence_hold": true,
+            "row_evidence_hot": true,
+            "row_evidence_null": "theory",
+            "row_policy": "independent",
+            "serve_average": 0.0,
+            "table_release_rule": "any",
+            "ucd_target": "class",
+            "ucd_weight": 0.02
+          },
+          "reason": "cancelled by request",
+          "request_id": "e33e0d9c635683a45ed4def6",
+          "role": "control",
+          "status": "cancelled",
+          "study": "r1r2-repair-control-20261022-tier1",
+          "view_revision": 14
+        },
+        {
+          "candidate": "r1r2-repair-r1only-20261022",
+          "candidate_revision": "20b184cd8114c98b653a6e3ce2ca3366a779aa8b78d3161551e0e34d8e114462",
+          "global_recipe": {
+            "adam_variant": "pytorch",
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "amsgrad": true,
+            "beta2_anneal_end": 0.2,
+            "beta2_end": null,
+            "betas": [
+              0.5,
+              0.99
+            ],
+            "birth_death_backend": "knn",
+            "birth_death_cells": 64,
+            "birth_death_chunk": 256,
+            "birth_death_feature_scale": "none",
+            "birth_death_isolation": false,
+            "birth_death_metric_rank": 8,
+            "birth_death_parent_policy": "real_anchor",
+            "birth_death_space": "data",
+            "conditioning": "scalar",
+            "constraint_geometry_mode": "none",
+            "continuous_policy": null,
+            "critic_formulation": "k3p",
+            "critic_payoff_damping": true,
+            "critic_r1_real": true,
+            "critic_step_mode": "none",
+            "d_betas": null,
+            "d_eps": null,
+            "d_guard_min_steps": 200,
+            "d_guard_ratio": 0.0,
+            "d_lr_mult": 1.0,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "direct_particle_gain": false,
+            "distance_reduction": "sum",
+            "ema_decay": 0.0,
+            "encoder_mode": "none",
+            "eps": 1e-08,
+            "input_noise_anneal_end": 0.1,
+            "input_noise_std": 0.0,
+            "kinetic_transport_local_weight": 0.0,
+            "kinetic_transport_projections": 32,
+            "kinetic_transport_weight": 0.0,
+            "latent_damping_max_rate": 0.0,
+            "loss": "non_saturating",
+            "loss_labels": [
+              0.0,
+              1.0,
+              1.0
+            ],
+            "lr": 0.0085,
+            "lr_anneal_start": 0.2,
+            "lr_control": "mobility",
+            "lr_decay_rate": 0.96,
+            "lr_decay_staircase": false,
+            "lr_decay_steps": 50000,
+            "lr_floor": 1.0,
+            "lr_schedule": "constant",
+            "model": "gan",
+            "name": "r3gan-stacked-training-toy-v1",
+            "network_lr_floor": 1.0,
+            "network_lr_horizon_cap": null,
+            "num_classes": null,
+            "observation_sigma": 0.03,
+            "optimizer_adam_lr": null,
+            "optimizer_convolution": "none",
+            "optimizer_family": "adam",
+            "optimizer_momentum": 0.0,
+            "optimizer_smoothing": 0.0,
+            "optimizer_svd_backend": "native",
+            "output_noise_mode": "fixed",
+            "output_noise_std": 0.0,
+            "output_noise_warmup": 0.2,
+            "particle_birth_death": false,
+            "prior_betas": [
+              0.0,
+              0.99
+            ],
+            "prior_eps": null,
+            "prior_l2": 0.0,
+            "prior_lr_mult": 1.0,
+            "prior_reg": 0.0,
+            "prior_reg_eps": 0.0001,
+            "prior_reg_target_std": 1.0,
+            "prior_regularizer": "vicreg",
+            "prior_update": "learned",
+            "reconstruction_weight": 1.0,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 0.0,
+            "reg_arm": "a_r1r2",
+            "reg_coeff": 0.1,
+            "reg_coeff_anneal_end": 0.2,
+            "reg_coeff_end": null,
+            "reg_every": 1,
+            "reg_fake_weight": 0.0,
+            "reg_kappa": 1.0,
+            "reg_real_weight": 1.0,
+            "reopen_anchor": "hold",
+            "reopen_guard": null,
+            "reopen_signal": "data",
+            "routing_temperature": 0.25,
+            "row_evidence_exclude": true,
+            "row_evidence_gate": false,
+            "row_evidence_hold": true,
+            "row_evidence_hot": true,
+            "row_evidence_null": "theory",
+            "row_policy": "independent",
+            "serve_average": 0.0,
+            "table_release_rule": "any",
+            "ucd_target": "class",
+            "ucd_weight": 0.02
+          },
+          "reason": "cancelled by request",
+          "request_id": "f218095d90b89024c66c0bb6",
+          "role": "r1only",
+          "status": "cancelled",
+          "study": "r1r2-repair-r1only-20261022-tier1",
+          "view_revision": 14
+        }
+      ],
+      "roles": [
+        {
+          "counts": {
+            "UNKNOWN": 13
+          },
+          "role": "r1cycle",
+          "tasks": [
+            {
+              "importance": "required",
+              "order": 0,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "gaussian1d_smoke"
+            },
+            {
+              "importance": "required",
+              "order": 1,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "two_pole"
+            },
+            {
+              "importance": "required",
+              "order": 2,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "unused_token_hold"
+            },
+            {
+              "importance": "required",
+              "order": 3,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "ae_gan_hold"
+            },
+            {
+              "importance": "required",
+              "order": 4,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "ring16_acquisition"
+            },
+            {
+              "importance": "required",
+              "order": 5,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "five_word_joint_smoke"
+            },
+            {
+              "importance": "required",
+              "order": 6,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "zero_tanh_smoke"
+            },
+            {
+              "importance": "diagnostic",
+              "order": 100,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "clockfree_audit_measurement_v1"
+            },
+            {
+              "importance": "required",
+              "order": 7,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_ddgan_gaussian_chain"
+            },
+            {
+              "importance": "required",
+              "order": 8,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_gan_multimodal"
+            },
+            {
+              "importance": "required",
+              "order": 9,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_reconstruction"
+            },
+            {
+              "importance": "required",
+              "order": 10,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ddgan_gaussian_chain"
+            },
+            {
+              "importance": "required",
+              "order": 11,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_vae_categorical"
+            },
+            {
+              "importance": "required",
+              "order": 12,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_vae_hard"
+            }
+          ]
+        },
+        {
+          "counts": {
+            "UNKNOWN": 13
+          },
+          "role": "control",
+          "tasks": [
+            {
+              "importance": "required",
+              "order": 0,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "gaussian1d_smoke"
+            },
+            {
+              "importance": "required",
+              "order": 1,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "two_pole"
+            },
+            {
+              "importance": "required",
+              "order": 2,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "unused_token_hold"
+            },
+            {
+              "importance": "required",
+              "order": 3,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "ae_gan_hold"
+            },
+            {
+              "importance": "required",
+              "order": 4,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "ring16_acquisition"
+            },
+            {
+              "importance": "required",
+              "order": 5,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "five_word_joint_smoke"
+            },
+            {
+              "importance": "required",
+              "order": 6,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "zero_tanh_smoke"
+            },
+            {
+              "importance": "diagnostic",
+              "order": 100,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "clockfree_audit_measurement_v1"
+            },
+            {
+              "importance": "required",
+              "order": 7,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_ddgan_gaussian_chain"
+            },
+            {
+              "importance": "required",
+              "order": 8,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_gan_multimodal"
+            },
+            {
+              "importance": "required",
+              "order": 9,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_reconstruction"
+            },
+            {
+              "importance": "required",
+              "order": 10,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ddgan_gaussian_chain"
+            },
+            {
+              "importance": "required",
+              "order": 11,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_vae_categorical"
+            },
+            {
+              "importance": "required",
+              "order": 12,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_vae_hard"
+            }
+          ]
+        },
+        {
+          "counts": {
+            "UNKNOWN": 13
+          },
+          "role": "r1only",
+          "tasks": [
+            {
+              "importance": "required",
+              "order": 0,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "gaussian1d_smoke"
+            },
+            {
+              "importance": "required",
+              "order": 1,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "two_pole"
+            },
+            {
+              "importance": "required",
+              "order": 2,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "unused_token_hold"
+            },
+            {
+              "importance": "required",
+              "order": 3,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "ae_gan_hold"
+            },
+            {
+              "importance": "required",
+              "order": 4,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "ring16_acquisition"
+            },
+            {
+              "importance": "required",
+              "order": 5,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "five_word_joint_smoke"
+            },
+            {
+              "importance": "required",
+              "order": 6,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "zero_tanh_smoke"
+            },
+            {
+              "importance": "diagnostic",
+              "order": 100,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "clockfree_audit_measurement_v1"
+            },
+            {
+              "importance": "required",
+              "order": 7,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_ddgan_gaussian_chain"
+            },
+            {
+              "importance": "required",
+              "order": 8,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_gan_multimodal"
+            },
+            {
+              "importance": "required",
+              "order": 9,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ae_reconstruction"
+            },
+            {
+              "importance": "required",
+              "order": 10,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_ddgan_gaussian_chain"
+            },
+            {
+              "importance": "required",
+              "order": 11,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_vae_categorical"
+            },
+            {
+              "importance": "required",
+              "order": 12,
+              "qualification_tier": 1,
+              "result": null,
+              "task": "model_vae_hard"
+            }
+          ]
+        }
+      ],
+      "source": {
+        "origin_commit": "92b565b09b2370ddee1133799b28d5aa3ea13083",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.8",
+          "system": "Linux"
+        },
+        "snapshot_path": "/mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/queue/snapshots/e481b63224fc2d8cf77b136ab54f06421f7ac0967e47509a63f95cfa42733464",
+        "source_digest": "e481b63224fc2d8cf77b136ab54f06421f7ac0967e47509a63f95cfa42733464",
+        "verified_files": 1287
+      }
+    }
+  },
+  "total_unique_paid_seconds": 0,
+  "training_updates_added": 0,
+  "unique_paid_costs": {}
+}

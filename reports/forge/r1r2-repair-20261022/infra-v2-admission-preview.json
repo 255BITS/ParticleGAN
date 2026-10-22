@@ -1,0 +1,138 @@
+{
+  "qualification_input": false,
+  "rows": [
+    {
+      "blockers": [],
+      "campaign": {
+        "budget_seconds": 24000,
+        "candidate_budget_seconds": 5220,
+        "id": "r1r2-repair-20261022"
+      },
+      "candidate_revision": "3cca6de5d931b16469b0ef0fedbc0b5cb21f55b8af202a7868e94277fcef2037",
+      "source_digest": "b33e375de0a1e9cf754f4d0fa24e0fd216db4fec86b1b549ccb5ea2bb0e4f175",
+      "study": "r1r2-repair-control-20261022-tier1-infra-v2",
+      "study_status": "READY",
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "model_ae_ddgan_gaussian_chain",
+        "model_ae_gan_multimodal",
+        "model_ae_reconstruction",
+        "model_ddgan_gaussian_chain",
+        "model_vae_categorical",
+        "model_vae_hard",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold",
+        "zero_tanh_smoke"
+      ]
+    },
+    {
+      "blockers": [],
+      "campaign": {
+        "budget_seconds": 24000,
+        "candidate_budget_seconds": 5220,
+        "id": "r1r2-repair-20261022"
+      },
+      "candidate_revision": "3cca6de5d931b16469b0ef0fedbc0b5cb21f55b8af202a7868e94277fcef2037",
+      "source_digest": "b33e375de0a1e9cf754f4d0fa24e0fd216db4fec86b1b549ccb5ea2bb0e4f175",
+      "study": "r1r2-repair-control-20261022-word-retention",
+      "study_status": "READY",
+      "task_ids": [
+        "five_word_joint_hold",
+        "five_word_joint_smoke"
+      ]
+    },
+    {
+      "blockers": [],
+      "campaign": {
+        "budget_seconds": 24000,
+        "candidate_budget_seconds": 5220,
+        "id": "r1r2-repair-20261022"
+      },
+      "candidate_revision": "704c803e0c8bf425e1c0cd673b77e0332278cd8163ca9058a95c50a2f00fbdab",
+      "source_digest": "b33e375de0a1e9cf754f4d0fa24e0fd216db4fec86b1b549ccb5ea2bb0e4f175",
+      "study": "r1r2-repair-r1only-20261022-tier1-infra-v2",
+      "study_status": "READY",
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "model_ae_ddgan_gaussian_chain",
+        "model_ae_gan_multimodal",
+        "model_ae_reconstruction",
+        "model_ddgan_gaussian_chain",
+        "model_vae_categorical",
+        "model_vae_hard",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold",
+        "zero_tanh_smoke"
+      ]
+    },
+    {
+      "blockers": [],
+      "campaign": {
+        "budget_seconds": 24000,
+        "candidate_budget_seconds": 5220,
+        "id": "r1r2-repair-20261022"
+      },
+      "candidate_revision": "704c803e0c8bf425e1c0cd673b77e0332278cd8163ca9058a95c50a2f00fbdab",
+      "source_digest": "b33e375de0a1e9cf754f4d0fa24e0fd216db4fec86b1b549ccb5ea2bb0e4f175",
+      "study": "r1r2-repair-r1only-20261022-word-retention",
+      "study_status": "READY",
+      "task_ids": [
+        "five_word_joint_hold",
+        "five_word_joint_smoke"
+      ]
+    },
+    {
+      "blockers": [],
+      "campaign": {
+        "budget_seconds": 24000,
+        "candidate_budget_seconds": 5220,
+        "id": "r1r2-repair-20261022"
+      },
+      "candidate_revision": "de3afa5bb4c97c9e51a2ef66817108ca2372525aebff8200537f9df9d3328421",
+      "source_digest": "b33e375de0a1e9cf754f4d0fa24e0fd216db4fec86b1b549ccb5ea2bb0e4f175",
+      "study": "r1r2-repair-r1cycle-20261022-tier1-infra-v2",
+      "study_status": "READY",
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_smoke",
+        "gaussian1d_smoke",
+        "model_ae_ddgan_gaussian_chain",
+        "model_ae_gan_multimodal",
+        "model_ae_reconstruction",
+        "model_ddgan_gaussian_chain",
+        "model_vae_categorical",
+        "model_vae_hard",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold",
+        "zero_tanh_smoke"
+      ]
+    },
+    {
+      "blockers": [],
+      "campaign": {
+        "budget_seconds": 24000,
+        "candidate_budget_seconds": 5220,
+        "id": "r1r2-repair-20261022"
+      },
+      "candidate_revision": "de3afa5bb4c97c9e51a2ef66817108ca2372525aebff8200537f9df9d3328421",
+      "source_digest": "b33e375de0a1e9cf754f4d0fa24e0fd216db4fec86b1b549ccb5ea2bb0e4f175",
+      "study": "r1r2-repair-r1cycle-20261022-word-retention",
+      "study_status": "READY",
+      "task_ids": [
+        "five_word_joint_hold",
+        "five_word_joint_smoke"
+      ]
+    }
+  ],
+  "scope": "read_only_ready_study_plans"
+}

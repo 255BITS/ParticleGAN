@@ -1,7 +1,8 @@
 # Bounded R1/R2 repair campaign
 
 Three prospective global recipes share the unchanged current tasks and one fresh
-source/runtime. No result exists yet. The stronger archived non-saturating
+source/runtime. The original-source attempt was interrupted by runner defects;
+its completed results and costs remain preserved. The stronger archived non-saturating
 AMSGrad m110 recipe is the common reference, not a new selected default.
 
 | Role | Candidate | Delta from its declared control |
@@ -35,7 +36,7 @@ Existing discriminator_stability revision 14; all **13 required Tier 1** tasks
 plus its separate optional clock diagnostic. Complete runnable peers in this
 tier before any required failure vetoes later tiers. No task or view membership,
 threshold, update count or prior condition changes. The word source-binding
-migration changes only two future evaluator-source hash fields; exact previous
+migration initially changes two future evaluator-source hash fields; exact previous
 task bytes and unchanged top-level scoring/data functions are preserved in
 source-binding-migration.json and previous-task-definitions/.
 
@@ -72,6 +73,31 @@ The ring_hold/ring_extension execution group reserves 3,600 once. Unsupported
 deeper hosts remain BLOCKED and spend nothing. A separately scoped diagnostic
 cannot become ordinary qualification or replace a missing checkpoint parent.
 
+## Infrastructure interruption and repaired source
+
+The original source completed 18 physical attempts (384.252489 paid seconds).
+The reference reproduced Ring16 covariance error 1.556546 and independently
+failed DDGAN generation. Five model attempts were incomplete because frozen AE
+metadata was missing or native Adam combined generator/encoder roles. The
+zero-tanh attempt completed training but its evaluator dispatch was BLOCKED.
+None of these original receipts is rewritten or regraded.
+
+Version 2 includes the exact AE provider metadata in snapshots, adds opt-in
+homogeneous Adam encoder groups with bit-exact numerical parity, preserves
+provider error diagnostics, and routes the existing four-bound zero-tanh scorer.
+The eight future model task source bindings and the word acquisition source
+binding are refreshed with exact original definitions preserved in
+previous-task-definitions-infra-v2/ and infrastructure-source-binding.json.
+Task scoring, data, architecture, prior, initialization, budget, sampling,
+cadence and gates stay unchanged. All three v1 requests were cancelled after
+workers stopped. The new v2 studies use the same campaign cap and retain all
+old physical charges. Only the scientific source changes; recipes stay fixed.
+
+Before admission, 177 focused runner/model tests and 32 repair API tests passed.
+An isolated frozen-source, actual NS/AMSGrad two-update integration cohort
+checks every model provider, exact update counts, RNG isolation and real GIFs;
+it cannot qualify or replace any full-budget task.
+
 ## Execution and tail paths
 
 Use /usr/bin/python (current Python 3.14.8, torch 2.14.0+cu130) with the two
@@ -88,13 +114,13 @@ After software checks and source binding, inspect all three ready studies, then
 commit the execution source before enqueue. Planning launches no training.
 
 ```sh
-python -m experiments.forge plan r1r2-repair-control-20261022 --study r1r2-repair-control-20261022-tier1 --show-boundaries
-python -m experiments.forge plan r1r2-repair-r1only-20261022 --study r1r2-repair-r1only-20261022-tier1 --show-boundaries
-python -m experiments.forge plan r1r2-repair-r1cycle-20261022 --study r1r2-repair-r1cycle-20261022-tier1 --show-boundaries
-python -m experiments.forge enqueue r1r2-repair-control-20261022 --study r1r2-repair-control-20261022-tier1
-python -m experiments.forge enqueue r1r2-repair-r1only-20261022 --study r1r2-repair-r1only-20261022-tier1
-python -m experiments.forge enqueue r1r2-repair-r1cycle-20261022 --study r1r2-repair-r1cycle-20261022-tier1
-python -u -m experiments.forge drain --gpus 0,1 --campaign r1r2-repair-20261022 > /mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/logs/drain.log 2>&1
+python -m experiments.forge plan r1r2-repair-control-20261022 --study r1r2-repair-control-20261022-tier1-infra-v2 --show-boundaries
+python -m experiments.forge plan r1r2-repair-r1only-20261022 --study r1r2-repair-r1only-20261022-tier1-infra-v2 --show-boundaries
+python -m experiments.forge plan r1r2-repair-r1cycle-20261022 --study r1r2-repair-r1cycle-20261022-tier1-infra-v2 --show-boundaries
+python -m experiments.forge enqueue r1r2-repair-control-20261022 --study r1r2-repair-control-20261022-tier1-infra-v2
+python -m experiments.forge enqueue r1r2-repair-r1only-20261022 --study r1r2-repair-r1only-20261022-tier1-infra-v2
+python -m experiments.forge enqueue r1r2-repair-r1cycle-20261022 --study r1r2-repair-r1cycle-20261022-tier1-infra-v2
+python -u -m experiments.forge drain --gpus 0,1 --campaign r1r2-repair-20261022 > /mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/logs/drain-infra-v2.log 2>&1
 ```
 
 Do not edit source, recipe, task or study between the three enqueue calls.
@@ -102,7 +128,7 @@ Enqueue freezes snapshots; later workspace edits cannot change child imports.
 
 ```sh
 tail -F /mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/queue/events.jsonl
-tail -F /mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/logs/drain.log
+tail -F /mnt/ml7tb/ParticleGAN-forge/r1r2-repair-20261022/logs/drain-infra-v2.log
 python -m experiments.forge logs --follow --campaign r1r2-repair-20261022
 ```
 
