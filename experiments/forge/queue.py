@@ -206,12 +206,15 @@ class Queue:
     def state(self):
         with file_lock(self.root / "queue.lock"):
             path = self.root / "queue" / "state.json"
-            state = read_json(path) if path.exists() else {
+            existed = path.exists()
+            state = read_json(path) if existed else {
                 "schema_version": 1, "campaigns": {}, "submissions": {}, "jobs": {}, "events": [], "charges": [],
             }
             state.setdefault("charges", [])
+            before = canonical(state) if existed else None
             yield state
-            atomic_json(path, state)
+            if not existed or canonical(state) != before:
+                atomic_json(path, state)
 
     def event(self, state, event, **fields):
         # Submitters append to the locked inbox; only the collector emits streams.
@@ -500,6 +503,7 @@ class Queue:
             free = [slot for slot in free if device_key(slot["device"]) not in exclusive]
             pending = sorted(state["submissions"].items(), key=lambda kv: (
                 -(kv[1]["request"].get("priority", 0) + (time.time() - kv[1]["submitted_at"]) / 300), kv[0]))
+            open_cache: dict[tuple[str | None, str | None], str | None] = {}
             for request_id, entry in pending:
                 if request_filter is not None and request_id != request_filter:
                     continue
@@ -508,10 +512,15 @@ class Queue:
                     continue
                 if self.report_root:
                     from .lifecycle import ensure_open
-                    try:
-                        ensure_open(self.report_root.parent.parent, request)
-                    except ValueError as error:
-                        entry.update(status="blocked", reason=str(error), lifecycle="awaiting_readout")
+                    open_key = (request.get("candidate", {}).get("id"), request.get("candidate_revision"))
+                    if open_key not in open_cache:
+                        try:
+                            ensure_open(self.report_root.parent.parent, request)
+                            open_cache[open_key] = None
+                        except ValueError as error:
+                            open_cache[open_key] = str(error)
+                    if open_cache[open_key] is not None:
+                        entry.update(status="blocked", reason=open_cache[open_key], lifecycle="awaiting_readout")
                         continue
                 if campaign_filter and request["campaign_id"] != campaign_filter:
                     continue

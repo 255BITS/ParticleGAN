@@ -74,6 +74,10 @@ def technique_signature(value):
         mechanisms["prior_l2"] = True
     if recipe.prior_update == "learned" and recipe.prior_proximal_strength > 0:
         mechanisms["prior_proximal"] = "initial_position_after_base_update_v1"
+    if recipe.kinetic_transport_weight > 0:
+        mechanisms["kinetic_transport"] = True
+    if recipe.kinetic_transport_local_weight > 0:
+        mechanisms["kinetic_transport_local"] = True
     if recipe.optimizer_smoothing:
         mechanisms["smoothed_dualnorm"] = True
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
@@ -177,4 +181,10 @@ def recipe_field_active(name, value, *, task=None):
         return False
     if name in {"prior_sigreg_projections", "prior_sigreg_knots"}:
         return prior_active and recipe.prior_regularizer == "sigreg" and recipe.prior_reg > 0
+    if name == "kinetic_transport_weight":
+        return recipe.kinetic_transport_weight > 0
+    if name == "kinetic_transport_local_weight":
+        return recipe.kinetic_transport_local_weight > 0
+    if name == "kinetic_transport_projections":
+        return recipe.kinetic_transport_weight > 0 or recipe.kinetic_transport_local_weight > 0
     return True

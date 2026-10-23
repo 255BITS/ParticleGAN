@@ -88,3 +88,18 @@ def test_numeric_ablation_activation_is_visible_even_outside_search_whitelist():
                  "input_noise_std", "output_noise_std"):
         with pytest.raises(ValueError, match="changes technique"):
             validate_same_technique(recipe, recipe.replace(**{name: 0}))
+
+
+def test_kinetic_transport_weights_tune_when_active_but_reject_zero_ablation():
+    active = Recipe(kinetic_transport_weight=0.05, kinetic_transport_local_weight=0.02)
+    tuned = active.replace(kinetic_transport_weight=0.1, kinetic_transport_local_weight=0.04)
+    assert validate_same_technique(active, tuned)["mechanisms"]["kinetic_transport"] is True
+    assert recipe_field_active("kinetic_transport_weight", active) is True
+    assert recipe_field_active("kinetic_transport_local_weight", active) is True
+    assert recipe_field_active("kinetic_transport_projections", active) is True
+    inactive = Recipe()
+    assert recipe_field_active("kinetic_transport_weight", inactive) is False
+    assert recipe_field_active("kinetic_transport_projections", inactive) is False
+    for name in ("kinetic_transport_weight", "kinetic_transport_local_weight"):
+        with pytest.raises(ValueError, match="search changes technique mechanisms"):
+            validate_same_technique(active, active.replace(**{name: 0.0}))

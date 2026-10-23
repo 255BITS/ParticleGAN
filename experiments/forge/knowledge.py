@@ -55,20 +55,37 @@ def leaderboard_path(root: Path, view_id: str) -> Path:
     return Path("reports/forge/leaderboards") / (view_id + ".md")
 
 
+_RECORD_FILE_CACHE: dict[tuple[str, int, int, int], tuple[dict, str, str]] = {}
+_ATTEMPT_DIR_CACHE: dict[tuple, tuple[dict, dict | None]] = {}
+_NORMALIZE_CACHE: dict[tuple, list[dict]] = {}
+_SEARCHABLE_CACHE: dict[int, tuple[dict, str]] = {}
+
+
 def _records(root: Path) -> tuple[list[dict], list[dict]]:
-    indexed, conflicts = {}, []
+    indexed, indexed_hashes, conflicts = {}, {}, []
     for path in sorted((root / "reports/forge/records").glob("*.json")):
-        record = read_json(path)
-        if record.get("schema_version") != 1 or not record.get("record_id"):
-            raise ValueError(f"invalid experiment record: {path}")
-        if not isinstance(record.get("task_results", []), list):
-            raise ValueError(f"task_results must be a list: {path}")
+        stat = path.stat()
+        cache_key = (str(path.resolve()), stat.st_ino, stat.st_mtime_ns, stat.st_size)
+        cached = _RECORD_FILE_CACHE.get(cache_key)
+        if cached is not None:
+            record, record_hash, searchable = cached
+        else:
+            record = read_json(path)
+            if record.get("schema_version") != 1 or not record.get("record_id"):
+                raise ValueError(f"invalid experiment record: {path}")
+            if not isinstance(record.get("task_results", []), list):
+                raise ValueError(f"task_results must be a list: {path}")
+            record_hash = stable_hash(record)
+            searchable = json.dumps(record, sort_keys=True).lower()
+            _RECORD_FILE_CACHE[cache_key] = (record, record_hash, searchable)
+            _SEARCHABLE_CACHE[id(record)] = (record, searchable)
         identity = record["record_id"]
-        if identity in indexed and stable_hash(indexed[identity]) != stable_hash(record):
+        if identity in indexed and indexed_hashes[identity] != record_hash:
             conflicts.append({"record_id": identity, "reason": "Different records have the same record_id.",
                               "path": str(path.relative_to(root))})
         else:
             indexed[identity] = record
+            indexed_hashes[identity] = record_hash
     return [indexed[key] for key in sorted(indexed)], conflicts
 
 
@@ -82,9 +99,21 @@ def _gaps(root: Path) -> dict:
 
 def _memory_records(root: Path) -> tuple[list[dict], list[dict]]:
     """Publication summaries enter recall only, never the qualification reducer."""
-    from .publication_memory import normalize
+    from .publication_memory import input_paths, normalize
     records, conflicts = _records(root)
-    return sorted([*records, *normalize(root)], key=lambda record: record["record_id"]), conflicts
+    sig = []
+    for p in sorted(input_paths(root)):
+        if p.exists():
+            st = p.stat()
+            sig.append((str(p), st.st_ino, st.st_mtime_ns, st.st_size))
+    norm_key = (id(normalize), str(Path(root).resolve()), tuple(sig))
+    pub_records = _NORMALIZE_CACHE.get(norm_key)
+    if pub_records is None:
+        pub_records = normalize(root)
+        for rec in pub_records:
+            _SEARCHABLE_CACHE[id(rec)] = (rec, json.dumps(rec, sort_keys=True).lower())
+        _NORMALIZE_CACHE[norm_key] = pub_records
+    return sorted([*records, *pub_records], key=lambda record: record["record_id"]), conflicts
 
 
 def _input_hashes(root: Path, *, summaries_only: bool = False) -> dict:
@@ -181,6 +210,7 @@ def _cost(rows: list[dict]) -> dict:
 
 def _attempts(root: Path) -> tuple[list[dict], list[dict]]:
     attempts, issues = [], []
+    root_key = str(Path(root).resolve())
     for directory in sorted((root / "reports/forge/attempts").glob("*")):
         if not directory.is_dir():
             continue
@@ -188,12 +218,35 @@ def _attempts(root: Path) -> tuple[list[dict], list[dict]]:
         if not request_path.exists() or not result_path.exists():
             issues.append({"attempt_id": directory.name, "reason": "Attempt lacks a durable request/result pair."})
             continue
+        evidence_path = directory / "evidence.json"
+        req_st, res_st = request_path.stat(), result_path.stat()
+        ev_st = evidence_path.stat() if evidence_path.exists() else None
+        cache_key = (
+            str(directory.resolve()),
+            root_key,
+            req_st.st_ino,
+            req_st.st_mtime_ns,
+            req_st.st_size,
+            res_st.st_ino,
+            res_st.st_mtime_ns,
+            res_st.st_size,
+            ev_st.st_ino if ev_st else None,
+            ev_st.st_mtime_ns if ev_st else None,
+            ev_st.st_size if ev_st else None,
+        )
+        cached = _ATTEMPT_DIR_CACHE.get(cache_key)
+        if cached is not None:
+            cached_attempt, cached_issue = cached
+            attempts.append({**cached_attempt, "task_results": list(cached_attempt["task_results"])})
+            if cached_issue is not None:
+                issues.append(dict(cached_issue))
+            continue
         resolved, result = read_json(request_path), read_json(result_path)
         request = resolved.get("request", resolved)
-        evidence_path = directory / "evidence.json"
-        certificate = read_json(evidence_path) if evidence_path.exists() else {}
+        certificate = read_json(evidence_path) if ev_st is not None else {}
         reason = None
-        if certificate.get("result_hash") != stable_hash(result):
+        result_hash = stable_hash(result)
+        if certificate.get("result_hash") != result_hash:
             reason = "Missing or mismatched durable result hash."
         elif certificate.get("source") != request.get("source"):
             reason = "Source certificate does not match the immutable request."
@@ -213,17 +266,21 @@ def _attempts(root: Path) -> tuple[list[dict], list[dict]]:
             if row.get("compatibility_key") != keys.get(row.get("task_id")) or row.get("task_id") not in keys:
                 reason = "Task result compatibility key does not match its immutable request."
             rows.append({**row, "_attempt_id": directory.name})
+        issue_entry = None
         if reason:
-            issues.append({"attempt_id": directory.name, "reason": reason})
+            issue_entry = {"attempt_id": directory.name, "reason": reason}
+            issues.append(issue_entry)
             rows = [{**row, "gate_status": "INVALID", "evidence": {}, "error": reason,
                      "reason": reason} for row in rows]
-        attempts.append({"attempt_id": directory.name, "request": request, "task_results": rows,
+        attempt_entry = {"attempt_id": directory.name, "request": request, "task_results": rows,
                          "request_id": request.get("request_id", resolved.get("request_id")),
                          "valid_receipt": reason is None, "receipt_error": reason,
-                         "result_hash": stable_hash(result),
+                         "result_hash": result_hash,
                          "retry_of": result.get("retry_of"),
                          "attempt_status": result.get("raw", {}).get("attempt_status"),
-                         "source": str(result_path.relative_to(root))})
+                         "source": str(result_path.relative_to(root))}
+        _ATTEMPT_DIR_CACHE[cache_key] = ({**attempt_entry, "task_results": list(rows)}, dict(issue_entry) if issue_entry else None)
+        attempts.append(attempt_entry)
     issues.extend(_resolve_retries(attempts))
     return attempts, issues
 
@@ -547,13 +604,79 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
         return annotate_rows(root, result, attempts=attempts, records=records)
 
 
-def recall(root: Path, query: str = "", goal: str | None = None) -> list[dict]:
+def in_flight_work(root: Path, query: str = "", goal: str | None = None) -> list[dict]:
+    """Surface active queue requests and open studies without hydrating attempts."""
+    root = Path(root)
+    records, _ = _records(root)
+    concluded_studies = {
+        record.get("study_id")
+        for record in records
+        if record.get("lifecycle") in {"concluded", "abandoned", "superseded"}
+        and record.get("study_id")
+    }
+    words = re.findall(r"[a-z0-9_]+", query.lower())
+    items = []
+    states = _queue_states(root, [])
+    for location, state in states.items():
+        for request_id, entry in sorted(state.get("submissions", {}).items()):
+            if entry.get("status") not in {"queued", "running", "paused"}:
+                continue
+            req = entry.get("request", {})
+            view_id = req.get("view", {}).get("id") or req.get("view", {}).get("goal")
+            if goal and view_id and view_id != goal:
+                continue
+            item = {
+                "kind": "queue_submission",
+                "request_id": request_id,
+                "candidate_id": req.get("candidate", {}).get("id"),
+                "candidate_revision": req.get("candidate_revision"),
+                "study_id": req.get("study", {}).get("id") if isinstance(req.get("study"), dict) else None,
+                "view": view_id,
+                "status": entry.get("status"),
+                "lifecycle": entry.get("lifecycle"),
+                "queue_root": location,
+            }
+            searchable = json.dumps(item, sort_keys=True).lower()
+            if words and not any(word in searchable for word in words):
+                continue
+            items.append(item)
+    for path in sorted((root / "configs/forge/studies").glob("*.json")):
+        study = read_json(path)
+        study_id = study.get("id", path.stem)
+        if study_id in concluded_studies or study.get("status") not in {"ready", "draft", "running"}:
+            continue
+        view_id = study.get("scope", {}).get("view", study.get("view"))
+        if goal and view_id and view_id != goal:
+            continue
+        item = {
+            "kind": "open_study",
+            "study_id": study_id,
+            "candidate_id": study.get("candidate"),
+            "control_id": study.get("control"),
+            "view": view_id,
+            "status": study.get("status"),
+            "hypothesis": study.get("hypothesis"),
+            "source": str(path.relative_to(root)),
+        }
+        searchable = json.dumps(item, sort_keys=True).lower()
+        if words and not any(word in searchable for word in words):
+            continue
+        items.append(item)
+    return items
+
+
+def recall(root: Path, query: str = "", goal: str | None = None, *, include_in_flight: bool = False) -> list[dict]:
     """Search normalized records; missing goal tags remain visible as unknown."""
     records, _ = _memory_records(Path(root))
     words = re.findall(r"[a-z0-9_]+", query.lower())
     matches = []
     for record in records:
-        searchable = json.dumps(record, sort_keys=True).lower()
+        cached_search = _SEARCHABLE_CACHE.get(id(record))
+        if cached_search is not None and cached_search[0] is record:
+            searchable = cached_search[1]
+        else:
+            searchable = json.dumps(record, sort_keys=True).lower()
+            _SEARCHABLE_CACHE[id(record)] = (record, searchable)
         score = sum(word in searchable for word in words)
         identities = [str(record.get(key) or "").lower() for key in
                       ("record_id", "candidate_id", "candidate_revision", "configuration_id", "study_id")]
@@ -580,7 +703,27 @@ def recall(root: Path, query: str = "", goal: str | None = None) -> list[dict]:
                                          if record.get("evidence_scope") == "published_summary"
                                          and row.get("gate_status") in {"FAIL", "INVALID", "BLOCKED", "INCOMPLETE"}],
                         "goal_applicability": "unknown" if not declared_goal else declared_goal})
-    return sorted(matches, key=lambda row: (-row["match_score"], row["record_id"]))
+    ordered = sorted(matches, key=lambda row: (-row["match_score"], row["record_id"]))
+    if include_in_flight:
+        for item in in_flight_work(root, query=query, goal=goal):
+            ordered.append({
+                "record_id": f"in_flight:{item.get('study_id') or item.get('request_id')}",
+                "candidate_id": item.get("candidate_id"),
+                "candidate_revision": item.get("candidate_revision"),
+                "evidence_scope": "in_flight",
+                "hypothesis": item.get("hypothesis"),
+                "conclusion": None,
+                "next_action": f"In-flight ({item['kind']}: {item.get('status')})",
+                "source": item.get("source") or item.get("queue_root"),
+                "cost": _cost([]),
+                "match_score": 0,
+                "exact_identity_match": False,
+                "study_id": item.get("study_id"),
+                "qualification_input": False,
+                "task_results": [],
+                "goal_applicability": item.get("view") or "unknown",
+            })
+    return ordered
 
 
 def _link(source) -> str:
@@ -745,7 +888,13 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         scientific_sources = sorted({row["source_digest"] for result in boards for row in result["current_rows"]
                                      if row.get("source_digest")})
         if summaries_only:
-            pending = previous.get("pending_readout", [])
+            concluded_ids = {
+                record.get("candidate_id")
+                for record in records
+                if record.get("lifecycle") in {"concluded", "abandoned", "superseded"}
+                and record.get("candidate_id")
+            }
+            pending = [cid for cid in previous.get("pending_readout", []) if cid not in concluded_ids]
             scientific_sources = previous.get("scientific_source_digests", [])
         reducer_hashes = _reducer_hashes()
         reducer_hash = file_hash(Path(__file__))

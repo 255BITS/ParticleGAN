@@ -34,11 +34,11 @@ images = ["torchvision>=0.21,<1", "Pillow>=13.0.0,<14", "torch-fidelity==0.3.0",
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["particlegan", "particlegan.*"]
+include = ["particlegan", "particlegan.*", "particlegan_forge", "particlegan_forge.*"]
 namespaces = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["."]
+pythonpath = [".", "tests"]
 addopts = "-ra"
 markers = ["cuda: requires an explicitly admitted CUDA device"]

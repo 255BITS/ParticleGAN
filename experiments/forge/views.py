@@ -833,16 +833,55 @@ def _candidate_eligibility(view, candidate):
     return reasons
 
 
-def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | None = None) -> dict:
+def check_summary(grade: dict) -> dict | None:
+    """Extract continuous check pass counts (k/M) from a graded task result."""
+    if not isinstance(grade, dict):
+        return None
+    passed = total = None
+    evaluator = grade.get("evaluator_result")
+    if isinstance(evaluator, dict):
+        checks = evaluator.get("checks")
+        if isinstance(checks, dict) and checks:
+            if all(isinstance(v, bool) for v in checks.values()):
+                passed = sum(1 for v in checks.values() if v)
+                total = len(checks)
+            elif all(isinstance(v, dict) for v in checks.values()):
+                passed = sum(1 for v in checks.values() if v.get("passed") is True or v.get("status") == "PASS")
+                total = len(checks)
+        elif isinstance(checks, list) and checks and all(isinstance(c, dict) for c in checks):
+            passed = sum(1 for c in checks if c.get("passed") is True or c.get("status") == "PASS")
+            total = len(checks)
+        elif type(evaluator.get("passing_checks")) is int and type(evaluator.get("observations")) is int:
+            passed, total = evaluator["passing_checks"], evaluator["observations"]
+    if total is None:
+        metrics = grade.get("metrics")
+        if isinstance(metrics, dict):
+            for pass_key, total_key in (
+                ("passing_checks", "observations"),
+                ("extension_passing", "extension_checks"),
+                ("passed_checks", "total_checks"),
+            ):
+                if type(metrics.get(pass_key)) is int and type(metrics.get(total_key)) is int:
+                    passed, total = metrics[pass_key], metrics[total_key]
+                    break
+    if type(passed) is int and type(total) is int and total > 0 and 0 <= passed <= total:
+        return {"passed_checks": passed, "total_checks": total, "check_pass_rate": round(passed / total, 6)}
+    return None
+
+
+def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | None = None,
+            allow_held_highest_tier: bool = False) -> dict:
     """Reduce one candidate's compatible receipts; tier attainment is computed.
 
     Held tasks are graded and shown but never counted. A tier with no required
     task has status HELD: it neither passes nor stops progression. The view
     reports PASS only when every counted tier passes and its highest assigned
-    tier is counted. When every counted tier passes but that highest tier is
-    held, or nothing is counted, the view status is HELD and the candidate is
-    not eligible; qualified_tier is then the highest counted tier reached. A
-    counted failure still reports FAIL, BLOCKED or INCOMPLETE. HELD is never a PASS.
+    tier is counted (unless allow_held_highest_tier is explicitly authorized).
+    When every counted tier passes but that highest tier is held, or nothing is
+    counted, the view status is HELD and the candidate is not eligible
+    (counted_eligible remains True when all counted tiers passed); qualified_tier
+    is then the highest counted tier reached. A counted failure still reports
+    FAIL, BLOCKED or INCOMPLETE. HELD is never a PASS.
     """
     validate_view(view, tasks)
     if not isinstance(results, list):
@@ -865,8 +904,10 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
         else:
             grade = grades[0]
             selected[name] = receipts[0]
+        summary = check_summary(grade)
         rows[name] = {"task_id": name, "qualification_tier": assignment["qualification_tier"],
                       "importance": assignment["importance"], **grade,
+                      **({"check_summary": summary} if summary is not None else {}),
                       **{key: deepcopy(assignment[key]) for key in ("hold", "removal") if key in assignment},
                       "cost": sum(_cost(r) for r in receipts)}
         rows[name].pop("evidence", None)
@@ -917,7 +958,7 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                     "held_tasks": [row["task_id"] for row in held_rows]}
     if view.get("evidence_scope") in DIAGNOSTIC_SCOPES:
         return {"view": view["id"], "view_revision": view["revision"], "policy_fingerprint": view_fingerprint(view),
-                "status": "DIAGNOSTIC", "qualified_tier": 0, "eligible": False,
+                "status": "DIAGNOSTIC", "qualified_tier": 0, "eligible": False, "counted_eligible": False,
                 "evidence_scope": view["evidence_scope"], "current_qualification_reuse": False,
                 "qualification_input": False, "qualification_reuse": False,
                 "diagnostic_complete": all(row["status"] in {"PASS", "FAIL"} for row in rows.values()),
@@ -975,8 +1016,10 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
         blockers = [{"task_id": None, "status": "BLOCKED", "reasons": eligibility}, *blockers]
     counted = [t["qualification_tier"] for t in tiers if t["status"] != "HELD"]
     complete = bool(counted) and qualified_tier == counted[-1]
+    counted_eligible = bool(complete and not eligibility)
+    allow_held = bool(allow_held_highest_tier or view.get("eligibility", {}).get("allow_held_highest_tier"))
     status = ("BLOCKED" if eligibility else
-              "PASS" if complete and tiers[-1]["status"] != "HELD" else
+              "PASS" if complete and (tiers[-1]["status"] != "HELD" or allow_held) else
               "HELD" if complete or not counted else
               next((t["status"] for t in tiers if t["status"] != "HELD" and t["qualification_tier"] > qualified_tier),
                    "INCOMPLETE"))
@@ -984,6 +1027,7 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
         status = "INCOMPLETE"
     return {"view": view["id"], "view_revision": view["revision"], "policy_fingerprint": view_fingerprint(view),
             "status": status, "qualified_tier": qualified_tier, "eligible": status == "PASS",
+            "counted_eligible": counted_eligible,
             "tiers": tiers, "tasks": list(rows.values()), "task_statuses": {name: row["status"] for name, row in rows.items()},
             "next_task": next_tasks[0] if next_tasks else None, "next_tasks": next_tasks,
             "blockers": blockers, "required_passed": sum(row["status"] == "PASS" for row in rows.values() if row["importance"] == "required"),

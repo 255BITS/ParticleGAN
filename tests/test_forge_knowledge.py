@@ -403,3 +403,36 @@ def test_held_view_shows_its_held_count_beside_the_status_and_a_held_next_action
     assert "shows HELD, never PASS" in knowledge._next_action("HELD", False)
     assert knowledge._next_action("HELD", True) == "Publish an explanation, comparison, and next action."
     assert knowledge._next_action("FAIL", False) == "Run the next eligible task within an explicit budget."
+
+
+def test_summaries_only_compile_filters_concluded_candidates_from_pending_readout(tmp_path):
+    atomic_json(tmp_path / "reports/forge/compilation.json", {
+        "input_digest": "prev-digest",
+        "pending_readout": ["already-concluded", "still-pending"],
+        "scientific_source_digests": ["src-1"],
+    })
+    atomic_json(tmp_path / "reports/forge/records/readout-done.json", {
+        "schema_version": 1,
+        "record_id": "readout-done",
+        "candidate_id": "already-concluded",
+        "lifecycle": "concluded",
+        "task_results": [],
+    })
+    out = knowledge.compile_memory(tmp_path, summaries_only=True)
+    assert out["pending_readout"] == ["still-pending"]
+
+
+def test_in_flight_work_surfaces_open_studies_and_active_queue_submissions(tmp_path):
+    atomic_json(tmp_path / "configs/forge/studies/active-study.json", {
+        "schema_version": 1,
+        "id": "active-study",
+        "candidate": "k3p",
+        "control": "bcap",
+        "status": "ready",
+        "hypothesis": "test in-flight visibility",
+        "scope": {"view": "discriminator_stability", "through_tier": 1, "task_ids": ["smoke"]},
+    })
+    items = knowledge.in_flight_work(tmp_path, query="k3p", goal="discriminator_stability")
+    assert any(item["kind"] == "open_study" and item["study_id"] == "active-study" for item in items)
+    with_inflight = knowledge.recall(tmp_path, query="k3p", goal="discriminator_stability", include_in_flight=True)
+    assert any(row["evidence_scope"] == "in_flight" and row["study_id"] == "active-study" for row in with_inflight)
