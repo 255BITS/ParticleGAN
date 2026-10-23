@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.9.4 — 2026-10-23
+
+- **Python 3.11+ requirement and patched build/image dependencies.** Raise
+  `requires-python` to `>=3.11`, require `setuptools>=84.2.1` in
+  `[build-system]` (`GHSA-8rrh-rw8j-w5fx`), and require `Pillow>=13.0.0,<14`
+  across the `lunar`, `images` and `experiments` optional dependency groups
+  (`CVE-2026-112900`, `CVE-2026-112393`, `CVE-2026-112403`), removing the
+  Python `< 3.11` `tomli` fallback. Core `particlegan` runtime dependencies
+  (`torch>=2.6,<3`, `numpy>=1.26,<3`) are unchanged.
+- **`UpdatePolicy` extra-state validation.** `UpdatePolicy._check_tensors`
+  validates module `_extra_state` metadata (such as `MoGParticlePrior`
+  `sigma_rel` and `standardize` fields persisted via `get_extra_state`) before
+  restoring model or optimizer state.
+- **Expanded Forge model toys and preserved diagnostic records.** Register
+  public AE, VAE and DDGAN research model toys in the Forge view-v14 inventory
+  and preserve source-bound saved-state VAE/DDGAN failure diagnostics and
+  concluded R1/R2 and stall-reach/G-idle recall archives.
+
 ## 0.9.3 — 2026-10-18
 
 - **Opt-in guarded FP64 Gram and diagnostic SVD dense profiles.** Add
