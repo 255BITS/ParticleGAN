@@ -37,7 +37,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {python: "3.10", shard: 0}
           - {python: "3.11", shard: 0}
           - {python: "3.12", shard: 0}
           - {python: "3.12", shard: 1}
