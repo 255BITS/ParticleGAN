@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 7200,
+    "candidate_budget_seconds": 1500,
+    "id": "dig2-ring16-cap-d1-v1"
+  },
+  "candidate": "k3p-r16cap-net-horizon-full-v1",
+  "competing_explanation": "The recipe-owned prior refactor, not the network anneal cap, may explain why K3P/KA2 no longer pass at 6400 updates.",
+  "control": {
+    "candidate_id": "recipe-prior-refactor-k3p-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_min_eigen_ratio",
+    "op": "<",
+    "phase": "final",
+    "task_id": "ring16_acquisition_6400",
+    "threshold": 0.15
+  },
+  "hypothesis": "With the G/D LR anneal over the full 6400-update cap, the recipe keeps local spread (min eigen ratio >= 0.15) and passes ring16_acquisition_6400.",
+  "id": "dig2-ring16-cap-d1-k3p-r16cap-net-horizon-full-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_min_eigen_ratio",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "ring16_acquisition_6400",
+    "threshold": 0.15
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "ring16-schedule-20261011-readout"
+      },
+      "path": "reports/forge/dig2-20261016/ring16-cap-motivation.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "dig2-ring16-cap-d1-diagnostic-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
