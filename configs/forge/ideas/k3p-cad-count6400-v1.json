@@ -1,0 +1,36 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Schedules driven by an internal progress counter advancing 1/6400 per update (no gate), replacing completed_steps/total_steps; same shapes as the step control",
+    "Critic spike guard active from the first update (d_guard_min_steps=0)"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "k3p-cad-count6400-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Internal-counter (D-style) anneal over a 6,400-update duration: reads no step label or horizon, but its duration is a recipe constant chosen to equal this cap.",
+  "parent": "k3p",
+  "prior_art": [
+    "k3p"
+  ],
+  "recipe_overrides": {
+    "critic_formulation": "k3p",
+    "d_guard_min_steps": 0,
+    "name": "k3p",
+    "network_lr_horizon_cap": null,
+    "progress_rate": 0.00015625,
+    "progress_schedule": "updates"
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

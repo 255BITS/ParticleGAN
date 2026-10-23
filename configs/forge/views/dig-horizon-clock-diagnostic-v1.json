@@ -1,0 +1,32 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Research diagnostic for the horizon/clock policy question; existing task definitions and gates are unchanged and no qualification follows.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "dig-horizon-clock-diagnostic-v1",
+  "policy_change_reason": "Matched K3P step, constant and progress-schedule arms on ring16_acquisition (1,600-update cap) and the clock parity measurement; diagnostic only, no ordinary qualification.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

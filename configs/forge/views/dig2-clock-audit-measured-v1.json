@@ -1,0 +1,38 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition_6400-clockdig"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "clockfree_audit_measured_v2-clockdig"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Research diagnostic: a scoped 6,400-update ring16 variant and a PROPOSED measured clock audit revision; counted tasks, gates and results are unchanged.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "dig2-clock-audit-measured-v1",
+  "policy_change_reason": "Can an annealing family pass ring16 at a 6,400 cap and a measured clock audit? Matched step / constant / internal-counter / critic-gated arms for K3P and KA2.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

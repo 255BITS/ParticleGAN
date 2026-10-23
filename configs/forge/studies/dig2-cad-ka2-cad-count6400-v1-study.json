@@ -1,0 +1,54 @@
+{
+  "campaign": {
+    "budget_seconds": 9600,
+    "candidate_budget_seconds": 1200,
+    "id": "dig2-clock-audit-measured-v1"
+  },
+  "candidate": "ka2-cad-count6400-v1",
+  "competing_explanation": "At 6,400 updates the longer training at high rate, not annealing, may be what passes ring16; the constant arm tests this.",
+  "control": {
+    "candidate_id": "ka2-cad-step-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "component_covariance_error",
+    "op": ">",
+    "phase": "final",
+    "task_id": "ring16_acquisition_6400-clockdig",
+    "threshold": 0.85
+  },
+  "hypothesis": "count6400 arm of ka2: Internal-counter (D-style) anneal over a 6,400-update duration: reads no step label or horizon, but its duration is a recipe constant chosen to equal this cap.",
+  "id": "dig2-cad-ka2-cad-count6400-v1-study",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "ring16_acquisition_6400-clockdig",
+    "threshold": 0.85
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "ring16-schedule-20261011-readout"
+      },
+      "path": "reports/forge/dig-20261015/horizon-clock-motivation.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "dig2-clock-audit-measured-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}
