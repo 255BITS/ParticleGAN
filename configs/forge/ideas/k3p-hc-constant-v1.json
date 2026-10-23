@@ -1,0 +1,37 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Constant K3P learning rates (no cosine anneal), no input-noise anneal, constant output noise, spike guard from the first update"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "k3p-hc-constant-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Constant-rate clock-free K3P control with no declared clock dependency.",
+  "parent": "k3p",
+  "prior_art": [
+    "k3p"
+  ],
+  "recipe_overrides": {
+    "critic_formulation": "k3p",
+    "d_guard_min_steps": 0,
+    "input_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "name": "k3p",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "output_noise_warmup": 0.0
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

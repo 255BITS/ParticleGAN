@@ -44,7 +44,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "reopen_anchor", "reopen_guard", "row_evidence_null", "birth_death_isolation",
     "birth_death_feature_scale", "birth_death_backend", "birth_death_parent_policy",
     "constraint_geometry_mode", "row_policy", "optimizer_family", "optimizer_convolution", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
-    "critic_step_mode",
+    "critic_step_mode", "progress_schedule",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "prior_sigreg_projections", "prior_sigreg_knots",
@@ -55,6 +55,7 @@ HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "input_noise_anneal_end", "output_noise_std", "output_noise_warmup",
     "routing_temperature", "observation_sigma", "reconstruction_weight", "serve_average",
     "birth_death_cells", "birth_death_metric_rank", "birth_death_chunk",
+    "progress_rate", "progress_target", "progress_ema",
 }
 RECIPE_FIELD_OWNERS = {
     **dict.fromkeys(TASK_RECIPE_FIELDS, "task"),
