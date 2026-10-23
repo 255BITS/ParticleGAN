@@ -168,6 +168,10 @@ def _validate_measurement_contract(task):
         validate_task(task)
         fixed.update(evaluator="experiments.forge.scaling_adapter:grade", training_feedback=False,
                      qualification_input=False)
+    elif kind == "zero_tanh_smoke":
+        # The implemented point-mass adapter draws 4,096 clean live samples.
+        # This task has final bounds, without a sustained-suffix requirement.
+        fixed.update(eval_samples=4096, minimum_stable_checks=1)
     else:
         return
     for key, expected in fixed.items():
@@ -554,6 +558,40 @@ def _transfer(task, evidence):
                     metrics=live, evaluator_result=grade)
 
 
+def _zero_tanh_smoke(task, evidence):
+    """Grade the declared origin-Dirac endpoint, without adding hold gates."""
+    from benchmarks.locked_shared.baseline import score_metrics
+    from .tanh_point_mass import accepts_origin_smoke
+
+    if not accepts_origin_smoke(task, task["execution"].get("host_definition")):
+        return _verdict("BLOCKED", "only the declared origin zero_tanh_smoke host is supported")
+    evaluation = task["evaluation"]
+    count = evaluation.get("observations", 24)
+    _positive_int(count, "evaluation observations")
+    steps = task["execution"]["steps"]
+    # Match the adapter's deduplicated cadence, including tiny software runs.
+    expected = sorted({math.ceil(i * steps / count) for i in range(1, count + 1)})
+    points = evidence.get("observations", evidence.get("curve"))
+    try:
+        _curve(points, evaluation["thresholds"])
+    except ValueError as exc:
+        return _verdict("INVALID" if points else "INCOMPLETE", str(exc))
+    if [point["step"] for point in points] != expected:
+        return _verdict("INCOMPLETE", "all declared zero-tanh observation checkpoints are required")
+    live = evidence.get("live")
+    if (not isinstance(live, dict) or live.get("step") != steps
+            or any(not _finite(live.get(name)) for name, _, _ in evaluation["thresholds"])):
+        return _verdict("INCOMPLETE", "finite final live metrics at the complete update budget are required")
+    samples = evaluation.get("eval_samples", 4096)
+    if any(type(row.get("sample_count")) is not int or row["sample_count"] != samples
+           for row in [*points, live]):
+        return _verdict("INCOMPLETE", "every zero-tanh observation requires the declared sample count")
+    cells = score_metrics(live, evaluation["thresholds"])
+    passed = all(cell["status"] == "PASS" for cell in cells)
+    return _verdict("PASS" if passed else "FAIL", "recomputed the declared final zero-tanh bounds",
+                    metrics=live, evaluator_result={"passed": passed, "metrics": cells})
+
+
 def _native(task, evidence, *, diagnostic=False):
     from benchmarks.toy100.accuracy_gate import evaluate_suite
     from .artifacts import verify_artifacts
@@ -782,7 +820,8 @@ def grade_result(task: dict, result: dict | None, *, diagnostic=False) -> dict:
                "transfer_sustained": _transfer, "native_accuracy": _native,
                "ring_hold": _ring, "ring_extension": _ring,
                "paired_adaptation": _adaptation, "clockfree_parity": _clockfree,
-               "image_training_performance": performance_grade}
+               "image_training_performance": performance_grade,
+               "zero_tanh_smoke": _zero_tanh_smoke}
     grader = graders.get(task["evaluation"]["kind"])
     if grader is None:
         return _verdict("BLOCKED", f"unsupported evaluator {task['evaluation']['kind']}")

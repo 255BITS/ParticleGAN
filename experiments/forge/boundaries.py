@@ -36,6 +36,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "optimizer_svd_backend", "optimizer_convolution_rule", "optimizer_dense_profile",
     "prior_update", "prior_regularizer",
     "kinetic_transport_weight", "kinetic_transport_local_weight",
+    "reg_real_weight", "reg_fake_weight", "joint_reconstruction_weight",
     "name", "critic_formulation", "model", "loss", "num_classes", "conditioning", "ucd_target", "encoder_mode",
     "distance_reduction", "continuous_policy", "reg_arm", "direct_particle_gain",
     "critic_r1_real", "critic_payoff_damping", "output_noise_mode", "lr_control",
@@ -258,6 +259,15 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
             result[name] = _record(None, owner, "task prior-control applicability",
                                    status="not_applicable", reference_recipe_value=_json_value(value),
                                    representation=prior_binding["representation"])
+        elif name == "joint_reconstruction_weight" and task.get("adapter") != "word_joint":
+            result[name] = _record(None, owner, "task joint-inverse reconstruction applicability",
+                                   status="not_applicable", reference_recipe_value=_json_value(value))
+        elif name in {"reg_real_weight", "reg_fake_weight"} and (
+                resolved_recipe["reg_arm"] not in {"a_r1r2", "b_cap"}
+                or (task.get("adapter") == "public_api_model_toy"
+                    and execution.get("host_definition", {}).get("adversarial") is False)):
+            result[name] = _record(None, owner, "task fixed critic-penalty applicability",
+                                   status="not_applicable", reference_recipe_value=_json_value(value))
         elif name in behavior_owned:
             result[name] = _record(None, owner, "frozen behavioral host objective/component source",
                                    status="host_owned", reference_recipe_value=_json_value(value))

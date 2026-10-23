@@ -927,6 +927,23 @@ recipe. Explicit legacy arms select the K3P optimizer; `reg_arm="k3p"` selects
 the earlier K3P penalty too. `reg_arm=None` follows `critic_formulation`, whose
 restoration default is KA2. These choices are recorded in new source/formulation cohorts.
 
+For the fixed arms, `reg_real_weight` and `reg_fake_weight` separately multiply
+the two mean penalties. Both default to `1`; for example,
+`Recipe(reg_arm="a_r1r2", reg_fake_weight=0)` applies real-only R1 at the
+unchanged `reg_coeff / 2` coefficient. A zero-weight term performs no critic
+forward. Nondefault weights require an explicit fixed arm and form a new
+recipe/checkpoint identity.
+
+`joint_reconstruction_weight` defaults to `0`. An explicitly bound joint
+inverse host can add `recipe.joint_reconstruction_loss(reconstruction, target)`
+to its generator/encoder loss. Continuous values use mean squared error;
+passing `categorical_dim` interprets the reconstruction as raw logits and uses
+stable categorical cross entropy. Targets are detached. The five-word joint
+fixture consumes this objective as `G(E(real_words))` using its existing real
+batch, without extra draws or a change to generation. Scalar hosts without a
+joint inverse are inapplicable; ordinary AE/VAE reconstruction keeps its own
+declared objective.
+
 `get_recipe("bcap")` selects fixed BCAP with zero-momentum `dualnorm`,
 `constraint_geometry_mode="direction_blend"`, and constant G/D/prior step sizes.
 Direction blending protects existing task objectives across the joint
@@ -1416,7 +1433,7 @@ caller.
 | --- | --- |
 | `recipe.make_prior(**kwargs)` | Prior selected by `prior_kind`, tables drawn at random ([initialize](#initializing-priors) for R2) |
 | `recipe.make_loss()` | `GANLoss(recipe.loss, labels=recipe.loss_labels)` (default non-saturating logistic) |
-| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
+| `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, separate_encoder_groups=False, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Recipe-selected optimizer for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, modules=None, latent_table=None, direct_particles=None, **adam_kwargs)` | Recipe-selected optimizer for generator-side params; `modules` binds kernel semantics alongside custom groups |
 | `recipe.make_critic_penalty(opt_d, *, output=None, collect_stats=False, **penalty_kwargs)` | The critic penalty paired with a critic optimizer (see below) |
@@ -1437,6 +1454,12 @@ The previous K3P critic replays through
 
 The following loop and Adam controller descriptions use the explicit KA2 recipe.
 The default optimized BISPF recipe also uses the protected-backward contract below.
+
+When binding G and E to `UpdatePolicy`, pass `separate_encoder_groups=True`.
+Native Adam then uses distinct homogeneous generator and encoder groups with
+identical network settings. Parameter updates and per-parameter Adam state are
+unchanged; the default retains the legacy combined-group checkpoint layout.
+Normalized optimizer families already separate these roles.
 
 ```python
 opt_g, opt_d = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))

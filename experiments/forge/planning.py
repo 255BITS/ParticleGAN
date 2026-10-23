@@ -139,6 +139,7 @@ class _ResolutionCache:
     def get_base_extra_sources(self) -> set[str]:
         if self._base_extra_sources is None:
             from .hostprofiles import profile_source_paths
+            from .model_toy_sources import model_toy_source_paths
             extra: set[str] = set()
             for task in self.get_all_tasks().values():
                 extra.update(relative for relative in task["evaluation"].get("sources", {})
@@ -148,6 +149,8 @@ class _ResolutionCache:
                 except (KeyError, TypeError, ValueError):
                     profile_sources = {}
                 extra.update(relative for relative in profile_sources
+                             if (self.root / relative).is_file())
+                extra.update(relative for relative in model_toy_source_paths(task)
                              if (self.root / relative).is_file())
             self._base_extra_sources = extra
         return self._base_extra_sources
@@ -685,6 +688,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         except (KeyError, TypeError, ValueError):
             profile_sources = {}
         extra_sources.update(relative for relative in profile_sources
+                             if (root / relative).is_file())
+        from .model_toy_sources import model_toy_source_paths
+        extra_sources.update(relative for relative in model_toy_source_paths(task)
                              if (root / relative).is_file())
     for task in tasks.values():
         for relative in task["evaluation"].get("sources", {}):
