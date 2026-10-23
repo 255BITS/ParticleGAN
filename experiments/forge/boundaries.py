@@ -33,6 +33,7 @@ TUNABLE_FIELDS = frozenset({
 TASK_RECIPE_FIELDS = RESOURCE_FIELDS | {"prior_kind", "sigma_rel", "standardize"}
 TECHNIQUE_RECIPE_FIELDS = frozenset({
     "training_precision",
+    "masked_mixture_weight", "masked_transport_weight", "imputer_component_weight",
     "optimizer_svd_backend", "optimizer_convolution_rule", "optimizer_dense_profile",
     "prior_update", "prior_regularizer",
     "kinetic_transport_weight", "kinetic_transport_local_weight",

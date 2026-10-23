@@ -20,7 +20,7 @@ import torch
 from particlegan import Recipe, get_recipe
 
 
-MODEL_PROVIDERS = ("api_model_ae", "api_model_vae", "api_model_ddgan", "api_model_ae_ddgan")
+MODEL_PROVIDERS = ("api_model_ae", "api_model_vae", "api_model_ddgan", "api_model_ae_ddgan", "api_model_misgan")
 PROVIDERS = ("api_images", "api_vectors", "api_conditionals", "api_diagnostics", "api_ring16", "api_gaussian1d") + MODEL_PROVIDERS
 ROOT = Path(__file__).resolve().parents[2]
 CASE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
@@ -138,6 +138,9 @@ def build(case, *, device="cpu", seed=DEFAULT_SEED, recipe_name=None, max_steps=
                                       recipe_name=recipe_name, max_steps=max_steps, **options)
     if not isinstance(fixture.recipe, Recipe):
         raise TypeError(f"{case['id']}: recipe must be the public particlegan.Recipe")
+    if ((fixture.recipe.masked_mixture_weight or fixture.recipe.masked_transport_weight or fixture.recipe.imputer_component_weight)
+            and case["provider"] != "api_model_misgan"):
+        raise ValueError("masked mixture/imputer objectives require the explicit MisGAN component consumer")
     if not fixture.api_components or any(not isinstance(name, str) or not name
                                           for name in fixture.api_components):
         raise ValueError(f"{case['id']}: public API components must be identified")

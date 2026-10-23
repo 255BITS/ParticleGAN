@@ -126,6 +126,6 @@ def test_executable_inventory_retains_every_historical_question_and_pr231():
     # and api-misgan-block-neural-imputer.
     historical = {name: case for name, case in cases.items() if case["provider"] not in api_contract.MODEL_PROVIDERS}
     assert len(historical) == 186
-    assert len(cases) == 194  # Eight explicitly scoped model/encoding cases.
+    assert len(cases) == 195  # Eight model/encoding cases and scoped MisGAN.
     assert all(case["evaluation_observations"] >= case.get("terminal_observations", 5)
                for case in cases.values())

@@ -56,6 +56,10 @@ def validate_task(task, *, root=None):
         expected_resources = dict(num_particles=module.PARTICLES, z_dim=module.Z_DIM, batch_size=module.BATCH)
         if any(stable_hash(host[key]) != stable_hash(case[key]) for key in ("target", "architecture")):
             raise ValueError("VAE task target or network declaration differs from the executable host")
+    elif case["provider"] == "api_model_misgan":
+        expected_resources = module.RESOURCES
+        if host != case["host_definition"]:
+            raise ValueError("MisGAN task host differs from the executable definition")
     else:
         from benchmarks.toy_audit.api_model_ddgan import RESOURCES, MixtureTarget
         expected_resources = RESOURCES

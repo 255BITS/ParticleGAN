@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 850. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 854. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4072,6 +4072,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/b86f62c3e4f84a43b85d366e4cc43824.json) · [Record](records/readout-170dc0a68d5b68737b370a5f.json)
 
+### bispf-optimized-quintic-v1 · readout-1858b3294015f9149e7fcb9d
+
+**Scope:** research_diagnostic; scientific; revision `a2bdf3d01a3c507b273d49bdefa1bf0707963aed72d1ed10fcca32bf82e4cf6d`.
+
+Retain BISPF core and distinguish incomplete-data recovery from learned multimodal conditional amortization with the frozen scorer and controls.
+
+**Observed:** {'FAIL': 1}; wall seconds 610.433; mechanism `structural`.
+
+model_misgan_four_mode: modes=4, hq=0.99658, mass_tv=0.24414
+
+Full scoped four-mode run completed1200updates/24checks and FAILed all5terminal complete gates. Endpoint generatorHQ=0.996582, massTV=0.244141, ambiguousHQ=0.993164, branchTV=0.044678. Preserve every terminal failed bound; no ordinary or historical100-mode pass credit.
+
+**Next:** Stop this exact revision. The sole bounded composite masked-quantile transport plus cosine-settling followup changes the failed mass/settling mechanisms while keeping the frozen task, initializer, prior, sampling and1200update protocol.
+
+[Evidence](../../reports/forge/attempts/87717e5cd41745a0a3462c3fb1605f75/result.json) · [Record](records/readout-1858b3294015f9149e7fcb9d.json)
+
 ### k3p-bcap-matched-v1 · readout-21b533460c29dd5049aa64df
 
 **Scope:** current; scientific; revision `18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312`.
@@ -4488,6 +4504,22 @@ This exact global configuration failed the first two_pole movement gate. Tier1 i
 
 [Evidence](../../reports/forge/attempts/9007daae982e4bc3b8c9f4019d48bd26/result.json) · [Record](records/readout-813a2ad71ca3580b4a8d46c1.json)
 
+### bispf-misgan-observed-v1 · readout-8287ac80f671694274d99b8a
+
+**Scope:** research_diagnostic; scientific; revision `5a3af62f0de5000d2215894277efb258ab83653b8621a86dacaadb2aef11624c`.
+
+Retain BISPF core and distinguish incomplete-data recovery from learned multimodal conditional amortization with the frozen scorer and controls.
+
+**Observed:** {'FAIL': 1}; wall seconds 621.916; mechanism `structural`.
+
+model_misgan_four_mode: modes=4, hq=0.99854, mass_tv=0.16968
+
+Full scoped four-mode run completed1200updates/24checks and FAILed all5terminal complete gates. Endpoint generatorHQ=0.998535, massTV=0.169678, ambiguousHQ=0.986084, branchTV=0.087891. Preserve every terminal failed bound; no ordinary or historical100-mode pass credit.
+
+**Next:** Stop this exact revision. The sole bounded composite masked-quantile transport plus cosine-settling followup changes the failed mass/settling mechanisms while keeping the frozen task, initializer, prior, sampling and1200update protocol.
+
+[Evidence](../../reports/forge/attempts/b6c907748655490f8c681e4c78713e00/result.json) · [Record](records/readout-8287ac80f671694274d99b8a.json)
+
 ### bispf-optimized-frobenius-v1 · readout-85a714c5fc9c0b038c400b22
 
 **Scope:** research_diagnostic; scientific; revision `c6dadb65374f5c93fe3922c2e10e32b5964105d4dc13ff80b97773c85b9f1aff`.
@@ -4792,6 +4824,22 @@ The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed For
 
 [Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
 
+### bispf-misgan-amortized-v1 · readout-c21940571fd7349e5f2a9c1b
+
+**Scope:** research_diagnostic; scientific; revision `43489bc17bc07057ac6f5b53d3368f30827498bd4b1415badfcbff0202fc519e`.
+
+Retain BISPF core and distinguish incomplete-data recovery from learned multimodal conditional amortization with the frozen scorer and controls.
+
+**Observed:** {'FAIL': 1}; wall seconds 615.736; mechanism `structural`.
+
+model_misgan_four_mode: modes=4, hq=0.99463, mass_tv=0.16968
+
+Full scoped four-mode run completed1200updates/24checks and FAILed all5terminal complete gates. Endpoint generatorHQ=0.994629, massTV=0.169678, ambiguousHQ=0.982666, branchTV=0.143311. Preserve every terminal failed bound; no ordinary or historical100-mode pass credit.
+
+**Next:** Stop this exact revision. The sole bounded composite masked-quantile transport plus cosine-settling followup changes the failed mass/settling mechanisms while keeping the frozen task, initializer, prior, sampling and1200update protocol.
+
+[Evidence](../../reports/forge/attempts/4727aead52a04e3285769fe0663b6844/result.json) · [Record](records/readout-c21940571fd7349e5f2a9c1b.json)
+
 ### bispf-v2 · readout-c2d279f7d47ac009ee80d771
 
 **Scope:** current; scientific; revision `96f0f8a2aee0663f0fe92e49641deb107b81201ae0efea33d9a54e24aaba8967`.
@@ -4871,6 +4919,22 @@ The prerequisite mode_hold passes; all 1200 hold checks and 300 extension checks
 **Next:** Retain the explicit diagnostic scope and original checkpoint/initialization/stream identities; keep current-policy Tier 3 blocked.
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-cd9493a6a30096475d381175.json)
+
+### bispf-misgan-transport-settle-v1 · readout-d57833ecdafd9cda119fefb6
+
+**Scope:** research_diagnostic; scientific; revision `4361bc72b78e2e5cd1fe28820e168a71edf24dcce81f08516986a8666c04c04e`.
+
+The declared composite observed-mass transport and cosine-settling repair passes all twelve unchanged MisGAN recovery and neural posterior bounds for all five terminal checks.
+
+**Observed:** {'PASS': 1}; wall seconds 447.389; mechanism `structural`.
+
+model_misgan_four_mode: modes=4, hq=0.98901, mass_tv=0.093994
+
+PASS on the scoped four-mode MisGAN task: 1,200 updates, 24 post-update evaluations and all five terminal checks pass every unchanged bound. Endpoint mass TV 0.093994, generator HQ 0.989014, ambiguous HQ 0.937256, branch TV 0.078125, branch coverage 1.000000, imputation accuracy 0.972656, observed error 0.0. All mechanism/optimizer/RNG guards pass. No ordinary, original 100-mode, or within-mode covariance qualification.
+
+**Next:** Stop the bounded campaign and retain all failures. Recommend this one complete scoped recipe for review; investigate the same mechanisms on a separately declared larger incomplete-data target before attempting unchanged 100-mode qualification. No seed experiment or automatic default promotion.
+
+[Evidence](../../reports/forge/attempts/3a5811fbd2d442cda18bb6591c9979c7/result.json) · [Record](records/readout-d57833ecdafd9cda119fefb6.json)
 
 ### release07-gan-v3-mog-v1 · readout-d5a99d9470252f695a717dfc
 
@@ -5750,4 +5814,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `3aa279e13001c206fe493e6a271c303da3876eaf7cdfffd72182d8e3a587f091`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `a2c90a824501ca7881dec8a4c0428be6acc192922033d37a4680b108fb6e0b27`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

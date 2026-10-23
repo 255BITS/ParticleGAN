@@ -147,6 +147,8 @@ class GANTrainer:
                  optimizer_options=None, penalty_options=None, serial_backward=True):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
+        if recipe.masked_mixture_weight or recipe.masked_transport_weight or recipe.imputer_component_weight:
+            raise ValueError("masked mixture/imputer objectives require a caller-owned incomplete-data host")
         if type(serial_backward) is not bool:
             raise TypeError("serial_backward must be a boolean")
         if not serial_backward:
