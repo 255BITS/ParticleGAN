@@ -88,6 +88,8 @@ Tier 2 full runs require every basic model task to pass. A blocked task may have
 
 Saved-state investigations: [VAE saved-state investigation](vae-failure-investigation/README.md); [DDGAN saved-state investigation](ddgan-failure-investigation/README.md). These diagnostics add no training, qualification or replacement for the recorded failures.
 
+BISPF matched repair comparisons: [three repair hypotheses](three-theme-repairs-20261022/README.md); [first-principles successors](first-principles-round2-20261022/README.md). These separate diagnostic cohorts preserve all original failures and qualification.
+
 <!-- Forge scaling performance: start -->
 
 ## Performance
@@ -548,5 +550,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `e9e8c99ea59f21f9f429769c9812be323eb3fba963164ce730fcc43c0a801c4a`.
+Publication input digest `97d03772505e1b3442429afd17609e70df7164a17dea5c179747d79291eca7ea`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "abf347a0068a7f22c3260637d4e8d643ede7e5828f094e7c64f0b89c12b5c269",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "6e724de2069abe6997fa9a85c77a44587fa0b5b88f69d2a8a8f75a7a46dc8e26",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/cb24c3e1645a4742a6296dc5839c64e2/observed-samples.pt": "e30d84b6732d6a1262a9d74f55d967bdf3b65193ba35937f3d6b610739f1b409"
+  },
+  "task_id": "vector_unequal_width"
+}

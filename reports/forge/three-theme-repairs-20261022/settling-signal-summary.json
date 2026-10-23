@@ -1,0 +1,340 @@
+{
+  "analytical_controls": {
+    "four_modes_missing_one": {
+      "energy_population_normalized_numerator": 0.04741963281073739,
+      "fake_masses": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.0
+      ],
+      "mass_tv": 0.24999999999999997,
+      "real_masses": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "scope": "exact population point-mass fixture, distinct from positive-width task data; no sampled approximation",
+      "unchanged_tau020_scale": 1.0
+    },
+    "gaussian_stationary_collapsed_to_reference_mean": {
+      "energy_u": 0.16818144968265036,
+      "raw_nn": 1.0851578801711246,
+      "unchanged_tau020_scale": 1.0
+    },
+    "matched_constant": {
+      "energy_u": 0.0,
+      "raw_nn": 0.0,
+      "unchanged_tau020_scale": 1e-05
+    },
+    "overlap_collapsed_to_reference_mean": {
+      "energy_u": 0.19533769930965808,
+      "raw_nn": 0.8663541041897065,
+      "unchanged_tau020_scale": 1.0
+    },
+    "rare2percent_missing": {
+      "energy_population_normalized_numerator": 0.0006809065496481129,
+      "fake_masses": [
+        0.57,
+        0.3,
+        0.13,
+        0.0
+      ],
+      "mass_tv": 0.019999999999999955,
+      "real_masses": [
+        0.55,
+        0.3,
+        0.13,
+        0.02
+      ],
+      "scope": "exact population point-mass fixture, distinct from positive-width task data; no sampled approximation",
+      "unchanged_tau020_scale": 0.003408296176112463
+    },
+    "ring16_missing_one": {
+      "energy_population_normalized_numerator": 0.0019942710087834667,
+      "fake_masses": [
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.06666666666666667,
+        0.0
+      ],
+      "mass_tv": 0.06249999999999999,
+      "real_masses": [
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "scope": "exact population point-mass fixture, distinct from positive-width task data; no sampled approximation",
+      "unchanged_tau020_scale": 0.027855235757061926
+    },
+    "ring8_missing_one": {
+      "energy_population_normalized_numerator": 0.009068535321961823,
+      "fake_masses": [
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.0
+      ],
+      "mass_tv": 0.12499999999999997,
+      "real_masses": [
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "scope": "exact population point-mass fixture, distinct from positive-width task data; no sampled approximation",
+      "unchanged_tau020_scale": 0.4303478865723828
+    },
+    "shifted_constant": {
+      "energy_u": 1.0,
+      "raw_nn": 1.0,
+      "unchanged_tau020_scale": 1.0
+    }
+  },
+  "artifacts": {
+    "gaussian1d_smoke": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/f9cc2d29828548608c07207c0756915e/evaluator/observed-samples.pt",
+      "sha256": "2a65f1ce2eb626d54ef4cccbf0d5bbb358b97aa11ab2036c0a7213fc67380cce"
+    },
+    "gaussian1d_stability": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9c292a19e74747d88230eb960f11a873/evaluator/observed-samples.pt",
+      "sha256": "4c14d4dad42c063c64bfd61a42a7868e4a162997ad1cc9e66f9569e3daab4ef3"
+    },
+    "vector_overlap": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/3a07f4a4ca4447e6a6151d11f47080c7/observed-samples.pt",
+      "sha256": "1fdd6b48fc6f79dd88459e924d6d220f2bcccdd50d7826fbe7bdaa1d9dccdb38"
+    }
+  },
+  "decision": "Do not implement or train the unchanged energy-U observer substitution: retained peak EMA reheats passing overlap states and analytical missing-mode controls cool prematurely.",
+  "optimizer_updates_added": 0,
+  "raw_probe": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/settling-signal-probe.json",
+    "sha256": "2283675d7eecddbdb82c86c9c10f69dab10e9a36f8b2d5ee8b212c6e48447d72"
+  },
+  "reference_scope": "first receipt-PASS generated state per phase; approximate target reference, not historical real batches or an oracle training mechanism",
+  "references": {
+    "gaussian_shifted": {
+      "metrics": {
+        "cdf_ks": 0.033980070503796256,
+        "finite_fraction": 1.0,
+        "mean": 3.009831651317654,
+        "mean_error_sigma": 0.019663302635308355,
+        "sample_count": 4096,
+        "std": 0.46304565105247697,
+        "std_ratio": 0.9260913021049539,
+        "step": 4709
+      },
+      "step": 4709
+    },
+    "gaussian_stationary": {
+      "metrics": {
+        "cdf_ks": 0.0362036101365355,
+        "finite_fraction": 1.0,
+        "mean": 1.981665072380565,
+        "mean_error_sigma": 0.036669855238869786,
+        "sample_count": 4096,
+        "std": 0.5133386249738645,
+        "std_ratio": 1.026677249947729,
+        "step": 209
+      },
+      "step": 209
+    },
+    "overlap": {
+      "metrics": {
+        "covariance_error": 0.2656756043434143,
+        "mean_error": 0.07672429084777832,
+        "sample_count": 4096,
+        "step": 100,
+        "sw1_normalized": 0.09672436706187214,
+        "target_scale": 0.8501437306404114
+      },
+      "step": 100
+    }
+  },
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "signal": "[mean cross distance - .5 mean offdiagonal real distance - .5 mean offdiagonal fake distance] / RMS offdiagonal real distance; realconstant scale1",
+  "signal_threshold": null,
+  "source_commit": "2a2b662bdfa6249076b27dbea4c136e23d3e7a80",
+  "source_digest": "8bfcc01cd7482b1b348edb2162567adfdcdaa7d308f75fc834774302c6ac4acb",
+  "tasks": {
+    "gaussian1d_smoke": {
+      "auroc_pass_vs_2x_original_gate_violation": 1.0,
+      "auroc_pass_vs_fail": 0.9907407407407407,
+      "failed_state_means": {
+        "max": 0.24971965620148937,
+        "median": 0.01103363466889968,
+        "min": 0.003022008191679227
+      },
+      "failed_states": 18,
+      "good_state_means": {
+        "max": 0.003025540142285791,
+        "median": 0.0023583892580494406,
+        "min": 0.00039986242580987045
+      },
+      "passing_states": 6,
+      "severe_state_means": {
+        "max": 0.24971965620148937,
+        "median": 0.019416084062120077,
+        "min": 0.009915113504555404
+      },
+      "severe_states": 9,
+      "unchanged_tau020_response": {
+        "FAIL": {
+          "fixed_state_32panel_final_ema_scale": {
+            "max": 1.0,
+            "median": 1.0,
+            "min": 0.862707307251926
+          },
+          "mean_pointwise_scale_across_states": {
+            "max": 1.0,
+            "median": 0.4328291043385465,
+            "min": 0.09149335598118215
+          }
+        },
+        "PASS": {
+          "fixed_state_32panel_final_ema_scale": {
+            "max": 1.0,
+            "median": 0.8630726081393871,
+            "min": 0.4660916508325671
+          },
+          "mean_pointwise_scale_across_states": {
+            "max": 0.15690580271464077,
+            "median": 0.1438415834257318,
+            "min": 0.08183607896272754
+          }
+        }
+      }
+    },
+    "gaussian1d_stability": {
+      "auroc_pass_vs_2x_original_gate_violation": 1.0,
+      "auroc_pass_vs_fail": 0.9381818181818182,
+      "failed_state_means": {
+        "max": 0.332015216057765,
+        "median": 0.013528199441841991,
+        "min": 0.0009841925520008342
+      },
+      "failed_states": 110,
+      "good_state_means": {
+        "max": 0.005097248340366766,
+        "median": 0.0017821751953265186,
+        "min": 0.0002929349304042323
+      },
+      "passing_states": 10,
+      "severe_state_means": {
+        "max": 0.332015216057765,
+        "median": 0.032219388624154105,
+        "min": 0.005447060411718344
+      },
+      "severe_states": 61,
+      "unchanged_tau020_response": {
+        "FAIL": {
+          "fixed_state_32panel_final_ema_scale": {
+            "max": 1.0,
+            "median": 1.0,
+            "min": 0.24785483397113686
+          },
+          "mean_pointwise_scale_across_states": {
+            "max": 1.0,
+            "median": 0.5547367359598298,
+            "min": 0.0741975740260719
+          }
+        },
+        "PASS": {
+          "fixed_state_32panel_final_ema_scale": {
+            "max": 1.0,
+            "median": 0.7636614573010838,
+            "min": 0.14741319946119882
+          },
+          "mean_pointwise_scale_across_states": {
+            "max": 0.18030705340035538,
+            "median": 0.12062521327263065,
+            "min": 0.07010405564739126
+          }
+        }
+      }
+    },
+    "vector_overlap": {
+      "auroc_pass_vs_2x_original_gate_violation": 1.0,
+      "auroc_pass_vs_fail": 0.85,
+      "failed_state_means": {
+        "max": 0.03354093504672959,
+        "median": 0.01826756382244859,
+        "min": 0.0037359476460285305
+      },
+      "failed_states": 14,
+      "good_state_means": {
+        "max": 0.015709465996993,
+        "median": 0.008801150287857773,
+        "min": 3.723055865809271e-05
+      },
+      "passing_states": 10,
+      "severe_state_means": {
+        "max": 0.030116241466786424,
+        "median": 0.028281889951870226,
+        "min": 0.026447538436954028
+      },
+      "severe_states": 2,
+      "unchanged_tau020_response": {
+        "FAIL": {
+          "fixed_state_32panel_final_ema_scale": {
+            "max": 1.0,
+            "median": 1.0,
+            "min": 0.9174915812039638
+          },
+          "mean_pointwise_scale_across_states": {
+            "max": 0.9671545550758269,
+            "median": 0.7537087206829405,
+            "min": 0.15172638470810373
+          }
+        },
+        "PASS": {
+          "fixed_state_32panel_final_ema_scale": {
+            "max": 1.0,
+            "median": 0.9993444812387338,
+            "min": 0.7154852280930344
+          },
+          "mean_pointwise_scale_across_states": {
+            "max": 0.6809556848174103,
+            "median": 0.4040974795141148,
+            "min": 0.06073993709352317
+          }
+        }
+      }
+    }
+  }
+}

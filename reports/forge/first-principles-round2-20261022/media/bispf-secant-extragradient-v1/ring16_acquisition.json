@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "8fc85b0137381eb1814031e44a4965a4f9dac195f59289bcb816c5273039561f",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "5d1c69df3e5e4032c888d4bf868dc64a61d7aa737c3a4dfa4e7d0baeb980c876",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/512e976ee4ec429eb00d0603f6cfca4c/observed-samples.pt": "515254bbfe0155d7b42af7f8ea04109f49a002cf2255caebf1abb083190a4082"
+  },
+  "task_id": "ring16_acquisition"
+}

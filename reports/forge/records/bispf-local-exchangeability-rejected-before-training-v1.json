@@ -1,0 +1,91 @@
+{
+  "candidate_id": "bispf-local-exchangeability-v1",
+  "candidate_revision": "3a08647b436e71317bb3cc17ad2e95d79d6299b0b52627d13bdd5bdad02b38f1",
+  "conclusion": "Rejected before API implementation or training: PASS-versus-severe AUROC .75 < the fixed .8 minimum; all 3 non-reference passing states remain fully hot (mobility 1). Full-window same-law controls have 0/20 full-heat cases, and all explicit missing rare/ring support, collapse and shifted-constant fixtures remain fully hot. These positives do not establish practical equivalence against the target: the saved-state reference is an earlier passing generated law, not an unavailable real batch. No public recipe, paid attempt, qualification or default claim was produced.",
+  "diagnostic_task_ids": [
+    "gaussian1d_smoke",
+    "gaussian1d_stability",
+    "vector_overlap"
+  ],
+  "evidence_scope": "historical",
+  "goal": "discriminator_stability",
+  "hypothesis": "A fixed multiscale local real/fake sample-label exchangeability test can separate finite-sample equilibrium fluctuations from support loss before scaling the actual G/prior displacement.",
+  "mechanism_class": "saved_state_finite_sample_support_sensitive_observer_screen",
+  "next_action": "Do not implement or train this exact observer, tune its ranks/window/alpha or replace the reference after rejection. Any substantive future settling mechanism must distinguish achievable approximation from equality while preserving finite-sample and rare-support controls.",
+  "provenance": {
+    "analysis_log": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls.log",
+      "sha256": "ea5163ba8f1ab1a12f5e692cb453dff4dc6390200524e782fb5016e7fb0f7a9a"
+    },
+    "analysis_result": {
+      "path": "reports/forge/first-principles-round2-20261022/settling/result.json",
+      "sha256": "815779c29e58649789711f56a33acfe1c98ecf9c24c90de610df4ed14e844cd8"
+    },
+    "analysis_source": {
+      "path": "reports/forge/first-principles-round2-20261022/settling/cheap_controls.py",
+      "sha256": "3a08647b436e71317bb3cc17ad2e95d79d6299b0b52627d13bdd5bdad02b38f1"
+    },
+    "archived_inputs": {
+      "gaussian1d_smoke": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/f9cc2d29828548608c07207c0756915e/evaluator/observed-samples.pt",
+        "sha256": "2a65f1ce2eb626d54ef4cccbf0d5bbb358b97aa11ab2036c0a7213fc67380cce"
+      },
+      "gaussian1d_stability": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9c292a19e74747d88230eb960f11a873/evaluator/observed-samples.pt",
+        "sha256": "4c14d4dad42c063c64bfd61a42a7868e4a162997ad1cc9e66f9569e3daab4ef3"
+      },
+      "vector_overlap": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/3a07f4a4ca4447e6a6151d11f47080c7/observed-samples.pt",
+        "sha256": "1fdd6b48fc6f79dd88459e924d6d220f2bcccdd50d7826fbe7bdaa1d9dccdb38"
+      }
+    },
+    "auroc": 0.75,
+    "cpu_seconds": 32.63926689,
+    "decision": "rejected_before_training",
+    "fixed_admission_minimum_auroc": 0.8,
+    "gpu_seconds": 0,
+    "independent_confirmation": false,
+    "model_forwards_added": 0,
+    "nonreference_passing_states_full_heat": [
+      {
+        "mobility": 1.0,
+        "p_global": 1.0349303051082946e-11,
+        "step": 500,
+        "task": "gaussian1d_smoke"
+      },
+      {
+        "mobility": 1.0,
+        "p_global": 1.737380432474595e-51,
+        "step": 750,
+        "task": "vector_overlap"
+      },
+      {
+        "mobility": 1.0,
+        "p_global": 4.6008866619250175e-28,
+        "step": 1050,
+        "task": "vector_overlap"
+      }
+    ],
+    "optimizer_updates": 0,
+    "raw_analysis_result": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls.json",
+      "sha256": "b4ec5f3678163f8fff6240682637e390856d1d7cc4826dcfea7d505696195403"
+    },
+    "reuse_eligible": false,
+    "sampling_draws_added": 0,
+    "saved_sample_source_commit": "2a2b662bdfa6249076b27dbea4c136e23d3e7a80",
+    "saved_sample_source_digest": "8bfcc01cd7482b1b348edb2162567adfdcdaa7d308f75fc834774302c6ac4acb",
+    "saved_source_cohort": "Round-one original BISPF seed-0 public-initializer saved generated panels; approximate passing-state references, not actual real training batches. Analytical zero-width support/constant fixtures are an explicitly separate synthetic diagnostic cohort.",
+    "source_commit": "96af7be246261f27db9794a4fa787dbe2a0487a9"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "bispf-local-exchangeability-rejected-before-training-v1",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/first-principles-round2-20261022/settling/README.md",
+    "sha256": "583e798159915ec5dde58eeec4d917c7862b5aabfa552cf64bed18230f75d570"
+  },
+  "task_results": []
+}

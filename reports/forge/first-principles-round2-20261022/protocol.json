@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "goal": "discriminator_stability",
+  "seed": 0,
+  "initializer": "task_public_deterministic_initializer",
+  "tasks": [
+    "gaussian1d_smoke",
+    "gaussian1d_stability",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2",
+    "grid100",
+    "rotated100",
+    "staggered100",
+    "ring16_acquisition",
+    "mode_hold",
+    "img_stripes2"
+  ],
+  "task_allowances_seconds": {
+    "gaussian1d_smoke": 120,
+    "gaussian1d_stability": 600,
+    "vector_unequal_mass": 1800,
+    "vector_unequal_width": 1800,
+    "vector_anisotropic": 1800,
+    "vector_overlap": 1800,
+    "img_bars4": 1800,
+    "img_blobs4": 1800,
+    "img_intensity2": 1800,
+    "grid100": 3600,
+    "rotated100": 3600,
+    "staggered100": 3600,
+    "ring16_acquisition": 300,
+    "mode_hold": 1800,
+    "img_stripes2": 1800
+  },
+  "candidate_reserved_seconds": 28020,
+  "comparison": {
+    "primary": "All eleven original failing tasks must PASS for a complete repair.",
+    "regressions": "All four previously passing control tasks must PASS; missing/blocked/error is not a pass.",
+    "partial": "Report per-task gates and continuous metrics for every arm, including failures; do not combine best per-task recipes.",
+    "causal": "All admitted arms share one committed frozen source and runtime; task architecture, data law and consumed streams, initial prior/capacity, sampling, update budget and evaluation cadence remain fixed. Every recipe delta and prior policy is declared."
+  },
+  "qualification_input": false,
+  "scope": "bispf_first_principles_successors_research_diagnostic",
+  "parent_protocol": "reports/forge/three-theme-repairs-20261022/protocol.json",
+  "parent_execution_source": "2a2b662bdfa6249076b27dbea4c136e23d3e7a80",
+  "parent_measured_readout": "reports/forge/three-theme-repairs-20261022/comparison.json",
+  "arms": [
+    "bispf-optimized-quintic-v1",
+    "bispf-output-energy-v1",
+    "bispf-secant-extragradient-v1",
+    "bispf-bregman-game-v1"
+  ],
+  "control_roles": {
+    "bispf-optimized-quintic-v1": "Contemporaneous unchanged original control for settling and Bregman payoff hypotheses.",
+    "bispf-output-energy-v1": "Contemporaneous first-round best global recipe; parent control for mechanics."
+  },
+  "max_scientific_arms": 5,
+  "max_paid_attempts": 60,
+  "reserved_seconds": 112080,
+  "ancillary_control_budget_seconds": {
+    "mechanics": 120,
+    "settling": 120,
+    "fidelity": 120
+  },
+  "entry_rule": "Each substantive successor must pass its fixed analytic/saved-state controls and public-API software/continuation checks before source freeze and paid execution. Failed cheap controls stop that mechanism; no threshold, seed or coefficient sweep.",
+  "stopping_rule": "One complete declared panel per admitted arm, no scientific retries or automatic further successor. Original task allowances apply. Incomplete, blocked, invalid and failed tasks remain visible. Finish all runnable diagnostic peers; own checkpoint prerequisites remain binding.",
+  "negative_controls": [
+    "Raw nearest-neighbor residual has a finite-sample floor above the old .020 cooler scale.",
+    "Energy-U plus peak EMA can freeze missing rare/ring support; not an admitted successor.",
+    "Unconditional normalized optimism, spectral reweighting, prior-only routing and CG4 output pullback have measured failures in BCAP sources.",
+    "Quartic sliced output transport repairs overlap but saturates blobs and regresses local density."
+  ],
+  "raw_artifact_root": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022",
+  "original_qualification_preserved": true,
+  "planned_arms": [
+    "bispf-optimized-quintic-v1",
+    "bispf-output-energy-v1",
+    "bispf-secant-extragradient-v1",
+    "bispf-local-exchangeability-v1",
+    "bispf-bregman-game-v1"
+  ],
+  "cheap_rejected": {
+    "bispf-local-exchangeability-v1": {
+      "reason": "Saved-state practical-equilibrium separation AUROC .75 failed fixed .8 minimum; no implementation or paid training.",
+      "report": "settling/README.md"
+    }
+  },
+  "recipe_deltas_vs_baseline": {
+    "bispf-optimized-quintic-v1": {},
+    "bispf-output-energy-v1": {
+      "output_energy_weight": 1.0
+    },
+    "bispf-secant-extragradient-v1": {
+      "output_energy_weight": 1.0,
+      "bispf_generator_step": "secant_extragradient"
+    },
+    "bispf-bregman-game-v1": {
+      "bispf_bregman_game": true
+    }
+  },
+  "preadmission_operator_revision": {
+    "mechanics": "The protected-field prototype falsely passed the fixed convex-quadratic contraction control because DirectionBlend concealed a reversed trial force. Retain that counterexample. The single admitted numerical definition, if its unchanged controls pass, checks the unblended normalized field then applies anchor protection only once to the final move. No constant/gate/seed tuning; another fixed-control failure stops the candidate."
+  }
+}

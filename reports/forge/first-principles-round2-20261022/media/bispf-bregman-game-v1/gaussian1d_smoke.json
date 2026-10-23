@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "ec2fed4103410ef04b7a255b028a87b71f25fff9c6765bff9755963aaa950733",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "4aa899cb74e31a297866512ada58acbbb952534195b7119370d2b6516380c6a4",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/ebc436d69a1e44cf8bc0e4e31111786c/evaluator/observed-samples.pt": "f85053c265f5cf181bb8448956a1b06f5acd117f9775d3494d8b6f52b53e340e"
+  },
+  "task_id": "gaussian1d_smoke"
+}

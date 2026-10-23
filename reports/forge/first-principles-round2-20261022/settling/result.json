@@ -1,0 +1,337 @@
+{
+  "alpha": 0.05,
+  "base_commit": "96af7be246261f27db9794a4fa787dbe2a0487a9",
+  "candidate_id": "bispf-local-exchangeability-v1",
+  "cpu_seconds": 32.63926689,
+  "decision": "Frozen admission AUROC .75 misses .8. Do not implement API or train this candidate; preserve finite-sample/support positives and practical-equivalence/reference limitation.",
+  "fixed_saved_steps": {
+    "gaussian1d_smoke": [
+      42,
+      84,
+      125,
+      209,
+      500,
+      1000
+    ],
+    "gaussian1d_stability": [
+      1042,
+      1125,
+      2000,
+      4000,
+      4042,
+      4709,
+      5000,
+      5042,
+      6000
+    ],
+    "vector_overlap": [
+      50,
+      100,
+      750,
+      800,
+      1000,
+      1050,
+      1100,
+      1150,
+      1200
+    ]
+  },
+  "fixtures": {
+    "collapsed_overlap": {
+      "minimum_local_p": 0.0,
+      "mobility": 1.0,
+      "p_global": 0.0,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": {
+        "center_index": 2048,
+        "center_sample": "fake",
+        "closed_neighbors": 2047,
+        "rank": 26,
+        "real_neighbors": 0
+      }
+    },
+    "collapsed_stationary": {
+      "minimum_local_p": 0.0,
+      "mobility": 1.0,
+      "p_global": 0.0,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": {
+        "center_index": 2048,
+        "center_sample": "fake",
+        "closed_neighbors": 2047,
+        "rank": 26,
+        "real_neighbors": 0
+      }
+    },
+    "matched_constant": {
+      "minimum_local_p": 1.0,
+      "mobility": 0.0,
+      "p_global": 1.0,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": null
+    },
+    "matched_four_atoms": {
+      "minimum_local_p": 1.0,
+      "mobility": 0.0,
+      "p_global": 1.0,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": null
+    },
+    "missing_one_four_atoms": {
+      "minimum_local_p": 1.59571620317291e-170,
+      "mobility": 1.0,
+      "p_global": 5.2288428545569916e-166,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": {
+        "center_index": 0,
+        "center_sample": "real",
+        "closed_neighbors": 3583,
+        "rank": 1664,
+        "real_neighbors": 1535
+      }
+    },
+    "missing_one_ring16": {
+      "minimum_local_p": 1.515571208362537e-39,
+      "mobility": 1.0,
+      "p_global": 4.966223735562362e-35,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": {
+        "center_index": 1920,
+        "center_sample": "real",
+        "closed_neighbors": 127,
+        "rank": 26,
+        "real_neighbors": 127
+      }
+    },
+    "missing_one_ring8": {
+      "minimum_local_p": 6.992478451068335e-81,
+      "mobility": 1.0,
+      "p_global": 2.291295338846072e-76,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": {
+        "center_index": 1792,
+        "center_sample": "real",
+        "closed_neighbors": 255,
+        "rank": 26,
+        "real_neighbors": 255
+      }
+    },
+    "missing_rare2percent": {
+      "minimum_local_p": 1.485992896732805e-12,
+      "mobility": 1.0,
+      "p_global": 4.869301524014056e-08,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": {
+        "center_index": 2007,
+        "center_sample": "real",
+        "closed_neighbors": 40,
+        "rank": 26,
+        "real_neighbors": 40
+      }
+    },
+    "shifted_constant": {
+      "minimum_local_p": 0.0,
+      "mobility": 1.0,
+      "p_global": 0.0,
+      "panel_size": 2048,
+      "ranks": [
+        26,
+        52,
+        104,
+        208,
+        416,
+        832,
+        1664,
+        2048
+      ],
+      "witness": {
+        "center_index": 0,
+        "center_sample": "real",
+        "closed_neighbors": 2047,
+        "rank": 26,
+        "real_neighbors": 2047
+      }
+    }
+  },
+  "gpu_seconds": 0,
+  "log": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls.log",
+    "sha256": "ea5163ba8f1ab1a12f5e692cb453dff4dc6390200524e782fb5016e7fb0f7a9a"
+  },
+  "nonreference_passing_states": [
+    {
+      "mobility": 1.0,
+      "p_global": 1.0349303051082946e-11,
+      "step": 500,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "mobility": 1.0,
+      "p_global": 1.737380432474595e-51,
+      "step": 750,
+      "task": "vector_overlap"
+    },
+    {
+      "mobility": 1.0,
+      "p_global": 4.6008866619250175e-28,
+      "step": 1050,
+      "task": "vector_overlap"
+    }
+  ],
+  "optimizer_updates": 0,
+  "panel_window": 2048,
+  "probe_source_sha256": "3a08647b436e71317bb3cc17ad2e95d79d6299b0b52627d13bdd5bdad02b38f1",
+  "raw_probe": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/settling/cheap-controls.json",
+    "sha256": "b4ec5f3678163f8fff6240682637e390856d1d7cc4826dcfea7d505696195403"
+  },
+  "references": {
+    "gaussian_shifted": {
+      "step": 4709,
+      "task": "gaussian1d_stability"
+    },
+    "gaussian_stationary": {
+      "step": 209,
+      "task": "gaussian1d_smoke"
+    },
+    "overlap": {
+      "step": 100,
+      "task": "vector_overlap"
+    }
+  },
+  "sample_receipts": {
+    "gaussian1d_smoke": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/f9cc2d29828548608c07207c0756915e/evaluator/observed-samples.pt",
+      "sha256": "2a65f1ce2eb626d54ef4cccbf0d5bbb358b97aa11ab2036c0a7213fc67380cce"
+    },
+    "gaussian1d_stability": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9c292a19e74747d88230eb960f11a873/evaluator/observed-samples.pt",
+      "sha256": "4c14d4dad42c063c64bfd61a42a7868e4a162997ad1cc9e66f9569e3daab4ef3"
+    },
+    "vector_overlap": {
+      "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/3a07f4a4ca4447e6a6151d11f47080c7/observed-samples.pt",
+      "sha256": "1fdd6b48fc6f79dd88459e924d6d220f2bcccdd50d7826fbe7bdaa1d9dccdb38"
+    }
+  },
+  "sample_source_digest": "8bfcc01cd7482b1b348edb2162567adfdcdaa7d308f75fc834774302c6ac4acb",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "status": "rejected_before_training",
+  "summary": {
+    "all_support_fixtures_full_and_matched_fixtures_zero": true,
+    "auroc": 0.75,
+    "same_law_full": {
+      "count": 20,
+      "full_heat": 0,
+      "max": 0.07483144853582305,
+      "median": 0.0,
+      "min": 0.0,
+      "zero": 19
+    },
+    "same_law_small": {
+      "count": 320,
+      "full_heat": 3,
+      "max": 1.0,
+      "median": 0.0,
+      "min": 0.0,
+      "zero": 284
+    },
+    "saved_pass": {
+      "count": 6,
+      "full_heat": 3,
+      "max": 1.0,
+      "median": 0.5,
+      "min": 0.0,
+      "zero": 3
+    },
+    "saved_severe": {
+      "count": 6,
+      "full_heat": 6,
+      "max": 1.0,
+      "median": 1.0,
+      "min": 1.0,
+      "zero": 0
+    },
+    "screen_pass": false
+  }
+}

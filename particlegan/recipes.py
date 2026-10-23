@@ -226,6 +226,15 @@ class Recipe:
     # Versioned dense-only numerical profile; annotated convolution, vector
     # and sampled-prior rules remain owned by their existing settings.
     optimizer_dense_profile: str = "default"
+    # Opt-in research objectives consume the existing G-phase batches only.
+    output_energy_weight: float = 0.0
+    fidelity_transport_weight: float = 0.0
+    # Replace both adversarial payoffs by a learned Bregman c-transform game.
+    bispf_bregman_game: bool = False
+    # Relocate existing BISPF G/prior cooling to the finite optimizer move.
+    bispf_thermal_application: str = "gradient"
+    # Same-batch normalized G/prior predictor-corrector; critic remains fixed.
+    bispf_generator_step: str = "ordinary"
     # Opt-in protection of existing G/encoder/prior objectives. Component
     # callers bind their protected losses before backward only when enabled.
     constraint_geometry_mode: str = "none"
@@ -297,6 +306,37 @@ class Recipe:
             raise ValueError("optimizer_smoothing must be finite and nonnegative")
         if self.optimizer_smoothing and self.optimizer_family != "dualnorm":
             raise ValueError("optimizer_smoothing requires optimizer_family='dualnorm'")
+        for field in ("output_energy_weight", "fidelity_transport_weight"):
+            value = getattr(self, field)
+            if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+                raise ValueError(f"{field} must be finite and nonnegative")
+        if type(self.bispf_bregman_game) is not bool:
+            raise ValueError("bispf_bregman_game must be a boolean")
+        if self.bispf_bregman_game and (
+                self.effective_critic_formulation != "bispf" or self.loss != "non_saturating"
+                or self.model != "gan" or self.conditioning != "scalar" or self.encoder_mode != "none"
+                or self.input_noise_std or self.output_noise_std
+                or self.output_energy_weight or self.fidelity_transport_weight
+                or self.kinetic_transport_weight or self.kinetic_transport_local_weight
+                or self.bispf_thermal_application != "gradient" or self.bispf_generator_step != "ordinary"
+                or self.constraint_geometry_mode not in ("none", "direction_blend")):
+            raise ValueError("bispf_bregman_game requires scalar non_saturating BISPF, zero additive noise, "
+                             "no auxiliary transport/energy, gradient cooling and none/direction_blend protection")
+        if self.bispf_thermal_application not in ("gradient", "displacement"):
+            raise ValueError("bispf_thermal_application must be gradient or displacement")
+        if self.bispf_generator_step not in ("ordinary", "secant_extragradient"):
+            raise ValueError("bispf_generator_step must be ordinary or secant_extragradient")
+        if self.bispf_generator_step == "secant_extragradient":
+            from .mechanics_replay import validate_recipe
+            validate_recipe(self)
+        if self.bispf_thermal_application == "displacement" and (
+                self.effective_critic_formulation != "bispf" or self.optimizer_family != "dualnorm"
+                or self.optimizer_momentum != 0):
+            raise ValueError("thermal displacement requires zero-momentum full DualNorm BISPF")
+        if self.bispf_thermal_application == "displacement" and self.constraint_geometry_mode == "strict_progress":
+            # Shortening an accepted finite nonconvex step can cross a higher
+            # loss region. Its endpoint certificate cannot certify the new one.
+            raise ValueError("thermal displacement cannot follow strict_progress without rechecking its finite protected losses")
         if self.constraint_geometry_mode not in ("none", "nonascent", "strict_progress", "direction_blend"):
             raise ValueError("constraint_geometry_mode must be none, nonascent, strict_progress or direction_blend")
         if self.constraint_geometry_mode != "none" and (self.optimizer_family != "dualnorm" or self.optimizer_momentum):

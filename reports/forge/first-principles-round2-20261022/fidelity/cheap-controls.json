@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "candidate": "bispf-bregman-game-v1",
+  "seed_study": false,
+  "scope": "analytic and CPU operation controls; no optimizer updates, sampling draws or qualification",
+  "saturated_prelink": [
+    {
+      "prelink": -40.0,
+      "target": 1.0,
+      "value": 40.0,
+      "minimum_absolute_gradient": 0.5
+    },
+    {
+      "prelink": 40.0,
+      "target": 0.0,
+      "value": 40.0,
+      "minimum_absolute_gradient": 0.5
+    }
+  ],
+  "same_moments_wrong_shape_zero_price_value": 0.29289321881345254,
+  "missing_mode_zero_price_generator_value": 0.0,
+  "missing_mode_critic_loss_price_gradient": [
+    0.25,
+    0.0,
+    0.0,
+    -0.25
+  ],
+  "constant_law": "exact-zero cost/force and gauge control covered by unit tests",
+  "global_torch_rng_unchanged": true,
+  "cost_measurements": [
+    {
+      "kind": "identity",
+      "batch": 2048,
+      "coordinates": 2,
+      "pair_matrix_bytes_float32": 16777216,
+      "cpu_seconds_D_plus_G_cost_and_backward": [
+        0.13141708799999985,
+        0.06702480100000008,
+        0.09219670400000002
+      ],
+      "native_7000_step_cost_only_cpu_projection_seconds": 919.919615999999
+    },
+    {
+      "kind": "sigmoid",
+      "batch": 32,
+      "coordinates": 64,
+      "pair_matrix_bytes_float32": 4096,
+      "cpu_seconds_D_plus_G_cost_and_backward": [
+        0.007030158999999925,
+        0.0004983100000000018,
+        0.0004882710000000401
+      ],
+      "native_7000_step_cost_only_cpu_projection_seconds": null
+    }
+  ],
+  "runtime_limit": "O(n*m*d) device-local cost plus row min; no CPU assignment, iterations or extra forwards"
+}

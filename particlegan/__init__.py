@@ -15,6 +15,7 @@ from .continuous import DataDriftController
 from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
 from .gan_loss import GANLoss
+from .bregman_game import declare_output_link
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
 from .policy import E22Policy, ServedModel, StepNoise, UpdatePolicy
 from .recipes import (
@@ -50,6 +51,7 @@ from . import init
 __all__ = [
     "disable_autograd_multithreading", "serial_autograd",
     "init",
+    "declare_output_link",
     "TensorFlowV1Adam",
     "prior_capabilities", "prior_mechanisms",
     "ParticleEncoding", "particle_ae", "particle_vae",

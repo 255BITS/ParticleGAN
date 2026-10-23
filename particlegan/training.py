@@ -1,5 +1,6 @@
 """A checkpointable training loop using the current recipe formulation."""
 from copy import deepcopy
+from contextlib import nullcontext
 import math
 
 from particlegan.optim.constraint_geometry import constraint_geometry_backward
@@ -158,6 +159,15 @@ class GANTrainer:
                 or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        self._bregman_link = None
+        if recipe.bispf_bregman_game:
+            from .bregman_game import OutputLink
+            self._bregman_link = OutputLink(self.G)
+            if _convolution_autocast(self.G, recipe.training_precision == "bf16_channels_last"):
+                raise ValueError("Bregman game requires an exact full-precision output/prelink capability")
+        if recipe.bispf_generator_step != "ordinary":
+            from .mechanics_replay import validate
+            validate(self)
         for module in (self.G, self.D):
             if (_convolution_autocast(module, recipe.training_precision == "bf16_channels_last")
                     and next(module.parameters()).device.type == "cuda"):
@@ -303,6 +313,14 @@ class GANTrainer:
     def _generate(self, model, latent, sigma, stream, indices=None, *, rows=None):
         if indices is not None and rows is not None:
             raise ValueError("pass sampled row IDs as indices or rows, not both")
+        bregman_link = getattr(self, "_bregman_link", None)
+        if bregman_link is not None and self._in_training_step:
+            if model is not self.G or sigma:
+                raise ValueError("Bregman training requires the declared live generator and zero output noise")
+            with bregman_link.capture() as observed:
+                output = self.policy.generate(latent, sigma=sigma, stream=stream, model=model,
+                                              rows=indices if rows is None else rows)
+            return bregman_link.attach(output, observed)
         if self._in_training_step and self._bf16_generator and latent.device.type == "cuda":
             with torch.autocast("cuda", dtype=torch.bfloat16):
                 return _float_output(self.policy.generate(latent, sigma=sigma, stream=stream, model=model,
@@ -347,6 +365,10 @@ class GANTrainer:
         return True
 
     def _execute_step(self, real, *, generator_real=None, collect_stats=False):
+        transaction = None
+        if self.recipe.bispf_generator_step != "ordinary":
+            from .mechanics_replay import ReplayState
+            transaction = ReplayState(self)
         self._in_training_step = True
         try:
             # Scope the entire update: graph construction can affect backward
@@ -355,6 +377,8 @@ class GANTrainer:
                 return self._step(real, generator_real=generator_real, collect_stats=collect_stats)
         except Exception:
             self.policy.abort_step()
+            if transaction is not None:
+                transaction.restore()
             raise
         finally:
             self._in_training_step = False
@@ -391,9 +415,56 @@ class GANTrainer:
         self.max_steps = max_total_steps
         return self.max_steps
 
+    def _generator_losses(self, fake_g, fake_logits, real_g, real_logits, indices, *, collect_stats=False):
+        """The shared scalar objective on existing G-phase tensors; no draws."""
+        recipe = self.recipe
+        bregman_link = getattr(self, "_bregman_link", None)
+        bregman_stats = None
+        if bregman_link is None:
+            loss_gan = self.loss.g_loss(fake_logits, real_logits)
+        else:
+            from .bregman_game import generator_game_loss
+            bregman_stats = {} if collect_stats else None
+            loss_gan = generator_game_loss(bregman_link.cost(fake_g, real_g), real_logits,
+                thermal_scale=float(self.penalty.regularizer.record._thermal_scale),
+                diagnostics=bregman_stats, fake=fake_g, real=real_g, kind=bregman_link.kind,
+                prelink=getattr(fake_g, "_particlegan_prelink", None))
+        transport = (recipe.kinetic_transport_loss(fake_g, real_g)
+                     if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
+        transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
+                           if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
+        output_energy = loss_gan.new_zeros(())
+        if recipe.output_energy_weight:
+            from .allocation_repair import energy_distance
+            output_energy = recipe.output_energy_weight * energy_distance(fake_g, real_g)
+        fidelity_transport = loss_gan.new_zeros(())
+        if recipe.fidelity_transport_weight:
+            from .fidelity_repair import sliced_quartic_transport
+            fidelity_transport = recipe.fidelity_transport_weight * sliced_quartic_transport(fake_g, real_g)
+        prior_reg = loss_gan.new_zeros(())
+        if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0):
+            raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+            prior_reg = self.prior_regularizer(raw)
+        loss_g = loss_gan + recipe.prior_reg * prior_reg
+        if self.prior.z.requires_grad and recipe.prior_l2 > 0:
+            loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
+        if recipe.kinetic_transport_weight:
+            loss_g = loss_g + transport
+        if recipe.kinetic_transport_local_weight:
+            loss_g = loss_g + transport_local
+        if recipe.output_energy_weight:
+            loss_g = loss_g + output_energy
+        if recipe.fidelity_transport_weight:
+            loss_g = loss_g + fidelity_transport
+        return dict(loss_g=loss_g, loss_gan=loss_gan, prior_reg=prior_reg,
+                    transport=transport, transport_local=transport_local,
+                    output_energy=output_energy, fidelity_transport=fidelity_transport,
+                    bregman_stats=bregman_stats)
+
     def _step(self, real, *, generator_real=None, collect_stats=False):
         self._serve_release()
         recipe = self.recipe
+        bregman_link = getattr(self, "_bregman_link", None)
         if self.max_steps is not None and self.completed_steps >= self.max_steps:
             raise RuntimeError("recipe training budget exhausted")
         real = self._batch(real, "real")
@@ -416,7 +487,12 @@ class GANTrainer:
             self.policy.observe_support(latent)
             fake = self._generate(self.G, latent, sigma_out, noise, rows=indices_d)
         self.policy.observe_critic_pair(real, fake)
-        loss_d = self.loss.d_loss(critic(real), critic(fake))
+        real_logits_d, fake_logits_d = critic(real), critic(fake)
+        if bregman_link is None:
+            loss_d = self.loss.d_loss(real_logits_d, fake_logits_d)
+        else:
+            from .bregman_game import critic_game_loss
+            loss_d = critic_game_loss(bregman_link.cost(fake, real), real_logits_d)
         self.penalty.collect_stats = collect_stats
         penalty = self.penalty(critic, real, fake)
         penalty_stats = self.penalty.last_stats
@@ -429,53 +505,61 @@ class GANTrainer:
         self.D.eval()
         self.G.train()
         flags = [p.requires_grad for p in self.D.parameters()]
+        thermal_displacement = recipe.bispf_thermal_application == "displacement"
+        if thermal_displacement:
+            from .settling_repair import unscaled_generator_gradients, thermal_optimizer_step
+            generator_context = unscaled_generator_gradients(self.penalty.regularizer.record, self.device)
+        else:
+            generator_context = nullcontext(1.0)
         try:
-            self.D.requires_grad_(False)
-            latent, indices = self._sample_training_prior(len(real))
-            fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
-            fake_logits = critic(fake_g)
-            real_g = generator_real() if callable(generator_real) else generator_real
-            real_g = real if real_g is None else self._batch(real_g, "generator_real")
-            if real_g.shape[1:] != real.shape[1:]:
-                raise ValueError("generator_real must match the real sample shape")
-            if len(real_g) != len(real):
-                raise ValueError("RpGAN generator_real must match the real batch size")
-            real_logits = critic(real_g)
-            loss_gan = self.loss.g_loss(fake_logits, real_logits)
-            transport = (recipe.kinetic_transport_loss(fake_g, real_g)
-                         if recipe.kinetic_transport_weight else loss_gan.new_zeros(()))
-            transport_local = (recipe.kinetic_transport_local_loss(fake_g, real_g)
-                               if recipe.kinetic_transport_local_weight else loss_gan.new_zeros(()))
-            prior_reg = loss_gan.new_zeros(())
-            if self.prior.z.requires_grad and (recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0):
-                # Keep the historical unweighted diagnostic, even at weight 0.
-                # Its contribution to the training objective is recipe.prior_reg.
-                raw = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
-                prior_reg = self.prior_regularizer(raw)
-            loss_g = loss_gan + recipe.prior_reg * prior_reg
-            if self.prior.z.requires_grad and recipe.prior_l2 > 0:
-                loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
-            if recipe.kinetic_transport_weight:
-                loss_g = loss_g + transport
-            if recipe.kinetic_transport_local_weight:
-                loss_g = loss_g + transport_local
-            self.opt_g.zero_grad()
-            protected_evaluator = None
-            if recipe.constraint_geometry_mode == "strict_progress":
-                # Same sampled indices and fixed within-component perturbation;
-                # probes never call a sampler or draw training/output noise.
-                locations = self.prior.z.detach().clone()
-                sampled_latent = latent.detach().clone()
-                def protected_evaluator():
-                    replay = sampled_latent + (self.prior.z[indices] - locations[indices])
-                    logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
-                    return (self.loss.g_loss(logits, real_logits),)
-            constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
-                                         protected_evaluator=protected_evaluator)
-            self.policy.after_generator_backward(
-                loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
-            self.opt_g.step()
-            self.policy.after_generator_step()
+            with generator_context as thermal_scale:
+                self.D.requires_grad_(False)
+                latent, indices = self._sample_training_prior(len(real))
+                fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+                fake_logits = critic(fake_g)
+                real_g = generator_real() if callable(generator_real) else generator_real
+                real_g = real if real_g is None else self._batch(real_g, "generator_real")
+                if real_g.shape[1:] != real.shape[1:]:
+                    raise ValueError("generator_real must match the real sample shape")
+                if len(real_g) != len(real):
+                    raise ValueError("RpGAN generator_real must match the real batch size")
+                real_logits = critic(real_g)
+                losses = self._generator_losses(fake_g, fake_logits, real_g, real_logits, indices, collect_stats=collect_stats)
+                loss_g, loss_gan, prior_reg = (losses[key] for key in ("loss_g", "loss_gan", "prior_reg"))
+                transport, transport_local = losses["transport"], losses["transport_local"]
+                output_energy, fidelity_transport = losses["output_energy"], losses["fidelity_transport"]
+                bregman_stats = losses["bregman_stats"]
+                self.opt_g.zero_grad()
+                protected_evaluator = None
+                if recipe.constraint_geometry_mode == "strict_progress":
+                    # Same sampled indices and fixed within-component perturbation;
+                    # probes never call a sampler or draw training/output noise.
+                    locations = self.prior.z.detach().clone()
+                    sampled_latent = latent.detach().clone()
+                    def protected_evaluator():
+                        replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                        logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                        return (self.loss.g_loss(logits, real_logits),)
+                constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
+                                             protected_evaluator=protected_evaluator)
+                if recipe.bispf_generator_step == "secant_extragradient":
+                    from .mechanics_replay import extragradient_step
+                    locations = self.prior.z.detach().clone()
+                    sampled_latent = latent.detach().clone()
+                    def replay_objective():
+                        replay = sampled_latent + (self.prior.z[indices] - locations[indices])
+                        output = self._generate(self.G, replay, sigma_out, noise, rows=indices)
+                        return self._generator_losses(output, critic(output), real_g, real_logits, indices)
+                    replay_stats = extragradient_step(self, replay_objective, anchor_losses=losses,
+                        critic_loss=loss_d - penalty, collect_stats=collect_stats)
+                else:
+                    self.policy.after_generator_backward(
+                        loss_gan=loss_gan.detach(), loss_critic=(loss_d - penalty).detach())
+                    if thermal_displacement:
+                        thermal_step_stats = thermal_optimizer_step(self.opt_g, thermal_scale, collect_stats=collect_stats)
+                    else:
+                        self.opt_g.step()
+                    self.policy.after_generator_step()
         finally:
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
@@ -485,10 +569,22 @@ class GANTrainer:
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
         result["step"] = self.completed_steps
+        if bregman_link is not None:
+            result["bregman_game"] = loss_gan.detach()
+            if collect_stats:
+                result["bregman_stats"] = bregman_stats
         if recipe.kinetic_transport_weight:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
             result["kinetic_transport_local"] = transport_local.detach()
+        if recipe.output_energy_weight:
+            result["output_energy"] = output_energy.detach()
+        if recipe.fidelity_transport_weight:
+            result["fidelity_transport"] = fidelity_transport.detach()
+        if recipe.bispf_generator_step == "secant_extragradient":
+            result["generator_replay"] = replay_stats
+        if thermal_displacement:
+            result["thermal_displacement"] = thermal_step_stats
         if collect_stats:
             result["penalty_stats"] = penalty_stats
         return result
@@ -549,11 +645,13 @@ class GANTrainer:
 
     def _state_dict(self):
         names = ("G", "D", "prior", "ema_G", "ema_prior")
+        bregman_link = getattr(self, "_bregman_link", None)
         return deepcopy({
             **({"max_steps": self.max_steps} if self.max_steps != self.recipe.total_steps else {}),
             "serial_backward": True,
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
+            **({"bregman_output_link": bregman_link.contract} if bregman_link is not None else {}),
             **self.recipe.prior_regularizer_checkpoint(self.prior_regularizer),
             "optimizer_options": self.optimizer_options, "penalty_options": self.penalty_options,
             "device": str(self.device), "dtype": str(self.dtype),
@@ -627,6 +725,8 @@ class GANTrainer:
             saved_recipe = {**saved_recipe, "prior_update": "frozen"}
         if not isinstance(saved_recipe, dict) or _normalized_recipe(saved_recipe) != _normalized_recipe(expected["recipe"]):
             raise ValueError("checkpoint recipe does not match trainer")
+        if getattr(self, "_bregman_link", None) is not None and state["bregman_output_link"] != expected["bregman_output_link"]:
+            raise ValueError("checkpoint Bregman output capability does not match trainer")
         self.recipe.restore_prior_regularizer(self.prior_regularizer, state.get("prior_regularizer"), validate_only=True)
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:

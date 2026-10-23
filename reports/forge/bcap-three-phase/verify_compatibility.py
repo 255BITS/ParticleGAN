@@ -70,7 +70,9 @@ def adapter_source(original):
     lines = source.splitlines(keepends=True)
     block = "".join(lines[target.lineno - 1:target.end_lineno])
     require(block.endswith("}\n"), "Original map bytes differ from the preserved source")
-    additions = ''.join(f'    {json.dumps(name)}: {json.dumps(value)},\n' for name, value in INACTIVE_DEFAULTS.items())
+    additions = ''.join(f'    {json.dumps(name)}: '
+                        f'{repr(value) if value is None or isinstance(value, bool) else json.dumps(value)},\n'
+                        for name, value in INACTIVE_DEFAULTS.items())
     new_block = block[:-2] + additions + "}\n"
     adapted = "".join(lines[:target.lineno - 1]) + new_block + "".join(lines[target.end_lineno:])
     adapted_tree = ast.parse(adapted)

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "c37ecccdf606e374c7013e80bf0e41666d42d2e4c40536b24b7a69e4c93272aa",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "4842df83cf717c43f5de2e326363c6a61f62ee4b70b526da359cc007d4b3c703",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/29b95f867728494faf79c51145d11481/observed-samples.pt": "88ade89ac0c125e40a6db40016cfd748072bd36e93a9d6d2a41c62d7aef58907"
+  },
+  "task_id": "vector_anisotropic"
+}

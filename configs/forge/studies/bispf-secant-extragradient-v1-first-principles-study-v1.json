@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "bispf-secant-extragradient-v1-first-principles-study-v1",
+  "status": "ready",
+  "candidate": "bispf-secant-extragradient-v1",
+  "control": {
+    "candidate_id": "bispf-output-energy-v1",
+    "task_map": {}
+  },
+  "hypothesis": "After energy restores support, normalized finite motion can still deform narrow populations; same-batch secant-certified predictor/corrector motion should improve conditional density without losing prior allocation. Endpoint prediction is supplementary; all sustained gates decide complete repair.",
+  "scope": {
+    "view": "bispf-three-theme-repair-diagnostic-v1",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "bispf-first-principles-round2-v1",
+    "budget_seconds": 112080,
+    "candidate_budget_seconds": 28020
+  },
+  "max_rounds": 1,
+  "prior_evidence": [
+    {
+      "path": "reports/forge/three-theme-repairs-20261022/comparison.json",
+      "selector": [
+        "arms",
+        "bispf-output-energy-v1"
+      ],
+      "identity": {
+        "candidate_revision": "f41fc85d86fb415a4b93eeff42b96785f69cf36923671dabd4513b0696a58b00"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "prediction": {
+    "task_id": "vector_unequal_width",
+    "metric": "component_covariance_error",
+    "op": "<=",
+    "threshold": 0.85,
+    "phase": "final"
+  },
+  "falsifier": {
+    "task_id": "mode_hold",
+    "metric": "hq",
+    "op": "<",
+    "threshold": 0.9,
+    "phase": "final"
+  },
+  "competing_explanation": "Finite-batch matching, local operator checks and stable output forces do not guarantee population convergence, sustained target fidelity or compatibility with the normalized shared network and learned prior. Existing original and energy controls isolate source drift; every failure and regression remains visible.",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "prediction_observed": "review_saved_diagnostics",
+    "inconclusive": "stop_and_readout",
+    "incomplete": "request_missing_evidence"
+  }
+}

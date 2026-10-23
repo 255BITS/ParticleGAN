@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 850. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 859. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -807,6 +807,22 @@ Direction-only projection (PR383, constraint_geometry_mode=direction_blend) is t
 **Next:** Base future BCAP research on the exact PR383 direction-only recipe; stop all five exact moonshot revisions and retain their negative evidence. Inspect saved equal-clock full/core density, mass allocation, spill and controller evidence before composition; keep unavailable gradient-force measurements explicit. Any next global trainer comparison should isolate one causal mechanism with a fixed backend and numerical falsifier, measure force scaling and actual displacement, and preserve all six Tier 1 gates, trajectory, residual and word hold. A common-clock word hold would be a separately declared new cohort; never regrade these original own-prefix results.
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/b235112dee4dd6d06a4e3eca7c1e31918a6a8b51/reports/forge/bcap-three-phase/README.md) · [Record](records/bcap-three-phase-concluded-context-v1.json)
+
+### bispf-local-exchangeability-v1 · bispf-local-exchangeability-rejected-before-training-v1
+
+**Scope:** historical; family_context; revision `3a08647b436e71317bb3cc17ad2e95d79d6299b0b52627d13bdd5bdad02b38f1`.
+
+A fixed multiscale local real/fake sample-label exchangeability test can separate finite-sample equilibrium fluctuations from support loss before scaling the actual G/prior displacement.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `saved_state_finite_sample_support_sensitive_observer_screen`.
+
+
+
+Rejected before API implementation or training: PASS-versus-severe AUROC .75 < the fixed .8 minimum; all 3 non-reference passing states remain fully hot (mobility 1). Full-window same-law controls have 0/20 full-heat cases, and all explicit missing rare/ring support, collapse and shifted-constant fixtures remain fully hot. These positives do not establish practical equivalence against the target: the saved-state reference is an earlier passing generated law, not an unavailable real batch. No public recipe, paid attempt, qualification or default claim was produced.
+
+**Next:** Do not implement or train this exact observer, tune its ranks/window/alpha or replace the reference after rejection. Any substantive future settling mechanism must distinguish achievable approximation from equality while preserving finite-sample and rare-support controls.
+
+[Evidence](../../reports/forge/first-principles-round2-20261022/settling/README.md) · [Record](records/bispf-local-exchangeability-rejected-before-training-v1.json)
 
 ### context:local-mog-envelope · context-local-mog-envelope-7f6e13219e35
 
@@ -4168,6 +4184,22 @@ Native BISPF on the two explicitly wider architecture-portability hosts passes s
 
 [Evidence](../../reports/forge/attempts/91832bb54bc74d1abc42a8576d9fc7e7/result.json) · [Record](records/readout-3721266a32807c156725dfc8.json)
 
+### bispf-secant-extragradient-v1 · readout-38cf5db74643596000f7c1e4
+
+**Scope:** research_diagnostic; scientific; revision `b709d4b4a6d8a298c38f646b6daf614ca6a40c593afa095ab868031c93d9fa89`.
+
+After energy restores support, normalized finite motion can still deform narrow populations; same-batch secant-certified predictor/corrector motion should improve conditional density without losing prior allocation. Endpoint prediction is supplementary; all sustained gates decide complete repair.
+
+**Observed:** {'FAIL': 10, 'PASS': 5}; wall seconds 11637.005; mechanism `structural`.
+
+staggered100: precision=0.63868, center_rms_sigma=0.17678, mass_tv=0.08418, radial_ks=0.26737; rotated100: precision=0.60551, center_rms_sigma=0.30766, mass_tv=0.08264, radial_ks=0.26227; grid100: precision=0.62864, center_rms_sigma=0.26611, mass_tv=0.10209, radial_ks=0.26204
+
+Completed all 15 seed-0 public-initialized matched tasks: 5 PASS, 10 FAIL; 2/4 original controls retained. Paid 11637.005374 seconds. Scientific source a03373da3421303b89c99a39898b091e22910134; unchanged gates, no retries, no ordinary qualification. Full report: reports/forge/first-principles-round2-20261022/README.md.
+
+**Next:** Reject this exact global revision as a replacement: ring and mode retention regress. Before another paid arm, investigate coupled player kinetics and local G/prior geometry with cheap controls.
+
+[Evidence](../../reports/forge/attempts/09b3f83cf31b4ad28bbb8949da7aef5c/result.json) · [Record](records/readout-38cf5db74643596000f7c1e4.json)
+
 ### bispf-v1 · readout-3f3f893ae724d651f1655fc9
 
 **Scope:** current; scientific; revision `45e5304bd6d19af271e0d2072cf1c5d36a3cf8cbcbf45e9eada0218c8ad0782b`.
@@ -4376,6 +4408,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 1.0,
 
 [Evidence](../../reports/forge/technique-receipts/3c6a84341114445da149f04ab7541f01.json) · [Record](records/readout-5bc30fee4d41b69294b1e32e.json)
 
+### bispf-output-energy-v1 · readout-60b29f7064ecc8b4be037149
+
+**Scope:** research_diagnostic; scientific; revision `7ee41f21594b9f695a00613dc02091eceed34f9b64b95fafd01844319cf9a6e1`.
+
+The first-round best complete global recipe supplies a source-matched control for the new finite-step mechanics, retaining its measured anisotropic/blobs repairs.
+
+**Observed:** {'FAIL': 9, 'PASS': 6}; wall seconds 2206.04; mechanism `structural`.
+
+ring16_acquisition: modes=16, hq=0.96191, mass_tv=0.061279; img_blobs4: modes=4, hq=0.96875; img_bars4: modes=3, hq=0.59375
+
+Completed all 15 seed-0 public-initialized matched tasks: 6 PASS, 9 FAIL; 4/4 original controls retained. Paid 2206.040106 seconds. Scientific source a03373da3421303b89c99a39898b091e22910134; unchanged gates, no retries, no ordinary qualification. Full report: reports/forge/first-principles-round2-20261022/README.md.
+
+**Next:** Retain as stronger balanced research control, not a qualified replacement. No per-task mixture or automatic adoption.
+
+[Evidence](../../reports/forge/attempts/08919da27fa34a85ab0927581c3cee0d/result.json) · [Record](records/readout-60b29f7064ecc8b4be037149.json)
+
 ### ka2-global-repair-v1 · readout-628b01d1adffd11312aff9b1
 
 **Scope:** current; scientific; revision `71a50b7b10fdc6307c92b781224e73625f670377ffeb4a31b9f3abe4b34be108`.
@@ -4407,6 +4455,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.130
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/813505867f5348bfbe113791d78ce0c5.json) · [Record](records/readout-6c0c2c5c6610ecfe73fe315d.json)
+
+### bispf-settling-displacement-v1 · readout-6eef9d004a4038d6256d665f
+
+**Scope:** research_diagnostic; scientific; revision `9c98f71ac51f73655a5b209c3b484cb4e383eafad8dd40881cee72f2e18b5be3`.
+
+Relocating the earned thermal factor from G/prior gradients to applied finite moves repairs settling while retaining residual reheating and unchanged critic updates.
+
+**Observed:** {'FAIL': 11, 'PASS': 4}; wall seconds 1401.374; mechanism `structural`.
+
+img_blobs4: modes=3, hq=0.8125; ring16_acquisition: modes=16, hq=0.9519, mass_tv=0.092041
+
+4/15 PASS, all eleven original failures retained and all four regression controls retained. Relocating existing thermal scaling does not repair Gaussian or overlap settling. Fourteen final metric dictionaries exactly match the control; dense grid changes but still fails.
+
+**Next:** Stop this exact relocation-only revision. Retain saved-state and analytical negative controls: an unchanged energy-U observer would cool missing rare/ring populations prematurely while its peak EMA reheats passing overlap panels. Require a support-sensitive and noise-aware signal to pass those controls before a separately preregistered successor; no threshold sweep or additional paid round.
+
+[Evidence](../../reports/forge/attempts/02a71b394e9f49478f13b0b9af3a2fa2/result.json) · [Record](records/readout-6eef9d004a4038d6256d665f.json)
 
 ### bispf-v2 · readout-7450f3d30d639bad8e4f25e5
 
@@ -4471,6 +4535,22 @@ Both width 64 image tasks PASS all original sustained gates at 600 updates: HQ 1
 **Next:** Retain this positive diagnostic beside ordinary quality and the completed performance matrix; no natural-image quality or automatic promotion claim.
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-7a4fda449cb2e080c1aebf91.json)
+
+### bispf-optimized-quintic-v1 · readout-7b135fc6ad2dd8e54342d8d7
+
+**Scope:** research_diagnostic; scientific; revision `f82d9e0600adac4921c941dc26fd7a1f2f360895860157c8a957b4af9632b608`.
+
+Removing the experimental output-energy objective supplies the unchanged BISPF recipe as a same-source matched ablation control for all three repair hypotheses. This run is necessary for the controlled comparison; archived different-source trajectories supply no matched-control credit.
+
+**Observed:** {'FAIL': 11, 'PASS': 4}; wall seconds 1312.437; mechanism `structural`.
+
+staggered100: precision=0.33617, center_rms_sigma=1.1429, mass_tv=0.12142, radial_ks=0.36911; vector_unequal_mass: hq=0.97729, mass_tv=0.057422
+
+Matched common-source control: 4/15 PASS, with all eleven selected failures retained. Every final metric dictionary and verdict exactly reproduces the original selected ordinary-quality evidence; historical identity and qualification remain separate.
+
+**Next:** Retain this completed diagnostic control and compare all changed recipes against its original certified receipts. Do not replace or requalify the selected historical recipe.
+
+[Evidence](../../reports/forge/attempts/1d62b9d9077e4f0db3450152dbacb485/result.json) · [Record](records/readout-7b135fc6ad2dd8e54342d8d7.json)
 
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
@@ -5032,6 +5112,22 @@ All six declared DCGAN mock-data performance workloads completed their finite pu
 
 [Evidence](../../reports/forge/scaling-receipts/dcgan-performance-cloud-v2/k3p-dcgan_performance_b64-d323d8672d36f9c0.json) · [Record](records/readout-ea9a34c10e46857f904487a0.json)
 
+### bispf-optimized-quintic-v1 · readout-ed0071fe8a0894f98abdd41f
+
+**Scope:** research_diagnostic; scientific; revision `a0127980ebaeca3a1a00b3e980fa892ef750ae8bcc6aef48475ee417a240e4b9`.
+
+The unchanged original recipe supplies a contemporaneous source-matched control; archived trajectories are motivation and parity checks, not current control evidence.
+
+**Observed:** {'FAIL': 11, 'PASS': 4}; wall seconds 1395.13; mechanism `structural`.
+
+rotated100: precision=0.22301, mass_tv=0.11132; mode_hold: modes=8, hq=0.96924
+
+Completed all 15 seed-0 public-initialized matched tasks: 4 PASS, 11 FAIL; 4/4 original controls retained. Paid 1395.129595 seconds. Scientific source a03373da3421303b89c99a39898b091e22910134; unchanged gates, no retries, no ordinary qualification. Full report: reports/forge/first-principles-round2-20261022/README.md.
+
+**Next:** Retain existing selected recipe and archived qualification; no unchanged rerun. Use matched evidence to diagnose remaining failures.
+
+[Evidence](../../reports/forge/attempts/0500b0476af64882a0ed5149c0e3cdfd/result.json) · [Record](records/readout-ed0071fe8a0894f98abdd41f.json)
+
 ### k3p · readout-eeec25002d17191c315f126b
 
 **Scope:** calibration_diagnostic; scientific; revision `6385ef80463dca6a3c1c1f94dd3269c8e1db3702a8d236c1bd59d69787e06325`.
@@ -5112,6 +5208,22 @@ Frozen BCAP smoothing=1e-5 retains 6/6 required Tier 1 passes; Tier 2 records {'
 
 [Evidence](../../reports/forge/bcap-tier2/readout.json) · [Record](records/readout-fa5fada954b7b255ec86d748.json)
 
+### bispf-output-energy-v1 · readout-fa8e84c6dadd33a5b746d755
+
+**Scope:** research_diagnostic; scientific; revision `f41fc85d86fb415a4b93eeff42b96785f69cf36923671dabd4513b0696a58b00`.
+
+A direct normalized energy-distance witness on the existing G-phase batches repairs generated component allocation without changing prior policy, sampling or tasks.
+
+**Observed:** {'FAIL': 9, 'PASS': 6}; wall seconds 2237.483; mechanism `structural`.
+
+mode_hold: modes=8, hq=0.98633; img_intensity2: modes=1, hq=0.5; vector_anisotropic: hq=0.97949, mass_tv=0.053385
+
+Two of eleven original failures repaired under complete unchanged gates: vector_anisotropic and img_blobs4. Six of fifteen tasks PASS, nine FAIL, with all four regression controls retained. This is a partial diagnostic gain, not a complete global repair.
+
+**Next:** Stop this exact revision as a global replacement. Retain its two sustained repairs and saved artifacts; isolate rare-shape instability, mean jitter and local image detail before any separately declared successor. No coefficient or seed sweep, continuation or default adoption.
+
+[Evidence](../../reports/forge/attempts/28d5316fcc024520857e2e3c16d8786c/result.json) · [Record](records/readout-fa8e84c6dadd33a5b746d755.json)
+
 ### k3p · readout-faf4999394106140c8a2052e
 
 **Scope:** current; scientific; revision `2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce`.
@@ -5127,6 +5239,38 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
+
+### bispf-bregman-game-v1 · readout-fc2093f115c77fd62076a614
+
+**Scope:** research_diagnostic; scientific; revision `464b78f33f34f3cbb19889963c547172f8e09fe564646aea89b6aedea9a3b3ab`.
+
+A learned output-space matching game with stable Bernoulli pullback should avoid the quartic witness saturation and supply joint location/mass forces; global cross-task numerical gates test the new payoff.
+
+**Observed:** {'FAIL': 9, 'PASS': 6}; wall seconds 1975.078; mechanism `structural`.
+
+img_blobs4: modes=4, hq=0.96875; img_intensity2: modes=2, hq=1
+
+Completed all 15 seed-0 public-initialized matched tasks: 6 PASS, 9 FAIL; 2/4 original controls retained. Paid 1975.078476 seconds. Scientific source a03373da3421303b89c99a39898b091e22910134; unchanged gates, no retries, no ordinary qualification. Full report: reports/forge/first-principles-round2-20261022/README.md.
+
+**Next:** Reject this exact global revision as a replacement despite image/overlap gains: ring and mode retention regress and native precision worsens. Preserve evidence; require cheap local-scale/dual-dynamics controls before a successor.
+
+[Evidence](../../reports/forge/attempts/4e68fd992e414152884cac122270afc7/result.json) · [Record](records/readout-fc2093f115c77fd62076a614.json)
+
+### bispf-fidelity-quartic-v1 · readout-fe481965f5c4526ff08eeaaf
+
+**Scope:** research_diagnostic; scientific; revision `194d5075a9250d00c641136fe3b4c4e40e8f5b4d6f55f79b7b05ce938d250be6`.
+
+A fixed-frame normalized quartic output transport objective repairs full-distribution tails and local fidelity while retaining adversarial and prior mechanisms.
+
+**Observed:** {'FAIL': 10, 'PASS': 5}; wall seconds 1653.124; mechanism `structural`.
+
+mode_hold: modes=8, hq=0.96167; vector_anisotropic: hq=0.82959, mass_tv=0.024333
+
+5/15 PASS: overlap is the sole new sustained repair, and all four regression controls retain PASS. Ten original failing tasks remain FAIL. Global quartic transport does not solve its intended full-tail or image-fidelity problem.
+
+**Next:** Stop this exact global quartic revision and retain the overlap repair plus negative tails/image evidence. Inspect saved center-output bridges and sigmoid saturation before another separately declared mechanism. No coefficient/seed sweep, continuation, paid successor or default adoption.
+
+[Evidence](../../reports/forge/attempts/0394da12b39643e1af8a09686ff53c43/result.json) · [Record](records/readout-fe481965f5c4526ff08eeaaf.json)
 
 ### ring16-duration-20261011 · ring16-duration-20261011-readout
 
@@ -5750,4 +5894,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `3aa279e13001c206fe493e6a271c303da3876eaf7cdfffd72182d8e3a587f091`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `7b7bb99140e666f005cd4925078358551aa94f5028a1b9281938a5d720b81dec`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

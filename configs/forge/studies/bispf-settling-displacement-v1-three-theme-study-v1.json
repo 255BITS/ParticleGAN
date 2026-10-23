@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "bispf-settling-displacement-v1-three-theme-study-v1",
+  "status": "ready",
+  "candidate": "bispf-settling-displacement-v1",
+  "control": {
+    "candidate_id": "bispf-optimized-quintic-v1",
+    "task_map": {}
+  },
+  "hypothesis": "Relocating the earned thermal factor from G/prior gradients to applied finite moves repairs settling while retaining residual reheating and unchanged critic updates.",
+  "scope": {
+    "view": "bispf-three-theme-repair-diagnostic-v1",
+    "through_tier": 1,
+    "execution_backend": "cuda",
+    "cuda_model": "NVIDIA RTX A6000"
+  },
+  "campaign": {
+    "id": "bispf-three-theme-repair-round1-v1",
+    "budget_seconds": 112080,
+    "candidate_budget_seconds": 28020
+  },
+  "max_rounds": 1,
+  "prior_evidence": [
+    {
+      "path": "reports/forge/bispf-optimized/quality.json",
+      "selector": [],
+      "identity": {
+        "candidate": "bispf-optimized-quintic-v1",
+        "candidate_revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def"
+      },
+      "use": "motivation_only"
+    }
+  ],
+  "prediction": {
+    "task_id": "gaussian1d_stability",
+    "metric": "cdf_ks",
+    "op": "<=",
+    "threshold": 0.05,
+    "phase": "final"
+  },
+  "falsifier": {
+    "task_id": "mode_hold",
+    "metric": "hq",
+    "op": "<",
+    "threshold": 0.9,
+    "phase": "final"
+  },
+  "competing_explanation": "Thermal estimates may cool before acquisition or fail to reheat; removing SBNP pre-cooling changes relative gradient geometry. Endpoint success alone cannot establish sustained stability.",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "prediction_observed": "review_saved_diagnostics",
+    "inconclusive": "stop_and_readout",
+    "incomplete": "request_missing_evidence"
+  }
+}

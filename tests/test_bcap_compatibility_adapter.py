@@ -57,8 +57,14 @@ def test_scoped_adapter_reaches_subprocess_program_and_restores_on_failure(tmp_p
             assert {name: defaults[name] for name in module.INACTIVE_DEFAULTS} == module.INACTIVE_DEFAULTS
             receipt = json.loads((tmp_path / "adapter-receipt.json").read_text())
             checked = receipt["checked_inactive_defaults"]
-            assert len(checked) == 15
+            assert len(checked) == 20
             assert checked["training_precision"] == "float32"
+            assert ({name: checked[name] for name in (
+                "output_energy_weight", "fidelity_transport_weight", "bispf_thermal_application",
+                "bispf_generator_step", "bispf_bregman_game")}
+                == {"output_energy_weight": 0.0, "fidelity_transport_weight": 0.0,
+                    "bispf_thermal_application": "gradient", "bispf_generator_step": "ordinary",
+                    "bispf_bregman_game": False})
             assert {name: defaults[name] for name in checked} == checked
             assert imported.NEW_INACTIVE_FIELDS == {**fields, **checked}
             # The subprocess keeps current code but asks the original task

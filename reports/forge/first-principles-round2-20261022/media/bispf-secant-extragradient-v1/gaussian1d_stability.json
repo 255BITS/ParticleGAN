@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "65455aa9a3adbcd093b019113dc59754aed33f6713d9ed35d9627603b60a6808",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 120,
+  "observations_sha256": "e36ee5c490d163d71ec1f5be446628f57927c9b70399431c55fa3dfd294aac58",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    15,
+    30,
+    45,
+    60,
+    74,
+    89,
+    104,
+    119
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/first-principles-round2-20261022/queue/bispf-first-principles-round2-v1/a622a7d6356841ff818552f7d5f57de7/evaluator/observed-samples.pt": "cd1c5787e3c0ce67bd8bcd1a7d715bfafec6041a30a8c49519d8850e426bc5ae"
+  },
+  "task_id": "gaussian1d_stability"
+}
