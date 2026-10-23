@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import math
 from pathlib import Path
 
 import matplotlib
@@ -9,6 +10,17 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
+
+
+def _safe_float(v: object) -> float:
+    """Safely convert a metric value to float; non-finite, None, and non-numeric map to nan."""
+    if v is None:
+        return float("nan")
+    try:
+        val = float(v)
+        return val if math.isfinite(val) else float("nan")
+    except (ValueError, TypeError):
+        return float("nan")
 
 
 def _tile_images(images: np.ndarray, max_cols: int = 8) -> np.ndarray:
@@ -59,7 +71,11 @@ def render_training_gif(
     if primary_metric is None and frames and frames[0].get("metrics"):
         primary_metric = sorted(frames[0]["metrics"].keys())[0]
 
-    metric_vals = [float(f["metrics"].get(primary_metric, 0.0)) for f in frames] if primary_metric else []
+    metric_vals = (
+        [_safe_float((f.get("metrics") or {}).get(primary_metric)) for f in frames]
+        if primary_metric
+        else []
+    )
 
     for idx, frame in enumerate(frames):
         fig, axes = plt.subplots(1, 3, figsize=(9.0, 3.0), dpi=100)
@@ -100,10 +116,19 @@ def render_training_gif(
         if primary_metric and metric_vals:
             ax2.plot(steps[: idx + 1], metric_vals[: idx + 1], color="#58a6ff", marker="o", markersize=3, linewidth=1.5)
             ax2.set_xlim(min(steps), max(max(steps), min(steps) + 1))
-            ymin, ymax = min(metric_vals), max(metric_vals)
-            pad = max(0.05, 0.1 * (ymax - ymin))
-            ax2.set_ylim(ymin - pad, ymax + pad)
-            ax2.set_title(f"{primary_metric}: {metric_vals[idx]:.4f}", color="#e6edf3", fontsize=9)
+            finite_vals = [v for v in metric_vals if math.isfinite(v)]
+            if finite_vals:
+                ymin, ymax = min(finite_vals), max(finite_vals)
+                pad = max(0.05, 0.1 * (ymax - ymin))
+                ax2.set_ylim(ymin - pad, ymax + pad)
+            else:
+                ax2.set_ylim(0.0, 1.0)
+            val_str = (
+                f"{metric_vals[idx]:.4f}"
+                if (idx < len(metric_vals) and math.isfinite(metric_vals[idx]))
+                else "nan"
+            )
+            ax2.set_title(f"{primary_metric}: {val_str}", color="#e6edf3", fontsize=9)
         ax2.tick_params(colors="#8b949e", labelsize=7)
         for spine in ax2.spines.values():
             spine.set_color("#30363d")
