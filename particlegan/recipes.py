@@ -114,6 +114,8 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    conditional_energy_weight: float = 0.0
+    conditional_energy_samples: int = 8
     # Opt-in label-free transport signal on the same G-phase target batch.
     kinetic_transport_weight: float = 0.0
     kinetic_transport_local_weight: float = 0.0
@@ -252,6 +254,9 @@ class Recipe:
     lr_decay_staircase: bool = False
 
     def __post_init__(self):
+        if (type(self.conditional_energy_samples) is not int
+                or self.conditional_energy_samples < 2):
+            raise ValueError("conditional_energy_samples must be an integer >= 2")
         if self.training_precision not in ("float32", "bf16_channels_last"):
             raise ValueError("training_precision must be float32 or bf16_channels_last")
         if self.prior_update not in ("learned", "frozen"):
@@ -571,7 +576,7 @@ class Recipe:
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
-                    "reconstruction_weight"):
+                    "reconstruction_weight", "conditional_energy_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
         if len(self.betas) != 2 or any(not 0 <= b < 1 for b in self.betas):

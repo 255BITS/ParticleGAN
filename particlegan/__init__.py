@@ -11,6 +11,7 @@ from .autoencoder import ParticleEncoding, particle_ae, particle_vae
 from .capabilities import prior_capabilities, prior_mechanisms
 from .birth_death import ParticleRows, ScalarHeadFeatures
 from .conditioning import UCD, ucd_labels, ucd_loss, ucd_scores
+from .conditional_score import conditional_energy_score
 from .continuous import DataDriftController
 from .diffusion import DDGAN
 from .discriminators import BatchDistanceDiscriminator, LinearSkipDiscriminator
@@ -61,6 +62,7 @@ __all__ = [
     "StratifiedBlueNoisePrior", "SBNPPriorRegularizer", "ContinuousThermalCooler", "BISPFEngine", "BISPFLossAdapter",
     "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss",
     "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
+    "conditional_energy_score",
     "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "get_recipe_fields", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
 ]

@@ -201,6 +201,11 @@ def task_policy_blockers(task, candidate):
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
+    if recipe.conditional_energy_weight:
+        host = task.get("execution", {}).get("host_definition", {})
+        if (task.get("adapter") != "public_api_model_toy"
+                or host.get("provider") != "benchmarks.toy_audit.api_model_ddgan"):
+            return ["conditional energy score requires an explicitly supported paired conditional host"]
     from .tier1_policy import blocked_host, is_policy_task
     policy_task = is_policy_task(task)
     if policy_task and blocked_host(task) is not None:
