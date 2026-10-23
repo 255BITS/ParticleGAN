@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "dig-bispf-ablation-followup-v1",
+  "budget_seconds": 1800,
+  "candidate_budget_seconds": 1800,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Exploratory follow-up to the BISPF ablation dig (2026-10-15): BISPF with its SBNP prior tether switched off, mode_hold only, seed 0."
+}
