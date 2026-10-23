@@ -329,6 +329,11 @@ def main(argv=None):
     queue_root = queue_location(root, args.queue_root)
     from .queue import Queue, drain
     def publish():
+        # Opt-in for isolated research queues: the full-memory compile rewrites
+        # shared leaderboards and can take tens of minutes per completion.
+        import os
+        if os.environ.get("FORGE_SKIP_COMPLETION_COMPILE") == "1":
+            return
         from .knowledge import compile_memory
         compile_memory(root)
     # The inventory already records every attempt in the live event stream.

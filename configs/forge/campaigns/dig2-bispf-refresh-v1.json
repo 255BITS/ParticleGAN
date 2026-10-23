@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "dig2-bispf-refresh-v1",
+  "budget_seconds": 40000,
+  "candidate_budget_seconds": 16200,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Opt-in BISPF/BCAP refresh dig (2026-10-16): rerun bispf-v1 and the selected BCAP recipe on the counted Tier 1 and Tier 2 tests on one frozen current source. Seed 0 only; reservations are worst-case task timeouts, actual training is capped at 2 GPU-hours by the operator."
+}
