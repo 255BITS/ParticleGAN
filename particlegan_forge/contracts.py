@@ -39,8 +39,75 @@ def read_json(path: Path | str):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
+def json_safe(value):
+    """Recursively sanitize data structures for strict JSON serialization.
+
+    Converts non-finite floats (NaN, +Inf, -Inf) to None (serializes to JSON null).
+    Converts tuples to lists.
+    Converts Path objects to strings.
+    Converts tensors/numpy arrays/scalars via .tolist() or .item() when available.
+    Preserves types (bool, int, finite float, str, None).
+    """
+    if hasattr(value, "detach") and callable(value.detach):
+        try:
+            value = value.detach().cpu()
+        except Exception:
+            pass
+    if hasattr(value, "item") and callable(value.item):
+        try:
+            value = value.item()
+        except (ValueError, RuntimeError, TypeError):
+            pass
+    if hasattr(value, "tolist") and callable(value.tolist):
+        try:
+            return json_safe(value.tolist())
+        except Exception:
+            pass
+    if isinstance(value, dict):
+        return {str(k): json_safe(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [json_safe(v) for v in value]
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float):
+        return None if (math.isnan(value) or math.isinf(value)) else value
+    if isinstance(value, Path):
+        return str(value)
+    return value
+
+
+def has_nonfinite(value) -> bool:
+    """Recursively check whether any float is NaN or Inf."""
+    if hasattr(value, "detach") and callable(value.detach):
+        try:
+            value = value.detach().cpu()
+        except Exception:
+            pass
+    if hasattr(value, "item") and callable(value.item):
+        try:
+            value = value.item()
+        except (ValueError, RuntimeError, TypeError):
+            pass
+    if hasattr(value, "tolist") and callable(value.tolist):
+        try:
+            return has_nonfinite(value.tolist())
+        except Exception:
+            pass
+    if isinstance(value, bool):
+        return False
+    if isinstance(value, float):
+        return math.isnan(value) or math.isinf(value)
+    if isinstance(value, dict):
+        return any(has_nonfinite(v) for v in value.values())
+    if isinstance(value, (list, tuple)):
+        return any(has_nonfinite(v) for v in value)
+    return False
+
+
 def atomic_json(path: Path | str, value) -> None:
-    atomic_text(path, json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n")
+    atomic_text(path, json.dumps(json_safe(value), indent=2, sort_keys=True, allow_nan=False) + "\n")
 
 
 def atomic_text(path: Path | str, value: str) -> None:

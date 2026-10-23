@@ -15,7 +15,9 @@ from .contracts import (
     atomic_text,
     file_hash,
     file_lock,
+    has_nonfinite,
     identifier,
+    json_safe,
     read_json,
     stable_hash,
     utc_now,
@@ -524,16 +526,14 @@ class ForgeWorkspace:
     ) -> TierView:
         """Archive the current view revision byte-for-byte and write the updated revision."""
         view_path = self.views_dir / f"{view_id}.json"
+        if not view_path.is_file():
+            raise FileNotFoundError(f"view {view_id!r} not found at {view_path}")
         raw_bytes = view_path.read_bytes()
         current_dict = read_json(view_path)
         current_view = TierView.from_dict(current_dict)
 
-        archive_rel = f"configs/forge/view-history/{view_id}-v{current_view.revision}.json"
-        archive_path = self.root / archive_rel
-        archive_path.parent.mkdir(parents=True, exist_ok=True)
-        if archive_path.exists() and archive_path.read_bytes() != raw_bytes:
-            raise ValueError(f"conflicting view archive already exists at {archive_rel}")
-        archive_path.write_bytes(raw_bytes)
+        if not isinstance(new_tier, int) or new_tier < 1:
+            raise ValueError(f"qualification_tier must be an integer >= 1, got {new_tier!r}")
 
         updated_assignments = []
         found = False
@@ -554,6 +554,13 @@ class ForgeWorkspace:
                 updated_assignments.append(a)
         if not found:
             raise KeyError(f"task {task_id!r} not in view {view_id!r}")
+
+        archive_rel = f"configs/forge/view-history/{view_id}-v{current_view.revision}.json"
+        archive_path = self.root / archive_rel
+        if archive_path.exists() and archive_path.read_bytes() != raw_bytes:
+            raise ValueError(f"conflicting view archive already exists at {archive_rel}")
+        archive_path.parent.mkdir(parents=True, exist_ok=True)
+        archive_path.write_bytes(raw_bytes)
 
         next_view = TierView(
             id=current_view.id,
@@ -622,13 +629,14 @@ class ForgeWorkspace:
             )
         wall_seconds = round(time.perf_counter() - t0, 4)
 
-        all_finite = bool(result.get("all_finite", True))
+        raw_observations = result.get("observations", [])
+        all_finite = bool(result.get("all_finite", True)) and not has_nonfinite(raw_observations)
         unintended_rng_deviations = int(result.get("unintended_rng_deviations", 0))
         completed_steps = int(result.get("completed_steps", task.steps))
 
         grade = grade_sustained_observations(
             task,
-            result["observations"],
+            raw_observations,
             all_finite=all_finite,
             unintended_rng_deviations=unintended_rng_deviations,
             completed_steps=completed_steps,
@@ -651,7 +659,7 @@ class ForgeWorkspace:
             "verdict": grade["status"],
             "grade": grade,
             "live": grade.get("live", {}),
-            "observations": result["observations"],
+            "observations": raw_observations,
             "artifacts": result.get("artifacts", {}),
             "cost": {
                 "wall_seconds": wall_seconds,
@@ -660,6 +668,7 @@ class ForgeWorkspace:
             "timestamp": now_ts,
             "completed_at": now_ts,
         }
+        receipt = json_safe(receipt)
         if steps_override is None or steps_override == task.steps:
             atomic_json(self._receipt_path(candidate_id, task_id, device=device), receipt)
         atomic_json(attempt_dir / "receipt.json", receipt)
@@ -670,6 +679,8 @@ class ForgeWorkspace:
         """Compute per-tier and whole-view qualification status from recorded receipts."""
         views = self.load_views()
         tasks = self.load_tasks()
+        if view_id not in views:
+            raise KeyError(f"view {view_id!r} not found in workspace")
         view = views[view_id]
 
         tiers_map: dict[int, list[TierAssignment]] = {}
@@ -766,7 +777,10 @@ class ForgeWorkspace:
         seed: int = 0,
     ) -> dict[str, Any]:
         """Run all runnable tasks in each tier up to through_tier, stopping higher tiers on required failure."""
-        view = self.load_views()[view_id]
+        views = self.load_views()
+        if view_id not in views:
+            raise KeyError(f"view {view_id!r} not found in workspace")
+        view = views[view_id]
         tiers_map: dict[int, list[TierAssignment]] = {}
         for a in view.assignments:
             if a.qualification_tier <= through_tier:
@@ -787,6 +801,8 @@ class ForgeWorkspace:
         candidates = self.load_candidates()
         if not views:
             raise ValueError("no views registered in workspace")
+        if view_id and view_id not in views:
+            raise KeyError(f"view {view_id!r} not found in workspace")
         primary_view = views[view_id] if view_id else next(iter(views.values()))
 
         # 1. Single current leaderboard for primary_view
