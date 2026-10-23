@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 850. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 853. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4264,6 +4264,22 @@ Stop this numerical-backend revision: graph acceleration improves the 64-pixel p
 
 [Evidence](../../reports/forge/attempts/697e75ed0af449a7b3beb42dfcbd3763/result.json) · [Record](records/readout-47d84c98f42853a07d20becb.json)
 
+### bispf-vaegan-settle-v1 · readout-4a3861ac6f4b3a836975d087
+
+**Scope:** research_diagnostic; scientific; revision `15cec064bfab5931854da2b176eb21f34230e1508407767ad76ab3f2fc721660`.
+
+A single global finite-budget cosine settling schedule repairs both unchanged VAEGAN tasks after transport-only failed; retain all adversarial, reconstruction and latent regularization objectives. This schedule comparison does not prove transport necessary.
+
+**Observed:** {'PASS': 2}; wall seconds 445.906; mechanism `floor_constant`.
+
+
+
+One global BISPF transport-plus-cosine-settling recipe passes both full1200-update VAEGAN tasks and all5 terminal checks, with hard/categorical passing suffixes6/9. Actual KL, input-dependent reconstruction and both independent sampling laws satisfy every unchanged bound.
+
+**Next:** Stop after6runs, retain all4 failures and2 passes. Recommend this recipe for these two declared toys; next separate causal question is schedule-only without transport. No extra seed run, continuation or promotion.
+
+[Evidence](../../reports/forge/attempts/2c33e91963ad464f990c4ae04f365e48/result.json) · [Record](records/readout-4a3861ac6f4b3a836975d087.json)
+
 ### k3p · readout-4bd94051f203bbbb28a3e7a6
 
 **Scope:** current; scientific; revision `87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9`.
@@ -4632,6 +4648,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
 
+### bispf-optimized-quintic-v1 · readout-a66096228357c6881cb90290
+
+**Scope:** research_diagnostic; scientific; revision `4b199ad28279ef9616e67ebc460824f614dc141a7f00ca739993218fc5635ae6`.
+
+One global projected transport auxiliary repairs sustained independent-prior generation in hard VAEGAN while retaining the categorical positive reference; measure an exact matched CUDA baseline before causal comparison.
+
+**Observed:** {'FAIL': 2}; wall seconds 452.695; mechanism `structural`.
+
+
+
+Matched CUDA VAEGAN baseline completes both1200-update tasks but fails sustained gates: hard2/5 and categorical3/5 terminal checks; both endpoints pass.
+
+**Next:** Retain this baseline, compare only bounded registered substantive repairs, and confer no ordinary qualification or default credit.
+
+[Evidence](../../reports/forge/attempts/7189bb6b75074e46a28cb04fc37a4c10/result.json) · [Record](records/readout-a66096228357c6881cb90290.json)
+
 ### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
 
 **Scope:** research_diagnostic; scientific; revision `3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402`.
@@ -4727,6 +4759,22 @@ The released v0.7 task adaptation passes preflight for all24 ordinary requiremen
 **Next:** Stop this exact failed revision; keep the integration and reusable host adaptation. Review the provisional tier1 movement/convergence protocol before another training hypothesis. Any post-failure quality comparison requires a separately registered bounded diagnostic lane; no threshold change, seed repeat, continuation, automatic matrix filling or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/df1794ebea6444c5a10c2a953843257d.json) · [Record](records/readout-afd6d27c7d1eae64aa13299f.json)
+
+### bispf-vaegan-transport-v1 · readout-b194dccb65688ca056129011
+
+**Scope:** research_diagnostic; scientific; revision `0612a7116b3d77a9724d9e6286115a6bebf369d011f4ca85e592d5a8d337b306`.
+
+One global projected transport auxiliary repairs sustained independent-prior generation in hard VAEGAN while retaining the categorical positive reference; measure an exact matched CUDA baseline before causal comparison.
+
+**Observed:** {'FAIL': 2}; wall seconds 468.822; mechanism `structural`.
+
+
+
+Transport alone fails both unchanged VAEGAN tasks with0/5 terminal passing checks; final likelihoodHQ hard.8191/categorical.6858. Reconstruction stays informative but independent generation degrades.
+
+**Next:** Stop this exact revision; keep failure in the current comparison. Its separately frozen finite-budget settling successor is measured without changing gates, source, initialization or data.
+
+[Evidence](../../reports/forge/attempts/1d92fe13cbcf4b468328b4da57fad683/result.json) · [Record](records/readout-b194dccb65688ca056129011.json)
 
 ### k3p-global-repair-v1 · readout-b214c23e088f39337c3d8784
 
@@ -5750,4 +5798,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `3aa279e13001c206fe493e6a271c303da3876eaf7cdfffd72182d8e3a587f091`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `e2ac809e7ef9d7828585ea6e7f889f85ba0e82a3c75360292a955c1a02f60054`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
