@@ -1,0 +1,40 @@
+{
+  "gif_sha256": "5a225b92698191d3ee6f68fa3a9780d471674c268b9768cb5cdac494eacf8226",
+  "kind": "actual_training_native_saved_observations_gif",
+  "nullable_accuracy_display": "Undefined saved early accuracy metrics remain gaps.",
+  "observation_count": 34,
+  "observations_sha256": "10a509872dbaa5fce257cb11a9e0838efafbb0b74e2bffd159d06d95d6873635",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "b058c4bc59c0b3e69e29f25e4fe5236a22056d79c823b89a1ce7541b104fecb9",
+  "rescored_observations": 0,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    21,
+    25,
+    29,
+    33
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/config.json": "e4898578037b64768b414c93b0f8f19603730db89fb754e5d48c77d1089f8727",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/events.jsonl": "eadbabf9618aa50386af44b055f42e3fb31d590c5525b02ded4206efcad9ff67",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_000000.npz": "13a52836225561b2822e7f8f82449a9c571e701813a499453d0ba0b7f5044de3",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_000050.npz": "9430e9d3831c3fa94f9324c5e5c96743177cb8a7c1c2cfe430100dd3eacca38c",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_000750.npz": "093ffa15cfb720b7070635f39fd7c1f488d308714fc720ad9a5b83726848918e",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_001750.npz": "51096d573d262fa3466783a93288b2cecfa9b9814f23c87ecc280e61f2654eb9",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_002750.npz": "e93dce0fd89961e88d11e2d0e7e0c418c1569b2da8810453a790f10af92ff2f0",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_004000.npz": "e6710c187c132cc4b7e054a37d71d9bf172327dd95a505f091f54b19c22c1b85",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_005000.npz": "531e0f758ea2f756e68c97f7d9cc4ceced22a8c35c99b8d665e4741af4d785d7",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_006000.npz": "9ec42bd3d32f5b4b6515f19bc857bfde4beb55a07e7b25686388f0fa57628d81",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/snapshots/step_007000.npz": "559c059e77f60a1c71f462edd8bbd5ed2ff28a5d7d83e9950a7a1ec28f875276",
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/native100/staggered100/summary.json": "217b8112f0cf3c46373abb8cdcccd81a6a67b9c3380f7899a4421b136068cbde"
+  },
+  "task_id": "staggered100"
+}

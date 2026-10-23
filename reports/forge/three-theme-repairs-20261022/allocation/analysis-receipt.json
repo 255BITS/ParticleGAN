@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "scope": "read_only_allocation_mechanism_analysis",
+  "qualification_input": false,
+  "source_commit": "2a2b662bdfa6249076b27dbea4c136e23d3e7a80",
+  "source_digest": "8bfcc01cd7482b1b348edb2162567adfdcdaa7d308f75fc834774302c6ac4acb",
+  "candidate": "bispf-output-energy-v1",
+  "control": "bispf-optimized-quintic-v1",
+  "inputs": [
+    {
+      "candidate": "bispf-optimized-quintic-v1",
+      "sha256": "3568f7c9d46ff5938eda4d4795e53384c33920831bef12085b6bd84dc843cf6e",
+      "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/full-readouts/bispf-optimized-quintic-v1.json"
+    },
+    {
+      "candidate": "bispf-output-energy-v1",
+      "sha256": "7dab80f4ba5d2c62a483c900714cc9055cd8be926e3611801c907535c674ee93",
+      "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/full-readouts/bispf-output-energy-v1.json"
+    }
+  ],
+  "analysis": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/allocation-analysis.json",
+    "sha256": "15479daeff2c25559848dba23a848b79477ecdcafabc40e53b09558036cd8ca7",
+    "bytes": 223835
+  },
+  "metadata_pairing": {
+    "task_pairs": 15,
+    "matched": true,
+    "scope": "initial state/prior/sampling/update counts, consumed non-evaluation stream digests, sole declared effective recipe delta"
+  },
+  "checkpoint_counters": {
+    "sha256_verified": 30,
+    "model_forwards": 0,
+    "sampling_draws": 0,
+    "optimizer_updates": 0
+  },
+  "outcome": {
+    "control_passes": 4,
+    "candidate_passes": 6,
+    "total_tasks": 15,
+    "new_passes": [
+      "vector_anisotropic",
+      "img_blobs4"
+    ],
+    "lost_passes": []
+  },
+  "decision": "retain scoped gains; stop claiming the exact revision solves the remaining failures; no new paid successor proposed"
+}

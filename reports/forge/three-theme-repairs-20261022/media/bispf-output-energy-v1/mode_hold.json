@@ -1,0 +1,25 @@
+{
+  "gif_sha256": "1ed634d00bda6cc912b669cda1c4c298bbaafca6c0c5e7f4cec29990877b8361",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "c38fd4eea6961b135e31a963ce3b0573f1c19ba85c1c772b6d5f0e0c9e3d9494",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {},
+  "task_id": "mode_hold"
+}

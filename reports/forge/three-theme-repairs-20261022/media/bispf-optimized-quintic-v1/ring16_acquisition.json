@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "780d7552c6322e8ad05fa67f463e3103dc11db75bd35fc16bbd0149c345933ef",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 96,
+  "observations_sha256": "b34ce4f6c1a337d80b9e41ba8e8918f8b4429e3f8a93123c13ecd0ac069f840c",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "f1f3354cdb255c9f78899a111a25723e2058d6da4a454280fa5574aa8d158309",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    12,
+    24,
+    36,
+    48,
+    59,
+    71,
+    83,
+    95
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/872b5293c62443f2b6455846a77e8025/observed-samples.pt": "65392d2a8919d466262f20d0ec976b3269a535fd59af3b530efd2abf2f4dac7b"
+  },
+  "task_id": "ring16_acquisition"
+}

@@ -1,0 +1,2222 @@
+{
+  "arms": {
+    "control": {
+      "charged_seconds": 1312.4368809360312,
+      "request_id": "728323efa37b4c2345764a9d",
+      "status_counts": {
+        "FAIL": 11,
+        "PASS": 4
+      },
+      "tasks": {
+        "gaussian1d_smoke": {
+          "attempt": "f9cc2d29828548608c07207c0756915e",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.46437829768611905,
+              "ema_residual": 0.1590934380331407,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/f9cc2d29828548608c07207c0756915e/provenance/provenance-state.pt",
+            "sha256": "95e0bad8ebad247a213e2879f6ccf827931149a78e291255cf9538f90946167b",
+            "step": 1000
+          },
+          "metrics": {
+            "cdf_ks": 0.13503149751656862,
+            "finite_fraction": 1.0,
+            "mean": 1.8275108302332228,
+            "mean_error_sigma": 0.3449783395335544,
+            "sample_count": 4096,
+            "std": 0.49129785502860907,
+            "std_ratio": 0.9825957100572181,
+            "step": 1000
+          },
+          "status": "PASS"
+        },
+        "gaussian1d_stability": {
+          "attempt": "9c292a19e74747d88230eb960f11a873",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.44803505736808474,
+              "ema_residual": 0.17516392793086233,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9c292a19e74747d88230eb960f11a873/provenance/provenance-state.pt",
+            "sha256": "7de40d8c13b378fa6ec6a904fe8869cade41466a8103dd00266dbc3d9ded4df4",
+            "step": 6000
+          },
+          "metrics": {
+            "cdf_ks": 0.07031856505709322,
+            "finite_fraction": 1.0,
+            "mean": 3.027367955102818,
+            "mean_error_sigma": 0.054735910205636173,
+            "sample_count": 4096,
+            "std": 0.4382549978248519,
+            "std_ratio": 0.8765099956497038,
+            "step": 6000
+          },
+          "status": "FAIL"
+        },
+        "grid100": {
+          "attempt": "7a441aff1a4a4bffa6b14119c82c252a",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.89075454312563,
+              "ema_residual": 0.02075191157963127,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/7a441aff1a4a4bffa6b14119c82c252a/provenance/provenance-state.pt",
+            "sha256": "36c99750864452ebddcf178c82129d37db2e95e9440ec2573f154fde64741d0e",
+            "step": 7000
+          },
+          "metrics": {
+            "abs_cov_trace_bias": 0.3254265581521434,
+            "accuracy_pass": false,
+            "accuracy_score": 6.0441056313506705,
+            "all_finite": true,
+            "center_max_sigma": 2.876391904468037,
+            "center_rms_sigma": 1.4971302739380452,
+            "cov_frob_rms": 0.610159902023204,
+            "cov_trace_bias": 0.3254265581521434,
+            "frozen_pass": false,
+            "mass_tv": 0.17028000000000001,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.30497,
+            "precision_gap": 0.6839210034617578,
+            "problem": "grid100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.4239402229676409,
+            "valid_n": 100000,
+            "within_radius_n": 30497
+          },
+          "status": "FAIL"
+        },
+        "img_bars4": {
+          "attempt": "c29c2bfafdda41d59d0b17678c46381e",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.877309799194336,
+              "ema_residual": 0.3748784363269806,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/c29c2bfafdda41d59d0b17678c46381e/provenance/provenance-state.pt",
+            "sha256": "bff64f9321e326138346ee93dd744372698d18f3ba8d0181fbd4fe6b3de6e670",
+            "step": 600
+          },
+          "metrics": {
+            "distribution_tv": 0.40625,
+            "hq": 0.96875,
+            "mean_rmse": 0.012657693587243557,
+            "mode_fractions": [
+              0.21875,
+              0.65625,
+              0.0625,
+              0.0625
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.21875,
+              0.65625,
+              0.0625,
+              0.03125
+            ],
+            "step": 600
+          },
+          "status": "FAIL"
+        },
+        "img_blobs4": {
+          "attempt": "e86c1f4fd95f4b619cb23df812524229",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 2.813976287841797,
+              "ema_residual": 0.39433547854423523,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/e86c1f4fd95f4b619cb23df812524229/provenance/provenance-state.pt",
+            "sha256": "f4965b5c72e60ff435526435c41cf02f65512c3c6cbc3e91f7ee98f1d3fe4f23",
+            "step": 600
+          },
+          "metrics": {
+            "distribution_tv": 0.1875,
+            "hq": 0.8125,
+            "mean_rmse": 0.04713716357946396,
+            "mode_fractions": [
+              0.25,
+              0.28125,
+              0.0625,
+              0.40625
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.25,
+              0.1875,
+              0.03125,
+              0.34375
+            ],
+            "step": 600
+          },
+          "status": "FAIL"
+        },
+        "img_intensity2": {
+          "attempt": "c2f726c69cb545b6bfa5896214de4d73",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.9771668308513125,
+              "ema_residual": 0.4822232714193654,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/c2f726c69cb545b6bfa5896214de4d73/provenance/provenance-state.pt",
+            "sha256": "bb6f05804ccf8a5302b1e1e4adb6407e8dc85a0cc1d6986e32baf334749c1415",
+            "step": 600
+          },
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 0.59375,
+            "mean_rmse": 0.06310120970010757,
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.34375,
+              0.25
+            ],
+            "step": 600
+          },
+          "status": "FAIL"
+        },
+        "img_stripes2": {
+          "attempt": "636c58f052ab4ab9851e24cda70e6857",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.06827192874625325,
+              "ema_residual": 0.7290319728851318,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/636c58f052ab4ab9851e24cda70e6857/provenance/provenance-state.pt",
+            "sha256": "0f1611d220f78f85bb8148bee327d2b2501a45ec8381161552912c05bdf143c1",
+            "step": 600
+          },
+          "metrics": {
+            "distribution_tv": 0.09375,
+            "hq": 1.0,
+            "mean_rmse": 3.7446086935233325e-05,
+            "mode_fractions": [
+              0.59375,
+              0.40625
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.59375,
+              0.40625
+            ],
+            "step": 600
+          },
+          "status": "PASS"
+        },
+        "mode_hold": {
+          "attempt": "9f8d0f07d89746b9998323f0ed7b6edd",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.230044841766357,
+              "ema_residual": 0.026483414694666862,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9f8d0f07d89746b9998323f0ed7b6edd/provenance/provenance-state.pt",
+            "sha256": "29c155c9655bb5be0050b940cdbf69cac11dcb9be92256ae7ea68c100e2b549f",
+            "step": 1200
+          },
+          "metrics": {
+            "cover": 1.0,
+            "effective_modes": 7.588357448577881,
+            "hq": 0.96923828125,
+            "modes": 8,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "status": "PASS"
+        },
+        "ring16_acquisition": {
+          "attempt": "872b5293c62443f2b6455846a77e8025",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.2494404405246495,
+              "ema_residual": 0.029838290664358048,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/872b5293c62443f2b6455846a77e8025/provenance/provenance-state.pt",
+            "sha256": "f5e863b46e129ca51baffe28747a773ba39c07adf1677bf86019ea0a3b755aa4",
+            "step": 1600
+          },
+          "metrics": {
+            "component_core_covariance_error": 0.4202522747218609,
+            "component_core_covariance_errors": [
+              0.13751405477523804,
+              0.5192552804946899,
+              0.538611114025116,
+              0.276391863822937,
+              0.3092400133609772,
+              0.2627265751361847,
+              0.2807994782924652,
+              0.8067973256111145,
+              0.2814944386482239,
+              0.5495706796646118,
+              0.5046860575675964,
+              0.6305508613586426,
+              0.30539077520370483,
+              0.35750091075897217,
+              0.4083615243434906,
+              0.5551454424858093
+            ],
+            "component_core_eigen_ratios": [
+              1.0385221242904663,
+              1.2991355657577515,
+              0.9495468139648438,
+              0.7520644068717957,
+              0.6115695238113403,
+              0.6284756660461426,
+              0.7103931307792664,
+              0.3822769522666931,
+              0.7046302556991577,
+              0.8023208379745483,
+              0.47371339797973633,
+              0.5396358966827393,
+              0.5688896179199219,
+              0.5359288454055786,
+              0.44385138154029846,
+              0.4526722729206085
+            ],
+            "component_core_min_eigen_ratio": 0.3822769522666931,
+            "component_counts": [
+              281,
+              292,
+              172,
+              207,
+              385,
+              288,
+              242,
+              207,
+              338,
+              282,
+              190,
+              176,
+              264,
+              264,
+              287,
+              221
+            ],
+            "component_covariance_error": 0.46625237818807364,
+            "component_covariance_errors": [
+              0.2493981271982193,
+              0.662957489490509,
+              0.5825216174125671,
+              0.3671972155570984,
+              0.3421090841293335,
+              0.25364500284194946,
+              0.2910119891166687,
+              0.8461260199546814,
+              0.2814944386482239,
+              0.7202823162078857,
+              0.531203031539917,
+              0.6946427822113037,
+              0.3033619225025177,
+              0.35750091075897217,
+              0.42144066095352173,
+              0.5551454424858093
+            ],
+            "component_mass": [
+              0.068603515625,
+              0.0712890625,
+              0.0419921875,
+              0.050537109375,
+              0.093994140625,
+              0.0703125,
+              0.05908203125,
+              0.050537109375,
+              0.08251953125,
+              0.06884765625,
+              0.04638671875,
+              0.04296875,
+              0.064453125,
+              0.064453125,
+              0.070068359375,
+              0.053955078125
+            ],
+            "component_min_eigen_ratio": 0.38043496012687683,
+            "component_resolved": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "component_spill": [
+              0.0854092538356781,
+              0.1164383590221405,
+              0.06976744532585144,
+              0.03381642326712608,
+              0.025974025949835777,
+              0.02083333395421505,
+              0.03719008341431618,
+              0.05797101557254791,
+              0.002958579920232296,
+              0.06737588346004486,
+              0.015789473429322243,
+              0.05681818351149559,
+              0.06439393758773804,
+              0.01515151560306549,
+              0.05574912950396538,
+              0.05882352963089943
+            ],
+            "covariance_error": 0.0816253274679184,
+            "hq": 0.951904296875,
+            "hq_component_counts": [
+              257,
+              258,
+              160,
+              200,
+              375,
+              282,
+              233,
+              195,
+              337,
+              263,
+              187,
+              166,
+              247,
+              260,
+              271,
+              208
+            ],
+            "mass_tv": 0.092041015625,
+            "max_component_spill": 0.1164383590221405,
+            "mean_error": 0.041858263313770294,
+            "min_hq_mass_ratio": 0.625,
+            "min_mass_ratio": 0.671875,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.041540640417359755,
+            "target_mass": [
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625
+            ],
+            "target_scale": 3.0029242038726807
+          },
+          "status": "PASS"
+        },
+        "rotated100": {
+          "attempt": "7bdacf72d7144643b355061eceebe340",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 5.046438980102539,
+              "ema_residual": 0.0289665543474257,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/7bdacf72d7144643b355061eceebe340/provenance/provenance-state.pt",
+            "sha256": "96614519784d3845650de7d99260de06bc2d3b1c31a841b48980b088509f2bb4",
+            "step": 7000
+          },
+          "metrics": {
+            "abs_cov_trace_bias": null,
+            "accuracy_pass": false,
+            "accuracy_score": null,
+            "all_finite": true,
+            "center_max_sigma": null,
+            "center_rms_sigma": null,
+            "cov_frob_rms": null,
+            "cov_trace_bias": null,
+            "frozen_pass": false,
+            "mass_tv": 0.11131999999999999,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.22301,
+            "precision_gap": 0.7658810034617577,
+            "problem": "rotated100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": null,
+            "valid_n": 100000,
+            "within_radius_n": 22301
+          },
+          "status": "FAIL"
+        },
+        "staggered100": {
+          "attempt": "1d62b9d9077e4f0db3450152dbacb485",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.576910107943141,
+              "ema_residual": 0.026505655896143027,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/1d62b9d9077e4f0db3450152dbacb485/provenance/provenance-state.pt",
+            "sha256": "3a29963c482ae1ad95f2142c4be7104524968a3816d98d11c3c41002ee1e9459",
+            "step": 7000
+          },
+          "metrics": {
+            "abs_cov_trace_bias": 0.5416896412783327,
+            "accuracy_pass": false,
+            "accuracy_score": 5.595689013196262,
+            "all_finite": true,
+            "center_max_sigma": 2.5165029923620326,
+            "center_rms_sigma": 1.1428836115772043,
+            "cov_frob_rms": 0.7089465554935794,
+            "cov_trace_bias": 0.5416896412783327,
+            "frozen_pass": false,
+            "mass_tv": 0.12142000000000003,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.33617,
+            "precision_gap": 0.6527210034617577,
+            "problem": "staggered100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.36911099661796126,
+            "valid_n": 100000,
+            "within_radius_n": 33617
+          },
+          "status": "FAIL"
+        },
+        "vector_anisotropic": {
+          "attempt": "61cd7b089dac4480b8cc578e9c968398",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 3.128105987151709,
+              "ema_residual": 0.03701020099490091,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/61cd7b089dac4480b8cc578e9c968398/provenance/provenance-state.pt",
+            "sha256": "91a49c6eaf11563738d7084bdfd50013e0e47100e730fee7c6781842ef619b3d",
+            "step": 1200
+          },
+          "metrics": {
+            "component_core_covariance_error": 0.31381389995416004,
+            "component_core_covariance_errors": [
+              0.23534445464611053,
+              0.3845527470111847,
+              0.32154449820518494
+            ],
+            "component_core_eigen_ratios": [
+              0.47893252968788147,
+              0.9180504083633423,
+              0.3251495957374573
+            ],
+            "component_core_min_eigen_ratio": 0.3251495957374573,
+            "component_counts": [
+              1284,
+              2083,
+              729
+            ],
+            "component_covariance_error": 0.31381389995416004,
+            "component_covariance_errors": [
+              0.23534445464611053,
+              0.3845527470111847,
+              0.32154449820518494
+            ],
+            "component_mass": [
+              0.3134765625,
+              0.508544921875,
+              0.177978515625
+            ],
+            "component_min_eigen_ratio": 0.3251495957374573,
+            "component_resolved": [
+              true,
+              true,
+              true
+            ],
+            "component_spill": [
+              0.007009345572441816,
+              0.0028804608155041933,
+              0.004115226212888956
+            ],
+            "covariance_error": 0.23122607171535492,
+            "hq": 0.99560546875,
+            "mass_tv": 0.1752115935087204,
+            "max_component_spill": 0.007009345572441816,
+            "mean_error": 0.27877509593963623,
+            "min_mass_ratio": 0.533935546875,
+            "resolved_core_covariance_error": 0.31381389995416004,
+            "resolved_core_min_eigen_ratio": 0.3251495957374573,
+            "resolved_max_component_spill": 0.007009345572441816,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.2136241052348046,
+            "target_mass": [
+              0.3333333432674408,
+              0.3333333432674408,
+              0.3333333432674408
+            ],
+            "target_scale": 2.032285690307617
+          },
+          "status": "FAIL"
+        },
+        "vector_overlap": {
+          "attempt": "3a07f4a4ca4447e6a6151d11f47080c7",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.9550976157188416,
+              "ema_residual": 0.23607878386974335,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/3a07f4a4ca4447e6a6151d11f47080c7/provenance/provenance-state.pt",
+            "sha256": "abfd7ccce8202c13589620a2f2bbcd6d361bb3b4629a48bcdfe64403579b8f21",
+            "step": 1200
+          },
+          "metrics": {
+            "covariance_error": 0.5222957730293274,
+            "mean_error": 0.10151220113039017,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.14908646786152607,
+            "target_scale": 0.8501437306404114
+          },
+          "status": "FAIL"
+        },
+        "vector_unequal_mass": {
+          "attempt": "32aa5db3ee874061b7541d98d7f6e3ca",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 2.7211244550645346,
+              "ema_residual": 0.154668791314587,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/32aa5db3ee874061b7541d98d7f6e3ca/provenance/provenance-state.pt",
+            "sha256": "bec40f622e673ee7d0d9cffcc4a73ae400d16c864db0f46ec3f7ad5bab602364",
+            "step": 1200
+          },
+          "metrics": {
+            "component_core_covariance_error": 0.5852136090397835,
+            "component_core_covariance_errors": [
+              0.25514453649520874,
+              0.411836713552475,
+              0.6738731861114502,
+              1.0
+            ],
+            "component_core_eigen_ratios": [
+              0.6919046640396118,
+              0.4720337688922882,
+              0.25853991508483887,
+              0.0
+            ],
+            "component_core_min_eigen_ratio": 0.0,
+            "component_counts": [
+              2488,
+              1203,
+              405,
+              0
+            ],
+            "component_covariance_error": 1.7676393389701843,
+            "component_covariance_errors": [
+              3.0473530292510986,
+              2.3493311405181885,
+              0.6738731861114502,
+              1.0
+            ],
+            "component_mass": [
+              0.607421875,
+              0.293701171875,
+              0.098876953125,
+              0.0
+            ],
+            "component_min_eigen_ratio": 0.0,
+            "component_resolved": [
+              true,
+              true,
+              true,
+              false
+            ],
+            "component_spill": [
+              0.018488746136426926,
+              0.02493765577673912,
+              0.04197530820965767,
+              1.0
+            ],
+            "covariance_error": 0.13873308897018433,
+            "hq": 0.977294921875,
+            "mass_tv": 0.05742187052965164,
+            "max_component_spill": 1.0,
+            "mean_error": 0.13277165591716766,
+            "min_mass_ratio": 0.0,
+            "resolved_core_covariance_error": 0.4469514787197113,
+            "resolved_core_min_eigen_ratio": 0.25853991508483887,
+            "resolved_max_component_spill": 0.04197530820965767,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.10174356676655379,
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "target_scale": 1.7593294382095337
+          },
+          "status": "FAIL"
+        },
+        "vector_unequal_width": {
+          "attempt": "828ab868916040639c11228709296ef8",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 3.0039212179034185,
+              "ema_residual": 0.07249116295303033,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/828ab868916040639c11228709296ef8/provenance/provenance-state.pt",
+            "sha256": "7160b0a9a76ac06cebeb887a32c0b0a0973421354c1fd77eb6f6ff215dd82815",
+            "step": 1200
+          },
+          "metrics": {
+            "component_core_covariance_error": 0.5155643448233604,
+            "component_core_covariance_errors": [
+              0.8274410367012024,
+              0.6632524132728577,
+              0.4029181897640228,
+              0.1686457395553589
+            ],
+            "component_core_eigen_ratios": [
+              0.09347031265497208,
+              0.28147757053375244,
+              0.521944522857666,
+              0.9080619812011719
+            ],
+            "component_core_min_eigen_ratio": 0.09347031265497208,
+            "component_counts": [
+              1490,
+              256,
+              1695,
+              655
+            ],
+            "component_covariance_error": 9.686902768909931,
+            "component_covariance_errors": [
+              0.8274410367012024,
+              37.34860610961914,
+              0.4029181897640228,
+              0.1686457395553589
+            ],
+            "component_mass": [
+              0.36376953125,
+              0.0625,
+              0.413818359375,
+              0.159912109375
+            ],
+            "component_min_eigen_ratio": 0.09347031265497208,
+            "component_resolved": [
+              true,
+              true,
+              true,
+              true
+            ],
+            "component_spill": [
+              0.0,
+              0.109375,
+              0.01946902647614479,
+              0.01984732784330845
+            ],
+            "covariance_error": 0.22530615329742432,
+            "hq": 0.98193359375,
+            "mass_tv": 0.277587890625,
+            "max_component_spill": 0.109375,
+            "mean_error": 0.3980906009674072,
+            "min_mass_ratio": 0.25,
+            "resolved_core_covariance_error": 0.5155643448233604,
+            "resolved_core_min_eigen_ratio": 0.09347031265497208,
+            "resolved_max_component_spill": 0.109375,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.2873825274476827,
+            "target_mass": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "target_scale": 2.1343955993652344
+          },
+          "status": "FAIL"
+        }
+      }
+    },
+    "settling": {
+      "charged_seconds": 1401.3744477308937,
+      "request_id": "7a58ff2ed6de1ece217a77ce",
+      "status_counts": {
+        "FAIL": 11,
+        "PASS": 4
+      },
+      "tasks": {
+        "gaussian1d_smoke": {
+          "attempt": "19d88aa179424f84bda44880421186ee",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.46437829768611905,
+              "ema_residual": 0.1590934380331407,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/19d88aa179424f84bda44880421186ee/provenance/provenance-state.pt",
+            "sha256": "95867feff6e839d51b48e07353ca11e5e268309092a23ae2215c6be6501e3e6b",
+            "step": 1000
+          },
+          "metrics": {
+            "cdf_ks": 0.13503149751656862,
+            "finite_fraction": 1.0,
+            "mean": 1.8275108302332228,
+            "mean_error_sigma": 0.3449783395335544,
+            "sample_count": 4096,
+            "std": 0.49129785502860907,
+            "std_ratio": 0.9825957100572181,
+            "step": 1000
+          },
+          "status": "PASS"
+        },
+        "gaussian1d_stability": {
+          "attempt": "ce8fba790dbb43b69436c303014ce97e",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.44803505736808474,
+              "ema_residual": 0.17516392793086233,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/ce8fba790dbb43b69436c303014ce97e/provenance/provenance-state.pt",
+            "sha256": "ce8500609146e0cc04a09c0a45c624571031e826464985591c941819394bbcca",
+            "step": 6000
+          },
+          "metrics": {
+            "cdf_ks": 0.07031856505709322,
+            "finite_fraction": 1.0,
+            "mean": 3.027367955102818,
+            "mean_error_sigma": 0.054735910205636173,
+            "sample_count": 4096,
+            "std": 0.4382549978248519,
+            "std_ratio": 0.8765099956497038,
+            "step": 6000
+          },
+          "status": "FAIL"
+        },
+        "grid100": {
+          "attempt": "e0c9a6e8ecc9472cac754e7d9685d714",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.887319660723209,
+              "ema_residual": 0.01932924310863018,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 0.996701117798636
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/e0c9a6e8ecc9472cac754e7d9685d714/provenance/provenance-state.pt",
+            "sha256": "2bcc87fd188d7594169eb66da039e09bca1e041dd5187b89781062623118c49c",
+            "step": 7000
+          },
+          "metrics": {
+            "abs_cov_trace_bias": 0.4634781841151854,
+            "accuracy_pass": false,
+            "accuracy_score": 6.122995639034497,
+            "all_finite": true,
+            "center_max_sigma": 2.60466320770422,
+            "center_rms_sigma": 1.2731050522018674,
+            "cov_frob_rms": 0.6296057537667777,
+            "cov_trace_bias": 0.4634781841151854,
+            "frozen_pass": false,
+            "mass_tv": 0.17087,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.35668,
+            "precision_gap": 0.6322110034617577,
+            "problem": "grid100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.4257536848257385,
+            "valid_n": 100000,
+            "within_radius_n": 35668
+          },
+          "status": "FAIL"
+        },
+        "img_bars4": {
+          "attempt": "6bb6eec62b7743bda2033652f4513753",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.877309799194336,
+              "ema_residual": 0.3748784363269806,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/6bb6eec62b7743bda2033652f4513753/provenance/provenance-state.pt",
+            "sha256": "7d544bb5ea9fdc84907421a51fb9c42c862bbe52ea07a8f8cfb4d7821d316234",
+            "step": 600
+          },
+          "metrics": {
+            "distribution_tv": 0.40625,
+            "hq": 0.96875,
+            "mean_rmse": 0.012657693587243557,
+            "mode_fractions": [
+              0.21875,
+              0.65625,
+              0.0625,
+              0.0625
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.21875,
+              0.65625,
+              0.0625,
+              0.03125
+            ],
+            "step": 600
+          },
+          "status": "FAIL"
+        },
+        "img_blobs4": {
+          "attempt": "02a71b394e9f49478f13b0b9af3a2fa2",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 2.813976287841797,
+              "ema_residual": 0.39433547854423523,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/02a71b394e9f49478f13b0b9af3a2fa2/provenance/provenance-state.pt",
+            "sha256": "12aaa2af74790780258e2a507e7c06b3f4279d1bc833fa860391eedaf36a7dc6",
+            "step": 600
+          },
+          "metrics": {
+            "distribution_tv": 0.1875,
+            "hq": 0.8125,
+            "mean_rmse": 0.04713716357946396,
+            "mode_fractions": [
+              0.25,
+              0.28125,
+              0.0625,
+              0.40625
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.25,
+              0.1875,
+              0.03125,
+              0.34375
+            ],
+            "step": 600
+          },
+          "status": "FAIL"
+        },
+        "img_intensity2": {
+          "attempt": "2d9b911e60c74b41aba7f51d42da5a85",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.9771668308513125,
+              "ema_residual": 0.4822232714193654,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/2d9b911e60c74b41aba7f51d42da5a85/provenance/provenance-state.pt",
+            "sha256": "a37bcb0ea9b80618e998cd2081dace6340602bbe1a8a8bae19999170c419bcd8",
+            "step": 600
+          },
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 0.59375,
+            "mean_rmse": 0.06310120970010757,
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.34375,
+              0.25
+            ],
+            "step": 600
+          },
+          "status": "FAIL"
+        },
+        "img_stripes2": {
+          "attempt": "32c0f32da1554b46922e666252b7e076",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.06827192874625325,
+              "ema_residual": 0.7290319728851318,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/32c0f32da1554b46922e666252b7e076/provenance/provenance-state.pt",
+            "sha256": "2264b20b128ac5e0e3f229a19941a9e2b6c45dc4e4bb98f6df56d22b94a70413",
+            "step": 600
+          },
+          "metrics": {
+            "distribution_tv": 0.09375,
+            "hq": 1.0,
+            "mean_rmse": 3.7446086935233325e-05,
+            "mode_fractions": [
+              0.59375,
+              0.40625
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.59375,
+              0.40625
+            ],
+            "step": 600
+          },
+          "status": "PASS"
+        },
+        "mode_hold": {
+          "attempt": "b765d663a63447ffb2359451d2b11434",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.230044841766357,
+              "ema_residual": 0.026483414694666862,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/b765d663a63447ffb2359451d2b11434/provenance/provenance-state.pt",
+            "sha256": "87dd54ac978c3c68083d0e5e6eb25b32b44f1eec80c1a06e9d871086d63e2f3e",
+            "step": 1200
+          },
+          "metrics": {
+            "cover": 1.0,
+            "effective_modes": 7.588357448577881,
+            "hq": 0.96923828125,
+            "modes": 8,
+            "n_modes": 8,
+            "step": 1200
+          },
+          "status": "PASS"
+        },
+        "ring16_acquisition": {
+          "attempt": "126fdf16f24e485db93c578064ce40dc",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.2494404405246495,
+              "ema_residual": 0.029838290664358048,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/126fdf16f24e485db93c578064ce40dc/provenance/provenance-state.pt",
+            "sha256": "62783399578c64252fbf9acade75f0303f873bb615b917cd4fb7f0d9b48cbf3b",
+            "step": 1600
+          },
+          "metrics": {
+            "component_core_covariance_error": 0.4202522747218609,
+            "component_core_covariance_errors": [
+              0.13751405477523804,
+              0.5192552804946899,
+              0.538611114025116,
+              0.276391863822937,
+              0.3092400133609772,
+              0.2627265751361847,
+              0.2807994782924652,
+              0.8067973256111145,
+              0.2814944386482239,
+              0.5495706796646118,
+              0.5046860575675964,
+              0.6305508613586426,
+              0.30539077520370483,
+              0.35750091075897217,
+              0.4083615243434906,
+              0.5551454424858093
+            ],
+            "component_core_eigen_ratios": [
+              1.0385221242904663,
+              1.2991355657577515,
+              0.9495468139648438,
+              0.7520644068717957,
+              0.6115695238113403,
+              0.6284756660461426,
+              0.7103931307792664,
+              0.3822769522666931,
+              0.7046302556991577,
+              0.8023208379745483,
+              0.47371339797973633,
+              0.5396358966827393,
+              0.5688896179199219,
+              0.5359288454055786,
+              0.44385138154029846,
+              0.4526722729206085
+            ],
+            "component_core_min_eigen_ratio": 0.3822769522666931,
+            "component_counts": [
+              281,
+              292,
+              172,
+              207,
+              385,
+              288,
+              242,
+              207,
+              338,
+              282,
+              190,
+              176,
+              264,
+              264,
+              287,
+              221
+            ],
+            "component_covariance_error": 0.46625237818807364,
+            "component_covariance_errors": [
+              0.2493981271982193,
+              0.662957489490509,
+              0.5825216174125671,
+              0.3671972155570984,
+              0.3421090841293335,
+              0.25364500284194946,
+              0.2910119891166687,
+              0.8461260199546814,
+              0.2814944386482239,
+              0.7202823162078857,
+              0.531203031539917,
+              0.6946427822113037,
+              0.3033619225025177,
+              0.35750091075897217,
+              0.42144066095352173,
+              0.5551454424858093
+            ],
+            "component_mass": [
+              0.068603515625,
+              0.0712890625,
+              0.0419921875,
+              0.050537109375,
+              0.093994140625,
+              0.0703125,
+              0.05908203125,
+              0.050537109375,
+              0.08251953125,
+              0.06884765625,
+              0.04638671875,
+              0.04296875,
+              0.064453125,
+              0.064453125,
+              0.070068359375,
+              0.053955078125
+            ],
+            "component_min_eigen_ratio": 0.38043496012687683,
+            "component_resolved": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "component_spill": [
+              0.0854092538356781,
+              0.1164383590221405,
+              0.06976744532585144,
+              0.03381642326712608,
+              0.025974025949835777,
+              0.02083333395421505,
+              0.03719008341431618,
+              0.05797101557254791,
+              0.002958579920232296,
+              0.06737588346004486,
+              0.015789473429322243,
+              0.05681818351149559,
+              0.06439393758773804,
+              0.01515151560306549,
+              0.05574912950396538,
+              0.05882352963089943
+            ],
+            "covariance_error": 0.0816253274679184,
+            "hq": 0.951904296875,
+            "hq_component_counts": [
+              257,
+              258,
+              160,
+              200,
+              375,
+              282,
+              233,
+              195,
+              337,
+              263,
+              187,
+              166,
+              247,
+              260,
+              271,
+              208
+            ],
+            "mass_tv": 0.092041015625,
+            "max_component_spill": 0.1164383590221405,
+            "mean_error": 0.041858263313770294,
+            "min_hq_mass_ratio": 0.625,
+            "min_mass_ratio": 0.671875,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 1600,
+            "sw1_normalized": 0.041540640417359755,
+            "target_mass": [
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625,
+              0.0625
+            ],
+            "target_scale": 3.0029242038726807
+          },
+          "status": "PASS"
+        },
+        "rotated100": {
+          "attempt": "919a9245756d471e9d8985449aea42ce",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 5.046438980102539,
+              "ema_residual": 0.0289665543474257,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/919a9245756d471e9d8985449aea42ce/provenance/provenance-state.pt",
+            "sha256": "082cadadc1adf42d0bc6bbe117b134dbbeb2ce063194be25133200239b813dd0",
+            "step": 7000
+          },
+          "metrics": {
+            "abs_cov_trace_bias": null,
+            "accuracy_pass": false,
+            "accuracy_score": null,
+            "all_finite": true,
+            "center_max_sigma": null,
+            "center_rms_sigma": null,
+            "cov_frob_rms": null,
+            "cov_trace_bias": null,
+            "frozen_pass": false,
+            "mass_tv": 0.11131999999999999,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.22301,
+            "precision_gap": 0.7658810034617577,
+            "problem": "rotated100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": null,
+            "valid_n": 100000,
+            "within_radius_n": 22301
+          },
+          "status": "FAIL"
+        },
+        "staggered100": {
+          "attempt": "ae269c93386f42b993adb79d7412d860",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 4.576910107943141,
+              "ema_residual": 0.026505655896143027,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/ae269c93386f42b993adb79d7412d860/provenance/provenance-state.pt",
+            "sha256": "6d382d58dd0acacc9606aee51e1c062b03bc8018d2f849cfca6c5cf7b11156ec",
+            "step": 7000
+          },
+          "metrics": {
+            "abs_cov_trace_bias": 0.5416896412783327,
+            "accuracy_pass": false,
+            "accuracy_score": 5.595689013196262,
+            "all_finite": true,
+            "center_max_sigma": 2.5165029923620326,
+            "center_rms_sigma": 1.1428836115772043,
+            "cov_frob_rms": 0.7089465554935794,
+            "cov_trace_bias": 0.5416896412783327,
+            "frozen_pass": false,
+            "mass_tv": 0.12142000000000003,
+            "n": 100000,
+            "passed": false,
+            "precision": 0.33617,
+            "precision_gap": 0.6527210034617577,
+            "problem": "staggered100",
+            "protocol": "toy100-accuracy-v1",
+            "radial_ks": 0.36911099661796126,
+            "valid_n": 100000,
+            "within_radius_n": 33617
+          },
+          "status": "FAIL"
+        },
+        "vector_anisotropic": {
+          "attempt": "f453c5a65b674779aa48277320c228a6",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 3.128105987151709,
+              "ema_residual": 0.03701020099490091,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/f453c5a65b674779aa48277320c228a6/provenance/provenance-state.pt",
+            "sha256": "332f5a33b394d20fa609cd52c45dfc8ee9c3840d41b047bfcca5276009abf844",
+            "step": 1200
+          },
+          "metrics": {
+            "component_core_covariance_error": 0.31381389995416004,
+            "component_core_covariance_errors": [
+              0.23534445464611053,
+              0.3845527470111847,
+              0.32154449820518494
+            ],
+            "component_core_eigen_ratios": [
+              0.47893252968788147,
+              0.9180504083633423,
+              0.3251495957374573
+            ],
+            "component_core_min_eigen_ratio": 0.3251495957374573,
+            "component_counts": [
+              1284,
+              2083,
+              729
+            ],
+            "component_covariance_error": 0.31381389995416004,
+            "component_covariance_errors": [
+              0.23534445464611053,
+              0.3845527470111847,
+              0.32154449820518494
+            ],
+            "component_mass": [
+              0.3134765625,
+              0.508544921875,
+              0.177978515625
+            ],
+            "component_min_eigen_ratio": 0.3251495957374573,
+            "component_resolved": [
+              true,
+              true,
+              true
+            ],
+            "component_spill": [
+              0.007009345572441816,
+              0.0028804608155041933,
+              0.004115226212888956
+            ],
+            "covariance_error": 0.23122607171535492,
+            "hq": 0.99560546875,
+            "mass_tv": 0.1752115935087204,
+            "max_component_spill": 0.007009345572441816,
+            "mean_error": 0.27877509593963623,
+            "min_mass_ratio": 0.533935546875,
+            "resolved_core_covariance_error": 0.31381389995416004,
+            "resolved_core_min_eigen_ratio": 0.3251495957374573,
+            "resolved_max_component_spill": 0.007009345572441816,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.2136241052348046,
+            "target_mass": [
+              0.3333333432674408,
+              0.3333333432674408,
+              0.3333333432674408
+            ],
+            "target_scale": 2.032285690307617
+          },
+          "status": "FAIL"
+        },
+        "vector_overlap": {
+          "attempt": "8c97f1452cab4d0f9e5ef0d4ca3e4739",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 0.9550976157188416,
+              "ema_residual": 0.23607878386974335,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/8c97f1452cab4d0f9e5ef0d4ca3e4739/provenance/provenance-state.pt",
+            "sha256": "88028bc2b27fe9f42f8630f945940c5158e0bdeaa4623088f1806b86c5636eb1",
+            "step": 1200
+          },
+          "metrics": {
+            "covariance_error": 0.5222957730293274,
+            "mean_error": 0.10151220113039017,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.14908646786152607,
+            "target_scale": 0.8501437306404114
+          },
+          "status": "FAIL"
+        },
+        "vector_unequal_mass": {
+          "attempt": "57d108bf59be414caeb518c57f7d2c58",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 2.7211244550645346,
+              "ema_residual": 0.154668791314587,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/57d108bf59be414caeb518c57f7d2c58/provenance/provenance-state.pt",
+            "sha256": "0a24f9cd457df86edeb8e09aecbac986feda41591fe6e7194da2e5622bc6b18c",
+            "step": 1200
+          },
+          "metrics": {
+            "component_core_covariance_error": 0.5852136090397835,
+            "component_core_covariance_errors": [
+              0.25514453649520874,
+              0.411836713552475,
+              0.6738731861114502,
+              1.0
+            ],
+            "component_core_eigen_ratios": [
+              0.6919046640396118,
+              0.4720337688922882,
+              0.25853991508483887,
+              0.0
+            ],
+            "component_core_min_eigen_ratio": 0.0,
+            "component_counts": [
+              2488,
+              1203,
+              405,
+              0
+            ],
+            "component_covariance_error": 1.7676393389701843,
+            "component_covariance_errors": [
+              3.0473530292510986,
+              2.3493311405181885,
+              0.6738731861114502,
+              1.0
+            ],
+            "component_mass": [
+              0.607421875,
+              0.293701171875,
+              0.098876953125,
+              0.0
+            ],
+            "component_min_eigen_ratio": 0.0,
+            "component_resolved": [
+              true,
+              true,
+              true,
+              false
+            ],
+            "component_spill": [
+              0.018488746136426926,
+              0.02493765577673912,
+              0.04197530820965767,
+              1.0
+            ],
+            "covariance_error": 0.13873308897018433,
+            "hq": 0.977294921875,
+            "mass_tv": 0.05742187052965164,
+            "max_component_spill": 1.0,
+            "mean_error": 0.13277165591716766,
+            "min_mass_ratio": 0.0,
+            "resolved_core_covariance_error": 0.4469514787197113,
+            "resolved_core_min_eigen_ratio": 0.25853991508483887,
+            "resolved_max_component_spill": 0.04197530820965767,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.10174356676655379,
+            "target_mass": [
+              0.550000011920929,
+              0.30000001192092896,
+              0.12999999523162842,
+              0.019999999552965164
+            ],
+            "target_scale": 1.7593294382095337
+          },
+          "status": "FAIL"
+        },
+        "vector_unequal_width": {
+          "attempt": "360ddd9ed4984c06ac6726fa06626342",
+          "final_checkpoint": {
+            "observer": {
+              "ema_data_scale": 3.0039212179034185,
+              "ema_residual": 0.07249116295303033,
+              "initialized": true,
+              "schema": 1,
+              "thermal_scale": 1.0
+            },
+            "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/360ddd9ed4984c06ac6726fa06626342/provenance/provenance-state.pt",
+            "sha256": "a366e2398071f8c0fad823effd02c8401488fa9250733961b5ef7d2e552a421f",
+            "step": 1200
+          },
+          "metrics": {
+            "component_core_covariance_error": 0.5155643448233604,
+            "component_core_covariance_errors": [
+              0.8274410367012024,
+              0.6632524132728577,
+              0.4029181897640228,
+              0.1686457395553589
+            ],
+            "component_core_eigen_ratios": [
+              0.09347031265497208,
+              0.28147757053375244,
+              0.521944522857666,
+              0.9080619812011719
+            ],
+            "component_core_min_eigen_ratio": 0.09347031265497208,
+            "component_counts": [
+              1490,
+              256,
+              1695,
+              655
+            ],
+            "component_covariance_error": 9.686902768909931,
+            "component_covariance_errors": [
+              0.8274410367012024,
+              37.34860610961914,
+              0.4029181897640228,
+              0.1686457395553589
+            ],
+            "component_mass": [
+              0.36376953125,
+              0.0625,
+              0.413818359375,
+              0.159912109375
+            ],
+            "component_min_eigen_ratio": 0.09347031265497208,
+            "component_resolved": [
+              true,
+              true,
+              true,
+              true
+            ],
+            "component_spill": [
+              0.0,
+              0.109375,
+              0.01946902647614479,
+              0.01984732784330845
+            ],
+            "covariance_error": 0.22530615329742432,
+            "hq": 0.98193359375,
+            "mass_tv": 0.277587890625,
+            "max_component_spill": 0.109375,
+            "mean_error": 0.3980906009674072,
+            "min_mass_ratio": 0.25,
+            "resolved_core_covariance_error": 0.5155643448233604,
+            "resolved_core_min_eigen_ratio": 0.09347031265497208,
+            "resolved_max_component_spill": 0.109375,
+            "sample_count": 4096,
+            "step": 1200,
+            "sw1_normalized": 0.2873825274476827,
+            "target_mass": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "target_scale": 2.1343955993652344
+          },
+          "status": "FAIL"
+        }
+      }
+    }
+  },
+  "comparison": {
+    "gaussian1d_smoke": {
+      "control": "PASS",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "PASS"
+    },
+    "gaussian1d_stability": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 120,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "scored_sample_tensors_exact": true,
+      "settling": "FAIL"
+    },
+    "grid100": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": false,
+      "final_model_tensors_exact": false,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": false,
+      "first_changed_observation_step": 4750,
+      "initialization_exact": true,
+      "native_snapshots": {
+        "first_different_step": 4750,
+        "last_exact_before_first_difference": 4500,
+        "live_sample_arrays_exact": false,
+        "snapshots": 34,
+        "target_arrays_exact": true
+      },
+      "observation_count": 34,
+      "observations_exact": false,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    },
+    "img_bars4": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    },
+    "img_blobs4": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    },
+    "img_intensity2": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    },
+    "img_stripes2": {
+      "control": "PASS",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "PASS"
+    },
+    "mode_hold": {
+      "control": "PASS",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "PASS"
+    },
+    "ring16_acquisition": {
+      "control": "PASS",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 96,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "PASS"
+    },
+    "rotated100": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "native_snapshots": {
+        "first_different_step": null,
+        "last_exact_before_first_difference": null,
+        "live_sample_arrays_exact": true,
+        "snapshots": 34,
+        "target_arrays_exact": true
+      },
+      "observation_count": 34,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    },
+    "staggered100": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "native_snapshots": {
+        "first_different_step": null,
+        "last_exact_before_first_difference": null,
+        "live_sample_arrays_exact": true,
+        "snapshots": 34,
+        "target_arrays_exact": true
+      },
+      "observation_count": 34,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    },
+    "vector_anisotropic": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    },
+    "vector_overlap": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "scored_sample_tensors_exact": true,
+      "settling": "FAIL"
+    },
+    "vector_unequal_mass": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    },
+    "vector_unequal_width": {
+      "control": "FAIL",
+      "endpoint_metrics_exact": true,
+      "final_model_tensors_exact": true,
+      "final_named_stream_states_exact": true,
+      "final_optimizer_states_exact": true,
+      "first_changed_observation_step": null,
+      "initialization_exact": true,
+      "observation_count": 24,
+      "observations_exact": true,
+      "rng_receipts_exact": true,
+      "settling": "FAIL"
+    }
+  },
+  "complete": true,
+  "control_saved_tensor_diagnostics": {
+    "gaussian1d_stability": {
+      "checkpoints": [
+        {
+          "observer": {
+            "ema_data_scale": 0.46437829768611905,
+            "ema_residual": 0.1590934380331407,
+            "initialized": true,
+            "schema": 1,
+            "thermal_scale": 1.0
+          },
+          "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9c292a19e74747d88230eb960f11a873/evaluator/initial-state.pt",
+          "sha256": "7fa7aa3eabe6b1734fd94ed2e856ca59fbf67824c4ed2d47b3c225d4359bbeae",
+          "step": 1000
+        },
+        {
+          "observer": {
+            "ema_data_scale": 0.4917958431736223,
+            "ema_residual": 0.1074096490118018,
+            "initialized": true,
+            "schema": 1,
+            "thermal_scale": 1.0
+          },
+          "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9c292a19e74747d88230eb960f11a873/evaluator/pre-shift-state.pt",
+          "sha256": "285ffe13708cc71e2c2e4566a0f5135f2c3d610972069b77d9da47a76a0b766c",
+          "step": 4000
+        },
+        {
+          "observer": {
+            "ema_data_scale": 0.44803505736808474,
+            "ema_residual": 0.17516392793086233,
+            "initialized": true,
+            "schema": 1,
+            "thermal_scale": 1.0
+          },
+          "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9c292a19e74747d88230eb960f11a873/evaluator/state.pt",
+          "sha256": "97393d8fadcf7a8af335891a9ecc671a0a9c25cfdf386c5770e0a1a476161237",
+          "step": 6000
+        }
+      ],
+      "final_signed_quantile_errors_sigma": {
+        "0.01": -0.054732431535483794,
+        "0.05": 0.27804652379442985,
+        "0.5": 0.09705185890197754,
+        "0.95": -0.0786424033491766,
+        "0.99": -0.2909443839743133
+      },
+      "phases": {
+        "recovery": {
+          "adjacent_empirical_w1_sigma": {
+            "max": 1.8462401610740926,
+            "median": 0.22695626795757562,
+            "min": 0.06732394394930452
+          },
+          "cdf_ks": {
+            "max": 0.25028692804366215,
+            "median": 0.07619923588904459,
+            "min": 0.033980070503796256
+          },
+          "longest": 1,
+          "observations": 24,
+          "passing": 2,
+          "std_ratio": {
+            "max": 1.2325794640124794,
+            "median": 0.9654219674846345,
+            "min": 0.7501590095006824
+          },
+          "terminal_suffix": 0,
+          "w1_scope": "distribution movement between independent scored batches, including finite-sample variation; not paired output displacement"
+        },
+        "shifted_hold": {
+          "adjacent_empirical_w1_sigma": {
+            "max": 1.900605456175981,
+            "median": 0.2906979267136194,
+            "min": 0.03955561440670863
+          },
+          "cdf_ks": {
+            "max": 0.3386099991679121,
+            "median": 0.11568818630680006,
+            "min": 0.035170433605824114
+          },
+          "longest": 1,
+          "observations": 24,
+          "passing": 2,
+          "std_ratio": {
+            "max": 2.8757420768244977,
+            "median": 0.9056665838791895,
+            "min": 0.659436380820266
+          },
+          "terminal_suffix": 0,
+          "w1_scope": "distribution movement between independent scored batches, including finite-sample variation; not paired output displacement"
+        },
+        "stationary": {
+          "adjacent_empirical_w1_sigma": {
+            "max": 1.2643879214738263,
+            "median": 0.36948987061623484,
+            "min": 0.0768583366589155
+          },
+          "cdf_ks": {
+            "max": 0.37305253819844497,
+            "median": 0.10932288320582498,
+            "min": 0.019113701023262375
+          },
+          "longest": 2,
+          "observations": 72,
+          "passing": 6,
+          "std_ratio": {
+            "max": 1.5715624768123742,
+            "median": 0.974987146934121,
+            "min": 0.7764446534668333
+          },
+          "terminal_suffix": 0,
+          "w1_scope": "distribution movement between independent scored batches, including finite-sample variation; not paired output displacement"
+        }
+      },
+      "same_law_sampling_floor": {
+        "above_cooling_tau": 160,
+        "cooling_tau": 0.02,
+        "panel_pairs": 160,
+        "panel_size": 128,
+        "raw_symmetric_nn_residual": {
+          "max": 0.17131692171096802,
+          "median": 0.056270839646458626,
+          "min": 0.024989085271954536
+        },
+        "sampling_draws_added": 0,
+        "scope": "two disjoint iid panels of the same generated law at scored passing states; not historical real/fake training residual"
+      },
+      "sample_artifact": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/9c292a19e74747d88230eb960f11a873/evaluator/observed-samples.pt",
+        "sha256": "4c14d4dad42c063c64bfd61a42a7868e4a162997ad1cc9e66f9569e3daab4ef3"
+      }
+    },
+    "vector_overlap": {
+      "analytic_target_covariance": [
+        [
+          0.42500000000000004,
+          0.0
+        ],
+        [
+          0.0,
+          0.30250000000000005
+        ]
+      ],
+      "final_checkpoint": {
+        "observer": {
+          "ema_data_scale": 0.9550976157188416,
+          "ema_residual": 0.23607878386974335,
+          "initialized": true,
+          "schema": 1,
+          "thermal_scale": 1.0
+        },
+        "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/3a07f4a4ca4447e6a6151d11f47080c7/provenance/provenance-state.pt",
+        "sha256": "abfd7ccce8202c13589620a2f2bbcd6d361bb3b4629a48bcdfe64403579b8f21",
+        "step": 1200
+      },
+      "passing_runs": {
+        "longest": 3,
+        "observations": 24,
+        "passing": 10,
+        "terminal_suffix": 0
+      },
+      "same_law_sampling_floor": {
+        "above_cooling_tau": 160,
+        "cooling_tau": 0.02,
+        "panel_pairs": 160,
+        "panel_size": 128,
+        "raw_symmetric_nn_residual": {
+          "max": 0.16503116488456726,
+          "median": 0.12582656741142273,
+          "min": 0.09372930973768234
+        },
+        "sampling_draws_added": 0,
+        "scope": "two disjoint iid panels of the same generated law at scored passing states; not historical real/fake training residual"
+      },
+      "sample_artifact": {
+        "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/queue/bispf-three-theme-repair-round1-v1/3a07f4a4ca4447e6a6151d11f47080c7/observed-samples.pt",
+        "sha256": "1fdd6b48fc6f79dd88459e924d6d220f2bcccdd50d7826fbe7bdaa1d9dccdb38"
+      },
+      "signed_covariance_windows": [
+        {
+          "bias_eigenvalues": [
+            -0.02585392684214492,
+            0.027639548463574456
+          ],
+          "covariance": [
+            [
+              0.4524314345879325,
+              0.003330078539944367
+            ],
+            [
+              0.003330078539944367,
+              0.2768541870334971
+            ]
+          ],
+          "mean": [
+            -0.0679901719568079,
+            -0.08661944223513274
+          ],
+          "signed_analytic_covariance_bias": [
+            [
+              0.027431434587932457,
+              0.003330078539944367
+            ],
+            [
+              0.003330078539944367,
+              -0.025645812966502923
+            ]
+          ],
+          "step": 750
+        },
+        {
+          "bias_eigenvalues": [
+            -0.03935159431204772,
+            0.04196185216252358
+          ],
+          "covariance": [
+            [
+              0.46606033463925894,
+              0.008514268202794497
+            ],
+            [
+              0.008514268202794497,
+              0.264049923211217
+            ]
+          ],
+          "mean": [
+            -0.20679562721647926,
+            -0.14152578124685533
+          ],
+          "signed_analytic_covariance_bias": [
+            [
+              0.0410603346392589,
+              0.008514268202794497
+            ],
+            [
+              0.008514268202794497,
+              -0.03845007678878304
+            ]
+          ],
+          "step": 800
+        },
+        {
+          "bias_eigenvalues": [
+            -0.11404890698123456,
+            0.07769365543169424
+          ],
+          "covariance": [
+            [
+              0.492164223082485,
+              -0.04368147655236028
+            ],
+            [
+              -0.04368147655236028,
+              0.19898052536797478
+            ]
+          ],
+          "mean": [
+            0.13234301820921246,
+            -0.07411071135902603
+          ],
+          "signed_analytic_covariance_bias": [
+            [
+              0.06716422308248493,
+              -0.04368147655236028
+            ],
+            [
+              -0.04368147655236028,
+              -0.10351947463202527
+            ]
+          ],
+          "step": 1000
+        },
+        {
+          "bias_eigenvalues": [
+            -0.09538468025458527,
+            0.08383243867933782
+          ],
+          "covariance": [
+            [
+              0.47368050099084563,
+              -0.07116298387659643
+            ],
+            [
+              -0.07116298387659643,
+              0.242267257433907
+            ]
+          ],
+          "mean": [
+            0.010800036700857163,
+            -0.02409317649926379
+          ],
+          "signed_analytic_covariance_bias": [
+            [
+              0.04868050099084559,
+              -0.07116298387659643
+            ],
+            [
+              -0.07116298387659643,
+              -0.06023274256609304
+            ]
+          ],
+          "step": 1050
+        },
+        {
+          "bias_eigenvalues": [
+            -0.1435791533199122,
+            0.1834747534443612
+          ],
+          "covariance": [
+            [
+              0.3021765904797496,
+              0.07973359515787884
+            ],
+            [
+              0.07973359515787884,
+              0.46521900964469953
+            ]
+          ],
+          "mean": [
+            -0.08640036718952615,
+            -0.2018060363989207
+          ],
+          "signed_analytic_covariance_bias": [
+            [
+              -0.12282340952025045,
+              0.07973359515787884
+            ],
+            [
+              0.07973359515787884,
+              0.16271900964469949
+            ]
+          ],
+          "step": 1100
+        },
+        {
+          "bias_eigenvalues": [
+            -0.2605626602822315,
+            -0.054614833163081564
+          ],
+          "covariance": [
+            [
+              0.17144386786936266,
+              0.037334806973264
+            ],
+            [
+              0.037334806973264,
+              0.24087863868532436
+            ]
+          ],
+          "mean": [
+            -0.005445953888738586,
+            0.0334986578727694
+          ],
+          "signed_analytic_covariance_bias": [
+            [
+              -0.2535561321306374,
+              0.037334806973264
+            ],
+            [
+              0.037334806973264,
+              -0.06162136131467569
+            ]
+          ],
+          "step": 1150
+        },
+        {
+          "bias_eigenvalues": [
+            -0.1967625509603791,
+            0.17568031488492
+          ],
+          "covariance": [
+            [
+              0.4411837167764874,
+              0.18429380153417446
+            ],
+            [
+              0.18429380153417446,
+              0.26523404714805365
+            ]
+          ],
+          "mean": [
+            -0.06711561928204901,
+            0.0668847314445884
+          ],
+          "signed_analytic_covariance_bias": [
+            [
+              0.016183716776487334,
+              0.18429380153417446
+            ],
+            [
+              0.18429380153417446,
+              -0.03726595285194639
+            ]
+          ],
+          "step": 1200
+        }
+      ]
+    }
+  },
+  "cost_scope": "charged attempt seconds; hardware contention and instrumentation preclude a speed ranking",
+  "optimizer_updates_added": 0,
+  "raw_analysis": {
+    "path": "/mnt/ml7tb/ParticleGAN-forge/three-theme-repairs-20261022/settling-final-analysis.json",
+    "sha256": "69c5307f786766cdd697c9fa151a0a5e4993374e69ca02918846fd1f6032572a"
+  },
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "source_commit": "2a2b662bdfa6249076b27dbea4c136e23d3e7a80",
+  "source_digest": "8bfcc01cd7482b1b348edb2162567adfdcdaa7d308f75fc834774302c6ac4acb",
+  "thermal_gradient_applied_move_history": "unavailable: trainer return diagnostics were not serialized by the frozen adapters"
+}
