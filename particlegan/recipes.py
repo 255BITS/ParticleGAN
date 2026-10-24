@@ -633,7 +633,7 @@ class Recipe:
                 result.pop(key)
         return result
 
-    def make_prior(self, **overrides):
+    def make_prior(self, *, manipulators=None, **overrides):
         """Construct the prior; overrides are local to this call.
 
         ``prior_update`` owns learning/freezing. A conflicting ``learnable``
@@ -646,6 +646,7 @@ class Recipe:
         including ``sigma=0`` when restoring a checkpoint.
         """
         from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
+        manipulators = overrides.pop("manipulators", manipulators)
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
                    "sigma_rel": self.sigma_rel, "standardize": self.standardize,
                    "learnable": self.prior_update == "learned", **overrides}
@@ -655,19 +656,26 @@ class Recipe:
         if kind == "mog":
             sigma_rel = options.pop("sigma_rel")
             if "sigma" in options:
-                return MoGParticlePrior(**options)
-            prior = MoGParticlePrior(sigma=0, **options)
-            sigma, d0 = calibrate_mog_sigma(prior.means(), sigma_rel)
-            prior.set_sigma(sigma)
-            prior.d0.copy_(d0)
-            prior.sigma_rel = float(sigma_rel)
-            return prior
-        if kind != "particles":
+                prior = MoGParticlePrior(**options)
+            else:
+                prior = MoGParticlePrior(sigma=0, **options)
+                sigma, d0 = calibrate_mog_sigma(prior.means(), sigma_rel)
+                prior.set_sigma(sigma)
+                prior.d0.copy_(d0)
+                prior.sigma_rel = float(sigma_rel)
+        elif kind == "particles":
+            if options.pop("sigma_rel") != 0:
+                raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
+            options.pop("standardize")
+            prior = ParticlePrior(**options)
+        else:
             raise ValueError("prior_kind must be 'particles' or 'mog'")
-        if options.pop("sigma_rel") != 0:
-            raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
-        options.pop("standardize")
-        return ParticlePrior(**options)
+        if manipulators is not None:
+            if isinstance(manipulators, (list, tuple)):
+                prior = prior.manipulate(*manipulators)
+            else:
+                prior = prior.manipulate(manipulators)
+        return prior
 
     def encode(self, query, prior, *, offset=None, draws=2, generator=None):
         """Route caller-produced queries; returns a ParticleEncoding.
@@ -676,16 +684,17 @@ class Recipe:
         offsets because local posterior and prior must match for this recipe.
         """
         from .autoencoder import particle_ae, particle_vae
+        base = getattr(prior, "base", prior)
         options = dict(temperature=self.routing_temperature,
                        distance_reduction=self.distance_reduction)
         if self.encoder_mode == "ae":
             if offset is None:
                 raise ValueError("AE encoding requires offset")
-            return particle_ae(query, offset, prior, **options)
+            return particle_ae(query, offset, base, **options)
         if self.encoder_mode in ("categorical", "hard"):
             if offset is not None:
                 raise ValueError("prior-matching VAE does not accept an offset")
-            return particle_vae(query, prior, draws=draws, generator=generator,
+            return particle_vae(query, base, draws=draws, generator=generator,
                                 hard=self.encoder_mode == "hard", **options)
         raise ValueError("this recipe has no encoder")
 
@@ -1040,13 +1049,16 @@ class Recipe:
 
     def _validate_frozen_prior_ownership(self, prior, *modules, optimizers=()):
         """Reject aliases before freezing, including already-frozen buffers."""
-        if self.prior_update != "frozen" or not hasattr(prior, "z"):
+        if self.prior_update != "frozen":
+            return
+        base = getattr(prior, "base", prior)
+        if not hasattr(base, "z"):
             return
         for module in modules:
             if module is not None:
-                _reject_table_storage_owners(prior.z, (*module.parameters(), *module.buffers()))
+                _reject_table_storage_owners(base.z, (*module.parameters(), *module.buffers()))
         for optimizer in optimizers:
-            _reject_table_storage_owners(prior.z,
+            _reject_table_storage_owners(base.z,
                 (p for group in optimizer.param_groups for p in group["params"]))
 
     def apply_prior_policy(self, prior):
@@ -1056,21 +1068,22 @@ class Recipe:
         identical deterministic locations and consume identical init streams.
         Freezing registers locations as a buffer, keeping sampling/state keys.
         """
-        if not hasattr(prior, "z"):
+        base = getattr(prior, "base", prior)
+        if not hasattr(base, "z"):
             return prior  # Gaussian priors have no trainable location table.
         if self.prior_update == "learned":
-            if not prior.z.requires_grad:
+            if not base.z.requires_grad:
                 raise ValueError("frozen prior contradicts Recipe.prior_update='learned'")
             if self.prior_regularizer in ("moment_tether", "sbnp") and self.prior_reg > 0:
                 from .moment_tether import capture_initial_moments
-                capture_initial_moments(prior)
-        elif prior.z.requires_grad:
-            rows = prior.z.detach()
-            del prior.z
-            prior.register_buffer("z", rows)
+                capture_initial_moments(base)
+        elif base.z.requires_grad:
+            rows = base.z.detach()
+            del base.z
+            base.register_buffer("z", rows)
         if self.prior_regularizer == "coulomb" and self.prior_update == "learned" and self.prior_reg > 0:
             from .coulomb_prior import capture_coulomb_reference
-            capture_coulomb_reference(prior)
+            capture_coulomb_reference(base)
         return prior
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
@@ -1109,8 +1122,18 @@ class Recipe:
         if prior is not None:
             self._validate_frozen_prior_ownership(prior, generator, discriminator, encoder, ema_critic)
             self.apply_prior_policy(prior)
-        prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
-        prior_ids = {id(p) for p in prior_params}
+            base_prior = getattr(prior, "base", prior)
+            base_params = [p for p in base_prior.parameters() if p.requires_grad]
+            base_ids = {id(p) for p in base_params}
+            router_params = [p for p in prior.parameters() if p.requires_grad and id(p) not in base_ids]
+            prior_params = base_params + router_params
+            prior_ids = {id(p) for p in prior_params}
+        else:
+            base_prior = None
+            base_params = []
+            router_params = []
+            prior_params = []
+            prior_ids = set()
         g_params = []
         seen = set(prior_ids)
         normalized = self.optimizer_family not in ("adam", "formulation")
@@ -1133,11 +1156,15 @@ class Recipe:
                 groups.extend(role_groups)
         if g_params and not normalized:
             groups.append({"params": g_params, "lr": self.lr})
-        if prior_params:
-            groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
+        if base_params:
+            groups.append({"params": base_params, "lr": self.lr * self.prior_lr_mult,
                            "betas": self.prior_betas if self.prior_betas is not None else self.betas,
                            **({"role": "prior"} if normalized else {}),
                            **({"eps": self.prior_eps} if self.prior_eps is not None else {})})
+        if router_params:
+            groups.append({"params": router_params, "lr": self.lr,
+                           "betas": self.betas,
+                           **({"role": "router"} if normalized else {})})
         mechanisms = prior_mechanisms(prior,
             latent_damping_max_rate=self.latent_damping_max_rate if self.prior_update == "learned" else 0.,
             prior_beta1=(self.prior_betas or self.betas)[0])
@@ -1146,7 +1173,7 @@ class Recipe:
         # Plain and nonstandardized MoG reads have the same row-local gradient
         # ownership. Standardized MoG keeps the component API's historic policy
         # (no A2), now explicit in the optimizer receipt and optionally required.
-        latent_table = prior.z if mechanisms["prior"]["a2_eligible"] else None
+        latent_table = base_prior.z if (base_prior is not None and hasattr(base_prior, "z") and mechanisms["prior"]["a2_eligible"]) else None
         opt_g = self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs)
         opt_g.prior_mechanisms = mechanisms
         return opt_g, self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)

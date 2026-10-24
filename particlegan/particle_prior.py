@@ -7,7 +7,7 @@ vectorized so it plays nicely with Accelerate / DDP and large particle
 counts (e.g. 100k+).
 """
 
-from typing import Optional, Tuple
+from typing import Any, Optional, Tuple
 import math
 from numbers import Real
 
@@ -177,6 +177,11 @@ class ParticlePrior(nn.Module):
                 idx = self.sample_indices(batch_size, generator=generator)
         z_batch = self.z[idx]
         return z_batch, idx
+
+    def manipulate(self, *manipulators: Any) -> "ManipulatedPrior":
+        """Wrap this prior in a ManipulatedPrior chaining the given manipulators."""
+        from .priors import ManipulatedPrior
+        return ManipulatedPrior(self, manipulators)
 
 
 def _nonnegative_scalar(value, name):

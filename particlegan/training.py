@@ -178,12 +178,13 @@ class GANTrainer:
         self.device, self.dtype = first_trainable.device, first_trainable.dtype
         self.prior = (recipe.make_prior().to(device=self.device, dtype=self.dtype)
                       if prior is None else prior)
+        base_prior = getattr(self.prior, "base", self.prior)
         expected_prior = MoGParticlePrior if recipe.prior_kind == "mog" else ParticlePrior
-        if type(self.prior) is not expected_prior:
+        if type(base_prior) is not expected_prior:
             raise ValueError("prior must match the recipe's ParticlePrior or MoGParticlePrior kind")
-        if type(self.prior) is MoGParticlePrior and self.prior.standardize != recipe.standardize:
+        if type(base_prior) is MoGParticlePrior and base_prior.standardize != recipe.standardize:
             raise ValueError("prior standardize must match the recipe")
-        if prior_noise_generator is not None and type(self.prior) is not MoGParticlePrior:
+        if prior_noise_generator is not None and type(base_prior) is not MoGParticlePrior:
             raise ValueError("prior_noise_generator requires a MoG prior")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
@@ -204,7 +205,7 @@ class GANTrainer:
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
         if require_latent_damping is None:
-            require_latent_damping = self.prior.z.requires_grad and recipe.latent_damping_max_rate > 0
+            require_latent_damping = base_prior.z.requires_grad and recipe.latent_damping_max_rate > 0
         if type(require_latent_damping) is not bool:
             raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
@@ -378,7 +379,8 @@ class GANTrainer:
         return self.policy._average_rate()
 
     def _sample_training_prior(self, n):
-        if type(self.prior) is MoGParticlePrior:
+        base_prior = getattr(self.prior, "base", self.prior)
+        if type(base_prior) is MoGParticlePrior:
             return self.prior.sample(n, generator=self.latent_generator,
                                      noise_generator=self.prior_noise_generator)
         return self.prior.sample(n, generator=self.latent_generator)
@@ -433,6 +435,8 @@ class GANTrainer:
             self.D.requires_grad_(False)
             latent, indices = self._sample_training_prior(len(real))
             fake_g = self._generate(self.G, latent, sigma_out, noise, rows=indices)
+            if hasattr(self.prior, "postprocess_generated"):
+                fake_g = self.prior.postprocess_generated(fake_g)
             fake_logits = critic(fake_g)
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
@@ -455,6 +459,18 @@ class GANTrainer:
             loss_g = loss_gan + recipe.prior_reg * prior_reg
             if self.prior.z.requires_grad and recipe.prior_l2 > 0:
                 loss_g = loss_g + recipe.prior_l2 * self.prior.z.square().mean()
+            prior_manip_loss = None
+            if hasattr(self.prior, "regularize"):
+                raw_rows = self.prior.z if recipe.num_particles <= 1024 else self.prior.z[torch.unique(indices)]
+                prior_manip_loss = self.prior.regularize(
+                    raw_rows,
+                    sampled_codes=latent,
+                    indices=indices,
+                    generated=fake_g,
+                    logits=fake_logits,
+                )
+                if prior_manip_loss is not None:
+                    loss_g = loss_g + prior_manip_loss
             if recipe.kinetic_transport_weight:
                 loss_g = loss_g + transport
             if recipe.kinetic_transport_local_weight:
@@ -468,7 +484,10 @@ class GANTrainer:
                 sampled_latent = latent.detach().clone()
                 def protected_evaluator():
                     replay = sampled_latent + (self.prior.z[indices] - locations[indices])
-                    logits = critic(self._generate(self.G, replay, sigma_out, noise, rows=indices))
+                    generated = self._generate(self.G, replay, sigma_out, noise, rows=indices)
+                    if hasattr(self.prior, "postprocess_generated"):
+                        generated = self.prior.postprocess_generated(generated)
+                    logits = critic(generated)
                     return (self.loss.g_loss(logits, real_logits),)
             constraint_geometry_backward(loss_g, self.opt_g, (loss_gan,),
                                          protected_evaluator=protected_evaluator)
@@ -481,10 +500,18 @@ class GANTrainer:
                 parameter.requires_grad_(flag)
         self.policy.finish_step()
         self._serve_apply()
+        has_prior_manip = False
+        if prior_manip_loss is not None:
+            if isinstance(prior_manip_loss, torch.Tensor):
+                has_prior_manip = bool((prior_manip_loss != 0).any().item())
+            else:
+                has_prior_manip = bool(prior_manip_loss != 0)
         result = {key: value.detach() for key, value in
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
         result["step"] = self.completed_steps
+        if has_prior_manip:
+            result["prior_manipulation"] = prior_manip_loss.detach()
         if recipe.kinetic_transport_weight:
             result["kinetic_transport"] = transport.detach()
         if recipe.kinetic_transport_local_weight:
@@ -663,9 +690,12 @@ class GANTrainer:
             from .coulomb_prior import CENTER_BUFFER, RADIUS_BUFFER
             for name in ("prior", "ema_prior"):
                 reference = state["models"][name]
-                if (not torch.isfinite(reference[CENTER_BUFFER]).all()
-                        or not torch.isfinite(reference[RADIUS_BUFFER])
-                        or reference[RADIUS_BUFFER] < 0):
+                center = reference.get(CENTER_BUFFER, reference.get(f"base.{CENTER_BUFFER}"))
+                radius = reference.get(RADIUS_BUFFER, reference.get(f"base.{RADIUS_BUFFER}"))
+                if (center is None or radius is None
+                        or not torch.isfinite(center).all()
+                        or not torch.isfinite(radius)
+                        or radius < 0):
                     raise ValueError("invalid checkpoint Coulomb initial reference")
         if not isinstance(state["optimizers"], list) or len(state["optimizers"]) != 2:
             raise ValueError("invalid checkpoint optimizer schema")

@@ -512,6 +512,8 @@ class UpdatePolicy:
         for name, module in self._training_modules().items():
             if name != "prior":
                 owners.update({id(p): name for p in module.parameters()})
+            else:
+                owners.update({id(p): "router" for p in module.parameters() if id(p) != id(self.table)})
         owners[id(self.table)] = "table"
         if roles is not None and (not isinstance(roles, (list, tuple)) or len(roles) != len(self.optimizers)):
             raise ValueError("roles must match policy optimizers and parameter groups")
