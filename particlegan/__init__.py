@@ -63,6 +63,15 @@ from .wavefront import (
     WavefrontManifoldPrior,
     sobolev_filter_2d,
 )
+from .tomographic import (
+    CosineRepulsionManipulator,
+    MarginalEntropyManipulator,
+    MarginalEntropyRegularizer,
+    NormalizedFeatureCosineRepulsion,
+    TomographicConstraintTarget,
+    evaluate_tomographic_constraints,
+    symmetric_log_odds,
+)
 from . import init
 
 __all__ = [
@@ -85,5 +94,9 @@ __all__ = [
     "GhostFreeDeMixingManipulator", "SobolevWavefrontManipulator", "SplatCarrierManipulator",
     "sobolev_filter_2d", "SobolevGradFilter", "WavefrontManifoldPrior",
     "GhostFreeSimplexMixer", "DifferentiableSplatCarrierBasis", "ResidualConvBlock", "SimplexWavefrontGenerator",
+    "symmetric_log_odds", "TomographicConstraintTarget",
+    "MarginalEntropyRegularizer", "MarginalEntropyManipulator",
+    "NormalizedFeatureCosineRepulsion", "CosineRepulsionManipulator",
+    "evaluate_tomographic_constraints",
 ]
 

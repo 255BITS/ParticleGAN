@@ -552,6 +552,10 @@ from .wavefront import (  # noqa: E402
     SobolevWavefrontManipulator,
     SplatCarrierManipulator,
 )
+from .tomographic import (  # noqa: E402
+    CosineRepulsionManipulator,
+    MarginalEntropyManipulator,
+)
 
 __all__ = [
     "PriorManipulator",
@@ -561,5 +565,7 @@ __all__ = [
     "GhostFreeDeMixingManipulator",
     "SobolevWavefrontManipulator",
     "SplatCarrierManipulator",
+    "CosineRepulsionManipulator",
+    "MarginalEntropyManipulator",
 ]
 
