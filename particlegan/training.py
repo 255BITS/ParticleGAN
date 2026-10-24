@@ -243,7 +243,8 @@ class GANTrainer:
         else:
             self.input_noise_generator = self.noise_generator
         self.prior_noise_generator = None
-        if type(self.prior) is MoGParticlePrior:
+        base_prior = getattr(self.prior, "base", self.prior)
+        if type(base_prior) is MoGParticlePrior:
             self.prior_noise_generator = self._stream(prior_noise_generator, seed + 6)
             self._STREAMS += ("prior_noise_generator",)
         self.model_generator = None

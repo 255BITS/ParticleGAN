@@ -1003,7 +1003,8 @@ class Recipe:
                 raise ValueError("initial_mmd requires prior= after public initialization")
             if set(overrides) - {"weight"}:
                 raise ValueError("initial_mmd has fixed panel/kernel scales; only weight can be overridden")
-            return InitialMMDRegularizer.from_priors(prior, weight=options["weight"])
+            base_prior = getattr(prior, "base", prior)
+            return InitialMMDRegularizer.from_priors(base_prior, weight=options["weight"])
         return ParticleRegularizer(**options)
 
     def prior_regularization(self, rows, *, regularizer=None, prior=None, reference=None):
@@ -1462,7 +1463,8 @@ def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *,
     optimizers = tuple(optimizers)
     from .recipe_schedules import apply_training_schedules
     apply_training_schedules(step, recipe, optimizers)
-    prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
+    base_prior = getattr(prior, "base", prior)
+    prior_ids = set() if base_prior is None else {id(p) for p in base_prior.parameters()}
     if recipe.continuous_policy in ("dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
         from torch import Tensor, nn
         if critic is None:
