@@ -499,6 +499,30 @@ class ForgeWorkspace:
         return {p.stem: CandidateSpec.from_dict(read_json(p)) for p in sorted(self.ideas_dir.glob("*.json"))}
 
     def validate(self) -> dict[str, Any]:
+        if (self.root / "experiments/forge").is_dir():
+            from experiments.forge.views import load_tasks as ef_load_tasks, load_view as ef_load_view
+            from experiments.forge.dispositions import unresolved_explanations
+            from experiments.forge.planning import declaration_paths, load_idea
+            from experiments.forge.studies import load_study
+            from experiments.forge.family_documentation import validate_family_documentation
+
+            tasks = ef_load_tasks(self.root)
+            declared = [ef_load_view(self.root, p.stem) for p in sorted((self.root / "configs/forge/views").glob("*.json"))]
+            problems = unresolved_explanations(self.root, declared)
+            if problems:
+                raise ValueError("; ".join(problems))
+            views = [view["id"] for view in declared]
+            candidates = [load_idea(self.root, path.stem)["id"] for path in declaration_paths(self.root)]
+            studies = [load_study(self.root, path.stem)["id"] for path in sorted((self.root / "configs/forge/studies").glob("*.json"))]
+            return {
+                "tasks": len(tasks),
+                "views": views,
+                "candidates": len(candidates),
+                "studies": studies,
+                "family_documentation": validate_family_documentation(self.root),
+                "training_launched": False,
+            }
+
         tasks = self.load_tasks()
         views = self.load_views()
         candidates = self.load_candidates()
@@ -578,8 +602,29 @@ class ForgeWorkspace:
         self.register_view(next_view)
         return next_view
 
-    def _receipt_path(self, candidate_id: str, task_id: str, device: str = "cpu") -> Path:
-        return self.reports_dir / "receipts" / device / candidate_id / f"{task_id}.json"
+    def _resolve_device(self, device: str | None = None) -> str:
+        if device is not None:
+            return device
+        receipts_dir = self.reports_dir / "receipts"
+        cuda_receipts = list((receipts_dir / "cuda").glob("*/*.json")) if (receipts_dir / "cuda").is_dir() else []
+        cpu_receipts = list((receipts_dir / "cpu").glob("*/*.json")) if (receipts_dir / "cpu").is_dir() else []
+        if cuda_receipts and not cpu_receipts:
+            return "cuda"
+        if cpu_receipts and not cuda_receipts:
+            return "cpu"
+        if len(cuda_receipts) > len(cpu_receipts):
+            return "cuda"
+        try:
+            import torch
+            if torch.cuda.is_available():
+                return "cuda"
+        except Exception:
+            pass
+        return "cpu"
+
+    def _receipt_path(self, candidate_id: str, task_id: str, device: str | None = None) -> Path:
+        resolved = self._resolve_device(device)
+        return self.reports_dir / "receipts" / resolved / candidate_id / f"{task_id}.json"
 
     def run_task(
         self,
@@ -675,8 +720,9 @@ class ForgeWorkspace:
         log_event("attempt_completed", verdict=grade["status"], wall_seconds=wall_seconds)
         return receipt
 
-    def qualify(self, candidate_id: str, view_id: str, *, device: str = "cpu") -> dict[str, Any]:
+    def qualify(self, candidate_id: str, view_id: str, *, device: str | None = None) -> dict[str, Any]:
         """Compute per-tier and whole-view qualification status from recorded receipts."""
+        device = self._resolve_device(device)
         views = self.load_views()
         tasks = self.load_tasks()
         if view_id not in views:
@@ -794,8 +840,9 @@ class ForgeWorkspace:
                 break
         return self.qualify(candidate_id, view_id, device=device)
 
-    def compile_reports(self, *, view_id: str | None = None, device: str = "cpu") -> dict[str, str]:
+    def compile_reports(self, *, view_id: str | None = None, device: str | None = None) -> dict[str, str]:
         """Generate the single current leaderboard, EXPERIMENTS_BY_TIER.md, and EXPERIMENT_MEMORY.md."""
+        device = self._resolve_device(device)
         views = self.load_views()
         tasks = self.load_tasks()
         candidates = self.load_candidates()

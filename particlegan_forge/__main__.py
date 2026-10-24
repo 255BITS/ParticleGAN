@@ -32,11 +32,11 @@ def main(argv=None) -> int:
 
     board_p = sub.add_parser("board", help="Show qualification status for all candidates on a view")
     board_p.add_argument("--view", required=True, help="View ID")
-    board_p.add_argument("--device", default="cpu", choices=("cpu", "cuda"))
+    board_p.add_argument("--device", default=None, choices=("cpu", "cuda"))
 
     comp_p = sub.add_parser("compile", help="Regenerate leaderboard, EXPERIMENTS_BY_TIER.md, and EXPERIMENT_MEMORY.md")
     comp_p.add_argument("--view", default=None, help="Primary view ID")
-    comp_p.add_argument("--device", default="cpu", choices=("cpu", "cuda"))
+    comp_p.add_argument("--device", default=None, choices=("cpu", "cuda"))
 
     retier_p = sub.add_parser("retier", help="Move a task to a new tier and archive the previous view revision")
     retier_p.add_argument("view", help="View ID")
