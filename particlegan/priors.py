@@ -545,3 +545,21 @@ class SimplexRoutingManipulator(PriorManipulator):
         w = codes[:, :num_modes]
         res = codes[:, num_modes:] if codes.shape[-1] > num_modes else None
         return w, res
+
+
+from .wavefront import (  # noqa: E402
+    GhostFreeDeMixingManipulator,
+    SobolevWavefrontManipulator,
+    SplatCarrierManipulator,
+)
+
+__all__ = [
+    "PriorManipulator",
+    "ManipulatedPrior",
+    "StratifiedSamplingManipulator",
+    "SimplexRoutingManipulator",
+    "GhostFreeDeMixingManipulator",
+    "SobolevWavefrontManipulator",
+    "SplatCarrierManipulator",
+]
+

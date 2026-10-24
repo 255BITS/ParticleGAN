@@ -45,6 +45,24 @@ from .bispf import (
     SinkhornRelativisticLoss,
     StratifiedBlueNoisePrior,
 )
+from .priors import (
+    GhostFreeDeMixingManipulator,
+    ManipulatedPrior,
+    PriorManipulator,
+    SimplexRoutingManipulator,
+    SobolevWavefrontManipulator,
+    SplatCarrierManipulator,
+    StratifiedSamplingManipulator,
+)
+from .wavefront import (
+    DifferentiableSplatCarrierBasis,
+    GhostFreeSimplexMixer,
+    ResidualConvBlock,
+    SimplexWavefrontGenerator,
+    SobolevGradFilter,
+    WavefrontManifoldPrior,
+    sobolev_filter_2d,
+)
 from . import init
 
 __all__ = [
@@ -63,4 +81,9 @@ __all__ = [
     "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "get_recipe_fields", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",
+    "PriorManipulator", "ManipulatedPrior", "StratifiedSamplingManipulator", "SimplexRoutingManipulator",
+    "GhostFreeDeMixingManipulator", "SobolevWavefrontManipulator", "SplatCarrierManipulator",
+    "sobolev_filter_2d", "SobolevGradFilter", "WavefrontManifoldPrior",
+    "GhostFreeSimplexMixer", "DifferentiableSplatCarrierBasis", "ResidualConvBlock", "SimplexWavefrontGenerator",
 ]
+
