@@ -1,5 +1,6 @@
 """Shared hyperparameters and small component factories; callers own control flow."""
 import math
+from collections.abc import Mapping
 from dataclasses import asdict, dataclass, fields, replace
 
 # Promote a registered trainer preset here; model-family factories inherit it.
@@ -264,12 +265,13 @@ class Recipe:
             raise ValueError("bispf_shape_gates must be a boolean")
         overrides = self.bispf_gate_overrides
         try:
-            pairs = overrides.items() if isinstance(overrides, dict) else overrides
-            pairs = tuple(sorted((str(name), value) for name, value in pairs))
+            pairs = overrides.items() if isinstance(overrides, Mapping) else overrides
+            pairs = tuple((str(name), value) for name, value in pairs)
         except (TypeError, ValueError):
             raise ValueError("bispf_gate_overrides must be (gate, value) pairs or a mapping") from None
         if len({name for name, _ in pairs}) != len(pairs):
             raise ValueError("bispf_gate_overrides names must be unique")
+        pairs = tuple(sorted(pairs, key=lambda pair: pair[0]))
         object.__setattr__(self, "bispf_gate_overrides", pairs)
         if pairs or not self.bispf_shape_gates:
             self.bispf_gates()

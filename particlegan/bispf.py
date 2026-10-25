@@ -147,6 +147,10 @@ class BISPFGates:
     cooler_min_batch: int = 16
     cooler_batch_numerator: float = 1024.0
     cooler_max_dim: int = 4
+    # Thermal cooler: branches without a batch-specific query (not dense
+    # multimode, not continuous flow) read the scale at this batch size and dim.
+    cooler_default_query_batch: int = 128
+    cooler_default_query_dim: int = 2
     # Generator loss: fake batches >= min_batch with a thermal scale s below
     # max_scale scale the generator-loss gradient by
     # clamp(s / sqrt(1 - s^2) * eps_smooth, 1e-6, 1).
@@ -203,7 +207,8 @@ class BISPFGates:
     _NULLABLE = ("sbnp_small_latent_weight",)
     _POSITIVE = ("gauge_ramp_calls", "cooler_min_batch", "cooler_reference_batch",
                  "cooler_batch_numerator", "cooler_max_dim", "image_scale_ref",
-                 "image_scale_min", "dense_multimode_query_batch")
+                 "image_scale_min", "dense_multimode_query_batch",
+                 "cooler_default_query_batch", "cooler_default_query_dim")
 
     def __post_init__(self):
         for spec in _dataclass_fields(self):
@@ -294,14 +299,22 @@ def sbnp_regularization_loss(
     repel_margin: float = 0.25,
     repel_max_samples: int = 1024,
     generator: torch.Generator | None = None,
+    dof_low_dim_max: int = 4,
 ) -> torch.Tensor:
-    """Variance/covariance whitening plus scale-free k-NN log-repulsion on latent rows."""
+    """Variance/covariance whitening plus scale-free k-NN log-repulsion on latent rows.
+
+    Rows with ``n <= 2 * k_nn`` (plus ``d`` when ``d <= dof_low_dim_max``) return
+    zero. The default 4 is the historical hard-coded gate; 0 disables the
+    low-dimension term.
+    """
     if weight == 0.0 or not len(z):
         return z[:0].sum()
     if z.ndim != 2 or not z.shape[1]:
         raise ValueError("particles must have shape [batch, positive latent dimension]")
     n, d = z.shape
-    min_dof = 2 * k_nn + (d if d <= 4 else 0)
+    if type(dof_low_dim_max) is not int or dof_low_dim_max < 0:
+        raise ValueError("dof_low_dim_max must be a non-negative integer")
+    min_dof = 2 * k_nn + (d if d <= dof_low_dim_max else 0)
     if n <= min_dof:
         return z[:0].sum()
 
@@ -1376,15 +1389,17 @@ class ContinuousThermalCooler:
         }
 
     def load_state_dict(self, state: Dict[str, Any]) -> None:
-        """Restore cooler state. Older states may omit the declared query fields, which keep
-        their current values, and may carry the removed, never-used ``eps_smooth``."""
+        """Restore cooler state. The declared gate fields are constructor-owned: a state that
+        records a different value is rejected, and older states may omit them. Older states may
+        carry the removed, never-used ``eps_smooth``."""
+        for name in self._DECLARED:
+            if name in state and state[name] != getattr(self, name):
+                raise ValueError(f"cooler state {name}={state[name]!r} does not match the declared "
+                                 f"{getattr(self, name)!r}")
         self.tau_cooling = float(state["tau_cooling"])
         self.s_min = float(state["s_min"])
         self.ema_decay = float(state["ema_decay"])
         self.ema_residual = float(state["ema_residual"])
-        for name in self._DECLARED:
-            if name in state:
-                setattr(self, name, float(state[name]) if name == "batch_numerator" else state[name])
         self.initialized = bool(state["initialized"])
 
 
@@ -1616,6 +1631,8 @@ class _BISPFPenaltyKernel:
             min_batch=self.gates.cooler_min_batch,
             batch_numerator=self.gates.cooler_batch_numerator,
             max_dim=self.gates.cooler_max_dim,
+            default_batch_size=self.gates.cooler_default_query_batch,
+            default_dim=self.gates.cooler_default_query_dim,
         )
         self.record = BISPFStepRecord() if record is None else record
         if not hasattr(self.record, "ema_residual"):

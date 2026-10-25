@@ -79,6 +79,10 @@ def _normalized_recipe(recipe):
     for name in ("d_betas", "loss_labels"):
         if name in recipe and isinstance(recipe[name], (list, tuple)):
             recipe[name] = tuple(recipe[name])
+    if isinstance(recipe.get("bispf_gate_overrides"), (list, tuple)):
+        # JSON turns the stored ((gate, value), ...) pairs into nested lists.
+        recipe["bispf_gate_overrides"] = tuple(
+            tuple(pair) if isinstance(pair, list) else pair for pair in recipe["bispf_gate_overrides"])
     if all(recipe.get(key, value) == value for key, value in _REMOVED_RECIPE_FIELDS.items()):
         recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
     if recipe.get("initialization", None) in (None, "batch_feature_zero"):

@@ -303,3 +303,49 @@ def test_cooler_scale_is_the_documented_smoothstep_at_the_declared_query():
     restored.load_state_dict(old)
     assert restored.scale == cooler.scale
     assert "eps_smooth" not in restored.state_dict()
+
+
+def test_cooler_state_cannot_override_declared_gate_fields():
+    cooler = ContinuousThermalCooler(max_dim=4)
+    state = ContinuousThermalCooler(max_dim=2).state_dict()
+    with pytest.raises(ValueError, match="max_dim"):
+        cooler.load_state_dict(state)
+    assert cooler.max_dim == 4
+    cooler.load_state_dict(ContinuousThermalCooler().state_dict())
+
+
+def test_cooler_default_query_is_a_recipe_gate():
+    recipe = get_recipe("bispf", bispf_gate_overrides={"cooler_default_query_batch": 32,
+                                                       "cooler_default_query_dim": 3})
+    penalty = recipe.make_critic_penalty(recipe.make_critic_optimizer(nn.Linear(2, 1)))
+    cooler = penalty.regularizer.cooler
+    assert (cooler.default_batch_size, cooler.default_dim) == (32, 3)
+    base = get_recipe("bispf")
+    default = base.make_critic_penalty(base.make_critic_optimizer(nn.Linear(2, 1))).regularizer.cooler
+    assert (default.default_batch_size, default.default_dim) == (128, 2)
+
+
+def test_recipe_gate_overrides_accept_any_mapping_and_report_duplicates():
+    from types import MappingProxyType
+    recipe = get_recipe("bispf", bispf_gate_overrides=MappingProxyType({"simplex_min_dim": 9}))
+    assert recipe.bispf_gate_overrides == (("simplex_min_dim", 9),)
+    with pytest.raises(ValueError, match="unique"):
+        get_recipe("bispf", bispf_gate_overrides=(("sbnp_small_latent_weight", None),
+                                                   ("sbnp_small_latent_weight", 1.0)))
+
+
+def test_json_carried_gate_overrides_match_live_recipe_in_checkpoint_comparison():
+    from particlegan.training import _normalized_recipe
+    recipe = get_recipe("bispf", bispf_gate_overrides={"late_thermal_min_call": 10}).to_dict()
+    carried = {**recipe, "bispf_gate_overrides": json.loads(json.dumps(recipe["bispf_gate_overrides"]))}
+    assert carried["bispf_gate_overrides"] == [["late_thermal_min_call", 10]]
+    assert _normalized_recipe(carried) == _normalized_recipe(recipe)
+
+
+def test_sbnp_regularization_loss_low_dim_dof_gate_is_declared():
+    from particlegan.bispf import sbnp_regularization_loss
+    z = torch.randn(8, 2, generator=torch.Generator().manual_seed(0))
+    assert sbnp_regularization_loss(z, k_nn=3).item() == 0  # n=8 <= 2*3 + d
+    assert sbnp_regularization_loss(z, k_nn=3, dof_low_dim_max=0).item() != 0
+    with pytest.raises(ValueError, match="dof_low_dim_max"):
+        sbnp_regularization_loss(z, dof_low_dim_max=-1)
