@@ -1,10 +1,25 @@
-"""First-class Tier API and workspace engine for particlegan_forge."""
+"""First-class Tier API and workspace engine for particlegan_forge.
+
+``particlegan_forge`` is the small, wheel-shipped facade of the repository's
+``experiments/forge`` engine (which is *not* packaged).  It keeps its own
+on-disk namespace -- ``configs/particlegan_forge/`` and
+``reports/particlegan_forge/`` (operational logs under
+``runs/particlegan_forge/``) -- and refuses to load files written with the
+``experiments/forge`` schema, so it can never overwrite ``reports/forge`` or
+``configs/forge`` outputs.
+"""
 from __future__ import annotations
 
+from contextlib import contextmanager
 from dataclasses import dataclass, field
+import inspect
+import json
 import math
 from pathlib import Path
+import signal
+import threading
 import time
+import traceback
 from typing import Any, Callable
 
 from .contracts import (
@@ -22,7 +37,93 @@ from .contracts import (
     stable_hash,
     utc_now,
 )
-from .rng import NamedStreams, deterministic_scope
+from .rng import RNG_VERSION, NamedStreams, deterministic_scope
+
+NAMESPACE = "particlegan_forge"
+"""Schema/namespace marker carried by every particlegan_forge declaration."""
+
+RECEIPT_SCHEMA_VERSION = 2
+_ENGINE_SOURCES = ("tiers.py", "rng.py", "contracts.py")
+_TIER_STATUS_PRECEDENCE = ("FAIL", "INVALID", "BLOCKED", "INCOMPLETE", "NOT_RUN")
+
+
+def resolve_device(device: str | None = None) -> str:
+    """Resolve the receipt cohort device identically for run, board and compile.
+
+    ``None`` means ``"cpu"`` (the CLI default for every command); ``"auto"``
+    selects ``"cuda"`` only when CUDA is available.  ``"cuda:N"`` maps to the
+    ``"cuda"`` cohort.  The result never depends on which receipts exist.
+    """
+    if device is None:
+        return "cpu"
+    if not isinstance(device, str):
+        raise ValueError(f"device must be a string, got {device!r}")
+    if device == "auto":
+        import torch
+
+        return "cuda" if torch.cuda.is_available() else "cpu"
+    kind = device.split(":", 1)[0]
+    if kind not in {"cpu", "cuda"} or (kind == "cpu" and device != "cpu"):
+        raise ValueError(f"unsupported device {device!r}; use 'cpu', 'cuda', 'cuda:N' or 'auto'")
+    return kind
+
+
+def engine_source_digest() -> str:
+    """Digest of the grading/RNG/contract sources receipts are bound to."""
+    here = Path(__file__).resolve().parent
+    return stable_hash({name: file_hash(here / name) for name in _ENGINE_SOURCES})
+
+
+def adapter_source_digest(fn: Callable) -> str | None:
+    """Digest of the module source defining an adapter (``None`` if unavailable)."""
+    try:
+        source_file = inspect.getsourcefile(fn)
+        if source_file and Path(source_file).is_file():
+            return file_hash(source_file)
+        return stable_hash(inspect.getsource(fn))
+    except (OSError, TypeError):
+        return None
+
+
+def _require_namespace(data: Any, kind: str) -> dict[str, Any]:
+    if not isinstance(data, dict) or data.get("namespace") != NAMESPACE:
+        raise ValueError(
+            f"refusing to load {kind}: not a {NAMESPACE} declaration "
+            "(missing namespace marker; experiments/forge workspace files are not supported)"
+        )
+    return data
+
+
+class AttemptTimeout(BaseException):
+    """Raised inside an adapter when the task's ``timeout_seconds`` elapses.
+
+    Derives from BaseException so adapters catching ``Exception`` cannot
+    swallow the deadline.
+    """
+
+
+@contextmanager
+def _deadline(seconds: float):
+    """Arm SIGALRM for ``seconds`` when possible; yield whether it was armed."""
+    armed = (
+        hasattr(signal, "setitimer")
+        and threading.current_thread() is threading.main_thread()
+        and signal.getitimer(signal.ITIMER_REAL)[0] == 0
+    )
+    if not armed:
+        yield False
+        return
+
+    def _expire(signum, frame):
+        raise AttemptTimeout(f"attempt exceeded timeout_seconds={seconds}")
+
+    previous = signal.signal(signal.SIGALRM, _expire)
+    signal.setitimer(signal.ITIMER_REAL, float(seconds))
+    try:
+        yield True
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous)
 
 OPS = {
     "<=": lambda a, b: a <= b,
@@ -90,6 +191,15 @@ class TaskSpec:
             raise ValueError("prior_kind must be 'mog' or 'particle_cloud'")
         if self.prior_kind == "mog" and self.prior_sigma <= 0:
             raise ValueError("mog prior requires positive sigma")
+        if not self.thresholds:
+            raise ValueError(f"task {self.id!r} must declare at least one numerical pass/fail threshold")
+        if not all(isinstance(b, MetricBound) for b in self.thresholds):
+            raise ValueError("task thresholds must be MetricBound instances")
+        if self.observations < 1 or self.minimum_stable_checks < 1:
+            raise ValueError("observations and minimum_stable_checks must be positive")
+        if (isinstance(self.timeout_seconds, bool) or not isinstance(self.timeout_seconds, (int, float))
+                or not math.isfinite(self.timeout_seconds) or self.timeout_seconds <= 0):
+            raise ValueError("timeout_seconds must be a positive finite number")
 
     def observation_steps(self) -> list[int]:
         if self.steps <= self.observations:
@@ -99,6 +209,7 @@ class TaskSpec:
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": 1,
+            "namespace": NAMESPACE,
             "id": self.id,
             "description": self.description,
             "adapter": self.adapter,
@@ -137,6 +248,7 @@ class TaskSpec:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> TaskSpec:
+        _require_namespace(data, "task")
         exec_block = data["execution"]
         res = exec_block["resources"]
         prior = exec_block["prior"]
@@ -275,6 +387,7 @@ class TierView:
     def to_dict(self) -> dict[str, Any]:
         out: dict[str, Any] = {
             "schema_version": 1,
+            "namespace": NAMESPACE,
             "id": self.id,
             "goal": self.goal,
             "revision": self.revision,
@@ -288,6 +401,7 @@ class TierView:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> TierView:
+        _require_namespace(data, "view")
         return cls(
             id=data["id"],
             goal=data["goal"],
@@ -335,6 +449,7 @@ class CandidateSpec:
     def to_dict(self) -> dict[str, Any]:
         out: dict[str, Any] = {
             "schema_version": 3,
+            "namespace": NAMESPACE,
             "id": self.id,
             "technique": self.technique,
             "changed_factors": list(self.changed_factors),
@@ -350,6 +465,7 @@ class CandidateSpec:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> CandidateSpec:
+        _require_namespace(data, "candidate")
         return cls(
             id=data["id"],
             technique=data.get("technique", data["id"]),
@@ -366,11 +482,33 @@ def grade_sustained_observations(
     task: TaskSpec,
     observations: list[dict[str, Any]],
     *,
-    all_finite: bool = True,
-    unintended_rng_deviations: int = 0,
+    all_finite: bool | None = None,
+    unintended_rng_deviations: int | None = None,
     completed_steps: int | None = None,
 ) -> dict[str, Any]:
-    """Grade observations against a TaskSpec's sustained terminal window contract."""
+    """Grade observations against a TaskSpec's sustained terminal window contract.
+
+    ``all_finite``, ``unintended_rng_deviations`` and ``completed_steps`` are
+    evidence the adapter must report explicitly; a missing (``None``) or
+    ill-typed value grades INVALID and is never defaulted to a passing value.
+    """
+    missing = []
+    if not isinstance(all_finite, bool):
+        missing.append("all_finite")
+    if (isinstance(unintended_rng_deviations, bool) or not isinstance(unintended_rng_deviations, int)
+            or unintended_rng_deviations < 0):
+        missing.append("unintended_rng_deviations")
+    if isinstance(completed_steps, bool) or not isinstance(completed_steps, int) or completed_steps < 0:
+        missing.append("completed_steps")
+    if not isinstance(observations, list) or not all(isinstance(row, dict) for row in observations):
+        missing.append("observations")
+    if missing:
+        return {
+            "status": "INVALID",
+            "reason": "adapter did not explicitly report valid " + ", ".join(missing),
+            "terminal_passing": 0,
+            "failed_bounds": [f"reported {name}" for name in missing],
+        }
     if unintended_rng_deviations > 0:
         return {
             "status": "INVALID",
@@ -385,7 +523,7 @@ def grade_sustained_observations(
             "terminal_passing": 0,
             "failed_bounds": ["all_finite == 1"],
         }
-    if completed_steps is not None and completed_steps < task.steps:
+    if completed_steps < task.steps:
         return {
             "status": "INCOMPLETE",
             "reason": f"completed {completed_steps}/{task.steps} steps",
@@ -440,33 +578,63 @@ class ForgeRegistry:
         return self._adapters[name]
 
 
+def _accepts_kwarg(fn: Callable, name: str) -> bool:
+    try:
+        params = inspect.signature(fn).parameters
+    except (TypeError, ValueError):
+        return False
+    return name in params or any(p.kind is inspect.Parameter.VAR_KEYWORD for p in params.values())
+
+
+def _tier_status(required_statuses: list[str]) -> str:
+    """Counted-tier status: PASS only when every required task passes.
+
+    Otherwise the most severe required status wins (FAIL > INVALID > BLOCKED >
+    INCOMPLETE); NOT_RUN alone reports INCOMPLETE at tier level.
+    """
+    if all(status == "PASS" for status in required_statuses):
+        return "PASS"
+    worst = next((s for s in _TIER_STATUS_PRECEDENCE if s in required_statuses), "INCOMPLETE")
+    return "INCOMPLETE" if worst == "NOT_RUN" else worst
+
+
 class ForgeWorkspace:
-    """Manages tasks, views, candidates, tiered execution, retiering, and leaderboards."""
+    """Manages tasks, views, candidates, tiered execution, retiering, and leaderboards.
+
+    All declarations live under ``configs/particlegan_forge/`` and all
+    generated reports/receipts under ``reports/particlegan_forge/``; the
+    ``experiments/forge`` namespaces (``configs/forge``, ``reports/forge``)
+    are never read or written.
+    """
 
     def __init__(self, root: Path | str, *, registry: ForgeRegistry | None = None, queue_root: Path | str | None = None):
         self.root = Path(root).resolve()
         self.registry = registry or ForgeRegistry()
-        self.queue_root = Path(queue_root).resolve() if queue_root else (self.root / "runs/forge")
+        self.queue_root = Path(queue_root).resolve() if queue_root else (self.root / "runs" / NAMESPACE)
+
+    @property
+    def configs_dir(self) -> Path:
+        return self.root / "configs" / NAMESPACE
 
     @property
     def tasks_dir(self) -> Path:
-        return self.root / "configs/forge/tasks"
+        return self.configs_dir / "tasks"
 
     @property
     def views_dir(self) -> Path:
-        return self.root / "configs/forge/views"
+        return self.configs_dir / "views"
 
     @property
     def view_history_dir(self) -> Path:
-        return self.root / "configs/forge/view-history"
+        return self.configs_dir / "view-history"
 
     @property
     def ideas_dir(self) -> Path:
-        return self.root / "configs/forge/ideas"
+        return self.configs_dir / "ideas"
 
     @property
     def reports_dir(self) -> Path:
-        return self.root / "reports/forge"
+        return self.root / "reports" / NAMESPACE
 
     def register_task(self, task: TaskSpec) -> Path:
         path = self.tasks_dir / f"{task.id}.json"
@@ -483,46 +651,29 @@ class ForgeWorkspace:
         atomic_json(path, candidate.to_dict())
         return path
 
-    def load_tasks(self) -> dict[str, TaskSpec]:
-        if not self.tasks_dir.is_dir():
+    @staticmethod
+    def _load_dir(directory: Path, loader: Callable) -> dict:
+        if not directory.is_dir():
             return {}
-        return {p.stem: TaskSpec.from_dict(read_json(p)) for p in sorted(self.tasks_dir.glob("*.json"))}
+        out = {}
+        for path in sorted(directory.glob("*.json")):
+            try:
+                out[path.stem] = loader(read_json(path))
+            except (KeyError, TypeError, ValueError) as exc:
+                raise ValueError(f"{path}: {exc}") from exc
+        return out
+
+    def load_tasks(self) -> dict[str, TaskSpec]:
+        return self._load_dir(self.tasks_dir, TaskSpec.from_dict)
 
     def load_views(self) -> dict[str, TierView]:
-        if not self.views_dir.is_dir():
-            return {}
-        return {p.stem: TierView.from_dict(read_json(p)) for p in sorted(self.views_dir.glob("*.json"))}
+        return self._load_dir(self.views_dir, TierView.from_dict)
 
     def load_candidates(self) -> dict[str, CandidateSpec]:
-        if not self.ideas_dir.is_dir():
-            return {}
-        return {p.stem: CandidateSpec.from_dict(read_json(p)) for p in sorted(self.ideas_dir.glob("*.json"))}
+        return self._load_dir(self.ideas_dir, CandidateSpec.from_dict)
 
     def validate(self) -> dict[str, Any]:
-        if (self.root / "experiments/forge").is_dir():
-            from experiments.forge.views import load_tasks as ef_load_tasks, load_view as ef_load_view
-            from experiments.forge.dispositions import unresolved_explanations
-            from experiments.forge.planning import declaration_paths, load_idea
-            from experiments.forge.studies import load_study
-            from experiments.forge.family_documentation import validate_family_documentation
-
-            tasks = ef_load_tasks(self.root)
-            declared = [ef_load_view(self.root, p.stem) for p in sorted((self.root / "configs/forge/views").glob("*.json"))]
-            problems = unresolved_explanations(self.root, declared)
-            if problems:
-                raise ValueError("; ".join(problems))
-            views = [view["id"] for view in declared]
-            candidates = [load_idea(self.root, path.stem)["id"] for path in declaration_paths(self.root)]
-            studies = [load_study(self.root, path.stem)["id"] for path in sorted((self.root / "configs/forge/studies").glob("*.json"))]
-            return {
-                "tasks": len(tasks),
-                "views": views,
-                "candidates": len(candidates),
-                "studies": studies,
-                "family_documentation": validate_family_documentation(self.root),
-                "training_launched": False,
-            }
-
+        """Validate this namespace's tasks, views and candidates (never experiments/forge)."""
         tasks = self.load_tasks()
         views = self.load_views()
         candidates = self.load_candidates()
@@ -532,6 +683,7 @@ class ForgeWorkspace:
                     raise ValueError(f"view {view.id} references unknown task {a.task!r}")
         return {
             "status": "valid",
+            "namespace": NAMESPACE,
             "tasks": len(tasks),
             "views": sorted(views.keys()),
             "candidates": len(candidates),
@@ -579,8 +731,8 @@ class ForgeWorkspace:
         if not found:
             raise KeyError(f"task {task_id!r} not in view {view_id!r}")
 
-        archive_rel = f"configs/forge/view-history/{view_id}-v{current_view.revision}.json"
-        archive_path = self.root / archive_rel
+        archive_path = self.view_history_dir / f"{view_id}-v{current_view.revision}.json"
+        archive_rel = archive_path.relative_to(self.root).as_posix()
         if archive_path.exists() and archive_path.read_bytes() != raw_bytes:
             raise ValueError(f"conflicting view archive already exists at {archive_rel}")
         archive_path.parent.mkdir(parents=True, exist_ok=True)
@@ -602,29 +754,23 @@ class ForgeWorkspace:
         self.register_view(next_view)
         return next_view
 
-    def _resolve_device(self, device: str | None = None) -> str:
-        if device is not None:
-            return device
-        receipts_dir = self.reports_dir / "receipts"
-        cuda_receipts = list((receipts_dir / "cuda").glob("*/*.json")) if (receipts_dir / "cuda").is_dir() else []
-        cpu_receipts = list((receipts_dir / "cpu").glob("*/*.json")) if (receipts_dir / "cpu").is_dir() else []
-        if cuda_receipts and not cpu_receipts:
-            return "cuda"
-        if cpu_receipts and not cuda_receipts:
-            return "cpu"
-        if len(cuda_receipts) > len(cpu_receipts):
-            return "cuda"
-        try:
-            import torch
-            if torch.cuda.is_available():
-                return "cuda"
-        except Exception:
-            pass
-        return "cpu"
 
     def _receipt_path(self, candidate_id: str, task_id: str, device: str | None = None) -> Path:
-        resolved = self._resolve_device(device)
-        return self.reports_dir / "receipts" / resolved / candidate_id / f"{task_id}.json"
+        return self.reports_dir / "receipts" / resolve_device(device) / candidate_id / f"{task_id}.json"
+
+    def _binding(self, task: TaskSpec, candidate: CandidateSpec, device: str, seed: int,
+                 adapter_source: str | None) -> dict[str, Any]:
+        """Receipt cohort binding: what a receipt must match to count as current evidence."""
+        return {
+            "namespace": NAMESPACE,
+            "task_fingerprint": stable_hash(task.to_dict()),
+            "candidate_fingerprint": stable_hash(candidate.to_dict()),
+            "rng_version": RNG_VERSION,
+            "engine_source_sha256": engine_source_digest(),
+            "adapter_source_sha256": adapter_source,
+            "device": device,
+            "seed": seed,
+        }
 
     def run_task(
         self,
@@ -635,12 +781,28 @@ class ForgeWorkspace:
         seed: int = 0,
         steps_override: int | None = None,
     ) -> dict[str, Any]:
-        """Execute one (candidate, task) pair under protocol seed 0 and isolated NamedStreams."""
+        """Execute one (candidate, task) pair under protocol seed 0 and isolated NamedStreams.
+
+        Adapters are called with ``task, candidate, streams, attempt_dir,
+        workspace_root, device, steps_override, log_event`` and, when their
+        signature accepts it, ``evaluate(step, fn)``, which runs ``fn`` under
+        ``streams.isolated_evaluation()``, records ``{"step", "metrics"}`` and
+        audits non-eval stream mutation.  The returned dict must report
+        ``all_finite``, ``unintended_rng_deviations`` and ``completed_steps``
+        explicitly (missing -> INVALID) plus ``observations`` (unless recorded
+        through ``evaluate``).  ``timeout_seconds`` is enforced with SIGALRM in
+        the main thread and checked against wall time everywhere (timeout ->
+        INCOMPLETE).  An adapter exception is recorded as an INVALID receipt,
+        replacing any earlier receipt for the same cohort path.
+        """
         tasks = self.load_tasks()
         candidates = self.load_candidates()
         task = tasks[task_id]
         candidate = candidates[candidate_id]
         adapter_fn = self.registry.get_adapter(task.adapter)
+        cohort_device = resolve_device(device)
+        exec_device = cohort_device if device in (None, "auto") else device
+        binding = self._binding(task, candidate, cohort_device, seed, adapter_source_digest(adapter_fn))
 
         attempt_dir = self.queue_root / candidate_id / task_id
         attempt_dir.mkdir(parents=True, exist_ok=True)
@@ -649,85 +811,176 @@ class ForgeWorkspace:
         events_path.parent.mkdir(parents=True, exist_ok=True)
 
         def log_event(event_type: str, **payload):
-            line = {"ts": utc_now(), "event": event_type, "candidate": candidate_id, "task": task_id, **payload}
+            line = json.dumps(
+                json_safe({"ts": utc_now(), "event": event_type, "candidate": candidate_id, "task": task_id, **payload}),
+                sort_keys=True,
+            )
             with file_lock(self.queue_root / ".events.lock"):
-                with events_path.open("a", encoding="utf-8") as f:
-                    import json
-                    f.write(json.dumps(line, sort_keys=True) + "\n")
-                with log_path.open("a", encoding="utf-8") as f:
-                    import json
-                    f.write(json.dumps(line, sort_keys=True) + "\n")
+                for path in (events_path, log_path):
+                    with path.open("a", encoding="utf-8") as f:
+                        f.write(line + "\n")
+
+        streams: NamedStreams | None = None
+        recorded: list[dict[str, Any]] = []
+        measured_deviations = 0
+
+        def evaluate(step: int, fn: Callable[[], dict]) -> dict:
+            nonlocal measured_deviations
+            if streams is None:
+                raise RuntimeError("evaluate() called outside an attempt")
+            with streams.isolated_evaluation():
+                metrics = fn()
+            measured_deviations += int(streams.last_eval_audit["unintended_rng_deviations"])
+            recorded.append({"step": int(step), "metrics": json_safe(dict(metrics))})
+            return metrics
+
+        adapter_kwargs = dict(
+            task=task,
+            candidate=candidate,
+            attempt_dir=attempt_dir,
+            workspace_root=self.root,
+            device=exec_device,
+            steps_override=steps_override,
+            log_event=log_event,
+        )
+        if _accepts_kwarg(adapter_fn, "evaluate"):
+            adapter_kwargs["evaluate"] = evaluate
 
         t0 = time.perf_counter()
-        log_event("attempt_started", device=device, steps=steps_override or task.steps)
-        with deterministic_scope(seed=seed):
-            streams = NamedStreams(seed=seed, device=device)
-            result = adapter_fn(
-                task=task,
-                candidate=candidate,
-                streams=streams,
-                attempt_dir=attempt_dir,
-                workspace_root=self.root,
-                device=device,
-                steps_override=steps_override,
-                log_event=log_event,
-            )
+        log_event("attempt_started", device=exec_device, steps=steps_override or task.steps)
+        result: Any = None
+        error: str | None = None
+        timed_out = False
+        try:
+            with _deadline(task.timeout_seconds):
+                with deterministic_scope(seed=seed):
+                    streams = NamedStreams(seed=seed, device=exec_device)
+                    result = adapter_fn(streams=streams, **adapter_kwargs)
+        except AttemptTimeout as exc:
+            timed_out, error = True, str(exc)
+        except Exception as exc:  # recorded as INVALID evidence, never silently dropped
+            error = f"{type(exc).__name__}: {exc}"
+            log_event("attempt_failed", error=error, traceback=traceback.format_exc())
         wall_seconds = round(time.perf_counter() - t0, 4)
+        if error is None and wall_seconds > task.timeout_seconds:
+            timed_out = True
+            error = f"attempt exceeded timeout_seconds={task.timeout_seconds} (wall {wall_seconds}s)"
 
-        raw_observations = result.get("observations", [])
-        all_finite = bool(result.get("all_finite", True)) and not has_nonfinite(raw_observations)
-        unintended_rng_deviations = int(result.get("unintended_rng_deviations", 0))
-        completed_steps = int(result.get("completed_steps", task.steps))
+        reported = result if isinstance(result, dict) else {}
+        raw_observations = reported.get("observations", recorded)
+        all_finite = reported.get("all_finite")
+        if isinstance(all_finite, bool) and has_nonfinite(raw_observations):
+            all_finite = False
+        unintended_rng_deviations = reported.get("unintended_rng_deviations")
+        if (measured_deviations and isinstance(unintended_rng_deviations, int)
+                and not isinstance(unintended_rng_deviations, bool)):
+            unintended_rng_deviations = max(unintended_rng_deviations, measured_deviations)
+        completed_steps = reported.get("completed_steps")
 
-        grade = grade_sustained_observations(
-            task,
-            raw_observations,
-            all_finite=all_finite,
-            unintended_rng_deviations=unintended_rng_deviations,
-            completed_steps=completed_steps,
-        )
+        if timed_out:
+            grade = {"status": "INCOMPLETE", "reason": error, "terminal_passing": 0,
+                     "failed_bounds": ["wall_seconds <= timeout_seconds"]}
+        elif error is not None:
+            grade = {"status": "INVALID", "reason": f"adapter raised {error}", "terminal_passing": 0,
+                     "failed_bounds": ["adapter completed without raising"]}
+        elif not isinstance(result, dict):
+            grade = {"status": "INVALID", "reason": "adapter must return a dict of evidence", "terminal_passing": 0,
+                     "failed_bounds": ["adapter returned evidence"]}
+        else:
+            grade = grade_sustained_observations(
+                task,
+                raw_observations,
+                all_finite=all_finite,
+                unintended_rng_deviations=unintended_rng_deviations,
+                completed_steps=completed_steps,
+            )
         now_ts = utc_now()
         receipt = {
-            "schema_version": 1,
+            "schema_version": RECEIPT_SCHEMA_VERSION,
             "candidate_id": candidate_id,
             "technique": candidate.technique,
             "task_id": task_id,
-            "device": device,
+            "device": cohort_device,
+            "execution_device": exec_device,
             "seed": seed,
             "completed_steps": completed_steps,
             "all_finite": all_finite,
             "unintended_rng_deviations": unintended_rng_deviations,
             "terminal_passing": grade.get("terminal_passing", 0),
-            "task_fingerprint": stable_hash(task.to_dict()),
-            "candidate_fingerprint": stable_hash(candidate.to_dict()),
-            "rng_manifest": streams.manifest(),
+            "task_fingerprint": binding["task_fingerprint"],
+            "candidate_fingerprint": binding["candidate_fingerprint"],
+            "binding": binding,
+            "cohort_key": stable_hash(binding),
+            "rng_manifest": streams.manifest() if streams is not None else None,
             "verdict": grade["status"],
             "grade": grade,
             "live": grade.get("live", {}),
             "observations": raw_observations,
-            "artifacts": result.get("artifacts", {}),
+            "artifacts": reported.get("artifacts", {}),
+            "error": error,
             "cost": {
                 "wall_seconds": wall_seconds,
                 "completed_steps": completed_steps,
+                "timeout_seconds": task.timeout_seconds,
             },
             "timestamp": now_ts,
             "completed_at": now_ts,
         }
         receipt = json_safe(receipt)
         if steps_override is None or steps_override == task.steps:
-            atomic_json(self._receipt_path(candidate_id, task_id, device=device), receipt)
+            atomic_json(self._receipt_path(candidate_id, task_id, device=cohort_device), receipt)
         atomic_json(attempt_dir / "receipt.json", receipt)
         log_event("attempt_completed", verdict=grade["status"], wall_seconds=wall_seconds)
         return receipt
 
-    def qualify(self, candidate_id: str, view_id: str, *, device: str | None = None) -> dict[str, Any]:
-        """Compute per-tier and whole-view qualification status from recorded receipts."""
-        device = self._resolve_device(device)
+    def _task_outcome(self, rpath: Path, expected: dict[str, Any], verify_adapter: bool) -> dict[str, Any]:
+        if not rpath.is_file():
+            return {"status": "NOT_RUN", "reason": "no receipt", "live": {}, "goal_gif": None, "receipt": None}
+        rec = read_json(rpath)
+        rec = rec if isinstance(rec, dict) else {}
+        bound = rec.get("binding") if isinstance(rec.get("binding"), dict) else {}
+        keys = [k for k in expected if verify_adapter or k != "adapter_source_sha256"]
+        stale = sorted(k for k in keys if bound.get(k) != expected[k])
+        if rec.get("cohort_key") != stable_hash(bound):
+            stale.append("cohort_key")
+        if stale:
+            return {"status": "NOT_RUN", "reason": "stale receipt: " + ", ".join(stale) + " differ",
+                    "live": {}, "goal_gif": None, "receipt": str(rpath)}
+        grade = rec.get("grade") if isinstance(rec.get("grade"), dict) else {}
+        return {
+            "status": rec.get("verdict", "INVALID"),
+            "reason": grade.get("reason"),
+            "failed_bounds": grade.get("failed_bounds", []),
+            "terminal_passing": grade.get("terminal_passing", 0),
+            "required_terminal_checks": grade.get("required_terminal_checks"),
+            "live": grade.get("live", {}),
+            "goal_gif": (rec.get("artifacts") or {}).get("goal_gif"),
+            "wall_seconds": (rec.get("cost") or {}).get("wall_seconds"),
+            "receipt": str(rpath),
+        }
+
+    def qualify(self, candidate_id: str, view_id: str, *, device: str | None = None, seed: int = 0) -> dict[str, Any]:
+        """Compute per-tier and whole-view qualification status from recorded receipts.
+
+        A receipt counts only when its cohort binding (task and candidate
+        fingerprints, RNG version, engine and adapter source digests, device
+        and seed) matches the current declarations; otherwise the task is
+        NOT_RUN.  The adapter digest is verified only when the adapter is
+        registered; ``adapter_source_verified`` is False otherwise and the
+        candidate is then not ``eligible``.  Tier semantics follow
+        ``experiments/forge/views.py``: a tier without required tasks is HELD,
+        neither passing nor blocking higher tiers; HELD is never PASS.
+        """
+        device = resolve_device(device)
         views = self.load_views()
         tasks = self.load_tasks()
+        candidates = self.load_candidates()
         if view_id not in views:
             raise KeyError(f"view {view_id!r} not found in workspace")
+        if candidate_id not in candidates:
+            raise KeyError(f"candidate {candidate_id!r} not found in workspace")
         view = views[view_id]
+        candidate = candidates[candidate_id]
 
         tiers_map: dict[int, list[TierAssignment]] = {}
         for a in view.assignments:
@@ -735,52 +988,37 @@ class ForgeWorkspace:
 
         tier_summaries: dict[int, dict[str, Any]] = {}
         blocked_by_lower = False
-        highest_tier = max(tiers_map.keys()) if tiers_map else 1
-
+        source_verified = True
         for t_num in sorted(tiers_map.keys()):
             assigns = tiers_map[t_num]
             req = [a for a in assigns if a.importance == "required"]
             held = [a for a in assigns if a.importance == "held"]
             task_outcomes = {}
-            req_passed = 0
-            req_incomplete = 0
             for a in assigns:
-                rpath = self._receipt_path(candidate_id, a.task, device=device)
-                if rpath.is_file():
-                    rec = read_json(rpath)
-                    expected_fp = stable_hash(tasks[a.task].to_dict())
-                    status = rec["verdict"] if rec.get("task_fingerprint") == expected_fp else "NOT_RUN"
-                    live = rec.get("grade", {}).get("live", {})
-                    gif_rel = rec.get("artifacts", {}).get("goal_gif")
-                else:
-                    status = "NOT_RUN"
-                    live = {}
-                    gif_rel = None
-                task_outcomes[a.task] = {
-                    "status": status,
-                    "importance": a.importance,
-                    "live": live,
-                    "goal_gif": gif_rel,
-                }
-                if a.importance == "required":
-                    if status == "PASS":
-                        req_passed += 1
-                    elif status in {"NOT_RUN", "INCOMPLETE"}:
-                        req_incomplete += 1
+                task = tasks[a.task]
+                try:
+                    adapter_digest = adapter_source_digest(self.registry.get_adapter(task.adapter))
+                    verify_adapter = True
+                except KeyError:
+                    adapter_digest, verify_adapter = None, False
+                expected = self._binding(task, candidate, device, seed, adapter_digest)
+                outcome = self._task_outcome(self._receipt_path(candidate_id, a.task, device), expected, verify_adapter)
+                outcome["importance"] = a.importance
+                outcome["adapter_source_verified"] = verify_adapter
+                if a.importance == "required" and not verify_adapter:
+                    source_verified = False
+                task_outcomes[a.task] = outcome
+            req_statuses = [task_outcomes[a.task]["status"] for a in req]
+            req_passed = sum(status == "PASS" for status in req_statuses)
 
-            if blocked_by_lower:
-                t_status = "BLOCKED"
-            elif not req and held:
+            if not req:
                 t_status = "HELD"
-            elif req_passed == len(req) and len(req) > 0:
-                t_status = "PASS"
-            elif req_incomplete > 0 and req_passed + req_incomplete == len(req):
-                t_status = "INCOMPLETE"
+            elif blocked_by_lower:
+                t_status = "BLOCKED"
             else:
-                t_status = "FAIL"
-
-            if t_status not in {"PASS", "HELD"}:
-                blocked_by_lower = True
+                t_status = _tier_status(req_statuses)
+                if t_status != "PASS":
+                    blocked_by_lower = True
 
             tier_summaries[t_num] = {
                 "tier": t_num,
@@ -788,28 +1026,39 @@ class ForgeWorkspace:
                 "required_passed": req_passed,
                 "required_total": len(req),
                 "held_total": len(held),
+                "diagnostic_total": sum(a.importance == "diagnostic" for a in assigns),
                 "tasks": task_outcomes,
             }
 
+        counted = [ts for _, ts in sorted(tier_summaries.items()) if ts["status"] != "HELD"]
         if view.evidence_scope == "research_diagnostic":
             overall = "DIAGNOSTIC"
-        elif any(ts["status"] == "FAIL" for ts in tier_summaries.values() if ts["required_total"] > 0):
-            overall = "FAIL"
-        elif any(ts["status"] in {"INCOMPLETE", "BLOCKED"} for ts in tier_summaries.values() if ts["required_total"] > 0):
-            overall = "INCOMPLETE"
-        elif tier_summaries.get(highest_tier, {}).get("status") == "HELD" or all(
-            ts["required_total"] == 0 for ts in tier_summaries.values()
-        ):
+        elif not counted:
             overall = "HELD"
         else:
-            overall = "PASS"
+            first_open = next((ts for ts in counted if ts["status"] != "PASS"), None)
+            if first_open is not None:
+                overall = first_open["status"]
+            elif tier_summaries[max(tier_summaries)]["status"] == "HELD":
+                overall = "HELD"
+            else:
+                overall = "PASS"
+        qualified_tier = 0
+        for ts in counted:
+            if ts["status"] != "PASS":
+                break
+            qualified_tier = ts["tier"]
 
         return {
             "candidate_id": candidate_id,
             "view_id": view_id,
             "device": device,
+            "seed": seed,
             "status": overall,
-            "eligible": overall == "PASS",
+            "qualified_tier": qualified_tier,
+            "adapter_source_verified": source_verified,
+            "eligible": overall == "PASS" and source_verified,
+            "held_tiers": [ts["tier"] for ts in tier_summaries.values() if ts["status"] == "HELD"],
             "tiers": tier_summaries,
         }
 
@@ -835,14 +1084,18 @@ class ForgeWorkspace:
         for t_num in sorted(tiers_map.keys()):
             for a in sorted(tiers_map[t_num], key=lambda x: x.order):
                 self.run_task(candidate_id, a.task, device=device, seed=seed)
-            q = self.qualify(candidate_id, view_id, device=device)
+            q = self.qualify(candidate_id, view_id, device=device, seed=seed)
             if q["tiers"][t_num]["status"] not in {"PASS", "HELD"} and view.evidence_scope != "research_diagnostic":
                 break
-        return self.qualify(candidate_id, view_id, device=device)
+        return self.qualify(candidate_id, view_id, device=device, seed=seed)
 
-    def compile_reports(self, *, view_id: str | None = None, device: str | None = None) -> dict[str, str]:
-        """Generate the single current leaderboard, EXPERIMENTS_BY_TIER.md, and EXPERIMENT_MEMORY.md."""
-        device = self._resolve_device(device)
+    def compile_reports(self, *, view_id: str | None = None, device: str | None = None, seed: int = 0) -> dict[str, str]:
+        """Generate the current leaderboard, EXPERIMENTS_BY_TIER.md and EXPERIMENT_MEMORY.md.
+
+        Everything is derived from declarations and receipts; no narrative is
+        hard-coded.  Outputs go to ``reports/particlegan_forge/`` only.
+        """
+        device = resolve_device(device)
         views = self.load_views()
         tasks = self.load_tasks()
         candidates = self.load_candidates()
@@ -852,11 +1105,19 @@ class ForgeWorkspace:
             raise KeyError(f"view {view_id!r} not found in workspace")
         primary_view = views[view_id] if view_id else next(iter(views.values()))
 
+        def fmt_live(live: dict) -> str:
+            return ", ".join(
+                f"{k}={float(v):.4f}" for k, v in sorted((live or {}).items())
+                if isinstance(v, (int, float)) and not isinstance(v, bool)
+            )
+
         # 1. Single current leaderboard for primary_view
         tier_nums = sorted({a.qualification_tier for a in primary_view.assignments}) or [1]
         header_cols = ["Technique", "Recipe", "Compute"] + [f"Tier {t}" for t in tier_nums] + ["Total", "Status"]
         lines = [
-            f"# Technique Inventory — `{primary_view.goal}` (`{primary_view.id}` v{primary_view.revision})",
+            f"# Leaderboard — `{primary_view.goal}` (`{primary_view.id}` v{primary_view.revision})",
+            "",
+            f"Generated by `{NAMESPACE}` from receipts under `reports/{NAMESPACE}/receipts/{device}` (seed {seed}).",
             "",
             "| " + " | ".join(header_cols) + " |",
             "| " + " | ".join(["---"] * len(header_cols)) + " |",
@@ -864,25 +1125,23 @@ class ForgeWorkspace:
 
         rows_scored = []
         for cid, cand in sorted(candidates.items()):
-            q = self.qualify(cid, primary_view.id, device=device)
+            q = self.qualify(cid, primary_view.id, device=device, seed=seed)
             tot_pass = sum(ts["required_passed"] for ts in q["tiers"].values())
             tot_req = sum(ts["required_total"] for ts in q["tiers"].values())
-            attained = 0
-            for t in tier_nums:
-                if q["tiers"].get(t, {}).get("status") == "PASS":
-                    attained = t
-                else:
-                    break
-            rows_scored.append((attained, tot_pass, cid, cand, q, tot_req))
+            rows_scored.append((q["qualified_tier"], tot_pass, cid, cand, q, tot_req))
 
         rows_scored.sort(key=lambda item: (-item[0], -item[1], item[2]))
         for _, tot_pass, cid, cand, q, tot_req in rows_scored:
             t_cells = []
             for t in tier_nums:
                 ts = q["tiers"].get(t, {"required_passed": 0, "required_total": 0, "status": "NOT_RUN"})
+                if ts["status"] == "HELD":
+                    t_cells.append("`HELD`")
+                    continue
                 suffix = "(*)" if ts["status"] in {"INCOMPLETE", "NOT_RUN", "BLOCKED"} else ""
                 t_cells.append(f"`{ts['required_passed']}{suffix}/{ts['required_total']}`")
-            row = [f"**{cand.technique}**", f"`{cid}`", f"`{device}`", *t_cells, f"**`{tot_pass}/{tot_req}`**", f"`{q['status']}`"]
+            status = f"`{q['status']}`" + ("" if q["adapter_source_verified"] else " (adapter source unverified)")
+            row = [f"**{cand.technique}**", f"`{cid}`", f"`{device}`", *t_cells, f"**`{tot_pass}/{tot_req}`**", status]
             lines.append("| " + " | ".join(row) + " |")
 
         lines.extend(["", "## Per-Task Breakdown", ""])
@@ -890,18 +1149,17 @@ class ForgeWorkspace:
             t_spec = tasks[a.task]
             lines.append(f"### Tier {a.qualification_tier}: `{a.task}` ({a.importance})")
             lines.append(f"- **Goal**: {t_spec.description}")
-            lines.append(f"- **Gates**: " + ", ".join(f"`{b.metric} {b.op} {b.bound}`" for b in t_spec.thresholds))
+            lines.append("- **Gates**: " + ", ".join(f"`{b.metric} {b.op} {b.bound}`" for b in t_spec.thresholds))
             for _, _, cid, _, q, _ in rows_scored:
                 tout = q["tiers"][a.qualification_tier]["tasks"][a.task]
-                live_str = ", ".join(f"{k}={v:.4f}" for k, v in sorted(tout["live"].items()) if isinstance(v, (int, float)))
                 gif_link = f" · [goal.gif]({tout['goal_gif']})" if tout.get("goal_gif") else ""
-                lines.append(f"  - `{cid}`: **{tout['status']}** ({live_str}){gif_link}")
+                lines.append(f"  - `{cid}`: **{tout['status']}** ({fmt_live(tout['live'])}){gif_link}")
             lines.append("")
 
-        leaderboard_path = self.reports_dir / "technique-inventory.md"
-        atomic_text(leaderboard_path, "\n".join(lines))
+        leaderboard_path = self.reports_dir / "leaderboard.md"
+        atomic_text(leaderboard_path, "\n".join(lines) + "\n")
 
-        # 2. EXPERIMENTS_BY_TIER.md
+        # 2. EXPERIMENTS_BY_TIER.md: declared task contracts, one row per assignment.
         ebt_lines = [
             "# Experiments by Tier",
             "",
@@ -918,23 +1176,29 @@ class ForgeWorkspace:
                 )
         ebt_lines.extend([
             "",
-            "## Single-Stream Evaluation Protocol & Contracts",
+            "## Declared Evaluation Contracts",
             "",
-            "- **Batch Size Law**: Strictly online single-stream execution with `batch_size=1` and detached inputs (`requires_grad=False`).",
-            "- **Initialization**: Deterministic orthogonal parameter initialization (`particlegan.init`) under protocol seed 0.",
-            "- **RNG Stream Isolation**: Isolated `NamedStreams` (`init`, `data`, `prior`, `noise`, `eval`) where evaluation callbacks never mutate non-eval streams (`unintended_rng_deviations == 0`).",
-            "- **Evaluation Cadence & Budget**: Full budget of 480 training steps per task, evaluated every 20 steps (24 observation windows).",
-            "- **Sustained Terminal Gate**: Final 5 consecutive observation checks (steps 400, 420, 440, 460, 480) must simultaneously pass all metric bounds (`terminal_passing == 5`).",
+            "| Task | Initializer | Sampling law | Observation steps | Sustained window | Timeout (s) |",
+            "| --- | --- | --- | --- | --- | --- |",
         ])
+        for tid, t in sorted(tasks.items()):
+            spec = t.to_dict()
+            obs = t.observation_steps()
+            window = obs[-t.minimum_stable_checks:]
+            ebt_lines.append(
+                f"| `{tid}` | `{spec['execution']['initializer']}` | `{spec['evaluation']['sampling_law']}` | "
+                f"{len(obs)} ({obs[0]}..{obs[-1]}) | last {t.minimum_stable_checks}: {window} | {t.timeout_seconds} |"
+            )
         ebt_path = self.reports_dir / "EXPERIMENTS_BY_TIER.md"
         atomic_text(ebt_path, "\n".join(ebt_lines) + "\n")
 
-        # 3. EXPERIMENT_MEMORY.md
+        # 3. EXPERIMENT_MEMORY.md: per-candidate receipt digest, no prose.
         mem_lines = [
             "# Experiment Memory",
             "",
-            f"- **Primary View**: [`{primary_view.id}`](technique-inventory.md) (revision {primary_view.revision})",
-            f"- **Tasks by Tier**: [`EXPERIMENTS_BY_TIER.md`](EXPERIMENTS_BY_TIER.md)",
+            f"- **Primary view**: [`{primary_view.id}`](leaderboard.md) (revision {primary_view.revision})",
+            "- **Tasks by tier**: [`EXPERIMENTS_BY_TIER.md`](EXPERIMENTS_BY_TIER.md)",
+            f"- **Cohort**: device `{device}`, seed {seed}",
             "",
             "## Recorded Candidates",
             "",
@@ -942,30 +1206,26 @@ class ForgeWorkspace:
         for _, tot_pass, cid, cand, q, tot_req in rows_scored:
             mem_lines.append(f"### `{cid}` (`{cand.technique}`)")
             mem_lines.append(f"- **Changed factors**: {', '.join(cand.changed_factors)}")
-            mem_lines.append(f"- **Status**: `{q['status']}` (`{tot_pass}/{tot_req}` required passes on `{device}`)")
+            if cand.parent:
+                mem_lines.append(f"- **Parent**: `{cand.parent}`")
+            mem_lines.append(
+                f"- **Status**: `{q['status']}` (`{tot_pass}/{tot_req}` required passes, "
+                f"qualified tier {q['qualified_tier']})"
+            )
+            for t_num, ts in sorted(q["tiers"].items()):
+                for tid, tout in ts["tasks"].items():
+                    detail = [f"terminal {tout.get('terminal_passing', 0)}/{tout.get('required_terminal_checks') or '-'}"]
+                    if tout.get("failed_bounds"):
+                        detail.append("failed " + "; ".join(f"`{fb}`" for fb in tout["failed_bounds"]))
+                    if tout.get("reason") and tout["status"] != "PASS":
+                        detail.append(f"reason: {tout['reason']}")
+                    live = fmt_live(tout["live"])
+                    if live:
+                        detail.append(live)
+                    mem_lines.append(
+                        f"  - Tier {t_num} `{tid}` ({tout['importance']}): **{tout['status']}** — " + " · ".join(detail)
+                    )
             mem_lines.append("")
-
-        mem_lines.extend([
-            "## Baseline Candidate Autopsy",
-            "",
-            "- **`bcap` (`1/4` PASS)**: Stateless baseline fails catastrophically on correlated blocks (`seq_img_dwell_bars4`, 0/5 passes, finite_template_tv=1.0) because without temporal memory it rapidly forgets past modes and collapses to the current dwelling mode. It also fails `seq_img_translating_bar_next` (0/5 passes, direction_acc=0.50) due to ambiguity of single-frame observations without velocity context.",
-            "- **`fast-weight-bcap` (`0/4` PASS)**: Incorporating fast Hebbian weights enables memory context, but without learning rate annealing and with single-sample rehearsal, large gradient steps at `batch_size=1` destabilize the discriminator and latent prior, causing mode collapse and high Total Variation across all tasks.",
-            "- **`ka2` (`0/4` PASS)**: Critic EMA anchors fail under non-stationary single-stream drift, causing rapid prior collapse (0/5 passes across all 4 tasks).",
-            "",
-            "## Winning Global Recipe Dynamics: `fast-weight-bcap-ns` (`4/4` PASS)",
-            "",
-            "A single unified global recipe qualifies on all 4 Tier 1 tasks (`4/4` PASS, 5/5 sustained terminal passes on each task) with zero per-task tuning:",
-            "- **Cosine Learning Rate Annealing**: Smooth annealing (`lr_schedule='cosine'`, `lr_anneal_start=0.5`, `lr_floor=0.05`) cools plasticity in the second half of training, stabilizing discriminator and latent distributions while preventing late-stage mode drift.",
-            "- **Multi-Sample Reservoir Rehearsal**: 7-sample rehearsal (`rehearsal_batch=7`) from a bounded 64-frame memory buffer prevents catastrophic forgetting across dwell blocks (`seq_img_dwell_bars4` hq=0.9688, tv=0.0938) while keeping the input stream strictly `batch_size=1`.",
-            "- **Temporal Velocity Context**: Difference-based velocity conditioning (`diff = frame - prev_frame`) with static noise gating (`||diff|| > 0.35`) disambiguates interior frames for `seq_img_translating_bar_next` (direction_acc=1.0000, rmse=0.0803).",
-            "- **Non-Saturating GAN Formulation**: Non-saturating loss stabilizes gradient flow and prevents discriminator saturation at batch_size=1.",
-            "",
-            "## Recommendations for Tier 2",
-            "",
-            "1. **Higher-Resolution Spatial Streams**: Scale memory-conditioned generators from 8x8 patches to 16x16 and 32x32 video sequences.",
-            "2. **Adaptive Rehearsal Allocation**: Investigate prioritized or surprise-driven reservoir sampling to maintain long-tail modes over 1,000+ step horizons.",
-            "3. **Continuous World-Model Latent Transport**: Couple fast-weight memory with continuous latent trajectory transport for complex multi-agent and physical environments.",
-        ])
         mem_path = self.reports_dir / "EXPERIMENT_MEMORY.md"
         atomic_text(mem_path, "\n".join(mem_lines) + "\n")
 
