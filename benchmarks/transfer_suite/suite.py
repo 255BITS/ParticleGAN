@@ -98,7 +98,15 @@ def run_episode(spec, card, *, ablation="none", fixed=False, allow_reserved=Fals
     options = dict(ablation=ablation, fixed=fixed)
     if "allow_reserved" in inspect.signature(runner).parameters:
         options["allow_reserved"] = allow_reserved
-    return runner(spec, card, **options)
+    result = runner(spec, card, **options)
+    # Reporting only: oracle noise floors next to each gate metric. The frozen
+    # runners' metric values, convergence and verdict inputs are untouched.
+    from .metric_uncertainty import annotate_image_episode, annotate_vector_episode
+    if spec["runner"] == "vector":
+        annotate_vector_episode(result, spec)
+    elif spec["runner"] == "image":
+        annotate_image_episode(result, spec)
+    return result
 
 
 def render(report, output):

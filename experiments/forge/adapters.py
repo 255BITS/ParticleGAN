@@ -486,8 +486,18 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
     spec = resolve_vector_spec(task)
     # The frozen vector law has no tanh branch. Only the published origin
     # smoke card is redirected; every other host keeps the import above.
-    if scorer is None and accepts_origin_smoke(task, spec):
+    tanh_smoke = scorer is None and accepts_origin_smoke(task, spec)
+    if tanh_smoke:
         from .tanh_point_mass import sample_target, score_samples
+    # Oracle noise floors are reporting-only fields next to the frozen vector
+    # scorer's gates. An eval_draw_contract other than fixed_v1 is an explicit,
+    # versioned new evaluation cohort (see metric_uncertainty).
+    from benchmarks.transfer_suite import metric_uncertainty
+    plain_vector = scorer is None and not tanh_smoke
+    contract = task["evaluation"].get("eval_draw_contract", "fixed_v1")
+    metric_uncertainty.evaluation_seeds(contract, 0)
+    if contract != "fixed_v1" and not plain_vector:
+        raise CapabilityError([f"eval_draw_contract {contract} requires the transfer vector scorer"])
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)
@@ -502,7 +512,12 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
         samples = run.sample(4096).cpu()
         if retain_scored_outputs:
             records.append({"step": step, "samples": samples.detach().clone()})
-        return score_samples(samples, spec, step)
+        if contract != "fixed_v1":
+            return metric_uncertainty.score_vector(samples, spec, step, contract=contract)
+        metrics = score_samples(samples, spec, step)
+        if plain_vector:
+            metrics = metric_uncertainty.with_vector_noise_floor(metrics, spec, step, len(samples))
+        return metrics
     for step in range(1, task["execution"]["steps"] + 1):
         run.step(sample_target(spec, context.recipe.batch_size, data, step - 1).to(device))
         if step in checkpoints:
@@ -510,6 +525,8 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
     evidence = {"observations": observations, "live": observations[-1], "host": host_receipt}
+    if plain_vector:
+        evidence["evaluation_contract"] = metric_uncertainty.evaluation_contract(contract)
     if retain_scored_outputs:
         evidence["saved_observer_outputs"] = _save_observer_outputs(
             output, "observed-samples.pt", records, kind="scored_vector_samples_v1")
