@@ -364,7 +364,7 @@ def test_stratified_sampling_manipulator_permutation_and_cursor():
 def test_simplex_routing_manipulator_invariants_and_gradients():
     """Verify SimplexRoutingManipulator mode weight normalization and gradient flow."""
     K = 5
-    m = SimplexRoutingManipulator(num_modes=K, temperature=0.3)
+    m = SimplexRoutingManipulator(num_modes=K, temperature=0.3, z_dim=4)
     base = ParticlePrior(num_particles=16, z_dim=4)
 
     codes = torch.randn(8, 4, requires_grad=True)
@@ -464,8 +464,8 @@ def test_optimizer_parameter_roles_all_recipes(preset):
         assert "generator" in policy.roles[0]
 
 
-def test_frozen_prior_with_trainable_manipulators():
-    """Verify that prior_update='frozen' leaves prior.base.z out of optimizers while training manipulators."""
+def test_frozen_prior_freezes_manipulator_parameters():
+    """prior_update='frozen' freezes the whole prior: table and manipulator (router) parameters."""
     recipe = get_recipe("bcap", prior_update="frozen", num_particles=32, z_dim=4, batch_size=8)
     gen = nn.Sequential(nn.Linear(4, 8), nn.Tanh(), nn.Linear(8, 2))
     disc = nn.Sequential(nn.Linear(2, 8), nn.Tanh(), nn.Linear(8, 1))
@@ -474,17 +474,16 @@ def test_frozen_prior_with_trainable_manipulators():
     prior = recipe.make_prior(manipulators=[m_train])
 
     assert prior.base.z.requires_grad is False
-    assert m_train.matrix.requires_grad is True
+    assert m_train.matrix.requires_grad is True  # make_prior does not bind the update policy
 
     opt_g, opt_d = recipe.make_optimizers(gen, disc, prior)
 
-    # prior.base.z must NOT be in opt_g
-    assert not any(p is prior.base.z for g in opt_g.param_groups for p in g["params"])
-
-    # m_train.matrix MUST be in opt_g under role='router'
-    router_groups = [g for g in opt_g.param_groups if any(p is m_train.matrix for p in g["params"])]
-    assert len(router_groups) == 1
-    assert router_groups[0]["role"] == "router"
+    # Neither the table nor the router may train under a frozen prior policy.
+    assert m_train.matrix.requires_grad is False
+    trained = {id(p) for g in opt_g.param_groups for p in g["params"]}
+    assert id(prior.base.z) not in trained
+    assert id(m_train.matrix) not in trained
+    assert not any(g.get("role") == "router" for g in opt_g.param_groups)
 
 
 # -----------------------------------------------------------------------------
