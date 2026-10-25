@@ -644,9 +644,13 @@ class Recipe:
         recalibrates MoG spacing). MoG recipes calibrate spacing on the
         means (potentially expensive). Pass ``sigma=...`` to skip calibration,
         including ``sigma=0`` when restoring a checkpoint.
+
+        ``manipulators`` (a PriorManipulator or sequence) wraps the prior in a
+        ``ManipulatedPrior``. Their hyperparameters are module configuration,
+        not Recipe fields: they travel in the prior's ``state_dict`` and are
+        reported by ``prior.manipulator_spec()``.
         """
         from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
-        manipulators = overrides.pop("manipulators", manipulators)
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
                    "sigma_rel": self.sigma_rel, "standardize": self.standardize,
                    "learnable": self.prior_update == "learned", **overrides}
@@ -682,9 +686,19 @@ class Recipe:
 
         AE requires raw offsets and returns one deterministic draw. VAE rejects
         offsets because local posterior and prior must match for this recipe.
+
+        Encoding routes queries over the storage table rows (codes are base
+        locations plus prior-matching noise). A ``ManipulatedPrior`` whose
+        manipulators transform sampled codes is rejected: those transforms
+        would not be applied to encoded codes, so they would differ from the
+        codes the decoder sees when sampling.
         """
         from .autoencoder import particle_ae, particle_vae
-        base = getattr(prior, "base", prior)
+        from .priors import unwrap_prior
+        if getattr(prior, "transforms_codes", False):
+            raise ValueError("encode does not apply prior manipulator transforms; "
+                             "use a prior without code-transforming manipulators")
+        base = unwrap_prior(prior)
         options = dict(temperature=self.routing_temperature,
                        distance_reduction=self.distance_reduction)
         if self.encoder_mode == "ae":
@@ -960,6 +974,12 @@ class Recipe:
             prior = reference
         if reference is None:
             reference = prior
+        # Regularizer references read storage buffers (initial moments,
+        # Coulomb reference) that live on the unwrapped table.
+        from .priors import unwrap_prior
+        prior = unwrap_prior(prior)
+        reference = (tuple(unwrap_prior(item) for item in reference)
+                     if isinstance(reference, (list, tuple)) else unwrap_prior(reference))
         if self.prior_regularizer == "sbnp":
             from .bispf import SBNPPriorRegularizer
             options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
@@ -1051,7 +1071,8 @@ class Recipe:
         """Reject aliases before freezing, including already-frozen buffers."""
         if self.prior_update != "frozen":
             return
-        base = getattr(prior, "base", prior)
+        from .priors import unwrap_prior
+        base = unwrap_prior(prior)
         if not hasattr(base, "z"):
             return
         for module in modules:
@@ -1067,8 +1088,13 @@ class Recipe:
         Initializing a trainable table first lets learned/frozen comparisons use
         identical deterministic locations and consume identical init streams.
         Freezing registers locations as a buffer, keeping sampling/state keys.
+        A frozen prior is frozen as a whole: parameters owned by its
+        manipulators (e.g. a learnable simplex router) are frozen too.
         """
-        base = getattr(prior, "base", prior)
+        from .priors import ManipulatedPrior, unwrap_prior
+        base = unwrap_prior(prior)
+        if self.prior_update == "frozen" and isinstance(prior, ManipulatedPrior):
+            prior.manipulators.requires_grad_(False)
         if not hasattr(base, "z"):
             return prior  # Gaussian priors have no trainable location table.
         if self.prior_update == "learned":
@@ -1122,7 +1148,8 @@ class Recipe:
         if prior is not None:
             self._validate_frozen_prior_ownership(prior, generator, discriminator, encoder, ema_critic)
             self.apply_prior_policy(prior)
-            base_prior = getattr(prior, "base", prior)
+            from .priors import unwrap_prior
+            base_prior = unwrap_prior(prior)
             base_params = [p for p in base_prior.parameters() if p.requires_grad]
             base_ids = {id(p) for p in base_params}
             router_params = [p for p in prior.parameters() if p.requires_grad and id(p) not in base_ids]

@@ -133,6 +133,10 @@ class ServedModel:
     default, exactly as in ``GANTrainer.sample``.  The private sampling stream
     starts from the policy's evaluation RNG state and never advances a
     training stream.  Module parameters are frozen and modules are in eval.
+    A ``ManipulatedPrior`` whose manipulators postprocess generator outputs
+    has that postprocessing applied last (after optional output noise) in
+    ``generate``/``sample`` and ``routed_forward``, as in ``GANTrainer``'s
+    critic and generator paths and the birth/death row generator.
     """
 
     def __init__(self, models, table, controller, *, source, output_sigma,
@@ -164,6 +168,8 @@ class ServedModel:
         if output_noise and self.output_sigma != 0:
             y = y + self.output_sigma * torch.randn(
                 y.shape, generator=stream, device=y.device, dtype=y.dtype)
+        if getattr(self.prior, "postprocesses_generated", False):
+            y = self.prior.postprocess_generated(y)
         return y
 
     def _sampling_stream(self, generator):
@@ -233,6 +239,8 @@ class ServedModel:
             y = self.routing.forward(self.models, context, candidate, perturb_fn=perturb_fn)
             if output_noise and self.output_sigma != 0:
                 y = y + self.output_sigma * torch.randn(y.shape, device=y.device, dtype=y.dtype, generator=stream)
+            if getattr(self.prior, "postprocesses_generated", False):
+                y = self.prior.postprocess_generated(y)
             return y
 
 
@@ -433,7 +441,8 @@ class UpdatePolicy:
                 features = ScalarHeadFeatures(self.D)
             rows = ParticleRows(table=table, optimizer=self.table_optimizer,
                                 averaged_table=self.averaged_table,
-                                generate=lambda latent: self._clean_generate(self.G, latent),
+                                generate=lambda latent: self._postprocess_generated(
+                                    self._clean_generate(self.G, latent)),
                                 critic_features=features,
                                 evaluation_modules=tuple(module for module in (self.G, encoder, router)
                                                          if module is not None),
@@ -981,6 +990,12 @@ class UpdatePolicy:
 
     def _clean_generate(self, model, latent):
         return model(latent) if self.generation is None else self.generation(model, latent)
+
+    def _postprocess_generated(self, generated):
+        """Manipulator output postprocessing; identity for plain priors."""
+        if getattr(self.prior, "postprocesses_generated", False):
+            return self.prior.postprocess_generated(generated)
+        return generated
 
     def observe_sampled_rows(self, rows):
         """Record generator-side prior draws for row-local optimizer updates.
