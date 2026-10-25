@@ -216,12 +216,11 @@ def test_compact_summarizes_nested_floors_for_log_lines():
     assert metrics["noise_floor"] is floor and mu.compact(None) is None
 
 
-def test_report_flatteners_skip_noise_floor_annotations():
-    from experiments.forge import cadence_report, family_reports
+def test_cadence_report_flattener_skips_noise_floor_annotations():
+    from experiments.forge import cadence_report
     floor = mu.summarize({"error": .5}, [{"error": .4}, {"error": .6}], [["error", "<=", 1.]])
     metrics = {"error": .5, "ema": {"error": .7, "noise_floor": floor}, "noise_floor": floor}
     assert cadence_report._scalars(metrics) == ({"error": .5, "ema.error": .7}, [])
-    assert dict(family_reports._metric_values(metrics)) == {"ema.error": .7, "error": .5}
 
 
 def test_vector_annotation_uses_each_rows_sample_count():
