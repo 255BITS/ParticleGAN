@@ -133,6 +133,9 @@ class ServedModel:
     default, exactly as in ``GANTrainer.sample``.  The private sampling stream
     starts from the policy's evaluation RNG state and never advances a
     training stream.  Module parameters are frozen and modules are in eval.
+    A ``ManipulatedPrior`` whose manipulators postprocess generator outputs
+    has that postprocessing applied last (after optional output noise), as
+    in ``GANTrainer``'s critic and generator paths.
     """
 
     def __init__(self, models, table, controller, *, source, output_sigma,
@@ -164,6 +167,8 @@ class ServedModel:
         if output_noise and self.output_sigma != 0:
             y = y + self.output_sigma * torch.randn(
                 y.shape, generator=stream, device=y.device, dtype=y.dtype)
+        if getattr(self.prior, "postprocesses_generated", False):
+            y = self.prior.postprocess_generated(y)
         return y
 
     def _sampling_stream(self, generator):
