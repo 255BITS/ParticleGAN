@@ -71,6 +71,10 @@ _ENV = {**os.environ, "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "CUDA_VISI
 
 # Runs in one helper interpreter. Every child records the exact byte stream the
 # production witness hashes, so the validity checks see the hashed tensors.
+# Coupled to witness_sha256's internals: it must call ``hashlib.sha256()``
+# through the module attribute ``init_registry.hashlib`` and feed it, per
+# tensor, the triple (repr of the shape tuple, str(dtype), raw bytes). A
+# refactor of that layout must update the parser in build() below.
 _FORKED = r"""
 import contextlib, hashlib, io, json, multiprocessing, sys
 sys.path.insert(0, sys.argv[1])

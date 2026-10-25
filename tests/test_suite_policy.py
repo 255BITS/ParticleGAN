@@ -1,5 +1,7 @@
 """Policies of the test suite itself: GPU opt-in, CPU thread budget and CI scope."""
 from pathlib import Path
+import ast
+import os
 import re
 import subprocess
 import sys
@@ -12,17 +14,81 @@ import yaml
 from tests.conftest import thread_budget
 
 ROOT = Path(__file__).resolve().parents[1]
-CUDA_SKIP = re.compile(r"not\s+torch\.cuda\.is_available\(\)")
+CUDA_SKIP = re.compile(r"not\s+torch\.cuda\.is_available\(\)|RUN_CUDA_IMAGE_TESTS")
+CUDA_MARK = "pytest.mark.cuda"
 
 
-def test_every_cuda_only_test_file_declares_the_cuda_marker():
-    """A CUDA skip without the marker runs silently on a workstation GPU."""
+def _segment(lines, node):
+    start = min([node.lineno] + [d.lineno for d in getattr(node, "decorator_list", [])])
+    return "\n".join(lines[start - 1:node.end_lineno])
+
+
+def unmarked_cuda_skip_sites(source):
+    """Names of tests (or helpers) that skip without CUDA but carry no cuda marker.
+
+    Checked per skip site, not per file: a file with one marked CUDA test and a
+    second unmarked one is reported. A module ``pytestmark`` with the marker
+    covers the whole file. Module-level skip helpers (a ``skipif`` mark bound to
+    a name, or a fixture/helper function that calls ``pytest.skip``) are
+    followed to every test that references them.
+    """
+    tree = ast.parse(source)
+    lines = source.splitlines()
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and any(getattr(t, "id", None) == "pytestmark" for t in node.targets):
+            if CUDA_MARK in _segment(lines, node):
+                return []
+    helpers = set()
+    tests = []
+    for node in tree.body:
+        if isinstance(node, ast.ClassDef) and node.name.startswith("Test"):
+            class_marked = any(CUDA_MARK in ast.get_source_segment(source, d) for d in node.decorator_list)
+            tests += [(f"{node.name}.{item.name}", item, class_marked) for item in node.body
+                      if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)) and item.name.startswith("test")]
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test"):
+            tests.append((node.name, node, False))
+        elif isinstance(node, (ast.Assign, ast.FunctionDef, ast.AsyncFunctionDef)):
+            text = _segment(lines, node)
+            if CUDA_SKIP.search(text) and CUDA_MARK not in text:
+                names = [node.name] if hasattr(node, "name") else [t.id for t in node.targets if isinstance(t, ast.Name)]
+                helpers.update(names)
     unmarked = []
+    for name, node, class_marked in tests:
+        text = _segment(lines, node)
+        uses = CUDA_SKIP.search(text) or any(re.search(rf"\b{re.escape(h)}\b", text) for h in helpers)
+        if uses and not class_marked and CUDA_MARK not in text:
+            unmarked.append(name)
+    return unmarked
+
+
+def test_every_cuda_only_test_declares_the_cuda_marker():
+    """A CUDA skip without the marker runs silently on a workstation GPU."""
+    unmarked = {}
     for path in sorted((ROOT / "tests").rglob("test_*.py")):
-        source = path.read_text(encoding="utf-8")
-        if (CUDA_SKIP.search(source) or "RUN_CUDA_IMAGE_TESTS" in source) and "pytest.mark.cuda" not in source:
-            unmarked.append(path.relative_to(ROOT).as_posix())
+        sites = unmarked_cuda_skip_sites(path.read_text(encoding="utf-8"))
+        if sites:
+            unmarked[path.relative_to(ROOT).as_posix()] = sites
     assert not unmarked
+
+
+@pytest.mark.parametrize("source,expected", [
+    # One marked CUDA test does not cover a second, unmarked one in the same file.
+    ("import pytest, torch\n@pytest.mark.cuda\n@pytest.mark.skipif(not torch.cuda.is_available(), reason='')\n"
+     "def test_a(): pass\n@pytest.mark.skipif(not torch.cuda.is_available(), reason='')\ndef test_b(): pass\n",
+     ["test_b"]),
+    ("import pytest, torch\ndef test_body():\n    if not torch.cuda.is_available():\n        pytest.skip('')\n",
+     ["test_body"]),
+    ("import pytest, torch\nCUDA = pytest.mark.skipif(not torch.cuda.is_available(), reason='')\n"
+     "@pytest.mark.cuda\n@CUDA\ndef test_a(): pass\n@CUDA\ndef test_b(): pass\n", ["test_b"]),
+    ("import pytest, torch\n@pytest.fixture\ndef gpu():\n    if not torch.cuda.is_available():\n        pytest.skip('')\n"
+     "def test_a(gpu): pass\n@pytest.mark.cuda\ndef test_b(gpu): pass\n", ["test_a"]),
+    ("import pytest, torch\n@pytest.mark.cuda\nclass TestGpu:\n"
+     "    @pytest.mark.skipif(not torch.cuda.is_available(), reason='')\n    def test_a(self): pass\n", []),
+    ("import pytest, torch\npytestmark = [pytest.mark.cuda]\n"
+     "@pytest.mark.skipif(not torch.cuda.is_available(), reason='')\ndef test_a(): pass\n", []),
+])
+def test_cuda_marker_policy_is_checked_per_skip_site(source, expected):
+    assert unmarked_cuda_skip_sites(source) == expected
 
 
 def test_cuda_marker_is_declared_and_deselected_by_default():
@@ -60,12 +126,27 @@ def test_session_pins_torch_threads_to_the_declared_budget(_pinned_torch_threads
     assert torch.get_num_threads() == _pinned_torch_threads
 
 
-def test_a_test_that_changes_threads_does_not_leak_into_the_next_one_part1():
-    torch.set_num_threads(max(1, torch.get_num_threads()) + 3)
+def test_a_test_that_changes_threads_does_not_leak_into_the_next_one(tmp_path):
+    """Run the production fixtures on a fixed two-test order in a child session.
 
-
-def test_a_test_that_changes_threads_does_not_leak_into_the_next_one_part2(_pinned_torch_threads):
-    assert torch.get_num_threads() == _pinned_torch_threads
+    Splitting this into two tests of this module would depend on run order
+    (random ordering or xdist would let the second pass trivially).
+    """
+    (tmp_path / "conftest.py").write_text(
+        "from tests.conftest import _pinned_torch_threads, _restore_torch_threads  # noqa: F401\n")
+    (tmp_path / "test_leak.py").write_text(
+        "import torch\n"
+        "def test_1_changes_threads(_pinned_torch_threads):\n"
+        "    torch.set_num_threads(_pinned_torch_threads + 3)\n"
+        "    assert torch.get_num_threads() == _pinned_torch_threads + 3\n"
+        "def test_2_sees_the_pinned_count(_pinned_torch_threads):\n"
+        "    assert torch.get_num_threads() == _pinned_torch_threads\n")
+    env = {**os.environ, "PYTHONPATH": os.pathsep.join([str(ROOT), os.environ.get("PYTHONPATH", "")])}
+    run = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-p", "no:randomly", "-p", "no:xdist",
+         "--rootdir", str(tmp_path), str(tmp_path / "test_leak.py")],
+        cwd=tmp_path, env=env, capture_output=True, text=True, timeout=300)
+    assert run.returncode == 0 and "2 passed" in run.stdout, run.stdout + run.stderr
 
 
 def test_minimum_supported_python_ci_job_runs_pytest():
