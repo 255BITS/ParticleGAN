@@ -1216,8 +1216,10 @@ class Recipe:
         latent_table = base_prior.z if (base_prior is not None and hasattr(base_prior, "z") and mechanisms["prior"]["a2_eligible"]) else None
         opt_g = self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs)
         opt_g.prior_mechanisms = mechanisms
-        return opt_g, self.make_critic_optimizer(discriminator, ema_critic=ema_critic,
-                                                 ka2_trust_mode=ka2_trust_mode, **adam_kwargs)
+        # Forwarded only when declared: subclass overrides of make_critic_optimizer keep their signature.
+        if ka2_trust_mode != "compound":
+            adam_kwargs = {**adam_kwargs, "ka2_trust_mode": ka2_trust_mode}
+        return opt_g, self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)
 
 
 
