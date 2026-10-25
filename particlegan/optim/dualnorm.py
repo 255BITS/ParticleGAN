@@ -525,6 +525,52 @@ class NormalizedOptimizer(Optimizer):
         """Discard an aborted update's row ownership."""
         self._sampled_rows.clear()
 
+    def _clear_pending(self):
+        """Drop wrapper-bound per-step inputs; the base optimizer binds none."""
+
+    def abort_pending(self):
+        """Discard every caller-bound input of a step that will not happen.
+
+        Clears sampled-row ownership and any wrapper-bound protected losses,
+        protected values/evaluator or finite-cap panels, so the next step can
+        be bound afresh. Parameters and optimizer state are left untouched.
+        """
+        self._clear_pending()
+        self.clear_sampled_rows()
+
+    @torch.no_grad()
+    def _propose_adjust_commit(self, propose, adjust=None, *, check=None):
+        """Shared wrapper step: check -> propose (base update) -> adjust -> commit.
+
+        ``check()`` validates bound inputs, ``propose()`` runs the base update
+        and returns the step result, and ``adjust(parameters, originals)`` may
+        rewrite the proposed tensors in place. Success clears wrapper-bound
+        pending inputs exactly as each wrapper always did. Any exception aborts
+        the step via ``abort_pending()``, so later steps and ``state_dict()``
+        work. A failing ``adjust`` restores the pre-step parameters (as the
+        wrappers always did). A failing base update is NOT rolled back: tensors
+        and optimizer state it already advanced (moments, step clocks,
+        observation records) stay as they are; only the pending inputs go.
+        """
+        parameters = [p for group in self.param_groups for p in group["params"]]
+        originals = [p.detach().clone() for p in parameters]
+        try:
+            if check is not None:
+                check()
+            result = propose()
+            if adjust is not None:
+                try:
+                    adjust(parameters, originals)
+                except BaseException:
+                    for parameter, original in zip(parameters, originals):
+                        parameter.copy_(original)
+                    raise
+        except BaseException:
+            self.abort_pending()
+            raise
+        self._clear_pending()
+        return result
+
     def sampled_rows_for(self, table):
         """Return a read-only copy of the pending step's sampled row IDs."""
         rows = self._sampled_rows.get(table)
@@ -887,6 +933,9 @@ class NormalizedOptimizer(Optimizer):
 
 def make_normalized_optimizer(recipe, params, *, critic=None, **options):
     """Recipe factory plus the same observation-only penalty metadata as Adam."""
+    # Materialize once: a generator must survive the role probe below, and
+    # plain tensors (no group dicts) default to the generator role.
+    params = list(params)
     optimizer_class = NormalizedOptimizer
     if critic is not None and recipe.critic_step_mode == "finite_cap":
         from .critic_cap import CriticCapOptimizer
@@ -902,7 +951,8 @@ def make_normalized_optimizer(recipe, params, *, critic=None, **options):
         optimizer_class = DirectionBlendOptimizer
     if recipe.prior_proximal_strength and recipe.prior_update == "learned" and critic is None:
         from .prior_proximal import proximal_optimizer_class
-        if any(group.get("role", "generator") in ("prior", "table") for group in params):
+        if any(isinstance(group, dict) and group.get("role", "generator") in ("prior", "table")
+               for group in params):
             optimizer_class = proximal_optimizer_class(optimizer_class)
             options["prior_proximal_strength"] = recipe.prior_proximal_strength
     optimizer = optimizer_class(params, family=recipe.optimizer_family,

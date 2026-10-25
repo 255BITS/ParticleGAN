@@ -86,12 +86,28 @@ class KA2StepRecord(CriticStepRecord):
             "observed_steps", "last_sur", "sur_hist", "sur_base", "w", "low_streak", "alpha",
             "last_ratio", "ema_updates", "ema_skips", "ema_reseeds")
 
-    def __init__(self, anchor=None, *, anchor_min_decay=0.90):
+    TRUST_MODES = ("compound", "scale")
+
+    def __init__(self, anchor=None, *, anchor_min_decay=0.90, trust_mode="compound"):
+        """``trust_mode`` declares how a DV controller's ``game_trust`` damps ``alpha``.
+
+        ``"compound"`` (legacy, qualified default): every blended call does
+        ``alpha *= game_trust`` on the controller state itself, so the damping
+        feeds back into the next ``advance_blend``. With a steady target T and
+        trust t < 1 the fixed point is t*T*K/(1 - t*(1-K)) (K = K_ATK), e.g.
+        trust .9 cuts alpha by ~87%, not 10%. ``"scale"`` keeps the undamped
+        controller state in ``alpha_raw`` and serves ``alpha = trust * alpha_raw``,
+        so trust t scales the EMA tracking rate by exactly t.
+        """
         if (isinstance(anchor_min_decay, bool) or not math.isfinite(anchor_min_decay)
                 or not 0.0 <= anchor_min_decay < 1.0):
             raise ValueError("anchor_min_decay must be finite and in [0, 1)")
+        if trust_mode not in self.TRUST_MODES:
+            raise ValueError("KA2 trust_mode must be compound or scale")
         super().__init__(anchor)
         self.anchor_min_decay = float(anchor_min_decay)
+        self.trust_mode = trust_mode
+        self.alpha_raw = None
         self.last_sur = None
         self.sur_hist = []
         self.sur_base = None
@@ -127,8 +143,12 @@ class KA2StepRecord(CriticStepRecord):
             target = 1.0
         else:
             target = (ratio - GAIN_LO) / (GAIN_HI - GAIN_LO)
-        rate = K_ATK if target > self.alpha else K_REL
-        self.alpha = max(0.0, min(1.0, self.alpha + (target - self.alpha) * rate))
+        # "scale" advances the undamped state; "compound" the served (damped) alpha.
+        current = self.alpha if self.trust_mode == "compound" or self.alpha_raw is None else self.alpha_raw
+        rate = K_ATK if target > current else K_REL
+        self.alpha = max(0.0, min(1.0, current + (target - current) * rate))
+        if self.trust_mode == "scale":
+            self.alpha_raw = self.alpha
         if weight < 0.5 and ratio is not None and ratio > REL_HI:
             self.low_streak += 1
         else:
@@ -161,13 +181,22 @@ class KA2StepRecord(CriticStepRecord):
         state = {key: getattr(self, key) for key in self.KEYS if key != "formulation"}
         state["formulation"] = "ka2"
         state["sur_hist"] = list(self.sur_hist)
+        if self.trust_mode != "compound":  # legacy checkpoints keep their exact keys
+            state["trust_mode"], state["alpha_raw"] = self.trust_mode, self.alpha_raw
         return state
 
     def load_state_dict(self, state):
         if not isinstance(state, dict) or state.get("formulation") != "ka2":
             raise ValueError("KA2 cannot resume an older K3P critic state; use its original release")
-        if set(state) != set(self.KEYS):
-            raise ValueError("invalid KA2 controller state keys")
+        extra = set() if self.trust_mode == "compound" else {"trust_mode", "alpha_raw"}
+        if set(state) != set(self.KEYS) | extra:
+            raise ValueError("invalid KA2 controller state keys (trust_mode must match the recipe)")
+        if extra:
+            raw = state["alpha_raw"]
+            if state["trust_mode"] != self.trust_mode or (raw is not None and (
+                    isinstance(raw, bool) or not isinstance(raw, (float, int))
+                    or not math.isfinite(raw) or not 0.0 <= raw <= 1.0)):
+                raise ValueError("invalid KA2 trust state")
         if state["anchor_min_decay"] != self.anchor_min_decay:
             raise ValueError("KA2 checkpoint anchor_min_decay does not match this recipe")
         for key in self._COUNTERS:
@@ -191,6 +220,8 @@ class KA2StepRecord(CriticStepRecord):
         for key in self.KEYS:
             if key not in ("formulation", "anchor_min_decay"):
                 setattr(self, key, deepcopy(state[key]))
+        if extra:
+            self.alpha_raw = None if state["alpha_raw"] is None else float(state["alpha_raw"])
 
 
 class KA2GradientPenalty(GradientPenalty):
@@ -199,6 +230,11 @@ class KA2GradientPenalty(GradientPenalty):
     ``W`` and the EMA tracking rate come from the paired KA2 optimizer's
     moment-surprise controller. ``anchor_weight=0`` is the explicit anchor
     ablation. Constant LR does not disable the blend or its release signal.
+
+    ``kappa`` has two units (legacy, kept bit-identical): part A compares the
+    per-coordinate norm ``|grad| / sqrt(D)`` with kappa, part B the raw norm
+    ``|grad|``, so B's cap is ``sqrt(D)`` times tighter for D-dimensional
+    samples.
     """
 
     def __init__(self, coeff=1.0, kappa=1.0, lazy_k=1, anchor_weight=1.0, *, record=None, r1_real=True):
@@ -271,7 +307,12 @@ class KA2GradientPenalty(GradientPenalty):
             weight = record.advance_blend()
             controller = getattr(self, "continuous_controller", None)
             if controller is not None and controller.variant in ("dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
-                record.alpha *= controller.game_trust
+                if record.trust_mode == "scale":
+                    record.alpha = record.alpha_raw * controller.game_trust
+                else:
+                    # Legacy: damps the controller state itself, so it compounds
+                    # across calls (see KA2StepRecord.__init__).
+                    record.alpha *= controller.game_trust
                 evidence = controller.data_drive if controller.variant in ("dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else controller.data_memory
                 if evidence < .1:
                     weight = record.w = 1.0
@@ -281,7 +322,13 @@ class KA2GradientPenalty(GradientPenalty):
                 record.w = weight = 1.0
                 record.alpha = (0.0 if controller.variant == "dv2" else
                                 (1.0 - .999) / (1.0 - record.anchor_min_decay))
+                if record.trust_mode == "scale":
+                    record.alpha_raw = record.alpha
                 record.low_streak = 0
+            # Units (legacy, qualified; documented, not changed): part A caps the
+            # per-coordinate norm n_f / sqrt(D) at kappa, while part B caps the
+            # raw norms n_r, n_f at the same kappa. For D > 1 the B cap is
+            # sqrt(D) times tighter than A's; kappa is not one unit across terms.
             if self.r1_real:
                 a_term = (sq_r / dimension).mean() + (n_f / dimension ** 0.5 - self.kappa).relu().square().mean()
             else:
@@ -305,8 +352,8 @@ class KA2CriticAdam(K3PCriticAdam):
     """
 
     def __init__(self, params, *, critic, ema_critic=None, anchor_min_decay=0.90,
-                 guard_ratio=5.0, guard_min_steps=200, **adam_kwargs):
-        record = KA2StepRecord(anchor_min_decay=anchor_min_decay)
+                 guard_ratio=5.0, guard_min_steps=200, trust_mode="compound", **adam_kwargs):
+        record = KA2StepRecord(anchor_min_decay=anchor_min_decay, trust_mode=trust_mode)
         super().__init__(params, critic=critic, ema_critic=ema_critic, anchor_decay=anchor_min_decay,
                          guard_ratio=guard_ratio, guard_min_steps=guard_min_steps, **adam_kwargs)
         record.anchor = self.anchor

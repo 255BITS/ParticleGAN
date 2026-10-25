@@ -239,9 +239,9 @@ def test_later_gram_hold_is_terminal_no_svd_fallback_or_rollback_claim(monkeypat
     same_tree(parameters[2].detach(), values[2])
     assert [optimizer.state[p].get("step", 0) for p in parameters] == [1, 1, 0, 0]
     assert optimizer.constraint_geometry_stats["steps"] == 0
-    # The inherited wrapper has not entered its cleanup block: this private
-    # object is discarded. Pending normals/partial clocks do not imply rollback.
-    assert optimizer._protected is not None
+    # A failed base update is not rolled back (partial tensors/clocks above),
+    # but its pending normals are aborted so the next bind/step can proceed.
+    assert optimizer._protected is None
     assert optimizer.direction_blend_stats["conflict_steps"] == 0
 
 

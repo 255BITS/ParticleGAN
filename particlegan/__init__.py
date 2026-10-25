@@ -35,6 +35,7 @@ from .coulomb_prior import CoulombPriorRegularizer
 from .sigreg import SIGReg
 from .initial_mmd import InitialMMDRegularizer
 from .bispf import (
+    BISPFGates,
     BISPFCriticAdam,
     BISPFCriticPenalty,
     BISPFEngine,
@@ -59,7 +60,7 @@ __all__ = [
     "ParticlePrior", "MoGParticlePrior", "calibrate_mog_sigma", "GaussianPrior", "GANLoss",
     "CoulombPriorRegularizer", "ParticleRegularizer", "InitialMMDRegularizer", "SIGReg",
     "StratifiedBlueNoisePrior", "SBNPPriorRegularizer", "ContinuousThermalCooler", "BISPFEngine", "BISPFLossAdapter",
-    "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss",
+    "BISPFStepRecord", "BISPFCriticAdam", "BISPFCriticPenalty", "SinkhornRelativisticLoss", "BISPFGates",
     "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "DEFAULT_RECIPE", "Recipe", "NetworkLRTransition", "DataDriftController", "get_recipe", "get_recipe_fields", "learning_rate_scale", "learning_rate_scales", "scale_learning_rates", "GANTrainer", "InputNoise",
     "BatchDistanceDiscriminator", "LinearSkipDiscriminator",

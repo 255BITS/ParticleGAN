@@ -9,8 +9,9 @@ Implements the four time-invariant pillars of BISPF:
 from __future__ import annotations
 
 from copy import copy
+from dataclasses import dataclass, fields as _dataclass_fields
 import math
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, Mapping, Tuple
 
 import torch
 from torch import nn
@@ -22,6 +23,8 @@ from .k3p import CriticPenalty as _K3PCriticPenalty, K3PCriticAdam, _first_outpu
 from .moment_tether import REFERENCE_NAMES, capture_initial_moments
 
 __all__ = [
+    "BISPFGates",
+    "bind_thermal_source",
     "StratifiedBlueNoisePrior",
     "SBNPPriorRegularizer",
     "sbnp_regularization_loss",
@@ -39,6 +42,252 @@ _PHI1 = 0.6180339887498949  # (sqrt(5) - 1) / 2
 _PHI2 = 0.3660254037844386  # (sqrt(3) - 1) / 2
 
 
+@dataclass(frozen=True)
+class BISPFGates:
+    """Every task-shape and step-count gate used by the BISPF components.
+
+    BISPF selects some of its behavior from the shapes it sees (input rank and
+    dimension, batch sizes, latent-table size) and from the critic-penalty call
+    count. Each regime is declared here as an ``<name>_enabled`` switch plus
+    its thresholds and constants. The defaults reproduce the historical,
+    previously hard-coded behavior bit for bit. ``Recipe.bispf_shape_gates`` and
+    ``Recipe.bispf_gate_overrides`` declare a recipe's values.
+
+    ``shape_gates=False`` is the master switch for a pure global recipe. It
+    disables every regime below, so each component takes the branch it takes
+    for shapes outside all special regimes. In that branch:
+
+    * the critic penalty uses chords, RMS (``sqrt(dim)``) gradient-norm units,
+      the generic cooler query, the declared ``lambda_floor``, ``kappa`` and
+      ``gamma_gauge``, and no curvature term;
+    * the generator loss has no dense rescale;
+    * the SBNP regularizer applies its declared ``weight``, ``k_nn``,
+      ``repel_weight`` and ``repel_margin``, has no isotropy terms, and
+      matches only off-diagonal covariance.
+
+    Gates that do not depend on shape or step, such as the thermal freeze
+    threshold, are unaffected.
+    """
+
+    shape_gates: bool = True
+
+    # Critic penalty: rank-2 inputs with dim >= simplex_min_dim are treated as
+    # discrete simplex codes (endpoint hard caps, no gauge, no chords, no cooling).
+    simplex_enabled: bool = True
+    simplex_min_dim: int = 170
+    # Critic penalty: inputs of rank >= 3 are treated as images (adaptive
+    # kappa, image floor/gauge, no cooling, no chords unless chord_blend is large).
+    image_enabled: bool = True
+    image_scale_ref: float = 4.899
+    image_scale_min: float = 0.15
+    image_kappa_base: float = 0.6
+    image_kappa_gain: float = 1.10
+    image_lambda_floor: float = 0.0005
+    image_gamma_gauge: float = 0.005
+    # Critic penalty: skip transport chords unless the input is rank 2 with
+    # dim <= chord_max_dim or chord_blend > chord_blend_override.
+    chord_bypass_enabled: bool = True
+    chord_max_dim: int = 64
+    chord_blend_override: float = 0.10
+    # Critic penalty: dim <= rms_exempt_max_dim uses raw (not sqrt(dim)-normalized)
+    # input-gradient norms.
+    rms_exempt_enabled: bool = True
+    rms_exempt_max_dim: int = 4
+    # Critic penalty: "continuous flow" regime (low-dim vectors, both batches
+    # >= min_batch, after min_call penalty calls) queries the cooler with the
+    # real batch size and its dimension.
+    continuous_flow_enabled: bool = True
+    continuous_flow_max_dim: int = 4
+    continuous_flow_min_batch: int = 32
+    continuous_flow_min_call: int = 500
+    # Critic penalty: within continuous flow, large batches query the cooler at
+    # dense_multimode_query_batch instead of the real batch size.
+    dense_multimode_enabled: bool = True
+    dense_multimode_min_batch: int = 1024
+    dense_multimode_min_dim: int = 2
+    dense_multimode_max_dim: int = 4
+    dense_multimode_min_call: int = 1000
+    dense_multimode_query_batch: int = 128
+    # Critic penalty: after late_thermal_min_call calls on dim == late_thermal_dim
+    # with the real batch in [min_real, max_real] and fake batch >= min_fake,
+    # force the thermal scale to late_thermal_scale when the quantile of both
+    # median-normalized nearest-neighbor distances is below the threshold
+    # (threshold_cold when the previous scale was < 1, else threshold_hot).
+    late_thermal_enabled: bool = True
+    late_thermal_min_call: int = 1650
+    late_thermal_dim: int = 2
+    late_thermal_min_real_batch: int = 64
+    late_thermal_max_real_batch: int = 512
+    late_thermal_min_fake_batch: int = 64
+    late_thermal_quantile: float = 0.95
+    late_thermal_threshold_hot: float = 0.050
+    late_thermal_threshold_cold: float = 0.065
+    late_thermal_scale: float = 1e-5
+    # Critic penalty: real batches smaller than small_batch_gauge_below cap the
+    # logit gauge at small_batch_gauge_cap.
+    small_batch_gauge_enabled: bool = True
+    small_batch_gauge_below: int = 16
+    small_batch_gauge_cap: float = 0.020
+    # Critic penalty: in continuous flow, ramp the gauge by gauge_ramp_extra over
+    # gauge_ramp_calls calls starting at gauge_ramp_start_call.
+    gauge_ramp_enabled: bool = True
+    gauge_ramp_start_call: int = 1000
+    gauge_ramp_calls: int = 200
+    gauge_ramp_extra: float = 0.150
+    # Critic penalty: in continuous flow with dim == curvature_dim, add a
+    # chord-gradient curvature penalty with this weight.
+    curvature_enabled: bool = True
+    curvature_dim: int = 1
+    curvature_weight: float = 0.25
+    # Thermal cooler: batches below cooler_reference_batch raise the cooling
+    # threshold by (cooler_batch_numerator / max(cooler_min_batch, b)) ** (1 / d),
+    # with d = clamp(dim, 1, cooler_max_dim).
+    cooler_tau_scaling_enabled: bool = True
+    cooler_reference_batch: int = 128
+    cooler_min_batch: int = 16
+    cooler_batch_numerator: float = 1024.0
+    cooler_max_dim: int = 4
+    # Thermal cooler: branches without a batch-specific query (not dense
+    # multimode, not continuous flow) read the scale at this batch size and dim.
+    cooler_default_query_batch: int = 128
+    cooler_default_query_dim: int = 2
+    # Generator loss: fake batches >= min_batch with a thermal scale s below
+    # max_scale scale the generator-loss gradient by
+    # clamp(s / sqrt(1 - s^2) * eps_smooth, 1e-6, 1).
+    dense_g_rescale_enabled: bool = True
+    dense_g_rescale_min_batch: int = 1024
+    dense_g_rescale_max_scale: float = 0.999
+    dense_g_rescale_eps_smooth: float = 0.001
+    # SBNP: rows with d <= max add d degrees of freedom to the minimum row count.
+    sbnp_dof_low_dim_enabled: bool = True
+    sbnp_dof_low_dim_max: int = 4
+    # SBNP: with a reference and d <= max_dim, n <= max_rows, match the full
+    # covariance (not only its off-diagonal).
+    sbnp_full_cov_enabled: bool = True
+    sbnp_full_cov_max_dim: int = 4
+    sbnp_full_cov_max_rows: int = 64
+    # SBNP: unanchored rows of this dim with more than `above` repulsion rows add
+    # a local k-NN covariance circularization term with this weight.
+    sbnp_local_iso_enabled: bool = True
+    sbnp_local_iso_dim: int = 2
+    sbnp_local_iso_above: int = 64
+    sbnp_local_iso_weight: float = 0.10
+    # SBNP: more than `above` repulsion rows (d >= 2) add a top-2 eigenvalue
+    # circularization term with this weight.
+    sbnp_active_iso_enabled: bool = True
+    sbnp_active_iso_above: int = 64
+    sbnp_active_iso_weight: float = 0.05
+    # SBNP: at most max_rows repulsion rows use this margin instead of repel_margin.
+    sbnp_small_margin_enabled: bool = True
+    sbnp_small_margin_max_rows: int = 64
+    sbnp_small_margin: float = 1.0
+    # SBNP "small latent" regime: n <= max_rows, d >= min_dim and total
+    # reference count <= max_reference (or no reference). Repulsion uses
+    # repel_weight * repel_mult, k_nn >= min_k_nn and this margin. When
+    # small_latent_weight is not None it is the weight applied instead of
+    # the regularizer's ``weight``.
+    sbnp_small_latent_enabled: bool = True
+    sbnp_small_latent_max_rows: int = 64
+    sbnp_small_latent_min_dim: int = 8
+    sbnp_small_latent_max_reference: int = 64
+    sbnp_small_latent_repel_mult: float = 25.0
+    sbnp_small_latent_min_k_nn: int = 10
+    sbnp_small_latent_margin: float = 1.0
+    sbnp_small_latent_weight: float | None = 1.0
+    # SBNP without a reference: a weight in (0, below) is replaced by this
+    # value. When disabled, the weight is applied as declared.
+    sbnp_unanchored_weight_enabled: bool = True
+    sbnp_unanchored_weight_below: float = 0.1
+    sbnp_unanchored_weight: float = 1.0
+    # SBNP: at a frozen thermal scale (<= 1e-4), d <= max passes the whole loss
+    # through with gradient scale s. Higher dimensions leave it unscaled.
+    sbnp_thermal_full_enabled: bool = True
+    sbnp_thermal_full_max_dim: int = 4
+
+    _NULLABLE = ("sbnp_small_latent_weight",)
+    _POSITIVE = ("gauge_ramp_calls", "cooler_min_batch", "cooler_reference_batch",
+                 "cooler_batch_numerator", "cooler_max_dim", "image_scale_ref",
+                 "image_scale_min", "dense_multimode_query_batch",
+                 "cooler_default_query_batch", "cooler_default_query_dim")
+
+    def __post_init__(self):
+        for spec in _dataclass_fields(self):
+            value, default = getattr(self, spec.name), spec.default
+            if isinstance(default, bool):
+                valid = type(value) is bool
+            elif spec.name in self._NULLABLE and value is None:
+                valid = True
+            elif isinstance(default, int):
+                valid = type(value) is int and value >= 0
+            else:
+                valid = (not isinstance(value, bool) and isinstance(value, (int, float))
+                         and math.isfinite(value) and value >= 0)
+            if valid and spec.name in self._POSITIVE:
+                valid = value > 0
+            if not valid:
+                raise ValueError(f"invalid BISPF gate {spec.name}={value!r}")
+        if not 0 <= self.late_thermal_quantile <= 1:
+            raise ValueError("BISPF gate late_thermal_quantile must be in [0, 1]")
+
+    @classmethod
+    def from_overrides(cls, shape_gates: bool = True, overrides: Any = ()) -> "BISPFGates":
+        """Build gates from a master switch and ``{name: value}`` or ``(name, value)`` pairs."""
+        values = dict(overrides.items() if isinstance(overrides, Mapping) else overrides)
+        known = {spec.name for spec in _dataclass_fields(cls)} - {"shape_gates"}
+        unknown = sorted(set(values) - known)
+        if unknown:
+            raise ValueError(f"unknown BISPF gates: {unknown}")
+        return cls(shape_gates=shape_gates, **values)
+
+    def active(self, name: str) -> bool:
+        """Whether regime ``name`` (its ``<name>_enabled`` switch) is on under the master switch."""
+        return self.shape_gates and getattr(self, f"{name}_enabled")
+
+
+_DEFAULT_GATES = BISPFGates()
+
+
+# Legacy process-wide thermal channel, keyed by device. A BISPF critic penalty
+# publishes its thermal scale here only while its record allows it
+# (``record.legacy_thermal_channel``, default True). Readers that are not bound
+# to a thermal source (an SBNP regularizer, SinkhornRelativisticLoss or
+# StratifiedBlueNoisePrior built outside GANTrainer) read the channel. This
+# keeps caller-owned loops on their historical trajectories. GANTrainer binds
+# its readers to its own critic record with ``bind_thermal_source`` and
+# switches publishing off, so trainers in one process do not interact.
+_LEGACY_THERMAL_CHANNEL: Dict[torch.device, float] = {}
+# Historical name of the same dict. policy.py, whose bytes are bound by
+# qualified Forge task sources, snapshots it around validation probes.
+_LAST_THERMAL_SCALE = _LEGACY_THERMAL_CHANNEL
+
+
+def _publish_thermal(record: Any, device: torch.device, scale: float) -> None:
+    record._thermal_scale = scale
+    if getattr(record, "legacy_thermal_channel", True):
+        _LEGACY_THERMAL_CHANNEL[device] = scale
+
+
+def _read_thermal(source: Any, device: torch.device, default: float = 1.0) -> float:
+    if source is not None:
+        return float(getattr(source, "_thermal_scale", 1.0))
+    return float(_LEGACY_THERMAL_CHANNEL.get(device, default))
+
+
+def bind_thermal_source(record: Any, *readers: Any) -> None:
+    """Bind thermal readers to one critic record and take that record off the legacy channel.
+
+    ``record`` is the critic optimizer's ``record``, whose ``_thermal_scale``
+    the BISPF critic penalty updates and the optimizer checkpoints. Each reader
+    with a ``thermal_source`` attribute (SBNP regularizer, Sinkhorn loss,
+    StratifiedBlueNoisePrior) then reads that record instead of the
+    process-wide legacy channel.
+    """
+    record.legacy_thermal_channel = False
+    for reader in readers:
+        if reader is not None and hasattr(reader, "thermal_source"):
+            reader.thermal_source = record
+
+
 def sbnp_regularization_loss(
     z: torch.Tensor,
     *,
@@ -50,14 +299,22 @@ def sbnp_regularization_loss(
     repel_margin: float = 0.25,
     repel_max_samples: int = 1024,
     generator: torch.Generator | None = None,
+    dof_low_dim_max: int = 4,
 ) -> torch.Tensor:
-    """Variance/covariance whitening plus scale-free k-NN log-repulsion on latent rows."""
+    """Variance/covariance whitening plus scale-free k-NN log-repulsion on latent rows.
+
+    Rows with ``n <= 2 * k_nn`` (plus ``d`` when ``d <= dof_low_dim_max``) return
+    zero. The default 4 is the historical hard-coded gate; 0 disables the
+    low-dimension term.
+    """
     if weight == 0.0 or not len(z):
         return z[:0].sum()
     if z.ndim != 2 or not z.shape[1]:
         raise ValueError("particles must have shape [batch, positive latent dimension]")
     n, d = z.shape
-    min_dof = 2 * k_nn + (d if d <= 4 else 0)
+    if type(dof_low_dim_max) is not int or dof_low_dim_max < 0:
+        raise ValueError("dof_low_dim_max must be a non-negative integer")
+    min_dof = 2 * k_nn + (d if d <= dof_low_dim_max else 0)
     if n <= min_dof:
         return z[:0].sum()
 
@@ -103,7 +360,28 @@ def sbnp_regularization_loss(
 
 
 class SBNPPriorRegularizer(nn.Module):
-    """Recipe-owned Stratified Blue-Noise Prior regularizer (``prior_regularizer='sbnp'``)."""
+    """Recipe-owned Stratified Blue-Noise Prior regularizer (``prior_regularizer='sbnp'``).
+
+    The loss is ``w * (mean/variance/covariance moments + r * repulsion
+    + isotropy terms)``. ``w`` is the declared ``weight`` unless one of
+    these declared shape regimes in ``gates`` (``BISPFGates``) applies:
+
+    * small latent (``sbnp_small_latent_*``): ``w = sbnp_small_latent_weight``
+      (default 1.0) when that value is not None. Repulsion is multiplied by
+      ``sbnp_small_latent_repel_mult`` (25) and uses ``k_nn >= 10`` and
+      margin 1.
+    * unanchored (no initial-moment reference, ``sbnp_unanchored_weight_*``):
+      a weight in ``(0, 0.1)`` becomes ``sbnp_unanchored_weight`` (1.0).
+
+    These defaults reproduce the historical behavior. With
+    ``BISPFGates(shape_gates=False)``, or with these regimes disabled, the
+    declared ``weight`` is the weight applied. ``effective_weight`` reports the
+    weight applied to a row batch.
+
+    ``thermal_source`` (usually the critic optimizer's ``record``, bound by
+    ``bind_thermal_source``) supplies the critic's thermal scale. When it is
+    unbound, the scale comes from the legacy process channel.
+    """
 
     def __init__(
         self,
@@ -116,8 +394,14 @@ class SBNPPriorRegularizer(nn.Module):
         repel_weight: float = 0.05,
         repel_margin: float = 0.50,
         repel_max_samples: int = 1024,
+        gates: BISPFGates | None = None,
+        thermal_source: Any = None,
     ) -> None:
         super().__init__()
+        if gates is not None and not isinstance(gates, BISPFGates):
+            raise TypeError("gates must be a BISPFGates instance")
+        self.gates = _DEFAULT_GATES if gates is None else gates
+        self.thermal_source = thermal_source
         for name, value, strict in (
             ("weight", weight, False),
             ("target_std", target_std, True),
@@ -165,13 +449,42 @@ class SBNPPriorRegularizer(nn.Module):
         )
         return mean, scatter / (count - 1).clamp_min(1), int(count.item())
 
+    def _min_dof(self, d: int) -> int:
+        gates = self.gates
+        low_dim = gates.active("sbnp_dof_low_dim") and d <= gates.sbnp_dof_low_dim_max
+        return 2 * self.k_nn + (d if low_dim else 0)
+
+    def _is_small_latent(self, n: int, d: int) -> bool:
+        gates = self.gates
+        return (gates.active("sbnp_small_latent") and n <= gates.sbnp_small_latent_max_rows
+                and d >= gates.sbnp_small_latent_min_dim
+                and (not self.references or sum(getattr(r, "moment_tether_count", 0) for r in self.references)
+                     <= gates.sbnp_small_latent_max_reference))
+
+    def _applied_weight(self, small_latent: bool) -> float:
+        gates = self.gates
+        if small_latent and gates.sbnp_small_latent_weight is not None:
+            return float(gates.sbnp_small_latent_weight)
+        if (not self.references and gates.active("sbnp_unanchored_weight")
+                and 0.0 < self.weight < gates.sbnp_unanchored_weight_below):
+            return float(gates.sbnp_unanchored_weight)
+        return self.weight
+
+    def effective_weight(self, rows: torch.Tensor) -> float:
+        """The loss weight ``forward(rows)`` applies (declared weight or a declared regime weight)."""
+        if self.weight == 0.0:
+            return 0.0
+        n, d = rows.shape
+        return self._applied_weight(self._is_small_latent(n, d))
+
     def forward(self, rows: torch.Tensor) -> torch.Tensor:
         if rows.ndim != 2 or not rows.shape[1]:
             raise ValueError("particles must have shape [batch, positive latent dimension]")
         if self.weight == 0.0 or not len(rows):
             return rows[:0].sum()
+        gates = self.gates
         n, d = rows.shape
-        min_dof = 2 * self.k_nn + (d if d <= 4 else 0)
+        min_dof = self._min_dof(d)
 
         if self.references:
             initial_mean, initial_covariance, total_n = self._reference_moments()
@@ -199,10 +512,12 @@ class SBNPPriorRegularizer(nn.Module):
         std = (centered.pow(2).mean(0) + self.eps).sqrt()
         var_loss = F.relu(target_sigma - std).pow(2).mean()
 
-        # 2. Covariance loss: capacity-conditioned covariance
+        # 2. Covariance loss: full covariance in the declared small anchored
+        # regime (sbnp_full_cov_*), otherwise off-diagonal decorrelation.
         if d > 1:
             cov = (centered.T @ centered) / max(n - 1, 1)
-            if self.references and d <= 4 and n <= 64:
+            if (self.references and gates.active("sbnp_full_cov")
+                    and d <= gates.sbnp_full_cov_max_dim and n <= gates.sbnp_full_cov_max_rows):
                 cov_diff = cov - target_cov
                 cov_loss = (cov_diff.pow(2) / (target_var.unsqueeze(0) * target_var.unsqueeze(1) + 1e-6)).sum()
             else:
@@ -215,10 +530,12 @@ class SBNPPriorRegularizer(nn.Module):
         m_sub = min(n, self.repel_max_samples)
         z_sub = rows[(torch.arange(m_sub, device=rows.device) * n) // m_sub] if m_sub < n else rows
 
-        # 4. Scale-free Local Covariance Circularization (Isotropy)
-        # Circularizes local cluster covariance without imposing global centripetal forces
+        # 4. Scale-free Local Covariance Circularization (Isotropy), declared
+        # by sbnp_local_iso_*: circularizes local cluster covariance without
+        # imposing global centripetal forces.
         local_iso_loss = rows.new_zeros(())
-        if d == 2 and not self.references and m_sub > 64:
+        if (gates.active("sbnp_local_iso") and d == gates.sbnp_local_iso_dim and not self.references
+                and m_sub > gates.sbnp_local_iso_above):
             with torch.no_grad():
                 dists_sub = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
                 eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
@@ -231,18 +548,25 @@ class SBNPPriorRegularizer(nn.Module):
             A = M - M_iso
             local_iso_loss = (A.pow(2).sum(dim=(-2, -1)) / ((tr_M.squeeze(-1).squeeze(-1) / d) + 1e-6).pow(2)).mean()
 
-        # 5. Active 2D plane circularization on top-2 eigenvalues of local covariance
+        # 5. Active 2D plane circularization on top-2 eigenvalues (sbnp_active_iso_*)
         active_iso_loss = rows.new_zeros(())
-        if d >= 2 and m_sub > 64:
+        if gates.active("sbnp_active_iso") and d >= 2 and m_sub > gates.sbnp_active_iso_above:
             row_centered = z_sub - z_sub.mean(dim=0, keepdim=True)
             cov_mat = (row_centered.T @ row_centered) / max(1, m_sub - 1)
             eigs = torch.linalg.eigvalsh(cov_mat)
             l1, l2 = eigs[-1], eigs[-2]
-            active_iso_loss = 0.05 * (l1 - l2).pow(2) / (l1 + l2 + 1e-6).pow(2)
+            active_iso_loss = gates.sbnp_active_iso_weight * (l1 - l2).pow(2) / (l1 + l2 + 1e-6).pow(2)
 
-        is_small_latent = (n <= 64 and d >= 8 and (not self.references or sum(getattr(r, "moment_tether_count", 0) for r in self.references) <= 64))
-        eff_k_nn = min(m_sub - 1, max(self.k_nn, 10)) if is_small_latent else self.k_nn
-        eff_repel_weight = (self.repel_weight * 25.0) if is_small_latent else self.repel_weight
+        is_small_latent = self._is_small_latent(n, d)
+        if is_small_latent:
+            eff_k_nn = min(m_sub - 1, max(self.k_nn, gates.sbnp_small_latent_min_k_nn))
+            eff_repel_weight = self.repel_weight * gates.sbnp_small_latent_repel_mult
+            effective_margin = gates.sbnp_small_latent_margin
+        else:
+            eff_k_nn = self.k_nn
+            eff_repel_weight = self.repel_weight
+            small_margin = gates.active("sbnp_small_margin") and m_sub <= gates.sbnp_small_margin_max_rows
+            effective_margin = gates.sbnp_small_margin if small_margin else self.repel_margin
         k = min(eff_k_nn, m_sub - 1)
         if k > 0 and eff_repel_weight > 0.0:
             sq_dist = torch.cdist(z_sub, z_sub, p=2.0).pow(2)
@@ -251,30 +575,38 @@ class SBNPPriorRegularizer(nn.Module):
                 r_med_sq = torch.median(sq_dist[off_mask]).clamp_min(1e-12)
             eye_inf = torch.eye(m_sub, device=rows.device, dtype=rows.dtype) * 1e9
             knn_sq_dist, _ = torch.topk(sq_dist + eye_inf, k=k, dim=1, largest=False)
-            effective_margin = 1.00 if is_small_latent else (1.0 if m_sub <= 64 else self.repel_margin)
             norm_sq_dist = knn_sq_dist / (effective_margin * r_med_sq)
             repel_loss = F.softplus(-torch.log(norm_sq_dist.clamp_min(1e-12))).mean()
         else:
             repel_loss = rows.new_zeros(())
 
         global_moments = mean_error + var_loss + cov_loss
-        s = float(_LAST_THERMAL_SCALE.get(rows.device, 1.0))
+        scale_w = self._applied_weight(is_small_latent)
+        s = _read_thermal(self.thermal_source, rows.device)
+        local_iso_weight = gates.sbnp_local_iso_weight
         if s <= 1e-4:
-            base_loss = global_moments + eff_repel_weight * repel_loss + 0.10 * local_iso_loss + active_iso_loss
-            scale_w = 1.0 if is_small_latent else (self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight))
+            # Frozen thermal state: low-dim rows (sbnp_thermal_full_*) pass the
+            # whole loss through with gradient scale s; others are unscaled.
+            base_loss = global_moments + eff_repel_weight * repel_loss + local_iso_weight * local_iso_loss + active_iso_loss
             out = scale_w * base_loss
-            if d <= 4 and out.requires_grad:
+            if (gates.active("sbnp_thermal_full") and d <= gates.sbnp_thermal_full_max_dim
+                    and out.requires_grad):
                 out = out * s + out.detach() * (1.0 - s)
             return out
         if global_moments.requires_grad and s < 1.0:
             global_moments = global_moments * s + global_moments.detach() * (1.0 - s)
-        base_loss = global_moments + eff_repel_weight * repel_loss + 0.10 * local_iso_loss + active_iso_loss
-        scale_w = 1.0 if is_small_latent else (self.weight if self.references else (1.0 if (0.0 < self.weight < 0.1) else self.weight))
+        base_loss = global_moments + eff_repel_weight * repel_loss + local_iso_weight * local_iso_loss + active_iso_loss
         return scale_w * base_loss
 
 
 class StratifiedBlueNoisePrior(nn.Module):
-    """Particle prior with epoch-stratified sampling, local k-NN jitter, and blue-noise repulsion."""
+    """Particle prior with epoch-stratified sampling, local k-NN jitter, and blue-noise repulsion.
+
+    Random draws use the caller's ``generator`` (construction, permutation,
+    evaluation indices and jitter). ``generator=None`` draws from the global
+    RNG; pass explicit streams for isolated training. Recipes do not build this
+    prior.
+    """
 
     def __init__(
         self,
@@ -295,8 +627,11 @@ class StratifiedBlueNoisePrior(nn.Module):
         var_weight: float = 1.0,
         cov_weight: float = 1.0,
         seed: int | None = None,
+        thermal_source: Any = None,
     ) -> None:
         super().__init__()
+        # Critic thermal state (bind_thermal_source); None reads the legacy channel.
+        self.thermal_source = thermal_source
         if num_particles <= 0 or z_dim <= 0:
             raise ValueError("num_particles and z_dim must be positive")
         if knn_k is not None:
@@ -376,7 +711,7 @@ class StratifiedBlueNoisePrior(nn.Module):
         z_batch = self.z[idx]
 
         if self.training and self.jitter_std > 0.0:
-            t_scale = float(_LAST_THERMAL_SCALE.get(self.z.device, self.thermal_ratio.item()))
+            t_scale = _read_thermal(self.thermal_source, self.z.device, float(self.thermal_ratio.item()))
             t_ratio = min(float(self.thermal_ratio.item()), t_scale)
             if t_ratio > 1e-5 and batch_size > 1:
                 with torch.no_grad():
@@ -474,7 +809,18 @@ def _cloud_scale_factor(x_real: torch.Tensor, x_fake: torch.Tensor, data_scale: 
 
 
 class BISPFEngine(nn.Module):
-    """Stateful engine implementing SRpGAN, EBI-TCR, Zero-Mean Gauge, and RDTN."""
+    """Stateful engine implementing SRpGAN, EBI-TCR, Zero-Mean Gauge, and RDTN.
+
+    ``ot_target_column_normalize`` selects the OT barycentric target in
+    ``g_step``. False (legacy) uses ``B * Pi^T @ x_real``. Its row weights are
+    Sinkhorn column masses, about 0.94-1.08 after 5 iterations rather than
+    exactly 1, so the target is pulled toward the origin and is not
+    translation-equivariant. True divides each row by its mass, giving the
+    barycenter ``Pi^T @ x_real / Pi.sum(0)``, which is translation-equivariant.
+
+    ``d_step`` draws instance noise, chord matches and chord positions from its
+    ``generator`` argument. ``BISPFLossAdapter`` supplies a declared stream.
+    """
 
     def __init__(
         self,
@@ -493,8 +839,12 @@ class BISPFEngine(nn.Module):
         *,
         grad_cap_c: float | None = None,
         sigma_0: float | None = None,
+        ot_target_column_normalize: bool = False,
     ) -> None:
         super().__init__()
+        if type(ot_target_column_normalize) is not bool:
+            raise TypeError("ot_target_column_normalize must be a boolean")
+        self.ot_target_column_normalize = ot_target_column_normalize
         if grad_cap_c is not None:
             grad_cap = float(grad_cap_c)
         if sigma_0 is not None:
@@ -643,6 +993,18 @@ class BISPFEngine(nn.Module):
         }
         return total_loss, stats
 
+    def _barycentric_target(self, Pi: torch.Tensor, x_r_flat: torch.Tensor) -> torch.Tensor:
+        weights = Pi.shape[1] * Pi.t()
+        if self.ot_target_column_normalize:
+            weights = weights / weights.sum(dim=1, keepdim=True).clamp_min(1e-12)
+        return torch.matmul(weights, x_r_flat)
+
+    @torch.no_grad()
+    def ot_target(self, x_real: torch.Tensor, x_fake: torch.Tensor) -> torch.Tensor:
+        """The flattened OT barycentric target that ``g_step`` pulls ``x_fake`` toward."""
+        Pi = self._sinkhorn_coupling(x_real.detach(), x_fake.detach())[0]
+        return self._barycentric_target(Pi, x_real.detach().reshape(x_real.shape[0], -1))
+
     def g_step(
         self,
         D: nn.Module,
@@ -668,7 +1030,7 @@ class BISPFEngine(nn.Module):
         if self.lambda_ot > 0.0:
             x_r_flat = x_real.detach().reshape(B, -1)
             x_f_flat = x_fake.reshape(B, -1)
-            x_target = torch.matmul(B * Pi.t(), x_r_flat)
+            x_target = self._barycentric_target(Pi, x_r_flat)
             ot_loss = 0.5 * self.lambda_ot * (x_f_flat - x_target).pow(2).sum(dim=1).mean() / med_sq_dist
         else:
             ot_loss = adv_loss.new_zeros(())
@@ -688,16 +1050,58 @@ class BISPFEngine(nn.Module):
 
 
 class BISPFLossAdapter:
-    """Drop-in loss adapter for BISPFEngine."""
+    """Drop-in loss adapter for BISPFEngine.
 
-    def __init__(self, engine: BISPFEngine) -> None:
+    ``d_loss`` passes a training-noise generator to ``BISPFEngine.d_step``, so
+    instance noise and chord draws never use the global RNG. The stream is the
+    ``generator`` argument of ``d_loss``, else the adapter's ``generator``.
+    Without either, the adapter creates its own stream on the batch device,
+    seeded with ``seed``. Checkpoint it with ``state_dict()``.
+    """
+
+    def __init__(self, engine: BISPFEngine, *, generator: torch.Generator | None = None, seed: int = 0) -> None:
+        if type(seed) is not int:
+            raise TypeError("seed must be an integer")
         self.engine = engine
+        self.generator = generator
+        self.seed = seed
         self.last_d_stats: Dict[str, float] = {}
         self.last_g_stats: Dict[str, float] = {}
 
-    def d_loss(self, D: nn.Module, x_real: torch.Tensor, x_fake: torch.Tensor) -> torch.Tensor:
-        loss, self.last_d_stats = self.engine.d_step(D, x_real, x_fake)
+    def _training_generator(self, device: torch.device) -> torch.Generator:
+        if self.generator is None:
+            self.generator = torch.Generator(device=device).manual_seed(self.seed)
+        return self.generator
+
+    def d_loss(
+        self,
+        D: nn.Module,
+        x_real: torch.Tensor,
+        x_fake: torch.Tensor,
+        *,
+        generator: torch.Generator | None = None,
+    ) -> torch.Tensor:
+        stream = self._training_generator(x_real.device) if generator is None else generator
+        loss, self.last_d_stats = self.engine.d_step(D, x_real, x_fake, generator=stream)
         return loss
+
+    def state_dict(self) -> Dict[str, Any]:
+        if self.generator is None:
+            return {"seed": self.seed, "device": None, "generator": None}
+        return {"seed": self.seed, "device": str(self.generator.device), "generator": self.generator.get_state()}
+
+    def load_state_dict(self, state: Dict[str, Any]) -> None:
+        if (not isinstance(state, dict) or set(state) != {"seed", "device", "generator"}
+                or type(state["seed"]) is not int):
+            raise ValueError("invalid BISPFLossAdapter state")
+        self.seed = state["seed"]
+        if state["generator"] is None:
+            self.generator = None
+            return
+        device = torch.device(state["device"])
+        if self.generator is None or self.generator.device != device:
+            self.generator = torch.Generator(device=device)
+        self.generator.set_state(state["generator"])
 
     def g_loss(
         self,
@@ -764,7 +1168,7 @@ class _BISPFObserverStepRecord(CriticStepRecord):
         self._last_d_logits = None
 
     def restore_device_state(self, device):
-        _LAST_THERMAL_SCALE[device] = self._thermal_scale
+        _publish_thermal(self, device, self._thermal_scale)
 
 
 class BISPFStepRecord(CriticStepRecord):
@@ -856,10 +1260,25 @@ class BISPFStepRecord(CriticStepRecord):
 class ContinuousThermalCooler:
     """Continuous residual-driven thermal cooler for basin settling and autonomous re-heating.
 
-    Computes linearized within-basin velocity scaling inverting DualNorm rownorm:
-        u = min(1.0, ema_residual / tau_cooling)
-        s_thermal = (v / sqrt(1 - v^2 + 1e-12)) * eps_smooth
-    where ema_residual tracks the scale-free nearest-neighbor residual delta_nn.
+    ``update`` tracks ``ema_residual``, the scale-free nearest-neighbor
+    Sinkhorn residual ``delta_nn``. The EMA uses fast attack: a residual above
+    the current EMA replaces it immediately. ``scale_for(batch_size, dim)``
+    returns a smoothstep of the cooling ratio::
+
+        tau = effective_tau(batch_size, dim)
+        u   = clamp(ema_residual / tau, 0, 1)
+        s   = s_min + (1 - s_min) * (3 u^2 - 2 u^3)        # in [s_min, 1]
+
+    ``effective_tau`` is ``tau_cooling``, raised for small batches when
+    ``tau_batch_scaling`` is on: for ``b = max(min_batch, batch_size)`` below
+    ``reference_batch`` it multiplies by ``(batch_numerator / b) ** (1 / d)``
+    with ``d = clamp(dim, 1, max_dim)``. ``scale`` queries
+    ``scale_for(default_batch_size, default_dim)``. The defaults (128, 2)
+    equal ``reference_batch``, so ``scale`` uses ``tau_cooling`` unscaled.
+
+    The rownorm linearization ``s / sqrt(1 - s^2) * eps_smooth`` is not part of
+    the cooler. It is the generator-loss dense rescale declared by
+    ``BISPFGates.dense_g_rescale_*``.
     """
 
     def __init__(
@@ -868,24 +1287,44 @@ class ContinuousThermalCooler:
         s_min: float = 1e-5,
         ema_decay: float = 0.95,
         initial_residual: float = 1.0,
-        eps_smooth: float = 0.001,
+        *,
+        tau_batch_scaling: bool = True,
+        reference_batch: int = 128,
+        min_batch: int = 16,
+        batch_numerator: float = 1024.0,
+        max_dim: int = 4,
+        default_batch_size: int = 128,
+        default_dim: int = 2,
     ) -> None:
-        for name, val in (("tau_cooling", tau_cooling), ("s_min", s_min), ("ema_decay", ema_decay), ("eps_smooth", eps_smooth)):
+        for name, val in (("tau_cooling", tau_cooling), ("s_min", s_min), ("ema_decay", ema_decay),
+                          ("batch_numerator", batch_numerator)):
             if isinstance(val, bool) or not isinstance(val, (int, float)) or not math.isfinite(val) or val <= 0:
                 raise ValueError(f"{name} must be a finite positive number")
         if s_min > 1.0:
             raise ValueError("s_min must be <= 1.0")
         if ema_decay >= 1.0:
             raise ValueError("ema_decay must be < 1.0")
+        if type(tau_batch_scaling) is not bool:
+            raise TypeError("tau_batch_scaling must be a boolean")
+        for name, val in (("reference_batch", reference_batch), ("min_batch", min_batch), ("max_dim", max_dim),
+                          ("default_batch_size", default_batch_size), ("default_dim", default_dim)):
+            if type(val) is not int or val < 1:
+                raise ValueError(f"{name} must be a positive integer")
         self.tau_cooling = float(tau_cooling)
         self.s_min = float(s_min)
         self.ema_decay = float(ema_decay)
-        self.eps_smooth = float(eps_smooth)
+        self.tau_batch_scaling = tau_batch_scaling
+        self.reference_batch = reference_batch
+        self.min_batch = min_batch
+        self.batch_numerator = float(batch_numerator)
+        self.max_dim = max_dim
+        self.default_batch_size = default_batch_size
+        self.default_dim = default_dim
         self.ema_residual = float(initial_residual)
         self.initialized = False
 
     def update(self, batch_residual: float | torch.Tensor) -> float:
-        """Update EMA residual with a new batch residual observation and return s_thermal."""
+        """Update EMA residual with a new batch residual observation and return ``scale``."""
         res = float(batch_residual.item()) if isinstance(batch_residual, torch.Tensor) else float(batch_residual)
         if not self.initialized:
             self.ema_residual = res
@@ -898,13 +1337,17 @@ class ContinuousThermalCooler:
         return self.scale
 
     def effective_tau(self, batch_size: int = 128, dim: int = 2) -> float:
-        """Compute dimension- and batch-scale invariant cooling threshold."""
-        d = max(1, min(dim, 4))
-        b = max(16, batch_size)
-        scale = 1.0 if b >= 128 else ((1024.0 / b) if d == 1 else (1024.0 / b) ** (1.0 / d))
+        """Cooling threshold for a batch size and dimension (see the class docstring)."""
+        if not self.tau_batch_scaling:
+            return self.tau_cooling
+        d = max(1, min(dim, self.max_dim))
+        b = max(self.min_batch, batch_size)
+        ratio = self.batch_numerator / b
+        scale = 1.0 if b >= self.reference_batch else (ratio if d == 1 else ratio ** (1.0 / d))
         return self.tau_cooling * scale
 
     def scale_for(self, batch_size: int = 128, dim: int = 2) -> float:
+        """Smoothstep thermal scale in ``[s_min, 1]`` (see the class docstring)."""
         tau = self.effective_tau(batch_size=batch_size, dim=dim)
         if tau <= 0.0:
             return 1.0
@@ -918,8 +1361,8 @@ class ContinuousThermalCooler:
 
     @property
     def scale(self) -> float:
-        """Return the current continuous thermal scaling factor s_thermal in [s_min, 1.0]."""
-        return self.scale_for(batch_size=128, dim=2)
+        """Thermal scale at the declared default query ``(default_batch_size, default_dim)``."""
+        return self.scale_for(batch_size=self.default_batch_size, dim=self.default_dim)
 
     def apply_straight_through(self, tensor: torch.Tensor, scale: float | None = None) -> torch.Tensor:
         """Apply straight-through gradient scaling: backward gradient is scaled by scale (or self.scale) while forward pass is identity."""
@@ -932,27 +1375,32 @@ class ContinuousThermalCooler:
         """Apply straight-through gradient scaling with current cooler scale."""
         return self.apply_straight_through(tensor)
 
+    _DECLARED = ("tau_batch_scaling", "reference_batch", "min_batch", "batch_numerator", "max_dim",
+                 "default_batch_size", "default_dim")
+
     def state_dict(self) -> Dict[str, Any]:
         return {
             "tau_cooling": self.tau_cooling,
             "s_min": self.s_min,
             "ema_decay": self.ema_decay,
             "ema_residual": self.ema_residual,
-            "eps_smooth": self.eps_smooth,
             "initialized": self.initialized,
+            **{name: getattr(self, name) for name in self._DECLARED},
         }
 
     def load_state_dict(self, state: Dict[str, Any]) -> None:
+        """Restore cooler state. The declared gate fields are constructor-owned: a state that
+        records a different value is rejected, and older states may omit them. Older states may
+        carry the removed, never-used ``eps_smooth``."""
+        for name in self._DECLARED:
+            if name in state and state[name] != getattr(self, name):
+                raise ValueError(f"cooler state {name}={state[name]!r} does not match the declared "
+                                 f"{getattr(self, name)!r}")
         self.tau_cooling = float(state["tau_cooling"])
         self.s_min = float(state["s_min"])
         self.ema_decay = float(state["ema_decay"])
         self.ema_residual = float(state["ema_residual"])
-        if "eps_smooth" in state:
-            self.eps_smooth = float(state["eps_smooth"])
         self.initialized = bool(state["initialized"])
-
-
-_LAST_THERMAL_SCALE: Dict[torch.device, float] = {}
 
 
 def _bispf_critic_forward_hook(module: nn.Module, args: Tuple[Any, ...], output: Any) -> Any:
@@ -980,7 +1428,8 @@ def _attach_critic_input_hook(critic: nn.Module, record: CriticStepRecord) -> No
     """Attach a lightweight forward hook so SinkhornRelativisticLoss can read input coordinates."""
     record._thermal_scale = 1.0
     record._in_penalty = False
-    _LAST_THERMAL_SCALE.clear()
+    if getattr(record, "legacy_thermal_channel", True):
+        _LEGACY_THERMAL_CHANNEL.clear()
     critic._bispf_record = record
     if getattr(critic, "_bispf_hook_registered", False):
         return
@@ -1016,11 +1465,16 @@ class BISPFCriticAdam(K3PCriticAdam):
     def load_state_dict(self, state_dict):
         super().load_state_dict(state_dict)
         device = self.param_groups[0]["params"][0].device
-        _LAST_THERMAL_SCALE[device] = self.record._thermal_scale
+        _publish_thermal(self.record, device, self.record._thermal_scale)
 
 
 class SinkhornRelativisticLoss(GANLoss):
-    """Scale-Free Sinkhorn Relativistic Pairing (SRpGAN) loss compatible with ``GANLoss``."""
+    """Scale-Free Sinkhorn Relativistic Pairing (SRpGAN) loss compatible with ``GANLoss``.
+
+    ``g_loss`` applies the declared dense rescale (``BISPFGates.dense_g_rescale_*``).
+    It reads the critic thermal scale from ``thermal_source`` (bound by
+    ``bind_thermal_source``), or from the legacy process channel when unbound.
+    """
 
     def __init__(
         self,
@@ -1030,12 +1484,18 @@ class SinkhornRelativisticLoss(GANLoss):
         sinkhorn_eps: float = 0.15,
         sinkhorn_iters: int = 5,
         record: BISPFStepRecord | None = None,
+        gates: BISPFGates | None = None,
+        thermal_source: Any = None,
     ) -> None:
         super().__init__("relativistic", labels=labels)
+        if gates is not None and not isinstance(gates, BISPFGates):
+            raise TypeError("gates must be a BISPFGates instance")
         self.loss = loss
         self.sinkhorn_eps = float(sinkhorn_eps)
         self.sinkhorn_iters = int(sinkhorn_iters)
         self.record = record
+        self.gates = _DEFAULT_GATES if gates is None else gates
+        self.thermal_source = thermal_source
 
     def _coords(self, real_logits: torch.Tensor, fake_logits: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         x_r = getattr(real_logits, "_bispf_input", None)
@@ -1071,10 +1531,13 @@ class SinkhornRelativisticLoss(GANLoss):
         b_r = r.shape[0]
         delta = r.unsqueeze(1) - f.unsqueeze(0)
         loss_val = (b_r * Pi * F.softplus(delta)).sum()
-        s_dense = float(_LAST_THERMAL_SCALE.get(fake_logits.device, 1.0))
+        gates = self.gates
+        s_dense = _read_thermal(self.thermal_source, fake_logits.device)
         b_f = fake_logits.shape[0]
-        if b_f >= 1024 and s_dense < 0.999:
-            s_v = max(1e-6, min(1.0, (s_dense / math.sqrt(max(1e-6, 1.0 - s_dense**2))) * 0.001))
+        if (gates.active("dense_g_rescale") and b_f >= gates.dense_g_rescale_min_batch
+                and s_dense < gates.dense_g_rescale_max_scale):
+            linearized = s_dense / math.sqrt(max(1e-6, 1.0 - s_dense**2))
+            s_v = max(1e-6, min(1.0, linearized * gates.dense_g_rescale_eps_smooth))
             loss_val = loss_val * s_v + loss_val.detach() * (1.0 - s_v)
         return loss_val
 
@@ -1085,7 +1548,14 @@ class SinkhornRelativisticLoss(GANLoss):
 
 
 class _BISPFPenaltyKernel:
-    """Internal EBI-TCR + Zero-Mean Logit Gauge kernel paired with ``CriticStepRecord``."""
+    """Internal EBI-TCR + Zero-Mean Logit Gauge kernel paired with ``CriticStepRecord``.
+
+    Shape- and step-conditioned branches (simplex/image inputs, chord bypass,
+    continuous-flow and dense cooling queries, the late 2-D thermal freeze,
+    gauge caps and ramps, the 1-D curvature term and cooler batch scaling) are
+    declared by ``gates`` (``BISPFGates``). Its defaults reproduce the
+    historical behavior.
+    """
 
     def __init__(
         self,
@@ -1105,7 +1575,11 @@ class _BISPFPenaltyKernel:
         s_min: float = 1e-5,
         thermal_decay: float = 0.95,
         record: CriticStepRecord | None = None,
+        gates: BISPFGates | None = None,
     ) -> None:
+        if gates is not None and not isinstance(gates, BISPFGates):
+            raise TypeError("gates must be a BISPFGates instance")
+        self.gates = _DEFAULT_GATES if gates is None else gates
         for name, val, pos in (
             ("coeff", coeff, False),
             ("kappa", kappa, False),
@@ -1152,6 +1626,13 @@ class _BISPFPenaltyKernel:
             tau_cooling=self.tau_cooling,
             s_min=self.s_min,
             ema_decay=self.thermal_decay,
+            tau_batch_scaling=self.gates.active("cooler_tau_scaling"),
+            reference_batch=self.gates.cooler_reference_batch,
+            min_batch=self.gates.cooler_min_batch,
+            batch_numerator=self.gates.cooler_batch_numerator,
+            max_dim=self.gates.cooler_max_dim,
+            default_batch_size=self.gates.cooler_default_query_batch,
+            default_dim=self.gates.cooler_default_query_dim,
         )
         self.record = BISPFStepRecord() if record is None else record
         if not hasattr(self.record, "ema_residual"):
@@ -1203,34 +1684,41 @@ class _BISPFPenaltyKernel:
         )
         self._observe_sinkhorn(float(res.item()), float(data_scale.item()), ema_decay=self.thermal_decay)
 
-        is_image_tensor = (x_real.ndim >= 3)
-        is_discrete_simplex = (x_real.ndim == 2 and dim >= 170)
-        # Evaluate transport chords for continuous low-dimensional vector flows (dim <= 64).
-        # Bypass chords for discrete categorical token codebooks and high-dimensional images
-        # when chord_blend is standard (<= 0.10), preventing manifold-blur distortion across
-        # non-convex visual boundaries while allowing explicit chord tests (chord_blend > 0.10).
-        use_chords = not is_discrete_simplex and (x_real.ndim == 2 and dim <= 64 or self.chord_blend > 0.10)
+        gates = self.gates
+        is_image_tensor = gates.active("image") and x_real.ndim >= 3
+        is_discrete_simplex = gates.active("simplex") and x_real.ndim == 2 and dim >= gates.simplex_min_dim
+        # Evaluate transport chords for continuous low-dimensional vector flows (dim <= chord_max_dim).
+        # The declared chord bypass skips chords for discrete categorical token codebooks and
+        # high-dimensional images when chord_blend is standard (<= chord_blend_override),
+        # preventing manifold-blur distortion across non-convex visual boundaries while
+        # allowing explicit chord tests (chord_blend > chord_blend_override).
+        use_chords = not is_discrete_simplex and (
+            not gates.active("chord_bypass")
+            or x_real.ndim == 2 and dim <= gates.chord_max_dim
+            or self.chord_blend > gates.chord_blend_override)
 
         is_continuous_flow = (
-            not is_discrete_simplex 
+            gates.active("continuous_flow")
+            and not is_discrete_simplex
             and not is_image_tensor
-            and 1 <= dim <= 4 
-            and b_r >= 32 
-            and b_f >= 32 
-            and call_idx >= 500
+            and 1 <= dim <= gates.continuous_flow_max_dim
+            and b_r >= gates.continuous_flow_min_batch
+            and b_f >= gates.continuous_flow_min_batch
+            and call_idx >= gates.continuous_flow_min_call
         )
         is_dense_multimode = (
-            is_continuous_flow
-            and b_r >= 1024
-            and b_f >= 1024
-            and 2 <= dim <= 4
-            and call_idx >= 1000
+            gates.active("dense_multimode")
+            and is_continuous_flow
+            and b_r >= gates.dense_multimode_min_batch
+            and b_f >= gates.dense_multimode_min_batch
+            and gates.dense_multimode_min_dim <= dim <= gates.dense_multimode_max_dim
+            and call_idx >= gates.dense_multimode_min_call
         )
         # Scale-invariant thermal cooler query
         if is_discrete_simplex or is_image_tensor:
             t_scale = 1.0
         elif is_dense_multimode and hasattr(self, "cooler"):
-            t_scale = self.cooler.scale_for(batch_size=128, dim=dim)
+            t_scale = self.cooler.scale_for(batch_size=gates.dense_multimode_query_batch, dim=dim)
         elif is_continuous_flow:
             t_scale = self.cooler.scale_for(batch_size=b_r, dim=dim) if hasattr(self, "cooler") else max(
                 1e-5, min(1.0, float(getattr(self.record, "ema_residual", 1.0)) / self.tau_cooling)
@@ -1238,22 +1726,26 @@ class _BISPFPenaltyKernel:
         else:
             t_scale = self.cooler.scale if hasattr(self, "cooler") else 1.0
 
-        if call_idx >= 1650 and dim == 2 and 64 <= b_r <= 512 and b_f >= 64:
+        if (gates.active("late_thermal") and call_idx >= gates.late_thermal_min_call
+                and dim == gates.late_thermal_dim
+                and gates.late_thermal_min_real_batch <= b_r <= gates.late_thermal_max_real_batch
+                and b_f >= gates.late_thermal_min_fake_batch):
             with torch.no_grad():
                 d2 = torch.cdist(x_real.detach().flatten(1), x_fake.detach().flatten(1), p=2.0).pow(2)
                 norm_d = (d2 / d2.median().clamp_min(1e-12)).sqrt()
-                r2f_95 = float(norm_d.min(dim=1).values.quantile(0.95).item())
-                f2r_95 = float(norm_d.min(dim=0).values.quantile(0.95).item())
+                r2f_q = float(norm_d.min(dim=1).values.quantile(gates.late_thermal_quantile).item())
+                f2r_q = float(norm_d.min(dim=0).values.quantile(gates.late_thermal_quantile).item())
                 prev_scale = float(getattr(self.record, "_thermal_scale", 1.0))
-                thresh = 0.065 if prev_scale < 1.0 else 0.050
-                if max(r2f_95, f2r_95) < thresh:
-                    t_scale = 1e-5
+                thresh = gates.late_thermal_threshold_cold if prev_scale < 1.0 else gates.late_thermal_threshold_hot
+                if max(r2f_q, f2r_q) < thresh:
+                    t_scale = gates.late_thermal_scale
 
-        self.record._thermal_scale = t_scale
-        _LAST_THERMAL_SCALE[x_real.device] = t_scale
+        _publish_thermal(self.record, x_real.device, t_scale)
 
-        # Dimension normalization for Born-Infeld gradient norm
-        scale_dim = 1.0 if (is_discrete_simplex or is_image_tensor or dim <= 4) else math.sqrt(dim)
+        # Dimension normalization for Born-Infeld gradient norm (raw norms in the declared
+        # rms_exempt low-dimensional regime)
+        rms_exempt = gates.active("rms_exempt") and dim <= gates.rms_exempt_max_dim
+        scale_dim = 1.0 if (is_discrete_simplex or is_image_tensor or rms_exempt) else math.sqrt(dim)
 
         if use_chords:
             # Stratified low-discrepancy Sinkhorn transport chords + Density-Directed Transport Bridge
@@ -1305,8 +1797,10 @@ class _BISPFPenaltyKernel:
 
         res_ratio = min(1.0, max(0.0, float(getattr(self.record, "ema_residual", 1.0))))
         if is_image_tensor:
-            img_scale = min(1.0, max(0.15, float(getattr(self.record, "ema_data_scale", 4.899)) / 4.899))
-            kappa_eff = (self.kappa / img_scale) * (0.6 + 1.10 * (1.0 - res_ratio))
+            ref_scale = gates.image_scale_ref
+            img_scale = min(1.0, max(gates.image_scale_min,
+                                     float(getattr(self.record, "ema_data_scale", ref_scale)) / ref_scale))
+            kappa_eff = (self.kappa / img_scale) * (gates.image_kappa_base + gates.image_kappa_gain * (1.0 - res_ratio))
         else:
             kappa_eff = self.kappa
 
@@ -1331,7 +1825,7 @@ class _BISPFPenaltyKernel:
             cap_real = F.softplus(norm_real - kappa_eff, beta=self.ebi_beta).pow(2).mean()
             cap_fake = F.softplus(norm_fake - kappa_eff, beta=self.ebi_beta).pow(2).mean()
 
-            eff_floor = 0.0005 if is_image_tensor else self.lambda_floor
+            eff_floor = gates.image_lambda_floor if is_image_tensor else self.lambda_floor
             curv_pen = x_real.new_zeros(())
 
             if use_chords:
@@ -1340,10 +1834,10 @@ class _BISPFPenaltyKernel:
                 floor_pen = 0.5 * eff_floor * ((sq_real.mean() + sq_fake.mean() + sq_chord.mean()) / (3.0 * dim))
                 cap_chord = F.softplus(norm_chord - kappa_eff, beta=self.ebi_beta).pow(2).mean()
                 cap_pen = 0.5 * self.lambda_cap * (cap_real + (1.0 - self.chord_blend) * cap_fake + self.chord_blend * cap_chord)
-                if is_continuous_flow and dim == 1:
+                if gates.active("curvature") and is_continuous_flow and dim == gates.curvature_dim:
                     g_r_matched = g_real.detach()[matched_real_idx]
                     g_target = (1.0 - alpha) * g_fake + alpha * g_r_matched
-                    curv_pen = 0.25 * (g_chord - g_target).flatten(1).pow(2).sum(dim=1).mean()
+                    curv_pen = gates.curvature_weight * (g_chord - g_target).flatten(1).pow(2).sum(dim=1).mean()
                 ebi_loss = floor_pen + cap_pen + curv_pen
             else:
                 norm_chord = 0.5 * (norm_real + norm_fake)
@@ -1356,12 +1850,13 @@ class _BISPFPenaltyKernel:
             self.record._last_d_logits = (d_r.detach(), d_f.detach())
             mean_logit = 0.5 * (d_r.mean() + d_f.mean())
             if is_image_tensor:
-                eff_gamma_gauge = 0.005
-            elif b_r < 16:
-                eff_gamma_gauge = min(self.gamma_gauge, 0.020)
-            elif is_continuous_flow and call_idx >= 1000:
-                ramp = min(1.0, max(0.0, (call_idx - 1000.0) / 200.0))
-                eff_gamma_gauge = self.gamma_gauge + 0.150 * ramp
+                eff_gamma_gauge = gates.image_gamma_gauge
+            elif gates.active("small_batch_gauge") and b_r < gates.small_batch_gauge_below:
+                eff_gamma_gauge = min(self.gamma_gauge, gates.small_batch_gauge_cap)
+            elif gates.active("gauge_ramp") and is_continuous_flow and call_idx >= gates.gauge_ramp_start_call:
+                ramp = min(1.0, max(0.0, (call_idx - float(gates.gauge_ramp_start_call))
+                                    / float(gates.gauge_ramp_calls)))
+                eff_gamma_gauge = self.gamma_gauge + gates.gauge_ramp_extra * ramp
             else:
                 eff_gamma_gauge = self.gamma_gauge
             gauge_loss = 0.5 * eff_gamma_gauge * mean_logit.pow(2)
@@ -1401,6 +1896,7 @@ class BISPFCriticPenalty(_K3PCriticPenalty):
         self.recipe, self.optimizer, self.critic = recipe, optimizer, optimizer.critic
         _attach_critic_input_hook(self.critic, optimizer.record)
         options = recipe._penalty_options(**penalty_overrides)
+        options.setdefault("gates", recipe.bispf_gates())
         self.regularizer = _BISPFPenaltyKernel(record=optimizer.record, **options)
         self.initial_coeff = self.regularizer.coeff
         self.output = _first_output if output is None else output
