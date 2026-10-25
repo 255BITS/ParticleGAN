@@ -75,31 +75,40 @@ class StrictProgressOptimizer(ConstraintGeometryOptimizer):
         self.strict_progress_stats['probes'] += 1
         return result
 
+    def _clear_pending(self):
+        super()._clear_pending()
+        self._protected_values = self._protected_evaluator = None
+
     @torch.no_grad()
     def step(self, closure=None):
-        if (closure is not None or self._protected is None or self._protected_values is None
-                or self._protected_evaluator is None):
-            raise ValueError('strict progress step requires protected backward and evaluator')
-        parameters = self._parameters()
-        originals = [p.detach().clone() for p in parameters]
-        normals = self._protected.double()
+        """One base update plus bounded finite realization on conflict.
 
-        def put(direction):
-            offset = 0
-            for p, old in zip(parameters, originals):
-                size = p.numel()
-                p.copy_(old + direction[offset:offset + size].view_as(p))
-                offset += size
+        Any failure, including a missing evaluator, aborts every pending input
+        (``abort_pending()``). A failed realization restores the pre-step
+        parameters; a failed base update is not rolled back.
+        """
+        def check():
+            if (closure is not None or self._protected is None or self._protected_values is None
+                    or self._protected_evaluator is None):
+                raise ValueError('strict progress step requires protected backward and evaluator')
 
-        def actual():
-            return torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
+        def adjust(parameters, originals):
+            normals = self._protected.double()
 
-        result = NormalizedOptimizer.step(self)
-        displacement = actual()
-        before = normals @ displacement.double()
-        conflict = bool((before > 0).any())
-        stats, progress = self.constraint_geometry_stats, self.strict_progress_stats
-        try:
+            def put(direction):
+                offset = 0
+                for p, old in zip(parameters, originals):
+                    size = p.numel()
+                    p.copy_(old + direction[offset:offset + size].view_as(p))
+                    offset += size
+
+            def actual():
+                return torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
+
+            displacement = actual()
+            before = normals @ displacement.double()
+            conflict = bool((before > 0).any())
+            stats, progress = self.constraint_geometry_stats, self.strict_progress_stats
             if conflict:
                 progress['conflict_steps'] += 1
                 direction, possible = common_descent(displacement, normals)
@@ -145,13 +154,8 @@ class StrictProgressOptimizer(ConstraintGeometryOptimizer):
             stats['projected_steps'] += int(not torch.equal(applied, displacement))
             stats['max_derivative_before'] = max(stats['max_derivative_before'], float(before.max()))
             stats['max_derivative_after'] = max(stats['max_derivative_after'], float((normals @ applied.double()).max()))
-        except Exception:
-            for p, old in zip(parameters, originals):
-                p.copy_(old)
-            raise
-        finally:
-            self._protected = self._protected_values = self._protected_evaluator = None
-        return result
+
+        return self._propose_adjust_commit(lambda: NormalizedOptimizer.step(self), adjust, check=check)
 
     def state_dict(self):
         result = super().state_dict()

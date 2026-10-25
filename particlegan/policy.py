@@ -290,6 +290,14 @@ class UpdatePolicy:
     observations, gradient evidence or counterfactual probes.
     Conditional loops with row controls disabled can use ``UpdatePolicy``
     without a routed row contract.
+
+    ``row_evidence_statistic`` declares the independent-row evidence gate's
+    test statistic (``particlegan.row_evidence``). The default
+    ``"sphericity"`` keeps the legacy trajectory of every qualified
+    row-evidence recipe; ``"hotelling"`` is a declared candidate (full
+    covariance T^2, float64 n x d x d accumulators). It is a trainer option,
+    not a recipe field, and the row-evidence checkpoint configuration records
+    it, so a mismatched resume is rejected.
     """
 
     _STREAMS = ("latent_generator", "penalty_generator", "eval_generator", "noise_generator")
@@ -300,7 +308,7 @@ class UpdatePolicy:
                  roles=None, generation=None, critic_features=None, encoder=None,
                  router=None, row_semantics="independent", seed=0, streams=None,
                  penalty=None, schedule=None, routed_rows=None,
-                 allow_shared_training_streams=False):
+                 allow_shared_training_streams=False, row_evidence_statistic="sphericity"):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if not isinstance(generator, nn.Module) or not isinstance(critic, nn.Module):
@@ -416,6 +424,13 @@ class UpdatePolicy:
             self.reopen_guard.observe_epoch(self._loss_epoch(), self.surprise)
         self.birth_death = None
         self.row_evidence = None
+        # Declared trainer option (review finding #11): the row-evidence test statistic. "sphericity" is the
+        # legacy law of every qualified row-evidence recipe; "hotelling" is the full-covariance T^2 candidate.
+        if row_evidence_statistic not in ("sphericity", "hotelling"):
+            raise ValueError("row_evidence_statistic must be sphericity or hotelling")
+        if row_evidence_statistic != "sphericity" and (
+                not recipe.row_evidence_gate or self.row_policy == "routed_paired"):
+            raise ValueError("row_evidence_statistic applies only to the independent-row row_evidence_gate")
         if self.row_policy == "routed_paired":
             self.routed_control = routed_rows.bind(
                 models=self._training_modules(), averaged_models=self._average_modules(),
@@ -454,7 +469,8 @@ class UpdatePolicy:
                 feature_scale=recipe.birth_death_feature_scale)
         if recipe.row_evidence_gate and self.routed_control is None:
             from .row_evidence import RowEvidence
-            self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null)
+            self.row_evidence = RowEvidence(table, null=recipe.row_evidence_null,
+                                            statistic=row_evidence_statistic)
         self.penalty = None
         if penalty is None and hasattr(self.opt_d, "record"):
             penalty = recipe.make_critic_penalty(self.opt_d)

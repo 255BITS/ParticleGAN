@@ -75,7 +75,12 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
         parameters = self._parameters()
         normals = []
         for loss in losses:
-            gradients = torch.autograd.grad(loss, parameters, retain_graph=True, allow_unused=True)
+            # Frozen parameters (requires_grad=False) cannot enter autograd.grad;
+            # their protected normal component is exactly zero.
+            trainable = [p for p in parameters if p.requires_grad]
+            computed = iter(torch.autograd.grad(loss, trainable, retain_graph=True, allow_unused=True)
+                            if trainable else ())
+            gradients = [next(computed) if p.requires_grad else None for p in parameters]
             pieces = []
             for parameter, gradient in zip(parameters, gradients):
                 piece = torch.zeros_like(parameter) if gradient is None else gradient.detach().clone()
@@ -94,35 +99,46 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
             self._protected = None
             raise ValueError("nonfinite constraint_geometry protected gradient")
 
+    def _clear_pending(self):
+        super()._clear_pending()
+        self._protected = None
+
     @torch.no_grad()
     def step(self, closure=None):
-        if closure is not None or self._protected is None:
-            raise ValueError("constraint_geometry step requires explicit protected-loss backward")
-        parameters = self._parameters()
-        originals = [p.detach().clone() for p in parameters]
-        normals = self._protected
-        result = super().step()
-        displacement = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
-        projected = project_nonascent(displacement, normals)
-        before = normals.double() @ displacement.double()
-        stats = self.constraint_geometry_stats
-        stats["steps"] += 1
-        changed = not torch.equal(projected, displacement)
-        stats["projected_steps"] += int(changed)
-        stats["max_derivative_before"] = max(stats["max_derivative_before"], float(before.max()))
-        if changed:
-            offset = 0
-            for parameter, original in zip(parameters, originals):
-                size = parameter.numel()
-                parameter.copy_(original + projected[offset:offset + size].view_as(parameter))
-                offset += size
-        # Preserve the already-applied tensors bitwise when projection is inactive.
-        # old + (new - old) can lose near-zero values in float32.
-        applied = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
-        after = normals.double() @ applied.double()
-        stats["max_derivative_after"] = max(stats["max_derivative_after"], float(after.max()))
-        self._protected = None
-        return result
+        """Project the base displacement; any failure aborts pending losses.
+
+        Any failure (check, base update or projection) calls ``abort_pending()``;
+        a failed projection also restores the pre-step parameters, a failed base
+        update is not rolled back (see ``NormalizedOptimizer._propose_adjust_commit``).
+        """
+        def check():
+            if closure is not None or self._protected is None:
+                raise ValueError("constraint_geometry step requires explicit protected-loss backward")
+
+        def adjust(parameters, originals):
+            normals = self._protected
+            displacement = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
+            projected = project_nonascent(displacement, normals)
+            before = normals.double() @ displacement.double()
+            stats = self.constraint_geometry_stats
+            stats["steps"] += 1
+            changed = not torch.equal(projected, displacement)
+            stats["projected_steps"] += int(changed)
+            stats["max_derivative_before"] = max(stats["max_derivative_before"], float(before.max()))
+            if changed:
+                offset = 0
+                for parameter, original in zip(parameters, originals):
+                    size = parameter.numel()
+                    parameter.copy_(original + projected[offset:offset + size].view_as(parameter))
+                    offset += size
+            # Preserve the already-applied tensors bitwise when projection is inactive.
+            # old + (new - old) can lose near-zero values in float32.
+            applied = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
+            after = normals.double() @ applied.double()
+            stats["max_derivative_after"] = max(stats["max_derivative_after"], float(after.max()))
+
+        return self._propose_adjust_commit(lambda: super(ConstraintGeometryOptimizer, self).step(),
+                                           adjust, check=check)
 
     def state_dict(self):
         result = super().state_dict()
