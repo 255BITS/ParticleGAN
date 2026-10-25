@@ -146,7 +146,7 @@ def test_selected_zero_has_identical_models_optimizers_consumed_rng_and_no_refer
 
 
 @pytest.mark.parametrize('selector', SELECTORS)
-@pytest.mark.parametrize('device', ['cpu', pytest.param('cuda:0', marks=pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA unavailable'))])
+@pytest.mark.parametrize('device', ['cpu', pytest.param('cuda:0', marks=[pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason='CUDA unavailable')])])
 def test_positive_selector_and_proximal_both_activate_and_resume(selector, device):
     ctx, a = build(settings={'prior_regularizer': selector, 'prior_reg': .001, 'prior_proximal_strength': 1})
     # This fixture constructs on CPU; CUDA coverage uses a fresh public context.

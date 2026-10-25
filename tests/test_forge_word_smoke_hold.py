@@ -109,6 +109,9 @@ def test_task_policy_preserves_old_sustained_definition_and_checked_budgets():
     assert sum(original_groups.values()) == 58440
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="word ladder execution requires CUDA")
 def test_cuda_bounded_public_word_draws_preserve_streams_and_save_complete_state(tmp_path):
     from experiments.forge.word_adapter import run_word
@@ -131,6 +134,9 @@ def test_cuda_bounded_public_word_draws_preserve_streams_and_save_complete_state
         purposes = {b["purpose"] for b in state["streams"]["manifest"]["bindings"].values()}
         assert {"generated_words", "paired_reconstruction", "word_confirmation", "word_reconstruction_confirmation"} <= purposes
     execute(device=DEVICE)
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="external-horizon restoration requires CUDA")

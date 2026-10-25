@@ -12,8 +12,8 @@ import torch
 from benchmarks.toy_audit import source_cuda_observation as observer
 
 
-@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(
-    not torch.cuda.is_available(), reason="Root runs this control with one visible GPU"))])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(
+    not torch.cuda.is_available(), reason="Root runs this control with one visible GPU")])])
 def test_rng_modes_gradients_and_nested_named_streams_are_preserved(device):
     module = torch.nn.Sequential(torch.nn.Linear(3, 3), torch.nn.Dropout(.5)).to(device)
     module[0].eval()  # mixed flags must stay mixed
@@ -52,8 +52,8 @@ def test_digest_supports_scalar_and_bfloat16_states():
     assert observer.digest(torch.tensor([1., 2.], dtype=torch.bfloat16)) != observer.digest(torch.tensor([2., 1.], dtype=torch.bfloat16))
 
 
-@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(
-    not torch.cuda.is_available(), reason="Root runs actual CUDA owner-prefix control"))])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(
+    not torch.cuda.is_available(), reason="Root runs actual CUDA owner-prefix control")])])
 def test_prefix_observation_preserves_updates_and_full_schedule(tmp_path, monkeypatch, device):
     source = tmp_path / "held_source.py"
     source.write_text('''import torch

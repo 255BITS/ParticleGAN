@@ -16,6 +16,10 @@ from particlegan.init import deterministic_orthogonal_
 from particlegan.optim import dualnorm
 
 
+# Every test here runs on the GPU (autouse fixture below): opt in with -m cuda.
+pytestmark = pytest.mark.cuda
+
+
 @pytest.fixture(autouse=True)
 def cuda_contract():
     if not torch.cuda.is_available():

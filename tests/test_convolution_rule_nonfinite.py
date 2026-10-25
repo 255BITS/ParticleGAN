@@ -17,6 +17,7 @@ def test_nonfinite_matrix_is_explicitly_rejected(function, value):
         function(matrix, smoothing=.001)
 
 
+@pytest.mark.cuda
 @pytest.mark.parametrize("rule", ["frobenius", "quintic"])
 def test_optimizer_does_not_silently_skip_nan_gradient(rule):
     if not torch.cuda.is_available():

@@ -23,6 +23,10 @@ FAMILIES = (
 )
 
 
+# Every test here runs on the GPU (autouse fixture below): opt in with -m cuda.
+pytestmark = pytest.mark.cuda
+
+
 @pytest.fixture(autouse=True)
 def cuda_optimizer_contract():
     """Run numerical and tiny public-API software checks on the GPU only."""

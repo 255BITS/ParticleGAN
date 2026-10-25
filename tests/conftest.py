@@ -7,6 +7,7 @@ import difflib
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -116,6 +117,52 @@ def _isolate_renderer_clock(request, monkeypatch):
     if request.module.__name__ == "test_e22_routed_caption_late_phase_renderer":
         render = request.module.render
         monkeypatch.setattr(render, "STARTED", render.time.monotonic())
+
+
+def thread_budget(environ=None) -> int | None:
+    """Return the CPU thread budget the environment declares, if any.
+
+    ``OMP_NUM_THREADS`` and ``MKL_NUM_THREADS`` are both honoured; when both
+    are set the smaller positive value wins. Unset or invalid values declare
+    nothing, so an undeclared run keeps torch's own startup default.
+    """
+    environ = os.environ if environ is None else environ
+    values = []
+    for name in ("OMP_NUM_THREADS", "MKL_NUM_THREADS"):
+        try:
+            value = int(environ.get(name, ""))
+        except ValueError:
+            continue
+        if value >= 1:
+            values.append(value)
+    return min(values) if values else None
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _pinned_torch_threads():
+    """Pin torch's intra-op thread count for the whole session.
+
+    Queued GPU experiments share this machine; tests must not grow to every
+    core. The value comes from OMP/MKL_NUM_THREADS (see ``thread_budget``).
+    """
+    import torch
+
+    previous = torch.get_num_threads()
+    budget = thread_budget()
+    if budget is not None:
+        torch.set_num_threads(budget)
+    yield torch.get_num_threads()
+    torch.set_num_threads(previous)
+
+
+@pytest.fixture(autouse=True)
+def _restore_torch_threads(_pinned_torch_threads):
+    """A test that changes torch's thread count must not leak it to the next."""
+    yield
+    import torch
+
+    if torch.get_num_threads() != _pinned_torch_threads:
+        torch.set_num_threads(_pinned_torch_threads)
 
 
 @pytest.fixture(autouse=True)

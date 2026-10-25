@@ -14,7 +14,7 @@ from experiments.forge.views import load_tasks
 
 
 ROOT = Path(__file__).resolve().parents[1]
-pytestmark = pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")
+pytestmark = [pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA required")]
 
 
 @pytest.mark.parametrize("host", HOSTS)
