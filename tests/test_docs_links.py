@@ -9,12 +9,39 @@ DOCS = ("README.md", "RESEARCH_GLOSSARY.md", "EXPERIMENTATION.md", "FINDINGS.md"
 LINK = re.compile(r"!?\[(?:[^\]\[]|\[[^\]]*\])*\]\(([^)\s]+)\)")
 INVENTORY = ROOT / "reports/forge/technique-inventory.md"
 BANNER = "<!-- superseded-banner: generated -->"
+# Dated pages that still read as "current"; each must carry the superseded banner.
+STALE_PAGES = (
+    "reports/cifar-ddgan/README.md", "reports/cifar-ddgan/READOUT.md",
+    "reports/cifar-ddgan/RUNBOOK.md", "reports/cifar-ddgan/ANIMA_HANDOFF.md",
+    "reports/toy100/README.md", "reports/toy100/gpu-leaderboard.md",
+    "reports/toy100/formulation-search.md", "reports/toy100/h_stability/SEARCH.md",
+    "reports/toy100/continuous-practical-leaderboard-cpu-history.md",
+    "reports/toy100/formulation-search-before-dimension-rms.md",
+    "reports/toy100/formulation-search-before-direct-particle.md",
+    "reports/toy100/formulation-search-before-k3p.md",
+    "reports/toy_audit/OPEN_PR_DECISIONS.md", "reports/transfer_suite/README.md",
+)
+
+
+def _slugs(headings):
+    """GitHub heading anchors, including the -1, -2 suffixes of repeated headings."""
+    seen, out = {}, set()
+    for heading in headings:
+        slug = re.sub(r"[^\w\- ]", "", heading.strip().lower()).replace(" ", "-")
+        count = seen.get(slug, 0)
+        seen[slug] = count + 1
+        out.add(f"{slug}-{count}" if count else slug)
+    return out
 
 
 def _anchors(path):
     text = re.sub(r"```.*?```", "", path.read_text(), flags=re.S)
-    return {re.sub(r"[^\w\- ]", "", m.strip().lower()).replace(" ", "-")
-            for m in re.findall(r"^#{1,6} (.*)$", text, re.M)}
+    return _slugs(re.findall(r"^#{1,6} (.*)$", text, re.M))
+
+
+def test_anchor_slugs_number_repeated_headings_like_github():
+    assert _slugs(["Results", "Notes: v2", "Results", "Results"]) == {
+        "results", "notes-v2", "results-1", "results-2"}
 
 
 def _links(path):
@@ -44,7 +71,9 @@ def test_glossary_expands_or_marks_every_heavily_used_acronym():
 def test_superseded_banners_link_to_the_single_current_inventory():
     bannered = [p for p in (ROOT / "reports").rglob("*.md")
                 if "attempts" not in p.parts and BANNER in p.read_text(errors="replace")]
-    assert len(bannered) >= 10
+    rel = {p.relative_to(ROOT).as_posix() for p in bannered}
+    missing = [name for name in STALE_PAGES if name not in rel]
+    assert not missing, missing
     for path in bannered + [ROOT / "FINDINGS.md"]:
         targets = [(path.parent / t).resolve() for t in _links(path) if t.endswith("technique-inventory.md")]
         assert INVENTORY.resolve() in targets, path
