@@ -523,7 +523,7 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
         if step in checkpoints:
             row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
-            _event("observation", task=task["id"], step=step, metrics=row)
+            _event("observation", task=task["id"], step=step, metrics=metric_uncertainty.compact(row))
     evidence = {"observations": observations, "live": observations[-1], "host": host_receipt}
     if plain_vector:
         evidence["evaluation_contract"] = metric_uncertainty.evaluation_contract(contract)

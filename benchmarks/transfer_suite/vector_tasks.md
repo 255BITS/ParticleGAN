@@ -184,8 +184,9 @@ the later [frozen comparison](../../reports/transfer_suite/README.md) reports it
 
 ## Gate-metric uncertainty (reporting only)
 
-`metric_uncertainty.py` reports an oracle noise floor next to every gate
-metric. This is reporting only: gate decisions and metric values are
+`metric_uncertainty.py` reports an oracle noise floor next to the gate
+metrics of transfer-suite vector and image episodes and of Forge vector tasks
+that use the plain transfer vector scorer. This is reporting only: gate decisions and metric values are
 unchanged. The floor scores 16 independent target draws (the oracle) at the
 candidate's sample count with the frozen scorer, using the candidate's
 reference draw and projections. It reports, for each gate:
@@ -201,7 +202,12 @@ and consume no training, eval-stream or global RNG.
 
 `suite.run_episode` adds the floors to vector and image episodes after the run.
 Forge `transfer_vector` observations carry them when the task uses the plain
-vector scorer. `vector_tasks.py` and `image_tasks.py` stay byte-identical,
+vector scorer. Forge vector tasks with a toy_audit `sample_evaluator`
+(for example `gaussian1d_quality`, `ring16_quality`) and the tanh origin smoke
+route get no floor and no `evaluation_contract` block yet. Log lines (Forge
+`observation` events and suite DONE lines) carry only a compact floor: its
+version, `oracle_all_gates_pass_fraction` and each gate's `margin_oracle_std`.
+The full floor stays in the stored evidence. `vector_tasks.py` and `image_tasks.py` stay byte-identical,
 because Forge task cards pin their digests.
 `score_against_reference` transcribes the frozen scorer with an explicit
 reference draw. A test binds it to `score_samples` for every task.

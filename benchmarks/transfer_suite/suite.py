@@ -22,6 +22,7 @@ from benchmarks.toy100.device import host_device
 
 from benchmarks.locked_shared import baseline
 from benchmarks.smart_descent import study, evaluate
+from .metric_uncertainty import compact
 from .protocol import (SELECTION, digest, reference_evidence, required_tasks, requirements, selection_key,
                        summarize, test_verdict, validate_manifest)
 
@@ -214,7 +215,7 @@ def run(output, *, generations=2, population=6):
                                    action_records=len(result.get("actions", [])))
         save()
         print(json.dumps(dict(event="DONE", candidate=row["name"], task=name,
-                              status=test_verdict(spec, result)["status"], live=result.get("live"),
+                              status=test_verdict(spec, result)["status"], live=compact(result.get("live")),
                               seconds=result.get("seconds"), error=result.get("error"))), flush=True)
     fit_tasks = [s for s in declared["tasks"] if s["phase"] == "fit"]
     required = [s for s in fit_tasks if s["tier"] == "required"]

@@ -111,6 +111,28 @@ def summarize(metrics, oracle_rows, gates, *, report=()):
                 oracle_all_gates_pass_fraction=sum(joint) / len(joint) if joint else None)
 
 
+def compact(metrics):
+    """``metrics`` with any nested ``noise_floor`` reduced to a tail-friendly summary.
+
+    For log lines (Forge observation events, suite DONE lines): keeps the floor
+    version, ``oracle_all_gates_pass_fraction`` and each gate's ``margin_oracle_std``.
+    The full floor stays in the stored evidence. Non-dict input is returned as is.
+    """
+    if not isinstance(metrics, dict):
+        return metrics
+    out = {}
+    for key, value in metrics.items():
+        if key == "noise_floor" and isinstance(value, dict):
+            gates = {name: entry.get("margin_oracle_std") for name, entry in (value.get("metrics") or {}).items()
+                     if isinstance(entry, dict) and "op" in entry}
+            out[key] = dict(version=value.get("version"),
+                            oracle_all_gates_pass_fraction=value.get("oracle_all_gates_pass_fraction"),
+                            margin_oracle_std=gates)
+        else:
+            out[key] = compact(value) if isinstance(value, dict) else value
+    return out
+
+
 def _remember(cache, key, build):
     if key not in cache:
         if len(cache) >= _CACHE_LIMIT:
@@ -275,24 +297,30 @@ def evaluation_contract(contract="fixed_v1"):
 def annotate_vector_episode(result, spec, *, count=None):
     """Add floors to a finished ``vector_tasks.run_episode`` result in place.
 
-    Uses each observation's own step and the episode's sample count; no model is
-    sampled again. A reporting failure is recorded, never raised into the episode.
+    Uses each observation's own step and sample count (``sample_count`` of the row,
+    falling back to ``count`` or ``vector_tasks.EVAL_SAMPLES``); no model is sampled
+    again. A reporting failure is recorded, never raised into the episode.
     """
     from . import vector_tasks
     if result.get("error") or not result.get("observations"):
         return result
     try:
         cfg = vector_tasks.resolve(spec, allow_reserved=True)
-        count = vector_tasks.EVAL_SAMPLES if count is None else count
+        default = vector_tasks.EVAL_SAMPLES if count is None else count
+
+        def size(metrics):
+            n = metrics.get("sample_count")
+            return int(n) if _number(n) and n > 0 else default
         last = result["observations"][-1]["step"]
         for row in result["observations"]:
             ema = row.get("ema")
-            row.update(with_vector_noise_floor({k: v for k, v in row.items() if k != "ema"}, cfg, row["step"], count))
+            plain = {k: v for k, v in row.items() if k != "ema"}
+            row.update(with_vector_noise_floor(plain, cfg, row["step"], size(plain)))
             if isinstance(ema, dict):
-                row["ema"] = with_vector_noise_floor(ema, cfg, row["step"], count)
+                row["ema"] = with_vector_noise_floor(ema, cfg, row["step"], size(ema))
         for name in ("live", "ema"):
             if isinstance(result.get(name), dict) and result[name]:
-                result[name] = with_vector_noise_floor(result[name], cfg, last, count)
+                result[name] = with_vector_noise_floor(result[name], cfg, last, size(result[name]))
         result["evaluation_contract"] = evaluation_contract("fixed_v1")
     except Exception as error:  # reporting only: keep the measured episode intact
         result["noise_floor_error"] = f"{type(error).__name__}: {error}"
@@ -300,10 +328,6 @@ def annotate_vector_episode(result, spec, *, count=None):
 
 
 # ------------------------------------------------------------------------------ images
-
-def _image_gates(thresholds):
-    return [["modes", ">=", thresholds["modes"]], ["hq", ">=", thresholds["hq_min"]]]
-
 
 @torch.no_grad()
 def image_noise_floor(metrics, spec, centers, count):
@@ -314,6 +338,7 @@ def image_noise_floor(metrics, spec, centers, count):
     by the frozen ``image_tasks.image_metrics``.
     """
     from .image_tasks import image_metrics
+    from .protocol import requirements
     thresholds = spec["thresholds"]
     key = (json.dumps(spec, sort_keys=True, default=repr), int(count))
 
@@ -328,7 +353,7 @@ def image_noise_floor(metrics, spec, centers, count):
                 chosen.shape, generator=rng, device=centers.device)).clamp(0., 1.)
             rows.append(_scalars(image_metrics(images, centers, thresholds)))
         return rows
-    floor = summarize(metrics, _remember(_IMAGE_ORACLE, key, build), _image_gates(thresholds),
+    floor = summarize(metrics, _remember(_IMAGE_ORACLE, key, build), requirements(spec),
                       report=IMAGE_REPORT_METRICS)
     floor.update(kind="image", sample_count=int(count), oracle="clipped noisy templates, one draw per particle",
                  oracle_seed_rule=f"derived_seed({NOISE_FLOOR_VERSION!r}, 'image', name, draw)")
@@ -350,7 +375,11 @@ def annotate_image_episode(result, spec):
         for name in ("live", "ema"):
             if isinstance(result.get(name), dict) and result[name]:
                 result[name] = dict(result[name], noise_floor=image_noise_floor(result[name], spec, centers, count))
-        result["evaluation_contract"] = dict(noise_floor=NOISE_FLOOR_VERSION, oracle_draws=ORACLE_DRAWS)
+        # The image evaluator has no selectable draw contract: it enumerates the
+        # particle table, so its archived evaluation law is recorded as fixed_v1.
+        result["evaluation_contract"] = dict(eval_draw_contract="fixed_v1", noise_floor=NOISE_FLOOR_VERSION,
+                                             oracle_draws=ORACLE_DRAWS,
+                                             comparable_with_archived_fixed_v1=True)
     except Exception as error:  # reporting only: keep the measured episode intact
         result["noise_floor_error"] = f"{type(error).__name__}: {error}"
     return result

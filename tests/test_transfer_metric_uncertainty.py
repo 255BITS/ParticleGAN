@@ -163,7 +163,7 @@ def test_forge_transfer_grade_passes_floor_fields_through():
     assert graded["metrics"]["noise_floor"] == floor and graded["metrics"]["sw1_projections"] == 32
 
 
-def test_forge_vector_observations_carry_floors_over_frozen_metrics(tmp_path):
+def test_forge_vector_observations_carry_floors_over_frozen_metrics(tmp_path, capsys):
     from experiments.forge import adapters
     from tests.test_forge_adapters import request, task
     torch.set_num_threads(1)
@@ -181,6 +181,15 @@ def test_forge_vector_observations_carry_floors_over_frozen_metrics(tmp_path):
         assert row["noise_floor"]["eval_draw_contract"] == "fixed_v1"
         assert set(row["noise_floor"]["metrics"]) >= {key for key, _, _ in spec["thresholds"]}
     assert evidence["evaluation_contract"] == mu.evaluation_contract("fixed_v1")
+    # Logged observation events stay tail-friendly: compact floor, full floor in evidence only.
+    events = [json.loads(line) for line in capsys.readouterr().out.splitlines() if '"observation"' in line]
+    assert len(events) == 2
+    for event, row in zip(events, evidence["observations"]):
+        logged = event["metrics"]["noise_floor"]
+        assert set(logged) == {"version", "oracle_all_gates_pass_fraction", "margin_oracle_std"}
+        assert logged["margin_oracle_std"] == {k: v["margin_oracle_std"] for k, v in row["noise_floor"]["metrics"].items()
+                                               if "op" in v}
+        assert _strip(event["metrics"]) == {k: v for k, v in _strip(row).items() if k != "step"}
 
 
 def test_forge_vector_rejects_undeclared_draw_contracts(tmp_path):
@@ -195,3 +204,42 @@ def test_forge_vector_rejects_undeclared_draw_contracts(tmp_path):
     rows = raw["evidence"]["observations"]
     assert raw["evidence"]["evaluation_contract"]["comparable_with_archived_fixed_v1"] is False
     assert rows[0]["noise_floor"]["reference_seed"] != rows[1]["noise_floor"]["reference_seed"]
+
+
+def test_compact_summarizes_nested_floors_for_log_lines():
+    floor = mu.summarize({"error": .5}, [{"error": .4}, {"error": .6}], [["error", "<=", 1.]], report=("extra",))
+    metrics = {"error": .5, "noise_floor": floor, "ema": {"error": .7, "noise_floor": floor}}
+    small = mu.compact(metrics)
+    want = dict(version=mu.NOISE_FLOOR_VERSION, oracle_all_gates_pass_fraction=1.,
+                margin_oracle_std={"error": floor["metrics"]["error"]["margin_oracle_std"]})
+    assert small == {"error": .5, "noise_floor": want, "ema": {"error": .7, "noise_floor": want}}
+    assert metrics["noise_floor"] is floor and mu.compact(None) is None
+
+
+def test_report_flatteners_skip_noise_floor_annotations():
+    from experiments.forge import cadence_report, family_reports
+    floor = mu.summarize({"error": .5}, [{"error": .4}, {"error": .6}], [["error", "<=", 1.]])
+    metrics = {"error": .5, "ema": {"error": .7, "noise_floor": floor}, "noise_floor": floor}
+    assert cadence_report._scalars(metrics) == ({"error": .5, "ema.error": .7}, [])
+    assert dict(family_reports._metric_values(metrics)) == {"ema.error": .7, "error": .5}
+
+
+def test_vector_annotation_uses_each_rows_sample_count():
+    spec = vectors.resolve(vectors.TASKS[0])
+    small, large = (vectors.score_samples(_shifted(spec, n), spec, spec["steps"]) for n in (128, 256))
+    result = dict(observations=[dict(small, step=spec["steps"])], live=dict(large))
+    mu.annotate_vector_episode(result, vectors.TASKS[0])
+    assert "noise_floor_error" not in result
+    assert result["observations"][0]["noise_floor"]["sample_count"] == 128
+    assert result["live"]["noise_floor"]["sample_count"] == 256
+
+
+def test_image_episode_contract_names_the_draw_contract():
+    spec = dict(image_tasks.TASKS[0])
+    centers = image_tasks.templates(spec)
+    exact = centers.repeat_interleave(spec["particles"] // len(centers) + 1, 0)[:spec["particles"]]
+    metrics = image_tasks.image_metrics(exact, centers, spec["thresholds"])
+    result = mu.annotate_image_episode(dict(observations=[dict(metrics, step=1)], live=dict(metrics)), spec)
+    assert "noise_floor_error" not in result
+    assert result["evaluation_contract"]["eval_draw_contract"] == "fixed_v1"
+    assert set(result["evaluation_contract"]) >= set(mu.evaluation_contract()) - {"sw1_projections"}

@@ -1448,6 +1448,8 @@ def _heading(level, title, anchor):
 def _metric_values(metrics, prefix=""):
     for name, value in sorted(metrics.items()):
         key = prefix + name
+        if name == "noise_floor":  # reporting-only oracle annotation, not a reported metric
+            continue
         if isinstance(value, dict):
             yield from _metric_values(value, key + ".")
         elif isinstance(value, (str, int, float, bool)) or value is None:
