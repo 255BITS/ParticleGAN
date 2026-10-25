@@ -142,29 +142,68 @@ class NamedStreams:
             "states": {key: stream.get_state().clone() for key, stream in sorted(self._streams.items())},
         }
 
-    def load_state_dict(self, state: dict) -> None:
-        if not isinstance(state, dict) or state.get("schema") != 1:
+    def validate_state_dict(self, state: dict) -> "NamedStreams":
+        """Validate a checkpoint against this stream set without mutating it.
+
+        Mirrors ``experiments.forge.rng.NamedStreams.validate_state_dict``: the
+        checkpoint's schema, RNG derivation version, protocol seed and runtime
+        must equal this instance's, every binding must agree with its own
+        derivation, and manifest/state keys must match exactly.  Returns a
+        probe whose bindings were derived under the checkpoint's (validated)
+        seed.
+        """
+        if not isinstance(state, dict) or set(state) != {"schema", "manifest", "states"} or state["schema"] != 1:
             raise ValueError("invalid named-stream checkpoint schema")
         manifest = state["manifest"]
-        probe = NamedStreams(self.seed, version=self.version, device=self.device)
-        for key, binding in manifest["bindings"].items():
-            stream = probe.generator(
-                binding["family"],
-                component=binding["component"],
-                purpose=binding["purpose"],
-                device=binding["device"],
-            )
-            stream.set_state(state["states"][key].cpu())
-        self._streams = probe._streams
+        if (not isinstance(manifest, dict) or set(manifest) != {"version", "seed", "runtime", "bindings"}
+                or manifest["version"] != self.version or manifest["seed"] != self.seed
+                or manifest["runtime"] != self.manifest()["runtime"]
+                or not isinstance(manifest["bindings"], dict) or not isinstance(state["states"], dict)
+                or manifest["bindings"].keys() != state["states"].keys()):
+            raise ValueError("named-stream checkpoint identity mismatch")
+        probe = NamedStreams(manifest["seed"], version=manifest["version"], device=self.device)
+        try:
+            for key, binding in manifest["bindings"].items():
+                stream = probe.generator(
+                    binding["family"],
+                    component=binding["component"],
+                    purpose=binding["purpose"],
+                    device=binding["device"],
+                )
+                if probe._bindings.get(key) != binding:
+                    raise ValueError("RNG binding disagrees with derivation")
+                stream.set_state(state["states"][key].cpu())
+        except (KeyError, TypeError, RuntimeError, AttributeError) as error:
+            raise ValueError("invalid named-stream state") from error
+        return probe
+
+    def load_state_dict(self, state: dict) -> None:
+        """Restore streams after full validation (all checks precede mutation)."""
+        probe = self.validate_state_dict(state)
+        for key, stream in probe._streams.items():
+            if key in self._streams:
+                self._streams[key].set_state(stream.get_state())
+            else:
+                self._streams[key] = stream
+        for key in set(self._streams) - set(probe._streams):
+            del self._streams[key]
         self._bindings = deepcopy(probe._bindings)
 
 
 @contextmanager
 def deterministic_scope(seed: int = 0):
-    """Run inside a deterministic, single-thread PyTorch scope and restore caller state."""
+    """Run inside a deterministic, single-thread PyTorch scope and restore caller state.
+
+    Inside the scope nondeterministic kernels raise (``warn_only=False``, as in
+    ``experiments/forge`` workers), cuDNN autotuning is off, cuDNN runs
+    deterministically, and TF32 is disabled for both cuDNN and CUDA matmul.
+    Every flag and the global RNG state are restored on exit.
+    """
     prev_threads = torch.get_num_threads()
     prev_det = torch.are_deterministic_algorithms_enabled()
-    prev_cudnn_bench = torch.backends.cudnn.benchmark if torch.backends.cudnn.is_available() else False
+    prev_warn_only = torch.is_deterministic_algorithms_warn_only_enabled()
+    cudnn = torch.backends.cudnn
+    prev_cudnn = (cudnn.benchmark, cudnn.deterministic, cudnn.allow_tf32)
     prev_tf32_matmul = torch.backends.cuda.matmul.allow_tf32
     devices = list(range(torch.cuda.device_count())) if torch.cuda.is_available() else []
     with torch.random.fork_rng(devices=devices):
@@ -172,15 +211,15 @@ def deterministic_scope(seed: int = 0):
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
         torch.set_num_threads(1)
-        torch.use_deterministic_algorithms(True, warn_only=True)
-        if torch.backends.cudnn.is_available():
-            torch.backends.cudnn.benchmark = False
+        torch.use_deterministic_algorithms(True, warn_only=False)
+        cudnn.benchmark = False
+        cudnn.deterministic = True
+        cudnn.allow_tf32 = False
         torch.backends.cuda.matmul.allow_tf32 = False
         try:
             yield
         finally:
             torch.set_num_threads(prev_threads)
-            torch.use_deterministic_algorithms(prev_det)
-            if torch.backends.cudnn.is_available():
-                torch.backends.cudnn.benchmark = prev_cudnn_bench
+            torch.use_deterministic_algorithms(prev_det, warn_only=prev_warn_only)
+            cudnn.benchmark, cudnn.deterministic, cudnn.allow_tf32 = prev_cudnn
             torch.backends.cuda.matmul.allow_tf32 = prev_tf32_matmul
