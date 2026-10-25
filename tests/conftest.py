@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 
 import pytest
+import torch
 
 from benchmarks.toy100.device import device_policy_scope
 
@@ -145,8 +146,6 @@ def _pinned_torch_threads():
     Queued GPU experiments share this machine; tests must not grow to every
     core. The value comes from OMP/MKL_NUM_THREADS (see ``thread_budget``).
     """
-    import torch
-
     previous = torch.get_num_threads()
     budget = thread_budget()
     if budget is not None:
@@ -157,10 +156,12 @@ def _pinned_torch_threads():
 
 @pytest.fixture(autouse=True)
 def _restore_torch_threads(_pinned_torch_threads):
-    """A test that changes torch's thread count must not leak it to the next."""
-    yield
-    import torch
+    """A test that changes torch's thread count must not leak it to the next.
 
+    Uses the module-level ``torch`` bound at collection: a test may replace
+    ``sys.modules["torch"]`` with a stub that is still installed at teardown.
+    """
+    yield
     if torch.get_num_threads() != _pinned_torch_threads:
         torch.set_num_threads(_pinned_torch_threads)
 

@@ -149,6 +149,12 @@ def test_a_test_that_changes_threads_does_not_leak_into_the_next_one(tmp_path):
     assert run.returncode == 0 and "2 passed" in run.stdout, run.stdout + run.stderr
 
 
+def test_thread_restore_survives_a_test_that_stubs_the_torch_module(monkeypatch):
+    """Teardown must not look torch up in ``sys.modules`` (tests stub it there)."""
+    from types import SimpleNamespace
+    monkeypatch.setitem(sys.modules, "torch", SimpleNamespace(set_num_threads=lambda _: None))
+
+
 def test_minimum_supported_python_ci_job_runs_pytest():
     workflow = yaml.safe_load((ROOT / ".github/workflows/tests.yml").read_text())
     job = workflow["jobs"]["cpu-tests"]

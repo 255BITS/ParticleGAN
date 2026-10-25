@@ -429,6 +429,9 @@ def test_active_optimizer_configuration_fields_remain_explicit_and_required(over
 
 def test_runtime_rechecks_grouped_member_before_adapter(tmp_path, monkeypatch):
     from experiments.forge import runtime
+    # Import the profile refusal module before torch is stubbed below; run in
+    # isolation it would otherwise import ``torch.nn`` from the stub.
+    import experiments.forge.tanh_point_mass  # noqa: F401
     req = prospective(tmp_path, grouped=True)
     req["tasks"]["vector_unequal_mass_published"]["execution"]["vector_profile"]["revision"] = 99
     rebind(req)
