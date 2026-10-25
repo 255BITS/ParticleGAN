@@ -80,6 +80,10 @@ def _normalized_recipe(recipe):
     for name in ("d_betas", "loss_labels"):
         if name in recipe and isinstance(recipe[name], (list, tuple)):
             recipe[name] = tuple(recipe[name])
+    if isinstance(recipe.get("bispf_gate_overrides"), (list, tuple)):
+        # JSON turns the stored ((gate, value), ...) pairs into nested lists.
+        recipe["bispf_gate_overrides"] = tuple(
+            tuple(pair) if isinstance(pair, list) else pair for pair in recipe["bispf_gate_overrides"])
     if all(recipe.get(key, value) == value for key, value in _REMOVED_RECIPE_FIELDS.items()):
         recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
     if recipe.get("initialization", None) in (None, "batch_feature_zero"):
@@ -238,6 +242,11 @@ class GANTrainer:
             weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
             prior=self.prior, reference=self.prior)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
+        if recipe.effective_critic_formulation == "bispf":
+            # Readers of the critic thermal scale use this trainer's checkpointed
+            # critic record, never another trainer's state.
+            from .bispf import bind_thermal_source
+            bind_thermal_source(self.opt_d.record, self.loss, self.prior_regularizer)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):

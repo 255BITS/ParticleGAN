@@ -1,5 +1,10 @@
 # Current task: improve the selected direct-particle-response GAN
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 Read AGENTS.md, reports/toy100/current-research-base.json and
 reports/toy100/direct-particle-base/README.md. The user selected
 direct_particle_response as the default research base. Start from its exact

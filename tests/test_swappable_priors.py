@@ -29,7 +29,7 @@ from particlegan.priors import (
 
 ROOT = Path(__file__).resolve().parents[1]
 
-FROZEN_112_RECIPE_FIELDS = (
+FROZEN_RECIPE_FIELDS = (
     "name",
     "critic_formulation",
     "model",
@@ -142,6 +142,8 @@ FROZEN_112_RECIPE_FIELDS = (
     "lr_decay_rate",
     "lr_decay_steps",
     "lr_decay_staircase",
+    "bispf_shape_gates",
+    "bispf_gate_overrides",
 )
 
 
@@ -201,17 +203,18 @@ def assert_nested_allclose(left, right, atol: float = 1e-6, rtol: float = 1e-5):
 # Group 1: Zero Recipe Bloat & Schema Invariance
 # -----------------------------------------------------------------------------
 
-def test_recipe_fields_exact_112_tuple_invariance():
-    """AC1 Gate 1: Ensure get_recipe_fields() matches the exact 112-tuple schema without additions."""
+def test_recipe_fields_exact_tuple_invariance():
+    """AC1 Gate 1: get_recipe_fields() matches the exact declared schema (112 fields plus the two
+    BISPF gate fields); prior manipulators add no recipe fields."""
     fields_dict = get_recipe_fields()
     field_names = tuple(fields_dict.keys())
-    assert len(field_names) == 112, f"Expected exactly 112 recipe fields, found {len(field_names)}"
-    assert field_names == FROZEN_112_RECIPE_FIELDS
+    assert len(field_names) == 114, f"Expected exactly 114 recipe fields, found {len(field_names)}"
+    assert field_names == FROZEN_RECIPE_FIELDS
 
-    # Assert Recipe dataclass itself has identical 112 fields
+    # Assert Recipe dataclass itself has identical 114 fields
     recipe_fields = tuple(f.name for f in dataclasses.fields(Recipe))
-    assert len(recipe_fields) == 112
-    assert recipe_fields == FROZEN_112_RECIPE_FIELDS
+    assert len(recipe_fields) == 114
+    assert recipe_fields == FROZEN_RECIPE_FIELDS
 
 
 def test_recipe_no_toplevel_torch_import():
@@ -231,11 +234,11 @@ spec.loader.exec_module(module)
 
 # Resolve fields across multiple presets without torch
 fields_ka2 = module.get_recipe_fields('ka2')
-assert len(fields_ka2) == 112
+assert len(fields_ka2) == 114
 fields_bcap = module.get_recipe_fields('bcap')
-assert len(fields_bcap) == 112
+assert len(fields_bcap) == 114
 fields_bispf = module.get_recipe_fields('bispf_optimized')
-assert len(fields_bispf) == 112
+assert len(fields_bispf) == 114
 
 assert 'torch' not in sys.modules, 'torch leaked into sys.modules'
 assert 'particlegan' not in sys.modules, 'particlegan leaked into sys.modules'
