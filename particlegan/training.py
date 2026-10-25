@@ -220,6 +220,11 @@ class GANTrainer:
             weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
             prior=self.prior, reference=self.prior)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
+        if recipe.effective_critic_formulation == "bispf":
+            # Readers of the critic thermal scale use this trainer's checkpointed
+            # critic record, never another trainer's state.
+            from .bispf import bind_thermal_source
+            bind_thermal_source(self.opt_d.record, self.loss, self.prior_regularizer)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):

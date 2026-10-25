@@ -250,8 +250,29 @@ class Recipe:
     lr_decay_rate: float = 0.96
     lr_decay_steps: int = 50_000
     lr_decay_staircase: bool = False
+    # BISPF shape/step gates (particlegan.bispf.BISPFGates) for the BISPF critic
+    # penalty, SinkhornRelativisticLoss and the SBNP prior regularizer. The
+    # defaults reproduce the historical hard-coded regimes. False is the
+    # master switch for a pure global recipe that disables every
+    # shape/step-conditioned branch. Overrides are (gate, value) pairs or a
+    # {gate: value} mapping, stored as sorted pairs.
+    bispf_shape_gates: bool = True
+    bispf_gate_overrides: tuple = ()
 
     def __post_init__(self):
+        if type(self.bispf_shape_gates) is not bool:
+            raise ValueError("bispf_shape_gates must be a boolean")
+        overrides = self.bispf_gate_overrides
+        try:
+            pairs = overrides.items() if isinstance(overrides, dict) else overrides
+            pairs = tuple(sorted((str(name), value) for name, value in pairs))
+        except (TypeError, ValueError):
+            raise ValueError("bispf_gate_overrides must be (gate, value) pairs or a mapping") from None
+        if len({name for name, _ in pairs}) != len(pairs):
+            raise ValueError("bispf_gate_overrides names must be unique")
+        object.__setattr__(self, "bispf_gate_overrides", pairs)
+        if pairs or not self.bispf_shape_gates:
+            self.bispf_gates()
         if self.training_precision not in ("float32", "bf16_channels_last"):
             raise ValueError("training_precision must be float32 or bf16_channels_last")
         if self.prior_update not in ("learned", "frozen"):
@@ -702,7 +723,7 @@ class Recipe:
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss
-            return SinkhornRelativisticLoss(labels=self.loss_labels)
+            return SinkhornRelativisticLoss(labels=self.loss_labels, gates=self.bispf_gates())
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
@@ -941,6 +962,11 @@ class Recipe:
                                 direct_betas=self.direct_particle_betas,
                                 direct_gain=self.direct_particle_gain, **options)
 
+    def bispf_gates(self):
+        """Resolved ``BISPFGates`` from ``bispf_shape_gates`` and ``bispf_gate_overrides``."""
+        from .bispf import BISPFGates
+        return BISPFGates.from_overrides(self.bispf_shape_gates, self.bispf_gate_overrides)
+
     @property
     def effective_critic_formulation(self):
         """Explicit legacy arms retain their K3P optimizer and penalty family."""
@@ -963,7 +989,7 @@ class Recipe:
         if self.prior_regularizer == "sbnp":
             from .bispf import SBNPPriorRegularizer
             options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
-                       "eps": self.prior_reg_eps, **overrides}
+                       "eps": self.prior_reg_eps, "gates": self.bispf_gates(), **overrides}
             if self.prior_update == "frozen":
                 options["weight"] = 0.
             return SBNPPriorRegularizer(reference, **options)
