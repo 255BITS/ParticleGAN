@@ -117,6 +117,20 @@ def _authorized_tasks(request):
 
 
 def _bindings(candidate, tasks, protocol, root):
+    """Actual public-API bindings; per-task memoized inside a bound resolution cache.
+
+    The memo key includes the candidate id and every declared override value
+    (``planning._binding_sig``), so declarations differing only in a tunable
+    value never share a cached binding.
+    """
+    from .resolution_scope import active
+    cache = active(root)
+    if cache is not None:
+        return cache.bindings(candidate, tasks, protocol, root, _resolve_bindings)
+    return _resolve_bindings(candidate, tasks, protocol, root)
+
+
+def _resolve_bindings(candidate, tasks, protocol, root):
     from .api import task_formulation_context
     result = {name: {} for name in ("recipe", "prior", "initialization", "budget", "sampling", "host", "evaluation", "task_identity")}
     for name, task in sorted(tasks.items()):

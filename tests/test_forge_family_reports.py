@@ -1040,7 +1040,7 @@ def test_full_suite_keeps_held_failures_and_deduplicates_shared_tests(report):
         "passed": 2, "failed": 1, "other": {"UNKNOWN": 1}, "total": 4}
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
     selected, full_suite = text.split("## Full-suite results — failures included", 1)
-    assert "| 2 | **1** | 1 not measured | 4 |" in full_suite
+    assert "| 2 | **1** | 1 | 0 | " in full_suite and " | 4 | " in full_suite
     assert "A held FAIL is still a failure" in full_suite
     assert "[3/3]" in selected and "[Problem list:" in full_suite
     assert "<details>" not in selected and "<summary>Qualification subset" not in text

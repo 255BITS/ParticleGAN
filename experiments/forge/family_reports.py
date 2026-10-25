@@ -959,18 +959,47 @@ def _outcome_text(counts):
     return "; ".join(f"{count} {labels.get(status, status.lower())}" for status, count in counts.items()) or "0"
 
 
+def _selected_row(publication, cohort):
+    rows = publication.get("rows", [])
+    index = cohort.get("row_index")
+    return rows[index] if isinstance(index, int) and 0 <= index < len(rows) else {}
+
+
+def _cohort_tier_statuses(cohort):
+    """Required-task statuses per tier, expanded from the cohort's recorded counts."""
+    return {tier: [status for status, count in sorted(cell.get("counts", {}).items()) for _ in range(count)]
+            for tier, cell in cohort.get("tiers", {}).items()}
+
+
 def _full_suite_section(root, publication, page, selected):
+    from .leaderboard_contract import (budget_text, family_search_budget, fixed_outcomes, holdout_claim,
+                                       load_fixed_test_list, selection_lineage)
     progress = publication["family_progress"]
-    names = full_suite_tasks(progress)
+    current = full_suite_tasks(progress)
+    fixed = load_fixed_test_list(root)
+    names = list(fixed["tests"]) if fixed else current
+    counted = {a["task"] for view in _summed_views(progress) for a in view["assignments"]
+               if a["importance"] == "required"}
+    not_counted = [name for name in names if name not in counted]
+    if fixed:
+        intro = (f"**{len(names)} tests from the fixed test list `{fixed['id']}` (dated {fixed['dated']})**: "
+                 + link(root, page, "list", fixed["path"]) + f", sha256 `{fixed['sha256'][:12]}`. "
+                 "The denominator never shrinks: every listed test counts in every row, including tests that a "
+                 "view now holds or removed from its count. ")
+    else:
+        intro = (f"**{len(names)} distinct tests** from the current views (no fixed test list is registered "
+                 "in this checkout, so this denominator follows view revisions). ")
     lines = ["## Full-suite results — failures included", "",
-             f"**{len(names)} distinct tests**, including held tests. Each test counts once. "
+             intro + "Each test counts once. "
              "A held FAIL is still a failure in this table. Only duplicate questions and phases already included "
              "in another test are excluded. These are recorded results for the selected recipe and source, "
              "not new measurements or current-source qualification.", "",
              link(root, page, "Problem list: what each test asks, what fails, and which configurations have passed",
                   PROBLEM_PAGE.as_posix()) + ".", "",
-             "| Family / selected recipe | Pass | Fail | Other outcomes | Total tests |",
-             "| --- | ---: | ---: | --- | ---: |"]
+             "| Family / selected recipe | PASS | FAIL | Not measured | Other outcomes "
+             "| Held or not counted (of these) | Total tests | Tuning budget and selection |",
+             "| --- | ---: | ---: | ---: | --- | --- | ---: | --- |"]
+    claims = []
     for family, cohort in selected:
         name = family["label"]
         if cohort["backend"] != "cuda" or (len(family["cohorts"]) > 1 and not family.get("current_cohort_anchor")):
@@ -980,12 +1009,38 @@ def _full_suite_section(root, publication, page, selected):
             configuration = next(item for item in progress.get("configuration_families", [])
                                  if item["id"] == cohort["configuration_family"])
             label += " · " + link(root, page, configuration["label"], configuration["page"])
-        counts = full_suite_outcomes(cohort, names)
-        lines.append(f"| {label} | {counts['passed']} | **{counts['failed']}** | "
-                     f"{_outcome_text(counts['other'])} | {counts['total']} |")
-    lines += ["", "Other outcomes are not scientific failures and earn no pass credit. "
+        statuses = {test: cohort["tasks"].get(test, {}).get("status", "UNKNOWN") for test in names}
+        counts = fixed_outcomes(statuses, names, not_counted)
+        held = counts["held"]
+        held_other = held["total"] - held["passed"] - held["failed"] - held["not_measured"]
+        held_text = (f"{held['total']}: {held['passed']} PASS, {held['failed']} FAIL, "
+                     f"{held['not_measured']} not measured" + (f", {held_other} other" if held_other else "")
+                     ) if held["total"] else "0"
+        candidate = _selected_row(publication, cohort).get("candidate_id")
+        lineage = selection_lineage(root, candidate) if candidate else {"search_id": None}
+        budget = budget_text(family_search_budget(root, family["id"]), lineage)
+        lines.append(f"| {label} | {counts['passed']} | **{counts['failed']}** | {counts['not_measured']} | "
+                     f"{_outcome_text(counts['other'])} | {held_text} | {counts['total']} | {budget} |")
+        if lineage.get("search_id"):
+            claim = holdout_claim(_cohort_tier_statuses(cohort), lineage.get("tuning_through_tier"))
+            claims.append(f"- **{family['label']}:** {claim['claim']}")
+    lines += ["", "Not measured and other outcomes are not scientific failures and earn no pass credit. "
               "Separate diagnostic and historical passes remain on the problem and family pages; "
-              "they do not replace a selected recipe's result.", ""]
+              "they do not replace a selected recipe's result. Tuning budgets count the family's registered "
+              "configuration searches (declared grid sizes) and every declared candidate card (ideas and "
+              "configurations, including hand-declared variants); a family with no search and a single card "
+              "is labelled untuned. Rows with different budgets are not equally tuned comparisons.", ""]
+    if claims:
+        lines += ["Selection versus holdout for recipes that descend from a registered search:", "", *claims, ""]
+    if fixed:
+        added = sorted(set(current) - set(names))
+        retired = sorted(set(names) - set(current))
+        if added:
+            lines += [f"Tests added to the views after {fixed['dated']} (outside this fixed denominator; "
+                      "a new dated list adds them): " + ", ".join(f"`{name}`" for name in added) + ".", ""]
+        if retired:
+            lines += ["Listed tests no longer assigned to a counted view still count above: "
+                      + ", ".join(f"`{name}`" for name in retired) + ".", ""]
     return lines
 
 
