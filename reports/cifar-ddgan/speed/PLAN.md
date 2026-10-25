@@ -7,8 +7,8 @@ VICReg and model/optimizer defaults. User explicitly permits lazy/finite-
 difference bcap experiments; these are approximations, not exact equivalents.
 
 Baseline profiles: U-Net32 on GPU0 and NCSN++128 on GPU1, 1,000 updates at
-batch64, 5k-sample diagnostic FID once at the end. Profile steps101–108.
-Steady throughput will use steps201–1000 to exclude startup/profiler overhead.
+batch 64, 5k-sample diagnostic FID once at the end. Profile steps 101–108.
+Steady throughput will use steps 201–1000 to exclude startup/profiler overhead.
 Samples/s = batch * updates/s per optimizer; total real draws are twice this
 because G and D each receive a separately drawn real batch. Evaluation and
 checkpoint time are excluded from train_seconds; reported total includes them.
@@ -16,8 +16,8 @@ Peak allocated memory includes the resident dataset and Inception evaluator.
 
 Candidates: frozen xt feature reuse (within each optimizer batch), avoiding an
 unused penalty scalar synchronization, channels-last, fused Adam, lazy bcap,
-gradient-aligned central finite differences, batch128 with half as many steps.
-EMA decay will be squared for batch128 to preserve smoothing in sample units;
+gradient-aligned central finite differences, batch 128 with half as many steps.
+EMA decay will be squared for batch 128 to preserve smoothing in sample units;
 optimizer hyperparameters stay fixed, so this remains a batch-size experiment.
 No final ranking from 1k FID alone; it is an early stability screen.
 
@@ -43,12 +43,12 @@ Tail: `tail -F results/cifar_ddgan/speed.live.log`
 
 Cache plus suppressed unused stats synchronization gave a 22% steady U-Net
 throughput gain. Channels-last was slower for this G; fused Adam only ~1% faster.
-Regularizer scouts therefore use cached NCHW + fused Adam at batch64. FD+lazy4
-won the initial screen (1,255 samples/s; 1k FID64.20); exact lazy4 reached1,164
+Regularizer scouts therefore use cached NCHW + fused Adam at batch 64. FD+lazy4
+won the initial screen (1,255 samples/s; 1k FID64.20); exact lazy4 reached 1,164
 withFID68.46. Batch128/256 matched sample exposure but hadFID77.70/91.18.
 
 NCSN++ bundle unexpectedly achieved1kFID59.33 vsbaseline306.67, with unchanged
-speed182 vs183samples/s. User explicitly asked to investigate. Run four more
+speed 182 vs183samples/s. User explicitly asked to investigate. Run four more
 1k NCSN++ scouts across both GPUs: cache-only (also suppress unused scalar
 sync), channels-last-only, fused-Adam-only, fullbundle+exactlazy4. Save their
 checkpoints for inspection. No altered seed, architecture, learning rates,
