@@ -19,6 +19,7 @@ Provenance contract:
 """
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 import inspect
+import hashlib
 import math
 
 import torch
@@ -101,6 +102,17 @@ class PriorManipulator(nn.Module):
         if state != expected:
             raise ValueError(f"prior manipulator configuration mismatch: checkpoint has {state!r}, "
                              f"module is {expected!r}")
+
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict,
+                              missing_keys, unexpected_keys, error_msgs):
+        # Legacy checkpoints (saved before configuration provenance existed)
+        # carry no ``_extra_state``. They load without validation instead of
+        # failing a strict load; parameters and buffers still load exactly.
+        legacy = prefix + "_extra_state" not in state_dict
+        super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
+                                      missing_keys, unexpected_keys, error_msgs)
+        if legacy and prefix + "_extra_state" in missing_keys:
+            missing_keys.remove(prefix + "_extra_state")
 
     def bind(self, base_prior: nn.Module) -> None:
         """Validate against / lazily size to the wrapped storage prior (wrap time)."""
@@ -297,6 +309,13 @@ class ManipulatedPrior(nn.Module):
 
     @property
     def row_local_gradients(self) -> bool:
+        """``prior_capabilities(self)["row_local_gradients"]``.
+
+        False unless the storage prior is exactly ``ParticlePrior`` or an
+        unstandardized ``MoGParticlePrior`` (and every manipulator is
+        row-local). Before PR #481 this property ignored the base and
+        reported True for other bases (e.g. ``FreshGaussianPrior``).
+        """
         from .capabilities import prior_capabilities
         return prior_capabilities(self)["row_local_gradients"]
 
@@ -401,7 +420,8 @@ class ManipulatedPrior(nn.Module):
                 base_codes, idx = self.base.sample(
                     batch_size, generator=generator, fixed_first_n=True, offset=offset
                 )
-            return self._transform(base_codes, idx, generator), idx
+            gen = noise_generator if noise_generator is not None else generator
+            return self._transform(base_codes, idx, gen), idx
 
         idx = self.sample_indices(batch_size, generator=generator)
         gen = noise_generator if noise_generator is not None else generator
@@ -573,14 +593,17 @@ class SimplexRoutingManipulator(PriorManipulator):
     ``init_seed`` and shape (``particlegan._qr``, the same source as
     ``particlegan.init.deterministic_orthogonal_``). Passing ``generator``
     instead draws ``nn.init.orthogonal_`` from that caller-owned stream (recorded
-    as ``projection_init="generator"``). Without ``z_dim`` the projection is
-    sized when wrapped by :class:`ManipulatedPrior`. The transform is not
+    as ``projection_init="generator"``, with that stream's initial seed and a
+    SHA-256 of its state at the draw in ``projection_init_generator``).
+    Without ``z_dim`` the projection (``"project"``) or the recorded slice
+    width (``"slice"``) is sized when wrapped by :class:`ManipulatedPrior`. The transform is not
     additive, so strict-progress replay rejects it.
     """
 
     additive_transform = False
     config_fields = ("num_modes", "temperature", "z_dim", "routing_mode", "residual_dim",
-                     "learnable_projection", "init_seed", "projection_init")
+                     "learnable_projection", "init_seed", "projection_init",
+                     "projection_init_generator")
 
     def __init__(
         self,
@@ -619,6 +642,7 @@ class SimplexRoutingManipulator(PriorManipulator):
         self.learnable_projection = bool(learnable_projection)
         self.init_seed = init_seed
         self.projection_init = "deterministic" if generator is None else "generator"
+        self.projection_init_generator: Optional[Dict[str, Any]] = None
         self._init_generator = generator
 
         if self.learnable_projection:
@@ -637,6 +661,10 @@ class SimplexRoutingManipulator(PriorManipulator):
                                                z_dim, self.num_modes), z_dim, self.num_modes)
             proj = proj.to(device=device, dtype=dtype)
         else:
+            state = self._init_generator.get_state()
+            self.projection_init_generator = {
+                "initial_seed": int(self._init_generator.initial_seed()),
+                "state_sha256": hashlib.sha256(state.cpu().numpy().tobytes()).hexdigest()}
             proj = torch.empty(z_dim, self.num_modes, device=self._init_generator.device, dtype=dtype)
             nn.init.orthogonal_(proj, generator=self._init_generator)
             proj = proj.to(device=device)
@@ -655,10 +683,12 @@ class SimplexRoutingManipulator(PriorManipulator):
         z = getattr(base_prior, "z", None)
         if z is None:
             return
-        if self.z_dim is not None and self.routing_mode == "project" and self.z_dim != z.shape[1]:
+        if self.z_dim is not None and self.z_dim != z.shape[1]:
             raise ValueError(f"SimplexRoutingManipulator z_dim={self.z_dim} does not match "
                              f"the base prior's {z.shape[1]}")
         self._ensure_initialized(z.shape[1], device=z.device, dtype=z.dtype)
+        if self.routing_mode == "slice":
+            self.z_dim = z.shape[1]  # record the bound width in the configuration
 
     def transform(
         self,

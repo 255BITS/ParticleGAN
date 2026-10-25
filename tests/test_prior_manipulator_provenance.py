@@ -295,3 +295,63 @@ def test_encode_rejects_code_transforming_manipulators():
     _equal(plain.codes, recipe.encode(query, base, offset=query).codes)
     with pytest.raises(ValueError, match="transforms"):
         recipe.encode(query, ManipulatedPrior(base, [StratifiedSamplingManipulator(8)]), offset=query)
+
+
+# -----------------------------------------------------------------------------
+# Review follow-ups (PR #481): legacy checkpoints, coverage, receipts, RNG
+# -----------------------------------------------------------------------------
+
+def test_legacy_manipulator_checkpoint_without_extra_state_loads_strictly():
+    source = ManipulatedPrior(ParticlePrior(8, 4), [SimplexRoutingManipulator(3, init_seed=5)])
+    legacy = {k: v for k, v in source.state_dict().items() if not k.endswith("_extra_state")}
+    target = ManipulatedPrior(ParticlePrior(8, 4), [SimplexRoutingManipulator(3)])
+    result = target.load_state_dict(legacy)
+    assert not result.missing_keys and not result.unexpected_keys
+    assert torch.equal(target.manipulators[0].projection, source.manipulators[0].projection)
+
+
+def test_birth_death_row_generator_applies_postprocess():
+    clamp = ClampOutputs()
+    recipe = get_recipe("bcap", z_dim=2, num_particles=8, batch_size=4, total_steps=6,
+                        particle_birth_death=True)
+    generator = nn.Sequential(nn.Linear(2, 4), nn.Tanh(), nn.Linear(4, 2))
+    critic = nn.Sequential(nn.Linear(2, 4), nn.Tanh(), nn.Linear(4, 1))
+    prior = recipe.make_prior()
+    for seed, component in enumerate((generator, critic, prior)):
+        deterministic_orthogonal_(component, seed=seed)
+    trainer = GANTrainer(recipe, generator, critic, prior=ManipulatedPrior(prior, [clamp]), seed=0)
+    rows = trainer.policy.birth_death.rows
+    out = rows.generate(torch.full((3, 2), 50.0))
+    assert out.abs().max() <= .25
+
+
+def test_simplex_slice_records_bound_width_and_rejects_mismatch():
+    prior = ManipulatedPrior(ParticlePrior(8, 5), [SimplexRoutingManipulator(3, routing_mode="slice")])
+    assert prior.manipulator_spec()[0]["config"]["z_dim"] == 5
+    with pytest.raises(ValueError, match="does not match"):
+        ManipulatedPrior(ParticlePrior(8, 5), [SimplexRoutingManipulator(3, routing_mode="slice", z_dim=4)])
+
+
+def test_simplex_generator_init_records_stream_identity():
+    stream = torch.Generator().manual_seed(3)
+    m = SimplexRoutingManipulator(3, z_dim=5, generator=stream)
+    record = m.config()["projection_init_generator"]
+    assert record["initial_seed"] == 3 and len(record["state_sha256"]) == 64
+    again = SimplexRoutingManipulator(3, z_dim=5, generator=torch.Generator().manual_seed(3))
+    assert again.config() == m.config()
+    assert SimplexRoutingManipulator(3, z_dim=5).config()["projection_init_generator"] is None
+
+
+class NoisyShift(PriorManipulator):
+    def transform(self, codes, idx=None, *, base_prior, generator=None, training=True):
+        return codes + torch.randn(codes.shape, generator=generator)
+
+
+def test_fixed_first_n_transform_uses_noise_generator():
+    prior = ManipulatedPrior(ParticlePrior(8, 2), [NoisyShift()])
+    draws = []
+    for latent_seed in (0, 1):
+        codes, _ = prior.sample(4, generator=torch.Generator().manual_seed(latent_seed), fixed_first_n=True,
+                                noise_generator=torch.Generator().manual_seed(9))
+        draws.append(codes)
+    assert torch.equal(draws[0], draws[1])
