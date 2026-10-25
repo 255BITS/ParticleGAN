@@ -1,5 +1,10 @@
 # Current task: improve the selected K3P GAN
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 Read AGENTS.md, reports/toy100/current-research-base.json,
 reports/toy100/k3p-base/README.md, and the current leaderboard. K3P is the
 user-selected research and launcher base. Use the exact pinned files under

@@ -35,28 +35,46 @@
 
 **Holding:** A test is held when no one global recipe passes it together with every counted test, when no recipe has passed its current declaration, or when it continues a held test. Holding changes qualification requirements, not any recorded result or the full-suite performance comparison. See the [2026-10-15 test dispositions](reports/forge/test-dispositions-20261015/README.md) and the [problem list](reports/forge/problems.md) for each question's intent, failures and known passing configurations.
 
+## Acronyms and short names
+
+Expansions are quoted only where the repository records one; the source column says where.
+"No recorded expansion" means no code, docstring, report or commit message spells the name out,
+so the row gives a functional description instead.
+
+| Name | Expansion | What it is | Source |
+|---|---|---|---|
+| **BISPF** | Born-Infeld Sinkhorn Particle Flow | The current default family (`DEFAULT_RECIPE = "bispf_optimized"`): Sinkhorn relativistic pairing, a Born-Infeld critic penalty, the SBNP prior and residual-driven noise. | `particlegan/bispf.py` module docstring; `particlegan/recipes.py` |
+| **SBNP** | Stratified Blue-Noise Particle Prior | BISPF's prior regularizer / particle table (`StratifiedBlueNoisePrior`). | `particlegan/bispf.py` module docstring |
+| **SRpGAN** | Scale-Free Sinkhorn Relativistic Pairing | BISPF's pairing of real and fake samples in the relativistic loss. | `particlegan/bispf.py` module docstring |
+| **EBI-TCR** | Elastic Born-Infeld Transport-Chord Regularization | BISPF's critic penalty, with a zero-mean logit gauge. | `particlegan/bispf.py` module docstring |
+| **RDTN** | Residual-Driven Thermal Noise | BISPF's noise term. | `particlegan/bispf.py` module docstring |
+| **BCAP** (BCap, `b_cap`) | No recorded expansion | Named after penalty arm `b_cap`, arm *b* of the August 2026 penalty study (`a_r1r2`, `b_cap`, `c_eikonal`, …). It is a fixed one-sided L2 cap on both real and fake critic input gradients, `coeff/2 * (E relu(‖g_r‖-κ)² + E relu(‖g_f‖-κ)²)`. In Forge, the BCAP family is a set of recipes built on this penalty (for example BCAP-pure and BCAP dualnorm). | `particlegan/grad_regularizers.py` (`GradientPenalty`); `experiments/analyze.py` (`ARM_ORDER`); [technique inventory](reports/forge/technique-inventory.md) |
+| **R1 / R2** | No recorded expansion | Critic input-gradient penalties on real (R1) and fake (R2) samples. `a_r1r2` is the fixed zero-centred squared-L2 penalty on both. | `particlegan/grad_regularizers.py` (`GradientPenalty`); [`docs/api.md`](docs/api.md) |
+| **K3** | No recorded expansion | A K3P predecessor. Its critic penalty is the learning-rate-driven blend `s·a_r1r2 + (1−s)·b_cap`, where `s` depends only on the critic's last applied learning rate: exactly `a_r1r2` while that rate is at least half its maximum, exactly `b_cap` at the .01 floor. A guard clips critic updates more than 5× their usual size after 200 updates per tensor. | [`reports/toy100/overnight-20260925/k3g-final.md`](reports/toy100/overnight-20260925/k3g-final.md) |
+| **K3P** | No recorded expansion; recorded as "K3 + gradient anchoring to an EMA critic" | The 0.8.0 default. Its critic penalty hands over from R1 plus a fake-gradient cap to one-sided caps plus an EMA-critic anchor as the critic learning rate falls. | [`reports/toy100/continuous-practical-leaderboard.md`](reports/toy100/continuous-practical-leaderboard.md) results table; [`docs/k3p.md`](docs/k3p.md); `particlegan/k3p.py` |
+| **K3G** | No recorded expansion; recorded as "K3 + generator guard" | A K3 variant that applies the critic guard to the generator too. | [`reports/toy100/continuous-practical-leaderboard.md`](reports/toy100/continuous-practical-leaderboard.md) results table |
+| **KA2** | No recorded expansion | The default before BISPF. It is K3P with the critic-penalty blend and EMA-critic tracking driven by the critic's own Adam moment surprise rather than by its learning rate. | [`docs/ka2.md`](docs/ka2.md); `particlegan/ka2.py` module docstring |
+| **A2** | No recorded expansion | Bounded sparse latent-row damping, used by K3P and KA2 (`latent_damping_max_rate`). | [`docs/ka2.md`](docs/ka2.md); `particlegan/k3p.py` (`LatentRowDamping`) |
+| **E22** | No recorded expansion | A schedule-free policy preset (`get_recipe("e22")`). Nothing in its training control path computes statistics on raw data or raw generator outputs. It came from the "no-outputs pass" (`gan-attempts/noout-20260928`). | [`docs/e22.md`](docs/e22.md); commit `0657de783` message |
+| **DV12** | No recorded expansion | The value `dv12` of `Recipe.continuous_policy`, the last of the `DataDriftController` variants `dv1`–`dv12`. It is E22's horizon-free data-innovation and game-stability controller (paired with `lr_control="stationarity"`) and also applies a latent perturbation with its own RNG stream. | `particlegan/continuous.py` (`DataDriftController`); `particlegan/recipes.py` (`continuous_policy`); [`docs/e22.md`](docs/e22.md) |
+| **UCD** | No recorded expansion | A conditional critic with one output per class (or per time/class pair) and no condition input. The adversarial logit is `out[:, c]`, plus class cross-entropy. The repository cites arXiv:2510.00624 for it. | `lib/sparse_models.py` module docstring; `particlegan/conditioning.py` |
+| **hq** | "high quality" | The fraction of generated samples within 3σ of their nearest true mode centre. The 100-Gaussian gate requires all 100 modes and `hq ≥ 0.95`. | `lib/toy_models.py` (`mode_coverage`); [`FINDINGS.md`](FINDINGS.md); `reports/readme-100gaussians/summary-current.json` |
+| **RpGAN** / Rp logistic | Relativistic-paired (logistic) GAN | The relativistic paired loss used by K3P, KA2 and the earlier toy studies. | [`docs/ka2.md`](docs/ka2.md) |
+| **DDGAN** | Denoising-diffusion GAN | The `ddgan` model family. | [`README.md`](README.md) model families table |
+| **MoG** | Mixture of Gaussians | A Gaussian-mixture particle prior (`mog` recipe). | [`README.md`](README.md) model families table |
+| **AE-GAN / VAE-GAN** | Autoencoder GAN / variational autoencoder GAN | An encoder routes data to particles. | [`README.md`](README.md) model families table |
+| **BH** | Benjamini-Hochberg | Multiple-testing control at level q, used by row evidence and birth/death. | `particlegan/birth_death.py` module docstring; [`docs/e22.md`](docs/e22.md) |
+| **mode TV / mass TV** | Mode-mass total variation | Total variation distance between generated and target mode masses. | [`docs/toy100.md`](docs/toy100.md) |
+| **FID50k / FID5k** | No recorded expansion beyond the sample count | FID computed from 50k (final) or 5k (diagnostic) generated samples. | [`reports/cifar-ddgan/READOUT.md`](reports/cifar-ddgan/READOUT.md) |
+| **GAN v3** | No recorded expansion | The recipe released in 0.7, kept as a Forge family. | [technique inventory](reports/forge/technique-inventory.md) |
+
 ## Repository layout for Forge
 
 - `configs/forge/` — **Immutable & versioned declarations**: `configurations/` (v3 recipe cards), `ideas/` (legacy v1/v2 cards), `studies/` (bounded questions), `searches/` (finite hyperparameter grids), `tasks/` (problem contracts), `views/` (tier/role policies), `protocols/` (screening rules), `calibration/` (gate calibration profiles).
 - `reports/forge/` — **Committed durable evidence**: `technique-inventory.md` (canonical family leaderboard), `problems.md` (per-task failure diagnoses), `records/` (concluded readouts and dispositions), `configuration-search/` & `cadence-studies/` (published study reports), `EXPERIMENT_MEMORY.md` & `compilation.json` (deterministic recall index).
 - `runs/forge/` — **Repo-local operational queue** (untracked): `queue/state.json`, `events.jsonl`, source snapshots, and per-attempt `run.log` / `terminal.json` files.
 
-## 5-minute agent quickstart
+## Agent quickstart
 
-```bash
-# 1. Orient: search prior art & in-flight work without loading bulk memory
-python -m experiments.forge recall --query "k3p" --view discriminator_stability
-python -m experiments.forge board --view discriminator_stability
-
-# 2. Propose or probe: fast preflight probe, or scaffold a configuration + study
-python -m experiments.forge probe k3p --task gaussian_1d_smoke --view discriminator_stability
-python -m experiments.forge new --id my-idea --parent k3p --view discriminator_stability --hypothesis "..."
-
-# 3. Plan & execute: verify boundaries/reuse, then enqueue or run
-python -m experiments.forge plan my-idea --study my-idea-study --show-boundaries
-python -m experiments.forge run my-idea --study my-idea-study --gpus 0
-
-# 4. Conclude: publish readout to unlock the candidate and update recall memory
-python -m experiments.forge readout my-idea --study my-idea-study \
-  --conclusion "..." --comparison "..." --next-action "..."
-```
+The one-page command sequence (recall → new → plan → run → board → readout) lives in
+[EXPERIMENTATION.md](EXPERIMENTATION.md#quickstart).
