@@ -317,3 +317,75 @@ def test_device_is_part_of_receipt_cohort(tmp_path):
     dst.write_bytes(src.read_bytes())
     outcome = ws.qualify("c", "v", device="cuda")["tiers"][1]["tasks"]["t1"]
     assert outcome["status"] == "NOT_RUN" and "device" in outcome["reason"]
+
+
+# --- PR #480 review follow-ups ----------------------------------------------------------------
+
+def test_deadline_is_disarmed_before_deterministic_scope_restores_flags(tmp_path, monkeypatch):
+    import contextlib
+    import signal
+
+    import particlegan_forge.tiers as tiers_mod
+
+    real_scope = tiers_mod.deterministic_scope
+    timer_at_restore = []
+
+    @contextlib.contextmanager
+    def probing_scope(seed=0):
+        with real_scope(seed=seed):
+            try:
+                yield
+            finally:
+                timer_at_restore.append(signal.getitimer(signal.ITIMER_REAL)[0])
+
+    monkeypatch.setattr(tiers_mod, "deterministic_scope", probing_scope)
+    ws, _ = _workspace(tmp_path, _ok(), tasks=[_task(timeout_seconds=60)])
+    assert ws.run_task("c", "t1")["verdict"] == "PASS"
+    assert timer_at_restore == [0.0]
+
+
+@pytest.mark.parametrize("field,value", [("completed_steps", "np"), ("unintended_rng_deviations", "np"),
+                                         ("completed_steps", 4.0)])
+def test_integral_evidence_scalars_are_accepted(tmp_path, field, value):
+    import numpy as np
+
+    if value == "np":
+        value = np.int64(4 if field == "completed_steps" else 0)
+    ws, _ = _workspace(tmp_path, _ok(**{field: value}))
+    assert ws.run_task("c", "t1")["verdict"] == "PASS"
+    task = _task()
+    rows = [{"step": s, "metrics": {"score": 1.0}} for s in task.observation_steps()]
+    for bad in (True, 4.5, -1, "4"):
+        assert grade_sustained_observations(task, rows, all_finite=True, unintended_rng_deviations=0,
+                                            completed_steps=bad)["status"] == "INVALID"
+
+
+def test_var_keyword_adapter_does_not_receive_evaluate(tmp_path):
+    inner = _ok()
+
+    def forwarding(**kwargs):
+        return inner(**kwargs)  # fixed-signature inner adapter would reject evaluate=
+
+    ws, _ = _workspace(tmp_path, forwarding)
+    assert ws.run_task("c", "t1")["verdict"] == "PASS"
+
+
+def test_fractional_timeout_round_trips_through_from_dict():
+    for timeout in (0.5, 1.5, 7):
+        loaded = TaskSpec.from_dict(_task(timeout_seconds=timeout).to_dict())
+        assert loaded.timeout_seconds == timeout and type(loaded.timeout_seconds) is type(timeout)
+
+
+def test_tier_statuses_match_experiments_forge_views(tmp_path):
+    ws, _ = _workspace(tmp_path, _ok(score=0.0), tasks=[_task("t1"), _task("t2")],
+                       tiers=[TierSpec(tier=1, required=["t1"]), TierSpec(tier=2, required=["t2"])])
+    ws.run_task("c", "t1")
+    q = ws.qualify("c", "v")
+    assert q["tiers"][1]["status"] == "FAIL" and not q["tiers"][1]["gated_by_lower_tier"]
+    # The tier above a failing tier keeps its own status (NOT_RUN), not BLOCKED.
+    assert q["tiers"][2]["status"] == "NOT_RUN" and q["tiers"][2]["gated_by_lower_tier"]
+    assert q["status"] == "FAIL" and q["qualified_tier"] == 0
+
+    ws2, _ = _workspace(tmp_path / "w2", _ok())
+    q2 = ws2.qualify("c", "v")
+    assert q2["tiers"][1]["status"] == "NOT_RUN" and q2["status"] == "INCOMPLETE"

@@ -15,6 +15,7 @@ from dataclasses import dataclass, field
 import inspect
 import json
 import math
+import numbers
 from pathlib import Path
 import signal
 import threading
@@ -179,7 +180,7 @@ class TaskSpec:
     thresholds: list[MetricBound] = field(default_factory=list)
     observations: int = 24
     minimum_stable_checks: int = 5
-    timeout_seconds: int = 300
+    timeout_seconds: float = 300
     host_definition: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self):
@@ -267,7 +268,7 @@ class TaskSpec:
             thresholds=[MetricBound.from_list(x) for x in eval_block.get("thresholds", [])],
             observations=int(eval_block.get("observations", 24)),
             minimum_stable_checks=int(eval_block.get("minimum_stable_checks", 5)),
-            timeout_seconds=int(data.get("resources", {}).get("timeout_seconds", 300)),
+            timeout_seconds=_load_timeout(data.get("resources", {}).get("timeout_seconds", 300)),
             host_definition=dict(exec_block.get("host_definition", {})),
         )
 
@@ -478,6 +479,24 @@ class CandidateSpec:
         )
 
 
+def _as_count(value: Any) -> int | None:
+    """Return ``value`` as a non-negative int, or ``None`` when it is not a count.
+
+    Accepts any ``numbers.Integral`` (e.g. ``numpy.int64``) and integral-valued
+    finite reals (``4.0``); rejects ``bool``, fractional, negative and
+    non-numeric values.
+    """
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, numbers.Integral):
+        count = int(value)
+    elif isinstance(value, numbers.Real) and math.isfinite(float(value)) and float(value).is_integer():
+        count = int(float(value))
+    else:
+        return None
+    return count if count >= 0 else None
+
+
 def grade_sustained_observations(
     task: TaskSpec,
     observations: list[dict[str, Any]],
@@ -495,10 +514,11 @@ def grade_sustained_observations(
     missing = []
     if not isinstance(all_finite, bool):
         missing.append("all_finite")
-    if (isinstance(unintended_rng_deviations, bool) or not isinstance(unintended_rng_deviations, int)
-            or unintended_rng_deviations < 0):
+    unintended_rng_deviations = _as_count(unintended_rng_deviations)
+    if unintended_rng_deviations is None:
         missing.append("unintended_rng_deviations")
-    if isinstance(completed_steps, bool) or not isinstance(completed_steps, int) or completed_steps < 0:
+    completed_steps = _as_count(completed_steps)
+    if completed_steps is None:
         missing.append("completed_steps")
     if not isinstance(observations, list) or not all(isinstance(row, dict) for row in observations):
         missing.append("observations")
@@ -579,23 +599,37 @@ class ForgeRegistry:
 
 
 def _accepts_kwarg(fn: Callable, name: str) -> bool:
+    """True only when ``fn`` names ``name`` as a keyword-capable parameter.
+
+    A bare ``**kwargs`` does not count: adapters that forward ``**kwargs`` to a
+    fixed-signature function must not receive optional extras they never asked for.
+    """
     try:
         params = inspect.signature(fn).parameters
     except (TypeError, ValueError):
         return False
-    return name in params or any(p.kind is inspect.Parameter.VAR_KEYWORD for p in params.values())
+    param = params.get(name)
+    return param is not None and param.kind in (
+        inspect.Parameter.POSITIONAL_OR_KEYWORD, inspect.Parameter.KEYWORD_ONLY)
+
+
+def _load_timeout(value: Any) -> float:
+    """Load ``timeout_seconds`` without truncation (ints stay ints, 0.5 stays 0.5)."""
+    if isinstance(value, str):
+        value = float(value)
+    return value
 
 
 def _tier_status(required_statuses: list[str]) -> str:
     """Counted-tier status: PASS only when every required task passes.
 
     Otherwise the most severe required status wins (FAIL > INVALID > BLOCKED >
-    INCOMPLETE); NOT_RUN alone reports INCOMPLETE at tier level.
+    INCOMPLETE > NOT_RUN), matching ``experiments/forge/views.py``: NOT_RUN is
+    kept at tier level and only becomes INCOMPLETE in the overall status.
     """
     if all(status == "PASS" for status in required_statuses):
         return "PASS"
-    worst = next((s for s in _TIER_STATUS_PRECEDENCE if s in required_statuses), "INCOMPLETE")
-    return "INCOMPLETE" if worst == "NOT_RUN" else worst
+    return next((s for s in _TIER_STATUS_PRECEDENCE if s in required_statuses), "INCOMPLETE")
 
 
 class ForgeWorkspace:
@@ -785,7 +819,8 @@ class ForgeWorkspace:
 
         Adapters are called with ``task, candidate, streams, attempt_dir,
         workspace_root, device, steps_override, log_event`` and, when their
-        signature accepts it, ``evaluate(step, fn)``, which runs ``fn`` under
+        signature names it explicitly (``**kwargs`` alone does not opt in),
+        ``evaluate(step, fn)``, which runs ``fn`` under
         ``streams.isolated_evaluation()``, records ``{"step", "metrics"}`` and
         audits non-eval stream mutation.  The returned dict must report
         ``all_finite``, ``unintended_rng_deviations`` and ``completed_steps``
@@ -852,9 +887,12 @@ class ForgeWorkspace:
         error: str | None = None
         timed_out = False
         try:
-            with _deadline(task.timeout_seconds):
-                with deterministic_scope(seed=seed):
-                    streams = NamedStreams(seed=seed, device=exec_device)
+            # The deadline is armed inside the deterministic scope and disarmed
+            # before the scope's ``finally`` restores process-wide torch flags,
+            # so SIGALRM can never interrupt that restoration.
+            with deterministic_scope(seed=seed):
+                streams = NamedStreams(seed=seed, device=exec_device)
+                with _deadline(task.timeout_seconds):
                     result = adapter_fn(streams=streams, **adapter_kwargs)
         except AttemptTimeout as exc:
             timed_out, error = True, str(exc)
@@ -872,9 +910,9 @@ class ForgeWorkspace:
         if isinstance(all_finite, bool) and has_nonfinite(raw_observations):
             all_finite = False
         unintended_rng_deviations = reported.get("unintended_rng_deviations")
-        if (measured_deviations and isinstance(unintended_rng_deviations, int)
-                and not isinstance(unintended_rng_deviations, bool)):
-            unintended_rng_deviations = max(unintended_rng_deviations, measured_deviations)
+        reported_deviations = _as_count(unintended_rng_deviations)
+        if measured_deviations and reported_deviations is not None:
+            unintended_rng_deviations = max(reported_deviations, measured_deviations)
         completed_steps = reported.get("completed_steps")
 
         if timed_out:
@@ -1011,10 +1049,12 @@ class ForgeWorkspace:
             req_statuses = [task_outcomes[a.task]["status"] for a in req]
             req_passed = sum(status == "PASS" for status in req_statuses)
 
+            # Each tier reports its own status (as experiments/forge/views.py
+            # does); a tier above the first open counted tier is flagged via
+            # ``gated_by_lower_tier`` instead of having its status overwritten.
+            gated = blocked_by_lower
             if not req:
                 t_status = "HELD"
-            elif blocked_by_lower:
-                t_status = "BLOCKED"
             else:
                 t_status = _tier_status(req_statuses)
                 if t_status != "PASS":
@@ -1023,6 +1063,7 @@ class ForgeWorkspace:
             tier_summaries[t_num] = {
                 "tier": t_num,
                 "status": t_status,
+                "gated_by_lower_tier": gated,
                 "required_passed": req_passed,
                 "required_total": len(req),
                 "held_total": len(held),
@@ -1038,7 +1079,7 @@ class ForgeWorkspace:
         else:
             first_open = next((ts for ts in counted if ts["status"] != "PASS"), None)
             if first_open is not None:
-                overall = first_open["status"]
+                overall = "INCOMPLETE" if first_open["status"] == "NOT_RUN" else first_open["status"]
             elif tier_summaries[max(tier_summaries)]["status"] == "HELD":
                 overall = "HELD"
             else:
