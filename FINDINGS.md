@@ -1,4 +1,19 @@
-# Gradient-penalty centering in RpGAN — findings (round 3: provenance, bake-off, corrected audit)
+# Historical findings log (2026-08-21 to 2026-10-06)
+
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](reports/forge/technique-inventory.md).
+> This log is no longer updated; its last entry is dated 2026-10-06. Results are preserved as recorded.
+
+Contents, in order:
+
+1. [Gradient-penalty centering in RpGAN](#gradient-penalty-centering-in-rpgan-round-3-provenance-bake-off-corrected-audit)
+   (rounds 1–3, August 2026; the only study here with five seeds and bootstrap intervals).
+2. Fixed-sigma MoG prior: [Stage 0 gate](#draft-fixed-sigma-mog-prior--stage-0-gate-2026-09-16) and
+   follow-ups (2026-09-16).
+3. BCAP-pure: [optimizer-only Tier 1 screen](#bcap-pure--optimizer-only-tier-1-screen-2026-10-05) (2026-10-05) and
+   [dualnorm pacing follow-up](#bcap-pure--dualnorm-pacing-follow-up-2026-10-06) (2026-10-06).
+
+## Gradient-penalty centering in RpGAN (round 3: provenance, bake-off, corrected audit)
 
 **Benchmark:** `examples/100gaussians.py` recipe (RpGAN, ParticlePrior, Fourier-2 D, EMA eval,
 Adam β1=0, delayed cosine anneal), 7 000 steps, 5 seeds per cell. **420 runs, 0 failures**;
@@ -10,7 +25,7 @@ context) and **median-centered core σ ratio** (the honest number; see
 of the alternating-GD update map (comparative only). Tables: `results/TABLE.md`,
 `results/bootstrap.md`, `results/LEADERBOARD.md`, `results/provenance.md`.
 
-## The organizing result: compatibility vs. curvature
+### The organizing result: compatibility vs. curvature
 
 - **Curvature (whether you converge) is center-agnostic.** Unregularized: radius 1.055 ± 0.052,
   |Im λ| ≈ 0.037, 47/100 modes. Any sample-point penalty, any centering: radius ≤ 1.002,
@@ -23,7 +38,7 @@ of the alternating-GD update map (comparative only). Tables: `results/TABLE.md`,
   W1** (all CI95 include 0) and the capped arms take the fidelity cells. Centering must match
   the loss family's optimal critic: margin device for f-div, transport device for IPM.
 
-## Round 3 verdicts
+### Round 3 verdicts
 
 **Provenance of the cap's stability — trajectory regularizer, not endpoint regularizer.**
 The blocking question (hinge slack at a flat critic ⇒ where does B's radius ≤ 1.002 come
@@ -68,7 +83,7 @@ trajectory bequeaths the *basin*; the W1/hq operating point is set by the penalt
 the end. Together with round 2's κ-anneal null: neither soft nor hard schedules cross the
 frontier; the frontier is a property of the *final* penalty regime.
 
-## Standing verdicts (rounds 1–2, updated wording)
+### Standing verdicts (rounds 1–2, updated wording)
 
 - **H1:** falsified for f-div on transport metrics (CI-backed); the sharpness half survives
   the *corrected* audit for the cap family only (core ≈ 0.9), not for strict eikonal
@@ -83,7 +98,7 @@ frontier; the frontier is a property of the *final* penalty regime.
   residual instability is symmetric-part, which optimism cannot fix). Lazy ≡ every-step at
   matched time-average.
 
-## Leaderboard & promotion (see `results/LEADERBOARD.md`)
+### Leaderboard & promotion (see `results/LEADERBOARD.md`)
 
 Logistic promotion track CHAMPION: **`b_cap` L2, coeff 1.0, 2×LR** (W1 0.290, hq 0.986,
 core σ 0.866 — clears the corrected guard; runner-up L1 variants 0.82–0.85 also honest;
@@ -96,16 +111,29 @@ core compression. If the objective may change and the deployment metric is *cali
 *sharpness*, stay logistic and promote the champion. Provenance caveat travels with the cap
 either way.
 
-## Caveats
+### Caveats
 
 Symmetric R1+R2 only (R1-alone diverges per R3GAN's ablations); γ is a frontier dial, not an
 escape. ~40 CI cells → multiplicity; headline claims rest on the largest, replicated,
 cross-validated effects. Spectral radii comparative (GD map, no optimizer state; FD smoothing
-bias identical across arms). One 2-D toy, small MLPs; deployment validation happens on the
-target domain (world-model repo — see `docs/eikonal-branch-notes.md` there), with this suite
-retained as a CI canary rather than a benchmark.
+bias identical across arms). One 2-D toy, small MLPs. Deployment validation was planned on a
+target domain in a separate world-model project outside this repository (its
+`docs/eikonal-branch-notes.md` is not part of ParticleGAN), with this suite retained as a CI
+canary rather than a benchmark.
 
-## Reproduce
+### Reproduce
+
+Check out archive commit
+[`40e637e82`](https://github.com/255BITS/ParticleGAN/tree/40e637e82cdedb51624e6a69e3dd6926c62a1924)
+(round 3, 2026-08-21; an ancestor of `develop`), where every file below exists.
+[`lib/grad_regularizers.py`](https://github.com/255BITS/ParticleGAN/blob/40e637e82cdedb51624e6a69e3dd6926c62a1924/lib/grad_regularizers.py),
+[`experiments/train_arm.py`](https://github.com/255BITS/ParticleGAN/blob/40e637e82cdedb51624e6a69e3dd6926c62a1924/experiments/train_arm.py),
+[`experiments/gen_configs.py`](https://github.com/255BITS/ParticleGAN/blob/40e637e82cdedb51624e6a69e3dd6926c62a1924/experiments/gen_configs.py)
+and [`experiments/provenance.py`](https://github.com/255BITS/ParticleGAN/blob/40e637e82cdedb51624e6a69e3dd6926c62a1924/experiments/provenance.py)
+were removed from the tree by #165 (`e0cdb036b`, 2026-09-25); the other files still exist but
+have changed since. The current package keeps only the fixed `a_r1r2` and `b_cap` arms, as
+`GradientPenalty(arm=...)` in [`particlegan/grad_regularizers.py`](particlegan/grad_regularizers.py)
+(v0.7 L2 kernels); the other arms are not in the package. Files used by the study:
 
 `lib/grad_regularizers.py` (arms, norms, anneal; FD-gradchecked), `lib/oadam.py` (vendored —
 do not substitute third-party copies), `lib/game_jacobian.py`, `lib/toy_metrics.py` (incl.

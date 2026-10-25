@@ -1,5 +1,10 @@
 # GPU leaderboard rebuild
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 This evaluates eight continuous-learning variants on CUDA. The original
 [22/22 CPU winner and its 16/22 GPU control](../gpu-known-winner-control/README.md)
 are a separate preserved-recipe comparison. See the [leaderboard and

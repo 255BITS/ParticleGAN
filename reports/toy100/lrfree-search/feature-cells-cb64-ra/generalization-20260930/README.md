@@ -1,5 +1,10 @@
 # ParticleGAN Atlas: qualification and convergence
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../../../../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 Atlas adds local population checks and guarded reopening to
 [PR155’s E22](https://github.com/255BITS/ParticleGAN/pull/155) at `cabe2084`.
 It is implemented in [PR223](https://github.com/255BITS/ParticleGAN/pull/223).

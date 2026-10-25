@@ -1,5 +1,10 @@
 # Compaction handoff: back on master after Anima experiments
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 The user requested committing the feature branch and returning to the main
 branch. This repository calls that branch `master`. Experimental code, configs,
 tests, and full reports remain committed on `experiment/anima-transplant`:
@@ -13,7 +18,7 @@ untracked `.claude/` and `sparse-ucd.log`.
 
 ## Results to carry forward
 
-All rows below trained for 10k updates at batch64 and used final FID50k.
+All rows below trained for 10k updates at batch 64 and used final FID50k.
 Historical baselines have different source provenance; each simultaneous
 pretrained/random transplant pair is a matched comparison.
 

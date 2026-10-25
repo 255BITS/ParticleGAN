@@ -2,51 +2,75 @@
 
 Read this before proposing or running an experiment. Forge records ideas,
 checks cheap prerequisites before spending on larger tests, and compares exact
-candidate revisions through goal-specific leaderboards.
+candidate revisions through goal-specific leaderboards. Terms such as *view*,
+*tier* and *held test*, and the family acronyms (BISPF, BCAP, K3P, KA2, E22, …), are
+defined in the [research glossary](RESEARCH_GLOSSARY.md).
 
-Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
-and the [current technique leaderboard](reports/forge/technique-inventory.md).
-The [problem list](reports/forge/problems.md) explains each outstanding question,
-what it tests, what fails and which configurations have passed it. Held failures
-remain in the leaderboard's full-suite results; the qualification subset is separate.
-For BCAP repair ideas, also read the completed
-[five-theory comparison](reports/forge/bcap-physics/README.md), including its
-source-bound readouts and unresolved gates.
-The subsequent [round-two readout](reports/forge/bcap-physics/round2/README.md)
-records a scoped sustained unequal-mass repair and remaining failures.
-The [round-three readout](reports/forge/bcap-physics/round3/README.md) adds two
-sustained conditional identity repairs while preserving the remaining failures.
-The [round-four readout](reports/forge/bcap-physics/round4/README.md) isolates a
-smaller conditional repair and measures composition, finite overshoot and tails.
-The [round-five readout](reports/forge/bcap-physics/round5/README.md) measures a
-combined conditional/rare repair and a width repair with rare/native regressions.
-The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
-defines the migration and adoption criteria.
-The [Forge preparation review map](docs/forge-integration-review-map.md) records
-the six agent-research changes and their software acceptance. Use its linked
-operating guides for recall, bounded decisions, policy execution and artifact
-retrieval; scientific calibration and release qualification remain separate.
-For a new research question or host, follow the
-[experiment creation guide](docs/forge-new-experiment.md), with worked ring and
-joint BiGAN examples, scorer controls, registration and artifact publication.
+## Quickstart
+
+Run every command from the repository root in the project's Python environment
+(`python -m pip install -e '.[experiments,dev]'`). Every step except `run`
+launches no training. `discriminator_stability` is the default view (goal).
+
+```bash
+# 1. Recall: what has been tried, what failed, what is in flight (no training)
+python -m experiments.forge recall --query "<topic>" --goal discriminator_stability
+
+# 2. New: scaffold one idea from a parent idea, plus its companion study.
+#    Writes configs/forge/ideas/<id>.json and configs/forge/studies/<id>-study.json;
+#    edit changed_factors, mechanism_rationale and recipe_overrides before planning.
+python -m experiments.forge new --id my-idea --parent <parent-idea-id> \
+  --goal discriminator_stability --hypothesis "<one falsifiable sentence>"
+
+# 3. Plan: exact tasks, evidence reuse and worst-case cost; writes nothing
+python -m experiments.forge plan my-idea --study my-idea-study --show-boundaries
+
+# 4. Run: freeze, enqueue and drain through the declared tier cap
+#    (--gpus 0,1 for physical GPUs, --gpus cpu for the CPU cohort)
+python -m experiments.forge run my-idea --study my-idea-study --gpus 0
+python -m experiments.forge queue            # active/blocked requests, costs, log paths
+python -m experiments.forge logs --follow    # tail the timestamped event stream
+
+# 5. Board: regrade the goal over compatible evidence (no launches)
+python -m experiments.forge board --goal discriminator_stability --candidate my-idea
+
+# 6. Readout: conclude the study; required before reusing or modifying the candidate
+python -m experiments.forge readout my-idea --study my-idea-study \
+  --conclusion "..." --comparison "..." --next-action "..."
+```
+
+Parent ids are the file names under `configs/forge/ideas/` (for example
+`bispf-optimized-v1`, `ka2` or `k3p`). Each command's `--help` lists its
+options. `python -m experiments.forge --help` lists the other commands
+(`probe`, `study`, `enqueue`, `drain`, `techniques`, `compile`, …), which the
+sections below describe.
+
+## Read first
+
+- The [current technique leaderboard](reports/forge/technique-inventory.md) is the
+  single current status page. Held failures remain in its full-suite results; the
+  qualification subset is separate.
+- The [problem list](reports/forge/problems.md) explains each outstanding question:
+  what it tests, what fails and which configurations have passed it.
+- The [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md) is a
+  reference index. Query it with `recall` instead of reading it in full.
+- For a new research question or host, follow the
+  [experiment creation guide](docs/forge-new-experiment.md). It has worked ring and
+  joint BiGAN examples, scorer controls, registration and artifact publication.
+
 Register ordinary new questions as required Tier 1 tasks in the existing
 `discriminator_stability` view. Revise that view and check its full reservation
-budget; create a separate view only for an explicitly different claim or
+budget. Create a separate view only for an explicitly different claim or
 diagnostic scope. Preserving an old denominator alone is not a reason for a new
 view. Historical receipts and pinned view revisions keep their original results.
+Keep bulk execution logs out of the repository, as [`AGENTS.md`](AGENTS.md) requires.
 
-For the combined E22/Atlas/Forge API, read
-[the develop integration notes](reports/forge/DEVELOP_INTEGRATION.md). Presets,
-external budgets and policy serving remain explicit; current Forge task
-definitions block E22/Atlas policy cohorts before reservation until separate
-policy-aware tasks are frozen. Keep bulk execution logs outside Git as required
-by [`AGENTS.md`](AGENTS.md).
-
-The [API model-mode research](reports/forge/api-model-toys/README.md) adds AE,
-hard/categorical VAE, full DDGAN chains and AE-DDGAN composition tasks to the
-existing tier view. Its fixed BISPF CPU research cohort, source-bound numerical
-results and actual-training GIFs remain separate from ordinary whole-suite
-qualification and from older AE/VAE/DDGAN studies.
+**`particlegan_forge`** is a separate, namespaced package that ships in the wheel.
+Its purpose is to expose Forge's task, tier and contract vocabulary (`TaskSpec`,
+`TierView`, named RNG streams, training-GIF rendering) to code outside this
+repository. The experiment workflow above runs through `python -m experiments.forge`.
+Treat `particlegan_forge` as the external tier API, and do not mix its registries
+with the repository's `configs/forge/` declarations.
 
 ## Readiness and scope
 
@@ -915,3 +939,31 @@ python -m experiments.forge promotion report <registration-id>
 This is the sole fixed-seed screening exception. Every registered outcome counts;
 there is no in-stage tuning, seed selection or live-to-EMA scoring switch.
 Registration and submission revalidate the finished candidate and calibration.
+
+## History
+
+These are earlier guidance and readouts, oldest material first. They keep their original
+sources and results. The [technique leaderboard](reports/forge/technique-inventory.md)
+supersedes their status statements.
+
+- **BCAP repair series.** Read these before proposing a BCAP repair:
+  - the [five-theory comparison](reports/forge/bcap-physics/README.md): source-bound readouts and unresolved gates;
+  - [round two](reports/forge/bcap-physics/round2/README.md): a scoped, sustained unequal-mass repair;
+  - [round three](reports/forge/bcap-physics/round3/README.md): two sustained conditional identity repairs;
+  - [round four](reports/forge/bcap-physics/round4/README.md): a smaller conditional repair, with composition, finite overshoot and tails;
+  - [round five](reports/forge/bcap-physics/round5/README.md): a combined conditional/rare repair, and a width repair with rare/native regressions.
+- The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
+  defines the migration and adoption criteria.
+- The [Forge preparation review map](docs/forge-integration-review-map.md) records
+  the six agent-research changes and their software acceptance. Its linked
+  operating guides cover recall, bounded decisions, policy execution and artifact
+  retrieval. Scientific calibration and release qualification remain separate.
+- The [develop integration notes](reports/forge/DEVELOP_INTEGRATION.md) describe the
+  combined E22/Atlas/Forge API. Presets, external budgets and policy serving remain
+  explicit. Current Forge task definitions block E22/Atlas policy cohorts before
+  reservation until separate policy-aware tasks are frozen.
+- The [API model-mode research](reports/forge/api-model-toys/README.md) adds AE,
+  hard/categorical VAE, full DDGAN chains and AE-DDGAN composition tasks to the
+  existing tier view. Its fixed BISPF CPU research cohort, source-bound numerical
+  results and actual-training GIFs remain separate from ordinary whole-suite
+  qualification and from older AE/VAE/DDGAN studies.

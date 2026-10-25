@@ -21,13 +21,13 @@ FD is optional and not promoted. Do not explore alternate bcap objectives.
 - U-Net FD lazy4 cached/fused: 37.003 / 8.56.
 - NCSN++ full bundle: 161.587 / 58.48, unstable; early recovery did not validate.
 
-One-shot10k: all variants100 modes, but FD jointHQ85.87% and65/100 narrow
-mode cores versus exact99.01%HQ, lazy4 98.84%HQ, neither with narrow cores.
-Denoising56k: all100 modes. JointHQ exact92.35%, fused91.98%, lazy4 91.46%,
+One-shot10k: all variants 100 modes, but FD jointHQ85.87% and 65/100 narrow
+mode cores versus exact 99.01%HQ, lazy4 98.84%HQ, neither with narrow cores.
+Denoising56k: all 100 modes. JointHQ exact 92.35%, fused 91.98%, lazy4 91.46%,
 FDlazy4 90.17%. FD catches up on coverage but has no speed advantage over
 exactlazy4 on the MLP. Do not claim universal FD collapse.
 
-Validation after default promotion:53 tests+13 subtests and4 CUDA resume tests
+Validation after default promotion: 53 tests+13 subtests and 4 CUDA resume tests
 passed. Earlier image-model/prior-controls tests and numerical gradient probes
 also passed; numerical probes document meaningful FD approximation error.
 
@@ -37,5 +37,5 @@ saved source.zip and config.yaml; do not silently rerun over completed paths.
 
 User requested a local commit before compaction; no push requested. Preserve unrelated .claude/ and
 sparse-ucd.log. The speed changes, configs, scripts and reports are included in the
-local speed-round commit. A future50k promoted-CIFAR run (~46 training min, extrapolated) is
+local speed-round commit. A future 50k promoted-CIFAR run (~46 training min, extrapolated) is
 recommended but not launched. No seed-only experiments.
