@@ -360,6 +360,9 @@ class RoutedEvidence:
         self.touches[touched] += 1
         self.counters["updates"] += 1
         self.refresh()
+        # Once per gradient update (as in RowEvidence); observe_effect refreshes
+        # flags too but is not another update to accumulate.
+        self.counters["flagged_rows_sum"] += int(self.flag.sum())
 
     @torch.no_grad()
     def observe_fit(self, weights, loss):
@@ -403,7 +406,6 @@ class RoutedEvidence:
         self.flag = enough & observed_effect & persistent
         self.fraction = float(self.flag.double().mean())
         self.valid = bool(enough.any())
-        self.counters["flagged_rows_sum"] += int(self.flag.sum())
 
     @torch.no_grad()
     def reset(self, rows=None):

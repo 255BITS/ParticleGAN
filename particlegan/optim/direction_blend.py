@@ -23,16 +23,16 @@ class DirectionBlendOptimizer(ConstraintGeometryOptimizer):
 
     @torch.no_grad()
     def step(self, closure=None):
-        if closure is not None or self._protected is None:
-            raise ValueError('direction blend step requires protected-loss backward')
-        parameters = self._parameters()
-        originals = [p.detach().clone() for p in parameters]
-        normals = self._protected.double()
-        result = NormalizedOptimizer.step(self)
-        displacement = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
-        before = normals @ displacement.double()
-        stats, blend = self.constraint_geometry_stats, self.direction_blend_stats
-        try:
+        """Full-scale blend; any failure aborts pending losses (a failed blend restores parameters)."""
+        def check():
+            if closure is not None or self._protected is None:
+                raise ValueError('direction blend step requires protected-loss backward')
+
+        def adjust(parameters, originals):
+            normals = self._protected.double()
+            displacement = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
+            before = normals @ displacement.double()
+            stats, blend = self.constraint_geometry_stats, self.direction_blend_stats
             if bool((before > 0).any()):
                 blend['conflict_steps'] += 1
                 direction, possible = common_descent(displacement, normals)
@@ -51,13 +51,8 @@ class DirectionBlendOptimizer(ConstraintGeometryOptimizer):
             stats['projected_steps'] += int(not torch.equal(applied, displacement))
             stats['max_derivative_before'] = max(stats['max_derivative_before'], float(before.max()))
             stats['max_derivative_after'] = max(stats['max_derivative_after'], float((normals @ applied.double()).max()))
-        except Exception:
-            for p, old in zip(parameters, originals):
-                p.copy_(old)
-            raise
-        finally:
-            self._protected = None
-        return result
+
+        return self._propose_adjust_commit(lambda: NormalizedOptimizer.step(self), adjust, check=check)
 
     def state_dict(self):
         saved = super().state_dict()
