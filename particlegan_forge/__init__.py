@@ -1,4 +1,9 @@
-"""Namespaced Forge & Tier API exports (`particlegan_forge`)."""
+"""Namespaced Forge & Tier API exports (`particlegan_forge`).
+
+A thin, wheel-shipped facade over the repository's (unpackaged)
+``experiments/forge`` semantics.  It reads/writes only
+``configs/particlegan_forge`` and ``reports/particlegan_forge``.
+"""
 from .contracts import (
     GATES,
     HOLD_REASONS,
@@ -20,6 +25,8 @@ from .contracts import (
 from .gif import render_training_gif
 from .rng import NamedStreams, RNG_VERSION, STREAM_NAMES, deterministic_scope
 from .tiers import (
+    NAMESPACE,
+    AttemptTimeout,
     CandidateSpec,
     ForgeRegistry,
     ForgeWorkspace,
@@ -29,9 +36,12 @@ from .tiers import (
     TierSpec,
     TierView,
     grade_sustained_observations,
+    resolve_device,
 )
 
 __all__ = [
+    "AttemptTimeout",
+    "NAMESPACE",
     "CandidateSpec",
     "ForgeRegistry",
     "ForgeWorkspace",
@@ -60,6 +70,7 @@ __all__ = [
     "json_safe",
     "read_json",
     "render_training_gif",
+    "resolve_device",
     "stable_hash",
     "utc_now",
 ]
