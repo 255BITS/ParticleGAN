@@ -1009,7 +1009,7 @@ def _full_suite_section(root, publication, page, selected):
             configuration = next(item for item in progress.get("configuration_families", [])
                                  if item["id"] == cohort["configuration_family"])
             label += " · " + link(root, page, configuration["label"], configuration["page"])
-        statuses = {test: cohort["tasks"].get(test, {}).get("status", "UNKNOWN") for test in names}
+        statuses = {test: cohort.get("tasks", {}).get(test, {}).get("status", "UNKNOWN") for test in names}
         counts = fixed_outcomes(statuses, names, not_counted)
         held = counts["held"]
         held_other = held["total"] - held["passed"] - held["failed"] - held["not_measured"]
