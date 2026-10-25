@@ -15,7 +15,7 @@ miscalibrated: at d = 8 with a spread spectrum P(p <= .05) is about .17 and BH f
 qualified configurations loadable).
 
 statistic="hotelling" (declared option): the true Hotelling T^2 = n_eff mean^T S^-1 mean with the full weighted covariance
-S (float64 per-row d x d accumulators), and the F law (n_eff - d) / (d (n_eff - 1)) T^2 ~ F(d, n_eff - d), evaluated with
+S (float64 per-row d x d accumulators: n * d * d * 8 bytes, e.g. about 2 GB at n = 60k rows and d = 64), and the F law (n_eff - d) / (d (n_eff - 1)) T^2 ~ F(d, n_eff - d), evaluated with
 an in-torch regularized incomplete beta. A p-value needs n_eff >= d + 2 and a positive-definite S (otherwise p = 1); a
 configuration that can never reach that raises. The EWMA weights make n_eff an effective (Kish) count, so the law is
 approximate; tests/test_row_evidence_calibration.py checks its null calibration under isotropic and anisotropic noise.

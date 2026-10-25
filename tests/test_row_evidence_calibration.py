@@ -62,13 +62,15 @@ def test_f_survival_matches_closed_forms():
     assert torch.allclose(f_survival(f, 2., d2), (1 + 2 * f / d2).pow(-d2 / 2), atol=1e-12)
 
 
-def test_untestable_configuration_warns_once_and_flags():
+def test_untestable_configuration_warns_once_and_flags(monkeypatch):
+    from particlegan import row_evidence
+    monkeypatch.setattr(row_evidence, "_WARNED", set())  # module-global: isolate from earlier constructions
     with warnings.catch_warnings(record=True) as caught:
         warnings.simplefilter("always")
         first = RowEvidence(torch.zeros(4, 34), window=50)
         RowEvidence(torch.zeros(4, 34), window=50)
     assert first.untestable and first.diagnostics()["untestable"]
-    assert sum(issubclass(w.category, RowEvidenceUntestableWarning) for w in caught) <= 1
+    assert sum(issubclass(w.category, RowEvidenceUntestableWarning) for w in caught) == 1
     with warnings.catch_warnings():
         warnings.simplefilter("error", RowEvidenceUntestableWarning)
         assert not RowEvidence(torch.zeros(4, 8), window=50).untestable

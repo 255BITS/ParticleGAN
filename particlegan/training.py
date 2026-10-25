@@ -144,6 +144,12 @@ class GANTrainer:
     remains a compatibility assertion; False is rejected. The checkpoint
     records this constraint, and unmarked or False historical checkpoints
     require their original source. The caller's autograd mode is restored.
+
+    ``row_evidence_statistic`` is forwarded to ``UpdatePolicy`` (legacy
+    ``"sphericity"`` by default; ``"hotelling"`` is a declared candidate).
+    KA2's ``trust_mode`` candidate is selected with
+    ``optimizer_options={"ka2_trust_mode": "scale"}``, which the checkpoint
+    records with the other optimizer options.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -151,7 +157,8 @@ class GANTrainer:
                  noise_generator=None, input_noise_generator=None,
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
-                 optimizer_options=None, penalty_options=None, serial_backward=True):
+                 optimizer_options=None, penalty_options=None, serial_backward=True,
+                 row_evidence_statistic="sphericity"):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
@@ -246,7 +253,8 @@ class GANTrainer:
             schedule=lambda step, config: learning_rate_scales(step, config),
             allow_shared_training_streams=not (recipe.continuous_policy is not None
                 or recipe.lr_control == "stationarity" or recipe.row_evidence_gate
-                or recipe.particle_birth_death or recipe.serve_average > 0))
+                or recipe.particle_birth_death or recipe.serve_average > 0),
+            row_evidence_statistic=row_evidence_statistic)
         self._STREAMS = type(self)._STREAMS
         if input_noise_generator is not None:
             self.input_noise_generator = self._stream(input_noise_generator, seed + 7)

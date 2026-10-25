@@ -116,3 +116,30 @@ def test_factory_accepts_plain_tensor_lists_and_generators(as_generator):
     params = (t for t in tensors) if as_generator else tensors
     optimizer = make_normalized_optimizer(recipe, params)
     assert sum(len(g["params"]) for g in optimizer.param_groups) == 2
+
+
+def test_prior_proximal_precheck_failure_aborts_direction_blend_pending_losses():
+    from particlegan.optim.prior_proximal import PriorProximalDirectionBlendOptimizer
+    table = nn.Parameter(torch.zeros(4, 2, dtype=torch.float64))
+    optimizer = get_recipe("bcap", prior_proximal_strength=.5, constraint_geometry_mode="direction_blend",
+                           lr=.03).make_generator_optimizer([dict(params=[table], role="prior")])
+    assert isinstance(optimizer, PriorProximalDirectionBlendOptimizer)
+    gradient = torch.arange(8., dtype=torch.float64).view(4, 2)
+
+    def bind():
+        optimizer.zero_grad()
+        optimizer.set_sampled_rows(table, torch.tensor([0, 2]))
+        loss = (table * gradient).sum()
+        constraint_geometry_backward(loss, optimizer, [loss])
+
+    bind()
+    lr = optimizer.param_groups[0]["lr"]
+    optimizer.param_groups[0]["lr"] = float("inf")  # nonfinite lr*strength: the proximal precheck rejects
+    with pytest.raises(ValueError, match="must be finite"):
+        optimizer.step()
+    assert optimizer._protected is None and optimizer.sampled_rows_for(table) is None
+    assert torch.equal(table, torch.zeros_like(table))
+    optimizer.param_groups[0]["lr"] = lr
+    bind()  # previously: "constraint_geometry losses already pending"
+    optimizer.step()
+    assert optimizer.prior_proximal_stats["steps"] == 1

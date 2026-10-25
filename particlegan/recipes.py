@@ -794,7 +794,7 @@ class Recipe:
         KA2GradientPenalty(**options)  # validate
         return options
 
-    def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
+    def make_critic_optimizer(self, critic, *, ema_critic=None, ka2_trust_mode="compound", **adam_kwargs):
         """Optimizer over ``critic``'s trainable parameters whose ``step()`` does the
         recipe's critic-side work (KA2: spike guard, moment surprise, adaptive
         EMA-critic update and guarded reseed).
@@ -808,7 +808,16 @@ class Recipe:
         metadata and an observation-only checkpointed critic step counter.
         Normalized families use the same fixed penalty and step observer;
         ``lr * d_lr_mult`` is their scheduled critic step size.
+        ``ka2_trust_mode`` declares how KA2's ``game_trust`` damps the anchor
+        rate (``KA2StepRecord``): the default ``"compound"`` is the legacy,
+        qualified law; ``"scale"`` is a declared candidate. Other critic
+        formulations reject a non-default value.
         """
+        if ka2_trust_mode not in ("compound", "scale"):
+            raise ValueError("ka2_trust_mode must be compound or scale")
+        if ka2_trust_mode != "compound" and (
+                self.optimizer_family != "formulation" or self.effective_critic_formulation != "ka2"):
+            raise ValueError("ka2_trust_mode applies only to the KA2 critic formulation")
         options = {"lr": self.lr * self.d_lr_mult, "betas": self.d_betas or self.betas,
                    "amsgrad": self.amsgrad, "eps": self.eps if self.d_eps is None else self.d_eps,
                    **adam_kwargs}
@@ -836,7 +845,8 @@ class Recipe:
         from .ka2 import KA2CriticAdam
         return KA2CriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
                              ema_critic=ema_critic, anchor_min_decay=self.reg_anchor_min_decay,
-                             guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
+                             guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps,
+                             **({} if ka2_trust_mode == "compound" else {"trust_mode": ka2_trust_mode}), **options)
 
     def make_generator_optimizer(self, params, *, modules=None, latent_table=None, direct_particles=None, **adam_kwargs):
         """Optimizer over ``params`` (module, tensors or param groups) whose ``step()`` does the
@@ -1113,8 +1123,11 @@ class Recipe:
         return prior
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
-                        require_latent_damping=False, **adam_kwargs):
+                        require_latent_damping=False, ka2_trust_mode="compound", **adam_kwargs):
         """Return ``(opt_g, opt_d)`` selected by ``optimizer_family``.
+
+        ``ka2_trust_mode`` reaches only the critic optimizer
+        (``make_critic_optimizer``); the default is the legacy KA2 law.
 
         ``opt_g`` covers G + optional E + prior (``make_generator_optimizer``;
         a learnable ``ParticlePrior`` table gets A2 damping) and ``opt_d`` the
@@ -1203,7 +1216,8 @@ class Recipe:
         latent_table = base_prior.z if (base_prior is not None and hasattr(base_prior, "z") and mechanisms["prior"]["a2_eligible"]) else None
         opt_g = self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs)
         opt_g.prior_mechanisms = mechanisms
-        return opt_g, self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)
+        return opt_g, self.make_critic_optimizer(discriminator, ema_critic=ema_critic,
+                                                 ka2_trust_mode=ka2_trust_mode, **adam_kwargs)
 
 
 

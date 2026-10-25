@@ -1563,10 +1563,15 @@ class FeatureCellBirthDeath(ParticleBirthDeath):
             raise ValueError("output sigma must be finite and nonnegative")
         # The success path keeps its original order (the body reads the new
         # serial). A failed apply restores the accumulated evidence, the evaluation
-        # clocks and the serial, so the evidence is not lost; later partial work
-        # (stream draws, applied row moves, body counters) is not rolled back.
+        # clock, every counter and the serial together (so the checkpoint invariant
+        # mean_evals == snapshot_serial still holds), so the evidence is not lost.
+        # Rows the failed body already moved (any table row that changed) start a
+        # new lineage with empty evidence. Stream draws, the moved rows themselves
+        # and the snapshot are not rolled back, and the restored counters do not
+        # count those partial moves.
         saved = ([t.clone() for t in (self.S,self.W,self.n,self.pending)],self.rows_since_eval,
-                 self.counters["evals"],self.counters["cell_evals"],self.snapshot_serial)
+                 dict(self.counters),self.snapshot_serial)
+        table_before = trainer.prior.z.detach().clone()
         self.rows_since_eval = 0
         self.counters["evals"] += 1
         self.counters["cell_evals"] += 1
@@ -1577,12 +1582,15 @@ class FeatureCellBirthDeath(ParticleBirthDeath):
         try:
             return self._apply_evaluation(trainer,sigma,begin)
         except BaseException:
-            evidence,self.rows_since_eval,evals,cell_evals,self.snapshot_serial = saved
+            evidence,self.rows_since_eval,counters,self.snapshot_serial = saved
             for target,value in zip((self.S,self.W,self.n,self.pending),evidence):
                 target.copy_(value)
-            self.counters["evals"],self.counters["cell_evals"] = evals,cell_evals
-            if self.moved_rows is not None:  # rows already transported start a new lineage
-                self.S[self.moved_rows]=0.; self.W[self.moved_rows]=0.; self.n[self.moved_rows]=0
+            self.counters.clear(); self.counters.update(counters)
+            moved = torch.ne(trainer.prior.z.detach(),table_before).flatten(1).any(1)
+            if self.moved_rows is not None:
+                moved[self.moved_rows] = True
+            if bool(moved.any()):  # rows already transported start a new lineage
+                self.S[moved]=0.; self.W[moved]=0.; self.n[moved]=0
             raise
         finally:
             for module,mode in modes:
