@@ -1,5 +1,10 @@
 # 100-mode convergence: failures and shared-recipe search
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../forge/technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 **Current GPU research/launcher selection: [K3P](k3p-base/README.md).**
 It passes 22/22 declared toy gates and its 1,200-update ring hold plus
 300-update extension. Target-shift recovery remains a measured failure.
