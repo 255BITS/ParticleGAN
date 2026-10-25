@@ -7,7 +7,7 @@ better starting baseline, but images remain rough and class fidelity is uneven.
 
 ## Leaderboard
 
-Every row uses 10k updates, batch64, seed24002, learned latent particles,
+Every row uses 10k updates, batch 64, seed 24002, learned latent particles,
 Gaussian step noise and the same final 50k-generated / 50k-real FID protocol.
 No seed repetitions were run. Training times exclude evaluation.
 
@@ -41,10 +41,10 @@ clean = G(xt, latent_particle, t, class)
 xt-1 = A[t]*clean + B[t]*xt + sqrt(posterior_var[t])*GaussianNoise
 ```
 
-T=4, alpha_bar=[1,.9,.5,.05,.0001]; learned20k x128 prior; independent Gaussian
+T=4, alpha_bar=[1,.9,.5,.05,.0001]; learned 20k x128 prior; independent Gaussian
 initial image and step noise; continuous xt/time conditioning in D; UCD ten
 heads and CE .02; shared Rp logistic GAN loss; candidate-only bcap1/kappa1;
-unique-row VICReg1; Adam(0,.999); EMA .995; cosine decay after60% to floor.05.
+unique-row VICReg1; Adam(0,.999); EMA .995; cosine decay after 60% to floor.05.
 No reconstruction loss, epsilon-regression objective or pure diffusion training.
 The change is to D architecture, not the adversarial diffusion formulation.
 
@@ -55,8 +55,8 @@ No arguments now selects the winning configuration in
 
 ## Interpretation
 
-Normalization improved final FID from 191.516 to62.819 with toy rates and from
-186.564 to76.863 with image rates. It costs about26% more training time in the
+Normalization improved final FID from 191.516 to 62.819 with toy rates and from
+186.564 to 76.863 with image rates. It costs about 26% more training time in the
 matched toy-rate comparison. GPU assignment differs across some historical
 controls and GPU1 also drives a desktop, so timing differences are approximate.
 The toy-rate recipe wins after normalization; the earlier preference for image
@@ -73,13 +73,13 @@ its alternatives on CIFAR.
 
 ![Matched diagnostic learning curves](normalized_d/controlled_curves.png)
 
-The toy-rate progress FIDs at2k/4k/6k/8k/10k were109.5/81.1/69.3/60.5/67.1
-(5k samples). Use the **final50k score62.819** for the leaderboard; do not select
+The toy-rate progress FIDs at 2k/4k/6k/8k/10k were 109.5/81.1/69.3/60.5/67.1
+(5k samples). Use the **final 50k score 62.819** for the leaderboard; do not select
 the lowest intermediate FID or compare sample counts as equivalent.
 
 ## Checkpoint diagnostics
 
-Read-only probes used the same256 real images, RNG seed and raw G/D weights.
+Read-only probes used the same 256 real images, RNG seed and raw G/D weights.
 These are diagnostic batches, not independent held-out estimates. The old
 model loads through the verified unchanged `d_norm:none` architecture.
 
@@ -91,7 +91,7 @@ model loads through the verified unchanged `d_norm:none` architecture.
 | 4 | .0022 | .0620 |
 
 D now has a stronger candidate gradient, with the cleaner steps near the
-existing soft bcap threshold1. Small exceedances are expected from a penalty,
+existing soft bcap threshold 1. Small exceedances are expected from a penalty,
 not a hard constraint. This supports the weak-gradient hypothesis; it does not
 prove which feature statistics caused the original failure. The noisiest step
 still has a weaker signal. Changing the latent particle changes outputs, most
@@ -105,10 +105,10 @@ constant LR, followed by spatial particle injection and pretrained D features.
 See [the prepared plan](NEXT_ROUND.md). The original recommendations below are
 retained as historical context.
 
-1. Extend the winning width32 recipe to30k updates, retaining the objective,
-   particles and four-step schedule. Its improvement slowed around8k and the
+1. Extend the winning width32 recipe to 30k updates, retaining the objective,
+   particles and four-step schedule. Its improvement slowed around 8k and the
    final diagnostic ticked upward, so longer training is a test, not a promise.
-2. In parallel, train width64 with GroupNorm for the same30k updates. Earlier
+2. In parallel, train width64 with GroupNorm for the same 30k updates. Earlier
    width64 failed with unnormalized D; that does not settle capacity after this
    fix. Compare FID versus both updates and elapsed training time.
 3. After a useful baseline, isolate prior/batch scaling and prior/noise controls.
@@ -119,13 +119,13 @@ retained as historical context.
    class fidelity. No transformer change is needed yet.
 
 A30k run should start fresh with a full config and planned schedule. Current
-strict resume cannot extend the10k horizon. Nothing else is queued.
+strict resume cannot extend the 10k horizon. Nothing else is queued.
 
 ## Validation and artifacts
 
-Before launch: 6 image/resume tests and19 toy/regularizer tests passed; both
+Before launch: 6 image/resume tests and 19 toy/regularizer tests passed; both
 real-CIFAR GPU smoke runs passed; exact old-source G/D compatibility checked.
-After default promotion, the6 image/resume tests passed again, including CUDA
+After default promotion, the 6 image/resume tests passed again, including CUDA
 checkpoint replay with normalized D. The pinned FID SciPy deprecation remains
 benign. All completed runs have verified saved-source completion certificates.
 

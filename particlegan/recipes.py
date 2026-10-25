@@ -1,5 +1,6 @@
 """Shared hyperparameters and small component factories; callers own control flow."""
 import math
+from collections.abc import Mapping
 from dataclasses import asdict, dataclass, fields, replace
 
 # Promote a registered trainer preset here; model-family factories inherit it.
@@ -250,8 +251,30 @@ class Recipe:
     lr_decay_rate: float = 0.96
     lr_decay_steps: int = 50_000
     lr_decay_staircase: bool = False
+    # BISPF shape/step gates (particlegan.bispf.BISPFGates) for the BISPF critic
+    # penalty, SinkhornRelativisticLoss and the SBNP prior regularizer. The
+    # defaults reproduce the historical hard-coded regimes. False is the
+    # master switch for a pure global recipe that disables every
+    # shape/step-conditioned branch. Overrides are (gate, value) pairs or a
+    # {gate: value} mapping, stored as sorted pairs.
+    bispf_shape_gates: bool = True
+    bispf_gate_overrides: tuple = ()
 
     def __post_init__(self):
+        if type(self.bispf_shape_gates) is not bool:
+            raise ValueError("bispf_shape_gates must be a boolean")
+        overrides = self.bispf_gate_overrides
+        try:
+            pairs = overrides.items() if isinstance(overrides, Mapping) else overrides
+            pairs = tuple((str(name), value) for name, value in pairs)
+        except (TypeError, ValueError):
+            raise ValueError("bispf_gate_overrides must be (gate, value) pairs or a mapping") from None
+        if len({name for name, _ in pairs}) != len(pairs):
+            raise ValueError("bispf_gate_overrides names must be unique")
+        pairs = tuple(sorted(pairs, key=lambda pair: pair[0]))
+        object.__setattr__(self, "bispf_gate_overrides", pairs)
+        if pairs or not self.bispf_shape_gates:
+            self.bispf_gates()
         if self.training_precision not in ("float32", "bf16_channels_last"):
             raise ValueError("training_precision must be float32 or bf16_channels_last")
         if self.prior_update not in ("learned", "frozen"):
@@ -716,7 +739,7 @@ class Recipe:
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
         if self.effective_critic_formulation == "bispf" and self.loss == "relativistic":
             from .bispf import SinkhornRelativisticLoss
-            return SinkhornRelativisticLoss(labels=self.loss_labels)
+            return SinkhornRelativisticLoss(labels=self.loss_labels, gates=self.bispf_gates())
         from .gan_loss import GANLoss
         return GANLoss(self.loss, labels=self.loss_labels)
 
@@ -794,7 +817,7 @@ class Recipe:
         KA2GradientPenalty(**options)  # validate
         return options
 
-    def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
+    def make_critic_optimizer(self, critic, *, ema_critic=None, ka2_trust_mode="compound", **adam_kwargs):
         """Optimizer over ``critic``'s trainable parameters whose ``step()`` does the
         recipe's critic-side work (KA2: spike guard, moment surprise, adaptive
         EMA-critic update and guarded reseed).
@@ -808,7 +831,16 @@ class Recipe:
         metadata and an observation-only checkpointed critic step counter.
         Normalized families use the same fixed penalty and step observer;
         ``lr * d_lr_mult`` is their scheduled critic step size.
+        ``ka2_trust_mode`` declares how KA2's ``game_trust`` damps the anchor
+        rate (``KA2StepRecord``): the default ``"compound"`` is the legacy,
+        qualified law; ``"scale"`` is a declared candidate. Other critic
+        formulations reject a non-default value.
         """
+        if ka2_trust_mode not in ("compound", "scale"):
+            raise ValueError("ka2_trust_mode must be compound or scale")
+        if ka2_trust_mode != "compound" and (
+                self.optimizer_family != "formulation" or self.effective_critic_formulation != "ka2"):
+            raise ValueError("ka2_trust_mode applies only to the KA2 critic formulation")
         options = {"lr": self.lr * self.d_lr_mult, "betas": self.d_betas or self.betas,
                    "amsgrad": self.amsgrad, "eps": self.eps if self.d_eps is None else self.d_eps,
                    **adam_kwargs}
@@ -836,7 +868,8 @@ class Recipe:
         from .ka2 import KA2CriticAdam
         return KA2CriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
                              ema_critic=ema_critic, anchor_min_decay=self.reg_anchor_min_decay,
-                             guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
+                             guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps,
+                             **({} if ka2_trust_mode == "compound" else {"trust_mode": ka2_trust_mode}), **options)
 
     def make_generator_optimizer(self, params, *, modules=None, latent_table=None, direct_particles=None, **adam_kwargs):
         """Optimizer over ``params`` (module, tensors or param groups) whose ``step()`` does the
@@ -955,6 +988,11 @@ class Recipe:
                                 direct_betas=self.direct_particle_betas,
                                 direct_gain=self.direct_particle_gain, **options)
 
+    def bispf_gates(self):
+        """Resolved ``BISPFGates`` from ``bispf_shape_gates`` and ``bispf_gate_overrides``."""
+        from .bispf import BISPFGates
+        return BISPFGates.from_overrides(self.bispf_shape_gates, self.bispf_gate_overrides)
+
     @property
     def effective_critic_formulation(self):
         """Explicit legacy arms retain their K3P optimizer and penalty family."""
@@ -983,7 +1021,7 @@ class Recipe:
         if self.prior_regularizer == "sbnp":
             from .bispf import SBNPPriorRegularizer
             options = {"weight": self.prior_reg, "target_std": self.prior_reg_target_std,
-                       "eps": self.prior_reg_eps, **overrides}
+                       "eps": self.prior_reg_eps, "gates": self.bispf_gates(), **overrides}
             if self.prior_update == "frozen":
                 options["weight"] = 0.
             return SBNPPriorRegularizer(reference, **options)
@@ -1113,8 +1151,11 @@ class Recipe:
         return prior
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
-                        require_latent_damping=False, **adam_kwargs):
+                        require_latent_damping=False, ka2_trust_mode="compound", **adam_kwargs):
         """Return ``(opt_g, opt_d)`` selected by ``optimizer_family``.
+
+        ``ka2_trust_mode`` reaches only the critic optimizer
+        (``make_critic_optimizer``); the default is the legacy KA2 law.
 
         ``opt_g`` covers G + optional E + prior (``make_generator_optimizer``;
         a learnable ``ParticlePrior`` table gets A2 damping) and ``opt_d`` the
@@ -1203,6 +1244,9 @@ class Recipe:
         latent_table = base_prior.z if (base_prior is not None and hasattr(base_prior, "z") and mechanisms["prior"]["a2_eligible"]) else None
         opt_g = self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs)
         opt_g.prior_mechanisms = mechanisms
+        # Forwarded only when declared: subclass overrides of make_critic_optimizer keep their signature.
+        if ka2_trust_mode != "compound":
+            adam_kwargs = {**adam_kwargs, "ka2_trust_mode": ka2_trust_mode}
         return opt_g, self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)
 
 

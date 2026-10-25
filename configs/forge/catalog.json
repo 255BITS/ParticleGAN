@@ -1,6 +1,6 @@
 {
   "counts": {
-    "files": 11782,
+    "files": 11783,
     "by_family": {
       "benchmark/init_research": 10,
       "benchmark/learned_lr": 10,
@@ -12,7 +12,7 @@
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
       "benchmark/toy_audit": 84,
-      "benchmark/transfer_suite": 87,
+      "benchmark/transfer_suite": 88,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
       "config/cifar_particle_ae": 16,
@@ -112,7 +112,7 @@
       "frozen_support": 28,
       "narrative": 996,
       "structured_evidence": 5053,
-      "support": 1541,
+      "support": 1542,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 725
@@ -1646,6 +1646,13 @@
       "suggested_tiers": []
     },
     {
+      "path": "benchmarks/transfer_suite/metric_uncertainty.py",
+      "git_blob": "6307c8505e6ecba03b100ce5f6a3a939f7231920",
+      "family": "benchmark/transfer_suite",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
       "path": "benchmarks/transfer_suite/plans/default_comparison.json",
       "git_blob": "4ffbce1362d38e623775b5d11605f437ae9fdd8a",
       "family": "benchmark/transfer_suite",
@@ -2136,7 +2143,7 @@
     },
     {
       "path": "benchmarks/transfer_suite/vector_tasks.md",
-      "git_blob": "dadfba12f2a56157c4a62183be4e4a173edfc48f",
+      "git_blob": "1c2c8faf447f3ee9fced382d0803efa6bf4f5f74",
       "family": "benchmark/transfer_suite",
       "role": "narrative",
       "suggested_tiers": []

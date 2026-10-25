@@ -20,9 +20,9 @@ updates, not equal compute. The pretrained branch uses external ImageNet data;
 this is not a from-scratch result. Production CUDA kernels are not bitwise
 deterministic, and there are no repeat-seed confidence intervals.
 
-The 5k-sample diagnostic FIDs were35.630 /42.975 /56.881 /58.554 in rank order.
-Use the 50k results above for ranking. Historical class-only UCD at30k updates
-achieved43.678; the new winner is better even at one-third the updates, although
+The 5k-sample diagnostic FIDs were 35.630 /42.975 /56.881 /58.554 in rank order.
+Use the 50k results above for ranking. Historical class-only UCD at 30k updates
+achieved 43.678; the new winner is better even at one-third the updates, although
 that historical comparison also changes UCD and D architecture.
 
 ## What changed and what we learned
@@ -37,11 +37,11 @@ no added perceptual/reconstruction loss. Frozen features retain input gradients
 and support bcap double backward. The checkpoint feature hash exactly matches
 startup, including batch-normalization buffers, after 10k updates.
 
-**Flat particle G:** lossless2x2 pixel rearrangement expands12 channels to128;
+**Flat particle G:** lossless2x2 pixel rearrangement expands 12 channels to 128;
 all six local-convolution/global-attention blocks retain 256 tokens. No pooling,
 token merging, compressed image latent, or intermediate narrow image path.
 Particles enter through both global modulation and a spatial16x16 feature map.
-This G alone improves FID by only 5.1% while costing61.6% more training time. With
+This G alone improves FID by only 5.1% while costing 61.6% more training time. With
 pretrained D it is 22.0% worse in FID than the U-Net and 27.2% slower. It remains a
 config-selectable research option, but does not earn promotion at this budget.
 This is an architecture package, not an isolated test of spatial injection.
@@ -72,7 +72,7 @@ are in [probes](probes).
 ## Promotion and reproduction
 
 `configs/cifar_ddgan/default.yaml` and trainer DEFAULTS now exactly match the
-measured31.741 recipe except output directory: **10k updates**, U-Net 32,
+measured 31.741 recipe except output directory: **10k updates**, U-Net 32,
 `d_backbone: pretrained_resnet18`, `ucd_target: time_class`, constant LR,
 G/D/particle rates.0006/.0009/.006, learned particles, Gaussian step noise.
 No-argument command: `.venv/bin/python experiments/train_cifar_ddgan.py`.

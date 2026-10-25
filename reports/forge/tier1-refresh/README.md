@@ -1,5 +1,10 @@
 # Existing configurations: expanded Tier 1 readout
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current status: [reports/forge/technique-inventory.md](../technique-inventory.md).
+> Results below are preserved as recorded; statements about "current" selections, defaults,
+> leaderboards, queues or GPUs describe the time of writing.
+
 This bounded refresh evaluates the **15 existing ideas and 32 saved
 configurations** against all five required Tier 1 tasks in
 `discriminator_stability` revision 3. The

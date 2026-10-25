@@ -181,3 +181,47 @@ separate execution/scoring protocols with `retrained: false`. All eight
 independent target-sampler controls pass v2, and the partial-center-collapse
 negative control fails. Calibration leaves the reserved annulus unexamined;
 the later [frozen comparison](../../reports/transfer_suite/README.md) reports its transfer results.
+
+## Gate-metric uncertainty (reporting only)
+
+`metric_uncertainty.py` reports an oracle noise floor next to the gate
+metrics of transfer-suite vector and image episodes and of Forge vector tasks
+that use the plain transfer vector scorer. This is reporting only: gate decisions and metric values are
+unchanged. The floor scores 16 independent target draws (the oracle) at the
+candidate's sample count with the frozen scorer, using the candidate's
+reference draw and projections. It reports, for each gate:
+
+- the oracle mean and standard deviation;
+- how often a perfect sampler passes the gate;
+- the candidate's margin to the threshold, in oracle-standard-deviation units.
+
+`sw1_projections` (32) and `sw1_finite_n_bias` sit next to `sw1_normalized`.
+`sw1_finite_n_bias` is the oracle mean, meaning the value a perfect sampler
+scores at this sample count. Oracle draws use their own hash-derived generators
+and consume no training, eval-stream or global RNG.
+
+`suite.run_episode` adds the floors to vector and image episodes after the run.
+Forge `transfer_vector` observations carry them when the task uses the plain
+vector scorer. Forge vector tasks with a toy_audit `sample_evaluator`
+(for example `gaussian1d_quality`, `ring16_quality`) and the tanh origin smoke
+route get no floor and no `evaluation_contract` block yet. Log lines (Forge
+`observation` events and suite DONE lines) carry only a compact floor: its
+version, `oracle_all_gates_pass_fraction` and each gate's `margin_oracle_std`.
+The full floor stays in the stored evidence. `vector_tasks.py` and `image_tasks.py` stay byte-identical,
+because Forge task cards pin their digests.
+`score_against_reference` transcribes the frozen scorer with an explicit
+reference draw. A test binds it to `score_samples` for every task.
+
+The evaluation-draw contract is versioned:
+
+- `fixed_v1` is the archived default. Every observation reuses the eval latents
+  (seed 990), the reference draw (991) and the projections (992), so terminal
+  observations are strongly correlated.
+- `per_observation_v2` is an explicit opt-in, set with
+  `evaluation.eval_draw_contract` on a Forge vector task or
+  `score_vector(..., contract=...)`. It derives these streams from each
+  observation's completed step. Forge eval latents already come from its
+  advancing eval stream, so in Forge the contract varies the reference draw and
+  the projections. Turning it on starts a new evaluation cohort, and its
+  receipts cannot be compared with archived `fixed_v1` receipts.
+- The legacy `vector_tasks.run_episode` remains `fixed_v1`.

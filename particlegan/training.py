@@ -80,6 +80,10 @@ def _normalized_recipe(recipe):
     for name in ("d_betas", "loss_labels"):
         if name in recipe and isinstance(recipe[name], (list, tuple)):
             recipe[name] = tuple(recipe[name])
+    if isinstance(recipe.get("bispf_gate_overrides"), (list, tuple)):
+        # JSON turns the stored ((gate, value), ...) pairs into nested lists.
+        recipe["bispf_gate_overrides"] = tuple(
+            tuple(pair) if isinstance(pair, list) else pair for pair in recipe["bispf_gate_overrides"])
     if all(recipe.get(key, value) == value for key, value in _REMOVED_RECIPE_FIELDS.items()):
         recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
     if recipe.get("initialization", None) in (None, "batch_feature_zero"):
@@ -145,6 +149,12 @@ class GANTrainer:
     records this constraint, and unmarked or False historical checkpoints
     require their original source. The caller's autograd mode is restored.
 
+    ``row_evidence_statistic`` is forwarded to ``UpdatePolicy`` (legacy
+    ``"sphericity"`` by default; ``"hotelling"`` is a declared candidate).
+    KA2's ``trust_mode`` candidate is selected with
+    ``optimizer_options={"ka2_trust_mode": "scale"}``, which the checkpoint
+    records with the other optimizer options.
+
     ``serve_after_step`` (default True) is the public extension point for the
     end-of-update serving swap. When a recipe serves an average
     (``serve_average > 0``) and that average has settled, each ``step`` ends by
@@ -165,7 +175,7 @@ class GANTrainer:
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
                  optimizer_options=None, penalty_options=None, serial_backward=True,
-                 serve_after_step=True):
+                 row_evidence_statistic="sphericity", serve_after_step=True):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
@@ -248,6 +258,11 @@ class GANTrainer:
             weight=1.0 if recipe.prior_regularizer == "vicreg" or recipe.prior_reg > 0 else 0.,
             prior=self.prior, reference=self.prior)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
+        if recipe.effective_critic_formulation == "bispf":
+            # Readers of the critic thermal scale use this trainer's checkpointed
+            # critic record, never another trainer's state.
+            from .bispf import bind_thermal_source
+            bind_thermal_source(self.opt_d.record, self.loss, self.prior_regularizer)
         if eval_generator is not None and any(eval_generator is stream for stream in (
                 latent_generator, penalty_generator, noise_generator, input_noise_generator,
                 prior_noise_generator, model_generator)):
@@ -263,7 +278,8 @@ class GANTrainer:
             schedule=lambda step, config: learning_rate_scales(step, config),
             allow_shared_training_streams=not (recipe.continuous_policy is not None
                 or recipe.lr_control == "stationarity" or recipe.row_evidence_gate
-                or recipe.particle_birth_death or recipe.serve_average > 0))
+                or recipe.particle_birth_death or recipe.serve_average > 0),
+            row_evidence_statistic=row_evidence_statistic)
         self._STREAMS = type(self)._STREAMS
         if input_noise_generator is not None:
             self.input_noise_generator = self._stream(input_noise_generator, seed + 7)

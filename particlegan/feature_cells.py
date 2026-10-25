@@ -1561,6 +1561,17 @@ class FeatureCellBirthDeath(ParticleBirthDeath):
         sigma = 0. if sigma_out is None else float(sigma_out)
         if not math.isfinite(sigma) or sigma<0:
             raise ValueError("output sigma must be finite and nonnegative")
+        # The success path keeps its original order (the body reads the new
+        # serial). A failed apply restores the accumulated evidence, the evaluation
+        # clock, every counter and the serial together (so the checkpoint invariant
+        # mean_evals == snapshot_serial still holds), so the evidence is not lost.
+        # Rows the failed body already moved (any table row that changed) start a
+        # new lineage with empty evidence. Stream draws, the moved rows themselves
+        # and the snapshot are not rolled back, and the restored counters do not
+        # count those partial moves.
+        saved = ([t.clone() for t in (self.S,self.W,self.n,self.pending)],self.rows_since_eval,
+                 dict(self.counters),self.snapshot_serial)
+        table_before = trainer.prior.z.detach().clone()
         self.rows_since_eval = 0
         self.counters["evals"] += 1
         self.counters["cell_evals"] += 1
@@ -1569,127 +1580,142 @@ class FeatureCellBirthDeath(ParticleBirthDeath):
         modes = [(module,module.training) for root in (trainer.G,trainer.D) for module in root.modules()]
         begin = time.perf_counter()
         try:
-            trainer.G.eval(); trainer.D.eval()
-            z = trainer.prior.z.detach()
-            q = self._capture_generated(trainer,z)
-            R = self._features(trainer,self.reservoir,chunk=self.settings["chunk"])
-            self.counters["feature_forward_rows"] += self.N
-            snapshot = FeatureCellSnapshot.fit(R,generator=self.stream,cells=self.settings["cells"],
-                                              rank=self.settings["rank"],chunk=self.settings["chunk"])
-            self.snapshot = snapshot
-            # Freeze the scalar witness before any odd-count-driven action.
-            partial_recovery = getattr(trainer,'mean_partial_recovery',False)
-            mean_fixed,mean_stamp = prepare_mean_witness(self,trainer,snapshot,R,
-                allow_partial_groups=partial_recovery)
-            pick = torch.randint(self.N,(self.N,),device=z.device,generator=self.stream)
-            F = self._capture_generated(trainer,z[pick],sigma=sigma,jitter=True,rows=pick)
-            flags,pvalues,_ = snapshot.support(q)
-            if not self.isolation:
-                flags.zero_()
-            snapshot.cache_queries(q)
-            comparison = snapshot.cell_comparison(F)
-            current_features = learned_latent_features(self,trainer,trainer.G)
-            average_features = learned_latent_features(self,trainer,trainer.ema_G)
-            def birth_planner(copy_children,copy_parents,supported,budget):
-                return plan_real_anchor_births(snapshot,q,flags,pvalues,comparison,z,current_features,
-                    ema_latents=trainer.ema_prior.z.detach(),ema_feature_of_latent=average_features,
-                    previous_children=copy_children,previous_copy_parents=copy_parents,
-                    supported_counts=supported,max_moves=budget)
-            child,parent,ordinary = snapshot.ordinary_transport(q,flags,comparison,
-                generator=self.stream,pvalues=pvalues,birth_planner=birth_planner)
-            birth_plan = ordinary["novel_birth_plan"]
-            newborn = birth_plan["children"]
-            iso_child,iso_parent,anchored = plan_residual_isolation(snapshot,q,flags,pvalues,birth_plan,
-                generator=self.stream,copy_children=child,copy_parents=parent,
-                supported_counts=ordinary["planned_supported_counts"])
-            c = self.counters
-            c["feature_rebuilds"] += 1
-            c["cell_discoveries"] += ordinary["discoveries"]
-            c["discoveries"] += ordinary["discoveries"]
-            c["realised_deaths"] += len(child)+len(newborn); c["realised_births"] += len(parent)+len(newborn)
-            if self.isolation:
-                c["iso_evals"] += 1; c["iso_flagged"] += int(flags.sum())
-                guard = bool(anchored["guard_passed"])
-                c["iso_acted" if guard else "iso_skipped"] += bool(flags.any())
-                c["iso_dup_skips"] += snapshot.duplicate_fraction>Q
-                self.iso_log = (self.iso_log+[[trainer.completed_steps+1,int(flags.sum()),int(guard)]])[-30:]
-            last = dict(step=trainer.completed_steps + 1, backend='feature_cells', snapshot=self.snapshot_serial, cells=snapshot.cells, metric_rank=snapshot.rank, k=None, d_R=None, d_F=None, eligible=int((pvalues > Q).sum()), discoveries=ordinary['discoveries'], ordinary_discoveries=ordinary['discoveries'], ordinary_excess_cells=ordinary['excess_cells'], ordinary_deficit_cells=ordinary['deficit_cells'], ordinary_budget=ordinary['budget'], ordinary_inaccessible_birth_quota=ordinary['inaccessible_birth_quota'], ordinary_moves=0 if self.dry_run else ordinary['moves'], iso_flagged=int(flags.sum()), iso_moves=0 if self.dry_run else len(iso_child), moves=0, anchored_inaccessible_deficit=anchored['inaccessible_deficit'], calibration_rows=snapshot.calibration_rows, pvalue_floor=1 / (snapshot.calibration_rows + 1), minimum_bh_flag_fraction=1 / (Q * (snapshot.calibration_rows + 1)), duplicate_fraction=snapshot.duplicate_fraction, statistic='conditional_categorical_transport', density_ratio=None, statistical_limit='conditional iid cell test; no repeated adaptive guarantee', mass_topology=dict(snapshot.mass_topology), ordinary_within_group_moves=ordinary['within_group_moves'], ordinary_between_group_moves=ordinary['between_group_moves'], unique_reaction_parents=len(torch.unique(torch.cat((parent, iso_parent)))), isolation_unfilled=anchored.get('unfilled_repairs', int(flags.sum())), count_partition=dict(snapshot.count_partition), count_boundary=float(snapshot.count_boundary), count_categories=comparison['categories'], count_multiplicity=comparison['multiplicity'], count_cutoff=comparison['cutoff'], ordinary_mass_moves=ordinary['mass_moves'], ordinary_support_moves=ordinary['support_moves'], ordinary_global_moves=ordinary['global_moves'], ordinary_death_policy=ordinary['death_policy'])
-            novel_diagnostics = novel_birth_diagnostics(birth_plan)
-            last.update(ordinary_copy_moves=0 if self.dry_run else len(child),
-                ordinary_novel_birth_moves=0 if self.dry_run else len(newborn),
-                novel_birth_attempts=birth_plan["attempted_cells"],
-                novel_birth_target_cells=novel_diagnostics["new_latent_target_cells"],
-                novel_birth_children=novel_diagnostics["child_rows"],novel_birth_seed_rows=novel_diagnostics["source_seed_rows"],
-                novel_birth=novel_diagnostics,
-                novel_birth_work_bound=dict(birth_plan["work_bound"]))
-            if not snapshot.valid_metric:
-                last["skip"] = "no varying learned features"
-            if not self.dry_run:
-                if len(child):
-                    self._move(trainer,child,parent)
-                if len(iso_child):
-                    self._move(trainer,iso_child,iso_parent)
-                apply_anchor_births(trainer,self,birth_plan)
-                moved = torch.cat((child,iso_child,newborn))
-                if len(moved):
-                    self.moved_rows = moved
-                    refreshed = self._capture_generated(trainer,trainer.prior.z.detach()[moved])
-                    invalidated,affected = snapshot.refresh_rows(moved,refreshed)
-                    self.S[invalidated]=0.; self.W[invalidated]=0.; self.n[invalidated]=0
-                    c["stale_resets"] += int(invalidated.sum()); c["invalidated_cells"] += int(affected.sum())
-                    last.update(stale_resets=int(invalidated.sum()),invalidated_cells=int(affected.sum()))
-                c["ordinary_moves"] += len(child)+len(newborn); c["moves"] += len(child)+len(newborn)
-                c["novel_birth_moves"] += len(newborn)
-                c["novel_birth_attempts"] += birth_plan["attempted_cells"]
-                c["matched"] += len(child)  # Copy matches; novel births have their own counter.
-                if self.isolation:
-                    c["iso_moves"] += len(iso_child)
-                last["moves"] = len(child)+len(iso_child)+len(newborn)
-            # Fourth ordinary copy phase sees actual post-prefix tables/counts;
-            # the pre-prefix witness and ranking directions stay fixed.
-            reserved = torch.cat((child,parent,iso_child,iso_parent,newborn,birth_plan["source_seed_rows"]))
-            mean_phase = run_mean_phase(self,trainer,snapshot,mean_fixed,mean_stamp,
-                earlier_ordinary=len(child)+len(newborn),reserved_rows=reserved,
-                allow_partial_groups=partial_recovery)
-            mean_child,mean_parent = mean_phase["children"],mean_phase["parents"]
-            if len(mean_child):
-                invalidated,affected = mean_phase["invalidated"],mean_phase["affected"]
-                self.S[invalidated]=0.; self.W[invalidated]=0.; self.n[invalidated]=0
-                c["stale_resets"] += int(invalidated.sum()); c["invalidated_cells"] += int(affected.sum())
-                last["stale_resets"] = last.get("stale_resets",0)+int(invalidated.sum())
-                last["invalidated_cells"] = last.get("invalidated_cells",0)+int(affected.sum())
-                self.moved_rows = torch.cat((child,iso_child,newborn,mean_child))
-                c["mean_moves"] += len(mean_child)
-                c["realised_deaths"] += len(mean_child); c["realised_births"] += len(mean_child)
-                c["ordinary_moves"] += len(mean_child); c["moves"] += len(mean_child)
-                c["matched"] += len(mean_child)
-            mean_count = len(mean_child)
-            last.update(mean_transport=dict(mean_phase["diagnostics"]),ordinary_mean_moves=mean_count,
-                ordinary_mean_children=mean_child.cpu().tolist(),ordinary_mean_parents=mean_parent.cpu().tolist(),
-                ordinary_copy_moves=last["ordinary_copy_moves"]+mean_count,
-                ordinary_moves=last["ordinary_moves"]+mean_count,moves=last["moves"]+mean_count,
-                ordinary_within_group_moves=last["ordinary_within_group_moves"]+mean_count,
-                unique_reaction_parents=len(torch.unique(torch.cat((parent,iso_parent,mean_parent)))),
-                ordinary_action_children=[] if self.dry_run else torch.cat((ordinary["action_children"],mean_child)).cpu().tolist(),
-                ordinary_copy_parent_rows=[] if self.dry_run else torch.cat((parent,mean_parent)).cpu().tolist(),
-                ordinary_action_kinds=[] if self.dry_run else torch.cat((ordinary["action_kinds"],torch.full_like(mean_child,4))).cpu().tolist())
-            if self.dry_run:
-                for key in ("ordinary_mass_moves","ordinary_support_moves","ordinary_global_moves"):
-                    last[key]=0
-            # All old/mean copies and new latents have been applied and cached.
-            # Keep the original fresh final EMA query: no feature-cache reuse.
-            self._record_paired_average(trainer,snapshot)
-            last["paired_average"] = dict(self.paired_average)
-            last["paired_average_forward_rows"] = self.N
-            c["feature_distance_cells"] += snapshot.work["distance_cells"]
-            c["projection_products"] += snapshot.work["projection_products"]
-            c["count_test_terms"] += snapshot.work["count_test_terms"]
-            last.update(work=dict(snapshot.work),eval_seconds=time.perf_counter()-begin)
-            self.last = last
-            return last
+            return self._apply_evaluation(trainer,sigma,begin)
+        except BaseException:
+            evidence,self.rows_since_eval,counters,self.snapshot_serial = saved
+            for target,value in zip((self.S,self.W,self.n,self.pending),evidence):
+                target.copy_(value)
+            self.counters.clear(); self.counters.update(counters)
+            moved = torch.ne(trainer.prior.z.detach(),table_before).flatten(1).any(1)
+            if self.moved_rows is not None:
+                moved[self.moved_rows] = True
+            if bool(moved.any()):  # rows already transported start a new lineage
+                self.S[moved]=0.; self.W[moved]=0.; self.n[moved]=0
+            raise
         finally:
             for module,mode in modes:
                 module.training = mode
+
+    @torch.no_grad()
+    def _apply_evaluation(self,trainer,sigma,begin):
+        trainer.G.eval(); trainer.D.eval()
+        z = trainer.prior.z.detach()
+        q = self._capture_generated(trainer,z)
+        R = self._features(trainer,self.reservoir,chunk=self.settings["chunk"])
+        self.counters["feature_forward_rows"] += self.N
+        snapshot = FeatureCellSnapshot.fit(R,generator=self.stream,cells=self.settings["cells"],
+                                          rank=self.settings["rank"],chunk=self.settings["chunk"])
+        self.snapshot = snapshot
+        # Freeze the scalar witness before any odd-count-driven action.
+        partial_recovery = getattr(trainer,'mean_partial_recovery',False)
+        mean_fixed,mean_stamp = prepare_mean_witness(self,trainer,snapshot,R,
+            allow_partial_groups=partial_recovery)
+        pick = torch.randint(self.N,(self.N,),device=z.device,generator=self.stream)
+        F = self._capture_generated(trainer,z[pick],sigma=sigma,jitter=True,rows=pick)
+        flags,pvalues,_ = snapshot.support(q)
+        if not self.isolation:
+            flags.zero_()
+        snapshot.cache_queries(q)
+        comparison = snapshot.cell_comparison(F)
+        current_features = learned_latent_features(self,trainer,trainer.G)
+        average_features = learned_latent_features(self,trainer,trainer.ema_G)
+        def birth_planner(copy_children,copy_parents,supported,budget):
+            return plan_real_anchor_births(snapshot,q,flags,pvalues,comparison,z,current_features,
+                ema_latents=trainer.ema_prior.z.detach(),ema_feature_of_latent=average_features,
+                previous_children=copy_children,previous_copy_parents=copy_parents,
+                supported_counts=supported,max_moves=budget)
+        child,parent,ordinary = snapshot.ordinary_transport(q,flags,comparison,
+            generator=self.stream,pvalues=pvalues,birth_planner=birth_planner)
+        birth_plan = ordinary["novel_birth_plan"]
+        newborn = birth_plan["children"]
+        iso_child,iso_parent,anchored = plan_residual_isolation(snapshot,q,flags,pvalues,birth_plan,
+            generator=self.stream,copy_children=child,copy_parents=parent,
+            supported_counts=ordinary["planned_supported_counts"])
+        c = self.counters
+        c["feature_rebuilds"] += 1
+        c["cell_discoveries"] += ordinary["discoveries"]
+        c["discoveries"] += ordinary["discoveries"]
+        c["realised_deaths"] += len(child)+len(newborn); c["realised_births"] += len(parent)+len(newborn)
+        if self.isolation:
+            c["iso_evals"] += 1; c["iso_flagged"] += int(flags.sum())
+            guard = bool(anchored["guard_passed"])
+            c["iso_acted" if guard else "iso_skipped"] += bool(flags.any())
+            c["iso_dup_skips"] += snapshot.duplicate_fraction>Q
+            self.iso_log = (self.iso_log+[[trainer.completed_steps+1,int(flags.sum()),int(guard)]])[-30:]
+        last = dict(step=trainer.completed_steps + 1, backend='feature_cells', snapshot=self.snapshot_serial, cells=snapshot.cells, metric_rank=snapshot.rank, k=None, d_R=None, d_F=None, eligible=int((pvalues > Q).sum()), discoveries=ordinary['discoveries'], ordinary_discoveries=ordinary['discoveries'], ordinary_excess_cells=ordinary['excess_cells'], ordinary_deficit_cells=ordinary['deficit_cells'], ordinary_budget=ordinary['budget'], ordinary_inaccessible_birth_quota=ordinary['inaccessible_birth_quota'], ordinary_moves=0 if self.dry_run else ordinary['moves'], iso_flagged=int(flags.sum()), iso_moves=0 if self.dry_run else len(iso_child), moves=0, anchored_inaccessible_deficit=anchored['inaccessible_deficit'], calibration_rows=snapshot.calibration_rows, pvalue_floor=1 / (snapshot.calibration_rows + 1), minimum_bh_flag_fraction=1 / (Q * (snapshot.calibration_rows + 1)), duplicate_fraction=snapshot.duplicate_fraction, statistic='conditional_categorical_transport', density_ratio=None, statistical_limit='conditional iid cell test; no repeated adaptive guarantee', mass_topology=dict(snapshot.mass_topology), ordinary_within_group_moves=ordinary['within_group_moves'], ordinary_between_group_moves=ordinary['between_group_moves'], unique_reaction_parents=len(torch.unique(torch.cat((parent, iso_parent)))), isolation_unfilled=anchored.get('unfilled_repairs', int(flags.sum())), count_partition=dict(snapshot.count_partition), count_boundary=float(snapshot.count_boundary), count_categories=comparison['categories'], count_multiplicity=comparison['multiplicity'], count_cutoff=comparison['cutoff'], ordinary_mass_moves=ordinary['mass_moves'], ordinary_support_moves=ordinary['support_moves'], ordinary_global_moves=ordinary['global_moves'], ordinary_death_policy=ordinary['death_policy'])
+        novel_diagnostics = novel_birth_diagnostics(birth_plan)
+        last.update(ordinary_copy_moves=0 if self.dry_run else len(child),
+            ordinary_novel_birth_moves=0 if self.dry_run else len(newborn),
+            novel_birth_attempts=birth_plan["attempted_cells"],
+            novel_birth_target_cells=novel_diagnostics["new_latent_target_cells"],
+            novel_birth_children=novel_diagnostics["child_rows"],novel_birth_seed_rows=novel_diagnostics["source_seed_rows"],
+            novel_birth=novel_diagnostics,
+            novel_birth_work_bound=dict(birth_plan["work_bound"]))
+        if not snapshot.valid_metric:
+            last["skip"] = "no varying learned features"
+        if not self.dry_run:
+            if len(child):
+                self._move(trainer,child,parent)
+            if len(iso_child):
+                self._move(trainer,iso_child,iso_parent)
+            apply_anchor_births(trainer,self,birth_plan)
+            moved = torch.cat((child,iso_child,newborn))
+            if len(moved):
+                self.moved_rows = moved
+                refreshed = self._capture_generated(trainer,trainer.prior.z.detach()[moved])
+                invalidated,affected = snapshot.refresh_rows(moved,refreshed)
+                self.S[invalidated]=0.; self.W[invalidated]=0.; self.n[invalidated]=0
+                c["stale_resets"] += int(invalidated.sum()); c["invalidated_cells"] += int(affected.sum())
+                last.update(stale_resets=int(invalidated.sum()),invalidated_cells=int(affected.sum()))
+            c["ordinary_moves"] += len(child)+len(newborn); c["moves"] += len(child)+len(newborn)
+            c["novel_birth_moves"] += len(newborn)
+            c["novel_birth_attempts"] += birth_plan["attempted_cells"]
+            c["matched"] += len(child)  # Copy matches; novel births have their own counter.
+            if self.isolation:
+                c["iso_moves"] += len(iso_child)
+            last["moves"] = len(child)+len(iso_child)+len(newborn)
+        # Fourth ordinary copy phase sees actual post-prefix tables/counts;
+        # the pre-prefix witness and ranking directions stay fixed.
+        reserved = torch.cat((child,parent,iso_child,iso_parent,newborn,birth_plan["source_seed_rows"]))
+        mean_phase = run_mean_phase(self,trainer,snapshot,mean_fixed,mean_stamp,
+            earlier_ordinary=len(child)+len(newborn),reserved_rows=reserved,
+            allow_partial_groups=partial_recovery)
+        mean_child,mean_parent = mean_phase["children"],mean_phase["parents"]
+        if len(mean_child):
+            invalidated,affected = mean_phase["invalidated"],mean_phase["affected"]
+            self.S[invalidated]=0.; self.W[invalidated]=0.; self.n[invalidated]=0
+            c["stale_resets"] += int(invalidated.sum()); c["invalidated_cells"] += int(affected.sum())
+            last["stale_resets"] = last.get("stale_resets",0)+int(invalidated.sum())
+            last["invalidated_cells"] = last.get("invalidated_cells",0)+int(affected.sum())
+            self.moved_rows = torch.cat((child,iso_child,newborn,mean_child))
+            c["mean_moves"] += len(mean_child)
+            c["realised_deaths"] += len(mean_child); c["realised_births"] += len(mean_child)
+            c["ordinary_moves"] += len(mean_child); c["moves"] += len(mean_child)
+            c["matched"] += len(mean_child)
+        mean_count = len(mean_child)
+        last.update(mean_transport=dict(mean_phase["diagnostics"]),ordinary_mean_moves=mean_count,
+            ordinary_mean_children=mean_child.cpu().tolist(),ordinary_mean_parents=mean_parent.cpu().tolist(),
+            ordinary_copy_moves=last["ordinary_copy_moves"]+mean_count,
+            ordinary_moves=last["ordinary_moves"]+mean_count,moves=last["moves"]+mean_count,
+            ordinary_within_group_moves=last["ordinary_within_group_moves"]+mean_count,
+            unique_reaction_parents=len(torch.unique(torch.cat((parent,iso_parent,mean_parent)))),
+            ordinary_action_children=[] if self.dry_run else torch.cat((ordinary["action_children"],mean_child)).cpu().tolist(),
+            ordinary_copy_parent_rows=[] if self.dry_run else torch.cat((parent,mean_parent)).cpu().tolist(),
+            ordinary_action_kinds=[] if self.dry_run else torch.cat((ordinary["action_kinds"],torch.full_like(mean_child,4))).cpu().tolist())
+        if self.dry_run:
+            for key in ("ordinary_mass_moves","ordinary_support_moves","ordinary_global_moves"):
+                last[key]=0
+        # All old/mean copies and new latents have been applied and cached.
+        # Keep the original fresh final EMA query: no feature-cache reuse.
+        self._record_paired_average(trainer,snapshot)
+        last["paired_average"] = dict(self.paired_average)
+        last["paired_average_forward_rows"] = self.N
+        c["feature_distance_cells"] += snapshot.work["distance_cells"]
+        c["projection_products"] += snapshot.work["projection_products"]
+        c["count_test_terms"] += snapshot.work["count_test_terms"]
+        last.update(work=dict(snapshot.work),eval_seconds=time.perf_counter()-begin)
+        self.last = last
+        return last
 
     def diagnostics(self):
         result = super().diagnostics()
