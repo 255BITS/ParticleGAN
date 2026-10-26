@@ -21,6 +21,8 @@ def _kernel_mean(left, right, scale):
     result = left[:0].sum()
     for a in left.split(64):
         for b in right.split(64):
+            # Exact broadcast differences (not _stats.pairwise_sq_dist, whose
+            # matmul cdist kernel rounds differently).
             distance = (a[:, None] - b[None, :]).square().sum(-1)
             for bandwidth in (.25, 1., 4.):
                 width = scale * bandwidth

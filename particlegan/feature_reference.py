@@ -1,4 +1,10 @@
-"""Fisher-Rao birth-death moves for a particle table (recipe ``particle_birth_death``).
+"""Frozen trainer-coupled reference birth-death law used by the feature-cell backend.
+
+This module pins the kNN/Beta reaction that ``feature_cells`` builds on; see
+:class:`FrozenFeatureReferenceBirthDeath` for why it is kept separate from the
+current law in ``birth_death.py``. The original law description follows.
+
+Fisher-Rao birth-death moves for a particle table (recipe ``particle_birth_death``).
 
 Spec: reports/design-birthdeath.md (rev 2). Once per full turnover of a FIFO
 reservoir R of the last N D-real rows (N = table size), every particle i is
@@ -22,55 +28,30 @@ import math
 
 import torch
 
-
-def _knn(query, points, k, exclude=None, chunk=2048, shortlist_dtype=None):
-    """Exact k smallest distances (ascending) and indices from each query row
-    to ``points``; ``exclude[i]`` (optional) is a point index skipped for query i.
-    Shortlist 2k+2 candidates with the matmul cdist (optionally in a cheaper dtype), then recompute exactly."""
-    m = min(len(points) - (exclude is not None), 2 * k + 2)
-    ds, ids = [], []
-    points_short = points if shortlist_dtype is None else points.to(shortlist_dtype)
-    for start in range(0, len(query), chunk):
-        q = query[start:start + chunk]
-        dist = torch.cdist(q if shortlist_dtype is None else q.to(shortlist_dtype), points_short,
-                           compute_mode="use_mm_for_euclid_dist")
-        if exclude is not None:
-            dist.scatter_(1, exclude[start:start + chunk, None], float("inf"))
-        idx = dist.topk(m, dim=1, largest=False).indices
-        exact = (q[:, None, :] - points[idx]).norm(dim=2)
-        exact, order = exact.sort(1)
-        ds.append(exact[:, :k])
-        ids.append(idx.gather(1, order)[:, :k])
-    return torch.cat(ds), torch.cat(ids)
+# The kNN/Beta numerical helpers are shared verbatim with the current law.
+from .birth_death import _knn, _levina_bickel, _normal_score
+from .drift_variants import drift_features
 
 
-def _levina_bickel(dist):
-    """MacKay-Ghahramani pooled Levina-Bickel MLE from ascending kNN distances [n, k]."""
-    k = dist.shape[1]
-    ok = dist[:, 0] > 0
-    if not bool(ok.any()):
-        return float("nan"), 0
-    t = dist[ok].double()
-    inverse = (t[:, -1:] / t[:, :-1]).log().sum(1) / (k - 1)
-    mean = float(inverse.mean())
-    return (1. / mean if mean > 0 else float("nan")), int(ok.sum())
+class FrozenFeatureReferenceBirthDeath:
+    """Frozen trainer-coupled kNN/Beta reaction law under the feature-cell backend.
 
+    This is a pinned fork of an earlier ``birth_death.ParticleBirthDeath`` that
+    reads the GANTrainer directly (``trainer.prior``, ``trainer.G``/``D``,
+    ``trainer.opt_g``). It is *not* the current table-agnostic
+    :class:`particlegan.birth_death.ParticleBirthDeath`, whose constructor takes
+    a :class:`~particlegan.birth_death.ParticleRows` facade. The two differ in
+    construction, feature extraction, generated-sample checks and checkpoint
+    configuration, so they are not interchangeable.
 
-def _normal_score(x, k):
-    """Exact null probability transform of a kNN log volume ratio: under the null
-    sigmoid(x) ~ Beta(k, k), so w = Phi^-1(I_sigmoid(x)(k, k)) ~ N(0, 1) exactly.
-    I_u(k, k) = P(Binomial(2k-1, u) >= k), summed in log space on the smaller tail."""
-    a = -x.abs()                                   # use the lower tail, restore the sign
-    log_u, log_1u = torch.nn.functional.logsigmoid(a), torch.nn.functional.logsigmoid(-a)
-    j = torch.arange(k, 2 * k, dtype=torch.float64, device=x.device)
-    log_binom = (torch.lgamma(torch.tensor(2. * k, dtype=torch.float64, device=x.device))
-                 - torch.lgamma(j + 1) - torch.lgamma(2 * k - j))
-    log_cdf = torch.logsumexp(log_binom + j * log_u[:, None] + (2 * k - 1 - j) * log_1u[:, None], dim=1)
-    w = torch.special.ndtri(log_cdf.exp().clamp(1e-300, .5))
-    return torch.where(x > 0, -w, w)
-
-
-class ParticleBirthDeath:
+    It exists for two reasons: :class:`~particlegan.feature_cells.FeatureCellBirthDeath`
+    inherits its FIFO reservoir, evidence rows, critic-feature extraction and
+    checkpoint base schema, and
+    :class:`~particlegan.feature_cells.SmallPopulationReferenceBirthDeath` uses
+    its unchanged reaction as the small-population fallback. Archived
+    feature-cell qualification evidence is bound to this exact behaviour, so
+    keep it frozen; change the current law in ``birth_death.py`` instead.
+    """
     Q = .05          # BH false-discovery rate per evaluation; dimension-test level
 
     def __init__(self, trainer, seed):
@@ -157,11 +138,12 @@ class ParticleBirthDeath:
     @torch.no_grad()
     def _jitter(self, trainer, latent, prior, noise):
         c = trainer.controller
-        if c is None or c.variant not in ("dv10", "dv11", "dv12"):
+        features = None if c is None else drift_features(c.variant)
+        if features is None or not features.latent_bandwidth:
             return torch.zeros_like(latent)
-        trust = c.support_trust if c.variant == "dv11" else 1.
+        trust = c.support_trust if features.support_trust else 1.
         displacement = c.latent_bandwidth * trust * noise
-        if c.variant == "dv12":
+        if features.local_support:
             radius = self._nearest_other(latent, prior.z.detach())
             norm = displacement.norm(dim=1)
             displacement = displacement * (radius / norm.clamp_min(1e-20)).clamp_max(1.).unsqueeze(1)
@@ -540,3 +522,7 @@ class ParticleBirthDeath:
             torch.Generator(device=self.stream.device).set_state(state["stream"].cpu())
         except (TypeError, RuntimeError, AttributeError) as error:
             raise ValueError("invalid birth-death stream state") from error
+
+
+# Historical import name; the same frozen class, not birth_death.ParticleBirthDeath.
+ParticleBirthDeath = FrozenFeatureReferenceBirthDeath
