@@ -102,7 +102,10 @@ removes the trained object. The tables mark them *table is the trained object*.
   - Ring16: all arms find 16 modes, but high-quality fraction falls from 0.95
     (A1) to 0.61 (A2) and 0.53 (A3). Per-component covariance error rises from
     0.47 to 5.9 and 6.7 (gate 0.85).
-  - `mode_hold`: A3's hq collapses to 0.50.
+  - `mode_hold`: A3's hq collapses to 0.50. (Its graded modes/hq sample
+    `prior.sample`, i.e. the fresh law. The optional `support` diagnostic in
+    `benchmarks/locked_shared/mode_hold.py` enumerates `generator(prior.z)`, so
+    under A3 it describes the frozen table rows, not the sampled N(0, I) law.)
   - Native 100-mode grids: precision falls from 0.30/0.22/0.34 (learned, on
     grid/rotated/staggered) to 0.03–0.08 for both controls. Mass TV improves,
     for example rotated100 0.111 → 0.068 (A2) → 0.037 (A3).

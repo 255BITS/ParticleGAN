@@ -175,11 +175,6 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
                 row["support"] = diversity(generator(prior.z), means, detailed=True)
                 if noise_policy is not None and noise_policy.output_std > 0:
                     row["support_scope"] = "one noisy draw per particle"
-                if getattr(prior, "code_law", "table") != "table":
-                    # The graded row above samples the fresh law; support still
-                    # enumerates the frozen table rows, not that law.
-                    row["support_scope"] = "; ".join(filter(None, (
-                        row.get("support_scope"), "table rows, not the sampled fresh_gaussian law")))
         return row
 
     def snapshot(step: int) -> dict:
