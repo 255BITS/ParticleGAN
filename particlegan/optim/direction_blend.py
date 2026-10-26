@@ -13,6 +13,7 @@ class DirectionBlendOptimizer(ConstraintGeometryOptimizer):
     Opposed normals restore the original tensors. Otherwise apply the rounded
     full blend even when finite objective values increase. Inactive updates keep
     the base tensors bitwise; no evaluator is bound or called.
+    Customizes the inherited step through the ``_check_step``/``_adjust_step`` hooks.
     """
 
     def __init__(self, *args, **kwargs):

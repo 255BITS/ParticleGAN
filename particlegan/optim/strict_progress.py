@@ -29,6 +29,7 @@ class StrictProgressOptimizer(ConstraintGeometryOptimizer):
     protected losses and fixed critic, without sampling or mutable forward buffers.
     Inactive steps never call it and retain the base step bitwise. Pending-state
     restore requires rebinding this caller-owned evaluator before step().
+    Customizes the inherited step through the ``_check_step``/``_adjust_step`` hooks.
     """
 
     def __init__(self, *args, **kwargs):
