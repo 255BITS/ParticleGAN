@@ -126,7 +126,7 @@ def test_history_pins_keep_original_blobs_and_record_superseded_page_edits(track
         source = sources[edit["source_id"]]
         assert source["revision"] == edit["pinned_revision"], path
         assert source["files"][path] == edit["pinned_blob"], path  # pins are never rewritten
-        assert (edit["current_blob"] is None) == (path not in tracked), path
+        assert edit["current_blob"] == tracked.get(path), path
     pinned = {path: blob for source in sources.values() for path, blob in source["files"].items()}
     touched = [e["path"] for _, e in _superseded() if e["disposition"] == "bannered"]
     touched += [p for goal in _goals() for p in goal.get("archived", {}).get("paths", [])]

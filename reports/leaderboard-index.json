@@ -6,7 +6,8 @@
     "bannered: a superseded page that report links still cite carries the generated superseded banner, which links the goal's current page and the technique inventory.",
     "frozen: a superseded page whose exact bytes are recorded (sha256 or Git blob) by a retention, archive or source-seal manifest is never edited; this index marks it superseded instead of a banner.",
     "archived: a superseded generated copy with no consumer other than the regenerated catalog and revision-pinned history records is removed from the tree and recorded in reports/log-archive.json.",
-    "The revision-pinned history import (reports/forge/history-sources.json, reports/forge/records/history-context-report-*.json) keeps the original blobs; banners and archiving never rewrite those pins."
+    "The revision-pinned history import (reports/forge/history-sources.json, reports/forge/records/history-context-report-*.json) keeps the original blobs; banners and archiving never rewrite those pins.",
+    "Scope: leaderboard pages (.md). Generated leaderboard data files (leaderboard*.json, .csv, .html) stay with the run directory that wrote them and are not indexed here."
   ],
   "banner": "<!-- superseded-banner: generated -->",
   "goals": [

@@ -63,6 +63,10 @@ It is archived when nothing but the regenerated catalog and the revision-pinned
 history import refers to it. The 2026-10-26 entry in the archive index removes 46
 such per-run toy100 gate pages; their gate JSON receipts stay tracked.
 [`forge/history-pin-edits.json`](forge/history-pin-edits.json) lists the pinned
-history narratives whose checkout copy has since changed. Their pins in
-`forge/history-sources.json` keep the original blobs.
+baseline-source history narratives that the banner, archive and doc edits
+touched after the pin. It is not a complete drift list; other pinned pages have
+drifted for unrelated reasons. Their pins in `forge/history-sources.json` keep
+the original blobs. The index covers leaderboard pages (`.md`); generated
+leaderboard data files (`leaderboard*.json`, `.csv`, `.html`) belong to the
+run directory that wrote them and are out of its scope.
 `tests/test_leaderboard_index.py` enforces the index and the record.
