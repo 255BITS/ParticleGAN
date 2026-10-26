@@ -105,40 +105,44 @@ class ConstraintGeometryOptimizer(NormalizedOptimizer):
 
     @torch.no_grad()
     def step(self, closure=None):
-        """Project the base displacement; any failure aborts pending losses.
+        """Base DualNorm update, then this class's displacement adjustment.
 
-        Any failure (check, base update or projection) calls ``abort_pending()``;
-        a failed projection also restores the pre-step parameters, a failed base
-        update is not rolled back (see ``NormalizedOptimizer._propose_adjust_commit``).
+        Subclasses customize ``_check_step`` and ``_adjust_step`` instead of
+        overriding ``step``. Any failure (check, base update or adjustment)
+        calls ``abort_pending()``; a failed adjustment also restores the
+        pre-step parameters, a failed base update is not rolled back (see
+        ``NormalizedOptimizer._propose_adjust_commit``).
         """
-        def check():
-            if closure is not None or self._protected is None:
-                raise ValueError("constraint_geometry step requires explicit protected-loss backward")
-
-        def adjust(parameters, originals):
-            normals = self._protected
-            displacement = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
-            projected = project_nonascent(displacement, normals)
-            before = normals.double() @ displacement.double()
-            stats = self.constraint_geometry_stats
-            stats["steps"] += 1
-            changed = not torch.equal(projected, displacement)
-            stats["projected_steps"] += int(changed)
-            stats["max_derivative_before"] = max(stats["max_derivative_before"], float(before.max()))
-            if changed:
-                offset = 0
-                for parameter, original in zip(parameters, originals):
-                    size = parameter.numel()
-                    parameter.copy_(original + projected[offset:offset + size].view_as(parameter))
-                    offset += size
-            # Preserve the already-applied tensors bitwise when projection is inactive.
-            # old + (new - old) can lose near-zero values in float32.
-            applied = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
-            after = normals.double() @ applied.double()
-            stats["max_derivative_after"] = max(stats["max_derivative_after"], float(after.max()))
-
         return self._propose_adjust_commit(lambda: super(ConstraintGeometryOptimizer, self).step(),
-                                           adjust, check=check)
+                                           self._adjust_step, check=lambda: self._check_step(closure))
+
+    def _check_step(self, closure):
+        """Reject a step whose protected losses were not bound by backward."""
+        if closure is not None or self._protected is None:
+            raise ValueError("constraint_geometry step requires explicit protected-loss backward")
+
+    def _adjust_step(self, parameters, originals):
+        """Project the base displacement onto the protected non-ascent cone."""
+        normals = self._protected
+        displacement = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
+        projected = project_nonascent(displacement, normals)
+        before = normals.double() @ displacement.double()
+        stats = self.constraint_geometry_stats
+        stats["steps"] += 1
+        changed = not torch.equal(projected, displacement)
+        stats["projected_steps"] += int(changed)
+        stats["max_derivative_before"] = max(stats["max_derivative_before"], float(before.max()))
+        if changed:
+            offset = 0
+            for parameter, original in zip(parameters, originals):
+                size = parameter.numel()
+                parameter.copy_(original + projected[offset:offset + size].view_as(parameter))
+                offset += size
+        # Preserve the already-applied tensors bitwise when projection is inactive.
+        # old + (new - old) can lose near-zero values in float32.
+        applied = torch.cat([(p - old).flatten() for p, old in zip(parameters, originals)])
+        after = normals.double() @ applied.double()
+        stats["max_derivative_after"] = max(stats["max_derivative_after"], float(after.max()))
 
     def state_dict(self):
         result = super().state_dict()
