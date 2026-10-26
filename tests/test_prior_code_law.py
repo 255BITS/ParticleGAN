@@ -57,8 +57,14 @@ def test_fresh_gaussian_particle_cloud_draws_n01_codes_and_refuses_table_reads()
 def test_recipe_declares_and_applies_code_law():
     default = get_recipe("bispf")
     assert default.prior_code_law == "table" and "prior_code_law" not in default.to_dict()
+    # Hosts build the initial table through recipe.replace(prior_update="learned");
+    # that construction must work (regression: it crashed every Forge host).
+    fresh = get_recipe("bispf", prior_update="frozen", prior_code_law="fresh_gaussian")
+    table = fresh.replace(prior_update="learned").make_prior()
     with pytest.raises(ValueError, match="requires prior_update='frozen'"):
-        get_recipe("bispf", prior_code_law="fresh_gaussian")
+        fresh.replace(prior_update="learned").apply_prior_policy(table)
+    fresh.apply_prior_policy(table)
+    assert table.code_law == "fresh_gaussian"
     with pytest.raises(ValueError, match="prior_code_law must be"):
         get_recipe("bispf", prior_update="frozen", prior_code_law="normal")
     recipe = get_recipe("bispf", prior_update="frozen", prior_code_law="fresh_gaussian")
@@ -112,3 +118,18 @@ def test_forge_binds_and_blocks_the_code_law():
     assert validate_prior_policy(task, {"prior_policy": proof}, recipe_dict) is None
     tampered = {**proof, "code_law": "table"}
     assert validate_prior_policy(task, {"prior_policy": tampered}, recipe_dict)["status"] == "INVALID"
+
+
+def test_forge_context_builds_a_fresh_gaussian_prior_for_a_vector_task():
+    """Regression: the Forge host path builds the table via replace(prior_update='learned')."""
+    import json
+    from pathlib import Path
+    from experiments.forge.api import task_formulation_context
+    root = Path(__file__).resolve().parents[1]
+    candidate = json.loads((root / "configs/forge/ideas/bispf-prior-fresh-gaussian-v1.json").read_text())
+    task = json.loads((root / "configs/forge/tasks/gaussian1d_smoke.json").read_text())
+    context = task_formulation_context(candidate, task, {"seed": 0}, root=root)
+    prior = context.build_prior()
+    assert prior.code_law == "fresh_gaussian" and not prior.z.requires_grad
+    codes, rows = prior.sample(8, torch.Generator().manual_seed(0))
+    assert codes.shape == (8, prior.z_dim) and rows.shape == (8,)
