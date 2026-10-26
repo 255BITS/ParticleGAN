@@ -16,7 +16,7 @@ import json
 import math
 from pathlib import Path
 import struct
-from types import MethodType, SimpleNamespace
+from types import SimpleNamespace
 
 SCHEMA = "pg_canonical_image_policy_binding_v1"
 OWNER_SCHEMA = "pg_canonical_image_initial_owner_v1"
@@ -276,7 +276,13 @@ def resolve_binding(root, candidate, task, protocol):
 
 
 def derive_live_step(source):
-    """Remove one serving storage swap; all public scientific AST stays exact."""
+    """Remove one serving storage swap; all public scientific AST stays exact.
+
+    Source-level receipt only (``compile_source_preflight``): the pinned
+    trainer's step without its final ``_serve_apply`` call. Owners no longer
+    execute this overlay; they request the same behaviour through the public
+    ``GANTrainer(serve_after_step=False)`` option.
+    """
     cls = next(n for n in ast.parse(source).body if isinstance(n, ast.ClassDef) and n.name == "GANTrainer")
     step = deepcopy(next(n for n in cls.body if isinstance(n, ast.FunctionDef) and n.name == "_step"))
     matches = [i for i, n in enumerate(step.body)
@@ -467,13 +473,19 @@ def construct_owner(root, binding, *, source_guard, device="cuda:1"):
     options = {name: owner.streams.generator(family, component=component, purpose=purpose)
                for name, (family, component, purpose) in stream_bindings.items()}
     owner.data = owner.streams.generator("data", component="target", purpose="training")
+    # Live training storage after every update: the public ``serve_after_step``
+    # extension point expresses exactly what ``derive_live_step`` removes from
+    # ``GANTrainer._step`` (the final ``_serve_apply`` swap); verified
+    # bit-identical on CPU trajectories of the *current* trainer. This owner
+    # cannot be constructed from this tree: ``require_legacy_autograd_source``
+    # accepts only the pinned trainer, which has no ``serve_after_step``
+    # parameter (this call would raise TypeError there), and several
+    # SOURCE_PINS already differ on develop. The archived cohort is reproduced
+    # from its original commit, which still carries the exec overlay.
     owner.trainer = GANTrainer(recipe, owner.generator, owner.critic, prior=owner.prior, seed=0,
-        max_steps=600, require_latent_damping=True, **options)
+        max_steps=600, require_latent_damping=True, serve_after_step=False, **options)
     owner.policy = owner.trainer.policy
     owner.opt_g, owner.opt_d = owner.trainer.opt_g, owner.trainer.opt_d
-    namespace = dict(vars(inspect.getmodule(GANTrainer)))
-    exec(compile(derive_live_step(_source(root, TRAINER_PATH)), "<pinned-live-storage-public-step>", "exec"), namespace)
-    owner.trainer._step = MethodType(namespace["_step"], owner.trainer)
     owner.lifecycle_audit = PolicyLifecycleAudit(owner.policy)
     owner.calls = owner.lifecycle_audit.calls
     owner.centers = image_tasks.templates(owner.spec).to(device=device, dtype=torch.float32)

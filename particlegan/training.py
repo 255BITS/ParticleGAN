@@ -154,6 +154,21 @@ class GANTrainer:
     KA2's ``trust_mode`` candidate is selected with
     ``optimizer_options={"ka2_trust_mode": "scale"}``, which the checkpoint
     records with the other optimizer options.
+
+    ``serve_after_step`` (default True) is the public extension point for the
+    end-of-update serving swap. When a recipe serves an average
+    (``serve_average > 0``) and that average has settled, each ``step`` ends by
+    copying the averaged weights into the modules (the training iterate is
+    restored at the start of the next update). ``serve_after_step=False``
+    leaves the live training iterate in the modules after every update; the
+    served state stays available from ``served_snapshot``/``served_model``.
+    Only that swap changes: losses, optimizer updates and RNG consumption are
+    identical, and checkpoints always store the training iterate (a resumed
+    ``serve_after_step=False`` trainer also leaves the training iterate in the
+    modules after ``load_state_dict``). Recipes
+    with ``serve_average == 0`` behave identically either way. The option is
+    execution-only and is not recorded in checkpoints; pass the same value
+    when resuming.
     """
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
@@ -162,11 +177,14 @@ class GANTrainer:
                  prior_noise_generator=None, eval_generator=None, model_generator=None,
                  require_latent_damping=None, max_steps=None,
                  optimizer_options=None, penalty_options=None, serial_backward=True,
-                 row_evidence_statistic="sphericity"):
+                 row_evidence_statistic="sphericity", serve_after_step=True):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if type(serial_backward) is not bool:
             raise TypeError("serial_backward must be a boolean")
+        if type(serve_after_step) is not bool:
+            raise TypeError("serve_after_step must be a boolean")
+        self.serve_after_step = serve_after_step
         if not serial_backward:
             raise ValueError("ParticleGAN requires serial_backward=True; autograd multithreading is disabled")
         if getattr(recipe, "row_policy", "independent") != "independent":
@@ -529,7 +547,8 @@ class GANTrainer:
             for parameter, flag in zip(self.D.parameters(), flags):
                 parameter.requires_grad_(flag)
         self.policy.finish_step()
-        self._serve_apply()
+        if self.serve_after_step:
+            self._serve_apply()
         result = {key: value.detach() for key, value in
                   dict(loss_d=loss_d, loss_g=loss_g, loss_gan=loss_gan,
                        prior_regularization=prior_reg, penalty=penalty).items()}
@@ -826,7 +845,8 @@ class GANTrainer:
         torch.set_rng_state(state["cpu_rng"].cpu())
         if self.device.type == "cuda":
             torch.cuda.set_rng_state(state["cuda_rng"].cpu(), self.device)
-        self._serve_apply()
+        if self.serve_after_step:
+            self._serve_apply()
 
 
 def _policy_property(name):

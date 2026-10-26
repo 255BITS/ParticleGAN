@@ -27,22 +27,29 @@ Backfill coverage: **853/853 distinct recipe/test pairs attempted (selected and 
 
 ## Full-suite results — failures included
 
-**49 distinct tests**, including held tests. Each test counts once. A held FAIL is still a failure in this table. Only duplicate questions and phases already included in another test are excluded. These are recorded results for the selected recipe and source, not new measurements or current-source qualification.
+**49 tests from the fixed test list `technique-inventory-full-suite-2026-10-25` (dated 2026-10-25)**: [list](../../configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json), sha256 `14155fb6273a`. The denominator never shrinks: every listed test counts in every row, including tests that a view now holds or removed from its count. Each test counts once. A held FAIL is still a failure in this table. Only duplicate questions and phases already included in another test are excluded. These are recorded results for the selected recipe and source, not new measurements or current-source qualification.
 
 [Problem list: what each test asks, what fails, and which configurations have passed](problems.md).
 
-| Family / selected recipe | Pass | Fail | Other outcomes | Total tests |
-| --- | ---: | ---: | --- | ---: |
-| [BCAP](families/bcap-pure.md) · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md) | 16 | **12** | 21 not measured | 49 |
-| [BISPF](families/bispf.md) | 18 | **11** | 20 not measured | 49 |
-| [Atlas](families/atlas.md) | 0 | **0** | 29 blocked; 20 not measured | 49 |
-| [E22](families/e22.md) | 0 | **0** | 29 blocked; 20 not measured | 49 |
-| [GAN v3 release 0.7](families/release07-gan-v3.md) | 5 | **2** | 42 not measured | 49 |
-| [K3P](families/k3p.md) | 5 | **2** | 42 not measured | 49 |
-| [KA2](families/ka2.md) | 5 | **2** | 42 not measured | 49 |
-| [R1/R2](families/r1r2.md) | 5 | **2** | 42 not measured | 49 |
+| Family / selected recipe | PASS | FAIL | Not measured | Other outcomes | Held or not counted (of these) | Total tests | Tuning budget and selection |
+| --- | ---: | ---: | ---: | --- | --- | ---: | --- |
+| [BCAP](families/bcap-pure.md) · [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md) | 16 | **12** | 21 | 0 | 13: 0 PASS, 7 FAIL, 6 not measured | 49 | 84 registered searches (172 grid configurations); 473 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
+| [BISPF](families/bispf.md) | 18 | **11** | 20 | 0 | 13: 0 PASS, 7 FAIL, 6 not measured | 49 | no registered configuration search; 8 declared candidate cards; selected recipe declared directly (no selecting search in its lineage) |
+| [Atlas](families/atlas.md) | 0 | **0** | 20 | 29 blocked | 13: 0 PASS, 0 FAIL, 6 not measured, 7 other | 49 | untuned: no registered configuration search; 1 declared candidate card; selected recipe declared directly (no selecting search in its lineage) |
+| [E22](families/e22.md) | 0 | **0** | 20 | 29 blocked | 13: 0 PASS, 0 FAIL, 6 not measured, 7 other | 49 | untuned: no registered configuration search; 1 declared candidate card; selected recipe declared directly (no selecting search in its lineage) |
+| [GAN v3 release 0.7](families/release07-gan-v3.md) | 5 | **2** | 42 | 0 | 13: 0 PASS, 0 FAIL, 13 not measured | 49 | 10 registered searches (16 grid configurations); 8 declared candidate cards; selected recipe descends from `release07-gan-v3-mog-family-defaults-round1-v1` (tuned on Tier ≤3) |
+| [K3P](families/k3p.md) | 5 | **2** | 42 | 0 | 13: 0 PASS, 0 FAIL, 13 not measured | 49 | 15 registered searches (50 grid configurations); 46 declared candidate cards; selected recipe descends from `k3p-family-defaults-round1-v1` (tuned on Tier ≤3) |
+| [KA2](families/ka2.md) | 5 | **2** | 42 | 0 | 13: 0 PASS, 0 FAIL, 13 not measured | 49 | 11 registered searches (18 grid configurations); 9 declared candidate cards; selected recipe descends from `ka2-family-defaults-round1-v1` (tuned on Tier ≤3) |
+| [R1/R2](families/r1r2.md) | 5 | **2** | 42 | 0 | 13: 0 PASS, 0 FAIL, 13 not measured | 49 | 12 registered searches (34 grid configurations); 18 declared candidate cards; selected recipe descends from `r1r2-modern-family-round1-v1` (tuned on Tier ≤3) |
 
-Other outcomes are not scientific failures and earn no pass credit. Separate diagnostic and historical passes remain on the problem and family pages; they do not replace a selected recipe's result.
+Not measured and other outcomes are not scientific failures and earn no pass credit. Separate diagnostic and historical passes remain on the problem and family pages; they do not replace a selected recipe's result. Tuning budgets count the family's registered configuration searches (declared grid sizes) and every declared candidate card (ideas and configurations, including hand-declared variants); a family with no search and a single card is labelled untuned. Rows with different budgets are not equally tuned comparisons.
+
+Selection versus holdout for recipes that descend from a registered search:
+
+- **GAN v3 release 0.7:** Selected on Tier ≤3; holdout none: 0/0 PASS — no untuned holdout tier is declared. Tuning-tier passes are selection evidence, not independent confirmation.
+- **K3P:** Selected on Tier ≤3; holdout none: 0/0 PASS — no untuned holdout tier is declared. Tuning-tier passes are selection evidence, not independent confirmation.
+- **KA2:** Selected on Tier ≤3; holdout none: 0/0 PASS — no untuned holdout tier is declared. Tuning-tier passes are selection evidence, not independent confirmation.
+- **R1/R2:** Selected on Tier ≤3; holdout none: 0/0 PASS — no untuned holdout tier is declared. Tuning-tier passes are selection evidence, not independent confirmation.
 
 ## Held and removed tests
 
@@ -548,5 +555,5 @@ After any view revision (for example a held or removed test), always add `--refr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `e9e8c99ea59f21f9f429769c9812be323eb3fba963164ce730fcc43c0a801c4a`.
+Publication input digest `221e9e3ccb33e5e2e22ddbd1963dd196c501986b8d965e0a390fe69badf0de8e`.
 [Performance by test and complete recipe](test-performance.md): compatible passes, failures, execution errors and missing witnesses, with sortable evidence drill-down.

@@ -10,11 +10,9 @@ from __future__ import annotations
 from collections import Counter
 from copy import deepcopy
 import hashlib
-import importlib.util
 import json
 import math
 from pathlib import Path
-import sys
 
 from .sampling import grade_sampling, validate_declaration
 from .priors import task_prior
@@ -205,6 +203,21 @@ def _validate_task(task):
 
 
 def load_tasks(root: Path | str) -> dict:
+    """Validated task catalogue; memoized while a resolution cache is bound.
+
+    Inside ``planning.resolution_cache(root)`` the catalogue is read once and
+    each caller receives a shallow copy of the memoized mapping (the task
+    declarations themselves are shared and must be treated as read-only).
+    """
+    from .resolution_scope import active
+    cache = active(root)
+    if cache is not None:
+        return dict(cache.get_all_tasks())
+    return read_task_catalog(root)
+
+
+def read_task_catalog(root: Path | str) -> dict:
+    """Read and validate every task declaration, bypassing any resolution cache."""
     tasks = {}
     for path in sorted((Path(root) / "configs/forge/tasks").glob("*.json")):
         task = _read(path)
@@ -590,15 +603,35 @@ def _native(task, evidence, *, diagnostic=False):
                     metrics=grade.get("holdout_metrics", {}), evaluator_result=grade)
 
 
+# Evidence identity of the ring grader. Task declarations (ring_hold,
+# ring_extension and their recipe-prior-refactor variants) keep binding the
+# archived path and hash below, so their evaluation fingerprints and every
+# recorded verdict are unchanged. Scoring code is imported from
+# ``benchmarks/``; the archived copy under ``reports/`` is evidence only and is
+# never placed on the import path.
+CONVERGENCE_GATE_RECEIPT = {
+    "module": "benchmarks.toy100.k3p_convergence_gate",
+    "source": "benchmarks/toy100/k3p_convergence_gate.py",
+    "archived_source": "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py",
+    "sha256": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
+    "archived_git_blob": "736563558b82bf7385881699cb12f59739f02e99",
+    "archived_commit": "74e1bae1e9c890d84debfff88eac5b16604b791f",
+    "relation": "byte_identical_copy",
+}
+
+
 def _convergence_class():
-    name = "_forge_original_convergence_gate"
-    if name not in sys.modules:
-        path = ROOT / "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py"
-        spec = importlib.util.spec_from_file_location(name, path)
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[name] = module
-        spec.loader.exec_module(module)
-    return sys.modules[name].ConvergenceGate
+    """The archived K3P ring ``ConvergenceGate``, loaded from ``benchmarks/``.
+
+    The imported module must stay byte-identical to the archived evidence
+    source (same SHA-256 and Git blob), otherwise grading refuses.
+    """
+    from benchmarks.toy100 import k3p_convergence_gate as module
+    digest = hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest()
+    if digest != CONVERGENCE_GATE_RECEIPT["sha256"]:
+        raise ValueError("ring convergence grader differs from its archived evidence identity "
+                         f"({CONVERGENCE_GATE_RECEIPT['archived_source']})")
+    return module.ConvergenceGate
 
 
 def _ring(task, evidence):

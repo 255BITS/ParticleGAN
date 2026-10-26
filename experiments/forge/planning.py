@@ -5,23 +5,30 @@ from contextlib import contextmanager
 from copy import deepcopy
 from dataclasses import asdict
 from pathlib import Path
+import threading
 
 from .contracts import atomic_json, canonical, identifier, read_json, stable_hash, validate_idea
 from .sampling import candidate_blockers
 from .execution_policy import DEFAULT as DEFAULT_EXECUTION_POLICY, group_blockers, policy
 from .preflight import task_preflight
 from .priors import task_prior
+from .resolution_scope import active as active_resolution_cache, bind as bind_resolution_cache
 from .sources import compute_profile, inspect_source, runtime_manifest, snapshot_source
-from .views import (load_tasks, load_view, task_evaluation_fingerprint,
+from .views import (load_tasks, load_view, read_task_catalog, task_evaluation_fingerprint,
                     task_execution_fingerprint, validate_view, view_fingerprint)
 
 FORMULATION_FIELDS = ("recipe_preset", "recipe_overrides", "prior", "extensions", "requires_capabilities",
                       "api_changes", "implementation", "initializer", "claim_contract")
 
-_ACTIVE_CACHE: _ResolutionCache | None = None
-
 
 def _blocker_sig(candidate: dict) -> str:
+    """Memo key for per-task *preflight* blockers within one resolution cache.
+
+    Preflight results are shared across candidates (the key has no candidate
+    id). Tunable override values enter only through ``tunable_flags``; this is
+    the historical preflight sharing contract and is unchanged. Bindings, which
+    report effective recipe values, use ``_binding_sig`` instead.
+    """
     from .boundaries import TUNABLE_FIELDS
     overrides = candidate.get("recipe_overrides") or {}
     resolved = candidate.get("resolved_recipe") or {}
@@ -46,9 +53,30 @@ def _blocker_sig(candidate: dict) -> str:
     })
 
 
-class _ResolutionCache:
+def _binding_sig(candidate: dict) -> str:
+    """Memo key for per-task decision-contract bindings (finding #23).
+
+    Bindings report effective recipe *values*, so every declared override
+    value is part of the key, not only which overrides are present: two
+    declarations with the same id and override names but a different tunable
+    value (e.g. ``lr``) must never share a cached binding.
+    """
+    return canonical({"blockers": _blocker_sig(candidate),
+                      "recipe_overrides": candidate.get("recipe_overrides") or {}})
+
+
+class ResolutionCache:
+    """Explicit memo tables for one read-only resolution scope over one checkout.
+
+    Bound by ``resolution_cache(root)`` through ``resolution_scope`` (a
+    ``ContextVar``), never by rebinding another module's functions. Readers that
+    memoize consult ``resolution_scope.active(root)``. Memo population is
+    serialized by ``self.lock`` so a deliberately shared cache stays consistent.
+    """
+
     def __init__(self, root: Path):
         self.root = Path(root).resolve()
+        self.lock = threading.RLock()
         self._paths: list[Path] | None = None
         self._path_by_id: dict[str, Path] = {}
         self._ideas: dict[str, dict] = {}
@@ -115,16 +143,46 @@ class _ResolutionCache:
         return self._runtime
 
     def get_all_tasks(self) -> dict:
-        if self._all_tasks is None:
-            self._all_tasks = self._orig_load_tasks(self.root)
-            self._task_static.clear()
-            self._views.clear()
+        with self.lock:
+            if self._all_tasks is None:
+                self._all_tasks = read_task_catalog(self.root)
+                self._task_static.clear()
+                self._views.clear()
+            return self._all_tasks
+
+    def loaded_tasks(self) -> dict | None:
+        """The memoized catalogue, or None before anything has loaded it."""
         return self._all_tasks
 
-    def _orig_load_tasks(self, r: Path):
-        from . import views as views_mod
-        fn = getattr(self, "orig_views_load_tasks", views_mod.load_tasks)
-        return fn(r)
+    def tier1_validation(self, task: dict, root, validate):
+        """Memoize ``tier1_policy`` validation of a catalogued task by id."""
+        tid = task.get("id") if isinstance(task, dict) else None
+        catalog = self._all_tasks
+        if not tid or catalog is None or tid not in catalog:
+            return validate(task, root=root)
+        key = (tid, root is not None)
+        with self.lock:
+            if key not in self.tier1_validate_cache:
+                self.tier1_validate_cache[key] = validate(task, root=root)
+            return self.tier1_validate_cache[key]
+
+    def bindings(self, candidate: dict, tasks: dict, protocol: dict, root, resolve):
+        """Per-task memo of ``decision_contracts`` bindings, keyed by ``_binding_sig`` (override values)."""
+        cid = candidate.get("id")
+        sig = _binding_sig(candidate)
+        result = {name: {} for name in ("recipe", "prior", "initialization", "budget", "sampling", "host",
+                                        "evaluation", "task_identity")}
+        for name, task in sorted(tasks.items()):
+            tid = task.get("id", name)
+            b_key = (cid, sig, tid)
+            with self.lock:
+                if b_key not in self.binding_task_cache:
+                    single = resolve(candidate, {name: task}, protocol, root)
+                    self.binding_task_cache[b_key] = {k: single[k][name] for k in result}
+                entry = self.binding_task_cache[b_key]
+            for k in result:
+                result[k][name] = entry[k]
+        return result
 
     def get_task_static(self, task_id: str, task: dict) -> tuple[str, str, str]:
         if task_id not in self._task_static:
@@ -410,67 +468,23 @@ class _ResolutionCache:
         return request
 
 
+_ResolutionCache = ResolutionCache  # Backwards-compatible private alias.
+
+
 @contextmanager
 def resolution_cache(root: Path):
-    global _ACTIVE_CACHE, load_tasks
+    """Memoize read-only resolution for ``root`` within this context.
+
+    Re-entrant: an inner scope for the same checkout reuses the active cache.
+    Nothing outside this context (other threads included) observes the cache.
+    """
     resolved = Path(root).resolve()
-    if _ACTIVE_CACHE is not None and _ACTIVE_CACHE.root == resolved:
-        yield _ACTIVE_CACHE
+    current = active_resolution_cache(resolved)
+    if current is not None:
+        yield current
         return
-    from . import decision_contracts, preflight as preflight_mod, tier1_policy, views as views_mod
-    previous = _ACTIVE_CACHE
-    cache = _ResolutionCache(resolved)
-    cache.orig_views_load_tasks = views_mod.load_tasks
-    orig_planning_load_tasks = load_tasks
-    orig_tier1_validate = tier1_policy.validate
-    orig_dc_bindings = decision_contracts._bindings
-    orig_preflight_tfc = None
-
-    def cached_load_tasks(r: Path | str):
-        if Path(r).resolve() == resolved:
-            return dict(cache.get_all_tasks())
-        return cache.orig_views_load_tasks(r)
-
-    def cached_tier1_validate(task, *, root=None):
-        tid = task.get("id") if isinstance(task, dict) else None
-        all_t = cache._all_tasks
-        if tid and all_t is not None and tid in all_t and (root is None or Path(root).resolve() == resolved):
-            t_key = (tid, root is not None)
-            if t_key not in cache.tier1_validate_cache:
-                cache.tier1_validate_cache[t_key] = orig_tier1_validate(task, root=root)
-            return cache.tier1_validate_cache[t_key]
-        return orig_tier1_validate(task, root=root)
-
-    def cached_dc_bindings(candidate, tasks, protocol, r):
-        if Path(r).resolve() != resolved:
-            return orig_dc_bindings(candidate, tasks, protocol, r)
-        cid = candidate.get("id")
-        sig = _blocker_sig(candidate)
-        result = {name: {} for name in ("recipe", "prior", "initialization", "budget", "sampling", "host", "evaluation", "task_identity")}
-        for name, task in sorted(tasks.items()):
-            tid = task.get("id", name)
-            b_key = (cid, sig, tid)
-            if b_key not in cache.binding_task_cache:
-                single = orig_dc_bindings(candidate, {name: task}, protocol, r)
-                cache.binding_task_cache[b_key] = {k: single[k][name] for k in result}
-            entry = cache.binding_task_cache[b_key]
-            for k in result:
-                result[k][name] = entry[k]
-        return result
-
-    _ACTIVE_CACHE = cache
-    views_mod.load_tasks = cached_load_tasks
-    load_tasks = cached_load_tasks
-    tier1_policy.validate = cached_tier1_validate
-    decision_contracts._bindings = cached_dc_bindings
-    try:
+    with bind_resolution_cache(ResolutionCache(resolved)) as cache:
         yield cache
-    finally:
-        views_mod.load_tasks = cache.orig_views_load_tasks
-        load_tasks = orig_planning_load_tasks
-        tier1_policy.validate = orig_tier1_validate
-        decision_contracts._bindings = orig_dc_bindings
-        _ACTIVE_CACHE = previous
 
 
 def candidate_revision_for(source_digest: str, candidate: dict) -> str:
@@ -514,8 +528,9 @@ def rekey_jobs(jobs):
 
 def declaration_paths(root: Path) -> list[Path]:
     """Ordinary ideas and immutable configurations share the same planner."""
-    if _ACTIVE_CACHE is not None and Path(root).resolve() == _ACTIVE_CACHE.root:
-        return list(_ACTIVE_CACHE.get_declaration_paths())
+    cache = active_resolution_cache(root)
+    if cache is not None:
+        return list(cache.get_declaration_paths())
     paths = sorted(path for directory in ("ideas", "configurations")
                    for path in (Path(root) / "configs/forge" / directory).glob("*.json"))
     if len({path.stem for path in paths}) != len(paths):
@@ -528,8 +543,9 @@ def discover_candidate_ids(root: Path) -> list[str]:
 
 
 def load_idea(root: Path, idea_id: str) -> dict:
-    if _ACTIVE_CACHE is not None and Path(root).resolve() == _ACTIVE_CACHE.root:
-        return _ACTIVE_CACHE.get_idea(idea_id)
+    cache = active_resolution_cache(root)
+    if cache is not None:
+        return cache.get_idea(idea_id)
     identifier(idea_id, "idea")
     matches = [path for path in declaration_paths(root) if path.stem == idea_id]
     if not matches:
@@ -588,9 +604,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                  study=None) -> dict:
     """Tier placement never enters candidate/task compatibility keys."""
     root = Path(root).resolve()
-    if (_ACTIVE_CACHE is not None and root == _ACTIVE_CACHE.root
-            and declaration is None and study is None and not freeze_source):
-        return _ACTIVE_CACHE.resolve_cached(
+    cache = active_resolution_cache(root)
+    if cache is not None and declaration is None and study is None and not freeze_source:
+        return cache.resolve_cached(
             idea_id, view_id=view_id, through_tier=through_tier,
             execution_backend=execution_backend, cuda_model=cuda_model,
         )
