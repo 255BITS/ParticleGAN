@@ -309,7 +309,18 @@
       "benchmarks/toy_audit/api_run.py": "b5f1e130e6daa4cfbf172b9beb13ab1e691c8fadba59d1aec58f74368df475d3",
       "benchmarks/toy_audit/reproducibility.py": "5f29fd7f9579be894e97bf4ad93bee8c77aeff104437b5d4e6dc4a4303935891",
       "experiments/forge/model_toy_adapter.py": "714be671402d345a7a33be0d43f18c02da0b9cd30dbbc04dc04b465fe434bd54",
-      "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+      "particlegan/policy.py": "6ed4060019ed457a787679c8a19b81c44ea2bf72ccc8069b0348f16794d86738"
+    },
+    "evaluator_revision": {
+      "id": "review-policy-source-binding-20261025",
+      "change": "Bind the review-stage particlegan/policy.py refresh for future execution: ManipulatedPrior output postprocessing in ServedModel/UpdatePolicy (identity for plain priors), the declared row_evidence_statistic trainer option (default 'sphericity' is the legacy law) and router-parameter ownership labels for manipulated priors. Plain-prior hosts execute the same operations. Architecture, data/target/prior/sampling laws, initialization, budgets, cadence and numerical gates are unchanged. Earlier source-bound receipts and verdicts retain their original identities; this refresh grants no reuse or pass credit.",
+      "previous_task_commit": "82f38664e4d6fb4aac67ed99d87887d6e6e4b357",
+      "previous_task_path": "configs/forge/tasks/model_ae_ddgan_gaussian_chain.json",
+      "previous_task_sha256": "8aae454052e4f4de7c43e610d7b0df740ac955216fabb88a60aeba015efa1858",
+      "previous_task_blob": "a652dcb9ab72707fb2464d5dbf5571f9659f0850",
+      "previous_source_sha256": {
+        "particlegan/policy.py": "4eb130cb5982c8333eec1abac6829c76b8aeea8f4ce87bc90b06b805c7dede0c"
+      }
     }
   },
   "resources": {
