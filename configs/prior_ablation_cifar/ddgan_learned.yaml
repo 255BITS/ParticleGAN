@@ -1,0 +1,11 @@
+# Matched CIFAR-10 U-Net DDGAN prior ablation (reports/prior-ablation-2026-10-25).
+# Existing particle DDGAN host and budget (10k updates, FID50k), protocol seed 0;
+# only the declared prior policy differs between the three arms.
+model: ddgan
+arm: gan
+seed: 0
+prior_update: learned
+prior_code_law: table
+data_dir: /nvme/dev/particlegan/ParticleGAN/data
+fid_cache: /tmp/claude-1000/prior-ablation/fid_cache
+out_dir: /tmp/claude-1000/prior-ablation/cifar/ddgan_learned
