@@ -22,7 +22,10 @@ def pairwise_sq_dist(a: torch.Tensor, b: torch.Tensor | None = None) -> torch.Te
     """Squared Euclidean distances ``cdist(a, b) ** 2`` (``b`` defaults to ``a``).
 
     Uses torch's default ``cdist`` compute mode (matrix-multiply kernel for
-    larger inputs), then squares.
+    larger inputs), then squares. ``kinetic_transport_local_loss`` keeps its
+    own exact (no-matmul) ``cdist`` and infinite-diagonal ``kthvalue`` width,
+    because they give different numerics (and its bytes are source-pinned by
+    Forge task cards).
     """
     return torch.cdist(a, a if b is None else b, p=2.0).pow(2)
 

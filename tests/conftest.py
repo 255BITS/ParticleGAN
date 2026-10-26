@@ -39,6 +39,15 @@ def _archived_inactive_comparison_scope(module, directory):
         "optimizer_convolution_rule": "polar", "training_precision": "float32"}
     original = (root / helper.INACTIVE).read_bytes()
     adapted, diff = helper.adapter_source(original)
+    # Review remediation (PRs #485, #492) declared further Recipe fields whose
+    # defaults are inactive. The archived helper serializes additions as JSON,
+    # which cannot spell True or (), so these go in as Python literals.
+    later_inactive = {"bispf_shape_gates": True, "bispf_gate_overrides": (), "prior_code_law": "table"}
+    tail = '    "training_precision": "float32",\n}\n'
+    assert adapted.decode().count(tail) == 1
+    adapted = adapted.decode().replace(tail, tail[:-2] + "".join(
+        f"    {name!r}: {value!r},\n" for name, value in later_inactive.items()) + "}\n").encode()
+    helper.INACTIVE_DEFAULTS = {**helper.INACTIVE_DEFAULTS, **later_inactive}
     # This new inactive field has explicit not-applicable provenance on the
     # original direct-coordinate hosts. It was absent from the original
     # comparator, whose existing assertions remain intact for every old field.
@@ -53,6 +62,10 @@ def _archived_inactive_comparison_scope(module, directory):
                         "source": "task prior-control applicability", "status": "not_applicable",
                         "reference_recipe_value": default, "representation":
                         state["applied"]["field_ownership"]["task_contract"]["prior"]["control_binding"]["representation"]}
+                elif name == "bispf_gate_overrides":
+                    # Ownership records are JSON values: the empty tuple is [].
+                    assert ownership["value"] == [] and default == ()
+                    assert ownership["source"].startswith("public Recipe ")
                 else:
                     assert ownership["value"] == default
                     assert ownership["source"].startswith("public Recipe ")
@@ -98,9 +111,14 @@ def _archived_inactive_comparison_scope(module, directory):
         yield
 
 
+def _module_basename(request):
+    # tests/ is a package, so pytest imports "tests.<name>"; match the file.
+    return request.module.__name__.rpartition(".")[2]
+
+
 @pytest.fixture(scope="module", autouse=True)
 def _preserve_archived_inactive_comparison(request, tmp_path_factory):
-    if request.module.__name__ != "test_bcap_integration_compatibility":
+    if _module_basename(request) != "test_bcap_integration_compatibility":
         yield
         return
     directory = tmp_path_factory.mktemp("bcap-inactive-adapter")
@@ -115,7 +133,7 @@ def _isolate_renderer_clock(request, monkeypatch):
     The archived protocol binds its test-file bytes. Keep this software-only
     clock isolation outside those frozen sources and preserve the CLI budget.
     """
-    if request.module.__name__ == "test_e22_routed_caption_late_phase_renderer":
+    if _module_basename(request) == "test_e22_routed_caption_late_phase_renderer":
         render = request.module.render
         monkeypatch.setattr(render, "STARTED", render.time.monotonic())
 
