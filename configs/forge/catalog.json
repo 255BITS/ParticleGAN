@@ -61,7 +61,7 @@
       "report/paired_error_2d": 1,
       "report/prior-ablation-2026-10-25": 3,
       "report/prior-comparison": 4,
-      "report/project": 10,
+      "report/project": 11,
       "report/r1-integrations": 2,
       "report/readme-100gaussians": 9,
       "report/releases": 1,
@@ -112,20 +112,20 @@
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 960,
+      "narrative": 961,
       "structured_evidence": 5056,
       "support": 1552,
       "support_artifact": 52,
       "visualization": 23,
       "visualization_artifact": 740
     },
-    "files": 11782
+    "files": 11783
   },
   "coverage": {
-    "declared_count": 11782,
+    "declared_count": 11783,
     "missing": [],
     "stale": [],
-    "tracked_count": 11782,
+    "tracked_count": 11783,
     "unclassified": [],
     "valid": true
   },
@@ -8597,7 +8597,7 @@
     },
     {
       "family": "report/project",
-      "git_blob": "8890e012487a127cea389092add929dfded7389b",
+      "git_blob": "ba9de4adc7e192e4471c14efdc0d80a44ebc0bb7",
       "path": "reports/README.md",
       "role": "narrative",
       "suggested_tiers": []
@@ -16576,7 +16576,7 @@
     },
     {
       "family": "report/project",
-      "git_blob": "be7e05c7ec7b5c0e11422992e3547be7bfdce5a6",
+      "git_blob": "15e15560788b8d4c93150c5579aab6aee1f15847",
       "path": "reports/leaderboard-index.json",
       "role": "structured_evidence",
       "suggested_tiers": []
@@ -17971,6 +17971,13 @@
       "family": "report/paired_error_2d",
       "git_blob": "1045dac8e252cc1f9c7e5a571be87cb05ce08e33",
       "path": "reports/paired_error_2d/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/project",
+      "git_blob": "ec2bd0e2e86f4cf22a85461b9026fdd93116633d",
+      "path": "reports/particlegan-review-2026-10-25.md",
       "role": "narrative",
       "suggested_tiers": []
     },
