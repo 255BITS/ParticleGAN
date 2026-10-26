@@ -1,6 +1,6 @@
 {
   "counts": {
-    "files": 11740,
+    "files": 11741,
     "by_family": {
       "benchmark/init_research": 10,
       "benchmark/learned_lr": 10,
@@ -59,7 +59,7 @@
       "report/paired-residual-toy": 5,
       "report/paired_error_2d": 1,
       "report/prior-comparison": 4,
-      "report/project": 8,
+      "report/project": 9,
       "report/r1-integrations": 2,
       "report/readme-100gaussians": 5,
       "report/releases": 1,
@@ -111,7 +111,7 @@
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
       "narrative": 996,
-      "structured_evidence": 5041,
+      "structured_evidence": 5042,
       "support": 1542,
       "support_artifact": 52,
       "visualization": 22,
@@ -123,8 +123,8 @@
     "missing": [],
     "stale": [],
     "unclassified": [],
-    "tracked_count": 11739,
-    "declared_count": 11739
+    "tracked_count": 11740,
+    "declared_count": 11740
   },
   "excluded_prefixes": [
     "configs/forge/",
@@ -8566,6 +8566,13 @@
       "path": "reports/behavioral_baseline/search/search_strength_fine/configs.json",
       "git_blob": "120725ccaa3217ce0731c12a811b8799b7f4f620",
       "family": "report/behavioral_baseline",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "path": "reports/branch-prune-2026-10-25.json",
+      "git_blob": "e95f63c0ce125cb47d1a82fbd9f6447a18e29960",
+      "family": "report/project",
       "role": "structured_evidence",
       "suggested_tiers": []
     },
