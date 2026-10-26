@@ -21,28 +21,32 @@ This module is the stable import surface. The implementation lives in
 """
 from __future__ import annotations
 
+# Private names below are compatibility re-exports (tests and archived tooling
+# import them from ``particlegan.bispf``); they are deliberately absent from
+# ``__all__``. ``noqa: F401`` keeps ``ruff --fix`` from deleting them.
+
 from ._bispf.critic import (
     BISPFCriticAdam,
     BISPFStepRecord,
-    _BISPFObserverStepRecord,
-    _attach_critic_input_hook,
-    _bispf_critic_forward_hook,
+    _BISPFObserverStepRecord,  # noqa: F401
+    _attach_critic_input_hook,  # noqa: F401
+    _bispf_critic_forward_hook,  # noqa: F401
 )
 from ._bispf.engine import BISPFEngine, BISPFLossAdapter
-from ._bispf.gates import BISPFGates, _DEFAULT_GATES
+from ._bispf.gates import BISPFGates, _DEFAULT_GATES  # noqa: F401
 from ._bispf.loss import SinkhornRelativisticLoss
-from ._bispf.penalty import _PHI1, _PHI2, BISPFCriticPenalty, _BISPFPenaltyKernel
+from ._bispf.penalty import _PHI1, _PHI2, BISPFCriticPenalty, _BISPFPenaltyKernel  # noqa: F401
 from ._bispf.prior import SBNPPriorRegularizer, StratifiedBlueNoisePrior, sbnp_regularization_loss
 from ._bispf.thermal import (
-    FROZEN_THERMAL_SCALE,
+    FROZEN_THERMAL_SCALE,  # noqa: F401
     ContinuousThermalCooler,
-    _LAST_THERMAL_SCALE,
-    _LEGACY_THERMAL_CHANNEL,
-    _publish_thermal,
-    _read_thermal,
+    _LAST_THERMAL_SCALE,  # noqa: F401
+    _LEGACY_THERMAL_CHANNEL,  # noqa: F401
+    _publish_thermal,  # noqa: F401
+    _read_thermal,  # noqa: F401
     bind_thermal_source,
 )
-from ._bispf.transport import _cloud_scale_factor, sinkhorn_coupling
+from ._bispf.transport import _cloud_scale_factor, sinkhorn_coupling  # noqa: F401
 
 __all__ = [
     "BISPFGates",

@@ -192,3 +192,17 @@ def test_recipe_variant_list_mirrors_drift_variants():
         assert get_recipe("ka2", continuous_policy=variant, total_steps=None).continuous_policy == variant
     with pytest.raises(ValueError, match="unknown continuous_policy"):
         get_recipe("ka2", continuous_policy="dv13", total_steps=None)
+
+
+def test_recipe_variant_literal_equals_drift_variants():
+    """recipes.py keeps its own literal (it must load standalone); pin it to DRIFT_VARIANTS."""
+    from particlegan import recipes
+    tree = ast.parse(inspect.getsource(recipes))
+    literals = []
+    for node in ast.walk(tree):
+        if (isinstance(node, ast.Compare) and isinstance(node.left, ast.Attribute)
+                and node.left.attr == "continuous_policy"
+                and len(node.ops) == 1 and isinstance(node.ops[0], ast.NotIn)
+                and isinstance(node.comparators[0], ast.Tuple)):
+            literals.append(tuple(ast.literal_eval(node.comparators[0])))
+    assert literals == [(None, *DRIFT_VARIANTS)]
