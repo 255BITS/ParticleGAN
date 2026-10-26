@@ -1,5 +1,8 @@
 # Stronger conditioning and marginal critics
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/transition/leaderboard/README.md](README.md); overall status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 The new best joint SW1 is **0.10027**, a **29.3% reduction** from the previous
 0.14179 leader and 59.9% from the original 0.24999 MoG baseline. However, physical
 consistency and joint support coverage worsen. The score leader is not an

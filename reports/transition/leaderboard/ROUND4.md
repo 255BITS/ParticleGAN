@@ -1,5 +1,8 @@
 # Context scale 2: more coverage, same score plateau
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/transition/leaderboard/README.md](README.md); overall status: [reports/forge/technique-inventory.md](../../forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../../leaderboard-index.json). Results below are preserved as recorded.
+
 The intermediate scale gives **0.10655 joint SW1**, **0.01909 residual**, and
 **0.212 coverage**. Relative to context scale 1, residual improves 12.3% and coverage
 8.9% (1.74 percentage points), while SW1 worsens 0.9%. It ranks third of nine;

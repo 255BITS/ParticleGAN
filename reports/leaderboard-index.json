@@ -1,0 +1,373 @@
+{
+  "schema": 1,
+  "rule": "AGENTS.md: only keep one generated leaderboard per goal, the current one.",
+  "policy": [
+    "Each goal names exactly one current page. Forge per-goal boards are the current page for their Forge goal.",
+    "bannered: a superseded page that report links still cite carries the generated superseded banner, which links the goal's current page and the technique inventory.",
+    "frozen: a superseded page whose exact bytes are recorded (sha256 or Git blob) by a retention, archive or source-seal manifest is never edited; this index marks it superseded instead of a banner.",
+    "archived: a superseded generated copy with no consumer other than the regenerated catalog and revision-pinned history records is removed from the tree and recorded in reports/log-archive.json.",
+    "The revision-pinned history import (reports/forge/history-sources.json, reports/forge/records/history-context-report-*.json) keeps the original blobs; banners and archiving never rewrite those pins."
+  ],
+  "banner": "<!-- superseded-banner: generated -->",
+  "goals": [
+    {
+      "goal": "recipe-qualification",
+      "current": "reports/forge/technique-inventory.md",
+      "description": "Forge family leaderboard: qualification of recipes on the declared toy, transfer and image suites.",
+      "superseded": [
+        {
+          "path": "reports/toy100/gpu-leaderboard.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/gpu-leaderboard/LEADERBOARD.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/gpu-leaderboard/README.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/continuous-practical-leaderboard.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/continuous-practical-leaderboard-cpu-history.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/baseline/leaderboard.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/recommended/leaderboard.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/batch-feature-init/batch-feature-leaderboard.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/gpu-known-winner-control/LEADERBOARD.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/transfer_suite/README.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/transfer_suite/unadjusted/README.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/transfer_suite/formulations/README.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "results/LEADERBOARD.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/README.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/toy100/formulation-round-20260924/critic_formulation/LEADERBOARD.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/formulation-round-20260924/retention.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/simpler22/toy100/leaderboard.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/simpler22/retention.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/simpler22/toy100/accuracy-leaderboard.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/simpler22/retention.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/simpler22/toy100/accuracy-leaderboard-grid100.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/simpler22/retention.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/shared22/toy100/leaderboard.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/shared22/retention.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/shared22/toy100/accuracy-leaderboard.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/shared22/retention.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/validation/LEADERBOARD.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/lrfree-search/feature-cells-cb64-ra/ARCHIVE.json",
+            "reports/toy100/lrfree-search/feature-cells-cb64-ra/artifact_manifest.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/cuda/learned/LEADERBOARD.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/lrfree-search/feature-cells-cb64-ra/cuda/ARCHIVE.json",
+            "reports/toy100/lrfree-search/feature-cells-cb64-ra/cuda/learned/artifact-manifest.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/fixes/support/LEADERBOARD.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/lrfree-search/feature-cells-cb64-ra/fixes/SOURCE-ARCHIVE.json",
+            "reports/toy100/lrfree-search/feature-cells-cb64-ra/fixes/support/manifest.json"
+          ]
+        },
+        {
+          "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/fixes/performance/training-regression/LEADERBOARD.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/toy100/lrfree-search/feature-cells-cb64-ra/fixes/SOURCE-ARCHIVE.json"
+          ]
+        },
+        {
+          "path": "reports/forge/supplemental/pr155-current-archive-v1/original/reports/toy100/lrfree-search/noout-e4/suite-leaderboard.md",
+          "disposition": "frozen",
+          "pinned_by": [
+            "reports/forge/supplemental/pr155-current-archive-v1/delta-classification.json"
+          ],
+          "note": "Byte copy of the archived PR #155 source."
+        }
+      ],
+      "archived": {
+        "log_archive_commit": "4a32492bc233174d85014869306dda4d3dc43041",
+        "paths": [
+          "reports/toy100/accuracy-failure/accuracy-leaderboard-rotated100.md",
+          "reports/toy100/accuracy-failure/leaderboard-rotated100.md",
+          "reports/toy100/accuracy-horizon/accuracy-leaderboard-grid100.md",
+          "reports/toy100/accuracy-horizon/accuracy-leaderboard-rotated100.md",
+          "reports/toy100/accuracy-horizon/accuracy-leaderboard-staggered100.md",
+          "reports/toy100/accuracy-horizon/accuracy-leaderboard.md",
+          "reports/toy100/accuracy-horizon/leaderboard-grid100.md",
+          "reports/toy100/accuracy-horizon/leaderboard-rotated100.md",
+          "reports/toy100/accuracy-horizon/leaderboard-staggered100.md",
+          "reports/toy100/accuracy-network-horizon/accuracy-leaderboard-grid100.md",
+          "reports/toy100/accuracy-network-horizon/accuracy-leaderboard-rotated100.md",
+          "reports/toy100/accuracy-network-horizon/accuracy-leaderboard-staggered100.md",
+          "reports/toy100/accuracy-network-horizon/accuracy-leaderboard.md",
+          "reports/toy100/accuracy-network-horizon/leaderboard-grid100.md",
+          "reports/toy100/accuracy-network-horizon/leaderboard-rotated100.md",
+          "reports/toy100/accuracy-network-horizon/leaderboard-staggered100.md",
+          "reports/toy100/gpu-known-winner-control/runs/simpler22_reference/grid100/native/accuracy-leaderboard-grid100.md",
+          "reports/toy100/gpu-known-winner-control/runs/simpler22_reference/grid100/native/leaderboard-grid100.md",
+          "reports/toy100/gpu-known-winner-control/runs/simpler22_reference/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "reports/toy100/gpu-known-winner-control/runs/simpler22_reference/rotated100/native/leaderboard-rotated100.md",
+          "reports/toy100/gpu-known-winner-control/runs/simpler22_reference/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "reports/toy100/gpu-known-winner-control/runs/simpler22_reference/staggered100/native/leaderboard-staggered100.md",
+          "reports/toy100/gpu-leaderboard/runs/H/grid100/native/accuracy-leaderboard-grid100.md",
+          "reports/toy100/gpu-leaderboard/runs/H/grid100/native/leaderboard-grid100.md",
+          "reports/toy100/gpu-leaderboard/runs/H/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "reports/toy100/gpu-leaderboard/runs/H/rotated100/native/leaderboard-rotated100.md",
+          "reports/toy100/gpu-leaderboard/runs/H/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "reports/toy100/gpu-leaderboard/runs/H/staggered100/native/leaderboard-staggered100.md",
+          "reports/toy100/gpu-leaderboard/runs/eps_net_1m/grid100/native/accuracy-leaderboard-grid100.md",
+          "reports/toy100/gpu-leaderboard/runs/eps_net_1m/grid100/native/leaderboard-grid100.md",
+          "reports/toy100/gpu-leaderboard/runs/eps_net_1m/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "reports/toy100/gpu-leaderboard/runs/eps_net_1m/rotated100/native/leaderboard-rotated100.md",
+          "reports/toy100/gpu-leaderboard/runs/eps_net_1m/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "reports/toy100/gpu-leaderboard/runs/eps_net_1m/staggered100/native/leaderboard-staggered100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_column_rms/grid100/native/accuracy-leaderboard-grid100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_column_rms/grid100/native/leaderboard-grid100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_column_rms/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_column_rms/rotated100/native/leaderboard-rotated100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_column_rms/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_column_rms/staggered100/native/leaderboard-staggered100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_rms/grid100/native/accuracy-leaderboard-grid100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_rms/grid100/native/leaderboard-grid100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_rms/rotated100/native/accuracy-leaderboard-rotated100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_rms/rotated100/native/leaderboard-rotated100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_rms/staggered100/native/accuracy-leaderboard-staggered100.md",
+          "reports/toy100/gpu-leaderboard/runs/shared_rms/staggered100/native/leaderboard-staggered100.md"
+        ]
+      }
+    },
+    {
+      "goal": "forge:adaptation",
+      "current": "reports/forge/leaderboards/adaptation.md",
+      "description": "Forge board for the adaptation goal (python -m experiments.forge board --goal adaptation)."
+    },
+    {
+      "goal": "forge:clockfree_continuous",
+      "current": "reports/forge/leaderboards/clockfree_continuous.md",
+      "description": "Forge board for the clockfree_continuous goal (python -m experiments.forge board --goal clockfree_continuous)."
+    },
+    {
+      "goal": "forge:formulation_comparison",
+      "current": "reports/forge/leaderboards/formulation_comparison.md",
+      "description": "Forge board for the formulation_comparison goal (python -m experiments.forge board --goal formulation_comparison)."
+    },
+    {
+      "goal": "forge:host_profile_transfer",
+      "current": "reports/forge/leaderboards/host_profile_transfer.md",
+      "description": "Forge board for the host_profile_transfer goal (python -m experiments.forge board --goal host_profile_transfer)."
+    },
+    {
+      "goal": "forge:quality_coverage",
+      "current": "reports/forge/leaderboards/quality_coverage.md",
+      "description": "Forge board for the quality_coverage goal (python -m experiments.forge board --goal quality_coverage)."
+    },
+    {
+      "goal": "prior-ablation",
+      "current": "reports/prior-ablation-2026-10-25/README.md",
+      "description": "Matched learned / frozen / fresh-Gaussian prior ablation and BISPF re-qualification."
+    },
+    {
+      "goal": "cifar-particle-ddgan",
+      "current": "reports/cifar-particle-ddgan/LEADERBOARD.md",
+      "description": "CIFAR-10 particle DDGAN host, FID50k at the final EMA."
+    },
+    {
+      "goal": "cifar-particle-ae",
+      "current": "reports/cifar-particle-ae/LEADERBOARD.md",
+      "description": "Direct CIFAR particle autoencoder, FID50k at the final EMA.",
+      "diagnostics": [
+        "reports/cifar-particle-ae/particle_overlap_sweep_smoke/LEADERBOARD.md",
+        "reports/cifar-particle-ae/particle_overlap_training_smoke/LEADERBOARD.md"
+      ]
+    },
+    {
+      "goal": "cifar-particle-ae-variation",
+      "current": "reports/cifar-particle-ae/variation/LEADERBOARD.md",
+      "description": "Conditional variation diversity/fidelity of one frozen CIFAR particle-AE checkpoint."
+    },
+    {
+      "goal": "mog-vae",
+      "current": "reports/mog-vae/stability/LEADERBOARD.md",
+      "description": "Particle VAE on the 100-Gaussian toy (lower-LR follow-up supersedes the 12-arm scout).",
+      "superseded": [
+        {
+          "path": "reports/mog-vae/LEADERBOARD.md",
+          "disposition": "bannered"
+        }
+      ]
+    },
+    {
+      "goal": "mog-autoencoder-routing",
+      "current": "reports/mog-autoencoder/LEADERBOARD.md",
+      "description": "Fixed-sigma particle routing scout on 100 Gaussians."
+    },
+    {
+      "goal": "mog-encoder-fit",
+      "current": "reports/mog-autoencoder/encoder-fit/LEADERBOARD.md",
+      "description": "Frozen encoder fitting from the bounded routing-scout checkpoint."
+    },
+    {
+      "goal": "transition-gan",
+      "current": "reports/transition/leaderboard/README.md",
+      "description": "Transition GAN conditional joint SW1 on fixed held-out geometries.",
+      "readouts": [
+        "reports/transition/leaderboard/READOUT.md"
+      ],
+      "superseded": [
+        {
+          "path": "reports/transition/leaderboard/ROUND1.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/transition/leaderboard/ROUND2.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/transition/leaderboard/ROUND3.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/transition/leaderboard/ROUND4.md",
+          "disposition": "bannered"
+        },
+        {
+          "path": "reports/transition/leaderboard/ROUND5.md",
+          "disposition": "bannered"
+        }
+      ]
+    },
+    {
+      "goal": "lunar-lander-world-model",
+      "current": "reports/gym/lunar_lander/baseline/README.md",
+      "description": "Lunar Lander single-transition baseline leaderboard."
+    },
+    {
+      "goal": "lunar-lander-gan-control",
+      "current": "reports/gym/lunar_lander_gan_control/README.md",
+      "description": "Lunar Lander GAN-only control leaderboard."
+    },
+    {
+      "goal": "api-toy-contract",
+      "current": "reports/toy_audit/api_contract/LEADERBOARD.md",
+      "description": "Sorted results of the public-API toy test contract registry."
+    }
+  ],
+  "not_leaderboards": [
+    {
+      "path": "reports/forge/leaderboard-retained-source-notes.md",
+      "kind": "source notes read by experiments/forge/family_reports.py"
+    },
+    {
+      "path": "reports/forge/COMPLETED_STUDIES.md",
+      "kind": "study index for the technique inventory"
+    },
+    {
+      "path": "reports/forge/WHAT_WORKED_REVIEW_20261015.md",
+      "kind": "dated review"
+    },
+    {
+      "path": "reports/forge/atlas-e22-policy-cloud-20261015/README.md",
+      "kind": "study readout"
+    },
+    {
+      "path": "reports/forge/dig-20261015/hygiene.md",
+      "kind": "dated review"
+    }
+  ],
+  "protocols": [
+    {
+      "path": "reports/forge/CURRENT_CALIBRATION_PROTOCOL.md",
+      "status": "live",
+      "consumers": [
+        "EXPERIMENTATION.md (Calibrate a screen before adopting it)",
+        "configs/forge/calibration/current-profile.schema.json"
+      ],
+      "decision": "Live procedure for `python -m experiments.forge calibrate`; no banner."
+    },
+    {
+      "path": "reports/readme-100gaussians/CURRENT_PROTOCOL.md",
+      "status": "live",
+      "consumers": [
+        "reports/readme-100gaussians/README.md",
+        "reports/readme-100gaussians/render.py",
+        "tests/test_readme_animation.py"
+      ],
+      "decision": "Declares the current README animation that render.py and its test maintain; no banner."
+    },
+    {
+      "path": "reports/toy100/lrfree-search/feature-cells-cb64-ra/**/*PROTOCOL*.md",
+      "status": "superseded",
+      "consumers": [],
+      "decision": "No live code or config reads them; the history import pins this tree at its source revision. Each protocol's bytes are sealed by ARCHIVE.json, SOURCE-ARCHIVE.json, READY.json or SOURCE-FREEZE.json, so they stay unedited and the search entry page reports/toy100/lrfree-search/feature-cells-cb64-ra/README.md carries the banner."
+    }
+  ]
+}
