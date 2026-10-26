@@ -476,9 +476,12 @@ def construct_owner(root, binding, *, source_guard, device="cuda:1"):
     # Live training storage after every update: the public ``serve_after_step``
     # extension point expresses exactly what ``derive_live_step`` removes from
     # ``GANTrainer._step`` (the final ``_serve_apply`` swap); verified
-    # bit-identical on CPU trajectories. The archived cohort's pinned trainer
-    # predates this option and is reproduced from its original commit, where
-    # this owner refuses construction above on any other trainer source.
+    # bit-identical on CPU trajectories of the *current* trainer. This owner
+    # cannot be constructed from this tree: ``require_legacy_autograd_source``
+    # accepts only the pinned trainer, which has no ``serve_after_step``
+    # parameter (this call would raise TypeError there), and several
+    # SOURCE_PINS already differ on develop. The archived cohort is reproduced
+    # from its original commit, which still carries the exec overlay.
     owner.trainer = GANTrainer(recipe, owner.generator, owner.critic, prior=owner.prior, seed=0,
         max_steps=600, require_latent_damping=True, serve_after_step=False, **options)
     owner.policy = owner.trainer.policy

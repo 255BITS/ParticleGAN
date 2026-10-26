@@ -965,10 +965,23 @@ def _selected_row(publication, cohort):
     return rows[index] if isinstance(index, int) and 0 <= index < len(rows) else {}
 
 
-def _cohort_tier_statuses(cohort):
-    """Required-task statuses per tier, expanded from the cohort's recorded counts."""
-    return {tier: [status for status, count in sorted(cell.get("counts", {}).items()) for _ in range(count)]
-            for tier, cell in cohort.get("tiers", {}).items()}
+def _cohort_tier_statuses(progress, cohort):
+    """Required-task statuses per tier, one entry per distinct task.
+
+    A task required by several summed views counts once, at the lowest tier
+    any of them assigns (so a task that could have selected the
+    configuration is never counted as holdout evidence).
+    """
+    tier_of = {}
+    for view in _summed_views(progress):
+        for assignment in view["assignments"]:
+            if assignment["importance"] == "required":
+                tier = int(assignment["qualification_tier"])
+                tier_of[assignment["task"]] = min(tier, tier_of.get(assignment["task"], tier))
+    statuses = {}
+    for task, tier in sorted(tier_of.items()):
+        statuses.setdefault(tier, []).append(cohort.get("tasks", {}).get(task, {}).get("status", "UNKNOWN"))
+    return statuses
 
 
 def _full_suite_section(root, publication, page, selected):
@@ -1022,7 +1035,7 @@ def _full_suite_section(root, publication, page, selected):
         lines.append(f"| {label} | {counts['passed']} | **{counts['failed']}** | {counts['not_measured']} | "
                      f"{_outcome_text(counts['other'])} | {held_text} | {counts['total']} | {budget} |")
         if lineage.get("search_id"):
-            claim = holdout_claim(_cohort_tier_statuses(cohort), lineage.get("tuning_through_tier"))
+            claim = holdout_claim(_cohort_tier_statuses(progress, cohort), lineage.get("tuning_through_tier"))
             claims.append(f"- **{family['label']}:** {claim['claim']}")
     lines += ["", "Not measured and other outcomes are not scientific failures and earn no pass credit. "
               "Separate diagnostic and historical passes remain on the problem and family pages; "

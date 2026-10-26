@@ -26,7 +26,9 @@ from .contracts import file_hash, read_json
 FIXED_TEST_LIST = Path("configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
 FIXED_TEST_LIST_SCHEMA = "forge_fixed_test_list_v1"
 NOT_MEASURED = frozenset({"UNKNOWN", "NOT_RUN"})
-FAILED = frozenset({"FAIL", "INVALID"})
+# Only a recorded FAIL is a scientific failure, matching ``fixed_outcomes``
+# (INVALID and other non-PASS outcomes are "other": no pass credit, not a failure).
+FAILED = frozenset({"FAIL"})
 INDEPENDENT_CONFIRMATION = "not_performed"
 
 
@@ -173,7 +175,7 @@ def holdout_claim(tier_statuses: dict, tuning_through_tier) -> dict:
     span = (f"Tier {tiers[0]}" if len(tiers) == 1 else f"Tiers {tiers[0]}–{tiers[-1]}") if tiers else "none"
     verdict = {"PASS": "passed the untuned holdout",
                "FAIL": "did not pass the untuned holdout",
-               "not_measured": "untuned holdout incomplete (not measured)",
+               "not_measured": "untuned holdout incomplete (not measured or not a PASS/FAIL outcome)",
                "none_declared": "no untuned holdout tier is declared"}[status]
     claim = (f"Selected on Tier ≤{tuning_through_tier}; holdout {span}: {passed}/{len(statuses)} PASS — {verdict}. "
              "Tuning-tier passes are selection evidence, not independent confirmation.")

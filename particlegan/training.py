@@ -163,7 +163,9 @@ class GANTrainer:
     leaves the live training iterate in the modules after every update; the
     served state stays available from ``served_snapshot``/``served_model``.
     Only that swap changes: losses, optimizer updates and RNG consumption are
-    identical, and checkpoints always store the training iterate. Recipes
+    identical, and checkpoints always store the training iterate (a resumed
+    ``serve_after_step=False`` trainer also leaves the training iterate in the
+    modules after ``load_state_dict``). Recipes
     with ``serve_average == 0`` behave identically either way. The option is
     execution-only and is not recorded in checkpoints; pass the same value
     when resuming.
@@ -843,7 +845,8 @@ class GANTrainer:
         torch.set_rng_state(state["cpu_rng"].cpu())
         if self.device.type == "cuda":
             torch.cuda.set_rng_state(state["cuda_rng"].cpu(), self.device)
-        self._serve_apply()
+        if self.serve_after_step:
+            self._serve_apply()
 
 
 def _policy_property(name):

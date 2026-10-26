@@ -111,7 +111,7 @@ def test_serve_after_step_false_is_bit_identical_to_the_legacy_live_step_overlay
     from experiments.forge.canonical_image_adapter import derive_live_step
     source = Path(training.__file__).read_text()
     hooked = "        if self.serve_after_step:\n            self._serve_apply()\n"
-    assert source.count(hooked) == 1
+    assert source.count(hooked) == 2  # end of _step and end of _load_state_dict
     legacy = source.replace(hooked, "        self._serve_apply()\n")  # the overlay's original input form
     namespace = dict(vars(training))
     exec(compile(derive_live_step(legacy), "<legacy-live-step>", "exec"), namespace)
@@ -132,6 +132,26 @@ def test_serve_after_step_is_validated_and_canonical_image_owner_no_longer_execs
     assert "_step = " not in owner_source
 
 
+
+def test_serve_after_step_false_also_leaves_the_training_iterate_after_resume():
+    def params(trainer):
+        return [value.clone() for value in trainer.G.state_dict().values()]
+
+    source = _trainer(serve_after_step=False)
+    _trajectory(source, steps=10)
+    live, state = params(source), source.state_dict()
+    # The fixture forces settling through a patched ``_serve_settled``; the checkpoint's
+    # recorded source is re-derived from table-tester state, which never settled here.
+    state["policy"]["served_source"] = "fast"
+    resumed = _trainer(serve_after_step=False)
+    resumed.load_state_dict(state)
+    assert resumed._fast is None
+    assert all(torch.equal(a, b) for a, b in zip(params(resumed), live))
+    served = _trainer()
+    served.load_state_dict(state)  # the default still serves the settled average on resume
+    assert served._fast is not None
+    assert not all(torch.equal(a, b) for a, b in zip(params(served), live))
+
 # 4. Graders live in benchmarks/, byte-identical to the archived evidence source.
 
 def test_ring_grader_imports_from_benchmarks_with_archived_identity():
@@ -145,9 +165,11 @@ def test_ring_grader_imports_from_benchmarks_with_archived_identity():
     blob = subprocess.run(["git", "hash-object", str(ROOT / receipt["source"])], capture_output=True,
                           text=True, check=True).stdout.strip()
     assert blob == receipt["archived_git_blob"]
-    assert not any(Path(m.__file__).resolve().is_relative_to(ROOT / "reports")
-                   for m in list(sys.modules.values()) if getattr(m, "__file__", None)
-                   and getattr(m, "__name__", "").endswith("convergence_gate"))
+    # Only the grader's own module and the retired exec-overlay name matter here;
+    # other tests legitimately load reports/ copies under unrelated names.
+    assert not Path(module.__file__).resolve().is_relative_to(ROOT / "reports")
+    legacy = sys.modules.get("_forge_original_convergence_gate")
+    assert legacy is None or not Path(legacy.__file__).resolve().is_relative_to(ROOT / "reports")
     for name in ("ring_hold", "ring_extension"):
         task = views.load_tasks(ROOT)[name]
         assert task["evaluation"]["sources"][receipt["archived_source"]] == receipt["sha256"]
@@ -206,6 +228,27 @@ def test_holdout_claim_separates_tuning_and_untuned_tiers():
     only_tuning = holdout_claim({1: ["PASS"]}, 1)
     assert only_tuning["status"] == "none_declared" and "no untuned holdout" in only_tuning["claim"]
 
+
+
+def test_holdout_treats_invalid_like_the_fixed_denominator_does():
+    # fixed_outcomes reports INVALID under "other", never "failed"; the holdout agrees.
+    assert fixed_outcomes({"a": "INVALID"}, ["a"], [])["failed"] == 0
+    assert holdout_claim({1: ["PASS"], 2: ["PASS", "INVALID"]}, 1)["status"] == "not_measured"
+
+
+def test_holdout_tier_statuses_count_each_required_task_once():
+    from experiments.forge.family_reports import _cohort_tier_statuses
+    shared = {"task": "shared", "qualification_tier": 2, "importance": "required"}
+    progress = {"diagnostic_views": ["diag"], "views": [
+        {"id": "a", "assignments": [shared, {"task": "early", "qualification_tier": 1, "importance": "required"}]},
+        {"id": "b", "assignments": [shared, {"task": "early", "qualification_tier": 3, "importance": "required"},
+                                    {"task": "held", "qualification_tier": 2, "importance": "held"}]},
+        {"id": "diag", "assignments": [{"task": "diag_only", "qualification_tier": 2, "importance": "required"}]}]}
+    cohort = {"tasks": {"shared": {"status": "PASS"}, "early": {"status": "PASS"}, "held": {"status": "FAIL"}},
+              "tiers": {"2": {"counts": {"PASS": 2}}}}  # summed per-view counts double-count "shared"
+    assert _cohort_tier_statuses(progress, cohort) == {1: ["PASS"], 2: ["PASS"]}
+    claim = holdout_claim(_cohort_tier_statuses(progress, cohort), 1)
+    assert claim["required_total"] == 1 and claim["required_passed"] == 1
 
 def test_search_progression_states_the_selected_holdout():
     tasks = [{"task": "smoke", "qualification_tier": 1, "importance": "required", "gate_status": "PASS"},
