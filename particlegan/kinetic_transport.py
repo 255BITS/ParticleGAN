@@ -54,6 +54,8 @@ def kinetic_transport_local_loss(fake, real):
             or fake.device != real.device):
         raise ValueError("local transport needs matching floating batches of at least two samples")
     x, y = fake.flatten(1), real.detach().flatten(1)
+    # Not _stats.pairwise_sq_dist: the exact (no-matmul) cdist kernel and a
+    # kthvalue width with an infinite diagonal give different numerics.
     distance_real = torch.cdist(y, y, compute_mode="donot_use_mm_for_euclid_dist").square()
     neighbor_distance = distance_real.clone()
     neighbor_distance.fill_diagonal_(float("inf"))

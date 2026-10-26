@@ -87,9 +87,14 @@ worktree paths and physical GPU 1 selection are preserved for provenance. Use
   benchmark, policy, public trainer, and helper sources.
 - `runs/<candidate>/<task>/` contains the declaration, result, device proof,
   optimizer/policy trace, and status. Native runs additionally retain their
-  coverage/accuracy evidence. Convergence checkpoints capture model, optimizer,
-  and RNG tensors for inspection; replay starts cold and does not claim that
-  these files serialize every adaptive policy's Python state.
+  coverage/accuracy evidence. Convergence checkpoints (`cold-state.pt`,
+  `converged-state.pt`, `final-state.pt`) capture model, optimizer, and RNG
+  tensors for inspection; replay starts cold and does not claim that these files
+  serialize every adaptive policy's Python state. These checkpoints, and the
+  unused `average-prefix`/`column-prefix` preflight states, are archived out of
+  the tree: [the archive index](../../log-archive.json) records each path's Git
+  blob, restorable from [commit `82f38664e`](https://github.com/255BITS/ParticleGAN/tree/82f38664e4d6fb4aac67ed99d87887d6e6e4b357/reports/toy100/gpu-leaderboard/runs).
+  The two `pr143-prefix*` states read by `audit_rng.py` remain tracked.
 - The [RNG validation](rng-validation-detailed.json) compares 72 tensor leaves
   and one generator state (73 state tensors total) after a
   PR143 prefix with sparse versus dense measurement. Model, Adam, data/noise,
