@@ -94,12 +94,16 @@ class MassTransportPolicy(TransportPolicy):
         return "count_certified_flagged_only" if plan.guard_rejects else "supported_surplus"
 
 
-def _spent_reserved(plan, rows, region, fallback):
-    """Gross certificate use by reserved rows of one count-category parity."""
+def _spent_reserved(plan, rows, region, fallback, *, global_regions):
+    """Gross certificate use by reserved rows of one count-category parity.
+
+    ``global_regions`` pools the use over all cells (one scalar per region)
+    instead of returning a per-cell count.
+    """
     if rows is None:
         return torch.zeros_like(fallback)
     categories = plan.categories[rows]
-    if plan.global_regions:
+    if global_regions:
         return (categories.remainder(2) == region).sum()
     counts = torch.bincount(categories, minlength=2*plan.snapshot.cells)
     return counts.reshape(plan.snapshot.cells, 2)[:, region]
@@ -123,10 +127,11 @@ class SupportTransportPolicy(TransportPolicy):
         plan.birth_capacity = plan.residual_birth_capacity.clone()
 
     def _reserve(self, plan, raw_death, raw_birth):
-        plan.global_regions = self.global_regions
         plan.raw_death_capacity, plan.raw_birth_capacity = raw_death, raw_birth
-        plan.spent_deaths = _spent_reserved(plan, plan.reserved_children, 1, raw_death)
-        plan.spent_births = _spent_reserved(plan, plan.reserved_parents, 0, raw_birth)
+        plan.spent_deaths = _spent_reserved(
+            plan, plan.reserved_children, 1, raw_death, global_regions=self.global_regions)
+        plan.spent_births = _spent_reserved(
+            plan, plan.reserved_parents, 0, raw_birth, global_regions=self.global_regions)
         plan.residual_death_capacity = (raw_death-plan.spent_deaths).clamp_min(0)
         plan.residual_birth_capacity = (raw_birth-plan.spent_births).clamp_min(0)
 

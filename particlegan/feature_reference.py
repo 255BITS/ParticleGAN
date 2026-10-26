@@ -6,7 +6,7 @@ current law in ``birth_death.py``. The original law description follows.
 
 Fisher-Rao birth-death moves for a particle table (recipe ``particle_birth_death``).
 
-Spec:reports/design-birthdeath.md (rev 2). Once per full turnover of a FIFO
+Spec: reports/design-birthdeath.md (rev 2). Once per full turnover of a FIFO
 reservoir R of the last N D-real rows (N = table size), every particle i is
 scored at its clean centre q_i = G(z_i) with the kNN log density ratio
 
