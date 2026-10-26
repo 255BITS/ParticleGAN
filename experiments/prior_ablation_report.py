@@ -16,11 +16,14 @@ from pathlib import Path
 
 CAMPAIGN = "prior-ablation-20261025"
 FIXED_LIST = Path("configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json")
+# (tag, studies in precedence order, candidate, label). A later study's attempt
+# replaces an earlier one only for the same task (the A3 repair request).
 ARMS = [
-    ("A1", "prior-ablation-a1-learned", "bispf-optimized-quintic-v1", "BISPF default (learned table)"),
-    ("A2", "prior-ablation-a2-frozen", "bispf-prior-frozen-v1", "Frozen table"),
-    ("A3", "prior-ablation-a3-fresh-gaussian", "bispf-prior-fresh-gaussian-v1", "Fresh N(0, I) latent"),
-    ("A4", "prior-ablation-a4-pure-global", "bispf-pure-global-v1", "Shape/step gates off"),
+    ("A1", ("prior-ablation-a1-learned",), "bispf-optimized-quintic-v1", "BISPF default (learned table)"),
+    ("A2", ("prior-ablation-a2-frozen",), "bispf-prior-frozen-v1", "Frozen table"),
+    ("A3", ("prior-ablation-a3-fresh-gaussian", "prior-ablation-a3-fresh-gaussian-r2"),
+     "bispf-prior-fresh-gaussian-v1", "Fresh N(0, I) latent"),
+    ("A4", ("prior-ablation-a4-pure-global",), "bispf-pure-global-v1", "Shape/step gates off"),
 ]
 # Tests whose "prior" is not a sampled latent: the table is the optimized
 # sample, embedding or residual control itself, so freezing it removes the
@@ -86,24 +89,29 @@ def collect(queue_root: Path, report: Path) -> dict:
     for path in sorted((queue_root / "queue" / "requests").glob("*.json")):
         request = json.loads(path.read_text())
         if request.get("campaign_id") == CAMPAIGN:
-            requests[request["candidate"]["id"] if isinstance(request["candidate"], dict)
-                     else request["candidate"]] = request
-    completed = {}
+            requests[(request.get("study") or {}).get("id")] = request
+    by_id = {request["request_id"]: study for study, request in requests.items()}
+    attempt_study, completed = {}, {}
     for line in (queue_root / "events.jsonl").open():
         if f'"{CAMPAIGN}"' not in line:
             continue
         event = json.loads(line)
-        if event.get("event") == "completed":
-            completed[(event["candidate"], event["task"])] = event
+        if event.get("event") == "claimed" and event.get("request") in by_id:
+            attempt_study[event["attempt"]] = by_id[event["request"]]
+        if event.get("event") == "completed" and event.get("attempt") in attempt_study:
+            completed[(attempt_study[event["attempt"]], event["task"])] = event
     arms = {}
-    for tag, study, candidate, label in ARMS:
-        request = requests.get(candidate, {})
+    for tag, studies, candidate, label in ARMS:
+        request = requests.get(studies[-1], {})
         cells = {}
         for test in tests:
             task = json.loads(Path(f"configs/forge/tasks/{test}.json").read_text())
-            event = completed.get((candidate, test))
-            if event is None and test in ("ring_extension",):
-                event = completed.get((candidate, "ring_hold"))
+            event = None
+            for name in studies:
+                found = completed.get((name, test))
+                if found is None and test == "ring_extension":
+                    found = completed.get((name, "ring_hold"))
+                event = found or event
             cell = {"status": "NOT_MEASURED", "applicability": "non_latent_table" if test in NON_LATENT else "latent"}
             if event is not None and test in (event.get("verdicts") or {}):
                 attempt = queue_root / CAMPAIGN / event["attempt"]
@@ -125,8 +133,8 @@ def collect(queue_root: Path, report: Path) -> dict:
         counts = {}
         for cell in cells.values():
             counts[cell["status"]] = counts.get(cell["status"], 0) + 1
-        arms[tag] = {"label": label, "study": study, "candidate": candidate,
-                     "request_id": request.get("request_id"), "candidate_revision": request.get("candidate_revision"),
+        arms[tag] = {"label": label, "studies": list(studies), "candidate": candidate,
+                     "request_ids": [requests.get(name, {}).get("request_id") for name in studies], "candidate_revision": request.get("candidate_revision"),
                      "source_digest": (request.get("source") or {}).get("digest"),
                      "counts": counts, "cells": cells,
                      "wall_seconds": round(sum(c.get("wall_seconds", 0.) for c in cells.values()), 1)}
