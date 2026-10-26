@@ -26,6 +26,11 @@ def prior_policy_receipt(recipe, *priors):
             "trainable_locations": any(prior.z.requires_grad for prior in priors)}
     if recipe.prior_proximal_strength:
         result["proximal_strength"] = recipe.prior_proximal_strength
+    if recipe.prior_code_law != "table":
+        # Recorded only for the opt-in control, so default receipts are unchanged.
+        result["code_law"] = recipe.prior_code_law
+        from particlegan.priors import unwrap_prior
+        result["actual_code_laws"] = [getattr(unwrap_prior(prior), "code_law", "table") for prior in priors]
     if recipe.prior_regularizer == "coulomb":
         from particlegan.coulomb_prior import CENTER_BUFFER, RADIUS_BUFFER
         result["coulomb"] = dict(softening=recipe.prior_coulomb_softening,
@@ -73,6 +78,10 @@ def validate_prior_policy(task, evidence, recipe=None):
             return {"status": "INVALID", "reason": "prior policy proof contradicts the actual recipe"}
         if proof.get("proximal_strength", 0.) != recipe.get("prior_proximal_strength", 0.):
             return {"status": "INVALID", "reason": "prior proximal proof contradicts the actual recipe"}
+        law = recipe.get("prior_code_law", "table")
+        if (proof.get("code_law", "table") != law
+                or any(actual != law for actual in proof.get("actual_code_laws", [law]))):
+            return {"status": "INVALID", "reason": "prior code-law proof contradicts the actual recipe"}
         if recipe.get("prior_regularizer") == "coulomb":
             settings = {"softening": recipe.get("prior_coulomb_softening", .1),
                         "confinement": recipe.get("prior_coulomb_confinement", .35),

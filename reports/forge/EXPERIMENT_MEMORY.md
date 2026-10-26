@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 850. Inventory coverage: incomplete. Unresolved import items: 7.
+Records: 856. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3992,6 +3992,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 [Evidence](../../reports/forge/attempts/11d3d8b814674fd0841217c7e4304c38/result.json) · [Record](records/readout-0297c36f9f2d9c5feb45b3cb.json)
 
+### bispf-prior-fresh-gaussian-v1 · readout-030ba1dfffb896ffe7ef8768
+
+**Scope:** research_diagnostic; scientific; revision `373a307163ee384dbed023239eda5b56bdce641eef92a5e8a5f87c8d3b54019c`.
+
+Replacing table codes with fresh N(0, I) latents of the same dimension loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'INCOMPLETE': 15}; wall seconds 51.643; mechanism `structural`.
+
+
+
+Cancelled: every attempt crashed at prior construction (Recipe rejected fresh_gaussian during replace(prior_update=learned)); repaired and rerun as prior-ablation-a3-fresh-gaussian-r2. INCOMPLETE receipts preserved.
+
+**Next:** Superseded by prior-ablation-a3-fresh-gaussian-r2.
+
+[Evidence](../../reports/forge/attempts/00db84a9a51c43ad8782fce53359e1b4/result.json) · [Record](records/readout-030ba1dfffb896ffe7ef8768.json)
+
 ### forge-no-critic-penalty · readout-060e7be73e2832e314b9573f
 
 **Scope:** calibration_diagnostic; scientific; revision `1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461`.
@@ -4071,6 +4087,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 **Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
 
 [Evidence](../../reports/forge/technique-receipts/b86f62c3e4f84a43b85d366e4cc43824.json) · [Record](records/readout-170dc0a68d5b68737b370a5f.json)
+
+### bispf-optimized-quintic-v1 · readout-1d42b97bbb8f1366a766a233
+
+**Scope:** current; scientific; revision `97cff463de780cdb270a5cb968799379fe2eef3bbad671fd59df0c3d9515eeb0`.
+
+Ordinary re-qualification of the unchanged selected BISPF recipe on the current develop source, reusing the compatible prior-ablation A1 evidence; the recorded discriminator_stability outcomes are reproduced.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 4, 'INCOMPLETE': 3, 'PASS': 6}; wall seconds 1300.973; mechanism `structural`.
+
+
+
+Ordinary discriminator_stability revision-14 re-qualification stops at Tier 1: six API model toys fail or crash, zero_tanh_smoke is unsupported, five-word smoke hit its 900 s wall clock. No new inventory row registered; revision-9 qualification retained. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Repair the Tier 1 execution defects or hold the API model toys before re-qualifying.
+
+[Evidence](../../reports/forge/attempts/09fee72cca8c4de1b4e74d0ef3ad6eb1/result.json) · [Record](records/readout-1d42b97bbb8f1366a766a233.json)
 
 ### k3p-bcap-matched-v1 · readout-21b533460c29dd5049aa64df
 
@@ -4376,6 +4408,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 1.0,
 
 [Evidence](../../reports/forge/technique-receipts/3c6a84341114445da149f04ab7541f01.json) · [Record](records/readout-5bc30fee4d41b69294b1e32e.json)
 
+### bispf-prior-fresh-gaussian-v1 · readout-5ed4195bb58c87dc84a60827
+
+**Scope:** research_diagnostic; scientific; revision `535d9c1c86a6b34cd606465d32a8071e842e37015d4641da4c7e90c281e7c78b`.
+
+Replacing table codes with fresh N(0, I) latents of the same dimension loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 10, 'PASS': 5}; wall seconds 1433.143; mechanism `structural`.
+
+vector_unequal_width: hq=0.84082, mass_tv=0.024658; vector_unequal_mass: hq=0.89111, mass_tv=0.092139
+
+Fresh N(0,I) latent: 5 PASS / 10 FAIL on the 15 supported sampled-MoG tests (33 blocked by design); identical verdicts to the frozen table; loses ring16_acquisition (hq 0.53) and mode_hold (hq 0.50) vs learned. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; the learned table beats an ordinary Gaussian latent on this suite.
+
+[Evidence](../../reports/forge/attempts/0114e66e15cc4b6f9515a2c9f343a51e/result.json) · [Record](records/readout-5ed4195bb58c87dc84a60827.json)
+
 ### ka2-global-repair-v1 · readout-628b01d1adffd11312aff9b1
 
 **Scope:** current; scientific; revision `71a50b7b10fdc6307c92b781224e73625f670377ffeb4a31b9f3abe4b34be108`.
@@ -4391,6 +4439,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0363295227<0.3; q
 **Next:** Initial complete candidate rejected. Its subsequent separately bounded global coupled-rate search is concluded; no automatic paid continuation or default adoption.
 
 [Evidence](../../reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/result.json) · [Record](records/readout-628b01d1adffd11312aff9b1.json)
+
+### bispf-pure-global-v1 · readout-6675da6b575648d03b2182e9
+
+**Scope:** research_diagnostic; scientific; revision `418fb58baf87609c9d8a8e95d60af662e1fe025f891dac4ccf81de16515f9b7b`.
+
+Disabling every declared BISPF shape/step gate (one pure global recipe) loses some of the selected recipe's passes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 18, 'INCOMPLETE': 3, 'PASS': 13}; wall seconds 2744.178; mechanism `structural`.
+
+
+
+Shape/step gates off: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (sustained window), mode_hold, ring_extension, img_stripes2 and the five-word smoke (wall clock). See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; keep the declared gates in the default recipe and investigate which single gate carries ring16/mode_hold.
+
+[Evidence](../../reports/forge/attempts/104c447903794b97b819d06102efa873/result.json) · [Record](records/readout-6675da6b575648d03b2182e9.json)
 
 ### k3p-no-output-noise-diagnostic · readout-6c0c2c5c6610ecfe73fe315d
 
@@ -4471,6 +4535,22 @@ Both width 64 image tasks PASS all original sustained gates at 600 updates: HQ 1
 **Next:** Retain this positive diagnostic beside ordinary quality and the completed performance matrix; no natural-image quality or automatic promotion claim.
 
 [Evidence](../../reports/forge/bispf-throughput/README.md) · [Record](records/readout-7a4fda449cb2e080c1aebf91.json)
+
+### bispf-optimized-quintic-v1 · readout-7b017c8ed900b677ebf6bf55
+
+**Scope:** research_diagnostic; scientific; revision `97cff463de780cdb270a5cb968799379fe2eef3bbad671fd59df0c3d9515eeb0`.
+
+Re-qualification: the unchanged selected BISPF recipe on develop (after the review RNG-contract and declared-gate fixes) reproduces its recorded full-suite outcomes.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 16, 'INCOMPLETE': 2, 'PASS': 20}; wall seconds 3203.035; mechanism `structural`.
+
+grid100: precision=0.30497, center_rms_sigma=1.4971, mass_tv=0.17028, radial_ks=0.42394
+
+Re-qualification on develop source b4d7f2c42: all 29 recorded PASS/FAIL verdicts reproduced (18 PASS, 11 FAIL); new: clockfree_audit PASS, target_shift_recovery and four API model toys FAIL. 19 PASS / 16 FAIL / 7 blocked / 5 not run / 2 incomplete of 49. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Keep as the default recipe; register a structural idea that combines learned precision with frozen-table mass evenness on the native grids.
+
+[Evidence](../../reports/forge/attempts/04a54e455df6414091592e87b703cde3/result.json) · [Record](records/readout-7b017c8ed900b677ebf6bf55.json)
 
 ### k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d · readout-813a2ad71ca3580b4a8d46c1
 
@@ -4759,6 +4839,22 @@ This exact global configuration passed two_pole, unused_token_hold and ae_gan_ho
 **Next:** Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.
 
 [Evidence](../../reports/forge/attempts/5b5f7aab977745aea97e1b47871a351f/result.json) · [Record](records/readout-b42a8f277178ec58808d6b5c.json)
+
+### bispf-prior-frozen-v1 · readout-bb93e156247cbef1aa781703
+
+**Scope:** research_diagnostic; scientific; revision `21e3bfccfbf3b99d397b160ef62df3654082414ba1068129101254d6e17ef6e8`.
+
+Freezing the particle table (same initial locations and capacity) loses sampled-latent passes that the learned BISPF default holds.
+
+**Observed:** {'BLOCKED': 1, 'FAIL': 18, 'INCOMPLETE': 4, 'PASS': 13}; wall seconds 2557.195; mechanism `structural`.
+
+img_bars4: modes=2, hq=0.78125
+
+Frozen table: 13 PASS / 18 FAIL of 49; loses ring16_acquisition (hq 0.61), mode_hold, ae_gan_hold and ring_extension vs learned; crashes trajectory/residual_student hosts. Lower mass TV but precision 0.03-0.05 on the native grids. See reports/prior-ablation-2026-10-25/README.md.
+
+**Next:** Stop; use as the matched control for a learned-offset-on-frozen-anchor structural idea.
+
+[Evidence](../../reports/forge/attempts/0275756b64b94d01af4cac346397f64d/result.json) · [Record](records/readout-bb93e156247cbef1aa781703.json)
 
 ### bispf-optimized-quintic-v1 · readout-bbadc8452e77fa75caff13c6
 
@@ -5750,4 +5846,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `059182ed8b7c6459394c50643540c0e9dd3dd6a168ec8f341afb99acb4968e21`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `070f83a11d4b5c059569410e6bca3e493e47635903155fdf1c0bfe6def2bf139`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

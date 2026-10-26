@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 400000,
+    "candidate_budget_seconds": 100000,
+    "id": "prior-ablation-20261025"
+  },
+  "candidate": "bispf-prior-frozen-v1",
+  "competing_explanation": "The generator alone does the warping; a frozen quasi-Gaussian table supplies the same coverage, so learning the prior adds nothing measurable on these gates.",
+  "control": {
+    "candidate_id": "bispf-optimized-quintic-v1",
+    "task_map": {}
+  },
+  "falsifier": {
+    "metric": "hq",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "hypothesis": "Freezing the particle table (same initial locations and capacity) loses sampled-latent passes that the learned BISPF default holds.",
+  "id": "prior-ablation-a2-frozen",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "hq",
+    "op": "<",
+    "phase": "final",
+    "task_id": "mode_hold",
+    "threshold": 0.9
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_id": "bispf-optimized-quintic-v1",
+        "candidate_revision": "8d941696e5e05607c763bccefbcbe34694996370bb6f1b03d70f514be6273def"
+      },
+      "path": "reports/forge/records/readout-10ed0ff3f18514315a760f4a.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "prior-ablation-full-suite-v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

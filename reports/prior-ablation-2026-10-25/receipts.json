@@ -1,0 +1,3915 @@
+{
+ "arms": {
+  "A1": {
+   "candidate": "bispf-optimized-quintic-v1",
+   "candidate_revision": "97cff463de780cdb270a5cb968799379fe2eef3bbad671fd59df0c3d9515eeb0",
+   "cells": {
+    "ae_gan_hold": {
+     "applicability": "latent",
+     "attempt": "cdb6e299ab404131923594d2265b5850",
+     "final_margin": {
+      "gate": "recon_mse",
+      "op": "<=",
+      "relative_margin": 0.9266,
+      "threshold": 0.05,
+      "value": 0.00366872176527977
+     },
+     "graded_raw_hash": "ce8237fbc0cce44e1206e8ba2f8b8563aa7f57f07f70453cf472e178621eea58",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 16.5
+    },
+    "clockfree_audit": {
+     "applicability": "latent",
+     "attempt": "b1c50811f67e4914bc9c3760aaf59bf8",
+     "final_margin": null,
+     "graded_raw_hash": "9cbac75696272e494245f153317690818858f601b110fea8e5718be3f8a7d7aa",
+     "noise_floor": null,
+     "ordinary_view_role": "not in view",
+     "reasons": [
+      "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+     ],
+     "status": "PASS",
+     "wall_seconds": 8.7
+    },
+    "clockfree_audit_measurement_v1": {
+     "applicability": "latent",
+     "attempt": "ed68afbb38244718b699106d339ec5d7",
+     "final_margin": null,
+     "graded_raw_hash": "7a6cf4d73882093e7e4234909660cb35ab182dd360e008c4e20efafcdf36af89",
+     "noise_floor": null,
+     "ordinary_view_role": "diagnostic",
+     "reasons": [
+      "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+     ],
+     "status": "PASS",
+     "wall_seconds": 8.5
+    },
+    "cover_leftover": {
+     "applicability": "non_latent_table",
+     "attempt": "312ec2b6165843d2b000c515aba3f73f",
+     "final_margin": {
+      "gate": "u_kept",
+      "op": ">=",
+      "relative_margin": 0.1754,
+      "threshold": 0.85,
+      "value": 0.9990948338734926
+     },
+     "graded_raw_hash": "aa3a9dda9ec7a886cf78018b90e91704a5fe86ee3f1cd5b8a597f20cb5d2dfe1",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 32.6
+    },
+    "five_word_joint_hold": {
+     "applicability": "non_latent_table",
+     "attempt": "432bbda947e048a489a157c4c59fbd6c",
+     "final_margin": {
+      "gate": "modes",
+      "op": "==",
+      "relative_margin": 0.0,
+      "threshold": 5,
+      "value": 5
+     },
+     "graded_raw_hash": "78309d1f32ec3eb101abd3ccd55d0eb0cde5c3fafff997b47edc2ce4e20aa607",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "every joint generation/inverse check throughout the fixed continuation window"
+     ],
+     "status": "PASS",
+     "wall_seconds": 193.4
+    },
+    "five_word_joint_smoke": {
+     "applicability": "non_latent_table",
+     "attempt": "81a07204789b4beca410152adc494bf5",
+     "final_margin": {
+      "gate": "modes",
+      "op": "==",
+      "relative_margin": 0.0,
+      "threshold": 5,
+      "value": 5
+     },
+     "graded_raw_hash": "44c2f87dba43904e8e40d7dafee9057f844d71eff3f59215ea202735cd3bf408",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "any scheduled full joint pass plus independent same-state confirmation"
+     ],
+     "status": "PASS",
+     "wall_seconds": 883.3
+    },
+    "gaussian1d_smoke": {
+     "applicability": "latent",
+     "attempt": "94c29209d72e4a4a9b959c457ac14793",
+     "final_margin": {
+      "gate": "cdf_ks",
+      "op": "<=",
+      "relative_margin": -1.7006,
+      "threshold": 0.05,
+      "value": 0.13503149751656862
+     },
+     "graded_raw_hash": "92fe294d9ce37a09c619ac87d5fe168354c8ebebe032180dc34d4f57dd68c602",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "any scheduled full pass with independent same-state confirmation"
+     ],
+     "status": "PASS",
+     "wall_seconds": 34.3
+    },
+    "gaussian1d_stability": {
+     "applicability": "latent",
+     "attempt": "d9cf791fb3774b68ad356e32eb526bef",
+     "final_margin": {
+      "gate": "cdf_ks",
+      "op": "<=",
+      "relative_margin": -0.4064,
+      "threshold": 0.05,
+      "value": 0.07031856505709322
+     },
+     "graded_raw_hash": "c1f9109b5128b18c8b10f3a341f44708240670a4cf65768cca6481a3119ad62b",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "stationary hold, deadline reacquisition and shifted hold"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 106.1
+    },
+    "grid100": {
+     "applicability": "latent",
+     "attempt": "1946eabef1694927aab4b3007b5f4be9",
+     "final_margin": {
+      "gate": "radial_ks",
+      "op": "<=",
+      "relative_margin": -9.5985,
+      "threshold": 0.04,
+      "value": 0.4239402229676409
+     },
+     "graded_raw_hash": "4f0a0daf2d7a92e74187e6f30d1c7df7f470e6c8a94d92e78991b96749869565",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 299.4
+    },
+    "grid100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "prerequisite not PASS: grid100 (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "grid100_mlp16": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
+     "status": "BLOCKED"
+    },
+    "grid100_res16_tanh": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
+     "status": "BLOCKED"
+    },
+    "img_bars4": {
+     "applicability": "latent",
+     "attempt": "67b3a4e8721e421780dd367b1e08bde2",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": -0.5,
+      "threshold": 4,
+      "value": 2
+     },
+     "graded_raw_hash": "5f2a7c192143a125534caf6ecc8f4f2963714cd6465aada8ad867ccc4ba84c5f",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 33.4
+    },
+    "img_blobs4": {
+     "applicability": "latent",
+     "attempt": "bfd1e4cdb2174b6a94f4c93606fe1a19",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": -0.25,
+      "threshold": 4,
+      "value": 3
+     },
+     "graded_raw_hash": "f16eefd028a4488bd04a728c30020824851d07b541b0cdc65e960d1d2764c52b",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 29.8
+    },
+    "img_intensity2": {
+     "applicability": "latent",
+     "attempt": "7bf95bf9d3b54162a29c627c919ada3c",
+     "final_margin": {
+      "gate": "hq",
+      "op": ">=",
+      "relative_margin": -0.3403,
+      "threshold": 0.9,
+      "value": 0.59375
+     },
+     "graded_raw_hash": "c60d706a35ca7fe2b215f841870e02f9649c50fc57e8975705db812f32b0382a",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 29.5
+    },
+    "img_stripes2": {
+     "applicability": "latent",
+     "attempt": "70ca4c8fc50b48029f4be606083e1b6a",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "25cad1e6a5841ec1e30ea30bcfaab8599a4dae41348702c9a9d17ca2ee2f5782",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 31.0
+    },
+    "mid_scale_identity": {
+     "applicability": "non_latent_table",
+     "attempt": "8c62d722f6a64044bd4fd0bb6bb3ae60",
+     "final_margin": {
+      "gate": "identity_at_mid",
+      "op": ">=",
+      "relative_margin": 0.14,
+      "threshold": 0.85,
+      "value": 0.9690003840924172
+     },
+     "graded_raw_hash": "fdbadc046e09e19a227838b238affcd7e53db0f157d115050f02da00472bb126",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 44.1
+    },
+    "misgan_block_neural_imputer": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "misgan_block_neural_imputer: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "misgan_block_recovery": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "misgan_block_recovery: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "mode_hold": {
+     "applicability": "latent",
+     "attempt": "465d853dc11c4ef783547bafe47d7c12",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 8,
+      "value": 8
+     },
+     "graded_raw_hash": "5fac5c061e4d983c362cb9b03870f582aa8d1d26e912db86f2aff4438f8246b9",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 47.1
+    },
+    "model_ae_ddgan_bimodal_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: model_ae_ddgan_gaussian_chain (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "model_ae_ddgan_gaussian_chain": {
+     "applicability": "latent",
+     "attempt": "f5c743ac03b4463fa8f9f2bc715a349b",
+     "final_margin": {
+      "gate": "t1_q0_normalized_mean",
+      "op": "<=",
+      "relative_margin": -3.3186,
+      "threshold": 0.25,
+      "value": 1.0796617068121266
+     },
+     "graded_raw_hash": "2ec2f1a951f15cc3b9f370f86409795409bd269e08022f700d7a194b535c50ce",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 84.6
+    },
+    "model_ae_gan_multimodal": {
+     "applicability": "latent",
+     "attempt": "41ef17f3f6ae480b9ebef6af7d2542b9",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "runner exited 1; inspect run.log"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 3.7
+    },
+    "model_ae_reconstruction": {
+     "applicability": "latent",
+     "attempt": "7fdf59fc00e74b579b1a122d3fd9ed65",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "runner exited 1; inspect run.log"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 3.5
+    },
+    "model_ddgan_bimodal_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: model_ddgan_gaussian_chain (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "model_ddgan_gaussian_chain": {
+     "applicability": "latent",
+     "attempt": "1e84645b0b64434b996bf1852beb4f8d",
+     "final_margin": {
+      "gate": "t1_q0_normalized_mean",
+      "op": "<=",
+      "relative_margin": -6.8514,
+      "threshold": 0.25,
+      "value": 1.962859963611772
+     },
+     "graded_raw_hash": "dd6547cc4de7ea5f6500169f7e93e74ed8b14d84de8186a0d6238fdf9aa45387",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 68.3
+    },
+    "model_vae_categorical": {
+     "applicability": "latent",
+     "attempt": "29263a8473fc43bfa5c99811905e5317",
+     "final_margin": {
+      "gate": "decoder_mean_modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "1ad28a8229749fd61cd202ed75d37679f9f9d99893ab588072c3d0f0f94cb169",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 32.6
+    },
+    "model_vae_hard": {
+     "applicability": "latent",
+     "attempt": "5cbead8dc5b84212ad85b17f0036c668",
+     "final_margin": {
+      "gate": "decoder_mean_modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "f4bf39f47508e8ac20c69b37a36e1380318665614e0fed7039f5a924a8150070",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 35.4
+    },
+    "residual_student": {
+     "applicability": "non_latent_table",
+     "attempt": "2d64cf67b7374d10992ae77b5a8b9a01",
+     "final_margin": {
+      "gate": "success_rate",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 1.0,
+      "value": 1.0
+     },
+     "graded_raw_hash": "7f05099e4b701d6a98de19abe9a36b1bb6e26eddd191bf0831010f4abd0bc8c1",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 18.5
+    },
+    "ring16_acquisition": {
+     "applicability": "latent",
+     "attempt": "c2fdedc2d6ea486285b3afe35d821b46",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 16,
+      "value": 16
+     },
+     "graded_raw_hash": "8e036e9e1192526a66d6f24f87b17ac2b04dfaca55284c2199b696b98ec840ee",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 49.0
+    },
+    "ring16_bigan_continuous": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "ring16_bigan_continuous: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "ring_extension": {
+     "applicability": "latent",
+     "attempt": "681b4be95d0b4b91921db836ca03f75c",
+     "final_margin": {
+      "gate": "modes",
+      "op": "==",
+      "relative_margin": 0.0,
+      "threshold": 8,
+      "value": 8
+     },
+     "graded_raw_hash": "a91721b311cfeeb8b3b5d7c58f4b2b27adaee41846e3428b41f8a8b9494eeb12",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed every extension observation without selecting another window"
+     ],
+     "status": "PASS",
+     "wall_seconds": 111.7
+    },
+    "rotated100": {
+     "applicability": "latent",
+     "attempt": "96d22c44db06461d84b0856c428b6060",
+     "final_margin": {
+      "gate": "mass_tv",
+      "op": "<=",
+      "relative_margin": -0.8553,
+      "threshold": 0.06,
+      "value": 0.11131999999999999
+     },
+     "graded_raw_hash": "5881a5e99781b36ba63e869f46d07369440b275b9d6a213ad83a58526d59e8b4",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 274.3
+    },
+    "rotated100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "prerequisite not PASS: rotated100 (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "staggered100": {
+     "applicability": "latent",
+     "attempt": "4ba252ac1d2e417f857e68967e1edf92",
+     "final_margin": {
+      "gate": "radial_ks",
+      "op": "<=",
+      "relative_margin": -8.2278,
+      "threshold": 0.04,
+      "value": 0.36911099661796126
+     },
+     "graded_raw_hash": "2b91d4f7d077d3f11df9c17389c7f93b3d74082dbab2b0c540ddf843bd4fcefa",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 280.4
+    },
+    "staggered100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "prerequisite not PASS: staggered100 (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "target_shift_recovery": {
+     "applicability": "latent",
+     "attempt": "f57c218dfdde45b7bf81ff339f60a5da",
+     "final_margin": null,
+     "graded_raw_hash": "00208ed95b61a1c2550206598fb7c909fbbd0b127b6a0a0d52fbabb9ffa4bb5f",
+     "noise_floor": null,
+     "ordinary_view_role": "not in view",
+     "reasons": [
+      "recomputed live recovery and matched frozen negative control"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 119.8
+    },
+    "trajectory": {
+     "applicability": "non_latent_table",
+     "attempt": "53db3be8da8645e0b38ef7e544f5b674",
+     "final_margin": {
+      "gate": "identity_mse",
+      "op": "<=",
+      "relative_margin": 0.989,
+      "threshold": 0.02,
+      "value": 0.00021965568885207176
+     },
+     "graded_raw_hash": "c57764b57523a76b3c6eb54a5d682a3dd894c46885dca03baca22b9ed67d8e0c",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 16.9
+    },
+    "two_pole": {
+     "applicability": "non_latent_table",
+     "attempt": "274417406d2c4cb7bdfb72d8f0389dc7",
+     "final_margin": {
+      "gate": "grad_med",
+      "op": "<=",
+      "relative_margin": 0.1236,
+      "threshold": 1.0,
+      "value": 0.8763748407363892
+     },
+     "graded_raw_hash": "ba2f2cf1d86c752225c10af0a8e93ea7f88c52f13b5381e20e77e63f3f8004c1",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 12.4
+    },
+    "unipolar": {
+     "applicability": "non_latent_table",
+     "attempt": "419bd83ec4244299a48d18ac1f22af2c",
+     "final_margin": {
+      "gate": "cover",
+      "op": ">=",
+      "relative_margin": 0.1637,
+      "threshold": 0.85,
+      "value": 0.9891211314555441
+     },
+     "graded_raw_hash": "6bece956d1e81c4801ea62c4cdaa21be176d706acfdc2b84366e72234701da80",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 17.9
+    },
+    "unused_token_hold": {
+     "applicability": "non_latent_table",
+     "attempt": "04a54e455df6414091592e87b703cde3",
+     "final_margin": {
+      "gate": "concept_move",
+      "op": ">=",
+      "relative_margin": 0.1441,
+      "threshold": 0.85,
+      "value": 0.9724967658233403
+     },
+     "graded_raw_hash": "7f0fdbe51343625c3c35be67f73691211910e6def9166e15d23b81fe9d087451",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 14.4
+    },
+    "vector_anisotropic": {
+     "applicability": "latent",
+     "attempt": "9c0c194960564ecb91d7aa81c6cf0a26",
+     "final_margin": {
+      "gate": "sw1_normalized",
+      "op": "<=",
+      "relative_margin": -0.1868,
+      "threshold": 0.18,
+      "value": 0.2136241052348046
+     },
+     "graded_raw_hash": "db0fecd021f0d7fd08e32b3871b544fa7af8f0071b7650b1aeffd3b1f5abff03",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": 54.31630828843227,
+        "oracle_mean": 0.028122469773128007,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.009871549023519173
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 7.23144028736022,
+        "oracle_mean": 0.9415666162967682,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.02422056862498055
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.023881102039013058,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.00822102030604303
+       },
+       "hq": {
+        "margin_oracle_std": 78.77658899774974,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": -6.365059758915008,
+        "oracle_mean": 0.008885703980922699,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003960935869205097
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.029374248697422445,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.010151359007069491
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": -5.007256550120658,
+        "oracle_mean": 0.020757921550241414,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.00671507539073355
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 35.6
+    },
+    "vector_overlap": {
+     "applicability": "latent",
+     "attempt": "d5fa3c1e459b401eacd56ab939910474",
+     "final_margin": {
+      "gate": "covariance_error",
+      "op": "<=",
+      "relative_margin": -0.1607,
+      "threshold": 0.45,
+      "value": 0.5222957730293274
+     },
+     "graded_raw_hash": "ee6d7d1bcb3551e825d38eba58daac106f91ae5a35127dbbac3b2203f9190c15",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "covariance_error": {
+        "margin_oracle_std": -5.386328932135651,
+        "oracle_mean": 0.04096917144488543,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.013422086534299807
+       },
+       "mean_error": {
+        "margin_oracle_std": 5.04064764402002,
+        "oracle_mean": 0.01952654923661612,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.009619358918517822
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 7.7623873327850825,
+        "oracle_mean": 0.020739419625376277,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003982477402011114
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 37.4
+    },
+    "vector_spiral": {
+     "applicability": "latent",
+     "attempt": "96e14beef5b7460a8c4b6c5d48807799",
+     "final_margin": {
+      "gate": "mean_error",
+      "op": "<=",
+      "relative_margin": 0.5234,
+      "threshold": 0.15,
+      "value": 0.07149022817611694
+     },
+     "graded_raw_hash": "caf55dc6a0d5d6348203622466b9c4c4fc8a2786c890f6a0b35d81df37aa8bbe",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "covariance_error": {
+        "margin_oracle_std": 29.598038860856352,
+        "oracle_mean": 0.03573521017096937,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.012484807230750313
+       },
+       "mean_error": {
+        "margin_oracle_std": 12.70890959579019,
+        "oracle_mean": 0.011289166446658783,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.006177537988773585
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 36.46033963971524,
+        "oracle_mean": 0.015902321359293217,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0034127151716156507
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 46.1
+    },
+    "vector_two_broad": {
+     "applicability": "latent",
+     "attempt": "b1fb097889bf4ffe99643e193a08e18f",
+     "final_margin": {
+      "gate": "hq",
+      "op": ">=",
+      "relative_margin": 0.1658,
+      "threshold": 0.85,
+      "value": 0.990966796875
+     },
+     "graded_raw_hash": "9b8ec612ca507bccbdee1fcb013ff9bff993a22fb5c695a1a0d31ea06039a820",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": 49.614637771487835,
+        "oracle_mean": 0.03598899347707629,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.010955680212794226
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 15.964493105346394,
+        "oracle_mean": 0.9594167359173298,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.020879492747292328
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.017539114342071116,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.005790405117427799
+       },
+       "hq": {
+        "margin_oracle_std": 76.26693911351559,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 17.694314557841825,
+        "oracle_mean": 0.0069427490234375,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0051520565590147975
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.015605036038323306,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.011851703869615945
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 8.297728208150296,
+        "oracle_mean": 0.014666097292517466,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.006408292310966918
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 38.2
+    },
+    "vector_unequal_mass": {
+     "applicability": "latent",
+     "attempt": "1f32056bff1b48b7911af66555444985",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -1.0796,
+      "threshold": 0.85,
+      "value": 1.7676393389701843
+     },
+     "graded_raw_hash": "286ba1451c0eef63cab9c82217fa8d0c36e7cbd8c4f6639daf5fd153671ca79a",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -45.91604569997744,
+        "oracle_mean": 0.08351954477257095,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.019985156059957387
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": -1.3940106040111742,
+        "oracle_mean": 0.807319663465023,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.10760319869044384
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.03590691240970045,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.011337437883263461
+       },
+       "hq": {
+        "margin_oracle_std": 68.87007629682549,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 28.05798713297138,
+        "oracle_mean": 0.008632200537249446,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003299528545351649
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.02094255347037688,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.00859417063572251
+       },
+       "min_mass_ratio": {
+        "margin_oracle_std": -13.057904912200671,
+        "oracle_mean": 0.9552471563220024,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.019145490925302433
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 14.005924577670289,
+        "oracle_mean": 0.016603394324950917,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.005587380740162688
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 38.1
+    },
+    "vector_unequal_width": {
+     "applicability": "latent",
+     "attempt": "f7d38af1951442bb9ae5e66e65081876",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -10.3964,
+      "threshold": 0.85,
+      "value": 9.686902768909931
+     },
+     "graded_raw_hash": "10dce6814fa77175814af0f3cc5e399b4929993685a245473eeeb02187fd33f3",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -808.501370863632,
+        "oracle_mean": 0.04858772183069959,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.010929978707977269
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": -2.6907989904662815,
+        "oracle_mean": 0.9306237623095512,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.02100851365907196
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.013382338627707213,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.006411725394390787
+       },
+       "hq": {
+        "margin_oracle_std": 71.37972618105962,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": -35.24436654209159,
+        "oracle_mean": 0.01123046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0036200931707092688
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.03234279865864664,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.010599210776127075
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": -15.799766313787664,
+        "oracle_mean": 0.022622820309285047,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.00679646301818878
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 38.9
+    },
+    "zero_tanh_rail_escape": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed",
+     "status": "BLOCKED"
+    },
+    "zero_tanh_smoke": {
+     "applicability": "latent",
+     "attempt": "17d28ee2c6524981b8e6b37e4e2b2caf",
+     "final_margin": null,
+     "graded_raw_hash": "982b12077d4aa41b82fc25921ee2952ed9535466d545e2abe41f26bb826662b6",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "unsupported evaluator zero_tanh_smoke"
+     ],
+     "status": "BLOCKED",
+     "wall_seconds": 27.7
+    }
+   },
+   "counts": {
+    "BLOCKED": 7,
+    "FAIL": 16,
+    "INCOMPLETE": 2,
+    "NOT_MEASURED": 5,
+    "PASS": 19
+   },
+   "label": "BISPF default (learned table)",
+   "request_ids": [
+    "677f30047e18d7c767e4cc84"
+   ],
+   "source_digest": "4621fa12e6fdf0a79507e3749426321277e65edd2d4f1f0ec054f21238d672b9",
+   "studies": [
+    "prior-ablation-a1-learned"
+   ],
+   "wall_seconds": 3203.1
+  },
+  "A2": {
+   "candidate": "bispf-prior-frozen-v1",
+   "candidate_revision": "21e3bfccfbf3b99d397b160ef62df3654082414ba1068129101254d6e17ef6e8",
+   "cells": {
+    "ae_gan_hold": {
+     "applicability": "latent",
+     "attempt": "ab6c15c9ca4c4fda924c733b5e5d3c14",
+     "final_margin": {
+      "gate": "recon_mse",
+      "op": "<=",
+      "relative_margin": -0.9974,
+      "threshold": 0.05,
+      "value": 0.09987083077430725
+     },
+     "graded_raw_hash": "e0a709ed1dc1881d715b613418a1105d33f21bd4f51f34ba49869b7268d1a053",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 10.6
+    },
+    "clockfree_audit": {
+     "applicability": "latent",
+     "attempt": "3963d7a67c9045a5a590526061abf490",
+     "final_margin": null,
+     "graded_raw_hash": "dc589ce588dcfab91f6b35dd5a3fd96e378c0d3002055a32aee651e990d2d118",
+     "noise_floor": null,
+     "ordinary_view_role": "not in view",
+     "reasons": [
+      "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+     ],
+     "status": "PASS",
+     "wall_seconds": 6.9
+    },
+    "clockfree_audit_measurement_v1": {
+     "applicability": "latent",
+     "attempt": "381eaba1d8834898bf7db4cf3cd14156",
+     "final_margin": null,
+     "graded_raw_hash": "49ce7c0298a37920ada4ed4d62bbd631714f15ae50c9c4e41c08c52011c3e26e",
+     "noise_floor": null,
+     "ordinary_view_role": "diagnostic",
+     "reasons": [
+      "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+     ],
+     "status": "PASS",
+     "wall_seconds": 6.9
+    },
+    "cover_leftover": {
+     "applicability": "non_latent_table",
+     "attempt": "0de06f6b44d24996acbd7affa4fa04b1",
+     "final_margin": {
+      "gate": "u_kept",
+      "op": ">=",
+      "relative_margin": 0.1575,
+      "threshold": 0.85,
+      "value": 0.9838596484026756
+     },
+     "graded_raw_hash": "ad676bc2f12de6e3f65f85e154bd7a49119414241950a295c84e8c21a937e134",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 25.2
+    },
+    "five_word_joint_hold": {
+     "applicability": "non_latent_table",
+     "attempt": "739e463c7a104b0fa52b8b689ede287e",
+     "final_margin": {
+      "gate": "modes",
+      "op": "==",
+      "relative_margin": 0.0,
+      "threshold": 5,
+      "value": 5
+     },
+     "graded_raw_hash": "26a03f5327055266b7edf8322725ecef17a2bf493a924657072aff8e5679913f",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "every joint generation/inverse check throughout the fixed continuation window"
+     ],
+     "status": "PASS",
+     "wall_seconds": 175.6
+    },
+    "five_word_joint_smoke": {
+     "applicability": "non_latent_table",
+     "attempt": "f7e029a6b5ea4c26892795f15fafc2fe",
+     "final_margin": {
+      "gate": "modes",
+      "op": "==",
+      "relative_margin": 0.0,
+      "threshold": 5,
+      "value": 5
+     },
+     "graded_raw_hash": "e384a91d564b7a5ad1a76ef9e32fa3e6ddb1db77289469e45ac27da5d53e4403",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "any scheduled full joint pass plus independent same-state confirmation"
+     ],
+     "status": "PASS",
+     "wall_seconds": 792.2
+    },
+    "gaussian1d_smoke": {
+     "applicability": "latent",
+     "attempt": "86069046a3b64ab2a7725700f06dea43",
+     "final_margin": {
+      "gate": "cdf_ks",
+      "op": "<=",
+      "relative_margin": -1.1912,
+      "threshold": 0.05,
+      "value": 0.10955798456694443
+     },
+     "graded_raw_hash": "b0d13e26e80592b5284a7974fbb758eea435ac4181526bb7b5d6d02a9b8db417",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "any scheduled full pass with independent same-state confirmation"
+     ],
+     "status": "PASS",
+     "wall_seconds": 20.7
+    },
+    "gaussian1d_stability": {
+     "applicability": "latent",
+     "attempt": "1f38030db1f842ecb1465543fbce5432",
+     "final_margin": {
+      "gate": "cdf_ks",
+      "op": "<=",
+      "relative_margin": -4.627,
+      "threshold": 0.05,
+      "value": 0.2813513392772776
+     },
+     "graded_raw_hash": "08511c330166cf990200cb6cf960d7a399dcb431a9b805ebe21df0c1791bd474",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "stationary hold, deadline reacquisition and shifted hold"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 74.8
+    },
+    "grid100": {
+     "applicability": "latent",
+     "attempt": "b1b16a4fe65445ffa86243d57501aab8",
+     "final_margin": {
+      "gate": "precision",
+      "op": ">=",
+      "relative_margin": -0.9492,
+      "threshold": 0.97,
+      "value": 0.04929
+     },
+     "graded_raw_hash": "15541db8da1dab3849fba434912ccb98e982bb814963615cdc0a8abb90920aaf",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 290.0
+    },
+    "grid100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "required capability unavailable: learned_locations",
+     "status": "BLOCKED"
+    },
+    "grid100_mlp16": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
+     "status": "BLOCKED"
+    },
+    "grid100_res16_tanh": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
+     "status": "BLOCKED"
+    },
+    "img_bars4": {
+     "applicability": "latent",
+     "attempt": "0275756b64b94d01af4cac346397f64d",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": -0.5,
+      "threshold": 4,
+      "value": 2
+     },
+     "graded_raw_hash": "fdfceed811ab9d8a1337bae709b32e2184dac5f49997dbd539eb80fdd36e1092",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 27.5
+    },
+    "img_blobs4": {
+     "applicability": "latent",
+     "attempt": "ae6c5796528447928588eac975c84c9c",
+     "final_margin": {
+      "gate": "hq",
+      "op": ">=",
+      "relative_margin": -0.3056,
+      "threshold": 0.9,
+      "value": 0.625
+     },
+     "graded_raw_hash": "fb3a1ca2c045077ca8d9f594900fc2bfc8d1c43bc8ad8f20fcc71b85bb6c0ae5",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 27.5
+    },
+    "img_intensity2": {
+     "applicability": "latent",
+     "attempt": "c0fabc4553eb47c89ca1445ead74ca7b",
+     "final_margin": {
+      "gate": "hq",
+      "op": ">=",
+      "relative_margin": -0.6528,
+      "threshold": 0.9,
+      "value": 0.3125
+     },
+     "graded_raw_hash": "62db121b87a43db7d4dada5ae8d71a3d9ba34eb43dcf7f283f8111d74fd39ebe",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 27.2
+    },
+    "img_stripes2": {
+     "applicability": "latent",
+     "attempt": "eb17ea6332b74efea44e00ae311eae0a",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "2d8a58dcd2f64cf827da8013522ea7ac9c33b9abd3e0835d6532ce2e8466799b",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 26.3
+    },
+    "mid_scale_identity": {
+     "applicability": "non_latent_table",
+     "attempt": "1b47cb1204634c7d98ca241a5a18c837",
+     "final_margin": {
+      "gate": "identity_at_mid",
+      "op": ">=",
+      "relative_margin": 0.14,
+      "threshold": 0.85,
+      "value": 0.9690003840924172
+     },
+     "graded_raw_hash": "12090bb1c11d58f1258c5fc59e34208ee04af258e62c61cddae3246beddd7c5b",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 38.7
+    },
+    "misgan_block_neural_imputer": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "misgan_block_neural_imputer: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "misgan_block_recovery": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "misgan_block_recovery: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "mode_hold": {
+     "applicability": "latent",
+     "attempt": "55806a2a0b554eac8b53f80c05525f7c",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 8,
+      "value": 8
+     },
+     "graded_raw_hash": "0acb88370b443846c9eb4051798743c0ef5a47a8b34cd2cb2179f8510ddb4c07",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 42.3
+    },
+    "model_ae_ddgan_bimodal_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: model_ae_ddgan_gaussian_chain (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "model_ae_ddgan_gaussian_chain": {
+     "applicability": "latent",
+     "attempt": "3b3afde6106d46bab810a1cf75bd6bf0",
+     "final_margin": {
+      "gate": "t1_q0_normalized_mean",
+      "op": "<=",
+      "relative_margin": -1.563,
+      "threshold": 0.25,
+      "value": 0.6407512198364155
+     },
+     "graded_raw_hash": "b5dac78579ff422b75b191ce29cfb7a460efa442643bd473f55b5022986653a4",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 65.0
+    },
+    "model_ae_gan_multimodal": {
+     "applicability": "latent",
+     "attempt": "f09e11866794412c98bf3806e9e7b04f",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "runner exited 1; inspect run.log"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 4.0
+    },
+    "model_ae_reconstruction": {
+     "applicability": "latent",
+     "attempt": "8285794f826c4b1194289b6ffc720e1b",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "runner exited 1; inspect run.log"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 3.3
+    },
+    "model_ddgan_bimodal_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: model_ddgan_gaussian_chain (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "model_ddgan_gaussian_chain": {
+     "applicability": "latent",
+     "attempt": "9eb72b112d0748be9e755117e5c2459f",
+     "final_margin": {
+      "gate": "t1_q1_normalized_mean",
+      "op": "<=",
+      "relative_margin": -2.8465,
+      "threshold": 0.25,
+      "value": 0.9616243077666784
+     },
+     "graded_raw_hash": "949159f930285490845879fb7dd394bd1a1cab11d175f8ade0bf49bc8e02b6f5",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 50.3
+    },
+    "model_vae_categorical": {
+     "applicability": "latent",
+     "attempt": "aeb03936dda94fa096bf39908bf3a855",
+     "final_margin": {
+      "gate": "decoder_mean_modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "48521f2833a0e3a699a4b60b85eba90895e7b65affcc480c0bf287149807ca8c",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 26.9
+    },
+    "model_vae_hard": {
+     "applicability": "latent",
+     "attempt": "ccba4e8584494a43ae4c57bc16874651",
+     "final_margin": {
+      "gate": "decoder_mean_modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "48ef8d1b210bcdd476284354fbc6182a24d671536788437d0ae566010eecef7a",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 26.1
+    },
+    "residual_student": {
+     "applicability": "non_latent_table",
+     "attempt": "f4ffaed0abf74c138e5aae7d2c185fcf",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "runner exited 1; inspect run.log"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 3.8
+    },
+    "ring16_acquisition": {
+     "applicability": "latent",
+     "attempt": "e6f5784b4cad41d59802de3680666635",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -5.9631,
+      "threshold": 0.85,
+      "value": 5.9186768382787704
+     },
+     "graded_raw_hash": "a3dec5d028b8b7657a8baab3b90dbe34b164974d583b5be62eccdf17a81418b5",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 35.2
+    },
+    "ring16_bigan_continuous": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "ring16_bigan_continuous: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "ring_extension": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: ring16_acquisition (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "rotated100": {
+     "applicability": "latent",
+     "attempt": "7ac5b5fcaf154940ba08fde127ac64f3",
+     "final_margin": {
+      "gate": "precision",
+      "op": ">=",
+      "relative_margin": -0.9714,
+      "threshold": 0.97,
+      "value": 0.02778
+     },
+     "graded_raw_hash": "a0ded1d303689ce8f187b8943e04d5f1fcd2fb2ff64a6ed2901aa3078c4415bb",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 253.2
+    },
+    "rotated100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "required capability unavailable: learned_locations",
+     "status": "BLOCKED"
+    },
+    "staggered100": {
+     "applicability": "latent",
+     "attempt": "c0135a366afa41198980dc35227f748c",
+     "final_margin": {
+      "gate": "mass_tv",
+      "op": "<=",
+      "relative_margin": -1.912,
+      "threshold": 0.06,
+      "value": 0.17472
+     },
+     "graded_raw_hash": "9750fd9525bb97b7e493c1b18a751640e664f2ebe4aa926dca4be3437235804e",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 267.1
+    },
+    "staggered100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "required capability unavailable: learned_locations",
+     "status": "BLOCKED"
+    },
+    "target_shift_recovery": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "Recipe.prior_update conflicts with legacy task-owned learnable",
+     "status": "BLOCKED"
+    },
+    "trajectory": {
+     "applicability": "non_latent_table",
+     "attempt": "05a4a183eb6c44fd896fe366bbb1f77a",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "runner exited 1; inspect run.log"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 3.8
+    },
+    "two_pole": {
+     "applicability": "non_latent_table",
+     "attempt": "22b511698fcd490591224250660a5a72",
+     "final_margin": {
+      "gate": "grad_med",
+      "op": "<=",
+      "relative_margin": 0.1236,
+      "threshold": 1.0,
+      "value": 0.8763748407363892
+     },
+     "graded_raw_hash": "80106ce45e6edb9e10b1fdc85611d50ea950f8b99f38cdb45bf6267fdc2b639e",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 7.7
+    },
+    "unipolar": {
+     "applicability": "non_latent_table",
+     "attempt": "43d66852d10d4a0292b81a3de06a3574",
+     "final_margin": {
+      "gate": "cover",
+      "op": ">=",
+      "relative_margin": 0.1637,
+      "threshold": 0.85,
+      "value": 0.9891211314555441
+     },
+     "graded_raw_hash": "0b94a3fbde88ea17251fbd8ee8246cc38034ddf9c1b5115d25262bb9f9be39d8",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 15.1
+    },
+    "unused_token_hold": {
+     "applicability": "non_latent_table",
+     "attempt": "7b113e36c3054e8b87d6ec83bd503598",
+     "final_margin": {
+      "gate": "concept_move",
+      "op": ">=",
+      "relative_margin": 0.1441,
+      "threshold": 0.85,
+      "value": 0.9724967658233403
+     },
+     "graded_raw_hash": "ab4de0cb641027dab0bc6a8da62fdc01b02bbc2a3953ddc5d82aa9de8e0ef976",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 9.1
+    },
+    "vector_anisotropic": {
+     "applicability": "latent",
+     "attempt": "1039388a80f04e639ce413181fb12e98",
+     "final_margin": {
+      "gate": "mass_tv",
+      "op": "<=",
+      "relative_margin": -0.142,
+      "threshold": 0.15,
+      "value": 0.1713053435087204
+     },
+     "graded_raw_hash": "f2bd5f38d81acea88c320de5b3d8cdf6ba3f5f287e727ba534bcb0dade0a4037",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -5.458855788635238,
+        "oracle_mean": 0.028122469773128007,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.009871549023519173
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 30.926425046592904,
+        "oracle_mean": 0.9415666162967682,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.02422056862498055
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.023881102039013058,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.00822102030604303
+       },
+       "hq": {
+        "margin_oracle_std": 10.091434271341527,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": -5.378866058994305,
+        "oracle_mean": 0.008885703980922699,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003960935869205097
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.029374248697422445,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.010151359007069491
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 1.1376123339684505,
+        "oracle_mean": 0.020757921550241414,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.00671507539073355
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 28.2
+    },
+    "vector_overlap": {
+     "applicability": "latent",
+     "attempt": "6fe7982f5c184b69b02a6312f271b87a",
+     "final_margin": {
+      "gate": "mean_error",
+      "op": "<=",
+      "relative_margin": -1.3299,
+      "threshold": 0.15,
+      "value": 0.349490761756897
+     },
+     "graded_raw_hash": "df21f422d16cc0b44fb9d10678cb8b8eca387d89d43b1d17f70b2ad99ee3e13a",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "covariance_error": {
+        "margin_oracle_std": -28.181383736851696,
+        "oracle_mean": 0.04096917144488543,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.013422086534299807
+       },
+       "mean_error": {
+        "margin_oracle_std": -20.73846744327896,
+        "oracle_mean": 0.01952654923661612,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.009619358918517822
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": -27.750965463455305,
+        "oracle_mean": 0.020739419625376277,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003982477402011114
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 27.6
+    },
+    "vector_spiral": {
+     "applicability": "latent",
+     "attempt": "2fdd02c85396440a87f41116fee20396",
+     "final_margin": {
+      "gate": "mean_error",
+      "op": "<=",
+      "relative_margin": 0.4624,
+      "threshold": 0.15,
+      "value": 0.08064587414264679
+     },
+     "graded_raw_hash": "82607160992567588218d9132e589635908492c62736eb68442b49045e9f1547",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "covariance_error": {
+        "margin_oracle_std": 32.36272406091172,
+        "oracle_mean": 0.03573521017096937,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.012484807230750313
+       },
+       "mean_error": {
+        "margin_oracle_std": 11.226823045587123,
+        "oracle_mean": 0.011289166446658783,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.006177537988773585
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 36.430259268280786,
+        "oracle_mean": 0.015902321359293217,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0034127151716156507
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 33.8
+    },
+    "vector_two_broad": {
+     "applicability": "latent",
+     "attempt": "7ce875e4d572448591e417040fe486fe",
+     "final_margin": {
+      "gate": "sw1_normalized",
+      "op": "<=",
+      "relative_margin": 0.0829,
+      "threshold": 0.18,
+      "value": 0.16507149563049633
+     },
+     "graded_raw_hash": "28c7a7913ff4e836ccb7f8388b7b80b193c0140b01fe46da1722e40099e706e7",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": 22.219403866559077,
+        "oracle_mean": 0.03598899347707629,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.010955680212794226
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 11.53209783073069,
+        "oracle_mean": 0.9594167359173298,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.020879492747292328
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.017539114342071116,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.005790405117427799
+       },
+       "hq": {
+        "margin_oracle_std": 59.35982410393819,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 21.01140619964399,
+        "oracle_mean": 0.0069427490234375,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0051520565590147975
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.015605036038323306,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.011851703869615945
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 2.3295604577768025,
+        "oracle_mean": 0.014666097292517466,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.006408292310966918
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 29.1
+    },
+    "vector_unequal_mass": {
+     "applicability": "latent",
+     "attempt": "f304460b05764aab9ecdf44bec044ae9",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -2.0542,
+      "threshold": 0.85,
+      "value": 2.596082419157028
+     },
+     "graded_raw_hash": "dede15609a7fc5bd32f64c4f391490158e6f657e19d8ef332459751f12af3b5a",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -87.36896594245314,
+        "oracle_mean": 0.08351954477257095,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.019985156059957387
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": -1.3561540379954886,
+        "oracle_mean": 0.807319663465023,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.10760319869044384
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.03590691240970045,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.011337437883263461
+       },
+       "hq": {
+        "margin_oracle_std": 68.87007629682549,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 15.775219097188023,
+        "oracle_mean": 0.008632200537249446,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003299528545351649
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.02094255347037688,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.00859417063572251
+       },
+       "min_mass_ratio": {
+        "margin_oracle_std": 7.639346528697918,
+        "oracle_mean": 0.9552471563220024,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.019145490925302433
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 9.650977132051343,
+        "oracle_mean": 0.016603394324950917,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.005587380740162688
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 28.2
+    },
+    "vector_unequal_width": {
+     "applicability": "latent",
+     "attempt": "20c3d2ef2b884fda88ff5e593e8d886a",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -0.5492,
+      "threshold": 0.85,
+      "value": 1.3168470039963722
+     },
+     "graded_raw_hash": "d3e9e29a8b546e5ed6e7fce634f21d1a01bc307c960fd78cd6260e0c70c88792",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -42.712526389062674,
+        "oracle_mean": 0.04858772183069959,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.010929978707977269
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 24.564816475553375,
+        "oracle_mean": 0.9306237623095512,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.02100851365907196
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.013382338627707213,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.006411725394390787
+       },
+       "hq": {
+        "margin_oracle_std": 42.32062225834846,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 12.90809750508291,
+        "oracle_mean": 0.01123046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0036200931707092688
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.03234279865864664,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.010599210776127075
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 4.8719237734937675,
+        "oracle_mean": 0.022622820309285047,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.00679646301818878
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 28.3
+    },
+    "zero_tanh_rail_escape": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed",
+     "status": "BLOCKED"
+    },
+    "zero_tanh_smoke": {
+     "applicability": "latent",
+     "attempt": "b7d08a479ace464ca76f8a8539b13341",
+     "final_margin": null,
+     "graded_raw_hash": "c7d8bb4e4ee35023ea0527d370b952fc1442675dfc1a1295406698778edc59b1",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "unsupported evaluator zero_tanh_smoke"
+     ],
+     "status": "BLOCKED",
+     "wall_seconds": 18.9
+    }
+   },
+   "counts": {
+    "BLOCKED": 11,
+    "FAIL": 18,
+    "INCOMPLETE": 4,
+    "NOT_MEASURED": 3,
+    "PASS": 13
+   },
+   "label": "Frozen table",
+   "request_ids": [
+    "0f5671c49ee69aecd2f77648"
+   ],
+   "source_digest": "4621fa12e6fdf0a79507e3749426321277e65edd2d4f1f0ec054f21238d672b9",
+   "studies": [
+    "prior-ablation-a2-frozen"
+   ],
+   "wall_seconds": 2557.1
+  },
+  "A3": {
+   "candidate": "bispf-prior-fresh-gaussian-v1",
+   "candidate_revision": "535d9c1c86a6b34cd606465d32a8071e842e37015d4641da4c7e90c281e7c78b",
+   "cells": {
+    "ae_gan_hold": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "ae_gan_hold: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "clockfree_audit": {
+     "applicability": "latent",
+     "attempt": "4c6c4588ac9b4c0ea4a7d4c0492eb397",
+     "final_margin": null,
+     "graded_raw_hash": "7bad4b2f72114d341c8abac95736f5f31e4432217523282ea4773d45a072557b",
+     "noise_floor": null,
+     "ordinary_view_role": "not in view",
+     "reasons": [
+      "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+     ],
+     "status": "PASS",
+     "wall_seconds": 9.5
+    },
+    "clockfree_audit_measurement_v1": {
+     "applicability": "latent",
+     "attempt": "f15b4aaf99fe482fa2a4e636d1d55923",
+     "final_margin": null,
+     "graded_raw_hash": "c55d1a580e9f3a6a98eba81123ded116718afca715e299167b0840396954d782",
+     "noise_floor": null,
+     "ordinary_view_role": "diagnostic",
+     "reasons": [
+      "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+     ],
+     "status": "PASS",
+     "wall_seconds": 10.0
+    },
+    "cover_leftover": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "five_word_joint_hold": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "five_word_joint_smoke": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "gaussian1d_smoke": {
+     "applicability": "latent",
+     "attempt": "3115d3e1c69f41399a353042fef6c917",
+     "final_margin": {
+      "gate": "std_ratio",
+      "op": "<=",
+      "relative_margin": 0.1852,
+      "threshold": 1.2,
+      "value": 0.9777508397040521
+     },
+     "graded_raw_hash": "25a77d374c97ba646b2104841002a9771e8d7a920fcdc3c2bde1bf2d8796bc09",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "any scheduled full pass with independent same-state confirmation"
+     ],
+     "status": "PASS",
+     "wall_seconds": 27.1
+    },
+    "gaussian1d_stability": {
+     "applicability": "latent",
+     "attempt": "f4952c90c40e44dcbd6e87afa50316ca",
+     "final_margin": {
+      "gate": "cdf_ks",
+      "op": "<=",
+      "relative_margin": -5.8059,
+      "threshold": 0.05,
+      "value": 0.3402943971603366
+     },
+     "graded_raw_hash": "886aae9fa2791b4cf8544f6d3516e9cc87a41f52f3a668a0bba0157f4ea8b47a",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "stationary hold, deadline reacquisition and shifted hold"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 96.7
+    },
+    "grid100": {
+     "applicability": "latent",
+     "attempt": "ee62bac4305a41cc8bb3f29e1ed70713",
+     "final_margin": {
+      "gate": "precision",
+      "op": ">=",
+      "relative_margin": -0.9451,
+      "threshold": 0.97,
+      "value": 0.05325
+     },
+     "graded_raw_hash": "8a81a0933923ed1f1e005d5d275cba7e4bec8bca91968a1040122c03fc5906bc",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 338.1
+    },
+    "grid100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "required capability unavailable: learned_locations",
+     "status": "BLOCKED"
+    },
+    "grid100_mlp16": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
+     "status": "BLOCKED"
+    },
+    "grid100_res16_tanh": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
+     "status": "BLOCKED"
+    },
+    "img_bars4": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "img_blobs4": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "img_intensity2": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "img_stripes2": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "mid_scale_identity": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "misgan_block_neural_imputer": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "misgan_block_neural_imputer: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "misgan_block_recovery": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "misgan_block_recovery: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "mode_hold": {
+     "applicability": "latent",
+     "attempt": "62e27d51192344e397db815d6c510b83",
+     "final_margin": {
+      "gate": "hq",
+      "op": ">=",
+      "relative_margin": -0.445,
+      "threshold": 0.9,
+      "value": 0.49951171875
+     },
+     "graded_raw_hash": "8c99326a59c27158bb8a5865cfcf04efa50c76dbefd111c50881de1aad967e76",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 48.4
+    },
+    "model_ae_ddgan_bimodal_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "model_ae_ddgan_bimodal_chain: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "model_ae_ddgan_gaussian_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "model_ae_ddgan_gaussian_chain: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "model_ae_gan_multimodal": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "model_ae_gan_multimodal: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "model_ae_reconstruction": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "model_ae_reconstruction: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "model_ddgan_bimodal_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "model_ddgan_bimodal_chain: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "model_ddgan_gaussian_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "model_ddgan_gaussian_chain: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "model_vae_categorical": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "model_vae_categorical: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "model_vae_hard": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "model_vae_hard: Recipe.prior_code_law='fresh_gaussian' requires a sampled MoG latent drawn only through prior.sample; this host reads, encodes or optimizes table rows",
+     "status": "BLOCKED"
+    },
+    "residual_student": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "ring16_acquisition": {
+     "applicability": "latent",
+     "attempt": "59ae9ba9b2b845ff84d32472eb3562b4",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -6.8607,
+      "threshold": 0.85,
+      "value": 6.681586712598801
+     },
+     "graded_raw_hash": "ea11a786439eea6000b91b95c539a5d2bd06e504fd3dbec39223ed85151d5a4e",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 42.5
+    },
+    "ring16_bigan_continuous": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "ring16_bigan_continuous: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "ring_extension": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: ring16_acquisition (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "rotated100": {
+     "applicability": "latent",
+     "attempt": "b1a7f0aa8c694d6aa736827bc8d1dcd9",
+     "final_margin": {
+      "gate": "precision",
+      "op": ">=",
+      "relative_margin": -0.9159,
+      "threshold": 0.97,
+      "value": 0.08155
+     },
+     "graded_raw_hash": "2aa29ec05f26e9cb585aaa9330d871d805b8fe2591c39d91aa2aaf0625b87044",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 305.2
+    },
+    "rotated100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "required capability unavailable: learned_locations",
+     "status": "BLOCKED"
+    },
+    "staggered100": {
+     "applicability": "latent",
+     "attempt": "bc97e562142444e0af66e9716ee2d969",
+     "final_margin": {
+      "gate": "mass_tv",
+      "op": "<=",
+      "relative_margin": -1.3437,
+      "threshold": 0.06,
+      "value": 0.14062
+     },
+     "graded_raw_hash": "eeeb7057a810441bd37ce8ed91b0b505cec5901858b72c88ecdeef860de936ff",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 306.8
+    },
+    "staggered100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "required capability unavailable: learned_locations",
+     "status": "BLOCKED"
+    },
+    "target_shift_recovery": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "Recipe.prior_update conflicts with legacy task-owned learnable",
+     "status": "BLOCKED"
+    },
+    "trajectory": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "two_pole": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "unipolar": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "unused_token_hold": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "required capability unavailable: mog_prior",
+     "status": "BLOCKED"
+    },
+    "vector_anisotropic": {
+     "applicability": "latent",
+     "attempt": "84406d8c152b4c24934fed0196bbf919",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -0.7132,
+      "threshold": 0.85,
+      "value": 1.4561882019042969
+     },
+     "graded_raw_hash": "b81c1f659174b058dd3dc1c5f997d98477c8eb86dd72d4e763e1e5d32c79698e",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -61.407606897361376,
+        "oracle_mean": 0.028122469773128007,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.009871549023519173
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 45.04883573978695,
+        "oracle_mean": 0.9415666162967682,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.02422056862498055
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.023881102039013058,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.00822102030604303
+       },
+       "hq": {
+        "margin_oracle_std": -29.006269188306227,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 28.27499395079968,
+        "oracle_mean": 0.008885703980922699,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003960935869205097
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.029374248697422445,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.010151359007069491
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 15.471578939166113,
+        "oracle_mean": 0.020757921550241414,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.00671507539073355
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 37.4
+    },
+    "vector_overlap": {
+     "applicability": "latent",
+     "attempt": "99d126970f9d41758a7b22bfdf60604a",
+     "final_margin": {
+      "gate": "covariance_error",
+      "op": "<=",
+      "relative_margin": 0.3008,
+      "threshold": 0.45,
+      "value": 0.31465914845466614
+     },
+     "graded_raw_hash": "8509a4cf4825c8c1c940b91049135454f47abcbc23ad936188594c1a43e87148",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "covariance_error": {
+        "margin_oracle_std": 10.083443524184835,
+        "oracle_mean": 0.04096917144488543,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.013422086534299807
+       },
+       "mean_error": {
+        "margin_oracle_std": 8.002942640356071,
+        "oracle_mean": 0.01952654923661612,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.009619358918517822
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 23.86193319972659,
+        "oracle_mean": 0.020739419625376277,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003982477402011114
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 35.8
+    },
+    "vector_spiral": {
+     "applicability": "latent",
+     "attempt": "0114e66e15cc4b6f9515a2c9f343a51e",
+     "final_margin": {
+      "gate": "mean_error",
+      "op": "<=",
+      "relative_margin": 0.6801,
+      "threshold": 0.15,
+      "value": 0.04798724129796028
+     },
+     "graded_raw_hash": "fd27566234382a0f522d0d817bddf1f9f21af06af3f0f7776d0f083ab3335f12",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "covariance_error": {
+        "margin_oracle_std": 27.41835381613941,
+        "oracle_mean": 0.03573521017096937,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.012484807230750313
+       },
+       "mean_error": {
+        "margin_oracle_std": 16.51349759199006,
+        "oracle_mean": 0.011289166446658783,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.006177537988773585
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 39.05923593690763,
+        "oracle_mean": 0.015902321359293217,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0034127151716156507
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 45.4
+    },
+    "vector_two_broad": {
+     "applicability": "latent",
+     "attempt": "5980ec5b403f488baf92e4f450fef522",
+     "final_margin": {
+      "gate": "hq",
+      "op": ">=",
+      "relative_margin": 0.1434,
+      "threshold": 0.85,
+      "value": 0.971923828125
+     },
+     "graded_raw_hash": "68df19ccfab66c2333893401a2b0954936cab62623147da43ab683ad622ee9c6",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": 46.06737782311113,
+        "oracle_mean": 0.03598899347707629,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.010955680212794226
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 15.582548795480076,
+        "oracle_mean": 0.9594167359173298,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.020879492747292328
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.017539114342071116,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.005790405117427799
+       },
+       "hq": {
+        "margin_oracle_std": 65.96416590455436,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 28.877652093060547,
+        "oracle_mean": 0.0069427490234375,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0051520565590147975
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.015605036038323306,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.011851703869615945
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 4.526668084385661,
+        "oracle_mean": 0.014666097292517466,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.006408292310966918
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 34.2
+    },
+    "vector_unequal_mass": {
+     "applicability": "latent",
+     "attempt": "16cde8e0ed62464487e91ededd4254c3",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -10.8907,
+      "threshold": 0.85,
+      "value": 10.107075214385986
+     },
+     "graded_raw_hash": "045eb87abb28f8507c18756d6a94de3b3e1b7ed1356f75bb3cd0b4217f5a0deb",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -463.1975445482573,
+        "oracle_mean": 0.08351954477257095,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.019985156059957387
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 12.971233422647304,
+        "oracle_mean": 0.807319663465023,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.10760319869044384
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.03590691240970045,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.011337437883263461
+       },
+       "hq": {
+        "margin_oracle_std": 22.24342318447529,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 17.536246079092702,
+        "oracle_mean": 0.008632200537249446,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003299528545351649
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.02094255347037688,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.00859417063572251
+       },
+       "min_mass_ratio": {
+        "margin_oracle_std": 5.088974475533725,
+        "oracle_mean": 0.9552471563220024,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.019145490925302433
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 8.471581960900192,
+        "oracle_mean": 0.016603394324950917,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.005587380740162688
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 35.3
+    },
+    "vector_unequal_width": {
+     "applicability": "latent",
+     "attempt": "13820ebefc25405b8f6fdb4afd9d84f4",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -5.4664,
+      "threshold": 0.85,
+      "value": 5.496446445584297
+     },
+     "graded_raw_hash": "412a0cca0e819db77f425be12da9ab41138be206f0a635db5c5f228acab1c28b",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -425.1102925015836,
+        "oracle_mean": 0.04858772183069959,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.010929978707977269
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 38.777504069254704,
+        "oracle_mean": 0.9306237623095512,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.02100851365907196
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.013382338627707213,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.006411725394390787
+       },
+       "hq": {
+        "margin_oracle_std": -4.966465034063352,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 34.6239146243969,
+        "oracle_mean": 0.01123046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0036200931707092688
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.03234279865864664,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.010599210776127075
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 15.596719433603111,
+        "oracle_mean": 0.022622820309285047,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.00679646301818878
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 35.9
+    },
+    "zero_tanh_rail_escape": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed",
+     "status": "BLOCKED"
+    },
+    "zero_tanh_smoke": {
+     "applicability": "latent",
+     "attempt": "b45a5cecb1244f0cabfb8a23008fc712",
+     "final_margin": null,
+     "graded_raw_hash": "03c58e03eb42ceeb1ddcdfd56b0d9d14d62221fadea6bfb4ea387ba8b103569f",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "unsupported evaluator zero_tanh_smoke"
+     ],
+     "status": "BLOCKED",
+     "wall_seconds": 25.0
+    }
+   },
+   "counts": {
+    "BLOCKED": 33,
+    "FAIL": 10,
+    "NOT_MEASURED": 1,
+    "PASS": 5
+   },
+   "label": "Fresh N(0, I) latent",
+   "request_ids": [
+    "cd10513c14e4dbc95042c478",
+    "10cd4b50acf264225df32bd0"
+   ],
+   "source_digest": "fdd92b5e64e2d097f007e708c84d1ae4fb7cb8d10bac68be1d8d3300946d6df4",
+   "studies": [
+    "prior-ablation-a3-fresh-gaussian",
+    "prior-ablation-a3-fresh-gaussian-r2"
+   ],
+   "wall_seconds": 1433.3
+  },
+  "A4": {
+   "candidate": "bispf-pure-global-v1",
+   "candidate_revision": "418fb58baf87609c9d8a8e95d60af662e1fe025f891dac4ccf81de16515f9b7b",
+   "cells": {
+    "ae_gan_hold": {
+     "applicability": "latent",
+     "attempt": "e1dec71ca80843cea68573d547c2c7a0",
+     "final_margin": {
+      "gate": "recon_mse",
+      "op": "<=",
+      "relative_margin": 0.8611,
+      "threshold": 0.05,
+      "value": 0.006946447771042585
+     },
+     "graded_raw_hash": "ee6097e8875cfe46941aebade429d1f209a58d8ef8187bc74d179b26f0c64746",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 11.9
+    },
+    "clockfree_audit": {
+     "applicability": "latent",
+     "attempt": "bf2825bba5754ac99bb157f261f5f7e2",
+     "final_margin": null,
+     "graded_raw_hash": "91f60e21db40de685646e718e301a4b40b3c9db950be95917019f7e50cf120d9",
+     "noise_floor": null,
+     "ordinary_view_role": "not in view",
+     "reasons": [
+      "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+     ],
+     "status": "PASS",
+     "wall_seconds": 7.4
+    },
+    "clockfree_audit_measurement_v1": {
+     "applicability": "latent",
+     "attempt": "4c7d857b3b9b495aa911501a69b0647f",
+     "final_margin": null,
+     "graded_raw_hash": "85af54052ff2e5c4003d04b60e80b7689c9714f3de7b6707b57067b5419e9f3d",
+     "noise_floor": null,
+     "ordinary_view_role": "diagnostic",
+     "reasons": [
+      "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+     ],
+     "status": "PASS",
+     "wall_seconds": 7.5
+    },
+    "cover_leftover": {
+     "applicability": "non_latent_table",
+     "attempt": "73c711a0bbce4302b9ce52180f847f14",
+     "final_margin": {
+      "gate": "content_kept",
+      "op": ">=",
+      "relative_margin": 0.1836,
+      "threshold": 0.75,
+      "value": 0.8877329231460668
+     },
+     "graded_raw_hash": "696f2a2963352cac6ede366186644bbe8fb63c83519644ea65afc05dd3e32686",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 28.5
+    },
+    "five_word_joint_hold": {
+     "applicability": "non_latent_table",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: five_word_joint_smoke (INCOMPLETE)",
+     "status": "NOT_MEASURED"
+    },
+    "five_word_joint_smoke": {
+     "applicability": "non_latent_table",
+     "attempt": "c969b3952ea34dccb1faa654f8ccbc7a",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "task wall-time budget exhausted"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 900.5
+    },
+    "gaussian1d_smoke": {
+     "applicability": "latent",
+     "attempt": "dbb3ad5c6334472c86036f5c0e3de4c4",
+     "final_margin": {
+      "gate": "cdf_ks",
+      "op": "<=",
+      "relative_margin": -0.6502,
+      "threshold": 0.05,
+      "value": 0.08251161749762725
+     },
+     "graded_raw_hash": "8219be50c874b5eea5e1573fe93422d163e8077b73683457b263a524f3951df9",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "any scheduled full pass with independent same-state confirmation"
+     ],
+     "status": "PASS",
+     "wall_seconds": 23.8
+    },
+    "gaussian1d_stability": {
+     "applicability": "latent",
+     "attempt": "a00e5dfa27184c0aa99963b1e6be77ec",
+     "final_margin": {
+      "gate": "cdf_ks",
+      "op": "<=",
+      "relative_margin": -0.9701,
+      "threshold": 0.05,
+      "value": 0.09850306301064327
+     },
+     "graded_raw_hash": "548244a71a2b7951ab885bdb0eee3100f8c8f60d7c6b568b0e8be436a0e04ee2",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "stationary hold, deadline reacquisition and shifted hold"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 89.7
+    },
+    "grid100": {
+     "applicability": "latent",
+     "attempt": "6420067c43b14537859a1cbb4ad6ee4c",
+     "final_margin": {
+      "gate": "mass_tv",
+      "op": "<=",
+      "relative_margin": -1.1323,
+      "threshold": 0.06,
+      "value": 0.12793999999999997
+     },
+     "graded_raw_hash": "51a7749d44e83e27a6d16f601f416686ee080a07ee018d342656d26f566ee51f",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 318.6
+    },
+    "grid100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "prerequisite not PASS: grid100 (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "grid100_mlp16": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
+     "status": "BLOCKED"
+    },
+    "grid100_res16_tanh": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "study admission refuses this native model variant: it has no explicit native profile ('native model variants require an explicit profile'); excluded from the run view for every arm",
+     "status": "BLOCKED"
+    },
+    "img_bars4": {
+     "applicability": "latent",
+     "attempt": "f293bc37a9744181ba2c0d6522ff1a55",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": -0.5,
+      "threshold": 4,
+      "value": 2
+     },
+     "graded_raw_hash": "f37b282a917a4b307c34adfb8478d3cae2580d4ad0714633be369a4cde0e2d51",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 32.7
+    },
+    "img_blobs4": {
+     "applicability": "latent",
+     "attempt": "7450af55c5f341898d5150d9b338bf98",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": -1.0,
+      "threshold": 4,
+      "value": 0
+     },
+     "graded_raw_hash": "f973cf41fc0a63981d2712174a6ac0b3168e107a612aa102d611d2ced1fd749c",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 33.7
+    },
+    "img_intensity2": {
+     "applicability": "latent",
+     "attempt": "b385a53475784df1ad3d36445e810666",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": -1.0,
+      "threshold": 2,
+      "value": 0
+     },
+     "graded_raw_hash": "48a080f89353f9d33d98281d1cfef6d45355f81f0c7445a6c3e666517aad9b0d",
+     "noise_floor": null,
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 31.8
+    },
+    "img_stripes2": {
+     "applicability": "latent",
+     "attempt": "262e0d4ce7884f11bb111fa8d24db7b7",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "14b66ebdcfc3c2e7cfeba2c1740e9fa485aee0e1bab589280cbd039b8dd7f6c0",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 31.6
+    },
+    "mid_scale_identity": {
+     "applicability": "non_latent_table",
+     "attempt": "8e242eab4e934ec28d631eb9f8400715",
+     "final_margin": {
+      "gate": "identity_at_mid",
+      "op": ">=",
+      "relative_margin": 0.1631,
+      "threshold": 0.85,
+      "value": 0.9886505174825434
+     },
+     "graded_raw_hash": "9bfb4afafec74ab3b5b769ff1713c677c8c7698b3f9f47fd92f74836c9e9d5b0",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 39.7
+    },
+    "misgan_block_neural_imputer": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "misgan_block_neural_imputer: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "misgan_block_recovery": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "misgan_block_recovery: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "mode_hold": {
+     "applicability": "latent",
+     "attempt": "4754649838da49f49ec380d2ae00db99",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": -0.125,
+      "threshold": 8,
+      "value": 7
+     },
+     "graded_raw_hash": "00d5e894f3173b56bb57afa7d602331da505693940ea23d7c8097187626d5b43",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 44.0
+    },
+    "model_ae_ddgan_bimodal_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: model_ae_ddgan_gaussian_chain (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "model_ae_ddgan_gaussian_chain": {
+     "applicability": "latent",
+     "attempt": "104c447903794b97b819d06102efa873",
+     "final_margin": {
+      "gate": "t1_q0_normalized_mean",
+      "op": "<=",
+      "relative_margin": -2.6332,
+      "threshold": 0.25,
+      "value": 0.9083088652902479
+     },
+     "graded_raw_hash": "4bedd1858a6299d30b68b19f2d267fe8f0f43ae7e3c376b6a0d81d2d10c41c82",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 74.5
+    },
+    "model_ae_gan_multimodal": {
+     "applicability": "latent",
+     "attempt": "fd2bd89a0f8c4ee1bd34756522da9774",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "runner exited 1; inspect run.log"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 3.2
+    },
+    "model_ae_reconstruction": {
+     "applicability": "latent",
+     "attempt": "505073cfbc12401a992f51de48de478d",
+     "final_margin": null,
+     "graded_raw_hash": null,
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "runner exited 1; inspect run.log"
+     ],
+     "status": "INCOMPLETE",
+     "wall_seconds": 3.2
+    },
+    "model_ddgan_bimodal_chain": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: model_ddgan_gaussian_chain (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "model_ddgan_gaussian_chain": {
+     "applicability": "latent",
+     "attempt": "44e1c54f801a40d08790f8173b9a2683",
+     "final_margin": {
+      "gate": "t1_q0_normalized_mean",
+      "op": "<=",
+      "relative_margin": -4.9014,
+      "threshold": 0.25,
+      "value": 1.4753618467794627
+     },
+     "graded_raw_hash": "5a48346de630a4f6cb18eb78ee2729862d97b475de6566f6a1f87af501ff10f9",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 57.6
+    },
+    "model_vae_categorical": {
+     "applicability": "latent",
+     "attempt": "7be89657e0354df9b62231ec72966b5d",
+     "final_margin": {
+      "gate": "decoder_mean_modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "3e5beacf5b8c5f4d7adef818453f1513e7a1613b6e7ad541fb0dd77805deb7cf",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 31.8
+    },
+    "model_vae_hard": {
+     "applicability": "latent",
+     "attempt": "fa57d18abc8241e1886d5487d8137e6d",
+     "final_margin": {
+      "gate": "decoder_mean_modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 2,
+      "value": 2
+     },
+     "graded_raw_hash": "9422785102330c9fba063a0e6137211d73fcd1820c540c61014f003cb906d522",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 30.9
+    },
+    "residual_student": {
+     "applicability": "non_latent_table",
+     "attempt": "9c3ffafe1fd44256b53d13dae31377e3",
+     "final_margin": {
+      "gate": "success_rate",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 1.0,
+      "value": 1.0
+     },
+     "graded_raw_hash": "5474d0be3a99fefcc0f54039e4fffc4e2fb40588d4d817df3e5342a5bba29dd2",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 16.4
+    },
+    "ring16_acquisition": {
+     "applicability": "latent",
+     "attempt": "4f0c4054daf244b9a4035052632611b0",
+     "final_margin": {
+      "gate": "modes",
+      "op": ">=",
+      "relative_margin": 0.0,
+      "threshold": 16,
+      "value": 16
+     },
+     "graded_raw_hash": "94d763faf49abd025393eb1937f7f81f2d8bb560a687f824890b0088c2809d90",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 40.5
+    },
+    "ring16_bigan_continuous": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "ring16_bigan_continuous: unsupported vector target declaration",
+     "status": "BLOCKED"
+    },
+    "ring_extension": {
+     "applicability": "latent",
+     "ordinary_view_role": "required",
+     "reason": "prerequisite not PASS: ring16_acquisition (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "rotated100": {
+     "applicability": "latent",
+     "attempt": "3616fea6060c449c838ee2c393e9afe8",
+     "final_margin": {
+      "gate": "mass_tv",
+      "op": "<=",
+      "relative_margin": -0.8745,
+      "threshold": 0.06,
+      "value": 0.11247
+     },
+     "graded_raw_hash": "e3888df0fede4a87a88531dbd58fae328dd5dfe458fe301e322aa2a5b57a685a",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 302.0
+    },
+    "rotated100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "prerequisite not PASS: rotated100 (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "staggered100": {
+     "applicability": "latent",
+     "attempt": "e924edff17804a78ba23cfcd57af6456",
+     "final_margin": {
+      "gate": "radial_ks",
+      "op": "<=",
+      "relative_margin": -8.3186,
+      "threshold": 0.04,
+      "value": 0.37274479660323306
+     },
+     "graded_raw_hash": "88f7a7e4624e124886f9a29832b87660e3d72648cd5b16cbb93c312e54396ff9",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "coverage, sustained live accuracy, or independent holdout failed"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 315.4
+    },
+    "staggered100_14k": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "prerequisite not PASS: staggered100 (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "target_shift_recovery": {
+     "applicability": "latent",
+     "ordinary_view_role": "not in view",
+     "reason": "prerequisite not PASS: mode_hold (FAIL)",
+     "status": "NOT_MEASURED"
+    },
+    "trajectory": {
+     "applicability": "non_latent_table",
+     "attempt": "3701a82e6a1c4006a2519f483f0dd315",
+     "final_margin": {
+      "gate": "identity_mse",
+      "op": "<=",
+      "relative_margin": 0.9916,
+      "threshold": 0.02,
+      "value": 0.00016894999134819955
+     },
+     "graded_raw_hash": "e678daac3b9647a05de2f5014c9d7d5f6cddda930b9f919ee76a32cff68babb7",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 15.5
+    },
+    "two_pole": {
+     "applicability": "non_latent_table",
+     "attempt": "afe2f63102be4d07b0cd035af95029a7",
+     "final_margin": {
+      "gate": "grad_med",
+      "op": "<=",
+      "relative_margin": 0.1227,
+      "threshold": 1.0,
+      "value": 0.8772904872894287
+     },
+     "graded_raw_hash": "66d8f9396f3a4df2230c4f701ab80c10af8c5b9e8c964948aab93bc4187f6926",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 7.5
+    },
+    "unipolar": {
+     "applicability": "non_latent_table",
+     "attempt": "5682f25877464c4d8cdec451729539e8",
+     "final_margin": {
+      "gate": "neu_hold",
+      "op": ">=",
+      "relative_margin": 0.1696,
+      "threshold": 0.85,
+      "value": 0.994141096714884
+     },
+     "graded_raw_hash": "c1a6a6a3749ee865de4ccb093c541e7c8035c1232f0ad076ec6c038bba5b164d",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 15.1
+    },
+    "unused_token_hold": {
+     "applicability": "non_latent_table",
+     "attempt": "c6c944ebb0904111a4fa8756065cde00",
+     "final_margin": {
+      "gate": "concept_move",
+      "op": ">=",
+      "relative_margin": 0.0744,
+      "threshold": 0.85,
+      "value": 0.9132169864873738
+     },
+     "graded_raw_hash": "b50d9dfccfef04f836a0ac191abac89eaabb875cf4b8e7db496569477c20e49d",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 9.3
+    },
+    "vector_anisotropic": {
+     "applicability": "latent",
+     "attempt": "ee723ee18e9045aea40feee086a46897",
+     "final_margin": {
+      "gate": "mass_tv",
+      "op": "<=",
+      "relative_margin": -1.187,
+      "threshold": 0.15,
+      "value": 0.3280436396598816
+     },
+     "graded_raw_hash": "955e3deee9f0042a79de741490810cff6f6d61f8bb097fa559b9179a68c8bef5",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": 1.9003140209636096,
+        "oracle_mean": 0.028122469773128007,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.009871549023519173
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 10.03050786792156,
+        "oracle_mean": 0.9415666162967682,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.02422056862498055
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.023881102039013058,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.00822102030604303
+       },
+       "hq": {
+        "margin_oracle_std": 76.66319962155256,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": -44.949892030342916,
+        "oracle_mean": 0.008885703980922699,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003960935869205097
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.029374248697422445,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.010151359007069491
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": -22.408188250180743,
+        "oracle_mean": 0.020757921550241414,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.00671507539073355
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 31.8
+    },
+    "vector_overlap": {
+     "applicability": "latent",
+     "attempt": "25dd3ceae9ab41e5a4dce26b1b04f7a0",
+     "final_margin": {
+      "gate": "mean_error",
+      "op": "<=",
+      "relative_margin": -1.0098,
+      "threshold": 0.15,
+      "value": 0.30146270990371704
+     },
+     "graded_raw_hash": "e7d4c5754e9d76f5ec39bcfee926420d3b445d20d6222ea40fc5388f57bef3df",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "covariance_error": {
+        "margin_oracle_std": -4.051401325942432,
+        "oracle_mean": 0.04096917144488543,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.013422086534299807
+       },
+       "mean_error": {
+        "margin_oracle_std": -15.745613734418681,
+        "oracle_mean": 0.01952654923661612,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.009619358918517822
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": -7.35131738057747,
+        "oracle_mean": 0.020739419625376277,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003982477402011114
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 32.7
+    },
+    "vector_spiral": {
+     "applicability": "latent",
+     "attempt": "1263357b52bc4cc09c267b7a4d7a8976",
+     "final_margin": {
+      "gate": "mean_error",
+      "op": "<=",
+      "relative_margin": 0.6559,
+      "threshold": 0.15,
+      "value": 0.051613207906484604
+     },
+     "graded_raw_hash": "b5cb0013e66dd0b9948cdb1bbc457aa8bad663f0ee473f976e3e5de9d972eb8b",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "covariance_error": {
+        "margin_oracle_std": 32.18752947194426,
+        "oracle_mean": 0.03573521017096937,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.012484807230750313
+       },
+       "mean_error": {
+        "margin_oracle_std": 15.926537768333164,
+        "oracle_mean": 0.011289166446658783,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.006177537988773585
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 41.382700752185556,
+        "oracle_mean": 0.015902321359293217,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0034127151716156507
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 40.5
+    },
+    "vector_two_broad": {
+     "applicability": "latent",
+     "attempt": "dfd071e84aef4c3c9638523ae9bb80c9",
+     "final_margin": {
+      "gate": "hq",
+      "op": ">=",
+      "relative_margin": 0.1765,
+      "threshold": 0.85,
+      "value": 1.0
+     },
+     "graded_raw_hash": "59257583a1ecdeb2a6e8ab100cbba3d3b6d7bfea9f6cce2111530d7ccf945479",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": 47.27335708977065,
+        "oracle_mean": 0.03598899347707629,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.010955680212794226
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 19.988236943589154,
+        "oracle_mean": 0.9594167359173298,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.020879492747292328
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.017539114342071116,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.005790405117427799
+       },
+       "hq": {
+        "margin_oracle_std": 81.15415204597157,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 15.419737432034628,
+        "oracle_mean": 0.0069427490234375,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0051520565590147975
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.015605036038323306,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.011851703869615945
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 13.467720148726656,
+        "oracle_mean": 0.014666097292517466,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.006408292310966918
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "required",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "PASS",
+     "wall_seconds": 30.7
+    },
+    "vector_unequal_mass": {
+     "applicability": "latent",
+     "attempt": "999bdbdbb75b4f4b93a0acc58bee761d",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -0.0903,
+      "threshold": 0.85,
+      "value": 0.926746279001236
+     },
+     "graded_raw_hash": "959abe1bc40aa30821e6478388388dcd94498260707f01e36a690c0f4c28645b",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -3.8401641083507068,
+        "oracle_mean": 0.08351954477257095,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.019985156059957387
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 0.6189927855818562,
+        "oracle_mean": 0.807319663465023,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.10760319869044384
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.03590691240970045,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.011337437883263461
+       },
+       "hq": {
+        "margin_oracle_std": 75.47441809744166,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": 14.694924740978163,
+        "oracle_mean": 0.008632200537249446,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.003299528545351649
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.02094255347037688,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.00859417063572251
+       },
+       "min_mass_ratio": {
+        "margin_oracle_std": 21.49963640817415,
+        "oracle_mean": 0.9552471563220024,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.019145490925302433
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": 0.31690976596038384,
+        "oracle_mean": 0.016603394324950917,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.005587380740162688
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 31.7
+    },
+    "vector_unequal_width": {
+     "applicability": "latent",
+     "attempt": "6927095c39164878a9656721f69b1763",
+     "final_margin": {
+      "gate": "component_covariance_error",
+      "op": "<=",
+      "relative_margin": -35.8846,
+      "threshold": 0.85,
+      "value": 31.351897723972797
+     },
+     "graded_raw_hash": "c24a6920c4029013c249d3cb16a8e8f9ad403adcf722cbe58efe33f48cc224e5",
+     "noise_floor": {
+      "draws": 16,
+      "eval_draw_contract": "fixed_v1",
+      "gates": {
+       "component_covariance_error": {
+        "margin_oracle_std": -2790.663965494363,
+        "oracle_mean": 0.04858772183069959,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.010929978707977269
+       },
+       "component_min_eigen_ratio": {
+        "margin_oracle_std": 3.330085094882625,
+        "oracle_mean": 0.9306237623095512,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.02100851365907196
+       },
+       "covariance_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.013382338627707213,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.006411725394390787
+       },
+       "hq": {
+        "margin_oracle_std": 72.17224719713357,
+        "oracle_mean": 0.988494873046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0018483342653254414
+       },
+       "mass_tv": {
+        "margin_oracle_std": -52.57655598204095,
+        "oracle_mean": 0.01123046875,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.0036200931707092688
+       },
+       "mean_error": {
+        "margin_oracle_std": null,
+        "oracle_mean": 0.03234279865864664,
+        "oracle_pass_fraction": null,
+        "oracle_std": 0.010599210776127075
+       },
+       "sw1_normalized": {
+        "margin_oracle_std": -27.420825323680436,
+        "oracle_mean": 0.022622820309285047,
+        "oracle_pass_fraction": 1.0,
+        "oracle_std": 0.00679646301818878
+       }
+      },
+      "version": "oracle-noise-floor-v1"
+     },
+     "ordinary_view_role": "held",
+     "reasons": [
+      "recomputed complete live curve and terminal suffix"
+     ],
+     "status": "FAIL",
+     "wall_seconds": 30.9
+    },
+    "zero_tanh_rail_escape": {
+     "applicability": "latent",
+     "ordinary_view_role": "held",
+     "reason": "zero_tanh_rail_escape: zero_tanh_rail_escape: unsupported tanh host zero_tanh_rail_escape; only zero_tanh_smoke is routed",
+     "status": "BLOCKED"
+    },
+    "zero_tanh_smoke": {
+     "applicability": "latent",
+     "attempt": "d6861127719441e4ac891170fb7aca54",
+     "final_margin": null,
+     "graded_raw_hash": "a52f4221662afbecce65136ddb8000d4cf7e8a2678ea0ee818dd4f91c8e0dc09",
+     "noise_floor": null,
+     "ordinary_view_role": "required",
+     "reasons": [
+      "unsupported evaluator zero_tanh_smoke"
+     ],
+     "status": "BLOCKED",
+     "wall_seconds": 21.6
+    }
+   },
+   "counts": {
+    "BLOCKED": 7,
+    "FAIL": 18,
+    "INCOMPLETE": 3,
+    "NOT_MEASURED": 8,
+    "PASS": 13
+   },
+   "label": "Shape/step gates off",
+   "request_ids": [
+    "766a699aa13fa2e3957b9579"
+   ],
+   "source_digest": "4621fa12e6fdf0a79507e3749426321277e65edd2d4f1f0ec054f21238d672b9",
+   "studies": [
+    "prior-ablation-a4-pure-global"
+   ],
+   "wall_seconds": 2744.2
+  }
+ },
+ "campaign": "prior-ablation-20261025",
+ "cifar": {
+  "arms": {
+   "C1": {
+    "config": "configs/prior_ablation_cifar/ddgan_learned.yaml",
+    "config_prior": {
+     "prior_code_law": "table",
+     "prior_update": "learned",
+     "seed": 0,
+     "steps": 10000
+    },
+    "feature_variance_ratio": 0.8132,
+    "fid50k": 79.701,
+    "fid50k_eval_floor": {
+     "draws": 3,
+     "mean": 79.698,
+     "std": 0.085,
+     "values": [
+      79.701,
+      79.782,
+      79.612
+     ]
+    },
+    "fid5k_curve": {
+     "10000": 84.115,
+     "2500": 82.342,
+     "5000": 81.386,
+     "7500": 86.644
+    },
+    "gpu": "NVIDIA RTX A6000",
+    "initialization_sha256": "d11a01f0388283a927ae6a67af59e7c462089b2ca35b9f6022517e407e0ad2f9",
+    "interrupted_attempts": {
+     "ddgan_learned.attempt1-oom-step6000": {
+      "abs_delta_vs_final_run": {
+       "2500": 1.537,
+       "5000": 6.122
+      },
+      "fid5k_curve": {
+       "2500": 83.879,
+       "5000": 87.508
+      }
+     }
+    },
+    "label": "Learned table (host default)",
+    "prior_rms_movement": 0.24182,
+    "rng_sha256": {
+     "corruption": "ec7f6965565c617d6e95567566393f5539e5029d30dfe474f5f2a68ca483d611",
+     "data": "1bcda887644a7e5cf1de1b1d9b3ea7f19b9497953dbb8e59b204780327302874",
+     "prior": "66a2e9ddc1515837800dba31ddaf4b17acb37908f2c8f77c69bf280f777c2447",
+     "reverse": "8a27d41c5cc7ba0eef55ef8d29d6c13eb69a4dc496f8d65835978e7c63fc5afc",
+     "time": "60caa3b121f3ec3141fe160d59d2c435766310f415c579866dd7e1e910a3b7bc"
+    },
+    "run": "ddgan_learned",
+    "sources_sha256": "11d6a8a688adeb879f8abf563354d16b8fc84e93887c375de792f8b6d509761a",
+    "status": "COMPLETE",
+    "steps": 10000,
+    "total_seconds": 926.2,
+    "train_seconds": 661.5
+   },
+   "C2": {
+    "config": "configs/prior_ablation_cifar/ddgan_frozen.yaml",
+    "config_prior": {
+     "prior_code_law": "table",
+     "prior_update": "frozen",
+     "seed": 0,
+     "steps": 10000
+    },
+    "feature_variance_ratio": 0.771,
+    "fid50k": 108.497,
+    "fid50k_eval_floor": {
+     "draws": 3,
+     "mean": 108.252,
+     "std": 0.212,
+     "values": [
+      108.497,
+      108.12,
+      108.14
+     ]
+    },
+    "fid5k_curve": {
+     "10000": 112.682,
+     "2500": 71.933,
+     "5000": 98.138,
+     "7500": 80.763
+    },
+    "gpu": "NVIDIA RTX A6000",
+    "initialization_sha256": "408ea90d95f06095d489a8b0ff613c09ea0ca704a9ab2325f8495b2c01d34d22",
+    "interrupted_attempts": {
+     "ddgan_frozen.attempt1-oom-step6000": {
+      "abs_delta_vs_final_run": {
+       "2500": 9.402,
+       "5000": 8.735
+      },
+      "fid5k_curve": {
+       "2500": 81.335,
+       "5000": 106.873
+      }
+     }
+    },
+    "label": "Frozen table",
+    "prior_rms_movement": 0.0,
+    "rng_sha256": {
+     "corruption": "ec7f6965565c617d6e95567566393f5539e5029d30dfe474f5f2a68ca483d611",
+     "data": "1bcda887644a7e5cf1de1b1d9b3ea7f19b9497953dbb8e59b204780327302874",
+     "prior": "66a2e9ddc1515837800dba31ddaf4b17acb37908f2c8f77c69bf280f777c2447",
+     "reverse": "8a27d41c5cc7ba0eef55ef8d29d6c13eb69a4dc496f8d65835978e7c63fc5afc",
+     "time": "60caa3b121f3ec3141fe160d59d2c435766310f415c579866dd7e1e910a3b7bc"
+    },
+    "run": "ddgan_frozen",
+    "sources_sha256": "11d6a8a688adeb879f8abf563354d16b8fc84e93887c375de792f8b6d509761a",
+    "status": "COMPLETE",
+    "steps": 10000,
+    "total_seconds": 923.9,
+    "train_seconds": 654.4
+   },
+   "C3": {
+    "config": "configs/prior_ablation_cifar/ddgan_fresh_gaussian.yaml",
+    "config_prior": {
+     "prior_code_law": "fresh_gaussian",
+     "prior_update": "frozen",
+     "seed": 0,
+     "steps": 10000
+    },
+    "feature_variance_ratio": 0.8839,
+    "fid50k": 82.704,
+    "fid50k_eval_floor": {
+     "draws": 3,
+     "mean": 82.702,
+     "std": 0.092,
+     "values": [
+      82.704,
+      82.793,
+      82.61
+     ]
+    },
+    "fid5k_curve": {
+     "10000": 86.501,
+     "2500": 115.844,
+     "5000": 79.889,
+     "7500": 85.547
+    },
+    "gpu": "NVIDIA RTX A6000",
+    "initialization_sha256": "408ea90d95f06095d489a8b0ff613c09ea0ca704a9ab2325f8495b2c01d34d22",
+    "label": "Fresh N(0, I) latent",
+    "prior_rms_movement": 0.0,
+    "rng_sha256": {
+     "corruption": "ec7f6965565c617d6e95567566393f5539e5029d30dfe474f5f2a68ca483d611",
+     "data": "1bcda887644a7e5cf1de1b1d9b3ea7f19b9497953dbb8e59b204780327302874",
+     "prior": "66a2e9ddc1515837800dba31ddaf4b17acb37908f2c8f77c69bf280f777c2447",
+     "reverse": "8a27d41c5cc7ba0eef55ef8d29d6c13eb69a4dc496f8d65835978e7c63fc5afc",
+     "time": "60caa3b121f3ec3141fe160d59d2c435766310f415c579866dd7e1e910a3b7bc"
+    },
+    "run": "ddgan_fresh_gaussian",
+    "sources_sha256": "11d6a8a688adeb879f8abf563354d16b8fc84e93887c375de792f8b6d509761a",
+    "status": "COMPLETE",
+    "steps": 10000,
+    "total_seconds": 784.8,
+    "train_seconds": 667.3
+   }
+  },
+  "protocol": "lib.cifar_metrics.PROTOCOL (torch-fidelity Inception-v3 2048, CIFAR-10 train 50k real)"
+ },
+ "fixed_list": "configs/forge/leaderboards/technique-inventory-full-suite-2026-10-25.json",
+ "fixed_list_sha256": "14155fb6273af76ef248db2da6335c22ddeab2a1deb82b3eb3f0f6cd08b19c34",
+ "ordinary_view": {
+  "id": "discriminator_stability",
+  "revision": 14
+ },
+ "schema": "prior_ablation_receipts_v1"
+}
