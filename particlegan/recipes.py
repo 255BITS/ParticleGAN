@@ -433,6 +433,8 @@ class Recipe:
             # Keep resolved recipe/Forge provenance truthful about the optimizer
             # family selected by an explicit legacy arm.
             object.__setattr__(self, "critic_formulation", "k3p")
+        # Mirrors drift_variants.DRIFT_VARIANTS: recipes.py must also load as a
+        # standalone, torch-free file, so it cannot import package modules here.
         if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
             raise ValueError("unknown continuous_policy")
         if (self.total_steps is None) != (self.continuous_policy is not None):
@@ -1534,7 +1536,8 @@ def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *,
     from .recipe_schedules import apply_training_schedules
     apply_training_schedules(step, recipe, optimizers)
     prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
-    if recipe.continuous_policy in ("dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+    from .drift_variants import drift_features
+    if drift_features(recipe.continuous_policy).critic_balance:
         from torch import Tensor, nn
         if critic is None:
             raise ValueError("asymmetric continuous rates require critic=module or optimized critic parameters")

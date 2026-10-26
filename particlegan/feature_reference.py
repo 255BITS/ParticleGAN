@@ -30,6 +30,7 @@ import torch
 
 # The kNN/Beta numerical helpers are shared verbatim with the current law.
 from .birth_death import _knn, _levina_bickel, _normal_score
+from .drift_variants import drift_features
 
 
 class FrozenFeatureReferenceBirthDeath:
@@ -137,11 +138,12 @@ class FrozenFeatureReferenceBirthDeath:
     @torch.no_grad()
     def _jitter(self, trainer, latent, prior, noise):
         c = trainer.controller
-        if c is None or c.variant not in ("dv10", "dv11", "dv12"):
+        features = None if c is None else drift_features(c.variant)
+        if features is None or not features.latent_bandwidth:
             return torch.zeros_like(latent)
-        trust = c.support_trust if c.variant == "dv11" else 1.
+        trust = c.support_trust if features.support_trust else 1.
         displacement = c.latent_bandwidth * trust * noise
-        if c.variant == "dv12":
+        if features.local_support:
             radius = self._nearest_other(latent, prior.z.detach())
             norm = displacement.norm(dim=1)
             displacement = displacement * (radius / norm.clamp_min(1e-20)).clamp_max(1.).unsqueeze(1)

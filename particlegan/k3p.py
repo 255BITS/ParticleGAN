@@ -20,6 +20,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.optim import Adam
 
+from ._stats import adam_moment_states, adam_surprise_ratio
 from .grad_regularizers import CriticStepRecord, GradientPenalty
 
 __all__ = ["CriticAnchor", "RobustCriticAnchor", "CriticSpikeGuard", "LatentRowDamping",
@@ -109,15 +110,11 @@ class CriticSpikeGuard:
         flags = []
         for group in optimizer.param_groups:
             beta2 = group["betas"][1]
-            for p in group["params"]:
-                st = optimizer.state.get(p)
-                if p.grad is None or not st or "exp_avg_sq" not in st:
-                    continue
+            for p, st in adam_moment_states(optimizer, group):
                 t = st["step"]
                 second = (st["max_exp_avg_sq"] if group.get("amsgrad", False) and "max_exp_avg_sq" in st
                           else st["exp_avg_sq"])
-                vhat = second.mean() / (1.0 - beta2 ** t)
-                ratio = p.grad.square().mean().sqrt() / vhat.clamp_min(1e-30).sqrt()
+                ratio = adam_surprise_ratio(p.grad, second, beta2, t)
                 clip = (t >= self.min_steps) & (ratio > self.ratio)
                 p.grad.mul_(torch.where(clip, self.ratio / ratio, torch.ones_like(ratio)))
                 flags.append(clip)

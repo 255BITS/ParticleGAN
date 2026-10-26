@@ -33,6 +33,8 @@ import warnings
 
 import torch
 
+from ._stats import bh_rejections
+
 
 STATISTICS = ("sphericity", "hotelling")
 _WARNED = set()
@@ -189,11 +191,10 @@ class RowEvidence:
         p = torch.where(ok, p, torch.ones_like(p))
         self.p_values = p
         ps, order = p.sort()
-        ranks = torch.arange(1, self.n + 1, device=p.device, dtype=p.dtype)
-        passed = (ps <= ranks * self.Q / self.n).nonzero()
+        rejected = bh_rejections(ps, self.Q)
         flag = torch.zeros(self.n, device=p.device, dtype=torch.bool)
-        if len(passed):
-            flag[order[:int(passed[-1]) + 1]] = True
+        if rejected:
+            flag[order[:rejected]] = True
         self.flag = flag
         self.fraction = float(flag.double().mean())
         self.valid = True
