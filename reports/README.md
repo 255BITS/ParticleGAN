@@ -38,3 +38,19 @@ To recover a log locally, use `git show ARCHIVE_COMMIT:PATH > /tmp/run.log`,
 with the commit and path from the index. The archived runs retain their original
 source and qualification identities. This storage cleanup changes no training
 code, recipe, evaluator, or acceptance result.
+
+The 2026-10-25 hygiene entry (its `reason` field explains it) adds 45 paths.
+These are twelve ignored `metrics.json` streams that were tracked despite
+`.gitignore`, the unreferenced repo-root `100gaussians_no_particles.gif` and
+`five_modes.gif`, the superseded 1k scout trajectory HTML galleries, and the
+toy100 GPU-leaderboard tensor checkpoints. Files that code, tests, retention
+manifests, Forge compilation inputs or report links read from the checkout stay
+tracked. Examples include `reports/forge/technique-evidence/`,
+`technique-inventory.json`, package source snapshots and retained-evidence NPZ.
+Forge's 45 historical attempt envelopes are re-included explicitly in
+`.gitignore`, so no tracked file matches an ignore rule.
+`tests/e2e/test_repository_hygiene.py` checks both rules and every archive
+entry's blob identity. This cleanup removes no leaderboard page. Per-study and
+per-run leaderboards are evidence that tests, records and report links cite.
+Superseded pages are marked with the generated banner, which points to the
+single current [technique inventory](forge/technique-inventory.md).
