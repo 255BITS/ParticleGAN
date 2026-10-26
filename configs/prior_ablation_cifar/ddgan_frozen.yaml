@@ -7,5 +7,5 @@ seed: 0
 prior_update: frozen
 prior_code_law: table
 data_dir: /nvme/dev/particlegan/ParticleGAN/data
-fid_cache: /tmp/claude-1000/prior-ablation/fid_cache
-out_dir: /tmp/claude-1000/prior-ablation/cifar/ddgan_frozen
+fid_cache: /nvme/dev/particlegan/prior-ablation-runs/fid_cache
+out_dir: /nvme/dev/particlegan/prior-ablation-runs/cifar/ddgan_frozen
