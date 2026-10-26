@@ -365,10 +365,10 @@ def _historical_row(record: dict) -> dict:
 
 
 def _current_request(root: Path, idea_id: str, view_id: str, execution_backend="cuda", cuda_model=None) -> dict:
-    from .planning import _ACTIVE_CACHE, load_idea, resolve_idea
-    idea = (_ACTIVE_CACHE.get_idea_ref(idea_id)
-            if _ACTIVE_CACHE is not None and Path(root).resolve() == _ACTIVE_CACHE.root
-            else load_idea(root, idea_id))
+    from .planning import load_idea, resolve_idea
+    from .resolution_scope import active
+    cache = active(root)
+    idea = cache.get_idea_ref(idea_id) if cache is not None else load_idea(root, idea_id)
     # Reconstruct the declared question. The resolver retains the full view's
     # tasks regardless of this authorization cap, so qualification is unchanged.
     through_tier = idea.get("decision_contract", {}).get("scope", {}).get("through_tier", 3)
@@ -795,14 +795,12 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         previous = read_json(output / "compilation.json") if (output / "compilation.json").is_file() else {}
         records, conflicts = _memory_records(root)
         boards = []
-        from . import planning, sources, views
+        from . import planning, sources
         orig_inspect = sources.inspect_source
         orig_planning_inspect = planning.inspect_source
-        orig_load_tasks = views.load_tasks
         orig_attempts = _attempts
         orig_records = _records
         source_cache: dict = {}
-        tasks_cache: dict = {}
         attempts_cache: dict = {}
         records_cache: dict = {}
 
@@ -811,12 +809,6 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
             if key not in source_cache:
                 source_cache[key] = orig_inspect(r, extra_paths)
             return dict(source_cache[key])
-
-        def cached_load_tasks(r: Path | str):
-            key = str(Path(r).resolve())
-            if key not in tasks_cache:
-                tasks_cache[key] = orig_load_tasks(r)
-            return tasks_cache[key]
 
         def cached_attempts(r: Path):
             key = str(Path(r).resolve())
@@ -835,7 +827,6 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         if not summaries_only:
             sources.inspect_source = cached_inspect
             planning.inspect_source = cached_inspect
-            views.load_tasks = cached_load_tasks
             globals()["_attempts"] = cached_attempts
             globals()["_records"] = cached_records
         try:
@@ -871,7 +862,6 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
             if not summaries_only:
                 sources.inspect_source = orig_inspect
                 planning.inspect_source = orig_planning_inspect
-                views.load_tasks = orig_load_tasks
                 globals()["_attempts"] = orig_attempts
                 globals()["_records"] = orig_records
         gaps = _gaps(root)
@@ -990,6 +980,29 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                 "memory": "reports/forge/EXPERIMENT_MEMORY.md", "conflicts": manifest["conflicts"]}
 
 
+def readout_selection_claim(root: Path, candidate: dict, view: dict, task_results: list) -> dict | None:
+    """Selection-versus-holdout claim for a candidate descending from a registered search.
+
+    Returns None when no ancestor came from a configuration search. Otherwise
+    the claim states whether the required tasks above the search's tuning tier
+    (the untuned holdout) passed; tuning-tier passes are never independent
+    confirmation. Missing results count as not measured.
+    """
+    from .leaderboard_contract import holdout_claim, selection_lineage
+    lineage = selection_lineage(root, candidate)
+    if not lineage.get("search_id"):
+        return None
+    statuses = {}
+    for row in task_results:
+        statuses[row.get("task_id")] = row.get("gate_status", "UNKNOWN")
+    by_tier = {}
+    for assignment in view.get("assignments", []):
+        if assignment.get("importance") == "required":
+            by_tier.setdefault(assignment["qualification_tier"], []).append(
+                statuses.get(assignment["task"], "UNKNOWN"))
+    return {**lineage, **holdout_claim(by_tier, lineage.get("tuning_through_tier"))}
+
+
 def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, next_action: str, *, study_id=None) -> dict:
     """Publish a readout for one exact attempted revision, then update memory."""
     root = Path(root)
@@ -1058,6 +1071,10 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
     elif candidate.get("decision_contract") is not None:
         from .decision_contracts import concluded_outcomes
         record["decision_outcomes"] = concluded_outcomes(selected)
+    claim = readout_selection_claim(root, candidate, (study_request or selected[0]["request"]).get("view", {}),
+                                    record["task_results"])
+    if claim is not None:
+        record["selection_claim"] = claim
     with file_lock(root / "runs/forge/readout.lock"), ExitStack() as locks:
         for location in sorted(states):
             locks.enter_context(file_lock(Path(location) / "queue.lock"))

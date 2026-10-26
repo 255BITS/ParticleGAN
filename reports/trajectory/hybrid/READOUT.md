@@ -88,7 +88,11 @@ real-motion dataset has been chosen or downloaded; no motion job is queued.
 - Both endpoint route plots visually inspected. Report gallery references
   checked; exported GIFs decode all64 frames. Viewer code unchanged; no new
   browser rendering test performed. Raw samples and EMA inference checkpoints
-  are under ignored results/trajectory/hybrid/.
+  are under ignored results/trajectory/hybrid/. The superseded 1k scout gallery
+  (`scout_1k/index.html` and its `viewer.html` files) is archived out of the
+  tree; [the archive index](../../log-archive.json) records each path's Git blob
+  at [commit `82f38664e`](https://github.com/255BITS/ParticleGAN/tree/82f38664e4d6fb4aac67ed99d87887d6e6e4b357/reports/trajectory/hybrid/scout_1k).
+  The scout tables, plots, GIFs and summaries stay tracked.
 - 1k SW1 favored MLP (.0486 vs .0547); neither arm was dropped based on scout
   rank. Both reached the same prescribed10k budget with no checkpoint selection.
 - Single-run configuration comparison, no seed sweeps or significance claim.

@@ -1,6 +1,6 @@
 {
   "counts": {
-    "files": 11783,
+    "files": 11741,
     "by_family": {
       "benchmark/init_research": 10,
       "benchmark/learned_lr": 10,
@@ -44,7 +44,7 @@
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
-      "report/cifar-ddgan": 563,
+      "report/cifar-ddgan": 555,
       "report/cifar-particle-ae": 33,
       "report/cifar-particle-ddgan": 44,
       "report/denoising-toy": 92,
@@ -59,7 +59,7 @@
       "report/paired-residual-toy": 5,
       "report/paired_error_2d": 1,
       "report/prior-comparison": 4,
-      "report/project": 8,
+      "report/project": 9,
       "report/r1-integrations": 2,
       "report/readme-100gaussians": 5,
       "report/releases": 1,
@@ -78,9 +78,9 @@
       "report/toy100/formulation-round-20260924": 247,
       "report/toy100/gap-fill-20260925": 124,
       "report/toy100/gpu-known-winner-control": 278,
-      "report/toy100/gpu-leaderboard": 1247,
+      "report/toy100/gpu-leaderboard": 1224,
       "report/toy100/gpu-leaderboard-data": 4,
-      "report/toy100/h_stability": 558,
+      "report/toy100/h_stability": 554,
       "report/toy100/k3p-base": 3,
       "report/toy100/overnight-20260925": 90,
       "report/toy100/pr140-independent-review": 13,
@@ -91,7 +91,7 @@
       "report/toy100/simpler22": 180,
       "report/toy100/torch214-gpu-check": 10,
       "report/toy_audit": 532,
-      "report/trajectory": 175,
+      "report/trajectory": 167,
       "report/transfer_suite": 341,
       "report/transfer_suite/anisotropic_core_metric": 2,
       "report/transfer_suite/silu_rare_collapse": 4,
@@ -105,15 +105,15 @@
       "driver": 404,
       "engine_support": 85,
       "evaluator_or_audit": 324,
-      "evidence_artifact": 1574,
+      "evidence_artifact": 1551,
       "frozen_candidate_implementation": 15,
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
       "narrative": 996,
-      "structured_evidence": 5053,
+      "structured_evidence": 5042,
       "support": 1542,
-      "support_artifact": 60,
+      "support_artifact": 52,
       "visualization": 22,
       "visualization_artifact": 725
     }
@@ -123,8 +123,8 @@
     "missing": [],
     "stale": [],
     "unclassified": [],
-    "tracked_count": 11782,
-    "declared_count": 11782
+    "tracked_count": 11740,
+    "declared_count": 11740
   },
   "excluded_prefixes": [
     "configs/forge/",
@@ -8570,6 +8570,13 @@
       "suggested_tiers": []
     },
     {
+      "path": "reports/branch-prune-2026-10-25.json",
+      "git_blob": "e95f63c0ce125cb47d1a82fbd9f6447a18e29960",
+      "family": "report/project",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
       "path": "reports/ci_status.md",
       "git_blob": "39bd67b621ff39b13577cd582610ea97aff47e45",
       "family": "report/project",
@@ -10488,13 +10495,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_10k/exact/metrics.json",
-      "git_blob": "723e5143280862653a4ad3ea8b63f53e5da6ba00",
-      "family": "report/cifar-ddgan",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_10k/exact/provenance.json",
       "git_blob": "8757f9d4a0c297821c99c40d442a146405edbdb5",
       "family": "report/cifar-ddgan",
@@ -10532,13 +10532,6 @@
     {
       "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_10k/fd_lazy4/environment.json",
       "git_blob": "c499b2415efe9ff636bd77698379ad1d507bd57c",
-      "family": "report/cifar-ddgan",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_10k/fd_lazy4/metrics.json",
-      "git_blob": "4b62748815c30c4c4683070492b9f899058c3c22",
       "family": "report/cifar-ddgan",
       "role": "structured_evidence",
       "suggested_tiers": []
@@ -10586,13 +10579,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_10k/fused/metrics.json",
-      "git_blob": "5dad153967021a0d4aad6c833833b4d1e48cc4e9",
-      "family": "report/cifar-ddgan",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_10k/fused/provenance.json",
       "git_blob": "8757f9d4a0c297821c99c40d442a146405edbdb5",
       "family": "report/cifar-ddgan",
@@ -10630,13 +10616,6 @@
     {
       "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_10k/lazy4/environment.json",
       "git_blob": "c499b2415efe9ff636bd77698379ad1d507bd57c",
-      "family": "report/cifar-ddgan",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_10k/lazy4/metrics.json",
-      "git_blob": "3db6b0bd71ce4fb83e527727cbbe8d259b5c339a",
       "family": "report/cifar-ddgan",
       "role": "structured_evidence",
       "suggested_tiers": []
@@ -10684,13 +10663,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_1k/exact/metrics.json",
-      "git_blob": "0ddd925a1ce47a11dcfa844e51a3e527fac5b6ad",
-      "family": "report/cifar-ddgan",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_1k/exact/provenance.json",
       "git_blob": "8757f9d4a0c297821c99c40d442a146405edbdb5",
       "family": "report/cifar-ddgan",
@@ -10728,13 +10700,6 @@
     {
       "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_1k/fd_lazy4/environment.json",
       "git_blob": "0909b2b0f971604c94afeac3b032a2bcbf1884a1",
-      "family": "report/cifar-ddgan",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_1k/fd_lazy4/metrics.json",
-      "git_blob": "f95621e5d43be230288663d18fd389f5deaf8f3c",
       "family": "report/cifar-ddgan",
       "role": "structured_evidence",
       "suggested_tiers": []
@@ -10782,13 +10747,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_1k/fused/metrics.json",
-      "git_blob": "07e7760f90ed9279bf521cb5f3b1cfc812f7cea1",
-      "family": "report/cifar-ddgan",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_1k/fused/provenance.json",
       "git_blob": "8757f9d4a0c297821c99c40d442a146405edbdb5",
       "family": "report/cifar-ddgan",
@@ -10826,13 +10784,6 @@
     {
       "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_1k/lazy4/environment.json",
       "git_blob": "0909b2b0f971604c94afeac3b032a2bcbf1884a1",
-      "family": "report/cifar-ddgan",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/cifar-ddgan/speed/runs/speed_100gaussians_1k/lazy4/metrics.json",
-      "git_blob": "89dbb5b875c3b37a0387b755b679a96594a81be3",
       "family": "report/cifar-ddgan",
       "role": "structured_evidence",
       "suggested_tiers": []
@@ -29130,13 +29081,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/preflight/average-prefix/final-state.pt",
-      "git_blob": "9469ddbfbcdb4752de59ffea5294a0de60b5817e",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/preflight/average-prefix/result.json",
       "git_blob": "3c2b687875c6790dc3bb02df07a61f92f43f27d7",
       "family": "report/toy100/gpu-leaderboard",
@@ -29169,13 +29113,6 @@
       "git_blob": "ba723359230f1d95c12bd3bd6d572afcef76e739",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/preflight/column-prefix/final-state.pt",
-      "git_blob": "e22acd7aa53313f8267c7aa24fbeb7fd3b6e089d",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -29566,13 +29503,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/runs/H/convergence/cold-state.pt",
-      "git_blob": "02bedc32720a281cbc493d3971cde237a01d65ce",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/runs/H/convergence/declaration.json",
       "git_blob": "cbc4ab95f1c6f9d32f4bfb5affaaada06529da97",
       "family": "report/toy100/gpu-leaderboard",
@@ -29591,13 +29521,6 @@
       "git_blob": "b655295fb29c8797676bbd2c8f20ae6f25eaea4c",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/H/convergence/final-state.pt",
-      "git_blob": "78cff41d488ad335b45d1eec8a20246f694db79d",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -31379,13 +31302,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/runs/PR107/convergence/cold-state.pt",
-      "git_blob": "5e7ffc0cf7a0da35e19d2631ec4410333e69108a",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/runs/PR107/convergence/declaration.json",
       "git_blob": "8dba7a2bbcc1b3cda6451d18c4a5c3573ad0ed2d",
       "family": "report/toy100/gpu-leaderboard",
@@ -31404,13 +31320,6 @@
       "git_blob": "63730da9643bbd3e6819d7cb2060c088c1a6eb52",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/PR107/convergence/final-state.pt",
-      "git_blob": "c1449148751bb18543e334eeb5309aa34b93bf79",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -31519,13 +31428,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/runs/PR140/convergence/cold-state.pt",
-      "git_blob": "5e7ffc0cf7a0da35e19d2631ec4410333e69108a",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/runs/PR140/convergence/declaration.json",
       "git_blob": "8b1e90a074e0de7e7b1d38edc217276a03acca93",
       "family": "report/toy100/gpu-leaderboard",
@@ -31544,13 +31446,6 @@
       "git_blob": "151d888c845a3a81009ffa191c83eb6c8c18e323",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/PR140/convergence/final-state.pt",
-      "git_blob": "c7948370f43731361b417f89bcc5b5250bdc32c0",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -31659,20 +31554,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/runs/PR143/convergence/cold-state.pt",
-      "git_blob": "5e7ffc0cf7a0da35e19d2631ec4410333e69108a",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/PR143/convergence/converged-state.pt",
-      "git_blob": "5c13edfe0241853eca34cb32ed4b33a27d6be99b",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/runs/PR143/convergence/declaration.json",
       "git_blob": "76a1b4aa0a19d6677e6c2415a3c24cd4aec9b2b1",
       "family": "report/toy100/gpu-leaderboard",
@@ -31691,13 +31572,6 @@
       "git_blob": "0f19aca8723bf3d5948e67fac0c4ae579bd713e3",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/PR143/convergence/final-state.pt",
-      "git_blob": "d37d30ab999890744a62bfbb195ccc59b0df0580",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -31876,20 +31750,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/convergence/cold-state.pt",
-      "git_blob": "ce6b82123309747b0d8a39d0e8502dbe703dd920",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/convergence/converged-state.pt",
-      "git_blob": "f8ff80ad2692856f09214cb8778a29ab28ce0c80",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/convergence/declaration.json",
       "git_blob": "c630dfa3acd16cbfc17e9503ea905c988d825409",
       "family": "report/toy100/gpu-leaderboard",
@@ -31908,13 +31768,6 @@
       "git_blob": "fe034d2ed3fdd8b111a401a48465196d8d9ac94e",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/eps_net_1m/convergence/final-state.pt",
-      "git_blob": "fbf465aa21a42259c9d104f70dbdf27f276345c0",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -33766,20 +33619,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/convergence/cold-state.pt",
-      "git_blob": "535353df2400bdb6635b3ac08844124baf94f07b",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/convergence/converged-state.pt",
-      "git_blob": "55444a58afcb28aacf5f2d0d25c43687bb050072",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/convergence/declaration.json",
       "git_blob": "413ade76a51a667babd5016fdf404edcde861f03",
       "family": "report/toy100/gpu-leaderboard",
@@ -33798,13 +33637,6 @@
       "git_blob": "3b081c2a4c8b4ca49382712a0fd3f94e8aeb98c9",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_column_rms/convergence/final-state.pt",
-      "git_blob": "4eeb7473cf67bc64ba291d2d508384823c7ddaae",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -35621,20 +35453,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/convergence/cold-state.pt",
-      "git_blob": "2c49951781e6aeaf5a08051da39153ce4591f15e",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/convergence/converged-state.pt",
-      "git_blob": "c92e5515400eabc2023881bf163b51610b04db8c",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/convergence/declaration.json",
       "git_blob": "b0db2ecf22ed7b0c36c4cf193206f68c22a7af46",
       "family": "report/toy100/gpu-leaderboard",
@@ -35653,13 +35471,6 @@
       "git_blob": "eb53468b1bfe9aca9315819684f00e7975ccba85",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_rms/convergence/final-state.pt",
-      "git_blob": "9811d76f5da3e2137b923bc6fc84bf56bb1cd578",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -37441,20 +37252,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_rms_average2/convergence/cold-state.pt",
-      "git_blob": "3bba3c5fad5657e8790a050829479b601bfad820",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_rms_average2/convergence/converged-state.pt",
-      "git_blob": "1e4ff561a6418ae57cdec5b8334c36e05f8ca8d1",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/gpu-leaderboard/runs/shared_rms_average2/convergence/declaration.json",
       "git_blob": "0c9bbb56a2b8a90bc96d3b4c994b7710f913de05",
       "family": "report/toy100/gpu-leaderboard",
@@ -37473,13 +37270,6 @@
       "git_blob": "6fd31b508d7a1b643cbbed8b16d2a5782d83615d",
       "family": "report/toy100/gpu-leaderboard",
       "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/gpu-leaderboard/runs/shared_rms_average2/convergence/final-state.pt",
-      "git_blob": "acf93f1dd149b8a6f9830bfb0902cf077cadbad6",
-      "family": "report/toy100/gpu-leaderboard",
-      "role": "evidence_artifact",
       "suggested_tiers": []
     },
     {
@@ -40831,13 +40621,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/h_stability/initial-probes/average2/metrics.json",
-      "git_blob": "8a70257987e282ae8bca81160c6fb7f7038536d6",
-      "family": "report/toy100/h_stability",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/h_stability/initial-probes/average2/optimizer-receipt.json.gz",
       "git_blob": "09c98651677bdb4c259f42aca53bf49a423c5a00",
       "family": "report/toy100/h_stability",
@@ -40882,13 +40665,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/toy100/h_stability/initial-probes/critic_refresh2/metrics.json",
-      "git_blob": "9475a66ace3ad866ace83210f3e9abbdc200e20c",
-      "family": "report/toy100/h_stability",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/toy100/h_stability/initial-probes/critic_refresh2/optimizer-receipt.json.gz",
       "git_blob": "59c96a78afba28a4bc43dc651b66f5cab3e3412f",
       "family": "report/toy100/h_stability",
@@ -40928,13 +40704,6 @@
     {
       "path": "reports/toy100/h_stability/initial-probes/extra_adam/losses.json",
       "git_blob": "9b2d6cf49fcecae7a89fa04a3e0bdbd08294d298",
-      "family": "report/toy100/h_stability",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/h_stability/initial-probes/extra_adam/metrics.json",
-      "git_blob": "631e1802966ffbff1bb7c050cfb68de39ecbf18a",
       "family": "report/toy100/h_stability",
       "role": "structured_evidence",
       "suggested_tiers": []
@@ -41595,13 +41364,6 @@
     {
       "path": "reports/toy100/h_stability/selected-base/own-state-short/losses.json",
       "git_blob": "cdda566ac6da92c702791a3ceb8ac30efc35c0ee",
-      "family": "report/toy100/h_stability",
-      "role": "structured_evidence",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/toy100/h_stability/selected-base/own-state-short/metrics.json",
-      "git_blob": "9ad67a74c29fa69fee5c8bd245a86897352f22ad",
       "family": "report/toy100/h_stability",
       "role": "structured_evidence",
       "suggested_tiers": []
@@ -80085,13 +79847,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/trajectory/diversity/scout_1k/index.html",
-      "git_blob": "628c8b19164c938952c9fa9ec05855fafbb0fd8d",
-      "family": "report/trajectory",
-      "role": "support_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/trajectory/diversity/scout_1k/leaderboard.json",
       "git_blob": "ffd05cbf994e893fe955acacd58750f7e099aac4",
       "family": "report/trajectory",
@@ -80148,13 +79903,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/trajectory/diversity/scout_1k/mlp_continuous/viewer.html",
-      "git_blob": "c3885e7e06a13e07c183b79af5bf26d9c6c2663e",
-      "family": "report/trajectory",
-      "role": "support_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/trajectory/diversity/scout_1k/mlp_discrete/config.yaml",
       "git_blob": "5b6e8ee9731454264e66c92988177e89777bfb34",
       "family": "report/trajectory",
@@ -80204,13 +79952,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/trajectory/diversity/scout_1k/mlp_discrete/viewer.html",
-      "git_blob": "02f13a069cef4415427e83b028bdb22ce4ac519d",
-      "family": "report/trajectory",
-      "role": "support_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/trajectory/diversity/scout_1k/temporal_continuous/config.yaml",
       "git_blob": "54fe0a67429cbe72a4fa0a5a229a4903da88e980",
       "family": "report/trajectory",
@@ -80257,13 +79998,6 @@
       "git_blob": "7fb51a84973f51d5486886b3003789cc611d5bb2",
       "family": "report/trajectory",
       "role": "visualization_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/trajectory/diversity/scout_1k/temporal_continuous/viewer.html",
-      "git_blob": "5eff211c0465973eeae4810f9b3d41893a8311bb",
-      "family": "report/trajectory",
-      "role": "support_artifact",
       "suggested_tiers": []
     },
     {
@@ -80320,13 +80054,6 @@
       "git_blob": "10db01eae37b056463a4ef63ccec87fe36d74808",
       "family": "report/trajectory",
       "role": "visualization_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/trajectory/diversity/scout_1k/temporal_discrete/viewer.html",
-      "git_blob": "d71bc907e994a8a1c69fa890c37bb3e08f4dd985",
-      "family": "report/trajectory",
-      "role": "support_artifact",
       "suggested_tiers": []
     },
     {
@@ -80554,20 +80281,6 @@
       "suggested_tiers": []
     },
     {
-      "path": "reports/trajectory/hybrid/scout_1k/hybrid_continuous/viewer.html",
-      "git_blob": "b03083e94bb7a51dbfb867367c8687984f687f7b",
-      "family": "report/trajectory",
-      "role": "support_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/trajectory/hybrid/scout_1k/index.html",
-      "git_blob": "ea24b1d35d3a2a9ee64dfa7de6a5b63b396c2ed4",
-      "family": "report/trajectory",
-      "role": "support_artifact",
-      "suggested_tiers": []
-    },
-    {
       "path": "reports/trajectory/hybrid/scout_1k/leaderboard.json",
       "git_blob": "230c213de9bbc02a75d9163bd6e0a9b52f790b4c",
       "family": "report/trajectory",
@@ -80628,13 +80341,6 @@
       "git_blob": "4836e8ccff08ee64b0b97ff6cd73f168fbed9f27",
       "family": "report/trajectory",
       "role": "visualization_artifact",
-      "suggested_tiers": []
-    },
-    {
-      "path": "reports/trajectory/hybrid/scout_1k/mlp_continuous/viewer.html",
-      "git_blob": "5df42eeaddcdc6d697e086d8f6c0cf31b7a62b38",
-      "family": "report/trajectory",
-      "role": "support_artifact",
       "suggested_tiers": []
     },
     {
