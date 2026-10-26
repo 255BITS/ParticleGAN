@@ -31,6 +31,11 @@ ARMS = [
 NON_LATENT = {"two_pole", "unused_token_hold", "unipolar", "mid_scale_identity", "trajectory",
               "residual_student", "cover_leftover", "five_word_joint_smoke", "five_word_joint_hold"}
 START, END = "<!-- prior-ablation tables: start -->", "<!-- prior-ablation tables: end -->"
+CIFAR_START, CIFAR_END = "<!-- prior-ablation cifar: start -->", "<!-- prior-ablation cifar: end -->"
+# CIFAR-10 particle DDGAN arms (configs/prior_ablation_cifar/*.yaml): (tag, run, label).
+CIFAR_ARMS = [("C1", "ddgan_learned", "Learned table (host default)"),
+              ("C2", "ddgan_frozen", "Frozen table"),
+              ("C3", "ddgan_fresh_gaussian", "Fresh N(0, I) latent")]
 
 
 def _gates(task):
@@ -39,6 +44,9 @@ def _gates(task):
     for name, value in (evaluation.get("accuracy_limits") or {}).items():
         if isinstance(value, (int, float)) and not isinstance(value, bool):
             gates.append((name, "<=", value))
+    for name, value in (evaluation.get("coverage_thresholds") or {}).items():
+        if isinstance(value, (int, float)) and not isinstance(value, bool) and name[:4] in ("min_", "max_"):
+            gates.append((name[4:], ">=" if name.startswith("min_") else "<=", value))
     return gates
 
 
@@ -130,6 +138,17 @@ def collect(queue_root: Path, report: Path) -> dict:
             elif test in blockers.get(tag, {}):
                 cell.update(status="BLOCKED", reason=blockers[tag][test])
             cells[test] = cell
+        for test, cell in cells.items():
+            if cell["status"] != "NOT_MEASURED":
+                continue
+            task = json.loads(Path(f"configs/forge/tasks/{test}.json").read_text())
+            parents = [d.get("task") if isinstance(d, dict) else d for d in task.get("dependencies", [])]
+            if test == "ring_extension":
+                parents = ["ring16_acquisition"]
+            failed = [name for name in parents if cells.get(name, {}).get("status", "PASS") != "PASS"]
+            if failed:
+                cell["reason"] = "prerequisite not PASS: " + ", ".join(
+                    f"{name} ({cells[name]['status']})" for name in failed)
         counts = {}
         for cell in cells.values():
             counts[cell["status"]] = counts.get(cell["status"], 0) + 1
@@ -142,15 +161,82 @@ def collect(queue_root: Path, report: Path) -> dict:
             "fixed_list_sha256": hashlib.sha256(FIXED_LIST.read_bytes()).hexdigest(), "arms": arms}
 
 
+def collect_cifar(cifar_root: Path) -> dict:
+    """Compact receipts for the CIFAR arms: final FID50k, FID5k curve, evaluation noise floor, provenance."""
+    arms = {}
+    for tag, run, label in CIFAR_ARMS:
+        out = cifar_root / run
+        arm = {"label": label, "run": run, "config": f"configs/prior_ablation_cifar/{run}.yaml", "status": "NOT_MEASURED"}
+        if (out / "summary.json").is_file():
+            summary = json.loads((out / "summary.json").read_text())
+            curve = {}
+            for line in (out / "metrics.jsonl").open():
+                row = json.loads(line)
+                if row.get("generation"):
+                    curve[str(row["step"])] = round(row["generation"]["fid5k"], 3)
+            final = summary["final"]
+            sources = json.loads((out / "provenance.json").read_text())["sources"]
+            arm.update(status="COMPLETE", fid50k=round(final["fid"], 3), fid5k_curve=curve,
+                       feature_variance_ratio=round(final["feature_variance_ratio"], 4),
+                       steps=final["step"], train_seconds=round(summary["train_seconds"], 1),
+                       total_seconds=round(summary["total_seconds"], 1),
+                       prior_rms_movement=round(summary["prior_rms_movement"], 5),
+                       initialization_sha256=summary["metadata"]["initialization_sha256"],
+                       rng_sha256=summary["rng_sha256"], gpu=summary["metadata"]["gpu"],
+                       sources_sha256=hashlib.sha256(json.dumps(sources, sort_keys=True).encode()).hexdigest(),
+                       config_prior={k: summary["config"][k] for k in ("prior_update", "prior_code_law", "seed", "steps")})
+            # Interrupted earlier attempts (same config and seed) give a GPU-nondeterminism floor.
+            for previous in sorted(cifar_root.glob(run + ".attempt*")):
+                if previous.is_dir() and (previous / "metrics.jsonl").is_file():
+                    rerun = {}
+                    for line in (previous / "metrics.jsonl").open():
+                        row = json.loads(line)
+                        if row.get("generation"):
+                            rerun[str(row["step"])] = round(row["generation"]["fid5k"], 3)
+                    arm.setdefault("interrupted_attempts", {})[previous.name] = {
+                        "fid5k_curve": rerun, "abs_delta_vs_final_run": {
+                            step: round(abs(value - curve[step]), 3) for step, value in rerun.items() if step in curve}}
+            if (out / "fid_floor.json").is_file():
+                floor = json.loads((out / "fid_floor.json").read_text())
+                arm["fid50k_eval_floor"] = {"draws": len(floor["rows"]), "values": [round(r["fid"], 3) for r in floor["rows"]],
+                                            "mean": round(floor["mean"], 3), "std": round(floor["std"], 3)}
+        arms[tag] = arm
+    return {"protocol": "lib.cifar_metrics.PROTOCOL (torch-fidelity Inception-v3 2048, CIFAR-10 train 50k real)",
+            "arms": arms}
+
+
+def render_cifar(cifar: dict) -> str:
+    arms = cifar["arms"]
+    lines = [CIFAR_START, "", "| Arm | Prior | FID50k ↓ | Eval floor (std, n) | FID5k @2500 / 5000 / 7500 / 10000 | "
+             "Feature var. ratio | Prior RMS move | Train s |", "| --- | --- | ---: | ---: | --- | ---: | ---: | ---: |"]
+    for tag, arm in arms.items():
+        if arm["status"] != "COMPLETE":
+            lines.append(f"| {tag} | {arm['label']} | not measured | | | | | |")
+            continue
+        floor = arm.get("fid50k_eval_floor")
+        floor_text = f"{floor['std']:.2f} (n={floor['draws']})" if floor else "—"
+        curve = " / ".join(f"{arm['fid5k_curve'].get(str(s), float('nan')):.1f}" for s in (2500, 5000, 7500, 10000))
+        lines.append(f"| {tag} | {arm['label']} | {arm['fid50k']:.2f} | {floor_text} | {curve} | "
+                     f"{arm['feature_variance_ratio']:.3f} | {arm['prior_rms_movement']:.4f} | {arm['train_seconds']:.0f} |")
+    deltas = [d for arm in arms.values() for attempt in arm.get("interrupted_attempts", {}).values()
+              for d in attempt["abs_delta_vs_final_run"].values()]
+    if deltas:
+        lines += ["", f"Training-nondeterminism floor: interrupted same-config attempts differ from the final runs by "
+                  f"{min(deltas):.1f}–{max(deltas):.1f} FID5k at matched checkpoints (n={len(deltas)})."]
+    lines += ["", CIFAR_END]
+    return "\n".join(lines)
+
+
 def _short(status):
-    return {"PASS": "PASS", "FAIL": "**FAIL**", "BLOCKED": "blocked", "NOT_MEASURED": "—"}.get(status, status.lower())
+    return {"PASS": "PASS", "FAIL": "**FAIL**", "BLOCKED": "blocked", "NOT_MEASURED": "not run"}.get(
+        status, status.lower())
 
 
 def render(receipts: dict) -> str:
     arms = receipts["arms"]
     tags = list(arms)
     lines = [START, "", "### Leaderboard (fixed denominator: 49 tests)", "",
-             "| Arm | Declared delta | PASS | FAIL | Blocked | Not measured | Other | GPU seconds |",
+             "| Arm | Declared delta | PASS | FAIL | Blocked | Not measured | Incomplete | GPU seconds |",
              "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for tag in tags:
         arm = arms[tag]
@@ -158,6 +244,21 @@ def render(receipts: dict) -> str:
         other = sum(v for k, v in c.items() if k not in ("PASS", "FAIL", "BLOCKED", "NOT_MEASURED"))
         lines.append(f"| {tag} | {arm['label']} | {c.get('PASS', 0)} | {c.get('FAIL', 0)} | {c.get('BLOCKED', 0)} | "
                      f"{c.get('NOT_MEASURED', 0)} | {other} | {arm['wall_seconds']:.0f} |")
+    lines.append(f"| A5 | `ot_target_column_normalize=True` | 0 | 0 | 0 | {len(arms[tags[0]]['cells'])} | 0 | 0 |")
+    lines += ["", "A5 is not measured on any test: the flag exists only on the standalone `BISPFEngine`, "
+              "which no recipe uses (see Method)."]
+    graded = ("PASS", "FAIL")
+    matched = [test for test in arms[tags[0]]["cells"]
+               if all(arms[tag]["cells"][test]["status"] in graded for tag in tags[:3])]
+    lines += ["", f"### Matched sampled-latent subset ({len(matched)} tests graded in A1, A2 and A3)", "",
+              "The only tests where all three prior arms produced a PASS/FAIL grade: " +
+              ", ".join(f"`{test}`" for test in matched) + ".", "",
+              "| Arm | PASS | FAIL | Passing tests |", "| --- | ---: | ---: | --- |"]
+    for tag in tags:
+        cells = arms[tag]["cells"]
+        passed = [test for test in matched if cells[test]["status"] == "PASS"]
+        failed = [test for test in matched if cells[test]["status"] == "FAIL"]
+        lines.append(f"| {tag} | {len(passed)} | {len(failed)} | " + ", ".join(f"`{t}`" for t in passed) + " |")
     lines += ["", "### Per-test outcomes and final-state margins", "",
               "Margin: the smallest relative signed distance to a declared threshold at the graded final state "
               "(negative = that gate fails there). Tasks graded on confirmed earlier passes can PASS with a negative "
@@ -168,6 +269,8 @@ def render(receipts: dict) -> str:
         for tag in tags:
             cell = arms[tag]["cells"][test]
             text = _short(cell["status"])
+            if cell["status"] == "NOT_MEASURED" and cell.get("reason", "").startswith("prerequisite"):
+                text = "not run (prereq.)"
             margin = cell.get("final_margin")
             if margin:
                 text += f" {margin['relative_margin']:+.2f} `{margin['gate']}`"
@@ -186,16 +289,24 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--queue-root", type=Path, default=Path("runs/forge"))
     parser.add_argument("--report", type=Path, default=Path("reports/prior-ablation-2026-10-25"))
+    parser.add_argument("--cifar-root", type=Path, default=Path("/nvme/dev/particlegan/prior-ablation-runs/cifar"))
     args = parser.parse_args()
     receipts = collect(args.queue_root, args.report)
+    receipts["cifar"] = collect_cifar(args.cifar_root)
     (args.report / "receipts.json").write_text(json.dumps(receipts, indent=1, sort_keys=True) + "\n")
     readme = args.report / "README.md"
     tables = render(receipts)
     text = readme.read_text() if readme.is_file() else START + "\n" + END + "\n"
     head, rest = text.split(START, 1)
-    readme.write_text(head + tables + rest.split(END, 1)[1])
+    text = head + tables + rest.split(END, 1)[1]
+    if CIFAR_START in text:
+        head, rest = text.split(CIFAR_START, 1)
+        text = head + render_cifar(receipts["cifar"]) + rest.split(CIFAR_END, 1)[1]
+    readme.write_text(text)
     for tag, arm in receipts["arms"].items():
         print(tag, arm["counts"], arm["wall_seconds"])
+    for tag, arm in receipts["cifar"]["arms"].items():
+        print(tag, arm["status"], arm.get("fid50k"), arm.get("fid50k_eval_floor"))
 
 
 if __name__ == "__main__":
