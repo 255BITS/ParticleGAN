@@ -6,6 +6,7 @@ the shared ``_apply_conv_batch`` helper against the pre-refactor inline code,
 with the CUDA-graph caches replaced by their eager equivalents.
 """
 from types import SimpleNamespace
+import inspect
 import math
 
 import pytest
@@ -129,7 +130,9 @@ class _CountingBase(NormalizedOptimizer):
 def test_wrapper_base_update_follows_the_mro(wrapper):
     # Previously DirectionBlend/StrictProgress called NormalizedOptimizer.step(self)
     # directly, silently skipping any cooperative class later in the MRO.
-    assert wrapper is ConstraintGeometryOptimizer or "step" not in vars(wrapper)
+    # torch.optim.Optimizer.__init__ installs a profiling wrapper as ``cls.step``
+    # on first construction, so compare the unwrapped functions.
+    assert inspect.unwrap(wrapper.step) is inspect.unwrap(ConstraintGeometryOptimizer.step)
     combined = type("Combined", (wrapper, _CountingBase), {})
     parameter = nn.Parameter(torch.tensor([.1, -.2], dtype=torch.float64))
     optimizer = combined([parameter], lr=.1, smoothing=.001)
