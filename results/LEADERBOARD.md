@@ -1,5 +1,8 @@
 # Regularizer study -- promotion leaderboard
 
+<!-- superseded-banner: generated -->
+> **Superseded — historical record.** Current leaderboard for this goal: [reports/forge/technique-inventory.md](../reports/forge/technique-inventory.md); goal index: [reports/leaderboard-index.json](../reports/leaderboard-index.json). Results below are preserved as recorded.
+
 Champion = promotion candidate for the repo's default recipe. Sharp board requires: all seeds pass the repo bar (100 modes & hq>=0.9), mean hq>=0.95, zero collapses. If the **core** σ ratio < 0.8, the row is flagged 'variance-compressed' and cannot hold CHAMPION.
 
 355 runs / 71 groups from the main tree; 60 audit runs annotated 12 group(s) with `per_mode_std_ratio` (marked ᴬ); the core σ ratio was recomputed from 230 saved sample cloud(s) covering 46/71 group(s).

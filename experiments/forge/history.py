@@ -43,14 +43,14 @@ REPORT_FAMILIES = {
     "lunar_fast", "mog-autoencoder", "mog-vae", "prior-comparison",
     "readme-100gaussians", "sparse-ucd", "trajectory", "transition", "releases",
     "atlas-explanation", "e22-animation", "r1-integrations", "develop-gates-20261001",
-    "paired-residual-toy", "toy_audit",
+    "paired-residual-toy", "toy_audit", "gram-profile", "prior-ablation-2026-10-25",
 }
 BENCHMARK_FAMILIES = {"init_research", "learned_lr", "legacy", "locked_shared",
                       "paired_error_2d", "smart_descent", "toy100", "transfer_suite",
                       "routed_conditioning", "toy_audit"}
 CONFIG_FAMILIES = {"100gaussians", "cifar_ddgan", "cifar_particle_ae",
                    "cifar_particle_ddgan", "denoising", "gym", "mog", "mog_vae",
-                   "sparse", "toy100", "trajectory", "transition"}
+                   "sparse", "toy100", "trajectory", "transition", "prior_ablation_cifar"}
 SCIENCE_MARKERS = ("status", "raw_status", "verdict", "harness_result_status", "record_kind")
 
 
