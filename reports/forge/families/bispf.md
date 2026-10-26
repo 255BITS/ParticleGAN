@@ -1161,6 +1161,89 @@ No experiments assigned.
 
 No experiments assigned.
 
+<a name="cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1"></a>
+
+## prior-ablation-full-suite-v1
+
+**prior-ablation-full-suite-v1 — revision 1**. [View declaration](../../../configs/forge/views/prior-ablation-full-suite-v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Test definition |
+| --- | --- | --- | --- |
+| [gaussian1d_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_smoke) | diagnostic | PASS | matches recorded run |
+| [two_pole](bispf.md#cohort-cuda-1bf9d7d34422-experiment-two_pole) | diagnostic | PASS | changed since run |
+| [unused_token_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-unused_token_hold) | diagnostic | PASS | changed since run |
+| [ae_gan_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ae_gan_hold) | diagnostic | PASS | changed since run |
+| [ring16_acquisition](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_acquisition) | diagnostic | PASS | matches recorded run |
+| [five_word_joint_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_smoke) | diagnostic | PASS | changed since run |
+| [zero_tanh_smoke](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_smoke) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [model_ae_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_gaussian_chain) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [model_ae_gan_multimodal](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_gan_multimodal) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [model_ae_reconstruction](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_reconstruction) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_gaussian_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_gaussian_chain) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [model_vae_categorical](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_categorical) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [model_vae_hard](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_vae_hard) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [clockfree_audit_measurement_v1](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
+| [clockfree_audit](bispf.md#cohort-cuda-1bf9d7d34422-experiment-clockfree_audit) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [gaussian1d_stability](bispf.md#cohort-cuda-1bf9d7d34422-experiment-gaussian1d_stability) | diagnostic | FAIL | matches recorded run |
+| [five_word_joint_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-five_word_joint_hold) | diagnostic | PASS | changed since run |
+| [trajectory](bispf.md#cohort-cuda-1bf9d7d34422-experiment-trajectory) | diagnostic | PASS | changed since run |
+| [residual_student](bispf.md#cohort-cuda-1bf9d7d34422-experiment-residual_student) | diagnostic | PASS | changed since run |
+| [unipolar](bispf.md#cohort-cuda-1bf9d7d34422-experiment-unipolar) | diagnostic | PASS | changed since run |
+| [cover_leftover](bispf.md#cohort-cuda-1bf9d7d34422-experiment-cover_leftover) | diagnostic | PASS | changed since run |
+| [mid_scale_identity](bispf.md#cohort-cuda-1bf9d7d34422-experiment-mid_scale_identity) | diagnostic | PASS | changed since run |
+| [mode_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-mode_hold) | diagnostic | PASS | matches recorded run |
+| [vector_two_broad](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_two_broad) | diagnostic | PASS | matches recorded run |
+| [vector_unequal_mass](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_mass) | diagnostic | FAIL | matches recorded run |
+| [vector_unequal_width](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_unequal_width) | diagnostic | FAIL | matches recorded run |
+| [vector_anisotropic](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_anisotropic) | diagnostic | FAIL | matches recorded run |
+| [vector_overlap](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_overlap) | diagnostic | FAIL | matches recorded run |
+| [vector_spiral](bispf.md#cohort-cuda-1bf9d7d34422-experiment-vector_spiral) | diagnostic | PASS | matches recorded run |
+| [img_stripes2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_stripes2) | diagnostic | PASS | matches recorded run |
+| [img_bars4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_bars4) | diagnostic | FAIL | matches recorded run |
+| [img_blobs4](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_blobs4) | diagnostic | FAIL | matches recorded run |
+| [img_intensity2](bispf.md#cohort-cuda-1bf9d7d34422-experiment-img_intensity2) | diagnostic | FAIL | matches recorded run |
+| [grid100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100) | diagnostic | FAIL | matches recorded run |
+| [rotated100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100) | diagnostic | FAIL | matches recorded run |
+| [staggered100](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100) | diagnostic | FAIL | matches recorded run |
+| [model_ae_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ae_ddgan_bimodal_chain) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [model_ddgan_bimodal_chain](bispf.md#cohort-cuda-1bf9d7d34422-experiment-model_ddgan_bimodal_chain) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [ring_hold](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring_hold) | diagnostic | PASS | matches recorded run |
+| [ring_extension](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring_extension) | diagnostic | PASS | matches recorded run |
+| [zero_tanh_rail_escape](bispf.md#cohort-cuda-1bf9d7d34422-experiment-zero_tanh_rail_escape) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_14k](bispf.md#cohort-cuda-1bf9d7d34422-experiment-grid100_14k) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [rotated100_14k](bispf.md#cohort-cuda-1bf9d7d34422-experiment-rotated100_14k) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k](bispf.md#cohort-cuda-1bf9d7d34422-experiment-staggered100_14k) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery](bispf.md#cohort-cuda-1bf9d7d34422-experiment-target_shift_recovery) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [misgan_block_recovery](bispf.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_recovery) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [misgan_block_neural_imputer](bispf.md#cohort-cuda-1bf9d7d34422-experiment-misgan_block_neural_imputer) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [ring16_bigan_continuous](bispf.md#cohort-cuda-1bf9d7d34422-experiment-ring16_bigan_continuous) | diagnostic | UNKNOWN | recorded definition unavailable |
+
+<a name="cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
+<a name="cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-4"></a>
+
+### Tier 4
+
+No experiments assigned.
+
 <a name="cohort-cuda-1bf9d7d34422-quality_coverage"></a>
 
 ## quality_coverage
@@ -1547,7 +1630,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
 
 Recorded final metric checks:
 
@@ -1616,7 +1699,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [selected-family-coverage-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1-tier-1).
+Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [selected-family-coverage-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-selected-family-coverage-diagnostic-v1-tier-1).
 
 Current pass criteria:
 
@@ -1636,7 +1719,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1).
+Used by: [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Recorded final metrics:
 
@@ -1688,7 +1771,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -1903,7 +1986,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metrics:
 
@@ -1962,7 +2045,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metrics:
 
@@ -2053,7 +2136,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metrics:
 
@@ -2101,7 +2184,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metrics:
 
@@ -2152,7 +2235,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metrics:
 
@@ -2219,7 +2302,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
+Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -2459,7 +2542,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [bispf_throughput_small / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_small-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [bispf_throughput_small / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_small-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -2550,7 +2633,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -2615,7 +2698,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -2680,7 +2763,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [bispf_throughput_small / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_small-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap_convolution_images / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap_convolution_images-tier-1) · [bispf_throughput_small / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_small-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -2771,7 +2854,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -2820,7 +2903,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
+Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -2847,7 +2930,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
+Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -2876,7 +2959,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bispf_throughput_endurance / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_endurance-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bispf_throughput_endurance / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_endurance-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -2915,7 +2998,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2).
+Used by: [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -2991,7 +3074,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3060,7 +3143,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3095,7 +3178,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3124,7 +3207,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2).
+Used by: [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3196,7 +3279,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3261,7 +3344,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3301,7 +3384,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3341,7 +3424,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -3382,7 +3465,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1).
+Used by: [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -3461,7 +3544,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4).
+Used by: [discriminator_stability / Tier 4](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-4) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3488,7 +3571,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [bispf_throughput_endurance / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_endurance-tier-1) · [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1).
+Used by: [bispf_throughput_endurance / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_endurance-tier-1) · [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Recorded final metrics:
 
@@ -3548,7 +3631,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [bispf_throughput_endurance / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_endurance-tier-1) · [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1).
+Used by: [bispf_throughput_endurance / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bispf_throughput_endurance-tier-1) · [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-3) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Recorded final metrics:
 
@@ -3606,7 +3689,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metrics:
 
@@ -3673,7 +3756,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
+Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3753,7 +3836,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metrics:
 
@@ -3820,7 +3903,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
+Used by: [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3900,7 +3983,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [adaptation / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) · [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3).
+Used by: [adaptation / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-3) · [clockfree_continuous / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -3923,7 +4006,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -3960,7 +4043,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [bcap-tier1-stability-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1-tier-1) · [bcap-tier1-stability-repairs-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [bcap-tier1-stability-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-tier1-stability-diagnostic-v1-tier-1) · [bcap-tier1-stability-repairs-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-tier1-stability-repairs-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
 
 Recorded final metric checks:
 
@@ -4087,7 +4170,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -4128,7 +4211,7 @@ Test definition: **changed since run**. Test definition changed since this run: 
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
+Used by: [adaptation / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-1) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-1).
 
 Recorded final metric checks:
 
@@ -4197,7 +4280,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -4271,7 +4354,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -4339,7 +4422,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -4407,7 +4490,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -4481,7 +4564,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -4558,7 +4641,7 @@ Test definition: **matches recorded run**. Test definition matches the recorded 
 
 Actual task device: `1` (recorded execution receipt).
 
-Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
+Used by: [adaptation / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-adaptation-tier-2) · [bcap-develop-integration-deeper-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-develop-integration-deeper-diagnostic-v1-tier-1) · [bcap-projection-baseline-repair-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-bcap-projection-baseline-repair-diagnostic-v1-tier-1) · [clockfree_continuous / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-host_profile_transfer-tier-2) · [lazy_cadence_coverage / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-lazy_cadence_coverage-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1) · [quality_coverage / Tier 2](bispf.md#cohort-cuda-1bf9d7d34422-quality_coverage-tier-2) · [recipe-prior-refactor-k3p-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-k3p-diagnostic-v1-tier-1) · [recipe-prior-refactor-ka2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-ka2-diagnostic-v1-tier-1) · [recipe-prior-refactor-r1r2-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-r1r2-diagnostic-v1-tier-1) · [recipe-prior-refactor-release07-gan-v3-diagnostic-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-recipe-prior-refactor-release07-gan-v3-diagnostic-v1-tier-1).
 
 Recorded final metric checks:
 
@@ -4632,7 +4715,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3).
+Used by: [discriminator_stability / Tier 3](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-3) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
@@ -4661,7 +4744,7 @@ Test definition: **recorded definition unavailable**. Recorded test definition u
 
 Execution: **not run**.
 
-Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1).
+Used by: [discriminator_stability / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-discriminator_stability-tier-1) · [prior-ablation-full-suite-v1 / Tier 1](bispf.md#cohort-cuda-1bf9d7d34422-prior-ablation-full-suite-v1-tier-1).
 
 Current pass criteria:
 
