@@ -1,0 +1,303 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "two_pole"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 2,
+      "qualification_tier": 1,
+      "task": "unused_token_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 3,
+      "qualification_tier": 1,
+      "task": "ae_gan_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 4,
+      "qualification_tier": 1,
+      "task": "ring16_acquisition"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 5,
+      "qualification_tier": 1,
+      "task": "five_word_joint_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 6,
+      "qualification_tier": 1,
+      "task": "zero_tanh_smoke"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 7,
+      "qualification_tier": 1,
+      "task": "model_ae_ddgan_gaussian_chain"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 8,
+      "qualification_tier": 1,
+      "task": "model_ae_gan_multimodal"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 9,
+      "qualification_tier": 1,
+      "task": "model_ae_reconstruction"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 10,
+      "qualification_tier": 1,
+      "task": "model_ddgan_gaussian_chain"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 11,
+      "qualification_tier": 1,
+      "task": "model_vae_categorical"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 12,
+      "qualification_tier": 1,
+      "task": "model_vae_hard"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 13,
+      "qualification_tier": 1,
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 14,
+      "qualification_tier": 1,
+      "task": "clockfree_audit"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 15,
+      "qualification_tier": 1,
+      "task": "gaussian1d_stability"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 16,
+      "qualification_tier": 1,
+      "task": "five_word_joint_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 17,
+      "qualification_tier": 1,
+      "task": "trajectory"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 18,
+      "qualification_tier": 1,
+      "task": "residual_student"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 19,
+      "qualification_tier": 1,
+      "task": "unipolar"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 20,
+      "qualification_tier": 1,
+      "task": "cover_leftover"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 21,
+      "qualification_tier": 1,
+      "task": "mid_scale_identity"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 22,
+      "qualification_tier": 1,
+      "task": "mode_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 23,
+      "qualification_tier": 1,
+      "task": "vector_two_broad"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 24,
+      "qualification_tier": 1,
+      "task": "vector_unequal_mass"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 25,
+      "qualification_tier": 1,
+      "task": "vector_unequal_width"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 26,
+      "qualification_tier": 1,
+      "task": "vector_anisotropic"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 27,
+      "qualification_tier": 1,
+      "task": "vector_overlap"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 28,
+      "qualification_tier": 1,
+      "task": "vector_spiral"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 29,
+      "qualification_tier": 1,
+      "task": "img_stripes2"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 30,
+      "qualification_tier": 1,
+      "task": "img_bars4"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 31,
+      "qualification_tier": 1,
+      "task": "img_blobs4"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 32,
+      "qualification_tier": 1,
+      "task": "img_intensity2"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 33,
+      "qualification_tier": 1,
+      "task": "grid100"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 34,
+      "qualification_tier": 1,
+      "task": "rotated100"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 35,
+      "qualification_tier": 1,
+      "task": "staggered100"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 36,
+      "qualification_tier": 1,
+      "task": "model_ae_ddgan_bimodal_chain"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 37,
+      "qualification_tier": 1,
+      "task": "model_ddgan_bimodal_chain"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 38,
+      "qualification_tier": 1,
+      "task": "ring_hold"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 39,
+      "qualification_tier": 1,
+      "task": "ring_extension"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 40,
+      "qualification_tier": 1,
+      "task": "zero_tanh_rail_escape"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 41,
+      "qualification_tier": 1,
+      "task": "grid100_14k"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 42,
+      "qualification_tier": 1,
+      "task": "rotated100_14k"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 43,
+      "qualification_tier": 1,
+      "task": "staggered100_14k"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 44,
+      "qualification_tier": 1,
+      "task": "target_shift_recovery"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 45,
+      "qualification_tier": 1,
+      "task": "misgan_block_recovery"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 46,
+      "qualification_tier": 1,
+      "task": "misgan_block_neural_imputer"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 47,
+      "qualification_tier": 1,
+      "task": "ring16_bigan_continuous"
+    }
+  ],
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "prior-ablation-full-suite-v1",
+  "policy_change_reason": "Matched prior ablation over the dated test list technique-inventory-full-suite-2026-10-25 (49 tests) plus ring_hold, the phase that ring_extension continues, less grid100_mlp16 and grid100_res16_tanh, whose native model variants have no explicit profile and cannot bind. Every task keeps its declaration, gates, architecture, data law, initial prior distribution/capacity, initialization, budget, sampling and cadence; only the declared trainer delta varies across candidates. All assignments are diagnostic so independent tasks run without tier vetoes; checkpoint and gate dependencies still apply. No ordinary qualification or default-adoption credit.",
+  "ranking": {
+    "cost_separate": true,
+    "policy": "diagnostic_outcomes_only"
+  },
+  "revision": 1,
+  "schema_version": 1
+}
