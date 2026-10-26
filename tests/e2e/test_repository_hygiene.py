@@ -48,6 +48,44 @@ def test_runs_and_editor_artifacts_are_never_tracked(tracked):
     assert not [name for name in tracked if name.endswith((".swp", ".swo", "~"))]
 
 
+def _git(repo_root, *args) -> subprocess.CompletedProcess:
+    return subprocess.run(["git", *args], cwd=str(repo_root), capture_output=True)
+
+
+def test_no_tracked_file_matches_an_ignore_rule(repo_root, tracked):
+    # Ignored bulk must never be force-added; files that code reads from the
+    # checkout are re-included explicitly in .gitignore instead.
+    done = _git(repo_root, "ls-files", "-z", "--cached", "--ignored", "--exclude-standard")
+    assert done.returncode == 0, done.stderr.decode()
+    assert [name for name in done.stdout.decode().split("\0") if name] == []
+
+
+def test_repo_root_gifs_are_cited_by_the_readme(repo_root, tracked):
+    readme = (repo_root / "README.md").read_text()
+    stray = [name for name in tracked if "/" not in name and name.endswith(".gif") and f"({name})" not in readme]
+    assert not stray, f"unreferenced root GIFs belong in reports/log-archive.json: {stray}"
+
+
+def test_archived_paths_stay_out_of_the_tree_with_their_recorded_blobs(repo_root, tracked):
+    import json
+
+    index = json.loads((repo_root / "reports/log-archive.json").read_text())
+    current = set(tracked)
+    for archive in index["archives"]:
+        files = archive["files"]
+        assert not current & {path for path, _, _ in files}, "an archived path is tracked again"
+        if _git(repo_root, "cat-file", "-e", archive["commit"] + "^{commit}").returncode:
+            continue  # shallow checkout: the archive commit is not available locally
+        listing = _git(repo_root, "ls-tree", "-r", "-z", "--long", archive["commit"], "--", *(p for p, _, _ in files))
+        assert listing.returncode == 0, listing.stderr.decode()
+        found = {}
+        for row in filter(None, listing.stdout.decode().split("\0")):
+            meta, path = row.split("\t", 1)
+            _, _, blob, size = meta.split()
+            found[path] = [path, int(size), blob]
+        assert [found.get(path) for path, _, _ in files] == [list(entry) for entry in files]
+
+
 def test_forge_validate_accepts_the_committed_declarations(run_cli):
     res = run_cli([sys.executable, "-m", "experiments.forge", "validate"], timeout=120)
     assert res.returncode == 0, res.stderr[-2000:]
