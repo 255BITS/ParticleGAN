@@ -89,3 +89,22 @@ def test_archived_paths_stay_out_of_the_tree_with_their_recorded_blobs(repo_root
 def test_forge_validate_accepts_the_committed_declarations(run_cli):
     res = run_cli([sys.executable, "-m", "experiments.forge", "validate"], timeout=120)
     assert res.returncode == 0, res.stderr[-2000:]
+
+
+def test_no_tracked_link_points_at_a_pruned_branch(repo_root):
+    # Branch-name GitHub links 404 once the branch is pruned; pin them to the
+    # recorded tip SHA instead (reports/branch-prune-*.json).
+    import json
+    import re
+
+    deleted: dict[str, str] = {}
+    for record in sorted((repo_root / "reports").glob("branch-prune-*.json")):
+        deleted.update(json.loads(record.read_text())["deleted"])
+    done = _git(repo_root, "grep", "-z", "-nE", r"github\.com/255BITS/ParticleGAN/(blob|tree)/")
+    link = re.compile(r"github\.com/255BITS/ParticleGAN/(?:blob|tree)/([^)\s\"'>]+)")
+    stale = [
+        row for row in done.stdout.decode(errors="replace").split("\n")
+        for ref in link.findall(row)
+        if any(ref == branch or ref.startswith(branch + "/") for branch in deleted)
+    ]
+    assert not stale, f"pin these links to the pruned branch's recorded tip SHA: {stale}"
