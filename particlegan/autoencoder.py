@@ -72,7 +72,8 @@ def _routing(query, prior, temperature, distance_reduction, detach_means):
             or query.device != means.device or query.dtype != means.dtype):
         raise ValueError("query must be nonempty [B,z_dim], with prior device and dtype")
     fixed = means.detach() if detach_means else means
-    # O(B*K) storage, avoiding a B*K*D distance tensor.
+    # O(B*K) storage, avoiding a B*K*D distance tensor. The expanded quadratic
+    # differs numerically from _stats.pairwise_sq_dist (cdist), so it stays here.
     distance = query.square().sum(1, keepdim=True) + fixed.square().sum(1)[None] - 2 * query @ fixed.T
     if distance_reduction == "mean":
         distance = distance / query.shape[1]

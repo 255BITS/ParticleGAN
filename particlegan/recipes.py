@@ -3,6 +3,8 @@ import math
 from collections.abc import Mapping
 from dataclasses import asdict, dataclass, fields, replace
 
+from .drift_variants import DRIFT_VARIANTS, drift_features
+
 # Promote a registered trainer preset here; model-family factories inherit it.
 DEFAULT_RECIPE = "bispf_optimized"
 
@@ -433,7 +435,7 @@ class Recipe:
             # Keep resolved recipe/Forge provenance truthful about the optimizer
             # family selected by an explicit legacy arm.
             object.__setattr__(self, "critic_formulation", "k3p")
-        if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        if self.continuous_policy is not None and self.continuous_policy not in DRIFT_VARIANTS:
             raise ValueError("unknown continuous_policy")
         if (self.total_steps is None) != (self.continuous_policy is not None):
             raise ValueError("continuous policies require total_steps=None")
@@ -1534,7 +1536,7 @@ def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *,
     from .recipe_schedules import apply_training_schedules
     apply_training_schedules(step, recipe, optimizers)
     prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
-    if recipe.continuous_policy in ("dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+    if drift_features(recipe.continuous_policy).critic_balance:
         from torch import Tensor, nn
         if critic is None:
             raise ValueError("asymmetric continuous rates require critic=module or optimized critic parameters")

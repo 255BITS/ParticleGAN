@@ -15,6 +15,8 @@ import math
 import torch
 import torch.nn.functional as F
 
+from ._stats import adam_moment_states, adam_surprise_ratio
+from .drift_variants import drift_features
 from .grad_regularizers import CriticStepRecord, GradientPenalty, _score_scalar
 from .k3p import CriticPenalty as _K3PCriticPenalty
 from .k3p import K3PCriticAdam, _first_output
@@ -58,17 +60,17 @@ def _surprise_of(optimizer):
     values = []
     for group in optimizer.param_groups:
         beta2 = group["betas"][1]
-        for parameter in group["params"]:
-            state = optimizer.state.get(parameter)
-            if parameter.grad is None or not state or "exp_avg_sq" not in state:
-                continue
+        for parameter, state in adam_moment_states(optimizer, group):
             step = state["step"]
             if step < 1:
                 continue
-            vhat = state["exp_avg_sq"].mean() / (1.0 - beta2 ** step)
-            surprise = parameter.grad.square().mean().sqrt() / vhat.clamp_min(1e-30).sqrt()
-            values.append(float(surprise.detach()))
-    return None if not values else _median(values)
+            values.append(adam_surprise_ratio(parameter.grad, state["exp_avg_sq"], beta2, step).detach())
+    if not values:
+        return None
+    # One host transfer for all tensors. Float64 holds every float16/bfloat16/
+    # float32 ratio exactly, so the Python floats equal per-tensor float(ratio).
+    device = values[0].device
+    return _median(torch.stack([value.to(device=device, dtype=torch.float64) for value in values]).tolist())
 
 
 class KA2StepRecord(CriticStepRecord):
@@ -306,21 +308,22 @@ class KA2GradientPenalty(GradientPenalty):
                     prox = self.anchor_weight * prox
             weight = record.advance_blend()
             controller = getattr(self, "continuous_controller", None)
-            if controller is not None and controller.variant in ("dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+            features = None if controller is None else drift_features(controller.variant)
+            if controller is not None and features.game_trust:
                 if record.trust_mode == "scale":
                     record.alpha = record.alpha_raw * controller.game_trust
                 else:
                     # Legacy: damps the controller state itself, so it compounds
                     # across calls (see KA2StepRecord.__init__).
                     record.alpha *= controller.game_trust
-                evidence = controller.data_drive if controller.variant in ("dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else controller.data_memory
+                evidence = controller.data_drive if features.drive_evidence else controller.data_memory
                 if evidence < .1:
                     weight = record.w = 1.0
                     record.low_streak = 0
             elif controller is not None and controller.data_memory < .1:
                 # Self-surprise is not evidence that the real target moved.
                 record.w = weight = 1.0
-                record.alpha = (0.0 if controller.variant == "dv2" else
+                record.alpha = (0.0 if features.calm_anchor_hold else
                                 (1.0 - .999) / (1.0 - record.anchor_min_decay))
                 if record.trust_mode == "scale":
                     record.alpha_raw = record.alpha
