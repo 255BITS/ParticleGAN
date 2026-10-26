@@ -198,7 +198,9 @@ jobs:
           for wheel in Path('dist').glob('*.whl'):
               with zipfile.ZipFile(wheel) as archive:
                   roots = {name.split('/')[0] for name in archive.namelist()}
-              assert all(root == 'particlegan' or root.endswith('.dist-info') for root in roots), roots
+              # particlegan_forge is the documented external tier API (EXPERIMENTATION.md).
+              packages = {'particlegan', 'particlegan_forge'}
+              assert all(root in packages or root.endswith('.dist-info') for root in roots), roots
           research = {'reports', 'results', 'experiments', 'benchmarks', 'lib', 'configs', 'data', 'runs', 'artifacts'}
           for source in Path('dist').glob('*.tar.gz'):
               with tarfile.open(source) as archive:
