@@ -13,8 +13,8 @@ from particlegan import RoutedRows
 from particlegan.continuous import DataDriftController
 
 
-DEVICES = ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(
-    not torch.cuda.is_available(), reason="CUDA required"))]
+DEVICES = ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(
+    not torch.cuda.is_available(), reason="CUDA required")])]
 
 
 def assert_tree_equal(left, right):

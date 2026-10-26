@@ -229,6 +229,9 @@ def test_malformed_reference_checkpoint_is_rejected_without_mutation(corruption)
     equal(before, t.state_dict())
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable")
 def test_cuda_force_and_gradients_match_cpu():
     rows = torch.tensor([[-.7, .2], [.8, -.3], [.1, .6]], dtype=torch.float64, requires_grad=True)
@@ -241,6 +244,9 @@ def test_cuda_force_and_gradients_match_cpu():
     other_gradient = torch.autograd.grad(other, device_rows)[0]
     assert torch.allclose(value, other.cpu(), atol=1e-12, rtol=1e-12)
     assert torch.allclose(gradient, other_gradient.cpu(), atol=1e-12, rtol=1e-12)
+
+
+@pytest.mark.cuda
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="word acquisition requires CUDA")

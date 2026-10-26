@@ -101,7 +101,7 @@ def test_zero_weight_consumes_no_rng_or_nonfinite_rows():
     equal(before, module.state_dict())
 
 
-@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable"))])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable")])])
 def test_public_bcap_training_resume_replays_projection_rng_and_all_consumed_state(device):
     ctx = context(device)
     a = trainer(ctx)
@@ -151,7 +151,7 @@ def test_active_sigreg_respects_existing_regularization_row_law(particles, expec
 
 
 @pytest.mark.parametrize("host", ["trajectory", "residual_student", "cover_leftover", "ae_gan_hold"])
-@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable"))])
+@pytest.mark.parametrize("device", ["cpu", pytest.param("cuda:0", marks=[pytest.mark.cuda, pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable")])])
 def test_behavior_hosts_apply_sigreg_and_archive_projection_state(tmp_path, monkeypatch, host, device):
     task = json.loads((ROOT / "configs/forge/tasks" / (host + ".json")).read_text())
     task["execution"]["steps"] = 2

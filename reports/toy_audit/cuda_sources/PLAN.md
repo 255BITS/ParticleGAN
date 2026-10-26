@@ -58,7 +58,7 @@ was launched by the observer implementation agent.
 
 ```sh
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-  /tmp/pr155-e22-venv/bin/python -m pytest -q tests/test_toy_source_cuda_observation.py
+  /tmp/pr155-e22-venv/bin/python -m pytest -m "cuda or not cuda" -q tests/test_toy_source_cuda_observation.py
 
 CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
   /tmp/pr155-e22-venv/bin/python -u -m benchmarks.toy_audit.source_cuda_observation \

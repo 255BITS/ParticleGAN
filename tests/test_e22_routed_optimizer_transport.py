@@ -105,6 +105,9 @@ def test_late_split_next_update_matches_same_age_scaled_history(optimizer_type, 
     print(f"{optimizer_type.__name__} beta1={betas[0]} amsgrad={amsgrad} decay={weight_decay}: {receipt}")
 
 
+@pytest.mark.cuda
+
+
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable")
 def test_cuda_split_next_update_and_exact_checkpoint_recovery():
     receipt = run_late_split(torch.optim.Adam, (0., .999), True, 0., device="cuda:0", age=256)
