@@ -184,3 +184,11 @@ def test_one_transport_patch_reaches_engine_loss_and_penalty(monkeypatch):
     kernel.penalty(D, x_r, x_f, step=0)
     assert len(calls) == 5
     assert math.isfinite(float(kernel.record.ema_residual))
+
+
+def test_recipe_variant_list_mirrors_drift_variants():
+    from particlegan import get_recipe
+    for variant in DRIFT_VARIANTS:
+        assert get_recipe("ka2", continuous_policy=variant, total_steps=None).continuous_policy == variant
+    with pytest.raises(ValueError, match="unknown continuous_policy"):
+        get_recipe("ka2", continuous_policy="dv13", total_steps=None)
